@@ -1,7 +1,7 @@
 {
-  "name": "cbrdx_template_ng",
-  "version": "1.0.0",
-  "description": "Template inicial para Angular, Basado en Angular-Seed",
+  "name": "cbrdx_th",
+  "version": "0.0.1",
+  "description": "Proyecto inicial para TH",
   "repository": {
     "url": "https://github.com/mgechev/angular-seed"
   },
