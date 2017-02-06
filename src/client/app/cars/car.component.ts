@@ -27,6 +27,7 @@ export class CarComponent {
 
     ngOnInit() {
         this.carService.getCarsMedium().then(cars => this.cars = cars);
+        console.log(this.carService.getCarsMedium());
     }
 
     showDialogToAdd() {

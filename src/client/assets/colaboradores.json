@@ -1,0 +1,24 @@
+{
+  "data":[
+    {"idColaborador":"1",
+      "numeroDocumento":"12",
+      "primerNombre":"Nombre 1",
+      "fechaDeste":"2011-05-11",
+      "cargoActual":"cargo 1"},
+    {"idColaborador":"2",
+      "numeroDocumento":"23",
+      "primerNombre":"Nombre 2",
+      "fechaDeste":"2012-05-12",
+      "cargoActual":"cargo 2"},
+    {"idColaborador":"3",
+      "numeroDocumento":"34",
+      "primerNombre":"Nombre 3",
+      "fechaDeste":"2013-05-13",
+      "cargoActual":"cargo 3"},
+    {"idColaborador":"4",
+      "numeroDocumento":"45",
+      "primerNombre":"Nombre 4",
+      "fechaDeste":"2014-05-14",
+      "cargoActual":"cargo 4"}
+  ]
+}

@@ -8,10 +8,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AboutModule } from './about/about.module';
 import { HomeModule } from './home/home.module';
 import { CarModule } from './cars/car.module';
+import { ColaboradoresModule } from './colaboradores/colaboradores.module';
 import { SharedModule } from './shared/shared.module';
 //CarsModule,
 @NgModule({
-  imports: [BrowserModule, HttpModule, AppRoutingModule, AboutModule, HomeModule,  CarModule, SharedModule.forRoot()],
+  imports: [BrowserModule, HttpModule, AppRoutingModule, AboutModule, HomeModule, ColaboradoresModule, CarModule, SharedModule.forRoot()],
   declarations: [AppComponent],
   providers: [{
     provide: APP_BASE_HREF,
