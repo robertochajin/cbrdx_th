@@ -53,6 +53,10 @@ export class ColaboradoresComponent {
         this.router.navigate(['colaboradores/add']);
     }
 
+    updateColaborador(c: Colaborador) {
+        this.router.navigate(['colaboradores/update/'+c.idColaborador]);
+}
+
     cloneColaborador(c: Colaborador): Colaborador {
         let colaborador = new PrimeColaborador();
         for (let prop in c) {

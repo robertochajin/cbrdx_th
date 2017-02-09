@@ -144,39 +144,18 @@ export let fakeBackendProvider = {
                 }
 
                 if (connection.request.url.match(/\/api\/colaboradores\/\d+$/) && connection.request.method === RequestMethod.Get) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                        // find user by id in users array
+                        let urlParts = connection.request.url.split('/');
+                        let id = parseInt(urlParts[urlParts.length - 1]);
+                        let matchedUsers = colaboradores.filter(colaborador => { return colaborador.idColaborador == id; });
+                        let colaborador = matchedUsers.length ? matchedUsers[0] : null;
 
-                    connection.mockRespond(new Response(new ResponseOptions({
-                        status: 200,
-                        body: {"data": {"idColaborador":"3",
-                            "numeroDocumento":"34",
-                            "primerNombre":"Nombre 3.1",
-                            "segundoNombre":"Nombre 3.2",
-                            "primerApellido":"Apellido 3.1",
-                            "segundoApellido":"Apellido 3.2",
-                            "tipoDocumento":"C.C.",
-                            "Avatar":"fotico.png",
-                            "ciudadExpedicion":"Bucaramanga",
-                            "fechaExp":"3 de 4 de 2004",
-                            "fechaNacimiento":"34",
-                            "idtercero":"34",
-                            "ciudadNacimiento":"Bogotá",
-                            "nacionalidad":"Colombiano",
-                            "genero":"F",
-                            "estadoCivil":"Soltero",
-                            "factorrh":"O+",
-                            "numeroDeHijos":"5",
-                            "lateralidad":"D",
-                            "nivelEducativo":"Pregrado",
-                            "profesion":"Orientador",
-                            "estratoSocioEconomico":"3",
-                            "vivienda":"Arrendada",
-                            "vehiculo":"Propio",
-                            "tallaCamisa":"34",
-                            "tallaPantalon":"34",
-                            "tallaCalzado":"31",
-                            "fechaDesde":"2013-05-13",
-                            "cargoActual":"cargo 3"}}
-                    })));
+                        // respond 200 OK with user
+                        connection.mockRespond(new Response(new ResponseOptions({ status: 200, body:{data: colaborador} })));
+
+
+                    return;
 
                 }
 
@@ -204,8 +183,8 @@ export let fakeBackendProvider = {
                         let urlParts = connection.request.url.split('/');
                         let id = parseInt(urlParts[urlParts.length - 1]);
                         for (let i = 0; i < colaboradores.length; i++) {
-                            let colaborador = colaboradores[i];
-                            if (colaborador.idColaborador === id) {
+                            let col = colaboradores[i];
+                            if (col.idColaborador == id) {
                                 // delete user
                                 colaboradores[i] = updColaborador;
                                 localStorage.setItem('colaboradores', JSON.stringify(colaboradores));

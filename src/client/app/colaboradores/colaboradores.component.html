@@ -13,8 +13,9 @@
         <p-column field="fechaDesde" header="Desde" [sortable]="true"></p-column>
         <p-column field="cargoActual" header="Cargo Actual" [sortable]="true"></p-column>
         <p-column header="Acciones">
-            <template let-car="rowData" pTemplate="body">
-                <button type="button" pButton icon="fa-close" (click)="deleteColaborador(colaborador)" label="Delete" class="ui-button-danger"></button>
+            <template let-colaborador="rowData" pTemplate="body">
+                <button type="button" pButton icon="fa-close" (click)="deleteColaborador(colaborador)" label="Eliminar" class="ui-button-danger"></button>
+                <button type="button" pButton icon="fa-close" (click)="updateColaborador(colaborador)" label="Editar" class="ui-button"></button>
             </template>
         </p-column>
         <footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Add"></button></div></footer>
