@@ -9,8 +9,7 @@ export let fakeBackendProvider = {
     provide: Http,
     useFactory: (backend: MockBackend, options: BaseRequestOptions) => {
         // array in local storage for registered users
-        let colaboradores: any[] = JSON.parse(localStorage.getItem('colaboradores')) || [];
-        colaboradores = [
+        let colaboradores: any[] = JSON.parse(localStorage.getItem('colaboradores')) || [
             {"idColaborador":"1",
                 "numeroDocumento":"12",
                 "primerNombre":"Nombre 1.1",
@@ -128,6 +127,7 @@ export let fakeBackendProvider = {
                 "fechaDesde":"2014-05-14",
                 "cargoActual":"cargo 4"}
         ];
+
         // configure fake backend
         backend.connections.subscribe((connection: MockConnection) => {
             // wrap in timeout to simulate server api call
@@ -206,8 +206,8 @@ export let fakeBackendProvider = {
                     let id = parseInt(urlParts[urlParts.length - 1]);
 
                     for (let i = 0; i < colaboradores.length; i++) {
-                        let user = colaboradores[i];
-                        if (user.id === id) {
+                        let col = colaboradores[i];
+                        if (col.idColaborador == id) {
                             // delete user
                             colaboradores.splice(i, 1);
                             localStorage.setItem('colaboradores', JSON.stringify(colaboradores));

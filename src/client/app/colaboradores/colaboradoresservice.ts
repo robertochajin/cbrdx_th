@@ -35,8 +35,8 @@ export class ColaboradoresService {
         return mapeada;
     }
 
-    deleteColaborador(id: number) {
-        const respuesta =  this.http.delete('/api/colaboradores/'+ id);
+    deleteColaborador(c: Colaborador) {
+        const respuesta =  this.http.delete('/api/colaboradores/'+ c.idColaborador);
         return respuesta.map((res:Response) => res.json());
     }
 
