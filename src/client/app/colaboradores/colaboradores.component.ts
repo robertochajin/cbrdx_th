@@ -44,10 +44,6 @@ export class ColaboradoresComponent {
         colaborador = null;
     }
 
-    selectCar(colaborador: Colaborador) {
-        console.log(colaborador);
-    }
-
     onRowSelect(event) {
         this.router.navigate(['colaboradores/detail', event.data.idColaborador]);
     }

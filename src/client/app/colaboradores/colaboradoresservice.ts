@@ -31,8 +31,7 @@ export class ColaboradoresService {
 
     getColaborador(id: number) {
         const respuesta =  this.http.get('/api/colaboradores/'+ id);
-        const mapeada = respuesta.map((res:Response) => res.json().data as Colaborador)
-        return mapeada;
+        return respuesta.map((res:Response) => res.json().data as Colaborador)
     }
 
     deleteColaborador(c: Colaborador) {
