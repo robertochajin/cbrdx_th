@@ -33,15 +33,9 @@ export class ColaboradoresComponent {
     }
 
     ngOnInit() {
-        //this.colaboradoresService.getColaboradoresMedium().then(colaboradores => this.colaboradores = colaboradores);
-        const col$ = this.colaboradoresService.getAllColaboradores().subscribe(
+        this.colaboradoresService.getAllColaboradores().subscribe(
             colaboradores => this.colaboradores = colaboradores
         );
-
-            //.map(colaboradores => this.colaboradores = colaboradores);
-        // col$.subscribe(
-        //     colaboradores => this.colaboradores = colaboradores
-        // );
     }
 
     onRowSelect(event) {
