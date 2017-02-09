@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 import {Http, Response} from '@angular/http';
 import { Colaborador } from './colaboradores';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+
 
 import 'rxjs/add/operator/toPromise';
 import any = jasmine.any;
@@ -19,11 +21,9 @@ export class ColaboradoresService {
     }
 
 
-    addColaborador(c: Colaborador): Promise<Colaborador> {
-        return this.http.post('/assets/colaboradores.json')
-            .toPromise()
-            .then(response => console.log(response.json()));
-    }
+    addColaborador(c: Colaborador) {
+        return this.http.post('/api/colaboradores',c).map((res:Response) => res.json().data);
+    };
 
 
     getColaborador(id: number) {
@@ -31,12 +31,5 @@ export class ColaboradoresService {
         const mapeada = respuesta.map((res:Response) => res.json().data as Colaborador)
         return mapeada;
     }
-
-
-// getColaborador(id: number): Promise<Colaborador> {
-//         return this.http.get('/assets/colaboradores.json')
-//             .toPromise()
-//             .then(response => response.json().data[id] as Colaborador});
-//     }
 
 }

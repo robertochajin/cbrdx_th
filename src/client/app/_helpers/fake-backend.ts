@@ -144,6 +144,10 @@ export let fakeBackendProvider = {
                 }
 
                 if (connection.request.url.match(/\/api\/colaboradores\/\d+$/) && connection.request.method === RequestMethod.Get) {
+                // get users
+               /* if (connection.request.url.endsWith('/api/colaboradores') && connection.request.method === RequestMethod.Get) {
+                    // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200, body: colaboradores })));
 
                     connection.mockRespond(new Response(new ResponseOptions({
                         status: 200,
@@ -177,10 +181,30 @@ export let fakeBackendProvider = {
                                 "fechaDeste":"2013-05-13",
                                 "cargoActual":"cargo 3"}}
                     })));
+                    return;
+                }*/
 
+                // create
+                if (connection.request.url.endsWith('/api/colaboradores') && connection.request.method === RequestMethod.Post) {
+                    // get new user object from post body
+                   let newColaborador = JSON.parse(connection.request.getBody());
+
+                    // validation
+                    //let duplicateUser = colaboradores.filter(colaborador => { return user.username === newUser.username; }).length;
+                    //if (duplicateUser) {
+                        return connection.mockError(new ResponseOptions);
+                    //}
+
+                    // save new user
+                    newColaborador.idColaborador = colaboradores.length + 1;
+                    colaboradores.push(newColaborador);
+                    localStorage.setItem('colaboradores', JSON.stringify(colaboradores));
+
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+
+                    return;
                 }
-
-
 
             }, 500);
 
