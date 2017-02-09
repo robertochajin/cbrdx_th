@@ -13,7 +13,7 @@
         <p-column field="fechaDesde" header="Desde" [sortable]="true"></p-column>
         <p-column field="cargoActual" header="Cargo Actual" [sortable]="true"></p-column>
         <p-column header="Acciones">
-            <template let-car="rowData" pTemplate="body">
+            <template let-colaborador="rowData" pTemplate="body">
                 <button type="button" pButton icon="fa-close" (click)="deleteColaborador(colaborador)" label="Delete" class="ui-button-danger"></button>
             </template>
         </p-column>

@@ -38,11 +38,14 @@ export class ColaboradoresComponent {
         );
     }
 
-    deleteColaborador(c: Colaborador) {
-        this.colaboradoresService.deleteColaborador(c.idColaborador);
+    deleteColaborador(colaborador: Colaborador) {
+        this.colaboradoresService.deleteColaborador(colaborador);
+        this.colaboradores.splice(colaborador.idColaborador, 1);
+        colaborador = null;
+    }
 
-        this.colaboradores.splice(c.idColaborador, 1);
-        c = null;
+    selectCar(colaborador: Colaborador) {
+        console.log(colaborador);
     }
 
     onRowSelect(event) {
