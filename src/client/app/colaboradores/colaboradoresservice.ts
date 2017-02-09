@@ -22,7 +22,7 @@ export class ColaboradoresService {
 
 
     addColaborador(c: Colaborador) {
-        return this.http.post('/api/colaboradores',c).map((res:Response) => res.json().data);
+        return this.http.post('/api/colaboradores',c).map((res:Response) => res.json());
     };
 
     updateColaborador(c: Colaborador) {
@@ -33,6 +33,11 @@ export class ColaboradoresService {
         const respuesta =  this.http.get('/api/colaboradores/'+ id);
         const mapeada = respuesta.map((res:Response) => res.json().data as Colaborador)
         return mapeada;
+    }
+
+    deleteColaborador(id: number) {
+        const respuesta =  this.http.delete('/api/colaboradores/'+ id);
+        return respuesta.map((res:Response) => res.json());
     }
 
 }

@@ -38,11 +38,15 @@ export class ColaboradoresComponent {
         );
     }
 
+    deleteColaborador(c: Colaborador) {
+        this.colaboradoresService.deleteColaborador(c.idColaborador);
+
+        this.colaboradores.splice(c.idColaborador, 1);
+        c = null;
+    }
+
     onRowSelect(event) {
         this.router.navigate(['colaboradores/detail', event.data.idColaborador]);
-        this.newColaborador = false;
-        this.colaborador = this.cloneColaborador(event.data);
-        this.displayDialog = true;
     }
 
     addColaborador() {
