@@ -1,6 +1,4 @@
-
 <div *ngIf="colaborador">
-
 
 
     <div class="row">
@@ -13,11 +11,12 @@
 
                 <div class="clearfix">
                     <div class="col-md-2">
-                        <img class="thumbnail pull-left img-responsive" src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg">
+                        <img class="thumbnail pull-left img-responsive"
+                             src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg">
                     </div>
                     <div class="col-md-8">
                         <h4>{{colaborador.primerNombre}} - {{colaborador.fechaNacimiento}}</h4>
-                        <span>{{colaborador.tipoDocumento}} {{colaborador.numeroDocumento}}</span><br />
+                        <span>{{colaborador.tipoDocumento}} {{colaborador.numeroDocumento}}</span><br/>
                         <span>{{colaborador.cargoActual}} - Area/oficina ({{colaborador.fechaDesde}})</span>
                     </div>
                     <div class="col-md-2">
@@ -28,33 +27,179 @@
                 <div class="col-xs-9">
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div class="tab-pane active" id="home-r">
-                            <ul class="list-group">
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                <li class="list-group-item">Morbi leo risus</li>
-                                <li class="list-group-item">Porta ac consectetur ac</li>
-                                <li class="list-group-item">Vestibulum at eros</li>
-                            </ul>
-                            <h4>Avatar: {{colaborador.Avatar}}</h4>
-                            <h4>ciudadExpedicion: {{colaborador.ciudadExpedicion}}</h4>
-                            <h4>fechaExp: {{colaborador.fechaExp}}</h4>
-                            <h4>idtercero: {{colaborador.idtercero}}</h4>
-                            <h4>ciudadNacimiento: {{colaborador.ciudadNacimiento}}</h4>
-                            <h4>nacionalidad: {{colaborador.nacionalidad}}</h4>
-                            <h4>genero: {{colaborador.genero}}</h4>
-                            <h4>estadoCivil: {{colaborador.estadoCivil}}</h4>
-                            <h4>factorrh: {{colaborador.factorrh}}</h4>
-                            <h4>numeroDeHijos: {{colaborador.numeroDeHijos}}</h4>
-                            <h4>lateralidad: {{colaborador.lateralidad}}</h4>
-                            <h4>nivelEducativo: {{colaborador.nivelEducativo}}</h4>
-                            <h4>profesion: {{colaborador.profesion}}</h4>
-                            <h4>estratoSocioEconomico: {{colaborador.estratoSocioEconomico}}</h4>
-                            <h4>vivienda: {{colaborador.vivienda}}</h4>
-                            <h4>vehiculo: {{colaborador.vehiculo}}</h4>
-                            <h4>tallaCamisa: {{colaborador.tallaCamisa}}</h4>
-                            <h4>tallaPantalon: {{colaborador.tallaPantalon}}</h4>
-                            <h4>tallaCalzado: {{colaborador.tallaCalzado}}</h4>
+                        <div class="tab-pane active" id="infoPersonal">
+
+
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="pnlDatosGenerales">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion"
+                                               href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                Datos Generales
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                                         aria-labelledby="headingOne">
+                                        <div class="panel-body">
+
+                                            <form class="form-horizontal">
+                                                <fieldset>
+                                                    <div class="form-group">
+
+                                                        <label class="col-md-3 control-label">Fecha de Exp.:</label>
+                                                        <label class="col-md-3 "><strong>{{colaborador.fechaExp}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Ciudad de Exp.:</label>
+                                                        <label class="col-md-3"><strong>{{colaborador.ciudadExpedicion}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Fecha de Nacimiento:</label>
+                                                        <label class="col-md-3"><strong>{{colaborador.fechaNacimiento}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">ciudad de Nacimiento:</label>
+                                                        <label class="col-md-3"><strong>{{colaborador.ciudadNacimiento}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Nacionalidad:</label>
+                                                        <label class="col-md-3"><strong>{{colaborador.nacionalidad}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Genero:</label>
+                                                        <label class="col-md-3"><strong>{{colaborador.genero}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Estado Civil:</label>
+                                                        <label class="col-md-3"><strong>{{colaborador.estadoCivil}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Factor RH:</label>
+                                                        <label class="col-md-3"><strong>{{colaborador.factorrh}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Numero de Hijos:</label>
+                                                        <label class="col-md-3"><strong>{{colaborador.numeroDeHijos}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Lateralidad:</label>
+                                                        <label class="col-md-3"><strong>{{colaborador.lateralidad}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Nivel Educativo:</label>
+                                                        <label class="col-md-3"><strong>{{colaborador.nivelEducativo}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Profesión:</label>
+                                                        <label class="col-md-3"><strong>{{colaborador.profesion}}</strong></label>
+
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="pnlInformacionFamiliar">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse"
+                                               data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
+                                               aria-controls="collapseTwo">
+                                                Información Familiar
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                                         aria-labelledby="headingTwo">
+                                        <div class="panel-body">
+                                            Información Familiar
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="pnlUbicacion">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse"
+                                               data-parent="#accordion" href="#collapseThree" aria-expanded="false"
+                                               aria-controls="collapseThree">
+                                                Ubicación
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                                         aria-labelledby="headingThree">
+                                        <div class="panel-body">
+                                            info de la ubicación
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="pnlFormacionAcademica">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse"
+                                               data-parent="#accordion" href="#collapseThree" aria-expanded="false"
+                                               aria-controls="collapseThree">
+                                                Formación Academica
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                                         aria-labelledby="headingThree">
+                                        <div class="panel-body">
+                                            info Formacion academica
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="pnlExperienciaLaboral">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse"
+                                               data-parent="#accordion" href="#collapseThree" aria-expanded="false"
+                                               aria-controls="collapseThree">
+                                                Experiencia Laboral
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                                         aria-labelledby="headingThree">
+                                        <div class="panel-body">
+                                            info de la xp laboral
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="pnlReferencias">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse"
+                                               data-parent="#accordion" href="#collapseThree" aria-expanded="false"
+                                               aria-controls="collapseThree">
+                                                Referencias
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                                         aria-labelledby="headingThree">
+                                        <div class="panel-body">
+                                            Info Referencias
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingFour">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse"
+                                               data-parent="#accordion" href="#collapseThree" aria-expanded="false"
+                                               aria-controls="collapseThree">
+                                                Ubicación
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                                         aria-labelledby="headingThree">
+                                        <div class="panel-body">
+                                            info de la ubicación
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                         <div class="tab-pane" id="profile-r">Reclutamiento</div>
                         <div class="tab-pane" id="messages-r">Novedades</div>
@@ -65,10 +210,16 @@
                 <div class="col-xs-3"> <!-- required for floating -->
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs tabs-right">
-                        <li class="active"><a href="#home-r" data-toggle="tab">>Info Personal</a></li>
-                        <li><a href="#profile-r" data-toggle="tab">Reclutamiento</a></li>
-                        <li><a href="#messages-r" data-toggle="tab">Novedades</a></li>
-                        <li><a href="#settings-r" data-toggle="tab">Formación y Capacitación</a></li>
+                        <li class="active"><a href="#infoPersonal" data-toggle="tab">Info Personal</a></li>
+                        <li><a href="#reclutamiento" data-toggle="tab">Reclutamiento</a></li>
+                        <li><a href="#novedades" data-toggle="tab">Novedades</a></li>
+                        <li><a href="#formacion" data-toggle="tab">Formación y Capacitación</a></li>
+                        <li><a href="#evaluaciones" data-toggle="tab">Evaluación de Competencias</a></li>
+                        <li><a href="#rituales" data-toggle="tab">Rituales Gerenciales</a></li>
+                        <li><a href="#disciplinarios" data-toggle="tab">Procesos Disciplinarios</a></li>
+                        <li><a href="#beneficios" data-toggle="tab">Plan de Beneficio</a></li>
+                        <li><a href="#examenes" data-toggle="tab">Examenes Ocupacionales</a></li>
+                        <li><a href="#dotaciones" data-toggle="tab">Dotaciones</a></li>
                     </ul>
                 </div>
 
