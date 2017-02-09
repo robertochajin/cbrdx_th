@@ -40,7 +40,7 @@ export class ColaboradoresComponent {
 
     deleteColaborador(colaborador: Colaborador) {
         this.colaboradoresService.deleteColaborador(colaborador);
-        this.colaboradores.splice(colaborador.idColaborador, 1);
+        this.colaboradores.splice(this.colaboradores.indexOf(colaborador), 1);
         colaborador = null;
     }
 
