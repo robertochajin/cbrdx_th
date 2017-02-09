@@ -196,6 +196,26 @@ export let fakeBackendProvider = {
                     return true ;
                 }
 
+                //delete
+                if (connection.request.url.match(/\/api\/colaboradores\/\d+$/) && connection.request.method === RequestMethod.Delete) {
+
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+
+                    for (let i = 0; i < colaboradores.length; i++) {
+                        let user = colaboradores[i];
+                        if (user.id === id) {
+                            // delete user
+                            colaboradores.splice(i, 1);
+                            localStorage.setItem('colaboradores', JSON.stringify(colaboradores));
+                            break;
+                        }
+                    }
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+                }
+
+
             }, 500);
 
         });
