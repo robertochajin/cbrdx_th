@@ -17,8 +17,7 @@ export class PrimeColaborador implements Colaborador {
 @Component({
     moduleId: module.id,
     selector: 'colaborador-detail',
-    templateUrl: './colaborador-detail.component.html',
-    //styleUrls: ['./colaborador-detail.component.css']
+    templateUrl: './colaborador-detail.component.html'
 })
 
 
@@ -34,9 +33,9 @@ export class ColaboradorDetailComponent implements OnInit   {
     ) {}
 
     ngOnInit(): void {
-        this.route.params
-            .switchMap((params: Params) => this.colaboradorService.getColaborador(+params['id']))
-            .subscribe(colaborador => this.colaborador = colaborador);
+        var este$ = this.route.params
+            .switchMap((params: Params) => this.colaboradorService.getColaborador(+params['id']));
+        este$.subscribe(colaborador => this.colaborador = colaborador);
     }
 
     goBack(): void {
