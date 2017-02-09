@@ -25,6 +25,9 @@ export class ColaboradoresService {
         return this.http.post('/api/colaboradores',c).map((res:Response) => res.json().data);
     };
 
+    updateColaborador(c: Colaborador) {
+        return this.http.put('/api/colaboradores/'+ c.idColaborador,c).map((res:Response) => res.json());
+    }
 
     getColaborador(id: number) {
         const respuesta =  this.http.get('/api/colaboradores/'+ id);

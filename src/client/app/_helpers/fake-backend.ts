@@ -38,7 +38,7 @@ export let fakeBackendProvider = {
                 "tallaCamisa":"12",
                 "tallaPantalon":"12",
                 "tallaCalzado":"11",
-                "fechaDeste":"2011-05-11",
+                "fechaDesde":"2011-05-11",
                 "cargoActual":"cargo 1"},
             {"idColaborador":"2",
                 "numeroDocumento":"23",
@@ -67,7 +67,7 @@ export let fakeBackendProvider = {
                 "tallaCamisa":"23",
                 "tallaPantalon":"23",
                 "tallaCalzado":"21",
-                "fechaDeste":"2012-05-12",
+                "fechaDesde":"2012-05-12",
                 "cargoActual":"cargo 2"},
             {"idColaborador":"3",
                 "numeroDocumento":"34",
@@ -96,7 +96,7 @@ export let fakeBackendProvider = {
                 "tallaCamisa":"34",
                 "tallaPantalon":"34",
                 "tallaCalzado":"31",
-                "fechaDeste":"2013-05-13",
+                "fechaDesde":"2013-05-13",
                 "cargoActual":"cargo 3"},
             {"idColaborador":"4",
                 "numeroDocumento":"45",
@@ -125,7 +125,7 @@ export let fakeBackendProvider = {
                 "tallaCamisa":"45",
                 "tallaPantalon":"45",
                 "tallaCalzado":"41",
-                "fechaDeste":"2014-05-14",
+                "fechaDesde":"2014-05-14",
                 "cargoActual":"cargo 4"}
         ];
         // configure fake backend
@@ -174,7 +174,7 @@ export let fakeBackendProvider = {
                             "tallaCamisa":"34",
                             "tallaPantalon":"34",
                             "tallaCalzado":"31",
-                            "fechaDeste":"2013-05-13",
+                            "fechaDesde":"2013-05-13",
                             "cargoActual":"cargo 3"}}
                     })));
 
@@ -193,7 +193,31 @@ export let fakeBackendProvider = {
                     // respond 200 OK
                     connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
 
-                    return true ;
+                    return;
+                }
+
+                // update user
+                if (connection.request.url.match(/\/api\/colaboradores\/\d+$/) && connection.request.method === RequestMethod.Put) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                        // find user by id in users array
+                        let updColaborador = JSON.parse(connection.request.getBody());
+                        let urlParts = connection.request.url.split('/');
+                        let id = parseInt(urlParts[urlParts.length - 1]);
+                        for (let i = 0; i < colaboradores.length; i++) {
+                            let colaborador = colaboradores[i];
+                            if (colaborador.idColaborador === id) {
+                                // delete user
+                                colaboradores[i] = updColaborador;
+                                localStorage.setItem('colaboradores', JSON.stringify(colaboradores));
+                                break;
+                            }
+                        }
+
+                        // respond 200 OK
+                        connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+
+
+                    return;
                 }
 
             }, 500);

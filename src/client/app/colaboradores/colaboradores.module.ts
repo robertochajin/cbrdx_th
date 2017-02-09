@@ -10,12 +10,14 @@ import 'rxjs/add/operator/toPromise';
 import { ColaboradoresComponent }  from './colaboradores.component';
 import { ColaboradorDetailComponent }  from './colaborador-detail.component';
 import { ColaboradorAddComponent }  from './colaborador-add.component';
+import { ColaboradorUpdateComponent }  from './colaborador-update.component';
 import { ColaboradoresService } from './colaboradoresservice';
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule } from 'primeng/primeng';
 
+
 @NgModule({
     imports:      [CommonModule,InputTextModule,FormsModule,DataTableModule,ButtonModule,DialogModule],
-    declarations: [ColaboradoresComponent, ColaboradorDetailComponent, ColaboradorAddComponent],
+    declarations: [ColaboradoresComponent, ColaboradorDetailComponent, ColaboradorAddComponent, ColaboradorUpdateComponent],
     bootstrap:    [ColaboradoresComponent],
     providers:    [ColaboradoresService],
     exports: 	  [ColaboradoresComponent]
