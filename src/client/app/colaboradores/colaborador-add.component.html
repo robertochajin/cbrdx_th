@@ -1,0 +1,74 @@
+
+<div *ngIf="colaborador">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="colaboradord clearfix">
+                <div class="header">
+                    <h4 class="title">Colaboradores</h4>
+                </div>
+                
+                <div class="clearfix">
+                    <div class="col-md-2">
+                        <img class="thumbnail pull-left img-responsive" src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg">
+                    </div>
+                    <div class="col-md-8">
+                        <h4>{{colaborador.primerNombre}} - {{colaborador.fechaNacimiento}}</h4>
+                        <span>{{colaborador.tipoDocumento}} {{colaborador.numeroDocumento}}</span><br />
+                        <span>{{colaborador.colaboradorgoActual}} - Area/oficina ({{colaborador.fechaDesde}})</span>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="#" class="btn btn-primary">Historial Laboral</a>
+                    </div>
+                </div>
+
+                <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="colaborador">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-4"><label for="primerNombre">primerNombre</label></div>
+                        <div class="ui-grid-col-8"><input pInputText id="primerNombre" [(ngModel)]="colaborador.primerNombre" /></div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-4"><label for="primerApellido">segundoNombre</label></div>
+                        <div class="ui-grid-col-8"><input pInputText id="primerApellido" [(ngModel)]="colaborador.segundoNombre" /></div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-4"><label for="primerApellido">primerApellido</label></div>
+                        <div class="ui-grid-col-8"><input pInputText id="primerApellido" [(ngModel)]="colaborador.primerApellido" /></div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-4"><label for="segundoApellido">segundoApellido</label></div>
+                        <div class="ui-grid-col-8"><input pInputText id="segundoApellido" [(ngModel)]="colaborador.segundoApellido" /></div>
+                    </div>
+                </div>
+                <footer>
+                    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                        <button type="button" pButton icon="fa-close" (click)="goBack()" label="Cancelar"></button>
+                        <button type="button" pButton icon="fa-check" (click)="addColaborador()" label="Guardar"></button>
+                    </div>
+                </footer>
+
+                <h4>Avatar: {{colaborador.Avatar}}</h4>
+                <h4>ciudadExpedicion: {{colaborador.ciudadExpedicion}}</h4>
+                <h4>fechaExp: {{colaborador.fechaExp}}</h4>
+                <h4>idtercero: {{colaborador.idtercero}}</h4>
+                <h4>ciudadNacimiento: {{colaborador.ciudadNacimiento}}</h4>
+                <h4>nacionalidad: {{colaborador.nacionalidad}}</h4>
+                <h4>genero: {{colaborador.genero}}</h4>
+                <h4>estadoCivil: {{colaborador.estadoCivil}}</h4>
+                <h4>factorrh: {{colaborador.factorrh}}</h4>
+                <h4>numeroDeHijos: {{colaborador.numeroDeHijos}}</h4>
+                <h4>lateralidad: {{colaborador.lateralidad}}</h4>
+                <h4>nivelEducativo: {{colaborador.nivelEducativo}}</h4>
+                <h4>profesion: {{colaborador.profesion}}</h4>
+                <h4>estratoSocioEconomico: {{colaborador.estratoSocioEconomico}}</h4>
+                <h4>vivienda: {{colaborador.vivienda}}</h4>
+                <h4>vehiculo: {{colaborador.vehiculo}}</h4>
+                <h4>tallaCamisa: {{colaborador.tallaCamisa}}</h4>
+                <h4>tallaPantalon: {{colaborador.tallaPantalon}}</h4>
+                <h4>tallaCalzado: {{colaborador.tallaCalzado}}</h4>
+
+            </div>
+
+        </div>
+    </div>
+</div>
