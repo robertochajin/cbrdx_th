@@ -15,11 +15,8 @@ import any = jasmine.any;
 export class ColaboradoresService {
 
     constructor(private http: Http) {}
-     private  subject = new Subject<any>;
-
 
     getAllColaboradores()  {
-       //return this.http.get('/api/colaboradores').map((response: Response) => response.json());
         return this.http.get('/api/colaboradores').map((res:Response) => res.json().data);
     }
 
@@ -29,10 +26,10 @@ export class ColaboradoresService {
     };
 
 
-    getColaborador(id: number): Promise<Colaborador> {
-        return this.http.get('/assets/colaboradores.json')
-            .toPromise()
-            .then(response => response.json().data[id] as Colaborador});
+    getColaborador(id: number) {
+        const respuesta =  this.http.get('/api/colaboradores/'+ id);
+        const mapeada = respuesta.map((res:Response) => res.json().data as Colaborador)
+        return mapeada;
     }
 
 }

@@ -33,7 +33,7 @@ export class ColaboradoresComponent {
     }
 
     ngOnInit() {
-        const col$ = this.colaboradoresService.getAllColaboradores().subscribe(
+        this.colaboradoresService.getAllColaboradores().subscribe(
             colaboradores => this.colaboradores = colaboradores
         );
     }

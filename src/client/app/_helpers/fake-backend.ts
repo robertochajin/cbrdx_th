@@ -9,7 +9,7 @@ export let fakeBackendProvider = {
     provide: Http,
     useFactory: (backend: MockBackend, options: BaseRequestOptions) => {
         // array in local storage for registered users
-        let colaboradores: any[] = JSON.parse(localStorage.getItem('colaboradores')) || [];
+        let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
 
         // configure fake backend
         backend.connections.subscribe((connection: MockConnection) => {
@@ -143,11 +143,44 @@ export let fakeBackendProvider = {
 
                 }
 
+                if (connection.request.url.match(/\/api\/colaboradores\/\d+$/) && connection.request.method === RequestMethod.Get) {
                 // get users
                /* if (connection.request.url.endsWith('/api/colaboradores') && connection.request.method === RequestMethod.Get) {
                     // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                     connection.mockRespond(new Response(new ResponseOptions({ status: 200, body: colaboradores })));
 
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        status: 200,
+                        body: {"data": {"idColaborador":"3",
+                                "numeroDocumento":"34",
+                                "primerNombre":"Nombre 3.1",
+                                "segundoNombre":"Nombre 3.2",
+                                "primerApellido":"Apellido 3.1",
+                                "segundoApellido":"Apellido 3.2",
+                                "tipoDocumento":"C.C.",
+                                "Avatar":"fotico.png",
+                                "ciudadExpedicion":"Bucaramanga",
+                                "fechaExp":"3 de 4 de 2004",
+                                "fechaNacimiento":"34",
+                                "idtercero":"34",
+                                "ciudadNacimiento":"Bogotá",
+                                "nacionalidad":"Colombiano",
+                                "genero":"F",
+                                "estadoCivil":"Soltero",
+                                "factorrh":"O+",
+                                "numeroDeHijos":"5",
+                                "lateralidad":"D",
+                                "nivelEducativo":"Pregrado",
+                                "profesion":"Orientador",
+                                "estratoSocioEconomico":"3",
+                                "vivienda":"Arrendada",
+                                "vehiculo":"Propio",
+                                "tallaCamisa":"34",
+                                "tallaPantalon":"34",
+                                "tallaCalzado":"31",
+                                "fechaDeste":"2013-05-13",
+                                "cargoActual":"cargo 3"}}
+                    })));
                     return;
                 }*/
 
