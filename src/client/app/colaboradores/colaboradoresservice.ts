@@ -16,16 +16,6 @@ export class ColaboradoresService {
 
     constructor(private http: Http) {}
      private  subject = new Subject<any>;
-    getColaboradoresMedium() {
-        // return this.http.get('/api/colaboradores')
-        //     .toPromise()
-        //     .then(res => <Colaborador[]> res.json().data)
-        //     .then(data => { return data; });
-
-        return this.http.get('/api/colaboradores').toPromise()
-             .then(res => <Colaborador[]> res.json().data)
-             .then(data => { return data; });
-    }
 
 
     getAllColaboradores()  {
@@ -34,10 +24,8 @@ export class ColaboradoresService {
     }
 
 
-    addColaborador(c: Colaborador): Promise<Colaborador> {
-        return this.http.get('/assets/colaboradores.json')
-            .toPromise()
-            .then(response => console.log(response.json()));
+    addColaborador(c: Colaborador) {
+        return this.http.post('/api/colaboradores',c).map((res:Response) => res.json().data);
     };
 
 

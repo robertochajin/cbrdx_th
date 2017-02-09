@@ -1,12 +1,17 @@
+<h3 class="first">Colaboradores</h3>
 <div>
-    <p-dataTable [value]="colaboradores" selectionMode="single" [(selection)]="selectedColaborador" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" [responsive]="true">
-        <header>Colaboradores</header>
+    <p-dataTable [value]="colaboradores" selectionMode="single" [(selection)]="selectedColaborador" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+        <p-header>
+            <div class="" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="addColaborador()" label="Nuevo Colaborador"></button></div>
+            <div class="" style="">
+                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                <input #gb type="text" pInputText size="50" placeholder="Buscar">
+            </div>
+        </p-header>
         <p-column field="numeroDocumento" header="Número de documento" [sortable]="true"></p-column>
         <p-column field="primerNombre" header="Nombre " [sortable]="true"></p-column>
         <p-column field="fechaDesde" header="Desde" [sortable]="true"></p-column>
         <p-column field="cargoActual" header="Cargo Actual" [sortable]="true"></p-column>
         <footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Add"></button></div></footer>
     </p-dataTable>
-
-    <button type="button" pButton icon="fa-check" (click)="addColaborador()" label="Crear Colaborador"></button>
 </div>
