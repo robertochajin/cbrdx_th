@@ -17,7 +17,7 @@ export let fakeBackendProvider = {
             setTimeout(() => {
 
                 // getColaboradores
-                /*if (connection.request.url.endsWith('/api/colaboradores') && connection.request.method === RequestMethod.Get) {
+                if (connection.request.url.endsWith('/api/colaboradores') && connection.request.method === RequestMethod.Get) {
 
                     connection.mockRespond(new Response(new ResponseOptions({
                         status: 200,
@@ -141,15 +141,15 @@ export let fakeBackendProvider = {
                         ]}
                     })));
 
-                }*/
+                }
 
                 // get users
-                if (connection.request.url.endsWith('/api/colaboradores') && connection.request.method === RequestMethod.Get) {
+               /* if (connection.request.url.endsWith('/api/colaboradores') && connection.request.method === RequestMethod.Get) {
                     // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                     connection.mockRespond(new Response(new ResponseOptions({ status: 200, body: colaboradores })));
 
                     return;
-                }
+                }*/
 
                 // create
                 if (connection.request.url.endsWith('/api/colaboradores') && connection.request.method === RequestMethod.Post) {
