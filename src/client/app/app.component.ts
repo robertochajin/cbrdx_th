@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Config } from './shared/config/env.config';
 import './operators';
+import {TranslateService} from 'ng2-translate';
 
 /**
  * This class represents the main application component.
@@ -11,7 +12,12 @@ import './operators';
   templateUrl: 'app.component.html',
 })
 export class AppComponent {
-  constructor() {
-    console.log('Environment config', Config);
+  constructor(private translate: TranslateService) {
+    //translate.addLangs(['en', 'hy']);
+    translate.setDefaultLang('es');
+    translate.use('es');
+  }
+  changeLang(lang: string) {
+    this.translate.use(lang);
   }
 }
