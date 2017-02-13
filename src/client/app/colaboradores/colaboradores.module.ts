@@ -14,9 +14,10 @@ import { ColaboradorUpdateComponent }  from './colaborador-update.component';
 import { ColaboradoresService } from './colaboradoresservice';
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule } from 'primeng/primeng';
 
+import {FamilyInformationModule} from './../employees-family-information/family-information.module';
 
 @NgModule({
-    imports:      [CommonModule,InputTextModule,FormsModule,DataTableModule,ButtonModule,DialogModule],
+    imports:      [CommonModule,InputTextModule,FormsModule,DataTableModule,ButtonModule,DialogModule,FamilyInformationModule],
     declarations: [ColaboradoresComponent, ColaboradorDetailComponent, ColaboradorAddComponent, ColaboradorUpdateComponent],
     bootstrap:    [ColaboradoresComponent],
     providers:    [ColaboradoresService],

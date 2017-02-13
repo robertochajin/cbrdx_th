@@ -34,7 +34,7 @@ class constructorFamilyInformation implements FamilyInformation {
 @Component({
     moduleId: module.id,
     selector: 'family-information',
-    templateUrl: './family-information-add.component.html',
+    templateUrl: 'family-information-form.component.html',
 })
 
 export class FamilyInformationAddComponent {
@@ -45,21 +45,23 @@ export class FamilyInformationAddComponent {
 
     constructor(
         private familyInformationService: FamilyInformationService,
-        private router: Router
+        private router: Router,
+        private location: Location
     ) {}
 
-    add() {
+    save() {
 
         this.familyInformationService.add(this.familyInformation)
             .subscribe(
                 data => {
-                    this.router.navigate(['/employees-family-information']);
+                    //this.router.navigate(['/employees-family-information']);
+                    this.location.back();
                 },
                 error => {
                 });
     }
 
     goBack(): void {
-        this.router.navigate(['/employees-family-information']);
+        this.location.back();
     }
 }

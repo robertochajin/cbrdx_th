@@ -146,7 +146,7 @@ export let fakeBackendProvider = {
          "direccionDeResidencia":"1",
          "convive":"1"},
          {"idFamiliar":"2",
-         "tipoDeDocumento":"2",
+         "tipoDeDocumento":"222",
          "numeroDeDocumento":"2",
          "nombreCompleto":"2",
          "primerNombre":"2",
@@ -156,7 +156,7 @@ export let fakeBackendProvider = {
          "fechadeNacimiento":"2",
          "edad":"2",
          "parentesco":"2",
-         "correoElectronico":"2",
+         "correoElectronico":"correo2",
          "telefono1":"2",
          "telefono2":"2",
          "direccionDeResidencia":"2",
@@ -304,7 +304,9 @@ export let fakeBackendProvider = {
                     let newFamily = JSON.parse(connection.request.getBody());
 
                     // save new user
-                    newFamily.idColaborador = colaboradores.length + 1;
+                    newFamily.idFamiliar = familys.length + 1;
+                    newFamily.nombreCompleto = newFamily.primerNombre+' '+newFamily.segundoNombre+' '+newFamily.primerApellido+' '+newFamily.segundoApellido;
+                    newFamily.edad = 25;
                     familys.push(newFamily);
                     localStorage.setItem('familys', JSON.stringify(familys));
 
@@ -314,18 +316,20 @@ export let fakeBackendProvider = {
                     return;
                 }
 
-                // actualizar un familair
+                // actualizar un familiar
                 if (connection.request.url.match(/\/api\/employees-family-information\/\d+$/) && connection.request.method === RequestMethod.Put) {
                     // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                     // find user by id in users array
-                    let upd = JSON.parse(connection.request.getBody());
+                    let newFamily = JSON.parse(connection.request.getBody());
+                    newFamily.nombreCompleto = newFamily.primerNombre+' '+newFamily.segundoNombre+' '+newFamily.primerApellido+' '+newFamily.segundoApellido;
+                    newFamily.edad = 25;
                     let urlParts = connection.request.url.split('/');
                     let id = parseInt(urlParts[urlParts.length - 1]);
                     for (let i = 0; i < familys.length; i++) {
                         let col = familys[i];
                         if (col.idFamiliar == id) {
                             // delete user
-                            familys[i] = upd;
+                            familys[i] = newFamily;
                             localStorage.setItem('familys', JSON.stringify(familys));
                             break;
                         }

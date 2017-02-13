@@ -27,7 +27,7 @@ class constructorFamilyInformation implements FamilyInformation {
 @Component({
     moduleId: module.id,
     selector: 'family-information',
-    templateUrl: 'family-information-add.component.html',
+    templateUrl: 'family-information-form.component.html',
 })
 
 export class FamilyInformationUpdateComponent implements OnInit{
@@ -37,7 +37,8 @@ export class FamilyInformationUpdateComponent implements OnInit{
     constructor(
         private familyInformationService: FamilyInformationService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private location: Location
 
     ) {}
     ngOnInit(): void {
@@ -46,18 +47,19 @@ export class FamilyInformationUpdateComponent implements OnInit{
             .subscribe(familyInformation => this.familyInformation = familyInformation);
     }
 
-    update() {
+    save() {
 
         this.familyInformationService.update(this.familyInformation)
             .subscribe(
                 data => {
-                    this.router.navigate(['/employees-family-information']);
+                    //this.router.navigate(['/employees-family-information']);
+                    this.location.back();
                 },
                 error => {
                 });
     }
     goBack(): void {
-        this.router.navigate(['/employees-family-information']);
+        this.location.back();
     }
 
 }

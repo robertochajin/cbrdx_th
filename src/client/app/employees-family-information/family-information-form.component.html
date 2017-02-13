@@ -9,7 +9,7 @@
                 <div class="clearfix">
                     <div class="col-md-12">
                         <h2></h2>
-                        <form name="form" (ngSubmit)="f.form.valid && add()" #f="ngForm" novalidate>
+                        <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
                             <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !tipoDeDocumento.valid }">
                                 <label for="tipoDeDocumento">Tipo de documento</label>
                                 <input type="text" class="form-control" name="tipoDeDocumento" [(ngModel)]="familyInformation.tipoDeDocumento" #tipoDeDocumento="ngModel" required />
