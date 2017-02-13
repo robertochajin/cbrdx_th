@@ -20,7 +20,6 @@ export class ColaboradoresService {
         return this.http.get('/api/colaboradores').map((res:Response) => res.json().data);
     }
 
-
     addColaborador(c: Colaborador) {
         return this.http.post('/api/colaboradores',c).map((res:Response) => res.json());
     };

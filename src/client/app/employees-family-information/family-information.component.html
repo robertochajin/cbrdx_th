@@ -1,0 +1,26 @@
+<h3 class="first">Información familiar</h3>
+<div>
+    <p-dataTable [value]="familyInformations"   [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+        <p-header>
+            <div class="" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="add()" label="Nuevo Colaborador"></button></div>
+            <div class="" style="">
+                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                <input #gb type="text" pInputText size="50" placeholder="Buscar">
+            </div>
+        </p-header>
+        <p-column field="nombreCompleto" header="Nombre" [sortable]="true"></p-column>
+        <p-column field="tipoDeDocumento" header="Tipo de documento" [sortable]="true"></p-column>
+        <p-column field="numeroDeDocumento" header="Número de documento" [sortable]="true"></p-column>
+        <p-column field="parentesco" header="Parentesco" [sortable]="true"></p-column>
+        <p-column field="edad" header="Edad" [sortable]="true"></p-column>
+        <p-column header="Acciones">
+            <template let-family="rowData" pTemplate="body">
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" pButton class="ui-button btn" (click)="detail(family)" icon="fa-eye"></button>
+                    <button type="button" pButton class="ui-button ui-button-success btn" (click)="update(family)" icon="fa-pencil"></button>
+                    <button type="button" pButton class="ui-button ui-button-danger btn" (click)="delete(family)" icon="fa-trash"></button>
+                </div>
+            </template>
+        </p-column>
+    </p-dataTable>
+</div>

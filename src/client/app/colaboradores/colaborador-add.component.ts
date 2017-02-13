@@ -20,7 +20,6 @@ export class PrimeColaborador implements Colaborador {
     moduleId: module.id,
     selector: 'colaborador-add',
     templateUrl: './colaborador-add.component.html',
-    //styleUrls: ['./colaborador-detail.component.css']
 })
 
 export class ColaboradorAddComponent {

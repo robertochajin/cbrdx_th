@@ -7,7 +7,6 @@ import { Location }                 from '@angular/common';
     moduleId: module.id,
     selector: 'colaborador-detail',
     templateUrl: 'colaborador-update.component.html',
-    styleUrls: [ './colaboradores.css' ]
 })
 
 export class ColaboradorUpdateComponent implements OnInit{

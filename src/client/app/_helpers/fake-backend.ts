@@ -128,12 +128,64 @@ export let fakeBackendProvider = {
                 "cargoActual":"cargo 4"}
         ];
 
+        let familys: any[] = JSON.parse(localStorage.getItem('familys')) || [
+         {"idFamiliar":"1",
+         "tipoDeDocumento":"1",
+         "numeroDeDocumento":"1",
+         "nombreCompleto":"1",
+         "primerNombre":"1",
+         "segundoNombre":"1",
+         "primerApellido":"1",
+         "segundoApellido":"1",
+         "fechadeNacimiento":"1",
+         "edad":"1",
+         "parentesco":"1",
+         "correoElectronico":"1",
+         "telefono1":"1",
+         "telefono2":"1",
+         "direccionDeResidencia":"1",
+         "convive":"1"},
+         {"idFamiliar":"2",
+         "tipoDeDocumento":"2",
+         "numeroDeDocumento":"2",
+         "nombreCompleto":"2",
+         "primerNombre":"2",
+         "segundoNombre":"2",
+         "primerApellido":"2",
+         "segundoApellido":"2",
+         "fechadeNacimiento":"2",
+         "edad":"2",
+         "parentesco":"2",
+         "correoElectronico":"2",
+         "telefono1":"2",
+         "telefono2":"2",
+         "direccionDeResidencia":"2",
+         "convive":"2"},
+         {"idFamiliar":"3",
+         "tipoDeDocumento":"3",
+         "numeroDeDocumento":"3",
+         "nombreCompleto":"3",
+         "primerNombre":"3",
+         "segundoNombre":"3",
+         "primerApellido":"3",
+         "segundoApellido":"3",
+         "fechadeNacimiento":"3",
+         "edad":"3",
+         "parentesco":"3",
+         "correoElectronico":"3",
+         "telefono1":"3",
+         "telefono2":"3",
+         "direccionDeResidencia":"3",
+         "convive":"3"}
+
+         ];
+
         // configure fake backend
         backend.connections.subscribe((connection: MockConnection) => {
             // wrap in timeout to simulate server api call
             setTimeout(() => {
 
-                // getColaboradores
+                // obtiene todos los Colaboradores
                 if (connection.request.url.endsWith('/api/colaboradores') && connection.request.method === RequestMethod.Get) {
 
                     connection.mockRespond(new Response(new ResponseOptions({
@@ -143,6 +195,7 @@ export let fakeBackendProvider = {
 
                 }
 
+                // obtiene un colaborador por el id
                 if (connection.request.url.match(/\/api\/colaboradores\/\d+$/) && connection.request.method === RequestMethod.Get) {
                     // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                         // find user by id in users array
@@ -159,7 +212,7 @@ export let fakeBackendProvider = {
 
                 }
 
-                // create
+                // crea un colaborador en el local
                 if (connection.request.url.endsWith('/api/colaboradores') && connection.request.method === RequestMethod.Post) {
                     // get new user object from post body
                    let newColaborador = JSON.parse(connection.request.getBody());
@@ -175,7 +228,7 @@ export let fakeBackendProvider = {
                     return;
                 }
 
-                // update user
+                // actualizar un colaborador
                 if (connection.request.url.match(/\/api\/colaboradores\/\d+$/) && connection.request.method === RequestMethod.Put) {
                     // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                         // find user by id in users array
@@ -199,7 +252,7 @@ export let fakeBackendProvider = {
                     return;
                 }
 
-                //delete
+                // elimina un colaborador del localstorage
                 if (connection.request.url.match(/\/api\/colaboradores\/\d+$/) && connection.request.method === RequestMethod.Delete) {
 
                     let urlParts = connection.request.url.split('/');
@@ -218,6 +271,91 @@ export let fakeBackendProvider = {
                     connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
                 }
 
+                // obtiene el listado de familiares
+                if (connection.request.url.endsWith('/api/employees-family-information') && connection.request.method === RequestMethod.Get) {
+
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        status: 200,
+                        body:{data:familys}
+                    })));
+
+                }
+
+                // obtiene un familiar por el id
+                if (connection.request.url.match(/\/api\/employees-family-information\/\d+$/) && connection.request.method === RequestMethod.Get) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                    // find user by id in users array
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    let matched = familys.filter(family => { return family.idFamiliar == id; });
+                    let family = matched.length ? matched[0] : null;
+
+                    // respond 200 OK with user
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200, body:{data: family} })));
+
+
+                    return;
+
+                }
+
+                // crea un familiar en el local
+                if (connection.request.url.endsWith('/api/employees-family-information') && connection.request.method === RequestMethod.Post) {
+                    // get new user object from post body
+                    let newFamily = JSON.parse(connection.request.getBody());
+
+                    // save new user
+                    newFamily.idColaborador = colaboradores.length + 1;
+                    familys.push(newFamily);
+                    localStorage.setItem('familys', JSON.stringify(familys));
+
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+
+                    return;
+                }
+
+                // actualizar un familair
+                if (connection.request.url.match(/\/api\/employees-family-information\/\d+$/) && connection.request.method === RequestMethod.Put) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                    // find user by id in users array
+                    let upd = JSON.parse(connection.request.getBody());
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    for (let i = 0; i < familys.length; i++) {
+                        let col = familys[i];
+                        if (col.idFamiliar == id) {
+                            // delete user
+                            familys[i] = upd;
+                            localStorage.setItem('familys', JSON.stringify(familys));
+                            break;
+                        }
+                    }
+
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+
+
+                    return;
+                }
+
+                // elimina un familiar del localstorage
+                if (connection.request.url.match(/\/api\/employees-family-information\/\d+$/) && connection.request.method === RequestMethod.Delete) {
+
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+
+                    for (let i = 0; i < familys.length; i++) {
+                        let col = familys[i];
+                        if (col.idFamiliar == id) {
+                            // delete user
+                            familys.splice(i, 1);
+                            localStorage.setItem('familys', JSON.stringify(familys));
+                            break;
+                        }
+                    }
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+                }
 
             }, 500);
 
