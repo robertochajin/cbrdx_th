@@ -180,6 +180,54 @@ export let fakeBackendProvider = {
 
          ];
 
+        let references: any[] = JSON.parse(localStorage.getItem('references')) || [
+                {
+                    'idReferencia'          : "1",
+                    'tipodeReferencia'      : "1",
+                    'empresa'               : "1",
+                    'nombreCompleto'        : "1 1 1 1",
+                    'primerNombre'          : "1",
+                    'segundoNombre'         : "1",
+                    'primerApellido'        : "1",
+                    'segundoApellido'       : "1",
+                    'ciudad'                : "1",
+                    'telefono'              : "1",
+                    'celular'               : "1",
+                    'numeroContacto'        : "2",
+                    'direccion'             : "1"
+                },
+                {
+                    'idReferencia'          : "2",
+                    'tipodeReferencia'      : "2",
+                    'empresa'               : "2",
+                    'nombreCompleto'        : "1 1 1 1",
+                    'primerNombre'          : "2",
+                    'segundoNombre'         : "2",
+                    'primerApellido'        : "2",
+                    'segundoApellido'       : "2",
+                    'ciudad'                : "2",
+                    'telefono'              : "2",
+                    'celular'               : "2",
+                    'numeroContacto'        : "2",
+                    'direccion'             : "2"
+                },
+                {
+                    'idReferencia'          : "3",
+                    'tipodeReferencia'      : "3",
+                    'empresa'               : "3",
+                    'nombreCompleto'        : "1 1 1 1",
+                    'primerNombre'          : "3",
+                    'segundoNombre'         : "3",
+                    'primerApellido'        : "3",
+                    'segundoApellido'       : "3",
+                    'ciudad'                : "3",
+                    'telefono'              : "3",
+                    'celular'               : "3",
+                    'numeroContacto'        : "2",
+                    'direccion'             : "3"
+                }
+            ];
+
         // configure fake backend
         backend.connections.subscribe((connection: MockConnection) => {
             // wrap in timeout to simulate server api call
@@ -361,6 +409,94 @@ export let fakeBackendProvider = {
                     connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
                 }
 
+                // obtiene el referencias
+                if (connection.request.url.endsWith('/api/references') && connection.request.method === RequestMethod.Get) {
+
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        status: 200,
+                        body:{data:references}
+                    })));
+
+                }
+
+                // obtiene una referencia por el id
+                if (connection.request.url.match(/\/api\/references\/\d+$/) && connection.request.method === RequestMethod.Get) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                    // find user by id in users array
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    let matched = references.filter(reference => { return reference.idReferencia == id; });
+                    let reference = matched.length ? matched[0] : null;
+
+                    // respond 200 OK with user
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200, body:{data: reference} })));
+
+                    return;
+
+                }
+
+                // crea una referencia en el localstorage
+                if (connection.request.url.endsWith('/api/references') && connection.request.method === RequestMethod.Post) {
+                    // get new user object from post body
+                    let newReference = JSON.parse(connection.request.getBody());
+
+                    // save new user
+                    newReference.idReferencia = familys.length + 1;
+                    newReference.nombreCompleto = newReference.primerNombre+' '+newReference.segundoNombre+' '+newReference.primerApellido+' '+newReference.segundoApellido;
+                    newReference.numeroContacto = newReference.telefono+' - '+newReference.celular;
+                    references.push(newReference);
+                    localStorage.setItem('references', JSON.stringify(references));
+
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+
+                    return;
+                }
+
+                // actualizar una referencia
+                if (connection.request.url.match(/\/api\/references\/\d+$/) && connection.request.method === RequestMethod.Put) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                    // find user by id in users array
+                    let newReference = JSON.parse(connection.request.getBody());
+                    newReference.nombreCompleto = newReference.primerNombre+' '+newReference.segundoNombre+' '+newReference.primerApellido+' '+newReference.segundoApellido;
+                    newReference.numeroContacto = newReference.telefono+' - '+newReference.celular;
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    for (let i = 0; i < references.length; i++) {
+                        let col = references[i];
+                        if (col.idReferencia == id) {
+                            // delete user
+                            references[i] = newReference;
+                            localStorage.setItem('references', JSON.stringify(references));
+                            break;
+                        }
+                    }
+
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+
+
+                    return;
+                }
+
+                // elimina una referencias del localstorage
+                if (connection.request.url.match(/\/api\/references\/\d+$/) && connection.request.method === RequestMethod.Delete) {
+
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+
+                    for (let i = 0; i < references.length; i++) {
+                        let col = references[i];
+                        if (col.idReferencia == id) {
+                            // delete user
+                            references.splice(i, 1);
+                            localStorage.setItem('references', JSON.stringify(references));
+                            break;
+                        }
+                    }
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+                }
             }, 500);
 
         });
