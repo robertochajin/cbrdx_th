@@ -8,223 +8,431 @@ export let fakeBackendProvider = {
     // use fake backend in place of Http service for backend-less development
     provide: Http,
     useFactory: (backend: MockBackend, options: BaseRequestOptions) => {
-        // array in local storage for registered users
+
         let colaboradores: any[] = JSON.parse(localStorage.getItem('colaboradores')) || [
-            {"idColaborador":"1",
-                "numeroDocumento":"12",
-                "primerNombre":"Nombre 1.1",
-                "segundoNombre":"Nombre 1.2",
-                "primerApellido":"Apellido 1.1",
-                "segundoApellido":"Apellido 1.2",
-                "tipoDocumento":"C.C.",
-                "Avatar":"fotico.png",
-                "ciudadExpedicion":"Bucaramanga",
-                "fechaExp":"1 de 2 de 2002",
-                "fechaNacimiento":"12",
-                "idtercero":"12",
-                "ciudadNacimiento":"Bogotá",
-                "nacionalidad":"Colombiano",
-                "genero":"F",
-                "estadoCivil":"Soltero",
-                "factorrh":"O+",
-                "numeroDeHijos":"5",
-                "lateralidad":"D",
-                "nivelEducativo":"Pregrado",
-                "profesion":"Orientador",
-                "estratoSocioEconomico":"3",
-                "vivienda":"Arrendada",
-                "vehiculo":"Propio",
-                "tallaCamisa":"12",
-                "tallaPantalon":"12",
-                "tallaCalzado":"11",
-                "fechaDesde":"2011-05-11",
-                "cargoActual":"cargo 1"},
-            {"idColaborador":"2",
-                "numeroDocumento":"23",
-                "primerNombre":"Nombre 2.1",
-                "segundoNombre":"Nombre 2.2",
-                "primerApellido":"Apellido 2.1",
-                "segundoApellido":"Apellido 2.2",
-                "tipoDocumento":"C.C.",
-                "Avatar":"fotico.png",
-                "ciudadExpedicion":"Bucaramanga",
-                "fechaExp":"2 de 3 de 2003",
-                "fechaNacimiento":"23",
-                "idtercero":"23",
-                "ciudadNacimiento":"Bogotá",
-                "nacionalidad":"Colombiano",
-                "genero":"F",
-                "estadoCivil":"Soltero",
-                "factorrh":"O+",
-                "numeroDeHijos":"5",
-                "lateralidad":"D",
-                "nivelEducativo":"Pregrado",
-                "profesion":"Orientador",
-                "estratoSocioEconomico":"3",
-                "vivienda":"Arrendada",
-                "vehiculo":"Propio",
-                "tallaCamisa":"23",
-                "tallaPantalon":"23",
-                "tallaCalzado":"21",
-                "fechaDesde":"2012-05-12",
-                "cargoActual":"cargo 2"},
-            {"idColaborador":"3",
-                "numeroDocumento":"34",
-                "primerNombre":"Nombre 3.1",
-                "segundoNombre":"Nombre 3.2",
-                "primerApellido":"Apellido 3.1",
-                "segundoApellido":"Apellido 3.2",
-                "tipoDocumento":"C.C.",
-                "Avatar":"fotico.png",
-                "ciudadExpedicion":"Bucaramanga",
-                "fechaExp":"3 de 4 de 2004",
-                "fechaNacimiento":"34",
-                "idtercero":"34",
-                "ciudadNacimiento":"Bogotá",
-                "nacionalidad":"Colombiano",
-                "genero":"F",
-                "estadoCivil":"Soltero",
-                "factorrh":"O+",
-                "numeroDeHijos":"5",
-                "lateralidad":"D",
-                "nivelEducativo":"Pregrado",
-                "profesion":"Orientador",
-                "estratoSocioEconomico":"3",
-                "vivienda":"Arrendada",
-                "vehiculo":"Propio",
-                "tallaCamisa":"34",
-                "tallaPantalon":"34",
-                "tallaCalzado":"31",
-                "fechaDesde":"2013-05-13",
-                "cargoActual":"cargo 3"},
-            {"idColaborador":"4",
-                "numeroDocumento":"45",
-                "primerNombre":"Nombre 4.1",
-                "segundoNombre":"Nombre 4.2",
-                "primerApellido":"Apellido 4.1",
-                "segundoApellido":"Apellido 4.2",
-                "tipoDocumento":"C.C.",
-                "Avatar":"fotico.png",
-                "ciudadExpedicion":"Bucaramanga",
-                "fechaExp":"4 de 5 de 2005",
-                "fechaNacimiento":"45",
-                "idtercero":"45",
-                "ciudadNacimiento":"Bogotá",
-                "nacionalidad":"Colombiano",
-                "genero":"F",
-                "estadoCivil":"Soltero",
-                "factorrh":"O+",
-                "numeroDeHijos":"5",
-                "lateralidad":"D",
-                "nivelEducativo":"Pregrado",
-                "profesion":"Orientador",
-                "estratoSocioEconomico":"3",
-                "vivienda":"Arrendada",
-                "vehiculo":"Propio",
-                "tallaCamisa":"45",
-                "tallaPantalon":"45",
-                "tallaCalzado":"41",
-                "fechaDesde":"2014-05-14",
-                "cargoActual":"cargo 4"}
-        ];
+                {"idColaborador":"1",
 
-        let familys: any[] = JSON.parse(localStorage.getItem('familys')) || [
-         {"idFamiliar":"1",
-         "tipoDeDocumento":"1",
-         "numeroDeDocumento":"1",
-         "nombreCompleto":"1",
-         "primerNombre":"1",
-         "segundoNombre":"1",
-         "primerApellido":"1",
-         "segundoApellido":"1",
-         "fechadeNacimiento":"1",
-         "edad":"1",
-         "parentesco":"1",
-         "correoElectronico":"1",
-         "telefono1":"1",
-         "telefono2":"1",
-         "direccionDeResidencia":"1",
-         "convive":"1"},
-         {"idFamiliar":"2",
-         "tipoDeDocumento":"222",
-         "numeroDeDocumento":"2",
-         "nombreCompleto":"2",
-         "primerNombre":"2",
-         "segundoNombre":"2",
-         "primerApellido":"2",
-         "segundoApellido":"2",
-         "fechadeNacimiento":"2",
-         "edad":"2",
-         "parentesco":"2",
-         "correoElectronico":"correo2",
-         "telefono1":"2",
-         "telefono2":"2",
-         "direccionDeResidencia":"2",
-         "convive":"2"},
-         {"idFamiliar":"3",
-         "tipoDeDocumento":"3",
-         "numeroDeDocumento":"3",
-         "nombreCompleto":"3",
-         "primerNombre":"3",
-         "segundoNombre":"3",
-         "primerApellido":"3",
-         "segundoApellido":"3",
-         "fechadeNacimiento":"3",
-         "edad":"3",
-         "parentesco":"3",
-         "correoElectronico":"3",
-         "telefono1":"3",
-         "telefono2":"3",
-         "direccionDeResidencia":"3",
-         "convive":"3"}
+                    "numeroDocumento":"1098936874",
 
-         ];
+                    "primerNombre":"Luis",
 
-        let references: any[] = JSON.parse(localStorage.getItem('references')) || [
+                    "segundoNombre":"Enrrique",
+
+                    "primerApellido":"Gomez",
+
+                    "segundoApellido":"Ramirez",
+
+                    "tipoDocumento":"C.C.",
+
+                    "Avatar":"fotico.png",
+
+                    "ciudadExpedicion":"Bucaramanga",
+
+                    "fechaExp":"1 de 2 de 2010",
+
+                    "fechaNacimiento":"12 de 12 de 1991",
+
+                    "idtercero":"12",
+
+                    "ciudadNacimiento":"Bogotá",
+
+                    "nacionalidad":"Colombiano",
+
+                    "genero":"M",
+
+                    "estadoCivil":"Soltero",
+
+                    "factorrh":"O+",
+
+                    "numeroDeHijos":"5",
+
+                    "lateralidad":"D",
+
+                    "nivelEducativo":"Pregrado",
+
+                    "profesion":"Orientador",
+
+                    "estratoSocioEconomico":"3",
+
+                    "vivienda":"Arrendada",
+
+                    "vehiculo":"Propio",
+
+                    "tallaCamisa":"M",
+
+                    "tallaPantalon":"32",
+
+                    "tallaCalzado":"38",
+
+                    "fechaDesde":"2011-05-11",
+
+                    "cargoActual":"Ejecutivo Comercial"},
+
+                {"idColaborador":"2",
+
+                    "numeroDocumento":"91256964",
+
+                    "primerNombre":"Miguel",
+
+                    "segundoNombre":"Alejandro",
+
+                    "primerApellido":"Fernandez",
+
+                    "segundoApellido":"Lopera",
+
+                    "tipoDocumento":"C.C.",
+
+                    "Avatar":"fotico.png",
+
+                    "ciudadExpedicion":"Bucaramanga",
+
+                    "fechaExp":"2 de 3 de 2003",
+
+                    "fechaNacimiento":"23 de 01 de 1985",
+
+                    "idtercero":"23",
+
+                    "ciudadNacimiento":"Bogotá",
+
+                    "nacionalidad":"Colombiano",
+
+                    "genero":"M",
+
+                    "estadoCivil":"Soltero",
+
+                    "factorrh":"O+",
+
+                    "numeroDeHijos":"5",
+
+                    "lateralidad":"D",
+
+                    "nivelEducativo":"Pregrado",
+
+                    "profesion":"Orientador",
+
+                    "estratoSocioEconomico":"3",
+
+                    "vivienda":"Arrendada",
+
+                    "vehiculo":"Propio",
+
+                    "tallaCamisa":"L",
+
+                    "tallaPantalon":"36",
+
+                    "tallaCalzado":"40",
+
+                    "fechaDesde":"2012-05-12",
+
+                    "cargoActual":"Asesor"},
+
+                {"idColaborador":"3",
+
+                    "numeroDocumento":"63859741",
+
+                    "primerNombre":"Juana",
+
+                    "segundoNombre":"Maria",
+
+                    "primerApellido":"Díaz",
+
+                    "segundoApellido":"Rodriguez",
+
+                    "tipoDocumento":"C.C.",
+
+                    "Avatar":"fotico.png",
+
+                    "ciudadExpedicion":"Bucaramanga",
+
+                    "fechaExp":"3 de 4 de 2004",
+
+                    "fechaNacimiento":"12 de 03 de 1986",
+
+                    "idtercero":"34",
+
+                    "ciudadNacimiento":"Bogotá",
+
+                    "nacionalidad":"Colombiano",
+
+                    "genero":"F",
+
+                    "estadoCivil":"Soltero",
+
+                    "factorrh":"O+",
+
+                    "numeroDeHijos":"5",
+
+                    "lateralidad":"D",
+
+                    "nivelEducativo":"Pregrado",
+
+                    "profesion":"Orientador",
+
+                    "estratoSocioEconomico":"3",
+
+                    "vivienda":"Arrendada",
+
+                    "vehiculo":"Propio",
+
+                    "tallaCamisa":"S",
+
+                    "tallaPantalon":"8",
+
+                    "tallaCalzado":"36",
+
+                    "fechaDesde":"2013-05-13",
+
+                    "cargoActual":"Ejecutiva"},
+
+                {"idColaborador":"4",
+
+                    "numeroDocumento":"63258159",
+
+                    "primerNombre":"Martha",
+
+                    "segundoNombre":"Sofia",
+
+                    "primerApellido":"Sepulveda",
+
+                    "segundoApellido":"Blanco",
+
+                    "tipoDocumento":"C.C.",
+
+                    "Avatar":"fotico.png",
+
+                    "ciudadExpedicion":"Bucaramanga",
+
+                    "fechaExp":"4 de 5 de 2005",
+
+                    "fechaNacimiento":"2 de 4 de 1987",
+
+                    "idtercero":"45",
+
+                    "ciudadNacimiento":"Bogotá",
+
+                    "nacionalidad":"Colombiano",
+
+                    "genero":"F",
+
+                    "estadoCivil":"Soltero",
+
+                    "factorrh":"O+",
+
+                    "numeroDeHijos":"5",
+
+                    "lateralidad":"D",
+
+                    "nivelEducativo":"Pregrado",
+
+                    "profesion":"Orientador",
+
+                    "estratoSocioEconomico":"3",
+
+                    "vivienda":"Arrendada",
+
+                    "vehiculo":"Propio",
+
+                    "tallaCamisa":"M",
+
+                    "tallaPantalon":"10",
+
+                    "tallaCalzado":"38",
+
+                    "fechaDesde":"2014-05-14",
+
+                    "cargoActual":"Ejecutiva"}
+
+            ];
+
+        let familys: any[] = JSON.parse(localStorage.getItem('familys'))
+            || [
+
+                {"idFamiliar":"1",
+
+                    "tipoDeDocumento":"R.C",
+
+                    "numeroDeDocumento":"1098154874",
+
+                    "nombreCompleto":"Maria Alejandra Gomez Reatiga",
+
+                    "primerNombre":"Maria",
+
+                    "segundoNombre":"Alejandra",
+
+                    "primerApellido":"Gomez",
+
+                    "segundoApellido":"Reatiga",
+
+                    "fechadeNacimiento":"1 de 2 de 2009",
+
+                    "edad":"8",
+
+                    "parentesco":"1",
+
+                    "correoElectronico":"mariagomez@gmail.com",
+
+                    "telefono1":"3214569874",
+
+                    "telefono2":"6531887",
+
+                    "direccionDeResidencia":"Calle 40 No. 21-56",
+
+                    "convive":"1"},
+
+                {"idFamiliar":"2",
+
+                    "tipoDeDocumento":"R.C",
+
+                    "numeroDeDocumento":"1098564821",
+
+                    "nombreCompleto":"Catalina Mejia Lopez",
+
+                    "primerNombre":"Catalina",
+
+                    "segundoNombre":"",
+
+                    "primerApellido":"Mejia",
+
+                    "segundoApellido":"Lopez",
+
+                    "fechadeNacimiento":"2 de 2 de 2009",
+
+                    "edad":"8",
+
+                    "parentesco":"2",
+
+                    "correoElectronico":"catalinamejia@gmail.com",
+
+                    "telefono1":"6598741",
+
+                    "telefono2":"3159874563",
+
+                    "direccionDeResidencia":"Calle 15 No. 25-15",
+
+                    "convive":"2"},
+
+                {"idFamiliar":"3",
+
+                    "tipoDeDocumento":"R.C",
+
+                    "numeroDeDocumento":"1098654987",
+
+                    "nombreCompleto":"Jairo Jose Sepulveda Blanco",
+
+                    "primerNombre":"Jairo",
+
+                    "segundoNombre":"Jose",
+
+                    "primerApellido":"Sepulveda",
+
+                    "segundoApellido":"Blanco",
+
+                    "fechadeNacimiento":"3 de 2 de 2009",
+
+                    "edad":"8",
+
+                    "parentesco":"3",
+
+                    "correoElectronico":"josesepulveda@gmail.com",
+
+                    "telefono1":"3",
+
+                    "telefono2":"3",
+
+                    "direccionDeResidencia":"3",
+
+                    "convive":"3"}
+
+            ];
+
+        let references: any[] = JSON.parse(localStorage.getItem('references'))
+            || [
+
                 {
+
                     'idReferencia'          : "1",
-                    'tipodeReferencia'      : "1",
-                    'empresa'               : "1",
-                    'nombreCompleto'        : "1 1 1 1",
-                    'primerNombre'          : "1",
-                    'segundoNombre'         : "1",
-                    'primerApellido'        : "1",
-                    'segundoApellido'       : "1",
-                    'ciudad'                : "1",
-                    'telefono'              : "1",
-                    'celular'               : "1",
-                    'numeroContacto'        : "2",
-                    'direccion'             : "1"
+
+                    'tipodeReferencia'      : "Laboral",
+
+                    'empresa'               : "Gobernación de Santander",
+
+                    'nombreCompleto'        : "Maria Angelica Diaz Ramirez",
+
+                    'primerNombre'          : "Maria",
+
+                    'segundoNombre'         : "Angelica",
+
+                    'primerApellido'        : "Diaz",
+
+                    'segundoApellido'       : "Ramirez",
+
+                    'ciudad'                : "Bucaramanga",
+
+                    'telefono'              : "6597842",
+
+                    'celular'               : "3215874125",
+
+                    'numeroContacto'        : "3169874125",
+
+                    'direccion'             : "Calle 5 No. 19-25"
                 },
+
                 {
+
                     'idReferencia'          : "2",
-                    'tipodeReferencia'      : "2",
-                    'empresa'               : "2",
-                    'nombreCompleto'        : "1 1 1 1",
-                    'primerNombre'          : "2",
-                    'segundoNombre'         : "2",
-                    'primerApellido'        : "2",
-                    'segundoApellido'       : "2",
-                    'ciudad'                : "2",
-                    'telefono'              : "2",
-                    'celular'               : "2",
-                    'numeroContacto'        : "2",
-                    'direccion'             : "2"
+
+                    'tipodeReferencia'      : "Laboral",
+
+                    'empresa'               : "ESSA",
+
+                    'nombreCompleto'        : "Alexander Ramirez",
+
+                    'primerNombre'          : "Alexander",
+
+                    'segundoNombre'         : "",
+
+                    'primerApellido'        : "Ramirez",
+
+                    'segundoApellido'       : "",
+
+                    'ciudad'                : "Bucaramanga",
+
+                    'telefono'              : "6597841",
+
+                    'celular'               : "3168945217",
+
+                    'numeroContacto'        : "3159876541",
+
+                    'direccion'             : "Cra 15 No. 26-87"
                 },
+
                 {
+
                     'idReferencia'          : "3",
-                    'tipodeReferencia'      : "3",
-                    'empresa'               : "3",
-                    'nombreCompleto'        : "1 1 1 1",
-                    'primerNombre'          : "3",
-                    'segundoNombre'         : "3",
-                    'primerApellido'        : "3",
-                    'segundoApellido'       : "3",
-                    'ciudad'                : "3",
-                    'telefono'              : "3",
-                    'celular'               : "3",
-                    'numeroContacto'        : "2",
-                    'direccion'             : "3"
+
+                    'tipodeReferencia'      : "Familiar",
+
+                    'empresa'               : "",
+
+                    'nombreCompleto'        : "Katherine Gomez Velazquez",
+
+                    'primerNombre'          : "Katherine",
+
+                    'segundoNombre'         : "",
+
+                    'primerApellido'        : "Gomez",
+
+                    'segundoApellido'       : "Velazquez",
+
+                    'ciudad'                : "Girón",
+
+                    'telefono'              : "3159874158",
+
+                    'celular'               : "3216987451",
+
+                    'numeroContacto'        : "6597841",
+
+                    'direccion'             : "Cra 2 No. 12-98"
                 }
             ];
 
