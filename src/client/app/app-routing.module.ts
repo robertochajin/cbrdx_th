@@ -19,6 +19,12 @@ import { ReferencesDetailComponent } from './employees-references/references-det
 import { ReferencesAddComponent } from './employees-references/references-add.component';
 import { ReferencesUpdateComponent } from './employees-references/references-update.component';
 
+//Información de formacion academica
+import { AcademicEducationComponent } from './employees-academic-education/academic-education.component';
+// import { ReferencesDetailComponent } from './employees-references/references-detail.component';
+// import { ReferencesAddComponent } from './employees-references/references-add.component';
+// import { ReferencesUpdateComponent } from './employees-references/references-update.component';
+
 const routes: Routes = [
   { path: '', redirectTo: '/colaboradores', pathMatch: 'full' },
 
@@ -39,6 +45,12 @@ const routes: Routes = [
   { path: 'employees-references/add', component: ReferencesAddComponent },
   { path: 'employees-references/detail/:id', component: ReferencesDetailComponent },
   { path: 'employees-references/update/:id', component: ReferencesUpdateComponent },
+
+  //Información de formacion academica
+  { path: 'employees-academic-education', component: AcademicEducationComponent },
+  // { path: 'employees-references/add', component: ReferencesAddComponent },
+  // { path: 'employees-references/detail/:id', component: ReferencesDetailComponent },
+  // { path: 'employees-references/update/:id', component: ReferencesUpdateComponent },
 ];
 
 @NgModule({
