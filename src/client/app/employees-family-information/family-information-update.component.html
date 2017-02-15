@@ -3,78 +3,97 @@
         <div class="col-md-12">
             <div class=" clearfix">
                 <div class="header">
-                    <h4 class="title">Información Familiar</h4>
+                    <h4 class="title">Información Familiarrrr</h4>
                 </div>
 
                 <div class="clearfix">
                     <div class="col-md-12">
                         <h2>Agregando Familiar</h2>
-                        <form name="form" (ngSubmit)="f.form.valid && add()" #f="ngForm" novalidate>
-                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !tipoDeDocumento.valid }">
-                                <label for="tipoDeDocumento">Tipo de documento</label>
-                                <input type="text" class="form-control" name="tipoDeDocumento" [(ngModel)]="familyInformation.tipoDeDocumento" #tipoDeDocumento="ngModel" required />
-                                <div *ngIf="f.submitted && !tipoDeDocumento.valid" class="help-block">Tipo de documento es requerido</div>
+                        <form name="form" (ngSubmit)="f.form.valid && add()" #f="ngForm" novalidate class="form-horizontal">
+                            <div class="row-fluid">
+                                <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !tipoDeDocumento.valid }">
+                                    <label for="tipoDeDocumento">Tipo de documento</label>
+                                    <input type="text" class="form-control" name="tipoDeDocumento" [(ngModel)]="familyInformation.tipoDeDocumento" #tipoDeDocumento="ngModel" required />
+                                    <div *ngIf="f.submitted && !tipoDeDocumento.valid" class="help-block">Tipo de documento es requerido</div>
+                                </div>
+                                <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !numeroDeDocumento.valid }">
+                                    <label for="numeroDeDocumento">Número de documento</label>
+                                    <input type="text" class="form-control" name="primerNombre" [(ngModel)]="familyInformation.numeroDeDocumento" #numeroDeDocumento="ngModel" required />
+                                    <div *ngIf="f.submitted && !numeroDeDocumento.valid" class="help-block">Número de documento es requerido</div>
+                                </div>
                             </div>
-                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !numeroDeDocumento.valid }">
-                                <label for="numeroDeDocumento">Número de documento</label>
-                                <input type="text" class="form-control" name="primerNombre" [(ngModel)]="familyInformation.numeroDeDocumento" #numeroDeDocumento="ngModel" required />
-                                <div *ngIf="f.submitted && !numeroDeDocumento.valid" class="help-block">Número de documento es requerido</div>
+                            <div class="row-fluid">
+                                <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !primerNombre.valid }">
+                                    <label for="primerNombre">Primer nombre</label>
+                                    <input type="text" class="form-control" name="primerNombre" [(ngModel)]="familyInformation.primerNombre" #primerNombre="ngModel" required />
+                                    <div *ngIf="f.submitted && !primerNombre.valid" class="help-block">Primer nombre es requerido</div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="segundoNombre">Segundo nombre</label>
+                                    <input type="text" class="form-control" name="segundoNombre" [(ngModel)]="familyInformation.segundoNombre" #segundoNombre="ngModel" />
+                                </div>
                             </div>
-                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !primerNombre.valid }">
-                                <label for="primerNombre">Primer nombre</label>
-                                <input type="text" class="form-control" name="primerNombre" [(ngModel)]="familyInformation.primerNombre" #primerNombre="ngModel" required />
-                                <div *ngIf="f.submitted && !primerNombre.valid" class="help-block">Primer nombre es requerido</div>
+                            <div class="row-fluid">
+                                <div class="form-group col-md-6">
+                                    <label for="primerApellido">Primer apellido</label>
+                                    <input type="text" class="form-control" name="primerApellido" [(ngModel)]="familyInformation.primerApellido" #primerApellido="ngModel" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="segundoApellido">Segundo apellido</label>
+                                    <input type="text" class="form-control" name="segundoApellido" [(ngModel)]="familyInformation.segundoApellido" #segundoApellido="ngModel" />
+                                </div>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="segundoNombre">Segundo nombre</label>
-                                <input type="text" class="form-control" name="segundoNombre" [(ngModel)]="familyInformation.segundoNombre" #segundoNombre="ngModel" />
+
+                            <div class="row-fluid">
+                                <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !fechadeNacimiento.valid }">
+                                    <label for="fechadeNacimiento">Fecha de Nacimiento</label>
+                                    <input type="text" class="form-control" name="fechadeNacimiento" [(ngModel)]="familyInformation.fechadeNacimiento" #fechadeNacimiento="ngModel" required />
+                                    <div *ngIf="f.submitted && !fechadeNacimiento.valid" class="help-block">Fecha de Nacimiento es requerido</div>
+                                </div>
+                                <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !parentesco.valid }">
+                                    <label for="parentesco">Parentesco</label>
+                                    <input type="text" class="form-control" name="parentesco" [(ngModel)]="familyInformation.parentesco" #parentesco="ngModel" required />
+                                    <div *ngIf="f.submitted && !parentesco.valid" class="help-block">Parentesco es requerido</div>
+                                </div>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="primerApellido">Primer apellido</label>
-                                <input type="text" class="form-control" name="primerApellido" [(ngModel)]="familyInformation.primerApellido" #primerApellido="ngModel" />
+
+                            <div class="row-fluid">
+                                <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !correoElectronico.valid }">
+                                    <label for="correoElectronico">Correo Electronico</label>
+                                    <input type="text" class="form-control" name="correoElectronico" [(ngModel)]="familyInformation.correoElectronico" #correoElectronico="ngModel" required />
+                                    <div *ngIf="f.submitted && !correoElectronico.valid" class="help-block">Correo Electronico es requerido</div>
+                                </div>
+                                <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !telefono1.valid }">
+                                    <label for="telefono1">Telefono 1</label>
+                                    <input type="text" class="form-control" name="telefono1" [(ngModel)]="familyInformation.telefono1" #telefono1="ngModel" required />
+                                    <div *ngIf="f.submitted && !telefono1.valid" class="help-block">Telefono 1 es requerido</div>
+                                </div>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="segundoApellido">Segundo apellido</label>
-                                <input type="text" class="form-control" name="segundoApellido" [(ngModel)]="familyInformation.segundoApellido" #segundoApellido="ngModel" />
+
+                            <div class="row-fluid">
+                                <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !direccionDeResidencia.valid }">
+                                    <label for="direccionDeResidencia">Direccion de Residencia</label>
+                                    <textarea class="form-control" rows="6" name="direccionDeResidencia" [(ngModel)]="familyInformation.direccionDeResidencia" #direccionDeResidencia="ngModel" required pInputTextarea></textarea>
+                                    <div *ngIf="f.submitted && !direccionDeResidencia.valid" class="help-block">Direccion de Residencia es requerido</div>
+                                </div>
+                                <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !telefono2.valid }">
+                                    <label for="telefono2">Telefono 2</label>
+                                    <input type="text" class="form-control" name="telefono2" [(ngModel)]="familyInformation.telefono2" #telefono2="ngModel" required />
+                                    <div *ngIf="f.submitted && !telefono2.valid" class="help-block">Telefono 2 es requerido</div>
+                                </div>
                             </div>
-                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !fechadeNacimiento.valid }">
-                                <label for="fechadeNacimiento">Fecha de Nacimiento</label>
-                                <input type="text" class="form-control" name="fechadeNacimiento" [(ngModel)]="familyInformation.fechadeNacimiento" #fechadeNacimiento="ngModel" required />
-                                <div *ngIf="f.submitted && !fechadeNacimiento.valid" class="help-block">Fecha de Nacimiento es requerido</div>
+
+                            <div class="row-fluid">
+                                <div class="form-group col-md-6">
+                                    <label for="convive">convive</label>
+                                    <input type="text" class="form-control" name="convive" [(ngModel)]="familyInformation.convive" #convive="ngModel" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <a (click)="goBack()" class="cancelar">Cancelar</a>
+                                    <button class="btn btn-primary">Agregar</button>
+                                </div>
                             </div>
-                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !parentesco.valid }">
-                                <label for="parentesco">Parentesco</label>
-                                <input type="text" class="form-control" name="parentesco" [(ngModel)]="familyInformation.parentesco" #parentesco="ngModel" required />
-                                <div *ngIf="f.submitted && !parentesco.valid" class="help-block">Parentesco es requerido</div>
-                            </div>
-                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !correoElectronico.valid }">
-                                <label for="correoElectronico">Correo Electronico</label>
-                                <input type="text" class="form-control" name="correoElectronico" [(ngModel)]="familyInformation.correoElectronico" #correoElectronico="ngModel" required />
-                                <div *ngIf="f.submitted && !correoElectronico.valid" class="help-block">Correo Electronico es requerido</div>
-                            </div>
-                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !telefono1.valid }">
-                                <label for="telefono1">Telefono 1</label>
-                                <input type="text" class="form-control" name="telefono1" [(ngModel)]="familyInformation.telefono1" #telefono1="ngModel" required />
-                                <div *ngIf="f.submitted && !telefono1.valid" class="help-block">Telefono 1 es requerido</div>
-                            </div>
-                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !direccionDeResidencia.valid }">
-                                <label for="direccionDeResidencia">Direccion de Residencia</label>
-                                <textarea class="form-control" rows="6" name="direccionDeResidencia" [(ngModel)]="familyInformation.direccionDeResidencia" #direccionDeResidencia="ngModel" required pInputTextarea></textarea>
-                                <div *ngIf="f.submitted && !direccionDeResidencia.valid" class="help-block">Direccion de Residencia es requerido</div>
-                            </div>
-                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !telefono2.valid }">
-                                <label for="telefono2">Telefono 2</label>
-                                <input type="text" class="form-control" name="telefono2" [(ngModel)]="familyInformation.telefono2" #telefono2="ngModel" required />
-                                <div *ngIf="f.submitted && !telefono2.valid" class="help-block">Telefono 2 es requerido</div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="convive">convive</label>
-                                <input type="text" class="form-control" name="convive" [(ngModel)]="familyInformation.convive" #convive="ngModel" />
-                            </div>
-                            <div class="form-group col-md-3 col-md-offset-9">
-                                <button class="btn btn-primary">Agregar</button>
-                                <a (click)="goBack()" class="btn btn-link">Cancelar</a>
-                            </div>
+
                         </form>
                     </div>
 
