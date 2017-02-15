@@ -1,0 +1,27 @@
+<h3 class="first">Ubicaciones</h3>
+<div>
+    <p-dataTable [value]="locations" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+        <p-header>
+            <div class="" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="add()" label="Nueva Ubicación"></button></div>
+            <div class="" style="">
+                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                <input #gb type="text" pInputText size="50" placeholder="Buscar">
+            </div>
+        </p-header>
+        <p-column field="TipoDireccionLabel" header="Tipo Dirección" [sortable]="true"></p-column>
+        <p-column field="Direccion" header="Dirección" [sortable]="true"></p-column>
+        <p-column field="Barrio" header="Barrio" [sortable]="true"></p-column>
+        <p-column field="NombreCiudad" header="Ciudad" [sortable]="true"></p-column>
+        <p-column field="NombreDepartamento" header="Departamento" [sortable]="true"></p-column>
+        <p-column field="NombrePais" header="Pais" [sortable]="true"></p-column>
+        <p-column header="Acciones">
+            <template let-location="rowData" pTemplate="body">
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" pButton class="ui-button btn" (click)="detail(location)" icon="fa-eye"></button>
+                    <button type="button" pButton class="ui-button ui-button-success btn" (click)="update(location)" icon="fa-pencil"></button>
+                    <button type="button" pButton class="ui-button ui-button-danger btn" (click)="delete(location)" icon="fa-trash"></button>
+                </div>
+            </template>
+        </p-column>
+    </p-dataTable>
+</div>

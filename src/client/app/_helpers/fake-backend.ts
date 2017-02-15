@@ -180,11 +180,70 @@ export let fakeBackendProvider = {
 
          ];
 
+        let locations: any[] = JSON.parse(localStorage.getItem('locations')) || [
+                {
+                    "idUbicacion": "1",
+                    "NombreCiudad": "1",
+                    "NombreDepartamento": "1",
+                    "NombrePais": "1",
+                    "Direccion": "1",
+                    "Ciudad": "1",
+                    "TipoDireccion": "1",
+                    "TipoDireccionLabel": "1",
+                    "Barrio": "1",
+                    "CorreoElectronico": "1",
+                    "Longitud": "1",
+                    "Latitud": "1",
+                    "ComoLlegar": "1",
+                    "Celular": "1",
+                    "Telefono": "1",
+                },
+                {
+                    "idUbicacion": "2",
+                    "NombreCiudad": "2",
+                    "NombreDepartamento": "2",
+                    "NombrePais": "2",
+                    "Direccion": "2",
+                    "Ciudad": "2",
+                    "TipoDireccion": "2",
+                    "TipoDireccionLabel": "2",
+                    "Barrio": "2",
+                    "CorreoElectronico": "2",
+                    "Longitud": "2",
+                    "Latitud": "2",
+                    "ComoLlegar": "2",
+                    "Celular": "2",
+                    "Telefono": "2",
+                },
+                {
+                    "idUbicacion": "3",
+                    "NombreCiudad": "3",
+                    "NombreDepartamento": "3",
+                    "NombrePais": "3",
+                    "Direccion": "3",
+                    "Ciudad": "3",
+                    "TipoDireccion": "3",
+                    "TipoDireccionLabel": "3",
+                    "Barrio": "3",
+                    "CorreoElectronico": "3",
+                    "Longitud": "3",
+                    "Latitud": "3",
+                    "ComoLlegar": "3",
+                    "Celular": "3",
+                    "Telefono": "3",
+                }
+            ];
+
+        let cities: any[] = [{'idCiudad': 101, 'nombreCiudad': 'Floridablanca - Santander - Colombia'},
+                            {'idCiudad': 102, 'nombreCiudad': 'Floridablanca - Vichada - Colombia'},
+                            {'idCiudad': 103, 'nombreCiudad': 'Floridablanca - Cesar - Colombia'}];
+
         // configure fake backend
         backend.connections.subscribe((connection: MockConnection) => {
             // wrap in timeout to simulate server api call
             setTimeout(() => {
 
+                /*================ Colaboradores ================*/
                 // obtiene todos los Colaboradores
                 if (connection.request.url.endsWith('/api/colaboradores') && connection.request.method === RequestMethod.Get) {
 
@@ -270,6 +329,124 @@ export let fakeBackendProvider = {
                     // respond 200 OK
                     connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
                 }
+
+                /*================ Ubicaciones ================*/
+
+                // obtiene el listado de Ubicaciones
+                if (connection.request.url.endsWith('/api/employees-location') && connection.request.method === RequestMethod.Get) {
+
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        status: 200,
+                        body:{data:locations}
+                    })));
+
+                }
+
+                // obtiene un Ubicacion por el id
+                if (connection.request.url.match(/\/api\/employees-location\/\d+$/) && connection.request.method === RequestMethod.Get) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                    // find user by id in users array
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    let matched = locations.filter(location => { return location.idUbicacion == id; });
+                    let location = matched.length ? matched[0] : null;
+
+                    // respond 200 OK with user
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200, body:{data: location} })));
+
+
+                    return;
+
+                }
+
+                // crea un Ubicacion en el local
+                if (connection.request.url.endsWith('/api/employees-location') && connection.request.method === RequestMethod.Post) {
+                    // get new user object from post body
+                    let newlocation = JSON.parse(connection.request.getBody());
+
+                    // save new user
+                    newlocation.idUbicacion = locations.length + 1;
+                    newlocation.nombreCompleto = newlocation.primerNombre+' '+newlocation.segundoNombre+' '+newlocation.primerApellido+' '+newlocation.segundoApellido;
+                    newlocation.edad = 25;
+                    locations.push(newlocation);
+                    localStorage.setItem('locations', JSON.stringify(locations));
+
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+
+                    return;
+                }
+
+                // actualizar un Ubicacion
+                if (connection.request.url.match(/\/api\/employees-location\/\d+$/) && connection.request.method === RequestMethod.Put) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                    // find user by id in users array
+                    let newlocation = JSON.parse(connection.request.getBody());
+                    newlocation.nombreCompleto = newlocation.primerNombre+' '+newlocation.segundoNombre+' '+newlocation.primerApellido+' '+newlocation.segundoApellido;
+                    newlocation.edad = 25;
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    for (let i = 0; i < locations.length; i++) {
+                        let col = locations[i];
+                        if (col.idUbicacion == id) {
+                            // delete user
+                            locations[i] = newlocation;
+                            localStorage.setItem('locations', JSON.stringify(locations));
+                            break;
+                        }
+                    }
+
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+
+
+                    return;
+                }
+
+                // elimina un Ubicacion del localstorage
+                if (connection.request.url.match(/\/api\/employees-location\/\d+$/) && connection.request.method === RequestMethod.Delete) {
+
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+
+                    for (let i = 0; i < locations.length; i++) {
+                        let col = locations[i];
+                        if (col.idUbicacion == id) {
+                            // delete user
+                            locations.splice(i, 1);
+                            localStorage.setItem('locations', JSON.stringify(locations));
+                            break;
+                        }
+                    }
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+                }
+
+                // obtiene un listado de ciudades filtrado por el query
+                if (connection.request.url.match(/\/api\/cities\/s\/\w+/) && connection.request.method === RequestMethod.Get) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                    // find user by id in users array
+                    let urlParts = connection.request.url.split('/');
+                    let qr = urlParts[urlParts.length - 1];
+                    let matched = cities.filter(cities => {
+                        //return cities.nombreCiudad.match(/^qr.*$/);
+                        if(cities.nombreCiudad.match(/[qr]+/)){
+                            return cities;
+                        }
+                    });
+                    let matched = matched.length ? matched : null;
+
+                    // respond 200 OK with user
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200, body:{data: matched} })));
+
+
+                    return;
+
+                }
+
+
+
+                /*================ Familiares ================*/
 
                 // obtiene el listado de familiares
                 if (connection.request.url.endsWith('/api/employees-family-information') && connection.request.method === RequestMethod.Get) {

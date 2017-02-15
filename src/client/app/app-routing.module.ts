@@ -8,6 +8,10 @@ import { FamilyInformationComponent } from './employees-family-information/famil
 import { FamilyInformationAddComponent } from './employees-family-information/family-information-add.component';
 import { FamilyInformationUpdateComponent } from './employees-family-information/family-information-update.component';
 import { FamilyInformationDetailComponent } from './employees-family-information/family-information-detail.component';
+import { LocationComponent } from './employees-location/location.component';
+import { LocationUpdateComponent} from "./employees-location/location-update.component";
+import { LocationAddComponent } from "./employees-location/location-add.component";
+import { LocationDetailComponent } from "./employees-location/location-detail.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/colaboradores', pathMatch: 'full' },
@@ -18,7 +22,11 @@ const routes: Routes = [
   { path: 'employees-family-information', component: FamilyInformationComponent },
   { path: 'employees-family-information/add', component: FamilyInformationAddComponent },
   { path: 'employees-family-information/update/:id', component: FamilyInformationUpdateComponent },
-  { path: 'employees-family-information/detail/:id', component: FamilyInformationDetailComponent }
+  { path: 'employees-family-information/detail/:id', component: FamilyInformationDetailComponent },
+  { path: 'employees-location', component: LocationComponent },
+  { path: 'employees-location/add', component: LocationAddComponent },
+  { path: 'employees-location/update/:id', component: LocationUpdateComponent },
+  { path: 'employees-location/detail/:id', component: LocationDetailComponent },
 ];
 
 @NgModule({

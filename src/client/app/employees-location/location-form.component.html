@@ -1,0 +1,39 @@
+<div *ngIf="employLocation">
+    <div class="row">
+        <div class="col-md-12">
+            <div class=" clearfix">
+                <div class="header">
+                    <h4 class="title">{{titulo}}</h4>
+                </div>
+                
+                <div class="clearfix">
+                    <div class="col-md-12">
+                        <h2></h2>
+                        <form name="formLocation" (ngSubmit)="l.form.valid && save()" #l="ngForm" >
+                            <div class="form-group col-md-12" [ngClass]="{ 'has-error': l.submitted && !telefono.valid }">
+                                <label for="telefono">telefono</label>
+                                <input type="text" class="form-control" name="telefono" [(ngModel)]="employLocation.Telefono" #telefono="ngModel" required />
+                                <div *ngIf="l.submitted && !telefono.valid" class="help-block">Teléfono es requerido</div>
+                            </div>
+
+                            <div class="form-group col-md-12" [ngClass]="{ 'has-error': l.submitted && !telefono.valid }">
+                                <label for="ciudad">Ciudad</label>
+                                <p-autoComplete placeholder="Buscar ciudad" field="nombreCiudad" name="ciudad"
+                                                [(ngModel)]="employLocation.NombreCiudad" [suggestions]="cityList" (completeMethod)="citySearch($event)" (onSelect)="captureId($event)" ></p-autoComplete>
+                            </div>
+
+
+                            <div class="form-group col-md-3 col-md-offset-9">
+                                    <button class="btn btn-primary">Agregar</button>
+                                <a (click)="goBack()" class="btn btn-link">Cancelar</a>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

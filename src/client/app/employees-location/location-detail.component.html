@@ -1,0 +1,84 @@
+<div *ngIf="location">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card clearfix">
+                <div class="col-xs-9">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="infoPersonal">
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="pnlDatosGenerales">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion"
+                                               href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                Familiares
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                                         aria-labelledby="headingOne">
+                                        <div class="panel-body">
+
+                                            <form class="form-horizontal">
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Tipo de documento.:</label>
+                                                        <label class="col-md-3 "><strong>{{location.tipoDeDocumento}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Número de documento.:</label>
+                                                        <label class="col-md-3"><strong>{{location.numeroDeDocumento}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Primero nombre:</label>
+                                                        <label class="col-md-3"><strong>{{location.primerNombre}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Segundo nombre:</label>
+                                                        <label class="col-md-3"><strong>{{location.segundoNombre}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Primero apellido:</label>
+                                                        <label class="col-md-3"><strong>{{location.primerApellido}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Segundo Apellido:</label>
+                                                        <label class="col-md-3"><strong>{{location.segundoApellido}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Fecha de nacimiento:</label>
+                                                        <label class="col-md-3"><strong>{{location.fechadeNacimiento}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Perentesco:</label>
+                                                        <label class="col-md-3"><strong>{{location.parentesco}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Correo electronico:</label>
+                                                        <label class="col-md-3"><strong>{{location.correoElectronico}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Teléfono 1:</label>
+                                                        <label class="col-md-3"><strong>{{location.telefono1}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Teléfono 2:</label>
+                                                        <label class="col-md-3"><strong>{{location.telefono2}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Dirección:</label>
+                                                        <label class="col-md-3"><strong>{{location.direccionDeResidencia}}</strong></label>
+
+                                                        <label class="col-md-3 control-label">Convive:</label>
+                                                        <label class="col-md-3"><strong>{{location.convive}}</strong></label>
+                                                        <div class="form-group">
+                                                            <a (click)="goBack()" class="btn btn-link">Cancel</a>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
