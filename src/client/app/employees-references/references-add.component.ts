@@ -10,6 +10,7 @@ import 'rxjs/add/operator/switchMap';
 import {Observable} from 'rxjs/Observable';
 import {date} from "gulp-util";
 import {modelGroupProvider} from "@angular/forms/src/directives/ng_model_group";
+import {SelectItem} from 'primeng/primeng';
 
 class constructorReferences implements References {
     constructor(
@@ -36,15 +37,32 @@ class constructorReferences implements References {
 
 export class ReferencesAddComponent {
     @Input()
+
     reference: References = new constructorReferences();
     model: any = {};
     const titulo = 'Agregando Referencia';
 
-    constructor(
+    cities: SelectItem[];
+
+    selectedCar: string = 'Paris';
+
+    constructor (
         private referencesService: ReferencesService,
         private router: Router,
         private location: Location
-    ) {}
+
+    ) {
+        this.cities = [];
+        this.cities.push({label:'Select City', value:null});
+        this.cities.push({label:'New York', value:{id:1, name: 'New York', code: 'NY'}});
+        this.cities.push({label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}});
+        this.cities.push({label:'London', value:{id:3, name: 'London', code: 'LDN'}});
+        this.cities.push({label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}});
+        this.cities.push({label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}});
+
+        //this.selectedCar = '1'
+       // this.cities.push({label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}});
+    }
 
     save() {
 
@@ -62,3 +80,5 @@ export class ReferencesAddComponent {
         this.location.back();
     }
 }
+
+
