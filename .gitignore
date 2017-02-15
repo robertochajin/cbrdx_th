@@ -58,3 +58,9 @@ src/client/app/shared/config/env.config.js.map
 .idea/workspace.xml
 
 dist/dev/index.html
+
+dist/dev/app/home/home.module.js
+
+.idea/workspace.xml
+
+dist/dev/app/home/home.module.js
