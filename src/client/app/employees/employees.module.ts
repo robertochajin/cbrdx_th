@@ -16,9 +16,10 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule } from 'prime
 
 import {FamilyInformationModule} from './../employees-family-information/family-information.module';
 import {ReferencesModule} from './../employees-references/references.module';
+import {AcademicEducationModule} from './../employees-academic-education/academic-education.module';
 
 @NgModule({
-    imports:      [CommonModule,InputTextModule,FormsModule,DataTableModule,ButtonModule,DialogModule,FamilyInformationModule,ReferencesModule],
+    imports:      [CommonModule,InputTextModule,FormsModule,DataTableModule,ButtonModule,DialogModule,FamilyInformationModule,ReferencesModule,AcademicEducationModule],
     declarations: [EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent],
     bootstrap:    [EmployeesComponent],
     providers:    [EmployeesService],

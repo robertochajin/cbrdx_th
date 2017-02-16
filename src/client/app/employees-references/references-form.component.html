@@ -11,9 +11,9 @@
                         <h2></h2>
                         <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
                             <div class="form-group col-md-6" >
-                                <!--<label for="tipodeReferencia">Tipo de Referencia</label>
-                                <input type="text" class="form-control" name="tipodeReferencia" [(ngModel)]="reference.tipodeReferencia" #tipodeReferencia="ngModel" required />-->
-                                <p-dropdown [options]="cities" class="form-control" [(ngModel)]="selectedCar" [filter]="true"></p-dropdown>
+                                <label for="tipodeReferencia">Tipo de Referencia</label>
+                                <input type="text" class="form-control" name="tipodeReferencia" [(ngModel)]="reference.tipodeReferencia" #tipodeReferencia="ngModel" required />
+
 
                             </div>
                             <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !empresa.valid }">
