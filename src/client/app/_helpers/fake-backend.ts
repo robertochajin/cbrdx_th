@@ -9,10 +9,12 @@ export let fakeBackendProvider = {
     provide: Http,
     useFactory: (backend: MockBackend, options: BaseRequestOptions) => {
 
-        let colaboradores: any[] = JSON.parse(localStorage.getItem('colaboradores')) || [
+        let employees: any[] = JSON.parse(localStorage.getItem('employees')) || [
                 {"idColaborador":"1",
 
                     "numeroDocumento":"1098936874",
+
+                    "nombreCompleto":"Luis Enrrique Gomez Ramirez",
 
                     "primerNombre":"Luis",
 
@@ -442,26 +444,26 @@ export let fakeBackendProvider = {
             setTimeout(() => {
 
                 // obtiene todos los Colaboradores
-                if (connection.request.url.endsWith('/api/colaboradores') && connection.request.method === RequestMethod.Get) {
+                if (connection.request.url.endsWith('/api/employees') && connection.request.method === RequestMethod.Get) {
 
                     connection.mockRespond(new Response(new ResponseOptions({
                         status: 200,
-                        body:{data:colaboradores}
+                        body:{data:employees}
                     })));
 
                 }
 
                 // obtiene un colaborador por el id
-                if (connection.request.url.match(/\/api\/colaboradores\/\d+$/) && connection.request.method === RequestMethod.Get) {
+                if (connection.request.url.match(/\/api\/employees\/\d+$/) && connection.request.method === RequestMethod.Get) {
                     // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                         // find user by id in users array
                         let urlParts = connection.request.url.split('/');
                         let id = parseInt(urlParts[urlParts.length - 1]);
-                        let matchedUsers = colaboradores.filter(colaborador => { return colaborador.idColaborador == id; });
-                        let colaborador = matchedUsers.length ? matchedUsers[0] : null;
+                        let matchedUsers = employees.filter(employee => { return employee.idColaborador == id; });
+                        let employee = matchedUsers.length ? matchedUsers[0] : null;
 
                         // respond 200 OK with user
-                        connection.mockRespond(new Response(new ResponseOptions({ status: 200, body:{data: colaborador} })));
+                        connection.mockRespond(new Response(new ResponseOptions({ status: 200, body:{data: employee} })));
 
 
                     return;
@@ -469,14 +471,14 @@ export let fakeBackendProvider = {
                 }
 
                 // crea un colaborador en el local
-                if (connection.request.url.endsWith('/api/colaboradores') && connection.request.method === RequestMethod.Post) {
+                if (connection.request.url.endsWith('/api/employees') && connection.request.method === RequestMethod.Post) {
                     // get new user object from post body
                    let newColaborador = JSON.parse(connection.request.getBody());
 
                     // save new user
-                    newColaborador.idColaborador = colaboradores.length + 1;
-                    colaboradores.push(newColaborador);
-                    localStorage.setItem('colaboradores', JSON.stringify(colaboradores));
+                    newColaborador.idColaborador = employees.length + 1;
+                    employees.push(newColaborador);
+                    localStorage.setItem('employees', JSON.stringify(employees));
 
                     // respond 200 OK
                     connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
@@ -485,18 +487,18 @@ export let fakeBackendProvider = {
                 }
 
                 // actualizar un colaborador
-                if (connection.request.url.match(/\/api\/colaboradores\/\d+$/) && connection.request.method === RequestMethod.Put) {
+                if (connection.request.url.match(/\/api\/employees\/\d+$/) && connection.request.method === RequestMethod.Put) {
                     // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                         // find user by id in users array
                         let updColaborador = JSON.parse(connection.request.getBody());
                         let urlParts = connection.request.url.split('/');
                         let id = parseInt(urlParts[urlParts.length - 1]);
-                        for (let i = 0; i < colaboradores.length; i++) {
-                            let col = colaboradores[i];
+                        for (let i = 0; i < employees.length; i++) {
+                            let col = employees[i];
                             if (col.idColaborador == id) {
                                 // delete user
-                                colaboradores[i] = updColaborador;
-                                localStorage.setItem('colaboradores', JSON.stringify(colaboradores));
+                                employees[i] = updColaborador;
+                                localStorage.setItem('employees', JSON.stringify(employees));
                                 break;
                             }
                         }
@@ -509,17 +511,17 @@ export let fakeBackendProvider = {
                 }
 
                 // elimina un colaborador del localstorage
-                if (connection.request.url.match(/\/api\/colaboradores\/\d+$/) && connection.request.method === RequestMethod.Delete) {
+                if (connection.request.url.match(/\/api\/employees\/\d+$/) && connection.request.method === RequestMethod.Delete) {
 
                     let urlParts = connection.request.url.split('/');
                     let id = parseInt(urlParts[urlParts.length - 1]);
 
-                    for (let i = 0; i < colaboradores.length; i++) {
-                        let col = colaboradores[i];
-                        if (col.idColaborador == id) {
+                    for (let i = 0; i < employees.length; i++) {
+                        let col = employees[i];
+                        if (col.idColaborador === id) {
                             // delete user
-                            colaboradores.splice(i, 1);
-                            localStorage.setItem('colaboradores', JSON.stringify(colaboradores));
+                            employees.splice(i, 1);
+                            localStorage.setItem('employees', JSON.stringify(employees));
                             break;
                         }
                     }

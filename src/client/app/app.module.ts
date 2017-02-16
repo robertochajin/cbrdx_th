@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AboutModule } from './about/about.module';
 import { HomeModule } from './home/home.module';
-import { ColaboradoresModule } from './colaboradores/colaboradores.module';
+import { EmployeesModule } from './employees/employees.module';
 import { SharedModule } from './shared/shared.module';
 import { FamilyInformationModule } from './employees-family-information/family-information.module';
 import { ReferencesModule } from './employees-references/references.module';
@@ -20,7 +20,7 @@ import { BaseRequestOptions } from '@angular/http';
 
 //CarsModule,
 @NgModule({
-  imports: [BrowserModule, HttpModule, AppRoutingModule, AboutModule, HomeModule, ColaboradoresModule,FamilyInformationModule,ReferencesModule,AcademicEducationModule, SharedModule.forRoot()],
+  imports: [BrowserModule, HttpModule, AppRoutingModule, AboutModule, HomeModule, EmployeesModule,FamilyInformationModule,ReferencesModule,AcademicEducationModule, SharedModule.forRoot()],
   declarations: [AppComponent],
   providers: [{
     provide: APP_BASE_HREF,

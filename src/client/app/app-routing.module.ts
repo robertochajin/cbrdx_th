@@ -1,56 +1,56 @@
 import { NgModule } from '@angular/core';
 import { RouterModule,Routes } from '@angular/router';
 
-//historia de colaboradores
-import { ColaboradorDetailComponent } from './colaboradores/colaborador-detail.component';
-import { ColaboradorAddComponent } from './colaboradores/colaborador-add.component';
-import { ColaboradorUpdateComponent } from './colaboradores/colaborador-update.component';
-import { ColaboradoresComponent } from './colaboradores/colaboradores.component';
+//historia de employees
+import { EmployeesDetailComponent } from './employees/employees-detail.component';
+import { EmployeesAddComponent } from './employees/employees-add.component';
+import { EmployeesUpdateComponent } from './employees/employees-update.component';
+import { EmployeesComponent } from './employees/employees.component';
 
-//Información familiar de colaboradores
+//Información familiar de employees
 import { FamilyInformationComponent } from './employees-family-information/family-information.component';
 import { FamilyInformationAddComponent } from './employees-family-information/family-information-add.component';
 import { FamilyInformationUpdateComponent } from './employees-family-information/family-information-update.component';
 import { FamilyInformationDetailComponent } from './employees-family-information/family-information-detail.component';
 
-//Información de referencia de colaboradores
+//Información de referencia de employees
 import { ReferencesComponent } from './employees-references/references.component';
 import { ReferencesDetailComponent } from './employees-references/references-detail.component';
 import { ReferencesAddComponent } from './employees-references/references-add.component';
 import { ReferencesUpdateComponent } from './employees-references/references-update.component';
 
 //Información de formacion academica
-import { AcademicEducationComponent } from './employees-academic-education/academic-education.component';
-// import { ReferencesDetailComponent } from './employees-references/references-detail.component';
-// import { ReferencesAddComponent } from './employees-references/references-add.component';
-// import { ReferencesUpdateComponent } from './employees-references/references-update.component';
+import { FormalStudiesComponent } from './employees-academic-education/formal-studies.component';
+import { FormalStudiesDetailComponent } from './employees-academic-education/formal-studies-detail.component';
+import { FormalStudiesAddComponent } from './employees-academic-education/formal-studies-add.component';
+import { FormalStudiesUpdateComponent } from './employees-academic-education/formal-studies-update.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/colaboradores', pathMatch: 'full' },
+  { path: '', redirectTo: '/employees', pathMatch: 'full' },
 
-  //historia de colaboradores
-  { path: 'colaboradores', component: ColaboradoresComponent },
-  { path: 'colaboradores/add', component: ColaboradorAddComponent },
-  { path: 'colaboradores/detail/:id', component: ColaboradorDetailComponent },
-  { path: 'colaboradores/update/:id', component: ColaboradorUpdateComponent },
+  //historia de employees
+  { path: 'employees', component: EmployeesComponent },
+  { path: 'employees/add', component: EmployeesAddComponent },
+  { path: 'employees/detail/:id', component: EmployeesDetailComponent },
+  { path: 'employees/update/:id', component: EmployeesUpdateComponent },
 
-  //Información familiar de colaboradores
+  //Información familiar de employees
   { path: 'employees-family-information', component: FamilyInformationComponent },
   { path: 'employees-family-information/add', component: FamilyInformationAddComponent },
   { path: 'employees-family-information/update/:id', component: FamilyInformationUpdateComponent },
   { path: 'employees-family-information/detail/:id', component: FamilyInformationDetailComponent },
 
-  //Información de referencia de colaboradores
+  //Información de referencia de employees
   { path: 'employees-references', component: ReferencesComponent },
   { path: 'employees-references/add', component: ReferencesAddComponent },
   { path: 'employees-references/detail/:id', component: ReferencesDetailComponent },
   { path: 'employees-references/update/:id', component: ReferencesUpdateComponent },
 
   //Información de formacion academica
-  { path: 'employees-academic-education', component: AcademicEducationComponent },
-  // { path: 'employees-references/add', component: ReferencesAddComponent },
-  // { path: 'employees-references/detail/:id', component: ReferencesDetailComponent },
-  // { path: 'employees-references/update/:id', component: ReferencesUpdateComponent },
+  { path: 'employees-formal-studies', component: FormalStudiesComponent },
+  { path: 'employees-formal-studies/add', component: FormalStudiesAddComponent },
+  { path: 'employees-formal-studies/detail/:id', component: FormalStudiesDetailComponent },
+  { path: 'employees-formal-studies/update/:id', component: FormalStudiesUpdateComponent }
 ];
 
 @NgModule({

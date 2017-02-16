@@ -40,8 +40,7 @@ class constructorFamilyInformation implements FamilyInformation {
 export class FamilyInformationAddComponent {
     @Input()
     familyInformation: FamilyInformation = new constructorFamilyInformation();
-    model: any = {};
-    const titulo = 'Agregando Familiar';
+    const header = 'Agregando Familiar';
 
     constructor(
         private familyInformationService: FamilyInformationService,

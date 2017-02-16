@@ -7,23 +7,22 @@ import { FormsModule } from '@angular/forms';
 
 import 'rxjs/add/operator/toPromise';
 
-import { AcademicEducationComponent }  from './academic-education.component';
-//import { AcademicEducationDetailComponent }  from './academic-education-detail.component';
-//import { AcademicEducationAddComponent }  from './academic-education-add.component';
-//import { AcademicEducationUpdateComponent }  from './academic-education-update.component';
+import { FormalStudiesComponent }  from './formal-studies.component';
+import { FormalStudiesDetailComponent }  from './formal-studies-detail.component';
+import { FormalStudiesAddComponent }  from './formal-studies-add.component';
+import { FormalStudiesUpdateComponent }  from './formal-studies-update.component';
 import { AcademicEducationService } from './academic-education.service';
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule } from 'primeng/primeng';
 
 
 @NgModule({
     imports:      [CommonModule,InputTextModule,FormsModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule],
-    declarations: [AcademicEducationComponent,
-                    // AcademicEducationDetailComponent,
-                    // AcademicEducationAddComponent,
-                    // AcademicEducationUpdateComponent
-                    ],
-    bootstrap:    [AcademicEducationComponent],
+    declarations: [FormalStudiesComponent,
+                    FormalStudiesAddComponent,
+                    FormalStudiesUpdateComponent,
+                    FormalStudiesDetailComponent],
+    bootstrap:    [FormalStudiesComponent],
     providers:    [AcademicEducationService],
-    exports: 	  [AcademicEducationComponent]
+    exports: 	  [FormalStudiesComponent]
 })
 export class AcademicEducationModule { }

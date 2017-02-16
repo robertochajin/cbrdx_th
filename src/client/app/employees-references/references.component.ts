@@ -26,8 +26,6 @@ class constructorReferences implements References {
 })
 export class ReferencesComponent {
 
-    displayDialog: boolean;
-
     reference: References = new constructorReferences();
 
     references: References[];

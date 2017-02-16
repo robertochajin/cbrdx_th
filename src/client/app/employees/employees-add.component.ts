@@ -3,49 +3,48 @@
  */
 import { Component, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ColaboradoresService } from './colaboradoresservice';
-import { Colaborador } from './colaboradores';
+import { EmployeesService } from './employees.service';
+import { Employee } from './employees';
 import { Location }                 from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 import {Observable} from 'rxjs/Observable';
-import {date} from "gulp-util";
-import {modelGroupProvider} from "@angular/forms/src/directives/ng_model_group";
 
-export class PrimeColaborador implements Colaborador {
+export class constructorEmployee implements Employee {
     constructor(public idColaborador?, public numeroDocumento?, public primerNombre?, public fechaDesde?, public cargoActual?, public tipoDocumento?, public Avatar?, public ciudadExpedicion?, public fechaExp?, public fechaNacimiento?, public idtercero?, public ciudadNacimiento?, public nacionalidad?, public genero?, public estadoCivil?, public factorrh?, public numeroDeHijos?, public lateralidad?, public nivelEducativo?, public profesion?, public estratoSocioEconomico?, public vivienda?, public vehiculo?, public tallaCamisa?, public tallaPantalon?, public tallaCalzado?, public fechaDeste?) {}
 }
 
 
 @Component({
     moduleId: module.id,
-    selector: 'colaborador-add',
-    templateUrl: './colaborador-add.component.html',
+    selector: 'employees',
+    templateUrl: 'employees-form.component.html',
 })
 
-export class ColaboradorAddComponent {
+export class EmployeesAddComponent {
     @Input()
-    colaborador: Colaborador = new PrimeColaborador();
-    model: any = {};
+    employee: Employee = new constructorEmployee();
+    const header = 'Agregando Colaborador';
 
     constructor(
-        private colaboradorService: ColaboradoresService,
-        private router: Router
+        private employeeService: EmployeesService,
+        private router: Router,
+        private location: Location
     ) {}
 
-    addColaborador() {
-        /*this.colaboradorService.addColaborador(this.colaborador);
-        this.location.back();*/
+    save() {
 
-        this.colaboradorService.addColaborador(this.colaborador)
+        this.employeeService.add(this.employee)
             .subscribe(
                 data => {
-                    this.router.navigate(['/colaboradores']);
+                    this.router.navigate(['/employees']);
+                    //this.location.back();
                 },
                 error => {
                 });
     }
 
     goBack(): void {
-        this.router.navigate(['/colaboradores']);
+        this.router.navigate(['/employees']);
+        //this.location.back();
     }
 }
