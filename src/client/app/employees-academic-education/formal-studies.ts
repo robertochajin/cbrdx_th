@@ -9,4 +9,8 @@ export interface Formalstudies {
     ciudad?;
     institucion?;
     confirmada?;
+    nivelEstudio?;
+    areaEstudio?;
+    otraInstitucion?;
+    estadoEstudio?;
 }

@@ -25,6 +25,11 @@ import { FormalStudiesDetailComponent } from './employees-academic-education/for
 import { FormalStudiesAddComponent } from './employees-academic-education/formal-studies-add.component';
 import { FormalStudiesUpdateComponent } from './employees-academic-education/formal-studies-update.component';
 
+import { NoFormalStudiesComponent } from './employees-academic-education/no-formal-studies.component';
+import { NoFormalStudiesDetailComponent } from './employees-academic-education/no-formal-studies-detail.component';
+import { NoFormalStudiesAddComponent } from './employees-academic-education/no-formal-studies-add.component';
+import { NoFormalStudiesUpdateComponent } from './employees-academic-education/no-formal-studies-update.component';
+
 const routes: Routes = [
   { path: '', redirectTo: '/employees', pathMatch: 'full' },
 
@@ -50,7 +55,11 @@ const routes: Routes = [
   { path: 'employees-formal-studies', component: FormalStudiesComponent },
   { path: 'employees-formal-studies/add', component: FormalStudiesAddComponent },
   { path: 'employees-formal-studies/detail/:id', component: FormalStudiesDetailComponent },
-  { path: 'employees-formal-studies/update/:id', component: FormalStudiesUpdateComponent }
+  { path: 'employees-formal-studies/update/:id', component: FormalStudiesUpdateComponent },
+  { path: 'employees-no-formal-studies', component: NoFormalStudiesComponent },
+  { path: 'employees-no-formal-studies/add', component: NoFormalStudiesAddComponent },
+  { path: 'employees-no-formal-studies/detail/:id', component: NoFormalStudiesDetailComponent },
+  { path: 'employees-no-formal-studies/update/:id', component: NoFormalStudiesUpdateComponent }
 ];
 
 @NgModule({

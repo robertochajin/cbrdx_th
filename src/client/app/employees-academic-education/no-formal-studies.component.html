@@ -1,4 +1,4 @@
-<h3 class="first">Educación formal</h3>
+<h3 class="first">Educación no formal</h3>
 <div>
     <div class="row datable-header">
         <div class="col-md-6 col-xs-12 datatable-header-add">
@@ -9,7 +9,7 @@
             <input #gb type="text" pInputText size="40" placeholder="Buscar...">
         </div>
     </div>
-    <p-dataTable [value]="fstudies" selectionMode="single" [(selection)]="selectedColaborador" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+    <p-dataTable [value]="nfstudies"  [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
         <p-column field="titulo" header="Título Obtenido" [sortable]="true"></p-column>
         <p-column field="ingreso" header="Ingreso " [sortable]="true"></p-column>
         <p-column field="finalizacion" header="Finalización" [sortable]="true"></p-column>
@@ -17,14 +17,14 @@
         <p-column field="institucion" header="Institución" [sortable]="true"></p-column>
         <p-column field="confirmada" header="Confirmada" [sortable]="true"></p-column>
         <p-column header="Acciones" styleClass="datatable-col-action">
-            <template let-fstudy="rowData" pTemplate="body">
+            <template let-study="rowData" pTemplate="body">
                 <div class="btn-group" role="group">
                     <button type="button"  class="ui-button btn" icon="fa-eye"
-                            pButton (click)="detail(fstudy)"></button>
+                            pButton (click)="detail(study)"></button>
                     <button type="button"  class="ui-button ui-button-success btn" icon="fa-pencil"
-                            pButton (click)="update(fstudy)"></button>
+                            pButton (click)="update(study)"></button>
                     <button type="button"  class="ui-button ui-button-danger btn" icon="fa-trash"
-                            pButton (click)="delete(fstudy)" ></button>
+                            pButton (click)="delete(study)" ></button>
                 </div>
             </template>
         </p-column>

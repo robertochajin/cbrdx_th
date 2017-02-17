@@ -3,16 +3,13 @@
  */
 import { Component, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {Formalstudies} from './formal-studies';
+import {Noformalstudies} from './no-formal-studies';
 import {AcademicEducationService} from './academic-education.service';
 import { Location }                 from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 import {Observable} from 'rxjs/Observable';
-//import {date} from "gulp-util";
-//import {modelGroupProvider} from "@angular/forms/src/directives/ng_model_group";
-//import {SelectItem} from 'primeng/primeng';
 
-class constructorFormal implements Formalstudies {
+class constructorNoFormal implements Noformalstudies {
     constructor(
         public 	idEstudio?,
         public 	titulo?,
@@ -21,10 +18,12 @@ class constructorFormal implements Formalstudies {
         public 	ciudad?,
         public 	institucion?,
         public 	confirmada?,
-        public  nivelEstudio?,
-        public  areaEstudio?,
-        public  otraInstitucion?,
-        public  estadoEstudio?,
+        public 	tipoEstudio?,
+        public 	otroTipoEstudio?,
+        public 	intensidad?,
+        public 	descripcion?,
+        public 	areaEstudio?,
+        public 	estadoEstudio?
     ) {}
 }
 
@@ -32,13 +31,13 @@ class constructorFormal implements Formalstudies {
 @Component({
     moduleId: module.id,
     selector: 'academic-education-formal',
-    templateUrl: 'formal-studies-form.component.html',
+    templateUrl: 'no-formal-studies-form.component.html',
 })
 
-export class FormalStudiesAddComponent {
+export class NoFormalStudiesAddComponent {
     @Input()
 
-    fstudy: Formalstudies = new constructorFormal();
+    nfstudy: Noformalstudies = new constructorNoFormal();
     const header = 'Agregando Estudio Formal';
 
     constructor (
@@ -50,7 +49,7 @@ export class FormalStudiesAddComponent {
 
     save() {
 
-        this.academicEducationService.addFormal(this.fstudy)
+        this.academicEducationService.addNoFormal(this.nfstudy)
             .subscribe(
                 data => {
                     this.location.back();

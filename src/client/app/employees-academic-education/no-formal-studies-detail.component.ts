@@ -27,11 +27,11 @@ class constructorFormal implements Formalstudies {
 @Component({
     moduleId: module.id,
     selector: 'academic-education',
-    template: 'formal-studies-detail.component.html',
+    template: 'no-formal-studies-detail.component.html',
 })
 
 
-export class FormalStudiesDetailComponent implements OnInit   {
+export class NoFormalStudiesDetailComponent implements OnInit   {
     @Input()
 
     study: Formalstudies = new constructorFormal();

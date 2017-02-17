@@ -438,6 +438,143 @@ export let fakeBackendProvider = {
                 }
             ];
 
+        let fstudies: any[] = JSON.parse(localStorage.getItem('fstudies'))
+            || [
+
+                {
+
+                    'idEstudio'             : "1",
+                    'titulo'                : "Laboral",
+                    'ingreso'               : "2 de mayo del 1999",
+                    'finalizacion'          : "2 de mayo del 2005",
+                    'ciudad'                : "Bucaramanga",
+                    'institucion'           : "uis",
+                    'confirmada'            : "Si",
+                    'confirmada'            : "Si",
+
+                    'nivelEstudio'          :   "Universitario",
+                    'areaEstudio'           :   "Ingenieria",
+                    'otraInstitucion'       :   "",
+                    'estadoEstudio'         :   "Culminado",
+                },
+
+                {
+
+                    'idEstudio'             : "2",
+
+                    'titulo'                : "Abogado",
+
+                    'ingreso'               : "2 de mayo del 1999",
+
+                    'finalizacion'          : "2 de mayo del 2005",
+
+                    'ciudad'                : "Bucaramanga",
+
+                    'institucion'           : "UPB",
+
+                    'confirmada'            : "Si",
+                    'nivelEstudio'          :   "Universitario",
+                    'areaEstudio'           :   "Ingenieria",
+                    'otraInstitucion'       :   "",
+                    'estadoEstudio'         :   "Culminado",
+                },
+
+                {
+
+                    'idEstudio'             : "3",
+
+                    'titulo'                : "ingeniero",
+
+                    'ingreso'               : "2 de mayo del 1999",
+
+                    'finalizacion'          : "2 de mayo del 2005",
+
+                    'ciudad'                : "Bucaramanga",
+
+                    'institucion'           : "uis",
+
+                    'confirmada'            : "Si",
+                    'nivelEstudio'          :   "Universitario",
+                    'areaEstudio'           :   "Ingenieria",
+                    'otraInstitucion'       :   "",
+                    'estadoEstudio'         :   "Culminado",
+                }
+            ];
+
+        let nfstudies: any[] = JSON.parse(localStorage.getItem('nfstudies'))
+            || [
+
+                {
+
+                    'idEstudio'             : "1",
+
+                    'titulo'                : "Laboral",
+
+                    'ingreso'               : "2 de mayo del 1999",
+
+                    'finalizacion'          : "2 de mayo del 2005",
+
+                    'ciudad'                : "Bucaramanga",
+
+                    'institucion'           : "uis",
+
+                    'confirmada'            : "Si",
+
+                    'tipoEstudio'           : "Tipo",
+                    'otroTipoEstudio'       : " Otro tipo",
+                    'intensidad'            : "8 Horas",
+                    'descripcion'           : "Un cursito para aprender algo",
+                    'areaEstudio'           : "Diplomado",
+                    'estadoEstudio'         : " Terminado",
+                },
+
+                {
+
+                    'idEstudio'             : "2",
+
+                    'titulo'                : "Abogado",
+
+                    'ingreso'               : "2 de mayo del 1999",
+
+                    'finalizacion'          : "2 de mayo del 2005",
+
+                    'ciudad'                : "Bucaramanga",
+
+                    'institucion'           : "UPB",
+
+                    'confirmada'            : "Si",
+                    'tipoEstudio'           : "Tipo",
+                    'otroTipoEstudio'       : " Otro tipo",
+                    'intensidad'            : "8 Horas",
+                    'descripcion'           : "Un cursito para aprender algo",
+                    'areaEstudio'           : "Diplomado",
+                    'estadoEstudio'         : " Terminado",
+                },
+
+                {
+
+                    'idEstudio'             : "3",
+
+                    'titulo'                : "ingeniero",
+
+                    'ingreso'               : "2 de mayo del 1999",
+
+                    'finalizacion'          : "2 de mayo del 2005",
+
+                    'ciudad'                : "Bucaramanga",
+
+                    'institucion'           : "uis",
+
+                    'confirmada'            : "Si",
+                    'tipoEstudio'           : "Tipo",
+                    'otroTipoEstudio'       : " Otro tipo",
+                    'intensidad'            : "8 Horas",
+                    'descripcion'           : "Un cursito para aprender algo",
+                    'areaEstudio'           : "Diplomado",
+                    'estadoEstudio'         : " Terminado",
+                }
+            ];
+
         // configure fake backend
         backend.connections.subscribe((connection: MockConnection) => {
             // wrap in timeout to simulate server api call
@@ -452,7 +589,7 @@ export let fakeBackendProvider = {
                     })));
 
                 }
-
+//Colaboradores
                 // obtiene un colaborador por el id
                 if (connection.request.url.match(/\/api\/employees\/\d+$/) && connection.request.method === RequestMethod.Get) {
                     // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
@@ -528,6 +665,7 @@ export let fakeBackendProvider = {
                     // respond 200 OK
                     connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
                 }
+//Familiares
 
                 // obtiene el listado de familiares
                 if (connection.request.url.endsWith('/api/employees-family-information') && connection.request.method === RequestMethod.Get) {
@@ -618,6 +756,7 @@ export let fakeBackendProvider = {
                     // respond 200 OK
                     connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
                 }
+//Referencias
 
                 // obtiene el referencias
                 if (connection.request.url.endsWith('/api/references') && connection.request.method === RequestMethod.Get) {
@@ -701,6 +840,184 @@ export let fakeBackendProvider = {
                             // delete user
                             references.splice(i, 1);
                             localStorage.setItem('references', JSON.stringify(references));
+                            break;
+                        }
+                    }
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+                }
+
+//Estudios formales
+
+                // obtiene todos
+                if (connection.request.url.endsWith('/api/formalstudies') && connection.request.method === RequestMethod.Get) {
+
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        status: 200,
+                        body:{data:fstudies}
+                    })));
+
+                }
+
+                // obtiene una  por el id
+                if (connection.request.url.match(/\/api\/formalstudies\/\d+$/) && connection.request.method === RequestMethod.Get) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                    // find user by id in users array
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    let matched = fstudies.filter(fstudy => { return fstudy.idEstudio == id; });
+                    let study = matched.length ? matched[0] : null;
+
+                    // respond 200 OK with user
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200, body:{data: study} })));
+
+                    return;
+
+                }
+
+                // crea una  en el localstorage
+                if (connection.request.url.endsWith('/api/formalstudies') && connection.request.method === RequestMethod.Post) {
+                    // get new user object from post body
+                    let news = JSON.parse(connection.request.getBody());
+
+                    // save new user
+                    news.idEstudio = fstudies.length + 1;
+                    news.nombreCompleto = news.primerNombre+' '+news.segundoNombre+' '+news.primerApellido+' '+news.segundoApellido;
+                    fstudies.push(news);
+                    localStorage.setItem('references', JSON.stringify(fstudies));
+
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+
+                    return;
+                }
+
+                // actualizar una
+                if (connection.request.url.match(/\/api\/formalstudies\/\d+$/) && connection.request.method === RequestMethod.Put) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                    // find user by id in users array
+                    let news = JSON.parse(connection.request.getBody());
+                    news.nombreCompleto = news.primerNombre+' '+news.segundoNombre+' '+news.primerApellido+' '+news.segundoApellido;
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    for (let i = 0; i < fstudies.length; i++) {
+                        let col = fstudies[i];
+                        if (col.idEstudio == id) {
+                            // delete user
+                            fstudies[i] = news;
+                            localStorage.setItem('references', JSON.stringify(fstudies));
+                            break;
+                        }
+                    }
+
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+
+
+                    return;
+                }
+
+                // elimina una  del localstorage
+                if (connection.request.url.match(/\/api\/formalstudies\/\d+$/) && connection.request.method === RequestMethod.Delete) {
+
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+
+                    for (let i = 0; i < fstudies.length; i++) {
+                        let col = fstudies[i];
+                        if (col.idEstudio == id) {
+                            // delete user
+                            fstudies.splice(i, 1);
+                            localStorage.setItem('references', JSON.stringify(fstudies));
+                            break;
+                        }
+                    }
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+                }
+
+//Estudios no formales
+
+                // obtiene todos
+                if (connection.request.url.endsWith('/api/noformalstudies') && connection.request.method === RequestMethod.Get) {
+
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        status: 200,
+                        body:{data:nfstudies}
+                    })));
+
+                }
+
+                // obtiene una  por el id
+                if (connection.request.url.match(/\/api\/noformalstudies\/\d+$/) && connection.request.method === RequestMethod.Get) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                    // find user by id in users array
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    let matched = nfstudies.filter(fstudy => { return fstudy.idEstudio == id; });
+                    let study = matched.length ? matched[0] : null;
+
+                    // respond 200 OK with user
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200, body:{data: study} })));
+
+                    return;
+
+                }
+
+                // crea una  en el localstorage
+                if (connection.request.url.endsWith('/api/noformalstudies') && connection.request.method === RequestMethod.Post) {
+                    // get new user object from post body
+                    let news = JSON.parse(connection.request.getBody());
+
+                    // save new user
+                    news.idEstudio = nfstudies.length + 1;
+                    news.nombreCompleto = news.primerNombre+' '+news.segundoNombre+' '+news.primerApellido+' '+news.segundoApellido;
+                    nfstudies.push(news);
+                    localStorage.setItem('references', JSON.stringify(nfstudies));
+
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+
+                    return;
+                }
+
+                // actualizar una
+                if (connection.request.url.match(/\/api\/noformalstudies\/\d+$/) && connection.request.method === RequestMethod.Put) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                    // find user by id in users array
+                    let news = JSON.parse(connection.request.getBody());
+                    news.nombreCompleto = news.primerNombre+' '+news.segundoNombre+' '+news.primerApellido+' '+news.segundoApellido;
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    for (let i = 0; i < nfstudies.length; i++) {
+                        let col = nfstudies[i];
+                        if (col.idEstudio == id) {
+                            // delete user
+                            nfstudies[i] = news;
+                            localStorage.setItem('references', JSON.stringify(nfstudies));
+                            break;
+                        }
+                    }
+
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+
+
+                    return;
+                }
+
+                // elimina una  del localstorage
+                if (connection.request.url.match(/\/api\/noformalstudies\/\d+$/) && connection.request.method === RequestMethod.Delete) {
+
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+
+                    for (let i = 0; i < nfstudies.length; i++) {
+                        let col = nfstudies[i];
+                        if (col.idEstudio == id) {
+                            // delete user
+                            nfstudies.splice(i, 1);
+                            localStorage.setItem('references', JSON.stringify(nfstudies));
                             break;
                         }
                     }
