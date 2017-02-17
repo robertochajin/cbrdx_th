@@ -12,7 +12,7 @@ import { LocationDetailComponent }  from './location-detail.component';
 import { LocationAddComponent }  from './location-add.component';
 import { LocationUpdateComponent }  from './location-update.component';
 import { LocationService } from './location.service';
-import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule, AutoCompleteModule } from 'primeng/primeng';
+import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule, AutoCompleteModule, DropdownModule } from 'primeng/primeng';
 
 
 @NgModule({
@@ -24,7 +24,8 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
                     DialogModule,
                     InputTextareaModule,
                     CalendarModule,
-                    AutoCompleteModule],
+                    AutoCompleteModule,
+                    DropdownModule],
     declarations: [LocationComponent,
                     LocationDetailComponent,
                     LocationAddComponent,

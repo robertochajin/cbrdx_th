@@ -1,39 +1,76 @@
 <div *ngIf="employLocation">
     <div class="row">
         <div class="col-md-12">
-            <div class=" clearfix">
-                <div class="header">
-                    <h4 class="title">{{titulo}}</h4>
-                </div>
-                
-                <div class="clearfix">
-                    <div class="col-md-12">
-                        <h2></h2>
-                        <form name="formLocation" (ngSubmit)="l.form.valid && save()" #l="ngForm" >
-                            <div class="form-group col-md-12" [ngClass]="{ 'has-error': l.submitted && !telefono.valid }">
-                                <label for="telefono">telefono</label>
-                                <input type="text" class="form-control" name="telefono" [(ngModel)]="employLocation.Telefono" #telefono="ngModel" required />
-                                <div *ngIf="l.submitted && !telefono.valid" class="help-block">Teléfono es requerido</div>
-                            </div>
+            <div class="header">
+                <h4 class="title">{{header}}</h4>
+            </div>
+        </div>
+    </div>
 
-                            <div class="form-group col-md-12" [ngClass]="{ 'has-error': l.submitted && !telefono.valid }">
-                                <label for="ciudad">Ciudad</label>
-                                <p-autoComplete placeholder="Buscar ciudad" field="nombreCiudad" name="ciudad"
-                                                [(ngModel)]="employLocation.NombreCiudad" [suggestions]="cityList" (completeMethod)="citySearch($event)" (onSelect)="captureId($event)" ></p-autoComplete>
-                            </div>
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <form name="formLocation" (ngSubmit)="l.form.valid && save()" #l="ngForm" novalidate
+                  class="form">
 
-
-                            <div class="form-group col-md-3 col-md-offset-9">
-                                    <button class="btn btn-primary">Agregar</button>
-                                <a (click)="goBack()" class="btn btn-link">Cancelar</a>
-                            </div>
-                        </form>
+                <div class="row">
+                    <div class="form-group col-md-4"
+                         [ngClass]="{ 'has-error': l.submitted && !TipoDireccionLabel.valid }">
+                        <label for="TipoDireccionLabel">Tipo de Dirección</label>
+                        <input type="text" class="form-control" name="TipoDireccionLabel"
+                               [(ngModel)]="employLocation.TipoDireccionLabel" #TipoDireccionLabel="ngModel"
+                               required/>
+                        <div *ngIf="l.submitted && !TipoDireccionLabel.valid" class="help-block">Tipo de
+                            dirección es requerido
+                        </div>
+                    </div>
+                    <div class="form-group col-md-8"
+                         [ngClass]="{ 'has-error': l.submitted && !ciudad.valid }">
+                        <label for="ciudad">Ciudad</label>
+                        <p-autoComplete placeholder="Buscar ciudad" field="nombreCiudad" name="ciudad"
+                                        [(ngModel)]="employLocation.NombreCiudad" [suggestions]="cityList" (completeMethod)="citySearch($event)" (onSelect)="captureId($event)" ></p-autoComplete>
+                        <div *ngIf="l.submitted && !ciudad.valid" class="help-block">La ciudad es requerida</div>
                     </div>
 
                 </div>
 
-            </div>
+                <div class="row">
+                    <div class="form-group col-md-3"
+                         [ngClass]="{ 'has-error': l.submitted && !ciudad.valid }>
+                        <label for="">Nomenclatura principal</label>
+                        <p-dropdown [options]="tipoNomenclaturaPrincipal" #tipoNomenclaturaPrincipal="ngModel" [(ngModel)]="principalNomenclature"></p-dropdown>
+                        <div>Nomenclatura principal es requerida</div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for=""></label>
+                        <input type="text" class="form-control" name="" #="ngModel"
+                               required />
+                        <div> es requerido</div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for=""></label>
+                        <input type="text" class="form-control" name="" #="ngModel"
+                               required />
+                        <div> es requerido</div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for=""></label>
+                        <input type="text" class="form-control" name="" #="ngModel"
+                               required />
+                        <div> es requerido</div>
+                    </div>
+                </div>
 
+
+
+                <div class="row form-footer-buttons">
+                    <div class="form-group col-md-12">
+                        <a (click)="goBack()" class="cancelar">Cancelar</a>
+                        <button class="btn btn-primary">Agregar</button>
+                    </div>
+                </div>
+            </form>
         </div>
+
     </div>
+
 </div>

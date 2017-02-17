@@ -28,6 +28,11 @@ class ConstructorLocation implements EmployeesLocation {
     ) {}
 }
 
+class ComplementaryNomenclature {
+    public tipoNomenclatura = ['Casa', 'Edificio', 'Manzana', 'Torre'];
+    public detalle : String;
+}
+
 @Component({
     moduleId: module.id,
     selector: 'add-location',
@@ -36,9 +41,21 @@ class ConstructorLocation implements EmployeesLocation {
 
 export class LocationAddComponent {
     @Input()
-    employLocation: EmployeesLocation = new ConstructorLocation();
+    employLocation: EmployeesLocation;
     model: any = {};
-    titulo = 'Agregando Ubicación';
+    header = 'Agregando Ubicación';
+
+    tipoNomenclaturaPrincipal = ['Carrera','Calle','Diagonal','Avenida'];
+    principalNomenclature: String;
+    numberOne: String;
+    numberTwo: String;
+    complementary: ComplementaryNomenclature;
+    complementaries: ComplementaryNomenclature[];
+    suburb: String;
+    latitude: number;
+    longitude: number;
+    howToGetThere: String;
+    finalAddress: String;
 
     cityList: any;
 
