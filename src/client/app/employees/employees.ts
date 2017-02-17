@@ -1,19 +1,21 @@
 /**
  * Created by TracesMaker on 06/02/2017.
  */
-export interface Colaborador {
+export interface Employee {
     idColaborador?;
-    numeroDocumento?;
-    primerNombre?;
-    fechaDesde?; //Campo calculado en backend?
-    cargoActual?; //Campo calculado en backend?
     tipoDocumento?;
-    Avatar?;
-    ciudadExpedicion?;
-    fechaExp?;
+    numeroDocumento?;
+    nombreCompleto?; //Campo calculado en backend
+    primerNombre?;
     segundoNombre?;
     primerApellido?;
     segundoApellido?;
+    fechaDesde?; //Campo calculado en backend?
+    cargoActual?; //Campo calculado en backend?
+
+    Avatar?;
+    ciudadExpedicion?;
+    fechaExp?;
     fechaNacimiento?;
     idtercero?;
     ciudadNacimiento?;

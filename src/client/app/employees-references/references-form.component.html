@@ -1,0 +1,74 @@
+<div *ngIf="reference">
+    <div class="row">
+        <div class="col-md-12">
+            <div class=" clearfix">
+                <div class="header">
+                    <h4 class="title">{{titulo}}</h4>
+                </div>
+                
+                <div class="clearfix">
+                    <div class="col-md-12">
+                        <h2></h2>
+                        <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
+                            <div class="form-group col-md-6" >
+                                <label for="tipodeReferencia">Tipo de Referencia</label>
+                                <input type="text" class="form-control" name="tipodeReferencia" [(ngModel)]="reference.tipodeReferencia" #tipodeReferencia="ngModel" required />
+
+
+                            </div>
+                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !empresa.valid }">
+                                <label for="empresa">Nombre empresa</label>
+                                <input type="text" class="form-control" name="empresa" [(ngModel)]="reference.empresa" #empresa="ngModel" required />
+                                <div *ngIf="f.submitted && !empresa.valid" class="help-block">Nombre empresa es requerido</div>
+                            </div>
+                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !primerNombre.valid }">
+                                <label for="primerNombre">Primer nombre</label>
+                                <input type="text" class="form-control" name="primerNombre" [(ngModel)]="reference.primerNombre" #primerNombre="ngModel" required />
+                                <div *ngIf="f.submitted && !primerNombre.valid" class="help-block">Primer nombre es requerido</div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="segundoNombre">Segundo nombre</label>
+                                <input type="text" class="form-control" name="segundoNombre" [(ngModel)]="reference.segundoNombre" #segundoNombre="ngModel" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="primerApellido">Primer apellido</label>
+                                <input type="text" class="form-control" name="primerApellido" [(ngModel)]="reference.primerApellido" #primerApellido="ngModel" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="segundoApellido">Segundo apellido</label>
+                                <input type="text" class="form-control" name="segundoApellido" [(ngModel)]="reference.segundoApellido" #segundoApellido="ngModel" />
+                            </div>
+                            <div class="form-group col-md-12" [ngClass]="{ 'has-error': f.submitted && !ciudad.valid }">
+                                <label for="ciudad">Ciudad</label>
+                                <input type="text" class="form-control" name="ciudad" [(ngModel)]="reference.ciudad" #ciudad="ngModel" required />
+                                <div *ngIf="f.submitted && !ciudad.valid" class="help-block">Ciudad es requerido</div>
+                            </div>
+                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !telefono.valid }">
+                                <label for="telefono">Teléfono</label>
+                                <input type="text" class="form-control" name="telefono" [(ngModel)]="reference.telefono" #telefono="ngModel" required />
+                                <div *ngIf="f.submitted && !telefono.valid" class="help-block">Teléfono es requerido</div>
+                            </div>
+                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !celular.valid }">
+                                <label for="celular">Celular</label>
+                                <input type="text" class="form-control" name="celular" [(ngModel)]="reference.celular" #celular="ngModel" required />
+                                <div *ngIf="f.submitted && !celular.valid" class="help-block">Celular es requerido</div>
+                            </div>
+                            <div class="form-group col-md-12" [ngClass]="{ 'has-error': f.submitted && !direccion.valid }">
+                                <label for="direccion">Direccion de Residencia</label>
+                                <textarea class="form-control" rows="6" name="direccion" [(ngModel)]="reference.direccion" #direccion="ngModel" required pInputTextarea></textarea>
+                                <div *ngIf="f.submitted && !direccion.valid" class="help-block">Direccion de Residencia es requerido</div>
+                            </div>
+                            <div class="form-group col-md-3 col-md-offset-9">
+                                <a (click)="goBack()" class=" btn-link">Cancelar</a>
+                                <button class="btn btn-primary">Agregar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -31,7 +31,7 @@ export class FamilyInformationService {
     }
 
     delete(f: FamilyInformation) {
-        const respuesta =  this.http.delete('/api/colaboradores/'+ f.idFamiliar);
+        const respuesta =  this.http.delete('/api/employees-family-information/'+ f.idFamiliar);
         return respuesta.map((res:Response) => res.json());
     }
 
