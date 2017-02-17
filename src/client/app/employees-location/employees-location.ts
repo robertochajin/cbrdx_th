@@ -2,20 +2,20 @@
  * Created by Angel on 10/02/2017.
  */
 export interface EmployeesLocation {
-    idUbicacion? : number;
-    NombreCiudad?: String;
-    NombreDepartamento?: String;
-    NombrePais?: String;
-    Direccion : String;
-    Ciudad : number;
-    TipoDireccion : number;
-    TipoDireccionLabel : String;
-    Barrio? : String;
-    CorreoElectronico? : String;
-    Longitud ? : String;
-    Latitud? : String;
-    ComoLlegar? : String;
-    Celular : String;
-    Telefono : String;
+    idUbicacion?:String;
+    nombreCiudad?:String;
+    nombreDepartamento?:String;
+    nombrePais?:String;
+    direccion?:String;
+    ciudad?:String;
+    tipoDireccion?:String;
+    tipoDireccionLabel?:String;
+    barrio?:String;
+    correoElectronico?:String;
+    longitud ?:String;
+    latitud?:String;
+    comoLlegar?:String;
+    celular?:String;
+    telefono?:String;
 }
 

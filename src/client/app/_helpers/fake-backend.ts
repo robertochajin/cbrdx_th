@@ -591,7 +591,7 @@ export let fakeBackendProvider = {
                 /*================ Ubicaciones ================*/
 
                 // obtiene el listado de Ubicaciones
-                if (connection.request.url.endsWith('/api/employees-location') && connection.request.method === RequestMethod.Get) {
+                if (connection.request.url.endsWith('/api/employees-employeeLocation') && connection.request.method === RequestMethod.Get) {
 
                     connection.mockRespond(new Response(new ResponseOptions({
                         status: 200,
@@ -618,7 +618,7 @@ export let fakeBackendProvider = {
                 }
 
                 // crea un Ubicacion en el local
-                if (connection.request.url.endsWith('/api/employees-location') && connection.request.method === RequestMethod.Post) {
+                if (connection.request.url.endsWith('/api/employees-employeeLocation') && connection.request.method === RequestMethod.Post) {
                     // get new user object from post body
                     let newlocation = JSON.parse(connection.request.getBody());
 

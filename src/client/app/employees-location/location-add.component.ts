@@ -8,23 +8,23 @@ import { LocationService } from './location.service';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 
-class ConstructorLocation implements EmployeesLocation {
+class ConstructorEmployeesLocation implements EmployeesLocation {
     constructor(
-        public idUbicacion,
-        public NombreCiudad,
-        public NombreDepartamento,
-        public NombrePais,
-        public Direccion,
-        public Ciudad,
-        public TipoDireccion,
-        public TipoDireccionLabel,
-        public Barrio,
-        public CorreoElectronico,
-        public Longitud,
-        public Latitud,
-        public ComoLlegar,
-        public Celular,
-        public Telefono
+        public idUbicacion? : String,
+        public nombreCiudad? : String,
+        public nombreDepartamento? : String,
+        public nombrePais? : String,
+        public direccion? : String,
+        public ciudad? : String,
+        public tipoDireccion? : String,
+        public tipoDireccionLabel? : String,
+        public barrio? : String,
+        public correoElectronico? : String,
+        public longitud? : String,
+        public latitud? : String,
+        public comoLlegar? : String,
+        public celular? : String,
+        public telefono? : String
     ) {}
 }
 
@@ -45,7 +45,8 @@ export class LocationAddComponent {
     model: any = {};
     header = 'Agregando Ubicación';
 
-    tipoNomenclaturaPrincipal = ['Carrera','Calle','Diagonal','Avenida'];
+    principalNomenclatureList = ['Carrera','Calle','Diagonal','Avenida'];
+    selectedPrincipalNomenclature: String;
     principalNomenclature: String;
     numberOne: String;
     numberTwo: String;
@@ -79,13 +80,20 @@ export class LocationAddComponent {
         this.location.back();
     }
 
-    citySearch(event){
+    citySearch(event:any) {
         this.locationService.getAllCities(event.query).subscribe(
             cities => this.cityList = cities
         );
     }
 
-    captureId(event){
+    captureId(event:any) {
+        return;
+    }
 
+    composeAddress():void {
+        this.finalAddress = this.selectedPrincipalNomenclature + ' ' +
+                            this.principalNomenclature + ' # ' +
+                            this.numberOne + ' - ' +
+                            this.numberTwo;
     }
 }

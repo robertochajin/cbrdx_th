@@ -1,8 +1,6 @@
 /**
  * Created by TracesMaker on 07/02/2017.
  */
-
-
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
@@ -11,23 +9,23 @@ import { LocationService } from './location.service';
 
 import 'rxjs/add/operator/switchMap';
 
-class ConstructorLocation implements EmployeesLocation {
+class ConstructorEmployeesLocation implements EmployeesLocation {
     constructor(
-        public idUbicacion,
-        public NombreCiudad,
-        public NombreDepartamento,
-        public NombrePais,
-        public Direccion,
-        public Ciudad,
-        public TipoDireccion,
-        public TipoDireccionLabel,
-        public Barrio,
-        public CorreoElectronico,
-        public Longitud,
-        public Latitud,
-        public ComoLlegar,
-        public Celular,
-        public Telefono
+        public idUbicacion? : String,
+        public nombreCiudad? : String,
+        public nombreDepartamento? : String,
+        public nombrePais? : String,
+        public direccion? : String,
+        public ciudad? : String,
+        public tipoDireccion? : String,
+        public tipoDireccionLabel? : String,
+        public barrio? : String,
+        public correoElectronico? : String,
+        public longitud? : String,
+        public latitud? : String,
+        public comoLlegar? : String,
+        public celular? : String,
+        public telefono? : String
     ) {}
 }
 
@@ -42,7 +40,7 @@ class ConstructorLocation implements EmployeesLocation {
 export class LocationDetailComponent implements OnInit   {
     @Input()
 
-    location: EmployeesLocation = new ConstructorLocation();
+    employeeLocation: EmployeesLocation = new ConstructorEmployeesLocation();
 
     constructor(
         private locationService: LocationService,
@@ -53,7 +51,7 @@ export class LocationDetailComponent implements OnInit   {
     ngOnInit(): void {
         let este$ = this.route.params
             .switchMap((params: Params) => this.locationService.get(+params['id']));
-        este$.subscribe(location => this.location = location);
+        este$.subscribe(location => this.employeeLocation = location);
     }
 
     goBack(): void {

@@ -58,10 +58,10 @@ const routes: Routes = [
   { path: 'employees-family-information/detail/:id', component: FamilyInformationDetailComponent },
 
   //employees-location
-  { path: 'employees-location', component: LocationComponent },
-  { path: 'employees-location/add', component: LocationAddComponent },
-  { path: 'employees-location/update/:id', component: LocationUpdateComponent },
-  { path: 'employees-location/detail/:id', component: LocationDetailComponent },
+  { path: 'employees-employeeLocation', component: LocationComponent },
+  { path: 'employees-employeeLocation/add', component: LocationAddComponent },
+  { path: 'employees-employeeLocation/update/:id', component: LocationUpdateComponent },
+  { path: 'employees-employeeLocation/detail/:id', component: LocationDetailComponent },
 ];
 
 @NgModule({

@@ -5,22 +5,23 @@ import { LocationService } from './location.service';
 import { Router, ActivatedRoute, Params }   from '@angular/router';
 import { Location } from '@angular/common';
 
-class ConstructorLocation implements EmployeesLocation {
+class ConstructorEmployeeLocation implements EmployeesLocation {
     constructor(
-        public idFamiliar?,
-        public tipoDeDocumento?,
-        public numeroDeDocumento?,
-        public primerNombre?,
-        public segundoNombre?,
-        public primerApellido?,
-        public segundoApellido?,
-        public fechadeNacimiento?,
-        public parentesco?,
-        public correoElectronico?,
-        public telefono1?,
-        public telefono2?,
-        public direccionDeResidencia?,
-        public convive?
+        public idUbicacion? : String,
+        public nombreCiudad? : String,
+        public nombreDepartamento? : String,
+        public nombrePais? : String,
+        public direccion? : String,
+        public ciudad? : String,
+        public tipoDireccion? : String,
+        public tipoDireccionLabel? : String,
+        public barrio? : String,
+        public correoElectronico? : String,
+        public longitud? : String,
+        public latitud? : String,
+        public comoLlegar? : String,
+        public celular? : String,
+        public telefono? : String
     ) {}
 }
 
@@ -31,7 +32,7 @@ class ConstructorLocation implements EmployeesLocation {
 })
 
 export class LocationUpdateComponent implements OnInit{
-    location: ConstructorLocation;
+    employeeLocation: ConstructorEmployeeLocation;
     titulo = 'Editanto Familiar';
 
     constructor(
@@ -44,7 +45,7 @@ export class LocationUpdateComponent implements OnInit{
     ngOnInit(): void {
         this.route.params
             .switchMap((params: Params) => this.locationService.get(+params['id']))
-            .subscribe(location => this.location = location);
+            .subscribe(location => this.employeeLocation = location);
     }
 
     save() {

@@ -14,20 +14,22 @@
 
                 <div class="row">
                     <div class="form-group col-md-4"
-                         [ngClass]="{ 'has-error': l.submitted && !TipoDireccionLabel.valid }">
-                        <label for="TipoDireccionLabel">Tipo de Dirección</label>
-                        <input type="text" class="form-control" name="TipoDireccionLabel"
-                               [(ngModel)]="employLocation.TipoDireccionLabel" #TipoDireccionLabel="ngModel"
+                         [ngClass]="{ 'has-error': l.submitted && !tipoDireccionLabel.valid }">
+                        <label for="tipoDireccionLabel">Tipo de Dirección</label>
+                        <input type="text" class="form-control" name="tipoDireccionLabel" id="tipoDireccionLabel"
+                               [(ngModel)]="employLocation.tipoDireccionLabel" #tipoDireccionLabel="ngModel"
                                required/>
-                        <div *ngIf="l.submitted && !TipoDireccionLabel.valid" class="help-block">Tipo de
+                        <div *ngIf="l.submitted && !tipoDireccionLabel.valid" class="help-block">Tipo de
                             dirección es requerido
                         </div>
                     </div>
                     <div class="form-group col-md-8"
                          [ngClass]="{ 'has-error': l.submitted && !ciudad.valid }">
                         <label for="ciudad">Ciudad</label>
-                        <p-autoComplete placeholder="Buscar ciudad" field="nombreCiudad" name="ciudad"
-                                        [(ngModel)]="employLocation.NombreCiudad" [suggestions]="cityList" (completeMethod)="citySearch($event)" (onSelect)="captureId($event)" ></p-autoComplete>
+                        <p-autoComplete placeholder="Buscar ciudad" field="nombreCiudad" name="ciudad" id="ciudad"
+                                        [(ngModel)]="employLocation.nombreCiudad" [suggestions]="cityList"
+                                        (completeMethod)="citySearch($event)" (onSelect)="captureId($event)" >
+                        </p-autoComplete>
                         <div *ngIf="l.submitted && !ciudad.valid" class="help-block">La ciudad es requerida</div>
                     </div>
 
@@ -35,31 +37,33 @@
 
                 <div class="row">
                     <div class="form-group col-md-3"
-                         [ngClass]="{ 'has-error': l.submitted && !ciudad.valid }>
-                        <label for="">Nomenclatura principal</label>
-                        <p-dropdown [options]="tipoNomenclaturaPrincipal" #tipoNomenclaturaPrincipal="ngModel" [(ngModel)]="principalNomenclature"></p-dropdown>
+                         [ngClass]="{ 'has-error': l.submitted && !ciudad.valid }">
+                        <label for="principalNomenclatureList">Nomenclatura principal</label>
+                        <p-dropdown [options]="principalNomenclatureList" #principalNomenclatureList="ngModel"
+                                    (onchange)="composeAddress()" [(ngModel)]="principalNomenclature" id="principalNomenclatureList"></p-dropdown>
+                        <div *ngIf="l.submitted && !principalNomenclatureList.valid" class="help-block">
+                            Nomenclatura principal es requerida
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="principalNomenclature"></label>
+                        <input type="text" class="form-control" id="principalNomenclature" name="principalNomenclature"
+                               (onchange)="composeAddress()" #principalNomenclature="ngModel" [(ngModel)]="principalNomenclature" required />
                         <div>Nomenclatura principal es requerida</div>
                     </div>
                     <div class="form-group col-md-3">
-                        <label for=""></label>
-                        <input type="text" class="form-control" name="" #="ngModel"
-                               required />
-                        <div> es requerido</div>
+                        <input type="text" class="form-control" name="numberOne" id="numberOne" #numberOne="ngModel"
+                               (onchange)="composeAddress()" [(ngModel)]="numberOne" required />
+                        <div *ngIf="l.submitted && !numberOne.valid" class="help-block">Número uno es requerido</div>
                     </div>
                     <div class="form-group col-md-3">
-                        <label for=""></label>
-                        <input type="text" class="form-control" name="" #="ngModel"
-                               required />
-                        <div> es requerido</div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for=""></label>
-                        <input type="text" class="form-control" name="" #="ngModel"
-                               required />
-                        <div> es requerido</div>
+                        <input type="text" class="form-control" name="numb" id="numberTwo" #numberTwo="ngModel"
+                               (onchange)="composeAddress()" [(ngModel)]="numberTwo" required />
+                        <div *ngIf="l.submitted && !numberTwo.valid" class="help-block">Número dos es requerido</div>
                     </div>
                 </div>
 
+                <div>{{finalAddress}}</div>
 
 
                 <div class="row form-footer-buttons">

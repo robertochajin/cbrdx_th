@@ -7,23 +7,23 @@ import {Router} from '@angular/router';
 import {EmployeesLocation} from './employees-location';
 import {LocationService} from './location.service';
 
-class ConstructorLocation implements EmployeesLocation {
+class ConstructorEmployeesLocation implements EmployeesLocation {
     constructor(
-        public idUbicacion,
-        public NombreCiudad,
-        public NombreDepartamento,
-        public NombrePais,
-        public Direccion,
-        public Ciudad,
-        public TipoDireccion,
-        public TipoDireccionLabel,
-        public Barrio,
-        public CorreoElectronico,
-        public Longitud,
-        public Latitud,
-        public ComoLlegar,
-        public Celular,
-        public Telefono
+        public idUbicacion? : String,
+        public nombreCiudad? : String,
+        public nombreDepartamento? : String,
+        public nombrePais? : String,
+        public direccion? : String,
+        public ciudad? : String,
+        public tipoDireccion? : String,
+        public tipoDireccionLabel? : String,
+        public barrio? : String,
+        public correoElectronico? : String,
+        public longitud? : String,
+        public latitud? : String,
+        public comoLlegar? : String,
+        public celular? : String,
+        public telefono? : String
     ) {}
 }
 
@@ -36,7 +36,7 @@ export class LocationComponent {
 
     displayDialog: boolean;
 
-    location: EmployeesLocation = new ConstructorLocation();
+    location: EmployeesLocation = new ConstructorEmployeesLocation();
 
     locations: EmployeesLocation[];
 
@@ -55,14 +55,14 @@ export class LocationComponent {
     }
 
     detail(l: EmployeesLocation) {
-        this.router.navigate(['employees-location/detail/'+l.idUbicacion]);
+        this.router.navigate(['employees-employeeLocation/detail/'+l.idUbicacion]);
     }
 
     add() {
-        this.router.navigate(['employees-location/add']);
+        this.router.navigate(['employees-employeeLocation/add']);
     }
 
     update(l: EmployeesLocation) {
-        this.router.navigate(['employees-location/update/'+l.idUbicacion]);
+        this.router.navigate(['employees-employeeLocation/update/'+l.idUbicacion]);
     }
 }
