@@ -12,6 +12,7 @@ import { SharedModule } from './shared/shared.module';
 import { FamilyInformationModule } from './employees-family-information/family-information.module';
 import { ReferencesModule } from './employees-references/references.module';
 import { AcademicEducationModule } from './employees-academic-education/academic-education.module';
+import { WorkExperienceModule } from './employees-work-experience/work-experience.module';
 
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers/index';
@@ -20,7 +21,13 @@ import { BaseRequestOptions } from '@angular/http';
 
 //CarsModule,
 @NgModule({
-  imports: [BrowserModule, HttpModule, AppRoutingModule, AboutModule, HomeModule, EmployeesModule,FamilyInformationModule,ReferencesModule,AcademicEducationModule, SharedModule.forRoot()],
+  imports: [BrowserModule, HttpModule, AppRoutingModule, AboutModule, HomeModule,
+    EmployeesModule,
+    FamilyInformationModule,
+    ReferencesModule,
+    AcademicEducationModule,
+    WorkExperienceModule,
+    SharedModule.forRoot()],
   declarations: [AppComponent],
   providers: [{
     provide: APP_BASE_HREF,

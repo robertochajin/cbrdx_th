@@ -30,6 +30,13 @@ import { NoFormalStudiesDetailComponent } from './employees-academic-education/n
 import { NoFormalStudiesAddComponent } from './employees-academic-education/no-formal-studies-add.component';
 import { NoFormalStudiesUpdateComponent } from './employees-academic-education/no-formal-studies-update.component';
 
+// Experiencia laboral
+import { WorkExperienceComponent } from './employees-work-experience/work-experience.component';
+import { WorkExperienceDetailComponent } from './employees-work-experience/work-experience-detail.component';
+import { WorkExperienceAddComponent } from './employees-work-experience/work-experience-add.component';
+import { WorkExperienceUpdateComponent } from './employees-work-experience/work-experience-update.component';
+
+
 const routes: Routes = [
   { path: '', redirectTo: '/employees', pathMatch: 'full' },
 
@@ -60,6 +67,12 @@ const routes: Routes = [
   { path: 'employees-no-formal-studies/add', component: NoFormalStudiesAddComponent },
   { path: 'employees-no-formal-studies/detail/:id', component: NoFormalStudiesDetailComponent },
   { path: 'employees-no-formal-studies/update/:id', component: NoFormalStudiesUpdateComponent }
+
+  //Experiencia laboral
+  { path: 'employees-work-experience', component: WorkExperienceComponent },
+  { path: 'employees-work-experience/add', component: WorkExperienceAddComponent },
+  { path: 'employees-work-experience/detail/:id', component: WorkExperienceDetailComponent },
+  { path: 'employees-work-experience/update/:id', component: WorkExperienceUpdateComponent },
 ];
 
 @NgModule({

@@ -2,29 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d95a76d-0932-4b62-a17b-5d60b31a9ae9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-add.component.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-detail.component.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-form.component.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-update.component.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies.component.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies.component.ts" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education-detail.component.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education-form.component.html" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-add.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-detail.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-form.component.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-update.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.module.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.service.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/dev/app/app-routing.module.js" afterPath="$PROJECT_DIR$/dist/dev/app/app-routing.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/dev/app/app.module.js" afterPath="$PROJECT_DIR$/dist/dev/app/app.module.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/dev/index.html" afterPath="$PROJECT_DIR$/dist/dev/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts" afterPath="$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/app-routing.module.ts" afterPath="$PROJECT_DIR$/src/client/app/app-routing.module.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education.module.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education.module.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education.service.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-add.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-add.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-detail.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-detail.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-form.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-form.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-update.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-update.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees/employees-detail.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees/employees-detail.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/app.module.ts" afterPath="$PROJECT_DIR$/src/client/app/app.module.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -45,46 +37,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="employees-detail.component.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/client/app/employees/employees-detail.component.html">
+      <file leaf-file-name="app-routing.module.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/app/app-routing.module.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="144" column="105" lean-forward="true" selection-start-line="144" selection-start-column="44" selection-end-line="144" selection-end-column="105" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="no-formal-studies.component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="25" column="15" lean-forward="false" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="43" />
+            <state relative-caret-position="340">
+              <caret line="74" column="40" lean-forward="false" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
               <folding>
-                <element signature="e#43#83#0" expanded="true" />
+                <element signature="e#2269#2365#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="formal-studies.component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies.component.ts">
+      <file leaf-file-name="work-experience.module.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.module.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="22" column="12" lean-forward="false" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="academic-education.module.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education.module.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="473">
-              <caret line="37" column="66" lean-forward="false" selection-start-line="37" selection-start-column="66" selection-end-line="37" selection-end-column="66" />
+            <state relative-caret-position="465">
+              <caret line="31" column="33" lean-forward="false" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="33" />
               <folding>
+                <element signature="n#!!doc" expanded="true" />
                 <element signature="e#43#89#0" expanded="true" />
-                <element signature="e#226#295#0" expanded="true" />
+                <element signature="e#226#297#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -103,10 +76,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>add</find>
-      <find>Colaboradores</find>
-      <find>HomeModule</find>
-      <find>Employees</find>
       <find>Colaborador</find>
       <find>colaboradores</find>
       <find>newEmployee</find>
@@ -114,8 +83,6 @@
       <find>EmployeesUpdateComponent</find>
       <find>colaborador</find>
       <find>formacion</find>
-      <find>Formalstudies</find>
-      <find>FormalStudies</find>
       <find>AcademicEducationModule</find>
       <find>mod</find>
       <find>reference</find>
@@ -133,13 +100,14 @@
       <find>objeto</find>
       <find>nombrecampo1</find>
       <find>nfstudies</find>
+      <find>formalstudies</find>
+      <find>formal-studies</find>
+      <find>Formalstudies</find>
+      <find>AcademicEducation</find>
+      <find>FormalStudies</find>
+      <find>academicEducation</find>
     </findStrings>
     <replaceStrings>
-      <replace>colaboradores</replace>
-      <replace>colaborador</replace>
-      <replace>segundoApellido</replace>
-      <replace>References</replace>
-      <replace>references</replace>
       <replace>empresa</replace>
       <replace>ciudad</replace>
       <replace>Teléfono</replace>
@@ -165,6 +133,11 @@
       <replace>Intensidad Horaria</replace>
       <replace>nfstudy</replace>
       <replace>Descripción</replace>
+      <replace>workexperience</replace>
+      <replace>work-experience</replace>
+      <replace>Workexperience</replace>
+      <replace>WorkExperience</replace>
+      <replace>workExperience</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -183,13 +156,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.html" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education-detail.component.html" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-references/references-detail.component.html" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-references/references.component.html" />
-        <option value="$PROJECT_DIR$/src/client/app/colaboradores/colaboradores.component.html" />
-        <option value="$PROJECT_DIR$/src/client/app/colaboradores/employees.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/colaboradores/employees.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/colaboradores/employees.service.ts" />
         <option value="$PROJECT_DIR$/src/client/app/colaboradores/employees-add.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/colaboradores/employees-detail.component.ts" />
@@ -214,8 +180,6 @@
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-detail.component.ts" />
         <option value="$PROJECT_DIR$/dist/dev/app/employees-academic-education/no-formal-studies-detail.component.js" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-detail.component.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/app-routing.module.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/app.module.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees/employees.module.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies.component.html" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies.ts" />
@@ -234,6 +198,15 @@
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education.module.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees/employees-detail.component.html" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.service.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-detail.component.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-add.component.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-update.component.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.module.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/app.module.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/app-routing.module.ts" />
       </list>
     </option>
   </component>
@@ -390,59 +363,33 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="employees-work-experience" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cbrdx_th" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cbrdx_th" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="employees-academic-education" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cbrdx_th" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cbrdx_th" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="employees" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cbrdx_th" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cbrdx_th" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="_helpers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -467,14 +414,15 @@
     <property name="SearchEverywhereHistoryKey" value="save as&#9;ACTION&#9;SaveAsTemplate&#10;keymap&#9;ACTION&#9;ChangeKeymap&#10;expand all&#9;ACTION&#9;ExpandAllRegions&#10;foldin&#9;ACTION&#9;FoldingGroup&#10;detail&#9;FILE&#9;file://D:/cbrdx/cbrdx_th/src/client/app/colaboradores/colaborador-detail.component.ts&#10;addcola&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\cbrdx\cbrdx_th\src\client\app\colaboradores" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/client/app" />
       <recent name="$PROJECT_DIR$/src/client/app/employees-academic-education" />
       <recent name="$PROJECT_DIR$/src/client/app/employees_family_information" />
       <recent name="D:\cbrdx\cbrdx_th\src\client\app\colaboradores" />
       <recent name="D:\cbrdx\cbrdx_th\src\client\assets" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\cbrdx\cbrdx_th\src\client\app\colaboradores" />
     </key>
   </component>
   <component name="RunManager">
@@ -566,7 +514,7 @@
       <workItem from="1487078502270" duration="19191000" />
       <workItem from="1487167705056" duration="18179000" />
       <workItem from="1487248242323" duration="18399000" />
-      <workItem from="1487337475701" duration="9547000" />
+      <workItem from="1487337475701" duration="12826000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'datatable-tracesmaker' into cbdx_th_observer_angel&#10;&#10;# Conflicts:&#10;#&#9;src/client/app/colaboradores/colaboradores.component.html&#10;">
       <created>1486676419265</created>
@@ -614,7 +562,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="178987000" />
+    <option name="totallyTimeSpent" value="182266000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -696,52 +644,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education.component.ts" />
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education-update.component.ts" />
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education.component.html" />
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-references/references-detail.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="26" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/dev/app/app-routing.module.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="29" column="39" lean-forward="false" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/dev/app/_helpers/fake-backend.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="225" column="58" lean-forward="false" selection-start-line="225" selection-start-column="58" selection-end-line="225" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/home/home.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_resource/angular-seed-master/src/client/app/app.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="15" lean-forward="true" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/app/employees/employees-routing.ts" />
     <entry file="file://$PROJECT_DIR$/src/client/app/employees/employees-update.component.html" />
     <entry file="file://$PROJECT_DIR$/src/client/app/home/home.component.html">
@@ -854,7 +756,7 @@
         <state relative-caret-position="184">
           <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding>
-            <element signature="e#45#102#0" expanded="true" />
+            <element signature="e#45#102#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -871,6 +773,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="106">
           <caret line="51" column="23" lean-forward="false" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -886,16 +789,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/app.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="22" column="144" lean-forward="false" selection-start-line="22" selection-start-column="144" selection-end-line="22" selection-end-column="144" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -916,16 +809,6 @@
             <element signature="n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
             <element signature="n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
             <element signature="n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/app-routing.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="55" column="78" lean-forward="false" selection-start-line="55" selection-start-column="53" selection-end-line="55" selection-end-column="78" />
-          <folding>
-            <element signature="e#1374#1471#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1070,16 +953,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="25" column="15" lean-forward="false" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="43" />
-          <folding>
-            <element signature="e#43#83#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -1102,8 +975,120 @@
     <entry file="file://$PROJECT_DIR$/src/client/app/employees/employees-detail.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
-          <caret line="144" column="105" lean-forward="true" selection-start-line="144" selection-start-column="44" selection-end-line="144" selection-end-column="105" />
+          <caret line="144" column="105" lean-forward="false" selection-start-line="144" selection-start-column="44" selection-end-line="144" selection-end-column="105" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="25" column="15" lean-forward="false" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="43" />
+          <folding>
+            <element signature="e#43#83#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="54" column="28" lean-forward="false" selection-start-line="54" selection-start-column="14" selection-end-line="54" selection-end-column="28" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#43#83#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="12" column="27" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="27" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-form.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="31" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-update.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="16" lean-forward="true" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#43#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-add.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="33" column="30" lean-forward="false" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#43#92#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-detail.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="29" column="30" lean-forward="false" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#45#102#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/app-routing.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="74" column="40" lean-forward="false" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+          <folding>
+            <element signature="e#2269#2365#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="14" column="83" lean-forward="false" selection-start-line="14" selection-start-column="83" selection-end-line="14" selection-end-column="83" />
+          <folding>
+            <element signature="e#920#975#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="33" lean-forward="false" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="33" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#43#89#0" expanded="true" />
+            <element signature="e#226#297#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
