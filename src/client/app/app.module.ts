@@ -21,7 +21,9 @@ import { BaseRequestOptions } from '@angular/http';
 
 //CarsModule,
 @NgModule({
-  imports: [BrowserModule, HttpModule, AppRoutingModule, AboutModule, HomeModule, EmployeesModule,FamilyInformationModule,ReferencesModule,AcademicEducationModule, LocationModule, SharedModule.forRoot()],
+  imports: [BrowserModule, HttpModule, AppRoutingModule, AboutModule, HomeModule, EmployeesModule,FamilyInformationModule,ReferencesModule,AcademicEducationModule,
+    LocationModule,
+    SharedModule.forRoot()],
   declarations: [AppComponent],
   providers: [{
     provide: APP_BASE_HREF,

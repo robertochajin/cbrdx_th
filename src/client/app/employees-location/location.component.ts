@@ -1,7 +1,7 @@
 /**
  * Created by Angel on 10/02/2017.
  */
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {EmployeesLocation} from './employees-location';
@@ -30,27 +30,24 @@ class ConstructorEmployeesLocation implements EmployeesLocation {
 @Component({
     moduleId: module.id,
     templateUrl: 'location.component.html',
-    selector: 'location'
+    selector: 'employees-locations'
 })
-export class LocationComponent {
+export class LocationComponent implements OnInit {
 
-    displayDialog: boolean;
-
-    location: EmployeesLocation = new ConstructorEmployeesLocation();
-
-    locations: EmployeesLocation[];
+    employeesLocation: EmployeesLocation = new ConstructorEmployeesLocation();
+    employeesLocations: EmployeesLocation[];
 
     constructor(private locationService: LocationService, private router: Router) {}
 
     ngOnInit() {
         this.locationService.getAll().subscribe(
-            locations => this.locations = locations
+            employeesLocations => this.employeesLocations = employeesLocations
         );
     }
 
     delete(l: EmployeesLocation) {
         this.locationService.delete(l);
-        this.locations.splice(this.locations.indexOf(l), 1);
+        this.employeesLocations.splice(this.employeesLocations.indexOf(l), 1);
         l = null;
     }
 

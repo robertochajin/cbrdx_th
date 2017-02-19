@@ -41,8 +41,8 @@ class ComplementaryNomenclature {
 
 export class LocationAddComponent {
     @Input()
-    employLocation: EmployeesLocation;
-    model: any = {};
+    employLocation: EmployeesLocation = new ConstructorEmployeesLocation();
+
     header = 'Agregando Ubicación';
 
     principalNomenclatureList = ['Carrera','Calle','Diagonal','Avenida'];
@@ -55,10 +55,11 @@ export class LocationAddComponent {
     suburb: String;
     latitude: number;
     longitude: number;
-    howToGetThere: String;
+    howToGetThere: String = '';
     finalAddress: String;
-
+    //
     cityList: any;
+    ciudad: any;
 
     constructor(private locationService: LocationService,
                 private router: Router,
@@ -71,8 +72,6 @@ export class LocationAddComponent {
             .subscribe(
                 data => {
                     this.location.back();
-                },
-                error => {
                 });
     }
 

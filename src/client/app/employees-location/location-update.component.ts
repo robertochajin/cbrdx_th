@@ -28,7 +28,7 @@ class ConstructorEmployeeLocation implements EmployeesLocation {
 @Component({
     moduleId: module.id,
     selector: 'family-information',
-    templateUrl: 'location-form.component.html',
+    template: 'location-form.component.html',
 })
 
 export class LocationUpdateComponent implements OnInit{

@@ -12,10 +12,12 @@ import { FamilyInformationComponent } from './employees-family-information/famil
 import { FamilyInformationAddComponent } from './employees-family-information/family-information-add.component';
 import { FamilyInformationUpdateComponent } from './employees-family-information/family-information-update.component';
 import { FamilyInformationDetailComponent } from './employees-family-information/family-information-detail.component';
+
+//employees location
 import { LocationComponent } from './employees-location/location.component';
-import { LocationUpdateComponent} from "./employees-location/location-update.component";
-import { LocationAddComponent } from "./employees-location/location-add.component";
-import { LocationDetailComponent } from "./employees-location/location-detail.component";
+import { LocationUpdateComponent } from './employees-location/location-update.component';
+import { LocationAddComponent } from './employees-location/location-add.component';
+import { LocationDetailComponent } from './employees-location/location-detail.component';
 
 //Información de referencia de employees
 import { ReferencesComponent } from './employees-references/references.component';
@@ -58,10 +60,10 @@ const routes: Routes = [
   { path: 'employees-family-information/detail/:id', component: FamilyInformationDetailComponent },
 
   //employees-location
-  { path: 'employees-employeeLocation', component: LocationComponent },
-  { path: 'employees-employeeLocation/add', component: LocationAddComponent },
-  { path: 'employees-employeeLocation/update/:id', component: LocationUpdateComponent },
-  { path: 'employees-employeeLocation/detail/:id', component: LocationDetailComponent },
+  { path: 'employees-location', component: LocationComponent },
+  { path: 'employees-location/add', component: LocationAddComponent },
+  { path: 'employees-location/update/:id', component: LocationUpdateComponent },
+  { path: 'employees-location/detail/:id', component: LocationDetailComponent },
 ];
 
 @NgModule({

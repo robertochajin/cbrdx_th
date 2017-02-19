@@ -27,9 +27,9 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
                     AutoCompleteModule,
                     DropdownModule],
     declarations: [LocationComponent,
-                    LocationDetailComponent,
-                    LocationAddComponent,
-                    LocationUpdateComponent
+                   LocationDetailComponent,
+                   LocationAddComponent,
+                   LocationUpdateComponent
                     ],
     bootstrap:    [LocationComponent],
     providers:    [LocationService],

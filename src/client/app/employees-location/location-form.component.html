@@ -1,4 +1,4 @@
-<div *ngIf="employLocation">
+<div >
     <div class="row">
         <div class="col-md-12">
             <div class="header">
@@ -14,12 +14,12 @@
 
                 <div class="row">
                     <div class="form-group col-md-4"
-                         [ngClass]="{ 'has-error': l.submitted && !tipoDireccionLabel.valid }">
+                         [ngClass]="{ 'has-error': l.submitted && !tipoDir.valid }">
                         <label for="tipoDireccionLabel">Tipo de Dirección</label>
                         <input type="text" class="form-control" name="tipoDireccionLabel" id="tipoDireccionLabel"
-                               [(ngModel)]="employLocation.tipoDireccionLabel" #tipoDireccionLabel="ngModel"
+                               [(ngModel)]="employLocation.tipoDireccionLabel" #tipoDir="ngModel"
                                required/>
-                        <div *ngIf="l.submitted && !tipoDireccionLabel.valid" class="help-block">Tipo de
+                        <div *ngIf="l.submitted && !tipoDir.valid" class="help-block">Tipo de
                             dirección es requerido
                         </div>
                     </div>
@@ -37,27 +37,27 @@
 
                 <div class="row">
                     <div class="form-group col-md-3"
-                         [ngClass]="{ 'has-error': l.submitted && !ciudad.valid }">
+                         [ngClass]="{ 'has-error': l.submitted }">
                         <label for="principalNomenclatureList">Nomenclatura principal</label>
-                        <p-dropdown [options]="principalNomenclatureList" #principalNomenclatureList="ngModel"
+                        <p-dropdown [options]="principalNomenclatureList"
                                     (onchange)="composeAddress()" [(ngModel)]="principalNomenclature" id="principalNomenclatureList"></p-dropdown>
-                        <div *ngIf="l.submitted && !principalNomenclatureList.valid" class="help-block">
+                        <div *ngIf="l.submitted " class="help-block">
                             Nomenclatura principal es requerida
                         </div>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="principalNomenclature"></label>
                         <input type="text" class="form-control" id="principalNomenclature" name="principalNomenclature"
-                               (onchange)="composeAddress()" #principalNomenclature="ngModel" [(ngModel)]="principalNomenclature" required />
+                               (onchange)="composeAddress()"  [(ngModel)]="principalNomenclature" required />
                         <div>Nomenclatura principal es requerida</div>
                     </div>
                     <div class="form-group col-md-3">
-                        <input type="text" class="form-control" name="numberOne" id="numberOne" #numberOne="ngModel"
+                        <input type="text" class="form-control" name="numberOne" id="numberOne"
                                (onchange)="composeAddress()" [(ngModel)]="numberOne" required />
                         <div *ngIf="l.submitted && !numberOne.valid" class="help-block">Número uno es requerido</div>
                     </div>
                     <div class="form-group col-md-3">
-                        <input type="text" class="form-control" name="numb" id="numberTwo" #numberTwo="ngModel"
+                        <input type="text" class="form-control" name="numb" id="numberTwo"
                                (onchange)="composeAddress()" [(ngModel)]="numberTwo" required />
                         <div *ngIf="l.submitted && !numberTwo.valid" class="help-block">Número dos es requerido</div>
                     </div>
