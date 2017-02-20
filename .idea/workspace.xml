@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6d95a76d-0932-4b62-a17b-5d60b31a9ae9" name="Default" comment="Experiencia laboral">
+    <list default="true" id="6d95a76d-0932-4b62-a17b-5d60b31a9ae9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/dev/index.html" afterPath="$PROJECT_DIR$/dist/dev/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts" afterPath="$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-add.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-add.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-detail.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-detail.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-form.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-form.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-update.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-update.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.service.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -531,7 +521,7 @@
       <workItem from="1487248242323" duration="18399000" />
       <workItem from="1487337475701" duration="12826000" />
       <workItem from="1487536334246" duration="105000" />
-      <workItem from="1487596157820" duration="5066000" />
+      <workItem from="1487596157820" duration="5114000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'datatable-tracesmaker' into cbdx_th_observer_angel&#10;&#10;# Conflicts:&#10;#&#9;src/client/app/colaboradores/colaboradores.component.html&#10;">
       <created>1486676419265</created>
@@ -575,11 +565,18 @@
       <option name="project" value="LOCAL" />
       <updated>1487265121958</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Experiencia laboral version 1">
+      <created>1487603666584</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1487603666584</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="187437000" />
+    <option name="totallyTimeSpent" value="187485000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -649,7 +646,8 @@
     <MESSAGE value="Merge branch 'datatable-tracesmaker' into cbdx_th_observer_angel&#10;&#10;# Conflicts:&#10;#&#9;src/client/app/colaboradores/colaboradores.component.html&#10;" />
     <MESSAGE value="Merge remote-tracking branch 'origin/cbrdx_th_ng2-translate_CarlosPineda' into cbdx_th_observer_angel&#10;&#10;# Conflicts:&#10;#&#9;src/client/app/app.module.ts&#10;#&#9;src/client/app/home/home.component.html&#10;" />
     <MESSAGE value="Arreglo Colaboradores a employees&#10;Historia de Estudios formales&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Arreglo Colaboradores a employees&#10;Historia de Estudios formales&#10;" />
+    <MESSAGE value="Experiencia laboral version 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Experiencia laboral version 1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
