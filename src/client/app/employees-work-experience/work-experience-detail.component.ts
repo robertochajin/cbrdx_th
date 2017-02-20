@@ -1,25 +1,33 @@
 /**
- * Created by Angel on 15/02/2017.
+ * Created by Angel on 17/02/2017.
  */
 
 
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
-import {WorkExperience} from './work-experience';
+import {Workexperience} from './work-experience';
 import {WorkExperienceService} from './work-experience.service';
 
 import 'rxjs/add/operator/switchMap';
 
-class constructorFormal implements WorkExperience {
+class constructorExperience implements constructorExperience {
     constructor(
-        public 	idEstudio?,
-        public 	titulo?,
+        public 	idExperiencia?,
+        public 	idColaborador?,
+        public  empresa?,
+        public  cargo?,
         public 	ingreso?,
         public 	finalizacion?,
         public 	ciudad?,
-        public 	institucion?,
-        public 	confirmada?
+        public  telefonoEmpresa?,
+        public  sectorEmpresa?,
+        public  subsectorEmpresa?,
+        public  nivelCargo?,
+        public  areaCargo?,
+        public  jefeInmediato?,
+        public  tiempoExperiencia?,
+        public  actualmente?,
     ) {}
 }
 
@@ -34,7 +42,7 @@ class constructorFormal implements WorkExperience {
 export class WorkExperienceDetailComponent implements OnInit   {
     @Input()
 
-    study: WorkExperience = new constructorFormal();
+    experience: Workexperience = new constructorExperience();
 
     constructor(
         private workExperienceService: WorkExperienceService,
@@ -45,7 +53,7 @@ export class WorkExperienceDetailComponent implements OnInit   {
     ngOnInit(): void {
         let este$ = this.route.params
             .switchMap((params: Params) => this.workExperienceService.get(+params['id']));
-        este$.subscribe(study => this.study = study);
+        este$.subscribe(experience => this.experience = experience);
     }
 
     goBack(): void {

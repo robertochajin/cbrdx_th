@@ -249,101 +249,64 @@ export let fakeBackendProvider = {
         let familys: any[] = JSON.parse(localStorage.getItem('familys'))
             || [
 
-                {"idFamiliar":"1",
-
+                {
+                    "idFamiliar":"1",
+                    'idColaborador'         : "1",
                     "tipoDeDocumento":"R.C",
-
                     "numeroDeDocumento":"1098154874",
-
                     "nombreCompleto":"Maria Alejandra Gomez Reatiga",
-
                     "primerNombre":"Maria",
-
                     "segundoNombre":"Alejandra",
-
                     "primerApellido":"Gomez",
-
                     "segundoApellido":"Reatiga",
-
                     "fechadeNacimiento":"1 de 2 de 2009",
-
                     "edad":"8",
-
                     "parentesco":"1",
-
                     "correoElectronico":"mariagomez@gmail.com",
-
                     "telefono1":"3214569874",
-
                     "telefono2":"6531887",
-
                     "direccionDeResidencia":"Calle 40 No. 21-56",
-
-                    "convive":"1"},
-
-                {"idFamiliar":"2",
-
+                    "convive":"1"
+                },
+                {
+                    "idFamiliar":"2",
+                    'idColaborador'         : "1",
                     "tipoDeDocumento":"R.C",
-
                     "numeroDeDocumento":"1098564821",
-
                     "nombreCompleto":"Catalina Mejia Lopez",
-
                     "primerNombre":"Catalina",
-
                     "segundoNombre":"",
-
                     "primerApellido":"Mejia",
-
                     "segundoApellido":"Lopez",
-
                     "fechadeNacimiento":"2 de 2 de 2009",
-
                     "edad":"8",
-
                     "parentesco":"2",
-
                     "correoElectronico":"catalinamejia@gmail.com",
-
                     "telefono1":"6598741",
-
                     "telefono2":"3159874563",
-
                     "direccionDeResidencia":"Calle 15 No. 25-15",
+                    "convive":"2"
+                },
 
-                    "convive":"2"},
-
-                {"idFamiliar":"3",
-
+                {
+                    "idFamiliar":"3",
+                    'idColaborador'         : "1",
                     "tipoDeDocumento":"R.C",
-
                     "numeroDeDocumento":"1098654987",
-
                     "nombreCompleto":"Jairo Jose Sepulveda Blanco",
-
                     "primerNombre":"Jairo",
-
                     "segundoNombre":"Jose",
-
                     "primerApellido":"Sepulveda",
-
                     "segundoApellido":"Blanco",
-
                     "fechadeNacimiento":"3 de 2 de 2009",
-
                     "edad":"8",
-
                     "parentesco":"3",
-
                     "correoElectronico":"josesepulveda@gmail.com",
-
                     "telefono1":"3",
-
                     "telefono2":"3",
-
                     "direccionDeResidencia":"3",
-
-                    "convive":"3"}
+                    "convive":"3"
+                }
 
             ];
 
@@ -353,87 +316,53 @@ export let fakeBackendProvider = {
                 {
 
                     'idReferencia'          : "1",
-
+                    'idColaborador'         : "1",
                     'tipodeReferencia'      : "Laboral",
-
                     'empresa'               : "Gobernación de Santander",
-
                     'nombreCompleto'        : "Maria Angelica Diaz Ramirez",
-
                     'primerNombre'          : "Maria",
-
                     'segundoNombre'         : "Angelica",
-
                     'primerApellido'        : "Diaz",
-
                     'segundoApellido'       : "Ramirez",
-
                     'ciudad'                : "Bucaramanga",
-
                     'telefono'              : "6597842",
-
                     'celular'               : "3215874125",
-
                     'numeroContacto'        : "3169874125",
-
                     'direccion'             : "Calle 5 No. 19-25"
                 },
 
                 {
 
                     'idReferencia'          : "2",
-
+                    'idColaborador'         : "1",
                     'tipodeReferencia'      : "Laboral",
-
                     'empresa'               : "ESSA",
-
                     'nombreCompleto'        : "Alexander Ramirez",
-
                     'primerNombre'          : "Alexander",
-
                     'segundoNombre'         : "",
-
                     'primerApellido'        : "Ramirez",
-
                     'segundoApellido'       : "",
-
                     'ciudad'                : "Bucaramanga",
-
                     'telefono'              : "6597841",
-
                     'celular'               : "3168945217",
-
                     'numeroContacto'        : "3159876541",
-
                     'direccion'             : "Cra 15 No. 26-87"
                 },
 
                 {
 
                     'idReferencia'          : "3",
-
                     'tipodeReferencia'      : "Familiar",
-
                     'empresa'               : "",
-
                     'nombreCompleto'        : "Katherine Gomez Velazquez",
-
                     'primerNombre'          : "Katherine",
-
                     'segundoNombre'         : "",
-
                     'primerApellido'        : "Gomez",
-
                     'segundoApellido'       : "Velazquez",
-
                     'ciudad'                : "Girón",
-
                     'telefono'              : "3159874158",
-
                     'celular'               : "3216987451",
-
                     'numeroContacto'        : "6597841",
-
                     'direccion'             : "Cra 2 No. 12-98"
                 }
             ];
@@ -444,6 +373,7 @@ export let fakeBackendProvider = {
                 {
 
                     'idEstudio'             : "1",
+                    'idColaborador'         : "1",
                     'titulo'                : "Laboral",
                     'ingreso'               : "2 de mayo del 1999",
                     'finalizacion'          : "2 de mayo del 2005",
@@ -451,7 +381,6 @@ export let fakeBackendProvider = {
                     'institucion'           : "uis",
                     'confirmada'            : "Si",
                     'confirmada'            : "Si",
-
                     'nivelEstudio'          :   "Universitario",
                     'areaEstudio'           :   "Ingenieria",
                     'otraInstitucion'       :   "",
@@ -461,43 +390,33 @@ export let fakeBackendProvider = {
                 {
 
                     'idEstudio'             : "2",
-
+                    'idColaborador'         : "1",
                     'titulo'                : "Abogado",
-
                     'ingreso'               : "2 de mayo del 1999",
-
                     'finalizacion'          : "2 de mayo del 2005",
-
                     'ciudad'                : "Bucaramanga",
-
                     'institucion'           : "UPB",
-
                     'confirmada'            : "Si",
-                    'nivelEstudio'          :   "Universitario",
-                    'areaEstudio'           :   "Ingenieria",
-                    'otraInstitucion'       :   "",
-                    'estadoEstudio'         :   "Culminado",
+                    'nivelEstudio'          : "Universitario",
+                    'areaEstudio'           : "Ingenieria",
+                    'otraInstitucion'       : "",
+                    'estadoEstudio'         : "Culminado",
                 },
 
                 {
 
                     'idEstudio'             : "3",
-
+                    'idColaborador'         : "1",
                     'titulo'                : "ingeniero",
-
                     'ingreso'               : "2 de mayo del 1999",
-
                     'finalizacion'          : "2 de mayo del 2005",
-
                     'ciudad'                : "Bucaramanga",
-
                     'institucion'           : "uis",
-
                     'confirmada'            : "Si",
-                    'nivelEstudio'          :   "Universitario",
-                    'areaEstudio'           :   "Ingenieria",
-                    'otraInstitucion'       :   "",
-                    'estadoEstudio'         :   "Culminado",
+                    'nivelEstudio'          : "Universitario",
+                    'areaEstudio'           : "Ingenieria",
+                    'otraInstitucion'       : "",
+                    'estadoEstudio'         : "Culminado",
                 }
             ];
 
@@ -507,19 +426,13 @@ export let fakeBackendProvider = {
                 {
 
                     'idEstudio'             : "1",
-
+                    'idColaborador'         : "1",
                     'titulo'                : "Laboral",
-
                     'ingreso'               : "2 de mayo del 1999",
-
                     'finalizacion'          : "2 de mayo del 2005",
-
                     'ciudad'                : "Bucaramanga",
-
                     'institucion'           : "uis",
-
                     'confirmada'            : "Si",
-
                     'tipoEstudio'           : "Tipo",
                     'otroTipoEstudio'       : " Otro tipo",
                     'intensidad'            : "8 Horas",
@@ -531,17 +444,12 @@ export let fakeBackendProvider = {
                 {
 
                     'idEstudio'             : "2",
-
+                    'idColaborador'         : "1",
                     'titulo'                : "Abogado",
-
                     'ingreso'               : "2 de mayo del 1999",
-
                     'finalizacion'          : "2 de mayo del 2005",
-
                     'ciudad'                : "Bucaramanga",
-
                     'institucion'           : "UPB",
-
                     'confirmada'            : "Si",
                     'tipoEstudio'           : "Tipo",
                     'otroTipoEstudio'       : " Otro tipo",
@@ -554,17 +462,12 @@ export let fakeBackendProvider = {
                 {
 
                     'idEstudio'             : "3",
-
+                    'idColaborador'         : "1",
                     'titulo'                : "ingeniero",
-
                     'ingreso'               : "2 de mayo del 1999",
-
                     'finalizacion'          : "2 de mayo del 2005",
-
                     'ciudad'                : "Bucaramanga",
-
                     'institucion'           : "uis",
-
                     'confirmada'            : "Si",
                     'tipoEstudio'           : "Tipo",
                     'otroTipoEstudio'       : " Otro tipo",
@@ -572,6 +475,62 @@ export let fakeBackendProvider = {
                     'descripcion'           : "Un cursito para aprender algo",
                     'areaEstudio'           : "Diplomado",
                     'estadoEstudio'         : " Terminado",
+                }
+            ];
+
+        let experiences: any[] = JSON.parse(localStorage.getItem('experience'))
+            || [
+
+                {
+                    'idExperiencia'             : "1",
+                    'idColaborador'         : "1",
+                    'empresa'               : "Crezcamos",
+                    'cargo'                 : "Gerente",
+                    'ingreso'               : "2 de mayo del 1999",
+                    'finalizacion'          : "2 de mayo del 2005",
+                    'ciudad'                : "Bucaramanga",
+                    'telefonoEmpresa'       : "uis",
+                    'sectorEmpresa'         : "Si",
+                    'subsectorEmpresa'      : "Tipo",
+                    'nivelCargo'            : " Otro tipo",
+                    'areaCargo'             : "8 Horas",
+                    'jefeInmediato'         : "Un cursito para aprender algo",
+                    'tiempoExperiencia'     : "Diplomado",
+                    'actualmente'           : "1"
+                },
+                {
+                    'idExperiencia'             : "2",
+                    'idColaborador'         : "1",
+                    'empresa'               : "Crezcamos",
+                    'cargo'                 : "Gerente",
+                    'ingreso'               : "2 de mayo del 1999",
+                    'finalizacion'          : "2 de mayo del 2005",
+                    'ciudad'                : "Bucaramanga",
+                    'telefonoEmpresa'       : "uis",
+                    'sectorEmpresa'         : "Si",
+                    'subsectorEmpresa'      : "Tipo",
+                    'nivelCargo'            : " Otro tipo",
+                    'areaCargo'             : "8 Horas",
+                    'jefeInmediato'         : "Un cursito para aprender algo",
+                    'tiempoExperiencia'     : "Diplomado",
+                    'actualmente'           : "1"
+                },
+                {
+                    'idExperiencia'             : "3",
+                    'idColaborador'         : "1",
+                    'empresa'               : "Crezcamos",
+                    'cargo'                 : "Gerente",
+                    'ingreso'               : "2 de mayo del 1999",
+                    'finalizacion'          : "2 de mayo del 2005",
+                    'ciudad'                : "Bucaramanga",
+                    'telefonoEmpresa'       : "uis",
+                    'sectorEmpresa'         : "Si",
+                    'subsectorEmpresa'      : "Tipo",
+                    'nivelCargo'            : " Otro tipo",
+                    'areaCargo'             : "8 Horas",
+                    'jefeInmediato'         : "Un cursito para aprender algo",
+                    'tiempoExperiencia'     : "Diplomado",
+                    'actualmente'           : "1"
                 }
             ];
 
@@ -1024,6 +983,97 @@ export let fakeBackendProvider = {
                     // respond 200 OK
                     connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
                 }
+
+ //Experiencia laboral
+
+                // obtiene todos
+                if (connection.request.url.endsWith('/api/workexperience') && connection.request.method === RequestMethod.Get) {
+
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        status: 200,
+                        body:{data:experiences}
+                    })));
+
+                }
+
+                // obtiene una  por el id
+                if (connection.request.url.match(/\/api\/workexperience\/\d+$/) && connection.request.method === RequestMethod.Get) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                    // find user by id in users array
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    let matched = experiences.filter(experience => { return experience.idExperiencia == id; });
+                    let experience = matched.length ? matched[0] : null;
+
+                    // respond 200 OK with user
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200, body:{data: experience} })));
+
+                    return;
+
+                }
+
+                // crea una  en el localstorage
+                if (connection.request.url.endsWith('/api/workexperience') && connection.request.method === RequestMethod.Post) {
+                    // get new user object from post body
+                    let news = JSON.parse(connection.request.getBody());
+
+                    // save new user
+                    news.idEstudio = nfstudies.length + 1;
+                    //news.nombreCompleto = news.primerNombre+' '+news.segundoNombre+' '+news.primerApellido+' '+news.segundoApellido;
+                    experiences.push(news);
+                    localStorage.setItem('experiences', JSON.stringify(experiences));
+
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+
+                    return;
+                }
+
+                // actualizar una
+                if (connection.request.url.match(/\/api\/workexperience\/\d+$/) && connection.request.method === RequestMethod.Put) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                    // find user by id in users array
+                    let news = JSON.parse(connection.request.getBody());
+                    //news.nombreCompleto = news.primerNombre+' '+news.segundoNombre+' '+news.primerApellido+' '+news.segundoApellido;
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    for (let i = 0; i < experiences.length; i++) {
+                        let col = experiences[i];
+                        if (col.idExperiencia == id) {
+                            // delete user
+                            experiences[i] = news;
+                            localStorage.setItem('experiences', JSON.stringify(experiences));
+                            break;
+                        }
+                    }
+
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+
+
+                    return;
+                }
+
+                // elimina una  del localstorage
+                if (connection.request.url.match(/\/api\/workexperience\/\d+$/) && connection.request.method === RequestMethod.Delete) {
+
+                    let urlParts = connection.request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+
+                    for (let i = 0; i < experiences.length; i++) {
+                        let col = experiences[i];
+                        if (col.idEstudio == id) {
+                            // delete user
+                            experiences.splice(i, 1);
+                            localStorage.setItem('experiences', JSON.stringify(experiences));
+                            break;
+                        }
+                    }
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+                }
+
+
             }, 500);
 
         });

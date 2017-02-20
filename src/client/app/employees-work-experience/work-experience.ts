@@ -2,15 +2,19 @@
  * Created by Angel on 15/02/2017.
  */
 export interface Workexperience {
-    idEstudio?;
-    titulo?;
+    idExperiencia?;
+    idColaborador?;
+    empresa?;
+    cargo?;
     ingreso?;
     finalizacion?;
     ciudad?;
-    institucion?;
-    confirmada?;
-    nivelEstudio?;
-    areaEstudio?;
-    otraInstitucion?;
-    estadoEstudio?;
+    telefonoEmpresa?;
+    sectorEmpresa?;
+    subsectorEmpresa?;
+    nivelCargo?;
+    areaCargo?;
+    jefeInmediato?;
+    tiempoExperiencia?;
+
 }

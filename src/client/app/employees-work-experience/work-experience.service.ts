@@ -3,9 +3,7 @@
  */
 import { Injectable } from '@angular/core';
 import {Http, Response} from '@angular/http';
-import {Noformalstudies} from './no-formal-studies';
-import {Formalstudies} from './work-experience';
-import {Noformalstudies} from './no-formal-studies';
+import {Workexperience} from './work-experience';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
@@ -18,21 +16,21 @@ export class WorkExperienceService {
         return this.http.get('/api/workexperience').map((res:Response) => res.json().data);
     }
 
-    add(f: Formalstudies) {
+    add(f: Workexperience) {
         return this.http.post('/api/workexperience',f).map((res:Response) => res.json());
     };
 
-    update(f: Formalstudies) {
-        return this.http.put('/api/workexperience/'+ f.idEstudio,f).map((res:Response) => res.json());
+    update(f: Workexperience) {
+        return this.http.put('/api/workexperience/'+ f.idExperiencia,f).map((res:Response) => res.json());
     }
 
     get(id: number) {
         const respuesta =  this.http.get('/api/workexperience/'+ id);
-        return respuesta.map((res:Response) => res.json().data as Formalstudies)
+        return respuesta.map((res:Response) => res.json().data as Workexperience)
     }
 
-    delete(f: Formalstudies) {
-        const respuesta =  this.http.delete('/api/workexperience/'+ f.idEstudio);
+    delete(f: Workexperience) {
+        const respuesta =  this.http.delete('/api/workexperience/'+ f.idExperiencia);
         return respuesta.map((res:Response) => res.json());
     }
 

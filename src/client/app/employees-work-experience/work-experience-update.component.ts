@@ -9,18 +9,25 @@ import { Location }                 from '@angular/common';
 import {Workexperience} from './work-experience';
 import {WorkExperienceService} from './work-experience.service';
 
-class constructorFormal implements Workexperience {
+class constructorExperience implements Workexperience {
     constructor(
-        public 	idEstudio?,
-        public 	titulo?,
+        public 	idExperiencia?,
+        public 	idColaborador?,
+        public  empresa?,
+        public  cargo?,
         public 	ingreso?,
         public 	finalizacion?,
         public 	ciudad?,
-        public 	institucion?,
-        public 	confirmada?,
+        public  telefonoEmpresa?,
+        public  sectorEmpresa?,
+        public  subsectorEmpresa?,
+        public  nivelCargo?,
+        public  areaCargo?,
+        public  jefeInmediato?,
+        public  tiempoExperiencia?,
+        public  actualmente?,
     ) {}
 }
-
 @Component({
     moduleId: module.id,
     selector: 'work-experience',
@@ -30,8 +37,8 @@ class constructorFormal implements Workexperience {
 export class WorkExperienceUpdateComponent implements OnInit{
 
 
-    fstudy: constructorFormal;
-    const header = 'Editando Estudio';
+    experience: constructorExperience;
+    const header = 'Editando Experiencia';
 
     constructor(
         private workExperienceService: WorkExperienceService,
@@ -43,12 +50,12 @@ export class WorkExperienceUpdateComponent implements OnInit{
     ngOnInit(): void {
         this.route.params
             .switchMap((params: Params) => this.workExperienceService.get(+params['id']))
-            .subscribe(fstudy => this.fstudy = fstudy);
+            .subscribe(experience => this.experience = experience);
     }
 
     save() {
 
-        this.workExperienceService.update(this.fstudy)
+        this.workExperienceService.update(this.experience)
             .subscribe(
                 data => {
                     this.location.back();

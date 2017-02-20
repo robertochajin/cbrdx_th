@@ -8,23 +8,24 @@ import {WorkExperienceService} from './work-experience.service';
 import { Location }                 from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 import {Observable} from 'rxjs/Observable';
-//import {date} from "gulp-util";
-//import {modelGroupProvider} from "@angular/forms/src/directives/ng_model_group";
-//import {SelectItem} from 'primeng/primeng';
 
-class constructorFormal implements Workexperience {
+class constructorExperience implements Workexperience {
     constructor(
-        public 	idEstudio?,
-        public 	titulo?,
+        public 	idExperiencia?,
+        public 	idColaborador?,
+        public  empresa?,
+        public  cargo?,
         public 	ingreso?,
         public 	finalizacion?,
         public 	ciudad?,
-        public 	institucion?,
-        public 	confirmada?,
-        public  nivelEstudio?,
-        public  areaEstudio?,
-        public  otraInstitucion?,
-        public  estadoEstudio?,
+        public  telefonoEmpresa?,
+        public  sectorEmpresa?,
+        public  subsectorEmpresa?,
+        public  nivelCargo?,
+        public  areaCargo?,
+        public  jefeInmediato?,
+        public  tiempoExperiencia?,
+        public  actualmente?,
     ) {}
 }
 
@@ -38,8 +39,8 @@ class constructorFormal implements Workexperience {
 export class WorkExperienceAddComponent {
     @Input()
 
-    fstudy: Workexperience = new constructorFormal();
-    const header = 'Agregando Estudio Formal';
+    experience: Workexperience = new constructorExperience();
+    const header = 'Agregando Experiencia';
 
     constructor (
         private academicEducationService: WorkExperienceService,
@@ -50,7 +51,7 @@ export class WorkExperienceAddComponent {
 
     save() {
 
-        this.academicEducationService.add(this.fstudy)
+        this.academicEducationService.add(this.experience)
             .subscribe(
                 data => {
                     this.location.back();

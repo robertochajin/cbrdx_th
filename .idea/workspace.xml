@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6d95a76d-0932-4b62-a17b-5d60b31a9ae9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-add.component.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-detail.component.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-form.component.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-update.component.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.module.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.service.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.ts" />
+    <list default="true" id="6d95a76d-0932-4b62-a17b-5d60b31a9ae9" name="Default" comment="Experiencia laboral">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/dev/app/app-routing.module.js" afterPath="$PROJECT_DIR$/dist/dev/app/app-routing.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/dev/app/app.module.js" afterPath="$PROJECT_DIR$/dist/dev/app/app.module.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/dev/index.html" afterPath="$PROJECT_DIR$/dist/dev/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/app-routing.module.ts" afterPath="$PROJECT_DIR$/src/client/app/app-routing.module.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/app.module.ts" afterPath="$PROJECT_DIR$/src/client/app/app.module.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts" afterPath="$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-add.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-add.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-detail.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-detail.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-form.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-form.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-update.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-update.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.service.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.service.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -37,28 +33,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="app-routing.module.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/app/app-routing.module.ts">
+      <file leaf-file-name="work-experience-update.component.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-update.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="74" column="40" lean-forward="false" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+            <state relative-caret-position="420">
+              <caret line="39" column="14" lean-forward="false" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="14" />
               <folding>
-                <element signature="e#2269#2365#0" expanded="true" />
+                <element signature="e#43#80#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="work-experience.module.ts" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.module.ts">
+      <file leaf-file-name="work-experience-detail.component.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-detail.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="33" lean-forward="false" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="33" />
+            <state relative-caret-position="337">
+              <caret line="48" column="25" lean-forward="false" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="e#43#89#0" expanded="true" />
-                <element signature="e#226#297#0" expanded="true" />
+                <element signature="e#45#102#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="work-experience-form.component.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-form.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="848">
+              <caret line="147" column="80" lean-forward="false" selection-start-line="147" selection-start-column="80" selection-end-line="147" selection-end-column="80" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="work-experience.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="31" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -76,8 +91,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Colaborador</find>
-      <find>colaboradores</find>
       <find>newEmployee</find>
       <find>employee</find>
       <find>EmployeesUpdateComponent</find>
@@ -88,17 +101,12 @@
       <find>reference</find>
       <find>new</find>
       <find>familyInformation</find>
-      <find>campo1</find>
       <find>&lt;/div&gt; AREA DE estudio</find>
       <find>NoFormalStudiesAddComponent</find>
-      <find>formal-studies-form.component.html</find>
       <find>formal-studies-form.component.html</find>
       <find>titulo</find>
       <find>study</find>
       <find>campo2</find>
-      <find>nombrecampo2</find>
-      <find>objeto</find>
-      <find>nombrecampo1</find>
       <find>nfstudies</find>
       <find>formalstudies</find>
       <find>formal-studies</find>
@@ -106,17 +114,15 @@
       <find>AcademicEducation</find>
       <find>FormalStudies</find>
       <find>academicEducation</find>
+      <find>nombreempresa</find>
+      <find>nombrecampo2</find>
+      <find>fstudy</find>
+      <find>campo1</find>
+      <find>nombrecampo1</find>
+      <find>objeto</find>
+      <find>Estado Estudio</find>
     </findStrings>
     <replaceStrings>
-      <replace>empresa</replace>
-      <replace>ciudad</replace>
-      <replace>Teléfono</replace>
-      <replace>Celular</replace>
-      <replace>direccion</replace>
-      <replace>reference</replace>
-      <replace>Employees</replace>
-      <replace>employees</replace>
-      <replace>Employee</replace>
       <replace>employee</replace>
       <replace>Noformalstudies</replace>
       <replace>NoFormalStudies</replace>
@@ -138,6 +144,15 @@
       <replace>Workexperience</replace>
       <replace>WorkExperience</replace>
       <replace>workExperience</replace>
+      <replace>empresa</replace>
+      <replace>Empresa</replace>
+      <replace>Teléfono Empresa</replace>
+      <replace>Sector Empresa</replace>
+      <replace>Cargo</replace>
+      <replace>areaCargo</replace>
+      <replace>Area Cargo</replace>
+      <replace>experience</replace>
+      <replace>Tiempo Experiencia</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -156,8 +171,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/client/app/colaboradores/employees.service.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/colaboradores/employees-add.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/colaboradores/employees-detail.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/colaboradores/employees-update.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/colaboradores/employees.module.ts" />
@@ -189,7 +202,6 @@
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-form.component.html" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-add.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-form.component.html" />
-        <option value="$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education.service.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-update.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies.ts" />
@@ -198,15 +210,18 @@
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education.module.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees/employees-detail.component.html" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.service.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-detail.component.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-add.component.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-update.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.module.ts" />
         <option value="$PROJECT_DIR$/src/client/app/app.module.ts" />
         <option value="$PROJECT_DIR$/src/client/app/app-routing.module.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.html" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-form.component.html" />
+        <option value="$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-add.component.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-update.component.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.service.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-detail.component.ts" />
       </list>
     </option>
   </component>
@@ -389,7 +404,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="employees-academic-education" />
+              <option name="myItemId" value="_helpers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -515,6 +530,8 @@
       <workItem from="1487167705056" duration="18179000" />
       <workItem from="1487248242323" duration="18399000" />
       <workItem from="1487337475701" duration="12826000" />
+      <workItem from="1487536334246" duration="105000" />
+      <workItem from="1487596157820" duration="5066000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'datatable-tracesmaker' into cbdx_th_observer_angel&#10;&#10;# Conflicts:&#10;#&#9;src/client/app/colaboradores/colaboradores.component.html&#10;">
       <created>1486676419265</created>
@@ -562,7 +579,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="182266000" />
+    <option name="totallyTimeSpent" value="187437000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -574,29 +591,29 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="719" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1280" height="719" extended-state="6" />
+    <editor active="false" />
     <layout>
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3515625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2859375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6138462" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6138462" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -614,7 +631,7 @@
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2859375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4430769" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6138462" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -639,13 +656,11 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="13" />
+      <option name="time" value="18" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees/employees-routing.ts" />
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees/employees-update.component.html" />
     <entry file="file://$PROJECT_DIR$/src/client/app/home/home.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -657,9 +672,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="233">
           <caret line="27" column="12" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="12" />
-          <folding>
-            <element signature="e#51#108#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -695,9 +707,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="353">
           <caret line="41" column="65" lean-forward="false" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="65" />
-          <folding>
-            <element signature="e#49#89#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -705,7 +714,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="19" column="44" lean-forward="false" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -755,9 +763,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
           <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding>
-            <element signature="e#45#102#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -765,23 +770,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="106">
           <caret line="56" column="23" lean-forward="false" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/dev/app/employees-academic-education/no-formal-studies-detail.component.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="51" column="23" lean-forward="false" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/dev/app/employees-academic-education/no-formal-studies-detail.component.js" />
     <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-detail.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="33" column="15" lean-forward="false" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -796,7 +792,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -804,12 +799,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="88" lean-forward="false" selection-start-line="11" selection-start-column="88" selection-end-line="11" selection-end-column="88" />
-          <folding>
-            <element signature="n#form#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -817,9 +806,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="159">
           <caret line="25" column="9" lean-forward="false" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="9" />
-          <folding>
-            <element signature="e#49#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -827,7 +813,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="33" column="17" lean-forward="false" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -835,9 +820,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="41" column="10" lean-forward="false" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
-          <folding>
-            <element signature="e#43#92#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -845,37 +827,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="57" column="25" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="941" column="73" lean-forward="false" selection-start-line="941" selection-start-column="58" selection-end-line="941" selection-end-column="73" />
-          <folding>
-            <element signature="e#501#5913#0" expanded="false" />
-            <element signature="e#6004#8345#0" expanded="false" />
-            <element signature="e#8442#10897#0" expanded="false" />
-            <element signature="e#10990#13138#0" expanded="false" />
-            <element signature="e#13233#15722#0" expanded="false" />
-            <element signature="e#16499#17279#0" expanded="false" />
-            <element signature="e#17455#18023#0" expanded="false" />
-            <element signature="e#18197#19309#0" expanded="false" />
-            <element signature="e#19500#20232#0" expanded="false" />
-            <element signature="e#20440#20646#0" expanded="false" />
-            <element signature="e#20843#21567#0" expanded="false" />
-            <element signature="e#21759#22501#0" expanded="false" />
-            <element signature="e#22691#23919#0" expanded="false" />
-            <element signature="e#24126#24844#0" expanded="false" />
-            <element signature="e#25025#25234#0" expanded="false" />
-            <element signature="e#25416#26156#0" expanded="false" />
-            <element signature="e#26340#27176#0" expanded="false" />
-            <element signature="e#27351#28676#0" expanded="false" />
-            <element signature="e#28869#29604#0" expanded="false" />
-            <element signature="e#29786#29993#0" expanded="false" />
-            <marker date="1487350693000" expanded="true" signature="20315:20646" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -883,7 +834,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="38" column="18" lean-forward="false" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -891,7 +841,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="50" column="47" lean-forward="false" selection-start-line="50" selection-start-column="47" selection-end-line="50" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -899,9 +848,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="25" column="30" lean-forward="false" selection-start-line="13" selection-start-column="8" selection-end-line="25" selection-end-column="30" />
-          <folding>
-            <element signature="e#43#92#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -909,7 +855,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="13" column="45" lean-forward="false" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -917,7 +862,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="13" column="19" lean-forward="false" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -925,7 +869,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="32" lean-forward="false" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -933,7 +876,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="10" lean-forward="false" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -941,7 +883,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
           <caret line="31" column="3" lean-forward="false" selection-start-line="31" selection-start-column="3" selection-end-line="31" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -949,7 +890,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="18" column="31" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -957,7 +897,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="22" column="12" lean-forward="false" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -965,10 +904,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="473">
           <caret line="37" column="66" lean-forward="false" selection-start-line="37" selection-start-column="66" selection-end-line="37" selection-end-column="66" />
-          <folding>
-            <element signature="e#43#89#0" expanded="true" />
-            <element signature="e#226#295#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -976,7 +911,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
           <caret line="144" column="105" lean-forward="false" selection-start-line="144" selection-start-column="44" selection-end-line="144" selection-end-column="105" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -984,86 +918,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="25" column="15" lean-forward="false" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="43" />
-          <folding>
-            <element signature="e#43#83#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="54" column="28" lean-forward="false" selection-start-line="54" selection-start-column="14" selection-end-line="54" selection-end-column="28" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#43#83#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="12" column="27" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="27" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-form.component.html">
+    <entry file="file://$PROJECT_DIR$/src/client/app/app.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="31" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-update.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="16" lean-forward="true" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#43#80#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-add.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="33" column="30" lean-forward="false" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#43#92#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-detail.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="29" column="30" lean-forward="false" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#45#102#0" expanded="true" />
+            <element signature="e#0#42#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/app/app-routing.module.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="74" column="40" lean-forward="false" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+        <state relative-caret-position="142">
+          <caret line="59" column="0" lean-forward="true" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
           <folding>
             <element signature="e#2269#2365#0" expanded="true" />
           </folding>
@@ -1072,10 +943,77 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/app/app.module.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="14" column="83" lean-forward="false" selection-start-line="14" selection-start-column="83" selection-end-line="14" selection-end-column="83" />
+        <state relative-caret-position="157">
+          <caret line="14" column="66" lean-forward="true" selection-start-line="14" selection-start-column="66" selection-end-line="14" selection-end-column="81" />
           <folding>
-            <element signature="e#920#975#0" expanded="true" />
+            <element signature="e#920#975#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-add.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="42" column="41" lean-forward="false" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
+          <folding>
+            <element signature="e#43#92#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="10" lean-forward="true" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="481" column="15" lean-forward="false" selection-start-line="481" selection-start-column="15" selection-end-line="481" selection-end-column="15" />
+          <folding>
+            <element signature="e#501#5913#0" expanded="false" />
+            <element signature="e#6004#8566#0" expanded="false" />
+            <element signature="e#8682#9540#0" expanded="false" />
+            <element signature="e#11277#13549#0" expanded="false" />
+            <element signature="e#13644#16267#0" expanded="false" />
+            <element signature="e#13663#14513#0" expanded="false" />
+            <element signature="e#16365#19140#0" expanded="false" />
+            <element signature="e#19917#20697#0" expanded="false" />
+            <element signature="e#20873#21441#0" expanded="false" />
+            <element signature="e#21615#22727#0" expanded="false" />
+            <element signature="e#22918#23650#0" expanded="false" />
+            <element signature="e#23858#24064#0" expanded="false" />
+            <element signature="e#24261#24985#0" expanded="false" />
+            <element signature="e#25177#25919#0" expanded="false" />
+            <element signature="e#26109#27337#0" expanded="false" />
+            <element signature="e#27544#28262#0" expanded="false" />
+            <element signature="e#28443#28652#0" expanded="false" />
+            <element signature="e#28834#29574#0" expanded="false" />
+            <element signature="e#29758#30594#0" expanded="false" />
+            <element signature="e#30769#32094#0" expanded="false" />
+            <element signature="e#32287#33022#0" expanded="false" />
+            <element signature="e#33204#33411#0" expanded="false" />
+            <element signature="e#33586#34307#0" expanded="false" />
+            <element signature="e#34484#35150#0" expanded="false" />
+            <element signature="e#35317#36475#0" expanded="false" />
+            <element signature="e#36660#37384#0" expanded="false" />
+            <element signature="e#37571#37779#0" expanded="false" />
+            <element signature="e#37956#38678#0" expanded="false" />
+            <element signature="e#38857#39526#0" expanded="false" />
+            <element signature="e#39695#40857#0" expanded="false" />
+            <element signature="e#41044#41772#0" expanded="false" />
+            <marker date="1487603126000" expanded="false" signature="8663:11184" ph="[...]" />
           </folding>
         </state>
       </provider>
@@ -1088,6 +1026,53 @@
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#43#89#0" expanded="true" />
             <element signature="e#226#297#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="31" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-form.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="848">
+          <caret line="147" column="80" lean-forward="false" selection-start-line="147" selection-start-column="80" selection-end-line="147" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="32" column="83" lean-forward="false" selection-start-line="32" selection-start-column="83" selection-end-line="32" selection-end-column="83" />
+          <folding>
+            <element signature="e#43#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-update.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="39" column="14" lean-forward="false" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="14" />
+          <folding>
+            <element signature="e#43#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-detail.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="48" column="25" lean-forward="false" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#45#102#0" expanded="true" />
           </folding>
         </state>
       </provider>
