@@ -9,6 +9,7 @@ import { Location }                 from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 import {Observable} from 'rxjs/Observable';
 
+//Costructor
 class constructorExperience implements Workexperience {
     constructor(
         public 	idExperiencia?,
@@ -40,7 +41,7 @@ export class WorkExperienceAddComponent {
     @Input()
 
     experience: Workexperience = new constructorExperience();
-    const header = 'Agregando Experiencia';
+    header:String = 'Agregando Experiencia';
 
     constructor (
         private academicEducationService: WorkExperienceService,

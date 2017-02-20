@@ -24,7 +24,7 @@ class constructorFormal implements Formalstudies {
         public  nivelEstudio?,
         public  areaEstudio?,
         public  otraInstitucion?,
-        public  estadoEstudio?,
+        public  estadoEstudio?
     ) {}
 }
 
@@ -39,7 +39,7 @@ export class FormalStudiesAddComponent {
     @Input()
 
     fstudy: Formalstudies = new constructorFormal();
-    const header = 'Agregando Estudio Formal';
+    header: string = 'Agregando Estudio Formal';
 
     constructor (
         private academicEducationService: AcademicEducationService,

@@ -7,6 +7,8 @@ import {Router} from '@angular/router';
 import {FamilyInformation} from './family-information';
 import {FamilyInformationService} from './family-information.service';
 import {Observable} from 'rxjs/Observable';
+import {ConfirmationService} from 'primeng/primeng';
+import {ConfirmationService} from 'primeng/primeng';
 
 class constructorFamilyInformation implements FamilyInformation {
     constructor(
@@ -32,17 +34,20 @@ class constructorFamilyInformation implements FamilyInformation {
 @Component({
     moduleId: module.id,
     templateUrl: 'family-information.component.html',
-    selector: 'familyinformation'
+    selector: 'familyinformation',
+    providers:  [ConfirmationService]
 })
 export class FamilyInformationComponent {
 
-    displayDialog: boolean;
-
     familyInformation: FamilyInformation = new constructorFamilyInformation();
-
+    dialogObjet: FamilyInformation = new constructorFamilyInformation();
     familyInformations: FamilyInformation[];
 
-    constructor(private familyInformationService: FamilyInformationService, private router: Router) {}
+    constructor(
+        private familyInformationService: FamilyInformationService,
+        private router: Router,
+        private confirmationService: ConfirmationService
+    ) {}
 
     ngOnInit() {
         this.familyInformationService.getAll().subscribe(
@@ -51,9 +56,20 @@ export class FamilyInformationComponent {
     }
 
     delete(f: FamilyInformation) {
-        this.familyInformationService.delete(f);
-        this.familyInformations.splice(this.familyInformations.indexOf(f), 1);
-        f = null;
+        this.dialogObjet = f;
+        this.confirmationService.confirm({
+            message: ` ¿Esta seguro que desea eliminar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+                this.familyInformationService.delete(this.dialogObjet);
+                this.familyInformations.splice(this.familyInformations.indexOf(this.dialogObjet), 1);
+                this.dialogObjet = null;
+            },
+            reject: () => {
+
+            }
+        });
     }
 
     detail(f: FamilyInformation) {

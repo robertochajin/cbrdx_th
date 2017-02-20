@@ -37,7 +37,7 @@ export class NoFormalStudiesUpdateComponent implements OnInit{
 
 
     nfstudy: constructorFormal;
-    const header = 'Editando Estudio';
+    header: string = 'Editando Estudio';
 
     constructor(
         private academicEducationService: AcademicEducationService,

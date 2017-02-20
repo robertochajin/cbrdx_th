@@ -35,7 +35,7 @@ export class FormalStudiesUpdateComponent implements OnInit{
 
 
     fstudy: constructorFormal;
-    const header = 'Editando Estudio';
+    header: string  = 'Editando Estudio';
 
     constructor(
         private academicEducationService: AcademicEducationService,

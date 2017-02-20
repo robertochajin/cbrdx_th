@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {Workexperience} from './work-experience';
 import {WorkExperienceService} from './work-experience.service';
 import {Observable} from 'rxjs/Observable';
+import {ConfirmationService} from 'primeng/primeng';
 
 class constructorExperience implements Workexperience {
     constructor(
@@ -23,14 +24,18 @@ class constructorExperience implements Workexperience {
 @Component({
     moduleId: module.id,
     templateUrl: 'work-experience.component.html',
-    selector: 'academic-education-formal'
+    selector: 'work-experience',
+    providers:  [ConfirmationService]
 })
 export class WorkExperienceComponent {
 
     experience: Workexperience = new constructorExperience();
+    dialogObjet: Workexperience = new constructorExperience();
     experiences: Workexperience[];
 
-    constructor(private workExperienceService: WorkExperienceService, private router: Router) {}
+    constructor(private workExperienceService: WorkExperienceService,
+                private router: Router,
+                private confirmationService: ConfirmationService) {}
 
     ngOnInit() {
         this.workExperienceService.getAll().subscribe(
@@ -39,9 +44,20 @@ export class WorkExperienceComponent {
     }
 
     delete(f: Workexperience) {
-        this.workExperienceService.delete(f);
-        this.experiences.splice(this.experiences.indexOf(f), 1);
-        f = null;
+        this.dialogObjet = f;
+        this.confirmationService.confirm({
+            message: ` ¿Esta seguro que lo desea eliminar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+                this.workExperienceService.delete( this.dialogObjet);
+                this.experiences.splice(this.experiences.indexOf( this.dialogObjet), 1);
+                this.dialogObjet = null;
+            },
+            reject: () => {
+                this.dialogObjet = null;
+            }
+        });
     }
 
     detail(f: Workexperience) {

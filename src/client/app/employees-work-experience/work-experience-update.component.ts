@@ -38,7 +38,7 @@ export class WorkExperienceUpdateComponent implements OnInit{
 
 
     experience: constructorExperience;
-    const header = 'Editando Experiencia';
+    header:String = 'Editando Experiencia';
 
     constructor(
         private workExperienceService: WorkExperienceService,
