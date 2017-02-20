@@ -521,7 +521,7 @@
       <workItem from="1487248242323" duration="18399000" />
       <workItem from="1487337475701" duration="12826000" />
       <workItem from="1487536334246" duration="105000" />
-      <workItem from="1487596157820" duration="5114000" />
+      <workItem from="1487596157820" duration="5121000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'datatable-tracesmaker' into cbdx_th_observer_angel&#10;&#10;# Conflicts:&#10;#&#9;src/client/app/colaboradores/colaboradores.component.html&#10;">
       <created>1486676419265</created>
@@ -572,11 +572,18 @@
       <option name="project" value="LOCAL" />
       <updated>1487603666584</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Experiencia laboral version 1">
+      <created>1487603681622</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1487603681622</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="187485000" />
+    <option name="totallyTimeSpent" value="187492000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
