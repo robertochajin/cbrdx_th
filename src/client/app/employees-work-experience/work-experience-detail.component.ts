@@ -35,7 +35,7 @@ class constructorExperience implements constructorExperience {
 @Component({
     moduleId: module.id,
     selector: 'work-experience',
-    template: 'work-experience-detail.component.html',
+    templateUrl: 'work-experience-detail.component.html',
 })
 
 

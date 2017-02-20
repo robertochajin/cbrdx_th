@@ -18,6 +18,10 @@ class constructorFormal implements Formalstudies {
         public 	ciudad?,
         public 	institucion?,
         public 	confirmada?,
+        public  nivelEstudio?,
+        public  areaEstudio?,
+        public  otraInstitucion?,
+        public  estadoEstudio?,
     ) {}
 }
 

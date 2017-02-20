@@ -16,5 +16,6 @@ export interface Workexperience {
     areaCargo?;
     jefeInmediato?;
     tiempoExperiencia?;
+    actualmente?;
 
 }

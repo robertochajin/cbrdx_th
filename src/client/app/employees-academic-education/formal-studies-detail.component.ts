@@ -19,7 +19,11 @@ class constructorFormal implements Formalstudies {
         public 	finalizacion?,
         public 	ciudad?,
         public 	institucion?,
-        public 	confirmada?
+        public 	confirmada?,
+        public  nivelEstudio?,
+        public  areaEstudio?,
+        public  otraInstitucion?,
+        public  estadoEstudio?,
     ) {}
 }
 
@@ -27,7 +31,7 @@ class constructorFormal implements Formalstudies {
 @Component({
     moduleId: module.id,
     selector: 'academic-education',
-    template: 'formal-studies-detail.component.html',
+    templateUrl: 'formal-studies-detail.component.html',
 })
 
 
