@@ -40,4 +40,8 @@ export class FamilyInformationService {
         return this.http.get('/api/document-types').map((res:Response) => res.json().data);
     }
 
+    getRelationship()  {
+        return this.http.get('/api/relationship').map((res:Response) => res.json().data);
+    }
+
 }

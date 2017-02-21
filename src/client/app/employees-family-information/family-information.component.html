@@ -1,8 +1,7 @@
-<h3 class="first">Información familiar</h3>
 <div>
     <div class="row datable-header">
         <div class="col-md-6 col-xs-12 datatable-header-add">
-            <button type="button" pButton icon="fa-plus" (click)="add()" label="Nuevo Colaborador"></button>
+            <button type="button" pButton icon="fa-plus" (click)="add()" label="Nuevo Familiar"></button>
         </div>
         <div class="col-md-6 col-xs-12 datatable-header-search" >
             <i class="fa fa-search"></i>
@@ -10,7 +9,7 @@
         </div>
     </div>
     <p-dataTable [value]="familyInformations"   [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-        <p-column field="primerNombre" header="Nombre" [sortable]="true"></p-column>
+        <p-column field="nombreCompleto" header="Nombre" [sortable]="true"></p-column>
         <p-column field="tipoDeDocumento" header="Tipo de documento" [sortable]="true"></p-column>
         <p-column field="numeroDeDocumento" header="Número de documento" [sortable]="true"></p-column>
         <p-column field="parentesco" header="Parentesco" [sortable]="true"></p-column>

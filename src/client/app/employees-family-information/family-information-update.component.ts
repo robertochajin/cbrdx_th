@@ -1,5 +1,6 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import {FamilyInformation} from './family-information';
 import {FamilyInformationService} from './family-information.service';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
@@ -13,10 +14,13 @@ import {SelectItem} from 'primeng/primeng';
 })
 
 export class FamilyInformationUpdateComponent implements OnInit{
-    familyInformation: constructorFamilyInformation;
+    @Input()
+    familyInformation:  FamilyInformation = new constructorFamilyInformation;
     header: string = 'Editanto Familiar';
     documentTypes: SelectItem[] = [];
+    relationship: SelectItem[] = [];
     selectedDocument: any;
+    selectedRelationship: any;
 
     constructor(
         private familyInformationService: FamilyInformationService,
@@ -27,6 +31,9 @@ export class FamilyInformationUpdateComponent implements OnInit{
     ngOnInit(): void {
         this.familyInformationService.getDocumentType().subscribe(
             documentTypes => this.documentTypes = documentTypes
+        );
+        this.familyInformationService.getRelationship().subscribe(
+            relationship => this.relationship = relationship
         );
         this.route.params
             .switchMap((params: Params) => this.familyInformationService.get(+params['id']))

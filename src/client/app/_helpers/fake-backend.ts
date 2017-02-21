@@ -1085,6 +1085,27 @@ export let fakeBackendProvider = {
 
                 }
 
+ //Parenetesco
+
+                // obtiene todos
+                if (connection.request.url.endsWith('/api/relationship') && connection.request.method === RequestMethod.Get) {
+
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        status: 200,
+                        body:{data:[
+                            {'id' : null, 'label' : "Seleccione"},
+                            {'id' : "1", 'label' : "Padre"},
+                            {'id' : "2", 'label' : "Madre"},
+                            {'id' : "3", 'label' : "Hermano"},
+                            {'id' : "4", 'label' : "Primo"},
+                            {'id' : "5", 'label' : "Amigo"},
+                            {'id' : "6", 'label' : "abuelo"},
+                        ]
+                        }
+                    })));
+
+                }
+
             }, 500);
 
         });
