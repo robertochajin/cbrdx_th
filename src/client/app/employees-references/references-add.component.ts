@@ -12,6 +12,7 @@ import {date} from "gulp-util";
 import {modelGroupProvider} from "@angular/forms/src/directives/ng_model_group";
 import {SelectItem} from 'primeng/primeng';
 
+//Constructor
 class constructorReferences implements References {
     constructor(
         public  idReferencia?,
@@ -40,7 +41,7 @@ export class ReferencesAddComponent {
 
     reference: References = new constructorReferences();
     model: any = {};
-    const titulo = 'Agregando Referencia';
+    header: string = 'Agregando Referencia';
 
     cities: SelectItem[];
 

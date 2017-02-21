@@ -9,4 +9,10 @@ export interface Noformalstudies {
     ciudad?;
     institucion?;
     confirmada?;
+    tipoEstudio?;
+    otroTipoEstudio?;
+    intensidad?;
+    descripcion?;
+    areaEstudio?;
+    estadoEstudio?;
 }

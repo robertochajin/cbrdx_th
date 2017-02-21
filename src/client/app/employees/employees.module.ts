@@ -12,14 +12,20 @@ import { EmployeesDetailComponent }  from './employees-detail.component';
 import { EmployeesAddComponent }  from './employees-add.component';
 import { EmployeesUpdateComponent }  from './employees-update.component';
 import { EmployeesService } from './employees.service';
-import { InputTextModule,DataTableModule,ButtonModule,DialogModule } from 'primeng/primeng';
+import { InputTextModule,DataTableModule,ButtonModule,DialogModule,ConfirmDialogModule } from 'primeng/primeng';
 
 import {FamilyInformationModule} from './../employees-family-information/family-information.module';
 import {ReferencesModule} from './../employees-references/references.module';
 import {AcademicEducationModule} from './../employees-academic-education/academic-education.module';
+import {WorkExperienceModule} from './../employees-work-experience/work-experience.module';
 
 @NgModule({
-    imports:      [CommonModule,InputTextModule,FormsModule,DataTableModule,ButtonModule,DialogModule,FamilyInformationModule,ReferencesModule,AcademicEducationModule],
+    imports:      [CommonModule,InputTextModule,FormsModule,DataTableModule,ButtonModule,DialogModule,ConfirmDialogModule,
+                    FamilyInformationModule,
+                    ReferencesModule,
+                    AcademicEducationModule,
+                    WorkExperienceModule
+                    ],
     declarations: [EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent],
     bootstrap:    [EmployeesComponent],
     providers:    [EmployeesService],

@@ -18,24 +18,26 @@ class constructorFormal implements Formalstudies {
         public 	ciudad?,
         public 	institucion?,
         public 	confirmada?,
-        public  nivelEstudio?,
-        public  areaEstudio?,
-        public  otraInstitucion?,
-        public  estadoEstudio?,
+        public 	tipoEstudio?,
+        public 	otroTipoEstudio?,
+        public 	intensidad?,
+        public 	descripcion?,
+        public 	areaEstudio?,
+        public 	estadoEstudio?
     ) {}
 }
 
 @Component({
     moduleId: module.id,
     selector: 'academic-education-noformal',
-    templateUrl: 'formal-studies-form.component.html',
+    templateUrl: 'no-formal-studies-form.component.html',
 })
 
-export class FormalStudiesUpdateComponent implements OnInit{
+export class NoFormalStudiesUpdateComponent implements OnInit{
 
 
-    fstudy: constructorFormal;
-    header: string  = 'Editando Estudio';
+    nfstudy: constructorFormal;
+    header: string = 'Editando Estudio';
 
     constructor(
         private academicEducationService: AcademicEducationService,
@@ -46,13 +48,13 @@ export class FormalStudiesUpdateComponent implements OnInit{
     ) {}
     ngOnInit(): void {
         this.route.params
-            .switchMap((params: Params) => this.academicEducationService.getFormal(+params['id']))
-            .subscribe(fstudy => this.fstudy = fstudy);
+            .switchMap((params: Params) => this.academicEducationService.getNoFormal(+params['id']))
+            .subscribe(nfstudy => this.nfstudy = nfstudy);
     }
 
     save() {
 
-        this.academicEducationService.updateFormal(this.fstudy)
+        this.academicEducationService.updateFormal(this.nfstudy)
             .subscribe(
                 data => {
                     this.location.back();

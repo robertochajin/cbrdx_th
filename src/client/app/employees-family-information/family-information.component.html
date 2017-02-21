@@ -10,7 +10,7 @@
         </div>
     </div>
     <p-dataTable [value]="familyInformations"   [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-        <p-column field="nombreCompleto" header="Nombre" [sortable]="true"></p-column>
+        <p-column field="primerNombre" header="Nombre" [sortable]="true"></p-column>
         <p-column field="tipoDeDocumento" header="Tipo de documento" [sortable]="true"></p-column>
         <p-column field="numeroDeDocumento" header="Número de documento" [sortable]="true"></p-column>
         <p-column field="parentesco" header="Parentesco" [sortable]="true"></p-column>
@@ -23,9 +23,10 @@
                     <button type="button"  class="ui-button ui-button-success btn" icon="fa-pencil"
                             pButton (click)="update(family)"></button>
                     <button type="button"  class="ui-button ui-button-danger btn" icon="fa-trash"
-                            pButton (click)="delete(family)" ></button>
+                            pButton (click)="del(family)" ></button>
                 </div>
             </template>
         </p-column>
     </p-dataTable>
 </div>
+<p-confirmDialog width="400"></p-confirmDialog>
