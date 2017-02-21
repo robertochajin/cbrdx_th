@@ -1,6 +1,7 @@
 /**
  * Created by Angel on 10/02/2017.
  */
+
 import { Injectable } from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {FamilyInformation} from './family-information';
@@ -33,6 +34,10 @@ export class FamilyInformationService {
     delete(f: FamilyInformation) {
         const respuesta =  this.http.delete('/api/employees-family-information/'+ f.idFamiliar);
         return respuesta.map((res:Response) => res.json());
+    }
+
+    getDocumentType()  {
+        return this.http.get('/api/document-types').map((res:Response) => res.json().data);
     }
 
 }

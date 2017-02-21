@@ -252,15 +252,13 @@ export let fakeBackendProvider = {
                 {
                     "idFamiliar":"1",
                     'idColaborador'         : "1",
-                    "tipoDeDocumento":"R.C",
+                    "tipoDeDocumento":"1",
                     "numeroDeDocumento":"1098154874",
-                    "nombreCompleto":"Maria Alejandra Gomez Reatiga",
                     "primerNombre":"Maria",
                     "segundoNombre":"Alejandra",
                     "primerApellido":"Gomez",
                     "segundoApellido":"Reatiga",
                     "fechadeNacimiento":"1 de 2 de 2009",
-                    "edad":"8",
                     "parentesco":"1",
                     "correoElectronico":"mariagomez@gmail.com",
                     "telefono1":"3214569874",
@@ -271,15 +269,13 @@ export let fakeBackendProvider = {
                 {
                     "idFamiliar":"2",
                     'idColaborador'         : "1",
-                    "tipoDeDocumento":"R.C",
+                    "tipoDeDocumento":"2",
                     "numeroDeDocumento":"1098564821",
-                    "nombreCompleto":"Catalina Mejia Lopez",
                     "primerNombre":"Catalina",
                     "segundoNombre":"",
                     "primerApellido":"Mejia",
                     "segundoApellido":"Lopez",
                     "fechadeNacimiento":"2 de 2 de 2009",
-                    "edad":"8",
                     "parentesco":"2",
                     "correoElectronico":"catalinamejia@gmail.com",
                     "telefono1":"6598741",
@@ -291,15 +287,13 @@ export let fakeBackendProvider = {
                 {
                     "idFamiliar":"3",
                     'idColaborador'         : "1",
-                    "tipoDeDocumento":"R.C",
+                    "tipoDeDocumento":"3",
                     "numeroDeDocumento":"1098654987",
-                    "nombreCompleto":"Jairo Jose Sepulveda Blanco",
                     "primerNombre":"Jairo",
                     "segundoNombre":"Jose",
                     "primerApellido":"Sepulveda",
                     "segundoApellido":"Blanco",
                     "fechadeNacimiento":"3 de 2 de 2009",
-                    "edad":"8",
                     "parentesco":"3",
                     "correoElectronico":"josesepulveda@gmail.com",
                     "telefono1":"3",
@@ -1073,6 +1067,23 @@ export let fakeBackendProvider = {
                     connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
                 }
 
+//Tipos documentos
+
+                // obtiene todos
+                if (connection.request.url.endsWith('/api/document-types') && connection.request.method === RequestMethod.Get) {
+
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        status: 200,
+                        body:{data:[
+                            {'id' : null, 'label' : "Seleccione"},
+                            {'id' : "1", 'label' : "Cédula de Ciudadania"},
+                            {'id' : "2", 'label' : "Cédula de Extrangeria"},
+                            {'id' : "3", 'label' : "Tarjeta de identidad"},
+                            ]
+                        }
+                    })));
+
+                }
 
             }, 500);
 

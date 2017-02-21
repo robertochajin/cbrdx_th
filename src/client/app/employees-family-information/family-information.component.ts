@@ -6,30 +6,8 @@ import {Router} from '@angular/router';
 
 import {FamilyInformation} from './family-information';
 import {FamilyInformationService} from './family-information.service';
-import {Observable} from 'rxjs/Observable';
+import {constructorFamilyInformation} from './family-information.construct';
 import {ConfirmationService} from 'primeng/primeng';
-import {ConfirmationService} from 'primeng/primeng';
-
-class constructorFamilyInformation implements FamilyInformation {
-    constructor(
-        public idFamiliar?,
-        public tipoDeDocumento?,
-        public nombreCompleto?,
-        public numeroDeDocumento?,
-        public primerNombre?,
-        public segundoNombre?,
-        public primerApellido?,
-        public segundoApellido?,
-        public fechadeNacimiento?,
-        public edad?,
-        public parentesco?,
-        public correoElectronico?,
-        public telefono1?,
-        public telefono2?,
-        public direccionDeResidencia?,
-        public convive?
-    ) {}
-}
 
 @Component({
     moduleId: module.id,
@@ -55,7 +33,7 @@ export class FamilyInformationComponent {
         );
     }
 
-    delete(f: FamilyInformation) {
+    del(f: FamilyInformation) {
         this.dialogObjet = f;
         this.confirmationService.confirm({
             message: ` ¿Esta seguro que desea eliminar?`,
@@ -73,14 +51,14 @@ export class FamilyInformationComponent {
     }
 
     detail(f: FamilyInformation) {
-        this.router.navigate(['employees-family-information/detail/'+f.idFamiliar]);
+        return this.router.navigate(['employees-family-information/detail/'+f.idFamiliar]);
     }
 
     add() {
-        this.router.navigate(['employees-family-information/add']);
+        return this.router.navigate(['employees-family-information/add']);
     }
 
     update(f: FamilyInformation) {
-        this.router.navigate(['employees-family-information/update/'+f.idFamiliar]);
+        return this.router.navigate(['employees-family-information/update/'+f.idFamiliar]);
     }
 }

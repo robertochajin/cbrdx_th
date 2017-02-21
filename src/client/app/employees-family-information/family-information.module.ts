@@ -12,11 +12,11 @@ import { FamilyInformationDetailComponent }  from './family-information-detail.c
 import { FamilyInformationAddComponent }  from './family-information-add.component';
 import { FamilyInformationUpdateComponent }  from './family-information-update.component';
 import { FamilyInformationService } from './family-information.service';
-import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,ConfirmDialogModule } from 'primeng/primeng';
+import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule,ConfirmDialogModule,CheckboxModule } from 'primeng/primeng';
 
 
 @NgModule({
-    imports:      [CommonModule,InputTextModule,FormsModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,ConfirmDialogModule],
+    imports:      [CommonModule,InputTextModule,FormsModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule, ConfirmDialogModule,CheckboxModule],
     declarations: [FamilyInformationComponent,
                     FamilyInformationDetailComponent,
                     FamilyInformationAddComponent,
