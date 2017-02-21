@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {Noformalstudies} from './no-formal-studies';
 import {AcademicEducationService} from './academic-education.service';
 import {Observable} from 'rxjs/Observable';
+import {ConfirmationService} from 'primeng/primeng';
 
 class constructorNoFormal implements Noformalstudies {
     constructor(
@@ -23,14 +24,19 @@ class constructorNoFormal implements Noformalstudies {
 @Component({
     moduleId: module.id,
     templateUrl: 'no-formal-studies.component.html',
-    selector: 'academic-education-no-formal'
+    selector: 'academic-education-no-formal',
+    providers:  [ConfirmationService]
 })
 export class NoFormalStudiesComponent {
 
     study: Noformalstudies = new constructorNoFormal();
+    dialogObjet: Noformalstudies = new constructorNoFormal();
     nfstudies: Noformalstudies[];
 
-    constructor(private academicEducationService: AcademicEducationService, private router: Router) {}
+    constructor(private academicEducationService: AcademicEducationService,
+                private router: Router,
+                private confirmationService: ConfirmationService
+    ) {}
 
     ngOnInit() {
         this.academicEducationService.getAllNoFormal().subscribe(
@@ -40,9 +46,20 @@ export class NoFormalStudiesComponent {
     }
 
     delete(f: Noformalstudies) {
-        this.academicEducationService.deleteNoFormal(f);
-        this.nfstudies.splice(this.nfstudies.indexOf(f), 1);
-        f = null;
+        this.dialogObjet = f;
+        this.confirmationService.confirm({
+            message: ` ¿Esta seguro que lo desea eliminar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+                this.academicEducationService.deleteNoFormal( this.dialogObjet);
+                this.nfstudies.splice(this.nfstudies.indexOf( this.dialogObjet), 1);
+                this.dialogObjet = null;
+            },
+            reject: () => {
+                this.dialogObjet = null;
+            }
+        });
     }
 
     detail(f: Noformalstudies) {

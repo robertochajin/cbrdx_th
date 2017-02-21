@@ -19,7 +19,13 @@ class constructorFormal implements Formalstudies {
         public 	finalizacion?,
         public 	ciudad?,
         public 	institucion?,
-        public 	confirmada?
+        public 	confirmada?,
+        public 	tipoEstudio?,
+        public 	otroTipoEstudio?,
+        public 	intensidad?,
+        public 	descripcion?,
+        public 	areaEstudio?,
+        public 	estadoEstudio?
     ) {}
 }
 
@@ -27,7 +33,7 @@ class constructorFormal implements Formalstudies {
 @Component({
     moduleId: module.id,
     selector: 'academic-education',
-    template: 'no-formal-studies-detail.component.html',
+    templateUrl: 'no-formal-studies-detail.component.html',
 })
 
 
@@ -44,7 +50,7 @@ export class NoFormalStudiesDetailComponent implements OnInit   {
 
     ngOnInit(): void {
         let este$ = this.route.params
-            .switchMap((params: Params) => this.academicEducationService.getFormal(+params['id']));
+            .switchMap((params: Params) => this.academicEducationService.getNoFormal(+params['id']));
         este$.subscribe(study => this.study = study);
     }
 

@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {Formalstudies} from './formal-studies';
 import {AcademicEducationService} from './academic-education.service';
 import {Observable} from 'rxjs/Observable';
+import {ConfirmationService} from 'primeng/primeng';
 
 class constructorFormal implements Formalstudies {
     constructor(
@@ -23,14 +24,20 @@ class constructorFormal implements Formalstudies {
 @Component({
     moduleId: module.id,
     templateUrl: 'formal-studies.component.html',
-    selector: 'academic-education-formal'
+    selector: 'academic-education-formal',
+    providers:  [ConfirmationService]
 })
 export class FormalStudiesComponent {
 
     fstudy: Formalstudies = new constructorFormal();
+    dialogObjet: Formalstudies = new constructorFormal();
     fstudies: Formalstudies[];
 
-    constructor(private academicEducationService: AcademicEducationService, private router: Router) {}
+    constructor(
+        private academicEducationService: AcademicEducationService,
+        private router: Router,
+        private confirmationService: ConfirmationService
+    ) {}
 
     ngOnInit() {
         this.academicEducationService.getAllFormal().subscribe(
@@ -39,9 +46,20 @@ export class FormalStudiesComponent {
     }
 
     delete(f: Formalstudies) {
-        this.academicEducationService.deleteFormal(f);
-        this.fstudies.splice(this.fstudies.indexOf(f), 1);
-        f = null;
+        this.dialogObjet = f;
+        this.confirmationService.confirm({
+            message: ` ¿Esta seguro que lo desea eliminar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+                this.academicEducationService.deleteFormal( this.dialogObjet);
+                this.fstudies.splice(this.fstudies.indexOf( this.dialogObjet), 1);
+                this.dialogObjet = null;
+            },
+            reject: () => {
+                this.dialogObjet = null;
+            }
+        });
     }
 
     detail(f: Formalstudies) {

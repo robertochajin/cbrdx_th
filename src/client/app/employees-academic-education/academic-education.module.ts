@@ -18,11 +18,14 @@ import { NoFormalStudiesAddComponent }  from './no-formal-studies-add.component'
 import { NoFormalStudiesUpdateComponent }  from './no-formal-studies-update.component';
 
 import { AcademicEducationService } from './academic-education.service';
-import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule } from 'primeng/primeng';
+import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule,ConfirmDialogModule } from 'primeng/primeng';
 
 
 @NgModule({
-    imports:      [CommonModule,InputTextModule,FormsModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule],
+    imports:      [ CommonModule,InputTextModule,FormsModule,DataTableModule,
+                    ButtonModule,DialogModule,InputTextareaModule,CalendarModule,
+                    DropdownModule,ConfirmDialogModule
+                    ],
     declarations: [
                     FormalStudiesComponent,
                     FormalStudiesAddComponent,

@@ -1,11 +1,13 @@
 /**
  * Created by TracesMaker on 06/02/2017.
+ * Update by Angel on 20/02/2017
  */
 import {Component} from '@angular/core';
 import {Employee} from './employees';
 import {EmployeesService} from './employees.service';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
+import {ConfirmationService} from 'primeng/primeng';
 
 class constructorEmployee implements Employee {
     constructor(public idColaborador?, public numeroDocumento?, public primerNombre?, public fechaDesde?, public cargoActual?) {
@@ -15,15 +17,21 @@ class constructorEmployee implements Employee {
 @Component({
     moduleId: module.id,
     templateUrl: 'employees.component.html',
-    selector: 'employees'
+    selector: 'employees',
+    providers:  [ConfirmationService]
 })
 export class EmployeesComponent {
 
     employee: Employee = new constructorEmployee();
+    dialogObjet: Employee = new constructorEmployee();
 
     employees: Employee[];
 
-    constructor(private employeesService: EmployeesService, private router: Router) {
+    constructor(
+        private employeesService: EmployeesService,
+        private router: Router,
+        private confirmationService: ConfirmationService
+        ) {
     }
 
     ngOnInit() {
@@ -33,9 +41,20 @@ export class EmployeesComponent {
     }
 
     delete(employee: Employee) {
-        this.employeesService.delete(employee);
-        this.employees.splice(this.employees.indexOf(employee), 1);
-        employee = null;
+        this.dialogObjet = employee;
+        this.confirmationService.confirm({
+            message: ` ¿Esta seguro que lo desea eliminar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+                this.employeesService.delete(this.dialogObjet);
+                this.employees.splice(this.employees.indexOf(this.dialogObjet), 1);
+                this.dialogObjet = null;
+            },
+            reject: () => {
+                this.dialogObjet = null;
+            }
+        });
     }
 
     detail(f: Employee) {

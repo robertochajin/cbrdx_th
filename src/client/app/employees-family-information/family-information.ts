@@ -2,21 +2,20 @@
  * Created by Angel on 10/02/2017.
  */
 export interface FamilyInformation {
-    idFamiliar?;
-    tipoDeDocumento?;
-    numeroDeDocumento?;
-    nombreCompleto?;
-    primerNombre?;
-    segundoNombre?;
-    primerApellido?;
-    segundoApellido?;
-    fechadeNacimiento?;
-    edad?;
-    parentesco?;
-    correoElectronico?;
-    telefono1?;
-    telefono2?;
-    direccionDeResidencia?;
-    convive?;
+    idFamiliar: number;
+    idColaborador: number;
+    tipoDeDocumento: number;
+    numeroDeDocumento: string;
+    primerNombre: string;
+    segundoNombre: string;
+    primerApellido: string;
+    segundoApellido: string;
+    fechadeNacimiento: string;
+    parentesco?: number;
+    correoElectronico?: string;
+    telefono1?: string;
+    telefono2?: string;
+    direccionDeResidencia?: string;
+    convive?: number;
 }
 

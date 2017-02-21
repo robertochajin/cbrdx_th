@@ -7,13 +7,14 @@ import {Router} from '@angular/router';
 import {References} from './references';
 import {ReferencesService} from './references.service';
 import {Observable} from 'rxjs/Observable';
+import {ConfirmationService} from 'primeng/primeng';
 
 class constructorReferences implements References {
     constructor(
         public  idReferencia?,
         public	tipodeReferencia?,
         public	empresa?,
-        public  nombreCompleto
+        public  nombreCompleto?,
         public	numeroContacto?,
         public	ciudad?
     ) {}
@@ -22,15 +23,21 @@ class constructorReferences implements References {
 @Component({
     moduleId: module.id,
     templateUrl: 'references.component.html',
-    selector: 'references'
+    selector: 'references',
+    providers:  [ConfirmationService]
 })
 export class ReferencesComponent {
 
     reference: References = new constructorReferences();
+    dialogObjet: References = new constructorReferences();
 
     references: References[];
 
-    constructor(private referencesService: ReferencesService, private router: Router) {}
+    constructor(
+                private referencesService: ReferencesService,
+                private router: Router,
+                private confirmationService: ConfirmationService
+                ) {}
 
     ngOnInit() {
         this.referencesService.getAll().subscribe(
@@ -39,9 +46,21 @@ export class ReferencesComponent {
     }
 
     delete(f: References) {
-        this.referencesService.delete(f);
-        this.references.splice(this.references.indexOf(f), 1);
-        f = null;
+
+        this.dialogObjet = f;
+        this.confirmationService.confirm({
+            message: ` ¿Esta seguro que lo desea eliminar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+                this.referencesService.delete(this.dialogObjet);
+                this.references.splice(this.references.indexOf(f), 1);
+                this.dialogObjet = null;
+            },
+            reject: () => {
+                this.dialogObjet = null;
+            }
+        });
     }
 
     detail(f: References) {

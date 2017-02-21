@@ -30,36 +30,49 @@ import { NoFormalStudiesDetailComponent } from './employees-academic-education/n
 import { NoFormalStudiesAddComponent } from './employees-academic-education/no-formal-studies-add.component';
 import { NoFormalStudiesUpdateComponent } from './employees-academic-education/no-formal-studies-update.component';
 
-const routes: Routes = [
-  { path: '', redirectTo: '/employees', pathMatch: 'full' },
+// Experiencia laboral
+import { WorkExperienceComponent } from './employees-work-experience/work-experience.component';
+import { WorkExperienceDetailComponent } from './employees-work-experience/work-experience-detail.component';
+import { WorkExperienceAddComponent } from './employees-work-experience/work-experience-add.component';
+import { WorkExperienceUpdateComponent } from './employees-work-experience/work-experience-update.component';
+
+
+const routes = [
+  {path: '', redirectTo: '/employees', pathMatch: 'full'},
 
   //historia de employees
-  { path: 'employees', component: EmployeesComponent },
-  { path: 'employees/add', component: EmployeesAddComponent },
-  { path: 'employees/detail/:id', component: EmployeesDetailComponent },
-  { path: 'employees/update/:id', component: EmployeesUpdateComponent },
+  {path: 'employees', component: EmployeesComponent},
+  {path: 'employees/add', component: EmployeesAddComponent},
+  {path: 'employees/detail/:id', component: EmployeesDetailComponent},
+  {path: 'employees/update/:id', component: EmployeesUpdateComponent},
 
   //Información familiar de employees
-  { path: 'employees-family-information', component: FamilyInformationComponent },
-  { path: 'employees-family-information/add', component: FamilyInformationAddComponent },
-  { path: 'employees-family-information/update/:id', component: FamilyInformationUpdateComponent },
-  { path: 'employees-family-information/detail/:id', component: FamilyInformationDetailComponent },
+  {path: 'employees-family-information', component: FamilyInformationComponent},
+  {path: 'employees-family-information/add', component: FamilyInformationAddComponent},
+  {path: 'employees-family-information/update/:id', component: FamilyInformationUpdateComponent},
+  {path: 'employees-family-information/detail/:id', component: FamilyInformationDetailComponent},
 
   //Información de referencia de employees
-  { path: 'employees-references', component: ReferencesComponent },
-  { path: 'employees-references/add', component: ReferencesAddComponent },
-  { path: 'employees-references/detail/:id', component: ReferencesDetailComponent },
-  { path: 'employees-references/update/:id', component: ReferencesUpdateComponent },
+  {path: 'employees-references', component: ReferencesComponent},
+  {path: 'employees-references/add', component: ReferencesAddComponent},
+  {path: 'employees-references/detail/:id', component: ReferencesDetailComponent},
+  {path: 'employees-references/update/:id', component: ReferencesUpdateComponent},
 
   //Información de formacion academica
-  { path: 'employees-formal-studies', component: FormalStudiesComponent },
-  { path: 'employees-formal-studies/add', component: FormalStudiesAddComponent },
-  { path: 'employees-formal-studies/detail/:id', component: FormalStudiesDetailComponent },
-  { path: 'employees-formal-studies/update/:id', component: FormalStudiesUpdateComponent },
-  { path: 'employees-no-formal-studies', component: NoFormalStudiesComponent },
-  { path: 'employees-no-formal-studies/add', component: NoFormalStudiesAddComponent },
-  { path: 'employees-no-formal-studies/detail/:id', component: NoFormalStudiesDetailComponent },
-  { path: 'employees-no-formal-studies/update/:id', component: NoFormalStudiesUpdateComponent }
+  {path: 'employees-formal-studies', component: FormalStudiesComponent},
+  {path: 'employees-formal-studies/add', component: FormalStudiesAddComponent},
+  {path: 'employees-formal-studies/detail/:id', component: FormalStudiesDetailComponent},
+  {path: 'employees-formal-studies/update/:id', component: FormalStudiesUpdateComponent},
+  {path: 'employees-no-formal-studies', component: NoFormalStudiesComponent},
+  {path: 'employees-no-formal-studies/add', component: NoFormalStudiesAddComponent},
+  {path: 'employees-no-formal-studies/detail/:id', component: NoFormalStudiesDetailComponent},
+  {path: 'employees-no-formal-studies/update/:id', component: NoFormalStudiesUpdateComponent},
+
+  //Experiencia laboral
+  {path: 'employees-work-experience', component: WorkExperienceComponent},
+  {path: 'employees-work-experience/add', component: WorkExperienceAddComponent},
+  {path: 'employees-work-experience/detail/:id', component: WorkExperienceDetailComponent},
+  {path: 'employees-work-experience/update/:id', component: WorkExperienceUpdateComponent},
 ];
 
 @NgModule({

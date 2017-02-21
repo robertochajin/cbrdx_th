@@ -18,6 +18,10 @@ class constructorFormal implements Formalstudies {
         public 	ciudad?,
         public 	institucion?,
         public 	confirmada?,
+        public  nivelEstudio?,
+        public  areaEstudio?,
+        public  otraInstitucion?,
+        public  estadoEstudio?,
     ) {}
 }
 
@@ -31,7 +35,7 @@ export class FormalStudiesUpdateComponent implements OnInit{
 
 
     fstudy: constructorFormal;
-    const header = 'Editando Estudio';
+    header: string  = 'Editando Estudio';
 
     constructor(
         private academicEducationService: AcademicEducationService,
