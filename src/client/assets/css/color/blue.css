@@ -80,3 +80,24 @@
     opacity: 1;
     text-decoration: none;
 }
+
+
+/**
+------------------ CSS Botones ------------------------
+ */
+.ui-button:enabled:hover {
+    background-color: #29ABE2!important;
+}
+/**
+---------------- Paginador --------------------
+ */
+body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active:hover {
+    background-color: #29ABE2!important;
+}
+/**
+---------------- focus input text ---------------------
+ */
+body .ui-inputtext.ui-state-focus,
+body .ui-inputtext:focus {
+    border: 1px solid: #29ABE2;
+}

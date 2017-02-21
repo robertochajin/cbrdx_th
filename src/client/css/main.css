@@ -2859,7 +2859,7 @@ textarea.form-control {
 
     .off-canvas-sidebar .sidebar-wrapper {
         position: relative;
-        z-index: 3;
+        z-index: 2;
         overflow-y: scroll;
         height: 100%;
         box-shadow: inset 1px 0 0 0 #ddd
@@ -3698,12 +3698,20 @@ a.cancelar:hover {
     text-align: center;
     white-space: nowrap;
 }
+.datatable-col-action button{
 
+}
 /**
 ------------------------ Edit PrimeNG CSS ------------------------------
  */
 .ui-datatable-header {
     overflow: auto;
+}
+body .ui-button,
+body .ui-state-active,
+body .ui-state-highlight{
+    background-color: #5d5d5d!important;
+    border: 1px #ccc solid!important;
 }
 
 /**
