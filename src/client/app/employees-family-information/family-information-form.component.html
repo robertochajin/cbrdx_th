@@ -21,7 +21,7 @@
                         <div class="form-group col-md-6"
                              [ngClass]="{ 'has-error': f.submitted && !numeroDeDocumento.valid }">
                             <label for="numeroDeDocumento">Número de documento</label>
-                            <input id="numeroDeDocumento" type="text" class="form-control" name="primerNombre"
+                            <input id="numeroDeDocumento" type="text" class="form-control" name="numeroDeDocumento"
                                    [(ngModel)]="familyInformation.numeroDeDocumento"
                                    #numeroDeDocumento="ngModel" required/>
                             <div *ngIf="f.submitted && !numeroDeDocumento.valid" class="help-block">Número de
@@ -64,7 +64,7 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="fechadeNacimiento">Fecha de Nacimiento</label>
-                            <p-calendar id="fechadeNacimiento" name="fechadeNacimiento" class="form-control" [showIcon]="true"
+                            <p-calendar id="fechadeNacimiento" name="fechadeNacimiento" class="form-control" [showIcon]="true" #fechadeNacimiento="ngModel"  [dataType]="date" (onSelect)="onSelectMethod($event)"
                                     [(ngModel)]="familyInformation.fechadeNacimiento"></p-calendar>
 
                         </div>

@@ -252,14 +252,14 @@ export let fakeBackendProvider = {
                 {
                     "idFamiliar":"1",
                     'idColaborador'         : "1",
-                    "tipoDeDocumento":"1",
+                    "tipoDeDocumento": {'value' : "1", 'label' : "Cédula de Ciudadania"},
                     "numeroDeDocumento":"1098154874",
                     "primerNombre":"Maria",
                     "segundoNombre":"Alejandra",
                     "primerApellido":"Gomez",
                     "segundoApellido":"Reatiga",
-                    "fechadeNacimiento":"1 de 2 de 2009",
-                    "parentesco":"1",
+                    "fechadeNacimiento":"01/02/2009",
+                    "parentesco":{'value' : "2", 'label' : "Madre"},
                     "correoElectronico":"mariagomez@gmail.com",
                     "telefono1":"3214569874",
                     "telefono2":"6531887",
@@ -269,14 +269,14 @@ export let fakeBackendProvider = {
                 {
                     "idFamiliar":"2",
                     'idColaborador'         : "1",
-                    "tipoDeDocumento":"2",
+                    "tipoDeDocumento": {'value' : "1", 'label' : "Cédula de Ciudadania"},
                     "numeroDeDocumento":"1098564821",
                     "primerNombre":"Catalina",
                     "segundoNombre":"",
                     "primerApellido":"Mejia",
                     "segundoApellido":"Lopez",
-                    "fechadeNacimiento":"2 de 2 de 2009",
-                    "parentesco":"2",
+                    "fechadeNacimiento":"01/02/2009",
+                    "parentesco":{'value' : "2", 'label' : "Madre"},
                     "correoElectronico":"catalinamejia@gmail.com",
                     "telefono1":"6598741",
                     "telefono2":"3159874563",
@@ -287,14 +287,14 @@ export let fakeBackendProvider = {
                 {
                     "idFamiliar":"3",
                     'idColaborador'         : "1",
-                    "tipoDeDocumento":"3",
+                    "tipoDeDocumento": {'value' : "1", 'label' : "Cédula de Ciudadania"},
                     "numeroDeDocumento":"1098654987",
                     "primerNombre":"Jairo",
                     "segundoNombre":"Jose",
                     "primerApellido":"Sepulveda",
                     "segundoApellido":"Blanco",
-                    "fechadeNacimiento":"3 de 2 de 2009",
-                    "parentesco":"3",
+                    "fechadeNacimiento":"01/02/2009",
+                    "parentesco":{'value' : "1", 'label' : "Padre"},
                     "correoElectronico":"josesepulveda@gmail.com",
                     "telefono1":"3",
                     "telefono2":"3",
@@ -1075,10 +1075,10 @@ export let fakeBackendProvider = {
                     connection.mockRespond(new Response(new ResponseOptions({
                         status: 200,
                         body:{data:[
-                            {'id' : null, 'label' : "Seleccione"},
-                            {'id' : "1", 'label' : "Cédula de Ciudadania"},
-                            {'id' : "2", 'label' : "Cédula de Extrangeria"},
-                            {'id' : "3", 'label' : "Tarjeta de identidad"},
+                            {'value' : null, 'label' : "Seleccione"},
+                            {'value' : "1", 'label' : "Cédula de Ciudadania"},
+                            {'value' : "2", 'label' : "Cédula de Extrangeria"},
+                            {'value' : "3", 'label' : "Tarjeta de identidad"},
                             ]
                         }
                     })));
@@ -1093,13 +1093,13 @@ export let fakeBackendProvider = {
                     connection.mockRespond(new Response(new ResponseOptions({
                         status: 200,
                         body:{data:[
-                            {'id' : null, 'label' : "Seleccione"},
-                            {'id' : "1", 'label' : "Padre"},
-                            {'id' : "2", 'label' : "Madre"},
-                            {'id' : "3", 'label' : "Hermano"},
-                            {'id' : "4", 'label' : "Primo"},
-                            {'id' : "5", 'label' : "Amigo"},
-                            {'id' : "6", 'label' : "abuelo"},
+                            {'value' : null, 'label' : "Seleccione"},
+                            {'value' : "1", 'label' : "Padre"},
+                            {'value' : "2", 'label' : "Madre"},
+                            {'value' : "3", 'label' : "Hermano"},
+                            {'value' : "4", 'label' : "Primo"},
+                            {'value' : "5", 'label' : "Amigo"},
+                            {'value' : "6", 'label' : "abuelo"},
                         ]
                         }
                     })));

@@ -29,7 +29,19 @@ export class FamilyInformationComponent {
 
     ngOnInit() {
         this.familyInformationService.getAll().subscribe(
-            familyInformations => this.familyInformations = familyInformations
+            familyInformations => {
+                this.familyInformations = familyInformations;
+                this.familyInformations.forEach(function(obj, index){
+                    obj.nombreCompleto = obj.primerNombre+' '+obj.segundoNombre+' '+obj.primerApellido+' '+obj.segundoApellido;
+
+                    let timestamp1 = new Date(obj.fechadeNacimiento).getTime();
+                    let timestamp2 = new Date().getTime();
+
+                    var timeDiff = Math.abs(timestamp2 - timestamp1);
+                    var diffDays = Math.round(timeDiff / (1000 * 3600 * 24 * 360));
+                    obj.edad = diffDays;
+                });
+            }
         );
     }
 
@@ -61,4 +73,5 @@ export class FamilyInformationComponent {
     update(f: FamilyInformation) {
         return this.router.navigate(['employees-family-information/update/'+f.idFamiliar]);
     }
+
 }

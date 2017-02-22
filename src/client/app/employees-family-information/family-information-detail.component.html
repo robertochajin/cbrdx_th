@@ -1,7 +1,7 @@
 <div *ngIf="familyInformation">
     <div class="row">
         <div class="col-md-12">
-            <h3 class="first">Información familiaar</h3>
+            <h3 class="first">Información familiar</h3>
         </div>
     </div>
 
@@ -13,7 +13,7 @@
                 <fieldset>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Tipo de documento.:</label>
-                        <label class="col-md-3 "><strong>{{familyInformation.tipoDeDocumento}}</strong></label>
+                        <label class="col-md-3 "><strong>{{selectedDocument}}</strong></label>
 
                         <label class="col-md-3 control-label">Número de documento.:</label>
                         <label class="col-md-3"><strong>{{familyInformation.numeroDeDocumento}}</strong></label>
@@ -34,7 +34,7 @@
                         <label class="col-md-3"><strong>{{familyInformation.fechadeNacimiento}}</strong></label>
 
                         <label class="col-md-3 control-label">Perentesco:</label>
-                        <label class="col-md-3"><strong>{{familyInformation.parentesco}}</strong></label>
+                        <label class="col-md-3"><strong>{{selectedRelationship}}</strong></label>
 
                         <label class="col-md-3 control-label">Correo electronico:</label>
                         <label class="col-md-3"><strong>{{familyInformation.correoElectronico}}</strong></label>
@@ -61,7 +61,8 @@
 
 <div class="row form-footer-buttons">
     <div class="form-group col-md-12">
-        <a (click)="goBack()" class="btn btn-primary"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+        <button icon="fa-arrow-left" label="Volver"
+                pButton (click)="goBack()"></button>
     </div>
 </div>
 

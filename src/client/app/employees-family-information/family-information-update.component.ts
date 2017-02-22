@@ -37,7 +37,14 @@ export class FamilyInformationUpdateComponent implements OnInit{
         );
         this.route.params
             .switchMap((params: Params) => this.familyInformationService.get(+params['id']))
-            .subscribe(familyInformation => this.familyInformation = familyInformation);
+            .subscribe(
+                familyInformation => {
+                    this.familyInformation = familyInformation;
+                    this.selectedDocument = this.familyInformation.tipoDeDocumento.value;
+                    this.selectedRelationship = this.familyInformation.parentesco.value;
+
+                });
+
     }
 
     save() {
@@ -52,6 +59,11 @@ export class FamilyInformationUpdateComponent implements OnInit{
     }
     goBack(): void {
         this.location.back();
+    }
+
+    onSelectMethod(event) {
+        let d = new Date(Date.parse(event));
+        this.familyInformation.fechadeNacimiento = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
     }
 
 }

@@ -10,23 +10,20 @@ export class constructorFamilyInformation implements FamilyInformation {
     idFamiliar: number;
     idColaborador: number;
     tipoDeDocumento: number;
-    numeroDeDocumento: string;
+    numeroDeDocumento: any;
     primerNombre: string;
     segundoNombre: string;
     primerApellido: string;
     segundoApellido: string;
     fechadeNacimiento: string;
-    parentesco: number;
+    parentesco: any;
     correoElectronico: string;
     telefono1: string;
     telefono2: string;
     direccionDeResidencia: string;
     convive: number;
-
     edad: number;
     nombreCompleto:string;
     constructor() {
-        this.nombreCompleto = this.primerNombre+' '+this.segundoNombre+' '+this.primerApellido+' '+this.segundoApellido;
-        this.edad = 25;
     }
 }

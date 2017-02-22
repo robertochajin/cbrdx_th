@@ -54,4 +54,9 @@ export class FamilyInformationAddComponent implements OnInit {
     goBack(): void {
         this.location.back();
     }
+    
+    onSelectMethod(event) {
+        let d = new Date(Date.parse(event));
+        this.familyInformation.fechadeNacimiento = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
+    }
 }

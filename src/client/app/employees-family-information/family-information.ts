@@ -4,18 +4,20 @@
 export interface FamilyInformation {
     idFamiliar: number;
     idColaborador: number;
-    tipoDeDocumento: number;
+    tipoDeDocumento: any;
     numeroDeDocumento: string;
     primerNombre: string;
     segundoNombre: string;
     primerApellido: string;
     segundoApellido: string;
     fechadeNacimiento: string;
-    parentesco?: number;
+    parentesco?: any;
     correoElectronico?: string;
     telefono1?: string;
     telefono2?: string;
     direccionDeResidencia?: string;
     convive?: number;
+    nombreCompleto?:string;
+    edad?:number;
 }
 

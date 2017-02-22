@@ -1,34 +1,11 @@
-/**
- * Created by TracesMaker on 07/02/2017.
- */
-
 
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import {FamilyInformation} from './family-information';
 import {FamilyInformationService} from './family-information.service';
-
+import {constructorFamilyInformation} from './family-information.construct';
 import 'rxjs/add/operator/switchMap';
-
-class constructorFamilyInformation implements FamilyInformation {
-    constructor(
-        public idFamiliar?,
-        public tipoDeDocumento?,
-        public numeroDeDocumento?,
-        public primerNombre?,
-        public segundoNombre?,
-        public primerApellido?,
-        public segundoApellido?,
-        public fechadeNacimiento?,
-        public parentesco?,
-        public correoElectronico?,
-        public telefono1?,
-        public telefono2?,
-        public direccionDeResidencia?,
-        public convive?
-    ) {}
-}
 
 
 @Component({
@@ -42,6 +19,9 @@ export class FamilyInformationDetailComponent implements OnInit   {
     @Input()
 
     familyInformation: FamilyInformation = new constructorFamilyInformation();
+    selectedDocument: string = "";
+    selectedRelationship: string = "";
+    este: string = "";
 
     constructor(
         private familyInformationService: FamilyInformationService,
@@ -52,7 +32,12 @@ export class FamilyInformationDetailComponent implements OnInit   {
     ngOnInit(): void {
         let este$ = this.route.params
             .switchMap((params: Params) => this.familyInformationService.get(+params['id']));
-        este$.subscribe(familyInformation => this.familyInformation = familyInformation);
+        este$.subscribe(familyInformation => {
+            this.familyInformation = familyInformation;
+            this.selectedDocument = this.familyInformation.tipoDeDocumento.label;
+            this.selectedRelationship = this.familyInformation.parentesco.label;
+
+        });
     }
 
     goBack(): void {
