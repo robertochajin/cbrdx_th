@@ -6,11 +6,13 @@ import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import {constructorFamilyInformation} from './family-information.construct';
 import {SelectItem} from 'primeng/primeng';
+import {ConfirmationService} from 'primeng/primeng';
 
 @Component({
     moduleId: module.id,
     selector: 'family-information',
     templateUrl: 'family-information-form.component.html',
+    providers:  [ConfirmationService]
 })
 
 export class FamilyInformationUpdateComponent implements OnInit{
@@ -25,7 +27,8 @@ export class FamilyInformationUpdateComponent implements OnInit{
     constructor(
         private familyInformationService: FamilyInformationService,
         private route: ActivatedRoute,
-        private location: Location
+        private location: Location,
+        private confirmationService: ConfirmationService
 
     ) {}
     ngOnInit(): void {
@@ -59,6 +62,16 @@ export class FamilyInformationUpdateComponent implements OnInit{
     }
     goBack(): void {
         this.location.back();
+        this.confirmationService.confirm({
+            message: ` ¿Esta seguro que desea Cancelar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+                this.location.back();
+            },
+            reject: () => {
+            }
+        });
     }
 
     onSelectMethod(event) {
