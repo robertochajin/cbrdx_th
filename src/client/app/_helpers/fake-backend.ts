@@ -440,61 +440,58 @@ export let fakeBackendProvider = {
 
         let locations: any[] = JSON.parse(localStorage.getItem('locations')) || [
                 {
-                    "idUbicacion": "1",
-                    "nombreCiudad": "1",
-                    "nombreDepartamento": "1",
-                    "nombrePais": "1",
-                    "direccion": "1",
-                    "ciudad": "1",
-                    "tipoDireccion": "1",
-                    "tipoDireccionLabel": "1",
-                    "barrio": "1",
-                    "correoElectronico": "1",
-                    "longitud": "1",
-                    "latitud": "1",
-                    "comoLlegar": "1",
-                    "celular": "1",
-                    "telefono": "1",
+                    'idUbicacion': '1',
+                    'ciudad': {'idCiudad': 103, 'nombreCiudad': 'Bucaramanga'},
+                    'departamento': {'idDepartamento': 3, 'nombreDepartamento': 'Santander'},
+                    'pais': {'idPais': 3, 'nombrePais': 'Colombia'},
+                    'direccion': '1',
+                    'tipoDireccion': {'idTipoDireccion': 1, 'tipoDireccion': 'Comercial'},                    
+                    'barrio': '1',
+                    'correoElectronico': '1',
+                    'longitud': '1',
+                    'latitud': '1',
+                    'comoLlegar': '1',
+                    'celular': '1',
+                    'telefono': '1',
                 },
                 {
-                    "idUbicacion": "2",
-                    "nombreCiudad": "2",
-                    "nombreDepartamento": "2",
-                    "nombrePais": "2",
-                    "direccion": "2",
-                    "ciudad": "2",
-                    "tipoDireccion": "2",
-                    "tipoDireccionLabel": "2",
-                    "barrio": "2",
-                    "correoElectronico": "2",
-                    "longitud": "2",
-                    "latitud": "2",
-                    "comoLlegar": "2",
-                    "celular": "2",
-                    "telefono": "2",
+                    'idUbicacion': '2',
+                    'ciudad': {'idCiudad': 102, 'nombreCiudad': 'Bucaramanga'},
+                    'departamento': {'idDepartamento': 4, 'nombreDepartamento': 'Santander'},
+                    'pais': {'idPais': 1, 'nombrePais': 'Colombia'},
+                    'direccion': '2',
+                    'tipoDireccion': {'idTipoDireccion': 2, 'tipoDireccion': 'Comercial'},                    
+                    'barrio': '2',
+                    'correoElectronico': '2',
+                    'longitud': '2',
+                    'latitud': '2',
+                    'comoLlegar': '2',
+                    'celular': '2',
+                    'telefono': '2',
                 },
                 {
-                    "idUbicacion": "3",
-                    "nombreCiudad": "3",
-                    "nombreDepartamento": "3",
-                    "nombrePais": "3",
-                    "direccion": "3",
-                    "ciudad": "3",
-                    "tipoDireccion": "3",
-                    "tipoDireccionLabel": "3",
-                    "barrio": "3",
-                    "correoElectronico": "3",
-                    "longitud": "3",
-                    "latitud": "3",
-                    "comoLlegar": "3",
-                    "celular": "3",
-                    "telefono": "3",
+                    'idUbicacion': '3',
+                    'ciudad': {'idCiudad': 103, 'nombreCiudad': 'Bucaramanga'},
+                    'departamento': {'idDepartamento': 4, 'nombreDepartamento': 'Santander'},
+                    'pais': {'idPais': 1, 'nombrePais': 'Colombia'},
+                    'direccion': '3',
+                    'tipoDireccion': {'idTipoDireccion': 3, 'tipoDireccion': 'Comercial'},                    
+                    'barrio': '3',
+                    'correoElectronico': '3',
+                    'longitud': '3',
+                    'latitud': '3',
+                    'comoLlegar': '3',
+                    'celular': '3',
+                    'telefono': '3',
                 }
             ];
 
         let cities: any[] = [{'idCiudad': 101, 'nombreCiudad': 'Floridablanca - Santander - Colombia'},
                             {'idCiudad': 102, 'nombreCiudad': 'Floridablanca - Vichada - Colombia'},
-                            {'idCiudad': 103, 'nombreCiudad': 'Floridablanca - Cesar - Colombia'}];
+                            {'idCiudad': 103, 'nombreCiudad': 'Floridablanca - Cesar - Colombia'},
+                            {'idCiudad': 102, 'nombreCiudad': 'Bucaramanga - Santander - Colombia'},
+                            {'idCiudad': 102, 'nombreCiudad': 'Bogota - Cundinamarca - Colombia'},
+                            {'idCiudad': 102, 'nombreCiudad': 'Cartagena - Bolivar - Colombia'},];
 
         // configure fake backend
         backend.connections.subscribe((connection: MockConnection) => {
@@ -621,7 +618,7 @@ export let fakeBackendProvider = {
                 if (connection.request.url.endsWith('/api/employees-employeeLocation') && connection.request.method === RequestMethod.Post) {
                     // get new user object from post body
                     let newlocation = JSON.parse(connection.request.getBody());
-
+console.log(newlocation);
                     // save new user
                     newlocation.idUbicacion = locations.length + 1;
                     newlocation.nombreCompleto = newlocation.primerNombre+' '+newlocation.segundoNombre+' '+newlocation.primerApellido+' '+newlocation.segundoApellido;
@@ -692,7 +689,7 @@ export let fakeBackendProvider = {
                             return cities;
                         }
                     });
-                    let matched = matched.length ? matched : null;
+                    matched = matched.length ? matched : null;
 
                     // respond 200 OK with user
                     connection.mockRespond(new Response(new ResponseOptions({ status: 200, body:{data: matched} })));

@@ -1,34 +1,9 @@
-/**
- * Created by TracesMaker on 07/02/2017.
- */
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
-import { EmployeesLocation } from './employees-location';
+import { ConstructorEmployeesLocation } from './employees-location.constructor';
 import { LocationService } from './location.service';
-
 import 'rxjs/add/operator/switchMap';
-
-class ConstructorEmployeesLocation implements EmployeesLocation {
-    constructor(
-        public idUbicacion? : String,
-        public nombreCiudad? : String,
-        public nombreDepartamento? : String,
-        public nombrePais? : String,
-        public direccion? : String,
-        public ciudad? : String,
-        public tipoDireccion? : String,
-        public tipoDireccionLabel? : String,
-        public barrio? : String,
-        public correoElectronico? : String,
-        public longitud? : String,
-        public latitud? : String,
-        public comoLlegar? : String,
-        public celular? : String,
-        public telefono? : String
-    ) {}
-}
-
 
 @Component({
     moduleId: module.id,
@@ -39,8 +14,7 @@ class ConstructorEmployeesLocation implements EmployeesLocation {
 
 export class LocationDetailComponent implements OnInit   {
     @Input()
-
-    employeeLocation: EmployeesLocation = new ConstructorEmployeesLocation();
+    employeeLocation: ConstructorEmployeesLocation = new ConstructorEmployeesLocation();
 
     constructor(
         private locationService: LocationService,
@@ -49,9 +23,9 @@ export class LocationDetailComponent implements OnInit   {
     ) {}
 
     ngOnInit(): void {
-        let este$ = this.route.params
-            .switchMap((params: Params) => this.locationService.get(+params['id']));
-        este$.subscribe(location => this.employeeLocation = location);
+        this.route.params
+            .switchMap((params: Params) => this.locationService.get(+params['id']))
+            .subscribe(este => this.employeeLocation = este);
     }
 
     goBack(): void {

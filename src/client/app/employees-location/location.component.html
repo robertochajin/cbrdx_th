@@ -13,9 +13,9 @@
         <p-column field="tipoDireccionLabel" header="Tipo Dirección" [sortable]="true"></p-column>
         <p-column field="direccion" header="Dirección" [sortable]="true"></p-column>
         <p-column field="barrio" header="Barrio" [sortable]="true"></p-column>
-        <p-column field="nombreCiudad" header="Ciudad" [sortable]="true"></p-column>
-        <p-column field="nombreDepartamento" header="Departamento" [sortable]="true"></p-column>
-        <p-column field="nombrePais" header="Pais" [sortable]="true"></p-column>
+        <p-column field="ciudad.nombreCiudad" header="Ciudad" [sortable]="true"></p-column>
+        <p-column field="departamento.nombreDepartamento" header="Departamento" [sortable]="true"></p-column>
+        <p-column field="pais.nombrePais" header="Pais" [sortable]="true"></p-column>
         <p-column header="Acciones" styleClass="datatable-col-action" >
             <template let-location="rowData" pTemplate="body">
                 <div class="btn-group" role="group">

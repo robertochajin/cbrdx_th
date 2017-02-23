@@ -1,31 +1,9 @@
-/**
- * Created by Angel on 10/02/2017.
- */
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import {EmployeesLocation} from './employees-location';
-import {LocationService} from './location.service';
+import { LocationService } from './location.service';
+import { ConstructorEmployeesLocation } from './employees-location.constructor';
 
-class ConstructorEmployeesLocation implements EmployeesLocation {
-    constructor(
-        public idUbicacion? : String,
-        public nombreCiudad? : String,
-        public nombreDepartamento? : String,
-        public nombrePais? : String,
-        public direccion? : String,
-        public ciudad? : String,
-        public tipoDireccion? : String,
-        public tipoDireccionLabel? : String,
-        public barrio? : String,
-        public correoElectronico? : String,
-        public longitud? : String,
-        public latitud? : String,
-        public comoLlegar? : String,
-        public celular? : String,
-        public telefono? : String
-    ) {}
-}
 
 @Component({
     moduleId: module.id,
@@ -34,8 +12,7 @@ class ConstructorEmployeesLocation implements EmployeesLocation {
 })
 export class LocationComponent implements OnInit {
 
-    employeesLocation: EmployeesLocation = new ConstructorEmployeesLocation();
-    employeesLocations: EmployeesLocation[];
+    employeesLocations: ConstructorEmployeesLocation[];
 
     constructor(private locationService: LocationService, private router: Router) {}
 
@@ -45,21 +22,21 @@ export class LocationComponent implements OnInit {
         );
     }
 
-    delete(l: EmployeesLocation) {
+    delete(l: ConstructorEmployeesLocation) {
         this.locationService.delete(l);
         this.employeesLocations.splice(this.employeesLocations.indexOf(l), 1);
         l = null;
     }
 
-    detail(l: EmployeesLocation) {
-        this.router.navigate(['employees-employeeLocation/detail/'+l.idUbicacion]);
+    detail(l: ConstructorEmployeesLocation) {
+        this.router.navigate(['employees-location/detail/'+l.idUbicacion]);
     }
 
     add() {
-        this.router.navigate(['employees-employeeLocation/add']);
+        this.router.navigate(['employees-location/add']);
     }
 
-    update(l: EmployeesLocation) {
-        this.router.navigate(['employees-employeeLocation/update/'+l.idUbicacion]);
+    update(l: ConstructorEmployeesLocation) {
+        this.router.navigate(['employees-location/update/'+l.idUbicacion]);
     }
 }

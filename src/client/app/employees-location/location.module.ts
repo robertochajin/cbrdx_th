@@ -1,6 +1,3 @@
-/**
- * Created by Angel on 10/02/2017.
- */
 import { NgModule }      from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -12,7 +9,8 @@ import { LocationDetailComponent }  from './location-detail.component';
 import { LocationAddComponent }  from './location-add.component';
 import { LocationUpdateComponent }  from './location-update.component';
 import { LocationService } from './location.service';
-import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule, AutoCompleteModule, DropdownModule } from 'primeng/primeng';
+import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,
+    AutoCompleteModule, DropdownModule } from 'primeng/primeng';
 
 
 @NgModule({

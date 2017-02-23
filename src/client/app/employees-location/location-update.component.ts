@@ -1,29 +1,10 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, OnInit } from '@angular/core';
-import { EmployeesLocation } from './employees-location';
+import { ConstructorEmployeesLocation } from './employees-location.constructor';
 import { LocationService } from './location.service';
 import { Router, ActivatedRoute, Params }   from '@angular/router';
 import { Location } from '@angular/common';
 
-class ConstructorEmployeeLocation implements EmployeesLocation {
-    constructor(
-        public idUbicacion? : String,
-        public nombreCiudad? : String,
-        public nombreDepartamento? : String,
-        public nombrePais? : String,
-        public direccion? : String,
-        public ciudad? : String,
-        public tipoDireccion? : String,
-        public tipoDireccionLabel? : String,
-        public barrio? : String,
-        public correoElectronico? : String,
-        public longitud? : String,
-        public latitud? : String,
-        public comoLlegar? : String,
-        public celular? : String,
-        public telefono? : String
-    ) {}
-}
 
 @Component({
     moduleId: module.id,
@@ -31,9 +12,10 @@ class ConstructorEmployeeLocation implements EmployeesLocation {
     template: 'location-form.component.html',
 })
 
-export class LocationUpdateComponent implements OnInit{
-    employeeLocation: ConstructorEmployeeLocation;
-    titulo = 'Editanto Familiar';
+export class LocationUpdateComponent implements OnInit {
+    employeeLocation: ConstructorEmployeesLocation = new ConstructorEmployeesLocation();
+
+    titulo = 'Editanto Ubicación ';
 
     constructor(
         private locationService: LocationService,
@@ -45,20 +27,18 @@ export class LocationUpdateComponent implements OnInit{
     ngOnInit(): void {
         this.route.params
             .switchMap((params: Params) => this.locationService.get(+params['id']))
-            .subscribe(location => this.employeeLocation = location);
+            .subscribe(employeeLocation => this.employeeLocation = employeeLocation);
     }
 
     save() {
 
-        this.locationService.update(this.location)
+        this.locationService.update(this.employeeLocation)
             .subscribe(
                 data => {
-                    //this.router.navigate(['/employees-family-information']);
                     this.location.back();
-                },
-                error => {
                 });
     }
+
     goBack(): void {
         this.location.back();
     }
