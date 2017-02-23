@@ -13,6 +13,12 @@ import { FamilyInformationAddComponent } from './employees-family-information/fa
 import { FamilyInformationUpdateComponent } from './employees-family-information/family-information-update.component';
 import { FamilyInformationDetailComponent } from './employees-family-information/family-information-detail.component';
 
+//employees location
+import { LocationComponent } from './employees-location/location.component';
+import { LocationUpdateComponent } from './employees-location/location-update.component';
+import { LocationAddComponent } from './employees-location/location-add.component';
+import { LocationDetailComponent } from './employees-location/location-detail.component';
+
 //Información de referencia de employees
 import { ReferencesComponent } from './employees-references/references.component';
 import { ReferencesDetailComponent } from './employees-references/references-detail.component';
@@ -68,7 +74,13 @@ const routes = [
   {path: 'employees-no-formal-studies/detail/:id', component: NoFormalStudiesDetailComponent},
   {path: 'employees-no-formal-studies/update/:id', component: NoFormalStudiesUpdateComponent},
 
-  //Experiencia laboral
+  //employees-location
+  { path: 'employees-location', component: LocationComponent },
+  { path: 'employees-location/add', component: LocationAddComponent },
+  { path: 'employees-location/update/:id', component: LocationUpdateComponent },
+  { path: 'employees-location/detail/:id', component: LocationDetailComponent },
+
+    //Experiencia laboral
   {path: 'employees-work-experience', component: WorkExperienceComponent},
   {path: 'employees-work-experience/add', component: WorkExperienceAddComponent},
   {path: 'employees-work-experience/detail/:id', component: WorkExperienceDetailComponent},
