@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {Noformalstudies} from './no-formal-studies';
 import {Formalstudies} from './formal-studies';
+import {Noformalstudies} from './no-formal-studies';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
@@ -39,11 +40,11 @@ export class AcademicEducationService {
         return this.http.get('/api/noformalstudies').map((res:Response) => res.json().data);
     }
 
-    addNoFormal(f: Formalstudies) {
+    addNoFormal(f: Noformalstudies) {
         return this.http.post('/api/noformalstudies',f).map((res:Response) => res.json());
     };
 
-    updateNoFormal(f: Formalstudies) {
+    updateNoFormal(f: Noformalstudies) {
         return this.http.put('/api/noformalstudies/'+ f.idEstudio,f).map((res:Response) => res.json());
     }
 
@@ -52,7 +53,7 @@ export class AcademicEducationService {
         return respuesta.map((res:Response) => res.json().data as Noformalstudies)
     }
 
-    deleteNoFormal(f: Formalstudies) {
+    deleteNoFormal(f: Noformalstudies) {
         const respuesta =  this.http.delete('/api/noformalstudies/'+ f.idEstudio);
         return respuesta.map((res:Response) => res.json());
     }

@@ -8,6 +8,7 @@ import {ReferencesService} from './references.service';
 import { Router, ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 
+//constructor de la interfas
 class constructorReferences implements References {
     constructor(
         public  idReferencia?,
@@ -20,7 +21,8 @@ class constructorReferences implements References {
         public	ciudad?,
         public	telefono?,
         public	celular?,
-        public	direccion?
+        public	direccion?,
+        public  numeroContacto?,
     ) {}
 }
 
@@ -32,7 +34,7 @@ class constructorReferences implements References {
 
 export class ReferencesUpdateComponent implements OnInit{
     reference: constructorReferences;
-    const titulo = 'Editanto Familiar';
+    header: string = 'Editanto Familiar';
 
     constructor(
         private referencesService: ReferencesService,

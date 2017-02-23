@@ -12,11 +12,14 @@ import { ReferencesDetailComponent }  from './references-detail.component';
 import { ReferencesAddComponent }  from './references-add.component';
 import { ReferencesUpdateComponent }  from './references-update.component';
 import { ReferencesService } from './references.service';
-import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule } from 'primeng/primeng';
+import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule,ConfirmDialogModule } from 'primeng/primeng';
 
 
 @NgModule({
-    imports:      [CommonModule,InputTextModule,FormsModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule],
+    imports:      [CommonModule,InputTextModule,FormsModule,DataTableModule,ButtonModule,
+                    DialogModule,InputTextareaModule,CalendarModule,DropdownModule,
+                    ConfirmDialogModule
+                    ],
     declarations: [ReferencesComponent,
                     ReferencesDetailComponent,
                     ReferencesAddComponent,

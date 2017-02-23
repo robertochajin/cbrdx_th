@@ -13,6 +13,7 @@ import { FamilyInformationModule } from './employees-family-information/family-i
 import { ReferencesModule } from './employees-references/references.module';
 import { AcademicEducationModule } from './employees-academic-education/academic-education.module';
 import { LocationModule } from './employees-location/location.module';
+import { WorkExperienceModule } from './employees-work-experience/work-experience.module';
 
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers/index';
@@ -21,8 +22,13 @@ import { BaseRequestOptions } from '@angular/http';
 
 //CarsModule,
 @NgModule({
-  imports: [BrowserModule, HttpModule, AppRoutingModule, AboutModule, HomeModule, EmployeesModule,FamilyInformationModule,ReferencesModule,AcademicEducationModule,
+  imports: [BrowserModule, HttpModule, AppRoutingModule, AboutModule, HomeModule,
+    EmployeesModule,
+    FamilyInformationModule,
     LocationModule,
+    ReferencesModule,
+    AcademicEducationModule,
+    WorkExperienceModule,
     SharedModule.forRoot()],
   declarations: [AppComponent],
   providers: [{

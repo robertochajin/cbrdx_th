@@ -2,7 +2,8 @@
 <div>
     <div class="row datable-header">
         <div class="col-md-6 col-xs-12 datatable-header-add">
-            <button type="button" pButton icon="fa-plus" (click)="add()" label="Nuevo Colaborador"></button>
+            <button type="button" icon="fa-plus" label="Nuevo Colaborador"
+                    pButton (click)="add()"></button>
         </div>
         <div class="col-md-6 col-xs-12 datatable-header-search" >
             <i class="fa fa-search"></i>
@@ -17,15 +18,16 @@
         <p-column field="cargoActual" header="Cargo Actual" [sortable]="true"></p-column>
         <p-column header="Acciones" styleClass="datatable-col-action">
             <template let-employee="rowData" pTemplate="body">
-                <div class="btn-group" role="group">
-                    <button type="button"  class="ui-button btn" icon="fa-eye"
+
+                    <button type="button" icon="fa-eye" class="ui-button-info"
                             pButton (click)="detail(employee)"></button>
-                    <button type="button"  class="ui-button ui-button-success btn" icon="fa-pencil"
+                    <button type="button" icon="fa-pencil" class="ui-button-success"
                             pButton (click)="update(employee)"></button>
-                    <button type="button"  class="ui-button ui-button-danger btn" icon="fa-trash"
+                    <button type="button" icon="fa-trash" class="ui-button-danger"
                             pButton (click)="delete(employee)" ></button>
-                </div>
+
             </template>
         </p-column>
     </p-dataTable>
 </div>
+<p-confirmDialog width="400"></p-confirmDialog>

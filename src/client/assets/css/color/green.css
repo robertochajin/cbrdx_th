@@ -7,12 +7,12 @@
 }
 .card .icon-big {
     color: #007a33;
-  }
+}
 .navbar {
     background-color: #009c41;
-  }
+}
 .sidebar .logo {
-  color:#FFFFFF;
+    color:#FFFFFF;
 }
 .sidebar .logo,
 .off-canvas-sidebar .logo {
@@ -78,4 +78,24 @@
     color: rgba(255, 255, 255, 0.7);
     opacity: 1;
     text-decoration: none;
+}
+
+/**
+------------------ CSS Botones ------------------------
+ */
+.ui-button:enabled:hover {
+    background-color: #009c41!important;
+}
+/**
+---------------- Paginador --------------------
+ */
+body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active:hover {
+    background-color: #009c41!important;
+}
+/**
+---------------- focus input text ---------------------
+ */
+body .ui-inputtext.ui-state-focus,
+body .ui-inputtext:focus {
+    border: 1px solid: #009c41;
 }
