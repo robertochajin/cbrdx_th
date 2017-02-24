@@ -373,7 +373,6 @@ hr {
 .main-panel {
     background-color: #f4f3ef;
     position: relative;
-    z-index: 2;
     float: right;
     width: calc(100% - 200px);
     min-height: 100%

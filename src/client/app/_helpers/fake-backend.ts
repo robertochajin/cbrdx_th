@@ -528,6 +528,23 @@ export let fakeBackendProvider = {
                 }
             ];
 
+        let documentTypes: any[] = [
+                                        {'value' : null, 'label' : "Seleccione"},
+                                        {'value' : "1", 'label' : "Cédula de Ciudadania"},
+                                        {'value' : "2", 'label' : "Cédula de Extrangeria"},
+                                        {'value' : "3", 'label' : "Tarjeta de identidad"},
+                                    ];
+
+        let relationship: any[] = [
+                                        {'value' : null, 'label' : "Seleccione"},
+                                        {'value' : "1", 'label' : "Padre"},
+                                        {'value' : "2", 'label' : "Madre"},
+                                        {'value' : "3", 'label' : "Hermano"},
+                                        {'value' : "4", 'label' : "Primo"},
+                                        {'value' : "5", 'label' : "Amigo"},
+                                        {'value' : "6", 'label' : "abuelo"},
+                                    ];
+
         // configure fake backend
         backend.connections.subscribe((connection: MockConnection) => {
             // wrap in timeout to simulate server api call
@@ -652,10 +669,13 @@ export let fakeBackendProvider = {
                     // get new user object from post body
                     let newFamily = JSON.parse(connection.request.getBody());
 
+                    let matchedTypes = documentTypes.filter(types => { return types.value == newFamily.tipoDeDocumento; });
+                    let matchedRelationship = relationship.filter(rel => { return rel.value == newFamily.parentesco; });
+
+                    newFamily.tipoDeDocumento = matchedTypes.length ? matchedTypes[0] : null;
+                    newFamily.parentesco = matchedRelationship.length ? matchedRelationship[0] : null;
                     // save new user
                     newFamily.idFamiliar = familys.length + 1;
-                    newFamily.nombreCompleto = newFamily.primerNombre+' '+newFamily.segundoNombre+' '+newFamily.primerApellido+' '+newFamily.segundoApellido;
-                    newFamily.edad = 25;
                     familys.push(newFamily);
                     localStorage.setItem('familys', JSON.stringify(familys));
 
@@ -670,8 +690,14 @@ export let fakeBackendProvider = {
                     // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                     // find user by id in users array
                     let newFamily = JSON.parse(connection.request.getBody());
-                    newFamily.nombreCompleto = newFamily.primerNombre+' '+newFamily.segundoNombre+' '+newFamily.primerApellido+' '+newFamily.segundoApellido;
-                    newFamily.edad = 25;
+
+                    let matchedTypes = documentTypes.filter(types => { return types.value == newFamily.tipoDeDocumento; });
+                    let matchedRelationship = relationship.filter(rel => { return rel.value == newFamily.parentesco; });
+
+                    newFamily.tipoDeDocumento = matchedTypes.length ? matchedTypes[0] : null;
+                    newFamily.parentesco = matchedRelationship.length ? matchedRelationship[0] : null;
+
+                 
                     let urlParts = connection.request.url.split('/');
                     let id = parseInt(urlParts[urlParts.length - 1]);
                     for (let i = 0; i < familys.length; i++) {
@@ -1074,13 +1100,7 @@ export let fakeBackendProvider = {
 
                     connection.mockRespond(new Response(new ResponseOptions({
                         status: 200,
-                        body:{data:[
-                            {'value' : null, 'label' : "Seleccione"},
-                            {'value' : "1", 'label' : "Cédula de Ciudadania"},
-                            {'value' : "2", 'label' : "Cédula de Extrangeria"},
-                            {'value' : "3", 'label' : "Tarjeta de identidad"},
-                            ]
-                        }
+                        body:{data:documentTypes}
                     })));
 
                 }
@@ -1092,15 +1112,7 @@ export let fakeBackendProvider = {
 
                     connection.mockRespond(new Response(new ResponseOptions({
                         status: 200,
-                        body:{data:[
-                            {'value' : null, 'label' : "Seleccione"},
-                            {'value' : "1", 'label' : "Padre"},
-                            {'value' : "2", 'label' : "Madre"},
-                            {'value' : "3", 'label' : "Hermano"},
-                            {'value' : "4", 'label' : "Primo"},
-                            {'value' : "5", 'label' : "Amigo"},
-                            {'value' : "6", 'label' : "abuelo"},
-                        ]
+                        body:{data:relationship
                         }
                     })));
 

@@ -21,7 +21,7 @@ export class constructorFamilyInformation implements FamilyInformation {
     telefono1: string;
     telefono2: string;
     direccionDeResidencia: string;
-    convive: number;
+    convive: boolean;
     edad: number;
     nombreCompleto:string;
     constructor() {

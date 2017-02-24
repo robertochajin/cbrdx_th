@@ -11,12 +11,12 @@ export interface FamilyInformation {
     primerApellido: string;
     segundoApellido: string;
     fechadeNacimiento: string;
-    parentesco?: any;
-    correoElectronico?: string;
-    telefono1?: string;
-    telefono2?: string;
-    direccionDeResidencia?: string;
-    convive?: number;
+    parentesco: any;
+    correoElectronico: string;
+    telefono1: string;
+    telefono2: string;
+    direccionDeResidencia: string;
+    convive: boolean;
     nombreCompleto?:string;
     edad?:number;
 }

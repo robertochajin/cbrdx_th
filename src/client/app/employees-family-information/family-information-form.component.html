@@ -1,3 +1,5 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400"></p-confirmDialog>
 <div *ngIf="familyInformation">
     <div class="row">
         <div class="col-md-12">
@@ -6,128 +8,140 @@
             </div>
         </div>
     </div>
-    <div class="row-fluid">
-            <div class="col-md-12">
-                <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate
-                      class="form">
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="tipoDeDocumento">* Tipo de documento</label>
-                            <p-dropdown id="tipoDeDocumento"  name="tipoDeDocumento" class="form-control"  [filter]="true" [autoWidth]="false"
-                                        [(ngModel)]="selectedDocument" [options]="documentTypes" ></p-dropdown>
-                        </div>
-                        <div class="form-group col-md-6"
-                             [ngClass]="{ 'has-error': f.submitted && !numeroDeDocumento.valid }">
-                            <label for="numeroDeDocumento">Número de documento</label>
-                            <input id="numeroDeDocumento" type="text" class="form-control" name="numeroDeDocumento"
-                                   [(ngModel)]="familyInformation.numeroDeDocumento"
-                                   #numeroDeDocumento="ngModel" required/>
-                            <div *ngIf="f.submitted && !numeroDeDocumento.valid" class="help-block">Número de
-                                documento es requerido
-                            </div>
-                        </div>
+    <form [formGroup]="familyform" (onSubmit)="onSubmit(familyform.value)">
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-6">
+                    <label for="tipoDeDocumento">* Tipo de documento</label>
+                    <p-dropdown id="tipoDeDocumento"  name="tipoDeDocumento" [options]="documentTypes" formControlName="tipoDeDocumento" [autoWidth]="false"
+                                [(ngModel)]="selectedDocument"></p-dropdown>
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['tipoDeDocumento'].valid&&familyform.controls['tipoDeDocumento'].dirty">
+                        <i class="fa fa-close"></i>
+                        Tipo de documento es requerido
                     </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-6"
-                             [ngClass]="{ 'has-error': f.submitted && !primerNombre.valid }">
-                            <label for="primerNombre">* Primer nombre</label>
-                            <input id="primerNombre" type="text" class="form-control" name="primerNombre"
-                                   [(ngModel)]="familyInformation.primerNombre" #primerNombre="ngModel"
-                                   required/>
-                            <div *ngIf="f.submitted && !primerNombre.valid" class="help-block">Primer nombre es
-                                requerido
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="segundoNombre">Segundo nombre</label>
-                            <input id="segundoNombre" type="text" class="form-control" name="segundoNombre"
-                                   [(ngModel)]="familyInformation.segundoNombre" #segundoNombre="ngModel"/>
-                        </div>
+                </div>
+                <div class="ui-grid-col-6">
+                    <label for="numeroDeDocumento">* Número de documento</label>
+                    <input id="numeroDeDocumento" name="numeroDeDocumento" pInputText type="text" formControlName="numeroDeDocumento"
+                           [(ngModel)]="familyInformation.numeroDeDocumento"/>
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['numeroDeDocumento'].valid&&familyform.controls['numeroDeDocumento'].dirty">
+                        <i class="fa fa-close"></i>
+                        Número de documento es requerido
                     </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-6"
-                             [ngClass]="{ 'has-error': f.submitted && !primerApellido.valid }">
-                            <label for="primerApellido">* Primer apellido</label>
-                            <input id="primerApellido" type="text" class="form-control" name="primerApellido"
-                                   [(ngModel)]="familyInformation.primerApellido" #primerApellido="ngModel" required/>
-                            <div *ngIf="f.submitted && !primerApellido.valid" class="help-block">Primer apellido es
-                                requerido
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="segundoApellido">Segundo apellido</label>
-                            <input id="segundoApellido" type="text" class="form-control" name="segundoApellido"
-                                   [(ngModel)]="familyInformation.segundoApellido" #segundoApellido="ngModel"/>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="fechadeNacimiento">* Fecha de Nacimiento</label>
-                            <p-calendar id="fechadeNacimiento" name="fechadeNacimiento" class="form-control" [showIcon]="true" #fechadeNacimiento="ngModel"  [dataType]="date" (onSelect)="onSelectMethod($event)"
-                                    [(ngModel)]="familyInformation.fechadeNacimiento"></p-calendar>
-
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="parentesco">* Parentesco</label>
-                            <p-dropdown id="parentesco"  name="parentesco" class="form-control"  [filter]="true" [autoWidth]="false"
-                                        [(ngModel)]="selectedRelationship" [options]="relationship" ></p-dropdown>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="correoElectronico">Correo Electronico</label>
-                            <input id="correoElectronico" type="text" class="form-control" name="correoElectronico"
-                                   [(ngModel)]="familyInformation.correoElectronico" placeholder="correo@correo.com"
-                                   #correoElectronico="ngModel"     />
-
-                        </div>
-                        <div class="form-group col-md-6"
-                             [ngClass]="{ 'has-error': f.submitted && !telefono1.valid }">
-                            <label for="telefono1">Telefono 1</label>
-                            <input id="telefono1" type="text" class="form-control" name="telefono1"
-                                   [(ngModel)]="familyInformation.telefono1" #telefono1="ngModel" required/>
-                            <div *ngIf="f.submitted && !telefono1.valid" class="help-block">Telefono 1 es
-                                requerido
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-6"
-                             [ngClass]="{ 'has-error': f.submitted && !direccionDeResidencia.valid }">
-                            <label for="direccionDeResidencia">Direccion de Residencia</label>
-                            <textarea id="direccionDeResidencia" class="form-control" rows="6" name="direccionDeResidencia"
-                                      [(ngModel)]="familyInformation.direccionDeResidencia"
-                                      #direccionDeResidencia="ngModel" required pInputTextarea></textarea>
-                            <div *ngIf="f.submitted && !direccionDeResidencia.valid" class="help-block">
-                                Direccion de Residencia es requerido
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="telefono2">Telefono 2</label>
-                            <input id="telefono2" type="text" class="form-control" name="telefono2"
-                                   [(ngModel)]="familyInformation.telefono2" #telefono2="ngModel" />
-
-                            <div class="form-group col-md-12">
-                                <label for="convive">convive</label>
-                                <p-checkbox id="convive"  name="convive"
-                                            [(ngModel)]="familyInformation.convive" binary="true"></p-checkbox>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row form-footer-buttons">
-                        <div class="form-group col-md-12">
-                            <a (click)="goBack()" class="cancelar">Cancelar</a>
-                            <button icon="fa-plus" label="Guardar"
-                                    pButton></button>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
-    </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-6">
+                    <label for="primerNombre">* Primer nombre</label>
+                    <input id="primerNombre" name="primerNombre" pInputText type="text" formControlName="primerNombre"
+                           [(ngModel)]="familyInformation.primerNombre"/>
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['primerNombre'].valid&&familyform.controls['primerNombre'].dirty">
+                        <i class="fa fa-close"></i>
+                        Primer nombre es requerido
+                    </div>
+                </div>
+                <div class="ui-grid-col-6">
+                    <label for="segundoNombre">Segundo nombre</label>
+                    <input id="segundoNombre" name="segundoNombre" pInputText type="text" formControlName="segundoNombre"
+                           [(ngModel)]="familyInformation.segundoNombre" />
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-6">
+                    <label for="primerApellido">* Primer apellido</label>
+                    <input id="primerApellido" name="primerApellido" pInputText type="text" formControlName="primerApellido"
+                           [(ngModel)]="familyInformation.primerApellido"/>
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['primerApellido'].valid&&familyform.controls['primerApellido'].dirty">
+                        <i class="fa fa-close"></i>
+                        Primer apellido es requerido
+                    </div>
+                </div>
+                <div class="ui-grid-col-6">
+                    <label for="segundoApellido">Segundo apellido</label>
+                    <input id="segundoApellido" name="segundoApellido" pInputText type="text" formControlName="segundoApellido"
+                           [(ngModel)]="familyInformation.segundoApellido"/>
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4">
+                    <label for="fechadeNacimiento">* Fecha de nacimiento</label>
+                    <p-calendar id="fechadeNacimiento" name="fechadeNacimiento"  [showIcon]="true"
+                                formControlName="fechadeNacimiento" [dataType]="date" (onSelect)="onSelectMethod($event)" [disabled]="disabled"
+                                [(ngModel)]="familyInformation.fechadeNacimiento"></p-calendar>
+
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['fechadeNacimiento'].valid&&familyform.controls['fechadeNacimiento'].dirty">
+                        <i class="fa fa-close"></i>
+                        Fecha de nacimiento es requerida
+                    </div>
+                </div>
+                <div class="ui-grid-col-4">
+                    <label for="correoElectronico">* Correo electronico</label>
+                    <input id="correoElectronico" name="correoElectronico" pInputText type="text" formControlName="correoElectronico" />
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['correoElectronico'].valid && familyform.controls['correoElectronico'].dirty">
+                        <i class="fa fa-close"></i>
+                        <span *ngIf="userform.controls['correoElectronico'].errors['required']">Correo electronico es requerido</span>
+                        <!--<span *ngIf="userform.controls['correoElectronico'].errors['invalidEmailAddress']">formato xxx@xxx.com</span>-->
+                    </div>
+                </div>
+                <div class="ui-grid-col-4">
+                    <label for="parentesco">* Parentesco</label>
+                    <p-dropdown id="parentesco"  name="parentesco" [options]="relationship" formControlName="parentesco" [autoWidth]="false"
+                                ></p-dropdown>
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['parentesco'].valid&&familyform.controls['parentesco'].dirty">
+                        <i class="fa fa-close"></i>
+                        Parentesco es requerido
+                    </div>
+                </div>
+                <!--<div class="ui-grid-col-6">-->
+                    <!--<label for="segundoApellido">Segundo apellido</label>-->
+                    <!--<input id="segundoApellido" name="segundoApellido" pInputText type="text" formControlName="segundoApellido" />-->
+                <!--</div>-->
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-5">
+                    <label for="telefono1">* Teléfono 1</label>
+                    <input id="telefono1" name="telefono1" pInputText type="text" formControlName="telefono1"
+                           [(ngModel)]="familyInformation.telefono1"/>
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['telefono1'].valid&&familyform.controls['telefono1'].dirty">
+                        <i class="fa fa-close"></i>
+                        Teléfono es requerido
+                    </div>
+                </div>
+                <div class="ui-grid-col-5">
+                    <label for="telefono2">Teléfono 2</label>
+                    <input id="telefono2" name="telefono2" pInputText type="text" formControlName="telefono2"
+                           [(ngModel)]="familyInformation.telefono2" />
+                </div>
+                <div class="ui-grid-col-2">
+                    <label for="convive">Convive</label>
+                    <p-checkbox id="convive"  name="convive" formControlName="convive"
+                                [(ngModel)]="familyInformation.convive" binary="true"></p-checkbox>
+
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-12">
+                    <label for="direccionDeResidencia">* Dirección de residencia</label>
+                    <textarea id="direccionDeResidencia" name="direccionDeResidencia" pInputTextarea formControlName="direccionDeResidencia" rows="5"
+                              [(ngModel)]="familyInformation.direccionDeResidencia" ></textarea>
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['direccionDeResidencia'].valid&&familyform.controls['direccionDeResidencia'].dirty">
+                        <i class="fa fa-close"></i>
+                        Dirección de residencia es requerido
+                    </div>
+                </div>
+
+            </div>
+            <div class="ui-grid-row form-footer-buttons">
+                <div class="ui-grid-col-4"></div>
+                <div class="ui-grid-col-1">
+                    <a (click)="goBack()" class="cancelar">Cancelar</a>
+                </div>
+                <div class="ui-grid-col-2">
+                    <button icon="fa-plus" label="Guardar" type="submit"
+                            [disabled]="!familyform.valid" pButton></button>
+                </div>
+                <div class="ui-grid-col-5"></div>
+            </div>
+        </div>
+    </form>
 </div>

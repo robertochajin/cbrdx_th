@@ -15,7 +15,7 @@
                     <div class="form-group col-md-6"
                          [ngClass]="{ 'has-error': f.submitted && !tipoDocumento.valid }">
                         <label for="tipoDocumento">Tipo de documento</label>
-                        <input type="text" class="form-control" name="tipoDocumento"
+                        <input id="tipoDocumento"   type="text" class="form-control" name="tipoDocumento"
                                [(ngModel)]="employee.tipoDocumento" #tipoDocumento="ngModel"
                                required/>
                         <div *ngIf="f.submitted && !tipoDocumento.valid" class="help-block">Tipo de
@@ -25,7 +25,7 @@
                     <div class="form-group col-md-6"
                          [ngClass]="{ 'has-error': f.submitted && !numeroDocumento.valid }">
                         <label for="numeroDocumento">Número de documento</label>
-                        <input type="text" class="form-control" name="numeroDocumento"
+                        <input id="numeroDocumento" type="text" class="form-control" name="numeroDocumento"
                                [(ngModel)]="employee.numeroDocumento"
                                #numeroDocumento="ngModel" required/>
                         <div *ngIf="f.submitted && !numeroDocumento.valid" class="help-block">Número de

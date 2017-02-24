@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6d95a76d-0932-4b62-a17b-5d60b31a9ae9" name="Default" comment="">
+    <list default="true" id="6d95a76d-0932-4b62-a17b-5d60b31a9ae9" name="Default" comment="Experiencia laboral version 1">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/custom-validators.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.componentcopi.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.componentcopy.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/dev/app/app-routing.module.js" afterPath="$PROJECT_DIR$/dist/dev/app/app-routing.module.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/dev/assets/css/color/black.css" afterPath="$PROJECT_DIR$/dist/dev/assets/css/color/black.css" />
@@ -14,8 +17,12 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.service.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.service.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.construct.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.construct.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.module.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.module.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees/employees-form.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees/employees-form.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/css/main.css" afterPath="$PROJECT_DIR$/src/client/css/main.css" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -36,100 +43,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="family-information.component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-              <folding>
-                <element signature="e#43#83#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="fake-backend.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="267" column="18" lean-forward="true" selection-start-line="251" selection-start-column="16" selection-end-line="267" selection-end-column="18" />
+            <state relative-caret-position="240">
+              <caret line="699" column="17" lean-forward="false" selection-start-line="699" selection-start-column="17" selection-end-line="699" selection-end-column="17" />
               <folding>
                 <element signature="e#501#5913#0" expanded="false" />
+                <element signature="e#6004#8487#0" expanded="false" />
+                <element signature="e#8584#11105#0" expanded="false" />
+                <element signature="e#11198#13470#0" expanded="false" />
+                <element signature="e#13565#16188#0" expanded="false" />
+                <element signature="e#13584#14434#0" expanded="false" />
+                <element signature="e#16305#17207#0" expanded="false" />
+                <element signature="e#17225#18127#0" expanded="false" />
+                <element signature="e#18145#19047#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="family-information-add.component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="8" column="36" lean-forward="false" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="family-information-update.component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="17" column="21" lean-forward="false" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="family-information-form.component.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="72" column="154" lean-forward="false" selection-start-line="72" selection-start-column="154" selection-end-line="72" selection-end-column="154" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="family-information.service.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.service.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="458">
-              <caret line="43" column="47" lean-forward="false" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="family-information.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="family-information.construct.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.construct.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="28" column="120" lean-forward="true" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="120" />
-              <folding>
-                <element signature="e#43#83#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/app/_helpers/index.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -147,42 +76,38 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>AcademicEducationModule</find>
-      <find>mod</find>
-      <find>reference</find>
-      <find>new</find>
+      <find>ReactiveFormsModule</find>
+      <find>ng2-validation</find>
+      <find>angula]</find>
+      <find>sistem.conf</find>
+      <find>module.exports</find>
+      <find>System.config</find>
+      <find>SYSTEM_CONFIG_DEV</find>
+      <find>index.ts</find>
+      <find>index.t</find>
+      <find>map</find>
+      <find>vali</find>
+      <find>barrels</find>
+      <find>v</find>
+      <find>submitted</find>
+      <find>diagnostic</find>
+      <find>SelectItem</find>
+      <find>documentTypes</find>
+      <find>match</find>
+      <find>familyInformationfamilyInformation</find>
       <find>familyInformation</find>
-      <find>&lt;/div&gt; AREA DE estudio</find>
-      <find>NoFormalStudiesAddComponent</find>
-      <find>formal-studies-form.component.html</find>
-      <find>titulo</find>
-      <find>study</find>
-      <find>campo2</find>
-      <find>nfstudies</find>
-      <find>formalstudies</find>
-      <find>formal-studies</find>
-      <find>Formalstudies</find>
-      <find>AcademicEducation</find>
-      <find>FormalStudies</find>
-      <find>academicEducation</find>
-      <find>nombreempresa</find>
-      <find>nombrecampo2</find>
-      <find>fstudy</find>
-      <find>campo1</find>
-      <find>nombrecampo1</find>
-      <find>objeto</find>
-      <find>Estado Estudio</find>
-      <find>p</find>
-      <find>CalendarModule</find>
-      <find>fec</find>
-      <find>relationship</find>
-      <find>FamilyInformation</find>
+      <find>InputTextareaModule</find>
+      <find>correoElectronico</find>
+      <find>familyform</find>
+      <find>controls</find>
+      <find>ConfirmationService</find>
+      <find>confirmationServiceconfirmationService</find>
+      <find>save</find>
+      <find>confirmationService</find>
+      <find>.main-panel</find>
+      <find>onSubmit</find>
     </findStrings>
     <replaceStrings>
-      <replace>employee</replace>
-      <replace>Noformalstudies</replace>
-      <replace>NoFormalStudies</replace>
-      <replace>news</replace>
       <replace>areaEstudio</replace>
       <replace>Otra Institución</replace>
       <replace>study</replace>
@@ -209,6 +134,10 @@
       <replace>Area Cargo</replace>
       <replace>experience</replace>
       <replace>Tiempo Experiencia</replace>
+      <replace>primerApellido</replace>
+      <replace>segundoApellido</replace>
+      <replace>familyform</replace>
+      <replace>fechadeNacimiento</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -227,25 +156,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/client/app/employees/employees-routing.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/home/home.component.html" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-references/references.component.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees/employees-add.component.html" />
-        <option value="$PROJECT_DIR$/src/client/app/employees/employees.component.html" />
-        <option value="$PROJECT_DIR$/src/client/app/employees/employees.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees/employees-update.component.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees/employees.component.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees/employees-form.component.html" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-references/references-form.component.html" />
-        <option value="$PROJECT_DIR$/dist/dev/app/employees-academic-education/formal-studies-detail.component.js" />
-        <option value="$PROJECT_DIR$/dist/dev/app/employees-academic-education/no-formal-studies-detail.component.js" />
-        <option value="$PROJECT_DIR$/src/client/app/employees/employees.module.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies.component.html" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees/employees-add.component.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-add.component.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-form.component.html" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-add.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-form.component.html" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education.service.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-update.component.ts" />
@@ -254,10 +164,7 @@
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education.module.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees/employees-detail.component.html" />
         <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.module.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/app.module.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/app-routing.module.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.html" />
         <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-form.component.html" />
@@ -272,12 +179,34 @@
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-detail.component.html" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-detail.component.html" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-detail.component.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.service.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.html" />
+        <option value="$PROJECT_DIR$/src/client/app/employees/employees-detail.component.html" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.componentcopy.html" />
+        <option value="$PROJECT_DIR$/src/client/app/employees/employees.module.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees/employees-form.component.html" />
+        <option value="$PROJECT_DIR$/src/client/app/shared/shared.module.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/app.component.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.service.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/CustomValidators.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/date-value-accessor.ts" />
+        <option value="$PROJECT_DIR$/node_modules/ng2-validation/dist/index.js" />
+        <option value="$PROJECT_DIR$/tools/config/project.config.ts" />
+        <option value="$PROJECT_DIR$/karma.conf.js" />
+        <option value="$PROJECT_DIR$/_resource/angular-seed-master/tools/config/seed.config.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/app.component.html" />
+        <option value="$PROJECT_DIR$/src/client/app/app.module.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/custom-validators2.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/custom-validators.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/app-routing.module.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.module.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.construct.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts" />
+        <option value="$PROJECT_DIR$/src/client/css/main.css" />
         <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html" />
+        <option value="$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts" />
       </list>
     </option>
   </component>
@@ -345,6 +274,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -355,6 +285,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="cbrdx_th" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cbrdx_th" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cbrdx_th" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cbrdx_th" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cbrdx_th" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -388,6 +350,32 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cbrdx_th" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cbrdx_th" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main.css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NestingTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -460,13 +448,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="employees" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cbrdx_th" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cbrdx_th" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="_helpers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -482,18 +495,18 @@
     <property name="js-tslint-nodeInterpreter" value="D:\nodejs\node.exe" />
     <property name="js-tslint-package" value="D:\cbrdx\cbrdx_th\node_modules\tslint" />
     <property name="javascript.nodejs.core.library.configured.version" value="5.1.0" />
-    <property name="SearchEverywhereHistoryKey" value="save as&#9;ACTION&#9;SaveAsTemplate&#10;keymap&#9;ACTION&#9;ChangeKeymap&#10;expand all&#9;ACTION&#9;ExpandAllRegions&#10;foldin&#9;ACTION&#9;FoldingGroup&#10;detail&#9;FILE&#9;file://D:/cbrdx/cbrdx_th/src/client/app/colaboradores/colaborador-detail.component.ts&#10;addcola&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="SYSTEM_CONFIG_DEV&#9;null&#9;null&#10;SYSTEM&#9;null&#9;null&#10;config.js&#9;FILE&#9;file:///Users/caudata/cbrdx_projects/cbrdx_th/dist/dev/app/system-config.js&#10; systemjs.config.js&#9;null&#9;null&#10;save as&#9;ACTION&#9;SaveAsTemplate&#10;keymap&#9;ACTION&#9;ChangeKeymap&#10;expand all&#9;ACTION&#9;ExpandAllRegions&#10;foldin&#9;ACTION&#9;FoldingGroup&#10;detail&#9;FILE&#9;file://D:/cbrdx/cbrdx_th/src/client/app/colaboradores/colaborador-detail.component.ts&#10;addcola&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\cbrdx\cbrdx_th\src\client\app\colaboradores" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/client/app/employees-family-information" />
       <recent name="$PROJECT_DIR$/src/client/app/employees-academic-education" />
       <recent name="$PROJECT_DIR$/src/client/app/employees-work-experience" />
       <recent name="$PROJECT_DIR$/src/client/app" />
       <recent name="$PROJECT_DIR$/src/client/app/employees_family_information" />
-      <recent name="D:\cbrdx\cbrdx_th\src\client\app\colaboradores" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\cbrdx\cbrdx_th\src\client\app\colaboradores" />
     </key>
   </component>
   <component name="RunManager">
@@ -589,6 +602,9 @@
       <workItem from="1487536334246" duration="105000" />
       <workItem from="1487596157820" duration="6904000" />
       <workItem from="1487701694591" duration="5158000" />
+      <workItem from="1487782217520" duration="9796000" />
+      <workItem from="1487856095847" duration="25882000" />
+      <workItem from="1487946494614" duration="7966000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'datatable-tracesmaker' into cbdx_th_observer_angel&#10;&#10;# Conflicts:&#10;#&#9;src/client/app/colaboradores/colaboradores.component.html&#10;">
       <created>1486676419265</created>
@@ -653,11 +669,18 @@
       <option name="project" value="LOCAL" />
       <updated>1487603691125</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Ajustes de correcciones reportados por tester">
+      <created>1487791386832</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1487791386832</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="194433000" />
+    <option name="totallyTimeSpent" value="238077000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -679,19 +702,19 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6138462" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48923078" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -728,398 +751,405 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/cbrdx_th_ng2-translate_CarlosPineda' into cbdx_th_observer_angel&#10;&#10;# Conflicts:&#10;#&#9;src/client/app/app.module.ts&#10;#&#9;src/client/app/home/home.component.html&#10;" />
     <MESSAGE value="Arreglo Colaboradores a employees&#10;Historia de Estudios formales&#10;" />
     <MESSAGE value="Experiencia laboral version 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Experiencia laboral version 1" />
+    <MESSAGE value="Ajustes de correcciones reportados por tester" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajustes de correcciones reportados por tester" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="19" />
+      <option name="time" value="21" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/dist/dev/app/employees-academic-education/formal-studies-detail.component.js">
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.componentcopi.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="51" column="37" lean-forward="false" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
+        <state relative-caret-position="225">
+          <caret line="25" column="30" lean-forward="false" selection-start-line="20" selection-start-column="4" selection-end-line="25" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/dev/app/employees-academic-education/formal-studies-update.component.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="56" column="23" lean-forward="false" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/dev/app/employees-academic-education/no-formal-studies-detail.component.js" />
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees/employees.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees/employees-add.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="25" column="9" lean-forward="false" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="38" column="18" lean-forward="false" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-add.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="25" column="30" lean-forward="false" selection-start-line="13" selection-start-column="8" selection-end-line="25" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-form.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="45" lean-forward="false" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="10" lean-forward="false" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="3" lean-forward="false" selection-start-line="31" selection-start-column="3" selection-end-line="31" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees/employees.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="18" column="31" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="22" column="12" lean-forward="false" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="37" column="66" lean-forward="false" selection-start-line="37" selection-start-column="66" selection-end-line="37" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees/employees-detail.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="144" column="105" lean-forward="false" selection-start-line="144" selection-start-column="44" selection-end-line="144" selection-end-column="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="25" column="15" lean-forward="false" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/app.component.ts">
+    <entry file="file://$PROJECT_DIR$/tsconfig.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#42#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/app-routing.module.ts">
+    <entry file="file://$PROJECT_DIR$/test-main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="59" column="0" lean-forward="true" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-          <folding>
-            <element signature="e#2269#2365#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yarn.lock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/debug.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/config/seed.config.interfaces.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/appveyor.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-107">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/utils.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/config/project.tasks.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_resource/angular-seed-master/test-config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_resource/angular-seed-master/src/client/app/system-config.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="148" column="19" lean-forward="false" selection-start-line="148" selection-start-column="9" selection-end-line="148" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/config.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/ng2-validation/dist/base64/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/ng2-validation/.editorconfig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/ng2-validation/dist/index.metadata.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protractor.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-180">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/dev/app/system-config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="1581" lean-forward="true" selection-start-line="0" selection-start-column="1581" selection-end-line="0" selection-end-column="1581" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/ng2-validation/dist/base64/directive.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/ng2-validation/dist/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-428">
+          <caret line="26" column="27" lean-forward="false" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/tsconfig.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="29" lean-forward="false" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/config/project.config.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="44" column="27" lean-forward="false" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@types/systemjs/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="181" column="39" lean-forward="false" selection-start-line="181" selection-start-column="39" selection-end-line="181" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/system-config.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/utils/seed/template_locals.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_resource/angular-seed-master/tools/config/seed.config.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="374" column="0" lean-forward="true" selection-start-line="374" selection-start-column="0" selection-end-line="374" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/karma.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/app.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/app/app.module.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="14" column="66" lean-forward="true" selection-start-line="14" selection-start-column="66" selection-end-line="14" selection-end-column="81" />
+        <state relative-caret-position="525">
+          <caret line="35" column="40" lean-forward="false" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
           <folding>
+            <element signature="e#0#41#0" expanded="false" />
             <element signature="e#920#975#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-add.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="42" column="41" lean-forward="false" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="10" lean-forward="true" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="33" lean-forward="false" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="32" column="83" lean-forward="false" selection-start-line="32" selection-start-column="83" selection-end-line="32" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-detail.component.html">
+    <entry file="file://$PROJECT_DIR$/node_modules/ng2-validation/dist/date/validator.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience.ts">
+    <entry file="file://$PROJECT_DIR$/node_modules/ng2-validation/dist/date/directive.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="15" lean-forward="false" selection-start-line="18" selection-start-column="15" selection-end-line="18" selection-end-column="15" />
+        <state relative-caret-position="135">
+          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-detail.component.ts">
+    <entry file="file://$PROJECT_DIR$/node_modules/ng2-validation/dist/date/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="29" column="27" lean-forward="false" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="27" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-detail.component.html">
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="60" column="4" lean-forward="false" selection-start-line="60" selection-start-column="4" selection-end-line="60" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-update.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="39" column="14" lean-forward="false" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-work-experience/work-experience-form.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="848">
-          <caret line="147" column="80" lean-forward="false" selection-start-line="147" selection-start-column="80" selection-end-line="147" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-form.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="57" column="25" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-update.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="23" column="31" lean-forward="false" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-add.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="16" column="8" lean-forward="false" selection-start-line="16" selection-start-column="8" selection-end-line="26" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-detail.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-detail.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="40" column="9" lean-forward="false" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="19" lean-forward="false" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="19" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="16" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-update.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="25" column="30" lean-forward="true" selection-start-line="13" selection-start-column="8" selection-end-line="25" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-detail.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+        <state relative-caret-position="60">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-detail.component.html">
+    <entry file="file://$PROJECT_DIR$/node_modules/ng2-validation/dist/date/validator.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="36" column="72" lean-forward="false" selection-start-line="36" selection-start-column="72" selection-end-line="36" selection-end-column="72" />
+        <state relative-caret-position="105">
+          <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/date-value-accessor.ts" />
+    <entry file="file://$PROJECT_DIR$/src/client/app/app-routing.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="58" column="16" lean-forward="false" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees/employees-form.component.html">
+    <entry file="file://$PROJECT_DIR$/dist/tmp/app/components/inputtext/inputtext.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="91" column="24" lean-forward="false" selection-start-line="91" selection-start-column="24" selection-end-line="92" selection-end-column="49" />
+        <state relative-caret-position="30">
+          <caret line="3" column="1" lean-forward="false" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.module.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="101" lean-forward="false" selection-start-line="14" selection-start-column="87" selection-end-line="14" selection-end-column="101" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="39" lean-forward="false" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="e#43#83#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="8" column="36" lean-forward="false" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="17" column="21" lean-forward="false" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="72" column="154" lean-forward="false" selection-start-line="72" selection-start-column="154" selection-end-line="72" selection-end-column="154" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="43" column="47" lean-forward="false" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="47" />
+        <state relative-caret-position="180">
+          <caret line="12" column="86" lean-forward="false" selection-start-line="12" selection-start-column="67" selection-end-line="12" selection-end-column="86" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        <state relative-caret-position="270">
+          <caret line="18" column="21" lean-forward="false" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.construct.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="28" column="120" lean-forward="true" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="120" />
+        <state relative-caret-position="255">
+          <caret line="19" column="30" lean-forward="false" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
           <folding>
-            <element signature="e#43#83#0" expanded="true" />
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/_helpers/index.ts">
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/custom-validators.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="105">
+          <caret line="7" column="41" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.componentcopy.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="126" column="32" lean-forward="false" selection-start-line="126" selection-start-column="32" selection-end-line="127" selection-end-column="111" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees/employees-form.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-796">
+          <caret line="15" column="37" lean-forward="false" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="37" column="35" lean-forward="false" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees/employees-update.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="374" column="23" lean-forward="false" selection-start-line="374" selection-start-column="23" selection-end-line="374" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="46" lean-forward="false" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="92" column="23" lean-forward="false" selection-start-line="92" selection-start-column="23" selection-end-line="92" selection-end-column="38" />
+          <folding>
+            <element signature="e#43#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="977">
+          <caret line="137" column="0" lean-forward="false" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="267" column="18" lean-forward="true" selection-start-line="251" selection-start-column="16" selection-end-line="267" selection-end-column="18" />
+        <state relative-caret-position="240">
+          <caret line="699" column="17" lean-forward="false" selection-start-line="699" selection-start-column="17" selection-end-line="699" selection-end-column="17" />
           <folding>
             <element signature="e#501#5913#0" expanded="false" />
+            <element signature="e#6004#8487#0" expanded="false" />
+            <element signature="e#8584#11105#0" expanded="false" />
+            <element signature="e#11198#13470#0" expanded="false" />
+            <element signature="e#13565#16188#0" expanded="false" />
+            <element signature="e#13584#14434#0" expanded="false" />
+            <element signature="e#16305#17207#0" expanded="false" />
+            <element signature="e#17225#18127#0" expanded="false" />
+            <element signature="e#18145#19047#0" expanded="false" />
           </folding>
         </state>
       </provider>

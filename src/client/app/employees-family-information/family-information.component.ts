@@ -4,7 +4,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {FamilyInformation} from './family-information';
 import {FamilyInformationService} from './family-information.service';
 import {constructorFamilyInformation} from './family-information.construct';
 import {ConfirmationService} from 'primeng/primeng';
@@ -17,9 +16,9 @@ import {ConfirmationService} from 'primeng/primeng';
 })
 export class FamilyInformationComponent {
 
-    familyInformation: FamilyInformation = new constructorFamilyInformation();
-    dialogObjet: FamilyInformation = new constructorFamilyInformation();
-    familyInformations: FamilyInformation[];
+    familyInformation: constructorFamilyInformation = new constructorFamilyInformation();
+    dialogObjet: constructorFamilyInformation = new constructorFamilyInformation();
+    familyInformations: constructorFamilyInformation[];
 
     constructor(
         private familyInformationService: FamilyInformationService,
@@ -45,7 +44,7 @@ export class FamilyInformationComponent {
         );
     }
 
-    del(f: FamilyInformation) {
+    del(f: constructorFamilyInformation) {
         this.dialogObjet = f;
         this.confirmationService.confirm({
             message: ` ¿Esta seguro que desea eliminar?`,
@@ -62,7 +61,7 @@ export class FamilyInformationComponent {
         });
     }
 
-    detail(f: FamilyInformation) {
+    detail(f: constructorFamilyInformation) {
         return this.router.navigate(['employees-family-information/detail/'+f.idFamiliar]);
     }
 
@@ -70,7 +69,7 @@ export class FamilyInformationComponent {
         return this.router.navigate(['employees-family-information/add']);
     }
 
-    update(f: FamilyInformation) {
+    update(f: constructorFamilyInformation) {
         return this.router.navigate(['employees-family-information/update/'+f.idFamiliar]);
     }
 
