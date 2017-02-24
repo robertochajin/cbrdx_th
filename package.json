@@ -145,8 +145,9 @@
     "font-awesome": "^4.7.0",
     "intl": "^1.2.5",
     "jquery": "^3.1.1",
+    "moment": "^2.17.1",
     "ng2-translate": "^5.0.0",
-    "primeng": "^2.0.0-rc.1",
+    "primeng": "^2.0.1",
     "rxjs": "~5.0.3",
     "systemjs": "0.19.41",
     "zone.js": "^0.7.2"
