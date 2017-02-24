@@ -1,0 +1,26 @@
+import { EmployeesLocation } from './employees-location';
+export class ConstructorEmployeesLocation implements EmployeesLocation {
+    idUbicacion:String;
+    direccion:String;
+    ciudad:{idCiudad:number, nombreCiudad:String};
+    departamento:{idDepartamento:number, nombreDepartamento:String};
+    pais:{idPais:number, nombrePais:String};
+    tipoDireccion:{idTipoDireccion: number, tipoDireccion: String};
+    barrio:String;
+    correoElectronico:String;
+    longitud :String;
+    latitud:String;
+    comoLlegar:String;
+    celular:String;
+    telefono:String;
+    colaborador:number;
+
+    constructor() {
+        this.ciudad = {idCiudad: 0, nombreCiudad: ''};
+        this.tipoDireccion = {idTipoDireccion: 0, tipoDireccion: ''};
+    }
+
+    setCiudad(idCiudad:number) {
+        this.ciudad.idCiudad = idCiudad
+    }
+}

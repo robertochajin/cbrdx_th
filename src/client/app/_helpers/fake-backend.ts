@@ -528,6 +528,84 @@ export let fakeBackendProvider = {
                 }
             ];
 
+        let locations: any[] = JSON.parse(localStorage.getItem('locations')) || [
+                {
+                    'idUbicacion': '1',
+                    'ciudad': {'idCiudad': 103, 'nombreCiudad': 'Bucaramanga'},
+                    'departamento': {'idDepartamento': 3, 'nombreDepartamento': 'Santander'},
+                    'pais': {'idPais': 3, 'nombrePais': 'Colombia'},
+                    'direccion': '1',
+                    'tipoDireccion': {'idTipoDireccion': 1, 'tipoDireccion': 'Comercial'},
+                    'barrio': '1',
+                    'correoElectronico': '1',
+                    'longitud': '1',
+                    'latitud': '1',
+                    'comoLlegar': '1',
+                    'celular': '1',
+                    'telefono': '1',
+                },
+                {
+                    'idUbicacion': '2',
+                    'ciudad': {'idCiudad': 102, 'nombreCiudad': 'Bucaramanga'},
+                    'departamento': {'idDepartamento': 4, 'nombreDepartamento': 'Santander'},
+                    'pais': {'idPais': 1, 'nombrePais': 'Colombia'},
+                    'direccion': '2',
+                    'tipoDireccion': {'idTipoDireccion': 2, 'tipoDireccion': 'Comercial'},
+                    'barrio': '2',
+                    'correoElectronico': '2',
+                    'longitud': '2',
+                    'latitud': '2',
+                    'comoLlegar': '2',
+                    'celular': '2',
+                    'telefono': '2',
+                },
+                {
+                    'idUbicacion': '3',
+                    'ciudad': {'idCiudad': 103, 'nombreCiudad': 'Bucaramanga'},
+                    'departamento': {'idDepartamento': 4, 'nombreDepartamento': 'Santander'},
+                    'pais': {'idPais': 1, 'nombrePais': 'Colombia'},
+                    'direccion': '3',
+                    'tipoDireccion': {'idTipoDireccion': 3, 'tipoDireccion': 'Comercial'},
+                    'barrio': '3',
+                    'correoElectronico': '3',
+                    'longitud': '3',
+                    'latitud': '3',
+                    'comoLlegar': '3',
+                    'celular': '3',
+                    'telefono': '3',
+                }
+            ];
+
+        let principalNomenclatureList = [
+            {label: 'Seleccione', value: null},
+            {label: 'Carrera', value: 'Carrera'},
+            {label: 'Calle', value: 'Calle'},
+            {label: 'Diagonal', value: 'Diagonal'},
+            {label: 'Avenida', value: 'Avenida'}
+        ];
+
+        let complementaryNomenclatureList = [
+            {label: 'Seleccione', value: null},
+            {label: 'Casa', value: 'Casa'},
+            {label: 'Torre', value: 'Torre'},
+            {label: 'Apartamento', value: 'Apartamento'},
+            {label: 'Manzana', value: 'Manzana'}
+        ];
+
+        let addressTypeList = [
+            {label: 'Seleccione', value: '0'},
+            {label: 'Residencial', value: 'Residencial'},
+            {label: 'Comercial', value: 'Comercial'}
+        ];
+
+
+        let cities: any[] = [{'idCiudad': 101, 'nombreCiudad': 'Floridablanca - Santander - Colombia'},
+                            {'idCiudad': 102, 'nombreCiudad': 'Floridablanca - Vichada - Colombia'},
+                            {'idCiudad': 103, 'nombreCiudad': 'Floridablanca - Cesar - Colombia'},
+                            {'idCiudad': 102, 'nombreCiudad': 'Bucaramanga - Santander - Colombia'},
+                            {'idCiudad': 102, 'nombreCiudad': 'Bogota - Cundinamarca - Colombia'},
+                            {'idCiudad': 102, 'nombreCiudad': 'Cartagena - Bolivar - Colombia'},];
+
         let documentTypes: any[] = [
                                         {'value' : null, 'label' : "Seleccione"},
                                         {'value' : "1", 'label' : "Cédula de Ciudadania"},
@@ -676,6 +754,8 @@ export let fakeBackendProvider = {
                     newFamily.parentesco = matchedRelationship.length ? matchedRelationship[0] : null;
                     // save new user
                     newFamily.idFamiliar = familys.length + 1;
+                    newFamily.nombreCompleto = newFamily.primerNombre+' '+newFamily.segundoNombre+' '+newFamily.primerApellido+' '+newFamily.segundoApellido;
+                    newFamily.edad = 25;
                     familys.push(newFamily);
                     localStorage.setItem('familys', JSON.stringify(familys));
 
@@ -697,7 +777,7 @@ export let fakeBackendProvider = {
                     newFamily.tipoDeDocumento = matchedTypes.length ? matchedTypes[0] : null;
                     newFamily.parentesco = matchedRelationship.length ? matchedRelationship[0] : null;
 
-                 
+
                     let urlParts = connection.request.url.split('/');
                     let id = parseInt(urlParts[urlParts.length - 1]);
                     for (let i = 0; i < familys.length; i++) {

@@ -1,0 +1,157 @@
+<div >
+    <div class="row">
+        <div class="col-md-12">
+            <div class="header">
+                <h4 class="title">{{header}}</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <!-- l.form.valid && -->
+            <form name="formLocation" (ngSubmit)="save()" #l="ngForm" novalidate
+                  class="form">
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="tipoDireccionLabel">Tipo de Dirección</label>
+                        <p-dropdown class="form-control" name="tipoDireccionLabel" id="tipoDireccionLabel"
+                                    #tipoDir="ngModel"
+                                [(ngModel)]="selectedTipoDireccion" [options]="addressTypeList"></p-dropdown>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="ciudad">Ciudad</label>
+                        <p-autoComplete class="form-control" placeholder="Buscar ciudad" field="nombreCiudad" name="ciudad" id="ciudad"
+                                        [(ngModel)]="selectedCity" [suggestions]="cityList"
+                                        (completeMethod)="citySearch($event)" (onSelect)="captureId($event)" >
+                        </p-autoComplete>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label for="ppal">Nomenclatura principal</label>
+                        <p-dropdown [options]="principalNomenclatureList" id="ppal" name="ppal" class="form-control" #ppal="ngModel"
+                                    (onChange)="composeAddress()" [(ngModel)]="selectedPrincipalNomenclature" ></p-dropdown>
+                    </div>
+                    <div class="form-group col-md-3"
+                         [ngClass]="{ 'has-error': l.submitted && !pncl.valid }">
+                        <label for="principalNomenclature">.</label>
+                        <input type="text" class="form-control" class="form-control" name="principalNomenclature" id="principalNomenclature"
+                               (change)="composeAddress()" [(ngModel)]="principalNomenclature" #pncl="ngModel" required />
+                        <div *ngIf="l.submitted && !pncl.valid" class="help-block">Nomenclatura Principal es requerida
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3"
+                         [ngClass]="{ 'has-error': l.submitted && !nmbOne.valid }">
+                        <label for="numberOne">#</label>
+                        <input type="text" class="form-control" class="form-control" name="numberOne" id="numberOne"
+                               (change)="composeAddress()" [(ngModel)]="numberOne" #nmbOne="ngModel" required />
+                        <div *ngIf="l.submitted && !nmbOne.valid" class="help-block">Nomenclatura Principal es requerida
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3"
+                         [ngClass]="{ 'has-error': l.submitted && !nmbTwo.valid }">
+                        <label for="numberTwo">-</label>
+                        <input type="text" class="form-control" class="form-control" name="numberTwo" id="numberTwo"
+                               (change)="composeAddress()" [(ngModel)]="numberTwo" #nmbTwo="ngModel" required />
+                        <div *ngIf="l.submitted && !nmbTwo.valid" class="help-block">Nomenclatura Principal es requerida
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngFor="let cpml of complementaries; let i = index">
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label for="cpl{{i}}">Nomenclatura complementaria</label>
+                            <p-dropdown [options]="complementaryNomenclatureList" id="cpl{{i}}" name="cpl{{i}}" class="form-control"
+                                        (onChange)="composeAddress()" [(ngModel)]="cpml.tipo" ></p-dropdown>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="cpld{{i}}">-</label>
+                            <input type="text" class="form-control" class="form-control" name="cpld{{i}}" id="cpld{{i}}"
+                                   (change)="composeAddress()" [(ngModel)]="cpml.detalle" required />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <button (click)="addComplementary()">Nuevo</button>
+                            <button *ngIf="i > 0" (click)="removeComplementary(i)">Borrar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6"
+                         [ngClass]="{ 'has-error': l.submitted && !barrioM.valid }" >
+                        <label for="barrio">Barrio</label>
+                        <input type="text" class="form-control" id="barrio" name="barrio" required
+                        [(ngModel)]="employLocation.barrio" #barrioM="ngModel" />
+                        <div *ngIf="l.submitted && !barrioM.valid" class="help-block">Nomenclatura Principal es requerida
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="latitud">Latitud</label>
+                        <input type="text" class="form-control" id="latitud" name="latitud"
+                        [(ngModel)]="employLocation.latitud" disabled/>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="longitud">Longitud</label>
+                        <input type="text" class="form-control" id="longitud" name="longitud"
+                        [(ngModel)]="employLocation.longitud" disabled/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="comollegar">Cómo llegar</label>
+                        <input type="text" class="form-control" id="comollegar" name="comollegar"
+                               [(ngModel)]="employLocation.comoLlegar" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="correoElectronico">Correo Electronico</label>
+                        <input type="text" class="form-control" id="correoElectronico" name="correoElectronico"
+                               [(ngModel)]="employLocation.correoElectronico" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="Telefono">Teléfono</label>
+                        <input type="text" class="form-control" id="Telefono" name="Telefono"
+                               [(ngModel)]="employLocation.telefono"/>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="form-group col-md-6">
+                        <label for="celular">Celular</label>
+                        <input type="text" class="form-control" id="celular" name="celular"
+                               [(ngModel)]="employLocation.celular"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6" style="border: dotted; border-color: black; background-color: #666; color: white;">{{finalAddress}}</div>
+                    <div class="col-md-6">
+                        <div id="ubicacionColaborador" style="width:500px;height:380px;"></div>
+                    </div>
+                </div>
+
+
+                <div class="row form-footer-buttons">
+                    <div class="form-group col-md-12">
+                        <a (click)="goBack()" class="cancelar">Cancelar</a>
+                        <button class="btn btn-primary">Agregar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
