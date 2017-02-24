@@ -39,27 +39,6 @@ ts-node
 .idea
 *.iml
 
-# User-specific stuff:
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-
-# Sensitive or high-churn files:
-.idea/**/dataSources/
-.idea/**/dataSources.ids
-.idea/**/dataSources.xml
-.idea/**/dataSources.local.xml
-.idea/**/sqlDataSources.xml
-.idea/**/dynamic.xml
-.idea/**/uiDesigner.xml
-
-# Gradle:
-.idea/**/gradle.xml
-.idea/**/libraries
-
-# Mongo Explorer plugin:
-.idea/**/mongoSettings.xml
-
-
 /tools/**/*.js
 dist
 dev
@@ -75,15 +54,3 @@ gulpfile.js.map
 .DS_Store
 src/client/app/shared/config/env.config.js
 src/client/app/shared/config/env.config.js.map
-
-
-# This is a comment
-# Ignore target at the top level
-/dist/
-# Ignore child project's targets as well
-/*/dist/
-# And any grandchildren ...
-/*/*/dist/
-# Or you can do:
-dist/
-# which matches 'target' in any sub folder

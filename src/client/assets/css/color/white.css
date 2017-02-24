@@ -97,5 +97,9 @@ body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active:hover 
  */
 body .ui-inputtext.ui-state-focus,
 body .ui-inputtext:focus {
-    border: 1px solid: #00632E;
+    border: 1px solid #00632E;
+}
+.form-control:focus{
+  border-color: #00632E!important;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0, 99, 46, 0.6);
 }

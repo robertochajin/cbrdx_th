@@ -1,24 +1,4 @@
 /* Paper CSS */
-.ct-blue {
-    stroke: #7a9e9f !important
-}
-
-.ct-azure {
-    stroke: #68b3c8 !important
-}
-
-.ct-green {
-    stroke: #7ac29a !important
-}
-
-.ct-orange {
-    stroke: #f3bb45 !important
-}
-
-.ct-red {
-    stroke: #eb5e28 !important
-}
-
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, a, .td-name, td {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -895,7 +875,6 @@ hr {
 
 .form-control {
     background-color: #fffcf5;
-    border: medium none;
     border-radius: 4px;
     color: #66615b;
     font-size: 14px;
@@ -907,10 +886,10 @@ hr {
 }
 
 .form-control:focus {
-    background-color: #fff;
+    /*background-color: #fff;
     -webkit-box-shadow: none;
     box-shadow: none;
-    outline: 0 !important
+    outline: 0 !important*/
 }
 
 .has-success .form-control, .has-error .form-control, .has-success .form-control:focus, .has-error .form-control:focus {
@@ -3711,7 +3690,6 @@ body .ui-button,
 body .ui-state-active,
 body .ui-state-highlight{
     background-color: #5d5d5d!important;
-    border: 1px #ccc solid!important;
 }
 
 /**
