@@ -14,4 +14,13 @@ export class ConstructorEmployeesLocation implements EmployeesLocation {
     celular:String;
     telefono:String;
     colaborador:number;
+
+    constructor() {
+        this.ciudad = {idCiudad: 0, nombreCiudad: ''};
+        this.tipoDireccion = {idTipoDireccion: 0, tipoDireccion: ''};
+    }
+
+    setCiudad(idCiudad:number) {
+        this.ciudad.idCiudad = idCiudad
+    }
 }

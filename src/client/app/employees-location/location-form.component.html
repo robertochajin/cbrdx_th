@@ -18,12 +18,12 @@
                         <label for="tipoDireccionLabel">Tipo de Dirección</label>
                         <p-dropdown class="form-control" name="tipoDireccionLabel" id="tipoDireccionLabel"
                                     #tipoDir="ngModel"
-                                [(ngModel)]="employLocation.tipoDireccion.idTipoDireccion" [options]="addressTypeList"></p-dropdown>
+                                [(ngModel)]="selectedTipoDireccion" [options]="addressTypeList"></p-dropdown>
                     </div>
                     <div class="form-group col-md-8">
                         <label for="ciudad">Ciudad</label>
                         <p-autoComplete class="form-control" placeholder="Buscar ciudad" field="nombreCiudad" name="ciudad" id="ciudad"
-                                        [(ngModel)]="employLocation.ciudad.idCiudad" [suggestions]="cityList"
+                                        [(ngModel)]="selectedCity" [suggestions]="cityList"
                                         (completeMethod)="citySearch($event)" (onSelect)="captureId($event)" >
                         </p-autoComplete>
                     </div>

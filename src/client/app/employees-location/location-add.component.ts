@@ -18,36 +18,18 @@ export class LocationAddComponent implements  OnInit {
     employLocation :ConstructorEmployeesLocation= new ConstructorEmployeesLocation();
     header = 'Agregando Ubicación';
 
-    principalNomenclatureList = [
-        {label: 'Seleccione', value: null},
-        {label: 'Carrera', value: 'Carrera'},
-        {label: 'Calle', value: 'Calle'},
-        {label: 'Diagonal', value: 'Diagonal'},
-        {label: 'Avenida', value: 'Avenida'}
-    ];
-
-    complementaryNomenclatureList = [
-        {label: 'Seleccione', value: null},
-        {label: 'Casa', value: 'Casa'},
-        {label: 'Torre', value: 'Torre'},
-        {label: 'Apartamento', value: 'Apartamento'},
-        {label: 'Manzana', value: 'Manzana'}
-    ];
-
-    addressTypeList = [
-        {label: 'Seleccione', value: '0'},
-        {label: 'Residencial', value: 'Residencial'},
-        {label: 'Comercial', value: 'Comercial'}
-    ];
-
+    principalNomenclatureList: any;
+    complementaryNomenclatureList: any;
+    addressTypeList: any;
     selectedPrincipalNomenclature: String;
+    selectedTipoDireccion: number;
+    selectedCity: any;
     principalNomenclature: String;
     numberOne: String;
     numberTwo: String;
     complementaries:any;
     finalAddress: String;
     cityList: any;
-
     map: any;
 
     constructor(private locationService: LocationService,
@@ -58,6 +40,16 @@ export class LocationAddComponent implements  OnInit {
     }
 
     ngOnInit() {
+        this.locationService.getPrincipalNomenclatureList().subscribe(
+            principalNomenclatureList => this.principalNomenclatureList = principalNomenclatureList
+        );
+        this.locationService.getComplementaryNomenclatureList().subscribe(
+            complementaryNomenclatureList => this.complementaryNomenclatureList = complementaryNomenclatureList
+        );
+        this.locationService.getAddressTypeList().subscribe(
+            addressTypeList => this.addressTypeList = addressTypeList
+        );
+
         this.employLocation.colaborador = 1; /*ASIGNAR VALOR QUE VENGA EN NAVECAGION */
         var mapProp = {
             center: new google.maps.LatLng(7.125635, -73.122056),
@@ -69,6 +61,7 @@ export class LocationAddComponent implements  OnInit {
 
     save() {
         this.employLocation.direccion = this.finalAddress;
+        this.employLocation.tipoDireccion.idTipoDireccion = this.selectedTipoDireccion;
         this.locationService.add(this.employLocation)
             .subscribe(
                 data => {
@@ -87,7 +80,9 @@ export class LocationAddComponent implements  OnInit {
     }
 
     captureId(event:any) {
-        this.employLocation.ciudad = event.idCiudad;
+        this.employLocation.setCiudad(
+            event.idCiudad
+        );
         this.composeAddress();
     }
 
@@ -98,15 +93,15 @@ export class LocationAddComponent implements  OnInit {
         this.finalAddress += this.numberOne  === undefined ? '': this.numberOne  + ' - ';
         this.finalAddress += this.numberTwo === undefined ? '': this.numberTwo + ' ';
 
-        if (this.finalAddress !== '' && this.employLocation.ciudad.nombreCiudad !== '' && this.employLocation.ciudad.nombreCiudad !== undefined ) {
-            console.log(this.finalAddress + ' ' + this.employLocation.ciudad.nombreCiudad);
+        if (this.finalAddress !== '' && this.selectedCity.nombreCiudad !== '' && this.selectedCity.nombreCiudad !== undefined ) {
+            console.log(this.finalAddress + ' ' + this.selectedCity.nombreCiudad);
             let geocoder = new google.maps.Geocoder();
 
             const assingLocation = (l:any ,t:any) => {
                 this.employLocation.latitud = l;
                 this.employLocation.longitud = t;
             };
-            geocoder.geocode({'address': this.finalAddress + ' ' + this.employLocation.ciudad.nombreCiudad},
+            geocoder.geocode({'address': this.finalAddress + ' ' + this.selectedCity.nombreCiudad},
                 function (results:any, status:any) {
                 if (status === google.maps.GeocoderStatus.OK) {
                     let latitude = results[0].geometry.location.lat();
