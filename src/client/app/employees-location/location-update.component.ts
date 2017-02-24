@@ -8,8 +8,8 @@ import { Location } from '@angular/common';
 
 @Component({
     moduleId: module.id,
-    selector: 'family-information',
-    template: 'location-form.component.html',
+    selector: 'update-location',
+    templateUrl: 'location-form.component.html',
 })
 
 export class LocationUpdateComponent implements OnInit {

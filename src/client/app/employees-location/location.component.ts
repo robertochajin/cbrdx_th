@@ -37,6 +37,7 @@ export class LocationComponent implements OnInit {
     }
 
     update(l: ConstructorEmployeesLocation) {
+        console.log(l);
         this.router.navigate(['employees-location/update/'+l.idUbicacion]);
     }
 }

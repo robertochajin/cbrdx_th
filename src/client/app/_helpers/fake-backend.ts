@@ -576,6 +576,29 @@ export let fakeBackendProvider = {
                 }
             ];
 
+        let principalNomenclatureList = [
+            {label: 'Seleccione', value: null},
+            {label: 'Carrera', value: 'Carrera'},
+            {label: 'Calle', value: 'Calle'},
+            {label: 'Diagonal', value: 'Diagonal'},
+            {label: 'Avenida', value: 'Avenida'}
+        ];
+
+        let complementaryNomenclatureList = [
+            {label: 'Seleccione', value: null},
+            {label: 'Casa', value: 'Casa'},
+            {label: 'Torre', value: 'Torre'},
+            {label: 'Apartamento', value: 'Apartamento'},
+            {label: 'Manzana', value: 'Manzana'}
+        ];
+
+        let addressTypeList = [
+            {label: 'Seleccione', value: '0'},
+            {label: 'Residencial', value: 'Residencial'},
+            {label: 'Comercial', value: 'Comercial'}
+        ];
+
+
         let cities: any[] = [{'idCiudad': 101, 'nombreCiudad': 'Floridablanca - Santander - Colombia'},
                             {'idCiudad': 102, 'nombreCiudad': 'Floridablanca - Vichada - Colombia'},
                             {'idCiudad': 103, 'nombreCiudad': 'Floridablanca - Cesar - Colombia'},
@@ -708,11 +731,9 @@ export let fakeBackendProvider = {
                 if (connection.request.url.endsWith('/api/employees-employeeLocation') && connection.request.method === RequestMethod.Post) {
                     // get new user object from post body
                     let newlocation = JSON.parse(connection.request.getBody());
-console.log(newlocation);
+
                     // save new user
                     newlocation.idUbicacion = locations.length + 1;
-                    newlocation.nombreCompleto = newlocation.primerNombre+' '+newlocation.segundoNombre+' '+newlocation.primerApellido+' '+newlocation.segundoApellido;
-                    newlocation.edad = 25;
                     locations.push(newlocation);
                     localStorage.setItem('locations', JSON.stringify(locations));
 
@@ -789,6 +810,35 @@ console.log(newlocation);
 
                 }
 
+                //Listado de nomenclaturas principales
+                if (connection.request.url.endsWith('/api/principal-nomenclature') && connection.request.method === RequestMethod.Get) {
+
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        status: 200,
+                        body:{data:principalNomenclatureList}
+                    })));
+
+                }
+
+                //Listado de tipos de nomenclaturas complementarias
+                if (connection.request.url.endsWith('/api/complementary-nomenclature') && connection.request.method === RequestMethod.Get) {
+
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        status: 200,
+                        body:{data:complementaryNomenclatureList}
+                    })));
+
+                }
+
+                //Listado de tipos de direcciones
+                if (connection.request.url.endsWith('/api/address-types') && connection.request.method === RequestMethod.Get) {
+
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        status: 200,
+                        body:{data:addressTypeList}
+                    })));
+
+                }
 
 
                 /*================ Familiares ================*/

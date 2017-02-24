@@ -12,6 +12,21 @@ export class LocationService {
             .map((res:Response) => res.json().data);
     }
 
+    getPrincipalNomenclatureList() {
+        return this.http.get('/api/principal-nomenclature')
+            .map((res:Response) => res.json().data);
+    }
+
+    getComplementaryNomenclatureList() {
+        return this.http.get('/api/complementary-nomenclature')
+            .map((res:Response) => res.json().data);
+    }
+
+    getAddressTypeList() {
+        return this.http.get('/api/address-types')
+            .map((res:Response) => res.json().data);
+    }
+
     getAllCities(qr: any)  {
         return this.http.get('/api/cities/s/'+ qr).map((res:Response) => res.json().data);
     }
