@@ -8,7 +8,7 @@ export class LocationService {
     constructor(private http: Http) {}
 
     getAll()  {
-        return this.http.get('/api/employees-employeeLocation')
+        return this.http.get('/api/employees-location')
             .map((res:Response) => res.json().data);
     }
 
@@ -32,20 +32,20 @@ export class LocationService {
     }
 
     add(f: ConstructorEmployeesLocation) {
-        return this.http.post('/api/employees-employeeLocation',f).map((res:Response) => res.json());
+        return this.http.post('/api/employees-location',f).map((res:Response) => res.json());
     };
 
     update(f: ConstructorEmployeesLocation) {
-        return this.http.put('/api/employees-employeeLocation/'+ 'AGREGARELID',f).map((res:Response) => res.json());
+        return this.http.put('/api/employees-location/'+ f.idUbicacion,f).map((res:Response) => res.json());
     }
 
     get(id: number) {
-        return this.http.get('/api/employees-employeeLocation/'+ id)
+        return this.http.get('/api/employees-location/'+ id)
                .map((res:Response) => res.json().data as ConstructorEmployeesLocation);
     }
 
     delete(f: ConstructorEmployeesLocation) {
-        const respuesta =  this.http.delete('/api/employees-location/'+ 'AGREGARELID');
+        const respuesta =  this.http.delete('/api/employees-location/'+ f.idUbicacion);
         return respuesta.map((res:Response) => res.json());
     }
 

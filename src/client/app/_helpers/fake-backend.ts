@@ -374,7 +374,6 @@ export let fakeBackendProvider = {
                     'ciudad'                : "Bucaramanga",
                     'institucion'           : "uis",
                     'confirmada'            : "Si",
-                    'confirmada'            : "Si",
                     'nivelEstudio'          :   "Universitario",
                     'areaEstudio'           :   "Ingenieria",
                     'otraInstitucion'       :   "",
@@ -534,15 +533,15 @@ export let fakeBackendProvider = {
                     'ciudad': {'idCiudad': 103, 'nombreCiudad': 'Bucaramanga'},
                     'departamento': {'idDepartamento': 3, 'nombreDepartamento': 'Santander'},
                     'pais': {'idPais': 3, 'nombrePais': 'Colombia'},
-                    'direccion': '1',
-                    'tipoDireccion': {'idTipoDireccion': 1, 'tipoDireccion': 'Comercial'},
-                    'barrio': '1',
-                    'correoElectronico': '1',
-                    'longitud': '1',
-                    'latitud': '1',
-                    'comoLlegar': '1',
-                    'celular': '1',
-                    'telefono': '1',
+                    'direccion': 'Diagonal 14 # 32 - 32 Torre 1 Apartamento 4 ',
+                    'tipoDireccion': {'idTipoDireccion': 2, 'tipoDireccion': 'Comercial'},
+                    'barrio': 'San Alonso',
+                    'correoElectronico': 'estecorreo@gmail.com',
+                    'longitud': '-73.11609329999999',
+                    'latitud': '7.1344315',
+                    'comoLlegar': 'caminando',
+                    'celular': '3008442354',
+                    'telefono': '6352354',
                 },
                 {
                     'idUbicacion': '2',
@@ -594,17 +593,17 @@ export let fakeBackendProvider = {
 
         let addressTypeList = [
             {label: 'Seleccione', value: '0'},
-            {label: 'Residencial', value: 'Residencial'},
-            {label: 'Comercial', value: 'Comercial'}
+            {label: 'Residencial', value: '1'},
+            {label: 'Comercial', value: '2'}
         ];
 
 
         let cities: any[] = [{'idCiudad': 101, 'nombreCiudad': 'Floridablanca - Santander - Colombia'},
                             {'idCiudad': 102, 'nombreCiudad': 'Floridablanca - Vichada - Colombia'},
                             {'idCiudad': 103, 'nombreCiudad': 'Floridablanca - Cesar - Colombia'},
-                            {'idCiudad': 102, 'nombreCiudad': 'Bucaramanga - Santander - Colombia'},
-                            {'idCiudad': 102, 'nombreCiudad': 'Bogota - Cundinamarca - Colombia'},
-                            {'idCiudad': 102, 'nombreCiudad': 'Cartagena - Bolivar - Colombia'},];
+                            {'idCiudad': 104, 'nombreCiudad': 'Bucaramanga - Santander - Colombia'},
+                            {'idCiudad': 105, 'nombreCiudad': 'Bogota - Cundinamarca - Colombia'},
+                            {'idCiudad': 106, 'nombreCiudad': 'Cartagena - Bolivar - Colombia'},];
 
         // configure fake backend
         backend.connections.subscribe((connection: MockConnection) => {
@@ -701,7 +700,7 @@ export let fakeBackendProvider = {
                 /*================ Ubicaciones ================*/
 
                 // obtiene el listado de Ubicaciones
-                if (connection.request.url.endsWith('/api/employees-employeeLocation') && connection.request.method === RequestMethod.Get) {
+                if (connection.request.url.endsWith('/api/employees-location') && connection.request.method === RequestMethod.Get) {
 
                     connection.mockRespond(new Response(new ResponseOptions({
                         status: 200,
@@ -728,7 +727,7 @@ export let fakeBackendProvider = {
                 }
 
                 // crea un Ubicacion en el local
-                if (connection.request.url.endsWith('/api/employees-employeeLocation') && connection.request.method === RequestMethod.Post) {
+                if (connection.request.url.endsWith('/api/employees-location') && connection.request.method === RequestMethod.Post) {
                     // get new user object from post body
                     let newlocation = JSON.parse(connection.request.getBody());
 
