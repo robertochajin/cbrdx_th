@@ -5,7 +5,7 @@ import 'rxjs/add/operator/switchMap';
 import {Component, Input,OnInit } from '@angular/core';
 import {FamilyInformationService} from './family-information.service';
 import {constructorFamilyInformation} from './family-information.construct';
-import {SelectItem, ConfirmationService, Message} from 'primeng/primeng'
+import {SelectItem, ConfirmationService, Message} from 'primeng/primeng';
 import {FormBuilder, FormGroup, Validators, FormControl, NgForm } from '@angular/forms';
 import {Router}  from '@angular/router';
 import {Location}  from '@angular/common';
@@ -54,9 +54,9 @@ export class FamilyInformationAddComponent implements OnInit {
             'correoElectronico': new FormControl('', Validators.compose([Validators.required])),
             'parentesco': new FormControl('', Validators.required),
             'telefono1': new FormControl('', Validators.required),
-            'telefono2': new FormControl('', Validators.required),
+            'telefono2': new FormControl(''),
             'direccionDeResidencia': new FormControl('', Validators.required),
-            'convive': new FormControl('', Validators.required)
+            'convive': new FormControl('')
         });
         this.familyInformationService.getDocumentType().subscribe(
             documentTypes => this.documentTypes = documentTypes
@@ -74,7 +74,6 @@ export class FamilyInformationAddComponent implements OnInit {
         this.familyInformationService.add(this.familyform.value)
             .subscribe(
                 data => {
-                    this.submitted = false;
                     this.location.back();
                     //this.router.navigate(['/employees-family-information']);
                 },
@@ -96,7 +95,7 @@ export class FamilyInformationAddComponent implements OnInit {
             }
         });
     }
-    
+
     onSelectMethod(event) {
         let d = new Date(Date.parse(event));
         this.familyInformation.fechadeNacimiento = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;

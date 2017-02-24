@@ -5,11 +5,8 @@ import {FamilyInformationService} from './family-information.service';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import {constructorFamilyInformation} from './family-information.construct';
-import {SelectItem} from 'primeng/primeng';
-import {ConfirmationService} from 'primeng/primeng';
-import {Message} from 'primeng/primeng'
+import {SelectItem, ConfirmationService, Message} from 'primeng/primeng';
 import {FormBuilder, FormGroup, Validators, FormControl, NgForm } from '@angular/forms';
-import {CustomValidators} from './custom-validators';
 
 @Component({
     moduleId: module.id,
@@ -26,6 +23,7 @@ export class FamilyInformationUpdateComponent implements OnInit{
     relationship: SelectItem[] = [];
     selectedDocument: any;
     selectedRelationship: any;
+
     msgs: Message[] = [];
 
     familyform: FormGroup;
@@ -43,14 +41,19 @@ export class FamilyInformationUpdateComponent implements OnInit{
     ngOnInit(): void {
 
         this.familyform = this.fb.group({
-            'tipoDeDocumento': new FormControl('', Validators.required),
-            'numeroDeDocumento': new FormControl('', Validators.required),
-            'primerNombre': new FormControl('', Validators.required),
-            'segundoNombre': new FormControl(''),
-            'primerApellido': new FormControl('', Validators.required),
-            'segundoApellido': new FormControl(''),
-            'fechadeNacimiento': new FormControl('', Validators.compose([Validators.required])),
-            'correoElectronico': new FormControl('', Validators.compose([Validators.required,CustomValidators.emailValidator])),
+          'tipoDeDocumento': new FormControl('', Validators.required),
+          'numeroDeDocumento': new FormControl('', Validators.required),
+          'primerNombre': new FormControl('', Validators.required),
+          'segundoNombre': new FormControl(''),
+          'primerApellido': new FormControl('', Validators.required),
+          'segundoApellido': new FormControl(''),
+          'fechadeNacimiento': new FormControl('', Validators.compose([Validators.required])),
+          'correoElectronico': new FormControl('', Validators.compose([Validators.required])),
+          'parentesco': new FormControl('', Validators.required),
+          'telefono1': new FormControl('', Validators.required),
+          'telefono2': new FormControl(''),
+          'direccionDeResidencia': new FormControl('', Validators.required),
+          'convive': new FormControl('')
         });
         this.familyInformationService.getDocumentType().subscribe(
             documentTypes => this.documentTypes = documentTypes
@@ -74,21 +77,19 @@ export class FamilyInformationUpdateComponent implements OnInit{
         this.submitted = true;
         this.msgs = [];
         this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
-        this.save();
+        let pruena = this.familyform.value;
+        this.familyform.value.idFamiliar = this.familyInformation.idFamiliar;
+        this.familyInformationService.update(this.familyform.value)
+          .subscribe(
+            data => {
+              this.location.back();
+            },
+            error => {
+            });
     }
 
-    save() {
 
-        this.familyInformationService.update(this.familyInformation)
-            .subscribe(
-                data => {
-                    this.location.back();
-                },
-                error => {
-                });
-    }
     goBack(): void {
-        //this.location.back();
         this.confirmationService.confirm({
             message: ` ¿Esta seguro que desea Cancelar?`,
             header: 'Corfirmación',
