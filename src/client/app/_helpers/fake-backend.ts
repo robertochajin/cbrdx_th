@@ -717,7 +717,7 @@ export let fakeBackendProvider = {
                 /*================ Ubicaciones ================*/
 
                 // obtiene el listado de Ubicaciones
-                if (connection.request.url.endsWith('/api/employees-location') && connection.request.method === RequestMethod.Get) {
+                if (connection.request.url.endsWith('/api/employees-employeeLocation') && connection.request.method === RequestMethod.Get) {
 
                     connection.mockRespond(new Response(new ResponseOptions({
                         status: 200,
@@ -891,11 +891,6 @@ export let fakeBackendProvider = {
                     // get new user object from post body
                     let newFamily = JSON.parse(connection.request.getBody());
 
-                    let matchedTypes = documentTypes.filter(types => { return types.value == newFamily.tipoDeDocumento; });
-                    let matchedRelationship = relationship.filter(rel => { return rel.value == newFamily.parentesco; });
-
-                    newFamily.tipoDeDocumento = matchedTypes.length ? matchedTypes[0] : null;
-                    newFamily.parentesco = matchedRelationship.length ? matchedRelationship[0] : null;
                     // save new user
                     newFamily.idFamiliar = familys.length + 1;
                     newFamily.nombreCompleto = newFamily.primerNombre+' '+newFamily.segundoNombre+' '+newFamily.primerApellido+' '+newFamily.segundoApellido;
