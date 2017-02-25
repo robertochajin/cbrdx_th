@@ -13,7 +13,7 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-6">
                     <label for="tipoDeDocumento">* Tipo de documento</label>
-                    <p-dropdown id="tipoDeDocumento"  name="tipoDeDocumento" [options]="documentTypes" formControlName="tipoDeDocumento" [autoWidth]="false"
+                    <p-dropdown id="tipoDeDocumento"  name="tipoDeDocumento" [options]="documentTypes" formControlName="tipoDeDocumento" [autoWidth]="false" (onChange)="onChangeMethod($event)"
                                 [(ngModel)]="selectedDocument"></p-dropdown>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['tipoDeDocumento'].valid&&familyform.controls['tipoDeDocumento'].dirty">
                         <i class="fa fa-close"></i>

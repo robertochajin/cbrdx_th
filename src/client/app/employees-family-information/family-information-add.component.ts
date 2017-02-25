@@ -64,6 +64,7 @@ export class FamilyInformationAddComponent implements OnInit {
         this.familyInformationService.getRelationship().subscribe(
             relationship => this.relationship = relationship
         );
+        this.familyInformation.segundoApellido = this.familyInformation.segundoNombre = '';
 
     }
 
@@ -99,6 +100,9 @@ export class FamilyInformationAddComponent implements OnInit {
     onSelectMethod(event) {
         let d = new Date(Date.parse(event));
         this.familyInformation.fechadeNacimiento = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
+    }
+    onChangeMethod(event) {
+      //alert('sd');
     }
 
 }
