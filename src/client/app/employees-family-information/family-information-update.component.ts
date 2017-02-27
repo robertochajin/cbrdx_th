@@ -129,17 +129,17 @@ export class FamilyInformationUpdateComponent implements OnInit{
     this.familyInformation.fechadeNacimiento = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
   }
 
-  onBlurMethod(event) {
-    let inp = event.target.value;
-    inp = this.strToDate(inp);
-
-    if(inp!= "" && inp != null && !isNaN(inp)) {
-      let d = new Date(inp);
-      this.familyInformation.fechadeNacimiento = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-    }else{
-      this.familyInformation.fechadeNacimiento = '';
-    }
-  }
+  // onBlurMethod(event) {
+  //   let inp = event.target.value;
+  //   inp = this.strToDate(inp);
+  //
+  //   if(inp!= "" && inp != null && !isNaN(inp)) {
+  //     let d = new Date(inp);
+  //     this.familyInformation.fechadeNacimiento = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+  //   }else{
+  //     this.familyInformation.fechadeNacimiento = '';
+  //   }
+  // }
 
   onChangeMethod(event) {
 

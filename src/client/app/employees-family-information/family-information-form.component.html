@@ -67,7 +67,7 @@
                     <label for="fechadeNacimiento">* Fecha de nacimiento</label>
                     <p-calendar id="fechadeNacimiento" name="fechadeNacimiento"  [showIcon]="true"
                                 [maxDate]="maxDate" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
-                                formControlName="fechadeNacimiento" [dataType]="date" (onSelect)="onSelectMethod($event)" (onBlur)="onBlurMethod($event)" [disabled]="disabled"
+                                formControlName="fechadeNacimiento" [dataType]="date" (onSelect)="onSelectMethod($event)" [disabled]="disabled"
                                 [(ngModel)]="familyInformation.fechadeNacimiento"></p-calendar>
 
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['fechadeNacimiento'].valid && familyform.controls['fechadeNacimiento'].dirty">
