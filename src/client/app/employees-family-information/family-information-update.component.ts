@@ -99,8 +99,12 @@ export class FamilyInformationUpdateComponent implements OnInit{
         this.submitted = true;
         this.msgs = [];
         this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
-        let pruena = this.familyform.value;
         this.familyform.value.idFamiliar = this.familyInformation.idFamiliar;
+        this.familyform.value.primerNombre = this.capitalizeSave(this.familyform.value.primerNombre);
+        this.familyform.value.segundoNombre = this.capitalizeSave(this.familyform.value.segundoNombre);
+        this.familyform.value.primerApellido = this.capitalizeSave(this.familyform.value.primerApellido);
+        this.familyform.value.segundoApellido = this.capitalizeSave(this.familyform.value.segundoApellido);
+
         this.familyInformationService.update(this.familyform.value)
           .subscribe(
             data => {
@@ -190,6 +194,10 @@ export class FamilyInformationUpdateComponent implements OnInit{
   capitalize(event) {
     let input = event.target.value;
     event.target.value = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
+  }
+
+  capitalizeSave(input) {
+    return input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
   }
 
 }
