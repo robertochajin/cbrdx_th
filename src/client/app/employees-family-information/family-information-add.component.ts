@@ -47,8 +47,6 @@ export class FamilyInformationAddComponent implements OnInit {
 
     ngOnInit() {
 
-        //let now = new Date();
-        //this.maxDateValue = `${now.getMonth()+1}/${now.getDate()}/${now.getFullYear()}`;
       this.es = {
         firstDayOfWeek: 1,
         dayNames: [ "domingo","lunes","martes","miércoles","jueves","viernes","sábado" ],
@@ -80,17 +78,14 @@ export class FamilyInformationAddComponent implements OnInit {
         );
         this.familyInformation.segundoApellido = this.familyInformation.segundoNombre = '';
 
-      let today = new Date();
-      let month = today.getMonth();
-      let year = today.getFullYear();
-      let prevMonth = (month === 0) ? 11 : month -1;
-      let prevYear = (prevMonth === 11) ? year - 1 : year;
-      let nextMonth = (month === 11) ? 0 : month + 1;
-      let lasYear = year-50;
-      this.maxDate = new Date();
-      this.maxDate.setMonth(month);
-      this.maxDate.setFullYear(year);
-      this.range = `${lasYear}:${year}`;
+        let today = new Date();
+        let month = today.getMonth();
+        let year = today.getFullYear();
+        let lasYear = year-80;
+        this.maxDate = new Date();
+        this.maxDate.setMonth(month);
+        this.maxDate.setFullYear(year);
+        this.range = `${lasYear}:${year}`;
 
     }
 
@@ -127,28 +122,26 @@ export class FamilyInformationAddComponent implements OnInit {
         this.familyInformation.fechadeNacimiento = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
     }
 
-    onBlurMethod(event) {
-      let inp = event.target.value;
-      try{
-        inp = Date.parse(inp);
-      }catch (err){
-        inp = "";
-      }
-
-      if(inp!= "" && inp != null && !isNaN(inp)) {
-        let d = new Date(inp);
-        this.familyInformation.fechadeNacimiento = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-      }else{
-        this.familyInformation.fechadeNacimiento = '';
-      }
-    }
+    // onBlurMethod(event) {
+    //   let inp = event.target.value;
+    //   inp = this.strToDate(inp);
+    //
+    //   if(inp!= "" && inp != null && !isNaN(inp)) {
+    //     let d = new Date(inp);
+    //     this.familyInformation.fechadeNacimiento = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+    //   }else{
+    //     this.familyInformation.fechadeNacimiento = '';
+    //   }
+    // }
 
     onChangeMethod(event) {
+
       let today = new Date();
       let month = today.getMonth();
       let year = today.getFullYear();
       let prev18Year =  year - 18;
-      let lastYear =  prev18Year - 50;
+      let prev20Year =  year - 20;
+      let lastYear =  prev18Year - 80;
       this.maxDate = new Date();
 
 
@@ -159,10 +152,18 @@ export class FamilyInformationAddComponent implements OnInit {
       }else{
         this.maxDate.setMonth(month);
         this.maxDate.setFullYear(year);
-        this.range = `${prev18Year}:${year}`;
+        this.range = `${prev20Year}:${year}`;
       }
+
       if((this.familyInformation.fechadeNacimiento)== null || (this.familyInformation.fechadeNacimiento)== "" ){
         this.familyInformation.fechadeNacimiento = `${this.maxDate.getMonth()+1}/${this.maxDate.getDate()}/${this.maxDate.getFullYear()}`
+      }else{
+        let timestamp2 = new Date(this.maxDate).getTime();
+        let timestamp1 = new Date(this.familyInformation.fechadeNacimiento).getTime();
+        let timeDiff = Math.round(timestamp2 - timestamp1);
+        if(timeDiff< 0){
+          this.familyInformation.fechadeNacimiento = "";
+        }
       }
 
     }

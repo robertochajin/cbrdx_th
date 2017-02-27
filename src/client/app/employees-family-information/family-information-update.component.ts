@@ -7,6 +7,7 @@ import { Location }                 from '@angular/common';
 import {constructorFamilyInformation} from './family-information.construct';
 import {SelectItem, ConfirmationService, Message} from 'primeng/primeng';
 import {FormBuilder, FormGroup, Validators, FormControl, NgForm } from '@angular/forms';
+import * as moment from 'moment/moment';
 
 @Component({
     moduleId: module.id,
@@ -23,11 +24,8 @@ export class FamilyInformationUpdateComponent implements OnInit{
     relationship: SelectItem[] = [];
     selectedDocument: any;
     selectedRelationship: any;
-
     msgs: Message[] = [];
-
     familyform: FormGroup;
-
     submitted: boolean;
     maxDate:Date = null;
     es: any;
@@ -54,7 +52,7 @@ export class FamilyInformationUpdateComponent implements OnInit{
         let month = today.getMonth();
         let year = today.getFullYear();
         let last18Year = year-18;
-        let lastYear = year-50;
+        let lastYear = year-100;
         this.maxDate = new Date();
         this.maxDate.setMonth(month);
         this.maxDate.setFullYear(year);
@@ -133,11 +131,7 @@ export class FamilyInformationUpdateComponent implements OnInit{
 
   onBlurMethod(event) {
     let inp = event.target.value;
-    try{
-      inp = Date.parse(inp);
-    }catch (err){
-      inp = "";
-    }
+    inp = this.strToDate(inp);
 
     if(inp!= "" && inp != null && !isNaN(inp)) {
       let d = new Date(inp);
@@ -148,25 +142,33 @@ export class FamilyInformationUpdateComponent implements OnInit{
   }
 
   onChangeMethod(event) {
+
     let today = new Date();
     let month = today.getMonth();
     let year = today.getFullYear();
     let prev18Year =  year - 18;
-    let lastYear =  prev18Year - 50;
+    let prev20Year =  year - 20;
+    let lastYear =  prev18Year - 80;
     this.maxDate = new Date();
+    this.maxDate.setMonth(month);
 
-
-    if(event.value==1 || event.value == 2){
-      this.maxDate.setMonth(month);
+    if(event.value ==1 || event.value == 2){
       this.maxDate.setFullYear(prev18Year);
       this.range = `${lastYear}:${prev18Year}`;
     }else{
-      this.maxDate.setMonth(month);
       this.maxDate.setFullYear(year);
-      this.range = `${prev18Year}:${year}`;
+      this.range = `${prev20Year}:${year}`;
     }
+
     if((this.familyInformation.fechadeNacimiento)== null || (this.familyInformation.fechadeNacimiento)== "" ){
-      this.familyInformation.fechadeNacimiento = `${this.maxDate.getMonth()+1}/${this.maxDate.getDate()}/${this.maxDate.getFullYear()}`
+      //this.familyInformation.fechadeNacimiento = `${this.maxDate.getMonth()+1}/${this.maxDate.getDate()}/${this.maxDate.getFullYear()}`
+    }else{
+      let timestamp2 = new Date(this.maxDate).getTime();
+      let timestamp1 = new Date(this.familyInformation.fechadeNacimiento).getTime();
+      let timeDiff = Math.round(timestamp2 - timestamp1);
+      if(timeDiff< 0){
+        this.familyInformation.fechadeNacimiento = "";
+      }
     }
 
   }
@@ -174,6 +176,15 @@ export class FamilyInformationUpdateComponent implements OnInit{
     if (event.keyCode === 13) {
       event.preventDefault();
     }
+  }
+  strToDate(newDateString: string): Date {
+    if (newDateString) {
+      let mom: moment.Moment = moment(newDateString, 'MM/DD/YYYY');
+      if (mom.isValid()) {
+        return mom.toDate();
+      }
+    }
+    return null;
   }
 
 }

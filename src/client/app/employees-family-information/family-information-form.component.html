@@ -65,11 +65,12 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4">
                     <label for="fechadeNacimiento">* Fecha de nacimiento</label>
-                    <p-calendar id="fechadeNacimiento" name="fechadeNacimiento"  [showIcon]="true" [maxDate]="maxDate" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range" [locale]="es"
+                    <p-calendar id="fechadeNacimiento" name="fechadeNacimiento"  [showIcon]="true"
+                                [maxDate]="maxDate" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
                                 formControlName="fechadeNacimiento" [dataType]="date" (onSelect)="onSelectMethod($event)" (onBlur)="onBlurMethod($event)" [disabled]="disabled"
                                 [(ngModel)]="familyInformation.fechadeNacimiento"></p-calendar>
 
-                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['fechadeNacimiento'].valid&&familyform.controls['fechadeNacimiento'].dirty">
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['fechadeNacimiento'].valid && familyform.controls['fechadeNacimiento'].dirty">
                         <i class="fa fa-close"></i>
                         Fecha de nacimiento es requerida
                     </div>
@@ -77,11 +78,11 @@
                 <div class="ui-grid-col-4">
                     <label for="correoElectronico">* Correo electronico</label>
                     <input id="correoElectronico" name="correoElectronico" pInputText type="text" formControlName="correoElectronico"
-                           [(ngModel)]="familyInformation.correoElectronico"/>
+                           [(ngModel)]="familyInformation.correoElectronico" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"/>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['correoElectronico'].valid && familyform.controls['correoElectronico'].dirty">
                         <i class="fa fa-close"></i>
                         <span *ngIf="familyform.controls['correoElectronico'].errors['required']">Correo electronico es requerido</span>
-                        <!--<span *ngIf="familyform.controls['correoElectronico'].errors['invalidEmailAddress']">formato xxx@xxx.com</span>-->
+                        <span *ngIf="familyform.controls['correoElectronico'].errors['pattern']">formato xxx@xxx.com</span>
                     </div>
                 </div>
                 <div class="ui-grid-col-4">
