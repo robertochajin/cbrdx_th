@@ -255,9 +255,9 @@ export let fakeBackendProvider = {
                     "tipoDeDocumento": {'value' : "1", 'label' : "Cédula de Ciudadania"},
                     "numeroDeDocumento":"1098154874",
                     "primerNombre":"Maria",
-                    "segundoNombre":"",
+                    "segundoNombre":"Alejandra",
                     "primerApellido":"Gomez",
-                    "segundoApellido":"",
+                    "segundoApellido":"Reatiga",
                     "fechadeNacimiento":"01/02/2009",
                     "parentesco":{'value' : "2", 'label' : "Madre"},
                     "correoElectronico":"mariagomez@gmail.com",
@@ -893,8 +893,13 @@ export let fakeBackendProvider = {
 
                     // save new user
                     newFamily.idFamiliar = familys.length + 1;
-                    newFamily.nombreCompleto = newFamily.primerNombre+' '+newFamily.segundoNombre+' '+newFamily.primerApellido+' '+newFamily.segundoApellido;
-                    newFamily.edad = 25;
+
+                    let matchedTypes = documentTypes.filter(types => { return types.value == newFamily.tipoDeDocumento; });
+                    let matchedRelationship = relationship.filter(rel => { return rel.value == newFamily.parentesco; });
+
+                    newFamily.tipoDeDocumento = matchedTypes.length ? matchedTypes[0] : null;
+                    newFamily.parentesco = matchedRelationship.length ? matchedRelationship[0] : null;
+
                     familys.push(newFamily);
                     localStorage.setItem('familys', JSON.stringify(familys));
 

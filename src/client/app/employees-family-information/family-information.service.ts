@@ -4,7 +4,7 @@
 
 import { Injectable } from '@angular/core';
 import {Http, Response} from '@angular/http';
-import {FamilyInformation} from './family-information';
+import {FamilyInformation} from './family-information.construct';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 //import any = jasmine.any;
