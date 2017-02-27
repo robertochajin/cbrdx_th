@@ -193,5 +193,10 @@ export class FamilyInformationAddComponent implements OnInit {
     // date vide ou incorrecte
     return '';
   }
+  capitalize(event) {
+    let input = event.target.value;
+    event.target.value = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
+  }
+
 
 }

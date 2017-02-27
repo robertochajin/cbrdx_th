@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6d95a76d-0932-4b62-a17b-5d60b31a9ae9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts" />
     </list>
@@ -25,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="family-information-add.component.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="family-information-add.component.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="946">
-              <caret line="168" column="5" lean-forward="false" selection-start-line="168" selection-start-column="5" selection-end-line="168" selection-end-column="5" />
+            <state relative-caret-position="451">
+              <caret line="198" column="3" lean-forward="true" selection-start-line="195" selection-start-column="2" selection-end-line="198" selection-end-column="3" />
               <folding>
                 <element signature="e#43#80#0" expanded="true" />
               </folding>
@@ -40,8 +41,8 @@
       <file leaf-file-name="family-information-update.component.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="136" column="30" lean-forward="false" selection-start-line="136" selection-start-column="30" selection-end-line="136" selection-end-column="30" />
+            <state relative-caret-position="481">
+              <caret line="191" column="92" lean-forward="false" selection-start-line="191" selection-start-column="92" selection-end-line="191" selection-end-column="92" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -49,13 +50,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="family-information-form.component.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="family-information-form.component.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="69" column="121" lean-forward="false" selection-start-line="69" selection-start-column="121" selection-end-line="69" selection-end-column="121" />
+            <state relative-caret-position="432">
+              <caret line="61" column="103" lean-forward="false" selection-start-line="61" selection-start-column="103" selection-end-line="61" selection-end-column="103" />
               <folding>
-                <marker date="1488225396000" expanded="true" signature="5810:5909" ph="..." />
+                <marker date="1488226256000" expanded="true" signature="5925:6024" ph="..." />
               </folding>
             </state>
           </provider>
@@ -236,9 +237,9 @@
         <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.construct.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts" />
       </list>
     </option>
   </component>
@@ -555,7 +556,7 @@
       <workItem from="1487946494614" duration="7966000" />
       <workItem from="1487969159671" duration="1953000" />
       <workItem from="1488122691817" duration="3574000" />
-      <workItem from="1488200980469" duration="16466000" />
+      <workItem from="1488200980469" duration="17322000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'datatable-tracesmaker' into cbdx_th_observer_angel&#10;&#10;# Conflicts:&#10;#&#9;src/client/app/colaboradores/colaboradores.component.html&#10;">
       <created>1486676419265</created>
@@ -634,11 +635,18 @@
       <option name="project" value="LOCAL" />
       <updated>1488225357086</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Ya no es necesario validar el onblur porque se limito a readonly el campo de fecha">
+      <created>1488225449303</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1488225449303</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="261474000" />
+    <option name="totallyTimeSpent" value="262330000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -688,7 +696,8 @@
     <MESSAGE value="Arreglo Colaboradores a employees&#10;Historia de Estudios formales&#10;" />
     <MESSAGE value="Ajustes de correcciones reportados por tester" />
     <MESSAGE value="Experiencia laboral version 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Experiencia laboral version 1" />
+    <MESSAGE value="Ya no es necesario validar el onblur porque se limito a readonly el campo de fecha" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ya no es necesario validar el onblur porque se limito a readonly el campo de fecha" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -995,10 +1004,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="61" column="103" lean-forward="false" selection-start-line="61" selection-start-column="103" selection-end-line="61" selection-end-column="103" />
+          <folding>
+            <marker date="1488226256000" expanded="true" signature="5925:6024" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="136" column="30" lean-forward="false" selection-start-line="136" selection-start-column="30" selection-end-line="136" selection-end-column="30" />
+        <state relative-caret-position="481">
+          <caret line="191" column="92" lean-forward="false" selection-start-line="191" selection-start-column="92" selection-end-line="191" selection-end-column="92" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
@@ -1007,20 +1026,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="946">
-          <caret line="168" column="5" lean-forward="false" selection-start-line="168" selection-start-column="5" selection-end-line="168" selection-end-column="5" />
+        <state relative-caret-position="451">
+          <caret line="198" column="3" lean-forward="true" selection-start-line="195" selection-start-column="2" selection-end-line="198" selection-end-column="3" />
           <folding>
             <element signature="e#43#80#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="69" column="121" lean-forward="false" selection-start-line="69" selection-start-column="121" selection-end-line="69" selection-end-column="121" />
-          <folding>
-            <marker date="1488225396000" expanded="true" signature="5810:5909" ph="..." />
           </folding>
         </state>
       </provider>

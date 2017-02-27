@@ -34,7 +34,7 @@
                 <div class="ui-grid-col-6">
                     <label for="primerNombre">* Primer nombre</label>
                     <input id="primerNombre" name="primerNombre" pInputText type="text" formControlName="primerNombre"
-                           [(ngModel)]="familyInformation.primerNombre"/>
+                           [(ngModel)]="familyInformation.primerNombre" (keyup)="capitalize($event)"/>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['primerNombre'].valid&&familyform.controls['primerNombre'].dirty">
                         <i class="fa fa-close"></i>
                         Primer nombre es requerido
@@ -43,14 +43,14 @@
                 <div class="ui-grid-col-6">
                     <label for="segundoNombre">Segundo nombre</label>
                     <input id="segundoNombre" name="segundoNombre" pInputText type="text" formControlName="segundoNombre"
-                           [(ngModel)]="familyInformation.segundoNombre" />
+                           [(ngModel)]="familyInformation.segundoNombre" (keyup)="capitalize($event)"/>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-6">
                     <label for="primerApellido">* Primer apellido</label>
                     <input id="primerApellido" name="primerApellido" pInputText type="text" formControlName="primerApellido"
-                           [(ngModel)]="familyInformation.primerApellido"/>
+                           [(ngModel)]="familyInformation.primerApellido" (keyup)="capitalize($event)"/>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['primerApellido'].valid&&familyform.controls['primerApellido'].dirty">
                         <i class="fa fa-close"></i>
                         Primer apellido es requerido
@@ -59,7 +59,7 @@
                 <div class="ui-grid-col-6">
                     <label for="segundoApellido">Segundo apellido</label>
                     <input id="segundoApellido" name="segundoApellido" pInputText type="text" formControlName="segundoApellido"
-                           [(ngModel)]="familyInformation.segundoApellido"/>
+                           [(ngModel)]="familyInformation.segundoApellido" (keyup)="capitalize($event)"/>
                 </div>
             </div>
             <div class="ui-grid-row">
