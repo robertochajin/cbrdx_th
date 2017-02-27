@@ -1,85 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6d95a76d-0932-4b62-a17b-5d60b31a9ae9" name="Default" comment="Experiencia laboral version 1">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/about/about-routing.module.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/about/about.component.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/about/about.component.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/about/about.component.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/about/about.component.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/about/about.module.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/app-routing.module.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/app.component.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/app.component.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/app.module.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/home/home-routing.module.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/home/home.component.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/home/home.component.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/home/home.component.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/home/home.component.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/home/home.module.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/i18n.providers.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/main.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/operators.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/config/env.config.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/name-list/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/name-list/name-list.service.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/navbar/navbar.component.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/navbar/navbar.component.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/navbar/navbar.component.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/navbar/navbar.component.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/shared.module.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/toolbar/toolbar.component.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/toolbar/toolbar.component.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/toolbar/toolbar.component.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/toolbar/toolbar.component.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/system-config.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/css/color/black.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/css/color/blue.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/css/color/blue.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/css/color/green.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/css/color/white.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/data.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/favicon/favicon-DEV.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/favicon/favicon-PROD.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/font/sp/icomoon.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/font/sp/icomoon.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/font/sp/icomoon.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/font/sp/icomoon.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/font/style.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/font/th/icomoon.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/font/th/icomoon.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/font/th/icomoon.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/font/th/icomoon.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/bootstrap-checkbox-radio.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/bootstrap-notify.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/chartist.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/demo.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/demo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/jquery-1.10.2.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/jquery.sharrre.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/paper-dashboard.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/script.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/script.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/svg/more.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/css/bootstrap.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/css/font-awesome.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/css/main.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/css/main.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/css/primeng.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/css/theme.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/tsconfig.json" afterPath="" />
+    <list default="true" id="6d95a76d-0932-4b62-a17b-5d60b31a9ae9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/tmp/app/home/home.component.html" afterPath="$PROJECT_DIR$/dist/tmp/app/home/home.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/tmp/app/shared/toolbar/toolbar.component.html" afterPath="$PROJECT_DIR$/dist/tmp/app/shared/toolbar/toolbar.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/tmp/index.html" afterPath="$PROJECT_DIR$/dist/tmp/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.service.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees/employees-detail.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees/employees-detail.component.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -100,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="family-information-add.component.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="family-information-add.component.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1">
-              <caret line="56" column="43" lean-forward="false" selection-start-line="56" selection-start-column="43" selection-end-line="56" selection-end-column="43" />
+            <state relative-caret-position="451">
+              <caret line="198" column="3" lean-forward="true" selection-start-line="195" selection-start-column="2" selection-end-line="198" selection-end-column="3" />
               <folding>
                 <element signature="e#43#80#0" expanded="true" />
               </folding>
@@ -112,26 +38,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="family-information-update.component.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="family-information-update.component.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="80" column="77" lean-forward="false" selection-start-line="80" selection-start-column="77" selection-end-line="80" selection-end-column="77" />
+            <state relative-caret-position="481">
+              <caret line="191" column="92" lean-forward="false" selection-start-line="191" selection-start-column="92" selection-end-line="191" selection-end-column="92" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="family-information.service.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.service.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#44#87#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -140,8 +53,44 @@
       <file leaf-file-name="family-information-form.component.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="44" lean-forward="false" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
+            <state relative-caret-position="432">
+              <caret line="61" column="103" lean-forward="false" selection-start-line="61" selection-start-column="103" selection-end-line="61" selection-end-column="103" />
+              <folding>
+                <marker date="1488226256000" expanded="true" signature="5925:6024" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fake-backend.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1439">
+              <caret line="901" column="0" lean-forward="false" selection-start-line="901" selection-start-column="0" selection-end-line="901" selection-end-column="0" />
+              <folding>
+                <element signature="e#501#5913#0" expanded="false" />
+                <element signature="e#6004#8487#0" expanded="false" />
+                <element signature="e#8584#11105#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="family-information.construct.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.construct.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="24" column="16" lean-forward="false" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="family-information.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="16" lean-forward="false" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -160,15 +109,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>module.exports</find>
-      <find>System.config</find>
-      <find>SYSTEM_CONFIG_DEV</find>
-      <find>index.ts</find>
-      <find>index.t</find>
-      <find>map</find>
-      <find>vali</find>
-      <find>barrels</find>
-      <find>v</find>
       <find>submitted</find>
       <find>diagnostic</find>
       <find>SelectItem</find>
@@ -190,6 +130,15 @@
       <find>convive</find>
       <find>convi</find>
       <find>submi</find>
+      <find>event</find>
+      <find>fecha</find>
+      <find>maxDateValue</find>
+      <find>this.maxDate.getFullYear</find>
+      <find>Calendar</find>
+      <find>lasYear</find>
+      <find>userform</find>
+      <find>es</find>
+      <find>onBl</find>
     </findStrings>
     <replaceStrings>
       <replace>areaEstudio</replace>
@@ -240,8 +189,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-form.component.html" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/academic-education.service.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-update.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies.component.html" />
@@ -264,7 +211,6 @@
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-detail.component.html" />
         <option value="$PROJECT_DIR$/src/client/app/employees-academic-education/no-formal-studies-detail.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.html" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.componentcopy.html" />
         <option value="$PROJECT_DIR$/src/client/app/employees/employees.module.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees/employees-form.component.html" />
@@ -282,15 +228,18 @@
         <option value="$PROJECT_DIR$/src/client/app/employees-family-information/custom-validators.ts" />
         <option value="$PROJECT_DIR$/src/client/app/app-routing.module.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.module.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.construct.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.ts" />
         <option value="$PROJECT_DIR$/src/client/css/main.css" />
-        <option value="$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts" />
         <option value="$PROJECT_DIR$/src/client/app/employees/employees-detail.component.html" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html" />
         <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.service.ts" />
-        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-detail.component.html" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-detail.component.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.construct.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html" />
         <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts" />
+        <option value="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts" />
       </list>
     </option>
   </component>
@@ -358,6 +307,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -450,10 +400,35 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cbrdx_th" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cbrdx_th" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_helpers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -580,6 +555,8 @@
       <workItem from="1487856095847" duration="25882000" />
       <workItem from="1487946494614" duration="7966000" />
       <workItem from="1487969159671" duration="1953000" />
+      <workItem from="1488122691817" duration="3574000" />
+      <workItem from="1488200980469" duration="17322000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'datatable-tracesmaker' into cbdx_th_observer_angel&#10;&#10;# Conflicts:&#10;#&#9;src/client/app/colaboradores/colaboradores.component.html&#10;">
       <created>1486676419265</created>
@@ -651,11 +628,25 @@
       <option name="project" value="LOCAL" />
       <updated>1487791386832</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Experiencia laboral version 1">
+      <created>1488225357086</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1488225357086</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Ya no es necesario validar el onblur porque se limito a readonly el campo de fecha">
+      <created>1488225449303</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1488225449303</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="240030000" />
+    <option name="totallyTimeSpent" value="262330000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -672,7 +663,7 @@
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3515625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33203125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -703,9 +694,10 @@
     <MESSAGE value="Merge branch 'datatable-tracesmaker' into cbdx_th_observer_angel&#10;&#10;# Conflicts:&#10;#&#9;src/client/app/colaboradores/colaboradores.component.html&#10;" />
     <MESSAGE value="Merge remote-tracking branch 'origin/cbrdx_th_ng2-translate_CarlosPineda' into cbdx_th_observer_angel&#10;&#10;# Conflicts:&#10;#&#9;src/client/app/app.module.ts&#10;#&#9;src/client/app/home/home.component.html&#10;" />
     <MESSAGE value="Arreglo Colaboradores a employees&#10;Historia de Estudios formales&#10;" />
-    <MESSAGE value="Experiencia laboral version 1" />
     <MESSAGE value="Ajustes de correcciones reportados por tester" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajustes de correcciones reportados por tester" />
+    <MESSAGE value="Experiencia laboral version 1" />
+    <MESSAGE value="Ya no es necesario validar el onblur porque se limito a readonly el campo de fecha" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ya no es necesario validar el onblur porque se limito a readonly el campo de fecha" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -717,41 +709,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/yarn.lock">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/debug.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/config/seed.config.interfaces.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/appveyor.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-107">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/utils.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tools/config/project.tasks.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -821,13 +778,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tools/config/project.config.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="44" column="27" lean-forward="false" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/@types/systemjs/index.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
@@ -863,23 +813,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/app.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/app.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="40" lean-forward="false" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/ng2-validation/dist/date/validator.d.ts" />
     <entry file="file://$PROJECT_DIR$/node_modules/ng2-validation/dist/date/directive.js" />
     <entry file="file://$PROJECT_DIR$/node_modules/ng2-validation/dist/date/index.js" />
@@ -905,22 +838,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="86" lean-forward="false" selection-start-line="12" selection-start-column="67" selection-end-line="12" selection-end-column="86" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="21" lean-forward="false" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/custom-validators.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="41" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -936,7 +853,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="59" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -944,14 +860,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="374" column="23" lean-forward="false" selection-start-line="374" selection-start-column="23" selection-end-line="374" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="46" lean-forward="false" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -959,20 +867,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-179">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#51#108#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="13" column="15" lean-forward="false" selection-start-line="13" selection-start-column="15" selection-end-line="13" selection-end-column="32" />
-          <folding>
-            <element signature="e#43#83#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -980,47 +874,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="113" column="45" lean-forward="false" selection-start-line="113" selection-start-column="45" selection-end-line="113" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="699" column="0" lean-forward="false" selection-start-line="699" selection-start-column="0" selection-end-line="699" selection-end-column="0" />
-          <folding>
-            <element signature="e#501#5913#0" expanded="false" />
-            <element signature="e#6004#8487#0" expanded="false" />
-            <element signature="e#8584#11105#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.construct.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="19" column="30" lean-forward="false" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1">
-          <caret line="56" column="43" lean-forward="false" selection-start-line="56" selection-start-column="43" selection-end-line="56" selection-end-column="43" />
-          <folding>
-            <element signature="e#43#80#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="44" lean-forward="false" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1029,18 +882,154 @@
         <state relative-caret-position="45">
           <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#44#87#0" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="e#44#87#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-detail.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="51" column="73" lean-forward="false" selection-start-line="51" selection-start-column="58" selection-end-line="51" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-detail.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="35" column="31" lean-forward="true" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/app.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/app.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/dev/app/employees-family-information/family-information-add.component.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-750">
+          <caret line="30" column="23" lean-forward="false" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/moment/moment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2685">
+          <caret line="179" column="30" lean-forward="false" selection-start-line="179" selection-start-column="28" selection-end-line="179" selection-end-column="30" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/custom-validators.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="168" lean-forward="false" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="168" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/config/project.config.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="458">
+          <caret line="50" column="20" lean-forward="false" selection-start-line="50" selection-start-column="14" selection-end-line="50" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="46" lean-forward="false" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="16" lean-forward="false" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.construct.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="24" column="16" lean-forward="false" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1439">
+          <caret line="901" column="0" lean-forward="false" selection-start-line="901" selection-start-column="0" selection-end-line="901" selection-end-column="0" />
+          <folding>
+            <element signature="e#501#5913#0" expanded="false" />
+            <element signature="e#6004#8487#0" expanded="false" />
+            <element signature="e#8584#11105#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#43#83#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="61" column="103" lean-forward="false" selection-start-line="61" selection-start-column="103" selection-end-line="61" selection-end-column="103" />
+          <folding>
+            <marker date="1488226256000" expanded="true" signature="5925:6024" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="80" column="77" lean-forward="false" selection-start-line="80" selection-start-column="77" selection-end-line="80" selection-end-column="77" />
+        <state relative-caret-position="481">
+          <caret line="191" column="92" lean-forward="false" selection-start-line="191" selection-start-column="92" selection-end-line="191" selection-end-column="92" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="451">
+          <caret line="198" column="3" lean-forward="true" selection-start-line="195" selection-start-column="2" selection-end-line="198" selection-end-column="3" />
+          <folding>
+            <element signature="e#43#80#0" expanded="true" />
           </folding>
         </state>
       </provider>
