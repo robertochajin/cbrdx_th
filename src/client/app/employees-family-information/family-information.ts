@@ -18,6 +18,6 @@ export interface FamilyInformation {
     direccionDeResidencia: string;
     convive: boolean;
     nombreCompleto?:string;
-    edad?:string;
+    edad?:number;
 }
 

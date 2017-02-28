@@ -3663,12 +3663,15 @@ a.cancelar:hover {
 .datatable-header-add {
 
 }
+
 .datatable-header-search {
     text-align: right;
 }
+
 .datatable-header-search i {
     margin: 4px 4px 0 0;
 }
+
 .datatable-col-action {
     text-align: center;
     white-space: nowrap;
@@ -3700,7 +3703,4 @@ form [class*="col-"] {
     border-top: 1px #e9e9e9 solid;
     margin-top: 10px;
     padding-top: 8px;
-}
-label {
-  font-weight: 200;
 }

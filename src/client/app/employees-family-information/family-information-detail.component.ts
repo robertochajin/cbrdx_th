@@ -21,9 +21,6 @@ export class FamilyInformationDetailComponent implements OnInit   {
     familyInformation: FamilyInformation = new constructorFamilyInformation();
     selectedDocument: string = "";
     selectedRelationship: string = "";
-    selectedConvive: string = "";
-    selectedApellido: string = "";
-  selectedNombre: string = "";
     este: string = "";
 
     constructor(
@@ -39,7 +36,6 @@ export class FamilyInformationDetailComponent implements OnInit   {
             this.familyInformation = familyInformation;
             this.selectedDocument = this.familyInformation.tipoDeDocumento.label;
             this.selectedRelationship = this.familyInformation.parentesco.label;
-            this.selectedConvive = this.familyInformation.convive == true ? "Si" : "No";
 
         });
     }

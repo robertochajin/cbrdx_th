@@ -1,3 +1,5 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400"></p-confirmDialog>
 <div *ngIf="fstudy">
     <div class="row">
         <div class="col-md-12">
@@ -6,34 +8,32 @@
             </div>
         </div>
     </div>
-  <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate
-        class="form">
+  <form  [formGroup]="formalStudiesForm"  (ngSubmit)="onSubmit(formalStudiesForm.value)">
     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
             <label for="nivelEstudio">Nivel de Estudios</label>
-            <input type="text" pInputText name="nivelEstudio" id="nivelEstudio"
-                   [(ngModel)]="fstudy.nivelEstudio" #nivelEstudio="ngModel" />
-            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !nivelEstudio.valid" >Tipo de
+            <input type="text" pInputText name="nivelEstudio" id="nivelEstudio"  formControlName="nivelEstudio"
+                   [(ngModel)]="fstudy.nivelEstudio"  />
+            <div class="ui-message ui-messages-error ui-corner-all"  *ngIf="!formalStudiesForm.controls['nivelEstudio'].valid&&formalStudiesForm.controls['nivelEstudio'].dirty">
               Nivel de Estudios es requerido
             </div>
           </div>
           <div class="ui-grid-col-6">
             <label for="areaEstudio">Area de Estudios</label>
-            <input type="text" pInputText name="areaEstudio" id="areaEstudio"
+            <input type="text" pInputText name="areaEstudio" id="areaEstudio"  formControlName="areaEstudio"
                    [(ngModel)]="fstudy.areaEstudio" />
-            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !areaEstudio.valid">Area de
-              Estudios es requerido
+            <div class="ui-message ui-messages-error ui-corner-all"  *ngIf="!formalStudiesForm.controls['areaEstudio'].valid&&formalStudiesForm.controls['areaEstudio'].dirty">
+              area de estudio es requerida
             </div>
           </div>
         </div>
         <div class="ui-grid-row">
-          <div class="form-group col-md-12"
-               [ngClass]="{ 'has-error': f.submitted && !titulo.valid }">
+          <div class="form-group col-md-12">
             <label for="titulo">Título</label>
-            <input type="text" pInputText name="titulo" id="titulo"
-                   [(ngModel)]="fstudy.titulo" #titulo="ngModel" />
-            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !titulo.valid">
+            <input type="text" pInputText name="titulo" id="titulo"  formControlName="titulo"
+                   [(ngModel)]="fstudy.titulo"  />
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formalStudiesForm.controls['titulo'].valid&&formalStudiesForm.controls['titulo'].dirty">
               Título es requerido
             </div>
           </div>
@@ -41,17 +41,17 @@
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
             <label for="institucion">Institución</label>
-            <input type="text" pInputText name="institucion" id="institucion"
-                   [(ngModel)]="fstudy.institucion" #institucion="ngModel" />
-            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !institucion.valid">
+            <input type="text" pInputText name="institucion" id="institucion"  formControlName="institucion"
+                   [(ngModel)]="fstudy.institucion"  />
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formalStudiesForm.controls['institucion'].valid&&formalStudiesForm.controls['institucion'].dirty">
               Institución es requerido
             </div>
           </div>
           <div class="ui-grid-col-6">
             <label for="otraInstitucion">Otra Institución</label>
-            <input type="text" pInputText name="otraInstitucion" id="otraInstitucion"
-                   [(ngModel)]="fstudy.otraInstitucion" #otraInstitucion="ngModel" />
-            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !institucion.valid">
+            <input type="text" pInputText name="otraInstitucion" id="otraInstitucion"  formControlName="otraInstitucion"
+                   [(ngModel)]="fstudy.otraInstitucion"  />
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formalStudiesForm.controls['otraInstitucion'].valid&&formalStudiesForm.controls['otraInstitucion'].dirty">
               Otra Institución es requerido
             </div>
           </div>
@@ -59,17 +59,17 @@
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
             <label for="ciudad">Ciudad</label>
-            <input type="text" pInputText name="ciudad" id="ciudad"
-                   [(ngModel)]="fstudy.ciudad" #ciudad="ngModel" />
-            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ciudad.valid">
+            <input type="text" pInputText name="ciudad" id="ciudad"  formControlName="ciudad"
+                   [(ngModel)]="fstudy.ciudad"  />
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formalStudiesForm.controls['ciudad'].valid&&formalStudiesForm.controls['ciudad'].dirty">
               Ciudad es requerido
             </div>
           </div>
           <div class="ui-grid-col-6">
             <label for="estadoEstudio">Estado Estudio</label>
-            <input type="text" pInputText name="estadoEstudio" id="estadoEstudio"
-                   [(ngModel)]="fstudy.estadoEstudio" #estadoEstudio="ngModel" />
-            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !estadoEstudio.valid">
+            <input type="text" pInputText name="estadoEstudio" id="estadoEstudio"  formControlName="estadoEstudio"
+                   [(ngModel)]="fstudy.estadoEstudio"  />
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formalStudiesForm.controls['estadoEstudio'].valid&&formalStudiesForm.controls['estadoEstudio'].dirty">
               Estado Estudio es requerido
             </div>
           </div>
@@ -77,26 +77,32 @@
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
             <label for="ingreso">Ingreso</label>
-            <input type="text" pInputText name="ingreso" id="ingreso"
-                   [(ngModel)]="fstudy.ingreso" #ingreso="ngModel" />
-            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ingreso.valid">
+            <input type="text" pInputText name="ingreso" id="ingreso"  formControlName="ingreso"
+                   [(ngModel)]="fstudy.ingreso"  />
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formalStudiesForm.controls['ingreso'].valid&&formalStudiesForm.controls['ingreso'].dirty">
               Ingreso es requerido
             </div>
           </div>
           <div class="ui-grid-col-6">
             <label for="finalizacion">Finalización</label>
-            <input type="text" pInputText name="finalizacion" id="finalizacion"
-                   [(ngModel)]="fstudy.finalizacion" #finalizacion="ngModel" />
-            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !finalizacion.valid">
+            <input type="text" pInputText name="finalizacion" id="finalizacion"  formControlName="finalizacion"
+                   [(ngModel)]="fstudy.finalizacion"  />
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formalStudiesForm.controls['finalizacion'].valid&&formalStudiesForm.controls['finalizacion'].dirty">
               Finalización es requerido
             </div>
           </div>
         </div>
+
         <div class="ui-grid-row form-footer-buttons">
-          <div class="form-group col-md-12">
+          <div class="ui-grid-col-4"></div>
+          <div class="ui-grid-col-1">
             <a (click)="goBack()" class="cancelar">Cancelar</a>
-            <button class="btn btn-primary">Guardar</button>
           </div>
+          <div class="ui-grid-col-2">
+            <button icon="fa-plus" label="Guardar" type="submit"
+                    [disabled]="!formalStudiesForm.valid" pButton></button>
+          </div>
+          <div class="ui-grid-col-5"></div>
         </div>
     </div>
   </form>
