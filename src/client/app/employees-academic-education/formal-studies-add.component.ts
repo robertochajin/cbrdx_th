@@ -1,18 +1,13 @@
-/**
- * Created by Angel on 15/02/2017.
- */
-import { Component, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import {Formalstudies} from './formal-studies';
-import {AcademicEducationService} from './academic-education.service';
-import { Location }                 from '@angular/common';
 import 'rxjs/add/operator/switchMap';
-import {Observable} from 'rxjs/Observable';
-//import {date} from "gulp-util";
-//import {modelGroupProvider} from "@angular/forms/src/directives/ng_model_group";
-//import {SelectItem} from 'primeng/primeng';
+import { Component, Input, OnInit } from '@angular/core';
+import { AcademicEducationService } from './academic-education.service';
+import { Location }                 from '@angular/common';
+import { Router } from '@angular/router';
+import { Formalstudies } from './formal-studies';
+import { SelectItem, Message, ConfirmDialog, ConfirmationService } from 'primeng/primeng';
+import { FormBuilder, FormGroup, Validators, FormControl, NgForm } from '@angular/forms';
 
-class constructorFormal implements Formalstudies {
+class ConstructorFormal implements Formalstudies {
     constructor(
         public 	idEstudio?,
         public 	titulo?,
@@ -33,30 +28,54 @@ class constructorFormal implements Formalstudies {
     moduleId: module.id,
     selector: 'academic-education-formal',
     templateUrl: 'formal-studies-form.component.html',
+    providers:  [ConfirmationService]
 })
 
-export class FormalStudiesAddComponent {
+export class FormalStudiesAddComponent implements OnInit {
     @Input()
 
-    fstudy: Formalstudies = new constructorFormal();
+    fstudy: Formalstudies = new ConstructorFormal();
     header: string = 'Agregando Estudio Formal';
+
+    formalStudiesForm: FormGroup;
+    submitted: boolean;
+    msgs: Message[] = [];
 
     constructor (
         private academicEducationService: AcademicEducationService,
         private router: Router,
-        private location: Location
-
+        private location: Location,
+        private fb: FormBuilder,
+        private confirmationService: ConfirmationService,
     ) {}
 
-    save() {
+    ngOnInit () {
+      this.formalStudiesForm = this.fb.group({
+        'titulo': new FormControl('', Validators.required),
+        'ingreso': new FormControl('', Validators.required),
+        'finalizacion': new FormControl('', Validators.required),
+        'ciudad': new FormControl('', Validators.required),
+        'institucion': new FormControl('', Validators.required),
+       // 'confirmada': new FormControl('', Validators.required),
+        'nivelEstudio': new FormControl('', Validators.required),
+        'areaEstudio': new FormControl('', Validators.required),
+        'otraInstitucion': new FormControl('', Validators.required),
+        'estadoEstudio': new FormControl('', Validators.required),
+      });
+    }
 
-        this.academicEducationService.addFormal(this.fstudy)
+
+    onSubmit(value: string) {
+      this.submitted = true;
+      this.msgs = [];
+      this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
+      if (this.formalStudiesForm.valid) {
+        this.academicEducationService.addFormal(this.formalStudiesForm.value)
             .subscribe(
                 data => {
                     this.location.back();
-                },
-                error => {
                 });
+      }
     }
 
     goBack(): void {
