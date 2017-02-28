@@ -6,57 +6,63 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
 
 
             <form class="form-horizontal">
                 <fieldset>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Tipo de documento.:</label>
-                        <label class="col-md-3 "><strong>{{selectedDocument}}</strong></label>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tipo de documento.:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{selectedDocument}}</strong></label>
 
-                        <label class="col-md-3 control-label">Número de documento.:</label>
-                        <label class="col-md-3"><strong>{{familyInformation.numeroDeDocumento}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Número de documento.:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.numeroDeDocumento}}</strong></label>
+                      </div>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Primero nombre:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.primerNombre}}</strong></label>
 
-                        <label class="col-md-3 control-label">Primero nombre:</label>
-                        <label class="col-md-3"><strong>{{familyInformation.primerNombre}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Segundo nombre:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.segundoNombre}}</strong></label>
+                      </div>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Primero apellido:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.primerApellido}}</strong></label>
 
-                        <label class="col-md-3 control-label">Segundo nombre:</label>
-                        <label class="col-md-3"><strong>{{familyInformation.segundoNombre}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Segundo Apellido:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.segundoApellido}}</strong></label>
+                      </div>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Fecha de nacimiento:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.fechadeNacimiento}}</strong></label>
 
-                        <label class="col-md-3 control-label">Primero apellido:</label>
-                        <label class="col-md-3"><strong>{{familyInformation.primerApellido}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Perentesco:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{selectedRelationship}}</strong></label>
+                      </div>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Correo electronico:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.correoElectronico}}</strong></label>
 
-                        <label class="col-md-3 control-label">Segundo Apellido:</label>
-                        <label class="col-md-3"><strong>{{familyInformation.segundoApellido}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Teléfono 1:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.telefono1}}</strong></label>
+                      </div>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Teléfono 2:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.telefono2}}</strong></label>
 
-                        <label class="col-md-3 control-label">Fecha de nacimiento:</label>
-                        <label class="col-md-3"><strong>{{familyInformation.fechadeNacimiento}}</strong></label>
-
-                        <label class="col-md-3 control-label">Perentesco:</label>
-                        <label class="col-md-3"><strong>{{selectedRelationship}}</strong></label>
-
-                        <label class="col-md-3 control-label">Correo electronico:</label>
-                        <label class="col-md-3"><strong>{{familyInformation.correoElectronico}}</strong></label>
-
-                        <label class="col-md-3 control-label">Teléfono 1:</label>
-                        <label class="col-md-3"><strong>{{familyInformation.telefono1}}</strong></label>
-
-                        <label class="col-md-3 control-label">Teléfono 2:</label>
-                        <label class="col-md-3"><strong>{{familyInformation.telefono2}}</strong></label>
-
-                        <label class="col-md-3 control-label">Dirección:</label>
-                        <label class="col-md-3"><strong>{{familyInformation.direccionDeResidencia}}</strong></label>
-
-                        <label class="col-md-3 control-label">Convive:</label>
-                        <label class="col-md-3"><strong>{{familyInformation.convive}}</strong></label>
-
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Dirección:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.direccionDeResidencia}}</strong></label>
+                      </div>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Convive:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{selectedConvive}}</strong></label>
+                      </div>
                     </div>
                 </fieldset>
             </form>
 
         </div>
-    </div>
+
 </div>
 
 <div class="row form-footer-buttons">
