@@ -3,26 +3,15 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AcademicEducationService } from './academic-education.service';
 import { Location }                 from '@angular/common';
 import { Router } from '@angular/router';
-import { Formalstudies } from './formal-studies';
+import { FormalStudies } from './formal-studies';
 import { SelectItem, Message, ConfirmDialog, ConfirmationService } from 'primeng/primeng';
 import { FormBuilder, FormGroup, Validators, FormControl, NgForm } from '@angular/forms';
 
-class ConstructorFormal implements Formalstudies {
-    constructor(
-        public 	idEstudio?,
-        public 	titulo?,
-        public 	ingreso?,
-        public 	finalizacion?,
-        public 	ciudad?,
-        public 	institucion?,
-        public 	confirmada?,
-        public  nivelEstudio?,
-        public  areaEstudio?,
-        public  otraInstitucion?,
-        public  estadoEstudio?
-    ) {}
-}
-
+import { StudyLevelServices } from '../_services/study-level.service';
+import { StudyAreaServices } from '../_services/study-area.service';
+import { CitiesServices } from '../_services/cities.service';
+import { StudyStateServices } from '../_services/study-state.service';
+import { InstituteServices } from '../_services/institute.service';
 
 @Component({
     moduleId: module.id,
@@ -33,16 +22,23 @@ class ConstructorFormal implements Formalstudies {
 
 export class FormalStudiesAddComponent implements OnInit {
     @Input()
-
-    fstudy: Formalstudies = new ConstructorFormal();
+    cityList: any;
+    fstudy: FormalStudies = new FormalStudies();
     header: string = 'Agregando Estudio Formal';
-
-    formalStudiesForm: FormGroup;
     submitted: boolean;
     msgs: Message[] = [];
+    studyLevelList: any;
+    studyAreaList: any;
+    studyStateList: any;
+    instituteList: any;
 
     constructor (
         private academicEducationService: AcademicEducationService,
+        private citiesServices: CitiesServices,
+        private instituteServices: InstituteServices,
+        private studyLevelServices: StudyLevelServices,
+        private studyAreaServices: StudyAreaServices,
+        private studyStateServices: StudyStateServices,
         private router: Router,
         private location: Location,
         private fb: FormBuilder,
@@ -50,32 +46,45 @@ export class FormalStudiesAddComponent implements OnInit {
     ) {}
 
     ngOnInit () {
-      this.formalStudiesForm = this.fb.group({
-        'titulo': new FormControl('', Validators.required),
-        'ingreso': new FormControl('', Validators.required),
-        'finalizacion': new FormControl('', Validators.required),
-        'ciudad': new FormControl('', Validators.required),
-        'institucion': new FormControl('', Validators.required),
-       // 'confirmada': new FormControl('', Validators.required),
-        'nivelEstudio': new FormControl('', Validators.required),
-        'areaEstudio': new FormControl('', Validators.required),
-        'otraInstitucion': new FormControl('', Validators.required),
-        'estadoEstudio': new FormControl('', Validators.required),
-      });
+      this.studyLevelServices.getAll().subscribe(studyLevelList => this.studyLevelList = studyLevelList);
+      this.studyAreaServices.getAll().subscribe(studyAreaList => this.studyAreaList = studyAreaList);
+      this.studyStateServices.getAll().subscribe(studyStateList => this.studyStateList = studyStateList);
     }
-
 
     onSubmit(value: string) {
       this.submitted = true;
       this.msgs = [];
       this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
-      if (this.formalStudiesForm.valid) {
-        this.academicEducationService.addFormal(this.formalStudiesForm.value)
-            .subscribe(
-                data => {
-                    this.location.back();
-                });
-      }
+      this.academicEducationService.addFormal(this.fstudy)
+          .subscribe(
+              data => {
+                  this.location.back();
+          });
+    }
+
+    citySearch(event:any) {
+      this.citiesServices.getAllCities(event.query).subscribe(
+        cities => this.cityList = cities
+      );
+    }
+
+    captureCityId(event:any) {
+      this.fstudy.ciudad.value = event.value;
+    }
+
+    instituteSearch(event:any) {
+      this.instituteServices.getByWildCard(event.query).subscribe(
+        instituteList => this.instituteList = instituteList
+      );
+    }
+
+    captureInstituteId(event:any) {
+      this.fstudy.ciudad.value = event.value;
+    }
+
+    onSelectMethod(event:any) {
+      let d = new Date(Date.parse(event));
+      this.fstudy.ingreso = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
     }
 
     goBack(): void {

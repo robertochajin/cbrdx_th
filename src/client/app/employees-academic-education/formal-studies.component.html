@@ -12,9 +12,9 @@
         <p-column field="titulo" header="Título Obtenido" [sortable]="true"></p-column>
         <p-column field="ingreso" header="Ingreso " [sortable]="true"></p-column>
         <p-column field="finalizacion" header="Finalización" [sortable]="true"></p-column>
-        <p-column field="ciudad" header="Ciudad" [sortable]="true"></p-column>
-        <p-column field="institucion" header="Institución" [sortable]="true"></p-column>
-        <p-column field="confirmada" header="Confirmada" [sortable]="true"></p-column>
+        <p-column field="ciudad.label" header="Ciudad" [sortable]="true"></p-column>
+        <p-column field="institucion.label" header="Institución" [sortable]="true"></p-column>
+        <p-column field="confirmada.label" header="Confirmada" [sortable]="true"></p-column>
         <p-column header="Acciones" styleClass="datatable-col-action">
             <template let-fstudy="rowData" pTemplate="body">
                 <div class="btn-group" role="group">

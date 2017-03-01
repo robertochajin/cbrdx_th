@@ -15,14 +15,20 @@ import { NoFormalStudiesAddComponent }  from './no-formal-studies-add.component'
 import { NoFormalStudiesUpdateComponent }  from './no-formal-studies-update.component';
 
 import { AcademicEducationService } from './academic-education.service';
+import { CitiesServices } from '../_services/cities.service';
+import { InstituteServices } from '../_services/institute.service';
+import { StudyLevelServices } from '../_services/study-level.service';
+import { StudyAreaServices } from '../_services/study-area.service';
+import { StudyStateServices } from '../_services/study-state.service';
+
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule,
-        ConfirmDialogModule,CheckboxModule,MessagesModule } from 'primeng/primeng';
+        ConfirmDialogModule,AutoCompleteModule,CheckboxModule,MessagesModule } from 'primeng/primeng';
 
 
 @NgModule({
     imports:      [ CommonModule,InputTextModule,FormsModule,ReactiveFormsModule,DataTableModule,
                     ButtonModule,DialogModule,InputTextareaModule,CalendarModule,
-                    DropdownModule,ConfirmDialogModule,CheckboxModule, MessagesModule
+                    DropdownModule,ConfirmDialogModule,AutoCompleteModule,CheckboxModule, MessagesModule
                     ],
     declarations: [
                     FormalStudiesComponent,
@@ -35,7 +41,8 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
                     NoFormalStudiesDetailComponent
                     ],
     bootstrap:    [FormalStudiesComponent],
-    providers:    [AcademicEducationService],
+    providers:    [AcademicEducationService, CitiesServices, StudyLevelServices, StudyAreaServices, StudyStateServices,
+                  InstituteServices],
     exports: 	  [FormalStudiesComponent,NoFormalStudiesComponent]
 })
 export class AcademicEducationModule { }

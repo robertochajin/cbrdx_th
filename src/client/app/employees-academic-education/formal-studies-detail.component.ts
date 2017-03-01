@@ -1,31 +1,10 @@
-/**
- * Created by Angel on 15/02/2017.
- */
-
-
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
-import {Formalstudies} from './formal-studies';
-import {AcademicEducationService} from './academic-education.service';
+import { FormalStudies } from './formal-studies';
+import { AcademicEducationService } from './academic-education.service';
 
 import 'rxjs/add/operator/switchMap';
-
-class constructorFormal implements Formalstudies {
-    constructor(
-        public 	idEstudio?,
-        public 	titulo?,
-        public 	ingreso?,
-        public 	finalizacion?,
-        public 	ciudad?,
-        public 	institucion?,
-        public 	confirmada?,
-        public  nivelEstudio?,
-        public  areaEstudio?,
-        public  otraInstitucion?,
-        public  estadoEstudio?,
-    ) {}
-}
 
 
 @Component({
@@ -38,7 +17,7 @@ class constructorFormal implements Formalstudies {
 export class FormalStudiesDetailComponent implements OnInit   {
     @Input()
 
-    study: Formalstudies = new constructorFormal();
+    study: FormalStudies = new FormalStudies();
 
     constructor(
         private academicEducationService: AcademicEducationService,
