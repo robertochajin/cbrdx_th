@@ -1,84 +1,80 @@
-/**
- * Created by Angel on 14/02/2017.
- */
-import { Component, Input } from '@angular/core';
+import 'rxjs/add/operator/switchMap';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Location }                 from '@angular/common';
 import {References} from './references';
 import {ReferencesService} from './references.service';
-import { Location }                 from '@angular/common';
-import 'rxjs/add/operator/switchMap';
-import {Observable} from 'rxjs/Observable';
-import {date} from "gulp-util";
-import {modelGroupProvider} from "@angular/forms/src/directives/ng_model_group";
-import {SelectItem} from 'primeng/primeng';
+import {SelectItem, Message, ConfirmDialog, ConfirmationService } from 'primeng/primeng';
 
-//Constructor
-class constructorReferences implements References {
-    constructor(
-        public  idReferencia?,
-        public	tipodeReferencia?,
-        public	empresa?,
-        public	primerNombre?,
-        public	segundoNombre?,
-        public	primerApellido?,
-        public	segundoApellido?,
-        public	ciudad?,
-        public	telefono?,
-        public	celular?,
-        public	direccion?
-    ) {}
-}
+import { ReferencesTypesServices } from '../_services/references-type.service';
+import { CitiesServices } from '../_services/cities.service';
+
 
 
 @Component({
     moduleId: module.id,
     selector: 'references',
     templateUrl: 'references-form.component.html',
+    providers:  [ConfirmationService]
 })
 
-export class ReferencesAddComponent {
+export class ReferencesAddComponent implements OnInit  {
     @Input()
 
-    reference: References = new constructorReferences();
-    model: any = {};
+    reference: References = new References();
     header: string = 'Agregando Referencia';
-
-    cities: SelectItem[];
-
-    selectedCar: string = 'Paris';
+    referencesTypes: SelectItem[] = [];
+    cityList: any;
+    submitted: boolean;
+    msgs: Message[] = [];
 
     constructor (
         private referencesService: ReferencesService,
         private router: Router,
-        private location: Location
+        private location: Location,
+        private citiesServices: CitiesServices,
+        private referencesTypesServices: ReferencesTypesServices,
+        private confirmationService: ConfirmationService,
 
-    ) {
-        this.cities = [];
-        this.cities.push({label:'Select City', value:null});
-        this.cities.push({label:'New York', value:{id:1, name: 'New York', code: 'NY'}});
-        this.cities.push({label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}});
-        this.cities.push({label:'London', value:{id:3, name: 'London', code: 'LDN'}});
-        this.cities.push({label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}});
-        this.cities.push({label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}});
+    ) {}
 
-        //this.selectedCar = '1'
-       // this.cities.push({label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}});
+    ngOnInit () {
+        this.referencesTypesServices.getAll().subscribe(referencesTypes => this.referencesTypes = referencesTypes);
+    }
+    onSubmit() {
+
+      this.submitted = true;
+      this.msgs = [];
+      this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
+      this.referencesService.add(this.reference)
+        .subscribe(
+          data => {
+            this.location.back();
+          });
     }
 
-    save() {
+    citySearch(event:any) {
+      this.citiesServices.getAllCities(event.query).subscribe(
+        cities => this.cityList = cities
+      );
+    }
 
-        this.referencesService.add(this.reference)
-            .subscribe(
-                data => {
-                    //this.router.navigate(['/employees-family-information']);
-                    this.location.back();
-                },
-                error => {
-                });
+    captureCityId(event:any) {
+      this.reference.ciudad.value = event.value;
+      this.reference.ciudad.label = event.label;
     }
 
     goBack(): void {
-        this.location.back();
+      this.confirmationService.confirm({
+        message: ` ¿Esta seguro que desea Cancelar?`,
+        header: 'Corfirmación',
+        icon: 'fa fa-question-circle',
+        accept: () => {
+          this.location.back();
+        },
+        reject: () => {
+        }
+      });
     }
 }
 

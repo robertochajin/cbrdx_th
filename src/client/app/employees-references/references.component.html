@@ -10,16 +10,16 @@
         </div>
     </div>
     <p-dataTable [value]="references"   [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-        <p-column field="tipodeReferencia" header="Tipo de referencia" [sortable]="true"></p-column>
+        <p-column field="tipodeReferencia.label" header="Tipo de referencia" [sortable]="true"></p-column>
         <p-column field="nombreCompleto" header="Nombre" [sortable]="true"></p-column>
         <p-column field="numeroContacto" header="Número de contacto" [sortable]="true"></p-column>
-        <p-column field="ciudad" header="Ciudad" [sortable]="true"></p-column>
+        <p-column field="ciudad.label" header="Ciudad" [sortable]="true"></p-column>
         <p-column header="Acciones" styleClass="datatable-col-action">
             <template let-reference="rowData" pTemplate="body">
                 <div class="btn-group" role="group" aria-label="...">
                     <button type="button" pButton class="ui-button btn" (click)="detail(reference)" icon="fa-eye"></button>
                     <button type="button" pButton class="ui-button ui-button-success btn" (click)="update(reference)" icon="fa-pencil"></button>
-                    <button type="button" pButton class="ui-button ui-button-danger btn" (click)="delete(reference)" icon="fa-trash"></button>
+                    <button type="button" pButton class="ui-button ui-button-danger btn" (click)="del(reference)" icon="fa-trash"></button>
                 </div>
             </template>
         </p-column>

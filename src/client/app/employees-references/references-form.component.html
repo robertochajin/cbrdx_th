@@ -1,74 +1,133 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
 <div *ngIf="reference">
-    <div class="row">
-        <div class="col-md-12">
-            <div class=" clearfix">
-                <div class="header">
-                    <h4 class="title">{{header}}</h4>
-                </div>
-
-                <div class="clearfix">
-                    <div class="col-md-12">
-                        <h2></h2>
-                        <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
-                            <div class="form-group col-md-6" >
-                                <label for="tipodeReferencia">Tipo de Referencia</label>
-                                <input type="text" class="form-control" name="tipodeReferencia" [(ngModel)]="reference.tipodeReferencia" #tipodeReferencia="ngModel" required />
-
-
-                            </div>
-                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !empresa.valid }">
-                                <label for="empresa">Nombre empresa</label>
-                                <input type="text" class="form-control" name="empresa" [(ngModel)]="reference.empresa" #empresa="ngModel" required />
-                                <div *ngIf="f.submitted && !empresa.valid" class="help-block">Nombre empresa es requerido</div>
-                            </div>
-                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !primerNombre.valid }">
-                                <label for="primerNombre">Primer nombre</label>
-                                <input type="text" class="form-control" name="primerNombre" [(ngModel)]="reference.primerNombre" #primerNombre="ngModel" required />
-                                <div *ngIf="f.submitted && !primerNombre.valid" class="help-block">Primer nombre es requerido</div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="segundoNombre">Segundo nombre</label>
-                                <input type="text" class="form-control" name="segundoNombre" [(ngModel)]="reference.segundoNombre" #segundoNombre="ngModel" />
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="primerApellido">Primer apellido</label>
-                                <input type="text" class="form-control" name="primerApellido" [(ngModel)]="reference.primerApellido" #primerApellido="ngModel" />
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="segundoApellido">Segundo apellido</label>
-                                <input type="text" class="form-control" name="segundoApellido" [(ngModel)]="reference.segundoApellido" #segundoApellido="ngModel" />
-                            </div>
-                            <div class="form-group col-md-12" [ngClass]="{ 'has-error': f.submitted && !ciudad.valid }">
-                                <label for="ciudad">Ciudad</label>
-                                <input type="text" class="form-control" name="ciudad" [(ngModel)]="reference.ciudad" #ciudad="ngModel" required />
-                                <div *ngIf="f.submitted && !ciudad.valid" class="help-block">Ciudad es requerido</div>
-                            </div>
-                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !telefono.valid }">
-                                <label for="telefono">Teléfono</label>
-                                <input type="text" class="form-control" name="telefono" [(ngModel)]="reference.telefono" #telefono="ngModel" required />
-                                <div *ngIf="f.submitted && !telefono.valid" class="help-block">Teléfono es requerido</div>
-                            </div>
-                            <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !celular.valid }">
-                                <label for="celular">Celular</label>
-                                <input type="text" class="form-control" name="celular" [(ngModel)]="reference.celular" #celular="ngModel" required />
-                                <div *ngIf="f.submitted && !celular.valid" class="help-block">Celular es requerido</div>
-                            </div>
-                            <div class="form-group col-md-12" [ngClass]="{ 'has-error': f.submitted && !direccion.valid }">
-                                <label for="direccion">Direccion de Residencia</label>
-                                <textarea class="form-control" rows="6" name="direccion" [(ngModel)]="reference.direccion" #direccion="ngModel" required pInputTextarea></textarea>
-                                <div *ngIf="f.submitted && !direccion.valid" class="help-block">Direccion de Residencia es requerido</div>
-                            </div>
-                            <div class="form-group col-md-3 col-md-offset-9">
-                                <a (click)="goBack()" class=" btn-link">Cancelar</a>
-                                <button class="btn btn-primary">Agregar</button>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="header">
+        <h4 class="title">{{header}}</h4>
+      </div>
     </div>
+  </div>
+  <form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate>
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4">
+                <label for="tipodeReferencia">* Tipo de Referencia</label>
+                <p-dropdown  id="tipodeReferencia" name="tipodeReferencia" [options]="referencesTypes" [autoWidth]="false" required="true"
+                             [(ngModel)]="reference.tipodeReferencia.value"  #tipodeReferencia="ngModel"  ></p-dropdown>
+                <div class="ui-message ui-messages-error ui-corner-all"
+                     *ngIf="f.submitted && !tipodeReferencia.valid">
+                  <i class="fa fa-close"></i>
+                  Tipo de Referencia es requerido
+                </div>
+            </div>
+            <div class="ui-grid-col-8">
+                <label for="empresa">* Nombre empresa</label>
+                <input pInputText type="text" id="empresa" name="empresa" #empresa="ngModel"
+                       [(ngModel)]="reference.empresa" #empresa="ngModel" required/>
+                <div class="ui-message ui-messages-error ui-corner-all"
+                     *ngIf="f.submitted && !empresa.valid">
+                  <i class="fa fa-close"></i>
+                  Nombre empresa es requerido
+                </div>
+            </div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-6">
+                <label for="primerNombre">* Primer nombre</label>
+                <input pInputText type="text" id="primerNombre" name="primerNombre" #primerNombre="ngModel"
+                       [(ngModel)]="reference.primerNombre" required/>
+                <div class="ui-message ui-messages-error ui-corner-all"
+                     *ngIf="f.submitted && !primerNombre.valid">
+                  <i class="fa fa-close"></i>
+                  Primer nombre es requerido
+                </div>
+            </div>
+            <div class="ui-grid-col-6">
+                <label for="segundoNombre">Segundo nombre</label>
+                <input pInputText type="text" id="segundoNombre" name="segundoNombre"
+                       [(ngModel)]="reference.segundoNombre" />
+            </div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-6">
+                <label for="primerApellido">* Primer apellido</label>
+                <input pInputText type="text" id="primerApellido" name="primerApellido" #primerApellido="ngModel"
+                       [(ngModel)]="reference.primerApellido" required/>
+                <div class="ui-message ui-messages-error ui-corner-all"
+                     *ngIf="f.submitted && !primerApellido.valid">
+                  <i class="fa fa-close"></i>
+                  Primer apellido es requerido
+                </div>
+            </div>
+            <div class="ui-grid-col-6">
+                <label for="segundoApellido">* Segundo apellido</label>
+                <input pInputText type="text" id="segundoApellido" name="segundoApellido"
+                       [(ngModel)]="reference.segundoApellido" />
+            </div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-12">
+                <label for="ciudad">* Ciudad</label>
+                <p-autoComplete placeholder="Buscar ciudad" field="label" name="ciudad" id="ciudad"
+                                [(ngModel)]="reference.ciudad.label" #ciudad="ngModel" [suggestions]="cityList" required="true"
+                                (completeMethod)="citySearch($event)" (onSelect)="captureCityId($event)">
+                </p-autoComplete>
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ciudad.valid">
+                  <i class="fa fa-close"></i>
+                  Ciudad es requerida
+                </div>
+            </div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-6">
+                <label for="telefono">* Teléfono</label>
+                <input pInputText type="text" id="telefono" name="telefono" #telefono="ngModel"
+                       [(ngModel)]="reference.telefono" required/>
+                <div class="ui-message ui-messages-error ui-corner-all"
+                     *ngIf="f.submitted && !telefono.valid">
+                  <i class="fa fa-close"></i>
+                  Teléfono es requerido
+                </div>
+            </div>
+            <div class="ui-grid-col-6">
+                <label for="celular">* Celular</label>
+                <input pInputText type="text" id="celular" name="celular" #celular="ngModel"
+                       [(ngModel)]="reference.celular" required/>
+                <div class="ui-message ui-messages-error ui-corner-all"
+                     *ngIf="f.submitted && !celular.valid">
+                  <i class="fa fa-close"></i>
+                  Celular es requerido
+                </div>
+            </div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-12">
+                <label for="direccion">* Dirección</label>
+                <textarea id="direccion" name="direccion" pInputTextarea  rows="5" #direccion="ngModel"
+                          [(ngModel)]="reference.direccion" ></textarea>
+                <div class="ui-message ui-messages-error ui-corner-all"
+                     *ngIf="f.submitted && !direccion.valid">
+                  <i class="fa fa-close"></i>
+                  Dirección es requerido
+                </div>
+            </div>
+        </div>
+      <div class="ui-grid-row form-footer-buttons">
+        <div class="ui-grid-col-4"></div>
+        <div class="ui-grid-col-1">
+          <a (click)="goBack()" class="cancelar">Cancelar</a>
+        </div>
+        <div class="ui-grid-col-2">
+          <button pButton icon="fa-plus" label="Guardar" type="submit"></button>
+        </div>
+        <div class="ui-grid-col-5"></div>
+      </div>
+    </div>
+  </form>
 </div>

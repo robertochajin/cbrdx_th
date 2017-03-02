@@ -6,53 +6,56 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+          <form class="form-horizontal">
+              <fieldset>
+                  <div class="form-group">
+                      <div class="row">
+                          <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tipo de referencia:</label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.tipodeReferencia.label}}</strong></label>
 
+                          <label class="col-md-3 col-sm-6 col-xs-12 control-label">Empresa:</label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.empresa}}</strong></label>
+                      </div>
+                      <div class="row">
+                          <label class="col-md-3 col-sm-6 col-xs-12 control-label">Primero nombre:</label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.primerNombre}}</strong></label>
 
-            <form class="form-horizontal">
-                <fieldset>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Tipo de referencia:</label>
-                        <label class="col-md-3 "><strong>{{reference.tipodeReferencia}}</strong></label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 control-label">Segundo nombre:</label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.segundoNombre}}</strong></label>
+                      </div>
+                      <div class="row">
+                          <label class="col-md-3 col-sm-6 col-xs-12 control-label">Primero apellido:</label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.primerApellido}}</strong></label>
 
-                        <label class="col-md-3 control-label">Empresa:</label>
-                        <label class="col-md-3"><strong>{{reference.empresa}}</strong></label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 control-label">Segundo Apellido:</label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.segundoApellido}}</strong></label>
+                      </div>
+                      <div class="row">
+                          <label class="col-md-3 col-sm-6 col-xs-12 control-label">Ciudad:</label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.ciudad.label}}</strong></label>
 
-                        <label class="col-md-3 control-label">Primero nombre:</label>
-                        <label class="col-md-3"><strong>{{reference.primerNombre}}</strong></label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 control-label">telefono:</label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.telefono}}</strong></label>
+                      </div>
+                      <div class="row">
+                          <label class="col-md-3 col-sm-6 col-xs-12 control-label">celular:</label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.celular}}</strong></label>
 
-                        <label class="col-md-3 control-label">Segundo nombre:</label>
-                        <label class="col-md-3"><strong>{{reference.segundoNombre}}</strong></label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 control-label">Direccion:</label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.direccion}}</strong></label>
+                      </div>
 
-                        <label class="col-md-3 control-label">Primero apellido:</label>
-                        <label class="col-md-3"><strong>{{reference.primerApellido}}</strong></label>
+                  </div>
+              </fieldset>
+          </form>
 
-                        <label class="col-md-3 control-label">Segundo Apellido:</label>
-                        <label class="col-md-3"><strong>{{reference.segundoApellido}}</strong></label>
-
-                        <label class="col-md-3 control-label">Ciudad:</label>
-                        <label class="col-md-3"><strong>{{reference.ciudad}}</strong></label>
-
-                        <label class="col-md-3 control-label">telefono:</label>
-                        <label class="col-md-3"><strong>{{reference.telefono}}</strong></label>
-
-                        <label class="col-md-3 control-label">celular:</label>
-                        <label class="col-md-3"><strong>{{reference.celular}}</strong></label>
-
-                        <label class="col-md-3 control-label">Direccion:</label>
-                        <label class="col-md-3"><strong>{{reference.direccion}}</strong></label>
-
-                    </div>
-                </fieldset>
-            </form>
-
-        </div>
     </div>
 </div>
 
 <div class="row form-footer-buttons">
-    <div class="form-group col-md-12">
-        <a (click)="goBack()" class="btn btn-primary"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
-    </div>
+  <div class="form-group col-md-12">
+    <button icon="fa-arrow-left" label="Regresar"
+            pButton (click)="goBack()"></button>
+  </div>
 </div>
 

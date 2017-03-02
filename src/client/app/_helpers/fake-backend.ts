@@ -311,9 +311,8 @@ export let fakeBackendProvider = {
 
                     'idReferencia'          : "1",
                     'idColaborador'         : "1",
-                    'tipodeReferencia'      : "Laboral",
+                    'tipodeReferencia'      : {value: 1, label: "Laboral"},
                     'empresa'               : "Gobernación de Santander",
-                    'nombreCompleto'        : "Maria Angelica Diaz Ramirez",
                     'primerNombre'          : "Maria",
                     'segundoNombre'         : "Angelica",
                     'primerApellido'        : "Diaz",
@@ -321,7 +320,6 @@ export let fakeBackendProvider = {
                     'ciudad'                : {value: 1, label: "Bucaramanga"},
                     'telefono'              : "6597842",
                     'celular'               : "3215874125",
-                    'numeroContacto'        : "3169874125",
                     'direccion'             : "Calle 5 No. 19-25"
                 },
 
@@ -329,9 +327,8 @@ export let fakeBackendProvider = {
 
                     'idReferencia'          : "2",
                     'idColaborador'         : "1",
-                    'tipodeReferencia'      : "Laboral",
+                    'tipodeReferencia'      : {value: 1, label: "Laboral"},
                     'empresa'               : "ESSA",
-                    'nombreCompleto'        : "Alexander Ramirez",
                     'primerNombre'          : "Alexander",
                     'segundoNombre'         : "",
                     'primerApellido'        : "Ramirez",
@@ -339,16 +336,14 @@ export let fakeBackendProvider = {
                     'ciudad'                : {value: 1, label: "Bucaramanga"},
                     'telefono'              : "6597841",
                     'celular'               : "3168945217",
-                    'numeroContacto'        : "3159876541",
                     'direccion'             : "Cra 15 No. 26-87"
                 },
 
                 {
 
                     'idReferencia'          : "3",
-                    'tipodeReferencia'      : "Familiar",
+                    'tipodeReferencia'      : {value: 2, label: "Familiar"},
                     'empresa'               : "",
-                    'nombreCompleto'        : "Katherine Gomez Velazquez",
                     'primerNombre'          : "Katherine",
                     'segundoNombre'         : "",
                     'primerApellido'        : "Gomez",
@@ -356,7 +351,6 @@ export let fakeBackendProvider = {
                     'ciudad'                : {value: 1, label: "Girón"},
                     'telefono'              : "3159874158",
                     'celular'               : "3216987451",
-                    'numeroContacto'        : "6597841",
                     'direccion'             : "Cra 2 No. 12-98"
                 }
             ];
@@ -624,7 +618,6 @@ export let fakeBackendProvider = {
             {label: 'Terminado', value: '2'}
         ];
 
-
         let cities: any[] = [{'value': 101, 'label': 'Floridablanca - Santander - Colombia'},
                             {'value': 102, 'label': 'Floridablanca - Vichada - Colombia'},
                             {'value': 103, 'label': 'Floridablanca - Cesar - Colombia'},
@@ -654,6 +647,12 @@ export let fakeBackendProvider = {
                                         {'value' : "4", 'label' : "Primo"},
                                         {'value' : "5", 'label' : "Amigo"},
                                         {'value' : "6", 'label' : "abuelo"},
+                                    ];
+
+        let referencesTypeList: any[] = [
+                                          {label: 'Seleccione', value: null},
+                                          {label: 'Laboral', value: '1'},
+                                          {label: 'Familiar', value: '2'}
                                     ];
 
         // configure fake backend
@@ -1033,10 +1032,12 @@ export let fakeBackendProvider = {
                     // get new user object from post body
                     let newReference = JSON.parse(connection.request.getBody());
 
+                    let matchedreferencesType = referencesTypeList.filter(rel => { return rel.value == newReference.tipodeReferencia.value ; });
+
+                    newReference.tipodeReferencia = matchedreferencesType.length ? matchedreferencesType[0] : null;
+
                     // save new user
-                    newReference.idReferencia = familys.length + 1;
-                    newReference.nombreCompleto = newReference.primerNombre+' '+newReference.segundoNombre+' '+newReference.primerApellido+' '+newReference.segundoApellido;
-                    newReference.numeroContacto = newReference.telefono+' - '+newReference.celular;
+                    newReference.idReferencia = references.length + 1;
                     references.push(newReference);
                     localStorage.setItem('references', JSON.stringify(references));
 
@@ -1051,8 +1052,9 @@ export let fakeBackendProvider = {
                     // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                     // find user by id in users array
                     let newReference = JSON.parse(connection.request.getBody());
-                    newReference.nombreCompleto = newReference.primerNombre+' '+newReference.segundoNombre+' '+newReference.primerApellido+' '+newReference.segundoApellido;
-                    newReference.numeroContacto = newReference.telefono+' - '+newReference.celular;
+                    let matchedreferencesType = referencesTypeList.filter(rel => { return rel.value == newReference.tipodeReferencia.value; });
+                    newReference.tipodeReferencia = matchedreferencesType.length ? matchedreferencesType[0] : null;
+
                     let urlParts = connection.request.url.split('/');
                     let id = parseInt(urlParts[urlParts.length - 1]);
                     for (let i = 0; i < references.length; i++) {
@@ -1434,6 +1436,17 @@ export let fakeBackendProvider = {
                     })));
 
                 }
+// Tipos referencias
+
+              // obtiene todos
+              if (connection.request.url.endsWith('/api/references-types') && connection.request.method === RequestMethod.Get) {
+
+                connection.mockRespond(new Response(new ResponseOptions({
+                  status: 200,
+                  body:{data:referencesTypeList}
+                })));
+
+              }
 
             }, 500);
 
