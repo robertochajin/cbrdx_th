@@ -130,9 +130,12 @@
 
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-6">
-                    <label for="correoElectronico">Correo Electronico</label>
-                    <input pInputText type="text" id="correoElectronico" name="correoElectronico"
-                    [(ngModel)]="employLocation.correoElectronico" #correoElectronico="ngModel" />
+                        <label for="correoElectronico">Correo Electronico</label>
+                        <input pInputText type="text" id="correoElectronico" name="correoElectronico"
+                        [(ngModel)]="employLocation.correoElectronico" #correoElectronico="ngModel" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$" />
+                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !correoElectronico.valid">
+                          <i class="fa fa-close"></i>formato xxx@xxx.com
+                        </div>
                     </div>
 
                     <div class="ui-grid-col-6">
