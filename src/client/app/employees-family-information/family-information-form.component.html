@@ -84,7 +84,7 @@
                 <div class="ui-grid-col-4">
                     <label for="correoElectronico">* Correo electronico</label>
                     <input id="correoElectronico" name="correoElectronico" pInputText type="text" formControlName="correoElectronico"
-                           [(ngModel)]="familyInformation.correoElectronico" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"/>
+                           [(ngModel)]="familyInformation.correoElectronico" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"/>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['correoElectronico'].valid && familyform.controls['correoElectronico'].dirty">
                         <i class="fa fa-close"></i>
                         <span *ngIf="familyform.controls['correoElectronico'].errors['required']">Correo electronico es requerido</span>
