@@ -24,9 +24,15 @@
                     <button type="button" pButton class="ui-button ui-button-success btn" icon="fa-pencil"
                             pButton (click)="update(elocation)" ></button>
                     <button type="button" pButton class="ui-button ui-button-danger btn" icon="fa-trash"
-                            pButton (click)="delete(elocation)" ></button>
+                            pButton (click)="del(elocation)" ></button>
                 </div>
             </template>
         </p-column>
     </p-dataTable>
 </div>
+<p-confirmDialog width="400" #cd>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
