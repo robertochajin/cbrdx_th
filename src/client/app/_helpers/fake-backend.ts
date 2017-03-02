@@ -30,9 +30,9 @@ export let fakeBackendProvider = {
 
                     "ciudadExpedicion":"Bucaramanga",
 
-                    "fechaExp":"1 de 2 de 2010",
+                    "fechaExp":"1998-11-20",
 
-                    "fechaNacimiento":"12 de 12 de 1991",
+                    "fechaNacimiento":"1980-11-03",
 
                     "idtercero":"12",
 
@@ -88,9 +88,9 @@ export let fakeBackendProvider = {
 
                     "ciudadExpedicion":"Bucaramanga",
 
-                    "fechaExp":"2 de 3 de 2003",
+                    "fechaExp":"1999-11-20",
 
-                    "fechaNacimiento":"23 de 01 de 1985",
+                    "fechaNacimiento":"1981-11-05",
 
                     "idtercero":"23",
 
@@ -146,9 +146,9 @@ export let fakeBackendProvider = {
 
                     "ciudadExpedicion":"Bucaramanga",
 
-                    "fechaExp":"3 de 4 de 2004",
+                    "fechaExp":"2000-11-20",
 
-                    "fechaNacimiento":"12 de 03 de 1986",
+                    "fechaNacimiento":"1982-11-04",
 
                     "idtercero":"34",
 
@@ -204,9 +204,9 @@ export let fakeBackendProvider = {
 
                     "ciudadExpedicion":"Bucaramanga",
 
-                    "fechaExp":"4 de 5 de 2005",
+                    "fechaExp":"2001-11-20",
 
-                    "fechaNacimiento":"2 de 4 de 1987",
+                    "fechaNacimiento":"1983-11-04",
 
                     "idtercero":"45",
 
@@ -475,7 +475,7 @@ export let fakeBackendProvider = {
             || [
 
                 {
-                    'idExperiencia'             : "1",
+                    'idExperiencia'         : "1",
                     'idColaborador'         : "1",
                     'empresa'               : "Crezcamos",
                     'cargo'                 : "Gerente",
