@@ -71,22 +71,12 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/css/theme.css" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/index.html" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/tsconfig.json" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/cbrdx_template_ng.iml" afterPath="$PROJECT_DIR$/.idea/cbrdx_template_ng.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/tmp/app/app.component.html" afterPath="$PROJECT_DIR$/dist/tmp/app/app.component.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/tmp/app/home/home.component.html" afterPath="$PROJECT_DIR$/dist/tmp/app/home/home.component.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/tmp/app/shared/toolbar/toolbar.component.html" afterPath="$PROJECT_DIR$/dist/tmp/app/shared/toolbar/toolbar.component.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/tmp/index.html" afterPath="$PROJECT_DIR$/dist/tmp/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts" afterPath="$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-form.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-location/employees-location.constructor.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-location/employees-location.constructor.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-location/employees-location.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-location/employees-location.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-location/location-add.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-location/location-add.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-location/location-form.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-location/location-form.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-location/location-update.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-location/location-update.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-location/location.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-location/location.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-location/location.module.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-location/location.module.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-references/references-form.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-references/references-form.component.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -111,90 +101,7 @@
     <favorites_list name="cbrdx_th" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="family-information-add.component.ts" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="116" column="12" lean-forward="false" selection-start-line="116" selection-start-column="12" selection-end-line="116" selection-end-column="12" />
-              <folding>
-                <element signature="e#43#80#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="location-form.component.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/app/employees-location/location-form.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="89" column="75" lean-forward="false" selection-start-line="89" selection-start-column="71" selection-end-line="89" selection-end-column="75" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#6;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#1;n#div#6;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="location-add.component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/app/employees-location/location-add.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="59" column="61" lean-forward="false" selection-start-line="59" selection-start-column="61" selection-end-line="59" selection-end-column="61" />
-              <folding>
-                <element signature="e#0#37#0" expanded="true" />
-                <marker date="1488406813000" expanded="true" signature="1654:2189" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="location-update.component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/app/employees-location/location-update.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="159" column="18" lean-forward="false" selection-start-line="159" selection-start-column="2" selection-end-line="159" selection-end-column="18" />
-              <folding>
-                <element signature="e#0#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fake-backend.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
-              <caret line="589" column="40" lean-forward="false" selection-start-line="589" selection-start-column="40" selection-end-line="589" selection-end-column="40" />
-              <folding>
-                <element signature="e#49#146#0" expanded="true" />
-                <element signature="e#501#5913#0" expanded="false" />
-                <element signature="e#6004#8487#0" expanded="false" />
-                <element signature="e#8584#11105#0" expanded="false" />
-                <element signature="e#11198#13418#0" expanded="false" />
-                <element signature="e#13513#16136#0" expanded="false" />
-                <element signature="e#16234#19009#0" expanded="false" />
-                <element signature="e#19120#19880#0" expanded="false" />
-                <element signature="e#19898#20635#0" expanded="false" />
-                <element signature="e#22745#23140#0" expanded="false" />
-                <element signature="e#23177#23757#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="employees-location.constructor.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/app/employees-location/employees-location.constructor.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -234,8 +141,8 @@
       <find>finalAddress</find>
       <find>numberOne</find>
       <find>complementaries</find>
-      <find>cpml</find>
       <find>addComplementary</find>
+      <find>cpml</find>
       <find>complementaryNomenclatureList</find>
     </findStrings>
     <replaceStrings>
@@ -441,150 +348,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cbrdx_th" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cbrdx_th" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cbrdx_th" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cbrdx_th" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="employees-references" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cbrdx_th" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cbrdx_th" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="employees-location" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cbrdx_th" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cbrdx_th" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="employees-family-information" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cbrdx_th" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cbrdx_th" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="_helpers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cbrdx_th" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cbrdx_th" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="dist" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -753,7 +516,7 @@
       <workItem from="1487946494614" duration="7966000" />
       <workItem from="1488232555286" duration="2866000" />
       <workItem from="1488287971440" duration="2894000" />
-      <workItem from="1488291664965" duration="34702000" />
+      <workItem from="1488291664965" duration="35106000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'datatable-tracesmaker' into cbdx_th_observer_angel&#10;&#10;# Conflicts:&#10;#&#9;src/client/app/colaboradores/colaboradores.component.html&#10;">
       <created>1486676419265</created>
@@ -825,11 +588,18 @@
       <option name="project" value="LOCAL" />
       <updated>1487791386832</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Historia de ubicaciones primera versión">
+      <created>1488460579004</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1488460579004</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="278539000" />
+    <option name="totallyTimeSpent" value="278943000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -842,7 +612,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="712" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281493" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -852,7 +622,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.334375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.334375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48902822" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -901,7 +671,8 @@
     <MESSAGE value="Arreglo Colaboradores a employees&#10;Historia de Estudios formales&#10;" />
     <MESSAGE value="Experiencia laboral version 1" />
     <MESSAGE value="Ajustes de correcciones reportados por tester" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajustes de correcciones reportados por tester" />
+    <MESSAGE value="Historia de ubicaciones primera versión" />
+    <option name="LAST_COMMIT_MESSAGE" value="Historia de ubicaciones primera versión" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1125,16 +896,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-references/references-add.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="43" column="44" lean-forward="false" selection-start-line="43" selection-start-column="44" selection-end-line="43" selection-end-column="44" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/app/employees-references/references-detail.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1222,7 +983,7 @@
         <state relative-caret-position="570">
           <caret line="40" column="33" lean-forward="false" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
           <folding>
-            <element signature="e#43#80#0" expanded="true" />
+            <element signature="e#43#80#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1237,14 +998,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-location/employees-location.constructor.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/app/employees-location/location-add.componentcopy.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="474">
@@ -1253,12 +1006,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-location/location-update.component.ts">
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-references/references-add.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="159" column="18" lean-forward="false" selection-start-line="159" selection-start-column="2" selection-end-line="159" selection-end-column="18" />
+        <state relative-caret-position="240">
+          <caret line="27" column="26" lean-forward="true" selection-start-line="17" selection-start-column="8" selection-end-line="27" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="116" column="12" lean-forward="false" selection-start-line="116" selection-start-column="12" selection-end-line="116" selection-end-column="12" />
           <folding>
-            <element signature="e#0#37#0" expanded="true" />
+            <element signature="e#43#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-location/location-form.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="89" column="75" lean-forward="false" selection-start-line="89" selection-start-column="71" selection-end-line="89" selection-end-column="75" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#6;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#6;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1274,13 +1046,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-location/location-form.component.html">
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-location/location-update.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="89" column="75" lean-forward="false" selection-start-line="89" selection-start-column="71" selection-end-line="89" selection-end-column="75" />
+        <state relative-caret-position="239">
+          <caret line="159" column="18" lean-forward="false" selection-start-line="159" selection-start-column="2" selection-end-line="159" selection-end-column="18" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#6;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#6;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#0#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1305,13 +1076,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-add.component.ts">
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-location/employees-location.constructor.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="116" column="12" lean-forward="false" selection-start-line="116" selection-start-column="12" selection-end-line="116" selection-end-column="12" />
-          <folding>
-            <element signature="e#43#80#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="165">
+          <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
