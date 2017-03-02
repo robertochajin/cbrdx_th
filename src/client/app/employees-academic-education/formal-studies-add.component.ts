@@ -82,13 +82,27 @@ export class FormalStudiesAddComponent implements OnInit {
       this.fstudy.ciudad.value = event.value;
     }
 
-    onSelectMethod(event:any) {
+    onSelectBegin(event:any) {
       let d = new Date(Date.parse(event));
       this.fstudy.ingreso = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
     }
 
+    onSelectEnd(event:any) {
+      let d = new Date(Date.parse(event));
+      this.fstudy.finalizacion = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
+    }
+
     goBack(): void {
-        this.location.back();
+      this.confirmationService.confirm({
+        message: ` ¿Esta seguro que desea Cancelar?`,
+        header: 'Corfirmación',
+        icon: 'fa fa-question-circle',
+        accept: () => {
+          this.router.navigate(['/employees-formal-studies']);
+        },
+        reject: () => {
+        }
+      });
     }
 }
 
