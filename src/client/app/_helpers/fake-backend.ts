@@ -671,7 +671,7 @@ export let fakeBackendProvider = {
                     })));
 
                 }
-//Colaboradores
+
                 // obtiene un colaborador por el id
                 if (connection.request.url.match(/\/api\/employees\/\d+$/) && connection.request.method === RequestMethod.Get) {
                     // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
@@ -785,14 +785,12 @@ export let fakeBackendProvider = {
                     // save new user
                     newlocation.idUbicacion = locations.length + 1;
 
-                    let matchedCity = cities.filter(types => { return types.value == newlocation.ciudad; });
-                    let matchedAddressType = addressTypeList.filter(rel => { return rel.value == newlocation.tipoDireccion ; });
+                    let matchedAddressType = addressTypeList.filter(rel => { return rel.value == newlocation.tipoDireccion.value ; });
 
-                    newlocation.ciudad = matchedCity.length ? matchedCity[0] : null;
                     newlocation.tipoDireccion = matchedAddressType.length ? matchedAddressType[0] : null;
-                    //
-                    newlocation.departamento = "{'idDepartamento': 4, 'nombreDepartamento': 'Santander'}";
-                    newlocation.pais = "{'idPais': 1, 'nombrePais': 'Colombia'}";
+                    newlocation["departamento"] = {'value': 4, 'label': 'Santander'};
+                    newlocation["pais"] = {'value': 1, 'label': 'Colombia'};
+
                     locations.push(newlocation);
                     localStorage.setItem('locations', JSON.stringify(locations));
 
@@ -807,14 +805,12 @@ export let fakeBackendProvider = {
                     // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                     // find user by id in users array
                     let newlocation = JSON.parse(connection.request.getBody());
-                    let matchedCity = cities.filter(types => { return types.value == newlocation.ciudad; });
-                    let matchedAddressType = addressTypeList.filter(rel => { return rel.value == newlocation.tipoDireccion ; });
 
-                    newlocation.ciudad = matchedCity.length ? matchedCity[0] : null;
+                    let matchedAddressType = addressTypeList.filter(rel => { return rel.value == newlocation.tipoDireccion.value ; });
+
                     newlocation.tipoDireccion = matchedAddressType.length ? matchedAddressType[0] : null;
-                    //
-                    newlocation.departamento = "{'idDepartamento': 4, 'nombreDepartamento': 'Santander'}";
-                    newlocation.pais = "{'idPais': 1, 'nombrePais': 'Colombia'}";
+                    newlocation["departamento"] = {'value': 4, 'label': 'Santander'};
+                    newlocation["pais"] = {'value': 1, 'label': 'Colombia'};
 
                     let urlParts = connection.request.url.split('/');
                     let id = parseInt(urlParts[urlParts.length - 1]);
