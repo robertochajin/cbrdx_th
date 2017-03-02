@@ -29,6 +29,7 @@ export class FormalStudiesDetailComponent implements OnInit   {
         let este$ = this.route.params
             .switchMap((params: Params) => this.academicEducationService.getFormal(+params['id']));
         este$.subscribe(study => this.study = study);
+        console.log(this.study);
     }
 
     goBack(): void {

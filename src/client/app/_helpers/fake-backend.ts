@@ -1176,8 +1176,12 @@ export let fakeBackendProvider = {
                     // get new user object from post body
                     let news = JSON.parse(connection.request.getBody());
 
-                    // save new user
+                    // save new formal study
                     news.idEstudio = fstudies.length + 1;
+                    news.ciudad = cities.find(c => c.value === news.ciudad.value );
+                    news.estadoEstudio = studyStateList.find(s => s.value === news.estadoEstudio.value);
+                    news.areaEstudio = studyAreaList.find(s => s.value === news.areaEstudio.value);
+                    news.nivelEstudio = studyLevelList.find(s => s.value === news.nivelEstudio.value);
 
                     fstudies.push(news);
                     localStorage.setItem('fstudies', JSON.stringify(fstudies));
