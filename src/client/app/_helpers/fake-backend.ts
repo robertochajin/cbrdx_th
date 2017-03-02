@@ -548,7 +548,7 @@ export let fakeBackendProvider = {
                     'ciudad': {'idCiudad': 102, 'nombreCiudad': 'Bucaramanga'},
                     'departamento': {'idDepartamento': 4, 'nombreDepartamento': 'Santander'},
                     'pais': {'idPais': 1, 'nombrePais': 'Colombia'},
-                    'direccion': '2',
+                    'direccion': 'Cra 14 # 32 - 32 Torre 1',
                     'tipoDireccion': {'idTipoDireccion': 2, 'tipoDireccion': 'Comercial'},
                     'barrio': '2',
                     'correoElectronico': '2',
@@ -563,7 +563,7 @@ export let fakeBackendProvider = {
                     'ciudad': {'idCiudad': 103, 'nombreCiudad': 'Bucaramanga'},
                     'departamento': {'idDepartamento': 4, 'nombreDepartamento': 'Santander'},
                     'pais': {'idPais': 1, 'nombrePais': 'Colombia'},
-                    'direccion': '3',
+                    'direccion': 'calle 14 # 32 - 32 Torre 1',
                     'tipoDireccion': {'idTipoDireccion': 3, 'tipoDireccion': 'Comercial'},
                     'barrio': '3',
                     'correoElectronico': '3',
@@ -717,7 +717,7 @@ export let fakeBackendProvider = {
                 /*================ Ubicaciones ================*/
 
                 // obtiene el listado de Ubicaciones
-                if (connection.request.url.endsWith('/api/employees-employeeLocation') && connection.request.method === RequestMethod.Get) {
+                if (connection.request.url.endsWith('/api/employees-location') && connection.request.method === RequestMethod.Get) {
 
                     connection.mockRespond(new Response(new ResponseOptions({
                         status: 200,

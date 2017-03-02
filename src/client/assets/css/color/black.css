@@ -92,8 +92,12 @@
 /**
 ------------------ CSS Botones ------------------------
  */
-.ui-button:enabled:hover {
-    background-color: #b1c800;
+body .ui-button:focus,
+body .ui-button:enabled:hover {
+    background-color: #b1c800!important;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(177, 200, 0, 0.6);
+  -webkit-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(177, 200, 0, 0.6);
+  -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(177, 200, 0, 0.6);
 }
 /**
 ---------------- Paginador --------------------
