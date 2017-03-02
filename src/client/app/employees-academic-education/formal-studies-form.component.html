@@ -72,7 +72,7 @@
           </div>
           <div class="ui-grid-col-6">
             <label for="estadoEstudio">Estado Estudio</label>
-            <p-dropdown name="estadoEstudio" id="estadoEstudio" #estadoEstudio="ngModel" required="true"
+            <p-dropdown name="estadoEstudio" id="estadoEstudio" #estadoEstudio="ngModel" required="true" (onChange)="updateEnd()"
                         [autoWidth]="false" [(ngModel)]="fstudy.estadoEstudio.value" [options]="studyStateList"></p-dropdown>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !estadoEstudio.valid">
               Estado Estudio es requerido
@@ -83,6 +83,7 @@
           <div class="ui-grid-col-6">
             <label for="ingreso">Ingreso</label>
             <p-calendar id="ingreso" name="ingreso"  [showIcon]="true" [disabled]="disabled"
+                        [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true" [maxDate]="maxDate"
                         [dataType]="date" (onSelect)="onSelectBegin($event)" #ingreso="ngModel" required="true"
                         [(ngModel)]="fstudy.ingreso"></p-calendar>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ingreso.valid">
@@ -92,7 +93,8 @@
           <div class="ui-grid-col-6">
             <label for="finalizacion">Finalización</label>
             <p-calendar id="finalizacion" name="finalizacion"  [showIcon]="true" [disabled]="disabled"
-                        [dataType]="date" (onSelect)="onSelectEnd($event)" #finalizacion="ngModel" [required]="estadoEstudio.value == 2"
+                        [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true" [minDate]="minDate" [maxDate]="maxDateFinal"
+                        [dataType]="date" (onSelect)="onSelectEnd($event)" #finalizacion="ngModel" [required]="estadoEstudio.value == id_estado_estudio_finalizado"
                         [(ngModel)]="fstudy.finalizacion"></p-calendar>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !finalizacion.valid">
               Finalización es requerido

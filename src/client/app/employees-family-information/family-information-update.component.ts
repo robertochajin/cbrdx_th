@@ -28,6 +28,7 @@ export class FamilyInformationUpdateComponent implements OnInit{
     familyform: FormGroup;
     submitted: boolean;
     maxDate:Date = null;
+    minDate:Date = null;
     es: any;
     range: string;
 
@@ -55,8 +56,11 @@ export class FamilyInformationUpdateComponent implements OnInit{
         let lastYear = year-100;
         this.maxDate = new Date();
         this.maxDate.setMonth(month);
-        this.maxDate.setFullYear(year);
-        this.range = `${lastYear}:${year}`;
+      this.maxDate.setFullYear(year);
+      this.minDate = new Date();
+      this.minDate.setMonth(1);
+      this.minDate.setFullYear(lastYear);
+      this.range = `${lastYear}:${year}`;
 
         this.familyform = this.fb.group({
           'tipoDeDocumento': new FormControl('', Validators.required),
