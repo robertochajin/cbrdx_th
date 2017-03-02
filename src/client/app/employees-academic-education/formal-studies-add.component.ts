@@ -79,7 +79,7 @@ export class FormalStudiesAddComponent implements OnInit {
     }
 
     captureInstituteId(event:any) {
-      this.fstudy.ciudad.value = event.value;
+      this.fstudy.institucion.value = event.value;
     }
 
     onSelectBegin(event:any) {
