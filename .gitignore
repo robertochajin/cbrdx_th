@@ -52,7 +52,6 @@ gulpfile.js.map
 
 # OS X trash files
 .DS_Store
-
-# Otros Archivos
-dist/dev/index.html
-.idea/workspace.xml
+src/client/app/shared/config/env.config.js
+src/client/app/shared/config/env.config.js.map
+.idea/*

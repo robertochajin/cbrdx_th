@@ -7,7 +7,6 @@ import {Router} from '@angular/router';
 import {FamilyInformationService} from './family-information.service';
 import {constructorFamilyInformation} from './family-information.construct';
 import {ConfirmationService} from 'primeng/primeng';
-import * as moment from 'moment/moment';
 
 @Component({
     moduleId: module.id,
@@ -21,7 +20,6 @@ export class FamilyInformationComponent {
     dialogObjet: constructorFamilyInformation = new constructorFamilyInformation();
     familyInformations: constructorFamilyInformation[];
 
-
     constructor(
         private familyInformationService: FamilyInformationService,
         private router: Router,
@@ -34,8 +32,13 @@ export class FamilyInformationComponent {
                 this.familyInformations = familyInformations;
                 this.familyInformations.forEach(function(obj, index){
                     obj.nombreCompleto = obj.primerNombre+' '+obj.segundoNombre+' '+obj.primerApellido+' '+obj.segundoApellido;
-                    let then = moment(obj.fechadeNacimiento,'MM/DD/YYYY').toNow(true);
-                    obj.edad = then.toString();
+
+                    let timestamp1 = new Date(obj.fechadeNacimiento).getTime();
+                    let timestamp2 = new Date().getTime();
+
+                    var timeDiff = Math.abs(timestamp2 - timestamp1);
+                    var diffDays = Math.round(timeDiff / (1000 * 3600 * 24 * 360));
+                    obj.edad = diffDays;
                 });
             }
         );

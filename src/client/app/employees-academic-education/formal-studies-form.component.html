@@ -1,3 +1,5 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400"></p-confirmDialog>
 <div *ngIf="fstudy">
     <div class="row">
         <div class="col-md-12">
@@ -6,33 +8,31 @@
             </div>
         </div>
     </div>
-  <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate
-        class="form">
+  <form  (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
             <label for="nivelEstudio">Nivel de Estudios</label>
-            <input type="text" pInputText name="nivelEstudio" id="nivelEstudio"
-                   [(ngModel)]="fstudy.nivelEstudio" #nivelEstudio="ngModel" />
-            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !nivelEstudio.valid" >Tipo de
+            <p-dropdown name="nivelEstudio" id="nivelEstudio" #nivelEstudio="ngModel" required="true"
+                        [autoWidth]="false" [(ngModel)]="fstudy.nivelEstudio.value" [options]="studyLevelList"></p-dropdown>
+            <div class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !nivelEstudio.valid">
               Nivel de Estudios es requerido
             </div>
           </div>
           <div class="ui-grid-col-6">
             <label for="areaEstudio">Area de Estudios</label>
-            <input type="text" pInputText name="areaEstudio" id="areaEstudio"
-                   [(ngModel)]="fstudy.areaEstudio" />
-            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !areaEstudio.valid">Area de
-              Estudios es requerido
+            <p-dropdown name="areaEstudio" id="areaEstudio" #areaEstudio="ngModel" required="true"
+                        [autoWidth]="false" [(ngModel)]="fstudy.areaEstudio.value" [options]="studyAreaList"></p-dropdown>
+            <div class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !areaEstudio.valid">
+              area de estudio es requerida
             </div>
           </div>
         </div>
         <div class="ui-grid-row">
-          <div class="form-group col-md-12"
-               [ngClass]="{ 'has-error': f.submitted && !titulo.valid }">
+          <div class="form-group col-md-12">
             <label for="titulo">Título</label>
-            <input type="text" pInputText name="titulo" id="titulo"
-                   [(ngModel)]="fstudy.titulo" #titulo="ngModel" />
+            <input type="text" pInputText name="titulo" id="titulo"  #titulo="ngModel" required="true"
+                   [(ngModel)]="fstudy.titulo"  />
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !titulo.valid">
               Título es requerido
             </div>
@@ -41,17 +41,20 @@
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
             <label for="institucion">Institución</label>
-            <input type="text" pInputText name="institucion" id="institucion"
-                   [(ngModel)]="fstudy.institucion" #institucion="ngModel" />
+            <p-autoComplete placeholder="Buscar institucion" field="label" #institucion="ngModel"
+                            name="institucion" id="institucion" [required]="otraInstitucion.value === undefined || otraInstitucion.value === ''"
+                            [(ngModel)]="fstudy.institucion.label" [suggestions]="instituteList"
+                            (completeMethod)="instituteSearch($event)" (onSelect)="captureInstituteId($event)" >
+            </p-autoComplete>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !institucion.valid">
               Institución es requerido
             </div>
           </div>
           <div class="ui-grid-col-6">
             <label for="otraInstitucion">Otra Institución</label>
-            <input type="text" pInputText name="otraInstitucion" id="otraInstitucion"
-                   [(ngModel)]="fstudy.otraInstitucion" #otraInstitucion="ngModel" />
-            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !institucion.valid">
+            <input type="text" pInputText name="otraInstitucion" id="otraInstitucion"  #otraInstitucion="ngModel"
+                   [(ngModel)]="fstudy.otraInstitucion" [required]="institucion.value === undefined || institucion.value === ''" />
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !otraInstitucion.valid">
               Otra Institución es requerido
             </div>
           </div>
@@ -59,16 +62,18 @@
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
             <label for="ciudad">Ciudad</label>
-            <input type="text" pInputText name="ciudad" id="ciudad"
-                   [(ngModel)]="fstudy.ciudad" #ciudad="ngModel" />
+            <p-autoComplete placeholder="Buscar ciudad" field="nombreCiudad" #ciudad="ngModel" name="ciudad" id="ciudad"
+                            [(ngModel)]="fstudy.ciudad.label" [suggestions]="cityList" required="true"
+                            (completeMethod)="citySearch($event)" (onSelect)="captureCityId($event)" >
+            </p-autoComplete>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ciudad.valid">
               Ciudad es requerido
             </div>
           </div>
           <div class="ui-grid-col-6">
             <label for="estadoEstudio">Estado Estudio</label>
-            <input type="text" pInputText name="estadoEstudio" id="estadoEstudio"
-                   [(ngModel)]="fstudy.estadoEstudio" #estadoEstudio="ngModel" />
+            <p-dropdown name="estadoEstudio" id="estadoEstudio" #estadoEstudio="ngModel" required="true"
+                        [autoWidth]="false" [(ngModel)]="fstudy.estadoEstudio.value" [options]="studyStateList"></p-dropdown>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !estadoEstudio.valid">
               Estado Estudio es requerido
             </div>
@@ -77,26 +82,33 @@
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
             <label for="ingreso">Ingreso</label>
-            <input type="text" pInputText name="ingreso" id="ingreso"
-                   [(ngModel)]="fstudy.ingreso" #ingreso="ngModel" />
+            <p-calendar id="ingreso" name="ingreso"  [showIcon]="true" [disabled]="disabled"
+                        [dataType]="date" (onSelect)="onSelectMethod($event)" #ingreso="ngModel" required="true"
+                        [(ngModel)]="fstudy.ingreso"></p-calendar>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ingreso.valid">
               Ingreso es requerido
             </div>
           </div>
           <div class="ui-grid-col-6">
             <label for="finalizacion">Finalización</label>
-            <input type="text" pInputText name="finalizacion" id="finalizacion"
-                   [(ngModel)]="fstudy.finalizacion" #finalizacion="ngModel" />
+            <p-calendar id="finalizacion" name="finalizacion"  [showIcon]="true" [disabled]="disabled"
+                        [dataType]="date" (onSelect)="onSelectMethod($event)" #finalizacion="ngModel" required="true"
+                        [(ngModel)]="fstudy.finalizacion"></p-calendar>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !finalizacion.valid">
               Finalización es requerido
             </div>
           </div>
         </div>
+
         <div class="ui-grid-row form-footer-buttons">
-          <div class="form-group col-md-12">
+          <div class="ui-grid-col-4"></div>
+          <div class="ui-grid-col-1">
             <a (click)="goBack()" class="cancelar">Cancelar</a>
-            <button class="btn btn-primary">Guardar</button>
           </div>
+          <div class="ui-grid-col-2">
+            <button icon="fa-plus" label="Guardar" type="submit" pButton></button>
+          </div>
+          <div class="ui-grid-col-5"></div>
         </div>
     </div>
   </form>

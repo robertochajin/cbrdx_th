@@ -1,25 +1,10 @@
-/**
- * Created by Angel on 14/02/2017.
- */
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormalStudies } from './formal-studies';
+import { AcademicEducationService } from './academic-education.service';
+import { Observable } from 'rxjs/Observable';
+import { ConfirmationService } from 'primeng/primeng';
 
-import {Formalstudies} from './formal-studies';
-import {AcademicEducationService} from './academic-education.service';
-import {Observable} from 'rxjs/Observable';
-import {ConfirmationService} from 'primeng/primeng';
-
-class constructorFormal implements Formalstudies {
-    constructor(
-        public 	idEstudio?,
-        public 	titulo?,
-        public 	ingreso?,
-        public 	finalizacion?,
-        public 	ciudad?,
-        public 	institucion?,
-        public 	confirmada?,
-    ) {}
-}
 
 @Component({
     moduleId: module.id,
@@ -29,9 +14,9 @@ class constructorFormal implements Formalstudies {
 })
 export class FormalStudiesComponent {
 
-    fstudy: Formalstudies = new constructorFormal();
-    dialogObjet: Formalstudies = new constructorFormal();
-    fstudies: Formalstudies[];
+    fstudy: FormalStudies = new FormalStudies();
+    dialogObjet: FormalStudies = new FormalStudies();
+    fstudies: FormalStudies[];
 
     constructor(
         private academicEducationService: AcademicEducationService,
@@ -45,7 +30,7 @@ export class FormalStudiesComponent {
         );
     }
 
-    delete(f: Formalstudies) {
+    delete(f: FormalStudies) {
         this.dialogObjet = f;
         this.confirmationService.confirm({
             message: ` ¿Esta seguro que lo desea eliminar?`,
@@ -62,7 +47,7 @@ export class FormalStudiesComponent {
         });
     }
 
-    detail(f: Formalstudies) {
+    detail(f: FormalStudies) {
         this.router.navigate(['employees-formal-studies/detail/'+f.idEstudio]);
     }
 
@@ -70,7 +55,7 @@ export class FormalStudiesComponent {
         this.router.navigate(['employees-formal-studies/add']);
     }
 
-    update(f: Formalstudies) {
+    update(f: FormalStudies) {
         this.router.navigate(['employees-formal-studies/update/'+f.idEstudio]);
     }
 }
