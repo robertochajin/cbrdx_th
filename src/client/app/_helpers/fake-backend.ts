@@ -1182,9 +1182,9 @@ export let fakeBackendProvider = {
 
                     // save new user
                     news.idEstudio = fstudies.length + 1;
-                    news.nombreCompleto = news.primerNombre+' '+news.segundoNombre+' '+news.primerApellido+' '+news.segundoApellido;
+
                     fstudies.push(news);
-                    localStorage.setItem('references', JSON.stringify(fstudies));
+                    localStorage.setItem('fstudies', JSON.stringify(fstudies));
 
                     // respond 200 OK
                     connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
