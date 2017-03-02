@@ -527,14 +527,15 @@ export let fakeBackendProvider = {
                 }
             ];
 
-        let locations: any[] = JSON.parse(localStorage.getItem('locations')) || [
+        let locations: any[] = JSON.parse(localStorage.getItem('locations')) ||
+          [
                 {
                     'idUbicacion': '1',
-                    'ciudad': {'idCiudad': 103, 'nombreCiudad': 'Bucaramanga'},
-                    'departamento': {'idDepartamento': 3, 'nombreDepartamento': 'Santander'},
-                    'pais': {'idPais': 3, 'nombrePais': 'Colombia'},
+                    'ciudad': {'value': 103, 'label': 'Bucaramanga'},
+                    'departamento': {'value': 3, 'label': 'Santander'},
+                    'pais': {'value': 3, 'label': 'Colombia'},
                     'direccion': 'Diagonal 14 # 32 - 32 Torre 1 Apartamento 4 ',
-                    'tipoDireccion': {'idTipoDireccion': 2, 'tipoDireccion': 'Comercial'},
+                    'tipoDireccion': {'value': 2, 'label': 'Comercial'},
                     'barrio': 'San Alonso',
                     'correoElectronico': 'estecorreo@gmail.com',
                     'longitud': '-73.11609329999999',
@@ -545,42 +546,42 @@ export let fakeBackendProvider = {
                 },
                 {
                     'idUbicacion': '2',
-                    'ciudad': {'idCiudad': 102, 'nombreCiudad': 'Bucaramanga'},
-                    'departamento': {'idDepartamento': 4, 'nombreDepartamento': 'Santander'},
-                    'pais': {'idPais': 1, 'nombrePais': 'Colombia'},
+                    'ciudad': {'value': 102, 'label': 'Bucaramanga'},
+                    'departamento': {'value': 4, 'label': 'Santander'},
+                    'pais': {'value': 1, 'label': 'Colombia'},
                     'direccion': 'Cra 14 # 32 - 32 Torre 1',
-                    'tipoDireccion': {'idTipoDireccion': 2, 'tipoDireccion': 'Comercial'},
-                    'barrio': '2',
-                    'correoElectronico': '2',
-                    'longitud': '2',
-                    'latitud': '2',
-                    'comoLlegar': '2',
-                    'celular': '2',
-                    'telefono': '2',
+                    'tipoDireccion': {'value': 2, 'label': 'Comercial'},
+                    'barrio': 'Alarcon',
+                    'correoElectronico': 'estecorreo@gmail.com',
+                    'longitud': '-73.11609329999999',
+                    'latitud': '7.1344315',
+                    'comoLlegar': 'caminando',
+                    'celular': '3008442354',
+                    'telefono': '6352354',
                 },
                 {
                     'idUbicacion': '3',
-                    'ciudad': {'idCiudad': 103, 'nombreCiudad': 'Bucaramanga'},
-                    'departamento': {'idDepartamento': 4, 'nombreDepartamento': 'Santander'},
-                    'pais': {'idPais': 1, 'nombrePais': 'Colombia'},
+                    'ciudad': {'value': 103, 'label': 'Bucaramanga'},
+                    'departamento': {'value': 4, 'label': 'Santander'},
+                    'pais': {'value': 1, 'label': 'Colombia'},
                     'direccion': 'calle 14 # 32 - 32 Torre 1',
-                    'tipoDireccion': {'idTipoDireccion': 3, 'tipoDireccion': 'Comercial'},
-                    'barrio': '3',
-                    'correoElectronico': '3',
-                    'longitud': '3',
-                    'latitud': '3',
-                    'comoLlegar': '3',
-                    'celular': '3',
-                    'telefono': '3',
+                    'tipoDireccion': {'value': 3, 'label': 'Comercial'},
+                    'barrio': 'Alarcon',
+                    'correoElectronico': 'estecorreo@gmail.com',
+                    'longitud': '-73.11609329999999',
+                    'latitud': '7.1344315',
+                    'comoLlegar': 'caminando',
+                    'celular': '3008442354',
+                    'telefono': '6352354',
                 }
             ];
 
         let principalNomenclatureList = [
             {label: 'Seleccione', value: null},
-            {label: 'Carrera', value: 'Carrera'},
-            {label: 'Calle', value: 'Calle'},
-            {label: 'Diagonal', value: 'Diagonal'},
-            {label: 'Avenida', value: 'Avenida'}
+            {label: 'Carrera', value: 1},
+            {label: 'Calle', value: 2},
+            {label: 'Diagonal', value: 3},
+            {label: 'Avenida', value: 4}
         ];
 
         let complementaryNomenclatureList = [
@@ -592,18 +593,18 @@ export let fakeBackendProvider = {
         ];
 
         let addressTypeList = [
-            {label: 'Seleccione', value: '0'},
+            {label: 'Seleccione', value: null},
             {label: 'Residencial', value: '1'},
             {label: 'Comercial', value: '2'}
         ];
 
 
-        let cities: any[] = [{'idCiudad': 101, 'nombreCiudad': 'Floridablanca - Santander - Colombia'},
-                            {'idCiudad': 102, 'nombreCiudad': 'Floridablanca - Vichada - Colombia'},
-                            {'idCiudad': 103, 'nombreCiudad': 'Floridablanca - Cesar - Colombia'},
-                            {'idCiudad': 104, 'nombreCiudad': 'Bucaramanga - Santander - Colombia'},
-                            {'idCiudad': 105, 'nombreCiudad': 'Bogota - Cundinamarca - Colombia'},
-                            {'idCiudad': 106, 'nombreCiudad': 'Cartagena - Bolivar - Colombia'},];
+        let cities: any[] = [{'value': 101, 'label': 'Floridablanca - Santander - Colombia'},
+                            {'value': 102, 'label': 'Floridablanca - Vichada - Colombia'},
+                            {'value': 103, 'label': 'Floridablanca - Cesar - Colombia'},
+                            {'value': 104, 'label': 'Bucaramanga - Santander - Colombia'},
+                            {'value': 105, 'label': 'Bogota - Cundinamarca - Colombia'},
+                            {'value': 106, 'label': 'Cartagena - Bolivar - Colombia'},];
 
         let documentTypes: any[] = [
                                         {'value' : null, 'label' : "Seleccione"},
@@ -750,6 +751,15 @@ export let fakeBackendProvider = {
 
                     // save new user
                     newlocation.idUbicacion = locations.length + 1;
+
+                    let matchedCity = cities.filter(types => { return types.value == newlocation.ciudad; });
+                    let matchedAddressType = addressTypeList.filter(rel => { return rel.value == newlocation.tipoDireccion ; });
+
+                    newlocation.ciudad = matchedCity.length ? matchedCity[0] : null;
+                    newlocation.tipoDireccion = matchedAddressType.length ? matchedAddressType[0] : null;
+                    //
+                    newlocation.departamento = "{'idDepartamento': 4, 'nombreDepartamento': 'Santander'}";
+                    newlocation.pais = "{'idPais': 1, 'nombrePais': 'Colombia'}";
                     locations.push(newlocation);
                     localStorage.setItem('locations', JSON.stringify(locations));
 
@@ -764,8 +774,15 @@ export let fakeBackendProvider = {
                     // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                     // find user by id in users array
                     let newlocation = JSON.parse(connection.request.getBody());
-                    newlocation.nombreCompleto = newlocation.primerNombre+' '+newlocation.segundoNombre+' '+newlocation.primerApellido+' '+newlocation.segundoApellido;
-                    newlocation.edad = 25;
+                    let matchedCity = cities.filter(types => { return types.value == newlocation.ciudad; });
+                    let matchedAddressType = addressTypeList.filter(rel => { return rel.value == newlocation.tipoDireccion ; });
+
+                    newlocation.ciudad = matchedCity.length ? matchedCity[0] : null;
+                    newlocation.tipoDireccion = matchedAddressType.length ? matchedAddressType[0] : null;
+                    //
+                    newlocation.departamento = "{'idDepartamento': 4, 'nombreDepartamento': 'Santander'}";
+                    newlocation.pais = "{'idPais': 1, 'nombrePais': 'Colombia'}";
+
                     let urlParts = connection.request.url.split('/');
                     let id = parseInt(urlParts[urlParts.length - 1]);
                     for (let i = 0; i < locations.length; i++) {
@@ -811,8 +828,8 @@ export let fakeBackendProvider = {
                     let urlParts = connection.request.url.split('/');
                     let qr = urlParts[urlParts.length - 1];
                     let matched = cities.filter(cities => {
-                        //return cities.nombreCiudad.match(/^qr.*$/);
-                        if(cities.nombreCiudad.match(/[qr]+/)){
+                        //return cities.value.match(/^qr.*$/);
+                        if(cities.label.match(/[qr]+/)){
                             return cities;
                         }
                     });

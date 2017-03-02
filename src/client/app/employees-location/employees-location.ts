@@ -1,10 +1,10 @@
 export interface EmployeesLocation {
     idUbicacion:String;
     direccion:String;
-    ciudad:{idCiudad:number, nombreCiudad:String};
-    departamento:{idDepartamento:number, nombreDepartamento:String};
-    pais:{idPais:number, nombrePais:String};
-    tipoDireccion:{idTipoDireccion: number, tipoDireccion: String};
+    ciudad:{value:number, label:String};
+    departamento?:{value:number, label:String};
+    pais?:{value:number, label:String};
+    tipoDireccion:{value: number, label: String};
     barrio?:String;
     correoElectronico?:String;
     longitud?:String;

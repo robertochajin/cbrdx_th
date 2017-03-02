@@ -1,7 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import 'rxjs/add/operator/toPromise';
 
 import { LocationComponent }  from './location.component';
@@ -10,20 +10,27 @@ import { LocationAddComponent }  from './location-add.component';
 import { LocationUpdateComponent }  from './location-update.component';
 import { LocationService } from './location.service';
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,
-    AutoCompleteModule, DropdownModule } from 'primeng/primeng';
+    AutoCompleteModule, DropdownModule,
+  MessagesModule,
+  ConfirmDialogModule
+} from 'primeng/primeng';
 
 
 @NgModule({
     imports:      [CommonModule,
                     InputTextModule,
                     FormsModule,
+                    ReactiveFormsModule,
                     DataTableModule,
                     ButtonModule,
                     DialogModule,
                     InputTextareaModule,
                     CalendarModule,
                     AutoCompleteModule,
-                    DropdownModule],
+                    DropdownModule,
+                    MessagesModule,
+                    ConfirmDialogModule
+    ],
     declarations: [LocationComponent,
                    LocationDetailComponent,
                    LocationAddComponent,

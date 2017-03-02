@@ -47,6 +47,8 @@ export class FamilyInformationComponent {
             message: ` ¿Esta seguro que desea eliminar?`,
             header: 'Corfirmación',
             icon: 'fa fa-question-circle',
+            // ok:'Si',
+            // cancel: "NO",
             accept: () => {
                 this.familyInformationService.delete(this.dialogObjet);
                 this.familyInformations.splice(this.familyInformations.indexOf(this.dialogObjet), 1);
