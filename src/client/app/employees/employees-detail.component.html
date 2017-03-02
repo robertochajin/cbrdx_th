@@ -1,214 +1,132 @@
 <div *ngIf="employee">
 
 
-    <div class="row">
+  <div class="row">
 
-        <div class="col-md-12">
-            <div class="card clearfix">
-                <div class="header">
-                    <h4 class="title">Colaboradores</h4>
-                </div>
+    <div class="col-md-12">
 
-                <div class="clearfix">
-                    <div class="col-md-2">
-                        <img class="thumbnail pull-left img-responsive"
-                             src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg">
-                    </div>
-                    <div class="col-md-8">
-                        <h4>{{employee.primerNombre}} - {{employee.fechaNacimiento}}</h4>
-                        <span>{{employee.tipoDocumento}} {{employee.numeroDocumento}}</span><br/>
-                        <span>{{employee.cargoActual}} - Area/oficina ({{employee.fechaDesde}})</span>
-                    </div>
-                    <div class="col-md-2">
-                        <a href="#" class="btn btn-primary">Historial Laboral</a>
-                    </div>
-                </div>
-
-                <div class="col-xs-9">
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="infoPersonal">
-
-
-                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" data-toggle="collapse" data-parent="#accordion"
-                                 href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="pnlDatosGenerales">
-                                        <h4 class="panel-title">
-                                            <a role="button" >
-                                                Datos Generales
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
-                                         aria-labelledby="headingOne">
-                                        <div class="panel-body">
-
-                                            <form class="form-horizontal">
-                                                <fieldset>
-                                                    <div class="form-group">
-
-                                                        <label class="col-md-3 control-label">Fecha de Exp.:</label>
-                                                        <label class="col-md-3 "><strong>{{employee.fechaExp}}</strong></label>
-
-                                                        <label class="col-md-3 control-label">Ciudad de Exp.:</label>
-                                                        <label class="col-md-3"><strong>{{employee.ciudadExpedicion}}</strong></label>
-
-                                                        <label class="col-md-3 control-label">Fecha de Nacimiento:</label>
-                                                        <label class="col-md-3"><strong>{{employee.fechaNacimiento}}</strong></label>
-
-                                                        <label class="col-md-3 control-label">ciudad de Nacimiento:</label>
-                                                        <label class="col-md-3"><strong>{{employee.ciudadNacimiento}}</strong></label>
-
-                                                        <label class="col-md-3 control-label">Nacionalidad:</label>
-                                                        <label class="col-md-3"><strong>{{employee.nacionalidad}}</strong></label>
-
-                                                        <label class="col-md-3 control-label">Genero:</label>
-                                                        <label class="col-md-3"><strong>{{employee.genero}}</strong></label>
-
-                                                        <label class="col-md-3 control-label">Estado Civil:</label>
-                                                        <label class="col-md-3"><strong>{{employee.estadoCivil}}</strong></label>
-
-                                                        <label class="col-md-3 control-label">Factor RH:</label>
-                                                        <label class="col-md-3"><strong>{{employee.factorrh}}</strong></label>
-
-                                                        <label class="col-md-3 control-label">Numero de Hijos:</label>
-                                                        <label class="col-md-3"><strong>{{employee.numeroDeHijos}}</strong></label>
-
-                                                        <label class="col-md-3 control-label">Lateralidad:</label>
-                                                        <label class="col-md-3"><strong>{{employee.lateralidad}}</strong></label>
-
-                                                        <label class="col-md-3 control-label">Nivel Educativo:</label>
-                                                        <label class="col-md-3"><strong>{{employee.nivelEducativo}}</strong></label>
-
-                                                        <label class="col-md-3 control-label">Profesión:</label>
-                                                        <label class="col-md-3"><strong>{{employee.profesion}}</strong></label>
-
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default" data-toggle="collapse"
-                                     data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
-                                     aria-controls="collapseTwo">
-                                    <div class="panel-heading" role="tab" id="pnlInformacionFamiliar">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" >
-                                                Información Familiar
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
-                                         aria-labelledby="headingTwo">
-                                        <div class="panel-body">
-                                          <familyinformation></familyinformation>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="panel panel-default" data-toggle="collapse"
-                                     data-parent="#accordion" href="#collapseThree" aria-expanded="false"
-                                     aria-controls="collapseThree">
-                                    <div class="panel-heading" role="tab" id="pnlUbicacion">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" >
-                                                Ubicación
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
-                                         aria-labelledby="headingThree">
-                                        <div class="panel-body">
-                                            info de la ubicación
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="panel panel-default" data-toggle="collapse"
-                                     data-parent="#accordion" href="#collapseFour" aria-expanded="false"
-                                     aria-controls="collapseThree">
-                                    <div class="panel-heading" role="tab" id="pnlFormacionAcademica">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" >
-                                                Formación Academica
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel"
-                                         aria-labelledby="headingThree">
-                                        <div class="panel-body">
-                                            <academic-education-formal></academic-education-formal>
-
-                                            <academic-education-no-formal></academic-education-no-formal>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="panel panel-default" data-toggle="collapse"
-                                     data-parent="#accordion" href="#collapseFive" aria-expanded="false"
-                                     aria-controls="collapseThree">
-                                    <div class="panel-heading" role="tab" id="pnlExperienciaLaboral">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" >
-                                                Experiencia Laboral
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel"
-                                         aria-labelledby="headingFive">
-                                        <div class="panel-body">
-                                            <work-experience></work-experience>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="panel panel-default" data-toggle="collapse"
-                                     data-parent="#accordion" href="#collapseSix" aria-expanded="false"
-                                     aria-controls="collapseThree">
-                                    <div class="panel-heading" role="tab" id="pnlReferencias">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" >
-                                                Referencias
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseSix" class="panel-collapse collapse" role="tabpanel"
-                                         aria-labelledby="headingThree">
-                                        <div class="panel-body">
-                                            <references></references>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="profile-r">Reclutamiento</div>
-                        <div class="tab-pane" id="messages-r">Novedades</div>
-                        <div class="tab-pane" id="settings-r">Formación y Capacitación</div>
-                    </div>
-                </div>
-
-                <div class="col-xs-3"> <!-- required for floating -->
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs tabs-right">
-                        <li class="active"><a href="#infoPersonal" data-toggle="tab">Info Personal</a></li>
-                        <li><a href="#reclutamiento" data-toggle="tab">Reclutamiento</a></li>
-                        <li><a href="#novedades" data-toggle="tab">Novedades</a></li>
-                        <li><a href="#formacion" data-toggle="tab">Formación y Capacitación</a></li>
-                        <li><a href="#evaluaciones" data-toggle="tab">Evaluación de Competencias</a></li>
-                        <li><a href="#rituales" data-toggle="tab">Rituales Gerenciales</a></li>
-                        <li><a href="#disciplinarios" data-toggle="tab">Procesos Disciplinarios</a></li>
-                        <li><a href="#beneficios" data-toggle="tab">Plan de Beneficio</a></li>
-                        <li><a href="#examenes" data-toggle="tab">Examenes Ocupacionales</a></li>
-                        <li><a href="#dotaciones" data-toggle="tab">Dotaciones</a></li>
-                    </ul>
-                </div>
-
-            </div>
-
+        <div class="header">
+          <h4 class="title">Colaboradores</h4>
         </div>
+
+        <div class="clearfix card-header">
+          <div class="col-md-2">
+            <img class="thumbnail pull-left img-responsive"
+                 src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg">
+          </div>
+          <div class="col-md-8">
+            <h4>{{employee.primerNombre}} - {{employee.fechaNacimiento}}</h4>
+            <span>{{employee.tipoDocumento}} {{employee.numeroDocumento}}</span><br/>
+            <span>{{employee.cargoActual}} - Area/oficina ({{employee.fechaDesde}})</span>
+          </div>
+          <div class="col-md-2">
+            <a href="#" class="btn btn-primary">Historial Laboral</a>
+          </div>
+        </div>
+
+        <p-tabView id="tbvInfoPersonal" orientation="right">
+          <p-tabPanel header="Info Personal" [selected]="true">
+
+            <p-accordion>
+              <p-accordionTab header="Datos Generales">
+                <form class="form-horizontal">
+                  <fieldset>
+                    <div class="form-group">
+
+                      <label class="col-md-3 col-sm-6 col-xs-12 control-label">Fecha de Exp.:</label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.fechaExp}}</strong></label>
+
+                      <label class="col-md-3 col-sm-6 col-xs-12 control-label">Ciudad de Exp.:</label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.ciudadExpedicion}}</strong></label>
+
+                      <label class="col-md-3 col-sm-6 col-xs-12 control-label">Fecha de Nacimiento:</label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.fechaNacimiento}}</strong></label>
+
+                      <label class="col-md-3 col-sm-6 col-xs-12 control-label">ciudad de Nacimiento:</label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.ciudadNacimiento}}</strong></label>
+
+                      <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nacionalidad:</label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.nacionalidad}}</strong></label>
+
+                      <label class="col-md-3 col-sm-6 col-xs-12 control-label">Genero:</label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.genero}}</strong></label>
+
+                      <label class="col-md-3 col-sm-6 col-xs-12 control-label">Estado Civil:</label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.estadoCivil}}</strong></label>
+
+                      <label class="col-md-3 col-sm-6 col-xs-12 control-label">Factor RH:</label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.factorrh}}</strong></label>
+
+                      <label class="col-md-3 col-sm-6 col-xs-12 control-label">Numero de Hijos:</label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.numeroDeHijos}}</strong></label>
+
+                      <label class="col-md-3 col-sm-6 col-xs-12 control-label">Lateralidad:</label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.lateralidad}}</strong></label>
+
+                      <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nivel Educativo:</label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.nivelEducativo}}</strong></label>
+
+                      <label class="col-md-3 col-sm-6 col-xs-12 control-label">Profesión:</label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.profesion}}</strong></label>
+
+                    </div>
+                  </fieldset>
+                </form>
+              </p-accordionTab>
+
+              <p-accordionTab header="Información Familiar">
+                <familyinformation></familyinformation>
+              </p-accordionTab>
+
+              <p-accordionTab header="Ubicación">
+                employees-locations
+              </p-accordionTab>
+
+              <p-accordionTab header="Formación Academica">
+                <academic-education-formal></academic-education-formal>
+                <academic-education-no-formal></academic-education-no-formal>
+              </p-accordionTab>
+
+              <p-accordionTab header="Experiencia Laboral">
+                <work-experience></work-experience>
+              </p-accordionTab>
+
+              <p-accordionTab header="Referencias">
+                <references></references>
+              </p-accordionTab>
+            </p-accordion>
+
+          </p-tabPanel>
+          <p-tabPanel header="Reclutamiento">
+            <h3>Reclutamiento</h3>
+          </p-tabPanel>
+          <p-tabPanel header="Novedades">
+            <h3>Novedades</h3>
+          </p-tabPanel>
+          <p-tabPanel header="Formación y Capacitación">
+            <h3>Formación y Capacitación</h3>
+          </p-tabPanel>
+          <p-tabPanel header="Evaluación de Competencias">
+            <h3>Evaluación de Competencias</h3>
+          </p-tabPanel>
+          <p-tabPanel header="Rituales Gerenciales">
+            <h3>Rituales Gerenciales</h3>
+          </p-tabPanel>
+          <p-tabPanel header="Procesos Disciplinarios">
+            <h3>Procesos Disciplinarios</h3>
+          </p-tabPanel>
+          <p-tabPanel header="Plan de Beneficio">
+            <h3>Plan de Beneficio</h3>
+          </p-tabPanel>
+          <p-tabPanel header="Examenes Ocupacionales">
+            <h3>Examenes Ocupacionales</h3>
+          </p-tabPanel>
+          <p-tabPanel header="Dotaciones">
+            <h3>Dotaciones</h3>
+          </p-tabPanel>
+        </p-tabView>
+
+
     </div>
+  </div>
 </div>
