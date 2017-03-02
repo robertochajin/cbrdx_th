@@ -3,18 +3,23 @@ import { Router } from '@angular/router';
 
 import { LocationService } from './location.service';
 import { ConstructorEmployeesLocation } from './employees-location.constructor';
-
+import {ConfirmationService} from 'primeng/primeng';
 
 @Component({
     moduleId: module.id,
     templateUrl: 'location.component.html',
-    selector: 'employees-locations'
+    selector: 'employees-locations',
+    providers:  [ConfirmationService]
 })
 export class LocationComponent implements OnInit {
 
     employeesLocations: ConstructorEmployeesLocation[];
-
-    constructor(private locationService: LocationService, private router: Router) {}
+    dialogObjet: ConstructorEmployeesLocation = new ConstructorEmployeesLocation();
+    constructor(
+              private locationService: LocationService,
+              private router: Router,
+              private confirmationService: ConfirmationService
+            ) {}
 
     ngOnInit() {
         this.locationService.getAll().subscribe(
@@ -26,6 +31,22 @@ export class LocationComponent implements OnInit {
         this.locationService.delete(l);
         this.employeesLocations.splice(this.employeesLocations.indexOf(l), 1);
         l = null;
+    }
+    del(f: ConstructorEmployeesLocation) {
+      this.dialogObjet = f;
+      this.confirmationService.confirm({
+        message: ` ¿Esta seguro que desea eliminar?`,
+        header: 'Corfirmación',
+        icon: 'fa fa-question-circle',
+        accept: () => {
+          this.locationService.delete(this.dialogObjet);
+          this.employeesLocations.splice(this.employeesLocations.indexOf(this.dialogObjet), 1);
+          this.dialogObjet = null;
+        },
+        reject: () => {
+
+        }
+      });
     }
 
     detail(l: ConstructorEmployeesLocation) {

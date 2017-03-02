@@ -12,13 +12,21 @@ import { ReferencesDetailComponent }  from './references-detail.component';
 import { ReferencesAddComponent }  from './references-add.component';
 import { ReferencesUpdateComponent }  from './references-update.component';
 import { ReferencesService } from './references.service';
-import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule,ConfirmDialogModule } from 'primeng/primeng';
+import { ReferencesTypesServices } from '../_services/references-type.service';
+
+import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule,
+  ConfirmDialogModule,
+  MessagesModule,
+  AutoCompleteModule
+} from 'primeng/primeng';
 
 
 @NgModule({
     imports:      [CommonModule,InputTextModule,FormsModule,DataTableModule,ButtonModule,
                     DialogModule,InputTextareaModule,CalendarModule,DropdownModule,
-                    ConfirmDialogModule
+                    ConfirmDialogModule,
+                    MessagesModule,
+                    AutoCompleteModule
                     ],
     declarations: [ReferencesComponent,
                     ReferencesDetailComponent,
@@ -26,7 +34,7 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
                     ReferencesUpdateComponent
                     ],
     bootstrap:    [ReferencesComponent],
-    providers:    [ReferencesService],
+    providers:    [ReferencesService,ReferencesTypesServices],
     exports: 	  [ReferencesComponent]
 })
 export class ReferencesModule { }

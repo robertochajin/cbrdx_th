@@ -1,6 +1,3 @@
-/**
- * Created by Angel on 14/02/2017.
- */
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
@@ -9,16 +6,7 @@ import {ReferencesService} from './references.service';
 import {Observable} from 'rxjs/Observable';
 import {ConfirmationService} from 'primeng/primeng';
 
-class constructorReferences implements References {
-    constructor(
-        public  idReferencia?,
-        public	tipodeReferencia?,
-        public	empresa?,
-        public  nombreCompleto?,
-        public	numeroContacto?,
-        public	ciudad?
-    ) {}
-}
+
 
 @Component({
     moduleId: module.id,
@@ -28,8 +16,8 @@ class constructorReferences implements References {
 })
 export class ReferencesComponent {
 
-    reference: References = new constructorReferences();
-    dialogObjet: References = new constructorReferences();
+    reference: References = new References();
+    dialogObjet: References = new References();
 
     references: References[];
 
@@ -41,11 +29,17 @@ export class ReferencesComponent {
 
     ngOnInit() {
         this.referencesService.getAll().subscribe(
-            references => this.references = references
+            references => {
+                this.references = references;
+                this.references.forEach(function(obj, index){
+                    obj.nombreCompleto = obj.primerNombre+' '+obj.segundoNombre+' '+obj.primerApellido+' '+obj.segundoApellido;
+                    obj.numeroContacto = obj.telefono+' /  '+obj.celular;
+                });
+            }
         );
     }
 
-    delete(f: References) {
+    del(f: References) {
 
         this.dialogObjet = f;
         this.confirmationService.confirm({

@@ -154,7 +154,17 @@ export class LocationAddComponent implements  OnInit {
     }
 
     goBack(): void {
-        this.location.back();
+        this.confirmationService.confirm({
+            message: ` ¿Esta seguro que desea Cancelar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+              //this.router.navigate(['/employees-family-information']);
+              this.location.back();
+            },
+            reject: () => {
+            }
+        });
     }
 
 
