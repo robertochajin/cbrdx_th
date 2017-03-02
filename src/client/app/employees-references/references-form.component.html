@@ -5,11 +5,13 @@
                 <div class="header">
                     <h4 class="title">{{header}}</h4>
                 </div>
-                
+
                 <div class="clearfix">
                     <div class="col-md-12">
                         <h2></h2>
                         <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
+                          <p-calendar name="datefield" [(ngModel)]="datefield" required="true" #cal="ngModel"></p-calendar>
+                            <p *ngIf="!cal.errors.required">error</p>
                             <div class="form-group col-md-6" >
                                 <label for="tipodeReferencia">Tipo de Referencia</label>
                                 <input type="text" class="form-control" name="tipodeReferencia" [(ngModel)]="reference.tipodeReferencia" #tipodeReferencia="ngModel" required />
