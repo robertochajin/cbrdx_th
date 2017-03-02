@@ -56,11 +56,11 @@ export class FormalStudiesAddComponent implements OnInit {
       this.yeison = JSON;
       this.es = {
         firstDayOfWeek: 1,
-        dayNames: [ "domingo","lunes","martes","miércoles","jueves","viernes","sábado" ],
-        dayNamesShort: [ "dom","lun","mar","mié","jue","vie","sáb" ],
-        dayNamesMin: [ "D","L","M","X","J","V","S" ],
-        monthNames: [ "enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre" ],
-        monthNamesShort: [ "ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic" ]
+        dayNames: [ 'domingo','lunes','martes','miércoles','jueves','viernes','sábado' ],
+        dayNamesShort: [ 'dom','lun','mar','mié','jue','vie','sáb' ],
+        dayNamesMin: [ 'D','L','M','X','J','V','S' ],
+        monthNames: [ 'enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre' ],
+        monthNamesShort: [ 'ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic' ]
       };
       let today = new Date();
       let month = today.getMonth();
@@ -99,7 +99,7 @@ export class FormalStudiesAddComponent implements OnInit {
     }
 
     captureCityId(event:any) {
-      this.fstudy.ciudad.value = event.value;
+      this.fstudy.ciudad = event;
     }
 
     instituteSearch(event:any) {
@@ -109,7 +109,7 @@ export class FormalStudiesAddComponent implements OnInit {
     }
 
     captureInstituteId(event:any) {
-      this.fstudy.institucion.value = event.value;
+      this.fstudy.institucion = event;
     }
 
     onSelectBegin(event:any) {

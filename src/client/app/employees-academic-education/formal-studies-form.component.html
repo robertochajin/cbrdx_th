@@ -62,7 +62,7 @@
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
             <label for="ciudad">Ciudad</label>
-            <p-autoComplete placeholder="Buscar ciudad" field="nombreCiudad" #ciudad="ngModel" name="ciudad" id="ciudad"
+            <p-autoComplete placeholder="Buscar ciudad" field="label" #ciudad="ngModel" name="ciudad" id="ciudad"
                             [(ngModel)]="fstudy.ciudad.label" [suggestions]="cityList" required="true"
                             (completeMethod)="citySearch($event)" (onSelect)="captureCityId($event)" >
             </p-autoComplete>
