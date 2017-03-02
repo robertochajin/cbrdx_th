@@ -54,5 +54,7 @@ gulpfile.js.map
 .DS_Store
 src/client/app/shared/config/env.config.js
 src/client/app/shared/config/env.config.js.map
-.idea/*
 /dist/
+/.idea/
+
+.idea/workspace.xml
