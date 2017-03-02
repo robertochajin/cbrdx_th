@@ -1,6 +1,4 @@
-/**
- * Created by Angel on 15/02/2017.
- */
+
 import { Injectable } from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {Noformalstudies} from './no-formal-studies';

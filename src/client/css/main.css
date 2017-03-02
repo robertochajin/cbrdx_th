@@ -3694,6 +3694,9 @@ body .ui-state-highlight{
 /**
 ------------------------ Form CSS ------------------------------
  */
+label{
+  font-weight: 100;
+}
 form [class*="col-"] {
     padding: 6px;
 }

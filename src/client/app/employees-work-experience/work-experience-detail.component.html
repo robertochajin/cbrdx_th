@@ -12,45 +12,59 @@
             <form class="form-horizontal">
                 <fieldset>
                     <div class="form-group">
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Empresa:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.empresa}}</strong></label>
 
-                        <label class="col-md-3 control-label">Empresa:</label>
-                        <label class="col-md-3 "><strong>{{experience.empresa}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Teléfono Empresa:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.telefonoEmpresa}}</strong></label>
+                      </div>
 
-                        <label class="col-md-3 control-label">Teléfono Empresa:</label>
-                        <label class="col-md-3 "><strong>{{experience.telefonoEmpresa}}</strong></label>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Sector Empresa:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.sectorEmpresa.label}}</strong></label>
 
-                        <label class="col-md-3 control-label">Sector Empresa:</label>
-                        <label class="col-md-3 "><strong>{{experience.sectorEmpresa}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Sub Sector Empresa:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.subsectorEmpresa.label}}</strong></label>
+                      </div>
 
-                        <label class="col-md-3 control-label">Sub Sector Empresa:</label>
-                        <label class="col-md-3 "><strong>{{experience.subsectorEmpresa}}</strong></label>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Cargo:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.cargo}}</strong></label>
 
-                        <label class="col-md-3 control-label">Cargo:</label>
-                        <label class="col-md-3 "><strong>{{experience.cargo}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nivel Cargo:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.nivelCargo}}</strong></label>
+                      </div>
 
-                        <label class="col-md-3 control-label">Nivel Cargo:</label>
-                        <label class="col-md-3 "><strong>{{experience.nivelCargo}}</strong></label>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Area Cargo:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.areaCargo}}</strong></label>
 
-                        <label class="col-md-3 control-label">Area Cargo:</label>
-                        <label class="col-md-3 "><strong>{{experience.areaCargo}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Jefe Inmediato:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.jefeInmediato}}</strong></label>
+                      </div>
 
-                        <label class="col-md-3 control-label">Jefe Inmediato:</label>
-                        <label class="col-md-3 "><strong>{{experience.jefeInmediato}}</strong></label>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Ciudad:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.ciudad.label}}</strong></label>
 
-                        <label class="col-md-3 control-label">Ciudad:</label>
-                        <label class="col-md-3 "><strong>{{experience.ciudad}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Ingreso:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.ingreso}}</strong></label>
+                      </div>
 
-                        <label class="col-md-3 control-label">Ingreso:</label>
-                        <label class="col-md-3 "><strong>{{experience.ingreso}}</strong></label>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Finalizacion:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.finalizacion}}</strong></label>
 
-                        <label class="col-md-3 control-label">Finalizacion:</label>
-                        <label class="col-md-3 "><strong>{{experience.finalizacion}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tiempo Experiencia:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.tiempoExperiencia}}</strong></label>
+                      </div>
 
-                        <label class="col-md-3 control-label">Tiempo Experiencia:</label>
-                        <label class="col-md-3 "><strong>{{experience.tiempoExperiencia}}</strong></label>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Actualmente:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.actualmente}}</strong></label>
+                      </div>
 
-                        <label class="col-md-3 control-label">Actualmente:</label>
-                        <label class="col-md-3 "><strong>{{experience.actualmente}}</strong></label>
                     </div>
                 </fieldset>
             </form>
@@ -60,7 +74,8 @@
 </div>
     <div class="row form-footer-buttons">
     <div class="form-group col-md-12">
-        <a (click)="goBack()" class="btn btn-primary"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+      <button icon="fa-arrow-left" label="Volver" type="button"
+              pButton (click)="goBack()"></button>
     </div>
 </div>
 
