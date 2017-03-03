@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location }                 from '@angular/common';
-import { Formalstudies } from './formal-studies';
+import { Noformalstudies } from './no-formal-studies';
 import { AcademicEducationService} from './academic-education.service';
 import { Message, ConfirmationService } from 'primeng/primeng';
 import 'rxjs/add/operator/switchMap';
@@ -11,13 +11,14 @@ import 'rxjs/add/operator/switchMap';
     moduleId: module.id,
     selector: 'academic-education',
     templateUrl: 'no-formal-studies-detail.component.html',
+    providers:  [ConfirmationService]
 })
 
 
 export class NoFormalStudiesDetailComponent implements OnInit   {
     @Input()
 
-    study: Formalstudies = new Formalstudies();
+    study: Noformalstudies = new Noformalstudies();
 
     constructor(
         private academicEducationService: AcademicEducationService,
@@ -28,20 +29,13 @@ export class NoFormalStudiesDetailComponent implements OnInit   {
     ) {}
 
     ngOnInit(): void {
-        let este$ = this.route.params
-            .switchMap((params: Params) => this.academicEducationService.getNoFormal(+params['id']));
-        este$.subscribe(study => this.study = study);
+        this.route.params
+            .switchMap((params: Params) => this.academicEducationService.getNoFormal(+params['id']))
+            .subscribe(study => this.study = study);
     }
 
     goBack(): void {
-      this.confirmationService.confirm({
-        message: ` ¿Esta seguro que desea Cancelar?`,
-        header: 'Corfirmación',
-        icon: 'fa fa-question-circle',
-        accept: () => {
-          this.router.navigate(['/employees-no-formal-studies']);
-        }
-      });
+      this.location.back();
     }
 }
 

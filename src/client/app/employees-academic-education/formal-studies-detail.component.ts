@@ -11,6 +11,7 @@ import 'rxjs/add/operator/switchMap';
     moduleId: module.id,
     selector: 'academic-education',
     templateUrl: 'formal-studies-detail.component.html',
+    providers: [ConfirmationService]
 })
 
 
@@ -35,14 +36,7 @@ export class FormalStudiesDetailComponent implements OnInit   {
     }
 
     goBack(): void {
-      this.confirmationService.confirm({
-        message: ` ¿Esta seguro que desea Cancelar?`,
-        header: 'Corfirmación',
-        icon: 'fa fa-question-circle',
-        accept: () => {
-          this.router.navigate(['/employees-formal-studies']);
-        }
-      });
+      this.location.back();
     }
 }
 

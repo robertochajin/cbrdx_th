@@ -6,59 +6,62 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+      <form class="form-horizontal">
+        <fieldset>
+          <div class="form-group">
 
+            <div class="row">
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">titulo:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.titulo}}</strong></label>
 
-            <form class="form-horizontal">
-                <fieldset>
-                    <div class="form-group">
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">ciudad:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.ciudad.label}}</strong></label>
+            </div>
+            <div class="row">
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">ingreso:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.ingreso}}</strong></label>
 
-                        <label class="col-md-3 control-label">titulo:</label>
-                        <label class="col-md-3 "><strong>{{study.empresa}}</strong></label>
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">finalizacion:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.finalizacion}}</strong></label>
+            </div>
+            <div class="row">
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">institucion:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.institucion}}</strong></label>
 
-                        <label class="col-md-3 control-label">ingreso:</label>
-                        <label class="col-md-3 "><strong>{{study.ingreso}}</strong></label>
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">confirmada:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.confirmada}}</strong></label>
+            </div>
+            <div class="row">
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">Intensidad:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.intensidad.label}}</strong></label>
 
-                        <label class="col-md-3 control-label">finalizacion:</label>
-                        <label class="col-md-3 "><strong>{{study.finalizacion}}</strong></label>
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tipo estudio:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.tipoEstudio.label}}</strong></label>
+            </div>
+            <div class="row">
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">Descripción:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.descripcion}}</strong></label>
 
-                        <label class="col-md-3 control-label">ciudad:</label>
-                        <label class="col-md-3 "><strong>{{study.ciudad}}</strong></label>
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">areaEstudio:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.areaEstudio.label}}</strong></label>
+            </div>
+            <div class="row">
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">otraInstitucion:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.otraInstitucion}}</strong></label>
 
-                        <label class="col-md-3 control-label">institucion:</label>
-                        <label class="col-md-3 "><strong>{{study.institucion}}</strong></label>
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">estadoEstudio:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.estadoEstudio.label}}</strong></label>
+            </div>
+          </div>
+        </fieldset>
+      </form>
 
-                        <label class="col-md-3 control-label">confirmada:</label>
-                        <label class="col-md-3 "><strong>{{study.confirmada}}</strong></label>
-
-                        <label class="col-md-3 control-label">tipoEstudio:</label>
-                        <label class="col-md-3 "><strong>{{study.tipoEstudio}}</strong></label>
-
-                        <label class="col-md-3 control-label">otro Tipo Estudio:</label>
-                        <label class="col-md-3 "><strong>{{study.otroTipoEstudio}}</strong></label>
-
-                        <label class="col-md-3 control-label">intensidad:</label>
-                        <label class="col-md-3 "><strong>{{study.intensidad}}</strong></label>
-
-                        <label class="col-md-3 control-label">descripcion:</label>
-                        <label class="col-md-3 "><strong>{{study.descripcion}}</strong></label>
-
-                        <label class="col-md-3 control-label">areaEstudio:</label>
-                        <label class="col-md-3 "><strong>{{study.areaEstudio}}</strong></label>
-
-                        <label class="col-md-3 control-label">estadoEstudio:</label>
-                        <label class="col-md-3 "><strong>{{study.estadoEstudio}}</strong></label>
-
-                    </div>
-                </fieldset>
-            </form>
-
-        </div>
-    </div>
-</div>
-    <div class="row form-footer-buttons">
-    <div class="form-group col-md-12">
-        <a (click)="goBack()" class="btn btn-primary"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
     </div>
 </div>
 
+<div class="row form-footer-buttons">
+  <div class="form-group col-md-12">
+    <button icon="fa-arrow-left" label="Regresar" type="button"
+            pButton (click)="goBack()"></button>
+  </div>
+</div>

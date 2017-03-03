@@ -115,15 +115,13 @@ export class FormalStudiesAddComponent implements OnInit {
     onSelectBegin(event:any) {
       let d = new Date(Date.parse(event));
       this.fstudy.ingreso = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
-
-      this.minDate.setFullYear(d.getFullYear(),d.getMonth(),d.getDate());
+      this.minDate.setFullYear(d.getFullYear(),d.getMonth(),d.getDate()+1);
     }
 
     onSelectEnd(event:any) {
       let d = new Date(Date.parse(event));
       this.fstudy.finalizacion = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
-
-      this.maxDate.setFullYear(d.getFullYear(),d.getMonth(),d.getDate());
+      this.maxDate.setFullYear(d.getFullYear(),d.getMonth(),d.getDate())-1;
     }
 
     updateEnd():void {
@@ -139,8 +137,6 @@ export class FormalStudiesAddComponent implements OnInit {
         icon: 'fa fa-question-circle',
         accept: () => {
           this.router.navigate(['/employees-formal-studies']);
-        },
-        reject: () => {
         }
       });
     }
