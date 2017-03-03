@@ -1,18 +1,9 @@
-/**
- * Created by TracesMaker on 06/02/2017.
- * Update by Angel on 20/02/2017
- */
 import {Component} from '@angular/core';
 import {Employee} from './employees';
 import {EmployeesService} from './employees.service';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {ConfirmationService} from 'primeng/primeng';
-
-class constructorEmployee implements Employee {
-    constructor(public idColaborador?, public numeroDocumento?, public primerNombre?, public fechaDesde?, public cargoActual?) {
-    }
-}
 
 @Component({
     moduleId: module.id,
@@ -22,8 +13,8 @@ class constructorEmployee implements Employee {
 })
 export class EmployeesComponent {
 
-    employee: Employee = new constructorEmployee();
-    dialogObjet: Employee = new constructorEmployee();
+    employee: Employee = new Employee();
+    dialogObjet: Employee = new Employee();
 
     employees: Employee[];
 
@@ -36,11 +27,16 @@ export class EmployeesComponent {
 
     ngOnInit() {
         this.employeesService.getAll().subscribe(
-            employees => this.employees = employees
+            employees => {
+              this.employees = employees;
+              this.employees.forEach(function(obj, index){
+                obj.nombreCompleto = obj.primerNombre+' '+obj.segundoNombre+' '+obj.primerApellido+' '+obj.segundoApellido;
+              });
+            }
         );
     }
 
-    delete(employee: Employee) {
+    del(employee: Employee) {
         this.dialogObjet = employee;
         this.confirmationService.confirm({
             message: ` ¿Esta seguro que lo desea eliminar?`,

@@ -6,19 +6,7 @@ import { Location }                 from '@angular/common';
 import { Employee } from './employees';
 import { EmployeesService} from './employees.service';
 
-class constructorEmployee implements Employee {
-    constructor(
-        public idColaborador?,
-        public tipoDocumento?,
-        public numeroDocumento?,
-        public primerNombre?,
-        public segundoNombre?,
-        public primerApellido?,
-        public segundoApellido?,
-        public fechaDesde?,
-        public cargoActual?
-    ) {}
-}
+
 @Component({
     moduleId: module.id,
     selector: 'employees',
@@ -26,8 +14,8 @@ class constructorEmployee implements Employee {
 })
 
 export class EmployeesUpdateComponent implements OnInit{
-    employee: constructorEmployee;
-    const header = 'Editando Colaborador';
+    employee: Employee;
+    header: string = 'Editando Colaborador';
 
     constructor(
         private employeesService: EmployeesService,
