@@ -101,7 +101,7 @@
                          [ngClass]="{ 'has-error': f.submitted && !ciudad.valid }">
                         <label for="ciudad">Ciudad</label>
 
-                      <p-autoComplete placeholder="Buscar ciudad" field="label" #ciudad="ngModel" name="ciudad" id="ciudad"
+                      <p-autoComplete placeholder="Buscar ciudad" field="label" #ciudad="ngModel" name="ciudad" id="ciudad" class="form-control"
                                       [(ngModel)]="experience.ciudad.label" [suggestions]="cityList" required="true"
                                       (completeMethod)="citySearch($event)" (onSelect)="captureCityId($event)" >
                       </p-autoComplete>
