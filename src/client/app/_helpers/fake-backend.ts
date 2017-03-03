@@ -487,8 +487,8 @@ export let fakeBackendProvider = {
           'idColaborador': "1",
           'empresa': "Crezcamos",
           'cargo': "Gerente",
-          'ingreso': "1999-03-02",
-          'finalizacion': "2005-03-02",
+          'ingreso': "02/03/1999",
+          'finalizacion': "02/03/2005",
           'ciudad': {value: 104, label: "Bucaramanga"},
           'telefonoEmpresa': "6020304",
           'sectorEmpresa': 1,
@@ -497,15 +497,15 @@ export let fakeBackendProvider = {
           'areaCargo': "Area A",
           'jefeInmediato': "Benito Gomez",
           'tiempoExperiencia': "10 Meses",
-          'actualmente': "1"
+          'actualmente': true
         },
         {
           'idExperiencia': "2",
           'idColaborador': "1",
           'empresa': "Ciberdix",
           'cargo': "Gerente",
-          'ingreso': "1999-03-02",
-          'finalizacion': "2000-03-02",
+          'ingreso': "02/03/1999",
+          'finalizacion': "02/30/2000",
           'ciudad': {value: 101, label: "Floridablanca"},
           'telefonoEmpresa': "6010203",
           'sectorEmpresa': 2,
@@ -514,15 +514,15 @@ export let fakeBackendProvider = {
           'areaCargo': "Area B",
           'jefeInmediato': "Filoberto Garcia",
           'tiempoExperiencia': "3 Años",
-          'actualmente': "0"
+          'actualmente': false
         },
         {
           'idExperiencia': "3",
           'idColaborador': "1",
           'empresa': "Empresa SAS",
           'cargo': "Gerente",
-          'ingreso': "1999-03-02",
-          'finalizacion': "2016-03-02",
+          'ingreso': "02/03/1999",
+          'finalizacion': "02/03/2016",
           'ciudad': {value: 104, label: "Bucaramanga"},
           'telefonoEmpresa': "6101010",
           'sectorEmpresa': 2,
@@ -531,7 +531,7 @@ export let fakeBackendProvider = {
           'areaCargo': "Area B",
           'jefeInmediato': "Armando Casas",
           'tiempoExperiencia': "2 Años",
-          'actualmente': "0"
+          'actualmente': false
         }
       ];
 

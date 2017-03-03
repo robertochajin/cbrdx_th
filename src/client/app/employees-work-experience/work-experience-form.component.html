@@ -1,168 +1,182 @@
 <div *ngIf="experience">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="header">
-                <h4 class="title">{{header}}</h4>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="header">
+        <h4 class="title">{{header}}</h4>
+      </div>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="col-md-12">
+      <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate
+            class="form">
+        <div class="row">
+          <div class="form-group col-md-6"
+               [ngClass]="{ 'has-error': f.submitted && !empresa.valid }">
+            <label for="empresa">Empresa</label>
+            <input id="empresa" type="text" class="form-control" name="empresa"
+                   [(ngModel)]="experience.empresa" #empresa="ngModel"
+                   required/>
+            <div *ngIf="f.submitted && !empresa.valid" class="help-block">
+              Empresa es requerido
             </div>
+          </div>
+          <div class="form-group col-md-6"
+               [ngClass]="{ 'has-error': f.submitted && !telefonoEmpresa.valid }">
+            <label for="telefonoEmpresa">Teléfono Empresa</label>
+            <input id="telefonoEmpresa" type="text" class="form-control" name="telefonoEmpresa"
+                   [(ngModel)]="experience.telefonoEmpresa" #telefonoEmpresa="ngModel"
+                   required/>
+            <div *ngIf="f.submitted && !telefonoEmpresa.valid" class="help-block">
+              Teléfono Empresa es requerido
+            </div>
+          </div>
         </div>
-    </div>
-    <div class="row-fluid">
-        <div class="col-md-12">
-            <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate
-                  class="form">
-                <div class="row">
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !empresa.valid }">
-                        <label for="empresa">Empresa</label>
-                        <input id="empresa" type="text" class="form-control" name="empresa"
-                               [(ngModel)]="experience.empresa" #empresa="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !empresa.valid" class="help-block">
-                            Empresa es requerido
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !telefonoEmpresa.valid }">
-                        <label for="telefonoEmpresa">Teléfono Empresa</label>
-                        <input id="telefonoEmpresa" type="text" class="form-control" name="telefonoEmpresa"
-                               [(ngModel)]="experience.telefonoEmpresa" #telefonoEmpresa="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !telefonoEmpresa.valid" class="help-block">
-                            Teléfono Empresa es requerido
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !sectorEmpresa.valid }">
-                        <label for="sectorEmpresa">Sector Empresa</label>
-                      <p-dropdown name="sectorEmpresa" id="sectorEmpresa" #sectorEmpresa="ngModel" required="true" class="form-control"
-                                  [autoWidth]="false" [(ngModel)]="experience.sectorEmpresa" [options]="companySectorList"></p-dropdown>
-                        <div *ngIf="f.submitted && !sectorEmpresa.valid" class="help-block">
-                            Sector Empresa es requerido
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !subsectorEmpresa.valid }">
-                        <label for="subsectorEmpresa">Sub Sector Empresa</label>
-                      <p-dropdown name="subSectorEmpresa" id="subSectorEmpresa" #subSectorEmpresa="ngModel" required="true" class="form-control"
-                                  [autoWidth]="false" [(ngModel)]="experience.subsectorEmpresa" [options]="companySubSectorList"></p-dropdown>
-                        <div *ngIf="f.submitted && !subsectorEmpresa.valid" class="help-block">
-                            Sub Sector Empresa es requerido
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !cargo.valid }">
-                        <label for="cargo">Cargo</label>
-                        <input id="cargo" type="text" class="form-control" name="cargo"
-                               [(ngModel)]="experience.cargo" #cargo="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !cargo.valid" class="help-block">
-                            Cargo es requerido
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !nivelCargo.valid }">
-                        <label for="nivelCargo">Nivel Cargo</label>
-                        <input id="nivelCargo" type="text" class="form-control" name="nivelCargo"
-                               [(ngModel)]="experience.nivelCargo" #nivelCargo="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !nivelCargo.valid" class="help-block">
-                            Nivel Cargo es requerido
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !areaCargo.valid }">
-                        <label for="areaCargo">Area Cargo</label>
-                        <input id="areaCargo" type="text" class="form-control" name="areaCargo"
-                               [(ngModel)]="experience.areaCargo" #areaCargo="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !areaCargo.valid" class="help-block">
-                            Area Cargo es requerido
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !jefeInmediato.valid }">
-                        <label for="jefeInmediato">Jefe Inmediato</label>
-                        <input id="jefeInmediato" type="text" class="form-control" name="jefeInmediato"
-                               [(ngModel)]="experience.jefeInmediato" #jefeInmediato="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !jefeInmediato.valid" class="help-block">
-                            Jefe Inmediato es requerido
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !ciudad.valid }">
-                        <label for="ciudad">Ciudad</label>
-
-                      <p-autoComplete placeholder="Buscar ciudad" field="label" #ciudad="ngModel" name="ciudad" id="ciudad" class="form-control"
-                                      [(ngModel)]="experience.ciudad.label" [suggestions]="cityList" required="true"
-                                      (completeMethod)="citySearch($event)" (onSelect)="captureCityId($event)" >
-                      </p-autoComplete>
-
-                        <div *ngIf="f.submitted && !ciudad.valid" class="help-block">
-                            Ciudad es requerido
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !tiempoExperiencia.valid }">
-                        <label for="tiempoExperiencia">Tiempo Experiencia</label>
-                        <input id="tiempoExperiencia" type="text" class="form-control" name="tiempoExperiencia"
-                               [(ngModel)]="experience.tiempoExperiencia" #tiempoExperiencia="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !tiempoExperiencia.valid" class="help-block">
-                            Tiempo Experiencia es requerido
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-4"
-                         [ngClass]="{ 'has-error': f.submitted && !ingreso.valid }">
-                        <label for="ingreso">Ingreso</label>
-                        <input id="ingreso" type="text" class="form-control" name="ingreso"
-                               [(ngModel)]="experience.ingreso" #ingreso="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !ingreso.valid" class="help-block">
-                            Ingreso es requerido
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4"
-                         [ngClass]="{ 'has-error': f.submitted && !finalizacion.valid }">
-                        <label for="finalizacion">Finalización</label>
-                        <input id="finalizacion" type="text" class="form-control" name="finalizacion"
-                               [(ngModel)]="experience.finalizacion" #finalizacion="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !finalizacion.valid" class="help-block">
-                            Finalización es requerido
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4"
-                         [ngClass]="{ 'has-error': f.submitted && !actualmente.valid }">
-                        <label for="actualmente">Actualmente</label>
-                        <input id="actualmente" type="text" class="form-control" name="actualmente"
-                               [(ngModel)]="experience.actualmente" #actualmente="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !actualmente.valid" class="help-block">
-                            actualmente es requerido
-                        </div>
-                    </div>
-                </div>
-                <div class="row form-footer-buttons">
-                    <div class="form-group col-md-12">
-                        <a (click)="goBack()" class="cancelar">Cancelar</a>
-                        <button pButton type="submit" label="Guardar"></button>
-                    </div>
-                </div>
-            </form>
+        <div class="row">
+          <div class="form-group col-md-6"
+               [ngClass]="{ 'has-error': f.submitted && !sectorEmpresa.valid }">
+            <label for="sectorEmpresa">Sector Empresa</label>
+            <p-dropdown name="sectorEmpresa" id="sectorEmpresa" #sectorEmpresa="ngModel" required="true"
+                        class="form-control"
+                        [autoWidth]="false" [(ngModel)]="experience.sectorEmpresa"
+                        [options]="companySectorList"></p-dropdown>
+            <div *ngIf="f.submitted && !sectorEmpresa.valid" class="help-block">
+              Sector Empresa es requerido
+            </div>
+          </div>
+          <div class="form-group col-md-6"
+               [ngClass]="{ 'has-error': f.submitted && !subsectorEmpresa.valid }">
+            <label for="subsectorEmpresa">Sub Sector Empresa</label>
+            <p-dropdown name="subSectorEmpresa" id="subSectorEmpresa" #subSectorEmpresa="ngModel" required="true"
+                        class="form-control"
+                        [autoWidth]="false" [(ngModel)]="experience.subsectorEmpresa"
+                        [options]="companySubSectorList"></p-dropdown>
+            <div *ngIf="f.submitted && !subsectorEmpresa.valid" class="help-block">
+              Sub Sector Empresa es requerido
+            </div>
+          </div>
         </div>
+        <div class="row">
+          <div class="form-group col-md-6"
+               [ngClass]="{ 'has-error': f.submitted && !cargo.valid }">
+            <label for="cargo">Cargo</label>
+            <input id="cargo" type="text" class="form-control" name="cargo"
+                   [(ngModel)]="experience.cargo" #cargo="ngModel"
+                   required/>
+            <div *ngIf="f.submitted && !cargo.valid" class="help-block">
+              Cargo es requerido
+            </div>
+          </div>
+          <div class="form-group col-md-6"
+               [ngClass]="{ 'has-error': f.submitted && !nivelCargo.valid }">
+            <label for="nivelCargo">Nivel Cargo</label>
+            <input id="nivelCargo" type="text" class="form-control" name="nivelCargo"
+                   [(ngModel)]="experience.nivelCargo" #nivelCargo="ngModel"
+                   required/>
+            <div *ngIf="f.submitted && !nivelCargo.valid" class="help-block">
+              Nivel Cargo es requerido
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6"
+               [ngClass]="{ 'has-error': f.submitted && !areaCargo.valid }">
+            <label for="areaCargo">Area Cargo</label>
+            <input id="areaCargo" type="text" class="form-control" name="areaCargo"
+                   [(ngModel)]="experience.areaCargo" #areaCargo="ngModel"
+                   required/>
+            <div *ngIf="f.submitted && !areaCargo.valid" class="help-block">
+              Area Cargo es requerido
+            </div>
+          </div>
+          <div class="form-group col-md-6"
+               [ngClass]="{ 'has-error': f.submitted && !jefeInmediato.valid }">
+            <label for="jefeInmediato">Jefe Inmediato</label>
+            <input id="jefeInmediato" type="text" class="form-control" name="jefeInmediato"
+                   [(ngModel)]="experience.jefeInmediato" #jefeInmediato="ngModel"
+                   required/>
+            <div *ngIf="f.submitted && !jefeInmediato.valid" class="help-block">
+              Jefe Inmediato es requerido
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6"
+               [ngClass]="{ 'has-error': f.submitted && !ciudad.valid }">
+            <label for="ciudad">Ciudad</label>
 
+            <p-autoComplete placeholder="Buscar ciudad" field="label" #ciudad="ngModel" name="ciudad" id="ciudad"
+                            class="form-control"
+                            [(ngModel)]="experience.ciudad.label" [suggestions]="cityList" required="true"
+                            (completeMethod)="citySearch($event)" (onSelect)="captureCityId($event)">
+            </p-autoComplete>
+
+            <div *ngIf="f.submitted && !ciudad.valid" class="help-block">
+              Ciudad es requerido
+            </div>
+          </div>
+          <div class="form-group col-md-6"
+               [ngClass]="{ 'has-error': f.submitted && !tiempoExperiencia.valid }">
+            <label for="tiempoExperiencia">Tiempo Experiencia</label>
+            <input id="tiempoExperiencia" type="text" class="form-control" name="tiempoExperiencia"
+                   [(ngModel)]="experience.tiempoExperiencia" #tiempoExperiencia="ngModel"
+                   required/>
+            <div *ngIf="f.submitted && !tiempoExperiencia.valid" class="help-block">
+              Tiempo Experiencia es requerido
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-4"
+               [ngClass]="{ 'has-error': f.submitted && !ingreso.valid }">
+            <label for="fechaIngreso">Ingreso</label>
+            <p-calendar id="fechaIngreso" name="fechaIngreso"
+                        (onSelect)="onSelectMethodCalendarIngreso($event)" [showIcon]="true"
+                        [maxDate]="maxDate" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range"
+                        [locale]="es"  dateFormat="mm/dd/yy"
+                        [disabled]="disabled" [(ngModel)]="experience.ingreso">
+            </p-calendar>
+            <div *ngIf="f.submitted && !ingreso.valid" class="help-block">
+              Ingreso es requerido
+            </div>
+          </div>
+          <div class="form-group col-md-4"
+               [ngClass]="{ 'has-error': f.submitted && !finalizacion.valid }">
+            <label for="fechaFinalizacion">Finalización</label>
+            <p-calendar id="fechaFinalizacion" name="fechaFinalizacion"
+                        (onSelect)="onSelectMethodCalendarFinalizacion($event)" [showIcon]="true"
+                        [maxDate]="maxDate" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range"
+                        [locale]="es"  dateFormat="mm/dd/yy"
+                        [disabled]="disabled" [(ngModel)]="experience.finalizacion">
+            </p-calendar>
+
+            <div *ngIf="f.submitted && !finalizacion.valid" class="help-block">
+              Finalización es requerido
+            </div>
+          </div>
+          <div class="form-group col-md-4"
+               [ngClass]="{ 'has-error': f.submitted && !actualmente.valid }">
+            <label for="actualmente">Actualmente</label>
+            <p-toggleButton id="actualmente" name="actualmente" onLabel="Si" offLabel="No"
+                            onIcon="fa-check-square" offIcon="fa-square"
+                            [(ngModel)]="experience.actualmente">
+            </p-toggleButton>
+
+            <div *ngIf="f.submitted && !actualmente.valid" class="help-block">
+              actualmente es requerido
+            </div>
+          </div>
+        </div>
+        <div class="row form-footer-buttons">
+          <div class="form-group col-md-12">
+            <a (click)="goBack()" class="cancelar">Cancelar</a>
+            <button pButton type="submit" label="Guardar"></button>
+          </div>
+        </div>
+      </form>
     </div>
+
+  </div>
 
 </div>
 

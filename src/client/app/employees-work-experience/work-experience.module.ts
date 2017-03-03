@@ -23,14 +23,15 @@ import {
   CalendarModule,
   DropdownModule,
   ConfirmDialogModule,
-  AutoCompleteModule
+  AutoCompleteModule,
+  ToggleButtonModule
 } from 'primeng/primeng';
 
 
 @NgModule({
   imports: [CommonModule, InputTextModule, FormsModule, DataTableModule,
     ButtonModule, DialogModule, InputTextareaModule, CalendarModule,
-    DropdownModule, ConfirmDialogModule, AutoCompleteModule],
+    DropdownModule, ConfirmDialogModule, AutoCompleteModule, ToggleButtonModule],
   declarations: [
     WorkExperienceComponent,
     WorkExperienceAddComponent,
