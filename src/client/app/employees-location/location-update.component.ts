@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/switchMap';
 import {Component, Input,OnInit } from '@angular/core';
 import {LocationService} from './location.service';
-import {ConstructorEmployeesLocation} from './employees-location.constructor';
+import {EmployeesLocation} from './employees-location';
 import {SelectItem, ConfirmationService, Message} from 'primeng/primeng';
 import {Router, ActivatedRoute, Params}  from '@angular/router';
 import {Location}  from '@angular/common';
@@ -17,7 +17,7 @@ declare let google: any;
 export class LocationUpdateComponent implements  OnInit {
 
   @Input()
-  employLocation :ConstructorEmployeesLocation= new ConstructorEmployeesLocation();
+  employLocation :EmployeesLocation= new EmployeesLocation();
   header:String = 'Editando Ubicación';
 
   principalNomenclatureList: any;
@@ -44,10 +44,11 @@ export class LocationUpdateComponent implements  OnInit {
     private router: Router,
     private location: Location,
     private confirmationService: ConfirmationService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {
     this.complementaries = [{tipo: null, detalle: ''}];
-    this.employLocation.tipoDireccion.value
+    this.employLocation.ciudad = {value: null, label: ''};
+    this.employLocation.tipoDireccion = {value: null, label: ''};
   }
 
   ngOnInit() {
@@ -173,12 +174,17 @@ export class LocationUpdateComponent implements  OnInit {
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
-        //this.router.navigate(['/employees-family-information']);
+        //this.router.navigate(['/employees-location']);
         this.location.back();
       },
       reject: () => {
       }
     });
+  }
+
+  focusMe(){
+    const element = document.querySelector("#formulario");
+    if (element) { element.scrollIntoView(element); }
   }
 
 

@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/switchMap';
 import {Component, Input,OnInit } from '@angular/core';
 import {LocationService} from './location.service';
-import {ConstructorEmployeesLocation} from './employees-location.constructor';
+import {EmployeesLocation} from './employees-location';
 import {SelectItem, ConfirmationService, Message} from 'primeng/primeng';
 import {Router}  from '@angular/router';
 import {Location}  from '@angular/common';
@@ -17,7 +17,7 @@ declare let google: any;
 export class LocationAddComponent implements  OnInit {
 
     @Input()
-    employLocation :ConstructorEmployeesLocation= new ConstructorEmployeesLocation();
+    employLocation : EmployeesLocation = new EmployeesLocation();
     header = 'Agregando Ubicación';
 
     principalNomenclatureList: any;
@@ -43,7 +43,6 @@ export class LocationAddComponent implements  OnInit {
 
     constructor(
                 private locationService: LocationService,
-                private router: Router,
                 private location: Location,
                 private confirmationService: ConfirmationService
             ) {
@@ -66,7 +65,7 @@ export class LocationAddComponent implements  OnInit {
 
         this.employLocation.colaborador = 1; /*ASIGNAR VALOR QUE VENGA EN NAVECAGION */
     }
-    onSubmit(value: string) {
+    onSubmit() {
       this.submitted = true;
       this.msgs = [];
       this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
@@ -118,14 +117,14 @@ export class LocationAddComponent implements  OnInit {
               let latitude = results[0].geometry.location.lat();
               let longitude = results[0].geometry.location.lng();
 
-              var latLng = new google.maps.LatLng(latitude, longitude);
-              var mapOptions = {
+              let latLng = new google.maps.LatLng(latitude, longitude);
+              let mapOptions = {
                 center: latLng,
                 zoom: 16,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
               };
-              var map = new google.maps.Map(document.getElementById('ubicacionColaborador'), mapOptions);
-              var marker = new google.maps.Marker({position: latLng, map: map});
+              let map = new google.maps.Map(document.getElementById('ubicacionColaborador'), mapOptions);
+              let marker = new google.maps.Marker({position: latLng, map: map});
 
               assingLocation(latitude, longitude);
             } else {
@@ -136,7 +135,7 @@ export class LocationAddComponent implements  OnInit {
       }
 
 
-      for (var c of this.complementaries){
+      for (let c of this.complementaries){
         if(c.tipo !== null) {
           this.finalAddress += ' ' + c.tipo + ' ' + c.detalle + ' ';
         }
@@ -167,5 +166,8 @@ export class LocationAddComponent implements  OnInit {
         });
     }
 
-
+  focusUP(){
+    const element = document.querySelector("#formulario");
+      if (element) { element.scrollIntoView(element); }
+  }
 }
