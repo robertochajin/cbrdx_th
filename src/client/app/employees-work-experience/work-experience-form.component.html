@@ -36,9 +36,8 @@
                     <div class="form-group col-md-6"
                          [ngClass]="{ 'has-error': f.submitted && !sectorEmpresa.valid }">
                         <label for="sectorEmpresa">Sector Empresa</label>
-                        <input id="sectorEmpresa" type="text" class="form-control" name="sectorEmpresa"
-                               [(ngModel)]="experience.sectorEmpresa" #sectorEmpresa="ngModel"
-                               required/>
+                      <p-dropdown name="sectorEmpresa" id="sectorEmpresa" #sectorEmpresa="ngModel" required="true" class="form-control"
+                                  [autoWidth]="false" [(ngModel)]="experience.sectorEmpresa" [options]="companySectorList"></p-dropdown>
                         <div *ngIf="f.submitted && !sectorEmpresa.valid" class="help-block">
                             Sector Empresa es requerido
                         </div>
@@ -46,9 +45,8 @@
                     <div class="form-group col-md-6"
                          [ngClass]="{ 'has-error': f.submitted && !subsectorEmpresa.valid }">
                         <label for="subsectorEmpresa">Sub Sector Empresa</label>
-                        <input id="subsectorEmpresa" type="text" class="form-control" name="subsectorEmpresa"
-                               [(ngModel)]="experience.subsectorEmpresa" #subsectorEmpresa="ngModel"
-                               required/>
+                      <p-dropdown name="subSectorEmpresa" id="subSectorEmpresa" #subSectorEmpresa="ngModel" required="true" class="form-control"
+                                  [autoWidth]="false" [(ngModel)]="experience.subsectorEmpresa" [options]="companySubSectorList"></p-dropdown>
                         <div *ngIf="f.submitted && !subsectorEmpresa.valid" class="help-block">
                             Sub Sector Empresa es requerido
                         </div>
@@ -102,9 +100,12 @@
                     <div class="form-group col-md-6"
                          [ngClass]="{ 'has-error': f.submitted && !ciudad.valid }">
                         <label for="ciudad">Ciudad</label>
-                        <input id="ciudad" type="text" class="form-control" name="ciudad"
-                               [(ngModel)]="experience.ciudad" #ciudad="ngModel"
-                               required/>
+
+                      <p-autoComplete placeholder="Buscar ciudad" field="label" #ciudad="ngModel" name="ciudad" id="ciudad" class="form-control"
+                                      [(ngModel)]="experience.ciudad.label" [suggestions]="cityList" required="true"
+                                      (completeMethod)="citySearch($event)" (onSelect)="captureCityId($event)" >
+                      </p-autoComplete>
+
                         <div *ngIf="f.submitted && !ciudad.valid" class="help-block">
                             Ciudad es requerido
                         </div>
@@ -155,7 +156,7 @@
                 <div class="row form-footer-buttons">
                     <div class="form-group col-md-12">
                         <a (click)="goBack()" class="cancelar">Cancelar</a>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button pButton type="submit" label="Guardar"></button>
                     </div>
                 </div>
             </form>
