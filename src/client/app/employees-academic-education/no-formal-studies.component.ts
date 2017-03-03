@@ -1,25 +1,8 @@
-/**
- * Created by Angel on 16/02/2017.
- */
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
-
-import {Noformalstudies} from './no-formal-studies';
-import {AcademicEducationService} from './academic-education.service';
-import {Observable} from 'rxjs/Observable';
-import {ConfirmationService} from 'primeng/primeng';
-
-class constructorNoFormal implements Noformalstudies {
-    constructor(
-        public 	idEstudio?,
-        public 	titulo?,
-        public 	ingreso?,
-        public 	finalizacion?,
-        public 	ciudad?,
-        public 	institucion?,
-        public 	confirmada?
-    ) {}
-}
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Noformalstudies } from './no-formal-studies';
+import { AcademicEducationService } from './academic-education.service';
+import { ConfirmationService } from 'primeng/primeng';
 
 @Component({
     moduleId: module.id,
@@ -27,10 +10,10 @@ class constructorNoFormal implements Noformalstudies {
     selector: 'academic-education-no-formal',
     providers:  [ConfirmationService]
 })
-export class NoFormalStudiesComponent {
+export class NoFormalStudiesComponent implements OnInit {
 
-    study: Noformalstudies = new constructorNoFormal();
-    dialogObjet: Noformalstudies = new constructorNoFormal();
+    study: Noformalstudies = new Noformalstudies();
+    dialogObjet: Noformalstudies = new Noformalstudies();
     nfstudies: Noformalstudies[];
 
     constructor(private academicEducationService: AcademicEducationService,
