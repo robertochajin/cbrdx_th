@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
-import { ConstructorEmployeesLocation } from './employees-location.constructor';
+import { EmployeesLocation } from './employees-location';
 import { LocationService } from './location.service';
 import 'rxjs/add/operator/switchMap';
 
@@ -14,7 +14,7 @@ import 'rxjs/add/operator/switchMap';
 
 export class LocationDetailComponent implements OnInit   {
     @Input()
-    employeeLocation: ConstructorEmployeesLocation = new ConstructorEmployeesLocation();
+    employeeLocation: EmployeesLocation = new EmployeesLocation();
 
     constructor(
         private locationService: LocationService,
