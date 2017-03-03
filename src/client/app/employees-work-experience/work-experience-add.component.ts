@@ -1,69 +1,57 @@
-/**
- * Created by Angel on 15/02/2017.
- */
-import { Component, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import {Component, Input} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
 import {Workexperience} from './work-experience';
 import {WorkExperienceService} from './work-experience.service';
-import { Location }                 from '@angular/common';
+import {Location}                 from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 import {Observable} from 'rxjs/Observable';
 
-//Costructor
-class constructorExperience implements Workexperience {
-    constructor(
-        public 	idExperiencia?,
-        public 	idColaborador?,
-        public  empresa?,
-        public  cargo?,
-        public 	ingreso?,
-        public 	finalizacion?,
-        public 	ciudad?,
-        public  telefonoEmpresa?,
-        public  sectorEmpresa?,
-        public  subsectorEmpresa?,
-        public  nivelCargo?,
-        public  areaCargo?,
-        public  jefeInmediato?,
-        public  tiempoExperiencia?,
-        public  actualmente?,
-    ) {}
-}
+import {CitiesServices} from "../_services/cities.service";
 
 
 @Component({
-    moduleId: module.id,
-    selector: 'work-experience-formal',
-    templateUrl: 'work-experience-form.component.html',
+  moduleId: module.id,
+  selector: 'work-experience-formal',
+  templateUrl: 'work-experience-form.component.html',
 })
 
 export class WorkExperienceAddComponent {
-    @Input()
+  @Input()
 
-    experience: Workexperience = new constructorExperience();
-    header:String = 'Agregando Experiencia';
+  experience: Workexperience = new Workexperience();
+  header: String = 'Agregando Experiencia';
+  cityList: any;
 
-    constructor (
-        private academicEducationService: WorkExperienceService,
-        private router: Router,
-        private location: Location
+  constructor(private academicEducationService: WorkExperienceService,
+              private citiesServices: CitiesServices,
+              private router: Router,
+              private location: Location) {
+  }
 
-    ) {}
+  save() {
 
-    save() {
+    this.academicEducationService.add(this.experience)
+      .subscribe(
+        data => {
+          this.location.back();
+        },
+        error => {
+        });
+  }
 
-        this.academicEducationService.add(this.experience)
-            .subscribe(
-                data => {
-                    this.location.back();
-                },
-                error => {
-                });
-    }
+  goBack(): void {
+    this.location.back();
+  }
 
-    goBack(): void {
-        this.location.back();
-    }
+  citySearch(event: any) {
+    this.citiesServices.getAllCities(event.query).subscribe(
+      cities => this.cityList = cities
+    );
+  }
+
+  captureCityId(event: any) {
+    this.experience.ciudad = event;
+  }
 }
 
 

@@ -358,58 +358,58 @@ export let fakeBackendProvider = {
         let experiences: any[] = JSON.parse(localStorage.getItem('experience'))
             || [
 
-                {
-                    'idExperiencia'             : "1",
-                    'idColaborador'         : "1",
-                    'empresa'               : "Crezcamos",
-                    'cargo'                 : "Gerente",
-                    'ingreso'               : "2 de mayo del 1999",
-                    'finalizacion'          : "2 de mayo del 2005",
-                    'ciudad'                : {value: 1, label: "Bucaramanga"},
-                    'telefonoEmpresa'       : "uis",
-                    'sectorEmpresa'         : "Si",
-                    'subsectorEmpresa'      : "Tipo",
-                    'nivelCargo'            : " Otro tipo",
-                    'areaCargo'             : "8 Horas",
-                    'jefeInmediato'         : "Un cursito para aprender algo",
-                    'tiempoExperiencia'     : "Diplomado",
-                    'actualmente'           : "1"
-                },
-                {
-                    'idExperiencia'             : "2",
-                    'idColaborador'         : "1",
-                    'empresa'               : "Crezcamos",
-                    'cargo'                 : "Gerente",
-                    'ingreso'               : "2 de mayo del 1999",
-                    'finalizacion'          : "2 de mayo del 2005",
-                    'ciudad'                : {value: 1, label: "Bucaramanga"},
-                    'telefonoEmpresa'       : "uis",
-                    'sectorEmpresa'         : "Si",
-                    'subsectorEmpresa'      : "Tipo",
-                    'nivelCargo'            : " Otro tipo",
-                    'areaCargo'             : "8 Horas",
-                    'jefeInmediato'         : "Un cursito para aprender algo",
-                    'tiempoExperiencia'     : "Diplomado",
-                    'actualmente'           : "1"
-                },
-                {
-                    'idExperiencia'             : "3",
-                    'idColaborador'         : "1",
-                    'empresa'               : "Crezcamos",
-                    'cargo'                 : "Gerente",
-                    'ingreso'               : "2 de mayo del 1999",
-                    'finalizacion'          : "2 de mayo del 2005",
-                    'ciudad'                : {value: 1, label: "Bucaramanga"},
-                    'telefonoEmpresa'       : "uis",
-                    'sectorEmpresa'         : "Si",
-                    'subsectorEmpresa'      : "Tipo",
-                    'nivelCargo'            : " Otro tipo",
-                    'areaCargo'             : "8 Horas",
-                    'jefeInmediato'         : "Un cursito para aprender algo",
-                    'tiempoExperiencia'     : "Diplomado",
-                    'actualmente'           : "1"
-                }
-            ];
+        {
+          'idExperiencia': "1",
+          'idColaborador': "1",
+          'empresa': "Crezcamos",
+          'cargo': "Gerente",
+          'ingreso': "1999-03-02",
+          'finalizacion': "2005-03-02",
+          'ciudad': {value: 104, label: "Bucaramanga"},
+          'telefonoEmpresa': "6020304",
+          'sectorEmpresa': 1,
+          'subsectorEmpresa': 2,
+          'nivelCargo': "Nivel Cargo A",
+          'areaCargo': "Area A",
+          'jefeInmediato': "Benito Gomez",
+          'tiempoExperiencia': "10 Meses",
+          'actualmente': "1"
+        },
+        {
+          'idExperiencia': "2",
+          'idColaborador': "1",
+          'empresa': "Ciberdix",
+          'cargo': "Gerente",
+          'ingreso': "1999-03-02",
+          'finalizacion': "2000-03-02",
+          'ciudad': {value: 101, label: "Floridablanca"},
+          'telefonoEmpresa': "6010203",
+          'sectorEmpresa': 2,
+          'subsectorEmpresa': 3,
+          'nivelCargo': "Nivel Cargo B",
+          'areaCargo': "Area B",
+          'jefeInmediato': "Filoberto Garcia",
+          'tiempoExperiencia': "3 Años",
+          'actualmente': "0"
+        },
+        {
+          'idExperiencia': "3",
+          'idColaborador': "1",
+          'empresa': "Empresa SAS",
+          'cargo': "Gerente",
+          'ingreso': "1999-03-02",
+          'finalizacion': "2016-03-02",
+          'ciudad': {value: 104, label: "Bucaramanga"},
+          'telefonoEmpresa': "6101010",
+          'sectorEmpresa': 2,
+          'subsectorEmpresa': 4,
+          'nivelCargo': "Nivel Cargo C",
+          'areaCargo': "Area B",
+          'jefeInmediato': "Armando Casas",
+          'tiempoExperiencia': "2 Años",
+          'actualmente': "0"
+        }
+      ];
 
         let locations: any[] = JSON.parse(localStorage.getItem('locations')) ||
           [
@@ -544,6 +544,25 @@ export let fakeBackendProvider = {
                                           {label: 'Laboral', value: '1'},
                                           {label: 'Familiar', value: '2'}
                                     ];
+    let companySectorList : any[] = [
+      {'value': null, 'label': "Seleccione..."},
+      {'value': "1", 'label': "Sector A"},
+      {'value': "2", 'label': "Sector B"},
+      {'value': "3", 'label': "Sector C"},
+      {'value': "4", 'label': "Sector D"},
+      {'value': "5", 'label': "Sector E"},
+      {'value': "6", 'label': "Sector F"},
+    ];
+
+    let companySubSectorList : any[] = [
+      {'value': null, 'label': "Seleccione..."},
+      {'value': "1", 'label': "Sub Sector A"},
+      {'value': "2", 'label': "Sub Sector B"},
+      {'value': "3", 'label': "Sub Sector C"},
+      {'value': "4", 'label': "Sub Sector D"},
+      {'value': "5", 'label': "Sub Sector E"},
+      {'value': "6", 'label': "Sub Sector F"},
+    ]
 
         // configure fake backend
         backend.connections.subscribe((connection: MockConnection) => {
@@ -1340,6 +1359,26 @@ export let fakeBackendProvider = {
                   body:{data:referencesTypeList}
                 })));
 
+              }
+
+              // companySectorList
+              if (connection.request.url.endsWith('/api/companyselector') && connection.request.method === RequestMethod.Get) {
+                connection.mockRespond(new Response(new ResponseOptions({
+                  status: 200,
+                  body: {
+                    data: companySectorList
+                  }
+                })));
+              }
+
+              //companySubSectorList
+              if (connection.request.url.endsWith('/api/companysubselector') && connection.request.method === RequestMethod.Get) {
+                connection.mockRespond(new Response(new ResponseOptions({
+                  status: 200,
+                  body: {
+                    data: companySubSectorList
+                  }
+                })));
               }
 
             }, 500);

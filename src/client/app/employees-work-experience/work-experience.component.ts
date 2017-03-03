@@ -1,6 +1,4 @@
-/**
- * Created by Angel on 14/02/2017.
- */
+
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
@@ -8,18 +6,6 @@ import {Workexperience} from './work-experience';
 import {WorkExperienceService} from './work-experience.service';
 import {Observable} from 'rxjs/Observable';
 import {ConfirmationService} from 'primeng/primeng';
-
-class constructorExperience implements Workexperience {
-    constructor(
-        public 	idEstudio?,
-        public 	idColaborador?,
-        public  empresa?,
-        public  cargo?,
-        public 	ingreso?,
-        public 	finalizacion?,
-        public 	ciudad?,
-    ) {}
-}
 
 @Component({
     moduleId: module.id,
@@ -29,8 +15,8 @@ class constructorExperience implements Workexperience {
 })
 export class WorkExperienceComponent {
 
-    experience: Workexperience = new constructorExperience();
-    dialogObjet: Workexperience = new constructorExperience();
+    experience: Workexperience = new Workexperience();
+    dialogObjet: Workexperience = new Workexperience();
     experiences: Workexperience[];
 
     constructor(private workExperienceService: WorkExperienceService,

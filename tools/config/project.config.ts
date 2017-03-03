@@ -30,7 +30,7 @@ export class ProjectConfig extends SeedConfig {
 
   constructor() {
     super();
-     this.APP_TITLE = 'Put name of your app here';
+     this.APP_TITLE = ' | Gestionamos';
 
     /* Enable typeless compiler runs (faster) between typed compiler runs. */
     // this.TYPED_COMPILE_INTERVAL = 5;
@@ -47,7 +47,7 @@ export class ProjectConfig extends SeedConfig {
       { src: 'primeng/resources/primeng.min.css', inject: true },
       { src: 'primeng/resources/themes/bootstrap/theme.css', inject: true },
 
-      { src: 'moment/moment.js', inject: true},
+      { src: 'moment/min/moment.min.js', inject: true},
       { src: 'moment/locale/es.js', inject: true},
 
 

@@ -3694,6 +3694,9 @@ body .ui-state-highlight{
 /**
 ------------------------ Form CSS ------------------------------
  */
+label{
+  font-weight: 100;
+}
 form [class*="col-"] {
     padding: 6px;
 }
@@ -3703,4 +3706,19 @@ form [class*="col-"] {
     border-top: 1px #e9e9e9 solid;
     margin-top: 10px;
     padding-top: 8px;
+}
+p-dropdown.form-control,
+p-autocomplete.form-control{
+  padding: 0px;
+  background-color: rgba(0,0,0,0);
+  border: 0 solid;
+}
+p-autocomplete .ui-autocomplete,
+p-dropdown .ui-dropdown{
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+p-autoComplete .ui-autocomplete-input{
+  width: 100%;
 }
