@@ -1,33 +1,10 @@
-/**
- * Created by Angel on 15/02/2017.
- */
-
-
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location }                 from '@angular/common';
-import {Formalstudies} from './formal-studies';
-import {AcademicEducationService} from './academic-education.service';
-
+import { Formalstudies } from './formal-studies';
+import { AcademicEducationService} from './academic-education.service';
+import { Message, ConfirmationService } from 'primeng/primeng';
 import 'rxjs/add/operator/switchMap';
-
-class constructorFormal implements Formalstudies {
-    constructor(
-        public 	idEstudio?,
-        public 	titulo?,
-        public 	ingreso?,
-        public 	finalizacion?,
-        public 	ciudad?,
-        public 	institucion?,
-        public 	confirmada?,
-        public 	tipoEstudio?,
-        public 	otroTipoEstudio?,
-        public 	intensidad?,
-        public 	descripcion?,
-        public 	areaEstudio?,
-        public 	estadoEstudio?
-    ) {}
-}
 
 
 @Component({
@@ -40,11 +17,13 @@ class constructorFormal implements Formalstudies {
 export class NoFormalStudiesDetailComponent implements OnInit   {
     @Input()
 
-    study: Formalstudies = new constructorFormal();
+    study: Formalstudies = new Formalstudies();
 
     constructor(
         private academicEducationService: AcademicEducationService,
+        private confirmationService: ConfirmationService,
         private route: ActivatedRoute,
+        private router: Router,
         private location: Location
     ) {}
 
@@ -55,7 +34,14 @@ export class NoFormalStudiesDetailComponent implements OnInit   {
     }
 
     goBack(): void {
-        this.location.back();
+      this.confirmationService.confirm({
+        message: ` ¿Esta seguro que desea Cancelar?`,
+        header: 'Corfirmación',
+        icon: 'fa fa-question-circle',
+        accept: () => {
+          this.router.navigate(['/employees-no-formal-studies']);
+        }
+      });
     }
 }
 

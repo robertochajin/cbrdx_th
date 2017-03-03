@@ -301,18 +301,17 @@ export let fakeBackendProvider = {
             || [
 
                 {
-
                     'idEstudio'             : "1",
                     'idColaborador'         : "1",
                     'titulo'                : "Laboral",
-                    'ingreso'               : "2 de mayo del 1999",
-                    'finalizacion'          : "2 de mayo del 2005",
+                    'ingreso'               : "10/10/2010",
+                    'finalizacion'          : "10/20/2010",
                     'ciudad'                : {value: 1, label: "Bucaramanga"},
-                    'institucion'           : {value: 1, label:"uis"},
+                    'institucion'           : "sagrado corazón de jesus",
                     'confirmada'            : "Si",
-                    'tipoEstudio'           : "Tipo",
+                    'tipoEstudio'           : {value: 1, label: "Diplomado"},
                     'otroTipoEstudio'       : " Otro tipo",
-                    'intensidad'            : "8 Horas",
+                    'intensidad'            : {value: 1, label: "20 horas"},
                     'descripcion'           : "Un cursito para aprender algo",
                     'areaEstudio'           : {value: 1, label:"Diplomado"},
                     'estadoEstudio'         : {value: 1, label:" Terminado"},
@@ -323,14 +322,14 @@ export let fakeBackendProvider = {
                     'idEstudio'             : "2",
                     'idColaborador'         : "1",
                     'titulo'                : "Abogado",
-                    'ingreso'               : "2 de mayo del 1999",
-                    'finalizacion'          : "2 de mayo del 2005",
+                    'ingreso'               : "10/10/2010",
+                    'finalizacion'          : "10/20/2010",
                     'ciudad'                : {value: 1, label: "Bucaramanga"},
-                    'institucion'           : {value: 1, label:"UPB"},
+                    'institucion'           : "sagrado corazón de jesus",
                     'confirmada'            : "Si",
-                    'tipoEstudio'           : "Tipo",
+                    'tipoEstudio'           : {value: 1, label: "Diplomado"},
                     'otroTipoEstudio'       : " Otro tipo",
-                    'intensidad'            : "8 Horas",
+                    'intensidad'            : {value: 1, label: "20 horas"},
                     'descripcion'           : "Un cursito para aprender algo",
                     'areaEstudio'           : {value: 1, label:"Diplomado"},
                     'estadoEstudio'         : {value: 1, label:" Terminado"},
@@ -341,14 +340,14 @@ export let fakeBackendProvider = {
                     'idEstudio'             : "3",
                     'idColaborador'         : "1",
                     'titulo'                : "ingeniero",
-                    'ingreso'               : "2 de mayo del 1999",
-                    'finalizacion'          : "2 de mayo del 2005",
+                    'ingreso'               : "10/10/2010",
+                    'finalizacion'          : "10/20/2010",
                     'ciudad'                : {value: 1, label: "Bucaramanga"},
-                    'institucion'           : {value: 1, label:"uis"},
+                    'institucion'           : "sagrado corazón de jesus",
                     'confirmada'            : "Si",
-                    'tipoEstudio'           : "Tipo",
+                    'tipoEstudio'           : {value: 1, label: "Diplomado"},
                     'otroTipoEstudio'       : " Otro tipo",
-                    'intensidad'            : "8 Horas",
+                    'intensidad'            : {value: 1, label: "20 horas"},
                     'descripcion'           : "Un cursito para aprender algo",
                     'areaEstudio'           : {value: 1, label:"Diplomado"},
                     'estadoEstudio'         : {value: 1, label:" Terminado"},
@@ -506,6 +505,24 @@ export let fakeBackendProvider = {
             {label: 'Seleccione', value: null},
             {label: 'En curso', value: '1'},
             {label: 'Terminado', value: '2'}
+        ];
+
+        let studyTypeList = [
+            {label: 'Seleccione', value: null},
+            {label: 'Diplomado', value: '1'},
+            {label: 'Taller', value: '2'},
+            {label: 'Curso de barrio', value: '3'},
+            {label: 'Curso SENA', value: '4'},
+            {label: 'Certificacion', value: '5'}
+        ];
+
+        let studyIntensityList = [
+            {label: 'Seleccione', value: null},
+            {label: '10 horas', value: '1'},
+            {label: '20 horas', value: '2'},
+            {label: '30 horas', value: '3'},
+            {label: '40 horas', value: '4'},
+            {label: '50 horas', value: '5'}
         ];
 
         let cities: any[] = [{'value': 101, 'label': 'Floridablanca - Santander - Colombia'},
@@ -1035,6 +1052,26 @@ export let fakeBackendProvider = {
 
                 }
 
+                //Listado de estados de estudio
+                if (connection.request.url.endsWith('/api/study-type') && connection.request.method === RequestMethod.Get) {
+
+                  connection.mockRespond(new Response(new ResponseOptions({
+                    status: 200,
+                    body:{data:studyTypeList}
+                  })));
+
+                }
+
+                //Listado de estados de estudio
+                if (connection.request.url.endsWith('/api/study-intensity') && connection.request.method === RequestMethod.Get) {
+
+                  connection.mockRespond(new Response(new ResponseOptions({
+                    status: 200,
+                    body:{data:studyIntensityList}
+                  })));
+
+                }
+
                 // obtiene un listado de instituciones filtrado por el query
                 if (connection.request.url.match(/\/api\/institute\/s\/\w+/) && connection.request.method === RequestMethod.Get) {
                   // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
@@ -1182,7 +1219,14 @@ export let fakeBackendProvider = {
 
                     // save new user
                     news.idEstudio = nfstudies.length + 1;
-                    news.nombreCompleto = news.primerNombre+' '+news.segundoNombre+' '+news.primerApellido+' '+news.segundoApellido;
+                    news.ciudad = cities.find(c => c.value === news.ciudad.value );
+                    news.estadoEstudio = studyStateList.find(s => s.value === news.estadoEstudio.value);
+                    news.areaEstudio = studyAreaList.find(s => s.value === news.areaEstudio.value);
+                    news.nivelEstudio = studyLevelList.find(s => s.value === news.nivelEstudio.value);
+
+                    news.tipoEstudio = studyTypeList.find(s => s.value === news.tipoEstudio.value);
+                    news.intensidad = studyIntensityList.find(s => s.value === news.intensidad.value);
+
                     nfstudies.push(news);
                     localStorage.setItem('references', JSON.stringify(nfstudies));
 

@@ -20,6 +20,8 @@ import { InstituteServices } from '../_services/institute.service';
 import { StudyLevelServices } from '../_services/study-level.service';
 import { StudyAreaServices } from '../_services/study-area.service';
 import { StudyStateServices } from '../_services/study-state.service';
+import { StudyTypeServices } from '../_services/study-type.service';
+import { StudyIntensityServices } from '../_services/study-intensity.service';
 
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule,
         ConfirmDialogModule,AutoCompleteModule,CheckboxModule,MessagesModule } from 'primeng/primeng';
@@ -42,7 +44,7 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
                     ],
     bootstrap:    [FormalStudiesComponent],
     providers:    [AcademicEducationService, CitiesServices, StudyLevelServices, StudyAreaServices, StudyStateServices,
-                  InstituteServices],
+                  InstituteServices, StudyTypeServices, StudyIntensityServices],
     exports: 	  [FormalStudiesComponent,NoFormalStudiesComponent]
 })
 export class AcademicEducationModule { }
