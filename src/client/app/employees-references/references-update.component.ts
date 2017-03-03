@@ -48,6 +48,11 @@ export class ReferencesUpdateComponent implements OnInit  {
     this.submitted = true;
     this.msgs = [];
     this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
+    this.reference.primerNombre = this.capitalizeSave(this.reference.primerNombre);
+    this.reference.segundoNombre = this.capitalizeSave(this.reference.segundoNombre);
+    this.reference.primerApellido = this.capitalizeSave(this.reference.primerApellido);
+    this.reference.segundoApellido = this.capitalizeSave(this.reference.segundoApellido);
+
     this.referencesService.update(this.reference)
       .subscribe(
         data => {
@@ -77,6 +82,20 @@ export class ReferencesUpdateComponent implements OnInit  {
       reject: () => {
       }
     });
+  }
+
+  focusUP(){
+    const element = document.querySelector("#formulario");
+    if (element) { element.scrollIntoView(element); }
+  }
+
+  capitalize(event) {
+    let input = event.target.value;
+    event.target.value = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
+  }
+
+  capitalizeSave(input) {
+    return input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
   }
 }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { LocationService } from './location.service';
-import { ConstructorEmployeesLocation } from './employees-location.constructor';
+import { EmployeesLocation } from './employees-location';
 import {ConfirmationService} from 'primeng/primeng';
 
 @Component({
@@ -13,8 +13,8 @@ import {ConfirmationService} from 'primeng/primeng';
 })
 export class LocationComponent implements OnInit {
 
-    employeesLocations: ConstructorEmployeesLocation[];
-    dialogObjet: ConstructorEmployeesLocation = new ConstructorEmployeesLocation();
+    employeesLocations: EmployeesLocation[];
+    dialogObjet: EmployeesLocation = new EmployeesLocation();
     constructor(
               private locationService: LocationService,
               private router: Router,
@@ -27,12 +27,12 @@ export class LocationComponent implements OnInit {
         );
     }
 
-    delete(l: ConstructorEmployeesLocation) {
+    delete(l: EmployeesLocation) {
         this.locationService.delete(l);
         this.employeesLocations.splice(this.employeesLocations.indexOf(l), 1);
         l = null;
     }
-    del(f: ConstructorEmployeesLocation) {
+    del(f: EmployeesLocation) {
       this.dialogObjet = f;
       this.confirmationService.confirm({
         message: ` ¿Esta seguro que desea eliminar?`,
@@ -49,7 +49,7 @@ export class LocationComponent implements OnInit {
       });
     }
 
-    detail(l: ConstructorEmployeesLocation) {
+    detail(l: EmployeesLocation) {
         this.router.navigate(['employees-location/detail/'+l.idUbicacion]);
     }
 
@@ -57,8 +57,7 @@ export class LocationComponent implements OnInit {
         this.router.navigate(['employees-location/add']);
     }
 
-    update(l: ConstructorEmployeesLocation) {
-        console.log(l);
+    update(l: EmployeesLocation) {
         this.router.navigate(['employees-location/update/'+l.idUbicacion]);
     }
 }

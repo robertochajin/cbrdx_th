@@ -301,18 +301,17 @@ export let fakeBackendProvider = {
             || [
 
                 {
-
                     'idEstudio'             : "1",
                     'idColaborador'         : "1",
                     'titulo'                : "Laboral",
-                    'ingreso'               : "2 de mayo del 1999",
-                    'finalizacion'          : "2 de mayo del 2005",
+                    'ingreso'               : "10/10/2010",
+                    'finalizacion'          : "10/20/2010",
                     'ciudad'                : {value: 1, label: "Bucaramanga"},
-                    'institucion'           : {value: 1, label:"uis"},
+                    'institucion'           : "sagrado corazón de jesus",
                     'confirmada'            : "Si",
-                    'tipoEstudio'           : "Tipo",
+                    'tipoEstudio'           : {value: 1, label: "Diplomado"},
                     'otroTipoEstudio'       : " Otro tipo",
-                    'intensidad'            : "8 Horas",
+                    'intensidad'            : {value: 1, label: "20 horas"},
                     'descripcion'           : "Un cursito para aprender algo",
                     'areaEstudio'           : {value: 1, label:"Diplomado"},
                     'estadoEstudio'         : {value: 1, label:" Terminado"},
@@ -323,14 +322,14 @@ export let fakeBackendProvider = {
                     'idEstudio'             : "2",
                     'idColaborador'         : "1",
                     'titulo'                : "Abogado",
-                    'ingreso'               : "2 de mayo del 1999",
-                    'finalizacion'          : "2 de mayo del 2005",
+                    'ingreso'               : "10/10/2010",
+                    'finalizacion'          : "10/20/2010",
                     'ciudad'                : {value: 1, label: "Bucaramanga"},
-                    'institucion'           : {value: 1, label:"UPB"},
+                    'institucion'           : "sagrado corazón de jesus",
                     'confirmada'            : "Si",
-                    'tipoEstudio'           : "Tipo",
+                    'tipoEstudio'           : {value: 1, label: "Diplomado"},
                     'otroTipoEstudio'       : " Otro tipo",
-                    'intensidad'            : "8 Horas",
+                    'intensidad'            : {value: 1, label: "20 horas"},
                     'descripcion'           : "Un cursito para aprender algo",
                     'areaEstudio'           : {value: 1, label:"Diplomado"},
                     'estadoEstudio'         : {value: 1, label:" Terminado"},
@@ -341,14 +340,14 @@ export let fakeBackendProvider = {
                     'idEstudio'             : "3",
                     'idColaborador'         : "1",
                     'titulo'                : "ingeniero",
-                    'ingreso'               : "2 de mayo del 1999",
-                    'finalizacion'          : "2 de mayo del 2005",
+                    'ingreso'               : "10/10/2010",
+                    'finalizacion'          : "10/20/2010",
                     'ciudad'                : {value: 1, label: "Bucaramanga"},
-                    'institucion'           : {value: 1, label:"uis"},
+                    'institucion'           : "sagrado corazón de jesus",
                     'confirmada'            : "Si",
-                    'tipoEstudio'           : "Tipo",
+                    'tipoEstudio'           : {value: 1, label: "Diplomado"},
                     'otroTipoEstudio'       : " Otro tipo",
-                    'intensidad'            : "8 Horas",
+                    'intensidad'            : {value: 1, label: "20 horas"},
                     'descripcion'           : "Un cursito para aprender algo",
                     'areaEstudio'           : {value: 1, label:"Diplomado"},
                     'estadoEstudio'         : {value: 1, label:" Terminado"},
@@ -358,58 +357,58 @@ export let fakeBackendProvider = {
         let experiences: any[] = JSON.parse(localStorage.getItem('experience'))
             || [
 
-                {
-                    'idExperiencia'             : "1",
-                    'idColaborador'         : "1",
-                    'empresa'               : "Crezcamos",
-                    'cargo'                 : "Gerente",
-                    'ingreso'               : "2 de mayo del 1999",
-                    'finalizacion'          : "2 de mayo del 2005",
-                    'ciudad'                : {value: 1, label: "Bucaramanga"},
-                    'telefonoEmpresa'       : "uis",
-                    'sectorEmpresa'         : "Si",
-                    'subsectorEmpresa'      : "Tipo",
-                    'nivelCargo'            : " Otro tipo",
-                    'areaCargo'             : "8 Horas",
-                    'jefeInmediato'         : "Un cursito para aprender algo",
-                    'tiempoExperiencia'     : "Diplomado",
-                    'actualmente'           : "1"
-                },
-                {
-                    'idExperiencia'             : "2",
-                    'idColaborador'         : "1",
-                    'empresa'               : "Crezcamos",
-                    'cargo'                 : "Gerente",
-                    'ingreso'               : "2 de mayo del 1999",
-                    'finalizacion'          : "2 de mayo del 2005",
-                    'ciudad'                : {value: 1, label: "Bucaramanga"},
-                    'telefonoEmpresa'       : "uis",
-                    'sectorEmpresa'         : "Si",
-                    'subsectorEmpresa'      : "Tipo",
-                    'nivelCargo'            : " Otro tipo",
-                    'areaCargo'             : "8 Horas",
-                    'jefeInmediato'         : "Un cursito para aprender algo",
-                    'tiempoExperiencia'     : "Diplomado",
-                    'actualmente'           : "1"
-                },
-                {
-                    'idExperiencia'             : "3",
-                    'idColaborador'         : "1",
-                    'empresa'               : "Crezcamos",
-                    'cargo'                 : "Gerente",
-                    'ingreso'               : "2 de mayo del 1999",
-                    'finalizacion'          : "2 de mayo del 2005",
-                    'ciudad'                : {value: 1, label: "Bucaramanga"},
-                    'telefonoEmpresa'       : "uis",
-                    'sectorEmpresa'         : "Si",
-                    'subsectorEmpresa'      : "Tipo",
-                    'nivelCargo'            : " Otro tipo",
-                    'areaCargo'             : "8 Horas",
-                    'jefeInmediato'         : "Un cursito para aprender algo",
-                    'tiempoExperiencia'     : "Diplomado",
-                    'actualmente'           : "1"
-                }
-            ];
+        {
+          'idExperiencia': "1",
+          'idColaborador': "1",
+          'empresa': "Crezcamos",
+          'cargo': "Gerente",
+          'ingreso': "1999-03-02",
+          'finalizacion': "2005-03-02",
+          'ciudad': {value: 104, label: "Bucaramanga"},
+          'telefonoEmpresa': "6020304",
+          'sectorEmpresa': 1,
+          'subsectorEmpresa': 2,
+          'nivelCargo': "Nivel Cargo A",
+          'areaCargo': "Area A",
+          'jefeInmediato': "Benito Gomez",
+          'tiempoExperiencia': "10 Meses",
+          'actualmente': "1"
+        },
+        {
+          'idExperiencia': "2",
+          'idColaborador': "1",
+          'empresa': "Ciberdix",
+          'cargo': "Gerente",
+          'ingreso': "1999-03-02",
+          'finalizacion': "2000-03-02",
+          'ciudad': {value: 101, label: "Floridablanca"},
+          'telefonoEmpresa': "6010203",
+          'sectorEmpresa': 2,
+          'subsectorEmpresa': 3,
+          'nivelCargo': "Nivel Cargo B",
+          'areaCargo': "Area B",
+          'jefeInmediato': "Filoberto Garcia",
+          'tiempoExperiencia': "3 Años",
+          'actualmente': "0"
+        },
+        {
+          'idExperiencia': "3",
+          'idColaborador': "1",
+          'empresa': "Empresa SAS",
+          'cargo': "Gerente",
+          'ingreso': "1999-03-02",
+          'finalizacion': "2016-03-02",
+          'ciudad': {value: 104, label: "Bucaramanga"},
+          'telefonoEmpresa': "6101010",
+          'sectorEmpresa': 2,
+          'subsectorEmpresa': 4,
+          'nivelCargo': "Nivel Cargo C",
+          'areaCargo': "Area B",
+          'jefeInmediato': "Armando Casas",
+          'tiempoExperiencia': "2 Años",
+          'actualmente': "0"
+        }
+      ];
 
         let locations: any[] = JSON.parse(localStorage.getItem('locations')) ||
           [
@@ -508,6 +507,24 @@ export let fakeBackendProvider = {
             {label: 'Terminado', value: '2'}
         ];
 
+        let studyTypeList = [
+            {label: 'Seleccione', value: null},
+            {label: 'Diplomado', value: '1'},
+            {label: 'Taller', value: '2'},
+            {label: 'Curso de barrio', value: '3'},
+            {label: 'Curso SENA', value: '4'},
+            {label: 'Certificacion', value: '5'}
+        ];
+
+        let studyIntensityList = [
+            {label: 'Seleccione', value: null},
+            {label: '10 horas', value: '1'},
+            {label: '20 horas', value: '2'},
+            {label: '30 horas', value: '3'},
+            {label: '40 horas', value: '4'},
+            {label: '50 horas', value: '5'}
+        ];
+
         let cities: any[] = [{'value': 101, 'label': 'Floridablanca - Santander - Colombia'},
                             {'value': 102, 'label': 'Floridablanca - Vichada - Colombia'},
                             {'value': 103, 'label': 'Floridablanca - Cesar - Colombia'},
@@ -544,6 +561,25 @@ export let fakeBackendProvider = {
                                           {label: 'Laboral', value: '1'},
                                           {label: 'Familiar', value: '2'}
                                     ];
+    let companySectorList : any[] = [
+      {'value': null, 'label': "Seleccione..."},
+      {'value': "1", 'label': "Sector A"},
+      {'value': "2", 'label': "Sector B"},
+      {'value': "3", 'label': "Sector C"},
+      {'value': "4", 'label': "Sector D"},
+      {'value': "5", 'label': "Sector E"},
+      {'value': "6", 'label': "Sector F"},
+    ];
+
+    let companySubSectorList : any[] = [
+      {'value': null, 'label': "Seleccione..."},
+      {'value': "1", 'label': "Sub Sector A"},
+      {'value': "2", 'label': "Sub Sector B"},
+      {'value': "3", 'label': "Sub Sector C"},
+      {'value': "4", 'label': "Sub Sector D"},
+      {'value': "5", 'label': "Sub Sector E"},
+      {'value': "6", 'label': "Sub Sector F"},
+    ]
 
         // configure fake backend
         backend.connections.subscribe((connection: MockConnection) => {
@@ -1016,6 +1052,26 @@ export let fakeBackendProvider = {
 
                 }
 
+                //Listado de estados de estudio
+                if (connection.request.url.endsWith('/api/study-type') && connection.request.method === RequestMethod.Get) {
+
+                  connection.mockRespond(new Response(new ResponseOptions({
+                    status: 200,
+                    body:{data:studyTypeList}
+                  })));
+
+                }
+
+                //Listado de estados de estudio
+                if (connection.request.url.endsWith('/api/study-intensity') && connection.request.method === RequestMethod.Get) {
+
+                  connection.mockRespond(new Response(new ResponseOptions({
+                    status: 200,
+                    body:{data:studyIntensityList}
+                  })));
+
+                }
+
                 // obtiene un listado de instituciones filtrado por el query
                 if (connection.request.url.match(/\/api\/institute\/s\/\w+/) && connection.request.method === RequestMethod.Get) {
                   // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
@@ -1163,7 +1219,14 @@ export let fakeBackendProvider = {
 
                     // save new user
                     news.idEstudio = nfstudies.length + 1;
-                    news.nombreCompleto = news.primerNombre+' '+news.segundoNombre+' '+news.primerApellido+' '+news.segundoApellido;
+                    news.ciudad = cities.find(c => c.value === news.ciudad.value );
+                    news.estadoEstudio = studyStateList.find(s => s.value === news.estadoEstudio.value);
+                    news.areaEstudio = studyAreaList.find(s => s.value === news.areaEstudio.value);
+                    news.nivelEstudio = studyLevelList.find(s => s.value === news.nivelEstudio.value);
+
+                    news.tipoEstudio = studyTypeList.find(s => s.value === news.tipoEstudio.value);
+                    news.intensidad = studyIntensityList.find(s => s.value === news.intensidad.value);
+
                     nfstudies.push(news);
                     localStorage.setItem('references', JSON.stringify(nfstudies));
 
@@ -1339,6 +1402,26 @@ export let fakeBackendProvider = {
                   body:{data:referencesTypeList}
                 })));
 
+              }
+
+              // companySectorList
+              if (connection.request.url.endsWith('/api/companyselector') && connection.request.method === RequestMethod.Get) {
+                connection.mockRespond(new Response(new ResponseOptions({
+                  status: 200,
+                  body: {
+                    data: companySectorList
+                  }
+                })));
+              }
+
+              //companySubSectorList
+              if (connection.request.url.endsWith('/api/companysubselector') && connection.request.method === RequestMethod.Get) {
+                connection.mockRespond(new Response(new ResponseOptions({
+                  status: 200,
+                  body: {
+                    data: companySubSectorList
+                  }
+                })));
               }
 
         // companySectorList
