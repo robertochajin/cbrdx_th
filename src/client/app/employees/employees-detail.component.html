@@ -27,8 +27,8 @@
         <p-tabView id="tbvInfoPersonal" orientation="right">
           <p-tabPanel header="Info Personal" [selected]="true">
 
-            <p-accordion>
-              <p-accordionTab header="Datos Generales" [selected]="true">
+            <p-accordion (onShow)="onTabShow($event)" (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)" id="accordion">
+              <p-accordionTab header="Datos Generales" [selected]="acordion.tab1">
                 <form class="form-horizontal">
                   <fieldset>
                     <div class="form-group">
@@ -74,36 +74,36 @@
                 </form>
               </p-accordionTab>
 
-              <p-accordionTab header="Información Familiar">
+              <p-accordionTab header="Información Familiar" [selected]="acordion.tab2">
                 <familyinformation></familyinformation>
               </p-accordionTab>
 
-              <p-accordionTab header="Ubicación">
+              <p-accordionTab header="Ubicación" [selected]="acordion.tab3">
                 <employees-locations></employees-locations>
               </p-accordionTab>
 
-              <p-accordionTab header="Formación Academica">
+              <p-accordionTab header="Formación Academica" [selected]="acordion.tab4">
                 <academic-education-formal></academic-education-formal>
                 <academic-education-no-formal></academic-education-no-formal>
               </p-accordionTab>
 
-              <p-accordionTab header="Experiencia Laboral">
+              <p-accordionTab header="Experiencia Laboral" [selected]="acordion.tab5">
                 <work-experience></work-experience>
               </p-accordionTab>
 
-              <p-accordionTab header="Referencias">
+              <p-accordionTab header="Referencias" [selected]="acordion.tab6">
                 <references></references>
               </p-accordionTab>
             </p-accordion>
 
           </p-tabPanel>
-          <p-tabPanel header="Reclutamiento">
+          <p-tabPanel header="Reclutamiento" >
             <h3>Reclutamiento</h3>
           </p-tabPanel>
           <p-tabPanel header="Novedades">
             <h3>Novedades</h3>
           </p-tabPanel>
-          <p-tabPanel header="Formación y Capacitación">
+          <p-tabPanel header="Formación y Capacitación" >
             <h3>Formación y Capacitación</h3>
           </p-tabPanel>
           <p-tabPanel header="Evaluación de Competencias">

@@ -96,6 +96,7 @@ export class FamilyInformationUpdateComponent implements OnInit{
                     }
 
                 });
+        this.focusUP();
 
     }
 
@@ -132,7 +133,7 @@ export class FamilyInformationUpdateComponent implements OnInit{
         });
     }
 
-  onSelectMethod(event) {
+  onSelectMethod(event:any) {
     let d = new Date(Date.parse(event));
     this.familyInformation.fechadeNacimiento = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
   }
@@ -149,7 +150,7 @@ export class FamilyInformationUpdateComponent implements OnInit{
   //   }
   // }
 
-  onChangeMethod(event) {
+  onChangeMethod(event:any) {
 
     let today = new Date();
     let month = today.getMonth();
@@ -180,11 +181,7 @@ export class FamilyInformationUpdateComponent implements OnInit{
     }
 
   }
-  keyPressOnForm(event) {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-    }
-  }
+
   strToDate(newDateString: string): Date {
     if (newDateString) {
       let mom: moment.Moment = moment(newDateString, 'MM/DD/YYYY');
@@ -195,13 +192,17 @@ export class FamilyInformationUpdateComponent implements OnInit{
     return null;
   }
 
-  capitalize(event) {
+  capitalize(event:any) {
     let input = event.target.value;
     event.target.value = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
   }
 
-  capitalizeSave(input) {
+  capitalizeSave(input :any) {
     return input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
+  }
+  focusUP(){
+    const element = document.querySelector("#formulario");
+    if (element) { element.scrollIntoView(element); }
   }
 
 }

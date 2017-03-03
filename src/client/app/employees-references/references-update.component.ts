@@ -42,6 +42,7 @@ export class ReferencesUpdateComponent implements OnInit  {
     this.route.params
       .switchMap((params: Params) => this.referencesService.get(+params['id']))
       .subscribe(reference => this.reference = reference);
+    this.focusUP();
   }
   onSubmit() {
 
@@ -89,12 +90,12 @@ export class ReferencesUpdateComponent implements OnInit  {
     if (element) { element.scrollIntoView(element); }
   }
 
-  capitalize(event) {
+  capitalize(event:any) {
     let input = event.target.value;
     event.target.value = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
   }
 
-  capitalizeSave(input) {
+  capitalizeSave(input:any) {
     return input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
   }
 }

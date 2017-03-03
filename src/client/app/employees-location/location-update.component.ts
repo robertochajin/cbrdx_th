@@ -182,7 +182,7 @@ export class LocationUpdateComponent implements  OnInit {
     });
   }
 
-  focusMe(){
+  focusUP(){
     const element = document.querySelector("#formulario");
     if (element) { element.scrollIntoView(element); }
   }

@@ -1,6 +1,3 @@
-/**
- * Created by Angel on 10/02/2017.
- */
 import 'rxjs/add/operator/switchMap';
 import {Component, Input,OnInit } from '@angular/core';
 import {FamilyInformationService} from './family-information.service';
@@ -86,6 +83,7 @@ export class FamilyInformationAddComponent implements OnInit {
         this.maxDate.setMonth(month);
         this.maxDate.setFullYear(year);
         this.range = `${lasYear}:${year}`;
+        this.focusMe();
 
     }
 
@@ -123,7 +121,7 @@ export class FamilyInformationAddComponent implements OnInit {
         });
     }
 
-    onSelectMethod(event) {
+    onSelectMethod(event:any) {
         let d = new Date(Date.parse(event));
         this.familyInformation.fechadeNacimiento = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
     }
@@ -140,7 +138,7 @@ export class FamilyInformationAddComponent implements OnInit {
     //   }
     // }
 
-    onChangeMethod(event) {
+    onChangeMethod(event:any) {
 
       let today = new Date();
       let month = today.getMonth();
@@ -173,11 +171,6 @@ export class FamilyInformationAddComponent implements OnInit {
       }
 
     }
-    keyPressOnForm(event) {
-      if (event.keyCode === 13) {
-        event.preventDefault();
-      }
-    }
 
   strToDate(newDateString: string): Date {
     if (newDateString) {
@@ -200,13 +193,17 @@ export class FamilyInformationAddComponent implements OnInit {
     return '';
   }
 
-  capitalize(event) {
+  capitalize(event:any) {
     let input = event.target.value;
     event.target.value = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
   }
 
-  capitalizeSave(input) {
+  capitalizeSave(input:any) {
     return input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
+  }
+  focusMe(){
+    const element = document.querySelector("#formulario");
+    if (element) { element.scrollIntoView(element); }
   }
 
 }

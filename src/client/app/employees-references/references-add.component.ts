@@ -40,6 +40,7 @@ export class ReferencesAddComponent implements OnInit  {
 
     ngOnInit () {
         this.referencesTypesServices.getAll().subscribe(referencesTypes => this.referencesTypes = referencesTypes);
+        this.focusUP();
     }
     onSubmit() {
 
@@ -88,12 +89,12 @@ export class ReferencesAddComponent implements OnInit  {
       if (element) { element.scrollIntoView(element); }
     }
 
-    capitalize(event) {
+    capitalize(event:any) {
       let input = event.target.value;
       event.target.value = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
     }
 
-    capitalizeSave(input) {
+    capitalizeSave(input:any) {
       return input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
     }
 }
