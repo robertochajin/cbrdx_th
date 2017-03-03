@@ -13,235 +13,125 @@ export let fakeBackendProvider = {
                 {"idColaborador":"1",
 
                     "numeroDocumento":"1098936874",
-
-                    "nombreCompleto":"Luis Enrrique Gomez Ramirez",
-
                     "primerNombre":"Luis",
-
                     "segundoNombre":"Enrrique",
-
                     "primerApellido":"Gomez",
-
                     "segundoApellido":"Ramirez",
-
-                    "tipoDocumento":"C.C.",
-
+                    "tipoDocumento": {'value' : "1", 'label' : "CC"},
                     "Avatar":"fotico.png",
-
-                    "ciudadExpedicion":"Bucaramanga",
-
-                    "fechaExp":"1 de 2 de 2010",
-
-                    "fechaNacimiento":"12 de 12 de 1991",
-
+                    "ciudadExpedicion": {'value' : "1", 'label' : "Bucaramanga"},
+                    "fechaExp":"1 de mayo de 2010",
+                    "fechaNacimiento":"12/12/1991",
                     "idtercero":"12",
-
-                    "ciudadNacimiento":"Bogotá",
-
+                    "ciudadNacimiento": {'value' : "2", 'label' : "Bogota"},
                     "nacionalidad":"Colombiano",
-
-                    "genero":"M",
-
-                    "estadoCivil":"Soltero",
-
-                    "factorrh":"O+",
-
+                    "genero": {'value' : "1", 'label' : "Masculino"},
+                    "estadoCivil": {'value' : "1", 'label' : "Soltero"},
+                    "factorrh": "O+",
                     "numeroDeHijos":"5",
-
                     "lateralidad":"D",
-
                     "nivelEducativo":"Pregrado",
-
                     "profesion":"Orientador",
-
                     "estratoSocioEconomico":"3",
-
                     "vivienda":"Arrendada",
-
                     "vehiculo":"Propio",
-
                     "tallaCamisa":"M",
-
                     "tallaPantalon":"32",
-
                     "tallaCalzado":"38",
-
                     "fechaDesde":"2011-05-11",
-
                     "cargoActual":"Ejecutivo Comercial"},
 
-                {"idColaborador":"2",
-
+                {
+                    "idColaborador":"2",
                     "numeroDocumento":"91256964",
-
                     "primerNombre":"Miguel",
-
                     "segundoNombre":"Alejandro",
-
                     "primerApellido":"Fernandez",
-
                     "segundoApellido":"Lopera",
-
-                    "tipoDocumento":"C.C.",
-
+                    "tipoDocumento": {'value' : "1", 'label' : "CC"},
                     "Avatar":"fotico.png",
-
-                    "ciudadExpedicion":"Bucaramanga",
-
-                    "fechaExp":"2 de 3 de 2003",
-
-                    "fechaNacimiento":"23 de 01 de 1985",
-
-                    "idtercero":"23",
-
-                    "ciudadNacimiento":"Bogotá",
-
+                    "ciudadExpedicion": {'value' : "1", 'label' : "Bucaramanga"},
+                    "fechaExp":"1 de mayo de 2010",
+                    "fechaNacimiento":"12/12/1991",
+                    "idtercero":"12",
+                    "ciudadNacimiento": {'value' : "2", 'label' : "Bogota"},
                     "nacionalidad":"Colombiano",
-
-                    "genero":"M",
-
-                    "estadoCivil":"Soltero",
-
+                    "genero": {'value' : "1", 'label' : "Masculino"},
+                    "estadoCivil": {'value' : "1", 'label' : "Soltero"},
                     "factorrh":"O+",
-
                     "numeroDeHijos":"5",
-
                     "lateralidad":"D",
-
                     "nivelEducativo":"Pregrado",
-
                     "profesion":"Orientador",
-
                     "estratoSocioEconomico":"3",
-
                     "vivienda":"Arrendada",
-
                     "vehiculo":"Propio",
-
                     "tallaCamisa":"L",
-
                     "tallaPantalon":"36",
-
                     "tallaCalzado":"40",
-
                     "fechaDesde":"2012-05-12",
-
                     "cargoActual":"Asesor"},
 
-                {"idColaborador":"3",
-
+                {
+                    "idColaborador":"3",
                     "numeroDocumento":"63859741",
-
                     "primerNombre":"Juana",
-
                     "segundoNombre":"Maria",
-
                     "primerApellido":"Díaz",
-
                     "segundoApellido":"Rodriguez",
-
-                    "tipoDocumento":"C.C.",
-
+                    "tipoDocumento": {'value' : "1", 'label' : "CC"},
                     "Avatar":"fotico.png",
-
-                    "ciudadExpedicion":"Bucaramanga",
-
-                    "fechaExp":"3 de 4 de 2004",
-
-                    "fechaNacimiento":"12 de 03 de 1986",
-
-                    "idtercero":"34",
-
-                    "ciudadNacimiento":"Bogotá",
-
+                    "ciudadExpedicion": {'value' : "1", 'label' : "Bucaramanga"},
+                    "fechaExp":"1 de mayo de 2010",
+                    "fechaNacimiento":"12/12/1991",
+                    "idtercero":"12",
+                    "ciudadNacimiento": {'value' : "2", 'label' : "Bogota"},
                     "nacionalidad":"Colombiano",
-
-                    "genero":"F",
-
-                    "estadoCivil":"Soltero",
-
+                    "genero": {'value' : "1", 'label' : "Masculino"},
+                    "estadoCivil": {'value' : "1", 'label' : "Soltero"},
                     "factorrh":"O+",
-
                     "numeroDeHijos":"5",
-
                     "lateralidad":"D",
-
                     "nivelEducativo":"Pregrado",
-
                     "profesion":"Orientador",
-
                     "estratoSocioEconomico":"3",
-
                     "vivienda":"Arrendada",
-
                     "vehiculo":"Propio",
-
                     "tallaCamisa":"S",
-
                     "tallaPantalon":"8",
-
                     "tallaCalzado":"36",
-
                     "fechaDesde":"2013-05-13",
-
                     "cargoActual":"Ejecutiva"},
 
-                {"idColaborador":"4",
-
+                {
+                    "idColaborador":"4",
                     "numeroDocumento":"63258159",
-
                     "primerNombre":"Martha",
-
                     "segundoNombre":"Sofia",
-
                     "primerApellido":"Sepulveda",
-
                     "segundoApellido":"Blanco",
-
-                    "tipoDocumento":"C.C.",
-
+                    "tipoDocumento": {'value' : "1", 'label' : "CC"},
                     "Avatar":"fotico.png",
-
-                    "ciudadExpedicion":"Bucaramanga",
-
-                    "fechaExp":"4 de 5 de 2005",
-
-                    "fechaNacimiento":"2 de 4 de 1987",
-
-                    "idtercero":"45",
-
-                    "ciudadNacimiento":"Bogotá",
-
+                    "ciudadExpedicion": {'value' : "1", 'label' : "Bucaramanga"},
+                    "fechaExp":"1 de mayo de 2010",
+                    "fechaNacimiento":"12/12/1991",
+                    "idtercero":"12",
+                    "ciudadNacimiento": {'value' : "2", 'label' : "Bogota"},
                     "nacionalidad":"Colombiano",
-
-                    "genero":"F",
-
-                    "estadoCivil":"Soltero",
-
+                    "genero": {'value' : "1", 'label' : "Masculino"},
+                    "estadoCivil": {'value' : "1", 'label' : "Soltero"},
                     "factorrh":"O+",
-
                     "numeroDeHijos":"5",
-
                     "lateralidad":"D",
-
                     "nivelEducativo":"Pregrado",
-
                     "profesion":"Orientador",
-
                     "estratoSocioEconomico":"3",
-
                     "vivienda":"Arrendada",
-
                     "vehiculo":"Propio",
-
                     "tallaCamisa":"M",
-
                     "tallaPantalon":"10",
-
                     "tallaCalzado":"38",
-
                     "fechaDesde":"2014-05-14",
-
                     "cargoActual":"Ejecutiva"}
 
             ];

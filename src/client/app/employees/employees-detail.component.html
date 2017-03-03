@@ -15,8 +15,8 @@
                  src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg">
           </div>
           <div class="col-md-8">
-            <h4>{{employee.primerNombre}} - {{employee.fechaNacimiento}}</h4>
-            <span>{{employee.tipoDocumento}} {{employee.numeroDocumento}}</span><br/>
+            <h4>{{employee.nombreCompleto}} - {{employee.fechaNacimiento}}</h4>
+            <span>{{employee.tipoDocumento.label}} {{employee.numeroDocumento}}</span><br/>
             <span>{{employee.cargoActual}} - Area/oficina ({{employee.fechaDesde}})</span>
           </div>
           <div class="col-md-2">
@@ -28,7 +28,7 @@
           <p-tabPanel header="Info Personal" [selected]="true">
 
             <p-accordion>
-              <p-accordionTab header="Datos Generales">
+              <p-accordionTab header="Datos Generales" [selected]="true">
                 <form class="form-horizontal">
                   <fieldset>
                     <div class="form-group">
@@ -43,16 +43,16 @@
                       <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.fechaNacimiento}}</strong></label>
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">ciudad de Nacimiento:</label>
-                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.ciudadNacimiento}}</strong></label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.ciudadNacimiento.label}}</strong></label>
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nacionalidad:</label>
-                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.nacionalidad}}</strong></label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.nacionalidad.label}}</strong></label>
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Genero:</label>
-                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.genero}}</strong></label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.genero.label}}</strong></label>
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Estado Civil:</label>
-                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.estadoCivil}}</strong></label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.estadoCivil.label}}</strong></label>
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Factor RH:</label>
                       <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.factorrh}}</strong></label>
@@ -79,7 +79,7 @@
               </p-accordionTab>
 
               <p-accordionTab header="Ubicación">
-                employees-locations
+                <employees-locations></employees-locations>
               </p-accordionTab>
 
               <p-accordionTab header="Formación Academica">

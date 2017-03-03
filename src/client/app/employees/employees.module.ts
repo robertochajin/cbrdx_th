@@ -1,6 +1,3 @@
-/**
- * Created by TracesMaker on 06/02/2017.
- */
 import {NgModule}      from '@angular/core';
 import {CommonModule} from '@angular/common';
 
@@ -26,6 +23,7 @@ import {FamilyInformationModule} from './../employees-family-information/family-
 import {ReferencesModule} from './../employees-references/references.module';
 import {AcademicEducationModule} from './../employees-academic-education/academic-education.module';
 import {WorkExperienceModule} from './../employees-work-experience/work-experience.module';
+import {LocationModule} from './../employees-location/location.module';
 
 @NgModule({
   imports: [CommonModule,
@@ -40,6 +38,7 @@ import {WorkExperienceModule} from './../employees-work-experience/work-experien
     ReferencesModule,
     AcademicEducationModule,
     WorkExperienceModule,
+    LocationModule,
     AccordionModule
   ],
   declarations: [EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent],

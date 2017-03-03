@@ -1,19 +1,10 @@
-/**
- * Created by TracesMaker on 07/02/2017.
- */
-
-
+import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
-import { EmployeesService } from './employees.service';
-import { Employee } from './employees';
-import 'rxjs/add/operator/switchMap';
+import { EmployeesService }         from './employees.service';
+import { Employee }                 from './employees';
 
-
-export class constructorEmployee implements Employee {
-  constructor(public idColaborador?, public numeroDocumento?, public primerNombre?, public fechaDesde?, public cargoActual?, public tipoDocumento?, public Avatar?, public ciudadExpedicion?, public fechaExp?, public fechaNacimiento?, public idtercero?, public ciudadNacimiento?, public nacionalidad?, public genero?, public estadoCivil?, public factorrh?, public numeroDeHijos?, public lateralidad?, public nivelEducativo?, public profesion?, public estratoSocioEconomico?, public vivienda?, public vehiculo?, public tallaCamisa?, public tallaPantalon?, public tallaCalzado?, public fechaDeste?) {}
-}
 
 @Component({
     moduleId: module.id,
@@ -25,7 +16,7 @@ export class constructorEmployee implements Employee {
 export class EmployeesDetailComponent implements OnInit   {
     @Input()
 
-    employee: Employee = new constructorEmployee();
+    employee: Employee = new Employee();
 
     constructor(
         private employeeService: EmployeesService,
@@ -36,7 +27,11 @@ export class EmployeesDetailComponent implements OnInit   {
     ngOnInit(): void {
         var este$ = this.route.params
             .switchMap((params: Params) => this.employeeService.get(+params['id']));
-        este$.subscribe(employee => this.employee = employee);
+        este$.subscribe(employee => {
+          this.employee = employee;
+          this.employee.nombreCompleto = this.employee.primerNombre+' '+this.employee.segundoNombre+' '+this.employee.primerApellido+' '+this.employee.segundoApellido;
+          });
+
     }
 
     goBack(): void {
