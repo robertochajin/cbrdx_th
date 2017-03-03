@@ -1,8 +1,3 @@
-/**
- * Created by Angel on 14/02/2017.
- */
-
-
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
@@ -10,23 +5,6 @@ import {References} from './references';
 import {ReferencesService} from './references.service';
 
 import 'rxjs/add/operator/switchMap';
-
-class constructorReferences implements References {
-    constructor(
-        public  idReferencia?,
-        public	tipodeReferencia?,
-        public	empresa?,
-        public	primerNombre?,
-        public	segundoNombre?,
-        public	primerApellido?,
-        public	segundoApellido?,
-        public	ciudad?,
-        public	telefono?,
-        public	celular?,
-        public	direccion?
-    ) {}
-}
-
 
 @Component({
     moduleId: module.id,
@@ -38,7 +16,7 @@ class constructorReferences implements References {
 export class ReferencesDetailComponent implements OnInit   {
     @Input()
 
-    reference: References = new constructorReferences();
+    reference: References = new References();
 
     constructor(
         private referencesService: ReferencesService,

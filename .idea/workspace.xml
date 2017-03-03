@@ -2,81 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d95a76d-0932-4b62-a17b-5d60b31a9ae9" name="Default" comment="Experiencia laboral version 1">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/about/about-routing.module.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/about/about.component.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/about/about.component.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/about/about.component.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/about/about.component.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/about/about.module.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/app-routing.module.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/app.component.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/app.component.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/app.module.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/home/home-routing.module.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/home/home.component.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/home/home.component.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/home/home.component.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/home/home.component.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/home/home.module.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/i18n.providers.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/main.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/operators.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/config/env.config.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/name-list/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/name-list/name-list.service.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/navbar/navbar.component.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/navbar/navbar.component.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/navbar/navbar.component.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/navbar/navbar.component.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/shared.module.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/toolbar/toolbar.component.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/toolbar/toolbar.component.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/toolbar/toolbar.component.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/shared/toolbar/toolbar.component.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/app/system-config.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/css/color/black.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/css/color/blue.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/css/color/blue.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/css/color/green.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/css/color/white.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/data.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/favicon/favicon-DEV.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/favicon/favicon-PROD.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/font/sp/icomoon.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/font/sp/icomoon.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/font/sp/icomoon.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/font/sp/icomoon.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/font/style.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/font/th/icomoon.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/font/th/icomoon.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/font/th/icomoon.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/font/th/icomoon.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/bootstrap-checkbox-radio.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/bootstrap-notify.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/chartist.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/demo.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/demo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/jquery-1.10.2.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/jquery.sharrre.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/paper-dashboard.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/script.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/js/script.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/assets/svg/more.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/css/bootstrap.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/css/font-awesome.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/css/main.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/css/main.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/css/primeng.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/css/theme.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/dev/tsconfig.json" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/cbrdx_template_ng.iml" afterPath="$PROJECT_DIR$/.idea/cbrdx_template_ng.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/tmp/app/app.component.html" afterPath="$PROJECT_DIR$/dist/tmp/app/app.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/tmp/app/home/home.component.html" afterPath="$PROJECT_DIR$/dist/tmp/app/home/home.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/tmp/app/shared/toolbar/toolbar.component.html" afterPath="$PROJECT_DIR$/dist/tmp/app/shared/toolbar/toolbar.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/tmp/index.html" afterPath="$PROJECT_DIR$/dist/tmp/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/app/_services/references-type.service.ts" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/custom-validators.ts" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts" afterPath="$PROJECT_DIR$/src/client/app/_helpers/fake-backend.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-add.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-add.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-detail.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-detail.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-form.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-form.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-update.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-academic-education/formal-studies-update.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-detail.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-detail.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-location/location-add.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-location/location-add.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-location/location-detail.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-location/location-detail.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-location/location-update.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-location/location-update.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-location/location.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-location/location.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-location/location.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-location/location.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-references/references-add.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-references/references-add.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-references/references-detail.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-references/references-detail.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-references/references-detail.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-references/references-detail.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-references/references-form.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-references/references-form.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-references/references-update.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-references/references-update.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-references/references.component.html" afterPath="$PROJECT_DIR$/src/client/app/employees-references/references.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-references/references.component.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-references/references.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-references/references.module.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-references/references.module.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/app/employees-references/references.ts" afterPath="$PROJECT_DIR$/src/client/app/employees-references/references.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -271,9 +219,10 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1280" />
-    <option name="height" value="712" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1296" />
+    <option name="height" value="776" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -312,6 +261,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -354,7 +304,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -387,38 +336,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="#PerlConfigurationType" factoryName="Perl" show_console_on_std_err="false" show_console_on_std_out="false">
-      <option name="alternativeSdkPath" />
-      <option name="compileTimeBreakpointsEnabled" value="false" />
-      <option name="consoleCharset" />
-      <option name="envs">
-        <map />
-      </option>
-      <option name="nonInteractiveModeEnabled" value="false" />
-      <option name="passParentEnvs" value="true" />
-      <option name="perlParameters" value="" />
-      <option name="programParameters" />
-      <option name="scriptPath" />
-      <option name="useAlternativeSdk" value="false" />
-      <option name="workingDirectory" />
-      <option name="SCRIPT_PATH" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="PERL_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENVS">
-        <map />
-      </option>
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="CHARSET" />
-      <option name="USE_ALTERNATIVE_SDK" value="false" />
-      <option name="ALTERNATIVE_SDK_PATH" />
-      <option name="scriptCharset" value="utf8" />
-      <option name="startMode" value="RUN" />
-      <option name="isNonInteractiveModeEnabled" value="false" />
-      <option name="isCompileTimeBreakpointsEnabled" value="false" />
-      <option name="initCode" value="" />
-      <method />
-    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
     </configuration>
@@ -517,6 +434,7 @@
       <workItem from="1488232555286" duration="2866000" />
       <workItem from="1488287971440" duration="2894000" />
       <workItem from="1488291664965" duration="35106000" />
+      <workItem from="1488499114571" duration="590000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'datatable-tracesmaker' into cbdx_th_observer_angel&#10;&#10;# Conflicts:&#10;#&#9;src/client/app/colaboradores/colaboradores.component.html&#10;">
       <created>1486676419265</created>
@@ -599,7 +517,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="278943000" />
+    <option name="totallyTimeSpent" value="279533000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -611,29 +529,29 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="712" extended-state="0" />
+    <frame x="-8" y="-8" width="1296" height="776" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.334375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281493" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.334375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48902822" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48902822" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -688,7 +606,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="29" lean-forward="false" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -745,9 +662,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
           <caret line="35" column="40" lean-forward="false" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -760,17 +674,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="555">
           <caret line="58" column="16" lean-forward="false" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/tmp/app/components/inputtext/inputtext.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="3" column="1" lean-forward="false" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/tmp/app/components/inputtext/inputtext.ts" />
     <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -821,31 +728,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/tmp/app/components/autocomplete/autocomplete.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="915">
-          <caret line="78" column="14" lean-forward="false" selection-start-line="78" selection-start-column="14" selection-end-line="78" selection-end-column="14" />
-          <folding>
-            <marker date="1486031674000" expanded="true" signature="917:3619" ph="..." />
-            <marker date="1486031674000" expanded="true" signature="1050:1498" ph="..." />
-            <marker date="1486031674000" expanded="true" signature="1708:2425" ph="..." />
-            <marker date="1486031674000" expanded="true" signature="1825:2060" ph="..." />
-            <marker date="1486031674000" expanded="true" signature="2117:2394" ph="..." />
-            <marker date="1486031674000" expanded="true" signature="2537:2683" ph="..." />
-            <marker date="1486031674000" expanded="true" signature="2900:3603" ph="..." />
-            <marker date="1486031674000" expanded="true" signature="3030:3584" ph="..." />
-            <marker date="1486031674000" expanded="true" signature="3198:3562" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/tmp/app/components/autocomplete/autocomplete.ts" />
     <entry file="file://$PROJECT_DIR$/src/client/app/employees-family-information/family-information-update.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="133" column="3" lean-forward="true" selection-start-line="130" selection-start-column="2" selection-end-line="133" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#37#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -853,9 +740,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -863,10 +747,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#43#89#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -874,7 +754,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -882,9 +761,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="16" column="193" lean-forward="false" selection-start-line="16" selection-start-column="174" selection-end-line="16" selection-end-column="193" />
-          <folding>
-            <element signature="e#0#46#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -892,7 +768,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-359">
           <caret line="15" column="37" lean-forward="false" selection-start-line="14" selection-start-column="33" selection-end-line="15" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -900,7 +775,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -908,7 +782,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="31" column="57" lean-forward="false" selection-start-line="31" selection-start-column="57" selection-end-line="31" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -916,7 +789,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="38" lean-forward="false" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -924,7 +796,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="101" lean-forward="false" selection-start-line="11" selection-start-column="87" selection-end-line="11" selection-end-column="101" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -932,9 +803,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-132">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -942,23 +810,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="9" lean-forward="false" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-location/location-form.componentcopy.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="36" column="63" lean-forward="false" selection-start-line="36" selection-start-column="63" selection-end-line="36" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-location/location-form.componentcopy.html" />
     <entry file="file://$PROJECT_DIR$/dist/dev/app/employees-location/location-add.component.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="214">
           <caret line="58" column="47" lean-forward="false" selection-start-line="58" selection-start-column="47" selection-end-line="58" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -966,7 +825,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="22" column="119" lean-forward="false" selection-start-line="22" selection-start-column="119" selection-end-line="22" selection-end-column="137" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -974,7 +832,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="33" column="39" lean-forward="false" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -982,9 +839,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
           <caret line="40" column="33" lean-forward="false" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
-          <folding>
-            <element signature="e#43#80#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -992,25 +846,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="11" column="2" lean-forward="true" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
-          <folding>
-            <element signature="n#!!block;n#ngOnInit#0;n#LocationComponent#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/app/employees-location/location-add.componentcopy.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="145" column="42" lean-forward="false" selection-start-line="145" selection-start-column="27" selection-end-line="145" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/app/employees-location/location-add.componentcopy.ts" />
     <entry file="file://$PROJECT_DIR$/src/client/app/employees-references/references-add.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="27" column="26" lean-forward="true" selection-start-line="17" selection-start-column="8" selection-end-line="27" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1018,9 +861,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="116" column="12" lean-forward="false" selection-start-line="116" selection-start-column="12" selection-end-line="116" selection-end-column="12" />
-          <folding>
-            <element signature="e#43#80#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1028,10 +868,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
           <caret line="89" column="75" lean-forward="false" selection-start-line="89" selection-start-column="71" selection-end-line="89" selection-end-column="75" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#6;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#6;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1039,10 +875,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="59" column="61" lean-forward="false" selection-start-line="59" selection-start-column="61" selection-end-line="59" selection-end-column="61" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-            <marker date="1488406813000" expanded="true" signature="1654:2189" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1050,9 +882,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
           <caret line="159" column="18" lean-forward="false" selection-start-line="159" selection-start-column="2" selection-end-line="159" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1060,19 +889,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="444">
           <caret line="589" column="40" lean-forward="false" selection-start-line="589" selection-start-column="40" selection-end-line="589" selection-end-column="40" />
-          <folding>
-            <element signature="e#49#146#0" expanded="true" />
-            <element signature="e#501#5913#0" expanded="false" />
-            <element signature="e#6004#8487#0" expanded="false" />
-            <element signature="e#8584#11105#0" expanded="false" />
-            <element signature="e#11198#13418#0" expanded="false" />
-            <element signature="e#13513#16136#0" expanded="false" />
-            <element signature="e#16234#19009#0" expanded="false" />
-            <element signature="e#19120#19880#0" expanded="false" />
-            <element signature="e#19898#20635#0" expanded="false" />
-            <element signature="e#22745#23140#0" expanded="false" />
-            <element signature="e#23177#23757#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1080,7 +896,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
