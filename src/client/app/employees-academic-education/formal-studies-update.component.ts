@@ -10,6 +10,7 @@ import { StudyAreaServices } from '../_services/study-area.service';
 import { CitiesServices } from '../_services/cities.service';
 import { StudyStateServices } from '../_services/study-state.service';
 import { InstituteServices } from '../_services/institute.service';
+import {NavService}                 from '../_services/_nav.service';
 
 @Component({
     moduleId: module.id,
@@ -36,6 +37,7 @@ export class FormalStudiesUpdateComponent implements OnInit {
   es: any;
   range: string;
   id_estado_estudio_finalizado = 2; //hace falta definir acceso a constantes en servicio
+  copyAutocomplete: string;
 
     constructor(
         private academicEducationService: AcademicEducationService,
@@ -48,6 +50,7 @@ export class FormalStudiesUpdateComponent implements OnInit {
         private router: Router,
         private location: Location,
         private confirmationService: ConfirmationService,
+        private _nav:NavService
     ) {}
 
     ngOnInit(): void {
@@ -57,7 +60,10 @@ export class FormalStudiesUpdateComponent implements OnInit {
       this.studyStateServices.getAll().subscribe(studyStateList => this.studyStateList = studyStateList);
       this.route.params
           .switchMap((params: Params) => this.academicEducationService.getFormal(+params['id']))
-          .subscribe(fstudy => this.fstudy = fstudy);
+          .subscribe(fstudy => {
+            this.fstudy = fstudy;
+            this.copyAutocomplete = this.fstudy.ciudad.label;
+          });
     }
 
     setInitRanges() {
@@ -85,14 +91,20 @@ export class FormalStudiesUpdateComponent implements OnInit {
     }
 
     onSubmit(value: string) {
-      this.submitted = true;
-      this.msgs = [];
-      this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
-      this.academicEducationService.updateFormal(this.fstudy)
-       .subscribe(
-         data => {
-           this.router.navigate(['/employees-formal-studies']);
-         });
+      if(this.copyAutocomplete != this.fstudy.ciudad.label){
+        this.fstudy.ciudad = {value:null, label:''};
+      }else {
+        this.submitted = true;
+        this.msgs = [];
+        this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
+        this.academicEducationService.updateFormal(this.fstudy)
+          .subscribe(
+            data => {
+              this._nav.setTab(3);
+              this.location.back();
+              //this.router.navigate(['/employees-formal-studies']);
+            });
+      }
     }
 
   citySearch(event:any) {
@@ -103,6 +115,7 @@ export class FormalStudiesUpdateComponent implements OnInit {
 
   captureCityId(event:any) {
     this.fstudy.ciudad = event;
+    this.copyAutocomplete = event.label
   }
 
   instituteSearch(event:any) {
@@ -141,7 +154,9 @@ export class FormalStudiesUpdateComponent implements OnInit {
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
-        this.router.navigate(['/employees-formal-studies']);
+        this._nav.setTab(3);
+        this.location.back();
+        //this.router.navigate(['/employees-formal-studies']);
       }
     });
   }

@@ -89,7 +89,10 @@ export class NoFormalStudiesUpdateComponent implements OnInit{
 
       this.route.params
           .switchMap((params: Params) => this.academicEducationService.getNoFormal(+params['id']))
-          .subscribe(nfstudy => this.nfstudy = nfstudy);
+          .subscribe(nfstudy => {
+            this.nfstudy = nfstudy;
+            this.copyAutocomplete = this.nfstudy.ciudad.label;
+          });
     }
 
     onSubmit(value: string) {
