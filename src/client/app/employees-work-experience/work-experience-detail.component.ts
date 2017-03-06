@@ -1,8 +1,6 @@
-/**
- * Created by Angel on 17/02/2017.
- */
 
 
+import {Workexperience} from './work-experience';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
@@ -11,25 +9,6 @@ import {WorkExperienceService} from './work-experience.service';
 
 import 'rxjs/add/operator/switchMap';
 
-class constructorExperience implements constructorExperience {
-    constructor(
-        public 	idExperiencia?,
-        public 	idColaborador?,
-        public  empresa?,
-        public  cargo?,
-        public 	ingreso?,
-        public 	finalizacion?,
-        public 	ciudad?,
-        public  telefonoEmpresa?,
-        public  sectorEmpresa?,
-        public  subsectorEmpresa?,
-        public  nivelCargo?,
-        public  areaCargo?,
-        public  jefeInmediato?,
-        public  tiempoExperiencia?,
-        public  actualmente?,
-    ) {}
-}
 
 
 @Component({
@@ -42,7 +21,7 @@ class constructorExperience implements constructorExperience {
 export class WorkExperienceDetailComponent implements OnInit   {
     @Input()
 
-    experience: Workexperience = new constructorExperience();
+    experience: Workexperience = new Workexperience();
 
     constructor(
         private workExperienceService: WorkExperienceService,

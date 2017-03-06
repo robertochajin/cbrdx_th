@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location }                 from '@angular/common';
 import { FormalStudies } from './formal-studies';
 import { AcademicEducationService } from './academic-education.service';
-
+import { Message, ConfirmationService } from 'primeng/primeng';
 import 'rxjs/add/operator/switchMap';
 
 
@@ -11,6 +11,7 @@ import 'rxjs/add/operator/switchMap';
     moduleId: module.id,
     selector: 'academic-education',
     templateUrl: 'formal-studies-detail.component.html',
+    providers: [ConfirmationService]
 })
 
 
@@ -21,7 +22,9 @@ export class FormalStudiesDetailComponent implements OnInit   {
 
     constructor(
         private academicEducationService: AcademicEducationService,
+        private confirmationService: ConfirmationService,
         private route: ActivatedRoute,
+        private router: Router,
         private location: Location
     ) {}
 
@@ -33,7 +36,7 @@ export class FormalStudiesDetailComponent implements OnInit   {
     }
 
     goBack(): void {
-        this.location.back();
+      this.location.back();
     }
 }
 

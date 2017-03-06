@@ -1,61 +1,41 @@
-/**
- * Created by Angel on 15/02/2017.
- */
-
-
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location }                 from '@angular/common';
-import {Formalstudies} from './formal-studies';
-import {AcademicEducationService} from './academic-education.service';
-
+import { Noformalstudies } from './no-formal-studies';
+import { AcademicEducationService} from './academic-education.service';
+import { Message, ConfirmationService } from 'primeng/primeng';
 import 'rxjs/add/operator/switchMap';
-
-class constructorFormal implements Formalstudies {
-    constructor(
-        public 	idEstudio?,
-        public 	titulo?,
-        public 	ingreso?,
-        public 	finalizacion?,
-        public 	ciudad?,
-        public 	institucion?,
-        public 	confirmada?,
-        public 	tipoEstudio?,
-        public 	otroTipoEstudio?,
-        public 	intensidad?,
-        public 	descripcion?,
-        public 	areaEstudio?,
-        public 	estadoEstudio?
-    ) {}
-}
 
 
 @Component({
     moduleId: module.id,
     selector: 'academic-education',
     templateUrl: 'no-formal-studies-detail.component.html',
+    providers:  [ConfirmationService]
 })
 
 
 export class NoFormalStudiesDetailComponent implements OnInit   {
     @Input()
 
-    study: Formalstudies = new constructorFormal();
+    study: Noformalstudies = new Noformalstudies();
 
     constructor(
         private academicEducationService: AcademicEducationService,
+        private confirmationService: ConfirmationService,
         private route: ActivatedRoute,
+        private router: Router,
         private location: Location
     ) {}
 
     ngOnInit(): void {
-        let este$ = this.route.params
-            .switchMap((params: Params) => this.academicEducationService.getNoFormal(+params['id']));
-        este$.subscribe(study => this.study = study);
+        this.route.params
+            .switchMap((params: Params) => this.academicEducationService.getNoFormal(+params['id']))
+            .subscribe(study => this.study = study);
     }
 
     goBack(): void {
-        this.location.back();
+      this.location.back();
     }
 }
 

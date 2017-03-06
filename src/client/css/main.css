@@ -3675,7 +3675,6 @@ a.cancelar:hover {
 .datatable-col-action {
     text-align: center;
     white-space: nowrap;
-    width: 107px;
 }
 .datatable-col-action button{
 
@@ -3720,4 +3719,8 @@ p-dropdown .ui-dropdown{
 }
 p-autoComplete .ui-autocomplete-input{
   width: 100%;
+}
+p-calendar,
+p-togglebutton {
+  display: block;
 }

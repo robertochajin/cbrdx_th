@@ -1,3 +1,10 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
 <div *ngIf="nfstudy">
     <div class="row">
         <div class="col-md-12">
@@ -6,143 +13,130 @@
             </div>
         </div>
     </div>
-    <div class="row-fluid">
-        <div class="col-md-12">
-            <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate
-                  class="form">
-                <div class="row">
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !tipoEstudio.valid }">
-                        <label for="tipoEstudio">Tipo de Estudio</label>
-                        <input id="tipoEstudio" type="text" class="form-control" name="tipoEstudio"
-                               [(ngModel)]="nfstudy.tipoEstudio" #tipoEstudio="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !tipoEstudio.valid" class="help-block">
-                            Tipo de Estudio es requerido
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !otroTipoEstudio.valid }">
-                        <label for="otroTipoEstudio">Otro Tipo de Estudio</label>
-                        <input id="otroTipoEstudio" type="text" class="form-control" name="otroTipoEstudio"
-                               [(ngModel)]="nfstudy.otroTipoEstudio" #otroTipoEstudio="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !otroTipoEstudio.valid" class="help-block">
-                            Otro Tipo de Estudio es requerido
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !ciudad.valid }">
-                        <label for="ciudad">Ciudad</label>
-                        <input id="ciudad" type="text" class="form-control" name="ciudad"
-                               [(ngModel)]="nfstudy.ciudad" #ciudad="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !ciudad.valid" class="help-block">
-                            Ciudad es requerido
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !titulo.valid }">
-                        <label for="titulo">Título</label>
-                        <input id="titulo" type="text" class="form-control" name="titulo"
-                               [(ngModel)]="nfstudy.titulo" #titulo="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !titulo.valid" class="help-block">
-                            Título es requerido
-                        </div>
-                    </div>
+    <form  (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 
+          <div class="ui-grid-row">
+              <div class="ui-grid-col-6">
+                  <label for="tipoEstudio">Tipo de Estudio</label>
+                  <p-dropdown name="tipoEstudio" id="tipoEstudio" #tipoEstudio="ngModel" required="true"
+                              [autoWidth]="false" [(ngModel)]="nfstudy.tipoEstudio.value" [options]="studyTypeList"></p-dropdown>
+                  <div class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !tipoEstudio.valid">
+                    Tipo de Estudios es requerido
+                  </div>
+              </div>
+              <div class="ui-grid-col-6">
+                  <label for="otroTipoEstudio">Otro Tipo de Estudio</label>
+                  <input id="otroTipoEstudio" pInputText type="text" name="otroTipoEstudio" #otroTipoEstudio="ngModel"
+                         [(ngModel)]="nfstudy.otroTipoEstudio" #otroTipoEstudio="ngModel" [required]="tipoEstudio.value === null"  />
+                  <div  class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !otroTipoEstudio.valid" >
+                      Otro Tipo de Estudio es requerido
+                  </div>
+              </div>
+          </div>
+          <div class="ui-grid-row">
+              <div class="ui-grid-col-6">
+                <label for="ciudad">Ciudad</label>
+                <p-autoComplete placeholder="Buscar ciudad" field="label" #ciudad="ngModel" name="ciudad" id="ciudad"
+                                [(ngModel)]="nfstudy.ciudad.label" [suggestions]="cityList" required="true"
+                                (completeMethod)="citySearch($event)" (onSelect)="captureCityId($event)" >
+                </p-autoComplete>
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ciudad.valid">
+                  Ciudad es requerido
                 </div>
-                <div class="row">
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !institucion.valid }">
-                        <label for="institucion">Institución</label>
-                        <input id="institucion" type="text" class="form-control" name="institucion"
-                               [(ngModel)]="nfstudy.institucion" #institucion="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !institucion.valid" class="help-block">
-                            Institución es requerido
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !areaEstudio.valid }">
-                        <label for="areaEstudio">Area de Estudios</label>
-                        <input id="areaEstudio" type="text" class="form-control" name="areaEstudio"
-                               [(ngModel)]="nfstudy.areaEstudio"
-                               #areaEstudio="ngModel" required/>
-                        <div *ngIf="f.submitted && !areaEstudio.valid" class="help-block">Area de
-                            Estudios es requerido
-                        </div>
-                    </div>
+              </div>
+              <div class="ui-grid-col-6">
+                <label for="titulo">Título</label>
+                <input type="text" pInputText name="titulo" id="titulo"  #titulo="ngModel" required="true"
+                       [(ngModel)]="nfstudy.titulo"  />
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !titulo.valid">
+                  Título es requerido
                 </div>
-                <div class="row">
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !ingreso.valid }">
-                        <label for="ingreso">Ingreso</label>
-                        <input id="ingreso" type="text" class="form-control" name="ingreso"
-                               [(ngModel)]="nfstudy.ingreso" #ingreso="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !ingreso.valid" class="help-block">
-                            Ingreso es requerido
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !finalizacion.valid }">
-                        <label for="finalizacion">Finalización</label>
-                        <input id="finalizacion" type="text" class="form-control" name="finalizacion"
-                               [(ngModel)]="nfstudy.finalizacion" #finalizacion="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !finalizacion.valid" class="help-block">
-                            Finalización es requerido
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !intensidad.valid }">
-                        <label for="intensidad">Intensidad Horaria</label>
-                        <input id="intensidad" type="text" class="form-control" name="intensidad"
-                               [(ngModel)]="nfstudy.intensidad" #intensidad="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !intensidad.valid" class="help-block">
-                            Intensidad Horaria es requerido
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !estadoEstudio.valid }">
-                        <label for="estadoEstudio">Estado Estudio</label>
-                        <input id="estadoEstudio" type="text" class="form-control" name="estadoEstudio"
-                               [(ngModel)]="nfstudy.estadoEstudio" #estadoEstudio="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !estadoEstudio.valid" class="help-block">
-                            Estado Estudio es requerido
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-12"
-                         [ngClass]="{ 'has-error': f.submitted && !descripcion.valid }">
-                        <label for="descripcion">Descripción</label>
-                        <input id="descripcion" type="text" class="form-control" name="descripcion"
-                               [(ngModel)]="nfstudy.descripcion" #descripcion="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !descripcion.valid" class="help-block">
-                            Descripción es requerido
-                        </div>
-                    </div>
-                </div>
-                <div class="row form-footer-buttons">
-                    <div class="form-group col-md-12">
-                        <a (click)="goBack()" class="cancelar">Cancelar</a>
-                        <button class="btn btn-primary">Guardar</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+              </div>
 
-    </div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-6">
+              <label for="areaEstudio">Area de Estudios</label>
+              <p-dropdown name="areaEstudio" id="areaEstudio" #areaEstudio="ngModel" required="true"
+                          [autoWidth]="false" [(ngModel)]="nfstudy.areaEstudio.value" [options]="studyAreaList"></p-dropdown>
+              <div class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !areaEstudio.valid">
+                area de estudio es requerida
+              </div>
+            </div>
+              <div class="ui-grid-col-6">
+                <label for="estadoEstudio">Estado Estudio</label>
+                <p-dropdown name="estadoEstudio" id="estadoEstudio" #estadoEstudio="ngModel" required="true" (onChange)="updateEnd()"
+                            [autoWidth]="false" [(ngModel)]="nfstudy.estadoEstudio.value" [options]="studyStateList"></p-dropdown>
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !estadoEstudio.valid">
+                  Estado Estudio es requerido
+                </div>
+              </div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-6">
+              <label for="ingreso">Ingreso</label>
+              <p-calendar id="ingreso" name="ingreso"  [showIcon]="true" [disabled]="disabled"
+                          [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true" [maxDate]="maxDate"
+                          [dataType]="date" (onSelect)="onSelectBegin($event)" #ingreso="ngModel" required="true"
+                          [(ngModel)]="nfstudy.ingreso"></p-calendar>
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ingreso.valid">
+                Ingreso es requerido
+              </div>
+            </div>
+            <div class="ui-grid-col-6" *ngIf="(estadoEstudio.value == id_estado_estudio_finalizado) && (ingreso.value !== undefined)">
+              <label for="finalizacion">Finalización</label>
+              <p-calendar id="finalizacion" name="finalizacion"  [showIcon]="true" [disabled]="disabled"
+                          [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true" [minDate]="minDate" [maxDate]="maxDateFinal"
+                          [dataType]="date" (onSelect)="onSelectEnd($event)" #finalizacion="ngModel" [required]="estadoEstudio.value == id_estado_estudio_finalizado"
+                          [(ngModel)]="nfstudy.finalizacion"></p-calendar>
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !finalizacion.valid">
+                Finalización es requerido
+              </div>
+            </div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-6">
+              <label for="institucion">Institución</label>
+              <input id="institucion" pInputText type="text" name="institucion" #institucion="ngModel"
+                     [(ngModel)]="nfstudy.institucion" #institucion="ngModel" required="true" />
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !institucion.valid">
+                Institución es requerido
+              </div>
+            </div>
+            <div class="ui-grid-col-6">
+                  <label for="intensidad">Intensidad Horaria</label>
+                  <p-dropdown name="intensidad" id="intensidad" #intensidad="ngModel" required="true" (onChange)="updateEnd()"
+                            [autoWidth]="false" [(ngModel)]="nfstudy.intensidad.value" [options]="studyIntensityList"></p-dropdown>
+                  <div  class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !intensidad.valid" >
+                      Intensidad Horaria es requerido
+                  </div>
+              </div>
+          </div>
+          <div class="ui-grid-row">
+              <div class="ui-grid-col-12">
+                  <label for="descripcion">Descripción</label>
+                  <textarea pInputTextarea id="descripcion" name="descripcion"  [(ngModel)]="nfstudy.descripcion"
+                          #descripcion="ngModel" required="true">
+                  </textarea>
+                  <div  class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !descripcion.valid" >
+                      Descripción es requerido
+                  </div>
+              </div>
+          </div>
 
+          <div class="ui-grid-row form-footer-buttons">
+            <div class="ui-grid-col-4"></div>
+            <div class="ui-grid-col-1">
+              <a (click)="goBack()" class="cancelar">Cancelar</a>
+            </div>
+            <div class="ui-grid-col-2">
+              <button icon="fa-plus" label="Guardar" type="submit" pButton></button>
+            </div>
+            <div class="ui-grid-col-5"></div>
+          </div>
+
+      </div>
+    </form>
 </div>
 
