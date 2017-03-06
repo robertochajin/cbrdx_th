@@ -8,6 +8,7 @@ import {constructorFamilyInformation} from './family-information.construct';
 import {SelectItem, ConfirmationService, Message} from 'primeng/primeng';
 import {FormBuilder, FormGroup, Validators, FormControl, NgForm } from '@angular/forms';
 import * as moment from 'moment/moment';
+import {NavService}                 from '../_services/_nav.service';
 
 @Component({
     moduleId: module.id,
@@ -37,7 +38,8 @@ export class FamilyInformationUpdateComponent implements OnInit{
         private route: ActivatedRoute,
         private location: Location,
         private confirmationService: ConfirmationService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private _nav:NavService
 
     ) {}
     ngOnInit(): void {
@@ -113,6 +115,7 @@ export class FamilyInformationUpdateComponent implements OnInit{
         this.familyInformationService.update(this.familyform.value)
           .subscribe(
             data => {
+              this._nav.setTab(1);
               this.location.back();
             },
             error => {
@@ -126,6 +129,7 @@ export class FamilyInformationUpdateComponent implements OnInit{
             header: 'Corfirmación',
             icon: 'fa fa-question-circle',
             accept: () => {
+                this._nav.setTab(1);
                 this.location.back();
             },
             reject: () => {

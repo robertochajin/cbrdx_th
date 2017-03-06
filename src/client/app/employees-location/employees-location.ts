@@ -2,19 +2,19 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class EmployeesLocation {
-  idUbicacion:String;
-  direccion:String;
-  ciudad:{value:number, label:String};
-  departamento:{value:number, label:String};
-  pais:{value:number, nombrePais:String};
-  tipoDireccion:{value: number, label: String};
-  barrio:String;
-  correoElectronico:String;
-  longitud :String;
-  latitud:String;
-  comoLlegar:String;
-  celular:String;
-  telefono:String;
+  idUbicacion:string;
+  direccion:string;
+  ciudad:{value:number, label:string};
+  departamento:{value:number, label:string};
+  pais:{value:number, nombrePais:string};
+  tipoDireccion:{value: number, label: string};
+  barrio:string;
+  correoElectronico:string;
+  longitud :string;
+  latitud:string;
+  comoLlegar:string;
+  celular:string;
+  telefono:string;
   colaborador:number;
 
   constructor() {

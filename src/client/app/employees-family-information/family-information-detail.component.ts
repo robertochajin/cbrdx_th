@@ -45,7 +45,7 @@ export class FamilyInformationDetailComponent implements OnInit   {
     }
 
     goBack(): void {
-        this._nav.setTab(2);
+        this._nav.setTab(1);
         this.location.back();
     }
 }

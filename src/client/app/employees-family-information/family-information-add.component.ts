@@ -7,6 +7,7 @@ import {FormBuilder, FormGroup, Validators, FormControl, NgForm } from '@angular
 import {Router}  from '@angular/router';
 import {Location}  from '@angular/common';
 import * as moment from 'moment/moment';
+import {NavService}                 from '../_services/_nav.service';
 
 @Component({
     moduleId: module.id,
@@ -39,7 +40,8 @@ export class FamilyInformationAddComponent implements OnInit {
         private router: Router,
         private fb: FormBuilder,
         private confirmationService: ConfirmationService,
-        private location: Location
+        private location: Location,
+        private _nav:NavService
     ) {}
 
     ngOnInit() {
@@ -100,6 +102,7 @@ export class FamilyInformationAddComponent implements OnInit {
         this.familyInformationService.add(this.familyform.value)
             .subscribe(
                 data => {
+                    this._nav.setTab(1);
                     this.location.back();
                     //this.router.navigate(['/employees-family-information']);
                 },
@@ -113,8 +116,9 @@ export class FamilyInformationAddComponent implements OnInit {
             header: 'Corfirmación',
             icon: 'fa fa-question-circle',
             accept: () => {
-                this.router.navigate(['/employees-family-information']);
-                //this.location.back();
+                //this.router.navigate(['/employees-family-information']);
+                this._nav.setTab(1);
+                this.location.back();
             },
             reject: () => {
             }

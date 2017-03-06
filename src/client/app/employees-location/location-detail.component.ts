@@ -1,9 +1,10 @@
+import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import { EmployeesLocation } from './employees-location';
 import { LocationService } from './location.service';
-import 'rxjs/add/operator/switchMap';
+import {NavService}                 from '../_services/_nav.service';
 
 @Component({
     moduleId: module.id,
@@ -19,7 +20,8 @@ export class LocationDetailComponent implements OnInit   {
     constructor(
         private locationService: LocationService,
         private route: ActivatedRoute,
-        private location: Location
+        private location: Location,
+        private _nav:NavService
     ) {}
 
     ngOnInit(): void {
@@ -29,6 +31,7 @@ export class LocationDetailComponent implements OnInit   {
     }
 
     goBack(): void {
+      this._nav.setTab(2);
         this.location.back();
     }
 }

@@ -6,6 +6,7 @@ import {SelectItem, ConfirmationService, Message} from 'primeng/primeng';
 import {Router}  from '@angular/router';
 import {Location}  from '@angular/common';
 declare let google: any;
+import {NavService}                 from '../_services/_nav.service';
 
 @Component({
     moduleId: module.id,
@@ -28,6 +29,7 @@ export class LocationAddComponent implements  OnInit {
     selectedPrincipalNomenclature: SelectItem[] = [];
     labelPrincipalNomenclature: String;
     //selectedCity: any[] = [{value: null, label : ''}];
+    copyAutocomplete: string;
 
     principalNomenclature: String;
     numberOne: String;
@@ -44,7 +46,8 @@ export class LocationAddComponent implements  OnInit {
     constructor(
                 private locationService: LocationService,
                 private location: Location,
-                private confirmationService: ConfirmationService
+                private confirmationService: ConfirmationService,
+                private _nav:NavService
             ) {
         this.complementaries = [{tipo: null, detalle: ''}];
         this.employLocation.tipoDireccion.value
@@ -66,17 +69,22 @@ export class LocationAddComponent implements  OnInit {
         this.employLocation.colaborador = 1; /*ASIGNAR VALOR QUE VENGA EN NAVECAGION */
     }
     onSubmit() {
-      this.submitted = true;
-      this.msgs = [];
-      this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
+        if(this.copyAutocomplete != this.employLocation.ciudad.label){
+          this.employLocation.ciudad = {value:null, label:''};
+        }else {
+            this.submitted = true;
+            this.msgs = [];
+            this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
 
-      this.employLocation.direccion = this.finalAddress;
-      //this.employLocation.tipoDireccion.idTipoDireccion = this.selectedTipoDireccion;
-      this.locationService.add(this.employLocation)
-        .subscribe(
-          data => {
-            this.location.back();
-          });
+            this.employLocation.direccion = this.finalAddress;
+            //this.employLocation.tipoDireccion.idTipoDireccion = this.selectedTipoDireccion;
+            this.locationService.add(this.employLocation)
+              .subscribe(
+                data => {
+                  this._nav.setTab(2);
+                  this.location.back();
+                });
+        }
     }
 
     citySearch(event:any) {
@@ -88,6 +96,7 @@ export class LocationAddComponent implements  OnInit {
     captureId(event:any) {
       this.employLocation.ciudad.value = event.value;
       this.employLocation.ciudad.label = event.label;
+      this.copyAutocomplete = event.label;
       this.composeAddress();
     }
     capturePrincipalNomenclature(event:any) {
@@ -159,6 +168,7 @@ export class LocationAddComponent implements  OnInit {
             icon: 'fa fa-question-circle',
             accept: () => {
               //this.router.navigate(['/employees-family-information']);
+              this._nav.setTab(2);
               this.location.back();
             },
             reject: () => {
