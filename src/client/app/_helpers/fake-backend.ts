@@ -1226,8 +1226,6 @@ export let fakeBackendProvider = {
                     news.ciudad = cities.find(c => c.value === news.ciudad.value );
                     news.estadoEstudio = studyStateList.find(s => s.value === news.estadoEstudio.value);
                     news.areaEstudio = studyAreaList.find(s => s.value === news.areaEstudio.value);
-                    news.nivelEstudio = studyLevelList.find(s => s.value === news.nivelEstudio.value);
-
                     news.tipoEstudio = studyTypeList.find(s => s.value === news.tipoEstudio.value);
                     news.intensidad = studyIntensityList.find(s => s.value === news.intensidad.value);
 

@@ -24,7 +24,7 @@ export class NoFormalStudiesAddComponent implements OnInit {
   @Input()
   cityList: any;
   nfstudy: Noformalstudies = new Noformalstudies();
-  header = 'Agregando Estudio Formal';
+  header = 'Agregando Estudio no Formal';
   submitted: boolean;
   msgs: Message[] = [];
   studyLevelList: any;
