@@ -82,6 +82,7 @@ export class LocationUpdateComponent implements  OnInit {
           this.map = new google.maps.Map(document.getElementById('ubicacionColaborador'), mapProp);
           var marker = new google.maps.Marker({position: latLng, map: this.map});
       });
+      this.focusUP()
 
   }
   onSubmit(value: string) {
