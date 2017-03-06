@@ -27,8 +27,8 @@
         <p-tabView id="tbvInfoPersonal" orientation="right">
           <p-tabPanel header="Info Personal" [selected]="true">
 
-            <p-accordion (onShow)="onTabShow($event)" (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)" id="accordion">
-              <p-accordionTab header="Datos Generales" [selected]="acordion.tab1">
+            <p-accordion (onOpen)="onTabShow($event)" id="accordion">
+              <p-accordionTab header="Datos Generales" [selected]="acordion == 0 || acordion == null ">
                 <form class="form-horizontal">
                   <fieldset>
                     <div class="form-group">
@@ -74,24 +74,24 @@
                 </form>
               </p-accordionTab>
 
-              <p-accordionTab header="Información Familiar" [selected]="acordion.tab2">
+              <p-accordionTab header="Información Familiar" [selected]="acordion == 1">
                 <familyinformation></familyinformation>
               </p-accordionTab>
 
-              <p-accordionTab header="Ubicación" [selected]="acordion.tab3">
+              <p-accordionTab header="Ubicación" [selected]="acordion == 2">
                 <employees-locations></employees-locations>
               </p-accordionTab>
 
-              <p-accordionTab header="Formación Academica" [selected]="acordion.tab4">
+              <p-accordionTab header="Formación Academica" [selected]="acordion == 3">
                 <academic-education-formal></academic-education-formal>
                 <academic-education-no-formal></academic-education-no-formal>
               </p-accordionTab>
 
-              <p-accordionTab header="Experiencia Laboral" [selected]="acordion.tab5">
+              <p-accordionTab header="Experiencia Laboral" [selected]="acordion == 4">
                 <work-experience></work-experience>
               </p-accordionTab>
 
-              <p-accordionTab header="Referencias" [selected]="acordion.tab6">
+              <p-accordionTab header="Referencias" [selected]="acordion == 5 ">
                 <references></references>
               </p-accordionTab>
             </p-accordion>

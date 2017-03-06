@@ -9,6 +9,7 @@ import {EmployeesDetailComponent}  from './employees-detail.component';
 import {EmployeesAddComponent}  from './employees-add.component';
 import {EmployeesUpdateComponent}  from './employees-update.component';
 import {EmployeesService} from './employees.service';
+import {NavService}                 from '../_services/_nav.service';
 import {
   InputTextModule,
   DataTableModule,
@@ -43,7 +44,7 @@ import {LocationModule} from './../employees-location/location.module';
   ],
   declarations: [EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent],
   bootstrap: [EmployeesComponent],
-  providers: [EmployeesService],
+  providers: [EmployeesService,NavService],
   exports: [EmployeesComponent]
 })
 export class EmployeesModule {
