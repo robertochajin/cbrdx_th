@@ -12,7 +12,7 @@ import { CitiesServices } from '../_services/cities.service';
 import { StudyStateServices } from '../_services/study-state.service';
 import { StudyTypeServices } from '../_services/study-type.service';
 import { StudyIntensityServices } from '../_services/study-intensity.service';
-
+import {NavService}                 from '../_services/_nav.service';
 @Component({
   moduleId: module.id,
   selector: 'academic-education-formal',
@@ -38,6 +38,7 @@ export class NoFormalStudiesAddComponent implements OnInit {
   es: any;
   range: string;
   id_estado_estudio_finalizado = 2;
+  copyAutocomplete: string;
   //hace falta definir acceso a constantes en servicio
 
   constructor(private academicEducationService: AcademicEducationService,
@@ -49,7 +50,8 @@ export class NoFormalStudiesAddComponent implements OnInit {
               private confirmationService: ConfirmationService,
               private studyIntensityServices: StudyIntensityServices,
               private router: Router,
-              private location: Location) {
+              private location: Location,
+              private _nav:NavService) {
   }
 
   ngOnInit() {
@@ -83,14 +85,19 @@ export class NoFormalStudiesAddComponent implements OnInit {
   }
 
   onSubmit(value: string) {
-    this.submitted = true;
-    this.msgs = [];
-    this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
-    this.academicEducationService.addNoFormal(this.nfstudy)
-      .subscribe(
-        data => {
-          this.router.navigate(['/employees-no-formal-studies']);
-        });
+    if(this.copyAutocomplete != this.nfstudy.ciudad.label){
+      this.nfstudy.ciudad = {value:null, label:''};
+    }else {
+      this.submitted = true;
+      this.msgs = [];
+      this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
+      this.academicEducationService.addNoFormal(this.nfstudy)
+        .subscribe(
+          data => {
+            this._nav.setTab(3);
+            this.location.back();
+          });
+    }
   }
 
 
@@ -102,6 +109,7 @@ export class NoFormalStudiesAddComponent implements OnInit {
 
   captureCityId(event:any) {
     this.nfstudy.ciudad = event;
+    this.copyAutocomplete = event.label
   }
 
   onSelectBegin(event:any) {
@@ -128,7 +136,9 @@ export class NoFormalStudiesAddComponent implements OnInit {
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
-        this.router.navigate(['/employees-no-formal-studies']);
+        this._nav.setTab(3);
+        this.location.back();
+        //this.router.navigate(['/employees-no-formal-studies']);
       }
     });
   }
