@@ -864,8 +864,12 @@ export let fakeBackendProvider = {
 
                     // save new user
                     newFamily.idFamiliar = familys.length + 1;
-                    newFamily.nombreCompleto = newFamily.primerNombre+' '+newFamily.segundoNombre+' '+newFamily.primerApellido+' '+newFamily.segundoApellido;
-                    newFamily.edad = 25;
+                    let matchedTypes = documentTypes.filter(types => { return types.value == newFamily.tipoDeDocumento; });
+                    let matchedRelationship = relationship.filter(rel => { return rel.value == newFamily.parentesco; });
+
+                    newFamily.tipoDeDocumento = matchedTypes.length ? matchedTypes[0] : null;
+                    newFamily.parentesco = matchedRelationship.length ? matchedRelationship[0] : null;
+
                     familys.push(newFamily);
                     localStorage.setItem('familys', JSON.stringify(familys));
 
@@ -1222,8 +1226,6 @@ export let fakeBackendProvider = {
                     news.ciudad = cities.find(c => c.value === news.ciudad.value );
                     news.estadoEstudio = studyStateList.find(s => s.value === news.estadoEstudio.value);
                     news.areaEstudio = studyAreaList.find(s => s.value === news.areaEstudio.value);
-                    news.nivelEstudio = studyLevelList.find(s => s.value === news.nivelEstudio.value);
-
                     news.tipoEstudio = studyTypeList.find(s => s.value === news.tipoEstudio.value);
                     news.intensidad = studyIntensityList.find(s => s.value === news.intensidad.value);
 

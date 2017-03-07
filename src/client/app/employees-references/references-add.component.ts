@@ -8,7 +8,7 @@ import {SelectItem, Message, ConfirmDialog, ConfirmationService } from 'primeng/
 
 import { ReferencesTypesServices } from '../_services/references-type.service';
 import { CitiesServices } from '../_services/cities.service';
-
+import {NavService}                 from '../_services/_nav.service';
 
 
 @Component({
@@ -27,6 +27,7 @@ export class ReferencesAddComponent implements OnInit  {
     cityList: any;
     submitted: boolean;
     msgs: Message[] = [];
+    copyAutocomplete: string;
 
     constructor (
         private referencesService: ReferencesService,
@@ -35,28 +36,34 @@ export class ReferencesAddComponent implements OnInit  {
         private citiesServices: CitiesServices,
         private referencesTypesServices: ReferencesTypesServices,
         private confirmationService: ConfirmationService,
+        private _nav:NavService
 
     ) {}
 
     ngOnInit () {
         this.referencesTypesServices.getAll().subscribe(referencesTypes => this.referencesTypes = referencesTypes);
+        this.focusUP();
     }
     onSubmit() {
+        if(this.copyAutocomplete != this.reference.ciudad.label){
+            this.reference.ciudad = {value:null, label:''};
+        }else {
+            this.submitted = true;
+            this.msgs = [];
+            this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
 
-      this.submitted = true;
-      this.msgs = [];
-      this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
+            this.reference.primerNombre = this.capitalizeSave(this.reference.primerNombre);
+            this.reference.segundoNombre = this.capitalizeSave(this.reference.segundoNombre);
+            this.reference.primerApellido = this.capitalizeSave(this.reference.primerApellido);
+            this.reference.segundoApellido = this.capitalizeSave(this.reference.segundoApellido);
 
-      this.reference.primerNombre = this.capitalizeSave(this.reference.primerNombre);
-      this.reference.segundoNombre = this.capitalizeSave(this.reference.segundoNombre);
-      this.reference.primerApellido = this.capitalizeSave(this.reference.primerApellido);
-      this.reference.segundoApellido = this.capitalizeSave(this.reference.segundoApellido);
-
-      this.referencesService.add(this.reference)
-        .subscribe(
-          data => {
-            this.location.back();
-          });
+            this.referencesService.add(this.reference)
+              .subscribe(
+                data => {
+                  this._nav.setTab(5);
+                  this.location.back();
+                });
+        }
     }
 
     citySearch(event:any) {
@@ -68,6 +75,7 @@ export class ReferencesAddComponent implements OnInit  {
     captureCityId(event:any) {
       this.reference.ciudad.value = event.value;
       this.reference.ciudad.label = event.label;
+      this.copyAutocomplete = event.label
     }
 
     goBack(): void {
@@ -76,6 +84,7 @@ export class ReferencesAddComponent implements OnInit  {
         header: 'Corfirmación',
         icon: 'fa fa-question-circle',
         accept: () => {
+          this._nav.setTab(5);
           this.location.back();
         },
         reject: () => {
@@ -88,12 +97,12 @@ export class ReferencesAddComponent implements OnInit  {
       if (element) { element.scrollIntoView(element); }
     }
 
-    capitalize(event) {
+    capitalize(event:any) {
       let input = event.target.value;
       event.target.value = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
     }
 
-    capitalizeSave(input) {
+    capitalizeSave(input:any) {
       return input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
     }
 }

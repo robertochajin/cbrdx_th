@@ -6,6 +6,7 @@ import {SelectItem, ConfirmationService, Message} from 'primeng/primeng';
 import {Router, ActivatedRoute, Params}  from '@angular/router';
 import {Location}  from '@angular/common';
 declare let google: any;
+import {NavService}                 from '../_services/_nav.service';
 
 @Component({
   moduleId: module.id,
@@ -18,21 +19,22 @@ export class LocationUpdateComponent implements  OnInit {
 
   @Input()
   employLocation :EmployeesLocation= new EmployeesLocation();
-  header:String = 'Editando Ubicación';
+  header:string = 'Editando Ubicación';
 
   principalNomenclatureList: any;
   complementaryNomenclatureList: any;
   addressTypeList: any;
 
   selectedPrincipalNomenclature: SelectItem[] = [];
-  labelPrincipalNomenclature: String;
+  labelPrincipalNomenclature: string;
+  copyAutocomplete: string;
 
-  principalNomenclature: String;
-  numberOne: String;
-  numberTwo: String;
+  principalNomenclature: string;
+  numberOne: string;
+  numberTwo: string;
 
   complementaries:any;
-  finalAddress: String;
+  finalAddress: string;
   cityList: any;
   map: any;
 
@@ -44,7 +46,8 @@ export class LocationUpdateComponent implements  OnInit {
     private router: Router,
     private location: Location,
     private confirmationService: ConfirmationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _nav:NavService
   ) {
     this.complementaries = [{tipo: null, detalle: ''}];
     this.employLocation.ciudad = {value: null, label: ''};
@@ -69,6 +72,7 @@ export class LocationUpdateComponent implements  OnInit {
       .subscribe(employLocation => {
         this.employLocation = employLocation;
         this.finalAddress = this.employLocation.direccion;
+        this.copyAutocomplete = this.employLocation.ciudad.label;
         var mapProp = {
             center: new google.maps.LatLng(this.employLocation.latitud, this.employLocation.longitud),
             zoom: 15,
@@ -81,17 +85,22 @@ export class LocationUpdateComponent implements  OnInit {
 
   }
   onSubmit(value: string) {
-    this.submitted = true;
-    this.msgs = [];
-    this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
+    if(this.copyAutocomplete != this.employLocation.ciudad.label){
+        this.employLocation.ciudad = {value:null, label:''};
+    }else {
+        this.submitted = true;
+        this.msgs = [];
+        this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
 
-    this.employLocation.direccion = this.finalAddress;
-    //this.employLocation.tipoDireccion.idTipoDireccion = this.selectedTipoDireccion;
-    this.locationService.add(this.employLocation)
-      .subscribe(
-        data => {
-          this.location.back();
-        });
+        this.employLocation.direccion = this.finalAddress;
+        //this.employLocation.tipoDireccion.idTipoDireccion = this.selectedTipoDireccion;
+        this.locationService.add(this.employLocation)
+          .subscribe(
+            data => {
+              this._nav.setTab(2);
+              this.location.back();
+            });
+    }
   }
 
   citySearch(event:any) {
@@ -103,6 +112,7 @@ export class LocationUpdateComponent implements  OnInit {
   captureId(event:any) {
     this.employLocation.ciudad.value = event.value;
     this.employLocation.ciudad.label = event.label;
+    this.copyAutocomplete = event.label;
     this.composeAddress();
   }
   capturePrincipalNomenclature(event:any) {
@@ -174,6 +184,7 @@ export class LocationUpdateComponent implements  OnInit {
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
+        this._nav.setTab(2);
         //this.router.navigate(['/employees-location']);
         this.location.back();
       },
@@ -182,7 +193,7 @@ export class LocationUpdateComponent implements  OnInit {
     });
   }
 
-  focusMe(){
+  focusUP(){
     const element = document.querySelector("#formulario");
     if (element) { element.scrollIntoView(element); }
   }

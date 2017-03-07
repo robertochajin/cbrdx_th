@@ -1,6 +1,3 @@
-/**
- * Created by Angel on 10/02/2017.
- */
 import 'rxjs/add/operator/switchMap';
 import {Component, Input,OnInit } from '@angular/core';
 import {FamilyInformationService} from './family-information.service';
@@ -10,6 +7,7 @@ import {FormBuilder, FormGroup, Validators, FormControl, NgForm } from '@angular
 import {Router}  from '@angular/router';
 import {Location}  from '@angular/common';
 import * as moment from 'moment/moment';
+import {NavService}                 from '../_services/_nav.service';
 
 @Component({
     moduleId: module.id,
@@ -42,7 +40,8 @@ export class FamilyInformationAddComponent implements OnInit {
         private router: Router,
         private fb: FormBuilder,
         private confirmationService: ConfirmationService,
-        private location: Location
+        private location: Location,
+        private _nav:NavService
     ) {}
 
     ngOnInit() {
@@ -86,6 +85,7 @@ export class FamilyInformationAddComponent implements OnInit {
         this.maxDate.setMonth(month);
         this.maxDate.setFullYear(year);
         this.range = `${lasYear}:${year}`;
+        this.focusMe();
 
     }
 
@@ -102,6 +102,7 @@ export class FamilyInformationAddComponent implements OnInit {
         this.familyInformationService.add(this.familyform.value)
             .subscribe(
                 data => {
+                    this._nav.setTab(1);
                     this.location.back();
                     //this.router.navigate(['/employees-family-information']);
                 },
@@ -115,15 +116,16 @@ export class FamilyInformationAddComponent implements OnInit {
             header: 'Corfirmación',
             icon: 'fa fa-question-circle',
             accept: () => {
-                this.router.navigate(['/employees-family-information']);
-                //this.location.back();
+                //this.router.navigate(['/employees-family-information']);
+                this._nav.setTab(1);
+                this.location.back();
             },
             reject: () => {
             }
         });
     }
 
-    onSelectMethod(event) {
+    onSelectMethod(event:any) {
         let d = new Date(Date.parse(event));
         this.familyInformation.fechadeNacimiento = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
     }
@@ -140,7 +142,7 @@ export class FamilyInformationAddComponent implements OnInit {
     //   }
     // }
 
-    onChangeMethod(event) {
+    onChangeMethod(event:any) {
 
       let today = new Date();
       let month = today.getMonth();
@@ -173,11 +175,6 @@ export class FamilyInformationAddComponent implements OnInit {
       }
 
     }
-    keyPressOnForm(event) {
-      if (event.keyCode === 13) {
-        event.preventDefault();
-      }
-    }
 
   strToDate(newDateString: string): Date {
     if (newDateString) {
@@ -200,13 +197,17 @@ export class FamilyInformationAddComponent implements OnInit {
     return '';
   }
 
-  capitalize(event) {
+  capitalize(event:any) {
     let input = event.target.value;
     event.target.value = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
   }
 
-  capitalizeSave(input) {
+  capitalizeSave(input:any) {
     return input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
+  }
+  focusMe(){
+    const element = document.querySelector("#formulario");
+    if (element) { element.scrollIntoView(element); }
   }
 
 }

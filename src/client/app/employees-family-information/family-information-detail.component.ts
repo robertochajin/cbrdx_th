@@ -1,11 +1,12 @@
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import {FamilyInformation} from './family-information';
 import {FamilyInformationService} from './family-information.service';
 import {constructorFamilyInformation} from './family-information.construct';
 import 'rxjs/add/operator/switchMap';
+import {NavService}                 from '../_services/_nav.service';
 
 
 @Component({
@@ -23,13 +24,13 @@ export class FamilyInformationDetailComponent implements OnInit   {
     selectedRelationship: string = "";
     selectedConvive: string = "";
     selectedApellido: string = "";
-  selectedNombre: string = "";
+    selectedNombre: string = "";
     este: string = "";
-
     constructor(
         private familyInformationService: FamilyInformationService,
         private route: ActivatedRoute,
-        private location: Location
+        private location: Location,
+        private _nav:NavService
     ) {}
 
     ngOnInit(): void {
@@ -40,11 +41,11 @@ export class FamilyInformationDetailComponent implements OnInit   {
             this.selectedDocument = this.familyInformation.tipoDeDocumento.label;
             this.selectedRelationship = this.familyInformation.parentesco.label;
             this.selectedConvive = this.familyInformation.convive == true ? "Si" : "No";
-
         });
     }
 
     goBack(): void {
+        this._nav.setTab(1);
         this.location.back();
     }
 }
