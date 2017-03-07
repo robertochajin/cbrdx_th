@@ -25,6 +25,8 @@ import {AcademicEducationModule} from './../employees-academic-education/academi
 import {WorkExperienceModule} from './../employees-work-experience/work-experience.module';
 import {LocationModule} from './../employees-location/location.module';
 
+//import {MomentModule} from 'angular2-moment/index.js';
+
 @NgModule({
   imports: [CommonModule,
     InputTextModule,
@@ -39,7 +41,8 @@ import {LocationModule} from './../employees-location/location.module';
     AcademicEducationModule,
     WorkExperienceModule,
     LocationModule,
-    AccordionModule
+    AccordionModule,
+    //MomentModule
   ],
   declarations: [EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent],
   bootstrap: [EmployeesComponent],
