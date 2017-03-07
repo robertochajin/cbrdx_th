@@ -56,4 +56,22 @@ export class NoFormalStudiesComponent implements OnInit {
     update(f: Noformalstudies) {
         this.router.navigate(['employees-no-formal-studies/update/'+f.idEstudio]);
     }
+
+    savecheck(f: Noformalstudies){
+      this.dialogObjet = f;
+      this.confirmationService.confirm({
+        message: ` ¿Esta seguro que desea confirmar?`,
+        header: 'Corfirmación',
+        icon: 'fa fa-question-circle',
+        accept: () => {
+          this.academicEducationService.updateNoFormal( this.dialogObjet).subscribe();
+          this.dialogObjet = null;
+        },
+        reject: () => {
+          this.dialogObjet.confirmada = this.dialogObjet.confirmada==true ? false: true;
+          this.dialogObjet = null;
+        }
+      });
+
+    }
 }
