@@ -1406,26 +1406,6 @@ export let fakeBackendProvider = {
 
               }
 
-              // companySectorList
-              if (connection.request.url.endsWith('/api/companyselector') && connection.request.method === RequestMethod.Get) {
-                connection.mockRespond(new Response(new ResponseOptions({
-                  status: 200,
-                  body: {
-                    data: companySectorList
-                  }
-                })));
-              }
-
-              //companySubSectorList
-              if (connection.request.url.endsWith('/api/companysubselector') && connection.request.method === RequestMethod.Get) {
-                connection.mockRespond(new Response(new ResponseOptions({
-                  status: 200,
-                  body: {
-                    data: companySubSectorList
-                  }
-                })));
-              }
-
         // companySectorList
         if (connection.request.url.endsWith('/api/companyselector') && connection.request.method === RequestMethod.Get) {
           connection.mockRespond(new Response(new ResponseOptions({
