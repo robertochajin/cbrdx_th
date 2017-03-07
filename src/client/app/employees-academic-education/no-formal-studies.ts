@@ -14,7 +14,7 @@ export class Noformalstudies {
   public otroTipoEstudio?: string;
   public intensidad?: {value: number, label: string};
   public descripcion?: string;
-  public confirmada?: string;
+  public confirmada?: boolean;
 
   constructor() {
     this.areaEstudio = {value: null, label: ''};

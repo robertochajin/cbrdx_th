@@ -19,7 +19,7 @@ export class NoFormalStudiesDetailComponent implements OnInit   {
     @Input()
 
     study: Noformalstudies = new Noformalstudies();
-
+    confirmadalabel:string;
     constructor(
         private academicEducationService: AcademicEducationService,
         private confirmationService: ConfirmationService,
@@ -31,7 +31,10 @@ export class NoFormalStudiesDetailComponent implements OnInit   {
     ngOnInit(): void {
         this.route.params
             .switchMap((params: Params) => this.academicEducationService.getNoFormal(+params['id']))
-            .subscribe(study => this.study = study);
+            .subscribe(study => {
+              this.study = study;
+              this.confirmadalabel = this.study.confirmada == true ? 'Si': 'No';
+            });
     }
 
     goBack(): void {

@@ -39,6 +39,7 @@ export class FormalStudiesAddComponent implements OnInit {
     yeison: any;
     id_estado_estudio_finalizado = 2; //hace falta definir acceso a constantes en servicio
     copyAutocomplete: string;
+    copyInstitucion: string;
 
     constructor (
         private academicEducationService: AcademicEducationService,
@@ -84,19 +85,24 @@ export class FormalStudiesAddComponent implements OnInit {
     }
 
     onSubmit(value: string) {
-      if(this.copyAutocomplete != this.fstudy.ciudad.label){
-        this.fstudy.ciudad = {value:null, label:''};
-      }else {
-        this.submitted = true;
-        this.msgs = [];
-        this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
-        this.academicEducationService.addFormal(this.fstudy)
-          .subscribe(
-            data => {
-              this._nav.setTab(3);
-              this.location.back();
-              //this.router.navigate(['/employees-formal-studies']);
-            });
+      if(this.copyAutocomplete != this.fstudy.ciudad.label || this.copyInstitucion != this.fstudy.institucion.label){
+        if(this.copyAutocomplete != this.fstudy.ciudad.label){
+          this.fstudy.ciudad = {value:null, label:''};
+        }
+        if(this.copyInstitucion != this.fstudy.institucion.label){
+          this.fstudy.institucion = {value:null, label:''};
+        }
+      }else{
+          this.submitted = true;
+          this.msgs = [];
+          this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
+          this.academicEducationService.addFormal(this.fstudy)
+            .subscribe(
+              data => {
+                this._nav.setTab(3);
+                this.location.back();
+                //this.router.navigate(['/employees-formal-studies']);
+              });
       }
     }
 
@@ -119,6 +125,7 @@ export class FormalStudiesAddComponent implements OnInit {
 
     captureInstituteId(event:any) {
       this.fstudy.institucion = event;
+      this.copyInstitucion = event.label
     }
 
     onSelectBegin(event:any) {

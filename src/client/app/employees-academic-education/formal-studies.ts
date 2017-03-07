@@ -12,7 +12,7 @@ export class FormalStudies {
   public estadoEstudio?:{value:number, label:string};
   public ingreso?: string;
   public finalizacion?: string;
-  public confirmada?: string;
+  public confirmada?: boolean;
   public soporte?: string;
 
   constructor() {
