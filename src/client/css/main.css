@@ -3679,6 +3679,9 @@ a.cancelar:hover {
 .datatable-col-action button{
 
 }
+.ui-sortable-column-icon{
+  float: right;
+}
 /**
 ------------------------ Edit PrimeNG CSS ------------------------------
  */

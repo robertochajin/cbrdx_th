@@ -13,7 +13,7 @@ import {CitiesServices} from "../_services/cities.service";
 
 /* Library */
 import {Observable} from 'rxjs/Observable';
-import * as moment from 'moment/moment';
+
 
 
 @Component({
@@ -23,6 +23,7 @@ import * as moment from 'moment/moment';
 })
 
 export class WorkExperienceAddComponent {
+  @Input()
 
   experience: Workexperience = new Workexperience();
   header: String = 'Agregando Experiencia Laboral';
@@ -33,12 +34,6 @@ export class WorkExperienceAddComponent {
   maxDate: Date = null;
   es: any;
   range: string;
-
-  @Input()
-
-  experience: Workexperience = new Workexperience();
-  header: String = 'Agregando Experiencia';
-  cityList: any;
 
   constructor(private academicEducationService: WorkExperienceService,
               private companySectorService: CompanySectorService,
@@ -96,12 +91,12 @@ export class WorkExperienceAddComponent {
   }
 
 
-  onSelectMethodCalendarIngreso(event) {
+  onSelectMethodCalendarIngreso(event: any) {
     let d = new Date(Date.parse(event));
     this.experience.ingreso = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
   }
 
-  onSelectMethodCalendarFinalizacion(event) {
+  onSelectMethodCalendarFinalizacion(event: any) {
     let d = new Date(Date.parse(event));
     this.experience.finalizacion = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
   }
