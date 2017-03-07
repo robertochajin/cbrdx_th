@@ -118,6 +118,24 @@
                 </div>
             </div>
         </div>
+        <!--<div class="ui-grid-row">
+            <div class="ui-grid-col-12">
+              <p-fileUpload multiple="multiple"
+                            name="referencefile[]"
+                            url="http://localhost:3000/upload"
+                            chooseLabel="Seleccione"
+                            uploadLabel="Subir"
+                            cancelLabel="Cancelar"
+                            (onUpload)="onUpload($event)"
+              >
+                <template pTemplate type="content">
+                  <ul *ngIf="uploadedFiles.length">
+                    <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                  </ul>
+                </template>
+              </p-fileUpload>
+           </div>
+        </div>-->
       <div class="ui-grid-row form-footer-buttons">
         <div class="ui-grid-col-4"></div>
         <div class="ui-grid-col-1">
