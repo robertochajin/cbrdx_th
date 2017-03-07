@@ -3681,6 +3681,8 @@ a.cancelar:hover {
 }
 .ui-sortable-column-icon{
   float: right;
+  margin-right: -12px;
+  margin-top: 2px;
 }
 /**
 ------------------------ Edit PrimeNG CSS ------------------------------
