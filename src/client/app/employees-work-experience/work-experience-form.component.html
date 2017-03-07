@@ -45,13 +45,13 @@
             </div>
           </div>
           <div class="form-group col-md-6"
-               [ngClass]="{ 'has-error': f.submitted && !subsectorEmpresa.valid }">
+               [ngClass]="{ 'has-error': f.submitted && !subSectorEmpresa.valid }">
             <label for="subsectorEmpresa">Sub Sector Empresa</label>
             <p-dropdown name="subSectorEmpresa" id="subSectorEmpresa" #subSectorEmpresa="ngModel" required="true"
                         class="form-control"
                         [autoWidth]="false" [(ngModel)]="experience.subsectorEmpresa"
                         [options]="companySubSectorList"></p-dropdown>
-            <div *ngIf="f.submitted && !subsectorEmpresa.valid" class="help-block">
+            <div *ngIf="f.submitted && !subSectorEmpresa.valid" class="help-block">
               Sub Sector Empresa es requerido
             </div>
           </div>
@@ -130,10 +130,10 @@
           <div class="form-group col-md-4"
                [ngClass]="{ 'has-error': f.submitted && !ingreso.valid }">
             <label for="fechaIngreso">Ingreso</label>
-            <p-calendar id="fechaIngreso" name="fechaIngreso"
+            <p-calendar id="fechaIngreso" name="fechaIngreso" #ingreso="ngModel"
                         (onSelect)="onSelectMethodCalendarIngreso($event)" [showIcon]="true"
                         [maxDate]="maxDate" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range"
-                        [locale]="es"  dateFormat="mm/dd/yy"
+                        [locale]="es"  dateFormat="mm/dd/yy" readonlyInput="true" [dataType]="date" required="true"
                         [disabled]="disabled" [(ngModel)]="experience.ingreso">
             </p-calendar>
             <div *ngIf="f.submitted && !ingreso.valid" class="help-block">
@@ -143,10 +143,10 @@
           <div class="form-group col-md-4"
                [ngClass]="{ 'has-error': f.submitted && !finalizacion.valid }">
             <label for="fechaFinalizacion">Finalización</label>
-            <p-calendar id="fechaFinalizacion" name="fechaFinalizacion"
+            <p-calendar id="fechaFinalizacion" name="fechaFinalizacion" #finalizacion="ngModel"
                         (onSelect)="onSelectMethodCalendarFinalizacion($event)" [showIcon]="true"
-                        [maxDate]="maxDate" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range"
-                        [locale]="es"  dateFormat="mm/dd/yy"
+                        [minDate]="minDate" [maxDate]="maxDateFinal" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range"
+                        [locale]="es"  dateFormat="mm/dd/yy" readonlyInput="true" [dataType]="date"
                         [disabled]="disabled" [(ngModel)]="experience.finalizacion">
             </p-calendar>
 
@@ -157,7 +157,7 @@
           <div class="form-group col-md-4"
                [ngClass]="{ 'has-error': f.submitted && !actualmente.valid }">
             <label for="actualmente">Actualmente</label>
-            <p-toggleButton id="actualmente" name="actualmente" onLabel="Si" offLabel="No"
+            <p-toggleButton id="actualmente" name="actualmente" onLabel="Si" offLabel="No" #actualmente="ngModel"
                             onIcon="fa-check-square" offIcon="fa-square"
                             [(ngModel)]="experience.actualmente">
             </p-toggleButton>
