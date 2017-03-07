@@ -61,8 +61,8 @@ export class WorkExperienceUpdateComponent implements OnInit {
       .subscribe(experience => {
         this.experience = experience;
       });
-     //this.companySectorService.getAll().subscribe(companySectorList => this.companySectorList = companySectorList);
-    // this.companySubSectorService.getAll().subscribe(companySubSectorList => this.companySubSectorList = companySubSectorList);
+     this.companySectorService.getAll().subscribe(companySectorList => this.companySectorList = companySectorList);
+     this.companySubSectorService.getAll().subscribe(companySubSectorList => this.companySubSectorList = companySubSectorList);
     //
     let today = new Date();
     let month = today.getMonth();

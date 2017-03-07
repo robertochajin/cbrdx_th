@@ -7,6 +7,10 @@ import { Location }                 from '@angular/common';
 import {Workexperience} from './work-experience';
 import {WorkExperienceService} from './work-experience.service';
 
+import {CompanySectorService} from "../_services/company-sector.service";
+import {CompanySubSectorService} from "../_services/company-sub-sector.service";
+import {CitiesServices} from "../_services/cities.service";
+
 import 'rxjs/add/operator/switchMap';
 
 
@@ -22,11 +26,17 @@ export class WorkExperienceDetailComponent implements OnInit   {
     @Input()
 
     experience: Workexperience = new Workexperience();
+  private companySectorList: any;
+  private companySubSectorList: any;
+  private cityList: any;
 
     constructor(
         private workExperienceService: WorkExperienceService,
         private route: ActivatedRoute,
-        private location: Location
+        private location: Location,
+        private companySectorService: CompanySectorService,
+        private companySubSectorService: CompanySubSectorService,
+        private citiesServices: CitiesServices,
     ) {}
 
     ngOnInit(): void {
