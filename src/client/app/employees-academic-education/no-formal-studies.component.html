@@ -5,8 +5,10 @@
             <button type="button" pButton icon="fa-plus" (click)="add()" label="Nuevo Estudio"></button>
         </div>
         <div class="col-md-6 col-xs-12 datatable-header-search" >
-            <i class="fa fa-search"></i>
-            <input #gb type="text" pInputText size="40" placeholder="Buscar...">
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            <input #gb type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
+          </div>
         </div>
     </div>
     <p-dataTable [value]="nfstudies"  [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
