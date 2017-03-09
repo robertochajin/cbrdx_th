@@ -107,3 +107,15 @@ body .ui-inputtext:focus {
   border-color: #00632E!important;
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0, 99, 46, 0.6);
 }
+
+/**
+------------------ hover main menu  ----------------------
+ */
+.sidebar .nav li.active > a {
+  color: #00632E!important;
+  background: rgba(204, 204, 204, 0.23)!important;
+}
+.sidebar .nav li:hover > a {
+  background: rgba(204, 204, 204, 0.13)!important;
+  color: #00632E!important;
+}
