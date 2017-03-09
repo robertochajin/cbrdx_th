@@ -36,9 +36,9 @@ import { BaseRequestOptions } from '@angular/http';
     useValue: '<%= APP_BASE %>'
     },
     // providers used to create fake backend
-    fakeBackendProvider,
-    MockBackend,
-    BaseRequestOptions
+    //fakeBackendProvider,
+    //MockBackend,
+    //BaseRequestOptions
   ],
   bootstrap: [AppComponent]
 
