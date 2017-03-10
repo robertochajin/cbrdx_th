@@ -14,8 +14,8 @@
     <p-dataTable [value]="employees" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
         <p-column field="numeroDocumento" header="Número de documento" [sortable]="true"></p-column>
         <p-column field="nombreCompleto" header="Nombre " [sortable]="true"></p-column>
-        <p-column field="fechaDesde" header="Desde" [sortable]="true"></p-column>
-        <p-column field="cargoActual" header="Cargo Actual" [sortable]="true"></p-column>
+        <p-column field="fechaCreacion" header="Desde" [sortable]="true"></p-column>
+        <!--<p-column field="cargoActual" header="Cargo Actual" [sortable]="true"></p-column>-->
         <p-column header="Acciones" styleClass="datatable-col-action">
             <template let-employee="rowData" pTemplate="body">
 

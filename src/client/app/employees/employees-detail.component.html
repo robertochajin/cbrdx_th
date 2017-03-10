@@ -16,7 +16,7 @@
           </div>
           <div class="col-md-8">
             <h4>{{employee.nombreCompleto}} - {{employee.fechaNacimiento}}</h4>
-            <span>{{employee.tipoDocumento.label}} {{employee.numeroDocumento}}</span><br/>
+            <span>{{employee.tipoDocumento.nombreListaTipoDocumentos}} {{employee.numeroDocumento}}</span><br/>
             <span>{{employee.cargoActual}} - Area/oficina ({{employee.fechaDesde}})</span>
           </div>
           <div class="col-md-2">
@@ -34,47 +34,47 @@
                     <div class="form-group">
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Fecha de Exp.:</label>
-                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.fechaExp}}</strong></label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.fechaDocumento}}</strong></label>
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Ciudad de Exp.:</label>
-                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.ciudadExpedicion.label}}</strong></label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.ciudadExpDocumento.descripcionDivisionPolitica}}</strong></label>
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Fecha de Nacimiento:</label>
                       <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.fechaNacimiento}}</strong></label>
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">ciudad de Nacimiento:</label>
-                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.ciudadNacimiento.label}}</strong></label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.ciudadNacimiento.descripcionDivisionPolitica}}</strong></label>
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nacionalidad:</label>
                       <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.nacionalidad}}</strong></label>
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Genero:</label>
-                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.genero.label}}</strong></label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.genero.nombreListaGenero}}</strong></label>
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Estado Civil:</label>
-                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.estadoCivil.label}}</strong></label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.estadoCivil.nombreListaEstadoCivil}}</strong></label>
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Factor RH:</label>
                       <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.factorrh}}</strong></label>
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Numero de Hijos:</label>
-                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.numeroDeHijos}}</strong></label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.nroHijos}}</strong></label>
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Lateralidad:</label>
                       <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.lateralidad}}</strong></label>
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nivel Educativo:</label>
-                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.nivelEducativo}}</strong></label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.nivelEducacion.nombreListaNivelEstudio}}</strong></label>
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Profesión:</label>
-                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.profesion}}</strong></label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.profesion.profesion}}</strong></label>
 
                     </div>
                   </fieldset>
                 </form>
               </p-accordionTab>
 
-              <p-accordionTab header="Información Familiar" [selected]="acordion == 1">
+             <!-- <p-accordionTab header="Información Familiar" [selected]="acordion == 1">
                 <familyinformation></familyinformation>
               </p-accordionTab>
 
@@ -93,7 +93,7 @@
 
               <p-accordionTab header="Referencias" [selected]="acordion == 5 ">
                 <references></references>
-              </p-accordionTab>
+              </p-accordionTab>-->
             </p-accordion>
 
           </p-tabPanel>
