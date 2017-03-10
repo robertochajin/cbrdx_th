@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {Router, ActivatedRoute, Params}   from '@angular/router';
 import {Location}                 from '@angular/common';
 
@@ -23,6 +23,8 @@ import * as moment from 'moment/moment';
 
 export class WorkExperienceUpdateComponent implements OnInit {
 
+  @Input()
+
 
   experience: Workexperience = new Workexperience();
   header: String = 'Editando Experiencia Laboral';
@@ -33,7 +35,6 @@ export class WorkExperienceUpdateComponent implements OnInit {
   maxDate: Date = null;
   es: any;
   range: string;
-
 
   constructor(private workExperienceService: WorkExperienceService,
               private companySectorService: CompanySectorService,
@@ -60,9 +61,9 @@ export class WorkExperienceUpdateComponent implements OnInit {
       .subscribe(experience => {
         this.experience = experience;
       });
-    this.companySectorService.getAll().subscribe(companySectorList => this.companySectorList = companySectorList);
-    this.companySubSectorService.getAll().subscribe(companySubSectorList => this.companySubSectorList = companySubSectorList);
-
+     this.companySectorService.getAll().subscribe(companySectorList => this.companySectorList = companySectorList);
+     this.companySubSectorService.getAll().subscribe(companySubSectorList => this.companySubSectorList = companySubSectorList);
+    //
     let today = new Date();
     let month = today.getMonth();
     let year = today.getFullYear();
@@ -100,7 +101,7 @@ export class WorkExperienceUpdateComponent implements OnInit {
   }
 
 
-  onSelectMethodCalendarIngreso(event) {
+  onSelectMethodCalendarIngreso(event: any) {
     let d = new Date(Date.parse(event));
     this.experience.ingreso = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
   }
@@ -109,7 +110,7 @@ export class WorkExperienceUpdateComponent implements OnInit {
 
   strToDate(newDateString: string): Date {
     if (newDateString) {
-      let mom: moment.Moment = moment(newDateString, 'YYYY-MM-DD');
+      let mom: moment.Moment = moment(newDateString, 'MM/DD/YYYY');
       if (mom.isValid()) {
         return mom.toDate();
       }

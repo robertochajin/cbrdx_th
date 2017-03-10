@@ -16,6 +16,7 @@ import {Observable} from 'rxjs/Observable';
 import * as moment from 'moment/moment';
 
 
+
 @Component({
   moduleId: module.id,
   selector: 'work-experience-formal',
@@ -23,6 +24,7 @@ import * as moment from 'moment/moment';
 })
 
 export class WorkExperienceAddComponent {
+  @Input()
 
   experience: Workexperience = new Workexperience();
   header: String = 'Agregando Experiencia Laboral';
@@ -30,15 +32,11 @@ export class WorkExperienceAddComponent {
   private companySubSectorList: any;
   private cityList: any;
 
+  minDate: Date = null;
   maxDate: Date = null;
+  maxDateFinal: Date = null;
   es: any;
   range: string;
-
-  @Input()
-
-  experience: Workexperience = new Workexperience();
-  header: String = 'Agregando Experiencia';
-  cityList: any;
 
   constructor(private academicEducationService: WorkExperienceService,
               private companySectorService: CompanySectorService,
@@ -56,17 +54,24 @@ export class WorkExperienceAddComponent {
       monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
     };
 
-    this.companySectorService.getAll().subscribe(companySectorList => this.companySectorList = companySectorList);
-    this.companySubSectorService.getAll().subscribe(companySubSectorList => this.companySubSectorList = companySubSectorList);
 
     let today = new Date();
     let month = today.getMonth();
     let year = today.getFullYear();
-    let lasYear = year - 80;
+    let lastYear = year - 80;
     this.maxDate = new Date();
-    this.maxDate.setMonth(month);
-    this.maxDate.setFullYear(year);
-    this.range = `${lasYear}:${year}`;
+    this.maxDate.setFullYear(year, month);
+    this.minDate = new Date();
+    this.minDate.setFullYear(lastYear, month);
+    this.maxDateFinal = new Date();
+    this.maxDateFinal.setMonth(month);
+    this.maxDateFinal.setFullYear(year);
+    this.range = `${lastYear}:${year}`;
+
+
+    this.companySectorService.getAll().subscribe(companySectorList => this.companySectorList = companySectorList);
+    this.companySubSectorService.getAll().subscribe(companySubSectorList => this.companySubSectorList = companySubSectorList);
+
 
   }
 
@@ -96,14 +101,16 @@ export class WorkExperienceAddComponent {
   }
 
 
-  onSelectMethodCalendarIngreso(event) {
+  onSelectMethodCalendarIngreso(event: any) {
     let d = new Date(Date.parse(event));
     this.experience.ingreso = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+    this.minDate.setFullYear(d.getFullYear(),d.getMonth(),d.getDate()+1);
   }
 
-  onSelectMethodCalendarFinalizacion(event) {
+  onSelectMethodCalendarFinalizacion(event: any) {
     let d = new Date(Date.parse(event));
     this.experience.finalizacion = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+    this.maxDate.setFullYear(d.getFullYear(),d.getMonth(),d.getDate()-1);
   }
 
 

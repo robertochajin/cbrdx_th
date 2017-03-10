@@ -257,7 +257,7 @@ export let fakeBackendProvider = {
                     'finalizacion'          : "2 de mayo del 2005",
                     'ciudad'                : {value: 1, label: "Bucaramanga"},
                     'institucion'           : {value: 1, label:"uis"},
-                    'confirmada'            : "Si",
+                    'confirmada'            : true,
                     'nivelEstudio'          : {value: 1, label:"Universitario"},
                     'areaEstudio'           : {value: 1, label:"Diplomado"},
                     'otraInstitucion'       :   "",
@@ -273,7 +273,7 @@ export let fakeBackendProvider = {
                     'finalizacion'          : "2 de mayo del 2005",
                     'ciudad'                : {value: 1, label: "Bucaramanga"},
                     'institucion'           : {value: 1, label:"UPB"},
-                    'confirmada'            : "Si",
+                    'confirmada'            : false,
                     'nivelEstudio'          : {value: 1, label: "Universitario"},
                     'areaEstudio'           : {value: 1, label:"Diplomado"},
                     'otraInstitucion'       : "",
@@ -289,7 +289,7 @@ export let fakeBackendProvider = {
                     'finalizacion'          : "2 de mayo del 2005",
                     'ciudad'                : {value: 1, label: "Bucaramanga"},
                     'institucion'           : {value: 1, label:"uis"},
-                    'confirmada'            : "Si",
+                    'confirmada'            : true,
                     'nivelEstudio'          : {value: 1, label: "Universitario"},
                     'areaEstudio'           : {value: 1, label:"Diplomado"},
                     'otraInstitucion'       : "",
@@ -308,7 +308,7 @@ export let fakeBackendProvider = {
                     'finalizacion'          : "10/20/2010",
                     'ciudad'                : {value: 1, label: "Bucaramanga"},
                     'institucion'           : "sagrado corazón de jesus",
-                    'confirmada'            : "Si",
+                    'confirmada'            : true,
                     'tipoEstudio'           : {value: 1, label: "Diplomado"},
                     'otroTipoEstudio'       : " Otro tipo",
                     'intensidad'            : {value: 1, label: "20 horas"},
@@ -326,7 +326,7 @@ export let fakeBackendProvider = {
                     'finalizacion'          : "10/20/2010",
                     'ciudad'                : {value: 1, label: "Bucaramanga"},
                     'institucion'           : "sagrado corazón de jesus",
-                    'confirmada'            : "Si",
+                    'confirmada'            : false,
                     'tipoEstudio'           : {value: 1, label: "Diplomado"},
                     'otroTipoEstudio'       : " Otro tipo",
                     'intensidad'            : {value: 1, label: "20 horas"},
@@ -344,7 +344,7 @@ export let fakeBackendProvider = {
                     'finalizacion'          : "10/20/2010",
                     'ciudad'                : {value: 1, label: "Bucaramanga"},
                     'institucion'           : "sagrado corazón de jesus",
-                    'confirmada'            : "Si",
+                    'confirmada'            : false,
                     'tipoEstudio'           : {value: 1, label: "Diplomado"},
                     'otroTipoEstudio'       : " Otro tipo",
                     'intensidad'            : {value: 1, label: "20 horas"},
@@ -362,8 +362,8 @@ export let fakeBackendProvider = {
           'idColaborador': "1",
           'empresa': "Crezcamos",
           'cargo': "Gerente",
-          'ingreso': "1999-03-02",
-          'finalizacion': "2005-03-02",
+          'ingreso': "10/10/2000",
+          'finalizacion': "10/10/2010",
           'ciudad': {value: 104, label: "Bucaramanga"},
           'telefonoEmpresa': "6020304",
           'sectorEmpresa': 1,
@@ -379,8 +379,8 @@ export let fakeBackendProvider = {
           'idColaborador': "1",
           'empresa': "Ciberdix",
           'cargo': "Gerente",
-          'ingreso': "1999-03-02",
-          'finalizacion': "2000-03-02",
+          'ingreso': "10/10/2010",
+          'finalizacion': "10/10/2016",
           'ciudad': {value: 101, label: "Floridablanca"},
           'telefonoEmpresa': "6010203",
           'sectorEmpresa': 2,
@@ -396,8 +396,8 @@ export let fakeBackendProvider = {
           'idColaborador': "1",
           'empresa': "Empresa SAS",
           'cargo': "Gerente",
-          'ingreso': "1999-03-02",
-          'finalizacion': "2016-03-02",
+          'ingreso': "10/10/2010",
+          'finalizacion': "10/10/2010",
           'ciudad': {value: 104, label: "Bucaramanga"},
           'telefonoEmpresa': "6101010",
           'sectorEmpresa': 2,
@@ -1404,26 +1404,6 @@ export let fakeBackendProvider = {
                   body:{data:referencesTypeList}
                 })));
 
-              }
-
-              // companySectorList
-              if (connection.request.url.endsWith('/api/companyselector') && connection.request.method === RequestMethod.Get) {
-                connection.mockRespond(new Response(new ResponseOptions({
-                  status: 200,
-                  body: {
-                    data: companySectorList
-                  }
-                })));
-              }
-
-              //companySubSectorList
-              if (connection.request.url.endsWith('/api/companysubselector') && connection.request.method === RequestMethod.Get) {
-                connection.mockRespond(new Response(new ResponseOptions({
-                  status: 200,
-                  body: {
-                    data: companySubSectorList
-                  }
-                })));
               }
 
         // companySectorList

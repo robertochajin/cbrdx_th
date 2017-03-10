@@ -27,6 +27,7 @@ export class ReferencesAddComponent implements OnInit  {
     cityList: any;
     submitted: boolean;
     msgs: Message[] = [];
+    uploadedFiles: any[] = [];
     copyAutocomplete: string;
 
     constructor (
@@ -104,6 +105,14 @@ export class ReferencesAddComponent implements OnInit  {
 
     capitalizeSave(input:any) {
       return input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
+    }
+    onUpload(event:any) {
+        for(let file of event.files) {
+            this.uploadedFiles.push(file);
+        }
+
+        this.msgs = [];
+        this.msgs.push({severity: 'info', summary: 'File Uploaded', detail: ''});
     }
 }
 

@@ -17,7 +17,8 @@ import { ReferencesTypesServices } from '../_services/references-type.service';
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule,
   ConfirmDialogModule,
   MessagesModule,
-  AutoCompleteModule
+  AutoCompleteModule,
+  FileUploadModule
 } from 'primeng/primeng';
 
 
@@ -26,7 +27,8 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
                     DialogModule,InputTextareaModule,CalendarModule,DropdownModule,
                     ConfirmDialogModule,
                     MessagesModule,
-                    AutoCompleteModule
+                    AutoCompleteModule,
+                    FileUploadModule
                     ],
     declarations: [ReferencesComponent,
                     ReferencesDetailComponent,
