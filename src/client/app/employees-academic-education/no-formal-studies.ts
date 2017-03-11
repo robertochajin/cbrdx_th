@@ -6,15 +6,15 @@ export class Noformalstudies {
   public areaEstudio?: {value: number, label: string};
   public titulo?: string;
   public institucion?: string;
-  public ciudad: {value: number, label: string};
-  public estadoEstudio?: {value: number, label: string};
+  public ciudad: {value: number, label: String};
+  public estadoEstudio?: {value: number, label: String};
   public ingreso?: string;
   public finalizacion?: string;
-  public tipoEstudio?:  {value: number, label: string};
+  public tipoEstudio?:  {value: number, label: String};
   public otroTipoEstudio?: string;
-  public intensidad?: {value: number, label: string};
+  public intensidad?: {value: number, label: String};
   public descripcion?: string;
-  public confirmada?: boolean;
+  public confirmada?: string;
 
   constructor() {
     this.areaEstudio = {value: null, label: ''};

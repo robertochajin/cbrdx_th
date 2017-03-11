@@ -54,7 +54,7 @@ export class EmployeesComponent {
     }
 
     detail(f: Employee) {
-        this.router.navigate(['employees/detail/'+f.idColaborador]);
+        this.router.navigate(['employees/detail/'+f.idTercero]);
     }
 
     add() {
@@ -62,7 +62,7 @@ export class EmployeesComponent {
     }
 
     update(c: Employee) {
-        this.router.navigate(['employees/update/'+c.idColaborador]);
+        this.router.navigate(['employees/update/'+c.idTercero]);
     }
 
 

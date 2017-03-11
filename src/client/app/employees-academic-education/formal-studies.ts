@@ -8,11 +8,11 @@ export class FormalStudies {
   public titulo?: string;
   public institucion?: {value:number, label:string};
   public otraInstitucion?: string;
-  public ciudad:{value:number, label:string};
-  public estadoEstudio?:{value:number, label:string};
+  public ciudad:{value:number, label:String};
+  public estadoEstudio?:{value:number, label:String};
   public ingreso?: string;
   public finalizacion?: string;
-  public confirmada?: boolean;
+  public confirmada?: string;
   public soporte?: string;
 
   constructor() {

@@ -85,7 +85,7 @@ export class FamilyInformationAddComponent implements OnInit {
         this.maxDate.setMonth(month);
         this.maxDate.setFullYear(year);
         this.range = `${lasYear}:${year}`;
-        this.focusUP();
+        this.focusMe();
 
     }
 
@@ -205,7 +205,7 @@ export class FamilyInformationAddComponent implements OnInit {
   capitalizeSave(input:any) {
     return input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
   }
-  focusUP(){
+  focusMe(){
     const element = document.querySelector("#formulario");
     if (element) { element.scrollIntoView(element); }
   }

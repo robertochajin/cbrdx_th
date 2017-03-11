@@ -27,16 +27,16 @@ export class LocationAddComponent implements  OnInit {
 
     //selectedTipoDireccion: SelectItem[] = [];
     selectedPrincipalNomenclature: SelectItem[] = [];
-    labelPrincipalNomenclature: string;
+    labelPrincipalNomenclature: String;
     //selectedCity: any[] = [{value: null, label : ''}];
     copyAutocomplete: string;
 
-    principalNomenclature: string;
-    numberOne: string;
-    numberTwo: string;
+    principalNomenclature: String;
+    numberOne: String;
+    numberTwo: String;
 
     complementaries:any;
-    finalAddress: string;
+    finalAddress: String;
     cityList: any;
     map: any;
 
@@ -67,7 +67,6 @@ export class LocationAddComponent implements  OnInit {
         );
 
         this.employLocation.colaborador = 1; /*ASIGNAR VALOR QUE VENGA EN NAVECAGION */
-        this.focusUP();
     }
     onSubmit() {
         if(this.copyAutocomplete != this.employLocation.ciudad.label){

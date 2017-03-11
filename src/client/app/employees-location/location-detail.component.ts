@@ -7,31 +7,32 @@ import { LocationService } from './location.service';
 import {NavService}                 from '../_services/_nav.service';
 
 @Component({
-  moduleId: module.id,
-  selector: 'family-information',
-  templateUrl: 'location-detail.component.html',
+    moduleId: module.id,
+    selector: 'family-information',
+    templateUrl: 'location-detail.component.html',
 })
 
 
-export class LocationDetailComponent implements OnInit {
-  @Input()
-  employeeLocation:EmployeesLocation = new EmployeesLocation();
+export class LocationDetailComponent implements OnInit   {
+    @Input()
+    employeeLocation: EmployeesLocation = new EmployeesLocation();
 
-  constructor(private locationService:LocationService,
-              private route:ActivatedRoute,
-              private location:Location,
-              private _nav:NavService) {
-  }
+    constructor(
+        private locationService: LocationService,
+        private route: ActivatedRoute,
+        private location: Location,
+        private _nav:NavService
+    ) {}
 
-  ngOnInit():void {
-    this.route.params
-      .switchMap((params:Params) => this.locationService.get(+params['id']))
-      .subscribe(este => this.employeeLocation = este);
-  }
+    ngOnInit(): void {
+        this.route.params
+            .switchMap((params: Params) => this.locationService.get(+params['id']))
+            .subscribe(este => this.employeeLocation = este);
+    }
 
-  goBack():void {
-    this._nav.setTab(2);
-    this.location.back();
-  }
+    goBack(): void {
+      this._nav.setTab(2);
+        this.location.back();
+    }
 }
 

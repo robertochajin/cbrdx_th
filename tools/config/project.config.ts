@@ -47,10 +47,9 @@ export class ProjectConfig extends SeedConfig {
       { src: 'primeng/resources/primeng.min.css', inject: true },
       { src: 'primeng/resources/themes/bootstrap/theme.css', inject: true },
 
-      //{ src: 'moment/min/moment.min.js', inject: true},
-      //{ src: 'moment/locale/es.js', inject: true},
+      { src: 'moment/min/moment.min.js', inject: true},
+      { src: 'moment/locale/es.js', inject: true},
 
-      //{ src: 'angular2-moment/index.js', inject: true},
 
     ];
 

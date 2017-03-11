@@ -19,7 +19,7 @@ export class FormalStudiesDetailComponent implements OnInit   {
     @Input()
 
     study: FormalStudies = new FormalStudies();
-    confirmadalabel:string;
+
     constructor(
         private academicEducationService: AcademicEducationService,
         private confirmationService: ConfirmationService,
@@ -31,11 +31,8 @@ export class FormalStudiesDetailComponent implements OnInit   {
     ngOnInit(): void {
         let este$ = this.route.params
             .switchMap((params: Params) => this.academicEducationService.getFormal(+params['id']));
-        este$.subscribe(study => {
-          this.study = study;
-          this.confirmadalabel = this.study.confirmada == true ? 'Si': 'No';
-        });
-        //console.log(this.study);
+        este$.subscribe(study => this.study = study);
+        console.log(this.study);
     }
 
     goBack(): void {
