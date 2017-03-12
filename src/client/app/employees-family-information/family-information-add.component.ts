@@ -1,13 +1,13 @@
 import 'rxjs/add/operator/switchMap';
-import {Component, Input,OnInit } from '@angular/core';
-import {FamilyInformationService} from './family-information.service';
-import {constructorFamilyInformation} from './family-information.construct';
-import {SelectItem, ConfirmationService, Message} from 'primeng/primeng';
-import {FormBuilder, FormGroup, Validators, FormControl, NgForm } from '@angular/forms';
-import {Router}  from '@angular/router';
-import {Location}  from '@angular/common';
+import { Component, Input,OnInit } from '@angular/core';
+import { FamilyInformationService } from './family-information.service';
+import { ConstructorFamilyInformation } from './family-information.construct';
+import { SelectItem, ConfirmationService, Message } from 'primeng/primeng';
+import { FormBuilder, FormGroup, Validators, FormControl, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import * as moment from 'moment/moment';
-import {NavService}                 from '../_services/_nav.service';
+import { NavService } from '../_services/_nav.service';
 
 @Component({
     moduleId: module.id,
@@ -19,7 +19,7 @@ import {NavService}                 from '../_services/_nav.service';
 export class FamilyInformationAddComponent implements OnInit {
     @Input()
 
-    familyInformation: constructorFamilyInformation = new constructorFamilyInformation();
+    familyInformation: ConstructorFamilyInformation = new ConstructorFamilyInformation();
     header:String = 'Agregando Familiar';
     documentTypes: SelectItem[] = [];
     relationship: SelectItem[] = [];
@@ -37,7 +37,6 @@ export class FamilyInformationAddComponent implements OnInit {
 
     constructor(
         private familyInformationService: FamilyInformationService,
-        private router: Router,
         private fb: FormBuilder,
         private confirmationService: ConfirmationService,
         private location: Location,
@@ -48,11 +47,11 @@ export class FamilyInformationAddComponent implements OnInit {
 
       this.es = {
         firstDayOfWeek: 1,
-        dayNames: [ "domingo","lunes","martes","miércoles","jueves","viernes","sábado" ],
-        dayNamesShort: [ "dom","lun","mar","mié","jue","vie","sáb" ],
-        dayNamesMin: [ "D","L","M","X","J","V","S" ],
-        monthNames: [ "enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre" ],
-        monthNamesShort: [ "ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic" ]
+        dayNames: [ 'domingo','lunes','martes','miércoles','jueves','viernes','sábado' ],
+        dayNamesShort: [ 'dom','lun','mar','mié','jue','vie','sáb' ],
+        dayNamesMin: [ 'D','L','M','X','J','V','S' ],
+        monthNames: [ 'enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre' ],
+        monthNamesShort: [ 'ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic' ]
       };
         this.familyform = this.fb.group({
             'tipoDeDocumento': new FormControl('', Validators.required),
@@ -85,11 +84,11 @@ export class FamilyInformationAddComponent implements OnInit {
         this.maxDate.setMonth(month);
         this.maxDate.setFullYear(year);
         this.range = `${lasYear}:${year}`;
-        this.focusUP();
+        this.focusMe();
 
     }
 
-    onSubmit(value: string) {
+    onSubmit() {
         this.submitted = true;
         this.msgs = [];
         this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
@@ -104,9 +103,6 @@ export class FamilyInformationAddComponent implements OnInit {
                 data => {
                     this._nav.setTab(1);
                     this.location.back();
-                    //this.router.navigate(['/employees-family-information']);
-                },
-                error => {
                 });
     }
 
@@ -116,18 +112,15 @@ export class FamilyInformationAddComponent implements OnInit {
             header: 'Corfirmación',
             icon: 'fa fa-question-circle',
             accept: () => {
-                //this.router.navigate(['/employees-family-information']);
                 this._nav.setTab(1);
                 this.location.back();
-            },
-            reject: () => {
             }
         });
     }
 
     onSelectMethod(event:any) {
         let d = new Date(Date.parse(event));
-        this.familyInformation.fechadeNacimiento = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
+        this.familyInformation.fechaNacimiento = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
     }
 
     // onBlurMethod(event) {
@@ -136,9 +129,9 @@ export class FamilyInformationAddComponent implements OnInit {
     //
     //   if(inp!= "" && inp != null && !isNaN(inp)) {
     //     let d = new Date(inp);
-    //     this.familyInformation.fechadeNacimiento = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+    //     this.familyInformation.fechaNacimiento = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
     //   }else{
-    //     this.familyInformation.fechadeNacimiento = '';
+    //     this.familyInformation.fechaNacimiento = '';
     //   }
     // }
 
@@ -153,24 +146,24 @@ export class FamilyInformationAddComponent implements OnInit {
       this.maxDate = new Date();
 
 
-      if(event.value==1 || event.value == 2){
-          this.maxDate.setMonth(month);
-          this.maxDate.setFullYear(prev18Year);
-          this.range = `${lastYear}:${prev18Year}`;
-      }else{
+      if(event.value === 1 || event.value === 2) {
+        this.maxDate.setMonth(month);
+        this.maxDate.setFullYear(prev18Year);
+        this.range = `${lastYear}:${prev18Year}`;
+      } else {
         this.maxDate.setMonth(month);
         this.maxDate.setFullYear(year);
         this.range = `${prev20Year}:${year}`;
       }
 
-      if((this.familyInformation.fechadeNacimiento)== null || (this.familyInformation.fechadeNacimiento)== "" ){
-        this.familyInformation.fechadeNacimiento = `${this.maxDate.getMonth()+1}/${this.maxDate.getDate()}/${this.maxDate.getFullYear()}`
-      }else{
+      if((this.familyInformation.fechaNacimiento) === null || (this.familyInformation.fechaNacimiento) === '' ) {
+        this.familyInformation.fechaNacimiento = `${this.maxDate.getMonth()+1}/${this.maxDate.getDate()}/${this.maxDate.getFullYear()}`;
+      } else {
         let timestamp2 = new Date(this.maxDate).getTime();
-        let timestamp1 = new Date(this.familyInformation.fechadeNacimiento).getTime();
+        let timestamp1 = new Date(this.familyInformation.fechaNacimiento).getTime();
         let timeDiff = Math.round(timestamp2 - timestamp1);
-        if(timeDiff< 0){
-          this.familyInformation.fechadeNacimiento = "";
+        if(timeDiff < 0) {
+          this.familyInformation.fechaNacimiento = '';
         }
       }
 
@@ -205,8 +198,9 @@ export class FamilyInformationAddComponent implements OnInit {
   capitalizeSave(input:any) {
     return input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
   }
-  focusUP(){
-    const element = document.querySelector("#formulario");
+
+  focusMe() {
+    const element = document.querySelector('#formulario');
     if (element) { element.scrollIntoView(element); }
   }
 
