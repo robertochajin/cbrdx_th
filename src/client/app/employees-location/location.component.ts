@@ -13,7 +13,7 @@ import {ConfirmationService} from 'primeng/primeng';
 })
 export class LocationComponent implements OnInit {
 
-  @Input() colaborador:number;
+  @Input() employee:number;
 
   employeesLocations:EmployeesLocation[];
   dialogObjet:EmployeesLocation = new EmployeesLocation();
@@ -24,7 +24,7 @@ export class LocationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.locationService.getAllByEmployee(this.colaborador).subscribe(
+    this.locationService.getAllByEmployee(this.employee).subscribe(
       employeesLocations => this.employeesLocations = employeesLocations
     );
   }
