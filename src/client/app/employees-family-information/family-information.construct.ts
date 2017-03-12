@@ -11,7 +11,7 @@ export class ConstructorFamilyInformation implements FamilyInformation {
   numeroDocumento: string;
   convive: boolean;
   parentesco: any;
-
+  idParentesco: number;
   idFamiliar: number;
   primerNombre: string;
   segundoNombre: string;

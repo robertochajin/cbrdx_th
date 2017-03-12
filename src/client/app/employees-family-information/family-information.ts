@@ -16,5 +16,6 @@ export interface FamilyInformation {
   numeroDocumento: string;
   convive: boolean;
   parentesco: any;
+  idParentesco : number;
 }
 

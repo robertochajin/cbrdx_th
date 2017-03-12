@@ -74,15 +74,15 @@
                 </form>
               </p-accordionTab>
 
-             <!-- <p-accordionTab header="Información Familiar" [selected]="acordion == 1">
-                <family-information></family-information>
+              <p-accordionTab header="Información Familiar" [selected]="acordion == 1">
+                <family-information *ngIf="employee.idTercero" [employee]="employee"></family-information>
               </p-accordionTab>
 
               <p-accordionTab header="Ubicación" [selected]="acordion == 2">
-                <employees-locations></employees-locations>
+                <employees-locations *ngIf="employee.idTercero" [employee]="employee"></employees-locations>
               </p-accordionTab>
 
-              <p-accordionTab header="Formación Academica" [selected]="acordion == 3">
+             <!--  <p-accordionTab header="Formación Academica" [selected]="acordion == 3">
                 <academic-education-formal></academic-education-formal>
                 <academic-education-no-formal></academic-education-no-formal>
               </p-accordionTab>
