@@ -90,7 +90,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
                 familyInformation => {
                     this.familyInformation = familyInformation;
                     this.selectedDocument = this.familyInformation.idTipoDocumento;
-                    // this.selectedRelationship = this.familyInformation.FALTAIDPARENTESCO;
+                    this.selectedRelationship = this.familyInformation.idParentesco;
                     if(this.selectedDocument === 1 || this.selectedDocument === 2) {
                       this.maxDate.setFullYear(last18Year);
                       this.range = `${lastYear}:${last18Year}`;
