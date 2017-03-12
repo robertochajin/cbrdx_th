@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { LocationService } from './location.service';
 import { EmployeesLocation } from './employees-location';
-import {ConfirmationService} from 'primeng/primeng';
+import { ConfirmationService } from 'primeng/primeng';
 
 @Component({
   moduleId: module.id,
@@ -13,14 +13,14 @@ import {ConfirmationService} from 'primeng/primeng';
 })
 export class LocationComponent implements OnInit {
 
-  @Input() colaborador:number = 11;
+  @Input() colaborador: number = 11;
 
-  employeesLocations:EmployeesLocation[];
-  dialogObjet:EmployeesLocation = new EmployeesLocation();
+  employeesLocations: EmployeesLocation[];
+  dialogObjet: EmployeesLocation = new EmployeesLocation();
 
-  constructor(private locationService:LocationService,
-              private router:Router,
-              private confirmationService:ConfirmationService) {
+  constructor(private locationService: LocationService,
+    private router: Router,
+    private confirmationService: ConfirmationService) {
   }
 
   ngOnInit() {
@@ -29,13 +29,13 @@ export class LocationComponent implements OnInit {
     );
   }
 
-  delete(l:EmployeesLocation) {
+  delete(l: EmployeesLocation) {
     this.locationService.delete(l);
     this.employeesLocations.splice(this.employeesLocations.indexOf(l), 1);
     l = null;
   }
 
-  del(f:EmployeesLocation) {
+  del(f: EmployeesLocation) {
     this.dialogObjet = f;
     this.confirmationService.confirm({
       message: ` ¿Esta seguro que desea eliminar?`,
@@ -52,15 +52,15 @@ export class LocationComponent implements OnInit {
     });
   }
 
-  detail(l:EmployeesLocation) {
-    this.router.navigate(['employees-location/detail/' + l.idUbicacion]);
+  detail(l: any) {
+    this.router.navigate(['employees-location/detail/' + l.localizacion.idUbicacion]);
   }
 
   add() {
-    this.router.navigate(['employees-location/add']);
+    this.router.navigate(['employees-location/add/' + this.colaborador]);
   }
 
-  update(l:EmployeesLocation) {
-    this.router.navigate(['employees-location/update/' + l.idUbicacion]);
+  update(l: any) {
+    this.router.navigate(['employees-location/update/' + l.localizacion.idUbicacion]);
   }
 }

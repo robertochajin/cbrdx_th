@@ -35,7 +35,7 @@ export class LocationService {
       .map((res:Response) => res.json());
   }
 
-  add(f:EmployeesLocation) {
+  add(f: any) {
     return this.http.post(API_URL + '/employeesLocations', f)
       .map((res:Response) => res.json());
   };
@@ -46,8 +46,8 @@ export class LocationService {
   }
 
   get(id:number) {
-    return this.http.get(API_URL + '/employeesLocations/' + id)
-      .map((res:Response) => res.json() as EmployeesLocation);
+    return this.http.get(API_URL + '/employeesLocations/location/' + id)
+      .map((res:Response) => res.json());
   }
 
   delete(f:EmployeesLocation) {

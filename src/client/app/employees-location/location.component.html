@@ -12,10 +12,10 @@
     <p-dataTable [value]="employeesLocations" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
         <p-column field="localizacion.tipoDireccion.label" header="Tipo Dirección" [sortable]="true"></p-column>
         <p-column field="localizacion.direccion" header="Dirección" [sortable]="true"></p-column>
-        <p-column field="localizacion.barrio" header="Barrio" [sortable]="true"></p-column>
-        <p-column field="localizacion.ciudad" header="Ciudad" [sortable]="true"></p-column>
-        <p-column field="localizacion.departamento" header="Departamento" [sortable]="true"></p-column>
-        <p-column field="localizacion.pais" header="Pais" [sortable]="true"></p-column>
+        <p-column field="localizacion.barrio.label" header="Barrio" [sortable]="true"></p-column>
+        <p-column field="localizacion.ciudad.label" header="Ciudad" [sortable]="true"></p-column>
+        <p-column field="localizacion.departamento.label" header="Departamento" [sortable]="true"></p-column>
+        <p-column field="localizacion.pais.label" header="Pais" [sortable]="true"></p-column>
         <p-column header="Acciones" styleClass="datatable-col-action" >
             <template let-elocation="rowData" pTemplate="body">
                 <div class="btn-group" role="group">

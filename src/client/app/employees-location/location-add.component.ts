@@ -1,5 +1,6 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { LocationService } from './location.service';
 import { EmployeesLocation } from './employees-location';
 import { SelectItem, ConfirmationService, Message } from 'primeng/primeng';
@@ -47,7 +48,8 @@ export class LocationAddComponent implements OnInit {
     private locationService: LocationService,
     private location: Location,
     private confirmationService: ConfirmationService,
-    private _nav: NavService
+    private _nav: NavService,
+    private route: ActivatedRoute
   ) {
     this.complementaries = [{ tipo: null, detalle: '' }];
     this.employLocation.tipoDireccion.value
@@ -66,8 +68,11 @@ export class LocationAddComponent implements OnInit {
       addressTypeList => this.addressTypeList = addressTypeList
     );
 
-    this.employLocation.colaborador = 1; /*ASIGNAR VALOR QUE VENGA EN NAVECAGION */
+    this.route.params.subscribe((params: Params) => {
+      this.employLocation.colaborador = params['id'];
+    });
   }
+
   onSubmit() {
     if (this.copyAutocomplete != this.employLocation.ciudad.label) {
       this.employLocation.ciudad = { value: null, label: '' };
@@ -77,8 +82,34 @@ export class LocationAddComponent implements OnInit {
       this.msgs.push({ severity: 'info', summary: 'Success', detail: 'Guardando' });
 
       this.employLocation.direccion = this.finalAddress;
-      //this.employLocation.tipoDireccion.idTipoDireccion = this.selectedTipoDireccion;
-      this.locationService.add(this.employLocation)
+
+      let terceroLocalizacion = {
+        idTercero: this.employLocation.colaborador,
+        idLocalizacion: '',
+        auditoriaFecha: new Date(),
+        auditoriaUsuario: 1,
+        localizacion: {
+          idUbicacion: '',
+          direccion: this.employLocation.direccion,
+          auditoriaUsuario: 1,
+          auditoriaFecha: new Date(),
+          idDivisionPolitica: this.employLocation.ciudad.value,
+          longitud: this.employLocation.longitud,
+          latitud: this.employLocation.latitud,
+          comoLlegar: this.employLocation.comoLlegar,
+          barrio: {
+            value: '',
+            label: this.employLocation.barrio
+          },
+          ciudad: this.employLocation.ciudad,
+          departamento: this.employLocation.departamento,
+          pais: this.employLocation.pais,
+          tipoDireccion: this.employLocation.tipoDireccion
+        }
+      }
+
+      console.log(terceroLocalizacion);
+      this.locationService.add(terceroLocalizacion)
         .subscribe(
         data => {
           this._nav.setTab(2);

@@ -8,7 +8,7 @@ export class EmployeesLocation {
   departamento:{value: number, label: string};
   pais:{value: number, label: string};
   tipoDireccion:{value: number, label: string};
-  barrio:string;
+  barrio:{value: number, label: string};
   correoElectronico:string;
   longitud :string;
   latitud:string;
