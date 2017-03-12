@@ -4,11 +4,11 @@ import { Injectable } from '@angular/core';
 export class EmployeesLocation {
   idUbicacion:string;
   direccion:string;
-  ciudad:{value:number, label:string};
-  departamento:{value:number, label:string};
-  pais:{value:number, nombrePais:string};
+  ciudad:{value: number, label: string};
+  departamento:{value: number, label: string};
+  pais:{value: number, label: string};
   tipoDireccion:{value: number, label: string};
-  barrio:string;
+  barrio:{value: number, label: string};
   correoElectronico:string;
   longitud :string;
   latitud:string;
