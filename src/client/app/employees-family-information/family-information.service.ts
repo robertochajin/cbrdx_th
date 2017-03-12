@@ -14,6 +14,11 @@ export class FamilyInformationService {
         return this.http.get(API_URL +'/terceroFamily').map((res:Response) => res.json());
     }
 
+    getAllByEmployee(id: number) {
+      return this.http.get(API_URL + '/terceroFamily/employee/' + id)
+        .map((res:Response) => res.json());
+    }
+
     add(f: ConstructorFamilyInformation) {
         return this.http.post(API_URL +'/terceroFamily',f).map((res:Response) => res.json());
     };

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { Employee } from '../employees/employees';
 import { LocationService } from './location.service';
 import { EmployeesLocation } from './employees-location';
 import { ConfirmationService } from 'primeng/primeng';
@@ -13,7 +13,7 @@ import { ConfirmationService } from 'primeng/primeng';
 })
 export class LocationComponent implements OnInit {
 
-  @Input() colaborador: any;
+  @Input() colaborador: Employee;
 
   employeesLocations: EmployeesLocation[];
   dialogObjet: EmployeesLocation = new EmployeesLocation();
@@ -24,7 +24,7 @@ export class LocationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.locationService.getAllByEmployee(this.colaborador).subscribe(
+    this.locationService.getAllByEmployee(this.colaborador.idTercero).subscribe(
       employeesLocations => this.employeesLocations = employeesLocations
     );
   }
@@ -54,7 +54,7 @@ export class LocationComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['employees-location/add/' + this.colaborador]);
+    this.router.navigate(['employees-location/add/' + this.colaborador.idTercero]);
   }
 
   update(l: any) {
