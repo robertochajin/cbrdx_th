@@ -10,28 +10,23 @@ export class LocationService {
   constructor(private http:Http) {
   }
 
-  getAll() {
-    return this.http.get(API_URL + '/employeesLocations')
-      .map((res:Response) => res.json());
-  }
-
   getAllByEmployee(id: number) {
     return this.http.get(API_URL + '/employeesLocations/employees/' + id)
       .map((res:Response) => res.json());
   }
 
   getPrincipalNomenclatureList() {
-    return this.http.get(API_URL + '/principalNomenclature')
+    return this.http.get(API_URL + '/nomenclatures/principal')
       .map((res:Response) => res.json());
   }
 
   getComplementaryNomenclatureList() {
-    return this.http.get(API_URL + '/complementaryNomenclature')
+    return this.http.get(API_URL + '/nomenclatures/complementary')
       .map((res:Response) => res.json());
   }
 
   getAddressTypeList() {
-    return this.http.get(API_URL + '/addressTypes')
+    return this.http.get(API_URL + '/nomenclatures/addressType')
       .map((res:Response) => res.json());
   }
 
@@ -40,7 +35,7 @@ export class LocationService {
       .map((res:Response) => res.json());
   }
 
-  add(f:EmployeesLocation) {
+  add(f: any) {
     return this.http.post(API_URL + '/employeesLocations', f)
       .map((res:Response) => res.json());
   };
@@ -51,8 +46,8 @@ export class LocationService {
   }
 
   get(id:number) {
-    return this.http.get(API_URL + '/employeesLocations/' + id)
-      .map((res:Response) => res.json() as EmployeesLocation);
+    return this.http.get(API_URL + '/employeesLocations/location/' + id)
+      .map((res:Response) => res.json());
   }
 
   delete(f:EmployeesLocation) {
