@@ -13,7 +13,7 @@ import { ConfirmationService } from 'primeng/primeng';
 })
 export class LocationComponent implements OnInit {
 
-  @Input() colaborador: number = 11;
+  @Input() colaborador: number;
 
   employeesLocations: EmployeesLocation[];
   dialogObjet: EmployeesLocation = new EmployeesLocation();
