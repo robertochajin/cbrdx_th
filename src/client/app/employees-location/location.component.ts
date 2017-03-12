@@ -13,7 +13,7 @@ import { ConfirmationService } from 'primeng/primeng';
 })
 export class LocationComponent implements OnInit {
 
-  @Input() colaborador: any = 11;
+  @Input() colaborador: any;
 
   employeesLocations: EmployeesLocation[];
   dialogObjet: EmployeesLocation = new EmployeesLocation();
@@ -45,10 +45,7 @@ export class LocationComponent implements OnInit {
         this.locationService.delete(this.dialogObjet);
         this.employeesLocations.splice(this.employeesLocations.indexOf(this.dialogObjet), 1);
         this.dialogObjet = null;
-      },
-      reject: () => {
-
-      }
+      }, reject: () => {}
     });
   }
 
