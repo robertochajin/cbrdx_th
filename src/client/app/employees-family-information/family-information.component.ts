@@ -1,8 +1,9 @@
-import {Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { Router } from '@angular/router';
 import { FamilyInformationService } from './family-information.service';
 import { ConstructorFamilyInformation } from './family-information.construct';
 import { ConfirmationService } from 'primeng/primeng';
+import { Employee } from '../employees/employees';
 
 @Component({
     moduleId: module.id,
@@ -11,7 +12,7 @@ import { ConfirmationService } from 'primeng/primeng';
     providers:  [ConfirmationService]
 })
 export class FamilyInformationComponent implements OnInit {
-    @Input employee:any;
+    @Input() employee:Employee;
     familyInformation: ConstructorFamilyInformation = new ConstructorFamilyInformation();
     dialogObjet: ConstructorFamilyInformation = new ConstructorFamilyInformation();
     familyInformations: ConstructorFamilyInformation[];
@@ -23,7 +24,7 @@ export class FamilyInformationComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.familyInformationService.getAll().subscribe(
+        this.familyInformationService.getAllByEmployee(this.employee.idTercero).subscribe(
             familyInformations => this.familyInformations = familyInformations
         );
     }
