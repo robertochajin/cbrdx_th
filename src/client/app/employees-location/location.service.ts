@@ -32,11 +32,14 @@ export class LocationService {
 
   getAllCities(qr:any) {
     return this.http.get(API_URL + '/divisionPolitica/cities/s/' + qr)
+<<<<<<< HEAD
       .map((res:Response) => res.json());
   }
 
   getAllHoods(qr:any) {
     return this.http.get(API_URL + '/divisionPolitica/hoods/s/' + qr)
+=======
+>>>>>>> origin/cbrdx_th_stable_master
       .map((res:Response) => res.json());
   }
 
