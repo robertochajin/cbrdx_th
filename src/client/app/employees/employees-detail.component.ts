@@ -32,9 +32,7 @@ export class EmployeesDetailComponent implements OnInit   {
                                            this.employee.segundoApellido;
 
             this.employee.cargoActual = 'FALTA CARGO';
-            this.employee.factorrh = 'FALTA FACTOR RH';
             this.employee.nacionalidad = 'FALTA NACIONALIDAD';
-            this.employee.lateralidad = 'FALTA LATERALIDAD';
           });
 
       this.acordion = this._nav.getTab();
