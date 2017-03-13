@@ -24,7 +24,7 @@ export class LocationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.locationService.getAllByEmployee(11).subscribe(
+    this.locationService.getAllByEmployee(this.colaborador.idTercero).subscribe(
       employeesLocations => this.employeesLocations = employeesLocations
     );
   }
@@ -54,7 +54,7 @@ export class LocationComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['employees-location/add/' + 11]);
+    this.router.navigate(['employees-location/add/' + this.colaborador.idTercero]);
   }
 
   update(l: any) {
