@@ -36,6 +36,7 @@ export class LocationService {
   }
 
   getAllHoods(qr:any) {
+    //
     return this.http.get(API_URL + '/divisionPolitica/hoods/s/' + qr)
       .map((res:Response) => res.json());
   }
