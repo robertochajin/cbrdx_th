@@ -31,7 +31,7 @@ export class LocationService {
   }
 
   getAllCities(qr:any) {
-    return this.http.get(API_URL + '/cities/s/' + qr)
+    return this.http.get(API_URL + '/divisionPolitica/cities/s/' + qr)
       .map((res:Response) => res.json());
   }
 
