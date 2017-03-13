@@ -9,8 +9,8 @@ export class ConstructorFamilyInformation implements FamilyInformation {
   telefonoFijo: string;
   telefonoCelular: string;
   numeroDocumento: string;
-  convive: boolean;
-  parentesco: any;
+  idConvivencia: boolean;
+  nombreListaParentesco: any;
   idParentesco: number;
   idFamiliar: number;
   primerNombre: string;
@@ -29,6 +29,6 @@ export class ConstructorFamilyInformation implements FamilyInformation {
                             this.segundoNombre +' '+
                             this.primerApellido +' '+
                             this.segundoApellido;
-    this.edad = moment(this.fechaNacimiento,'MM/DD/YYYY').toNow(true).toString();
+    this.edad = moment(this.fechaNacimiento,'YYYY-MM-DD').toNow(true).toString();
   }
 }
