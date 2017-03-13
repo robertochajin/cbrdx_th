@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class Employee {
 
-  public idTercero : string;
+  public idTercero : number;
   public numeroDocumento : string;
   public nombreCompleto?  : string;
   public primerNombre  : string;

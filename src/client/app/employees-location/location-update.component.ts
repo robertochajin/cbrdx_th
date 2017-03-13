@@ -51,6 +51,7 @@ export class LocationUpdateComponent implements  OnInit {
   ) {
     this.complementaries = [{tipo: null, detalle: ''}];
     this.employLocation.ciudad = {value: null, label: ''};
+    this.employLocation.barrio = {value: null, label: ''};
     this.employLocation.tipoDireccion = {value: null, label: ''};
   }
 

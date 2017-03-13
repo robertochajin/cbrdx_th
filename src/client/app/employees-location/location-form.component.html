@@ -19,7 +19,7 @@
                 <div class="ui-grid-col-4">
                     <label for="tipoDireccionLabel">* Tipo de Dirección</label>
                     <p-dropdown  id="tipoDireccionLabel" name="tipoDireccionLabel" [options]="addressTypeList" [autoWidth]="false" required="true"
-                                 [(ngModel)]="employLocation.tipoDireccion.value"  #tipoDireccionLabel="ngModel"  ></p-dropdown>
+                                 [(ngModel)]="employLocation.tipoDireccion.label"  #tipoDireccionLabel="ngModel"  ></p-dropdown>
                     <div class="ui-message ui-messages-error ui-corner-all"
                          *ngIf="f.submitted && !tipoDireccionLabel.valid" (focus)="!tipoDireccionLabel.valid">
                     <i class="fa fa-close"></i>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="ui-grid-col-8">
                     <label for="ciudad">* Ciudad</label>
-                    <p-autoComplete placeholder="Buscar ciudad" field="label" name="ciudad" id="ciudad"
+                    <p-autoComplete placeholder="Buscar ciudad" field="descripcionDivisionPolitica" name="ciudad" id="ciudad"
                     [(ngModel)]="employLocation.ciudad.label" #ciudad="ngModel" [suggestions]="cityList" required="true"
                     (completeMethod)="citySearch($event)" (onSelect)="captureId($event)">
                     </p-autoComplete>

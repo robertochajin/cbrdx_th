@@ -1,14 +1,13 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit, } from '@angular/core';
-import {FamilyInformation} from './family-information';
-import {FamilyInformationService} from './family-information.service';
+import { FamilyInformationService } from './family-information.service';
 import { ActivatedRoute, Params }   from '@angular/router';
-import { Location }                 from '@angular/common';
-import {constructorFamilyInformation} from './family-information.construct';
-import {SelectItem, ConfirmationService, Message} from 'primeng/primeng';
-import {FormBuilder, FormGroup, Validators, FormControl, NgForm } from '@angular/forms';
+import { Location } from '@angular/common';
+import { ConstructorFamilyInformation } from './family-information.construct';
+import { SelectItem, ConfirmationService, Message } from 'primeng/primeng';
+import { FormBuilder, FormGroup, Validators, FormControl, NgForm } from '@angular/forms';
 import * as moment from 'moment/moment';
-import {NavService}                 from '../_services/_nav.service';
+import { NavService } from '../_services/_nav.service';
 
 @Component({
     moduleId: module.id,
@@ -17,9 +16,9 @@ import {NavService}                 from '../_services/_nav.service';
     providers:  [ConfirmationService]
 })
 
-export class FamilyInformationUpdateComponent implements OnInit{
+export class FamilyInformationUpdateComponent implements OnInit {
     @Input()
-    familyInformation:  FamilyInformation = new constructorFamilyInformation;
+    familyInformation:  ConstructorFamilyInformation = new ConstructorFamilyInformation();
     header: string = 'Editando Familiar';
     documentTypes: SelectItem[] = [];
     relationship: SelectItem[] = [];
@@ -45,11 +44,11 @@ export class FamilyInformationUpdateComponent implements OnInit{
     ngOnInit(): void {
       this.es = {
         firstDayOfWeek: 1,
-        dayNames: [ "domingo","lunes","martes","miércoles","jueves","viernes","sábado" ],
-        dayNamesShort: [ "dom","lun","mar","mié","jue","vie","sáb" ],
-        dayNamesMin: [ "D","L","M","X","J","V","S" ],
-        monthNames: [ "enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre" ],
-        monthNamesShort: [ "ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic" ]
+        dayNames: [ 'domingo','lunes','martes','miércoles','jueves','viernes','sábado' ],
+        dayNamesShort: [ 'dom','lun','mar','mié','jue','vie','sáb' ],
+        dayNamesMin: [ 'D','L','M','X','J','V','S' ],
+        monthNames: [ 'enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre' ],
+        monthNamesShort: [ 'ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic' ]
       };
         let today = new Date();
         let month = today.getMonth();
@@ -90,9 +89,9 @@ export class FamilyInformationUpdateComponent implements OnInit{
             .subscribe(
                 familyInformation => {
                     this.familyInformation = familyInformation;
-                    this.selectedDocument = this.familyInformation.tipoDeDocumento.value;
-                    this.selectedRelationship = this.familyInformation.parentesco.value;
-                    if(this.selectedDocument==1 || this.selectedDocument == 2){
+                    this.selectedDocument = this.familyInformation.idTipoDocumento;
+                    this.selectedRelationship = this.familyInformation.idParentesco;
+                    if(this.selectedDocument === 1 || this.selectedDocument === 2) {
                       this.maxDate.setFullYear(last18Year);
                       this.range = `${lastYear}:${last18Year}`;
                     }
@@ -117,8 +116,6 @@ export class FamilyInformationUpdateComponent implements OnInit{
             data => {
               this._nav.setTab(1);
               this.location.back();
-            },
-            error => {
             });
     }
 
@@ -131,15 +128,13 @@ export class FamilyInformationUpdateComponent implements OnInit{
             accept: () => {
                 this._nav.setTab(1);
                 this.location.back();
-            },
-            reject: () => {
             }
         });
     }
 
   onSelectMethod(event:any) {
     let d = new Date(Date.parse(event));
-    this.familyInformation.fechadeNacimiento = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
+    this.familyInformation.fechaNacimiento = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
   }
 
   // onBlurMethod(event) {
@@ -148,9 +143,9 @@ export class FamilyInformationUpdateComponent implements OnInit{
   //
   //   if(inp!= "" && inp != null && !isNaN(inp)) {
   //     let d = new Date(inp);
-  //     this.familyInformation.fechadeNacimiento = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+  //     this.familyInformation.fechaNacimiento = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
   //   }else{
-  //     this.familyInformation.fechadeNacimiento = '';
+  //     this.familyInformation.fechaNacimiento = '';
   //   }
   // }
 
@@ -165,7 +160,7 @@ export class FamilyInformationUpdateComponent implements OnInit{
     this.maxDate = new Date();
     this.maxDate.setMonth(month);
 
-    if(event.value ==1 || event.value == 2){
+    if(event.value === 1 || event.value === 2){
       this.maxDate.setFullYear(prev18Year);
       this.range = `${lastYear}:${prev18Year}`;
     }else{
@@ -173,14 +168,13 @@ export class FamilyInformationUpdateComponent implements OnInit{
       this.range = `${prev20Year}:${year}`;
     }
 
-    if((this.familyInformation.fechadeNacimiento)== null || (this.familyInformation.fechadeNacimiento)== "" ){
-      //this.familyInformation.fechadeNacimiento = `${this.maxDate.getMonth()+1}/${this.maxDate.getDate()}/${this.maxDate.getFullYear()}`
-    }else{
+    if((this.familyInformation.fechaNacimiento) === null || (this.familyInformation.fechaNacimiento) === '' ){
+    } else {
       let timestamp2 = new Date(this.maxDate).getTime();
-      let timestamp1 = new Date(this.familyInformation.fechadeNacimiento).getTime();
+      let timestamp1 = new Date(this.familyInformation.fechaNacimiento).getTime();
       let timeDiff = Math.round(timestamp2 - timestamp1);
-      if(timeDiff< 0){
-        this.familyInformation.fechadeNacimiento = "";
+      if(timeDiff< 0) {
+        this.familyInformation.fechaNacimiento = '';
       }
     }
 
@@ -204,8 +198,8 @@ export class FamilyInformationUpdateComponent implements OnInit{
   capitalizeSave(input :any) {
     return input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
   }
-  focusUP(){
-    const element = document.querySelector("#formulario");
+  focusUP() {
+    const element = document.querySelector('#formulario');
     if (element) { element.scrollIntoView(element); }
   }
 
