@@ -14,8 +14,8 @@ export interface FamilyInformation {
   telefonoCelular: string;
   direccion: string;
   numeroDocumento: string;
-  convive: boolean;
-  parentesco: any;
+  idConvivencia: boolean;
+  nombreListaParentesco: any;
   idParentesco : number;
 }
 

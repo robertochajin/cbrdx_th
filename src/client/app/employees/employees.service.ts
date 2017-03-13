@@ -8,8 +8,8 @@ export class EmployeesService {
 
 
     //au = API_URL;
-    au = 'http://localhost:8445/';
-    //au = 'http://40.71.92.147:8445/';
+    //au = 'http://localhost:8445/';  para cambios rápidos locales
+    au = 'http://40.71.92.147:8445/'; //dominio se debe cambiar a negocio.
     headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) {}
