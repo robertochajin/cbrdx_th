@@ -29,6 +29,7 @@ export class FamilyInformationService {
 
     get(id: number) {
         //return this.http.get(API_URL +'/terceroFamily/'+ id)
+        return this.http.get('http://40.71.92.147:8445/Vfamily/'+ id)
                 .map((res:Response) => res.json() as ConstructorFamilyInformation);
     }
 
