@@ -35,6 +35,12 @@ export class LocationService {
       .map((res:Response) => res.json());
   }
 
+  getAllHoods(qr:any) {
+    //
+    return this.http.get(API_URL + '/divisionPolitica/hoods/s/' + qr)
+      .map((res:Response) => res.json());
+  }
+
   add(f: any) {
     return this.http.post(API_URL + '/employeesLocations', f)
       .map((res:Response) => res.json());
