@@ -13,7 +13,7 @@ import { ConfirmationService } from 'primeng/primeng';
 })
 export class LocationComponent implements OnInit {
 
-  @Input() colaborador: Employee;
+  @Input() colaborador: any;
 
   employeesLocations: EmployeesLocation[];
   dialogObjet: EmployeesLocation = new EmployeesLocation();
@@ -24,7 +24,7 @@ export class LocationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.locationService.getAllByEmployee(this.colaborador.idTercero).subscribe(
+    this.locationService.getAllByEmployee(11).subscribe(
       employeesLocations => this.employeesLocations = employeesLocations
     );
   }
@@ -54,7 +54,7 @@ export class LocationComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['employees-location/add/' + this.colaborador.idTercero]);
+    this.router.navigate(['employees-location/add/' + 11]);
   }
 
   update(l: any) {

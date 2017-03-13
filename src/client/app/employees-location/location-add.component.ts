@@ -39,6 +39,7 @@ export class LocationAddComponent implements OnInit {
   complementaries: any;
   finalAddress: string;
   cityList: any;
+  hoodList: any;
   map: any;
 
   submitted: boolean;
@@ -86,21 +87,18 @@ export class LocationAddComponent implements OnInit {
       let terceroLocalizacion = {
         idTercero: this.employLocation.colaborador,
         idLocalizacion: '',
-        auditoriaFecha: new Date(),
+        auditoriaFecha: '',
         auditoriaUsuario: 1,
         localizacion: {
           idUbicacion: '',
           direccion: this.employLocation.direccion,
           auditoriaUsuario: 1,
-          auditoriaFecha: new Date(),
-          idDivisionPolitica: this.employLocation.ciudad.value,
+          auditoriaFecha: '',
+          idDivisionPolitica: this.employLocation.barrio.value,
           longitud: this.employLocation.longitud,
           latitud: this.employLocation.latitud,
           comoLlegar: this.employLocation.comoLlegar,
-          barrio: {
-            value: '',
-            label: this.employLocation.barrio
-          },
+          barrio: this.employLocation.barrio,
           ciudad: this.employLocation.ciudad,
           departamento: this.employLocation.departamento,
           pais: this.employLocation.pais,
@@ -124,6 +122,12 @@ export class LocationAddComponent implements OnInit {
     );
   }
 
+  hoodSearch(event: any) {
+    this.locationService.getAllHoods(event.query).subscribe(
+      hoods => this.hoodList = hoods
+    );
+  }
+
   captureId(event: any) {
     this.employLocation.ciudad.value = event.idDivisionPolitica;
     this.employLocation.ciudad.label = event.descripcionDivisionPolitica;
@@ -131,9 +135,19 @@ export class LocationAddComponent implements OnInit {
     this.composeAddress();
   }
 
+  captureHoodId(event: any) {
+    this.employLocation.barrio.value = event.idDivisionPolitica;
+    this.employLocation.barrio.label = event.descripcionDivisionPolitica;
+  }
+
   capturePrincipalNomenclature(event: any) {
     this.labelPrincipalNomenclature = event.originalEvent.srcElement.innerText.trim();
     this.composeAddress();
+  }
+
+  captureTipoDireccion(event: any) {
+    this.employLocation.tipoDireccion.value = event.value;
+    this.employLocation.tipoDireccion.label = event.originalEvent.srcElement.innerText.trim();
   }
 
   composeAddress(): void {
