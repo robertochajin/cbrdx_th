@@ -38,11 +38,15 @@ export class FamilyInformationService {
     }
 
     getDocumentType()  {
-        return this.http.get(API_URL +'/document-types').map((res:Response) => res.json());
+        //return this.http.get(API_URL +'/document-types')
+        return this.http.get(API_URL +'http://40.71.92.147:8445/documenttype')
+          .map((res:Response) => res.json());
     }
 
     getRelationship()  {
-        return this.http.get(API_URL +'/relationship').map((res:Response) => res.json());
+        //return this.http.get(API_URL +'/relationship')
+        return this.http.get('http://40.71.92.147:8445/relationtypes')
+          .map((res:Response) => res.json());
     }
 
 }
