@@ -19,6 +19,7 @@ export class EmployeesLocation {
 
   constructor() {
     this.ciudad = {value: null, label: ''};
+    this.barrio = {value: null, label: ''};
     this.tipoDireccion = {value: null, label: ''};
   }
 
