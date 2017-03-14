@@ -57,11 +57,11 @@ export class FamilyInformationComponent implements OnInit {
     }
 
     add() {
-        return this.router.navigate(['employees-family-information/add']);
+        return this.router.navigate(['employees-family-information/add/'+this.employee.idTercero]);
     }
 
     update(f: ConstructorFamilyInformation) {
-        return this.router.navigate(['employees-family-information/update/'+f.idTerceroFamiliar]);
+        return this.router.navigate(['employees-family-information/update/'+f.idTerceroFamiliar+'/'+f.idTercero]);
     }
 
 }

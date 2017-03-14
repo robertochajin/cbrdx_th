@@ -31,6 +31,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
     minDate:Date = null;
     es: any;
     range: string;
+    idTercero: number;
 
     constructor(
         private familyInformationService: FamilyInformationService,
@@ -87,23 +88,22 @@ export class FamilyInformationUpdateComponent implements OnInit {
         this.familyInformationService.getRelationship().subscribe(
             relationship => this.relationship = relationship
         );
-        this.route.params
-            .switchMap((params: Params) => this.familyInformationService.get(+params['id']))
-            .subscribe(
-                familyInformation => {
-                    this.familyInformation = familyInformation;
-                    this.selectedDocument = this.familyInformation.idTipoDocumento;
-                    this.selectedRelationship = this.familyInformation.idParentezco;
-                  console.log('de la dDB llega:', this.familyInformation.fechaNacimiento);
-                    let mom: moment.Moment = moment(this.familyInformation.fechaNacimiento, 'YYYY-MM-DD');
-                    this.familyInformation.fechaNacimiento = mom.format('DD/MM/YYYY') ;
-                  console.log('asdfa al front:', this.familyInformation.fechaNacimiento);
-                    if(this.selectedDocument === 1 || this.selectedDocument === 2) {
-                      this.maxDate.setFullYear(last18Year);
-                      this.range = `${lastYear}:${last18Year}`;
-                    }
+        this.route.params.subscribe((params: Params) => {
+          this.idTercero = params['tercero'];
+          this.familyInformationService.get(+params['id']).subscribe(
+            familyInformation => {
+              this.familyInformation = familyInformation;
+              this.selectedDocument = this.familyInformation.idTipoDocumento;
+              this.selectedRelationship = this.familyInformation.idParentezco;
+              let mom: moment.Moment = moment(this.familyInformation.fechaNacimiento, 'YYYY-MM-DD');
+              this.familyInformation.fechaNacimiento = mom.format('DD/MM/YYYY');
+              if (this.selectedDocument === 1 || this.selectedDocument === 2) {
+                this.maxDate.setFullYear(last18Year);
+                this.range = `${lastYear}:${last18Year}`;
+              }
 
-                });
+            });
+        });
         this.focusUP();
 
     }
@@ -117,10 +117,10 @@ export class FamilyInformationUpdateComponent implements OnInit {
         this.familyform.value.segundoNombre = this.capitalizeSave(this.familyform.value.segundoNombre);
         this.familyform.value.primerApellido = this.capitalizeSave(this.familyform.value.primerApellido);
         this.familyform.value.segundoApellido = this.capitalizeSave(this.familyform.value.segundoApellido);
-        console.log('llega:', this.familyform.value.fechaNacimiento);
         let mom: moment.Moment = moment(this.familyform.value.fechaNacimiento, 'DD/MM/YYYY');
         this.familyform.value.fechaNacimiento = mom.format('YYYY-MM-DD') ;
-        console.log('sale:', this.familyform.value.fechaNacimiento);
+        this.familyform.value.idTercero = this.idTercero;
+        this.familyform.value.idTerceroFamiliar = this.familyInformation.idTerceroFamiliar;
         this.familyInformationService.update(this.familyform.value)
           .subscribe(
             data => {
