@@ -72,7 +72,7 @@
                 <div class="ui-grid-col-4">
                     <label for="fechaNacimiento">* Fecha de nacimiento</label>
                     <p-calendar id="fechaNacimiento" name="fechaNacimiento"  [showIcon]="true"
-                                [maxDate]="maxDate" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
+                                [maxDate]="maxDate" [minDate]="minDate" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
                                 formControlName="fechaNacimiento" [dataType]="date" (onSelect)="onSelectMethod($event)" [disabled]="disabled"
                                 [(ngModel)]="familyInformation.fechaNacimiento"></p-calendar>
 

@@ -97,9 +97,17 @@ export class FamilyInformationUpdateComponent implements OnInit {
               this.selectedRelationship = this.familyInformation.idParentezco;
               let mom: moment.Moment = moment(this.familyInformation.fechaNacimiento, 'YYYY-MM-DD');
               this.familyInformation.fechaNacimiento = mom.format('DD/MM/YYYY');
-              if (this.selectedDocument === 1 || this.selectedDocument === 2) {
+
+              if(this.selectedDocument === 1) {
                 this.maxDate.setFullYear(last18Year);
                 this.range = `${lastYear}:${last18Year}`;
+              } else if (this.selectedDocument === 2) {
+                this.range = `${last18Year}:${year}`;
+                this.maxDate.setFullYear(year);
+                // this.minDate.setFullYear(last18Year);
+              } else {
+                this.maxDate.setFullYear(year);
+                this.range = `${last18Year}:${year}`;
               }
 
             });
@@ -170,9 +178,13 @@ export class FamilyInformationUpdateComponent implements OnInit {
     this.maxDate = new Date();
     this.maxDate.setMonth(month);
 
-    if(event.value === 1 || event.value === 2) {
+    if(event.value === 1) {
       this.maxDate.setFullYear(prev18Year);
       this.range = `${lastYear}:${prev18Year}`;
+    } else if (event.value === 2) {
+      this.range = `${prev18Year}:${year}`;
+      this.maxDate.setFullYear(year);
+      // this.minDate.setFullYear(prev18Year);
     } else {
       this.maxDate.setFullYear(year);
       this.range = `${prev20Year}:${year}`;
