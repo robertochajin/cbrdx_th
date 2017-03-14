@@ -1,6 +1,8 @@
 /**
  * Revisa si hay un tema en sesión HTML5 y carga el tema determinado
  * si no existe un determminado se asigna el color White (blanco).
+ *
+ * @autor CarlosPineda
  */
  if(sessionStorage.datatheme === undefined){
      $("head link#theme").attr("href", 'assets/css/color/' + 'white' + '.css');
@@ -12,6 +14,8 @@
 /**
  * Funcion que Cambia el tema por el seleccionado
  * @param color String
+ *
+ * @autor CarlosPineda
  */
  function changeTheme(color) {
    $("head link#theme").attr("href", 'assets/css/color/' + color + '.css');
