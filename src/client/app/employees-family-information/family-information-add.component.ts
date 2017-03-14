@@ -4,7 +4,7 @@ import { FamilyInformationService } from './family-information.service';
 import { ConstructorFamilyInformation } from './family-information.construct';
 import { SelectItem, ConfirmationService, Message } from 'primeng/primeng';
 import { FormBuilder, FormGroup, Validators, FormControl, NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 import { Location } from '@angular/common';
 import * as moment from 'moment/moment';
 import { NavService } from '../_services/_nav.service';
@@ -25,7 +25,7 @@ export class FamilyInformationAddComponent implements OnInit {
     relationship: SelectItem[] = [];
     selectedDocument: any;
     selectedRelationship: any;
-
+    idTercero: number;
     msgs: Message[] = [];
 
     familyform: FormGroup;
@@ -37,6 +37,7 @@ export class FamilyInformationAddComponent implements OnInit {
 
     constructor(
         private familyInformationService: FamilyInformationService,
+        private route: ActivatedRoute,
         private fb: FormBuilder,
         private confirmationService: ConfirmationService,
         private location: Location,
@@ -55,18 +56,18 @@ export class FamilyInformationAddComponent implements OnInit {
       };
         this.familyform = this.fb.group({
             'tipoDeDocumento': new FormControl('', Validators.required),
-            'numeroDeDocumento': new FormControl('', Validators.required),
+            'numeroDocumento': new FormControl('', Validators.required),
             'primerNombre': new FormControl('', Validators.required),
             'segundoNombre': new FormControl(''),
             'primerApellido': new FormControl('', Validators.required),
             'segundoApellido': new FormControl(''),
-            'fechadeNacimiento': new FormControl('', Validators.compose([Validators.required])),
+            'fechaNacimiento': new FormControl('', Validators.compose([Validators.required])),
             'correoElectronico': new FormControl('', Validators.compose([Validators.required])),
-            'parentesco': new FormControl('', Validators.required),
-            'telefono1': new FormControl('', Validators.required),
-            'telefono2': new FormControl(''),
-            'direccionDeResidencia': new FormControl('', Validators.required),
-            'convive': new FormControl('')
+            'idParentezco': new FormControl('', Validators.required),
+            'telefonoFijo': new FormControl('', Validators.required),
+            'telefonoCelular': new FormControl(''),
+            'direccion': new FormControl('', Validators.required),
+            'idConvivencia': new FormControl('')
         });
         this.familyInformationService.getDocumentType().subscribe(
             documentTypes => this.documentTypes = documentTypes
@@ -75,7 +76,9 @@ export class FamilyInformationAddComponent implements OnInit {
             relationship => this.relationship = relationship
         );
         this.familyInformation.segundoApellido = this.familyInformation.segundoNombre = '';
-
+      this.route.params.subscribe((params: Params) => {
+        this.idTercero = params['tercero'];
+      });
         let today = new Date();
         let month = today.getMonth();
         let year = today.getFullYear();
@@ -97,6 +100,9 @@ export class FamilyInformationAddComponent implements OnInit {
         this.familyform.value.segundoNombre = this.capitalizeSave(this.familyform.value.segundoNombre);
         this.familyform.value.primerApellido = this.capitalizeSave(this.familyform.value.primerApellido);
         this.familyform.value.segundoApellido = this.capitalizeSave(this.familyform.value.segundoApellido);
+        let mom: moment.Moment = moment(this.familyform.value.fechaNacimiento, 'DD/MM/YYYY');
+        this.familyform.value.fechaNacimiento = mom.format('YYYY-MM-DD');
+        this.familyform.value.idTercero = this.idTercero;
 
         this.familyInformationService.add(this.familyform.value)
             .subscribe(

@@ -13,6 +13,8 @@ export class EmployeesService {
 
   //au = 'http://localhost:8445/employees';  //para cambios rápidos locales
   au = 'http://40.71.92.147:8445/employees'; //dominio se debe cambiar a negocio.
+
+  //au = 'http://192.168.1.54:8445/employees'; //dominio se debe cambiar a negocio.
     headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) {}
