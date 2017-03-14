@@ -129,8 +129,7 @@ export class LocationUpdateComponent implements OnInit {
         localizacion: this.employLocation
       };
 
-      this.locationService.update(tercero)
-        .subscribe(
+      this.locationService.update(tercero).subscribe(
         data => {
           this._nav.setTab(2);
           this.location.back();
