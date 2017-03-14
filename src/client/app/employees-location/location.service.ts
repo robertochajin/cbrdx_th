@@ -48,7 +48,7 @@ export class LocationService {
 
   update(f: any) {
     return this.http.put(API_URL + '/employeesLocations/', f)
-      .map((res: Response) => res.json());
+      .map((res: Response) => res);
   }
 
   get(id: number) {
@@ -58,6 +58,6 @@ export class LocationService {
 
   delete(f: any) {
     return this.http.put(API_URL + '/employeesLocations/', f)
-      .map((res: Response) => res.json());
+      .map((res: Response) => res);
   }
 }
