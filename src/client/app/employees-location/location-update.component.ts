@@ -36,6 +36,7 @@ export class LocationUpdateComponent implements OnInit {
   complementaries: any;
   finalAddress: string;
   cityList: any;
+  hoodList: any;
   map: any;
   idTercero: any;
 
@@ -120,12 +121,24 @@ export class LocationUpdateComponent implements OnInit {
     );
   }
 
+  hoodSearch(event: any) {
+    this.locationService.getAllHoods(event.query).subscribe(
+      hoods => this.hoodList = hoods
+    );
+  }  
+
   captureId(event: any) {
-    this.employLocation.ciudad.value = event.value;
-    this.employLocation.ciudad.label = event.label;
-    this.copyAutocomplete = event.label;
+    this.employLocation.ciudad.value = event.idDivisionPolitica;
+    this.employLocation.ciudad.label = event.descripcionDivisionPolitica;
+    this.copyAutocomplete = event.descripcionDivisionPolitica;
     this.composeAddress();
   }
+
+  captureHoodId(event: any) {
+    this.employLocation.barrio.value = event.idDivisionPolitica;
+    this.employLocation.barrio.label = event.descripcionDivisionPolitica;
+  }
+
   capturePrincipalNomenclature(event: any) {
     this.labelPrincipalNomenclature = event.originalEvent.srcElement.innerText.trim();
     this.composeAddress();
