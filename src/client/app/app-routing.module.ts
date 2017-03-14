@@ -54,8 +54,8 @@ const routes = [
 
   //Información familiar de employees
   {path: 'employees-family-information', component: FamilyInformationComponent},
-  {path: 'employees-family-information/add', component: FamilyInformationAddComponent},
-  {path: 'employees-family-information/update/:id', component: FamilyInformationUpdateComponent},
+  {path: 'employees-family-information/add/:tercero', component: FamilyInformationAddComponent},
+  {path: 'employees-family-information/update/:id/:tercero', component: FamilyInformationUpdateComponent},
   {path: 'employees-family-information/detail/:id', component: FamilyInformationDetailComponent},
 
   //Información de referencia de employees

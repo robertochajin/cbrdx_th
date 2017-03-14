@@ -11,11 +11,11 @@ export class FamilyInformationService {
     constructor(private http: Http) {}
 
     getAll()  {
-        return this.http.get(API_URL +'/terceroFamily').map((res:Response) => res.json());
+        return this.http.get(API_URL +'/terceroFamily').map((res:Response) => res.json() as ConstructorFamilyInformation[]);
     }
 
     getAllByEmployee(id: number) {
-      return this.http.get(API_URL + '/terceroFamily/employee/' + id)
+      return this.http.get(API_URL + '/terceroFamily/employee/habilitated/' + id)
         .map((res:Response) => res.json());
     }
 
@@ -24,13 +24,13 @@ export class FamilyInformationService {
     };
 
     update(f: ConstructorFamilyInformation) {
-        return this.http.put(API_URL +'/terceroFamily/'+ f.idFamiliar,f).map((res:Response) => res.json());
+        return this.http.put(API_URL +'/terceroFamily/',f).map((res:Response) => res.json());
     }
 
     get(id: number) {
-        //return this.http.get(API_URL +'/terceroFamily/'+ id)
-        return this.http.get('http://40.71.92.147:8445/Vfamily/'+ id)
-                .map((res:Response) => res.json() as ConstructorFamilyInformation);
+      //return this.http.get('http://40.71.92.147:8445/Vfamily/'+ id)
+      return this.http.get(API_URL +'/terceroFamily/'+ id)
+        .map((res:Response) => res.json() as ConstructorFamilyInformation);
     }
 
     delete(f: ConstructorFamilyInformation) {
@@ -38,8 +38,8 @@ export class FamilyInformationService {
     }
 
     getDocumentType()  {
-        //return this.http.get(API_URL +'/document-types')
-        return this.http.get(API_URL +'http://40.71.92.147:8445/documenttype')
+        //return this.http.get(API_URL +'/documenttype')
+        return this.http.get('http://40.71.92.147:8445/documenttype')
           .map((res:Response) => res.json());
     }
 
