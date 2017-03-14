@@ -152,14 +152,16 @@ export class FamilyInformationAddComponent implements OnInit {
       this.maxDate = new Date();
 
 
-      if(event.value === 1 || event.value === 2) {
-        this.maxDate.setMonth(month);
+      if(this.selectedDocument === 1) {
         this.maxDate.setFullYear(prev18Year);
         this.range = `${lastYear}:${prev18Year}`;
-      } else {
-        this.maxDate.setMonth(month);
+      } else if (this.selectedDocument === 2) {
+        this.range = `${prev18Year}:${year}`;
         this.maxDate.setFullYear(year);
-        this.range = `${prev20Year}:${year}`;
+        // this.minDate.setFullYear(last18Year);
+      } else {
+        this.maxDate.setFullYear(year);
+        this.range = `${prev18Year}:${year}`;
       }
 
       if((this.familyInformation.fechaNacimiento) === null || (this.familyInformation.fechaNacimiento) === '' ) {
