@@ -55,18 +55,18 @@ export class FamilyInformationAddComponent implements OnInit {
       };
         this.familyform = this.fb.group({
             'tipoDeDocumento': new FormControl('', Validators.required),
-            'numeroDeDocumento': new FormControl('', Validators.required),
+            'numeroDocumento': new FormControl('', Validators.required),
             'primerNombre': new FormControl('', Validators.required),
             'segundoNombre': new FormControl(''),
             'primerApellido': new FormControl('', Validators.required),
             'segundoApellido': new FormControl(''),
-            'fechadeNacimiento': new FormControl('', Validators.compose([Validators.required])),
+            'fechaNacimiento': new FormControl('', Validators.compose([Validators.required])),
             'correoElectronico': new FormControl('', Validators.compose([Validators.required])),
-            'parentesco': new FormControl('', Validators.required),
-            'telefono1': new FormControl('', Validators.required),
-            'telefono2': new FormControl(''),
-            'direccionDeResidencia': new FormControl('', Validators.required),
-            'convive': new FormControl('')
+            'idParentezco': new FormControl('', Validators.required),
+            'telefonoFijo': new FormControl('', Validators.required),
+            'telefonoCelular': new FormControl(''),
+            'direccion': new FormControl('', Validators.required),
+            'idConvivencia': new FormControl('')
         });
         this.familyInformationService.getDocumentType().subscribe(
             documentTypes => this.documentTypes = documentTypes

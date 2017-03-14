@@ -29,11 +29,12 @@ export class EmployeesComponent {
         this.employeesService.getAll().subscribe(
             employees => {
               this.employees = employees;
-              this.employees.forEach(function(obj, index){
-                obj.nombreCompleto = obj.primerNombre+' '+obj.segundoNombre+' '+obj.primerApellido+' '+obj.segundoApellido;
+              this.employees.forEach(e => {
+                e.nombreCompleto = e.primerNombre+' '+e.segundoNombre+' '+e.primerApellido+' '+e.segundoApellido;
               });
             }
         );
+
     }
 
     del(employee: Employee) {

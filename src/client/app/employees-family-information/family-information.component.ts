@@ -4,6 +4,7 @@ import { FamilyInformationService } from './family-information.service';
 import { ConstructorFamilyInformation } from './family-information.construct';
 import { ConfirmationService } from 'primeng/primeng';
 import { Employee } from '../employees/employees';
+import * as moment from 'moment/moment';
 
 @Component({
     moduleId: module.id,
@@ -24,8 +25,16 @@ export class FamilyInformationComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.familyInformationService.getAllByEmployee(this.employee.idTercero).subscribe(
-            familyInformations => this.familyInformations = familyInformations
+
+        this.familyInformationService.getAll().subscribe(
+        //this.familyInformationService.getAllByEmployee(this.employee.idTercero).subscribe(
+            familyInformations => {
+              this.familyInformations = familyInformations;
+              this.familyInformations.forEach(e => {
+                e.nombreCompleto = e.primerNombre+' '+e.segundoNombre+' '+e.primerApellido+' '+e.segundoApellido;
+                e.edad = moment(e.fechaNacimiento,'YYYY-MM-DD').toNow(true).toString();
+              });
+            }
         );
     }
 

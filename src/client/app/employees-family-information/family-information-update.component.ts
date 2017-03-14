@@ -65,21 +65,24 @@ export class FamilyInformationUpdateComponent implements OnInit {
 
         this.familyform = this.fb.group({
           'tipoDeDocumento': new FormControl('', Validators.required),
-          'numeroDeDocumento': new FormControl('', Validators.required),
+          'numeroDocumento': new FormControl('', Validators.required),
           'primerNombre': new FormControl('', Validators.required),
           'segundoNombre': new FormControl(''),
           'primerApellido': new FormControl('', Validators.required),
           'segundoApellido': new FormControl(''),
-          'fechadeNacimiento': new FormControl('', Validators.compose([Validators.required])),
+          'fechaNacimiento': new FormControl('', Validators.compose([Validators.required])),
           'correoElectronico': new FormControl('', Validators.compose([Validators.required])),
-          'parentesco': new FormControl('', Validators.required),
-          'telefono1': new FormControl('', Validators.required),
-          'telefono2': new FormControl(''),
-          'direccionDeResidencia': new FormControl('', Validators.required),
-          'convive': new FormControl('')
+          'idParentezco': new FormControl('', Validators.required),
+          'telefonoFijo': new FormControl('', Validators.required),
+          'telefonoCelular': new FormControl(''),
+          'direccion': new FormControl('', Validators.required),
+          'idConvivencia': new FormControl('')
         });
         this.familyInformationService.getDocumentType().subscribe(
-            documentTypes => this.documentTypes = documentTypes
+            documentTypes => {
+              documentTypes.push({label: 'Seleccione', value: null});
+              this.documentTypes = documentTypes;
+            }
         );
         this.familyInformationService.getRelationship().subscribe(
             relationship => this.relationship = relationship
@@ -90,7 +93,11 @@ export class FamilyInformationUpdateComponent implements OnInit {
                 familyInformation => {
                     this.familyInformation = familyInformation;
                     this.selectedDocument = this.familyInformation.idTipoDocumento;
-                    this.selectedRelationship = this.familyInformation.idParentesco;
+                    this.selectedRelationship = this.familyInformation.idParentezco;
+                  console.log('de la dDB llega:', this.familyInformation.fechaNacimiento);
+                    let mom: moment.Moment = moment(this.familyInformation.fechaNacimiento, 'YYYY-MM-DD');
+                    this.familyInformation.fechaNacimiento = mom.format('DD/MM/YYYY') ;
+                  console.log('asdfa al front:', this.familyInformation.fechaNacimiento);
                     if(this.selectedDocument === 1 || this.selectedDocument === 2) {
                       this.maxDate.setFullYear(last18Year);
                       this.range = `${lastYear}:${last18Year}`;
@@ -110,7 +117,10 @@ export class FamilyInformationUpdateComponent implements OnInit {
         this.familyform.value.segundoNombre = this.capitalizeSave(this.familyform.value.segundoNombre);
         this.familyform.value.primerApellido = this.capitalizeSave(this.familyform.value.primerApellido);
         this.familyform.value.segundoApellido = this.capitalizeSave(this.familyform.value.segundoApellido);
-
+        console.log('llega:', this.familyform.value.fechaNacimiento);
+        let mom: moment.Moment = moment(this.familyform.value.fechaNacimiento, 'DD/MM/YYYY');
+        this.familyform.value.fechaNacimiento = mom.format('YYYY-MM-DD') ;
+        console.log('sale:', this.familyform.value.fechaNacimiento);
         this.familyInformationService.update(this.familyform.value)
           .subscribe(
             data => {
@@ -160,16 +170,15 @@ export class FamilyInformationUpdateComponent implements OnInit {
     this.maxDate = new Date();
     this.maxDate.setMonth(month);
 
-    if(event.value === 1 || event.value === 2){
+    if(event.value === 1 || event.value === 2) {
       this.maxDate.setFullYear(prev18Year);
       this.range = `${lastYear}:${prev18Year}`;
-    }else{
+    } else {
       this.maxDate.setFullYear(year);
       this.range = `${prev20Year}:${year}`;
     }
 
-    if((this.familyInformation.fechaNacimiento) === null || (this.familyInformation.fechaNacimiento) === '' ){
-    } else {
+    if((this.familyInformation.fechaNacimiento) !== null && (this.familyInformation.fechaNacimiento) !== '' ) {
       let timestamp2 = new Date(this.maxDate).getTime();
       let timestamp1 = new Date(this.familyInformation.fechaNacimiento).getTime();
       let timeDiff = Math.round(timestamp2 - timestamp1);
