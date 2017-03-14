@@ -35,17 +35,30 @@ export class LocationComponent implements OnInit {
     l = null;
   }
 
-  del(f: EmployeesLocation) {
-    this.dialogObjet = f;
+  del(f: any) {
     this.confirmationService.confirm({
       message: ` ¿Esta seguro que desea eliminar?`,
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
-        this.locationService.delete(this.dialogObjet);
-        this.employeesLocations.splice(this.employeesLocations.indexOf(this.dialogObjet), 1);
+        let tercero: any = {
+          idTercero: this.colaborador.idTercero,
+          auditoriaFecha: '',
+          auditoriaUsuario: 1,
+          indicadorHabilitado: false,
+          idLocalizacion: f.idLocalizacion,
+          localizacion: f.localizacion
+        };
+
+        tercero.localizacion.indicadorHabilitado = false;
+
+        this.locationService.update(tercero).subscribe(
+          data => {
+            this.employeesLocations.splice(this.employeesLocations.indexOf(f), 1);
+            alert("Se eliminó exitosamente el registro");
+          });
         this.dialogObjet = null;
-      }, reject: () => {}
+      }, reject: () => { }
     });
   }
 
@@ -58,6 +71,6 @@ export class LocationComponent implements OnInit {
   }
 
   update(l: any) {
-    this.router.navigate(['employees-location/update/' + l.localizacion.idUbicacion]);
+    this.router.navigate(['employees-location/update/' + l.localizacion.idUbicacion + '/' + this.colaborador.idTercero]);
   }
 }
