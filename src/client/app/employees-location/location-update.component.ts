@@ -1,25 +1,25 @@
 import 'rxjs/add/operator/switchMap';
-import {Component, Input,OnInit } from '@angular/core';
-import {LocationService} from './location.service';
-import {EmployeesLocation} from './employees-location';
-import {SelectItem, ConfirmationService, Message} from 'primeng/primeng';
-import {Router, ActivatedRoute, Params}  from '@angular/router';
-import {Location}  from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+import { LocationService } from './location.service';
+import { EmployeesLocation } from './employees-location';
+import { SelectItem, ConfirmationService, Message } from 'primeng/primeng';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
 declare let google: any;
-import {NavService}                 from '../_services/_nav.service';
+import { NavService } from '../_services/_nav.service';
 
 @Component({
   moduleId: module.id,
   selector: 'add-location',
   templateUrl: 'location-form.component.html',
-  providers:  [ConfirmationService]
+  providers: [ConfirmationService]
 })
 
-export class LocationUpdateComponent implements  OnInit {
+export class LocationUpdateComponent implements OnInit {
 
   @Input()
-  employLocation :EmployeesLocation= new EmployeesLocation();
-  header:string = 'Editando Ubicación';
+  employLocation: EmployeesLocation = new EmployeesLocation();
+  header: string = 'Editando Ubicación';
 
   principalNomenclatureList: any;
   complementaryNomenclatureList: any;
@@ -33,10 +33,11 @@ export class LocationUpdateComponent implements  OnInit {
   numberOne: string;
   numberTwo: string;
 
-  complementaries:any;
+  complementaries: any;
   finalAddress: string;
   cityList: any;
   map: any;
+  idTercero: any;
 
   submitted: boolean;
   msgs: Message[] = [];
@@ -47,11 +48,12 @@ export class LocationUpdateComponent implements  OnInit {
     private location: Location,
     private confirmationService: ConfirmationService,
     private route: ActivatedRoute,
-    private _nav:NavService
+    private _nav: NavService
   ) {
-    this.complementaries = [{tipo: null, detalle: ''}];
-    this.employLocation.ciudad = {value: null, label: ''};
-    this.employLocation.tipoDireccion = {value: null, label: ''};
+    this.complementaries = [{ tipo: null, detalle: '' }];
+    this.employLocation.ciudad = { value: null, label: '' };
+    this.employLocation.barrio = { value: null, label: '' };
+    this.employLocation.tipoDireccion = { value: null, label: '' };
   }
 
   ngOnInit() {
@@ -67,78 +69,91 @@ export class LocationUpdateComponent implements  OnInit {
       addressTypeList => this.addressTypeList = addressTypeList
     );
 
-    this.route.params
-      .switchMap((params: Params) => this.locationService.get(+params['id']))
-      .subscribe(employLocation => {
+    this.route.params.subscribe((params: Params) => {
+      this.locationService.get(params['id']).subscribe(employLocation => {
+        this.idTercero = params['tercero'];
         this.employLocation = employLocation;
         this.finalAddress = this.employLocation.direccion;
         this.copyAutocomplete = this.employLocation.ciudad.label;
         var mapProp = {
-            center: new google.maps.LatLng(this.employLocation.latitud, this.employLocation.longitud),
-            zoom: 15,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-          var latLng = new google.maps.LatLng(this.employLocation.latitud, this.employLocation.longitud);
-          this.map = new google.maps.Map(document.getElementById('ubicacionColaborador'), mapProp);
-          var marker = new google.maps.Marker({position: latLng, map: this.map});
+          center: new google.maps.LatLng(this.employLocation.latitud, this.employLocation.longitud),
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var latLng = new google.maps.LatLng(this.employLocation.latitud, this.employLocation.longitud);
+        this.map = new google.maps.Map(document.getElementById('ubicacionColaborador'), mapProp);
+        var marker = new google.maps.Marker({ position: latLng, map: this.map });
       });
-      this.focusUP()
-
+    });
   }
-  onSubmit(value: string) {
-    if(this.copyAutocomplete != this.employLocation.ciudad.label){
-        this.employLocation.ciudad = {value:null, label:''};
-    }else {
-        this.submitted = true;
-        this.msgs = [];
-        this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
 
-        this.employLocation.direccion = this.finalAddress;
-        //this.employLocation.tipoDireccion.idTipoDireccion = this.selectedTipoDireccion;
-        this.locationService.add(this.employLocation)
-          .subscribe(
-            data => {
-              this._nav.setTab(2);
-              this.location.back();
-            });
+  onSubmit(value: string) {
+    if (this.copyAutocomplete != this.employLocation.ciudad.label) {
+      this.employLocation.ciudad = { value: null, label: '' };
+    } else {
+      this.submitted = true;
+      this.msgs = [];
+      this.msgs.push({ severity: 'info', summary: 'Success', detail: 'Guardando' });
+
+      this.employLocation.direccion = this.finalAddress;
+
+      let tercero: any = {
+        idTercero: this.idTercero,
+        auditoriaFecha: '',
+        auditoriaUsuario: 1,
+        idLocalizacion: this.employLocation.idUbicacion,
+        localizacion: this.employLocation
+      };
+
+      this.locationService.update(tercero)
+        .subscribe(
+        data => {
+          this._nav.setTab(2);
+          this.location.back();
+        });
     }
   }
 
-  citySearch(event:any) {
+  citySearch(event: any) {
     this.locationService.getAllCities(event.query).subscribe(
       cities => this.cityList = cities
     );
   }
 
-  captureId(event:any) {
+  captureId(event: any) {
     this.employLocation.ciudad.value = event.value;
     this.employLocation.ciudad.label = event.label;
     this.copyAutocomplete = event.label;
     this.composeAddress();
   }
-  capturePrincipalNomenclature(event:any) {
+  capturePrincipalNomenclature(event: any) {
     this.labelPrincipalNomenclature = event.originalEvent.srcElement.innerText.trim();
     this.composeAddress();
   }
 
-  composeAddress():void {
+  captureTipoDireccion(event: any) {
+    this.employLocation.tipoDireccion.value = event.value;
+    this.employLocation.tipoDireccion.label = event.originalEvent.srcElement.innerText.trim();
+  }  
+
+  composeAddress(): void {
 
     this.finalAddress = '';
-    this.finalAddress += this.labelPrincipalNomenclature  === undefined ? '': this.labelPrincipalNomenclature  + ' ';
-    this.finalAddress += this.principalNomenclature  === undefined ? '': this.principalNomenclature  + ' # ';
-    this.finalAddress += this.numberOne  === undefined ? '': this.numberOne  + ' - ';
-    this.finalAddress += this.numberTwo === undefined ? '': this.numberTwo + ' ';
+    this.finalAddress += this.labelPrincipalNomenclature === undefined ? '' : this.labelPrincipalNomenclature + ' ';
+    this.finalAddress += this.principalNomenclature === undefined ? '' : this.principalNomenclature + ' # ';
+    this.finalAddress += this.numberOne === undefined ? '' : this.numberOne + ' - ';
+    this.finalAddress += this.numberTwo === undefined ? '' : this.numberTwo + ' ';
 
-    if (this.finalAddress !== '' && this.employLocation.ciudad.label !== '' && this.employLocation.ciudad.label !== undefined ) {
+    if (this.finalAddress !== '' && this.employLocation.ciudad.label !== '' && this.employLocation.ciudad.label !== undefined) {
       //console.log(this.finalAddress + ' ' + this.employLocation.ciudad.label);
       let geocoder = new google.maps.Geocoder();
 
-      const assingLocation = (l:any ,t:any) => {
+      const assingLocation = (l: any, t: any) => {
         this.employLocation.latitud = l;
         this.employLocation.longitud = t;
       };
-      geocoder.geocode({'address': this.finalAddress + ' ' + this.employLocation.ciudad.label},
-        function (results:any, status:any) {
+      geocoder.geocode({ 'address': this.finalAddress + ' ' + this.employLocation.ciudad.label },
+        function (results: any, status: any) {
           if (status === google.maps.GeocoderStatus.OK) {
             let latitude = results[0].geometry.location.lat();
             let longitude = results[0].geometry.location.lng();
@@ -150,7 +165,7 @@ export class LocationUpdateComponent implements  OnInit {
               mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             var map = new google.maps.Map(document.getElementById('ubicacionColaborador'), mapOptions);
-            var marker = new google.maps.Marker({position: latLng, map: map});
+            var marker = new google.maps.Marker({ position: latLng, map: map });
 
             assingLocation(latitude, longitude);
           } else {
@@ -161,8 +176,8 @@ export class LocationUpdateComponent implements  OnInit {
     }
 
 
-    for (var c of this.complementaries){
-      if(c.tipo !== null) {
+    for (var c of this.complementaries) {
+      if (c.tipo !== null) {
         this.finalAddress += ' ' + c.tipo + ' ' + c.detalle + ' ';
       }
     }
@@ -170,13 +185,13 @@ export class LocationUpdateComponent implements  OnInit {
 
   }
   addComplementary(): void {
-    let complementary = {'tipo': 0, 'detalle': ''};
+    let complementary = { 'tipo': 0, 'detalle': '' };
     this.complementaries.push(complementary);
   }
 
-  removeComplementary(id:any): void {
+  removeComplementary(id: any): void {
     //console.log(id);
-    this.complementaries.splice(id,1);
+    this.complementaries.splice(id, 1);
   }
 
   goBack(): void {
@@ -194,7 +209,7 @@ export class LocationUpdateComponent implements  OnInit {
     });
   }
 
-  focusUP(){
+  focusUP() {
     const element = document.querySelector("#formulario");
     if (element) { element.scrollIntoView(element); }
   }

@@ -30,7 +30,7 @@ export class FormalStudiesComponent {
         );
     }
 
-    del(f: FormalStudies) {
+    delete(f: FormalStudies) {
         this.dialogObjet = f;
         this.confirmationService.confirm({
             message: ` ¿Esta seguro que lo desea eliminar?`,
@@ -57,22 +57,5 @@ export class FormalStudiesComponent {
 
     update(f: FormalStudies) {
         this.router.navigate(['employees-formal-studies/update/'+f.idEstudio]);
-    }
-    savecheck(f: FormalStudies){
-      this.dialogObjet = f;
-      this.confirmationService.confirm({
-        message: ` ¿Esta seguro que desea confirmar?`,
-        header: 'Corfirmación',
-        icon: 'fa fa-question-circle',
-        accept: () => {
-          this.academicEducationService.updateFormal( this.dialogObjet).subscribe();
-          this.dialogObjet = null;
-        },
-        reject: () => {
-          this.dialogObjet.confirmada = this.dialogObjet.confirmada==true ? false: true;
-          this.dialogObjet = null;
-        }
-      });
-
     }
 }

@@ -76,8 +76,8 @@ const routes = [
 
   //employees-location
   { path: 'employees-location', component: LocationComponent },
-  { path: 'employees-location/add', component: LocationAddComponent },
-  { path: 'employees-location/update/:id', component: LocationUpdateComponent },
+  { path: 'employees-location/add/:id', component: LocationAddComponent },
+  { path: 'employees-location/update/:id/:tercero', component: LocationUpdateComponent },
   { path: 'employees-location/detail/:id', component: LocationDetailComponent },
 
     //Experiencia laboral

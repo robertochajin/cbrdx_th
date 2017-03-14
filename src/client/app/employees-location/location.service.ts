@@ -1,52 +1,63 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { EmployeesLocation } from './employees-location';
+import { API_URL } from "../global";
+import { Employee } from "../employees/employees";
 
 @Injectable()
 export class LocationService {
 
-    constructor(private http: Http) {}
+  constructor(private http: Http) {
+  }
 
-    getAll()  {
-        return this.http.get('/api/employees-location')
-            .map((res:Response) => res.json().data);
-    }
+  getAllByEmployee(id: number) {
+    return this.http.get(API_URL + '/employeesLocations/employees/' + id)
+      .map((res: Response) => res.json());
+  }
 
-    getPrincipalNomenclatureList() {
-        return this.http.get('/api/principal-nomenclature')
-            .map((res:Response) => res.json().data);
-    }
+  getPrincipalNomenclatureList() {
+    return this.http.get(API_URL + '/nomenclatures/principal')
+      .map((res: Response) => res.json());
+  }
 
-    getComplementaryNomenclatureList() {
-        return this.http.get('/api/complementary-nomenclature')
-            .map((res:Response) => res.json().data);
-    }
+  getComplementaryNomenclatureList() {
+    return this.http.get(API_URL + '/nomenclatures/complementary')
+      .map((res: Response) => res.json());
+  }
 
-    getAddressTypeList() {
-        return this.http.get('/api/address-types')
-            .map((res:Response) => res.json().data);
-    }
+  getAddressTypeList() {
+    return this.http.get(API_URL + '/nomenclatures/addressType')
+      .map((res: Response) => res.json());
+  }
 
-    getAllCities(qr: any)  {
-        return this.http.get('/api/cities/s/'+ qr).map((res:Response) => res.json().data);
-    }
+  getAllCities(qr: any) {
+    return this.http.get(API_URL + '/divisionPolitica/cities/s/' + qr)
+      .map((res: Response) => res.json());
+  }
 
-    add(f: EmployeesLocation) {
-        return this.http.post('/api/employees-location',f).map((res:Response) => res.json());
-    };
+  getAllHoods(qr: any) {
+    //
+    return this.http.get(API_URL + '/divisionPolitica/hoods/s/' + qr)
+      .map((res: Response) => res.json());
+  }
 
-    update(f: EmployeesLocation) {
-        return this.http.put('/api/employees-location/'+ f.idUbicacion,f).map((res:Response) => res.json());
-    }
+  add(f: any) {
+    return this.http.post(API_URL + '/employeesLocations', f)
+      .map((res: Response) => res.json());
+  };
 
-    get(id: number) {
-        return this.http.get('/api/employees-location/'+ id)
-               .map((res:Response) => res.json().data as EmployeesLocation);
-    }
+  update(f: any) {
+    return this.http.put(API_URL + '/employeesLocations/', f)
+      .map((res: Response) => res.json());
+  }
 
-    delete(f: EmployeesLocation) {
-        const respuesta =  this.http.delete('/api/employees-location/'+ f.idUbicacion);
-        return respuesta.map((res:Response) => res.json());
-    }
+  get(id: number) {
+    return this.http.get(API_URL + '/employeesLocations/location/' + id)
+      .map((res: Response) => res.json());
+  }
 
+  delete(f: any) {
+    return this.http.put(API_URL + '/employeesLocations/', f)
+      .map((res: Response) => res.json());
+  }
 }

@@ -12,7 +12,6 @@ import { CitiesServices } from '../_services/cities.service';
 import { StudyStateServices } from '../_services/study-state.service';
 import { StudyTypeServices } from '../_services/study-type.service';
 import { StudyIntensityServices } from '../_services/study-intensity.service';
-import {NavService}                 from '../_services/_nav.service';
 
 @Component({
     moduleId: module.id,
@@ -42,7 +41,6 @@ export class NoFormalStudiesUpdateComponent implements OnInit{
   range: string;
   yeison: any;
   id_estado_estudio_finalizado = 2;  //hace falta definir acceso a constantes en servicio
-  copyAutocomplete: string;
 
   constructor(private academicEducationService: AcademicEducationService,
               private citiesServices: CitiesServices,
@@ -54,8 +52,7 @@ export class NoFormalStudiesUpdateComponent implements OnInit{
               private studyIntensityServices: StudyIntensityServices,
               private route: ActivatedRoute,
               private router: Router,
-              private location: Location,
-              private _nav:NavService) {
+              private location: Location) {
   }
 
     ngOnInit(): void {
@@ -89,26 +86,18 @@ export class NoFormalStudiesUpdateComponent implements OnInit{
 
       this.route.params
           .switchMap((params: Params) => this.academicEducationService.getNoFormal(+params['id']))
-          .subscribe(nfstudy => {
-            this.nfstudy = nfstudy;
-            this.copyAutocomplete = this.nfstudy.ciudad.label;
-          });
+          .subscribe(nfstudy => this.nfstudy = nfstudy);
     }
 
     onSubmit(value: string) {
-      if(this.copyAutocomplete != this.nfstudy.ciudad.label){
-        this.nfstudy.ciudad = {value:null, label:''};
-      }else {
-        this.submitted = true;
-        this.msgs = [];
-        this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
-        this.academicEducationService.updateNoFormal(this.nfstudy)
-          .subscribe(
-            data => {
-              this._nav.setTab(3);
-              this.location.back();
-            });
-      }
+      this.submitted = true;
+      this.msgs = [];
+      this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
+      this.academicEducationService.updateNoFormal(this.nfstudy)
+        .subscribe(
+          data => {
+            this.router.navigate(['/employees-no-formal-studies']);
+          });
     }
 
     citySearch(event:any) {
@@ -119,7 +108,6 @@ export class NoFormalStudiesUpdateComponent implements OnInit{
 
     captureCityId(event:any) {
       this.nfstudy.ciudad = event;
-      this.copyAutocomplete = event.label
     }
 
     onSelectBegin(event:any) {
@@ -146,8 +134,7 @@ export class NoFormalStudiesUpdateComponent implements OnInit{
         header: 'Corfirmación',
         icon: 'fa fa-question-circle',
         accept: () => {
-          this._nav.setTab(3);
-          this.location.back();
+          this.router.navigate(['/employees-no-formal-studies']);
         }
       });
     }

@@ -5,10 +5,8 @@
             <button type="button" pButton icon="fa-plus" (click)="add()" label="Nuevo Estudio"></button>
         </div>
         <div class="col-md-6 col-xs-12 datatable-header-search" >
-          <div class="input-group">
-            <div class="input-group-addon"><i class="fa fa-search"></i></div>
-            <input #gb type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
-          </div>
+            <i class="fa fa-search"></i>
+            <input #gb type="text" pInputText size="40" placeholder="Buscar...">
         </div>
     </div>
     <p-dataTable [value]="nfstudies"  [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
@@ -17,11 +15,7 @@
         <p-column field="finalizacion" header="Finalización" [sortable]="true"></p-column>
         <p-column field="ciudad.label" header="Ciudad" [sortable]="true"></p-column>
         <p-column field="institucion" header="Institución" [sortable]="true"></p-column>
-        <p-column field="confirmada" header="Confirmada" [sortable]="true">
-          <template  let-fstudy="rowData" pTemplate="body">
-            <p-checkbox [(ngModel)]="fstudy.confirmada" binary="true" (onChange)="savecheck(fstudy)"></p-checkbox>
-          </template>
-        </p-column>
+        <p-column field="confirmada" header="Confirmada" [sortable]="true"></p-column>
         <p-column header="Acciones" styleClass="datatable-col-action">
             <template let-study="rowData" pTemplate="body">
                 <div class="btn-group" role="group">
