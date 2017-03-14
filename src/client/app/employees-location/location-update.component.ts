@@ -44,6 +44,7 @@ export class LocationUpdateComponent implements OnInit {
   hoodList: any;
   map: any;
   idTercero: any;
+  idTerceroLocalizacion: any;
 
   submitted: boolean;
   msgs: Message[] = [];
@@ -96,6 +97,7 @@ export class LocationUpdateComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.locationService.get(params['id']).subscribe(employLocation => {
         this.idTercero = params['tercero'];
+        this.idTerceroLocalizacion = params['tl'];
         this.employLocation = employLocation;
         this.finalAddress = this.employLocation.direccion;
         this.copyAutocomplete = this.employLocation.ciudad.label;
@@ -123,6 +125,7 @@ export class LocationUpdateComponent implements OnInit {
 
       let tercero: any = {
         idTercero: this.idTercero,
+        idTerceroLocalizacion: this.idTerceroLocalizacion,
         auditoriaFecha: '',
         auditoriaUsuario: 1,
         idLocalizacion: this.employLocation.idUbicacion,
