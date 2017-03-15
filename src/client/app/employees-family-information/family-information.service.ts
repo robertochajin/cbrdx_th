@@ -24,7 +24,7 @@ export class FamilyInformationService {
     };
 
     update(f: ConstructorFamilyInformation) {
-        return this.http.put(API_URL +'/terceroFamily/',f).map((res:Response) => res.json());
+        return this.http.put(API_URL +'/terceroFamily/',f).map((res:Response) => res);
     }
 
     get(id: number) {
