@@ -17,7 +17,7 @@
           <div class="col-md-8">
             <h4>{{employee.nombreCompleto}} - {{employee.fechaNacimiento}}</h4>
             <span>{{employee.tipoDocumento.nombreListaTipoDocumentos}} {{employee.numeroDocumento}}</span><br/>
-            <span>{{employee.cargoActual}} - Area/oficina ({{employee.fechaDesde}})</span>
+            <span>{{employee.cargoActual}} - Contabilidad ({{employee.fechaCreacion}})</span>
           </div>
           <div class="col-md-2">
             <a href="#" class="btn btn-primary">Historial Laboral</a>
@@ -74,9 +74,9 @@
                 </form>
               </p-accordionTab>
 
-              <!--<p-accordionTab header="Información Familiar" [selected]="acordion == 1">
+              <p-accordionTab header="Información Familiar" [selected]="acordion == 1">
                <family-information *ngIf="employee.idTercero" [employee]="employee"></family-information>
-              </p-accordionTab>-->
+              </p-accordionTab>
 
               <p-accordionTab header="Ubicación" [selected]="acordion == 2">
                 <employees-locations *ngIf="employee.idTercero" [colaborador]="employee"></employees-locations>

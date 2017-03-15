@@ -29,12 +29,6 @@ export class LocationComponent implements OnInit {
     );
   }
 
-  delete(l: EmployeesLocation) {
-    this.locationService.delete(l);
-    this.employeesLocations.splice(this.employeesLocations.indexOf(l), 1);
-    l = null;
-  }
-
   del(f: any) {
     this.confirmationService.confirm({
       message: ` ¿Esta seguro que desea eliminar?`,
@@ -55,9 +49,7 @@ export class LocationComponent implements OnInit {
         this.locationService.update(tercero).subscribe(
           data => {
             this.employeesLocations.splice(this.employeesLocations.indexOf(f), 1);
-            alert("Se eliminó exitosamente el registro");
           });
-        this.dialogObjet = null;
       }, reject: () => { }
     });
   }
@@ -71,6 +63,6 @@ export class LocationComponent implements OnInit {
   }
 
   update(l: any) {
-    this.router.navigate(['employees-location/update/' + l.localizacion.idUbicacion + '/' + this.colaborador.idTercero]);
+    this.router.navigate(['employees-location/update/' + l.localizacion.idUbicacion + '/' + this.colaborador.idTercero + '/' + l.idTerceroLocalizacion]);
   }
 }

@@ -13,6 +13,8 @@ export class EmployeesService {
 
   //au = 'http://localhost:8445/employees';  //para cambios rápidos locales
   au = 'http://40.71.92.147:8445/employees'; //dominio se debe cambiar a negocio.
+
+  //au = 'http://192.168.1.54:8445/employees'; //dominio se debe cambiar a negocio.
     headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http) {}
@@ -31,6 +33,14 @@ export class EmployeesService {
 
     get(id: number) {
         return this.http.get(this.au+'/'+ id).map((res:Response) => res.json() as Employee);
+    }
+
+    getNacionalidad(id: number) {
+        return this.http.get('http://40.71.92.147:8445/vista/'+ id).map((res:Response) => res.json());
+    }
+
+    getCargoActual(id: number) {
+        return this.http.get('http://40.71.92.147:8446/tercerosCargos/'+ id).map((res:Response) => res.json());
     }
 
     delete(c: Employee) {

@@ -23,17 +23,27 @@ export class EmployeesDetailComponent implements OnInit   {
     ) {}
 
     ngOnInit(): void {
-      this.route.params.switchMap((params: Params) => this.employeeService.get(+params['id']))
-          .subscribe(employee => {
-            this.employee = employee;
-            this.employee.nombreCompleto = this.employee.primerNombre+' '+
-                                           this.employee.segundoNombre+' '+
-                                           this.employee.primerApellido+' '+
-                                           this.employee.segundoApellido;
+      this.route.params.subscribe((params: Params) => {
+        this.employeeService.get(+params['id']).subscribe(employee => {
+          this.employee = employee;
+          this.employee.nombreCompleto = this.employee.primerNombre+' '+
+            this.employee.segundoNombre+' '+
+            this.employee.primerApellido+' '+
+            this.employee.segundoApellido;
 
-            this.employee.cargoActual = 'FALTA CARGO';
-            this.employee.nacionalidad = 'FALTA NACIONALIDAD';
+          this.employee.nacionalidad = 'cargando...';
+          this.employee.cargoActual = 'cargando...';
+
+          this.route.params.subscribe((params: Params) => {
+            this.employeeService.getCargoActual(+params['id']).subscribe(c => {
+              this.employee.cargoActual = c.cargo.cargo;});
           });
+
+          this.employeeService.getNacionalidad(this.employee.ciudadNacimiento.idDivisionPolitica)
+              .subscribe(c => this.employee.nacionalidad = c.camino);
+
+        });
+      });
 
       this.acordion = this._nav.getTab();
 

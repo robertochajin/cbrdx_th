@@ -25,7 +25,12 @@ export class LocationUpdateComponent implements OnInit {
   complementaryNomenclatureList: any;
   addressTypeList: any;
 
+  lista: SelectItem[];
+  listaTipoDireccion: SelectItem[];
+  listaComplementary: SelectItem[];
+
   selectedPrincipalNomenclature: SelectItem[] = [];
+  selectedAddressType: SelectItem[] = [];
   labelPrincipalNomenclature: string;
   copyAutocomplete: string;
 
@@ -36,8 +41,10 @@ export class LocationUpdateComponent implements OnInit {
   complementaries: any;
   finalAddress: string;
   cityList: any;
+  hoodList: any;
   map: any;
   idTercero: any;
+  idTerceroLocalizacion: any;
 
   submitted: boolean;
   msgs: Message[] = [];
@@ -58,20 +65,39 @@ export class LocationUpdateComponent implements OnInit {
 
   ngOnInit() {
 
-
     this.locationService.getPrincipalNomenclatureList().subscribe(
-      principalNomenclatureList => this.principalNomenclatureList = principalNomenclatureList
-    );
+      principalNomenclatureList => {
+        this.lista = [];
+        this.lista.push({ label: 'Seleccione una...', value: null });
+        for (let pn of principalNomenclatureList) {
+          this.lista.push({ label: pn.label, value: pn.value });
+        }
+        // this.principalNomenclatureList = principalNomenclatureList
+        this.principalNomenclatureList = this.lista;
+      });
     this.locationService.getComplementaryNomenclatureList().subscribe(
-      complementaryNomenclatureList => this.complementaryNomenclatureList = complementaryNomenclatureList
-    );
+      complementaryNomenclatureList => {
+        this.listaComplementary = [];
+        this.listaComplementary.push({ label: 'Seleccione una...', value: null });
+        for (let pn of complementaryNomenclatureList) {
+          this.listaComplementary.push({ label: pn.label, value: pn.value });
+        }
+        this.complementaryNomenclatureList = this.listaComplementary;
+      });
     this.locationService.getAddressTypeList().subscribe(
-      addressTypeList => this.addressTypeList = addressTypeList
-    );
+      addressTypeList => {
+        this.listaTipoDireccion = [];
+        this.listaTipoDireccion.push({ label: 'Seleccione una...', value: null });
+        for (let pn of addressTypeList) {
+          this.listaTipoDireccion.push({ label: pn.label, value: pn.value });
+        }
+        this.addressTypeList = this.listaTipoDireccion;
+      });
 
     this.route.params.subscribe((params: Params) => {
       this.locationService.get(params['id']).subscribe(employLocation => {
         this.idTercero = params['tercero'];
+        this.idTerceroLocalizacion = params['tl'];
         this.employLocation = employLocation;
         this.finalAddress = this.employLocation.direccion;
         this.copyAutocomplete = this.employLocation.ciudad.label;
@@ -99,14 +125,14 @@ export class LocationUpdateComponent implements OnInit {
 
       let tercero: any = {
         idTercero: this.idTercero,
+        idTerceroLocalizacion: this.idTerceroLocalizacion,
         auditoriaFecha: '',
         auditoriaUsuario: 1,
         idLocalizacion: this.employLocation.idUbicacion,
         localizacion: this.employLocation
       };
 
-      this.locationService.update(tercero)
-        .subscribe(
+      this.locationService.update(tercero).subscribe(
         data => {
           this._nav.setTab(2);
           this.location.back();
@@ -120,12 +146,24 @@ export class LocationUpdateComponent implements OnInit {
     );
   }
 
+  hoodSearch(event: any) {
+    this.locationService.getAllHoods(event.query).subscribe(
+      hoods => this.hoodList = hoods
+    );
+  }
+
   captureId(event: any) {
-    this.employLocation.ciudad.value = event.value;
-    this.employLocation.ciudad.label = event.label;
-    this.copyAutocomplete = event.label;
+    this.employLocation.ciudad.value = event.idDivisionPolitica;
+    this.employLocation.ciudad.label = event.descripcionDivisionPolitica;
+    this.copyAutocomplete = event.descripcionDivisionPolitica;
     this.composeAddress();
   }
+
+  captureHoodId(event: any) {
+    this.employLocation.barrio.value = event.idDivisionPolitica;
+    this.employLocation.barrio.label = event.descripcionDivisionPolitica;
+  }
+
   capturePrincipalNomenclature(event: any) {
     this.labelPrincipalNomenclature = event.originalEvent.srcElement.innerText.trim();
     this.composeAddress();
@@ -134,7 +172,7 @@ export class LocationUpdateComponent implements OnInit {
   captureTipoDireccion(event: any) {
     this.employLocation.tipoDireccion.value = event.value;
     this.employLocation.tipoDireccion.label = event.originalEvent.srcElement.innerText.trim();
-  }  
+  }
 
   composeAddress(): void {
 
@@ -178,7 +216,17 @@ export class LocationUpdateComponent implements OnInit {
 
     for (var c of this.complementaries) {
       if (c.tipo !== null) {
-        this.finalAddress += ' ' + c.tipo + ' ' + c.detalle + ' ';
+        switch (c.tipo) {
+          case 1:
+            this.finalAddress += ' Casa' + ' ' + c.detalle + ' ';
+            break;
+          case 2:
+            this.finalAddress += ' Bloque' + ' ' + c.detalle + ' ';
+            break;
+          case 3:
+            this.finalAddress += ' Apartamento' + ' ' + c.detalle + ' ';
+            break;
+        }
       }
     }
     this.employLocation.direccion = this.finalAddress;

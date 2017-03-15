@@ -27,10 +27,10 @@
                     </div>
                 </div>
                 <div class="ui-grid-col-6">
-                    <label for="numeroDeDocumento">* Número de documento</label>
-                    <input id="numeroDeDocumento" name="numeroDeDocumento" pInputText type="text" formControlName="numeroDeDocumento"
+                    <label for="numeroDocumento">* Número de documento</label>
+                    <input id="numeroDocumento" name="numeroDocumento" pInputText type="text" formControlName="numeroDocumento"
                            [(ngModel)]="familyInformation.numeroDocumento"/>
-                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['numeroDeDocumento'].valid&&familyform.controls['numeroDeDocumento'].dirty">
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['numeroDocumento'].valid&&familyform.controls['numeroDocumento'].dirty">
                         <i class="fa fa-close"></i>
                         Número de documento es requerido
                     </div>
@@ -70,13 +70,13 @@
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4">
-                    <label for="fechadeNacimiento">* Fecha de nacimiento</label>
-                    <p-calendar id="fechadeNacimiento" name="fechadeNacimiento"  [showIcon]="true"
-                                [maxDate]="maxDate" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
-                                formControlName="fechadeNacimiento" [dataType]="date" (onSelect)="onSelectMethod($event)" [disabled]="disabled"
+                    <label for="fechaNacimiento">* Fecha de nacimiento</label>
+                    <p-calendar id="fechaNacimiento" name="fechaNacimiento"  [showIcon]="true"
+                                [maxDate]="maxDate" [minDate]="minDate" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
+                                formControlName="fechaNacimiento" [dataType]="date" (onSelect)="onSelectMethod($event)" [disabled]="disabled"
                                 [(ngModel)]="familyInformation.fechaNacimiento"></p-calendar>
 
-                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['fechadeNacimiento'].valid && familyform.controls['fechadeNacimiento'].dirty">
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['fechaNacimiento'].valid && familyform.controls['fechaNacimiento'].dirty">
                         <i class="fa fa-close"></i>
                         Fecha de nacimiento es requerida
                     </div>
@@ -92,43 +92,43 @@
                     </div>
                 </div>
                 <div class="ui-grid-col-4">
-                    <label for="parentesco">* Parentesco</label>
-                    <p-dropdown id="parentesco"  name="parentesco" [options]="relationship" formControlName="parentesco" [autoWidth]="false"
+                    <label for="idParentezco">* Parentezco</label>
+                    <p-dropdown id="idParentezco"  name="idParentezco" [options]="relationship" formControlName="idParentezco" [autoWidth]="false"
                                 [(ngModel)]="selectedRelationship "></p-dropdown>
-                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['parentesco'].valid&&familyform.controls['parentesco'].dirty">
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['idParentezco'].valid&&familyform.controls['idParentezco'].dirty">
                         <i class="fa fa-close"></i>
-                        Parentesco es requerido
+                        Parentezco es requerido
                     </div>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-5">
-                    <label for="telefono1">* Teléfono 1</label>
-                    <input id="telefono1" name="telefono1" pInputText type="text" formControlName="telefono1"
+                    <label for="telefonoFijo">* Teléfono 1</label>
+                    <input id="telefonoFijo" name="telefonoFijo" pInputText type="text" formControlName="telefonoFijo"
                            [(ngModel)]="familyInformation.telefonoFijo"/>
-                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['telefono1'].valid&&familyform.controls['telefono1'].dirty">
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['telefonoFijo'].valid&&familyform.controls['telefonoFijo'].dirty">
                         <i class="fa fa-close"></i>
                         Teléfono es requerido
                     </div>
                 </div>
                 <div class="ui-grid-col-5">
-                    <label for="telefono2">Teléfono 2</label>
-                    <input id="telefono2" name="telefono2" pInputText type="text" formControlName="telefono2"
+                    <label for="telefonoCelular">Teléfono 2</label>
+                    <input id="telefonoCelular" name="telefonoCelular" pInputText type="text" formControlName="telefonoCelular"
                            [(ngModel)]="familyInformation.telefonoCelular" />
                 </div>
                 <div class="ui-grid-col-2">
-                    <label for="convive">Convive</label>
-                    <p-checkbox id="convive"  name="convive" formControlName="convive"
+                    <label for="idConvivencia">idConvivencia</label>
+                    <p-checkbox id="idConvivencia"  name="idConvivencia" formControlName="idConvivencia"
                                 [(ngModel)]="familyInformation.idConvivencia" binary="true"></p-checkbox>
 
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-12">
-                    <label for="direccionDeResidencia">* Dirección de residencia</label>
-                    <textarea id="direccionDeResidencia" name="direccionDeResidencia" pInputTextarea formControlName="direccionDeResidencia" rows="5"
+                    <label for="direccion">* Dirección de residencia</label>
+                    <textarea id="direccion" name="direccion" pInputTextarea formControlName="direccion" rows="5"
                               [(ngModel)]="familyInformation.direccion" ></textarea>
-                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['direccionDeResidencia'].valid&&familyform.controls['direccionDeResidencia'].dirty">
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!familyform.controls['direccion'].valid&&familyform.controls['direccion'].dirty">
                         <i class="fa fa-close"></i>
                         Dirección de residencia es requerido
                     </div>

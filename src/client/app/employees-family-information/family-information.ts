@@ -15,7 +15,7 @@ export interface FamilyInformation {
   direccion: string;
   numeroDocumento: string;
   idConvivencia: boolean;
-  nombreListaParentesco: any;
-  idParentesco : number;
+  nombreListaParentezco: any;
+  idParentezco : number;
 }
 

@@ -19,7 +19,7 @@
                 <div class="ui-grid-col-4">
                     <label for="tipoDireccionLabel">* Tipo de Dirección</label>
                     <p-dropdown id="tipoDireccionLabel" name="tipoDireccionLabel" [options]="addressTypeList" [autoWidth]="false" required="true"
-                        [(ngModel)]="employLocation.tipoDireccion.label" #tipoDireccionLabel="ngModel" (onChange)="captureTipoDireccion($event)"></p-dropdown>
+                        [(ngModel)]="selectedAddressType" #tipoDireccionLabel="ngModel" (onChange)="captureTipoDireccion($event)"></p-dropdown>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !tipoDireccionLabel.valid" (focus)="!tipoDireccionLabel.valid">
                         <i class="fa fa-close"></i> Tipo de Dirección es requerido
                     </div>

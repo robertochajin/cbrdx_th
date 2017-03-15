@@ -25,9 +25,12 @@ export class LocationAddComponent implements OnInit {
   principalNomenclatureList: any;
   complementaryNomenclatureList: any;
   addressTypeList: any;
-
+  lista: SelectItem[];
+  listaTipoDireccion: SelectItem[];
+  listaComplementary: SelectItem[];
   //selectedTipoDireccion: SelectItem[] = [];
   selectedPrincipalNomenclature: SelectItem[] = [];
+  selectedAddressType: SelectItem[] = [];
   labelPrincipalNomenclature: string;
   //selectedCity: any[] = [{value: null, label : ''}];
   copyAutocomplete: string;
@@ -60,14 +63,33 @@ export class LocationAddComponent implements OnInit {
 
 
     this.locationService.getPrincipalNomenclatureList().subscribe(
-      principalNomenclatureList => this.principalNomenclatureList = principalNomenclatureList
-    );
+      principalNomenclatureList => {
+        this.lista = [];
+        this.lista.push({label: 'Seleccione una...', value: null});
+        for (let pn of principalNomenclatureList){
+          this.lista.push({label: pn.label, value: pn.value});
+        }
+        // this.principalNomenclatureList = principalNomenclatureList
+        this.principalNomenclatureList = this.lista;
+      });
     this.locationService.getComplementaryNomenclatureList().subscribe(
-      complementaryNomenclatureList => this.complementaryNomenclatureList = complementaryNomenclatureList
-    );
+      complementaryNomenclatureList => {
+        this.listaComplementary = [];
+        this.listaComplementary.push({label: 'Seleccione una...', value: null});
+        for (let pn of complementaryNomenclatureList){
+          this.listaComplementary.push({label: pn.label, value: pn.value});
+        }
+        this.complementaryNomenclatureList = this.listaComplementary;
+      });
     this.locationService.getAddressTypeList().subscribe(
-      addressTypeList => this.addressTypeList = addressTypeList
-    );
+      addressTypeList => {
+        this.listaTipoDireccion = [];
+        this.listaTipoDireccion.push({label: 'Seleccione una...', value: null});
+        for (let pn of addressTypeList){
+          this.listaTipoDireccion.push({label: pn.label, value: pn.value});
+        }
+        this.addressTypeList = this.listaTipoDireccion;
+      });
 
     this.route.params.subscribe((params: Params) => {
       this.employLocation.colaborador = params['id'];
@@ -106,7 +128,6 @@ export class LocationAddComponent implements OnInit {
         }
       }
 
-      console.log(terceroLocalizacion);
       this.locationService.add(terceroLocalizacion)
         .subscribe(
         data => {
@@ -148,6 +169,7 @@ export class LocationAddComponent implements OnInit {
   captureTipoDireccion(event: any) {
     this.employLocation.tipoDireccion.value = event.value;
     this.employLocation.tipoDireccion.label = event.originalEvent.srcElement.innerText.trim();
+    console.log(this.employLocation.tipoDireccion)
   }
 
   composeAddress(): void {
@@ -192,7 +214,17 @@ export class LocationAddComponent implements OnInit {
 
     for (let c of this.complementaries) {
       if (c.tipo !== null) {
-        this.finalAddress += ' ' + c.tipo + ' ' + c.detalle + ' ';
+        switch (c.tipo) {
+          case 1:
+            this.finalAddress += ' Casa' + ' ' + c.detalle + ' ';
+            break;
+          case 2:
+            this.finalAddress += ' Bloque' + ' ' + c.detalle + ' ';
+            break;
+          case 3:
+            this.finalAddress += ' Apartamento' + ' ' + c.detalle + ' ';
+            break;
+        }
       }
     }
 
