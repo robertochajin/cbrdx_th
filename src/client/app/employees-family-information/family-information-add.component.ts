@@ -102,7 +102,7 @@ export class FamilyInformationAddComponent implements OnInit {
         this.familyform.value.segundoApellido = this.capitalizeSave(this.familyform.value.segundoApellido);
         let mom: moment.Moment = moment(this.familyform.value.fechaNacimiento, 'DD/MM/YYYY');
         this.familyform.value.fechaNacimiento = mom.format('YYYY-MM-DD');
-        this.familyform.value.idTercero = this.idTercero;
+        this.familyform.value.idFamiliar = this.idTercero;
 
         this.familyInformationService.add(this.familyform.value)
             .subscribe(

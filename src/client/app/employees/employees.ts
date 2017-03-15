@@ -53,6 +53,7 @@ export class Employee {
     //this.ciudadNacimiento = {/*idDivisionPoliticaPadre:null, */descripcionDivisionPolitica:''};
     //this.ciudadExpedicion = {/*idDivisionPoliticaPadre:null, */descripcionDivisionPolitica:''};
     this.nacionalidad = '';
+    this.cargoActual = '';
     this.estratoSocioEconomico = {value:null, label:''};
     this.genero = {
       codigoListaGenero: '',

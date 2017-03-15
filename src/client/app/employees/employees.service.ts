@@ -35,6 +35,14 @@ export class EmployeesService {
         return this.http.get(this.au+'/'+ id).map((res:Response) => res.json() as Employee);
     }
 
+    getNacionalidad(id: number) {
+        return this.http.get('http://40.71.92.147:8445/vista/'+ id).map((res:Response) => res.json());
+    }
+
+    getCargoActual(id: number) {
+        return this.http.get('http://40.71.92.147:8446/tercerosCargos/'+ id).map((res:Response) => res.json());
+    }
+
     delete(c: Employee) {
         const respuesta =  this.http.delete(this.au+'/'+ c.idTercero);
         return respuesta.map((res:Response) => res.json());
