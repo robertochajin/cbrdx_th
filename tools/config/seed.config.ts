@@ -48,7 +48,7 @@ export class SeedConfig {
    * The default port is `5555`, which can be overriden by the  `--port` flag when running `npm start`.
    * @type {number}
    */
-  PORT = argv['port'] || 5555;
+  PORT = argv['port'] || 5556;
 
   /**
    * The root folder of the project (up two levels from the current directory).
@@ -375,7 +375,7 @@ export class SeedConfig {
 
 
       'primeng': '${this.APP_BASE}node_modules/primeng',
-      
+
 
       'app/*': '/app/*',
       // For test config
