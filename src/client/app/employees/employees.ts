@@ -17,7 +17,7 @@ export class Employee {
   public fechaDocumento?  : string;
   public fechaNacimiento? : string;
   public idtercero? : string;
-  public factorrh?  : string;
+  public factorrh?  : any;
   public nroHijos? : number;
   public lateralidad? : string;
   public nivelEducativo  : any;
@@ -72,6 +72,7 @@ export class Employee {
       auditoriaUsuario: null,
       auditoriaFecha: ''
     };
+    this.factorrh = {item: ''};
   }
 }
 

@@ -35,7 +35,7 @@ export class FamilyInformationService {
     }
 
     delete(f: ConstructorFamilyInformation) {
-        return this.http.delete(API_URL +'/terceroFamily/'+ f.idFamiliar).map((res:Response) => res.json());
+        return this.http.put(API_URL +'/terceroFamily/', f).map((res:Response) => res);
     }
 
     getDocumentType()  {
