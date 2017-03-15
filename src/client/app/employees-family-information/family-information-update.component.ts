@@ -101,7 +101,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
               let mom: moment.Moment = moment(this.familyInformation.fechaNacimiento, 'YYYY-MM-DD');
               this.familyInformation.fechaNacimiento = mom.format('MM/DD/YYYY');
               this.familyform.value.idConvivencia = this.familyform.value.idConvivencia ? true : false;
-              this.familyform.value.indicadorHabilitado = 1;
+
               if(this.selectedDocument === 1) {
                 this.maxDate.setFullYear(last18Year);
                 this.range = `${lastYear}:${last18Year}`;
@@ -134,6 +134,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
         this.familyform.value.idTercero = this.idTercero;
         this.familyform.value.idTerceroFamiliar = this.familyInformation.idTerceroFamiliar;
         this.familyform.value.idConvivencia = this.familyform.value.idConvivencia ? 1 : 0;
+        this.familyform.value.indicadorHabilitado = 1;
         this.familyInformationService.update(this.familyform.value)
           .subscribe(
             data => {
