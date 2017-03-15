@@ -45,7 +45,7 @@ export class FamilyInformationComponent implements OnInit {
             header: 'Corfirmación',
             icon: 'fa fa-question-circle',
             accept: () => {
-              this.dialogObjet.indicadorHabilitado = false;
+              this.dialogObjet.indicadorHabilitado = 0;
               this.familyInformationService.delete(this.dialogObjet).subscribe( r => {
                 this.familyInformations.splice(this.familyInformations.indexOf(this.dialogObjet), 1);
                 this.dialogObjet = null;
