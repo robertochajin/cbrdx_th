@@ -55,7 +55,7 @@ export class FamilyInformationAddComponent implements OnInit {
         monthNamesShort: [ 'ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic' ]
       };
         this.familyform = this.fb.group({
-            'tipoDeDocumento': new FormControl('', Validators.required),
+            'idTipoDocumento': new FormControl('', Validators.required),
             'numeroDocumento': new FormControl('', Validators.required),
             'primerNombre': new FormControl('', Validators.required),
             'segundoNombre': new FormControl(''),
@@ -70,10 +70,16 @@ export class FamilyInformationAddComponent implements OnInit {
             'idConvivencia': new FormControl('')
         });
         this.familyInformationService.getDocumentType().subscribe(
-            documentTypes => this.documentTypes = documentTypes
+            documentTypes => {
+              this.documentTypes = documentTypes;
+              this.documentTypes.unshift({label:  'Seleccione', value:null});
+            }
         );
         this.familyInformationService.getRelationship().subscribe(
-            relationship => this.relationship = relationship
+            relationship => {
+              this.relationship = relationship;
+              this.relationship.unshift({label:  'Seleccione', value:null});
+            }
         );
         this.familyInformation.segundoApellido = this.familyInformation.segundoNombre = '';
       this.route.params.subscribe((params: Params) => {

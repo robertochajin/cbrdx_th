@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import { ConstructorFamilyInformation } from './family-information.construct';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { API_URL } from '../global';
+import {API_URL, API_URL_D} from '../global';
 
 @Injectable()
 export class FamilyInformationService {
@@ -20,15 +20,16 @@ export class FamilyInformationService {
     }
 
     add(f: ConstructorFamilyInformation) {
+      console.info(f);
         return this.http.post(API_URL +'/terceroFamily',f).map((res:Response) => res.json());
     };
 
     update(f: ConstructorFamilyInformation) {
+      console.info(f);
         return this.http.put(API_URL +'/terceroFamily/',f).map((res:Response) => res);
     }
 
     get(id: number) {
-      //return this.http.get('http://40.71.92.147:8445/Vfamily/'+ id)
       return this.http.get(API_URL +'/terceroFamily/'+ id)
         .map((res:Response) => res.json() as ConstructorFamilyInformation);
     }
@@ -38,14 +39,12 @@ export class FamilyInformationService {
     }
 
     getDocumentType()  {
-        //return this.http.get(API_URL +'/documenttype')
-        return this.http.get('http://40.71.92.147:8445/documenttype')
+        return this.http.get(API_URL_D+'/documenttype')
           .map((res:Response) => res.json());
     }
 
     getRelationship()  {
-        //return this.http.get(API_URL +'/relationship')
-        return this.http.get('http://40.71.92.147:8445/relationtypes')
+        return this.http.get(API_URL_D+'/relationtypes')
           .map((res:Response) => res.json());
     }
 

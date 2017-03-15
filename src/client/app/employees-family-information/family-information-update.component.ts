@@ -65,7 +65,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
       this.range = `${lastYear}:${year}`;
 
         this.familyform = this.fb.group({
-          'tipoDeDocumento': new FormControl('', Validators.required),
+          'idTipoDocumento': new FormControl('', Validators.required),
           'numeroDocumento': new FormControl('', Validators.required),
           'primerNombre': new FormControl('', Validators.required),
           'segundoNombre': new FormControl(''),
@@ -80,13 +80,16 @@ export class FamilyInformationUpdateComponent implements OnInit {
           'idConvivencia': new FormControl('')
         });
         this.familyInformationService.getDocumentType().subscribe(
-            documentTypes => {
-              documentTypes.push({label: 'Seleccione', value: null});
-              this.documentTypes = documentTypes;
-            }
+          documentTypes => {
+            this.documentTypes = documentTypes;
+            this.documentTypes.unshift({label:  'Seleccione', value:null});
+          }
         );
         this.familyInformationService.getRelationship().subscribe(
-            relationship => this.relationship = relationship
+          relationship => {
+            this.relationship = relationship;
+            this.relationship.unshift({label:  'Seleccione', value:null});
+          }
         );
         this.route.params.subscribe((params: Params) => {
           this.idTercero = params['tercero'];
