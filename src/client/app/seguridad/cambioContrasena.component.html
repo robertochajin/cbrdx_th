@@ -1,0 +1,110 @@
+
+<div id="loginBg">
+
+</div>
+
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6 col-md-offset-3 ">
+
+              <div class="account-wall">
+
+                <img id="imgLogin" class="img-responsive"
+                     src="./assets/images/logo_login_sp.png" >
+
+<h3 class="text-center">Recupera tu cuenta</h3>
+
+                <form #f="ngForm" (ngSubmit)="f.valid&&doPost();" novalidate class="form-signin">
+
+                        <div class="form-group">
+                            <label for="correo">Correo Electrónico </label>
+                            <div>
+                              <div class="input-group input-block-level">
+                                <span class="input-group-addon"> <i class="fa fa-envelope"></i> </span>
+                                <input type="text" pInputText class="form-control" id="correo" #correo="ngModel"
+                                       name="correo" [(ngModel)]="correoElectronico" required
+                                       pattern="[a-z0-9]+([-._]?[a-z0-9]+)+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"
+                                       (keyup)="emailCleanUp($event.target.value)"/>
+                                </div>
+                                <div *ngIf="f.submitted&&!correo.valid" class="alert alert-danger">
+                                    <div [hidden]="!correo.errors.required">
+                                        El correo electronico es requerido.
+                                    </div>
+                                    <div [hidden]="!correo.errors.pattern">
+                                        El correo electronico debe tener el formato wwwwwwww@xxxxxx.yyy[.zz]
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" *ngIf="!recordarUsuario">
+                            <label for="uSistema" >Usuario</label>
+                            <div>
+                              <div class="input-group input-block-level">
+                                <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
+                                <input type="text" pInputText class="form-control" id="uSistema" [(ngModel)]="usuario"
+                                       required pattern="[a-z0-9]+([-._]?[a-z0-9]+)+" #uSistema="ngModel"
+                                       name="uSistema"
+                                       (keyup)="userCleanUp($event.target.value);"/>
+                                </div>
+                                <div *ngIf="f.submitted&&!uSistema.valid" class="alert alert-danger">
+                                    <div [hidden]="!uSistema.errors.required">
+                                        El nombre de usuario es requerido.
+                                    </div>
+                                    <div [hidden]="!uSistema.errors.pattern">
+                                        El usuario debe contener solo letras, numeros o los caracteres . _ y/o -
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                            <div class="text-center">
+                                <a (click)="olvideUsuario()" class="recordarUsuario" *ngIf="!recordarUsuario">Olvide mi
+                                    usuario</a>
+                            </div>
+
+
+
+                        <div class="form-group text-center" style="margin-top:10px;">
+                            <a (click)="goBack()" class="cancelar" *ngIf="!recordarUsuario">Cancelar</a>
+                            <a (click)="regresarUsuario()" class="regresar" *ngIf="recordarUsuario">Regresar</a>
+                            <button *ngIf="!recordarUsuario" pButton type="submit"
+                                    label="Aceptar"></button>
+                            <button *ngIf="recordarUsuario" pButton type="submit"
+                                    label="Aceptar"></button>
+                        </div>
+
+                </form>
+
+
+
+
+
+</div>
+</div>
+</div>
+</div>
+
+<p-dialog header="Confirmación" [(visible)]="displayDialog" responsive="true">
+    <p>Si los datos coinciden con los registrados en el sistema se enviará a su correo la contraseña nueva. Esta seguro
+        que desea continuar?.</p>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="fa-close" (click)="goBack()" label="No"></button>
+            <button type="button" pButton icon="fa-check" (click)="envioContrasena()" label="Si"></button>
+        </div>
+    </p-footer>
+</p-dialog>
+
+
+<p-dialog header="Confirmación" [(visible)]="displayDialog1" responsive="true">
+    <p>Si la direccion de correo corresponde a una cuenta se enviará a su correo su nombre de usuario. Esta seguro que
+        desea continuar?.</p>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="fa-close" (click)="goBack()" label="No"></button>
+            <button type="button" pButton icon="fa-check" (click)="envioUsuario()" label="Si"></button>
+        </div>
+    </p-footer>
+</p-dialog>
