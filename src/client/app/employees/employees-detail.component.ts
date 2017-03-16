@@ -34,10 +34,10 @@ export class EmployeesDetailComponent implements OnInit   {
             this.employee.nacionalidad = 'cargando...';
             this.employee.cargoActual = 'cargando...';
 
-          // this.route.params.subscribe((params: Params) => {
-          //   this.employeeService.getCargoActual(+params['id']).subscribe(c => {
-          //     this.employee.cargoActual = c.cargo.cargo;});
-          // });
+            // this.route.params.subscribe((params: Params) => {
+            //   this.employeeService.getCargoActual(+params['id']).subscribe(c => {
+            //     this.employee.cargoActual = c.cargo.cargo;});
+            // });
           //
           // this.employeeService.getNacionalidad(this.employee.ciudadNacimiento.idDivisionPolitica)
           //     .subscribe(c => this.employee.nacionalidad = c.camino);
