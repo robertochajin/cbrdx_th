@@ -16,7 +16,7 @@ export class EmployeesService {
     constructor(private http: Http) {}
 
     getAll()  {
-        return this.http.get(this.au+'/wRol').map((res:Response) => res.json());
+        return this.http.get(this.au).map((res:Response) => res.json());
     }
 
     add(c: Employee) {
