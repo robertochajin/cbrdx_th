@@ -1,29 +1,30 @@
-/**
- * Created by Angel on 10/02/2017.
- */
-import {Component} from '@angular/core';
+import { FamilyInformation } from './family-information';
+import * as moment from 'moment/moment';
 
-import {FamilyInformation} from './family-information';
+export class ConstructorFamilyInformation implements FamilyInformation {
+  idTerceroFamiliar: number;
+  idTercero: number;
+  idTipoDocumento: number;
+  nombreListaTipoDocumento: string;
+  telefonoFijo: string;
+  telefonoCelular: string;
+  numeroDocumento: string;
+  idConvivencia: boolean;
+  nombreListaParentezco: any;
+  idParentezco: number;
+  idFamiliar: number;
+  primerNombre: string;
+  segundoNombre: string;
+  primerApellido: string;
+  segundoApellido: string;
+  fechaNacimiento: string;
+  correoElectronico: string;
+  direccion: string;
+  indicadorHabilitado: number;
 
+  nombreCompleto:string;
+  edad: string;
 
-export class constructorFamilyInformation implements FamilyInformation {
-    idFamiliar: number;
-    idColaborador: number;
-    tipoDeDocumento: number;
-    numeroDeDocumento: any;
-    primerNombre: string;
-    segundoNombre: string;
-    primerApellido: string;
-    segundoApellido: string;
-    fechadeNacimiento: string;
-    parentesco: any;
-    correoElectronico: string;
-    telefono1: string;
-    telefono2: string;
-    direccionDeResidencia: string;
-    convive: boolean;
-    edad: string;
-    nombreCompleto:string;
-    constructor() {
-    }
+  constructor() {
+  }
 }

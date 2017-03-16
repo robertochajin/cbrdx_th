@@ -3,49 +3,76 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class Employee {
 
-  public idColaborador : string;
-  public tipoDocumento : {value:number, label:string};
+  public idTercero : number;
   public numeroDocumento : string;
   public nombreCompleto?  : string;
   public primerNombre  : string;
   public segundoNombre : string;
   public primerApellido  : string;
   public segundoApellido : string;
-  public fechaDesde?  : string;
+  public fechaCreacion?  : string;
   public cargoActual? : string;
+  public nacionalidad?  : string;
   public Avatar?  : string;
-  public ciudadExpedicion?  : {value:number, label:string};
-  public fechaExp?  : string;
+  public fechaDocumento?  : string;
   public fechaNacimiento? : string;
   public idtercero? : string;
-  public ciudadNacimiento?  : {value:number, label:string};
-  public nacionalidad?  : string;
-  public genero?  : {value:number, label:string};
-  public estadoCivil? : {value:number, label:string};
-  public factorrh?  : string;
-  public numeroDeHijos? : string;
+  public factorrh?  : any;
+  public nroHijos? : number;
   public lateralidad? : string;
-  public nivelEducativo?  : string;
-  public profesion? : string;
-  public estratoSocioEconomico? : {value:number, label:string};
+  public nivelEducativo  : any;
   public vivienda?  : string;
   public vehiculo?  : string;
   public tallaCamisa? : string;
   public tallaPantalon? : string;
   public tallaCalzado?  : string;
+  public profesion? : any;
+  /*idEstadoCivil:number,*/
+  public estadoCivil? : {
+    codigoListaEstadoCivil: string,
+    nombreListaEstadoCivil: string,
+    indicadoHabilitado: boolean,
+    auditoriaUsuario: number,
+    auditoriaFecha: string
+  };
+  public genero  : {
+    codigoListaGenero: string,
+    nombreListaGenero: string
+  };
+  public tipoDocumento? : {/*idTipoDocumento:number,*/ nombreListaTipoDocumentos:string};
+  public ciudadExpDocumento  : any ;//{/*idDivisionPoliticaPadre:number,*/ descripcionDivisionPolitica:string};
+  public ciudadNacimiento  : any ;//{/*idDivisionPoliticaPadre:number,*/ descripcionDivisionPolitica:string};
+  public estratoSocioEconomico? : {value:number, label:string};
 
 
   constructor() {
     this.nombreCompleto = '';
     this.segundoNombre = '';
     this.segundoApellido = '';
-    this.tipoDocumento = {value:null, label:''};
-    this.ciudadNacimiento = {value:null, label:''};
-    this.ciudadExpedicion = {value:null, label:''};
+    this.tipoDocumento = {/*idTipoDocumento:null, */nombreListaTipoDocumentos:''};
+    //this.ciudadNacimiento = {/*idDivisionPoliticaPadre:null, */descripcionDivisionPolitica:''};
+    //this.ciudadExpedicion = {/*idDivisionPoliticaPadre:null, */descripcionDivisionPolitica:''};
     this.nacionalidad = '';
+    this.cargoActual = '';
     this.estratoSocioEconomico = {value:null, label:''};
-    this.genero = {value:null, label:''};
-    this.estadoCivil = {value:null, label:''};
+    this.genero = {
+      codigoListaGenero: '',
+      nombreListaGenero: ''
+    };
+    /*this.genero = {
+      codigoListaGenero: '',
+      indicadoHabilitado: false,
+      auditoriaUsuario: null,
+      auditoriaFecha: ''
+    };*/
+    this.estadoCivil = {
+      codigoListaEstadoCivil: '',
+      nombreListaEstadoCivil: '',
+      indicadoHabilitado: false,
+      auditoriaUsuario: null,
+      auditoriaFecha: ''
+    };
+    this.factorrh = {item: ''};
   }
 }
 

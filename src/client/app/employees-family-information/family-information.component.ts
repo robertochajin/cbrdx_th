@@ -1,25 +1,22 @@
-/**
- * Created by Angel on 10/02/2017.
- */
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
-
-import {FamilyInformationService} from './family-information.service';
-import {constructorFamilyInformation} from './family-information.construct';
-import {ConfirmationService} from 'primeng/primeng';
+import { Component, OnInit, Input} from '@angular/core';
+import { Router } from '@angular/router';
+import { FamilyInformationService } from './family-information.service';
+import { ConstructorFamilyInformation } from './family-information.construct';
+import { ConfirmationService } from 'primeng/primeng';
+import { Employee } from '../employees/employees';
 import * as moment from 'moment/moment';
 
 @Component({
     moduleId: module.id,
     templateUrl: 'family-information.component.html',
-    selector: 'familyinformation',
+    selector: 'family-information',
     providers:  [ConfirmationService]
 })
-export class FamilyInformationComponent {
-
-    familyInformation: constructorFamilyInformation = new constructorFamilyInformation();
-    dialogObjet: constructorFamilyInformation = new constructorFamilyInformation();
-    familyInformations: constructorFamilyInformation[];
+export class FamilyInformationComponent implements OnInit {
+    @Input() employee:Employee;
+    familyInformation: ConstructorFamilyInformation = new ConstructorFamilyInformation();
+    dialogObjet: ConstructorFamilyInformation = new ConstructorFamilyInformation();
+    familyInformations: ConstructorFamilyInformation[];
 
     constructor(
         private familyInformationService: FamilyInformationService,
@@ -28,47 +25,45 @@ export class FamilyInformationComponent {
     ) {}
 
     ngOnInit() {
-        this.familyInformationService.getAll().subscribe(
+
+      //this.familyInformationService.getAll().subscribe(
+        this.familyInformationService.getAllByEmployee(this.employee.idTercero).subscribe(
             familyInformations => {
-                this.familyInformations = familyInformations;
-                this.familyInformations.forEach(function(obj, index){
-                    obj.nombreCompleto = obj.primerNombre+' '+obj.segundoNombre+' '+obj.primerApellido+' '+obj.segundoApellido;
-                    let then = moment(obj.fechadeNacimiento,'MM/DD/YYYY').toNow(true);
-                    obj.edad = then.toString();
-                });
+              this.familyInformations = familyInformations;
+              this.familyInformations.forEach(e => {
+                e.nombreCompleto = e.primerNombre+' '+e.segundoNombre+' '+e.primerApellido+' '+e.segundoApellido;
+                e.edad = moment(e.fechaNacimiento,'YYYY-MM-DD').toNow(true).toString();
+              });
             }
         );
     }
 
-    del(f: constructorFamilyInformation) {
+    del(f: ConstructorFamilyInformation) {
         this.dialogObjet = f;
         this.confirmationService.confirm({
             message: ` ¿Esta seguro que desea eliminar?`,
             header: 'Corfirmación',
             icon: 'fa fa-question-circle',
-            // ok:'Si',
-            // cancel: "NO",
             accept: () => {
-                this.familyInformationService.delete(this.dialogObjet);
+              this.dialogObjet.indicadorHabilitado = 0;
+              this.familyInformationService.delete(this.dialogObjet).subscribe( r => {
                 this.familyInformations.splice(this.familyInformations.indexOf(this.dialogObjet), 1);
                 this.dialogObjet = null;
-            },
-            reject: () => {
-
+              });
             }
         });
     }
 
-    detail(f: constructorFamilyInformation) {
-        return this.router.navigate(['employees-family-information/detail/'+f.idFamiliar]);
+    detail(f: ConstructorFamilyInformation) {
+        return this.router.navigate(['employees-family-information/detail/'+f.idTerceroFamiliar]);
     }
 
     add() {
-        return this.router.navigate(['employees-family-information/add']);
+        return this.router.navigate(['employees-family-information/add/'+this.employee.idTercero]);
     }
 
-    update(f: constructorFamilyInformation) {
-        return this.router.navigate(['employees-family-information/update/'+f.idFamiliar]);
+    update(f: ConstructorFamilyInformation) {
+        return this.router.navigate(['employees-family-information/update/'+f.idTerceroFamiliar+'/'+f.idFamiliar]);
     }
 
 }

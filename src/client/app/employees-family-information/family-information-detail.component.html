@@ -13,10 +13,10 @@
                     <div class="form-group">
                       <div class="row">
                         <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tipo de documento.:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{selectedDocument}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{familyInformation.nombreListaTipoDocumento}}</strong></label>
 
                         <label class="col-md-3 col-sm-6 col-xs-12 control-label">Número de documento.:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.numeroDeDocumento}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.numeroDocumento}}</strong></label>
                       </div>
                       <div class="row">
                         <label class="col-md-3 col-sm-6 col-xs-12 control-label">Primero nombre:</label>
@@ -34,28 +34,28 @@
                       </div>
                       <div class="row">
                         <label class="col-md-3 col-sm-6 col-xs-12 control-label">Fecha de nacimiento:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.fechadeNacimiento}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.fechaNacimiento}}</strong></label>
 
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Perentesco:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{selectedRelationship}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Perentezco:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.nombreListaParentezco}}</strong></label>
                       </div>
                       <div class="row">
                         <label class="col-md-3 col-sm-6 col-xs-12 control-label">Correo electronico:</label>
                         <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.correoElectronico}}</strong></label>
 
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Teléfono 1:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.telefono1}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Teléfono:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.telefonoFijo}}</strong></label>
                       </div>
                       <div class="row">
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Teléfono 2:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.telefono2}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Celular:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.telefonoCelular}}</strong></label>
 
                         <label class="col-md-3 col-sm-6 col-xs-12 control-label">Dirección:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.direccionDeResidencia}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.direccion}}</strong></label>
                       </div>
                       <div class="row">
                         <label class="col-md-3 col-sm-6 col-xs-12 control-label">Convive:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{selectedConvive}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.idConvivencia === 1 ? 'Si' : 'No'}}</strong></label>
                       </div>
                     </div>
                 </fieldset>

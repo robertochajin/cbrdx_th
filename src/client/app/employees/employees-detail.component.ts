@@ -13,7 +13,7 @@ import {NavService}                 from '../_services/_nav.service';
 
 
 export class EmployeesDetailComponent implements OnInit   {
-    @Input() employee: Employee = new Employee();
+    employee: Employee;
     acordion:number;
     constructor(
         private employeeService: EmployeesService,
@@ -23,12 +23,27 @@ export class EmployeesDetailComponent implements OnInit   {
     ) {}
 
     ngOnInit(): void {
-        let este$ = this.route.params
-            .switchMap((params: Params) => this.employeeService.get(+params['id']));
-      este$.subscribe(employee => {
+      this.route.params.subscribe((params: Params) => {
+        this.employeeService.get(+params['id']).subscribe(employee => {
           this.employee = employee;
-          this.employee.nombreCompleto = this.employee.primerNombre+' '+this.employee.segundoNombre+' '+this.employee.primerApellido+' '+this.employee.segundoApellido;
-          });
+          this.employee.nombreCompleto = this.employee.primerNombre+' '+
+            this.employee.segundoNombre+' '+
+            this.employee.primerApellido+' '+
+            this.employee.segundoApellido;
+
+            this.employee.nacionalidad = 'cargando...';
+            this.employee.cargoActual = 'cargando...';
+
+            // this.route.params.subscribe((params: Params) => {
+            //   this.employeeService.getCargoActual(+params['id']).subscribe(c => {
+            //     this.employee.cargoActual = c.cargo.cargo;});
+            // });
+          //
+          // this.employeeService.getNacionalidad(this.employee.ciudadNacimiento.idDivisionPolitica)
+          //     .subscribe(c => this.employee.nacionalidad = c.camino);
+
+        });
+      });
 
       this.acordion = this._nav.getTab();
 
@@ -40,7 +55,6 @@ export class EmployeesDetailComponent implements OnInit   {
     onTabShow(e:any) {
       this._nav.setTab(e.index);
       this.acordion = this._nav.getTab();
-      //console.info(e.index);
     }
 
 }

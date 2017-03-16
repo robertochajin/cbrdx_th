@@ -54,8 +54,8 @@ const routes = [
 
   //Información familiar de employees
   {path: 'employees-family-information', component: FamilyInformationComponent},
-  {path: 'employees-family-information/add', component: FamilyInformationAddComponent},
-  {path: 'employees-family-information/update/:id', component: FamilyInformationUpdateComponent},
+  {path: 'employees-family-information/add/:tercero', component: FamilyInformationAddComponent},
+  {path: 'employees-family-information/update/:id/:tercero', component: FamilyInformationUpdateComponent},
   {path: 'employees-family-information/detail/:id', component: FamilyInformationDetailComponent},
 
   //Información de referencia de employees
@@ -76,8 +76,8 @@ const routes = [
 
   //employees-location
   { path: 'employees-location', component: LocationComponent },
-  { path: 'employees-location/add', component: LocationAddComponent },
-  { path: 'employees-location/update/:id', component: LocationUpdateComponent },
+  { path: 'employees-location/add/:id', component: LocationAddComponent },
+  { path: 'employees-location/update/:id/:tercero/:tl', component: LocationUpdateComponent },
   { path: 'employees-location/detail/:id', component: LocationDetailComponent },
 
     //Experiencia laboral

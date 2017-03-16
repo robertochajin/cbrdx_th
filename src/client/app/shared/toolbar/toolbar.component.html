@@ -1,10 +1,15 @@
 <div class="sidebar">
   <div class="sidebar-wrapper">
     <div class="logo">
+
       <i class="fa fa-cog"></i> DemoLogo
     </div>
 
-    <ul class="nav">
+
+
+
+  <div >
+    <ul class="nav" id="mainMenu">
       <li class="active">
         <a href="#">
           <i class="icon-THDashboard"></i>
@@ -12,56 +17,110 @@
         </a>
       </li>
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <a href="#menuSistema" aria-controls="menuSistema" data-toggle="collapse" aria-expanded="false" data-parent="#mainMenu">
           <i class="icon-THApl"></i>
-          <p>Sistema</p>
+          <p>
+            Sistema
+            <b class="caret"></b>
+          </p>
         </a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Menú 1</a></li>
-          <li><a href="#">Menú 2</a></li>
-          <li><a href="#">Menú 3</a></li>
-          <li><a href="#">Menú 4</a></li>
-          <li><a href="#">Menú 5</a></li>
-        </ul>
+        <div class="collapse" id="menuSistema">
+          <ul class="nav">
+            <li><a href="#">Item A</a></li>
+            <li><a href="#">Item B</a></li>
+            <li><a href="#">Item C</a></li>
+            <li><a href="#">Item D</a></li>
+          </ul>
+        </div>
       </li>
 
       <li>
-        <a href="#">
+        <a href="#menuOrganizacion" aria-controls="menuOrganizacion" data-toggle="collapse" aria-expanded="false" data-parent="#mainMenu">
           <i class="icon-THDO"></i>
-          <p>Organización</p>
+          <p>
+            Organización
+            <b class="caret"></b>
+          </p>
         </a>
+        <div class="collapse" id="menuOrganizacion">
+          <ul class="nav">
+            <li><a href="#">Item A</a></li>
+            <li><a href="#">Item B</a></li>
+            <li><a href="#">Item C</a></li>
+            <li><a href="#">Item D</a></li>
+          </ul>
+        </div>
       </li>
 
       <li>
-        <a href="#">
+        <a href="#menuReclutamiento" aria-controls="menuReclutamiento" data-toggle="collapse" aria-expanded="false" data-parent="#mainMenu">
           <i class="fa fa-cog"></i>
-          <p>Reclutamiento</p>
+          <p>
+            Reclutamiento
+            <b class="caret"></b>
+          </p>
         </a>
+        <div class="collapse" id="menuReclutamiento">
+          <ul class="nav">
+            <li><a href="#">Item A</a></li>
+            <li><a href="#">Item B</a></li>
+          </ul>
+        </div>
       </li>
 
       <li>
-        <a href="#">
+        <a href="#menuFormacion" aria-controls="menuFormacion" data-toggle="collapse" aria-expanded="false" data-parent="#mainMenu">
           <i class="icon-THFd"></i>
-          <p>Formación</p>
+          <p>
+            Formación
+            <b class="caret"></b>
+          </p>
         </a>
+        <div class="collapse" id="menuFormacion">
+          <ul class="nav">
+            <li><a href="#">Item A</a></li>
+            <li><a href="#">Item B</a></li>
+          </ul>
+        </div>
       </li>
 
       <li>
-        <a href="#">
+        <a href="#menuBienestar" aria-controls="menuBienestar" data-toggle="collapse" aria-expanded="false" data-parent="#mainMenu">
           <i class="icon-THBso"></i>
-          <p>Bienestar</p>
+          <p>
+            Bienestar
+            <b class="caret"></b>
+          </p>
         </a>
+        <div class="collapse" id="menuBienestar">
+          <ul class="nav">
+            <li><a href="#">Item A</a></li>
+            <li><a href="#">Item B</a></li>
+          </ul>
+        </div>
       </li>
 
       <li>
-        <a href="#">
+        <a href="#menuReportes" aria-controls="menuReportes" data-toggle="collapse" aria-expanded="false" data-parent="#mainMenu">
           <i class="icon-THRep"></i>
-          <p>Reportes</p>
+          <p>
+            Reportes
+            <b class="caret"></b>
+          </p>
         </a>
+        <div class="collapse" id="menuReportes">
+          <ul class="nav">
+            <li><a href="#">Item A</a></li>
+            <li><a href="#">Item B</a></li>
+          </ul>
+        </div>
       </li>
 
     </ul>
+  </div>
 
 
   </div>
 </div>
+
+

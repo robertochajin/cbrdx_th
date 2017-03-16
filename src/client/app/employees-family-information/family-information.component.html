@@ -10,9 +10,9 @@
     </div>
     <p-dataTable [value]="familyInformations"   [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
         <p-column field="nombreCompleto" header="Nombre" [sortable]="true"></p-column>
-        <p-column field="tipoDeDocumento.label" header="Tipo de documento" [sortable]="true"></p-column>
-        <p-column field="numeroDeDocumento" header="Número de documento" [sortable]="true"></p-column>
-        <p-column field="parentesco.label" header="Parentesco" [sortable]="true"></p-column>
+        <p-column field="nombreListaTipoDocumento" header="Tipo de documento" [sortable]="true"></p-column>
+        <p-column field="numeroDocumento" header="Número de documento" [sortable]="true"></p-column>
+        <p-column field="nombreListaParentezco" header="Parentezco" [sortable]="true"></p-column>
         <p-column field="edad" header="Edad" [sortable]="true"></p-column>
         <p-column header="Acciones" styleClass="datatable-col-action" >
             <template let-family="rowData" pTemplate="body">

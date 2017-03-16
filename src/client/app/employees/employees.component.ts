@@ -29,11 +29,12 @@ export class EmployeesComponent {
         this.employeesService.getAll().subscribe(
             employees => {
               this.employees = employees;
-              this.employees.forEach(function(obj, index){
-                obj.nombreCompleto = obj.primerNombre+' '+obj.segundoNombre+' '+obj.primerApellido+' '+obj.segundoApellido;
+              this.employees.forEach(e => {
+                e.nombreCompleto = e.primerNombre+' '+e.segundoNombre+' '+e.primerApellido+' '+e.segundoApellido;
               });
             }
         );
+
     }
 
     del(employee: Employee) {
@@ -54,7 +55,7 @@ export class EmployeesComponent {
     }
 
     detail(f: Employee) {
-        this.router.navigate(['employees/detail/'+f.idColaborador]);
+        this.router.navigate(['employees/detail/'+f.idTercero]);
     }
 
     add() {
@@ -62,7 +63,7 @@ export class EmployeesComponent {
     }
 
     update(c: Employee) {
-        this.router.navigate(['employees/update/'+c.idColaborador]);
+        this.router.navigate(['employees/update/'+c.idTercero]);
     }
 
 
