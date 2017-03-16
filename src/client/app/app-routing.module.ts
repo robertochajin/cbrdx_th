@@ -44,6 +44,7 @@ import { WorkExperienceUpdateComponent } from './employees-work-experience/work-
 
 //Login
 import {LoginComponent} from './seguridad/login.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 import {CambioContrasenaComponent} from "./seguridad/cambioContrasena.component";
 import {AuthGuard} from "./_guards/auth.guard";
 
@@ -94,7 +95,7 @@ const routes = [
   //Login
   {path: 'login', component: LoginComponent},
   {path: 'cambioContrasena', component: CambioContrasenaComponent},
-
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

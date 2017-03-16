@@ -1,0 +1,44 @@
+<div class="ui-grid-row">
+    <div class="col-md-6 col-xs-12 " style="text-align: left"><label>Ultima vez que ingresó: </label>
+    </div>
+    <div class="col-md-6 col-xs-12 ">
+        <button class=" pull-right" (click)="displayDialog=true" type="button" pButton icon="fa-plus" label="Configurar Widgets"></button>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="col-md-12">
+        <form>
+            <div class="col-md-12" id="funcionalidades" style="padding: 0.5% 0.5% 0.5% 0.5%"
+                 *ngIf="funcionalidades">
+                <p-panel header="Funcionalides">
+                    <div class="navegacion">
+                        <div class="ui-grid-row ">
+                            <div class="ui-grid-col-2"><a (click)="go('employees')"><i class="fa fa-users"></i>
+                                <p _ngcontent-upl-0="">Colaboradores</p></a></div>
+                        </div>
+                    </div>
+                </p-panel>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+<!--<div *ngFor="let item of widgets" [innerHTML]= "item.panel">-->
+<!--{{item.panel}}-->
+<!--</div>-->
+
+<p-dialog header="Configuración de Widgets" [(visible)]="displayDialog" responsive="true">
+
+    <div class="ui-g-12">
+        <p-checkbox name="widgets" [(ngModel)]="funcionalidades" label="Funcionalidades" binary="true"></p-checkbox>
+    </div>
+    <div class="ui-g-12">
+        <p-checkbox name="widgets" [(ngModel)]="rolesSistema" label="Roles Sistema" binary="true"></p-checkbox>
+    </div>
+    <div class="ui-g-12">
+        <p-checkbox name="widgets" [(ngModel)]="usuariosAct" label="Usuarios Act/Inact" binary="true"></p-checkbox>
+    </div>
+
+</p-dialog>

@@ -1,33 +1,28 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { APP_BASE_HREF } from '@angular/common';
-import { HttpModule } from '@angular/http';
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-
-import { AboutModule } from './about/about.module';
-import { HomeModule } from './home/home.module';
-import { EmployeesModule } from './employees/employees.module';
-import { SharedModule } from './shared/shared.module';
-import { FamilyInformationModule } from './employees-family-information/family-information.module';
-import { ReferencesModule } from './employees-references/references.module';
-import { AcademicEducationModule } from './employees-academic-education/academic-education.module';
-import { LocationModule } from './employees-location/location.module';
-import { WorkExperienceModule } from './employees-work-experience/work-experience.module';
-
-import {LoginModule} from './seguridad/login.module';
+import {NgModule} from "@angular/core";
+import {BrowserModule} from "@angular/platform-browser";
+import {APP_BASE_HREF} from "@angular/common";
+import {HttpModule} from "@angular/http";
+import {AppComponent} from "./app.component";
+import {AppRoutingModule} from "./app-routing.module";
+import {AboutModule} from "./about/about.module";
+import {HomeModule} from "./home/home.module";
+import {EmployeesModule} from "./employees/employees.module";
+import {SharedModule} from "./shared/shared.module";
+import {FamilyInformationModule} from "./employees-family-information/family-information.module";
+import {ReferencesModule} from "./employees-references/references.module";
+import {AcademicEducationModule} from "./employees-academic-education/academic-education.module";
+import {LocationModule} from "./employees-location/location.module";
+import {WorkExperienceModule} from "./employees-work-experience/work-experience.module";
+import {LoginModule} from "./seguridad/login.module";
 import {LoginService} from "./_services/login.service";
-import { AuthGuard } from './_guards/auth.guard';
-import { AuthenticationService } from './_services/authentication.service';
+import {AuthGuard} from "./_guards/auth.guard";
+import {AuthenticationService} from "./_services/authentication.service";
 import {GrowlModule} from "primeng/primeng";
-
+import {DashboardModule} from "./dashboard/dashboard.module";
 // used to create fake backend
-import { fakeBackendProvider } from './_helpers/index';
-import { MockBackend, MockConnection } from '@angular/http/testing';
-import { BaseRequestOptions } from '@angular/http';
 
 //CarsModule,
-@NgModule({
+@NgModule( {
   imports: [BrowserModule, HttpModule, AppRoutingModule, AboutModule, HomeModule,
     EmployeesModule,
     FamilyInformationModule,
@@ -37,6 +32,7 @@ import { BaseRequestOptions } from '@angular/http';
     WorkExperienceModule,
     LoginModule,
     GrowlModule,
+    DashboardModule,
     SharedModule.forRoot()],
 
   declarations: [AppComponent],
@@ -59,5 +55,6 @@ import { BaseRequestOptions } from '@angular/http';
 
   bootstrap: [AppComponent]
 
-})
-export class AppModule { }
+} )
+export class AppModule {
+}
