@@ -1,6 +1,4 @@
-/**
- * Created by Jenniferth Escobar - Felipe Aguirre on 9/03/2017.
- */
+
 import {NgModule} from "@angular/core";
 import {
   InputTextModule,
