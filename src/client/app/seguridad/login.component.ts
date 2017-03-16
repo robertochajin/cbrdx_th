@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
   user() {
     this.loginService.setSession(true);
     this.appmain.setSession(true);
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/employees']);
   }
 
   cambioContrasena() {
@@ -71,7 +71,6 @@ export class LoginComponent implements OnInit {
     this.http.post("https://www.google.com/recaptcha/api/siteverify", "secret=6LckLxkUAAAAAGf_9vx0BYTT7Q1fpk5X70BVDM6S&response=" + captchaResponse,{headers: headers}).subscribe(res => {
       let response = res.json().success;
       this.captcha = response;
-      this.captcha.re
     });
   }
 }
