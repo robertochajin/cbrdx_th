@@ -15,6 +15,12 @@ import { AcademicEducationModule } from './employees-academic-education/academic
 import { LocationModule } from './employees-location/location.module';
 import { WorkExperienceModule } from './employees-work-experience/work-experience.module';
 
+import {LoginModule} from './seguridad/login.module';
+import {LoginService} from "./_services/login.service";
+import { AuthGuard } from './_guards/auth.guard';
+import { AuthenticationService } from './_services/authentication.service';
+import {GrowlModule} from "primeng/primeng";
+
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers/index';
 import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -29,17 +35,28 @@ import { BaseRequestOptions } from '@angular/http';
     ReferencesModule,
     AcademicEducationModule,
     WorkExperienceModule,
+    LoginModule,
+    GrowlModule,
     SharedModule.forRoot()],
+
   declarations: [AppComponent],
   providers: [{
     provide: APP_BASE_HREF,
     useValue: '<%= APP_BASE %>'
-    },
+  },
+    AuthGuard,
+    AuthenticationService,
+    LoginService,
+    {
+      provide: APP_BASE_HREF,
+      useValue: '<%= APP_BASE %>',
+    }
     // providers used to create fake backend
     // fakeBackendProvider,
     // MockBackend,
     // BaseRequestOptions
   ],
+
   bootstrap: [AppComponent]
 
 })
