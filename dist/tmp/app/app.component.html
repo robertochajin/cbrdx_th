@@ -1,8 +1,8 @@
-<div class="wrapper">
-  <sd-toolbar></sd-toolbar>
-  <div class="main-panel">
-    <sd-navbar></sd-navbar>
-    <div class="content">
+<div class="wrapper" >
+  <sd-toolbar *ngIf="sessionStart"></sd-toolbar>
+  <div [class.main-panel]="sessionStart">
+    <sd-navbar *ngIf="sessionStart"></sd-navbar>
+    <div class="content" >
       <div class="container-fluid">
         <router-outlet></router-outlet>
       </div>
@@ -10,7 +10,7 @@
 
     <footer class="footer">
       <div class="container-fluid">
-        <div class="copyright pull-right text-right">
+        <div class="copyright pull-right">
           &copy;
           <script>document.write(new Date().getFullYear())</script>
           Todos los derechos reservados<br/>
