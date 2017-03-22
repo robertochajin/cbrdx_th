@@ -1,18 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Employee } from './employees';
-import { API_URL } from '../global';
+import {API_URL, API_URL_D} from '../global';
 
 @Injectable()
 export class EmployeesService {
 
 
-    //au = API_URL;
-    //au = 'http://localhost:8446/terceros';  //para cambios rápidos locales
-  //au = 'http://40.71.92.147:8446/teceros'; // dominio se debe cambiar a negocio.
-
-  //au = 'http://localhost:8445/employees';  //para cambios rápidos locales
-  au = 'http://40.71.92.147:8445/employees'; //dominio se debe cambiar a negocio.
+    // au = API_URL+'/teceros';
+    au = API_URL_D+'/employees'; //dominio se debe cambiar a negocio.
 
   //au = 'http://192.168.1.54:8445/employees'; //dominio se debe cambiar a negocio.
     headers = new Headers({'Content-Type': 'application/json'});
@@ -36,11 +32,11 @@ export class EmployeesService {
     }
 
     getNacionalidad(id: number) {
-        return this.http.get('http://40.71.92.147:8445/vista/'+ id).map((res:Response) => res.json());
+        return this.http.get(API_URL_D+'/vista/'+ id).map((res:Response) => res.json());
     }
 
     getCargoActual(id: number) {
-        return this.http.get('http://40.71.92.147:8446/tercerosCargos/'+ id).map((res:Response) => res.json());
+        return this.http.get(API_URL+'/tercerosCargos/'+ id).map((res:Response) => res.json());
     }
 
     delete(c: Employee) {

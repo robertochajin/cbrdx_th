@@ -26,8 +26,8 @@ export class FamilyInformationComponent implements OnInit {
 
     ngOnInit() {
 
-        this.familyInformationService.getAll().subscribe(
-        //this.familyInformationService.getAllByEmployee(this.employee.idTercero).subscribe(
+      //this.familyInformationService.getAll().subscribe(
+        this.familyInformationService.getAllByEmployee(this.employee.idTercero).subscribe(
             familyInformations => {
               this.familyInformations = familyInformations;
               this.familyInformations.forEach(e => {
@@ -45,9 +45,11 @@ export class FamilyInformationComponent implements OnInit {
             header: 'Corfirmación',
             icon: 'fa fa-question-circle',
             accept: () => {
-                this.familyInformationService.delete(this.dialogObjet);
+              this.dialogObjet.indicadorHabilitado = 0;
+              this.familyInformationService.delete(this.dialogObjet).subscribe( r => {
                 this.familyInformations.splice(this.familyInformations.indexOf(this.dialogObjet), 1);
                 this.dialogObjet = null;
+              });
             }
         });
     }
@@ -61,7 +63,7 @@ export class FamilyInformationComponent implements OnInit {
     }
 
     update(f: ConstructorFamilyInformation) {
-        return this.router.navigate(['employees-family-information/update/'+f.idTerceroFamiliar+'/'+f.idTercero]);
+        return this.router.navigate(['employees-family-information/update/'+f.idTerceroFamiliar+'/'+f.idFamiliar]);
     }
 
 }

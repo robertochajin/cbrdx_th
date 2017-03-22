@@ -20,6 +20,7 @@ export class ConstructorFamilyInformation implements FamilyInformation {
   fechaNacimiento: string;
   correoElectronico: string;
   direccion: string;
+  indicadorHabilitado: number;
 
   nombreCompleto:string;
   edad: string;

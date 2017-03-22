@@ -17,10 +17,10 @@ export class Employee {
   public fechaDocumento?  : string;
   public fechaNacimiento? : string;
   public idtercero? : string;
-  public factorrh?  : string;
+  public factorrh?  : any;
   public nroHijos? : number;
-  public lateralidad? : string;
-  public nivelEducativo  : any;
+  public lateralidad? : any;
+  public nivelEducacion : any;
   public vivienda?  : string;
   public vehiculo?  : string;
   public tallaCamisa? : string;
@@ -28,17 +28,8 @@ export class Employee {
   public tallaCalzado?  : string;
   public profesion? : any;
   /*idEstadoCivil:number,*/
-  public estadoCivil? : {
-    codigoListaEstadoCivil: string,
-    nombreListaEstadoCivil: string,
-    indicadoHabilitado: boolean,
-    auditoriaUsuario: number,
-    auditoriaFecha: string
-  };
-  public genero  : {
-    codigoListaGenero: string,
-    nombreListaGenero: string
-  };
+  public estadoCivil? : any;
+  public genero  : any;
   public tipoDocumento? : {/*idTipoDocumento:number,*/ nombreListaTipoDocumentos:string};
   public ciudadExpDocumento  : any ;//{/*idDivisionPoliticaPadre:number,*/ descripcionDivisionPolitica:string};
   public ciudadNacimiento  : any ;//{/*idDivisionPoliticaPadre:number,*/ descripcionDivisionPolitica:string};
@@ -55,23 +46,8 @@ export class Employee {
     this.nacionalidad = '';
     this.cargoActual = '';
     this.estratoSocioEconomico = {value:null, label:''};
-    this.genero = {
-      codigoListaGenero: '',
-      nombreListaGenero: ''
-    };
-    /*this.genero = {
-      codigoListaGenero: '',
-      indicadoHabilitado: false,
-      auditoriaUsuario: null,
-      auditoriaFecha: ''
-    };*/
-    this.estadoCivil = {
-      codigoListaEstadoCivil: '',
-      nombreListaEstadoCivil: '',
-      indicadoHabilitado: false,
-      auditoriaUsuario: null,
-      auditoriaFecha: ''
-    };
+    this.genero = '';
+    this.factorrh = '';
   }
 }
 

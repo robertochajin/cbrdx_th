@@ -55,7 +55,7 @@ export class FamilyInformationAddComponent implements OnInit {
         monthNamesShort: [ 'ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic' ]
       };
         this.familyform = this.fb.group({
-            'tipoDeDocumento': new FormControl('', Validators.required),
+            'idTipoDocumento': new FormControl('', Validators.required),
             'numeroDocumento': new FormControl('', Validators.required),
             'primerNombre': new FormControl('', Validators.required),
             'segundoNombre': new FormControl(''),
@@ -70,10 +70,16 @@ export class FamilyInformationAddComponent implements OnInit {
             'idConvivencia': new FormControl('')
         });
         this.familyInformationService.getDocumentType().subscribe(
-            documentTypes => this.documentTypes = documentTypes
+            documentTypes => {
+              this.documentTypes = documentTypes;
+              this.documentTypes.unshift({label:  'Seleccione', value:null});
+            }
         );
         this.familyInformationService.getRelationship().subscribe(
-            relationship => this.relationship = relationship
+            relationship => {
+              this.relationship = relationship;
+              this.relationship.unshift({label:  'Seleccione', value:null});
+            }
         );
         this.familyInformation.segundoApellido = this.familyInformation.segundoNombre = '';
       this.route.params.subscribe((params: Params) => {
@@ -100,9 +106,11 @@ export class FamilyInformationAddComponent implements OnInit {
         this.familyform.value.segundoNombre = this.capitalizeSave(this.familyform.value.segundoNombre);
         this.familyform.value.primerApellido = this.capitalizeSave(this.familyform.value.primerApellido);
         this.familyform.value.segundoApellido = this.capitalizeSave(this.familyform.value.segundoApellido);
-        let mom: moment.Moment = moment(this.familyform.value.fechaNacimiento, 'DD/MM/YYYY');
+        let mom: moment.Moment = moment(this.familyform.value.fechaNacimiento, 'MM/DD/YYYY');
         this.familyform.value.fechaNacimiento = mom.format('YYYY-MM-DD');
         this.familyform.value.idFamiliar = this.idTercero;
+
+        this.familyform.value.idConvivencia = this.familyform.value.idConvivencia ? 1 : 0;
 
         this.familyInformationService.add(this.familyform.value)
             .subscribe(
