@@ -13,7 +13,7 @@
         <p-panel>
           <p-header>
             <div class="ui-helper-clearfix">
-              <span class="ui-panel-title">Usuarios del Sistema</span>
+              <span class="ui-panel-title">{{ usuariosTitle }}</span>
               <button class="pull-right" type="text" (click)="rolesSistema = !rolesSistema" icon=""><i class="fa fa-close"></i></button>
               <!--<input pButton=""  [style]="{'float':'right'}" label="Save" icon="fa-check" (onClick)="save()" [model]="items"></input>-->
             </div>
@@ -59,7 +59,7 @@
 <!--{{item.panel}}-->
 <!--</div>-->
 
-<p-dialog header="Configuración de Widgets" [(visible)]="displayDialog" responsive="true">
+<p-dialog header="{{ 'CONF_WIDGETS' | translate:param }}" [(visible)]="displayDialog" responsive="true">
 
   <div class="ui-g-12">
     <p-checkbox name="widgets" [(ngModel)]="rolesSistema" label="Roles Sistema" binary="true"></p-checkbox>

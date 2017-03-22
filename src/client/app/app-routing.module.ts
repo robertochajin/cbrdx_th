@@ -95,7 +95,7 @@ const routes = [
   //Login
   {path: 'login', component: LoginComponent},
   {path: 'cambioContrasena', component: CambioContrasenaComponent},
-  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  {path: 'dashboard', component: DashboardComponent},
 ];
 
 @NgModule({

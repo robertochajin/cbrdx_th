@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {APP_BASE_HREF} from "@angular/common";
-import {HttpModule} from "@angular/http";
+import {HttpModule,Http} from "@angular/http";
 import {AppComponent} from "./app.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {AboutModule} from "./about/about.module";
@@ -19,6 +19,9 @@ import {AuthGuard} from "./_guards/auth.guard";
 import {AuthenticationService} from "./_services/authentication.service";
 import {GrowlModule} from "primeng/primeng";
 import {DashboardModule} from "./dashboard/dashboard.module";
+import {TranslateModule, TranslateLoader, TranslateStaticLoader} from "ng2-translate";
+
+
 // used to create fake backend
 
 //CarsModule,
@@ -33,7 +36,13 @@ import {DashboardModule} from "./dashboard/dashboard.module";
     LoginModule,
     GrowlModule,
     DashboardModule,
-    SharedModule.forRoot()],
+    SharedModule.forRoot(),
+    TranslateModule.forRoot({
+      provide: TranslateLoader,
+      useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
+      deps: [Http]
+    })
+  ],
 
   declarations: [AppComponent],
   providers: [{
