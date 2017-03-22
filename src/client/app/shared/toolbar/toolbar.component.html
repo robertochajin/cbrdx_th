@@ -1,8 +1,7 @@
 <div class="sidebar">
   <div class="sidebar-wrapper">
     <div class="logo">
-
-      <i class="fa fa-cog"></i> DemoLogo
+      <img src="/assets/images/logo_login_th.png" alt="" class="img-responsive" />
     </div>
 
 
@@ -10,11 +9,31 @@
 
   <div >
     <ul class="nav" id="mainMenu">
-      <li class="active">
-        <a href="#">
+      <li>
+        <a routerLink="/dashboard" routerLinkActive="active">
           <i class="icon-THDashboard"></i>
           <p>Dashboard</p>
         </a>
+      </li>
+      <li class="active">
+        <a routerLink="/employees" routerLinkActive="active">
+          <i class="icon-THDO"></i>
+          <p>Colaboradores</p>
+        </a>
+      </li>
+      <!--<li>
+        <a href="#menuOrganizacion" aria-controls="menuOrganizacion" data-toggle="collapse" aria-expanded="false" data-parent="#mainMenu">
+          <i class="icon-THDO"></i>
+          <p>
+            Organización
+            <b class="caret"></b>
+          </p>
+        </a>
+        <div class="collapse" id="menuOrganizacion">
+          <ul class="nav">
+            <li><a routerLink="/employees" routerLinkActive="active">Colaboradores</a></li>
+          </ul>
+        </div>
       </li>
       <li class="dropdown">
         <a href="#menuSistema" aria-controls="menuSistema" data-toggle="collapse" aria-expanded="false" data-parent="#mainMenu">
@@ -26,10 +45,7 @@
         </a>
         <div class="collapse" id="menuSistema">
           <ul class="nav">
-            <li><a href="#">Item A</a></li>
-            <li><a href="#">Item B</a></li>
-            <li><a href="#">Item C</a></li>
-            <li><a href="#">Item D</a></li>
+            <li><a routerLink="/employees" routerLinkActive="active">Colaboradores</a></li>
           </ul>
         </div>
       </li>
@@ -44,10 +60,7 @@
         </a>
         <div class="collapse" id="menuOrganizacion">
           <ul class="nav">
-            <li><a href="#">Item A</a></li>
-            <li><a href="#">Item B</a></li>
-            <li><a href="#">Item C</a></li>
-            <li><a href="#">Item D</a></li>
+            <li><a routerLink="/employees" routerLinkActive="active">Colaboradores</a></li>
           </ul>
         </div>
       </li>
@@ -62,13 +75,13 @@
         </a>
         <div class="collapse" id="menuReclutamiento">
           <ul class="nav">
-            <li><a href="#">Item A</a></li>
-            <li><a href="#">Item B</a></li>
+            <li><a routerLink="/dashboard" routerLinkActive="active">Item A</a></li>
+            <li><a routerLink="/dashboard" routerLinkActive="active">Item B</a></li>
           </ul>
         </div>
-      </li>
+      </li>-->
 
-      <li>
+      <!--<li>
         <a href="#menuFormacion" aria-controls="menuFormacion" data-toggle="collapse" aria-expanded="false" data-parent="#mainMenu">
           <i class="icon-THFd"></i>
           <p>
@@ -78,8 +91,8 @@
         </a>
         <div class="collapse" id="menuFormacion">
           <ul class="nav">
-            <li><a href="#">Item A</a></li>
-            <li><a href="#">Item B</a></li>
+            <li><a routerLink="/dashboard" routerLinkActive="active">Item A</a></li>
+            <li><a routerLink="/dashboard" routerLinkActive="active">Item B</a></li>
           </ul>
         </div>
       </li>
@@ -94,8 +107,8 @@
         </a>
         <div class="collapse" id="menuBienestar">
           <ul class="nav">
-            <li><a href="#">Item A</a></li>
-            <li><a href="#">Item B</a></li>
+            <li><a routerLink="/dashboard" routerLinkActive="active">Item A</a></li>
+            <li><a routerLink="/dashboard" routerLinkActive="active">Item B</a></li>
           </ul>
         </div>
       </li>
@@ -110,11 +123,11 @@
         </a>
         <div class="collapse" id="menuReportes">
           <ul class="nav">
-            <li><a href="#">Item A</a></li>
-            <li><a href="#">Item B</a></li>
+            <li><a routerLink="/dashboard" routerLinkActive="active">Item A</a></li>
+            <li><a routerLink="/dashboard" routerLinkActive="active">Item B</a></li>
           </ul>
         </div>
-      </li>
+      </li>-->
 
     </ul>
   </div>

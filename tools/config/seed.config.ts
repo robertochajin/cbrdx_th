@@ -305,6 +305,12 @@ export class SeedConfig {
    * @type {string[]}
    */
   EXTRA_WATCH_PATHS: string[] = [];
+  /**
+   * Puerto de los servicios
+   * @type {string}
+   */
+  SVC_PORT_SEG = '8447';
+  SVC_URL = 'http://40.71.25.236';
 
   /**
    * The list of NPM dependcies to be injected in the `index.html`.

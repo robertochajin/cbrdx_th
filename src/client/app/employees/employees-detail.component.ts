@@ -34,10 +34,19 @@ export class EmployeesDetailComponent implements OnInit   {
             this.employee.nacionalidad = 'cargando...';
             this.employee.cargoActual = 'cargando...';
 
-          // this.route.params.subscribe((params: Params) => {
-          //   this.employeeService.getCargoActual(+params['id']).subscribe(c => {
-          //     this.employee.cargoActual = c.cargo.cargo;});
-          // });
+            if( this.employee.ciudadExpDocumento === null ) this.employee.ciudadExpDocumento='';
+            if( this.employee.ciudadNacimiento === null ) this.employee.ciudadNacimiento='';
+            if( this.employee.genero === null ) this.employee.genero='';
+            if( this.employee.estadoCivil === null ) this.employee.estadoCivil='';
+            if( this.employee.factorrh === null ) this.employee.factorrh='';
+            if( this.employee.lateralidad === null ) this.employee.lateralidad='';
+            if( this.employee.nivelEducacion === null ) this.employee.nivelEducacion='';
+            if( this.employee.profesion === null ) this.employee.profesion='';
+
+            // this.route.params.subscribe((params: Params) => {
+            //   this.employeeService.getCargoActual(+params['id']).subscribe(c => {
+            //     this.employee.cargoActual = c.cargo.cargo;});
+            // });
           //
           // this.employeeService.getNacionalidad(this.employee.ciudadNacimiento.idDivisionPolitica)
           //     .subscribe(c => this.employee.nacionalidad = c.camino);
