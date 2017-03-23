@@ -1,0 +1,35 @@
+<h3>Tipo de Área</h3>
+<div class="col-sm-6 col-sm-offset-3">
+    <h2 class="text-center">Detalle Tipo de Área</h2>
+
+        <div class="form-group" >
+            <label for="codigoArea" class="control-label col-sm-3">Código </label>
+            <div class=" col-sm-9">
+                <input type="text" pInputText class="form-control" id="codigoArea" name="codigoArea"
+                       #codigoArea="ngModel"
+                       [(ngModel)]="areas.codigoArea" disabled>
+            </div>
+        </div>
+        <div class="form-group" >
+            <label for="estructuraArea" class="control-label col-sm-3">Nombre </label>
+            <div class=" col-sm-9">
+                <input type="text" pInputText class="form-control" id="estructuraArea" name="estructuraArea" #estructuraArea="ngModel"
+                       [(ngModel)]="areas.estructuraArea" disabled>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+            <div class=" col-sm-9">
+                <p-checkbox [(ngModel)]="areas.indicadorHabilitado" binary="true" id="indicador" name="indicador"
+                            #indicador="ngModel" class="form-control" disabled></p-checkbox>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <a (click)="goBack()" class="cancelar">Regresar</a>
+
+        </div>
+
+</div>

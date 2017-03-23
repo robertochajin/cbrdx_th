@@ -1,0 +1,30 @@
+<h3>Grupos de Gestión</h3>
+<div class="row datable-header">
+    <div class="col-md-6 col-xs-12 datatable-header-add">
+        <button type="button" pButton icon="fa-plus" (click)="addGrupoGestion()" label="Nuevo Grupo de Gestión"></button>
+    </div>
+    <div class="col-md-6 col-xs-12 datatable-header-search">
+        <i class="fa fa-search"></i>
+        <input #gb type="text" pInputText size="40" placeholder="Buscar...">
+    </div>
+</div>
+<p-dataTable [value]="gruposGestion" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+    <p-column field="idGrupoGestion" header="Id" [sortable]="true"></p-column>
+    <p-column field="codigoGrupoGestion" header="Código" [sortable]="true"></p-column>
+    <p-column field="grupoGestion" header="Nombre" [sortable]="true"></p-column>
+    <p-column field="indicadorHabilitado" header="Estado" [sortable]="true">
+        <template let-const="rowData" pTemplate="body">
+            <p-checkbox [(ngModel)]="const.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
+        </template>
+    </p-column>
+    <p-column header="Acciones" styleClass="datatable-col-action">
+        <template let-constantData="rowData" pTemplate="body">
+            <div class="btn-group" role="group">
+                <button type="button" class="ui-button btn" icon="fa-eye"
+                        pButton (click)="viewGrupoGestion(constantData)"></button>
+                <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" pButton
+                        (click)="editGrupoGestion(constantData)"></button>
+            </div>
+        </template>
+    </p-column>
+</p-dataTable>

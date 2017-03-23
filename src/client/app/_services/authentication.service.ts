@@ -8,7 +8,7 @@ import {toPromise} from "rxjs/operator/toPromise";
 export class AuthenticationService {
   public token: string;
   public headers = new Headers({'Content-Type': 'application/json'});
-  private masterService = '<%= SVC_URL %>:<%= SVC_PORT_SEG %>/auth';
+  private masterService = '<%= SVC_SP_URL %>/auth';
 
   constructor(private http: Http) {
     // set token if saved in local storage
@@ -38,6 +38,7 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string): Promise<boolean> {
+    console.info(this.masterService );
     return this.http.post(this.masterService + "/login", JSON.stringify({
       username: username,
       password: password

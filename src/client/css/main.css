@@ -3724,3 +3724,23 @@ p-calendar,
 p-togglebutton {
   display: block;
 }
+
+.ui-tree {
+  width: 100%!important;
+}
+body .ui-tree .ui-treenode .ui-treenode-content .ui-treenode-label {
+  padding: 4px!important;
+  width: 90%;
+  white-space: initial;
+}
+
+body .ui-tree .ui-treenode .ui-treenode-content .ui-tree-toggler {
+  vertical-align: top!important;
+}
+p-tree{
+  height: 410px;
+  display: flex;
+}
+dashboard_height{
+  height: 275px;
+}

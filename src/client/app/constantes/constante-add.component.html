@@ -1,0 +1,88 @@
+<h3>Constantes</h3>
+<div class="col-sm-6 col-sm-offset-3">
+    <h2 class="text-center">Agregar Constante</h2>
+    <form class="form-horizontal" #f="ngForm" (ngSubmit)="!codeExists&&f.form.valid&&createConstant()" novalidate
+          (keydown.enter)="$event.preventDefault()" id="f" name="f">
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !constante.valid }">
+            <label for="constante" class="control-label col-sm-3">Constante</label>
+            <div class=" col-sm-9">
+                <input type="text" pInputText class="form-control" id="constante" name="constante" #constante="ngModel"
+                       [(ngModel)]="constant.constante" required maxlength="6" pattern="[A-Z]{0,6}"
+                       (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
+                       (paste)="inputCleanUp($event.target.value)">
+                <div *ngIf="codeExists" class="alert alert-danger">
+                    Ya se encuentra registrado ese codigo
+                </div>
+                <div *ngIf="f.submitted&&!constante.valid" class="alert alert-danger">
+                    <div [hidden]="!constante.errors.required">Debe ingresar un nombre para la Constante</div>
+                    <div [hidden]="!constante.errors.maxlength">El codigo no debe tener mas de 6 caracteres.</div>
+                    <div [hidden]="!constante.errors.pattern">El codigo debe ser solo letras Mayusculas</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="idTipoDato" class="control-label col-sm-3">Tipo de Dato</label>
+            <div class="col-sm-9">
+                <select [(ngModel)]="constant.idTipoDato" id="idTipoDato" name="idTipoDato" class="form-control"
+                        required #idTipoDato="ngModel" [ngClass]="{ 'has-error': f.submitted && !idTipoDato.valid }"
+                        (select)="alterPattern()" (change)="alterPattern()">
+                    <option *ngFor="let c of datatypeDetails" [ngValue]="c.idListaItem">
+                        {{c.codigoItem}} - {{c.item}}
+                    </option>
+                </select>
+                <div *ngIf="f.submitted&&!idTipoDato.valid" class="alert alert-danger">
+                    <div [hidden]="!idTipoDato.errors.required">Debe seleccionar un valor</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="valor" class="control-label col-sm-3">Valor</label>
+            <div class=" col-sm-9">
+                <input type="text" pInputText class="form-control" id="valor" name="valor" #valor="ngModel"
+                       [(ngModel)]="constant.valor" required maxlength="20" [pattern]="regex"
+                       [ngClass]="{ 'has-error': f.submitted && !valor.valid }">
+                <div *ngIf="f.submitted&&!valor.valid" class="alert alert-danger">
+                    <div [hidden]="!valor.errors.required">Debe ingresar un valor para la Constante</div>
+                    <div [hidden]="!valor.errors.maxlength">El valor no debe tener mas de 20 caracteres.</div>
+                    <div [hidden]="!valor.errors.pattern">El codigo debe ser solo numeros</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="descripcion" class="control-label col-sm-3">Descripción</label>
+            <div class=" col-sm-9">
+                <input type="text" pInputText class="form-control" id="descripcion" name="descripcion"
+                       #descripcion="ngModel"
+                       [(ngModel)]="constant.descripcion" maxlength="50">
+                <div *ngIf="f.submitted&&!descripcion.valid"
+                     class="alert alert-danger">
+                    <div [hidden]="!descripcion.errors.maxlength">La descripción no debe tener mas de 50 caracteres.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+            <div class=" col-sm-9">
+                <p-checkbox [(ngModel)]="constant.indicadorHabilitado" binary="true" id="indicador" name="indicador"
+                            #indicador="ngModel"></p-checkbox>
+            </div>
+        </div>
+        <div class="row form-footer-buttons">
+            <div class="form-group col-md-12">
+            <a (click)="displayDialog=true" class="cancelar">Cancelar</a>
+            <button type="submit" pButton icon="fa-plus" label="Guardar" (keydown.enter)="submit.click()"
+                    #submit></button>
+        </div>
+        </div>
+    </form>
+</div>
+<p-dialog header="Confirmación" [(visible)]="displayDialog" responsive="true">
+    <p>Si continua perdera la información no guardada.Esta seguro que desea salir?.</p>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>
+            <button type="button" pButton icon="fa-check" (click)="goBack()" label="Si"></button>
+        </div>
+    </p-footer>
+</p-dialog>

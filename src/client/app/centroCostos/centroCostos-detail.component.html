@@ -1,0 +1,29 @@
+<h3>Centro de Costo</h3>
+<div class="col-sm-6 col-sm-offset-3 form-horizontal">
+    <h2 class="text-center">Detalle Centro de Costo</h2>
+    <div class="form-group">
+        <label for="codigoCentroCostos" class="control-label col-sm-3">Código </label>
+        <div class=" col-sm-9">
+            <input type="text" pInputText class="form-control" id="codigoCentroCostos" disabled
+                   [(ngModel)]="centroCostos.codigoCentroCostos">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="cCostos" class="control-label col-sm-3">Nombre </label>
+        <div class=" col-sm-9">
+            <input type="text" pInputText class="form-control" id="cCostos" disabled
+                   [(ngModel)]="centroCostos.centroCostos">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+        <div class=" col-sm-9">
+            <p-checkbox [(ngModel)]="centroCostos.indicadorHabilitado" binary="true" id="indicador" enabled
+                        class="form-control" disabled></p-checkbox>
+        </div>
+    </div>
+    <div class="form-group">
+        <a (click)="goBack()" class="cancelar">Regresar</a>
+    </div>
+</div>

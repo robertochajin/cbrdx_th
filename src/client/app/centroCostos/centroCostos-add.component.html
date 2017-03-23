@@ -1,0 +1,66 @@
+<h3>Centro de Costo</h3>
+<div class="col-sm-6 col-sm-offset-3">
+    <h2 class="text-center">Nuevo Centro de Costo</h2>
+    <form class="form-horizontal" #f="ngForm" (ngSubmit)="!codeExists&&f.form.valid&&createGruposGestion()" novalidate
+          (keydown.enter)="$event.preventDefault()">
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !codigoCentroCostos.valid }">
+            <label for="codigoCentroCostos" class="control-label col-sm-3">Código </label>
+            <div class=" col-sm-9">
+                <input type="text" pInputText class="form-control" id="codigoCentroCostos" name="codigoCentroCostos"
+                       #codigoCentroCostos="ngModel"
+                       [(ngModel)]="centroCostos.codigoCentroCostos" required maxlength="30" pattern="[A-Z0-9]{0,30}"
+                       (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
+                       (paste)="inputCleanUp($event.target.value)">
+                <div *ngIf="codeExists" class="alert alert-danger">
+                    Ya se encuentra registrado ese código
+                </div>
+                <div *ngIf="f.submitted&&!codigoCentroCostos.valid" class="alert alert-danger">
+                    <div [hidden]="!codigoCentroCostos.errors.required">Debe ingresar un codigo para el centro de
+                        costo
+                    </div>
+                    <div [hidden]="!codigoCentroCostos.errors.maxlength">El código no debe tener mas de 30 caracteres.
+                    </div>
+                    <div [hidden]="!codigoCentroCostos.errors.pattern">El código debe ser solo letras Mayusculas</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !cCostos.valid }">
+            <label for="cCostos" class="control-label col-sm-3">Nombre </label>
+            <div class=" col-sm-9">
+                <input type="text" pInputText class="form-control" id="cCostos" name="cCostos" #cCostos="ngModel"
+                       [(ngModel)]="centroCostos.centroCostos" required maxlength="60" pattern="[A-Z]{1}.*">
+                <div *ngIf="f.submitted&&!cCostos.valid" class="alert alert-danger">
+                    <div [hidden]="!cCostos.errors.required">Debe ingresar un nombre para el centro de costo</div>
+                    <div [hidden]="!cCostos.errors.maxlength">El nombre no debe tener mas de 60 caracteres.</div>
+                    <div [hidden]="!cCostos.errors.pattern">El nombre del centro de costos debe comenzar por una letra
+                        Mayuscula
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+            <div class=" col-sm-9">
+                <p-checkbox [(ngModel)]="centroCostos.indicadorHabilitado" binary="true" id="indicador" name="indicador"
+                            #indicador="ngModel"></p-checkbox>
+            </div>
+        </div>
+        <div class="row form-footer-buttons">
+            <div class="col-md-10">
+                <a (click)="displayDialog=true" class="cancelar">Cancelar</a>
+                <button type="submit" pButton icon="fa-plus" label="Guardar" #submit
+                        (keydown.enter)="submit.click()"></button>
+            </div>
+        </div>
+    </form>
+    <p-dialog header="Confirmación" [(visible)]="displayDialog" responsive="true">
+        <p>Si continua perdera la información no guardada. ¿Esta seguro que desea salir?.</p>
+        <p-footer>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>
+                <button type="button" pButton icon="fa-check" (click)="goBack()" label="Si"></button>
+            </div>
+        </p-footer>
+    </p-dialog>
+</div>

@@ -1,0 +1,132 @@
+<h3>Administrador de Usuarios</h3>
+<p-tabView>
+    <p-tabPanel header="Datos de Usuario">
+        <p-fieldset legend="Datos Tercero">
+
+            <div class="col-md-3">
+                <div class="ui-grid-col-10">
+                    <img class="thumbnail img-responsive"
+                         src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg ">
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="ui-grid-col-6">
+                    <p>{{tercero.primerNombre}} {{tercero.segundoNombre}} {{tercero.primerApellido}}
+                        {{tercero.segundoApellido}}</p>
+                    <p>{{tercero.numeroDocumento}}</p>
+                </div>
+                <div class="ui-grid-col-6">
+                    <p></p>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="ui-grid-col-4">
+                    <label>Género :</label>
+                    <p></p>
+                    <label>Ciudad :</label>
+                    <p></p>
+                </div>
+                <div class="ui-grid-col-4">
+                    <label>Estado civil :</label>
+                    <p></p>
+                    <label>Dirección :</label>
+                    <p></p>
+                </div>
+                <div class="ui-grid-col-4">
+                    <label>EPS :</label>
+                    <p></p>
+                    <label>Teléfono :</label>
+                    <p></p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="pull-right">
+                    <label>Editar información de Tercero </label>
+                    <button pButton type="button" icon="glyphicon-pencil" iconPos="right" label="Editar"></button>
+                </div>
+            </div>
+        </p-fieldset>
+
+        <p-fieldset legend="Información Contacto">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="uSistema" class="control-label col-sm-4">Usuario Sistema</label>
+                    <div class="col-sm-8">
+                        <input type="text" pInputText disabled [(ngModel)]="usuario.usuarioSistema"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Usuario LDAP</label>
+                    <div class="ui-grid-col-6">
+                        <p-checkbox [(ngModel)]="usuario.usuarioLdap" binary="true" disabled></p-checkbox>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Correo Electronico</label>
+                    <div class="col-sm-8">
+                        <input pInputText [(ngModel)]="usuario.correoElectronico" disabled type="email"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Habilitado</label>
+                    <div class="col-sm-8">
+                        <p-checkbox [(ngModel)]="usuario.indicadorHabilitado" binary="true" disabled></p-checkbox>
+                    </div>
+                </div>
+                <div class="col-md-12, pull-right">
+                    <a (click)="goBack()" class="cancelar">Regresar</a>
+                </div>
+            </div>
+        </p-fieldset>
+
+    </p-tabPanel>
+    <p-tabPanel header="Roles y Grupos de Gestión">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-6">
+                <p-dataTable [value]="curRoles" [paginator]="true" [rows]="10"
+                             [responsive]="true">
+                    <p-column field="rol" header="Rol"></p-column>
+                    <p-column header="Periodo Habilitación">
+                        <template let-const="rowData" pTemplate="body">
+                            <p>FI:{{const.fechaInicio}}<br>FF:{{const.fechaFin}}</p>
+                        </template>
+                    </p-column>
+                </p-dataTable>
+            </div>
+            <div class="ui-grid-col-6">
+                <p-dataTable [value]="curGrupos" [paginator]="true" [rows]="10"
+                             [responsive]="true">
+                    <p-column field="grupoGestion" header="GrupoGestion"></p-column>
+                    <p-column header="Periodo Habilitación">
+                        <template let-const="rowData" pTemplate="body">
+                            <p>FI:{{const.fechaInicio}}<br>FF:{{const.fechaFin}}</p>
+                        </template>
+                    </p-column>
+                </p-dataTable>
+            </div>
+        </div>
+
+        <div class="col-md-12, pull-right">
+            <a (click)="goBack()" class="cancelar">Regresar</a>
+        </div>
+    </p-tabPanel>
+    <p-tabPanel header="Historial" rightIcon="fa-calendar">
+        <div class="row datable-header">
+            <div class="col-md-6 col-xs-12 datatable-header-add">
+            </div>
+            <div class="col-md-6 col-xs-12 datatable-header-search">
+                <i class="fa fa-search"></i>
+                <input #gbs type="text" pInputText size="40" placeholder="Buscar...">
+            </div>
+        </div>
+        <p-dataTable [value]="historico" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gbs">
+            <p-column field="idAuditoria" header="Id" [sortable]="true"></p-column>
+            <p-column field="historia" header="Historia" [sortable]="true"></p-column>
+            <p-column field="valorAnterior" header="Valor Anterior" [sortable]="true"></p-column>
+            <p-column field="valorNuevo" header="Valor Nuevo" [sortable]="true"></p-column>
+        </p-dataTable>
+    </p-tabPanel>
+</p-tabView>

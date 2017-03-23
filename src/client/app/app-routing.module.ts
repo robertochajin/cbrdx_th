@@ -48,6 +48,52 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {CambioContrasenaComponent} from "./seguridad/cambioContrasena.component";
 import {AuthGuard} from "./_guards/auth.guard";
 
+// Constantes
+import {ConstanteComponent} from "./constantes/constante.component";
+import {ConstanteAddComponent} from "./constantes/constante-add.component";
+import {ConstanteEditComponent} from "./constantes/constante-edit.component";
+import {ConstanteDetailComponent} from "./constantes/constante-detail.component";
+
+
+// Listas
+import {ListaComponent} from "./listas/lista.component";
+import {ListaAddComponent} from "./listas/lista-add.component";
+import {ListaDetailComponent} from "./listas/lista-detail.component";
+import {ListaEditComponent} from "./listas/lista-edit.component";
+
+// Centros de Costos
+import {CentroCostosComponent} from "./centroCostos/centroCostos.component";
+import {CentroCostosAddComponent} from "./centroCostos/centroCostos-add.component";
+import {CentroCostosDetailComponent} from "./centroCostos/centroCostos-detail.component";
+import {CentroCostosEditComponent} from "./centroCostos/centroCostos-edit.component";
+
+// Grupos de Gestion
+import {GruposGestionComponent} from "./gruposGestion/gruposGestion.component";
+import {GruposGestionAddComponent} from "./gruposGestion/gruposGestion-add.component";
+import {GruposGestionDetailComponent} from "./gruposGestion/gruposGestion-detail.component";
+import {GruposGestionEditComponent} from "./gruposGestion/gruposGestion-edit.component";
+
+// Roles
+import {RolesComponent} from "./roles/roles.component";
+import {RolesAddComponent} from "./roles/roles-add.component";
+
+// Usuarios
+import {UsuariosComponent} from "./usuarios/usuarios.component";
+import {UsuariosAddComponent} from "./usuarios/usuarios-add.component";
+import {UsuarioDetailComponent} from "./usuarios/usuarios-detail.component";
+import {UsuariosEditComponent} from "./usuarios/usuarios-edit.component";
+
+// Tipos De Area
+import {TipoDeAreaComponent} from "./areas/tipoDeArea.component";
+import {TipoDeAreaEditComponent} from "./areas/tipoDeArea-edit.component";
+import {TipoDeAreaDetailComponent} from "./areas/tipoDeArea-detail.component";
+import {TipoDeAreaAddComponent} from "./areas/tipoDeArea-add.component";
+
+// Arboles
+import {DivisionPoliticaComponent} from "./divisionPolitica/divisionPolitica.component";
+import {OcupacionesComponent} from "./ocupaciones/ocupaciones.component";
+import {ActividadEconomicaComponent} from "./actividadEconomica/actividadEconomica.component";
+
 
 const routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -96,6 +142,53 @@ const routes = [
   {path: 'login', component: LoginComponent},
   {path: 'cambioContrasena', component: CambioContrasenaComponent},
   {path: 'dashboard', component: DashboardComponent},
+
+  // Constantes
+  {path: 'constantes', component: ConstanteComponent, canActivate: [AuthGuard]},
+  {path: 'constantes/add', component: ConstanteAddComponent, canActivate: [AuthGuard]},
+  {path: 'constantes/edit/:id', component: ConstanteEditComponent, canActivate: [AuthGuard]},
+  {path: 'constantes/detail/:id', component: ConstanteDetailComponent, canActivate: [AuthGuard]},
+
+  // Listas
+  {path: 'listas', component: ListaComponent, canActivate: [AuthGuard]},
+  {path: 'listas/add', component: ListaAddComponent, canActivate: [AuthGuard]},
+  {path: 'listas/detail/:id', component: ListaDetailComponent, canActivate: [AuthGuard]},
+  {path: 'listas/edit/:id', component: ListaEditComponent, canActivate: [AuthGuard]},
+
+  // Centros de Costos
+  {path: 'centroCostos', component: CentroCostosComponent, canActivate: [AuthGuard]},
+  {path: 'centroCostos/add', component: CentroCostosAddComponent, canActivate: [AuthGuard]},
+  {path: 'centroCostos/detail/:id', component: CentroCostosDetailComponent, canActivate: [AuthGuard]},
+  {path: 'centroCostos/edit/:id', component: CentroCostosEditComponent, canActivate: [AuthGuard]},
+
+  // Grupos de Gestion
+  {path: 'gruposGestion', component: GruposGestionComponent, canActivate: [AuthGuard]},
+  {path: 'gruposGestion/add', component: GruposGestionAddComponent, canActivate: [AuthGuard]},
+  {path: 'gruposGestion/detail/:id', component: GruposGestionDetailComponent, canActivate: [AuthGuard]},
+  {path: 'gruposGestion/edit/:id', component: GruposGestionEditComponent, canActivate: [AuthGuard]},
+
+  // Roles
+  {path: 'roles', component: RolesComponent, canActivate: [AuthGuard]},
+  {path: 'roles/add', component: RolesAddComponent, canActivate: [AuthGuard]},
+
+  // Usuarios
+  {path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard]},
+  {path: 'usuarios/add', component: UsuariosAddComponent, canActivate: [AuthGuard]},
+  {path: 'usuarios/detail/:id', component: UsuarioDetailComponent, canActivate: [AuthGuard]},
+  {path: 'usuarios/edit/:id', component: UsuariosEditComponent, canActivate: [AuthGuard]},
+
+  // Tipos De Area
+  {path: 'tipoArea', component: TipoDeAreaComponent, canActivate: [AuthGuard]},
+  {path: 'tipoArea/add', component: TipoDeAreaAddComponent, canActivate: [AuthGuard]},
+  {path: 'tipoArea/detail/:id', component: TipoDeAreaDetailComponent, canActivate: [AuthGuard]},
+  {path: 'tipoArea/edit/:id', component: TipoDeAreaEditComponent, canActivate: [AuthGuard]},
+
+  // Arboles
+  {path: 'divisionPolitica', component: DivisionPoliticaComponent, canActivate: [AuthGuard]},
+  {path: 'ocupaciones', component: OcupacionesComponent, canActivate: [AuthGuard]},
+  {path: 'actividadeconomica', component: ActividadEconomicaComponent, canActivate: [AuthGuard]},
+
+
 ];
 
 @NgModule({

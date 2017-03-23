@@ -21,8 +21,20 @@ import {GrowlModule} from "primeng/primeng";
 import {DashboardModule} from "./dashboard/dashboard.module";
 import {TranslateModule, TranslateLoader, TranslateStaticLoader} from "ng2-translate";
 
+// Copy sp
 
-// used to create fake backend
+import {ConstanteModule} from "./constantes/constante.module";
+import {ListaModule} from "./listas/lista.module";
+import {CentroCostosModule} from "./centroCostos/centroCostos.module";
+import {GruposGestionModule} from "./gruposGestion/gruposGestion.module";
+import {RolesModule} from "./roles/roles.module";
+import {UsuariosModule} from "./usuarios/usuarios.module";
+import {TipoDeAreaModule} from "./areas/tipoDeArea.module";
+import {DivisionPoliticaModule} from "./divisionPolitica/divisionPolitica.module";
+import {OcupacionesModule} from "./ocupaciones/ocupaciones.module";
+import {ActividadEconomicaModule} from "./actividadEconomica/actividadEconomica.module";
+
+
 
 //CarsModule,
 @NgModule( {
@@ -41,7 +53,17 @@ import {TranslateModule, TranslateLoader, TranslateStaticLoader} from "ng2-trans
       provide: TranslateLoader,
       useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
       deps: [Http]
-    })
+    }),
+    ConstanteModule,
+    ListaModule,
+    CentroCostosModule,
+    GruposGestionModule,
+    RolesModule,
+    UsuariosModule,
+    TipoDeAreaModule,
+    DivisionPoliticaModule,
+    OcupacionesModule,
+    ActividadEconomicaModule,
   ],
 
   declarations: [AppComponent],
@@ -56,10 +78,6 @@ import {TranslateModule, TranslateLoader, TranslateStaticLoader} from "ng2-trans
       provide: APP_BASE_HREF,
       useValue: '<%= APP_BASE %>',
     }
-    // providers used to create fake backend
-    // fakeBackendProvider,
-    // MockBackend,
-    // BaseRequestOptions
   ],
 
   bootstrap: [AppComponent]
