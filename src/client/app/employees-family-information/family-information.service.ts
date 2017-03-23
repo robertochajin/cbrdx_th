@@ -10,8 +10,8 @@ export class FamilyInformationService {
 
     private serviceURL = '<%= SVC_TH_URL %>/terceroFamily/';
     private serviceURLEmployee = '<%= SVC_TH_URL %>/terceroFamily/';
-    private serviceURLDocumenttype = '<%= SVC_TH_URL %>/documenttype/';
-    private serviceURLRelationtypes = '<%= SVC_TH_URL %>/relationtypes/';
+    private serviceURLDocumenttype = '<%= SVC_TH_URL_D %>/documenttype/';
+    private serviceURLRelationtypes = '<%= SVC_TH_URL_D %>/relationtypes/';
 
     constructor(private http: Http) {}
 
