@@ -7,9 +7,9 @@ import {Observable} from "rxjs";
 export class ReferencesTypesService {
 
   public headers = new Headers({'Content-Type': 'application/json'});
-  // private masterService = '<%= SVC_URL %>:<%= SVC_PORT_SEG %>/references/';
-  private masterService = 'http://40.71.92.147:8444/references/';
-  private detailService  = '<%= SVC_URL %>:<%= SVC_PORT_SEG %>/references/';
+
+  private masterService = '<%= SVC_TH_URL %>/referenceTypes/';
+  private detailService  = '<%= SVC_TH_URL %>/referenceTypes/';
 
   constructor(private http: Http,
               private authenticationService: AuthenticationService
