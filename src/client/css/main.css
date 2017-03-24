@@ -235,7 +235,7 @@ hr {
     max-height: none;
     min-height: 100%;
     overflow: hidden;
-    width: 200px;
+    width: 160px;
     z-index: 4;
     box-shadow: inset -1px 0 0 0 #ddd
 }
@@ -253,14 +253,13 @@ hr {
 }
 
 .sidebar, .off-canvas-sidebar {
-    width: 200px;
+    width: 160px;
     display: block;
     font-weight: 200
 }
 
 .sidebar .logo, .off-canvas-sidebar .logo {
     padding: 18px 0;
-    margin: 0 20px
 }
 
 .sidebar .logo p, .off-canvas-sidebar .logo p {
@@ -354,7 +353,7 @@ hr {
     background-color: #f4f3ef;
     position: relative;
     float: right;
-    width: calc(100% - 200px);
+    width: calc(100% - 160px);
     min-height: 100%
 }
 
@@ -954,9 +953,9 @@ hr {
 }
 
 .input-group-addon {
-    background-color: #fffcf5;
+    /* background-color: #fffcf5;
     border: medium none;
-    border-radius: 4px
+    border-radius: 4px */
 }
 
 .has-success .input-group-addon, .has-error .input-group-addon {
@@ -3723,4 +3722,24 @@ p-autoComplete .ui-autocomplete-input{
 p-calendar,
 p-togglebutton {
   display: block;
+}
+
+.ui-tree {
+  width: 100%!important;
+}
+body .ui-tree .ui-treenode .ui-treenode-content .ui-treenode-label {
+  padding: 4px!important;
+  width: 90%;
+  white-space: initial;
+}
+
+body .ui-tree .ui-treenode .ui-treenode-content .ui-tree-toggler {
+  vertical-align: top!important;
+}
+p-tree{
+  height: 410px;
+  display: flex;
+}
+dashboard_height{
+  height: 275px;
 }

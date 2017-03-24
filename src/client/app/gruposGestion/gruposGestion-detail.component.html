@@ -1,0 +1,56 @@
+<h3>Grupos de Gestión</h3>
+<div class="col-sm-8 col-sm-offset-2">
+    <h2 class="text-center">Detalle Grupo de Gestión</h2>
+    <div class="form-group">
+        <label for="codigoGrupoGestion" class="control-label col-sm-3">Código </label>
+        <div class=" col-sm-9">
+            <input type="text" pInputText class="form-control" id="codigoGrupoGestion" disabled
+                   [(ngModel)]="grupoGestion.codigoGrupoGestion">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="gGestion" class="control-label col-sm-3">Nombre </label>
+        <div class=" col-sm-9">
+            <input type="text" pInputText class="form-control" id="gGestion" disabled
+                   [(ngModel)]="grupoGestion.grupoGestion">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="fechaInicio" class="control-label col-sm-3">Fecha Inicio</label>
+        <div class=" col-sm-9">
+            <p-calendar id="fechaInicio" name="fechaInicio" [(ngModel)]="grupoGestion.fechaInicio"
+                        [showIcon]="true" class="form-control" dateFormat="yy-mm-dd" disabled></p-calendar>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="fechaFin" class="control-label col-sm-3">Fecha Fin</label>
+        <div class=" col-sm-9">
+            <p-calendar id="fechaFin" name="fechaFin" [(ngModel)]="grupoGestion.fechaFin" class="form-control"
+                        [showIcon]="true" dateFormat="yy-mm-dd" disabled></p-calendar>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="funciones" class="control-label col-sm-3">Funciones </label>
+        <div class=" col-sm-9">
+            <textarea pInputTextarea class="form-control" id="funciones" disabled
+                      [(ngModel)]="grupoGestion.funciones"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="responsabilidades" class="control-label col-sm-3">Responsabilidades </label>
+        <div class=" col-sm-9">
+                <textarea pInputTextarea class="form-control" id="responsabilidades" disabled
+                          [(ngModel)]="grupoGestion.responsabilidades"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+        <div class=" col-sm-9">
+            <p-checkbox [(ngModel)]="grupoGestion.indicadorHabilitado" binary="true" id="indicador" class="form-control"
+                        disabled></p-checkbox>
+        </div>
+    </div>
+    <div class="form-group">
+        <a (click)="goBack()" class="cancelar">Regresar</a>
+    </div>
+</div>

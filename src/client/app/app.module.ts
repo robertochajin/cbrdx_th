@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {APP_BASE_HREF} from "@angular/common";
-import {HttpModule} from "@angular/http";
+import {HttpModule,Http} from "@angular/http";
 import {AppComponent} from "./app.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {AboutModule} from "./about/about.module";
@@ -19,7 +19,22 @@ import {AuthGuard} from "./_guards/auth.guard";
 import {AuthenticationService} from "./_services/authentication.service";
 import {GrowlModule} from "primeng/primeng";
 import {DashboardModule} from "./dashboard/dashboard.module";
-// used to create fake backend
+import {TranslateModule, TranslateLoader, TranslateStaticLoader} from "ng2-translate";
+
+// Copy sp
+
+import {ConstanteModule} from "./constantes/constante.module";
+import {ListaModule} from "./listas/lista.module";
+import {CentroCostosModule} from "./centroCostos/centroCostos.module";
+import {GruposGestionModule} from "./gruposGestion/gruposGestion.module";
+import {RolesModule} from "./roles/roles.module";
+import {UsuariosModule} from "./usuarios/usuarios.module";
+import {TipoDeAreaModule} from "./areas/tipoDeArea.module";
+import {DivisionPoliticaModule} from "./divisionPolitica/divisionPolitica.module";
+import {OcupacionesModule} from "./ocupaciones/ocupaciones.module";
+import {ActividadEconomicaModule} from "./actividadEconomica/actividadEconomica.module";
+
+
 
 //CarsModule,
 @NgModule( {
@@ -33,7 +48,23 @@ import {DashboardModule} from "./dashboard/dashboard.module";
     LoginModule,
     GrowlModule,
     DashboardModule,
-    SharedModule.forRoot()],
+    SharedModule.forRoot(),
+    TranslateModule.forRoot({
+      provide: TranslateLoader,
+      useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
+      deps: [Http]
+    }),
+    ConstanteModule,
+    ListaModule,
+    CentroCostosModule,
+    GruposGestionModule,
+    RolesModule,
+    UsuariosModule,
+    TipoDeAreaModule,
+    DivisionPoliticaModule,
+    OcupacionesModule,
+    ActividadEconomicaModule,
+  ],
 
   declarations: [AppComponent],
   providers: [{
@@ -47,10 +78,6 @@ import {DashboardModule} from "./dashboard/dashboard.module";
       provide: APP_BASE_HREF,
       useValue: '<%= APP_BASE %>',
     }
-    // providers used to create fake backend
-    // fakeBackendProvider,
-    // MockBackend,
-    // BaseRequestOptions
   ],
 
   bootstrap: [AppComponent]

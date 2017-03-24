@@ -1,0 +1,61 @@
+<h3>Listas</h3>
+<p-fieldset legend="Parámetros Lista">
+    <div class="col-xs-6">
+        <div class="form-group">
+            <label for="codigoLista">Codigo</label>
+            <input class="form-control" type="text" pInputText [(ngModel)]="masterList.codigoLista" id="codigoLista"
+                   disabled>
+        </div>
+        <div class="form-group">
+            <label for="lista">Lista</label>
+            <input class="form-control" type="text" pInputText [(ngModel)]="masterList.lista" id="lista" disabled>
+        </div>
+        <div class="form-group form-inline">
+            <label for="indicador">Habilitado</label>
+            <p-checkbox [(ngModel)]="masterList.indicadorHabilitado" binary="true" id="indicador" disabled
+                        class="form-control"></p-checkbox>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="form-group">
+            <label for="dependeLista">Depende de Lista</label>
+            <select [(ngModel)]="masterList.dependeLista" id="dependeLista" disabled class="form-control">
+                <option *ngFor="let c of othersList" [ngValue]="c.idLista">{{c.lista}}</option>
+            </select>
+        </div>
+        <div class="form-group" *ngIf="masterList.dependeLista">
+            <label for="dependeItem">Depende de Item</label>
+            <select [(ngModel)]="masterList.dependeItem" id="dependeItem" class="form-control" disabled>
+                <option *ngFor="let d of othersDetailsList" [ngValue]="d.idListaItem">{{d.codigoItem}} -
+                    {{d.item}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="idLista">Id</label>
+            <p id="idLista">{{masterList.idLista}}</p>
+        </div>
+    </div>
+</p-fieldset>
+
+<p-fieldset legend="Elementos de la Lista">
+    <p-dataTable [value]="detailsList" [paginator]="true" [rows]="10" [responsive]="true">
+        <header>Listas</header>
+        <p-column field="codigoItem" header="Código"></p-column>
+        <p-column field="item" header="Item"></p-column>
+        <p-column field="descripcion" header="Descripcion"></p-column>
+        <p-column field="indicadorPredeterminado" header="Predeterminado">
+            <template let-const="rowData" pTemplate="body">
+                <p-checkbox [(ngModel)]="const.indicadorPredeterminado" binary="true" disabled="true"></p-checkbox>
+            </template>
+        </p-column>
+        <p-column field="indicadorHabilitado" header="Habilitado">
+            <template let-const="rowData" pTemplate="body">
+                <p-checkbox [(ngModel)]="const.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
+            </template>
+        </p-column>
+    </p-dataTable>
+    <div class="pull-right">
+        <a (click)="goBack()" class="cancelar">Volver</a>
+    </div>
+</p-fieldset>

@@ -7,12 +7,13 @@ import {Tercero} from "../_models/tercero";
 import {Usuario} from "../_models/usuario";
 import {UsuariosService} from "../_services/usuarios.service";
 import {RolCantidad} from "../_models/RolCantidad";
+import {TranslateService} from 'ng2-translate';
 
 @Component({
   moduleId: module.id,
   templateUrl: 'dashboard.component.html',
   selector: 'dashboard',
-  styleUrls: ['dashboard.css']
+  styleUrls: ['dashboard.css'],
 })
 export class DashboardComponent implements OnInit {
 
@@ -28,8 +29,14 @@ export class DashboardComponent implements OnInit {
   rolesSistema: boolean = true;
   usuariosAct: boolean = true;
   widgets: any[] = [];
+  usuariosTitle:string;
 
-  constructor(private router: Router, private rolesService: RolesService, private  tercerosServices: TercerosService, private usuarioService: UsuariosService) {
+
+  constructor(private router: Router, private rolesService: RolesService, private  tercerosServices: TercerosService,
+              private usuarioService: UsuariosService,
+              private _translate:TranslateService
+    ) {
+
     usuarioService.listUsers().subscribe(res => {
       this.listaUsuarios = res;
       for (let u of this.listaUsuarios) {
@@ -40,11 +47,9 @@ export class DashboardComponent implements OnInit {
         }
       }
     });
-    // this.widgets =[
-    //                 {order:3, panel:'<roles>hola 1</roles>'},
-    //                 {order:2, panel:"<ocupaciones></ocupaciones>"},
-    //                 {order:1, panel:"<actividadEconomica>hola 3</actividadEconomica>"},
-    //                 ];
+
+    this.refreshText();
+
   }
 
 
@@ -127,7 +132,9 @@ export class DashboardComponent implements OnInit {
       }
       this.isData = true;
     });
+
   }
+
 
   user() {
     this.router.navigate(['usuarios']);
@@ -167,6 +174,11 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(["actividadeconomica"]);
         break;
     }
+  }
+  refreshText() {
+    this._translate.get('Usuarios del Sistema').subscribe((res: string) => {
+      this.usuariosTitle = res;
+    });
   }
 
 }

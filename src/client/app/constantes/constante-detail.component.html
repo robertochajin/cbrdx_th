@@ -1,0 +1,46 @@
+<h3>Constantes</h3>
+<div class="col-sm-6 col-sm-offset-3">
+    <h2 class="text-center">Detalle Constante</h2>
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label for="constante" class="control-label col-sm-3">Constante</label>
+            <div class=" col-sm-9">
+                <input type="text" pInputText class="form-control" id="constante" [(ngModel)]="constant.constante"
+                       disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="idTipoDato" class="control-label col-sm-3">Tipo de Dato</label>
+            <div class="col-sm-9">
+                <select [(ngModel)]="constant.idTipoDato" id="idTipoDato" class="form-control" disabled>
+                    <option *ngFor="let c of datatypeDetails" [ngValue]="c.idListaItem">
+                        {{c.codigoItem}} - {{c.item}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="valor" class="control-label col-sm-3">Valor</label>
+            <div class=" col-sm-9">
+                <input type="text" pInputText class="form-control" id="valor" [(ngModel)]="constant.valor" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="descripcion" class="control-label col-sm-3">Descripción</label>
+            <div class=" col-sm-9">
+                <input type="text" pInputText class="form-control" id="descripcion" [(ngModel)]="constant.descripcion"
+                       disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+            <div class=" col-sm-9">
+                <p-checkbox [(ngModel)]="constant.indicadorHabilitado" binary="true" id="indicador" disabled
+                            class="form-control"></p-checkbox>
+            </div>
+        </div>
+        <div class="form-group">
+            <a (click)="goBack()" class="cancelar">Regresar</a>
+        </div>
+    </div>
+</div>

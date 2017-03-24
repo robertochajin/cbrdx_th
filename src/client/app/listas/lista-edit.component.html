@@ -1,0 +1,275 @@
+<h3>Listas</h3>
+<p-fieldset legend="Parametros Lista">
+    <form #f="ngForm" class="form-horizontal" (ngSubmit)="!codeExists&&f.form.valid&&createMaster(f)" novalidate
+          (keydown.enter)="$event.preventDefault()">
+        <div class="col-sm-6">
+            <div class="form-group" [ngClass]="{ 'has-error':f.submitted&&!codigoLista.valid}">
+                <label class="control-label col-sm-4" for="codigoLista">Codigo</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" pInputText id="codigoLista" name="codigoLista"
+                           [(ngModel)]="masterList.codigoLista" #codigoLista="ngModel" required maxlength="10"
+                           pattern="[A-Z]{0,10}" [disabled]="isMasterCreated"
+                           (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
+                           (paste)="inputCleanUp($event.target.value)">
+                    <div *ngIf="codeExists" class="alert alert-danger">
+                        Ya se encuentra registrado ese codigo
+                    </div>
+                    <div *ngIf="f.submitted&&codigoLista.errors" class="alert alert-danger">
+                        <div [hidden]="!codigoLista.errors.required">Debe ingresar el Codigo.</div>
+                        <div [hidden]="!codigoLista.errors.pattern">El codigo solo debe contener letras.</div>
+                        <div [hidden]="!codigoLista.errors.maxlength">El codigo no debe tener mas de 10 caracteres.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error':f.submitted&&!lista.valid}">
+                <label class="control-label col-sm-4" for="lista">Lista</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" pInputText [(ngModel)]="masterList.lista" id="lista"
+                           required maxlength="40" #lista="ngModel" name="lista" pattern="[A-Z]{1}.*"
+                           [disabled]="isMasterCreated">
+                    <div *ngIf="f.submitted&&lista.errors" class="alert alert-danger">
+                        <div [hidden]="!lista.errors.required">Debe ingresar el nombre de la Lista.</div>
+                        <div [hidden]="!lista.errors.pattern">El nombre debe comenzar por una letra mayuscula.</div>
+                        <div [hidden]="!lista.errors.maxlength">La lista no debe tener mas de 40 caracteres.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="indicador">Habilitado</label>
+                <div class="col-sm-8">
+                    <p-checkbox [(ngModel)]="masterList.indicadorHabilitado" binary="true" id="indicador"
+                                name="indicador" #indicador="ngModel" [disabled]="isMasterCreated"
+                                (ngModelChange)="modifyDependency()"></p-checkbox>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="dependeLista">Depende de Lista</label>
+                <div class="col-sm-8">
+                    <select [(ngModel)]="masterList.dependeLista" id="dependeLista" name="dependeLista"
+                            (ngModelChange)="onChange($event)" class="form-control"
+                            [disabled]="isMasterCreated||!isEnabled">
+                        <option *ngFor="let c of othersList" [ngValue]="c.idLista">{{c.lista}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" *ngIf="masterList.dependeLista">
+                <label class="control-label col-sm-4" for="dependeItem">Depende de Item</label>
+                <div class="col-sm-8">
+                    <select [(ngModel)]="masterList.dependeItem" id="dependeItem" name="dependeItem"
+                            class="form-control"
+                            [disabled]="isMasterCreated" [required]="masterList.dependeLista" #dependeItem="ngModel">
+                        <option *ngFor="let d of othersDetailsList" [ngValue]="d.idListaItem">{{d.codigoItem}} -
+                            {{d.item}}
+                        </option>
+                    </select>
+                    <div *ngIf="f.submitted&&dependeItem.errors" class="alert alert-danger">
+                        <div [hidden]="!dependeItem.errors.required">Debe seleccionar un elemento.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="idLista">Id</label>
+                <div class="col-sm-8">
+                    <p id="idLista">{{masterList.idLista}}</p>
+                </div>
+            </div>
+            <div class="col-md-11 col-md-offset-1">
+                <div class="row form-footer-buttons">
+                    <div class="col-md-12">
+                        <button class="pull-right" type="submit" pButton icon="fa-check" label="Actualizar"
+                                (keydown.enter)="submit.click()"
+                                #submit></button>
+                        <a (click)="displayDialog=true" class="cancelar pull-right">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</p-fieldset>
+<p-fieldset legend="Elementos de la Lista">
+    <form *ngIf="!isEdit" name="form" (ngSubmit)="!detailCodeExists&&fd.form.valid && createDetail(fd)" #fd="ngForm"
+          novalidate
+          (keydown.enter)="$event.preventDefault()">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group" [ngClass]="{ 'has-error':fd.submitted&&!codigoItem.valid}">
+                    <label for="codigoItem">Codigo</label>
+                    <input class="form-control" id="codigoItem" name="codigoItem" type="text" pInputText
+                           [(ngModel)]="editableDetail.codigoItem" maxlength="10" required #codigoItem="ngModel"
+                           (keyup)="childInputCleanUp($event.target.value)" (change)="validateDetailCode()"
+                           (paste)="childInputCleanUp($event.target.value)" pattern="[A-Z]{0,10}"/>
+                    <div *ngIf="detailCodeExists" class="alert alert-danger">
+                        <div>El codigo ya esta registrado.</div>
+                    </div>
+                    <div *ngIf="fd.submitted&&codigoItem.errors" class="alert alert-danger">
+                        <div [hidden]="!codigoItem.errors.required">Debe ingresar el codigo del Elemento.</div>
+                        <div [hidden]="!codigoItem.errors.pattern">El codigo deben ser solo letras.</div>
+                        <div [hidden]="!codigoItem.errors.maxlength">El codigo no debe tener mas de 10 caracteres.</div>
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="{ 'has-error':fd.submitted&&!item.valid}">
+                    <label for="item">Item</label>
+                    <input class="form-control" id="item" name="item" type="text" pInputText
+                           [(ngModel)]="editableDetail.item" #item="ngModel" maxlength="30" required/>
+                    <div *ngIf="fd.submitted&&item.errors" class="alert alert-danger">
+                        <div [hidden]="!item.errors.required">Debe ingresar el nombre del Elemento.</div>
+                        <div [hidden]="!item.errors.maxlength">El elemento no debe tener mas de 30 caracteres.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label for="descripcion">Descripcion</label>
+                    <input class="form-control" id="descripcion" name="descripcion" type="text" pInputText
+                           [(ngModel)]="editableDetail.descripcion"
+                           size="30"/>
+                </div>
+                <div class="form-group">
+                    <label for="predeterminado">Predeterminado</label>
+                    <p-checkbox id="predeterminado" [(ngModel)]="editableDetail.indicadorPredeterminado"
+                                binary="true" name="predeterminado"></p-checkbox>
+                    <label for="habilitado">Habilitado</label>
+                    <p-checkbox id="habilitado" [(ngModel)]="editableDetail.indicadorHabilitado"
+                                binary="true" name="habilitado"></p-checkbox>
+                </div>
+                <div class="form-group">
+
+                </div>
+                <div class="col-md-11 col-md-offset-1">
+                    <div class="row form-footer-buttons">
+                        <div class="col-md-12 ">
+                            <button type="submit" pButton icon="fa-check" label="Agregar" class="pull-right"
+                                    (keydown.enter)="submitDetail.click()"
+                                    #submitDetail></button>
+                            <a (click)="displayDetailDialog=true" class="cancelar pull-right">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form *ngIf="isEdit" name="formEdit" (ngSubmit)="!detailCodeExists&&fe.form.valid && updateDetail(fe)" #fe="ngForm"
+          novalidate (keydown.enter)="$event.preventDefault()">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group" [ngClass]="{ 'has-error':fe.submitted&&!codigoItemEdit.valid}">
+                    <label for="codigoItemEdit">Codigo</label>
+                    <input class="form-control" id="codigoItemEdit" name="codigoItemEdit" type="text" pInputText
+                           [(ngModel)]="editableDetail.codigoItem" maxlength="10" required #codigoItemEdit="ngModel"
+                           (keyup)="childInputCleanUp($event.target.value)" (change)="validateDetailCode()"
+                           (paste)="childInputCleanUp($event.target.value)" pattern="[A-Z]{0,10}"/>
+                    <div *ngIf="detailCodeExists" class="alert alert-danger">
+                        <div>El codigo ya esta registrado.</div>
+                    </div>
+                    <div *ngIf="fe.submitted&&codigoItemEdit.errors" class="alert alert-danger">
+                        <div [hidden]="!codigoItemEdit.errors.required">Debe ingresar el codigo del Elemento.</div>
+                        <div [hidden]="!codigoItemEdit.errors.pattern">El codigo deben ser solo letras.</div>
+                        <div [hidden]="!codigoItemEdit.errors.maxlength">El codigo no debe tener mas de 10 caracteres.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="{ 'has-error':fe.submitted&&!itemEdit.valid}">
+                    <label for="itemEdit">Item</label>
+                    <input class="form-control" id="itemEdit" name="itemEdit" type="text" pInputText
+                           [(ngModel)]="editableDetail.item" #itemEdit="ngModel" maxlength="30" required/>
+                    <div *ngIf="fe.submitted&&itemEdit.errors" class="alert alert-danger">
+                        <div [hidden]="!itemEdit.errors.required">Debe ingresar el nombre del Elemento.</div>
+                        <div [hidden]="!itemEdit.errors.maxlength">El elemento no debe tener mas de 30 caracteres.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label for="descripcionEdit">Descripcion</label>
+                    <input class="form-control" id="descripcionEdit" name="descripcionEdit" type="text" pInputText
+                           [(ngModel)]="editableDetail.descripcion"
+                           size="30"/>
+                </div>
+                <div class="form-group">
+                    <label for="predeterminadoEdit">Predeterminado</label>
+                    <p-checkbox id="predeterminadoEdit" [(ngModel)]="editableDetail.indicadorPredeterminado"
+                                binary="true" name="predeterminadoEdit"></p-checkbox>
+                    <label for="habilitadoEdit">Habilitado</label>
+                    <p-checkbox id="habilitadoEdit" [(ngModel)]="editableDetail.indicadorHabilitado"
+                                binary="true" name="habilitado"></p-checkbox>
+                </div>
+                <div class="form-group">
+
+                </div>
+                <div class="col-md-11 col-md-offset-1">
+                    <div class="row form-footer-buttons">
+                        <div class="col-md-12 ">
+                            <button type="submit" pButton icon="fa-check" label="Actualizar" class="pull-right"
+                                    (keydown.enter)="submitDetailEdit.click()"
+                                    #submitDetailEdit></button>
+                            <a (click)="displayDetailDialog=true" class="cancelar pull-right">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <p-dataTable [value]="detailsList" [paginator]="true" [rows]="10" [responsive]="true">
+        <header>Listas</header>
+        <p-column field="codigoItem" header="Código"></p-column>
+        <p-column field="item" header="Item"></p-column>
+        <p-column field="descripcion" header="Descripcion"></p-column>
+        <p-column field="indicadorPredeterminado" header="Predeterminado">
+            <template let-const="rowData" pTemplate="body">
+                <p-checkbox [(ngModel)]="const.indicadorPredeterminado" binary="true" disabled="true"></p-checkbox>
+            </template>
+        </p-column>
+        <p-column field="indicadorHabilitado" header="Habilitado">
+            <template let-const="rowData" pTemplate="body">
+                <p-checkbox [(ngModel)]="const.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
+            </template>
+        </p-column>
+        <p-column header="Acciones">
+            <template let-const="rowData" pTemplate="body">
+                <div class="btn-group" role="group">
+                    <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" pButton
+                            (click)="detailEdit(const);"></button>
+                </div>
+            </template>
+        </p-column>
+    </p-dataTable>
+    <div class="pull-right form-footer-buttons">
+        <a (click)="displayReturnDialog=true" class="cancelar">Regresar</a>
+    </div>
+</p-fieldset>
+<p-dialog header="Confirmación" [(visible)]="displayDialog" responsive="true">
+    <p>Si continua perdera la información no guardada.Esta seguro que desea cancelar?.</p>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No" autofocus></button>
+            <button type="button" pButton icon="fa-check" (click)="clearMaster()" label="Si"></button>
+        </div>
+    </p-footer>
+</p-dialog>
+<p-dialog header="Confirmación" [(visible)]="displayReturnDialog" responsive="true">
+    <p>Si continua perdera la información no guardada.Esta seguro que desea cancelar?.</p>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="fa-close" (click)="displayReturnDialog=false" label="No"
+                    autofocus></button>
+            <button type="button" pButton icon="fa-check" (click)="goBack()" label="Si"></button>
+        </div>
+    </p-footer>
+</p-dialog>
+<p-dialog *ngIf="displayDetailDialog" header="Confirmación" [(visible)]="displayDetailDialog" responsive="true">
+    <p>Si continua perdera la información no guardada.Esta seguro que desea salir?.</p>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="fa-close" (click)="displayDetailDialog=false" label="No"
+                    autofocus></button>
+            <button type="button" pButton icon="fa-check" (click)="clearDetail()" label="Si"></button>
+        </div>
+    </p-footer>
+</p-dialog>
+<p-dialog *ngIf="displayUpdateDialog" header="Actualizacion Correcta" [(visible)]="displayUpdateDialog"
+          responsive="true" closable="false">
+    <p>Informacion actualizada.</p>
+</p-dialog>
