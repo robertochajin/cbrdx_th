@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Employee } from '../employees/employees';
 import { LocationService } from '../_services/employee-location.service';
-import { EmployeesLocation } from './employee-location';
+import { EmployeesLocation } from '../_models/employee-location';
 import { ConfirmationService } from 'primeng/primeng';
 
 @Component({
