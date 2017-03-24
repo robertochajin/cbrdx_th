@@ -20,7 +20,7 @@ export class FamilyInformationService {
     }
 
     getAllByEmployee(id: number) {
-      return this.http.get(this.serviceURLEmployee + 'habilitated/' + id)
+      return this.http.get(this.serviceURLEmployee + '/employee/habilitated/' + id)
         .map((res:Response) => res.json());
     }
 

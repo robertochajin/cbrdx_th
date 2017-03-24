@@ -2,14 +2,14 @@ import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { EmployeesLocation } from './employees-location';
-import { LocationService } from './location.service';
+import { EmployeesLocation } from '../_models/employee-location';
+import { LocationService } from '../_services/employee-location.service';
 import { NavService } from '../_services/_nav.service';
 
 @Component({
     moduleId: module.id,
     selector: 'family-information',
-    templateUrl: 'location-detail.component.html',
+    templateUrl: 'employee-location-detail.component.html',
 })
 
 

@@ -1,6 +1,3 @@
-/**
- * Created by Angel on 14/02/2017.
- */
 import { NgModule }      from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -10,9 +7,10 @@ import 'rxjs/add/operator/toPromise';
 import { ReferencesComponent }  from './references.component';
 import { ReferencesDetailComponent }  from './references-detail.component';
 import { ReferencesAddComponent }  from './references-add.component';
+import { LocationsComponent }  from '../locations/locations.component';
 import { ReferencesUpdateComponent }  from './references-update.component';
 import { ReferencesService } from './references.service';
-import { ReferencesTypesServices } from '../_services/references-type.service';
+import { ReferencesTypesService } from '../_services/references-type.service';
 
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule,
   ConfirmDialogModule,
@@ -33,10 +31,11 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
     declarations: [ReferencesComponent,
                     ReferencesDetailComponent,
                     ReferencesAddComponent,
-                    ReferencesUpdateComponent
+                    ReferencesUpdateComponent,
+                    LocationsComponent
                     ],
     bootstrap:    [ReferencesComponent],
-    providers:    [ReferencesService,ReferencesTypesServices],
+    providers:    [ReferencesService,ReferencesTypesService],
     exports: 	  [ReferencesComponent]
 })
 export class ReferencesModule { }

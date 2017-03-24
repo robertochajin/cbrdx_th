@@ -18,9 +18,9 @@ import {AuthenticationService} from "./authentication.service";
 @Injectable()
 export class UsuariosService extends TercerosService {
 
-    private usuariosServiceURL = '<%= SVC_URL %>:<%= SVC_PORT_SEG %>/usuarios/';
-    private usuariosGruposServiceURL = '<%= SVC_URL %>:<%= SVC_PORT_SEG %>/usuariosGruposGestion/';
-    private usuariosRolesServiceURL = '<%= SVC_URL %>:<%= SVC_PORT_SEG %>/usuariosRoles/';
+    private usuariosServiceURL = '<%= SVC_SP_URL %>/usuarios/';
+    private usuariosGruposServiceURL = '<%= SVC_SP_URL %>/usuariosGruposGestion/';
+    private usuariosRolesServiceURL = '<%= SVC_SP_URL %>/usuariosRoles/';
 
     listUsers() {
         return this.http.get(this.usuariosServiceURL, {headers: this.headers}).map((res: Response) => res.json() as Usuario[]);

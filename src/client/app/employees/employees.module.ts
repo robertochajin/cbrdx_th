@@ -24,7 +24,7 @@ import {FamilyInformationModule} from './../employees-family-information/family-
 import {ReferencesModule} from './../employees-references/references.module';
 import {AcademicEducationModule} from './../employees-academic-education/academic-education.module';
 import {WorkExperienceModule} from './../employees-work-experience/work-experience.module';
-import {LocationModule} from './../employees-location/location.module';
+import {LocationModule} from '../employees-location/employee-location.module';
 
 //import {MomentModule} from 'angular2-moment/index.js';
 

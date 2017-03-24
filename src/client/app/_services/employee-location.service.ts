@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { EmployeesLocation } from './employees-location';
+import { EmployeesLocation } from '../_models/employee-location';
 import { Employee } from "../employees/employees";
 
 @Injectable()
@@ -28,17 +28,6 @@ export class LocationService {
 
   getAddressTypeList() {
     return this.http.get(this.serviceURL + '/nomenclatures/addressType')
-      .map((res: Response) => res.json());
-  }
-
-  getAllCities(qr: any) {
-    return this.http.get(this.serviceURL + '/divisionPolitica/cities/s/' + qr)
-      .map((res: Response) => res.json());
-  }
-
-  getAllHoods(qr: any) {
-    //
-    return this.http.get(this.serviceURL + '/divisionPolitica/hoods/s/' + qr)
       .map((res: Response) => res.json());
   }
 

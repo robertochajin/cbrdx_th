@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Router} from '@angular/router';
-
 import {References} from './references';
 import {ReferencesService} from './references.service';
 import {Observable} from 'rxjs/Observable';
 import {ConfirmationService} from 'primeng/primeng';
+import {Employee} from "../employees/employees";
 
 
 
@@ -15,7 +15,7 @@ import {ConfirmationService} from 'primeng/primeng';
     providers:  [ConfirmationService]
 })
 export class ReferencesComponent {
-
+  @Input() employee:Employee;
     reference: References = new References();
     dialogObjet: References = new References();
 
@@ -28,12 +28,13 @@ export class ReferencesComponent {
                 ) {}
 
     ngOnInit() {
-        this.referencesService.getAll().subscribe(
+        //this.referencesService.getAll().subscribe(
+        this.referencesService.getAllgetAllByEmployee(this.employee.idTercero).subscribe(
             references => {
                 this.references = references;
                 this.references.forEach(function(obj, index){
                     obj.nombreCompleto = obj.primerNombre+' '+obj.segundoNombre+' '+obj.primerApellido+' '+obj.segundoApellido;
-                    obj.numeroContacto = obj.telefono+' /  '+obj.celular;
+                    obj.numeroContacto = obj.telefonoFijo+' /  '+obj.telefonoFMovil;
                 });
             }
         );
@@ -58,7 +59,7 @@ export class ReferencesComponent {
     }
 
     detail(f: References) {
-        this.router.navigate(['employees-references/detail/'+f.idReferencia]);
+        this.router.navigate(['employees-references/detail/'+f.idTercerosReferencia]);
     }
 
     add() {
@@ -66,6 +67,6 @@ export class ReferencesComponent {
     }
 
     update(f: References) {
-        this.router.navigate(['employees-references/update/'+f.idReferencia]);
+        this.router.navigate(['employees-references/update/'+f.idTercerosReferencia]);
     }
 }

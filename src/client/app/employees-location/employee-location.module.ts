@@ -4,11 +4,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import 'rxjs/add/operator/toPromise';
 
-import { LocationComponent }  from './location.component';
-import { LocationDetailComponent }  from './location-detail.component';
-import { LocationAddComponent }  from './location-add.component';
-import { LocationUpdateComponent }  from './location-update.component';
-import { LocationService } from './location.service';
+import { LocationComponent }  from './employee-location.component';
+import { LocationDetailComponent }  from './employee-location-detail.component';
+import { LocationAddComponent }  from './employee-location-add.component';
+import { LocationUpdateComponent }  from './employee-location-update.component';
+import { LocationService } from '../_services/employee-location.service';
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,
     AutoCompleteModule, DropdownModule,
   MessagesModule,

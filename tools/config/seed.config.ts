@@ -324,9 +324,6 @@ export class SeedConfig {
   SVC_TH_URL_D = "http://" + this.IP_CIBERDIX+":"+this.SVC_TH_PORT_D;
   SVC_TH_URL = "http://" + this.IP_CIBERDIX+":"+this.SVC_TH_PORT;
 
-  SVC_PORT_SEG = '8447';
-  SVC_URL = 'http://40.71.92.147';
-
   /**
    * The list of NPM dependcies to be injected in the `index.html`.
    * @type {InjectableDependency[]}

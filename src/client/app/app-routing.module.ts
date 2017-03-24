@@ -14,10 +14,10 @@ import { FamilyInformationUpdateComponent } from './employees-family-information
 import { FamilyInformationDetailComponent } from './employees-family-information/family-information-detail.component';
 
 //employees location
-import { LocationComponent } from './employees-location/location.component';
-import { LocationUpdateComponent } from './employees-location/location-update.component';
-import { LocationAddComponent } from './employees-location/location-add.component';
-import { LocationDetailComponent } from './employees-location/location-detail.component';
+import { LocationComponent } from './employees-location/employee-location.component';
+import { LocationUpdateComponent } from './employees-location/employee-location-update.component';
+import { LocationAddComponent } from './employees-location/employee-location-add.component';
+import { LocationDetailComponent } from './employees-location/employee-location-detail.component';
 
 //Información de referencia de employees
 import { ReferencesComponent } from './employees-references/references.component';
@@ -112,8 +112,8 @@ const routes = [
 
   //Información de referencia de employees
   {path: 'employees-references', component: ReferencesComponent, canActivate: [AuthGuard]},
-  {path: 'employees-references/add', component: ReferencesAddComponent, canActivate: [AuthGuard]},
-  {path: 'employees-references/detail/:id', component: ReferencesDetailComponent, canActivate: [AuthGuard]},
+  {path: 'employees-references/add/:tercero', component: ReferencesAddComponent, canActivate: [AuthGuard]},
+  {path: 'employees-references/detail/:id/:tercero', component: ReferencesDetailComponent, canActivate: [AuthGuard]},
   {path: 'employees-references/update/:id', component: ReferencesUpdateComponent, canActivate: [AuthGuard]},
 
   //Información de formacion academica

@@ -8,7 +8,7 @@ import {AuthenticationService} from "./authentication.service";
 export class TipoDeAreaService {
 
     headers = new Headers({'Content-Type': 'application/json'});
-    private serviceURL = '<%= SVC_URL %>:<%= SVC_PORT_SEG %>/tipoArea/';
+    private serviceURL = '<%= SVC_SP_URL %>/tipoArea/';
 
     constructor(private http: Http,
                 private authenticationService: AuthenticationService

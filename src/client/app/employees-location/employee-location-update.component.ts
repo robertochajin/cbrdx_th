@@ -1,10 +1,9 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { LocationService } from './location.service';
-import { EmployeesLocation } from './employees-location';
+import { LocationService } from '../_services/employee-location.service';
+import { EmployeesLocation } from '../_models/employee-location';
 import { SelectItem, ConfirmationService, Message } from 'primeng/primeng';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 declare let google: any;
 import { NavService } from '../_services/_nav.service';
@@ -12,27 +11,27 @@ import { NavService } from '../_services/_nav.service';
 @Component({
   moduleId: module.id,
   selector: 'add-location',
-  templateUrl: 'location-form.component.html',
+  templateUrl: 'employee-location-form.component.html',
   providers: [ConfirmationService]
 })
 
-export class LocationAddComponent implements OnInit {
+export class LocationUpdateComponent implements OnInit {
 
   @Input()
   employLocation: EmployeesLocation = new EmployeesLocation();
-  header = 'Agregando Ubicación';
+  header: string = 'Editando Ubicación';
 
   principalNomenclatureList: any;
   complementaryNomenclatureList: any;
   addressTypeList: any;
+
   lista: SelectItem[];
   listaTipoDireccion: SelectItem[];
   listaComplementary: SelectItem[];
-  //selectedTipoDireccion: SelectItem[] = [];
+
   selectedPrincipalNomenclature: SelectItem[] = [];
   selectedAddressType: SelectItem[] = [];
   labelPrincipalNomenclature: string;
-  //selectedCity: any[] = [{value: null, label : ''}];
   copyAutocomplete: string;
 
   principalNomenclature: string;
@@ -44,30 +43,34 @@ export class LocationAddComponent implements OnInit {
   cityList: any;
   hoodList: any;
   map: any;
+  idTercero: any;
+  idTerceroLocalizacion: any;
 
   submitted: boolean;
   msgs: Message[] = [];
 
   constructor(
     private locationService: LocationService,
+    private router: Router,
     private location: Location,
     private confirmationService: ConfirmationService,
-    private _nav: NavService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _nav: NavService
   ) {
     this.complementaries = [{ tipo: null, detalle: '' }];
-    this.employLocation.tipoDireccion.value
+    this.employLocation.ciudad = { value: null, label: '' };
+    this.employLocation.barrio = { value: null, label: '' };
+    this.employLocation.tipoDireccion = { value: null, label: '' };
   }
 
   ngOnInit() {
 
-
     this.locationService.getPrincipalNomenclatureList().subscribe(
       principalNomenclatureList => {
         this.lista = [];
-        this.lista.push({label: 'Seleccione una...', value: null});
-        for (let pn of principalNomenclatureList){
-          this.lista.push({label: pn.label, value: pn.value});
+        this.lista.push({ label: 'Seleccione una...', value: null });
+        for (let pn of principalNomenclatureList) {
+          this.lista.push({ label: pn.label, value: pn.value });
         }
         // this.principalNomenclatureList = principalNomenclatureList
         this.principalNomenclatureList = this.lista;
@@ -75,28 +78,42 @@ export class LocationAddComponent implements OnInit {
     this.locationService.getComplementaryNomenclatureList().subscribe(
       complementaryNomenclatureList => {
         this.listaComplementary = [];
-        this.listaComplementary.push({label: 'Seleccione una...', value: null});
-        for (let pn of complementaryNomenclatureList){
-          this.listaComplementary.push({label: pn.label, value: pn.value});
+        this.listaComplementary.push({ label: 'Seleccione una...', value: null });
+        for (let pn of complementaryNomenclatureList) {
+          this.listaComplementary.push({ label: pn.label, value: pn.value });
         }
         this.complementaryNomenclatureList = this.listaComplementary;
       });
     this.locationService.getAddressTypeList().subscribe(
       addressTypeList => {
         this.listaTipoDireccion = [];
-        this.listaTipoDireccion.push({label: 'Seleccione una...', value: null});
-        for (let pn of addressTypeList){
-          this.listaTipoDireccion.push({label: pn.label, value: pn.value});
+        this.listaTipoDireccion.push({ label: 'Seleccione una...', value: null });
+        for (let pn of addressTypeList) {
+          this.listaTipoDireccion.push({ label: pn.label, value: pn.value });
         }
         this.addressTypeList = this.listaTipoDireccion;
       });
 
     this.route.params.subscribe((params: Params) => {
-      this.employLocation.colaborador = params['id'];
+      this.locationService.get(params['id']).subscribe(employLocation => {
+        this.idTercero = params['tercero'];
+        this.idTerceroLocalizacion = params['tl'];
+        this.employLocation = employLocation;
+        this.finalAddress = this.employLocation.direccion;
+        this.copyAutocomplete = this.employLocation.ciudad.label;
+        var mapProp = {
+          center: new google.maps.LatLng(this.employLocation.latitud, this.employLocation.longitud),
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var latLng = new google.maps.LatLng(this.employLocation.latitud, this.employLocation.longitud);
+        this.map = new google.maps.Map(document.getElementById('ubicacionColaborador'), mapProp);
+        var marker = new google.maps.Marker({ position: latLng, map: this.map });
+      });
     });
   }
 
-  onSubmit() {
+  onSubmit(value: string) {
     if (this.copyAutocomplete != this.employLocation.ciudad.label) {
       this.employLocation.ciudad = { value: null, label: '' };
     } else {
@@ -106,30 +123,16 @@ export class LocationAddComponent implements OnInit {
 
       this.employLocation.direccion = this.finalAddress;
 
-      let terceroLocalizacion = {
-        idTercero: this.employLocation.colaborador,
-        idLocalizacion: '',
+      let tercero: any = {
+        idTercero: this.idTercero,
+        idTerceroLocalizacion: this.idTerceroLocalizacion,
         auditoriaFecha: '',
         auditoriaUsuario: 1,
-        localizacion: {
-          idUbicacion: '',
-          direccion: this.employLocation.direccion,
-          auditoriaUsuario: 1,
-          auditoriaFecha: '',
-          idDivisionPolitica: this.employLocation.barrio.value,
-          longitud: this.employLocation.longitud,
-          latitud: this.employLocation.latitud,
-          comoLlegar: this.employLocation.comoLlegar,
-          barrio: this.employLocation.barrio,
-          ciudad: this.employLocation.ciudad,
-          departamento: this.employLocation.departamento,
-          pais: this.employLocation.pais,
-          tipoDireccion: this.employLocation.tipoDireccion
-        }
-      }
+        idLocalizacion: this.employLocation.idUbicacion,
+        localizacion: this.employLocation
+      };
 
-      this.locationService.add(terceroLocalizacion)
-        .subscribe(
+      this.locationService.update(tercero).subscribe(
         data => {
           this._nav.setTab(2);
           this.location.back();
@@ -169,7 +172,6 @@ export class LocationAddComponent implements OnInit {
   captureTipoDireccion(event: any) {
     this.employLocation.tipoDireccion.value = event.value;
     this.employLocation.tipoDireccion.label = event.originalEvent.srcElement.innerText.trim();
-    console.log(this.employLocation.tipoDireccion)
   }
 
   composeAddress(): void {
@@ -194,14 +196,14 @@ export class LocationAddComponent implements OnInit {
             let latitude = results[0].geometry.location.lat();
             let longitude = results[0].geometry.location.lng();
 
-            let latLng = new google.maps.LatLng(latitude, longitude);
-            let mapOptions = {
+            var latLng = new google.maps.LatLng(latitude, longitude);
+            var mapOptions = {
               center: latLng,
               zoom: 16,
               mapTypeId: google.maps.MapTypeId.ROADMAP
             };
-            let map = new google.maps.Map(document.getElementById('ubicacionColaborador'), mapOptions);
-            let marker = new google.maps.Marker({ position: latLng, map: map });
+            var map = new google.maps.Map(document.getElementById('ubicacionColaborador'), mapOptions);
+            var marker = new google.maps.Marker({ position: latLng, map: map });
 
             assingLocation(latitude, longitude);
           } else {
@@ -212,7 +214,7 @@ export class LocationAddComponent implements OnInit {
     }
 
 
-    for (let c of this.complementaries) {
+    for (var c of this.complementaries) {
       if (c.tipo !== null) {
         switch (c.tipo) {
           case 1:
@@ -227,6 +229,7 @@ export class LocationAddComponent implements OnInit {
         }
       }
     }
+    this.employLocation.direccion = this.finalAddress;
 
   }
   addComplementary(): void {
@@ -245,8 +248,8 @@ export class LocationAddComponent implements OnInit {
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
-        //this.router.navigate(['/employees-family-information']);
         this._nav.setTab(2);
+        //this.router.navigate(['/employees-location']);
         this.location.back();
       },
       reject: () => {
@@ -258,4 +261,6 @@ export class LocationAddComponent implements OnInit {
     const element = document.querySelector("#formulario");
     if (element) { element.scrollIntoView(element); }
   }
+
+
 }

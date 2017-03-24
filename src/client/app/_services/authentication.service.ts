@@ -38,7 +38,6 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string): Promise<boolean> {
-    console.info(this.masterService );
     return this.http.post(this.masterService + "/login", JSON.stringify({
       username: username,
       password: password

@@ -5,147 +5,153 @@
     <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
   </p-footer>
 </p-confirmDialog>
-<div *ngIf="reference">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="header">
-        <h4 class="title">{{header}}</h4>
+
+  <div *ngIf="addinglocation">
+    <div *ngIf="reference">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="header">
+            <h4 class="title">{{header}}</h4>
+          </div>
+        </div>
       </div>
+      <form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-4">
+                    <label for="tipodeReferencia">* Tipo de Referencia</label>
+                    <p-dropdown  id="tipodeReferencia" name="tipodeReferencia" [options]="referencesTypes" [autoWidth]="false" required="true"
+                                 [(ngModel)]="reference.tipodeReferencia.value"  #tipodeReferencia="ngModel"  ></p-dropdown>
+                    <div class="ui-message ui-messages-error ui-corner-all"
+                         *ngIf="f.submitted && !tipodeReferencia.valid">
+                      <i class="fa fa-close"></i>
+                      Tipo de Referencia es requerido
+                    </div>
+                </div>
+                <div class="ui-grid-col-8">
+                    <label for="empresa">* Nombre empresa</label>
+                    <input pInputText type="text" id="empresa" name="empresa" #empresa="ngModel"
+                           [(ngModel)]="reference.empresa" #empresa="ngModel" required/>
+                    <div class="ui-message ui-messages-error ui-corner-all"
+                         *ngIf="f.submitted && !empresa.valid">
+                      <i class="fa fa-close"></i>
+                      Nombre empresa es requerido
+                    </div>
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-6">
+                    <label for="primerNombre">* Primer nombre</label>
+                    <input pInputText type="text" id="primerNombre" name="primerNombre" #primerNombre="ngModel"
+                           [(ngModel)]="reference.primerNombre" (keyup)="capitalize($event)" required/>
+                    <div class="ui-message ui-messages-error ui-corner-all"
+                         *ngIf="f.submitted && !primerNombre.valid">
+                      <i class="fa fa-close"></i>
+                      Primer nombre es requerido
+                    </div>
+                </div>
+                <div class="ui-grid-col-6">
+                    <label for="segundoNombre">Segundo nombre</label>
+                    <input pInputText type="text" id="segundoNombre" name="segundoNombre"
+                           [(ngModel)]="reference.segundoNombre" (keyup)="capitalize($event)" />
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-6">
+                    <label for="primerApellido">* Primer apellido</label>
+                    <input pInputText type="text" id="primerApellido" name="primerApellido" #primerApellido="ngModel"
+                           [(ngModel)]="reference.primerApellido" (keyup)="capitalize($event)" required/>
+                    <div class="ui-message ui-messages-error ui-corner-all"
+                         *ngIf="f.submitted && !primerApellido.valid">
+                      <i class="fa fa-close"></i>
+                      Primer apellido es requerido
+                    </div>
+                </div>
+                <div class="ui-grid-col-6">
+                    <label for="segundoApellido">Segundo apellido</label>
+                    <input pInputText type="text" id="segundoApellido" name="segundoApellido"
+                           [(ngModel)]="reference.segundoApellido" (keyup)="capitalize($event)" />
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-12">
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ciudad.valid">
+                      <i class="fa fa-close"></i>
+                      Ciudad es requerida
+                    </div>
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-6">
+                    <label for="telefono">* Teléfono</label>
+                    <input pInputText type="text" id="telefono" name="telefono" #telefono="ngModel"
+                           [(ngModel)]="reference.telefono" required/>
+                    <div class="ui-message ui-messages-error ui-corner-all"
+                         *ngIf="f.submitted && !telefono.valid">
+                      <i class="fa fa-close"></i>
+                      Teléfono es requerido
+                    </div>
+                </div>
+                <div class="ui-grid-col-6">
+                    <label for="celular">* Celular</label>
+                    <input pInputText type="text" id="celular" name="celular" #celular="ngModel"
+                           [(ngModel)]="reference.celular" required/>
+                    <div class="ui-message ui-messages-error ui-corner-all"
+                         *ngIf="f.submitted && !celular.valid">
+                      <i class="fa fa-close"></i>
+                      Celular es requerido
+                    </div>
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-10">
+                    <label for="direccion">* Dirección</label>
+                    <textarea id="direccion" name="direccion" pInputTextarea  rows="5" #direccion="ngModel" disabled="true"
+                              [(ngModel)]="reference.direccion" ></textarea>
+                    <div class="ui-message ui-messages-error ui-corner-all"
+                         *ngIf="f.submitted && !direccion.valid">
+                      <i class="fa fa-close"></i>
+                      Dirección es requerido
+                    </div>
+                </div>
+                <div class="ui-grid-col-2">
+                  <button pButton icon="fa-plus" label="Editar Dirección" (click)="toggleform()"></button>
+                </div>
+            </div>
+            <!--<div class="ui-grid-row">
+                <div class="ui-grid-col-12">
+                  <p-fileUpload multiple="multiple"
+                                name="referencefile[]"
+                                url="http://localhost:3000/upload"
+                                chooseLabel="Seleccione"
+                                uploadLabel="Subir"
+                                cancelLabel="Cancelar"
+                                (onUpload)="onUpload($event)"
+                  >
+                    <template pTemplate type="content">
+                      <ul *ngIf="uploadedFiles.length">
+                        <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                      </ul>
+                    </template>
+                  </p-fileUpload>
+               </div>
+            </div>-->
+          <div class="ui-grid-row form-footer-buttons">
+            <div class="ui-grid-col-4"></div>
+            <div class="ui-grid-col-1">
+              <a (click)="goBack()" class="cancelar">Cancelar</a>
+            </div>
+            <div class="ui-grid-col-2">
+              <button pButton icon="fa-plus" label="Guardar" type="submit" (click)="focusUP()"></button>
+            </div>
+            <div class="ui-grid-col-5"></div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
-  <form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
-    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-4">
-                <label for="tipodeReferencia">* Tipo de Referencia</label>
-                <p-dropdown  id="tipodeReferencia" name="tipodeReferencia" [options]="referencesTypes" [autoWidth]="false" required="true"
-                             [(ngModel)]="reference.tipodeReferencia.value"  #tipodeReferencia="ngModel"  ></p-dropdown>
-                <div class="ui-message ui-messages-error ui-corner-all"
-                     *ngIf="f.submitted && !tipodeReferencia.valid">
-                  <i class="fa fa-close"></i>
-                  Tipo de Referencia es requerido
-                </div>
-            </div>
-            <div class="ui-grid-col-8">
-                <label for="empresa">* Nombre empresa</label>
-                <input pInputText type="text" id="empresa" name="empresa" #empresa="ngModel"
-                       [(ngModel)]="reference.empresa" #empresa="ngModel" required/>
-                <div class="ui-message ui-messages-error ui-corner-all"
-                     *ngIf="f.submitted && !empresa.valid">
-                  <i class="fa fa-close"></i>
-                  Nombre empresa es requerido
-                </div>
-            </div>
-        </div>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-6">
-                <label for="primerNombre">* Primer nombre</label>
-                <input pInputText type="text" id="primerNombre" name="primerNombre" #primerNombre="ngModel"
-                       [(ngModel)]="reference.primerNombre" (keyup)="capitalize($event)" required/>
-                <div class="ui-message ui-messages-error ui-corner-all"
-                     *ngIf="f.submitted && !primerNombre.valid">
-                  <i class="fa fa-close"></i>
-                  Primer nombre es requerido
-                </div>
-            </div>
-            <div class="ui-grid-col-6">
-                <label for="segundoNombre">Segundo nombre</label>
-                <input pInputText type="text" id="segundoNombre" name="segundoNombre"
-                       [(ngModel)]="reference.segundoNombre" (keyup)="capitalize($event)" />
-            </div>
-        </div>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-6">
-                <label for="primerApellido">* Primer apellido</label>
-                <input pInputText type="text" id="primerApellido" name="primerApellido" #primerApellido="ngModel"
-                       [(ngModel)]="reference.primerApellido" (keyup)="capitalize($event)" required/>
-                <div class="ui-message ui-messages-error ui-corner-all"
-                     *ngIf="f.submitted && !primerApellido.valid">
-                  <i class="fa fa-close"></i>
-                  Primer apellido es requerido
-                </div>
-            </div>
-            <div class="ui-grid-col-6">
-                <label for="segundoApellido">* Segundo apellido</label>
-                <input pInputText type="text" id="segundoApellido" name="segundoApellido"
-                       [(ngModel)]="reference.segundoApellido" (keyup)="capitalize($event)" />
-            </div>
-        </div>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-12">
-                <label for="ciudad">* Ciudad</label>
-                <p-autoComplete placeholder="Buscar ciudad" field="label" name="ciudad" id="ciudad"
-                                [(ngModel)]="reference.ciudad.label" #ciudad="ngModel" [suggestions]="cityList" required="true"
-                                (completeMethod)="citySearch($event)" (onSelect)="captureCityId($event)">
-                </p-autoComplete>
-                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ciudad.valid">
-                  <i class="fa fa-close"></i>
-                  Ciudad es requerida
-                </div>
-            </div>
-        </div>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-6">
-                <label for="telefono">* Teléfono</label>
-                <input pInputText type="text" id="telefono" name="telefono" #telefono="ngModel"
-                       [(ngModel)]="reference.telefono" required/>
-                <div class="ui-message ui-messages-error ui-corner-all"
-                     *ngIf="f.submitted && !telefono.valid">
-                  <i class="fa fa-close"></i>
-                  Teléfono es requerido
-                </div>
-            </div>
-            <div class="ui-grid-col-6">
-                <label for="celular">* Celular</label>
-                <input pInputText type="text" id="celular" name="celular" #celular="ngModel"
-                       [(ngModel)]="reference.celular" required/>
-                <div class="ui-message ui-messages-error ui-corner-all"
-                     *ngIf="f.submitted && !celular.valid">
-                  <i class="fa fa-close"></i>
-                  Celular es requerido
-                </div>
-            </div>
-        </div>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-12">
-                <label for="direccion">* Dirección</label>
-                <textarea id="direccion" name="direccion" pInputTextarea  rows="5" #direccion="ngModel"
-                          [(ngModel)]="reference.direccion" ></textarea>
-                <div class="ui-message ui-messages-error ui-corner-all"
-                     *ngIf="f.submitted && !direccion.valid">
-                  <i class="fa fa-close"></i>
-                  Dirección es requerido
-                </div>
-            </div>
-        </div>
-        <!--<div class="ui-grid-row">
-            <div class="ui-grid-col-12">
-              <p-fileUpload multiple="multiple"
-                            name="referencefile[]"
-                            url="http://localhost:3000/upload"
-                            chooseLabel="Seleccione"
-                            uploadLabel="Subir"
-                            cancelLabel="Cancelar"
-                            (onUpload)="onUpload($event)"
-              >
-                <template pTemplate type="content">
-                  <ul *ngIf="uploadedFiles.length">
-                    <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-                  </ul>
-                </template>
-              </p-fileUpload>
-           </div>
-        </div>-->
-      <div class="ui-grid-row form-footer-buttons">
-        <div class="ui-grid-col-4"></div>
-        <div class="ui-grid-col-1">
-          <a (click)="goBack()" class="cancelar">Cancelar</a>
-        </div>
-        <div class="ui-grid-col-2">
-          <button pButton icon="fa-plus" label="Guardar" type="submit" (click)="focusUP()"></button>
-        </div>
-        <div class="ui-grid-col-5"></div>
-      </div>
-    </div>
-  </form>
-</div>
+  <div *ngIf="!addinglocation">
+    <locations [parentTitle]="'Referencias'" (create)="bindLocation($event)"></locations>
+  </div>
+
+

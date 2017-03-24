@@ -23,10 +23,10 @@ export class AppComponent implements AfterViewInit, AfterViewChecked{
     translate.use('es');
   }
   ngAfterViewInit(){
-    console.log('fin carga!');
+    // console.log('fin carga!');
   }
   ngAfterViewChecked(){
-    console.log('fin carga view!');
+    // console.log('fin carga view!');
   }
 
   setSession(s:boolean):void{
