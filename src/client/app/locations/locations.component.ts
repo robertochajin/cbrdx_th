@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Localizaciones } from '../_models/localizaciones';
 import { SelectItem, ConfirmationService, Message, InputTextareaModule } from 'primeng/primeng';
 import { Location } from '@angular/common';
-import { PoliticalDivisionServices } from '../_services/political-division.service';
+import { PoliticalDivisionService } from '../_services/political-division.service';
 import { LocationService } from '../_services/employee-location.service';
 
 declare let google: any;
@@ -13,7 +13,7 @@ declare let google: any;
   moduleId: module.id,
   selector: 'locations',
   templateUrl: 'locations-form.component.html',
-  providers: [PoliticalDivisionServices, ConfirmationService]
+  providers: [PoliticalDivisionService, ConfirmationService]
 })
 
 export class LocationsComponent implements OnInit {
@@ -57,7 +57,7 @@ export class LocationsComponent implements OnInit {
 
   constructor(
     private location: Location,
-    private politicalDivisionServices: PoliticalDivisionServices,
+    private politicalDivisionServices: PoliticalDivisionService,
     private locationService: LocationService,
     private confirmationService: ConfirmationService,
     private route: ActivatedRoute

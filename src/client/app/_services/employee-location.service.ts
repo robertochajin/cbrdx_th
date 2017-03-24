@@ -31,17 +31,6 @@ export class LocationService {
       .map((res: Response) => res.json());
   }
 
-  getAllCities(qr: any) {
-    return this.http.get(this.serviceURL + '/divisionPolitica/cities/s/' + qr)
-      .map((res: Response) => res.json());
-  }
-
-  getAllHoods(qr: any) {
-    //
-    return this.http.get(this.serviceURL + '/divisionPolitica/hoods/s/' + qr)
-      .map((res: Response) => res.json());
-  }
-
   add(f: any) {
     return this.http.post(this.serviceURL + '/employeesLocations', f)
       .map((res: Response) => res.json());

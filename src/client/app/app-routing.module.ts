@@ -112,8 +112,8 @@ const routes = [
 
   //Información de referencia de employees
   {path: 'employees-references', component: ReferencesComponent, canActivate: [AuthGuard]},
-  {path: 'employees-references/add', component: ReferencesAddComponent, canActivate: [AuthGuard]},
-  {path: 'employees-references/detail/:id', component: ReferencesDetailComponent, canActivate: [AuthGuard]},
+  {path: 'employees-references/add/:tercero', component: ReferencesAddComponent, canActivate: [AuthGuard]},
+  {path: 'employees-references/detail/:id/:tercero', component: ReferencesDetailComponent, canActivate: [AuthGuard]},
   {path: 'employees-references/update/:id', component: ReferencesUpdateComponent, canActivate: [AuthGuard]},
 
   //Información de formacion academica

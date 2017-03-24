@@ -2,6 +2,7 @@ import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { LocationService } from '../_services/employee-location.service';
+import { PoliticalDivisionService } from '../_services/political-division.service';
 import { EmployeesLocation } from '../_models/employee-location';
 import { SelectItem, ConfirmationService, Message } from 'primeng/primeng';
 import { Router } from '@angular/router';
@@ -52,6 +53,7 @@ export class LocationAddComponent implements OnInit {
     private locationService: LocationService,
     private location: Location,
     private confirmationService: ConfirmationService,
+    private politicalDivisionService: PoliticalDivisionService,
     private _nav: NavService,
     private route: ActivatedRoute
   ) {
@@ -138,13 +140,13 @@ export class LocationAddComponent implements OnInit {
   }
 
   citySearch(event: any) {
-    this.locationService.getAllCities(event.query).subscribe(
+    this.politicalDivisionService.getAllCities(event.query).subscribe(
       cities => this.cityList = cities
     );
   }
 
   hoodSearch(event: any) {
-    this.locationService.getAllHoods(event.query).subscribe(
+    this.politicalDivisionService.getAllHoods(event.query).subscribe(
       hoods => this.hoodList = hoods
     );
   }

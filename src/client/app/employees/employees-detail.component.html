@@ -90,10 +90,10 @@
               <p-accordionTab header="Experiencia Laboral" [selected]="acordion == 4">
                 <work-experience></work-experience>
               </p-accordionTab>
-
+              -->
               <p-accordionTab header="Referencias" [selected]="acordion == 5 ">
-                <references></references>
-              </p-accordionTab>-->
+                <references *ngIf="employee.idTercero" [employee]="employee"></references>
+              </p-accordionTab>
             </p-accordion>
 
           </p-tabPanel>
