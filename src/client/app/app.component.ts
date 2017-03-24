@@ -20,10 +20,10 @@ export class AppComponent implements AfterViewInit, AfterViewChecked{
     console.log('Environment config', Config);
   }
   ngAfterViewInit(){
-    console.log('fin carga!');
+    // console.log('fin carga!');
   }
   ngAfterViewChecked(){
-    console.log('fin carga view!');
+    // console.log('fin carga view!');
   }
 
   setSession(s:boolean):void{

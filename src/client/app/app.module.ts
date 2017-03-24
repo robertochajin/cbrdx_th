@@ -11,7 +11,7 @@ import {SharedModule} from "./shared/shared.module";
 import {FamilyInformationModule} from "./employees-family-information/family-information.module";
 import {ReferencesModule} from "./employees-references/references.module";
 import {AcademicEducationModule} from "./employees-academic-education/academic-education.module";
-import {LocationModule} from "./employees-location/location.module";
+import {LocationModule} from "./employees-location/employee-location.module";
 import {WorkExperienceModule} from "./employees-work-experience/work-experience.module";
 import {LoginModule} from "./seguridad/login.module";
 import {LoginService} from "./_services/login.service";

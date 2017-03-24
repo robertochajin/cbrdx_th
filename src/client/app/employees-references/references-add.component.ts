@@ -6,9 +6,10 @@ import {References} from './references';
 import {ReferencesService} from './references.service';
 import {SelectItem, Message, ConfirmDialog, ConfirmationService } from 'primeng/primeng';
 
-import { ReferencesTypesServices } from '../_services/references-type.service';
+import { ReferencesTypesService } from '../_services/references-type.service';
 import { CitiesServices } from '../_services/cities.service';
 import {NavService}                 from '../_services/_nav.service';
+import {Localizaciones} from "../_models/localizaciones";
 
 
 @Component({
@@ -20,8 +21,9 @@ import {NavService}                 from '../_services/_nav.service';
 
 export class ReferencesAddComponent implements OnInit  {
     @Input()
-
     reference: References = new References();
+
+    localizacion: Localizaciones = new Localizaciones();
     header: string = 'Agregando Referencia';
     referencesTypes: SelectItem[] = [];
     cityList: any;
@@ -29,42 +31,44 @@ export class ReferencesAddComponent implements OnInit  {
     msgs: Message[] = [];
     uploadedFiles: any[] = [];
     copyAutocomplete: string;
+    addinglocation: boolean = true;
 
     constructor (
         private referencesService: ReferencesService,
         private router: Router,
         private location: Location,
         private citiesServices: CitiesServices,
-        private referencesTypesServices: ReferencesTypesServices,
+        private referencesTypesServices: ReferencesTypesService,
         private confirmationService: ConfirmationService,
         private _nav:NavService
 
     ) {}
 
     ngOnInit () {
-        this.referencesTypesServices.getAll().subscribe(referencesTypes => this.referencesTypes = referencesTypes);
+        this.referencesTypesServices.getAll().subscribe(referencesTypes => {
+          this.referencesTypes.unshift({label:'seleccione', value:2});
+          referencesTypes.forEach((x:any) => {
+            this.referencesTypes.push({label:x.nombreListaTipoReferencias, value: x.codigoListaTipoReferencias});
+          });
+        });
         this.focusUP();
     }
     onSubmit() {
-        if(this.copyAutocomplete != this.reference.ciudad.label){
-            this.reference.ciudad = {value:null, label:''};
-        }else {
-            this.submitted = true;
-            this.msgs = [];
-            this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
+      this.submitted = true;
+      this.msgs = [];
+      this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
 
-            this.reference.primerNombre = this.capitalizeSave(this.reference.primerNombre);
-            this.reference.segundoNombre = this.capitalizeSave(this.reference.segundoNombre);
-            this.reference.primerApellido = this.capitalizeSave(this.reference.primerApellido);
-            this.reference.segundoApellido = this.capitalizeSave(this.reference.segundoApellido);
+      this.reference.primerNombre = this.capitalizeSave(this.reference.primerNombre);
+      this.reference.segundoNombre = this.capitalizeSave(this.reference.segundoNombre);
+      this.reference.primerApellido = this.capitalizeSave(this.reference.primerApellido);
+      this.reference.segundoApellido = this.capitalizeSave(this.reference.segundoApellido);
 
-            this.referencesService.add(this.reference)
-              .subscribe(
-                data => {
-                  this._nav.setTab(5);
-                  this.location.back();
-                });
-        }
+      this.referencesService.add(this.reference)
+        .subscribe(
+          data => {
+            this._nav.setTab(5);
+            this.location.back();
+          });
     }
 
     citySearch(event:any) {
@@ -74,8 +78,6 @@ export class ReferencesAddComponent implements OnInit  {
     }
 
     captureCityId(event:any) {
-      this.reference.ciudad.value = event.value;
-      this.reference.ciudad.label = event.label;
       this.copyAutocomplete = event.label
     }
 
@@ -113,6 +115,16 @@ export class ReferencesAddComponent implements OnInit  {
 
         this.msgs = [];
         this.msgs.push({severity: 'info', summary: 'File Uploaded', detail: ''});
+    }
+
+    bindLocation(event: any){
+      this.localizacion = event;
+      this.reference.direccion = event.direccion;
+      this.toggleform();
+    }
+
+    toggleform(){
+      this.addinglocation = !this.addinglocation;
     }
 }
 

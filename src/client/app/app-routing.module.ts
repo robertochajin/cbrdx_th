@@ -14,10 +14,10 @@ import { FamilyInformationUpdateComponent } from './employees-family-information
 import { FamilyInformationDetailComponent } from './employees-family-information/family-information-detail.component';
 
 //employees location
-import { LocationComponent } from './employees-location/location.component';
-import { LocationUpdateComponent } from './employees-location/location-update.component';
-import { LocationAddComponent } from './employees-location/location-add.component';
-import { LocationDetailComponent } from './employees-location/location-detail.component';
+import { LocationComponent } from './employees-location/employee-location.component';
+import { LocationUpdateComponent } from './employees-location/employee-location-update.component';
+import { LocationAddComponent } from './employees-location/employee-location-add.component';
+import { LocationDetailComponent } from './employees-location/employee-location-detail.component';
 
 //Información de referencia de employees
 import { ReferencesComponent } from './employees-references/references.component';
@@ -53,49 +53,49 @@ const routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
 
   //historia de employees
-  {path: 'employees', component: EmployeesComponent, canActivate: [AuthGuard]},
-  {path: 'employees/add', component: EmployeesAddComponent, canActivate: [AuthGuard]},
-  {path: 'employees/detail/:id', component: EmployeesDetailComponent, canActivate: [AuthGuard]},
-  {path: 'employees/update/:id', component: EmployeesUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'employees', component: EmployeesComponent},
+  {path: 'employees/add', component: EmployeesAddComponent},
+  {path: 'employees/detail/:id', component: EmployeesDetailComponent},
+  {path: 'employees/update/:id', component: EmployeesUpdateComponent},
 
   //Información familiar de employees
-  {path: 'employees-family-information', component: FamilyInformationComponent, canActivate: [AuthGuard]},
-  {path: 'employees-family-information/add/:tercero', component: FamilyInformationAddComponent, canActivate: [AuthGuard]},
-  {path: 'employees-family-information/update/:id/:tercero', component: FamilyInformationUpdateComponent, canActivate: [AuthGuard]},
-  {path: 'employees-family-information/detail/:id', component: FamilyInformationDetailComponent, canActivate: [AuthGuard]},
+  {path: 'employees-family-information', component: FamilyInformationComponent},
+  {path: 'employees-family-information/add/:tercero', component: FamilyInformationAddComponent},
+  {path: 'employees-family-information/update/:id/:tercero', component: FamilyInformationUpdateComponent},
+  {path: 'employees-family-information/detail/:id', component: FamilyInformationDetailComponent},
 
   //Información de referencia de employees
-  {path: 'employees-references', component: ReferencesComponent, canActivate: [AuthGuard]},
-  {path: 'employees-references/add', component: ReferencesAddComponent, canActivate: [AuthGuard]},
-  {path: 'employees-references/detail/:id', component: ReferencesDetailComponent, canActivate: [AuthGuard]},
-  {path: 'employees-references/update/:id', component: ReferencesUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'employees-references', component: ReferencesComponent},
+  {path: 'employees-references/add/:tercero', component: ReferencesAddComponent},
+  {path: 'employees-references/detail/:id', component: ReferencesDetailComponent},
+  {path: 'employees-references/update/:id/:tercero', component: ReferencesUpdateComponent},
 
   //Información de formacion academica
-  {path: 'employees-formal-studies', component: FormalStudiesComponent, canActivate: [AuthGuard]},
-  {path: 'employees-formal-studies/add', component: FormalStudiesAddComponent, canActivate: [AuthGuard]},
-  {path: 'employees-formal-studies/detail/:id', component: FormalStudiesDetailComponent, canActivate: [AuthGuard]},
-  {path: 'employees-formal-studies/update/:id', component: FormalStudiesUpdateComponent, canActivate: [AuthGuard]},
-  {path: 'employees-no-formal-studies', component: NoFormalStudiesComponent, canActivate: [AuthGuard]},
-  {path: 'employees-no-formal-studies/add', component: NoFormalStudiesAddComponent, canActivate: [AuthGuard]},
-  {path: 'employees-no-formal-studies/detail/:id', component: NoFormalStudiesDetailComponent, canActivate: [AuthGuard]},
-  {path: 'employees-no-formal-studies/update/:id', component: NoFormalStudiesUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'employees-formal-studies', component: FormalStudiesComponent},
+  {path: 'employees-formal-studies/add/:tercero', component: FormalStudiesAddComponent},
+  {path: 'employees-formal-studies/detail/:id', component: FormalStudiesDetailComponent},
+  {path: 'employees-formal-studies/update/:id/:tercero', component: FormalStudiesUpdateComponent},
+  {path: 'employees-no-formal-studies', component: NoFormalStudiesComponent},
+  {path: 'employees-no-formal-studies/add/:tercero', component: NoFormalStudiesAddComponent},
+  {path: 'employees-no-formal-studies/detail/:id', component: NoFormalStudiesDetailComponent},
+  {path: 'employees-no-formal-studies/update/:id/:tercero', component: NoFormalStudiesUpdateComponent},
 
   //employees-location
-  { path: 'employees-location', component: LocationComponent, canActivate: [AuthGuard]},
-  { path: 'employees-location/add/:id', component: LocationAddComponent, canActivate: [AuthGuard]},
-  { path: 'employees-location/update/:id/:tercero/:tl', component: LocationUpdateComponent, canActivate: [AuthGuard] },
-  { path: 'employees-location/detail/:id', component: LocationDetailComponent, canActivate: [AuthGuard] },
+  { path: 'employees-location', component: LocationComponent},
+  { path: 'employees-location/add/:id', component: LocationAddComponent},
+  { path: 'employees-location/update/:id/:tercero/:tl', component: LocationUpdateComponent },
+  { path: 'employees-location/detail/:id', component: LocationDetailComponent },
 
     //Experiencia laboral
-  {path: 'employees-work-experience', component: WorkExperienceComponent, canActivate: [AuthGuard]},
-  {path: 'employees-work-experience/add', component: WorkExperienceAddComponent, canActivate: [AuthGuard]},
-  {path: 'employees-work-experience/detail/:id', component: WorkExperienceDetailComponent, canActivate: [AuthGuard]},
-  {path: 'employees-work-experience/update/:id', component: WorkExperienceUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'employees-work-experience', component: WorkExperienceComponent},
+  {path: 'employees-work-experience/add/:tercero', component: WorkExperienceAddComponent},
+  {path: 'employees-work-experience/detail/:id', component: WorkExperienceDetailComponent},
+  {path: 'employees-work-experience/update/:id/:tercero', component: WorkExperienceUpdateComponent},
 
   //Login
   {path: 'login', component: LoginComponent},
   {path: 'cambioContrasena', component: CambioContrasenaComponent},
-  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  {path: 'dashboard', component: DashboardComponent},
 ];
 
 @NgModule({

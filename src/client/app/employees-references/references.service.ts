@@ -16,12 +16,16 @@ export class ReferencesService {
         return this.http.get('/api/references').map((res:Response) => res.json().data);
     }
 
+    getAllgetAllByEmployee(idTercero: number)  {
+        return this.http.get('/api/references/employee'+ idTercero).map((res:Response) => res.json().data);
+    }
+
     add(f: References) {
         return this.http.post('/api/references',f).map((res:Response) => res.json());
     };
 
     update(f: References) {
-        return this.http.put('/api/references/'+ f.idReferencia,f).map((res:Response) => res.json());
+        return this.http.put('/api/references/'+ f.idTercerosReferencia,f).map((res:Response) => res.json());
     }
 
     get(id: number) {
@@ -30,7 +34,7 @@ export class ReferencesService {
     }
 
     delete(f: References) {
-        const respuesta =  this.http.delete('/api/references/'+ f.idReferencia);
+        const respuesta =  this.http.delete('/api/references/'+ f.idTercerosReferencia);
         return respuesta.map((res:Response) => res.json());
     }
 

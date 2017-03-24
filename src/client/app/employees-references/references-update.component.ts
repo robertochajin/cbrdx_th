@@ -6,7 +6,7 @@ import {References} from './references';
 import {ReferencesService} from './references.service';
 import {SelectItem, Message, ConfirmDialog, ConfirmationService } from 'primeng/primeng';
 
-import { ReferencesTypesServices } from '../_services/references-type.service';
+import { ReferencesTypesService } from '../_services/references-type.service';
 import { CitiesServices } from '../_services/cities.service';
 import {NavService}                 from '../_services/_nav.service';
 
@@ -35,7 +35,7 @@ export class ReferencesUpdateComponent implements OnInit  {
     private route: ActivatedRoute,
     private location: Location,
     private citiesServices: CitiesServices,
-    private referencesTypesServices: ReferencesTypesServices,
+    private referencesTypesServices: ReferencesTypesService,
     private confirmationService: ConfirmationService,
     private _nav:NavService
 
@@ -47,32 +47,26 @@ export class ReferencesUpdateComponent implements OnInit  {
       .switchMap((params: Params) => this.referencesService.get(+params['id']))
       .subscribe(reference => {
         this.reference = reference;
-        this.copyAutocomplete = this.reference.ciudad.label;
-
       });
     this.focusUP();
   }
   onSubmit() {
+    this.submitted = true;
+    this.msgs = [];
+    this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
+    this.reference.primerNombre = this.capitalizeSave(this.reference.primerNombre);
+    this.reference.segundoNombre = this.capitalizeSave(this.reference.segundoNombre);
+    this.reference.primerApellido = this.capitalizeSave(this.reference.primerApellido);
+    this.reference.segundoApellido = this.capitalizeSave(this.reference.segundoApellido);
 
-    if(this.copyAutocomplete != this.reference.ciudad.label){
-      this.reference.ciudad = {value:null, label:''};
-    }else{
-      this.submitted = true;
-      this.msgs = [];
-      this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
-      this.reference.primerNombre = this.capitalizeSave(this.reference.primerNombre);
-      this.reference.segundoNombre = this.capitalizeSave(this.reference.segundoNombre);
-      this.reference.primerApellido = this.capitalizeSave(this.reference.primerApellido);
-      this.reference.segundoApellido = this.capitalizeSave(this.reference.segundoApellido);
-
-      this.referencesService.update(this.reference)
-        .subscribe(
-          data => {
-            this._nav.setTab(5);
-            this.location.back();
-          });
-    }
+    this.referencesService.update(this.reference)
+      .subscribe(
+        data => {
+          this._nav.setTab(5);
+          this.location.back();
+        });
   }
+
 
   citySearch(event:any) {
     this.citiesServices.getAllCities(event.query).subscribe(
@@ -81,8 +75,6 @@ export class ReferencesUpdateComponent implements OnInit  {
   }
 
   captureCityId(event:any) {
-    this.reference.ciudad.value = event.value;
-    this.reference.ciudad.label = event.label;
     this.copyAutocomplete = event.label
   }
 

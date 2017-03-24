@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
-import { LocationService } from './location.service';
-import { EmployeesLocation } from './employees-location';
+import { LocationService } from '../_services/employee-location.service';
+import { EmployeesLocation } from './employee-location';
 import { SelectItem, ConfirmationService, Message } from 'primeng/primeng';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
@@ -11,7 +11,7 @@ import { NavService } from '../_services/_nav.service';
 @Component({
   moduleId: module.id,
   selector: 'add-location',
-  templateUrl: 'location-form.component.html',
+  templateUrl: 'employee-location-form.component.html',
   providers: [ConfirmationService]
 })
 

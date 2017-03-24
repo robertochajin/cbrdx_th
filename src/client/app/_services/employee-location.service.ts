@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { EmployeesLocation } from './employees-location';
+import { EmployeesLocation } from '../employees-location/employee-location';
 import { API_URL } from "../global";
 import { Employee } from "../employees/employees";
 
