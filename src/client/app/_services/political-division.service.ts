@@ -5,7 +5,7 @@ import { Http, Response } from '@angular/http';
 @Injectable()
 export class PoliticalDivisionService {
 
-  private serviceURL = '<%= SVC_SP_URL %>/divisionPolitica/';
+  private serviceURL = '<%= SVC_TH_URL %>/api/divisionPolitica/';
   constructor(private http: Http) {}
 
   getHoodsByWildCard(qr: any) {
@@ -15,6 +15,11 @@ export class PoliticalDivisionService {
 
   getAllCities(qr: any) {
     return this.http.get(this.serviceURL + 'cities/s/' + qr)
+      .map((res: Response) => res.json());
+  }
+
+  getById(id: number) {
+    return this.http.get(this.serviceURL + 'buscarId/' + id)
       .map((res: Response) => res.json());
   }
 

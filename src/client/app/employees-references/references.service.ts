@@ -8,7 +8,7 @@ export class ReferencesService {
 
 
     headers = new Headers({'Content-Type': 'application/json'});
-    private serviceURL = '<%= SVC_TH_URL %>/employeesReferences/';
+    private serviceURL = '<%= SVC_TH_URL %>/api/tercerosReferencias/';
 
     constructor(private http: Http,
                 private authenticationService: AuthenticationService) {
@@ -17,12 +17,11 @@ export class ReferencesService {
 
     getAll()  {
         return this.http.get(this.serviceURL, {headers: this.headers})
-                    .map((res:Response) => res.json().data);
+                    .map((res:Response) => res.json());
     }
 
     getAllgetAllByEmployee(idTercero: number)  {
-        // return this.http.get(this.serviceURL+'employee/'+ idTercero, {headers: this.headers})
-        return this.http.get(this.serviceURL, {headers: this.headers})
+      return this.http.get(this.serviceURL+'buscarTercero/'+ idTercero, {headers: this.headers})
                     .map((res:Response) => res.json());
     }
 
@@ -32,17 +31,17 @@ export class ReferencesService {
     };
 
     update(f: References) {
-        return this.http.put(this.serviceURL+'/'+ f.idTercerosReferencia, f, {headers: this.headers})
+        return this.http.put(this.serviceURL+'/'+ f.idTerceroReferencia, f, {headers: this.headers})
                     .map((res:Response) => res.json());
     }
 
     get(id: number) {
-        return this.http.get(this.serviceURL+'/'+ id, {headers: this.headers})
-                    .map((res:Response) => res.json().data as References);
+        return this.http.get(this.serviceURL+'/buscarId/'+ id, {headers: this.headers})
+                    .map((res:Response) => res.json() as References);
     }
 
     delete(f: References) {
-        return this.http.delete(this.serviceURL+'/'+ f.idTercerosReferencia, {headers: this.headers})
+        return this.http.delete(this.serviceURL+'/'+ f.idTerceroReferencia, {headers: this.headers})
                     .map((res:Response) => res.json());
     }
 

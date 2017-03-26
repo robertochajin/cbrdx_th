@@ -11,6 +11,8 @@ import { LocationsComponent }  from '../locations/locations.component';
 import { ReferencesUpdateComponent }  from './references-update.component';
 import { ReferencesService } from './references.service';
 import { ReferencesTypesService } from '../_services/references-type.service';
+import { LocateService } from '../_services/locate.service';
+import { PoliticalDivisionService } from "../_services/political-division.service";
 
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule,
   ConfirmDialogModule,
@@ -35,7 +37,7 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
                     LocationsComponent
                     ],
     bootstrap:    [ReferencesComponent],
-    providers:    [ReferencesService,ReferencesTypesService],
+    providers:    [ReferencesService,ReferencesTypesService,LocateService, PoliticalDivisionService],
     exports: 	  [ReferencesComponent]
 })
 export class ReferencesModule { }

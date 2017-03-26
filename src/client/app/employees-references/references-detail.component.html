@@ -11,7 +11,7 @@
                   <div class="form-group">
                       <div class="row">
                           <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tipo de referencia:</label>
-                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.tipodeReferencia.label}}</strong></label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 " *ngIf="reference.tipodeReferencia"><strong>{{reference.tipodeReferencia.label}}</strong></label>
 
                           <label class="col-md-3 col-sm-6 col-xs-12 control-label">Empresa:</label>
                           <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.empresa}}</strong></label>
@@ -31,15 +31,15 @@
                           <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.segundoApellido}}</strong></label>
                       </div>
                       <div class="row">
-                          <label class="col-md-3 col-sm-6 col-xs-12 control-label">Ciudad:</label>
-                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.ciudad.label}}</strong></label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 control-label">Ciudad/Municipio:</label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.ciudad}}</strong></label>
 
                           <label class="col-md-3 col-sm-6 col-xs-12 control-label">telefono:</label>
-                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.telefono}}</strong></label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.telefonoFijo}}</strong></label>
                       </div>
                       <div class="row">
                           <label class="col-md-3 col-sm-6 col-xs-12 control-label">celular:</label>
-                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.celular}}</strong></label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.telefonoMovil}}</strong></label>
 
                           <label class="col-md-3 col-sm-6 col-xs-12 control-label">Direccion:</label>
                           <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{reference.direccion}}</strong></label>

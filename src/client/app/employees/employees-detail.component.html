@@ -28,7 +28,7 @@
           <p-tabPanel header="Info Personal" [selected]="true">
 
             <p-accordion (onOpen)="onTabShow($event)" id="accordion">
-              <p-accordionTab header="Datos Generales" [selected]="acordion == 0 || acordion == null ">
+              <!--<p-accordionTab header="Datos Generales" [selected]="acordion == 0 || acordion == null ">
                 <form class="form-horizontal">
                   <fieldset>
                     <div class="form-group">
@@ -82,7 +82,7 @@
                 <employees-locations *ngIf="employee.idTercero" [colaborador]="employee"></employees-locations>
               </p-accordionTab>
 
-             <!--  <p-accordionTab header="Formación Academica" [selected]="acordion == 3">
+               <p-accordionTab header="Formación Academica" [selected]="acordion == 3">
                 <academic-education-formal></academic-education-formal>
                 <academic-education-no-formal></academic-education-no-formal>
               </p-accordionTab>
