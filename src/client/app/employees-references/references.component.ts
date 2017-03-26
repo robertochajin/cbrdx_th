@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import {References} from './references';
 import {ReferencesService} from './references.service';
+import { ReferencesTypesService } from '../_services/references-type.service';
 import {Observable} from 'rxjs/Observable';
 import {ConfirmationService} from 'primeng/primeng';
 import {Employee} from "../employees/employees";
@@ -23,18 +24,23 @@ export class ReferencesComponent {
 
     constructor(
                 private referencesService: ReferencesService,
+                private referencesTypesService: ReferencesTypesService,
                 private router: Router,
                 private confirmationService: ConfirmationService
                 ) {}
 
     ngOnInit() {
-        //this.referencesService.getAll().subscribe(
         this.referencesService.getAllgetAllByEmployee(this.employee.idTercero).subscribe(
             references => {
                 this.references = references;
                 this.references.forEach(function(obj, index){
                     obj.nombreCompleto = obj.primerNombre+' '+obj.segundoNombre+' '+obj.primerApellido+' '+obj.segundoApellido;
-                    obj.numeroContacto = obj.telefonoFijo+' /  '+obj.telefonoFMovil;
+                    obj.numeroContacto = obj.telefonoFijo+' /  '+obj.telefonoMovil;
+
+                  //a utilizar en caso de que no se tenga el dato de tipo de referencia para utilizar en la vista
+                    // this.referencesTypesService.getById(obj.idTipoReferencia).subscribe(
+                    //   (tr:any ) => obj.tipodeReferencia.label = tr.nombreListaTipoReferencias
+                    // );
                 });
             }
         );
@@ -59,14 +65,14 @@ export class ReferencesComponent {
     }
 
     detail(f: References) {
-        this.router.navigate(['employees-references/detail/'+f.idTercerosReferencia]);
+        this.router.navigate(['employees-references/detail/'+f.idTerceroReferencia]);
     }
 
     add() {
-        this.router.navigate(['employees-references/add']);
+        this.router.navigate(['employees-references/add/'+this.employee.idTercero]);
     }
 
     update(f: References) {
-        this.router.navigate(['employees-references/update/'+f.idTercerosReferencia]);
+        this.router.navigate(['employees-references/update/'+f.idTerceroReferencia+'/'+this.employee.idTercero]);
     }
 }

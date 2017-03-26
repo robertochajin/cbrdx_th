@@ -27,21 +27,17 @@ export class LocationsComponent implements OnInit {
   @Output()
   create: EventEmitter<Localizaciones> = new EventEmitter<Localizaciones>();
 
+  @Output()
+    dismiss: EventEmitter<number> = new EventEmitter<number>();
+
   tipoDireccion: {value: null, label: string};
   barrio: any;
-  header = 'Agregando Ubicación';
-
   principalNomenclatureList: any;
   complementaryNomenclatureList: any;
   addressTypeList: any;
-  lista: SelectItem[];
-  listaTipoDireccion: SelectItem[];
-  listaComplementary: SelectItem[];
-  selectedPrincipalNomenclature: any;
-  selectedAddressType: SelectItem[] = [];
+  selectedPrincipalNomenclature: number;
+  selectedAddressType: number;
   labelPrincipalNomenclature: string;
-  copyAutocomplete: string;
-
   principalNomenclature: string;
   numberOne: string;
   numberTwo: string;
@@ -74,6 +70,9 @@ export class LocationsComponent implements OnInit {
     this.locationService.getComplementaryNomenclatureList().subscribe(
       complementaryNomenclatureList => {
         this.complementaryNomenclatureList = complementaryNomenclatureList;
+        this.complementaryNomenclatureList.map((cn:any) => {
+          cn.value = cn.label;
+        });
         this.complementaryNomenclatureList.unshift({label:  'Seleccione', value:null});
       });
     this.locationService.getAddressTypeList().subscribe(
@@ -81,19 +80,18 @@ export class LocationsComponent implements OnInit {
         this.addressTypeList = addressTypeList;
         this.addressTypeList.unshift({label:  'Seleccione', value:null});
       });
-    this.barrio = {value: null, label: ''};
-  }
 
-  onSubmit() {
-    this.create.emit(this.localizacion);
-    // this.submitted = true;
-    // this.msgs = [];
-    // this.msgs.push({ severity: 'info', summary: 'Success', detail: 'Guardando' });
-    // this.localizacion.direccion = this.finalAddress;
+    this.finalAddress = this.localizacion.direccion;
+    this.selectedAddressType = this.localizacion.idTipoDireccion;
+    this.selectedPrincipalNomenclature = this.localizacion.nomenclaturaPrincipal;
+    this.barrio = {value: this.localizacion.idDivisionPolitica};
   }
 
   createLocation(){
     this.localizacion.direccion = this.finalAddress;
+    this.localizacion.idTipoDireccion = this.selectedAddressType;
+    this.localizacion.nomenclaturaPrincipal = this.selectedPrincipalNomenclature;
+    this.localizacion.idDivisionPolitica = this.barrio.value;
     this.create.emit(this.localizacion);
   }
 
@@ -126,7 +124,6 @@ export class LocationsComponent implements OnInit {
     this.finalAddress += this.numberTwo === undefined ? '' : this.numberTwo + ' ';
 
     if (this.finalAddress !== '' && this.barrio.label !== '' && this.barrio.label !== undefined) {
-      //console.log(this.finalAddress + ' ' + this.barrio.label);
       let geocoder = new google.maps.Geocoder();
 
       const assingLocation = (l: any, t: any) => {
@@ -153,40 +150,29 @@ export class LocationsComponent implements OnInit {
             console.log('Error : ' + status);
           }
         });
-
     }
-
 
     for (let c of this.complementaries) {
-      if (c.tipo !== null) {
-        switch (c.tipo) {
-          case 1:
-            this.finalAddress += ' Casa' + ' ' + c.detalle + ' ';
-            break;
-          case 2:
-            this.finalAddress += ' Bloque' + ' ' + c.detalle + ' ';
-            break;
-          case 3:
-            this.finalAddress += ' Apartamento' + ' ' + c.detalle + ' ';
-            break;
-        }
-      }
+      this.finalAddress += c.tipo + ' ' + c.detalle + ' ';
     }
 
+    if (this.barrio !== undefined && this.barrio.label !== '' && this.barrio.label !== undefined) {
+      this.finalAddress += this.barrio.label;
+    }
   }
+
   addComplementary(): void {
     let complementary = { 'tipo': 0, 'detalle': '' };
     this.complementaries.push(complementary);
   }
 
   removeComplementary(id: any): void {
-    //console.log(id);
     this.complementaries.splice(id, 1);
   }
 
-  goBack(): void {
+  discard(): void {
     this.confirmationService.confirm({
-      message: ` ¿Esta seguro que desea Cancelar?`,
+      message: ` ¿Esta seguro que desea cancelar la edición de la dirección?`,
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {

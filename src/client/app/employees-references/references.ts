@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class References {
-  public idTercerosReferencia :number;
-  public idTerceros :number;
+  public idTerceroReferencia :number;
+  public idTercero :number;
   public idTipoReferencia :number;
   public empresa :string;
   public primerNombre :string;
@@ -11,7 +11,7 @@ export class References {
   public primerApellido :string;
   public segundoApellido :string;
   public telefonoFijo :string;
-  public telefonoFMovil :string;
+  public telefonoMovil :string;
   public idLocalizacion :number ;
   public idAdjunto :number ;
   public indicadorHabilitado :boolean ;
@@ -21,8 +21,9 @@ export class References {
   public fechaVerificado :string ;
 
   public nombreCompleto?: string;
-  public direccion: string;
-  public tipodeReferencia: {value:number, label:string}
+  public ciudad?: string;
+  public direccion?: string;
+  public tipodeReferencia?: {value:number, label:string}
 
   public numeroContacto?:string;
 
