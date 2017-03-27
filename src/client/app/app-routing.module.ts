@@ -141,7 +141,7 @@ const routes = [
   //Login
   {path: 'login', component: LoginComponent},
   {path: 'cambioContrasena', component: CambioContrasenaComponent},
-  {path: 'dashboard', component: DashboardComponent},
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
 
   // Constantes
   {path: 'constantes', component: ConstanteComponent, canActivate: [AuthGuard]},

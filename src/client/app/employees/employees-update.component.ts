@@ -3,14 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 
-import { Employee } from './employees';
-import { EmployeesService} from './employees.service';
+import { Employee } from '../_models/employees';
+import { EmployeesService} from '../_services/employees.service';
 
 
 @Component({
     moduleId: module.id,
     selector: 'employees',
-    templateUrl: 'employees-form.component.html',
+    template: 'employees-form.component.html',
 })
 
 export class EmployeesUpdateComponent implements OnInit{

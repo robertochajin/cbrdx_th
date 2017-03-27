@@ -4,12 +4,18 @@ import { Injectable } from '@angular/core';
 export class Employee {
 
   public idTercero : number;
+  public idNaturaleza : number;
+  public naturaleza? : string;
+  public idTipoDocumento : number;
+  public tipoDocumento? : string;
   public numeroDocumento : string;
-  public nombreCompleto?  : string;
+
   public primerNombre  : string;
   public segundoNombre : string;
   public primerApellido  : string;
   public segundoApellido : string;
+  public nombreCompleto?  : string;
+
   public fechaCreacion?  : string;
   public cargoActual? : string;
   public nacionalidad?  : string;
@@ -30,7 +36,6 @@ export class Employee {
   /*idEstadoCivil:number,*/
   public estadoCivil? : any;
   public genero  : any;
-  public tipoDocumento? : {/*idTipoDocumento:number,*/ nombreListaTipoDocumentos:string};
   public ciudadExpDocumento  : any ;//{/*idDivisionPoliticaPadre:number,*/ descripcionDivisionPolitica:string};
   public ciudadNacimiento  : any ;//{/*idDivisionPoliticaPadre:number,*/ descripcionDivisionPolitica:string};
   public estratoSocioEconomico? : {value:number, label:string};
@@ -40,7 +45,6 @@ export class Employee {
     this.nombreCompleto = '';
     this.segundoNombre = '';
     this.segundoApellido = '';
-    this.tipoDocumento = {/*idTipoDocumento:null, */nombreListaTipoDocumentos:''};
     //this.ciudadNacimiento = {/*idDivisionPoliticaPadre:null, */descripcionDivisionPolitica:''};
     //this.ciudadExpedicion = {/*idDivisionPoliticaPadre:null, */descripcionDivisionPolitica:''};
     this.nacionalidad = '';

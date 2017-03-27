@@ -8,7 +8,7 @@ import {EmployeesComponent}  from './employees.component';
 import {EmployeesDetailComponent}  from './employees-detail.component';
 import {EmployeesAddComponent}  from './employees-add.component';
 import {EmployeesUpdateComponent}  from './employees-update.component';
-import {EmployeesService} from './employees.service';
+import {EmployeesService} from '../_services/employees.service';
 import {NavService}                 from '../_services/_nav.service';
 import {
   InputTextModule,
@@ -17,7 +17,13 @@ import {
   DialogModule,
   ConfirmDialogModule,
   TabViewModule,
-  AccordionModule
+  AccordionModule,
+  MessagesModule,
+  AutoCompleteModule,
+  FileUploadModule,
+  DropdownModule,
+  CalendarModule
+
 } from 'primeng/primeng';
 
 import {FamilyInformationModule} from './../employees-family-information/family-information.module';
@@ -43,6 +49,11 @@ import {LocationModule} from '../employees-location/employee-location.module';
     WorkExperienceModule,
     LocationModule,
     AccordionModule,
+    MessagesModule,
+    AutoCompleteModule,
+    FileUploadModule,
+    DropdownModule,
+    CalendarModule
     //MomentModule
   ],
   declarations: [EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent],

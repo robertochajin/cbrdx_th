@@ -4,7 +4,7 @@ import {References} from './references';
 import {ReferencesService} from './references.service';
 import {Observable} from 'rxjs/Observable';
 import {ConfirmationService} from 'primeng/primeng';
-import {Employee} from "../employees/employees";
+import {Employee} from "../_models/employees";
 
 
 

@@ -9,91 +9,126 @@
 
     <div class="row-fluid">
         <div class="col-md-12">
-            <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate
-                  class="form">
-                <div class="row">
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !tipoDocumento.valid }">
+            <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate >
+                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="NGpersonTypes">Naturaleza</label>
+                            <p-dropdown id="NGpersonTypes"  name="NGpersonTypes" required="true"
+                                        [options]="personTypes" [autoWidth]="false"
+                                        [(ngModel)]="employee.idNaturaleza"
+                                        #NGpersonTypes="ngModel"
+                            ></p-dropdown>
+                          <div class="ui-message ui-messages-error ui-corner-all"
+                               *ngIf="f.submitted && !NGpersonTypes.valid">
+                            <i class="fa fa-close"></i>
+                            Naturaleza es requerido
+                          </div>
+                        </div>
+                      <div class="form-group col-md-6"
+                           [ngClass]="{ 'has-error': f.submitted && !tipoDocumento.valid }">
                         <label for="tipoDocumento">Tipo de documento</label>
-                        <input id="tipoDocumento"   type="text" class="form-control" name="tipoDocumento"
-                               [(ngModel)]="employee.tipoDocumento" #tipoDocumento="ngModel"
-                               required/>
+                        <p-dropdown id="tipoDocumento"  name="tipoDocumento" required="true"
+                                    [options]="documentTypes" [autoWidth]="false"
+                                    [(ngModel)]="employee.idtipoDocumento"
+                                    #tipoDocumento="ngModel"
+                        ></p-dropdown>
                         <div *ngIf="f.submitted && !tipoDocumento.valid" class="help-block">Tipo de
-                            documento es requerido
+                          documento es requerido
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="row">
+                        
+                        <div class="form-group col-md-6"
+                             [ngClass]="{ 'has-error': f.submitted && !numeroDocumento.valid }">
+                            <label for="numeroDocumento">Número de documento</label>
+                            <input id="numeroDocumento" type="text" pInputText  name="numeroDocumento"
+                                   [(ngModel)]="employee.numeroDocumento"
+                                   #numeroDocumento="ngModel" required/>
+                            <div *ngIf="f.submitted && !numeroDocumento.valid" class="help-block">Número de
+                                documento es requerido
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="expeditionDate">Fecha expedición documento</label>
+                          <p-calendar id="expeditionDate" name="expeditionDate"  [showIcon]="true" [disabled]="disabled"
+                                      [dataType]="date"  #expeditionDate="ngModel" required="true"
+                                      [(ngModel)]="employee.fechaDocumento"></p-calendar>
+                          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !expeditionDate.valid">
+                            Fecha expedición documento es requerido
+                          </div>
                         </div>
                     </div>
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !numeroDocumento.valid }">
-                        <label for="numeroDocumento">Número de documento</label>
-                        <input id="numeroDocumento" type="text" class="form-control" name="numeroDocumento"
-                               [(ngModel)]="employee.numeroDocumento"
-                               #numeroDocumento="ngModel" required/>
-                        <div *ngIf="f.submitted && !numeroDocumento.valid" class="help-block">Número de
-                            documento es requerido
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="primerNombre">Primer nombre</label>
+                            <input type="text" pInputText id="primerNombre" name="primerNombre"
+                                   [(ngModel)]="employee.primerNombre" #primerNombre="ngModel"
+                                   required/>
+                            <div *ngIf="f.submitted && !primerNombre.valid" class="help-block">Primer nombre es
+                                requerido
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="segundoNombre">Segundo nombre</label>
+                            <input type="text" pInputText id="segundoNombre"  name="segundoNombre"
+                                   [(ngModel)]="employee.segundoNombre" #segundoNombre="ngModel"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="primerApellido">Primer apellido</label>
+                            <input type="text" pInputText id="primerApellido" name="primerApellido"
+                                   [(ngModel)]="employee.primerApellido" #primerApellido="ngModel"/>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="segundoApellido">Segundo apellido</label>
+                            <input type="text" pInputText id="segundoApellido" name="segundoApellido"
+                                   [(ngModel)]="employee.segundoApellido" #segundoApellido="ngModel"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="NGnationalityTypes">Nacionalidad</label>
+                            <p-dropdown id="NGnationalityTypes"  name="NGpersonTypes" required="true"
+                                        [options]="nationalityTypes" [autoWidth]="false"
+                                        [(ngModel)]="employee.nacionalidad"
+                                        #NGnationalityTypes="ngModel"
+                            ></p-dropdown>
+                            <div class="ui-message ui-messages-error ui-corner-all"
+                                 *ngIf="f.submitted && !NGnationalityTypes.valid">
+                              <i class="fa fa-close"></i>
+                              Nacionalidad es requerido
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="NGgenderTypes">Genero</label>
+                          <p-dropdown id="NGgenderTypes"  name="NGgenderTypes" required="true"
+                                      [options]="genderTypes" [autoWidth]="false"
+                                      [(ngModel)]="employee.nacionalidad"
+                                      #NGgenderTypes="ngModel"
+                          ></p-dropdown>
+                          <div class="ui-message ui-messages-error ui-corner-all"
+                               *ngIf="f.submitted && !NGgenderTypes.valid">
+                            <i class="fa fa-close"></i>
+                            Genero es requerido
+                          </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !primerNombre.valid }">
-                        <label for="primerNombre">Primer nombre</label>
-                        <input type="text" class="form-control" name="primerNombre"
-                               [(ngModel)]="employee.primerNombre" #primerNombre="ngModel"
-                               required/>
-                        <div *ngIf="f.submitted && !primerNombre.valid" class="help-block">Primer nombre es
-                            requerido
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="segundoNombre">Segundo nombre</label>
-                        <input type="text" class="form-control" name="segundoNombre"
-                               [(ngModel)]="employee.segundoNombre" #segundoNombre="ngModel"/>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="primerApellido">Primer apellido</label>
-                        <input type="text" class="form-control" name="primerApellido"
-                               [(ngModel)]="employee.primerApellido" #primerApellido="ngModel"/>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="segundoApellido">Segundo apellido</label>
-                        <input type="text" class="form-control" name="segundoApellido"
-                               [(ngModel)]="employee.segundoApellido" #segundoApellido="ngModel"/>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !fechaDesde.valid }">
-                        <label for="fechaDesde">Fecha contrato</label>
-                        <input type="text" class="form-control" name="fechaDesde"
-                               [(ngModel)]="employee.fechaDesde"
-                               #fechaDesde="ngModel" required/>
-                        <div *ngIf="f.submitted && !fechaDesde.valid" class="help-block">Fecha es requerido
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6"
-                         [ngClass]="{ 'has-error': f.submitted && !cargoActual.valid }">
-                        <label for="cargoActual">Cargo</label>
-                        <input type="text" class="form-control" name="cargoActual"
-                               [(ngModel)]="employee.cargoActual" #cargoActual="ngModel" required/>
-                        <div *ngIf="f.submitted && !cargoActual.valid" class="help-block">Cargo actual es
-                            requerido
-                        </div>
-                    </div>
-                </div>
-
                 <div class="row form-footer-buttons">
                     <div class="form-group col-md-12">
                         <a (click)="goBack()" class="cancelar">Cancelar</a>
-                        <button icon="fa-plus" label="Guardar Colaborador"
+                        <button icon="fa-plus" label="Guardar"
                                 pButton></button>
 
                     </div>
                 </div>
+
             </form>
         </div>
 

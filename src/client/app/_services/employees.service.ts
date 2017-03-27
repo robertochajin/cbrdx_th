@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
-import { Employee } from './employees';
+import { Employee } from '../_models/employees';
 
 @Injectable()
 export class EmployeesService {
