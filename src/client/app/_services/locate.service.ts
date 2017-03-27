@@ -31,7 +31,7 @@ export class LocateService {
   };
 
   update(f: Localizaciones) {
-    return this.http.put(this.masterService, JSON.stringify(f), {headers: this.headers}).toPromise().catch(this.handleError);
+    return this.http.put(this.masterService, JSON.stringify(f), {headers: this.headers}).catch(this.handleError);
   }
 
   handleError(error: any): Promise<any> {
