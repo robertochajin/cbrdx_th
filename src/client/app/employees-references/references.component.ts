@@ -54,9 +54,15 @@ export class ReferencesComponent {
             header: 'Corfirmación',
             icon: 'fa fa-question-circle',
             accept: () => {
-                this.referencesService.delete(this.dialogObjet);
-                this.references.splice(this.references.indexOf(f), 1);
-                this.dialogObjet = null;
+
+              this.referencesService.get(this.dialogObjet.idTerceroReferencia).subscribe(
+                ref => {
+                  ref.indicadorHabilitado = false;
+                  return this.referencesService.update(ref).subscribe(x => {
+                    this.references.splice(this.references.indexOf(f), 1);
+                    this.dialogObjet = null;
+                  });
+                });
             },
             reject: () => {
                 this.dialogObjet = null;

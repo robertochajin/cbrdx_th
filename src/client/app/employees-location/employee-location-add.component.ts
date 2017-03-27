@@ -146,7 +146,7 @@ export class LocationAddComponent implements OnInit {
   }
 
   hoodSearch(event: any) {
-    this.politicalDivisionService.getAllHoods(event.query).subscribe(
+    this.politicalDivisionService.getHoodsByWildCard(event.query).subscribe(
       hoods => this.hoodList = hoods
     );
   }

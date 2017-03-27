@@ -143,7 +143,7 @@
     </div>
   </div>
   <div *ngIf="!addinglocation">
-    <locations [parentTitle]="'Referencias'" (create)="bindLocation($event)" [localizacion]="localizacion"></locations>
+    <locations [parentTitle]="'Referencias'" (dismiss)="toggleform()" (create)="bindLocation($event)" [localizacion]="localizacion"></locations>
   </div>
 
 

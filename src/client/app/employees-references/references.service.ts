@@ -31,8 +31,7 @@ export class ReferencesService {
     };
 
     update(f: References) {
-        return this.http.put(this.serviceURL+'/'+ f.idTerceroReferencia, f, {headers: this.headers})
-                    .map((res:Response) => res.json());
+        return this.http.put(this.serviceURL, JSON.stringify(f), {headers: this.headers}).catch(this.handleError);
     }
 
     get(id: number) {
@@ -40,9 +39,9 @@ export class ReferencesService {
                     .map((res:Response) => res.json() as References);
     }
 
-    delete(f: References) {
-        return this.http.delete(this.serviceURL+'/'+ f.idTerceroReferencia, {headers: this.headers})
-                    .map((res:Response) => res.json());
+    handleError(error: any): Promise<any> {
+      console.error('Error:', error);
+      return Promise.reject(error.message || error);
     }
 
 }

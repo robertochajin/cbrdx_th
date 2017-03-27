@@ -11,6 +11,7 @@ import { CitiesServices } from '../_services/cities.service';
 import { LocateService } from '../_services/locate.service';
 import { NavService } from '../_services/_nav.service';
 import { Localizaciones } from "../_models/localizaciones";
+import {PoliticalDivisionService} from "../_services/political-division.service";
 
 @Component({
   moduleId: module.id,
@@ -37,6 +38,7 @@ export class ReferencesUpdateComponent implements OnInit  {
     private route: ActivatedRoute,
     private location: Location,
     private locateService: LocateService,
+    private politicalDivisionService: PoliticalDivisionService,
     private referencesTypesServices: ReferencesTypesService,
     private confirmationService: ConfirmationService,
     private _nav:NavService
@@ -57,6 +59,11 @@ export class ReferencesUpdateComponent implements OnInit  {
         this.locateService.getById(this.reference.idLocalizacion).subscribe(localizacion => {
           this.localizacion = localizacion;
           this.reference.direccion = localizacion.direccion;
+          this.localizacion.locacion = {camino:'', idDivisionPolitica: null};
+          this.politicalDivisionService.getLocation(localizacion.idDivisionPolitica).subscribe(ciudad => {
+            this.localizacion.locacion.camino = ciudad.camino;
+            this.localizacion.locacion.idDivisionPolitica = ciudad.idDivisionPolitica;
+          });
         });
       });
     });

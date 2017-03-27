@@ -31,7 +31,6 @@ export class LocationsComponent implements OnInit {
     dismiss: EventEmitter<number> = new EventEmitter<number>();
 
   tipoDireccion: {value: null, label: string};
-  barrio: any;
   principalNomenclatureList: any;
   complementaryNomenclatureList: any;
   addressTypeList: any;
@@ -84,14 +83,13 @@ export class LocationsComponent implements OnInit {
     this.finalAddress = this.localizacion.direccion;
     this.selectedAddressType = this.localizacion.idTipoDireccion;
     this.selectedPrincipalNomenclature = this.localizacion.nomenclaturaPrincipal;
-    this.barrio = {value: this.localizacion.idDivisionPolitica};
   }
 
   createLocation(){
     this.localizacion.direccion = this.finalAddress;
     this.localizacion.idTipoDireccion = this.selectedAddressType;
     this.localizacion.nomenclaturaPrincipal = this.selectedPrincipalNomenclature;
-    this.localizacion.idDivisionPolitica = this.barrio.value;
+    this.localizacion.idDivisionPolitica = this.localizacion.locacion.idDivisionPolitica;
     this.create.emit(this.localizacion);
   }
 
@@ -102,8 +100,8 @@ export class LocationsComponent implements OnInit {
   }
 
   captureHoodId(event: any) {
-    this.barrio.value = event.idDivisionPolitica;
-    this.barrio.label = event.descripcionDivisionPolitica;
+    this.localizacion.locacion.idDivisionPolitica = event.idDivisionPolitica;
+    this.localizacion.locacion.camino = event.camino;
   }
 
   capturePrincipalNomenclature(label: any) {
@@ -123,14 +121,14 @@ export class LocationsComponent implements OnInit {
     this.finalAddress += this.numberOne === undefined ? '' : this.numberOne + ' - ';
     this.finalAddress += this.numberTwo === undefined ? '' : this.numberTwo + ' ';
 
-    if (this.finalAddress !== '' && this.barrio.label !== '' && this.barrio.label !== undefined) {
+    if (this.finalAddress !== '' && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined) {
       let geocoder = new google.maps.Geocoder();
 
       const assingLocation = (l: any, t: any) => {
         this.localizacion.latitud = l;
         this.localizacion.longitud = t;
       };
-      geocoder.geocode({ 'address': this.finalAddress + ' ' + this.barrio.label },
+      geocoder.geocode({ 'address': this.finalAddress + ' ' + this.localizacion.locacion.camino },
         function (results: any, status: any) {
           if (status === google.maps.GeocoderStatus.OK) {
             let latitude = results[0].geometry.location.lat();
@@ -156,8 +154,8 @@ export class LocationsComponent implements OnInit {
       this.finalAddress += c.tipo + ' ' + c.detalle + ' ';
     }
 
-    if (this.barrio !== undefined && this.barrio.label !== '' && this.barrio.label !== undefined) {
-      this.finalAddress += this.barrio.label;
+    if (this.localizacion.locacion !== undefined && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined) {
+      this.finalAddress += this.localizacion.locacion.camino;
     }
   }
 
@@ -171,15 +169,7 @@ export class LocationsComponent implements OnInit {
   }
 
   discard(): void {
-    this.confirmationService.confirm({
-      message: ` ¿Esta seguro que desea cancelar la edición de la dirección?`,
-      header: 'Corfirmación',
-      icon: 'fa fa-question-circle',
-      accept: () => {
-      },
-      reject: () => {
-      }
-    });
+    this.dismiss.emit(1);
   }
 
   focusUP() {
