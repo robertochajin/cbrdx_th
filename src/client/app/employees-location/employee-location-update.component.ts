@@ -7,6 +7,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 declare let google: any;
 import { NavService } from '../_services/_nav.service';
+import {PoliticalDivisionService} from "../_services/political-division.service";
 
 @Component({
   moduleId: module.id,
@@ -54,6 +55,7 @@ export class LocationUpdateComponent implements OnInit {
     private router: Router,
     private location: Location,
     private confirmationService: ConfirmationService,
+    private politicalDivisionService: PoliticalDivisionService,
     private route: ActivatedRoute,
     private _nav: NavService
   ) {
@@ -141,13 +143,13 @@ export class LocationUpdateComponent implements OnInit {
   }
 
   citySearch(event: any) {
-    this.locationService.getAllCities(event.query).subscribe(
+    this.politicalDivisionService.getAllCities(event.query).subscribe(
       cities => this.cityList = cities
     );
   }
 
   hoodSearch(event: any) {
-    this.locationService.getAllHoods(event.query).subscribe(
+    this.politicalDivisionService.getHoodsByWildCard(event.query).subscribe(
       hoods => this.hoodList = hoods
     );
   }

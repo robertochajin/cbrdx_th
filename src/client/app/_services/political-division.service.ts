@@ -28,5 +28,10 @@ export class PoliticalDivisionService {
     return this.http.get(this.masterService + 'buscarId/' + id,{headers: this.headers})
       .map((res: Response) => res.json());
   }
+
+  getLocation(id: number) {
+    return this.http.get(this.masterService + 'buscarLocalizacion/' + id ,{headers: this.headers})
+      .map((res: Response) => res.json());
+  }
 }
 
