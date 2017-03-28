@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import { FormalStudies } from './formal-studies';
-import { AcademicEducationService } from './academic-education.service';
+import { AcademicEducationService } from '../_services/academic-education.service';
 import { Message, ConfirmationService, SelectItem, ConfirmDialog} from 'primeng/primeng';
 import { StudyLevelServices } from '../_services/study-level.service';
 import { StudyAreaServices } from '../_services/study-area.service';

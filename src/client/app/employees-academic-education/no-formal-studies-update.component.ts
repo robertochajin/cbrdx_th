@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
-import { AcademicEducationService } from './academic-education.service';
+import { AcademicEducationService } from '../_services/academic-education.service';
 import { Location }                 from '@angular/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Noformalstudies } from './no-formal-studies';

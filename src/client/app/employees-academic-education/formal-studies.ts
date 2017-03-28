@@ -2,24 +2,25 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class FormalStudies {
-  public idEstudio?: string;
-  public nivelEstudio?: {value:number, label:string};
-  public areaEstudio?: {value:number, label:string};
-  public titulo?: string;
-  public institucion?: {value:number, label:string};
-  public otraInstitucion?: string;
-  public ciudad:{value:number, label:String};
-  public estadoEstudio?:{value:number, label:String};
-  public ingreso?: string;
-  public finalizacion?: string;
-  public confirmada?: string;
-  public soporte?: string;
+
+  public idTerceroEstudioFormal: number ;
+  public idTercero: number ;
+  public idNivelEstudio: number ;
+  public idAreaEstudio: number ;
+  public tituloEstudio: string ;
+  public idInstitucion: number ;
+  public otraInstitucion: string;
+  public idCiudad: number ;
+  public idEstado: number ;
+  public fechaIngresa: string ;
+  public fechaTermina: string ;
+  public idAdjunto: number ;
+  public indicadorHabilitado: boolean;
+  public auditoriaUsuario: number ;
+  public auditoriaFecha: string ;
+  public indicadorVerificado: boolean ;
+  public fechaVerificado: string;
 
   constructor() {
-    this.nivelEstudio = {value: null, label: ''};
-    this.areaEstudio = {value: null, label: ''};
-    this.institucion = {value: null, label: ''};
-    this.ciudad = {value: null, label: ''};
-    this.estadoEstudio = {value: null, label: ''};
   }
 }

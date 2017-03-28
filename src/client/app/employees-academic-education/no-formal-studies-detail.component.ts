@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location }                 from '@angular/common';
 import { Noformalstudies } from './no-formal-studies';
-import { AcademicEducationService} from './academic-education.service';
+import { AcademicEducationService} from '../_services/academic-education.service';
 import { Message, ConfirmationService } from 'primeng/primeng';
 import 'rxjs/add/operator/switchMap';
 
