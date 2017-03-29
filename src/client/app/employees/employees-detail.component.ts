@@ -2,8 +2,8 @@ import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
-import { EmployeesService }         from './employees.service';
-import { Employee }                 from './employees';
+import { EmployeesService }         from '../_services/employees.service';
+import { Employee }                 from '../_models/employees';
 import {NavService}                 from '../_services/_nav.service';
 @Component({
     moduleId: module.id,
