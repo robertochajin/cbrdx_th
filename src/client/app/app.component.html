@@ -1,23 +1,33 @@
-<div class="wrapper" >
+<div class="wrapper">
   <sd-toolbar *ngIf="sessionStart"></sd-toolbar>
-  <div [class.main-panel]="sessionStart">
-    <sd-navbar *ngIf="sessionStart"></sd-navbar>
-    <div class="content" >
-      <div class="container-fluid">
-        <router-outlet></router-outlet>
-      </div>
-    </div>
 
-    <footer class="footer">
-      <div class="container-fluid">
-        <div class="copyright pull-right">
-          &copy;
-          <script>document.write(new Date().getFullYear())</script>
-          Todos los derechos reservados<br/>
-          Powered by <a href="http://www.ciberdix.com">Ciberdix</a>
-        </div>
-      </div>
-    </footer>
+  <sd-navbar *ngIf="sessionStart"></sd-navbar>
 
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header" *ngIf="sessionStart">
+      <div class="btn-group btn-breadcrumb">
+        <a href="#" class="btn btn-default"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="#" class="btn btn-default">Snippets</a>
+        <a href="#" class="btn btn-default">Breadcrumbs</a>
+        <a href="#" class="btn btn-default">Default</a>
+      </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <router-outlet></router-outlet>
+    </section>
+    <!-- /.content -->
   </div>
+
+  <footer class="main-footer" *ngIf="sessionStart">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 0.0.1
+    </div>
+    Copyright &copy; 2017 <a href="http://ciberdix.com">Ciberdix</a>.
+    All right
+    reserved.
+  </footer>
+
 </div>
