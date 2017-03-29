@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormalStudies } from './formal-studies';
 import { AcademicEducationService } from '../_services/academic-education.service';
 import { ConfirmationService } from 'primeng/primeng';
-import {Employee} from "../employees/employees";
+import {Employee} from "../_models/employees";
 
 
 @Component({

@@ -203,7 +203,9 @@ export class EmployeesUpdateComponent {
             }
   
             this.ciudadExpDocumento = this.employee.ciudadExpDocumento;
+            this.backupCiudadExpDocumento = this.employee.ciudadExpDocumento;
             this.ciudadNacimiento = this.employee.ciudadNacimiento;
+            this.backupCiudadNacimiento = this.employee.ciudadNacimiento;
       });
     
     this.es = {
