@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { EmployeesLocation } from '../_models/employee-location';
-import { Employee } from "../employees/employees";
+import { Employee } from "../_models/employees";
 
 @Injectable()
 export class LocationService {
