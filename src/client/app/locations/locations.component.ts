@@ -102,6 +102,7 @@ export class LocationsComponent implements OnInit {
   captureHoodId(event: any) {
     this.localizacion.locacion.idDivisionPolitica = event.idDivisionPolitica;
     this.localizacion.locacion.camino = event.camino;
+    this.composeAddress();
   }
 
   capturePrincipalNomenclature(label: any) {
@@ -121,14 +122,24 @@ export class LocationsComponent implements OnInit {
     this.finalAddress += this.numberOne === undefined ? '' : this.numberOne + ' - ';
     this.finalAddress += this.numberTwo === undefined ? '' : this.numberTwo + ' ';
 
-    if (this.finalAddress !== '' && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined) {
+    if (this.finalAddress !== '' && this.localizacion.locacion != undefined && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined) {
       let geocoder = new google.maps.Geocoder();
 
       const assingLocation = (l: any, t: any) => {
         this.localizacion.latitud = l;
         this.localizacion.longitud = t;
       };
-      geocoder.geocode({ 'address': this.finalAddress + ' ' + this.localizacion.locacion.camino },
+
+      //Asumiendo que el camino obtenido de la busqueda tiene un máximo de 4 níveles
+      //Se hace el conteo de 3 comas par identificar si la selección fue de una división politica de nivel 4 (barrio/vereda)
+      //para hacerle el tratamiento al string con el cual se hace la busqueda en el API de maps.google
+      let strToSearch = '';
+      if(((this.localizacion.locacion.camino.match(/,/g) || []).length) === 3){
+        strToSearch = this.localizacion.locacion.camino.substr(this.localizacion.locacion.camino.indexOf(','));
+      } else {
+        strToSearch = this.localizacion.locacion.camino;
+      }
+      geocoder.geocode({ 'address': this.finalAddress + ' ' + strToSearch },
         function (results: any, status: any) {
           if (status === google.maps.GeocoderStatus.OK) {
             let latitude = results[0].geometry.location.lat();
@@ -140,12 +151,13 @@ export class LocationsComponent implements OnInit {
               zoom: 16,
               mapTypeId: google.maps.MapTypeId.ROADMAP
             };
-            let map = new google.maps.Map(document.getElementById('ubicacionColaborador'), mapOptions);
+            let map = new google.maps.Map(document.getElementById('graphMap'), mapOptions);
             let marker = new google.maps.Marker({ position: latLng, map: map });
 
             assingLocation(latitude, longitude);
           } else {
-            console.log('Error : ' + status);
+            document.getElementById('graphMap').innerHTML = "La busqueda no arroja ningun resultado";
+            assingLocation('', '');
           }
         });
     }

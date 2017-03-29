@@ -14,7 +14,7 @@ import { NoFormalStudiesDetailComponent }  from './no-formal-studies-detail.comp
 import { NoFormalStudiesAddComponent }  from './no-formal-studies-add.component';
 import { NoFormalStudiesUpdateComponent }  from './no-formal-studies-update.component';
 
-import { AcademicEducationService } from './academic-education.service';
+import { AcademicEducationService } from '../_services/academic-education.service';
 import { CitiesServices } from '../_services/cities.service';
 import { InstituteServices } from '../_services/institute.service';
 import { StudyLevelServices } from '../_services/study-level.service';
