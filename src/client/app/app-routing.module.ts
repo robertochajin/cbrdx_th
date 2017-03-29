@@ -113,18 +113,18 @@ const routes = [
   //Información de referencia de employees
   {path: 'employees-references', component: ReferencesComponent, canActivate: [AuthGuard]},
   {path: 'employees-references/add/:tercero', component: ReferencesAddComponent, canActivate: [AuthGuard]},
-  {path: 'employees-references/detail/:id/:tercero', component: ReferencesDetailComponent, canActivate: [AuthGuard]},
-  {path: 'employees-references/update/:id', component: ReferencesUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'employees-references/update/:id/:tercero', component: ReferencesUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'employees-references/detail/:id', component: ReferencesDetailComponent, canActivate: [AuthGuard]},
 
   //Información de formacion academica
   {path: 'employees-formal-studies', component: FormalStudiesComponent, canActivate: [AuthGuard]},
-  {path: 'employees-formal-studies/add', component: FormalStudiesAddComponent, canActivate: [AuthGuard]},
+  {path: 'employees-formal-studies/add/:tercero', component: FormalStudiesAddComponent, canActivate: [AuthGuard]},
   {path: 'employees-formal-studies/detail/:id', component: FormalStudiesDetailComponent, canActivate: [AuthGuard]},
-  {path: 'employees-formal-studies/update/:id', component: FormalStudiesUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'employees-formal-studies/update/:id/:tercero', component: FormalStudiesUpdateComponent, canActivate: [AuthGuard]},
   {path: 'employees-no-formal-studies', component: NoFormalStudiesComponent, canActivate: [AuthGuard]},
-  {path: 'employees-no-formal-studies/add', component: NoFormalStudiesAddComponent, canActivate: [AuthGuard]},
+  {path: 'employees-no-formal-studies/add/:tercero', component: NoFormalStudiesAddComponent, canActivate: [AuthGuard]},
   {path: 'employees-no-formal-studies/detail/:id', component: NoFormalStudiesDetailComponent, canActivate: [AuthGuard]},
-  {path: 'employees-no-formal-studies/update/:id', component: NoFormalStudiesUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'employees-no-formal-studies/update/:id/:tercero', component: NoFormalStudiesUpdateComponent, canActivate: [AuthGuard]},
 
   //employees-location
   { path: 'employees-location', component: LocationComponent, canActivate: [AuthGuard]},

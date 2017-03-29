@@ -2,27 +2,27 @@
   <div class="row">
     <div class="col-md-12">
       <div class="header">
-        <h4 class="title">Agregando dirección / {{parentTitle}}</h4>
+        <h4 class="title">Editando dirección / {{parentTitle}}</h4>
       </div>
     </div>
   </div>
-  <form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+  <form (ngSubmit)="l.valid && createLocation()" #l="ngForm" novalidate id="formlocalizacion">
     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
       <div class="ui-grid-row">
         <div class="ui-grid-col-4">
           <label for="tipoDireccionLabel">* Tipo de Dirección</label>
           <p-dropdown id="tipoDireccionLabel" name="tipoDireccionLabel" [options]="addressTypeList" [autoWidth]="false" required="true"
                       [(ngModel)]="selectedAddressType" #tipoDireccionLabel="ngModel" (onChange)="captureTipoDireccion($event)"></p-dropdown>
-          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !tipoDireccionLabel.valid" (focus)="!tipoDireccionLabel.valid">
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !tipoDireccionLabel.valid" (focus)="!tipoDireccionLabel.valid">
             <i class="fa fa-close"></i> Tipo de Dirección es requerido
           </div>
         </div>
         <div class="ui-grid-col-8">
           <label for="barrio">Barrio / Vereda / Ciudad</label>
-          <p-autoComplete placeholder="Buscar barrio" field="descripcionDivisionPolitica" name="barrio" id="barrio" [(ngModel)]="barrio.label"
+          <p-autoComplete placeholder="Buscar barrio" field="camino" name="barrio" id="barrio" [(ngModel)]="localizacion.locacion"
                           #barrio="ngModel" [suggestions]="hoodList" required="true" (completeMethod)="hoodSearch($event)" (onSelect)="captureHoodId($event)">
           </p-autoComplete>
-          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !barrio.valid">
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !barrio.valid">
             <i class="fa fa-close"></i> Barrio es requerida
           </div>
         </div>
@@ -33,7 +33,7 @@
           <label for="ppal">Nomenclatura principal</label>
           <p-dropdown [options]="principalNomenclatureList" id="ppal" name="ppal" #ppal="ngModel" [autoWidth]="false" (onChange)="capturePrincipalNomenclature(ppal.valueAccessor.label)"
                       [(ngModel)]="selectedPrincipalNomenclature" required="true"></p-dropdown>
-          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ppal.valid">
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !ppal.valid">
             <i class="fa fa-close"></i> Nomenclatura principal es requerido
           </div>
         </div>
@@ -41,7 +41,7 @@
           <label for="principalNomenclature">.</label>
           <input type="text" pInputText name="principalNomenclature" id="principalNomenclature" (change)="composeAddress()" [(ngModel)]="principalNomenclature"
                  #pncl="ngModel" required="true" />
-          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !pncl.valid">
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !pncl.valid">
             <i class="fa fa-close"></i> Campo requerido
           </div>
         </div>
@@ -49,7 +49,7 @@
           <label for="numberOne">#</label>
           <input type="text" pInputText name="numberOne" id="numberOne" (change)="composeAddress()" [(ngModel)]="numberOne" #nmbOne="ngModel"
                  required="true" />
-          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !nmbOne.valid">
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !nmbOne.valid">
             <i class="fa fa-close"></i> Campo requerido
           </div>
         </div>
@@ -57,7 +57,7 @@
           <label for="numberTwo">-</label>
           <input type="text" pInputText name="numberTwo" id="numberTwo" (change)="composeAddress()" [(ngModel)]="numberTwo" #nmbTwo="ngModel"
                  required="true" />
-          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !nmbTwo.valid">
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !nmbTwo.valid">
             <i class="fa fa-close"></i> Campo requerido
           </div>
         </div>
@@ -72,7 +72,7 @@
           </div>
           <div class="ui-grid-col-6">
             <label for="cpld{{i}}">-</label>
-            <input type="text" pInputText name="cpld{{i}}" id="cpld{{i}}" (change)="composeAddress()" [(ngModel)]="cpml.detalle" required/>
+            <input type="text" pInputText name="cpld{{i}}" id="cpld{{i}}" (change)="composeAddress()" [(ngModel)]="cpml.detalle" />
           </div>
           <div class="ui-grid-col-1">
             <label>-</label>
@@ -107,7 +107,7 @@
           </div>
         </div>
         <div class="ui-grid-col-6">
-          <div id="ubicacionColaborador" style="width: 420px; height: 330px; position: relative; overflow: hidden; margin: 20px;">
+          <div id="graphMap" style="width: 420px; height: 330px; position: relative; overflow: hidden; margin: 20px;">
           </div>
         </div>
       </div>
@@ -115,10 +115,10 @@
       <div class="ui-grid-row form-footer-buttons">
         <div class="ui-grid-col-4"></div>
         <div class="ui-grid-col-1">
-          <a (click)="goBack()" class="cancelar">Cancelar</a>
+          <a (click)="discard()" class="cancelar">Cancelar</a>
         </div>
         <div class="ui-grid-col-2">
-          <button pButton icon="fa-plus" label="Guardar" type="button" (click)="createLocation()"></button>
+          <button pButton icon="fa-plus" label="Asignar dirección" type="submit"></button>
         </div>
         <div class="ui-grid-col-5"></div>
       </div>

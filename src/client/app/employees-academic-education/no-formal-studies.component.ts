@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Noformalstudies } from './no-formal-studies';
-import { AcademicEducationService } from './academic-education.service';
+import { AcademicEducationService } from '../_services/academic-education.service';
 import { ConfirmationService } from 'primeng/primeng';
 
 @Component({

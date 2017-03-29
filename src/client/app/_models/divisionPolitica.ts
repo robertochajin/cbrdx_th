@@ -14,6 +14,5 @@ export class DivisionPolitica {
     indicadorHabilitado: boolean = true;
     auditoriaUsuario: number;
     auditoriaFecha: Date;
-    camino: string;
-
+  	camino: string;
 }

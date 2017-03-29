@@ -79,18 +79,18 @@
               </p-accordionTab>
 
               <p-accordionTab header="Ubicación" [selected]="acordion == 2">
-                <employees-locations *ngIf="employee.idTercero" [colaborador]="employee"></employees-locations>
+                <!--<employees-locations *ngIf="employee.idTercero" [colaborador]="employee"></employees-locations>-->
               </p-accordionTab>
 
-             <!--  <p-accordionTab header="Formación Academica" [selected]="acordion == 3">
-                <academic-education-formal></academic-education-formal>
-                <academic-education-no-formal></academic-education-no-formal>
+               <p-accordionTab header="Formación Academica" [selected]="acordion == 3">
+                <academic-education-formal *ngIf="employee.idTercero" [employee]="employee"></academic-education-formal>
+                <!--<academic-education-no-formal></academic-education-no-formal>-->
               </p-accordionTab>
 
               <p-accordionTab header="Experiencia Laboral" [selected]="acordion == 4">
-                <work-experience></work-experience>
+                <!--  <work-experience ></work-experience>-->
               </p-accordionTab>
-              -->
+
               <p-accordionTab header="Referencias" [selected]="acordion == 5 ">
                 <references *ngIf="employee.idTercero" [employee]="employee"></references>
               </p-accordionTab>

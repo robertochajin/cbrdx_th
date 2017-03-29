@@ -21,7 +21,7 @@
                 <div class="ui-grid-col-4">
                     <label for="tipodeReferencia">* Tipo de Referencia</label>
                     <p-dropdown  id="tipodeReferencia" name="tipodeReferencia" [options]="referencesTypes" [autoWidth]="false" required="true"
-                                 [(ngModel)]="reference.tipodeReferencia.value"  #tipodeReferencia="ngModel"  ></p-dropdown>
+                                 [(ngModel)]="reference.idTipoReferencia"  #tipodeReferencia="ngModel"  ></p-dropdown>
                     <div class="ui-message ui-messages-error ui-corner-all"
                          *ngIf="f.submitted && !tipodeReferencia.valid">
                       <i class="fa fa-close"></i>
@@ -74,42 +74,34 @@
                 </div>
             </div>
             <div class="ui-grid-row">
-                <div class="ui-grid-col-12">
-                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ciudad.valid">
-                      <i class="fa fa-close"></i>
-                      Ciudad es requerida
-                    </div>
+              <div class="ui-grid-col-6">
+                <label for="celular">* Celular</label>
+                <input pInputText type="text" id="celular" name="celular" #celular="ngModel"
+                       [(ngModel)]="reference.telefonoMovil" required/>
+                <div class="ui-message ui-messages-error ui-corner-all"
+                     *ngIf="f.submitted && !celular.valid">
+                  <i class="fa fa-close"></i>
+                  Celular es requerido
                 </div>
-            </div>
-            <div class="ui-grid-row">
+              </div>
                 <div class="ui-grid-col-6">
-                    <label for="telefono">* Teléfono</label>
+                    <label for="telefono">Teléfono</label>
                     <input pInputText type="text" id="telefono" name="telefono" #telefono="ngModel"
-                           [(ngModel)]="reference.telefono" required/>
+                           [(ngModel)]="reference.telefonoFijo" />
                     <div class="ui-message ui-messages-error ui-corner-all"
                          *ngIf="f.submitted && !telefono.valid">
                       <i class="fa fa-close"></i>
                       Teléfono es requerido
                     </div>
                 </div>
-                <div class="ui-grid-col-6">
-                    <label for="celular">* Celular</label>
-                    <input pInputText type="text" id="celular" name="celular" #celular="ngModel"
-                           [(ngModel)]="reference.celular" required/>
-                    <div class="ui-message ui-messages-error ui-corner-all"
-                         *ngIf="f.submitted && !celular.valid">
-                      <i class="fa fa-close"></i>
-                      Celular es requerido
-                    </div>
-                </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-10">
                     <label for="direccion">* Dirección</label>
-                    <textarea id="direccion" name="direccion" pInputTextarea  rows="5" #direccion="ngModel" disabled="true"
+                    <textarea id="direccion" name="direccion" pInputTextarea  rows="5" #direccion="ngModel" disabled="true" required
                               [(ngModel)]="reference.direccion" ></textarea>
                     <div class="ui-message ui-messages-error ui-corner-all"
-                         *ngIf="f.submitted && !direccion.valid">
+                         *ngIf="f.submitted && reference.direccion===''">
                       <i class="fa fa-close"></i>
                       Dirección es requerido
                     </div>
@@ -151,7 +143,7 @@
     </div>
   </div>
   <div *ngIf="!addinglocation">
-    <locations [parentTitle]="'Referencias'" (create)="bindLocation($event)"></locations>
+    <locations [parentTitle]="'Referencias'" (dismiss)="toggleform()" (create)="bindLocation($event)" [localizacion]="localizacion"></locations>
   </div>
 
 

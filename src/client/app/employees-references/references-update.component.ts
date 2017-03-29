@@ -1,40 +1,44 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute,Params } from '@angular/router';
-import { Location }                 from '@angular/common';
-import {References} from './references';
-import {ReferencesService} from './references.service';
-import {SelectItem, Message, ConfirmDialog, ConfirmationService } from 'primeng/primeng';
+import { Location } from '@angular/common';
+import { References } from './references';
+import { ReferencesService } from './references.service';
+import { SelectItem, Message, ConfirmDialog, ConfirmationService } from 'primeng/primeng';
 
 import { ReferencesTypesService } from '../_services/references-type.service';
 import { CitiesServices } from '../_services/cities.service';
-import {NavService}                 from '../_services/_nav.service';
+import { LocateService } from '../_services/locate.service';
+import { NavService } from '../_services/_nav.service';
+import { Localizaciones } from "../_models/localizaciones";
+import {PoliticalDivisionService} from "../_services/political-division.service";
 
 @Component({
   moduleId: module.id,
-  selector: 'references',
+  selector: 'update-references',
   templateUrl: 'references-form.component.html',
   providers:  [ConfirmationService]
 })
 
 export class ReferencesUpdateComponent implements OnInit  {
   @Input()
-
   reference: References = new References();
+  localizacion: Localizaciones = new Localizaciones();
   header: string = 'Editanto Referencia';
   referencesTypes: SelectItem[] = [];
-  cityList: any;
   submitted: boolean;
-  copyAutocomplete: string;
   msgs: Message[] = [];
   uploadedFiles: any[] = [];
+  addinglocation: boolean = true;
+  idTercero: number;
 
   constructor (
     private referencesService: ReferencesService,
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
-    private citiesServices: CitiesServices,
+    private locateService: LocateService,
+    private politicalDivisionService: PoliticalDivisionService,
     private referencesTypesServices: ReferencesTypesService,
     private confirmationService: ConfirmationService,
     private _nav:NavService
@@ -42,40 +46,58 @@ export class ReferencesUpdateComponent implements OnInit  {
   ) {}
 
   ngOnInit () {
-    this.referencesTypesServices.getAll().subscribe(referencesTypes => this.referencesTypes = referencesTypes);
-    this.route.params
-      .switchMap((params: Params) => this.referencesService.get(+params['id']))
-      .subscribe(reference => {
-        this.reference = reference;
+    this.referencesTypesServices.getAll().subscribe(referencesTypes => {
+      this.referencesTypes.unshift({label:'seleccione', value:null});
+      referencesTypes.forEach((x:any) => {
+        this.referencesTypes.push({label:x.nombreListaTipoReferencia, value: x.idListaTipoReferencia});
       });
+    });
+    this.route.params.subscribe((params: Params) => {
+      this.idTercero = params['tercero'];
+      this.referencesService.get(+params['id']).subscribe(reference => {
+        this.reference = reference;
+        this.locateService.getById(this.reference.idLocalizacion).subscribe(localizacion => {
+          this.localizacion = localizacion;
+          this.reference.direccion = localizacion.direccion;
+          this.localizacion.locacion = {camino:'', idDivisionPolitica: null};
+          this.politicalDivisionService.getLocation(localizacion.idDivisionPolitica).subscribe(ciudad => {
+            this.localizacion.locacion.camino = ciudad.camino;
+            this.localizacion.locacion.idDivisionPolitica = ciudad.idDivisionPolitica;
+          });
+        });
+      });
+    });
     this.focusUP();
   }
   onSubmit() {
-    this.submitted = true;
     this.msgs = [];
-    this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
-    this.reference.primerNombre = this.capitalizeSave(this.reference.primerNombre);
-    this.reference.segundoNombre = this.capitalizeSave(this.reference.segundoNombre);
-    this.reference.primerApellido = this.capitalizeSave(this.reference.primerApellido);
-    this.reference.segundoApellido = this.capitalizeSave(this.reference.segundoApellido);
+    if(this.reference.direccion !== ''){
+      this.submitted = true;
 
-    this.referencesService.update(this.reference)
-      .subscribe(
+      this.localizacion.indicadorHabilitado = true;
+      this.locateService.update(this.localizacion).subscribe(
         data => {
-          this._nav.setTab(5);
-          this.location.back();
-        });
-  }
+            this.reference.primerNombre = this.capitalizeSave(this.reference.primerNombre);
+            this.reference.segundoNombre = this.capitalizeSave(this.reference.segundoNombre);
+            this.reference.primerApellido = this.capitalizeSave(this.reference.primerApellido);
+            this.reference.segundoApellido = this.capitalizeSave(this.reference.segundoApellido);
+            this.reference.idTercero = this.idTercero;
+            this.reference.indicadorHabilitado = true;
+            this.referencesService.update(this.reference)
+              .subscribe(
+                data => {
 
+                  this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
+                  this._nav.setTab(5);
+                  this.location.back();
+                });
+        }
+      );
 
-  citySearch(event:any) {
-    this.citiesServices.getAllCities(event.query).subscribe(
-      cities => this.cityList = cities
-    );
-  }
-
-  captureCityId(event:any) {
-    this.copyAutocomplete = event.label
+    } else {
+      this.focusUP();
+      this.msgs.push({severity: 'error', summary: 'Dirección invalida', detail: 'Es necesario agregar una dirección válida'});
+    }
   }
 
   goBack(): void {
@@ -112,6 +134,16 @@ export class ReferencesUpdateComponent implements OnInit  {
 
     this.msgs = [];
     this.msgs.push({severity: 'info', summary: 'File Uploaded', detail: ''});
+  }
+
+  bindLocation(event: any){
+    this.localizacion = event;
+    this.reference.direccion = event.direccion;
+    this.toggleform();
+  }
+
+  toggleform(){
+    this.addinglocation = !this.addinglocation;
   }
 }
 

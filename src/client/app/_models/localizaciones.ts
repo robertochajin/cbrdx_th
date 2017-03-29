@@ -1,15 +1,21 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class Localizaciones {
-  public idUbicacion: number;
-  public idTipoDireccion: number;
-  public direccion: string;
-  public latitud: string;
-  public longitud: string;
-  public comoLlegar: string;
-  public indicadorHabilitado: boolean;
-  public idDivisionPolitica: number;
-  public auditoriaUsuario: number;
-  public auditoriaFecha: string;
+
+  idLocalizacion: number;
+  idTipoDireccion: number;
+  direccion: string;
+  latitud: string;
+  longitud: string;
+  comoLlegar: string;
+  indicadorHabilitado: boolean;
+  idDivisionPolitica: number;
+  auditoriaUsuario: number;
+  auditoriaFecha: string;
+  nomenclaturaPrincipal: number;
+  locacion: {camino: string, idDivisionPolitica: number};
+
+  constructor(){
+  }
 }

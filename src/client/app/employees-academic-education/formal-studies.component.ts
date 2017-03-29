@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { Router } from '@angular/router';
 import { FormalStudies } from './formal-studies';
-import { AcademicEducationService } from './academic-education.service';
-import { Observable } from 'rxjs/Observable';
+import { AcademicEducationService } from '../_services/academic-education.service';
 import { ConfirmationService } from 'primeng/primeng';
+import {Employee} from "../employees/employees";
 
 
 @Component({
@@ -13,6 +13,8 @@ import { ConfirmationService } from 'primeng/primeng';
     providers:  [ConfirmationService]
 })
 export class FormalStudiesComponent {
+
+    @Input() employee:Employee;
 
     fstudy: FormalStudies = new FormalStudies();
     dialogObjet: FormalStudies = new FormalStudies();
@@ -25,7 +27,7 @@ export class FormalStudiesComponent {
     ) {}
 
     ngOnInit() {
-        this.academicEducationService.getAllFormal().subscribe(
+        this.academicEducationService.getAllFormalByEmployee(this.employee.idTercero).subscribe(
             fstudies => this.fstudies = fstudies
         );
     }
@@ -37,7 +39,7 @@ export class FormalStudiesComponent {
             header: 'Corfirmación',
             icon: 'fa fa-question-circle',
             accept: () => {
-                this.academicEducationService.deleteFormal( this.dialogObjet);
+                // this.academicEducationService.deleteFormal( this.dialogObjet);
                 this.fstudies.splice(this.fstudies.indexOf( this.dialogObjet), 1);
                 this.dialogObjet = null;
             },
@@ -48,14 +50,14 @@ export class FormalStudiesComponent {
     }
 
     detail(f: FormalStudies) {
-        this.router.navigate(['employees-formal-studies/detail/'+f.idEstudio]);
+        this.router.navigate(['employees-formal-studies/detail/'+f.idTerceroEstudioFormal]);
     }
 
     add() {
-        this.router.navigate(['employees-formal-studies/add']);
+        this.router.navigate(['employees-formal-studies/add/'+this.employee.idTercero]);
     }
 
     update(f: FormalStudies) {
-        this.router.navigate(['employees-formal-studies/update/'+f.idEstudio]);
+        this.router.navigate(['employees-formal-studies/update/'+f.idTerceroEstudioFormal+'/'+this.employee.idTercero]);
     }
 }

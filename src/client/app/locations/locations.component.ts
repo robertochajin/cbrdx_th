@@ -27,21 +27,16 @@ export class LocationsComponent implements OnInit {
   @Output()
   create: EventEmitter<Localizaciones> = new EventEmitter<Localizaciones>();
 
-  tipoDireccion: {value: null, label: string};
-  barrio: any;
-  header = 'Agregando Ubicación';
+  @Output()
+    dismiss: EventEmitter<number> = new EventEmitter<number>();
 
+  tipoDireccion: {value: null, label: string};
   principalNomenclatureList: any;
   complementaryNomenclatureList: any;
   addressTypeList: any;
-  lista: SelectItem[];
-  listaTipoDireccion: SelectItem[];
-  listaComplementary: SelectItem[];
-  selectedPrincipalNomenclature: any;
-  selectedAddressType: SelectItem[] = [];
+  selectedPrincipalNomenclature: number;
+  selectedAddressType: number;
   labelPrincipalNomenclature: string;
-  copyAutocomplete: string;
-
   principalNomenclature: string;
   numberOne: string;
   numberTwo: string;
@@ -74,6 +69,9 @@ export class LocationsComponent implements OnInit {
     this.locationService.getComplementaryNomenclatureList().subscribe(
       complementaryNomenclatureList => {
         this.complementaryNomenclatureList = complementaryNomenclatureList;
+        this.complementaryNomenclatureList.map((cn:any) => {
+          cn.value = cn.label;
+        });
         this.complementaryNomenclatureList.unshift({label:  'Seleccione', value:null});
       });
     this.locationService.getAddressTypeList().subscribe(
@@ -81,19 +79,17 @@ export class LocationsComponent implements OnInit {
         this.addressTypeList = addressTypeList;
         this.addressTypeList.unshift({label:  'Seleccione', value:null});
       });
-    this.barrio = {value: null, label: ''};
-  }
 
-  onSubmit() {
-    this.create.emit(this.localizacion);
-    // this.submitted = true;
-    // this.msgs = [];
-    // this.msgs.push({ severity: 'info', summary: 'Success', detail: 'Guardando' });
-    // this.localizacion.direccion = this.finalAddress;
+    this.finalAddress = this.localizacion.direccion;
+    this.selectedAddressType = this.localizacion.idTipoDireccion;
+    this.selectedPrincipalNomenclature = this.localizacion.nomenclaturaPrincipal;
   }
 
   createLocation(){
     this.localizacion.direccion = this.finalAddress;
+    this.localizacion.idTipoDireccion = this.selectedAddressType;
+    this.localizacion.nomenclaturaPrincipal = this.selectedPrincipalNomenclature;
+    this.localizacion.idDivisionPolitica = this.localizacion.locacion.idDivisionPolitica;
     this.create.emit(this.localizacion);
   }
 
@@ -104,8 +100,9 @@ export class LocationsComponent implements OnInit {
   }
 
   captureHoodId(event: any) {
-    this.barrio.value = event.idDivisionPolitica;
-    this.barrio.label = event.descripcionDivisionPolitica;
+    this.localizacion.locacion.idDivisionPolitica = event.idDivisionPolitica;
+    this.localizacion.locacion.camino = event.camino;
+    this.composeAddress();
   }
 
   capturePrincipalNomenclature(label: any) {
@@ -125,15 +122,24 @@ export class LocationsComponent implements OnInit {
     this.finalAddress += this.numberOne === undefined ? '' : this.numberOne + ' - ';
     this.finalAddress += this.numberTwo === undefined ? '' : this.numberTwo + ' ';
 
-    if (this.finalAddress !== '' && this.barrio.label !== '' && this.barrio.label !== undefined) {
-      //console.log(this.finalAddress + ' ' + this.barrio.label);
+    if (this.finalAddress !== '' && this.localizacion.locacion != undefined && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined) {
       let geocoder = new google.maps.Geocoder();
 
       const assingLocation = (l: any, t: any) => {
         this.localizacion.latitud = l;
         this.localizacion.longitud = t;
       };
-      geocoder.geocode({ 'address': this.finalAddress + ' ' + this.barrio.label },
+
+      //Asumiendo que el camino obtenido de la busqueda tiene un máximo de 4 níveles
+      //Se hace el conteo de 3 comas par identificar si la selección fue de una división politica de nivel 4 (barrio/vereda)
+      //para hacerle el tratamiento al string con el cual se hace la busqueda en el API de maps.google
+      let strToSearch = '';
+      if(((this.localizacion.locacion.camino.match(/,/g) || []).length) === 3){
+        strToSearch = this.localizacion.locacion.camino.substr(this.localizacion.locacion.camino.indexOf(','));
+      } else {
+        strToSearch = this.localizacion.locacion.camino;
+      }
+      geocoder.geocode({ 'address': this.finalAddress + ' ' + strToSearch },
         function (results: any, status: any) {
           if (status === google.maps.GeocoderStatus.OK) {
             let latitude = results[0].geometry.location.lat();
@@ -145,55 +151,37 @@ export class LocationsComponent implements OnInit {
               zoom: 16,
               mapTypeId: google.maps.MapTypeId.ROADMAP
             };
-            let map = new google.maps.Map(document.getElementById('ubicacionColaborador'), mapOptions);
+            let map = new google.maps.Map(document.getElementById('graphMap'), mapOptions);
             let marker = new google.maps.Marker({ position: latLng, map: map });
 
             assingLocation(latitude, longitude);
           } else {
-            console.log('Error : ' + status);
+            document.getElementById('graphMap').innerHTML = "La busqueda no arroja ningun resultado";
+            assingLocation('', '');
           }
         });
-
     }
-
 
     for (let c of this.complementaries) {
-      if (c.tipo !== null) {
-        switch (c.tipo) {
-          case 1:
-            this.finalAddress += ' Casa' + ' ' + c.detalle + ' ';
-            break;
-          case 2:
-            this.finalAddress += ' Bloque' + ' ' + c.detalle + ' ';
-            break;
-          case 3:
-            this.finalAddress += ' Apartamento' + ' ' + c.detalle + ' ';
-            break;
-        }
-      }
+      this.finalAddress += c.tipo + ' ' + c.detalle + ' ';
     }
 
+    if (this.localizacion.locacion !== undefined && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined) {
+      this.finalAddress += this.localizacion.locacion.camino;
+    }
   }
+
   addComplementary(): void {
     let complementary = { 'tipo': 0, 'detalle': '' };
     this.complementaries.push(complementary);
   }
 
   removeComplementary(id: any): void {
-    //console.log(id);
     this.complementaries.splice(id, 1);
   }
 
-  goBack(): void {
-    this.confirmationService.confirm({
-      message: ` ¿Esta seguro que desea Cancelar?`,
-      header: 'Corfirmación',
-      icon: 'fa fa-question-circle',
-      accept: () => {
-      },
-      reject: () => {
-      }
-    });
+  discard(): void {
+    this.dismiss.emit(1);
   }
 
   focusUP() {

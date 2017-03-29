@@ -8,8 +8,8 @@ export class ReferencesTypesService {
 
   public headers = new Headers({'Content-Type': 'application/json'});
 
-  private masterService = '<%= SVC_TH_URL %>/referenceTypes/';
-  private detailService  = '<%= SVC_TH_URL %>/referenceTypes/';
+  private masterService = '<%= SVC_TH_URL %>/api/listasTiposReferencias/';
+  private detailService  = '<%= SVC_TH_URL %>/api/listasTiposReferencias/';
 
   constructor(private http: Http,
               private authenticationService: AuthenticationService
@@ -19,6 +19,10 @@ export class ReferencesTypesService {
 
   getAll()  {
     return this.http.get(this.masterService,{headers: this.headers}).map((res:Response) => res.json());
+  }
+
+  getById(id: number)  {
+    return this.http.get(this.masterService+'buscarId/'+id,{headers: this.headers}).map((res:Response) => res.json());
   }
 
 }
