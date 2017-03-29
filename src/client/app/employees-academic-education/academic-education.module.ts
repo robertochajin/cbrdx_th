@@ -25,12 +25,13 @@ import { StudyIntensityServices } from '../_services/study-intensity.service';
 
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule,
         ConfirmDialogModule,AutoCompleteModule,CheckboxModule,MessagesModule } from 'primeng/primeng';
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
     imports:      [ CommonModule,InputTextModule,FormsModule,ReactiveFormsModule,DataTableModule,
                     ButtonModule,DialogModule,InputTextareaModule,CalendarModule,
-                    DropdownModule,ConfirmDialogModule,AutoCompleteModule,CheckboxModule, MessagesModule
+                    DropdownModule,ConfirmDialogModule,AutoCompleteModule,CheckboxModule, MessagesModule,SharedModule
                     ],
     declarations: [
                     FormalStudiesComponent,
