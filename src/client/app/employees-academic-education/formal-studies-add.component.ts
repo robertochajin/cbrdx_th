@@ -44,10 +44,8 @@ export class FormalStudiesAddComponent implements OnInit {
   maxDateFinal: Date = null;
   es: any;
   range: string;
-  yeison: any;
-  id_estado_estudio_finalizado = 2;
+  id_estado_estudio_finalizado = 2;//hace falta definir acceso a constantes en servicio
   idTercero: number;
-  //hace falta definir acceso a constantes en servicio
 
   constructor(private academicEducationService: AcademicEducationService,
               private politicalDivisionService: PoliticalDivisionService,
@@ -64,7 +62,6 @@ export class FormalStudiesAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.yeison = JSON;
     this.es = {
       firstDayOfWeek: 1,
       dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
@@ -121,12 +118,11 @@ export class FormalStudiesAddComponent implements OnInit {
     this.fstudy.fechaIngresa = fi.format('YYYY-MM-DD');
     let ff: moment.Moment = moment(this.fstudy.fechaTermina, 'MM/DD/YYYY');
     this.fstudy.fechaTermina = ff.format('YYYY-MM-DD');
-    console.info('fs', this.fstudy);
     this.academicEducationService.addFormal(this.fstudy)
       .subscribe(
         data => {
           this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
-          this._nav.setTab(4);
+          this._nav.setTab(3);
           this.location.back();
         });
   }
@@ -138,7 +134,7 @@ export class FormalStudiesAddComponent implements OnInit {
   }
 
   captureCityId(event: any) {
-    this.fstudy.idCiudad = event;
+    this.fstudy.idCiudad = this.selectedCity.idDivisionPolitica;
   }
 
   instituteSearch(event: any) {
@@ -148,7 +144,7 @@ export class FormalStudiesAddComponent implements OnInit {
   }
 
   captureInstituteId(event: any) {
-    this.fstudy.idInstitucion = event;
+    this.fstudy.idInstitucion = this.selectedInstitute.idListaInstitucion;
   }
 
   onSelectBegin(event: any) {
@@ -175,7 +171,7 @@ export class FormalStudiesAddComponent implements OnInit {
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
-        this._nav.setTab(4);
+        this._nav.setTab(3);
         this.location.back();
       }
     });

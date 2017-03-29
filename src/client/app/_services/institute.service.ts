@@ -14,7 +14,11 @@ export class InstituteServices {
     this.headers = new Headers({'Content-Type': 'application/json', 'Authorization': this.authenticationService.token});
   }
   getByWildCard(qr: any)  {
-    return this.http.get(this.masterService+'enabled/').map((res:Response) => res.json() as Institutes[]);
+    return this.http.get(this.masterService+'buscarInstitucion/'+qr+'/').map((res:Response) => res.json() as Institutes[]);
+  }
+
+  getById(id: number) {
+    return this.http.get(this.masterService+'buscarId/'+id).map((res:Response) => res.json() as Institutes);
   }
 
 }

@@ -50,7 +50,7 @@ export class FormalStudiesComponent {
     }
 
     detail(f: FormalStudies) {
-        this.router.navigate(['employees-formal-studies/detail/'+f.idEstudio]);
+        this.router.navigate(['employees-formal-studies/detail/'+f.idTerceroEstudioFormal]);
     }
 
     add() {
@@ -58,6 +58,6 @@ export class FormalStudiesComponent {
     }
 
     update(f: FormalStudies) {
-        this.router.navigate(['employees-formal-studies/update/'+f.idEstudio+'/'+this.employee.idTercero]);
+        this.router.navigate(['employees-formal-studies/update/'+f.idTerceroEstudioFormal+'/'+this.employee.idTercero]);
     }
 }
