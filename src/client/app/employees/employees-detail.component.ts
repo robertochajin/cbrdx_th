@@ -32,13 +32,11 @@ export class EmployeesDetailComponent implements OnInit   {
             this.employee.segundoApellido;
 
             this.employee.nacionalidad = 'cargando...';
-            this.employee.cargoActual = 'cargando...';
 
             if( this.employee.ciudadExpDocumento === null ) this.employee.ciudadExpDocumento='';
             if( this.employee.ciudadNacimiento === null ) this.employee.ciudadNacimiento='';
             if( this.employee.genero === null ) this.employee.genero='';
             if( this.employee.estadoCivil === null ) this.employee.estadoCivil='';
-            if( this.employee.factorrh === null ) this.employee.factorrh='';
             if( this.employee.lateralidad === null ) this.employee.lateralidad='';
             if( this.employee.nivelEducacion === null ) this.employee.nivelEducacion='';
             if( this.employee.profesion === null ) this.employee.profesion='';
