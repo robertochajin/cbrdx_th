@@ -18,6 +18,7 @@ import {StudyStates} from "../_models/studyStates";
 import {Institutes} from "../_models/institutes";
 import {DivisionPolitica} from "../_models/divisionPolitica";
 import {NavService} from "../_services/_nav.service";
+import {TranslateService} from 'ng2-translate';
 
 @Component({
   moduleId: module.id,
@@ -57,6 +58,7 @@ export class FormalStudiesAddComponent implements OnInit {
               private router: Router,
               private location: Location,
               private fb: FormBuilder,
+              private translate: TranslateService,
               private confirmationService: ConfirmationService,
               private _nav: NavService) {
   }
