@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Http, Response, Headers} from '@angular/http';
 import {AuthenticationService} from "./authentication.service";
-
+import {DivisionPolitica} from "../_models/divisionPolitica";
 
 @Injectable()
 export class PoliticalDivisionService {
@@ -26,7 +26,7 @@ export class PoliticalDivisionService {
 
   getById(id: number) {
     return this.http.get(this.masterService + 'buscarId/' + id,{headers: this.headers})
-      .map((res: Response) => res.json());
+      .map((res: Response) => res.json() as DivisionPolitica);
   }
 
   getLocation(id: number) {

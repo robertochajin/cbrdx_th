@@ -118,13 +118,13 @@ const routes = [
 
   //Información de formacion academica
   {path: 'employees-formal-studies', component: FormalStudiesComponent, canActivate: [AuthGuard]},
-  {path: 'employees-formal-studies/add', component: FormalStudiesAddComponent, canActivate: [AuthGuard]},
+  {path: 'employees-formal-studies/add/:tercero', component: FormalStudiesAddComponent, canActivate: [AuthGuard]},
   {path: 'employees-formal-studies/detail/:id', component: FormalStudiesDetailComponent, canActivate: [AuthGuard]},
-  {path: 'employees-formal-studies/update/:id', component: FormalStudiesUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'employees-formal-studies/update/:id/:tercero', component: FormalStudiesUpdateComponent, canActivate: [AuthGuard]},
   {path: 'employees-no-formal-studies', component: NoFormalStudiesComponent, canActivate: [AuthGuard]},
-  {path: 'employees-no-formal-studies/add', component: NoFormalStudiesAddComponent, canActivate: [AuthGuard]},
+  {path: 'employees-no-formal-studies/add/:tercero', component: NoFormalStudiesAddComponent, canActivate: [AuthGuard]},
   {path: 'employees-no-formal-studies/detail/:id', component: NoFormalStudiesDetailComponent, canActivate: [AuthGuard]},
-  {path: 'employees-no-formal-studies/update/:id', component: NoFormalStudiesUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'employees-no-formal-studies/update/:id/:tercero', component: NoFormalStudiesUpdateComponent, canActivate: [AuthGuard]},
 
   //employees-location
   { path: 'employees-location', component: LocationComponent, canActivate: [AuthGuard]},
@@ -141,7 +141,7 @@ const routes = [
   //Login
   {path: 'login', component: LoginComponent},
   {path: 'cambioContrasena', component: CambioContrasenaComponent},
-  {path: 'dashboard', component: DashboardComponent},
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
 
   // Constantes
   {path: 'constantes', component: ConstanteComponent, canActivate: [AuthGuard]},

@@ -10,8 +10,9 @@ import {Search} from "../_models/search";
 export class OcupacionesService {
 
     headers = new Headers({'Content-Type': 'application/json'});
-    private serviceURL = '<%= SVC_SP_URL %>/ocupaciones/';
+    private serviceURL_SP = '<%= SVC_SP_URL %>/ocupaciones/';
     private serviceTiposURL = '<%= SVC_SP_URL %>/ocupacionesTipos/';
+    private serviceURL = '<%= SVC_TH_URL %>/api/';
 
     constructor(private http: Http,
                 private authenticationService: AuthenticationService
@@ -20,19 +21,19 @@ export class OcupacionesService {
     }
 
     listOcupaciones() {
-        return this.http.get(this.serviceURL,{headers: this.headers}).map((res: Response) => res.json() as Ocupaciones[]);
+        return this.http.get(this.serviceURL_SP,{headers: this.headers}).map((res: Response) => res.json() as Ocupaciones[]);
     }
 
     addOcupaciones(c: Ocupaciones): Promise<Ocupaciones> {
-        return this.http.post(this.serviceURL, JSON.stringify(c), {headers: this.headers}).toPromise().then(res => res.json() as Ocupaciones).catch(this.handleError);
+        return this.http.post(this.serviceURL_SP, JSON.stringify(c), {headers: this.headers}).toPromise().then(res => res.json() as Ocupaciones).catch(this.handleError);
     };
 
     updateOcupaciones(c: Ocupaciones): Promise<Ocupaciones> {
-        return this.http.put(this.serviceURL, JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
+        return this.http.put(this.serviceURL_SP, JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
     }
 
     viewOcupaciones(id: number) {
-        return this.http.get(this.serviceURL + id,{headers: this.headers}).map(res => res.json() as Ocupaciones);
+        return this.http.get(this.serviceURL_SP + id,{headers: this.headers}).map(res => res.json() as Ocupaciones);
     }
 
     handleError(error: any): Promise<any> {
@@ -44,6 +45,11 @@ export class OcupacionesService {
         return this.http.get(this.serviceTiposURL,{headers: this.headers}).map((res: Response) => res.json() as OcupacionesTipos[]);
     }
     getSearch(val: string) {
-        return this.http.get(this.serviceURL +'search/'+ val+'/',{headers: this.headers}).map(res => res.json() as Search[]);
+        return this.http.get(this.serviceURL_SP +'search/'+ val+'/',{headers: this.headers}).map(res => res.json() as Search[]);
+    }
+  
+    /* Refactor */
+    listByNivel(val: number) {
+      return this.http.get(this.serviceURL+'ocupaciones/tipo/'+ val+'/',{headers: this.headers}).map((res: Response) => res.json() as Ocupaciones[]);
     }
 }

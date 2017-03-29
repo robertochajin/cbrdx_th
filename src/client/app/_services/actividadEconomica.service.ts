@@ -10,8 +10,9 @@ import {Search} from "../_models/search";
 export class ActividadEconomicaService {
 
     headers = new Headers({'Content-Type': 'application/json'});
-    private serviceURL = '<%= SVC_SP_URL %>/actividadesEconomicas/';
+    private serviceURL_SP = '<%= SVC_SP_URL %>/actividadesEconomicas/';
     private serviceTypesURL = '<%= SVC_SP_URL %>/actividadesEconomicasTipos/';
+    private serviceURL = '<%= SVC_TH_URL %>/api/';
 
     constructor(private http: Http,
                 private authenticationService: AuthenticationService
@@ -20,19 +21,19 @@ export class ActividadEconomicaService {
     }
 
     listActividadEconomica() {
-        return this.http.get(this.serviceURL,{headers: this.headers}).map((res: Response) => res.json() as ActividadEconomica[]);
+        return this.http.get(this.serviceURL_SP,{headers: this.headers}).map((res: Response) => res.json() as ActividadEconomica[]);
     }
 
     addActividadEconomica(c: ActividadEconomica): Promise<ActividadEconomica> {
-        return this.http.post(this.serviceURL, JSON.stringify(c), {headers: this.headers}).toPromise().then(res => res.json() as ActividadEconomica).catch(this.handleError);
+        return this.http.post(this.serviceURL_SP, JSON.stringify(c), {headers: this.headers}).toPromise().then(res => res.json() as ActividadEconomica).catch(this.handleError);
     };
 
     updateActividadEconomica(c: ActividadEconomica): Promise<ActividadEconomica> {
-        return this.http.put(this.serviceURL, JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
+        return this.http.put(this.serviceURL_SP, JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
     }
 
     viewActividadEconomica(id: number) {
-        return this.http.get(this.serviceURL + id,{headers: this.headers}).map(res => res.json() as ActividadEconomica);
+        return this.http.get(this.serviceURL_SP + id,{headers: this.headers}).map(res => res.json() as ActividadEconomica);
     }
 
     handleError(error: any): Promise<any> {
@@ -44,6 +45,14 @@ export class ActividadEconomicaService {
         return this.http.get(this.serviceTypesURL,{headers: this.headers}).map((res: Response) => res.json() as ActividadEconomicaTipos[]);
     }
     getSearch(val: string) {
-        return this.http.get(this.serviceURL +'search/'+ val+'/',{headers: this.headers}).map(res => res.json() as Search[]);
+        return this.http.get(this.serviceURL_SP +'search/'+ val+'/',{headers: this.headers}).map(res => res.json() as Search[]);
+    }
+  
+    /* Refactor */
+    listByPadre(id: number) {
+      return this.http.get(this.serviceURL+'actividadesEconomicas/padre/'+ id+'/',{headers: this.headers}).map((res: Response) => res.json() as ActividadEconomica[]);
+    }
+    listLastChild(id: number) {
+      return this.http.get(this.serviceURL+'actividadesEconomicas/lastChild/'+ id+'/',{headers: this.headers}).map((res: Response) => res.json() as ActividadEconomica[]);
     }
 }
