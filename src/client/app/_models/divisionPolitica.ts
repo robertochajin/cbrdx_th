@@ -1,6 +1,3 @@
-/**
- * Created by Felipe Aguirre - Jenniferth Escobar on 6/03/2017.
- */
 export class DivisionPolitica {
     idDivisionPolitica: number;
     idDivisionPoliticaPadre: number = 0;
@@ -17,5 +14,6 @@ export class DivisionPolitica {
     indicadorHabilitado: boolean = true;
     auditoriaUsuario: number;
     auditoriaFecha: Date;
+    camino: string;
 
 }

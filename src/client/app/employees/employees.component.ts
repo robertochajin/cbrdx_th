@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {Employee} from '../_models/employees';
 import {EmployeesService} from '../_services/employees.service';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
 import {ConfirmationService} from 'primeng/primeng';
 
 @Component({
