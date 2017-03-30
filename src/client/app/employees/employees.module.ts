@@ -8,7 +8,7 @@ import {EmployeesService} from '../_services/employees.service';
 import { ListEmployeesService }   from '../_services/lists-employees.service';
 import { PoliticalDivisionService } from "../_services/political-division.service";
 
-//import {NavService}                 from '../_services/_nav.service';
+import {NavService}                 from '../_services/_nav.service';
 
 import {FormSharedModule } from '../shared/form-shared.module';
 
@@ -31,7 +31,7 @@ import {LocationModule} from '../employees-location/employee-location.module';
   ],
   declarations: [EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent],
   bootstrap: [EmployeesComponent],
-  providers: [EmployeesService,ListEmployeesService, PoliticalDivisionService],
+  providers: [EmployeesService,ListEmployeesService, PoliticalDivisionService, NavService],
   exports: [EmployeesComponent]
 })
 export class EmployeesModule {
