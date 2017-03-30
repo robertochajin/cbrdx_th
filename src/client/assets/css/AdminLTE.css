@@ -4,7 +4,7 @@
  *   Author: Almsaeed Studio
  *	 Website: Almsaeed Studio <http://almsaeedstudio.com>
  *   License: Open source - MIT
- *           Please visit http://opensource.org/licenses/MIT for more information
+ *   Please visit http://opensource.org/licenses/MIT for more information
 !*/
 /*
  * Core: General Layout Style
@@ -12,11 +12,11 @@
  */
 html,
 body {
-  height: 100%;
+  height: 100%!important;
 }
 .layout-boxed html,
 .layout-boxed body {
-  height: 100%;
+  height: 100%!important;
 }
 body {
   font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;

@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+/** Componentes de la Template principal **/
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { TranslateService, TranslateModule } from 'ng2-translate';
 
 /**
@@ -13,8 +15,8 @@ import { TranslateService, TranslateModule } from 'ng2-translate';
 
 @NgModule({
   imports: [CommonModule, RouterModule],
-  declarations: [ToolbarComponent, NavbarComponent],
-  exports: [ToolbarComponent, NavbarComponent,
+  declarations: [ToolbarComponent, NavbarComponent,BreadcrumbComponent],
+  exports: [ToolbarComponent, NavbarComponent,BreadcrumbComponent,
     CommonModule, FormsModule, RouterModule,TranslateModule]
 })
 export class SharedModule {

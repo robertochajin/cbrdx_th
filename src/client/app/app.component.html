@@ -1,17 +1,13 @@
 <div class="wrapper">
+
   <sd-toolbar *ngIf="sessionStart"></sd-toolbar>
 
   <sd-navbar *ngIf="sessionStart"></sd-navbar>
 
-  <div class="content-wrapper">
+  <div [ngClass]="sessionStart ? 'content-wrapper' : 'wrapper-login'">
     <!-- Content Header (Page header) -->
     <section class="content-header" *ngIf="sessionStart">
-      <div class="btn-group btn-breadcrumb">
-        <a href="#" class="btn btn-default"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="#" class="btn btn-default">Snippets</a>
-        <a href="#" class="btn btn-default">Breadcrumbs</a>
-        <a href="#" class="btn btn-default">Default</a>
-      </div>
+      <sd-breadcrumb></sd-breadcrumb>
     </section>
 
     <!-- Main content -->
