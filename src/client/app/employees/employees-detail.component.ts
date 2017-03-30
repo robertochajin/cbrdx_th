@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
+import { ActivatedRoute, Params, Router }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import { EmployeesService }         from '../_services/employees.service';
 import { Employee }                 from '../_models/employees';
@@ -19,7 +19,8 @@ export class EmployeesDetailComponent implements OnInit   {
         private employeeService: EmployeesService,
         private route: ActivatedRoute,
         private location: Location,
-        private _nav:NavService
+        private _nav:NavService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
@@ -62,6 +63,10 @@ export class EmployeesDetailComponent implements OnInit   {
     onTabShow(e:any) {
       this._nav.setTab(e.index);
       this.acordion = this._nav.getTab();
+    }
+  
+    update(id: number) {
+      this.router.navigate(['employees/update/'+id]);
     }
 
 }
