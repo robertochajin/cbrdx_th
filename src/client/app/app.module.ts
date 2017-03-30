@@ -4,8 +4,7 @@ import {APP_BASE_HREF} from "@angular/common";
 import {HttpModule,Http} from "@angular/http";
 import {AppComponent} from "./app.component";
 import {AppRoutingModule} from "./app-routing.module";
-import {AboutModule} from "./about/about.module";
-import {HomeModule} from "./home/home.module";
+
 import {EmployeesModule} from "./employees/employees.module";
 import {SharedModule} from "./shared/shared.module";
 import {FamilyInformationModule} from "./employees-family-information/family-information.module";
@@ -38,7 +37,7 @@ import {ActividadEconomicaModule} from "./actividadEconomica/actividadEconomica.
 
 //CarsModule,
 @NgModule( {
-  imports: [BrowserModule, HttpModule, AppRoutingModule, AboutModule, HomeModule,
+  imports: [BrowserModule, HttpModule, AppRoutingModule,
     EmployeesModule,
     FamilyInformationModule,
     LocationModule,
