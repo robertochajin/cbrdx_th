@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class StudyStates {
+export class StudyTypes {
 
-  idListaEstadoEstudio: number;
-  codigoListaEstadoEstudio: string;
-  nombreListaEstadoEstudio: string;
-  ordenListaEstadoEstudio: number;
-  indicadorHabilitado: boolean;
-  auditoriaUsuario: number;
-  auditoriaFecha: string;
-  label: string;
-  value: number;
-
+  public idListaTipoEstudio: number ;
+  public codigoListaTipoEstudio: string ;
+  public nombreListaTipoEstudio: string ;
+  public ordenListaTipoEstudio: number ;
+  public indicadorHabilitado: boolean ;
+  public auditoriaUsuario: number ;
+  public auditoriaFecha: string ;
 }
