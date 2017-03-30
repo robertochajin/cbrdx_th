@@ -63,6 +63,9 @@
 }
 
 /** Default button **/
+.btn-breadcrumb > .btn-default{
+  background-color: #fff;
+}
 .btn-breadcrumb .btn.btn-default:not(:last-child):after {
   border-left: 10px solid #fff;
 }
