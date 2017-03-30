@@ -1,9 +1,9 @@
 <p-messages [value]="msgs"></p-messages>
 <p-confirmDialog width="400" #cd>
-  <p-footer>
-    <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
-    <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
-  </p-footer>
+    <p-footer>
+        <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+    </p-footer>
 </p-confirmDialog>
 <div *ngIf="employee">
     <div class="row">
@@ -13,7 +13,6 @@
             </div>
         </div>
     </div>
-
     <div class="row-fluid">
         <div class="col-md-12">
             <form name="formulario" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
@@ -90,7 +89,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="primerNombre">Primer nombre</label>
@@ -253,7 +251,7 @@
                               Tipo Ocupación es requerido
                             </div>
                         </div>
-                        <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 1">
+                        <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 2">
                           <label for="NGoccupations">Ocupación</label>
                           <p-dropdown id="NGoccupations"  name="NGoccupations" required="true" filter="filter"
                                       [options]="occupations" [autoWidth]="false"
@@ -268,7 +266,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 2">
+                        <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 1">
                             <label for="NGsector">Sector</label>
                             <p-dropdown id="NGsector"  name="NGsector" required="true"
                                         [options]="sector" [autoWidth]="false"
@@ -282,7 +280,7 @@
                               Sector es requerido
                             </div>
                         </div>
-                        <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 2">
+                        <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 1">
                             <label for="NGactivities">Actividad</label>
                             <p-dropdown id="NGactivities"  name="NGactivities" required="true" filter="filter"
                                         [options]="activities" [autoWidth]="false"
