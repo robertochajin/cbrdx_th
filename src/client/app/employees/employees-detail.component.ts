@@ -39,7 +39,7 @@ export class EmployeesDetailComponent implements OnInit   {
             if( this.employee.genero === null ) this.employee.genero='';
             if( this.employee.estadoCivil === null ) this.employee.estadoCivil='';
             if( this.employee.lateralidad === null ) this.employee.lateralidad='';
-            if( this.employee.nivelEducacion === null ) this.employee.nivelEducacion='';
+            if( this.employee.nivelEstudio === null ) this.employee.nivelEstudio='';
             if( this.employee.profesion === null ) this.employee.profesion='';
 
             // this.route.params.subscribe((params: Params) => {
