@@ -86,20 +86,13 @@ export class FormalStudiesUpdateComponent implements OnInit {
       this.idTercero = params['tercero'];
       this.academicEducationService.getFormal(+params['id']).subscribe(fstudy => {
         this.fstudy = fstudy;
-        this.politicalDivisionService.getLocation(this.fstudy.idCiudad).subscribe(ciudad => {
-          this.selectedCity = new DivisionPolitica();
-          this.selectedCity.camino = ciudad.camino;
-          this.selectedCity.idDivisionPolitica = ciudad.idDivisionPolitica;
-        });
-
-        this.instituteServices.getById(this.fstudy.idInstitucion).subscribe(i => {
-          this.selectedInstitute = new Institutes();
-          this.selectedInstitute.nombreListaInstitucion = i.nombreListaInstitucion;
-          this.selectedInstitute.idListaInstitucion = i.idListaInstitucion;
-        });
-
-        this.idTercero = this.fstudy.idTercero;
+        this.selectedCity = new DivisionPolitica();
+        this.selectedCity.camino = this.fstudy.ciudad;
+        this.selectedCity.idDivisionPolitica = this.fstudy.idCiudad;
+        this.selectedInstitute = new Institutes();
+        this.selectedInstitute.nombreListaInstitucion = this.fstudy.institucion;
         this.selectedInstitute.idListaInstitucion = this.fstudy.idInstitucion;
+        this.idTercero = this.fstudy.idTercero;
         let fi: moment.Moment = moment(this.fstudy.fechaIngresa, 'YYYY-MM-DD');
         this.fstudy.fechaIngresa = fi.format('MM/DD/YYYY');
         let ff: moment.Moment = moment(this.fstudy.fechaTermina, 'YYYY-MM-DD');
