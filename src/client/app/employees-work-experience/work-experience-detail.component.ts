@@ -1,15 +1,9 @@
-
-
-import {Workexperience} from './work-experience';
+import {Workexperience} from '../_models/work-experience';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
-import {WorkExperienceService} from './work-experience.service';
-
-import {CompanySectorService} from "../_services/company-sector.service";
-import {CompanySubSectorService} from "../_services/company-sub-sector.service";
-import {CitiesServices} from "../_services/cities.service";
-
+import {WorkExperienceService} from '../_services/work-experience.service';
+import * as moment from 'moment/moment';
 import 'rxjs/add/operator/switchMap';
 
 
@@ -33,15 +27,19 @@ export class WorkExperienceDetailComponent implements OnInit   {
         private workExperienceService: WorkExperienceService,
         private route: ActivatedRoute,
         private location: Location,
-        private companySectorService: CompanySectorService,
-        private companySubSectorService: CompanySubSectorService,
-        private citiesServices: CitiesServices,
     ) {}
 
     ngOnInit(): void {
         let este$ = this.route.params
             .switchMap((params: Params) => this.workExperienceService.get(+params['id']));
-        este$.subscribe(experience => this.experience = experience);
+        este$.subscribe(experience => {
+          this.experience = experience;
+          if(this.experience.indicadorActualmente){
+              this.experience.tiempoExperiencia = moment(this.experience.fechaIngresa,'YYYY-MM-DD').toNow(true).toString();
+          }else{
+              this.experience.tiempoExperiencia = moment(this.experience.fechaTermina,'YYYY-MM-DD').diff(moment(this.experience.fechaIngresa,'YYYY-MM-DD'),'days').toString()+" Días";
+          }
+        });
     }
 
     goBack(): void {

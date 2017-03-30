@@ -52,6 +52,10 @@ export class ListEmployeesService {
     return this.http.get(this.serviceURL+"tiposAfiliacion/",{headers: this.headers}).map((res:Response) => res.json());
   }
   
+  getOfficeLevelTypes()  {
+    return this.http.get(this.serviceURL+"listasNivelesCargos/enabled/",{headers: this.headers}).map((res:Response) => res.json());
+  }
+  
   handleError(error: any): Promise<any> {
     console.error('Error:', error);
     return Promise.reject(error.message || error);

@@ -24,7 +24,7 @@ export class EmployeesService {
     };
 
     update(c: Employee) {
-        return this.http.put(this.serviceURL+'terceros',c).map((res:Response) => res.json());
+        return this.http.put(this.serviceURL+'terceros',c).map((res:Response) => res);
     }
 
     get(id: number) {
