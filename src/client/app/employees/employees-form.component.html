@@ -251,7 +251,7 @@
                               Tipo Ocupación es requerido
                             </div>
                         </div>
-                        <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 1">
+                        <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 2">
                           <label for="NGoccupations">Ocupación</label>
                           <p-dropdown id="NGoccupations"  name="NGoccupations" required="true" filter="filter"
                                       [options]="occupations" [autoWidth]="false"
@@ -266,7 +266,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 2">
+                        <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 1">
                             <label for="NGsector">Sector</label>
                             <p-dropdown id="NGsector"  name="NGsector" required="true"
                                         [options]="sector" [autoWidth]="false"
@@ -280,7 +280,7 @@
                               Sector es requerido
                             </div>
                         </div>
-                        <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 2">
+                        <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 1">
                             <label for="NGactivities">Actividad</label>
                             <p-dropdown id="NGactivities"  name="NGactivities" required="true" filter="filter"
                                         [options]="activities" [autoWidth]="false"

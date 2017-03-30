@@ -43,7 +43,7 @@ export class Employee {
   public idProfesion: number;
   public profesion? : string;
   public idNivelEducacion: number;
-  public nivelEducacion? : string;
+  public nivelEstudio? : string;
   public idVehiculo: number;
   public auditoriaUsuario: number;
   public auditoriaFecha: Date;
