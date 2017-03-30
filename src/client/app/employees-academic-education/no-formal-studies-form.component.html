@@ -17,17 +17,9 @@
       <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 
           <div class="ui-grid-row">
-            <ul>
-              <li >tipo:{{tipoEstudio.value | json}}</li>
-              <li >otrotipo:{{otroTipoEstudio.value | json}}</li>
-              <li>==! null:{{otroTipoEstudio.value !== null}}</li>
-              <li>==! '':{{otroTipoEstudio.value !== ''}}</li>
-            </ul>
-          </div>
-          <div class="ui-grid-row">
               <div class="ui-grid-col-6">
                   <label for="tipoEstudio">Tipo de Estudio</label>
-                  <p-dropdown name="tipoEstudio" id="tipoEstudio" #tipoEstudio="ngModel" required="otroTipoEstudio.value !== null"
+                  <p-dropdown name="tipoEstudio" id="tipoEstudio" #tipoEstudio="ngModel" [required]="otroTipoEstudio.value === '' || otroTipoEstudio.value === null"
                               [autoWidth]="false" [(ngModel)]="nfstudy.idTipoEstudio" [options]="studyTypeList"></p-dropdown>
                   <div class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !tipoEstudio.valid">
                     Tipo de Estudios es requerido
@@ -45,8 +37,8 @@
           <div class="ui-grid-row">
               <div class="ui-grid-col-6">
                 <label for="ciudad">Ciudad</label>
-                <p-autoComplete placeholder="Buscar ciudad" field="label" #ciudad="ngModel" name="ciudad" id="ciudad"
-                                [(ngModel)]="nfstudy.ciudad" [suggestions]="cityList" required="true"
+                <p-autoComplete placeholder="Buscar ciudad" field="camino" #ciudad="ngModel" name="ciudad" id="ciudad"
+                                [(ngModel)]="selectedCity" [suggestions]="cityList" required="true"
                                 (completeMethod)="citySearch($event)" (onSelect)="captureCityId($event)" >
                 </p-autoComplete>
                 <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ciudad.valid">
@@ -93,11 +85,11 @@
                 Ingreso es requerido
               </div>
             </div>
-            <div class="ui-grid-col-6" *ngIf="(indicadorTerminacion) && (ingreso !== undefined)">
+            <div class="ui-grid-col-6" *ngIf="(indicadorTerminacion.value)">
               <label for="finalizacion">Finalización</label>
               <p-calendar id="finalizacion" name="finalizacion"  [showIcon]="true" [disabled]="disabled"
                           [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true" [minDate]="minDate" [maxDate]="maxDateFinal"
-                          [dataType]="date" (onSelect)="onSelectEnd($event)" #finalizacion="ngModel" [required]="estadoEstudio == id_estado_estudio_finalizado"
+                          [dataType]="date" (onSelect)="onSelectEnd($event)" #finalizacion="ngModel" [required]="indicadorTerminacion.value"
                           [(ngModel)]="nfstudy.fechaTermina"></p-calendar>
               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !finalizacion.valid">
                 Finalización es requerido

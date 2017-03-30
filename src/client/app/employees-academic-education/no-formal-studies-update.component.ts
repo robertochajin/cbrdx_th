@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/switchMap';
 import {Component, Input, OnInit} from '@angular/core';
 import {AcademicEducationService} from '../_services/academic-education.service';
-import {Location}                 from '@angular/common';
+import {Location} from '@angular/common';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {Noformalstudies} from './no-formal-studies';
 import {Message, ConfirmationService} from 'primeng/primeng';
@@ -9,16 +9,15 @@ import * as moment from 'moment/moment';
 import {StudyLevelServices} from '../_services/study-level.service';
 import {StudyAreaServices} from '../_services/study-area.service';
 import {CitiesServices} from '../_services/cities.service';
-import {StudyStateServices} from '../_services/study-state.service';
 import {StudyTypeServices} from '../_services/study-type.service';
 import {StudyIntensityServices} from '../_services/study-intensity.service';
 import {StudyLevels} from "../_models/studyLevels";
 import {StudyAreas} from "../_models/studyAreas";
-import {StudyStates} from "../_models/studyStates";
 import {StudyTypes} from "../_models/studyTypes";
 import {Intensity} from "../_models/intensity";
 import {DivisionPolitica} from "../_models/divisionPolitica";
 import {NavService} from "../_services/_nav.service";
+import {PoliticalDivisionService} from "../_services/political-division.service";
 
 @Component({
   moduleId: module.id,
@@ -38,7 +37,6 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
   msgs: Message[] = [];
   studyLevelList: any[] = [];
   studyAreaList: any[] = [];
-  studyStateList: any[] = [];
   studyTypeList: any[] = [];
   studyIntensityList: any[] = [];
   minDate: Date = null;
@@ -46,7 +44,6 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
   maxDateFinal: Date = null;
   es: any;
   range: string;
-  id_estado_estudio_finalizado = 2;
   idTercero: number;
   //hace falta definir acceso a constantes en servicio
 
@@ -54,10 +51,10 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
               private citiesServices: CitiesServices,
               private studyLevelServices: StudyLevelServices,
               private studyAreaServices: StudyAreaServices,
-              private studyStateServices: StudyStateServices,
               private studyTypeServices: StudyTypeServices,
               private confirmationService: ConfirmationService,
               private studyIntensityServices: StudyIntensityServices,
+              private politicalDivisionService: PoliticalDivisionService,
               private route: ActivatedRoute,
               private router: Router,
               private location: Location,
@@ -77,12 +74,6 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
       this.studyAreaList.push({label: 'Seleccione', value: null});
       studyAreaList.map((s: StudyAreas) => {
         this.studyAreaList.push({label: s.nombreListaAreaEstudio, value: s.idListaAreaEstudio});
-      });
-    });
-    this.studyStateServices.getAllEnabled().subscribe(studyStateList => {
-      this.studyStateList.push({label: 'Seleccione', value: null});
-      studyStateList.map((s: StudyStates) => {
-        this.studyStateList.push({label: s.nombreListaEstadoEstudio, value: s.idListaEstadoEstudio});
       });
     });
 
@@ -160,7 +151,7 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
   }
 
   citySearch(event: any) {
-    this.citiesServices.getAllCities(event.query).subscribe(
+    this.politicalDivisionService.getAllCities(event.query).subscribe(
       cities => this.cityList = cities
     );
   }
@@ -193,7 +184,8 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
-        this.router.navigate(['/employees-no-formal-studies']);
+        this._nav.setTab(3);
+        this.location.back();
       }
     });
   }
