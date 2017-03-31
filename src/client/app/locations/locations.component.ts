@@ -49,6 +49,7 @@ export class LocationsComponent implements OnInit {
 
   submitted: boolean;
   msgs: Message[] = [];
+  badSelect: boolean = false;
 
   constructor(
     private location: Location,
@@ -89,8 +90,12 @@ export class LocationsComponent implements OnInit {
     this.localizacion.direccion = this.finalAddress;
     this.localizacion.idTipoDireccion = this.selectedAddressType;
     this.localizacion.nomenclaturaPrincipal = this.selectedPrincipalNomenclature;
-    this.localizacion.idDivisionPolitica = this.localizacion.locacion.idDivisionPolitica;
-    this.create.emit(this.localizacion);
+    if(this.localizacion.locacion.idDivisionPolitica !== undefined){
+      this.localizacion.idDivisionPolitica = this.localizacion.locacion.idDivisionPolitica;
+      this.create.emit(this.localizacion);
+    } else {
+      this.badSelect = false;
+    }
   }
 
   hoodSearch(event: any) {
@@ -102,6 +107,8 @@ export class LocationsComponent implements OnInit {
   captureHoodId(event: any) {
     this.localizacion.locacion.idDivisionPolitica = event.idDivisionPolitica;
     this.localizacion.locacion.camino = event.camino;
+    this.localizacion.idDivisionPolitica = event.idDivisionPolitica;
+    this.badSelect = true;
     this.composeAddress();
   }
 
@@ -163,7 +170,9 @@ export class LocationsComponent implements OnInit {
     }
 
     for (let c of this.complementaries) {
-      this.finalAddress += c.tipo + ' ' + c.detalle + ' ';
+      if(c.detalle !== '' && c.tipo !== null){
+        this.finalAddress += c.tipo + ' ' + c.detalle + ' ';
+      }
     }
 
     if (this.localizacion.locacion !== undefined && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined) {

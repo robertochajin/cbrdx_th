@@ -47,6 +47,7 @@ export class FormalStudiesAddComponent implements OnInit {
   range: string;
   id_estado_estudio_finalizado = 2;//hace falta definir acceso a constantes en servicio
   idTercero: number;
+  wrongCity: boolean = true;
 
   constructor(private academicEducationService: AcademicEducationService,
               private politicalDivisionService: PoliticalDivisionService,
@@ -111,22 +112,26 @@ export class FormalStudiesAddComponent implements OnInit {
 
   onSubmit(value: string) {
     this.submitted = true;
-    this.msgs = [];
-    this.fstudy.idCiudad = this.selectedCity.idDivisionPolitica;
-    this.fstudy.idTercero = this.idTercero;
-    this.fstudy.indicadorHabilitado = true;
-    this.fstudy.idInstitucion = this.selectedInstitute.idListaInstitucion;
-    let fi: moment.Moment = moment(this.fstudy.fechaIngresa, 'MM/DD/YYYY');
-    this.fstudy.fechaIngresa = fi.format('YYYY-MM-DD');
-    let ff: moment.Moment = moment(this.fstudy.fechaTermina, 'MM/DD/YYYY');
-    this.fstudy.fechaTermina = ff.format('YYYY-MM-DD');
-    this.academicEducationService.addFormal(this.fstudy)
-      .subscribe(
-        data => {
-          this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
-          this._nav.setTab(3);
-          this.location.back();
-        });
+    if (this.selectedCity !== undefined && this.selectedCity.idDivisionPolitica !== undefined) {
+      this.msgs = [];
+      this.fstudy.idCiudad = this.selectedCity.idDivisionPolitica;
+      this.fstudy.idTercero = this.idTercero;
+      this.fstudy.indicadorHabilitado = true;
+      this.fstudy.idInstitucion = this.selectedInstitute.idListaInstitucion;
+      let fi: moment.Moment = moment(this.fstudy.fechaIngresa, 'MM/DD/YYYY');
+      this.fstudy.fechaIngresa = fi.format('YYYY-MM-DD');
+      let ff: moment.Moment = moment(this.fstudy.fechaTermina, 'MM/DD/YYYY');
+      this.fstudy.fechaTermina = ff.format('YYYY-MM-DD');
+      this.academicEducationService.addFormal(this.fstudy)
+        .subscribe(
+          data => {
+            this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
+            this._nav.setTab(3);
+            this.location.back();
+          });
+    } else {
+      this.wrongCity = true;
+    }
   }
 
   citySearch(event: any) {
@@ -137,6 +142,7 @@ export class FormalStudiesAddComponent implements OnInit {
 
   captureCityId(event: any) {
     this.fstudy.idCiudad = this.selectedCity.idDivisionPolitica;
+    this.wrongCity = false;
   }
 
   instituteSearch(event: any) {

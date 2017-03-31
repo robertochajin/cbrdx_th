@@ -10,6 +10,7 @@ import { ListEmployeesService }     from '../_services/lists-employees.service';
 import { PoliticalDivisionService } from "../_services/political-division.service";
 import { TiposPersonas }            from '../_models/tiposPersonas';
 import { DivisionPolitica }         from "../_models/divisionPolitica";
+import { NavService }               from '../_services/_nav.service';
 
 import {Ocupaciones} from "../_models/ocupaciones";
 import {OcupacionesService}         from "../_services/ocupaciones.service";
@@ -70,19 +71,12 @@ export class EmployeesUpdateComponent {
     private politicalDivisionService: PoliticalDivisionService,
     private actividadEconomicaService: ActividadEconomicaService,
     private ocupacionesService: OcupacionesService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private _nav:NavService
   ) {
-  
-    this.listEmployeesService.getListPersonTypes().subscribe(res => {
-      for (let dp of res) {
-        this.personTypes.push({
-          label: dp.nombreListaTipoPersona,
-          value: dp.idListaTipoPersona
-        });
-      }
-    });
     
     this.listEmployeesService.getListPersonTypes().subscribe(res => {
+      this.personTypes.push({label: "Seleccione", value: null});
       for (let dp of res) {
         this.personTypes.push({
           label: dp.nombreListaTipoPersona,
@@ -91,17 +85,17 @@ export class EmployeesUpdateComponent {
       }
     });
     this.listEmployeesService.getDocumentTypes().subscribe(res => {
+      this.documentTypes.push({label: "Seleccione", value: null});
       for (let dp of res) {
         this.documentTypes.push({
           label: dp.nombreListaTipoDocumento,
           value: dp.idListaTipoDocumento
         });
       }
-      //this.employee.idTipoDocumento = this.documentTypes[0].value;
-      //this.updateDate(this.documentTypes[0]);
     });
     
     this.listEmployeesService.getGenderTypes().subscribe(res => {
+      this.genderTypes.push({label: "Seleccione", value: null});
       for (let dp of res) {
         this.genderTypes.push({
           label: dp.nombreListaGenero,
@@ -110,6 +104,7 @@ export class EmployeesUpdateComponent {
       }
     });
     this.listEmployeesService.getMaritalStatusTypes().subscribe(res => {
+      this.maritalStatusTypes.push({label: "Seleccione", value: null});
       for (let dp of res) {
         this.maritalStatusTypes.push({
           label: dp.nombreListaEstadoCivil,
@@ -118,6 +113,7 @@ export class EmployeesUpdateComponent {
       }
     });
     this.listEmployeesService.getRhRactorTypes().subscribe(res => {
+      this.rhRactorTypes.push({label: "Seleccione", value: null});
       for (let dp of res) {
         this.rhRactorTypes.push({
           label: dp.nombre,
@@ -126,6 +122,7 @@ export class EmployeesUpdateComponent {
       }
     });
     this.listEmployeesService.getHealthTypes().subscribe(res => {
+      this.healthTypes.push({label: "Seleccione", value: null});
       for (let dp of res) {
         this.healthTypes.push({
           label: dp.nombre,
@@ -134,6 +131,7 @@ export class EmployeesUpdateComponent {
       }
     });
     this.listEmployeesService.getOccupationsTypes().subscribe(res => {
+      this.occupationsTypes.push({label: "Seleccione", value: null});
       for (let dp of res) {
         this.occupationsTypes.push({
           label: dp.nombre,
@@ -142,6 +140,7 @@ export class EmployeesUpdateComponent {
       }
     });
     this.listEmployeesService.getAcademicLevelTypes().subscribe(res => {
+      this.academicLevelTypes.push({label: "Seleccione", value: null});
       for (let dp of res) {
         this.academicLevelTypes.push({
           label: dp.nombreListaNivelEstudio,
@@ -150,6 +149,7 @@ export class EmployeesUpdateComponent {
       }
     });
     this.listEmployeesService.getAffiliationTypes().subscribe(rest => {
+      this.affiliationTypes.push({label: "Seleccione", value: null});
       for (let dp of rest) {
         this.affiliationTypes.push({
           label: dp.nombre,
@@ -158,17 +158,17 @@ export class EmployeesUpdateComponent {
       }
     });
     this.actividadEconomicaService.listByPadre(0).subscribe(res => {
+      this.sector.push({label: "Seleccione", value: null});
       for (let dp of res) {
         this.sector.push({
           label: dp.actividadEconomica,
           value: dp.idActividadEconomica
         });
       }
-      //this.employee.idSectorEconomico = this.sector[0].value;
-      //this.updateActivities(this.employee.idSectorEconomico);
     });
     
     this.ocupacionesService.listByNivel(4).subscribe(res => {
+      this.occupations.push({label: "Seleccione", value: null});
       for (let dp of res) {
         this.occupations.push({
           label: dp.ocupacion,
@@ -277,7 +277,8 @@ export class EmployeesUpdateComponent {
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
-        this.router.navigate(['/employees']);
+        this._nav.setTab(0);
+        this.location.back();
       }
     });
   }
@@ -286,16 +287,19 @@ export class EmployeesUpdateComponent {
       lis => this.resultExpeditionCity = lis
     );
   }
+  
   captureExpeditionCity(event: any) {
     this.employee.idCiudadExpDocumento = event.idDivisionPolitica;
     this.ciudadExpDocumento = event.camino;
     this.backupCiudadExpDocumento = event.camino;
   }
+  
   searchBirthPlace(event: any) {
     this.politicalDivisionService.getAllCities(event.query).subscribe(
       lis => this.resultBirthPlace = lis
     );
   }
+  
   captureBirthPlace(event: any) {
     this.employee.idCiudadNacimiento = event.idDivisionPolitica;
     this.ciudadNacimiento = event.camino;
@@ -306,6 +310,7 @@ export class EmployeesUpdateComponent {
     const element = document.querySelector('#formulario');
     if (element) { element.scrollIntoView(element); }
   }
+  
   updateDate(event:any) {
     
     let today = new Date();
@@ -364,13 +369,13 @@ export class EmployeesUpdateComponent {
   updateActivities(value:number) {
     this.activities = [];
     this.actividadEconomicaService.listLastChild(value).subscribe(res => {
+      this.activities.push({label: "Seleccione", value: null});
       for (let dp of res) {
         this.activities.push({
           label: dp.actividadEconomica,
           value: dp.idActividadEconomica
         });
       }
-      this.employee.idActividadEconomica = this.activities[0].value;
     });
   }
   

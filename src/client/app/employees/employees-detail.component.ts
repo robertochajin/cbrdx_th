@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
+import { ActivatedRoute, Params, Router }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import { EmployeesService }         from '../_services/employees.service';
 import { Employee }                 from '../_models/employees';
@@ -19,27 +19,26 @@ export class EmployeesDetailComponent implements OnInit   {
         private employeeService: EmployeesService,
         private route: ActivatedRoute,
         private location: Location,
-        private _nav:NavService
+        private _nav:NavService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
       this.route.params.subscribe((params: Params) => {
         this.employeeService.get(+params['id']).subscribe(employee => {
           this.employee = employee;
-          this.employee.nombreCompleto = this.employee.primerNombre+' '+
-            this.employee.segundoNombre+' '+
-            this.employee.primerApellido+' '+
-            this.employee.segundoApellido;
-
-            this.employee.nacionalidad = 'cargando...';
-
-            if( this.employee.ciudadExpDocumento === null ) this.employee.ciudadExpDocumento='';
-            if( this.employee.ciudadNacimiento === null ) this.employee.ciudadNacimiento='';
-            if( this.employee.genero === null ) this.employee.genero='';
-            if( this.employee.estadoCivil === null ) this.employee.estadoCivil='';
-            if( this.employee.lateralidad === null ) this.employee.lateralidad='';
-            if( this.employee.nivelEducacion === null ) this.employee.nivelEducacion='';
-            if( this.employee.profesion === null ) this.employee.profesion='';
+          // this.employee.nombreCompleto = this.employee.primerNombre+' '+
+          //   this.employee.segundoNombre+' '+
+          //   this.employee.primerApellido+' '+
+          //   this.employee.segundoApellido;
+		  //
+          //   if( this.employee.ciudadExpDocumento === null ) this.employee.ciudadExpDocumento='';
+          //   if( this.employee.ciudadNacimiento === null ) this.employee.ciudadNacimiento='';
+          //   if( this.employee.genero === null ) this.employee.genero='';
+          //   if( this.employee.estadoCivil === null ) this.employee.estadoCivil='';
+          //   if( this.employee.lateralidad === null ) this.employee.lateralidad='';
+          //   if( this.employee.nivelEstudio === null ) this.employee.nivelEstudio='';
+          //   if( this.employee.profesion === null ) this.employee.profesion='';
 
             // this.route.params.subscribe((params: Params) => {
             //   this.employeeService.getCargoActual(+params['id']).subscribe(c => {
@@ -62,6 +61,10 @@ export class EmployeesDetailComponent implements OnInit   {
     onTabShow(e:any) {
       this._nav.setTab(e.index);
       this.acordion = this._nav.getTab();
+    }
+  
+    update(id: number) {
+      this.router.navigate(['employees/update/'+id]);
     }
 
 }
