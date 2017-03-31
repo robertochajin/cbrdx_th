@@ -37,7 +37,7 @@
                                         [options]="documentTypes" [autoWidth]="false"
                                         [(ngModel)]="employee.idTipoDocumento"
                                         #NGdocumentTypes="ngModel"
-                                        (onChange)="updateDate($event)"
+                                        (onChange)="updateDate()"
                           ></p-dropdown>
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !NGdocumentTypes.valid">
@@ -53,6 +53,7 @@
                                    [(ngModel)]="employee.numeroDocumento"
                                    #numeroDocumento="ngModel" required
                                    (change)="validateDocument()"
+                                   (keyup)="inputCleanUp($event.target.value)"
                             />
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !numeroDocumento.valid">

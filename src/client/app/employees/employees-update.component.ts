@@ -315,7 +315,11 @@ export class EmployeesUpdateComponent {
     if (element) { element.scrollIntoView(element); }
   }
   
-  updateDate(event:any) {
+  updateDate() {
+    
+    let tipo = this.employee.idTipoDocumento;
+    let exp = this.expeditionDate;
+    let dateExpo = new Date(exp);
     
     let today = new Date();
     let month = today.getMonth();
@@ -327,12 +331,15 @@ export class EmployeesUpdateComponent {
     this.maxDate.setMonth(month);
     
     
-    if(event.value === 1) {
+    if(tipo === 1) {
       this.maxDate.setFullYear(prev18Year);
-    } else if (event.value === 2) {
+    } else if (tipo === 2) {
       this.maxDate.setFullYear(year);
     } else {
       this.maxDate.setFullYear(year);
+    }
+    if(this.maxDate > dateExpo) {
+      this.maxDate = dateExpo;
     }
     
     if((this.employee.fechaNacimiento) !== null && (this.employee.fechaNacimiento) !== '' ) {
@@ -343,6 +350,7 @@ export class EmployeesUpdateComponent {
         this.employee.fechaNacimiento = '';
       }
     }
+    this.validateDocument();
     
   }
   
@@ -358,6 +366,7 @@ export class EmployeesUpdateComponent {
   onExpeditionDate(event:any) {
     let d = new Date(Date.parse(event));
     this.expeditionDate= `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
+    this.updateDate();
   }
   
   onBirthDate(event:any) {
@@ -381,6 +390,30 @@ export class EmployeesUpdateComponent {
         });
       }
     });
+  }
+  
+  validateDocument() {
+      if(this.employee.numeroDocumento !="" && this.employee.numeroDocumento != null){
+          this.employeesService.validateDocument(this.employee).subscribe(res => {
+              if(res.idTercero > 0 && this.employee.idTercero != res.idTercero ) {
+                  this.confirmationService.confirm({
+                    message: ` ¿La cedula que ha ingresado ya existe, desea ver el colaborador existente?`,
+                    header: 'Corfirmación',
+                    icon: 'fa fa-question-circle',
+                    accept: () => {
+                      this.router.navigate(['/employees/update/'+res.idTercero]);
+                    },
+                    reject:() =>{
+                      this.employee.numeroDocumento = '';
+                    }
+                  });
+              }
+          });
+      }
+  }
+  
+  inputCleanUp(value: string) {
+      this.employee.numeroDocumento = value.toUpperCase().replace(' ', '').trim();
   }
   
 }
