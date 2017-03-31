@@ -178,19 +178,19 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
 
   onSelectBegin(event: any) {
     let d = new Date(Date.parse(event));
-    this.nfstudy.fechaIngresa = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+    this.fechaIngresa = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
     this.minDate.setFullYear(d.getFullYear(), d.getMonth(), d.getDate() + 1);
   }
 
   onSelectEnd(event: any) {
     let d = new Date(Date.parse(event));
-    this.nfstudy.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+    this.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
     this.maxDate.setFullYear(d.getFullYear(), d.getMonth(), d.getDate() - 1);
   }
 
   updateEnd(): void {
     if (this.nfstudy.indicadorTerminacion) {
-      this.nfstudy.fechaTermina = undefined;
+      this.nfstudy.fechaTermina = "";
     }
   }
 
