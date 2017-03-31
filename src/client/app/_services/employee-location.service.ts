@@ -7,7 +7,6 @@ import { Employee } from "../_models/employees";
 export class LocationService {
 
   private serviceURL = '<%= SVC_TH_URL %>';
-  // private serviceURL = 'http://localhost:8448';
 
   constructor(private http: Http) {
   }
