@@ -376,7 +376,6 @@ export class EmployeesUpdateComponent {
           value: dp.idActividadEconomica
         });
       }
-      this.employee.idActividadEconomica = this.activities[0].value;
     });
   }
   

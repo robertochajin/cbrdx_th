@@ -79,6 +79,7 @@ export class WorkExperienceAddComponent {
     }
   
   ngOnInit() {
+      this.focusUP();
       this.es = {
         firstDayOfWeek: 1,
         dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
@@ -153,7 +154,7 @@ export class WorkExperienceAddComponent {
   }
   
   focusUP() {
-      const element = document.querySelector('#formulario');
+      const element = document.querySelector('#WEformulario');
       if (element) { element.scrollIntoView(element); }
   }
   

@@ -27,20 +27,18 @@ export class EmployeesDetailComponent implements OnInit   {
       this.route.params.subscribe((params: Params) => {
         this.employeeService.get(+params['id']).subscribe(employee => {
           this.employee = employee;
-          this.employee.nombreCompleto = this.employee.primerNombre+' '+
-            this.employee.segundoNombre+' '+
-            this.employee.primerApellido+' '+
-            this.employee.segundoApellido;
-
-            this.employee.nacionalidad = 'cargando...';
-
-            if( this.employee.ciudadExpDocumento === null ) this.employee.ciudadExpDocumento='';
-            if( this.employee.ciudadNacimiento === null ) this.employee.ciudadNacimiento='';
-            if( this.employee.genero === null ) this.employee.genero='';
-            if( this.employee.estadoCivil === null ) this.employee.estadoCivil='';
-            if( this.employee.lateralidad === null ) this.employee.lateralidad='';
-            if( this.employee.nivelEstudio === null ) this.employee.nivelEstudio='';
-            if( this.employee.profesion === null ) this.employee.profesion='';
+          // this.employee.nombreCompleto = this.employee.primerNombre+' '+
+          //   this.employee.segundoNombre+' '+
+          //   this.employee.primerApellido+' '+
+          //   this.employee.segundoApellido;
+		  //
+          //   if( this.employee.ciudadExpDocumento === null ) this.employee.ciudadExpDocumento='';
+          //   if( this.employee.ciudadNacimiento === null ) this.employee.ciudadNacimiento='';
+          //   if( this.employee.genero === null ) this.employee.genero='';
+          //   if( this.employee.estadoCivil === null ) this.employee.estadoCivil='';
+          //   if( this.employee.lateralidad === null ) this.employee.lateralidad='';
+          //   if( this.employee.nivelEstudio === null ) this.employee.nivelEstudio='';
+          //   if( this.employee.profesion === null ) this.employee.profesion='';
 
             // this.route.params.subscribe((params: Params) => {
             //   this.employeeService.getCargoActual(+params['id']).subscribe(c => {
