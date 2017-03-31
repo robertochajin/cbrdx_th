@@ -320,6 +320,7 @@ export class EmployeesAddComponent {
           this.employee.fechaNacimiento = '';
         }
       }
+      this.validateDocument();
       
     }
   
@@ -358,6 +359,26 @@ export class EmployeesAddComponent {
                 });
             }
         });
+    }
+    validateDocument() {
+        console.log(this.employee);
+        if(this.employee.numeroDocumento !="" && this.employee.numeroDocumento != null){
+            this.employeesService.validateDocument(this.employee).subscribe(res => {
+                if(res.idTercero > 0) {
+                    this.confirmationService.confirm({
+                      message: ` ¿La cedula que ha ingresado ya existe, desea ver el colaborador existente?`,
+                      header: 'Corfirmación',
+                      icon: 'fa fa-question-circle',
+                      accept: () => {
+                        this.router.navigate(['/employees/update/'+res.idTercero]);
+                      },
+                      reject:() =>{
+                        this.employee.numeroDocumento = '';
+                      }
+                });
+              }
+            });
+        }
     }
     
 }

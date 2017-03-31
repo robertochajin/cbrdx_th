@@ -172,6 +172,8 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
 
   captureCityId(event: any) {
     this.nfstudy.idCiudad = event.idDivisionPolitica;
+    this.nfstudy.ciudad = event.camino;
+    this.selectedCity = event.camino;
   }
 
   onSelectBegin(event: any) {

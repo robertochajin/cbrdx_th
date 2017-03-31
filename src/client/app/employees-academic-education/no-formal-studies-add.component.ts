@@ -160,6 +160,7 @@ export class NoFormalStudiesAddComponent implements OnInit {
   captureCityId(event: any) {
     this.nfstudy.ciudad = event.camino;
     this.nfstudy.idCiudad = event.idDivisionPolitica;
+    this.selectedCity = event.camino;
   }
 
   onSelectBegin(event: any) {
@@ -191,6 +192,19 @@ export class NoFormalStudiesAddComponent implements OnInit {
       }
     });
   }
+  changeTipoestudio(event:any) {
+      if (this.nfstudy.idTipoEstudio !== null) {
+          this.nfstudy.otroEstudio = '';
+      }
+  }
+  removeEstudio() {
+      if (this.nfstudy.otroEstudio !== '') {
+          this.nfstudy.idTipoEstudio = null;
+      }
+  }
+
+  
+
 }
 
 

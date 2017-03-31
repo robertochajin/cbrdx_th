@@ -51,7 +51,9 @@
                             <label for="numeroDocumento">Número de documento</label>
                             <input id="numeroDocumento" type="text" pInputText  name="numeroDocumento"
                                    [(ngModel)]="employee.numeroDocumento"
-                                   #numeroDocumento="ngModel" required/>
+                                   #numeroDocumento="ngModel" required
+                                   (change)="validateDocument()"
+                            />
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !numeroDocumento.valid">
                               <i class="fa fa-close"></i>
