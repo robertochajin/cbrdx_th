@@ -30,7 +30,7 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
   @Input()
   nfstudy: Noformalstudies = new Noformalstudies();
   cityList: any;
-  selectedCity: DivisionPolitica = new DivisionPolitica();
+  selectedCity: string;
   header: string = 'Editando Estudio No Formal';
   submitted: boolean;
   msgs: Message[] = [];
@@ -39,11 +39,13 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
   studyTypeList: any[] = [];
   studyIntensityList: any[] = [];
   minDate: Date = null;
-  maxDate: Date = null;
-  maxDateFinal: Date = null;
+  maxDate: Date = new Date(Date.now());
+  maxDateFinal: Date = new Date(Date.now());
   es: any;
   range: string;
   idTercero: number;
+  fechaIngresa: string;
+  fechaTermina: string;
   //hace falta definir acceso a constantes en servicio
 
   constructor(private academicEducationService: AcademicEducationService,
@@ -92,14 +94,16 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
       this.idTercero = params['tercero'];
       this.academicEducationService.getNoFormal(+params['id']).subscribe(nfstudy => {
         this.nfstudy = nfstudy;
-        this.selectedCity = new DivisionPolitica();
-        this.selectedCity.camino = this.nfstudy.ciudad;
-        this.selectedCity.idDivisionPolitica = this.nfstudy.idCiudad;
+        this.selectedCity = this.nfstudy.ciudad;
         this.idTercero = this.nfstudy.idTercero;
         let fi: moment.Moment = moment(this.nfstudy.fechaIngresa, 'YYYY-MM-DD');
-        this.nfstudy.fechaIngresa = fi.format('MM/DD/YYYY');
-        let ff: moment.Moment = moment(this.nfstudy.fechaTermina, 'YYYY-MM-DD');
-        this.nfstudy.fechaTermina = ff.format('MM/DD/YYYY');
+        this.fechaIngresa = fi.format('MM/DD/YYYY');
+        this.onSelectBegin(this.fechaIngresa);
+        if (this.nfstudy.indicadorTerminacion == true) {
+          let ff: moment.Moment = moment(this.nfstudy.fechaTermina, 'YYYY-MM-DD');
+          this.fechaTermina = ff.format('MM/DD/YYYY');
+          this.onSelectEnd(this.fechaTermina);
+        }
       });
     });
 
@@ -132,20 +136,32 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
 
   onSubmit(value: string) {
     this.submitted = true;
-    this.msgs = [];
-    this.nfstudy.idCiudad = this.selectedCity.idDivisionPolitica;
-    this.nfstudy.idTercero = this.idTercero;
-    this.nfstudy.indicadorHabilitado = true;
-    let fi: moment.Moment = moment(this.nfstudy.fechaIngresa, 'MM/DD/YYYY');
-    this.nfstudy.fechaIngresa = fi.format('YYYY-MM-DD');
-    let ff: moment.Moment = moment(this.nfstudy.fechaTermina, 'MM/DD/YYYY');
-    this.nfstudy.fechaTermina = ff.format('YYYY-MM-DD');
-    this.academicEducationService.updateNoFormal(this.nfstudy).subscribe(
-      data => {
-        this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
-        this._nav.setTab(3);
-        this.location.back();
-      });
+    if(this.nfstudy.ciudad != this.selectedCity){
+      this.selectedCity = "";
+      this.nfstudy.idCiudad = null;
+    }
+    if(this.nfstudy.ciudad == this.selectedCity) {
+      this.msgs = [];
+      this.nfstudy.idTercero = this.idTercero;
+      this.nfstudy.indicadorHabilitado = true;
+    
+      let fi: moment.Moment = moment(this.fechaIngresa, 'MM/DD/YYYY');
+      this.nfstudy.fechaIngresa = fi.format('YYYY-MM-DD');
+      if (this.nfstudy.indicadorTerminacion == true) {
+        let ff: moment.Moment = moment(this.fechaTermina, 'MM/DD/YYYY');
+          this.nfstudy.fechaTermina = ff.format('YYYY-MM-DD');
+      }else{
+        this.nfstudy.fechaTermina = null;
+      }
+      this.academicEducationService.updateNoFormal(this.nfstudy)
+        .subscribe(data => {
+          this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
+          this._nav.setTab(3);
+          this.location.back();
+        }, error => {
+          this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
+        });
+    }
   }
 
   citySearch(event: any) {
