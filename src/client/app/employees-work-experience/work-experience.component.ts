@@ -36,9 +36,11 @@ export class WorkExperienceComponent implements OnInit{
             header: 'Corfirmación',
             icon: 'fa fa-question-circle',
             accept: () => {
-                this.workExperienceService.delete( this.dialogObjet);
-                this.experiences.splice(this.experiences.indexOf( this.dialogObjet), 1);
-                this.dialogObjet = null;
+                this.dialogObjet.indicadorHabilitado = false;
+                this.workExperienceService.update(this.dialogObjet).subscribe( r => {
+                  this.experiences.splice(this.experiences.indexOf(this.dialogObjet), 1);
+                  this.dialogObjet = null;
+                });
             },
             reject: () => {
                 this.dialogObjet = null;

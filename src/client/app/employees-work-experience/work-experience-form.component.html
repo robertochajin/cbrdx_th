@@ -15,7 +15,7 @@
     </div>
     <div class="row-fluid">
         <div class="col-md-12">
-            <form id="WEformulario" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <form id="formulario" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
                 <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                     <div class="row">
                         <div class="form-group col-md-6">
@@ -134,44 +134,56 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="form-group col-md-4"
-                           [ngClass]="{ 'has-error': f.submitted && !ingreso.valid }">
-                        <label for="ingreso">Fecha de Ingreso</label>
-                        <p-calendar id="ingreso" name="ingreso" #ingreso="ngModel"
-                                    (onSelect)="onSelectMethodCalendarIngreso($event)" [showIcon]="true"
-                                    [maxDate]="maxDateIngreso" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range"
-                                    [locale]="es" readonlyInput="true" [dataType]="date" required="true"
-                                    [disabled]="disabled" [(ngModel)]="fechaIngresa">
-                        </p-calendar>
-                        <div  class="ui-message ui-messages-error ui-corner-all"
-                              *ngIf="f.submitted && !ingreso.valid">
-                          <i class="fa fa-close"></i>
-                          Ingreso  es requerido
+                        <div class="form-group col-md-4"
+                             [ngClass]="{ 'has-error': f.submitted && !ingreso.valid }">
+                          <label for="ingreso">Fecha de Ingreso</label>
+                          <p-calendar id="ingreso" name="ingreso" #ingreso="ngModel"
+                                      (onSelect)="onSelectMethodCalendarIngreso($event)" [showIcon]="true"
+                                      [maxDate]="maxDateIngreso" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range"
+                                      [locale]="es" readonlyInput="true" [dataType]="date" required="true"
+                                      [disabled]="disabled" [(ngModel)]="fechaIngresa">
+                          </p-calendar>
+                          <div  class="ui-message ui-messages-error ui-corner-all"
+                                *ngIf="f.submitted && !ingreso.valid">
+                            <i class="fa fa-close"></i>
+                            Ingreso  es requerido
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group col-md-2">
-                        <label for="actualmente">Actualmente</label>
-                        <p-toggleButton id="actualmente" name="actualmente" onLabel="Si" offLabel="No" #actualmente="ngModel"
-                                        onIcon="fa-check-square" offIcon="fa-square"
-                                        [(ngModel)]="experience.indicadorActualmente">
-                        </p-toggleButton>
-                      </div>
-                      <div class="form-group col-md-4" *ngIf="!experience.indicadorActualmente">
-                        <label for="finalizacion">Fecha de Finalización</label>
-                        <p-calendar id="finalizacion" name="finalizacion" #finalizacion="ngModel"
-                                    (onSelect)="onSelectMethodCalendarFinalizacion($event)" [showIcon]="true" required="true"
-                                    [minDate]="minDate" [maxDate]="maxDateFinal" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range"
-                                    [locale]="es"  readonlyInput="true" [dataType]="date"
-                                    [disabled]="disabled" [(ngModel)]="fechaTermina">
-                        </p-calendar>
-                        <div  class="ui-message ui-messages-error ui-corner-all"
-                              *ngIf="f.submitted && !finalizacion.valid">
-                          <i class="fa fa-close"></i>
-                          Finalización  es requerido
+                        <div class="form-group col-md-2">
+                          <label for="actualmente">Actualmente</label>
+                          <p-toggleButton id="actualmente" name="actualmente" onLabel="Si" offLabel="No" #actualmente="ngModel"
+                                          onIcon="fa-check-square" offIcon="fa-square"
+                                          [(ngModel)]="experience.indicadorActualmente">
+                          </p-toggleButton>
                         </div>
+                        <div class="form-group col-md-4" *ngIf="!experience.indicadorActualmente">
+                          <label for="finalizacion">Fecha de Finalización</label>
+                          <p-calendar id="finalizacion" name="finalizacion" #finalizacion="ngModel"
+                                      (onSelect)="onSelectMethodCalendarFinalizacion($event)" [showIcon]="true" required="true"
+                                      [minDate]="minDate" [maxDate]="maxDateFinal" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range"
+                                      [locale]="es"  readonlyInput="true" [dataType]="date"
+                                      [disabled]="disabled" [(ngModel)]="fechaTermina">
+                          </p-calendar>
+                          <div  class="ui-message ui-messages-error ui-corner-all"
+                                *ngIf="f.submitted && !finalizacion.valid">
+                            <i class="fa fa-close"></i>
+                            Finalización  es requerido
+                          </div>
                       </div>
 
                     </div>
+                    <!--<div class="row">
+                        <div class="form-group col-md-5">
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+                          <div class=" col-sm-9">
+                            <p-checkbox binary="true" id="indicador" name="indicador"
+                                        [(ngModel)]="experience.indicadorHabilitado"
+                                        #indicador="ngModel"></p-checkbox>
+                          </div>
+                        </div>
+                    </div>-->
                 </div>
               <div class="row form-footer-buttons">
                 <div class="form-group col-md-12">
