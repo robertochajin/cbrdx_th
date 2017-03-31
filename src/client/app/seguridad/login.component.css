@@ -87,3 +87,21 @@
     height: 100%;
     background: url("/assets/images/bg-login4.jpg") no-repeat fixed center center / cover  #F3F3F3;
 }
+/*
+-------- Nuevos cambios Login ---------
+ */
+.wrapper-login{
+  margin: 0!important;
+}
+.wrapper-login > .content{
+  margin: 0!important;
+  padding: 0!important;
+}
+.icon-mainmenu{
+  font-size: 1.4em;
+}
+.logo-lg img{
+}
+.logo-mini img{
+  width: 90%;
+}

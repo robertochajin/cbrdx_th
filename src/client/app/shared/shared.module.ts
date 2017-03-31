@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
 
 /** Componentes de la Template principal **/
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -20,10 +20,23 @@ import { TranslateService, TranslateModule } from 'ng2-translate';
     CommonModule, FormsModule, RouterModule,TranslateModule]
 })
 export class SharedModule {
+
+  constructor(private router: Router) {
+    router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd){
+        //console.log('router yeah');
+        //window.scrollTo(0,0);
+        <any>changePage();
+      }
+    });
+  }
+
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
       providers: [TranslateService]
     };
   }
+
+
 }

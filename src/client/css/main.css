@@ -1,20 +1,29 @@
 /**
--------------------------- Cambios Main Theme ------------------------
+-------------------------- Cambios Main Theme PrimeNG ------------------------
  */
-.wrapper-login{
-  margin: 0!important;
+body .ui-widget,
+body .ui-widget .ui-widget, body .ui-widget input,
+body .ui-widget select,
+body .ui-widget textarea,
+body .ui-widget button  {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif!important;
 }
-.wrapper-login > .content{
-  margin: 0!important;
-  padding: 0!important;
+body .ui-state-disabled, body .ui-widget:disabled {
+  opacity: 0.6;
+  filter: Alpha(Opacity= 35);
+  background-color: #ccc;
+  cursor: default !important;
+  color: #000;
 }
-.icon-mainmenu{
-  font-size: 1.4em;
-}
-.logo-lg img{
-}
-.logo-mini img{
-  width: 90%;
+
+/*
+----------------- Cambios Theme AdminLTE ---------------------------------
+ */
+.content-wrapper,
+.right-side {
+  min-height: 100%;
+  background-color: #f4f3ef;
+  z-index: 800;
 }
 /**
 ------------------------ Main CSS ------------------------------------

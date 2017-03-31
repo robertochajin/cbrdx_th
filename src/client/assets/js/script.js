@@ -33,3 +33,7 @@ function changeTheme(color) {
   sessionStorage.setItem("datatheme", color);
 }
 
+function changePage(){
+  console.log('heyyyy changePage');
+  $.scrollTop(0,0);
+}
