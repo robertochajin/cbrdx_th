@@ -188,6 +188,7 @@ export class LocationsComponent implements OnInit {
 
   removeComplementary(id: any): void {
     this.complementaries.splice(id, 1);
+    this.composeAddress();
   }
 
   discard(): void {
