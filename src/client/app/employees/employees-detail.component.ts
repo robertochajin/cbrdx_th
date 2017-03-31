@@ -13,7 +13,8 @@ import {NavService}                 from '../_services/_nav.service';
 
 
 export class EmployeesDetailComponent implements OnInit   {
-    employee: Employee;
+    @Input()
+    employee: Employee = new Employee();
     acordion:number;
     constructor(
         private employeeService: EmployeesService,
@@ -27,10 +28,10 @@ export class EmployeesDetailComponent implements OnInit   {
       this.route.params.subscribe((params: Params) => {
         this.employeeService.get(+params['id']).subscribe(employee => {
           this.employee = employee;
-          // this.employee.nombreCompleto = this.employee.primerNombre+' '+
-          //   this.employee.segundoNombre+' '+
-          //   this.employee.primerApellido+' '+
-          //   this.employee.segundoApellido;
+          this.employee.nombreCompleto = this.employee.primerNombre+' '+
+            this.employee.segundoNombre+' '+
+            this.employee.primerApellido+' '+
+            this.employee.segundoApellido;
 		  //
           //   if( this.employee.ciudadExpDocumento === null ) this.employee.ciudadExpDocumento='';
           //   if( this.employee.ciudadNacimiento === null ) this.employee.ciudadNacimiento='';

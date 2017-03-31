@@ -19,8 +19,31 @@ export class Noformalstudies {
   public indicadorTerminacion: boolean;
   public fechaIngresa: string;
   public fechaTermina: string;
+  public fechaVerificado: string;
   public idAdjunto: number;
   public indicadorHabilitado: boolean;
+  public indicadorVerificado: boolean;
   public auditoriaUsuario: number;
   public auditoriaFecha: string;
+  
+  constructor(){
+    this.auditoriaFecha = "";
+    this.auditoriaUsuario = 1;
+    this.descripcion = "";
+    this.fechaIngresa = "";
+    this.fechaTermina = "";
+    this.fechaVerificado ="";
+    this.idAdjunto = 0;
+    this.idAreaEstudio = 0;
+    this.idCiudad = 0;
+    this.idIntensidadHoraria = 0;
+    this.idTercero = 0;
+    this.idTipoEstudio = 0;
+    this.indicadorHabilitado = true;
+    this.indicadorTerminacion = true;
+    this.indicadorVerificado = false;
+    this.institucion = "";
+    this.otroEstudio = "";
+    this.tituloEstudio = "";
+  }
 }
