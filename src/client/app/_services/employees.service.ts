@@ -46,5 +46,9 @@ export class EmployeesService {
         const respuesta =  this.http.delete(this.serviceURL+'/'+ c.idTercero);
         return respuesta.map((res:Response) => res.json());
     }
+  
+    validateDocument(c: Employee) {
+      return this.http.get(this.serviceURL+'terceros/'+ c.numeroDocumento+'/'+c.idTipoDocumento+'/').map((res:Response) => res.json() as Employee);
+    }
 
 }
