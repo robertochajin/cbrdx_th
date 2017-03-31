@@ -119,11 +119,19 @@ export class FormalStudiesAddComponent implements OnInit {
         this.fstudy.idCiudad = this.selectedCity.idDivisionPolitica;
         this.fstudy.idTercero = this.idTercero;
         this.fstudy.indicadorHabilitado = true;
-        this.fstudy.idInstitucion = this.selectedInstitute.idListaInstitucion;
+        if (this.selectedInstitute !== null){
+          this.fstudy.idInstitucion = this.selectedInstitute.idListaInstitucion;
+        }else {
+          this.fstudy.idInstitucion = null;
+        }
         let fi: moment.Moment = moment(this.fstudy.fechaIngresa, 'MM/DD/YYYY');
         this.fstudy.fechaIngresa = fi.format('YYYY-MM-DD');
-        let ff: moment.Moment = moment(this.fstudy.fechaTermina, 'MM/DD/YYYY');
-        this.fstudy.fechaTermina = ff.format('YYYY-MM-DD');
+        if (this.fstudy.idEstado === this.id_estado_estudio_finalizado) {
+          let ff: moment.Moment = moment(this.fstudy.fechaTermina, 'MM/DD/YYYY');
+          this.fstudy.fechaTermina = ff.format('YYYY-MM-DD');
+        }else{
+          this.fstudy.fechaTermina = null;
+        }
         this.academicEducationService.addFormal(this.fstudy)
           .subscribe(
             data => {

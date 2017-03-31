@@ -129,7 +129,7 @@ const routes = [
   //employees-location
   { path: 'employees-location', component: LocationComponent, canActivate: [AuthGuard]},
   { path: 'employees-location/add/:id', component: LocationAddComponent, canActivate: [AuthGuard]},
-  { path: 'employees-location/update/:id/:tercero/:tl', component: LocationUpdateComponent, canActivate: [AuthGuard] },
+  { path: 'employees-location/update/:id/:tercero', component: LocationUpdateComponent, canActivate: [AuthGuard] },
   { path: 'employees-location/detail/:id', component: LocationDetailComponent, canActivate: [AuthGuard] },
 
     //Experiencia laboral
