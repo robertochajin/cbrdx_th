@@ -15,7 +15,6 @@ import { NoFormalStudiesAddComponent }  from './no-formal-studies-add.component'
 import { NoFormalStudiesUpdateComponent }  from './no-formal-studies-update.component';
 
 import { AcademicEducationService } from '../_services/academic-education.service';
-import { CitiesServices } from '../_services/cities.service';
 import { InstituteServices } from '../_services/institute.service';
 import { StudyLevelServices } from '../_services/study-level.service';
 import { StudyAreaServices } from '../_services/study-area.service';
@@ -44,7 +43,7 @@ import {SharedModule} from "../shared/shared.module";
                     NoFormalStudiesDetailComponent
                     ],
     bootstrap:    [FormalStudiesComponent],
-    providers:    [AcademicEducationService, CitiesServices, StudyLevelServices, StudyAreaServices, StudyStateServices,
+    providers:    [AcademicEducationService, StudyLevelServices, StudyAreaServices, StudyStateServices,
                   InstituteServices, StudyTypeServices, StudyIntensityServices],
     exports: 	  [FormalStudiesComponent,NoFormalStudiesComponent]
 })

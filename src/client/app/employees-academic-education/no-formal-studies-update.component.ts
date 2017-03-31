@@ -8,7 +8,6 @@ import {Message, ConfirmationService} from 'primeng/primeng';
 import * as moment from 'moment/moment';
 import {StudyLevelServices} from '../_services/study-level.service';
 import {StudyAreaServices} from '../_services/study-area.service';
-import {CitiesServices} from '../_services/cities.service';
 import {StudyTypeServices} from '../_services/study-type.service';
 import {StudyIntensityServices} from '../_services/study-intensity.service';
 import {StudyLevels} from "../_models/studyLevels";
@@ -48,7 +47,6 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
   //hace falta definir acceso a constantes en servicio
 
   constructor(private academicEducationService: AcademicEducationService,
-              private citiesServices: CitiesServices,
               private studyLevelServices: StudyLevelServices,
               private studyAreaServices: StudyAreaServices,
               private studyTypeServices: StudyTypeServices,
