@@ -49,7 +49,7 @@ export class LocationsComponent implements OnInit {
 
   submitted: boolean;
   msgs: Message[] = [];
-  badSelect: boolean = false;
+  badSelect: boolean = true;
 
   constructor(
     private location: Location,
@@ -94,7 +94,8 @@ export class LocationsComponent implements OnInit {
       this.localizacion.idDivisionPolitica = this.localizacion.locacion.idDivisionPolitica;
       this.create.emit(this.localizacion);
     } else {
-      this.badSelect = false;
+      this.badSelect = true;
+      this.localizacion.locacion = null;
     }
   }
 
@@ -108,7 +109,7 @@ export class LocationsComponent implements OnInit {
     this.localizacion.locacion.idDivisionPolitica = event.idDivisionPolitica;
     this.localizacion.locacion.camino = event.camino;
     this.localizacion.idDivisionPolitica = event.idDivisionPolitica;
-    this.badSelect = true;
+    this.badSelect = false;
     this.composeAddress();
   }
 
