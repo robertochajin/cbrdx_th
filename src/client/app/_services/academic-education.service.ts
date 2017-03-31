@@ -38,8 +38,8 @@ export class AcademicEducationService {
     return this.http.get(this.masterService + 'buscarId/' + id, {headers: this.headers}).map((res: Response) => res.json() as FormalStudies)
   }
 
-  getAllNoFormal() {
-    return this.http.get(this.NFmasterService + '', {headers: this.headers}).map((res: Response) => res.json());
+  getAllNoFormalByEmployee(id: number) {
+    return this.http.get(this.NFmasterService + 'buscarTercero/' + id, {headers: this.headers}).map((res: Response) => res.json());
   }
 
   addNoFormal(f: Noformalstudies) {
@@ -47,16 +47,13 @@ export class AcademicEducationService {
   };
 
   updateNoFormal(f: Noformalstudies) {
-    return this.http.put(this.NFmasterService + '/', JSON.stringify(f), {headers: this.headers}).map((res: Response) => res.json());
+    return this.http.put(this.NFmasterService, JSON.stringify(f), {headers: this.headers}).catch(this.handleError);
   }
 
   getNoFormal(id: number) {
-    return this.http.get(this.NFmasterService + '/' + id, {headers: this.headers}).map((res: Response) => res.json() as Noformalstudies);
+    return this.http.get(this.NFmasterService + 'buscarId/' + id, {headers: this.headers}).map((res: Response) => res.json() as Noformalstudies);
   }
 
-  deleteNoFormal(f: Noformalstudies) {
-    return this.http.delete(this.NFmasterService + '/' + f.idEstudio).map((res: Response) => res.json());
-  }
 
   handleError(error: any): Promise<any> {
     console.error('Error:', error);
