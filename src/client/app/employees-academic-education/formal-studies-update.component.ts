@@ -130,7 +130,7 @@ export class FormalStudiesUpdateComponent implements OnInit {
   onSubmit(value: string) {
     this.submitted = true;
     if (this.selectedCity !== undefined && this.selectedCity.idDivisionPolitica !== undefined) {
-      if (this.selectedInstitute != undefined && this.selectedInstitute.idListaInstitucion != undefined) {
+      if (this.fstudy.otraInstitucion !== '' || (this.selectedInstitute != undefined && this.selectedInstitute.idListaInstitucion != undefined)) {
         this.msgs = [];
         this.fstudy.idCiudad = this.selectedCity.idDivisionPolitica;
         this.fstudy.idTercero = this.idTercero;

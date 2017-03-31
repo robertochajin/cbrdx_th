@@ -22,7 +22,7 @@
           <p-autoComplete placeholder="Buscar barrio" field="camino" name="barrio" id="barrio" [(ngModel)]="localizacion.locacion"
                           #barrio="ngModel" [suggestions]="hoodList" required="true" (completeMethod)="hoodSearch($event)" (onSelect)="captureHoodId($event)">
           </p-autoComplete>
-          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !badSelect">
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && badSelect">
             <i class="fa fa-close"></i> Barrio es requerido
           </div>
         </div>

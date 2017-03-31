@@ -46,7 +46,7 @@
                             [(ngModel)]="selectedInstitute" [suggestions]="instituteList"
                             (completeMethod)="instituteSearch($event)" (onSelect)="captureInstituteId($event)" >
             </p-autoComplete>
-            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && wrongInstitute">
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && wrongInstitute && (otraInstitucion.value === undefined || otraInstitucion.value === '')">
               Institución es requerido
             </div>
           </div>
