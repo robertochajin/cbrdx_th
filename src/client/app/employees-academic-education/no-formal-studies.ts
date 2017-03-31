@@ -2,25 +2,48 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Noformalstudies {
-  public idEstudio?: string;
-  public areaEstudio?: {value: number, label: string};
-  public titulo?: string;
-  public institucion?: string;
-  public ciudad: {value: number, label: String};
-  public estadoEstudio?: {value: number, label: String};
-  public ingreso?: string;
-  public finalizacion?: string;
-  public tipoEstudio?:  {value: number, label: String};
-  public otroTipoEstudio?: string;
-  public intensidad?: {value: number, label: String};
-  public descripcion?: string;
-  public confirmada?: string;
-
-  constructor() {
-    this.areaEstudio = {value: null, label: ''};
-    this.ciudad = {value: null, label: ''};
-    this.estadoEstudio = {value: null, label: ''};
-    this.tipoEstudio = {value: null, label: ''};
-    this.intensidad = {value: null, label: ''};
+  public idTerceroEstudioNoFormal: number;
+  public idTercero: number;
+  public idTipoEstudio: number;
+  public tipoEstudio: string;
+  public otroEstudio: string;
+  public idAreaEstudio: number;
+  public areaEstudio: string;
+  public tituloEstudio: string;
+  public institucion: string;
+  public idIntensidadHoraria: number;
+  public intensidadHoraria: string;
+  public descripcion: string;
+  public idCiudad: number;
+  public ciudad: string;
+  public indicadorTerminacion: boolean;
+  public fechaIngresa: string;
+  public fechaTermina: string;
+  public fechaVerificado: string;
+  public idAdjunto: number;
+  public indicadorHabilitado: boolean;
+  public indicadorVerificado: boolean;
+  public auditoriaUsuario: number;
+  public auditoriaFecha: string;
+  
+  constructor(){
+    this.auditoriaFecha = "";
+    this.auditoriaUsuario = 1;
+    this.descripcion = "";
+    this.fechaIngresa = "";
+    this.fechaTermina = "";
+    this.fechaVerificado ="";
+    this.idAdjunto = 0;
+    this.idAreaEstudio = 0;
+    this.idCiudad = 0;
+    this.idIntensidadHoraria = 0;
+    this.idTercero = 0;
+    this.idTipoEstudio = 0;
+    this.indicadorHabilitado = true;
+    this.indicadorTerminacion = true;
+    this.indicadorVerificado = false;
+    this.institucion = "";
+    this.otroEstudio = "";
+    this.tituloEstudio = "";
   }
 }

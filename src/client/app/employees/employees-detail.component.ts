@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
+import { ActivatedRoute, Params, Router }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import { EmployeesService }         from '../_services/employees.service';
 import { Employee }                 from '../_models/employees';
@@ -13,13 +13,15 @@ import {NavService}                 from '../_services/_nav.service';
 
 
 export class EmployeesDetailComponent implements OnInit   {
-    employee: Employee;
+    @Input()
+    employee: Employee = new Employee();
     acordion:number;
     constructor(
         private employeeService: EmployeesService,
         private route: ActivatedRoute,
         private location: Location,
-        private _nav:NavService
+        private _nav:NavService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
@@ -30,16 +32,14 @@ export class EmployeesDetailComponent implements OnInit   {
             this.employee.segundoNombre+' '+
             this.employee.primerApellido+' '+
             this.employee.segundoApellido;
-
-            this.employee.nacionalidad = 'cargando...';
-
-            if( this.employee.ciudadExpDocumento === null ) this.employee.ciudadExpDocumento='';
-            if( this.employee.ciudadNacimiento === null ) this.employee.ciudadNacimiento='';
-            if( this.employee.genero === null ) this.employee.genero='';
-            if( this.employee.estadoCivil === null ) this.employee.estadoCivil='';
-            if( this.employee.lateralidad === null ) this.employee.lateralidad='';
-            if( this.employee.nivelEducacion === null ) this.employee.nivelEducacion='';
-            if( this.employee.profesion === null ) this.employee.profesion='';
+		  //
+          //   if( this.employee.ciudadExpDocumento === null ) this.employee.ciudadExpDocumento='';
+          //   if( this.employee.ciudadNacimiento === null ) this.employee.ciudadNacimiento='';
+          //   if( this.employee.genero === null ) this.employee.genero='';
+          //   if( this.employee.estadoCivil === null ) this.employee.estadoCivil='';
+          //   if( this.employee.lateralidad === null ) this.employee.lateralidad='';
+          //   if( this.employee.nivelEstudio === null ) this.employee.nivelEstudio='';
+          //   if( this.employee.profesion === null ) this.employee.profesion='';
 
             // this.route.params.subscribe((params: Params) => {
             //   this.employeeService.getCargoActual(+params['id']).subscribe(c => {
@@ -62,6 +62,10 @@ export class EmployeesDetailComponent implements OnInit   {
     onTabShow(e:any) {
       this._nav.setTab(e.index);
       this.acordion = this._nav.getTab();
+    }
+  
+    update(id: number) {
+      this.router.navigate(['employees/update/'+id]);
     }
 
 }

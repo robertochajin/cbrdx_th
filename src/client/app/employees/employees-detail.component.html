@@ -16,8 +16,8 @@
         </div>
         <div class="col-md-8">
           <h4>{{employee.nombreCompleto}} - {{employee.fechaNacimiento}}</h4>
-          <span>{{employee.tipoDocumento}} {{employee.numeroDocumento}}</span><br/>
-          <span>{{employee.cargoActual}} - Contabilidad ({{employee.fechaCreacion}})</span>
+          <span>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</span><br/>
+          <span>{{employee.cargoActual}}({{employee.fechaCreacion}})</span>
         </div>
         <div class="col-md-2">
           <a href="#" class="btn btn-primary">Historial Laboral</a>
@@ -37,8 +37,7 @@
                       <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.fechaDocumento}}</strong></label>
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Ciudad de Exp.:</label>
-                      <label
-                        class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.ciudadExpDocumento}}</strong></label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.ciudadExpDocumento}}</strong></label>
 
                     </div>
                     <div class="row">
@@ -51,7 +50,7 @@
                     </div>
                     <div class="row">
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nacionalidad:</label>
-                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.nacionalidad}}</strong></label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.gentilicio}}</strong></label>
 
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Genero:</label>
                       <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.genero}}</strong></label>
@@ -69,17 +68,23 @@
                       <label class="col-md-3 col-sm-6 col-xs-12 control-label">Numero de Hijos:</label>
                       <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.nroHijos}}</strong></label>
 
-                      <label class="col-md-3 col-sm-6 col-xs-12 control-label">Lateralidad:</label>
-                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.lateralidad}}</strong></label>
+                      <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nivel Educativo:</label>
+                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.nivelEstudio}}</strong></label>
 
                     </div>
                     <div class="row">
-                      <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nivel Educativo:</label>
-                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.nivelEducacion}}</strong></label>
+                      <!--<label class="col-md-3 col-sm-6 col-xs-12 control-label">Lateralidad:</label>-->
+                      <!--<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.lateralidad}}</strong></label>-->
 
-                      <label class="col-md-3 col-sm-6 col-xs-12 control-label">Profesión:</label>
-                      <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.profesion}}</strong></label>
+                      <!--<label class="col-md-3 col-sm-6 col-xs-12 control-label">Profesión:</label>-->
+                      <!--<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.profesion}}</strong></label>-->
 
+                    </div>
+                    <div class="row form-footer-buttons">
+                      <div class="form-group col-md-12">
+                        <button type="button" icon="fa-pencil" label="Editar" class="ui-button-success"
+                                pButton (click)="update(employee.idTercero)"></button>
+                      </div>
                     </div>
                   </div>
                 </fieldset>
@@ -91,16 +96,16 @@
             </p-accordionTab>
 
             <p-accordionTab header="Ubicación" [selected]="acordion == 2">
-              <employees-locations *ngIf="employee.idTercero" [colaborador]="employee"></employees-locations>
+              <!--<employees-locations *ngIf="employee.idTercero" [colaborador]="employee"></employees-locations>-->
             </p-accordionTab>
 
             <p-accordionTab header="Formación Academica" [selected]="acordion == 3">
               <academic-education-formal *ngIf="employee.idTercero" [employee]="employee"></academic-education-formal>
-              <!--<academic-education-no-formal></academic-education-no-formal>-->
+              <academic-education-no-formal *ngIf="employee.idTercero" [employee]="employee"></academic-education-no-formal>
             </p-accordionTab>
 
             <p-accordionTab header="Experiencia Laboral" [selected]="acordion == 4">
-              <!--  <work-experience ></work-experience>-->
+               <work-experience *ngIf="employee.idTercero" [employee]="employee"></work-experience>
             </p-accordionTab>
 
             <p-accordionTab header="Referencias" [selected]="acordion == 5 ">

@@ -1,9 +1,8 @@
-
-import {Component} from '@angular/core';
+import {Component,OnInit,Input} from '@angular/core';
 import {Router} from '@angular/router';
-
-import {Workexperience} from './work-experience';
-import {WorkExperienceService} from './work-experience.service';
+import { Employee } from '../_models/employees';
+import {Workexperience} from '../_models/work-experience';
+import {WorkExperienceService} from '../_services/work-experience.service';
 import {Observable} from 'rxjs/Observable';
 import {ConfirmationService} from 'primeng/primeng';
 
@@ -13,8 +12,8 @@ import {ConfirmationService} from 'primeng/primeng';
     selector: 'work-experience',
     providers:  [ConfirmationService]
 })
-export class WorkExperienceComponent {
-
+export class WorkExperienceComponent implements OnInit{
+   @Input() employee:Employee;
     experience: Workexperience = new Workexperience();
     dialogObjet: Workexperience = new Workexperience();
     experiences: Workexperience[];
@@ -24,7 +23,8 @@ export class WorkExperienceComponent {
                 private confirmationService: ConfirmationService) {}
 
     ngOnInit() {
-        this.workExperienceService.getAll().subscribe(
+        this.workExperienceService.getByEmployee(this.employee.idTercero).subscribe(
+        //this.workExperienceService.getByEmployee(11).subscribe(
             fstudies => this.experiences = fstudies
         );
     }
@@ -36,9 +36,11 @@ export class WorkExperienceComponent {
             header: 'Corfirmación',
             icon: 'fa fa-question-circle',
             accept: () => {
-                this.workExperienceService.delete( this.dialogObjet);
-                this.experiences.splice(this.experiences.indexOf( this.dialogObjet), 1);
-                this.dialogObjet = null;
+                this.dialogObjet.indicadorHabilitado = false;
+                this.workExperienceService.update(this.dialogObjet).subscribe( r => {
+                  this.experiences.splice(this.experiences.indexOf(this.dialogObjet), 1);
+                  this.dialogObjet = null;
+                });
             },
             reject: () => {
                 this.dialogObjet = null;
@@ -47,14 +49,14 @@ export class WorkExperienceComponent {
     }
 
     detail(f: Workexperience) {
-        this.router.navigate(['employees-work-experience/detail/'+f.idExperiencia]);
+        this.router.navigate(['employees-work-experience/detail/'+f.idTerceroExperienciaLaboral]);
     }
 
     add() {
-        this.router.navigate(['employees-work-experience/add']);
+        this.router.navigate(['employees-work-experience/add/'+this.employee.idTercero]);
     }
 
     update(f: Workexperience) {
-        this.router.navigate(['employees-work-experience/update/'+f.idExperiencia]);
+        this.router.navigate(['employees-work-experience/update/'+f.idTerceroExperienciaLaboral]);
     }
 }

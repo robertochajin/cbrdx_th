@@ -134,7 +134,7 @@ const routes = [
 
     //Experiencia laboral
   {path: 'employees-work-experience', component: WorkExperienceComponent, canActivate: [AuthGuard]},
-  {path: 'employees-work-experience/add', component: WorkExperienceAddComponent, canActivate: [AuthGuard]},
+  {path: 'employees-work-experience/add/:tercero', component: WorkExperienceAddComponent, canActivate: [AuthGuard]},
   {path: 'employees-work-experience/detail/:id', component: WorkExperienceDetailComponent, canActivate: [AuthGuard]},
   {path: 'employees-work-experience/update/:id', component: WorkExperienceUpdateComponent, canActivate: [AuthGuard]},
 
