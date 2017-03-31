@@ -51,7 +51,7 @@ export class Employee {
   public telefonoCelular: string;
   public imagen?  : string;
   public cargoActual? : string;
-  public nacionalidad?  : string;
+  public gentilicio?  : string;
   public fechaDefuncion? : string;
   public indicadorVivo : boolean;//eje: (true, false)
   public indicadorHabilitado : boolean;//eje: (true, false)
@@ -65,8 +65,8 @@ export class Employee {
   
 
   constructor() {
-    this.nombreCompleto = '';
-    this.nacionalidad = '';
+    this.nombreCompleto = this.primerNombre+' '+ this.segundoNombre+' '+ this.primerApellido+' '+ this.segundoApellido;
+    this.gentilicio = '';
     this.cargoActual = '';
     this.genero = '';
     this.razonSocial = '';
@@ -97,6 +97,7 @@ export class Employee {
     this.imagen = "";
     this.imc = 0;
     this.indicadorVivo = true;
+    this.indicadorHabilitado = true;
     this.nroHijos = 0,
     this.numeroDocumento = "";
     this.peso = 0;

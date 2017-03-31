@@ -78,7 +78,7 @@ export class EmployeesAddComponent {
           this.employee.idTipoPersona = this.personTypes[0].value;
         });
         this.listEmployeesService.getDocumentTypes().subscribe(res => {
-          this.personTypes.push({label: "Seleccione", value: null});
+          this.documentTypes.push({label: "Seleccione", value: null});
             for (let dp of res) {
                 this.documentTypes.push({
                   label: dp.nombreListaTipoDocumento,
@@ -351,7 +351,6 @@ export class EmployeesAddComponent {
                   value: dp.idActividadEconomica
                 });
             }
-            this.employee.idActividadEconomica = this.activities[0].value;
         });
     }
     
