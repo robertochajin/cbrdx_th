@@ -1,6 +1,3 @@
-/**
- * Created by Jenniferth Escobar - Felipe Aguirre on 9/03/2017.
- */
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {ActividadEconomica} from "../_models/actividadEconomica";
@@ -24,7 +21,7 @@ export class ActividadEconomicaComponent implements OnInit {
     activityTypes: ActividadEconomicaTipos[] = [];
     treeActividadEconomica: any[] = [];
     treeselected: TreeNode;
-    selectedNode: any;
+    selectedNode: Tree;
     tabselected: number = 1;
     labeltabselected: string;
     header: string;
@@ -275,7 +272,7 @@ export class ActividadEconomicaComponent implements OnInit {
     }
 
     getTypebyCodigo(id: string) {
-        let nameactividadEconomica: string = '';
+        let nameactividadEconomica: string = "";
         for (let c of  this.activityTypes.filter(t => t.codigoActividadTipo.toString() == id)) {
             nameactividadEconomica = c.descripcionActividadTipo;
         }
@@ -416,4 +413,12 @@ export class ActividadEconomicaComponent implements OnInit {
         }
         node.children = ocupacionesNivel;
     }
+}
+class Tree {
+  value: number;
+  label: string;
+  level: number;
+  codigo: string;
+  expanded:boolean;
+  children: Tree[];
 }
