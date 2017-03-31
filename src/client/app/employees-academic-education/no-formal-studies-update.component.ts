@@ -205,5 +205,15 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
       }
     });
   }
+  changeTipoestudio(event:any) {
+    if (this.nfstudy.idTipoEstudio !== null) {
+      this.nfstudy.otroEstudio = '';
+    }
+  }
+  removeEstudio() {
+    if (this.nfstudy.otroEstudio !== '') {
+      this.nfstudy.idTipoEstudio = null;
+    }
+  }
 
 }
