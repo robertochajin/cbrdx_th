@@ -56,6 +56,10 @@ export class ListEmployeesService {
     return this.http.get(this.serviceURL+"listasNivelesCargos/enabled/",{headers: this.headers}).map((res:Response) => res.json());
   }
   
+  getTerType(val:string)  {
+    return this.http.get(this.serviceURL+"listasTiposTerceros/buscarCodigo/"+val+"/",{headers: this.headers}).map((res:Response) => res.json());
+  }
+  
   handleError(error: any): Promise<any> {
     console.error('Error:', error);
     return Promise.reject(error.message || error);

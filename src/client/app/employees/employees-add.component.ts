@@ -56,6 +56,7 @@ export class EmployeesAddComponent {
     expeditionDate: string;
     birthDate: string;
     deathDate: string;
+    idTipoTercero: number;
 
     constructor(
         private employeesService: EmployeesService,
@@ -181,6 +182,11 @@ export class EmployeesAddComponent {
             }
           this.employee.idOcupacion = this.occupations[0].value;
         });
+  
+      this.listEmployeesService.getTerType("TERCOL").subscribe(
+       res => {
+         this.idTipoTercero = res.idListaTipoTercero
+       });
 
   
   
@@ -237,7 +243,7 @@ export class EmployeesAddComponent {
               let mom3: moment.Moment = moment(this.deathDate, 'MM/DD/YYYY');
               this.employee.fechaDefuncion = mom3.format('YYYY-MM-DD');
             }
-    
+            this.employee.idTipoTercero = this.idTipoTercero;
     
             this.employeesService.add(this.employee)
               .subscribe(data => {
