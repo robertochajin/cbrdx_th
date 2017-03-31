@@ -126,8 +126,12 @@ export class FormalStudiesAddComponent implements OnInit {
         }
         let fi: moment.Moment = moment(this.fstudy.fechaIngresa, 'MM/DD/YYYY');
         this.fstudy.fechaIngresa = fi.format('YYYY-MM-DD');
-        let ff: moment.Moment = moment(this.fstudy.fechaTermina, 'MM/DD/YYYY');
-        this.fstudy.fechaTermina = ff.format('YYYY-MM-DD');
+        if (this.fstudy.idEstado === this.id_estado_estudio_finalizado) {
+          let ff: moment.Moment = moment(this.fstudy.fechaTermina, 'MM/DD/YYYY');
+          this.fstudy.fechaTermina = ff.format('YYYY-MM-DD');
+        }else{
+          this.fstudy.fechaTermina = null;
+        }
         this.academicEducationService.addFormal(this.fstudy)
           .subscribe(
             data => {

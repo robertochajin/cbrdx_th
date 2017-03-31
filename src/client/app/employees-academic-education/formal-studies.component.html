@@ -14,7 +14,12 @@
         <p-column field="fechaIngresa" header="Ingreso " [sortable]="true"></p-column>
         <p-column field="fechaTermina" header="Finalización" [sortable]="true"></p-column>
         <p-column field="ciudad" header="Ciudad" [sortable]="true"></p-column>
-        <p-column field="institucion" header="Institución" [sortable]="true"></p-column>
+        <p-column  header="Institución" [sortable]="true">
+          <template let-const="rowData" pTemplate="body">
+            <p *ngIf="const.idInstitucion == null">{{const.otraInstitucion}}</p>
+            <p *ngIf="const.idInstitucion != null">{{const.institucion}}</p>
+          </template>
+        </p-column>
         <p-column field="indicadorVerificado" header="Confirmada" [sortable]="true"></p-column>
         <p-column header="Acciones" styleClass="datatable-col-action">
             <template let-fstudy="rowData" pTemplate="body">
