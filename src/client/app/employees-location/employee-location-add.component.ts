@@ -92,6 +92,7 @@ export class LocationAddComponent implements OnInit {
     this.finalAddress = this.localizacion.direccion;
     this.selectedAddressType = this.localizacion.idTipoDireccion;
     this.selectedPrincipalNomenclature = this.localizacion.nomenclaturaPrincipal;
+    this.focusUP();
   }
 
   createLocation() {
@@ -184,7 +185,8 @@ export class LocationAddComponent implements OnInit {
     }
 
     for (let c of this.complementaries) {
-      this.finalAddress += c.tipo + ' ' + c.detalle + ' ';
+      if (c.tipo != null)
+        this.finalAddress += c.tipo + ' ' + c.detalle + ' ';
     }
 
     if (this.localizacion.locacion !== undefined && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined) {
@@ -199,6 +201,7 @@ export class LocationAddComponent implements OnInit {
 
   removeComplementary(id: any): void {
     this.complementaries.splice(id, 1);
+    this.composeAddress
   }
 
   // discard(): void {
@@ -222,7 +225,7 @@ export class LocationAddComponent implements OnInit {
   }
 
   focusUP() {
-    const element = document.querySelector("#formulario");
+    const element = document.querySelector("#formlocalizacion");
     if (element) { element.scrollIntoView(element); }
   }
 
