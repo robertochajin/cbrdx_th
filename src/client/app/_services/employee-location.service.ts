@@ -6,8 +6,8 @@ import { Employee } from "../_models/employees";
 @Injectable()
 export class LocationService {
 
-  // private serviceURL = '<%= SVC_TH_URL %>';
-  private serviceURL = 'http://localhost:8448';
+  private serviceURL = '<%= SVC_TH_URL %>';
+  // private serviceURL = 'http://localhost:8448';
 
   constructor(private http: Http) {
   }
