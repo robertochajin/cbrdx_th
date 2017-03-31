@@ -9,6 +9,9 @@ import { LocationDetailComponent }  from './employee-location-detail.component';
 import { LocationAddComponent }  from './employee-location-add.component';
 import { LocationUpdateComponent }  from './employee-location-update.component';
 import { LocationService } from '../_services/employee-location.service';
+// import { LocationsComponent }  from '../locations/locations.component';
+// import {SharedModule} from "../shared/shared.module";
+
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,
     AutoCompleteModule, DropdownModule,
   MessagesModule,
@@ -29,12 +32,14 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
                     AutoCompleteModule,
                     DropdownModule,
                     MessagesModule,
-                    ConfirmDialogModule
+                    ConfirmDialogModule,
+                    // SharedModule
     ],
     declarations: [LocationComponent,
                    LocationDetailComponent,
                    LocationAddComponent,
-                   LocationUpdateComponent
+                   LocationUpdateComponent,
+                //    LocationsComponent
                     ],
     bootstrap:    [LocationComponent],
     providers:    [LocationService],
