@@ -169,7 +169,7 @@ export class WorkExperienceUpdateComponent {
   }
   
   focusUP() {
-    const element = document.querySelector('#WEformulario');
+    const element = document.querySelector('#formulario');
     if (element) { element.scrollIntoView(element); }
   }
   
