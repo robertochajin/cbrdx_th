@@ -7,7 +7,6 @@ import { ReferencesService } from './references.service';
 import { SelectItem, Message, ConfirmDialog, ConfirmationService } from 'primeng/primeng';
 
 import { ReferencesTypesService } from '../_services/references-type.service';
-import { CitiesServices } from '../_services/cities.service';
 import { LocateService } from '../_services/locate.service';
 import { NavService } from '../_services/_nav.service';
 import { Localizaciones } from "../_models/localizaciones";

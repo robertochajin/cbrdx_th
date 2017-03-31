@@ -101,7 +101,7 @@
 
             <p-accordionTab header="Formación Academica" [selected]="acordion == 3">
               <academic-education-formal *ngIf="employee.idTercero" [employee]="employee"></academic-education-formal>
-              <!--<academic-education-no-formal></academic-education-no-formal>-->
+              <academic-education-no-formal *ngIf="employee.idTercero" [employee]="employee"></academic-education-no-formal>
             </p-accordionTab>
 
             <p-accordionTab header="Experiencia Laboral" [selected]="acordion == 4">
