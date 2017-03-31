@@ -66,7 +66,8 @@ export class LocationUpdateComponent implements OnInit {
       this.idTercero = +params['tercero'];
       this.locateService.getById(+params['id']).subscribe(localizacion => {
         this.localizacion = localizacion;
-        this.selectedPrincipalNomenclature = localizacion.nomenclaturaPrincipal;
+        this.selectedAddressType = this.localizacion.idTipoDireccion;
+        this.selectedPrincipalNomenclature = this.localizacion.nomenclaturaPrincipal;
         this.finalAddress = localizacion.direccion;
         this.localizacion.locacion = { camino: '', idDivisionPolitica: null };
         this.politicalDivisionService.getLocation(localizacion.idDivisionPolitica).subscribe(ciudad => {
@@ -93,6 +94,8 @@ export class LocationUpdateComponent implements OnInit {
         this.addressTypeList = addressTypeList;
         this.addressTypeList.unshift({ label: 'Seleccione', value: null });
       });
+
+      this.focusUP();
   }
 
   createLocation() {
@@ -177,7 +180,8 @@ export class LocationUpdateComponent implements OnInit {
     }
 
     for (let c of this.complementaries) {
-      this.finalAddress += c.tipo + ' ' + c.detalle + ' ';
+      if (c.tipo != null)
+        this.finalAddress += c.tipo + ' ' + c.detalle + ' ';
     }
 
     if (this.localizacion.locacion !== undefined && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined) {
@@ -192,6 +196,7 @@ export class LocationUpdateComponent implements OnInit {
 
   removeComplementary(id: any): void {
     this.complementaries.splice(id, 1);
+    this.composeAddress
   }
 
   // discard(): void {
@@ -214,7 +219,7 @@ export class LocationUpdateComponent implements OnInit {
   }
 
   focusUP() {
-    const element = document.querySelector("#formulario");
+    const element = document.querySelector("#formlocalizacion");
     if (element) { element.scrollIntoView(element); }
   }
 
