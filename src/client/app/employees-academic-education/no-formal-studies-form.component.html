@@ -20,15 +20,16 @@
               <div class="ui-grid-col-6">
                   <label for="tipoEstudio">Tipo de Estudio</label>
                   <p-dropdown name="tipoEstudio" id="tipoEstudio" #tipoEstudio="ngModel" [required]="otroTipoEstudio.value === '' || otroTipoEstudio.value === null"
-                              [autoWidth]="false" [(ngModel)]="nfstudy.idTipoEstudio" [options]="studyTypeList"></p-dropdown>
+                              [autoWidth]="false" [(ngModel)]="nfstudy.idTipoEstudio" [options]="studyTypeList" (onChange)="changeTipoestudio($event)"
+                  ></p-dropdown>
                   <div class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !tipoEstudio.valid">
                     Tipo de Estudios es requerido
                   </div>
               </div>
               <div class="ui-grid-col-6">
                   <label for="otroTipoEstudio">Otro Tipo de Estudio</label>
-                  <input id="otroTipoEstudio" pInputText type="text" name="otroTipoEstudio" #otroTipoEstudio="ngModel"
-                         [(ngModel)]="nfstudy.otroEstudio" #otroTipoEstudio="ngModel" [required]="tipoEstudio.value === null"  />
+                  <input id="otroTipoEstudio" pInputText type="text" name="otroTipoEstudio" #otroTipoEstudio="ngModel" (change)="removeEstudio()"
+                         [(ngModel)]="nfstudy.otroEstudio" #otroTipoEstudio="ngModel" [required]="tipoEstudio.value === null" />
                   <div  class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !otroTipoEstudio.valid" >
                       Otro Tipo de Estudio es requerido
                   </div>

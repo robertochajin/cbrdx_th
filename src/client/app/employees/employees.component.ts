@@ -16,7 +16,7 @@ export class EmployeesComponent {
     dialogObjet: Employee = new Employee();
 
     employees: Employee[];
-
+    codigoTipo: number;
     constructor(
         private employeesService: EmployeesService,
         private router: Router,
@@ -25,7 +25,7 @@ export class EmployeesComponent {
     }
 
     ngOnInit() {
-        this.employeesService.getAll().subscribe(
+        this.employeesService.getByTipo("TERCOL").subscribe(
             employees => {
               this.employees = employees;
               this.employees.forEach(e => {
