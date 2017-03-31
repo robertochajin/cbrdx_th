@@ -1,5 +1,5 @@
 <div class="ui-grid-row">
-  <div class="col-md-6 col-xs-12 " style="text-align: left"><label>Ultima vez que ingresó: </label>
+  <div class="col-md-6 col-xs-12 " style="text-align: left"><label>{{ 'LBL_ULTIMOINGRESO' | translate:param }}: </label>
   </div>
   <div class="col-md-6 col-xs-12 ">
     <button class=" pull-right" (click)="displayDialog=true" type="button" pButton icon="fa-plus" label="Configurar Widgets"></button>
@@ -29,7 +29,7 @@
         <p-panel>
           <p-header>
             <div class="ui-helper-clearfix">
-              <span class="ui-panel-title">Usuarios Activos /Inactivos</span>
+              <span class="ui-panel-title">{{ 'LBL_USUARIOS' | translate:param }} {{ 'LBL_ACTIVO' | translate:param }}/{{ 'LBL_INACTIVO' | translate:param }}</span>
               <button class="pull-right" type="text" (click)="usuariosAct = !usuariosAct" icon=""><i class="fa fa-close"></i></button>
               <!--<input pButton=""  [style]="{'float':'right'}" label="Save" icon="fa-check" (onClick)="save()" [model]="items"></input>-->
             </div>
@@ -37,14 +37,14 @@
           <div class="ui-grid-row ">
             <div class="col-md-7"><img class="thumbnail img-responsive"
                                        src="http://es.seaicons.com/wp-content/uploads/2015/09/Accept-Male-User-icon.png"
-                                       width="60" height="60"><label>Usuarios Activos</label></div>
+                                       width="60" height="60"><label>{{ 'LBL_USUARIOS' | translate:param }} {{ 'LBL_ACTIVO' | translate:param }}</label></div>
             <div class="col-md-5"><h1>{{usuariosActivos}}</h1></div>
           </div>
           <hr>
           <div class="ui-grid-row">
             <div class="col-md-7"><img class="thumbnail img-responsive"
                                        src="http://icon-icons.com/icons2/20/PNG/256/delete_delete_deleteusers_delete_male_user_maleclient_2348.png"
-                                       width="60" height="60"><label>Usuarios Inactivos</label></div>
+                                       width="60" height="60"><label>{{ 'LBL_USUARIOS' | translate:param }} {{ 'LBL_INACTIVO' | translate:param }} </label></div>
             <div class="col-md-5"><h1 >{{usuariosInactivos}}</h1></div>
           </div>
           <div class="pull-right"><a (click)="user()" class="verMás">Ver Más</a></div>
