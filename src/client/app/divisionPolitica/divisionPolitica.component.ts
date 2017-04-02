@@ -1,7 +1,3 @@
-/**
- * Created by Felipe Aguirre - Jenniferth Escobar on 03/02/2017.
- */
-
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {DivisionPoliticaService} from "../_services/divisionPolitica.service";
@@ -488,7 +484,6 @@ export class DivisionPoliticaComponent implements OnInit {
         }else{
             if(this.selectedNode.children) {
                 this.selectedNode.children.forEach( childNode => {
-                    console.info(childNode);
                     if (childNode.data.idDivisionPolitica == id) {
                         childNode.expanded = true;
                         if(tipo != 4){

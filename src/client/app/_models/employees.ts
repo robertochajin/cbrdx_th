@@ -62,6 +62,7 @@ export class Employee {
   public idOcupacion : number; //eje: (Comercial,)
   public idSectorEconomico : number;
   public idActividadEconomica : number;
+  public idTipoTercero : number;
   
 
   constructor() {
@@ -93,6 +94,7 @@ export class Employee {
     this.idTipoOcupacion = null;
     this.idTipoPersona = null;
     this.idTipoVivienda = null;
+    this.idTipoTercero = null;
     this.idVehiculo = null;
     this.imagen = "";
     this.imc = 0;

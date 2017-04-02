@@ -9,6 +9,7 @@ export class LocateService {
   public headers = new Headers({'Content-Type': 'application/json'});
 
   private masterService = '<%= SVC_TH_URL %>/api/localizaciones/';
+  // private masterService = 'http://localhost:8448/api/localizaciones';
   private detailService  = '<%= SVC_TH_URL %>/api/localizaciones/';
 
   constructor(private http: Http,

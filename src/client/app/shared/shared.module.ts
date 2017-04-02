@@ -15,8 +15,8 @@ import { TranslateService, TranslateModule } from 'ng2-translate';
 
 @NgModule({
   imports: [CommonModule, RouterModule],
-  declarations: [ToolbarComponent, NavbarComponent,BreadcrumbComponent],
-  exports: [ToolbarComponent, NavbarComponent,BreadcrumbComponent,
+  declarations: [ToolbarComponent, NavbarComponent],
+  exports: [ToolbarComponent, NavbarComponent,
     CommonModule, FormsModule, RouterModule,TranslateModule]
 })
 export class SharedModule {

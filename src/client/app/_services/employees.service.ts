@@ -18,6 +18,9 @@ export class EmployeesService {
     getAll()  {
         return this.http.get(this.serviceURL+'vterceros').map((res:Response) => res.json());
     }
+    getByTipo(type:string)  {
+        return this.http.get(this.serviceURL+'vterceros/buscarTerceros/'+type+"/").map((res:Response) => res.json());
+    }
 
     add(c: Employee) {
         return this.http.post(this.serviceURL+'terceros',c).map((res:Response) => res.json());
@@ -42,6 +45,10 @@ export class EmployeesService {
     delete(c: Employee) {
         const respuesta =  this.http.delete(this.serviceURL+'/'+ c.idTercero);
         return respuesta.map((res:Response) => res.json());
+    }
+  
+    validateDocument(c: Employee) {
+      return this.http.get(this.serviceURL+'terceros/'+ c.numeroDocumento+'/'+c.idTipoDocumento+'/').map((res:Response) => res.json() as Employee);
     }
 
 }

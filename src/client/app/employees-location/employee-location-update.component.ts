@@ -1,13 +1,15 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
 import { LocationService } from '../_services/employee-location.service';
+import { LocateService } from '../_services/locate.service';
 import { EmployeesLocation } from '../_models/employee-location';
+import { Localizaciones } from '../_models/localizaciones';
 import { SelectItem, ConfirmationService, Message } from 'primeng/primeng';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 declare let google: any;
 import { NavService } from '../_services/_nav.service';
-import {PoliticalDivisionService} from "../_services/political-division.service";
+import { PoliticalDivisionService } from "../_services/political-division.service";
 
 @Component({
   moduleId: module.id,
@@ -18,23 +20,21 @@ import {PoliticalDivisionService} from "../_services/political-division.service"
 
 export class LocationUpdateComponent implements OnInit {
 
-  @Input()
-  employLocation: EmployeesLocation = new EmployeesLocation();
+  // @Input()
+  // employLocation: Localizaciones = new Localizaciones();
   header: string = 'Editando Ubicación';
 
+  localizacion: Localizaciones = new Localizaciones();
+  terceroLocalizacion: EmployeesLocation = new EmployeesLocation();
+
+  idTercero: Number;
+  tipoDireccion: { value: null, label: string };
   principalNomenclatureList: any;
   complementaryNomenclatureList: any;
   addressTypeList: any;
-
-  lista: SelectItem[];
-  listaTipoDireccion: SelectItem[];
-  listaComplementary: SelectItem[];
-
-  selectedPrincipalNomenclature: SelectItem[] = [];
-  selectedAddressType: SelectItem[] = [];
+  selectedPrincipalNomenclature: number;
+  selectedAddressType: number;
   labelPrincipalNomenclature: string;
-  copyAutocomplete: string;
-
   principalNomenclature: string;
   numberOne: string;
   numberTwo: string;
@@ -44,136 +44,91 @@ export class LocationUpdateComponent implements OnInit {
   cityList: any;
   hoodList: any;
   map: any;
-  idTercero: any;
-  idTerceroLocalizacion: any;
 
   submitted: boolean;
   msgs: Message[] = [];
 
   constructor(
-    private locationService: LocationService,
-    private router: Router,
     private location: Location,
+    private politicalDivisionServices: PoliticalDivisionService,
+    private locationService: LocationService,
+    private locateService: LocateService,
     private confirmationService: ConfirmationService,
-    private politicalDivisionService: PoliticalDivisionService,
     private route: ActivatedRoute,
-    private _nav: NavService
+    private _nav: NavService,
+    private politicalDivisionService: PoliticalDivisionService,
   ) {
     this.complementaries = [{ tipo: null, detalle: '' }];
-    this.employLocation.ciudad = { value: null, label: '' };
-    this.employLocation.barrio = { value: null, label: '' };
-    this.employLocation.tipoDireccion = { value: null, label: '' };
   }
 
   ngOnInit() {
-
+    this.route.params.subscribe((params: Params) => {
+      this.idTercero = +params['tercero'];
+      this.locateService.getById(+params['id']).subscribe(localizacion => {
+        this.localizacion = localizacion;
+        this.selectedAddressType = this.localizacion.idTipoDireccion;
+        this.selectedPrincipalNomenclature = this.localizacion.nomenclaturaPrincipal;
+        this.finalAddress = localizacion.direccion;
+        this.localizacion.locacion = { camino: '', idDivisionPolitica: null };
+        this.politicalDivisionService.getLocation(localizacion.idDivisionPolitica).subscribe(ciudad => {
+          this.localizacion.locacion.camino = ciudad.camino;
+          this.localizacion.locacion.idDivisionPolitica = ciudad.idDivisionPolitica;
+        });
+      });
+    });
     this.locationService.getPrincipalNomenclatureList().subscribe(
       principalNomenclatureList => {
-        this.lista = [];
-        this.lista.push({ label: 'Seleccione una...', value: null });
-        for (let pn of principalNomenclatureList) {
-          this.lista.push({ label: pn.label, value: pn.value });
-        }
-        // this.principalNomenclatureList = principalNomenclatureList
-        this.principalNomenclatureList = this.lista;
+        this.principalNomenclatureList = principalNomenclatureList;
+        this.principalNomenclatureList.unshift({ label: 'Seleccione', value: null });
       });
     this.locationService.getComplementaryNomenclatureList().subscribe(
       complementaryNomenclatureList => {
-        this.listaComplementary = [];
-        this.listaComplementary.push({ label: 'Seleccione una...', value: null });
-        for (let pn of complementaryNomenclatureList) {
-          this.listaComplementary.push({ label: pn.label, value: pn.value });
-        }
-        this.complementaryNomenclatureList = this.listaComplementary;
+        this.complementaryNomenclatureList = complementaryNomenclatureList;
+        this.complementaryNomenclatureList.map((cn: any) => {
+          cn.value = cn.label;
+        });
+        this.complementaryNomenclatureList.unshift({ label: 'Seleccione', value: null });
       });
     this.locationService.getAddressTypeList().subscribe(
       addressTypeList => {
-        this.listaTipoDireccion = [];
-        this.listaTipoDireccion.push({ label: 'Seleccione una...', value: null });
-        for (let pn of addressTypeList) {
-          this.listaTipoDireccion.push({ label: pn.label, value: pn.value });
-        }
-        this.addressTypeList = this.listaTipoDireccion;
+        this.addressTypeList = addressTypeList;
+        this.addressTypeList.unshift({ label: 'Seleccione', value: null });
       });
 
-    this.route.params.subscribe((params: Params) => {
-      this.locationService.get(params['id']).subscribe(employLocation => {
-        this.idTercero = params['tercero'];
-        this.idTerceroLocalizacion = params['tl'];
-        this.employLocation = employLocation;
-        this.finalAddress = this.employLocation.direccion;
-        this.copyAutocomplete = this.employLocation.ciudad.label;
-        var mapProp = {
-          center: new google.maps.LatLng(this.employLocation.latitud, this.employLocation.longitud),
-          zoom: 15,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var latLng = new google.maps.LatLng(this.employLocation.latitud, this.employLocation.longitud);
-        this.map = new google.maps.Map(document.getElementById('ubicacionColaborador'), mapProp);
-        var marker = new google.maps.Marker({ position: latLng, map: this.map });
-      });
+      this.focusUP();
+  }
+
+  createLocation() {
+    this.localizacion.direccion = this.finalAddress;
+    this.localizacion.idTipoDireccion = this.selectedAddressType;
+    this.localizacion.nomenclaturaPrincipal = this.selectedPrincipalNomenclature;
+    this.localizacion.idDivisionPolitica = this.localizacion.locacion.idDivisionPolitica;
+
+    this.locateService.update(this.localizacion).subscribe(res => {
+      this._nav.setTab(2);
+      this.location.back();
     });
   }
 
-  onSubmit(value: string) {
-    if (this.copyAutocomplete != this.employLocation.ciudad.label) {
-      this.employLocation.ciudad = { value: null, label: '' };
-    } else {
-      this.submitted = true;
-      this.msgs = [];
-      this.msgs.push({ severity: 'info', summary: 'Success', detail: 'Guardando' });
-
-      this.employLocation.direccion = this.finalAddress;
-
-      let tercero: any = {
-        idTercero: this.idTercero,
-        idTerceroLocalizacion: this.idTerceroLocalizacion,
-        auditoriaFecha: '',
-        auditoriaUsuario: 1,
-        idLocalizacion: this.employLocation.idUbicacion,
-        localizacion: this.employLocation
-      };
-
-      this.locationService.update(tercero).subscribe(
-        data => {
-          this._nav.setTab(2);
-          this.location.back();
-        });
-    }
-  }
-
-  citySearch(event: any) {
-    this.politicalDivisionService.getAllCities(event.query).subscribe(
-      cities => this.cityList = cities
-    );
-  }
-
   hoodSearch(event: any) {
-    this.politicalDivisionService.getHoodsByWildCard(event.query).subscribe(
+    this.politicalDivisionServices.getHoodsByWildCard(event.query).subscribe(
       hoods => this.hoodList = hoods
     );
   }
 
-  captureId(event: any) {
-    this.employLocation.ciudad.value = event.idDivisionPolitica;
-    this.employLocation.ciudad.label = event.descripcionDivisionPolitica;
-    this.copyAutocomplete = event.descripcionDivisionPolitica;
+  captureHoodId(event: any) {
+    this.localizacion.locacion.idDivisionPolitica = event.idDivisionPolitica;
+    this.localizacion.locacion.camino = event.camino;
     this.composeAddress();
   }
 
-  captureHoodId(event: any) {
-    this.employLocation.barrio.value = event.idDivisionPolitica;
-    this.employLocation.barrio.label = event.descripcionDivisionPolitica;
-  }
-
-  capturePrincipalNomenclature(event: any) {
-    this.labelPrincipalNomenclature = event.originalEvent.srcElement.innerText.trim();
+  capturePrincipalNomenclature(label: any) {
+    this.labelPrincipalNomenclature = label;
     this.composeAddress();
   }
 
   captureTipoDireccion(event: any) {
-    this.employLocation.tipoDireccion.value = event.value;
-    this.employLocation.tipoDireccion.label = event.originalEvent.srcElement.innerText.trim();
+    this.tipoDireccion = event;
   }
 
   composeAddress(): void {
@@ -184,65 +139,69 @@ export class LocationUpdateComponent implements OnInit {
     this.finalAddress += this.numberOne === undefined ? '' : this.numberOne + ' - ';
     this.finalAddress += this.numberTwo === undefined ? '' : this.numberTwo + ' ';
 
-    if (this.finalAddress !== '' && this.employLocation.ciudad.label !== '' && this.employLocation.ciudad.label !== undefined) {
-      //console.log(this.finalAddress + ' ' + this.employLocation.ciudad.label);
+    if (this.finalAddress !== '' && this.localizacion.locacion != undefined && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined) {
       let geocoder = new google.maps.Geocoder();
 
       const assingLocation = (l: any, t: any) => {
-        this.employLocation.latitud = l;
-        this.employLocation.longitud = t;
+        this.localizacion.latitud = l;
+        this.localizacion.longitud = t;
       };
-      geocoder.geocode({ 'address': this.finalAddress + ' ' + this.employLocation.ciudad.label },
+
+      //Asumiendo que el camino obtenido de la busqueda tiene un máximo de 4 níveles
+      //Se hace el conteo de 3 comas par identificar si la selección fue de una división politica de nivel 4 (barrio/vereda)
+      //para hacerle el tratamiento al string con el cual se hace la busqueda en el API de maps.google
+      let strToSearch = '';
+      if (((this.localizacion.locacion.camino.match(/,/g) || []).length) === 3) {
+        strToSearch = this.localizacion.locacion.camino.substr(this.localizacion.locacion.camino.indexOf(','));
+      } else {
+        strToSearch = this.localizacion.locacion.camino;
+      }
+      geocoder.geocode({ 'address': this.finalAddress + ' ' + strToSearch },
         function (results: any, status: any) {
           if (status === google.maps.GeocoderStatus.OK) {
             let latitude = results[0].geometry.location.lat();
             let longitude = results[0].geometry.location.lng();
 
-            var latLng = new google.maps.LatLng(latitude, longitude);
-            var mapOptions = {
+            let latLng = new google.maps.LatLng(latitude, longitude);
+            let mapOptions = {
               center: latLng,
               zoom: 16,
               mapTypeId: google.maps.MapTypeId.ROADMAP
             };
-            var map = new google.maps.Map(document.getElementById('ubicacionColaborador'), mapOptions);
-            var marker = new google.maps.Marker({ position: latLng, map: map });
+            let map = new google.maps.Map(document.getElementById('graphMap'), mapOptions);
+            let marker = new google.maps.Marker({ position: latLng, map: map });
 
             assingLocation(latitude, longitude);
           } else {
-            console.log('Error : ' + status);
+            document.getElementById('graphMap').innerHTML = "La busqueda no arroja ningun resultado";
+            assingLocation('', '');
           }
         });
-
     }
 
-
-    for (var c of this.complementaries) {
-      if (c.tipo !== null) {
-        switch (c.tipo) {
-          case 1:
-            this.finalAddress += ' Casa' + ' ' + c.detalle + ' ';
-            break;
-          case 2:
-            this.finalAddress += ' Bloque' + ' ' + c.detalle + ' ';
-            break;
-          case 3:
-            this.finalAddress += ' Apartamento' + ' ' + c.detalle + ' ';
-            break;
-        }
-      }
+    for (let c of this.complementaries) {
+      if (c.tipo != null)
+        this.finalAddress += c.tipo + ' ' + c.detalle + ' ';
     }
-    this.employLocation.direccion = this.finalAddress;
 
+    if (this.localizacion.locacion !== undefined && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined) {
+      this.finalAddress += this.localizacion.locacion.camino;
+    }
   }
+
   addComplementary(): void {
     let complementary = { 'tipo': 0, 'detalle': '' };
     this.complementaries.push(complementary);
   }
 
   removeComplementary(id: any): void {
-    //console.log(id);
     this.complementaries.splice(id, 1);
+    this.composeAddress();
   }
+
+  // discard(): void {
+  //   this.dismiss.emit(1);
+  // }
 
   goBack(): void {
     this.confirmationService.confirm({
@@ -250,8 +209,8 @@ export class LocationUpdateComponent implements OnInit {
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
+        //this.router.navigate(['/employees-family-information']);
         this._nav.setTab(2);
-        //this.router.navigate(['/employees-location']);
         this.location.back();
       },
       reject: () => {
@@ -260,9 +219,7 @@ export class LocationUpdateComponent implements OnInit {
   }
 
   focusUP() {
-    const element = document.querySelector("#formulario");
+    const element = document.querySelector('#formulario');
     if (element) { element.scrollIntoView(element); }
   }
-
-
 }

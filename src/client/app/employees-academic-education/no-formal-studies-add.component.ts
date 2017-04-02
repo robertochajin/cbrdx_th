@@ -30,7 +30,7 @@ export class NoFormalStudiesAddComponent implements OnInit {
   @Input()
   nfstudy: Noformalstudies = new Noformalstudies();
   cityList: any;
-  selectedCity: DivisionPolitica;
+  selectedCity: string;
   header = 'Agregando Estudio no Formal';
   submitted: boolean;
   msgs: Message[] = [];
@@ -39,11 +39,13 @@ export class NoFormalStudiesAddComponent implements OnInit {
   studyTypeList: any[] = [];
   studyIntensityList: any[] = [];
   minDate: Date = null;
-  maxDate: Date = null;
-  maxDateFinal: Date = null;
+  maxDate: Date = new Date(Date.now());
+  maxDateFinal: Date = new Date(Date.now());
   es: any;
   range: string;
   idTercero: number;
+  fechaIngresa: string;
+  fechaTermina: string;
   //hace falta definir acceso a constantes en servicio
 
   constructor(private academicEducationService: AcademicEducationService,
@@ -119,24 +121,33 @@ export class NoFormalStudiesAddComponent implements OnInit {
   }
 
   onSubmit(value: string) {
-    this.submitted = true;
-    this.msgs = [];
-    this.nfstudy.idCiudad = this.selectedCity.idDivisionPolitica;
-    this.nfstudy.idTercero = this.idTercero;
-    this.nfstudy.indicadorHabilitado = true;
-    let fi: moment.Moment = moment(this.nfstudy.fechaIngresa, 'MM/DD/YYYY');
-    this.nfstudy.fechaIngresa = fi.format('YYYY-MM-DD');
-    if(this.nfstudy.fechaTermina !== undefined){
-      let ff: moment.Moment = moment(this.nfstudy.fechaTermina, 'MM/DD/YYYY');
-      this.nfstudy.fechaTermina = ff.format('YYYY-MM-DD');
-    }
-    this.academicEducationService.addNoFormal(this.nfstudy)
-      .subscribe(
-        data => {
-          this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
-          this._nav.setTab(3);
-          this.location.back();
-        });
+      this.submitted = true;
+      if(this.nfstudy.ciudad != this.selectedCity){
+        this.selectedCity = "";
+        this.nfstudy.idCiudad = null;
+      }
+      if(this.nfstudy.ciudad == this.selectedCity) {
+          this.msgs = [];
+          this.nfstudy.idTercero = this.idTercero;
+          this.nfstudy.indicadorHabilitado = true;
+    
+          let fi: moment.Moment = moment(this.fechaIngresa, 'MM/DD/YYYY');
+          this.nfstudy.fechaIngresa = fi.format('YYYY-MM-DD');
+          if (this.nfstudy.indicadorTerminacion == true) {
+            let ff: moment.Moment = moment(this.fechaTermina, 'MM/DD/YYYY');
+            this.nfstudy.fechaTermina = ff.format('YYYY-MM-DD');
+          }else{
+            this.nfstudy.fechaTermina = null;
+          }
+          this.academicEducationService.addNoFormal(this.nfstudy)
+            .subscribe(data => {
+              this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
+              this._nav.setTab(3);
+              this.location.back();
+            }, error => {
+              this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
+            });
+      }
   }
 
 
@@ -147,18 +158,20 @@ export class NoFormalStudiesAddComponent implements OnInit {
   }
 
   captureCityId(event: any) {
-    this.nfstudy.ciudad = event;
+    this.nfstudy.ciudad = event.camino;
+    this.nfstudy.idCiudad = event.idDivisionPolitica;
+    this.selectedCity = event.camino;
   }
 
   onSelectBegin(event: any) {
     let d = new Date(Date.parse(event));
-    this.nfstudy.fechaIngresa = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+    this.fechaIngresa = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
     this.minDate.setFullYear(d.getFullYear(), d.getMonth(), d.getDate() + 1);
   }
 
   onSelectEnd(event: any) {
     let d = new Date(Date.parse(event));
-    this.nfstudy.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+    this.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
     this.maxDate.setFullYear(d.getFullYear(), d.getMonth(), d.getDate() - 1);
   }
 
@@ -179,6 +192,19 @@ export class NoFormalStudiesAddComponent implements OnInit {
       }
     });
   }
+  changeTipoestudio(event:any) {
+      if (this.nfstudy.idTipoEstudio !== null) {
+          this.nfstudy.otroEstudio = '';
+      }
+  }
+  removeEstudio() {
+      if (this.nfstudy.otroEstudio !== '') {
+          this.nfstudy.idTipoEstudio = null;
+      }
+  }
+
+  
+
 }
 
 
