@@ -2,6 +2,7 @@ import {NgModule, ModuleWithProviders} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {RouterModule, Router, NavigationEnd} from '@angular/router';
+import {jQuery} from '@types/jquery';
 
 /** Componentes de la Template principal **/
 import {ToolbarComponent} from './toolbar/toolbar.component';
@@ -34,8 +35,8 @@ export class SharedModule {
       if (val instanceof NavigationEnd) {
         //console.log('router yeah');
         this._window.scrollTo(0, 0);
-        <any>changePage();
-        //$('#wrapper').animate({scrollTop:0},'slow');
+        //<any>changePage();
+        jQuery('#wrapper').animate({scrollTop:0},'slow');
       }
     });
   }

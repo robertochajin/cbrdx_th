@@ -1,17 +1,17 @@
-<div class="wrapper">
+<div id="wrapper" class="wrapper">
 
   <sd-toolbar *ngIf="sessionStart"></sd-toolbar>
 
   <sd-navbar *ngIf="sessionStart"></sd-navbar>
 
-  <div [ngClass]="sessionStart ? 'content-wrapper' : 'wrapper-login'">
+  <div id="content-wrapper" [ngClass]="sessionStart ? 'content-wrapper' : 'wrapper-login'">
     <!-- Content Header (Page header) -->
     <section class="content-header" *ngIf="sessionStart">
       <sd-breadcrumb></sd-breadcrumb>
     </section>
 
     <!-- Main content -->
-    <section class="content">
+    <section id="main" class="content clearfix">
       <router-outlet></router-outlet>
     </section>
     <!-- /.content -->
