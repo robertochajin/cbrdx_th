@@ -121,11 +121,8 @@
               <div class="ui-grid-col-12">
                   <label for="descripcion">Descripción</label>
                   <textarea pInputTextarea id="descripcion" name="descripcion"  [(ngModel)]="nfstudy.descripcion"
-                          #descripcion="ngModel" required="true">
+                          #descripcion="ngModel">
                   </textarea>
-                  <div  class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !descripcion.valid" >
-                      Descripción es requerido
-                  </div>
               </div>
           </div>
 
