@@ -25,6 +25,16 @@ body .ui-state-disabled, body .ui-widget:disabled {
   background-color: #f4f3ef;
   z-index: 800;
 }
+.info-box-text {
+  text-transform: capitalize;
+  text-align: center;
+}
+.icon-mainmenu{
+  font-size: 2em;
+}
+.sidebar-menu > li > a {
+  padding: 10px 10px ;
+}
 /**
 ------------------------ Main CSS ------------------------------------
  */
@@ -408,6 +418,10 @@ a.cancelar:hover {
 .datatable-col-action button{
 
 }
+.ui-datatable .ui-sortable-column-icon {
+  float: right;
+}
+
 /**
 ------------------------ Edit PrimeNG CSS ------------------------------
  */
