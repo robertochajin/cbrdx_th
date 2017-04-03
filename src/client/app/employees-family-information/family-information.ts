@@ -1,21 +1,27 @@
 export interface FamilyInformation {
   idTerceroFamiliar: number;
   idTercero: number;
-  idFamiliar: number;
   idTipoDocumento: number;
   nombreListaTipoDocumento: string;
+  telefonoFijo: string;
+  telefonoCelular: string;
+  numeroDocumento: string;
+  idConvivencia: number;
+  nombreListaParentezco: any;
+  idParentesco: number;
+  idFamiliar: number;
   primerNombre: string;
   segundoNombre: string;
   primerApellido: string;
   segundoApellido: string;
   fechaNacimiento: string;
   correoElectronico: string;
-  telefonoFijo: string;
-  telefonoCelular: string;
   direccion: string;
-  numeroDocumento: string;
-  idConvivencia: boolean;
-  nombreListaParentezco: any;
-  idParentezco : number;
+  indicadorHabilitado: boolean;
+  idLocalizacion: number;
+  nombreCompleto:string;
+  edad: string;
+  auditoriaFecha: string;
+  auditoriaUsuario: number;
 }
 

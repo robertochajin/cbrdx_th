@@ -7,12 +7,12 @@ import 'rxjs/add/operator/toPromise';
 import { ReferencesComponent }  from './references.component';
 import { ReferencesDetailComponent }  from './references-detail.component';
 import { ReferencesAddComponent }  from './references-add.component';
-import { LocationsComponent }  from '../locations/locations.component';
 import { ReferencesUpdateComponent }  from './references-update.component';
 import { ReferencesService } from './references.service';
 import { ReferencesTypesService } from '../_services/references-type.service';
 import { LocateService } from '../_services/locate.service';
 import { PoliticalDivisionService } from "../_services/political-division.service";
+import { LocationsModule } from "../locations/locations.module";
 
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule,
   ConfirmDialogModule,
@@ -28,13 +28,13 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
                     ConfirmDialogModule,
                     MessagesModule,
                     AutoCompleteModule,
-                    FileUploadModule
+                    FileUploadModule,
+                    LocationsModule
                     ],
     declarations: [ReferencesComponent,
                     ReferencesDetailComponent,
                     ReferencesAddComponent,
-                    ReferencesUpdateComponent,
-                    LocationsComponent
+                    ReferencesUpdateComponent
                     ],
     bootstrap:    [ReferencesComponent],
     providers:    [ReferencesService,ReferencesTypesService,LocateService, PoliticalDivisionService],
