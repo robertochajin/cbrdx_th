@@ -1,9 +1,10 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {APP_BASE_HREF} from "@angular/common";
-import {HttpModule,Http} from "@angular/http";
+import {HttpModule, Http} from "@angular/http";
 import {AppComponent} from "./app.component";
 import {AppRoutingModule} from "./app-routing.module";
+import {WindowRefService} from './_services/window-ref.service';
 
 import {EmployeesModule} from "./employees/employees.module";
 import {SharedModule} from "./shared/shared.module";
@@ -34,9 +35,8 @@ import {OcupacionesModule} from "./ocupaciones/ocupaciones.module";
 import {ActividadEconomicaModule} from "./actividadEconomica/actividadEconomica.module";
 
 
-
 //CarsModule,
-@NgModule( {
+@NgModule({
   imports: [BrowserModule, HttpModule, AppRoutingModule,
     EmployeesModule,
     FamilyInformationModule,
@@ -66,10 +66,12 @@ import {ActividadEconomicaModule} from "./actividadEconomica/actividadEconomica.
   ],
 
   declarations: [AppComponent],
-  providers: [{
-    provide: APP_BASE_HREF,
-    useValue: '<%= APP_BASE %>'
-  },
+  providers: [
+    WindowRefService,
+    {
+      provide: APP_BASE_HREF,
+      useValue: '<%= APP_BASE %>'
+    },
     AuthGuard,
     AuthenticationService,
     LoginService,
@@ -81,6 +83,6 @@ import {ActividadEconomicaModule} from "./actividadEconomica/actividadEconomica.
 
   bootstrap: [AppComponent]
 
-} )
+})
 export class AppModule {
 }

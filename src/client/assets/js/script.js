@@ -34,6 +34,6 @@ function changeTheme(color) {
 }
 
 function changePage(){
-  console.log('heyyyy changePage');
-  $.scrollTop(0,0);
+  console.log('changePage Rulez');
+  $('#wrapper').animate({scrollTop:0},'slow');
 }
