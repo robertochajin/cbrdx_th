@@ -8,7 +8,7 @@
             <div class=" col-sm-9">
                 <input type="text" pInputText class="form-control" id="codigoArea" name="codigoArea"
                        #codigoArea="ngModel"
-                       [(ngModel)]="areas.codigoArea" required maxlength="8" pattern="[A-Z]{0,8}"
+                       [(ngModel)]="areas.codigoArea" required maxlength="8" pattern="[A-Z0-9]{0,8}"
                        (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
                        (paste)="inputCleanUp($event.target.value)">
                 <div *ngIf="codeExists" class="alert alert-danger">
@@ -19,7 +19,7 @@
                     </div>
                     <div [hidden]="!codigoArea.errors.maxlength">El código no debe tener mas de 8 caracteres.
                     </div>
-                    <div [hidden]="!codigoArea.errors.pattern">El código debe ser solo letras Mayusculas</div>
+                    <div [hidden]="!codigoArea.errors.pattern">El código debe ser solo letras y númenos</div>
                 </div>
             </div>
         </div>
@@ -27,7 +27,9 @@
             <label for="estructuraArea" class="control-label col-sm-3">Nombre </label>
             <div class=" col-sm-9">
                 <input type="text" pInputText class="form-control" id="estructuraArea" name="estructuraArea" #estructuraArea="ngModel"
-                       [(ngModel)]="areas.estructuraArea" required maxlength="40" pattern="[A-Z]{1}.*">
+                       [(ngModel)]="areas.estructuraArea" required maxlength="40" pattern="[A-Z]{1}.*"
+                       (keyup)="capitalize()"
+                >
                 <div *ngIf="f.submitted&&!estructuraArea.valid" class="alert alert-danger">
                     <div [hidden]="!estructuraArea.errors.required">Debe ingresar un nombre para el tipo de área</div>
                     <div [hidden]="!estructuraArea.errors.maxlength">El nombre no debe tener mas de 40 caracteres.</div>

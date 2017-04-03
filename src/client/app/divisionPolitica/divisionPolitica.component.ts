@@ -53,6 +53,7 @@ export class DivisionPoliticaComponent implements OnInit {
     Resguardos:boolean = false;
     resultSearch: Search[];
     selectedSearch: SelectItem;
+    codeExists: boolean = false;
 
     constructor(private router: Router, private divisionPoliticaService: DivisionPoliticaService) {
         divisionPoliticaService.listByPadreDivisionPolitica(0).subscribe(res => {
@@ -497,5 +498,23 @@ export class DivisionPoliticaComponent implements OnInit {
             }
         }
     }
+  
+  validateCode() {
+    this.codeExists = this.listadoTodo.filter(t => (t.codigoDivisionPolitica === this.politicalDivision.codigoDivisionPolitica && this.politicalDivision.idDivisionPolitica != t.idDivisionPolitica)).length > 0;
+  }
+  
+  inputNumberCodigo() {
+      let labelCodigo = this.politicalDivision.codigoDivisionPolitica;
+      if(labelCodigo != "" && labelCodigo != null) {
+          this.politicalDivision.codigoDivisionPolitica = this.politicalDivision.codigoDivisionPolitica.replace(/[^0-9]/g, '');
+      }
+  }
+  
+  inputNumberIndicativo() {
+      let labelIndicativo = this.politicalDivision.indicativoDivisonPolitica;
+      if(labelIndicativo != "" && labelIndicativo != null) {
+         this.politicalDivision.indicativoDivisonPolitica = this.politicalDivision.indicativoDivisonPolitica.replace(/[^0-9]/g, '');
+      }
+  }
 
 }

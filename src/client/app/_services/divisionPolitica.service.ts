@@ -14,12 +14,12 @@ import {Search} from "../_models/search";
 export class DivisionPoliticaService {
 
     headers = new Headers({'Content-Type': 'application/json'});
-    private serviceURL = '<%= SVC_SP_URL %>/divisionPolitica/';
-    private serviceAreasURL = '<%= SVC_SP_URL %>/divisionPoliticaAreas/';
-    private serviceTiposURL = '<%= SVC_SP_URL %>/divisionPoliticaTipos/';
-    private serviceComunasURL = '<%= SVC_SP_URL %>/divisionPoliticaComunas/';
-    private serviceLocalidadesURL = '<%= SVC_SP_URL %>/divisionPoliticaLocalidades/';
-    private serviceResguardosURL = '<%= SVC_SP_URL %>/divisionPoliticaResguardos/';
+    private serviceURL = '<%= SVC_TH_URL %>/api/divisionPolitica/';
+    private serviceAreasURL = '<%= SVC_TH_URL %>/api/divisionPoliticaAreas/';
+    private serviceTiposURL = '<%= SVC_TH_URL %>/api/divisionPoliticaTipos/';
+    private serviceComunasURL = '<%= SVC_TH_URL %>/api/divisionPoliticaComunas/';
+    private serviceLocalidadesURL = '<%= SVC_TH_URL %>/api/divisionPoliticaLocalidades/';
+    private serviceResguardosURL = '<%= SVC_TH_URL %>/api/divisionPoliticaResguardos/';
 
     constructor(private http: Http,
                 private authenticationService: AuthenticationService
@@ -32,7 +32,7 @@ export class DivisionPoliticaService {
     }
 
     listByPadreDivisionPolitica(id:number) {
-        return this.http.get(this.serviceURL+"query/"+id,{headers: this.headers}).map((res: Response) => res.json() as DivisionPolitica[]);
+        return this.http.get(this.serviceURL+"buscarHijos/"+id,{headers: this.headers}).map((res: Response) => res.json() as DivisionPolitica[]);
     }
     addDivisionPolitica(c: DivisionPolitica): Promise<DivisionPolitica> {
         return this.http.post(this.serviceURL, JSON.stringify(c), {headers: this.headers}).toPromise().then(res => res.json() as DivisionPolitica).catch(this.handleError);

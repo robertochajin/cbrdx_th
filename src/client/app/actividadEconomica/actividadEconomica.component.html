@@ -30,7 +30,7 @@
             <div class="row-fluid">
                 <div class="col-md-12">
 
-                    <form (ngSubmit)="f.valid && save()" #f="ngForm" novalidate id="formName">
+                    <form (ngSubmit)="!codeExists&&f.valid && save()" #f="ngForm" novalidate id="formName">
 
                         <div class="row">
                             <div class="form-group">
@@ -51,7 +51,9 @@
                                            name="codigoActividadEconomica"
                                            [(ngModel)]="actividadEconomica.codigoActividadEconomica"
                                            #codigoActividadEconomica="ngModel"
-                                           [maxlength]="tabselected" [minlength]="tabselected" required>
+                                           [maxlength]="tabselected" [minlength]="tabselected"
+                                           (change)="validateCode()" required
+                                    >
 
                                     <div *ngIf="f.submitted && !codigoActividadEconomica.valid"
                                          class="ui-message  ui-corner-all">
