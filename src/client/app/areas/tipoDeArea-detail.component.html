@@ -1,35 +1,40 @@
-<h3>Tipo de Área</h3>
-<div class="col-sm-6 col-sm-offset-3">
-    <h2 class="text-center">Detalle Tipo de Área</h2>
 
-        <div class="form-group" >
-            <label for="codigoArea" class="control-label col-sm-3">Código </label>
-            <div class=" col-sm-9">
-                <input type="text" pInputText class="form-control" id="codigoArea" name="codigoArea"
-                       #codigoArea="ngModel"
-                       [(ngModel)]="areas.codigoArea" disabled>
-            </div>
-        </div>
-        <div class="form-group" >
-            <label for="estructuraArea" class="control-label col-sm-3">Nombre </label>
-            <div class=" col-sm-9">
-                <input type="text" pInputText class="form-control" id="estructuraArea" name="estructuraArea" #estructuraArea="ngModel"
-                       [(ngModel)]="areas.estructuraArea" disabled>
+<div *ngIf="areas">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="first">>Detalle Tipo de Área</h3>
+    </div>
+  </div>
 
-            </div>
-        </div>
+  <div class="row">
 
+    <form class="form-horizontal">
+      <fieldset>
         <div class="form-group">
-            <label for="indicador" class="control-label col-sm-3">Habilitado</label>
-            <div class=" col-sm-9">
-                <p-checkbox [(ngModel)]="areas.indicadorHabilitado" binary="true" id="indicador" name="indicador"
-                            #indicador="ngModel" class="form-control" disabled></p-checkbox>
-            </div>
+          <div class="row">
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Codigo:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{areas.codigoArea}}</strong></label>
+
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nombre:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{areas.estructuraArea}}</strong></label>
+          </div>
+
+          <div class="row">
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Habilitado:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{areas.indicadorHabilitado}}</strong></label>
+
+          </div>
         </div>
+      </fieldset>
+    </form>
 
-        <div class="form-group">
-            <a (click)="goBack()" class="cancelar">Regresar</a>
+  </div>
 
-        </div>
+</div>
 
+<div class="row form-footer-buttons">
+  <div class="form-group col-md-12">
+    <button icon="fa-arrow-left" label="Regresar" type="button"
+            pButton (click)="goBack()"></button>
+  </div>
 </div>

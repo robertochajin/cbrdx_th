@@ -1,29 +1,34 @@
-<h3>Centro de Costo</h3>
-<div class="col-sm-6 col-sm-offset-3 form-horizontal">
-    <h2 class="text-center">Detalle Centro de Costo</h2>
-    <div class="form-group">
-        <label for="codigoCentroCostos" class="control-label col-sm-3">Código </label>
-        <div class=" col-sm-9">
-            <input type="text" pInputText class="form-control" id="codigoCentroCostos" disabled
-                   [(ngModel)]="centroCostos.codigoCentroCostos">
-        </div>
+<div *ngIf="centroCostos">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="first">Centro de Costos</h3>
     </div>
-    <div class="form-group">
-        <label for="cCostos" class="control-label col-sm-3">Nombre </label>
-        <div class=" col-sm-9">
-            <input type="text" pInputText class="form-control" id="cCostos" disabled
-                   [(ngModel)]="centroCostos.centroCostos">
-        </div>
-    </div>
+  </div>
 
-    <div class="form-group">
-        <label for="indicador" class="control-label col-sm-3">Habilitado</label>
-        <div class=" col-sm-9">
-            <p-checkbox [(ngModel)]="centroCostos.indicadorHabilitado" binary="true" id="indicador" enabled
-                        class="form-control" disabled></p-checkbox>
+  <div class="row">
+    <form class="form-horizontal">
+      <fieldset>
+        <div class="form-group">
+          <div class="row">
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Codigo:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{centroCostos.codigoCentroCostos}}</strong></label>
+
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nombre:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{centroCostos.centroCostos}}</strong></label>
+          </div>
+          <div class="row">
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Habilitado:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{centroCostos.indicadorHabilitado}}</strong></label>
+          </div>
         </div>
-    </div>
-    <div class="form-group">
-        <a (click)="goBack()" class="cancelar">Regresar</a>
-    </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<div class="row form-footer-buttons">
+  <div class="form-group col-md-12">
+    <button icon="fa-arrow-left" label="Regresar" type="button"
+            pButton (click)="goBack()"></button>
+  </div>
 </div>
