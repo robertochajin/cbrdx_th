@@ -45,8 +45,10 @@ export class FamilyInformationComponent implements OnInit {
             header: 'Corfirmación',
             icon: 'fa fa-question-circle',
             accept: () => {
-              this.dialogObjet.indicadorHabilitado = 0;
-              this.familyInformationService.delete(this.dialogObjet).subscribe( r => {
+              this.dialogObjet.indicadorHabilitado = false;
+              this.dialogObjet.auditoriaFecha = '';
+              this.dialogObjet.auditoriaUsuario = 1;
+              this.familyInformationService.update(this.dialogObjet).subscribe( (r:any) => {
                 this.familyInformations.splice(this.familyInformations.indexOf(this.dialogObjet), 1);
                 this.dialogObjet = null;
               });
@@ -63,7 +65,7 @@ export class FamilyInformationComponent implements OnInit {
     }
 
     update(f: ConstructorFamilyInformation) {
-        return this.router.navigate(['employees-family-information/update/'+f.idTerceroFamiliar+'/'+f.idFamiliar]);
+        return this.router.navigate(['employees-family-information/update/'+f.idTerceroFamiliar+'/'+this.employee.idTercero]);
     }
 
 }

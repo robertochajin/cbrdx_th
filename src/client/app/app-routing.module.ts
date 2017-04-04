@@ -6,6 +6,7 @@ import { EmployeesDetailComponent } from './employees/employees-detail.component
 import { EmployeesAddComponent } from './employees/employees-add.component';
 import { EmployeesUpdateComponent } from './employees/employees-update.component';
 import { EmployeesComponent } from './employees/employees.component';
+import { EmployeesAdditionalDataComponent } from './employees/employees-additional-data.component';
 
 //Información familiar de employees
 import { FamilyInformationComponent } from './employees-family-information/family-information.component';
@@ -137,6 +138,9 @@ const routes = [
   {path: 'employees-work-experience/add/:tercero', component: WorkExperienceAddComponent, canActivate: [AuthGuard]},
   {path: 'employees-work-experience/detail/:id', component: WorkExperienceDetailComponent, canActivate: [AuthGuard]},
   {path: 'employees-work-experience/update/:id', component: WorkExperienceUpdateComponent, canActivate: [AuthGuard]},
+
+  // employees additional data
+  {path: 'employees-additional-data/:id', component: EmployeesAdditionalDataComponent, canActivate: [AuthGuard]},
 
   //Login
   {path: 'login', component: LoginComponent},

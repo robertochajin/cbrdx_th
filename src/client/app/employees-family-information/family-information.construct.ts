@@ -1,7 +1,7 @@
 import { FamilyInformation } from './family-information';
 import * as moment from 'moment/moment';
 
-export class ConstructorFamilyInformation implements FamilyInformation {
+export class ConstructorFamilyInformation {
   idTerceroFamiliar: number;
   idTercero: number;
   idTipoDocumento: number;
@@ -9,9 +9,9 @@ export class ConstructorFamilyInformation implements FamilyInformation {
   telefonoFijo: string;
   telefonoCelular: string;
   numeroDocumento: string;
-  idConvivencia: boolean;
+  idConvivencia: number;
   nombreListaParentezco: any;
-  idParentezco: number;
+  idParentesco: number;
   idFamiliar: number;
   primerNombre: string;
   segundoNombre: string;
@@ -20,11 +20,16 @@ export class ConstructorFamilyInformation implements FamilyInformation {
   fechaNacimiento: string;
   correoElectronico: string;
   direccion: string;
-  indicadorHabilitado: number;
-
+  indicadorHabilitado: boolean;
+  idLocalizacion: number;
   nombreCompleto:string;
   edad: string;
+  auditoriaFecha: string;
+  auditoriaUsuario: number;
+
 
   constructor() {
+    this.auditoriaFecha = "";
+    this.auditoriaUsuario = 1;
   }
 }

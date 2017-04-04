@@ -27,9 +27,7 @@ export class Employee {
   public nroHijos? : number;
   public idLateralidad? : number;
   public lateralidad? : string;
-  public idTipoVivienda? : number;
   public vivienda?  : string;
-  public estrato? : number;
   public tallaCamisa? : number;
   public tallaPantalon? : number;
   public tallaCalzado?  : number;
@@ -63,7 +61,17 @@ export class Employee {
   public idSectorEconomico : number;
   public idActividadEconomica : number;
   public idTipoTercero : number;
-  
+
+  public idTallaCamisa : number;
+  public idTallaPantalon : number;
+  public idTallaCalzado : number;
+  public tipoPersona : number;
+  public tipoOcupacion : number;
+  public estadoJuridico : number;
+  public tipoAfiliacion : number;
+  public tipoTercero : number;
+  public sectorEconomico : string;
+  public coberturaSalud : string;
 
   constructor() {
     this.nombreCompleto = this.primerNombre+' '+ this.segundoNombre+' '+ this.primerApellido+' '+ this.segundoApellido;
@@ -71,10 +79,9 @@ export class Employee {
     this.cargoActual = '';
     this.genero = '';
     this.razonSocial = '';
-  
+
     this.auditoriaUsuario = 1;
     this.correoElectronico = "";
-    this.estrato = 0;
     this.factorRh = "";
     this.idActividadEconomica =  null;
     this.idCiudadExpDocumento = null;
@@ -93,9 +100,7 @@ export class Employee {
     this.idTipoDocumento = null;
     this.idTipoOcupacion = null;
     this.idTipoPersona = null;
-    this.idTipoVivienda = null;
     this.idTipoTercero = null;
-    this.idVehiculo = null;
     this.imagen = "";
     this.imc = 0;
     this.indicadorVivo = true;
