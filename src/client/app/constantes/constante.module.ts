@@ -1,6 +1,3 @@
-/**
- * Created by Felipe Aguirre - Jenniferth Escobar on 23/02/2017.
- */
 import {NgModule} from "@angular/core";
 import {InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule} from "primeng/primeng";
 import {CommonModule} from "@angular/common";

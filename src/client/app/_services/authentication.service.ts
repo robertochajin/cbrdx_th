@@ -32,8 +32,6 @@ export class AuthenticationService {
       } else {
         return false;
       }
-    }, error => {
-      return false;
     });
   }
 

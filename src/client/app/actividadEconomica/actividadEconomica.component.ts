@@ -290,7 +290,7 @@ export class ActividadEconomicaComponent implements OnInit {
     }
 
     validateCode() {
-        this.codeExists = this.listadoActividadEconomica.filter(t => t.codigoActividadEconomica === this.actividadEconomica.codigoActividadEconomica && this.actividadEconomica.idActividadEconomica == null).length > 0;
+        this.codeExists = this.listadoActividadEconomica.filter(t => (t.codigoActividadEconomica === this.actividadEconomica.codigoActividadEconomica && this.actividadEconomica.idActividadEconomica != t.idActividadEconomica)).length > 0;
     }
 
 
