@@ -102,7 +102,7 @@ export class FamilyInformationAddComponent implements OnInit {
     this.maxDate.setMonth(month);
     this.maxDate.setFullYear(year);
     this.range = `${lasYear}:${year}`;
-    this.focusMe();
+    this.focusUP();
 
   }
 
@@ -145,7 +145,7 @@ export class FamilyInformationAddComponent implements OnInit {
                     data => {
 
                       this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
-                      this._nav.setTab(5);
+                      this._nav.setTab(1);
                       this.location.back();
                     });
               });
@@ -247,13 +247,6 @@ export class FamilyInformationAddComponent implements OnInit {
       return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
     } else {
       return ''
-    }
-  }
-
-  focusMe() {
-    const element = document.querySelector('#formulario');
-    if (element) {
-      element.scrollIntoView(element);
     }
   }
 

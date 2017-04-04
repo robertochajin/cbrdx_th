@@ -33,7 +33,7 @@ export class FamilyInformationService {
   }
 
   get(id: number) {
-    return this.http.get(this.serviceURL + id)
+    return this.http.get(this.serviceURL + 'buscarId/' + id)
       .map((res: Response) => res.json() as ConstructorFamilyInformation);
   }
 
