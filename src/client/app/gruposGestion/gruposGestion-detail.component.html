@@ -1,56 +1,52 @@
-<h3>Grupos de Gestión</h3>
-<div class="col-sm-8 col-sm-offset-2">
-    <h2 class="text-center">Detalle Grupo de Gestión</h2>
-    <div class="form-group">
-        <label for="codigoGrupoGestion" class="control-label col-sm-3">Código </label>
-        <div class=" col-sm-9">
-            <input type="text" pInputText class="form-control" id="codigoGrupoGestion" disabled
-                   [(ngModel)]="grupoGestion.codigoGrupoGestion">
+<div *ngIf="grupoGestion">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="first">Grupos de Gestión</h3>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <form class="form-horizontal">
+      <fieldset>
+        <div class="form-group">
+          <div class="row">
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Codigo:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{grupoGestion.codigoGrupoGestion}}</strong></label>
+
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nombre:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{grupoGestion.grupoGestion}}</strong></label>
+          </div>
+          <div class="row">
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Fecha Inicio:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{grupoGestion.fechaInicio}}</strong></label>
+
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Fecha Fin:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{grupoGestion.fechaFin}}</strong></label>
+          </div>
+          <div class="row">
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Funciones:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{grupoGestion.funciones}}</strong></label>
+
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Responsabilidades:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{grupoGestion.responsabilidades}}</strong></label>
+          </div>
+          <div class="row">
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Habilitado:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{grupoGestion.indicadorHabilitado}}</strong></label>
+
+          </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="gGestion" class="control-label col-sm-3">Nombre </label>
-        <div class=" col-sm-9">
-            <input type="text" pInputText class="form-control" id="gGestion" disabled
-                   [(ngModel)]="grupoGestion.grupoGestion">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="fechaInicio" class="control-label col-sm-3">Fecha Inicio</label>
-        <div class=" col-sm-9">
-            <p-calendar id="fechaInicio" name="fechaInicio" [(ngModel)]="grupoGestion.fechaInicio"
-                        [showIcon]="true" class="form-control" dateFormat="yy-mm-dd" disabled></p-calendar>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="fechaFin" class="control-label col-sm-3">Fecha Fin</label>
-        <div class=" col-sm-9">
-            <p-calendar id="fechaFin" name="fechaFin" [(ngModel)]="grupoGestion.fechaFin" class="form-control"
-                        [showIcon]="true" dateFormat="yy-mm-dd" disabled></p-calendar>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="funciones" class="control-label col-sm-3">Funciones </label>
-        <div class=" col-sm-9">
-            <textarea pInputTextarea class="form-control" id="funciones" disabled
-                      [(ngModel)]="grupoGestion.funciones"></textarea>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="responsabilidades" class="control-label col-sm-3">Responsabilidades </label>
-        <div class=" col-sm-9">
-                <textarea pInputTextarea class="form-control" id="responsabilidades" disabled
-                          [(ngModel)]="grupoGestion.responsabilidades"></textarea>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="indicador" class="control-label col-sm-3">Habilitado</label>
-        <div class=" col-sm-9">
-            <p-checkbox [(ngModel)]="grupoGestion.indicadorHabilitado" binary="true" id="indicador" class="form-control"
-                        disabled></p-checkbox>
-        </div>
-    </div>
-    <div class="form-group">
-        <a (click)="goBack()" class="cancelar">Regresar</a>
-    </div>
+      </fieldset>
+    </form>
+
+  </div>
+
+</div>
+
+<div class="row form-footer-buttons">
+  <div class="form-group col-md-12">
+    <button icon="fa-arrow-left" label="Regresar" type="button"
+            pButton (click)="goBack()"></button>
+  </div>
 </div>
