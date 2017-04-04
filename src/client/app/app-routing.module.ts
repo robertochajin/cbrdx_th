@@ -129,19 +129,19 @@ const routes = [
   //employees-location
   { path: 'employees-location', component: LocationComponent, canActivate: [AuthGuard]},
   { path: 'employees-location/add/:id', component: LocationAddComponent, canActivate: [AuthGuard]},
-  { path: 'employees-location/update/:id/:tercero/:tl', component: LocationUpdateComponent, canActivate: [AuthGuard] },
+  { path: 'employees-location/update/:id/:tercero', component: LocationUpdateComponent, canActivate: [AuthGuard] },
   { path: 'employees-location/detail/:id', component: LocationDetailComponent, canActivate: [AuthGuard] },
 
     //Experiencia laboral
   {path: 'employees-work-experience', component: WorkExperienceComponent, canActivate: [AuthGuard]},
-  {path: 'employees-work-experience/add', component: WorkExperienceAddComponent, canActivate: [AuthGuard]},
+  {path: 'employees-work-experience/add/:tercero', component: WorkExperienceAddComponent, canActivate: [AuthGuard]},
   {path: 'employees-work-experience/detail/:id', component: WorkExperienceDetailComponent, canActivate: [AuthGuard]},
   {path: 'employees-work-experience/update/:id', component: WorkExperienceUpdateComponent, canActivate: [AuthGuard]},
 
   //Login
   {path: 'login', component: LoginComponent},
   {path: 'cambioContrasena', component: CambioContrasenaComponent},
-  {path: 'dashboard', component: DashboardComponent},
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
 
   // Constantes
   {path: 'constantes', component: ConstanteComponent, canActivate: [AuthGuard]},

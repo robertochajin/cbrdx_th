@@ -20,6 +20,11 @@ export class FormalStudies {
   public auditoriaFecha: string ;
   public indicadorVerificado: boolean ;
   public fechaVerificado: string;
+  public nivelEstudio: string;
+  public areaEstudio: string;
+  public institucion: string;
+  public ciudad: string;
+  public estadoEstudio: string;
 
   constructor() {
   }

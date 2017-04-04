@@ -22,7 +22,7 @@ export class OcupacionesComponent implements OnInit {
     ocupacionesTypes: OcupacionesTipos[] = [];
     treeocupaciones: any[] = [];
     treeselected: TreeNode;
-    selectedNode: any;
+    selectedNode: Tree;
     tabselected: number = 1;
     labeltabselected: string;
     header: string;
@@ -420,4 +420,12 @@ export class OcupacionesComponent implements OnInit {
     }
 
 
+}
+class Tree {
+  value: number;
+  label: string;
+  level: number;
+  codigo: string;
+  expanded:boolean;
+  children: Tree[];
 }

@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
-import {Employee} from './employees';
-import {EmployeesService} from './employees.service';
+import {Employee} from '../_models/employees';
+import {EmployeesService} from '../_services/employees.service';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
 import {ConfirmationService} from 'primeng/primeng';
 
 @Component({
@@ -17,7 +16,7 @@ export class EmployeesComponent {
     dialogObjet: Employee = new Employee();
 
     employees: Employee[];
-
+    codigoTipo: number;
     constructor(
         private employeesService: EmployeesService,
         private router: Router,
@@ -26,7 +25,7 @@ export class EmployeesComponent {
     }
 
     ngOnInit() {
-        this.employeesService.getAll().subscribe(
+        this.employeesService.getByTipo("TERCOL").subscribe(
             employees => {
               this.employees = employees;
               this.employees.forEach(e => {

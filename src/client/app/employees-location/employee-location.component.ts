@@ -1,9 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { Employee } from '../employees/employees';
-import { LocationService } from '../_services/employee-location.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Employee } from '../_models/employees';
 import { EmployeesLocation } from '../_models/employee-location';
+import { Localizaciones } from '../_models/localizaciones';
 import { ConfirmationService } from 'primeng/primeng';
+import { LocationService } from '../_services/employee-location.service';
+import { LocateService } from '../_services/locate.service';
 
 @Component({
   moduleId: module.id,
@@ -15,12 +17,16 @@ export class LocationComponent implements OnInit {
 
   @Input() colaborador: any;
 
-  employeesLocations: EmployeesLocation[];
+  employeesLocations: Localizaciones[];
+  terceroLocalizacion: EmployeesLocation = new EmployeesLocation();
   dialogObjet: EmployeesLocation = new EmployeesLocation();
 
   constructor(private locationService: LocationService,
     private router: Router,
-    private confirmationService: ConfirmationService) {
+    private locateService: LocateService,
+    private confirmationService: ConfirmationService,
+    private route: ActivatedRoute
+  ) {
   }
 
   ngOnInit() {
@@ -29,33 +35,32 @@ export class LocationComponent implements OnInit {
     );
   }
 
-  del(f: any) {
+  del(f: Localizaciones) {
     this.confirmationService.confirm({
       message: ` ¿Esta seguro que desea eliminar?`,
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
-        let tercero: any = {
-          idTercero: this.colaborador.idTercero,
-          auditoriaFecha: '',
-          auditoriaUsuario: 1,
-          indicadorHabilitado: false,
-          idLocalizacion: f.idLocalizacion,
-          localizacion: f.localizacion
-        };
+        console.log(f);
 
-        tercero.localizacion.indicadorHabilitado = false;
+        f.indicadorHabilitado = false;
 
-        this.locationService.update(tercero).subscribe(
-          data => {
-            this.employeesLocations.splice(this.employeesLocations.indexOf(f), 1);
+        this.locateService.update(f).subscribe(res => {
+          this.locationService.get(f.idLocalizacion).subscribe(tl => {
+            this.terceroLocalizacion = tl;
+            this.terceroLocalizacion.indicadorHabilitado = false;
+            this.locationService.update(this.terceroLocalizacion).subscribe(
+              data => {
+                this.employeesLocations.splice(this.employeesLocations.indexOf(f), 1);
+              });
           });
+        });
       }, reject: () => { }
     });
   }
 
   detail(l: any) {
-    this.router.navigate(['employees-location/detail/' + l.localizacion.idUbicacion]);
+    this.router.navigate(['employees-location/detail/' + l.idLocalizacion]);
   }
 
   add() {
@@ -63,6 +68,6 @@ export class LocationComponent implements OnInit {
   }
 
   update(l: any) {
-    this.router.navigate(['employees-location/update/' + l.localizacion.idUbicacion + '/' + this.colaborador.idTercero + '/' + l.idTerceroLocalizacion]);
+    this.router.navigate(['employees-location/update/' + l.idLocalizacion + '/' + this.colaborador.idTercero]);
   }
 }

@@ -21,11 +21,11 @@
                       </div>
 
                       <div class="row">
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Sector Empresa:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.sectorEmpresa.label}}</strong></label>
+                        <label class="col-md-3 col-sm-3 col-xs-12 control-label">Sector Empresa:</label>
+                        <label class="col-md-3 col-sm-3 col-xs-12 "><strong>{{experience.sectorEmpresa}}</strong></label>
 
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Sub Sector Empresa:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.subsectorEmpresa.label}}</strong></label>
+                        <label class="col-md-3 col-sm-3 col-xs-12 control-label">Actividad Ecónomica Principal:</label>
+                        <label class="col-md-3 col-sm-3 col-xs-12 "><strong>{{experience.subSectorEmpresa}}</strong></label>
                       </div>
 
                       <div class="row">
@@ -45,25 +45,30 @@
                       </div>
 
                       <div class="row">
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Ciudad:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.ciudad.label}}</strong></label>
+                        <label class="col-md-3 col-sm-3 col-xs-12 control-label">Ciudad:</label>
+                        <label class="col-md-9 col-sm-9 col-xs-12 "><strong>{{experience.ciudad}}</strong></label>
 
+                      </div>
+                      <div class="row">
                         <label class="col-md-3 col-sm-6 col-xs-12 control-label">Ingreso:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.ingreso}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.fechaIngresa}}</strong></label>
+                        <div *ngIf="experience.indicadorActualmente">
+                          <label class="col-md-3 col-sm-6 col-xs-12 control-label" >Actualmente:</label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.indicadorActualmente === true ? 'Si' : 'No'}}</strong></label>
+                        </div>
+                        <div *ngIf="!experience.indicadorActualmente">
+                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Finalizacion:</label>
+                            <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.fechaTermina}}</strong></label>
+                        </div>
                       </div>
 
                       <div class="row">
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Finalizacion:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.finalizacion}}</strong></label>
 
                         <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tiempo Experiencia:</label>
                         <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.tiempoExperiencia}}</strong></label>
                       </div>
 
-                      <div class="row">
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Actualmente:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.actualmente}}</strong></label>
-                      </div>
+
 
                     </div>
                 </fieldset>
@@ -74,7 +79,7 @@
 </div>
     <div class="row form-footer-buttons">
     <div class="form-group col-md-12">
-      <button icon="fa-arrow-left" label="Volver" type="button"
+      <button icon="fa-arrow-left" label="Regresar" type="button"
               pButton (click)="goBack()"></button>
     </div>
 </div>

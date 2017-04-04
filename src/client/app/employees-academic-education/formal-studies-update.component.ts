@@ -7,7 +7,6 @@ import {AcademicEducationService} from '../_services/academic-education.service'
 import {Message, ConfirmationService, SelectItem, ConfirmDialog} from 'primeng/primeng';
 import {StudyLevelServices} from '../_services/study-level.service';
 import {StudyAreaServices} from '../_services/study-area.service';
-import {CitiesServices} from '../_services/cities.service';
 import {StudyStateServices} from '../_services/study-state.service';
 import {InstituteServices} from '../_services/institute.service';
 
@@ -46,8 +45,10 @@ export class FormalStudiesUpdateComponent implements OnInit {
   maxDateFinal: Date = null;
   es: any;
   range: string;
-  id_estado_estudio_finalizado = 2; //hace falta definir acceso a constantes en servicio
+  id_estado_estudio_finalizado = 1; //hace falta definir acceso a constantes en servicio
   idTercero: number;
+  wrongCity: boolean = true;
+  wrongInstitute: boolean = true;
 
   constructor(private academicEducationService: AcademicEducationService,
               private politicalDivisionService: PoliticalDivisionService,
@@ -86,20 +87,13 @@ export class FormalStudiesUpdateComponent implements OnInit {
       this.idTercero = params['tercero'];
       this.academicEducationService.getFormal(+params['id']).subscribe(fstudy => {
         this.fstudy = fstudy;
-        this.politicalDivisionService.getLocation(this.fstudy.idCiudad).subscribe(ciudad => {
-          this.selectedCity = new DivisionPolitica();
-          this.selectedCity.camino = ciudad.camino;
-          this.selectedCity.idDivisionPolitica = ciudad.idDivisionPolitica;
-        });
-
-        this.instituteServices.getById(this.fstudy.idInstitucion).subscribe(i => {
-          this.selectedInstitute = new Institutes();
-          this.selectedInstitute.nombreListaInstitucion = i.nombreListaInstitucion;
-          this.selectedInstitute.idListaInstitucion = i.idListaInstitucion;
-        });
-
-        this.idTercero = this.fstudy.idTercero;
+        this.selectedCity = new DivisionPolitica();
+        this.selectedCity.camino = this.fstudy.ciudad;
+        this.selectedCity.idDivisionPolitica = this.fstudy.idCiudad;
+        this.selectedInstitute = new Institutes();
+        this.selectedInstitute.nombreListaInstitucion = this.fstudy.institucion;
         this.selectedInstitute.idListaInstitucion = this.fstudy.idInstitucion;
+        this.idTercero = this.fstudy.idTercero;
         let fi: moment.Moment = moment(this.fstudy.fechaIngresa, 'YYYY-MM-DD');
         this.fstudy.fechaIngresa = fi.format('MM/DD/YYYY');
         let ff: moment.Moment = moment(this.fstudy.fechaTermina, 'YYYY-MM-DD');
@@ -135,21 +129,37 @@ export class FormalStudiesUpdateComponent implements OnInit {
 
   onSubmit(value: string) {
     this.submitted = true;
-    this.msgs = [];
-    this.fstudy.idCiudad = this.selectedCity.idDivisionPolitica;
-    this.fstudy.idTercero = this.idTercero;
-    this.fstudy.indicadorHabilitado = true;
-    this.fstudy.idInstitucion = this.selectedInstitute.idListaInstitucion;
-    let fi: moment.Moment = moment(this.fstudy.fechaIngresa, 'MM/DD/YYYY');
-    this.fstudy.fechaIngresa = fi.format('YYYY-MM-DD');
-    let ff: moment.Moment = moment(this.fstudy.fechaTermina, 'MM/DD/YYYY');
-    this.fstudy.fechaTermina = ff.format('YYYY-MM-DD');
-    this.academicEducationService.updateFormal(this.fstudy).subscribe(
-      data => {
-        this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
-        this._nav.setTab(3);
-        this.location.back();
-      });
+    if (this.selectedCity !== undefined && this.selectedCity.idDivisionPolitica !== undefined) {
+      if (this.fstudy.otraInstitucion !== '' || (this.selectedInstitute != undefined && this.selectedInstitute.idListaInstitucion != undefined)) {
+        this.msgs = [];
+        this.fstudy.idCiudad = this.selectedCity.idDivisionPolitica;
+        this.fstudy.idTercero = this.idTercero;
+        this.fstudy.indicadorHabilitado = true;
+        if (this.selectedInstitute !== null){
+          this.fstudy.idInstitucion = this.selectedInstitute.idListaInstitucion;
+        }else {
+          this.fstudy.idInstitucion = null;
+        }
+        let fi: moment.Moment = moment(this.fstudy.fechaIngresa, 'MM/DD/YYYY');
+        this.fstudy.fechaIngresa = fi.format('YYYY-MM-DD');
+        if (this.fstudy.idEstado === this.id_estado_estudio_finalizado) {
+          let ff: moment.Moment = moment(this.fstudy.fechaTermina, 'MM/DD/YYYY');
+          this.fstudy.fechaTermina = ff.format('YYYY-MM-DD');
+        }else{
+          this.fstudy.fechaTermina = null;
+        }
+        this.academicEducationService.updateFormal(this.fstudy).subscribe(
+          data => {
+            this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
+            this._nav.setTab(3);
+            this.location.back();
+          });
+      } else {
+        this.wrongInstitute = true;
+      }
+    } else {
+      this.wrongCity = true;
+    }
   }
 
   citySearch(event: any) {
@@ -160,12 +170,25 @@ export class FormalStudiesUpdateComponent implements OnInit {
 
   captureCityId(event: any) {
     this.fstudy.idCiudad = this.selectedCity.idDivisionPolitica;
+    this.wrongCity = false;
   }
 
   instituteSearch(event: any) {
     this.instituteServices.getByWildCard(event.query).subscribe(
       instituteList => this.instituteList = instituteList
     );
+  }
+
+  captureInstituteId(event: any) {
+    this.fstudy.idInstitucion = this.selectedInstitute.idListaInstitucion;
+    this.fstudy.otraInstitucion = '';
+    this.wrongInstitute = false;
+  }
+
+  removeInstitute() {
+    if (this.fstudy.otraInstitucion !== '') {
+      this.selectedInstitute = null;
+    }
   }
 
   onSelectBegin(event: any) {

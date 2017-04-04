@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { EmployeesLocation } from '../_models/employee-location';
-import { Employee } from "../employees/employees";
+import { Employee } from "../_models/employees";
 
 @Injectable()
 export class LocationService {
@@ -11,8 +11,13 @@ export class LocationService {
   constructor(private http: Http) {
   }
 
+  get(id: Number){
+    return this.http.get(this.serviceURL + '/api/tercerosLocalizaciones/loc/' + id)
+      .map((res: Response) => res.json());
+  }
+
   getAllByEmployee(id: number) {
-    return this.http.get(this.serviceURL + '/employeesLocations/employees/' + id)
+    return this.http.get(this.serviceURL + '/api/tercerosLocalizaciones/' + id)
       .map((res: Response) => res.json());
   }
 
@@ -32,22 +37,17 @@ export class LocationService {
   }
 
   add(f: any) {
-    return this.http.post(this.serviceURL + '/employeesLocations', f)
+    return this.http.post(this.serviceURL + '/api/tercerosLocalizaciones', f)
       .map((res: Response) => res.json());
   };
 
   update(f: any) {
-    return this.http.put(this.serviceURL + '/employeesLocations/', f)
+    return this.http.put(this.serviceURL + '/api/tercerosLocalizaciones', f)
       .map((res: Response) => res);
   }
 
-  get(id: number) {
-    return this.http.get(this.serviceURL + '/employeesLocations/location/' + id)
-      .map((res: Response) => res.json());
-  }
-
   delete(f: any) {
-    return this.http.put(this.serviceURL + '/employeesLocations/', f)
+    return this.http.put(this.serviceURL + '/api/tercerosLocalizaciones', f)
       .map((res: Response) => res);
   }
 }

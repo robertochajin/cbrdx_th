@@ -17,6 +17,7 @@ export class CambioContrasenaComponent implements OnInit {
     recordarUsuario: boolean = false;
     displayDialog1: boolean = false;
     displayDialog: boolean = false;
+    error: string;
 
     constructor(private loginService: AuthenticationService, private router: Router) {
     }
@@ -43,11 +44,19 @@ export class CambioContrasenaComponent implements OnInit {
         this.displayDialog1 = false;
         this.recordarUsuario = false;
     }
-
-    envioContrasena() {
-        this.loginService.forgetPass(this.correoElectronico, this.usuario);
-        this.displayDialog = false;
-    }
+  
+  envioContrasena() {
+    this.loginService.forgetPass(this.correoElectronico, this.usuario).then(res => {
+      if (res) {
+        this.error = "Se notifico al administrador del Sistema de su solicitud de cambio de contraseña";
+      } else {
+        this.error = "Se envió un correo electronico con su nueva contraseña de acceso al sistema";
+      }
+    }, error => {
+      this.error = ""
+    });
+    this.displayDialog = false;
+  }
 
     emailCleanUp(value: string) {
         this.correoElectronico = value.toLowerCase().replace(' ', '').trim();

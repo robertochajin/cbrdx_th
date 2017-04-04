@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FamilyInformationService } from './family-information.service';
 import { ConstructorFamilyInformation } from './family-information.construct';
 import { ConfirmationService } from 'primeng/primeng';
-import { Employee } from '../employees/employees';
+import { Employee } from '../_models/employees';
 import * as moment from 'moment/moment';
 
 @Component({

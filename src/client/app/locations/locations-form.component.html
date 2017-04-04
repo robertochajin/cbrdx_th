@@ -22,8 +22,8 @@
           <p-autoComplete placeholder="Buscar barrio" field="camino" name="barrio" id="barrio" [(ngModel)]="localizacion.locacion"
                           #barrio="ngModel" [suggestions]="hoodList" required="true" (completeMethod)="hoodSearch($event)" (onSelect)="captureHoodId($event)">
           </p-autoComplete>
-          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !barrio.valid">
-            <i class="fa fa-close"></i> Barrio es requerida
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && badSelect">
+            <i class="fa fa-close"></i> Barrio es requerido
           </div>
         </div>
       </div>
@@ -47,19 +47,11 @@
         </div>
         <div class="ui-grid-col-3">
           <label for="numberOne">#</label>
-          <input type="text" pInputText name="numberOne" id="numberOne" (change)="composeAddress()" [(ngModel)]="numberOne" #nmbOne="ngModel"
-                 required="true" />
-          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !nmbOne.valid">
-            <i class="fa fa-close"></i> Campo requerido
-          </div>
+          <input type="text" pInputText name="numberOne" id="numberOne" (change)="composeAddress()" [(ngModel)]="numberOne" #nmbOne="ngModel"/>
         </div>
         <div class="ui-grid-col-3">
           <label for="numberTwo">-</label>
-          <input type="text" pInputText name="numberTwo" id="numberTwo" (change)="composeAddress()" [(ngModel)]="numberTwo" #nmbTwo="ngModel"
-                 required="true" />
-          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !nmbTwo.valid">
-            <i class="fa fa-close"></i> Campo requerido
-          </div>
+          <input type="text" pInputText name="numberTwo" id="numberTwo" (change)="composeAddress()" [(ngModel)]="numberTwo" #nmbTwo="ngModel"/>
         </div>
       </div>
 

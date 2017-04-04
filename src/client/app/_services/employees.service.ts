@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
-import { Employee } from './employees';
+import { Employee } from '../_models/employees';
 
 @Injectable()
 export class EmployeesService {
 
 
-  private serviceURL = '<%= SVC_TH_URL_D %>/employees/';
+  private serviceURL = '<%= SVC_TH_URL %>/api/';
   private serviceURLTerceros = '<%= SVC_TH_URL %>/tercerosCargos/';
 
 
@@ -16,19 +16,22 @@ export class EmployeesService {
     constructor(private http: Http) {}
 
     getAll()  {
-        return this.http.get(this.serviceURL+'/wRol').map((res:Response) => res.json());
+        return this.http.get(this.serviceURL+'vterceros').map((res:Response) => res.json());
+    }
+    getByTipo(type:string)  {
+        return this.http.get(this.serviceURL+'vterceros/buscarTerceros/'+type+"/").map((res:Response) => res.json());
     }
 
     add(c: Employee) {
-        return this.http.post(this.serviceURL,c).map((res:Response) => res.json());
+        return this.http.post(this.serviceURL+'terceros',c).map((res:Response) => res.json());
     };
 
     update(c: Employee) {
-        return this.http.put(this.serviceURL+'/'+ c.idTercero,c).map((res:Response) => res.json());
+        return this.http.put(this.serviceURL+'terceros',c).map((res:Response) => res);
     }
 
     get(id: number) {
-        return this.http.get(this.serviceURL+'/'+ id).map((res:Response) => res.json() as Employee);
+        return this.http.get(this.serviceURL+'vterceros/'+ id).map((res:Response) => res.json() as Employee);
     }
 
     getNacionalidad(id: number) {
@@ -42,6 +45,10 @@ export class EmployeesService {
     delete(c: Employee) {
         const respuesta =  this.http.delete(this.serviceURL+'/'+ c.idTercero);
         return respuesta.map((res:Response) => res.json());
+    }
+  
+    validateDocument(c: Employee) {
+      return this.http.get(this.serviceURL+'terceros/'+ c.numeroDocumento+'/'+c.idTipoDocumento+'/').map((res:Response) => res.json() as Employee);
     }
 
 }
