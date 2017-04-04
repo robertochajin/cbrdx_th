@@ -33,10 +33,8 @@ import {TipoDeAreaModule} from "./areas/tipoDeArea.module";
 import {DivisionPoliticaModule} from "./divisionPolitica/divisionPolitica.module";
 import {OcupacionesModule} from "./ocupaciones/ocupaciones.module";
 import {ActividadEconomicaModule} from "./actividadEconomica/actividadEconomica.module";
+import {ClinicalInformationModule} from "./employees-clinical-information/clinical-information.module";
 
-
-
-//CarsModule,
 @NgModule( {
   imports: [BrowserModule, HttpModule, AppRoutingModule, AboutModule, HomeModule,
     EmployeesModule,
@@ -45,6 +43,7 @@ import {ActividadEconomicaModule} from "./actividadEconomica/actividadEconomica.
     ReferencesModule,
     AcademicEducationModule,
     WorkExperienceModule,
+    ClinicalInformationModule,
     LoginModule,
     GrowlModule,
     DashboardModule,
