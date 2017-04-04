@@ -20,8 +20,9 @@
     </div>
 </div>
 <div class="ui-grid-row">
+
     <div class="col-md-4">
-        <p-tree [(value)]="treedivisionPolitica" selectionMode="single" [(selection)]="selectedNode"
+        <p-tree id="trvDivisionPolitica" [(value)]="treedivisionPolitica" selectionMode="single" [(selection)]="selectedNode"
                 (onNodeSelect)="nodeSelect($event.node)"
                 (onNodeExpand)="nodeExpand($event.node)"
         ></p-tree>

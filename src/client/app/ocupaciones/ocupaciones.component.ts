@@ -306,6 +306,9 @@ export class OcupacionesComponent implements OnInit {
     }
 
     captureId(event: Search) {
+        // ScrollTo 0;
+        jQuery('#trvOcupaciones').scrollTop(0);
+
         this.ocupacionesService.viewOcupaciones(event.value).subscribe(res => {
             this.ocupaciones = res;
             this.searchRecursive(res);
@@ -313,6 +316,8 @@ export class OcupacionesComponent implements OnInit {
             if (res.idOcupacionPadre != 0) {
                 this.ocupacionesService.viewOcupaciones(res.idOcupacionPadre).subscribe(r => {
                     this.labelPadre = r.ocupacion;
+                    // Scroll to Select
+                    jQuery('#trvOcupaciones').scrollTop(jQuery('.ui-state-highlight').position().top - jQuery('#trvOcupaciones').height() / 2);
                 });
             } else {
                 this.labelPadre = "";
