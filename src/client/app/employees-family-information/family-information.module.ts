@@ -9,22 +9,23 @@ import { FamilyInformationDetailComponent }  from './family-information-detail.c
 import { FamilyInformationAddComponent }  from './family-information-add.component';
 import { FamilyInformationUpdateComponent }  from './family-information-update.component';
 import { FamilyInformationService } from './family-information.service';
+import { RelationTypeServices } from '../_services/relation-type.service';
+import {LocationsModule} from "../locations/locations.module";
 
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule,ConfirmDialogModule,CheckboxModule,MessagesModule } from 'primeng/primeng';
 
 
 @NgModule({
-    imports:      [CommonModule,InputTextModule,FormsModule,ReactiveFormsModule, DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule, ConfirmDialogModule,CheckboxModule,MessagesModule,
+    imports:      [CommonModule,InputTextModule,FormsModule,ReactiveFormsModule, DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule, ConfirmDialogModule,CheckboxModule,MessagesModule,LocationsModule
 
                     ],
     declarations: [FamilyInformationComponent,
                     FamilyInformationDetailComponent,
                     FamilyInformationAddComponent,
                     FamilyInformationUpdateComponent,
-
                     ],
     bootstrap:    [FamilyInformationComponent],
-    providers:    [FamilyInformationService],
+    providers:    [FamilyInformationService,RelationTypeServices],
     exports: 	  [FamilyInformationComponent]
 })
 export class FamilyInformationModule { }
