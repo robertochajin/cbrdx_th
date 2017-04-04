@@ -91,26 +91,40 @@
               </form>
             </p-accordionTab>
 
-            <p-accordionTab header="Información Familiar" [selected]="acordion == 1">
+            <p-accordionTab header="Datos adicionales" [selected]="acordion == 1">
+              <fieldset>
+                <employees-additional-data *ngIf="employee.idTercero" [employee]="employee"></employees-additional-data>
+              </fieldset>
+            </p-accordionTab>
+
+           <p-accordionTab header="Datos de Contacto" [selected]="acordion == 2">
+              <fieldset>
+                <employees-contact *ngIf="employee.idTercero" [employee]="employee"></employees-contact>
+              </fieldset>
+            </p-accordionTab>
+
+            <p-accordionTab header="Información Familiar" [selected]="acordion == 3">
               <family-information *ngIf="employee.idTercero" [employee]="employee"></family-information>
             </p-accordionTab>
 
-            <p-accordionTab header="Ubicación" [selected]="acordion == 2">
+            <p-accordionTab header="Ubicación" [selected]="acordion == 4">
               <employees-locations *ngIf="employee.idTercero" [colaborador]="employee"></employees-locations>
             </p-accordionTab>
 
-            <p-accordionTab header="Formación Academica" [selected]="acordion == 3">
+            <p-accordionTab header="Formación Academica" [selected]="acordion == 5">
               <academic-education-formal *ngIf="employee.idTercero" [employee]="employee"></academic-education-formal>
               <academic-education-no-formal *ngIf="employee.idTercero" [employee]="employee"></academic-education-no-formal>
             </p-accordionTab>
 
-            <p-accordionTab header="Experiencia Laboral" [selected]="acordion == 4">
+            <p-accordionTab header="Experiencia Laboral" [selected]="acordion == 6">
                <work-experience *ngIf="employee.idTercero" [employee]="employee"></work-experience>
             </p-accordionTab>
 
-            <p-accordionTab header="Referencias" [selected]="acordion == 5 ">
+            <p-accordionTab header="Referencias" [selected]="acordion == 7 ">
               <references *ngIf="employee.idTercero" [employee]="employee"></references>
             </p-accordionTab>
+
+
           </p-accordion>
 
         </p-tabPanel>

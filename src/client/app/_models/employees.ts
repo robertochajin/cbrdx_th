@@ -31,7 +31,8 @@ export class Employee {
   public tallaCamisa? : number;
   public tallaPantalon? : number;
   public tallaCalzado?  : number;
-  public correoElectronico?  : string;
+  public correoElectronico  : string;
+  public sitioWeb  : string;
   public fechaCreacion?  : string;
   public idTipoPersona : number;
   public razonSocial?: string;
@@ -82,6 +83,7 @@ export class Employee {
 
     this.auditoriaUsuario = 1;
     this.correoElectronico = "";
+    this.sitioWeb = "";
     this.factorRh = "";
     this.idActividadEconomica =  null;
     this.idCiudadExpDocumento = null;
