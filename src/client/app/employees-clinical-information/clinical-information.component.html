@@ -13,9 +13,9 @@
         <div class="col-md-3 col-xs-12" >
           <label >Fecha inicio</label>
           <p-calendar id="fechaInicio" name="fechaInicio" #fechaInicio="ngModel"  [showIcon]="true"
-                      [maxDate]="maxDate" [minDate]="minDate" [monthNavigator]="true" [yearNavigator]="true"
+                      [maxDate]="maxDateInicio" [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
                       [yearRange]="range" [locale]="es" readonlyInput="readonlyInput" [dataType]="date"
-                      (onSelect)="onSelectMethod($event)" [(ngModel)]="ecd.fechaInicio" required></p-calendar>
+                      (onSelect)="onSelectInicio($event)" [(ngModel)]="ecd.fechaInicio" required></p-calendar>
           <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && fechaInicio.valid">
             <i class="fa fa-close"></i>Fecha inicio es requerido
           </div>
@@ -23,9 +23,9 @@
         <div class="col-md-3 col-xs-12" >
           <label >Fecha fin</label>
           <p-calendar id="fechaFin" name="fechaFin" #fechaFin="ngModel"  [showIcon]="true"
-                      [maxDate]="maxDate" [monthNavigator]="true" [yearNavigator]="true"
+                      [maxDate]="maxDateFin" [minDate]="minDateFin" [monthNavigator]="true" [yearNavigator]="true"
                       [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
-                      [dataType]="date" [(ngModel)]="ecd.fechaFin" ></p-calendar>
+                      (onSelect)="onSelectFin($event)" [dataType]="date" [(ngModel)]="ecd.fechaFin" ></p-calendar>
         </div>
         <div class="col-md-2 col-xs-12" >
           <label >Acción</label>

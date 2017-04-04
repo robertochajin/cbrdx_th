@@ -20,8 +20,10 @@ export class ClinicalInformationComponent {
   ecd: EmployeesClinicalData = new EmployeesClinicalData();
   diagnosticList: DiagnosticosCIE[] = [];
 
-  minDate: Date = null;
-  maxDate: Date = new Date(Date.now());
+  minDateInicio: Date = null;
+  maxDateInicio: Date = new Date(Date.now());
+  minDateFin: Date = null;
+  maxDateFin: Date = null;
   es: any;
   range: string;
   wrongDiagnostic: boolean = true;
@@ -55,17 +57,21 @@ export class ClinicalInformationComponent {
     let year = today.getFullYear();
     let last18Year = year - 18;
     let lastYear = year - 100;
-    this.maxDate = new Date();
-    this.minDate = new Date();
+    this.maxDateInicio = new Date();
+    this.minDateInicio = new Date();
+    this.minDateFin = new Date();
+    this.maxDateFin = new Date();
     if (this.employee.idTipoDocumento === this.idMayorDeEdad) {
-      this.minDate.setFullYear(lastYear, month);
+      this.minDateInicio.setFullYear(lastYear, month);
+      this.minDateFin.setFullYear(lastYear, month);
       this.range = `${lastYear}:${last18Year}`;
-      this.maxDate.setFullYear(last18Year);
     } else {
-      this.minDate.setFullYear(last18Year, month);
+      this.minDateInicio.setFullYear(last18Year, month);
+      this.minDateFin.setFullYear(last18Year, month);
       this.range = `${last18Year}:${year}`;
-      this.maxDate.setFullYear(year);
     }
+    this.maxDateInicio = today;
+    this.maxDateFin = today;
   }
 
   captureDiagnosticId(event: any){
@@ -83,6 +89,18 @@ export class ClinicalInformationComponent {
         this.clinicalInformations.push(data);
       }
     });
+  }
+
+  onSelectInicio(event: any) {
+    let d = new Date(Date.parse(event));
+    // this.ecd.fechaInicio = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+    this.minDateFin.setFullYear(d.getFullYear(),d.getMonth(),d.getDate()+1);
+  }
+
+  onSelectFin(event: any) {
+    let d = new Date(Date.parse(event));
+    // this.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+    this.maxDateInicio.setFullYear(d.getFullYear(),d.getMonth(),d.getDate()-1);
   }
 
   detail(f: EmployeesClinicalData) {
