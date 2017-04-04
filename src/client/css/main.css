@@ -433,6 +433,11 @@ body .ui-state-active,
 body .ui-state-highlight{
     background-color: #5d5d5d!important;
 }
+p-tree{
+  display: inherit;
+  overflow: auto;
+  height: 410px;
+}
 
 /**
 ------------------------ Form CSS ------------------------------
@@ -480,10 +485,7 @@ body .ui-tree .ui-treenode .ui-treenode-content .ui-treenode-label {
 body .ui-tree .ui-treenode .ui-treenode-content .ui-tree-toggler {
   vertical-align: top!important;
 }
-p-tree{
-  height: 410px;
-  display: flex;
-}
 dashboard_height{
   height: 275px;
 }
+

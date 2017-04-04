@@ -35,7 +35,12 @@ export class SharedModule {
         //console.log('router yeah');
         //this._window.scrollTo(0, 0);
         //<any>changePage();
+
+        // ScrollTop
         jQuery('#wrapper').animate({scrollTop:0},'fast');
+
+        // Focus Primer campo
+        jQuery(':input:enabled:visible:first').select().focus();
       }
     });
   }
