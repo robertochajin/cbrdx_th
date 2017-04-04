@@ -1,5 +1,5 @@
 <div class="ui-grid-row">
-  <div class="col-md-6 col-xs-12 " style="text-align: left"><label>Ultima vez que ingresó: </label>
+  <div class="col-md-6 col-xs-12 " style="text-align: left"><label>{{ 'LBL_ULTIMOINGRESO' | translate:param }}: </label>
   </div>
   <div class="col-md-6 col-xs-12 ">
     <button class=" pull-right" (click)="displayDialog=true" type="button" pButton icon="fa-plus" label="Configurar Widgets"></button>
@@ -30,7 +30,7 @@
         <p-panel>
           <p-header>
             <div class="ui-helper-clearfix">
-              <span class="ui-panel-title">Usuarios Activos /Inactivos</span>
+              <span class="ui-panel-title">{{ 'LBL_USUARIOS' | translate:param }} {{ 'LBL_ACTIVO' | translate:param }}/{{ 'LBL_INACTIVO' | translate:param }}</span>
               <button class="pull-right" type="text" (click)="usuariosAct = !usuariosAct" icon=""><i class="fa fa-close"></i></button>
               <!--<input pButton=""  [style]="{'float':'right'}" label="Save" icon="fa-check" (onClick)="save()" [model]="items"></input>-->
             </div>
@@ -40,7 +40,7 @@
             <div class="info-box" style="background: #f9f9f9;">
               <span class="info-box-icon bg-green"><i class="fa fa-user"></i></span>
               <div class="info-box-content">
-                <span class="info-box-text">Usuarios Activos</span>
+                <span class="info-box-text">{{ 'LBL_USUARIOS' | translate:param }} {{ 'LBL_ACTIVO' | translate:param }}</span>
                 <span class="info-box-number" style="text-align: center;font-size: 2.4em;">{{usuariosActivos}}</span>
               </div>
             </div>
@@ -48,7 +48,7 @@
             <div class="info-box" style="background: #f9f9f9;">
               <span class="info-box-icon bg-yellow"><i class="fa fa-user-times"></i></span>
               <div class="info-box-content">
-                <span class="info-box-text">Usuarios Inactivos</span>
+                <span class="info-box-text">{{ 'LBL_USUARIOS' | translate:param }} {{ 'LBL_INACTIVO' | translate:param }}</span>
                 <span class="info-box-number" style="text-align: center;font-size: 2.4em;">{{usuariosInactivos}}</span>
               </div>
             </div>
