@@ -30,7 +30,7 @@ export class EmployeesUpdateComponent {
   @Input()
   employee: Employee = new Employee();
   header: string = 'Agregando Colaborador';
-  
+
   personTypes: SelectItem[] = [];
   documentTypes: SelectItem[] = [];
   resultExpeditionCity: DivisionPolitica[];
@@ -53,7 +53,7 @@ export class EmployeesUpdateComponent {
   listadoOcupaciones: Ocupaciones[];
   listadoActividadEconomica: ActividadEconomica[];
   msgs: Message[] = [];
-  
+
   maxDate:Date = null;
   maxDateDocumento:Date = null;
   range: string;
@@ -62,7 +62,7 @@ export class EmployeesUpdateComponent {
   birthDate: string;
   deathDate: string;
   idTipoTercero: number;
-  
+
   constructor(
     private employeesService: EmployeesService,
     private route: ActivatedRoute,
@@ -75,7 +75,7 @@ export class EmployeesUpdateComponent {
     private confirmationService: ConfirmationService,
     private _nav:NavService
   ) {
-    
+
     this.listEmployeesService.getListPersonTypes().subscribe(res => {
       this.personTypes.push({label: "Seleccione", value: null});
       for (let dp of res) {
@@ -94,7 +94,7 @@ export class EmployeesUpdateComponent {
         });
       }
     });
-    
+
     this.listEmployeesService.getGenderTypes().subscribe(res => {
       this.genderTypes.push({label: "Seleccione", value: null});
       for (let dp of res) {
@@ -167,7 +167,7 @@ export class EmployeesUpdateComponent {
         });
       }
     });
-    
+
     this.ocupacionesService.listByNivel(4).subscribe(res => {
       this.occupations.push({label: "Seleccione", value: null});
       for (let dp of res) {
@@ -177,41 +177,41 @@ export class EmployeesUpdateComponent {
         });
       }
     });
-  
+
     this.listEmployeesService.getTerType("TERCOL").subscribe(
       res => {
         this.idTipoTercero = res.idListaTipoTercero
       });
-    
+
   }
-  
+
   ngOnInit() {
-  
+
       this.route.params
           .switchMap((params: Params) => this.employeesService.get(+params['id']))
           .subscribe(employee => {
             this.employee = employee;
             this.updateActivities(this.employee.idSectorEconomico);
-  
-            
+
+
             let mom: moment.Moment = moment(this.employee.fechaDocumento, 'YYYY-MM-DD');
             this.expeditionDate = mom.format('MM/DD/YYYY');
-            
+
             let mom2: moment.Moment = moment(this.employee.fechaNacimiento, 'YYYY-MM-DD');
             this.birthDate = mom2.format('MM/DD/YYYY');
-            
-            
+
+
             if (this.employee.indicadorVivo == false) {
               let mom3: moment.Moment = moment(this.employee.fechaDefuncion, 'YYYY-MM-DD');
               this.deathDate = mom3.format('MM/DD/YYYY');
             }
-  
+
             this.ciudadExpDocumento = this.employee.ciudadExpDocumento;
             this.backupCiudadExpDocumento = this.employee.ciudadExpDocumento;
             this.ciudadNacimiento = this.employee.ciudadNacimiento;
             this.backupCiudadNacimiento = this.employee.ciudadNacimiento;
       });
-    
+
     this.es = {
       firstDayOfWeek: 1,
       dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
@@ -236,7 +236,7 @@ export class EmployeesUpdateComponent {
     this.range = `${lasYear}:${year}`;
     this.focusUP();
   }
-  
+
   onSubmit() {
     this.focusUP();
     if(this.ciudadExpDocumento != this.backupCiudadExpDocumento ){
@@ -253,7 +253,7 @@ export class EmployeesUpdateComponent {
       this.employee.segundoNombre = this.capitalizeSave(this.employee.segundoNombre);
       this.employee.primerApellido = this.capitalizeSave(this.employee.primerApellido);
       this.employee.segundoApellido = this.capitalizeSave(this.employee.segundoApellido);
-      
+
       let mom: moment.Moment = moment(this.expeditionDate, 'MM/DD/YYYY');
       this.employee.fechaDocumento = mom.format('YYYY-MM-DD');
       let mom2: moment.Moment = moment(this.birthDate, 'MM/DD/YYYY');
@@ -263,7 +263,7 @@ export class EmployeesUpdateComponent {
         this.employee.fechaDefuncion = mom3.format('YYYY-MM-DD');
       }
       this.employee.idTipoTercero = this.idTipoTercero;
-      
+
       this.employeesService.update(this.employee)
         .subscribe(data => {
           this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
@@ -274,7 +274,7 @@ export class EmployeesUpdateComponent {
         });
     }
   }
-  
+
   goBack(): void {
     this.confirmationService.confirm({
       message: ` ¿Esta seguro que desea salir sin guardar?`,
@@ -291,32 +291,32 @@ export class EmployeesUpdateComponent {
       lis => this.resultExpeditionCity = lis
     );
   }
-  
+
   captureExpeditionCity(event: any) {
     this.employee.idCiudadExpDocumento = event.idDivisionPolitica;
     this.ciudadExpDocumento = event.camino;
     this.backupCiudadExpDocumento = event.camino;
   }
-  
+
   searchBirthPlace(event: any) {
     this.politicalDivisionService.getAllCities(event.query).subscribe(
       lis => this.resultBirthPlace = lis
     );
   }
-  
+
   captureBirthPlace(event: any) {
     this.employee.idCiudadNacimiento = event.idDivisionPolitica;
     this.ciudadNacimiento = event.camino;
     this.backupCiudadNacimiento = event.camino;
   }
-  
+
   focusUP() {
     const element = document.querySelector('#formulario');
     if (element) { element.scrollIntoView(element); }
   }
-  
+
   updateDate(event:any) {
-    
+
     let today = new Date();
     let month = today.getMonth();
     let year = today.getFullYear();
@@ -325,8 +325,8 @@ export class EmployeesUpdateComponent {
     let lastYear =  prev18Year - 80;
     this.maxDate = new Date();
     this.maxDate.setMonth(month);
-    
-    
+
+
     if(event.value === 1) {
       this.maxDate.setFullYear(prev18Year);
     } else if (event.value === 2) {
@@ -334,7 +334,7 @@ export class EmployeesUpdateComponent {
     } else {
       this.maxDate.setFullYear(year);
     }
-    
+
     if((this.employee.fechaNacimiento) !== null && (this.employee.fechaNacimiento) !== '' ) {
       let timestamp2 = new Date(this.maxDate).getTime();
       let timestamp1 = new Date(this.employee.fechaNacimiento).getTime();
@@ -343,33 +343,33 @@ export class EmployeesUpdateComponent {
         this.employee.fechaNacimiento = '';
       }
     }
-    
+
   }
-  
+
   capitalize(event:any) {
     let input = event.target.value;
     event.target.value = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
   }
-  
+
   capitalizeSave(input:any) {
     return input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
   }
-  
+
   onExpeditionDate(event:any) {
     let d = new Date(Date.parse(event));
     this.expeditionDate= `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
   }
-  
+
   onBirthDate(event:any) {
     let d = new Date(Date.parse(event));
     this.birthDate= `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
   }
-  
+
   onDeathDate(event:any) {
     let d = new Date(Date.parse(event));
     this.deathDate= `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
   }
-  
+
   updateActivities(value:number) {
     this.activities = [];
     this.actividadEconomicaService.listLastChild(value).subscribe(res => {
@@ -382,5 +382,5 @@ export class EmployeesUpdateComponent {
       }
     });
   }
-  
+
 }
