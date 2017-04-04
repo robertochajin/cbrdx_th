@@ -15,7 +15,8 @@ import {Search} from "../_models/search";
 @Component({
     moduleId: module.id,
     templateUrl: 'divisionPolitica.component.html',
-    selector: 'divisionPolitica'
+    selector: 'divisionPolitica',
+
 })
 export class DivisionPoliticaComponent implements OnInit {
     msgs: Message[] = [];
@@ -408,6 +409,9 @@ export class DivisionPoliticaComponent implements OnInit {
     }
 
     captureId(event: Search) {
+      // ScrollTo 0;
+      jQuery('#trvDivisionPolitica').scrollTop(0);
+
         this.divisionPoliticaService.viewDivisionPolitica(event.value).subscribe(res => {
             this.politicalDivision = res;
             this.searchRecursive(res);
@@ -417,6 +421,8 @@ export class DivisionPoliticaComponent implements OnInit {
             if (res.idDivisionPolitica != 0) {
                 this.divisionPoliticaService.viewDivisionPolitica(res.idDivisionPoliticaPadre).subscribe(res => {
                     this.labelPadre = res.descripcionDivisonPolitica;
+                    // Scroll to Select
+                    jQuery('#trvDivisionPolitica').scrollTop(jQuery('.ui-state-highlight').position().top - jQuery('#trvDivisionPolitica').height() / 2);
 
                 });
             } else {
@@ -467,6 +473,8 @@ export class DivisionPoliticaComponent implements OnInit {
 
         this.selectedSearch = null;
         this.nodeSelect(this.selectedNode);
+
+
     }
 
     private searchLevel(id:number,tipo:number){

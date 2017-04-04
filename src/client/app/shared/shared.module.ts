@@ -1,13 +1,15 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import {NgModule, ModuleWithProviders} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {RouterModule, Router, NavigationEnd} from '@angular/router';
 
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { NameListService } from './name-list/name-list.service';
+/** Componentes de la Template principal **/
+import {ToolbarComponent} from './toolbar/toolbar.component';
+import {NavbarComponent} from './navbar/navbar.component';
+import {BreadcrumbComponent} from './breadcrumb/breadcrumb.component';
 import {TranslateService, TranslateModule} from 'ng2-translate';
-// import { LocationsComponent }  from '../locations/locations.component';
+
+import {WindowRefService} from '../_services/window-ref.service';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -15,17 +17,40 @@ import {TranslateService, TranslateModule} from 'ng2-translate';
 
 @NgModule({
   imports: [CommonModule, RouterModule],
-  declarations: [ToolbarComponent, NavbarComponent, 
-  // LocationsComponent
-  ],
-  exports: [ToolbarComponent, NavbarComponent,
-    CommonModule, FormsModule, RouterModule,TranslateModule]
+  declarations: [ToolbarComponent, NavbarComponent, BreadcrumbComponent],
+  exports: [ToolbarComponent, NavbarComponent, BreadcrumbComponent,
+    CommonModule, FormsModule, RouterModule, TranslateModule]
 })
 export class SharedModule {
+
+  private _window: Window;
+
+
+  constructor(private router: Router, windowRef: WindowRefService) {
+
+    this._window = windowRef.nativeWindow;
+
+    router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        //console.log('router yeah');
+        //this._window.scrollTo(0, 0);
+        //<any>changePage();
+
+        // ScrollTop
+        jQuery('#wrapper').animate({scrollTop:0},'fast');
+
+        // Focus Primer campo
+        jQuery(':input:enabled:visible:first').select().focus();
+      }
+    });
+  }
+
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [NameListService,TranslateService]
+      providers: [TranslateService]
     };
   }
+
+
 }

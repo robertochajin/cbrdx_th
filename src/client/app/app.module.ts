@@ -1,11 +1,11 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {APP_BASE_HREF} from "@angular/common";
-import {HttpModule,Http} from "@angular/http";
+import {HttpModule, Http} from "@angular/http";
 import {AppComponent} from "./app.component";
 import {AppRoutingModule} from "./app-routing.module";
-import {AboutModule} from "./about/about.module";
-import {HomeModule} from "./home/home.module";
+import {WindowRefService} from './_services/window-ref.service';
+
 import {EmployeesModule} from "./employees/employees.module";
 import {SharedModule} from "./shared/shared.module";
 import {FamilyInformationModule} from "./employees-family-information/family-information.module";
@@ -35,8 +35,10 @@ import {OcupacionesModule} from "./ocupaciones/ocupaciones.module";
 import {ActividadEconomicaModule} from "./actividadEconomica/actividadEconomica.module";
 import {ClinicalInformationModule} from "./employees-clinical-information/clinical-information.module";
 
-@NgModule( {
-  imports: [BrowserModule, HttpModule, AppRoutingModule, AboutModule, HomeModule,
+
+//CarsModule,
+@NgModule({
+  imports: [BrowserModule, HttpModule, AppRoutingModule,
     EmployeesModule,
     FamilyInformationModule,
     LocationModule,
@@ -66,10 +68,12 @@ import {ClinicalInformationModule} from "./employees-clinical-information/clinic
   ],
 
   declarations: [AppComponent],
-  providers: [{
-    provide: APP_BASE_HREF,
-    useValue: '<%= APP_BASE %>'
-  },
+  providers: [
+    WindowRefService,
+    {
+      provide: APP_BASE_HREF,
+      useValue: '<%= APP_BASE %>'
+    },
     AuthGuard,
     AuthenticationService,
     LoginService,
@@ -81,6 +85,6 @@ import {ClinicalInformationModule} from "./employees-clinical-information/clinic
 
   bootstrap: [AppComponent]
 
-} )
+})
 export class AppModule {
 }
