@@ -9,4 +9,5 @@ export class CentroCostos {
     indicadorHabilitado: boolean = true;
     auditoriaUsuario: number;
     auditoriaFecha: Date;
+
 }

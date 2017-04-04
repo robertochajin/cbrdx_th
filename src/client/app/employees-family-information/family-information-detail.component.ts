@@ -28,8 +28,10 @@ export class FamilyInformationDetailComponent implements OnInit   {
 
     ngOnInit(): void {
         this.route.params
-            .switchMap((params: Params) => this.familyInformationService.get(+params['id']))
-            .subscribe(familyInformation => { this.familyInformation = familyInformation });
+            .subscribe((params: Params) => {
+              this.familyInformationService.get(+params['id'])
+              .subscribe(familyInformation => { this.familyInformation = familyInformation })
+            } );
     }
 
     goBack(): void {
