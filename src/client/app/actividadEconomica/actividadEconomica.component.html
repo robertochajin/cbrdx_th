@@ -18,7 +18,7 @@
 <div class="ui-grid-row">
     <div class="col-md-4">
 
-        <p-tree [(value)]="treeActividadEconomica" selectionMode="single" [(selection)]="treeselected"
+        <p-tree id="trvActividadEconomica"[(value)]="treeActividadEconomica" selectionMode="single" [(selection)]="treeselected"
 
                 (onNodeSelect)="nodeSelect($event.node)"
                 (onNodeExpand)="nodeExpand($event.node)"
