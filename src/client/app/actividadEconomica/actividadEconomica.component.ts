@@ -301,6 +301,9 @@ export class ActividadEconomicaComponent implements OnInit {
     }
 
     captureId(event: Search) {
+      // ScrollTo 0;
+      jQuery('#trvActividadEconomica').scrollTop(0);
+
         this.actividadEconomicaService.viewActividadEconomica(event.value).subscribe(res => {
             this.actividadEconomica = res;
             this.searchRecursive(res);
@@ -308,6 +311,9 @@ export class ActividadEconomicaComponent implements OnInit {
             if (res.idActividadPadre != 0) {
                 this.actividadEconomicaService.viewActividadEconomica(res.idActividadPadre).subscribe(res => {
                     this.labelPadre = res.actividadEconomica;
+                  // Scroll to Select
+                  jQuery('#trvActividadEconomica').scrollTop(jQuery('.ui-state-highlight').position().top - jQuery('#trvActividadEconomica').height() / 2);
+
                 });
             } else {
                 this.labelPadre = "";
