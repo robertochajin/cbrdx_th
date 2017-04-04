@@ -1,6 +1,6 @@
 <div>
     <div class="row datable-header">
-      <form (ngSubmit)="d.valid && saveDiagnostic()" #d="ngForm" novalidate id="diagnosticForm">
+      <!--<form (ngSubmit)="d.valid && saveDiagnostic()" #d="ngForm" novalidate id="diagnosticForm">-->
         <div class="col-md-4 col-xs-12" >
           <label >Diagnóstico</label>
           <p-autoComplete placeholder="Buscar diagnóstico" field="nombre" name="diagnostico" id="diagnostico" [(ngModel)]="ecd.diagnostico"
@@ -31,7 +31,7 @@
           <label >Acción</label>
           <button class="ui-button ui-button-success btn" icon="fa-plus" pButton icon="fa-plus" type="submit" ></button>
         </div>
-      </form>
+      <!--</form>-->
     </div>
     <p-dataTable [value]="clinicalInformations"   [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
         <p-column field="codigo" header="Código" [sortable]="true"></p-column>
