@@ -1,12 +1,12 @@
 <div>
     <div class="row datable-header">
-      <!--<form (ngSubmit)="d.valid && saveDiagnostic()" #d="ngForm" novalidate id="diagnosticForm">-->
+      <form (ngSubmit)="d.valid && saveDiagnostic()" #d="ngForm" novalidate id="diagnosticForm">
         <div class="col-md-4 col-xs-12" >
           <label >Diagnóstico</label>
           <p-autoComplete placeholder="Buscar diagnóstico" field="nombre" name="diagnostico" id="diagnostico" [(ngModel)]="ecd.diagnostico"
                           #diagnostico="ngModel" [suggestions]="diagnosticList" required="true" (completeMethod)="diagnosticSearch($event)" (onSelect)="captureDiagnosticId($event)">
           </p-autoComplete>
-          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submit() && wrongDiagnostic">
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && wrongDiagnostic">
             <i class="fa fa-close"></i> Diagnóstico es requerido
           </div>
         </div>
@@ -16,7 +16,7 @@
                       [maxDate]="maxDate" [minDate]="minDate" [monthNavigator]="true" [yearNavigator]="true"
                       [yearRange]="range" [locale]="es" readonlyInput="readonlyInput" [dataType]="date"
                       (onSelect)="onSelectMethod($event)" [(ngModel)]="ecd.fechaInicio" required></p-calendar>
-          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submit() && fechaInicio.valid">
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && fechaInicio.valid">
             <i class="fa fa-close"></i>Fecha inicio es requerido
           </div>
         </div>
@@ -31,7 +31,7 @@
           <label >Acción</label>
           <button class="ui-button ui-button-success btn" icon="fa-plus" pButton icon="fa-plus" type="submit" ></button>
         </div>
-      <!--</form>-->
+      </form>
     </div>
     <p-dataTable [value]="clinicalInformations"   [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
         <p-column field="codigo" header="Código" [sortable]="true"></p-column>
