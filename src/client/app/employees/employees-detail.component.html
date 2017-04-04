@@ -111,6 +111,10 @@
             <p-accordionTab header="Referencias" [selected]="acordion == 5 ">
               <references *ngIf="employee.idTercero" [employee]="employee"></references>
             </p-accordionTab>
+
+            <p-accordionTab header="Datos clínicos" [selected]="acordion == 6">
+              <clinical-information *ngIf="employee.idTercero" [employee]="employee"></clinical-information>
+            </p-accordionTab>
           </p-accordion>
 
         </p-tabPanel>

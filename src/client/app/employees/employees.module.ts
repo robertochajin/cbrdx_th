@@ -18,6 +18,7 @@ import {AcademicEducationModule} from './../employees-academic-education/academi
 import {WorkExperienceModule} from './../employees-work-experience/work-experience.module';
 import {LocationModule} from '../employees-location/employee-location.module';
 import {EmployeesAdditionalDataComponent} from "./employees-additional-data.component";
+import {ClinicalInformationModule} from "../employees-clinical-information/clinical-information.module";
 
 //import {MomentModule} from 'angular2-moment/index.js';
 
@@ -28,6 +29,7 @@ import {EmployeesAdditionalDataComponent} from "./employees-additional-data.comp
     AcademicEducationModule,
     WorkExperienceModule,
     LocationModule,
+    ClinicalInformationModule,
     FormSharedModule
   ],
   declarations: [EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent,EmployeesAdditionalDataComponent],
