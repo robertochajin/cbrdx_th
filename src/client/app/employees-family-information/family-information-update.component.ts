@@ -1,206 +1,250 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, Input, OnInit, } from '@angular/core';
-import { FamilyInformationService } from './family-information.service';
-import { ActivatedRoute, Params }   from '@angular/router';
-import { Location } from '@angular/common';
-import { ConstructorFamilyInformation } from './family-information.construct';
-import { SelectItem, ConfirmationService, Message } from 'primeng/primeng';
-import { FormBuilder, FormGroup, Validators, FormControl, NgForm } from '@angular/forms';
+import {Component, Input, OnInit,} from '@angular/core';
+import {FamilyInformationService} from './family-information.service';
+import {Router, ActivatedRoute, Params} from '@angular/router';
+import {Location} from '@angular/common';
+import {ConstructorFamilyInformation} from './family-information.construct';
+import {SelectItem, ConfirmationService, Message} from 'primeng/primeng';
+import {FormBuilder, FormGroup, Validators, FormControl, NgForm} from '@angular/forms';
 import * as moment from 'moment/moment';
-import { NavService } from '../_services/_nav.service';
+import {NavService} from '../_services/_nav.service';
+import {Localizaciones} from "../_models/localizaciones";
+import {LocateService} from "../_services/locate.service";
+import {ListEmployeesService} from "../_services/lists-employees.service";
+import {RelationTypeServices} from "../_services/relation-type.service";
+import {Employee} from "../_models/employees";
+import {EmployeesService} from "../_services/employees.service";
+import {PoliticalDivisionService} from "../_services/political-division.service";
 
 @Component({
-    moduleId: module.id,
-    selector: 'family-information',
-    templateUrl: 'family-information-form.component.html',
-    providers:  [ConfirmationService]
+  moduleId: module.id,
+  selector: 'family-information-update',
+  templateUrl: 'family-information-form.component.html',
+  providers: [ConfirmationService]
 })
 
 export class FamilyInformationUpdateComponent implements OnInit {
-    @Input()
-    familyInformation:  ConstructorFamilyInformation = new ConstructorFamilyInformation();
-    header: string = 'Editando Familiar';
-    documentTypes: SelectItem[] = [];
-    relationship: SelectItem[] = [];
-    selectedDocument: any;
-    selectedRelationship: any;
-    msgs: Message[] = [];
-    familyform: FormGroup;
-    submitted: boolean;
-    maxDate:Date = null;
-    minDate:Date = null;
-    es: any;
-    range: string;
-    idTercero: number;
+  @Input()
 
-    constructor(
-        private familyInformationService: FamilyInformationService,
-        private route: ActivatedRoute,
-        private location: Location,
-        private confirmationService: ConfirmationService,
-        private fb: FormBuilder,
-        private _nav:NavService
+  familyInformation: ConstructorFamilyInformation = new ConstructorFamilyInformation();
+  localizacion: Localizaciones = new Localizaciones();
+  terceroFamiliar: Employee = new Employee();
+  header: string = 'Editando Familiar';
+  documentTypes: SelectItem[] = [];
+  relationship: SelectItem[] = [];
+  selectedDocument: any;
+  selectedRelationship: any;
+  idTercero: number;
+  msgs: Message[] = [];
+  convive: boolean;
+  submitted: boolean;
+  maxDate: Date = null;
+  es: any;
+  range: string;
+  addinglocation: boolean = true;
+  idTipoTercero: number;
+  idMayorDeEdad: number = 1;
+  //Es necesario crear la constante y consultarla
 
-    ) {}
-    ngOnInit(): void {
-      this.es = {
-        firstDayOfWeek: 1,
-        dayNames: [ 'domingo','lunes','martes','miércoles','jueves','viernes','sábado' ],
-        dayNamesShort: [ 'dom','lun','mar','mié','jue','vie','sáb' ],
-        dayNamesMin: [ 'D','L','M','X','J','V','S' ],
-        monthNames: [ 'enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre' ],
-        monthNamesShort: [ 'ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic' ]
-      };
-        let today = new Date();
-        let month = today.getMonth();
-        let year = today.getFullYear();
-        let last18Year = year-18;
-        let lastYear = year-100;
-        this.maxDate = new Date();
-        this.maxDate.setMonth(month);
-      this.maxDate.setFullYear(year);
-      this.minDate = new Date();
-      this.minDate.setMonth(1);
-      this.minDate.setFullYear(lastYear);
-      this.range = `${lastYear}:${year}`;
-
-        this.familyform = this.fb.group({
-          'idTipoDocumento': new FormControl('', Validators.required),
-          'numeroDocumento': new FormControl('', Validators.required),
-          'primerNombre': new FormControl('', Validators.required),
-          'segundoNombre': new FormControl(''),
-          'primerApellido': new FormControl('', Validators.required),
-          'segundoApellido': new FormControl(''),
-          'fechaNacimiento': new FormControl('', Validators.compose([Validators.required])),
-          'correoElectronico': new FormControl('', Validators.compose([Validators.required])),
-          'idParentezco': new FormControl('', Validators.required),
-          'telefonoFijo': new FormControl('', Validators.required),
-          'telefonoCelular': new FormControl(''),
-          'direccion': new FormControl('', Validators.required),
-          'idConvivencia': new FormControl('')
-        });
-        this.familyInformationService.getDocumentType().subscribe(
-          documentTypes => {
-            this.documentTypes = documentTypes;
-            this.documentTypes.unshift({label:  'Seleccione', value:null});
-          }
-        );
-        this.familyInformationService.getRelationship().subscribe(
-          relationship => {
-            this.relationship = relationship;
-            this.relationship.unshift({label:  'Seleccione', value:null});
-          }
-        );
-        this.route.params.subscribe((params: Params) => {
-          this.idTercero = params['tercero'];
-          this.familyInformationService.get(+params['id']).subscribe(
-            familyInformation => {
-              this.familyInformation = familyInformation;
-              this.selectedDocument = this.familyInformation.idTipoDocumento;
-              this.selectedRelationship = this.familyInformation.idParentezco;
-              let mom: moment.Moment = moment(this.familyInformation.fechaNacimiento, 'YYYY-MM-DD');
-              this.familyInformation.fechaNacimiento = mom.format('MM/DD/YYYY');
-              this.familyform.value.idConvivencia = this.familyform.value.idConvivencia ? true : false;
-
-              if(this.selectedDocument === 1) {
-                this.maxDate.setFullYear(last18Year);
-                this.range = `${lastYear}:${last18Year}`;
-              } else if (this.selectedDocument === 2) {
-                this.range = `${last18Year}:${year}`;
-                this.maxDate.setFullYear(year);
-                // this.minDate.setFullYear(last18Year);
-              } else {
-                this.maxDate.setFullYear(year);
-                this.range = `${last18Year}:${year}`;
-              }
-
-            });
-        });
-        this.focusUP();
-
-    }
-
-    onSubmit(value: string) {
-        this.submitted = true;
-        this.msgs = [];
-        this.msgs.push({severity:'info', summary:'Success', detail:'Guardando'});
-        this.familyform.value.idFamiliar = this.familyInformation.idFamiliar;
-        this.familyform.value.primerNombre = this.capitalizeSave(this.familyform.value.primerNombre);
-        this.familyform.value.segundoNombre = this.capitalizeSave(this.familyform.value.segundoNombre);
-        this.familyform.value.primerApellido = this.capitalizeSave(this.familyform.value.primerApellido);
-        this.familyform.value.segundoApellido = this.capitalizeSave(this.familyform.value.segundoApellido);
-        let mom: moment.Moment = moment(this.familyform.value.fechaNacimiento, 'MM/DD/YYYY');
-        this.familyform.value.fechaNacimiento = mom.format('YYYY-MM-DD') ;
-        this.familyform.value.idTercero = this.idTercero;
-        this.familyform.value.idTerceroFamiliar = this.familyInformation.idTerceroFamiliar;
-        this.familyform.value.idConvivencia = this.familyform.value.idConvivencia ? 1 : 0;
-        this.familyform.value.indicadorHabilitado = 1;
-        this.familyInformationService.update(this.familyform.value)
-          .subscribe(
-            data => {
-              this._nav.setTab(1);
-              this.location.back();
-            });
-    }
-
-
-    goBack(): void {
-        this.confirmationService.confirm({
-            message: ` ¿Esta seguro que desea Cancelar?`,
-            header: 'Corfirmación',
-            icon: 'fa fa-question-circle',
-            accept: () => {
-                this._nav.setTab(1);
-                this.location.back();
-            }
-        });
-    }
-
-  onSelectMethod(event:any) {
-    let d = new Date(Date.parse(event));
-    this.familyInformation.fechaNacimiento = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
+  constructor(private familyInformationService: FamilyInformationService,
+              private route: ActivatedRoute,
+              private fb: FormBuilder,
+              private locateService: LocateService,
+              private employeesService: EmployeesService,
+              private relationTypeServices: RelationTypeServices,
+              private listEmployeesService: ListEmployeesService,
+              private confirmationService: ConfirmationService,
+              private politicalDivisionService: PoliticalDivisionService,
+              private location: Location,
+              private _nav: NavService) {
   }
 
-  // onBlurMethod(event) {
-  //   let inp = event.target.value;
-  //   inp = this.strToDate(inp);
-  //
-  //   if(inp!= "" && inp != null && !isNaN(inp)) {
-  //     let d = new Date(inp);
-  //     this.familyInformation.fechaNacimiento = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-  //   }else{
-  //     this.familyInformation.fechaNacimiento = '';
-  //   }
-  // }
+  ngOnInit(): void {
+    this.es = {
+      firstDayOfWeek: 1,
+      dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
+      dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
+      dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+      monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+      monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
+    };
+    let today = new Date();
+    let month = today.getMonth();
+    let year = today.getFullYear();
+    let last18Year = year - 18;
+    let lastYear = year - 100;
+    this.maxDate = new Date();
+    this.maxDate.setMonth(month);
+    this.maxDate.setFullYear(year);
+    this.range = `${lastYear}:${year}`;
 
-  onChangeMethod(event:any) {
+
+    this.listEmployeesService.getDocumentTypes().subscribe(
+      documentTypes => {
+        this.documentTypes.push({label: 'Seleccione', value: null});
+        documentTypes.map((s: any) => {
+          this.documentTypes.push({label: s.nombreListaTipoDocumento, value: s.idListaTipoDocumento});
+        });
+      }
+    );
+
+    this.relationTypeServices.getAllEnabled().subscribe(
+      relationship => {
+        this.relationship.unshift({label: 'Seleccione', value: null});
+        relationship.map((s: any) => {
+          this.relationship.push({label: s.nombreListaParentesco, value: s.idListaParentesco});
+        });
+      }
+    );
+
+    this.listEmployeesService.getTerType("TERFAM").subscribe(
+      res => {
+        this.idTipoTercero = res.idListaTipoTercero
+      });
+
+    this.familyInformation.idConvivencia = 0;
+    this.route.params.subscribe((params: Params) => {
+      this.idTercero = params['tercero'];
+    });
+
+    this.route.params.subscribe((params: Params) => {
+      this.idTercero = params['tercero'];
+      this.familyInformationService.get(+params['id']).subscribe(
+        familyInformation => {
+          this.familyInformation = familyInformation;
+          this.selectedDocument = this.familyInformation.idTipoDocumento;
+          this.selectedRelationship = this.familyInformation.idParentesco;
+          let mom: moment.Moment = moment(this.familyInformation.fechaNacimiento, 'YYYY-MM-DD');
+          this.familyInformation.fechaNacimiento = mom.format('MM/DD/YYYY');
+          this.convive = this.familyInformation.idConvivencia == 1 ? true : false;
+
+          if (this.selectedDocument === this.idMayorDeEdad) {
+            this.maxDate.setFullYear(last18Year);
+            this.range = `${lastYear}:${last18Year}`;
+          } else {
+            this.range = `${last18Year}:${year}`;
+            this.maxDate.setFullYear(year);
+          }
+
+          this.employeesService.get(this.familyInformation.idFamiliar).subscribe(terceroFamiliar => this.terceroFamiliar = terceroFamiliar);
+
+          this.locateService.getById(this.familyInformation.idLocalizacion).subscribe(localizacion => {
+            this.localizacion = localizacion;
+            this.familyInformation.direccion = localizacion.direccion;
+            this.localizacion.locacion = {camino: '', idDivisionPolitica: null};
+            this.politicalDivisionService.getLocation(localizacion.idDivisionPolitica).subscribe(ciudad => {
+              this.localizacion.locacion.camino = ciudad.camino;
+              this.localizacion.locacion.idDivisionPolitica = ciudad.idDivisionPolitica;
+            });
+          });
+
+        });
+    });
+
+    this.focusUP();
+
+  }
+
+  onSubmit(value: string) {
+    this.submitted = true;
+    this.msgs = [];
+    if (this.familyInformation.direccion !== '') {
+      this.submitted = true;
+      this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
+
+      this.locateService.update(this.localizacion).subscribe(
+        data => {
+
+          this.terceroFamiliar.idTipoDocumento = this.selectedDocument;
+          this.terceroFamiliar.numeroDocumento = this.familyInformation.numeroDocumento;
+          this.terceroFamiliar.correoElectronico = this.familyInformation.correoElectronico;
+          this.terceroFamiliar.telefonoFijo = this.familyInformation.telefonoFijo;
+          this.terceroFamiliar.telefonoCelular = this.familyInformation.telefonoCelular;
+          this.terceroFamiliar.primerNombre = this.capitalizeSave(this.familyInformation.primerNombre);
+          this.terceroFamiliar.segundoNombre = this.capitalizeSave(this.familyInformation.segundoNombre);
+          this.terceroFamiliar.primerApellido = this.capitalizeSave(this.familyInformation.primerApellido);
+          this.terceroFamiliar.segundoApellido = this.capitalizeSave(this.familyInformation.segundoApellido);
+          let mom: moment.Moment = moment(this.familyInformation.fechaNacimiento, 'MM/DD/YYYY');
+          this.terceroFamiliar.fechaNacimiento = mom.format('YYYY-MM-DD');
+          this.terceroFamiliar.indicadorHabilitado = true;
+          this.terceroFamiliar.idTipoTercero = this.idTipoTercero;
+
+          this.employeesService.update(this.terceroFamiliar)
+            .subscribe(data2 => {
+
+              this.familyInformation.idTercero = this.idTercero;
+              this.familyInformation.indicadorHabilitado = true;
+              this.familyInformation.idParentesco = this.selectedRelationship;
+              this.familyInformation.idConvivencia = this.convive ? 1 : 0;
+              this.familyInformation.auditoriaFecha = '';
+              this.familyInformation.auditoriaUsuario = 1;
+
+              this.familyInformationService.update(this.familyInformation)
+                .subscribe(
+                  data => {
+
+                    this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
+                    this._nav.setTab(1);
+                    this.location.back();
+                  });
+            });
+        });
+
+    } else {
+      this.focusUP();
+      this.msgs.push({
+        severity: 'error',
+        summary: 'Dirección invalida',
+        detail: 'Es necesario agregar una dirección válida'
+      });
+    }
+  }
+
+
+  goBack(): void {
+    this.confirmationService.confirm({
+      message: ` ¿Esta seguro que desea Cancelar?`,
+      header: 'Corfirmación',
+      icon: 'fa fa-question-circle',
+      accept: () => {
+        this._nav.setTab(1);
+        this.location.back();
+      }
+    });
+  }
+
+  onSelectMethod(event: any) {
+    let d = new Date(Date.parse(event));
+    this.familyInformation.fechaNacimiento = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+  }
+
+  onChangeMethod(event: any) {
 
     let today = new Date();
     let month = today.getMonth();
     let year = today.getFullYear();
-    let prev18Year =  year - 18;
-    let prev20Year =  year - 20;
-    let lastYear =  prev18Year - 80;
+    let prev18Year = year - 18;
+    let prev20Year = year - 20;
+    let lastYear = prev18Year - 80;
     this.maxDate = new Date();
     this.maxDate.setMonth(month);
 
-    if(event.value === 1) {
+    if (event.value === 1) {
       this.maxDate.setFullYear(prev18Year);
       this.range = `${lastYear}:${prev18Year}`;
     } else if (event.value === 2) {
       this.range = `${prev18Year}:${year}`;
       this.maxDate.setFullYear(year);
-      // this.minDate.setFullYear(prev18Year);
     } else {
       this.maxDate.setFullYear(year);
       this.range = `${prev20Year}:${year}`;
     }
 
-    if((this.familyInformation.fechaNacimiento) !== null && (this.familyInformation.fechaNacimiento) !== '' ) {
+    if ((this.familyInformation.fechaNacimiento) !== null && (this.familyInformation.fechaNacimiento) !== '') {
       let timestamp2 = new Date(this.maxDate).getTime();
       let timestamp1 = new Date(this.familyInformation.fechaNacimiento).getTime();
       let timeDiff = Math.round(timestamp2 - timestamp1);
-      if(timeDiff< 0) {
+      if (timeDiff < 0) {
         this.familyInformation.fechaNacimiento = '';
       }
     }
@@ -217,17 +261,34 @@ export class FamilyInformationUpdateComponent implements OnInit {
     return null;
   }
 
-  capitalize(event:any) {
+  capitalize(event: any) {
     let input = event.target.value;
-    event.target.value = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
+    event.target.value = input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
   }
 
-  capitalizeSave(input :any) {
-    return input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
+  capitalizeSave(input: any) {
+    if (input !== undefined) {
+      return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
+    } else {
+      return ''
+    }
   }
+
+  bindLocation(event: any) {
+    this.localizacion = event;
+    this.familyInformation.direccion = event.direccion;
+    this.toggleform();
+  }
+
+  toggleform() {
+    this.addinglocation = !this.addinglocation;
+  }
+
   focusUP() {
     const element = document.querySelector('#formulario');
-    if (element) { element.scrollIntoView(element); }
+    if (element) {
+      element.scrollIntoView(element);
+    }
   }
 
 }
