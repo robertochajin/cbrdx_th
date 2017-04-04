@@ -11,12 +11,13 @@
                   <img id="imgLogin" class="img-responsive"
                      src="./assets/images/logo_login_th.png" >
 
-                  <h3 class="text-center">Recupera tu cuenta</h3>
+
+                  <h3 class="text-center">{{ 'LBL_RECUPERACUENTA' | translate:param }}</h3>
 
                   <form #f="ngForm" (ngSubmit)="f.valid&&doPost();" novalidate class="form-signin">
 
                       <div class="form-group">
-                          <label for="correo">Correo Electrónico </label>
+                          <label for="correo">{{ 'LBL_CORREOELECTRONICO' | translate:param }}</label>
                           <div>
                             <div class="input-group input-block-level">
                               <span class="input-group-addon"> <i class="fa fa-envelope"></i> </span>
@@ -27,10 +28,10 @@
                               </div>
                               <div *ngIf="f.submitted&&!correo.valid" class="alert alert-danger">
                                   <div [hidden]="!correo.errors.required">
-                                      El correo electronico es requerido.
-                                  </div>
-                                  <div [hidden]="!correo.errors.pattern">
-                                      El correo electronico debe tener el formato wwwwwwww@xxxxxx.yyy[.zz]
+                                       {{ 'MSG_CORREOREQUERIDO' | translate:param }}
+                                    </div>
+                                    <div [hidden]="!correo.errors.pattern">
+                                        {{ 'MSG_CORREOFORMATO' | translate:param }}
                                   </div>
                               </div>
                           </div>
@@ -38,7 +39,7 @@
 
 
                       <div class="form-group" *ngIf="!recordarUsuario">
-                          <label for="uSistema" >Usuario</label>
+                          <label for="uSistema" >{{ 'MSG_USUARIO' | translate:param }}</label>
                           <div>
                             <div class="input-group input-block-level">
                               <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
@@ -49,29 +50,28 @@
                               </div>
                               <div *ngIf="f.submitted&&!uSistema.valid" class="alert alert-danger">
                                   <div [hidden]="!uSistema.errors.required">
-                                      El nombre de usuario es requerido.
-                                  </div>
-                                  <div [hidden]="!uSistema.errors.pattern">
-                                      El usuario debe contener solo letras, numeros o los caracteres . _ y/o -
+                                     {{ 'MSG_USUARIOREQUERIDO' | translate:param }}
+                                    </div>
+                                    <div [hidden]="!uSistema.errors.pattern">
+                                        {{ 'MSG_USUARIOCONTENER' | translate:param }}
                                   </div>
                               </div>
                           </div>
                       </div>
 
                           <div class="text-center">
-                              <a (click)="olvideUsuario()" class="recordarUsuario" *ngIf="!recordarUsuario">Olvide mi
-                                  usuario</a>
+                              <a (click)="olvideUsuario()" class="recordarUsuario" *ngIf="!recordarUsuario">{{ 'LBL_OLVIDE' | translate:param }} {{ 'LBL_USUARIO' | translate:param }}</a>
                           </div>
 
 
 
                       <div class="form-group text-center" style="margin-top:10px;">
-                          <a (click)="goBack()" class="cancelar" *ngIf="!recordarUsuario">Cancelar</a>
-                          <a (click)="regresarUsuario()" class="regresar" *ngIf="recordarUsuario">Regresar</a>
+                          <a (click)="goBack()" class="cancelar" *ngIf="!recordarUsuario">{{ 'BTN_CANCELAR' | translate:param }}</a>
+                          <a (click)="regresarUsuario()" class="regresar" *ngIf="recordarUsuario">{{ 'BTN_REGRESAR' | translate:param }}</a>
                           <button *ngIf="!recordarUsuario" pButton type="submit"
-                                  label="Aceptar"></button>
+                                  label="{ 'BTN_ACEPTAR' | translate:param }}"></button>
                           <button *ngIf="recordarUsuario" pButton type="submit"
-                                  label="Aceptar"></button>
+                                  label="{ 'BTN_ACEPTAR' | translate:param }}"></button>
                       </div>
                       <div *ngIf="error" class="alert alert-danger">{{error}}</div>
                       <div *ngIf="notice" class="alert alert-info">{{notice}}</div>
@@ -81,9 +81,10 @@
       </div>
   </div>
 
-<p-dialog header="Confirmación" [(visible)]="displayDialog" responsive="true">
-    <p>Si los datos coinciden con los registrados en el sistema se enviará a su correo la contraseña nueva. Esta seguro
-        que desea continuar?.</p>
+<p-dialog header="{{ 'LBL_CONFIRMACION' | translate:param }}" [(visible)]="displayDialog" responsive="true">
+    <p>
+        {{ 'MSG_CONFIRMACIONDATOSCORRECTOS' | translate:param }}
+    </p>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <button type="button" pButton icon="fa-close" (click)="goBack()" label="No"></button>
@@ -93,9 +94,10 @@
 </p-dialog>
 
 
-<p-dialog header="Confirmación" [(visible)]="displayDialog1" responsive="true">
-    <p>Si la direccion de correo corresponde a una cuenta se enviará a su correo su nombre de usuario. Esta seguro que
-        desea continuar?.</p>
+<p-dialog header="{{ 'LBL_CONFIRMACION' | translate:param }}" [(visible)]="displayDialog1" responsive="true">
+    <p>
+        {{ 'MSG_CONFIRMACIONDATOSCORRECTOS' | translate:param }}
+    </p>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <button type="button" pButton icon="fa-close" (click)="goBack()" label="No"></button>

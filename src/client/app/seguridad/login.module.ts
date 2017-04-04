@@ -19,9 +19,11 @@ import {CambioContrasenaComponent} from "./cambioContrasena.component";
 import {AuthenticationService} from "../_services/authentication.service";
 import {RecaptchaModule} from "ng-recaptcha/index";
 import {RecaptchaFormsModule} from "ng-recaptcha/forms";
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule( {
-  imports: [CommonModule, FormsModule, InputTextModule, ButtonModule, DialogModule, CaptchaModule, FieldsetModule, PasswordModule, RecaptchaModule.forRoot(), RecaptchaFormsModule],
+  imports: [CommonModule, FormsModule, InputTextModule, ButtonModule, DialogModule, CaptchaModule, FieldsetModule, PasswordModule, RecaptchaModule.forRoot(), RecaptchaFormsModule,
+    SharedModule],
   declarations: [LoginComponent, CambioContrasenaComponent],
   bootstrap: [LoginComponent],
   providers: [LoginService, AuthenticationService],

@@ -1,42 +1,40 @@
-<h3>Listas</h3>
-<p-fieldset legend="Parámetros Lista">
-    <div class="col-xs-6">
-        <div class="form-group">
-            <label for="codigoLista">Codigo</label>
-            <input class="form-control" type="text" pInputText [(ngModel)]="masterList.codigoLista" id="codigoLista"
-                   disabled>
-        </div>
-        <div class="form-group">
-            <label for="lista">Lista</label>
-            <input class="form-control" type="text" pInputText [(ngModel)]="masterList.lista" id="lista" disabled>
-        </div>
-        <div class="form-group form-inline">
-            <label for="indicador">Habilitado</label>
-            <p-checkbox [(ngModel)]="masterList.indicadorHabilitado" binary="true" id="indicador" disabled
-                        class="form-control"></p-checkbox>
-        </div>
+<div *ngIf="masterList">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="first">Listas</h3>
     </div>
-    <div class="col-xs-6">
+  </div>
+  <p-fieldset legend="Parámetros Lista">
+  <div class="row">
+    <form class="form-horizontal">
+      <fieldset>
         <div class="form-group">
-            <label for="dependeLista">Depende de Lista</label>
-            <select [(ngModel)]="masterList.dependeLista" id="dependeLista" disabled class="form-control">
-                <option *ngFor="let c of othersList" [ngValue]="c.idLista">{{c.lista}}</option>
-            </select>
+          <div class="row">
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Codigo:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{masterList.codigoLista}}</strong></label>
+
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Lista:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{masterList.lista}}</strong></label>
+          </div>
+          <div class="row">
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Id:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{masterList.idLista}}</strong></label>
+
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Habilitado:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{masterList.indicadorHabilitado}}</strong></label>
+          </div>
+          <div class="row">
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="masterList.dependeLista">Depende de Item:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12" *ngIf="masterList.dependeLista"><strong>{{masterList.dependeItem}}</strong></label>
+
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Depende de Lista:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{masterList.dependeLista}}</strong></label>
+          </div>
         </div>
-        <div class="form-group" *ngIf="masterList.dependeLista">
-            <label for="dependeItem">Depende de Item</label>
-            <select [(ngModel)]="masterList.dependeItem" id="dependeItem" class="form-control" disabled>
-                <option *ngFor="let d of othersDetailsList" [ngValue]="d.idListaItem">{{d.codigoItem}} -
-                    {{d.item}}
-                </option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="idLista">Id</label>
-            <p id="idLista">{{masterList.idLista}}</p>
-        </div>
-    </div>
-</p-fieldset>
+      </fieldset>
+    </form>
+  </div>
+  </p-fieldset>
 
 <p-fieldset legend="Elementos de la Lista">
     <p-dataTable [value]="detailsList" [paginator]="true" [rows]="10" [responsive]="true">
@@ -55,7 +53,11 @@
             </template>
         </p-column>
     </p-dataTable>
-    <div class="pull-right">
-        <a (click)="goBack()" class="cancelar">Volver</a>
-    </div>
 </p-fieldset>
+  <div class="row form-footer-buttons">
+    <div class="form-group col-md-12">
+      <button icon="fa-arrow-left" label="Regresar" type="button"
+              pButton (click)="goBack()"></button>
+    </div>
+  </div>
+</div>
