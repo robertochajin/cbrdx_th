@@ -43,7 +43,7 @@ export class DivisionPoliticaService {
     }
 
     viewDivisionPolitica(id: number) {
-        return this.http.get(this.serviceURL + id,{headers: this.headers}).map(res => res.json() as DivisionPolitica);
+        return this.http.get(this.serviceURL+"buscarId/" + id,{headers: this.headers}).map(res => res.json() as DivisionPolitica);
     }
 
     listDivisionPoliticaAreas() {
