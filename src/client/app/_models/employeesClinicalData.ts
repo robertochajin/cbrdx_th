@@ -1,0 +1,17 @@
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class EmployeesClinicalData {
+  idTerceroDatoClinico : number;
+  idTercero : number;
+  idDiagnostico : number;
+  fechaInicio : string;
+  fechaFin : string;
+  indicadorHabilitado : boolean;
+  auditoriaUsuario : number;
+  auditoriaFecha : string;
+  idDiagnosticoCie: number;
+  codigo: string;
+  descripcion: string;
+  diagnostico: {idDiagnosticoCIE:number, codigo:string, descripcion:string};
+}
