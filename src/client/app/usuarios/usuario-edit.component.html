@@ -294,7 +294,8 @@
         </p-dataTable>
     </p-tabPanel>
 </p-tabView>
-<p-dialog header="Confirmación" [(visible)]="displayDialog" responsive="true">
+<p-dialog header="Confirmación" [(visible)]="displayDialog"
+          responsive="true" modal="true">
     <p>Si continua perdera la información no guardada.Esta seguro que desea salir?.</p>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
@@ -304,7 +305,8 @@
     </p-footer>
 </p-dialog>
 
-<p-dialog header="Confirmación" [(visible)]="displayUpdateDialog" responsive="true">
+<p-dialog header="Confirmación" [(visible)]="displayUpdateDialog"
+          responsive="true" modal="true">
     <p>Si continua se actualizara la información del usuario.Esta seguro que desea continuar?.</p>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
