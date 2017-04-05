@@ -13,5 +13,6 @@ export class DiagnosticosCIE {
   public noAfeccion: number;
   public auditoriaUsuario: number;
   public auditoriaFecha: string;
+  public label: string;
 
 }

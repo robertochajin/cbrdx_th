@@ -15,8 +15,7 @@ export class DiagnosticCIEServices {
   }
 
   getByWildCard(qr: any)  {
-    // return this.http.get(this.masterService+'buscarDiagnostico/'+qr+'/').map((res:Response) => res.json() as DiagnosticosCIE[]);
-    return this.http.get(this.masterService).map((res:Response) => res.json() as DiagnosticosCIE[]);
+    return this.http.get(this.masterService+'codigoNombre/'+qr+'/').map((res:Response) => res.json() as DiagnosticosCIE[]);
   }
 
   getById(id: number) {
