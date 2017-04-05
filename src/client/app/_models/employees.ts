@@ -75,7 +75,7 @@ export class Employee {
   public coberturaSalud : string;
 
   constructor() {
-    this.nombreCompleto = this.primerNombre+' '+ this.segundoNombre+' '+ this.primerApellido+' '+ this.segundoApellido;
+    this.nombreCompleto = '';
     this.gentilicio = '';
     this.cargoActual = '';
     this.genero = '';

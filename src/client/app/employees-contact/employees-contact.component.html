@@ -1,0 +1,52 @@
+<p-messages [value]="msgs"></p-messages>
+<div *ngIf="employee">
+  <div class="row-fluid">
+    <div class="col-md-12">
+      <form name="formulario" (ngSubmit)="fcont.valid && onSubmit()" #fcont="ngForm" novalidate id="formulario">
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+          <div class="row">
+            <div class="form-group col-md-12">
+                <label for="correoElectronico">* Correo Electronico</label>
+                <input id="correoElectronico" name="correoElectronico" #correoElectronico="ngModel" pInputText type="text" required
+                       [(ngModel)]="employee.correoElectronico" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"/>
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="fcont.submitted && !correoElectronico.valid ">
+                  <i class="fa fa-close"></i>
+                  Correo electronico es requerido
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="sitio">Sitio Web</label>
+              <input type="text" pInputText id="sitio" name="sitio"
+                     [(ngModel)]="employee.sitioWeb" #web="ngModel"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="fijo">Teléfono fijo</label>
+              <p-inputMask id="fijo" name="fijo"
+                           mask="(999) 999-9999? Ext 9999" placeholder="(999) 999-9999? Ext 99999"
+                           [(ngModel)]="employee.telefonoFijo" #telefonoFijo="ngModel"
+              ></p-inputMask>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="cel">Teléfono Celular</label>
+              <p-inputMask id="cel" name="cel"
+                           mask="(999) 999-9999" placeholder="(999) 999-9999"
+                           [(ngModel)]="employee.telefonoCelular" #celular="ngModel"
+              ></p-inputMask>
+            </div>
+          </div>
+        </div>
+        <div class="row form-footer-buttons">
+          <div class="form-group col-md-12">
+            <button icon="fa-plus" label="Guardar" type="submit"
+                    pButton></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
