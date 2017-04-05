@@ -19,27 +19,24 @@ export class ConstanteEditComponent implements OnInit {
 
     constant: Constante = new Constante();
     constantList: VConstante[];
-    datatypeMaster: Lista;
-    datatypeDetails: ListaItem[];
+    constantType: any[] = [];
     codeExists: boolean = false;
     regex: string = ".{0,20}";
     displayDialog: boolean = false;
 
     constructor(private constanteService: ConstanteService, private listaService: ListaService, private router: Router, private route: ActivatedRoute) {
-        listaService.getMasterByCodigo("TIDACO").subscribe(res => {
-            this.datatypeMaster = res;
-            listaService.getMasterDetails(this.datatypeMaster.idLista).subscribe(data => {
-                this.datatypeDetails = data;
-                route.params.switchMap((params: Params) => constanteService.viewConstant(+params['id']))
-                    .subscribe(data => {
-                        this.constant = data;
-                        this.constanteService.listOtherConstants(this.constant.idConstante).subscribe(res => {
-                            this.constantList = res;
-                        });
-                        this.alterPattern();
-                    });
-            });
+        route.params.switchMap((params: Params) => constanteService.viewConstant(+params['id']))
+        .subscribe(data => {
+          this.constant = data;
+          this.constanteService.listConstants().subscribe(res => {
+            this.constantList = res;
+          });
+          constanteService.getTiposConstantes().subscribe(res =>{
+            this.constantType = res;
+            this.alterPattern();
+          });
         });
+        
     }
 
     ngOnInit(): void {
@@ -53,27 +50,36 @@ export class ConstanteEditComponent implements OnInit {
     }
 
     validateCode() {
-        this.codeExists = this.constantList.filter(t => t.constante === this.constant.constante).length > 0;
+        this.codeExists = this.constantList.filter(t => t.constante === this.constant.constante && t.idConstante != this.constant.idTipoDato).length > 0;
     }
 
     inputCleanUp(value: string) {
         this.constant.constante = value.toUpperCase().replace(' ', '').trim();
     }
-
-    alterPattern() {
-        for (let dataType of this.datatypeDetails) {
-            if (dataType.idListaItem == this.constant.idTipoDato) {
-                if (dataType.codigoItem == "NUM") {
-                    this.regex = "[0-9]{0,20}";
-                } else {
-                    this.regex = ".{0,20}";
-                }
-                break;
-            }
-        }
+  
+  alterPattern() {
+    this.inputValue();
+    let dataType = this.constantType.find(t => t.idListaTipoDato == this.constant.idTipoDato);
+    if (dataType.codigo == "NUM") {
+      this.regex = "[0-9]{0,20}";
+    } else {
+      this.regex = ".{0,20}";
     }
+    
+  }
 
     goBack(): void {
         this.router.navigate(['constantes']);
     }
+  inputValue() {
+    let label = this.constant.valor;
+    if(label != "" && label != null && this.constant.idTipoDato != null) {
+      let dataType = this.constantType.find(t => t.idListaTipoDato == this.constant.idTipoDato);
+      if(dataType.codigo === "NUM") {
+        this.constant.valor = this.constant.valor.replace(/[^0-9]/g,'');
+      }else{
+        this.constant.valor = label.replace(" ",'').trim();
+      }
+    }
+  }
 }

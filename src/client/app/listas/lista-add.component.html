@@ -229,7 +229,8 @@
         <a (click)="displayReturnDialog=true" class="cancelar">Volver</a>
     </div>
 </p-fieldset>
-<p-dialog *ngIf="displayDialog" header="Confirmación" [(visible)]="displayDialog" responsive="true">
+<p-dialog *ngIf="displayDialog" header="Confirmación" [(visible)]="displayDialog"
+          responsive="true" modal="true">
     <p>Si continua perdera la información no guardada.Esta seguro que desea salir?.</p>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
@@ -238,7 +239,8 @@
         </div>
     </p-footer>
 </p-dialog>
-<p-dialog *ngIf="displayReturnDialog" header="Confirmación" [(visible)]="displayReturnDialog" responsive="true">
+<p-dialog *ngIf="displayReturnDialog" header="Confirmación" [(visible)]="displayReturnDialog"
+          responsive="true" modal="true">
     <p>Si continua perdera la información no guardada.Esta seguro que desea salir?.</p>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
@@ -248,7 +250,8 @@
         </div>
     </p-footer>
 </p-dialog>
-<p-dialog *ngIf="displayDetailDialog" header="Confirmación" [(visible)]="displayDetailDialog" responsive="true">
+<p-dialog *ngIf="displayDetailDialog" header="Confirmación" [(visible)]="displayDetailDialog"
+          responsive="true" modal="true">
     <p>Si continua perdera la información no guardada.Esta seguro que desea salir?.</p>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">

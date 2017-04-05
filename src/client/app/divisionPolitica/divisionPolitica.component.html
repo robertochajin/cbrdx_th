@@ -32,7 +32,7 @@
         <p-fieldset legend="{{header}}">
             <div class="row-fluid">
                 <div class="col-md-12">
-                    <form name="form" (ngSubmit)="fdivision.valid && save()" #fdivision="ngForm" novalidate>
+                    <form name="form" (ngSubmit)="!codeExists&&fdivision.valid && save()" #fdivision="ngForm" novalidate>
                         <div class="row">
                             <div class="form-group">
                                 <h4>{{labelPadre}}</h4>
@@ -45,11 +45,16 @@
                                     <input type="text" pInputText class="form-control" id="codigoDivisionPolitica"
                                            name="codigoDivisionPolitica"
                                            [(ngModel)]="politicalDivision.codigoDivisionPolitica"
+                                           (change)="validateCode()"
                                            #codigoDivisionPolitica="ngModel"
+                                           (keyup)="inputNumberCodigo()"
                                            required/>
                                     <div *ngIf="fdivision.submitted && !codigoDivisionPolitica.valid"
                                          class="help-block">
                                         Código es requerido
+                                    </div>
+                                    <div *ngIf="codeExists" class="ui-message  ui-corner-all">
+                                      Ya se encuentra registrado ese código
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +85,9 @@
                                            name="indicativoDivisonPolitica"
                                            [(ngModel)]="politicalDivision.indicativoDivisonPolitica"
                                            #indicativoDivisonPolitica="ngModel"
-                                           pattern="[0-9]{10}">
+                                           pattern="[0-9]{0,20}"
+                                            maxlength="20" (keyup)="inputNumberIndicativo()"
+                                    >
                                     <div class="ui-message ui-corner-all" *ngIf="fdivision.submitted && !indicativoDivisonPolitica.valid">
                                         <i class="fa fa-close"></i>Solo números
                                     </div>
@@ -188,7 +195,8 @@
                 </div>
             </div>
         </p-fieldset>
-        <p-dialog header="Confirmación" [(visible)]="displayDialog" responsive="true">
+        <p-dialog header="Confirmación" [(visible)]="displayDialog"
+                  responsive="true" modal="true">
             <p>Si continua perdera la información no guardada.Esta seguro que desea salir?.</p>
             <p-footer>
                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">

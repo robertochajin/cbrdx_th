@@ -1,0 +1,53 @@
+<p-messages [value]="msgs"></p-messages>
+<div *ngIf="employee">
+  <div class="row-fluid">
+    <div class="col-md-12">
+      <form name="formulario" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="correo">Correo Electronico</label>
+              <input type="text" pInputText id="correo" name="correo"
+                     [(ngModel)]="employee.correoElectronico" #email="ngModel"
+              />
+             <!-- <div class="ui-message ui-messages-error ui-corner-all"
+                   *ngIf="f.submitted && !email.valid">
+                <i class="fa fa-close"></i>
+                Correo Electronico es requerido
+              </div>-->
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="sitio">Sitio Web</label>
+              <input type="text" pInputText id="sitio" name="sitio"
+                     [(ngModel)]="employee.sitioWeb" #web="ngModel"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="fijo">Teléfono fijo</label>
+              <input type="text" pInputText id="fijo" name="fijo"
+                     [(ngModel)]="employee.telefonoFijo" #telefonoFijo="ngModel"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="cel">Teléfono Celular</label>
+              <input type="text" pInputText id="cel" name="cel"
+                     [(ngModel)]="employee.telefonoCelular" #telefonoCelular="ngModel"
+
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row form-footer-buttons">
+          <div class="form-group col-md-12">
+            <button icon="fa-plus" label="Guardar" type="submit"
+                    pButton></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
