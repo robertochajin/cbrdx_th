@@ -1,0 +1,130 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+  </p-footer>
+
+</p-confirmDialog>
+<div *ngIf="employeeEstate">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="header">
+        <h4 class="title">{{header}}</h4>
+      </div>
+    </div>
+  </div>
+  <form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">
+          <label for="idTipoVivienda">Tipo Inmueble</label>
+          <p-dropdown id="idTipoVivienda" name="idTipoVivienda" required="true"
+                      [options]="listTypeEstate" [autoWidth]="false"
+                      [(ngModel)]="employeeEstate.idTipoVivienda"
+                      #idTipoVivienda="ngModel"
+          ></p-dropdown>
+          <div class="ui-message ui-messages-error ui-corner-all"
+               *ngIf="f.submitted && !idTipoVivienda.valid">
+            <i class="fa fa-close"></i>
+            Tipo inmueble requerido
+          </div>
+        </div>
+        <div class="ui-grid-col-6">
+          <label for="idClaseVivienda">La Vivenda es?</label>
+          <p-dropdown id="idClaseVivienda" name="idClaseVivienda" required="true"
+                      [options]="listClassEstate" [autoWidth]="false"
+                      [(ngModel)]="employeeEstate.idClaseVivienda"
+                      #idClaseVivienda="ngModel"
+          ></p-dropdown>
+          <div class="ui-message ui-messages-error ui-corner-all"
+               *ngIf="f.submitted && !idClaseVivienda.valid">
+            <i class="fa fa-close"></i>
+            Clase vivienda requerida
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">
+          <label for="idTipoConstruccionVivienda">Tipo Contrucción</label>
+          <p-dropdown id="idTipoConstruccionVivienda" name="idTipoConstruccionVivienda" required="true"
+                      [options]="listTypeConstruction" [autoWidth]="false"
+                      [(ngModel)]="employeeEstate.idTipoConstruccionVivienda"
+                      #idTipoConstruccionVivienda="ngModel"
+          ></p-dropdown>
+          <div class="ui-message ui-messages-error ui-corner-all"
+               *ngIf="f.submitted && !idTipoConstruccionVivienda.valid">
+            <i class="fa fa-close"></i>
+            Tipo construcción requerido
+          </div>
+        </div>
+        <div class="ui-grid-col-6">
+          <label for="numeroPisos">Número Pisos</label>
+          <input id="numeroPisos" name="numeroPisos" #numeroPisos="ngModel" pInputText type="text"
+                 (keyup)="inputNumberPisos()"
+                 (paste)="inputNumberPisos()"
+                 [(ngModel)]="employeeEstate.numeroPisos" min="1" required/>
+          <div class="ui-message ui-messages-error ui-corner-all"
+               *ngIf="f.submitted && !numeroPisos.valid">
+            <i class="fa fa-close"></i>
+            Pisos requeridos
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">
+          <label for="anioConstruccion">Año de Construcción</label>
+          <input id="anioConstruccion" name="anioConstruccion" #anioConstruccion="ngModel" pInputText type="text"
+                 (keyup)="inputNumber()" (paste)="inputNumber()" (change)="anioValidate()"
+                 [(ngModel)]="employeeEstate.anioConstruccion" required maxlength="4"/>
+          <div class="ui-message ui-messages-error ui-corner-all"
+               *ngIf="(f.submitted && !anioConstruccion.valid )&& !anioValid">
+            <i class="fa fa-close"></i>
+            Año construcción requerido
+          </div>
+          <!--<div *ngIf="anioValid" class="alert alert-danger">-->
+            <!--Año no valido-->
+          <!--</div>-->
+        </div>
+        <div class="ui-grid-col-6">
+          <label for="numeroSotanos">Número de Sotanos</label>
+          <input id="numeroSotanos" name="numeroSotanos" #numeroSotanos="ngModel" pInputText type="text"
+                 (keyup)="inputNumberSotanos()"
+                 (paste)="inputNumberSotanos()"
+                 [(ngModel)]="employeeEstate.numeroSotanos" min="1" required/>
+          <div class="ui-message ui-messages-error ui-corner-all"
+               *ngIf="f.submitted && !numeroSotanos.valid ">
+            <i class="fa fa-close"></i>
+           Sotanos requeridos
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">
+          <label for="idEstrato">Estrato</label>
+          <p-dropdown id="idEstrato" name="idEstrato" required="true"
+                      [options]="listStratum" [autoWidth]="false"
+                      [(ngModel)]="employeeEstate.idEstrato"
+                      #idEstrato="ngModel"
+          ></p-dropdown>
+          <div class="ui-message ui-messages-error ui-corner-all"
+               *ngIf="f.submitted && !idEstrato.valid">
+            <i class="fa fa-close"></i>
+            Estrato requerido
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-row form-footer-buttons">
+        <div class="ui-grid-col-4"></div>
+        <div class="ui-grid-col-1">
+          <a (click)="goBack()" class="cancelar">Cancelar</a>
+        </div>
+        <div class="ui-grid-col-2">
+          <button pButton icon="fa-plus" label="Guardar" type="submit"></button>
+        </div>
+        <div class="ui-grid-col-5"></div>
+      </div>
+    </div>
+  </form>
+</div>
+

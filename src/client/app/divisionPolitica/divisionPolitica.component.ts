@@ -512,9 +512,9 @@ export class DivisionPoliticaComponent implements OnInit {
   }
   
   inputNumberCodigo() {
-      let labelCodigo = this.politicalDivision.codigoDivisionPolitica;
+      let labelCodigo = this.politicalDivision.codigoPostalDivisionPolitica;
       if(labelCodigo != "" && labelCodigo != null) {
-          this.politicalDivision.codigoDivisionPolitica = this.politicalDivision.codigoDivisionPolitica.replace(/[^0-9]/g, '');
+          this.politicalDivision.codigoPostalDivisionPolitica = this.politicalDivision.codigoPostalDivisionPolitica.replace(/[^0-9]/g, '');
       }
   }
   
@@ -523,6 +523,11 @@ export class DivisionPoliticaComponent implements OnInit {
       if(labelIndicativo != "" && labelIndicativo != null) {
          this.politicalDivision.indicativoDivisonPolitica = this.politicalDivision.indicativoDivisonPolitica.replace(/[^0-9]/g, '');
       }
+  }
+  
+  capitalize() {
+    let input = this.politicalDivision.descripcionDivisonPolitica;
+    this.politicalDivision.descripcionDivisonPolitica = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
   }
 
 }
