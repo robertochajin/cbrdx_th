@@ -14,11 +14,12 @@ import {Router, ActivatedRoute, Params} from "@angular/router";
 export class TipoDeAreaDetailComponent {
 
     areas: TipoDeArea = new TipoDeArea();
-
+    habilitado: string;
     constructor(private tipoDeAreaService: TipoDeAreaService, private router: Router, private route: ActivatedRoute) {
         route.params.switchMap((params: Params) => tipoDeAreaService.viewArea(+params['id']))
             .subscribe(data => {
                 this.areas = data;
+              this.habilitado = data.indicadorHabilitado ? "Si" : "No";
             });
     }
 

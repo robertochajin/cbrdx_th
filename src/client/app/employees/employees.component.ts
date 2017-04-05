@@ -10,6 +10,7 @@ import {ConfirmationService} from 'primeng/primeng';
     selector: 'employees',
     providers:  [ConfirmationService]
 })
+
 export class EmployeesComponent {
 
     employee: Employee = new Employee();

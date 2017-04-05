@@ -63,16 +63,33 @@ export class ListEmployeesService {
   getLateralityTypes()  {
     return this.http.get(this.serviceURL+"listasLateralidades/enabled",{headers: this.headers}).map((res:Response) => res.json());
 
-  }getlistSizeShirt()  {
+  }
+  getlistSizeShirt()  {
     return this.http.get(this.serviceURL+"listasTallas/enabled/CAM",{headers: this.headers}).map((res:Response) => res.json());
 
-  }getlistSizeFootwear()  {
+  }
+  getlistSizeFootwear()  {
     return this.http.get(this.serviceURL+"listasTallas/enabled/ZAPA",{headers: this.headers}).map((res:Response) => res.json());
 
-  }getlistSizePants()  {
+  }
+  getlistSizePants()  {
     return this.http.get(this.serviceURL+"listasTallas/enabled/PAN",{headers: this.headers}).map((res:Response) => res.json());
   }
-
+  getlistStratum()  {
+    return this.http.get(this.serviceURL+"listasEstratos",{headers: this.headers}).map((res:Response) => res.json());
+  }
+  getlistTypeConstruction()  {
+    return this.http.get(this.serviceURL+"listasTiposConstruccionViviendas",{headers: this.headers}).map((res:Response) => res.json());
+  }
+  getlistTypeEstate()  {
+    return this.http.get(this.serviceURL+"listasTiposViviendas",{headers: this.headers}).map((res:Response) => res.json());
+  }
+  getlistClassEstate()  {
+    return this.http.get(this.serviceURL+"listasClasesViviendas",{headers: this.headers}).map((res:Response) => res.json());
+  }
+  getlistLocation(c: number)  {
+    return this.http.get(this.serviceURL+"/localizaciones/buscarTercero/"+c,{headers: this.headers}).map((res:Response) => res.json());
+  }
   handleError(error: any): Promise<any> {
     console.error('Error:', error);
     return Promise.reject(error.message || error);

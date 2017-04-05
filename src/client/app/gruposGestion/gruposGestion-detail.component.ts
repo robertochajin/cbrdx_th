@@ -14,11 +14,12 @@ import {Router, ActivatedRoute, Params} from "@angular/router";
 export class GruposGestionDetailComponent {
 
     grupoGestion: GruposGestion = new GruposGestion();
-
+    habilitado: string;
     constructor(private gruposGestionService: GruposGestionService, private router: Router, private route: ActivatedRoute) {
         route.params.switchMap((params: Params) => gruposGestionService.viewGruposGestion(+params['id']))
             .subscribe(data => {
                 this.grupoGestion = data;
+                this.habilitado = data.indicadorHabilitado ? "Si" : "No";
             });
     }
 

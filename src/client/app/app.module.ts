@@ -12,6 +12,7 @@ import {FamilyInformationModule} from "./employees-family-information/family-inf
 import {ReferencesModule} from "./employees-references/references.module";
 import {AcademicEducationModule} from "./employees-academic-education/academic-education.module";
 import {LocationModule} from "./employees-location/employee-location.module";
+import {EmployeesEstateModule} from "./employees-estate/employee-estate.module";
 import {WorkExperienceModule} from "./employees-work-experience/work-experience.module";
 import {LoginModule} from "./seguridad/login.module";
 import {LoginService} from "./_services/login.service";
@@ -42,6 +43,7 @@ import {ActividadEconomicaModule} from "./actividadEconomica/actividadEconomica.
     EmployeesModule,
     FamilyInformationModule,
     LocationModule,
+    EmployeesEstateModule,
     ReferencesModule,
     AcademicEducationModule,
     WorkExperienceModule,
