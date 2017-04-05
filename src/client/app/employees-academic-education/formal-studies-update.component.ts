@@ -151,7 +151,7 @@ export class FormalStudiesUpdateComponent implements OnInit {
         this.academicEducationService.updateFormal(this.fstudy).subscribe(
           data => {
             this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
-            this._nav.setTab(3);
+            this._nav.setTab(6);
             this.location.back();
           });
       } else {
@@ -215,7 +215,7 @@ export class FormalStudiesUpdateComponent implements OnInit {
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
-        this._nav.setTab(3);
+        this._nav.setTab(6);
         this.location.back();
       }
     });

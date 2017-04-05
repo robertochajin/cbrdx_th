@@ -78,7 +78,7 @@ export class ReferencesAddComponent implements OnInit  {
                   data => {
 
                     this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
-                    this._nav.setTab(5);
+                    this._nav.setTab(8);
                     this.location.back();
                   });
             }
@@ -97,7 +97,7 @@ export class ReferencesAddComponent implements OnInit  {
         header: 'Corfirmación',
         icon: 'fa fa-question-circle',
         accept: () => {
-          this._nav.setTab(5);
+          this._nav.setTab(8);
           this.location.back();
         },
         reject: () => {

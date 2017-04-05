@@ -110,7 +110,7 @@ export class LocationAddComponent implements OnInit {
       this.terceroLocalizacion.auditoriaUsuario = 1;
 
       this.locationService.add(this.terceroLocalizacion).subscribe(res => {
-        this._nav.setTab(2);
+        this._nav.setTab(4);
         this.location.back();
       });
     });
@@ -217,7 +217,7 @@ export class LocationAddComponent implements OnInit {
       icon: 'fa fa-question-circle',
       accept: () => {
         //this.router.navigate(['/employees-family-information']);
-        this._nav.setTab(2);
+        this._nav.setTab(4);
         this.location.back();
       },
       reject: () => {
