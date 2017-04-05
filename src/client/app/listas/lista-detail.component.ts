@@ -24,12 +24,13 @@ export class ListaDetailComponent implements OnInit {
     othersList: Lista[];
     othersDetailsList: ListaItem[];
     detailsList: ListaItem[];
-
+    habilitado: string;
     ngOnInit(): void {
         this.route.params
             .switchMap((params: Params) => this.listasService.getMaster(+params['id']))
             .subscribe(data => {
                 this.masterList = data;
+              this.habilitado = data.indicadorHabilitado ? "Si" : "No";
                 this.listasService.getOtherMasters(this.masterList.idLista).subscribe(res => {
                     this.othersList = res;
                     let list: Lista = new Lista();

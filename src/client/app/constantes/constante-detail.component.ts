@@ -19,7 +19,8 @@ export class ConstanteDetailComponent {
     constant: Constante = new Constante();
     datatypeMaster: Lista;
     datatypeDetails: ListaItem[];
-
+    dataType:string;
+    habilitado: string;
     constructor(private constanteService: ConstanteService, private listaService: ListaService, private router: Router, private route: ActivatedRoute) {
         listaService.getMasterByCodigo("TIDACO").subscribe(res => {
             this.datatypeMaster = res;
@@ -28,6 +29,12 @@ export class ConstanteDetailComponent {
                 route.params.switchMap((params: Params) => constanteService.viewConstant(+params['id']))
                     .subscribe(data => {
                         this.constant = data;
+                      this.habilitado = data.indicadorHabilitado ? "Si" : "No";
+                          listaService.getTipoDato(this.constant.idTipoDato).subscribe(res=>{
+                            if(res.nombre != null){
+                            this.dataType = res.nombre;
+                            }
+                          });
                     });
             });
         });
