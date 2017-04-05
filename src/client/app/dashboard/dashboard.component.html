@@ -76,7 +76,8 @@
 <!--{{item.panel}}-->
 <!--</div>-->
 
-<p-dialog header="{{ 'CONF_WIDGETS' | translate:param }}" [(visible)]="displayDialog" responsive="true">
+<p-dialog header="{{ 'CONF_WIDGETS' | translate:param }}" [(visible)]="displayDialog"
+          responsive="true" modal="true">
 
   <div class="ui-g-12">
     <p-checkbox name="widgets" [(ngModel)]="rolesSistema" label="Roles Sistema" binary="true"></p-checkbox>
