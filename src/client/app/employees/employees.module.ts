@@ -22,6 +22,7 @@ import {WorkExperienceModule} from './../employees-work-experience/work-experien
 import {LocationModule} from '../employees-location/employee-location.module';
 import {ClinicalInformationModule} from "../employees-clinical-information/clinical-information.module";
 import {EmployeesContactModule} from "../employees-contact/employees-contact.module";
+import {EmployeesEstateModule} from "../employees-estate/employee-estate.module";
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {EmployeesContactModule} from "../employees-contact/employees-contact.mod
     LocationModule,
     ClinicalInformationModule,
     FormSharedModule,
-    EmployeesContactModule
+    EmployeesContactModule,
+    EmployeesEstateModule
   ],
   
   declarations: [EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent,EmployeesAdditionalDataComponent],
