@@ -22,7 +22,7 @@ import * as moment from 'moment/moment';
 @Component({
   moduleId: module.id,
   selector: 'employees',
-  templateUrl: 'employees-additional-data.component.html',
+  template: 'employees-additional-data.component.html',
   providers: [ConfirmationService]
 })
 
