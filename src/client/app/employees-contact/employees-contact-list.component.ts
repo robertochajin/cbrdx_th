@@ -118,5 +118,13 @@ export class EmployeesContactListComponent{
       this.msgs = [];
       this.show_form  = false;
     }
+  
+    capitalize() {
+        let input = this.contact.contacto;
+        input = input.toLowerCase().replace(/^.|\s\S/g, function(a) {
+          return a.toUpperCase();
+        });
+        this.contact.contacto = input;
+    }
     
 }

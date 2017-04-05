@@ -10,6 +10,7 @@
               <label for="nombre">* Nombre Contacto</label>
               <input type="text" pInputText id="nombre" name="nombre"
                      [(ngModel)]="contact.contacto" #contacto="ngModel" required
+                     (keyup)="capitalize()"
               />
               <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="fe.submitted && !contacto.valid">
