@@ -42,6 +42,4 @@ import {EmployeesContactModule} from "../employees-contact/employees-contact.mod
   exports: [EmployeesComponent]
 })
 export class EmployeesModule {
-  constructor() {
-  }
 }

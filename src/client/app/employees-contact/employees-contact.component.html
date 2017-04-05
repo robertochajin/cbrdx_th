@@ -2,19 +2,17 @@
 <div *ngIf="employee">
   <div class="row-fluid">
     <div class="col-md-12">
-      <form name="formulario" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+      <form name="formulario" (ngSubmit)="fcont.valid && onSubmit()" #fcont="ngForm" novalidate id="formulario">
         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
           <div class="row">
             <div class="form-group col-md-12">
-              <label for="correo">Correo Electronico</label>
-              <input type="text" pInputText id="correo" name="correo"
-                     [(ngModel)]="employee.correoElectronico" #email="ngModel"
-              />
-             <!-- <div class="ui-message ui-messages-error ui-corner-all"
-                   *ngIf="f.submitted && !email.valid">
-                <i class="fa fa-close"></i>
-                Correo Electronico es requerido
-              </div>-->
+                <label for="correoElectronico">* Correo Electronico</label>
+                <input id="correoElectronico" name="correoElectronico" #correoElectronico="ngModel" pInputText type="text" required
+                       [(ngModel)]="employee.correoElectronico" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"/>
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="fcont.submitted && !correoElectronico.valid ">
+                  <i class="fa fa-close"></i>
+                  Correo electronico es requerido
+                </div>
             </div>
           </div>
           <div class="row">
@@ -28,16 +26,17 @@
           <div class="row">
             <div class="form-group col-md-6">
               <label for="fijo">Teléfono fijo</label>
-              <input type="text" pInputText id="fijo" name="fijo"
-                     [(ngModel)]="employee.telefonoFijo" #telefonoFijo="ngModel"
-              />
+              <p-inputMask id="fijo" name="fijo"
+                           mask="(999) 999-9999? Ext 9999" placeholder="(999) 999-9999? Ext 99999"
+                           [(ngModel)]="employee.telefonoFijo" #telefonoFijo="ngModel"
+              ></p-inputMask>
             </div>
             <div class="form-group col-md-6">
               <label for="cel">Teléfono Celular</label>
-              <input type="text" pInputText id="cel" name="cel"
-                     [(ngModel)]="employee.telefonoCelular" #telefonoCelular="ngModel"
-
-              />
+              <p-inputMask id="cel" name="cel"
+                           mask="(999) 999-9999" placeholder="(999) 999-9999"
+                           [(ngModel)]="employee.telefonoCelular" #celular="ngModel"
+              ></p-inputMask>
             </div>
           </div>
         </div>

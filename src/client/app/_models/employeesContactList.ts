@@ -5,15 +5,17 @@ export class EmployeesContact {
   
   public idTerceroContacto: number;
   public idTercero: number;
-  public nombreContacto: string;
+  public contacto: string;
   public idListaParentesco: number;
-  public telefonoFijo: string;
-  public telefonoCelular: number;
+  public codigoListaParentesco: string;
+  public nombreListaParentesco: string;
+  public telefono: string;
+  public celular: number;
   public indicadorHabilitado: boolean;
   public auditoriaUsuario: number;
   public auditoriaFecha: Date;
   
   constructor() {
-      
+      this.indicadorHabilitado = true;
   }
 }

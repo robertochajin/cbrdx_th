@@ -23,7 +23,7 @@ import {EmployeesContactService} from '../_services/employees-contact.service';
     EmployeesContactComponent,
     EmployeesContactListComponent
   ],
-  bootstrap: [EmployeesContactComponent],
+  bootstrap: [EmployeesContactComponent,EmployeesContactListComponent],
   providers: [EmployeesContactService],
   exports: [EmployeesContactComponent,EmployeesContactListComponent]
 })
