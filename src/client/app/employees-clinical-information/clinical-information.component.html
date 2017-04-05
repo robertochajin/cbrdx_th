@@ -3,16 +3,16 @@
       <div class="col-md-6 col-xs-12 datatable-header-add" *ngIf="!ecd">
         <button type="button" pButton icon="fa-plus" (click)="add()" label="Nuevo Dato Clínico"></button>
       </div>
-      <form *ngIf="ecd" (ngSubmit)="saveDiagnostic()" #d="ngForm" novalidate id="diagnosticForm">
+      <form *ngIf="ecd" (ngSubmit)="d.valid && saveDiagnostic()" #d="ngForm" novalidate id="diagnosticForm">
         <div class="row">
           <div class="col-md-1 col-xs-1" >
           </div>
           <div class="col-md-4 col-xs-12" >
           <label >Diagnóstico</label>
           <p-autoComplete placeholder="Buscar diagnóstico" field="label" name="diagnostico" id="diagnostico" [(ngModel)]="ecd.diagnostico" [disabled]="editing"
-                          #diagnostico="ngModel" [suggestions]="diagnosticList" required="true" (completeMethod)="diagnosticSearch($event)" (onSelect)="captureDiagnosticId($event)">
+                          #diagnostico="ngModel" [suggestions]="diagnosticList" [required]="!editing" (completeMethod)="diagnosticSearch($event)" (onSelect)="captureDiagnosticId($event)">
           </p-autoComplete>
-          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && wrongDiagnostic">
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && wrongDiagnostic && !editing">
             <i class="fa fa-close"></i> Diagnóstico es requerido
           </div>
         </div>
@@ -21,8 +21,8 @@
           <p-calendar id="fechaInicio" name="fechaInicio" #fechaInicio="ngModel"  [showIcon]="true" [disabled]="editing"
                       [maxDate]="maxDateInicio" [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
                       [yearRange]="range" [locale]="es" readonlyInput="readonlyInput" [dataType]="date"
-                      (onSelect)="onSelectInicio($event)" [(ngModel)]="tfechaInicio" required></p-calendar>
-          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !fechaInicio.valid">
+                      (onSelect)="onSelectInicio($event)" [(ngModel)]="tfechaInicio" [required]="!editing"></p-calendar>
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !fechaInicio.valid && !editing">
             <i class="fa fa-close"></i>Fecha inicio es requerido
           </div>
         </div>
@@ -30,8 +30,11 @@
           <label >Fecha fin</label>
           <p-calendar id="fechaFin" name="fechaFin" #fechaFin="ngModel"  [showIcon]="true"
                       [maxDate]="maxDateFin" [minDate]="minDateFin" [monthNavigator]="true" [yearNavigator]="true"
-                      [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
+                      [yearRange]="range" [locale]="es" readonlyInput="readonlyInput" [required]="editing"
                       (onSelect)="onSelectFin($event)" [dataType]="date" [(ngModel)]="tfechaFin" ></p-calendar>
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !fechaInicio.valid && editing">
+            <i class="fa fa-close"></i>Fecha final es requerida
+          </div>
         </div>
       </div>
       <div class="row">

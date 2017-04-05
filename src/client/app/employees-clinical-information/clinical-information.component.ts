@@ -31,9 +31,9 @@ export class ClinicalInformationComponent {
   wrongDiagnostic: boolean = true;
 
   clinicalInformations: EmployeesClinicalData[];
-  idMayorDeEdad: number = 1;
+  idMayorDeEdad: number = 1; //Es necesario crear la constante y consultarla
   editing: boolean = false;
-  //Es necesario crear la constante y consultarla
+  ecdBackUp: EmployeesClinicalData;
 
 
   constructor(private clinicalInformationService: ClinicalInformationService,
@@ -158,6 +158,7 @@ export class ClinicalInformationComponent {
   }
 
   update(f: EmployeesClinicalData) {
+    this.ecdBackUp = f;
     let fi: moment.Moment = moment(f.fechaInicio, 'YYYY-MM-DD');
     this.tfechaInicio = fi.format('MM/DD/YYYY');
     if (f.fechaFin !== null && f.fechaFin !== undefined && f.fechaFin !== '') {
@@ -178,6 +179,7 @@ export class ClinicalInformationComponent {
     this.ecd.idTerceroDatoClinico = f.idTerceroDatoClinico;
     this.clinicalInformations.splice(this.clinicalInformations.indexOf(f), 1);
     this.editing = true;
+    this.maxDateFin = new Date();
   }
 
   goBack(): void {
@@ -187,6 +189,10 @@ export class ClinicalInformationComponent {
       icon: 'fa fa-question-circle',
       accept: () => {
         this.ecd = null;
+        if(this.editing){
+          this.clinicalInformations.push(this.ecdBackUp);
+          this.editing = false;
+        }
       }
     });
   }
