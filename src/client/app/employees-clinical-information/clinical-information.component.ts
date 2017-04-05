@@ -31,7 +31,9 @@ export class ClinicalInformationComponent {
   wrongDiagnostic: boolean = true;
 
   clinicalInformations: EmployeesClinicalData[];
-  idMayorDeEdad: number = 1;  //Es necesario crear la constante y consultarla
+  idMayorDeEdad: number = 1;
+  editing: boolean = false;
+  //Es necesario crear la constante y consultarla
 
 
   constructor(private clinicalInformationService: ClinicalInformationService,
@@ -90,6 +92,7 @@ export class ClinicalInformationComponent {
 
   add() {
     this.ecd = new EmployeesClinicalData();
+    this.editing = false;
   }
 
   saveDiagnostic() {
@@ -174,5 +177,17 @@ export class ClinicalInformationComponent {
     this.ecd.idTercero = f.idTercero;
     this.ecd.idTerceroDatoClinico = f.idTerceroDatoClinico;
     this.clinicalInformations.splice(this.clinicalInformations.indexOf(f), 1);
+    this.editing = true;
+  }
+
+  goBack(): void {
+    this.confirmationService.confirm({
+      message: ` ¿Esta seguro que desea Cancelar?`,
+      header: 'Corfirmación',
+      icon: 'fa fa-question-circle',
+      accept: () => {
+        this.ecd = null;
+      }
+    });
   }
 }
