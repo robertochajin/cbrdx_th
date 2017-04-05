@@ -1,0 +1,68 @@
+import {Component,Input} from '@angular/core';
+import {EmployeeEstate} from '../_models/employee-estate';
+import {EmployeeEstateService} from '../_services/employee-estate.service';
+import {Router} from '@angular/router';
+import {ConfirmationService} from 'primeng/primeng';
+import { Employee } from '../_models/employees';
+
+@Component({
+  moduleId: module.id,
+  templateUrl: 'employee-estate.component.html',
+  selector: 'employees-estate',
+  providers:  [ConfirmationService]
+})
+export class EmployeesEstateComponent {
+  @Input() employee:Employee;
+  employeeEstate: EmployeeEstate = new EmployeeEstate();
+  dialogObjet: EmployeeEstate = new EmployeeEstate();
+
+  employeesEstate: EmployeeEstate[];
+
+  constructor(
+    private employeesEstateService: EmployeeEstateService,
+    private router: Router,
+    private confirmationService: ConfirmationService
+  ) {
+    // this.employee.idTercero=179;
+  }
+
+  ngOnInit() {
+
+    this.employeesEstateService.getAll().subscribe(
+      employeesEstate => {
+        this.employeesEstate = employeesEstate;
+
+      }
+    );
+
+  }
+
+  del(employeeEstate: EmployeeEstate) {
+    this.dialogObjet = employeeEstate;
+    this.confirmationService.confirm({
+      message: `¿Esta seguro que lo desea eliminar?`,
+      header: 'Corfirmación',
+      icon: 'fa fa-question-circle',
+      accept: () => {
+        this.employeesEstateService.delete(this.dialogObjet);
+        this.employeesEstate.splice(this.employeesEstate.indexOf(this.dialogObjet), 1);
+        this.dialogObjet = null;
+      },
+      reject: () => {
+        this.dialogObjet = null;
+      }
+    });
+  }
+
+  detail(f: EmployeeEstate) {
+    this.router.navigate(['employees-estate/detail/'+f.idTerceroInmueble]);
+  }
+
+  update(c: EmployeeEstate) {
+    this.router.navigate(['employees-estate/update/'+c.idTerceroInmueble]);
+  }
+  add() {
+    //this.router.navigate(['employees-estate/add/'+this.employee.idTercero]);
+    this.router.navigate(['employees-estate/add/'+179 ]);
+  }
+}

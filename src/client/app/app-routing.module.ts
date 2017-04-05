@@ -8,6 +8,12 @@ import { EmployeesUpdateComponent } from './employees/employees-update.component
 import { EmployeesComponent } from './employees/employees.component';
 import { EmployeesAdditionalDataComponent } from './employees/employees-additional-data.component';
 
+//historia employees estates
+import { EmployeesEstateComponent } from './employees-estate/employee-estate.component';
+import { EmployeesEstateAddComponent } from './employees-estate/employee-estate-add.component';
+import { EmployeeEstateDetailComponent } from './employees-estate/employee-estate-detail.component';
+import { EmployeesEstateUpdateComponent } from './employees-estate/employee-estate-update.component';
+
 //Información familiar de employees
 import { FamilyInformationComponent } from './employees-family-information/family-information.component';
 import { FamilyInformationAddComponent } from './employees-family-information/family-information-add.component';
@@ -141,6 +147,12 @@ const routes = [
 
   // employees additional data
   {path: 'employees-additional-data/:id', component: EmployeesAdditionalDataComponent, canActivate: [AuthGuard]},
+
+  // employees estate
+  {path: 'employees-estate', component: EmployeesEstateComponent, canActivate: [AuthGuard]},
+  {path: 'employees-estate/add/:idTercero', component: EmployeesEstateAddComponent, canActivate: [AuthGuard]},
+  {path: 'employees-estate/detail/:id', component: EmployeeEstateDetailComponent, canActivate: [AuthGuard]},
+  {path: 'employees-estate/update/:id', component: EmployeesEstateUpdateComponent, canActivate: [AuthGuard]},
 
   //Login
   {path: 'login', component: LoginComponent},
