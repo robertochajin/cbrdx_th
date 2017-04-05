@@ -69,7 +69,7 @@
                           <a (click)="goBack()" class="cancelar" *ngIf="!recordarUsuario">{{ 'BTN_CANCELAR' | translate:param }}</a>
                           <a (click)="regresarUsuario()" class="regresar" *ngIf="recordarUsuario">{{ 'BTN_REGRESAR' | translate:param }}</a>
                           <button *ngIf="!recordarUsuario" pButton type="submit"
-                                  label="{ 'BTN_ACEPTAR' | translate:param }}"></button>
+                                  label="{{ 'BTN_ACEPTAR' | translate:param }}"></button>
                       </div>
                       <div *ngIf="error" class="alert alert-danger">{{error}}</div>
                       <div *ngIf="notice" class="alert alert-info">{{notice}}</div>
