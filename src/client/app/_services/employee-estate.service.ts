@@ -13,6 +13,10 @@ export class EmployeeEstateService {
   getAll()  {
     return this.http.get(this.serviceURL+'tercerosInmuebles').map((res:Response) => res.json());
   }
+  
+  getByEmployee(id:number)  {
+    return this.http.get(this.serviceURL+'tercerosInmuebles/buscarTercero/'+id).map((res:Response) => res.json() as EmployeeEstate[]);
+  }
 
   getById(id: number) {
     return this.http.get(this.serviceURL+'tercerosInmuebles/'+ id).map((res:Response) => res.json() as EmployeeEstate);

@@ -10,12 +10,16 @@ export class EmployeesContact {
   public codigoListaParentesco: string;
   public nombreListaParentesco: string;
   public telefono: string;
-  public celular: number;
+  public celular: string;
   public indicadorHabilitado: boolean;
   public auditoriaUsuario: number;
   public auditoriaFecha: Date;
   
   constructor() {
       this.indicadorHabilitado = true;
+      this.telefono = "";
+      this.celular = "";
+      this.idTerceroContacto = null;
+      this.idListaParentesco = null;
   }
 }
