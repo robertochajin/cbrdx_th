@@ -27,9 +27,9 @@
                         required
                         #idTipoDato="ngModel" [ngClass]="{ 'has-error': f.submitted && !idTipoDato.valid }"
                         (select)="alterPattern()" (change)="alterPattern()">
-                    <option *ngFor="let c of datatypeDetails" [ngValue]="c.idListaItem">
-                        {{c.codigoItem}} - {{c.item}}
-                    </option>
+                      <option *ngFor="let c of constantType" [ngValue]="c.idListaTipoDato">
+                        {{c.codigo}} - {{c.nombre}}
+                      </option>
                 </select>
                 <div *ngIf="f.submitted&&!idTipoDato.valid" class="alert alert-danger">
                     <div [hidden]="!idTipoDato.errors.required">Debe seleccionar un valor</div>
@@ -77,7 +77,8 @@
         </div>
         </div>
     </form>
-    <p-dialog header="Confirmación" [(visible)]="displayDialog" responsive="true">
+    <p-dialog header="Confirmación" [(visible)]="displayDialog"
+              responsive="true" modal="true">
         <p>Si continua perdera la información no guardada.Esta seguro que desea salir?.</p>
         <p-footer>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">

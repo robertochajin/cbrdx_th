@@ -33,3 +33,19 @@ function changeTheme(color) {
   sessionStorage.setItem("datatheme", color);
 }
 
+function changePage(){
+  console.log('changePage Rulez');
+  $('#wrapper').animate({scrollTop:0},'slow');
+}
+
+/**
+ *
+ */
+function scrolltoselect(){
+  if( $('.ui-tree .ui-state-highlight') ){
+    t = $('.ui-state-highlight').position().top;
+    h = $('#trvDivisionPolitica').height();
+
+    $('#trvDivisionPolitica').scrollTop($('.ui-state-highlight').position().top - $('#trvDivisionPolitica').height() / 2);
+  }
+}

@@ -15,7 +15,8 @@ import {Search} from "../_models/search";
 @Component({
     moduleId: module.id,
     templateUrl: 'divisionPolitica.component.html',
-    selector: 'divisionPolitica'
+    selector: 'divisionPolitica',
+
 })
 export class DivisionPoliticaComponent implements OnInit {
     msgs: Message[] = [];
@@ -53,6 +54,7 @@ export class DivisionPoliticaComponent implements OnInit {
     Resguardos:boolean = false;
     resultSearch: Search[];
     selectedSearch: SelectItem;
+    codeExists: boolean = false;
 
     constructor(private router: Router, private divisionPoliticaService: DivisionPoliticaService) {
         divisionPoliticaService.listByPadreDivisionPolitica(0).subscribe(res => {
@@ -408,6 +410,9 @@ export class DivisionPoliticaComponent implements OnInit {
     }
 
     captureId(event: Search) {
+      // ScrollTo 0;
+      jQuery('#trvDivisionPolitica').scrollTop(0);
+
         this.divisionPoliticaService.viewDivisionPolitica(event.value).subscribe(res => {
             this.politicalDivision = res;
             this.searchRecursive(res);
@@ -417,6 +422,8 @@ export class DivisionPoliticaComponent implements OnInit {
             if (res.idDivisionPolitica != 0) {
                 this.divisionPoliticaService.viewDivisionPolitica(res.idDivisionPoliticaPadre).subscribe(res => {
                     this.labelPadre = res.descripcionDivisonPolitica;
+                    // Scroll to Select
+                    jQuery('#trvDivisionPolitica').scrollTop(jQuery('.ui-state-highlight').position().top - jQuery('#trvDivisionPolitica').height() / 2);
 
                 });
             } else {
@@ -467,6 +474,8 @@ export class DivisionPoliticaComponent implements OnInit {
 
         this.selectedSearch = null;
         this.nodeSelect(this.selectedNode);
+
+
     }
 
     private searchLevel(id:number,tipo:number){
@@ -497,5 +506,23 @@ export class DivisionPoliticaComponent implements OnInit {
             }
         }
     }
+  
+  validateCode() {
+    this.codeExists = this.listadoTodo.filter(t => (t.codigoDivisionPolitica === this.politicalDivision.codigoDivisionPolitica && this.politicalDivision.idDivisionPolitica != t.idDivisionPolitica)).length > 0;
+  }
+  
+  inputNumberCodigo() {
+      let labelCodigo = this.politicalDivision.codigoDivisionPolitica;
+      if(labelCodigo != "" && labelCodigo != null) {
+          this.politicalDivision.codigoDivisionPolitica = this.politicalDivision.codigoDivisionPolitica.replace(/[^0-9]/g, '');
+      }
+  }
+  
+  inputNumberIndicativo() {
+      let labelIndicativo = this.politicalDivision.indicativoDivisonPolitica;
+      if(labelIndicativo != "" && labelIndicativo != null) {
+         this.politicalDivision.indicativoDivisonPolitica = this.politicalDivision.indicativoDivisonPolitica.replace(/[^0-9]/g, '');
+      }
+  }
 
 }

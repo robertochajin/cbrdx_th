@@ -74,13 +74,15 @@
                                   label="{ 'BTN_ACEPTAR' | translate:param }}"></button>
                       </div>
                       <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+                      <div *ngIf="notice" class="alert alert-info">{{notice}}</div>
                   </form>
               </div>
           </div>
       </div>
   </div>
 
-<p-dialog header="{{ 'LBL_CONFIRMACION' | translate:param }}" [(visible)]="displayDialog" responsive="true">
+<p-dialog header="{{ 'LBL_CONFIRMACION' | translate:param }}" [(visible)]="displayDialog"
+          responsive="true" modal="true">
     <p>
         {{ 'MSG_CONFIRMACIONDATOSCORRECTOS' | translate:param }}
     </p>
@@ -93,7 +95,8 @@
 </p-dialog>
 
 
-<p-dialog header="{{ 'LBL_CONFIRMACION' | translate:param }}" [(visible)]="displayDialog1" responsive="true">
+<p-dialog header="{{ 'LBL_CONFIRMACION' | translate:param }}" [(visible)]="displayDialog1"
+          responsive="true" modal="true">
     <p>
         {{ 'MSG_CONFIRMACIONDATOSCORRECTOS' | translate:param }}
     </p>

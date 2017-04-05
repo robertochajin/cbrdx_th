@@ -18,7 +18,7 @@
 <div class="ui-grid-row">
     <div class="col-md-4">
 
-        <p-tree [(value)]="treeActividadEconomica" selectionMode="single" [(selection)]="treeselected"
+        <p-tree id="trvActividadEconomica"[(value)]="treeActividadEconomica" selectionMode="single" [(selection)]="treeselected"
 
                 (onNodeSelect)="nodeSelect($event.node)"
                 (onNodeExpand)="nodeExpand($event.node)"
@@ -30,7 +30,7 @@
             <div class="row-fluid">
                 <div class="col-md-12">
 
-                    <form (ngSubmit)="f.valid && save()" #f="ngForm" novalidate id="formName">
+                    <form (ngSubmit)="!codeExists&&f.valid && save()" #f="ngForm" novalidate id="formName">
 
                         <div class="row">
                             <div class="form-group">
@@ -51,7 +51,9 @@
                                            name="codigoActividadEconomica"
                                            [(ngModel)]="actividadEconomica.codigoActividadEconomica"
                                            #codigoActividadEconomica="ngModel"
-                                           [maxlength]="tabselected" [minlength]="tabselected" required>
+                                           [maxlength]="tabselected" [minlength]="tabselected"
+                                           (change)="validateCode()" required
+                                    >
 
                                     <div *ngIf="f.submitted && !codigoActividadEconomica.valid"
                                          class="ui-message  ui-corner-all">
@@ -106,7 +108,8 @@
                 </div>
             </div>
         </p-fieldset>
-        <p-dialog header="Confirmación" [(visible)]="displayDialog" responsive="true">
+        <p-dialog header="Confirmación" [(visible)]="displayDialog"
+                  responsive="true" modal="true">
             <p>Si continua perdera la información no guardada.Esta seguro que desea salir?.</p>
             <p-footer>
                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">

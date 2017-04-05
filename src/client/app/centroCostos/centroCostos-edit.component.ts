@@ -44,4 +44,9 @@ export class CentroCostosEditComponent {
     goBack(): void {
         this.router.navigate(['centroCostos']);
     }
+  
+    capitalize() {
+      let input = this.centroCostos.centroCostos;
+      this.centroCostos.centroCostos = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
+    }
 }
