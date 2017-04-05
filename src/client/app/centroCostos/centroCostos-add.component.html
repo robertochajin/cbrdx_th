@@ -28,7 +28,9 @@
             <label for="cCostos" class="control-label col-sm-3">Nombre </label>
             <div class=" col-sm-9">
                 <input type="text" pInputText class="form-control" id="cCostos" name="cCostos" #cCostos="ngModel"
-                       [(ngModel)]="centroCostos.centroCostos" required maxlength="60" pattern="[A-Z]{1}.*">
+                       [(ngModel)]="centroCostos.centroCostos" required maxlength="60" pattern="[A-Z]{1}.*"
+                       (keyup)="capitalize()"
+                >
                 <div *ngIf="f.submitted&&!cCostos.valid" class="alert alert-danger">
                     <div [hidden]="!cCostos.errors.required">Debe ingresar un nombre para el centro de costo</div>
                     <div [hidden]="!cCostos.errors.maxlength">El nombre no debe tener mas de 60 caracteres.</div>
