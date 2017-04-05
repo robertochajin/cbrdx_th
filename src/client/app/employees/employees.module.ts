@@ -5,7 +5,7 @@ import {EmployeesDetailComponent}  from './employees-detail.component';
 import {EmployeesAddComponent}  from './employees-add.component';
 import {EmployeesUpdateComponent}  from './employees-update.component';
 import {EmployeesAdditionalDataComponent} from "./employees-additional-data.component";
-import {EmployeesContactComponent} from "./employees-contact.component";
+
 
 import {EmployeesService} from '../_services/employees.service';
 import { ListEmployeesService }   from '../_services/lists-employees.service';
@@ -21,8 +21,8 @@ import {AcademicEducationModule} from './../employees-academic-education/academi
 import {WorkExperienceModule} from './../employees-work-experience/work-experience.module';
 import {LocationModule} from '../employees-location/employee-location.module';
 import {ClinicalInformationModule} from "../employees-clinical-information/clinical-information.module";
+import {EmployeesContactModule} from "../employees-contact/employees-contact.module";
 
-//import {MomentModule} from 'angular2-moment/index.js';
 
 @NgModule({
   imports: [
@@ -32,13 +32,16 @@ import {ClinicalInformationModule} from "../employees-clinical-information/clini
     WorkExperienceModule,
     LocationModule,
     ClinicalInformationModule,
-    FormSharedModule
+    FormSharedModule,
+    EmployeesContactModule
   ],
   
-  declarations: [EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent,EmployeesAdditionalDataComponent,EmployeesContactComponent],
+  declarations: [EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent,EmployeesAdditionalDataComponent],
   bootstrap: [EmployeesComponent],
   providers: [EmployeesService,ListEmployeesService, PoliticalDivisionService, NavService],
   exports: [EmployeesComponent]
 })
 export class EmployeesModule {
+  constructor() {
+  }
 }

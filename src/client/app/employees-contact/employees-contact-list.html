@@ -1,3 +1,4 @@
+<h3 class="first">Datos de contacto en caso de emergencia</h3>
 <div>
     <div class="row datable-header">
         <div class="col-md-6 col-xs-12 datatable-header-add">
@@ -10,20 +11,18 @@
           </div>
         </div>
     </div>
-    <p-dataTable [value]="experiences" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-        <p-column field="empresa" header="Empresa" [sortable]="true"></p-column>
-        <p-column field="cargo" header="Cargo" [sortable]="true"></p-column>
-        <p-column field="fechaTermina" header="Finalización" [sortable]="true"></p-column>
-        <p-column field="ciudad" header="Ciudad" [sortable]="true"></p-column>
+    <p-dataTable [value]="contacts" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+        <p-column field="nombreContacto" header="Nombre Contacto" [sortable]="true"></p-column>
+        <p-column field="parentesco" header="Parentesco" [sortable]="true"></p-column>
+        <p-column field="telefonoFijo" header="Teléfono" [sortable]="true"></p-column>
+        <p-column field="telefonoCelular" header="Celular" [sortable]="true"></p-column>
         <p-column header="Acciones" styleClass="datatable-col-action">
-            <template let-experience="rowData" pTemplate="body">
+            <template let-contact="rowData" pTemplate="body">
                 <div class="btn-group" role="group">
-                    <button type="button"  class="ui-button btn" icon="fa-eye"
-                            pButton (click)="detail(experience)"></button>
                     <button type="button"  class="ui-button ui-button-success btn" icon="fa-pencil"
-                            pButton (click)="update(experience)"></button>
+                            pButton (click)="update(contact)"></button>
                     <button type="button"  class="ui-button ui-button-danger btn" icon="fa-trash"
-                            pButton (click)="delete(experience)" ></button>
+                            pButton (click)="delete(contact)" ></button>
                 </div>
             </template>
         </p-column>

@@ -98,8 +98,9 @@
             </p-accordionTab>
 
            <p-accordionTab header="Datos de Contacto" [selected]="acordion == 2">
-              <fieldset>
-                <employees-contact *ngIf="employee.idTercero" [employee]="employee"></employees-contact>
+              <fieldset *ngIf="employee.idTercero">
+                <employees-contact  [employee]="employee"></employees-contact>
+                <employees-contact-list [employee]="employee"></employees-contact-list>
               </fieldset>
             </p-accordionTab>
 
