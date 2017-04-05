@@ -4,6 +4,9 @@ import {EmployeesComponent}  from './employees.component';
 import {EmployeesDetailComponent}  from './employees-detail.component';
 import {EmployeesAddComponent}  from './employees-add.component';
 import {EmployeesUpdateComponent}  from './employees-update.component';
+import {EmployeesAdditionalDataComponent} from "./employees-additional-data.component";
+import {EmployeesContactComponent} from "./employees-contact.component";
+
 import {EmployeesService} from '../_services/employees.service';
 import { ListEmployeesService }   from '../_services/lists-employees.service';
 import { PoliticalDivisionService } from "../_services/political-division.service";
@@ -17,7 +20,7 @@ import {ReferencesModule} from './../employees-references/references.module';
 import {AcademicEducationModule} from './../employees-academic-education/academic-education.module';
 import {WorkExperienceModule} from './../employees-work-experience/work-experience.module';
 import {LocationModule} from '../employees-location/employee-location.module';
-import {EmployeesAdditionalDataComponent} from "./employees-additional-data.component";
+import {ClinicalInformationModule} from "../employees-clinical-information/clinical-information.module";
 
 //import {MomentModule} from 'angular2-moment/index.js';
 
@@ -28,9 +31,11 @@ import {EmployeesAdditionalDataComponent} from "./employees-additional-data.comp
     AcademicEducationModule,
     WorkExperienceModule,
     LocationModule,
+    ClinicalInformationModule,
     FormSharedModule
   ],
-  declarations: [EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent,EmployeesAdditionalDataComponent],
+  
+  declarations: [EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent,EmployeesAdditionalDataComponent,EmployeesContactComponent],
   bootstrap: [EmployeesComponent],
   providers: [EmployeesService,ListEmployeesService, PoliticalDivisionService, NavService],
   exports: [EmployeesComponent]

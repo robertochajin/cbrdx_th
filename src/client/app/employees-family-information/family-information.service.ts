@@ -23,7 +23,6 @@ export class FamilyInformationService {
   }
 
   add(f: ConstructorFamilyInformation) {
-    console.info(f);
     return this.http.post(this.serviceURL, f, {headers: this.headers})
       .map((res: Response) => res.json());
   };

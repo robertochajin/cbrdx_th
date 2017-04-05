@@ -1,10 +1,10 @@
-<h3>Administrador de Usuarios</h3>
+<h3>{{ 'LBL_ ADMINISTRADOR' | translate:param }} {{ 'LBL_USUARIOS' | translate:param }}</h3>
 <p-tabView>
     <p-tabPanel header="Datos de Usuario">
         <p-fieldset legend="Buscar Tercero para asignar Usuario" *ngIf="!isTerceroSet">
             <form #fc="ngForm">
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-3" style="text-align: center"><label>Tipo Documento:</label>
+                    <div class="ui-grid-col-3" style="text-align: center"><label>{{ 'LBL_TIPODOCUMENTO' | translate:param }}:</label>
                     </div>
                     <div class="ui-grid-col-3">
                         <select [(ngModel)]="selectedTipo" id="idTipoDato" name="idTipoDato" class="form-control"
@@ -14,12 +14,12 @@
                             </option>
                         </select>
                     </div>
-                    <div class="ui-grid-col-3" style="text-align: center"><label for="numDocumento">Número de Documento
+                    <div class="ui-grid-col-3" style="text-align: center"><label for="{{ 'LBL_NUMERODOCUMENTO' | translate:param }} ">Número de Documento
                         :</label></div>
                     <div class="ui-grid-col-3">
                         <input id="numDocumento" name="numDocumento" #numDocumento="ngModel" type="text" pInputText
                                [(ngModel)]="numeroDocumento" required maxlength="20" (keyup)="changeEvent($event)"
-                               (paste)="changeEvent($event)"/>
+                              (paste)="changeEvent($event)"/>
                         <div *ngIf="fc.submitted&&!numDocumento.valid" class="alert alert-danger">
                             <div [hidden]="!numDocumento.errors.required">Debe ingresar un numero de documento.</div>
                             <div [hidden]="!numDocumento.errors.maxlength">El número de documento no debe tener mas de
@@ -365,7 +365,8 @@
         </p-dataTable>
     </p-tabPanel>
 </p-tabView>
-<p-dialog header="Confirmación" [(visible)]="displayDialog" responsive="true">
+<p-dialog header="Confirmación" [(visible)]="displayDialog"
+          responsive="true" modal="true">
     <p>Si continua perdera la información no guardada.Esta seguro que desea salir?.</p>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">

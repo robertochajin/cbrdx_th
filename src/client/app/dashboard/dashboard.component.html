@@ -1,5 +1,5 @@
 <div class="ui-grid-row">
-  <div class="col-md-6 col-xs-12 " style="text-align: left"><label>Ultima vez que ingresó: </label>
+  <div class="col-md-6 col-xs-12 " style="text-align: left"><label>{{ 'LBL_ULTIMOINGRESO' | translate:param }}: </label>
   </div>
   <div class="col-md-6 col-xs-12 ">
     <button class=" pull-right" (click)="displayDialog=true" type="button" pButton icon="fa-plus" label="Configurar Widgets"></button>
@@ -8,7 +8,7 @@
 <div class="row-fluid">
   <div class="col-md-12">
     <form>
-      <div class="col-md-7" id="rolesSistema" style="padding: 0.5% 0.5% 0.5% 0.5%"
+      <div class="col-md-8" id="rolesSistema" style="padding: 0.5% 0.5% 0.5% 0.5%"
            *ngIf="rolesSistema" >
         <p-panel>
           <p-header>
@@ -18,38 +18,55 @@
               <!--<input pButton=""  [style]="{'float':'right'}" label="Save" icon="fa-check" (onClick)="save()" [model]="items"></input>-->
             </div>
           </p-header>
-          <div *ngIf="isData" class="ui-grid-row dashboard_height" style="height: 275px;">
+          <div *ngIf="isData" class="ui-grid-row dashboard_height" style="height: 100%;">
             <p-chart type="doughnut" [data]="data"></p-chart>
           </div>
         </p-panel>
       </div>
 
-      <div class="col-md-5" id="usuariosAct"
+      <div class="col-md-4" id="usuariosAct"
            *ngIf="usuariosAct">
+
         <p-panel>
           <p-header>
             <div class="ui-helper-clearfix">
-              <span class="ui-panel-title">Usuarios Activos /Inactivos</span>
+              <span class="ui-panel-title">{{ 'LBL_USUARIOS' | translate:param }} {{ 'LBL_ACTIVO' | translate:param }}/{{ 'LBL_INACTIVO' | translate:param }}</span>
               <button class="pull-right" type="text" (click)="usuariosAct = !usuariosAct" icon=""><i class="fa fa-close"></i></button>
               <!--<input pButton=""  [style]="{'float':'right'}" label="Save" icon="fa-check" (onClick)="save()" [model]="items"></input>-->
             </div>
           </p-header>
           <div class="ui-grid-row ">
-            <div class="col-md-7"><img class="thumbnail img-responsive"
-                                       src="http://es.seaicons.com/wp-content/uploads/2015/09/Accept-Male-User-icon.png"
-                                       width="60" height="60"><label>Usuarios Activos</label></div>
-            <div class="col-md-5"><h1>{{usuariosActivos}}</h1></div>
+
+            <div class="info-box" style="background: #f9f9f9;">
+              <span class="info-box-icon bg-green"><i class="fa fa-user"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">{{ 'LBL_USUARIOS' | translate:param }} {{ 'LBL_ACTIVO' | translate:param }}</span>
+                <span class="info-box-number" style="text-align: center;font-size: 2.4em;">{{usuariosActivos}}</span>
+              </div>
+            </div>
+
+            <div class="info-box" style="background: #f9f9f9;">
+              <span class="info-box-icon bg-yellow"><i class="fa fa-user-times"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">{{ 'LBL_USUARIOS' | translate:param }} {{ 'LBL_INACTIVO' | translate:param }}</span>
+                <span class="info-box-number" style="text-align: center;font-size: 2.4em;">{{usuariosInactivos}}</span>
+              </div>
+            </div>
+
+
+
+            <div class="pull-right">
+              <a (click)="user()" class="verMás btn btn-primary btn-sm">
+                Ver Más <i class="fa fa-chevron-right"></i>
+              </a>
+            </div>
+
           </div>
-          <hr>
-          <div class="ui-grid-row">
-            <div class="col-md-7"><img class="thumbnail img-responsive"
-                                       src="http://icon-icons.com/icons2/20/PNG/256/delete_delete_deleteusers_delete_male_user_maleclient_2348.png"
-                                       width="60" height="60"><label>Usuarios Inactivos</label></div>
-            <div class="col-md-5"><h1 >{{usuariosInactivos}}</h1></div>
-          </div>
-          <div class="pull-right"><a (click)="user()" class="verMás">Ver Más</a></div>
+
+
         </p-panel>
       </div>
+
     </form>
   </div>
 
@@ -59,7 +76,8 @@
 <!--{{item.panel}}-->
 <!--</div>-->
 
-<p-dialog header="{{ 'CONF_WIDGETS' | translate:param }}" [(visible)]="displayDialog" responsive="true">
+<p-dialog header="{{ 'CONF_WIDGETS' | translate:param }}" [(visible)]="displayDialog"
+          responsive="true" modal="true">
 
   <div class="ui-g-12">
     <p-checkbox name="widgets" [(ngModel)]="rolesSistema" label="Roles Sistema" binary="true"></p-checkbox>

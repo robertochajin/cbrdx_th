@@ -1,11 +1,11 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {APP_BASE_HREF} from "@angular/common";
-import {HttpModule,Http} from "@angular/http";
+import {HttpModule, Http} from "@angular/http";
 import {AppComponent} from "./app.component";
 import {AppRoutingModule} from "./app-routing.module";
-import {AboutModule} from "./about/about.module";
-import {HomeModule} from "./home/home.module";
+import {WindowRefService} from './_services/window-ref.service';
+
 import {EmployeesModule} from "./employees/employees.module";
 import {SharedModule} from "./shared/shared.module";
 import {FamilyInformationModule} from "./employees-family-information/family-information.module";
@@ -34,12 +34,12 @@ import {TipoDeAreaModule} from "./areas/tipoDeArea.module";
 import {DivisionPoliticaModule} from "./divisionPolitica/divisionPolitica.module";
 import {OcupacionesModule} from "./ocupaciones/ocupaciones.module";
 import {ActividadEconomicaModule} from "./actividadEconomica/actividadEconomica.module";
-
+import {ClinicalInformationModule} from "./employees-clinical-information/clinical-information.module";
 
 
 //CarsModule,
-@NgModule( {
-  imports: [BrowserModule, HttpModule, AppRoutingModule, AboutModule, HomeModule,
+@NgModule({
+  imports: [BrowserModule, HttpModule, AppRoutingModule,
     EmployeesModule,
     FamilyInformationModule,
     LocationModule,
@@ -47,6 +47,7 @@ import {ActividadEconomicaModule} from "./actividadEconomica/actividadEconomica.
     ReferencesModule,
     AcademicEducationModule,
     WorkExperienceModule,
+    ClinicalInformationModule,
     LoginModule,
     GrowlModule,
     DashboardModule,
@@ -69,10 +70,12 @@ import {ActividadEconomicaModule} from "./actividadEconomica/actividadEconomica.
   ],
 
   declarations: [AppComponent],
-  providers: [{
-    provide: APP_BASE_HREF,
-    useValue: '<%= APP_BASE %>'
-  },
+  providers: [
+    WindowRefService,
+    {
+      provide: APP_BASE_HREF,
+      useValue: '<%= APP_BASE %>'
+    },
     AuthGuard,
     AuthenticationService,
     LoginService,
@@ -84,6 +87,6 @@ import {ActividadEconomicaModule} from "./actividadEconomica/actividadEconomica.
 
   bootstrap: [AppComponent]
 
-} )
+})
 export class AppModule {
 }

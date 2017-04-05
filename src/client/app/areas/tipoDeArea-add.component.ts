@@ -1,7 +1,3 @@
-/**
- * Created by Jenniferth Escobar - Felipe Aguirre on 28/02/2017.
- */
-
 import {Component} from "@angular/core";
 import {TipoDeArea} from "../_models/tipoDeArea";
 import {TipoDeAreaService} from "../_services/tipoDeArea.service";
@@ -40,5 +36,10 @@ export class TipoDeAreaAddComponent {
 
     goBack(): void {
         this.router.navigate(['tipoArea']);
+    }
+  
+    capitalize() {
+      let input = this.areas.estructuraArea;
+      this.areas.estructuraArea = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
     }
 }

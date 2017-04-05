@@ -290,7 +290,7 @@ export class ActividadEconomicaComponent implements OnInit {
     }
 
     validateCode() {
-        this.codeExists = this.listadoActividadEconomica.filter(t => t.codigoActividadEconomica === this.actividadEconomica.codigoActividadEconomica && this.actividadEconomica.idActividadEconomica == null).length > 0;
+        this.codeExists = this.listadoActividadEconomica.filter(t => (t.codigoActividadEconomica === this.actividadEconomica.codigoActividadEconomica && this.actividadEconomica.idActividadEconomica != t.idActividadEconomica)).length > 0;
     }
 
 
@@ -301,6 +301,9 @@ export class ActividadEconomicaComponent implements OnInit {
     }
 
     captureId(event: Search) {
+      // ScrollTo 0;
+      jQuery('#trvActividadEconomica').scrollTop(0);
+
         this.actividadEconomicaService.viewActividadEconomica(event.value).subscribe(res => {
             this.actividadEconomica = res;
             this.searchRecursive(res);
@@ -308,6 +311,9 @@ export class ActividadEconomicaComponent implements OnInit {
             if (res.idActividadPadre != 0) {
                 this.actividadEconomicaService.viewActividadEconomica(res.idActividadPadre).subscribe(res => {
                     this.labelPadre = res.actividadEconomica;
+                  // Scroll to Select
+                  jQuery('#trvActividadEconomica').scrollTop(jQuery('.ui-state-highlight').position().top - jQuery('#trvActividadEconomica').height() / 2);
+
                 });
             } else {
                 this.labelPadre = "";

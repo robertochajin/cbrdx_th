@@ -8,6 +8,7 @@ import {FormsModule} from '@angular/forms';
 import 'rxjs/add/operator/toPromise';
 
 import {UsuariosComponent}  from './usuarios.component';
+import {SharedModule} from "../shared/shared.module";
 import {UsuarioDetailComponent}  from './usuarios-detail.component';
 import {UsuariosAddComponent}  from './usuarios-add.component';
 import {UsuariosService} from '../_services/usuarios.service';
@@ -30,7 +31,7 @@ import {ListaService} from "../_services/lista.service";
 import {UsuariosEditComponent} from "./usuarios-edit.component";
 
 @NgModule({
-    imports: [CommonModule, InputTextModule, FormsModule, DataTableModule, ButtonModule, DialogModule, PanelModule, TabViewModule, CalendarModule, DropdownModule, FieldsetModule, CheckboxModule],
+    imports: [CommonModule, InputTextModule, FormsModule, DataTableModule, ButtonModule, DialogModule, PanelModule, TabViewModule, CalendarModule, DropdownModule, FieldsetModule, CheckboxModule,SharedModule],
     declarations: [UsuariosComponent, UsuarioDetailComponent, UsuariosAddComponent,UsuariosEditComponent],
     bootstrap: [UsuariosComponent],
     providers: [UsuariosService, GruposGestionService, RolesService, TercerosService, ListaService],
