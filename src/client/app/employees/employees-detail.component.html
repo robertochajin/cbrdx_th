@@ -114,6 +114,7 @@
 
                   <p-accordionTab header="Activos" [selected]="acordion == 5">
                     <employees-estate *ngIf="employee.idTercero" [employee]="employee"></employees-estate>
+                    <employees-vehicle *ngIf="employee.idTercero" [employee]="employee"></employees-vehicle>
                   </p-accordionTab>
 
                   <p-accordionTab header="Formación Academica" [selected]="acordion == 6">
