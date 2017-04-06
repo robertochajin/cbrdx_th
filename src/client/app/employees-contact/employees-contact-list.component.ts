@@ -65,8 +65,10 @@ export class EmployeesContactListComponent{
         if(this.contact.idTerceroContacto == null || this.contact.idTerceroContacto == 0) {
             this.employeesContactService.add(this.contact)
             .subscribe(data => {
-              this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
-              this.contacts.push(this.contact)
+                this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
+                this.employeesContactService.getByEmployee(this.employee.idTercero).subscribe(
+                  contacts => this.contacts = contacts
+                );
             }, error => {
               this.show_form  = true;
               this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
@@ -74,7 +76,10 @@ export class EmployeesContactListComponent{
         }else{
             this.employeesContactService.update(this.contact)
             .subscribe(data => {
-              this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
+                this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
+                this.employeesContactService.getByEmployee(this.employee.idTercero).subscribe(
+                  contacts => this.contacts = contacts
+                );
             }, error => {
               this.show_form  = true;
               this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
