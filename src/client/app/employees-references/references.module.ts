@@ -11,6 +11,7 @@ import { ReferencesUpdateComponent }  from './references-update.component';
 import { ReferencesService } from './references.service';
 import { ReferencesTypesService } from '../_services/references-type.service';
 import { LocateService } from '../_services/locate.service';
+import {SharedModule} from "../shared/shared.module";
 import { PoliticalDivisionService } from "../_services/political-division.service";
 import { LocationsModule } from "../locations/locations.module";
 
@@ -27,6 +28,7 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
                     DialogModule,InputTextareaModule,CalendarModule,DropdownModule,
                     ConfirmDialogModule,
                     MessagesModule,
+                    SharedModule,
                     AutoCompleteModule,
                     FileUploadModule,
                     LocationsModule

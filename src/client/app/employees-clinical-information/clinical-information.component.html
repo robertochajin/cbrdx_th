@@ -50,7 +50,7 @@
       </div>
       </form>
     </div>
-    <p-dataTable [value]="clinicalInformations"   [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="clinicalInformations"   [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
         <p-column field="codigo" header="Código" [sortable]="true"></p-column>
         <p-column field="descripcion" header="Diagnóstico" [sortable]="true"></p-column>
         <p-column field="fechaInicio" header="Fecha inicio" [sortable]="true"></p-column>

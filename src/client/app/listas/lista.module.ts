@@ -18,10 +18,11 @@ import {ListaService} from "../_services/lista.service";
 import {ListaComponent} from "./lista.component";
 import {ListaAddComponent} from "./lista-add.component";
 import {ListaDetailComponent} from "./lista-detail.component";
+import {SharedModule} from "../shared/shared.module";
 import {ListaEditComponent} from "./lista-edit.component";
 
 @NgModule({
-    imports: [CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule, FieldsetModule],
+    imports: [CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule, FieldsetModule,SharedModule],
     declarations: [ListaComponent, ListaAddComponent, ListaDetailComponent, ListaEditComponent],
     bootstrap: [ListaComponent],
     providers: [ListaService],

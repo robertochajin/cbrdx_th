@@ -23,8 +23,10 @@ import {RolesService} from "../_services/roles.service";
 import {RolesComponent} from "./roles.component";
 import {RolesAddComponent} from "./roles-add.component";
 import {MenuElementoService} from "../_services/menuElemento.service";
+import {SharedModule} from "../shared/shared.module";
+
 @NgModule({
-    imports: [CommonModule, FormsModule, MultiSelectModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule, FieldsetModule, TabViewModule, CalendarModule],
+    imports: [CommonModule, FormsModule, MultiSelectModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule, FieldsetModule, TabViewModule, CalendarModule,SharedModule],
     declarations: [RolesComponent, RolesAddComponent],
     bootstrap: [RolesComponent],
     providers: [RolesService, MenuElementoService],
