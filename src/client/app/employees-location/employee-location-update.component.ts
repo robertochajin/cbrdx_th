@@ -10,6 +10,9 @@ import { Location } from '@angular/common';
 declare let google: any;
 import { NavService } from '../_services/_nav.service';
 import { PoliticalDivisionService } from "../_services/political-division.service";
+import {ListEmployeesService}     from '../_services/lists-employees.service';
+import {TerceroResidencias} from "../_models/terceroResidencias";
+import {TercerosResidenciasServices} from "../_services/terceros-residencias.service";
 
 @Component({
   moduleId: module.id,
@@ -39,6 +42,11 @@ export class LocationUpdateComponent implements OnInit {
   numberOne: string;
   numberTwo: string;
 
+  listTypeEstate: SelectItem[] = [];
+  listTypeConstruction: SelectItem[] = [];
+  listStratum: SelectItem[] = [];
+  listClassEstate: SelectItem[] = [];
+  residencia: TerceroResidencias = new TerceroResidencias();
   complementaries: any;
   finalAddress: string;
   cityList: any;
@@ -54,6 +62,8 @@ export class LocationUpdateComponent implements OnInit {
     private locationService: LocationService,
     private locateService: LocateService,
     private confirmationService: ConfirmationService,
+    private listEmployeesService: ListEmployeesService,
+    private tercerosResidenciasServices: TercerosResidenciasServices,
     private route: ActivatedRoute,
     private _nav: NavService,
     private politicalDivisionService: PoliticalDivisionService,
@@ -74,8 +84,60 @@ export class LocationUpdateComponent implements OnInit {
           this.localizacion.locacion.camino = ciudad.camino;
           this.localizacion.locacion.idDivisionPolitica = ciudad.idDivisionPolitica;
         });
+
+        this.locationService.get(this.localizacion.idLocalizacion).subscribe(l => {
+
+          this.tercerosResidenciasServices.getByTerceroLocalizacion(l.idTerceroLocalizacion).subscribe(residencia => {
+            console.log(residencia);
+            this.residencia = residencia;
+          });
+        });
       });
+
+
+
     });
+
+    this.listEmployeesService.getlistTypeEstate().subscribe(rest => {
+      this.listTypeEstate.push({label: "Seleccione", value: null});
+      for (let dp of rest) {
+        this.listTypeEstate.push({
+          label: dp.nombre,
+          value: dp.idListaTipoVivienda
+        });
+      }
+    });
+
+    this.listEmployeesService.getlistClassEstate().subscribe(rest => {
+      this.listClassEstate.push({label: "Seleccione", value: null});
+      for (let dp of rest) {
+        this.listClassEstate.push({
+          label: dp.nombre,
+          value: dp.idListaClaseVivienda
+        });
+      }
+    });
+
+    this.listEmployeesService.getlistTypeConstruction().subscribe(rest => {
+      this.listTypeConstruction.push({label: "Seleccione", value: null});
+      for (let dp of rest) {
+        this.listTypeConstruction.push({
+          label: dp.nombre,
+          value: dp.idListaTipoConstruccionVivienda
+        });
+      }
+    });
+
+    this.listEmployeesService.getlistStratum().subscribe(rest => {
+      this.listStratum.push({label: "Seleccione", value: null});
+      for (let dp of rest) {
+        this.listStratum.push({
+          label: dp.nombre,
+          value: dp.idListaEstrato
+        });
+      }
+    });
+
     this.locationService.getPrincipalNomenclatureList().subscribe(
       principalNomenclatureList => {
         this.principalNomenclatureList = principalNomenclatureList;
@@ -105,8 +167,12 @@ export class LocationUpdateComponent implements OnInit {
     this.localizacion.idDivisionPolitica = this.localizacion.locacion.idDivisionPolitica;
 
     this.locateService.update(this.localizacion).subscribe(res => {
-      this._nav.setTab(2);
-      this.location.back();
+      if (this.residencia.indicadorHabilitado) {
+        this.tercerosResidenciasServices.update(this.residencia).subscribe(res3 => {
+          this._nav.setTab(4);
+          this.location.back();
+        });
+      }
     });
   }
 
@@ -210,7 +276,7 @@ export class LocationUpdateComponent implements OnInit {
       icon: 'fa fa-question-circle',
       accept: () => {
         //this.router.navigate(['/employees-family-information']);
-        this._nav.setTab(2);
+        this._nav.setTab(4);
         this.location.back();
       },
       reject: () => {

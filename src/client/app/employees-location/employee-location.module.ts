@@ -9,14 +9,16 @@ import { LocationDetailComponent }  from './employee-location-detail.component';
 import { LocationAddComponent }  from './employee-location-add.component';
 import { LocationUpdateComponent }  from './employee-location-update.component';
 import { LocationService } from '../_services/employee-location.service';
+import {ListEmployeesService}     from '../_services/lists-employees.service';
 // import { LocationsComponent }  from '../locations/locations.component';
 // import {SharedModule} from "../shared/shared.module";
 
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,
     AutoCompleteModule, DropdownModule,
-  MessagesModule,
+  MessagesModule, CheckboxModule,
   ConfirmDialogModule
 } from 'primeng/primeng';
+import {TercerosResidenciasServices} from "../_services/terceros-residencias.service";
 
 
 @NgModule({
@@ -32,6 +34,7 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
                     AutoCompleteModule,
                     DropdownModule,
                     MessagesModule,
+                    CheckboxModule,
                     ConfirmDialogModule,
                     // SharedModule
     ],
@@ -42,7 +45,7 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
                 //    LocationsComponent
                     ],
     bootstrap:    [LocationComponent],
-    providers:    [LocationService],
+    providers:    [LocationService, ListEmployeesService, TercerosResidenciasServices],
     exports: 	  [LocationComponent]
 })
 export class LocationModule { }
