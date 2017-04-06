@@ -66,7 +66,14 @@ export class EmployeesAdditionalDataComponent {
         });
       }
     });
-    this.listEmployeesService.getlistSizePants().subscribe(rest => {
+    
+    
+
+  }
+
+  ngOnInit() {
+    let tipo = this.employee.genero == "Masculino" ? "PANH":"PANM"
+    this.listEmployeesService.getlistSizePants(tipo).subscribe(rest => {
       this.listSizePants.push({label: "Seleccione", value: null});
       for (let dp of rest) {
         this.listSizePants.push({
@@ -75,11 +82,6 @@ export class EmployeesAdditionalDataComponent {
         });
       }
     });
-
-  }
-
-  ngOnInit() {
-   
   }
 
   onSubmit() {

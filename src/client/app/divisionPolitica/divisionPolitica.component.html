@@ -47,7 +47,6 @@
                                            [(ngModel)]="politicalDivision.codigoDivisionPolitica"
                                            (change)="validateCode()"
                                            #codigoDivisionPolitica="ngModel"
-                                           (keyup)="inputNumberCodigo()"
                                            required/>
                                     <div *ngIf="fdivision.submitted && !codigoDivisionPolitica.valid"
                                          class="help-block">
@@ -68,6 +67,7 @@
                                            name="descripcionDivisonPolitica"
                                            [(ngModel)]="politicalDivision.descripcionDivisonPolitica"
                                            #descripcionDivisonPolitica="ngModel"
+                                           (keyup)="capitalize()"
                                            required/>
                                     <div *ngIf="fdivision.submitted && !descripcionDivisonPolitica.valid"
                                          class="help-block">
@@ -101,6 +101,7 @@
                                     <input type="text" pInputText class="form-control" id="codigoPostal"
                                            name="codigoPostal"
                                            [(ngModel)]="politicalDivision.codigoPostalDivisionPolitica"
+                                           (keyup)="inputNumberCodigo()"
                                            #codigoPostal="ngModel">
                                 </div>
                             </div>

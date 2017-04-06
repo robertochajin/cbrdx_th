@@ -1,4 +1,5 @@
 <h3 class="first">Datos de contacto en caso de emergencia</h3>
+<p-messages [value]="msgs"></p-messages>
 <div *ngIf="show_form">
   <div class="row-fluid">
     <div class="col-md-12">
@@ -9,6 +10,7 @@
               <label for="nombre">* Nombre Contacto</label>
               <input type="text" pInputText id="nombre" name="nombre"
                      [(ngModel)]="contact.contacto" #contacto="ngModel" required
+                     (keyup)="capitalize()"
               />
               <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="fe.submitted && !contacto.valid">
@@ -33,7 +35,7 @@
                      [(ngModel)]="contact.telefono" #telefonoFijo="ngModel"
               />-->
               <p-inputMask id="fijo" name="fijo"
-                           mask="(999) 999-9999? Ext 9999" placeholder="(999) 999-9999? Ext 99999"
+                           mask="?(999) 999-9999 Ext 9999" placeholder="(999) 999-9999 Ext 99999"
                            [(ngModel)]="contact.telefono" #telefonoFijo="ngModel"
               ></p-inputMask>
             </div>
@@ -44,7 +46,7 @@
 
               />-->
               <p-inputMask id="cel" name="cel"
-                           mask="(999) 999-9999" placeholder="(999) 999-9999"
+                           mask="?(999) 999-9999" placeholder="(999) 999-9999"
                            [(ngModel)]="contact.celular" #celular="ngModel"
               ></p-inputMask>
             </div>

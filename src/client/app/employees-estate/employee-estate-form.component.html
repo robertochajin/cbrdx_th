@@ -113,19 +113,6 @@
             Estrato requerido
           </div>
         </div>
-        <div class="ui-grid-col-6">
-          <label for="idLocalizacion">Ubicación</label>
-          <p-dropdown id="idLocalizacion" name="idLocalizacion" required="true"
-                      [options]="listLocalizacion" [autoWidth]="false"
-                      [(ngModel)]="employeeEstate.idLocalizacion"
-                      #idLocalizacion="ngModel"
-          ></p-dropdown>
-          <div class="ui-message ui-messages-error ui-corner-all"
-               *ngIf="f.submitted && !idLocalizacion.valid">
-            <i class="fa fa-close"></i>
-            Tipo inmueble requerido
-          </div>
-        </div>
       </div>
       <div class="ui-grid-row form-footer-buttons">
         <div class="ui-grid-col-4"></div>
