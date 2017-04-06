@@ -17,9 +17,10 @@ export class AuthenticationService {
   }
 
   forgetUser(mail: string) {
-    this.http.post(this.masterService + "/rememberUser/", JSON.stringify({
+    return this.http.post(this.masterService + "/rememberUser/", JSON.stringify({
       correoElectronico: mail
-    }), {headers: this.headers}).subscribe(res => {
+    }), {headers: this.headers}).toPromise().then(res => {
+      return true;
     });
   }
 
