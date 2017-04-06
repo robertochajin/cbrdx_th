@@ -1,0 +1,111 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+  </p-footer>
+
+</p-confirmDialog>
+<div *ngIf="employeeVehicle">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="header">
+        <h4 class="title">{{header}}</h4>
+      </div>
+    </div>
+  </div>
+  <form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">
+          <label for="idTipoVehiculo">Tipo Vehiculo</label>
+          <p-dropdown id="idTipoVehiculo" name="idTipoVehiculo" required="true"
+                      [options]="listTypeVehicle" [autoWidth]="false"
+                      [(ngModel)]="employeeVehicle.idTipoVehiculo"
+                      #idTipoVehiculo="ngModel"
+          ></p-dropdown>
+          <div class="ui-message ui-messages-error ui-corner-all"
+               *ngIf="f.submitted && !idTipoVehiculo.valid">
+            <i class="fa fa-close"></i>
+            Tipo vehiculo requerido
+          </div>
+        </div>
+        <div class="ui-grid-col-6">
+          <label for="idTipoServicio">Tipo de Servicio</label>
+          <p-dropdown id="idTipoServicio" name="idTipoServicio" required="true"
+                      [options]="listTypeService" [autoWidth]="false"
+                      [(ngModel)]="employeeVehicle.idTipoServicio"
+                      #idTipoServicio="ngModel"
+          ></p-dropdown>
+          <div class="ui-message ui-messages-error ui-corner-all"
+               *ngIf="f.submitted && !idTipoServicio.valid">
+            <i class="fa fa-close"></i>
+            Tipo de Servicio requerido
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">
+          <label for="idMarca">Marca</label>
+          <p-dropdown id="idMarca" name="idMarca" required="true"
+                      [options]="listBrandVehicle" [autoWidth]="false"
+                      [(ngModel)]="employeeVehicle.idMarca"
+                      #idMarca="ngModel"
+          ></p-dropdown>
+          <div class="ui-message ui-messages-error ui-corner-all"
+               *ngIf="f.submitted && !idMarca.valid">
+            <i class="fa fa-close"></i>
+            Marca requerida
+          </div>
+        </div>
+        <div class="ui-grid-col-6">
+          <label for="modelo">Modelo</label>
+          <input id="modelo" name="modelo" #modelo="ngModel" pInputText type="text"
+                 [(ngModel)]="employeeVehicle.modelo" min="1" (keyup)="inputNumber()" required maxlength="4"/>
+          <div class="ui-message ui-messages-error ui-corner-all"
+               *ngIf="f.submitted && !modelo.valid">
+            <i class="fa fa-close"></i>
+            Modelo requerido
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">
+          <label for="placa">Placa</label>
+          <input id="placa" name="placa" #placa="ngModel" pInputText type="text"
+                 [(ngModel)]="employeeVehicle.placa" required maxlength="10" (keyup)="inputPlaca()"/>
+          <div class="ui-message ui-messages-error ui-corner-all"
+               *ngIf="(f.submitted && !placa.valid )&& !anioValid">
+            <i class="fa fa-close"></i>
+            Placa requerida
+          </div>
+        </div>
+        <div class="ui-grid-col-6">
+          <label for="city">Ciudad Placa</label>
+          <p-autoComplete placeholder="Ciudad Placa" field="camino" name="city" id="city" #city="ngModel" required="true"
+                          [(ngModel)]="ciudadPlaca"
+                          [suggestions]="resultCity"
+                          (completeMethod)="searchCity($event)"
+                          (onSelect)="captureCity($event)">
+          </p-autoComplete>
+          <div class="ui-message ui-messages-error ui-corner-all"
+               *ngIf="f.submitted && !city.valid">
+            <i class="fa fa-close"></i>
+            Ciudad de placa es requerida
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-row form-footer-buttons">
+        <div class="ui-grid-col-4"></div>
+        <div class="ui-grid-col-1">
+          <a (click)="goBack()" class="cancelar">Cancelar</a>
+        </div>
+        <div class="ui-grid-col-2">
+          <button pButton icon="fa-plus" label="Guardar" type="submit"></button>
+        </div>
+        <div class="ui-grid-col-5"></div>
+      </div>
+    </div>
+  </form>
+</div>
+

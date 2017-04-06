@@ -72,8 +72,8 @@ export class ListEmployeesService {
     return this.http.get(this.serviceURL+"listasTallas/enabled/ZAPA",{headers: this.headers}).map((res:Response) => res.json());
 
   }
-  getlistSizePants()  {
-    return this.http.get(this.serviceURL+"listasTallas/enabled/PAN",{headers: this.headers}).map((res:Response) => res.json());
+  getlistSizePants(tipo:string)  {
+    return this.http.get(this.serviceURL+"listasTallas/enabled/"+tipo,{headers: this.headers}).map((res:Response) => res.json());
   }
   getlistStratum()  {
     return this.http.get(this.serviceURL+"listasEstratos",{headers: this.headers}).map((res:Response) => res.json());
@@ -93,6 +93,16 @@ export class ListEmployeesService {
   handleError(error: any): Promise<any> {
     console.error('Error:', error);
     return Promise.reject(error.message || error);
+  }
+
+  getlistTypeVehicle()  {
+    return this.http.get(this.serviceURL+"listasTiposVehiculos",{headers: this.headers}).map((res:Response) => res.json());
+  }
+  getlistTypeService()  {
+    return this.http.get(this.serviceURL+"listasTiposServiciosVehiculos",{headers: this.headers}).map((res:Response) => res.json());
+  }
+  getlistBrand()  {
+    return this.http.get(this.serviceURL+"listasMarcasVehiculos",{headers: this.headers}).map((res:Response) => res.json());
   }
 
 }

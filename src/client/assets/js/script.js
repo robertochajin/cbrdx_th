@@ -8,15 +8,32 @@ $(function(){
    * @autor CarlosPineda
    */
   if (sessionStorage.datatheme === undefined) {
+    /*
     $("head link#theme").attr("href", 'assets/css/color/' + 'white' + '.css');
     $("#logoApp").attr("src", 'assets/images/gestionamos_' + 'white' + '.png');
     console.log('white');
+    */
+    sessionStorage.setItem("datatheme", 'skin-blue');
+    $('body').addClass(sessionStorage.datatheme);
   } else {
+    /*
     $("head link#theme").attr("href", 'assets/css/color/' + sessionStorage.datatheme + '.css');
     $("#logoApp").attr("src", 'assets/images/gestionamos_' + sessionStorage.datatheme + '.png');
     console.log(sessionStorage.datatheme);
+    */
+    $('body').addClass(sessionStorage.datatheme);
   }
 
+});
+
+//Skin switcher
+var current_skin = "skin-blue";
+$('#layout-skins-list [data-skin]').click(function(e) {
+  e.preventDefault();
+  var skinName = $(this).data('skin');
+  $('body').removeClass(current_skin);
+  $('body').addClass(skinName);
+  current_skin = skinName;
 });
 
 
@@ -28,24 +45,22 @@ $(function(){
  * @autor CarlosPineda
  */
 function changeTheme(color) {
+  /*
   $("head link#theme").attr("href", 'assets/css/color/' + color + '.css');
   $("#logoApp").attr("src", 'assets/images/gestionamos_' + color + '.png');
   sessionStorage.setItem("datatheme", color);
+  */
+  $('body').removeClass(sessionStorage.datatheme);
+  sessionStorage.setItem("datatheme", color);
+  $('body').addClass(color);
 }
 
+
+/**
+ *
+ */
 function changePage(){
   console.log('changePage Rulez');
   $('#wrapper').animate({scrollTop:0},'slow');
 }
 
-/**
- *
- */
-function scrolltoselect(){
-  if( $('.ui-tree .ui-state-highlight') ){
-    t = $('.ui-state-highlight').position().top;
-    h = $('#trvDivisionPolitica').height();
-
-    $('#trvDivisionPolitica').scrollTop($('.ui-state-highlight').position().top - $('#trvDivisionPolitica').height() / 2);
-  }
-}
