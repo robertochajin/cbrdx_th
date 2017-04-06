@@ -37,20 +37,22 @@ export class EmployeesEstateComponent {
   }
 
   del(employeeEstate: EmployeeEstate) {
-    this.dialogObjet = employeeEstate;
-    this.confirmationService.confirm({
-      message: `¿Esta seguro que lo desea eliminar?`,
-      header: 'Corfirmación',
-      icon: 'fa fa-question-circle',
-      accept: () => {
-        this.employeesEstateService.delete(this.dialogObjet);
-        this.employeesEstate.splice(this.employeesEstate.indexOf(this.dialogObjet), 1);
-        this.dialogObjet = null;
-      },
-      reject: () => {
-        this.dialogObjet = null;
-      }
-    });
+      this.dialogObjet = employeeEstate;
+      this.confirmationService.confirm({
+        message: `¿Esta seguro que lo desea eliminar?`,
+        header: 'Corfirmación',
+        icon: 'fa fa-question-circle',
+        accept: () => {
+          this.dialogObjet.indicadorHabilitado = false;
+          this.employeesEstateService.update(this.dialogObjet).subscribe( r => {
+            this.employeesEstate.splice(this.employeesEstate.indexOf(this.dialogObjet), 1);
+            this.dialogObjet = null;
+          });
+        },
+        reject: () => {
+          this.dialogObjet = null;
+        }
+      });
   }
 
   detail(f: EmployeeEstate) {
