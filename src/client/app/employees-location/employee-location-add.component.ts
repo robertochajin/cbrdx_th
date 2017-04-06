@@ -1,16 +1,19 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { LocationService } from '../_services/employee-location.service';
-import { LocateService } from '../_services/locate.service';
-import { PoliticalDivisionService } from '../_services/political-division.service';
-import { EmployeesLocation } from '../_models/employee-location';
-import { Localizaciones } from '../_models/localizaciones';
-import { SelectItem, ConfirmationService, Message } from 'primeng/primeng';
-import { Router } from '@angular/router';
-import { Location } from '@angular/common';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {ActivatedRoute, Params} from '@angular/router';
+import {LocationService} from '../_services/employee-location.service';
+import {LocateService} from '../_services/locate.service';
+import {PoliticalDivisionService} from '../_services/political-division.service';
+import {EmployeesLocation} from '../_models/employee-location';
+import {Localizaciones} from '../_models/localizaciones';
+import {SelectItem, ConfirmationService, Message} from 'primeng/primeng';
+import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 declare let google: any;
-import { NavService } from '../_services/_nav.service';
+import {NavService} from '../_services/_nav.service';
+import {ListEmployeesService}     from '../_services/lists-employees.service';
+import {TerceroResidencias} from "../_models/terceroResidencias";
+import {TercerosResidenciasServices} from "../_services/terceros-residencias.service";
 
 @Component({
   moduleId: module.id,
@@ -33,7 +36,7 @@ export class LocationAddComponent implements OnInit {
   dismiss: EventEmitter<number> = new EventEmitter<number>();
 
   idTercero: Number;
-  tipoDireccion: { value: null, label: string };
+  tipoDireccion: {value: null, label: string};
   principalNomenclatureList: any;
   complementaryNomenclatureList: any;
   addressTypeList: any;
@@ -43,46 +46,91 @@ export class LocationAddComponent implements OnInit {
   principalNomenclature: string;
   numberOne: string;
   numberTwo: string;
-
+  listTypeEstate: SelectItem[] = [];
+  listTypeConstruction: SelectItem[] = [];
+  listStratum: SelectItem[] = [];
+  listClassEstate: SelectItem[] = [];
   complementaries: any;
   finalAddress: string;
   cityList: any;
   hoodList: any;
   map: any;
-
+  residencia: TerceroResidencias = new TerceroResidencias();
   submitted: boolean;
   msgs: Message[] = [];
 
-  constructor(
-    private location: Location,
-    private politicalDivisionServices: PoliticalDivisionService,
-    private locationService: LocationService,
-    private locateService: LocateService,
-    private confirmationService: ConfirmationService,
-    private route: ActivatedRoute,
-    private _nav: NavService
-  ) {
-    this.complementaries = [{ tipo: null, detalle: '' }];
+  constructor(private location: Location,
+              private politicalDivisionServices: PoliticalDivisionService,
+              private locationService: LocationService,
+              private locateService: LocateService,
+              private listEmployeesService: ListEmployeesService,
+              private tercerosResidenciasServices: TercerosResidenciasServices,
+              private confirmationService: ConfirmationService,
+              private route: ActivatedRoute,
+              private _nav: NavService) {
+    this.complementaries = [{tipo: null, detalle: ''}];
   }
 
   ngOnInit() {
     this.locationService.getPrincipalNomenclatureList().subscribe(
       principalNomenclatureList => {
         this.principalNomenclatureList = principalNomenclatureList;
-        this.principalNomenclatureList.unshift({ label: 'Seleccione', value: null });
+        this.principalNomenclatureList.unshift({label: 'Seleccione', value: null});
       });
+
     this.locationService.getComplementaryNomenclatureList().subscribe(
       complementaryNomenclatureList => {
         this.complementaryNomenclatureList = complementaryNomenclatureList;
         this.complementaryNomenclatureList.map((cn: any) => {
           cn.value = cn.label;
         });
-        this.complementaryNomenclatureList.unshift({ label: 'Seleccione', value: null });
+        this.complementaryNomenclatureList.unshift({label: 'Seleccione', value: null});
       });
+
+    this.listEmployeesService.getlistTypeEstate().subscribe(rest => {
+      this.listTypeEstate.push({label: "Seleccione", value: null});
+      for (let dp of rest) {
+        this.listTypeEstate.push({
+          label: dp.nombre,
+          value: dp.idListaTipoVivienda
+        });
+      }
+    });
+
+    this.listEmployeesService.getlistClassEstate().subscribe(rest => {
+      this.listClassEstate.push({label: "Seleccione", value: null});
+      for (let dp of rest) {
+        this.listClassEstate.push({
+          label: dp.nombre,
+          value: dp.idListaClaseVivienda
+        });
+      }
+    });
+
+    this.listEmployeesService.getlistTypeConstruction().subscribe(rest => {
+      this.listTypeConstruction.push({label: "Seleccione", value: null});
+      for (let dp of rest) {
+        this.listTypeConstruction.push({
+          label: dp.nombre,
+          value: dp.idListaTipoConstruccionVivienda
+        });
+      }
+    });
+
+    this.listEmployeesService.getlistStratum().subscribe(rest => {
+      this.listStratum.push({label: "Seleccione", value: null});
+      for (let dp of rest) {
+        this.listStratum.push({
+          label: dp.nombre,
+          value: dp.idListaEstrato
+        });
+      }
+    });
+
     this.locationService.getAddressTypeList().subscribe(
       addressTypeList => {
         this.addressTypeList = addressTypeList;
-        this.addressTypeList.unshift({ label: 'Seleccione', value: null });
+        this.addressTypeList.unshift({label: 'Seleccione', value: null});
       });
 
     this.route.params.subscribe((params: Params) => {
@@ -92,7 +140,7 @@ export class LocationAddComponent implements OnInit {
     this.finalAddress = this.localizacion.direccion;
     this.selectedAddressType = this.localizacion.idTipoDireccion;
     this.selectedPrincipalNomenclature = this.localizacion.nomenclaturaPrincipal;
-    
+
     this.focusUP();
   }
 
@@ -109,9 +157,15 @@ export class LocationAddComponent implements OnInit {
       this.terceroLocalizacion.indicadorHabilitado = true;
       this.terceroLocalizacion.auditoriaUsuario = 1;
 
-      this.locationService.add(this.terceroLocalizacion).subscribe(res => {
-        this._nav.setTab(2);
-        this.location.back();
+      this.locationService.add(this.terceroLocalizacion).subscribe(res2 => {
+
+        if (this.residencia.indicadorHabilitado) {
+          this.residencia.idTerceroLocalizacion = res2.idTerceroLocalizacion;
+          this.tercerosResidenciasServices.add(this.residencia).subscribe(res3 => {
+            this._nav.setTab(4);
+            this.location.back();
+          });
+        }
       });
     });
   }
@@ -162,7 +216,7 @@ export class LocationAddComponent implements OnInit {
       } else {
         strToSearch = this.localizacion.locacion.camino;
       }
-      geocoder.geocode({ 'address': this.finalAddress + ' ' + strToSearch },
+      geocoder.geocode({'address': this.finalAddress + ' ' + strToSearch},
         function (results: any, status: any) {
           if (status === google.maps.GeocoderStatus.OK) {
             let latitude = results[0].geometry.location.lat();
@@ -175,7 +229,7 @@ export class LocationAddComponent implements OnInit {
               mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             let map = new google.maps.Map(document.getElementById('graphMap'), mapOptions);
-            let marker = new google.maps.Marker({ position: latLng, map: map });
+            let marker = new google.maps.Marker({position: latLng, map: map});
 
             assingLocation(latitude, longitude);
           } else {
@@ -196,7 +250,7 @@ export class LocationAddComponent implements OnInit {
   }
 
   addComplementary(): void {
-    let complementary = { 'tipo': 0, 'detalle': '' };
+    let complementary = {'tipo': 0, 'detalle': ''};
     this.complementaries.push(complementary);
   }
 
@@ -217,7 +271,7 @@ export class LocationAddComponent implements OnInit {
       icon: 'fa fa-question-circle',
       accept: () => {
         //this.router.navigate(['/employees-family-information']);
-        this._nav.setTab(2);
+        this._nav.setTab(4);
         this.location.back();
       },
       reject: () => {
@@ -227,6 +281,8 @@ export class LocationAddComponent implements OnInit {
 
   focusUP() {
     const element = document.querySelector('#formulario');
-    if (element) { element.scrollIntoView(element); }
+    if (element) {
+      element.scrollIntoView(element);
+    }
   }
 }
