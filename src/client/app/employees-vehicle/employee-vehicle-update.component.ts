@@ -10,7 +10,7 @@ import {ListEmployeesService}     from '../_services/lists-employees.service';
 import {PoliticalDivisionService} from "../_services/political-division.service";
 import {DivisionPolitica}         from "../_models/divisionPolitica";
 import * as moment from 'moment/moment';
-
+import {NavService} from '../_services/_nav.service';
 @Component({
   moduleId: module.id,
   selector: 'employees-vehicle',
@@ -29,8 +29,6 @@ export class EmployeesVehicleUpdateComponent {
   msgs: Message[] = [];
   year: Number;
   anioValid: boolean = false;
-  listLocalizacion: SelectItem[] = [];
-  idTercero: Number;
   ciudadPlaca: String;
   backupCiudadPlaca: String;
   resultCity: DivisionPolitica[];
@@ -41,7 +39,9 @@ export class EmployeesVehicleUpdateComponent {
               private location: Location,
               private listEmployeesService: ListEmployeesService,
               private politicalDivisionService: PoliticalDivisionService,
-              private confirmationService: ConfirmationService) {
+              private confirmationService: ConfirmationService,
+              private _nav: NavService
+  ) {
 
   }
 
@@ -49,8 +49,8 @@ export class EmployeesVehicleUpdateComponent {
     this.route.params.switchMap((params: Params) => this.employeeVehicleService.getById(+params['id']))
       .subscribe(data => {
         this.employeeVehicle = data;
-        this.ciudadPlaca= this.employeeVehicle.ciudad;
-        this.backupCiudadPlaca= this.employeeVehicle.ciudad;
+        this.ciudadPlaca = this.employeeVehicle.ciudad;
+        this.backupCiudadPlaca = this.employeeVehicle.ciudad;
       });
 
     let today = new Date();
@@ -93,12 +93,13 @@ export class EmployeesVehicleUpdateComponent {
   onSubmit() {
     if (this.ciudadPlaca != this.backupCiudadPlaca) {
       this.ciudadPlaca = "";
-      this.employeeVehicle.idCiudad =null;
+      this.employeeVehicle.idCiudad = null;
     }
     if (this.ciudadPlaca == this.backupCiudadPlaca) {
       this.employeeVehicleService.update(this.employeeVehicle)
         .subscribe(data => {
           this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
+          this._nav.setTab(5);
           this.location.back();
         }, error => {
           this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
@@ -120,7 +121,8 @@ export class EmployeesVehicleUpdateComponent {
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
-        this.router.navigate(['/employees-vehicle']);
+        this._nav.setTab(5);
+        this.location.back();
       }
     });
   }

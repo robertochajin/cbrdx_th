@@ -23,12 +23,11 @@ export class EmployeesVehicleComponent {
     private router: Router,
     private confirmationService: ConfirmationService
   ) {
-    // this.employee.idTercero=179;
   }
 
   ngOnInit() {
 
-    this.employeesVehicleService.getAll().subscribe(
+    this.employeesVehicleService.getByIdTercero(this.employee.idTercero).subscribe(
       employeesVehicle => {
         this.employeesVehicle = employeesVehicle;
 
@@ -62,7 +61,6 @@ export class EmployeesVehicleComponent {
     this.router.navigate(['employees-vehicle/update/'+c.idTerceroVehiculo]);
   }
   add() {
-    //this.router.navigate(['employees-estate/add/'+this.employee.idTercero]);
-    this.router.navigate(['employees-vehicle/add/'+11 ]);
+    this.router.navigate(['employees-vehicle/add/'+ this.employee.idTercero ]);
   }
 }

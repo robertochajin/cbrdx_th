@@ -18,7 +18,7 @@ export class EmployeeVehicleService {
     return this.http.get(this.serviceURL+'tercerosVehiculos/'+ id).map((res:Response) => res.json() as EmployeeVehicle);
   }
   getByIdTercero(id: number) {
-    return this.http.get(this.serviceURL+'tercerosVehiculos/buscarTercero/'+ id).map((res:Response) => res.json() as EmployeeVehicle);
+    return this.http.get(this.serviceURL+'tercerosVehiculos/buscarTerceros/'+ id).map((res:Response) => res.json() as EmployeeVehicle[]);
   }
 
   add(c: EmployeeVehicle) {

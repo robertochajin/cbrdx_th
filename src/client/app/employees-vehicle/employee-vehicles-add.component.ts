@@ -10,7 +10,7 @@ import {ListEmployeesService}     from '../_services/lists-employees.service';
 import {PoliticalDivisionService} from "../_services/political-division.service";
 import {DivisionPolitica}         from "../_models/divisionPolitica";
 import * as moment from 'moment/moment';
-
+import {NavService} from '../_services/_nav.service';
 @Component({
   moduleId: module.id,
   selector: 'employees-vehicle',
@@ -29,8 +29,6 @@ export class EmployeesVehicleAddComponent {
   msgs: Message[] = [];
   year: Number;
   anioValid: boolean = false;
-  listLocalizacion: SelectItem[] = [];
-  idTercero: number;
   ciudadPlaca: string;
   backupCiudadPlaca: string;
   resultCity: DivisionPolitica[];
@@ -41,7 +39,9 @@ export class EmployeesVehicleAddComponent {
               private location: Location,
               private listEmployeesService: ListEmployeesService,
               private politicalDivisionService: PoliticalDivisionService,
-              private confirmationService: ConfirmationService) {
+              private confirmationService: ConfirmationService,
+              private _nav: NavService
+  ) {
 
   }
 
@@ -53,7 +53,6 @@ export class EmployeesVehicleAddComponent {
 
     this.route.params.subscribe((params: Params) => {
       this.employeeVehicle.idTercero = Number(+params['idTercero']);
-      this.idTercero = Number(+params['idTercero']);
     });
 
     this.listEmployeesService.getlistTypeVehicle().subscribe(rest => {
@@ -97,6 +96,7 @@ export class EmployeesVehicleAddComponent {
       this.employeeVehicleService.add(this.employeeVehicle)
         .subscribe(data => {
           this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
+          this._nav.setTab(5);
           this.location.back();
         }, error => {
           this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
@@ -117,7 +117,8 @@ export class EmployeesVehicleAddComponent {
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
-        this.router.navigate(['/employees-vehicle']);
+        this._nav.setTab(5);
+        this.location.back();
       }
     });
   }
