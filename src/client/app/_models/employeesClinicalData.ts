@@ -15,4 +15,7 @@ export class EmployeesClinicalData {
   descripcion: string;
   diagnostico: {idDiagnosticoCie:number, codigo:string, descripcion:string, label: string};
 
+  constructor() {
+    this.indicadorHabilitado = true;
+  }
 }

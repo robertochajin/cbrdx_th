@@ -70,7 +70,11 @@
                           <a (click)="regresarUsuario()" class="regresar" *ngIf="recordarUsuario">{{ 'BTN_REGRESAR' | translate:param }}</a>
                           <button *ngIf="!recordarUsuario" pButton type="submit"
                                   label="{{ 'BTN_ACEPTAR' | translate:param }}"></button>
+                          <button *ngIf="recordarUsuario" pButton type="submit"
+                                  label="{{ 'BTN_ACEPTAR' | translate:param }}"></button>
+
                       </div>
+
                       <div *ngIf="error" class="alert alert-danger">{{error}}</div>
                       <div *ngIf="notice" class="alert alert-info">{{notice}}</div>
                   </form>

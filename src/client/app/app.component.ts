@@ -1,6 +1,12 @@
-import {Component, AfterContentInit, ContentChild,
-  AfterViewChecked, AfterViewInit, ViewChild,ViewChildren} from '@angular/core';
+import {Component,
+  AfterContentInit,
+  ContentChild,
+  AfterViewChecked,
+  AfterViewInit,
+  ViewChild,
+  ViewChildren} from '@angular/core';
 import { Config } from './shared/config/env.config';
+import { FormsModule, FormBuilder } from '@angular/forms'
 import './operators';
 import {LoginService} from "./_services/login.service";
 import {TranslateService} from 'ng2-translate';
@@ -12,21 +18,28 @@ import {TranslateService} from 'ng2-translate';
   moduleId: module.id,
   selector: 'sd-app',
   templateUrl: 'app.component.html',
+  providers: [FormBuilder]
 })
 export class AppComponent implements AfterViewInit, AfterViewChecked{
   sessionStart:boolean;
 
-  constructor(private loginService:LoginService,private translate: TranslateService) {
+  constructor(private loginService:LoginService,
+              private translate: TranslateService,
+              private formBuilder: FormBuilder) {
     this.sessionStart = loginService.getSession();
     //console.log('Environment config', Config);
     translate.setDefaultLang('es');
     translate.use('es');
   }
   ngAfterViewInit(){
-    // console.log('fin carga!');
+      console.log('AfterViewInit');
+      $.getScript('assets/js/app.js', function(){});
   }
   ngAfterViewChecked(){
-    // console.log('fin carga view!');
+     //console.log('AfterViewChecked');
+  }
+  onSubmit(){
+    console.log('SUBMIT FORM!! JUAJAJA');
   }
 
   setSession(s:boolean):void{
