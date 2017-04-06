@@ -20,8 +20,9 @@
 
         <p-tree id="trvActividadEconomica"[(value)]="treeActividadEconomica" selectionMode="single" [(selection)]="treeselected"
                 (onNodeSelect)="nodeSelect($event.node)"
-                (onNodeExpand)="nodeExpand($event.node)"
-        ></p-tree>
+                (onNodeExpand)="nodeExpand($event.node)">
+        </p-tree>
+
     </div>
 
     <div class="col-md-8">
