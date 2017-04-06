@@ -53,6 +53,7 @@
                                            #codigoActividadEconomica="ngModel"
                                            [maxlength]="tabselected" [minlength]="tabselected"
                                            (change)="validateCode()" required
+                                           (keyup)="capitalizeCodigo()"
                                     >
 
                                     <div *ngIf="f.submitted && !codigoActividadEconomica.valid"

@@ -212,7 +212,7 @@
             </div>
         </div>
     </form>
-    <p-dataTable [value]="detailsList" [paginator]="true" [rows]="10" [responsive]="true">
+    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="detailsList" [paginator]="true" [rows]="10" [responsive]="true">
         <header>Listas</header>
         <p-column field="codigoItem" header="Código"></p-column>
         <p-column field="item" header="Item"></p-column>

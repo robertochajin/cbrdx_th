@@ -39,7 +39,7 @@
   "MSG_CONFIRMACION":"Si continua perderá la información no guardada. ¿Está seguro que desea salir?",
   "MSG_GUARDADO":"Guardado",
   "MSG_REGISTRO":"Registro",
-  "MSG_NORECORDSFOUND":"La Búsqueda no Arrojo Ningún Resultado",
+  "MSG_NORECORDSFOUND":"La búsqueda no arrojo ningún resultado",
 
 
 
@@ -50,7 +50,7 @@
   "FIN_REFERENCIA":"=================================================================",
 
   "INICIO_INFORMACIONFAMILIAR":"==============================================================",
-      "LBL_CONFIRMACION":"Familiar",
+      
       "LBL_PARENTESCO":"Parentesco",
       "LBL_TEL1":"Teléfono 1",
       "LBL_TEL2":"Teléfono 2",
@@ -204,7 +204,7 @@
   "INICIO_SEGURIDAD":"==============================================================",
       "LBL_CONTRASEÑA":"Contraseña",
       "LBL_INICIARSESION":"Iniciar Sesión",
-      "LBL_OLVIDE":"Olvide mi",
+      "LBL_OLVIDE":"Olvidé mi",
       "LBL_RECUPERACUENTA":"Recupera tu Cuenta",
       "MSG_USUARIOREQUERIDO":"El nombre de usuario es requerido.",
       "MSG_USUARIOCONTENER":"El usuario debe contener solo letras, números o los caracteres. _ y/o -",

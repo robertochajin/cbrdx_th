@@ -534,5 +534,11 @@ export class DivisionPoliticaComponent implements OnInit {
           this.politicalDivision.descripcionDivisonPolitica = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
       }
   }
+  capitalizeCodigo() {
+    let input = this.politicalDivision.codigoDivisionPolitica;
+    if(input != "" && input != null){
+      this.politicalDivision.codigoDivisionPolitica = input.toUpperCase();
+    }
+  }
 
 }

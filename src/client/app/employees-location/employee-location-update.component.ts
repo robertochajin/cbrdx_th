@@ -1,15 +1,15 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, Input, OnInit } from '@angular/core';
-import { LocationService } from '../_services/employee-location.service';
-import { LocateService } from '../_services/locate.service';
-import { EmployeesLocation } from '../_models/employee-location';
-import { Localizaciones } from '../_models/localizaciones';
-import { SelectItem, ConfirmationService, Message } from 'primeng/primeng';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Location } from '@angular/common';
+import {Component, Input, OnInit} from '@angular/core';
+import {LocationService} from '../_services/employee-location.service';
+import {LocateService} from '../_services/locate.service';
+import {EmployeesLocation} from '../_models/employee-location';
+import {Localizaciones} from '../_models/localizaciones';
+import {SelectItem, ConfirmationService, Message} from 'primeng/primeng';
+import {Router, ActivatedRoute, Params} from '@angular/router';
+import {Location} from '@angular/common';
 declare let google: any;
-import { NavService } from '../_services/_nav.service';
-import { PoliticalDivisionService } from "../_services/political-division.service";
+import {NavService} from '../_services/_nav.service';
+import {PoliticalDivisionService} from "../_services/political-division.service";
 import {ListEmployeesService}     from '../_services/lists-employees.service';
 import {TerceroResidencias} from "../_models/terceroResidencias";
 import {TercerosResidenciasServices} from "../_services/terceros-residencias.service";
@@ -31,7 +31,7 @@ export class LocationUpdateComponent implements OnInit {
   terceroLocalizacion: EmployeesLocation = new EmployeesLocation();
 
   idTercero: Number;
-  tipoDireccion: { value: null, label: string };
+  tipoDireccion: {value: null, label: string};
   principalNomenclatureList: any;
   complementaryNomenclatureList: any;
   addressTypeList: any;
@@ -56,19 +56,17 @@ export class LocationUpdateComponent implements OnInit {
   submitted: boolean;
   msgs: Message[] = [];
 
-  constructor(
-    private location: Location,
-    private politicalDivisionServices: PoliticalDivisionService,
-    private locationService: LocationService,
-    private locateService: LocateService,
-    private confirmationService: ConfirmationService,
-    private listEmployeesService: ListEmployeesService,
-    private tercerosResidenciasServices: TercerosResidenciasServices,
-    private route: ActivatedRoute,
-    private _nav: NavService,
-    private politicalDivisionService: PoliticalDivisionService,
-  ) {
-    this.complementaries = [{ tipo: null, detalle: '' }];
+  constructor(private location: Location,
+              private politicalDivisionServices: PoliticalDivisionService,
+              private locationService: LocationService,
+              private locateService: LocateService,
+              private confirmationService: ConfirmationService,
+              private listEmployeesService: ListEmployeesService,
+              private tercerosResidenciasServices: TercerosResidenciasServices,
+              private route: ActivatedRoute,
+              private _nav: NavService,
+              private politicalDivisionService: PoliticalDivisionService,) {
+    this.complementaries = [{tipo: null, detalle: ''}];
   }
 
   ngOnInit() {
@@ -79,21 +77,20 @@ export class LocationUpdateComponent implements OnInit {
         this.selectedAddressType = this.localizacion.idTipoDireccion;
         this.selectedPrincipalNomenclature = this.localizacion.nomenclaturaPrincipal;
         this.finalAddress = localizacion.direccion;
-        this.localizacion.locacion = { camino: '', idDivisionPolitica: null };
+        this.localizacion.locacion = {camino: '', idDivisionPolitica: null};
         this.politicalDivisionService.getLocation(localizacion.idDivisionPolitica).subscribe(ciudad => {
           this.localizacion.locacion.camino = ciudad.camino;
           this.localizacion.locacion.idDivisionPolitica = ciudad.idDivisionPolitica;
         });
 
         this.locationService.get(this.localizacion.idLocalizacion).subscribe(l => {
-
+          this.terceroLocalizacion = l;
           this.tercerosResidenciasServices.getByTerceroLocalizacion(l.idTerceroLocalizacion).subscribe(residencia => {
-            console.log(residencia);
-            this.residencia = residencia;
+            if(residencia !== undefined)
+              this.residencia = residencia;
           });
         });
       });
-
 
 
     });
@@ -141,7 +138,7 @@ export class LocationUpdateComponent implements OnInit {
     this.locationService.getPrincipalNomenclatureList().subscribe(
       principalNomenclatureList => {
         this.principalNomenclatureList = principalNomenclatureList;
-        this.principalNomenclatureList.unshift({ label: 'Seleccione', value: null });
+        this.principalNomenclatureList.unshift({label: 'Seleccione', value: null});
       });
     this.locationService.getComplementaryNomenclatureList().subscribe(
       complementaryNomenclatureList => {
@@ -149,15 +146,15 @@ export class LocationUpdateComponent implements OnInit {
         this.complementaryNomenclatureList.map((cn: any) => {
           cn.value = cn.label;
         });
-        this.complementaryNomenclatureList.unshift({ label: 'Seleccione', value: null });
+        this.complementaryNomenclatureList.unshift({label: 'Seleccione', value: null});
       });
     this.locationService.getAddressTypeList().subscribe(
       addressTypeList => {
         this.addressTypeList = addressTypeList;
-        this.addressTypeList.unshift({ label: 'Seleccione', value: null });
+        this.addressTypeList.unshift({label: 'Seleccione', value: null});
       });
 
-      this.focusUP();
+    this.focusUP();
   }
 
   createLocation() {
@@ -168,10 +165,22 @@ export class LocationUpdateComponent implements OnInit {
 
     this.locateService.update(this.localizacion).subscribe(res => {
       if (this.residencia.indicadorHabilitado) {
-        this.tercerosResidenciasServices.update(this.residencia).subscribe(res3 => {
-          this._nav.setTab(4);
-          this.location.back();
-        });
+        if (this.residencia.idTerceroResidencia !== null && this.residencia.idTerceroResidencia !== undefined) {
+          this.tercerosResidenciasServices.update(this.residencia).subscribe(res3 => {
+            this._nav.setTab(4);
+            this.location.back();
+          });
+        } else {
+
+          this.residencia.idTerceroLocalizacion = this.terceroLocalizacion.idTerceroLocalizacion;
+          this.tercerosResidenciasServices.add(this.residencia).subscribe(res3 => {
+            this._nav.setTab(4);
+            this.location.back();
+          });
+        }
+      } else {
+        this._nav.setTab(4);
+        this.location.back();
       }
     });
   }
@@ -222,7 +231,7 @@ export class LocationUpdateComponent implements OnInit {
       } else {
         strToSearch = this.localizacion.locacion.camino;
       }
-      geocoder.geocode({ 'address': this.finalAddress + ' ' + strToSearch },
+      geocoder.geocode({'address': this.finalAddress + ' ' + strToSearch},
         function (results: any, status: any) {
           if (status === google.maps.GeocoderStatus.OK) {
             let latitude = results[0].geometry.location.lat();
@@ -235,7 +244,7 @@ export class LocationUpdateComponent implements OnInit {
               mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             let map = new google.maps.Map(document.getElementById('graphMap'), mapOptions);
-            let marker = new google.maps.Marker({ position: latLng, map: map });
+            let marker = new google.maps.Marker({position: latLng, map: map});
 
             assingLocation(latitude, longitude);
           } else {
@@ -256,7 +265,7 @@ export class LocationUpdateComponent implements OnInit {
   }
 
   addComplementary(): void {
-    let complementary = { 'tipo': 0, 'detalle': '' };
+    let complementary = {'tipo': 0, 'detalle': ''};
     this.complementaries.push(complementary);
   }
 
@@ -286,6 +295,8 @@ export class LocationUpdateComponent implements OnInit {
 
   focusUP() {
     const element = document.querySelector('#formulario');
-    if (element) { element.scrollIntoView(element); }
+    if (element) {
+      element.scrollIntoView(element);
+    }
   }
 }

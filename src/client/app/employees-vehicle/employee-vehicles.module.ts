@@ -9,6 +9,8 @@ import { EmployeesVehicleComponent }  from './employee-vehicles.component';
 import { EmployeesVehicleAddComponent }  from './employee-vehicles-add.component';
 import { EmployeesVehicleUpdateComponent }  from './employee-vehicle-update.component';
 import {EmployeeVehicleService} from '../_services/employee-vehicles.service';
+import {SharedModule} from "../shared/shared.module";
+
 
 
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,
@@ -32,6 +34,7 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
     DropdownModule,
     MessagesModule,
     ConfirmDialogModule,
+    SharedModule,
   ],
   declarations: [EmployeesVehicleComponent,
     // EmployeeEstateDetailComponent,

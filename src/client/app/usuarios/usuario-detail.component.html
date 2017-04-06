@@ -86,7 +86,7 @@
     <p-tabPanel header="{{ 'LBL_ROLES' | translate:param }} Y {{ 'LBL_GESTION' | translate:param }}">
         <div class="ui-grid-row">
             <div class="ui-grid-col-6">
-                <p-dataTable [value]="curRoles" [paginator]="true" [rows]="10"
+                <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="curRoles" [paginator]="true" [rows]="10"
                              [responsive]="true">
                     <p-column field="rol" header="{{ 'LBL_ROL' | translate:param }}"></p-column>
                     <p-column header="{{ 'LBL_PERIODOHABILITACION' | translate:param }}">
@@ -97,7 +97,7 @@
                 </p-dataTable>
             </div>
             <div class="ui-grid-col-6">
-                <p-dataTable [value]="curGrupos" [paginator]="true" [rows]="10"
+                <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="curGrupos" [paginator]="true" [rows]="10"
                              [responsive]="true">
                     <p-column field="grupoGestion" header="{{ 'LBL_GESTION' | translate:param }}"></p-column>
                     <p-column header="{{ 'LBL_PERIODOHABILITACION' | translate:param }}">
@@ -122,7 +122,7 @@
                 <input #gbs type="text" pInputText size="40" placeholder="Buscar...">
             </div>
         </div>
-        <p-dataTable [value]="historico" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gbs">
+        <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="historico" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gbs">
             <p-column field="idAuditoria" header="{{ 'LBL_ID' | translate:param }}" [sortable]="true"></p-column>
             <p-column field="historia" header="{{ 'LBL_HISTORIAL' | translate:param }}" [sortable]="true"></p-column>
             <p-column field="valorAnterior" header="{{ 'LBL_VALOR' | translate:param }} {{ 'LBL_ANTERIOR' | translate:param }}" [sortable]="true"></p-column>
