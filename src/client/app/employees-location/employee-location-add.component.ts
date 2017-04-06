@@ -165,6 +165,9 @@ export class LocationAddComponent implements OnInit {
             this._nav.setTab(4);
             this.location.back();
           });
+        } else {
+          this._nav.setTab(4);
+          this.location.back();
         }
       });
     });
