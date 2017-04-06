@@ -14,6 +14,7 @@ import {GruposGestionComponent} from "./gruposGestion.component";
 import {GruposGestionAddComponent} from "./gruposGestion-add.component";
 import {GruposGestionEditComponent} from "./gruposGestion-edit.component";
 import {GruposGestionDetailComponent} from "./gruposGestion-detail.component";
+import {SharedModule} from "../shared/shared.module";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 /**
@@ -21,7 +22,7 @@ import 'rxjs/add/operator/switchMap';
  */
 
 @NgModule({
-    imports: [CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule, CalendarModule],
+    imports: [CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule, CalendarModule,SharedModule],
     declarations: [GruposGestionComponent, GruposGestionAddComponent, GruposGestionEditComponent, GruposGestionDetailComponent],
     bootstrap: [GruposGestionComponent],
     providers: [GruposGestionService],
