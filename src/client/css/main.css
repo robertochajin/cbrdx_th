@@ -428,6 +428,14 @@ a.cancelar:hover {
 .ui-datatable .ui-sortable-column-icon {
   float: right;
 }
+.ui-datatable-thead >tr > th > span{
+  font-weight: bold;
+  font-size: .8em;
+}
+body .ui-datatable .ui-datatable-thead > tr > th,
+body .ui-datatable .ui-datatable-tfoot > tr > td {
+  background-color: #ededed;
+}
 
 /**
 ------------------------ Edit PrimeNG CSS ------------------------------
@@ -449,8 +457,9 @@ p-tree{
 /**
 ------------------------ Form CSS ------------------------------
  */
+
 label{
-  font-weight: 100;
+  font-weight: 300;
 }
 form [class*="col-"] {
     padding: 6px;
@@ -491,8 +500,5 @@ body .ui-tree .ui-treenode .ui-treenode-content .ui-treenode-label {
 
 body .ui-tree .ui-treenode .ui-treenode-content .ui-tree-toggler {
   vertical-align: top!important;
-}
-dashboard_height{
-  height: 275px;
 }
 

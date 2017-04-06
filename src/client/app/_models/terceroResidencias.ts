@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TerceroResidencias {
+  public idTerceroResidencia: number;
   public idTerceroLocalizacion: number;
   public idTipoVivienda: number;
   public idTipoConstruccionVivienda: number;

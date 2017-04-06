@@ -24,13 +24,20 @@ export class TercerosResidenciasServices {
   }
 
   get(id: number) {
-    return this.http.get(this.masterService + '/buscarId/' + id, {headers: this.headers})
+    return this.http.get(this.masterService + 'buscarId/' + id, {headers: this.headers})
       .map((res: Response) => res.json() as TerceroResidencias);
   }
 
   getByTerceroLocalizacion(id: number) {
-    return this.http.get(this.masterService + '/buscarId/' + id, {headers: this.headers})
-      .map((res: Response) => res.json() as TerceroResidencias);
+    return this.http.get(this.masterService + 'buscarId/' + id, {headers: this.headers})
+      .map((res: Response) => {
+          if (res.text() !== '') {
+           return res.json()
+          } else {
+            return undefined;
+          }
+        }
+      );
   }
 
   handleError(error: any): Promise<any> {

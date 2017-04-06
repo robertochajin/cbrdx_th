@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class EmployeesLocation {
-  idTerceroLocalizacion:Number;
+  idTerceroLocalizacion:number;
   idTercero:Number;
   idlocalizacion:Number;
   indicadorHabilitado:boolean;
