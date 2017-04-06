@@ -41,6 +41,7 @@
                                     <input type="text" pInputText class="form-control" id="codigoOcupacion"
                                            name="codigoOcupacion" [(ngModel)]="ocupaciones.codigoOcupacion"
                                            (change)="validateCode()"
+                                           (keyup)="capitalizeCodigo()"
                                            #codigoOcupacion="ngModel" [maxlength]="tabselected"
                                            [minlength]="tabselected" required>
                                     <div *ngIf="f.submitted && !codigoOcupacion.valid" class="ui-message  ui-corner-all">

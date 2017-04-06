@@ -423,7 +423,12 @@ export class OcupacionesComponent implements OnInit {
         }
         node.children = ocupacionesNivel;
     }
-
+    capitalizeCodigo() {
+      let input = this.ocupaciones.codigoOcupacion;
+      if(input != "" && input != null){
+        this.ocupaciones.codigoOcupacion = input.toUpperCase();
+      }
+    }
 
 }
 class Tree {

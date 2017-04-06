@@ -419,6 +419,13 @@ export class ActividadEconomicaComponent implements OnInit {
         }
         node.children = ocupacionesNivel;
     }
+    
+    capitalizeCodigo() {
+      let input = this.actividadEconomica.codigoActividadEconomica;
+      if(input != "" && input != null){
+        this.actividadEconomica.codigoActividadEconomica = input.toUpperCase();
+      }
+    }
 }
 class Tree {
   value: number;
