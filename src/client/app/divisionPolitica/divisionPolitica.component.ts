@@ -286,8 +286,7 @@ export class DivisionPoliticaComponent implements OnInit {
         this.labelPadre = "";
         this.politicalDivision.idDivisionPoliticaPadre = 0;
         this.getTipoPais();
-
-
+        this.codeExists = false;
     }
 
     newDepartment(){
@@ -299,6 +298,7 @@ export class DivisionPoliticaComponent implements OnInit {
         this.politicalDivision.idDivisionPoliticaPadre = this.btnnuevodepartamento.idparent;
         let nodeCode = this.getCodigoTypebyId(this.selectedNode.data.idDivisionPoliticaTipo);
         this.getTiposHijos(nodeCode.substr(0,2));
+        this.codeExists = false;
     }
 
     newCity(){
@@ -311,6 +311,7 @@ export class DivisionPoliticaComponent implements OnInit {
         this.politicalDivision.codigoDivisionPolitica = this.selectedNode.data.codigoDivisionPolitica;
         let nodeCode = this.getCodigoTypebyId(this.selectedNode.data.idDivisionPoliticaTipo);
         this.getTiposHijos(nodeCode.substr(0,2));
+        this.codeExists = false;
     }
 
     newNeighborhood(){
@@ -322,6 +323,7 @@ export class DivisionPoliticaComponent implements OnInit {
         this.politicalDivision.codigoDivisionPolitica = this.selectedNode.data.codigoDivisionPolitica;
         let nodeCode = this.getCodigoTypebyId(this.selectedNode.data.idDivisionPoliticaTipo);
         this.getTiposHijos(nodeCode.substr(0,3));
+        this.codeExists = false;
     }
 
     getTipoPais():void {
@@ -422,6 +424,7 @@ export class DivisionPoliticaComponent implements OnInit {
             if (res.idDivisionPolitica != 0) {
                 this.divisionPoliticaService.viewDivisionPolitica(res.idDivisionPoliticaPadre).subscribe(res => {
                     this.labelPadre = res.descripcionDivisonPolitica;
+                    this.codeExists = false;
                     // Scroll to Select
                     jQuery('#trvDivisionPolitica').scrollTop(jQuery('.ui-state-highlight').position().top - jQuery('#trvDivisionPolitica').height() / 2);
 
@@ -526,8 +529,10 @@ export class DivisionPoliticaComponent implements OnInit {
   }
   
   capitalize() {
-    let input = this.politicalDivision.descripcionDivisonPolitica;
-    this.politicalDivision.descripcionDivisonPolitica = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
+      if(this.politicalDivision.descripcionDivisonPolitica != "" && this.politicalDivision.descripcionDivisonPolitica != null){
+          let input = this.politicalDivision.descripcionDivisonPolitica;
+          this.politicalDivision.descripcionDivisonPolitica = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
+      }
   }
 
 }
