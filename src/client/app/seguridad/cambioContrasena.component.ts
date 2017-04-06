@@ -34,6 +34,7 @@ export class CambioContrasenaComponent implements OnInit {
     olvideUsuario() {
         this.usuario = "";
         this.recordarUsuario = true;
+        this.error = "";
     }
 
     regresarUsuario() {
