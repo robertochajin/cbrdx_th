@@ -72,8 +72,8 @@ export class ListEmployeesService {
     return this.http.get(this.serviceURL+"listasTallas/enabled/ZAPA",{headers: this.headers}).map((res:Response) => res.json());
 
   }
-  getlistSizePants()  {
-    return this.http.get(this.serviceURL+"listasTallas/enabled/PAN",{headers: this.headers}).map((res:Response) => res.json());
+  getlistSizePants(tipo:string)  {
+    return this.http.get(this.serviceURL+"listasTallas/enabled/"+tipo,{headers: this.headers}).map((res:Response) => res.json());
   }
   getlistStratum()  {
     return this.http.get(this.serviceURL+"listasEstratos",{headers: this.headers}).map((res:Response) => res.json());
