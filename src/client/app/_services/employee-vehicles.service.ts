@@ -28,9 +28,5 @@ export class EmployeeVehicleService {
   update(c: EmployeeVehicle) {
     return this.http.put(this.serviceURL+'tercerosVehiculos',c).map((res:Response) => res);
   }
-
-  delete(c: EmployeeVehicle) {
-    const respuesta =  this.http.delete(this.serviceURL+'/'+ c.idTerceroVehiculo);
-    return respuesta.map((res:Response) => res.json());
-  }
+  
 }
