@@ -114,7 +114,12 @@ export class EmployeesVehicleUpdateComponent {
     }
   }
 
-
+  inputPlaca() {
+    let placa = this.employeeVehicle.placa;
+    if (this.employeeVehicle.placa != null) {
+      this.employeeVehicle.placa = placa.replace(' ', '');
+    }
+  }
   goBack(): void {
     this.confirmationService.confirm({
       message: ` ¿Esta seguro que desea salir sin guardar?`,

@@ -73,7 +73,7 @@
         <div class="ui-grid-col-6">
           <label for="placa">Placa</label>
           <input id="placa" name="placa" #placa="ngModel" pInputText type="text"
-                 [(ngModel)]="employeeVehicle.placa" required maxlength="6"/>
+                 [(ngModel)]="employeeVehicle.placa" required maxlength="10" (keyup)="inputPlaca()"/>
           <div class="ui-message ui-messages-error ui-corner-all"
                *ngIf="(f.submitted && !placa.valid )&& !anioValid">
             <i class="fa fa-close"></i>
