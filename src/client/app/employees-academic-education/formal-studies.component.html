@@ -9,7 +9,7 @@
             <input #gb type="text" pInputText size="40" placeholder="Buscar...">
         </div>
     </div>
-    <p-dataTable [value]="fstudies" selectionMode="single" [(selection)]="selectedColaborador" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="fstudies" selectionMode="single" [(selection)]="selectedColaborador" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
         <p-column field="tituloEstudio" header="Título Obtenido" [sortable]="true"></p-column>
         <p-column field="fechaIngresa" header="Ingreso " [sortable]="true"></p-column>
         <p-column field="fechaTermina" header="Finalización" [sortable]="true"></p-column>
