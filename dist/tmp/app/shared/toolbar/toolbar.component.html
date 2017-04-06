@@ -1,150 +1,94 @@
-<div class="sidebar">
-  <div class="sidebar-wrapper">
-    <div class="logo">
-      <img id="logoApp" src="assets/images/gestionamos_white.png" class="img-responsive" />
+<header class="main-header">
+  <!-- Logo -->
+  <a routerLink="/dashboard" routerLinkActive="active" class="logo">
+    <!-- mini logo for sidebar mini 50x50 pixels -->
+    <span class="logo-mini">
+      <img id="logoAppIcon" src="assets/images/gestionamos_green_icon.png"/>
+    </span>
+    <!-- logo for regular state and mobile devices -->
+    <span class="logo-lg">
+      <img id="logoApp" src="assets/images/gestionamos_green.png"/>
+    </span>
+  </a>
+  <!-- Header Navbar: style can be found in header.less -->
+  <nav class="navbar navbar-static-top">
+    <!-- Sidebar toggle button-->
+    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </a>
+
+    <div class="navbar-custom-menu">
+      <ul class="nav navbar-nav">
+        <!-- Notifications: style can be found in dropdown.less -->
+        <li class="dropdown notifications-menu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-bell-o"></i>
+            <span class="label label-warning">10</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="header">Tiene 10 Notificaciones Nuevas</li>
+            <li>
+              <!-- inner menu: contains the actual data -->
+              <ul class="menu">
+                <li>
+                  <a href="#">
+                    <i class="fa fa-users text-aqua"></i> Notificación A
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa fa-users text-aqua"></i> Notificación B
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa fa-users text-aqua"></i> Notificación C
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="footer"><a href="#">Ver Más...</a></li>
+          </ul>
+        </li>
+        <!-- User Account: style can be found in dropdown.less -->
+        <li class="dropdown user user-menu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <img src="assets/images/user-160x160.jpg" class="user-image" alt="User Image">
+            <span class="hidden-xs">Victor Pineda</span>
+          </a>
+          <ul class="dropdown-menu">
+            <!-- User image -->
+            <li class="user-header">
+              <img src="assets/images/user-160x160.jpg" class="img-circle" alt="User Image">
+              <p>
+                Victor Pineda
+                <small>Usuario desde 10/12/2014</small>
+              </p>
+            </li>
+
+            <li class="disabled"><a href="#">Temas disponible</a></li>
+            <li class="menu-theme">
+              <span class="colortheme colorwhite" onclick="changeTheme('white')"></span>
+              <span class="colortheme colorblack" onclick="changeTheme('black')"></span>
+              <span class="colortheme colorblue" onclick="changeTheme('blue')"></span>
+              <span class="colortheme colorgreen" onclick="changeTheme('green')"></span>
+            </li>
+
+
+            <!-- Menu Footer-->
+            <li class="user-footer">
+
+              <div class="pull-right">
+                <a href="#" class="btn btn-default">Cerrar Sesión</a>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
-  <div >
-    <ul class="nav" id="mainMenu">
-      <li>
-        <a routerLink="/dashboard" routerLinkActive="active">
-          <i class="icon-THDashboard"></i>
-          <p>Dashboard</p>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/employees" routerLinkActive="active">
-          <i class="icon-THDO"></i>
-          <p>Colaboradores</p>
-        </a>
-      </li>
-      <li class="dropdown">
-        <a href="#menuSistema" aria-controls="menuSistema" data-toggle="collapse" aria-expanded="false" data-parent="#mainMenu">
-          <i class="icon-THApl"></i>
-          <p>
-            Sistema
-            <b class="caret"></b>
-          </p>
-        </a>
-        <div class="collapse" id="menuSistema">
-          <ul class="nav">
-            <li><a routerLink="/usuarios" routerLinkActive="active">Usuarios</a></li>
-            <li><a routerLink="/centroCostos" routerLinkActive="active">Centros de Costos</a></li>
-            <li><a routerLink="/constantes" routerLinkActive="active">constantes</a></li>
-            <li><a routerLink="/gruposGestion" routerLinkActive="active">Grupos de Gestión</a></li>
-            <li><a routerLink="/listas" routerLinkActive="active">Listas</a></li>
-            <li><a routerLink="/tipoArea" routerLinkActive="active">Tipos de Areas</a></li>
-            <li><a routerLink="/ocupaciones" routerLinkActive="active">Ocupaciones</a></li>
-            <li><a routerLink="/divisionPolitica" routerLinkActive="active">División Política</a></li>
-            <li><a routerLink="/actividadeconomica" routerLinkActive="active">Actividad Economica</a></li>
-          </ul>
-        </div>
-      </li>
-<!--
-      <li class="dropdown">
-        <a href="#menuSistema" aria-controls="menuSistema" data-toggle="collapse" aria-expanded="false" data-parent="#mainMenu">
-          <i class="icon-THApl"></i>
-          <p>
-            Sistema
-            <b class="caret"></b>
-          </p>
-        </a>
-        <div class="collapse" id="menuSistema">
-          <ul class="nav">
-            <li><a href="#">Item A</a></li>
-            <li><a href="#">Item B</a></li>
-            <li><a href="#">Item C</a></li>
-            <li><a href="#">Item D</a></li>
-          </ul>
-        </div>
-      </li>
 
-      <li>
-        <a href="#menuOrganizacion" aria-controls="menuOrganizacion" data-toggle="collapse" aria-expanded="false" data-parent="#mainMenu">
-          <i class="icon-THDO"></i>
-          <p>
-            Organización
-            <b class="caret"></b>
-          </p>
-        </a>
-        <div class="collapse" id="menuOrganizacion">
-          <ul class="nav">
-            <li><a href="#">Item A</a></li>
-            <li><a href="#">Item B</a></li>
-            <li><a href="#">Item C</a></li>
-            <li><a href="#">Item D</a></li>
-          </ul>
-        </div>
-      </li>
-
-      <li>
-        <a href="#menuReclutamiento" aria-controls="menuReclutamiento" data-toggle="collapse" aria-expanded="false" data-parent="#mainMenu">
-          <i class="fa fa-cog"></i>
-          <p>
-            Reclutamiento
-            <b class="caret"></b>
-          </p>
-        </a>
-        <div class="collapse" id="menuReclutamiento">
-          <ul class="nav">
-            <li><a href="#">Item A</a></li>
-            <li><a href="#">Item B</a></li>
-          </ul>
-        </div>
-      </li>
-
-      <li>
-        <a href="#menuFormacion" aria-controls="menuFormacion" data-toggle="collapse" aria-expanded="false" data-parent="#mainMenu">
-          <i class="icon-THFd"></i>
-          <p>
-            Formación
-            <b class="caret"></b>
-          </p>
-        </a>
-        <div class="collapse" id="menuFormacion">
-          <ul class="nav">
-            <li><a href="#">Item A</a></li>
-            <li><a href="#">Item B</a></li>
-          </ul>
-        </div>
-      </li>
-
-      <li>
-        <a href="#menuBienestar" aria-controls="menuBienestar" data-toggle="collapse" aria-expanded="false" data-parent="#mainMenu">
-          <i class="icon-THBso"></i>
-          <p>
-            Bienestar
-            <b class="caret"></b>
-          </p>
-        </a>
-        <div class="collapse" id="menuBienestar">
-          <ul class="nav">
-            <li><a href="#">Item A</a></li>
-            <li><a href="#">Item B</a></li>
-          </ul>
-        </div>
-      </li>
-
-      <li>
-        <a href="#menuReportes" aria-controls="menuReportes" data-toggle="collapse" aria-expanded="false" data-parent="#mainMenu">
-          <i class="icon-THRep"></i>
-          <p>
-            Reportes
-            <b class="caret"></b>
-          </p>
-        </a>
-        <div class="collapse" id="menuReportes">
-          <ul class="nav">
-            <li><a href="#">Item A</a></li>
-            <li><a href="#">Item B</a></li>
-          </ul>
-        </div>
-      </li>
--->
-    </ul>
-  </div>
-
-
-  </div>
-</div>
-
-
+  </nav>
+</header>

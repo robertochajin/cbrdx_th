@@ -21,6 +21,10 @@ export class EmployeeEstate {
   idTerceroLocalizacion: Number;
 
   constructor() {
+    this.indicadorHabilitado = true;
+    this.auditoriaFecha = null;
+    this.auditoriaUsuario = null;
+    this.idTerceroInmueble = null;
   }
 
 }

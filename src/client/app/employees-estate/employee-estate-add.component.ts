@@ -7,6 +7,7 @@ import {SelectItem, Message, ConfirmDialog, ConfirmationService} from 'primeng/p
 import {EmployeeEstateService} from '../_services/employee-estate.service';
 import {ListEmployeesService}     from '../_services/lists-employees.service';
 import * as moment from 'moment/moment';
+import {NavService} from '../_services/_nav.service';
 
 @Component({
   moduleId: module.id,
@@ -27,7 +28,6 @@ export class EmployeesEstateAddComponent {
   msgs: Message[] = [];
   year:Number;
   anioValid: boolean = false;
-  listLocalizacion: SelectItem[] = [];
   idTercero:number;
 
   constructor(private employeesEsatesService: EmployeeEstateService,
@@ -35,7 +35,8 @@ export class EmployeesEstateAddComponent {
               private route: ActivatedRoute,
               private location: Location,
               private listEmployeesService: ListEmployeesService,
-              private confirmationService: ConfirmationService) {
+              private confirmationService: ConfirmationService,
+              private _nav: NavService,) {
 
   }
 
@@ -46,12 +47,9 @@ export class EmployeesEstateAddComponent {
 
     this.route.params.subscribe((params: Params) => {
       this.employeeEstate.idTercero = Number(+params['idTercero']);
-      this.idTercero =Number(+params['idTercero']);
+      this.idTercero = Number(+params['idTercero']);
     });
-    this.employeeEstate.indicadorHabilitado = true;
-    this.employeeEstate.auditoriaFecha = null;
-    this.employeeEstate.auditoriaUsuario = null;
-    this.employeeEstate.idTerceroInmueble = null;
+    
 
 
     this.listEmployeesService.getlistTypeEstate().subscribe(rest => {
@@ -94,23 +92,13 @@ export class EmployeesEstateAddComponent {
       }
     });
 
-    this.listEmployeesService.getlistLocation(this.idTercero).subscribe(rest => {
-      this.listLocalizacion.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listLocalizacion.push({
-          label: dp.direccion,
-          value: dp.idLocalizacion
-        });
-      }
-    });
-
-
   }
 
   onSubmit() {
     this.employeesEsatesService.add(this.employeeEstate)
       .subscribe(data => {
         this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
+        this._nav.setTab(5);
         this.location.back();
       }, error => {
         this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
@@ -153,7 +141,8 @@ export class EmployeesEstateAddComponent {
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
-        this.router.navigate(['/employees-estate']);
+        this._nav.setTab(5);
+        this.location.back();
       }
     });
   }

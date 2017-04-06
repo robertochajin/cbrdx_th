@@ -120,7 +120,7 @@ export class WorkExperienceAddComponent implements OnInit {
         this.workExperienceService.add(this.experience)
           .subscribe(data => {
             this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
-            this._nav.setTab(4);
+            this._nav.setTab(7);
             this.location.back();
           }, error => {
             this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
@@ -134,7 +134,7 @@ export class WorkExperienceAddComponent implements OnInit {
           header: 'Corfirmación',
           icon: 'fa fa-question-circle',
           accept: () => {
-            this._nav.setTab(4);
+            this._nav.setTab(7);
             this.location.back();
           }
       });
