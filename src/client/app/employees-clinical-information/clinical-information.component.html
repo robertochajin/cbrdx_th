@@ -1,36 +1,53 @@
 <div>
     <div class="row datable-header">
-      <form (ngSubmit)="d.valid && saveDiagnostic()" #d="ngForm" novalidate id="diagnosticForm">
-        <div class="col-md-4 col-xs-12" >
+      <div class="col-md-6 col-xs-12 datatable-header-add" *ngIf="!ecd">
+        <button type="button" pButton icon="fa-plus" (click)="add()" label="Nuevo Dato Clínico"></button>
+      </div>
+      <form *ngIf="ecd" (ngSubmit)="d.valid && saveDiagnostic()" #d="ngForm" novalidate id="diagnosticForm">
+        <div class="row">
+          <div class="col-md-1 col-xs-1" >
+          </div>
+          <div class="col-md-4 col-xs-12" >
           <label >Diagnóstico</label>
-          <p-autoComplete placeholder="Buscar diagnóstico" field="nombre" name="diagnostico" id="diagnostico" [(ngModel)]="ecd.diagnostico"
-                          #diagnostico="ngModel" [suggestions]="diagnosticList" required="true" (completeMethod)="diagnosticSearch($event)" (onSelect)="captureDiagnosticId($event)">
+          <p-autoComplete placeholder="Buscar diagnóstico" field="label" name="diagnostico" id="diagnostico" [(ngModel)]="ecd.diagnostico" [disabled]="editing"
+                          #diagnostico="ngModel" [suggestions]="diagnosticList" [required]="!editing" (completeMethod)="diagnosticSearch($event)" (onSelect)="captureDiagnosticId($event)">
           </p-autoComplete>
-          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && wrongDiagnostic">
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && wrongDiagnostic && !editing">
             <i class="fa fa-close"></i> Diagnóstico es requerido
           </div>
         </div>
         <div class="col-md-3 col-xs-12" >
           <label >Fecha inicio</label>
-          <p-calendar id="fechaInicio" name="fechaInicio" #fechaInicio="ngModel"  [showIcon]="true"
-                      [maxDate]="maxDate" [minDate]="minDate" [monthNavigator]="true" [yearNavigator]="true"
+          <p-calendar id="fechaInicio" name="fechaInicio" #fechaInicio="ngModel"  [showIcon]="true" [disabled]="editing"
+                      [maxDate]="maxDateInicio" [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
                       [yearRange]="range" [locale]="es" readonlyInput="readonlyInput" [dataType]="date"
-                      (onSelect)="onSelectMethod($event)" [(ngModel)]="ecd.fechaInicio" required></p-calendar>
-          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && fechaInicio.valid">
+                      (onSelect)="onSelectInicio($event)" [(ngModel)]="tfechaInicio" [required]="!editing"></p-calendar>
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !fechaInicio.valid && !editing">
             <i class="fa fa-close"></i>Fecha inicio es requerido
           </div>
         </div>
         <div class="col-md-3 col-xs-12" >
           <label >Fecha fin</label>
           <p-calendar id="fechaFin" name="fechaFin" #fechaFin="ngModel"  [showIcon]="true"
-                      [maxDate]="maxDate" [monthNavigator]="true" [yearNavigator]="true"
-                      [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
-                      [dataType]="date" [(ngModel)]="ecd.fechaFin" ></p-calendar>
+                      [maxDate]="maxDateFin" [minDate]="minDateFin" [monthNavigator]="true" [yearNavigator]="true"
+                      [yearRange]="range" [locale]="es" readonlyInput="readonlyInput" [required]="editing"
+                      (onSelect)="onSelectFin($event)" [dataType]="date" [(ngModel)]="tfechaFin" ></p-calendar>
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !fechaInicio.valid && editing">
+            <i class="fa fa-close"></i>Fecha final es requerida
+          </div>
         </div>
-        <div class="col-md-2 col-xs-12" >
-          <label >Acción</label>
-          <button class="ui-button ui-button-success btn" icon="fa-plus" pButton icon="fa-plus" type="submit" ></button>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-xs-1" >
         </div>
+        <div class="col-md-1 col-xs-1" >
+          <a (click)="goBack()" class="cancelar">Cancelar</a>
+        </div>
+        <div class="col-md-2 col-xs-1" >
+          <button class="ui-button ui-button-success btn" icon="fa-plus" pButton icon="fa-plus" type="submit" label="Agregar"></button>
+        </div>
+        <div class="col-md-5 col-xs-1" ></div>
+      </div>
       </form>
     </div>
     <p-dataTable [value]="clinicalInformations"   [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">

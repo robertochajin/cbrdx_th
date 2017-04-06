@@ -15,11 +15,13 @@ import {Router, ActivatedRoute, Params} from "@angular/router";
 export class CentroCostosDetailComponent {
 
     centroCostos: CentroCostos = new CentroCostos();
+  habilitado:string;
 
   constructor(private centroCostosService: CentroCostosService, private router: Router, private route: ActivatedRoute) {
     route.params.switchMap((params: Params) => centroCostosService.viewCentroCostos(+params['id']))
       .subscribe(data => {
         this.centroCostos = data;
+        this.habilitado = data.indicadorHabilitado ? "Si" : "No";
       });
   }
 

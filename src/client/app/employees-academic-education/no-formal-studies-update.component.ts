@@ -156,7 +156,7 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
       this.academicEducationService.updateNoFormal(this.nfstudy)
         .subscribe(data => {
           this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
-          this._nav.setTab(3);
+          this._nav.setTab(6);
           this.location.back();
         }, error => {
           this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
@@ -200,7 +200,7 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
-        this._nav.setTab(3);
+        this._nav.setTab(6);
         this.location.back();
       }
     });

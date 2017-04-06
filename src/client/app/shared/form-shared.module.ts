@@ -20,7 +20,8 @@ import {
   TreeModule,
   FieldsetModule,
   CheckboxModule,
-  ToggleButtonModule
+  ToggleButtonModule,
+  InputMaskModule
   
 } from 'primeng/primeng';
 
@@ -49,7 +50,8 @@ import {
       TreeModule,
       FieldsetModule,
       CheckboxModule,
-      ToggleButtonModule
+      ToggleButtonModule,
+      InputMaskModule
   ],
   declarations: [
   ],
@@ -73,7 +75,8 @@ import {
       TreeModule,
       FieldsetModule,
       CheckboxModule,
-      ToggleButtonModule
+      ToggleButtonModule,
+      InputMaskModule
     
   ]
 })

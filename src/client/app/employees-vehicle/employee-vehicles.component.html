@@ -1,0 +1,39 @@
+<h3 class="first">Vehiculos</h3>
+<div>
+  <div class="row datable-header">
+    <div class="col-md-6 col-xs-12 datatable-header-add">
+      <button type="button" icon="fa-plus" label="Nuevo Vehiculo"
+              pButton (click)="add()"></button>
+    </div>
+    <div class="col-md-6 col-xs-12 datatable-header-search" >
+
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input #gb type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
+      </div>
+
+    </div>
+  </div>
+
+  <p-dataTable [value]="employeesVehicle" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+    <p-column field="tipoVehiculo" header="Tipo Vehiculo" [sortable]="true"></p-column>
+    <p-column field="tipoServicio" header="Tipo de Servicio " [sortable]="true"></p-column>
+    <p-column field="marca" header="Marca" [sortable]="true"></p-column>
+    <p-column field="modelo" header="Modelo" [sortable]="true"></p-column>
+    <p-column field="placa" header="Placa" [sortable]="true"></p-column>
+    <p-column header="Acciones" styleClass="datatable-col-action">
+      <template let-employeeVehicle="rowData" pTemplate="body">
+
+        <!--<button type="button" icon="fa-eye" class="ui-button-info"-->
+        <!--pButton (click)="detail(employeeEstate)"></button>-->
+        <button type="button" icon="fa-pencil" class="ui-button-success"
+                pButton (click)="update(employeeVehicle)"></button>
+        <button type="button" icon="fa-trash" class="ui-button-danger"
+        pButton (click)="del(employeeVehicle)" ></button>
+
+      </template>
+    </p-column>
+  </p-dataTable>
+</div>
+<p-confirmDialog width="400"></p-confirmDialog>
+

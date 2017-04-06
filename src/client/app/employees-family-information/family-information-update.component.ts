@@ -184,7 +184,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
                   data => {
 
                     this.msgs.push({severity: 'info', summary: 'Success', detail: 'Guardando'});
-                    this._nav.setTab(1);
+                    this._nav.setTab(3);
                     this.location.back();
                   });
             });
@@ -207,7 +207,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
-        this._nav.setTab(1);
+        this._nav.setTab(3);
         this.location.back();
       }
     });
