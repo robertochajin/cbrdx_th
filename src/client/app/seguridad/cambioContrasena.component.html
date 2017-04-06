@@ -14,7 +14,7 @@
 
                   <h3 class="text-center">{{ 'LBL_RECUPERACUENTA' | translate:param }}</h3>
 
-                  <form #f="ngForm" (ngSubmit)="f.valid&&doPost();" novalidate class="form-signin">
+                  <form #f="ngForm" (ngSubmit)="f.valid&&doPost();" novalidate class="form-signin" *ngIf="!enviando">
 
                       <div class="form-group">
                           <label for="correo">{{ 'LBL_CORREOELECTRONICO' | translate:param }}</label>
