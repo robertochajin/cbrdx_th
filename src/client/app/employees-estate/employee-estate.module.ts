@@ -9,7 +9,7 @@ import { EmployeeEstateDetailComponent }  from './employee-estate-detail.compone
 import { EmployeesEstateAddComponent }  from './employee-estate-add.component';
 import { EmployeesEstateUpdateComponent }  from './employee-estate-update.component';
 import {EmployeeEstateService} from '../_services/employee-estate.service';
-
+import {SharedModule} from "../shared/shared.module";
 
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,
   AutoCompleteModule, DropdownModule,
@@ -32,6 +32,7 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
     DropdownModule,
     MessagesModule,
     ConfirmDialogModule,
+    SharedModule,
   ],
   declarations: [EmployeesEstateComponent,
     EmployeeEstateDetailComponent,
