@@ -41,6 +41,10 @@ export class SharedModule {
 
         // Focus Primer campo
         jQuery(':input:enabled:visible:first').select().focus();
+
+        jQuery('button').click(function(){
+          setTimeout( () => jQuery('.ng-invalid:first').select().focus(), 6000);
+        });
       }
     });
   }
