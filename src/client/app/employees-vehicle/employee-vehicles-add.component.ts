@@ -110,6 +110,12 @@ export class EmployeesVehicleAddComponent {
       this.employeeVehicle.modelo = Number(modelo.replace(/[^0-9]/g, ''));
     }
   }
+  inputPlaca() {
+    let placa = this.employeeVehicle.placa;
+    if (this.employeeVehicle.placa != null) {
+      this.employeeVehicle.placa = placa.replace(' ', '');
+    }
+  }
 
   goBack(): void {
     this.confirmationService.confirm({

@@ -43,9 +43,11 @@ export class EmployeesVehicleComponent {
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
-        this.employeesVehicleService.delete(this.dialogObjet);
-        this.employeesVehicle.splice(this.employeesVehicle.indexOf(this.dialogObjet), 1);
-        this.dialogObjet = null;
+        this.dialogObjet.indicadorHabilitado = false;
+        this.employeesVehicleService.update(this.dialogObjet).subscribe( r => {
+          this.employeesVehicle.splice(this.employeesVehicle.indexOf(this.dialogObjet), 1);
+          this.dialogObjet = null;
+        });
       },
       reject: () => {
         this.dialogObjet = null;
