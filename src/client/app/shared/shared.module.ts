@@ -24,7 +24,7 @@ import {WindowRefService} from '../_services/window-ref.service';
 export class SharedModule {
 
   private _window: Window;
-  topInvalid : number;
+  topInvalid: number;
 
 
   constructor(private router: Router, windowRef: WindowRefService) {
@@ -33,21 +33,26 @@ export class SharedModule {
 
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
-        //console.log('router yeah');
-        //this._window.scrollTo(0, 0);
-        //<any>changePage();
+
+        // Fix Footer -
+        setTimeout(() => {
+          jQuery(window).resize();
+        }, 2000);
 
         // ScrollTop
-        jQuery('#wrapper').animate({scrollTop:0},'fast');
+        jQuery('#wrapper').animate({scrollTop: 0}, 'fast');
 
         // Focus Primer campo
-        jQuery(':input:enabled:visible:first').select().focus();
+        jQuery('input[type=text]:enabled:visible:first').select().focus();
 
-        jQuery('button').click(function(){
-          console.log('action button');
-          //setTimeout( jQuery('.ng-invalid:first').select().focus(), 6000);
-
-          //jQuery('#wrapper').scrollTop(jQuery('.ng-invalid:first').position().top);
+        // Focus primer invalid campo
+        jQuery('button').click(function () {
+          if (jQuery('.ng-invalid').length) {
+            jQuery('body').scrollTop(jQuery('input.ng-invalid:first').position().top);
+            setTimeout(() => {
+              jQuery('input.ng-invalid:first').select().focus();
+            }, 500);
+          }
         });
       }
     });
