@@ -24,6 +24,7 @@ import {WindowRefService} from '../_services/window-ref.service';
 export class SharedModule {
 
   private _window: Window;
+  topInvalid : number;
 
 
   constructor(private router: Router, windowRef: WindowRefService) {
@@ -43,7 +44,10 @@ export class SharedModule {
         jQuery(':input:enabled:visible:first').select().focus();
 
         jQuery('button').click(function(){
-          setTimeout( () => jQuery('.ng-invalid:first').select().focus(), 6000);
+          console.log('action button');
+          //setTimeout( jQuery('.ng-invalid:first').select().focus(), 6000);
+
+          //jQuery('#wrapper').scrollTop(jQuery('.ng-invalid:first').position().top);
         });
       }
     });
