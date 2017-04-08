@@ -115,6 +115,9 @@ import {FaultsAndSanctionsUpdateComponent} from "./faultsAndSanctions/faults-and
 import {PositionsComponent} from "./positions/positions.component";
 import {PositionsAddComponent} from "./positions/positions-add.component";
 import {PositionsUpdateComponent} from "./positions/positions-update.component";
+import {EvaluationCriteriasComponent} from "./position-evaluation-criterias/evaluation-criterias.component";
+import {PositionResponsabilitiesComponent} from "./position-responsabilities/position-responsabilities.component";
+
 
 const routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -219,11 +222,15 @@ const routes = [
   {path: 'tipoArea/detail/:id', component: TipoDeAreaDetailComponent, canActivate: [AuthGuard]},
   {path: 'tipoArea/edit/:id', component: TipoDeAreaEditComponent, canActivate: [AuthGuard]},
 
+  // Temporales
+  {path: 'criterios', component: EvaluationCriteriasComponent, canActivate: [AuthGuard]},
+  {path: 'responsabilidades', component: PositionResponsabilitiesComponent, canActivate: [AuthGuard]},
+
   // Arboles
   {path: 'divisionPolitica', component: DivisionPoliticaComponent, canActivate: [AuthGuard]},
   {path: 'ocupaciones', component: OcupacionesComponent, canActivate: [AuthGuard]},
   {path: 'actividadeconomica', component: ActividadEconomicaComponent, canActivate: [AuthGuard]},
-  
+
   // Faltas
   {path: 'faults', component: FaultsAndSanctionsComponent, canActivate: [AuthGuard]},
   {path: 'faults/add', component: FaultsAndSanctionsAddComponent, canActivate: [AuthGuard]},
