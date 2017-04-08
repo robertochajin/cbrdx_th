@@ -106,7 +106,8 @@ import {DivisionPoliticaComponent} from "./divisionPolitica/divisionPolitica.com
 import {OcupacionesComponent} from "./ocupaciones/ocupaciones.component";
 import {ActividadEconomicaComponent} from "./actividadEconomica/actividadEconomica.component";
 
-import {EvaluationCriteriasComponent} from "./positions-evaluation-criterias/evaluation-criterias.component";
+import {EvaluationCriteriasComponent} from "./position-evaluation-criterias/evaluation-criterias.component";
+import {PositionResponsabilitiesComponent} from "./position-responsabilities/position-responsabilities.component";
 
 
 const routes = [
@@ -214,6 +215,7 @@ const routes = [
 
   // Arboles
   {path: 'criterios', component: EvaluationCriteriasComponent, canActivate: [AuthGuard]},
+  {path: 'responsabilidades', component: PositionResponsabilitiesComponent, canActivate: [AuthGuard]},
 
   // Arboles
   {path: 'divisionPolitica', component: DivisionPoliticaComponent, canActivate: [AuthGuard]},

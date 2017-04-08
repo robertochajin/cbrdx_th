@@ -36,7 +36,8 @@ import {DivisionPoliticaModule} from "./divisionPolitica/divisionPolitica.module
 import {OcupacionesModule} from "./ocupaciones/ocupaciones.module";
 import {ActividadEconomicaModule} from "./actividadEconomica/actividadEconomica.module";
 import {ClinicalInformationModule} from "./employees-clinical-information/clinical-information.module";
-import {EvaluationCriteriasModule} from "./positions-evaluation-criterias/evaluation-criterias.module";
+import {EvaluationCriteriasModule} from "./position-evaluation-criterias/evaluation-criterias.module";
+import {PositionResponsabilitiesModule} from "./position-responsabilities/position-responsabilities.module";
 
 
 //CarsModule,
@@ -55,6 +56,7 @@ import {EvaluationCriteriasModule} from "./positions-evaluation-criterias/evalua
     GrowlModule,
     DashboardModule,
     EvaluationCriteriasModule,
+    PositionResponsabilitiesModule,
     SharedModule.forRoot(),
     TranslateModule.forRoot({
       provide: TranslateLoader,
