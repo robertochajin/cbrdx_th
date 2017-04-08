@@ -106,6 +106,15 @@ import {DivisionPoliticaComponent} from "./divisionPolitica/divisionPolitica.com
 import {OcupacionesComponent} from "./ocupaciones/ocupaciones.component";
 import {ActividadEconomicaComponent} from "./actividadEconomica/actividadEconomica.component";
 
+// Faltas
+import {FaultsAndSanctionsComponent} from "./faultsAndSanctions/faults-and-sanctions.component";
+import {FaultsAndSanctionsAddComponent} from "./faultsAndSanctions/faults-and-sanctions-add.component";
+import {FaultsAndSanctionsUpdateComponent} from "./faultsAndSanctions/faults-and-sanctions-update.component";
+
+// Cargos
+import {PositionsComponent} from "./positions/positions.component";
+import {PositionsAddComponent} from "./positions/positions-add.component";
+import {PositionsUpdateComponent} from "./positions/positions-update.component";
 import {EvaluationCriteriasComponent} from "./position-evaluation-criterias/evaluation-criterias.component";
 import {PositionResponsabilitiesComponent} from "./position-responsabilities/position-responsabilities.component";
 
@@ -213,7 +222,7 @@ const routes = [
   {path: 'tipoArea/detail/:id', component: TipoDeAreaDetailComponent, canActivate: [AuthGuard]},
   {path: 'tipoArea/edit/:id', component: TipoDeAreaEditComponent, canActivate: [AuthGuard]},
 
-  // Arboles
+  // Temporales
   {path: 'criterios', component: EvaluationCriteriasComponent, canActivate: [AuthGuard]},
   {path: 'responsabilidades', component: PositionResponsabilitiesComponent, canActivate: [AuthGuard]},
 
@@ -222,6 +231,15 @@ const routes = [
   {path: 'ocupaciones', component: OcupacionesComponent, canActivate: [AuthGuard]},
   {path: 'actividadeconomica', component: ActividadEconomicaComponent, canActivate: [AuthGuard]},
 
+  // Faltas
+  {path: 'faults', component: FaultsAndSanctionsComponent, canActivate: [AuthGuard]},
+  {path: 'faults/add', component: FaultsAndSanctionsAddComponent, canActivate: [AuthGuard]},
+  {path: 'faults/update/:id', component: FaultsAndSanctionsUpdateComponent, canActivate: [AuthGuard]},
+
+  // Cargos
+  {path: 'positions', component: PositionsComponent, canActivate: [AuthGuard]},
+  {path: 'positions/add', component: PositionsAddComponent, canActivate: [AuthGuard]},
+  {path: 'positions/update/:id', component: PositionsUpdateComponent, canActivate: [AuthGuard]},
 
 ];
 
