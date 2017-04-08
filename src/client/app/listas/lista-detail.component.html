@@ -6,33 +6,33 @@
   </div>
   <p-fieldset legend="Parámetros Lista">
   <div class="row">
+    <div class="col-md-offset-2 col-md-8 col-sm-12">
     <form class="form-horizontal">
       <fieldset>
-        <div class="form-group">
           <div class="row">
-            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Codigo:</label>
-            <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{masterList.codigoLista}}</strong></label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Codigo:</label>
+            <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{masterList.codigoLista}}</strong></label>
 
-            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Lista:</label>
-            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{masterList.lista}}</strong></label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Lista:</label>
+            <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{masterList.lista}}</strong></label>
           </div>
           <div class="row">
-            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Id:</label>
-            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{masterList.idLista}}</strong></label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Id:</label>
+            <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{masterList.idLista}}</strong></label>
 
-            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Habilitado:</label>
-            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{habilitado}}</strong></label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Habilitado:</label>
+            <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{habilitado}}</strong></label>
           </div>
           <div class="row">
-            <label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="masterList.dependeLista">Depende de Item:</label>
-            <label class="col-md-3 col-sm-6 col-xs-12" *ngIf="masterList.dependeLista"><strong>{{masterList.dependeItem}}</strong></label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label" *ngIf="masterList.dependeLista">Depende de Item:</label>
+            <label class="col-md-3 col-sm-6 col-xs-8" *ngIf="masterList.dependeLista"><strong>{{masterList.dependeItem}}</strong></label>
 
-            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Depende de Lista:</label>
-            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{masterList.dependeLista}}</strong></label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Depende de Lista:</label>
+            <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{masterList.dependeLista}}</strong></label>
           </div>
-        </div>
       </fieldset>
     </form>
+    </div>
   </div>
   </p-fieldset>
 

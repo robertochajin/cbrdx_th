@@ -6,6 +6,7 @@ import {ResponsabilitiesServices} from "../_services/responsabilities.service";
 import * as moment from 'moment/moment';
 import {Responsabilities} from "../_models/responsabilities";
 import {PositionResponsabilities} from "../_models/positionResponsabilities";
+import {Positions} from "../_models/positions";
 
 @Component({
   moduleId: module.id,
@@ -37,8 +38,7 @@ export class PositionResponsabilitiesComponent {
       }
     );
 
-    // this.positionResponsabilitiesService.getAllByPosition(this.position.idCargo)
-    this.positionResponsabilitiesService.getAllByPosition(1).subscribe(prs => {
+    this.positionResponsabilitiesService.getAllByPosition(this.position.idCargo).subscribe(prs => {
       this.positionResponsabilities = prs;
     });
   }
@@ -46,7 +46,7 @@ export class PositionResponsabilitiesComponent {
   save(pr: PositionResponsabilities) {
     this.positionResponsabilitiesService.add(pr).subscribe(res => {
       if (res.idResponsabilidad){
-        this.positionResponsabilitiesService.getAllByPosition(1).subscribe(prs => {
+         this.positionResponsabilitiesService.getAllByPosition(this.position.idCargo).subscribe(prs => {
           this.positionResponsabilities = prs;
         });
       }
