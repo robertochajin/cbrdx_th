@@ -15,6 +15,10 @@ import {LocationModule} from "./employees-location/employee-location.module";
 import {EmployeesEstateModule} from "./employees-estate/employee-estate.module";
 import {EmployeesVehicleModule} from "./employees-vehicle/employee-vehicles.module";
 import {WorkExperienceModule} from "./employees-work-experience/work-experience.module";
+import {FaultsAndSanctionsModule} from "./faultsAndSanctions/faults-and-sanctions.module";
+import {PositionsModule} from "./positions/positions.module";
+
+
 import {LoginModule} from "./seguridad/login.module";
 import {LoginService} from "./_services/login.service";
 import {AuthGuard} from "./_guards/auth.guard";
@@ -69,6 +73,8 @@ import {ClinicalInformationModule} from "./employees-clinical-information/clinic
     DivisionPoliticaModule,
     OcupacionesModule,
     ActividadEconomicaModule,
+    FaultsAndSanctionsModule,
+    PositionsModule
   ],
 
   declarations: [AppComponent],

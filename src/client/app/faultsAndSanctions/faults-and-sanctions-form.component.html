@@ -1,0 +1,97 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+    <p-footer>
+        <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+    </p-footer>
+</p-confirmDialog>
+<div *ngIf="fault">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="header">
+                <h4 class="title">{{header}}</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <form name="formulario" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate>
+                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="falta">* Falta o Sanción</label>
+                            <input pInputText type="text" id="falta" name="falta" #falta="ngModel"
+                                 [(ngModel)]="fault.falta" required/>
+                            <div class="ui-message ui-messages-error ui-corner-all"
+                                 *ngIf="f.submitted && !falta.valid">
+                              <i class="fa fa-close"></i>
+                              Naturaleza es requerida
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="types">* Tipo</label>
+                            <p-dropdown id="types"  name="types" required="true"
+                                        [options]="faultsTypes" [autoWidth]="false"
+                                        [(ngModel)]="fault.idTipoFalta"
+                                        #types="ngModel"
+                          ></p-dropdown>
+                            <div class="ui-message ui-messages-error ui-corner-all"
+                                 *ngIf="f.submitted && !types.valid">
+                              <i class="fa fa-close"></i>
+                              Tipo de falta es requerido
+                            </div>
+                        </div>
+                      <div class="form-group col-md-3">
+                            <label for="types">* Estado</label>
+                            <p-dropdown id="status"  name="status" required="true"
+                                        [options]="faultsStatus" [autoWidth]="false"
+                                        [(ngModel)]="fault.idEstadoFalta"
+                                        #status="ngModel"
+                          ></p-dropdown>
+                            <div class="ui-message ui-messages-error ui-corner-all"
+                                 *ngIf="f.submitted && !status.valid">
+                              <i class="fa fa-close"></i>
+                              Estado es requerido
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="accion">Acción Sugerida</label>
+                            <textarea id="accion" name="accion" pInputTextarea  rows="5"
+                                      #accion="ngModel" required
+                                      [(ngModel)]="fault.accion"
+                            ></textarea>
+                            <div class="ui-message ui-messages-error ui-corner-all"
+                                 *ngIf="f.submitted && !accion.valid">
+                              <i class="fa fa-close"></i>
+                              Acción es requerido
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-5">
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+                          <div class=" col-sm-9">
+                            <p-checkbox binary="true" id="indicador" name="indicador"
+                                        [(ngModel)]="fault.indicadorHabilitado"
+                                        #indicador="ngModel"></p-checkbox>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-footer-buttons">
+                    <div class="form-group col-md-12">
+                        <a (click)="goBack()" class="cancelar">Cancelar</a>
+                        <button icon="fa-plus" label="Guardar" type="submit"
+                                pButton></button>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
