@@ -2,7 +2,6 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import {TranslateService, TranslateModule} from 'ng2-translate';
 import {
   InputTextModule,
   DataTableModule,
@@ -21,7 +20,8 @@ import {
   FieldsetModule,
   CheckboxModule,
   ToggleButtonModule,
-  InputMaskModule
+  InputMaskModule,
+  InputTextareaModule
   
 } from 'primeng/primeng';
 
@@ -51,7 +51,8 @@ import {
       FieldsetModule,
       CheckboxModule,
       ToggleButtonModule,
-      InputMaskModule
+      InputMaskModule,
+      InputTextareaModule
   ],
   declarations: [
   ],
@@ -59,7 +60,6 @@ import {
       CommonModule,
       FormsModule,
       RouterModule,
-      TranslateModule,
       DataTableModule,
       ButtonModule,
       DialogModule,
@@ -76,7 +76,8 @@ import {
       FieldsetModule,
       CheckboxModule,
       ToggleButtonModule,
-      InputMaskModule
+      InputMaskModule,
+      InputTextareaModule
     
   ]
 })
@@ -84,7 +85,7 @@ export class FormSharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: FormSharedModule,
-      providers: [TranslateService]
+      providers: []
     };
   }
 }

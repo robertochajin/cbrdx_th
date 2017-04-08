@@ -61,6 +61,7 @@
                                 <div class=" col-sm-9">
                                     <textarea pInputTextarea class="form-control" id="ocupacion" name="ocupacion"
                                               required [(ngModel)]="ocupaciones.ocupacion" #ocupacion="ngModel"
+                                              (keyup)="capitalizeName()"
                                     ></textarea>
                                     <div *ngIf="f.submitted && !ocupacion.valid" class="ui-message  ui-corner-all">
                                         {{labelfieldocupacion}} es requerido
