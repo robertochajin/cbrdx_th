@@ -428,6 +428,14 @@ a.cancelar:hover {
 .ui-datatable .ui-sortable-column-icon {
   float: right;
 }
+.ui-datatable-thead >tr > th > span{
+  font-weight: bold;
+  font-size: .8em;
+}
+body .ui-datatable .ui-datatable-thead > tr > th,
+body .ui-datatable .ui-datatable-tfoot > tr > td {
+  background-color: #ededed;
+}
 
 /**
 ------------------------ Edit PrimeNG CSS ------------------------------
@@ -449,8 +457,9 @@ p-tree{
 /**
 ------------------------ Form CSS ------------------------------
  */
+
 label{
-  font-weight: 100;
+  font-weight: 300;
 }
 form [class*="col-"] {
     padding: 6px;
@@ -492,7 +501,107 @@ body .ui-tree .ui-treenode .ui-treenode-content .ui-treenode-label {
 body .ui-tree .ui-treenode .ui-treenode-content .ui-tree-toggler {
   vertical-align: top!important;
 }
-dashboard_height{
-  height: 275px;
+
+
+
+/**
+----------------------------------------------------------------------
+---------------------------- COLOR CSS -------------------------------
+----------------------------------------------------------------------
+ */
+
+/* -- Botones Blue -- */
+body.skin-blue .ui-button:focus,
+body.skin-blue .ui-button:enabled:hover {
+  background-color: #29ABE2!important;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(41, 171, 226, 0.6);
+  -webkit-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(41, 171, 226, 0.6);
+  -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(41, 171, 226, 0.6);
+}
+/* -- Paginador Blue -- */
+body.skin-blue .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active:hover {
+  background-color: #29ABE2!important;
+}
+/* -- focus input text Blue -- */
+body.skin-blue .ui-inputtext.ui-state-focus,
+body.skin-blue .ui-inputtext:focus {
+  border: 1px solid #29ABE2;
+}
+body.skin-blue .form-control:focus{
+  border-color: #29ABE2!important;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(41, 171, 226, 0.6);
 }
 
+
+
+/* -- Botones black -- */
+body.skin-black .ui-button:focus,
+body.skin-black .ui-button:enabled:hover {
+  background-color: #b1c800!important;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(177, 200, 0, 0.6);
+  -webkit-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(177, 200, 0, 0.6);
+  -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(177, 200, 0, 0.6);
+}
+/* -- Paginador Black -- */
+body.skin-black .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active:hover {
+  background-color: #b1c800!important;
+}
+/* -- focus input text Black -- */
+body.skin-black .ui-inputtext.ui-state-focus,
+body.skin-black .ui-inputtext:focus {
+  border: 1px solid #29ABE2;
+}
+body.skin-black .form-control:focus{
+  border-color: #29ABE2!important;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(41, 171, 226, 0.6);
+}
+
+
+
+
+/* -- Botones Green -- */
+body.skin-green .ui-button:focus,
+body.skin-green .ui-button:enabled:hover {
+  background-color: #009c41!important;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(0, 156, 65, 0.6);
+  -webkit-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(0, 156, 65, 0.6);
+  -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(0, 156, 65, 0.6);
+}
+/* -- Paginador Green -- */
+body.skin-green .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active:hover {
+  background-color: #009c41!important;
+}
+/* -- focus input text Green -- */
+body.skin-green .ui-inputtext.ui-state-focus,
+body.skin-green .ui-inputtext:focus {
+  border: 1px solid #009c41;
+}
+body.skin-green .form-control:focus{
+  border-color: #009c41!important;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0, 156, 65, 0.6);
+}
+
+
+
+
+/* -- Botones Purple -- */
+body.skin-purple .ui-button:focus,
+body.skin-purple .ui-button:enabled:hover {
+  background-color: #605ca8!important;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(96, 92, 168, 0.6);
+  -webkit-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(96, 92, 168, 0.6);
+  -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(96, 92, 168, 0.6);
+}
+/* -- Paginador Purple -- */
+body.skin-purple .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active:hover {
+  background-color: #605ca8!important;
+}
+/* -- focus input text Purple -- */
+body.skin-purple .ui-inputtext.ui-state-focus,
+body.skin-purple .ui-inputtext:focus {
+  border: 1px solid #605ca8;
+}
+body.skin-purple .form-control:focus{
+  border-color: #605ca8!important;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(96, 92, 168, 0.6);
+}

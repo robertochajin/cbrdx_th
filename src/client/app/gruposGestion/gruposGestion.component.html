@@ -8,7 +8,7 @@
         <input #gb type="text" pInputText size="40" placeholder="Buscar...">
     </div>
 </div>
-<p-dataTable [value]="gruposGestion" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="gruposGestion" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb" emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}">
     <p-column field="idGrupoGestion" header="Id" [sortable]="true"></p-column>
     <p-column field="codigoGrupoGestion" header="Código" [sortable]="true"></p-column>
     <p-column field="grupoGestion" header="Nombre" [sortable]="true"></p-column>
