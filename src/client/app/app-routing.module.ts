@@ -106,6 +106,8 @@ import {DivisionPoliticaComponent} from "./divisionPolitica/divisionPolitica.com
 import {OcupacionesComponent} from "./ocupaciones/ocupaciones.component";
 import {ActividadEconomicaComponent} from "./actividadEconomica/actividadEconomica.component";
 
+import {EvaluationCriteriasComponent} from "./positions-evaluation-criterias/evaluation-criterias.component";
+
 
 const routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -209,6 +211,9 @@ const routes = [
   {path: 'tipoArea/add', component: TipoDeAreaAddComponent, canActivate: [AuthGuard]},
   {path: 'tipoArea/detail/:id', component: TipoDeAreaDetailComponent, canActivate: [AuthGuard]},
   {path: 'tipoArea/edit/:id', component: TipoDeAreaEditComponent, canActivate: [AuthGuard]},
+
+  // Arboles
+  {path: 'criterios', component: EvaluationCriteriasComponent, canActivate: [AuthGuard]},
 
   // Arboles
   {path: 'divisionPolitica', component: DivisionPoliticaComponent, canActivate: [AuthGuard]},

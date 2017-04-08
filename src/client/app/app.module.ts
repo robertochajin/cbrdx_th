@@ -36,6 +36,7 @@ import {DivisionPoliticaModule} from "./divisionPolitica/divisionPolitica.module
 import {OcupacionesModule} from "./ocupaciones/ocupaciones.module";
 import {ActividadEconomicaModule} from "./actividadEconomica/actividadEconomica.module";
 import {ClinicalInformationModule} from "./employees-clinical-information/clinical-information.module";
+import {EvaluationCriteriasModule} from "./positions-evaluation-criterias/evaluation-criterias.module";
 
 
 //CarsModule,
@@ -53,6 +54,7 @@ import {ClinicalInformationModule} from "./employees-clinical-information/clinic
     LoginModule,
     GrowlModule,
     DashboardModule,
+    EvaluationCriteriasModule,
     SharedModule.forRoot(),
     TranslateModule.forRoot({
       provide: TranslateLoader,
