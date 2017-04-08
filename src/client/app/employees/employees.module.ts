@@ -13,6 +13,7 @@ import { PoliticalDivisionService } from "../_services/political-division.servic
 
 import {NavService}                 from '../_services/_nav.service';
 
+import {SharedModule } from '../shared/shared.module';
 import {FormSharedModule } from '../shared/form-shared.module';
 
 import {FamilyInformationModule} from './../employees-family-information/family-information.module';
@@ -34,6 +35,7 @@ import {EmployeesVehicleModule} from "../employees-vehicle/employee-vehicles.mod
     WorkExperienceModule,
     LocationModule,
     ClinicalInformationModule,
+    SharedModule,
     FormSharedModule,
     EmployeesContactModule,
     EmployeesEstateModule,
