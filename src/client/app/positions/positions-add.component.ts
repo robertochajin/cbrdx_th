@@ -1,6 +1,6 @@
 import "rxjs/add/operator/switchMap";
 import { Component } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router,ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { Positions } from "../_models/positions";
 import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
@@ -24,6 +24,7 @@ export class PositionsAddComponent {
    
    constructor( private positionsService: PositionsService,
                 private router: Router,
+                private route: ActivatedRoute,
                 private location: Location,
                 private listPositionsService: ListPositionsService,
                 private confirmationService: ConfirmationService ) {
@@ -32,18 +33,18 @@ export class PositionsAddComponent {
          this.categoryTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
             this.categoryTypes.push( {
-                                        label: dp.nombre,
-                                        value: dp.idListaCategoria
+                                        label: dp.categoria,
+                                        value: dp.idCategoria
                                      } );
          }
       } );
       
-      this.listPositionsService.getBossPositionTypes().subscribe( res => {
+      this.positionsService.getAll().subscribe( res => {
          this.bossPositionTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
             this.bossPositionTypes.push( {
                                             label: dp.nombre,
-                                            value: dp.idListaCargoJefe
+                                            value: dp.idCargo
                                          } );
          }
       } );
@@ -52,8 +53,8 @@ export class PositionsAddComponent {
          this.stateTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
             this.stateTypes.push( {
-                                     label: dp.nombre,
-                                     value: dp.idListaEstado
+                                     label: dp.observacion,
+                                     value: dp.idEstadoCargo
                                   } );
          }
       } );
