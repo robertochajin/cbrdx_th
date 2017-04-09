@@ -17,15 +17,19 @@ export class ListPositionsService {
    }
    
    getCategoryTypes() {
-      return this.http.get( this.serviceURL + "tiposPersonas/", { headers: this.headers } ).map( ( res: Response ) => res.json() );
+      return this.http.get( this.serviceURL + "categorias/", { headers: this.headers } ).map( ( res: Response ) => res.json() );
    }
    
-   getBossPositionTypes() {
+   /*getBossPositionTypes() {
       return this.http.get( this.serviceURL + "tiposDocumentos/", { headers: this.headers } ).map( ( res: Response ) => res.json() );
-   }
+   }*/
    
    getstateTypes() {
-      return this.http.get( this.serviceURL + "tiposDocumentos/", { headers: this.headers } ).map( ( res: Response ) => res.json() );
+      return this.http.get( this.serviceURL + "cargosEstadosObservaciones/", { headers: this.headers } ).map( ( res: Response ) => res.json() );
+   }
+   
+   getLevelTypes() {
+      return this.http.get( this.serviceURL + "listasNivelesCargos/enabled/", { headers: this.headers } ).map( ( res: Response ) => res.json() );
    }
    
    handleError( error: any ): Promise<any> {

@@ -13,23 +13,23 @@ export class PositionsService {
    }
    
    getAll() {
-      return this.http.get( this.serviceURL + 'cargos' ).map( ( res: Response ) => res.json() );
+      return this.http.get( this.serviceURL + 'cargos/enabled' ).map( ( res: Response ) => res.json() );
    }
    
    add( c: Positions ) {
-      return this.http.post( this.serviceURL + 'faltasysanciones', c ).map( ( res: Response ) => res.json() );
+      return this.http.post( this.serviceURL + 'cargos', c ).map( ( res: Response ) => res.json() );
    };
    
    update( c: Positions ) {
-      return this.http.put( this.serviceURL + 'faltasysanciones', c ).map( ( res: Response ) => res );
+      return this.http.put( this.serviceURL + 'cargos', c ).map( ( res: Response ) => res );
    }
    
    get( id: number ) {
-      return this.http.get( this.serviceURL + 'faltasysanciones/' + id ).map( ( res: Response ) => res.json() as Positions );
+      return this.http.get( this.serviceURL + 'cargos/' + id ).map( ( res: Response ) => res.json() as Positions );
    }
    
    getListfaultsTypes() {
-      return this.http.get( this.serviceURL + 'faltasysanciones' ).map( ( res: Response ) => res.json() );
+      return this.http.get( this.serviceURL + 'cargos' ).map( ( res: Response ) => res.json() );
    }
    
    getObservations( id: number ) {
