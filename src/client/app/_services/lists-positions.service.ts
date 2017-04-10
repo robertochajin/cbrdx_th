@@ -25,7 +25,7 @@ export class ListPositionsService {
    }
    
    getstateByCode(val:string) {
-      return this.http.get( this.serviceURL + "listasEstadosCargos/codigo/"+val+"/", { headers: this.headers } ).map( ( res: Response ) => res.json() );
+      return this.http.get( this.serviceURL + "listasEstadosCargos/codigo/"+val, { headers: this.headers } ).map( ( res: Response ) => res.json() );
    }
    
    getLevelTypes() {

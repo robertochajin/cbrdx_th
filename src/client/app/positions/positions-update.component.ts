@@ -26,7 +26,9 @@ export class PositionsUpdateComponent implements OnInit{
    levelTypes: SelectItem[] = [];
    disableTabs: boolean = false;
    msgs: Message[] = [];
-   
+   defaultState: any;
+   aprobado:boolean = false;
+   step = 8;
    constructor( private positionsService: PositionsService,
                 private router: Router,
                 private route: ActivatedRoute,
@@ -74,7 +76,10 @@ export class PositionsUpdateComponent implements OnInit{
                                   } );
          }
       } );
-      
+   
+      this.listPositionsService.getstateByCode("APROB").subscribe( res => {
+          this.defaultState = res;
+      });
    }
    
    ngOnInit() {
@@ -82,6 +87,9 @@ export class PositionsUpdateComponent implements OnInit{
       this.route.params.subscribe( ( params: Params ) => {
          this.positionsService.get( +params[ 'id' ] ).subscribe( position => {
             this.position = position;
+            this.position.paso = 0;
+            this.position.idEstado = 1;
+            this.aprobado = this.position.idEstado == this.defaultState.idListaEstadoCargo ? true : false;
             this.positionsService.getListPositions().subscribe( res => {
                this.bossPositionTypes.push( { label: "Seleccione", value: null } );
                for ( let dp of res ) {
@@ -101,6 +109,55 @@ export class PositionsUpdateComponent implements OnInit{
    
    onSubmit0() {
       this.msgs = [];
+      if(this.position.paso == 1){
+         this.position.paso = 2;
+         this.step = 2;
+      }
+      this.positionsService.update( this.position )
+      .subscribe( data => {
+         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         //this.router.navigate(['positions/update/'+data.idCargo]);
+      }, error => {
+         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+      } );
+   }
+   
+   onSubmit2() {
+      this.msgs = [];
+      if(this.position.paso == 3){
+         this.position.paso = 4;
+         this.step = 4;
+      }
+      this.positionsService.update( this.position )
+      .subscribe( data => {
+         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         //this.router.navigate(['positions/update/'+data.idCargo]);
+      }, error => {
+         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+      } );
+   }
+   
+   onSubmit5() {
+      this.msgs = [];
+      if(this.position.paso == 5){
+         this.position.paso = 6;
+         this.step = 7;
+      }
+      this.positionsService.update( this.position )
+      .subscribe( data => {
+         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         //this.router.navigate(['positions/update/'+data.idCargo]);
+      }, error => {
+         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+      } );
+   }
+   
+   onSubmit7() {
+      this.msgs = [];
+      if(this.position.paso == 7){
+         this.position.paso = 8;
+         this.step = 8;
+      }
       this.positionsService.update( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );

@@ -53,7 +53,10 @@ export class PositionsAddComponent {
          }
       } );
       
-      this.defaultState = this.listPositionsService.getstateByCode("CONST");
+      //this.defaultState = this.listPositionsService.getstateByCode("CONST");
+      this.listPositionsService.getstateByCode("CONST").subscribe( res => {
+         this.defaultState = res;
+      });
       
    }
    
@@ -62,7 +65,8 @@ export class PositionsAddComponent {
    
    onSubmit0() {
       this.msgs = [];
-      this.position.idListaEstadoCargo = this.defaultState.idListaEstadoCargo;
+      this.position.idEstado = this.defaultState.idListaEstadoCargo;
+      this.position.paso = 1;
       this.positionsService.add( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );

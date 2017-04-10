@@ -16,7 +16,7 @@
 
     <p-dataTable [value]="positions" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
         <p-column field="codigoCargo" header="Codigo" [sortable]="true"></p-column>
-        <p-column field="nombreCargo" header="Nombre " [sortable]="true"></p-column>
+        <p-column field="cargo" header="Nombre " [sortable]="true"></p-column>
        <p-column field="indHab" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true">
           <template let-position="rowData" pTemplate="body">
              <p-checkbox [(ngModel)]="position.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>

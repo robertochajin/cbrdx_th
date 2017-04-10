@@ -10,11 +10,17 @@ import { PoliticalDivisionService } from "../_services/political-division.servic
 import { NavService } from "../_services/_nav.service";
 import { SharedModule } from "../shared/shared.module";
 import { FormSharedModule } from "../shared/form-shared.module";
+import { EvaluationCriteriasModule } from "../position-evaluation-criterias/evaluation-criterias.module";
+import { PositionRolesModule } from "../position-roles/position-roles.module";
+import { PositionResponsabilitiesModule } from "../position-responsabilities/position-responsabilities.module";
 
 @NgModule( {
               imports: [
                  SharedModule,
-                 FormSharedModule
+                 FormSharedModule,
+                 EvaluationCriteriasModule,
+                 PositionRolesModule,
+                 PositionResponsabilitiesModule
               ],
    
               declarations: [
