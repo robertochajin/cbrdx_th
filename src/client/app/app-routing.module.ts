@@ -106,6 +106,11 @@ import {DivisionPoliticaComponent} from "./divisionPolitica/divisionPolitica.com
 import {OcupacionesComponent} from "./ocupaciones/ocupaciones.component";
 import {ActividadEconomicaComponent} from "./actividadEconomica/actividadEconomica.component";
 
+// Cargos Productividad
+import {ProductivityComponent} from "./position-productivity/productivity.component";
+
+//Cargos factores de riesgo
+import {RiskComponent} from "./position-risks/position-risks.component";
 // Faltas
 import {FaultsAndSanctionsComponent} from "./faultsAndSanctions/faults-and-sanctions.component";
 import {FaultsAndSanctionsAddComponent} from "./faultsAndSanctions/faults-and-sanctions-add.component";
@@ -223,11 +228,6 @@ const routes = [
   {path: 'tipoArea/detail/:id', component: TipoDeAreaDetailComponent, canActivate: [AuthGuard]},
   {path: 'tipoArea/edit/:id', component: TipoDeAreaEditComponent, canActivate: [AuthGuard]},
 
-  // Temporales
-  {path: 'criterios', component: EvaluationCriteriasComponent, canActivate: [AuthGuard]},
-  {path: 'responsabilidades', component: PositionResponsabilitiesComponent, canActivate: [AuthGuard]},
-  {path: 'cargosroles', component: PositionRolesComponent, canActivate: [AuthGuard]},
-
   // Arboles
   {path: 'divisionPolitica', component: DivisionPoliticaComponent, canActivate: [AuthGuard]},
   {path: 'ocupaciones', component: OcupacionesComponent, canActivate: [AuthGuard]},
@@ -242,6 +242,13 @@ const routes = [
   {path: 'positions', component: PositionsComponent, canActivate: [AuthGuard]},
   {path: 'positions/add', component: PositionsAddComponent, canActivate: [AuthGuard]},
   {path: 'positions/update/:id', component: PositionsUpdateComponent, canActivate: [AuthGuard]},
+//  Cargos Productividad
+  {path: 'productivity/:idCargo', component: ProductivityComponent, canActivate: [AuthGuard]},
+
+
+  // cargos factores de riesgo
+  {path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [AuthGuard]},
+
 
 ];
 
