@@ -23,7 +23,7 @@
             <div class="col-md-2 col-xs-12">
               <label for="evaluationCriteria{{i}}">* Criterio evaluacion</label>
               <p-dropdown id="evaluationCriteria{{i}}" name="evaluationCriteria{{i}}"
-                          [options]="evaluationCriterias" required #criterio="ngModel"  (change)="sumFactors()"
+                          [options]="evaluationCriterias" required #criterio="ngModel"  (onChange)="assignCriteria(criteria)"
                           [autoWidth]="false" [(ngModel)]="criteria.idCriterio"></p-dropdown>
               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !criterio.valid" >
                 <i class="fa fa-close"></i>
@@ -65,9 +65,8 @@
             </div>
           </div>
           <div class="row">
-            <li>=>{{d.valid}}</li>
             <div class="col-md-6 col-xs-12">
-              <div class="alert alert-success" [hidden]="!oneHundred && d.valid" role="alert">Perfecto!</div>
+              <div class="alert alert-success" [hidden]="!oneHundred && !d.valid" role="alert">Perfecto!</div>
               <div class="alert alert-warning" [hidden]="oneHundred" role="alert">Lo siento, debe sumar 100</div>
             </div>
             <div class="col-md-1 col-xs-12">
@@ -98,14 +97,6 @@
       <p-column field="descripcion" header="Descripción" [sortable]="true"></p-column>
       <p-column field="factor" header="Factor" [sortable]="true"></p-column>
       <p-column field="meta" header="Meta" [sortable]="true"></p-column>
-      <p-column header="Acciones" styleClass="datatable-col-action">
-        <template let-positionCriteria="rowData" pTemplate="body">
-          <div class="btn-group" role="group" aria-label="...">
-            <button type="button" pButton class="ui-button ui-button-success btn" (click)="update(positionCriteria)"
-                    icon="fa-pencil"></button>
-          </div>
-        </template>
-      </p-column>
     </p-dataTable>
   </div>
 </div>
