@@ -2,12 +2,13 @@ import {Injectable} from '@angular/core';
 import {Http, Response, Headers} from '@angular/http';
 import {AuthenticationService} from "../_services/authentication.service";
 import {PositionResponsabilities} from "../_models/positionResponsabilities";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class PositionResponsabilitiesService {
 
   headers = new Headers({'Content-Type': 'application/json'});
-  private serviceURL = '<%= SVC_TH_URL %>/api/cargosCriterios/';
+  private serviceURL = '<%= SVC_TH_URL %>/api/cargosResponsabilidades/';
 
   constructor(private http: Http,
               private authenticationService: AuthenticationService) {
@@ -18,8 +19,9 @@ export class PositionResponsabilitiesService {
     return this.http.get(this.serviceURL).map((res: Response) => res.json() as PositionResponsabilities[]);
   }
 
-  getAllByPosition(id: number) {
-    return this.http.get(this.serviceURL + 'buscarCargo/' + id).map((res: Response) => res.json());
+  getAllByPosition(id: number): Observable<PositionResponsabilities[]> {
+    return this.http.get(this.serviceURL + 'enabled/').map((res: Response) => res.json() as PositionResponsabilities[]);
+    // return this.http.get(this.serviceURL + 'buscarCargo/' + id).map((res: Response) => res.json());
   }
 
   add(f: PositionResponsabilities) {
