@@ -23,7 +23,7 @@
             <div class="col-md-2 col-xs-12">
               <label for="evaluationCriteria{{i}}">* Criterio evaluacion</label>
               <p-dropdown id="evaluationCriteria{{i}}" name="evaluationCriteria{{i}}"
-                          [options]="evaluationCriterias" required #criterio="ngModel"  (change)="assignCriteria(criteria)"
+                          [options]="evaluationCriterias" required #criterio="ngModel"  (onChange)="assignCriteria(criteria)"
                           [autoWidth]="false" [(ngModel)]="criteria.idCriterio"></p-dropdown>
               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !criterio.valid" >
                 <i class="fa fa-close"></i>
@@ -65,9 +65,8 @@
             </div>
           </div>
           <div class="row">
-            <li>=>{{d.valid}}</li>
             <div class="col-md-6 col-xs-12">
-              <div class="alert alert-success" [hidden]="!oneHundred && d.valid" role="alert">Perfecto!</div>
+              <div class="alert alert-success" [hidden]="!oneHundred && !d.valid" role="alert">Perfecto!</div>
               <div class="alert alert-warning" [hidden]="oneHundred" role="alert">Lo siento, debe sumar 100</div>
             </div>
             <div class="col-md-1 col-xs-12">

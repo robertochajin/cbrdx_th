@@ -34,7 +34,7 @@ export class EvaluationCriteriasComponent {
    ngOnInit() {
       // provisional
       this.position = new Positions();
-      this.position.idCargo = 10;
+      this.position.idCargo = 19;
       // fin provisional
 
       this.evaluationCriterias.push({
@@ -53,6 +53,7 @@ export class EvaluationCriteriasComponent {
             .subscribe(positionCriterias => {
                this.positionCriterias = positionCriterias;
                this.positionCriterias.map(p => {
+                  p.idCargo = this.position.idCargo;
                   p.criterio = this.evaluationCriterias.find(e => e.idCriterio == p.idCriterio).criterio;
                });
             });
@@ -66,8 +67,10 @@ export class EvaluationCriteriasComponent {
    }
 
    savePositionCriterias() {
+      this.positionCriteriasService.addInBulk(this.positionCriterias).subscribe(data => {
 
-      console.log(JSON.stringify(this.positionCriterias));
+      });
+
       this.editing = false;
    }
 
@@ -90,12 +93,21 @@ export class EvaluationCriteriasComponent {
    }
 
    editCriterias() {
+      if(this.positionCriterias.length == 0){
+         let nc = new PositionCriterias();
+         nc.indicadorHabilitado = true;
+         nc.idCargo = this.position.idCargo;
+         this.positionCriterias.push(nc);
+      }
       this.sumFactors();
       this.editing = true;
    }
 
    addCriteria() {
-      this.positionCriterias.push(new PositionCriterias());
+      let nc = new PositionCriterias();
+      nc.indicadorHabilitado = true;
+      nc.idCargo = this.position.idCargo;
+      this.positionCriterias.push(nc);
    }
 
    removeCriteria(id: any) {

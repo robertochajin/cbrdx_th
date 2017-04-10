@@ -29,8 +29,7 @@ export class PositionCriteriasService {
   };
 
   addInBulk(pcs: PositionCriterias[]) {
-     console.log(JSON.stringify(pcs));
-    // return this.http.post(this.serviceURL, pcs, {headers: this.headers}).map((res: Response) => res.json());
+    return this.http.post(this.serviceURL, JSON.stringify(pcs), {headers: this.headers}).map((res: Response) => res.json());
   };
 
   update(f: PositionCriterias) {
