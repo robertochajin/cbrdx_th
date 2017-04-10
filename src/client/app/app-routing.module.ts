@@ -1,58 +1,58 @@
-import { NgModule } from '@angular/core';
-import { RouterModule,Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
 //historia de employees
-import { EmployeesDetailComponent } from './employees/employees-detail.component';
-import { EmployeesAddComponent } from './employees/employees-add.component';
-import { EmployeesUpdateComponent } from './employees/employees-update.component';
-import { EmployeesComponent } from './employees/employees.component';
-import { EmployeesAdditionalDataComponent } from './employees/employees-additional-data.component';
+import {EmployeesDetailComponent} from './employees/employees-detail.component';
+import {EmployeesAddComponent} from './employees/employees-add.component';
+import {EmployeesUpdateComponent} from './employees/employees-update.component';
+import {EmployeesComponent} from './employees/employees.component';
+import {EmployeesAdditionalDataComponent} from './employees/employees-additional-data.component';
 
 //historia employees estates
-import { EmployeesEstateComponent } from './employees-estate/employee-estate.component';
-import { EmployeesEstateAddComponent } from './employees-estate/employee-estate-add.component';
-import { EmployeeEstateDetailComponent } from './employees-estate/employee-estate-detail.component';
-import { EmployeesEstateUpdateComponent } from './employees-estate/employee-estate-update.component';
+import {EmployeesEstateComponent} from './employees-estate/employee-estate.component';
+import {EmployeesEstateAddComponent} from './employees-estate/employee-estate-add.component';
+import {EmployeeEstateDetailComponent} from './employees-estate/employee-estate-detail.component';
+import {EmployeesEstateUpdateComponent} from './employees-estate/employee-estate-update.component';
 
 //historia employees estates
-import { EmployeesVehicleComponent } from './employees-vehicle/employee-vehicles.component';
-import { EmployeesVehicleAddComponent } from './employees-vehicle/employee-vehicles-add.component';
+import {EmployeesVehicleComponent} from './employees-vehicle/employee-vehicles.component';
+import {EmployeesVehicleAddComponent} from './employees-vehicle/employee-vehicles-add.component';
 // import { EmployeeEstateDetailComponent } from './employees-estate/employee-estate-detail.component';
-import { EmployeesVehicleUpdateComponent } from './employees-vehicle/employee-vehicle-update.component';
+import {EmployeesVehicleUpdateComponent} from './employees-vehicle/employee-vehicle-update.component';
 //Información familiar de employees
-import { FamilyInformationComponent } from './employees-family-information/family-information.component';
-import { FamilyInformationAddComponent } from './employees-family-information/family-information-add.component';
-import { FamilyInformationUpdateComponent } from './employees-family-information/family-information-update.component';
-import { FamilyInformationDetailComponent } from './employees-family-information/family-information-detail.component';
+import {FamilyInformationComponent} from './employees-family-information/family-information.component';
+import {FamilyInformationAddComponent} from './employees-family-information/family-information-add.component';
+import {FamilyInformationUpdateComponent} from './employees-family-information/family-information-update.component';
+import {FamilyInformationDetailComponent} from './employees-family-information/family-information-detail.component';
 
 //employees location
-import { LocationComponent } from './employees-location/employee-location.component';
-import { LocationUpdateComponent } from './employees-location/employee-location-update.component';
-import { LocationAddComponent } from './employees-location/employee-location-add.component';
-import { LocationDetailComponent } from './employees-location/employee-location-detail.component';
+import {LocationComponent} from './employees-location/employee-location.component';
+import {LocationUpdateComponent} from './employees-location/employee-location-update.component';
+import {LocationAddComponent} from './employees-location/employee-location-add.component';
+import {LocationDetailComponent} from './employees-location/employee-location-detail.component';
 
 //Información de referencia de employees
-import { ReferencesComponent } from './employees-references/references.component';
-import { ReferencesDetailComponent } from './employees-references/references-detail.component';
-import { ReferencesAddComponent } from './employees-references/references-add.component';
-import { ReferencesUpdateComponent } from './employees-references/references-update.component';
+import {ReferencesComponent} from './employees-references/references.component';
+import {ReferencesDetailComponent} from './employees-references/references-detail.component';
+import {ReferencesAddComponent} from './employees-references/references-add.component';
+import {ReferencesUpdateComponent} from './employees-references/references-update.component';
 
 //Información de formacion academica
-import { FormalStudiesComponent } from './employees-academic-education/formal-studies.component';
-import { FormalStudiesDetailComponent } from './employees-academic-education/formal-studies-detail.component';
-import { FormalStudiesAddComponent } from './employees-academic-education/formal-studies-add.component';
-import { FormalStudiesUpdateComponent } from './employees-academic-education/formal-studies-update.component';
+import {FormalStudiesComponent} from './employees-academic-education/formal-studies.component';
+import {FormalStudiesDetailComponent} from './employees-academic-education/formal-studies-detail.component';
+import {FormalStudiesAddComponent} from './employees-academic-education/formal-studies-add.component';
+import {FormalStudiesUpdateComponent} from './employees-academic-education/formal-studies-update.component';
 
-import { NoFormalStudiesComponent } from './employees-academic-education/no-formal-studies.component';
-import { NoFormalStudiesDetailComponent } from './employees-academic-education/no-formal-studies-detail.component';
-import { NoFormalStudiesAddComponent } from './employees-academic-education/no-formal-studies-add.component';
-import { NoFormalStudiesUpdateComponent } from './employees-academic-education/no-formal-studies-update.component';
+import {NoFormalStudiesComponent} from './employees-academic-education/no-formal-studies.component';
+import {NoFormalStudiesDetailComponent} from './employees-academic-education/no-formal-studies-detail.component';
+import {NoFormalStudiesAddComponent} from './employees-academic-education/no-formal-studies-add.component';
+import {NoFormalStudiesUpdateComponent} from './employees-academic-education/no-formal-studies-update.component';
 
 // Experiencia laboral
-import { WorkExperienceComponent } from './employees-work-experience/work-experience.component';
-import { WorkExperienceDetailComponent } from './employees-work-experience/work-experience-detail.component';
-import { WorkExperienceAddComponent } from './employees-work-experience/work-experience-add.component';
-import { WorkExperienceUpdateComponent } from './employees-work-experience/work-experience-update.component';
+import {WorkExperienceComponent} from './employees-work-experience/work-experience.component';
+import {WorkExperienceDetailComponent} from './employees-work-experience/work-experience-detail.component';
+import {WorkExperienceAddComponent} from './employees-work-experience/work-experience-add.component';
+import {WorkExperienceUpdateComponent} from './employees-work-experience/work-experience-update.component';
 
 //Login
 import {LoginComponent} from './seguridad/login.component';
@@ -106,6 +106,11 @@ import {DivisionPoliticaComponent} from "./divisionPolitica/divisionPolitica.com
 import {OcupacionesComponent} from "./ocupaciones/ocupaciones.component";
 import {ActividadEconomicaComponent} from "./actividadEconomica/actividadEconomica.component";
 
+// Cargos Productividad
+import {ProductivityComponent} from "./position-productivity/productivity.component";
+
+//Cargos factores de riesgo
+import {RiskComponent} from "./position-risks/position-risks.component";
 
 const routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -118,9 +123,21 @@ const routes = [
 
   //Información familiar de employees
   {path: 'employees-family-information', component: FamilyInformationComponent, canActivate: [AuthGuard]},
-  {path: 'employees-family-information/add/:tercero', component: FamilyInformationAddComponent, canActivate: [AuthGuard]},
-  {path: 'employees-family-information/update/:id/:tercero', component: FamilyInformationUpdateComponent, canActivate: [AuthGuard]},
-  {path: 'employees-family-information/detail/:id', component: FamilyInformationDetailComponent, canActivate: [AuthGuard]},
+  {
+    path: 'employees-family-information/add/:tercero',
+    component: FamilyInformationAddComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'employees-family-information/update/:id/:tercero',
+    component: FamilyInformationUpdateComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'employees-family-information/detail/:id',
+    component: FamilyInformationDetailComponent,
+    canActivate: [AuthGuard]
+  },
 
   //Información de referencia de employees
   {path: 'employees-references', component: ReferencesComponent, canActivate: [AuthGuard]},
@@ -132,19 +149,27 @@ const routes = [
   {path: 'employees-formal-studies', component: FormalStudiesComponent, canActivate: [AuthGuard]},
   {path: 'employees-formal-studies/add/:tercero', component: FormalStudiesAddComponent, canActivate: [AuthGuard]},
   {path: 'employees-formal-studies/detail/:id', component: FormalStudiesDetailComponent, canActivate: [AuthGuard]},
-  {path: 'employees-formal-studies/update/:id/:tercero', component: FormalStudiesUpdateComponent, canActivate: [AuthGuard]},
+  {
+    path: 'employees-formal-studies/update/:id/:tercero',
+    component: FormalStudiesUpdateComponent,
+    canActivate: [AuthGuard]
+  },
   {path: 'employees-no-formal-studies', component: NoFormalStudiesComponent, canActivate: [AuthGuard]},
   {path: 'employees-no-formal-studies/add/:tercero', component: NoFormalStudiesAddComponent, canActivate: [AuthGuard]},
   {path: 'employees-no-formal-studies/detail/:id', component: NoFormalStudiesDetailComponent, canActivate: [AuthGuard]},
-  {path: 'employees-no-formal-studies/update/:id/:tercero', component: NoFormalStudiesUpdateComponent, canActivate: [AuthGuard]},
+  {
+    path: 'employees-no-formal-studies/update/:id/:tercero',
+    component: NoFormalStudiesUpdateComponent,
+    canActivate: [AuthGuard]
+  },
 
   //employees-location
-  { path: 'employees-location', component: LocationComponent, canActivate: [AuthGuard]},
-  { path: 'employees-location/add/:id', component: LocationAddComponent, canActivate: [AuthGuard]},
-  { path: 'employees-location/update/:id/:tercero', component: LocationUpdateComponent, canActivate: [AuthGuard] },
-  { path: 'employees-location/detail/:id', component: LocationDetailComponent, canActivate: [AuthGuard] },
+  {path: 'employees-location', component: LocationComponent, canActivate: [AuthGuard]},
+  {path: 'employees-location/add/:id', component: LocationAddComponent, canActivate: [AuthGuard]},
+  {path: 'employees-location/update/:id/:tercero', component: LocationUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'employees-location/detail/:id', component: LocationDetailComponent, canActivate: [AuthGuard]},
 
-    //Experiencia laboral
+  //Experiencia laboral
   {path: 'employees-work-experience', component: WorkExperienceComponent, canActivate: [AuthGuard]},
   {path: 'employees-work-experience/add/:tercero', component: WorkExperienceAddComponent, canActivate: [AuthGuard]},
   {path: 'employees-work-experience/detail/:id', component: WorkExperienceDetailComponent, canActivate: [AuthGuard]},
@@ -159,7 +184,7 @@ const routes = [
   {path: 'employees-estate/detail/:id', component: EmployeeEstateDetailComponent, canActivate: [AuthGuard]},
   {path: 'employees-estate/update/:id', component: EmployeesEstateUpdateComponent, canActivate: [AuthGuard]},
 
- // employees vehicle
+  // employees vehicle
   {path: 'employees-vehicle', component: EmployeesVehicleComponent, canActivate: [AuthGuard]},
   {path: 'employees-vehicle/add/:idTercero', component: EmployeesVehicleAddComponent, canActivate: [AuthGuard]},
   // {path: 'employees-estate/detail/:id', component: EmployeeEstateDetailComponent, canActivate: [AuthGuard]},
@@ -215,6 +240,13 @@ const routes = [
   {path: 'ocupaciones', component: OcupacionesComponent, canActivate: [AuthGuard]},
   {path: 'actividadeconomica', component: ActividadEconomicaComponent, canActivate: [AuthGuard]},
 
+//  Cargos Productividad
+  {path: 'productivity/:idCargo', component: ProductivityComponent, canActivate: [AuthGuard]},
+
+
+  // cargos factores de riesgo
+  {path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [AuthGuard]},
+
 
 ];
 
@@ -224,5 +256,6 @@ const routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
 
