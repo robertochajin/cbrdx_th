@@ -313,7 +313,7 @@ export class SeedConfig {
   IP = '40.71.92.147';  //_CIBERDIX
   SVC_SP_PORT = '8447';
 
-  SVC_SP_URL = "http://" + this.IP+":"+this.SVC_SP_PORT;
+  SVC_SP_URL = 'http://' + this.IP+':'+this.SVC_SP_PORT;
 
   /**
    * Se definen la IP y el PUERTO con la cual la vista se conecta a los servicios Talento Humano
@@ -321,8 +321,8 @@ export class SeedConfig {
    */
   SVC_TH_PORT_D = '8444';
   SVC_TH_PORT = '8448';
-  SVC_TH_URL_D = "http://" + this.IP+":"+this.SVC_TH_PORT_D;
-  SVC_TH_URL = "http://" + this.IP+":"+this.SVC_TH_PORT;
+  SVC_TH_URL_D = 'http://' + this.IP+':'+this.SVC_TH_PORT_D;
+  SVC_TH_URL = 'http://' + this.IP+':'+this.SVC_TH_PORT;
 
   /**
    * The list of NPM dependcies to be injected in the `index.html`.
