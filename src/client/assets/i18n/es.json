@@ -39,7 +39,7 @@
   "MSG_CONFIRMACION":"Si continua perderá la información no guardada. ¿Está seguro que desea salir?",
   "MSG_GUARDADO":"Guardado",
   "MSG_REGISTRO":"Registro",
-  "MSG_NORECORDSFOUND":"Su búsqueda no obtuvo ningún resultado",
+  "MSG_NORECORDSFOUND":"u búsqueda no obtuvo ningún resultado",
 
 
 
@@ -92,7 +92,7 @@
      "LBL_CONSTANTE":"Constante",  
      "LBL_CONSTANTES":"Constantes",
      "LBL_TIPODATO":"Tipo Dato",
-     "LBL_DESCIPCION":"Descripción ",
+     "LBL_DESCRIPCION":"Descripción",
      "LBL_VALOR":"Valor",  
   "FIN_CONSTANTES":"=================================================================",
 
