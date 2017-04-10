@@ -392,7 +392,7 @@ export class SeedConfig {
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
       'traceur': 'node_modules/traceur/bin/traceur.js',
-      'ng2-translate': 'node_modules/ng2-translate/ng2-translate.js',
+      //'ng2-translate': 'node_modules/ng2-translate/ng2-translate.js',
       'primeng': '${this.APP_BASE}node_modules/primeng',
 
 

@@ -28,7 +28,7 @@ export class OcupacionesService {
         return this.http.post(this.serviceURL_SP, JSON.stringify(c), {headers: this.headers}).toPromise().then(res => res.json() as Ocupaciones).catch(this.handleError);
     };
 
-    updateOcupaciones(c: Ocupaciones): Promise<Ocupaciones> {
+    updateOcupaciones(c: Ocupaciones): Promise<any> {
         return this.http.put(this.serviceURL_SP, JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
     }
 
