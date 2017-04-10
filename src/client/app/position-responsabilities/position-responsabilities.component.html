@@ -1,0 +1,45 @@
+<div>
+  <div class="row datable-header">
+    <div>
+      <div class="container">
+        <h3>Editando responsabilidades del cargo</h3>
+      </div>
+      <form (ngSubmit)="d.valid && save(tr)" #d="ngForm" novalidate id="responsabilitiesForm">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-xs-12">
+              <label for="responsabilidad">* Responsabilidad</label>
+              <p-dropdown id="responsabilidad" name="responsabilidad"
+                          [options]="responsabilities" required #responsabilidad="ngModel"
+                          [autoWidth]="false" [(ngModel)]="tr.idResponsabilidad"></p-dropdown>
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !responsabilidad.valid">
+                <i class="fa fa-close"></i>
+                Responsabilidad
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <button class="ui-button ui-button-success btn" icon="fa-plus" pButton icon="fa-plus" type="submit"
+                      label="Guardar"></button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div>
+    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="positionResponsabilities" [paginator]="true"
+                 [rows]="10" [responsive]="true" [globalFilter]="gb">
+      <p-column field="responsabilidad" header="Responsabilidad" [sortable]="true"></p-column>
+      <p-column field="descripcion" header="Descripción" [sortable]="true"></p-column>
+      <p-column header="Acciones" styleClass="datatable-col-action">
+        <template let-positionResponsability="rowData" pTemplate="body">
+          <div class="btn-group" role="group" aria-label="...">
+            <button type="button" pButton class="ui-button ui-button-danger btn" icon="fa-trash"
+                    pButton (click)="del(positionResponsability)" ></button>
+          </div>
+        </template>
+      </p-column>
+    </p-dataTable>
+  </div>
+</div>
+<p-confirmDialog width="400"></p-confirmDialog>

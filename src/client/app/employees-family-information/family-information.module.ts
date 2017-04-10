@@ -10,13 +10,14 @@ import { FamilyInformationAddComponent }  from './family-information-add.compone
 import { FamilyInformationUpdateComponent }  from './family-information-update.component';
 import { FamilyInformationService } from './family-information.service';
 import { RelationTypeServices } from '../_services/relation-type.service';
+import {SharedModule} from "../shared/shared.module";
 import {LocationsModule} from "../locations/locations.module";
 
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule,ConfirmDialogModule,CheckboxModule,MessagesModule } from 'primeng/primeng';
 
 
 @NgModule({
-    imports:      [CommonModule,InputTextModule,FormsModule,ReactiveFormsModule, DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule, ConfirmDialogModule,CheckboxModule,MessagesModule,LocationsModule
+    imports:      [CommonModule,InputTextModule,FormsModule,ReactiveFormsModule, DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule, ConfirmDialogModule,CheckboxModule,MessagesModule,LocationsModule,SharedModule
 
                     ],
     declarations: [FamilyInformationComponent,

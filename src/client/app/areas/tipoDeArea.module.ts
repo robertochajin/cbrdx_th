@@ -7,6 +7,7 @@ import {TipoDeAreaComponent} from "./tipoDeArea.component";
 import {TipoDeAreaAddComponent} from "./tipoDeArea-add.component";
 import {TipoDeAreaEditComponent} from "./tipoDeArea-edit.component";
 import {TipoDeAreaDetailComponent} from "./tipoDeArea-detail.component";
+import {SharedModule} from "../shared/shared.module";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 
@@ -15,7 +16,7 @@ import 'rxjs/add/operator/switchMap';
  */
 
 @NgModule({
-    imports: [CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule, CalendarModule],
+    imports: [CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule, CalendarModule,SharedModule],
     declarations: [TipoDeAreaComponent, TipoDeAreaAddComponent, TipoDeAreaEditComponent, TipoDeAreaDetailComponent],
     bootstrap: [TipoDeAreaComponent],
     providers: [TipoDeAreaService],

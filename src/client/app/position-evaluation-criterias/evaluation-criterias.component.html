@@ -1,0 +1,112 @@
+<style type="text/css">
+  .ui-spinner {
+    width:60px;
+  }
+  .ui-spinner-input {
+    width:60px;
+  }
+</style>
+<div>
+  <div class="row datable-header">
+    <div class="col-md-6 col-xs-12 datatable-header-add" *ngIf="!editing">
+      <button type="button" pButton icon="fa-plus" (click)="editCriterias()"
+              label="Editar criterios de evaluación"></button>
+    </div>
+    <div *ngIf="editing">
+      <div class="container">
+        <h3>Editando criterios de evaluación</h3>
+        <p>La suma de factores para todos los críterios debe ser 100 para poder guardar</p>
+      </div>
+      <form (ngSubmit)="d.valid && oneHundred && savePositionCriterias()" #d="ngForm" novalidate id="criteriasForm">
+        <div class="container">
+          <div class="row"  *ngFor="let criteria of positionCriterias; let i = index">
+            <div class="col-md-2 col-xs-12">
+              <label for="evaluationCriteria{{i}}">* Criterio evaluacion</label>
+              <p-dropdown id="evaluationCriteria{{i}}" name="evaluationCriteria{{i}}"
+                          [options]="evaluationCriterias" required #criterio="ngModel"  (change)="sumFactors()"
+                          [autoWidth]="false" [(ngModel)]="criteria.idCriterio"></p-dropdown>
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !criterio.valid" >
+                <i class="fa fa-close"></i>
+                Criterio es requerido
+              </div>
+            </div>
+            <div class="col-md-3 col-xs-12">
+              <label for="descripcion{{i}}">Descripción</label>
+              <textarea id="descripcion{{i}}" name="descripcion{{i}}" pInputTextarea (change)="sumFactors()" rows="2" cols="35" #descripcion="ngModel"
+                        [(ngModel)]="criteria.descripcion" required></textarea>
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !descripcion.valid">
+                <i class="fa fa-close"></i>
+                Descripción es requerida
+              </div>
+            </div>
+            <div class="col-md-3 col-xs-12">
+              <label for="factor{{i}}">* Factor</label>
+              <p-spinner class="elspinner" id="factor{{i}}" name="factor{{i}}" #factor="ngModel"  maxlength="3" pattern="^[1-9][0-9]?$|^100$"
+                         [min]="0" [max]="100" (change)="sumFactors()"
+                         [(ngModel)]="criteria.factor" required></p-spinner>
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !factor.valid">
+                <i class="fa fa-close"></i>
+                Factor es requerido
+              </div>
+            </div>
+            <div class="col-md-3 col-xs-12">
+              <label for="meta{{i}}">* Meta</label>
+              <p-spinner id="meta{{i}}" name="meta{{i}}" #meta="ngModel" (change)="sumFactors()"
+                     [(ngModel)]="criteria.meta" required></p-spinner>
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !meta.valid">
+                <i class="fa fa-close"></i>
+                Meta es requerido
+              </div>
+            </div>
+            <div class="col-md-1 col-xs-12">
+              <button *ngIf="i == 0" pButton type="button" (click)="addCriteria()" label="+"></button>
+              <button *ngIf="i != 0" class="ui-button ui-button-danger btn" icon="fa-trash" pButton type="button"
+                      (click)="removeCriteria()"></button>
+            </div>
+          </div>
+          <div class="row">
+            <li>=>{{d.valid}}</li>
+            <div class="col-md-6 col-xs-12">
+              <div class="alert alert-success" [hidden]="!oneHundred && d.valid" role="alert">Perfecto!</div>
+              <div class="alert alert-warning" [hidden]="oneHundred" role="alert">Lo siento, debe sumar 100</div>
+            </div>
+            <div class="col-md-1 col-xs-12">
+              {{total}}%
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-4 col-xs-1">
+            </div>
+            <div class="col-md-1 col-xs-1">
+              <a (click)="goBack()" class="cancelar">Cancelar</a>
+            </div>
+            <div class="col-md-2 col-xs-1">
+              <button class="ui-button ui-button-success btn" icon="fa-plus" pButton icon="fa-plus" type="submit"
+                      label="Agregar"></button>
+            </div>
+            <div class="col-md-5 col-xs-1"></div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="!editing">
+    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="positionCriterias" [paginator]="true"
+                 [rows]="10" [responsive]="true" [globalFilter]="gb">
+      <p-column field="criterio" header="Criterio de desempeño" [sortable]="true"></p-column>
+      <p-column field="descripcion" header="Descripción" [sortable]="true"></p-column>
+      <p-column field="factor" header="Factor" [sortable]="true"></p-column>
+      <p-column field="meta" header="Meta" [sortable]="true"></p-column>
+      <p-column header="Acciones" styleClass="datatable-col-action">
+        <template let-positionCriteria="rowData" pTemplate="body">
+          <div class="btn-group" role="group" aria-label="...">
+            <button type="button" pButton class="ui-button ui-button-success btn" (click)="update(positionCriteria)"
+                    icon="fa-pencil"></button>
+          </div>
+        </template>
+      </p-column>
+    </p-dataTable>
+  </div>
+</div>
+<p-confirmDialog width="400"></p-confirmDialog>

@@ -4,6 +4,9 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../_services/authentication.service";
+import {LoginService} from "../_services/login.service";
+import {AppComponent} from "../app.component";
+
 @Component({
     moduleId: module.id,
     templateUrl: 'cambioContrasena.component.html',
@@ -19,12 +22,16 @@ export class CambioContrasenaComponent implements OnInit {
     displayDialog: boolean = false;
     error: string;
     notice: string;
-
-    constructor(private loginService: AuthenticationService, private router: Router) {
+    enviando: boolean = false;
+    constructor(private authenticationService: AuthenticationService,
+                private loginService: LoginService,
+                private router: Router,
+                private appmain: AppComponent,) {
     }
 
     ngOnInit(): void {
-
+      this.loginService.setSession(false);
+      this.appmain.setSession(false);
     }
 
     goBack() {
@@ -34,6 +41,7 @@ export class CambioContrasenaComponent implements OnInit {
     olvideUsuario() {
         this.usuario = "";
         this.recordarUsuario = true;
+        this.error = "";
     }
 
     regresarUsuario() {
@@ -41,19 +49,25 @@ export class CambioContrasenaComponent implements OnInit {
     }
 
     envioUsuario() {
-        this.loginService.forgetUser(this.correoElectronico);
+        this.enviando = true;
         this.displayDialog1 = false;
         this.recordarUsuario = false;
+        this.authenticationService.forgetUser(this.correoElectronico).then(res => {
+            this.enviando = false;
+        });
     }
-  
+
   envioContrasena() {
-    this.loginService.forgetPass(this.correoElectronico, this.usuario).then(res => {
+    this.enviando = true;
+    this.authenticationService.forgetPass(this.correoElectronico, this.usuario).then(res => {
       if (res) {
+        this.enviando = false;
         this.notice = "Se notifico al administrador del Sistema de su solicitud de cambio de contraseña";
       } else {
         this.notice = "Se envió un correo electronico con su nueva contraseña de acceso al sistema";
       }
     }, error => {
+      this.enviando = false;
       this.error = "El correo y/o el usuario no coinciden con lo registrado"
     });
     this.displayDialog = false;

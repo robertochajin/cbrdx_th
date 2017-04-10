@@ -7,7 +7,7 @@
             <label for="constante" class="control-label col-sm-3">Constante</label>
             <div class=" col-sm-9">
                 <input type="text" pInputText class="form-control" id="constante" name="constante" #constante="ngModel"
-                       [(ngModel)]="constant.constante" required maxlength="6" pattern="[A-Z]{0,6}"
+                       [(ngModel)]="constant.constante" required maxlength="6" pattern="[A-Z0-9]{0,6}"
                        (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
                        (paste)="inputCleanUp($event.target.value)">
                 <div *ngIf="codeExists" class="alert alert-danger">
@@ -40,8 +40,11 @@
             <label for="valor" class="control-label col-sm-3">Valor</label>
             <div class=" col-sm-9">
                 <input type="text" pInputText class="form-control" id="valor" name="valor" #valor="ngModel"
-                       [(ngModel)]="constant.valor" required maxlength="20" [pattern]="regex"
-                       [ngClass]="{ 'has-error': f.submitted && !valor.valid }">
+                       [(ngModel)]="constant.valor" required maxlength="512" [pattern]="regex"
+                       [ngClass]="{ 'has-error': f.submitted && !valor.valid }"
+                       (keyup)="inputValue()"
+                       (paste)="inputValue()"
+                >
                 <div *ngIf="f.submitted&&!valor.valid" class="alert alert-danger">
                     <div [hidden]="!valor.errors.required">Debe ingresar un valor para la Constante</div>
                     <div [hidden]="!valor.errors.maxlength">El valor no debe tener mas de 20 caracteres.</div>

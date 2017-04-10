@@ -75,7 +75,7 @@
           </div>
         </div>
     </div>
-    <p-dataTable [value]="contacts" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="contacts" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
         <p-column field="contacto" header="Nombre Contacto" [sortable]="true"></p-column>
         <p-column field="nombreListaParentesco" header="Parentesco" [sortable]="true"></p-column>
         <p-column field="telefono" header="Teléfono" [sortable]="true"></p-column>

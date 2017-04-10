@@ -41,6 +41,7 @@
                                     <input type="text" pInputText class="form-control" id="codigoOcupacion"
                                            name="codigoOcupacion" [(ngModel)]="ocupaciones.codigoOcupacion"
                                            (change)="validateCode()"
+                                           (keyup)="capitalizeCodigo()"
                                            #codigoOcupacion="ngModel" [maxlength]="tabselected"
                                            [minlength]="tabselected" required>
                                     <div *ngIf="f.submitted && !codigoOcupacion.valid" class="ui-message  ui-corner-all">
@@ -60,6 +61,7 @@
                                 <div class=" col-sm-9">
                                     <textarea pInputTextarea class="form-control" id="ocupacion" name="ocupacion"
                                               required [(ngModel)]="ocupaciones.ocupacion" #ocupacion="ngModel"
+                                              (keyup)="capitalizeName()"
                                     ></textarea>
                                     <div *ngIf="f.submitted && !ocupacion.valid" class="ui-message  ui-corner-all">
                                         {{labelfieldocupacion}} es requerido

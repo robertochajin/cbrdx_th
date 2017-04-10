@@ -14,7 +14,7 @@
 
                   <h3 class="text-center">{{ 'LBL_RECUPERACUENTA' | translate:param }}</h3>
 
-                  <form #f="ngForm" (ngSubmit)="f.valid&&doPost();" novalidate class="form-signin">
+                  <form #f="ngForm" (ngSubmit)="f.valid&&doPost();" novalidate class="form-signin" *ngIf="!enviando">
 
                       <div class="form-group">
                           <label for="correo">{{ 'LBL_CORREOELECTRONICO' | translate:param }}</label>
@@ -70,7 +70,11 @@
                           <a (click)="regresarUsuario()" class="regresar" *ngIf="recordarUsuario">{{ 'BTN_REGRESAR' | translate:param }}</a>
                           <button *ngIf="!recordarUsuario" pButton type="submit"
                                   label="{{ 'BTN_ACEPTAR' | translate:param }}"></button>
+                          <button *ngIf="recordarUsuario" pButton type="submit"
+                                  label="{{ 'BTN_ACEPTAR' | translate:param }}"></button>
+
                       </div>
+
                       <div *ngIf="error" class="alert alert-danger">{{error}}</div>
                       <div *ngIf="notice" class="alert alert-info">{{notice}}</div>
                   </form>
