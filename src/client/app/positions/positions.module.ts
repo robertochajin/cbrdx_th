@@ -8,11 +8,13 @@ import { PositionsService } from "../_services/positions.service";
 import { ListPositionsService } from "../_services/lists-positions.service";
 import { PoliticalDivisionService } from "../_services/political-division.service";
 import { NavService } from "../_services/_nav.service";
+import { SharedModule } from "../shared/shared.module";
 import { FormSharedModule } from "../shared/form-shared.module";
 
 @NgModule( {
               imports: [
-                 FormSharedModule,
+                 SharedModule,
+                 FormSharedModule
               ],
    
               declarations: [

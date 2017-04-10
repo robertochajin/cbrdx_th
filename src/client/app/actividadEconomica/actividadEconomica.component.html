@@ -77,7 +77,8 @@
                                 <div class=" col-sm-9">
                                     <textarea pInputTextarea class="form-control" id="aEconomica" name="aEconomica"
                                               [(ngModel)]="actividadEconomica.actividadEconomica" #aEconomica="ngModel"
-                                              [required]="true"></textarea>
+                                              [required]="true" (keyup)="capitalizeName()"
+                                    ></textarea>
                                     <div *ngIf="f.submitted && !aEconomica.valid"
                                          class="ui-message  ui-corner-all">
                                         {{labelfieldactividad}} es requerido

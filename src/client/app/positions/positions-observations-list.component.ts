@@ -32,7 +32,7 @@ export class PositionsObservationsListComponent {
    
    ngOnInit() {
      
-      this.positionsService.getObservations( this.position.idCargo ).subscribe(
+      this.positionsService.getObservationsbyPosition( this.position.idCargo ).subscribe(
          observations => this.observations = observations
       );
       
@@ -46,7 +46,7 @@ export class PositionsObservationsListComponent {
          this.positionsService.addObservations( this.observation )
          .subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
-            this.positionsService.getObservations( this.position.idCargo ).subscribe(
+            this.positionsService.getObservationsbyPosition( this.position.idCargo ).subscribe(
                observations => this.observations = observations
             );
          }, error => {
@@ -57,7 +57,7 @@ export class PositionsObservationsListComponent {
          this.positionsService.updateObservations( this.observation )
          .subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
-            this.positionsService.getObservations( this.position.idCargo ).subscribe(
+            this.positionsService.getObservationsbyPosition( this.position.idCargo ).subscribe(
                observations => this.observations = observations
             );
          }, error => {

@@ -1,12 +1,13 @@
 import "rxjs/add/operator/switchMap";
-import { Component, Input } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { Location } from "@angular/common";
-import { Positions } from "../_models/positions";
-import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
-import { NavService } from "../_services/_nav.service";
-import { PositionsService } from "../_services/positions.service";
-import { ListPositionsService } from "../_services/lists-positions.service";
+import { Component, Input, OnInit} from '@angular/core';
+import { ActivatedRoute, Router, Params } from '@angular/router'
+import { Location } from '@angular/common';
+import { Positions } from '../_models/positions';
+import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
+import { NavService } from '../_services/_nav.service';
+import { PositionsService } from '../_services/positions.service';
+import { ListPositionsService } from '../_services/lists-positions.service';
+import { TipoDeAreaService } from '../_services/tipoDeArea.service';
 
 @Component( {
                moduleId: module.id,
@@ -14,11 +15,12 @@ import { ListPositionsService } from "../_services/lists-positions.service";
                templateUrl: 'positions-form.component.html',
                providers: [ ConfirmationService ]
             } )
-export class PositionsUpdateComponent {
+export class PositionsUpdateComponent implements OnInit{
    @Input()
    position: Positions = new Positions();
    acordion: number;
    categoryTypes: SelectItem[] = [];
+   areaTypes: SelectItem[] = [];
    bossPositionTypes: SelectItem[] = [];
    stateTypes: SelectItem[] = [];
    levelTypes: SelectItem[] = [];
@@ -30,6 +32,7 @@ export class PositionsUpdateComponent {
                 private route: ActivatedRoute,
                 private location: Location,
                 private listPositionsService: ListPositionsService,
+                private tipoDeAreaService: TipoDeAreaService,
                 private confirmationService: ConfirmationService,
                 private _nav: NavService, ) {
       
@@ -42,14 +45,13 @@ export class PositionsUpdateComponent {
                                      } );
          }
       } );
-      
-      this.positionsService.getAll().subscribe( res => {
-         this.bossPositionTypes.push( { label: "Seleccione", value: null } );
+      this.tipoDeAreaService.getlistAreas().subscribe( res => {
+         this.areaTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
-            this.bossPositionTypes.push( {
-                                            label: dp.nombre,
-                                            value: dp.idCargo
-                                         } );
+            this.areaTypes.push( {
+                                    label: dp.estructuraArea,
+                                    value: dp.idEstructuraArea
+                                 } );
          }
       } );
       
@@ -57,8 +59,8 @@ export class PositionsUpdateComponent {
          this.stateTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
             this.stateTypes.push( {
-                                     label: dp.observacion,
-                                     value: dp.idEstadoCargo
+                                     label: dp.nombre,
+                                     value: dp.idListaEstadoCargo
                                   } );
          }
       } );
@@ -76,13 +78,36 @@ export class PositionsUpdateComponent {
    }
    
    ngOnInit() {
+   
+      this.route.params.subscribe( ( params: Params ) => {
+         this.positionsService.get( +params[ 'id' ] ).subscribe( position => {
+            this.position = position;
+            this.positionsService.getListPositions().subscribe( res => {
+               this.bossPositionTypes.push( { label: "Seleccione", value: null } );
+               for ( let dp of res ) {
+                  if ( res.idCargo != this.position.idCargo ) {
+                     this.bossPositionTypes.push( {
+                                                     label: dp.cargo,
+                                                     value: dp.idCargo
+                                                  } );
+                  }
+               }
+            } );
+         } );
+      } );
       
-      /* this.route.params.subscribe((params: Params) => {
-       this.positionsService.get(+params['id']).subscribe(position => {
-       this.position = position;
-       });
-       });*/
       this.acordion = this._nav.getTab();
+   }
+   
+   onSubmit0() {
+      this.msgs = [];
+      this.positionsService.update( this.position )
+      .subscribe( data => {
+         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         //this.router.navigate(['positions/update/'+data.idCargo]);
+      }, error => {
+         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+      } );
    }
    
    goBack(): void {

@@ -20,12 +20,12 @@ export class ListPositionsService {
       return this.http.get( this.serviceURL + "categorias/", { headers: this.headers } ).map( ( res: Response ) => res.json() );
    }
    
-   /*getBossPositionTypes() {
-      return this.http.get( this.serviceURL + "tiposDocumentos/", { headers: this.headers } ).map( ( res: Response ) => res.json() );
-   }*/
-   
    getstateTypes() {
-      return this.http.get( this.serviceURL + "cargosEstadosObservaciones/", { headers: this.headers } ).map( ( res: Response ) => res.json() );
+      return this.http.get( this.serviceURL + "listasEstadosCargos/", { headers: this.headers } ).map( ( res: Response ) => res.json() );
+   }
+   
+   getstateByCode(val:string) {
+      return this.http.get( this.serviceURL + "listasEstadosCargos/codigo/"+val+"/", { headers: this.headers } ).map( ( res: Response ) => res.json() );
    }
    
    getLevelTypes() {

@@ -7,7 +7,7 @@
                <div *ngIf="position">
                   <div class="row-fluid">
                      <div class="col-md-12">
-                        <form name="formulario" (ngSubmit)="f1.valid && onSubmit()" #f1="ngForm" novalidate>
+                        <form name="formulario" (ngSubmit)="f0.valid && onSubmit0()" #f0="ngForm" novalidate>
                            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                               <div class="row">
                                  <div class="form-group col-md-3">
@@ -16,7 +16,7 @@
                                            [(ngModel)]="position.codigoCargo" #codigo="ngModel"
                                            required/>
                                     <div class="ui-message ui-messages-error ui-corner-all"
-                                         *ngIf="f1.submitted && !codigo.valid">
+                                         *ngIf="f0.submitted && !codigo.valid">
                                        <i class="fa fa-close"></i>
                                        Código es requerido
                                     </div>
@@ -27,51 +27,51 @@
                                            [(ngModel)]="position.cargo" #nombre="ngModel"
                                            required/>
                                     <div class="ui-message ui-messages-error ui-corner-all"
-                                         *ngIf="f1.submitted && !nombre.valid">
+                                         *ngIf="f0.submitted && !nombre.valid">
                                        <i class="fa fa-close"></i>
                                        Nombre es requerida
                                     </div>
                                  </div>
                               </div>
                               <div class="row">
-                                 <div class="form-group col-md-3">
-                                    <label for="idCategoria">Area</label>
-                                    <p-dropdown id="idCategoria" name="idCategoria" required="true"
-                                                [options]="categoryTypes" [autoWidth]="false"
-                                                [(ngModel)]="position.idCategoria"
-                                                #idCategoria="ngModel"
+                                 <div class="form-group col-md-6">
+                                    <label for="idEstructuraArea">Area</label>
+                                    <p-dropdown id="idEstructuraArea" name="idEstructuraArea" required="true"
+                                                [options]="areaTypes" [autoWidth]="false"
+                                                [(ngModel)]="position.idEstructuraArea"
+                                                #idEstructuraArea="ngModel"
                                     ></p-dropdown>
                                     <div class="ui-message ui-messages-error ui-corner-all"
-                                         *ngIf="f1.submitted && !idCategoria.valid">
+                                         *ngIf="f0.submitted && !idEstructuraArea.valid">
                                        <i class="fa fa-close"></i>
                                        Lateralidad requerida
                                     </div>
                                  </div>
-                                 <div class="form-group col-md-9">
+                                 <div class="form-group col-md-6">
                                     <label for="personaACargoDir">Personas a cargo Directas</label>
-                                    <input type="text" pInputText id="personaACargoDir" name="personaACargoDir"
-                                           [(ngModel)]="position.personaACargoDir" #personaACargoDir="ngModel"
+                                    <input type="text" pInputText id="personaACargoDir" name="personaACargoDir" type="number"
+                                           [(ngModel)]="position.personaACargoDir" #personaACargoDir="ngModel" type="number"
                                     />
                                  </div>
                               </div>
                               <div class="row">
-                                 <div class="form-group col-md-3">
+                                 <div class="form-group col-md-6">
                                     <label for="idCargoJefe">Cargo que depende</label>
                                     <p-dropdown id="idCargoJefe" name="idCargoJefe" required="true"
                                                 [options]="bossPositionTypes" [autoWidth]="false"
                                                 [(ngModel)]="position.idCargoJefe"
-                                                #idCategoria="ngModel"
+                                                #idCargoJefe="ngModel"
                                     ></p-dropdown>
-                                    <div class="ui-message ui-messages-error ui-corner-all"
-                                         *ngIf="f1.submitted && !idCargoJefe.valid">
+                                    <!--<div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f0.submitted && !idCargoJefe.valid">
                                        <i class="fa fa-close"></i>
                                        Cargo que depende es requerida
-                                    </div>
+                                    </div>-->
                                  </div>
-                                 <div class="form-group col-md-9">
+                                 <div class="form-group col-md-6">
                                     <label for="personaACargoInd">Personas a cargo Indirectas</label>
                                     <input type="text" pInputText id="personaACargoInd" name="personaACargoInd"
-                                           [(ngModel)]="position.personaACargoInd" #personaACargoInd="ngModel"
+                                           [(ngModel)]="position.personaACargoInd" #personaACargoInd="ngModel" type="number"
                                     />
                                  </div>
                               </div>
@@ -81,31 +81,31 @@
                                     <textarea pInputTextarea id="mision" name="mision"
                                               [(ngModel)]="position.mision" #mision="ngModel"
                                               [required]="true"></textarea>
-                                    <div *ngIf="f1.submitted && !mision.valid"
+                                    <div *ngIf="f0.submitted && !mision.valid"
                                          class="ui-message  ui-corner-all">
                                        Misión del cargo es requerido
                                     </div>
                                  </div>
                               </div>
-                              <div class="row">
+                              <div class="row" *ngIf="position.idCargo">
                                  <div class="form-group col-md-6">
                                     <label for="idEstado">Estado</label>
-                                    <p-dropdown id="idEstado" name="idEstado" required="true"
+                                    <p-dropdown id="idEstado" name="idEstado"
                                                 [options]="stateTypes" [autoWidth]="false"
                                                 [(ngModel)]="position.idEstado"
                                                 #idEstado="ngModel"
                                     ></p-dropdown>
-                                    <div class="ui-message ui-messages-error ui-corner-all"
-                                         *ngIf="f1.submitted && !idEstado.valid">
+                                    <!--disabled="true"<div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f0.submitted && !idEstado.valid">
                                        <i class="fa fa-close"></i>
                                        Estado es requerida
-                                    </div>
+                                    </div>-->
                                  </div>
                                  <div class="form-group col-md-6">
                                     <label for="indicador" class="control-label col-sm-3">Habilitado</label>
                                     <div class=" col-sm-9">
                                        <p-checkbox binary="true" id="indicador" name="indicador"
-                                                   [(ngModel)]="position.indicadorHabilitado"
+                                                   [(ngModel)]="position.indicadorHabilitado" disabled="true"
                                                    #indicador="ngModel"></p-checkbox>
                                     </div>
                                  </div>
@@ -121,7 +121,7 @@
                      </div>
                   </div>
                </div>
-               <positions-observations-list *ngIf="position" [position]="position"></positions-observations-list>
+               <positions-observations-list *ngIf="position.idCargo" [position]="position"></positions-observations-list>
             
             </fieldset>
          </p-accordionTab>
@@ -138,7 +138,7 @@
                <div *ngIf="position">
                   <div class="row-fluid">
                      <div class="col-md-12">
-                        <form name="formulario" (ngSubmit)="f2.valid && onSubmit()" #f1="ngForm" novalidate>
+                        <form name="formulario" (ngSubmit)="f2.valid && onSubmit()" #f2="ngForm" novalidate>
                            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                      
                               <div class="row">
@@ -188,12 +188,44 @@
                          [disabled]="disableTabs">
          </p-accordionTab>
          
-         <p-accordionTab header="Responsabilidades complemenarias" [selected]="acordion == 5"
-                         [disabled]="disableTabs">
+         <p-accordionTab header="Responsabilidades complemenarias" [selected]="acordion == 5"  [disabled]="disableTabs">
+            <fieldset>
+               <div *ngIf="position">
+                  <div class="row-fluid">
+                     <div class="col-md-12">
+                        <form name="formulario" (ngSubmit)="f5.valid && onSubmit()" #f5="ngForm" novalidate>
+                           <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                     
+                              <div class="row">
+                                 <div class=" col-sm-12">
+                                    <label for="responsabilidadesAd">Responsabilidades Complementarias</label>
+                                    <textarea pInputTextarea id="responsabilidadesAd"
+                                              name="responsabilidadesAd"
+                                              [(ngModel)]="position.responsabilidadesAd"
+                                              #responsabilidadesAd="ngModel"
+                                              [required]="true"></textarea>
+                                    <div *ngIf="f5.submitted && !responsabilidadesAd.valid"
+                                         class="ui-message  ui-corner-all">
+                                       Responsabilidades complentarias es requerido
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row form-footer-buttons">
+                              <div class="form-group col-md-12">
+                                 <button icon="fa-plus" label="Guardar" type="submit"
+                                         pButton></button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+   
+            </fieldset>
          </p-accordionTab>
          
-         <p-accordionTab header="Posición en caso de ausencia" [selected]="acordion == 6"
-                         [disabled]="disableTabs">
+         <p-accordionTab header="Posición en caso de ausencia" [selected]="acordion == 6" [disabled]="disableTabs">
          </p-accordionTab>
          
          <p-accordionTab header="Autoridades" [selected]="acordion == 7" [disabled]="disableTabs">
@@ -215,7 +247,7 @@
                                               [(ngModel)]="position.conocimientosBasicos"
                                               #conocimientosBasicos="ngModel"
                                               [required]="true"></textarea>
-                                    <div *ngIf="f2.submitted && !conocimientosBasicos.valid"
+                                    <div *ngIf="f8.submitted && !conocimientosBasicos.valid"
                                          class="ui-message  ui-corner-all">
                                        Conocimientos basicos es requerido
                                     </div>
@@ -291,8 +323,7 @@
                          [disabled]="disableTabs">
          </p-accordionTab>
    
-         <p-accordionTab header="Responsabilidades sobre activos de la compañia" [selected]="acordion == 10"
-                         [disabled]="disableTabs">
+         <p-accordionTab header="Responsabilidades sobre activos de la compañia" [selected]="acordion == 10" [disabled]="disableTabs">
             <fieldset>
                <div *ngIf="position">
                   <div class="row-fluid">
@@ -406,7 +437,7 @@
                                                 #idCategoria="ngModel"
                                     ></p-dropdown>
                                     <div class="ui-message ui-messages-error ui-corner-all"
-                                         *ngIf="f1.submitted && !idCategory.valid">
+                                         *ngIf="f14.submitted && !idCategory.valid">
                                        <i class="fa fa-close"></i>
                                        Categoria requerida
                                     </div>
@@ -418,41 +449,6 @@
                                     <input type="text" pInputText id="salario" name="salario"
                                            [(ngModel)]="position.salario" #salario="ngModel"
                                     />
-                                 </div>
-                              </div>
-                              <div class="row">
-                                 <div class=" col-sm-12">
-                                    <label for="mision">Misión del cargo</label>
-                                    <textarea pInputTextarea id="mision" name="mision"
-                                              [(ngModel)]="position.mision" #mision="ngModel"
-                                              [required]="true"></textarea>
-                                    <div *ngIf="f1.submitted && !mision.valid"
-                                         class="ui-message  ui-corner-all">
-                                       Misión del cargo es requerido
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="row">
-                                 <div class="form-group col-md-6">
-                                    <label for="idEstado">Estado</label>
-                                    <p-dropdown id="idEstado" name="idEstado" required="true"
-                                                [options]="stateTypes" [autoWidth]="false"
-                                                [(ngModel)]="position.idEstado"
-                                                #idEstado="ngModel"
-                                    ></p-dropdown>
-                                    <div class="ui-message ui-messages-error ui-corner-all"
-                                         *ngIf="f1.submitted && !idEstado.valid">
-                                       <i class="fa fa-close"></i>
-                                       Estado es requerida
-                                    </div>
-                                 </div>
-                                 <div class="form-group col-md-6">
-                                    <label for="indicador" class="control-label col-sm-3">Habilitado</label>
-                                    <div class=" col-sm-9">
-                                       <p-checkbox binary="true" id="indicador" name="indicador"
-                                                   [(ngModel)]="position.indicadorHabilitado"
-                                                   #indicador="ngModel"></p-checkbox>
-                                    </div>
                                  </div>
                               </div>
                            </div>

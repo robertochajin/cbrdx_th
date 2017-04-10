@@ -18,9 +18,7 @@ export class Positions {
     public salario: number;
     public interrelacionesInternas: string;
     public interrelacionesExternas: string;
-    public responsabilidadesElementos: string;
-    public responsabilidadesImprementos: string;
-    public responsabilidadesOtros: string;
+    public responsabilidadesAd: string;
     public tomaDecisiones: string;
     public actividadesSupervisa: string;
     public nivelEducacion: string;
@@ -38,10 +36,43 @@ export class Positions {
     public edad: number;
     public auditoriaUsuario: number;
     public auditoriaFecha: Date;
+    public idListaEstadoCargo: number;
+    public step: number;
     
     constructor() {
-        this.codigoCargo = '';
-        this.cargo = '';
-        this.indicadorHabilitado = true;
+       this.idCargo = null;
+       this.cargo = null;
+       this.auditoriaUsuario = null;
+       this.auditoriaFecha = null;
+       this.personaACargoDir = null;
+       this.personaACargoInd = null;
+       this.idCargoJefe = null;
+       this.cargoJefe = "";
+       this.mision = "";
+       this.puntos = null;
+       this.idCategoria = null;
+       this.categoria = "";
+       this.salario = null;
+       this.indicadorRequiereFormacion = true;
+       this.indicadorHabilitado = false;
+       this.interrelacionesInternas = "";
+       this.interrelacionesExternas = "";
+       this.responsabilidadesAd = "";
+       this.tomaDecisiones = null;
+       this.actividadesSupervisa = null;
+       this.idNivelEducacion = null;
+       this.nivelEducacion = null;
+       this.conocimientosBasicos = null;
+       this.tiempoExperiencia = null;
+       this.otrosRequisitos = null;
+       this.edad = null;
+       this.cargaFisica = "";
+       this.cargaMental = "";
+       this.nivelPsicoSocial = null;
+       this.codigoCargo = "";
+       this.idEstructuraArea = null;
+       this.estructuraArea = "";
+       this.idListaEstadoCargo = null;
+       this.step = 1;
     }
 }
