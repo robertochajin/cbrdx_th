@@ -8,7 +8,7 @@
             <div class=" col-sm-9">
                 <input type="text" pInputText class="form-control" id="codigoGrupoGestion" name="codigoGrupoGestion"
                        #codigoGrupoGestion="ngModel"
-                       [(ngModel)]="grupoGestion.codigoGrupoGestion" required maxlength="10" pattern="[A-Z]{0,10}"
+                       [(ngModel)]="grupoGestion.codigoGrupoGestion" required maxlength="10" pattern="[A-Z0-9]{0,10}"
                        (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
                        (paste)="inputCleanUp($event.target.value)">
                 <div *ngIf="codeExists" class="alert alert-danger">

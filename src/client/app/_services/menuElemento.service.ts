@@ -24,7 +24,7 @@ export class MenuElementoService {
         return this.http.post(this.serviceURL, JSON.stringify(c), {headers: this.headers}).toPromise().then(res => res.json() as MenuElemento).catch(this.handleError);
     };
 
-    updateMenuElemento(c: MenuElemento): Promise<MenuElemento> {
+    updateMenuElemento(c: MenuElemento): Promise<any> {
         return this.http.put(this.serviceURL, JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
     }
 

@@ -41,7 +41,7 @@
         <header>Listas</header>
         <p-column field="codigoItem" header="Código"></p-column>
         <p-column field="item" header="Item"></p-column>
-        <p-column field="descripcion" header="Descripcion"></p-column>
+        <p-column field="descripcion" header="{{ 'LBL_DESCRIPCION' | translate }}"></p-column>
         <p-column field="indicadorPredeterminado" header="Predeterminado">
             <template let-const="rowData" pTemplate="body">
                 <p-checkbox [(ngModel)]="const.indicadorPredeterminado" binary="true" disabled="true"></p-checkbox>
