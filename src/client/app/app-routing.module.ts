@@ -117,6 +117,7 @@ import {PositionsAddComponent} from "./positions/positions-add.component";
 import {PositionsUpdateComponent} from "./positions/positions-update.component";
 import {EvaluationCriteriasComponent} from "./position-evaluation-criterias/evaluation-criterias.component";
 import {PositionResponsabilitiesComponent} from "./position-responsabilities/position-responsabilities.component";
+import {PositionRolesComponent} from "./position-roles/position-roles.component";
 
 
 const routes = [
@@ -225,6 +226,7 @@ const routes = [
   // Temporales
   {path: 'criterios', component: EvaluationCriteriasComponent, canActivate: [AuthGuard]},
   {path: 'responsabilidades', component: PositionResponsabilitiesComponent, canActivate: [AuthGuard]},
+  {path: 'cargosroles', component: PositionRolesComponent, canActivate: [AuthGuard]},
 
   // Arboles
   {path: 'divisionPolitica', component: DivisionPoliticaComponent, canActivate: [AuthGuard]},

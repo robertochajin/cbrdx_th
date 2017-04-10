@@ -42,6 +42,7 @@ import {ActividadEconomicaModule} from "./actividadEconomica/actividadEconomica.
 import {ClinicalInformationModule} from "./employees-clinical-information/clinical-information.module";
 import {EvaluationCriteriasModule} from "./position-evaluation-criterias/evaluation-criterias.module";
 import {PositionResponsabilitiesModule} from "./position-responsabilities/position-responsabilities.module";
+import {PositionRolesModule} from "./position-roles/position-roles.module";
 
 
 //CarsModule,
@@ -61,6 +62,7 @@ import {PositionResponsabilitiesModule} from "./position-responsabilities/positi
     DashboardModule,
     EvaluationCriteriasModule,
     PositionResponsabilitiesModule,
+    PositionRolesModule,
     SharedModule.forRoot(),
     TranslateModule.forRoot({
       provide: TranslateLoader,
