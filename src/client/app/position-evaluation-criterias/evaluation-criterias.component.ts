@@ -4,6 +4,8 @@ import {ConfirmationService} from 'primeng/primeng';
 import * as moment from 'moment/moment';
 import {PositionCriterias} from "../_models/positionCriterias";
 import {EvaluationCriterias} from "../_models/evaluationCriterias";
+import {PositionCriteriasService} from "../_services/position-criterias.service";
+import {Positions} from "../_models/positions";
 
 @Component({
   moduleId: module.id,
@@ -13,6 +15,8 @@ import {EvaluationCriterias} from "../_models/evaluationCriterias";
 })
 export class EvaluationCriteriasComponent {
 
+   @Input()
+   position: Positions;
   editing: boolean = false;
   positionCriterias: PositionCriterias[] = [];
   //criteria: PositionCriterias = new PositionCriterias();
@@ -21,10 +25,15 @@ export class EvaluationCriteriasComponent {
   total: number = 0;
 
   constructor(private router: Router,
+              private positionCriteriasService: PositionCriteriasService,
               private confirmationService: ConfirmationService) {
   }
 
   ngOnInit() {
+     // provisional
+     this.position = new Positions();
+     this.position.idCargo = 10;
+     // fin provisional
     this.evaluationCriterias.push({
       idCriterio: 1,
       criterio: 1,
@@ -62,45 +71,12 @@ export class EvaluationCriteriasComponent {
       value: 3
     });
 
-    this.positionCriterias.push({
-        idCargosCriterios : 1,
-        idCriterio : 1,
-        idCargo : 1,
-        criterio : "",
-        descripcion : "",
-        meta : 1,
-        indicadorHabilitado : true,
-        auditoriaUsuario : 1,
-        auditoriaFecha : "",
-        factor : 34
-    });
-    this.positionCriterias.push({
-        idCargosCriterios : 1,
-        idCriterio : 1,
-        idCargo : 1,
-        criterio : "",
-        descripcion : "",
-        meta : 1,
-        indicadorHabilitado : true,
-        auditoriaUsuario : 1,
-        auditoriaFecha : "",
-        factor : 33
-    });
-    this.positionCriterias.push({
-        idCargosCriterios : 1,
-        idCriterio : 1,
-        idCargo : 1,
-        criterio : "",
-        descripcion : "",
-        meta : 1,
-        indicadorHabilitado : true,
-        auditoriaUsuario : 1,
-        auditoriaFecha : "",
-        factor : 33
-    });
+    this.positionCriteriasService.getAllByPosition(this.position.idCargo).subscribe();
   }
 
   savePositionCriterias() {
+
+     console.log(JSON.stringify(this.positionCriterias));
     this.editing = false;
   }
 

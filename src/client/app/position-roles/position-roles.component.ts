@@ -65,31 +65,4 @@ export class PositionRolesComponent {
       }
    }
 
-   save(pr: PositionRoles) {
-      pr.indicadorHabilitado = true;
-      pr.idCargo = this.position.idCargo;
-      this.positionRolesServices.add(pr).subscribe(res => {
-         if (res.idResponsabilidad) {
-            this.positionRolesServices.getAllByPosition(this.position.idCargo).subscribe(prs => {
-               this.positionRoles = prs;
-            });
-         }
-      });
-   }
-
-   del(r: PositionRoles) {
-      this.confirmationService.confirm({
-         message: ` ¿Esta seguro que desea eliminar?`,
-         header: 'Corfirmación',
-         icon: 'fa fa-question-circle',
-         accept: () => {
-            r.indicadorHabilitado = false;
-            this.positionRolesServices.update(r).subscribe(res => {
-
-            });
-         }, reject: () => {
-         }
-      });
-   }
-
 }
