@@ -8,6 +8,7 @@ import { NavService } from '../_services/_nav.service';
 import { PositionsService } from '../_services/positions.service';
 import { ListPositionsService } from '../_services/lists-positions.service';
 import { TipoDeAreaService } from '../_services/tipoDeArea.service';
+import { ListEmployeesService } from "../_services/lists-employees.service";
 
 @Component( {
                moduleId: module.id,
@@ -24,11 +25,13 @@ export class PositionsUpdateComponent implements OnInit{
    bossPositionTypes: SelectItem[] = [];
    stateTypes: SelectItem[] = [];
    levelTypes: SelectItem[] = [];
+   genderTypes: SelectItem[] = [];
+   maritalStatusTypes: SelectItem[] = [];
    disableTabs: boolean = false;
    msgs: Message[] = [];
    defaultState: any;
    aprobado:boolean = false;
-   step = 8;
+   step = 16;
    constructor( private positionsService: PositionsService,
                 private router: Router,
                 private route: ActivatedRoute,
@@ -36,6 +39,7 @@ export class PositionsUpdateComponent implements OnInit{
                 private listPositionsService: ListPositionsService,
                 private tipoDeAreaService: TipoDeAreaService,
                 private confirmationService: ConfirmationService,
+                private listEmployeesService: ListEmployeesService,
                 private _nav: NavService, ) {
       
       this.listPositionsService.getCategoryTypes().subscribe( res => {
@@ -79,6 +83,25 @@ export class PositionsUpdateComponent implements OnInit{
    
       this.listPositionsService.getstateByCode("APROB").subscribe( res => {
           this.defaultState = res;
+      });
+   
+      this.listEmployeesService.getGenderTypes().subscribe(res => {
+         this.genderTypes.push({label: "Seleccione", value: null});
+         for (let dp of res) {
+            this.genderTypes.push({
+                                     label: dp.nombreListaGenero,
+                                     value: dp.idListaGenero
+                                  });
+         }
+      });
+      this.listEmployeesService.getMaritalStatusTypes().subscribe(res => {
+         this.maritalStatusTypes.push({label: "Seleccione", value: null});
+         for (let dp of res) {
+            this.maritalStatusTypes.push({
+                                            label: dp.nombreListaEstadoCivil,
+                                            value: dp.idListaEstadoCivil
+                                         });
+         }
       });
    }
    
@@ -157,6 +180,21 @@ export class PositionsUpdateComponent implements OnInit{
       if(this.position.paso == 7){
          this.position.paso = 8;
          this.step = 8;
+      }
+      this.positionsService.update( this.position )
+      .subscribe( data => {
+         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         //this.router.navigate(['positions/update/'+data.idCargo]);
+      }, error => {
+         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+      } );
+   }
+   
+   onSubmit8() {
+      this.msgs = [];
+      if(this.position.paso == 8){
+         this.position.paso = 9;
+         this.step = 9;
       }
       this.positionsService.update( this.position )
       .subscribe( data => {
