@@ -1,0 +1,111 @@
+<div id="loginBg">
+
+</div>
+
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6 col-md-offset-3 ">
+
+              <div class="account-wall">
+
+                  <img id="imgLogin" class="img-responsive"
+                     src="./assets/images/logo_login_th.png" >
+
+
+                  <h3 class="text-center">{{ 'LBL_RECUPERACUENTA' | translate:param }}</h3>
+
+                  <form #f="ngForm" (ngSubmit)="f.valid&&doPost();" novalidate class="form-signin" *ngIf="!enviando">
+
+                      <div class="form-group">
+                          <label for="correo">{{ 'LBL_CORREOELECTRONICO' | translate:param }}</label>
+                          <div>
+                            <div class="input-group input-block-level">
+                              <span class="input-group-addon"> <i class="fa fa-envelope"></i> </span>
+                              <input type="text" pInputText class="form-control" id="correo" #correo="ngModel"
+                                     name="correo" [(ngModel)]="correoElectronico" required
+                                     pattern="[a-z0-9]+([-._]?[a-z0-9]+)+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"
+                                     (keyup)="emailCleanUp($event.target.value)"/>
+                              </div>
+                              <div *ngIf="f.submitted&&!correo.valid" class="alert alert-danger">
+                                  <div [hidden]="!correo.errors.required">
+                                       {{ 'MSG_CORREOREQUERIDO' | translate:param }}
+                                    </div>
+                                    <div [hidden]="!correo.errors.pattern">
+                                        {{ 'MSG_CORREOFORMATO' | translate:param }}
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+
+                      <div class="form-group" *ngIf="!recordarUsuario">
+                          <label for="uSistema" >{{ 'LBL_USUARIO' | translate:param }}</label>
+                          <div>
+                            <div class="input-group input-block-level">
+                              <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
+                              <input type="text" pInputText class="form-control" id="uSistema" [(ngModel)]="usuario"
+                                     required pattern="[a-z0-9]+([-._]?[a-z0-9]+)+" #uSistema="ngModel"
+                                     name="uSistema"
+                                     (keyup)="userCleanUp($event.target.value);"/>
+                              </div>
+                              <div *ngIf="f.submitted&&!uSistema.valid" class="alert alert-danger">
+                                  <div [hidden]="!uSistema.errors.required">
+                                     {{ 'MSG_USUARIOREQUERIDO' | translate:param }}
+                                    </div>
+                                    <div [hidden]="!uSistema.errors.pattern">
+                                        {{ 'MSG_USUARIOCONTENER' | translate:param }}
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                          <div class="text-center">
+                              <a (click)="olvideUsuario()" class="recordarUsuario" *ngIf="!recordarUsuario">{{ 'LBL_OLVIDE' | translate:param }} {{ 'LBL_USUARIO' | translate:param }}</a>
+                          </div>
+
+
+
+                      <div class="form-group text-center" style="margin-top:10px;">
+                          <a (click)="goBack()" class="cancelar" *ngIf="!recordarUsuario">{{ 'BTN_CANCELAR' | translate:param }}</a>
+                          <a (click)="regresarUsuario()" class="regresar" *ngIf="recordarUsuario">{{ 'BTN_REGRESAR' | translate:param }}</a>
+                          <button *ngIf="!recordarUsuario" pButton type="submit"
+                                  label="{{ 'BTN_ACEPTAR' | translate:param }}"></button>
+                          <button *ngIf="recordarUsuario" pButton type="submit"
+                                  label="{{ 'BTN_ACEPTAR' | translate:param }}"></button>
+
+                      </div>
+
+                      <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+                      <div *ngIf="notice" class="alert alert-info">{{notice}}</div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+
+<p-dialog header="{{ 'LBL_CONFIRMACION' | translate:param }}" [(visible)]="displayDialog"
+          responsive="true" modal="true">
+    <p>
+        {{ 'MSG_CONFIRMACIONDATOSCORRECTOS' | translate:param }}
+    </p>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="fa-close" (click)="goBack()" label="No"></button>
+            <button type="button" pButton icon="fa-check" (click)="envioContrasena()" label="Si"></button>
+        </div>
+    </p-footer>
+</p-dialog>
+
+
+<p-dialog header="{{ 'LBL_CONFIRMACION' | translate:param }}" [(visible)]="displayDialog1"
+          responsive="true" modal="true">
+    <p>
+        {{ 'MSG_CONFIRMACIONDATOSCORRECTOS' | translate:param }}
+    </p>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="fa-close" (click)="goBack()" label="No"></button>
+            <button type="button" pButton icon="fa-check" (click)="envioUsuario()" label="Si"></button>
+        </div>
+    </p-footer>
+</p-dialog>

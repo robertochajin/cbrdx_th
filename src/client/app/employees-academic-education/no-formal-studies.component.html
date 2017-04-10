@@ -1,0 +1,32 @@
+<h3 class="first">Educación no formal</h3>
+<div>
+    <div class="row datable-header">
+        <div class="col-md-6 col-xs-12 datatable-header-add">
+            <button type="button" pButton icon="fa-plus" (click)="add()" label="Nuevo Estudio"></button>
+        </div>
+        <div class="col-md-6 col-xs-12 datatable-header-search" >
+            <i class="fa fa-search"></i>
+            <input #gb type="text" pInputText size="40" placeholder="Buscar...">
+        </div>
+    </div>
+    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="nfstudies"  [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+        <p-column field="tituloEstudio" header="Título Obtenido" [sortable]="true"></p-column>
+        <p-column field="fechaIngresa" header="Ingreso " [sortable]="true"></p-column>
+        <p-column field="fechaTermina" header="Finalización" [sortable]="true"></p-column>
+        <p-column field="ciudad" header="Ciudad" [sortable]="true"></p-column>
+        <p-column field="institucion" header="Institución" [sortable]="true"></p-column>
+        <p-column header="Acciones" styleClass="datatable-col-action">
+            <template let-study="rowData" pTemplate="body">
+                <div class="btn-group" role="group">
+                    <button type="button"  class="ui-button btn" icon="fa-eye"
+                            pButton (click)="detail(study)"></button>
+                    <button type="button"  class="ui-button ui-button-success btn" icon="fa-pencil"
+                            pButton (click)="update(study)"></button>
+                    <button type="button"  class="ui-button ui-button-danger btn" icon="fa-trash"
+                            pButton (click)="delete(study)" ></button>
+                </div>
+            </template>
+        </p-column>
+    </p-dataTable>
+</div>
+<p-confirmDialog width="400"></p-confirmDialog>

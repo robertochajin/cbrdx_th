@@ -57,7 +57,8 @@
     "@types/gulp-protractor": "^1.0.29",
     "@types/gulp-sass": "^0.0.29",
     "@types/gulp-util": "^3.0.29",
-    "@types/jasmine": "^2.5.35",
+    "@types/jasmine": "2.2.29",
+    "@types/jquery": "^2.0.41",
     "@types/node": "^6.0.45",
     "@types/rimraf": "0.0.28",
     "@types/run-sequence": "^0.0.28",
@@ -115,8 +116,8 @@
     "remap-istanbul": "^0.8.4",
     "rimraf": "^2.5.4",
     "rollup": "^0.41.4",
-    "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-commonjs": "^7.0.0",
+    "rollup-plugin-node-resolve": "^2.0.0",
     "run-sequence": "^1.2.2",
     "semver": "^5.3.0",
     "serve-static": "^1.11.1",
@@ -145,9 +146,12 @@
     "font-awesome": "^4.7.0",
     "intl": "^1.2.5",
     "jquery": "^3.1.1",
-    "primeng": "^2.0.0-rc.1",
+    "moment": "^2.17.1",
+    "ng2-translate": "^5.0.0",
+    "primeng": "^2.0.5",
     "rxjs": "~5.0.3",
     "systemjs": "0.19.41",
+    "ng-recaptcha": "^2.0.0",
     "zone.js": "^0.7.2"
   }
 }

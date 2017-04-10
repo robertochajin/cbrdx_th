@@ -1,0 +1,122 @@
+<h3>Grupos de Gestión</h3>
+<div class="col-sm-6 col-sm-offset-3">
+    <h2 class="text-center">Editar Grupo de Gestión</h2>
+    <form class="form-horizontal" #f="ngForm" (ngSubmit)="isGreater&&!codeExists&&f.form.valid&&createGruposGestion()"
+          (keydown.enter)="$event.preventDefault()" novalidate>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !codigoGrupoGestion.valid }">
+            <label for="codigoGrupoGestion" class="control-label col-sm-3">Código </label>
+            <div class=" col-sm-9">
+                <input type="text" pInputText class="form-control" id="codigoGrupoGestion" name="codigoGrupoGestion"
+                       #codigoGrupoGestion="ngModel"
+                       [(ngModel)]="grupoGestion.codigoGrupoGestion" required maxlength="10" pattern="[A-Z0-9]{0,10}"
+                       (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
+                       (paste)="inputCleanUp($event.target.value)">
+                <div *ngIf="codeExists" class="alert alert-danger">
+                    Ya se encuentra registrado ese código
+                </div>
+                <div *ngIf="f.submitted&&!codigoGrupoGestion.valid" class="alert alert-danger">
+                    <div [hidden]="!codigoGrupoGestion.errors.required">Debe ingresar un codigo para el grupo de
+                        gestión
+                    </div>
+                    <div [hidden]="!codigoGrupoGestion.errors.maxlength">El código no debe tener mas de 10 caracteres.
+                    </div>
+                    <div [hidden]="!codigoGrupoGestion.errors.pattern">El código debe ser solo letras Mayusculas</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !gGestion.valid }">
+            <label for="gGestion" class="control-label col-sm-3">Nombre </label>
+            <div class=" col-sm-9">
+                <input type="text" pInputText class="form-control" id="gGestion" name="gGestion" #gGestion="ngModel"
+                       [(ngModel)]="grupoGestion.grupoGestion" required maxlength="64" pattern="[A-Z]{1}.*">
+                <div *ngIf="f.submitted&&!gGestion.valid" class="alert alert-danger">
+                    <div [hidden]="!gGestion.errors.required">Debe ingresar un nombre para el grupo de gestión</div>
+                    <div [hidden]="!gGestion.errors.maxlength">El código no debe tener mas de 64 caracteres.</div>
+                    <div [hidden]="!gGestion.errors.pattern">Debe comenzar por un caracter Mayuscula</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fechaInicio" class="control-label col-sm-3">Fecha Inicio</label>
+            <div class=" col-sm-8 form-inline">
+                <p-calendar id="fechaInicio" name="fechaInicio" [(ngModel)]="grupoGestion.fechaInicio" [showIcon]="true"
+                            dateFormat="yy-mm-dd" [minDate]="currentDate"
+                            readonlyInput="true" (onSelect)="isRequired=true;validateGreater();"></p-calendar>
+
+            </div>
+            <div [hidden]="!grupoGestion.fechaInicio" class="col-sm-1 pull-right">
+            <button pButton type="button" class="ui-button-danger"
+                    (click)="clearSelection()"
+                    icon="fa-close"></button>
+        </div>
+        </div>
+        <div class="form-group">
+            <label for="fechaFin" class="control-label col-sm-3">Fecha Fin</label>
+            <div class=" col-sm-9">
+                <p-calendar id="fechaFin" name="fechaFin" [(ngModel)]="grupoGestion.fechaFin"
+                            [showIcon]="true" dateFormat="yy-mm-dd" [minDate]="grupoGestion.fechaInicio"
+                            [required]="isRequired" [disabled]="!isRequired" (onSelect)="validateGreater();"
+                            readonlyInput="true" #fechaFin="ngModel"></p-calendar>
+                <div *ngIf="f.submitted&&!isGreater" class="alert alert-danger">La fecha Final debe ser mayor que la
+                    Inicial
+                </div>
+                <div *ngIf="f.submitted&&isRequired&&grupoGestion.fechaFin==null" class="alert alert-danger">Debe
+                    seleccionar una fecha final
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="funciones" class="control-label col-sm-3">Funciones </label>
+            <div class=" col-sm-9">
+                <textarea pInputTextarea class="form-control" id="funciones" name="funciones"
+                          #funciones="ngModel" required autoResize="autoResize"
+                          (keydown.enter)="$event.initEvent('enterKey');"
+                          [(ngModel)]="grupoGestion.funciones" maxlength="500"></textarea>
+                <div *ngIf="f.submitted&&!funciones.valid"
+                     class="alert alert-danger">
+                    <div [hidden]="!funciones.errors.required">Debe ingresar una funcion del grupo de gestión</div>
+                    <div [hidden]="!funciones.errors.maxlength">La descripción de las funciones no debe tener mas de 500
+                        caracteres.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="responsabilidades" class="control-label col-sm-3">Responsabilidades</label>
+            <div class=" col-sm-9">
+                <textarea pInputTextarea class="form-control" id="responsabilidades" name="responsabilidades"
+                          #descripcion="ngModel" [(ngModel)]="grupoGestion.responsabilidades" autoResize="autoResize"
+                          maxlength="500"></textarea>
+                <div *ngIf="f.submitted&&!descripcion.valid"
+                     class="alert alert-danger">
+                    <div [hidden]="!descripcion.errors.maxlength">La descripción de las reponsabilidades no debe tener
+                        mas de 50 caracteres.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+            <div class=" col-sm-9">
+                <p-checkbox [(ngModel)]="grupoGestion.indicadorHabilitado" binary="true" id="indicador" name="indicador"
+                            #indicador="ngModel"></p-checkbox>
+            </div>
+        </div>
+        <div class="row form-footer-buttons">
+            <div class="form-group col-md-12">
+            <a (click)="displayDialog=true" class="cancelar">Cancelar</a>
+            <button type="submit" pButton icon="fa-plus" label="Guardar"></button>
+        </div>
+        </div>
+    </form>
+</div>
+<p-dialog header="Confirmación" [(visible)]="displayDialog"
+          responsive="true" modal="true">
+    <p>Si continua perdera la información no guardada. ¿Esta seguro que desea salir?.</p>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>
+            <button type="button" pButton icon="fa-check" (click)="goBack()" label="Si"></button>
+        </div>
+    </p-footer>
+</p-dialog>

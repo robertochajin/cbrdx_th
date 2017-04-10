@@ -1,0 +1,106 @@
+<h3>Ocupaciones</h3>
+<div class="row datable-header">
+    <div class="col-md-6 col-xs-12 datatable-header-add">
+        <button type="button" pButton icon="fa-plus" (click)="newOccupation()" label="{{btnoccupation.label}}"
+                *ngIf="btnoccupation.show"></button>
+        <button type="button" pButton icon="fa-plus" (click)="newSubOccupation()" label="{{btnsubocupation.label}}"
+                *ngIf="btnsubocupation.show"></button>
+    </div>
+    <div class="col-md-6 col-xs-12 datatable-header-search">
+        <p-autoComplete placeholder="Buscar..." field="label" name="buscar" id="buscar" #buscar="ngModel"
+                        [(ngModel)]="selectedSearch"
+                        [suggestions]="resultSearch"
+                        (completeMethod)="search($event)"
+                        (onSelect)="captureId($event)">
+        </p-autoComplete>
+    </div>
+</div>
+<div class="ui-grid-row">
+    <div class="col-md-4">
+        <p-tree id="trvOcupaciones" [(value)]="treeocupaciones" selectionMode="single" [(selection)]="treeselected"
+                (onNodeSelect)="nodeSelect($event.node)"
+                (onNodeExpand)="nodeExpand($event.node)"
+        ></p-tree>
+    </div>
+
+    <div class="col-md-8">
+        <p-fieldset legend="{{header}}">
+            <div class="row-fluid">
+                <div class="col-md-12">
+                    <form name="form" (ngSubmit)="!codeExists&&f.valid && save()" #f="ngForm" id="formName" novalidate>
+                            <div class="form-group">
+                                <h4>{{labelPadre}}</h4>
+                            </div>
+                            <div class="form-group">
+                                <h4>{{labelTipo}}</h4>
+                            </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="codigoOcupacion" class="control-label col-sm-3">* Código </label>
+                                <div class=" col-sm-9">
+                                    <input type="text" pInputText class="form-control" id="codigoOcupacion"
+                                           name="codigoOcupacion" [(ngModel)]="ocupaciones.codigoOcupacion"
+                                           (change)="validateCode()"
+                                           (keyup)="capitalizeCodigo()"
+                                           #codigoOcupacion="ngModel" [maxlength]="tabselected"
+                                           [minlength]="tabselected" required>
+                                    <div *ngIf="f.submitted && !codigoOcupacion.valid" class="ui-message  ui-corner-all">
+                                        <p [hidden]="!codigoOcupacion.errors.required">Código es requerido</p>
+                                        <p [hidden]="!codigoOcupacion.errors.minlength">Código debe ser de
+                                            {{tabselected}} numeros</p>
+                                    </div>
+                                    <div *ngIf="codeExists" class="ui-message  ui-corner-all">
+                                        Ya se encuentra registrado ese código
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="ocupacion" class="control-label col-sm-3">* {{labelfieldocupacion}} </label>
+                                <div class=" col-sm-9">
+                                    <textarea pInputTextarea class="form-control" id="ocupacion" name="ocupacion"
+                                              required [(ngModel)]="ocupaciones.ocupacion" #ocupacion="ngModel"
+                                              (keyup)="capitalizeName()"
+                                    ></textarea>
+                                    <div *ngIf="f.submitted && !ocupacion.valid" class="ui-message  ui-corner-all">
+                                        {{labelfieldocupacion}} es requerido
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+                                <div class=" col-sm-9">
+                                    <p-checkbox binary="true" id="indicador" name="indicador"
+                                                [(ngModel)]="ocupaciones.indicadorHabilitado">
+                                    </p-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row form-footer-buttons">
+                                <div class="form-group col-md-12">
+                                    <a (click)="displayDialog=true" class="cancelar">Cancelar</a>
+                                    <button pButton type="submit" label="Guardar"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </p-fieldset>
+        <p-dialog header="Confirmación" [(visible)]="displayDialog"
+                  responsive="true" modal="true">
+            <p>Si continua perdera la información no guardada.Esta seguro que desea salir?.</p>
+            <p-footer>
+                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                    <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>
+                    <button type="button" pButton icon="fa-check" (click)="doCancel()" label="Si"></button>
+                </div>
+            </p-footer>
+        </p-dialog>
+    </div>
+</div>
+<p-growl [value]="msgs"></p-growl>

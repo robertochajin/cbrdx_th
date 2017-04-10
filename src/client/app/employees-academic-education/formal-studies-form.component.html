@@ -1,0 +1,120 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400"></p-confirmDialog>
+<div *ngIf="fstudy">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="header">
+                <h4 class="title">{{header}}</h4>
+            </div>
+        </div>
+    </div>
+  <form  (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-6">
+            <label for="nivelEstudio">Nivel de Estudios</label>
+            <p-dropdown name="nivelEstudio" id="nivelEstudio" #nivelEstudio="ngModel" required="true"
+                        [autoWidth]="false" [(ngModel)]="fstudy.idNivelEstudio" [options]="studyLevelList"></p-dropdown>
+            <div class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !nivelEstudio.valid">
+              Nivel de Estudios es requerido
+            </div>
+          </div>
+          <div class="ui-grid-col-6">
+            <label for="areaEstudio">Area de Estudios</label>
+            <p-dropdown name="areaEstudio" id="areaEstudio" #areaEstudio="ngModel" required="true"
+                        [autoWidth]="false" [(ngModel)]="fstudy.idAreaEstudio" [options]="studyAreaList"></p-dropdown>
+            <div class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !areaEstudio.valid">
+              area de estudio es requerida
+            </div>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="form-group col-md-12">
+            <label for="titulo">Título</label>
+            <input type="text" pInputText name="titulo" id="titulo"  #titulo="ngModel" required="true"
+                   [(ngModel)]="fstudy.tituloEstudio"  />
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !titulo.valid">
+              Título es requerido
+            </div>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-6">
+            <label for="institucion">Institución</label>
+            <p-autoComplete placeholder="Buscar institucion" field="nombreListaInstitucion" #institucion="ngModel"
+                            name="institucion" id="institucion" [required]="otraInstitucion.value === undefined || otraInstitucion.value === ''"
+                            [(ngModel)]="selectedInstitute" [suggestions]="instituteList"
+                            (completeMethod)="instituteSearch($event)" (onSelect)="captureInstituteId($event)" >
+            </p-autoComplete>
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && wrongInstitute && (otraInstitucion.value === undefined || otraInstitucion.value === '')">
+              Institución es requerido
+            </div>
+          </div>
+          <div class="ui-grid-col-6">
+            <label for="otraInstitucion">Otra Institución</label>
+            <input type="text" pInputText name="otraInstitucion" id="otraInstitucion"  #otraInstitucion="ngModel" (change)="removeInstitute()"
+                   [(ngModel)]="fstudy.otraInstitucion" [required]="institucion.value === undefined || institucion.value === ''" />
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !otraInstitucion.valid">
+              Otra Institución es requerido
+            </div>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-6">
+            <label for="ciudad">Ciudad</label>
+            <p-autoComplete placeholder="Buscar ciudad" field="camino" #ciudad="ngModel" name="ciudad" id="ciudad"
+                            [(ngModel)]="selectedCity" [suggestions]="cityList" required="true"
+                            (completeMethod)="citySearch($event)" (onSelect)="captureCityId($event)" >
+            </p-autoComplete>
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && wrongCity">
+              Ciudad es requerido
+            </div>
+          </div>
+          <div class="ui-grid-col-6">
+            <label for="estadoEstudio">Estado Estudio</label>
+            <p-dropdown name="estadoEstudio" id="estadoEstudio" #estadoEstudio="ngModel" required="true" (onChange)="updateEnd()"
+                        [autoWidth]="false" [(ngModel)]="fstudy.idEstado" [options]="studyStateList"></p-dropdown>
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !estadoEstudio.valid">
+              Estado Estudio es requerido
+            </div>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-6">
+            <label for="ingreso">Ingreso</label>
+            <p-calendar id="ingreso" name="ingreso"  [showIcon]="true" [disabled]="disabled"
+                        [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true" [maxDate]="maxDate"
+                        [dataType]="date" (onSelect)="onSelectBegin($event)" #ingreso="ngModel" required="true"
+                        [(ngModel)]="fstudy.fechaIngresa"></p-calendar>
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ingreso.valid">
+              Ingreso es requerido
+            </div>
+          </div>
+          <div class="ui-grid-col-6"  *ngIf="(estadoEstudio.value == id_estado_estudio_finalizado) && (ingreso.value !== undefined)">
+            <label for="fechaTermina">Finalización</label>
+            <p-calendar id="fechaTermina" name="fechaTermina"  [showIcon]="true" [disabled]="disabled"
+                        [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true" [minDate]="minDate" [maxDate]="maxDateFinal"
+                        [dataType]="date" (onSelect)="onSelectEnd($event)" #fechaTermina="ngModel" [required]="estadoEstudio.value == id_estado_estudio_finalizado"
+                        [(ngModel)]="fstudy.fechaTermina"></p-calendar>
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fechaTermina.valid">
+              Finalización es requerido
+            </div>
+          </div>
+        </div>
+
+        <div class="ui-grid-row form-footer-buttons">
+          <div class="ui-grid-col-4"></div>
+          <div class="ui-grid-col-1">
+            <a (click)="goBack()" class="cancelar">Cancelar</a>
+          </div>
+          <div class="ui-grid-col-2">
+            <button icon="fa-plus" label="{{'BTN_GUARDAR' | translate:param}}" type="submit" pButton></button>
+          </div>
+          <div class="ui-grid-col-5"></div>
+        </div>
+    </div>
+  </form>
+
+
+</div>
+

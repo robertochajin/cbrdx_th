@@ -1,0 +1,291 @@
+<p-messages [value]="msgs"></p-messages>
+<div class="row">
+   <div class="col-md-12">
+      <p-accordion (onOpen)="onTabShow($event)" id="accordion">
+         <p-accordionTab header="Identificación del cargo" [selected]="acordion == 0 || acordion == null ">
+            <fieldset>
+               <div *ngIf="position">
+                  <div class="row-fluid">
+                     <div class="col-md-12">
+                        <form name="formulario" (ngSubmit)="f1.valid && onSubmit()" #f1="ngForm" novalidate>
+                           <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                              <div class="row">
+                                 <div class="form-group col-md-3">
+                                    <label for="codigo">* Código </label>
+                                    <input type="text" pInputText id="codigo" name="codigo"
+                                           [(ngModel)]="position.codigoCargo" #codigo="ngModel"
+                                           required/>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f1.submitted && !codigo.valid">
+                                       <i class="fa fa-close"></i>
+                                       Código es requerido
+                                    </div>
+                                 </div>
+                                 <div class="form-group col-md-9">
+                                    <label for="nombre">* Nombre</label>
+                                    <input type="text" pInputText id="nombre" name="nombre"
+                                           [(ngModel)]="position.cargo" #nombre="ngModel"
+                                           required/>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f1.submitted && !nombre.valid">
+                                       <i class="fa fa-close"></i>
+                                       Nombre es requerida
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="form-group col-md-3">
+                                    <label for="idCategoria">Area</label>
+                                    <p-dropdown id="idCategoria" name="idCategoria" required="true"
+                                                [options]="categoryTypes" [autoWidth]="false"
+                                                [(ngModel)]="position.idCategoria"
+                                                #idCategoria="ngModel"
+                                    ></p-dropdown>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f1.submitted && !idCategoria.valid">
+                                       <i class="fa fa-close"></i>
+                                       Lateralidad requerida
+                                    </div>
+                                 </div>
+                                 <div class="form-group col-md-9">
+                                    <label for="personaACargoDir">Personas a cargo Directas</label>
+                                    <input type="text" pInputText id="personaACargoDir" name="personaACargoDir"
+                                           [(ngModel)]="position.personaACargoDir" #personaACargoDir="ngModel"
+                                    />
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="form-group col-md-3">
+                                    <label for="idCargoJefe">Cargo que depende</label>
+                                    <p-dropdown id="idCargoJefe" name="idCargoJefe" required="true"
+                                                [options]="bossPositionTypes" [autoWidth]="false"
+                                                [(ngModel)]="position.idCargoJefe"
+                                                #idCategoria="ngModel"
+                                    ></p-dropdown>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f1.submitted && !idCargoJefe.valid">
+                                       <i class="fa fa-close"></i>
+                                       Cargo que depende es requerida
+                                    </div>
+                                 </div>
+                                 <div class="form-group col-md-9">
+                                    <label for="personaACargoInd">Personas a cargo Indirectas</label>
+                                    <input type="text" pInputText id="personaACargoInd" name="personaACargoInd"
+                                           [(ngModel)]="position.personaACargoInd" #personaACargoInd="ngModel"
+                                    />
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class=" col-sm-12">
+                                    <label for="mision">Misión del cargo</label>
+                                    <textarea pInputTextarea id="mision" name="mision"
+                                              [(ngModel)]="position.mision" #mision="ngModel"
+                                              [required]="true"></textarea>
+                                    <div *ngIf="f1.submitted && !mision.valid"
+                                         class="ui-message  ui-corner-all">
+                                       Misión del cargo es requerido
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="form-group col-md-6">
+                                    <label for="idEstado">Estado</label>
+                                    <p-dropdown id="idEstado" name="idEstado" required="true"
+                                                [options]="stateTypes" [autoWidth]="false"
+                                                [(ngModel)]="position.idEstado"
+                                                #idEstado="ngModel"
+                                    ></p-dropdown>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f1.submitted && !idEstado.valid">
+                                       <i class="fa fa-close"></i>
+                                       Estado es requerida
+                                    </div>
+                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+                                    <div class=" col-sm-9">
+                                       <p-checkbox binary="true" id="indicador" name="indicador"
+                                                   [(ngModel)]="position.indicadorHabilitado"
+                                                   #indicador="ngModel"></p-checkbox>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row form-footer-buttons">
+                              <div class="form-group col-md-12">
+                                 <button icon="fa-plus" label="Guardar" type="submit"
+                                         pButton></button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+               <positions-observations-list *ngIf="position" [position]="position"></positions-observations-list>
+            
+            </fieldset>
+         </p-accordionTab>
+         
+         <p-accordionTab header="Producto de valor esperado y criterios de desempeño" [selected]="acordion == 1"
+                         [disabled]="disableTabs">
+            <fieldset>
+            
+            </fieldset>
+         </p-accordionTab>
+         
+         <p-accordionTab header="Interrelaciones" [selected]="acordion == 2" [disabled]="disableTabs">
+         </p-accordionTab>
+         
+         <p-accordionTab header="Rol dentro del proceso" [selected]="acordion == 3" [disabled]="disableTabs">
+         </p-accordionTab>
+         
+         <p-accordionTab header="Responsabilidades principales" [selected]="acordion == 4"
+                         [disabled]="disableTabs">
+         </p-accordionTab>
+         
+         <p-accordionTab header="Responsabilidades complemenarias" [selected]="acordion == 5"
+                         [disabled]="disableTabs">
+         </p-accordionTab>
+         
+         <p-accordionTab header="Posición en caso de ausencia" [selected]="acordion == 6"
+                         [disabled]="disableTabs">
+         </p-accordionTab>
+         
+         <p-accordionTab header="Autoridades" [selected]="acordion == 7" [disabled]="disableTabs">
+         </p-accordionTab>
+         
+         <p-accordionTab header="Requisitos generales" [selected]="acordion == 8" [disabled]="disableTabs">
+         </p-accordionTab>
+         
+         <p-accordionTab header="Competencias y/o Habilidades requeridas" [selected]="acordion == 9"
+                         [disabled]="disableTabs">
+         </p-accordionTab>
+         
+         <p-accordionTab header="Responsabilidades sobre activos de la compañia" [selected]="acordion == 10"
+                         [disabled]="disableTabs">
+         </p-accordionTab>
+         
+         <p-accordionTab header="Productividad" [selected]="acordion == 11" [disabled]="disableTabs">
+         </p-accordionTab>
+         
+         <p-accordionTab header="Personalidad" [selected]="acordion == 12" [disabled]="disableTabs">
+         </p-accordionTab>
+         
+         <p-accordionTab header="Factores de riesgo ocupacional" [selected]="acordion == 13"
+                         [disabled]="disableTabs">
+         </p-accordionTab>
+         
+         <p-accordionTab header="Valoración salarial del cargo" [selected]="acordion == 14" [disabled]="disableTabs">
+            <fieldset>
+               <div *ngIf="position">
+                  <div class="row-fluid">
+                     <div class="col-md-12">
+                        <form name="formulario" (ngSubmit)="f14.valid && onSubmit()" #f14="ngForm" novalidate>
+                           <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                              <div class="row">
+                                 <div class="form-group col-md-3">
+                                    <label for="puntos">* Puntos de valoración </label>
+                                    <input type="text" pInputText id="puntos" name="puntos"
+                                           [(ngModel)]="position.puntos" #codigo="ngModel"
+                                           required/>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f14.submitted && !puntos.valid">
+                                       <i class="fa fa-close"></i>
+                                       Código es requerido
+                                    </div>
+                                 </div>
+                                 <div class="form-group col-md-3">
+                                    <label for="idNivelEducacion">Nivel del cargo</label>
+                                    <p-dropdown id="idNivelEducacion" name="idNivelEducacion" required="true"
+                                                [options]="levelTypes" [autoWidth]="false"
+                                                [(ngModel)]="position.idCategoria"
+                                                #idNivelEducacion="ngModel"
+                                    ></p-dropdown>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f14.submitted && !idNivelEducacion.valid">
+                                       <i class="fa fa-close"></i>
+                                       Nivel del cargo requerida
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="form-group col-md-12">
+                                    <label for="idCategory">Area</label>
+                                    <p-dropdown id="idCategory" name="idCategory" required="true"
+                                                [options]="categoryTypes" [autoWidth]="false"
+                                                [(ngModel)]="position.idCategoria"
+                                                #idCategoria="ngModel"
+                                    ></p-dropdown>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f1.submitted && !idCategory.valid">
+                                       <i class="fa fa-close"></i>
+                                       Categoria requerida
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="form-group col-md-9">
+                                    <label for="salario">Salario al 100%</label>
+                                    <input type="text" pInputText id="salario" name="salario"
+                                           [(ngModel)]="position.salario" #salario="ngModel"
+                                    />
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class=" col-sm-12">
+                                    <label for="mision">Misión del cargo</label>
+                                    <textarea pInputTextarea id="mision" name="mision"
+                                              [(ngModel)]="position.mision" #mision="ngModel"
+                                              [required]="true"></textarea>
+                                    <div *ngIf="f1.submitted && !mision.valid"
+                                         class="ui-message  ui-corner-all">
+                                       Misión del cargo es requerido
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="form-group col-md-6">
+                                    <label for="idEstado">Estado</label>
+                                    <p-dropdown id="idEstado" name="idEstado" required="true"
+                                                [options]="stateTypes" [autoWidth]="false"
+                                                [(ngModel)]="position.idEstado"
+                                                #idEstado="ngModel"
+                                    ></p-dropdown>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f1.submitted && !idEstado.valid">
+                                       <i class="fa fa-close"></i>
+                                       Estado es requerida
+                                    </div>
+                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+                                    <div class=" col-sm-9">
+                                       <p-checkbox binary="true" id="indicador" name="indicador"
+                                                   [(ngModel)]="position.indicadorHabilitado"
+                                                   #indicador="ngModel"></p-checkbox>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row form-footer-buttons">
+                              <div class="form-group col-md-12">
+                                 <button icon="fa-plus" label="Guardar" type="submit"
+                                         pButton></button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+               <positions-observations-list *ngIf="position" [position]="position"></positions-observations-list>
+   
+            </fieldset>
+         </p-accordionTab>
+         
+         <p-accordionTab header="Relación organizacional" [selected]="acordion == 15" [disabled]="disableTabs">
+         </p-accordionTab>
+      
+      </p-accordion>
+   
+   </div>
+</div>

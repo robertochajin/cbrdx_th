@@ -1,7 +1,7 @@
 import { join } from 'path';
 
 import { SeedConfig } from './seed.config';
-// import { ExtendPackages } from './seed.config.interfaces';
+import { ExtendPackages } from './seed.config.interfaces';
 
 /**
  * This class extends the basic seed configuration, allowing for project specific overrides. A few examples can be found
@@ -30,7 +30,7 @@ export class ProjectConfig extends SeedConfig {
 
   constructor() {
     super();
-    // this.APP_TITLE = 'Put name of your app here';
+     this.APP_TITLE = ' | Gestionamos';
 
     /* Enable typeless compiler runs (faster) between typed compiler runs. */
     // this.TYPED_COMPILE_INTERVAL = 5;
@@ -46,7 +46,9 @@ export class ProjectConfig extends SeedConfig {
 
       { src: 'primeng/resources/primeng.min.css', inject: true },
       { src: 'primeng/resources/themes/bootstrap/theme.css', inject: true },
-      { src: 'font-awesome/css/font-awesome.min.css', inject: true },
+
+      { src: 'moment/min/moment.min.js', inject: true},
+      { src: 'moment/locale/es.js', inject: true},
 
 
     ];
@@ -59,13 +61,13 @@ export class ProjectConfig extends SeedConfig {
     ];
 
     // Add packages (e.g. ng2-translate)
-    // let additionalPackages: ExtendPackages[] = [{
-    //   name: 'ng2-translate',
+     let additionalPackages: ExtendPackages[] = [{
+       name: 'ng2-translate',
     //   // Path to the package's bundle
-    //   path: 'node_modules/ng2-translate/bundles/ng2-translate.umd.js'
-    // }];
+       path: 'node_modules/ng2-translate/bundles/ng2-translate.umd.js'
+     }];
     //
-    // this.addPackagesBundles(additionalPackages);
+     this.addPackagesBundles(additionalPackages);
 
     /* Add to or override NPM module configurations: */
     // this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], { ghostMode: false });

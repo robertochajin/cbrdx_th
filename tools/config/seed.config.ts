@@ -48,7 +48,7 @@ export class SeedConfig {
    * The default port is `5555`, which can be overriden by the  `--port` flag when running `npm start`.
    * @type {number}
    */
-  PORT = argv['port'] || 5555;
+  PORT = argv['port'] || 5556;
 
   /**
    * The root folder of the project (up two levels from the current directory).
@@ -305,6 +305,24 @@ export class SeedConfig {
    * @type {string[]}
    */
   EXTRA_WATCH_PATHS: string[] = [];
+  /**
+   * Se definen la IP y el PUERTO con la cual la vista se conecta a los servicios Solucion de proteccion
+   * @type {string}
+   */
+  IP_CREZCAMOS = '192.168.253.37';
+  IP_CIBERDIX = '40.71.92.147';
+  SVC_SP_PORT = '8447';
+
+  SVC_SP_URL = "http://" + this.IP_CIBERDIX+":"+this.SVC_SP_PORT;
+
+  /**
+   * Se definen la IP y el PUERTO con la cual la vista se conecta a los servicios Talento Humano
+   * @type {string}
+   */
+  SVC_TH_PORT_D = '8444';
+  SVC_TH_PORT = '8448';
+  SVC_TH_URL_D = "http://" + this.IP_CIBERDIX+":"+this.SVC_TH_PORT_D;
+  SVC_TH_URL = "http://" + this.IP_CIBERDIX+":"+this.SVC_TH_PORT;
 
   /**
    * The list of NPM dependcies to be injected in the `index.html`.
@@ -368,14 +386,15 @@ export class SeedConfig {
       '@angular/core/testing': 'node_modules/@angular/core/bundles/core-testing.umd.js',
       '@angular/http/testing': 'node_modules/@angular/http/bundles/http-testing.umd.js',
       '@angular/platform-browser/testing':
-        'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
+      'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
       '@angular/platform-browser-dynamic/testing':
-        'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
+      'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
-
+      'traceur': 'node_modules/traceur/bin/traceur.js',
+      //'ng2-translate': 'node_modules/ng2-translate/ng2-translate.js',
       'primeng': '${this.APP_BASE}node_modules/primeng',
-      
+
 
       'app/*': '/app/*',
       // For test config

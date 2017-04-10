@@ -1,0 +1,33 @@
+<h3>Usuarios</h3>
+<div class="row datable-header">
+    <div class="col-md-6 col-xs-12 datatable-header-add">
+        <button type="button" pButton icon="fa-plus" (click)="addUser()" label="{{ 'LBL_NUEVO' | translate:param }} {{ 'LBL_USUARIOS' | translate:param }}"></button>
+    </div>
+    <div class="col-md-6 col-xs-12 datatable-header-search">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input type="text" pInputText size="40" placeholder="Buscar..." (keyup)="showData($event.target.value)" class="form-control">
+      </div>
+    </div>
+</div>
+<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUNDUSERS' | translate:param }}"  [value]="usuarios" [paginator]="true" [rows]="10" [responsive]="true">
+    <p-column field="idUsuario" header="{{ 'LBL_ID' | translate:param }}" [sortable]="true"></p-column>
+    <p-column field="nombre" header="{{ 'LBL_NOMBRE' | translate:param }}" [sortable]="true"></p-column>
+    <p-column field="documento" header="{{ 'LBL_NUMERODOCUMENTO' | translate:param }}" [sortable]="true"></p-column>
+    <p-column field="usuario" header="{{ 'LBL_USUARIO' | translate:param }}" [sortable]="true"></p-column>
+    <p-column field="indHab" header="{{ 'LBL_HABILITADO' | translate:param }}" [sortable]="true">
+        <template let-const="rowData" pTemplate="body">
+            <p-checkbox [(ngModel)]="const.indHab" binary="true" disabled="true"></p-checkbox>
+        </template>
+    </p-column>
+    <p-column header="{{ 'LBL_ACCIONES' | translate:param }}" styleClass="datatable-col-action">
+        <template let-constantData="rowData" pTemplate="body">
+            <div class="btn-group" role="group">
+                <button type="button" class="ui-button btn" icon="fa-eye"
+                        pButton (click)="viewUser(constantData.idUsuario)"></button>
+                <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" pButton
+                        (click)="editUser(constantData.idUsuario)"></button>
+            </div>
+        </template>
+    </p-column>
+</p-dataTable>

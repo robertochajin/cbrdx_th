@@ -1,0 +1,86 @@
+<div *ngIf="experience">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="first">Experiencia laboral</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <form class="form-horizontal">
+                <fieldset>
+                    <div class="form-group">
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Empresa:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.empresa}}</strong></label>
+
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Teléfono Empresa:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.telefonoEmpresa}}</strong></label>
+                      </div>
+
+                      <div class="row">
+                        <label class="col-md-3 col-sm-3 col-xs-12 control-label">Sector Empresa:</label>
+                        <label class="col-md-3 col-sm-3 col-xs-12 "><strong>{{experience.sectorEmpresa}}</strong></label>
+
+                        <label class="col-md-3 col-sm-3 col-xs-12 control-label">Actividad Ecónomica Principal:</label>
+                        <label class="col-md-3 col-sm-3 col-xs-12 "><strong>{{experience.subSectorEmpresa}}</strong></label>
+                      </div>
+
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Cargo:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.cargo}}</strong></label>
+
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nivel Cargo:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.nivelCargo}}</strong></label>
+                      </div>
+
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Area Cargo:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.areaCargo}}</strong></label>
+
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Jefe Inmediato:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.jefeInmediato}}</strong></label>
+                      </div>
+
+                      <div class="row">
+                        <label class="col-md-3 col-sm-3 col-xs-12 control-label">Ciudad:</label>
+                        <label class="col-md-9 col-sm-9 col-xs-12 "><strong>{{experience.ciudad}}</strong></label>
+
+                      </div>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Ingreso:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.fechaIngresa}}</strong></label>
+                        <div *ngIf="experience.indicadorActualmente">
+                          <label class="col-md-3 col-sm-6 col-xs-12 control-label" >Actualmente:</label>
+                          <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.indicadorActualmente === true ? 'Si' : 'No'}}</strong></label>
+                        </div>
+                        <div *ngIf="!experience.indicadorActualmente">
+                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Finalizacion:</label>
+                            <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.fechaTermina}}</strong></label>
+                        </div>
+                      </div>
+
+                      <div class="row">
+
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tiempo Experiencia:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{experience.tiempoExperiencia}}</strong></label>
+                      </div>
+
+
+
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+</div>
+    <div class="row form-footer-buttons">
+    <div class="form-group col-md-12">
+      <button icon="fa-arrow-left" label="Regresar" type="button"
+              pButton (click)="goBack()"></button>
+    </div>
+</div>
+

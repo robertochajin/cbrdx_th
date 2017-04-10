@@ -1,0 +1,51 @@
+<div *ngIf="employeeEstate">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="first">Inmuebles</h3>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <form class="form-horizontal">
+      <fieldset>
+        <div class="form-group">
+          <div class="row">
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tipo Inmueble:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeEstate.tipoVivienda}}</strong></label>
+
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">El Inmueble es:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeEstate.claseVivienda}}</strong></label>
+          </div>
+          <div class="row">
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tipo Construcción:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeEstate.tipoConstruccionVivienda}}</strong></label>
+
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Numero de Pisos:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeEstate.numeroPisos}}</strong></label>
+          </div>
+          <div class="row">
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Año Construcción:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeEstate.anioConstruccion}}</strong></label>
+
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Numero de Sotanos:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeEstate.numeroSotanos}}</strong></label>
+          </div>
+          <div class="row">
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Estrato:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeEstate.estrato}}</strong></label>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+
+  </div>
+
+</div>
+
+<div class="row form-footer-buttons">
+  <div class="form-group col-md-12">
+    <button icon="fa-arrow-left" label="Regresar" type="button"
+            pButton (click)="goBack()"></button>
+  </div>
+</div>

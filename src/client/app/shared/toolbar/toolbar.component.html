@@ -1,50 +1,94 @@
-<div class="sidebar">
-    <div class="sidebar-wrapper">
-        <div class="logo">
-            <i class="fa fa-cog"></i> DemoLogo
-        </div>
+<header class="main-header">
+  <!-- Logo -->
+  <a routerLink="/dashboard" routerLinkActive="active" class="logo">
+    <!-- mini logo for sidebar mini 50x50 pixels -->
+    <span class="logo-mini">
+      <img id="logoAppIcon" src="assets/images/gestionamos_green_icon.png"/>
+    </span>
+    <!-- logo for regular state and mobile devices -->
+    <span class="logo-lg">
+      <img id="logoApp" src="assets/images/gestionamos_green.png"/>
+    </span>
+  </a>
+  <!-- Header Navbar: style can be found in header.less -->
+  <nav class="navbar navbar-static-top">
+    <!-- Sidebar toggle button-->
+    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </a>
 
-        <ul class="nav">
-            <li class="active">
-                <a href="index.html">
-                    <i class="icon-SPDashboard"></i>
-                    <p>Dashboard</p>
-                </a>
-            </li>
+    <div class="navbar-custom-menu">
+      <ul class="nav navbar-nav">
+        <!-- Notifications: style can be found in dropdown.less -->
+        <li class="dropdown notifications-menu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-bell-o"></i>
+            <span class="label label-warning">10</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="header">Tiene 10 Notificaciones Nuevas</li>
             <li>
-                <a href="table.html">
-                    <i class="icon-SPApl"></i>
-                    <p>Sistema</p>
-                </a>
+              <!-- inner menu: contains the actual data -->
+              <ul class="menu">
+                <li>
+                  <a href="#">
+                    <i class="fa fa-users text-aqua"></i> Notificación A
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa fa-users text-aqua"></i> Notificación B
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa fa-users text-aqua"></i> Notificación C
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="footer"><a href="#">Ver Más...</a></li>
+          </ul>
+        </li>
+        <!-- User Account: style can be found in dropdown.less -->
+        <li class="dropdown user user-menu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <img src="assets/images/user-160x160.jpg" class="user-image" alt="User Image">
+            <span class="hidden-xs">Victor Pineda</span>
+          </a>
+          <ul class="dropdown-menu">
+            <!-- User image -->
+            <li class="user-header">
+              <img src="assets/images/user-160x160.jpg" class="img-circle" alt="User Image">
+              <p>
+                Victor Pineda
+                <small>Usuario desde 10/12/2014</small>
+              </p>
             </li>
 
-            <li>
-                <a href="#">
-                    <i class="icon-SPAsp"></i>
-                    <p>Negocio</p>
-                </a>
+            <li class="disabled menu-theme-title"><a href="#">Temas disponible</a></li>
+            <li class="menu-theme">
+              <span class="colortheme colorwhite" onclick="changeTheme('skin-black')" ></span>
+              <span class="colortheme colorpurple" onclick="changeTheme('skin-purple')"></span>
+              <span class="colortheme colorblue" onclick="changeTheme('skin-blue')"></span>
+              <span class="colortheme colorgreen" onclick="changeTheme('skin-green')"></span>
             </li>
 
-            <li>
-                <a href="#">
-                    <i class="icon-SPGsp"></i>
-                    <p>Gestión</p>
-                </a>
-            </li>
 
-            <li>
-                <a href="#">
-                    <i class="icon-SPRec"></i>
-                    <p>Financiero</p>
-                </a>
-            </li>
+            <!-- Menu Footer-->
+            <li class="user-footer">
 
-            <li>
-                <a href="#">
-                    <i class="icon-SPRep"></i>
-                    <p>Reportes</p>
-                </a>
+              <div class="pull-right">
+                <a href="#" class="btn btn-default">Cerrar Sesión</a>
+              </div>
             </li>
-        </ul>
+          </ul>
+        </li>
+      </ul>
     </div>
-</div>
+
+  </nav>
+</header>

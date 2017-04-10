@@ -1,0 +1,107 @@
+.content-wrapper,
+.content{
+  margin: 0;
+  padding: 0;
+}
+
+.form-signin
+{
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+    margin-bottom: 10px;
+}
+.form-signin .checkbox
+{
+    font-weight: normal;
+}
+.form-signin .form-control
+{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus
+{
+    z-index: 2;
+}
+.form-signin input[type="text"]
+{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"]
+{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.account-wall
+{
+    margin-top: 20px;
+    padding: 40px 0px 20px 0px;
+    background-color: rgba(255,255,255,.8);
+    -moz-box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.1);
+}
+.login-title
+{
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    display: block;
+}
+.profile-img
+{
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+.need-help{
+    margin-top: 10px;
+}
+#btnIniciarSesion{
+    width: 100%;
+}
+#recordarcontrasena{
+    text-align: center;
+}
+#imgLogin{
+    margin: 0px auto 30px;
+    height: 100px;
+}
+#loginBg{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url("/assets/images/bg-login6.jpg") no-repeat fixed center center / cover  #F3F3F3;
+}
+/*
+-------- Nuevos cambios Login ---------
+ */
+.wrapper-login{
+  margin: 0!important;
+}
+.wrapper-login > .content{
+  margin: 0!important;
+  padding: 0!important;
+}
+.icon-mainmenu{
+  font-size: 1.4em;
+}
+.logo-lg img{
+}
+.logo-mini img{
+  width: 90%;
+}

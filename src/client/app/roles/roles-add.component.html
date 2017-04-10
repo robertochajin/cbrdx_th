@@ -1,0 +1,138 @@
+<h3>Roles</h3>
+<p-tabView>
+    <p-tabPanel header="Rol">
+        <div class="form-horizontal">
+            <form #f="ngForm" novalidate (keydown.enter)="$event.preventDefault()"
+                  (ngSubmit)="!codeExists&&f.form.valid&&createMaster(f)">
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="codigoRol">Codigo</label>
+                    <div class="col-sm-9">
+                        <input type="text" pInputText [(ngModel)]="rol.codigoRol" id="codigoRol" name="codigoRol"
+                               #codigoRol="ngModel" required maxlength="6" pattern="[A-Z]{0,6}" class="form-control"
+                               (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
+                               (paste)="inputCleanUp($event.target.value)" [disabled]="masterCreated"/>
+                        <div *ngIf="codeExists" class="alert alert-danger">
+                            Ya se encuentra registrado ese código
+                        </div>
+                        <div *ngIf="f.submitted&&!codigoRol.valid" class="alert alert-danger">
+                            <div [hidden]="!codigoRol.errors.required">Debe ingresar un codigo para el rol</div>
+                            <div [hidden]="!codigoRol.errors.maxlength">El código no debe tener mas de 6 caracteres.
+                            </div>
+                            <div [hidden]="!codigoRol.errors.pattern">El código debe ser solo letras Mayusculas</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="r">Rol</label>
+                    <div class="col-sm-9">
+                        <input type="text" pInputText [(ngModel)]="rol.rol" id="r" name="r" [disabled]="masterCreated"
+                               #r="ngModel" required maxlength="64" pattern="[A-Z]{1}.*" class="form-control"/>
+                        <div *ngIf="f.submitted&&!r.valid" class="alert alert-danger">
+                            <div [hidden]="!r.errors.required">Debe ingresar un nombre para el rol</div>
+                            <div [hidden]="!r.errors.maxlength">El código no debe tener mas de 64 caracteres.</div>
+                            <div [hidden]="!r.errors.pattern">El código debe comenzar por una letra Mayusculas</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fechaInicio" class="control-label col-sm-3">Fecha Inicio</label>
+                    <div class=" col-sm-9">
+                        <p-calendar id="fechaInicio" name="fechaInicio" [(ngModel)]="rol.fechaInicio"
+                                    [disabled]="masterCreated"
+                                    [showIcon]="true" class="form-control" dateFormat="yy-mm-dd"
+                                    [minDate]="currentDate"></p-calendar>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fechaFin" class="control-label col-sm-3">Fecha Fin</label>
+                    <div class=" col-sm-9">
+                        <p-calendar id="fechaFin" name="fechaFin" [(ngModel)]="rol.fechaFin" class="form-control"
+                                    [disabled]="masterCreated"
+                                    [showIcon]="true" dateFormat="yy-mm-dd" [minDate]="rol.fechaInicio"></p-calendar>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion" class="control-label col-sm-3">Descripcion</label>
+                    <div class=" col-sm-9">
+                        <textarea pInputTextarea class="form-control" id="descripcion" name="descripcion"
+                                  [disabled]="masterCreated"
+                                  #descripcion="ngModel" [(ngModel)]="rol.descripcion" maxlength="128"></textarea>
+                        <div *ngIf="f.submitted&&!descripcion.valid" class="alert alert-danger">
+                            <div [hidden]="!descripcion.errors.maxlength">La descripción de las reponsabilidades no debe
+                                tener mas de 128 caracteres.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+                    <div class=" col-sm-9">
+                        <p-checkbox [(ngModel)]="rol.indicadorHabilitado" binary="true" id="indicador" name="indicador"
+                                    #indicador="ngModel" class="form-control" [disabled]="masterCreated"></p-checkbox>
+                    </div>
+                </div>
+                <div class="form-group" [hidden]="masterCreated">
+                    <a (click)="displayDialog=true" class="cancelar">Cancelar</a>
+                    <button type="submit" pButton icon="fa-plus" label="Guardar"></button>
+                </div>
+            </form>
+        </div>
+    </p-tabPanel>
+    <p-tabPanel header="Funcionalidad">
+        <div *ngIf="!isAdding">
+            <div class="row datable-header">
+                <div class="col-md-6 col-xs-12 datatable-header-add">
+                    <button type="button" pButton icon="fa-plus" (click)="addFunction()"
+                            label="Nueva Funcionalidad"></button>
+                </div>
+                <div class="col-md-6 col-xs-12 datatable-header-search">
+                    <i class="fa fa-search"></i>
+                    <input #gb type="text" pInputText size="40" placeholder="Buscar...">
+                </div>
+            </div>
+            <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="asignedRoles" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+                <p-column field="idRolMenuElemento" header="Id" [sortable]="true"></p-column>
+                <p-column field="elementoMenu" header="Codigo" [sortable]="true"></p-column>
+                <p-column field="indicadorHabilitado" header="Estado" [sortable]="true">
+                    <template let-const="rowData" pTemplate="body">
+                        <p-checkbox [(ngModel)]="const.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
+                    </template>
+                </p-column>
+                <p-column header="Acciones" styleClass="datatable-col-action">
+                    <template let-data="rowData" pTemplate="body">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="ui-button btn" icon="fa-eye"
+                                    pButton (click)="viewRole(data)"></button>
+                            <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" pButton
+                                    (click)="editRole(data)"></button>
+                        </div>
+                    </template>
+                </p-column>
+            </p-dataTable>
+        </div>
+        <div *ngIf="isAdding">
+            <div class="form-horizontal">
+                <form #fd="ngForm" novalidate (keydown.enter)="$event.preventDefault()"
+                      (ngSubmit)="fd.form.valid&&createDetail(f)">
+                    <div class="form-group">
+                        <label></label>
+                        <select>
+                            <option *ngFor="let c of elementosMenu" [ngValue]="c.idMenuElemento">{{c.elementoMenu}}
+                            </option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </p-tabPanel>
+</p-tabView>
+<p-dialog header="Confirmación" [(visible)]="displayDialog"
+          responsive="true" modal="true">
+    <p>Si continua perdera la información no guardada. ¿Esta seguro que desea salir?.</p>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>
+            <button type="button" pButton icon="fa-check" (click)="goBack()" label="Si"></button>
+        </div>
+    </p-footer>
+</p-dialog>

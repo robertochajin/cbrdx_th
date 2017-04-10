@@ -1,0 +1,74 @@
+<div *ngIf="familyInformation">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="first">Información familiar</h3>
+        </div>
+    </div>
+
+    <div class="row">
+
+
+            <form class="form-horizontal">
+                <fieldset>
+                    <div class="form-group">
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tipo de documento.:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{familyInformation.nombreListaTipoDocumento}}</strong></label>
+
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Número de documento.:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.numeroDocumento}}</strong></label>
+                      </div>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Primero nombre:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.primerNombre}}</strong></label>
+
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Segundo nombre:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.segundoNombre}}</strong></label>
+                      </div>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Primero apellido:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.primerApellido}}</strong></label>
+
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Segundo Apellido:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.segundoApellido}}</strong></label>
+                      </div>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Fecha de nacimiento:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.fechaNacimiento}}</strong></label>
+
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Perentezco:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.nombreListaParentesco}}</strong></label>
+                      </div>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Correo electronico:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.correoElectronico}}</strong></label>
+
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Teléfono:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.telefonoFijo}}</strong></label>
+                      </div>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Celular:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.telefonoCelular}}</strong></label>
+
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Dirección:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.direccion}}</strong></label>
+                      </div>
+                      <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Convive:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.idConvivencia === 1 ? 'Si' : 'No'}}</strong></label>
+                      </div>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+
+</div>
+
+<div class="row form-footer-buttons">
+    <div class="form-group col-md-12">
+        <button icon="fa-arrow-left" label="Regresar" type="button"
+                pButton (click)="goBack()"></button>
+    </div>
+</div>
+
