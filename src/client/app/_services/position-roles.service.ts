@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Http, Response, Headers} from '@angular/http';
 import {AuthenticationService} from "../_services/authentication.service";
-import {PositionResponsabilities} from "../_models/positionResponsabilities";
 import {Observable} from "rxjs";
+import {PositionRoles} from "../_models/positionRoles";
 
 @Injectable()
-export class PositionResponsabilitiesService {
+export class PositionRolesServices {
 
   headers = new Headers({'Content-Type': 'application/json'});
-  private serviceURL = '<%= SVC_TH_URL %>/api/cargosResponsabilidades/';
+  private serviceURL = '<%= SVC_TH_URL %>/api/cargosRolesProcesos/';
 
   constructor(private http: Http,
               private authenticationService: AuthenticationService) {
@@ -16,25 +16,25 @@ export class PositionResponsabilitiesService {
   }
 
   getAll() {
-    return this.http.get(this.serviceURL).map((res: Response) => res.json() as PositionResponsabilities[]);
+    return this.http.get(this.serviceURL).map((res: Response) => res.json() as PositionRoles[]);
   }
 
-  getAllByPosition(id: number): Observable<PositionResponsabilities[]> {
-    return this.http.get(this.serviceURL + 'buscarCargo/' + id).map((res: Response) => res.json() as PositionResponsabilities[]);
+  getAllByPosition(id: number): Observable<PositionRoles[]> {
+    return this.http.get(this.serviceURL + 'buscarCargo/'+ id).map((res: Response) => res.json() as PositionRoles[]);
   }
 
-  add(f: PositionResponsabilities) {
+  add(f: PositionRoles) {
     return this.http.post(this.serviceURL, f, {headers: this.headers})
       .map((res: Response) => res.json());
   };
 
-  update(f: PositionResponsabilities) {
+  update(f: PositionRoles) {
     return this.http.put(this.serviceURL, JSON.stringify(f), {headers: this.headers}).catch(this.handleError);
   }
 
   get(id: number) {
     return this.http.get(this.serviceURL + 'buscarId/' + id)
-      .map((res: Response) => res.json() as PositionResponsabilities);
+      .map((res: Response) => res.json() as PositionRoles);
   }
 
   handleError(error: any): Promise<any> {
