@@ -18,7 +18,9 @@ export class Positions {
     public salario: number;
     public interrelacionesInternas: string;
     public interrelacionesExternas: string;
-    public responsabilidadesAd: string;
+    public responsabilidadesElementos: string;
+    public responsabilidadesImprementos: string;
+    public responsabilidadesOtros: string;
     public tomaDecisiones: string;
     public actividadesSupervisa: string;
     public nivelEducacion: string;
@@ -31,6 +33,8 @@ export class Positions {
     public estructuraArea: string;
     public idEstructuraArea: number;
     public idNivelEducacion: number;
+    public idGenero: number; //? falta este campo
+    public idEstadoCivil: number; //? falta este campo
     public edad: number;
     public auditoriaUsuario: number;
     public auditoriaFecha: Date;

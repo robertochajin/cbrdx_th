@@ -22,7 +22,7 @@ export class PositionsUpdateComponent {
    bossPositionTypes: SelectItem[] = [];
    stateTypes: SelectItem[] = [];
    levelTypes: SelectItem[] = [];
-   disableTabs: boolean = true;
+   disableTabs: boolean = false;
    msgs: Message[] = [];
    
    constructor( private positionsService: PositionsService,
