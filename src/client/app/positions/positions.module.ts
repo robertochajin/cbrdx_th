@@ -13,6 +13,8 @@ import { FormSharedModule } from "../shared/form-shared.module";
 import { EvaluationCriteriasModule } from "../position-evaluation-criterias/evaluation-criterias.module";
 import { PositionRolesModule } from "../position-roles/position-roles.module";
 import { PositionResponsabilitiesModule } from "../position-responsabilities/position-responsabilities.module";
+import { ProductivityModule } from "../position-productivity/productivity.module";
+import { RiskModule } from "../position-risks/position-risks.module";
 
 @NgModule( {
               imports: [
@@ -20,7 +22,9 @@ import { PositionResponsabilitiesModule } from "../position-responsabilities/pos
                  FormSharedModule,
                  EvaluationCriteriasModule,
                  PositionRolesModule,
-                 PositionResponsabilitiesModule
+                 PositionResponsabilitiesModule,
+                 RiskModule,
+                 ProductivityModule
               ],
    
               declarations: [

@@ -237,11 +237,17 @@ const routes = [
   {path: 'faults', component: FaultsAndSanctionsComponent, canActivate: [AuthGuard]},
   {path: 'faults/add', component: FaultsAndSanctionsAddComponent, canActivate: [AuthGuard]},
   {path: 'faults/update/:id', component: FaultsAndSanctionsUpdateComponent, canActivate: [AuthGuard]},
-
+   
+   // Temporales
+   {path: 'criterios', component: EvaluationCriteriasComponent, canActivate: [AuthGuard]},
+   {path: 'responsabilidades', component: PositionResponsabilitiesComponent, canActivate: [AuthGuard]},
+   {path: 'cargosroles', component: PositionRolesComponent, canActivate: [AuthGuard]},
+   
   // Cargos
   {path: 'positions', component: PositionsComponent, canActivate: [AuthGuard]},
   {path: 'positions/add', component: PositionsAddComponent, canActivate: [AuthGuard]},
   {path: 'positions/update/:id', component: PositionsUpdateComponent, canActivate: [AuthGuard]},
+   
 //  Cargos Productividad
   {path: 'productivity/:idCargo', component: ProductivityComponent, canActivate: [AuthGuard]},
 

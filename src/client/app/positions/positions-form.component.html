@@ -449,6 +449,7 @@
          
          <p-accordionTab header="Productividad" [selected]="acordion == 11"
                          [disabled]="step >0 && step <12">
+            <productivity *ngIf="position.idCargo" [position]="position"></productivity>
          </p-accordionTab>
          
          <p-accordionTab header="Personalidad" [selected]="acordion == 12"
@@ -457,6 +458,7 @@
          
          <p-accordionTab header="Factores de riesgo ocupacional" [selected]="acordion == 13"
                          [disabled]="step >0 && step <14">
+            <position-risks *ngIf="position.idCargo" [position]="position"></position-risks>
          </p-accordionTab>
          
          <p-accordionTab header="Valoración salarial del cargo" [selected]="acordion == 14"

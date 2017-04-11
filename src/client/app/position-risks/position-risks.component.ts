@@ -7,6 +7,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {Exam} from '../_models/position-exam';
 import {SelectItem, Message, ConfirmationService} from 'primeng/primeng';
+import { Positions } from "../_models/positions";
 
 @Component({
   moduleId: module.id,
@@ -15,8 +16,11 @@ import {SelectItem, Message, ConfirmationService} from 'primeng/primeng';
   providers: [ConfirmationService]
 })
 export class RiskComponent {
-
-  @Input() Risk: Risk;
+   
+   @Input()
+   position: Positions;
+  Risk: Risk;
+  
   header: string = 'Riesgos Laborales';
   risk: Risk = new Risk();
   exam: Exam = new Exam();
@@ -42,11 +46,10 @@ export class RiskComponent {
   }
 
   ngOnInit() {
+     
+      this.risk.idCargo = this.position.idCargo;
+      this.exam.idCargo = this.position.idCargo;
 
-    this.route.params.subscribe((params: Params) => {
-      this.risk.idCargo = Number(+params['idCargo']);
-      this.exam.idCargo=Number(+params['idCargo']);
-    });
     this.riskService.getListExam().subscribe(rest => {
       for (let dp of rest) {
         this.listExam.push({label: dp.idListaExamen, value: dp.nombre});
