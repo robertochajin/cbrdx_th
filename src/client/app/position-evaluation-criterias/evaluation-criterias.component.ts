@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import {ConfirmationService} from 'primeng/primeng';
 import * as moment from 'moment/moment';
+import {Positions} from "../_models/positions";
 import {PositionCriterias} from "../_models/positionCriterias";
 import {EvaluationCriterias} from "../_models/evaluationCriterias";
 
@@ -12,7 +13,7 @@ import {EvaluationCriterias} from "../_models/evaluationCriterias";
   providers: [ConfirmationService]
 })
 export class EvaluationCriteriasComponent {
-
+   @Input() position: Positions;
   editing: boolean = false;
   positionCriterias: PositionCriterias[] = [];
   //criteria: PositionCriterias = new PositionCriterias();

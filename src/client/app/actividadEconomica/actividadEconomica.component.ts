@@ -432,7 +432,8 @@ export class ActividadEconomicaComponent implements OnInit {
       if(input != "" && input != null){
          this.actividadEconomica.actividadEconomica = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
       }
-   }
+    }
+     
 }
 class Tree {
    value: number;
