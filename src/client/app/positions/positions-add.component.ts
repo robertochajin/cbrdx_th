@@ -24,6 +24,7 @@ export class PositionsAddComponent {
    disableTabs: boolean = true;
    msgs: Message[] = [];
    defaultState: any;
+   step = 1;
    
    constructor( private positionsService: PositionsService,
                 private router: Router,
@@ -56,6 +57,7 @@ export class PositionsAddComponent {
       //this.defaultState = this.listPositionsService.getstateByCode("CONST");
       this.listPositionsService.getstateByCode("CONST").subscribe( res => {
          this.defaultState = res;
+         
       });
       
    }
@@ -66,7 +68,8 @@ export class PositionsAddComponent {
    onSubmit0() {
       this.msgs = [];
       this.position.idEstado = this.defaultState.idListaEstadoCargo;
-      this.position.paso = 1;
+      this.position.paso = 2;
+      //console.info( this.position);
       this.positionsService.add( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
@@ -87,12 +90,11 @@ export class PositionsAddComponent {
                                         } );
    }
    
-   capitalize( event: any ) {
-      let input = event.target.value;
-      event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+   capitalizeNombre() {
+      let input = this.position.cargo;
+      if(input != "" && input != null ){
+         this.position.cargo = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+      }
    }
-   
-   capitalizeSave( input: any ) {
-      return input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
-   }
+ 
 }

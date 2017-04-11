@@ -27,7 +27,7 @@ export class EvaluationCriteriasComponent {
    total: number = 0;
 
    @Output()
-   nextStep: EventEmitter<boolean> = new EventEmitter<boolean>();
+   nextStep: EventEmitter<number> = new EventEmitter<number>();
 
    constructor(private router: Router,
                private positionCriteriasService: PositionCriteriasService,
@@ -36,11 +36,7 @@ export class EvaluationCriteriasComponent {
    }
 
    ngOnInit() {
-      // provisional
-      this.position = new Positions();
-      this.position.idCargo = 19;
-      // fin provisional
-
+      
       this.evaluationCriterias.push({
          idCriterio: null,
          criterio: null,
@@ -134,12 +130,6 @@ export class EvaluationCriteriasComponent {
    }
 
    next(){
-      //validar 100 y seguir
-      if(this.oneHundred){
-         this.nextStep.emit(true);
-      } else {
-         //Envía mensaje
-         this.nextStep.emit(false);
-      }
+      this.nextStep.emit(4);
    }
 }
