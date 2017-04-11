@@ -316,13 +316,16 @@ export class OcupacionesComponent implements OnInit {
             if (res.idOcupacionPadre != 0) {
                 this.ocupacionesService.viewOcupaciones(res.idOcupacionPadre).subscribe(r => {
                     this.labelPadre = r.ocupacion;
-                    // Scroll to Select
-                    jQuery('#trvOcupaciones').scrollTop(jQuery('.ui-state-highlight').position().top - jQuery('#trvOcupaciones').height() / 2);
                 });
             } else {
                 this.labelPadre = "";
             }
             this.labelTipo = "Tipo: " + this.ocupacionesTypes.find(t => t.idOcupacionTipo == res.idOcupacionTipo).descripcionOcupacionTipo;
+
+           // Scroll to Select
+           jQuery('#trvOcupaciones').scrollTop(
+              jQuery('.ui-state-highlight').position().top - jQuery('#trvOcupaciones').height() / 2
+           );
         });
     }
 
