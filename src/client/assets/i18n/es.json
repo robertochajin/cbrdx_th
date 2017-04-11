@@ -36,6 +36,7 @@
   "LBL_DE":"de",
   "LBL_EPS":"Eps",
   "LBL_TELEFONO":"Teléfono",
+  "LBL_PERTENECE":"Pertenece",
 
   "MSG_CONFIRMACION":"Si continúa perderá la información no guardada. ¿Está seguro que desea salir?",
   "MSG_GUARDADO":"Guardado",
@@ -105,6 +106,7 @@
   "FIN_DASHBOARD":"=================================================================",
 
   "INICIO_DIVISIONPOLITICA":"==============================================================",
+      "LBL_DIVSIONPOLITICA":"División Política ",
       "LBL_PAIS":"País",
       "LBL_DEPARTAMENTO":"Departamento",  
       "LBL_MUNICIPIO":"Municipio",
@@ -170,7 +172,7 @@
   "INICIO_GRUPOSDEGESTION":"==============================================================",
       "LBL_GESTION":"Grupos Gestión",
       "LBL_FUNCIONES":"Funciones",
-      "LBL_RESPONSBILIDADES":"Responsabilidades",
+      "LBL_RESPONSABILIDADES":"Responsabilidades",
   "FIN_GRUPOGESTION":"=================================================================",
 
   "INICIO_LOCATION":"==============================================================",

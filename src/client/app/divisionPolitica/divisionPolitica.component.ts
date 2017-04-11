@@ -244,7 +244,7 @@ export class DivisionPoliticaComponent implements OnInit {
                      "children": chil
                  };
                  //console.info(this.politicalDivision);
-                 this.listadoTodo.push(data);
+                this.listadoTodo.push(data);
                  if (this.politicalDivision.idDivisionPoliticaPadre == 0) {
                      this.treedivisionPolitica.push(newChil);
                      this.newCountry();

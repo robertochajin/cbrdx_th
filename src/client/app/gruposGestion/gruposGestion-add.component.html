@@ -112,7 +112,7 @@
 </div>
 <p-dialog header="Confirmación" [(visible)]="displayDialog"
           responsive="true" modal="true">
-    <p>Si continua perdera la información no guardada. ¿Esta seguro que desea salir?.</p>
+    <p>{{ 'MSG_CONFIRMACION' | translate:param }} </p>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>
