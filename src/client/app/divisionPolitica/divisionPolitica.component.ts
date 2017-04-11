@@ -425,14 +425,16 @@ export class DivisionPoliticaComponent implements OnInit {
                 this.divisionPoliticaService.viewDivisionPolitica(res.idDivisionPoliticaPadre).subscribe(res => {
                     this.labelPadre = res.descripcionDivisonPolitica;
                     this.codeExists = false;
-                    // Scroll to Select
-                    jQuery('#trvDivisionPolitica').scrollTop(jQuery('.ui-state-highlight').position().top - jQuery('#trvDivisionPolitica').height() / 2);
 
                 });
             } else {
                 this.labelPadre = "";
             }
         });
+
+       // Scroll to Select
+       jQuery('#trvDivisionPolitica').scrollTop(jQuery('.ui-state-highlight').position().top - jQuery('#trvDivisionPolitica').height() / 2);
+
     }
 
     private searchRecursive(res:DivisionPolitica){
