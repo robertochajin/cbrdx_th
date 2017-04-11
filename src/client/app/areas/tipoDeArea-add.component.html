@@ -15,7 +15,7 @@
                     Ya se encuentra registrado ese código
                 </div>
                 <div *ngIf="f.submitted&&!codigoArea.valid" class="alert alert-danger">
-                    <div [hidden]="!codigoArea.errors.required">Debe ingresar un código para el tipo de área.
+                    <div [hidden]="!codigoArea.errors.required">Debe ingresar un codigo para el tipo de área.
                     </div>
                     <div [hidden]="!codigoArea.errors.maxlength">El código no debe tener mas de 8 caracteres.
                     </div>

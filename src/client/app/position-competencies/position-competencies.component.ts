@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import {SelectItem, ConfirmationService} from 'primeng/primeng';
 import {CompetenciesServices} from "../_services/competencies.service";
@@ -27,10 +27,7 @@ export class PositionCompetenciesComponent {
    positionCompetencies: PositionCompetencies [] = [];
    private groups: GroupCompetencies[];
    private ponderancies: Ponderancies[];
-   
-   @Output()
-   nextStep: EventEmitter<number> = new EventEmitter<number>();
-   
+
    constructor(private router: Router,
                private positionCompetenciesService: PositionCompetenciesServices,
                private competenciesServices: CompetenciesServices,
@@ -61,10 +58,6 @@ export class PositionCompetenciesComponent {
             });
          });
       });
-   }
-   
-   next(){
-      this.nextStep.emit(10);
    }
 
 }

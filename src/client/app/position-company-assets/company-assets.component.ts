@@ -34,6 +34,8 @@ export class CompanyAssetsComponent implements OnInit {
    }
 
    ngOnInit() {
+      this.position = new Positions();
+      this.position.idCargo = 10;
 
       this.listCompanyAssetsService.getAllEnabled().subscribe(listCompanyAssets => {
          this.listCompanyAssets = listCompanyAssets;
@@ -85,6 +87,6 @@ export class CompanyAssetsComponent implements OnInit {
       }
 
       if (this.permitirSiguiente)
-         this.nextStep.emit(11);
+         this.nextStep.emit(10);
    }
 }

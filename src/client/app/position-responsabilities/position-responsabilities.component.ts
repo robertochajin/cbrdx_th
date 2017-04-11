@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import {SelectItem, ConfirmationService} from 'primeng/primeng';
 import {PositionResponsabilitiesService} from "../_services/position-responsabilities.service";
@@ -21,9 +21,6 @@ export class PositionResponsabilitiesComponent {
    responsabilities: SelectItem[] = [];
    tr: PositionResponsabilities = new PositionResponsabilities();
    positionResponsabilities: PositionResponsabilities [] = [];
-   
-   @Output()
-   nextStep: EventEmitter<number> = new EventEmitter<number>();
 
    constructor(private router: Router,
                private positionResponsabilitiesService: PositionResponsabilitiesService,
@@ -32,7 +29,10 @@ export class PositionResponsabilitiesComponent {
    }
 
    ngOnInit() {
-
+      // provisional
+      this.position = new Positions();
+      this.position.idCargo = 10;
+      // fin provisional
       this.responsabilitiesServices.getAllEnabledByPosition(this.position.idCargo).subscribe(
          responsabilities => {
             this.responsabilities.unshift({label: 'Seleccione', value: null});
@@ -87,10 +87,6 @@ export class PositionResponsabilitiesComponent {
          }, reject: () => {
          }
       });
-   }
-   
-   next(){
-      this.nextStep.emit(5);
    }
 
 }

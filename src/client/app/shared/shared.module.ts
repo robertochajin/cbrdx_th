@@ -47,7 +47,7 @@ export class SharedModule {
 
         // Focus primer invalid campo
         jQuery('button').click(function () {
-          if (jQuery('input.ng-invalid').length) {
+          if (jQuery('.ng-invalid').length) {
             jQuery('body').scrollTop(jQuery('input.ng-invalid:first').position().top);
             setTimeout(() => {
               jQuery('input.ng-invalid:first').select().focus();

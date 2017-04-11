@@ -69,11 +69,4 @@ export class GruposGestionAddComponent implements OnInit {
         console.info(d);
         console.info(this.grupoGestion.fechaInicio);
     }
-   
-   capitalizeName() {
-      let input = this.grupoGestion.grupoGestion;
-      if(input != "" && input != null){
-         this.grupoGestion.grupoGestion = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
-      }
-   }
 }

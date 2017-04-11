@@ -128,6 +128,7 @@ import {CompanyAssetsComponent} from "./position-company-assets/company-assets.c
 
 // cargos posición en caso de ausencia
 import {AbsenceComponent} from "./position-absence/position-absence.component";
+import {PersonalityComponent} from "./position-personality/personality.component";
 
 const routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -234,6 +235,7 @@ const routes = [
 
   // Temporales
   {path: 'criterios', component: EvaluationCriteriasComponent, canActivate: [AuthGuard]},
+  {path: 'personalidad', component: PersonalityComponent, canActivate: [AuthGuard]},
   {path: 'activos', component: CompanyAssetsComponent, canActivate: [AuthGuard]},
   {path: 'responsabilidades', component: PositionResponsabilitiesComponent, canActivate: [AuthGuard]},
   {path: 'cargosroles', component: PositionRolesComponent, canActivate: [AuthGuard]},

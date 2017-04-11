@@ -2,7 +2,7 @@ import "rxjs/add/operator/switchMap";
 import {Absence} from "../_models/position-absence";
 import {Positions} from "../_models/positions";
 import {AbsenceService} from "../_services/position-absence.service";
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {SelectItem, Message, ConfirmationService} from 'primeng/primeng';
 
@@ -15,9 +15,7 @@ import {SelectItem, Message, ConfirmationService} from 'primeng/primeng';
 
 export class AbsenceComponent {
 
-   @Input()
-   position: Positions;
-   
+   @Input() positions: Positions;
    absence: Absence = new Absence();
    dialogObjet: Absence = new Absence();
    msgs: Message[] = [];
@@ -27,9 +25,6 @@ export class AbsenceComponent {
    listAbsenceREP: Absence[] = [];
    idCargoRelacionREE: number;
    idCargoRelacionREP: number;
-   
-   @Output()
-   nextStep: EventEmitter<number> = new EventEmitter<number>();
 
    constructor(private absenceService: AbsenceService,
                private router: Router,
@@ -40,7 +35,9 @@ export class AbsenceComponent {
 
    ngOnInit() {
 
-      this.absence.idCargo = this.position.idCargo;
+      this.route.params.subscribe((params: Params) => {
+         this.absence.idCargo = Number(+params['idCargo']);
+      });
       this.absenceService.getReemplazaA(this.absence.idCargo).subscribe(
          rest => {
             for (let r of rest) {
@@ -227,9 +224,5 @@ export class AbsenceComponent {
             this.dialogObjet = null;
          }
       });
-   }
-   
-   next(){
-      this.nextStep.emit(7);
    }
 }

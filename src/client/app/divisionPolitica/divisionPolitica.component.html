@@ -47,7 +47,7 @@
                                            [(ngModel)]="politicalDivision.codigoDivisionPolitica"
                                            (change)="validateCode()"
                                            (keyup)="capitalizeCodigo()"
-                                           #codigoDivisionPolitica="ngModel" maxlength="10"
+                                           #codigoDivisionPolitica="ngModel"
                                            required/>
                                     <div *ngIf="fdivision.submitted && !codigoDivisionPolitica.valid"
                                          class="help-block">
@@ -97,7 +97,7 @@
                         </div>
                         <div class="row" *ngIf="tabselected > 1">
                             <div class="form-group">
-                                <label for="codigoPostal" class="control-label col-sm-3">{{ 'LBL_CODIGO' | translate }} {{ 'LBL_POSTAL' | translate }}</label>
+                                <label for="codigoPostal" class="control-label col-sm-3">{{ 'LBL_CODIGOPOSTAL' | translate }}</label>
                                 <div class=" col-sm-9">
                                     <input type="text" pInputText class="form-control" id="codigoPostal"
                                            name="codigoPostal"

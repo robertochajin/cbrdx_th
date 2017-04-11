@@ -70,11 +70,4 @@ export class GruposGestionEditComponent {
     goBack(): void {
         this.router.navigate(['gruposGestion']);
     }
-   
-   capitalizeName() {
-      let input = this.grupoGestion.grupoGestion;
-      if(input != "" && input != null){
-         this.grupoGestion.grupoGestion = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
-      }
-   }
 }

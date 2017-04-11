@@ -15,9 +15,6 @@ import { PositionRolesModule } from "../position-roles/position-roles.module";
 import { PositionResponsabilitiesModule } from "../position-responsabilities/position-responsabilities.module";
 import { ProductivityModule } from "../position-productivity/productivity.module";
 import { RiskModule } from "../position-risks/position-risks.module";
-import { AbsenceModule } from "../position-absence/position-absence.module";
-import { PositionCompetenciesModule } from "../position-competencies/position-competencies.module";
-import { CompanyAssetsModule } from "../position-company-assets/company-assets.module";
 
 @NgModule( {
               imports: [
@@ -27,10 +24,7 @@ import { CompanyAssetsModule } from "../position-company-assets/company-assets.m
                  PositionRolesModule,
                  PositionResponsabilitiesModule,
                  RiskModule,
-                 ProductivityModule,
-                 AbsenceModule,
-                 PositionCompetenciesModule,
-                 CompanyAssetsModule
+                 ProductivityModule
               ],
    
               declarations: [

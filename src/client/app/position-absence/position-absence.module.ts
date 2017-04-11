@@ -19,5 +19,5 @@ import {AbsenceService} from '../_services/position-absence.service';
    providers: [AbsenceService],
    exports: [AbsenceComponent]
 })
-export class AbsenceModule {
+export class AbsencekModule {
 }

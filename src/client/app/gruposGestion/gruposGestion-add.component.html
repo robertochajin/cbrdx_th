@@ -28,8 +28,7 @@
             <label for="gGestion" class="control-label col-sm-3">Nombre </label>
             <div class=" col-sm-9">
                 <input type="text" pInputText class="form-control" id="gGestion" name="gGestion" #gGestion="ngModel"
-                       [(ngModel)]="grupoGestion.grupoGestion" required maxlength="64"
-                       pattern="[A-Z]{1}.*" (keyup)="capitalizeName()">
+                       [(ngModel)]="grupoGestion.grupoGestion" required maxlength="64" pattern="[A-Z]{1}.*">
                 <div *ngIf="f.submitted&&!gGestion.valid" class="alert alert-danger">
                     <div [hidden]="!gGestion.errors.required">Debe ingresar un nombre para el grupo de gestión</div>
                     <div [hidden]="!gGestion.errors.maxlength">El código no debe tener mas de 64 caracteres.</div>
