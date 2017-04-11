@@ -36,7 +36,7 @@
                             </div>
                         <div class="row">
                             <div class="form-group">
-                                <label for="codigoOcupacion" class="control-label col-sm-3">* Código </label>
+                                <label for="codigoOcupacion" class="control-label col-sm-3">* {{ 'LBL_CODIGO' | translate }} </label>
                                 <div class=" col-sm-9">
                                     <input type="text" pInputText class="form-control" id="codigoOcupacion"
                                            name="codigoOcupacion" [(ngModel)]="ocupaciones.codigoOcupacion"
@@ -71,7 +71,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+                                <label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate }}</label>
                                 <div class=" col-sm-9">
                                     <p-checkbox binary="true" id="indicador" name="indicador"
                                                 [(ngModel)]="ocupaciones.indicadorHabilitado">
@@ -82,8 +82,8 @@
                         <div class="row">
                             <div class="row form-footer-buttons">
                                 <div class="form-group col-md-12">
-                                    <a (click)="displayDialog=true" class="cancelar">Cancelar</a>
-                                    <button pButton type="submit" label="Guardar"></button>
+                                    <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+                                    <button pButton type="submit" label="{{ 'BTN_GUARDAR' | translate }}"></button>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
         </p-fieldset>
         <p-dialog header="Confirmación" [(visible)]="displayDialog"
                   responsive="true" modal="true">
-            <p>Si continua perdera la información no guardada.Esta seguro que desea salir?.</p>
+            <p> {{ 'MSG_CONFIRMACION' | translate }}</p>
             <p-footer>
                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                     <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>

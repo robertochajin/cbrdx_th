@@ -38,7 +38,7 @@ export class DivisionPoliticaService {
         return this.http.post(this.serviceURL, JSON.stringify(c), {headers: this.headers}).toPromise().then(res => res.json() as DivisionPolitica).catch(this.handleError);
     };
 
-    updateDivisionPolitica(c: DivisionPolitica): Promise<DivisionPolitica> {
+    updateDivisionPolitica(c: DivisionPolitica): Promise<any> {
         return this.http.put(this.serviceURL, JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
     }
 
