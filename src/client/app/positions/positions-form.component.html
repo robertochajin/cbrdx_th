@@ -407,13 +407,14 @@
          
          <p-accordionTab header="Personalidad" [selected]="acordion == 12"
                          [disabled]="step >0 && step <13">
-            <div class="ui-grid-row form-footer-buttons">
+            <personality  (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></personality>
+            <!--<div class="ui-grid-row form-footer-buttons">
                <div class="ui-grid-col-8"></div>
                <div class="ui-grid-col-3">
                   <button pButton icon="fa-plus" label="Siguiente" (click)="nextStep(13)"></button>
                </div>
                <div class="ui-grid-col-5"></div>
-            </div>
+            </div>-->
          </p-accordionTab>
          
          <p-accordionTab header="Factores de riesgo ocupacional" [selected]="acordion == 13"
@@ -433,7 +434,7 @@
                                  <div class="form-group col-md-3">
                                     <label for="puntos">* Puntos de valoración </label>
                                     <input type="text" pInputText id="puntos" name="puntos"
-                                           [(ngModel)]="position.puntos" #codigo="ngModel"
+                                           [(ngModel)]="position.puntos" #puntos="ngModel"
                                            required/>
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f14.submitted && !puntos.valid">
@@ -442,26 +443,21 @@
                                     </div>
                                  </div>
                                  <div class="form-group col-md-3">
-                                    <label for="idNivelEducacion">Nivel del cargo</label>
+                                    <!--<label for="idNivelEducacion">Nivel del cargo</label>
                                     <p-dropdown id="idNivelEducacion" name="idNivelEducacion" required="true"
                                                 [options]="levelTypes" [autoWidth]="false"
                                                 [(ngModel)]="position.idCategoria"
                                                 #idNivelEducacion="ngModel"
-                                    ></p-dropdown>
-                                    <div class="ui-message ui-messages-error ui-corner-all"
-                                         *ngIf="f14.submitted && !idNivelEducacion.valid">
-                                       <i class="fa fa-close"></i>
-                                       Nivel del cargo requerida
-                                    </div>
+                                    ></p-dropdown>-->
                                  </div>
                               </div>
                               <div class="row">
                                  <div class="form-group col-md-12">
-                                    <label for="idCategory">Area</label>
+                                    <label for="idCategory">Categoria de acuerdo al mapa de cargos</label>
                                     <p-dropdown id="idCategory" name="idCategory" required="true"
                                                 [options]="categoryTypes" [autoWidth]="false"
                                                 [(ngModel)]="position.idCategoria"
-                                                #idCategoria="ngModel"
+                                                #idCategory="ngModel"
                                     ></p-dropdown>
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f14.submitted && !idCategory.valid">
@@ -476,6 +472,11 @@
                                     <input type="text" pInputText id="salario" name="salario"
                                            [(ngModel)]="position.salario" #salario="ngModel"
                                     />
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f14.submitted && !salario.valid">
+                                       <i class="fa fa-close"></i>
+                                       Salario es requerido
+                                    </div>
                                  </div>
                               </div>
                            </div>
@@ -495,7 +496,7 @@
          
          <p-accordionTab header="Relación organizacional" [selected]="acordion == 15"
                          [disabled]="step >0 && step <16">
-            <p-tree [value]="treeArrray" layout="horizontal" selectionMode="single" [(selection)]="cargoActual" ></p-tree>
+            <p-tree [value]="treeArrray" layout="horizontal" selectionMode="single" [(selection)]="selectedNode" ></p-tree>
          </p-accordionTab>
       
       </p-accordion>

@@ -33,6 +33,7 @@ export class PositionsUpdateComponent {
    defaultState: any;
    aprobado:boolean = false;
    treeArrray: TreeNode[] = [];
+   selectedNode: TreeNode;
    step = 1;
    constructor( private positionsService: PositionsService,
                 private router: Router,
