@@ -61,7 +61,7 @@
             <div class="col-md-1 col-xs-12">
               <button *ngIf="i == 0" pButton type="button" (click)="addCriteria()" label="+"></button>
               <button *ngIf="i != 0" class="ui-button ui-button-danger btn" icon="fa-trash" pButton type="button"
-                      (click)="removeCriteria()"></button>
+                      (click)="removeCriteria(i)"></button>
             </div>
           </div>
           <div class="row">
@@ -108,5 +108,7 @@
       </p-column>
     </p-dataTable>
   </div>
+   <button type="button" pButton icon="fa-left-arrow" (click)="next()"
+           label="Siguiente"></button>
 </div>
 <p-confirmDialog width="400"></p-confirmDialog>
