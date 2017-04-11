@@ -123,6 +123,8 @@ import {PositionsUpdateComponent} from "./positions/positions-update.component";
 import {EvaluationCriteriasComponent} from "./position-evaluation-criterias/evaluation-criterias.component";
 import {PositionResponsabilitiesComponent} from "./position-responsabilities/position-responsabilities.component";
 import {PositionRolesComponent} from "./position-roles/position-roles.component";
+import {PositionCompetenciesComponent} from "./position-competencies/position-competencies.component";
+
 // cargos posición en caso de ausencia
 import {AbsenceComponent} from "./position-absence/position-absence.component";
 
@@ -229,6 +231,12 @@ const routes = [
   {path: 'tipoArea/detail/:id', component: TipoDeAreaDetailComponent, canActivate: [AuthGuard]},
   {path: 'tipoArea/edit/:id', component: TipoDeAreaEditComponent, canActivate: [AuthGuard]},
 
+  // Temporales
+  {path: 'criterios', component: EvaluationCriteriasComponent, canActivate: [AuthGuard]},
+  {path: 'responsabilidades', component: PositionResponsabilitiesComponent, canActivate: [AuthGuard]},
+  {path: 'cargosroles', component: PositionRolesComponent, canActivate: [AuthGuard]},
+  {path: 'competencias', component: PositionCompetenciesComponent, canActivate: [AuthGuard]},
+
   // Arboles
   {path: 'divisionPolitica', component: DivisionPoliticaComponent, canActivate: [AuthGuard]},
   {path: 'ocupaciones', component: OcupacionesComponent, canActivate: [AuthGuard]},
@@ -239,17 +247,23 @@ const routes = [
   {path: 'faults/add', component: FaultsAndSanctionsAddComponent, canActivate: [AuthGuard]},
   {path: 'faults/update/:id', component: FaultsAndSanctionsUpdateComponent, canActivate: [AuthGuard]},
 
+   // Temporales
+   {path: 'criterios', component: EvaluationCriteriasComponent, canActivate: [AuthGuard]},
+   {path: 'responsabilidades', component: PositionResponsabilitiesComponent, canActivate: [AuthGuard]},
+   {path: 'cargosroles', component: PositionRolesComponent, canActivate: [AuthGuard]},
+
   // Cargos
   {path: 'positions', component: PositionsComponent, canActivate: [AuthGuard]},
   {path: 'positions/add', component: PositionsAddComponent, canActivate: [AuthGuard]},
   {path: 'positions/update/:id', component: PositionsUpdateComponent, canActivate: [AuthGuard]},
-//  Cargos Productividad
+
+  //  Cargos Productividad
   {path: 'productivity/:idCargo', component: ProductivityComponent, canActivate: [AuthGuard]},
 
 
   // cargos factores de riesgo
   {path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [AuthGuard]},
-//cargos posición en caso de ausencia
+  //cargos posición en caso de ausencia
   {path: 'position-absence/:idCargo', component: AbsenceComponent, canActivate: [AuthGuard]},
 
 
