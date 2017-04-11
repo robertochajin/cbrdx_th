@@ -13,6 +13,10 @@ export class PositionsService {
    }
    
    getAll() {
+      return this.http.get( this.serviceURL + 'cargos' ).map( ( res: Response ) => res.json() );
+   }
+   
+   getListPositions() {
       return this.http.get( this.serviceURL + 'cargos/enabled' ).map( ( res: Response ) => res.json() );
    }
    
@@ -25,22 +29,33 @@ export class PositionsService {
    }
    
    get( id: number ) {
-      return this.http.get( this.serviceURL + 'cargos/' + id ).map( ( res: Response ) => res.json() as Positions );
+      return this.http.get( this.serviceURL + 'cargos/' + id ).map(( res: Response ) => {
+         if(res.text() != ""){
+            return res.json() as Positions
+         }else{
+            return new Positions;
+         }
+      }).catch(this.handleError);
    }
    
    getListfaultsTypes() {
       return this.http.get( this.serviceURL + 'cargos' ).map( ( res: Response ) => res.json() );
    }
    
-   getObservations( id: number ) {
-      return this.http.get( this.serviceURL + 'observaciones' ).map( ( res: Response ) => res.json() );
+   getObservationsbyPosition( id: number ) {
+      return this.http.get( this.serviceURL + 'cargosEstadosObservaciones' ).map( ( res: Response ) => res.json() );
    }
    
    updateObservations( obj: PositionsObservations ) {
-      return this.http.put( this.serviceURL + 'observaciones', obj ).map( ( res: Response ) => res );
+      return this.http.put( this.serviceURL + 'cargosEstadosObservaciones', obj ).map( ( res: Response ) => res );
    }
    
    addObservations( obj: PositionsObservations ) {
-      return this.http.post( this.serviceURL + 'observaciones', obj ).map( ( res: Response ) => res.json() );
+      return this.http.post( this.serviceURL + 'cargosEstadosObservaciones', obj ).map( ( res: Response ) => res.json() );
    };
+   
+   handleError(error: any): Promise<any> {
+      console.error('Error:', error);
+      return Promise.reject(error.message || error);
+   }
 }

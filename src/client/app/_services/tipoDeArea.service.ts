@@ -8,7 +8,7 @@ import {AuthenticationService} from "./authentication.service";
 export class TipoDeAreaService {
 
     headers = new Headers({'Content-Type': 'application/json'});
-    private serviceURL = '<%= SVC_SP_URL %>/tipoArea/';
+    private serviceURL = '<%= SVC_TH_URL %>/api/estructuraAreas/';
 
     constructor(private http: Http,
                 private authenticationService: AuthenticationService
@@ -30,6 +30,9 @@ export class TipoDeAreaService {
 
     viewArea(id: number) {
         return this.http.get(this.serviceURL + id,{headers: this.headers}).map(res => res.json() as TipoDeArea);
+    }
+    getlistAreas() {
+        return this.http.get(this.serviceURL + 'enabled',{headers: this.headers}).map((res: Response) => res.json() as TipoDeArea[]);
     }
 
     handleError(error: any): Promise<any> {

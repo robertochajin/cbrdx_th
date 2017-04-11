@@ -6,6 +6,7 @@ import { Positions } from "../_models/positions";
 import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
 import { PositionsService } from "../_services/positions.service";
 import { ListPositionsService } from "../_services/lists-positions.service";
+import { TipoDeAreaService } from "../_services/tipoDeArea.service";
 
 @Component( {
                moduleId: module.id,
@@ -17,55 +18,58 @@ import { ListPositionsService } from "../_services/lists-positions.service";
 export class PositionsAddComponent {
    position: Positions = new Positions();
    categoryTypes: SelectItem[] = [];
+   areaTypes: SelectItem[] = [];
    bossPositionTypes: SelectItem[] = [];
    stateTypes: SelectItem[] = [];
    disableTabs: boolean = true;
    msgs: Message[] = [];
+   defaultState: any;
+   step = 1;
    
    constructor( private positionsService: PositionsService,
                 private router: Router,
                 private route: ActivatedRoute,
                 private location: Location,
                 private listPositionsService: ListPositionsService,
+                private tipoDeAreaService: TipoDeAreaService,
                 private confirmationService: ConfirmationService ) {
       
-      this.listPositionsService.getCategoryTypes().subscribe( res => {
-         this.categoryTypes.push( { label: "Seleccione", value: null } );
-         for ( let dp of res ) {
-            this.categoryTypes.push( {
-                                        label: dp.categoria,
-                                        value: dp.idCategoria
-                                     } );
-         }
-      } );
       
-      this.positionsService.getAll().subscribe( res => {
+      this.positionsService.getListPositions().subscribe( res => {
          this.bossPositionTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
             this.bossPositionTypes.push( {
-                                            label: dp.nombre,
+                                            label: dp.cargo,
                                             value: dp.idCargo
                                          } );
          }
       } );
-      
-      this.listPositionsService.getstateTypes().subscribe( res => {
-         this.stateTypes.push( { label: "Seleccione", value: null } );
+      this.tipoDeAreaService.getlistAreas().subscribe( res => {
+         this.areaTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
-            this.stateTypes.push( {
-                                     label: dp.observacion,
-                                     value: dp.idEstadoCargo
-                                  } );
+            this.areaTypes.push( {
+                                            label: dp.estructuraArea,
+                                            value: dp.idEstructuraArea
+                                         } );
          }
       } );
+      
+      //this.defaultState = this.listPositionsService.getstateByCode("CONST");
+      this.listPositionsService.getstateByCode("CONST").subscribe( res => {
+         this.defaultState = res;
+         
+      });
       
    }
    
    ngOnInit() {
    }
    
-   onSubmit() {
+   onSubmit0() {
       this.msgs = [];
+      this.position.idEstado = this.defaultState.idListaEstadoCargo;
+      this.position.paso = 2;
+      //console.info( this.position);
       this.positionsService.add( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
@@ -86,12 +90,11 @@ export class PositionsAddComponent {
                                         } );
    }
    
-   capitalize( event: any ) {
-      let input = event.target.value;
-      event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+   capitalizeNombre() {
+      let input = this.position.cargo;
+      if(input != "" && input != null ){
+         this.position.cargo = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+      }
    }
-   
-   capitalizeSave( input: any ) {
-      return input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
-   }
+ 
 }

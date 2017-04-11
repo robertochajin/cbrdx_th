@@ -25,11 +25,11 @@ export class PositionsComponent {
     }
 
     ngOnInit() {
-        /*this.positionsService.getAll().subscribe(
+        this.positionsService.getAll().subscribe(
             positions => {
               this.positions = positions;
             }
-        );*/
+        );
 
     }
 
