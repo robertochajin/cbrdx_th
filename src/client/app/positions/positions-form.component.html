@@ -25,6 +25,7 @@
                                     <label for="nombre">* Nombre</label>
                                     <input type="text" pInputText id="nombre" name="nombre"
                                            [(ngModel)]="position.cargo" #nombre="ngModel"
+                                           (keyup) = "capitalizeNombre()"
                                            required/>
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !nombre.valid">
@@ -35,7 +36,7 @@
                               </div>
                               <div class="row">
                                  <div class="form-group col-md-6">
-                                    <label for="idEstructuraArea">Area</label>
+                                    <label for="idEstructuraArea">* Area</label>
                                     <p-dropdown id="idEstructuraArea" name="idEstructuraArea" required="true"
                                                 [options]="areaTypes" [autoWidth]="false"
                                                 [(ngModel)]="position.idEstructuraArea"
@@ -48,10 +49,15 @@
                                     </div>
                                  </div>
                                  <div class="form-group col-md-6">
-                                    <label for="personaACargoDir">Personas a cargo Directas</label>
+                                    <label for="personaACargoDir">* Personas a cargo Directas</label>
                                     <input type="text" pInputText id="personaACargoDir" name="personaACargoDir" type="number"
-                                           [(ngModel)]="position.personaACargoDir" #personaACargoDir="ngModel" type="number"
+                                           [(ngModel)]="position.personaACargoDir" #personaACargoDir="ngModel" required
                                     />
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f0.submitted && !personaACargoDir.valid">
+                                       <i class="fa fa-close"></i>
+                                       Personas a cargo es requerido
+                                    </div>
                                  </div>
                               </div>
                               <div class="row">
@@ -69,20 +75,25 @@
                                     </div>-->
                                  </div>
                                  <div class="form-group col-md-6">
-                                    <label for="personaACargoInd">Personas a cargo Indirectas</label>
-                                    <input type="text" pInputText id="personaACargoInd" name="personaACargoInd"
+                                    <label for="personaACargoInd">* Personas a cargo Indirectas</label>
+                                    <input type="text" pInputText id="personaACargoInd" name="personaACargoInd" required
                                            [(ngModel)]="position.personaACargoInd" #personaACargoInd="ngModel" type="number"
                                     />
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f0.submitted && !personaACargoInd.valid">
+                                       <i class="fa fa-close"></i>
+                                       Personas a cargo es requerido
+                                    </div>
                                  </div>
                               </div>
                               <div class="row">
                                  <div class=" col-sm-12">
-                                    <label for="mision">Misión del cargo</label>
+                                    <label for="mision">* Misión del cargo</label>
                                     <textarea pInputTextarea id="mision" name="mision"
                                               [(ngModel)]="position.mision" #mision="ngModel"
                                               [required]="true"></textarea>
                                     <div *ngIf="f0.submitted && !mision.valid"
-                                         class="ui-message  ui-corner-all">
+                                         class="ui-message ui-messages-error ui-corner-all">
                                        Misión del cargo es requerido
                                     </div>
                                  </div>
@@ -113,7 +124,7 @@
                            </div>
                            <div class="row form-footer-buttons">
                               <div class="form-group col-md-12">
-                                 <button icon="fa-plus" label="Guardar" type="submit"
+                                 <button icon="fa-plus" label="Siguiente" type="submit"
                                          pButton></button>
                               </div>
                            </div>
@@ -137,7 +148,7 @@
          
          <p-accordionTab header="Producto de valor esperado y criterios de desempeño" [selected]="acordion == 1"
                          [disabled]="step == 1">
-               <evaluation-criterias *ngIf="position.idCargo" [position]="position"></evaluation-criterias>
+               <evaluation-criterias (nextStep)="onSubmit1($event)" *ngIf="position.idCargo" [position]="position"></evaluation-criterias>
          </p-accordionTab>
          
          <p-accordionTab header="Interrelaciones" [selected]="acordion == 2"
@@ -148,7 +159,6 @@
                      <div class="col-md-12">
                         <form name="formulario" (ngSubmit)="f2.valid && onSubmit2()" #f2="ngForm" novalidate>
                            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-                     
                               <div class="row">
                                  <div class=" col-sm-12">
                                     <label for="interrelacionesInternas">Internas</label>
@@ -173,11 +183,10 @@
                                     </div>
                                  </div>
                               </div>
-                  
                            </div>
                            <div class="row form-footer-buttons">
                               <div class="form-group col-md-12">
-                                 <button icon="fa-plus" label="Guardar" type="submit"
+                                 <button icon="fa-plus" label="Guardar y Siguente" type="submit"
                                          pButton></button>
                               </div>
                            </div>
@@ -191,12 +200,12 @@
          
          <p-accordionTab header="Rol dentro del proceso" [selected]="acordion == 3"
                          [disabled]="step >0 && step <4">
-            <position-roles *ngIf="position.idCargo" [position]="position"></position-roles>
+            <position-roles (nextStep)="onSubmit3($event)" *ngIf="position.idCargo" [position]="position"></position-roles>
          </p-accordionTab>
          
          <p-accordionTab header="Responsabilidades principales" [selected]="acordion == 4"
                          [disabled]="step >0 && step <5">
-            <position-responsabilities *ngIf="position.idCargo" [position]="position"></position-responsabilities>
+            <position-responsabilities (nextStep)="onSubmit4($event)" *ngIf="position.idCargo" [position]="position"></position-responsabilities>
          </p-accordionTab>
          
          <p-accordionTab header="Responsabilidades complemenarias" [selected]="acordion == 5"
@@ -225,7 +234,7 @@
                            </div>
                            <div class="row form-footer-buttons">
                               <div class="form-group col-md-12">
-                                 <button icon="fa-plus" label="Guardar" type="submit"
+                                 <button icon="fa-plus" label="Guardar y Siguente" type="submit"
                                          pButton></button>
                               </div>
                            </div>
@@ -279,7 +288,7 @@
                            </div>
                            <div class="row form-footer-buttons">
                               <div class="form-group col-md-12">
-                                 <button icon="fa-plus" label="Guardar" type="submit"
+                                 <button icon="fa-plus" label="Guardar y Siguente" type="submit"
                                          pButton></button>
                               </div>
                            </div>
@@ -368,7 +377,7 @@
                            </div>
                            <div class="row form-footer-buttons">
                               <div class="form-group col-md-12">
-                                 <button icon="fa-plus" label="Guardar" type="submit"
+                                 <button icon="fa-plus" label="Guardar y Siguente" type="submit"
                                          pButton></button>
                               </div>
                            </div>
@@ -435,7 +444,7 @@
                            </div>
                            <div class="row form-footer-buttons">
                               <div class="form-group col-md-12">
-                                 <button icon="fa-plus" label="Guardar" type="submit"
+                                 <button icon="fa-plus" label="Guardar y Siguente" type="submit"
                                          pButton></button>
                               </div>
                            </div>
@@ -449,7 +458,7 @@
          
          <p-accordionTab header="Productividad" [selected]="acordion == 11"
                          [disabled]="step >0 && step <12">
-            <productivity *ngIf="position.idCargo" [position]="position"></productivity>
+            <productivity (nextStep)="updateStep11($event)" *ngIf="position.idCargo" [position]="position"></productivity>
          </p-accordionTab>
          
          <p-accordionTab header="Personalidad" [selected]="acordion == 12"
@@ -521,7 +530,7 @@
                            </div>
                            <div class="row form-footer-buttons">
                               <div class="form-group col-md-12">
-                                 <button icon="fa-plus" label="Guardar" type="submit"
+                                 <button icon="fa-plus" label="Guardar y Siguente" type="submit"
                                          pButton></button>
                               </div>
                            </div>
@@ -535,6 +544,7 @@
          
          <p-accordionTab header="Relación organizacional" [selected]="acordion == 15"
                          [disabled]="step >0 && step <16">
+            <p-tree [value]="treeArrray" layout="horizontal" selectionMode="single" [(selection)]="cargoActual" ></p-tree>
          </p-accordionTab>
       
       </p-accordion>
