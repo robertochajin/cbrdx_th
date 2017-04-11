@@ -33,6 +33,7 @@ export class PositionsUpdateComponent {
    defaultState: any;
    aprobado:boolean = false;
    treeArrray: TreeNode[] = [];
+   selectedNode: TreeNode;
    step = 1;
    constructor( private positionsService: PositionsService,
                 private router: Router,
@@ -259,6 +260,23 @@ export class PositionsUpdateComponent {
       }
       this._nav.setTab(9);
       this.acordion = 9;
+      this.positionsService.update( this.position )
+      .subscribe( data => {
+         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         //this.router.navigate(['positions/update/'+data.idCargo]);
+      }, error => {
+         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+      } );
+   }
+   
+   onSubmit14() {
+      this.msgs = [];
+      if(this.position.paso == 15){
+         this.position.paso = 16;
+         this.step = 16;
+      }
+      this._nav.setTab(15);
+      this.acordion = 15;
       this.positionsService.update( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );

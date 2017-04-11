@@ -3,7 +3,7 @@ import {Location} from "@angular/common";
 import {Risk} from "../_models/position-risks";
 import {RiskService} from "../_services/positios-risks.service";
 import {NavService} from "../_services/_nav.service"
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {Exam} from '../_models/position-exam';
 import {SelectItem, Message, ConfirmationService} from 'primeng/primeng';
@@ -20,6 +20,9 @@ export class RiskComponent {
    @Input()
    position: Positions;
   Risk: Risk;
+   
+   @Output()
+   nextStep: EventEmitter<number> = new EventEmitter<number>();
   
   header: string = 'Riesgos Laborales';
   risk: Risk = new Risk();
@@ -240,7 +243,10 @@ export class RiskComponent {
   //       });
   //   }
   // }
-
+   next(){
+      this.nextStep.emit(14);
+   }
+   
 }
 
 
