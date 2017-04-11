@@ -9,10 +9,10 @@ import {Search} from "../_models/search";
 
 
 @Component({
-   moduleId: module.id,
-   templateUrl: 'actividadEconomica.component.html',
-   selector: 'actividadEconomica'
-})
+              moduleId: module.id,
+              templateUrl: 'actividadEconomica.component.html',
+              selector: 'actividadEconomica'
+           })
 export class ActividadEconomicaComponent implements OnInit {
 
    msgs: Message[] = [];
@@ -25,7 +25,7 @@ export class ActividadEconomicaComponent implements OnInit {
    tabselected: number = 1;
    labeltabselected: string;
    header: string;
-   labelPadre: string = '';
+   labelPadre: string = "";
    labelTipo: string;
    labelfieldactividad: string;
    btnactivity: {show: boolean, label: string, idparent: number, parent: string} = {
@@ -52,20 +52,20 @@ export class ActividadEconomicaComponent implements OnInit {
          this.listadoActividadEconomica = res;
          for (let c of this.listadoActividadEconomica.filter(t => t.idActividadPadre == 0)) {
             this.treeActividadEconomica.push({
-               "value": c.idActividadEconomica,
-               "label": c.actividadEconomica,
-               "level": 1,
+                                                "value": c.idActividadEconomica,
+                                                "label": c.actividadEconomica,
+                                                "level": 1,
 
-               "codigo": c.codigoActividadEconomica,
-               "children": [{
-                  "value": 0,
-                  "label": '+ Cargando...',
-                  "level": 2,
-                  "codigo": "",
-                  "data": c,
-                  "children": {}
-               }]
-            });
+                                                "codigo": c.codigoActividadEconomica,
+                                                "children": [{
+                                                   "value": 0,
+                                                   "label": '+ Cargando...',
+                                                   "level": 2,
+                                                   "codigo": "",
+                                                   "data" : c,
+                                                   "children": {}
+                                                }]
+                                             });
          }
       });
 
@@ -100,15 +100,15 @@ export class ActividadEconomicaComponent implements OnInit {
 
       for (let c of this.listadoActividadEconomica.filter(t => t.idActividadPadre == node.value)) {
          actividadEconomicaNivel.push({
-            "value": c.idActividadEconomica,
-            "label": c.actividadEconomica,
-            "level": node.level + 1,
-            "parent": node,
-            "data": c,
-            "codigo": c.codigoActividadEconomica,
-            "children": chil
+                                         "value": c.idActividadEconomica,
+                                         "label": c.actividadEconomica,
+                                         "level": node.level + 1,
+                                         "parent":node,
+                                         "data": c,
+                                         "codigo": c.codigoActividadEconomica,
+                                         "children": chil
 
-         });
+                                      });
       }
       node.children = actividadEconomicaNivel;
    }
@@ -430,16 +430,24 @@ export class ActividadEconomicaComponent implements OnInit {
 
    capitalizeCodigo() {
       let input = this.actividadEconomica.codigoActividadEconomica;
-      if (input != "" && input != null) {
+      if(input != "" && input != null){
          this.actividadEconomica.codigoActividadEconomica = input.toUpperCase();
       }
    }
+
+   capitalizeName() {
+      let input = this.actividadEconomica.actividadEconomica;
+      if(input != "" && input != null){
+         this.actividadEconomica.actividadEconomica = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
+      }
+    }
+
 }
 class Tree {
    value: number;
    label: string;
    level: number;
    codigo: string;
-   expanded: boolean;
+   expanded:boolean;
    children: Tree[];
 }
