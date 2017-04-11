@@ -309,8 +309,8 @@ export class SeedConfig {
    * Se definen la IP y el PUERTO con la cual la vista se conecta a los servicios Solucion de proteccion
    * @type {string}
    */
-  //IP = '192.168.253.37'; //_CREZCAMOS
-  IP = '40.71.92.147'; //_CIBERDIX
+  IP = '192.168.253.37'; //_CREZCAMOS
+  //IP = '40.71.92.147'; //_CIBERDIX
   SVC_SP_PORT = '8447';
 
   SVC_SP_URL = "http://" + this.IP+":"+this.SVC_SP_PORT;
