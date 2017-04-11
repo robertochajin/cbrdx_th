@@ -223,8 +223,8 @@ export class ActividadEconomicaComponent implements OnInit {
             this.selectedNode.label = this.actividadEconomica.actividadEconomica;
             this.header = this.actividadEconomica.actividadEconomica;
             for (let i = 0; i < this.listadoActividadEconomica.length; i++) {
-               if (this.listadoActividadEconomica[i].idActividadEconomica === data.idActividadEconomica) {
-                  this.listadoActividadEconomica[i] = data;
+               if (this.listadoActividadEconomica[i].idActividadEconomica === this.actividadEconomica.idActividadEconomica) {
+                  this.listadoActividadEconomica[i] = this.actividadEconomica;
                   return;
                }
             }
@@ -431,7 +431,8 @@ export class ActividadEconomicaComponent implements OnInit {
    capitalizeCodigo() {
       let input = this.actividadEconomica.codigoActividadEconomica;
       if(input != "" && input != null){
-         this.actividadEconomica.codigoActividadEconomica = input.toUpperCase();
+         this.actividadEconomica.codigoActividadEconomica = input.toUpperCase().replace(' ', '').trim();
+   
       }
    }
 

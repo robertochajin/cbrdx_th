@@ -93,12 +93,6 @@ export class PositionRolesComponent {
    }
    
    next(){
-      //validar 100 y seguir
-      if(this.oneHundred){
-         this.nextStep.emit(2);
-      } else {
-         //Envía mensaje
-         
-         
-         
-      }
+         this.nextStep.emit(4);
+   }
+}
