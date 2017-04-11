@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {Router} from '@angular/router';
 import {ConfirmationService} from 'primeng/primeng';
 import * as moment from 'moment/moment';
@@ -20,10 +20,14 @@ export class EvaluationCriteriasComponent {
    position: Positions;
    editing: boolean = false;
    positionCriterias: PositionCriterias[] = [];
+   backUpPositionCriterias: PositionCriterias[] = [];
    //criteria: PositionCriterias = new PositionCriterias();
    evaluationCriterias: EvaluationCriterias[] = [];
    oneHundred: boolean = false;
    total: number = 0;
+
+   @Output()
+   nextStep: EventEmitter<boolean> = new EventEmitter<boolean>();
 
    constructor(private router: Router,
                private positionCriteriasService: PositionCriteriasService,
@@ -93,6 +97,7 @@ export class EvaluationCriteriasComponent {
    }
 
    editCriterias() {
+      this.backUpPositionCriterias = this.positionCriterias;
       if(this.positionCriterias.length == 0){
          let nc = new PositionCriterias();
          nc.indicadorHabilitado = true;
@@ -122,8 +127,19 @@ export class EvaluationCriteriasComponent {
          icon: 'fa fa-question-circle',
 
          accept: () => {
-
+            this.editing = false;
+            this.positionCriterias = this.backUpPositionCriterias;
          }
       });
+   }
+
+   next(){
+      //validar 100 y seguir
+      if(this.oneHundred){
+         this.nextStep.emit(true);
+      } else {
+         //Envía mensaje
+         this.nextStep.emit(false);
+      }
    }
 }
