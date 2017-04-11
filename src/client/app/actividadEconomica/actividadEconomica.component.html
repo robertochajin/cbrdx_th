@@ -87,22 +87,18 @@
                                 </div>
                             </div>
                         </div>
+                  <div class="row">
+                      <div class="form-group">
+                          <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+                          <div class=" col-sm-9">
 
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="indicador" class="control-label col-sm-3">Habilitado</label>
-                                <div class=" col-sm-9">
+                              <p-checkbox binary="true" id="indicador" name="indicador"
+                                          [(ngModel)]="actividadEconomica.indicadorHabilitado">
+                              </p-checkbox>
 
-                                    <p-checkbox binary="true" id="indicador" name="indicador"
-                                                [(ngModel)]="actividadEconomica.indicadorHabilitado">
-                                    </p-checkbox>
-
-                                </div>
-                            </div>
-                        </div>
-                     </div>
+                          </div>
+                      </div>
                   </div>
-                  
                   <div class="row">
                      <div class="form-group">
                         <label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate }}</label>

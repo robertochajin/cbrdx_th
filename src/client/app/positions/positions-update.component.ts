@@ -111,7 +111,7 @@ export class PositionsUpdateComponent {
          this.positionsService.get( +params[ 'id' ] ).subscribe( position => {
             this.position = position;
             this.step = this.position.paso;
-            this.step = 3;
+            //this.step = 3;
             if(this.step >0 && this.step <16){
                if(this._nav.getTab() > 0 && this._nav.getTab()!= null){
                   this.acordion = this._nav.getTab();
@@ -165,6 +165,21 @@ export class PositionsUpdateComponent {
       
       this.acordion = this._nav.getTab();
    }
+   nextStep(step:number) {
+      this.msgs = [];
+      if(this.position.paso!= 0 && this.position.paso <= step){
+         this.position.paso = step+1;
+         this.step = this.position.paso;
+      }
+      this._nav.setTab(step);
+      this.acordion = step;
+      this.positionsService.update( this.position )
+      .subscribe( data => {
+         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+      }, error => {
+         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+      } );
+   }
    
    onSubmit0() {
       this.msgs = [];
@@ -172,6 +187,8 @@ export class PositionsUpdateComponent {
          this.position.paso = 2;
          this.step = 2;
       }
+      this._nav.setTab(1);
+      this.acordion = 1;
       this.positionsService.update( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
@@ -186,7 +203,7 @@ export class PositionsUpdateComponent {
       if(this.position.paso == 2){
          this.position.paso = 3;
          this.step = 3;
-         this._nav.setTab(2)
+         this._nav.setTab(2);
          this.acordion = 2;
       }
       this.positionsService.update( this.position )
@@ -200,12 +217,13 @@ export class PositionsUpdateComponent {
    
    onSubmit2() {
       this.msgs = [];
-      if(this.position.paso == 3){
+      if(this.position.paso <= 3){
          this.position.paso = 4;
          this.step = 4;
       }
-      this._nav.setTab(3)
+      this._nav.setTab(3);
       this.acordion = 3;
+      console.info(this.step);
       this.positionsService.update( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
@@ -221,7 +239,7 @@ export class PositionsUpdateComponent {
          this.position.paso = 5;
          this.step = 5;
       }
-      this._nav.setTab(4)
+      this._nav.setTab(4);
       this.acordion = 4;
       this.positionsService.update( this.position )
       .subscribe( data => {
@@ -238,7 +256,7 @@ export class PositionsUpdateComponent {
          this.position.paso = 6;
          this.step = 6;
       }
-      this._nav.setTab(5)
+      this._nav.setTab(5);
       this.acordion = 5;
       this.positionsService.update( this.position )
       .subscribe( data => {

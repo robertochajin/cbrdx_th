@@ -124,7 +124,7 @@
                            </div>
                            <div class="row form-footer-buttons">
                               <div class="form-group col-md-12">
-                                 <button icon="fa-plus" label="Siguiente" type="submit"
+                                 <button icon="fa-plus" label="Guardar y Siguiente" type="submit"
                                          pButton></button>
                               </div>
                            </div>
@@ -148,7 +148,7 @@
          
          <p-accordionTab header="Producto de valor esperado y criterios de desempeño" [selected]="acordion == 1"
                          [disabled]="step == 1">
-               <evaluation-criterias (nextStep)="onSubmit1($event)" *ngIf="position.idCargo" [position]="position"></evaluation-criterias>
+               <evaluation-criterias (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></evaluation-criterias>
          </p-accordionTab>
          
          <p-accordionTab header="Interrelaciones" [selected]="acordion == 2"
@@ -167,7 +167,7 @@
                                               #interrelacionesInternas="ngModel"
                                               [required]="true"></textarea>
                                     <div *ngIf="f2.submitted && !interrelacionesInternas.valid"
-                                         class="ui-message  ui-corner-all">
+                                         class="ui-message ui-messages-error ui-corner-all">
                                        Interrelaciones Internas es requerido
                                     </div>
                                  </div>
@@ -178,7 +178,7 @@
                                               #interrelacionesExternas="ngModel"
                                               [required]="true"></textarea>
                                     <div *ngIf="f2.submitted && !interrelacionesExternas.valid"
-                                         class="ui-message  ui-corner-all">
+                                         class="ui-message ui-messages-error ui-corner-all">
                                        Interrelaciones Externas es requerido
                                     </div>
                                  </div>
@@ -199,13 +199,13 @@
          </p-accordionTab>
          
          <p-accordionTab header="Rol dentro del proceso" [selected]="acordion == 3"
-                         [disabled]="step >0 && step <4">
-            <position-roles (nextStep)="onSubmit3($event)" *ngIf="position.idCargo" [position]="position"></position-roles>
+                         [disabled]="step >0 && step < 4">
+            <position-roles (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-roles>
          </p-accordionTab>
          
          <p-accordionTab header="Responsabilidades principales" [selected]="acordion == 4"
                          [disabled]="step >0 && step <5">
-            <position-responsabilities (nextStep)="onSubmit4($event)" *ngIf="position.idCargo" [position]="position"></position-responsabilities>
+            <position-responsabilities (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-responsabilities>
          </p-accordionTab>
          
          <p-accordionTab header="Responsabilidades complemenarias" [selected]="acordion == 5"
