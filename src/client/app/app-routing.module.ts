@@ -123,7 +123,8 @@ import {PositionsUpdateComponent} from "./positions/positions-update.component";
 import {EvaluationCriteriasComponent} from "./position-evaluation-criterias/evaluation-criterias.component";
 import {PositionResponsabilitiesComponent} from "./position-responsabilities/position-responsabilities.component";
 import {PositionRolesComponent} from "./position-roles/position-roles.component";
-
+// cargos posición en caso de ausencia
+import {AbsenceComponent} from "./position-absence/position-absence.component";
 
 const routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -248,6 +249,8 @@ const routes = [
 
   // cargos factores de riesgo
   {path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [AuthGuard]},
+//cargos posición en caso de ausencia
+  {path: 'position-absence/:idCargo', component: AbsenceComponent, canActivate: [AuthGuard]},
 
 
 ];
