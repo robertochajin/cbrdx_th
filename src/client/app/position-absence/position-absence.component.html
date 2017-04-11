@@ -1,0 +1,100 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+   <p-footer>
+      <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+      <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+   </p-footer>
+</p-confirmDialog>
+<div *ngIf="absence">
+   <div class="row">
+      <div class="col-md-12">
+         <div class="header">
+            <h3 class="title">Posición en caso de ausencia</h3>
+         </div>
+      </div>
+   </div>
+   <form (ngSubmit)="fr.valid && onSubmitREE()" #fr="ngForm" novalidate id="formulario">
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+         <div class="ui-grid-row">
+            <div class="ui-grid-col-12">
+               <label for="idCargoREE"><h3>Reemplaza a</h3></label>
+               <p-dropdown id="idCargoREE" name="idCargoREE" required="true"
+                           [options]="listPositionREE" [autoWidth]="false"
+                           [(ngModel)]="idCargoRelacionREE" #idCargoREE="ngModel"
+               ></p-dropdown>
+               <div class="ui-message ui-messages-error ui-corner-all"
+                    *ngIf="fr.submitted && !idCargoREE.valid">
+                  <i class="fa fa-close"></i>
+                  Cargo requerido
+               </div>
+            </div>
+         </div>
+         <div class="ui-grid-row form-footer-buttons">
+            <div class="ui-grid-col-4"></div>
+            <div class="ui-grid-col-1">
+            </div>
+            <div class="ui-grid-col-2">
+               <button pButton icon="fa-plus" label="Guardar" type="submit"></button>
+            </div>
+            <div class="ui-grid-col-5"></div>
+         </div>
+      </div>
+   </form>
+   <div class="row">
+      <div class="col-md-12">
+         <p-dataTable [value]="listAbsenceREE" [paginator]="true" [rows]="10" [responsive]="true"
+                      [globalFilter]="gb">
+            <p-column field="cargoRelacion" header="Cargo" [sortable]="true"></p-column>
+            <p-column header="Acciones" styleClass="datatable-col-action">
+               <template let-absence="rowData" pTemplate="body">
+                  <button type="button" icon="fa-trash" class="ui-button-danger"
+                          pButton (click)="delREE(absence)"></button>
+               </template>
+            </p-column>
+         </p-dataTable>
+      </div>
+   </div>
+   <form (ngSubmit)="f.valid && onSubmitREP()" #f="ngForm" novalidate id="formularioREP">
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+         <div class="ui-grid-row">
+            <div class="ui-grid-col-12">
+               <label for="idCargoREP"><h3>Reemplazado por</h3></label>
+               <p-dropdown id="idCargoREP" name="idCargoREP" required="true"
+                           [options]="listPositionREP" [autoWidth]="false"
+                           [(ngModel)]="idCargoRelacionREP" #idCargoREP="ngModel"
+               ></p-dropdown>
+               <div class="ui-message ui-messages-error ui-corner-all"
+                    *ngIf="f.submitted && !idCargoREP.valid">
+                  <i class="fa fa-close"></i>
+                  Cargo requerido
+               </div>
+            </div>
+         </div>
+         <div class="ui-grid-row form-footer-buttons">
+            <div class="ui-grid-col-5"></div>
+            <div class="ui-grid-col-2">
+               <button pButton icon="fa-plus" label="Guardar" type="submit"></button>
+            </div>
+            <div class="ui-grid-col-5"></div>
+         </div>
+      </div>
+   </form>
+   <div class="row">
+      <div class="col-md-12">
+         <p-dataTable [value]="listAbsenceREP" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+            <p-column field="cargoRelacion" header="Cargo" [sortable]="true"></p-column>
+            <p-column header="Acciones" styleClass="datatable-col-action">
+               <template let-absence="rowData" pTemplate="body">
+                  <button type="button" icon="fa-trash" class="ui-button-danger"
+                          pButton (click)="delREP(absence)"></button>
+               </template>
+            </p-column>
+         </p-dataTable>
+      </div>
+   </div>
+</div>
+<div class="row">
+   <div class="col-md-3 pull-right">
+      <button pButton label="Siguiente" type="button" class="pull-right"></button>
+   </div>
+</div>

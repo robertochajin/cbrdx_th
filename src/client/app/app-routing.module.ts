@@ -126,6 +126,8 @@ import {PositionRolesComponent} from "./position-roles/position-roles.component"
 import {PositionCompetenciesComponent} from "./position-competencies/position-competencies.component";
 import {CompanyAssetsComponent} from "./position-company-assets/company-assets.component";
 
+// cargos posición en caso de ausencia
+import {AbsenceComponent} from "./position-absence/position-absence.component";
 
 const routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -257,12 +259,14 @@ const routes = [
   {path: 'positions/add', component: PositionsAddComponent, canActivate: [AuthGuard]},
   {path: 'positions/update/:id', component: PositionsUpdateComponent, canActivate: [AuthGuard]},
 
-//  Cargos Productividad
+  //  Cargos Productividad
   {path: 'productivity/:idCargo', component: ProductivityComponent, canActivate: [AuthGuard]},
 
 
   // cargos factores de riesgo
   {path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [AuthGuard]},
+  //cargos posición en caso de ausencia
+  {path: 'position-absence/:idCargo', component: AbsenceComponent, canActivate: [AuthGuard]},
 
 
 ];
