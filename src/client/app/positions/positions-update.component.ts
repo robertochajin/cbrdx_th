@@ -165,6 +165,7 @@ export class PositionsUpdateComponent {
       
       this.acordion = this._nav.getTab();
    }
+   
    nextStep(step:number) {
       this.msgs = [];
       if(this.position.paso!= 0 && this.position.paso <= step){
@@ -198,23 +199,6 @@ export class PositionsUpdateComponent {
       } );
    }
    
-   onSubmit1(event:any){
-      this.msgs = [];
-      if(this.position.paso == 2){
-         this.position.paso = 3;
-         this.step = 3;
-         this._nav.setTab(2);
-         this.acordion = 2;
-      }
-      this.positionsService.update( this.position )
-      .subscribe( data => {
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
-         //this.router.navigate(['positions/update/'+data.idCargo]);
-      }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
-      } );
-   }
-   
    onSubmit2() {
       this.msgs = [];
       if(this.position.paso <= 3){
@@ -233,46 +217,14 @@ export class PositionsUpdateComponent {
       } );
    }
    
-   onSubmit3() {
-      this.msgs = [];
-      if(this.position.paso == 4){
-         this.position.paso = 5;
-         this.step = 5;
-      }
-      this._nav.setTab(4);
-      this.acordion = 4;
-      this.positionsService.update( this.position )
-      .subscribe( data => {
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
-         //this.router.navigate(['positions/update/'+data.idCargo]);
-      }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
-      } );
-   }
-   
-   onSubmit4() {
-      this.msgs = [];
-      if(this.position.paso == 5){
-         this.position.paso = 6;
-         this.step = 6;
-      }
-      this._nav.setTab(5);
-      this.acordion = 5;
-      this.positionsService.update( this.position )
-      .subscribe( data => {
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
-         //this.router.navigate(['positions/update/'+data.idCargo]);
-      }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
-      } );
-   }
-   
    onSubmit5() {
       this.msgs = [];
-      if(this.position.paso == 5){
-         this.position.paso = 6;
+      if(this.position.paso <= 6){
+         this.position.paso = 7;
          this.step = 7;
       }
+      this._nav.setTab(6);
+      this.acordion = 6;
       this.positionsService.update( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
@@ -284,10 +236,12 @@ export class PositionsUpdateComponent {
    
    onSubmit7() {
       this.msgs = [];
-      if(this.position.paso == 7){
-         this.position.paso = 8;
-         this.step = 8;
+      if(this.position.paso == 8){
+         this.position.paso = 9;
+         this.step = 9;
       }
+      this._nav.setTab(8);
+      this.acordion = 8;
       this.positionsService.update( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
@@ -299,10 +253,12 @@ export class PositionsUpdateComponent {
    
    onSubmit8() {
       this.msgs = [];
-      if(this.position.paso == 8){
-         this.position.paso = 9;
-         this.step = 9;
+      if(this.position.paso == 9){
+         this.position.paso = 10;
+         this.step = 10;
       }
+      this._nav.setTab(9);
+      this.acordion = 9;
       this.positionsService.update( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );

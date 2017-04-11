@@ -248,6 +248,7 @@
          
          <p-accordionTab header="Posición en caso de ausencia" [selected]="acordion == 6"
                          [disabled]="step >0 && step <7">
+            <position-absence (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-absence>
          </p-accordionTab>
          
          <p-accordionTab header="Autoridades" [selected]="acordion == 7"
@@ -391,83 +392,33 @@
          
          <p-accordionTab header="Competencias y/o Habilidades requeridas" [selected]="acordion == 9"
                          [disabled]="step >0 && step <10">
+            <position-competencies (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-competencies>
          </p-accordionTab>
    
          <p-accordionTab header="Responsabilidades sobre activos de la compañia" [selected]="acordion == 10"
                          [disabled]="step >0 && step <11">
-            <fieldset>
-               <div *ngIf="position">
-                  <div class="row-fluid">
-                     <div class="col-md-12">
-                        <form name="formulario" (ngSubmit)="f10.valid && onSubmit()" #f10="ngForm" novalidate>
-                           <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-                        
-                              <div class="row">
-                                 <div class=" col-sm-12">
-                                    <label for="responsabilidadesElementos">Elementos de oficina</label>
-                                    <textarea pInputTextarea id="responsabilidadesElementos"
-                                              name="responsabilidadesElementos"
-                                              [(ngModel)]="position.responsabilidadesElementos"
-                                              #responsabilidadesElementos="ngModel"
-                                              [required]="true"></textarea>
-                                    <div *ngIf="f10.submitted && !responsabilidadesElementos.valid"
-                                         class="ui-message  ui-corner-all">
-                                       Responsabilidades sobre elementos de oficina es requerido
-                                    </div>
-                                 </div>
-                              </div>
-                              
-                              <div class="row">
-                                 <div class=" col-sm-12">
-                                    <label for="responsabilidadesImprementos">Elementos de oficina</label>
-                                    <textarea pInputTextarea id="responsabilidadesImprementos"
-                                              name="responsabilidadesImprementos"
-                                              [(ngModel)]="position.responsabilidadesElementos"
-                                              #responsabilidadesImprementos="ngModel"
-                                              [required]="true"></textarea>
-                                    <div *ngIf="f10.submitted && !responsabilidadesImprementos.valid"
-                                         class="ui-message  ui-corner-all">
-                                       Responsabilidades sobre implementos de oficina es requerido
-                                    </div>
-                                 </div>
-                              </div>
-                        
-                                 <div class="row">
-                                 <div class=" col-sm-12">
-                                    <label for="responsabilidadesOtros">Otros (Caja menor, Cheque, Etc</label>
-                                    <textarea pInputTextarea id="responsabilidadesOtros" name="responsabilidadesOtros"
-                                              [(ngModel)]="position.responsabilidadesOtros" #responsabilidadesOtros="ngModel"
-                                              [required]="true"></textarea>
-                                 </div>
-                              </div>
-                     
-                           </div>
-                           <div class="row form-footer-buttons">
-                              <div class="form-group col-md-12">
-                                 <button icon="fa-plus" label="Guardar y Siguente" type="submit"
-                                         pButton></button>
-                              </div>
-                           </div>
-                        </form>
-                     </div>
-                  </div>
-               </div>
-      
-            </fieldset>
+            <company-assets (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></company-assets>
          </p-accordionTab>
          
          <p-accordionTab header="Productividad" [selected]="acordion == 11"
                          [disabled]="step >0 && step <12">
-            <productivity (nextStep)="updateStep11($event)" *ngIf="position.idCargo" [position]="position"></productivity>
+            <productivity (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></productivity>
          </p-accordionTab>
          
          <p-accordionTab header="Personalidad" [selected]="acordion == 12"
                          [disabled]="step >0 && step <13">
+            <div class="ui-grid-row form-footer-buttons">
+               <div class="ui-grid-col-8"></div>
+               <div class="ui-grid-col-3">
+                  <button pButton icon="fa-plus" label="Siguiente" (click)="nextStep(13)"></button>
+               </div>
+               <div class="ui-grid-col-5"></div>
+            </div>
          </p-accordionTab>
          
          <p-accordionTab header="Factores de riesgo ocupacional" [selected]="acordion == 13"
                          [disabled]="step >0 && step <14">
-            <position-risks *ngIf="position.idCargo" [position]="position"></position-risks>
+            <position-risks (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-risks>
          </p-accordionTab>
          
          <p-accordionTab header="Valoración salarial del cargo" [selected]="acordion == 14"
