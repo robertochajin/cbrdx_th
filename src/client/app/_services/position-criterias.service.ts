@@ -27,6 +27,10 @@ export class PositionCriteriasService {
       .map((res: Response) => res.json());
   };
 
+  addInBulk(pcs: PositionCriterias[]) {
+     return this.http.post(this.serviceURL, JSON.stringify(pcs), {headers: this.headers}).map((res: Response) => res.json());
+  };
+
   update(f: PositionCriterias) {
     return this.http.put(this.serviceURL, JSON.stringify(f), {headers: this.headers}).catch(this.handleError);
   }
