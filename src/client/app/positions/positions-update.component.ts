@@ -253,10 +253,12 @@ export class PositionsUpdateComponent {
    
    onSubmit8() {
       this.msgs = [];
-      if(this.position.paso == 8){
-         this.position.paso = 9;
-         this.step = 9;
+      if(this.position.paso == 9){
+         this.position.paso = 10;
+         this.step = 10;
       }
+      this._nav.setTab(9);
+      this.acordion = 9;
       this.positionsService.update( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
