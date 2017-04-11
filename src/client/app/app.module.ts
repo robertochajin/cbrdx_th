@@ -33,6 +33,7 @@ import {ProductivityModule} from "./position-productivity/productivity.module";
 
 import {RiskModule} from "./position-risks/position-risks.module";
 import {AbsencekModule} from "./position-absence/position-absence.module";
+import {AuthoritiesModule} from "./position-authorities/position-authorities.module";
 // import {ResponsibilityModule} from "./position-responsibility/responsibility.module";
 // Copy sp
 
@@ -92,6 +93,7 @@ import {PositionCompetenciesModule} from "./position-competencies/position-compe
     PositionsModule,
     ProductivityModule,
     RiskModule,
+     AuthoritiesModule,
      AbsencekModule,
   ],
 
