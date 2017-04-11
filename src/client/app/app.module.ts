@@ -17,6 +17,7 @@ import {EmployeesVehicleModule} from "./employees-vehicle/employee-vehicles.modu
 import {WorkExperienceModule} from "./employees-work-experience/work-experience.module";
 import {FaultsAndSanctionsModule} from "./faultsAndSanctions/faults-and-sanctions.module";
 import {PositionsModule} from "./positions/positions.module";
+import {CompanyAssetsModule} from "./position-company-assets/company-assets.module"
 
 
 import {LoginModule} from "./seguridad/login.module";
@@ -56,64 +57,65 @@ import {PositionCompetenciesModule} from "./position-competencies/position-compe
 
 //CarsModule,
 @NgModule({
-  imports: [BrowserModule, HttpModule, AppRoutingModule,
-    EmployeesModule,
-    FamilyInformationModule,
-    LocationModule,
-    EmployeesEstateModule,
-    EmployeesVehicleModule,
-    ReferencesModule,
-    AcademicEducationModule,
-    WorkExperienceModule,
-    ClinicalInformationModule,
-    LoginModule,
-    GrowlModule,
-    DashboardModule,
-    EvaluationCriteriasModule,
-    PositionResponsabilitiesModule,
-    PositionRolesModule,
-    PositionCompetenciesModule,
-    SharedModule.forRoot(),
-    TranslateModule.forRoot({
-      provide: TranslateLoader,
-      useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
-      deps: [Http]
-    }),
-    ConstanteModule,
-    ListaModule,
-    CentroCostosModule,
-    GruposGestionModule,
-    RolesModule,
-    UsuariosModule,
-    TipoDeAreaModule,
-    DivisionPoliticaModule,
-    OcupacionesModule,
-    ActividadEconomicaModule,
-    FaultsAndSanctionsModule,
-    PositionsModule,
-    ProductivityModule,
-    RiskModule,
-     AuthoritiesModule,
-     AbsencekModule,
-  ],
+ imports: [BrowserModule, HttpModule, AppRoutingModule,
+      EmployeesModule,
+      FamilyInformationModule,
+      LocationModule,
+      EmployeesEstateModule,
+      EmployeesVehicleModule,
+      ReferencesModule,
+      AcademicEducationModule,
+      WorkExperienceModule,
+      ClinicalInformationModule,
+      LoginModule,
+      GrowlModule,
+      DashboardModule,
+      EvaluationCriteriasModule,
+      PositionResponsabilitiesModule,
+      PositionRolesModule,
+      PositionCompetenciesModule,
+      SharedModule.forRoot(),
+      TranslateModule.forRoot({
+         provide: TranslateLoader,
+         useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
+         deps: [Http]
+      }),
+      ConstanteModule,
+      ListaModule,
+      CentroCostosModule,
+      GruposGestionModule,
+      RolesModule,
+      UsuariosModule,
+      TipoDeAreaModule,
+      DivisionPoliticaModule,
+      OcupacionesModule,
+      ActividadEconomicaModule,
+      FaultsAndSanctionsModule,
+      PositionsModule,
+      ProductivityModule,
+      RiskModule,
+      AbsencekModule,
+      AuthoritiesModule,
+      CompanyAssetsModule
+   ],
 
-  declarations: [AppComponent],
-  providers: [
-    WindowRefService,
-    {
-      provide: APP_BASE_HREF,
-      useValue: '<%= APP_BASE %>'
-    },
-    AuthGuard,
-    AuthenticationService,
-    LoginService,
-    {
-      provide: APP_BASE_HREF,
-      useValue: '<%= APP_BASE %>',
-    }
-  ],
+   declarations: [AppComponent],
+   providers: [
+      WindowRefService,
+      {
+         provide: APP_BASE_HREF,
+         useValue: '<%= APP_BASE %>'
+      },
+      AuthGuard,
+      AuthenticationService,
+      LoginService,
+      {
+         provide: APP_BASE_HREF,
+         useValue: '<%= APP_BASE %>',
+      }
+   ],
 
-  bootstrap: [AppComponent]
+   bootstrap: [AppComponent]
 
 })
 export class AppModule {
