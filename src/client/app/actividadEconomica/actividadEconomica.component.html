@@ -1,80 +1,80 @@
 <h3>Actividades Económicas</h3>
 <div class="row datable-header">
-    <div class="col-md-6 col-xs-12 datatable-header-add">
-        <button type="button" pButton icon="fa-plus" (click)="newActivity()" label="{{btnactivity.label}}"
-                *ngIf="btnactivity.show"></button>
-        <button type="button" pButton icon="fa-plus" (click)="newSubActivity()" label="{{btnsubactivity.label}}"
-                *ngIf="btnsubactivity.show"></button>
-    </div>
-    <div class="col-md-6 col-xs-12 datatable-header-search">
-        <p-autoComplete placeholder="Buscar..." field="label" name="buscar" id="buscar" #buscar="ngModel"
-                        [(ngModel)]="selectedSearch"
-                        [suggestions]="resultSearch"
-                        (completeMethod)="search($event)"
-                        (onSelect)="captureId($event)">
-        </p-autoComplete>
-    </div>
+   <div class="col-md-6 col-xs-12 datatable-header-add">
+      <button type="button" pButton icon="fa-plus" (click)="newActivity()" label="{{btnactivity.label}}"
+              *ngIf="btnactivity.show"></button>
+      <button type="button" pButton icon="fa-plus" (click)="newSubActivity()" label="{{btnsubactivity.label}}"
+              *ngIf="btnsubactivity.show"></button>
+   </div>
+   <div class="col-md-6 col-xs-12 datatable-header-search">
+      <p-autoComplete placeholder="Buscar..." field="label" name="buscar" id="buscar" #buscar="ngModel"
+                      [(ngModel)]="selectedSearch"
+                      [suggestions]="resultSearch"
+                      (completeMethod)="search($event)"
+                      (onSelect)="captureId($event)">
+      </p-autoComplete>
+   </div>
 </div>
 <div class="ui-grid-row">
-    <div class="col-md-4">
-
-        <p-tree id="trvActividadEconomica" [(value)]="treeActividadEconomica" selectionMode="single" [(selection)]="treeselected"
-                (onNodeSelect)="nodeSelect($event.node)"
-                (onNodeExpand)="nodeExpand($event.node)">
-        </p-tree>
-
-    </div>
-
-    <div class="col-md-8">
-        <p-fieldset legend="{{header}}">
-            <div class="row-fluid">
-                <div class="col-md-12">
-
-                    <form (ngSubmit)="!codeExists&&f.valid && save()" #f="ngForm" novalidate id="formName">
-
-                        <div class="row">
-                            <div class="form-group">
-                                <h4>{{labelPadre}}</h4>
-                            </div>
-
-                            <div class="form-group">
-                                <h4>{{labelTipo}}</h4>
-                            </div>
-
+   <div class="col-md-4">
+      
+      <p-tree id="trvActividadEconomica" [(value)]="treeActividadEconomica" selectionMode="single" [(selection)]="treeselected"
+              (onNodeSelect)="nodeSelect($event.node)"
+              (onNodeExpand)="nodeExpand($event.node)">
+      </p-tree>
+   
+   </div>
+   
+   <div class="col-md-8">
+      <p-fieldset legend="{{header}}">
+         <div class="row-fluid">
+            <div class="col-md-12">
+               
+               <form (ngSubmit)="!codeExists&&f.valid && save()" #f="ngForm" novalidate id="formName">
+                  
+                  <div class="row">
+                     <div class="form-group">
+                        <h4>{{labelPadre}}</h4>
+                     </div>
+                     
+                     <div class="form-group">
+                        <h4>{{labelTipo}}</h4>
+                     </div>
+                  
+                  </div>
+                  <div class="row">
+                     <div class="form-group">
+                        <label for="codigoActividadEconomica" class="control-label col-sm-3">* {{ 'LBL_CODIGO' | translate }} </label>
+                        <div class=" col-sm-9">
+                           
+                           <input type="text" pInputText class="form-control" id="codigoActividadEconomica"
+                                  name="codigoActividadEconomica"
+                                  [(ngModel)]="actividadEconomica.codigoActividadEconomica"
+                                  #codigoActividadEconomica="ngModel"
+                                  [maxlength]="tabselected" [minlength]="tabselected"
+                                  (change)="validateCode()" required
+                                  (keyup)="capitalizeCodigo()"
+                           >
+                           
+                           <div *ngIf="f.submitted && !codigoActividadEconomica.valid"
+                                class="ui-message  ui-corner-all">
+                              <p [hidden]="!codigoActividadEconomica.errors.required">Código es requerido</p>
+                              <p [hidden]="!codigoActividadEconomica.errors.minlength">Código debe ser de
+                                 {{tabselected}} números</p>
+                           </div>
+                           <div *ngIf="codeExists" class="ui-message  ui-corner-all">
+                              Ya se encuentra registrado ese código
+                           </div>
+                        
                         </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="codigoActividadEconomica" class="control-label col-sm-3">* Código </label>
-                                <div class=" col-sm-9">
-
-                                    <input type="text" pInputText class="form-control" id="codigoActividadEconomica"
-                                           name="codigoActividadEconomica"
-                                           [(ngModel)]="actividadEconomica.codigoActividadEconomica"
-                                           #codigoActividadEconomica="ngModel"
-                                           [maxlength]="tabselected" [minlength]="tabselected"
-                                           (change)="validateCode()" required
-                                           (keyup)="capitalizeCodigo()"
-                                    >
-
-                                    <div *ngIf="f.submitted && !codigoActividadEconomica.valid"
-                                         class="ui-message  ui-corner-all">
-                                        <p [hidden]="!codigoActividadEconomica.errors.required">Código es requerido</p>
-                                        <p [hidden]="!codigoActividadEconomica.errors.minlength">Código debe ser de
-                                            {{tabselected}} números</p>
-                                    </div>
-                                    <div *ngIf="codeExists" class="ui-message  ui-corner-all">
-                                        Ya se encuentra registrado ese código
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-
-                                <label for="aEconomica" class="control-label col-sm-3">*
-                                    {{labelfieldactividad}} </label>
-                                <div class=" col-sm-9">
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="form-group">
+                        
+                        <label for="aEconomica" class="control-label col-sm-3">*
+                           {{labelfieldactividad}} </label>
+                        <div class=" col-sm-9">
                                     <textarea pInputTextarea class="form-control" id="aEconomica" name="aEconomica"
                                               [(ngModel)]="actividadEconomica.actividadEconomica" #aEconomica="ngModel"
                                               [required]="true" (keyup)="capitalizeName()"
@@ -100,29 +100,44 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row form-footer-buttons">
-                            <div class="form-group col-md-12">
-                                <a (click)="displayDialog=true" class="cancelar">Cancelar</a>
-                                <button pButton type="submit" formaction="" label="Guardar"></button>
-                            </div>
+                     </div>
+                  </div>
+                  
+                  <div class="row">
+                     <div class="form-group">
+                        <label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate }}</label>
+                        <div class=" col-sm-9">
+                           
+                           <p-checkbox binary="true" id="indicador" name="indicador"
+                                       [(ngModel)]="actividadEconomica.indicadorHabilitado">
+                           </p-checkbox>
+                        
                         </div>
-                    </form>
-                </div>
+                     </div>
+                  </div>
+                  <div class="row form-footer-buttons">
+                     <div class="form-group col-md-12">
+                        <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }} </a>
+                        <button pButton type="submit" formaction="" label="{{ 'BTN_GUARDAR' | translate }}"></button>
+                     </div>
+                  </div>
+               </form>
             </div>
-        </p-fieldset>
-        <p-dialog header="Confirmación" [(visible)]="displayDialog"
-                  responsive="true" modal="true">
-            <p>Si continua perdera la información no guardada.Esta seguro que desea salir?.</p>
-            <p-footer>
-                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                    <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>
-
-                    <button type="button" pButton icon="fa-check" (click)="doCancel()" label="Si"></button>
-
-                </div>
-            </p-footer>
-        </p-dialog>
-    </div>
+         </div>
+      </p-fieldset>
+      <p-dialog header="Confirmación" [(visible)]="displayDialog"
+                responsive="true" modal="true">
+         <p>{{ 'MSG_CONFIRMACION' | translate }}</p>
+         <p-footer>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+               <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>
+               
+               <button type="button" pButton icon="fa-check" (click)="doCancel()" label="Si"></button>
+            
+            </div>
+         </p-footer>
+      </p-dialog>
+   </div>
 </div>
 
 <p-growl [value]="msgs"></p-growl>

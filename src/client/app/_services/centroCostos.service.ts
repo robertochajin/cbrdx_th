@@ -23,7 +23,7 @@ export class CentroCostosService {
         return this.http.post(this.serviceURL, JSON.stringify(c), {headers: this.headers}).toPromise().then(res => res.json() as CentroCostos).catch(this.handleError);
     };
 
-    updateCentroCostos(c: CentroCostos): Promise<CentroCostos> {
+    updateCentroCostos(c: CentroCostos): Promise<any> {
         return this.http.put(this.serviceURL, JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
     }
 

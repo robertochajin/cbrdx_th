@@ -1,10 +1,10 @@
-import {Injectable} from "@angular/core";
-import {Headers, Http, Response} from "@angular/http";
-import "rxjs/add/operator/toPromise";
-import {ActividadEconomica} from "../_models/actividadEconomica";
-import {ActividadEconomicaTipos} from "../_models/actividadEconomicaTipos";
-import {AuthenticationService} from "./authentication.service";
-import {Search} from "../_models/search";
+import { Injectable } from '@angular/core';
+import { Headers, Http, Response } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+import { ActividadEconomica } from '../_models/actividadEconomica';
+import { ActividadEconomicaTipos } from '../_models/actividadEconomicaTipos';
+import { AuthenticationService } from './authentication.service';
+import { Search } from '../_models/search';
 
 @Injectable()
 export class ActividadEconomicaService {
@@ -25,10 +25,11 @@ export class ActividadEconomicaService {
     }
 
     addActividadEconomica(c: ActividadEconomica): Promise<ActividadEconomica> {
-        return this.http.post(this.serviceURL_SP, JSON.stringify(c), {headers: this.headers}).toPromise().then(res => res.json() as ActividadEconomica).catch(this.handleError);
+        return this.http.post(this.serviceURL_SP, JSON.stringify(c), {headers: this.headers})
+           .toPromise().then(res => res.json() as ActividadEconomica).catch(this.handleError);
     };
 
-    updateActividadEconomica(c: ActividadEconomica): Promise<ActividadEconomica> {
+    updateActividadEconomica(c: ActividadEconomica): Promise<any> {
         return this.http.put(this.serviceURL_SP, JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
     }
 
@@ -47,12 +48,14 @@ export class ActividadEconomicaService {
     getSearch(val: string) {
         return this.http.get(this.serviceURL_SP +'search/'+ val+'/',{headers: this.headers}).map(res => res.json() as Search[]);
     }
-  
+
     /* Refactor */
     listByPadre(id: number) {
-      return this.http.get(this.serviceURL+'actividadesEconomicas/padre/'+ id+'/',{headers: this.headers}).map((res: Response) => res.json() as ActividadEconomica[]);
+      return this.http.get(this.serviceURL+'actividadesEconomicas/padre/'+ id+'/',{headers: this.headers})
+         .map((res: Response) => res.json() as ActividadEconomica[]);
     }
     listLastChild(id: number) {
-      return this.http.get(this.serviceURL+'actividadesEconomicas/lastChild/'+ id+'/',{headers: this.headers}).map((res: Response) => res.json() as ActividadEconomica[]);
+      return this.http.get(this.serviceURL+'actividadesEconomicas/lastChild/'+ id+'/',{headers: this.headers})
+         .map((res: Response) => res.json() as ActividadEconomica[]);
     }
 }
