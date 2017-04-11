@@ -430,11 +430,12 @@ export class DivisionPoliticaComponent implements OnInit {
             } else {
                 this.labelPadre = "";
             }
+
+           // Scroll to Select
+           jQuery('#trvDivisionPolitica').scrollTop(
+              jQuery('.ui-state-highlight').position().top - jQuery('#trvDivisionPolitica').height() / 2
+           );
         });
-
-       // Scroll to Select
-       jQuery('#trvDivisionPolitica').scrollTop(jQuery('.ui-state-highlight').position().top - jQuery('#trvDivisionPolitica').height() / 2);
-
     }
 
     private searchRecursive(res:DivisionPolitica){

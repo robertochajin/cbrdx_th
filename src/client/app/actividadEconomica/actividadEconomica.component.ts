@@ -311,19 +311,22 @@ export class ActividadEconomicaComponent implements OnInit {
          if (res.idActividadPadre != 0) {
             this.actividadEconomicaService.viewActividadEconomica(res.idActividadPadre).subscribe(res => {
                this.labelPadre = res.actividadEconomica;
+
             });
          } else {
             this.labelPadre = "";
          }
          this.labelTipo = "Tipo: " + this.activityTypes.find(t => t.idActividadEconomicaTipo == res.idActividadTipo).descripcionActividadTipo;
-      });
 
-      // Scroll to Select
-      setTimeout(() => {
+         // Scroll to Select
          jQuery('#trvActividadEconomica').scrollTop(
             jQuery('.ui-state-highlight').position().top - jQuery('#trvActividadEconomica').height() / 2
          );
-      }, 500);
+
+
+      });
+
+
 
    }
 

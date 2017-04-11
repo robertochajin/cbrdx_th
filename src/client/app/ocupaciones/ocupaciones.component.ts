@@ -321,10 +321,14 @@ export class OcupacionesComponent implements OnInit {
                 this.labelPadre = "";
             }
             this.labelTipo = "Tipo: " + this.ocupacionesTypes.find(t => t.idOcupacionTipo == res.idOcupacionTipo).descripcionOcupacionTipo;
+
+           // Scroll to Select
+           jQuery('#trvOcupaciones').scrollTop(
+              jQuery('.ui-state-highlight').position().top - jQuery('#trvOcupaciones').height() / 2
+           );
         });
 
-       // Scroll to Select
-       jQuery('#trvOcupaciones').scrollTop(jQuery('.ui-state-highlight').position().top - jQuery('#trvOcupaciones').height() / 2);
+
     }
 
     private searchRecursive(res:Ocupaciones){
