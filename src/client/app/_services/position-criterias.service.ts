@@ -19,12 +19,16 @@ export class PositionCriteriasService {
   }
 
   getAllByPosition(id: number) {
-    return this.http.get(this.serviceURL + 'buscarCargo/' + id).map((res: Response) => res.json());
+    return this.http.get(this.serviceURL + 'enabled/' + id).map((res: Response) => res.json());
   }
 
   add(f: PositionCriterias) {
     return this.http.post(this.serviceURL, f, {headers: this.headers})
       .map((res: Response) => res.json());
+  };
+
+  addInBulk(pcs: PositionCriterias[]) {
+     return this.http.post(this.serviceURL, JSON.stringify(pcs), {headers: this.headers}).map((res: Response) => res.json());
   };
 
   update(f: PositionCriterias) {

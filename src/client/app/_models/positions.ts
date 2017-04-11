@@ -55,7 +55,7 @@ export class Positions {
       this.puntos = null;
       this.idCategoria = null;
       this.categoria = "";
-      this.salario = null;
+      this.salario = 0;
       this.indicadorRequiereFormacion = true;
       this.indicadorHabilitado = false;
       this.interrelacionesInternas = "";
