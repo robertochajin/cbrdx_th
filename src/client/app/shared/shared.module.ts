@@ -37,7 +37,7 @@ export class SharedModule {
         // Fix Footer -
         setTimeout(() => {
           jQuery(window).resize();
-        }, 2000);
+        }, 500);
 
         // ScrollTop
         jQuery('#wrapper').animate({scrollTop: 0}, 'fast');
@@ -47,7 +47,7 @@ export class SharedModule {
 
         // Focus primer invalid campo
         jQuery('button').click(function () {
-          if (jQuery('input.ng-invalid').length) {
+          if (jQuery('.ng-invalid').length) {
             jQuery('body').scrollTop(jQuery('input.ng-invalid:first').position().top);
             setTimeout(() => {
               jQuery('input.ng-invalid:first').select().focus();

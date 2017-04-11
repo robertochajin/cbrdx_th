@@ -27,6 +27,12 @@ import {GrowlModule} from "primeng/primeng";
 import {DashboardModule} from "./dashboard/dashboard.module";
 import {TranslateModule, TranslateLoader, TranslateStaticLoader} from "ng2-translate";
 
+import {ProductivityModule} from "./position-productivity/productivity.module";
+// import {AptitudeLevelModule} from "./aptitude-level/aptitude-level.module";
+// import {IQLevelModule} from "./IQlevel/iqlevel.module";
+
+import {RiskModule} from "./position-risks/position-risks.module";
+// import {ResponsibilityModule} from "./position-responsibility/responsibility.module";
 // Copy sp
 
 import {ConstanteModule} from "./constantes/constante.module";
@@ -82,7 +88,9 @@ import {PositionCompetenciesModule} from "./position-competencies/position-compe
     OcupacionesModule,
     ActividadEconomicaModule,
     FaultsAndSanctionsModule,
-    PositionsModule
+    PositionsModule,
+    ProductivityModule,
+    RiskModule,
   ],
 
   declarations: [AppComponent],
