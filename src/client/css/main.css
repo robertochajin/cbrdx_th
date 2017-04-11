@@ -38,6 +38,16 @@ body .ui-state-disabled, body .ui-widget:disabled {
 .sidebar-menu > li > a {
   padding: 10px 10px ;
 }
+
+/** fix Menu top border */
+@media (min-width: 768px){
+   .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > a > span {
+      top: 2px;
+   }
+}
+
+
+
 /**
 ------------------------ Main CSS ------------------------------------
  */

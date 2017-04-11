@@ -17,7 +17,7 @@ export class TercerosService {
         this.http = http;
         this.headers = new Headers({
             'Content-Type': 'application/json',
-            'Authorization': this.authenticationService.token
+            'Authorization': this.authenticationService ? this.authenticationService.token : ''
         });
     }
 
@@ -26,7 +26,8 @@ export class TercerosService {
     }
 
     consultarTercero(tipoDocumento: number, numeroDocumento: string) {
-        return this.http.get(this.serviceURL + tipoDocumento + "/" + numeroDocumento, {headers: this.headers}).map(res => res.json() as Tercero).catch(this.handleError);
+        return this.http.get(this.serviceURL + tipoDocumento + "/" + numeroDocumento, {headers: this.headers})
+           .map(res => res.json() as Tercero).catch(this.handleError);
     }
 
     handleError(error: any): Promise<any> {

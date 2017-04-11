@@ -49,6 +49,7 @@ import {ClinicalInformationModule} from "./employees-clinical-information/clinic
 import {EvaluationCriteriasModule} from "./position-evaluation-criterias/evaluation-criterias.module";
 import {PositionResponsabilitiesModule} from "./position-responsabilities/position-responsabilities.module";
 import {PositionRolesModule} from "./position-roles/position-roles.module";
+import {PositionCompetenciesModule} from "./position-competencies/position-competencies.module";
 
 
 //CarsModule,
@@ -69,6 +70,7 @@ import {PositionRolesModule} from "./position-roles/position-roles.module";
     EvaluationCriteriasModule,
     PositionResponsabilitiesModule,
     PositionRolesModule,
+    PositionCompetenciesModule,
     SharedModule.forRoot(),
     TranslateModule.forRoot({
       provide: TranslateLoader,

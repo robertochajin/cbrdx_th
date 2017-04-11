@@ -24,7 +24,7 @@ export class TipoDeAreaService {
         return this.http.post(this.serviceURL, JSON.stringify(c), {headers: this.headers}).toPromise().then(res => res.json() as TipoDeArea).catch(this.handleError);
     };
 
-    updateArea(c: TipoDeArea): Promise<TipoDeArea> {
+    updateArea(c: TipoDeArea): Promise<any> {
         return this.http.put(this.serviceURL, JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
     }
 

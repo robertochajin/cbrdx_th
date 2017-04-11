@@ -37,7 +37,7 @@ export class SharedModule {
         // Fix Footer -
         setTimeout(() => {
           jQuery(window).resize();
-        }, 2000);
+        }, 500);
 
         // ScrollTop
         jQuery('#wrapper').animate({scrollTop: 0}, 'fast');

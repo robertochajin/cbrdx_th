@@ -32,7 +32,7 @@ export class GruposGestionService {
         return this.http.post(this.serviceURL, JSON.stringify(g), {headers: this.headers}).toPromise().then(res => res.json() as GruposGestion).catch(this.handleError);
     };
 
-    updateGruposGestion(g: GruposGestion): Promise<GruposGestion> {
+    updateGruposGestion(g: GruposGestion): Promise<any> {
         if (g.fechaInicio != null) {
             g.fechaInicio.setHours(23);
             g.fechaFin.setHours(23);

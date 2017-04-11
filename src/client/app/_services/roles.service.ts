@@ -40,7 +40,7 @@ export class RolesService {
         return this.http.post(this.masterService, JSON.stringify(c), {headers: this.headers}).toPromise().then(res => res.json() as Rol).catch(this.handleError);
     };
 
-    updateRole(c: Rol): Promise<Rol> {
+    updateRole(c: Rol): Promise<any> {
         return this.http.put(this.masterService, JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
     }
 
