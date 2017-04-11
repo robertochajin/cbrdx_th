@@ -219,8 +219,8 @@ export class OcupacionesComponent implements OnInit {
                 this.selectedNode.label = this.ocupaciones.ocupacion;
                 this.header = this.ocupaciones.ocupacion;
                 for (let i = 0; i < this.listadoOcupaciones.length; i++) {
-                    if (this.listadoOcupaciones[i].idOcupacion === data.idOcupacion) {
-                        this.listadoOcupaciones[i] = data;
+                    if (this.listadoOcupaciones[i].idOcupacion === this.ocupaciones.idOcupacion) {
+                        this.listadoOcupaciones[i] = this.ocupaciones;
                         return;
                     }
                 }
@@ -427,7 +427,7 @@ export class OcupacionesComponent implements OnInit {
     capitalizeCodigo() {
       let input = this.ocupaciones.codigoOcupacion;
       if(input != "" && input != null){
-        this.ocupaciones.codigoOcupacion = input.toUpperCase();
+        this.ocupaciones.codigoOcupacion = input.toUpperCase().replace(' ', '').trim();
       }
     }
     
