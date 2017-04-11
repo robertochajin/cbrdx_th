@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class EvaluationCriterias {
   public idCriterio: number;
-  public criterio: string;
+  public criterio: number;
   public indicadorHabilitado: boolean;
   public auditoriaUsuario: number;
   public auditoriaFecha: string;

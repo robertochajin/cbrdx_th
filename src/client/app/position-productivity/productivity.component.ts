@@ -1,9 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ProductivityService} from '../_services/productivity.service';
 import {SelectItem, ConfirmationService, Message} from 'primeng/primeng';
 import {Productivity} from '../_models/productivity';
 import {Location}                 from '@angular/common';
 import {Router, ActivatedRoute, Params}   from '@angular/router';
+import { Positions } from "../_models/positions";
 @Component({
   moduleId: module.id,
   templateUrl: 'productivity.component.html',
@@ -11,7 +12,8 @@ import {Router, ActivatedRoute, Params}   from '@angular/router';
   providers: [ConfirmationService]
 })
 export class ProductivityComponent {
-
+   @Input()
+   position: Positions;
   productivity: Productivity = new Productivity();
   ListProductivity: SelectItem[] = [];
   ListIQLevel: SelectItem[] = [];
@@ -25,9 +27,7 @@ export class ProductivityComponent {
   }
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      this.productivity.idCargo = Number(+params['idCargo']);
-    });
+     this.productivity.idCargo = this.position.idCargo;
 
     this.productivityService.getlistProductivityByIdCargo(this.productivity.idCargo).subscribe(rest=>{
       if(rest!==undefined){
@@ -60,7 +60,7 @@ export class ProductivityComponent {
       this.productivityService.add(this.productivity)
         .subscribe(data => {
           this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
-          this.location.back();
+          //this.location.back();
         }, error => {
           this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
         });
@@ -68,7 +68,7 @@ export class ProductivityComponent {
       this.productivityService.update(this.productivity)
         .subscribe(data => {
           this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
-          this.location.back();
+          //this.location.back();
         }, error => {
           this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
         });

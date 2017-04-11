@@ -8,7 +8,6 @@ export class PositionCriteriasService {
 
   headers = new Headers({'Content-Type': 'application/json'});
   private serviceURL = '<%= SVC_TH_URL %>/api/cargosCriterios/';
-  private serviceURL_Dominio = '<%= SVC_TH_URL_D %>/api/cargosCriterios/';
 
   constructor(private http: Http,
               private authenticationService: AuthenticationService) {
@@ -20,16 +19,12 @@ export class PositionCriteriasService {
   }
 
   getAllByPosition(id: number) {
-    return this.http.get(this.serviceURL_Dominio + 'enabled/' + id).map((res: Response) => res.json());
+    return this.http.get(this.serviceURL + 'buscarCargo/' + id).map((res: Response) => res.json());
   }
 
   add(f: PositionCriterias) {
     return this.http.post(this.serviceURL, f, {headers: this.headers})
       .map((res: Response) => res.json());
-  };
-
-  addInBulk(pcs: PositionCriterias[]) {
-    return this.http.post(this.serviceURL, JSON.stringify(pcs), {headers: this.headers}).map((res: Response) => res.json());
   };
 
   update(f: PositionCriterias) {

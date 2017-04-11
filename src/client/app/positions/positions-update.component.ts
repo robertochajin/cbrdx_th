@@ -1,12 +1,14 @@
 import "rxjs/add/operator/switchMap";
-import { Component, Input } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { Location } from "@angular/common";
-import { Positions } from "../_models/positions";
-import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
-import { NavService } from "../_services/_nav.service";
-import { PositionsService } from "../_services/positions.service";
-import { ListPositionsService } from "../_services/lists-positions.service";
+import { Component, Input, OnInit} from '@angular/core';
+import { ActivatedRoute, Router, Params } from '@angular/router'
+import { Location } from '@angular/common';
+import { Positions } from '../_models/positions';
+import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
+import { NavService } from '../_services/_nav.service';
+import { PositionsService } from '../_services/positions.service';
+import { ListPositionsService } from '../_services/lists-positions.service';
+import { TipoDeAreaService } from '../_services/tipoDeArea.service';
+import { ListEmployeesService } from "../_services/lists-employees.service";
 
 @Component( {
                moduleId: module.id,
@@ -14,23 +16,30 @@ import { ListPositionsService } from "../_services/lists-positions.service";
                templateUrl: 'positions-form.component.html',
                providers: [ ConfirmationService ]
             } )
-export class PositionsUpdateComponent {
+export class PositionsUpdateComponent implements OnInit{
    @Input()
    position: Positions = new Positions();
    acordion: number;
    categoryTypes: SelectItem[] = [];
+   areaTypes: SelectItem[] = [];
    bossPositionTypes: SelectItem[] = [];
    stateTypes: SelectItem[] = [];
    levelTypes: SelectItem[] = [];
-   disableTabs: boolean = true;
+   genderTypes: SelectItem[] = [];
+   maritalStatusTypes: SelectItem[] = [];
+   disableTabs: boolean = false;
    msgs: Message[] = [];
-   
+   defaultState: any;
+   aprobado:boolean = false;
+   step = 16;
    constructor( private positionsService: PositionsService,
                 private router: Router,
                 private route: ActivatedRoute,
                 private location: Location,
                 private listPositionsService: ListPositionsService,
+                private tipoDeAreaService: TipoDeAreaService,
                 private confirmationService: ConfirmationService,
+                private listEmployeesService: ListEmployeesService,
                 private _nav: NavService, ) {
       
       this.listPositionsService.getCategoryTypes().subscribe( res => {
@@ -42,14 +51,13 @@ export class PositionsUpdateComponent {
                                      } );
          }
       } );
-      
-      this.positionsService.getAll().subscribe( res => {
-         this.bossPositionTypes.push( { label: "Seleccione", value: null } );
+      this.tipoDeAreaService.getlistAreas().subscribe( res => {
+         this.areaTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
-            this.bossPositionTypes.push( {
-                                            label: dp.nombre,
-                                            value: dp.idCargo
-                                         } );
+            this.areaTypes.push( {
+                                    label: dp.estructuraArea,
+                                    value: dp.idEstructuraArea
+                                 } );
          }
       } );
       
@@ -57,8 +65,8 @@ export class PositionsUpdateComponent {
          this.stateTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
             this.stateTypes.push( {
-                                     label: dp.observacion,
-                                     value: dp.idEstadoCargo
+                                     label: dp.nombre,
+                                     value: dp.idListaEstadoCargo
                                   } );
          }
       } );
@@ -72,17 +80,129 @@ export class PositionsUpdateComponent {
                                   } );
          }
       } );
-      
+   
+      this.listPositionsService.getstateByCode("APROB").subscribe( res => {
+          this.defaultState = res;
+      });
+   
+      this.listEmployeesService.getGenderTypes().subscribe(res => {
+         this.genderTypes.push({label: "Seleccione", value: null});
+         for (let dp of res) {
+            this.genderTypes.push({
+                                     label: dp.nombreListaGenero,
+                                     value: dp.idListaGenero
+                                  });
+         }
+      });
+      this.listEmployeesService.getMaritalStatusTypes().subscribe(res => {
+         this.maritalStatusTypes.push({label: "Seleccione", value: null});
+         for (let dp of res) {
+            this.maritalStatusTypes.push({
+                                            label: dp.nombreListaEstadoCivil,
+                                            value: dp.idListaEstadoCivil
+                                         });
+         }
+      });
    }
    
    ngOnInit() {
+   
+      this.route.params.subscribe( ( params: Params ) => {
+         this.positionsService.get( +params[ 'id' ] ).subscribe( position => {
+            this.position = position;
+            this.position.paso = 0;
+            this.position.idEstado = 1;
+            this.aprobado = this.position.idEstado == this.defaultState.idListaEstadoCargo ? true : false;
+            this.positionsService.getListPositions().subscribe( res => {
+               this.bossPositionTypes.push( { label: "Seleccione", value: null } );
+               for ( let dp of res ) {
+                  if ( res.idCargo != this.position.idCargo ) {
+                     this.bossPositionTypes.push( {
+                                                     label: dp.cargo,
+                                                     value: dp.idCargo
+                                                  } );
+                  }
+               }
+            } );
+         } );
+      } );
       
-      /* this.route.params.subscribe((params: Params) => {
-       this.positionsService.get(+params['id']).subscribe(position => {
-       this.position = position;
-       });
-       });*/
       this.acordion = this._nav.getTab();
+   }
+   
+   onSubmit0() {
+      this.msgs = [];
+      if(this.position.paso == 1){
+         this.position.paso = 2;
+         this.step = 2;
+      }
+      this.positionsService.update( this.position )
+      .subscribe( data => {
+         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         //this.router.navigate(['positions/update/'+data.idCargo]);
+      }, error => {
+         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+      } );
+   }
+   
+   onSubmit2() {
+      this.msgs = [];
+      if(this.position.paso == 3){
+         this.position.paso = 4;
+         this.step = 4;
+      }
+      this.positionsService.update( this.position )
+      .subscribe( data => {
+         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         //this.router.navigate(['positions/update/'+data.idCargo]);
+      }, error => {
+         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+      } );
+   }
+   
+   onSubmit5() {
+      this.msgs = [];
+      if(this.position.paso == 5){
+         this.position.paso = 6;
+         this.step = 7;
+      }
+      this.positionsService.update( this.position )
+      .subscribe( data => {
+         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         //this.router.navigate(['positions/update/'+data.idCargo]);
+      }, error => {
+         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+      } );
+   }
+   
+   onSubmit7() {
+      this.msgs = [];
+      if(this.position.paso == 7){
+         this.position.paso = 8;
+         this.step = 8;
+      }
+      this.positionsService.update( this.position )
+      .subscribe( data => {
+         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         //this.router.navigate(['positions/update/'+data.idCargo]);
+      }, error => {
+         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+      } );
+   }
+   
+   onSubmit8() {
+      this.msgs = [];
+      if(this.position.paso == 8){
+         this.position.paso = 9;
+         this.step = 9;
+      }
+      this.positionsService.update( this.position )
+      .subscribe( data => {
+         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         //this.router.navigate(['positions/update/'+data.idCargo]);
+      }, error => {
+         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+      } );
    }
    
    goBack(): void {

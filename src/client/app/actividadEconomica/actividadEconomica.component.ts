@@ -426,6 +426,13 @@ export class ActividadEconomicaComponent implements OnInit {
         this.actividadEconomica.codigoActividadEconomica = input.toUpperCase();
       }
     }
+   
+   capitalizeName() {
+      let input = this.actividadEconomica.actividadEconomica;
+      if(input != "" && input != null){
+         this.actividadEconomica.actividadEconomica = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
+      }
+   }
 }
 class Tree {
   value: number;
