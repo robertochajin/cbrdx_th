@@ -268,6 +268,23 @@ export class PositionsUpdateComponent {
       } );
    }
    
+   onSubmit14() {
+      this.msgs = [];
+      if(this.position.paso == 15){
+         this.position.paso = 16;
+         this.step = 16;
+      }
+      this._nav.setTab(15);
+      this.acordion = 15;
+      this.positionsService.update( this.position )
+      .subscribe( data => {
+         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         //this.router.navigate(['positions/update/'+data.idCargo]);
+      }, error => {
+         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+      } );
+   }
+   
    goBack(): void {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea salir sin guardar?`,
