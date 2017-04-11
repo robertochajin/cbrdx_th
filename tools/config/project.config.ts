@@ -14,7 +14,8 @@ export class ProjectConfig extends SeedConfig {
 
   FONTS_DEST = `${this.APP_DEST}/fonts`;
   FONTS_SRC = [
-      'src/client/assets/font/sp/**'
+      'src/client/assets/font/sp/**',
+     'node_modules/font-awesome/fonts/**'
   ];
 
   PRIME_NG_THEME = 'bootstrap';

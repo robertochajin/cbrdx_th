@@ -128,6 +128,8 @@ import {CompanyAssetsComponent} from "./position-company-assets/company-assets.c
 
 // cargos posición en caso de ausencia
 import {AbsenceComponent} from "./position-absence/position-absence.component";
+import {PersonalityComponent} from "./position-personality/personality.component";
+
 //autoridades
 import {AuthoritiesComponent} from "./position-authorities/position-authorities.component";
 const routes = [

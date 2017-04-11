@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {ProductivityService} from '../_services/productivity.service';
 import {SelectItem, ConfirmationService, Message} from 'primeng/primeng';
 import {Productivity} from '../_models/productivity';
@@ -20,7 +20,10 @@ export class ProductivityComponent {
   ListAptitudeLevel: SelectItem[] = [];
   header: string = 'Productividad';
   msgs: Message[] = [];
-
+   
+   @Output()
+   nextStep: EventEmitter<number> = new EventEmitter<number>();
+   
   constructor(private productivityService: ProductivityService,
               private location: Location,
               private route: ActivatedRoute,) {
@@ -60,7 +63,7 @@ export class ProductivityComponent {
       this.productivityService.add(this.productivity)
         .subscribe(data => {
           this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
-          //this.location.back();
+          this.next();
         }, error => {
           this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
         });
@@ -68,10 +71,13 @@ export class ProductivityComponent {
       this.productivityService.update(this.productivity)
         .subscribe(data => {
           this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
-          //this.location.back();
+           this.next();
         }, error => {
           this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
         });
     }
   }
+   next(){
+      this.nextStep.emit(12);
+   }
 }

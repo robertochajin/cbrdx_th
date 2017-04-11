@@ -34,8 +34,6 @@ export class CompanyAssetsComponent implements OnInit {
    }
 
    ngOnInit() {
-      this.position = new Positions();
-      this.position.idCargo = 10;
 
       this.listCompanyAssetsService.getAllEnabled().subscribe(listCompanyAssets => {
          this.listCompanyAssets = listCompanyAssets;
@@ -52,17 +50,20 @@ export class CompanyAssetsComponent implements OnInit {
    }
 
    update(lca: ListCompanyAssets) {
-      let obj = this.companyAssets.find(o => lca.idListaTipoElemento == o.idTipoElemento);
+      this.companyAssetsService.getAllByPosition(this.position.idCargo).subscribe(res => {
+         this.companyAssets = res;
+         let obj = this.companyAssets.find(o => lca.idListaTipoElemento == o.idTipoElemento);
 
-      if (obj != undefined) {
-         obj.descripcion = lca.descripcion;
-         this.companyAssetsService.update(obj).subscribe(res => {
-            if (res.ok)
-               this.permitirSiguiente = true;
-         });
-      } else {
-         this.save(lca);
-      }
+         if (obj != undefined) {
+            obj.descripcion = lca.descripcion;
+            this.companyAssetsService.update(obj).subscribe(res => {
+               if (res.ok)
+                  this.permitirSiguiente = true;
+            });
+         } else {
+            this.save(lca);
+         }
+      });
    }
 
    save(lca: ListCompanyAssets) {
@@ -84,6 +85,6 @@ export class CompanyAssetsComponent implements OnInit {
       }
 
       if (this.permitirSiguiente)
-         this.nextStep.emit(10);
+         this.nextStep.emit(11);
    }
 }
