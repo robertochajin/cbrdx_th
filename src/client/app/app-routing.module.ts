@@ -124,6 +124,7 @@ import {EvaluationCriteriasComponent} from "./position-evaluation-criterias/eval
 import {PositionResponsabilitiesComponent} from "./position-responsabilities/position-responsabilities.component";
 import {PositionRolesComponent} from "./position-roles/position-roles.component";
 import {PositionCompetenciesComponent} from "./position-competencies/position-competencies.component";
+import {CompanyAssetsComponent} from "./position-company-assets/company-assets.component";
 
 
 const routes = [
@@ -231,6 +232,7 @@ const routes = [
 
   // Temporales
   {path: 'criterios', component: EvaluationCriteriasComponent, canActivate: [AuthGuard]},
+  {path: 'activos', component: CompanyAssetsComponent, canActivate: [AuthGuard]},
   {path: 'responsabilidades', component: PositionResponsabilitiesComponent, canActivate: [AuthGuard]},
   {path: 'cargosroles', component: PositionRolesComponent, canActivate: [AuthGuard]},
   {path: 'competencias', component: PositionCompetenciesComponent, canActivate: [AuthGuard]},
