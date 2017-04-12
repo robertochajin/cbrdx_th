@@ -16,6 +16,7 @@ import {Ponderancies} from "../_models/ponderancies";
    moduleId: module.id,
    templateUrl: 'position-competencies.component.html',
    selector: 'position-competencies',
+   styleUrls: ['position-competencies.component.css'],
    providers: [ConfirmationService]
 })
 export class PositionCompetenciesComponent {
@@ -27,10 +28,11 @@ export class PositionCompetenciesComponent {
    positionCompetencies: PositionCompetencies [] = [];
    private groups: GroupCompetencies[];
    private ponderancies: Ponderancies[];
-   
+   ponderanciesList: SelectItem[] = [];
+
    @Output()
    nextStep: EventEmitter<number> = new EventEmitter<number>();
-   
+
    constructor(private router: Router,
                private positionCompetenciesService: PositionCompetenciesServices,
                private competenciesServices: CompetenciesServices,
@@ -46,15 +48,37 @@ export class PositionCompetenciesComponent {
       // fin provisional
 
       this.ponderanciesServices.getAllEnabled().subscribe(ponderancies => {
-         this.ponderancies = ponderancies;
+         this.ponderanciesList.push({label: "Selccione...", value: null});
+         ponderancies.map(p => {
+            this.ponderanciesList.push({label: p.ponderacion, value: p.idPonderacion})
+         });
+      });
+
+      this.positionCompetenciesService.getAllByPosition(this.position.idCargo).subscribe(pcs => {
+         this.positionCompetencies = pcs;
+
          this.groupCompetenciesServices.getAllEnabled().subscribe(groups => {
             this.groups = groups;
             this.groups.map(g => {
                this.competenciesServices.getAllEnabledByGroup(g.idGrupoCompetencia).subscribe(
                   competencies => {
                      g.competencies = competencies;
+
                      g.competencies.map(c => {
-                        c.ponderaciones = this.ponderancies;
+                        let skill = this.positionCompetencies.find((element:PositionCompetencies, index:number, array:PositionCompetencies[]) => {
+                           if(element.idCargo == this.position.idCargo && element.idCompetencia == c.idCompetencia){
+                              return true;
+                           } else {
+                              return false;
+                           }
+                        });
+
+                        if(skill !== undefined) {
+                           c.cargoCompetencia = skill;
+                        } else {
+                           c.cargoCompetencia = new PositionCompetencies();
+                        }
+
                      });
                   }
                );
@@ -62,9 +86,50 @@ export class PositionCompetenciesComponent {
          });
       });
    }
-   
+
+   update(competencie: Competencies, idGrupo: number){
+
+      //verificar el idPonderación si llega nulo para definir si se debe actualizar o agregar
+      let skill = competencie.cargoCompetencia;
+      if(skill.idCargoCompetencia !== null && skill.idCargoCompetencia !== undefined) {
+         this.positionCompetenciesService.update(skill);
+      } else {
+         if (skill.idPonderacion !== undefined && skill.idPonderacion !== null) {
+            skill.idCompetencia = competencie.idCompetencia;
+            skill.idCargo = this.position.idCargo;
+            this.positionCompetenciesService.add(skill).subscribe(data => {
+               if (data.idCargoCompetencia) {
+                  this.groups[idGrupo].competencies.map(c => {
+                     if (c.idCompetencia === data.idCompetencia) {
+                        c.cargoCompetencia = data;
+                     }
+                  });
+               }
+            });
+         }
+      }
+   }
+
    next(){
-      this.nextStep.emit(10);
+      let complete: boolean = true;
+      for (let group of this.groups){
+         for(let competencie of group.competencies){
+            if(competencie.cargoCompetencia === undefined || competencie.cargoCompetencia.idCargoCompetencia === null){
+               complete = false;
+               return;
+            }
+         }
+         if(!complete){
+            return;
+         }
+      }
+
+      if(complete){
+         //emitir evento
+         this.nextStep.emit(10);
+      } else {
+         //lanzar mensaje advirtiendo que un grupo no tiene asignado ningun factor
+      }
    }
 
 }

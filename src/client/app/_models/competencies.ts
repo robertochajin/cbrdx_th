@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Ponderancies} from "./ponderancies";
+import {PositionCompetencies} from "./positionCompetencies";
 
 @Injectable()
 export class Competencies {
@@ -12,11 +12,12 @@ export class Competencies {
    public auditoriaFecha : string;
 
    //Campo auxiliar
-   public ponderaciones : Ponderancies[];
+   public cargoCompetencia : PositionCompetencies;
 
   constructor() {
     this.indicadorHabilitado = true;
     this.auditoriaUsuario = 1;
     this.auditoriaFecha = "";
+    this.cargoCompetencia = new PositionCompetencies();
   }
 }
