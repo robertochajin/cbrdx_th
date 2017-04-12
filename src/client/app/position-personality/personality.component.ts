@@ -34,9 +34,6 @@ export class PersonalityComponent implements OnInit {
    }
 
    ngOnInit() {
-      this.position = new Positions();
-      this.position.idCargo = 10;
-
       this.listpersonalityService.getAllEnabled().subscribe(listPersonality => {
          this.listPersonality = listPersonality;
          this.personalityService.getAllByPosition(this.position.idCargo).subscribe(res => {

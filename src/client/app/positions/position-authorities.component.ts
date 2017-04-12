@@ -13,7 +13,7 @@ import {SelectItem, Message, ConfirmationService} from 'primeng/primeng';
    providers: [ConfirmationService]
 })
 
-export class AuthoritiesComponent {
+export class PositionAuthoritiesComponent {
 
    @Input() position: Positions;
    absence: Absence = new Absence();
@@ -31,9 +31,7 @@ export class AuthoritiesComponent {
 
    ngOnInit() {
 
-      this.route.params.subscribe((params: Params) => {
-         this.absence.idCargo = Number(+params['idCargo']);
-      });
+      this.absence.idCargo = this.position.idCargo;
       this.absenceService.getSupervisa(this.absence.idCargo).subscribe(
          rest => {
             for (let r of rest) {
