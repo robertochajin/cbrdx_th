@@ -38,6 +38,8 @@ import {AbsenceModule} from "./position-absence/position-absence.module";
 import {AuthoritiesModule} from "./position-authorities/position-authorities.module";
 // import {ResponsibilityModule} from "./position-responsibility/responsibility.module";
 // Copy sp
+//riesgos
+import {RisksModule} from "./risks/risks.module";
 
 import {ConstanteModule} from "./constantes/constante.module";
 import {ListaModule} from "./listas/lista.module";
@@ -97,6 +99,7 @@ import {PositionCompetenciesModule} from "./position-competencies/position-compe
       RiskModule,
       PersonalityModule,
       AbsenceModule,
+      RisksModule,
       AuthoritiesModule,
       CompanyAssetsModule
    ],
