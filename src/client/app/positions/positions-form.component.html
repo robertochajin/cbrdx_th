@@ -98,12 +98,12 @@
                                     </div>
                                  </div>
                               </div>
-                              <div class="row" *ngIf="position.idCargo">
+                              <div class="row" *ngIf="position.paso == 16">
                                  <div class="form-group col-md-6">
                                     <label for="idEstado">Estado</label>
                                     <p-dropdown id="idEstado" name="idEstado"
                                                 [options]="stateTypes" [autoWidth]="false"
-                                                [(ngModel)]="position.idEstado"
+                                                [(ngModel)]="position.idEstado" disabled="true"
                                                 #idEstado="ngModel"
                                     ></p-dropdown>
                                     <!--disabled="true"<div class="ui-message ui-messages-error ui-corner-all"
@@ -297,7 +297,7 @@
                      </div>
                   </div>
                </div>
-   
+               <position-authorities *ngIf="position.idCargo" [position]="position"></position-authorities>
             </fieldset>
          </p-accordionTab>
          
@@ -490,7 +490,7 @@
                      </div>
                   </div>
                </div>
-   
+               
             </fieldset>
          </p-accordionTab>
          

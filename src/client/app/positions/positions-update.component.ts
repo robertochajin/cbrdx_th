@@ -20,6 +20,7 @@ import {TreeNode} from "primeng/components/common/api";
 export class PositionsUpdateComponent {
    @Input()
    position: Positions = new Positions();
+   allPosition: Positions[] = [];
    acordion: number;
    categoryTypes: SelectItem[] = [];
    areaTypes: SelectItem[] = [];
@@ -126,7 +127,7 @@ export class PositionsUpdateComponent {
             });
             
             this.positionsService.getListPositions().subscribe( res => {
-         
+               this.allPosition = res;
                this.bossPositionTypes.push( { label: "Seleccione", value: null } );
                for ( let dp of res ) {
                   if ( res.idCargo != this.position.idCargo ) {
@@ -137,27 +138,23 @@ export class PositionsUpdateComponent {
                   }
                }
                //this.treeArrray = res;
-               for (let c of res.filter(t => t.idCargoJefe == 0 || t.idCargoJefe == null)) {
-                  let maxNivel: TreeNode[] = [];
-                  for (let p of res.filter(x => x.idCargoJefe == c.idCargo)) {
-                     let treeNode: TreeNode = [];
-                     treeNode = {"label": p.cargo};
-                     if (res.filter(t => t.idCargoJefe == p.idCargo).length > 0) {
-                        treeNode.children = [];
-                        treeNode.expanded = true;
-                        let treeNodeChild: TreeNode;
-                        for (let m of res.filter(t => t.idCargoJefe == p.idCargo)) {
-                           treeNodeChild = {"label": m.cargo};
-                           treeNode.children.push(treeNodeChild);
-                        }
-                     }
-                     maxNivel.push(treeNode);
+               for (let c of this.allPosition.filter(t => t.idCargoJefe == 0 || t.idCargoJefe == null)) {
+                  let node: TreeNode;
+                  let treeNode: TreeNode[] = [];
+                  
+                  if(this.allPosition.filter(x => x.idCargoJefe == c.idCargo).length > 0){
+                     treeNode = this.buildChild(c);
                   }
-                  this.treeArrray.push({
-                                           "label": c.cargo,
-                                           "children": maxNivel,
-                                           "expanded": true
-                                        });
+                  node = {
+                     "label": c.cargo,
+                     "children": treeNode,
+                     "expanded": true
+                  };
+                  this.treeArrray.push(node);
+                  if(this.position.idCargo == c.idCargo){
+                     this.selectedNode = node;
+                  }
+                  
                }
                //this.expandAll()
             } );
@@ -273,6 +270,7 @@ export class PositionsUpdateComponent {
       this.msgs = [];
       if(this.position.paso == 15){
          this.position.paso = 16;
+         this.position.idEstado = this.defaultState.idListaEstadoCargo;
          this.step = 16;
       }
       this._nav.setTab(15);
@@ -302,5 +300,25 @@ export class PositionsUpdateComponent {
       this._nav.setTab( e.index );
       this.acordion = this._nav.getTab();
    }
-   
+   buildChild( dadInfo:Positions) {
+      let treeChild: TreeNode[] = [];
+      
+      for (let p of this.allPosition.filter(x => x.idCargoJefe == dadInfo.idCargo)) {
+         let node: TreeNode = [];
+         let treeNode: TreeNode[] = [];
+         if(this.allPosition.filter(y => y.idCargoJefe == p.idCargo).length > 0){
+            treeNode = this.buildChild(p);
+         }
+         node = {
+            "label": p.cargo,
+            "children": treeNode,
+            "expanded": true
+         }
+         treeChild.push(node);
+         if(this.position.idCargo == p.idCargo){
+            this.selectedNode = node;
+         }
+      }
+      return treeChild;
+   }
 }
