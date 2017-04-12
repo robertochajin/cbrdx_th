@@ -23,12 +23,7 @@
                            [(ngModel)]="risk.idTipoRiesgo" (onChange)="changeType()"
                            #idTipoRiesgo="ngModel" disabled="true"
                ></p-dropdown>
-               <div class="ui-message ui-messages-error ui-corner-all"
-                    *ngIf="f.submitted && !idTipoRiesgo.valid">
-                  <i class="fa fa-close"></i>
-                  Tipo de riesgo requerido
-               </div>
-            </div>
+              </div>
             <div class="ui-grid-col-6" *ngIf="!risk.idRiesgo">
                <label for="idTipoRiesgo">Tipo</label>
                <p-dropdown id="idTipoRiesgo" name="idTipoRiesgo" required="true"
@@ -49,11 +44,6 @@
                            [(ngModel)]="risk.idSubTipoRiesgo"
                            #idSubTipoRiesgo="ngModel" disabled="true"
                ></p-dropdown>
-               <div class="ui-message ui-messages-error ui-corner-all"
-                    *ngIf="f.submitted && !idSubTipoRiesgo.valid">
-                  <i class="fa fa-close"></i>
-                  SubTipo de riego requerido
-               </div>
             </div>
             <div class="ui-grid-col-6"  *ngIf="!risk.idRiesgo">
                <label for="idSubTipoRiesgo">SubTipo</label>
