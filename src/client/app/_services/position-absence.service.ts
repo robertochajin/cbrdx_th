@@ -13,6 +13,9 @@ export class AbsenceService {
    getReemplazaA(id: number) {
       return this.http.get(this.serviceURL + 'cargosRelacionados/buscarRelacion/REE/' + id).map((res: Response) => res.json() as Absence[]);
    }
+   getSupervisa(id: number) {
+      return this.http.get(this.serviceURL + 'cargosRelacionados/buscarRelacion/SUP/' + id).map((res: Response) => res.json() as Absence[]);
+   }
    getReemplazado(id: number) {
       return this.http.get(this.serviceURL + 'cargosRelacionados/buscarRelacion/REP/' + id).map((res: Response) => res.json() as Absence[]);
    }

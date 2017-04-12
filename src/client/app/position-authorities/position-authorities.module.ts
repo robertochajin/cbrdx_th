@@ -1,7 +1,7 @@
 import {NgModule}      from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import 'rxjs/add/operator/toPromise';
-import {AbsenceComponent} from "./position-absence.component";
+import {AuthoritiesComponent} from "./position-authorities.component";
 import {FormSharedModule } from '../shared/form-shared.module';
 import {AbsenceService} from '../_services/position-absence.service';
 // import {InputSwitchModule} from 'primeng/primeng';
@@ -10,14 +10,13 @@ import {AbsenceService} from '../_services/position-absence.service';
    imports: [
       FormSharedModule,
       ReactiveFormsModule,
-      // InputSwitchModule,
    ],
    declarations: [
-      AbsenceComponent
+      AuthoritiesComponent
    ],
-   bootstrap: [AbsenceComponent],
+   bootstrap: [AuthoritiesComponent],
    providers: [AbsenceService],
-   exports: [AbsenceComponent]
+   exports: [AuthoritiesComponent]
 })
-export class AbsenceModule {
+export class AuthoritiesModule {
 }

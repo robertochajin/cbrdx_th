@@ -17,6 +17,7 @@ import {EmployeesVehicleModule} from "./employees-vehicle/employee-vehicles.modu
 import {WorkExperienceModule} from "./employees-work-experience/work-experience.module";
 import {FaultsAndSanctionsModule} from "./faultsAndSanctions/faults-and-sanctions.module";
 import {PositionsModule} from "./positions/positions.module";
+import {PersonalityModule} from "./position-personality/personality.module";
 import {CompanyAssetsModule} from "./position-company-assets/company-assets.module"
 
 
@@ -33,7 +34,8 @@ import {ProductivityModule} from "./position-productivity/productivity.module";
 // import {IQLevelModule} from "./IQlevel/iqlevel.module";
 
 import {RiskModule} from "./position-risks/position-risks.module";
-import {AbsencekModule} from "./position-absence/position-absence.module";
+import {AbsenceModule} from "./position-absence/position-absence.module";
+import {AuthoritiesModule} from "./position-authorities/position-authorities.module";
 // import {ResponsibilityModule} from "./position-responsibility/responsibility.module";
 // Copy sp
 
@@ -56,7 +58,7 @@ import {PositionCompetenciesModule} from "./position-competencies/position-compe
 
 //CarsModule,
 @NgModule({
- imports: [BrowserModule, HttpModule, AppRoutingModule,
+   imports: [BrowserModule, HttpModule, AppRoutingModule,
       EmployeesModule,
       FamilyInformationModule,
       LocationModule,
@@ -93,7 +95,9 @@ import {PositionCompetenciesModule} from "./position-competencies/position-compe
       PositionsModule,
       ProductivityModule,
       RiskModule,
-      AbsencekModule,
+      PersonalityModule,
+      AbsenceModule,
+      AuthoritiesModule,
       CompanyAssetsModule
    ],
 
