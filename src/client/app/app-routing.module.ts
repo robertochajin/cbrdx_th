@@ -130,8 +130,6 @@ import {CompanyAssetsComponent} from "./position-company-assets/company-assets.c
 import {AbsenceComponent} from "./position-absence/position-absence.component";
 import {PersonalityComponent} from "./position-personality/personality.component";
 
-//autoridades
-import {AuthoritiesComponent} from "./position-authorities/position-authorities.component";
 const routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
 
@@ -270,8 +268,6 @@ const routes = [
   {path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [AuthGuard]},
   //cargos posición en caso de ausencia
   {path: 'position-absence/:idCargo', component: AbsenceComponent, canActivate: [AuthGuard]},
-   //cargos autoridades
-  {path: 'position-authorities/:idCargo', component: AuthoritiesComponent, canActivate: [AuthGuard]},
 
 
 ];
