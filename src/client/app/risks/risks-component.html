@@ -1,0 +1,34 @@
+<h3 class="first">Riesgos</h3>
+<div>
+   <div class="row datable-header">
+      <div class="col-md-6 col-xs-12 datatable-header-add">
+         <button type="button" icon="fa-plus" label="Nuevo Riesgo"
+                 pButton (click)="add()"></button>
+      </div>
+      <div class="col-md-6 col-xs-12 datatable-header-search" >
+         <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            <input #gb type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
+         </div>
+      </div>
+   </div>
+   <p-dataTable [value]="risks" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+      <p-column field="tipo" header="Tipo" [sortable]="true"></p-column>
+      <p-column field="subtipo" header="SubTipo " [sortable]="true"></p-column>
+      <p-column field="riesgo" header="Riesgo" [sortable]="true"></p-column>
+      <p-column header="Habilitado" styleClass="datatable-col-action">
+         <template let-risk="rowData" pTemplate="body">
+            <p-checkbox name="indicadorHabilitado" [(ngModel)]="risk.indicadorHabilitado" binary="true" (onChange)="change(risk)" ></p-checkbox>
+         </template>
+      </p-column>
+      <p-column header="Acciones" styleClass="datatable-col-action">
+         <template let-risk="rowData" pTemplate="body">
+            <button type="button" icon="fa-pencil" class="ui-button-success"
+                    pButton (click)="update(risk)"></button>
+            <button type="button" icon="fa-trash" class="ui-button-danger"
+                    pButton (click)="del(risk)" ></button>
+         </template>
+      </p-column>
+   </p-dataTable>
+</div>
+<p-confirmDialog width="400"></p-confirmDialog>
