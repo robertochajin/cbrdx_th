@@ -6,7 +6,7 @@
          <p-column header="Acciones" field="cargoCompetencia" >
             <template let-competencie="rowData" pTemplate="body">
              <p-dropdown [options]="ponderanciesList" [(ngModel)]="competencie.cargoCompetencia.idPonderacion"
-                         [autoWidth]="false" (onChange)="update(competencie, i)"></p-dropdown>
+                         [autoWidth]="false" (onBlur)="update(competencie, i)"></p-dropdown>
             </template>
          </p-column>
       </p-dataTable>

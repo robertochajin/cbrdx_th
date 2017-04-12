@@ -88,21 +88,25 @@ export class PositionCompetenciesComponent {
    }
 
    update(competencie: Competencies, idGrupo: number){
+
+      //verificar el idPonderación si llega nulo para definir si se debe actualizar o agregar
       let skill = competencie.cargoCompetencia;
       if(skill.idCargoCompetencia !== null && skill.idCargoCompetencia !== undefined) {
          this.positionCompetenciesService.update(skill);
       } else {
-         skill.idCompetencia = competencie.idCompetencia;
-         skill.idCargo = this.position.idCargo;
-         this.positionCompetenciesService.add(skill).subscribe(data => {
-            if(data.idCargoCompetencia){
-               this.groups[idGrupo].competencies.map(c => {
-                  if(c.idCompetencia === data.idCompetencia){
-                     c.cargoCompetencia = data;
-                  }
-               });
-            }
-         });
+         if (skill.idPonderacion !== undefined && skill.idPonderacion !== null) {
+            skill.idCompetencia = competencie.idCompetencia;
+            skill.idCargo = this.position.idCargo;
+            this.positionCompetenciesService.add(skill).subscribe(data => {
+               if (data.idCargoCompetencia) {
+                  this.groups[idGrupo].competencies.map(c => {
+                     if (c.idCompetencia === data.idCompetencia) {
+                        c.cargoCompetencia = data;
+                     }
+                  });
+               }
+            });
+         }
       }
    }
 
