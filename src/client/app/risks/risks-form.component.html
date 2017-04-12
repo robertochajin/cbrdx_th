@@ -80,6 +80,15 @@
                   Descripción requerida
                </div>
             </div>
+            <div class="ui-grid-col-6" *ngIf="risk.idRiesgo">
+               <label for="indicadorHabilitado">Indicador Habilitado</label>
+               <p-checkbox id="indicadorHabilitado" name="indicadorHabilitado" [(ngModel)]="risk.indicadorHabilitado" binary="true"  ></p-checkbox>
+
+               <div class="ui-message ui-messages-error ui-corner-all"
+                    *ngIf="f.submitted && !indicadorHabilitado.valid">
+                  <i class="fa fa-close"></i>
+               </div>
+            </div>
          </div>
          <div class="ui-grid-row form-footer-buttons">
             <div class="ui-grid-col-4"></div>

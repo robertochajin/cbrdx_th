@@ -61,7 +61,7 @@ export class RisksUpdateComponent {
    }
 
    onSubmit() {
-      this.risksService.add(this.risk)
+      this.risksService.update(this.risk)
          .subscribe(data => {
             this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
             this.location.back();
