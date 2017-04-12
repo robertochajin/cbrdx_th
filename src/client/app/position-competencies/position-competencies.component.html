@@ -1,10 +1,16 @@
 <p-tabView>
-   <p-tabPanel header="dummy"></p-tabPanel>
-   <p-tabPanel *ngFor="let group of groups; let i = index" header="3434" >
-      sdasdasd
+   <p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}" >
+      <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="group.competencies"
+                    [responsive]="true" id="positionCompetenciesDT" styleClass="dejemeverelcombo" >
+         <p-column field="competencia" header="Competencia" [sortable]="true"></p-column>
+         <p-column header="Acciones" field="cargoCompetencia" >
+            <template let-competencie="rowData" pTemplate="body">
+             <p-dropdown [options]="ponderanciesList" [(ngModel)]="competencie.cargoCompetencia.idPonderacion"
+                         [autoWidth]="false" (onChange)="update(competencie, i)"></p-dropdown>
+            </template>
+         </p-column>
+      </p-dataTable>
    </p-tabPanel>
+   <p-tabPanel header=""></p-tabPanel>
 </p-tabView>
-<div>
-  {{groups | json}}
-</div>
 <p-confirmDialog width="400"></p-confirmDialog>
