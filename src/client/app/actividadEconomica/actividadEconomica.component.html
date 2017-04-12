@@ -18,8 +18,7 @@
 <div class="ui-grid-row">
    <div class="col-md-4">
 
-      <p-tree id="trvActividadEconomica" [(value)]="treeActividadEconomica" selectionMode="single"
-              [(selection)]="treeselected"
+      <p-tree id="trvActividadEconomica" [(value)]="treeActividadEconomica" selectionMode="single" [(selection)]="treeselected"
               (onNodeSelect)="nodeSelect($event.node)"
               (onNodeExpand)="nodeExpand($event.node)">
       </p-tree>
@@ -32,6 +31,7 @@
             <div class="col-md-12">
 
                <form (ngSubmit)="!codeExists&&f.valid && save()" #f="ngForm" novalidate id="formName">
+
                   <div class="row">
                      <div class="form-group">
                         <h4>{{labelPadre}}</h4>
@@ -44,8 +44,7 @@
                   </div>
                   <div class="row">
                      <div class="form-group">
-                        <label for="codigoActividadEconomica" class="control-label col-sm-3">* {{ 'LBL_CODIGO' |
-                           translate }} </label>
+                        <label for="codigoActividadEconomica" class="control-label col-sm-3">* {{ 'LBL_CODIGO' | translate }} </label>
                         <div class=" col-sm-9">
 
                            <input type="text" pInputText class="form-control" id="codigoActividadEconomica"
@@ -54,7 +53,8 @@
                                   #codigoActividadEconomica="ngModel"
                                   [maxlength]="tabselected" [minlength]="tabselected"
                                   (change)="validateCode()" required
-                                  (keyup)="capitalizeCodigo()">
+                                  (keyup)="capitalizeCodigo()"
+                           >
 
                            <div *ngIf="f.submitted && !codigoActividadEconomica.valid"
                                 class="ui-message  ui-corner-all">
@@ -71,20 +71,36 @@
                   </div>
                   <div class="row">
                      <div class="form-group">
-   
+
                         <label for="aEconomica" class="control-label col-sm-3">*
                            {{labelfieldactividad}} </label>
                         <div class=" col-sm-9">
                                     <textarea pInputTextarea class="form-control" id="aEconomica" name="aEconomica"
                                               [(ngModel)]="actividadEconomica.actividadEconomica" #aEconomica="ngModel"
-                                              [required]="true" (keyup)="capitalizeName()"></textarea>
-                           <div *ngIf="f.submitted && !aEconomica.valid"
-                                class="ui-message  ui-corner-all">
-                              {{labelfieldactividad}} es requerido
-                           </div>
+                                              [required]="true" (keyup)="capitalizeName()"
+                                    ></textarea>
+                                    <div *ngIf="f.submitted && !aEconomica.valid"
+                                         class="ui-message  ui-corner-all">
+                                        {{labelfieldactividad}} es requerido
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                  </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+                                <div class=" col-sm-9">
+
+                                    <p-checkbox binary="true" id="indicador" name="indicador"
+                                                [(ngModel)]="actividadEconomica.indicadorHabilitado">
+                                    </p-checkbox>
+
+                                </div>
+                            </div>
+                        </div>
+
 
                   <div class="row">
                      <div class="form-group">
@@ -108,7 +124,6 @@
             </div>
          </div>
       </p-fieldset>
-
       <p-dialog header="Confirmación" [(visible)]="displayDialog"
                 responsive="true" modal="true">
          <p>{{ 'MSG_CONFIRMACION' | translate }}</p>
