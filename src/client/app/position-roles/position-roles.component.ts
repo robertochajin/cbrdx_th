@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {Router} from '@angular/router';
 import {SelectItem, ConfirmationService} from 'primeng/primeng';
 import {Positions} from "../_models/positions";
@@ -19,6 +19,9 @@ export class PositionRolesComponent {
    position: Positions;
    processRoles: ProcessRoles[] = [];
    positionRoles: PositionRoles [] = [];
+   
+   @Output()
+   nextStep: EventEmitter<number> = new EventEmitter<number>();
 
    constructor(private router: Router,
                private positionRolesServices: PositionRolesServices,
@@ -27,10 +30,7 @@ export class PositionRolesComponent {
    }
 
    ngOnInit() {
-      // provisional
-      this.position = new Positions();
-      this.position.idCargo = 10;
-      // fin provisional
+     
       this.processRolesServices.getAllEnabled().subscribe(processRoles => {
          this.processRoles = processRoles;
          this.positionRolesServices.getAllByPosition(this.position.idCargo).subscribe(prs => {
@@ -91,5 +91,8 @@ export class PositionRolesComponent {
          }
       });
    }
-
+   
+   next(){
+         this.nextStep.emit(4);
+   }
 }

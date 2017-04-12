@@ -219,8 +219,8 @@ export class OcupacionesComponent implements OnInit {
                 this.selectedNode.label = this.ocupaciones.ocupacion;
                 this.header = this.ocupaciones.ocupacion;
                 for (let i = 0; i < this.listadoOcupaciones.length; i++) {
-                    if (this.listadoOcupaciones[i].idOcupacion === data.idOcupacion) {
-                        this.listadoOcupaciones[i] = data;
+                    if (this.listadoOcupaciones[i].idOcupacion === this.ocupaciones.idOcupacion) {
+                        this.listadoOcupaciones[i] = this.ocupaciones;
                         return;
                     }
                 }
@@ -316,14 +316,19 @@ export class OcupacionesComponent implements OnInit {
             if (res.idOcupacionPadre != 0) {
                 this.ocupacionesService.viewOcupaciones(res.idOcupacionPadre).subscribe(r => {
                     this.labelPadre = r.ocupacion;
-                    // Scroll to Select
-                    jQuery('#trvOcupaciones').scrollTop(jQuery('.ui-state-highlight').position().top - jQuery('#trvOcupaciones').height() / 2);
                 });
             } else {
                 this.labelPadre = "";
             }
             this.labelTipo = "Tipo: " + this.ocupacionesTypes.find(t => t.idOcupacionTipo == res.idOcupacionTipo).descripcionOcupacionTipo;
+
+           // Scroll to Select
+           jQuery('#trvOcupaciones').scrollTop(
+              jQuery('.ui-state-highlight').position().top - jQuery('#trvOcupaciones').height() / 2
+           );
         });
+
+
     }
 
     private searchRecursive(res:Ocupaciones){
@@ -427,7 +432,7 @@ export class OcupacionesComponent implements OnInit {
     capitalizeCodigo() {
       let input = this.ocupaciones.codigoOcupacion;
       if(input != "" && input != null){
-        this.ocupaciones.codigoOcupacion = input.toUpperCase();
+        this.ocupaciones.codigoOcupacion = input.toUpperCase().replace(' ', '').trim();
       }
     }
     

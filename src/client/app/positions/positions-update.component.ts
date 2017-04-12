@@ -9,6 +9,7 @@ import { PositionsService } from '../_services/positions.service';
 import { ListPositionsService } from '../_services/lists-positions.service';
 import { TipoDeAreaService } from '../_services/tipoDeArea.service';
 import { ListEmployeesService } from "../_services/lists-employees.service";
+import {TreeNode} from "primeng/components/common/api";
 
 @Component( {
                moduleId: module.id,
@@ -16,7 +17,7 @@ import { ListEmployeesService } from "../_services/lists-employees.service";
                templateUrl: 'positions-form.component.html',
                providers: [ ConfirmationService ]
             } )
-export class PositionsUpdateComponent implements OnInit{
+export class PositionsUpdateComponent {
    @Input()
    position: Positions = new Positions();
    acordion: number;
@@ -31,7 +32,9 @@ export class PositionsUpdateComponent implements OnInit{
    msgs: Message[] = [];
    defaultState: any;
    aprobado:boolean = false;
-   step = 16;
+   treeArrray: TreeNode[] = [];
+   selectedNode: TreeNode;
+   step = 1;
    constructor( private positionsService: PositionsService,
                 private router: Router,
                 private route: ActivatedRoute,
@@ -81,9 +84,7 @@ export class PositionsUpdateComponent implements OnInit{
          }
       } );
    
-      this.listPositionsService.getstateByCode("APROB").subscribe( res => {
-          this.defaultState = res;
-      });
+     
    
       this.listEmployeesService.getGenderTypes().subscribe(res => {
          this.genderTypes.push({label: "Seleccione", value: null});
@@ -110,10 +111,22 @@ export class PositionsUpdateComponent implements OnInit{
       this.route.params.subscribe( ( params: Params ) => {
          this.positionsService.get( +params[ 'id' ] ).subscribe( position => {
             this.position = position;
-            this.position.paso = 0;
-            this.position.idEstado = 1;
-            this.aprobado = this.position.idEstado == this.defaultState.idListaEstadoCargo ? true : false;
+            this.step = this.position.paso;
+            //this.step = 3;
+            if(this.step >0 && this.step <16){
+               if(this._nav.getTab() > 0 && this._nav.getTab()!= null){
+                  this.acordion = this._nav.getTab();
+               }else{
+                  this.acordion = this.step-1;
+               }
+            }
+            this.listPositionsService.getstateByCode("APROB").subscribe( res => {
+               this.defaultState = res;
+               this.aprobado = this.position.idEstado == this.defaultState.idListaEstadoCargo ? true : false;
+            });
+            
             this.positionsService.getListPositions().subscribe( res => {
+         
                this.bossPositionTypes.push( { label: "Seleccione", value: null } );
                for ( let dp of res ) {
                   if ( res.idCargo != this.position.idCargo ) {
@@ -123,11 +136,51 @@ export class PositionsUpdateComponent implements OnInit{
                                                   } );
                   }
                }
+               //this.treeArrray = res;
+               for (let c of res.filter(t => t.idCargoJefe == 0 || t.idCargoJefe == null)) {
+                  let maxNivel: TreeNode[] = [];
+                  for (let p of res.filter(x => x.idCargoJefe == c.idCargo)) {
+                     let treeNode: TreeNode = [];
+                     treeNode = {"label": p.cargo};
+                     if (res.filter(t => t.idCargoJefe == p.idCargo).length > 0) {
+                        treeNode.children = [];
+                        treeNode.expanded = true;
+                        let treeNodeChild: TreeNode;
+                        for (let m of res.filter(t => t.idCargoJefe == p.idCargo)) {
+                           treeNodeChild = {"label": m.cargo};
+                           treeNode.children.push(treeNodeChild);
+                        }
+                     }
+                     maxNivel.push(treeNode);
+                  }
+                  this.treeArrray.push({
+                                           "label": c.cargo,
+                                           "children": maxNivel,
+                                           "expanded": true
+                                        });
+               }
+               //this.expandAll()
             } );
          } );
       } );
       
       this.acordion = this._nav.getTab();
+   }
+   
+   nextStep(step:number) {
+      this.msgs = [];
+      if(this.position.paso!= 0 && this.position.paso <= step){
+         this.position.paso = step+1;
+         this.step = this.position.paso;
+      }
+      this._nav.setTab(step);
+      this.acordion = step;
+      this.positionsService.update( this.position )
+      .subscribe( data => {
+         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+      }, error => {
+         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+      } );
    }
    
    onSubmit0() {
@@ -136,6 +189,8 @@ export class PositionsUpdateComponent implements OnInit{
          this.position.paso = 2;
          this.step = 2;
       }
+      this._nav.setTab(1);
+      this.acordion = 1;
       this.positionsService.update( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
@@ -147,10 +202,13 @@ export class PositionsUpdateComponent implements OnInit{
    
    onSubmit2() {
       this.msgs = [];
-      if(this.position.paso == 3){
+      if(this.position.paso <= 3){
          this.position.paso = 4;
          this.step = 4;
       }
+      this._nav.setTab(3);
+      this.acordion = 3;
+      console.info(this.step);
       this.positionsService.update( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
@@ -162,10 +220,12 @@ export class PositionsUpdateComponent implements OnInit{
    
    onSubmit5() {
       this.msgs = [];
-      if(this.position.paso == 5){
-         this.position.paso = 6;
+      if(this.position.paso <= 6){
+         this.position.paso = 7;
          this.step = 7;
       }
+      this._nav.setTab(6);
+      this.acordion = 6;
       this.positionsService.update( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
@@ -177,10 +237,12 @@ export class PositionsUpdateComponent implements OnInit{
    
    onSubmit7() {
       this.msgs = [];
-      if(this.position.paso == 7){
-         this.position.paso = 8;
-         this.step = 8;
+      if(this.position.paso == 8){
+         this.position.paso = 9;
+         this.step = 9;
       }
+      this._nav.setTab(8);
+      this.acordion = 8;
       this.positionsService.update( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
@@ -192,10 +254,29 @@ export class PositionsUpdateComponent implements OnInit{
    
    onSubmit8() {
       this.msgs = [];
-      if(this.position.paso == 8){
-         this.position.paso = 9;
-         this.step = 9;
+      if(this.position.paso == 9){
+         this.position.paso = 10;
+         this.step = 10;
       }
+      this._nav.setTab(9);
+      this.acordion = 9;
+      this.positionsService.update( this.position )
+      .subscribe( data => {
+         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         //this.router.navigate(['positions/update/'+data.idCargo]);
+      }, error => {
+         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+      } );
+   }
+   
+   onSubmit14() {
+      this.msgs = [];
+      if(this.position.paso == 15){
+         this.position.paso = 16;
+         this.step = 16;
+      }
+      this._nav.setTab(15);
+      this.acordion = 15;
       this.positionsService.update( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
@@ -216,8 +297,10 @@ export class PositionsUpdateComponent implements OnInit{
                                         } );
    }
    
+   
    onTabShow( e: any ) {
       this._nav.setTab( e.index );
       this.acordion = this._nav.getTab();
    }
+   
 }
