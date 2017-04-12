@@ -37,6 +37,8 @@ import {RiskModule} from "./position-risks/position-risks.module";
 import {AbsenceModule} from "./position-absence/position-absence.module";
 // import {ResponsibilityModule} from "./position-responsibility/responsibility.module";
 // Copy sp
+//riesgos
+import {RisksModule} from "./risks/risks.module";
 
 import {ConstanteModule} from "./constantes/constante.module";
 import {ListaModule} from "./listas/lista.module";
@@ -96,7 +98,8 @@ import {PositionCompetenciesModule} from "./position-competencies/position-compe
       RiskModule,
       PersonalityModule,
       AbsenceModule,
-      CompanyAssetsModule
+      RisksModule,
+            CompanyAssetsModule
    ],
 
    declarations: [AppComponent],
