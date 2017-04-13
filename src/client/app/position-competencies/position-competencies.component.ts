@@ -43,11 +43,6 @@ export class PositionCompetenciesComponent {
    }
 
    ngOnInit() {
-      // provisional
-      this.position = new Positions();
-      this.position.idCargo = 10;
-      // fin provisional
-
       this.ponderanciesServices.getAllEnabled().subscribe(ponderancies => {
          this.ponderanciesList.push({label: "Selccione...", value: null});
          ponderancies.map(p => {
