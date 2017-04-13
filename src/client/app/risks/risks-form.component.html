@@ -38,7 +38,7 @@
                </div>
             </div>
             <div class="ui-grid-col-6"  *ngIf="risk.idRiesgo">
-               <label for="idSubTipoRiesgou">SubTipo</label>
+               <label for="idSubTipoRiesgou">SubTipo1</label>
                <p-dropdown id="idSubTipoRiesgou" name="idSubTipoRiesgou" required="true"
                            [options]="listSubTypeRisks" [autoWidth]="false"
                            [(ngModel)]="risk.idSubTipoRiesgo"
@@ -70,14 +70,9 @@
                   Descripción requerida
                </div>
             </div>
-            <div class="ui-grid-col-6" *ngIf="risk.idRiesgo">
+            <div class="ui-grid-col-6" *ngIf="risk.idRiesgo"><br>
                <label for="indicadorHabilitado">Indicador Habilitado</label>
                <p-checkbox id="indicadorHabilitado" name="indicadorHabilitado" [(ngModel)]="risk.indicadorHabilitado" binary="true"  ></p-checkbox>
-
-               <div class="ui-message ui-messages-error ui-corner-all"
-                    *ngIf="f.submitted && !indicadorHabilitado.valid">
-                  <i class="fa fa-close"></i>
-               </div>
             </div>
          </div>
          <div class="ui-grid-row form-footer-buttons">
