@@ -22,7 +22,7 @@ export class PositionResponsabilitiesComponent {
    tr: PositionResponsabilities = new PositionResponsabilities();
    positionResponsabilities: PositionResponsabilities [] = [];
    guardando:boolean = false;
-   
+
    @Output()
    nextStep: EventEmitter<number> = new EventEmitter<number>();
 
@@ -49,8 +49,6 @@ export class PositionResponsabilitiesComponent {
    }
 
    save(pr: PositionResponsabilities) {
-      //console.info(pr);
-      this.guardando = true;
       pr.indicadorHabilitado = true;
       pr.idCargo = this.position.idCargo;
       this.positionResponsabilitiesService.add(pr).subscribe(res => {
