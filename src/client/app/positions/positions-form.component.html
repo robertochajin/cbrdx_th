@@ -63,7 +63,7 @@
                               <div class="row">
                                  <div class="form-group col-md-6">
                                     <label for="idCargoJefe">Cargo que depende</label>
-                                    <p-dropdown id="idCargoJefe" name="idCargoJefe" required="true"
+                                    <p-dropdown id="idCargoJefe" name="idCargoJefe"
                                                 [options]="bossPositionTypes" [autoWidth]="false"
                                                 [(ngModel)]="position.idCargoJefe"
                                                 #idCargoJefe="ngModel"
@@ -128,19 +128,19 @@
                                          pButton></button>
                               </div>
                            </div>
-                           <div class="row form-footer-buttons" *ngIf="position.paso == 0">
+                           <div class="row form-footer-buttons" *ngIf="position.paso == 16">
                               <div class="form-group col-md-12">
-                                 <button icon="fa-plus" label="Aprobar" type="submit"
-                                         pButton></button>
-                                 <button icon="fa-plus" label="No aprobar" type="submit"
-                                         pButton></button>
+                                 <button icon="fa-plus" label="Aprobar" type="button"
+                                         pButton (click)="updateEstado(aprobado)"></button>
+                                 <button icon="fa-plus" label="No aprobar" type="button"
+                                         pButton (click)="updateEstado(noAprobado)"></button>
                               </div>
                            </div>
                         </form>
                      </div>
                   </div>
                </div>
-               <positions-observations-list *ngIf="aprobado" [position]="position"></positions-observations-list>
+               <positions-observations-list *ngIf="position.idEstado != construccion" [position]="position"></positions-observations-list>
                
             
             </fieldset>
@@ -408,13 +408,6 @@
          <p-accordionTab header="Personalidad" [selected]="acordion == 12"
                          [disabled]="step >0 && step <13">
             <personality  (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></personality>
-            <!--<div class="ui-grid-row form-footer-buttons">
-               <div class="ui-grid-col-8"></div>
-               <div class="ui-grid-col-3">
-                  <button pButton icon="fa-plus" label="Siguiente" (click)="nextStep(13)"></button>
-               </div>
-               <div class="ui-grid-col-5"></div>
-            </div>-->
          </p-accordionTab>
          
          <p-accordionTab header="Factores de riesgo ocupacional" [selected]="acordion == 13"
@@ -497,6 +490,12 @@
          <p-accordionTab header="Relación organizacional" [selected]="acordion == 15"
                          [disabled]="step >0 && step <16">
             <p-tree [value]="treeArrray" layout="horizontal" selectionMode="single" [(selection)]="selectedNode" ></p-tree>
+            <div class="row form-footer-buttons">
+               <div class="form-group col-md-12">
+                  <button icon="fa-plus" label="Volver Arriba" type="button" (click)="firstStep()"
+                          pButton></button>
+               </div>
+            </div>
          </p-accordionTab>
       
       </p-accordion>

@@ -74,7 +74,7 @@ export class CompanyAssetsComponent implements OnInit {
 
       this.companyAssetsService.add(companyAssets).subscribe(res => {
          if (res.ok)
-            this.permitirSiguiente = true;
+               this.permitirSiguiente = true;
       });
    }
 

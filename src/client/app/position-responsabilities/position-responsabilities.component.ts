@@ -21,7 +21,8 @@ export class PositionResponsabilitiesComponent {
    responsabilities: SelectItem[] = [];
    tr: PositionResponsabilities = new PositionResponsabilities();
    positionResponsabilities: PositionResponsabilities [] = [];
-   
+   guardando:boolean = false;
+
    @Output()
    nextStep: EventEmitter<number> = new EventEmitter<number>();
 
@@ -55,6 +56,8 @@ export class PositionResponsabilitiesComponent {
             this.responsabilities.map((r) => {
                if(pr.idResponsabilidad === r.value){
                   this.responsabilities.splice(this.responsabilities.indexOf(r));
+                  this.tr.idResponsabilidad = null;
+                  this.guardando = false;
                }
             });
             this.positionResponsabilitiesService.getAllByPosition(this.position.idCargo).subscribe(prs => {
@@ -70,8 +73,10 @@ export class PositionResponsabilitiesComponent {
          header: 'Corfirmación',
          icon: 'fa fa-question-circle',
          accept: () => {
+            this.guardando = true;
             r.indicadorHabilitado = false;
             this.positionResponsabilitiesService.update(r).subscribe(res => {
+               this.guardando = false;
                this.positionResponsabilities.splice(this.positionResponsabilities.indexOf(r), 1);
                this.responsabilities = [];
                this.responsabilitiesServices.getAllEnabledByPosition(this.position.idCargo).subscribe(
