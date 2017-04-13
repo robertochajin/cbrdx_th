@@ -1,15 +1,15 @@
 import "rxjs/add/operator/switchMap";
-import { Component, Input, OnInit} from '@angular/core';
-import { ActivatedRoute, Router, Params } from '@angular/router'
-import { Location } from '@angular/common';
-import { Positions } from '../_models/positions';
-import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
-import { NavService } from '../_services/_nav.service';
-import { PositionsService } from '../_services/positions.service';
-import { ListPositionsService } from '../_services/lists-positions.service';
-import { TipoDeAreaService } from '../_services/tipoDeArea.service';
+import { Component, Input } from "@angular/core";
+import { ActivatedRoute, Router, Params } from "@angular/router";
+import { Location } from "@angular/common";
+import { Positions } from "../_models/positions";
+import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
+import { NavService } from "../_services/_nav.service";
+import { PositionsService } from "../_services/positions.service";
+import { ListPositionsService } from "../_services/lists-positions.service";
+import { TipoDeAreaService } from "../_services/tipoDeArea.service";
 import { ListEmployeesService } from "../_services/lists-employees.service";
-import {TreeNode} from "primeng/components/common/api";
+import { TreeNode } from "primeng/components/common/api";
 
 @Component( {
                moduleId: module.id,
@@ -26,13 +26,14 @@ export class PositionsUpdateComponent {
    areaTypes: SelectItem[] = [];
    bossPositionTypes: SelectItem[] = [];
    stateTypes: SelectItem[] = [];
+   liststateTypes: any[];
    levelTypes: SelectItem[] = [];
    genderTypes: SelectItem[] = [];
    maritalStatusTypes: SelectItem[] = [];
-   disableTabs: boolean = false;
    msgs: Message[] = [];
-   defaultState: any;
-   aprobado:boolean = false;
+   aprobado: number;
+   noAprobado: number;
+   construccion: number;
    treeArrray: TreeNode[] = [];
    selectedNode: TreeNode;
    step = 1;
@@ -55,6 +56,7 @@ export class PositionsUpdateComponent {
                                      } );
          }
       } );
+   
       this.tipoDeAreaService.getlistAreas().subscribe( res => {
          this.areaTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
@@ -66,12 +68,24 @@ export class PositionsUpdateComponent {
       } );
       
       this.listPositionsService.getstateTypes().subscribe( res => {
+         this.liststateTypes = res;
          this.stateTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
             this.stateTypes.push( {
                                      label: dp.nombre,
                                      value: dp.idListaEstadoCargo
                                   } );
+            switch ( dp.codigo ) {
+               case "APROB":
+                  this.aprobado = dp.idListaEstadoCargo;
+                  break;
+               case "NOAPR":
+                  this.noAprobado = dp.idListaEstadoCargo;
+                  break;
+               case "CONST":
+                  this.construccion = dp.idListaEstadoCargo;
+                  break;
+            }
          }
       } );
    
@@ -85,8 +99,6 @@ export class PositionsUpdateComponent {
          }
       } );
    
-     
-   
       this.listEmployeesService.getGenderTypes().subscribe(res => {
          this.genderTypes.push({label: "Seleccione", value: null});
          for (let dp of res) {
@@ -96,6 +108,7 @@ export class PositionsUpdateComponent {
                                   });
          }
       });
+   
       this.listEmployeesService.getMaritalStatusTypes().subscribe(res => {
          this.maritalStatusTypes.push({label: "Seleccione", value: null});
          for (let dp of res) {
@@ -121,10 +134,6 @@ export class PositionsUpdateComponent {
                   this.acordion = this.step-1;
                }
             }
-            this.listPositionsService.getstateByCode("APROB").subscribe( res => {
-               this.defaultState = res;
-               this.aprobado = this.position.idEstado == this.defaultState.idListaEstadoCargo ? true : false;
-            });
             
             this.positionsService.getListPositions().subscribe( res => {
                this.allPosition = res;
@@ -137,31 +146,17 @@ export class PositionsUpdateComponent {
                                                   } );
                   }
                }
-               //this.treeArrray = res;
-               for (let c of this.allPosition.filter(t => t.idCargoJefe == 0 || t.idCargoJefe == null)) {
-                  let node: TreeNode;
-                  let treeNode: TreeNode[] = [];
-                  
-                  if(this.allPosition.filter(x => x.idCargoJefe == c.idCargo).length > 0){
-                     treeNode = this.buildChild(c);
-                  }
-                  node = {
-                     "label": c.cargo,
-                     "children": treeNode,
-                     "expanded": true
-                  };
-                  this.treeArrray.push(node);
-                  if(this.position.idCargo == c.idCargo){
-                     this.selectedNode = node;
-                  }
-                  
-               }
-               //this.expandAll()
+               this.buildParent();
             } );
          } );
       } );
       
       this.acordion = this._nav.getTab();
+   }
+   
+   firstStep() {
+      this._nav.setTab( 0 );
+      this.acordion = 0;
    }
    
    nextStep(step:number) {
@@ -170,10 +165,10 @@ export class PositionsUpdateComponent {
          this.position.paso = step+1;
          this.step = this.position.paso;
       }
-      this._nav.setTab(step);
-      this.acordion = step;
       this.positionsService.update( this.position )
       .subscribe( data => {
+         this._nav.setTab( step );
+         this.acordion = step;
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
       }, error => {
          this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
@@ -186,10 +181,11 @@ export class PositionsUpdateComponent {
          this.position.paso = 2;
          this.step = 2;
       }
-      this._nav.setTab(1);
-      this.acordion = 1;
+   
       this.positionsService.update( this.position )
       .subscribe( data => {
+         this._nav.setTab( 1 );
+         this.acordion = 1;
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          //this.router.navigate(['positions/update/'+data.idCargo]);
       }, error => {
@@ -203,11 +199,10 @@ export class PositionsUpdateComponent {
          this.position.paso = 4;
          this.step = 4;
       }
-      this._nav.setTab(3);
-      this.acordion = 3;
-      console.info(this.step);
       this.positionsService.update( this.position )
       .subscribe( data => {
+         this._nav.setTab( 3 );
+         this.acordion = 3;
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          //this.router.navigate(['positions/update/'+data.idCargo]);
       }, error => {
@@ -221,10 +216,10 @@ export class PositionsUpdateComponent {
          this.position.paso = 7;
          this.step = 7;
       }
-      this._nav.setTab(6);
-      this.acordion = 6;
       this.positionsService.update( this.position )
       .subscribe( data => {
+         this._nav.setTab( 6 );
+         this.acordion = 6;
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          //this.router.navigate(['positions/update/'+data.idCargo]);
       }, error => {
@@ -234,7 +229,7 @@ export class PositionsUpdateComponent {
    
    onSubmit7() {
       this.msgs = [];
-      if(this.position.paso == 8){
+      if ( this.position.paso <= 8 ) {
          this.position.paso = 9;
          this.step = 9;
       }
@@ -251,14 +246,14 @@ export class PositionsUpdateComponent {
    
    onSubmit8() {
       this.msgs = [];
-      if(this.position.paso == 9){
+      if ( this.position.paso <= 9 ) {
          this.position.paso = 10;
          this.step = 10;
       }
-      this._nav.setTab(9);
-      this.acordion = 9;
       this.positionsService.update( this.position )
       .subscribe( data => {
+         this._nav.setTab( 9 );
+         this.acordion = 9;
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          //this.router.navigate(['positions/update/'+data.idCargo]);
       }, error => {
@@ -268,13 +263,30 @@ export class PositionsUpdateComponent {
    
    onSubmit14() {
       this.msgs = [];
-      if(this.position.paso == 15){
-         this.position.paso = 16;
-         this.position.idEstado = this.defaultState.idListaEstadoCargo;
+      if ( this.position.paso <= 15 ) {
          this.step = 16;
+         this.position.paso = 16;
       }
-      this._nav.setTab(15);
-      this.acordion = 15;
+      this.positionsService.update( this.position )
+      .subscribe( data => {
+         this._nav.setTab( 15 );
+         this.acordion = 15;
+         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         //this.router.navigate(['positions/update/'+data.idCargo]);
+      }, error => {
+         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+      } );
+   }
+   
+   updateEstado( value: number ) {
+      this.msgs = [];
+      this.position.idEstado = value;
+      if ( this.position.idEstado == this.aprobado ) {
+         this.position.indicadorHabilitado = true;
+      }
+      if ( this.position.idEstado == this.noAprobado ) {
+         this.position.indicadorHabilitado = false;
+      }
       this.positionsService.update( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
@@ -295,11 +307,32 @@ export class PositionsUpdateComponent {
                                         } );
    }
    
-   
    onTabShow( e: any ) {
       this._nav.setTab( e.index );
       this.acordion = this._nav.getTab();
    }
+   
+   buildParent() {
+      for ( let c of this.allPosition.filter( t => t.idCargoJefe == 0 || t.idCargoJefe == null ) ) {
+         let node: TreeNode;
+         let treeNode: TreeNode[] = [];
+         
+         if ( this.allPosition.filter( x => x.idCargoJefe == c.idCargo ).length > 0 ) {
+            treeNode = this.buildChild( c );
+         }
+         node = {
+            "label": c.cargo,
+            "children": treeNode,
+            "expanded": true
+         };
+         this.treeArrray.push( node );
+         if ( this.position.idCargo == c.idCargo ) {
+            this.selectedNode = node;
+         }
+         
+      }
+   }
+   
    buildChild( dadInfo:Positions) {
       let treeChild: TreeNode[] = [];
       
@@ -312,7 +345,7 @@ export class PositionsUpdateComponent {
          node = {
             "label": p.cargo,
             "children": treeNode,
-            "expanded": true
+            "expanded": treeNode.length > 0 ? true : false
          }
          treeChild.push(node);
          if(this.position.idCargo == p.idCargo){

@@ -38,11 +38,12 @@ export class PositionsObservationsListComponent {
       
    }
    
-   onSubmit() {
+   onSubmitObservacion() {
       this.msgs = [];
       this.show_form = false;
       this.observation.idCargo = this.position.idCargo;
-      if ( this.observation.idCargo == null || this.observation.idCargo == 0 ) {
+      this.observation.idEstadoCargo = this.position.idEstado;
+      if ( this.observation.idCargoEstadoObservacion == null || this.observation.idCargoEstadoObservacion == 0 ) {
          this.positionsService.addObservations( this.observation )
          .subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );

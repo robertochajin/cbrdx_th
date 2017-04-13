@@ -155,6 +155,6 @@ export class EvaluationCriteriasComponent {
    }
 
    next() {
-      this.nextStep.emit(1);
+      this.nextStep.emit(2);
    }
 }
