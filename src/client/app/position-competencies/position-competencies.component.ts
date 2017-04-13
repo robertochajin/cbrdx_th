@@ -1,6 +1,6 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {Router} from '@angular/router';
-import {SelectItem, ConfirmationService} from 'primeng/primeng';
+import {SelectItem, Message, ConfirmationService} from 'primeng/primeng';
 import {CompetenciesServices} from "../_services/competencies.service";
 import * as moment from 'moment/moment';
 import {Competencies} from "../_models/competencies";
@@ -29,6 +29,7 @@ export class PositionCompetenciesComponent {
    private groups: GroupCompetencies[];
    private ponderancies: Ponderancies[];
    ponderanciesList: SelectItem[] = [];
+   msgs: Message[] = [];
 
    @Output()
    nextStep: EventEmitter<number> = new EventEmitter<number>();
@@ -92,7 +93,7 @@ export class PositionCompetenciesComponent {
       //verificar el idPonderación si llega nulo para definir si se debe actualizar o agregar
       let skill = competencie.cargoCompetencia;
       if(skill.idCargoCompetencia !== null && skill.idCargoCompetencia !== undefined) {
-         this.positionCompetenciesService.update(skill);
+         this.positionCompetenciesService.update(skill).subscribe(r => {});
       } else {
          if (skill.idPonderacion !== undefined && skill.idPonderacion !== null) {
             skill.idCompetencia = competencie.idCompetencia;
@@ -111,16 +112,17 @@ export class PositionCompetenciesComponent {
    }
 
    next(){
+      this.msgs = [];
       let complete: boolean = true;
       for (let group of this.groups){
          for(let competencie of group.competencies){
-            if(competencie.cargoCompetencia === undefined || competencie.cargoCompetencia.idCargoCompetencia === null){
+            if(competencie.cargoCompetencia === undefined || competencie.cargoCompetencia.idCargoCompetencia === undefined){
                complete = false;
-               return;
+               break;
             }
          }
          if(!complete){
-            return;
+            break;
          }
       }
 
@@ -129,6 +131,7 @@ export class PositionCompetenciesComponent {
          this.nextStep.emit(9);
       } else {
          //lanzar mensaje advirtiendo que un grupo no tiene asignado ningun factor
+         this.msgs.push( { severity: 'warning', summary: 'Formulario incompleto', detail: 'Es necesario asignar ponderación a todas las competencias.' } );
       }
    }
 

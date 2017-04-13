@@ -48,7 +48,6 @@ export class PositionResponsabilitiesComponent {
    }
 
    save(pr: PositionResponsabilities) {
-      console.info(pr);
       pr.indicadorHabilitado = true;
       pr.idCargo = this.position.idCargo;
       this.positionResponsabilitiesService.add(pr).subscribe(res => {
