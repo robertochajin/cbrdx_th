@@ -4,7 +4,7 @@
       <div class="container">
         <h3>Editando responsabilidades del cargo</h3>
       </div>
-      <form (ngSubmit)="d.valid && save(tr)" #d="ngForm" novalidate id="responsabilitiesForm">
+      <form (ngSubmit)="d.valid && save(tr)" #d="ngForm" novalidate id="responsabilitiesForm" *ngIf="!guardando">
         <div class="container">
            <div class="row">
               <div class="col-md-8 col-xs-9">
