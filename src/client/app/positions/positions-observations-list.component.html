@@ -3,7 +3,7 @@
 <div *ngIf="show_form">
    <div class="row-fluid">
       <div class="col-md-12">
-         <form (ngSubmit)="fobs.valid && onSubmit()" #fobs="ngForm" novalidate>
+         <form (ngSubmit)="fobs.valid && onSubmitObservacion()" #fobs="ngForm" novalidate>
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                <div class="row">
                   <div class=" col-sm-12">
@@ -20,7 +20,7 @@
             </div>
             <div class="row form-footer-buttons">
                <div class="form-group col-md-12">
-                  <button icon="fa-plus" label="Guardar" type="submit"
+                  <button icon="fa-plus" label="Agregar Observación" type="submit"
                           pButton></button>
                </div>
             </div>
@@ -31,7 +31,7 @@
 <div>
    <div class="row datable-header">
       <div class="col-md-6 col-xs-12 datatable-header-add">
-         <button type="button" pButton icon="fa-plus" (click)="add()" label="Nuevo Contacto"></button>
+         <button type="button" pButton icon="fa-plus" (click)="add()" label="Nueva Observación"></button>
       </div>
       <div class="col-md-6 col-xs-12 datatable-header-search">
          <div class="input-group">
@@ -41,6 +41,7 @@
       </div>
    </div>
    <p-dataTable [value]="contacts" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+      <p-column field="idCargoEstadoObservacion" header="Id" [sortable]="true"></p-column>
       <p-column field="observacion" header="Observación" [sortable]="true"></p-column>
       <p-column field="auditoriaFecha" header="Fecha" [sortable]="true"></p-column>
       <!--<p-column header="Acciones" styleClass="datatable-col-action">
