@@ -18,7 +18,7 @@
       <p-column field="riesgo" header="Riesgo" [sortable]="true"></p-column>
       <p-column header="Habilitado" styleClass="datatable-col-action">
          <template let-risk="rowData" pTemplate="body">
-            <p-checkbox name="indicadorHabilitado" [(ngModel)]="risk.indicadorHabilitado" binary="true" (onChange)="change(risk)" ></p-checkbox>
+            <p-checkbox name="indicadorHabilitado" [(ngModel)]="risk.indicadorHabilitado" binary="true" disabled="true" ></p-checkbox>
          </template>
       </p-column>
       <p-column header="Acciones" styleClass="datatable-col-action">
