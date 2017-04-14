@@ -7,12 +7,12 @@
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                <div class="row">
                   <div class=" col-sm-12">
-                     <label for="observation">Observación</label>
-                     <textarea pInputTextarea id="observation" name="observation"
-                               [(ngModel)]="observation.observacion" #observation="ngModel"
+                     <label for="obs">Observación</label>
+                     <textarea pInputTextarea id="obs" name="obs"
+                               [(ngModel)]="observation.observacion" #obs="ngModel"
                                [required]="true"></textarea>
-                     <div *ngIf="fobs.submitted && !observation.valid"
-                          class="ui-message  ui-corner-all">
+                     <div *ngIf="fobs.submitted && !obs.valid"
+                          class="ui-message ui-messages-error ui-corner-all">
                         Observación es requerido
                      </div>
                   </div>
@@ -40,8 +40,9 @@
          </div>
       </div>
    </div>
-   <p-dataTable [value]="contacts" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+   <p-dataTable [value]="observations" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
       <p-column field="idCargoEstadoObservacion" header="Id" [sortable]="true"></p-column>
+      <p-column field="estadoCargo" header="Estado" [sortable]="true"></p-column>
       <p-column field="observacion" header="Observación" [sortable]="true"></p-column>
       <p-column field="auditoriaFecha" header="Fecha" [sortable]="true"></p-column>
       <!--<p-column header="Acciones" styleClass="datatable-col-action">
