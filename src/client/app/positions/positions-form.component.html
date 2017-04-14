@@ -140,7 +140,7 @@
                      </div>
                   </div>
                </div>
-               <positions-observations-list *ngIf="position.idEstado != construccion" [position]="position"></positions-observations-list>
+               <positions-observations-list *ngIf="position.idEstado == aprobado || position.idEstado == noAprobado" [position]="position"></positions-observations-list>
                
             
             </fieldset>
@@ -297,8 +297,8 @@
                      </div>
                   </div>
                </div>
-               <position-authorities *ngIf="position.idCargo" [position]="position"></position-authorities>
             </fieldset>
+            <position-authorities *ngIf="position.idCargo" [position]="position"></position-authorities>
          </p-accordionTab>
          
          <p-accordionTab header="Requisitos generales" [selected]="acordion == 8"

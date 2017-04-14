@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class PositionsObservations {
+export class ListStates {
 
-  public idCargoEstadoObservacion : number;
-  public observacion  : string;
-  public idCargo  : number;
-  public idEstadoCargo  : number;
-  public estadoCargo  : string;
+  public idListaEstadoCargo : number;
+  public codigo  : string;
+  public nombre  : string;
   public indicadorHabilitado : boolean;
   public auditoriaUsuario: number;
   public auditoriaFecha: string;

@@ -13,7 +13,7 @@
          </div>
       </div>
    </div>
-   <form (ngSubmit)="fr.valid && onSubmitREE()" #fr="ngForm" novalidate id="formulario">
+   <form (ngSubmit)="fr.valid && onSubmitREE()" #fr="ngForm" novalidate id="formulario" *ngIf="!guardandoA">
       <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
          <div class="ui-grid-row">
             <div class="ui-grid-col-12">
@@ -52,7 +52,7 @@
          </p-dataTable>
       </div>
    </div>
-   <form (ngSubmit)="f.valid && onSubmitREP()" #f="ngForm" novalidate id="formularioREP">
+   <form (ngSubmit)="f.valid && onSubmitREP()" #f="ngForm" novalidate id="formularioREP" *ngIf="!guardandoP">
       <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
          <div class="ui-grid-row">
             <div class="ui-grid-col-12">
