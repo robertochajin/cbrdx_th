@@ -23,5 +23,25 @@ export class GroupCompetenciesServices {
     return this.http.get(this.masterService + 'noAsignadas/'+idPosition).map((res: Response) => res.json() as GroupCompetencies[]);
   }
 
+
+   add(f: GroupCompetencies) {
+      return this.http.post(this.masterService, f, {headers: this.headers})
+         .map((res: Response) => res.json());
+   };
+
+   update(f: GroupCompetencies) {
+      return this.http.put(this.masterService, JSON.stringify(f), {headers: this.headers}).catch(this.handleError);
+   }
+
+   get(id: number) {
+      return this.http.get(this.masterService + 'buscarId/' + id)
+         .map((res: Response) => res.json() as GroupCompetencies);
+   }
+
+   handleError(error: any): Promise<any> {
+      console.error('Error:', error);
+      return Promise.reject(error.message || error);
+   }
+
 }
 
