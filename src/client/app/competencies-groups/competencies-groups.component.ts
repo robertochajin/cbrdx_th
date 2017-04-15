@@ -131,7 +131,17 @@ export class CompetenciesGroupsComponent {
    }
 
    disableCompetencie(competencie: Competencies){
-
+      this.confirmationService.confirm({
+         message: `¿Esta seguro que desea deshabilitar esta competencia?`,
+         header: 'Corfirmación',
+         icon: 'fa fa-question-circle',
+         accept: () => {
+            let group = this.groups.find(z => competencie.idGrupoCompetencia == z.idGrupoCompetencia);
+            let groupIndex = this.groups.indexOf(group);
+            let competenceIndex = this.groups[groupIndex].competencies.indexOf(competencie);
+            this.groups[groupIndex].competencies.splice(competenceIndex,1);
+         }
+      });
    }
 
 }
