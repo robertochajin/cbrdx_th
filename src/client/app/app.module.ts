@@ -55,6 +55,7 @@ import {EvaluationCriteriasModule} from "./position-evaluation-criterias/evaluat
 import {PositionResponsabilitiesModule} from "./position-responsabilities/position-responsabilities.module";
 import {PositionRolesModule} from "./position-roles/position-roles.module";
 import {PositionCompetenciesModule} from "./position-competencies/position-competencies.module";
+import {CompetenciesGroupsModule} from "./competencies-groups/competencies-groups.module";
 
 
 //CarsModule,
@@ -76,6 +77,7 @@ import {PositionCompetenciesModule} from "./position-competencies/position-compe
       PositionResponsabilitiesModule,
       PositionRolesModule,
       PositionCompetenciesModule,
+      CompetenciesGroupsModule,
       SharedModule.forRoot(),
       TranslateModule.forRoot({
          provide: TranslateLoader,
