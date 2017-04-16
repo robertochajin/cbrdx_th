@@ -4,10 +4,13 @@ import { PositionsComponent } from "./positions.component";
 import { PositionsUpdateComponent } from "./positions-update.component";
 import { PositionsAddComponent } from "./positions-add.component";
 import { PositionsObservationsListComponent } from "./positions-observations-list.component";
+import { PositionAuthoritiesComponent } from "./position-authorities.component";
+
 import { PositionsService } from "../_services/positions.service";
 import { ListPositionsService } from "../_services/lists-positions.service";
 import { PoliticalDivisionService } from "../_services/political-division.service";
 import { NavService } from "../_services/_nav.service";
+
 import { SharedModule } from "../shared/shared.module";
 import { FormSharedModule } from "../shared/form-shared.module";
 import { EvaluationCriteriasModule } from "../position-evaluation-criterias/evaluation-criterias.module";
@@ -39,7 +42,8 @@ import { PersonalityModule } from "../position-personality/personality.module";
                  PositionsComponent,
                  PositionsUpdateComponent,
                  PositionsAddComponent,
-                 PositionsObservationsListComponent
+                 PositionsObservationsListComponent,
+                 PositionAuthoritiesComponent
               ],
               bootstrap: [ PositionsComponent ],
               providers: [ PositionsService, ListPositionsService, PoliticalDivisionService, NavService ],

@@ -35,9 +35,10 @@ import {ProductivityModule} from "./position-productivity/productivity.module";
 
 import {RiskModule} from "./position-risks/position-risks.module";
 import {AbsenceModule} from "./position-absence/position-absence.module";
-import {AuthoritiesModule} from "./position-authorities/position-authorities.module";
 // import {ResponsibilityModule} from "./position-responsibility/responsibility.module";
 // Copy sp
+//riesgos
+import {RisksModule} from "./risks/risks.module";
 
 import {ConstanteModule} from "./constantes/constante.module";
 import {ListaModule} from "./listas/lista.module";
@@ -54,6 +55,7 @@ import {EvaluationCriteriasModule} from "./position-evaluation-criterias/evaluat
 import {PositionResponsabilitiesModule} from "./position-responsabilities/position-responsabilities.module";
 import {PositionRolesModule} from "./position-roles/position-roles.module";
 import {PositionCompetenciesModule} from "./position-competencies/position-competencies.module";
+import {CompetenciesGroupsModule} from "./competencies-groups/competencies-groups.module";
 
 
 //CarsModule,
@@ -75,6 +77,7 @@ import {PositionCompetenciesModule} from "./position-competencies/position-compe
       PositionResponsabilitiesModule,
       PositionRolesModule,
       PositionCompetenciesModule,
+      CompetenciesGroupsModule,
       SharedModule.forRoot(),
       TranslateModule.forRoot({
          provide: TranslateLoader,
@@ -97,8 +100,8 @@ import {PositionCompetenciesModule} from "./position-competencies/position-compe
       RiskModule,
       PersonalityModule,
       AbsenceModule,
-      AuthoritiesModule,
-      CompanyAssetsModule
+      RisksModule,
+            CompanyAssetsModule
    ],
 
    declarations: [AppComponent],

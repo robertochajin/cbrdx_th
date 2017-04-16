@@ -4,11 +4,16 @@
       <div class="container">
         <h3>Editando responsabilidades del cargo</h3>
       </div>
-      <form (ngSubmit)="d.valid && save(tr)" #d="ngForm" novalidate id="responsabilitiesForm">
+      <form (ngSubmit)="d.valid && save(tr)" #d="ngForm" novalidate id="responsabilitiesForm" *ngIf="!guardando">
         <div class="container">
+           <div class="row">
+              <div class="col-md-8 col-xs-9">
+                 <label for="responsabilidad">* Responsabilidad</label>
+              </div>
+           </div>
           <div class="row">
-            <div class="col-md-8 col-xs-12">
-              <label for="responsabilidad">* Responsabilidad</label>
+            <div class="col-md-9 col-xs-9">
+              
               <p-dropdown id="responsabilidad" name="responsabilidad"
                           [options]="responsabilities" required #responsabilidad="ngModel"
                           [autoWidth]="false" [(ngModel)]="tr.idResponsabilidad"></p-dropdown>
@@ -17,9 +22,9 @@
                 Responsabilidad
               </div>
             </div>
-            <div class="col-md-4 col-xs-12">
+            <div class="col-md-3 col-xs-3">
               <button class="ui-button ui-button-success btn" icon="fa-plus" pButton icon="fa-plus" type="submit"
-                      label="Guardar"></button>
+                      label="Agregar"></button>
             </div>
           </div>
         </div>

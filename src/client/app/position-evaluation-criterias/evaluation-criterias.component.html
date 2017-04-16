@@ -1,11 +1,3 @@
-<style type="text/css">
-  .ui-spinner {
-    width:60px;
-  }
-  .ui-spinner-input {
-    width:60px;
-  }
-</style>
 <div>
   <div class="row datable-header">
     <div class="col-md-6 col-xs-12 datatable-header-add" *ngIf="!editing">
@@ -17,13 +9,13 @@
         <h3>Editando criterios de evaluación</h3>
         <p>La suma de factores para todos los críterios debe ser 100 para poder guardar</p>
       </div>
-      <form (ngSubmit)="d.valid && oneHundred && savePositionCriterias()" #d="ngForm" novalidate id="criteriasForm">
+      <form (ngSubmit)="d.valid && oneHundred && !criteriaRepeated && savePositionCriterias()" #d="ngForm" novalidate id="criteriasForm">
         <div class="container">
           <div class="row"  *ngFor="let criteria of positionCriterias; let i = index">
             <div class="col-md-2 col-xs-12">
               <label for="evaluationCriteria{{i}}">* Criterio evaluacion</label>
               <p-dropdown id="evaluationCriteria{{i}}" name="evaluationCriteria{{i}}"
-                          [options]="evaluationCriterias" required #criterio="ngModel"  (change)="sumFactors()"
+                          [options]="evaluationCriterias" required #criterio="ngModel"  (onChange)="checkRepeated()"
                           [autoWidth]="false" [(ngModel)]="criteria.idCriterio"></p-dropdown>
               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !criterio.valid" >
                 <i class="fa fa-close"></i>
@@ -32,7 +24,7 @@
             </div>
             <div class="col-md-3 col-xs-12">
               <label for="descripcion{{i}}">Descripción</label>
-              <textarea id="descripcion{{i}}" name="descripcion{{i}}" pInputTextarea (change)="sumFactors()" rows="2" cols="35" #descripcion="ngModel"
+              <textarea id="descripcion{{i}}" name="descripcion{{i}}" pInputTextarea  rows="2" cols="35" #descripcion="ngModel"
                         [(ngModel)]="criteria.descripcion" required></textarea>
               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !descripcion.valid">
                 <i class="fa fa-close"></i>
@@ -51,7 +43,7 @@
             </div>
             <div class="col-md-3 col-xs-12">
               <label for="meta{{i}}">* Meta</label>
-              <p-spinner id="meta{{i}}" name="meta{{i}}" #meta="ngModel" (change)="sumFactors()"
+              <p-spinner id="meta{{i}}" name="meta{{i}}" #meta="ngModel"
                      [(ngModel)]="criteria.meta" required></p-spinner>
               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !meta.valid">
                 <i class="fa fa-close"></i>
@@ -65,10 +57,10 @@
             </div>
           </div>
           <div class="row">
-            <li>=>{{d.valid}}</li>
             <div class="col-md-6 col-xs-12">
-              <div class="alert alert-success" [hidden]="!oneHundred && d.valid" role="alert">Perfecto!</div>
-              <div class="alert alert-warning" [hidden]="oneHundred" role="alert">Lo siento, debe sumar 100</div>
+              <div class="alert alert-success" [hidden]="!oneHundred && !d.valid" role="alert">Perfecto!</div>
+              <div class="alert alert-warning" [hidden]="(!d.submitted && !oneHundred) || (oneHundred)" role="alert">Lo siento, debe sumar 100</div>
+              <div class="alert alert-warning" [hidden]="(!d.submitted && !criteriaRepeated)" role="alert">No puede tener criterios repetidos</div>
             </div>
             <div class="col-md-1 col-xs-12">
               {{total}}%
@@ -98,14 +90,6 @@
       <p-column field="descripcion" header="Descripción" [sortable]="true"></p-column>
       <p-column field="factor" header="Factor" [sortable]="true"></p-column>
       <p-column field="meta" header="Meta" [sortable]="true"></p-column>
-      <p-column header="Acciones" styleClass="datatable-col-action">
-        <template let-positionCriteria="rowData" pTemplate="body">
-          <div class="btn-group" role="group" aria-label="...">
-            <button type="button" pButton class="ui-button ui-button-success btn" (click)="update(positionCriteria)"
-                    icon="fa-pencil"></button>
-          </div>
-        </template>
-      </p-column>
     </p-dataTable>
   </div>
    <div class="row">

@@ -24,6 +24,7 @@ export class EvaluationCriteriasComponent {
    //criteria: PositionCriterias = new PositionCriterias();
    evaluationCriterias: EvaluationCriterias[] = [];
    oneHundred: boolean = false;
+   criteriaRepeated: boolean = false;
    total: number = 0;
 
    @Output()
@@ -36,19 +37,19 @@ export class EvaluationCriteriasComponent {
    }
 
    ngOnInit() {
-      
-      this.evaluationCriterias.push({
-         idCriterio: null,
-         criterio: null,
-         indicadorHabilitado: false,
-         auditoriaUsuario: 1,
-         auditoriaFecha: "",
-         label: "seleccione...",
-         value: null
-      });
 
       this.evaluationCriteriasServices.getAllEnabled().subscribe(criterias => {
-         this.evaluationCriterias = criterias;
+         this.evaluationCriterias.push({
+            idCriterio: null,
+            criterio: null,
+            indicadorHabilitado: false,
+            auditoriaUsuario: 1,
+            auditoriaFecha: "",
+            label: "seleccione...",
+            value: null
+         });
+
+         criterias.map(c => this.evaluationCriterias.push(c));
          this.positionCriteriasService.getAllByPosition(this.position.idCargo)
             .subscribe(positionCriterias => {
                this.positionCriterias = positionCriterias;
@@ -68,10 +69,34 @@ export class EvaluationCriteriasComponent {
 
    savePositionCriterias() {
       this.positionCriteriasService.addInBulk(this.positionCriterias).subscribe(data => {
-
+         this.positionCriterias.map(pc => {
+            pc.criterio = this.evaluationCriterias.find(e => e.idCriterio == pc.idCriterio).criterio;
+         })
       });
 
       this.editing = false;
+   }
+
+   checkRepeated() {
+      let pctemp = this.positionCriterias;
+      let cont: number;
+      for (let pc1 of this.positionCriterias) {
+         cont = 0;
+         for (let pc2 of pctemp) {
+            if (pc1.idCriterio !== null && pc2.idCriterio === pc1.idCriterio) {
+               cont = cont + 1;
+            }
+            if (cont > 1) break
+         }
+         if (cont > 1) break
+      }
+
+      if (cont > 1) {
+         //lanza un mensaje advirtiendo que no se puede guardar dos criterios iguales
+         this.criteriaRepeated = true;
+      } else {
+         this.criteriaRepeated = false;
+      }
    }
 
    sumFactors() {
@@ -94,7 +119,7 @@ export class EvaluationCriteriasComponent {
 
    editCriterias() {
       this.backUpPositionCriterias = this.positionCriterias;
-      if(this.positionCriterias.length == 0){
+      if (this.positionCriterias.length == 0) {
          let nc = new PositionCriterias();
          nc.indicadorHabilitado = true;
          nc.idCargo = this.position.idCargo;
@@ -129,7 +154,7 @@ export class EvaluationCriteriasComponent {
       });
    }
 
-   next(){
-      this.nextStep.emit(4);
+   next() {
+      this.nextStep.emit(2);
    }
 }

@@ -13,11 +13,15 @@
          </div>
       </div>
    </div>
-   <form (ngSubmit)="fr.valid && onSubmitREE()" #fr="ngForm" novalidate id="formulario">
+   <form (ngSubmit)="fr.valid && onSubmitREE()" #fr="ngForm" novalidate id="formulario" *ngIf="!guardandoA">
       <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
          <div class="ui-grid-row">
             <div class="ui-grid-col-12">
                <label for="idCargoREE"><h3>Reemplaza a</h3></label>
+            </div>
+         </div>
+         <div class="ui-grid-row">
+            <div class="ui-grid-col-9">
                <p-dropdown id="idCargoREE" name="idCargoREE" required="true"
                            [options]="listPositionREE" [autoWidth]="false"
                            [(ngModel)]="idCargoRelacionREE" #idCargoREE="ngModel"
@@ -28,15 +32,9 @@
                   Cargo requerido
                </div>
             </div>
-         </div>
-         <div class="ui-grid-row form-footer-buttons">
-            <div class="ui-grid-col-4"></div>
-            <div class="ui-grid-col-1">
+            <div class="ui-grid-col-3">
+               <button pButton icon="fa-plus" label="Agregar" type="submit"></button>
             </div>
-            <div class="ui-grid-col-2">
-               <button pButton icon="fa-plus" label="Guardar" type="submit"></button>
-            </div>
-            <div class="ui-grid-col-5"></div>
          </div>
       </div>
    </form>
@@ -54,11 +52,15 @@
          </p-dataTable>
       </div>
    </div>
-   <form (ngSubmit)="f.valid && onSubmitREP()" #f="ngForm" novalidate id="formularioREP">
+   <form (ngSubmit)="f.valid && onSubmitREP()" #f="ngForm" novalidate id="formularioREP" *ngIf="!guardandoP">
       <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
          <div class="ui-grid-row">
             <div class="ui-grid-col-12">
                <label for="idCargoREP"><h3>Reemplazado por</h3></label>
+            </div>
+         </div>
+         <div class="ui-grid-row">
+            <div class="ui-grid-col-9">
                <p-dropdown id="idCargoREP" name="idCargoREP" required="true"
                            [options]="listPositionREP" [autoWidth]="false"
                            [(ngModel)]="idCargoRelacionREP" #idCargoREP="ngModel"
@@ -69,13 +71,9 @@
                   Cargo requerido
                </div>
             </div>
-         </div>
-         <div class="ui-grid-row form-footer-buttons">
-            <div class="ui-grid-col-5"></div>
-            <div class="ui-grid-col-2">
+            <div class="ui-grid-col-3">
                <button pButton icon="fa-plus" label="Guardar" type="submit"></button>
             </div>
-            <div class="ui-grid-col-5"></div>
          </div>
       </div>
    </form>
