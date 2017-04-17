@@ -47,8 +47,8 @@ export class EmployeesService {
         return respuesta.map((res:Response) => res.json());
     }
   
-    validateDocument(c: Employee) {
-      return this.http.get(this.serviceURL+'terceros/'+ c.numeroDocumento+'/'+c.idTipoDocumento+'/').map((res:Response) => res.json() as Employee);
+    validateDocument(numeroDocumento: string, idTipoDocumento: number) {
+      return this.http.get(this.serviceURL+'terceros/'+ numeroDocumento+'/'+ idTipoDocumento+'/').map((res:Response) => res.json() as Employee);
     }
 
 }

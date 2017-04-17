@@ -6,6 +6,9 @@
   </p-footer>
 
 </p-confirmDialog>
+<p-dialog header="Documento repetido" [(visible)]="repeatedDocument" modal="modal" width="300" responsive="true">
+   El documento que intenta ingresar ya está asignado a otra persona y no puede ser duplicado.
+</p-dialog>
 <div *ngIf="addinglocation">
 <div *ngIf="familyInformation">
     <div class="row">
@@ -30,7 +33,7 @@
                 <div class="ui-grid-col-6">
                     <label for="numeroDocumento">* Número de documento</label>
                     <input id="numeroDocumento" name="numeroDocumento" #numeroDocumento="ngModel" pInputText type="text"
-                           [(ngModel)]="familyInformation.numeroDocumento"required/>
+                           [(ngModel)]="familyInformation.numeroDocumento" required (change)="validateDocument()" />
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !numeroDocumento.valid">
                         <i class="fa fa-close"></i>
                         Número de documento es requerido
