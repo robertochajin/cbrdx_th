@@ -449,6 +449,11 @@ a.cancelar:hover {
 .datatable-col-action button{
 
 }
+
+.datatable-col-center {
+   text-align: center;
+   white-space: nowrap;
+}
 .ui-datatable .ui-sortable-column-icon {
   float: right;
 }
