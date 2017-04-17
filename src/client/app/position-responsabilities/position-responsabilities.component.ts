@@ -51,17 +51,18 @@ export class PositionResponsabilitiesComponent {
    save(pr: PositionResponsabilities) {
       pr.indicadorHabilitado = true;
       pr.idCargo = this.position.idCargo;
+      this.guardando = true;
       this.positionResponsabilitiesService.add(pr).subscribe(res => {
          if (res.idResponsabilidad) {
             this.responsabilities.map((r) => {
                if(pr.idResponsabilidad === r.value){
                   this.responsabilities.splice(this.responsabilities.indexOf(r));
                   this.tr.idResponsabilidad = null;
-                  this.guardando = false;
                }
             });
             this.positionResponsabilitiesService.getAllByPosition(this.position.idCargo).subscribe(prs => {
                this.positionResponsabilities = prs;
+               this.guardando = false;
             });
          }
       });
@@ -76,7 +77,6 @@ export class PositionResponsabilitiesComponent {
             this.guardando = true;
             r.indicadorHabilitado = false;
             this.positionResponsabilitiesService.update(r).subscribe(res => {
-               this.guardando = false;
                this.positionResponsabilities.splice(this.positionResponsabilities.indexOf(r), 1);
                this.responsabilities = [];
                this.responsabilitiesServices.getAllEnabledByPosition(this.position.idCargo).subscribe(
@@ -85,6 +85,7 @@ export class PositionResponsabilitiesComponent {
                      responsabilities.map((s: Responsabilities) => {
                         this.responsabilities.push({label: s.responsabilidad, value: s.idResponsabilidad});
                      });
+                     this.guardando = false;
                   }
                );
             });
