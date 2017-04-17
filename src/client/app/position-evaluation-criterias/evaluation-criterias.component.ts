@@ -20,7 +20,7 @@ export class EvaluationCriteriasComponent {
    position: Positions;
    editing: boolean = false;
    positionCriterias: PositionCriterias[] = [];
-   backUpPositionCriterias: PositionCriterias[] = [];
+   backUpPositionCriterias: PositionCriterias[];
    //criteria: PositionCriterias = new PositionCriterias();
    evaluationCriterias: EvaluationCriterias[] = [];
    oneHundred: boolean = false;
@@ -68,6 +68,7 @@ export class EvaluationCriteriasComponent {
    }
 
    savePositionCriterias() {
+      this.positionCriterias = this.backUpPositionCriterias;
       this.positionCriteriasService.addInBulk(this.positionCriterias).subscribe(data => {
          this.positionCriterias.map(pc => {
             pc.criterio = this.evaluationCriterias.find(e => e.idCriterio == pc.idCriterio).criterio;
@@ -78,9 +79,9 @@ export class EvaluationCriteriasComponent {
    }
 
    checkRepeated() {
-      let pctemp = this.positionCriterias;
+      let pctemp = this.backUpPositionCriterias;
       let cont: number;
-      for (let pc1 of this.positionCriterias) {
+      for (let pc1 of this.backUpPositionCriterias) {
          cont = 0;
          for (let pc2 of pctemp) {
             if (pc1.idCriterio !== null && pc2.idCriterio === pc1.idCriterio) {
@@ -101,7 +102,7 @@ export class EvaluationCriteriasComponent {
 
    sumFactors() {
       this.total = 0;
-      for (let p of this.positionCriterias) {
+      for (let p of this.backUpPositionCriterias) {
          if (p.factor != null) {
             this.total = this.total + Number(p.factor);
          }
@@ -118,26 +119,28 @@ export class EvaluationCriteriasComponent {
    }
 
    editCriterias() {
-      this.backUpPositionCriterias = this.positionCriterias;
-      if (this.positionCriterias.length == 0) {
+      this.backUpPositionCriterias = this.positionCriterias.slice(0);
+      if (this.backUpPositionCriterias.length == 0) {
          let nc = new PositionCriterias();
          nc.indicadorHabilitado = true;
          nc.idCargo = this.position.idCargo;
-         this.positionCriterias.push(nc);
+         this.backUpPositionCriterias.push(nc);
       }
       this.sumFactors();
       this.editing = true;
+      this.criteriaRepeated = false;
+      this.oneHundred = false;
    }
 
    addCriteria() {
       let nc = new PositionCriterias();
       nc.indicadorHabilitado = true;
       nc.idCargo = this.position.idCargo;
-      this.positionCriterias.push(nc);
+      this.backUpPositionCriterias.push(nc);
    }
 
    removeCriteria(id: any) {
-      this.positionCriterias.splice(id, 1);
+      this.backUpPositionCriterias.splice(id, 1);
       this.sumFactors();
    }
 
@@ -148,8 +151,15 @@ export class EvaluationCriteriasComponent {
          icon: 'fa fa-question-circle',
 
          accept: () => {
-            this.editing = false;
-            this.positionCriterias = this.backUpPositionCriterias;
+            this.positionCriteriasService.getAllByPosition(this.position.idCargo)
+               .subscribe(positionCriterias => {
+                  this.positionCriterias = positionCriterias;
+                  this.positionCriterias.map(p => {
+                     p.idCargo = this.position.idCargo;
+                     p.criterio = this.evaluationCriterias.find(e => e.idCriterio == p.idCriterio).criterio;
+                  });
+                  this.editing = false;
+               });
          }
       });
    }

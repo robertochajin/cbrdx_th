@@ -128,6 +128,10 @@ import {PositionResponsabilitiesComponent} from "./position-responsabilities/pos
 import {PositionRolesComponent} from "./position-roles/position-roles.component";
 import {PositionCompetenciesComponent} from "./position-competencies/position-competencies.component";
 import {CompanyAssetsComponent} from "./position-company-assets/company-assets.component";
+// proyecciòn laboral
+import {JobProjectionModule} from "./job-projection/projection-area.module";
+// estructura física
+import {PhysicStructuteModule} from "./physic-structure/physic-structure.module";
 
 // cargos posición en caso de ausencia
 import {AbsenceComponent} from "./position-absence/position-absence.component";
@@ -136,6 +140,7 @@ import {PersonalityComponent} from "./position-personality/personality.component
 import {RisksComponent} from "./risks/risks-component";
 import {RisksAddComponent} from "./risks/risks-add.component";
 import {RisksUpdateComponent} from "./risks/risks-update.component";
+import {CompetenciesGroupsComponent} from "./competencies-groups/competencies-groups.component";
 
 const routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -256,6 +261,9 @@ const routes = [
   {path: 'faults', component: FaultsAndSanctionsComponent, canActivate: [AuthGuard]},
   {path: 'faults/add', component: FaultsAndSanctionsAddComponent, canActivate: [AuthGuard]},
   {path: 'faults/update/:id', component: FaultsAndSanctionsUpdateComponent, canActivate: [AuthGuard]},
+
+   // Temporales
+   {path: 'competencies-groups', component: CompetenciesGroupsComponent, canActivate: [AuthGuard]},
 
    // Temporales
    {path: 'criterios', component: EvaluationCriteriasComponent, canActivate: [AuthGuard]},

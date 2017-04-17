@@ -30,8 +30,11 @@ import {DashboardModule} from "./dashboard/dashboard.module";
 import {TranslateModule, TranslateLoader, TranslateStaticLoader} from "ng2-translate";
 
 import {ProductivityModule} from "./position-productivity/productivity.module";
-// import {AptitudeLevelModule} from "./aptitude-level/aptitude-level.module";
-// import {IQLevelModule} from "./IQlevel/iqlevel.module";
+
+//proyección laboral
+import {JobProjectionModule} from "./job-projection/projection-area.module";
+//Estructura física
+import {PhysicStructuteModule} from "./physic-structure/physic-structure.module";
 
 import {RiskModule} from "./position-risks/position-risks.module";
 import {AbsenceModule} from "./position-absence/position-absence.module";
@@ -55,6 +58,7 @@ import {EvaluationCriteriasModule} from "./position-evaluation-criterias/evaluat
 import {PositionResponsabilitiesModule} from "./position-responsabilities/position-responsabilities.module";
 import {PositionRolesModule} from "./position-roles/position-roles.module";
 import {PositionCompetenciesModule} from "./position-competencies/position-competencies.module";
+import {CompetenciesGroupsModule} from "./competencies-groups/competencies-groups.module";
 
 
 import { OrganizationalStructureModule } from "./organizationalStructure/organizationalStructure.module";
@@ -80,6 +84,7 @@ import { OrganizationalStructureModule } from "./organizationalStructure/organiz
       PositionRolesModule,
       PositionCompetenciesModule,
       OrganizationalStructureModule,
+      CompetenciesGroupsModule,
       SharedModule.forRoot(),
       TranslateModule.forRoot({
          provide: TranslateLoader,
@@ -99,6 +104,8 @@ import { OrganizationalStructureModule } from "./organizationalStructure/organiz
       FaultsAndSanctionsModule,
       PositionsModule,
       ProductivityModule,
+      // JobProjectionModule,
+      PhysicStructuteModule,
       RiskModule,
       PersonalityModule,
       AbsenceModule,

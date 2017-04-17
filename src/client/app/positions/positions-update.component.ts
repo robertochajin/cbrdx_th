@@ -37,6 +37,7 @@ export class PositionsUpdateComponent {
    treeArrray: TreeNode[] = [];
    selectedNode: TreeNode;
    step = 1;
+   nivel:number;
    constructor( private positionsService: PositionsService,
                 private router: Router,
                 private route: ActivatedRoute,
@@ -134,7 +135,7 @@ export class PositionsUpdateComponent {
                   this.acordion = this.step-1;
                }
             }
-            
+
             this.positionsService.getListPositions().subscribe( res => {
                this.allPosition = res;
                this.bossPositionTypes.push( { label: "Seleccione", value: null } );
@@ -150,10 +151,10 @@ export class PositionsUpdateComponent {
             } );
          } );
       } );
-      
       this.acordion = this._nav.getTab();
+
    }
-   
+
    firstStep() {
       this._nav.setTab( 0 );
       this.acordion = 0;

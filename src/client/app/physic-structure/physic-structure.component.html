@@ -1,0 +1,27 @@
+<h3 class="first">Estructura Física</h3>
+<div>
+   <div class="row datable-header">
+      <div class="col-md-6 col-xs-12 datatable-header-add">
+         <button type="button" icon="fa-plus" label="Agregar Nuevo"
+                 pButton (click)="add()"></button>
+      </div>
+      <div class="col-md-6 col-xs-12 datatable-header-search" >
+
+         <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            <input #gb type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
+         </div>
+
+      </div>
+   </div>
+   <p-dataTable [value]="ListPhysicStrucrute" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+      <p-column field="tipoVehiculo" header="Id" [sortable]="true"></p-column>
+      <p-column field="tipoServicio" header="Nombre" [sortable]="true"></p-column>
+      <p-column field="marca" header="Categoria" [sortable]="true"></p-column>
+      <p-column field="modelo" header="Dirección" [sortable]="true"></p-column>
+      <p-column field="placa" header="Indicador Virtual"></p-column>
+      <p-column field="placa" header="Indicador Habilitado" ></p-column>
+   </p-dataTable>
+</div>
+<p-confirmDialog width="400"></p-confirmDialog>
+
