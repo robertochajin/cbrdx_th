@@ -1,14 +1,24 @@
 /**
+------------------------- CSS Globales --------------------------------------
+ */
+body{
+   height: 100%!important;
+}
+
+
+/**
 -------------------------- Cambios Main Theme PrimeNG ------------------------
  */
 body .ui-widget,
-body .ui-widget .ui-widget, body .ui-widget input,
+body .ui-widget .ui-widget,
+body .ui-widget input,
 body .ui-widget select,
 body .ui-widget textarea,
 body .ui-widget button  {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif!important;
 }
-body .ui-state-disabled, body .ui-widget:disabled {
+body .ui-state-disabled,
+body .ui-widget:disabled {
   opacity: 0.6;
   filter: Alpha(Opacity= 35);
   background-color: #ccc;
@@ -46,8 +56,12 @@ body .ui-state-disabled, body .ui-widget:disabled {
    }
 }
 
-
-
+.sidebar-menu .treeview-menu > li > a {
+   padding: 5px 5px 5px 26px;
+}
+.sidebar-menu .treeview-menu > li > a > .fa{
+   margin-left: -24px;
+}
 /**
 ------------------------ Main CSS ------------------------------------
  */
