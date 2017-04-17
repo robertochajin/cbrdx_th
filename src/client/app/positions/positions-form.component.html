@@ -436,12 +436,12 @@
                                     </div>
                                  </div>
                                  <div class="form-group col-md-3">
-                                    <!--<label for="idNivelEducacion">Nivel del cargo</label>
-                                    <p-dropdown id="idNivelEducacion" name="idNivelEducacion" required="true"
+                                    <label for="idNivelEducacion">Nivel del cargo</label>
+                                    <p-dropdown id="idNivelEducacion" name="idNivelEducacion" required="true" disabled="false"
                                                 [options]="levelTypes" [autoWidth]="false"
-                                                [(ngModel)]="position.idCategoria"
+                                                [(ngModel)]="nivel"
                                                 #idNivelEducacion="ngModel"
-                                    ></p-dropdown>-->
+                                    ></p-dropdown>
                                  </div>
                               </div>
                               <div class="row">
@@ -460,7 +460,7 @@
                                  </div>
                               </div>
                               <div class="row">
-                                 <div class="form-group col-md-9">
+                                 <div class="form-group col-md-8">
                                     <label for="salario">Salario al 100%</label>
                                     <input type="text" pInputText id="salario" name="salario"
                                            [(ngModel)]="position.salario" #salario="ngModel"
@@ -470,6 +470,10 @@
                                        <i class="fa fa-close"></i>
                                        Salario es requerido
                                     </div>
+                                 </div>
+                                 <div class="ui-grid-col-4" ><br>
+                                    <label for="indicadorRequiereFormacion">Requiere formación</label>
+                                    <p-checkbox id="indicadorRequiereFormacion" name="indicadorRequiereFormacion" [(ngModel)]="position.indicadorRequiereFormacion" binary="true"  ></p-checkbox>
                                  </div>
                               </div>
                            </div>

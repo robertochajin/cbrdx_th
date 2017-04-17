@@ -1,0 +1,112 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+   <p-footer>
+      <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+      <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+   </p-footer>
+
+</p-confirmDialog>
+<div *ngIf="physicStrucrute">
+   <div class="row">
+      <div class="col-md-12">
+         <div class="header">
+            <h4 class="title">{{header}}</h4>
+         </div>
+      </div>
+   </div>
+   <form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+         <div class="ui-grid-row">
+            <div class="ui-grid-col-12">
+               <label for="nombre">Nombre</label>
+               <input id="nombre" name="nombre" #nombre="ngModel" pInputText type="text"
+                      [(ngModel)]="physicStrucrute.nombre"  required="true"/>
+               <div class="ui-message ui-messages-error ui-corner-all"
+                    *ngIf="f.submitted && !nombre.valid">
+                  <i class="fa fa-close"></i>
+                  Nombre requerido
+               </div>
+            </div>
+         </div>
+         <div class="ui-grid-row">
+            <div class="ui-grid-col-12">
+               <label for="direccion">Dirección</label>
+               <input id="direccion" name="direccion" #direccion="ngModel" pInputText type="text"
+                      [(ngModel)]="physicStrucrute.nombre"  required="true"/>
+               <div class="ui-message ui-messages-error ui-corner-all"
+                    *ngIf="f.submitted && !direccion.valid">
+                  <i class="fa fa-close"></i>
+                  Dirección requerida
+               </div>
+            </div>
+         </div>
+         <div class="ui-grid-row">
+            <div class="ui-grid-col-6">
+               <label for="telefono">Teléfono</label>
+               <input id="telefono" name="telefono" #telefono="ngModel" pInputText type="text"
+                      [(ngModel)]="physicStrucrute.telefono"  required="true"/>
+               <div class="ui-message ui-messages-error ui-corner-all"
+                    *ngIf="f.submitted && !telefono.valid">
+                  <i class="fa fa-close"></i>
+                  Teléfono requerido
+               </div>
+            </div>
+            <div class="ui-grid-col-6">
+               <label for="celular">Celular</label>
+               <input id="celular" name="celular" #celular="ngModel" pInputText type="text"
+                      [(ngModel)]="physicStrucrute.celular"  required="true"/>
+               <div class="ui-message ui-messages-error ui-corner-all"
+                    *ngIf="f.submitted && !celular.valid">
+                  <i class="fa fa-close"></i>
+                  Celular requerido
+               </div>
+            </div>
+         </div>
+         <div class="ui-grid-row">
+            <div class="ui-grid-col-12">
+               <label for="correo">Correo Electrónico</label>
+               <input id="correo" name="correo" #correo="ngModel" pInputText type="text"
+                      [(ngModel)]="physicStrucrute.correo"  required="true"/>
+               <div class="ui-message ui-messages-error ui-corner-all"
+                    *ngIf="f.submitted && !correo.valid">
+                  <i class="fa fa-close"></i>
+                  Corre Electrónico requerido
+               </div>
+            </div>
+         </div>
+         <div class="ui-grid-row">
+            <div class="ui-grid-col-12">
+               <label for="categoria">Categoría</label>
+               <input id="categoria" name="categoria" #categoria="ngModel" pInputText type="text"
+                      [(ngModel)]="physicStrucrute.categoria"  required="true"/>
+               <div class="ui-message ui-messages-error ui-corner-all"
+                    *ngIf="f.submitted && !categoria.valid">
+                  <i class="fa fa-close"></i>
+                  Categoria requerida
+               </div>
+            </div>
+         </div>
+         <div class="ui-grid-row">
+            <div class="ui-grid-col-4">
+               <label for="indicadorHabilitado">Indicador Habilitado</label>
+               <p-checkbox id="indicadorHabilitado" name="indicadorHabilitado" [(ngModel)]="physicStrucrute.indicadorHabilitado" binary="true"  ></p-checkbox>
+            </div>
+            <div class="ui-grid-col-4">
+               <label for="virtual">Indicador Habilitado</label>
+               <p-checkbox id="virtual" name="virtual" [(ngModel)]="physicStrucrute.virtual" binary="true"  ></p-checkbox>
+            </div>
+         </div>
+         <div class="ui-grid-row form-footer-buttons">
+            <div class="ui-grid-col-4"></div>
+            <div class="ui-grid-col-1">
+               <a (click)="goBack()" class="cancelar">Cancelar</a>
+            </div>
+            <div class="ui-grid-col-2">
+               <button pButton icon="fa-plus" label="Guardar" type="submit"></button>
+            </div>
+            <div class="ui-grid-col-5"></div>
+         </div>
+      </div>
+   </form>
+</div>
+
