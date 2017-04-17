@@ -27,6 +27,27 @@ export class PositionsService {
    update( c: Positions ) {
       return this.http.put( this.serviceURL + 'cargos', c ).map( ( res: Response ) => res );
    }
+   updateEstado( c: Positions ) {
+      return this.http.put( this.serviceURL + 'cargos/tab2', c ).map( ( res: Response ) => res );
+   }
+   update1( c: Positions ) {
+      return this.http.put( this.serviceURL + 'cargos/tab1/', c ).map( ( res: Response ) => res );
+   }
+   update2( c: Positions ) {
+      return this.http.put( this.serviceURL + 'cargos/tab3', c ).map( ( res: Response ) => res );
+   }
+   update3( c: Positions ) {
+      return this.http.put( this.serviceURL + 'cargos/tab4', c ).map( ( res: Response ) => res );
+   }
+   update4( c: Positions ) {
+      return this.http.put( this.serviceURL + 'cargos/tab5', c ).map( ( res: Response ) => res );
+   }
+   update5( c: Positions ) {
+      return this.http.put( this.serviceURL + 'cargos/tab6', c ).map( ( res: Response ) => res );
+   }
+   update6( c: Positions ) {
+      return this.http.put( this.serviceURL + 'cargos/tab7', c ).map( ( res: Response ) => res );
+   }
    
    get( id: number ) {
       return this.http.get( this.serviceURL + 'cargos/' + id ).map(( res: Response ) => {
@@ -43,7 +64,7 @@ export class PositionsService {
    }
    
    getObservationsbyPosition( id: number ) {
-      return this.http.get( this.serviceURL + 'cargosEstadosObservaciones' ).map( ( res: Response ) => res.json() );
+      return this.http.get( this.serviceURL + 'cargosEstadosObservaciones/buscarCargo/'+ id ).map( ( res: Response ) => res.json() );
    }
    
    updateObservations( obj: PositionsObservations ) {

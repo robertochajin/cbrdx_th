@@ -133,6 +133,7 @@ import {PersonalityComponent} from "./position-personality/personality.component
 import {RisksComponent} from "./risks/risks-component";
 import {RisksAddComponent} from "./risks/risks-add.component";
 import {RisksUpdateComponent} from "./risks/risks-update.component";
+import {CompetenciesGroupsComponent} from "./competencies-groups/competencies-groups.component";
 
 const routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -253,6 +254,9 @@ const routes = [
   {path: 'faults', component: FaultsAndSanctionsComponent, canActivate: [AuthGuard]},
   {path: 'faults/add', component: FaultsAndSanctionsAddComponent, canActivate: [AuthGuard]},
   {path: 'faults/update/:id', component: FaultsAndSanctionsUpdateComponent, canActivate: [AuthGuard]},
+
+   // Temporales
+   {path: 'competencies-groups', component: CompetenciesGroupsComponent, canActivate: [AuthGuard]},
 
    // Temporales
    {path: 'criterios', component: EvaluationCriteriasComponent, canActivate: [AuthGuard]},

@@ -316,6 +316,7 @@ export class OcupacionesComponent implements OnInit {
             if (res.idOcupacionPadre != 0) {
                 this.ocupacionesService.viewOcupaciones(res.idOcupacionPadre).subscribe(r => {
                     this.labelPadre = r.ocupacion;
+                     this.codeExists = false;
                 });
             } else {
                 this.labelPadre = "";

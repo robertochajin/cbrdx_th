@@ -27,6 +27,8 @@ export class AbsenceComponent {
    listAbsenceREP: Absence[] = [];
    idCargoRelacionREE: number;
    idCargoRelacionREP: number;
+   guardandoA:boolean = false;
+   guardandoP:boolean = false;
    
    @Output()
    nextStep: EventEmitter<number> = new EventEmitter<number>();
@@ -96,8 +98,10 @@ export class AbsenceComponent {
       this.msgs = [];
       this.absence.idTipoRelacion = 2; //Reemplaza a
       this.absence.idCargoRelacion = this.idCargoRelacionREE;
+      this.guardandoA = true;
       this.absenceService.add(this.absence)
          .subscribe(data => {
+            this.guardandoA = false;
             this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
             this.absenceService.getPositionById(data.idCargoRelacion).subscribe(res => {
                data.cargoRelacion = res.cargo;
@@ -121,16 +125,19 @@ export class AbsenceComponent {
                }
             });
          }, error => {
+            this.guardandoA = false;
             this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
          });
    }
 
    onSubmitREP() {
       this.msgs = [];
+      this.guardandoP = true;
       this.absence.idTipoRelacion = 4;//Reemplazado por
       this.absence.idCargoRelacion = this.idCargoRelacionREP;
       this.absenceService.add(this.absence)
          .subscribe(data => {
+            this.guardandoP = false;
             this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
             this.absenceService.getPositionById(data.idCargoRelacion).subscribe(res => {
                data.cargoRelacion = res.cargo;
@@ -155,6 +162,7 @@ export class AbsenceComponent {
                }
             });
          }, error => {
+            this.guardandoP = false;
             this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
          });
    }
@@ -166,8 +174,10 @@ export class AbsenceComponent {
          header: 'Corfirmación',
          icon: 'fa fa-question-circle',
          accept: () => {
+            this.guardandoA = true;
             this.dialogObjet.indicadorHabilitado = false;
             this.absenceService.update(this.dialogObjet).subscribe(r => {
+               this.guardandoA = false;
                this.listAbsenceREE.splice(this.listAbsenceREE.indexOf(this.dialogObjet), 1);
                this.dialogObjet = null;
                this.listPositionREE = []
@@ -201,8 +211,10 @@ export class AbsenceComponent {
          header: 'Corfirmación',
          icon: 'fa fa-question-circle',
          accept: () => {
+            this.guardandoP = true;
             this.dialogObjet.indicadorHabilitado = false;
             this.absenceService.update(this.dialogObjet).subscribe(r => {
+               this.guardandoP = false;
                this.listAbsenceREP.splice(this.listAbsenceREP.indexOf(this.dialogObjet), 1);
                this.dialogObjet = null;
                this.listPositionREP = []

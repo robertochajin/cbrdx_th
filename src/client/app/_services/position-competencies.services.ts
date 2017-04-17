@@ -29,7 +29,6 @@ export class PositionCompetenciesServices {
    };
 
    update(f: PositionCompetencies) {
-      console.log(JSON.stringify(f));
       return this.http.put(this.serviceURL, JSON.stringify(f), {headers: this.headers}).catch(this.handleError);
    }
 
