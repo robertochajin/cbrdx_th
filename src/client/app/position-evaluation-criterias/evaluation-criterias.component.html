@@ -11,7 +11,7 @@
       </div>
       <form (ngSubmit)="d.valid && oneHundred && !criteriaRepeated && savePositionCriterias()" #d="ngForm" novalidate id="criteriasForm">
         <div class="container">
-          <div class="row"  *ngFor="let criteria of positionCriterias; let i = index">
+          <div class="row"  *ngFor="let criteria of backUpPositionCriterias; let i = index">
             <div class="col-md-2 col-xs-12">
               <label for="evaluationCriteria{{i}}">* Criterio evaluacion</label>
               <p-dropdown id="evaluationCriteria{{i}}" name="evaluationCriteria{{i}}"
@@ -33,18 +33,16 @@
             </div>
             <div class="col-md-3 col-xs-12">
               <label for="factor{{i}}">* Factor</label>
-              <p-spinner class="elspinner" id="factor{{i}}" name="factor{{i}}" #factor="ngModel"  maxlength="3" pattern="^[1-9][0-9]?$|^100$"
-                         [min]="0" [max]="100" (change)="sumFactors()"
-                         [(ngModel)]="criteria.factor" required></p-spinner>
+              <input type="number" maxlength="3" size="3" pattern="(?:\b|-)([1-9]{1,2}[0]?|100)\b" min="1" max="100" (change)="sumFactors()"
+                     pInputText id="factor{{i}}" name="factor{{i}}" [(ngModel)]="criteria.factor" #factor="ngModel" required/>
               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !factor.valid">
                 <i class="fa fa-close"></i>
-                Factor es requerido
+                Factor es invalido
               </div>
             </div>
             <div class="col-md-3 col-xs-12">
               <label for="meta{{i}}">* Meta</label>
-              <p-spinner id="meta{{i}}" name="meta{{i}}" #meta="ngModel"
-                     [(ngModel)]="criteria.meta" required></p-spinner>
+              <input type="number" pInputText id="meta{{i}}" name="meta{{i}}" [(ngModel)]="criteria.meta" #meta="ngModel" required/>
               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !meta.valid">
                 <i class="fa fa-close"></i>
                 Meta es requerido
@@ -58,7 +56,7 @@
           </div>
           <div class="row">
             <div class="col-md-6 col-xs-12">
-              <div class="alert alert-success" [hidden]="!oneHundred && !d.valid" role="alert">Perfecto!</div>
+              <div class="alert alert-success" [hidden]="!oneHundred" role="alert">La suma es 100, perfecto!</div>
               <div class="alert alert-warning" [hidden]="(!d.submitted && !oneHundred) || (oneHundred)" role="alert">Lo siento, debe sumar 100</div>
               <div class="alert alert-warning" [hidden]="(!d.submitted && !criteriaRepeated)" role="alert">No puede tener criterios repetidos</div>
             </div>
