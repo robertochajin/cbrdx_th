@@ -370,7 +370,7 @@ export class EmployeesAddComponent {
     
     validateDocument() {
         if(this.employee.numeroDocumento !="" && this.employee.numeroDocumento != null){
-            this.employeesService.validateDocument(this.employee).subscribe(res => {
+            this.employeesService.validateDocument(this.employee.numeroDocumento, this.employee.idTipoDocumento).subscribe(res => {
                 if(res.idTercero > 0) {
                     this.confirmationService.confirm({
                       message: ` ¿La cedula que ha ingresado ya existe, desea ver el colaborador existente?`,

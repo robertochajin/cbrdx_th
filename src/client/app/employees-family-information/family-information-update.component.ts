@@ -42,6 +42,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
   es: any;
   range: string;
   addinglocation: boolean = true;
+  repeatedDocument: boolean = false;
   idTipoTercero: number;
   idMayorDeEdad: number = 1;
   //Es necesario crear la constante y consultarla
@@ -290,5 +291,16 @@ export class FamilyInformationUpdateComponent implements OnInit {
       element.scrollIntoView(element);
     }
   }
+
+   validateDocument() {
+      if(this.familyInformation.numeroDocumento !="" && this.familyInformation.numeroDocumento != null && this.selectedDocument != null){
+         this.employeesService.validateDocument(this.familyInformation.numeroDocumento, this.selectedDocument).subscribe(res => {
+            if(res.idTercero > 0) {
+               this.repeatedDocument = true;
+               this.familyInformation.numeroDocumento = '';
+            }
+         });
+      }
+   }
 
 }
