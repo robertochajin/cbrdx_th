@@ -116,6 +116,9 @@ import {FaultsAndSanctionsComponent} from "./faultsAndSanctions/faults-and-sanct
 import {FaultsAndSanctionsAddComponent} from "./faultsAndSanctions/faults-and-sanctions-add.component";
 import {FaultsAndSanctionsUpdateComponent} from "./faultsAndSanctions/faults-and-sanctions-update.component";
 
+// Estrctura Organizacional
+import {OrganizationalStructureComponent} from "./organizationalStructure/organizationalStructure.component";
+
 // Cargos
 import {PositionsComponent} from "./positions/positions.component";
 import {PositionsAddComponent} from "./positions/positions-add.component";
@@ -263,6 +266,9 @@ const routes = [
   {path: 'positions', component: PositionsComponent, canActivate: [AuthGuard]},
   {path: 'positions/add', component: PositionsAddComponent, canActivate: [AuthGuard]},
   {path: 'positions/update/:id', component: PositionsUpdateComponent, canActivate: [AuthGuard]},
+   
+   // Estrctura Organizacional
+   {path: 'organizational-structure', component: OrganizationalStructureComponent, canActivate: [AuthGuard]},
 
   //  Cargos Productividad
   {path: 'productivity/:idCargo', component: ProductivityComponent, canActivate: [AuthGuard]},

@@ -165,7 +165,7 @@ export class PositionsUpdateComponent {
          this.position.paso = step+1;
          this.step = this.position.paso;
       }
-      this.positionsService.update( this.position )
+      this.positionsService.updateEstado( this.position )
       .subscribe( data => {
          this._nav.setTab( step );
          this.acordion = step;
@@ -182,7 +182,7 @@ export class PositionsUpdateComponent {
          this.step = 2;
       }
    
-      this.positionsService.update( this.position )
+      this.positionsService.update1( this.position )
       .subscribe( data => {
          this._nav.setTab( 1 );
          this.acordion = 1;
@@ -199,7 +199,7 @@ export class PositionsUpdateComponent {
          this.position.paso = 4;
          this.step = 4;
       }
-      this.positionsService.update( this.position )
+      this.positionsService.update2( this.position )
       .subscribe( data => {
          this._nav.setTab( 3 );
          this.acordion = 3;
@@ -216,7 +216,7 @@ export class PositionsUpdateComponent {
          this.position.paso = 7;
          this.step = 7;
       }
-      this.positionsService.update( this.position )
+      this.positionsService.update3( this.position )
       .subscribe( data => {
          this._nav.setTab( 6 );
          this.acordion = 6;
@@ -235,7 +235,7 @@ export class PositionsUpdateComponent {
       }
       this._nav.setTab(8);
       this.acordion = 8;
-      this.positionsService.update( this.position )
+      this.positionsService.update4( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          //this.router.navigate(['positions/update/'+data.idCargo]);
@@ -250,7 +250,7 @@ export class PositionsUpdateComponent {
          this.position.paso = 10;
          this.step = 10;
       }
-      this.positionsService.update( this.position )
+      this.positionsService.update5( this.position )
       .subscribe( data => {
          this._nav.setTab( 9 );
          this.acordion = 9;
@@ -267,7 +267,7 @@ export class PositionsUpdateComponent {
          this.step = 16;
          this.position.paso = 16;
       }
-      this.positionsService.update( this.position )
+      this.positionsService.update6( this.position )
       .subscribe( data => {
          this._nav.setTab( 15 );
          this.acordion = 15;
@@ -287,7 +287,7 @@ export class PositionsUpdateComponent {
       if ( this.position.idEstado == this.noAprobado ) {
          this.position.indicadorHabilitado = false;
       }
-      this.positionsService.update( this.position )
+      this.positionsService.updateEstado( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          //this.router.navigate(['positions/update/'+data.idCargo]);

@@ -57,6 +57,9 @@ import {PositionRolesModule} from "./position-roles/position-roles.module";
 import {PositionCompetenciesModule} from "./position-competencies/position-competencies.module";
 
 
+import { OrganizationalStructureModule } from "./organizationalStructure/organizationalStructure.module";
+
+
 //CarsModule,
 @NgModule({
    imports: [BrowserModule, HttpModule, AppRoutingModule,
@@ -76,6 +79,7 @@ import {PositionCompetenciesModule} from "./position-competencies/position-compe
       PositionResponsabilitiesModule,
       PositionRolesModule,
       PositionCompetenciesModule,
+      OrganizationalStructureModule,
       SharedModule.forRoot(),
       TranslateModule.forRoot({
          provide: TranslateLoader,
