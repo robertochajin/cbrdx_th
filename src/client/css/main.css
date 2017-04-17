@@ -426,6 +426,9 @@ a.cancelar:hover {
 /**
 ------------------------ Datatable ------------------------------------
  */
+.ui-datatable table {
+   table-layout: auto !important;
+}
 .datable-header {
     margin-bottom: 10px;
 }
@@ -448,6 +451,9 @@ a.cancelar:hover {
 }
 .datatable-col-action button{
 
+}
+.datatable-col-action .btn-group{
+   display: inline-flex;
 }
 
 .datatable-col-center {
