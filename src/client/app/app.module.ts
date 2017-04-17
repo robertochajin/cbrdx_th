@@ -61,6 +61,9 @@ import {PositionCompetenciesModule} from "./position-competencies/position-compe
 import {CompetenciesGroupsModule} from "./competencies-groups/competencies-groups.module";
 
 
+import { OrganizationalStructureModule } from "./organizationalStructure/organizationalStructure.module";
+
+
 //CarsModule,
 @NgModule({
    imports: [BrowserModule, HttpModule, AppRoutingModule,
@@ -80,6 +83,7 @@ import {CompetenciesGroupsModule} from "./competencies-groups/competencies-group
       PositionResponsabilitiesModule,
       PositionRolesModule,
       PositionCompetenciesModule,
+      OrganizationalStructureModule,
       CompetenciesGroupsModule,
       SharedModule.forRoot(),
       TranslateModule.forRoot({
