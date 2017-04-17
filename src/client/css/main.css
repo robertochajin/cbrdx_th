@@ -429,6 +429,9 @@ a.cancelar:hover {
 .ui-datatable table {
    table-layout: auto !important;
 }
+.ui-datatable table th{
+   white-space: nowrap;
+}
 .datable-header {
     margin-bottom: 10px;
 }
@@ -461,16 +464,19 @@ a.cancelar:hover {
    white-space: nowrap;
 }
 .ui-datatable .ui-sortable-column-icon {
-  float: right;
+  /*float: right;*/
 }
 .ui-datatable-thead >tr > th > span{
   font-weight: bold;
   font-size: .8em;
 }
 body .ui-datatable .ui-datatable-thead > tr > th,
-body .ui-datatable .ui-datatable-tfoot > tr > td {
-  background-color: #ededed;
+body .ui-datatable .ui-datatable-tfoot > tr > td,
+body .ui-paginator{
+   background-color: #ededed;
+   white-space: nowrap;
 }
+
 
 /**
 ------------------------ Edit PrimeNG CSS ------------------------------
