@@ -79,4 +79,8 @@ export class PositionsService {
       console.error('Error:', error);
       return Promise.reject(error.message || error);
    }
+
+   getLevelById(id: number) {
+      return this.http.get( this.serviceURL + 'listasNivelesCargos/buscarId/'+id ).map( ( res: Response ) => res.json() );
+   }
 }
