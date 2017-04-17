@@ -48,19 +48,21 @@ export class CompetenciesGroupsComponent {
 
    saveGroup() {
       if (this.group.idGrupoCompetencia !== null && this.group.idGrupoCompetencia !== undefined) {
-         // this.groupCompetenciesServices.update(this.group).subscribe(res => {});
-
-         //suponemos que lo actualiza y lo modificamos en la lista...
-         this.groups[this.groups.indexOf(this.groups.find(z => this.group.idGrupoCompetencia == z.idGrupoCompetencia))] = this.group;
-         this.group = new GroupCompetencies();
-         this.editingGroup = false;
+         this.groupCompetenciesServices.update(this.group).subscribe(res => {
+            if(res.ok){
+               this.groups[this.groups.indexOf(this.groups.find(z => this.group.idGrupoCompetencia == z.idGrupoCompetencia))] = this.group;
+               this.group = new GroupCompetencies();
+               this.editingGroup = false;
+            }
+         });
       } else {
-         // this.groupCompetenciesServices.add(this.group).subscribe(res => {});
-
-         // Suponemos que lo guarda y lo agregamos a la lista de grupos
-         this.groups.push(this.group); // se debe cambiar por lo que retorna el servicio
-         this.group = new GroupCompetencies();
-         this.editingGroup = false;
+         this.groupCompetenciesServices.add(this.group).subscribe(res => {
+            if(res.idGrupoCompetencia){
+               this.groups.push(res); // se debe cambiar por lo que retorna el servicio
+               this.group = new GroupCompetencies();
+               this.editingGroup = false;
+            }
+         });
       }
    }
 
@@ -105,28 +107,30 @@ export class CompetenciesGroupsComponent {
    saveCompetencie(competencie: Competencies){
 
       if (this.competencie.idCompetencia !== null && this.competencie.idCompetencia !== undefined) {
-         // this.competenciesServices.add(this.competencie).subscribe();
+         this.competenciesServices.update(this.competencie).subscribe(res => {
+            if(res.ok){
+               this.groups[this.groups.indexOf(this.groups.find(z => this.competencie.idGrupoCompetencia == z.idGrupoCompetencia))]
+                  .competencies.map(c => {
+                  if(c.idCompetencia == this.competencie.idCompetencia){
+                     c = this.competencie;
+                  }
+               });
 
-         //suponemos que lo actualiza y lo modificamos en la lista...
+               this.competencie = new Competencies();
+               this.editingCompetencie = false;
+            }
+         });
 
-         this.groups[this.groups.indexOf(this.groups.find(z => this.competencie.idGrupoCompetencia == z.idGrupoCompetencia))]
-            .competencies.map(c => {
-               if(c.idCompetencia == this.competencie.idCompetencia){
-                  c = this.competencie;
-               }
-            });
-
-         this.competencie = new Competencies();
-         this.editingCompetencie = false;
       } else {
-         // this.groupCompetenciesServices.add(this.group).subscribe(res => {});
+         this.competenciesServices.add(this.competencie).subscribe(res => {
+            if (res.idCompetencia){
+               this.groups[this.groups.indexOf(this.groups.find(z => this.competencie.idGrupoCompetencia == z.idGrupoCompetencia))]
+                  .competencies.push(res);
 
-         // Suponemos que lo guarda y lo agregamos a la lista de grupos
-         this.groups[this.groups.indexOf(this.groups.find(z => this.competencie.idGrupoCompetencia == z.idGrupoCompetencia))]
-            .competencies.push(this.competencie); //de debe cambiar por lo que retorna el servicio
-
-         this.competencie = new Competencies();
-         this.editingCompetencie = false;
+               this.competencie = new Competencies();
+               this.editingCompetencie = false;
+            }
+         });
       }
    }
 
@@ -136,10 +140,13 @@ export class CompetenciesGroupsComponent {
          header: 'Corfirmación',
          icon: 'fa fa-question-circle',
          accept: () => {
-            let group = this.groups.find(z => competencie.idGrupoCompetencia == z.idGrupoCompetencia);
-            let groupIndex = this.groups.indexOf(group);
-            let competenceIndex = this.groups[groupIndex].competencies.indexOf(competencie);
-            this.groups[groupIndex].competencies.splice(competenceIndex,1);
+            competencie.indicadorHabilitado = false;
+            this.competenciesServices.update(competencie).subscribe(res => {
+               let group = this.groups.find(z => competencie.idGrupoCompetencia == z.idGrupoCompetencia);
+               let groupIndex = this.groups.indexOf(group);
+               let competenceIndex = this.groups[groupIndex].competencies.indexOf(competencie);
+               this.groups[groupIndex].competencies.splice(competenceIndex,1);
+            });
          }
       });
    }
