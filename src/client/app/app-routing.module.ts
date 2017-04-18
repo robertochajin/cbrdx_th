@@ -129,7 +129,7 @@ import {PositionRolesComponent} from "./position-roles/position-roles.component"
 import {PositionCompetenciesComponent} from "./position-competencies/position-competencies.component";
 import {CompanyAssetsComponent} from "./position-company-assets/company-assets.component";
 // proyecciòn laboral
-import {JobProjectionModule} from "./job-projection/projection-area.module";
+import {JobProjectionComponent} from "./job-projection/job-projection.component";
 // estructura física
 import {PhysicStructureComponent} from "./physic-structure/physic-structure.component";
 import {PhysicStructureAddComponent} from "./physic-structure/physic-structure-add.component";
@@ -290,7 +290,7 @@ const routes = [
    {path: 'risks/update/:idRiesgo', component: RisksUpdateComponent, canActivate: [AuthGuard]},
 
    //proyecciòn laboral
-   //  {path: 'job-projection', component: JobProjectionModule, canActivate: [AuthGuard]},
+   {path: 'job-projection', component: JobProjectionComponent, canActivate: [AuthGuard]},
 
    // estructura física
    {path: 'physic-structure', component: PhysicStructureComponent, canActivate: [AuthGuard]},
