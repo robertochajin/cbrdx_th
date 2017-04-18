@@ -24,7 +24,7 @@
                     </div>
                </div>
             </div>
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-5 col-xs-12">
                <div class="form-group">
                     <label for="descripcion{{i}}" class="control-label">Descripción</label>
                     <textarea id="descripcion{{i}}" name="descripcion{{i}}" pInputTextarea  rows="2" cols="35" #descripcion="ngModel"
@@ -35,7 +35,7 @@
                     </div>
                </div>
             </div>
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-2 col-xs-12">
                <div class="form-group">
                     <label for="factor{{i}}" class="control-label">* Factor</label>
                     <input type="number" maxlength="3" size="3" pattern="(?:\b|-)([1-9]{1,2}[0]?|100)\b" min="1" max="100" (change)="sumFactors()"
@@ -46,7 +46,7 @@
                     </div>
                </div>
             </div>
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-2 col-xs-12">
                <div class="form-group">
                     <label for="meta{{i}}" class="control-label">* Meta</label>
                     <input type="number" pInputText id="meta{{i}}" name="meta{{i}}" [(ngModel)]="criteria.meta" #meta="ngModel" required class="form-control text-center"/>
@@ -74,8 +74,8 @@
 
 
           <div class="row">
-            <div class="col-md-3 col-xs-12 text-center col-md-offset-5">
-              {{total}}%
+            <div class="col-md-2 col-xs-12 text-center col-md-offset-7 text-b">
+               <strong> {{total}}% </strong>
             </div>
           </div>
 
