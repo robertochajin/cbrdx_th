@@ -129,7 +129,6 @@ import {PositionRolesComponent} from "./position-roles/position-roles.component"
 import {PositionCompetenciesComponent} from "./position-competencies/position-competencies.component";
 import {CompanyAssetsComponent} from "./position-company-assets/company-assets.component";
 // proyecciòn laboral
-import {JobProjectionModule} from "./job-projection/projection-area.module";
 // estructura física
 import {PhysicStructureComponent} from "./physic-structure/physic-structure.component";
 import {PhysicStructureAddComponent} from "./physic-structure/physic-structure-add.component";
