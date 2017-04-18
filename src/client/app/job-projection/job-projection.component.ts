@@ -6,8 +6,8 @@ import {ConfirmationService, Message, SelectItem} from 'primeng/primeng';
 
 @Component({
    moduleId: module.id,
-   templateUrl: 'projection-area.component.html',
-   selector: 'projection-area',
+   templateUrl: 'job-projection.component.html',
+   selector: 'projection',
    providers: [ConfirmationService]
 })
 

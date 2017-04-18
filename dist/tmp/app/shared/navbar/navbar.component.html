@@ -14,7 +14,7 @@
 
       <li class="treeview" routerLinkActive="active">
         <a routerLink="/employees" >
-          <i class="icon-THDO icon-mainmenu"></i>
+          <i class="fa fa-users" aria-hidden="true" style="font-size: 1.5em;"></i>
           <span>Colaboradores</span>
         </a>
       </li>
@@ -69,12 +69,33 @@
            </li>
 
            <li routerLinkActive="active">
-              <a routerLink="/competencies-groups" routerLinkActive="active"><i class="fa fa-circle-o"></i>
-                 Competencias<br />Habilidades
+           <a routerLink="/competencies-groups" routerLinkActive="active"><i class="fa fa-circle-o"></i>
+              Competencias<br />Habilidades
+           </a>
+        </li>
+
+           <li routerLinkActive="active">
+              <a routerLink="/risks" routerLinkActive="active"><i class="fa fa-circle-o"></i>
+                 Riesgos
               </a>
            </li>
 
         </ul>
+      </li>
+
+
+       <li class="treeview" routerLinkActive="active">
+          <a href="#">
+             <i class="icon-THDO icon-mainmenu"></i>
+             <span> Organización </span>
+          </a>
+          <ul class="treeview-menu" >
+             <li routerLinkActive="active">
+                <a routerLink="/physic-structure" ><i class="fa fa-circle-o"></i> Estructura Fisica</a>
+             </li>
+
+          </ul>
+
       </li>
 <!--
       <li class="treeview" routerLinkActive="active">
