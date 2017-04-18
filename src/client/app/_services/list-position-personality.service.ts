@@ -7,7 +7,7 @@ export class PositionPersonalityTypesServices {
 
    public headers = new Headers({'Content-Type': 'application/json'});
 
-   private serviceURL = '<%= SVC_TH_URL %>/api/tiposPersonas';
+   private serviceURL = '<%= SVC_TH_URL %>/api/listasAtributosCargos';
 
    constructor(private http: Http,
                private authenticationService: AuthenticationService
