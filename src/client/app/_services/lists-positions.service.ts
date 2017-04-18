@@ -17,7 +17,7 @@ export class ListPositionsService {
    }
    
    getCategoryTypes() {
-      return this.http.get( this.serviceURL + "categorias/", { headers: this.headers } ).map( ( res: Response ) => res.json() );
+      return this.http.get( this.serviceURL + "categorias/enabled", { headers: this.headers } ).map( ( res: Response ) => res.json() );
    }
    
    getstateTypes() {

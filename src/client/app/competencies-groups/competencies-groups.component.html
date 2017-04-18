@@ -1,0 +1,150 @@
+<p-messages [value]="msgs"></p-messages>
+<div *ngIf="editingGroup">
+   <div class="row-fluid">
+      <div class="col-md-12">
+         <form name="formulario" (ngSubmit)="fg.valid && saveGroup()" #fg="ngForm" novalidate>
+            <fieldset>
+               <legend>Creando / editando grupo:</legend>
+               <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                  <div class="row">
+                     <div class="form-group col-md-12">
+                        <label for="nombre">* Nombre</label>
+                        <input type="text" pInputText id="nombre" name="nombre"
+                               [(ngModel)]="group.grupoCompetencia" #nombre="ngModel"
+                               required/>
+                        <div class="ui-message ui-messages-error ui-corner-all"
+                             *ngIf="fg.submitted && !nombre.valid">
+                           <i class="fa fa-close"></i>
+                           Nombre es requerido
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="form-group col-md-12">
+                        <label for="description">* Descripción</label>
+                        <textarea id="description" name="description" #description="ngModel" pInputTextarea rows="5"
+                                  [(ngModel)]="group.descripcion" required></textarea>
+                        <div class="ui-message ui-messages-error ui-corner-all"
+                             *ngIf="fg.submitted && !description.valid">
+                           <i class="fa fa-close"></i>
+                           Descripción es requerido
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="form-group col-md-12">
+                        <label for="ponderancie">* Ponderación</label>
+                        <input type="number" maxlength="3" size="3" pattern="(?:\b|-)([1-9]{1,2}[0]?|100)\b" min="1"
+                               max="100" pInputText id="ponderancie" name="ponderancie"
+                               [(ngModel)]="group.ponderacion" #ponderancie="ngModel"
+                               required/>
+                        <div class="ui-message ui-messages-error ui-corner-all"
+                             *ngIf="fg.submitted && !ponderancie.valid">
+                           <i class="fa fa-close"></i>
+                           Es necesaria una ponderación válida entre 1 y 100
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="form-group col-md-12">
+                        <label for="enabledGroup">Habilitado</label>
+                        <p-checkbox id="enabledGroup" name="enabledGroup" #enabledGroup="ngModel"
+                                    [(ngModel)]="group.indicadorHabilitado" binary="true"></p-checkbox>
+                     </div>
+                  </div>
+                  <div class="row form-footer-buttons">
+                     <div class="form-group col-md-6">
+                        <a (click)="cancelEditingGroup()" class="cancelar">Cancelar</a>
+                     </div>
+                     <div class="form-group col-md-6">
+                        <button pButton type="submit" label="Guardar"></button>
+                     </div>
+                  </div>
+               </div>
+            </fieldset>
+         </form>
+      </div>
+   </div>
+</div>
+<div *ngIf="!editingGroup">
+   <div class="row">
+      <div class="col-md-6">
+         <button type="button" pButton icon="fa-plus" (click)="editGroup(null)" label="Agregar grupo"></button>
+      </div>
+   </div>
+   <p-tabView orientation="left">
+      <p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}" [selected]="i == 0">
+         <div class="row" *ngIf="editingCompetencie">
+            <div class="col-md-12">
+               <form name="competencieForm" (ngSubmit)="fc.valid && saveCompetencie()" #fc="ngForm" novalidate>
+                  <fieldset>
+                     <legend>Creando / editando grupo:</legend>
+                     <div class="row">
+                        <div class="form-group col-md-12">
+                           <label for="cNombre">* Competencia / Habilidad</label>
+                           <input type="text" pInputText id="cNombre" name="cNombre"
+                                  [(ngModel)]="competencie.competencia" #cNombre="ngModel"
+                                  required/>
+                           <div class="ui-message ui-messages-error ui-corner-all"
+                                *ngIf="fc.submitted && !cNombre.valid">
+                              <i class="fa fa-close"></i>
+                              Competencia / Habilidad es requerido
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group col-md-12">
+                           <label for="cDescription">* Descripción</label>
+                           <textarea id="cDescription" name="cDescription" #cDescription="ngModel" pInputTextarea
+                                     rows="5"
+                                     [(ngModel)]="competencie.descripcion" required></textarea>
+                           <div class="ui-message ui-messages-error ui-corner-all"
+                                *ngIf="fc.submitted && !cDescription.valid">
+                              <i class="fa fa-close"></i>
+                              Descripción es requerido
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row form-footer-buttons">
+                        <div class="form-group col-md-6">
+                           <a (click)="cancelEditingCompetencie()" class="cancelar">Cancelar</a>
+                        </div>
+                        <div class="form-group col-md-6">
+                           <button pButton type="submit" label="Guardar"></button>
+                        </div>
+                     </div>
+                  </fieldset>
+               </form>
+            </div>
+         </div>
+         <div class="row" *ngIf="!editingCompetencie">
+            <div class="col-md-6">
+               <button type="button" pButton icon="fa-pencil" (click)="editGroup(group)" label="Editar grupo"></button>
+            </div>
+            <div class="col-md-6">
+               <button type="button" pButton icon="fa-plus" (click)="editCompetencie(null, group.idGrupoCompetencia)"
+                       label="Agregar Competencia"></button>
+            </div>
+         </div>
+         <div class="row" *ngIf="!editingCompetencie">
+            <div class="col-md-12">
+               <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="group.competencies"
+                            [responsive]="true" id="positionCompetenciesDT" styleClass="dejemeverelcombo">
+                  <p-column field="competencia" header="Competencia" [sortable]="true"></p-column>
+                  <p-column field="descripcion" header="Descripción" [sortable]="true"></p-column>
+                  <p-column header="Acciones">
+                     <template let-competencie="rowData" pTemplate="body">
+                        <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil"
+                                pButton (click)="editCompetencie(competencie, group.idGrupoCompetencia)"></button>
+                        <button type="button" class="ui-button ui-button-danger btn" icon="fa-trash"
+                                pButton (click)="disableCompetencie(competencie)"></button>
+                     </template>
+                  </p-column>
+               </p-dataTable>
+            </div>
+         </div>
+      </p-tabPanel>
+      <p-tabPanel header="" hidden="true" ></p-tabPanel>
+   </p-tabView>
+</div>
+<p-confirmDialog width="400"></p-confirmDialog>

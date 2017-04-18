@@ -1,14 +1,24 @@
 /**
+------------------------- CSS Globales --------------------------------------
+ */
+body{
+   height: 100%!important;
+}
+
+
+/**
 -------------------------- Cambios Main Theme PrimeNG ------------------------
  */
 body .ui-widget,
-body .ui-widget .ui-widget, body .ui-widget input,
+body .ui-widget .ui-widget,
+body .ui-widget input,
 body .ui-widget select,
 body .ui-widget textarea,
 body .ui-widget button  {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif!important;
 }
-body .ui-state-disabled, body .ui-widget:disabled {
+body .ui-state-disabled,
+body .ui-widget:disabled {
   opacity: 0.6;
   filter: Alpha(Opacity= 35);
   background-color: #ccc;
@@ -46,12 +56,18 @@ body .ui-state-disabled, body .ui-widget:disabled {
    }
 }
 
-
-
+.sidebar-menu .treeview-menu > li > a {
+   padding: 5px 5px 5px 26px;
+}
+.sidebar-menu .treeview-menu > li > a > .fa{
+   margin-left: -24px;
+}
 /**
 ------------------------ Main CSS ------------------------------------
  */
-
+a{
+   cursor: pointer;
+}
 /** ---- Breadcrumb ------ */
 .btn-breadcrumb .btn:not(:last-child):after {
   content: " ";
@@ -412,6 +428,12 @@ a.cancelar:hover {
 /**
 ------------------------ Datatable ------------------------------------
  */
+.ui-datatable table {
+   table-layout: auto !important;
+}
+.ui-datatable table th{
+   white-space: nowrap;
+}
 .datable-header {
     margin-bottom: 10px;
 }
@@ -435,17 +457,28 @@ a.cancelar:hover {
 .datatable-col-action button{
 
 }
+.datatable-col-action .btn-group{
+   display: inline-flex;
+}
+
+.datatable-col-center {
+   text-align: center;
+   white-space: nowrap;
+}
 .ui-datatable .ui-sortable-column-icon {
-  float: right;
+  /*float: right;*/
 }
 .ui-datatable-thead >tr > th > span{
   font-weight: bold;
   font-size: .8em;
 }
 body .ui-datatable .ui-datatable-thead > tr > th,
-body .ui-datatable .ui-datatable-tfoot > tr > td {
-  background-color: #ededed;
+body .ui-datatable .ui-datatable-tfoot > tr > td,
+body .ui-paginator{
+   background-color: #ededed;
+   white-space: nowrap;
 }
+
 
 /**
 ------------------------ Edit PrimeNG CSS ------------------------------

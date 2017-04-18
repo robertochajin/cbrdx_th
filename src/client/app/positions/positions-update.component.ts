@@ -1,15 +1,15 @@
 import "rxjs/add/operator/switchMap";
-import { Component, Input, OnInit} from '@angular/core';
-import { ActivatedRoute, Router, Params } from '@angular/router'
-import { Location } from '@angular/common';
-import { Positions } from '../_models/positions';
-import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
-import { NavService } from '../_services/_nav.service';
-import { PositionsService } from '../_services/positions.service';
-import { ListPositionsService } from '../_services/lists-positions.service';
-import { TipoDeAreaService } from '../_services/tipoDeArea.service';
+import { Component, Input } from "@angular/core";
+import { ActivatedRoute, Router, Params } from "@angular/router";
+import { Location } from "@angular/common";
+import { Positions } from "../_models/positions";
+import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
+import { NavService } from "../_services/_nav.service";
+import { PositionsService } from "../_services/positions.service";
+import { ListPositionsService } from "../_services/lists-positions.service";
+import { TipoDeAreaService } from "../_services/tipoDeArea.service";
 import { ListEmployeesService } from "../_services/lists-employees.service";
-import {TreeNode} from "primeng/components/common/api";
+import { TreeNode } from "primeng/components/common/api";
 
 @Component( {
                moduleId: module.id,
@@ -20,20 +20,26 @@ import {TreeNode} from "primeng/components/common/api";
 export class PositionsUpdateComponent {
    @Input()
    position: Positions = new Positions();
+   allPosition: Positions[] = [];
    acordion: number;
    categoryTypes: SelectItem[] = [];
+   listcategoryTypes: any[] = [];
    areaTypes: SelectItem[] = [];
    bossPositionTypes: SelectItem[] = [];
    stateTypes: SelectItem[] = [];
+   liststateTypes: any[];
    levelTypes: SelectItem[] = [];
+   listslevelTypes: any[] = [];
    genderTypes: SelectItem[] = [];
    maritalStatusTypes: SelectItem[] = [];
-   disableTabs: boolean = false;
    msgs: Message[] = [];
-   defaultState: any;
-   aprobado:boolean = false;
+   aprobado: number;
+   noAprobado: number;
+   construccion: number;
    treeArrray: TreeNode[] = [];
+   selectedNode: TreeNode;
    step = 1;
+   nivel:number;
    constructor( private positionsService: PositionsService,
                 private router: Router,
                 private route: ActivatedRoute,
@@ -45,6 +51,7 @@ export class PositionsUpdateComponent {
                 private _nav: NavService, ) {
       
       this.listPositionsService.getCategoryTypes().subscribe( res => {
+         this.listcategoryTypes = res;
          this.categoryTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
             this.categoryTypes.push( {
@@ -52,7 +59,20 @@ export class PositionsUpdateComponent {
                                         value: dp.idCategoria
                                      } );
          }
+         
       } );
+      
+      this.listPositionsService.getLevelTypes().subscribe( resl => {
+         this.listslevelTypes = resl;
+         this.levelTypes.push( { label: "Seleccione", value: null } );
+         for ( let dp of resl ) {
+            this.levelTypes.push( {
+                                     label: dp.nombre,
+                                     value: dp.idListaNivelCargo
+                                  } );
+         }
+      } );
+   
       this.tipoDeAreaService.getlistAreas().subscribe( res => {
          this.areaTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
@@ -64,26 +84,28 @@ export class PositionsUpdateComponent {
       } );
       
       this.listPositionsService.getstateTypes().subscribe( res => {
+         this.liststateTypes = res;
          this.stateTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
             this.stateTypes.push( {
                                      label: dp.nombre,
                                      value: dp.idListaEstadoCargo
                                   } );
+            switch ( dp.codigo ) {
+               case "APROB":
+                  this.aprobado = dp.idListaEstadoCargo;
+                  break;
+               case "NOAPR":
+                  this.noAprobado = dp.idListaEstadoCargo;
+                  break;
+               case "CONST":
+                  this.construccion = dp.idListaEstadoCargo;
+                  break;
+            }
          }
       } );
    
-      this.listPositionsService.getLevelTypes().subscribe( res => {
-         this.levelTypes.push( { label: "Seleccione", value: null } );
-         for ( let dp of res ) {
-            this.levelTypes.push( {
-                                     label: dp.nombre,
-                                     value: dp.idListaNivelCargo
-                                  } );
-         }
-      } );
-   
-     
+      
    
       this.listEmployeesService.getGenderTypes().subscribe(res => {
          this.genderTypes.push({label: "Seleccione", value: null});
@@ -94,6 +116,7 @@ export class PositionsUpdateComponent {
                                   });
          }
       });
+   
       this.listEmployeesService.getMaritalStatusTypes().subscribe(res => {
          this.maritalStatusTypes.push({label: "Seleccione", value: null});
          for (let dp of res) {
@@ -119,13 +142,9 @@ export class PositionsUpdateComponent {
                   this.acordion = this.step-1;
                }
             }
-            this.listPositionsService.getstateByCode("APROB").subscribe( res => {
-               this.defaultState = res;
-               this.aprobado = this.position.idEstado == this.defaultState.idListaEstadoCargo ? true : false;
-            });
-            
+            this.getCategory();
             this.positionsService.getListPositions().subscribe( res => {
-         
+               this.allPosition = res;
                this.bossPositionTypes.push( { label: "Seleccione", value: null } );
                for ( let dp of res ) {
                   if ( res.idCargo != this.position.idCargo ) {
@@ -135,35 +154,17 @@ export class PositionsUpdateComponent {
                                                   } );
                   }
                }
-               //this.treeArrray = res;
-               for (let c of res.filter(t => t.idCargoJefe == 0 || t.idCargoJefe == null)) {
-                  let maxNivel: TreeNode[] = [];
-                  for (let p of res.filter(x => x.idCargoJefe == c.idCargo)) {
-                     let treeNode: TreeNode = [];
-                     treeNode = {"label": p.cargo};
-                     if (res.filter(t => t.idCargoJefe == p.idCargo).length > 0) {
-                        treeNode.children = [];
-                        treeNode.expanded = true;
-                        let treeNodeChild: TreeNode;
-                        for (let m of res.filter(t => t.idCargoJefe == p.idCargo)) {
-                           treeNodeChild = {"label": m.cargo};
-                           treeNode.children.push(treeNodeChild);
-                        }
-                     }
-                     maxNivel.push(treeNode);
-                  }
-                  this.treeArrray.push({
-                                           "label": c.cargo,
-                                           "children": maxNivel,
-                                           "expanded": true
-                                        });
-               }
-               //this.expandAll()
+               this.buildParent();
             } );
          } );
       } );
-      
       this.acordion = this._nav.getTab();
+
+   }
+
+   firstStep() {
+      this._nav.setTab( 0 );
+      this.acordion = 0;
    }
    
    nextStep(step:number) {
@@ -172,10 +173,10 @@ export class PositionsUpdateComponent {
          this.position.paso = step+1;
          this.step = this.position.paso;
       }
-      this._nav.setTab(step);
-      this.acordion = step;
-      this.positionsService.update( this.position )
+      this.positionsService.updateEstado( this.position )
       .subscribe( data => {
+         this._nav.setTab( step );
+         this.acordion = step;
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
       }, error => {
          this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
@@ -188,10 +189,11 @@ export class PositionsUpdateComponent {
          this.position.paso = 2;
          this.step = 2;
       }
-      this._nav.setTab(1);
-      this.acordion = 1;
-      this.positionsService.update( this.position )
+   
+      this.positionsService.update1( this.position )
       .subscribe( data => {
+         this._nav.setTab( 1 );
+         this.acordion = 1;
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          //this.router.navigate(['positions/update/'+data.idCargo]);
       }, error => {
@@ -205,11 +207,10 @@ export class PositionsUpdateComponent {
          this.position.paso = 4;
          this.step = 4;
       }
-      this._nav.setTab(3);
-      this.acordion = 3;
-      console.info(this.step);
-      this.positionsService.update( this.position )
+      this.positionsService.update2( this.position )
       .subscribe( data => {
+         this._nav.setTab( 3 );
+         this.acordion = 3;
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          //this.router.navigate(['positions/update/'+data.idCargo]);
       }, error => {
@@ -223,10 +224,10 @@ export class PositionsUpdateComponent {
          this.position.paso = 7;
          this.step = 7;
       }
-      this._nav.setTab(6);
-      this.acordion = 6;
-      this.positionsService.update( this.position )
+      this.positionsService.update3( this.position )
       .subscribe( data => {
+         this._nav.setTab( 6 );
+         this.acordion = 6;
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          //this.router.navigate(['positions/update/'+data.idCargo]);
       }, error => {
@@ -236,13 +237,13 @@ export class PositionsUpdateComponent {
    
    onSubmit7() {
       this.msgs = [];
-      if(this.position.paso == 8){
+      if ( this.position.paso <= 8 ) {
          this.position.paso = 9;
          this.step = 9;
       }
       this._nav.setTab(8);
       this.acordion = 8;
-      this.positionsService.update( this.position )
+      this.positionsService.update4( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          //this.router.navigate(['positions/update/'+data.idCargo]);
@@ -253,13 +254,48 @@ export class PositionsUpdateComponent {
    
    onSubmit8() {
       this.msgs = [];
-      if(this.position.paso == 9){
+      if ( this.position.paso <= 9 ) {
          this.position.paso = 10;
          this.step = 10;
       }
-      this._nav.setTab(9);
-      this.acordion = 9;
-      this.positionsService.update( this.position )
+      this.positionsService.update5( this.position )
+      .subscribe( data => {
+         this._nav.setTab( 9 );
+         this.acordion = 9;
+         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         //this.router.navigate(['positions/update/'+data.idCargo]);
+      }, error => {
+         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+      } );
+   }
+   
+   onSubmit14() {
+      this.msgs = [];
+      if ( this.position.paso <= 15 ) {
+         this.step = 16;
+         this.position.paso = 16;
+      }
+      this.positionsService.update6( this.position )
+      .subscribe( data => {
+         this._nav.setTab( 15 );
+         this.acordion = 15;
+         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         //this.router.navigate(['positions/update/'+data.idCargo]);
+      }, error => {
+         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+      } );
+   }
+   
+   updateEstado( value: number ) {
+      this.msgs = [];
+      this.position.idEstado = value;
+      if ( this.position.idEstado == this.aprobado ) {
+         this.position.indicadorHabilitado = true;
+      }
+      if ( this.position.idEstado == this.noAprobado ) {
+         this.position.indicadorHabilitado = false;
+      }
+      this.positionsService.updateEstado( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          //this.router.navigate(['positions/update/'+data.idCargo]);
@@ -279,10 +315,65 @@ export class PositionsUpdateComponent {
                                         } );
    }
    
-   
    onTabShow( e: any ) {
       this._nav.setTab( e.index );
       this.acordion = this._nav.getTab();
    }
    
+   buildParent() {
+      for ( let c of this.allPosition.filter( t => t.idCargoJefe == 0 || t.idCargoJefe == null ) ) {
+         let node: TreeNode;
+         let treeNode: TreeNode[] = [];
+         
+         if ( this.allPosition.filter( x => x.idCargoJefe == c.idCargo ).length > 0 ) {
+            treeNode = this.buildChild( c );
+         }
+         node = {
+            "label": c.cargo,
+            "children": treeNode,
+            "expanded": true
+         };
+         this.treeArrray.push( node );
+         if ( this.position.idCargo == c.idCargo ) {
+            this.selectedNode = node;
+         }
+         
+      }
+   }
+   
+   buildChild( dadInfo:Positions) {
+      let treeChild: TreeNode[] = [];
+      
+      for (let p of this.allPosition.filter(x => x.idCargoJefe == dadInfo.idCargo)) {
+         let node: TreeNode = [];
+         let treeNode: TreeNode[] = [];
+         if(this.allPosition.filter(y => y.idCargoJefe == p.idCargo).length > 0){
+            treeNode = this.buildChild(p);
+         }
+         node = {
+            "label": p.cargo,
+            "children": treeNode,
+            "expanded": treeNode.length > 0 ? true : false
+         }
+         treeChild.push(node);
+         if(this.position.idCargo == p.idCargo){
+            this.selectedNode = node;
+         }
+      }
+      return treeChild;
+   }
+   
+   getCategory(){
+      let selectCategory = this.listcategoryTypes.filter( t => t.puntosMinimos <= this.position.puntos
+      && t.puntosMaximos >= this.position.puntos );
+      if(selectCategory.length > 0){
+         this.position.idCategoria = selectCategory[0].idCategoria;
+         this.nivel = selectCategory[0].nivel;
+      }else{
+         this.position.idCategoria = null;
+         this.nivel = null;
+      }
+      
+   }
+
 }

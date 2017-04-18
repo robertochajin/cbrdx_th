@@ -116,6 +116,9 @@ import {FaultsAndSanctionsComponent} from "./faultsAndSanctions/faults-and-sanct
 import {FaultsAndSanctionsAddComponent} from "./faultsAndSanctions/faults-and-sanctions-add.component";
 import {FaultsAndSanctionsUpdateComponent} from "./faultsAndSanctions/faults-and-sanctions-update.component";
 
+// Estrctura Organizacional
+import {OrganizationalStructureComponent} from "./organizationalStructure/organizationalStructure.component";
+
 // Cargos
 import {PositionsComponent} from "./positions/positions.component";
 import {PositionsAddComponent} from "./positions/positions-add.component";
@@ -125,10 +128,24 @@ import {PositionResponsabilitiesComponent} from "./position-responsabilities/pos
 import {PositionRolesComponent} from "./position-roles/position-roles.component";
 import {PositionCompetenciesComponent} from "./position-competencies/position-competencies.component";
 import {CompanyAssetsComponent} from "./position-company-assets/company-assets.component";
+// proyecciòn laboral
+import {JobProjectionComponent} from "./job-projection/job-projection.component";
+import {JobProjectionPositionsComponent} from "./job-projection/job-projection-positions.component";
+
+// estructura física
+import {PhysicStructureComponent} from "./physic-structure/physic-structure.component";
+import {PhysicStructureAddComponent} from "./physic-structure/physic-structure-add.component";
+import {PhysicStructureDetailComponent} from "./physic-structure/physic-structure-detail.component";
+import {PhysicStructureUpdateComponent} from "./physic-structure/physic-structure-update.component";
 
 // cargos posición en caso de ausencia
 import {AbsenceComponent} from "./position-absence/position-absence.component";
 import {PersonalityComponent} from "./position-personality/personality.component";
+//riesgo
+import {RisksComponent} from "./risks/risks-component";
+import {RisksAddComponent} from "./risks/risks-add.component";
+import {RisksUpdateComponent} from "./risks/risks-update.component";
+import {CompetenciesGroupsComponent} from "./competencies-groups/competencies-groups.component";
 
 const routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -235,7 +252,6 @@ const routes = [
 
   // Temporales
   {path: 'criterios', component: EvaluationCriteriasComponent, canActivate: [AuthGuard]},
-  {path: 'personalidad', component: PersonalityComponent, canActivate: [AuthGuard]},
   {path: 'activos', component: CompanyAssetsComponent, canActivate: [AuthGuard]},
   {path: 'responsabilidades', component: PositionResponsabilitiesComponent, canActivate: [AuthGuard]},
   {path: 'cargosroles', component: PositionRolesComponent, canActivate: [AuthGuard]},
@@ -252,6 +268,9 @@ const routes = [
   {path: 'faults/update/:id', component: FaultsAndSanctionsUpdateComponent, canActivate: [AuthGuard]},
 
    // Temporales
+   {path: 'competencies-groups', component: CompetenciesGroupsComponent, canActivate: [AuthGuard]},
+
+   // Temporales
    {path: 'criterios', component: EvaluationCriteriasComponent, canActivate: [AuthGuard]},
    {path: 'responsabilidades', component: PositionResponsabilitiesComponent, canActivate: [AuthGuard]},
    {path: 'cargosroles', component: PositionRolesComponent, canActivate: [AuthGuard]},
@@ -260,9 +279,27 @@ const routes = [
   {path: 'positions', component: PositionsComponent, canActivate: [AuthGuard]},
   {path: 'positions/add', component: PositionsAddComponent, canActivate: [AuthGuard]},
   {path: 'positions/update/:id', component: PositionsUpdateComponent, canActivate: [AuthGuard]},
+   
+   // Estrctura Organizacional
+   {path: 'organizational-structure', component: OrganizationalStructureComponent, canActivate: [AuthGuard]},
 
   //  Cargos Productividad
   {path: 'productivity/:idCargo', component: ProductivityComponent, canActivate: [AuthGuard]},
+   //riesgos
+
+   {path: 'risks', component: RisksComponent, canActivate: [AuthGuard]},
+   {path: 'risks/add', component: RisksAddComponent, canActivate: [AuthGuard]},
+   {path: 'risks/update/:idRiesgo', component: RisksUpdateComponent, canActivate: [AuthGuard]},
+
+   //proyecciòn laboral
+   {path: 'job-projection', component: JobProjectionComponent, canActivate: [AuthGuard]},
+   {path: 'job-projection-positions', component: JobProjectionPositionsComponent, canActivate: [AuthGuard]},
+
+   // estructura física
+   {path: 'physic-structure', component: PhysicStructureComponent, canActivate: [AuthGuard]},
+   {path: 'physic-structure/add', component: PhysicStructureAddComponent, canActivate: [AuthGuard]},
+   {path: 'physic-structure/detail/:id', component: PhysicStructureDetailComponent, canActivate: [AuthGuard]},
+   {path: 'physic-structure/update/:id', component: PhysicStructureUpdateComponent, canActivate: [AuthGuard]},
 
 
   // cargos factores de riesgo
