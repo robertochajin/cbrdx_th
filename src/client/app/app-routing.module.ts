@@ -128,7 +128,10 @@ import {CompanyAssetsComponent} from "./position-company-assets/company-assets.c
 // proyecciòn laboral
 import {JobProjectionModule} from "./job-projection/projection-area.module";
 // estructura física
-import {PhysicStructuteModule} from "./physic-structure/physic-structure.module";
+import {PhysicStructureComponent} from "./physic-structure/physic-structure.component";
+import {PhysicStructureAddComponent} from "./physic-structure/physic-structure-add.component";
+import {PhysicStructureDetailComponent} from "./physic-structure/physic-structure-detail.component";
+import {PhysicStructureUpdateComponent} from "./physic-structure/physic-structure-update.component";
 
 // cargos posición en caso de ausencia
 import {AbsenceComponent} from "./position-absence/position-absence.component";
@@ -307,7 +310,10 @@ const routes = [
    //  {path: 'job-projection', component: JobProjectionModule, canActivate: [AuthGuard]},
 
    // estructura física
-   {path: 'physic-structure', component: PhysicStructuteModule, canActivate: [AuthGuard]},
+   {path: 'physic-structure', component: PhysicStructureComponent, canActivate: [AuthGuard]},
+   {path: 'physic-structure/add', component: PhysicStructureAddComponent, canActivate: [AuthGuard]},
+   {path: 'physic-structure/detail/:id', component: PhysicStructureDetailComponent, canActivate: [AuthGuard]},
+   {path: 'physic-structure/update/:id', component: PhysicStructureUpdateComponent, canActivate: [AuthGuard]},
 
    // cargos factores de riesgo
    {path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [AuthGuard]},
