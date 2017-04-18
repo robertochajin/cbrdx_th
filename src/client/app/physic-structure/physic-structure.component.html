@@ -13,9 +13,9 @@
       </div>
    </div>
    <p-dataTable [value]="ListPhysicStructure" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-      <p-column field="codigo" header="Id" [sortable]="true"></p-column>
+      <p-column field="codigo" header="Código" [sortable]="true"></p-column>
       <p-column field="estructuraFisica" header="Nombre" [sortable]="true"></p-column>
-      <p-column field="clasificacionSede" header="Categoria" [sortable]="true"></p-column>
+      <p-column field="clasificacionSede" header="Categoría" [sortable]="true"></p-column>
       <p-column field="direccion" header="Dirección" [sortable]="true"></p-column>
       <p-column header="Ind. Virtual" styleClass="datatable-col-action">
          <template let-physicStructure="rowData" pTemplate="body">

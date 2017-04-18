@@ -1,75 +1,45 @@
 <h3 class="first">Proyección laboral</h3>
-<!--<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">-->
-   <!--<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">-->
-      <!--<div class="ui-grid-row">-->
-         <!--<div class="ui-grid-col-3">-->
-            <!--<label for="idSede">Sede</label>-->
-            <!--<p-dropdown id="idSede" name="idSede" required="true"-->
-                        <!--[options]="ListaEstados" [autoWidth]="false"-->
-                        <!--[(ngModel)]="JobProjection.idEstado"-->
-                        <!--#idSede="ngModel"-->
-            <!--&gt;</p-dropdown>-->
-            <!--<div class="ui-message ui-messages-error ui-corner-all"-->
-                 <!--*ngIf="f.submitted && !idSede.valid">-->
-               <!--<i class="fa fa-close"></i>-->
-               <!--Tipo vehiculo requerido-->
-            <!--</div>-->
-         <!--</div>-->
-         <!--<div class="ui-grid-col-3">-->
-            <!--<label for="idTipoArea">Tipo Area</label>-->
-            <!--<p-dropdown id="idTipoArea" name="idTipoArea" required="true"-->
-                        <!--[options]="ListaEstados" [autoWidth]="false"-->
-                        <!--[(ngModel)]="JobProjection.idEstado"-->
-                        <!--#idTipoArea="ngModel"-->
-            <!--&gt;</p-dropdown>-->
-            <!--<div class="ui-message ui-messages-error ui-corner-all"-->
-                 <!--*ngIf="f.submitted && !idTipoArea.valid">-->
-               <!--<i class="fa fa-close"></i>-->
-               <!--Tipo de Servicio requerido-->
-            <!--</div>-->
-         <!--</div>-->
-         <!--<div class="ui-grid-col-3">-->
-            <!--<label for="idEstado">Estado</label>-->
-            <!--<p-dropdown id="idEstado" name="idEstado" required="true"-->
-                        <!--[options]="ListaEstados" [autoWidth]="false"-->
-                        <!--[(ngModel)]="JobProjection.idEstado"-->
-                        <!--#idEstado="ngModel"-->
-            <!--&gt;</p-dropdown>-->
-            <!--<div class="ui-message ui-messages-error ui-corner-all"-->
-                 <!--*ngIf="f.submitted && !idEstado.valid">-->
-               <!--<i class="fa fa-close"></i>-->
-               <!--Tipo de Servicio requerido-->
-            <!--</div>-->
-         <!--</div>-->
-         <!--<div class="ui-grid-col-3">-->
-            <!--<label for="anioproyeccion">Año Proyección</label>-->
-            <!--<input type="anioproyeccion" pInputText id="anioproyeccion" name="anioproyeccion"-->
-                   <!--[(ngModel)]="JobProjection.nroPlazas"#anioproyeccion="ngModel"-->
-            <!--/>-->
-         <!--</div>-->
-         <!--<div class="ui-grid-col-3">-->
-            <!--<label for="anioproyeccion">Año Proyección</label>-->
-            <!--<input type="anioproyeccion" pInputText id="anioproyeccion" name="anioproyeccion"-->
-                   <!--[(ngModel)]="JobProjection.nroPlazas"#anioproyeccion="ngModel"-->
-            <!--/>-->
-         <!--</div>-->
-      <!--</div>-->
-   <!--</div>-->
-<!--</form>-->
+<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+   <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+      <div class="ui-grid-row">
+         <div class="ui-grid-col-3">
+            <label for="idSede">Tipo Area</label>
+            <p-dropdown id="idSede" name="idSede" required="true"
+                        [options]="ListaEstados" [autoWidth]="false"
+                        [(ngModel)]="JobProjection.idEstado" (onChange)="changeTypeArea()"
+                        #idSede="ngModel"
+            ></p-dropdown>
+            <div class="ui-message ui-messages-error ui-corner-all"
+                 *ngIf="f.submitted && !idSede.valid">
+               <i class="fa fa-close"></i>
+               Tipo vehiculo requerido
+            </div>
+         </div>
+         <div class="ui-grid-col-3">
+            <label for="idTipoArea">Area</label>
+            <p-dropdown id="idTipoArea" name="idTipoArea" required="true"
+                        [options]="ListaEstados" [autoWidth]="false" (onChange)="changeArea()"
+                        [(ngModel)]="JobProjection.idEstado"
+                        #idTipoArea="ngModel"
+            ></p-dropdown>
+            <div class="ui-message ui-messages-error ui-corner-all"
+                 *ngIf="f.submitted && !idTipoArea.valid">
+               <i class="fa fa-close"></i>
+               Tipo de Servicio requerido
+            </div>
+         </div>
+
+         <div class="ui-grid-col-3">
+            <label for="anioproyeccion">Año Proyección</label>
+            <input type="anioproyeccion" pInputText id="anioproyeccion" name="anioproyeccion"
+                   [(ngModel)]="JobProjection.nroPlazas"#anioproyeccion="ngModel"
+            />
+         </div>
+      </div>
+   </div>
+</form>
 <br><br>
 <div>
-   <!--<div class="row datable-header">-->
-      <!--<div class="col-md-6 col-xs-12 datatable-header-add">-->
-         <!--<button type="button" icon="fa-plus" label="Agregar Nueva Proyección Laboral"-->
-                 <!--pButton (click)="add()"></button>-->
-      <!--</div>-->
-      <!--<div class="col-md-6 col-xs-12 datatable-header-search">-->
-         <!--<div class="input-group">-->
-            <!--<div class="input-group-addon"><i class="fa fa-search"></i></div>-->
-            <!--<input #gb type="text" pInputText size="40" placeholder="Buscar..." class="form-control">-->
-         <!--</div>-->
-      <!--</div>-->
-   <!--</div>-->
    <p-dataTable  [value]="ListJobProjection" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
       <p-column field="tipoVehiculo" header="Area" [sortable]="true"></p-column>
       <p-column field="tipoServicio" header="Tipo de Servicio " [sortable]="true"></p-column>
@@ -89,17 +59,17 @@
    </p-dataTable>
 </div>
 <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-   <div class="ui-grid-row">
-      <div class="ui-grid-col-4">
-         <label for="idSede">Sede</label>
-      </div>
-      <div class="ui-grid-col-4">
-         <label for="idTipoArea">Tipo Area</label>
-      </div>
-      <div class="ui-grid-col-4">
-         <label for="idEstado">Estado</label>
-      </div>
-   </div>
+   <!--<div class="ui-grid-row">-->
+      <!--<div class="ui-grid-col-4">-->
+         <!--<label for="idSede">Sede</label>-->
+      <!--</div>-->
+      <!--<div class="ui-grid-col-4">-->
+         <!--<label for="idTipoArea">Tipo Area</label>-->
+      <!--</div>-->
+      <!--<div class="ui-grid-col-4">-->
+         <!--<label for="idEstado">Estado</label>-->
+      <!--</div>-->
+   <!--</div>-->
 </div>
 <p-confirmDialog width="400"></p-confirmDialog>
 
