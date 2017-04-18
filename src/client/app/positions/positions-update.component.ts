@@ -23,11 +23,13 @@ export class PositionsUpdateComponent {
    allPosition: Positions[] = [];
    acordion: number;
    categoryTypes: SelectItem[] = [];
+   listcategoryTypes: any[] = [];
    areaTypes: SelectItem[] = [];
    bossPositionTypes: SelectItem[] = [];
    stateTypes: SelectItem[] = [];
    liststateTypes: any[];
    levelTypes: SelectItem[] = [];
+   listslevelTypes: any[] = [];
    genderTypes: SelectItem[] = [];
    maritalStatusTypes: SelectItem[] = [];
    msgs: Message[] = [];
@@ -49,12 +51,25 @@ export class PositionsUpdateComponent {
                 private _nav: NavService, ) {
       
       this.listPositionsService.getCategoryTypes().subscribe( res => {
+         this.listcategoryTypes = res;
          this.categoryTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
             this.categoryTypes.push( {
                                         label: dp.categoria,
                                         value: dp.idCategoria
                                      } );
+         }
+         
+      } );
+      
+      this.listPositionsService.getLevelTypes().subscribe( resl => {
+         this.listslevelTypes = resl;
+         this.levelTypes.push( { label: "Seleccione", value: null } );
+         for ( let dp of resl ) {
+            this.levelTypes.push( {
+                                     label: dp.nombre,
+                                     value: dp.idListaNivelCargo
+                                  } );
          }
       } );
    
@@ -90,15 +105,7 @@ export class PositionsUpdateComponent {
          }
       } );
    
-      this.listPositionsService.getLevelTypes().subscribe( res => {
-         this.levelTypes.push( { label: "Seleccione", value: null } );
-         for ( let dp of res ) {
-            this.levelTypes.push( {
-                                     label: dp.nombre,
-                                     value: dp.idListaNivelCargo
-                                  } );
-         }
-      } );
+      
    
       this.listEmployeesService.getGenderTypes().subscribe(res => {
          this.genderTypes.push({label: "Seleccione", value: null});
@@ -135,7 +142,7 @@ export class PositionsUpdateComponent {
                   this.acordion = this.step-1;
                }
             }
-
+            this.getCategory();
             this.positionsService.getListPositions().subscribe( res => {
                this.allPosition = res;
                this.bossPositionTypes.push( { label: "Seleccione", value: null } );
@@ -166,7 +173,7 @@ export class PositionsUpdateComponent {
          this.position.paso = step+1;
          this.step = this.position.paso;
       }
-      this.positionsService.update( this.position )
+      this.positionsService.updateEstado( this.position )
       .subscribe( data => {
          this._nav.setTab( step );
          this.acordion = step;
@@ -183,7 +190,7 @@ export class PositionsUpdateComponent {
          this.step = 2;
       }
    
-      this.positionsService.update( this.position )
+      this.positionsService.update1( this.position )
       .subscribe( data => {
          this._nav.setTab( 1 );
          this.acordion = 1;
@@ -200,7 +207,7 @@ export class PositionsUpdateComponent {
          this.position.paso = 4;
          this.step = 4;
       }
-      this.positionsService.update( this.position )
+      this.positionsService.update2( this.position )
       .subscribe( data => {
          this._nav.setTab( 3 );
          this.acordion = 3;
@@ -217,7 +224,7 @@ export class PositionsUpdateComponent {
          this.position.paso = 7;
          this.step = 7;
       }
-      this.positionsService.update( this.position )
+      this.positionsService.update3( this.position )
       .subscribe( data => {
          this._nav.setTab( 6 );
          this.acordion = 6;
@@ -236,7 +243,7 @@ export class PositionsUpdateComponent {
       }
       this._nav.setTab(8);
       this.acordion = 8;
-      this.positionsService.update( this.position )
+      this.positionsService.update4( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          //this.router.navigate(['positions/update/'+data.idCargo]);
@@ -251,7 +258,7 @@ export class PositionsUpdateComponent {
          this.position.paso = 10;
          this.step = 10;
       }
-      this.positionsService.update( this.position )
+      this.positionsService.update5( this.position )
       .subscribe( data => {
          this._nav.setTab( 9 );
          this.acordion = 9;
@@ -268,7 +275,7 @@ export class PositionsUpdateComponent {
          this.step = 16;
          this.position.paso = 16;
       }
-      this.positionsService.update( this.position )
+      this.positionsService.update6( this.position )
       .subscribe( data => {
          this._nav.setTab( 15 );
          this.acordion = 15;
@@ -288,7 +295,7 @@ export class PositionsUpdateComponent {
       if ( this.position.idEstado == this.noAprobado ) {
          this.position.indicadorHabilitado = false;
       }
-      this.positionsService.update( this.position )
+      this.positionsService.updateEstado( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          //this.router.navigate(['positions/update/'+data.idCargo]);
@@ -355,4 +362,18 @@ export class PositionsUpdateComponent {
       }
       return treeChild;
    }
+   
+   getCategory(){
+      let selectCategory = this.listcategoryTypes.filter( t => t.puntosMinimos <= this.position.puntos
+      && t.puntosMaximos >= this.position.puntos );
+      if(selectCategory.length > 0){
+         this.position.idCategoria = selectCategory[0].idCategoria;
+         this.nivel = selectCategory[0].nivel;
+      }else{
+         this.position.idCategoria = null;
+         this.nivel = null;
+      }
+      
+   }
+
 }

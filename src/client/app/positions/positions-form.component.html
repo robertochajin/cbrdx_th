@@ -50,7 +50,7 @@
                                  </div>
                                  <div class="form-group col-md-6">
                                     <label for="personaACargoDir">* Personas a cargo Directas</label>
-                                    <input type="text" pInputText id="personaACargoDir" name="personaACargoDir" type="number"
+                                    <input type="text" pInputText id="personaACargoDir" name="personaACargoDir" type="number" min="0"
                                            [(ngModel)]="position.personaACargoDir" #personaACargoDir="ngModel" required
                                     />
                                     <div class="ui-message ui-messages-error ui-corner-all"
@@ -77,7 +77,7 @@
                                  <div class="form-group col-md-6">
                                     <label for="personaACargoInd">* Personas a cargo Indirectas</label>
                                     <input type="text" pInputText id="personaACargoInd" name="personaACargoInd" required
-                                           [(ngModel)]="position.personaACargoInd" #personaACargoInd="ngModel" type="number"
+                                           [(ngModel)]="position.personaACargoInd" #personaACargoInd="ngModel" type="number" min="0"
                                     />
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !personaACargoInd.valid">
@@ -90,7 +90,7 @@
                                  <div class=" col-sm-12">
                                     <label for="mision">* Misión del cargo</label>
                                     <textarea pInputTextarea id="mision" name="mision"
-                                              [(ngModel)]="position.mision" #mision="ngModel"
+                                              [(ngModel)]="position.mision" #mision="ngModel" maxlength="500"
                                               [required]="true"></textarea>
                                     <div *ngIf="f0.submitted && !mision.valid"
                                          class="ui-message ui-messages-error ui-corner-all">
@@ -124,7 +124,7 @@
                            </div>
                            <div class="row form-footer-buttons">
                               <div class="form-group col-md-12">
-                                 <button icon="fa-plus" label="Guardar y Siguiente" type="submit"
+                                 <button icon="fa-plus" label="Siguiente" type="submit"
                                          pButton></button>
                               </div>
                            </div>
@@ -140,7 +140,7 @@
                      </div>
                   </div>
                </div>
-               <positions-observations-list *ngIf="position.idEstado == aprobado || position.idEstado == noAprobado" [position]="position"></positions-observations-list>
+               <positions-observations-list *ngIf="(position.idEstado == aprobado || position.idEstado == noAprobado) && position.idCargo > 0" [position]="position"></positions-observations-list>
                
             
             </fieldset>
@@ -164,7 +164,7 @@
                                     <label for="interrelacionesInternas">Internas</label>
                                     <textarea pInputTextarea id="interrelacionesInternas" name="interrelacionesInternas"
                                               [(ngModel)]="position.interrelacionesInternas"
-                                              #interrelacionesInternas="ngModel"
+                                              #interrelacionesInternas="ngModel" maxlength="500"
                                               [required]="true"></textarea>
                                     <div *ngIf="f2.submitted && !interrelacionesInternas.valid"
                                          class="ui-message ui-messages-error ui-corner-all">
@@ -175,7 +175,7 @@
                                     <label for="interrelacionesInternas">Externas</label>
                                     <textarea pInputTextarea id="interrelacionesExternas" name="interrelacionesExternas"
                                               [(ngModel)]="position.interrelacionesExternas"
-                                              #interrelacionesExternas="ngModel"
+                                              #interrelacionesExternas="ngModel" maxlength="500"
                                               [required]="true"></textarea>
                                     <div *ngIf="f2.submitted && !interrelacionesExternas.valid"
                                          class="ui-message ui-messages-error ui-corner-all">
@@ -186,7 +186,7 @@
                            </div>
                            <div class="row form-footer-buttons">
                               <div class="form-group col-md-12">
-                                 <button icon="fa-plus" label="Guardar y Siguente" type="submit"
+                                 <button icon="fa-plus" label="Siguiente" type="submit"
                                          pButton></button>
                               </div>
                            </div>
@@ -221,7 +221,7 @@
                                  <div class=" col-sm-12">
                                     <label for="responsabilidadesAd">Responsabilidades Complementarias</label>
                                     <textarea pInputTextarea id="responsabilidadesAd"
-                                              name="responsabilidadesAd"
+                                              name="responsabilidadesAd" maxlength="500"
                                               [(ngModel)]="position.responsabilidadesAd"
                                               #responsabilidadesAd="ngModel"
                                               [required]="true"></textarea>
@@ -234,7 +234,7 @@
                            </div>
                            <div class="row form-footer-buttons">
                               <div class="form-group col-md-12">
-                                 <button icon="fa-plus" label="Guardar y Siguente" type="submit"
+                                 <button icon="fa-plus" label="Siguiente" type="submit"
                                          pButton></button>
                               </div>
                            </div>
@@ -276,7 +276,7 @@
                                  <div class=" col-sm-12">
                                     <label for="actividadesSupervisa">Actividades que supervisa</label>
                                     <textarea pInputTextarea id="actividadesSupervisa"
-                                              name="responsabilidadesAd"
+                                              name="responsabilidadesAd" maxlength="500"
                                               [(ngModel)]="position.actividadesSupervisa"
                                               #actividadesSupervisa="ngModel"
                                               [required]="true"></textarea>
@@ -287,10 +287,15 @@
                                  </div>
                               </div>
                            </div>
+                           <position-authorities *ngIf="position.idCargo" [position]="position"></position-authorities>
                            <div class="row form-footer-buttons">
-                              <div class="form-group col-md-12">
-                                 <button icon="fa-plus" label="Guardar y Siguente" type="submit"
-                                         pButton></button>
+                              <div class="form-group">
+                                 <div class="col-md-10">
+                                 </div>
+                                 <div class="form-group col-md-2">
+                                    <button icon="fa-plus" label="Siguiente" type="submit"
+                                            pButton></button>
+                                 </div>
                               </div>
                            </div>
                         </form>
@@ -298,7 +303,7 @@
                   </div>
                </div>
             </fieldset>
-            <position-authorities *ngIf="position.idCargo" [position]="position"></position-authorities>
+            
          </p-accordionTab>
          
          <p-accordionTab header="Requisitos generales" [selected]="acordion == 8"
@@ -316,7 +321,7 @@
                                        desempeño de las funciones del cargo?</label>
                                     <textarea pInputTextarea id="conocimientosBasicos" name="conocimientosBasicos"
                                               [(ngModel)]="position.conocimientosBasicos"
-                                              #conocimientosBasicos="ngModel"
+                                              #conocimientosBasicos="ngModel" maxlength="200"
                                               [required]="true"></textarea>
                                     <div *ngIf="f8.submitted && !conocimientosBasicos.valid"
                                          class="ui-message ui-messages-error ui-corner-all">
@@ -336,14 +341,14 @@
                                  <div class=" col-sm-12">
                                     <label for="otrosRequisitos">Otros requisitos</label>
                                     <textarea pInputTextarea id="otrosRequisitos" name="otrosRequisitos"
-                                              [(ngModel)]="position.otrosRequisitos" #otrosRequisitos="ngModel"
+                                              [(ngModel)]="position.otrosRequisitos" #otrosRequisitos="ngModel" maxlength="200"
                                               [required]="true"></textarea>
                                  </div>
                               </div>
                               <div class="row">
                                  <div class="col-md-4">
                                     <label for="edad">Edad</label>
-                                    <input type="text" pInputText id="edad" name="edad" type="number"
+                                    <input type="text" pInputText id="edad" name="edad" type="number" min="0"
                                            [(ngModel)]="position.edad" #edad="ngModel"
                                     />
                                  </div>
@@ -378,7 +383,7 @@
                            </div>
                            <div class="row form-footer-buttons">
                               <div class="form-group col-md-12">
-                                 <button icon="fa-plus" label="Guardar y Siguente" type="submit"
+                                 <button icon="fa-plus" label="Siguiente" type="submit"
                                          pButton></button>
                               </div>
                            </div>
@@ -426,8 +431,9 @@
                               <div class="row">
                                  <div class="form-group col-md-3">
                                     <label for="puntos">* Puntos de valoración </label>
-                                    <input type="text" pInputText id="puntos" name="puntos"
+                                    <input pInputText id="puntos" name="puntos" type="number" min="0"
                                            [(ngModel)]="position.puntos" #puntos="ngModel"
+                                           (change)="getCategory()"
                                            required/>
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f14.submitted && !puntos.valid">
@@ -435,21 +441,15 @@
                                        Código es requerido
                                     </div>
                                  </div>
-                                 <div class="form-group col-md-3">
-                                    <label for="idNivelEducacion">Nivel del cargo</label>
-                                    <p-dropdown id="idNivelEducacion" name="idNivelEducacion" required="true" disabled="false"
-                                                [options]="levelTypes" [autoWidth]="false"
-                                                [(ngModel)]="nivel"
-                                                #idNivelEducacion="ngModel"
-                                    ></p-dropdown>
-                                 </div>
+                                 
                               </div>
                               <div class="row">
-                                 <div class="form-group col-md-12">
+                                 <div class="form-group col-md-9">
                                     <label for="idCategory">Categoria de acuerdo al mapa de cargos</label>
                                     <p-dropdown id="idCategory" name="idCategory" required="true"
                                                 [options]="categoryTypes" [autoWidth]="false"
                                                 [(ngModel)]="position.idCategoria"
+                                                disabled="true"
                                                 #idCategory="ngModel"
                                     ></p-dropdown>
                                     <div class="ui-message ui-messages-error ui-corner-all"
@@ -457,6 +457,13 @@
                                        <i class="fa fa-close"></i>
                                        Categoria requerida
                                     </div>
+                                 </div>
+                                 <div class="form-group col-md-3">
+                                    <label for="idNivelEducacion">Nivel del cargo</label>
+                                    <input type="text" pInputText id="idNivelEducacion" name="idNivelEducacion"
+                                           [(ngModel)]="nivel" #idNivelEducacion="ngModel"
+                                           disabled="true"
+                                    />
                                  </div>
                               </div>
                               <div class="row">
@@ -479,7 +486,7 @@
                            </div>
                            <div class="row form-footer-buttons">
                               <div class="form-group col-md-12">
-                                 <button icon="fa-plus" label="Guardar y Siguente" type="submit"
+                                 <button icon="fa-plus" label="Siguiente" type="submit"
                                          pButton></button>
                               </div>
                            </div>
