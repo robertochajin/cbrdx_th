@@ -4,9 +4,7 @@
       <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
       <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
    </p-footer>
-
 </p-confirmDialog>
-
 <div *ngIf="addinglocation">
    <div *ngIf="physicStructure">
       <div class="row">
@@ -22,7 +20,7 @@
                <div class="ui-grid-col-8">
                   <label for="nombre">Nombre</label>
                   <input id="nombre" name="nombre" #nombre="ngModel" pInputText type="text"
-                         [(ngModel)]="physicStructure.estructuraFisica" required="true"/>
+                         [(ngModel)]="physicStructure.estructuraFisica" required="true" (keyup)="capitalize($event)"/>
                   <div class="ui-message ui-messages-error ui-corner-all"
                        *ngIf="f.submitted && !nombre.valid">
                      <i class="fa fa-close"></i>
@@ -30,7 +28,7 @@
                   </div>
                </div>
                <div class="ui-grid-col-4">
-                  <label for="codigo">Codigo</label>
+                  <label for="codigo">Código</label>
                   <input id="codigo" name="codigo" #codigo="ngModel" pInputText type="text"
                          [(ngModel)]="physicStructure.codigo" required="true" maxlength="15" pattern="[A-Z0-9]{0,15}"
                          (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
@@ -88,12 +86,12 @@
                <div class="ui-grid-col-12">
                   <label for="correo">Correo Electrónico</label>
                   <input id="correo" name="correo" #correo="ngModel" pInputText type="text"
-                         [(ngModel)]="physicStructure.correoElectronico" required="true" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"/>
-                  <!--<div class="ui-message ui-messages-error ui-corner-all"-->
-                       <!--*ngIf="!correo.valid">-->
-                     <!--<i class="fa fa-close"></i>-->
-                     <!--Correo Electrónico no valido-->
-                  <!--</div>-->
+                         [(ngModel)]="physicStructure.correoElectronico" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"/>
+                  <div class="ui-message ui-messages-error ui-corner-all"
+                       *ngIf="f.submitted &&!correo.valid">
+                     <i class="fa fa-close"></i>
+                     Correo Electrónico no valido
+                  </div>
                </div>
             </div>
             <div class="ui-grid-row">

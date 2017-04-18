@@ -40,7 +40,7 @@ export class PersonalityComponent implements OnInit {
             this.personality = res;
             this.listPersonality.map((lca: ListPositionPersonality) => {
                this.personality.map((ca: PositionPersonality) => {
-                  if (ca.idAtributo == lca.idListaTipoPersona)
+                  if (ca.idAtributo == lca.idListaAtributoCargo)
                      lca.descripcion = ca.descripcion
                });
             });
@@ -51,7 +51,7 @@ export class PersonalityComponent implements OnInit {
    update(lca: ListPositionPersonality) {
       this.personalityService.getAllByPosition(this.position.idCargo).subscribe(res => {
          this.personality = res;
-         let obj = this.personality.find(o => lca.idListaTipoPersona == o.idAtributo);
+         let obj = this.personality.find(o => lca.idListaAtributoCargo == o.idAtributo);
 
          if (obj != undefined) {
             obj.descripcion = lca.descripcion;
@@ -68,7 +68,7 @@ export class PersonalityComponent implements OnInit {
    save(lca: ListPositionPersonality) {
       let personality = new PositionPersonality();
       personality.idCargo = this.position.idCargo;
-      personality.idAtributo = lca.idListaTipoPersona;
+      personality.idAtributo = lca.idListaAtributoCargo;
       personality.descripcion = lca.descripcion;
 
       this.personalityService.add(personality).subscribe(res => {

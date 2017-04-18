@@ -117,4 +117,8 @@ export class PhysicStructureUpdateComponent {
          }
       });
    }
+   capitalize(event:any) {
+      let input = event.target.value;
+      event.target.value = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
+   }
 }

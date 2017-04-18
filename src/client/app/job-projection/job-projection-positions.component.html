@@ -1,0 +1,57 @@
+<h3 class="first">Proyección laboral</h3>
+<div class="row">
+   <div class="col-md-offset-2 col-md-8 col-sm-12">
+      <form class="form-horizontal">
+         <fieldset>
+            <div class="row">
+               <label class="col-md-3 col-sm-6 col-xs-4 control-label">Codigo:</label>
+               <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{demo}}</strong></label>
+
+               <label class="col-md-3 col-sm-6 col-xs-4 control-label">Nombre:</label>
+               <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{demo}}</strong></label>
+            </div>
+            <div class="row">
+               <label class="col-md-3 col-sm-6 col-xs-4 control-label">Tipo:</label>
+               <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{demo}}</strong></label>
+
+               <label class="col-md-3 col-sm-6 col-xs-4 control-label">Centro de Costos:</label>
+               <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{demo}}</strong></label>
+            </div>
+            <div class="row">
+               <label class="col-md-3 col-sm-6 col-xs-4 control-label">Proyección:</label>
+               <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{demo}}</strong></label>
+
+               <label class="col-md-3 col-sm-6 col-xs-4 control-label">Estado:</label>
+               <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{demo}}</strong></label>
+            </div>
+         </fieldset>
+      </form>
+   </div>
+</div><br><br>
+<div>
+   <div class="row datable-header">
+      <div class="col-md-6 col-xs-12 datatable-header-add">
+         <button type="button" icon="fa-plus" label="Asignar Cargos"
+                 pButton (click)="add()"></button>
+      </div>
+   </div>
+   <p-dataTable [value]="ListJobProjection" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+      <p-column field="tipoVehiculo" header="Area" [sortable]="true"></p-column>
+      <p-column field="tipoServicio" header="Tipo de Servicio " [sortable]="true"></p-column>
+      <p-column field="marca" header="Plazas Actuales" [sortable]="true"></p-column>
+      <p-column field="modelo" header="Plazas Proyectdas" [sortable]="true"></p-column>
+      <p-column field="placa" header="Costo Proyectado" [sortable]="true"></p-column>
+      <p-column header="Acciones" styleClass="datatable-col-action">
+         <template let-projection="rowData" pTemplate="body">
+            <button type="button" icon="fa-eye" class="ui-button-info"
+                    pButton (click)="detail(projection)"></button>
+            <button type="button" icon="fa-pencil" class="ui-button-success"
+                    pButton (click)="update(projection)"></button>
+            <!--<button type="button" icon="fa-trash" class="ui-button-danger"-->
+            <!--pButton (click)="del(projection)"></button>-->
+         </template>
+      </p-column>
+   </p-dataTable>
+</div>
+<p-confirmDialog width="400"></p-confirmDialog>
+
