@@ -6,6 +6,7 @@ import { OrganizationalStructure } from "../_models/organizationalStructure";
 import { TreeNode } from "primeng/components/common/api";
 import { SelectItem, Message } from "primeng/primeng";
 import { Search } from "../_models/search";
+import { ListEmployeesService }     from '../_services/lists-employees.service';
 
 @Component( {
                moduleId: module.id,
@@ -34,28 +35,82 @@ export class OrganizationalStructureComponent implements OnInit {
    };
    
    displayDialog: boolean = false;
-   Comunas: boolean = false;
-   Localidades: boolean = false;
-   Resguardos: boolean = false;
-   resultSearch: Search[];
-   selectedSearch: SelectItem;
-   documentTypes: SelectItem;
    codeExists: boolean = false;
    
-   constructor( private router: Router, private organizationalStructureService: OrganizationalStructureService ) {
-      organizationalStructureService.listOrganizationalStructure( ).subscribe( res => {
-         this.listOrganizationalStructure = res;
-         for ( let c of this.listOrganizationalStructure.filter( t => t.idEstructuraOrganizacional == 0 ) ) {
-            this.treedCompany.push( {
-                                               "label": c.nombre,
-                                               "data": c,
-                                               "children": [ {
-                                                  "label": '+ Cargando...',
-                                                  "data": ""
-                                               } ]
-                                            } );
-         }
-      } );
+   documentTypes: SelectItem[] = [];
+   strctureTypes: SelectItem[] = [];
+   costTypes: SelectItem[] = [];
+   areaTypes: SelectItem[] = [];
+   physicalTypes: SelectItem[] = [];
+   
+   constructor(
+      private router: Router,
+      private organizationalStructureService: OrganizationalStructureService,
+      private listEmployeesService: ListEmployeesService
+      ) {
+         organizationalStructureService.listOrganizationalStructure( ).subscribe( res => {
+            this.listOrganizationalStructure = res;
+            for ( let c of this.listOrganizationalStructure.filter( t => t.idEstructuraOrganizacional == 0 ) ) {
+               this.treedCompany.push( {
+                                                  "label": c.nombre,
+                                                  "data": c,
+                                                  "children": [ {
+                                                     "label": '+ Cargando...',
+                                                     "data": ""
+                                                  } ]
+                                               } );
+            }
+         } );
+      
+         this.listEmployeesService.getDocumentTypes().subscribe(res => {
+            this.documentTypes.push({label: "Seleccione", value: null});
+            for (let dp of res) {
+               this.documentTypes.push({
+                                          label: dp.nombreListaTipoDocumento,
+                                          value: dp.idListaTipoDocumento
+                                       });
+            }
+         });
+         
+         this.organizationalStructureService.getStrctureTypes().subscribe(res => {
+            this.strctureTypes.push({label: "Seleccione", value: null});
+            for (let dp of res) {
+               this.strctureTypes.push({
+                                          label: dp.nombreListaTipoDocumento,
+                                          value: dp.idListaTipoDocumento
+                                       });
+            }
+         });
+         
+         this.organizationalStructureService.getCostTypes().subscribe(res => {
+            this.costTypes.push({label: "Seleccione", value: null});
+            for (let dp of res) {
+               this.strctureTypes.push({
+                                          label: dp.nombreListaTipoDocumento,
+                                          value: dp.idListaTipoDocumento
+                                       });
+            }
+         });
+         
+         this.organizationalStructureService.getAreaTypes().subscribe(res => {
+            this.costTypes.push({label: "Seleccione", value: null});
+            for (let dp of res) {
+               this.strctureTypes.push({
+                                          label: dp.nombreListaTipoDocumento,
+                                          value: dp.idListaTipoDocumento
+                                       });
+            }
+         });
+         
+         this.organizationalStructureService.getPhysicalTypes().subscribe(res => {
+            this.physicalTypes.push({label: "Seleccione", value: null});
+            for (let dp of res) {
+               this.strctureTypes.push({
+                                          label: dp.nombreListaTipoDocumento,
+                                          value: dp.idListaTipoDocumento
+                                       });
+            }
+         });
    
       /*organizationalStructureService.listOrganizationalStructureTypes().subscribe( res => {
         this.listOrganizationalStructureTypes = res;
