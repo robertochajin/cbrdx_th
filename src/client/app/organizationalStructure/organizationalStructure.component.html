@@ -1,0 +1,209 @@
+<h3>Estructura Organizacional</h3>
+<div class="row datable-header">
+   <div class="col-md-6 col-xs-12 datatable-header-add">
+      <button type="button" pButton icon="fa-plus" (click)="newCompany()" label="{{btnnuevo.label}}"
+              *ngIf="btnnuevo.show"></button>
+      <button type="button" pButton icon="fa-plus" (click)="newBranch()" label="{{btnnuevobranch.label}}"
+              *ngIf="btnnuevobranch.show"></button>
+   </div>
+</div>
+<div class="ui-grid-row">
+   
+   <div class="col-md-4">
+      <p-tree id="trvDivisionPolitica" [(value)]="treedivisionPolitica" selectionMode="single"
+              [(selection)]="selectedNode"
+              (onNodeSelect)="nodeSelect($event.node)"
+              (onNodeExpand)="nodeExpand($event.node)"
+      ></p-tree>
+   </div>
+   
+   <div class="col-md-8">
+      <p-fieldset legend="{{header}}">
+         <div class="row-fluid">
+            <div class="col-md-12">
+               <form (ngSubmit)="!codeExists&&f.valid && save()" #f="ngForm" novalidate>
+                  <div *ngIf="empresa">
+                     <div class="row">
+                        <div class="form-group" >
+                           <label for="documentTypes" class="control-label col-sm-3">* Típo Documento</label>
+                           <div class=" col-sm-9">
+                              <p-dropdown id="documentTypes" name="areaTypes"
+                                          [options]="documentTypes" [autoWidth]="false"
+                                          [(ngModel)]="organizationalStructure.idTipoDocumento"
+                                          #documentTypes="ngModel"></p-dropdown>
+                              <div class="ui-message ui-messages-error ui-corner-all"
+                                   *ngIf="f.submitted && !documentTypes.valid"
+                                   class="help-block">
+                                 Tipo Documento es requerido
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group">
+                           <label for="codigo" class="control-label col-sm-3">* Número de Identificación </label>
+                           <div class=" col-sm-9">
+                              <input type="text" pInputText class="form-control" id="codigo"
+                                     name="codigo"
+                                     [(ngModel)]="organizationalStructure.codigo"
+                                     (change)="validateCode()"
+                                     (keyup)="capitalizeCodigo()"
+                                     #codigo="ngModel" maxlength="10"
+                                     required/>
+                              <div class="ui-message ui-messages-error ui-corner-all"
+                                   *ngIf="f.submitted && !codigo.valid">
+                                 Código es requerido
+                              </div>
+                              <div class="ui-message ui-messages-error ui-corner-all"
+                                   *ngIf="codeExists">
+                                 Ya se encuentra registrado ese código
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div *ngIf="!empresa">
+                     <div class="row">
+                        <div class="form-group">
+                           <h4>{{labelPadre}}</h4>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group">
+                           <label for="codigo" class="control-label col-sm-3">* {{ 'LBL_CODIGO' | translate }} </label>
+                           <div class=" col-sm-9">
+                              <input type="text" pInputText class="form-control" id="codigo"
+                                     name="codigo"
+                                     [(ngModel)]="organizationalStructure.codigo"
+                                     (change)="validateCode()"
+                                     (keyup)="capitalizeCodigo()"
+                                     #codigo="ngModel" maxlength="10"
+                                     required/>
+                              <div class="ui-message ui-messages-error ui-corner-all"
+                                   *ngIf="f.submitted && !codigo.valid">
+                                 Código es requerido
+                              </div>
+                              <div class="ui-message ui-messages-error ui-corner-all"
+                                   *ngIf="codeExists">
+                                 Ya se encuentra registrado ese código
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group">
+                           <label for="nombre" class="control-label col-sm-3">* Nombre </label>
+                           <div class=" col-sm-9">
+                              <input type="text" pInputText class="form-control" id="nombre"
+                                     name="nombre"
+                                     [(ngModel)]="organizationalStructure.nombre"
+                                     #nombre="ngModel"
+                                     (keyup)="capitalize()"
+                                     required/>
+                              <div class="ui-message ui-messages-error ui-corner-all"
+                                   *ngIf="f.submitted && !nombre.valid"
+                                   class="help-block">
+                                 Nombre es requerido
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group" *ngIf="tabselected == 4">
+                           <label for="strctureTypes" class="control-label col-sm-3">* Tipo Estructura </label>
+                           <div class=" col-sm-9">
+                              <p-dropdown id="strctureTypes" name="strctureTypes"
+                                          [options]="divisionPoliticaEstrato" [autoWidth]="false"
+                                          [(ngModel)]="organizationalStructure.idTipoEstructura"
+                                          #strctureTypes="ngModel"></p-dropdown>
+                              <div class="ui-message ui-messages-error ui-corner-all"
+                                   *ngIf="f.submitted && !strctureTypes.valid"
+                                   class="help-block">
+                                 Nombre es requerido
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group" *ngIf="tabselected == 4">
+                           <label for="costCenter" class="control-label col-sm-3">* Centro de Costo</label>
+                           <div class=" col-sm-9">
+                              <p-dropdown id="costCenter" name="costCenter"
+                                          [options]="divisionPoliticaEstrato" [autoWidth]="false"
+                                          [(ngModel)]="organizationalStructure.idCentroCostos"
+                                          #costCenter="ngModel"></p-dropdown>
+                              <div class="ui-message ui-messages-error ui-corner-all"
+                                   *ngIf="f.submitted && !costCenter.valid"
+                                   class="help-block">
+                                 Centro de Costo es requerido
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group" *ngIf="tabselected == 4">
+                           <label for="areaTypes" class="control-label col-sm-3">* Tipo de Area</label>
+                           <div class=" col-sm-9">
+                              <p-dropdown id="areaTypes" name="areaTypes"
+                                          [options]="divisionPoliticaEstrato" [autoWidth]="false"
+                                          [(ngModel)]="organizationalStructure.idTipoArea"
+                                          #areaTypes="ngModel"></p-dropdown>
+                              <div class="ui-message ui-messages-error ui-corner-all"
+                                   *ngIf="f.submitted && !areaTypes.valid"
+                                   class="help-block">
+                                 Centro de Costo es requerido
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group" *ngIf="tabselected == 4">
+                           <label for="areaTypes" class="control-label col-sm-3">* Estructura Fisica</label>
+                           <div class=" col-sm-9">
+                              <p-dropdown id="estrcturaFisica" name="areaTypes"
+                                          [options]="divisionPoliticaEstrato" [autoWidth]="false"
+                                          [(ngModel)]="organizationalStructure.idEstructuraFisica"
+                                          #areaTypes="ngModel"></p-dropdown>
+                              <div class="ui-message ui-messages-error ui-corner-all"
+                                   *ngIf="f.submitted && !areaTypes.valid"
+                                   class="help-block">
+                                 Centro de Costo es requerido
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     
+                     <div class="row">
+                        <div class="form-group">
+                           <label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate }}</label>
+                           <div class=" col-sm-9">
+                              <p-checkbox binary="true" id="indicador" name="indicador"
+                                          [(ngModel)]="organizationalStructure.indicadorHabilitado"
+                                          #indicador="ngModel"></p-checkbox>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row form-footer-buttons">
+                     <div class="form-group col-md-12">
+                        <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+                        <button pButton type="submit" formaction="" label="{{ 'BTN_GUARDAR' | translate }}"></button>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </p-fieldset>
+      <p-dialog header="Confirmación" [(visible)]="displayDialog"
+                responsive="true" modal="true">
+         <p>{{ 'MSG_CONFIRMACION' | translate }}</p>
+         <p-footer>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+               <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>
+               <button type="button" pButton icon="fa-check" (click)="doCancel()" label="Si"></button>
+            </div>
+         </p-footer>
+      </p-dialog>
+   </div>
+</div>
+<p-growl [value]="msgs"></p-growl>
