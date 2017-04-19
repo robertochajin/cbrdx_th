@@ -1,184 +1,104 @@
 <aside class="main-sidebar">
-  <!-- sidebar: style can be found in sidebar.less -->
-  <section class="sidebar">
-    <!-- sidebar menu: : style can be found in sidebar.less -->
-    <ul class="sidebar-menu">
-      <li class="header">MENÚ PRINCIPAL</li>
+   <!-- Sidebar -->
+   <section class="sidebar">
 
-      <li class="treeview" routerLinkActive="active">
-        <a routerLink="/dashboard" >
-          <i class="icon-THDashboard icon-mainmenu"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
+      <ul class="sidebar-menu">
 
-      <li class="treeview" routerLinkActive="active">
-        <a routerLink="/employees" >
-          <i class="fa fa-users" aria-hidden="true" style="font-size: 1.5em;"></i>
-          <span>Colaboradores</span>
-        </a>
-      </li>
+         <li class="header">MENÚ PRINCIPAL</li>
 
-      <li class="treeview" routerLinkActive="active">
-        <a href="#">
-          <i class="icon-THApl icon-mainmenu"></i>
-          <span> Sistema </span>
-        </a>
-        <ul class="treeview-menu" >
-          <li routerLinkActive="active">
-            <a routerLink="/usuarios" ><i class="fa fa-circle-o"></i> Usuarios</a>
-          </li>
-          <li routerLinkActive="active">
-            <a routerLink="/centroCostos" routerLinkActive="active"><i class="fa fa-circle-o"></i> Centros de Costos</a>
-          </li>
-          <li routerLinkActive="active">
-            <a routerLink="/constantes" routerLinkActive="active"><i class="fa fa-circle-o"></i> Constantes</a>
-          </li>
-          <li routerLinkActive="active">
-            <a routerLink="/gruposGestion" routerLinkActive="active"><i class="fa fa-circle-o"></i> Grupos de
-              Gestión</a>
-          </li>
-          <li routerLinkActive="active">
-            <a routerLink="/listas" routerLinkActive="active"><i class="fa fa-circle-o"></i> Listas</a>
-          </li>
-          <li routerLinkActive="active">
-            <a routerLink="/tipoArea" routerLinkActive="active"><i class="fa fa-circle-o"></i> Tipos de Areas</a>
-          </li>
-          <li routerLinkActive="active">
-            <a routerLink="/ocupaciones" routerLinkActive="active"><i class="fa fa-circle-o"></i> Ocupaciones</a>
-          </li>
-          <li routerLinkActive="active">
-            <a routerLink="/divisionPolitica" routerLinkActive="active"><i class="fa fa-circle-o"></i> División Política</a>
-          </li>
-          <li routerLinkActive="active">
-            <a routerLink="/actividadeconomica" routerLinkActive="active"><i class="fa fa-circle-o"></i> Actividad
-              Económica</a>
-          </li>
-
-           <li routerLinkActive="active">
-              <a routerLink="/positions" routerLinkActive="active"><i class="fa fa-circle-o"></i>
-                 Cargos
-
-              </a>
-           </li>
-
-           <li routerLinkActive="active">
-              <a routerLink="/faults" routerLinkActive="active"><i class="fa fa-circle-o"></i>
-                 Faltas y Sanciones
-              </a>
-           </li>
-
-           <li routerLinkActive="active">
-           <a routerLink="/competencies-groups" routerLinkActive="active"><i class="fa fa-circle-o"></i>
-              Competencias<br />Habilidades
-           </a>
-        </li>
-
-           <li routerLinkActive="active">
-              <a routerLink="/risks" routerLinkActive="active"><i class="fa fa-circle-o"></i>
-                 Riesgos
-              </a>
-           </li>
-
-        </ul>
-      </li>
+         <li class="treeview" routerLinkActive="active">
+            <a routerLink="/dashboard">
+               <i class="icon-THDashboard icon-mainmenu"></i>
+               <span>Dashboard</span>
+            </a>
+         </li>
 
 
-       <li class="treeview" routerLinkActive="active">
-          <a href="#">
-             <i class="icon-THDO icon-mainmenu"></i>
-             <span> Organización </span>
-          </a>
-          <ul class="treeview-menu" >
-             <li routerLinkActive="active">
-                <a routerLink="/physic-structure" ><i class="fa fa-circle-o"></i> Estructura Fisica</a>
-             </li>
-             <li routerLinkActive="active">
-                <a routerLink="/organizational-structure" ><i class="fa fa-circle-o"></i> Estructura<br/>Organizacional</a>
-             </li>
-             <li routerLinkActive="active">
-                <a routerLink="/organizational-structure-positions" ><i class="fa fa-circle-o"></i> Planta de<br/>Colaboradores</a>
-             </li>
+         <li class="treeview" routerLinkActive="active">
+            <a routerLink="/employees">
+               <i class="fa fa-users" aria-hidden="true" style="font-size: 1.5em;"></i>
+               <span>Colaboradores</span>
+            </a>
+         </li>
 
-          </ul>
 
-      </li>
-<!--
-      <li class="treeview" routerLinkActive="active">
-        <a routerLink="/faults" >
-          <i class="fa fa-exclamation-triangle icon-mainmenu"></i>
-          <span>Faltas y Sanciones</span>
-        </a>
-      </li>
-
-      <li class="treeview" routerLinkActive="active">
-        <a routerLink="/positions" >
-          <i class="fa fa-exclamation-triangle icon-mainmenu"></i>
-          <span>Cargos</span>
-        </a>
-      </li>
--->
-    </ul>
-  </section>
-  <!-- /.sidebar -->
-</aside>
-
-<!--
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar bar1"></span>
-                <span class="icon-bar bar2"></span>
-                <span class="icon-bar bar3"></span>
-            </button>
-            <a class="navbar-brand" href="#">Dashboard</a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <p>Viernes, 6 de Enero de 2017</p>
-                    </a>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-bell"></i>
-                        <p class="notification">5</p>
-                        <p>Notificaciones</p>
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Notificación 1</a></li>
-                        <li><a href="#">Notificación 2</a></li>
-                        <li><a href="#">Notificación 3</a></li>
-                        <li><a href="#">Notificación 4</a></li>
-                        <li><a href="#">Otra Notificación</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-user"></i>
-                        <p>Usuario</p>
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="disabled"><a href="#">Temas disponible</a></li>
-                        <li class="menu-theme">
-                            <span class="colortheme colorwhite" onclick="changeTheme('white')"></span>
-                            <span class="colortheme colorblack" onclick="changeTheme('black')"></span>
-                            <span class="colortheme colorblue"  onclick="changeTheme('blue')"></span>
-                            <span class="colortheme colorgreen" onclick="changeTheme('green')"></span>
-                        </li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Editar Info</a></li>
-                        <li><a href="#">Cerrar Sesión</a></li>
-                    </ul>
-                </li>
+         <li class="treeview" routerLinkActive="active">
+            <a href="#">
+               <i class="fa fa-cogs" aria-hidden="true" style="font-size: 1.5em;"></i>
+               <span> Sistema </span>
+            </a>
+            <ul class="treeview-menu">
+               <li routerLinkActive="active">
+                  <a routerLink="/usuarios"><i class="fa fa-circle-o"></i> Usuarios</a>
+               </li>
+               <li routerLinkActive="active">
+                  <a routerLink="/constantes" routerLinkActive="active"><i class="fa fa-circle-o"></i> Constantes</a>
+               </li>
+               <li routerLinkActive="active">
+                  <a routerLink="/gruposGestion" routerLinkActive="active"><i class="fa fa-circle-o"></i> Grupos de Gestión</a>
+               </li>
+               <li routerLinkActive="active">
+                  <a routerLink="/listas" routerLinkActive="active"><i class="fa fa-circle-o"></i> Listas</a>
+               </li>
+               <li routerLinkActive="active">
+                  <a routerLink="/ocupaciones" routerLinkActive="active"><i class="fa fa-circle-o"></i> Ocupaciones</a>
+               </li>
+               <li routerLinkActive="active">
+                  <a routerLink="/divisionPolitica" routerLinkActive="active"><i class="fa fa-circle-o"></i> División Política</a>
+               </li>
+               <li routerLinkActive="active">
+                  <a routerLink="/actividadeconomica" routerLinkActive="active"><i class="fa fa-circle-o"></i> Actividad Económica</a>
+               </li>
             </ul>
+         </li>
 
-        </div>
-    </div>
-</nav>
--->
+
+         <li class="treeview" routerLinkActive="active">
+            <a href="#">
+               <i class="icon-THApl icon-mainmenu"></i>
+               <span> Administración </span>
+            </a>
+            <ul class="treeview-menu">
+               <li routerLinkActive="active">
+                  <a routerLink="/centroCostos" routerLinkActive="active"><i class="fa fa-circle-o"></i> Centros de Costos</a>
+               </li>
+               <li routerLinkActive="active">
+                  <a routerLink="/tipoArea" routerLinkActive="active"><i class="fa fa-circle-o"></i> Tipos de Areas</a>
+               </li>
+               <li routerLinkActive="active">
+                  <a routerLink="/faults" routerLinkActive="active"><i class="fa fa-circle-o"></i>Faltas y Sanciones</a>
+               </li>
+               <li routerLinkActive="active">
+                  <a routerLink="/competencies-groups" routerLinkActive="active"><i class="fa fa-circle-o"></i>Competencias<br/>Habilidades</a>
+               </li>
+               <li routerLinkActive="active">
+                  <a routerLink="/risks" routerLinkActive="active"><i class="fa fa-circle-o"></i>Riesgos Laborales</a>
+               </li>
+               <li routerLinkActive="active">
+                  <a routerLink="/positions" routerLinkActive="active"><i class="fa fa-circle-o"></i>Cargos</a>
+               </li>
+            </ul>
+         </li>
+
+
+         <li class="treeview" routerLinkActive="active">
+            <a href="#">
+               <i class="icon-THDO icon-mainmenu"></i>
+               <span> Organización </span>
+            </a>
+            <ul class="treeview-menu">
+               <li routerLinkActive="active">
+                  <a routerLink="/physic-structure"><i class="fa fa-circle-o"></i> Estructura Fisica</a>
+               </li>
+               <li routerLinkActive="active">
+                  <a routerLink="/organizational-structure"><i class="fa fa-circle-o"></i> Estructura<br/>Organizacional</a>
+               </li>
+               <li routerLinkActive="active">
+                  <a routerLink="/organizational-structure-positions"><i class="fa fa-circle-o"></i> Planta de<br/>Colaboradores</a>
+               </li>
+            </ul>
+         </li>
+      </ul>
+   </section>
+   <!-- /.sidebar -->
+</aside>
