@@ -20,8 +20,8 @@ export class JobProjectionService {
    getSubTypeRisks() {
       return this.http.get( this.serviceURL + 'riesgosSubTipos' ).map( ( res: Response ) => res.json());
    }
-   getListEstados() {
-      return this.http.get( this.serviceURL + 'listasEstadosCargos' ).map( ( res: Response ) => res.json());
+   getLisTypeStructure() {
+      return this.http.get( this.serviceURL + 'listasTiposEstructuras/enabled' ).map( ( res: Response ) => res.json());
    }
 
    getById(id: number) {

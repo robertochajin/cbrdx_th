@@ -32,12 +32,12 @@ export class JobProjectionComponent {
          }
       );
 
-      this.jobProjectionService.getListEstados().subscribe(rest => {
+      this.jobProjectionService.getLisTypeStructure().subscribe(rest => {
          this.ListaEstados.push({label: "Seleccione", value: null});
          for (let dp of rest) {
             this.ListaEstados.push({
                label: dp.nombre,
-               value: dp.idListaEstadoCargo
+               value: dp.idListaTipoEstructura
             });
          }
       });
