@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Http, Response, Headers } from "@angular/http";
 import { Positions } from "../_models/positions";
 import { PositionsObservations } from "../_models/positionsObservations";
+import { PositionsActivities } from "../_models/positionsActivities";
 
 @Injectable()
 export class PositionsService {
@@ -23,9 +24,15 @@ export class PositionsService {
    getListPositions() {
       return this.http.get( this.serviceURL + 'cargos/enabled' ).map( ( res: Response ) => res.json() );
    }
+   getListStudies() {
+      return this.http.get( this.serviceURL + 'nivelesEstudios/enabled/' ).map( ( res: Response ) => res.json() );
+   }
    
    add( c: Positions ) {
       return this.http.post( this.serviceURL + 'cargos', c ).map( ( res: Response ) => res.json() );
+   };
+   addPositionsActivities( c: PositionsActivities ) {
+      return this.http.post( this.serviceURL + 'cargosOcupaciones', c ).map( ( res: Response ) => res.json() );
    };
    
    update( c: Positions ) {
@@ -86,5 +93,15 @@ export class PositionsService {
 
    getLevelById(id: number) {
       return this.http.get( this.serviceURL + 'listasNivelesCargos/buscarId/'+id ).map( ( res: Response ) => res.json() );
+   }
+
+   getListActivities() {
+      return this.http.get( this.serviceURL + 'ocupaciones' ).map( ( res: Response ) => res.json() );
+   }
+   getPositionActivitiesById(id:number) {
+      return this.http.get( this.serviceURL + 'cargosOcupaciones/buscarCargo/'+id ).map( ( res: Response ) => res.json() as PositionsActivities[] );
+   }
+   getActivitiesById(id:number) {
+      return this.http.get( this.serviceURL + 'ocupaciones/'+id ).map( ( res: Response ) => res.json() );
    }
 }

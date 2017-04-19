@@ -20,6 +20,7 @@ export class PositionsAddComponent {
    categoryTypes: SelectItem[] = [];
    areaTypes: SelectItem[] = [];
    bossPositionTypes: SelectItem[] = [];
+   listStudies: SelectItem[] = [];
    stateTypes: SelectItem[] = [];
    disableTabs: boolean = true;
    msgs: Message[] = [];
@@ -42,6 +43,12 @@ export class PositionsAddComponent {
                                             label: dp.cargo,
                                             value: dp.idCargo
                                          } );
+         }
+      } );
+      this.positionsService.getListStudies().subscribe( res => {
+         this.listStudies.push( { label: "Seleccione", value: null } );
+         for ( let dp of res ) {
+            this.listStudies.push( {label: dp.nombreListaNivelEstudio,value: dp.idListaNivelEstudio} );
          }
       } );
       this.tipoDeAreaService.getlistAreas().subscribe( res => {
