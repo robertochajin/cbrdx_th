@@ -5,6 +5,7 @@ import { PositionsUpdateComponent } from "./positions-update.component";
 import { PositionsAddComponent } from "./positions-add.component";
 import { PositionsObservationsListComponent } from "./positions-observations-list.component";
 import { PositionAuthoritiesComponent } from "./position-authorities.component";
+import { PositionActivitiesComponent } from "./positions-activities.component";
 
 import { PositionsService } from "../_services/positions.service";
 import { ListPositionsService } from "../_services/lists-positions.service";
@@ -43,7 +44,8 @@ import { PersonalityModule } from "../position-personality/personality.module";
                  PositionsUpdateComponent,
                  PositionsAddComponent,
                  PositionsObservationsListComponent,
-                 PositionAuthoritiesComponent
+                 PositionAuthoritiesComponent,
+                 PositionActivitiesComponent
               ],
               bootstrap: [ PositionsComponent ],
               providers: [ PositionsService, ListPositionsService, PoliticalDivisionService, NavService ],
