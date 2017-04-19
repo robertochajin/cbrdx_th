@@ -171,6 +171,7 @@ export class JobProjectionComponent {
    bindLocation( event: any ) {
       this.jobProjection = event;
       this.ListJobProjection.push(this.jobProjection);
+      this.jobProjection= new JobProjection();
       this.toggleform();
       let cargos = 0;
       let cargosI = 0;
@@ -223,13 +224,28 @@ export class JobProjectionComponent {
    }
    delete(jp: JobProjection){
      this.ListJobProjection.splice(this.ListJobProjection.indexOf(this.dialogObjet), 1);
+      let cargos = 0;
+      let cargosI = 0;
+      let costoI = 0;
+      let plazasP = 0;
+      let costoP = 0;
+      let plazasI = 0;
       let ok = true;
       for(let p of this.ListJobProjection){
+         cargos += 1;
+         plazasP += Number(p.plazasProyectadas);
+         costoP += p.costoProyectado;
          if (p.idEstadoProyeccion != 2) {
             ok = false;
          }
       }
       ok ? this.estadoArea = "Area Totalmente Aprobada" : this.estadoArea = "Area Parciamente Aprobada";
+      this.plazasP = plazasP.toFixed(0);
+      this.costoP = costoP.toFixed(2);
+      this.cargos = cargos.toFixed(0);
+      this.plazasI = (((plazasP - this.plazasA) / this.plazasA) * 100).toFixed(2);
+      this.cargosI = (((cargos - cargos) / cargos) * 100).toFixed(2);
+      this.costoI = (((costoP - this.costoA) / this.costoA) * 100).toFixed(2);
 
    }
 }
