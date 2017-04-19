@@ -96,8 +96,12 @@
                            {{osp.salario*osp.plazas}}
                         </template>
                      </p-column>
-                     <p-column field="plazas" header="Ocupados" [sortable]="true"></p-column>
-                     <p-column field="plazas" header="Vacantes" [sortable]="true"></p-column>
+                     <p-column field="ocupados" header="Ocupados" [sortable]="true"></p-column>
+                     <p-column header="Vacantes" [sortable]="true">
+                        <template let-osp="rowData" pTemplate="body">
+                           {{osp.plazas-osp.ocupados}}
+                        </template>
+                     </p-column>
                      <p-column header="Acciones" styleClass="datatable-col-action" >
                         <template let-osp="rowData" pTemplate="body">
                            <div class="btn-group" role="group">
@@ -109,6 +113,20 @@
                         </template>
                      </p-column>
                   </p-dataTable>
+                  <div class="row">
+                     <div class="col-md-4">
+                        <strong>No de cargos:</strong>
+                        {{osPositions.length}}
+                     </div>
+                     <div class="col-md-4">
+                        <strong>No de plazas:</strong>
+                        {{countSlots}}
+                     </div>
+                     <div class="col-md-4">
+                        <strong>Costo planta:</strong>
+                         ${{countCost}}
+                     </div>
+                  </div>
 
                </div>
             </div>

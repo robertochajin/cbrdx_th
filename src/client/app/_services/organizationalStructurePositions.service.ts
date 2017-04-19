@@ -21,7 +21,6 @@ export class OrganizationalStructurePositionsServices {
 
    getAllByOrganizacionalStructure(idOrganizacionalStructure: number): Observable<OrganizationalStructurePositions[]> {
       return this.http.get(this.masterService + 'buscarCargo/' + idOrganizacionalStructure).map((res: Response) => res.json() as OrganizationalStructurePositions[]);
-      // return this.http.get(this.masterService + 'buscarByArea/' + idOrganizacionalStructure).map((res: Response) => res.json() as OrganizationalStructurePositions[]);
    }
 
    add(f: OrganizationalStructurePositions) {
