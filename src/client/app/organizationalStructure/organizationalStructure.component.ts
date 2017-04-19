@@ -226,7 +226,7 @@ export class OrganizationalStructureComponent implements OnInit {
       
       if ( this.empresa == true ) {
          if ( this.organizationalStructure.localizacion != '' && this.organizationalStructure.localizacion != null ) {
-            this.guardando = true;
+            
             if ( this.organizationalStructure.idLocalizacion == null || this.organizationalStructure.idLocalizacion == 0 ) {
                this.localizacion.indicadorHabilitado = true;
                this.locateService.add( this.localizacion ).subscribe(
@@ -253,7 +253,7 @@ export class OrganizationalStructureComponent implements OnInit {
    saveEO() {
       
       if ( this.organizationalStructure.idEstructuraOrganizacional == null || this.organizationalStructure.idEstructuraOrganizacional == 0 ) {
-         
+         this.guardando = true;
          this.organizationalStructureService.addOrganizationalStructure( this.organizationalStructure ).then( data => {
             this.guardando = false;
             this.empresa = false;
