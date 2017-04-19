@@ -35,6 +35,9 @@ export class PositionsService {
       return this.http.post( this.serviceURL + 'cargosOcupaciones', c ).map( ( res: Response ) => res.json() );
    };
    
+   updatePositionsActivities( c: PositionsActivities ) {
+      return this.http.put( this.serviceURL + 'cargosOcupaciones', c ).map( ( res: Response ) => res );
+   }
    update( c: Positions ) {
       return this.http.put( this.serviceURL + 'cargos', c ).map( ( res: Response ) => res );
    }

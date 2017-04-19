@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, Input }         from '@angular/core';
-import { Router, ActivatedRoute }   from '@angular/router';
+import { Router, ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import { FaultsAndSanctions }       from '../_models/faultsAndSanctions';
 import { SelectItem, Message, ConfirmDialog, ConfirmationService } from 'primeng/primeng';
@@ -26,6 +26,7 @@ export class FaultsAndSanctionsUpdateComponent {
   constructor(
     private faultsAndSanctionsService: FaultsAndSanctionsService,
     private router: Router,
+    private route: ActivatedRoute,
     private location: Location,
     private confirmationService: ConfirmationService
   ) {
@@ -51,6 +52,11 @@ export class FaultsAndSanctionsUpdateComponent {
   }
   
   ngOnInit() {
+     this.route.params
+     .switchMap((params: Params) => this.faultsAndSanctionsService.get(+params['id']))
+     .subscribe(fault => {
+        this.fault = fault;
+     });
     
   }
   

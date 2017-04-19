@@ -36,12 +36,12 @@
          <p-dataTable [value]="listPositionsActivities" [paginator]="true" [rows]="10" [responsive]="true"
                       [globalFilter]="gb">
             <p-column field="ocupacion" header="Ocupación" [sortable]="true"></p-column>
-            <!--<p-column header="Acciones" styleClass="datatable-col-action">-->
-               <!--<template let-absence="rowData" pTemplate="body">-->
-                  <!--<button type="button" icon="fa-trash" class="ui-button-danger"-->
-                          <!--pButton (click)="del(absence)"></button>-->
-               <!--</template>-->
-            <!--</p-column>-->
+            <p-column header="Acciones" styleClass="datatable-col-action">
+               <template let-PA="rowData" pTemplate="body">
+                  <button type="button" icon="fa-trash" class="ui-button-danger"
+                          pButton (click)="del(PA)"></button>
+               </template>
+            </p-column>
          </p-dataTable>
       </div>
    </div>
