@@ -35,7 +35,6 @@
     <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="positionResponsabilities" [paginator]="true"
                  [rows]="10" [responsive]="true" [globalFilter]="gb">
       <p-column field="responsabilidad" header="Responsabilidad" [sortable]="true"></p-column>
-      <p-column field="descripcion" header="Descripción" [sortable]="true"></p-column>
       <p-column header="Acciones" styleClass="datatable-col-action">
         <template let-positionResponsability="rowData" pTemplate="body">
           <div class="btn-group" role="group" aria-label="...">
