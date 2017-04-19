@@ -268,6 +268,8 @@ export class OrganizationalStructureComponent implements OnInit {
                this.treedCompany.push( newChil );
                this.selectedNode = newChil;
                this.newBranch();
+               this.empresa = false;
+               this.btnEmpresa = false;
             } else {
                this.selectedNode.children.push( newChil );
                this.newBranch();

@@ -105,10 +105,10 @@
                                  <input  type="email" pInputText class="form-control" id="correo" name="correo"
                                         [(ngModel)]="organizationalStructure.correoElectronico"
                                          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"
-                                        #correo="ngModel"
-                                        required/>
+                                        #email="ngModel"
+                                        />
                                  <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="f.submitted && !correo.valid">
+                                      *ngIf="f.submitted && !email.valid">
                                     Debe escribir un correo valido
                                  </div>
                               </div>
@@ -132,7 +132,7 @@
                                  <textarea id="direccion" name="direccion" pInputTextarea  rows="5" #direccion="ngModel" disabled="true" required="true"
                                         [(ngModel)]="organizationalStructure.localizacion" ></textarea>
                                  <div class="ui-message ui-messages-error ui-corner-all"
-                                   *ngIf="f.submitted && !direccion.valid  ">
+                                   *ngIf="f.submitted && organizationalStructure.localizacion==''">
                                  <i class="fa fa-close"></i>
                                  Dirección es requerido
                                  </div>
