@@ -17,5 +17,7 @@ export class Localizaciones {
   locacion: {camino: string, idDivisionPolitica: number};
 
   constructor(){
+     this.locacion.camino = "";
+     this.locacion.idDivisionPolitica = null;
   }
 }

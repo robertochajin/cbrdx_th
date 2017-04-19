@@ -6,6 +6,7 @@ export class OrganizationalStructure {
    numeroDocumento : string;
    idCentroCostos : number;
    idEstructuraFisica : number;
+   
    idEstructuraOrganizacional : number;
    idLocalizacion : number;
    idLogo : number;
@@ -21,6 +22,15 @@ export class OrganizationalStructure {
    correoElectronico : string;
    auditoriaFecha : Date;
    auditoriaUsuario : number;
+   
+   tipoEstructura : string;
+   centroCostos : string;
+   tipoArea : string;
+   estructuraFisica : string;
+   tipoDocumento : string;
+   
+   
+   
    constructor(){
       this.idTipoEstructura = null;
       this.codigo = "";
