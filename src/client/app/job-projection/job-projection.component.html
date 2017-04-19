@@ -1,63 +1,128 @@
-<h3 class="first">Proyección laboral</h3>
-<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+<div *ngIf="addinglocation">
+   <p-messages [value]="msgs"></p-messages>
+   <h3 class="first">Proyección laboral</h3>
+   <form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+         <div class="ui-grid-row">
+            <div class="ui-grid-col-3">
+               <label for="idTipoArea">Tipo Area</label>
+               <p-dropdown id="idTipoArea" name="idTipoArea"
+                           [options]="ListaTiposAreas" [autoWidth]="false"
+                           [(ngModel)]="jobProjection.idCargo" (onChange)="changeTypeArea()"
+                           #idTypeArea="ngModel"
+               ></p-dropdown>
+            </div>
+            <div class="ui-grid-col-3">
+               <label for="idArea">Area</label>
+               <p-dropdown id="idArea" name="idArea" required="true"
+                           [options]="ListaAreas" [autoWidth]="false" (onChange)="changeArea()"
+                           [(ngModel)]="jobProjection.idEstructuraOrganizacional"
+                           #idArea="ngModel"
+               ></p-dropdown>
+            </div>
+            <div class="ui-grid-col-2">
+               <label for="anio">Año</label>
+               <input *ngIf="viewanio" id="anio" name="anio" #anio="ngModel" pInputText type="number"
+                      [(ngModel)]="jobProjection.anio" required (keyup)="changeAnio()" (change)="changeAnio()"/>
+            </div>
+            <div class="ui-grid-col-2">
+               <label for="idArea"><strong>Estado </strong></label><br>
+               <label for="idArea">{{estadoArea}}</label>
+            </div>
+            <div class="ui-grid-col-2">
+               <label for="idArea">.</label>
+               <button pButton label="Generar Proyección" type="button" (click)="genProyec()"></button>
+            </div>
+         </div>
+      </div>
+   </form>
+   <br><br>
+   <div>
+      <div class="row datable-header">
+         <div *ngIf="nuevoCargo" class="col-md-6 col-xs-12 datatable-header-add">
+            <button type="button" icon="fa-plus" label="Nuevo Cargo"
+                    pButton (click)="toggleform()"></button>
+         </div>
+      </div>
+      <p-dataTable [value]="ListJobProjection" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+         <p-column field="cargo" header="Cargo" [sortable]="true"></p-column>
+         <p-column field="plazasActuales" header="Plazas Actuales" [sortable]="true"></p-column>
+         <p-column field="plazasProyectadas" header="Plazas Proyectdas" [sortable]="true"></p-column>
+         <p-column field="costoActual" header="Costo Actual" [sortable]="true"></p-column>
+         <p-column field="costoProyectado" header="Costo Proyectado" [sortable]="true"></p-column>
+         <p-column field="estadoProyeccion" header="Estados" [sortable]="true"></p-column>
+         <p-column header="Acciones" styleClass="datatable-col-action">
+            <template let-projection="rowData" pTemplate="body">
+               <button *ngIf="projection.idProyecccionLaboral!==null" type="button" icon="fa-eye" class="ui-button-info"
+                       pButton (click)="detail(projection)"></button>
+               <button
+                  *ngIf="(projection.idEstadoProyeccion===1 ||projection.idEstadoProyeccion===3 ||projection.idEstadoProyeccion===4) &&projection.idProyecccionLaboral!==null"
+                  type="button" icon="fa-pencil" class="ui-button-success"
+                  pButton (click)="update(projection)"></button>
+               <button *ngIf="projection.idEstadoProyeccion!==2 &&projection.idProyecccionLaboral!==null" type="button" icon="fa-check" class="ui-button-danger"
+                       pButton (click)="approve(projection)"></button>
+               <button *ngIf="projection.idProyecccionLaboral===null" type="button"  label="Confirmar" class="ui-button-danger"
+                       pButton (click)="confirmar(projection)"></button>
+               <button *ngIf="projection.idProyecccionLaboral===null" type="button"  label="Eliminar" class="ui-button-danger"
+                       pButton (click)="delete(projection)"></button>
+            </template>
+         </p-column>
+      </p-dataTable>
+   </div>
+   <br><br>
    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
       <div class="ui-grid-row">
-         <div class="ui-grid-col-3">
-            <label for="idTipoArea">Tipo Area</label>
-            <p-dropdown id="idTipoArea" name="idTipoArea"
-                        [options]="ListaTiposAreas" [autoWidth]="false"
-                        [(ngModel)]="jobProjection.idTipoArea" (onChange)="changeTypeArea()"
-                        #idTipoArea="ngModel"
-            ></p-dropdown>
+         <div class="ui-grid-col-2">
          </div>
          <div class="ui-grid-col-3">
-            <label for="idArea">Area</label>
-            <p-dropdown id="idArea" name="idArea" required="true"
-                        [options]="ListaAreas" [autoWidth]="false" (onChange)="changeArea()"
-                        [(ngModel)]="jobProjection.idArea"
-                        #idArea="ngModel"
-            ></p-dropdown>
+            <label><strong>Actual</strong></label>
+            <div class="row">
+               <label class="col-md-6 col-sm-6 col-xs-6 control-label">No de Cargos:</label>
+               <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{cargosA}}</strong></label>
+            </div>
+            <div class="row">
+               <label class="col-md-6 col-sm-6 col-xs-4 control-label">No de plazas:</label>
+               <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{plazasA}}</strong></label>
+            </div>
+            <div class="row">
+               <label class="col-md-6 col-sm-6 col-xs-4 control-label">Costo planta:</label>
+               <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{costoA}}</strong></label>
+            </div>
          </div>
          <div class="ui-grid-col-3">
-            <label for="anioproyeccion">Año Proyección</label>
-            <input type="anioproyeccion" pInputText id="anioproyeccion" name="anioproyeccion"
-                   [(ngModel)]="jobProjection.nroPlazas"#anioproyeccion="ngModel"
-            />
+            <label><strong>Proyectado</strong></label>
+            <div class="row">
+               <label class="col-md-6 col-sm-6 col-xs-6 control-label">No de Cargos:</label>
+               <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{cargos}}</strong></label>
+            </div>
+            <div class="row">
+               <label class="col-md-6 col-sm-6 col-xs-4 control-label">No de plazas:</label>
+               <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{plazasP}}</strong></label>
+            </div>
+            <div class="row">
+               <label class="col-md-6 col-sm-6 col-xs-4 control-label">Costo planta:</label>
+               <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{costoP}}</strong></label>
+            </div>
+         </div>
+         <div class="ui-grid-col-3">
+            <label><strong>Incremento %</strong></label>
+            <div class="row">
+               <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{cargosI}}%</strong></label>
+            </div>
+            <div class="row">
+               <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{plazasI}}%</strong></label>
+            </div>
+            <div class="row">
+               <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{costoI}}%</strong></label>
+            </div>
+         </div>
+         <div class="ui-grid-col-1">
          </div>
       </div>
    </div>
-</form>
-<br><br>
-<div>
-   <p-dataTable  [value]="ListJobProjection" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-      <p-column field="tipoVehiculo" header="Cargo" [sortable]="true"></p-column>
-      <p-column field="marca" header="Plazas Actuales" [sortable]="true"></p-column>
-      <p-column field="modelo" header="Plazas Proyectdas" [sortable]="true"></p-column>
-      <p-column field="placa" header="Costo Proyectado" [sortable]="true"></p-column>
-      <p-column header="Acciones" styleClass="datatable-col-action">
-         <template let-projection="rowData" pTemplate="body">
-            <button type="button" icon="fa-eye" class="ui-button-info"
-            pButton (click)="detail(projection)"></button>
-            <button type="button" icon="fa-pencil" class="ui-button-success"
-                    pButton (click)="update(projection)"></button>
-            <!--<button type="button" icon="fa-trash" class="ui-button-danger"-->
-                    <!--pButton (click)="del(projection)"></button>-->
-         </template>
-      </p-column>
-   </p-dataTable>
+   <p-confirmDialog width="400"></p-confirmDialog>
 </div>
-<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-   <!--<div class="ui-grid-row">-->
-      <!--<div class="ui-grid-col-4">-->
-         <!--<label for="idSede">Sede</label>-->
-      <!--</div>-->
-      <!--<div class="ui-grid-col-4">-->
-         <!--<label for="idTipoArea">Tipo Area</label>-->
-      <!--</div>-->
-      <!--<div class="ui-grid-col-4">-->
-         <!--<label for="idEstado">Estado</label>-->
-      <!--</div>-->
-   <!--</div>-->
+<div *ngIf="!addinglocation">
+   <projections  (dismiss)="toggleform()" (create)="bindLocation($event)" [jobProjection]="jobProjection"></projections>
 </div>
-<p-confirmDialog width="400"></p-confirmDialog>
 

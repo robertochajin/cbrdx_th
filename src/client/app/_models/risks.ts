@@ -6,7 +6,7 @@ export class Risks {
    idTipoRiesgo: number;
    tipo: string;
    riesgo: number = 0;
-   indicadorHabilitado: boolean = true;
+   indicadorHabilitado: boolean;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
 constructor() {
