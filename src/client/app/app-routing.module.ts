@@ -275,7 +275,7 @@ const routes = [
    {path: 'competencies-groups', component: CompetenciesGroupsComponent, canActivate: [AuthGuard]},
 
    // Temporales
-   {path: 'organizacional-structure-positions', component: OrganizationalStructurePositionsComponent, canActivate: [AuthGuard]},
+   {path: 'organizational-structure-positions', component: OrganizationalStructurePositionsComponent, canActivate: [AuthGuard]},
 
   // Cargos
   {path: 'positions', component: PositionsComponent, canActivate: [AuthGuard]},
