@@ -226,7 +226,7 @@ export class OrganizationalStructureComponent implements OnInit {
       
       if ( this.empresa == true ) {
          if ( this.organizationalStructure.localizacion != '' && this.organizationalStructure.localizacion != null ) {
-            this.guardando = true;
+            
             if ( this.organizationalStructure.idLocalizacion == null || this.organizationalStructure.idLocalizacion == 0 ) {
                this.localizacion.indicadorHabilitado = true;
                this.locateService.add( this.localizacion ).subscribe(
@@ -253,9 +253,13 @@ export class OrganizationalStructureComponent implements OnInit {
    saveEO() {
       
       if ( this.organizationalStructure.idEstructuraOrganizacional == null || this.organizationalStructure.idEstructuraOrganizacional == 0 ) {
-         
+         this.guardando = true;
          this.organizationalStructureService.addOrganizationalStructure( this.organizationalStructure ).then( data => {
             this.guardando = false;
+            this.empresa = false;
+            this.btnEmpresa = false;
+            this.empty = "";
+            
             this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Registro guardado con exito!' } );
             let newChil: any = {
                "label": this.organizationalStructure.nombre,
@@ -268,6 +272,7 @@ export class OrganizationalStructureComponent implements OnInit {
                this.treedCompany.push( newChil );
                this.selectedNode = newChil;
                this.newBranch();
+               
             } else {
                this.selectedNode.children.push( newChil );
                this.newBranch();
