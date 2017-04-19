@@ -1,7 +1,12 @@
 <h3>Planta de colaboradores</h3>
 <div class="row">
    <div class="col-md-4">
-      <h1>Arbol de estructura organizacional</h1>
+         <p-tree id="treedCompany" [(value)]="treedCompany" selectionMode="single"
+                 [(selection)]="selectedNode"
+                 (onNodeSelect)="nodeSelect($event.node)"
+                 (onNodeExpand)="nodeExpand($event.node)"
+         ></p-tree>
+         {{empty}}
    </div>
    <div class="col-md-8">
       <p-tabView>
@@ -9,19 +14,22 @@
             <div>
                <div class="row">
                   <label class="col-md-3 col-sm-6 col-xs-12 control-label">Código:</label>
-                  <label class="col-md-3 col-sm-6 col-xs-12 "><strong></strong></label>
+                  <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.codigo}}</strong></label>
                   <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nombre del área:</label>
-                  <label class="col-md-3 col-sm-6 col-xs-12 "><strong></strong></label>
+                  <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.nombre}}</strong></label>
                </div>
                <div class="row">
-                  <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tipo:</label>
-                  <label class="col-md-3 col-sm-6 col-xs-12 "><strong></strong></label>
+                  <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tipo Estructura:</label>
+                  <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.tipoEstructura}}</strong></label>
                   <label class="col-md-3 col-sm-6 col-xs-12 control-label">Centro de costos:</label>
-                  <label class="col-md-3 col-sm-6 col-xs-12 "><strong></strong></label>
+                  <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.centroCostos}}</strong></label>
                </div>
                <div class="row">
-                  <label class="col-md-3 col-sm-6 col-xs-12 control-label">Zona</label>
-                  <label class="col-md-3 col-sm-6 col-xs-12 "><strong></strong></label>
+                  <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tipo de Area: </label>
+                  <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.tipoArea}}</strong></label>
+                  <label class="col-md-3 col-sm-6 col-xs-12 control-label">Estructura Fisica: </label>
+                  <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.estructuraFisica}}</strong></label>
+                  
                </div>
             </div>
             <div>
