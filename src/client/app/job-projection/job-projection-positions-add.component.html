@@ -13,13 +13,21 @@
          </div>
       </div>
    </div>
-   <form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+   <form (ngSubmit)="f.valid && createProjection()" #f="ngForm" novalidate id="formulario">
       <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
          <div class="ui-grid-row">
             <div class="ui-grid-col-6">
                <label for="cargo">Cargo</label>
-               <input id="cargo" name="cargo" #cargo="ngModel" pInputText type="text"
-                      [(ngModel)]="jobProjection.idCargo" required disabled/>
+               <p-dropdown id="cargo" name="cargo" required="true"
+                           [options]="ListPositions" [autoWidth]="false"
+                           [(ngModel)]="jobProjection.idCargo" (onChange)="changePosition()"
+                           #cargo="ngModel"
+               ></p-dropdown>
+               <div class="ui-message ui-messages-error ui-corner-all"
+                    *ngIf="f.submitted && !cargo.valid">
+                  <i class="fa fa-close"></i>
+                  Cargo requerido
+               </div>
             </div>
          </div>
          <div class="ui-grid-row">
@@ -42,7 +50,7 @@
                <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="f.submitted && !proyectadas.valid">
                   <i class="fa fa-close"></i>
-                  Plazas requeridas
+                  Plazas proyectadas requeridas
                </div>
             </div>
             <div class="ui-grid-col-6">
@@ -50,10 +58,6 @@
                <input id="costoP" name="costoP" #costoP="ngModel" pInputText type="text"
                       [(ngModel)]="jobProjection.costoProyectado" required disabled/>
             </div>
-         </div>
-         <div class="ui-grid-row" *ngIf="jobProjection.idEstadoProyeccion===3">
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Motivo no aprobación:</label>
-            <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{jobProjection.observacionAprobacion}}</strong></label>
          </div>
          <div class="ui-grid-row">
             <div class="ui-grid-col-12">
@@ -70,7 +74,7 @@
          <div class="ui-grid-row form-footer-buttons">
             <div class="ui-grid-col-4"></div>
             <div class="ui-grid-col-1">
-               <a (click)="goBack()" class="cancelar">Cancelar</a>
+               <a (click)="discard()" class="cancelar">Cancelar</a>
             </div>
             <div class="ui-grid-col-2">
                <button pButton icon="fa-plus" label="Guardar" type="submit" ></button>
