@@ -5,8 +5,10 @@ import {Positions} from "../_models/positions";
 import {ConfirmationService} from "primeng/components/common/api";
 import {PositionsService} from "../_services/positions.service";
 import {OrganizationalStructurePositionsServices} from "../_services/organizationalStructurePositions.service";
+import { OrganizationalStructureService } from "../_services/organizationalStructure.service";
 import {PersonPositionsServices} from "../_services/personPositions.service";
 import {ContractTypesServices} from "../_services/contractTypes.service";
+import { TreeNode } from "primeng/components/common/api";
 
 @Component({
    moduleId: module.id,
@@ -20,17 +22,36 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    private editingPosition: boolean = false;
    private badPostion: boolean = false;
    private area: OrganizationalStructure = new OrganizationalStructure();
+   private listOrganizationalStructure: OrganizationalStructure[];
    private osPosition: OrganizationalStructurePositions = new OrganizationalStructurePositions();
    private BackUpOSPosition: OrganizationalStructurePositions = new OrganizationalStructurePositions();
    private osPositions: OrganizationalStructurePositions[] = [];
    private positionList: Positions[] = [];
    private selectedPosition : Positions = new Positions();
+   
+   treedCompany: TreeNode[] = [];
+   selectedNode: TreeNode;
 
    constructor(private positionsService: PositionsService,
                private ospService: OrganizationalStructurePositionsServices,
+               private organizationalStructureService: OrganizationalStructureService,
                private personPositionService: PersonPositionsServices,
                private contractTypesService: ContractTypesServices,
                private confirmationService: ConfirmationService) {
+   
+      organizationalStructureService.getAllEnabled().subscribe( res => {
+         this.listOrganizationalStructure = res;
+            for ( let c of this.listOrganizationalStructure.filter( t => t.idPadre == 0 || t.idPadre == null ) ) {
+               let companyNode = {
+                  "label": c.nombre,
+                  "data": c,
+                  "leaf": false,
+                  "expanded": true
+               };
+               this.treedCompany.push( companyNode );
+               this.nodeExpand(companyNode);
+            }
+      } );
    }
 
    ngOnInit() {
@@ -39,6 +60,31 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
       //temporal
 
       this.ospService.getAllByOrganizacionalStructure(this.area.idEstructuraOrganizacional).subscribe(list => this.osPositions = list);
+   }
+   nodeExpand( node: any ) {
+      let chilNodes: TreeNode[] = [];
+      for ( let c of this.listOrganizationalStructure.filter( t => t.idPadre == node.data.idEstructuraOrganizacional ) ) {
+         chilNodes.push( {
+                            "label": c.nombre,
+                            "data": c,
+                            "parent": node,
+                            "leaf": false,
+                            "children" : []
+                         } );
+      }
+      node.children = chilNodes;
+      
+   }
+   
+   nodeSelect( node: any ) {
+      if(node.data.idPadre != null && node.data.idPadre != 0){
+         this.area = node.data;
+      }
+         
+      /*this.organizationalStructureService.viewOrganizationalStructure( node.data.idEstructuraOrganizacional ).subscribe(
+         organizationalStructure => {
+            this.area = organizationalStructure;
+      } );*/
    }
 
    editPosition(osPosition: OrganizationalStructurePositions) {

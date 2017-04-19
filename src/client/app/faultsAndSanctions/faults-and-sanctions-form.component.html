@@ -18,7 +18,7 @@
             <form name="formulario" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate>
                 <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                     <div class="row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-9">
                             <label for="falta">* Falta o Sanción</label>
                             <input pInputText type="text" id="falta" name="falta" #falta="ngModel"
                                  [(ngModel)]="fault.falta" required/>
@@ -41,7 +41,7 @@
                               Tipo de falta es requerido
                             </div>
                         </div>
-                      <div class="form-group col-md-3">
+                      <!--<div class="form-group col-md-3">
                             <label for="types">* Estado</label>
                             <p-dropdown id="status"  name="status" required="true"
                                         [options]="faultsStatus" [autoWidth]="false"
@@ -53,7 +53,7 @@
                               <i class="fa fa-close"></i>
                               Estado es requerido
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="row">
                         <div class="form-group col-md-12">
