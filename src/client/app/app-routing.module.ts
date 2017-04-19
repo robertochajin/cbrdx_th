@@ -129,9 +129,14 @@ import {PositionRolesComponent} from "./position-roles/position-roles.component"
 import {PositionCompetenciesComponent} from "./position-competencies/position-competencies.component";
 import {CompanyAssetsComponent} from "./position-company-assets/company-assets.component";
 // proyecciòn laboral
-import {JobProjectionModule} from "./job-projection/projection-area.module";
+import {JobProjectionComponent} from "./job-projection/job-projection.component";
+import {JobProjectionPositionsComponent} from "./job-projection/job-projection-positions.component";
+
 // estructura física
-import {PhysicStructuteModule} from "./physic-structure/physic-structure.module";
+import {PhysicStructureComponent} from "./physic-structure/physic-structure.component";
+import {PhysicStructureAddComponent} from "./physic-structure/physic-structure-add.component";
+import {PhysicStructureDetailComponent} from "./physic-structure/physic-structure-detail.component";
+import {PhysicStructureUpdateComponent} from "./physic-structure/physic-structure-update.component";
 
 // cargos posición en caso de ausencia
 import {AbsenceComponent} from "./position-absence/position-absence.component";
@@ -281,9 +286,21 @@ const routes = [
   //  Cargos Productividad
   {path: 'productivity/:idCargo', component: ProductivityComponent, canActivate: [AuthGuard]},
    //riesgos
-  {path: 'risks', component: RisksComponent, canActivate: [AuthGuard]},
-  {path: 'risks/add', component: RisksAddComponent, canActivate: [AuthGuard]},
-  {path: 'risks/update/:idRiesgo', component: RisksUpdateComponent, canActivate: [AuthGuard]},
+
+   {path: 'risks', component: RisksComponent, canActivate: [AuthGuard]},
+   {path: 'risks/add', component: RisksAddComponent, canActivate: [AuthGuard]},
+   {path: 'risks/update/:idRiesgo', component: RisksUpdateComponent, canActivate: [AuthGuard]},
+
+   //proyecciòn laboral
+   {path: 'job-projection', component: JobProjectionComponent, canActivate: [AuthGuard]},
+   {path: 'job-projection-positions', component: JobProjectionPositionsComponent, canActivate: [AuthGuard]},
+
+   // estructura física
+   {path: 'physic-structure', component: PhysicStructureComponent, canActivate: [AuthGuard]},
+   {path: 'physic-structure/add', component: PhysicStructureAddComponent, canActivate: [AuthGuard]},
+   {path: 'physic-structure/detail/:id', component: PhysicStructureDetailComponent, canActivate: [AuthGuard]},
+   {path: 'physic-structure/update/:id', component: PhysicStructureUpdateComponent, canActivate: [AuthGuard]},
+
 
   // cargos factores de riesgo
   {path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [AuthGuard]},

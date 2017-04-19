@@ -1,6 +1,6 @@
 import {Component,Input} from '@angular/core';
-import {PhysicStrucrute} from '../_models/physic-structure';
-import {PhysicStructuteService} from '../_services/physic-structure.service';
+import {PhysicStructure} from '../_models/physic-structure';
+import {PhysicStructureService} from '../_services/physic-structure.service';
 import {Router} from '@angular/router';
 import {ConfirmationService} from 'primeng/primeng';
 
@@ -11,28 +11,35 @@ import {ConfirmationService} from 'primeng/primeng';
    providers:  [ConfirmationService]
 })
 export class PhysicStructureComponent {
-   physicStrucrute: PhysicStrucrute = new PhysicStrucrute();
-   dialogObjet: PhysicStrucrute = new PhysicStrucrute();
+   physicStructure: PhysicStructure = new PhysicStructure();
+   dialogObjet: PhysicStructure = new PhysicStructure();
 
-   ListPhysicStrucrute: PhysicStrucrute[];
+   ListPhysicStructure: PhysicStructure[];
 
    constructor(
-      private physicStrucruteService: PhysicStructuteService,
+      private physicStructureService: PhysicStructureService,
       private router: Router,
       private confirmationService: ConfirmationService
    ) {
    }
-
    ngOnInit() {
 
-      this.physicStrucruteService.getAll().subscribe(
-         physicStrucrute => {
-            this.ListPhysicStrucrute = physicStrucrute;
+      this.physicStructureService.getAll().subscribe(
+         physicStructure => {
+            this.ListPhysicStructure = physicStructure;
+            this.ListPhysicStructure.sort(function (a, b) {
+               return b.idEstructuraFisica - a.idEstructuraFisica;
+            });
          }
       );
    }
-
    add() {
       this.router.navigate(['physic-structure/add']);
+   }
+   detail(e: PhysicStructure) {
+      this.router.navigate(['physic-structure/detail/'+e.idEstructuraFisica]);
+   }
+   update(e: PhysicStructure) {
+      this.router.navigate(['physic-structure/update/'+e.idEstructuraFisica]);
    }
 }

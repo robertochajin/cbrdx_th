@@ -32,9 +32,9 @@ import {TranslateModule, TranslateLoader, TranslateStaticLoader} from "ng2-trans
 import {ProductivityModule} from "./position-productivity/productivity.module";
 
 //proyección laboral
-import {JobProjectionModule} from "./job-projection/projection-area.module";
+import {JobProjectionModule} from "./job-projection/job-projection.module";
 //Estructura física
-import {PhysicStructuteModule} from "./physic-structure/physic-structure.module";
+import {PhysicStructureModule} from "./physic-structure/physic-structure.module";
 
 import {RiskModule} from "./position-risks/position-risks.module";
 import {AbsenceModule} from "./position-absence/position-absence.module";
@@ -104,8 +104,8 @@ import { OrganizationalStructureModule } from "./organizationalStructure/organiz
       FaultsAndSanctionsModule,
       PositionsModule,
       ProductivityModule,
-      // JobProjectionModule,
-      PhysicStructuteModule,
+      JobProjectionModule,
+      PhysicStructureModule,
       RiskModule,
       PersonalityModule,
       AbsenceModule,

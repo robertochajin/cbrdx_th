@@ -5,23 +5,36 @@
          <button type="button" icon="fa-plus" label="Agregar Nuevo"
                  pButton (click)="add()"></button>
       </div>
-      <div class="col-md-6 col-xs-12 datatable-header-search" >
-
+      <div class="col-md-6 col-xs-12 datatable-header-search">
          <div class="input-group">
             <div class="input-group-addon"><i class="fa fa-search"></i></div>
             <input #gb type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
          </div>
-
       </div>
    </div>
-   <p-dataTable [value]="ListPhysicStrucrute" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-      <p-column field="tipoVehiculo" header="Id" [sortable]="true"></p-column>
-      <p-column field="tipoServicio" header="Nombre" [sortable]="true"></p-column>
-      <p-column field="marca" header="Categoria" [sortable]="true"></p-column>
-      <p-column field="modelo" header="Dirección" [sortable]="true"></p-column>
-      <p-column field="placa" header="Indicador Virtual"></p-column>
-      <p-column field="placa" header="Indicador Habilitado" ></p-column>
+   <p-dataTable [value]="ListPhysicStructure" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+      <p-column field="codigo" header="Código" [sortable]="true"></p-column>
+      <p-column field="estructuraFisica" header="Nombre" [sortable]="true"></p-column>
+      <p-column field="clasificacionSede" header="Categoría" [sortable]="true"></p-column>
+      <p-column field="direccion" header="Dirección" [sortable]="true"></p-column>
+      <p-column header="Ind. Virtual" styleClass="datatable-col-action">
+         <template let-physicStructure="rowData" pTemplate="body">
+            <p-checkbox name="indicadorVirtual" [(ngModel)]="physicStructure.indicadorVirtual" binary="true" disabled="true" ></p-checkbox>
+         </template>
+      </p-column>
+      <p-column header="Ind. Habilitado" styleClass="datatable-col-action">
+         <template let-physicStructure="rowData" pTemplate="body">
+            <p-checkbox name="indicadorHabilitado" [(ngModel)]="physicStructure.indicadorHabilitado" binary="true" disabled="true" ></p-checkbox>
+         </template>
+      </p-column>
+      <p-column header="Acciones" styleClass="datatable-col-action">
+         <template let-physicStructure="rowData" pTemplate="body">
+            <button type="button" icon="fa-eye" class="ui-button-info"
+                    pButton (click)="detail(physicStructure)"></button>
+            <button type="button" icon="fa-pencil" class="ui-button-success"
+                    pButton (click)="update(physicStructure)"></button>
+         </template>
+      </p-column>
    </p-dataTable>
 </div>
 <p-confirmDialog width="400"></p-confirmDialog>
-
