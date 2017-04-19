@@ -1,0 +1,48 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+   <p-footer>
+      <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+      <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+   </p-footer>
+</p-confirmDialog>
+<div *ngIf="positionsActivities">
+   <form (ngSubmit)="fr.valid && onSubmit()" #fr="ngForm" novalidate id="formulario">
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+         <div class="ui-grid-row">
+            <div class="ui-grid-col-12">
+               <label for="idOcupacion"><h3>Ocupación </h3></label>
+            </div>
+         </div>
+         <div class="ui-grid-row">
+            <div class="ui-grid-col-9">
+               <p-dropdown id="idOcupacion" name="idOcupacion" required="true"
+                           [options]="listActivities" [autoWidth]="false"
+                           [(ngModel)]="positionsActivities.idOcupacion" #idOcupacion="ngModel"
+               ></p-dropdown>
+               <div class="ui-message ui-messages-error ui-corner-all"
+                    *ngIf="fr.submitted && !idOcupacion.valid">
+                  <i class="fa fa-close"></i>
+                  Cargo requerido
+               </div>
+            </div>
+            <div class="ui-grid-col-3">
+               <button pButton icon="fa-plus" label="Agregar" type="submit"></button>
+            </div>
+         </div>
+      </div>
+   </form>
+   <div class="row">
+      <div class="col-md-12">
+         <p-dataTable [value]="listPositionsActivities" [paginator]="true" [rows]="10" [responsive]="true"
+                      [globalFilter]="gb">
+            <p-column field="ocupacion" header="Ocupación" [sortable]="true"></p-column>
+            <!--<p-column header="Acciones" styleClass="datatable-col-action">-->
+               <!--<template let-absence="rowData" pTemplate="body">-->
+                  <!--<button type="button" icon="fa-trash" class="ui-button-danger"-->
+                          <!--pButton (click)="del(absence)"></button>-->
+               <!--</template>-->
+            <!--</p-column>-->
+         </p-dataTable>
+      </div>
+   </div>
+</div>

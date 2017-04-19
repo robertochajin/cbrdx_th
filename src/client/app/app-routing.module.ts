@@ -148,6 +148,9 @@ import {RisksUpdateComponent} from "./risks/risks-update.component";
 import {CompetenciesGroupsComponent} from "./competencies-groups/competencies-groups.component";
 import {OrganizationalStructurePositionsComponent} from "./organizationalStructurePositions/organizational-structure-positions.component";
 
+
+import {PositionAuthoritiesComponent} from "./positions/position-authorities.component";
+
 const routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
 
@@ -305,6 +308,9 @@ const routes = [
   {path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [AuthGuard]},
   //cargos posición en caso de ausencia
   {path: 'position-absence/:idCargo', component: AbsenceComponent, canActivate: [AuthGuard]},
+
+
+  {path: 'position-activities/:idCargo', component: PositionAuthoritiesComponent, canActivate: [AuthGuard]},
 
 
 ];

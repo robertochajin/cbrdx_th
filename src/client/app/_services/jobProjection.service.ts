@@ -14,25 +14,15 @@ export class JobProjectionService {
    getAll() {
       return this.http.get( this.serviceURL + 'riesgos' ).map( ( res: Response ) => res.json() as JobProjection[] );
    }
-   getTypeRisks() {
-      return this.http.get( this.serviceURL + 'riesgosTipos' ).map( ( res: Response ) => res.json());
-   }
-   getSubTypeRisks() {
-      return this.http.get( this.serviceURL + 'riesgosSubTipos' ).map( ( res: Response ) => res.json());
-   }
-   getListEstados() {
-      return this.http.get( this.serviceURL + 'listasEstadosCargos' ).map( ( res: Response ) => res.json());
+
+   getLisTypeStructure() {
+      return this.http.get( this.serviceURL + 'listasTiposEstructuras/enabled' ).map( ( res: Response ) => res.json());
    }
 
    getById(id: number) {
       return this.http.get( this.serviceURL + 'riesgos/'+id ).map( ( res: Response ) => res.json() as JobProjection);
    }
-   getTypeRiskById(id: number){
-      return this.http.get( this.serviceURL + 'riesgosTipos/'+id ).map( ( res: Response ) => res.json());
-   }
-   getSubTypeRiskById(id: number){
-      return this.http.get( this.serviceURL + 'riesgosSubTipos/'+id ).map( ( res: Response ) => res.json());
-   }
+   
    add( r: JobProjection ) {
       return this.http.post( this.serviceURL + 'riesgos', r ).map( ( res: Response ) => res.json() );
    };
