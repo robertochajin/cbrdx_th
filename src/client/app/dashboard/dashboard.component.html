@@ -1,4 +1,4 @@
-<div class="ui-grid-row">
+<div class="row">
   <div class="col-md-6 col-xs-12 " style="text-align: left"><label>{{ 'LBL_ULTIMOINGRESO' | translate:param }}: </label>
   </div>
   <div class="col-md-6 col-xs-12 ">
@@ -18,8 +18,8 @@
               <!--<input pButton=""  [style]="{'float':'right'}" label="Save" icon="fa-check" (onClick)="save()" [model]="items"></input>-->
             </div>
           </p-header>
-          <div *ngIf="isData" class="ui-grid-row dashboard_height" style="height: 100%;">
-            <p-chart type="doughnut" [data]="data"></p-chart>
+          <div *ngIf="isData" style="height: 100%;">
+            <p-chart type="doughnut" [data]="data" height="140"></p-chart>
           </div>
         </p-panel>
       </div>

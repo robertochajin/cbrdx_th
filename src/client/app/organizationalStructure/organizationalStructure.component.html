@@ -67,7 +67,7 @@
                               <div class=" col-sm-9">
                                  <input type="text" pInputText class="form-control" id="razonSocial" name="razonSocial"
                                         [(ngModel)]="organizationalStructure.nombre"
-                                        #razonSocial="ngModel"
+                                        #razonSocial="ngModel" (keyup)="capitalizeName()"
                                         required/>
                                  <div class="ui-message ui-messages-error ui-corner-all"
                                       *ngIf="f.submitted && !razonSocial.valid">
@@ -183,8 +183,7 @@
                                         (keyup)="capitalizeName()"
                                         required/>
                                  <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="f.submitted && !nombre.valid"
-                                      class="help-block">
+                                      *ngIf="f.submitted && !nombre.valid">
                                     Nombre es requerido
                                  </div>
                               </div>
@@ -195,12 +194,11 @@
                               <label for="strctureTypes" class="control-label col-sm-3">* Tipo Estructura </label>
                               <div class=" col-sm-9">
                                  <p-dropdown id="strctureTypes" name="strctureTypes"
-                                             [options]="structureTypes" [autoWidth]="false"
+                                             [options]="structureTypes" [autoWidth]="false" required="true"
                                              [(ngModel)]="organizationalStructure.idTipoEstructura"
                                              #strctureTypes="ngModel"></p-dropdown>
                                  <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="f.submitted && !strctureTypes.valid"
-                                      class="help-block">
+                                      *ngIf="f.submitted && !strctureTypes.valid">
                                     Nombre es requerido
                                  </div>
                               </div>
@@ -211,12 +209,11 @@
                               <label for="costCenter" class="control-label col-sm-3">* Centro de Costo</label>
                               <div class=" col-sm-9">
                                  <p-dropdown id="costCenter" name="costCenter"
-                                             [options]="costTypes" [autoWidth]="false"
+                                             [options]="costTypes" [autoWidth]="false" required="true"
                                              [(ngModel)]="organizationalStructure.idCentroCostos"
                                              #costCenter="ngModel"></p-dropdown>
                                  <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="f.submitted && !costCenter.valid"
-                                      class="help-block">
+                                      *ngIf="f.submitted && !costCenter.valid">
                                     Centro de Costo es requerido
                                  </div>
                               </div>
@@ -227,12 +224,11 @@
                               <label for="tiposArea" class="control-label col-sm-3">* Tipo de Area</label>
                               <div class=" col-sm-9">
                                  <p-dropdown id="tiposArea" name="tiposArea"
-                                             [options]="areaTypes" [autoWidth]="false"
+                                             [options]="areaTypes" [autoWidth]="false" required="true"
                                              [(ngModel)]="organizationalStructure.idTipoArea"
                                              #tiposArea="ngModel"></p-dropdown>
                                  <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="f.submitted && !tiposArea.valid"
-                                      class="help-block">
+                                      *ngIf="f.submitted && !tiposArea.valid">
                                     Centro de Costo es requerido
                                  </div>
                               </div>
@@ -243,12 +239,11 @@
                               <label for="estructuraFisica" class="control-label col-sm-3">* Estructura Fisica</label>
                               <div class=" col-sm-9">
                                  <p-dropdown id="estructuraFisica" name="estructuraFisica"
-                                             [options]="physicalTypes" [autoWidth]="false"
+                                             [options]="physicalTypes" [autoWidth]="false" required="true"
                                              [(ngModel)]="organizationalStructure.idEstructuraFisica"
                                              #estructuraFisica="ngModel"></p-dropdown>
                                  <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="f.submitted && !estructuraFisica.valid"
-                                      class="help-block">
+                                      *ngIf="f.submitted && !estructuraFisica.valid">
                                     Centro de Costo es requerido
                                  </div>
                               </div>
