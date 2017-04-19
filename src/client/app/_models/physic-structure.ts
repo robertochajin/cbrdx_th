@@ -1,19 +1,26 @@
-export class PhysicStructute {
-   idEstructura: number;
-   nombre: string;
-   subtipo: string;
+export class PhysicStructure {
+   idEstructuraFisica: number;
+   codigo:string;
+   estructuraFisica: string;
+   idClasificacionSede: number;
+   clasificacionSede:string;
+   idLocalizacion: number;
+   direccion:string;
+   camino: string;
    telefono: number;
-   celular: number;
-   correo: string;
-   categoria: string;
-   virtual: boolean;
-   indicadorHabilitado: boolean = true;
+   celular: string;
+   correoElectronico: string;
+   indicadorVirtual:boolean;
+   indicadorHabilitado: boolean;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
 
    constructor() {
       this.auditoriaFecha = null;
       this.auditoriaUsuario = null;
-      this.idEstructura = null;
+      this.idEstructuraFisica = null;
+      this.direccion='';
+      this.telefono=null;
+      this.celular=null;
    }
 }

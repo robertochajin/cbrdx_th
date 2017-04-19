@@ -1,40 +1,41 @@
-import {Component, Input} from '@angular/core';
+import {Component,Input} from '@angular/core';
 import {Location} from '@angular/common';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute, Params}   from '@angular/router';
 import {ConfirmationService, SelectItem, Message} from 'primeng/primeng';
 import {PhysicStructure} from '../_models/physic-structure';
 import {PhysicStructureService} from '../_services/physic-structure.service';
 import {Localizaciones} from "../_models/localizaciones";
-import {LocateService} from '../_services/locate.service';
+import { LocateService } from '../_services/locate.service';
 
 @Component({
    moduleId: module.id,
    templateUrl: 'physic-structure-form.component.html',
    selector: 'physic-structure',
-   providers: [ConfirmationService]
+   providers:  [ConfirmationService]
 })
-export class PhysicStructureAddComponent {
+export class PhysicStructureUpdateComponent {
    physicStructure: PhysicStructure = new PhysicStructure();
    dialogObjet: PhysicStructure = new PhysicStructure();
-   ListCategory: SelectItem[] = [];
-   ListPhysicStructure: PhysicStructure[];
-   msgs: Message[] = [];
-   header: string = "Agregando Estructura Física";
-   submitted: boolean;
    codExists: boolean = false;
-   direcValid: boolean;
-   addinglocation: boolean = true;
+   addinglocation: boolean= true;
    localizacion: Localizaciones = new Localizaciones();
+   ListPhysicStructure: PhysicStructure[];
+   ListCategory: SelectItem[]=[];
+   submitted: boolean;
+   msgs: Message[] = [];
+   header:string= "Editando Estructura Física";
 
-   constructor(private physicStructureService: PhysicStructureService,
-               private locateService: LocateService,
-               private router: Router,
-               private location: Location,
-               private confirmationService: ConfirmationService) {
+   constructor(
+      private physicStructureService: PhysicStructureService,
+      private locateService: LocateService,
+      private router: Router,
+      private route: ActivatedRoute,
+      private location: Location,
+      private confirmationService: ConfirmationService
+   ) {
    }
 
    ngOnInit() {
-
       this.physicStructureService.getAll().subscribe(res => {
          this.ListPhysicStructure = res;
       });
@@ -48,28 +49,33 @@ export class PhysicStructureAddComponent {
             });
          }
       });
+      this.route.params.switchMap((params: Params) => this.physicStructureService.getById(+params['id']))
+         .subscribe(data => {
+            this.physicStructure = data;
+            this.locateService.getById(this.physicStructure.idLocalizacion).subscribe(
+               rest=>{
+                  this.localizacion= rest;
+               }
+            );
+         });
       this.focusUP();
    }
 
    inputCleanUp(value: string) {
       this.physicStructure.codigo = value.toUpperCase().replace(' ', '').trim();
    }
-
    validateCode() {
       this.codExists = this.ListPhysicStructure.filter(t => t.codigo === this.physicStructure.codigo).length > 0;
    }
-
-   toggleform() {
+   toggleform(){
       this.addinglocation = !this.addinglocation;
    }
-
-   bindLocation(event: any) {
+   bindLocation(event: any){
       this.localizacion = event;
       this.physicStructure.direccion = event.direccion;
       this.toggleform();
    }
-
-   onSubmit() {
+   onSubmit(){
       this.msgs = [];
       if (this.physicStructure.direccion !== '') {
          this.submitted = true;
@@ -77,7 +83,7 @@ export class PhysicStructureAddComponent {
          this.locateService.add(this.localizacion).subscribe(
             data => {
                this.physicStructure.idLocalizacion = data.idLocalizacion;
-               this.physicStructureService.add(this.physicStructure).subscribe(
+               this.physicStructureService.update(this.physicStructure).subscribe(
                   data => {
                      this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
                      this.location.back();
@@ -95,12 +101,13 @@ export class PhysicStructureAddComponent {
          });
       }
    }
+
    focusUP(){
       const element = document.querySelector("#formulario");
       if (element) { element.scrollIntoView(element); }
    }
 
-   goBack() {
+   goBack(){
       this.confirmationService.confirm({
          message: ` ¿Esta seguro que desea salir sin guardar?`,
          header: 'Corfirmación',
@@ -110,10 +117,8 @@ export class PhysicStructureAddComponent {
          }
       });
    }
-
    capitalize(event:any) {
       let input = event.target.value;
       event.target.value = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
    }
-
 }

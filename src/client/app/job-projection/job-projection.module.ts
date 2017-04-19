@@ -1,7 +1,8 @@
 import {NgModule}      from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import 'rxjs/add/operator/toPromise';
-import {JobProjectionComponent} from "./projection-area.component";
+import {JobProjectionComponent} from "./job-projection.component";
+import {JobProjectionPositionsComponent} from "./job-projection-positions.component";
 import {FormSharedModule } from '../shared/form-shared.module';
 import {JobProjectionService} from '../_services/jobProjection.service';
 import {InputSwitchModule,CheckboxModule} from 'primeng/primeng';
@@ -14,11 +15,11 @@ import {InputSwitchModule,CheckboxModule} from 'primeng/primeng';
       CheckboxModule
    ],
    declarations: [
-      JobProjectionComponent
+      JobProjectionComponent,JobProjectionPositionsComponent
    ],
-   bootstrap: [JobProjectionComponent],
+   bootstrap: [JobProjectionComponent,JobProjectionPositionsComponent],
    providers: [JobProjectionService],
-   exports: [JobProjectionComponent]
+   exports: [JobProjectionComponent,JobProjectionPositionsComponent]
 })
 export class JobProjectionModule {
 }

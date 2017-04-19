@@ -65,7 +65,9 @@ body .ui-widget:disabled {
 /**
 ------------------------ Main CSS ------------------------------------
  */
-
+a{
+   cursor: pointer;
+}
 /** ---- Breadcrumb ------ */
 .btn-breadcrumb .btn:not(:last-child):after {
   content: " ";

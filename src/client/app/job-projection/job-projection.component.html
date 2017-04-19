@@ -1,4 +1,4 @@
-<!--<h3 class="first">Proyección laboral</h3>-->
+<h3 class="first">Proyección laboral</h3>
 <!--<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">-->
    <!--<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">-->
       <!--<div class="ui-grid-row">-->
@@ -54,19 +54,10 @@
             <!--/>-->
          <!--</div>-->
       <!--</div>-->
-      <!--<div class="ui-grid-row form-footer-buttons">-->
-         <!--<div class="ui-grid-col-4"></div>-->
-         <!--<div class="ui-grid-col-1">-->
-            <!--<a (click)="goBack()" class="cancelar">Cancelar</a>-->
-         <!--</div>-->
-         <!--<div class="ui-grid-col-2">-->
-            <!--<button pButton icon="fa-plus" label="Guardar" type="submit"></button>-->
-         <!--</div>-->
-         <!--<div class="ui-grid-col-5"></div>-->
-      <!--</div>-->
    <!--</div>-->
 <!--</form>-->
-<!--<div>-->
+<br><br>
+<div>
    <!--<div class="row datable-header">-->
       <!--<div class="col-md-6 col-xs-12 datatable-header-add">-->
          <!--<button type="button" icon="fa-plus" label="Agregar Nueva Proyección Laboral"-->
@@ -79,37 +70,36 @@
          <!--</div>-->
       <!--</div>-->
    <!--</div>-->
-   <!--<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="ListJobProjection"-->
-                <!--[paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">-->
-      <!--<p-column field="tipoVehiculo" header="Tipo Vehiculo" [sortable]="true"></p-column>-->
-      <!--<p-column field="tipoServicio" header="Tipo de Servicio " [sortable]="true"></p-column>-->
-      <!--<p-column field="marca" header="Marca" [sortable]="true"></p-column>-->
-      <!--<p-column field="modelo" header="Modelo" [sortable]="true"></p-column>-->
-      <!--<p-column field="placa" header="Placa" [sortable]="true"></p-column>-->
-      <!--<p-column header="Acciones" styleClass="datatable-col-action">-->
-         <!--<template let-projection="rowData" pTemplate="body">-->
-            <!--<button type="button" icon="fa-eye" class="ui-button-info"-->
-            <!--pButton (click)="detail(projection)"></button>-->
-            <!--<button type="button" icon="fa-pencil" class="ui-button-success"-->
-                    <!--pButton (click)="update(projection)"></button>-->
+   <p-dataTable  [value]="ListJobProjection" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+      <p-column field="tipoVehiculo" header="Area" [sortable]="true"></p-column>
+      <p-column field="tipoServicio" header="Tipo de Servicio " [sortable]="true"></p-column>
+      <p-column field="marca" header="Plazas Actuales" [sortable]="true"></p-column>
+      <p-column field="modelo" header="Plazas Proyectdas" [sortable]="true"></p-column>
+      <p-column field="placa" header="Costo Proyectado" [sortable]="true"></p-column>
+      <p-column header="Acciones" styleClass="datatable-col-action">
+         <template let-projection="rowData" pTemplate="body">
+            <button type="button" icon="fa-eye" class="ui-button-info"
+            pButton (click)="detail(projection)"></button>
+            <button type="button" icon="fa-pencil" class="ui-button-success"
+                    pButton (click)="update(projection)"></button>
             <!--<button type="button" icon="fa-trash" class="ui-button-danger"-->
                     <!--pButton (click)="del(projection)"></button>-->
-         <!--</template>-->
-      <!--</p-column>-->
-   <!--</p-dataTable>-->
-<!--</div>-->
-<!--<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">-->
-   <!--<div class="ui-grid-row">-->
-      <!--<div class="ui-grid-col-4">-->
-         <!--<label for="idSede">Sede</label>-->
-      <!--</div>-->
-      <!--<div class="ui-grid-col-4">-->
-         <!--<label for="idTipoArea">Tipo Area</label>-->
-      <!--</div>-->
-      <!--<div class="ui-grid-col-4">-->
-         <!--<label for="idEstado">Estado</label>-->
-      <!--</div>-->
-   <!--</div>-->
-<!--</div>-->
-<!--<p-confirmDialog width="400"></p-confirmDialog>-->
+         </template>
+      </p-column>
+   </p-dataTable>
+</div>
+<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+   <div class="ui-grid-row">
+      <div class="ui-grid-col-4">
+         <label for="idSede">Sede</label>
+      </div>
+      <div class="ui-grid-col-4">
+         <label for="idTipoArea">Tipo Area</label>
+      </div>
+      <div class="ui-grid-col-4">
+         <label for="idEstado">Estado</label>
+      </div>
+   </div>
+</div>
+<p-confirmDialog width="400"></p-confirmDialog>
 
