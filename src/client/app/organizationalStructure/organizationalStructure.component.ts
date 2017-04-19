@@ -256,6 +256,10 @@ export class OrganizationalStructureComponent implements OnInit {
          
          this.organizationalStructureService.addOrganizationalStructure( this.organizationalStructure ).then( data => {
             this.guardando = false;
+            this.empresa = false;
+            this.btnEmpresa = false;
+            this.empty = "";
+            
             this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Registro guardado con exito!' } );
             let newChil: any = {
                "label": this.organizationalStructure.nombre,
@@ -268,8 +272,7 @@ export class OrganizationalStructureComponent implements OnInit {
                this.treedCompany.push( newChil );
                this.selectedNode = newChil;
                this.newBranch();
-               this.empresa = false;
-               this.btnEmpresa = false;
+               
             } else {
                this.selectedNode.children.push( newChil );
                this.newBranch();
