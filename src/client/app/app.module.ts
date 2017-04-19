@@ -62,6 +62,7 @@ import {CompetenciesGroupsModule} from "./competencies-groups/competencies-group
 
 
 import { OrganizationalStructureModule } from "./organizationalStructure/organizationalStructure.module";
+import { OrganizationalStructurePositionsModule } from "./organizationalStructurePositions/organizational-structure-positions.module";
 
 
 //CarsModule,
@@ -84,6 +85,7 @@ import { OrganizationalStructureModule } from "./organizationalStructure/organiz
       PositionRolesModule,
       PositionCompetenciesModule,
       OrganizationalStructureModule,
+      OrganizationalStructurePositionsModule,
       CompetenciesGroupsModule,
       SharedModule.forRoot(),
       TranslateModule.forRoot({

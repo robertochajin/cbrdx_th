@@ -2,10 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { OrganizationalStructureService } from "../_services/organizationalStructure.service";
 import { OrganizationalStructure } from "../_models/organizationalStructure";
-//import { OrganizationalStructureTipos } from "../_models/organizationalStructureTipos";
 import { TreeNode } from "primeng/components/common/api";
 import { SelectItem, Message } from "primeng/primeng";
-import { Search } from "../_models/search";
+import { ListEmployeesService } from "../_services/lists-employees.service";
+import { LocateService } from "../_services/locate.service";
+import { Localizaciones } from "../_models/localizaciones";
+import { PoliticalDivisionService } from "../_services/political-division.service";
 
 @Component( {
                moduleId: module.id,
@@ -17,445 +19,302 @@ export class OrganizationalStructureComponent implements OnInit {
    msgs: Message[] = [];
    organizationalStructure: OrganizationalStructure = new OrganizationalStructure();
    listOrganizationalStructure: OrganizationalStructure[];
-   //listOrganizationalStructureTypes: OrganizationalStructureTipos[];
-   divisionPoliticaTipos: SelectItem[] = [];
+   documentTypes: SelectItem[] = [];
+   structureTypes: SelectItem[] = [];
+   costTypes: SelectItem[] = [];
+   areaTypes: SelectItem[] = [];
+   physicalTypes: SelectItem[] = [];
    
    treedCompany: TreeNode[] = [];
    selectedNode: TreeNode;
-   empresa : boolean = true;
+   empresa: boolean = true;
+   btnEmpresa: boolean = true;
    header: string;
-   labelPadre: string;
-   
-   btnnuevo: { show: boolean, label: string, idparent: number, parent: string } = {
-      show: true, label: 'Agregar Empresa', parent: '', idparent: 0
-   };
-   btnnuevobranch: { show: boolean, label: string, idparent: number, parent: string } = {
-      show: false, label: '', parent: '', idparent: 0
-   };
-   
    displayDialog: boolean = false;
-   Comunas: boolean = false;
-   Localidades: boolean = false;
-   Resguardos: boolean = false;
-   resultSearch: Search[];
-   selectedSearch: SelectItem;
-   documentTypes: SelectItem;
    codeExists: boolean = false;
+   documentExists: boolean = false;
+   empty: string;
+   addinglocation: boolean = true;
+   guardando: boolean = false;
+   localizacion: Localizaciones = new Localizaciones();
    
-   constructor( private router: Router, private organizationalStructureService: OrganizationalStructureService ) {
-      organizationalStructureService.listOrganizationalStructure( ).subscribe( res => {
+   constructor( private router: Router,
+                private organizationalStructureService: OrganizationalStructureService,
+                private listEmployeesService: ListEmployeesService,
+                private politicalDivisionService: PoliticalDivisionService,
+                private locateService: LocateService ) {
+      organizationalStructureService.listOrganizationalStructure().subscribe( res => {
          this.listOrganizationalStructure = res;
-         for ( let c of this.listOrganizationalStructure.filter( t => t.idEstructuraOrganizacional == 0 ) ) {
-            this.treedCompany.push( {
-                                               "label": c.nombre,
-                                               "data": c,
-                                               "children": [ {
-                                                  "label": '+ Cargando...',
-                                                  "data": ""
-                                               } ]
-                                            } );
+         if ( this.listOrganizationalStructure.length > 0 ) {
+            this.empresa = false;
+            for ( let c of this.listOrganizationalStructure.filter( t => t.idPadre == 0 || t.idPadre == null ) ) {
+               let companyNode = {
+                  "label": c.nombre,
+                  "data": c,
+                  "leaf": false,
+               };
+               this.treedCompany.push( companyNode );
+               this.selectedNode = companyNode;
+            }
+            this.btnEmpresa = false;
+            this.newBranch();
+         } else {
+            
+            this.empresa = true;
+            this.empty = "No hay elementos registrados";
+            this.newCompany();
          }
       } );
-   
-      /*organizationalStructureService.listOrganizationalStructureTypes().subscribe( res => {
-        this.listOrganizationalStructureTypes = res;
-      } );*/
+      
+      this.listEmployeesService.getDocumentTypes().subscribe( res => {
+         this.documentTypes.push( { label: "Seleccione", value: null } );
+         for ( let dp of res ) {
+            this.documentTypes.push( {
+                                        label: dp.nombreListaTipoDocumento,
+                                        value: dp.idListaTipoDocumento
+                                     } );
+         }
+      } );
+      
+      this.organizationalStructureService.getStrctureTypes().subscribe( res => {
+         this.structureTypes.push( { label: "Seleccione", value: null } );
+         for ( let dp of res ) {
+            this.structureTypes.push( {
+                                         label: dp.nombre,
+                                         value: dp.idListaTipoEstructura
+                                      } );
+         }
+      } );
+      
+      this.organizationalStructureService.getCostTypes().subscribe( res => {
+         this.costTypes.push( { label: "Seleccione", value: null } );
+         for ( let dp of res ) {
+            this.costTypes.push( {
+                                    label: dp.centroCostos,
+                                    value: dp.idCentroCostos
+                                 } );
+         }
+      } );
+      
+      this.organizationalStructureService.getAreaTypes().subscribe( res => {
+         this.areaTypes.push( { label: "Seleccione", value: null } );
+         for ( let dp of res ) {
+            this.areaTypes.push( {
+                                    label: dp.estructuraArea,
+                                    value: dp.idEstructuraArea
+                                 } );
+         }
+      } );
+      
+      this.organizationalStructureService.getPhysicalTypes().subscribe( res => {
+         this.physicalTypes.push( { label: "Seleccione", value: null } );
+         for ( let dp of res ) {
+            this.physicalTypes.push( {
+                                        label: dp.estructuraFisica,
+                                        value: dp.idEstructuraFisica
+                                     } );
+         }
+      } );
+      
    }
    
    ngOnInit(): void {
+      this.localizacion.direccion
    }
    
-   /*nodeExpand( node: any ) {
-      let divisionPoliticaNivel: any[] = [];
-      let chil: any;
-      let tabselected = this.getCodigoTypebyId( node.data.idDivisionPoliticaTipo ).length;
-      if ( tabselected >= 3 ) {
-         chil = [];
+   validateCode() {
+      if ( this.organizationalStructure.codigo != "" && this.organizationalStructure.codigo != null ) {
+         this.codeExists = this.listOrganizationalStructure.filter( t => (t.codigo === this.organizationalStructure.codigo && t.idEstructuraOrganizacional != this.organizationalStructure.idEstructuraOrganizacional ) ).length > 0;
       } else {
-         chil = [ {
-            "label": '+ Cargando...',
-         } ]
+         this.codeExists = false;
       }
-      for ( let c of this.listadoTodo.filter( t => t.idDivisionPoliticaPadre == node.data.idDivisionPolitica ) ) {
-         divisionPoliticaNivel.push( {
-                                        "label": c.descripcionDivisonPolitica,
-                                        "data": c,
-                                        "parent": node,
-                                        "children": chil
-                                     } );
+      
+   }
+   
+   capitalizeCode() {
+      let input = this.organizationalStructure.codigo;
+      if ( input != "" && input != null ) {
+         this.organizationalStructure.codigo = input.toUpperCase().replace( ' ', '' ).trim();
       }
-      node.children = divisionPoliticaNivel;
+   }
+   
+   validateDocument() {
+      if ( this.organizationalStructure.numeroDocumento != "" && this.organizationalStructure.idTipoDocumento != null ) {
+         this.documentExists = this.listOrganizationalStructure.filter( t => (t.numeroDocumento === this.organizationalStructure.numeroDocumento && t.idTipoDocumento === this.organizationalStructure.idTipoDocumento && t.idEstructuraOrganizacional != this.organizationalStructure.idEstructuraOrganizacional ) ).length > 0;
+      } else {
+         this.documentExists = false;
+      }
+   }
+   
+   capitalizeName() {
+      let input = this.organizationalStructure.nombre;
+      if ( input != "" && input != null ) {
+         this.organizationalStructure.nombre = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+      }
+   }
+   
+   newCompany() {
+      this.organizationalStructure = new OrganizationalStructure();
+      this.header = 'Nueva empresa';
+      this.organizationalStructure.idPadre = 0;
+      this.codeExists = false;
+      this.documentExists = false;
+      this.empresa = true;
+   }
+   
+   newBranch() {
+      this.empresa = false;
+      this.organizationalStructure = new OrganizationalStructure();
+      this.header = 'Nueva Area';
+      this.organizationalStructure.idPadre = this.selectedNode.data.idEstructuraOrganizacional;
+      this.codeExists = false;
+      this.documentExists = false;
+   }
+   
+   nodeExpand( node: any ) {
+      let chilNodes: TreeNode[] = [];
+      for ( let c of this.listOrganizationalStructure.filter( t => t.idPadre == node.data.idEstructuraOrganizacional ) ) {
+         chilNodes.push( {
+                            "label": c.nombre,
+                            "data": c,
+                            "parent": node,
+                            "leaf": false,
+                            "children" : []
+                         } );
+      }
+      node.children = chilNodes;
       
    }
    
    nodeSelect( node: any ) {
       
-      let nodeCode = this.getCodigoTypebyId( node.data.idDivisionPoliticaTipo );
-      
-      this.tabselected = nodeCode.length;
-      //console.info(node.data);
-      
-      this.header = node.data.descripcionDivisonPolitica;
-      this.btnnuevodepartamento.show = false;
-      this.btnnuevomunicipio.show = false;
-      this.btnnuevobarrio.show = false;
-      
-      switch ( this.tabselected ) {
-         case 1:
-            
-            this.getTipoPais();
-            this.labeldescripcionDivisonPolitica = "Nombre del País";
-            this.labelPadre = "";
-            this.btnnuevopais = {
-               show: true,
-               label: 'Nuevo País ',
-               parent: node.label,
-               idparent: 0
-            };
-            this.btnnuevodepartamento = {
-               show: true,
-               label: 'Nuevo departamento de ' + node.label,
-               parent: node.label,
-               idparent: node.data.idDivisionPolitica
-            };
-            break;
+      if ( node.data.idPadre == 0 || node.data.idPadre == null ) {
+         this.empresa = true;
          
-         case 2:
-            this.getTiposHijos( nodeCode.substr( 0, 1 ) );
-            this.labeldescripcionDivisonPolitica = "Nombre del Departamento";
-            this.labelPadre = "País: " + node.parent.label;
-            this.btnnuevomunicipio = {
-               show: true,
-               label: 'Nuevo municipio de ' + node.label,
-               parent: node.label,
-               idparent: node.data.idDivisionPolitica
-            };
-            break;
-         
-         case 3:
-            this.getTiposHijos( nodeCode.substr( 0, 2 ) );
-            this.labeldescripcionDivisonPolitica = "Nombre del Municipio";
-            this.labelPadre = "Departamento: " + node.parent.label;
-            this.btnnuevobarrio = {
-               show: true,
-               label: 'Nueva barrio de ' + node.label,
-               parent: node.label,
-               idparent: node.data.idDivisionPolitica
-            };
-            break;
-         
-         case 4:
-            nodeCode = this.getCodigoTypebyId( node.parent.data.idDivisionPoliticaTipo );
-            this.getTiposHijos( nodeCode.substr( 0, 3 ) );
-            this.labeldescripcionDivisonPolitica = "Nombre del Barrio";
-            this.labelPadre = "Ciudad: " + node.parent.label;
-            break;
-         
+      } else {
+         this.empresa = false;
       }
-      
-      this.divisionPoliticaService.viewDivisionPolitica( node.data.idDivisionPolitica ).subscribe(
-         politicalDivision => {
-            this.politicalDivision = politicalDivision;
-            this.validateCode();
+      this.organizationalStructureService.viewOrganizationalStructure( node.data.idEstructuraOrganizacional ).subscribe(
+         organizationalStructure => {
+            this.organizationalStructure = organizationalStructure;
+            this.codeExists = false;
+            this.documentExists = false;
+            if ( node.data.idPadre == 0 || node.data.idPadre == null ) {
+               this.header = this.organizationalStructure.nombre;
+               if ( this.organizationalStructure.idLocalizacion != null ) {
+                  this.locateService.getById( this.organizationalStructure.idLocalizacion ).subscribe( localizacion => {
+                     this.localizacion = localizacion;
+                     this.organizationalStructure.localizacion = localizacion.direccion;
+                     this.localizacion.locacion = { camino: '', idDivisionPolitica: null };
+                     if ( localizacion.idDivisionPolitica != null ) {
+                        this.politicalDivisionService.getLocation( localizacion.idDivisionPolitica ).subscribe( ciudad => {
+                           this.localizacion.locacion.camino = ciudad.camino;
+                           this.localizacion.locacion.idDivisionPolitica = ciudad.idDivisionPolitica;
+                        } );
+                     }
+                  } );
+               }
+            } else {
+               this.header = this.organizationalStructure.nombre;
+            }
+            
          } );
+      
    }
    
    save() {
-      if ( this.politicalDivision.idDivisionPolitica == null || this.politicalDivision.idDivisionPolitica == 0 ) {
-         //console.info(this.politicalDivision);
-         
-         this.divisionPoliticaService.addDivisionPolitica( this.politicalDivision ).then( data => {
-            this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Nuevo registro' } );
-            let chil: any[] = [];
-            if ( this.tabselected <= 3 ) {
-               chil = [ {
-                  "label": '+ Cargando...',
-               } ]
+      
+      if ( this.empresa == true ) {
+         if ( this.organizationalStructure.localizacion != '' && this.organizationalStructure.localizacion != null ) {
+            this.guardando = true;
+            if ( this.organizationalStructure.idLocalizacion == null || this.organizationalStructure.idLocalizacion == 0 ) {
+               this.localizacion.indicadorHabilitado = true;
+               this.locateService.add( this.localizacion ).subscribe(
+                  data => {
+                     this.organizationalStructure.idLocalizacion = data.idLocalizacion;
+                     return this.saveEO();
+                  } );
+            } else {
+               this.locateService.update( this.localizacion ).subscribe(
+                  data => {
+                     return this.saveEO();
+                  } );
             }
+         } else {
+            this.guardando = false;
+         }
+      } else {
+         this.guardando = true;
+         return this.saveEO();
+      }
+      
+   }
+   
+   saveEO() {
+      
+      if ( this.organizationalStructure.idEstructuraOrganizacional == null || this.organizationalStructure.idEstructuraOrganizacional == 0 ) {
+         
+         this.organizationalStructureService.addOrganizationalStructure( this.organizationalStructure ).then( data => {
+            this.guardando = false;
+            this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Registro guardado con exito!' } );
             let newChil: any = {
-               "label": this.politicalDivision.descripcionDivisonPolitica,
+               "label": this.organizationalStructure.nombre,
                "data": data,
-               "children": chil
+               "leaf": false,
+               "children" : []
             };
-            //console.info(this.politicalDivision);
-            this.listadoTodo.push( data );
-            if ( this.politicalDivision.idDivisionPoliticaPadre == 0 ) {
-               this.treedivisionPolitica.push( newChil );
-               this.newCountry();
+            this.listOrganizationalStructure.push( data );
+            if ( this.organizationalStructure.idPadre == 0 || this.organizationalStructure.idPadre == null ) {
+               this.treedCompany.push( newChil );
+               this.selectedNode = newChil;
+               this.newBranch();
             } else {
                this.selectedNode.children.push( newChil );
-               switch ( this.tabselected ) {
-                  case 2:
-                     this.newDepartment();
-                     break;
-                  case 3:
-                     this.newCity();
-                     break;
-                  case 4:
-                     this.newNeighborhood();
-                     break;
-               }
+               this.newBranch();
             }
          }, error => {
+            this.guardando = false;
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       } else {
-         this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Nuevo registro' } );
-         this.divisionPoliticaService.updateDivisionPolitica( this.politicalDivision ).then( data => {
-            this.selectedNode.data = this.politicalDivision;
-            this.selectedNode.label = this.politicalDivision.descripcionDivisonPolitica;
-            this.header = this.politicalDivision.descripcionDivisonPolitica;
-            for ( let i = 0; i < this.listadoTodo.length; i++ ) {
-               if ( this.listadoTodo[ i ].idDivisionPolitica === this.politicalDivision.idDivisionPolitica ) {
-                  this.listadoTodo[ i ] = this.politicalDivision;
+         this.organizationalStructureService.updateOrganizationalStructure( this.organizationalStructure ).then( data => {
+            this.guardando = false;
+            this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Registro actualizado con exito!' } );
+            this.selectedNode.data = this.organizationalStructure;
+            this.selectedNode.label = this.organizationalStructure.nombre;
+            this.header = this.organizationalStructure.nombre;
+            for ( let i = 0; i < this.listOrganizationalStructure.length; i++ ) {
+               if ( this.listOrganizationalStructure[ i ].idEstructuraOrganizacional === this.organizationalStructure.idEstructuraOrganizacional ) {
+                  this.listOrganizationalStructure[ i ] = this.organizationalStructure;
                   return;
                }
             }
+         }, error => {
+            this.guardando = false;
+            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al actualizar.' } );
          } );
       }
    }
    
-   newCountry() {
-      this.politicalDivision = new DivisionPolitica();
-      this.tabselected = 1;
-      this.header = 'Nuevo país';
-      this.labeldescripcionDivisonPolitica = "Nombre del País";
-      this.labelPadre = "";
-      this.politicalDivision.idDivisionPoliticaPadre = 0;
-      this.getTipoPais();
-      this.codeExists = false;
-   }
-   
-   newDepartment() {
-      this.politicalDivision = new DivisionPolitica();
-      this.tabselected = 2;
-      this.header = 'Nuevo Departamento';
-      this.labelPadre = "Pais: " + this.btnnuevodepartamento.parent;
-      this.labeldescripcionDivisonPolitica = "Nombre del Departamento";
-      this.politicalDivision.idDivisionPoliticaPadre = this.btnnuevodepartamento.idparent;
-      let nodeCode = this.getCodigoTypebyId( this.selectedNode.data.idDivisionPoliticaTipo );
-      this.getTiposHijos( nodeCode.substr( 0, 2 ) );
-      this.codeExists = false;
-   }*/
-   
-   /*
-   
-   getTipoPais(): void {
-      this.divisionPoliticaTipos = [];
-      for ( let dp of this.listadoDivisionPoliticaTipos.filter( t => t.codigoDivisionPoliticaTipo.length == 1 ) ) {
-         this.divisionPoliticaTipos.push( {
-                                             label: dp.descripcionTipo,
-                                             value: dp.idDivisionPoliticaTipo
-                                          } );
-      }
-      this.politicalDivision.idDivisionPoliticaTipo = this.divisionPoliticaTipos[ 0 ].value;
-   }
-   
-   getTiposHijos( id: string ): void {
-      this.divisionPoliticaTipos = [];
-      for ( let dp of this.listadoDivisionPoliticaTipos.filter( t => t.codigoDivisionPoliticaTipo.startsWith( id ) && t.codigoDivisionPoliticaTipo.length == id.length + 1 ) ) {
-         this.divisionPoliticaTipos.push( {
-                                             label: dp.descripcionTipo,
-                                             value: dp.idDivisionPoliticaTipo
-                                          } );
-      }
-      this.politicalDivision.idDivisionPoliticaTipo = this.divisionPoliticaTipos[ 0 ].value;
-      this.changeTipoID( this.politicalDivision.idDivisionPoliticaTipo );
-      //console.log(this.politicalDivision);
-   }
-   
-   getCodigoTypebyId( id: number ) {
-      let nivel: string = "1";
-      for ( let dp of this.listadoDivisionPoliticaTipos.filter( t => t.idDivisionPoliticaTipo == id ) ) {
-         nivel = dp.codigoDivisionPoliticaTipo;
-         break;
-      }
-      return nivel;
-   }
-   
    doCancel() {
-      if ( this.politicalDivision.idDivisionPolitica == null || this.politicalDivision.idDivisionPolitica == 0 ) {
-         this.politicalDivision = new DivisionPolitica;
+      if ( this.organizationalStructure.idEstructuraOrganizacional == null || this.organizationalStructure.idEstructuraOrganizacional == 0 ) {
+         this.organizationalStructure = new OrganizationalStructure;
       } else {
-         this.divisionPoliticaService.viewDivisionPolitica( this.politicalDivision.idDivisionPolitica ).subscribe( res => {
-            this.politicalDivision = res;
+         this.organizationalStructureService.viewOrganizationalStructure( this.organizationalStructure.idEstructuraOrganizacional ).subscribe( res => {
+            this.organizationalStructure = res;
          } );
       }
       this.displayDialog = false;
    }
    
-   changeTipo( event: any ) {
-      let codigo = this.getCodigoTypebyId( event.value );
-      this.Comunas = false;
-      this.Localidades = false;
-      this.Resguardos = false;
-      
-      if ( codigo == '1112' ) {
-         this.Comunas = true;
-      }
-      if ( codigo == '1121' || codigo == '1131' ) {
-         this.Localidades = true;
-      }
-      if ( codigo == '1151' ) {
-         this.Resguardos = true;
-      }
+   bindLocation( event: any ) {
+      this.localizacion = event;
+      this.organizationalStructure.localizacion = event.direccion;
+      this.toggleform();
    }
    
-   changeTipoID( id: number ) {
-      let codigo = this.getCodigoTypebyId( id );
-      this.Comunas = false;
-      this.Localidades = false;
-      this.Resguardos = false;
-      
-      if ( codigo == '1112' ) {
-         this.Comunas = true;
-      }
-      if ( codigo == '1121' || codigo == '1131' ) {
-         this.Localidades = true;
-      }
-      if ( codigo == '1151' ) {
-         this.Resguardos = true;
-      }
+   toggleform() {
+      this.addinglocation = !this.addinglocation;
    }
    
-   search( event: any ) {
-      this.divisionPoliticaService.getSearch( event.query ).subscribe(
-         lis => this.resultSearch = lis
-      );
-   }
-   
-   captureId( event: Search ) {
-      // ScrollTo 0;
-      jQuery( '#trvDivisionPolitica' ).scrollTop( 0 );
-      
-      this.divisionPoliticaService.viewDivisionPolitica( event.value ).subscribe( res => {
-         this.politicalDivision = res;
-         this.searchRecursive( res );
-         this.header = res.descripcionDivisonPolitica;
-         let nodeCode = this.getCodigoTypebyId( res.idDivisionPoliticaTipo );
-         this.getTiposHijos( nodeCode.substr( 0, nodeCode.length - 1 ) );
-         if ( res.idDivisionPolitica != 0 ) {
-            this.divisionPoliticaService.viewDivisionPolitica( res.idDivisionPoliticaPadre ).subscribe( res => {
-               this.labelPadre = res.descripcionDivisonPolitica;
-               this.codeExists = false;
-               
-            } );
-         } else {
-            this.labelPadre = "";
-         }
-         
-         // Scroll to Select
-         jQuery( '#trvDivisionPolitica' ).scrollTop(
-            jQuery( '.ui-state-highlight' ).position().top - jQuery( '#trvDivisionPolitica' ).height() / 2
-         );
-      } );
-   }
-   
-   private searchRecursive( res: DivisionPolitica ) {
-      let node4: number = 0;
-      let node3: number = 0;
-      let node2: number = 0;
-      let node1: number = 0;
-      let nivel = this.listadoDivisionPoliticaTipos.find( t => t.idDivisionPoliticaTipo == res.idDivisionPoliticaTipo ).codigoDivisionPoliticaTipo.length;
-      
-      switch ( nivel.toString() ) {
-         case "1":
-            node1 = res.idDivisionPolitica;
-            break;
-         case "2":
-            node2 = res.idDivisionPolitica;
-            node1 = res.idDivisionPoliticaPadre;
-            break;
-         case "3":
-            node3 = res.idDivisionPolitica;
-            node2 = res.idDivisionPoliticaPadre;
-            node1 = this.listadoTodo.find( t => t.idDivisionPolitica == res.idDivisionPoliticaPadre ).idDivisionPoliticaPadre;
-            break;
-         case "4":
-            node4 = res.idDivisionPolitica;
-            node3 = res.idDivisionPoliticaPadre;
-            node2 = this.listadoTodo.find( t => t.idDivisionPolitica == node3 ).idDivisionPoliticaPadre;
-            node1 = this.listadoTodo.find( t => t.idDivisionPolitica == node2 ).idDivisionPoliticaPadre;
-            break;
-      }
-      if ( node1 > 0 ) {
-         this.searchLevel( node1, 1 );
-      }
-      if ( node2 > 0 ) {
-         this.searchLevel( node2, 2 );
-      }
-      if ( node3 > 0 ) {
-         this.searchLevel( node3, 3 );
-      }
-      if ( node4 > 0 ) {
-         this.searchLevel( node4, 4 );
-      }
-      
-      this.selectedSearch = null;
-      this.nodeSelect( this.selectedNode );
-      
-   }
-   
-   private searchLevel( id: number, tipo: number ) {
-      
-      if ( tipo == 1 ) {
-         this.treedivisionPolitica.forEach( node => {
-            if ( node.data.idDivisionPolitica == id ) {
-               node.expanded = true;
-               this.nodeExpand( node );
-               this.selectedNode = node;
-            } else {
-               node.expanded = false;
-            }
-         } );
-      } else {
-         if ( this.selectedNode.children ) {
-            this.selectedNode.children.forEach( childNode => {
-               if ( childNode.data.idDivisionPolitica == id ) {
-                  childNode.expanded = true;
-                  if ( tipo != 4 ) {
-                     this.nodeExpand( childNode );
-                  }
-                  this.selectedNode = childNode;
-               } else {
-                  childNode.expanded = false;
-               }
-            } );
-         }
-      }
-   }
-   
-   
-   validateCode() {
-      this.codeExists = this.listadoTodo.filter( t => (t.codigoDivisionPolitica === this.politicalDivision.codigoDivisionPolitica && t.idDivisionPolitica != this.politicalDivision.idDivisionPolitica ) ).length > 0;
-   }
-   
-   inputNumberCodigo() {
-      let labelCodigo = this.politicalDivision.codigoPostalDivisionPolitica;
-      if ( labelCodigo != "" && labelCodigo != null ) {
-         this.politicalDivision.codigoPostalDivisionPolitica = this.politicalDivision.codigoPostalDivisionPolitica.replace( /[^0-9]/g, '' );
-      }
-   }
-   
-   inputNumberIndicativo() {
-      let labelIndicativo = this.politicalDivision.indicativoDivisonPolitica;
-      if ( labelIndicativo != "" && labelIndicativo != null ) {
-         this.politicalDivision.indicativoDivisonPolitica = this.politicalDivision.indicativoDivisonPolitica.replace( /[^0-9]/g, '' );
-      }
-   }
-   
-   capitalize() {
-      let input = this.politicalDivision.descripcionDivisonPolitica;
-      if ( input != "" && input != null ) {
-         this.politicalDivision.descripcionDivisonPolitica = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
-      }
-   }
-   
-   capitalizeCodigo() {
-      let input = this.politicalDivision.codigoDivisionPolitica;
-      if ( input != "" && input != null ) {
-         this.politicalDivision.codigoDivisionPolitica = input.toUpperCase().replace( ' ', '' ).trim();
-      }
-   }
-*/
 }

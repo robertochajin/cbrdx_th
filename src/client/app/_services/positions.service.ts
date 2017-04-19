@@ -16,7 +16,11 @@ export class PositionsService {
    getAll() {
       return this.http.get( this.serviceURL + 'cargos' ).map( ( res: Response ) => res.json() );
    }
-   
+
+   getByWildCard(query: string) {
+      return this.http.get( this.serviceURL + 'cargos' + '/wildcard/' + query ).map( ( res: Response ) => res.json() );
+   }
+
    getListPositions() {
       return this.http.get( this.serviceURL + 'cargos/enabled' ).map( ( res: Response ) => res.json() );
    }
