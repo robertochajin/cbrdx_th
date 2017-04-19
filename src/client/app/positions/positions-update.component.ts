@@ -126,6 +126,7 @@ export class PositionsUpdateComponent {
                                          });
          }
       });
+      this.acordion = 0;
    }
    
    ngOnInit() {
@@ -154,11 +155,14 @@ export class PositionsUpdateComponent {
                                                   } );
                   }
                }
+               if(this.position.indicadorHabilitado == false){
+                  this.allPosition.push(this.position);
+               }
                this.buildParent();
             } );
          } );
       } );
-      this.acordion = this._nav.getTab();
+      
 
    }
 
