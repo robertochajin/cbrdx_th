@@ -18,19 +18,23 @@ export class OrganizationalStructureService {
    }
    
    listOrganizationalStructure() {
-      return this.http.get( this.serviceURL+'estrcturaOrganizacional', { headers: this.headers } ).map( ( res: Response ) => res.json() as OrganizationalStructure[] );
+      return this.http.get( this.serviceURL+'estructuraOrganizacional', { headers: this.headers } ).map( ( res: Response ) => res.json() as OrganizationalStructure[] );
    }
    
    addOrganizationalStructure( c: OrganizationalStructure ): Promise<OrganizationalStructure> {
-      return this.http.post( this.serviceURL+'estrcturaOrganizacional', JSON.stringify( c ), { headers: this.headers } ).toPromise().then( res => res.json() as OrganizationalStructure ).catch( this.handleError );
+      return this.http.post( this.serviceURL+'estructuraOrganizacional', JSON.stringify( c ), { headers: this.headers } ).toPromise().then( res => res.json() as OrganizationalStructure ).catch( this.handleError );
    };
    
    updateOrganizationalStructure( c: OrganizationalStructure ): Promise<any> {
-      return this.http.put( this.serviceURL+'estrcturaOrganizacional', JSON.stringify( c ), { headers: this.headers } ).toPromise().catch( this.handleError );
+      return this.http.put( this.serviceURL+'estructuraOrganizacional', JSON.stringify( c ), { headers: this.headers } ).toPromise().catch( this.handleError );
    }
    
    viewOrganizationalStructure( id: number ) {
-      return this.http.get( this.serviceURL+'estrcturaOrganizacional/' + "buscarId/" + id, { headers: this.headers } ).map( res => res.json() as OrganizationalStructure );
+      return this.http.get( this.serviceURL+'estructuraOrganizacional/' + id, { headers: this.headers } ).map( res => res.json() as OrganizationalStructure );
+   }
+   
+   viewPadreOrganizationalStructure( id: number ) {
+      return this.http.get( this.serviceURL+'estructuraOrganizacional/' + "buscarPadre/" + id, { headers: this.headers } ).map( res => res.json() as OrganizationalStructure );
    }
    
    handleError( error: any ): Promise<any> {

@@ -8,11 +8,13 @@ import {FormSharedModule } from '../shared/form-shared.module';
 
 import {OrganizationalStructureService} from "../_services/organizationalStructure.service";
 import {OrganizationalStructureComponent} from "./organizationalStructure.component";
+import { LocationsModule } from "../locations/locations.module";
 
 @NgModule({
     imports: [
        SharedModule,
        FormSharedModule,
+       LocationsModule
     ],
     declarations: [OrganizationalStructureComponent],
     bootstrap: [OrganizationalStructureComponent],
