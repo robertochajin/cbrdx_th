@@ -51,6 +51,7 @@ export class ProjectConfig extends SeedConfig {
       { src: 'moment/min/moment.min.js', inject: true},
       { src: 'moment/locale/es.js', inject: true},
 
+       { src: 'chart.js/dist/Chart.js', inject: true},
 
     ];
 
