@@ -12,11 +12,13 @@ export class OrganizationalStructurePositions {
    public auditoriaFecha : string;
    public cargo: string;
    public salario: number;
+   public ocupados: number;
 
 
    constructor() {
       this.indicadorHabilitado = true;
       this.auditoriaUsuario = 1;
       this.auditoriaFecha = "";
+      this.ocupados = 0;
    }
 }
