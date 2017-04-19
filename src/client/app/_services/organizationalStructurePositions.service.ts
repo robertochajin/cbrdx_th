@@ -8,8 +8,8 @@ import {OrganizationalStructurePositions} from "../_models/organizationalStructu
 export class OrganizationalStructurePositionsServices {
 
    public headers = new Headers({'Content-Type': 'application/json'});
-   private masterService = '<%= SVC_TH_URL %>/api/sedesAreasCargos/';
-   private detailService = '<%= SVC_TH_URL %>/api/sedesAreasCargos/';
+   private masterService = '<%= SVC_TH_URL %>/api/estructuraOrganizacionalCargos/';
+   private detailService = '<%= SVC_TH_URL %>/api/estructuraOrganizacionalCargos/';
 
    constructor(private http: Http, private authenticationService: AuthenticationService) {
       this.headers = new Headers({'Content-Type': 'application/json', 'Authorization': this.authenticationService.token});
@@ -17,6 +17,11 @@ export class OrganizationalStructurePositionsServices {
 
    getAllEnabled(): Observable<OrganizationalStructurePositions[]> {
       return this.http.get(this.masterService + 'enabled/').map((res: Response) => res.json() as OrganizationalStructurePositions[]);
+   }
+
+   getAllByOrganizacionalStructure(idOrganizacionalStructure: number): Observable<OrganizationalStructurePositions[]> {
+      return this.http.get(this.masterService + 'buscarCargo/' + idOrganizacionalStructure).map((res: Response) => res.json() as OrganizationalStructurePositions[]);
+      // return this.http.get(this.masterService + 'buscarByArea/' + idOrganizacionalStructure).map((res: Response) => res.json() as OrganizationalStructurePositions[]);
    }
 
    add(f: OrganizationalStructurePositions) {
