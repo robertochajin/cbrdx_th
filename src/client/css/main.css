@@ -62,6 +62,9 @@ body .ui-widget:disabled {
 .sidebar-menu .treeview-menu > li > a > .fa{
    margin-left: -24px;
 }
+.sidebar-menu li > a > .pull-right-container {
+   right: 0px;
+}
 /**
 ------------------------ Main CSS ------------------------------------
  */
