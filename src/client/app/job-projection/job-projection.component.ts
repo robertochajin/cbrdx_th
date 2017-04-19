@@ -42,63 +42,13 @@ export class JobProjectionComponent {
          }
       });
 
-      // this.jobProjectionService.getAll().subscribe(
-      //    projection => {
-      //       for (let r of projection) {
-      //          this.jobProjectionService.getTypeRiskById(r.idTipoRiesgo).subscribe(
-      //             res => {
-      //                r.tipo = res.riesgoTipo;
-      //             });
-      //          this.jobProjectionService.getSubTypeRiskById(r.idSubTipoRiesgo).subscribe(
-      //             res => {
-      //                r.subtipo = res.riesgoSubTipo;
-      //             });
-      //          this.risks.push(r);
-      //       }
-      //    }
-      // );
+   }
+   changeTypeArea(){
 
    }
+   changeArea(){
 
-   // del(risks: Risks) {
-   //    this.dialogObjet = risks;
-   //    this.confirmationService.confirm({
-   //       message: ` ¿Esta seguro que lo desea eliminar?`,
-   //       header: 'Corfirmación',
-   //       icon: 'fa fa-question-circle',
-   //       accept: () => {
-   //          this.dialogObjet.indicadorHabilitado = false;
-   //          this.risksService.update(this.dialogObjet).subscribe(r => {
-   //             this.risks.splice(this.risks.indexOf(this.dialogObjet), 1);
-   //             this.dialogObjet = null;
-   //          });
-   //       },
-   //       reject: () => {
-   //          this.dialogObjet = null;
-   //       }
-   //    });
-   // }
-
-   // change(r: Risks) {
-   //    this.risksService.update(r)
-   //       .subscribe(data => {
-   //          this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
-   //       }, error => {
-   //          this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
-   //       });
-   // }
-
-   // detail(r: Risks) {
-   //    this.router.navigate(['risks/detail/' + r.idRiesgo]);
-   // }
-   //
-   // add() {
-   //    this.router.navigate(['risks/add']);
-   // }
-   //
-   // update(r: Risks) {
-   //    this.router.navigate(['risks/update/' + r.idRiesgo]);
-   // }
+   }
 
 
 }

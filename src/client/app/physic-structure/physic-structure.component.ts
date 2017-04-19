@@ -27,6 +27,9 @@ export class PhysicStructureComponent {
       this.physicStructureService.getAll().subscribe(
          physicStructure => {
             this.ListPhysicStructure = physicStructure;
+            this.ListPhysicStructure.sort(function (a, b) {
+               return b.idEstructuraFisica - a.idEstructuraFisica;
+            });
          }
       );
    }
