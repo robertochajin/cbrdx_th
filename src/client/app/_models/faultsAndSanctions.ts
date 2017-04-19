@@ -4,8 +4,6 @@ import { Injectable } from '@angular/core';
 export class FaultsAndSanctions {
 
   public idFalta : number;
-  public idEstadoFalta : number;
-  public estadoFalta : string;
   public falta  : string;
   public idTipoFalta  : number;
   public tipoFalta  : string;
