@@ -19,12 +19,14 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
 
    private editingPosition: boolean = false;
    private badPostion: boolean = false;
+   private countSlots: number = 0;
+   private countCost: number = 0;
    private area: OrganizationalStructure = new OrganizationalStructure();
    private osPosition: OrganizationalStructurePositions = new OrganizationalStructurePositions();
-   private BackUpOSPosition: OrganizationalStructurePositions = new OrganizationalStructurePositions();
+   private backUpOSPosition: OrganizationalStructurePositions = new OrganizationalStructurePositions();
    private osPositions: OrganizationalStructurePositions[] = [];
    private positionList: Positions[] = [];
-   private selectedPosition : Positions = new Positions();
+   private selectedPosition : Positions = null;
 
    constructor(private positionsService: PositionsService,
                private ospService: OrganizationalStructurePositionsServices,
@@ -35,17 +37,22 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
 
    ngOnInit() {
       //temporal
-      this.area.idEstructuraOrganizacional = 19;
+      this.area.idEstructuraOrganizacional = 7;
       //temporal
 
-      this.ospService.getAllByOrganizacionalStructure(this.area.idEstructuraOrganizacional).subscribe(list => this.osPositions = list);
+      this.ospService.getAllByOrganizacionalStructure(this.area.idEstructuraOrganizacional).subscribe(list => {this.osPositions = list; this.sumPositions()});
    }
 
    editPosition(osPosition: OrganizationalStructurePositions) {
       if (osPosition != null) {
-         this.BackUpOSPosition = osPosition;
+         this.backUpOSPosition = osPosition;
+         this.osPosition = osPosition;
+         this.selectedPosition = new Positions();
+         this.selectedPosition.idCargo = osPosition.idCargo;
+         this.selectedPosition.cargo = osPosition.cargo;
       } else {
          this.osPosition = new OrganizationalStructurePositions();
+         this.selectedPosition = null;
       }
       this.editingPosition = true;
    }
@@ -67,17 +74,19 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
 
    savePosition() {
       if (this.osPosition.idEstructuraOrganizacionalCargo !== undefined && this.osPosition.idEstructuraOrganizacionalCargo !== null) {
+         this.ospService.update(this.osPosition).subscribe(data => {
+            this.osPositions[this.osPositions.indexOf(this.backUpOSPosition)] = this.osPosition;
+            this.osPositions.push(data);
+            this.editingPosition = false;
+            this.osPosition = new OrganizationalStructurePositions();
+         });
+      } else {
          this.osPosition.idEstructuraOrganizacional = this.area.idEstructuraOrganizacional;
          this.osPosition.indicadorHabilitado = true;
          this.ospService.add(this.osPosition).subscribe(data => {
-            this.osPositions.push(data);
+            this.osPositions.push(this.osPosition);
             this.editingPosition = false;
          });
-      } else {
-         //Actualiza y actualiza...el datatable
-         this.osPositions.push(this.osPosition);
-         this.editingPosition = false;
-
       }
    }
 
@@ -92,16 +101,26 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
          this.osPosition.salario = event.salario;
          this.badPostion = false;
       } else {
+         this.selectedPosition = null;
          this.badPostion = false;
       }
    }
 
    cancelEditingPosition() {
-      if (this.BackUpOSPosition != null) {
+      if (this.backUpOSPosition != null) {
          //Verificar si es necesario reestablecer el objeto en la tabla
-         // this.osPositions[this.osPositions.indexOf(this.BackUpOSPosition)] = this.BackUpOSPosition;
-         this.BackUpOSPosition = null;
+         // this.osPositions[this.osPositions.indexOf(this.backUpOSPosition)] = this.backUpOSPosition;
+         this.backUpOSPosition = null;
       }
       this.editingPosition = false;
+   }
+
+   sumPositions(){
+      this.countCost = 0;
+      this.countSlots = 0;
+      for (let position of this.osPositions){
+         this.countCost = this.countCost + (position.salario * position.plazas);
+         this.countSlots = this.countSlots + position.plazas;
+      }
    }
 }

@@ -81,10 +81,11 @@ export class EvaluationCriteriasComponent {
    checkRepeated() {
       let pctemp = this.backUpPositionCriterias;
       let cont: number;
+      this.criteriaRepeated = false;
       for (let pc1 of this.backUpPositionCriterias) {
          cont = 0;
          for (let pc2 of pctemp) {
-            if (pc1.idCriterio !== null && pc2.idCriterio === pc1.idCriterio) {
+            if (pc1.idCriterio !== null && pc2.idCriterio !== pc1.idCriterio) {
                cont = cont + 1;
             }
             if (cont > 1) break
@@ -126,10 +127,11 @@ export class EvaluationCriteriasComponent {
          nc.idCargo = this.position.idCargo;
          this.backUpPositionCriterias.push(nc);
       }
-      this.sumFactors();
-      this.editing = true;
       this.criteriaRepeated = false;
       this.oneHundred = false;
+      this.sumFactors();
+      this.checkRepeated();
+      this.editing = true;
    }
 
    addCriteria() {
@@ -137,11 +139,13 @@ export class EvaluationCriteriasComponent {
       nc.indicadorHabilitado = true;
       nc.idCargo = this.position.idCargo;
       this.backUpPositionCriterias.push(nc);
+      this.checkRepeated();
    }
 
    removeCriteria(id: any) {
       this.backUpPositionCriterias.splice(id, 1);
       this.sumFactors();
+      this.checkRepeated();
    }
 
    goBack(): void {
