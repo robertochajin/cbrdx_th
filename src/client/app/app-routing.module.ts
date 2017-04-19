@@ -146,6 +146,7 @@ import {RisksComponent} from "./risks/risks-component";
 import {RisksAddComponent} from "./risks/risks-add.component";
 import {RisksUpdateComponent} from "./risks/risks-update.component";
 import {CompetenciesGroupsComponent} from "./competencies-groups/competencies-groups.component";
+import {OrganizationalStructurePositionsComponent} from "./organizationalStructurePositions/organizational-structure-positions.component";
 
 const routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -271,9 +272,7 @@ const routes = [
    {path: 'competencies-groups', component: CompetenciesGroupsComponent, canActivate: [AuthGuard]},
 
    // Temporales
-   {path: 'criterios', component: EvaluationCriteriasComponent, canActivate: [AuthGuard]},
-   {path: 'responsabilidades', component: PositionResponsabilitiesComponent, canActivate: [AuthGuard]},
-   {path: 'cargosroles', component: PositionRolesComponent, canActivate: [AuthGuard]},
+   {path: 'organizacional-structure-positions', component: OrganizationalStructurePositionsComponent, canActivate: [AuthGuard]},
 
   // Cargos
   {path: 'positions', component: PositionsComponent, canActivate: [AuthGuard]},
