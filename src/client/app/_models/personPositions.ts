@@ -6,11 +6,23 @@ export class PersonPositions {
    idSede: number;
    idArea: number;
    idCargo: number;
-   fechaInicio: string;
-   fechaFin: string;
    idTipoContrato: number;
-   public indicadorHabilitado : boolean;
+   indicadorHabilitado : boolean;
    auditoriaUsuario: number; 
    auditoriaFecha: string;
    idTercero: number;
+   idEstructuraOrganizacionalCargo: number;
+   asignadoDesde: string;
+
+   //Atributos auxiliares
+   cargo: string;
+   primerNombre: string;
+   primerApellido: string;
+   segundoNombre: string;
+   segundoApellido: string;
+   nombreCompleto: string;
+   tipoContrato: string;
+   idZona: number;
+   zona: string;
+   idEstructuraOrganizacional: number;
 }

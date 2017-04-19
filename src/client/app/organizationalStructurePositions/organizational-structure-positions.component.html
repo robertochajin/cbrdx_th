@@ -1,37 +1,47 @@
 <h3>Planta de colaboradores</h3>
 <div class="row">
    <div class="col-md-4">
-         <p-tree id="treedCompany" [(value)]="treedCompany" selectionMode="single"
-                 [(selection)]="selectedNode"
-                 (onNodeSelect)="nodeSelect($event.node)"
-                 (onNodeExpand)="nodeExpand($event.node)"
-         ></p-tree>
-         {{empty}}
+      <p-tree id="treedCompany" [(value)]="treedCompany" selectionMode="single"
+              [(selection)]="selectedNode"
+              (onNodeSelect)="nodeSelect($event.node)"
+              (onNodeExpand)="nodeExpand($event.node)"
+      ></p-tree>
+      {{empty}}
    </div>
-   <div class="col-md-8">
+   <div class="col-md-8" *ngIf="area.idEstructuraOrganizacional == null">
       <p-tabView>
-         <p-tabPanel header="Información del area">
-            <div>
-               <div class="row">
-                  <label class="col-md-3 col-sm-6 col-xs-12 control-label">Código:</label>
-                  <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.codigo}}</strong></label>
-                  <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nombre del área:</label>
-                  <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.nombre}}</strong></label>
-               </div>
-               <div class="row">
-                  <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tipo Estructura:</label>
-                  <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.tipoEstructura}}</strong></label>
-                  <label class="col-md-3 col-sm-6 col-xs-12 control-label">Centro de costos:</label>
-                  <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.centroCostos}}</strong></label>
-               </div>
-               <div class="row">
-                  <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tipo de Area: </label>
-                  <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.tipoArea}}</strong></label>
-                  <label class="col-md-3 col-sm-6 col-xs-12 control-label">Estructura Fisica: </label>
-                  <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.estructuraFisica}}</strong></label>
-                  
-               </div>
-            </div>
+         <p-tabPanel header="área de trabajo">
+            <h4>Por favor, seleccione un nodo de tipo área de la estructura organizacional</h4>
+         </p-tabPanel>
+      </p-tabView>
+   </div>
+   <div class="col-md-8" *ngIf="area.idEstructuraOrganizacional != null">
+      <p-tabView (onChange)="handleChangeTab($event.index)">
+         <p-tabPanel header="Información del area" [selected]="true">
+            <form class="form-horizontal">
+               <fieldset>
+                  <div class="form-group">
+                     <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Código:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.codigo}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nombre del área:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.nombre}}</strong></label>
+                     </div>
+                     <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tipo Estructura:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.tipoEstructura}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Centro de costos:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.centroCostos}}</strong></label>
+                     </div>
+                     <div class="row">
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tipo de Area: </label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.tipoArea}}</strong></label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Estructura Fisica: </label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.estructuraFisica}}</strong></label>
+                     </div>
+                  </div>
+               </fieldset>
+            </form>
             <div>
                <div class="row" *ngIf="editingPosition">
                   <div class="col-md-12">
@@ -41,8 +51,10 @@
                            <div class="row">
                               <div class="form-group col-md-12">
                                  <label for="cargo">* Cargo</label>
-                                 <p-autoComplete placeholder="Buscar cargo" field="cargo" name="cargo" id="cargo" minLength="3" delay="500"
-                                                 [suggestions]="positionList" required="true" (completeMethod)="positionSearch($event)"
+                                 <p-autoComplete placeholder="Buscar cargo" field="cargo" name="cargo" id="cargo"
+                                                 minLength="3" delay="500"
+                                                 [suggestions]="positionList" required="true"
+                                                 (completeMethod)="positionSearch($event)"
                                                  (onSelect)="capturePosition($event)" [(ngModel)]="selectedPosition">
                                  </p-autoComplete>
                                  <div class="ui-message ui-messages-error ui-corner-all"
@@ -79,14 +91,15 @@
                <div *ngIf="!editingPosition">
                   <div class="row datable-header">
                      <div class="col-md-6 col-xs-12 datatable-header-add">
-                        <button type="button" pButton icon="fa-plus" (click)="editPosition(null)" label="Nuevo Cargo"></button>
+                        <button type="button" pButton icon="fa-plus" (click)="editPosition(null)"
+                                label="Nuevo Cargo"></button>
                      </div>
-                     <div class="col-md-6 col-xs-12 datatable-header-search" >
+                     <div class="col-md-6 col-xs-12 datatable-header-search">
                         <i class="fa fa-search"></i>
                         <input #gb type="text" pInputText size="40" placeholder="Buscar...">
                      </div>
                   </div>
-                  <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="osPositions"
+                  <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="osPositions"
                                [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
                      <p-column field="cargo" header="Cargo" [sortable]="true"></p-column>
                      <p-column field="salario" header="Salario" [sortable]="true"></p-column>
@@ -102,38 +115,124 @@
                            {{osp.plazas-osp.ocupados}}
                         </template>
                      </p-column>
-                     <p-column header="Acciones" styleClass="datatable-col-action" >
+                     <p-column header="Acciones" styleClass="datatable-col-action">
                         <template let-osp="rowData" pTemplate="body">
                            <div class="btn-group" role="group">
-                              <button type="button"  class="ui-button ui-button-success btn" icon="fa-pencil"
+                              <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil"
                                       pButton (click)="editPosition(osp)"></button>
-                              <button type="button"  class="ui-button ui-button-danger btn" icon="fa-trash"
-                                      pButton (click)="delete(osp)" ></button>
+                              <button *ngIf="osp.ocupados == 0" type="button" class="ui-button ui-button-danger btn"
+                                      icon="fa-trash"
+                                      pButton (click)="delete(osp)"></button>
                            </div>
                         </template>
                      </p-column>
                   </p-dataTable>
-                  <div class="row">
-                     <div class="col-md-4">
-                        <strong>No de cargos:</strong>
-                        {{osPositions.length}}
-                     </div>
-                     <div class="col-md-4">
-                        <strong>No de plazas:</strong>
-                        {{countSlots}}
-                     </div>
-                     <div class="col-md-4">
-                        <strong>Costo planta:</strong>
-                         ${{countCost}}
+                  <div class="panel panel-default">
+                     <div class="panel-body">
+                        <div class="row">
+                           <div class="col-md-4">
+                              <strong>No de cargos:</strong>
+                              {{osPositions.length}}
+                           </div>
+                           <div class="col-md-4">
+                              <strong>No de plazas:</strong>
+                              {{countSlots}}
+                           </div>
+                           <div class="col-md-4">
+                              <strong>Costo planta:</strong>
+                              ${{countCost}}
+                           </div>
+                        </div>
                      </div>
                   </div>
-
                </div>
             </div>
          </p-tabPanel>
          <p-tabPanel header="Colaboradores">
-
+            <div class="row" *ngIf="editingPerson">
+               <div class="col-md-12">
+                  <form name="personForm" (ngSubmit)="pp.valid && !badEmployee && savePersonPosition()" #pp="ngForm" novalidate>
+                     <fieldset>
+                        <legend>Asignando colaborador al cargo</legend>
+                        <div class="form-group container">
+                           <div class="row">
+                              <div class="form-group col-md-8">
+                                 <label for="colaborador">* Colaborador</label>
+                                 <p-autoComplete placeholder="Buscar colaborador" field="nombreCompleto"
+                                                 name="colaborador" id="colaborador"
+                                                 minLength="3" delay="500" [suggestions]="employeeList" required="true"
+                                                 (completeMethod)="employeeSearch($event)"
+                                                 (onSelect)="captureEmployee($event)" [(ngModel)]="selectedEmployee">
+                                 </p-autoComplete>
+                                 <div class="ui-message ui-messages-error ui-corner-all"
+                                      *ngIf="pp.submitted && badEmployee">
+                                    <i class="fa fa-close"></i>
+                                    Colaborador es requerido
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="form-group col-md-3">
+                                 <label for="ingreso">* Asignado desde</label>
+                                 <p-calendar id="ingreso" name="ingreso" [showIcon]="true"
+                                             [yearNavigator]="true" [locale]="es" readonlyInput="true"
+                                             #ingreso="ngModel" required="true" [dataType]="date"
+                                             (onSelect)="onSelectBegin($event)"
+                                             [(ngModel)]="personsPosition.asignadoDesde"></p-calendar>
+                                 <div class="ui-message ui-messages-error ui-corner-all"
+                                      *ngIf="pp.submitted && !ingreso.valid">
+                                    <i class="fa fa-close"></i>
+                                    Fecha ingreso es requerido
+                                 </div>
+                              </div>
+                              <div class="form-group col-md-5">
+                                 <label for="tipoContrato">* Tipo de contrato</label>
+                                 <p-dropdown name="tipoContrato" id="tipoContrato" #tipoContrato="ngModel" required="true"
+                                             [autoWidth]="false" [(ngModel)]="personsPosition.idTipoContrato" [options]="contracTypeList"></p-dropdown>
+                                 <div class="ui-message ui-messages-error ui-corner-all"
+                                      *ngIf="pp.submitted && !ingreso.valid">
+                                    <i class="fa fa-close"></i>
+                                    Tipo de contrato es requerido
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row form-footer-buttons">
+                              <div class="form-group col-md-8">
+                                 <a (click)="cancelEditingPerson()" class="cancelar">Cancelar</a>
+                                 <button pButton type="submit" label="Guardar"></button>
+                              </div>
+                           </div>
+                        </div>
+                     </fieldset>
+                  </form>
+               </div>
+            </div>
+            <div *ngIf="!editingPerson">
+               <div class="row datable-header">
+                  <div class="col-md-6">
+                  </div>
+                  <div class="col-md-6 col-xs-12 datatable-header-search">
+                     <i class="fa fa-search"></i>
+                     <input #pl type="text" pInputText size="40" placeholder="Buscar...">
+                  </div>
+               </div>
+               <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="postionSlots"
+                            [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="pl">
+                  <p-column field="cargo" header="Cargo" [sortable]="true"></p-column>
+                  <p-column field="nombreCompleto" header="Colaborador" [sortable]="true"></p-column>
+                  <p-column field="asignadoDesde" header="Asignado desde" [sortable]="true"></p-column>
+                  <p-column header="Acciones" styleClass="datatable-col-action">
+                     <template let-pp="rowData" pTemplate="body">
+                        <div class="btn-group" role="group">
+                           <button type="button" class="ui-button ui-button-success btn" icon="fa-child"
+                                   pButton (click)="editPersonSlot(pp)"></button>
+                        </div>
+                     </template>
+                  </p-column>
+               </p-dataTable>
+            </div>
          </p-tabPanel>
       </p-tabView>
    </div>
 </div>
+<p-confirmDialog width="400"></p-confirmDialog>
