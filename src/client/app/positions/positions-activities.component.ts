@@ -6,7 +6,7 @@ import {AbsenceService} from "../_services/position-absence.service";
 import {Component, OnInit, Input} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {SelectItem, Message, ConfirmationService} from 'primeng/primeng';
-import { PositionsService } from "../_services/positions.service";
+import {PositionsService} from "../_services/positions.service";
 
 @Component({
    moduleId: module.id,
@@ -19,7 +19,7 @@ export class PositionActivitiesComponent {
 
    @Input() position: Positions;
    positionsActivities: PositionsActivities = new PositionsActivities();
-   dialogObjet: Absence = new Absence();
+   dialogObjet: PositionsActivities = new PositionsActivities();
    msgs: Message[] = [];
    listActivities: SelectItem[] = [];
    listPositionsActivities: PositionsActivities[] = [];
@@ -36,12 +36,13 @@ export class PositionActivitiesComponent {
       this.positionsActivities.idCargo = this.position.idCargo;
       this.positionsService.getPositionActivitiesById(this.positionsActivities.idCargo).subscribe(
          rest => {
-            // this.listPositionsActivities= rest;
             for (let r of rest) {
                this.positionsService.getActivitiesById(r.idOcupacion).subscribe(res => {
                   r.ocupacion = res.ocupacion;
                });
-               this.listPositionsActivities.push(r);
+               if (r.indicadorHabilitado === true) {
+                  this.listPositionsActivities.push(r);
+               }
             }
          });
 
@@ -94,6 +95,40 @@ export class PositionActivitiesComponent {
          });
    }
 
+   del(a: PositionsActivities) {
+      this.dialogObjet = a;
+      this.confirmationService.confirm({
+         message: `¿Esta seguro que lo desea eliminar?`,
+         header: 'Corfirmación',
+         icon: 'fa fa-question-circle',
+         accept: () => {
+            this.dialogObjet.indicadorHabilitado = false;
+            this.positionsService.updatePositionsActivities(this.dialogObjet).subscribe(r => {
+               this.listPositionsActivities.splice(this.listPositionsActivities.indexOf(this.dialogObjet), 1);
+               this.dialogObjet = null;
+               this.listActivities = [];
+               this.positionsService.getListActivities().subscribe(rest => {
+                  this.listActivities.push({label: 'Seleccione...', value: null});
+                  for (let dp of rest) {
+                     let bandera = false;
+                     for (let r of this.listPositionsActivities) {
+                        if (dp.idOcupacion === r.idOcupacion) {
+                           bandera = true;
+                           break;
+                        }
+                     }
+                     if (!bandera) {
+                        this.listActivities.push({label: dp.ocupacion, value: dp.idOcupacion});
+                     }
+                  }
+               });
+            });
+         },
+         reject: () => {
+            this.dialogObjet = null;
+         }
+      });
+   }
 
 
 }

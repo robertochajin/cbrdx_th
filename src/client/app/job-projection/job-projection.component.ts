@@ -20,6 +20,7 @@ export class JobProjectionComponent {
    dialogObjet: JobProjection = new JobProjection();
    msgs: Message[] = [];
 
+
    constructor(private jobProjectionService: JobProjectionService,
                private router: Router,
                private confirmationService: ConfirmationService) {
@@ -37,16 +38,25 @@ export class JobProjectionComponent {
          this.ListaTiposAreas.push({label: "Seleccione", value: null});
          for (let dp of rest) {
             this.ListaTiposAreas.push({
-               label: dp.nombre,
-               value: dp.idListaTipoEstructura
+               label: dp.estructuraArea,
+               value: dp.idEstructuraArea
             });
          }
       });
 
+
    }
    changeTypeArea(){
    this.ListaAreas=[];
-
+      this.jobProjectionService.getLisStructure().subscribe(rest => {
+         this.ListaAreas.push({label: "Seleccione", value: null});
+         for (let dp of rest) {
+            this.ListaAreas.push({
+               label: dp.nombre,
+               value: dp.idEstructuraOrganizacional
+            });
+         }
+      });
    }
    changeArea(){
 
