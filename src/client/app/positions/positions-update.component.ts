@@ -31,6 +31,7 @@ export class PositionsUpdateComponent {
    levelTypes: SelectItem[] = [];
    listslevelTypes: any[] = [];
    genderTypes: SelectItem[] = [];
+   listStudies: SelectItem[] = [];
    maritalStatusTypes: SelectItem[] = [];
    msgs: Message[] = [];
    aprobado: number;
@@ -72,7 +73,12 @@ export class PositionsUpdateComponent {
                                   } );
          }
       } );
-   
+      this.positionsService.getListStudies().subscribe( res => {
+         this.listStudies.push( { label: "Seleccione", value: null } );
+         for ( let dp of res ) {
+            this.listStudies.push( {label: dp.nombreListaNivelEstudio,value: dp.idListaNivelEstudio} );
+         }
+      } );
       this.tipoDeAreaService.getlistAreas().subscribe( res => {
          this.areaTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
@@ -126,6 +132,7 @@ export class PositionsUpdateComponent {
                                          });
          }
       });
+      this.acordion = 0;
    }
    
    ngOnInit() {
@@ -154,11 +161,14 @@ export class PositionsUpdateComponent {
                                                   } );
                   }
                }
+               if(this.position.indicadorHabilitado == false){
+                  this.allPosition.push(this.position);
+               }
                this.buildParent();
             } );
          } );
       } );
-      this.acordion = this._nav.getTab();
+      
 
    }
 

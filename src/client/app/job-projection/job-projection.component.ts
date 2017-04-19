@@ -15,9 +15,11 @@ export class JobProjectionComponent {
 
    JobProjection: JobProjection = new JobProjection();
    ListJobProjection: JobProjection[]=[];
-   ListaEstados: SelectItem[]= [];
+   ListaTiposAreas: SelectItem[]= [];
+   ListaAreas: SelectItem[]= [];
    dialogObjet: JobProjection = new JobProjection();
    msgs: Message[] = [];
+
 
    constructor(private jobProjectionService: JobProjectionService,
                private router: Router,
@@ -32,19 +34,29 @@ export class JobProjectionComponent {
          }
       );
 
-      this.jobProjectionService.getListEstados().subscribe(rest => {
-         this.ListaEstados.push({label: "Seleccione", value: null});
+      this.jobProjectionService.getLisTypeStructure().subscribe(rest => {
+         this.ListaTiposAreas.push({label: "Seleccione", value: null});
          for (let dp of rest) {
-            this.ListaEstados.push({
-               label: dp.nombre,
-               value: dp.idListaEstadoCargo
+            this.ListaTiposAreas.push({
+               label: dp.estructuraArea,
+               value: dp.idEstructuraArea
             });
          }
       });
 
+
    }
    changeTypeArea(){
-
+   this.ListaAreas=[];
+      this.jobProjectionService.getLisStructure().subscribe(rest => {
+         this.ListaAreas.push({label: "Seleccione", value: null});
+         for (let dp of rest) {
+            this.ListaAreas.push({
+               label: dp.nombre,
+               value: dp.idEstructuraOrganizacional
+            });
+         }
+      });
    }
    changeArea(){
 

@@ -21,6 +21,10 @@ export class OrganizationalStructureService {
       return this.http.get( this.serviceURL+'estructuraOrganizacional', { headers: this.headers } ).map( ( res: Response ) => res.json() as OrganizationalStructure[] );
    }
    
+   getAllEnabled() {
+      return this.http.get( this.serviceURL+'estructuraOrganizacional/enabled', { headers: this.headers } ).map( ( res: Response ) => res.json() as OrganizationalStructure[] );
+   }
+   
    addOrganizationalStructure( c: OrganizationalStructure ): Promise<OrganizationalStructure> {
       return this.http.post( this.serviceURL+'estructuraOrganizacional', JSON.stringify( c ), { headers: this.headers } ).toPromise().then( res => res.json() as OrganizationalStructure ).catch( this.handleError );
    };
