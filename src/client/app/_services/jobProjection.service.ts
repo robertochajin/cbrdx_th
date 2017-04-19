@@ -20,8 +20,12 @@ export class JobProjectionService {
       return this.http.get(this.serviceURL + 'estructuraAreas').map((res: Response) => res.json());
    }
 
-   getLisStructure() {
-      return this.http.get(this.serviceURL + 'estructuraOrganizacional/buscarTipo/').map((res: Response) => res.json() as OrganizationalStructure[]);
+   getLisStructure(id: number) {
+      return this.http.get(this.serviceURL + 'estructuraOrganizacional/buscarTipo/' + id).map((res: Response) => res.json() as OrganizationalStructure[]);
+   }
+
+   getListJobProjctionByArea(id: number) {
+      return this.http.get(this.serviceURL + 'proyeccionesLaborales/buscarArea/' + id).map((res: Response) => res.json() as JobProjection[]);
    }
 
    getById(id: number) {

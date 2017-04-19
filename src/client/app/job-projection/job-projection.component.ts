@@ -13,7 +13,7 @@ import {ConfirmationService, Message, SelectItem} from 'primeng/primeng';
 
 export class JobProjectionComponent {
 
-   JobProjection: JobProjection = new JobProjection();
+   jobProjection: JobProjection = new JobProjection();
    ListJobProjection: JobProjection[]=[];
    ListaTiposAreas: SelectItem[]= [];
    ListaAreas: SelectItem[]= [];
@@ -48,7 +48,7 @@ export class JobProjectionComponent {
    }
    changeTypeArea(){
    this.ListaAreas=[];
-      this.jobProjectionService.getLisStructure().subscribe(rest => {
+      this.jobProjectionService.getLisStructure(this.jobProjection.idTipoArea).subscribe(rest => {
          this.ListaAreas.push({label: "Seleccione", value: null});
          for (let dp of rest) {
             this.ListaAreas.push({
@@ -59,7 +59,10 @@ export class JobProjectionComponent {
       });
    }
    changeArea(){
-
+   this.ListJobProjection=[];
+      this.jobProjectionService.getListJobProjctionByArea(this.jobProjection.idArea).subscribe(rest => {
+         this.ListJobProjection=rest;
+      });
    }
 
 

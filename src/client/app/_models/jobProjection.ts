@@ -1,9 +1,9 @@
 
 export class JobProjection {
    idProyeccion: number;
-   idSedeArea: number;
+   idArea: number;
    idCargo: number;
-   idEstado: number;
+   idTipoArea: number;
    nroPlazas: number;
    costoPlazas: number;
    auditoriaUsuario: number;

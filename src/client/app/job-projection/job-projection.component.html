@@ -6,7 +6,7 @@
             <label for="idTipoArea">Tipo Area</label>
             <p-dropdown id="idTipoArea" name="idTipoArea"
                         [options]="ListaTiposAreas" [autoWidth]="false"
-                        [(ngModel)]="JobProjection.idEstado" (onChange)="changeTypeArea()"
+                        [(ngModel)]="jobProjection.idTipoArea" (onChange)="changeTypeArea()"
                         #idTipoArea="ngModel"
             ></p-dropdown>
          </div>
@@ -14,14 +14,14 @@
             <label for="idArea">Area</label>
             <p-dropdown id="idArea" name="idArea" required="true"
                         [options]="ListaAreas" [autoWidth]="false" (onChange)="changeArea()"
-                        [(ngModel)]="JobProjection.idEstado"
+                        [(ngModel)]="jobProjection.idArea"
                         #idArea="ngModel"
             ></p-dropdown>
          </div>
          <div class="ui-grid-col-3">
             <label for="anioproyeccion">Año Proyección</label>
             <input type="anioproyeccion" pInputText id="anioproyeccion" name="anioproyeccion"
-                   [(ngModel)]="JobProjection.nroPlazas"#anioproyeccion="ngModel"
+                   [(ngModel)]="jobProjection.nroPlazas"#anioproyeccion="ngModel"
             />
          </div>
       </div>
@@ -30,8 +30,7 @@
 <br><br>
 <div>
    <p-dataTable  [value]="ListJobProjection" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-      <p-column field="tipoVehiculo" header="Area" [sortable]="true"></p-column>
-      <p-column field="tipoServicio" header="Tipo de Servicio " [sortable]="true"></p-column>
+      <p-column field="tipoVehiculo" header="Cargo" [sortable]="true"></p-column>
       <p-column field="marca" header="Plazas Actuales" [sortable]="true"></p-column>
       <p-column field="modelo" header="Plazas Proyectdas" [sortable]="true"></p-column>
       <p-column field="placa" header="Costo Proyectado" [sortable]="true"></p-column>
