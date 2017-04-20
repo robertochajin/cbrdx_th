@@ -11,12 +11,12 @@ import * as moment from 'moment/moment';
 import {NavService} from '../_services/_nav.service';
 @Component({
    moduleId: module.id,
-   templateUrl: 'job-projection-positions-form.component.html',
+   templateUrl: 'job-projection-positions-approve.component.html',
    selector: 'projection',
    providers: [ConfirmationService]
 })
 
-export class JobProjectionUpdateComponent {
+export class JobProjectionApprobeComponent {
    @Input()
    jobProjection: JobProjection = new JobProjection();
    positions: Positions = new Positions();
@@ -24,7 +24,7 @@ export class JobProjectionUpdateComponent {
    header: string = 'Editando Proyección';
    msgs: Message[] = [];
    year: Number;
-
+   aprobacion: boolean;
 
    constructor(private jobProjectionService: JobProjectionService,
                private router: Router,
@@ -36,14 +36,6 @@ export class JobProjectionUpdateComponent {
    }
 
    ngOnInit() {
-      this.jobProjectionService.getConstantes().subscribe(rest => {
-         for (let c of rest) {
-            if (c.constante === "AUMSUE") {
-               this.constante = c;
-               break;
-            }
-         }
-      });
       this.route.params.switchMap((params: Params) => this.jobProjectionService.getById(+params['id']))
          .subscribe(data => {
             this.jobProjection = data;
@@ -55,13 +47,12 @@ export class JobProjectionUpdateComponent {
 
    }
 
-   calculate() {
-      let salario = ((this.jobProjection.plazasProyectadas * this.positions.salario) * (Number(this.constante.valor) / 100)) + (this.jobProjection.plazasProyectadas * this.positions.salario);
-      this.jobProjection.costoProyectado = salario;
-   }
-
    onSubmit() {
-      this.jobProjection.idEstadoProyeccion=4;
+      if(this.aprobacion===true){
+         this.jobProjection.idEstadoProyeccion=2;
+      }else{
+         this.jobProjection.idEstadoProyeccion=3;
+      }
       this.jobProjectionService.update(this.jobProjection)
          .subscribe(data => {
             this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});

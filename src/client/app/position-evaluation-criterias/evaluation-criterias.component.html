@@ -49,7 +49,7 @@
             <div class="col-md-2 col-xs-12">
                <div class="form-group">
                     <label for="meta{{i}}" class="control-label">* Meta</label>
-                    <input type="number" pInputText id="meta{{i}}" name="meta{{i}}" [(ngModel)]="criteria.meta" #meta="ngModel" required class="form-control text-center"/>
+                    <input type="number" pInputText id="meta{{i}}" name="meta{{i}}" min="1"  [(ngModel)]="criteria.meta" #meta="ngModel" required class="form-control text-center"/>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !meta.valid">
                       <i class="fa fa-close"></i>
                       Meta es requerido
@@ -100,14 +100,15 @@
       <p-column field="factor" header="Factor" [sortable]="true"></p-column>
       <p-column field="meta" header="Meta" [sortable]="true"></p-column>
     </p-dataTable>
+     <div class="row">
+        <div class="col-md-10">
+        </div>
+        <div class="col-md-2">
+           <button type="button" pButton icon="fa-arrow-right" (click)="next()"
+                   label="Siguiente"></button>
+        </div>
+     </div>
   </div>
-   <div class="row">
-      <div class="col-md-10">
-      </div>
-      <div class="col-md-2">
-      <button type="button" pButton icon="fa-arrow-right" (click)="next()"
-              label="Siguiente"></button>
-      </div>
-   </div>
+   
 </div>
 <p-confirmDialog width="400"></p-confirmDialog>

@@ -653,3 +653,8 @@ body.skin-purple .form-control:focus{
   border-color: #605ca8!important;
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(96, 92, 168, 0.6);
 }
+
+
+li.inhabilitado{
+   background-color: #ccc!important;
+}

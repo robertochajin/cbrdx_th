@@ -14,6 +14,7 @@ export class OrganizationalStructure {
    idTipoArea : number;
    idTipoDocumento : number;
    indicadorHabilitado : boolean;
+   indicadorPlantaConfirmada : boolean;
    paginaWeb : string;
    razonSocial : string;
    localizacion : string;

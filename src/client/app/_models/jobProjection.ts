@@ -1,17 +1,26 @@
 
 export class JobProjection {
-   idProyeccion: number;
-   idSedeArea: number;
+   idProyecccionLaboral: number;
+   idEstructuraOrganizacional: number;
    idCargo: number;
-   idEstado: number;
-   nroPlazas: number;
-   costoPlazas: number;
+   cargo: string;
+   plazasActuales: number;
+   plazasProyectadas: number;
+   costoActual: number;
+   costoProyectado: number;
+   idEstadoProyeccion: number;
+   estadoProyeccion: string;
+   idUsuarioAprueba: number;
+   idUsuarioProyecta: number;
+   anio: number;
+   observacion: string;
+   observacionAprobacion: string;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
 
    constructor() {
       this.auditoriaFecha = null;
       this.auditoriaUsuario = null;
-      this.idProyeccion = null;
+      this.idProyecccionLaboral = null;
    }
 }

@@ -130,7 +130,10 @@ import {PositionCompetenciesComponent} from "./position-competencies/position-co
 import {CompanyAssetsComponent} from "./position-company-assets/company-assets.component";
 // proyecciòn laboral
 import {JobProjectionComponent} from "./job-projection/job-projection.component";
-import {JobProjectionPositionsComponent} from "./job-projection/job-projection-positions.component";
+import {JobProjectionUpdateComponent} from "./job-projection/job-projection-positions-update.component";
+import {JobProjectionApprobeComponent} from "./job-projection/job-projection-positions-approve.component";
+import {JobProjectionAddComponent} from "./job-projection/job-projection-positions-add.component";
+import {JobProjectionDetailComponent} from "./job-projection/job-projection-positions-detail.component";
 
 // estructura física
 import {PhysicStructureComponent} from "./physic-structure/physic-structure.component";
@@ -295,7 +298,10 @@ const routes = [
 
    //proyecciòn laboral
    {path: 'job-projection', component: JobProjectionComponent, canActivate: [AuthGuard]},
-   {path: 'job-projection-positions', component: JobProjectionPositionsComponent, canActivate: [AuthGuard]},
+   {path: 'job-projection/update/:id', component: JobProjectionUpdateComponent, canActivate: [AuthGuard]},
+   {path: 'job-projection/approbe/:id', component: JobProjectionApprobeComponent, canActivate: [AuthGuard]},
+   {path: 'job-projection/add/:id', component: JobProjectionAddComponent, canActivate: [AuthGuard]},
+   {path: 'job-projection/detail/:id', component: JobProjectionDetailComponent, canActivate: [AuthGuard]},
 
    // estructura física
    {path: 'physic-structure', component: PhysicStructureComponent, canActivate: [AuthGuard]},
