@@ -17,7 +17,7 @@ export class JobProjection {
    observacionAprobacion: string;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
-
+   index: number;
    constructor() {
       this.auditoriaFecha = null;
       this.auditoriaUsuario = null;

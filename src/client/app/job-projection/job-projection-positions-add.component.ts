@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import {Component, Input, Output,EventEmitter}         from '@angular/core';
+import {Component, Input, Output, EventEmitter}         from '@angular/core';
 import {Router, ActivatedRoute, Params}   from '@angular/router';
 import {Location}                 from '@angular/common';
 import {JobProjection} from '../_models/jobProjection';
@@ -17,11 +17,14 @@ import {NavService} from '../_services/_nav.service';
 })
 
 export class JobProjectionAddComponent {
+   jobProjectionAdd: JobProjection;
    @Input()
-   jobProjection: JobProjection = new JobProjection();
+   id: number;
+   @Input()
+   anio: number;
    ListJobProjection: JobProjection[];
    positions: Positions = new Positions();
-   ListPositions: SelectItem[]=[];
+   ListPositions: SelectItem[] = [];
    constante: Constante = new Constante();
    header: string = 'Editando Proyección';
    msgs: Message[] = [];
@@ -42,30 +45,33 @@ export class JobProjectionAddComponent {
    }
 
    ngOnInit() {
-      this.jobProjectionService.getListJobProjctionByArea(this.jobProjection.idEstructuraOrganizacional).subscribe(rest=>{
-         this.ListJobProjection=rest;
-      });
-      this.jobProjection.observacion=null;
-      this.jobProjection.costoProyectado=null;
-      this.jobProjection.plazasProyectadas=null;
-      this.jobProjectionService.getPositions().subscribe(rest=>{
-         this.ListPositions.push({label: "Seleccione", value: null});
-         for (let dp of rest) {
-            let bandera = false;
-            for (let r of this.ListJobProjection) {
-               if (dp.idCargo === r.idCargo) {
-                  bandera = true;
-                  break;
+      this.jobProjectionAdd= new JobProjection();
+      this.jobProjectionService.getListJobProjctionByArea(this.id).subscribe(rest => {
+         this.ListJobProjection = rest;
+         this.jobProjectionAdd.observacion = null;
+         this.jobProjectionAdd.idEstructuraOrganizacional=this.id;
+         this.jobProjectionAdd.anio=this.anio;
+         this.jobProjectionAdd.costoProyectado = null;
+         this.jobProjectionAdd.plazasProyectadas = null;
+         this.jobProjectionService.getPositions().subscribe(rest => {
+            this.ListPositions.push({label: "Seleccione", value: null});
+            for (let dp of rest) {
+               let bandera = false;
+               for (let r of this.ListJobProjection) {
+                  if (dp.idCargo === r.idCargo) {
+                     bandera = true;
+                     break;
+                  }
                }
-            }
-            if (!bandera) {
-               this.ListPositions.push({
-                  label: dp.cargo,
-                  value: dp.idCargo
-               });
-            }
+               if (!bandera) {
+                  this.ListPositions.push({
+                     label: dp.cargo,
+                     value: dp.idCargo
+                  });
+               }
 
-         }
+            }
+         });
       });
 
       this.jobProjectionService.getConstantes().subscribe(rest => {
@@ -76,52 +82,41 @@ export class JobProjectionAddComponent {
             }
          }
       });
-      this.jobProjection.plazasActuales=0;
-      this.jobProjection.costoActual=0;
+      this.jobProjectionAdd.plazasActuales = 0;
+      this.jobProjectionAdd.costoActual = 0;
    }
 
-   changePosition(){
-      this.jobProjectionService.getPositionsById(this.jobProjection.idCargo).subscribe(rest => {
+   changePosition() {
+      this.jobProjectionService.getPositionsById(this.jobProjectionAdd.idCargo).subscribe(rest => {
          this.positions = rest;
       });
 
    }
-   calculate() {
-      let salario = ((this.jobProjection.plazasProyectadas * this.positions.salario) *(Number(this.constante.valor)/100))+(this.jobProjection.plazasProyectadas * this.positions.salario);
-      this.jobProjection.costoProyectado=salario;
-   }
-   createProjection(){
 
-      this.jobProjection.idProyecccionLaboral=null;
-      this.jobProjection.costoActual=0;
-      this.jobProjection.idEstadoProyeccion=1;
-      this.jobProjection.estadoProyeccion="Solicitado";
-      this.jobProjection.cargo= this.positions.cargo;
-      this.create.emit(this.jobProjection);
-      // this.localizacion.direccion = this.finalAddress;
-      // this.localizacion.idTipoDireccion = this.selectedAddressType;
-      // this.localizacion.nomenclaturaPrincipal = this.selectedPrincipalNomenclature;
-      // if (this.localizacion.locacion.idDivisionPolitica !== undefined) {
-      //    this.localizacion.idDivisionPolitica = this.localizacion.locacion.idDivisionPolitica;
-      //    this.create.emit(this.localizacion);
-      // } else {
-      //    this.badSelect = true;
-      //    this.localizacion.locacion = null;
-      // }
+   calculate() {
+      let salario = ((this.jobProjectionAdd.plazasProyectadas * this.positions.salario) * (Number(this.constante.valor) / 100)) + (this.jobProjectionAdd.plazasProyectadas * this.positions.salario);
+      this.jobProjectionAdd.costoProyectado = salario;
    }
-   // onSubmit() {
-   //    this.jobProjection.idEstadoProyeccion=4;
-   //    this.jobProjectionService.add(this.jobProjection)
-   //       .subscribe(data => {
-   //          this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
-   //          this.location.back();
-   //       }, error => {
-   //          this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
-   //       });
-   // }
+
+   createProjection() {
+
+      this.jobProjectionAdd.idProyecccionLaboral = null;
+      this.jobProjectionAdd.costoActual = 0;
+      this.jobProjectionAdd.idEstadoProyeccion = 1;
+      this.jobProjectionAdd.estadoProyeccion = "Solicitado";
+      this.jobProjectionAdd.cargo = this.positions.cargo;
+      this.create.emit(this.jobProjectionAdd);
+
+   }
+
 
    discard(): void {
       this.dismiss.emit(1);
    }
-
+   inputNumber() {
+      let plazas =this.jobProjectionAdd.plazasProyectadas + "";
+      if (this.jobProjectionAdd.plazasProyectadas != null) {
+         this.jobProjectionAdd.plazasProyectadas = Number(plazas.replace(/[^0-9]/g, ''));
+      }
+   }
 }
