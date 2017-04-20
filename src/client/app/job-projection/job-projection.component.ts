@@ -171,7 +171,7 @@ export class JobProjectionComponent {
    bindLocation( event: any ) {
       this.jobProjection = event;
       this.ListJobProjection.push(this.jobProjection);
-      this.jobProjection= new JobProjection();
+      this.jobProjection.idCargo=null;
       this.toggleform();
       let cargos = 0;
       let cargosI = 0;

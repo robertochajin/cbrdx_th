@@ -45,6 +45,9 @@ export class JobProjectionAddComponent {
       this.jobProjectionService.getListJobProjctionByArea(this.jobProjection.idEstructuraOrganizacional).subscribe(rest=>{
          this.ListJobProjection=rest;
       });
+      this.jobProjection.observacion=null;
+      this.jobProjection.costoProyectado=null;
+      this.jobProjection.plazasProyectadas=null;
       this.jobProjectionService.getPositions().subscribe(rest=>{
          this.ListPositions.push({label: "Seleccione", value: null});
          for (let dp of rest) {
@@ -81,6 +84,7 @@ export class JobProjectionAddComponent {
       this.jobProjectionService.getPositionsById(this.jobProjection.idCargo).subscribe(rest => {
          this.positions = rest;
       });
+
    }
    calculate() {
       let salario = ((this.jobProjection.plazasProyectadas * this.positions.salario) *(Number(this.constante.valor)/100))+(this.jobProjection.plazasProyectadas * this.positions.salario);
