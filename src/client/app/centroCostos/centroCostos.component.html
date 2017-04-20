@@ -12,7 +12,7 @@
     <p-column field="idCentroCostos" header="Id" [sortable]="true"></p-column>
     <p-column field="codigoCentroCostos" header="Código" [sortable]="true"></p-column>
     <p-column field="centroCostos" header="Nombre" [sortable]="true"></p-column>
-    <p-column field="indicadorHabilitado" header="Estado" [sortable]="true">
+    <p-column field="indicadorHabilitado" header="Estado" [sortable]="true" styleClass="datatable-col-center">
         <template let-const="rowData" pTemplate="body">
             <p-checkbox [(ngModel)]="const.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
         </template>
