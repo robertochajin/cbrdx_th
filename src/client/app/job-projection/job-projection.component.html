@@ -4,6 +4,16 @@
          <div *ngIf="addinglocation">
             <p-messages [value]="msgs"></p-messages>
             <h3 class="first">Proyección laboral</h3>
+            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+               <div class="ui-grid-row">
+                  <div class="ui-grid-col-10">
+                  </div>
+                  <div class="ui-grid-col-2">
+                     <button pButton label="Confirmar Proyección" type="button" (click)="confirmProjection()"></button>
+                  </div>
+               </div>
+            </div>
+            <br><br>
             <form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                   <div class="ui-grid-row">
@@ -25,13 +35,9 @@
                      </div>
                      <div class="ui-grid-col-2">
                         <label for="anio">Año</label>
-                        <!--<p-dropdown id="anio" name="anio" required="true"-->
-                                    <!--[options]="anioSelect" [autoWidth]="false" (onChange)="changeAnio()"-->
-                                    <!--[(ngModel)]="jobProjection.anio"-->
-                                    <!--#anio="ngModel"-->
-                        <!--&gt;</p-dropdown>-->
-                        <input *ngIf="viewanio" id="anio" name="anio" #anio="ngModel" pInputText type="number" [min]="minanio"
-                               [(ngModel)]="jobProjection.anio" required (change)="changeAnio()" />
+                        <input *ngIf="viewanio" id="anio" name="anio" #anio="ngModel" pInputText type="number"
+                               [min]="minanio"
+                               [(ngModel)]="jobProjection.anio" required (change)="changeAnio()"/>
                      </div>
                      <div class="ui-grid-col-2">
                         <label for="idArea"><strong>Estado </strong></label><br>
@@ -136,7 +142,8 @@
             <p-confirmDialog width="400"></p-confirmDialog>
          </div>
          <div *ngIf="!addinglocation">
-           <projections (dismiss)="toggleform()" (create)="bindLocation($event)" [id]="jobProjection.idEstructuraOrganizacional"[anio]="jobProjection.anio"></projections>
+            <projections (dismiss)="toggleform()" (create)="bindLocation($event)"
+                         [id]="jobProjection.idEstructuraOrganizacional" [anio]="jobProjection.anio"></projections>
          </div>
       </div>
       <div *ngIf="!detailprojection">
