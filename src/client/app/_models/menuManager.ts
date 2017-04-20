@@ -1,9 +1,9 @@
 export class MenuManager {
    
    idMenu : number;
-   codigo : string;
-   nombre : string;
-   formulario : string;
+   codigoMenu : string;
+   menu : string;
+   ruta : string;
    secuencia : number;
    idPadre : number;
    indicadorHabilitado : boolean;
@@ -11,10 +11,11 @@ export class MenuManager {
    auditoriaUsuario : number;
    
    constructor(){
-      this.codigo = "";
-      this.nombre = "";
-      this.formulario = "";
+      this.codigoMenu = "";
+      this.menu = "";
+      this.ruta = "";
       this.secuencia = null;
       this.indicadorHabilitado = true;
+      this.idPadre = 0;
    }
 }

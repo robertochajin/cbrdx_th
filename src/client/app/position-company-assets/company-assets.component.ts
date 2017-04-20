@@ -6,6 +6,7 @@ import {ListCompanyAssets} from "../_models/listCompanyAssets";
 import {CompanyAssetsServices} from "../_services/company-assets.service";
 import {CompanyAssetsTypesServices} from "../_services/list-company-assets.service";
 import {Positions} from "../_models/positions";
+import {SelectItem, Message} from 'primeng/primeng';
 
 @Component({
    moduleId: module.id,
@@ -26,7 +27,9 @@ export class CompanyAssetsComponent implements OnInit {
 
    description: string;
    permitirSiguiente: boolean = false;
-
+   alert: boolean = false;
+   msgsAlert: Message[] = [];
+   
    constructor(private router: Router,
                private companyAssetsService: CompanyAssetsServices,
                private listCompanyAssetsService: CompanyAssetsTypesServices,
@@ -34,7 +37,7 @@ export class CompanyAssetsComponent implements OnInit {
    }
 
    ngOnInit() {
-
+      this.msgsAlert.push({severity: 'alert', summary: 'Error', detail: 'Debe llenar al menos un registro'});
       this.listCompanyAssetsService.getAllEnabled().subscribe(listCompanyAssets => {
          this.listCompanyAssets = listCompanyAssets;
          this.companyAssetsService.getAllByPosition(this.position.idCargo).subscribe(res => {
@@ -57,11 +60,22 @@ export class CompanyAssetsComponent implements OnInit {
          if (obj != undefined) {
             obj.descripcion = lca.descripcion;
             this.companyAssetsService.update(obj).subscribe(res => {
-               if (res.ok)
-                  this.permitirSiguiente = true;
+               if (res.ok) {
+                  if ( this.permitirSiguiente == false && obj.descripcion!="") {
+                     this.nextStep.emit( 11 );
+                     this.permitirSiguiente = true;
+                  }
+                  if(obj.descripcion == "")
+                     this.permitirSiguiente = false;
+               }
+                  
             });
          } else {
-            this.save(lca);
+            if(lca.descripcion != ""){
+               this.save(lca);
+            }else{
+               this.permitirSiguiente = false;
+            }
          }
       });
    }
@@ -73,18 +87,32 @@ export class CompanyAssetsComponent implements OnInit {
       companyAssets.descripcion = lca.descripcion;
 
       this.companyAssetsService.add(companyAssets).subscribe(res => {
-         if (res.ok)
+         if (res.ok) {
+            if ( this.permitirSiguiente == false ) {
+               this.nextStep.emit( 11 );
                this.permitirSiguiente = true;
+            }
+         }
       });
    }
 
    next() {
-      for (let elemento of this.listCompanyAssets) {
-         if (elemento.descripcion != undefined && elemento.descripcion.length > 0)
-            this.update(elemento);
+      let num = 0;
+      for ( let elemento of this.listCompanyAssets ) {
+         if (elemento.descripcion == "" || elemento.descripcion == null )
+            num++;
       }
-
-      if (this.permitirSiguiente)
-         this.nextStep.emit(11);
+      if(this.listCompanyAssets.length == num){
+         this.alert = true;
+      }else {
+         this.alert = false;
+         for ( let elemento of this.listCompanyAssets ) {
+            if ( elemento.descripcion != undefined && elemento.descripcion != null )
+               this.update( elemento );
+         }
+         if ( this.permitirSiguiente == true ) {
+            this.nextStep.emit( 11 );
+         }
+      }
    }
 }

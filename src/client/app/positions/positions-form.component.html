@@ -226,7 +226,7 @@
                                               #responsabilidadesAd="ngModel"
                                               [required]="true"></textarea>
                                     <div *ngIf="f5.submitted && !responsabilidadesAd.valid"
-                                         class="ui-message  ui-corner-all">
+                                          class="ui-message ui-messages-error ui-corner-all">
                                        Responsabilidades complentarias es requerido
                                     </div>
                                  </div>
@@ -274,15 +274,16 @@
                               </div>
                               <div class="row">
                                  <div class=" col-sm-12">
-                                    <label for="actividadesSupervisa">Actividades que supervisa</label>
+                                    <label for="actividadesSupervisa">* Actividades que supervisa</label>
                                     <textarea pInputTextarea id="actividadesSupervisa"
                                               name="responsabilidadesAd" maxlength="500"
                                               [(ngModel)]="position.actividadesSupervisa"
                                               #actividadesSupervisa="ngModel"
                                               [required]="true"></textarea>
-                                    <div *ngIf="f7.submitted && !actividadesSupervisa.valid"
-                                         class="ui-message  ui-corner-all">
-                                       Responsabilidades complentarias es requerido
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f7.submitted && !actividadesSupervisa.valid">
+                                       <i class="fa fa-close"></i>
+                                       Actividades que supervisa es requerido
                                     </div>
                                  </div>
                               </div>
@@ -348,9 +349,14 @@
                               <div class="row">
                                  <div class="col-md-3">
                                     <label for="edad">Edad</label>
-                                    <input type="text" pInputText id="edad" name="edad" type="number" min="0"
+                                    <input type="text" pInputText id="edad" name="edad" type="number" min="1" max="99" pattern="(?:\b|-)([1-9]{1,2}?|99)\b"
                                            [(ngModel)]="position.edad" #edad="ngModel"
                                     />
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f8.submitted && !edad.valid">
+                                       <i class="fa fa-close"></i>
+                                       Edad es invalido
+                                    </div>
                                  </div>
                                  <div class="form-group col-md-3">
                                     <label for="idGenero">Genero</label>
