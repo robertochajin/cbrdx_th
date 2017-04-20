@@ -90,6 +90,8 @@ export class JobProjectionAddComponent {
       this.jobProjectionService.getPositionsById(this.jobProjectionAdd.idCargo).subscribe(rest => {
          this.positions = rest;
       });
+      this.jobProjectionAdd.plazasProyectadas=null;
+      this.jobProjectionAdd.costoProyectado=null;
 
    }
 
