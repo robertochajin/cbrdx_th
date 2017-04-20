@@ -39,7 +39,8 @@ export class JobProjectionComponent {
    plazasI: string;
    costoI: string;
    cargosI: string;
-
+   date = new Date();
+   year = this.date.getFullYear()-2;
    minanio: number;
    constructor(private jobProjectionService: JobProjectionService,
                private router: Router,
@@ -47,9 +48,7 @@ export class JobProjectionComponent {
    }
 
    ngOnInit() {
-      let date = new Date();
-      let year = date.getFullYear()-2;
-      this.minanio=year;
+      this.minanio=this.year;
       this.jobProjectionService.getLisTypeStructure().subscribe(rest => {
          this.ListaTiposAreas.push({label: "Seleccione", value: null});
          for (let dp of rest) {
@@ -77,6 +76,7 @@ export class JobProjectionComponent {
    }
 
    changeTypeArea() {
+      this.minanio=this.year;
       this.jobProjection.anio = null;
       this.nuevoCargo = false;
       this.viewanio = false;
@@ -94,6 +94,7 @@ export class JobProjectionComponent {
    }
 
    changeArea() {
+      this.minanio=this.year;
       this.plazasA = 0;
       this.cargosA = 0;
       this.costoA = 0;
