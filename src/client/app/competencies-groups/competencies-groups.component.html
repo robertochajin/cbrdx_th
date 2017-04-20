@@ -7,7 +7,7 @@
                <legend>Creando / editando grupo:</legend>
                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                   <div class="row">
-                     <div class="form-group col-md-12">
+                     <div class="form-group col-md-8">
                         <label for="nombre">* Nombre</label>
                         <input type="text" pInputText id="nombre" name="nombre"
                                [(ngModel)]="group.grupoCompetencia" #nombre="ngModel"
@@ -16,6 +16,18 @@
                              *ngIf="fg.submitted && !nombre.valid">
                            <i class="fa fa-close"></i>
                            Nombre es requerido
+                        </div>
+                     </div>
+                     <div class="form-group col-md-4">
+                        <label for="ponderancie">* Ponderación</label>
+                        <input type="number" maxlength="3" size="3" pattern="(?:\b|-)([1-9]{1,2}[0]?|100)\b" min="1"
+                               max="100" pInputText id="ponderancie" name="ponderancie"
+                               [(ngModel)]="group.ponderacion" #ponderancie="ngModel"
+                               required/>
+                        <div class="ui-message ui-messages-error ui-corner-all"
+                             *ngIf="fg.submitted && !ponderancie.valid">
+                           <i class="fa fa-close"></i>
+                           Es necesaria una ponderación válida entre 1 y 100
                         </div>
                      </div>
                   </div>
@@ -33,30 +45,18 @@
                   </div>
                   <div class="row">
                      <div class="form-group col-md-12">
-                        <label for="ponderancie">* Ponderación</label>
-                        <input type="number" maxlength="3" size="3" pattern="(?:\b|-)([1-9]{1,2}[0]?|100)\b" min="1"
-                               max="100" pInputText id="ponderancie" name="ponderancie"
-                               [(ngModel)]="group.ponderacion" #ponderancie="ngModel"
-                               required/>
-                        <div class="ui-message ui-messages-error ui-corner-all"
-                             *ngIf="fg.submitted && !ponderancie.valid">
-                           <i class="fa fa-close"></i>
-                           Es necesaria una ponderación válida entre 1 y 100
-                        </div>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="form-group col-md-12">
                         <label for="enabledGroup">Habilitado</label>
                         <p-checkbox id="enabledGroup" name="enabledGroup" #enabledGroup="ngModel"
                                     [(ngModel)]="group.indicadorHabilitado" binary="true"></p-checkbox>
                      </div>
                   </div>
                   <div class="row form-footer-buttons">
-                     <div class="form-group col-md-6">
+                     <div class="form-group col-md-4">
+                     </div>
+                     <div class="form-group col-md-2">
                         <a (click)="cancelEditingGroup()" class="cancelar">Cancelar</a>
                      </div>
-                     <div class="form-group col-md-6">
+                      <div class="form-group col-md-2">
                         <button pButton type="submit" label="Guardar"></button>
                      </div>
                   </div>
@@ -73,7 +73,8 @@
       </div>
    </div>
    <p-tabView orientation="left">
-      <p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}" [selected]="i == 0">
+      <p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}" [selected]="i == 0"
+                  headerStyleClass="{{ group.indicadorHabilitado ? '':'inhabilitado' }}">
          <div class="row" *ngIf="editingCompetencie">
             <div class="col-md-12">
                <form name="competencieForm" (ngSubmit)="fc.valid && saveCompetencie()" #fc="ngForm" novalidate>

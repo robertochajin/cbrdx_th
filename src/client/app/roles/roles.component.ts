@@ -1,6 +1,3 @@
-/**
- * Created by Felipe Aguirre - Jenniferth Escobar on 26/02/2017.
- */
 import {Component} from "@angular/core";
 import {Rol} from "../_models/rol";
 import {RolesService} from "../_services/roles.service";
