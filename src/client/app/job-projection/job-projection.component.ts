@@ -32,7 +32,8 @@ export class JobProjectionComponent {
    cargos: string;
    cargosA: number = 0;
    plazasA: number = 0;
-   costoA: number = 0;
+   costoA: string = "0";
+   costoAA:number = 0;
    costo: string;
    plazasP: string;
    costoP: string;
@@ -40,15 +41,16 @@ export class JobProjectionComponent {
    costoI: string;
    cargosI: string;
    date = new Date();
-   year = this.date.getFullYear()-2;
+   year = this.date.getFullYear() - 2;
    minanio: number;
+
    constructor(private jobProjectionService: JobProjectionService,
                private router: Router,
                private confirmationService: ConfirmationService) {
    }
 
    ngOnInit() {
-      this.minanio=this.year;
+      this.minanio = this.year;
       this.jobProjectionService.getLisTypeStructure().subscribe(rest => {
          this.ListaTiposAreas.push({label: "Seleccione", value: null});
          for (let dp of rest) {
@@ -58,25 +60,26 @@ export class JobProjectionComponent {
             });
          }
       });
-
-
    }
 
    calculateCostA() {
       this.plazasA = 0;
       this.cargosA = 0;
-      this.costoA = 0;
+      this.costoA = "0";
+      let costoa=0;
       this.jobProjectionService.getLisStructurePositions(this.jobProjection.idEstructuraOrganizacional).subscribe(res => {
          for (let r of res) {
             this.cargosA += 1;
             this.plazasA += r.plazas;
-            this.costoA += Number(r.plazas) * Number(r.salario);
+            costoa += Number(r.plazas) * Number(r.salario);
+            this.costoAA += Number(r.plazas) * Number(r.salario);
          }
+         this.costoA =new Intl.NumberFormat(["ban", "id"]).format(costoa);
       });
    }
 
    changeTypeArea() {
-      this.minanio=this.year;
+      this.minanio = this.year;
       this.jobProjection.anio = null;
       this.nuevoCargo = false;
       this.viewanio = false;
@@ -94,10 +97,10 @@ export class JobProjectionComponent {
    }
 
    changeArea() {
-      this.minanio=this.year;
+      this.minanio = this.year;
       this.plazasA = 0;
       this.cargosA = 0;
-      this.costoA = 0;
+      this.costoA = "0";
       this.calculateCostA();
       this.jobProjection.anio = null;
       this.viewanio = true;
@@ -105,7 +108,6 @@ export class JobProjectionComponent {
       this.jobProjectionService.getListJobProjctionByArea(this.jobProjection.idEstructuraOrganizacional).subscribe(rest => {
          this.ListJobProjectionTemp = rest;
       });
-
 
    }
 
@@ -129,6 +131,10 @@ export class JobProjectionComponent {
       let ok = true;
       for (let p of this.ListJobProjectionTemp) {
          if (Number(this.jobProjection.anio) === p.anio) {
+            let v = p.costoProyectado;
+            let va = p.costoActual;
+            p.costoPP=new Intl.NumberFormat(["ban", "id"]).format(v);
+            p.costoAP=new Intl.NumberFormat(["ban", "id"]).format(va);
             this.ListJobProjection.push(p);
          }
       }
@@ -142,11 +148,11 @@ export class JobProjectionComponent {
       }
       ok ? this.estadoArea = "Area Totalmente Aprobada" : this.estadoArea = "Area Parciamente Aprobada";
       this.plazasP = plazasP.toFixed(0);
-      this.costoP = costoP.toFixed(2);
+      this.costoP =new Intl.NumberFormat(["ban", "id"]).format(costoP);
       this.cargos = cargos.toFixed(0);
       this.plazasI = (((plazasP - this.plazasA) / this.plazasA) * 100).toFixed(2);
       this.cargosI = (((cargos - this.cargosA) / this.cargosA) * 100).toFixed(2);
-      this.costoI = (((costoP - this.costoA) / this.costoA) * 100).toFixed(2);
+      this.costoI = (((costoP - this.costoAA) / this.costoAA) * 100).toFixed(2);
 
    }
 
@@ -235,11 +241,11 @@ export class JobProjectionComponent {
       }
       ok ? this.estadoArea = "Area Totalmente Aprobada" : this.estadoArea = "Area Parciamente Aprobada";
       this.plazasP = plazasP.toFixed(0);
-      this.costoP = costoP.toFixed(2);
+      this.costoP =new Intl.NumberFormat(["ban", "id"]).format(costoP);
       this.cargos = cargos.toFixed(0);
       this.plazasI = (((plazasP - this.plazasA) / this.plazasA) * 100).toFixed(2);
       this.cargosI = (((cargos - this.cargosA) / this.cargosA) * 100).toFixed(2);
-      this.costoI = (((costoP - this.costoA) / this.costoA) * 100).toFixed(2);
+      this.costoI = (((costoP - this.costoAA) / this.costoAA) * 100).toFixed(2);
 
    }
 
@@ -265,11 +271,11 @@ export class JobProjectionComponent {
       }
       ok ? this.estadoArea = "Area Totalmente Aprobada" : this.estadoArea = "Area Parciamente Aprobada";
       this.plazasP = plazasP.toFixed(0);
-      this.costoP = costoP.toFixed(2);
+      this.costoP =new Intl.NumberFormat(["ban", "id"]).format(costoP);
       this.cargos = cargos.toFixed(0);
       this.plazasI = (((plazasP - this.plazasA) / this.plazasA) * 100).toFixed(2);
       this.cargosI = (((cargos - this.cargosA) / this.cargosA) * 100).toFixed(2);
-      this.costoI = (((costoP - this.costoA) / this.costoA) * 100).toFixed(2);
+      this.costoI = (((costoP - this.costoAA) / this.costoAA) * 100).toFixed(2);
 
    }
 
@@ -295,11 +301,11 @@ export class JobProjectionComponent {
       }
       ok ? this.estadoArea = "Area Totalmente Aprobada" : this.estadoArea = "Area Parciamente Aprobada";
       this.plazasP = plazasP.toFixed(0);
-      this.costoP = costoP.toFixed(2);
+      this.costoP =new Intl.NumberFormat(["ban", "id"]).format(costoP);
       this.cargos = cargos.toFixed(0);
       this.plazasI = (((plazasP - this.plazasA) / this.plazasA) * 100).toFixed(2);
       this.cargosI = (((cargos - this.cargosA) / this.cargosA) * 100).toFixed(2);
-      this.costoI = (((costoP - this.costoA) / this.costoA) * 100).toFixed(2);
+      this.costoI = (((costoP - this.costoAA) / this.costoAA) * 100).toFixed(2);
 
    }
 
@@ -347,14 +353,19 @@ export class JobProjectionComponent {
       }
       ok ? this.estadoArea = "Area Totalmente Aprobada" : this.estadoArea = "Area Parciamente Aprobada";
       this.plazasP = plazasP.toFixed(0);
-      this.costoP = costoP.toFixed(2);
+      this.costoP =new Intl.NumberFormat(["ban", "id"]).format(costoP);
       this.cargos = cargos.toFixed(0);
       this.plazasI = (((plazasP - this.plazasA) / this.plazasA) * 100).toFixed(2);
       this.cargosI = (((cargos - this.cargosA) / this.cargosA) * 100).toFixed(2);
-      this.costoI = (((costoP - this.costoA) / this.costoA) * 100).toFixed(2);
+      this.costoI = (((costoP - this.costoAA) / this.costoAA) * 100).toFixed(2);
 
    }
-   confirmProjection(){
 
+   confirmProjection() {
+      // this.jobProjectionService.getPending().subscribe(rest=>{
+      //    this.jobProjectionService.getConfirmProjection().subscribe(res=>{
+      //
+      //    });
+      // });
    }
 }

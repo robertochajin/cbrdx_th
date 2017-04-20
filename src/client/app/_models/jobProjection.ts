@@ -18,6 +18,8 @@ export class JobProjection {
    auditoriaUsuario: number;
    auditoriaFecha: Date;
    index: number;
+   costoPP: string;
+   costoAP: string;
    constructor() {
       this.auditoriaFecha = null;
       this.auditoriaUsuario = null;
