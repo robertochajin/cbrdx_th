@@ -18,6 +18,7 @@ export class JobProjectionComponent {
    ListJobProjectionTemp: JobProjection[] = [];
    ListaTiposAreas: SelectItem[] = [];
    ListaAreas: SelectItem[] = [];
+   anioSelect: SelectItem[] = [];
    dialogObjet: JobProjection = new JobProjection();
    addinglocation: boolean = true;
    detailprojection: boolean = true;
@@ -38,17 +39,17 @@ export class JobProjectionComponent {
    plazasI: string;
    costoI: string;
    cargosI: string;
-   anio: number = 10000;
 
+   minanio: number;
    constructor(private jobProjectionService: JobProjectionService,
                private router: Router,
                private confirmationService: ConfirmationService) {
    }
 
    ngOnInit() {
-
       let date = new Date();
-      let yyyy = date.getFullYear();
+      let year = date.getFullYear()-2;
+      this.minanio=year;
       this.jobProjectionService.getLisTypeStructure().subscribe(rest => {
          this.ListaTiposAreas.push({label: "Seleccione", value: null});
          for (let dp of rest) {
@@ -102,12 +103,13 @@ export class JobProjectionComponent {
       this.ListJobProjection = [];
       this.jobProjectionService.getListJobProjctionByArea(this.jobProjection.idEstructuraOrganizacional).subscribe(rest => {
          this.ListJobProjectionTemp = rest;
-         for (let a of this.ListJobProjectionTemp) {
-            if (this.anio > a.anio) {
-               this.anio = a.anio;
-            }
-         }
+         // for (let a of this.ListJobProjectionTemp) {
+         //    if (this.minanio > a.anio) {
+         //       this.minanio = a.anio;
+         //    }
+         // }
       });
+
 
    }
 
@@ -117,8 +119,8 @@ export class JobProjectionComponent {
       this.jobProjectionService.getListJobProjctionByArea(this.jobProjection.idEstructuraOrganizacional).subscribe(rest => {
          this.ListJobProjectionTemp = rest;
          for (let a of this.ListJobProjectionTemp) {
-            if (this.anio > a.anio) {
-               this.anio = a.anio;
+            if (this.minanio > a.anio) {
+               this.minanio = a.anio;
             }
          }
       });
@@ -217,7 +219,7 @@ export class JobProjectionComponent {
 
    bindLocation(event: any) {
       let jp = new JobProjection();
-      jp=event;
+      jp = event;
       this.ListJobProjection.push(jp);
       this.toggleform();
       let cargos = 0;
@@ -356,7 +358,8 @@ export class JobProjectionComponent {
       this.costoI = (((costoP - this.costoA) / this.costoA) * 100).toFixed(2);
 
    }
-   calculate(){
+
+   calculate() {
 
    }
 }
