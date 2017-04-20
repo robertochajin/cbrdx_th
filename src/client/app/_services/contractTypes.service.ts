@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {Http, Response, Headers} from '@angular/http';
 import {AuthenticationService} from "./authentication.service";
 import {ContractTypes} from "../_models/contractTypes";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class ContractTypesServices {
 
    public headers = new Headers({'Content-Type': 'application/json'});
-   private masterService = '<%= SVC_TH_URL %>/api/listasEstadosEstudios/';
-   private detailService = '<%= SVC_TH_URL %>/api/listasEstadosEstudios/';
+   private masterService = '<%= SVC_TH_URL %>/api/listasTiposContratos/';
+   private detailService = '<%= SVC_TH_URL %>/api/listasTiposContratos/';
 
    constructor(private http: Http, private authenticationService: AuthenticationService) {
       this.headers = new Headers({
@@ -17,7 +18,7 @@ export class ContractTypesServices {
       });
    }
 
-   getAllEnabled() {
+   getAllEnabled() : Observable<ContractTypes[]> {
       return this.http.get(this.masterService + 'enabled/').map((res: Response) => res.json() as ContractTypes[]);
    }
 
