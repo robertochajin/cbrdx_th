@@ -151,8 +151,12 @@ import {RisksUpdateComponent} from "./risks/risks-update.component";
 import {CompetenciesGroupsComponent} from "./competencies-groups/competencies-groups.component";
 import {OrganizationalStructurePositionsComponent} from "./organizationalStructurePositions/organizational-structure-positions.component";
 
-
 import {PositionAuthoritiesComponent} from "./positions/position-authorities.component";
+
+//Administracion
+import {MenuManagerComponent} from "./menuManager/menuManager.component";
+
+
 
 const routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -317,7 +321,9 @@ const routes = [
 
 
   {path: 'position-activities/:idCargo', component: PositionAuthoritiesComponent, canActivate: [AuthGuard]},
-
+   
+   //Administracion
+   {path: 'menus', component: MenuManagerComponent, canActivate: [AuthGuard]},
 
 ];
 

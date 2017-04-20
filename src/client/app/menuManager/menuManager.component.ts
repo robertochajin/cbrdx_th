@@ -16,7 +16,7 @@ export class MenuManagerComponent implements OnInit {
    menus: MenuManager = new MenuManager();
    listmenu: MenuManager[];
       
-   treedCompany: TreeNode[] = [];
+   treeMenu: TreeNode[] = [];
    selectedNode: TreeNode;
    modulo: boolean = true;
    header: string;
@@ -31,11 +31,11 @@ export class MenuManagerComponent implements OnInit {
          this.listmenu = res;
             for ( let c of this.listmenu.filter( t => t.idPadre == 0 || t.idPadre == null ) ) {
                let companyNode = {
-                  "label": c.nombre,
+                  "label": c.menu,
                   "data": c,
                   "leaf": false,
                };
-               this.treedCompany.push( companyNode );
+               this.treeMenu.push( companyNode );
             }
             this.newModule();
       } );
@@ -45,8 +45,8 @@ export class MenuManagerComponent implements OnInit {
    }
    
    validateCode() {
-      if ( this.menus.codigo != "" && this.menus.codigo != null ) {
-         this.codeExists = this.listmenu.filter( t => (t.codigo === this.menus.codigo && t.idMenu != this.menus.idMenu ) ).length > 0;
+      if ( this.menus.codigoMenu != "" && this.menus.codigoMenu != null ) {
+         this.codeExists = this.listmenu.filter( t => (t.codigoMenu === this.menus.codigoMenu && t.idMenu != this.menus.idMenu ) ).length > 0;
       } else {
          this.codeExists = false;
       }
@@ -54,17 +54,17 @@ export class MenuManagerComponent implements OnInit {
    }
    
    capitalizeCode() {
-      let input = this.menus.codigo;
+      let input = this.menus.codigoMenu;
       if ( input != "" && input != null ) {
-         this.menus.codigo = input.toUpperCase().replace( ' ', '' ).trim();
+         this.menus.codigoMenu = input.toUpperCase().replace( ' ', '' ).trim();
       }
    }
    
       
    capitalizeName() {
-      let input = this.menus.nombre;
+      let input = this.menus.menu;
       if ( input != "" && input != null ) {
-         this.menus.nombre = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+         this.menus.menu = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }
    
@@ -88,10 +88,10 @@ export class MenuManagerComponent implements OnInit {
       let chilNodes: TreeNode[] = [];
       for ( let c of this.listmenu.filter( t => t.idPadre == node.data.idMenu ) ) {
          chilNodes.push( {
-                            "label": c.nombre,
+                            "label": c.menu,
                             "data": c,
                             "parent": node,
-                            "leaf": false,
+                            "leaf": true,
                             "children" : []
                          } );
       }
@@ -103,9 +103,11 @@ export class MenuManagerComponent implements OnInit {
       
       if ( node.data.idPadre == 0 || node.data.idPadre == null ) {
          this.modulo = true;
+         this.header = 'Módulo';
          
       } else {
          this.modulo = false;
+         this.header = 'Menú';
       }
       this.menuManagerService.view( node.data.idMenu ).subscribe(
          menus => {
@@ -123,13 +125,13 @@ export class MenuManagerComponent implements OnInit {
             this.guardando = false;
             this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Registro guardado con exito!' } );
             let newChil: any = {
-               "label": this.menus.nombre,
+               "label": this.menus.menu,
                "data": data,
                "children" : []
             };
             this.listmenu.push( data );
             if ( this.menus.idPadre == 0 || this.menus.idPadre == null ) {
-               this.treedCompany.push( newChil );
+               this.treeMenu.push( newChil );
                this.selectedNode = newChil;
                this.newModule();
                
@@ -146,8 +148,8 @@ export class MenuManagerComponent implements OnInit {
             this.guardando = false;
             this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Registro actualizado con exito!' } );
             this.selectedNode.data = this.menus;
-            this.selectedNode.label = this.menus.nombre;
-            this.header = this.menus.nombre;
+            this.selectedNode.label = this.menus.menu;
+            this.header = this.menus.menu;
             for ( let i = 0; i < this.listmenu.length; i++ ) {
                if ( this.listmenu[ i ].idMenu === this.menus.idMenu ) {
                   this.listmenu[ i ] = this.menus;

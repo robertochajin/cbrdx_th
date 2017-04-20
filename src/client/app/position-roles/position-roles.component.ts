@@ -6,6 +6,7 @@ import {PositionRoles} from "../_models/positionRoles";
 import {ProcessRoles} from "../_models/processRoles";
 import {ProcessRolesServices} from "../_services/processRoles.service";
 import {PositionRolesServices} from "../_services/position-roles.service";
+import { Message } from "primeng/components/common/api";
 
 @Component({
    moduleId: module.id,
@@ -19,6 +20,7 @@ export class PositionRolesComponent {
    position: Positions;
    processRoles: ProcessRoles[] = [];
    positionRoles: PositionRoles [] = [];
+   msgsAlert: Message[] = [];
    
    @Output()
    nextStep: EventEmitter<number> = new EventEmitter<number>();
@@ -93,6 +95,16 @@ export class PositionRolesComponent {
    }
    
    next(){
+      let num = 0;
+      for (let elemento of this.processRoles) {
+         if (elemento.asignadoAlCargo)
+            num++;
+      }
+      if(num > 0){
          this.nextStep.emit(4);
+         this.msgsAlert = [];
+      }else{
+         this.msgsAlert.push({severity: 'alert', summary: 'Error', detail: 'Debe seleccional al menos un rol'});
+      }
    }
 }
