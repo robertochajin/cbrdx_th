@@ -23,7 +23,7 @@ export class EmployeesService {
     }
 
     getTerColWithoutPosition(query:string)  {
-        return this.http.get(this.serviceURL+'vterceros/asignarColaborador/').map((res:Response) => res.json());
+        return this.http.get(this.serviceURL+'vterceros/asignarColaborador/'+query.trim()+'/').map((res:Response) => res.json());
     }
 
     add(c: Employee) {
