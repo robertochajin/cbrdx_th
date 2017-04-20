@@ -104,11 +104,6 @@ export class JobProjectionComponent {
       this.ListJobProjection = [];
       this.jobProjectionService.getListJobProjctionByArea(this.jobProjection.idEstructuraOrganizacional).subscribe(rest => {
          this.ListJobProjectionTemp = rest;
-         // for (let a of this.ListJobProjectionTemp) {
-         //    if (this.minanio > a.anio) {
-         //       this.minanio = a.anio;
-         //    }
-         // }
       });
 
 
@@ -359,8 +354,7 @@ export class JobProjectionComponent {
       this.costoI = (((costoP - this.costoA) / this.costoA) * 100).toFixed(2);
 
    }
-
-   calculate() {
+   confirmProjection(){
 
    }
 }
