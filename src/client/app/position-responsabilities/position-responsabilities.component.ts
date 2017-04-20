@@ -56,7 +56,7 @@ export class PositionResponsabilitiesComponent {
          if (res.idResponsabilidad) {
             this.responsabilities.map((r) => {
                if(pr.idResponsabilidad === r.value){
-                  this.responsabilities.splice(this.responsabilities.indexOf(r));
+                  this.responsabilities.splice(this.responsabilities.indexOf(r),1);
                   this.tr.idResponsabilidad = null;
                }
             });

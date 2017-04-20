@@ -11,7 +11,7 @@ export class PhysicStructure {
    celular: string;
    correoElectronico: string;
    indicadorVirtual:boolean;
-   indicadorHabilitado: boolean;
+   indicadorHabilitado: boolean=true;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
 
