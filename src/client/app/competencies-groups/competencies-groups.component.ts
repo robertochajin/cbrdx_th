@@ -32,7 +32,7 @@ export class CompetenciesGroupsComponent {
       this.groupCompetenciesServices.getAllEnabled().subscribe(groups => {
          this.groups = groups;
          this.groups.map(g => {
-            this.competenciesServices.getAllEnabledByGroup(g.idGrupoCompetencia).subscribe(
+            this.competenciesServices.getAllByGroup(g.idGrupoCompetencia).subscribe(
                competencies => g.competencies = competencies
             );
          });
