@@ -65,6 +65,10 @@ import { OrganizationalStructureModule } from "./organizationalStructure/organiz
 import { OrganizationalStructurePositionsModule } from "./organizationalStructurePositions/organizational-structure-positions.module";
 
 
+// Administracion
+import { MenuManagerModule } from "./menuManager/menuManager.module";
+
+
 //CarsModule,
 @NgModule({
    imports: [BrowserModule, HttpModule, AppRoutingModule,
@@ -112,7 +116,8 @@ import { OrganizationalStructurePositionsModule } from "./organizationalStructur
       PersonalityModule,
       AbsenceModule,
       RisksModule,
-            CompanyAssetsModule
+      MenuManagerModule,
+      CompanyAssetsModule
    ],
 
    declarations: [AppComponent],
