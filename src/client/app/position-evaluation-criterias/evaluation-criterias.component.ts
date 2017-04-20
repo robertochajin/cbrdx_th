@@ -85,7 +85,7 @@ export class EvaluationCriteriasComponent {
       for (let pc1 of this.backUpPositionCriterias) {
          cont = 0;
          for (let pc2 of pctemp) {
-            if (pc1.idCriterio !== null && pc2.idCriterio === pc1.idCriterio) {
+            if (pc1.idCriterio != null && pc2.idCriterio === pc1.idCriterio) {
                cont = cont + 1;
             }
             if (cont > 1) break

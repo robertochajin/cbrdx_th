@@ -1,3 +1,4 @@
+<p-messages *ngIf="alert" [value]="msgsAlert"></p-messages>
 <div>
    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listCompanyAssets"
                 [paginator]="false" [responsive]="true" >
@@ -13,6 +14,11 @@
       </p-column>
    </p-dataTable>
 
-   <button type="button" pButton icon="fa-left-arrow" (click)="next()" label="Siguiente"></button>
 </div>
+<div class="row">
+   <div class="col-md-3 pull-right">
+      <button pButton label="Siguiente" (click)="next()" type="button" class="pull-right"></button>
+   </div>
+</div>
+
 <p-confirmDialog width="400"></p-confirmDialog>
