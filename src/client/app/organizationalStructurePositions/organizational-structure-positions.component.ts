@@ -134,9 +134,27 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
          header: 'Corfirmación',
          icon: 'fa fa-question-circle',
          accept: () => {
-            this.osPosition.indicadorHabilitado = false;
+            osPosition.indicadorHabilitado = false;
             this.ospService.update(osPosition).subscribe((r: any) => {
                this.osPositions.splice(this.osPositions.indexOf(osPosition), 1);
+               this.sumPositions();
+            });
+         }
+      });
+   }
+
+   removePerson(personPosition: PersonPositions){
+      this.confirmationService.confirm({
+         message: ` ¿Esta seguro que desea retirar este trabajador del cargo?`,
+         header: 'Corfirmación',
+         icon: 'fa fa-question-circle',
+         accept: () => {
+            personPosition.indicadorHabilitado = false;
+            this.personPositionService.update(personPosition).subscribe((r: any) => {
+               personPosition.idTercero = 0;
+               personPosition.nombreCompleto = '';
+               personPosition.asignadoDesde = '';
+               this.postionSlots[this.postionSlots.indexOf(personPosition)] = personPosition;
             });
          }
       });
@@ -159,13 +177,14 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
             this.osPositions[this.osPositions.indexOf(this.backUpOSPosition)] = this.osPosition;
             this.editingPosition = false;
             this.osPosition = new OrganizationalStructurePositions();
+            this.sumPositions();
          });
       } else {
          this.osPosition.idEstructuraOrganizacional = this.area.idEstructuraOrganizacional;
-         this.osPosition.indicadorHabilitado = true;
          this.ospService.add(this.osPosition).subscribe(data => {
             this.osPositions.push(this.osPosition);
             this.editingPosition = false;
+            this.sumPositions();
          });
       }
    }
@@ -187,7 +206,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    }
 
    employeeSearch(event: any) {
-      if (this.employeeList.length == 0)
+      // if (this.employeeList.length == 0)
          this.employeesService.getTerColWithoutPosition(event.query).subscribe(list => {
             this.employeeList = list;
             this.employeeList.map(e => e.nombreCompleto = e.primerNombre + ' ' + e.segundoNombre + ' ' + e.primerApellido + ' ' + e.segundoApellido);
@@ -205,17 +224,20 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
       } else {
 
          let fi: moment.Moment = moment(this.personsPosition.asignadoDesde, 'MM/DD/YYYY');
-         this.personsPosition.asignadoDesde = fi.format('YYYY-MM-DD');
+         this.personsPosition.asignadoDesde = fi.add(2, 'days').format('YYYY-MM-DD');
          if (this.personsPosition.idTerceroCargo == null) {
             this.personPositionService.add(this.personsPosition).subscribe(res => {
                res.nombreCompleto = this.selectedEmployee.nombreCompleto;
                res.cargo = this.personsPosition.cargo;
+
+               res.asignadoDesde = fi.subtract(2, 'days').format('YYYY-MM-DD');
                this.postionSlots[this.postionSlots.indexOf(this.backUpPersonsPosition)] = res;
                this.editingPerson = false;
             });
          } else {
             this.personPositionService.update(this.personsPosition).subscribe(res => {
                if (res.ok) {
+                  this.personsPosition.asignadoDesde = fi.subtract(2, 'days').format('YYYY-MM-DD');
                   this.postionSlots[this.postionSlots.indexOf(this.backUpPersonsPosition)] = this.personsPosition;
                   this.editingPerson = false;
                }
@@ -256,6 +278,8 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
             this.personsPositions = listPerson;
             this.personsPositions.map(pp => {
                pp.nombreCompleto = pp.primerNombre + ' ' + pp.segundoNombre + ' ' + pp.primerApellido + ' ' + pp.segundoApellido;
+               let fi: moment.Moment = moment(pp.asignadoDesde, 'YYYY-MM-DD');
+               pp.asignadoDesde = fi.add(1, 'days').format('YYYY-MM-DD');
                this.assingPerson(pp, null);
             });
          });
@@ -315,5 +339,22 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
          index = this.postionSlots.findIndex(ps => (ps.idCargo == person.idCargo && ps.idTercero == 0));
       if (index != -1)
          this.postionSlots[index] = person;
+   }
+
+   confirmStructure(){
+      //actualizar la estructura
+      this.confirmationService.confirm({
+         message: ` ¿Esta seguro que confirmar esta planta? Después de confirmar no podrá hacer modificaciones sobre los cargos`,
+         header: 'Corfirmación',
+         icon: 'fa fa-question-circle',
+         accept: () => {
+            this.area.indicadorPlantaConfirmada = true;
+            this.organizationalStructureService.updateOrganizationalStructure(this.area).then((r: any) => {
+               if(!r.ok){
+                  this.area.indicadorPlantaConfirmada = true;
+               }
+            });
+         }
+      });
    }
 }

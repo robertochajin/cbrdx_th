@@ -48,40 +48,45 @@
                      <form name="positionForm" (ngSubmit)="fp.valid && savePosition()" #fp="ngForm" novalidate>
                         <fieldset>
                            <legend>Creando / editando cargo para el área:</legend>
-                           <div class="row">
-                              <div class="form-group col-md-12">
-                                 <label for="cargo">* Cargo</label>
-                                 <p-autoComplete placeholder="Buscar cargo" field="cargo" name="cargo" id="cargo"
-                                                 minLength="3" delay="500"
-                                                 [suggestions]="positionList" required="true"
-                                                 (completeMethod)="positionSearch($event)"
-                                                 (onSelect)="capturePosition($event)" [(ngModel)]="selectedPosition">
-                                 </p-autoComplete>
-                                 <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="fp.submitted && badPostion">
-                                    <i class="fa fa-close"></i>
-                                    Cargo es requerido
+                           <div class="form-group container">
+                              <div class="row">
+                                 <div class="form-group col-md-8">
+                                    <label for="cargo">* Cargo</label>
+                                    <p-autoComplete placeholder="Buscar cargo" field="cargo" name="cargo" id="cargo"
+                                                    minLength="3" delay="500"
+                                                    [suggestions]="positionList" required="true"
+                                                    (completeMethod)="positionSearch($event)"
+                                                    (onSelect)="capturePosition($event)" [(ngModel)]="selectedPosition">
+                                    </p-autoComplete>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="fp.submitted && badPostion">
+                                       <i class="fa fa-close"></i>
+                                       Cargo es requerido
+                                    </div>
                                  </div>
                               </div>
-                           </div>
-                           <div class="row">
-                              <div class="form-group col-md-4">
-                                 <label for="nPlazas">* Número de plazas</label>
-                                 <input type="number" min="1" pInputText id="nPlazas" name="nPlazas"
-                                        [(ngModel)]="osPosition.plazas" #nPlazas="ngModel" required/>
-                                 <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="fp.submitted && !nPlazas.valid">
-                                    <i class="fa fa-close"></i>
-                                    Numero de plazas es requerido
+                              <div class="row">
+                                 <div class="form-group col-md-4">
+                                    <label for="nPlazas">* Número de plazas</label>
+                                    <input type="number" min="1" pInputText id="nPlazas" name="nPlazas"
+                                           [(ngModel)]="osPosition.plazas" #nPlazas="ngModel" required/>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="fp.submitted && !nPlazas.valid">
+                                       <i class="fa fa-close"></i>
+                                       Numero de plazas es requerido
+                                    </div>
+                                 </div>
+                                 <div class="form-group col-md-4">
+                                    <label for="cEnabled">Habilitado</label>
+                                    <p-checkbox id="cEnabled"  name="cEnabled" binary="true"
+                                                [(ngModel)]="osPosition.indicadorHabilitado" ></p-checkbox>
                                  </div>
                               </div>
-                           </div>
-                           <div class="row form-footer-buttons">
-                              <div class="form-group col-md-6">
-                                 <a (click)="cancelEditingPosition()" class="cancelar">Cancelar</a>
-                              </div>
-                              <div class="form-group col-md-6">
-                                 <button pButton type="submit" label="Guardar"></button>
+                              <div class="row form-footer-buttons">
+                                 <div class="form-group col-md-8">
+                                    <a (click)="cancelEditingPosition()" class="cancelar">Cancelar</a>
+                                    <button pButton type="submit" label="Guardar"></button>
+                                 </div>
                               </div>
                            </div>
                         </fieldset>
@@ -91,7 +96,7 @@
                <div *ngIf="!editingPosition">
                   <div class="row datable-header">
                      <div class="col-md-6 col-xs-12 datatable-header-add">
-                        <button type="button" pButton icon="fa-plus" (click)="editPosition(null)"
+                        <button *ngIf="!area.indicadorPlantaConfirmada" type="button" pButton icon="fa-plus" (click)="editPosition(null)"
                                 label="Nuevo Cargo"></button>
                      </div>
                      <div class="col-md-6 col-xs-12 datatable-header-search">
@@ -117,7 +122,7 @@
                      </p-column>
                      <p-column header="Acciones" styleClass="datatable-col-action">
                         <template let-osp="rowData" pTemplate="body">
-                           <div class="btn-group" role="group">
+                           <div class="btn-group" role="group" *ngIf="!area.indicadorPlantaConfirmada">
                               <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil"
                                       pButton (click)="editPosition(osp)"></button>
                               <button *ngIf="osp.ocupados == 0" type="button" class="ui-button ui-button-danger btn"
@@ -143,6 +148,14 @@
                               ${{countCost}}
                            </div>
                         </div>
+                        <div class="row">
+                           <div class="col-md-4">
+                           </div>
+                           <div class="col-md-4">
+                              <button type="button" class="ui-button ui-button-danger btn" icon="fa-check-square-o"
+                                      pButton (click)="confirmStructure()" label="Confirmar planta"></button>
+                           </div>
+                        </div>
                      </div>
                   </div>
                </div>
@@ -151,7 +164,8 @@
          <p-tabPanel header="Colaboradores">
             <div class="row" *ngIf="editingPerson">
                <div class="col-md-12">
-                  <form name="personForm" (ngSubmit)="pp.valid && !badEmployee && savePersonPosition()" #pp="ngForm" novalidate>
+                  <form name="personForm" (ngSubmit)="pp.valid && !badEmployee && savePersonPosition()" #pp="ngForm"
+                        novalidate>
                      <fieldset>
                         <legend>Asignando colaborador al cargo</legend>
                         <div class="form-group container">
@@ -187,8 +201,10 @@
                               </div>
                               <div class="form-group col-md-5">
                                  <label for="tipoContrato">* Tipo de contrato</label>
-                                 <p-dropdown name="tipoContrato" id="tipoContrato" #tipoContrato="ngModel" required="true"
-                                             [autoWidth]="false" [(ngModel)]="personsPosition.idTipoContrato" [options]="contracTypeList"></p-dropdown>
+                                 <p-dropdown name="tipoContrato" id="tipoContrato" #tipoContrato="ngModel"
+                                             required="true"
+                                             [autoWidth]="false" [(ngModel)]="personsPosition.idTipoContrato"
+                                             [options]="contracTypeList"></p-dropdown>
                                  <div class="ui-message ui-messages-error ui-corner-all"
                                       *ngIf="pp.submitted && !ingreso.valid">
                                     <i class="fa fa-close"></i>
@@ -226,6 +242,9 @@
                         <div class="btn-group" role="group">
                            <button type="button" class="ui-button ui-button-success btn" icon="fa-child"
                                    pButton (click)="editPersonSlot(pp)"></button>
+                           <button *ngIf="pp.idTercero != 0" type="button" class="ui-button ui-button-danger btn"
+                                   icon="fa-mail-forward"
+                                   pButton (click)="removePerson(pp)"></button>
                         </div>
                      </template>
                   </p-column>
