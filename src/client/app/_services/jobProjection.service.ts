@@ -53,7 +53,7 @@ export class JobProjectionService {
       return this.http.get(this.serviceURL + 'proyeccionesLaborales/generarProyeccion/1').map((res: Response) => res.json());
    };
    update(jp: JobProjection) {
-      return this.http.put(this.serviceURL + 'proyeccionesLaborales', jp).map((res: Response) => res);
+      return this.http.put(this.serviceURL + 'proyeccionesLaborales', jp).map((res: Response) =>  res);
    }
    add(jp: JobProjection) {
       return this.http.post(this.serviceURL + 'proyeccionesLaborales', jp).map((res: Response) => res.json() as JobProjection);
