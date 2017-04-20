@@ -43,10 +43,12 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    private employeeList: Employee [] = [];
    private selectedEmployee: Employee = null;
    private badEmployee: boolean = true;
+   private range: string;
    private contracTypeList: SelectItem [] = [];
    treedCompany: TreeNode[] = [];
    selectedNode: TreeNode;
    private es: any;
+   private maxDate: Date = null;
 
    constructor(private positionsService: PositionsService,
                private ospService: OrganizationalStructurePositionsServices,
@@ -81,6 +83,15 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
          monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
       };
 
+
+      let today = new Date();
+      let month = today.getMonth();
+      let year = today.getFullYear();
+      let lastYear = year - 100;
+      this.maxDate = new Date();
+      this.maxDate.setFullYear(year, month, today.getDate());
+      this.range = `${lastYear}:${year}`;
+
       this.contractTypesService.getAllEnabled().subscribe((ts: ContractTypes[]) => {
          this.contracTypeList.push({label: 'Seleccione', value: null});
          ts.map(c => this.contracTypeList.push({label: c.nombre, value: c.idListaTipoContrato}));
@@ -109,6 +120,8 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
             this.osPositions = list;
             this.sumPositions();
             this.handleChangeTab(1);
+            this.editingPerson = false;
+            this.editingPosition = false;
          });
 
       }
@@ -143,7 +156,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
       });
    }
 
-   removePerson(personPosition: PersonPositions){
+   removePerson(personPosition: PersonPositions) {
       this.confirmationService.confirm({
          message: ` ¿Esta seguro que desea retirar este trabajador del cargo?`,
          header: 'Corfirmación',
@@ -206,11 +219,10 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    }
 
    employeeSearch(event: any) {
-      // if (this.employeeList.length == 0)
-         this.employeesService.getTerColWithoutPosition(event.query).subscribe(list => {
-            this.employeeList = list;
-            this.employeeList.map(e => e.nombreCompleto = e.primerNombre + ' ' + e.segundoNombre + ' ' + e.primerApellido + ' ' + e.segundoApellido);
-         });
+      this.employeesService.getTerColWithoutPosition(event.query).subscribe(list => {
+         this.employeeList = list;
+         this.employeeList.map(e => e.nombreCompleto = e.primerNombre + ' ' + e.segundoNombre + ' ' + e.primerApellido + ' ' + e.segundoApellido);
+      });
    }
 
    captureEmployee(event: any) {
@@ -237,6 +249,8 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
          } else {
             this.personPositionService.update(this.personsPosition).subscribe(res => {
                if (res.ok) {
+                  this.personsPosition.nombreCompleto = this.selectedEmployee.nombreCompleto;
+                  this.personsPosition.cargo = this.personsPosition.cargo;
                   this.personsPosition.asignadoDesde = fi.subtract(2, 'days').format('YYYY-MM-DD');
                   this.postionSlots[this.postionSlots.indexOf(this.backUpPersonsPosition)] = this.personsPosition;
                   this.editingPerson = false;
@@ -247,16 +261,35 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    }
 
    cancelEditingPosition() {
-      if (this.backUpOSPosition != null) {
-         //Verificar si es necesario reestablecer el objeto en la tabla
-         // this.osPositions[this.osPositions.indexOf(this.backUpOSPosition)] = this.backUpOSPosition;
-         this.backUpOSPosition = null;
-      }
-      this.editingPosition = false;
+      this.confirmationService.confirm({
+         message: ` ¿Esta seguro que cancelar la edición?`,
+         header: 'Corfirmación',
+         icon: 'fa fa-question-circle',
+         accept: () => {
+            if (this.backUpOSPosition != null) {
+               //Verificar si es necesario reestablecer el objeto en la tabla
+               // this.osPositions[this.osPositions.indexOf(this.backUpOSPosition)] = this.backUpOSPosition;
+               this.backUpOSPosition = null;
+            }
+            this.editingPosition = false;
+         }
+      });
    }
 
    cancelEditingPerson() {
-      this.editingPerson = false;
+
+      this.confirmationService.confirm({
+         message: ` ¿Esta seguro que cancelar la edición?`,
+         header: 'Corfirmación',
+         icon: 'fa fa-question-circle',
+         accept: () => {
+            if (this.backUpPersonsPosition != null) {
+               this.personsPositions[this.personsPositions.indexOf(this.backUpPersonsPosition)] = this.backUpPersonsPosition;
+               this.backUpPersonsPosition = null;
+            }
+            this.editingPerson = false;
+         }
+      });
    }
 
    sumPositions() {
@@ -288,17 +321,18 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
 
    editPersonSlot(pp: PersonPositions) {
 
+      this.backUpPersonsPosition = new PersonPositions();
       this.backUpPersonsPosition = pp;
-      if(pp.asignadoDesde != undefined){
-         let fi: moment.Moment = moment(pp.asignadoDesde, 'YYYY-MM-DD');
-         pp.asignadoDesde = fi.format('MM/DD/YYYY');
+      this.personsPosition = JSON.parse(JSON.stringify(pp));
+      if (this.personsPosition.asignadoDesde != undefined) {
+         let fi: moment.Moment = moment(this.personsPosition.asignadoDesde, 'YYYY-MM-DD');
+         this.personsPosition.asignadoDesde = fi.format('MM/DD/YYYY');
       }
-      this.personsPosition = pp;
 
-      if (pp.nombreCompleto != '') {
+      if (this.personsPosition.nombreCompleto != '') {
          this.selectedEmployee = new Employee();
-         this.selectedEmployee.nombreCompleto = pp.nombreCompleto;
-         this.selectedEmployee.idTercero = pp.idTercero;
+         this.selectedEmployee.nombreCompleto = this.personsPosition.nombreCompleto;
+         this.selectedEmployee.idTercero = this.personsPosition.idTercero;
          this.badEmployee = false;
       } else {
          this.selectedEmployee = null;
@@ -341,7 +375,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
          this.postionSlots[index] = person;
    }
 
-   confirmStructure(){
+   confirmStructure() {
       //actualizar la estructura
       this.confirmationService.confirm({
          message: ` ¿Esta seguro que confirmar esta planta? Después de confirmar no podrá hacer modificaciones sobre los cargos`,
@@ -350,7 +384,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
          accept: () => {
             this.area.indicadorPlantaConfirmada = true;
             this.organizationalStructureService.updateOrganizationalStructure(this.area).then((r: any) => {
-               if(!r.ok){
+               if (!r.ok) {
                   this.area.indicadorPlantaConfirmada = true;
                }
             });
