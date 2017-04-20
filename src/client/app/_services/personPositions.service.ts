@@ -7,8 +7,8 @@ import {PersonPositions} from "../_models/personPositions";
 export class PersonPositionsServices {
 
    public headers = new Headers({'Content-Type': 'application/json'});
-   private masterService = '<%= SVC_TH_URL %>/api/listasEstadosEstudios/';
-   private detailService = '<%= SVC_TH_URL %>/api/listasEstadosEstudios/';
+   private masterService = '<%= SVC_TH_URL %>/api/tercerosCargos/';
+   private detailService = '<%= SVC_TH_URL %>/api/tercerosCargos/';
 
    constructor(private http: Http, private authenticationService: AuthenticationService) {
       this.headers = new Headers({
@@ -19,6 +19,10 @@ export class PersonPositionsServices {
 
    getAllEnabled() {
       return this.http.get(this.masterService + 'enabled/').map((res: Response) => res.json() as PersonPositions[]);
+   }
+
+   getAllByOrganizationalStructure(idOrganizationalStructure: number) {
+      return this.http.get(this.masterService + 'buscarEstructura/' + idOrganizationalStructure).map((res: Response) => res.json() as PersonPositions[]);
    }
 
    add(f: PersonPositions) {

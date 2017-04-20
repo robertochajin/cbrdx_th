@@ -11,23 +11,24 @@ import * as moment from 'moment/moment';
 import {NavService} from '../_services/_nav.service';
 @Component({
    moduleId: module.id,
-   templateUrl: 'job-projection-positions-form.component.html',
-   selector: 'projections-update',
+   templateUrl: 'job-projection-positions-approve.component.html',
+   selector: 'projections-approve',
    providers: [ConfirmationService]
 })
 
-export class JobProjectionUpdateComponent {
+export class JobProjectionApprobeComponent {
    @Input()
    jobProjection: JobProjection= new JobProjection();
    @Output()
-   update: EventEmitter<JobProjection> = new EventEmitter<JobProjection>();
+   approve: EventEmitter<JobProjection> = new EventEmitter<JobProjection>();
+   @Output()
+   dismiss: EventEmitter<number> = new EventEmitter<number>();
    positions: Positions = new Positions();
    constante: Constante = new Constante();
    header: string = 'Editando Proyección';
    msgs: Message[] = [];
    year: Number;
-   @Output()
-   dismiss: EventEmitter<number> = new EventEmitter<number>();
+   aprobacion: boolean;
 
    constructor(private jobProjectionService: JobProjectionService,
                private router: Router,
@@ -35,41 +36,29 @@ export class JobProjectionUpdateComponent {
                private location: Location,
                private confirmationService: ConfirmationService,
                private _nav: NavService) {
-      this.jobProjection;
+
    }
 
    ngOnInit() {
-      this.jobProjectionService.getConstantes().subscribe(rest => {
-         for (let c of rest) {
-            if (c.constante === "AUMSUE") {
-               this.constante = c;
-               break;
-            }
-         }
-      });
       this.jobProjectionService.getPositionsById(this.jobProjection.idCargo).subscribe(rest => {
          this.positions = rest;
-      this.jobProjection.cargo= rest.cargo;
       });
-
-   }
-
-   calculate() {
-      let salario = ((this.jobProjection.plazasProyectadas * this.positions.salario) * (Number(this.constante.valor) / 100)) + (this.jobProjection.plazasProyectadas * this.positions.salario);
-      this.jobProjection.costoProyectado = salario;
    }
 
    onCreate() {
-      this.jobProjection.idEstadoProyeccion=4;
-      this.jobProjection.estadoProyeccion="Pendiente Por Aprobar";
-      this.jobProjectionService.update(this.jobProjection).subscribe(rest => {
-         this.update.emit(this.jobProjection);
-      });
-
+      if (this.aprobacion === true) {
+         this.jobProjection.idEstadoProyeccion = 2;
+         this.jobProjection.estadoProyeccion = "Aprobada";
+      } else {
+         this.jobProjection.idEstadoProyeccion = 3;
+         this.jobProjection.estadoProyeccion = "No Aprobado";
+      }
+      this.jobProjectionService.update(this.jobProjection)
+      this.approve.emit(this.jobProjection);
    }
 
    goBack(): void {
-      this.dismiss.emit(1);
+     this.dismiss.emit(1);
    }
 
 }

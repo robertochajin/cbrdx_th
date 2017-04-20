@@ -13,7 +13,6 @@
          </div>
       </div>
    </div>
-   <label for="costoP">{{jobProjection.index}}</label>
    <form (ngSubmit)="f.valid && onCreate()" #f="ngForm" novalidate id="formulario">
       <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
          <div class="ui-grid-row">
@@ -39,12 +38,7 @@
             <div class="ui-grid-col-6">
                <label for="proyectadas">Plazas Proyectadas</label>
                <input id="proyectadas" name="proyectadas" #proyectadas="ngModel" pInputText type="text"
-                      [(ngModel)]="jobProjection.plazasProyectadas" required (keyup)="calculate()" (keyup)="inputNumber()"/>
-               <div class="ui-message ui-messages-error ui-corner-all"
-                    *ngIf="f.submitted && !proyectadas.valid">
-                  <i class="fa fa-close"></i>
-                  Plazas requeridas
-               </div>
+                      [(ngModel)]="jobProjection.plazasProyectadas" required disabled/>
             </div>
             <div class="ui-grid-col-6">
                <label for="costoP">Costo Proyectado</label>
@@ -52,21 +46,25 @@
                       [(ngModel)]="jobProjection.costoProyectado" required disabled/>
             </div>
          </div>
-         <div class="ui-grid-row" *ngIf="jobProjection.idEstadoProyeccion===3">
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Motivo no aprobación:</label>
-            <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{jobProjection.observacionAprobacion}}</strong></label>
+         <div class="ui-grid-row">
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Motivo solicitud:</label>
+            <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{jobProjection.observacion}}</strong></label>
          </div>
          <div class="ui-grid-row">
             <div class="ui-grid-col-12">
-               <label for="observaciones">Observaciones</label>
-               <textarea id="observaciones" name="observaciones" #observaciones="ngModel" pInputTextarea rows="2" cols="35"
-                         [(ngModel)]="jobProjection.observacion" required >p</textarea>
+               <label for="observaciones">Observaciones </label>
+               <textarea id="observaciones" name="observaciones" #observaciones="ngModel" pInputTextarea  rows="2" cols="35"
+                         [(ngModel)]="jobProjection.observacionAprobacion" required >p</textarea>
                <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="f.submitted && !observaciones.valid">
                   <i class="fa fa-close"></i>
                   Dirección requerida
                </div>
             </div>
+         </div>
+         <div class="ui-grid-col-6" ><br>
+            <label for="Aprobado">Aprobado</label>
+            <p-checkbox id="Aprobado" name="Aprobado" [(ngModel)]="aprobacion" binary="true"  ></p-checkbox>
          </div>
          <div class="ui-grid-row form-footer-buttons">
             <div class="ui-grid-col-4"></div>

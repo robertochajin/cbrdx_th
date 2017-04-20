@@ -22,6 +22,10 @@ export class EmployeesService {
         return this.http.get(this.serviceURL+'vterceros/buscarTerceros/'+type+"/").map((res:Response) => res.json());
     }
 
+    getTerColWithoutPosition(query:string)  {
+        return this.http.get(this.serviceURL+'vterceros/asignarColaborador/'+query.trim()+'/').map((res:Response) => res.json());
+    }
+
     add(c: Employee) {
         return this.http.post(this.serviceURL+'terceros',c).map((res:Response) => res.json());
     };

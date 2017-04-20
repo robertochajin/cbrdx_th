@@ -14,7 +14,7 @@
     <p-column field="tipoDato" header="Tipo Dato" [sortable]="true"></p-column>
     <p-column field="valor" header="Valor" [sortable]="true"></p-column>
     <p-column field="descripcion" header="{{ 'LBL_DESCRIPCION' | translate }}" [sortable]="true"></p-column>
-    <p-column field="indicadorHabilitado" header="Estado" [sortable]="true">
+    <p-column field="indicadorHabilitado" header="Estado" [sortable]="true" styleClass="datatable-col-center">
         <template let-const="rowData" pTemplate="body">
             <p-checkbox [(ngModel)]="const.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
         </template>
