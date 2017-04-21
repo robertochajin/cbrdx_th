@@ -318,11 +318,12 @@ export class ActividadEconomicaComponent implements OnInit {
          }
          this.labelTipo = "Tipo: " + this.activityTypes.find(t => t.idActividadEconomicaTipo == res.idActividadTipo).descripcionActividadTipo;
 
-         // Scroll to Select
-         jQuery('#trvActividadEconomica').scrollTop(
-            jQuery('.ui-state-highlight').position().top - jQuery('#trvActividadEconomica').height() / 2
-         );
-
+         setTimeout(() => {
+            // Scroll to Select
+            jQuery('#trvActividadEconomica').scrollTop(
+               jQuery('.ui-state-highlight').position().top - jQuery('#trvActividadEconomica').height() / 2
+            );
+         }, 500);
 
       });
 
