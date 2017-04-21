@@ -58,6 +58,11 @@
                                                     (completeMethod)="positionSearch($event)"
                                                     (onSelect)="capturePosition($event)" [(ngModel)]="selectedPosition">
                                     </p-autoComplete>
+                                    <div class="ui-message ui-messages-warning ui-corner-all"
+                                         *ngIf="positionRepeated">
+                                       <i class="fa fa-close"></i>
+                                       El cargo que intentaste seleccionar ya fue asignado a esta área
+                                    </div>
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="fp.submitted && badPostion">
                                        <i class="fa fa-close"></i>
