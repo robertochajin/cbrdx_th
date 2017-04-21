@@ -251,8 +251,9 @@
                   </div>
                </div>
                <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="postionSlots"
-                            [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="pl">
-                  <p-column field="cargo" header="Cargo" [sortable]="true"></p-column>
+                            [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="pl" #dt>
+                  <p-column field="cargo" header="Cargo" [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains">
+                  </p-column>
                   <p-column field="nombreCompleto" header="Colaborador" [sortable]="true"></p-column>
                   <p-column field="asignadoDesde" header="Asignado desde" [sortable]="true"></p-column>
                   <p-column header="Acciones" styleClass="datatable-col-action">
