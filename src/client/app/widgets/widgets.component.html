@@ -1,24 +1,27 @@
+<h3 class="first">Widgets</h3>
 <div>
-   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="processRoles"
-                [paginator]="false" [responsive]="true" >
-      <p-column header="Rol">
-         <template let-rol="rowData" pTemplate="body">
-            {{rol.codigo}} - {{rol.nombre}}
+   <div class="row datable-header">
+      <div class="col-md-6 col-xs-12 datatable-header-add">
+         <button type="button" icon="fa-plus" label="{{ 'BTN_AGREGAR' | translate:param }} Widgets"
+                 pButton (click)="add()"></button>
+      </div>
+   </div>
+   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="listWidgets" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+      <p-column field="codigoWidget" header="{{ 'LBL_CODIGO' | translate:param }}" [sortable]="true"></p-column>
+      <p-column field="widget" header="{{ 'LBL_NOMBRE' | translate:param }} " [sortable]="true"></p-column>
+      <p-column field="descripcion" header="Url" [sortable]="true"></p-column>
+      <p-column header="{{ 'LBL_HABILITADO' | translate:param }}" styleClass="datatable-col-action">
+         <template let-widget="rowData" pTemplate="body">
+            <p-checkbox name="indicadorVirtual" [(ngModel)]="widget.indicadorHabilitado" binary="true" disabled="true" ></p-checkbox>
          </template>
       </p-column>
-      <p-column header="-" styleClass="datatable-col-action">
-         <template let-rol="rowData" pTemplate="body">
-            <p-checkbox [(ngModel)]="rol.asignadoAlCargo" binary="true" (onChange)="updateProcessRol(rol)"></p-checkbox>
+      <p-column header="{{ 'LBL_ACCIONES' | translate:param }}" styleClass="datatable-col-action">
+         <template let-widget="rowData" pTemplate="body">
+            <button type="button" icon="fa-pencil" class="ui-button-success"
+                    pButton (click)="update(widget)"></button>
          </template>
       </p-column>
    </p-dataTable>
 </div>
-<div class="row">
-   <div class="col-md-10">
-   </div>
-   <div class="col-md-2">
-      <button type="button" pButton icon="fa-left-arrow" (click)="next()"
-              label="Siguiente"></button>
-   </div>
-</div>
 <p-confirmDialog width="400"></p-confirmDialog>
+
