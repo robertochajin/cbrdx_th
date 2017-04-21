@@ -88,18 +88,20 @@
          {{widget.widget}}
       </div>
    </template>
+   <div class="col-md-3">
+   <p-checkbox name="widgets" [(ngModel)]="rolesSistema" label="Roles Sistema" binary="true"></p-checkbox>
+   </div>
+      <div class="col-md-3">
+   <p-checkbox name="widgets" [(ngModel)]="usuariosAct" label="Usuarios Act/Inact" binary="true"></p-checkbox>
+      </div>
+   <!--<div class="ui-g-12">-->
+   <!--</div>-->
+   <!--<div class="ui-g-12">-->
+   <!--</div>-->
    <p-footer>
       <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
          <button type="button" pButton icon="fa-check" (click)="displayDialog=false" label="{{ 'BTN_ACEPTAR' | translate:param }}"></button>
       </div>
       Selected Widgets: <span *ngFor="let widget of selectedWidgets" style="margin-right:10px">{{widget}}</span>
-
    </p-footer>
-   <!--<div class="ui-g-12">-->
-   <!--<p-checkbox name="widgets" [(ngModel)]="rolesSistema" label="Roles Sistema" binary="true"></p-checkbox>-->
-   <!--</div>-->
-   <!--<div class="ui-g-12">-->
-   <!--<p-checkbox name="widgets" [(ngModel)]="usuariosAct" label="Usuarios Act/Inact" binary="true"></p-checkbox>-->
-   <!--</div>-->
-
 </p-dialog>

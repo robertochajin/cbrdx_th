@@ -5,6 +5,12 @@
          <button type="button" icon="fa-plus" label="{{ 'BTN_AGREGAR' | translate:param }} Widgets"
                  pButton (click)="add()"></button>
       </div>
+      <div class="col-md-6 col-xs-12 datatable-header-search" >
+         <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            <input #gb type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
+         </div>
+      </div>
    </div>
    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="listWidgets" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
       <p-column field="codigoWidget" header="{{ 'LBL_CODIGO' | translate:param }}" [sortable]="true"></p-column>
