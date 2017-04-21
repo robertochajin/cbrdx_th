@@ -8,7 +8,6 @@ export class DiagnosticCIEServices {
 
   public headers = new Headers({'Content-Type': 'application/json'});
   private masterService = '<%= SVC_TH_URL %>/api/diagnosticosCie/';
-  private detailService  = '<%= SVC_TH_URL %>/api/diagnosticosCie/';
 
   constructor(private http: Http, private authenticationService: AuthenticationService) {
     this.headers = new Headers({'Content-Type': 'application/json', 'Authorization': this.authenticationService.token});

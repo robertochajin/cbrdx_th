@@ -8,7 +8,7 @@ import {AuthenticationService} from "./authentication.service";
 export class MenuElementoService {
 
     headers = new Headers({'Content-Type': 'application/json'});
-    private serviceURL = '<%= SVC_SP_URL %>/menusElementos/';
+    private serviceURL = '<%= SVC_TH_URL %>/api/menusElementos/';
 
     constructor(private http: Http,
                 private authenticationService: AuthenticationService

@@ -10,8 +10,8 @@ import {Search} from "../_models/search";
 export class OcupacionesService {
 
     headers = new Headers({'Content-Type': 'application/json'});
-    private serviceURL_SP = '<%= SVC_SP_URL %>/ocupaciones/';
-    private serviceTiposURL = '<%= SVC_SP_URL %>/ocupacionesTipos/';
+    private serviceURL_SP = '<%= SVC_TH_URL %>/api/ocupaciones/';
+    private serviceTiposURL = '<%= SVC_TH_URL %>/api/ocupacionesTipos/';
     private serviceURL = '<%= SVC_TH_URL %>/api/';
 
     constructor(private http: Http,
