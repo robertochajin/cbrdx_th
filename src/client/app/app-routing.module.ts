@@ -144,7 +144,6 @@ import {PhysicStructureUpdateComponent} from "./physic-structure/physic-structur
 // widgets
 import {WidgetsAddComponent} from "./widgets/widgets-add.component";
 import {WidgetsUpdateComponent} from "./widgets/widgets-update.component";
-import {WidgetsDetailComponent} from "./widgets/widgets-detail.component";
 
 // cargos posición en caso de ausencia
 import {AbsenceComponent} from "./position-absence/position-absence.component";
