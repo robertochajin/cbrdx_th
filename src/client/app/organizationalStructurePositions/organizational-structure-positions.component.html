@@ -122,11 +122,14 @@
                   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="osPositions"
                                [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
                      <p-column field="cargo" header="Cargo" [sortable]="true"></p-column>
-                     <p-column field="salario" header="Salario" [sortable]="true"></p-column>
+                     <p-column header="Salario" [sortable]="true">
+                        <template let-osp="rowData" pTemplate="body">
+                           {{(osp.salario).toLocaleString()}}
+                        </template></p-column>
                      <p-column field="plazas" header="Número de plazas" [sortable]="true"></p-column>
                      <p-column header="Salario total" [sortable]="true">
                         <template let-osp="rowData" pTemplate="body">
-                           {{osp.salario*osp.plazas}}
+                           {{(osp.salario*osp.plazas).toLocaleString()}}
                         </template>
                      </p-column>
                      <p-column field="ocupados" header="Ocupados" [sortable]="true"></p-column>
@@ -160,7 +163,7 @@
                            </div>
                            <div class="col-md-4">
                               <strong>Costo planta:</strong>
-                              ${{countCost}}
+                              ${{countCost.toLocaleString()}}
                            </div>
                         </div>
                         <div class="row">
@@ -248,8 +251,9 @@
                   </div>
                </div>
                <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="postionSlots"
-                            [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="pl">
-                  <p-column field="cargo" header="Cargo" [sortable]="true"></p-column>
+                            [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="pl" #dt>
+                  <p-column field="cargo" header="Cargo" [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains">
+                  </p-column>
                   <p-column field="nombreCompleto" header="Colaborador" [sortable]="true"></p-column>
                   <p-column field="asignadoDesde" header="Asignado desde" [sortable]="true"></p-column>
                   <p-column header="Acciones" styleClass="datatable-col-action">

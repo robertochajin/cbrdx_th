@@ -195,6 +195,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
       } else {
          this.osPosition.idEstructuraOrganizacional = this.area.idEstructuraOrganizacional;
          this.ospService.add(this.osPosition).subscribe(data => {
+            this.osPosition.idEstructuraOrganizacionalCargo = data.idEstructuraOrganizacionalCargo;
             this.osPositions.push(this.osPosition);
             this.editingPosition = false;
             this.sumPositions();
