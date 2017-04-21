@@ -1,3 +1,16 @@
-/**
- * Created by ciberdix on 21/04/2017.
- */
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+
+@Component({
+   moduleId: module.id,
+   templateUrl: 'administration-forms.component.html',
+})
+export class AdministrationFormsComponent {
+
+
+   constructor(private router: Router) {
+   }
+
+   ngOnInit() {
+   }
+}
