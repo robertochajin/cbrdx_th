@@ -19,19 +19,25 @@
          <div class="ui-grid-row">
             <div class="ui-grid-col-6">
                <label for="codigoadd">{{ 'LBL_CODIGO' | translate:param }}</label>
-               <input id="codigoadd" name="codigoadd" #codigoadd="ngModel" pInputText type="text" maxlength="15"
-                      pattern="[A-Z0-9]{0,15}" required="true"
-                      [(ngModel)]="widgets.codigoWidget"
-                      (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
-                      (paste)="inputCleanUp($event.target.value)"/>
-               <div *ngIf="codExists" class="alert alert-danger">
-                  {{ 'WIDGETS.MSG_CODIGOREPETIDO' | translate:param }}
+               <div *ngIf="widgets.idWidget===undefined">
+                  <input id="codigoadd" name="codigoadd" #codigoadd="ngModel"
+                         pInputText type="text" maxlength="15"
+                         pattern="[A-Z0-9]{0,15}" required="true"
+                         [(ngModel)]="widgets.codigoWidget"
+                         (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
+                         (paste)="inputCleanUp($event.target.value)"/>
+                  <div *ngIf="codExists" class="alert alert-danger">
+                     {{ 'WIDGETS.MSG_CODIGOREPETIDO' | translate:param }}
+                  </div>
+                  <div class="ui-message ui-messages-error ui-corner-all"
+                       *ngIf="f.submitted && !codigoadd.valid ">
+                     <i class="fa fa-close"></i>
+                     {{ 'WIDGETS.MSG_CODIGOREQUERIDO' | translate:param }}
+                  </div>
                </div>
-               <div class="ui-message ui-messages-error ui-corner-all"
-                    *ngIf="f.submitted && !codigoadd.valid && codExists">
-                  <i class="fa fa-close"></i>
-                  {{ 'WIDGETS.MSG_CODIGOREQUERIDO' | translate:param }}
-               </div>
+               <input *ngIf="widgets.idWidget!==undefined" id="codigo" name="codigo" #codigo="ngModel" pInputText
+                      type="text" maxlength="15" pattern="[A-Z0-9]{0,15}" required="true" disabled
+                      [(ngModel)]="widgets.codigoWidget"/>
             </div>
             <div class="ui-grid-col-6">
                <label for="nombre">{{ 'LBL_NOMBRE' | translate:param }}</label>
@@ -48,8 +54,7 @@
             <div class="ui-grid-col-6">
                <label for="URL">Url</label>
                <input id="URL" name="URL" #URL="ngModel" pInputText type="text"
-                      pattern="^(www|http|https|ftp:\/\/)(.*\.[a-z]{2,4})"
-                      [(ngModel)]="widgets.descripcion" required="true" (keyup)="inputURL()"/>
+                      [(ngModel)]="widgets.descripcion" required="true" />
                <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="f.submitted && !URL.valid">
                   <i class="fa fa-close"></i>
