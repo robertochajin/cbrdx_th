@@ -153,6 +153,7 @@ import {OrganizationalStructurePositionsComponent} from "./organizationalStructu
 
 
 import {PositionAuthoritiesComponent} from "./positions/position-authorities.component";
+import {WidgetsComponent} from "./widgets/widgets.component";
 
 const routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -216,6 +217,7 @@ const routes = [
   {path: 'login', component: LoginComponent},
   {path: 'cambioContrasena', component: CambioContrasenaComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  {path: 'widgets', component: WidgetsComponent, canActivate: [AuthGuard]},
 
   // Constantes
   {path: 'constantes', component: ConstanteComponent, canActivate: [AuthGuard]},
