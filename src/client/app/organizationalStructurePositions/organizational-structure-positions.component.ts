@@ -166,7 +166,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
             this.personPositionService.update(personPosition).subscribe((r: any) => {
                personPosition.idTercero = 0;
                personPosition.nombreCompleto = '';
-               personPosition.asignadoDesde = '';
+               personPosition.asignadoDesde = null;
                this.postionSlots[this.postionSlots.indexOf(personPosition)] = personPosition;
             });
          }
