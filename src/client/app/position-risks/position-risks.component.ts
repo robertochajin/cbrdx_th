@@ -41,6 +41,8 @@ export class RiskComponent {
    idTypeRisk: string;
    idSubtypeRisk: string;
    guardando : boolean = false;
+   msgsAlert: Message[] = [];
+   
    constructor(private riskService: RiskService,
                private router: Router,
                private route: ActivatedRoute,
@@ -127,6 +129,7 @@ export class RiskComponent {
             this.guardando = true;
             this.riskService.add(this.risk)
                .subscribe(data => {
+                  this.msgsAlert = [];
                   this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
                   this.guardando = false;
                   this.riskService.getRiskById(this.risk.idRiesgo).subscribe(rest => {
@@ -183,6 +186,7 @@ export class RiskComponent {
    }
 
    changeExam(e: Exam) {
+      this.msgs = [];
       if (e.idCargoExamen != null) {
          this.riskService.updatePositionExam(e)
             .subscribe(data => {
@@ -246,7 +250,13 @@ export class RiskComponent {
    //   }
    // }
    next() {
-      this.nextStep.emit(14);
+      if(this.listRisks.length > 0){
+         this.nextStep.emit(14);
+         this.msgsAlert = [];
+      }else{
+         this.msgsAlert[0] ={severity: 'alert', summary: 'Error', detail: 'Debe llenar al menos un Riesgo'};
+      }
+      
    }
 
 }

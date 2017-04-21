@@ -1,16 +1,15 @@
 <h3>Administración de Menús</h3>
 <div class="row datable-header">
    <div class="col-md-6 col-xs-12 datatable-header-add">
-      <button type="button" pButton icon="fa-plus" (click)="newModule()" label="Agregar Módulo"
-              *ngIf="btnEmpresa"></button>
+      <button type="button" pButton icon="fa-plus" (click)="newModule()" label="Agregar Módulo"></button>
       <button type="button" pButton icon="fa-plus" (click)="newMenu()" label="Agregar Menú"
-              *ngIf="!btnEmpresa"></button>
+              *ngIf="modulo"></button>
    </div>
 </div>
 <div class="ui-grid-row">
    
    <div class="col-md-4">
-      <p-tree id="treedCompany" [(value)]="treedCompany" selectionMode="single"
+      <p-tree id="treedCompany" [(value)]="treeMenu" selectionMode="single"
               [(selection)]="selectedNode"
               (onNodeSelect)="nodeSelect($event.node)"
               (onNodeExpand)="nodeExpand($event.node)"
@@ -28,7 +27,7 @@
                         <div class=" col-sm-9">
                            <input type="text" pInputText class="form-control" id="codigo"
                                   name="codigo"
-                                  [(ngModel)]="menus.codigo"
+                                  [(ngModel)]="menus.codigoMenu"
                                   (change)="validateCode()"
                                   (keyup)="capitalizeCode()"
                                   #codigo="ngModel" maxlength="10"
@@ -67,12 +66,12 @@
                            <label for="ruta" class="control-label col-sm-3">* Formulario </label>
                            <div class=" col-sm-9">
                               <input type="text" pInputText class="form-control" id="ruta" name="ruta"
-                                     [(ngModel)]="menus.formulario"
+                                     [(ngModel)]="menus.ruta"
                                      #ruta="ngModel"
                                      required/>
                               <div class="ui-message ui-messages-error ui-corner-all"
                                    *ngIf="f.submitted && !ruta.valid">
-                                 Rita del Formulario es requerido
+                                 Ruta del Formulario es requerido
                               </div>
                            </div>
                         </div>

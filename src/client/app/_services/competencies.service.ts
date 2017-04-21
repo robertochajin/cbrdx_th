@@ -22,6 +22,10 @@ export class CompetenciesServices {
       return this.http.get(this.masterService + 'enabled/' + idGrupo).map((res: Response) => res.json() as Competencies[]);
    }
 
+   getAllByGroup(idGrupo: number): Observable<Competencies[]> {
+      return this.http.get(this.masterService + 'buscarGrupo/' + idGrupo).map((res: Response) => res.json() as Competencies[]);
+   }
+
 
    add(f: Competencies) {
       return this.http.post(this.masterService, f, {headers: this.headers})

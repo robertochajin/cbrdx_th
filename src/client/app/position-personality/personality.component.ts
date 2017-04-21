@@ -6,6 +6,7 @@ import {ListPositionPersonality} from "../_models/listPositionPersonality";
 import {PositionPersonalityServices} from "../_services/position-personality.service";
 import {PositionPersonalityTypesServices} from "../_services/list-position-personality.service";
 import {Positions} from "../_models/positions";
+import {SelectItem, Message} from 'primeng/primeng';
 
 @Component({
    moduleId: module.id,
@@ -26,7 +27,8 @@ export class PersonalityComponent implements OnInit {
 
    description: string;
    permitirSiguiente: boolean = false;
-
+   alert: boolean = false;
+   msgsAlert: Message[] = [];
    constructor(private router: Router,
                private personalityService: PositionPersonalityServices,
                private listpersonalityService: PositionPersonalityTypesServices,
@@ -34,6 +36,7 @@ export class PersonalityComponent implements OnInit {
    }
 
    ngOnInit() {
+      this.msgsAlert.push({severity: 'alert', summary: 'Error', detail: 'Debe llenar al menos un registro'});
       this.listpersonalityService.getAllEnabled().subscribe(listPersonality => {
          this.listPersonality = listPersonality;
          this.personalityService.getAllByPosition(this.position.idCargo).subscribe(res => {
@@ -56,11 +59,21 @@ export class PersonalityComponent implements OnInit {
          if (obj != undefined) {
             obj.descripcion = lca.descripcion;
             this.personalityService.update(obj).subscribe(res => {
-               if (res.ok)
-                  this.permitirSiguiente = true;
+               if (res.ok){
+                  if(this.permitirSiguiente == false && obj.descripcion!=""){
+                     this.nextStep.emit( 13 );
+                     this.permitirSiguiente = true;
+                  }
+                  if(obj.descripcion == "")
+                     this.permitirSiguiente = false;
+               }
             });
          } else {
-            this.save(lca);
+            if(lca.descripcion != "") {
+               this.save( lca );
+            }else{
+               this.permitirSiguiente = false;
+            }
          }
       });
    }
@@ -72,18 +85,31 @@ export class PersonalityComponent implements OnInit {
       personality.descripcion = lca.descripcion;
 
       this.personalityService.add(personality).subscribe(res => {
-         if (res.ok)
-            this.permitirSiguiente = true;
+         if (res.ok){
+            if(this.permitirSiguiente == false){
+               this.nextStep.emit( 13 );
+               this.permitirSiguiente = true;
+            }
+         }
       });
    }
 
    next() {
+      let num = 0;
       for (let elemento of this.listPersonality) {
-         if (elemento.descripcion != undefined && elemento.descripcion.length > 0)
-            this.update(elemento);
+         if (elemento.descripcion == "" || elemento.descripcion == null )
+            num++;
       }
-
-      if (this.permitirSiguiente)
-         this.nextStep.emit(13);
+      if(this.listPersonality.length == num){
+         this.alert = true;
+      }else{
+         this.alert = false;
+         for (let elemento of this.listPersonality) {
+            if (elemento.descripcion != undefined && elemento.descripcion != null )
+               this.update(elemento);
+         }
+         if (this.permitirSiguiente)
+            this.nextStep.emit(13);
+      }
    }
 }
