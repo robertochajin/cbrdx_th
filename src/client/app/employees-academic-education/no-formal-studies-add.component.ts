@@ -46,6 +46,8 @@ export class NoFormalStudiesAddComponent implements OnInit {
   idTercero: number;
   fechaIngresa: string;
   fechaTermina: string;
+  files: string;
+   uploadedFiles: any[] = [];
   //hace falta definir acceso a constantes en servicio
 
   constructor(private academicEducationService: AcademicEducationService,
@@ -202,6 +204,17 @@ export class NoFormalStudiesAddComponent implements OnInit {
           this.nfstudy.idTipoEstudio = null;
       }
   }
+
+  // Upload Adjunto
+   onUpload(event:any) {
+     console.log('upload');
+      for(let file of event.files) {
+         this.uploadedFiles.push(file);
+      }
+
+      //this.msgs = [];
+      //this.msgs.push({severity: 'info', summary: 'File Uploaded', detail: ''});
+   }
 
   
 

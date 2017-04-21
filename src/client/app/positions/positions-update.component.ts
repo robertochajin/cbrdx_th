@@ -177,8 +177,9 @@ export class PositionsUpdateComponent {
    firstStep() {
       this._nav.setTab( 0 );
       this.acordion = 0;
+      jQuery('body').animate({scrollTop: 0}, 'fast');
    }
-   
+
    nextStep(step:number) {
       this.msgs = [];
       if(this.position.paso!= 0 && this.position.paso <= step){
