@@ -27,6 +27,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    private editingPosition: boolean = false;
    private editingPerson: boolean = false;
    private badPostion: boolean = false;
+   private positionRepeated: boolean = false;
    private countSlots: number = 0;
    private countCost: number = 0;
    private area: OrganizationalStructure = new OrganizationalStructure();
@@ -166,7 +167,8 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
             this.personPositionService.update(personPosition).subscribe((r: any) => {
                personPosition.idTercero = 0;
                personPosition.nombreCompleto = '';
-               personPosition.asignadoDesde = '';
+               personPosition.asignadoDesde = null;
+               personPosition.idTipoContrato = null;
                this.postionSlots[this.postionSlots.indexOf(personPosition)] = personPosition;
             });
          }
@@ -174,14 +176,14 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    }
 
    isRepeated(idCargo: number, idEstructuraOrganizacionalCargo: number): boolean {
-      let repeated: boolean = false;
+      this.positionRepeated = false;
       this.osPositions.map(osp => {
          if (idCargo !== null && idCargo === osp.idCargo && idEstructuraOrganizacionalCargo !== osp.idEstructuraOrganizacionalCargo) {
-            repeated = true;
+            this.positionRepeated  = true;
          }
       });
 
-      return repeated;
+      return this.positionRepeated;
    }
 
    savePosition() {
@@ -195,6 +197,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
       } else {
          this.osPosition.idEstructuraOrganizacional = this.area.idEstructuraOrganizacional;
          this.ospService.add(this.osPosition).subscribe(data => {
+            this.osPosition.idEstructuraOrganizacionalCargo = data.idEstructuraOrganizacionalCargo;
             this.osPositions.push(this.osPosition);
             this.editingPosition = false;
             this.sumPositions();
@@ -212,6 +215,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
          this.osPosition.cargo = event.cargo;
          this.osPosition.salario = event.salario;
          this.badPostion = false;
+         this.positionRepeated = false;
       } else {
          this.selectedPosition = null;
          this.badPostion = false;

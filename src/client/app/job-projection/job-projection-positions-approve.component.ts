@@ -18,7 +18,7 @@ import {NavService} from '../_services/_nav.service';
 
 export class JobProjectionApprobeComponent {
    @Input()
-   jobProjection: JobProjection= new JobProjection();
+   jobProjection: JobProjection = new JobProjection();
    @Output()
    approve: EventEmitter<JobProjection> = new EventEmitter<JobProjection>();
    @Output()
@@ -53,12 +53,13 @@ export class JobProjectionApprobeComponent {
          this.jobProjection.idEstadoProyeccion = 3;
          this.jobProjection.estadoProyeccion = "No Aprobado";
       }
-      this.jobProjectionService.update(this.jobProjection)
-      this.approve.emit(this.jobProjection);
+      this.jobProjectionService.update(this.jobProjection).subscribe(rest => {
+         this.approve.emit(this.jobProjection);
+      });
    }
 
    goBack(): void {
-     this.dismiss.emit(1);
+      this.dismiss.emit(1);
    }
 
 }
