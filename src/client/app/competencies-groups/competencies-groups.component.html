@@ -74,7 +74,9 @@
    </div>
    <p-tabView orientation="left">
       <p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}" [selected]="i == 0"
-                  headerStyleClass="{{ group.indicadorHabilitado ? '':'inhabilitado' }}">
+                  headerStyleClass="{{ group.indicadorHabilitado ? '':'inhabilitado' }}"
+                  [disabled]="editingCompetencie"
+      >
          <div class="row" *ngIf="editingCompetencie">
             <div class="col-md-12">
                <form name="competencieForm" (ngSubmit)="fc.valid && saveCompetencie()" #fc="ngForm" novalidate>
@@ -166,7 +168,7 @@
             </div>
          </div>
       </p-tabPanel>
-      <p-tabPanel header="" hidden="true" ></p-tabPanel>
+      <p-tabPanel header="" *ngIf="1!=1" ></p-tabPanel>
    </p-tabView>
 </div>
 <p-confirmDialog width="400"></p-confirmDialog>

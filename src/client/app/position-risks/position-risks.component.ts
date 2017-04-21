@@ -254,7 +254,7 @@ export class RiskComponent {
          this.nextStep.emit(14);
          this.msgsAlert = [];
       }else{
-         this.msgsAlert.push({severity: 'alert', summary: 'Error', detail: 'Debe llenar al menos un Riesgo'});
+         this.msgsAlert[0] ={severity: 'alert', summary: 'Error', detail: 'Debe llenar al menos un Riesgo'};
       }
       
    }
