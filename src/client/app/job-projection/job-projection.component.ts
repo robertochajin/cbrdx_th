@@ -164,11 +164,12 @@ export class JobProjectionComponent {
          accept: () => {
             this.jobProjectionService.genPro()
                .subscribe(data => {
+                  this.msgs=[];
                   if (data === 0) {
                      this.msgs.push({
-                        severity: 'error',
-                        summary: 'Error',
-                        detail: 'La proyección laboral ya fue creada.'
+                        severity: 'info',
+                        summary: '',
+                        detail: 'La proyección laboral ya ha sido generada.'
                      });
                   }
                   if (data === 1) {
