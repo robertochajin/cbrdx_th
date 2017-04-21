@@ -346,12 +346,8 @@
                                  <div class=" col-sm-12">
                                     <label for="otrosRequisitos">Otros requisitos</label>
                                     <textarea pInputTextarea id="otrosRequisitos" name="otrosRequisitos"
-                                              [(ngModel)]="position.otrosRequisitos" #otrosRequisitos="ngModel" maxlength="200"
-                                              [required]="true"></textarea>
-                                    <div *ngIf="f8.submitted && !otrosRequisitos.valid"
-                                         class="ui-message ui-messages-error ui-corner-all">
-                                       Otros requisitos es requerido
-                                    </div>
+                                              [(ngModel)]="position.otrosRequisitos" #otrosRequisitos="ngModel" maxlength="200">
+                                    </textarea>
                                  </div>
                               </div>
                               <div class="row">
