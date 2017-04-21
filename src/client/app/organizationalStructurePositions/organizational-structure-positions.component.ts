@@ -168,6 +168,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
                personPosition.idTercero = 0;
                personPosition.nombreCompleto = '';
                personPosition.asignadoDesde = null;
+               personPosition.idTipoContrato = null;
                this.postionSlots[this.postionSlots.indexOf(personPosition)] = personPosition;
             });
          }
