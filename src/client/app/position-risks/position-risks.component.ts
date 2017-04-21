@@ -33,8 +33,11 @@ export class RiskComponent {
    listRisk: Risk[];
    listRisks: Risk[] = [];
    listTipoRiesgos: SelectItem[] = [];
+   allTipoRiesgos: any[] = [];
    listSubtipoRiesgo: SelectItem[] = [];
+   allSubtipoRiesgo: any[] = [];
    listRiesgo: SelectItem[] = [];
+   allRiesgo: any[] = [];
    listExam: SelectItem[] = [];
    ListPositionExam: Exam[];
    PositionExam: Exam[];
@@ -46,7 +49,26 @@ export class RiskComponent {
    constructor(private riskService: RiskService,
                private router: Router,
                private route: ActivatedRoute,
-               private confirmationService: ConfirmationService,) {
+               private confirmationService: ConfirmationService) {
+   
+      this.riskService.getTypeRisk().subscribe(rest => {
+         this.allTipoRiesgos = rest;
+         this.listTipoRiesgos.push({label: "Seleccione", value: null});
+         for (let dp of rest) {
+            this.listTipoRiesgos.push({
+                                         label: dp.riesgoTipo,
+                                         value: dp.idRiesgoTipo
+                                      });
+         }
+      });
+   
+      this.riskService.getSubypeRisk().subscribe(rest => {
+         this.allSubtipoRiesgo = rest;
+      });
+   
+      this.riskService.getRisk().subscribe(rest => {
+         this.allRiesgo = rest;
+      });
 
    }
 
@@ -92,8 +114,10 @@ export class RiskComponent {
                let r = new Risk();
                r.idCargo = rk.idCargo;
                r.idCargoRiesgo = rk.idCargoRiesgo;
+               r.idRiesgo = rk.idRiesgo;
                r.auditoriaFecha = rk.auditoriaFecha;
                r.auditoriaFecha = rk.auditoriaFecha;
+               
                this.riskService.getRiskById(rk.idRiesgo).subscribe(rest => {
                   r.riesgo = rest.riesgo;
                   this.riskService.getTypeRiskById(rest.idTipoRiesgo).subscribe(restT => {
@@ -107,15 +131,7 @@ export class RiskComponent {
             }
          }
       );
-      this.riskService.getTypeRisk().subscribe(rest => {
-         this.listTipoRiesgos.push({label: "Seleccione", value: null});
-         for (let dp of rest) {
-            this.listTipoRiesgos.push({
-               label: dp.riesgoTipo,
-               value: dp.idRiesgoTipo
-            });
-         }
-      });
+      
 
    }
 
@@ -127,28 +143,35 @@ export class RiskComponent {
          icon: 'fa fa-question-circle',
          accept: () => {
             this.guardando = true;
-            this.riskService.add(this.risk)
-               .subscribe(data => {
+            /*console.info(this.listRisks.filter(r => r.idRiesgo == this.risk.idRiesgo && r.idCargo == this.risk.idCargo));
+            console.info(this.risk.idRiesgo );
+            console.info(this.risk.idCargo);
+            console.info(this.listRisks);
+            console.info(this.allTipoRiesgos);*/
+            
+            if(this.listRisks.filter(r => r.idRiesgo == this.risk.idRiesgo && r.idCargo == this.risk.idCargo).length > 0){
+               this.msgs[0] = {severity: 'error', summary: 'Error', detail: 'El riesgo ya existe!'};
+               this.guardando = false;
+            }else {
+               this.riskService.add( this.risk )
+               .subscribe( data => {
                   this.msgsAlert = [];
-                  this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
+                  this.msgs[ 0 ] = { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' };
                   this.guardando = false;
-                  this.riskService.getRiskById(this.risk.idRiesgo).subscribe(rest => {
-                     this.risk.riesgo = rest.riesgo;
-                     this.riskService.getTypeRiskById(rest.idTipoRiesgo).subscribe(restT => {
-                        this.risk.tipo = restT.riesgoTipo;
-                     });
-                     this.riskService.getSubypeRiskById(rest.idSubTipoRiesgo).subscribe(restS => {
-                        this.risk.subtipo = restS.riesgoSubTipo;
-                     });
-                  });
-                  this.listRisks.push(this.risk);
+                     let riesgo = this.allRiesgo.find( s1 => s1.idRiesgo == this.risk.idRiesgo );
+                     let tipo = this.allTipoRiesgos.find( s2 => s2.idRiesgoTipo == riesgo.idTipoRiesgo )
+                     let subtipo = this.allSubtipoRiesgo.find( s2 => s2.idRiesgoSubTipo == riesgo.idSubTipoRiesgo )
+                     this.risk.riesgo = riesgo.riesgo ? riesgo.riesgo : "";
+                     this.risk.tipo = tipo.riesgoTipo ? riesgo.riesgoTipo : "";
+                     this.risk.subtipo = subtipo.riesgoSubTipo ? riesgo.riesgoSubTipo : "";
+                     this.listRisks.push( this.risk );
                }, error => {
                   this.show_form = true;
-                  this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
-               });
+                  this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Error al guardar.' };
+               } );
+            }
          }
       });
-
    }
 
    changeType() {
@@ -156,33 +179,29 @@ export class RiskComponent {
       this.listRiesgo = [];
       this.risk.idRiesgo = null;
       this.idSubtypeRisk = null;
-      this.riskService.getSubypeRisk().subscribe(rest => {
-         this.listSubtipoRiesgo.push({label: "Seleccione", value: null});
-         for (let dp of rest) {
-            if (dp.idRiesgoTipo === this.idTypeRisk) {
-               this.listSubtipoRiesgo.push({
-                  label: dp.riesgoSubTipo,
-                  value: dp.idRiesgoSubTipo
-               });
-            }
+      this.listSubtipoRiesgo.push({label: "Seleccione", value: null});
+      for (let dp of this.allSubtipoRiesgo) {
+         if (dp.idRiesgoTipo === this.idTypeRisk) {
+            this.listSubtipoRiesgo.push({
+               label: dp.riesgoSubTipo,
+               value: dp.idRiesgoSubTipo
+            });
          }
-      });
+      }
    }
 
    changeSubtype() {
       this.listRiesgo = [];
       this.risk.idRiesgo = null;
-      this.riskService.getRisk().subscribe(rest => {
-         this.listRiesgo.push({label: "Seleccione", value: null});
-         for (let dp of rest) {
-            if (dp.idTipoRiesgo === this.idTypeRisk && dp.idSubTipoRiesgo === this.idSubtypeRisk) {
-               this.listRiesgo.push({
-                  label: dp.riesgo,
-                  value: dp.idRiesgo
-               });
-            }
+      this.listRiesgo.push({label: "Seleccione", value: null});
+      for (let dp of this.allRiesgo) {
+         if (dp.idTipoRiesgo === this.idTypeRisk && dp.idSubTipoRiesgo === this.idSubtypeRisk) {
+            this.listRiesgo.push({
+               label: dp.riesgo,
+               value: dp.idRiesgo
+            });
          }
-      });
+      }
    }
 
    changeExam(e: Exam) {
