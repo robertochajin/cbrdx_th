@@ -141,6 +141,10 @@ import {PhysicStructureAddComponent} from "./physic-structure/physic-structure-a
 import {PhysicStructureDetailComponent} from "./physic-structure/physic-structure-detail.component";
 import {PhysicStructureUpdateComponent} from "./physic-structure/physic-structure-update.component";
 
+// widgets
+import {WidgetsAddComponent} from "./widgets/widgets-add.component";
+import {WidgetsUpdateComponent} from "./widgets/widgets-update.component";
+
 // cargos posición en caso de ausencia
 import {AbsenceComponent} from "./position-absence/position-absence.component";
 import {PersonalityComponent} from "./position-personality/personality.component";
@@ -317,6 +321,9 @@ const routes = [
    {path: 'physic-structure/detail/:id', component: PhysicStructureDetailComponent, canActivate: [AuthGuard]},
    {path: 'physic-structure/update/:id', component: PhysicStructureUpdateComponent, canActivate: [AuthGuard]},
 
+   // widgets
+   {path: 'widgets/add', component: WidgetsAddComponent, canActivate: [AuthGuard]},
+   {path: 'widgets/update/:id', component: WidgetsUpdateComponent, canActivate: [AuthGuard]},
 
   // cargos factores de riesgo
   {path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [AuthGuard]},

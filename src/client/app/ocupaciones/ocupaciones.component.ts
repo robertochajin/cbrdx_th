@@ -324,9 +324,12 @@ export class OcupacionesComponent implements OnInit {
             this.labelTipo = "Tipo: " + this.ocupacionesTypes.find(t => t.idOcupacionTipo == res.idOcupacionTipo).descripcionOcupacionTipo;
 
            // Scroll to Select
-           jQuery('#trvOcupaciones').scrollTop(
-              jQuery('.ui-state-highlight').position().top - jQuery('#trvOcupaciones').height() / 2
-           );
+           setTimeout(() => {
+              jQuery('#trvOcupaciones').scrollTop(
+                 jQuery('.ui-state-highlight').position().top - jQuery('#trvOcupaciones').height() / 2
+              );
+           }, 500);
+
         });
 
 

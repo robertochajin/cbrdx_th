@@ -420,6 +420,7 @@ export class DivisionPoliticaComponent implements OnInit {
     }
 
     captureId(event: Search) {
+
       // ScrollTo 0;
       jQuery('#trvDivisionPolitica').scrollTop(0);
 
@@ -439,10 +440,13 @@ export class DivisionPoliticaComponent implements OnInit {
                 this.labelPadre = "";
             }
 
-           // Scroll to Select
-           jQuery('#trvDivisionPolitica').scrollTop(
-              jQuery('.ui-state-highlight').position().top - jQuery('#trvDivisionPolitica').height() / 2
-           );
+            // Scroll to Select
+            setTimeout(() => {
+               jQuery('#trvDivisionPolitica').scrollTop(
+                  jQuery('.ui-state-highlight').position().top - jQuery('#trvDivisionPolitica').height() / 2
+               );
+            }, 500);
+
         });
     }
 
