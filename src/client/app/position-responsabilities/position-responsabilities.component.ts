@@ -7,6 +7,7 @@ import * as moment from 'moment/moment';
 import {Responsabilities} from "../_models/responsabilities";
 import {PositionResponsabilities} from "../_models/positionResponsabilities";
 import {Positions} from "../_models/positions";
+import { Message } from "primeng/components/common/api";
 
 @Component({
    moduleId: module.id,
@@ -22,6 +23,7 @@ export class PositionResponsabilitiesComponent {
    tr: PositionResponsabilities = new PositionResponsabilities();
    positionResponsabilities: PositionResponsabilities [] = [];
    guardando:boolean = false;
+   msgsAlert: Message[] = [];
 
    @Output()
    nextStep: EventEmitter<number> = new EventEmitter<number>();
@@ -93,9 +95,14 @@ export class PositionResponsabilitiesComponent {
          }
       });
    }
-   
+
    next(){
-      this.nextStep.emit(5);
+      if(this.positionResponsabilities .length > 0){
+         this.nextStep.emit(5);
+         this.msgsAlert = [];
+      }else{
+         this.msgsAlert[0] = {severity: 'alert', summary: 'Error', detail: 'Debe llenar al menos una responsabilidad'};
+      }
    }
 
 }

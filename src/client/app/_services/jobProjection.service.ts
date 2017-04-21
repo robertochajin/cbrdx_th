@@ -41,6 +41,12 @@ export class JobProjectionService {
    getPositions() {
       return this.http.get(this.serviceURL + 'cargos/enabled').map((res: Response) => res.json());
    }
+   getPending() {
+      return this.http.get(this.serviceURL + 'proyeccionesLaborales/consultarPendientes').map((res: Response) => res.json());
+   }
+   getConfirmProjection() {
+      return this.http.get(this.serviceURL + 'proyeccionesLaborales/confirmarProyeccion').map((res: Response) => res);
+   }
    getConstantes() {
       return this.http.get(this.serviceURL + 'constantes').map((res: Response) => res.json() as Constante[]);
    }
@@ -53,7 +59,7 @@ export class JobProjectionService {
       return this.http.get(this.serviceURL + 'proyeccionesLaborales/generarProyeccion/1').map((res: Response) => res.json());
    };
    update(jp: JobProjection) {
-      return this.http.put(this.serviceURL + 'proyeccionesLaborales', jp).map((res: Response) => res);
+      return this.http.put(this.serviceURL + 'proyeccionesLaborales', jp).map((res: Response) =>  res);
    }
    add(jp: JobProjection) {
       return this.http.post(this.serviceURL + 'proyeccionesLaborales', jp).map((res: Response) => res.json() as JobProjection);

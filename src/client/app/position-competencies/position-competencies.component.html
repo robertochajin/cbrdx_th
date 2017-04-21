@@ -1,6 +1,7 @@
 <p-messages [value]="msgs"></p-messages>
 <p-tabView>
-   <p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}"  [selected]="i == 1" >
+   <p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}"
+               [selected]="i == 0" >
       <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="group.competencies"
                     [responsive]="true" id="positionCompetenciesDT" styleClass="table-overflow" >
          <p-column field="competencia" header="Competencia" [sortable]="true"></p-column>
@@ -12,7 +13,7 @@
          </p-column>
       </p-dataTable>
    </p-tabPanel>
-   <p-tabPanel header=""></p-tabPanel>
+   <p-tabPanel header="" *ngIf="1 != 1"></p-tabPanel>
 </p-tabView>
 <p-confirmDialog width="400"></p-confirmDialog>
 <div class="row">

@@ -34,6 +34,7 @@ export class PositionsUpdateComponent {
    listStudies: SelectItem[] = [];
    maritalStatusTypes: SelectItem[] = [];
    msgs: Message[] = [];
+   msgOcupaciones: Message[] = [];
    aprobado: number;
    noAprobado: number;
    construccion: number;
@@ -41,6 +42,8 @@ export class PositionsUpdateComponent {
    selectedNode: TreeNode;
    step = 1;
    nivel:number;
+   alertOcu:boolean = false;
+   
    constructor( private positionsService: PositionsService,
                 private router: Router,
                 private route: ActivatedRoute,
@@ -168,7 +171,6 @@ export class PositionsUpdateComponent {
             } );
          } );
       } );
-      
 
    }
 
@@ -207,6 +209,13 @@ export class PositionsUpdateComponent {
          this.acordion = 1;
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          //this.router.navigate(['positions/update/'+data.idCargo]);
+         this.positionsService.getListPositions().subscribe( res => {
+            this.allPosition = res;
+            if(this.position.indicadorHabilitado == false){
+               this.allPosition.push(this.position);
+            }
+            this.buildParent();
+         });
       }, error => {
          this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
       } );
@@ -332,6 +341,7 @@ export class PositionsUpdateComponent {
    }
    
    buildParent() {
+      this.treeArrray = [];
       for ( let c of this.allPosition.filter( t => t.idCargoJefe == 0 || t.idCargoJefe == null ) ) {
          let node: TreeNode;
          let treeNode: TreeNode[] = [];
@@ -385,6 +395,28 @@ export class PositionsUpdateComponent {
          this.nivel = null;
       }
       
+   }
+   validarOcupaciones(){
+      this.positionsService.getPositionActivitiesById(this.position.idCargo).subscribe(
+         rest => {
+           let contador = 0;
+            for (let r of rest) {
+               if (r.indicadorHabilitado == true) {
+                  contador++;
+               }
+            }
+            if(contador > 0){
+               this.alertOcu = false;
+               this.msgOcupaciones = [];
+               this.onSubmit8();
+               return true;
+            }else{
+               this.alertOcu = true;
+               this.msgOcupaciones[0] = {severity: 'alert', summary: 'Error', detail: 'Debe agregar al menos una' +
+               ' ocuapación'};
+               return false;
+            }
+         });
    }
 
 }

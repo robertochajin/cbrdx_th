@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import {Component, Input}         from '@angular/core';
+import {Component, Input, Output, EventEmitter}         from '@angular/core';
 import {Router, ActivatedRoute, Params}   from '@angular/router';
 import {Location}                 from '@angular/common';
 import {JobProjection} from '../_models/jobProjection';
@@ -12,19 +12,22 @@ import {NavService} from '../_services/_nav.service';
 @Component({
    moduleId: module.id,
    templateUrl: 'job-projection-positions-form.component.html',
-   selector: 'projection',
+   selector: 'projections-update',
    providers: [ConfirmationService]
 })
 
 export class JobProjectionUpdateComponent {
    @Input()
-   jobProjection: JobProjection = new JobProjection();
+   jobProjection: JobProjection= new JobProjection();
+   @Output()
+   update: EventEmitter<JobProjection> = new EventEmitter<JobProjection>();
    positions: Positions = new Positions();
    constante: Constante = new Constante();
    header: string = 'Editando Proyección';
    msgs: Message[] = [];
    year: Number;
-
+   @Output()
+   dismiss: EventEmitter<number> = new EventEmitter<number>();
 
    constructor(private jobProjectionService: JobProjectionService,
                private router: Router,
@@ -32,7 +35,7 @@ export class JobProjectionUpdateComponent {
                private location: Location,
                private confirmationService: ConfirmationService,
                private _nav: NavService) {
-
+      this.jobProjection;
    }
 
    ngOnInit() {
@@ -44,14 +47,10 @@ export class JobProjectionUpdateComponent {
             }
          }
       });
-      this.route.params.switchMap((params: Params) => this.jobProjectionService.getById(+params['id']))
-         .subscribe(data => {
-            this.jobProjection = data;
-            this.jobProjectionService.getPositionsById(data.idCargo).subscribe(rest => {
-               this.positions = rest;
-            });
-
-         });
+      this.jobProjectionService.getPositionsById(this.jobProjection.idCargo).subscribe(rest => {
+         this.positions = rest;
+      this.jobProjection.cargo= rest.cargo;
+      });
 
    }
 
@@ -60,26 +59,22 @@ export class JobProjectionUpdateComponent {
       this.jobProjection.costoProyectado = salario;
    }
 
-   onSubmit() {
+   onCreate() {
       this.jobProjection.idEstadoProyeccion=4;
-      this.jobProjectionService.update(this.jobProjection)
-         .subscribe(data => {
-            this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
-            this.location.back();
-         }, error => {
-            this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
-         });
+      this.jobProjection.estadoProyeccion="Pendiente Por Aprobar";
+      this.jobProjectionService.update(this.jobProjection).subscribe(rest => {
+         this.update.emit(this.jobProjection);
+      });
+
    }
 
    goBack(): void {
-      this.confirmationService.confirm({
-         message: ` ¿Esta seguro que desea salir sin guardar?`,
-         header: 'Corfirmación',
-         icon: 'fa fa-question-circle',
-         accept: () => {
-            this.location.back();
-         }
-      });
+      this.dismiss.emit(1);
    }
-
+   inputNumber() {
+      let plazas =this.jobProjection.plazasProyectadas + "";
+      if (this.jobProjection.plazasProyectadas != null) {
+         this.jobProjection.plazasProyectadas = Number(plazas.replace(/[^0-9]/g, ''));
+      }
+   }
 }

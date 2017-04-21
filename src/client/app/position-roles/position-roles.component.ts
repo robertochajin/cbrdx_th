@@ -6,6 +6,7 @@ import {PositionRoles} from "../_models/positionRoles";
 import {ProcessRoles} from "../_models/processRoles";
 import {ProcessRolesServices} from "../_services/processRoles.service";
 import {PositionRolesServices} from "../_services/position-roles.service";
+import { Message } from "primeng/components/common/api";
 
 @Component({
    moduleId: module.id,
@@ -19,6 +20,7 @@ export class PositionRolesComponent {
    position: Positions;
    processRoles: ProcessRoles[] = [];
    positionRoles: PositionRoles [] = [];
+   msgsAlert: Message[] = [];
    
    @Output()
    nextStep: EventEmitter<number> = new EventEmitter<number>();
@@ -30,7 +32,6 @@ export class PositionRolesComponent {
    }
 
    ngOnInit() {
-     
       this.processRolesServices.getAllEnabled().subscribe(processRoles => {
          this.processRoles = processRoles;
          this.positionRolesServices.getAllByPosition(this.position.idCargo).subscribe(prs => {
@@ -47,13 +48,24 @@ export class PositionRolesComponent {
    }
 
    updateProcessRol(rol: ProcessRoles){
+      this.msgsAlert = [];
       let objUpdate  = this.positionRoles.find(s => rol.idListaRolProceso == s.idRolProceso);
       if(objUpdate !== undefined){
          //Update the existing one
          objUpdate.indicadorHabilitado = rol.asignadoAlCargo;
-         this.positionRolesServices.update(objUpdate).subscribe(data => {
-            //Enviar mensaje de guardado correcto
-         });
+         let num = 0;
+         for (let elemento of this.processRoles) {
+            if (elemento.asignadoAlCargo)
+               num++;
+         }
+         if(num != 1 && objUpdate.indicadorHabilitado == false ) {
+            this.msgsAlert[0] = {severity: 'alert', summary: 'Error', detail: 'Debe seleccional al menos un rol'};
+            objUpdate.indicadorHabilitado = true;
+         }else{
+            this.positionRolesServices.update( objUpdate ).subscribe( data => {
+               //Enviar mensaje de guardado correcto
+            } );
+         }
       } else {
          //Add new record to PotitionRoles
          let objAdd: PositionRoles = new PositionRoles();
@@ -93,6 +105,16 @@ export class PositionRolesComponent {
    }
    
    next(){
+      let num = 0;
+      for (let elemento of this.processRoles) {
+         if (elemento.asignadoAlCargo)
+            num++;
+      }
+      if(num > 0){
          this.nextStep.emit(4);
+         this.msgsAlert = [];
+      }else{
+         this.msgsAlert[0] = {severity: 'alert', summary: 'Error', detail: 'Debe seleccional al menos un rol'};
+      }
    }
 }

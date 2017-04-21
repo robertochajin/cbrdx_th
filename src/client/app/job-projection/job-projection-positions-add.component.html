@@ -5,7 +5,7 @@
       <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
    </p-footer>
 </p-confirmDialog>
-<div *ngIf="jobProjection">
+<div *ngIf="jobProjectionAdd">
    <div class="row">
       <div class="col-md-12">
          <div class="header">
@@ -20,7 +20,7 @@
                <label for="cargo">Cargo</label>
                <p-dropdown id="cargo" name="cargo" required="true"
                            [options]="ListPositions" [autoWidth]="false"
-                           [(ngModel)]="jobProjection.idCargo" (onChange)="changePosition()"
+                           [(ngModel)]="jobProjectionAdd.idCargo" (onChange)="changePosition()"
                            #cargo="ngModel"
                ></p-dropdown>
                <div class="ui-message ui-messages-error ui-corner-all"
@@ -34,19 +34,19 @@
             <div class="ui-grid-col-6">
                <label for="actuales">Plazas Actuales</label>
                <input id="actuales" name="actuales" #actuales="ngModel" pInputText type="text"
-                      [(ngModel)]="jobProjection.plazasActuales" required disabled/>
+                      [(ngModel)]="jobProjectionAdd.plazasActuales" required disabled/>
             </div>
             <div class="ui-grid-col-6">
                <label for="costoA">Costo Actual</label>
                <input id="costoA" name="costoA" #costoA="ngModel" pInputText type="text"
-                      [(ngModel)]="jobProjection.costoActual" required disabled/>
+                      [(ngModel)]="jobProjectionAdd.costoActual" required disabled/>
             </div>
          </div>
          <div class="ui-grid-row">
             <div class="ui-grid-col-6">
                <label for="proyectadas">Plazas Proyectadas</label>
                <input id="proyectadas" name="proyectadas" #proyectadas="ngModel" pInputText type="text"
-                      [(ngModel)]="jobProjection.plazasProyectadas" required (keyup)="calculate()"/>
+                      [(ngModel)]="jobProjectionAdd.plazasProyectadas" required (change)="calculate()"(keyup)="inputNumber()"/>
                <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="f.submitted && !proyectadas.valid">
                   <i class="fa fa-close"></i>
@@ -56,18 +56,18 @@
             <div class="ui-grid-col-6">
                <label for="costoP">Costo Proyectado</label>
                <input id="costoP" name="costoP" #costoP="ngModel" pInputText type="text"
-                      [(ngModel)]="jobProjection.costoProyectado" required disabled/>
+                      [(ngModel)]="jobProjectionAdd.costoProyectado" required disabled/>
             </div>
          </div>
          <div class="ui-grid-row">
             <div class="ui-grid-col-12">
                <label for="observaciones">Observaciones</label>
-               <textarea id="observaciones" name="observaciones" #observaciones="ngModel" pInputTextarea  rows="2" cols="35"
-                         [(ngModel)]="jobProjection.observacion" required >p</textarea>
+               <textarea id="observaciones" name="observaciones" #observaciones="ngModel" pInputTextarea rows="2" cols="35"
+                         [(ngModel)]="jobProjectionAdd.observacion" required >p</textarea>
                <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="f.submitted && !observaciones.valid">
                   <i class="fa fa-close"></i>
-                  Dirección requerida
+                  Observación requerida
                </div>
             </div>
          </div>

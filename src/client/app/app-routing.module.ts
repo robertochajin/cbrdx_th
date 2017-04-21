@@ -141,6 +141,10 @@ import {PhysicStructureAddComponent} from "./physic-structure/physic-structure-a
 import {PhysicStructureDetailComponent} from "./physic-structure/physic-structure-detail.component";
 import {PhysicStructureUpdateComponent} from "./physic-structure/physic-structure-update.component";
 
+// widgets
+import {WidgetsAddComponent} from "./widgets/widgets-add.component";
+import {WidgetsUpdateComponent} from "./widgets/widgets-update.component";
+
 // cargos posición en caso de ausencia
 import {AbsenceComponent} from "./position-absence/position-absence.component";
 import {PersonalityComponent} from "./position-personality/personality.component";
@@ -151,8 +155,13 @@ import {RisksUpdateComponent} from "./risks/risks-update.component";
 import {CompetenciesGroupsComponent} from "./competencies-groups/competencies-groups.component";
 import {OrganizationalStructurePositionsComponent} from "./organizationalStructurePositions/organizational-structure-positions.component";
 
-
 import {PositionAuthoritiesComponent} from "./positions/position-authorities.component";
+import {WidgetsComponent} from "./widgets/widgets.component";
+
+//Administracion
+import {MenuManagerComponent} from "./menuManager/menuManager.component";
+
+
 
 const routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -216,6 +225,7 @@ const routes = [
   {path: 'login', component: LoginComponent},
   {path: 'cambioContrasena', component: CambioContrasenaComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  {path: 'widgets', component: WidgetsComponent, canActivate: [AuthGuard]},
 
   // Constantes
   {path: 'constantes', component: ConstanteComponent, canActivate: [AuthGuard]},
@@ -309,6 +319,9 @@ const routes = [
    {path: 'physic-structure/detail/:id', component: PhysicStructureDetailComponent, canActivate: [AuthGuard]},
    {path: 'physic-structure/update/:id', component: PhysicStructureUpdateComponent, canActivate: [AuthGuard]},
 
+   // widgets
+   {path: 'widgets/add', component: WidgetsAddComponent, canActivate: [AuthGuard]},
+   {path: 'widgets/update/:id', component: WidgetsUpdateComponent, canActivate: [AuthGuard]},
 
   // cargos factores de riesgo
   {path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [AuthGuard]},
@@ -317,7 +330,9 @@ const routes = [
 
 
   {path: 'position-activities/:idCargo', component: PositionAuthoritiesComponent, canActivate: [AuthGuard]},
-
+   
+   //Administracion
+   {path: 'menus', component: MenuManagerComponent, canActivate: [AuthGuard]},
 
 ];
 

@@ -29,7 +29,7 @@ export class AbsenceComponent {
    idCargoRelacionREP: number;
    guardandoA:boolean = false;
    guardandoP:boolean = false;
-   
+   msgsAlert: Message[] = [];
    @Output()
    nextStep: EventEmitter<number> = new EventEmitter<number>();
 
@@ -242,6 +242,12 @@ export class AbsenceComponent {
    }
    
    next(){
-      this.nextStep.emit(7);
+      if(this.listAbsenceREP.length > 0 &&   this.listAbsenceREE.length > 0){
+         this.nextStep.emit(7);
+         this.msgsAlert = [];
+      }else{
+         this.msgsAlert[0] = {severity: 'alert', summary: 'Error', detail: 'Debe llenar al menos una opción en cada' +
+         ' posición'};
+      }
    }
 }

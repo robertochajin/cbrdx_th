@@ -57,7 +57,7 @@
                </div>
             </div>
             <div class="col-md-1 col-xs-12">
-              <button *ngIf="i == 0" pButton type="button" (click)="addCriteria()" label="+" style="margin-top: 24px;"></button>
+              <button *ngIf="i == 0 && !oneHundred" pButton type="button"(click)="addCriteria()" label="+" style="margin-top: 24px;"></button>
               <button *ngIf="i != 0" class="ui-button ui-button-danger btn" icon="fa-trash" pButton type="button"
                       (click)="removeCriteria(i)" style="margin-top: 24px;"></button>
             </div>

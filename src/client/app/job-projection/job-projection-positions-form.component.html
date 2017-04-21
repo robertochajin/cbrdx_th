@@ -13,13 +13,14 @@
          </div>
       </div>
    </div>
-   <form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+   <label for="costoP">{{jobProjection.index}}</label>
+   <form (ngSubmit)="f.valid && onCreate()" #f="ngForm" novalidate id="formulario">
       <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
          <div class="ui-grid-row">
             <div class="ui-grid-col-6">
                <label for="cargo">Cargo</label>
                <input id="cargo" name="cargo" #cargo="ngModel" pInputText type="text"
-                      [(ngModel)]="jobProjection.idCargo" required disabled/>
+                      [(ngModel)]="jobProjection.cargo" required disabled/>
             </div>
          </div>
          <div class="ui-grid-row">
@@ -38,7 +39,7 @@
             <div class="ui-grid-col-6">
                <label for="proyectadas">Plazas Proyectadas</label>
                <input id="proyectadas" name="proyectadas" #proyectadas="ngModel" pInputText type="text"
-                      [(ngModel)]="jobProjection.plazasProyectadas" required (keyup)="calculate()"/>
+                      [(ngModel)]="jobProjection.plazasProyectadas" required (keyup)="calculate()" (keyup)="inputNumber()"/>
                <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="f.submitted && !proyectadas.valid">
                   <i class="fa fa-close"></i>
@@ -58,12 +59,12 @@
          <div class="ui-grid-row">
             <div class="ui-grid-col-12">
                <label for="observaciones">Observaciones</label>
-               <textarea id="observaciones" name="observaciones" #observaciones="ngModel" pInputTextarea  rows="2" cols="35"
+               <textarea id="observaciones" name="observaciones" #observaciones="ngModel" pInputTextarea rows="2" cols="35"
                          [(ngModel)]="jobProjection.observacion" required >p</textarea>
                <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="f.submitted && !observaciones.valid">
                   <i class="fa fa-close"></i>
-                  Dirección requerida
+                  Observación requerida
                </div>
             </div>
          </div>

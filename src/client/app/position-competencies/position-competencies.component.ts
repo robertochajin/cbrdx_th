@@ -52,12 +52,15 @@ export class PositionCompetenciesComponent {
 
       this.positionCompetenciesService.getAllByPosition(this.position.idCargo).subscribe(pcs => {
          this.positionCompetencies = pcs;
-
+         if(this.positionCompetencies.length > 0){
+            this.ponderanciesList.splice(0,1);
+         }
          this.groupCompetenciesServices.getAllEnabled().subscribe(groups => {
             this.groups = groups;
             this.groups.map(g => {
                this.competenciesServices.getAllEnabledByGroup(g.idGrupoCompetencia).subscribe(
                   competencies => {
+                     
                      g.competencies = competencies;
 
                      g.competencies.map(c => {
