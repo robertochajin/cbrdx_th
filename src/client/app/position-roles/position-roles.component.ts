@@ -32,7 +32,6 @@ export class PositionRolesComponent {
    }
 
    ngOnInit() {
-     
       this.processRolesServices.getAllEnabled().subscribe(processRoles => {
          this.processRoles = processRoles;
          this.positionRolesServices.getAllByPosition(this.position.idCargo).subscribe(prs => {
@@ -49,13 +48,24 @@ export class PositionRolesComponent {
    }
 
    updateProcessRol(rol: ProcessRoles){
+      this.msgsAlert = [];
       let objUpdate  = this.positionRoles.find(s => rol.idListaRolProceso == s.idRolProceso);
       if(objUpdate !== undefined){
          //Update the existing one
          objUpdate.indicadorHabilitado = rol.asignadoAlCargo;
-         this.positionRolesServices.update(objUpdate).subscribe(data => {
-            //Enviar mensaje de guardado correcto
-         });
+         let num = 0;
+         for (let elemento of this.processRoles) {
+            if (elemento.asignadoAlCargo)
+               num++;
+         }
+         if(num != 1 && objUpdate.indicadorHabilitado == false ) {
+            this.msgsAlert[0] = {severity: 'alert', summary: 'Error', detail: 'Debe seleccional al menos un rol'};
+            objUpdate.indicadorHabilitado = true;
+         }else{
+            this.positionRolesServices.update( objUpdate ).subscribe( data => {
+               //Enviar mensaje de guardado correcto
+            } );
+         }
       } else {
          //Add new record to PotitionRoles
          let objAdd: PositionRoles = new PositionRoles();
@@ -104,7 +114,7 @@ export class PositionRolesComponent {
          this.nextStep.emit(4);
          this.msgsAlert = [];
       }else{
-         this.msgsAlert.push({severity: 'alert', summary: 'Error', detail: 'Debe seleccional al menos un rol'});
+         this.msgsAlert[0] = {severity: 'alert', summary: 'Error', detail: 'Debe seleccional al menos un rol'};
       }
    }
 }
