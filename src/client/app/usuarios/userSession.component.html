@@ -1,0 +1,86 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+   <p-footer>
+      <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+      <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+   </p-footer>
+</p-confirmDialog>
+<div *ngIf="employee">
+   <div class="row">
+      <div class="col-md-12">
+         <div class="header">
+            <h4 class="title">Usuario</h4>
+         </div>
+         <div class="clearfix card-header">
+            <div class="col-md-2">
+               <img class="thumbnail pull-left img-responsive"
+                    src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg">
+            </div>
+            <div class="col-md-6">
+               <h4>{{employee.nombreCompleto}} - {{employee.fechaNacimiento}}</h4>
+               <span>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</span><br/>
+            </div>
+            <div class="col-md-4">
+               <p-fileUpload name="myfile[]" url="http://localhost:3000/upload"></p-fileUpload>
+            </div>
+         </div>
+         
+         <div *ngIf="user">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="header">
+                     <h4 class="title">Cambio de Contraseña</h4>
+                  </div>
+               </div>
+            </div>
+            <form class="form-horizontal" #f="ngForm" (ngSubmit)="f.valid && onSubmit()" novalidate>
+               <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                  <div class="row">
+                     <label for="pass_actual" class="control-label col-sm-3">Contraseña actual</label>
+                     <div class=" col-sm-6">
+                        <input type="text" pInputText id="pass_actual" name="pass_actual" class="form-control"
+                               [(ngModel)]="oldPass" #pass_actual="ngModel" required/>
+                        <div class="ui-message ui-messages-error ui-corner-all"
+                             *ngIf="f.submitted && !pass_actual.valid">
+                           <i class="fa fa-close"></i>
+                           Contraseña actual es requerido
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <label for="pass_nueva" class="control-label col-sm-3">Nueva contraseña</label>
+                     <div class=" col-sm-6">
+                        <input type="text" pInputText id="pass_nueva" name="pass_nueva" class="form-control"
+                               [(ngModel)]="newPass" #pass_nueva="ngModel" required/>
+                        <div class="ui-message ui-messages-error ui-corner-all"
+                             *ngIf="f.submitted && !pass_nueva.valid">
+                           <i class="fa fa-close"></i>
+                           Contraseña nueva es requerido
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <label for="pass_nueva2" class="control-label col-sm-3">Repetir Nueva contraseña</label>
+                     <div class=" col-sm-6">
+                        <input type="text" pInputText id="pass_nueva2" name="pass_nueva" class="form-control"
+                               [(ngModel)]="newPassConfirm" #pass_nueva2="ngModel" required/>
+                        <div class="ui-message ui-messages-error ui-corner-all"
+                             *ngIf="f.submitted && !pass_nueva2.valid">
+                           <i class="fa fa-close"></i>
+                           Contraseña nueva es requerido
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row form-footer-buttons">
+                     <div class="form-group col-md-12">
+                        <a (click)="displayDialog=true" class="cancelar">Cancelar</a>
+                        <button type="submit" pButton icon="fa-plus" label="Guardar" (keydown.enter)="submit.click()"
+                                #submit></button>
+                     </div>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>

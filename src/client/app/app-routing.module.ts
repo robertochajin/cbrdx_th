@@ -156,6 +156,7 @@ import {WidgetsComponent} from "./widgets/widgets.component";
 
 //Administracion
 import {MenuManagerComponent} from "./menuManager/menuManager.component";
+import { UserSessionComponent } from "./usuarios/userSession.component";
 
 
 
@@ -252,10 +253,11 @@ const routes = [
   {path: 'roles/add', component: RolesAddComponent, canActivate: [AuthGuard]},
 
   // Usuarios
-  {path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard]},
-  {path: 'usuarios/add', component: UsuariosAddComponent, canActivate: [AuthGuard]},
-  {path: 'usuarios/detail/:id', component: UsuarioDetailComponent, canActivate: [AuthGuard]},
-  {path: 'usuarios/edit/:id', component: UsuariosEditComponent, canActivate: [AuthGuard]},
+  {path: 'usuarios', component: UsuariosComponent},
+  {path: 'usuarios/add', component: UsuariosAddComponent},
+  {path: 'usuarios/detail/:id', component: UsuarioDetailComponent},
+  {path: 'usuarios/edit/:id', component: UsuariosEditComponent},
+  {path: 'user-session', component: UserSessionComponent},
 
   // Tipos De Area
   {path: 'tipoArea', component: TipoDeAreaComponent, canActivate: [AuthGuard]},
