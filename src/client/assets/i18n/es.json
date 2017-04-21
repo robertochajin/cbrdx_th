@@ -223,7 +223,8 @@
    "MSG_URLREQUERIDA":"Url requerida",
    "LBL_AGREGANDO":"Agregando widgets",
    "LBL_EDITANDO":"Editando widgets",
-   "LBL_DETALLEWIDGETS":"Detalle widgets"
+   "LBL_DETALLEWIDGETS":"Detalle widgets",
+   "LBL_CONFIGURARWIDGETS":"Configurar Widgets"
    },
   "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 }

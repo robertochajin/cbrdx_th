@@ -22,6 +22,9 @@ export class WidgetsComponent {
    ngOnInit() {
       this.widgetServices.getAll().subscribe(res => {
          this.listWidgets = res;
+         this.listWidgets.sort(function (a, b) {
+            return b.idWidget - a.idWidget;
+         });
       });
    }
 
