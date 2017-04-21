@@ -58,7 +58,7 @@
                              pButton (click)="toggleform()"></button>
                   </div>
                </div>
-               <p-dataTable [value]="ListJobProjection" [paginator]="true" [rows]="10" [responsive]="true"
+               <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="ListJobProjection" [paginator]="true" [rows]="10" [responsive]="true"
                             [globalFilter]="gb">
                   <p-column field="cargo" header="Cargo" [sortable]="true"></p-column>
                   <p-column field="plazasActuales" header="Plazas Actuales" [sortable]="true"></p-column>
@@ -126,13 +126,13 @@
                   <div class="ui-grid-col-3">
                      <label><strong>Incremento %</strong></label>
                      <div class="row">
-                        <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{cargosI}}%</strong></label>
+                        <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{cargosI}} %</strong></label>
                      </div>
                      <div class="row">
-                        <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{plazasI}}%</strong></label>
+                        <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{plazasI}} %</strong></label>
                      </div>
                      <div class="row">
-                        <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{costoI}}%</strong></label>
+                        <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{costoI}} %</strong></label>
                      </div>
                   </div>
                   <div class="ui-grid-col-1">

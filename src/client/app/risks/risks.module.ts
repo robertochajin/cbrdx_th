@@ -7,9 +7,11 @@ import {RisksUpdateComponent} from "./risks-update.component";
 import {FormSharedModule } from '../shared/form-shared.module';
 import {RisksService} from '../_services/risks.service';
 import {InputSwitchModule,CheckboxModule} from 'primeng/primeng';
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
    imports: [
+      SharedModule,
       FormSharedModule,
       ReactiveFormsModule,
       InputSwitchModule,

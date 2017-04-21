@@ -6,12 +6,14 @@ import {JobProjectionUpdateComponent} from "./job-projection-positions-update.co
 import {JobProjectionApprobeComponent} from "./job-projection-positions-approve.component";
 import {JobProjectionAddComponent} from "./job-projection-positions-add.component";
 import {JobProjectionDetailComponent} from "./job-projection-positions-detail.component";
+import {SharedModule} from "../shared/shared.module";
 import {FormSharedModule } from '../shared/form-shared.module';
 import {JobProjectionService} from '../_services/jobProjection.service';
 import {InputSwitchModule,CheckboxModule} from 'primeng/primeng';
 
 @NgModule({
    imports: [
+      SharedModule,
       FormSharedModule,
       ReactiveFormsModule,
       InputSwitchModule,
