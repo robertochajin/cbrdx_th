@@ -1,16 +1,16 @@
 <div class="row">
-   <div class="col-md-6 col-xs-12 " style="text-align: left"><label>{{ 'LBL_ULTIMOINGRESO' | translate:param
-      }}: </label>
+   <div class="col-md-6 col-xs-12 " style="text-align: left">
+     <label>{{ 'LBL_ULTIMOINGRESO' | translate:param }}: </label>
    </div>
    <div class="col-md-6 col-xs-12 ">
       <button class=" pull-right" (click)="displayDialog=true" type="button" pButton icon="fa-plus"
               label="{{ 'WIDGETS.LBL_CONFIGURARWIDGETS' | translate:param }}"></button>
    </div>
 </div>
+
 <div class="row">
-   <div class="col-md-12">
       <form>
-         <div class="col-md-8" id="rolesSistema" style="padding: 0.5% 0.5% 0.5% 0.5%"
+         <div class="col-md-8" id="rolesSistema"
               *ngIf="rolesSistema">
             <p-panel>
                <p-header>
@@ -73,8 +73,6 @@
          </div>
 
       </form>
-   </div>
-
 </div>
 
 <!--<div *ngFor="let item of widgets" [innerHTML]= "item.panel">-->
