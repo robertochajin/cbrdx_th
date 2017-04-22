@@ -75,32 +75,18 @@
                         <label for="aEconomica" class="control-label col-sm-3">*
                            {{labelfieldactividad}} </label>
                         <div class=" col-sm-9">
-                                    <textarea pInputTextarea class="form-control" id="aEconomica" name="aEconomica"
-                                              [(ngModel)]="actividadEconomica.actividadEconomica" #aEconomica="ngModel"
-                                              [required]="true" (keyup)="capitalizeName()"
-                                    ></textarea>
-                                    <div *ngIf="f.submitted && !aEconomica.valid"
-                                         class="ui-message  ui-corner-all">
-                                        {{labelfieldactividad}} es requerido
-                                    </div>
+                              <textarea pInputTextarea class="form-control" id="aEconomica" name="aEconomica"
+                                        [(ngModel)]="actividadEconomica.actividadEconomica" #aEconomica="ngModel"
+                                        [required]="true" (keyup)="capitalizeName()"
+                              ></textarea>
+                              <div *ngIf="f.submitted && !aEconomica.valid"
+                                   class="ui-message  ui-corner-all">
+                                  {{labelfieldactividad}} es requerido
+                              </div>
 
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="indicador" class="control-label col-sm-3">Habilitado</label>
-                                <div class=" col-sm-9">
-
-                                    <p-checkbox binary="true" id="indicador" name="indicador"
-                                                [(ngModel)]="actividadEconomica.indicadorHabilitado">
-                                    </p-checkbox>
-
-                                </div>
-                            </div>
-                        </div>
-
+                          </div>
+                      </div>
+                  </div>
 
                   <div class="row">
                      <div class="form-group">

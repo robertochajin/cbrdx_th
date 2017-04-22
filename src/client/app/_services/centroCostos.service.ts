@@ -8,7 +8,7 @@ import {AuthenticationService} from "./authentication.service";
 export class CentroCostosService {
 
     headers = new Headers({'Content-Type': 'application/json'});
-    private serviceURL = '<%= SVC_SP_URL %>/centrosCostos/';
+    private serviceURL = '<%= SVC_TH_URL %>/api/centrosCostos/';
 
     constructor(private http: Http,
                 private authenticationService: AuthenticationService

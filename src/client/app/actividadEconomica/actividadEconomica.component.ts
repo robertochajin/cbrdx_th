@@ -71,11 +71,12 @@ export class ActividadEconomicaComponent implements OnInit {
 
       actividadEconomicaService.listActividadEconomicaTipos().subscribe(listActividadEconomicaTipos => {
          this.activityTypes = listActividadEconomicaTipos;
+         this.newActivity();
       });
    }
 
    ngOnInit(): void {
-      this.newActivity();
+      
 
    }
 
@@ -192,14 +193,31 @@ export class ActividadEconomicaComponent implements OnInit {
             console.info(this.tabselected);
             console.info(this.selectedNode);
             let chil: any[] = [];
-            if (this.selectedNode.level <= 3) {
+            let nivel = 1;
+            if(this.selectedNode)
+               nivel = this.selectedNode.level;
+            else
+               nivel = 1;
+            
+            if(this.tabselected == 1){
                chil = [{
                   "value": 0,
                   "label": '+ Cargando...',
                   "level": this.tabselected + 1,
                   "codigo": ''
-               }]
+               }];
+               
+            }else{
+               if (nivel <= 3 ) {
+                  chil = [{
+                     "value": 0,
+                     "label": '+ Cargando...',
+                     "level": this.tabselected + 1,
+                     "codigo": ''
+                  }];
+               }
             }
+            
             let newChil: any = {
                "label": this.actividadEconomica.actividadEconomica,
                "value": data.idActividadEconomica,
@@ -447,9 +465,9 @@ export class ActividadEconomicaComponent implements OnInit {
 }
 class Tree {
    value: number;
-   label: string;
-   level: number;
-   codigo: string;
+   label: string = '';
+   level: number = 0;
+   codigo: string = '';
    expanded:boolean;
    children: Tree[];
 }
