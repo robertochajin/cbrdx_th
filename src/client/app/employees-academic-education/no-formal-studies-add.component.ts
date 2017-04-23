@@ -7,7 +7,6 @@ import {Noformalstudies} from './no-formal-studies';
 import {Message, ConfirmationService} from 'primeng/primeng';
 import * as moment from 'moment/moment';
 import {StudyLevelServices} from '../_services/study-level.service';
-import {StudyAreaServices} from '../_services/study-area.service';
 import {StudyTypeServices} from '../_services/study-type.service';
 import {StudyIntensityServices} from '../_services/study-intensity.service';
 import {StudyLevels} from "../_models/studyLevels";
@@ -17,6 +16,8 @@ import {Intensity} from "../_models/intensity";
 import {DivisionPolitica} from "../_models/divisionPolitica";
 import {NavService} from "../_services/_nav.service";
 import {PoliticalDivisionService} from "../_services/political-division.service";
+import {ListaService} from "../_services/lista.service";
+import {ListaItem} from "../_models/listaItem";
 
 @Component({
   moduleId: module.id,
@@ -52,7 +53,7 @@ export class NoFormalStudiesAddComponent implements OnInit {
 
   constructor(private academicEducationService: AcademicEducationService,
               private studyLevelServices: StudyLevelServices,
-              private studyAreaServices: StudyAreaServices,
+              private listaService: ListaService,
               private studyTypeServices: StudyTypeServices,
               private confirmationService: ConfirmationService,
               private studyIntensityServices: StudyIntensityServices,
@@ -72,12 +73,12 @@ export class NoFormalStudiesAddComponent implements OnInit {
         this.studyLevelList.push({label: s.nombreListaNivelEstudio, value: s.idListaNivelEstudio});
       });
     });
-    this.studyAreaServices.getAllEnabled().subscribe(studyAreaList => {
-      this.studyAreaList.push({label: 'Seleccione', value: null});
-      studyAreaList.map((s: StudyAreas) => {
-        this.studyAreaList.push({label: s.nombreListaAreaEstudio, value: s.idListaAreaEstudio});
-      });
-    });
+     this.listaService.getMasterDetails('ListasAreasEstudios').subscribe(studyAreaList => {
+        this.studyAreaList .push({label: 'Seleccione', value: null});
+        studyAreaList.map((s: ListaItem) => {
+           this.studyAreaList.push({label: s.nombre, value: s.idLista});
+        });
+     });
 
     this.studyTypeServices.getAllEnabled().subscribe(studyTypeList => {
       this.studyTypeList.push({label: 'Seleccione', value: null});

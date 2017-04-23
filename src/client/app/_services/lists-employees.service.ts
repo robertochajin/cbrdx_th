@@ -84,9 +84,6 @@ export class ListEmployeesService {
   getlistTypeEstate()  {
     return this.http.get(this.serviceURL+"listasTiposViviendas",{headers: this.headers}).map((res:Response) => res.json());
   }
-  getlistClassEstate()  {
-    return this.http.get(this.serviceURL+"listasClasesViviendas",{headers: this.headers}).map((res:Response) => res.json());
-  }
   getlistLocation(c: number)  {
     return this.http.get(this.serviceURL+"/localizaciones/buscarTercero/"+c,{headers: this.headers}).map((res:Response) => res.json());
   }

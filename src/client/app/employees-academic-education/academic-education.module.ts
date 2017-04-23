@@ -17,14 +17,13 @@ import { NoFormalStudiesUpdateComponent }  from './no-formal-studies-update.comp
 import { AcademicEducationService } from '../_services/academic-education.service';
 import { InstituteServices } from '../_services/institute.service';
 import { StudyLevelServices } from '../_services/study-level.service';
-import { StudyAreaServices } from '../_services/study-area.service';
-import { StudyStateServices } from '../_services/study-state.service';
 import { StudyTypeServices } from '../_services/study-type.service';
 import { StudyIntensityServices } from '../_services/study-intensity.service';
 
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule,
         ConfirmDialogModule,AutoCompleteModule,CheckboxModule,MessagesModule, FileUploadModule } from 'primeng/primeng';
 import {SharedModule} from "../shared/shared.module";
+import {ListaService} from "../_services/lista.service";
 
 
 @NgModule({
@@ -43,8 +42,8 @@ import {SharedModule} from "../shared/shared.module";
                     NoFormalStudiesDetailComponent
                     ],
     bootstrap:    [FormalStudiesComponent],
-    providers:    [AcademicEducationService, StudyLevelServices, StudyAreaServices, StudyStateServices,
-                  InstituteServices, StudyTypeServices, StudyIntensityServices],
+    providers:    [AcademicEducationService, StudyLevelServices,
+                  InstituteServices, StudyTypeServices, StudyIntensityServices, ListaService],
     exports: 	  [FormalStudiesComponent,NoFormalStudiesComponent]
 })
 export class AcademicEducationModule { }

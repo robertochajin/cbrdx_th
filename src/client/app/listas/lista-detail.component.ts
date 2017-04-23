@@ -1,6 +1,3 @@
-/**
- * Created by Felipe Aguirre - Jenniferth Escobar on 24/02/2017.
- */
 import {Component, OnInit, Input} from "@angular/core";
 import {ActivatedRoute, Params} from "@angular/router";
 import {Location} from "@angular/common";
@@ -30,23 +27,8 @@ export class ListaDetailComponent implements OnInit {
             .switchMap((params: Params) => this.listasService.getMaster(+params['id']))
             .subscribe(data => {
                 this.masterList = data;
-              this.habilitado = data.indicadorHabilitado ? "Si" : "No";
-                this.listasService.getOtherMasters(this.masterList.idLista).subscribe(res => {
-                    this.othersList = res;
-                    let list: Lista = new Lista();
-                    list.lista = "Seleccione...";
-                    this.othersList.push(list);
-                    if (this.masterList.dependeLista != null) {
-                        this.listasService.getMasterDetails(this.masterList.dependeLista).subscribe(res => {
-                            this.othersDetailsList = res;
-                            let detail: ListaItem = new ListaItem();
-                            detail.item = "Seleccione -";
-                            detail.codigoItem = "";
-                            this.othersDetailsList.push(detail);
-                        });
-                    }
-                });
-                this.listasService.getMasterDetails(this.masterList.idLista).subscribe(res => {
+              this.habilitado = data.indicadorEditable ? "Si" : "No";
+                this.listasService.getMasterDetails(this.masterList.nombreTabla).subscribe(res => {
                     this.detailsList = res;
                 });
             });

@@ -6,18 +6,16 @@ import {FormalStudies} from './formal-studies';
 import {AcademicEducationService} from '../_services/academic-education.service';
 import {Message, ConfirmationService, SelectItem, ConfirmDialog} from 'primeng/primeng';
 import {StudyLevelServices} from '../_services/study-level.service';
-import {StudyAreaServices} from '../_services/study-area.service';
-import {StudyStateServices} from '../_services/study-state.service';
 import {InstituteServices} from '../_services/institute.service';
 
 import * as moment from 'moment/moment';
 import {PoliticalDivisionService} from '../_services/political-division.service';
 import {StudyLevels} from "../_models/studyLevels";
-import {StudyAreas} from "../_models/studyAreas";
-import {StudyStates} from "../_models/studyStates";
 import {Institutes} from "../_models/institutes";
 import {DivisionPolitica} from "../_models/divisionPolitica";
 import {NavService} from "../_services/_nav.service";
+import {ListaItem} from "../_models/listaItem";
+import {ListaService} from "../_services/lista.service";
 
 @Component({
   moduleId: module.id,
@@ -54,10 +52,8 @@ export class FormalStudiesUpdateComponent implements OnInit {
               private politicalDivisionService: PoliticalDivisionService,
               private instituteServices: InstituteServices,
               private studyLevelServices: StudyLevelServices,
-              private studyAreaServices: StudyAreaServices,
-              private studyStateServices: StudyStateServices,
+              private listaService: ListaService,
               private route: ActivatedRoute,
-              private router: Router,
               private location: Location,
               private confirmationService: ConfirmationService,
               private _nav: NavService) {
@@ -71,18 +67,18 @@ export class FormalStudiesUpdateComponent implements OnInit {
         this.studyLevelList.push({label: s.nombreListaNivelEstudio, value: s.idListaNivelEstudio});
       });
     });
-    this.studyAreaServices.getAllEnabled().subscribe(studyAreaList => {
-      this.studyAreaList .push({label: 'Seleccione', value: null});
-      studyAreaList.map((s: StudyAreas) => {
-        this.studyAreaList.push({label: s.nombreListaAreaEstudio, value: s.idListaAreaEstudio});
-      });
-    });
-    this.studyStateServices.getAllEnabled().subscribe(studyStateList => {
-      this.studyStateList.push({label: 'Seleccione', value: null});
-      studyStateList.map((s: StudyStates) => {
-        this.studyStateList.push({label: s.nombreListaEstadoEstudio, value: s.idListaEstadoEstudio});
-      });
-    });
+     this.listaService.getMasterDetails('ListasAreasEstudios').subscribe(studyAreaList => {
+        this.studyAreaList .push({label: 'Seleccione', value: null});
+        studyAreaList.map((s: ListaItem) => {
+           this.studyAreaList.push({label: s.nombre, value: s.idLista});
+        });
+     });
+     this.listaService.getMasterDetails('ListasEstadosEstudios').subscribe(res => {
+        this.studyStateList.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.studyStateList.push({label: s.nombre, value: s.idLista});
+        });
+     });
     this.route.params.subscribe((params: Params) => {
       this.idTercero = params['tercero'];
       this.academicEducationService.getFormal(+params['id']).subscribe(fstudy => {

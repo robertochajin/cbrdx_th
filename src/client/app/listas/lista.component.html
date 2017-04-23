@@ -1,7 +1,6 @@
 <h3>Listas</h3>
 <div class="row datable-header">
     <div class="col-md-6 col-xs-12 datatable-header-add">
-        <button type="button" pButton icon="fa-plus" (click)="addList()" label="Nueva Lista"></button>
     </div>
     <div class="col-md-6 col-xs-12 datatable-header-search">
         <i class="fa fa-search"></i>
@@ -10,11 +9,10 @@
 </div>
 <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="listadoListas" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
     <p-column field="idLista" header="Id" [sortable]="true"></p-column>
-    <p-column field="codigoLista" header="Codigo" [sortable]="true"></p-column>
-    <p-column field="lista" header="Grupo Lista" [sortable]="true"></p-column>
-    <p-column field="indicadorHabilitado" header="Estado" [sortable]="true" styleClass="datatable-col-center">
+    <p-column field="lista" header="Nombre" [sortable]="true"></p-column>
+    <p-column field="indicadorEditable" header="Lista editable" [sortable]="true" styleClass="datatable-col-center">
         <template let-const="rowData" pTemplate="body">
-            <p-checkbox [(ngModel)]="const.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
+            <p-checkbox [(ngModel)]="const.indicadorEditable" binary="true" disabled="true"></p-checkbox>
         </template>
     </p-column>
     <p-column header="Acciones" styleClass="datatable-col-action">

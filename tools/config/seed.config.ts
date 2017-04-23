@@ -320,7 +320,7 @@ export class SeedConfig {
    * @type {string}
    */
   SVC_TH_PORT_D = '8444';
-  SVC_TH_PORT = '8448';
+  SVC_TH_PORT = '8449';
   SVC_TH_URL_D = "http://" + this.IP+":"+this.SVC_TH_PORT_D;
   SVC_TH_URL = "http://" + this.IP+":"+this.SVC_TH_PORT;
 

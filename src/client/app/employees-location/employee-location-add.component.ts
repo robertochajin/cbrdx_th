@@ -14,6 +14,8 @@ import {NavService} from '../_services/_nav.service';
 import {ListEmployeesService}     from '../_services/lists-employees.service';
 import {TerceroResidencias} from "../_models/terceroResidencias";
 import {TercerosResidenciasServices} from "../_services/terceros-residencias.service";
+import {ListaService} from "../_services/lista.service";
+import {ListaItem} from "../_models/listaItem";
 
 @Component({
   moduleId: module.id,
@@ -61,6 +63,7 @@ export class LocationAddComponent implements OnInit {
 
   constructor(private location: Location,
               private politicalDivisionServices: PoliticalDivisionService,
+              private listaService: ListaService,
               private locationService: LocationService,
               private locateService: LocateService,
               private listEmployeesService: ListEmployeesService,
@@ -97,15 +100,12 @@ export class LocationAddComponent implements OnInit {
       }
     });
 
-    this.listEmployeesService.getlistClassEstate().subscribe(rest => {
-      this.listClassEstate.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listClassEstate.push({
-          label: dp.nombre,
-          value: dp.idListaClaseVivienda
+     this.listaService.getMasterDetails('ListasClasesViviendas').subscribe(res => {
+        this.listClassEstate.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listClassEstate.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
 
     this.listEmployeesService.getlistTypeConstruction().subscribe(rest => {
       this.listTypeConstruction.push({label: "Seleccione", value: null});
@@ -117,15 +117,12 @@ export class LocationAddComponent implements OnInit {
       }
     });
 
-    this.listEmployeesService.getlistStratum().subscribe(rest => {
-      this.listStratum.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listStratum.push({
-          label: dp.nombre,
-          value: dp.idListaEstrato
+     this.listaService.getMasterDetails('ListasEstratos').subscribe(res => {
+        this.listStratum.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listStratum.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
 
     this.locationService.getAddressTypeList().subscribe(
       addressTypeList => {
