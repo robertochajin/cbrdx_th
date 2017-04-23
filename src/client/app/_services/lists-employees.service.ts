@@ -55,18 +55,6 @@ export class ListEmployeesService {
   getTerType(val:string)  {
     return this.http.get(this.serviceURL+"listasTiposTerceros/buscarCodigo/"+val+"/",{headers: this.headers}).map((res:Response) => res.json());
   }
-
-  getlistSizeShirt()  {
-    return this.http.get(this.serviceURL+"listasTallas/enabled/CAM",{headers: this.headers}).map((res:Response) => res.json());
-
-  }
-  getlistSizeFootwear()  {
-    return this.http.get(this.serviceURL+"listasTallas/enabled/ZAPA",{headers: this.headers}).map((res:Response) => res.json());
-
-  }
-  getlistSizePants(tipo:string)  {
-    return this.http.get(this.serviceURL+"listasTallas/enabled/"+tipo,{headers: this.headers}).map((res:Response) => res.json());
-  }
   getlistStratum()  {
     return this.http.get(this.serviceURL+"listasEstratos",{headers: this.headers}).map((res:Response) => res.json());
   }

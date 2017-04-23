@@ -16,6 +16,7 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
   MessagesModule,
   ConfirmDialogModule
 } from 'primeng/primeng';
+import {ListaService} from "../_services/lista.service";
 
 
 @NgModule({
@@ -41,7 +42,7 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
 
   ],
   bootstrap:    [EmployeesEstateComponent],
-  providers:    [EmployeeEstateService],
+  providers:    [EmployeeEstateService, ListaService],
   exports: 	  [EmployeesEstateComponent]
 })
 export class EmployeesEstateModule { }

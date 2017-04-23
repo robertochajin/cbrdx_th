@@ -3,6 +3,8 @@ import {Constante} from "../_models/constante";
 import {VConstante} from "../_models/vConstante";
 import {ConstanteService} from "../_services/constante.service";
 import {Router} from "@angular/router";
+import {ListaItem} from "../_models/listaItem";
+import {ListaService} from "../_services/lista.service";
 
 @Component({
    moduleId: module.id,
@@ -13,13 +15,13 @@ export class ConstanteAddComponent implements OnInit {
 
    constant: Constante = new Constante();
    constantList: VConstante[];
-   constantType: any[];
+   constantType: ListaItem[];
    codeExists: boolean = false;
    regex: string = "";
    displayDialog: boolean = false;
 
-   constructor(private constanteService: ConstanteService, private router: Router) {
-      constanteService.getTiposConstantes().subscribe(res => {
+   constructor(private constanteService: ConstanteService, private router: Router,private listaService: ListaService) {
+      this.listaService.getMasterDetails('ListasTiposDatos').subscribe(res => {
          this.constantType = res;
       });
    }
@@ -46,7 +48,7 @@ export class ConstanteAddComponent implements OnInit {
 
    alterPattern() {
       this.inputValue();
-      let dataType = this.constantType.find(t => t.idListaTipoDato == this.constant.idTipoDato);
+      let dataType = this.constantType.find(t => t.idLista == this.constant.idTipoDato);
       if (dataType.codigo == "NUM") {
          this.regex = "[0-9]{0,20}";
       } else {
@@ -62,7 +64,7 @@ export class ConstanteAddComponent implements OnInit {
    inputValue() {
       let label = this.constant.valor;
       if (label != "" && label != null && this.constant.idTipoDato != null) {
-         let dataType = this.constantType.find(t => t.idListaTipoDato == this.constant.idTipoDato);
+         let dataType = this.constantType.find(t => t.idLista == this.constant.idTipoDato);
          if (dataType.codigo === "NUM") {
             this.constant.valor = this.constant.valor.replace(/[^0-9]/g, '');
          } else {

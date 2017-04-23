@@ -107,15 +107,12 @@ export class LocationAddComponent implements OnInit {
         });
      });
 
-    this.listEmployeesService.getlistTypeConstruction().subscribe(rest => {
-      this.listTypeConstruction.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listTypeConstruction.push({
-          label: dp.nombre,
-          value: dp.idListaTipoConstruccionVivienda
+     this.listaService.getMasterDetails('ListasTiposConstruccionViviendas').subscribe(res => {
+        this.listTypeConstruction.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listTypeConstruction.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
 
      this.listaService.getMasterDetails('ListasEstratos').subscribe(res => {
         this.listStratum.push({label: 'Seleccione', value: null});

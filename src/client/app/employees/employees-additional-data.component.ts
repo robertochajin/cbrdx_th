@@ -48,21 +48,21 @@ export class EmployeesAdditionalDataComponent {
            this.lateralityTypes.push({label: s.nombre, value: s.idLista});
         });
      });
-    this.listEmployeesService.getlistSizeShirt().subscribe(rest => {
+     this.listaService.getMasterDetailsByCode('ListasTallas','CAM').subscribe(rest => {
       this.listSizeShirt.push({label: "Seleccione", value: null});
       for (let dp of rest) {
         this.listSizeShirt.push({
           label: dp.nombre,
-          value: dp.idListaTalla
+          value: dp.idLista
         });
       }
     });
-    this.listEmployeesService.getlistSizeFootwear().subscribe(rest => {
+     this.listaService.getMasterDetailsByCode('ListasTallas','ZAPA').subscribe(rest => {
       this.listSizeFootwear.push({label: "Seleccione", value: null});
       for (let dp of rest) {
         this.listSizeFootwear.push({
           label: dp.nombre,
-          value: dp.idListaTalla
+          value: dp.idLista
         });
       }
     });
@@ -73,12 +73,12 @@ export class EmployeesAdditionalDataComponent {
 
   ngOnInit() {
     let tipo = this.employee.genero == "Masculino" ? "PANH":"PANM"
-    this.listEmployeesService.getlistSizePants(tipo).subscribe(rest => {
+     this.listaService.getMasterDetailsByCode('ListasTallas',tipo).subscribe(rest => {
       this.listSizePants.push({label: "Seleccione", value: null});
       for (let dp of rest) {
         this.listSizePants.push({
           label: dp.nombre,
-          value: dp.idListaTalla
+          value: dp.idLista
         });
       }
     });

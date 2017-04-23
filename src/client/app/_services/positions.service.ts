@@ -93,7 +93,7 @@ export class PositionsService {
       console.error('Error:', error);
       return Promise.reject(error.message || error);
    }
-   
+
    getListActivities() {
       return this.http.get( this.serviceURL + 'ocupaciones' ).map( ( res: Response ) => res.json() );
    }

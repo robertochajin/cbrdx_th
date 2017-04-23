@@ -7,11 +7,7 @@ import {Noformalstudies} from './no-formal-studies';
 import {Message, ConfirmationService} from 'primeng/primeng';
 import * as moment from 'moment/moment';
 import {StudyLevelServices} from '../_services/study-level.service';
-import {StudyTypeServices} from '../_services/study-type.service';
 import {StudyLevels} from "../_models/studyLevels";
-import {StudyAreas} from "../_models/studyAreas";
-import {StudyTypes} from "../_models/studyTypes";
-import {Intensity} from "../_models/intensity";
 import {NavService} from "../_services/_nav.service";
 import {PoliticalDivisionService} from "../_services/political-division.service";
 import {ListaItem} from "../_models/listaItem";
@@ -50,7 +46,6 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
   constructor(private academicEducationService: AcademicEducationService,
               private studyLevelServices: StudyLevelServices,
               private listaService: ListaService,
-              private studyTypeServices: StudyTypeServices,
               private confirmationService: ConfirmationService,
               private politicalDivisionService: PoliticalDivisionService,
               private route: ActivatedRoute,
@@ -75,12 +70,12 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
         });
      });
 
-    this.studyTypeServices.getAllEnabled().subscribe(studyTypeList => {
-      this.studyTypeList.push({label: 'Seleccione', value: null});
-      studyTypeList.map((s: StudyTypes) => {
-        this.studyTypeList.push({label: s.nombreListaTipoEstudio, value: s.idListaTipoEstudio});
-      });
-    });
+     this.listaService.getMasterDetails('ListasTiposEstudios').subscribe(res => {
+        this.studyTypeList.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.studyTypeList.push({label: s.nombre, value: s.idLista});
+        });
+     });
      this.listaService.getMasterDetails('ListasIntensidades').subscribe(res => {
         this.studyIntensityList.push({label: 'Seleccione', value: null});
         res.map((s: ListaItem) => {
