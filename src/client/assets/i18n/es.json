@@ -37,6 +37,7 @@
   "LBL_EPS":"Eps",
   "LBL_TELEFONO":"Teléfono",
   "LBL_PERTENECE":"Pertenece",
+   "LBL_VERMAS" : "Ver más"
 
   "MSG_CONFIRMACION":"Si continúa perderá la información no guardada. ¿Está seguro que desea salir?",
   "MSG_GUARDADO":"Guardado",
@@ -225,6 +226,14 @@
    "LBL_EDITANDO":"Editando widgets",
    "LBL_DETALLEWIDGETS":"Detalle widgets",
    "LBL_CONFIGURARWIDGETS":"Configurar Widgets"
+   },
+
+   "TEMPLATE":{
+      "LBL_MENUPRINCIPAL": "MENÚ PRINCIPAL",
+      "LBL_USUARIODESDE":"Usuario desde",
+      "LBL_TEMASDISPONIBLES": "Temas Disponible",
+      "LBL_EDITARCONTRASENA":"Editar Contraseña",
+      "LBL_CERRARSESION": "Cerrar Sesión"
    },
   "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 }
