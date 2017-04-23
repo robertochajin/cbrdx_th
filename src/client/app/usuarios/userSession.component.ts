@@ -14,7 +14,8 @@ import { UsuariosService } from "../_services/usuarios.service";
                moduleId: module.id,
                selector: 'userSession',
                templateUrl: 'userSession.component.html',
-               providers: [ ConfirmationService ]
+               providers: [ ConfirmationService ],
+               styleUrls: ['userSession.component.css'],
             } )
 
 export class UserSessionComponent implements OnInit {

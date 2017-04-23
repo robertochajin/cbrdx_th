@@ -141,6 +141,7 @@
     "@angular/platform-browser": "~2.4.0",
     "@angular/platform-browser-dynamic": "~2.4.0",
     "@angular/router": "~3.4.1",
+    "angular2-jwt": "^0.2.2",
     "bootstrap": "^3.3.7",
     "chart.js": "^2.5.0",
     "core-js": "^2.4.1",
@@ -150,7 +151,7 @@
     "moment": "^2.17.1",
     "ng-recaptcha": "^2.0.0",
     "ng2-translate": "^5.0.0",
-    "primeng": "^2.0.5",
+    "primeng": "^2.0.6",
     "rxjs": "~5.0.3",
     "systemjs": "0.19.41",
     "zone.js": "^0.7.2"
