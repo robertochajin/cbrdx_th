@@ -47,6 +47,10 @@ export class ListaService {
     return this.http.get(this.masterService + 'tabla/' + tableName + '/code/' + code + '/', {headers: this.headers}).map((res: Response) => res.json() as ListaItem[]);
   }
 
+  getMasterDetailsByWildCard(tableName: string, query:string) {
+    return this.http.get(this.masterService + 'tabla/' + tableName + '/name/' + query + '/', {headers: this.headers}).map((res: Response) => res.json() as ListaItem[]);
+  }
+
   getMasterDetailsByIdItem(tableName: string, idItem:number) : Observable<ListaItem>{
     return this.http.get(this.masterService + 'tabla/' + tableName + '/idItem/' + idItem + '/', {headers: this.headers}).map((res: Response) => res.json() as ListaItem);
   }

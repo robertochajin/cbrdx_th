@@ -8,6 +8,8 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 import {Exam} from '../_models/position-exam';
 import {SelectItem, Message, ConfirmationService} from 'primeng/primeng';
 import {Positions} from "../_models/positions";
+import {ListaItem} from "../_models/listaItem";
+import {ListaService} from "../_services/lista.service";
 
 @Component({
    moduleId: module.id,
@@ -47,6 +49,7 @@ export class RiskComponent {
    msgsAlert: Message[] = [];
    
    constructor(private riskService: RiskService,
+               private listaService: ListaService,
                private router: Router,
                private route: ActivatedRoute,
                private confirmationService: ConfirmationService) {
@@ -77,6 +80,12 @@ export class RiskComponent {
       this.risk.idCargo = this.position.idCargo;
       this.exam.idCargo = this.position.idCargo;
 
+      this.listaService.getMasterDetails('ListasExamenes').subscribe(res => {
+         this.listExam.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => {
+            this.listExam.push({label: s.nombre, value: s.idLista});
+         });
+      });
       this.riskService.getListExam().subscribe(rest => {
          for (let dp of rest) {
             this.listExam.push({label: dp.idListaExamen, value: dp.nombre});

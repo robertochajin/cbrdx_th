@@ -15,10 +15,8 @@ import { NoFormalStudiesAddComponent }  from './no-formal-studies-add.component'
 import { NoFormalStudiesUpdateComponent }  from './no-formal-studies-update.component';
 
 import { AcademicEducationService } from '../_services/academic-education.service';
-import { InstituteServices } from '../_services/institute.service';
 import { StudyLevelServices } from '../_services/study-level.service';
 import { StudyTypeServices } from '../_services/study-type.service';
-import { StudyIntensityServices } from '../_services/study-intensity.service';
 
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextareaModule,CalendarModule,DropdownModule,
         ConfirmDialogModule,AutoCompleteModule,CheckboxModule,MessagesModule, FileUploadModule } from 'primeng/primeng';
@@ -43,7 +41,7 @@ import {ListaService} from "../_services/lista.service";
                     ],
     bootstrap:    [FormalStudiesComponent],
     providers:    [AcademicEducationService, StudyLevelServices,
-                  InstituteServices, StudyTypeServices, StudyIntensityServices, ListaService],
+                  StudyTypeServices, ListaService],
     exports: 	  [FormalStudiesComponent,NoFormalStudiesComponent]
 })
 export class AcademicEducationModule { }

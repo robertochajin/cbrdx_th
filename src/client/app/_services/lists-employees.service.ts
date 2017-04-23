@@ -52,18 +52,10 @@ export class ListEmployeesService {
     return this.http.get(this.serviceURL+"tiposAfiliacion/",{headers: this.headers}).map((res:Response) => res.json());
   }
 
-  getOfficeLevelTypes()  {
-    return this.http.get(this.serviceURL+"listasNivelesCargos/enabled/",{headers: this.headers}).map((res:Response) => res.json());
-  }
-
   getTerType(val:string)  {
     return this.http.get(this.serviceURL+"listasTiposTerceros/buscarCodigo/"+val+"/",{headers: this.headers}).map((res:Response) => res.json());
   }
 
-  getLateralityTypes()  {
-    return this.http.get(this.serviceURL+"listasLateralidades/enabled",{headers: this.headers}).map((res:Response) => res.json());
-
-  }
   getlistSizeShirt()  {
     return this.http.get(this.serviceURL+"listasTallas/enabled/CAM",{headers: this.headers}).map((res:Response) => res.json());
 
@@ -97,9 +89,6 @@ export class ListEmployeesService {
   }
   getlistTypeService()  {
     return this.http.get(this.serviceURL+"listasTiposServiciosVehiculos",{headers: this.headers}).map((res:Response) => res.json());
-  }
-  getlistBrand()  {
-    return this.http.get(this.serviceURL+"listasMarcasVehiculos",{headers: this.headers}).map((res:Response) => res.json());
   }
 
 }

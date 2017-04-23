@@ -15,6 +15,8 @@ import { NavService } from '../_services/_nav.service';
 
 /* Library */
 import * as moment from 'moment/moment';
+import {ListaItem} from "../_models/listaItem";
+import {ListaService} from "../_services/lista.service";
 
 
 
@@ -49,6 +51,7 @@ export class WorkExperienceUpdateComponent implements OnInit{
   constructor(private workExperienceService: WorkExperienceService,
               private router: Router,
               private confirmationService: ConfirmationService,
+              private listaService: ListaService,
               private location: Location,
               private actividadEconomicaService: ActividadEconomicaService,
               private politicalDivisionService: PoliticalDivisionService,
@@ -65,16 +68,14 @@ export class WorkExperienceUpdateComponent implements OnInit{
         });
       }
     });
-    
-    this.listEmployeesService.getOfficeLevelTypes().subscribe(res => {
-      this.officeLevel.push({label: "Seleccione", value: null});
-      for (let dp of res) {
-        this.officeLevel.push({
-          label: dp.nombre,
-          value: dp.idListaNivelCargo
+
+     this.listaService.getMasterDetails('ListasNivelesCargos').subscribe(res => {
+        this.officeLevel.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.officeLevel.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
+
   }
   
   ngOnInit() {

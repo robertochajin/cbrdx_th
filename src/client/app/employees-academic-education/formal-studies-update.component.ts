@@ -6,12 +6,10 @@ import {FormalStudies} from './formal-studies';
 import {AcademicEducationService} from '../_services/academic-education.service';
 import {Message, ConfirmationService, SelectItem, ConfirmDialog} from 'primeng/primeng';
 import {StudyLevelServices} from '../_services/study-level.service';
-import {InstituteServices} from '../_services/institute.service';
 
 import * as moment from 'moment/moment';
 import {PoliticalDivisionService} from '../_services/political-division.service';
 import {StudyLevels} from "../_models/studyLevels";
-import {Institutes} from "../_models/institutes";
 import {DivisionPolitica} from "../_models/divisionPolitica";
 import {NavService} from "../_services/_nav.service";
 import {ListaItem} from "../_models/listaItem";
@@ -36,8 +34,8 @@ export class FormalStudiesUpdateComponent implements OnInit {
   studyLevelList: any[] = [];
   studyAreaList: any[] = [];
   studyStateList: any[] = [];
-  instituteList: Institutes[] = [];
-  selectedInstitute: Institutes = new Institutes();
+  instituteList: ListaItem[] = [];
+  selectedInstitute: ListaItem = new ListaItem();
   minDate: Date = null;
   maxDate: Date = null;
   maxDateFinal: Date = null;
@@ -50,7 +48,6 @@ export class FormalStudiesUpdateComponent implements OnInit {
 
   constructor(private academicEducationService: AcademicEducationService,
               private politicalDivisionService: PoliticalDivisionService,
-              private instituteServices: InstituteServices,
               private studyLevelServices: StudyLevelServices,
               private listaService: ListaService,
               private route: ActivatedRoute,
@@ -86,9 +83,9 @@ export class FormalStudiesUpdateComponent implements OnInit {
         this.selectedCity = new DivisionPolitica();
         this.selectedCity.camino = this.fstudy.ciudad;
         this.selectedCity.idDivisionPolitica = this.fstudy.idCiudad;
-        this.selectedInstitute = new Institutes();
-        this.selectedInstitute.nombreListaInstitucion = this.fstudy.institucion;
-        this.selectedInstitute.idListaInstitucion = this.fstudy.idInstitucion;
+        this.selectedInstitute = new ListaItem();
+        this.selectedInstitute.nombre = this.fstudy.institucion;
+        this.selectedInstitute.idLista = this.fstudy.idInstitucion;
         this.idTercero = this.fstudy.idTercero;
         let fi: moment.Moment = moment(this.fstudy.fechaIngresa, 'YYYY-MM-DD');
         this.fstudy.fechaIngresa = fi.format('MM/DD/YYYY');
@@ -126,13 +123,13 @@ export class FormalStudiesUpdateComponent implements OnInit {
   onSubmit(value: string) {
     this.submitted = true;
     if (this.selectedCity !== undefined && this.selectedCity.idDivisionPolitica !== undefined) {
-      if (this.fstudy.otraInstitucion !== '' || (this.selectedInstitute != undefined && this.selectedInstitute.idListaInstitucion != undefined)) {
+      if (this.fstudy.otraInstitucion !== '' || (this.selectedInstitute != undefined && this.selectedInstitute.idLista != undefined)) {
         this.msgs = [];
         this.fstudy.idCiudad = this.selectedCity.idDivisionPolitica;
         this.fstudy.idTercero = this.idTercero;
         this.fstudy.indicadorHabilitado = true;
         if (this.selectedInstitute !== null){
-          this.fstudy.idInstitucion = this.selectedInstitute.idListaInstitucion;
+          this.fstudy.idInstitucion = this.selectedInstitute.idLista;
         }else {
           this.fstudy.idInstitucion = null;
         }
@@ -170,13 +167,13 @@ export class FormalStudiesUpdateComponent implements OnInit {
   }
 
   instituteSearch(event: any) {
-    this.instituteServices.getByWildCard(event.query).subscribe(
+     this.listaService.getMasterDetailsByWildCard('ListasInstituciones',event.query).subscribe(
       instituteList => this.instituteList = instituteList
     );
   }
 
   captureInstituteId(event: any) {
-    this.fstudy.idInstitucion = this.selectedInstitute.idListaInstitucion;
+    this.fstudy.idInstitucion = this.selectedInstitute.idLista;
     this.fstudy.otraInstitucion = '';
     this.wrongInstitute = false;
   }

@@ -8,7 +8,6 @@ import {Message, ConfirmationService} from 'primeng/primeng';
 import * as moment from 'moment/moment';
 import {StudyLevelServices} from '../_services/study-level.service';
 import {StudyTypeServices} from '../_services/study-type.service';
-import {StudyIntensityServices} from '../_services/study-intensity.service';
 import {StudyLevels} from "../_models/studyLevels";
 import {StudyAreas} from "../_models/studyAreas";
 import {StudyTypes} from "../_models/studyTypes";
@@ -53,7 +52,6 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
               private listaService: ListaService,
               private studyTypeServices: StudyTypeServices,
               private confirmationService: ConfirmationService,
-              private studyIntensityServices: StudyIntensityServices,
               private politicalDivisionService: PoliticalDivisionService,
               private route: ActivatedRoute,
               private router: Router,
@@ -83,12 +81,12 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
         this.studyTypeList.push({label: s.nombreListaTipoEstudio, value: s.idListaTipoEstudio});
       });
     });
-    this.studyIntensityServices.getAllEnabled().subscribe(studyIntensityList => {
-      this.studyIntensityList.push({label: 'Seleccione', value: null});
-      studyIntensityList.map((s: Intensity) => {
-        this.studyIntensityList.push({label: s.nombreListaIntensidad, value: s.idListaIntensidad});
-      });
-    });
+     this.listaService.getMasterDetails('ListasIntensidades').subscribe(res => {
+        this.studyIntensityList.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.studyIntensityList.push({label: s.nombre, value: s.idLista});
+        });
+     });
 
     this.route.params.subscribe((params: Params) => {
       this.idTercero = params['tercero'];

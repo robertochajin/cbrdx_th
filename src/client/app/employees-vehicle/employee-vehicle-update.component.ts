@@ -11,6 +11,8 @@ import {PoliticalDivisionService} from "../_services/political-division.service"
 import {DivisionPolitica}         from "../_models/divisionPolitica";
 import * as moment from 'moment/moment';
 import {NavService} from '../_services/_nav.service';
+import {ListaItem} from "../_models/listaItem";
+import {ListaService} from "../_services/lista.service";
 @Component({
   moduleId: module.id,
   selector: 'employees-vehicle',
@@ -37,6 +39,7 @@ export class EmployeesVehicleUpdateComponent {
               private router: Router,
               private route: ActivatedRoute,
               private location: Location,
+              private listaService: ListaService,
               private listEmployeesService: ListEmployeesService,
               private politicalDivisionService: PoliticalDivisionService,
               private confirmationService: ConfirmationService,
@@ -78,15 +81,12 @@ export class EmployeesVehicleUpdateComponent {
       }
     });
 
-    this.listEmployeesService.getlistBrand().subscribe(rest => {
-      this.listBrandVehicle.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listBrandVehicle.push({
-          label: dp.nombre,
-          value: dp.idListaMarcaVehiculo
+     this.listaService.getMasterDetails('ListasMarcasVehiculos').subscribe(res => {
+        this.listBrandVehicle.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listBrandVehicle.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
 
   }
 

@@ -8,6 +8,8 @@ import {EmployeesService} from "../_services/employees.service";
 import {ListEmployeesService} from "../_services/lists-employees.service";
 import {DivisionPolitica} from "../_models/divisionPolitica";
 import {NavService} from "../_services/_nav.service";
+import {ListaItem} from "../_models/listaItem";
+import {ListaService} from "../_services/lista.service";
 
 @Component({
   moduleId: module.id,
@@ -33,21 +35,19 @@ export class EmployeesAdditionalDataComponent {
   msgs: Message[] = [];
 
   constructor(private employeesService: EmployeesService,
+              private listaService: ListaService,
               private route: ActivatedRoute,
               private router: Router,
               private location: Location,
               private listEmployeesService: ListEmployeesService,
               private _nav: NavService) {
 
-    this.listEmployeesService.getLateralityTypes().subscribe(rest => {
-      this.lateralityTypes.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.lateralityTypes.push({
-          label: dp.nombre,
-          value: dp.idListaLateralidad
+     this.listaService.getMasterDetails('ListasLateralidades').subscribe(res => {
+        this.lateralityTypes.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.lateralityTypes.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
     this.listEmployeesService.getlistSizeShirt().subscribe(rest => {
       this.listSizeShirt.push({label: "Seleccione", value: null});
       for (let dp of rest) {

@@ -9,7 +9,6 @@ import {FormBuilder, FormGroup, Validators, FormControl, NgForm} from '@angular/
 import * as moment from 'moment/moment';
 import {StudyLevelServices} from '../_services/study-level.service';
 import {PoliticalDivisionService} from '../_services/political-division.service';
-import {InstituteServices} from '../_services/institute.service';
 import {StudyLevels} from "../_models/studyLevels";
 import {StudyAreas} from "../_models/studyAreas";
 import {StudyStates} from "../_models/studyStates";
@@ -38,8 +37,8 @@ export class FormalStudiesAddComponent implements OnInit {
   studyLevelList: any[] = [];
   studyAreaList: any[] = [];
   studyStateList: any[] = [];
-  instituteList: Institutes[] = [];
-  selectedInstitute: Institutes;
+  instituteList: ListaItem[] = [];
+  selectedInstitute: ListaItem;
   minDate: Date = null;
   maxDate: Date = null;
   maxDateFinal: Date = null;
@@ -52,7 +51,6 @@ export class FormalStudiesAddComponent implements OnInit {
 
   constructor(private academicEducationService: AcademicEducationService,
               private politicalDivisionService: PoliticalDivisionService,
-              private instituteServices: InstituteServices,
               private listaService: ListaService,
               private studyLevelServices: StudyLevelServices,
               private route: ActivatedRoute,
@@ -111,13 +109,13 @@ export class FormalStudiesAddComponent implements OnInit {
   onSubmit(value: string) {
     this.submitted = true;
     if (this.selectedCity !== undefined && this.selectedCity.idDivisionPolitica !== undefined) {
-      if (this.fstudy.otraInstitucion !== '' || (this.selectedInstitute != undefined && this.selectedInstitute.idListaInstitucion != undefined)) {
+      if (this.fstudy.otraInstitucion !== '' || (this.selectedInstitute != undefined && this.selectedInstitute.idLista != undefined)) {
         this.msgs = [];
         this.fstudy.idCiudad = this.selectedCity.idDivisionPolitica;
         this.fstudy.idTercero = this.idTercero;
         this.fstudy.indicadorHabilitado = true;
         if (this.selectedInstitute !== null){
-          this.fstudy.idInstitucion = this.selectedInstitute.idListaInstitucion;
+          this.fstudy.idInstitucion = this.selectedInstitute.idLista;
         }else {
           this.fstudy.idInstitucion = null;
         }
@@ -156,13 +154,13 @@ export class FormalStudiesAddComponent implements OnInit {
   }
 
   instituteSearch(event: any) {
-    this.instituteServices.getByWildCard(event.query).subscribe(
+     this.listaService.getMasterDetailsByWildCard('ListasInstituciones',event.query).subscribe(
       instituteList => this.instituteList = instituteList
     );
   }
 
   captureInstituteId(event: any) {
-    this.fstudy.idInstitucion = this.selectedInstitute.idListaInstitucion;
+    this.fstudy.idInstitucion = this.selectedInstitute.idLista;
     this.fstudy.otraInstitucion = '';
     this.wrongInstitute = false;
   }
