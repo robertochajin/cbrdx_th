@@ -88,6 +88,8 @@ import {GruposGestionEditComponent} from "./gruposGestion/gruposGestion-edit.com
 // Roles
 import {RolesComponent} from "./roles/roles.component";
 import {RolesAddComponent} from "./roles/roles-add.component";
+import { RolesUpdateComponent } from "./roles/roles-update.component";
+
 
 // Usuarios
 import {UsuariosComponent} from "./usuarios/usuarios.component";
@@ -255,6 +257,7 @@ const routes = [
   // Roles
   {path: 'roles', component: RolesComponent, canActivate: [AuthGuard]},
   {path: 'roles/add', component: RolesAddComponent, canActivate: [AuthGuard]},
+  {path: 'roles/update/:id', component: RolesUpdateComponent, canActivate: [AuthGuard]},
 
   // Usuarios
   {path: 'usuarios', component: UsuariosComponent},

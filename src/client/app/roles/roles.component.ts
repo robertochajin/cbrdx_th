@@ -16,15 +16,11 @@ export class RolesComponent {
         });
     }
 
-    addRole() {
+    add() {
         this.router.navigate(['roles/add']);
     }
-
-    viewRole(r: Rol) {
-        this.router.navigate(['roles/view/'], r.idRol);
-    }
-
-    editRole(r: Rol) {
-        this.router.navigate(['roles/edit'], r.idRol);
+   
+   update(r: Rol) {
+        this.router.navigate(['roles/update/'+r.idRol]);
     }
 }
