@@ -46,7 +46,7 @@ export class FormManagerAddComponent {
    editingSection: boolean = false;
    codExists: boolean = false;
    showFrom: boolean = true;
-   showFromF: boolean = true;
+   showFormF: boolean = true;
 
    constructor(private formManagerService: FormManagerService,
                private router: Router,
@@ -176,9 +176,9 @@ export class FormManagerAddComponent {
          this.functionalityControl.idFuncionalidadControl = null;
          this.functionalityControl.idFuncionalidad = this.functionality.idFuncionalidad;
          this.functionalityControl.indicadorSeccion = false;
-         this.showFromF=false;
+         this.showFormF=false;
          this.formManagerService.addField(this.functionalityControl).subscribe(rest => {
-            this.showFromF=true;
+            this.showFormF=true;
             this.formManagerService.getFieldByIdFuncionalidad(this.functionality.idFuncionalidad).subscribe(rest => {
                for (let r of rest) {
                   if (r.indicadorSeccion === false && r.idPadre === null) {
@@ -196,9 +196,9 @@ export class FormManagerAddComponent {
          this.functionalityControl.idFuncionalidadControl = null;
          this.functionalityControl.idFuncionalidad = this.functionality.idFuncionalidad;
          this.functionalityControl.indicadorSeccion = false;
-         this.showFromF=false;
+         this.showFormF=false;
          this.formManagerService.addField(this.functionalityControl).subscribe(rest => {
-            this.showFromF=true;
+            this.showFormF=true;
             this.formManagerService.getFieldByIdFather(this.idPadre).subscribe(rest => {
                this.functionalityField = rest;
             });
