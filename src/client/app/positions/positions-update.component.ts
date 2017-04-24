@@ -74,12 +74,11 @@ export class PositionsUpdateComponent {
             this.listslevelTypes.push({label: s.nombre, value: s.idLista});
          });
       });
-      this.positionsService.getListStudies().subscribe( res => {
-         this.listStudies.push( { label: "Seleccione", value: null } );
-         for ( let dp of res ) {
-            this.listStudies.push( {label: dp.nombreListaNivelEstudio,value: dp.idListaNivelEstudio} );
-         }
-      } );
+      this.listaService.getMasterDetails('ListasNivelesEstudios').subscribe(res => {
+         this.listStudies.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => this.listStudies.push({label: s.nombre, value: s.idLista}));
+      });
+
       this.tipoDeAreaService.getlistAreas().subscribe( res => {
          this.areaTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
@@ -114,28 +113,18 @@ export class PositionsUpdateComponent {
             }
          }
       } );
-   
-      
-   
-      this.listEmployeesService.getGenderTypes().subscribe(res => {
-         this.genderTypes.push({label: "Seleccione", value: null});
-         for (let dp of res) {
-            this.genderTypes.push({
-                                     label: dp.nombreListaGenero,
-                                     value: dp.idListaGenero
-                                  });
-         }
+
+
+      this.listaService.getMasterDetails('ListasGeneros').subscribe(res => {
+         this.genderTypes.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => this.genderTypes.push({label: s.nombre, value: s.idLista}));
       });
-   
-      this.listEmployeesService.getMaritalStatusTypes().subscribe(res => {
-         this.maritalStatusTypes.push({label: "Seleccione", value: null});
-         for (let dp of res) {
-            this.maritalStatusTypes.push({
-                                            label: dp.nombreListaEstadoCivil,
-                                            value: dp.idListaEstadoCivil
-                                         });
-         }
+
+      this.listaService.getMasterDetails('ListasEstadosCiviles').subscribe(res => {
+         this.maritalStatusTypes.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => this.maritalStatusTypes.push({label: s.nombre, value: s.idLista}));
       });
+
       this.acordion = 0;
    }
    

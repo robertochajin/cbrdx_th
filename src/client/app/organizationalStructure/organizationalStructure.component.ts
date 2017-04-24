@@ -68,16 +68,11 @@ export class OrganizationalStructureComponent implements OnInit {
             this.newCompany();
          }
       } );
-      
-      this.listEmployeesService.getDocumentTypes().subscribe( res => {
-         this.documentTypes.push( { label: "Seleccione", value: null } );
-         for ( let dp of res ) {
-            this.documentTypes.push( {
-                                        label: dp.nombreListaTipoDocumento,
-                                        value: dp.idListaTipoDocumento
-                                     } );
-         }
-      } );
+
+      this.listaService.getMasterDetails('ListasTiposDocumentos').subscribe(res => {
+         this.documentTypes.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => this.documentTypes.push({label: s.nombre, value: s.idLista}));
+      });
 
       this.listaService.getMasterDetails('ListasTiposEstructuras').subscribe(res => {
          this.structureTypes.push({label: 'Seleccione', value: null});
