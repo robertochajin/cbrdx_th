@@ -54,6 +54,8 @@
          </p-accordionTab>
          <p-accordionTab *ngIf="indicadorSeccion" header="{{ 'ADMIN_FORMULARIOS.LBL_SECCION' | translate:param }}"
                          [disabled]="secciondisabled" [selected]="acordion==2">
+
+            <div *ngIf="!editingSection">
             <div *ngIf="!detailSection">
                <h3 class="first">{{ 'ADMIN_FORMULARIOS.LBL_SECCION' | translate:param }}</h3>
                <form (ngSubmit)="fs.valid && onCreateS()" #fs="ngForm" novalidate id="formularioseccion">
@@ -218,11 +220,77 @@
                   </div>
                </div>
             </div>
+            </div>
+            <div *ngIf="editingSection">
+               <h3 class="first">{{ 'ADMIN_FORMULARIOS.LBL_SECCION' | translate:param }}</h3>
+               <form (ngSubmit)="fs.valid && onUpdateS()" #fs="ngForm" novalidate id="formularioseccionu">
+                  <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                     <div class="ui-grid-row">
+                        <div class="ui-grid-col-6">
+                           <label for="nombre">{{ 'LBL_NOMBRE' | translate:param }}</label>
+                           <input id="nombres" name="nombres" #nombres="ngModel" pInputText type="text"
+                                  [(ngModel)]="functionalityControlSection.control" required
+                                  (keyup)="capitalize($event)"/>
+                           <div class="ui-message ui-messages-error ui-corner-all"
+                                *ngIf="fs.submitted && !nombres.valid">
+                              <i class="fa fa-close"></i>
+                              {{ 'ADMIN_FORMULARIOS.MSG_NOMBREREQUERIDO' | translate:param }}
+                           </div>
+                        </div>
+                        <div class="ui-grid-col-6">
+                           <label for="codigos">{{'LBL_CODIGO' | translate:param }}</label>
+                           <input id="codigos" name="codigos" #codigos="ngModel" pInputText type="text"
+                                  [(ngModel)]="functionalityControlSection.codigo" required disabled/>
+                        </div>
+                     </div>
+                     <div class="ui-grid-row">
+                        <div class="ui-grid-col-6">
+                           <label for="clasificacions">{{ 'ADMIN_FORMULARIOS.LBL_CLASIFICACION' | translate:param
+                              }}</label>
+                           <p-dropdown id="clasificacions" name="clasificacions" required="true"
+                                       [options]="listClassificationSeccion" [autoWidth]="false"
+                                       [(ngModel)]="functionalityControlSection.idClasificacion"
+                                       #clasificacions="ngModel"
+                           ></p-dropdown>
+                           <div class="ui-message ui-messages-error ui-corner-all"
+                                *ngIf="fs.submitted && !clasificacions.valid">
+                              <i class="fa fa-close"></i>
+                              {{ 'ADMIN_FORMULARIOS.MSG_CLASIFICACIONREQUERIDO' | translate:param }}
+                           </div>
+                        </div>
+                        <div class="ui-grid-col-3">
+                           <label></label><br>
+                           <p-checkbox id="visibles" name="visibles"
+                                       [(ngModel)]="functionalityControlSection.indicadorVisible"
+                                       binary="true"
+                                       label="{{ 'ADMIN_FORMULARIOS.LBL_VISIBLE' | translate:param }}"></p-checkbox>
+                        </div>
+                        <div class="ui-grid-col-3">
+                           <label></label><br>
+                           <p-checkbox id="imprimirs" name="imprimirs"
+                                       [(ngModel)]="functionalityControlSection.indicadorImprimir"
+                                       binary="true"
+                                       label="{{ 'ADMIN_FORMULARIOS.LBL_IMPRIMIR' | translate:param }}"></p-checkbox>
+                        </div>
+                     </div>
+                     <div class="ui-grid-row form-footer-buttons">
+                        <div class="ui-grid-col-4"></div>
+                        <div class="ui-grid-col-5"></div>
+                        <div class="ui-grid-col-1">
+                           <a (click)="goBackSectionEdi()" class="cancelar">{{'BTN_CANCELAR' | translate:param }}</a>
+                        </div>
+                        <div class="ui-grid-col-2">
+                           <button pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate:param }}"
+                                   type="submit"></button>
+                        </div>
+                     </div>
+                  </div>
+               </form>
+            </div>
          </p-accordionTab>
          <p-accordionTab header="{{ 'ADMIN_FORMULARIOS.LBL_CAMPO' | translate:param }}" [selected]="acordion==3"
                          [disabled]="campodisabled">
             <div *ngIf="!detailField">
-               <div *ngIf="!editingSection">
                   <div *ngIf="!editingField">
                      <h3 class="first">{{ 'ADMIN_FORMULARIOS.LBL_CAMPO' | translate:param }}</h3>
                      <form (ngSubmit)="fc.valid && onCreateC(acordion)" #fc="ngForm" novalidate id="formulariocampo">
@@ -348,8 +416,6 @@
                         </div>
                      </div>
                   </div>
-               </div>
-
                <div *ngIf="editingField">
                   <form (ngSubmit)="fc.valid && onUpdateC(acordion)" #fc="ngForm" novalidate id="formulariocampou">
                      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
@@ -416,72 +482,72 @@
                   </form>
                </div>
 
-               <div *ngIf="editingSection">
-                  <h3 class="first">{{ 'ADMIN_FORMULARIOS.LBL_SECCION' | translate:param }}</h3>
-                  <form (ngSubmit)="fs.valid && onUpdateS()" #fs="ngForm" novalidate id="formularioseccionu">
-                     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-                        <div class="ui-grid-row">
-                           <div class="ui-grid-col-6">
-                              <label for="nombre">{{ 'LBL_NOMBRE' | translate:param }}</label>
-                              <input id="nombres" name="nombres" #nombres="ngModel" pInputText type="text"
-                                     [(ngModel)]="functionalityControlSection.control" required
-                                     (keyup)="capitalize($event)"/>
-                              <div class="ui-message ui-messages-error ui-corner-all"
-                                   *ngIf="fs.submitted && !nombres.valid">
-                                 <i class="fa fa-close"></i>
-                                 {{ 'ADMIN_FORMULARIOS.MSG_NOMBREREQUERIDO' | translate:param }}
-                              </div>
-                           </div>
-                           <div class="ui-grid-col-6">
-                              <label for="codigos">{{'LBL_CODIGO' | translate:param }}</label>
-                              <input id="codigos" name="codigos" #codigos="ngModel" pInputText type="text"
-                                     [(ngModel)]="functionalityControlSection.codigo" required disabled/>
-                           </div>
-                        </div>
-                        <div class="ui-grid-row">
-                           <div class="ui-grid-col-6">
-                              <label for="clasificacions">{{ 'ADMIN_FORMULARIOS.LBL_CLASIFICACION' | translate:param
-                                 }}</label>
-                              <p-dropdown id="clasificacions" name="clasificacions" required="true"
-                                          [options]="listClassificationSeccion" [autoWidth]="false"
-                                          [(ngModel)]="functionalityControlSection.idClasificacion"
-                                          #clasificacions="ngModel"
-                              ></p-dropdown>
-                              <div class="ui-message ui-messages-error ui-corner-all"
-                                   *ngIf="fs.submitted && !clasificacions.valid">
-                                 <i class="fa fa-close"></i>
-                                 {{ 'ADMIN_FORMULARIOS.MSG_CLASIFICACIONREQUERIDO' | translate:param }}
-                              </div>
-                           </div>
-                           <div class="ui-grid-col-3">
-                              <label></label><br>
-                              <p-checkbox id="visibles" name="visibles"
-                                          [(ngModel)]="functionalityControlSection.indicadorVisible"
-                                          binary="true"
-                                          label="{{ 'ADMIN_FORMULARIOS.LBL_VISIBLE' | translate:param }}"></p-checkbox>
-                           </div>
-                           <div class="ui-grid-col-3">
-                              <label></label><br>
-                              <p-checkbox id="imprimirs" name="imprimirs"
-                                          [(ngModel)]="functionalityControlSection.indicadorImprimir"
-                                          binary="true"
-                                          label="{{ 'ADMIN_FORMULARIOS.LBL_IMPRIMIR' | translate:param }}"></p-checkbox>
-                           </div>
-                        </div>
-                        <div class="ui-grid-row form-footer-buttons">
-                           <div class="ui-grid-col-4"></div>
-                           <div class="ui-grid-col-5"></div>
-                           <div class="ui-grid-col-1">
-                              <a (click)="goBackSectionEdi()" class="cancelar">{{'BTN_CANCELAR' | translate:param }}</a>
-                           </div>
-                           <div class="ui-grid-col-2">
-                              <button pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate:param }}"
-                                      type="submit"></button>
-                           </div>
-                        </div>
-                     </div>
-                  </form>
-               </div>
+               <!--<div *ngIf="editingSection">-->
+                  <!--<h3 class="first">{{ 'ADMIN_FORMULARIOS.LBL_SECCION' | translate:param }}</h3>-->
+                  <!--<form (ngSubmit)="fs.valid && onUpdateS()" #fs="ngForm" novalidate id="formularioseccionu">-->
+                     <!--<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">-->
+                        <!--<div class="ui-grid-row">-->
+                           <!--<div class="ui-grid-col-6">-->
+                              <!--<label for="nombre">{{ 'LBL_NOMBRE' | translate:param }}</label>-->
+                              <!--<input id="nombres" name="nombres" #nombres="ngModel" pInputText type="text"-->
+                                     <!--[(ngModel)]="functionalityControlSection.control" required-->
+                                     <!--(keyup)="capitalize($event)"/>-->
+                              <!--<div class="ui-message ui-messages-error ui-corner-all"-->
+                                   <!--*ngIf="fs.submitted && !nombres.valid">-->
+                                 <!--<i class="fa fa-close"></i>-->
+                                 <!--{{ 'ADMIN_FORMULARIOS.MSG_NOMBREREQUERIDO' | translate:param }}-->
+                              <!--</div>-->
+                           <!--</div>-->
+                           <!--<div class="ui-grid-col-6">-->
+                              <!--<label for="codigos">{{'LBL_CODIGO' | translate:param }}</label>-->
+                              <!--<input id="codigos" name="codigos" #codigos="ngModel" pInputText type="text"-->
+                                     <!--[(ngModel)]="functionalityControlSection.codigo" required disabled/>-->
+                           <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="ui-grid-row">-->
+                           <!--<div class="ui-grid-col-6">-->
+                              <!--<label for="clasificacions">{{ 'ADMIN_FORMULARIOS.LBL_CLASIFICACION' | translate:param-->
+                                 <!--}}</label>-->
+                              <!--<p-dropdown id="clasificacions" name="clasificacions" required="true"-->
+                                          <!--[options]="listClassificationSeccion" [autoWidth]="false"-->
+                                          <!--[(ngModel)]="functionalityControlSection.idClasificacion"-->
+                                          <!--#clasificacions="ngModel"-->
+                              <!--&gt;</p-dropdown>-->
+                              <!--<div class="ui-message ui-messages-error ui-corner-all"-->
+                                   <!--*ngIf="fs.submitted && !clasificacions.valid">-->
+                                 <!--<i class="fa fa-close"></i>-->
+                                 <!--{{ 'ADMIN_FORMULARIOS.MSG_CLASIFICACIONREQUERIDO' | translate:param }}-->
+                              <!--</div>-->
+                           <!--</div>-->
+                           <!--<div class="ui-grid-col-3">-->
+                              <!--<label></label><br>-->
+                              <!--<p-checkbox id="visibles" name="visibles"-->
+                                          <!--[(ngModel)]="functionalityControlSection.indicadorVisible"-->
+                                          <!--binary="true"-->
+                                          <!--label="{{ 'ADMIN_FORMULARIOS.LBL_VISIBLE' | translate:param }}"></p-checkbox>-->
+                           <!--</div>-->
+                           <!--<div class="ui-grid-col-3">-->
+                              <!--<label></label><br>-->
+                              <!--<p-checkbox id="imprimirs" name="imprimirs"-->
+                                          <!--[(ngModel)]="functionalityControlSection.indicadorImprimir"-->
+                                          <!--binary="true"-->
+                                          <!--label="{{ 'ADMIN_FORMULARIOS.LBL_IMPRIMIR' | translate:param }}"></p-checkbox>-->
+                           <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="ui-grid-row form-footer-buttons">-->
+                           <!--<div class="ui-grid-col-4"></div>-->
+                           <!--<div class="ui-grid-col-5"></div>-->
+                           <!--<div class="ui-grid-col-1">-->
+                              <!--<a (click)="goBackSectionEdi()" class="cancelar">{{'BTN_CANCELAR' | translate:param }}</a>-->
+                           <!--</div>-->
+                           <!--<div class="ui-grid-col-2">-->
+                              <!--<button pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate:param }}"-->
+                                      <!--type="submit"></button>-->
+                           <!--</div>-->
+                        <!--</div>-->
+                     <!--</div>-->
+                  <!--</form>-->
+               <!--</div>-->
             </div>
             <div *ngIf="detailField">
                <div *ngIf="functionalityControlFieldDetail">
