@@ -116,7 +116,7 @@ export class FormManagerUpdateComponent {
          this.listClassificationSeccion.push({label: 'Seleccione', value: null});
          res.map((s: ListaItem) => this.listClassificationSeccion.push({label: s.nombre, value: s.idLista}));
       });
-      this.listaService.getMasterDetailsStartsByCode('listClassificationSeccion', 'CAM').subscribe(res => {
+      this.listaService.getMasterDetailsStartsByCode('ListasClasificaciones', 'CAM').subscribe(res => {
          this.listClassificationCampo.push({label: 'Seleccione', value: null});
          res.map((s: ListaItem) => this.listClassificationCampo.push({label: s.nombre, value: s.idLista}));
       });

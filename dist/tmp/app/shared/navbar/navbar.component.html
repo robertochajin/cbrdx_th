@@ -4,7 +4,9 @@
 
       <ul class="sidebar-menu">
 
-         <li class="header">MENÚ PRINCIPAL</li>
+         <li class="header">
+            {{ 'TEMPLATE.LBL_MENUPRINCIPAL' | translate:param }}
+         </li>
 
          <li class="treeview" routerLinkActive="active">
             <a routerLink="/dashboard">
@@ -48,7 +50,7 @@
                   </a>
                </li>
                <li routerLinkActive="active">
-                  <a routerLink="/roles" routerLinkActive="active"><i class="fa fa-circle-o"></i>Roles
+                  <a routerLink="/roles" routerLinkActive="active"><i class="fa fa-circle-o"></i> Roles
                      <span class="pull-right-container">
                         <small class="label pull-right bg-green">new</small>
                      </span>
@@ -63,6 +65,21 @@
                <li routerLinkActive="active">
                   <a routerLink="/actividadeconomica" routerLinkActive="active"><i class="fa fa-circle-o"></i> Actividad Económica</a>
                </li>
+               <li routerLinkActive="active">
+                  <a routerLink="/form-manager" routerLinkActive="active"><i class="fa fa-circle-o"></i> Administrador<br />de Menús
+                     <span class="pull-right-container">
+                        <small class="label pull-right bg-green">new</small>
+                     </span>
+                  </a>
+               </li>
+               <li routerLinkActive="active">
+                  <a routerLink="/widgets" routerLinkActive="active"><i class="fa fa-circle-o"></i> Administración<br />de Widgets
+                     <span class="pull-right-container">
+                        <small class="label pull-right bg-green">new</small>
+                     </span>
+                  </a>
+               </li>
+
             </ul>
          </li>
 
@@ -77,7 +94,7 @@
                   <a routerLink="/centroCostos" routerLinkActive="active"><i class="fa fa-circle-o"></i> Centros de Costos</a>
                </li>
                <li routerLinkActive="active">
-                  <a routerLink="/tipoArea" routerLinkActive="active"><i class="fa fa-circle-o"></i> Tipos de Areas</a>
+                  <a routerLink="/tipoArea" routerLinkActive="active"><i class="fa fa-circle-o"></i> Tipos de Áreas</a>
                </li>
                <li routerLinkActive="active">
                   <a routerLink="/faults" routerLinkActive="active"><i class="fa fa-circle-o"></i> Faltas y<br />Sanciones
@@ -118,7 +135,7 @@
             </a>
             <ul class="treeview-menu">
                <li routerLinkActive="active">
-                  <a routerLink="/physic-structure"><i class="fa fa-circle-o"></i> Estructura Fisica
+                  <a routerLink="/physic-structure"><i class="fa fa-circle-o"></i> Estructura Física
                      <span class="pull-right-container">
                         <small class="label pull-right bg-green">new</small>
                      </span>
