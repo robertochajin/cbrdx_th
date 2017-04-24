@@ -9,8 +9,8 @@
                     <div class="ui-grid-col-3">
                         <select [(ngModel)]="selectedTipo" id="idTipoDato" name="idTipoDato" class="form-control"
                                 required #idTipoDato="ngModel">
-                            <option *ngFor="let c of datatypeDetails" [ngValue]="c.idListaItem">
-                                {{c.codigoItem}} - {{c.item}}
+                            <option *ngFor="let c of datatypeDetails" [ngValue]="c.idLista">
+                                {{c.codigo}} - {{c.nombre}}
                             </option>
                         </select>
                     </div>

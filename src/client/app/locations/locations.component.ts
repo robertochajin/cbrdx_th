@@ -6,6 +6,8 @@ import {SelectItem, ConfirmationService, Message, InputTextareaModule} from 'pri
 import {Location} from '@angular/common';
 import {PoliticalDivisionService} from '../_services/political-division.service';
 import {LocationService} from '../_services/employee-location.service';
+import {ListaItem} from "../_models/listaItem";
+import {ListaService} from "../_services/lista.service";
 
 declare let google: any;
 
@@ -54,30 +56,25 @@ export class LocationsComponent implements OnInit {
   constructor(private location: Location,
               private politicalDivisionServices: PoliticalDivisionService,
               private locationService: LocationService,
+              private listaService: ListaService,
               private confirmationService: ConfirmationService,
               private route: ActivatedRoute) {
     this.complementaries = [{tipo: null, detalle: ''}];
   }
 
   ngOnInit() {
-    this.locationService.getPrincipalNomenclatureList().subscribe(
-      principalNomenclatureList => {
-        this.principalNomenclatureList = principalNomenclatureList;
-        this.principalNomenclatureList.unshift({label: 'Seleccione', value: null});
-      });
-    this.locationService.getComplementaryNomenclatureList().subscribe(
-      complementaryNomenclatureList => {
-        this.complementaryNomenclatureList = complementaryNomenclatureList;
-        this.complementaryNomenclatureList.map((cn: any) => {
-          cn.value = cn.label;
-        });
-        this.complementaryNomenclatureList.unshift({label: 'Seleccione', value: null});
-      });
-    this.locationService.getAddressTypeList().subscribe(
-      addressTypeList => {
-        this.addressTypeList = addressTypeList;
-        this.addressTypeList.unshift({label: 'Seleccione', value: null});
-      });
+     this.listaService.getMasterDetails('ListasTiposDirecciones').subscribe(res => {
+        this.addressTypeList.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => this.addressTypeList.push({label: s.nombre, value: s.idLista}));
+     });
+     this.listaService.getMasterDetails('ListasTiposNomenclaturas').subscribe(res => {
+        this.principalNomenclatureList.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => this.principalNomenclatureList.push({label: s.nombre, value: s.idLista}));
+     });
+     this.listaService.getMasterDetails('ListasTiposNomenclaturasComplementarias').subscribe(res => {
+        this.complementaryNomenclatureList.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => this.complementaryNomenclatureList.push({label: s.nombre, value: s.nombre}));
+     });
 
     this.finalAddress = this.localizacion.direccion;
     this.selectedAddressType = this.localizacion.idTipoDireccion;

@@ -41,7 +41,7 @@ export class PhysicStructureAddComponent {
          this.ListPhysicStructure = res;
       });
 
-      this.listaService.getMasterDetails('ListasClasificaciones').subscribe(res => {
+      this.listaService.getMasterDetails('ListasClasificacionesSedes').subscribe(res => {
          this.ListCategory.push({label: 'Seleccione', value: null});
          res.map((s: ListaItem) => {
             this.ListCategory.push({label: s.nombre, value: s.idLista});
