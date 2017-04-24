@@ -6,6 +6,8 @@ import {NavService} from "../_services/_nav.service";
 import {FormManagerService} from '../_services/form-manager.service';
 import {ConfirmationService, Message, SelectItem} from 'primeng/primeng';
 import {Location}                 from '@angular/common';
+import {ListaService} from "../_services/lista.service";
+import {ListaItem} from "../_models/listaItem";
 
 @Component({
    moduleId: module.id,
@@ -48,6 +50,7 @@ export class FormManagerUpdateComponent {
    constructor(private formManagerService: FormManagerService,
                private router: Router,
                private location: Location,
+               private listaService: ListaService,
                private route: ActivatedRoute,
                private _nav: NavService,
                private confirmationService: ConfirmationService) {
@@ -108,23 +111,14 @@ export class FormManagerUpdateComponent {
             }
          });
       });
-      this.formManagerService.getClassificationSeccion().subscribe(rest => {
-         this.listClassificationSeccion.push({label: "Seleccione", value: null});
-         for (let dp of rest) {
-            this.listClassificationSeccion.push({
-               label: dp.nombre,
-               value: dp.idListaClasificacion
-            });
-         }
+
+      this.listaService.getMasterDetailsStartsByCode('ListasClasificaciones','SEC').subscribe(res => {
+         this.listClassificationSeccion.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => this.listClassificationSeccion.push({label: s.nombre, value: s.idLista}));
       });
-      this.formManagerService.getClassificationCampo().subscribe(rest => {
-         this.listClassificationCampo.push({label: "Seleccione", value: null});
-         for (let dp of rest) {
-            this.listClassificationCampo.push({
-               label: dp.nombre,
-               value: dp.idListaClasificacion
-            });
-         }
+      this.listaService.getMasterDetailsStartsByCode('listClassificationSeccion', 'CAM').subscribe(res => {
+         this.listClassificationCampo.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => this.listClassificationCampo.push({label: s.nombre, value: s.idLista}));
       });
    }
 
