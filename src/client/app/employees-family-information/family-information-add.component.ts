@@ -11,9 +11,10 @@ import {NavService} from '../_services/_nav.service';
 import {Localizaciones} from "../_models/localizaciones";
 import {LocateService} from "../_services/locate.service";
 import {ListEmployeesService} from "../_services/lists-employees.service";
-import {RelationTypeServices} from "../_services/relation-type.service";
 import {Employee} from "../_models/employees";
 import {EmployeesService} from "../_services/employees.service";
+import {ListaItem} from "../_models/listaItem";
+import {ListaService} from "../_services/lista.service";
 
 @Component({
   moduleId: module.id,
@@ -49,9 +50,9 @@ export class FamilyInformationAddComponent implements OnInit {
               private fb: FormBuilder,
               private locateService: LocateService,
               private employeesService: EmployeesService,
-              private relationTypeServices: RelationTypeServices,
               private listEmployeesService: ListEmployeesService,
               private confirmationService: ConfirmationService,
+              private listaService: ListaService,
               private location: Location,
               private _nav: NavService) {
   }
@@ -76,14 +77,12 @@ export class FamilyInformationAddComponent implements OnInit {
       }
     );
 
-    this.relationTypeServices.getAllEnabled().subscribe(
-      relationship => {
-        this.relationship.unshift({label: 'Seleccione', value: null});
-        relationship.map((s: any) => {
-          this.relationship.push({label: s.nombreListaParentesco, value: s.idListaParentesco});
+     this.listaService.getMasterDetails('ListasParentescos').subscribe(res => {
+        this.relationship.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.relationship.push({label: s.nombre, value: s.idLista});
         });
-      }
-    );
+     });
 
     this.familyInformation.idConvivencia = 0;
     this.route.params.subscribe((params: Params) => {

@@ -8,6 +8,8 @@ import {EmployeeEstateService} from '../_services/employee-estate.service';
 import {ListEmployeesService}     from '../_services/lists-employees.service';
 import {LocationService}     from '../_services/employee-location.service';
 import * as moment from 'moment/moment';
+import {ListaService} from "../_services/lista.service";
+import {ListaItem} from "../_models/listaItem";
 
 @Component({
   moduleId: module.id,
@@ -29,6 +31,7 @@ export class EmployeesEstateUpdateComponent {
   msgs: Message[] = [];
 
   constructor(private employeesEstatesService: EmployeeEstateService,
+              private listaService: ListaService,
               private router: Router,
               private route: ActivatedRoute,
               private location: Location,
@@ -44,45 +47,33 @@ export class EmployeesEstateUpdateComponent {
         this.employeeEstate = data;
       });
 
-    this.listEmployeesService.getlistTypeEstate().subscribe(rest => {
-      this.listTypeEstate.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listTypeEstate.push({
-          label: dp.nombre,
-          value: dp.idListaTipoVivienda
+     this.listaService.getMasterDetails('ListasTiposViviendas').subscribe(res => {
+        this.listTypeEstate.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listTypeEstate.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
 
-    this.listEmployeesService.getlistClassEstate().subscribe(rest => {
-      this.listClassEstate.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listClassEstate.push({
-          label: dp.nombre,
-          value: dp.idListaClaseVivienda
+     this.listaService.getMasterDetails('ListasClasesViviendas').subscribe(res => {
+        this.listClassEstate.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listClassEstate.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
 
-    this.listEmployeesService.getlistTypeConstruction().subscribe(rest => {
-      this.listTypeConstruction.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listTypeConstruction.push({
-          label: dp.nombre,
-          value: dp.idListaTipoConstruccionVivienda
+     this.listaService.getMasterDetails('ListasTiposConstruccionViviendas').subscribe(res => {
+        this.listTypeConstruction.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listTypeConstruction.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
 
-    this.listEmployeesService.getlistStratum().subscribe(rest => {
-      this.listStratum.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listStratum.push({
-          label: dp.nombre,
-          value: dp.idListaEstrato
+     this.listaService.getMasterDetails('ListasEstratos').subscribe(res => {
+        this.listStratum.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listStratum.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
 
 
   }

@@ -2,8 +2,6 @@ import {Component, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import {References} from './references';
 import {ReferencesService} from './references.service';
-import { ReferencesTypesService } from '../_services/references-type.service';
-import {Observable} from 'rxjs/Observable';
 import {ConfirmationService} from 'primeng/primeng';
 import {Employee} from "../_models/employees";
 
@@ -24,7 +22,6 @@ export class ReferencesComponent {
 
     constructor(
                 private referencesService: ReferencesService,
-                private referencesTypesService: ReferencesTypesService,
                 private router: Router,
                 private confirmationService: ConfirmationService
                 ) {}
@@ -36,11 +33,6 @@ export class ReferencesComponent {
                 this.references.forEach(function(obj, index){
                     obj.nombreCompleto = obj.primerNombre+' '+obj.segundoNombre+' '+obj.primerApellido+' '+obj.segundoApellido;
                     obj.numeroContacto = obj.telefonoFijo+' /  '+obj.telefonoMovil;
-
-                  //a utilizar en caso de que no se tenga el dato de tipo de referencia para utilizar en la vista
-                    // this.referencesTypesService.getById(obj.idTipoReferencia).subscribe(
-                    //   (tr:any ) => obj.tipodeReferencia.label = tr.nombreListaTipoReferencias
-                    // );
                 });
             }
         );

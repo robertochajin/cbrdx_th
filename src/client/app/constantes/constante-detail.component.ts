@@ -24,7 +24,7 @@ export class ConstanteDetailComponent {
     constructor(private constanteService: ConstanteService, private listaService: ListaService, private router: Router, private route: ActivatedRoute) {
         listaService.getMasterByCodigo("TIDACO").subscribe(res => {
             this.datatypeMaster = res;
-            listaService.getMasterDetails(this.datatypeMaster.idLista).subscribe(data => {
+            listaService.getMasterDetails(this.datatypeMaster.nombreTabla).subscribe(data => {
                 this.datatypeDetails = data;
                 route.params.switchMap((params: Params) => constanteService.viewConstant(+params['id']))
                     .subscribe(data => {

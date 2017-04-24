@@ -28,7 +28,7 @@
                           required
                           #idTipoDato="ngModel" [ngClass]="{ 'has-error': f.submitted && !idTipoDato.valid }"
                           (select)="alterPattern()" (change)="alterPattern()">
-                      <option *ngFor="let c of constantType" [ngValue]="c.idListaTipoDato">
+                      <option *ngFor="let c of constantType" [ngValue]="c.idLista">
                           {{c.codigo}} - {{c.nombre}}
                       </option>
                   </select>

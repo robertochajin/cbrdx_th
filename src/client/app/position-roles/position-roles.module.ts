@@ -3,8 +3,8 @@ import {CommonModule} from '@angular/common';
 import {SharedModule} from '../shared/shared.module';
 import {FormSharedModule} from "../shared/form-shared.module";
 import {PositionRolesComponent} from "./position-roles.component";
-import {ProcessRolesServices} from "../_services/processRoles.service";
 import {PositionRolesServices} from "../_services/position-roles.service";
+import {ListaService} from "../_services/lista.service";
 
 @NgModule({
   imports: [CommonModule,
@@ -13,7 +13,7 @@ import {PositionRolesServices} from "../_services/position-roles.service";
   ],
   declarations: [PositionRolesComponent],
   bootstrap: [PositionRolesComponent],
-  providers: [PositionRolesServices, ProcessRolesServices],
+  providers: [PositionRolesServices,ListaService],
   exports: [PositionRolesComponent]
 })
 

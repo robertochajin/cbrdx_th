@@ -7,13 +7,14 @@ import {PositionsService} from "../_services/positions.service";
 import {OrganizationalStructurePositionsServices} from "../_services/organizationalStructurePositions.service";
 import {OrganizationalStructureService} from "../_services/organizationalStructure.service";
 import {PersonPositionsServices} from "../_services/personPositions.service";
-import {ContractTypesServices} from "../_services/contractTypes.service";
 import {TreeNode} from "primeng/components/common/api";
 import {PersonPositions} from "../_models/personPositions";
 import {EmployeesService} from "../_services/employees.service";
 import {Employee} from "../_models/employees";
 import * as moment from 'moment/moment';
 import {ContractTypes} from "../_models/contractTypes";
+import {ListaItem} from "../_models/listaItem";
+import {ListaService} from "../_services/lista.service";
 
 @Component({
    moduleId: module.id,
@@ -56,7 +57,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
                private employeesService: EmployeesService,
                private organizationalStructureService: OrganizationalStructureService,
                private personPositionService: PersonPositionsServices,
-               private contractTypesService: ContractTypesServices,
+               private listaService: ListaService,
                private confirmationService: ConfirmationService) {
 
       organizationalStructureService.getAllEnabled().subscribe(res => {
@@ -93,9 +94,11 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
       this.maxDate.setFullYear(year, month, today.getDate());
       this.range = `${lastYear}:${year}`;
 
-      this.contractTypesService.getAllEnabled().subscribe((ts: ContractTypes[]) => {
+      this.listaService.getMasterDetails('ListasTiposContratos').subscribe(res => {
          this.contracTypeList.push({label: 'Seleccione', value: null});
-         ts.map(c => this.contracTypeList.push({label: c.nombre, value: c.idListaTipoContrato}));
+         res.map((s: ListaItem) => {
+            this.contracTypeList.push({label: s.nombre, value: s.idLista});
+         });
       });
    }
 
