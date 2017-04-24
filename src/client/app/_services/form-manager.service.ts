@@ -19,42 +19,42 @@ export class FormManagerService {
       return this.http.post(this.serviceURL + 'funcionalidades', r, {headers: this.headers}).map((res: Response) => res.json());
    };
    update(r: Functionality) {
-      return this.http.put(this.serviceURL + 'funcionalidades', r).catch(this.handleError);
+      return this.http.put(this.serviceURL + 'funcionalidades', r,{headers: this.headers}).catch(this.handleError);
    };
    addSection(r: FunctionalityControl) {
-      return this.http.post(this.serviceURL + 'funcionalidadesControles', r).map((res: Response) => res.json());
+      return this.http.post(this.serviceURL + 'funcionalidadesControles', r,{headers: this.headers}).map((res: Response) => res.json());
    };
    addField(r: FunctionalityControl) {
-      return this.http.post(this.serviceURL + 'funcionalidadesControles', r).map((res: Response) => res.json());
+      return this.http.post(this.serviceURL + 'funcionalidadesControles', r,{headers: this.headers}).map((res: Response) => res.json());
    };
    updateField(r: FunctionalityControl) {
-      return this.http.put(this.serviceURL + 'funcionalidadesControles', r).catch(this.handleError);
+      return this.http.put(this.serviceURL + 'funcionalidadesControles', r,{headers: this.headers}).catch(this.handleError);
    };
    updateSection(r: FunctionalityControl) {
-      return this.http.put(this.serviceURL + 'funcionalidadesControles', r).catch(this.handleError);
+      return this.http.put(this.serviceURL + 'funcionalidadesControles', r,{headers: this.headers}).catch(this.handleError);
    };
    getAllFunctionalityControl(){
-      return this.http.get(this.serviceURL + 'funcionalidadesControles').map((res: Response) => res.json() as FunctionalityControl[]);
+      return this.http.get(this.serviceURL + 'funcionalidadesControles',{headers: this.headers}).map((res: Response) => res.json() as FunctionalityControl[]);
    }
    getAllFunctionality() {
-      return this.http.get(this.serviceURL + 'funcionalidades').map((res: Response) => res.json() as Functionality[]);
+      return this.http.get(this.serviceURL + 'funcionalidades',{headers: this.headers}).map((res: Response) => res.json() as Functionality[]);
    }
    getFunctionalityById(id: number) {
-      return this.http.get(this.serviceURL + 'funcionalidades/id/'+id).map((res: Response) => res.json() as Functionality);
+      return this.http.get(this.serviceURL + 'funcionalidades/id/'+id,{headers: this.headers}).map((res: Response) => res.json() as Functionality);
    }
 
    getFunctionality() {
-      return this.http.get(this.serviceURL + 'menus/idPadreDifCero').map((res: Response) => res.json());
+      return this.http.get(this.serviceURL + 'menus/idPadreDifCero' ,{headers: this.headers}).map((res: Response) => res.json());
    }
 
    getSectionByIdFuncionalidad(id: number) {
-      return this.http.get(this.serviceURL + 'funcionalidadesControles/secycam/'+id+'/true').map((res: Response) => res.json());
+      return this.http.get(this.serviceURL + 'funcionalidadesControles/secycam/'+id+'/true' ,{headers: this.headers}).map((res: Response) => res.json());
    }
    getFieldByIdFuncionalidad(id: number) {
-      return this.http.get(this.serviceURL + 'funcionalidadesControles/secycam/'+id+'/false').map((res: Response) => res.json());
+      return this.http.get(this.serviceURL + 'funcionalidadesControles/secycam/'+id+'/false' ,{headers: this.headers}).map((res: Response) => res.json());
    }
    getFieldByIdFather(id: number) {
-      return this.http.get(this.serviceURL + 'funcionalidadesControles/buscarPadre/'+id).map((res: Response) => res.json());
+      return this.http.get(this.serviceURL + 'funcionalidadesControles/buscarPadre/'+id ,{headers: this.headers}).map((res: Response) => res.json());
    }
    handleError(error: any): Promise<any> {
       console.error('Error:', error);
@@ -62,10 +62,10 @@ export class FormManagerService {
    }
    
    getAllEnabled() {
-      return this.http.get(this.serviceURL + 'funcionalidades/enabled').map((res: Response) => res.json() as Functionality[]);
+      return this.http.get(this.serviceURL + 'funcionalidades/enabled' ,{headers: this.headers}).map((res: Response) => res.json() as Functionality[]);
    }
    getFuncionalidadesControlesEnabled() {
-      return this.http.get(this.serviceURL + 'funcionalidadesControles/enabled').map((res: Response) => res.json() as FunctionalityControl[]);
+      return this.http.get(this.serviceURL + 'funcionalidadesControles/enabled', {headers: this.headers}).map((res: Response) => res.json() as FunctionalityControl[]);
    }
 
 }

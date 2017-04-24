@@ -16,11 +16,11 @@ export class OrganizationalStructurePositionsServices {
    }
 
    getAllEnabled(): Observable<OrganizationalStructurePositions[]> {
-      return this.http.get(this.masterService + 'enabled/').map((res: Response) => res.json() as OrganizationalStructurePositions[]);
+      return this.http.get(this.masterService + 'enabled/',{headers: this.headers}).map((res: Response) => res.json() as OrganizationalStructurePositions[]);
    }
 
    getAllByOrganizacionalStructure(idOrganizacionalStructure: number): Observable<OrganizationalStructurePositions[]> {
-      return this.http.get(this.masterService + 'buscarCargo/' + idOrganizacionalStructure).map((res: Response) => res.json() as OrganizationalStructurePositions[]);
+      return this.http.get(this.masterService + 'buscarCargo/' + idOrganizacionalStructure,{headers: this.headers}).map((res: Response) => res.json() as OrganizationalStructurePositions[]);
    }
 
    add(f: OrganizationalStructurePositions) {
@@ -33,7 +33,7 @@ export class OrganizationalStructurePositionsServices {
    }
 
    get(id: number) {
-      return this.http.get(this.masterService + 'buscarId/' + id)
+      return this.http.get(this.masterService + 'buscarId/' + id,{headers: this.headers})
          .map((res: Response) => res.json() as OrganizationalStructurePositions);
    }
 

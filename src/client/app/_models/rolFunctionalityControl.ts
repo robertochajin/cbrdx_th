@@ -8,6 +8,7 @@ export class RolFunctionalityControl {
    public idRol: number;
    public rol:  string;
    public control:  string;
+   public codigo:  string;
    public indicadorHabilitado:  boolean=true;
    public indicadorSeccion:  boolean=true;
    public indicadorEditar:  boolean=true;
