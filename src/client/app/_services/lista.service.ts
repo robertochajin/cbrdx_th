@@ -39,8 +39,12 @@ export class ListaService {
     return this.http.post(this.masterService, JSON.stringify(l), {headers: this.headers}).toPromise().then(res => res.json() as Lista).catch(this.handleError);
   }
 
-  getMasterDetails(tableName: string) {
+  getMasterAllDetails(tableName: string) {
     return this.http.get(this.masterService + 'tabla/' + tableName + '/', {headers: this.headers}).map((res: Response) => res.json() as ListaItem[]);
+  }
+
+  getMasterDetails(tableName: string) {
+    return this.http.get(this.masterService + 'tabla/' + tableName + '/enabled/', {headers: this.headers}).map((res: Response) => res.json() as ListaItem[]);
   }
 
   getMasterDetailsByCode(tableName: string, code:string) {

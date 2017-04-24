@@ -31,7 +31,7 @@ export class ListaEditComponent implements OnInit {
       this.route.params.switchMap((params: Params) => this.listaService.getMaster(+params['id']))
          .subscribe(data => {
             this.masterList = data;
-            this.listaService.getMasterDetails(this.masterList.nombreTabla).subscribe(res => {
+            this.listaService.getMasterAllDetails(this.masterList.nombreTabla).subscribe(res => {
                this.detailsList = res;
             });
          });
@@ -69,7 +69,7 @@ export class ListaEditComponent implements OnInit {
       this.listaService.createDetail(this.editableDetail, this.masterList.nombreTabla).then(res => {
          this.editableDetail = new ListaItem;
          this.isEdit = true;
-         this.listaService.getMasterDetails(this.masterList.nombreTabla).subscribe(res => {
+         this.listaService.getMasterAllDetails(this.masterList.nombreTabla).subscribe(res => {
             this.isEdit = false;
             this.detailsList = res;
          });
@@ -80,7 +80,7 @@ export class ListaEditComponent implements OnInit {
       this.listaService.updateDetail(this.editableDetail, this.masterList.nombreTabla).then(res => {
          this.editableDetail = new ListaItem;
          this.isEdit = false;
-         this.listaService.getMasterDetails(this.masterList.nombreTabla).subscribe(res => {
+         this.listaService.getMasterAllDetails(this.masterList.nombreTabla).subscribe(res => {
             this.detailsList = res;
          });
       });
@@ -99,7 +99,7 @@ export class ListaEditComponent implements OnInit {
          this.isEdit = false
       }
       this.editableDetail = new ListaItem;
-      this.listaService.getMasterDetails(this.masterList.nombreTabla).subscribe(res => {
+      this.listaService.getMasterAllDetails(this.masterList.nombreTabla).subscribe(res => {
          this.detailsList = res;
       });
    }
