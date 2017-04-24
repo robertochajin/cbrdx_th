@@ -16,6 +16,7 @@ import {ActividadEconomica}         from "../_models/actividadEconomica";
 import {ActividadEconomicaService}  from "../_services/actividadEconomica.service";
 import * as moment from 'moment/moment';
 import {ListaService} from "../_services/lista.service";
+import {ListaItem} from "../_models/listaItem";
 
 @Component({
    moduleId: module.id,
@@ -68,96 +69,71 @@ export class EmployeesAddComponent {
                private actividadEconomicaService: ActividadEconomicaService,
                private ocupacionesService: OcupacionesService,
                private confirmationService: ConfirmationService) {
-      this.listEmployeesService.getListPersonTypes().subscribe(res => {
-         this.personTypes.push({label: "Seleccione", value: null});
-         for (let dp of res) {
-            this.personTypes.push({
-               label: dp.nombreListaTipoPersona,
-               value: dp.idListaTipoPersona
-            });
-         }
-         this.employee.idTipoPersona = this.personTypes[0].value;
-      });
-      this.listEmployeesService.getDocumentTypes().subscribe(res => {
-         this.documentTypes.push({label: "Seleccione", value: null});
-         for (let dp of res) {
-            this.documentTypes.push({
-               label: dp.nombreListaTipoDocumento,
-               value: dp.idListaTipoDocumento
-            });
-         }
-         this.employee.idTipoDocumento = this.documentTypes[0].value;
+      listaService.getMasterDetails('ListasTiposPersonas').subscribe(res => {
+         this.personTypes.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => {
+            this.personTypes.push({label: s.nombre, value: s.idLista});
+         });
+         this.employee.idTipoPersona = null;
       });
 
-      this.listEmployeesService.getGenderTypes().subscribe(res => {
-         this.genderTypes.push({label: "Seleccione", value: null});
-         for (let dp of res) {
-            this.genderTypes.push({
-               label: dp.nombreListaGenero,
-               value: dp.idListaGenero
-            });
-         }
-         this.employee.idGenero = this.genderTypes[0].value;
+      this.listaService.getMasterDetails('ListasTiposDocumentos').subscribe(res => {
+         this.documentTypes.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => {
+            this.documentTypes.push({label: s.nombre, value: s.idLista});
+         });
+         this.employee.idTipoDocumento = null;
       });
-      this.listEmployeesService.getMaritalStatusTypes().subscribe(res => {
-         this.maritalStatusTypes.push({label: "Seleccione", value: null});
-         for (let dp of res) {
-            this.maritalStatusTypes.push({
-               label: dp.nombreListaEstadoCivil,
-               value: dp.idListaEstadoCivil
-            });
-         }
-         this.employee.idEstadoCivil = this.maritalStatusTypes[0].value;
+
+      this.listaService.getMasterDetails('ListasGeneros').subscribe(res => {
+         this.genderTypes.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => {
+            this.genderTypes.push({label: s.nombre, value: s.idLista});
+         });
+         this.employee.idGenero = null;
       });
-      this.listEmployeesService.getRhRactorTypes().subscribe(res => {
-         this.rhRactorTypes.push({label: "Seleccione", value: null});
-         for (let dp of res) {
-            this.rhRactorTypes.push({
-               label: dp.nombre,
-               value: dp.idListaFactorRh
-            });
-         }
-         this.employee.idFactorRh = this.rhRactorTypes[0].value;
+
+      this.listaService.getMasterDetails('ListasEstadosCiviles').subscribe(res => {
+         this.maritalStatusTypes.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => {
+            this.maritalStatusTypes.push({label: s.nombre, value: s.idLista});
+         });
+         this.employee.idEstadoCivil = null;
       });
-      this.listEmployeesService.getHealthTypes().subscribe(res => {
-         this.healthTypes.push({label: "Seleccione", value: null});
-         for (let dp of res) {
-            this.healthTypes.push({
-               label: dp.nombre,
-               value: dp.idListaCoberturaSalud
-            });
-         }
-         this.employee.idCoberturaSalud = this.healthTypes[0].value;
+      this.listaService.getMasterDetails('ListasFactoresRH').subscribe(res => {
+         this.rhRactorTypes.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => {
+            this.rhRactorTypes.push({label: s.nombre, value: s.idLista});
+         });
+         this.employee.idFactorRh = null;
       });
-      this.listEmployeesService.getOccupationsTypes().subscribe(res => {
-         this.occupationsTypes.push({label: "Seleccione", value: null});
-         for (let dp of res) {
-            this.occupationsTypes.push({
-               label: dp.nombre,
-               value: dp.idListaTipoOcupacion
-            });
-         }
-         this.employee.idTipoOcupacion = this.occupationsTypes[0].value;
+      this.listaService.getMasterDetails('ListasCoberturasSalud').subscribe(res => {
+         this.healthTypes.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => {
+            this.healthTypes.push({label: s.nombre, value: s.idLista});
+         });
+         this.employee.idCoberturaSalud = null;
       });
-      this.listEmployeesService.getAcademicLevelTypes().subscribe(res => {
-         this.academicLevelTypes.push({label: "Seleccione", value: null});
-         for (let dp of res) {
-            this.academicLevelTypes.push({
-               label: dp.nombreListaNivelEstudio,
-               value: dp.idListaNivelEstudio
-            });
-         }
-         this.employee.idNivelEducacion = this.academicLevelTypes[0].value;
+      this.listaService.getMasterDetails('ListasTiposOcupaciones').subscribe(res => {
+         this.occupationsTypes.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => {
+            this.occupationsTypes.push({label: s.nombre, value: s.idLista});
+         });
+         this.employee.idTipoOcupacion = null;
       });
-      this.listEmployeesService.getAffiliationTypes().subscribe(rest => {
-         this.affiliationTypes.push({label: "Seleccione", value: null});
-         for (let dp of rest) {
-            this.affiliationTypes.push({
-               label: dp.nombre,
-               value: dp.idListaTipoAfiliacion
-            });
-         }
-         this.employee.idTipoAfiliacion = rest[0].idListaTipoAfiliacion;
+      this.listaService.getMasterDetails('ListasNivelesEstudios').subscribe(res => {
+         this.academicLevelTypes.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => {
+            this.academicLevelTypes.push({label: s.nombre, value: s.idLista});
+         });
+         this.employee.idActividadEconomica = null;
+      });
+      this.listaService.getMasterDetails('ListasTiposAfiliacion').subscribe(res => {
+         this.affiliationTypes.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => {
+            this.affiliationTypes.push({label: s.nombre, value: s.idLista});
+         });
+         this.employee.idTipoAfiliacion = null;
       });
       this.actividadEconomicaService.listByPadre(0).subscribe(res => {
          this.sector.push({label: "Seleccione", value: null});
