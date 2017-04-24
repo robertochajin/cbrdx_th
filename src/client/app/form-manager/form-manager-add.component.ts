@@ -45,6 +45,8 @@ export class FormManagerAddComponent {
    detailField: boolean = false;
    editingSection: boolean = false;
    codExists: boolean = false;
+   showFrom: boolean = true;
+   showFromF: boolean = true;
 
    constructor(private formManagerService: FormManagerService,
                private router: Router,
@@ -85,7 +87,7 @@ export class FormManagerAddComponent {
          this.listClassificationSeccion.push({label: 'Seleccione', value: null});
          res.map((s: ListaItem) => this.listClassificationSeccion.push({label: s.nombre, value: s.idLista}));
       });
-      this.listaService.getMasterDetailsStartsByCode('listClassificationSeccion', 'CAM').subscribe(res => {
+      this.listaService.getMasterDetailsStartsByCode('ListasClasificaciones', 'CAM').subscribe(res => {
          this.listClassificationCampo.push({label: 'Seleccione', value: null});
          res.map((s: ListaItem) => this.listClassificationCampo.push({label: s.nombre, value: s.idLista}));
       });
@@ -141,7 +143,9 @@ export class FormManagerAddComponent {
       this.functionalityControl.indicadorSeccion = true;
       this.functionalityControl.idPadre = null;
       this.functionalityControl.idFuncionalidad = this.functionality.idFuncionalidad;
+      this.showFrom=false;
       this.formManagerService.addSection(this.functionalityControl).subscribe(res => {
+         this.showFrom=true;
          this.idPadre = res.idFuncionalidadControl;
          this.functionalityControl = res;
          this.formManagerService.getSectionByIdFuncionalidad(this.functionalityControl.idFuncionalidad).subscribe(rest => {
@@ -156,8 +160,9 @@ export class FormManagerAddComponent {
                this.functionalitySection.push(s);
             }
          });
-         this.functionalityControl.control = " ";
-         this.functionalityControl.codigo = " ";
+         this.functionalityControl.control = "";
+         this.functionalityControl.codigo = "";
+         this.functionalityControl.idClasificacion=null;
       });
       this.formManagerService.getAllFunctionalityControl().subscribe(rest => {
          this.listAllfunctionalityControl = rest;
@@ -171,7 +176,9 @@ export class FormManagerAddComponent {
          this.functionalityControl.idFuncionalidadControl = null;
          this.functionalityControl.idFuncionalidad = this.functionality.idFuncionalidad;
          this.functionalityControl.indicadorSeccion = false;
+         this.showFromF=false;
          this.formManagerService.addField(this.functionalityControl).subscribe(rest => {
+            this.showFromF=true;
             this.formManagerService.getFieldByIdFuncionalidad(this.functionality.idFuncionalidad).subscribe(rest => {
                for (let r of rest) {
                   if (r.indicadorSeccion === false && r.idPadre === null) {
@@ -180,21 +187,25 @@ export class FormManagerAddComponent {
                }
             });
          });
-         this.functionalityControl.control = " ";
-         this.functionalityControl.codigo = " ";
+         this.functionalityControl.control = "";
+         this.functionalityControl.codigo = "";
+         this.functionalityControl.idClasificacion = null;
       } else {
          this.functionalityField = [];
          this.functionalityControl.idPadre = this.idPadre;
          this.functionalityControl.idFuncionalidadControl = null;
          this.functionalityControl.idFuncionalidad = this.functionality.idFuncionalidad;
          this.functionalityControl.indicadorSeccion = false;
+         this.showFromF=false;
          this.formManagerService.addField(this.functionalityControl).subscribe(rest => {
+            this.showFromF=true;
             this.formManagerService.getFieldByIdFather(this.idPadre).subscribe(rest => {
                this.functionalityField = rest;
             });
          });
-         this.functionalityControl.control = " ";
-         this.functionalityControl.codigo = " ";
+         this.functionalityControl.control = "";
+         this.functionalityControl.codigo = "";
+         this.functionalityControl.idClasificacion = null;
       }
       this.formManagerService.getAllFunctionalityControl().subscribe(rest => {
          this.listAllfunctionalityControl = rest;

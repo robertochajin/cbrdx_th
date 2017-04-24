@@ -46,6 +46,8 @@ export class FormManagerUpdateComponent {
    detailField: boolean=false;
    editingSection: boolean=false;
    codExists: boolean=false;
+   showForm: boolean=true;
+   showFormF: boolean=true;
 
    constructor(private formManagerService: FormManagerService,
                private router: Router,
@@ -116,7 +118,7 @@ export class FormManagerUpdateComponent {
          this.listClassificationSeccion.push({label: 'Seleccione', value: null});
          res.map((s: ListaItem) => this.listClassificationSeccion.push({label: s.nombre, value: s.idLista}));
       });
-      this.listaService.getMasterDetailsStartsByCode('listClassificationSeccion', 'CAM').subscribe(res => {
+      this.listaService.getMasterDetailsStartsByCode('ListasClasificaciones', 'CAM').subscribe(res => {
          this.listClassificationCampo.push({label: 'Seleccione', value: null});
          res.map((s: ListaItem) => this.listClassificationCampo.push({label: s.nombre, value: s.idLista}));
       });
@@ -168,11 +170,14 @@ export class FormManagerUpdateComponent {
    }
 
    onCreateS() {
+
       this.functionalitySection = [];
       this.functionalityControl.indicadorSeccion = true;
       this.functionalityControl.idPadre = null;
       this.functionalityControl.idFuncionalidad = this.functionality.idFuncionalidad;
-      this.formManagerService.addSection(this.functionalityControl).subscribe(res => {
+      this.showForm= false;
+      this.formManagerService.addSection(this.functionalityControl).subscribe(res =>{
+         this.showForm=true;
          this.idPadre = res.idFuncionalidadControl;
          this.functionalityControl = res;
          this.formManagerService.getSectionByIdFuncionalidad(this.functionalityControl.idFuncionalidad).subscribe(rest => {
@@ -187,14 +192,16 @@ export class FormManagerUpdateComponent {
                this.functionalitySection.push(s);
             }
          });
-         this.functionalityControl.control = " ";
-         this.functionalityControl.codigo = " ";
+         this.functionalityControl.control = "";
+         this.functionalityControl.codigo = "";
+         this.functionalityControl.idClasificacion=null;
       });
       this.formManagerService.getAllFunctionalityControl().subscribe(rest=>{
          this.listAllfunctionalityControl= rest;
       });
-   }
 
+   }
+   onSubmit(){}
    onCreateC(n: number) {
 
       if (this.indicadorSeccion === false) {
@@ -203,7 +210,9 @@ export class FormManagerUpdateComponent {
          this.functionalityControl.idFuncionalidadControl = null;
          this.functionalityControl.idFuncionalidad = this.functionality.idFuncionalidad;
          this.functionalityControl.indicadorSeccion = false;
+         this.showFormF=false;
          this.formManagerService.addField(this.functionalityControl).subscribe(rest => {
+            this.showFormF=true;
             this.formManagerService.getFieldByIdFuncionalidad(this.functionality.idFuncionalidad).subscribe(rest => {
                for (let r of rest) {
                   if (r.indicadorSeccion === false && r.idPadre === null) {
@@ -212,21 +221,25 @@ export class FormManagerUpdateComponent {
                }
             });
          });
-         this.functionalityControl.control = " ";
-         this.functionalityControl.codigo = " ";
+         this.functionalityControl.control = "";
+         this.functionalityControl.codigo = "";
+         this.functionalityControl.idClasificacion = null;
       } else {
          this.functionalityField=[];
          this.functionalityControl.idPadre = this.idPadre;
          this.functionalityControl.idFuncionalidadControl = null;
          this.functionalityControl.idFuncionalidad = this.functionality.idFuncionalidad;
          this.functionalityControl.indicadorSeccion = false;
+         this.showFormF=false;
          this.formManagerService.addField(this.functionalityControl).subscribe(rest => {
+            this.showFormF=true;
             this.formManagerService.getFieldByIdFather(this.idPadre).subscribe(rest => {
                this.functionalityField = rest;
             });
          });
-         this.functionalityControl.control = " ";
-         this.functionalityControl.codigo = " ";
+         this.functionalityControl.control = "";
+         this.functionalityControl.codigo = "";
+         this.functionalityControl.idClasificacion = null;
       }
 
       this.formManagerService.getAllFunctionalityControl().subscribe(rest=>{
