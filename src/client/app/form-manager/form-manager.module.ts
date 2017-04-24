@@ -4,7 +4,7 @@ import 'rxjs/add/operator/toPromise';
 import {FormManagerComponent} from "./form-manager.component";
 import {FormManagerAddComponent} from "./form-manager-add.component";
 import {FormManagerUpdateComponent} from "./form-manager-update.component";
-import {FunctionalityComponent} from "./functionality.component";
+// import {FunctionalityComponent} from "./functionality.component";
 import {FormManagerService} from '../_services/form-manager.service';;
 import {FormSharedModule } from '../shared/form-shared.module';
 import {SharedModule} from "../shared/shared.module";
@@ -20,7 +20,7 @@ import {SharedModule} from "../shared/shared.module";
       FormManagerComponent,
       FormManagerAddComponent,
       FormManagerUpdateComponent,
-      FunctionalityComponent
+      // FunctionalityComponent
    ],
    bootstrap: [FormManagerComponent],
    providers: [FormManagerService],

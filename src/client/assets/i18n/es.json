@@ -228,6 +228,7 @@
    },
    "ADMIN_FORMULARIOS":{
    "LBL_FUNCIONALIDAD":"Funcionalidad",
+   "MSG_FUNCIONALIDADREQUERIDA":"Funcionalidad requerida",
    "LBL_AÑADIRFUNCIONALIDAD":"Añadir funcionalidad",
    "LBL_SECCION":"Sección",
    "LBL_CLASIFICACION":"Clasificación",
@@ -241,13 +242,7 @@
    "MSG_CODIGOREPETIDO":"Ya se encuentra registrado ese código",
    "MSG_NOMBREREQUERIDO":"Nombre  requerido",
    "MSG_CODIGOREQUERIDO":"Código requrido",
-   "MSG_CLASIFICACIONREQUERIDA":"Clasificación requerida",
-
-   "MSG_URLREQUERIDA":"Url requerida",
-   "LBL_AGREGANDO":"Agregando widgets",
-   "LBL_EDITANDO":"Editando widgets",
-   "LBL_DETALLEWIDGETS":"Detalle widgets",
-   "LBL_CONFIGURARWIDGETS":"Configurar Widgets"
+   "MSG_CLASIFICACIONREQUERIDA":"Clasificación requerida"
    },
   "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 }
