@@ -17,7 +17,7 @@ export class RolFuncionalitiesServices {
   }
 
   getAll() {
-    return this.http.get(this.serviceURL).map((res: Response) => res.json() as RolFuncionalities[]);
+    return this.http.get(this.serviceURL,{headers: this.headers}).map((res: Response) => res.json() as RolFuncionalities[]);
   }
 
   getAllByRol(id: number): Observable<RolFuncionalities[]> {
@@ -40,6 +40,15 @@ export class RolFuncionalitiesServices {
     return this.http.get(this.serviceURL + '/' + id)
       .map((res: Response) => res.json() as RolFuncionalities);
   }
+   
+   addControl(f: RolFunctionalityControl) {
+      return this.http.post(this.serviceControlURL, f, {headers: this.headers})
+      .map((res: Response) => res.json());
+   };
+   
+   updateControl(f: RolFunctionalityControl) {
+      return this.http.put(this.serviceControlURL, JSON.stringify(f), {headers: this.headers}).catch(this.handleError);
+   }
 
   handleError(error: any): Promise<any> {
     console.error('Error:', error);

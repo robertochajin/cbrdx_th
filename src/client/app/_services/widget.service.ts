@@ -15,11 +15,11 @@ export class WidgetServices {
    }
 
    getAll(): Observable<Widgets[]> {
-      return this.http.get(this.masterService).map((res: Response) => res.json() as Widgets[]);
+      return this.http.get(this.masterService, { headers: this.headers }).map((res: Response) => res.json() as Widgets[]);
    }
 
    getAllEnabled(): Observable<Widgets[]> {
-       return this.http.get(this.masterService + '/enabled/').map((res: Response) => res.json() as Widgets[]);
+       return this.http.get(this.masterService + '/enabled/', { headers: this.headers }).map((res: Response) => res.json() as Widgets[]);
    }
 
    add(f: Widgets) {
@@ -31,7 +31,7 @@ export class WidgetServices {
    }
 
    getById(id: number) {
-      return this.http.get(this.masterService + '/' + id).map((res: Response) => res.json() as Widgets);
+      return this.http.get(this.masterService + '/' + id, { headers: this.headers }).map((res: Response) => res.json() as Widgets);
    }
 
    handleError(error: any): Promise<any> {

@@ -13,6 +13,7 @@ export class RolWidgets {
 
    constructor() {
       this.indicadorHabilitado = true;
+      this.indicadorObligatorio = false;
       this.auditoriaUsuario = 1;
       this.auditoriaFecha = "";
    }
