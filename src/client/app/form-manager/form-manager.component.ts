@@ -26,6 +26,9 @@ export class FormManagerComponent {
    ngOnInit() {
       this.formManagerService.getAllFunctionality().subscribe(rest=>{
          this.listFunctionalities=rest;
+         this.listFunctionalities.sort(function (a, b) {
+            return b.idFuncionalidad - a.idFuncionalidad;
+         });
       });
    }
 

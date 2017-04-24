@@ -13,10 +13,10 @@
       </div>
    </div>
    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="listFunctionalities" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-      <p-column field="idFuncionalidad" header="Id" [sortable]="true"></p-column>
+      <!--<p-column field="idFuncionalidad" header="Id" [sortable]="true"></p-column>-->
       <!--<p-column field="codigo" header="{{'LBL_CODIGO' | translate:param }}" [sortable]="true"></p-column>-->
       <!--<p-column field="menu" header="{{'LBL_NOMBRE' | translate:param }} " [sortable]="true"></p-column>-->
-      <p-column field="idMenu" header="{{'ADMIN_FORMULARIOS.LBL_FUNCIONALIDAD' | translate:param }}" [sortable]="true"></p-column>
+      <p-column field="menu" header="{{'ADMIN_FORMULARIOS.LBL_FUNCIONALIDAD' | translate:param }}" [sortable]="true"></p-column>
       <p-column header="{{'LBL_HABILITADO' | translate:param }}" styleClass="datatable-col-action">
          <template let-func="rowData" pTemplate="body">
             <p-checkbox name="indicadorHabilitado" [(ngModel)]="func.indicadorHabilitado" binary="true" disabled="true" ></p-checkbox>
