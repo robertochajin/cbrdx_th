@@ -16,7 +16,7 @@ import {WindowRefService} from '../_services/window-ref.service';
  */
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslateModule],
   declarations: [ToolbarComponent, NavbarComponent, BreadcrumbComponent],
   exports: [ToolbarComponent, NavbarComponent, BreadcrumbComponent,
     CommonModule, FormsModule, RouterModule, TranslateModule]
