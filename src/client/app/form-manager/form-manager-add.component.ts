@@ -262,6 +262,7 @@ export class FormManagerAddComponent {
          this.functionalityControl.codigo = " ";
       });
       this.editingSection = false;
+      this.acordion=3;
    }
 
    updateField(c: FunctionalityControl) {
@@ -271,7 +272,6 @@ export class FormManagerAddComponent {
    }
 
    updateSection(f: FunctionalityControl) {
-      this.acordion = 3;
       this.editingSection = true;
       this.functionalityControlSection = f;
       this.formManagerService.getFieldByIdFather(f.idFuncionalidadControl).subscribe(rest => {
@@ -304,9 +304,11 @@ export class FormManagerAddComponent {
    goBackDetail() {
       this.detailSection = false;
    }
+   goBackField() {
+      this.editingField = false;
+   }
    goBackSectionEdi(){
-      this.detailSection = false;
-      this.acordion=2;
+      this.editingSection = false;
    }
    detailDetailF(f: FunctionalityControl) {
       this.detailField = true;
