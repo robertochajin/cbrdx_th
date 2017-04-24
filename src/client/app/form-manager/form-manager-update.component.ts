@@ -244,7 +244,6 @@ export class FormManagerUpdateComponent {
       this.editingSection=true;
       this.functionalityControlSection= f;
       this.functionalityField = [];
-      this.acordion = 3;
       this.formManagerService.getFieldByIdFather(f.idFuncionalidadControl).subscribe(rest => {
          this.functionalityField = rest;
       });
@@ -311,6 +310,7 @@ export class FormManagerUpdateComponent {
          this.functionalityControl.codigo = " ";
       });
       this.editingSection=false;
+      this.acordion=3;
    }
    updateField(c: FunctionalityControl){
       this.editingField=true;
@@ -348,8 +348,7 @@ export class FormManagerUpdateComponent {
       this.detailField=false;
    }
    goBackSectionEdi(){
-      this.detailSection = false;
-      this.acordion=2;
+      this.editingSection = false;
    }
    capitalize(event:any) {
       let input = event.target.value;
