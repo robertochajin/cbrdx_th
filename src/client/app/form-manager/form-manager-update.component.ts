@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
 import {Functionality} from '../_models/functionality';
-import {FunctionalitySection} from '../_models/functionalitySection';
-import {FunctionalityField} from '../_models/functionalityFields';
 import {Router, ActivatedRoute, Params}   from '@angular/router';
 import {FunctionalityControl} from '../_models/functionalityContorl';
 import {NavService} from "../_services/_nav.service";
@@ -28,6 +26,7 @@ export class FormManagerUpdateComponent {
    functionalitySection: FunctionalityControl[] = [];
    listAllfunctionalityControl: FunctionalityControl [];
    functionalityField: FunctionalityControl[];
+   listFunctionalities: Functionality[];
    listFunctionality: SelectItem[] = [];
    listClassificationSeccion: SelectItem[] = [];
    listClassificationCampo: SelectItem[] = [];
@@ -84,14 +83,30 @@ export class FormManagerUpdateComponent {
             });
          });
 
-      this.formManagerService.getFunctionality().subscribe(rest => {
-         this.listFunctionality.push({label: "Seleccione", value: null});
-         for (let dp of rest) {
-            this.listFunctionality.push({
-               label: dp.menu,
-               value: dp.idMenu
-            });
-         }
+      this.formManagerService.getAllFunctionalityControl().subscribe(rest => {
+         this.listAllfunctionalityControl = rest;
+      });
+
+      this.formManagerService.getFunctionality().subscribe(res => {
+         this.formManagerService.getAllFunctionality().subscribe(rest => {
+            this.listFunctionalities = rest;
+            this.listFunctionality.push({label: "Seleccione", value: null});
+            for (let dp of res) {
+               let bandera = false;
+               for (let r of this.listFunctionalities) {
+                  if (dp.idMenu === r.idMenu) {
+                     bandera = true;
+                     break;
+                  }
+               }
+               if (!bandera) {
+                  this.listFunctionality.push({
+                     label: dp.menu,
+                     value: dp.idMenu
+                  });
+               }
+            }
+         });
       });
       this.formManagerService.getClassificationSeccion().subscribe(rest => {
          this.listClassificationSeccion.push({label: "Seleccione", value: null});
