@@ -304,7 +304,10 @@ export class FormManagerAddComponent {
    goBackDetail() {
       this.detailSection = false;
    }
-
+   goBackSectionEdi(){
+      this.detailSection = false;
+      this.acordion=2;
+   }
    detailDetailF(f: FunctionalityControl) {
       this.detailField = true;
       this.functionalityControlFieldDetail = f;
