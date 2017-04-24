@@ -253,5 +253,17 @@
       "LBL_EDITARCONTRASENA":"Editar Contraseña",
       "LBL_CERRARSESION": "Cerrar Sesión"
    },
+
+   "USER_SESSION":{
+      "LBL_USUARIO":"Usuario",
+      "LBL_CEDULA":"Cédula",
+      "LBL_NUEVOAVATAR": "Nuevo Avatar",
+      "LBL_CAMBIOCONTRASENA":"Cambio de Contraseña",
+      "LBL_CONTRASENAACTUAL":"Contraseña actual",
+      "LBL_NUEVACONTRASENA":"Nueva Contraseña",
+      "LBL_REPETIRCONTRASENA":"Repetir nueva contraseña",
+      "LBL_CONTRASENAACTUALREQUERIDA":"Contraseña actual es requerida.",
+      "LBL_CONTRASENANUEVAREQUERIDA":"Contraseña Nueva es requerida."
+   },
   "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 }
