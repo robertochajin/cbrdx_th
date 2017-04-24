@@ -29,7 +29,7 @@ export class PositionsUpdateComponent {
    areaTypes: SelectItem[] = [];
    bossPositionTypes: SelectItem[] = [];
    stateTypes: SelectItem[] = [];
-   liststateTypes: any[];
+   liststateTypes: any[] = [];
    levelTypes: SelectItem[] = [];
    listslevelTypes: any[] = [];
    genderTypes: SelectItem[] = [];

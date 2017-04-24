@@ -33,9 +33,9 @@ export class LocationsComponent implements OnInit {
   dismiss: EventEmitter<number> = new EventEmitter<number>();
 
   tipoDireccion: {value: null, label: string};
-  principalNomenclatureList: ListaItem[] = [];
-  complementaryNomenclatureList: ListaItem[] = [];
-  addressTypeList: ListaItem[] = [];
+  principalNomenclatureList: SelectItem[] = [];
+  complementaryNomenclatureList: SelectItem[] = [];
+  addressTypeList: SelectItem[] = [];
   selectedPrincipalNomenclature: number;
   selectedAddressType: number;
   labelPrincipalNomenclature: string;
