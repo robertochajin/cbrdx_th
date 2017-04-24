@@ -81,41 +81,35 @@ export class RiskComponent {
       this.exam.idCargo = this.position.idCargo;
 
       this.listaService.getMasterDetails('ListasExamenes').subscribe(res => {
-         this.listExam.push({label: 'Seleccione', value: null});
          res.map((s: ListaItem) => {
             this.listExam.push({label: s.nombre, value: s.idLista});
          });
-      });
-      this.listaService.getMasterDetails('ListasExamenes').subscribe(res => {
-         this.listExam.push({label: 'Seleccione', value: null});
-         res.map((s: ListaItem) => {
-            this.listExam.push({label: s.nombre, value: s.idLista});
-         });
-      });
-      this.riskService.getExamByIdCargo(this.risk.idCargo).subscribe(
-         exam => {
-            this.ListPositionExam = exam;
-            this.PositionExam = exam;
-            for (let le of  this.listExam) {
-               let bandera = false;
-               for (let pe of this.ListPositionExam) {
-                  if (Number(le.label) === pe.idExamen) {
-                     bandera = true;
-                     break;
+
+         this.riskService.getExamByIdCargo(this.risk.idCargo).subscribe(
+            exam => {
+               this.ListPositionExam = exam;
+               this.PositionExam = exam;
+               for (let le of  this.listExam) {
+                  let bandera = false;
+                  for (let pe of this.ListPositionExam) {
+                     if (Number(le.label) === pe.idExamen) {
+                        bandera = true;
+                        break;
+                     }
+                  }
+                  if (!bandera) {
+                     let ex = new Exam();
+                     ex.idExamen = Number(le.value);
+                     ex.examen = le.label;
+                     ex.indicadorIngreso = false;
+                     ex.indicadorPeriodicidad = false;
+                     ex.indicadorRetiro = false;
+                     this.PositionExam.push(ex);
                   }
                }
-               if (!bandera) {
-                  let ex = new Exam();
-                  ex.idExamen = Number(le.label);
-                  ex.examen = le.value;
-                  ex.indicadorIngreso = false;
-                  ex.indicadorPeriodicidad = false;
-                  ex.indicadorRetiro = false;
-                  this.PositionExam.push(ex);
-               }
             }
-         }
-      );
+         );
+      });
 
 
       this.riskService.getRiskByIdCargo(this.risk.idCargo).subscribe(

@@ -82,12 +82,10 @@ export class FormalStudiesAddComponent implements OnInit {
     this.maxDateFinal.setFullYear(year);
     this.range = `${lastYear}:${year}`;
 
-    this.studyLevelServices.getAllEnabled().subscribe(studyLevelList => {
-      this.studyLevelList.push({label: 'Seleccione', value: null});
-      studyLevelList.map((s: StudyLevels) => {
-        this.studyLevelList.push({label: s.nombreListaNivelEstudio, value: s.idListaNivelEstudio});
-      });
-    });
+     this.listaService.getMasterDetails('ListasNivelesEstudios').subscribe(res => {
+        this.studyLevelList.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => this.studyLevelList.push({label: s.nombre, value: s.idLista}));
+     });
     this.listaService.getMasterDetails('ListasAreasEstudios').subscribe(studyAreaList => {
       this.studyAreaList .push({label: 'Seleccione', value: null});
       studyAreaList.map((s: ListaItem) => {
