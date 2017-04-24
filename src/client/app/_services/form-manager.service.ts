@@ -30,7 +30,9 @@ export class FormManagerService {
    updateSection(r: FunctionalityControl) {
       return this.http.put(this.serviceURL + 'funcionalidadesControles', r).catch(this.handleError);
    };
-
+   getAllFunctionalityControl(){
+      return this.http.get(this.serviceURL + 'funcionalidadesControles').map((res: Response) => res.json() as FunctionalityControl[]);
+   }
    getAllFunctionality() {
       return this.http.get(this.serviceURL + 'funcionalidades').map((res: Response) => res.json() as Functionality[]);
    }

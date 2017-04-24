@@ -23,7 +23,10 @@ export class FormManagerAddComponent {
    functionalityControl: FunctionalityControl = new FunctionalityControl();
    functionalityControlField: FunctionalityControl = new FunctionalityControl();
    functionalityControlSection: FunctionalityControl = new FunctionalityControl();
+   functionalityControlSectionDetail: FunctionalityControl = new FunctionalityControl();
+   functionalityControlFieldDetail: FunctionalityControl = new FunctionalityControl();
    functionalitySection: FunctionalityControl [];
+   listAllfunctionalityControl: FunctionalityControl [];
    functionalityField: FunctionalityControl[] = [];
    listFunctionality: SelectItem[] = [];
    listClassificationSeccion: SelectItem[] = [];
@@ -33,9 +36,15 @@ export class FormManagerAddComponent {
    campodisabled: boolean = true;
    secciondisabled: boolean = true;
    indicadorSeccion: boolean = true;
+   indicadorVisible: string;
+   indicadorImprime: string;
+   indicadorHabilitado: string;
    idPadre: number;
    editingField: boolean=false;
+   detailSection: boolean=false;
+   detailField: boolean=false;
    editingSection: boolean=false;
+   codExists: boolean=false;
 
    constructor(private formManagerService: FormManagerService,
                private router: Router,
@@ -46,6 +55,9 @@ export class FormManagerAddComponent {
 
    ngOnInit() {
       this.acordion = 0;
+      this.formManagerService.getAllFunctionalityControl().subscribe(rest=>{
+         this.listAllfunctionalityControl= rest;
+      });
       this.formManagerService.getFunctionality().subscribe(rest => {
          this.listFunctionality.push({label: "Seleccione", value: null});
          for (let dp of rest) {
@@ -143,6 +155,9 @@ export class FormManagerAddComponent {
          this.functionalityControl.control = " ";
          this.functionalityControl.codigo = " ";
       });
+      this.formManagerService.getAllFunctionalityControl().subscribe(rest=>{
+         this.listAllfunctionalityControl= rest;
+      });
    }
 
    onCreateC(n: number) {
@@ -177,7 +192,9 @@ export class FormManagerAddComponent {
          this.functionalityControl.control = " ";
          this.functionalityControl.codigo = " ";
       }
-
+      this.formManagerService.getAllFunctionalityControl().subscribe(rest=>{
+         this.listAllfunctionalityControl= rest;
+      });
    }
 
    onUpdateC() {
@@ -201,7 +218,6 @@ export class FormManagerAddComponent {
          this.functionalityControlField.codigo = " ";
       } else {
          this.functionalityField=[];
-         // this.functionalityControlField.idPadre = this.idPadre;
          this.functionalityControlField.idFuncionalidad = this.functionality.idFuncionalidad;
          this.functionalityControlField.indicadorSeccion = false;
          this.formManagerService.updateField(this.functionalityControlField).subscribe(rest => {
@@ -216,12 +232,8 @@ export class FormManagerAddComponent {
    }
    onUpdateS(){
       this.functionalitySection = [];
-      // this.functionalityControlSection.indicadorSeccion = true;
-      // this.functionalityControlSection.idPadre = null;
-      // this.functionalityControlSection.idFuncionalidad = this.functionality.idFuncionalidad;
       this.formManagerService.updateSection(this.functionalityControlSection).subscribe(res => {
          this.idPadre = this.functionalityControlSection.idFuncionalidadControl;
-         // this.functionalityControl = res;
          this.formManagerService.getSectionByIdFuncionalidad(this.functionalityControlSection.idFuncionalidad).subscribe(rest => {
             for (let s of rest) {
                this.formManagerService.getFieldByIdFather(s.idFuncionalidadControl).subscribe(rest => {
@@ -262,22 +274,44 @@ export class FormManagerAddComponent {
       this.secciondisabled = false;
    }
 
+   validateCode() {
+      this.functionalityControl.codigo= this.functionalityControl.codigo.toUpperCase();
+      this.codExists = this.listAllfunctionalityControl.filter(t => t.codigo === this.functionalityControl.codigo).length > 0;
+   }
+   detailSectionF(f: FunctionalityControl){
+      this.detailSection=true;
+      this.functionalityControlSectionDetail= f;
+      this.functionalityControlSectionDetail.indicadorImprimir?this.indicadorImprime="Si":this.indicadorImprime="No";
+      this.functionalityControlSectionDetail.indicadorVisible?this.indicadorVisible="Si":this.indicadorVisible="No";
+      this.functionalityControlSectionDetail.indicadorHabilitado?this.indicadorHabilitado="Si":this.indicadorHabilitado="No";
+   }
+
+   goBackDetail() {
+      this.detailSection=false;
+   }
+   detailDetailF(f: FunctionalityControl){
+      this.detailField=true;
+      this.functionalityControlFieldDetail= f;
+      this.functionalityControlFieldDetail.indicadorImprimir?this.indicadorImprime="Si":this.indicadorImprime="No";
+      this.functionalityControlFieldDetail.indicadorVisible?this.indicadorVisible="Si":this.indicadorVisible="No";
+      this.functionalityControlFieldDetail.indicadorHabilitado?this.indicadorHabilitado="Si":this.indicadorHabilitado="No";
+   }
+   goBackDetailField() {
+      this.detailField=false;
+   }
    goBack() {
       this.location.back();
    }
 
-   change() {
-
+   capitalize(event:any) {
+      let input = event.target.value;
+      if(input.substring(0,1)===" "){
+         input = input.replace(' ','');
+      }
+      event.target.value = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
    }
-
-   detail() {
+   inputCleanUp(event:any) {
+      let input = event.target.value;
+      event.target.value=input.toUpperCase().replace(' ','').trim();
    }
-
-   add() {
-   }
-
-   update() {
-   }
-
-
-}
+ }
