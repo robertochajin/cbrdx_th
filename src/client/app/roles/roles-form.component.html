@@ -89,5 +89,12 @@
       </div>
    </form>
 </div>
-  
 
+<p-tabView *ngIf="rol.idRol">
+   <p-tabPanel header="Funcionalidades">
+      <rol-fucionalities *ngIf="rol.idRol" [rol]="rol"></rol-fucionalities>
+   </p-tabPanel>
+   <p-tabPanel header="Widgets">
+      <rol-widges *ngIf="rol.idRol" [rol]="rol"></rol-widges>
+   </p-tabPanel>
+</p-tabView>

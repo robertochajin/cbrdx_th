@@ -10,13 +10,12 @@ import { SelectItem, Message, ConfirmationService} from 'primeng/primeng';
 @Component({
     moduleId: module.id,
     templateUrl: 'rol-functionalities.component.html',
-    selector: 'rol-fucionalities',
+    selector: 'rol-fucionalities-config',
     providers:  [ConfirmationService]
 })
-export class RolFuncionalitiesComponent{
+export class RolFuncionalitiesConfigComponent{
     
-    @Input() rol:Rol;
-    
+    rol:Rol;
     funcionality: RolFuncionalities = new RolFuncionalities();
     lfuncionality: RolFuncionalities = new RolFuncionalities();
     dialogObjet: RolFuncionalities = new RolFuncionalities();

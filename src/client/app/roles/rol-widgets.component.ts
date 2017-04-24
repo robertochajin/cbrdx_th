@@ -13,7 +13,7 @@ import { RolWidgetsServices } from "../_services/rolWidgets.service";
     selector: 'rol-widges',
     providers:  [ConfirmationService]
 })
-export class RolFuncionalitiesComponent{
+export class RolWidgetsComponent{
     
     @Input() rol:Rol;
     

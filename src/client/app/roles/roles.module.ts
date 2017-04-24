@@ -9,6 +9,11 @@ import { RolesUpdateComponent } from "./roles-update.component";
 import { MenuElementoService } from "../_services/menuElemento.service";
 import { SharedModule } from "../shared/shared.module";
 import { FormSharedModule } from "../shared/form-shared.module";
+import { RolFuncionalitiesComponent } from "./rol-functionalities.component";
+import { RolFuncionalitiesServices } from "../_services/rolFuncionalities.service";
+import { RolWidgetsComponent } from "./rol-widgets.component";
+import { RolWidgetsServices } from "../_services/rolWidgets.service";
+import { RolFuncionalitiesConfigComponent } from "./rol-functionalities-config.component";
 
 @NgModule( {
               imports: [
@@ -18,12 +23,17 @@ import { FormSharedModule } from "../shared/form-shared.module";
               declarations: [
                  RolesComponent,
                  RolesAddComponent,
-                 RolesUpdateComponent
+                 RolesUpdateComponent,
+                 RolFuncionalitiesComponent,
+                 RolWidgetsComponent,
+                 RolFuncionalitiesConfigComponent
               ],
               bootstrap: [ RolesComponent ],
               providers: [
                  RolesService,
-                 MenuElementoService
+                 MenuElementoService,
+                 RolFuncionalitiesServices,
+                 RolWidgetsServices
               ],
               exports: [ RolesComponent ]
            } )

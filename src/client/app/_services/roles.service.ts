@@ -11,8 +11,8 @@ import { AuthenticationService } from '../_services/authentication.service';
 @Injectable()
 export class RolesService {
     public headers:Headers;
-    private masterService = '<%= SVC_SP_URL %>/roles/';
-    private detailService = '<%= SVC_SP_URL %>/rolesMenuElementos/';
+    private masterService = '<%= SVC_TH_URL %>/api/roles/';
+    private detailService = '<%= SVC_TH_URL %>/api/rolesMenuElementos/';
 
     constructor(private http: Http,
                 private authenticationService: AuthenticationService
