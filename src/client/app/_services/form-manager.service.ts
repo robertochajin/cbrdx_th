@@ -44,13 +44,6 @@ export class FormManagerService {
       return this.http.get(this.serviceURL + 'menus/idPadreDifCero').map((res: Response) => res.json());
    }
 
-   getClassificationSeccion() {
-      return this.http.get(this.serviceURL + 'listasClasificaciones/sec').map((res: Response) => res.json());
-   }
-
-   getClassificationCampo() {
-      return this.http.get(this.serviceURL + 'listasClasificaciones/cam').map((res: Response) => res.json());
-   }
    getSectionByIdFuncionalidad(id: number) {
       return this.http.get(this.serviceURL + 'funcionalidadesControles/secycam/'+id+'/true').map((res: Response) => res.json());
    }
@@ -63,6 +56,13 @@ export class FormManagerService {
    handleError(error: any): Promise<any> {
       console.error('Error:', error);
       return Promise.reject(error.message || error);
+   }
+   
+   getAllEnabled() {
+      return this.http.get(this.serviceURL + 'funcionalidades/enabled').map((res: Response) => res.json() as Functionality[]);
+   }
+   getFuncionalidadesControlesEnabled() {
+      return this.http.get(this.serviceURL + 'funcionalidadesControles/enabled').map((res: Response) => res.json() as FunctionalityControl[]);
    }
 
 }

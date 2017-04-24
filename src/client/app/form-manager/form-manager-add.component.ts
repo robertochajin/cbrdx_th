@@ -6,6 +6,8 @@ import {FormManagerService} from '../_services/form-manager.service';
 import {Router} from '@angular/router';
 import {ConfirmationService, Message, SelectItem} from 'primeng/primeng';
 import {Location}                 from '@angular/common';
+import {ListaService} from "../_services/lista.service";
+import {ListaItem} from "../_models/listaItem";
 
 @Component({
    moduleId: module.id,
@@ -47,6 +49,7 @@ export class FormManagerAddComponent {
    constructor(private formManagerService: FormManagerService,
                private router: Router,
                private location: Location,
+               private listaService: ListaService,
                private _nav: NavService,
                private confirmationService: ConfirmationService) {
    }
@@ -78,23 +81,13 @@ export class FormManagerAddComponent {
             }
          });
       });
-      this.formManagerService.getClassificationSeccion().subscribe(rest => {
-         this.listClassificationSeccion.push({label: "Seleccione", value: null});
-         for (let dp of rest) {
-            this.listClassificationSeccion.push({
-               label: dp.nombre,
-               value: dp.idListaClasificacion
-            });
-         }
+      this.listaService.getMasterDetailsStartsByCode('ListasClasificaciones','SEC').subscribe(res => {
+         this.listClassificationSeccion.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => this.listClassificationSeccion.push({label: s.nombre, value: s.idLista}));
       });
-      this.formManagerService.getClassificationCampo().subscribe(rest => {
-         this.listClassificationCampo.push({label: "Seleccione", value: null});
-         for (let dp of rest) {
-            this.listClassificationCampo.push({
-               label: dp.nombre,
-               value: dp.idListaClasificacion
-            });
-         }
+      this.listaService.getMasterDetailsStartsByCode('ListasClasificaciones', 'CAM').subscribe(res => {
+         this.listClassificationCampo.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => this.listClassificationCampo.push({label: s.nombre, value: s.idLista}));
       });
    }
 
@@ -262,6 +255,7 @@ export class FormManagerAddComponent {
          this.functionalityControl.codigo = " ";
       });
       this.editingSection = false;
+      this.acordion=3;
    }
 
    updateField(c: FunctionalityControl) {
@@ -271,7 +265,6 @@ export class FormManagerAddComponent {
    }
 
    updateSection(f: FunctionalityControl) {
-      this.acordion = 3;
       this.editingSection = true;
       this.functionalityControlSection = f;
       this.formManagerService.getFieldByIdFather(f.idFuncionalidadControl).subscribe(rest => {
@@ -304,9 +297,11 @@ export class FormManagerAddComponent {
    goBackDetail() {
       this.detailSection = false;
    }
+   goBackField() {
+      this.editingField = false;
+   }
    goBackSectionEdi(){
-      this.detailSection = false;
-      this.acordion=2;
+      this.editingSection = false;
    }
    detailDetailF(f: FunctionalityControl) {
       this.detailField = true;

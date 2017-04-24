@@ -7,7 +7,8 @@ import {Observable} from 'rxjs/Observable';
 import {ListEmployeesService} from "../_services/lists-employees.service";
 import {EmployeesService} from "../_services/employees.service";
 import {SelectItem, Message, ConfirmationService} from 'primeng/primeng';
-import {RelationTypeServices} from "../_services/relation-type.service";
+import {ListaItem} from "../_models/listaItem";
+import {ListaService} from "../_services/lista.service";
 
 @Component({
     moduleId: module.id,
@@ -31,18 +32,15 @@ export class EmployeesContactListComponent{
                 private router: Router,
                 private route: ActivatedRoute,
                 private confirmationService: ConfirmationService,
-                private listEmployeesService: ListEmployeesService,
                 private employeesService: EmployeesService,
-                private relationTypeServices: RelationTypeServices,
+                private listaService: ListaService,
     ) {
-      this.relationTypeServices.getAllEnabled().subscribe(
-        relationship => {
-          this.relationship.unshift({label: 'Seleccione', value: null});
-          relationship.map((s: any) => {
-            this.relationship.push({label: s.nombreListaParentesco, value: s.idListaParentesco});
+       this.listaService.getMasterDetails('ListasParentescos').subscribe(res => {
+          this.relationship.push({label: 'Seleccione', value: null});
+          res.map((s: ListaItem) => {
+             this.relationship.push({label: s.nombre, value: s.idLista});
           });
-        }
-      );
+       });
     }
 
     ngOnInit() {

@@ -69,7 +69,6 @@ import {ConstanteDetailComponent} from "./constantes/constante-detail.component"
 
 // Listas
 import {ListaComponent} from "./listas/lista.component";
-import {ListaAddComponent} from "./listas/lista-add.component";
 import {ListaDetailComponent} from "./listas/lista-detail.component";
 import {ListaEditComponent} from "./listas/lista-edit.component";
 
@@ -88,6 +87,8 @@ import {GruposGestionEditComponent} from "./gruposGestion/gruposGestion-edit.com
 // Roles
 import {RolesComponent} from "./roles/roles.component";
 import {RolesAddComponent} from "./roles/roles-add.component";
+import { RolesUpdateComponent } from "./roles/roles-update.component";
+import { RolFuncionalitiesConfigComponent } from "./roles/rol-functionalities-config.component";
 
 // Usuarios
 import {UsuariosComponent} from "./usuarios/usuarios.component";
@@ -168,6 +169,7 @@ import { UserSessionComponent } from "./usuarios/userSession.component";
 
 
 
+
 const routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
 
@@ -240,7 +242,6 @@ const routes = [
 
   // Listas
   {path: 'listas', component: ListaComponent, canActivate: [AuthGuard]},
-  {path: 'listas/add', component: ListaAddComponent, canActivate: [AuthGuard]},
   {path: 'listas/detail/:id', component: ListaDetailComponent, canActivate: [AuthGuard]},
   {path: 'listas/edit/:id', component: ListaEditComponent, canActivate: [AuthGuard]},
 
@@ -259,6 +260,8 @@ const routes = [
   // Roles
   {path: 'roles', component: RolesComponent, canActivate: [AuthGuard]},
   {path: 'roles/add', component: RolesAddComponent, canActivate: [AuthGuard]},
+  {path: 'roles/update/:id', component: RolesUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'roles-funcionalities-config/:id', component: RolFuncionalitiesConfigComponent, canActivate: [AuthGuard]},
 
   // Usuarios
   {path: 'usuarios', component: UsuariosComponent},

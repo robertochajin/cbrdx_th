@@ -13,14 +13,6 @@ export class FaultsAndSanctionsService {
     getAll()  {
         return this.http.get(this.serviceURL+'faltas').map((res:Response) => res.json());
     }
-    
-    getListfaultsTypes()  {
-        return this.http.get(this.serviceURL+'listasTiposFaltas/enabled').map((res:Response) => res.json());
-    }
-  
-    getListfaultsStatus()  {
-        return this.http.get(this.serviceURL+'listasEstadosFaltas/enabled').map((res:Response) => res.json());
-    }
 
     add(c: FaultsAndSanctions) {
         return this.http.post(this.serviceURL+'faltas',c).map((res:Response) => res.json());

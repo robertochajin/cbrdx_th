@@ -19,6 +19,7 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
   ConfirmDialogModule
 } from 'primeng/primeng';
 import {TercerosResidenciasServices} from "../_services/terceros-residencias.service";
+import {ListaService} from "../_services/lista.service";
 
 
 @NgModule({
@@ -45,7 +46,7 @@ import {TercerosResidenciasServices} from "../_services/terceros-residencias.ser
                 //    LocationsComponent
                     ],
     bootstrap:    [LocationComponent],
-    providers:    [LocationService, ListEmployeesService, TercerosResidenciasServices],
+    providers:    [LocationService, ListEmployeesService, TercerosResidenciasServices, ListaService],
     exports: 	  [LocationComponent]
 })
 export class LocationModule { }

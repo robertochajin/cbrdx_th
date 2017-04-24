@@ -67,10 +67,6 @@
                   Fecha Fin es requerida
                </div>
             </div>
-         </div>
-         <div class="ui-grid-row">
-            <div class="form-group col-md-5">
-            </div>
             <div class="form-group col-md-4">
                <label for="indicador" class="control-label col-sm-3">Habilitado</label>
                <div class=" col-sm-9">
@@ -93,5 +89,12 @@
       </div>
    </form>
 </div>
-  
 
+<p-tabView *ngIf="rol.idRol">
+   <p-tabPanel header="Funcionalidades">
+      <rol-fucionalities *ngIf="rol.idRol" [rol]="rol"></rol-fucionalities>
+   </p-tabPanel>
+   <p-tabPanel header="Widgets">
+      <rol-widges *ngIf="rol.idRol" [rol]="rol"></rol-widges>
+   </p-tabPanel>
+</p-tabView>

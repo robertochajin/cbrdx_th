@@ -15,10 +15,6 @@ export class PhysicStructureService {
       return this.http.get(this.serviceURL + 'estructuraFisica').map((res: Response) => res.json() as PhysicStructure[]);
    }
 
-   getListSedes() {
-      return this.http.get(this.serviceURL + 'listasClasificacionesSedes').map((res: Response) => res.json());
-   }
-
    getById(id: number) {
       return this.http.get(this.serviceURL + 'estructuraFisica/' + id).map((res: Response) => res.json() as PhysicStructure);
    }

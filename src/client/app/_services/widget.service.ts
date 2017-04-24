@@ -18,9 +18,9 @@ export class WidgetServices {
       return this.http.get(this.masterService).map((res: Response) => res.json() as Widgets[]);
    }
 
-   // getAllEnabled(): Observable<Widgets[]> {
-   //    return this.http.get(this.masterService + 'enabled/').map((res: Response) => res.json() as Widgets[]);
-   // }
+   getAllEnabled(): Observable<Widgets[]> {
+       return this.http.get(this.masterService + '/enabled/').map((res: Response) => res.json() as Widgets[]);
+   }
 
    add(f: Widgets) {
       return this.http.post(this.masterService, f, {headers: this.headers}).map((res: Response) => res.json());

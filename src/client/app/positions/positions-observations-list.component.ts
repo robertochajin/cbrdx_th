@@ -7,6 +7,8 @@ import { PositionsService } from "../_services/positions.service";
 import { ListPositionsService } from "../_services/lists-positions.service";
 
 import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
+import {ListaItem} from "../_models/listaItem";
+import {ListaService} from "../_services/lista.service";
 
 @Component( {
                moduleId: module.id,
@@ -21,14 +23,15 @@ export class PositionsObservationsListComponent {
    dialogObjet: PositionsObservations = new PositionsObservations();
    observations: PositionsObservations[];
    show_form: boolean = false;
-   liststateTypes: ListStates[];
-   stateTypes: ListStates[];
+   liststateTypes: ListaItem[];
+   stateTypes: ListaItem[];
    
    msgs: Message[] = [];
    
    constructor( private positionsService: PositionsService,
                 private router: Router,
                 private route: ActivatedRoute,
+                private listaService: ListaService,
                 private confirmationService: ConfirmationService,
                 private listPositionsService: ListPositionsService) {
       
@@ -38,7 +41,7 @@ export class PositionsObservationsListComponent {
       if(this.position.idCargo){
          this.positionsService.getObservationsbyPosition( this.position.idCargo ).subscribe( observations => {
             this.observations = observations;
-            this.listPositionsService.getstateTypes().subscribe( res => {
+            this.listaService.getMasterDetails('ListasTiposViviendas').subscribe(res => {
                this.liststateTypes = res;
                this.nombresEstados();
             } );
@@ -123,7 +126,7 @@ export class PositionsObservationsListComponent {
       for ( let i = 0;  i < this.observations.length; i++ ) {
          if(this.observations[i].idEstadoCargo != null){
             this.stateTypes = this.liststateTypes.filter(estado => {
-               return estado.idListaEstadoCargo == this.observations[i].idEstadoCargo; });
+               return estado.idLista == this.observations[i].idEstadoCargo; });
             this.observations[i].estadoCargo = this.stateTypes[0].nombre;
          }
       }

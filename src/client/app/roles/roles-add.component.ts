@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Location }                 from '@angular/common';
+import { Location } from "@angular/common";
 import { Rol } from "../_models/rol";
 import { RolesService } from "../_services/roles.service";
 import { Router } from "@angular/router";
@@ -7,7 +7,7 @@ import { VRolMenuElemento } from "../_models/vRolMenuElemento";
 import { MenuElementoService } from "../_services/menuElemento.service";
 import { MenuElemento } from "../_models/menuElemento";
 import { ConfirmationService } from "primeng/primeng";
-import * as moment from 'moment/moment';
+import * as moment from "moment/moment";
 
 @Component( {
                moduleId: module.id,
@@ -23,10 +23,10 @@ export class RolesAddComponent {
    codeExists: boolean = false;
    range: string;
    es: any;
-   maxDate:Date;
-   minDate:Date;
-   fechaInicio:Date;
-   fechaFin:Date;
+   maxDate: Date;
+   minDate: Date;
+   fechaInicio: string;
+   fechaFin: string;
    
    asignedRoles: VRolMenuElemento[];
    masterCreated: boolean = false;
@@ -45,31 +45,6 @@ export class RolesAddComponent {
    
    ngOnInit() {
       
-      /*this.route.params
-       .switchMap((params: Params) => this.employeesService.get(+params['id']))
-       .subscribe(employee => {
-       this.employee = employee;
-       this.updateActivities(this.employee.idSectorEconomico);
-       
-       
-       let mom: moment.Moment = moment(this.employee.fechaDocumento, 'YYYY-MM-DD');
-       this.expeditionDate = mom.format('MM/DD/YYYY');
-       
-       let mom2: moment.Moment = moment(this.employee.fechaNacimiento, 'YYYY-MM-DD');
-       this.birthDate = mom2.format('MM/DD/YYYY');
-       
-       
-       if (this.employee.indicadorVivo == false) {
-       let mom3: moment.Moment = moment(this.employee.fechaDefuncion, 'YYYY-MM-DD');
-       this.deathDate = mom3.format('MM/DD/YYYY');
-       }
-       
-       this.ciudadExpDocumento = this.employee.ciudadExpDocumento;
-       this.backupCiudadExpDocumento = this.employee.ciudadExpDocumento;
-       this.ciudadNacimiento = this.employee.ciudadNacimiento;
-       this.backupCiudadNacimiento = this.employee.ciudadNacimiento;
-       });
-       */
       this.es = {
          firstDayOfWeek: 1,
          dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
@@ -80,12 +55,16 @@ export class RolesAddComponent {
       };
    }
    
-   onFechaInicio(event:any) {
-      this.minDate = new Date(Date.parse(event));
+   onFechaInicio( event: any ) {
+      let d = new Date( Date.parse( event ) );
+      this.fechaInicio = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      this.minDate = new Date( Date.parse( event ) );
    }
    
-   onFechaFin(event:any) {
-      this.maxDate = new Date(Date.parse(event));
+   onFechaFin( event: any ) {
+      let d = new Date( Date.parse( event ) );
+      this.fechaFin = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      this.maxDate = new Date( Date.parse( event ) );
    }
    
    validateCode() {
@@ -104,14 +83,14 @@ export class RolesAddComponent {
    }
    
    goBack(): void {
-      this.confirmationService.confirm({
-                                          message: ` ¿Esta seguro que desea salir sin guardar?`,
-                                          header: 'Corfirmación',
-                                          icon: 'fa fa-question-circle',
-                                          accept: () => {
-                                             this.location.back();
-                                          }
-                                       });
+      this.confirmationService.confirm( {
+                                           message: ` ¿Esta seguro que desea salir sin guardar?`,
+                                           header: 'Corfirmación',
+                                           icon: 'fa fa-question-circle',
+                                           accept: () => {
+                                              this.location.back();
+                                           }
+                                        } );
    }
    
    capitalizeName() {
@@ -121,38 +100,20 @@ export class RolesAddComponent {
       }
    }
    
-   /*createMaster(f: NgForm) {
-    this.rolesService.addRole(this.rol).then(res => {
-    f.resetForm();
-    this.masterCreated = true;
-    this.rol = res;
-    });
-    }*/
-   /*
-    
-    addFunction() {
-    
-    let mom: moment.Moment = moment(this.expeditionDate, 'MM/DD/YYYY');
-    this.employee.fechaDocumento = mom.format('YYYY-MM-DD');
-    let mom2: moment.Moment = moment(this.birthDate, 'MM/DD/YYYY');
-    this.employee.fechaNacimiento = mom2.format('YYYY-MM-DD');
-    if (this.employee.indicadorVivo == false) {
-    let mom3: moment.Moment = moment(this.deathDate, 'MM/DD/YYYY');
-    this.employee.fechaDefuncion = mom3.format('YYYY-MM-DD');
-    }
-    this.employee.idTipoTercero = this.idTipoTercero;
-    
-    this.menuElementoService.listMenuElemento().subscribe(res => {
-    this.elementosMenu = res;
-    this.isAdding = true;
-    });
-    }
-    
-    createDetail() {
-    this.rolesService.getAssignedFunctions(this.rol.idRol).subscribe(res => {
-    this.asignedRoles = res;
-    this.isAdding = false;
-    });
-    }
- */
+   onSubmit() {
+      
+      if ( this.fechaInicio != null ) {
+         let momInicio: moment.Moment = moment( this.fechaInicio, 'MM/DD/YYYY' );
+         this.rol.fechaInicio = momInicio.format( 'YYYY-MM-DD' );
+      }
+      if ( this.fechaFin != null ) {
+         let momFin: moment.Moment = moment( this.fechaFin, 'MM/DD/YYYY' );
+         this.rol.fechaFin = momFin.format( 'YYYY-MM-DD' );
+      }
+      this.rolesService.addRole( this.rol ).then( res => {
+         this.router.navigate( [ 'roles/update/' + res.idRol ] );
+      } );
+      
+   }
+   
 }

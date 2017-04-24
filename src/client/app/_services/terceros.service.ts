@@ -10,7 +10,7 @@ export class TercerosService {
 
     public http: Http;
     public headers = new Headers({'Content-Type': 'application/json'});
-    private serviceURL = '<%= SVC_SP_URL %>/terceros/';
+    private serviceURL = '<%= SVC_TH_URL %>/api/terceros/';
 
     constructor(http: Http,
                 private authenticationService: AuthenticationService) {
