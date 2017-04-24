@@ -50,7 +50,7 @@
                 </li>
               </ul>
             </li>
-            <li class="footer"><a href="#">Ver Más...</a></li>
+            <li class="footer"><a href="#">{{ 'LBL_VERMAS' | translate:param }}</a></li>
           </ul>
         </li>
         <!-- User Account: style can be found in dropdown.less -->
@@ -62,14 +62,14 @@
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-              <img src="assets/images/user-160x160.jpg" class="img-circle" alt="User Image">
+            <img src="assets/images/user-160x160.jpg" class="img-circle" alt="User Image">
               <p>
                 Carlos Enrique Torres Barrios
-                <small>Usuario desde 10/12/2014</small>
+                <small>{{ 'TEMPLATE.LBL_USUARIODESDE' | translate:param }} 10/12/2014</small>
               </p>
             </li>
 
-            <li class="disabled menu-theme-title"><a href="#">Temas disponible</a></li>
+            <li class="disabled menu-theme-title"><a href="#">{{ 'TEMPLATE.LBL_USUARIODESDE' | translate:param }}</a></li>
             <li class="menu-theme">
               <span class="colortheme colorwhite" onclick="changeTheme('skin-black')" ></span>
               <span class="colortheme colorpurple" onclick="changeTheme('skin-purple')"></span>
@@ -80,9 +80,11 @@
 
             <!-- Menu Footer-->
             <li class="user-footer">
-               <a routerLink="/user-session" class="btn btn-default">Cambiar Contraseña</a>
+               <div class="pull-left">
+                  <a routerLink="/user-session" class="btn btn-default">{{ 'TEMPLATE.LBL_EDITARCONTRASENA' | translate:param }}</a>
+               </div>
               <div class="pull-right">
-                <a href="#" class="btn btn-danger">Cerrar Sesión</a>
+                <a href="#" class="btn btn-danger">{{ 'TEMPLATE.LBL_CERRARSESION' | translate:param }}</a>
               </div>
             </li>
           </ul>
