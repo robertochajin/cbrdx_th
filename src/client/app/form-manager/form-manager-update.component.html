@@ -182,26 +182,25 @@
                         <form class="form-horizontal">
                            <fieldset>
                               <div class="row">
-                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">Código:</label>
+                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'LBL_CODIGO' | translate:param }}:</label>
                                  <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{functionalityControlSectionDetail.codigo}}</strong></label>
 
-                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">Nombre:</label>
+                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'LBL_NOMBRE' | translate:param }}:</label>
                                  <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{functionalityControlSectionDetail.control}}</strong></label>
                               </div>
                               <div class="row">
-                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">Clasificación
-                                    Información:</label>
+                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'ADMIN_FORMULARIOS.LBL_CLASIFICACIONINFORMACION' | translate:param }}:</label>
                                  <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{functionalityControlSectionDetail.clasificacion}}</strong></label>
 
-                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">Visible:</label>
+                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'ADMIN_FORMULARIOS.LBL_VISIBLE' | translate:param }}:</label>
                                  <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{indicadorVisible}}</strong></label>
                               </div>
                               <div class="row">
-                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">Imprimmir:</label>
+                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'ADMIN_FORMULARIOS.LBL_IMPRIMIR' | translate:param }}:</label>
                                  <label
                                     class="col-md-3 col-sm-6 col-xs-8 "><strong>{{indicadorImprime}}</strong></label>
 
-                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">Habilitado:</label>
+                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'LBL_HABILITADO' | translate:param }}:</label>
                                  <label
                                     class="col-md-3 col-sm-6 col-xs-8"><strong>{{indicadorHabilitado}}</strong></label>
                               </div>
@@ -366,11 +365,6 @@
                                  <label for="codigoca">{{ 'LBL_CODIGO' | translate:param }}</label>
                                  <input id="codigoca" name="codigoca" #codigoca="ngModel" pInputText type="text"
                                         [(ngModel)]="functionalityControlField.codigo" required disabled/>
-                                 <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="fc.submitted && !codigoca.valid">
-                                    <i class="fa fa-close"></i>
-                                    {{ 'ADMIN_FORMULARIOS.MSG_CODIGOREQUERIDO' | translate:param }}
-                                 </div>
                               </div>
                            </div>
                            <div class="ui-grid-row">
@@ -478,9 +472,11 @@
                         </div>
                         <div class="ui-grid-row form-footer-buttons">
                            <div class="ui-grid-col-4"></div>
-                           <div class="ui-grid-col-1">
-                           </div>
+
                            <div class="ui-grid-col-5"></div>
+                           <div class="ui-grid-col-1">
+                              <a (click)="goBackSectionEdi()" class="cancelar">{{'BTN_CANCELAR' | translate:param }}</a>
+                           </div>
                            <div class="ui-grid-col-2">
                               <button pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate:param }}"
                                       type="submit"></button>
@@ -502,26 +498,25 @@
                         <form class="form-horizontal">
                            <fieldset>
                               <div class="row">
-                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">Código:</label>
+                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'LBL_CODIGO' | translate:param }}:</label>
                                  <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{functionalityControlFieldDetail.codigo}}</strong></label>
 
-                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">Nombre:</label>
+                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'LBL_NOMBRE' | translate:param }}:</label>
                                  <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{functionalityControlFieldDetail.control}}</strong></label>
                               </div>
                               <div class="row">
-                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">Clasificación
-                                    Información:</label>
+                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'ADMIN_FORMULARIOS.LBL_CLASIFICACIONDATO' | translate:param }}:</label>
                                  <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{functionalityControlFieldDetail.clasificacion}}</strong></label>
 
-                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">Visible:</label>
+                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'ADMIN_FORMULARIOS.LBL_VISIBLE' | translate:param }}:</label>
                                  <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{indicadorVisible}}</strong></label>
                               </div>
                               <div class="row">
-                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">Obligatorio:</label>
+                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'ADMIN_FORMULARIOS.LBL_OBLIGATORIO' | translate:param }}:</label>
                                  <label
                                     class="col-md-3 col-sm-6 col-xs-8 "><strong>{{indicadorImprime}}</strong></label>
 
-                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">Habilitado:</label>
+                                 <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'LBL_HABILITADO' | translate:param }}:</label>
                                  <label
                                     class="col-md-3 col-sm-6 col-xs-8"><strong>{{indicadorHabilitado}}</strong></label>
                               </div>
