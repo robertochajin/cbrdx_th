@@ -80,15 +80,10 @@ export class FamilyInformationUpdateComponent implements OnInit {
     this.maxDate.setFullYear(year);
     this.range = `${lastYear}:${year}`;
 
-
-    this.listEmployeesService.getDocumentTypes().subscribe(
-      documentTypes => {
+     this.listaService.getMasterDetails('ListasTiposDocumentos').subscribe(res => {
         this.documentTypes.push({label: 'Seleccione', value: null});
-        documentTypes.map((s: any) => {
-          this.documentTypes.push({label: s.nombreListaTipoDocumento, value: s.idListaTipoDocumento});
-        });
-      }
-    );
+        res.map((s: ListaItem) => this.documentTypes.push({label: s.nombre, value: s.idLista}));
+     });
 
      this.listaService.getMasterDetails('ListasParentescos').subscribe(res => {
         this.relationship.push({label: 'Seleccione', value: null});
