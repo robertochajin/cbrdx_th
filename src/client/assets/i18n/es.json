@@ -218,7 +218,7 @@
   "FIN_SEGURIDAD":"=================================================================",
 
    "WIDGETS":{
-   "MSG_CODIGOREQUERIDO":"Código requrido",
+   "MSG_CODIGOREQUERIDO":"Código requerido",
    "MSG_CODIGOREPETIDO":"Ya se encuentra registrado ese código",
    "MSG_NOMBREREQUERIDO":"Nombre  requerido",
    "MSG_URLREQUERIDA":"Url requerida",
@@ -242,7 +242,7 @@
    "LBL_OBLIGATORIO":"Obligatorio",
    "MSG_CODIGOREPETIDO":"Ya se encuentra registrado ese código",
    "MSG_NOMBREREQUERIDO":"Nombre  requerido",
-   "MSG_CODIGOREQUERIDO":"Código requrido",
+   "MSG_CODIGOREQUERIDO":"Código requerido",
    "MSG_CLASIFICACIONREQUERIDA":"Clasificación requerida"
    },
 
