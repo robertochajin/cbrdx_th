@@ -347,6 +347,10 @@ export class FormManagerUpdateComponent {
    goBackDetailField() {
       this.detailField=false;
    }
+   goBackSectionEdi(){
+      this.detailSection = false;
+      this.acordion=2;
+   }
    capitalize(event:any) {
       let input = event.target.value;
       if(input.substring(0,1)===" "){
