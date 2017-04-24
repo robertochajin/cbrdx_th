@@ -19,19 +19,7 @@ export class ListPositionsService {
    getCategoryTypes() {
       return this.http.get( this.serviceURL + "categorias/enabled", { headers: this.headers } ).map( ( res: Response ) => res.json() );
    }
-   
-   getstateTypes() {
-      return this.http.get( this.serviceURL + "listasEstadosCargos/", { headers: this.headers } ).map( ( res: Response ) => res.json() );
-   }
-   
-   getstateByCode(val:string) {
-      return this.http.get( this.serviceURL + "listasEstadosCargos/codigo/"+val, { headers: this.headers } ).map( ( res: Response ) => res.json() );
-   }
-   
-   getLevelTypes() {
-      return this.http.get( this.serviceURL + "listasNivelesCargos/enabled/", { headers: this.headers } ).map( ( res: Response ) => res.json() );
-   }
-   
+
    handleError( error: any ): Promise<any> {
       console.error( 'Error:', error );
       return Promise.reject( error.message || error );

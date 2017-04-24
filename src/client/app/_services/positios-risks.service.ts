@@ -15,10 +15,6 @@ export class RiskService {
     return this.http.get(this.serviceURL + 'riesgosTipos').map((res: Response) => res.json());
   }
 
-  getListExam() {
-    return this.http.get(this.serviceURL + 'listasExamenes/enabled').map((res: Response) => res.json());
-  }
-
   getExamByIdCargo(id:number ) {
     return this.http.get(this.serviceURL + 'cargosExamenes/buscarCargo/'+id).map((res: Response) => res.json() as Exam[]);
   }

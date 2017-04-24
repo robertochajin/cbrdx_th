@@ -3,6 +3,7 @@ import {JobProjection} from '../_models/jobProjection';
 import {JobProjectionService} from '../_services/jobProjection.service';
 import {Router} from '@angular/router';
 import {ConfirmationService, Message, SelectItem} from 'primeng/primeng';
+import {ListaService} from "../_services/lista.service";
 
 @Component({
    moduleId: module.id,
@@ -45,6 +46,7 @@ export class JobProjectionComponent {
    minanio: number;
 
    constructor(private jobProjectionService: JobProjectionService,
+               private listaService: ListaService,
                private router: Router,
                private confirmationService: ConfirmationService) {
    }
@@ -319,7 +321,8 @@ export class JobProjectionComponent {
          this.jobProjectionService.getPositionsById(rest.idCargo).subscribe(res => {
             rest.cargo = res.cargo;
          });
-         this.jobProjectionService.getEstadoById(rest.idEstadoProyeccion).subscribe(res => {
+         this.listaService.getMasterDetailsByIdItem('ListasEstadosProyecciones',rest.idEstadoProyeccion)
+            .subscribe(res => {
             rest.estadoProyeccion = res.nombre;
          });
          this.ListJobProjection.push(rest);

@@ -25,6 +25,7 @@ import {ClinicalInformationModule} from "../employees-clinical-information/clini
 import {EmployeesContactModule} from "../employees-contact/employees-contact.module";
 import {EmployeesEstateModule} from "../employees-estate/employee-estate.module";
 import {EmployeesVehicleModule} from "../employees-vehicle/employee-vehicles.module";
+import {ListaService} from "../_services/lista.service";
 
 
 @NgModule({
@@ -44,7 +45,7 @@ import {EmployeesVehicleModule} from "../employees-vehicle/employee-vehicles.mod
 
   declarations: [EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent,EmployeesAdditionalDataComponent],
   bootstrap: [EmployeesComponent],
-  providers: [EmployeesService,ListEmployeesService, PoliticalDivisionService, NavService],
+  providers: [EmployeesService,ListEmployeesService, PoliticalDivisionService, NavService, ListaService],
   exports: [EmployeesComponent]
 })
 export class EmployeesModule {

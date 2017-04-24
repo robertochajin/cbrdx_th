@@ -11,6 +11,8 @@ import {PoliticalDivisionService} from "../_services/political-division.service"
 import {DivisionPolitica}         from "../_models/divisionPolitica";
 import * as moment from 'moment/moment';
 import {NavService} from '../_services/_nav.service';
+import {ListaService} from "../_services/lista.service";
+import {ListaItem} from "../_models/listaItem";
 @Component({
   moduleId: module.id,
   selector: 'employees-vehicle',
@@ -34,6 +36,7 @@ export class EmployeesVehicleAddComponent {
   resultCity: DivisionPolitica[];
 
   constructor(private employeeVehicleService: EmployeeVehicleService,
+              private listaService: ListaService,
               private router: Router,
               private route: ActivatedRoute,
               private location: Location,
@@ -55,35 +58,27 @@ export class EmployeesVehicleAddComponent {
       this.employeeVehicle.idTercero = Number(+params['idTercero']);
     });
 
-    this.listEmployeesService.getlistTypeVehicle().subscribe(rest => {
-      this.listTypeVehicle.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listTypeVehicle.push({
-          label: dp.nombre,
-          value: dp.idListaTipoVehiculo
+     this.listaService.getMasterDetails('ListasTiposVehiculos').subscribe(res => {
+        this.listTypeVehicle.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listTypeVehicle.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
 
-    this.listEmployeesService.getlistTypeService().subscribe(rest => {
-      this.listTypeService.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listTypeService.push({
-          label: dp.nombre,
-          value: dp.idListaTipoServicioVehiculo
+     this.listaService.getMasterDetails('ListasTiposServiciosVehiculos').subscribe(res => {
+        this.listTypeService.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listTypeService.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
 
-    this.listEmployeesService.getlistBrand().subscribe(rest => {
-      this.listBrandVehicle.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listBrandVehicle.push({
-          label: dp.nombre,
-          value: dp.idListaMarcaVehiculo
+     this.listaService.getMasterDetails('ListasMarcasVehiculos').subscribe(res => {
+        this.listBrandVehicle.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listBrandVehicle.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
+
 
   }
 

@@ -4,9 +4,9 @@ import {SelectItem, ConfirmationService} from 'primeng/primeng';
 import {Positions} from "../_models/positions";
 import {PositionRoles} from "../_models/positionRoles";
 import {ProcessRoles} from "../_models/processRoles";
-import {ProcessRolesServices} from "../_services/processRoles.service";
 import {PositionRolesServices} from "../_services/position-roles.service";
 import { Message } from "primeng/components/common/api";
+import {ListaService} from "../_services/lista.service";
 
 @Component({
    moduleId: module.id,
@@ -27,18 +27,20 @@ export class PositionRolesComponent {
 
    constructor(private router: Router,
                private positionRolesServices: PositionRolesServices,
-               private processRolesServices: ProcessRolesServices,
+               private listaService: ListaService,
                private confirmationService: ConfirmationService) {
    }
 
    ngOnInit() {
-      this.processRolesServices.getAllEnabled().subscribe(processRoles => {
-         this.processRoles = processRoles;
+      this.listaService.getMasterDetails('ListasRolesProceso').subscribe(processRoles => {
+         processRoles.map(li => {
+            this.processRoles.push(new ProcessRoles(li.idLista,li.codigo,li.nombre,li.orden));
+         });
          this.positionRolesServices.getAllByPosition(this.position.idCargo).subscribe(prs => {
             this.positionRoles = prs;
             this.processRoles.map((r: ProcessRoles) => {
                this.positionRoles.map((pr: PositionRoles) => {
-                  if (pr.idRolProceso == r.idListaRolProceso) {
+                  if (pr.idRolProceso == r.idLista) {
                      r.asignadoAlCargo = true;
                   }
                });
@@ -49,7 +51,7 @@ export class PositionRolesComponent {
 
    updateProcessRol(rol: ProcessRoles){
       this.msgsAlert = [];
-      let objUpdate  = this.positionRoles.find(s => rol.idListaRolProceso == s.idRolProceso);
+      let objUpdate  = this.positionRoles.find(s => rol.idLista == s.idRolProceso);
       if(objUpdate !== undefined){
          //Update the existing one
          objUpdate.indicadorHabilitado = rol.asignadoAlCargo;
@@ -69,7 +71,7 @@ export class PositionRolesComponent {
       } else {
          //Add new record to PotitionRoles
          let objAdd: PositionRoles = new PositionRoles();
-         objAdd.idRolProceso = rol.idListaRolProceso;
+         objAdd.idRolProceso = rol.idLista;
          objAdd.idCargo = this.position.idCargo;
          this.positionRolesServices.add(objAdd).subscribe(data => {
             this.positionRoles.push(data);
