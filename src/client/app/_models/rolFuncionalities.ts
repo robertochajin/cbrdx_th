@@ -3,7 +3,9 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class RolFuncionalities {
    public idRolFuncionalidad: number;
+   public idFuncionalidad: number;
    public idRol: number;
+   public rol: string;
    public idMenu: number;
    public menu: string;
    public indicadorHabilitado: boolean;

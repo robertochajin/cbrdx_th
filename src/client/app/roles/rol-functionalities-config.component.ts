@@ -1,59 +1,82 @@
 import { Component,OnInit,Input} from '@angular/core';
-import { Router,ActivatedRoute, Params} from '@angular/router';
+import { ActivatedRoute, Router, Params } from "@angular/router";
 import { Rol } from '../_models/rol';
 import { RolFuncionalities } from '../_models/rolFuncionalities';
 import {  RolFuncionalitiesServices } from '../_services/rolFuncionalities.service';
-import { MenuManager } from "../_models/menuManager";
-import { MenuManagerService } from "../_services/menuManager.service";
+import { RolFunctionalityControl } from "../_models/rolFunctionalityControl";
+import { FunctionalityControl } from "../_models/functionalityContorl";
+import { FormManagerService } from "../_services/form-manager.service";
 import { SelectItem, Message, ConfirmationService} from 'primeng/primeng';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'rol-functionalities.component.html',
+    templateUrl: 'rol-functionalities-config.component.html',
     selector: 'rol-fucionalities-config',
     providers:  [ConfirmationService]
 })
 export class RolFuncionalitiesConfigComponent{
-    
-    rol:Rol;
-    funcionality: RolFuncionalities = new RolFuncionalities();
-    lfuncionality: RolFuncionalities = new RolFuncionalities();
-    dialogObjet: RolFuncionalities = new RolFuncionalities();
-    funcionalities: RolFuncionalities[];
+   
+    rolFuncionality: RolFuncionalities;
+    listaFuncionalityControl: RolFunctionalityControl[];
+    funcionalityControl: RolFunctionalityControl = new RolFunctionalityControl();
+    lfuncionalityControl: RolFunctionalityControl = new RolFunctionalityControl();
     show_form: boolean = false;
     msgs: Message[] = [];
-    menus: SelectItem[] = [];
-    listMenus: MenuManager[] = [];
+    fControles: RolFunctionalityControl;
+    secciones: RolFunctionalityControl[] = [];
+    controles: RolFunctionalityControl[] = [];
     
     constructor(private rolFuncionalitiesService: RolFuncionalitiesServices,
                 private router: Router,
                 private route: ActivatedRoute,
                 private confirmationService: ConfirmationService,
-                private menuManagerService: MenuManagerService,
+                private formManagerService: FormManagerService,
     ) {
-      this.menuManagerService.getAllEnabled().subscribe(
-         menus => {
-            this.listMenus = menus;
-          this.menus.unshift({label: 'Seleccione', value: null});
-            menus.map((s: any) => {
-               this.menus.push({label: s.menu, value: s.idMenu});
+       this.route.params.subscribe( ( params: Params ) => {
+          this.rolFuncionalitiesService.get( +params[ 'id' ] ).subscribe( rolFuncionality => {
+             this.rolFuncionality = rolFuncionality;
           });
-        }
-      );
+          this.rolFuncionalitiesService.getControlByFuncionality( +params[ 'id' ] ).subscribe( listaFuncionalityControl => {
+             this.listaFuncionalityControl = listaFuncionalityControl;
+      
+          });
+       });
     }
 
     ngOnInit() {
-
-        this.rolFuncionalitiesService.getAllByRol(this.rol.idRol).subscribe(
-           funcionalities => this.funcionalities = funcionalities
-        );
-        
+       this.formManagerService.getFuncionalidadesControlesEnabled().subscribe(
+          fControles => {
+             fControles.map((s: any) => {
+                this.fControles = new RolFunctionalityControl();
+                if(this.listaFuncionalityControl.find(d => d.idFuncionalidadControl = s.idFuncionalidadControl)){
+                   this.fControles = this.listaFuncionalityControl.find(d => d.idFuncionalidadControl = s.idFuncionalidadControl)
+                }else {
+                   this.fControles.idFuncionalidadControl = s.idFuncionalidadControl;
+                   this.fControles.idRol = this.rolFuncionality.idRol;
+                   this.fControles.rol = this.rolFuncionality.rol;
+                   this.fControles.control = s.control;
+                   this.fControles.indicadorHabilitado = false;
+                   this.fControles.indicadorEditar = false;
+                   this.fControles.indicadorSeccion = false;
+                }
+                if(s.indicadorSeccion == true ){
+                   this.secciones.push(this.fControles);
+                }else{
+                   this.controles.push(this.fControles);
+                }
+             });
+          }
+       );
+       this.route.params.subscribe( ( params: Params ) => {
+         
+       });
+       
     }
     
     onSubmit() {
         this.msgs = [];
         this.show_form  = false;
-        this.funcionality.idRol = this.rol.idRol;
+        /*this.funcionality.idRol = this.rol.idRol;
         if(this.funcionality.idRolFuncionalidad == null || this.funcionality.idRolFuncionalidad == 0) {
             this.rolFuncionalitiesService.add(this.funcionality)
             .subscribe(data => {
@@ -77,25 +100,12 @@ export class RolFuncionalitiesConfigComponent{
               this.show_form  = true;
               this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
             });
-        }
+        }*/
       
     }
    
-    add(){
-      this.msgs = [];
-      this.rol = new Rol();
-      this.show_form  = true;
-    }
-    
-    update(f: Rol) {
-      this.msgs = [];
-      this.rol = f;
-      this.show_form  = true;
-    }
-    
-    goBackUpdate(){
-      this.msgs = [];
-      this.show_form  = false;
-    }
+   changeControl(fc:RolFunctionalityControl){
+       
+   }
     
 }

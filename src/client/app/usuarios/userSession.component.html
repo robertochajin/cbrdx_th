@@ -58,6 +58,11 @@
                            <i class="fa fa-close"></i>
                            Contraseña nueva es requerido
                         </div>
+                        <div class="ui-message ui-messages-error ui-corner-all"
+                             *ngIf="f.submitted && newPass == oldPass">
+                           <i class="fa fa-close"></i>
+                           Contraseña nueva debe ser diferente de la Actual
+                        </div>
                      </div>
                   </div>
                   <div class="row">
@@ -69,6 +74,11 @@
                              *ngIf="f.submitted && !pass_nueva2.valid">
                            <i class="fa fa-close"></i>
                            Contraseña nueva es requerido
+                        </div>
+                        <div class="ui-message ui-messages-error ui-corner-all"
+                             *ngIf="f.submitted && newPassConfirm != newPass && newPass != null && newPass != ''">
+                           <i class="fa fa-close"></i>
+                           Debe coincidir con la Contraseña nueva
                         </div>
                      </div>
                   </div>

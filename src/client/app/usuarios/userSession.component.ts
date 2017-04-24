@@ -24,6 +24,9 @@ export class UserSessionComponent implements OnInit {
    user: Usuario = new Usuario();
    acordion: number;
    msgs: Message[] = [];
+   oldPass : string = "";
+   newPass : string = "";
+   newPassConfirm : string = "";
    
    constructor( private employeeService: EmployeesService,
                 private usuariosService: UsuariosService,
@@ -34,17 +37,37 @@ export class UserSessionComponent implements OnInit {
    }
    
    ngOnInit(): void {
-      let idColaborador = 129;
-      this.employeeService.get( idColaborador ).subscribe( employee => {
-         this.employee = employee;
-         this.employee.nombreCompleto = this.employee.primerNombre + ' ' +
-            this.employee.segundoNombre + ' ' +
-            this.employee.primerApellido + ' ' +
-            this.employee.segundoApellido;
-      } );
-      this.usuariosService.viewUser( idColaborador ).subscribe(data => {
+      let idUsuario = 4;
+      this.usuariosService.viewUser( idUsuario ).subscribe(data => {
          this.user = data;
+         this.employeeService.get( this.user.idTercero ).subscribe( employee => {
+            this.employee = employee;
+            this.employee.nombreCompleto = this.employee.primerNombre + ' ' +
+               this.employee.segundoNombre + ' ' +
+               this.employee.primerApellido + ' ' +
+               this.employee.segundoApellido;
+         } );
       });
+      
+      
+   }
+   onSubmit() {
+      if(this.oldPass != this.newPass && this.newPass == this.newPassConfirm) {
+         this.user.contrasenaAntigua = this.oldPass;
+         this.user.contrasena = this.newPass;
+         this.usuariosService.updatePass( this.user ).then( res => {
+            if ( res ) {
+               this.msgs[ 0 ] = { severity: 'info', summary: 'Exito', detail: 'Contraseña actualizada correctamente.' };
+            } else {
+               this.msgs[ 0 ] = {
+                  severity: 'error', summary: 'Error al actualizar',
+                  detail: 'Contraseña actual no es correcta.'
+               };
+            }
+         }, error => {
+            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         } );
+      }
    }
    
    goBack(): void {

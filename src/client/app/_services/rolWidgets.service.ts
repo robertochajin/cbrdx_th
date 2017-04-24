@@ -8,7 +8,7 @@ import { RolWidgets } from "../_models/rolWidgets";
 export class RolWidgetsServices {
 
   headers = new Headers({'Content-Type': 'application/json'});
-  private serviceURL = '<%= SVC_TH_URL %>/api/RolFuncionalidades/';
+  private serviceURL = '<%= SVC_TH_URL %>/api/rolesWidgets/';
 
   constructor(private http: Http,
               private authenticationService: AuthenticationService) {

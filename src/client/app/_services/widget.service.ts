@@ -19,7 +19,7 @@ export class WidgetServices {
    }
 
    getAllEnabled(): Observable<Widgets[]> {
-       return this.http.get(this.masterService + 'enabled/').map((res: Response) => res.json() as Widgets[]);
+       return this.http.get(this.masterService + '/enabled/').map((res: Response) => res.json() as Widgets[]);
    }
 
    add(f: Widgets) {

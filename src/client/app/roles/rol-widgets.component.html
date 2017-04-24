@@ -2,18 +2,18 @@
 <div *ngIf="show_form">
    <div class="row-fluid">
       <div class="col-md-12">
-         <form name="func" (ngSubmit)="ff.valid && onSubmit()" #ff="ngForm" novalidate>
+         <form name="func" (ngSubmit)="rw.valid && onSubmit()" #rw="ngForm" novalidate>
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                <div class="row">
                   <div class="form-group col-md-1">
                   </div>
                   <div class="ui-grid-col-10">
                      <label for="idWidget">Widget</label>
-                     <p-dropdown id="idWidget" name="idWidget" #idWidget="ngModel" [options]="relationship"
+                     <p-dropdown id="idWidget" name="idWidget" #idWidget="ngModel" [options]="widgets"
                                  [autoWidth]="false"
-                                 [(ngModel)]="widgets.idWidget" required></p-dropdown>
+                                 [(ngModel)]="rolWidget.idWidget" required></p-dropdown>
                      <div class="ui-message ui-messages-error ui-corner-all"
-                          *ngIf="fe.submitted && !idWidget.valid">
+                          *ngIf="rw.submitted && !idWidget.valid">
                         <i class="fa fa-close"></i>
                         Widget es requerido
                      </div>
@@ -23,13 +23,13 @@
                   <div class="form-group col-md-3">
                      <label for="indicadorHabilitado">Habilitado</label>
                         <p-checkbox binary="true" id="indicadorHabilitado" name="indicadorHabilitado"
-                                    [(ngModel)]="rol.indicadorHabilitado"
+                                    [(ngModel)]="rolWidget.indicadorHabilitado"
                         ></p-checkbox>
                   </div>
                   <div class="form-group col-md-3">
                      <label for="indicadorObligatorio">Insertar</label>
                         <p-checkbox binary="true" id="indicadorObligatorio" name="indicadorObligatorio"
-                                    [(ngModel)]="rol.indicadorObligatorio"
+                                    [(ngModel)]="rolWidget.indicadorObligatorio"
                         ></p-checkbox>
                   </div>
                </div>

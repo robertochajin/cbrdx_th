@@ -659,9 +659,6 @@ li.inhabilitado{
    background-color: #ccc!important;
 }
 
-body .ui-widget-content{
-   background-color:  transparent;
-}
 body .ui-tabview.ui-tabview-top .ui-tabview-nav, body .ui-tabview.ui-tabview-bottom .ui-tabview-nav, body .ui-tabview.ui-tabview-left .ui-tabview-nav, body .ui-tabview.ui-tabview-right .ui-tabview-nav{
    background: transparent;
 }

@@ -2,20 +2,20 @@
 <div *ngIf="show_form">
    <div class="row-fluid">
       <div class="col-md-12">
-         <form name="func" (ngSubmit)="ff.valid && onSubmit()" #ff="ngForm" novalidate>
+         <form name="func" (ngSubmit)="rf.valid && onSubmit()" #rf="ngForm" novalidate>
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                <div class="row">
                   <div class="form-group col-md-1">
                   </div>
                   <div class="ui-grid-col-10">
-                     <label for="idMenu">Funcionalidades</label>
-                     <p-dropdown id="idMenu" name="idParentezco" #idParentezco="ngModel" [options]="relationship"
+                     <label for="idFuncionalidad">Funcionalidades</label>
+                     <p-dropdown id="idFuncionalidad" name="idFuncionalidad" #idFuncionalidad="ngModel" [options]="menus"
                                  [autoWidth]="false"
-                                 [(ngModel)]="functionality.idMenu" required></p-dropdown>
+                                 [(ngModel)]="rolFuncionality.idFuncionalidad" required></p-dropdown>
                      <div class="ui-message ui-messages-error ui-corner-all"
-                          *ngIf="fe.submitted && !idParentezco.valid">
+                          *ngIf="rf.submitted && !idFuncionalidad.valid">
                         <i class="fa fa-close"></i>
-                        Parentezco es requerido
+                        Funcionalidades es requerido
                      </div>
                   </div>
                </div>
@@ -23,25 +23,25 @@
                   <div class="form-group col-md-3">
                      <label for="indicadorHabilitado">Habilitado</label>
                         <p-checkbox binary="true" id="indicadorHabilitado" name="indicadorHabilitado"
-                                    [(ngModel)]="rol.indicadorHabilitado"
+                                    [(ngModel)]="rolFuncionality.indicadorHabilitado"
                         ></p-checkbox>
                   </div>
                   <div class="form-group col-md-3">
                      <label for="indicadorImprimir">Imprimir</label>
                         <p-checkbox binary="true" id="indicadorImprimir" name="indicadorImprimir"
-                                    [(ngModel)]="rol.indicadorImprimir"
+                                    [(ngModel)]="rolFuncionality.indicadorImprimir"
                         ></p-checkbox>
                   </div>
                   <div class="form-group col-md-3">
                      <label for="indicadorExportar">Exportar</label>
                         <p-checkbox binary="true" id="indicadorExportar" name="indicadorExportar"
-                                    [(ngModel)]="rol.indicadorExportar"
+                                    [(ngModel)]="rolFuncionality.indicadorExportar"
                         ></p-checkbox>
                   </div>
                   <div class="form-group col-md-3">
                      <label for="indicadorInsertar">Insertar</label>
                         <p-checkbox binary="true" id="indicadorInsertar" name="indicadorInsertar"
-                                    [(ngModel)]="rol.indicadorInsertar"
+                                    [(ngModel)]="rolFuncionality.indicadorInsertar"
                         ></p-checkbox>
                   </div>
                </div>
@@ -69,19 +69,22 @@
          </div>
       </div>
    </div>
-   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="contacts" [paginator]="true"
+   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="funcionalities" [paginator]="true"
                 [rows]="10" [responsive]="true" [globalFilter]="gb">
-      <p-column field="contacto" header="Nombre Contacto" [sortable]="true"></p-column>
-      <p-column field="nombreListaParentesco" header="Parentesco" [sortable]="true"></p-column>
-      <p-column field="telefono" header="Teléfono" [sortable]="true"></p-column>
-      <p-column field="celular" header="Celular" [sortable]="true"></p-column>
-      <p-column header="Acciones" styleClass="datatable-col-action">
-         <template let-lcontact="rowData" pTemplate="body">
+      <p-column field="menu" header="Menú" [sortable]="true"></p-column>
+      <p-column field="indicadorHabilitado" header="Estado" [sortable]="true" styleClass="datatable-col-center">
+         <template let-lfuncionality="rowData" pTemplate="body">
+            <p-checkbox [(ngModel)]="lfuncionality.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
+         </template>
+      </p-column>
+    
+      <p-column header="Configuración" styleClass="datatable-col-action">
+         <template let-lfuncionality="rowData" pTemplate="body">
             <div class="btn-group" role="group">
                <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil"
-                       pButton (click)="update(lcontact)"></button>
-               <button type="button" class="ui-button ui-button-danger btn" icon="fa-trash"
-                       pButton (click)="delete(lcontact)"></button>
+                       pButton (click)="update(lfuncionality)"></button>
+               <button type="button" class="ui-button ui-button-success btn" icon="fa-cog"
+                       pButton (click)="config(lfuncionality)"></button>
             </div>
          </template>
       </p-column>
