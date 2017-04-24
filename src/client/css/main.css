@@ -217,9 +217,9 @@ a{
 }
 
 .user-avatar{
-   -webkit-box-shadow: 0 8px 6px -6px #ccc;
-   -moz-box-shadow: 0 8px 6px -6px #ccc;
-   box-shadow: 0 8px 6px -6px #ccc;
+   -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+           box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 /**
 ------------------------ General CSS ------------------------------------
