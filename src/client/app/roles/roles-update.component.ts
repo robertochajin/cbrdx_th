@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { Location } from "@angular/common";
 import { Rol } from "../_models/rol";
 import { RolesService } from "../_services/roles.service";
-import { Router } from "@angular/router";
+import { Router,ActivatedRoute, Params } from "@angular/router";
 import { VRolMenuElemento } from "../_models/vRolMenuElemento";
 import { MenuElementoService } from "../_services/menuElemento.service";
 import { MenuElemento } from "../_models/menuElemento";
@@ -15,7 +15,7 @@ import * as moment from "moment/moment";
                selector: 'roles-form.component',
                providers: [ ConfirmationService ]
             } )
-export class RolesAddComponent {
+export class RolesUpdateComponent {
    
    rol: Rol = new Rol();
    roles: Rol[];
@@ -35,6 +35,7 @@ export class RolesAddComponent {
    
    constructor( private rolesService: RolesService,
                 private router: Router,
+                private route: ActivatedRoute,
                 private menuElementoService: MenuElementoService,
                 private location: Location,
                 private confirmationService: ConfirmationService ) {
@@ -45,6 +46,21 @@ export class RolesAddComponent {
    
    ngOnInit() {
       
+      this.route.params
+      .switchMap( ( params: Params ) => this.rolesService.viewRole( +params[ 'id' ] ) )
+      .subscribe( rol => {
+         this.rol = rol;
+         if ( this.rol.fechaInicio != null ) {
+            let momInicio: moment.Moment = moment( this.rol.fechaInicio, 'YYYY-MM-DD');
+            this.fechaInicio = momInicio.format(  'MM/DD/YYYY'  );
+         }
+         if ( this.rol.fechaFin != null ) {
+            let momFin: moment.Moment = moment( this.rol.fechaFin, 'YYYY-MM-DD'  );
+            this.fechaFin = momFin.format( 'MM/DD/YYYY' );
+         }
+
+      } );
+
       this.es = {
          firstDayOfWeek: 1,
          dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
