@@ -15,7 +15,7 @@ export class EvaluationCriteriasServices {
   }
 
   getAllEnabled()  {
-    return this.http.get(this.masterService+'enabled/').map((res:Response) => res.json() as EvaluationCriterias[]);
+    return this.http.get(this.masterService+'enabled/' ,{headers: this.headers}).map((res:Response) => res.json() as EvaluationCriterias[]);
   }
 
 }
