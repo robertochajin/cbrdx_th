@@ -44,13 +44,6 @@ export class FormManagerService {
       return this.http.get(this.serviceURL + 'menus/idPadreDifCero').map((res: Response) => res.json());
    }
 
-   getClassificationSeccion() {
-      return this.http.get(this.serviceURL + 'listasClasificaciones/sec').map((res: Response) => res.json());
-   }
-
-   getClassificationCampo() {
-      return this.http.get(this.serviceURL + 'listasClasificaciones/cam').map((res: Response) => res.json());
-   }
    getSectionByIdFuncionalidad(id: number) {
       return this.http.get(this.serviceURL + 'funcionalidadesControles/secycam/'+id+'/true').map((res: Response) => res.json());
    }
