@@ -98,15 +98,12 @@ export class LocationUpdateComponent implements OnInit {
 
     });
 
-    this.listEmployeesService.getlistTypeEstate().subscribe(rest => {
-      this.listTypeEstate.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listTypeEstate.push({
-          label: dp.nombre,
-          value: dp.idListaTipoVivienda
+     this.listaService.getMasterDetails('ListasTiposViviendas').subscribe(res => {
+        this.listTypeEstate.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listTypeEstate.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
 
      this.listaService.getMasterDetails('ListasClasesViviendas').subscribe(res => {
         this.listClassEstate.push({label: 'Seleccione', value: null});

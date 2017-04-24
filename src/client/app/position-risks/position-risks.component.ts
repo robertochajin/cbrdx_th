@@ -86,10 +86,11 @@ export class RiskComponent {
             this.listExam.push({label: s.nombre, value: s.idLista});
          });
       });
-      this.riskService.getListExam().subscribe(rest => {
-         for (let dp of rest) {
-            this.listExam.push({label: dp.idListaExamen, value: dp.nombre});
-         }
+      this.listaService.getMasterDetails('ListasExamenes').subscribe(res => {
+         this.listExam.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => {
+            this.listExam.push({label: s.nombre, value: s.idLista});
+         });
       });
       this.riskService.getExamByIdCargo(this.risk.idCargo).subscribe(
          exam => {

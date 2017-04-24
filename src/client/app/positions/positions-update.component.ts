@@ -10,6 +10,8 @@ import { ListPositionsService } from "../_services/lists-positions.service";
 import { TipoDeAreaService } from "../_services/tipoDeArea.service";
 import { ListEmployeesService } from "../_services/lists-employees.service";
 import { TreeNode } from "primeng/components/common/api";
+import {ListaItem} from "../_models/listaItem";
+import {ListaService} from "../_services/lista.service";
 
 @Component( {
                moduleId: module.id,
@@ -52,8 +54,9 @@ export class PositionsUpdateComponent {
                 private tipoDeAreaService: TipoDeAreaService,
                 private confirmationService: ConfirmationService,
                 private listEmployeesService: ListEmployeesService,
+                private listaService: ListaService,
                 private _nav: NavService, ) {
-      
+
       this.listPositionsService.getCategoryTypes().subscribe( res => {
          this.listcategoryTypes = res;
          this.categoryTypes.push( { label: "Seleccione", value: null } );
@@ -65,17 +68,12 @@ export class PositionsUpdateComponent {
          }
          
       } );
-      
-      this.listPositionsService.getLevelTypes().subscribe( resl => {
-         this.listslevelTypes = resl;
-         this.levelTypes.push( { label: "Seleccione", value: null } );
-         for ( let dp of resl ) {
-            this.levelTypes.push( {
-                                     label: dp.nombre,
-                                     value: dp.idListaNivelCargo
-                                  } );
-         }
-      } );
+      this.listaService.getMasterDetails('ListasNivelesCargos').subscribe(res => {
+         this.listslevelTypes.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => {
+            this.listslevelTypes.push({label: s.nombre, value: s.idLista});
+         });
+      });
       this.positionsService.getListStudies().subscribe( res => {
          this.listStudies.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
@@ -91,24 +89,27 @@ export class PositionsUpdateComponent {
                                  } );
          }
       } );
+
+      this.listaService.getMasterDetails('ListasEstadosCargos').subscribe(res => {
+         this.liststateTypes.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => {
+            this.liststateTypes.push({label: s.nombre, value: s.idLista});
+         });
       
-      this.listPositionsService.getstateTypes().subscribe( res => {
-         this.liststateTypes = res;
-         this.stateTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
             this.stateTypes.push( {
                                      label: dp.nombre,
-                                     value: dp.idListaEstadoCargo
+                                     value: dp.idLista
                                   } );
             switch ( dp.codigo ) {
                case "APROB":
-                  this.aprobado = dp.idListaEstadoCargo;
+                  this.aprobado = dp.idLista;
                   break;
                case "NOAPR":
-                  this.noAprobado = dp.idListaEstadoCargo;
+                  this.noAprobado = dp.idLista;
                   break;
                case "CONST":
-                  this.construccion = dp.idListaEstadoCargo;
+                  this.construccion = dp.idLista;
                   break;
             }
          }

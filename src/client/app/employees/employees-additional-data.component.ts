@@ -48,7 +48,7 @@ export class EmployeesAdditionalDataComponent {
            this.lateralityTypes.push({label: s.nombre, value: s.idLista});
         });
      });
-     this.listaService.getMasterDetailsByCode('ListasTallas','CAM').subscribe(rest => {
+     this.listaService.getMasterDetailsStartsByCode('ListasTallas','CAM').subscribe(rest => {
       this.listSizeShirt.push({label: "Seleccione", value: null});
       for (let dp of rest) {
         this.listSizeShirt.push({
@@ -57,7 +57,7 @@ export class EmployeesAdditionalDataComponent {
         });
       }
     });
-     this.listaService.getMasterDetailsByCode('ListasTallas','ZAPA').subscribe(rest => {
+     this.listaService.getMasterDetailsStartsByCode('ListasTallas','ZAPA').subscribe(rest => {
       this.listSizeFootwear.push({label: "Seleccione", value: null});
       for (let dp of rest) {
         this.listSizeFootwear.push({
@@ -73,7 +73,7 @@ export class EmployeesAdditionalDataComponent {
 
   ngOnInit() {
     let tipo = this.employee.genero == "Masculino" ? "PANH":"PANM"
-     this.listaService.getMasterDetailsByCode('ListasTallas',tipo).subscribe(rest => {
+     this.listaService.getMasterDetailsStartsByCode('ListasTallas',tipo).subscribe(rest => {
       this.listSizePants.push({label: "Seleccione", value: null});
       for (let dp of rest) {
         this.listSizePants.push({

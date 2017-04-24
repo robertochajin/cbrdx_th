@@ -77,14 +77,8 @@ export class UsuariosAddComponent implements OnInit {
                 private router: Router) {
         listasService.getMasterByCodigo("TIPDOC").subscribe(res => {
             this.datatypeMaster = res;
-            listasService.getMasterDetails(this.datatypeMaster.idLista).subscribe(res => {
+            listasService.getMasterDetails(this.datatypeMaster.nombreTabla).subscribe(res => {
                 this.datatypeDetails = res;
-                for (let dataType of this.datatypeDetails) {
-                    if (dataType.indicadorPredeterminado) {
-                        this.selectedTipo = dataType.idListaItem;
-                        break;
-                    }
-                }
             });
         });
         usuariosService.listUsers().subscribe(res => {

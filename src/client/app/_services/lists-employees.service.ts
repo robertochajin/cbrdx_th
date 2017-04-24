@@ -58,15 +58,11 @@ export class ListEmployeesService {
   getlistStratum()  {
     return this.http.get(this.serviceURL+"listasEstratos",{headers: this.headers}).map((res:Response) => res.json());
   }
-  getlistTypeConstruction()  {
-    return this.http.get(this.serviceURL+"listasTiposConstruccionViviendas",{headers: this.headers}).map((res:Response) => res.json());
-  }
-  getlistTypeEstate()  {
-    return this.http.get(this.serviceURL+"listasTiposViviendas",{headers: this.headers}).map((res:Response) => res.json());
-  }
+
   getlistLocation(c: number)  {
     return this.http.get(this.serviceURL+"/localizaciones/buscarTercero/"+c,{headers: this.headers}).map((res:Response) => res.json());
   }
+
   handleError(error: any): Promise<any> {
     console.error('Error:', error);
     return Promise.reject(error.message || error);
