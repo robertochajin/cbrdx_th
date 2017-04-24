@@ -7,7 +7,7 @@ import {ReferencesService} from './references.service';
 import 'rxjs/add/operator/switchMap';
 import {LocateService} from "../_services/locate.service";
 import {PoliticalDivisionService} from "../_services/political-division.service";
-import {ReferencesTypesService} from "../_services/references-type.service";
+import {ListaService} from "../_services/lista.service";
 
 @Component({
     moduleId: module.id,
@@ -21,7 +21,7 @@ export class ReferencesDetailComponent implements OnInit   {
     constructor(
         private referencesService: ReferencesService,
         private locateService: LocateService,
-        private referencesTypeService: ReferencesTypesService,
+        private listaService: ListaService,
         private politicalDivisionService: PoliticalDivisionService,
         private route: ActivatedRoute,
         private location: Location
@@ -41,8 +41,8 @@ export class ReferencesDetailComponent implements OnInit   {
                 });
               });
               this.reference.tipodeReferencia = {value: null, label: 'Cargando...'};
-              this.referencesTypeService.getById(this.reference.idTipoReferencia)
-                .subscribe(tipo => this.reference.tipodeReferencia.label = tipo.nombreListaTipoReferencia);
+              this.listaService.getMasterDetailsByIdItem('ListasTiposReferencias', this.reference.idTipoReferencia)
+                .subscribe(tipo => this.reference.tipodeReferencia.label = tipo.nombre);
             });
     }
 

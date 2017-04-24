@@ -60,26 +60,19 @@ export class EmployeesVehicleUpdateComponent {
     let year = today.getFullYear();
     this.year = year;
 
-
-    this.listEmployeesService.getlistTypeVehicle().subscribe(rest => {
-      this.listTypeVehicle.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listTypeVehicle.push({
-          label: dp.nombre,
-          value: dp.idListaTipoVehiculo
+     this.listaService.getMasterDetails('ListasTiposVehiculos').subscribe(res => {
+        this.listTypeVehicle.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listTypeVehicle.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
 
-    this.listEmployeesService.getlistTypeService().subscribe(rest => {
-      this.listTypeService.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listTypeService.push({
-          label: dp.nombre,
-          value: dp.idListaTipoServicioVehiculo
+     this.listaService.getMasterDetails('ListasTiposServiciosVehiculos').subscribe(res => {
+        this.listTypeService.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listTypeService.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
 
      this.listaService.getMasterDetails('ListasMarcasVehiculos').subscribe(res => {
         this.listBrandVehicle.push({label: 'Seleccione', value: null});

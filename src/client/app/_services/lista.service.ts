@@ -44,7 +44,7 @@ export class ListaService {
   }
 
   getMasterDetailsByCode(tableName: string, code:string) {
-    return this.http.get(this.masterService + 'tabla/' + tableName + '/code/' + code + '/', {headers: this.headers}).map((res: Response) => res.json() as ListaItem[]);
+    return this.http.get(this.masterService + 'tabla/' + tableName + '/code/' + code + '/', {headers: this.headers}).map((res: Response) => res.json() as ListaItem);
   }
 
   getMasterDetailsByWildCard(tableName: string, query:string) {

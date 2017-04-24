@@ -72,12 +72,6 @@ export class ListEmployeesService {
     return Promise.reject(error.message || error);
   }
 
-  getlistTypeVehicle()  {
-    return this.http.get(this.serviceURL+"listasTiposVehiculos",{headers: this.headers}).map((res:Response) => res.json());
-  }
-  getlistTypeService()  {
-    return this.http.get(this.serviceURL+"listasTiposServiciosVehiculos",{headers: this.headers}).map((res:Response) => res.json());
-  }
 
 }
 
