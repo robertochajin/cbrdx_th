@@ -33,6 +33,9 @@ import {ProductivityModule} from "./position-productivity/productivity.module";
 
 //proyección laboral
 import {JobProjectionModule} from "./job-projection/job-projection.module";
+
+// administrador de formularios
+import {FormManagerModule} from "./form-manager/form-manager.module";
 //Estructura física
 import {PhysicStructureModule} from "./physic-structure/physic-structure.module";
 
@@ -93,6 +96,7 @@ import { MenuManagerModule } from "./menuManager/menuManager.module";
       OrganizationalStructurePositionsModule,
       CompetenciesGroupsModule,
       WidgetModule,
+      FormManagerModule,
       SharedModule.forRoot(),
       TranslateModule.forRoot({
          provide: TranslateLoader,
