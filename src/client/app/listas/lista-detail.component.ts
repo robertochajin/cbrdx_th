@@ -28,7 +28,7 @@ export class ListaDetailComponent implements OnInit {
             .subscribe(data => {
                 this.masterList = data;
               this.habilitado = data.indicadorEditable ? "Si" : "No";
-                this.listasService.getMasterDetails(this.masterList.nombreTabla).subscribe(res => {
+                this.listasService.getMasterAllDetails(this.masterList.nombreTabla).subscribe(res => {
                     this.detailsList = res;
                 });
             });
