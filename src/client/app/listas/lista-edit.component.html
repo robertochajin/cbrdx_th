@@ -45,7 +45,7 @@
     </form>
 </p-fieldset>
 <p-fieldset legend="Elementos de la Lista">
-    <form *ngIf="!isEdit" name="form" (ngSubmit)="!detailCodeExists&&fd.form.valid && createDetail(fd)" #fd="ngForm"
+    <form *ngIf="!isEdit && masterList.indicadorEditable" name="form" (ngSubmit)="!detailCodeExists&&fd.form.valid && createDetail(fd)" #fd="ngForm"
           novalidate
           (keydown.enter)="$event.preventDefault()">
         <div class="row">
@@ -97,7 +97,7 @@
             </div>
         </div>
     </form>
-    <form *ngIf="isEdit" name="formEdit" (ngSubmit)="!detailCodeExists&&fe.form.valid && updateDetail(fe)" #fe="ngForm"
+    <form *ngIf="isEdit && masterList.indicadorEditable" name="formEdit" (ngSubmit)="!detailCodeExists&&fe.form.valid && updateDetail(fe)" #fe="ngForm"
           novalidate (keydown.enter)="$event.preventDefault()">
         <div class="row">
             <div class="col-xs-6">
@@ -158,7 +158,7 @@
                 <p-checkbox [(ngModel)]="const.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
             </template>
         </p-column>
-        <p-column header="Acciones">
+        <p-column header="Acciones" *ngIf="masterList.indicadorEditable">
             <template let-const="rowData" pTemplate="body">
                 <div class="btn-group" role="group">
                     <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" pButton
