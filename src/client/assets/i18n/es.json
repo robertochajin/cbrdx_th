@@ -37,7 +37,7 @@
   "LBL_EPS":"Eps",
   "LBL_TELEFONO":"Teléfono",
   "LBL_PERTENECE":"Pertenece",
-   "LBL_VERMAS" : "Ver más"
+   "LBL_VERMAS" : "Ver más",
 
   "MSG_CONFIRMACION":"Si continúa perderá la información no guardada. ¿Está seguro que desea salir?",
   "MSG_GUARDADO":"Guardado",
