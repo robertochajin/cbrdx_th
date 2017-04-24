@@ -6,6 +6,8 @@ import {PhysicStructure} from '../_models/physic-structure';
 import {PhysicStructureService} from '../_services/physic-structure.service';
 import {Localizaciones} from "../_models/localizaciones";
 import { LocateService } from '../_services/locate.service';
+import {ListaItem} from "../_models/listaItem";
+import {ListaService} from "../_services/lista.service";
 
 @Component({
    moduleId: module.id,
@@ -27,6 +29,7 @@ export class PhysicStructureUpdateComponent {
 
    constructor(
       private physicStructureService: PhysicStructureService,
+      private listaService: ListaService,
       private locateService: LocateService,
       private router: Router,
       private route: ActivatedRoute,
@@ -40,15 +43,13 @@ export class PhysicStructureUpdateComponent {
          this.ListPhysicStructure = res;
       });
 
-      this.physicStructureService.getListSedes().subscribe(rest => {
-         this.ListCategory.push({label: "Seleccione", value: null});
-         for (let dp of rest) {
-            this.ListCategory.push({
-               label: dp.nombre,
-               value: dp.idListaClasificacionSede
-            });
-         }
+      this.listaService.getMasterDetails('ListasClasificaciones').subscribe(res => {
+         this.ListCategory.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => {
+            this.ListCategory.push({label: s.nombre, value: s.idLista});
+         });
       });
+
       this.route.params.switchMap((params: Params) => this.physicStructureService.getById(+params['id']))
          .subscribe(data => {
             this.physicStructure = data;

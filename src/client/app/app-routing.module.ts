@@ -69,7 +69,6 @@ import {ConstanteDetailComponent} from "./constantes/constante-detail.component"
 
 // Listas
 import {ListaComponent} from "./listas/lista.component";
-import {ListaAddComponent} from "./listas/lista-add.component";
 import {ListaDetailComponent} from "./listas/lista-detail.component";
 import {ListaEditComponent} from "./listas/lista-edit.component";
 
@@ -243,7 +242,6 @@ const routes = [
 
   // Listas
   {path: 'listas', component: ListaComponent, canActivate: [AuthGuard]},
-  {path: 'listas/add', component: ListaAddComponent, canActivate: [AuthGuard]},
   {path: 'listas/detail/:id', component: ListaDetailComponent, canActivate: [AuthGuard]},
   {path: 'listas/edit/:id', component: ListaEditComponent, canActivate: [AuthGuard]},
 

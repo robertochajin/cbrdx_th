@@ -1,10 +1,10 @@
 export class Lista {
-    idLista: number;
-    codigoLista: string;
-    lista: string;
-    dependeLista: number;
-    dependeItem: number;
-    indicadorHabilitado: boolean=true;
-    auditoriaUsuario: number;
-    auditoriaFecha: Date;
+    
+   public idLista : number;
+   public nombreTabla : string;
+   public lista : string;
+   public indicadorEditable : boolean;
+   public auditoriaUsuario : number;
+   public auditoriaFecha : Date;
+   public descripcion : string;
 }

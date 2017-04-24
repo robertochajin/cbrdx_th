@@ -30,7 +30,9 @@ export class FormManagerService {
    updateSection(r: FunctionalityControl) {
       return this.http.put(this.serviceURL + 'funcionalidadesControles', r).catch(this.handleError);
    };
-
+   getAllFunctionalityControl(){
+      return this.http.get(this.serviceURL + 'funcionalidadesControles').map((res: Response) => res.json() as FunctionalityControl[]);
+   }
    getAllFunctionality() {
       return this.http.get(this.serviceURL + 'funcionalidades').map((res: Response) => res.json() as Functionality[]);
    }
@@ -39,7 +41,7 @@ export class FormManagerService {
    }
 
    getFunctionality() {
-      return this.http.get(this.serviceURL + 'menus').map((res: Response) => res.json());
+      return this.http.get(this.serviceURL + 'menus/idPadreDifCero').map((res: Response) => res.json());
    }
 
    getClassificationSeccion() {
@@ -49,14 +51,14 @@ export class FormManagerService {
    getClassificationCampo() {
       return this.http.get(this.serviceURL + 'listasClasificaciones/cam').map((res: Response) => res.json());
    }
-   getSectionByIdFuncionalidad(n: number) {
-      return this.http.get(this.serviceURL + 'funcionalidadesControles/secycam/'+n+'/true').map((res: Response) => res.json());
+   getSectionByIdFuncionalidad(id: number) {
+      return this.http.get(this.serviceURL + 'funcionalidadesControles/secycam/'+id+'/true').map((res: Response) => res.json());
    }
-   getFieldByIdFuncionalidad(n: number) {
-      return this.http.get(this.serviceURL + 'funcionalidadesControles/secycam/'+n+'/false').map((res: Response) => res.json());
+   getFieldByIdFuncionalidad(id: number) {
+      return this.http.get(this.serviceURL + 'funcionalidadesControles/secycam/'+id+'/false').map((res: Response) => res.json());
    }
-   getFieldByIdFather(n: number) {
-      return this.http.get(this.serviceURL + 'funcionalidadesControles/buscarPadre/'+n).map((res: Response) => res.json());
+   getFieldByIdFather(id: number) {
+      return this.http.get(this.serviceURL + 'funcionalidadesControles/buscarPadre/'+id).map((res: Response) => res.json());
    }
    handleError(error: any): Promise<any> {
       console.error('Error:', error);
@@ -69,24 +71,5 @@ export class FormManagerService {
    getFuncionalidadesControlesEnabled() {
       return this.http.get(this.serviceURL + 'funcionalidadesControles/enabled').map((res: Response) => res.json() as FunctionalityControl[]);
    }
-
-   //funcionalidadesControles/secycam/2/false
-   // getSubTypeRisks() {
-   //    return this.http.get(this.serviceURL + 'riesgosSubTipos').map((res: Response) => res.json());
-   // }
-   //
-   // getById(id: number) {
-   //    return this.http.get(this.serviceURL + 'riesgos/' + id).map((res: Response) => res.json() as Functionality);
-   // }
-   //
-   // getTypeRiskById(id: number) {
-   //    return this.http.get(this.serviceURL + 'riesgosTipos/' + id).map((res: Response) => res.json());
-   // }
-   //
-   // getSubTypeRiskById(id: number) {
-   //    return this.http.get(this.serviceURL + 'riesgosSubTipos/' + id).map((res: Response) => res.json());
-   // }
-
-
 
 }

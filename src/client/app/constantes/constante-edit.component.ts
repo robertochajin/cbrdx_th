@@ -28,7 +28,7 @@ export class ConstanteEditComponent implements OnInit {
             this.constanteService.listConstants().subscribe(res => {
                this.constantList = res;
             });
-            constanteService.getTiposConstantes().subscribe(res => {
+            listaService.getMasterDetails('ListasTiposDatos').subscribe(res => {
                this.constantType = res;
                this.alterPattern();
             });

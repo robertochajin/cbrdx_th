@@ -37,8 +37,4 @@ export class ConstanteService {
         console.error('Error:', error);
         return Promise.reject(error.message || error);
     }
-    
-    getTiposConstantes()  {
-      return this.http.get(this.serviceURL+"listasTiposDatos/enabled/",{headers: this.headers}).map((res:Response) => res.json());
-    }
 }

@@ -7,6 +7,7 @@ import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
 import { PositionsService } from "../_services/positions.service";
 import { ListPositionsService } from "../_services/lists-positions.service";
 import { TipoDeAreaService } from "../_services/tipoDeArea.service";
+import {ListaService} from "../_services/lista.service";
 
 @Component( {
                moduleId: module.id,
@@ -29,6 +30,7 @@ export class PositionsAddComponent {
    
    constructor( private positionsService: PositionsService,
                 private router: Router,
+                private listaService: ListaService,
                 private route: ActivatedRoute,
                 private location: Location,
                 private listPositionsService: ListPositionsService,
@@ -61,10 +63,9 @@ export class PositionsAddComponent {
          }
       } );
       
-      //this.defaultState = this.listPositionsService.getstateByCode("CONST");
-      this.listPositionsService.getstateByCode("CONST").subscribe( res => {
+
+      this.listaService.getMasterDetailsByCode("ListasEstadosCargos","CONST").subscribe( res => {
          this.defaultState = res;
-         
       });
       
    }

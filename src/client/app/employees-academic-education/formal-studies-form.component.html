@@ -41,7 +41,7 @@
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
             <label for="institucion">Institución</label>
-            <p-autoComplete placeholder="Buscar institucion" field="nombreListaInstitucion" #institucion="ngModel"
+            <p-autoComplete placeholder="Buscar institucion" field="nombre" #institucion="ngModel"
                             name="institucion" id="institucion" [required]="otraInstitucion.value === undefined || otraInstitucion.value === ''"
                             [(ngModel)]="selectedInstitute" [suggestions]="instituteList"
                             (completeMethod)="instituteSearch($event)" (onSelect)="captureInstituteId($event)" >

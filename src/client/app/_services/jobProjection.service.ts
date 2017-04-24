@@ -35,9 +35,6 @@ export class JobProjectionService {
    getPositionsById(id: number) {
       return this.http.get(this.serviceURL + 'cargos/' + id).map((res: Response) => res.json());
    }
-   getEstadoById(id: number) {
-      return this.http.get(this.serviceURL + 'listasEstadosProyecciones/' + id).map((res: Response) => res.json());
-   }
    getPositions() {
       return this.http.get(this.serviceURL + 'cargos/enabled').map((res: Response) => res.json());
    }

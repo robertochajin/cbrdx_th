@@ -8,6 +8,7 @@ export class FunctionalityControl {
    public idClasificacion: number;
    public idPadre: number;
    public codigo:  string;
+   public clasificacion:  string;
    public control:  string;
    public indicadorHabilitado:  boolean=true;
    public indicadorVisible:  boolean=true;
