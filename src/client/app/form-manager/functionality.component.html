@@ -1,0 +1,32 @@
+<div *ngIf="functionality">
+   <form (ngSubmit)="f.valid && onCreate()" #f="ngForm" novalidate id="formulario">
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+         <div class="ui-grid-row">
+            <div class="ui-grid-col-4">
+               <label for="funcionalidad">Funcionalidad</label>
+               <input id="funcionalidad" name="funcionalidad" #funcionalidad="ngModel" pInputText type="text"
+                      [(ngModel)]="a" required disabled/>
+            </div>
+            <div class="ui-grid-col-4">
+               <label></label><br>
+               <p-checkbox id="seccion" name="seccion" [(ngModel)]="seccion" binary="true" label="Sección"></p-checkbox>
+            </div>
+            <div class="ui-grid-col-4">
+               <label></label><br>
+               <p-checkbox id="Habilitado" name="Habilitado" [(ngModel)]="habilitado" binary="true" label="Ind Habilitado"></p-checkbox>
+            </div>
+         </div>
+         <div class="ui-grid-row form-footer-buttons">
+            <div class="ui-grid-col-4"></div>
+            <div class="ui-grid-col-1">
+               <a (click)="goBack()" class="cancelar">Cancelar</a>
+            </div>
+            <div class="ui-grid-col-2">
+               <button pButton icon="fa-plus" label="Guardar" type="submit" ></button>
+            </div>
+            <div class="ui-grid-col-5"></div>
+         </div>
+      </div>
+   </form>
+</div>
+<p-confirmDialog width="400"></p-confirmDialog>

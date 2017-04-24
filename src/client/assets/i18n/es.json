@@ -44,7 +44,7 @@
   "MSG_REGISTRO":"Registro",
   "MSG_NORECORDSFOUND":"Su búsqueda no obtuvo ningún resultado",
 
-
+   "LBL_BUSCAR":"Buscar...",
 
   "FIN_COMUNES":"====================================================================",
   "INICIO_REFERENCIA":"==============================================================",
@@ -221,6 +221,29 @@
    "MSG_CODIGOREQUERIDO":"Código requrido",
    "MSG_CODIGOREPETIDO":"Ya se encuentra registrado ese código",
    "MSG_NOMBREREQUERIDO":"Nombre  requerido",
+   "MSG_URLREQUERIDA":"Url requerida",
+   "LBL_AGREGANDO":"Agregando widgets",
+   "LBL_EDITANDO":"Editando widgets",
+   "LBL_DETALLEWIDGETS":"Detalle widgets",
+   "LBL_CONFIGURARWIDGETS":"Configurar Widgets"
+   },
+   "ADMIN_FORMULARIOS":{
+   "LBL_FUNCIONALIDAD":"Funcionalidad",
+   "LBL_AÑADIRFUNCIONALIDAD":"Añadir funcionalidad",
+   "LBL_SECCION":"Sección",
+   "LBL_CLASIFICACION":"Clasificación",
+   "LBL_CLASIFICACIONINFORMACION":"Clasificación Información",
+   "LBL_CLASIFICACIONDATO":"Clasificación Dato",
+   "LBL_VISIBLE":"Visible",
+   "LBL_IMPRIMIR":"Imprimir",
+   "LBL_CAMPO":"Campo",
+   "LBL_TERMINAR":"Terminar",
+   "LBL_OBLIGATORIO":"Obligatorio",
+   "MSG_CODIGOREPETIDO":"Ya se encuentra registrado ese código",
+   "MSG_NOMBREREQUERIDO":"Nombre  requerido",
+   "MSG_CODIGOREQUERIDO":"Código requrido",
+   "MSG_CLASIFICACIONREQUERIDA":"Clasificación requerida",
+
    "MSG_URLREQUERIDA":"Url requerida",
    "LBL_AGREGANDO":"Agregando widgets",
    "LBL_EDITANDO":"Editando widgets",
