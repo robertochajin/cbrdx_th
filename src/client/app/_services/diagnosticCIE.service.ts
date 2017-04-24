@@ -14,11 +14,11 @@ export class DiagnosticCIEServices {
   }
 
   getByWildCard(qr: any)  {
-    return this.http.get(this.masterService+'codigoNombre/'+qr+'/').map((res:Response) => res.json() as DiagnosticosCIE[]);
+    return this.http.get(this.masterService+'codigoNombre/'+qr+'/', {headers: this.headers}).map((res:Response) => res.json() as DiagnosticosCIE[]);
   }
 
   getById(id: number) {
-    return this.http.get(this.masterService+'buscarId/'+id).map((res:Response) => res.json() as DiagnosticosCIE);
+    return this.http.get(this.masterService+'buscarId/'+id, {headers: this.headers}).map((res:Response) => res.json() as DiagnosticosCIE);
   }
 
 }

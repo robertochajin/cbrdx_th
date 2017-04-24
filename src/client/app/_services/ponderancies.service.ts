@@ -16,11 +16,11 @@ export class PonderanciesServices {
   }
 
   getAllEnabled(): Observable<Ponderancies[]> {
-    return this.http.get(this.masterService + 'enabled/').map((res: Response) => res.json() as Ponderancies[]);
+    return this.http.get(this.masterService + 'enabled/', { headers: this.headers }).map((res: Response) => res.json() as Ponderancies[]);
   }
 
   getAllEnabledByPosition(idPosition: number): Observable<Ponderancies[]> {
-    return this.http.get(this.masterService + 'noAsignadas/'+idPosition).map((res: Response) => res.json() as Ponderancies[]);
+    return this.http.get(this.masterService + 'noAsignadas/'+idPosition, { headers: this.headers }).map((res: Response) => res.json() as Ponderancies[]);
   }
 
 }

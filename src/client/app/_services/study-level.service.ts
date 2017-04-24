@@ -15,7 +15,7 @@ export class StudyLevelServices {
   }
 
   getAllEnabled() {
-    return this.http.get(this.masterService+'enabled/').map((res:Response) => res.json() as StudyLevels[]);
+    return this.http.get(this.masterService+'enabled/', { headers: this.headers }).map((res:Response) => res.json() as StudyLevels[]);
   }
 
 }

@@ -265,5 +265,9 @@
       "LBL_CONTRASENAACTUALREQUERIDA":"Contraseña actual es requerida.",
       "LBL_CONTRASENANUEVAREQUERIDA":"Contraseña Nueva es requerida."
    },
+   "ROLES":{
+      "LBL_CONTROLES":"Controles",
+      "LBL_SECCIONES":"Secciones",
+   },
   "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 }
