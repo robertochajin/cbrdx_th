@@ -87,6 +87,8 @@ import {GruposGestionEditComponent} from "./gruposGestion/gruposGestion-edit.com
 // Roles
 import {RolesComponent} from "./roles/roles.component";
 import {RolesAddComponent} from "./roles/roles-add.component";
+import { RolesUpdateComponent } from "./roles/roles-update.component";
+import { RolFuncionalitiesConfigComponent } from "./roles/rol-functionalities-config.component";
 
 // Usuarios
 import {UsuariosComponent} from "./usuarios/usuarios.component";
@@ -164,6 +166,7 @@ import {WidgetsComponent} from "./widgets/widgets.component";
 //Administracion
 import {MenuManagerComponent} from "./menuManager/menuManager.component";
 import { UserSessionComponent } from "./usuarios/userSession.component";
+
 
 
 
@@ -257,6 +260,8 @@ const routes = [
   // Roles
   {path: 'roles', component: RolesComponent, canActivate: [AuthGuard]},
   {path: 'roles/add', component: RolesAddComponent, canActivate: [AuthGuard]},
+  {path: 'roles/update/:id', component: RolesUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'roles-funcionalities-config/:id', component: RolFuncionalitiesConfigComponent, canActivate: [AuthGuard]},
 
   // Usuarios
   {path: 'usuarios', component: UsuariosComponent},

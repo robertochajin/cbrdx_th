@@ -21,7 +21,8 @@ import {
   CheckboxModule,
   ToggleButtonModule,
   InputMaskModule,
-  InputTextareaModule
+  InputTextareaModule,
+  InputSwitchModule
   
 } from 'primeng/primeng';
 
@@ -52,7 +53,8 @@ import {
       CheckboxModule,
       ToggleButtonModule,
       InputMaskModule,
-      InputTextareaModule
+      InputTextareaModule,
+      InputSwitchModule
   ],
   declarations: [
   ],
@@ -77,7 +79,8 @@ import {
       CheckboxModule,
       ToggleButtonModule,
       InputMaskModule,
-      InputTextareaModule
+      InputTextareaModule,
+      InputSwitchModule
     
   ]
 })

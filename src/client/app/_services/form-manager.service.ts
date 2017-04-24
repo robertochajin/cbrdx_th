@@ -57,5 +57,12 @@ export class FormManagerService {
       console.error('Error:', error);
       return Promise.reject(error.message || error);
    }
+   
+   getAllEnabled() {
+      return this.http.get(this.serviceURL + 'funcionalidades/enabled').map((res: Response) => res.json() as Functionality[]);
+   }
+   getFuncionalidadesControlesEnabled() {
+      return this.http.get(this.serviceURL + 'funcionalidadesControles/enabled').map((res: Response) => res.json() as FunctionalityControl[]);
+   }
 
 }
