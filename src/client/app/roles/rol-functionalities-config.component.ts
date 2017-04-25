@@ -22,6 +22,7 @@ export class RolFuncionalitiesConfigComponent {
     lfuncionalityControl: RolFunctionalityControl = new RolFunctionalityControl();
     show_form: boolean = false;
     msgs: Message[] = [];
+    lfControles: FunctionalityControl[] = [];
     fControles: RolFunctionalityControl;
     secciones: RolFunctionalityControl[] = [];
     controles: RolFunctionalityControl[] = [];
@@ -35,48 +36,25 @@ export class RolFuncionalitiesConfigComponent {
        this.route.params.subscribe( ( params: Params ) => {
           this.rolFuncionalitiesService.get( +params[ 'id' ] ).subscribe( rolFuncionality => {
              this.rolFuncionality = rolFuncionality;
+             this.rolFuncionalitiesService.getControlByFuncionality( this.rolFuncionality.idRol,this.rolFuncionality.idFuncionalidad ).subscribe( listaFuncionalityControl => {
+                this.listaFuncionalityControl = listaFuncionalityControl;
+                this.formManagerService.getFuncionalidadesControlesEnabled().subscribe(
+                   lfControles => {
+                      this.lfControles = lfControles;
+                      this.cosntrucObj()
+                   }
+                );
+             });
           });
-          this.rolFuncionalitiesService.getControlByFuncionality( +params[ 'id' ] ).subscribe( listaFuncionalityControl => {
-             this.listaFuncionalityControl = listaFuncionalityControl;
-      
-          });
+          
        });
     }
 
     ngOnInit() {
-       this.formManagerService.getFuncionalidadesControlesEnabled().subscribe(
-          fControles => {
-             fControles.map((s: any) => {
-                this.fControles = new RolFunctionalityControl();
-                if(this.listaFuncionalityControl.find(d => d.idFuncionalidadControl = s.idFuncionalidadControl)){
-                   this.fControles = this.listaFuncionalityControl.find(d => d.idFuncionalidadControl = s.idFuncionalidadControl)
-                   this.fControles.codigo = s.codigo;
-                }else {
-                   this.fControles.idFuncionalidadControl = s.idFuncionalidadControl;
-                   this.fControles.idRol = this.rolFuncionality.idRol;
-                   this.fControles.rol = this.rolFuncionality.rol;
-                   this.fControles.control = s.control;
-                   this.fControles.codigo = s.codigo;
-                   this.fControles.indicadorHabilitado = false;
-                   this.fControles.indicadorEditar = false;
-                   this.fControles.indicadorSeccion = false;
-                }
-                if(s.indicadorSeccion == true ){
-                   this.secciones.push(this.fControles);
-                }else{
-                   this.controles.push(this.fControles);
-                }
-             });
-          }
-       );
-       this.route.params.subscribe( ( params: Params ) => {
-         
-       });
-       
+       this.msgs = [];
     }
     
    changeControl(fc:RolFunctionalityControl){
-       console.info(fc);
       this.msgs = [];
       if(fc.idRolFuncionalidadControl == null ) {
          this.rolFuncionalitiesService.addControl(fc).subscribe(data => {
@@ -94,6 +72,30 @@ export class RolFuncionalitiesConfigComponent {
             this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
          });
       }
+   }
+   cosntrucObj(){
+      this.lfControles.map((s: any) => {
+         this.fControles = new RolFunctionalityControl();
+         if(this.listaFuncionalityControl.find(d => d.idFuncionalidadControl == s.idFuncionalidadControl)){
+            this.fControles = this.listaFuncionalityControl.find(d => d.idFuncionalidadControl = s.idFuncionalidadControl)
+            this.fControles.codigo = s.codigo;
+         }else {
+            this.fControles.idRolFuncionalidadControl = null;
+            this.fControles.idFuncionalidadControl = s.idFuncionalidadControl;
+            this.fControles.idRol = this.rolFuncionality.idRol;
+            this.fControles.rol = this.rolFuncionality.rol;
+            this.fControles.control = s.control;
+            this.fControles.codigo = s.codigo;
+            this.fControles.indicadorHabilitado = false;
+            this.fControles.indicadorEditar = false;
+            this.fControles.indicadorSeccion = false;
+         }
+         if(s.indicadorSeccion == true ){
+            this.secciones.push(this.fControles);
+         }else{
+            this.controles.push(this.fControles);
+         }
+      });
    }
     
 }
