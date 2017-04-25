@@ -9,18 +9,18 @@
                 <input type="text" pInputText class="form-control" id="codigoArea" name="codigoArea"
                        #codigoArea="ngModel"
                        [(ngModel)]="areas.codigoArea" required maxlength="8" pattern="[A-Z0-9]{0,8}"
-                       (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
+                       (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)" disabled
                        (paste)="inputCleanUp($event.target.value)">
-                <div *ngIf="codeExists" class="alert alert-danger">
-                    Ya se encuentra registrado ese código
-                </div>
-                <div *ngIf="f.submitted&&!codigoArea.valid" class="alert alert-danger">
-                    <div [hidden]="!codigoArea.errors.required">Debe ingresar un codigo para el tipo de área.
-                    </div>
-                    <div [hidden]="!codigoArea.errors.maxlength">El código no debe tener mas de 8 caracteres.
-                    </div>
-                    <div [hidden]="!codigoArea.errors.pattern">El código debe ser solo letras y númenos</div>
-                </div>
+                <!--<div *ngIf="codeExists" class="alert alert-danger">-->
+                    <!--Ya se encuentra registrado ese código-->
+                <!--</div>-->
+                <!--<div *ngIf="f.submitted&&!codigoArea.valid" class="alert alert-danger">-->
+                    <!--<div [hidden]="!codigoArea.errors.required">Debe ingresar un codigo para el tipo de área.-->
+                    <!--</div>-->
+                    <!--<div [hidden]="!codigoArea.errors.maxlength">El código no debe tener mas de 8 caracteres.-->
+                    <!--</div>-->
+                    <!--<div [hidden]="!codigoArea.errors.pattern">El código debe ser solo letras y númenos</div>-->
+                <!--</div>-->
             </div>
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !estructuraArea.valid }">
