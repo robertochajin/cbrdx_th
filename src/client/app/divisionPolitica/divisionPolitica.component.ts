@@ -303,6 +303,7 @@ export class DivisionPoliticaComponent implements OnInit {
         this.labelPadre =  "Pais: "+this.btnnuevodepartamento.parent;
         this.labeldescripcionDivisonPolitica = "Nombre del Departamento";
         this.politicalDivision.idDivisionPoliticaPadre = this.btnnuevodepartamento.idparent;
+        this.politicalDivision.codigoDivisionPolitica = this.selectedNode.data.codigoDivisionPolitica;
         let nodeCode = this.getCodigoTypebyId(this.selectedNode.data.idDivisionPoliticaTipo);
         this.getTiposHijos(nodeCode.substr(0,2));
         this.codeExists = false;

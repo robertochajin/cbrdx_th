@@ -20,8 +20,8 @@
                      <!--<input pButton=""  [style]="{'float':'right'}" label="Save" icon="fa-check" (onClick)="save()" [model]="items"></input>-->
                   </div>
                </p-header>
-               <div *ngIf="isData" style="height: 100%;">
-                  <p-chart type="doughnut" [data]="data" height="140"></p-chart>
+               <div *ngIf="isData">
+                  <p-chart id="chrRolesUsuarios" type="doughnut" [data]="data" width="400" height="400" [options]="options"></p-chart>
                </div>
             </p-panel>
          </div>
