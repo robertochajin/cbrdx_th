@@ -29,7 +29,7 @@ export class EmployeesVehicleAddComponent {
   listTypeService: SelectItem[] = [];
   listBrandVehicle: SelectItem[] = [];
   msgs: Message[] = [];
-  year: Number;
+  year: number;
   anioValid: boolean = false;
   ciudadPlaca: string;
   backupCiudadPlaca: string;
@@ -52,7 +52,7 @@ export class EmployeesVehicleAddComponent {
 
     let today = new Date();
     let year = today.getFullYear();
-    this.year = year;
+    this.year = year+1;
 
     this.route.params.subscribe((params: Params) => {
       this.employeeVehicle.idTercero = Number(+params['idTercero']);
@@ -103,6 +103,9 @@ export class EmployeesVehicleAddComponent {
     let modelo = this.employeeVehicle.modelo + "";
     if (this.employeeVehicle.modelo != null) {
       this.employeeVehicle.modelo = Number(modelo.replace(/[^0-9]/g, ''));
+      if(this.employeeVehicle.modelo>this.year){
+         this.employeeVehicle.modelo=this.year;
+      }
     }
   }
   inputPlaca() {
