@@ -12,7 +12,7 @@ import { Router, CanActivate } from '@angular/router';
 })
 export class ToolbarComponent {
 
-   usuarioLogueado: any = {sub : ''};
+   usuarioLogueado: any = {sub : '', usuario: '', nombre: ''};
 
    jwtHelper: JwtHelper = new JwtHelper();
 
