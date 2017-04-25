@@ -40,7 +40,7 @@
         <div class="form-group">
             <label for="fechaInicio" class="control-label col-sm-3">Fecha Inicio</label>
             <div class=" col-sm-8">
-                <p-calendar id="fechaInicio" name="fechaInicio" [(ngModel)]="grupoGestion.fechaInicio" [showIcon]="true"
+                <p-calendar id="fechaInicio" name="fechaInicio" [locale]="es" [(ngModel)]="grupoGestion.fechaInicio" [showIcon]="true"
                             dateFormat="yy-mm-dd" [minDate]="currentDate"
                             readonlyInput="true" (onSelect)="isRequired=true;validateGreater();"></p-calendar>
 
