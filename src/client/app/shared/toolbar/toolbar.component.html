@@ -86,7 +86,7 @@
                   <a routerLink="/user-session" class="btn btn-default">{{ 'TEMPLATE.LBL_EDITARCONTRASENA' | translate:param }}</a>
                </div>
               <div class="pull-right">
-                <a href="#" class="btn btn-danger">{{ 'TEMPLATE.LBL_CERRARSESION' | translate:param }}</a>
+                <a href="#" (click)="logout()" class="btn btn-danger">{{ 'TEMPLATE.LBL_CERRARSESION' | translate:param }}</a>
               </div>
             </li>
           </ul>

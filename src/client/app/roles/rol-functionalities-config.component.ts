@@ -1,5 +1,6 @@
 import { Component,OnInit,Input} from '@angular/core';
 import { ActivatedRoute, Router, Params } from "@angular/router";
+import { Location } from "@angular/common";
 import { Rol } from '../_models/rol';
 import { RolFuncionalities } from '../_models/rolFuncionalities';
 import {  RolFuncionalitiesServices } from '../_services/rolFuncionalities.service';
@@ -30,6 +31,7 @@ export class RolFuncionalitiesConfigComponent {
     constructor(private rolFuncionalitiesService: RolFuncionalitiesServices,
                 private router: Router,
                 private route: ActivatedRoute,
+                private location: Location,
                 private confirmationService: ConfirmationService,
                 private formManagerService: FormManagerService,
     ) {
@@ -96,6 +98,9 @@ export class RolFuncionalitiesConfigComponent {
             this.controles.push(this.fControles);
          }
       });
+   }
+   goBack(){
+      this.location.back();
    }
     
 }
