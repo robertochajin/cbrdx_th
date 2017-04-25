@@ -41,7 +41,7 @@
             <label for="fechaInicio" class="control-label col-sm-3">Fecha Inicio</label>
             <div class=" col-sm-8 form-inline">
                 <p-calendar id="fechaInicio" name="fechaInicio" [(ngModel)]="grupoGestion.fechaInicio" [showIcon]="true"
-                            dateFormat="yy-mm-dd" [minDate]="currentDate"
+                            dateFormat="yy-mm-dd" [minDate]="currentDate" [locale]="es"
                             readonlyInput="true" (onSelect)="isRequired=true;validateGreater();"></p-calendar>
 
             </div>
@@ -54,7 +54,7 @@
         <div class="form-group">
             <label for="fechaFin" class="control-label col-sm-3">Fecha Fin</label>
             <div class=" col-sm-9">
-                <p-calendar id="fechaFin" name="fechaFin" [(ngModel)]="grupoGestion.fechaFin"
+                <p-calendar id="fechaFin" name="fechaFin" [(ngModel)]="grupoGestion.fechaFin" [locale]="es"
                             [showIcon]="true" dateFormat="yy-mm-dd" [minDate]="grupoGestion.fechaInicio"
                             [required]="isRequired" [disabled]="!isRequired" (onSelect)="validateGreater();"
                             readonlyInput="true" #fechaFin="ngModel"></p-calendar>
