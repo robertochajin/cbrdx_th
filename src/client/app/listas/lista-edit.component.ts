@@ -61,7 +61,7 @@ export class ListaEditComponent implements OnInit {
    }
 
    childInputCleanUp(value: string) {
-      this.editableDetail.codigo = value.toUpperCase().replace(' ', '').trim();
+      this.editableDetail.codigo = value.toUpperCase().replace(/[^A-Z]/g, '').replace(' ', '').trim();
    }
 
    createDetail(f: NgForm) {
