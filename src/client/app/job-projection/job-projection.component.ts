@@ -377,9 +377,16 @@ export class JobProjectionComponent {
                detail: str
             });
          }
-         // this.jobProjectionService.getConfirmProjection().subscribe(res=>{
-         //
-         // });
+         if (rest.length === 0) {
+            this.jobProjectionService.getConfirmProjection().subscribe(res => {
+               this.msgs = [];
+               this.msgs.push({
+                  severity: 'info',
+                  summary: 'Exito',
+                  detail: 'Proyección confirmada con exito'
+               });
+            });
+         }
       });
    }
 }
