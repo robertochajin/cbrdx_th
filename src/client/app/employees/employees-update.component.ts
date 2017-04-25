@@ -155,9 +155,9 @@ export class EmployeesUpdateComponent {
          }
       });
 
-      this.listEmployeesService.getTerType("TERCOL").subscribe(
+      this.listaService.getMasterDetailsByCode('ListasTiposTerceros', "TERCOL").subscribe(
          res => {
-            this.idTipoTercero = res.idListaTipoTercero
+            this.idTipoTercero = res.idLista;
          });
 
    }
