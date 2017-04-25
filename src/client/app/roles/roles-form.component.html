@@ -18,7 +18,7 @@
          <div class="ui-grid-row">
             <div class="ui-grid-col-4">
                <label for="codigoRol">* Código</label>
-               <input type="text" pInputText id="codigoRol" name="codigoRol"
+               <input type="text" pInputText id="codigoRol" name="codigoRol" [readonly]="rol.idRol!==null"
                       [(ngModel)]="rol.codigoRol" maxlength="6"
                       (change)="validateCode()" (keyup)="capitalizeCode()"
                       #codigoRol="ngModel" required/>
@@ -45,24 +45,26 @@
                <label for="fInicio">* Fecha Inicio</label>
                <p-calendar id="fInicio" name="fInicio" [showIcon]="true" [dataType]="date"
                            [maxDate]="maxDate" [locale]="es" readonlyInput="true"
-                           [(ngModel)]="fechaInicio" #fInicio="ngModel"  required
+                           [(ngModel)]="fechaInicio" #fInicio="ngModel"
                            (onSelect)="onFechaInicio($event)"
                >
                </p-calendar>
-               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fInicio.valid ">
-                  <i class="fa fa-close"></i>
-                  Fecha de Inicio es requerida
-               </div>
+            </div>
+            <div class="col-sm-1 pull-right">
+               <label for="fInicio">Borrar</label>
+               <button pButton type="button" class="ui-button-danger"
+                       (click)="clearSelectionRol()"
+                       icon="fa-close"></button>
             </div>
             <div class="ui-grid-col-3">
                <label for="fFin">* Fecha Fin</label>
                <p-calendar id="fFin" name="fFin" [showIcon]="true" [dataType]="date"
-                           [minDate]="minDate" [locale]="es" readonlyInput="true"
-                           [(ngModel)]="fechaFin" #fFin="ngModel" required
+                           [minDate]="minDate" [locale]="es" readonlyInput="true" [disabled]="fechaInicio == null"
+                           [(ngModel)]="fechaFin" #fFin="ngModel" [required]="fechaInicio != null"
                            (onSelect)="onFechaFin($event)"
                >
                </p-calendar>
-               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fFin.valid ">
+               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fFin.valid && fechaInicio != null">
                   <i class="fa fa-close"></i>
                   Fecha Fin es requerida
                </div>

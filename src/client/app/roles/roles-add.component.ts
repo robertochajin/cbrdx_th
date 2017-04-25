@@ -44,7 +44,7 @@ export class RolesAddComponent {
    }
    
    ngOnInit() {
-      
+      this.rol.idRol=null;
       this.es = {
          firstDayOfWeek: 1,
          dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
@@ -111,9 +111,13 @@ export class RolesAddComponent {
          this.rol.fechaFin = momFin.format( 'YYYY-MM-DD' );
       }
       this.rolesService.addRole( this.rol ).then( res => {
-         this.router.navigate( [ 'roles/update/' + res.idRol ] );
+         this.router.navigate( [ 'roles/update/' + res.idRol +'/true'] );
       } );
       
    }
    
+   clearSelectionRol() {
+      this.fechaInicio = null;
+      this.fechaFin = null;
+   }
 }

@@ -9,6 +9,7 @@ import { Employee } from "../_models/employees";
 
 import { Usuario } from "../_models/usuario";
 import { UsuariosService } from "../_services/usuarios.service";
+import { JwtHelper } from "angular2-jwt";
 
 @Component( {
                moduleId: module.id,
@@ -20,6 +21,8 @@ import { UsuariosService } from "../_services/usuarios.service";
 
 export class UserSessionComponent implements OnInit {
    
+   jwtHelper: JwtHelper = new JwtHelper();
+   
    employee: Employee = new Employee();
    user: Usuario = new Usuario();
    acordion: number;
@@ -27,6 +30,7 @@ export class UserSessionComponent implements OnInit {
    oldPass : string = "";
    newPass : string = "";
    newPassConfirm : string = "";
+   usuarioLogueado: any;
    
    constructor( private employeeService: EmployeesService,
                 private usuariosService: UsuariosService,
@@ -37,7 +41,14 @@ export class UserSessionComponent implements OnInit {
    }
    
    ngOnInit(): void {
-      let idUsuario = 4;
+      
+      let token = localStorage.getItem('token');
+   
+      if (token != null)
+         this.usuarioLogueado = this.jwtHelper.decodeToken(token);
+      
+      let idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      
       this.usuariosService.viewUser( idUsuario ).subscribe(data => {
          this.user = data;
          this.employeeService.get( this.user.idTercero ).subscribe( employee => {
@@ -48,8 +59,6 @@ export class UserSessionComponent implements OnInit {
                this.employee.segundoApellido;
          } );
       });
-      
-      
    }
    onSubmit() {
       if(this.oldPass != this.newPass && this.newPass == this.newPassConfirm) {

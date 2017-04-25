@@ -6,7 +6,7 @@ import { Router,ActivatedRoute, Params } from "@angular/router";
 import { VRolMenuElemento } from "../_models/vRolMenuElemento";
 import { MenuElementoService } from "../_services/menuElemento.service";
 import { MenuElemento } from "../_models/menuElemento";
-import { ConfirmationService } from "primeng/primeng";
+import {ConfirmationService, Message} from "primeng/primeng";
 import * as moment from "moment/moment";
 
 @Component( {
@@ -19,7 +19,7 @@ export class RolesUpdateComponent {
    
    rol: Rol = new Rol();
    roles: Rol[];
-   
+   msgs: Message[] = [];
    codeExists: boolean = false;
    range: string;
    es: any;
@@ -126,10 +126,20 @@ export class RolesUpdateComponent {
          let momFin: moment.Moment = moment( this.fechaFin, 'MM/DD/YYYY' );
          this.rol.fechaFin = momFin.format( 'YYYY-MM-DD' );
       }
-      this.rolesService.updateRole( this.rol ).then( res => {
-         this.router.navigate( [ 'roles/update/' + res.idRol ] );
-      } );
-      
+      this.rolesService.updateRole(this.rol).then(res => {
+         this.msgs = [];
+         this.msgs.push({
+            severity: 'info',
+            summary: 'Exito',
+            detail: 'El rol ha sido actualizado con exito'
+         });
+      });
+
    }
-   
+
+   clearSelectionRol() {
+      this.fechaInicio = null;
+      this.fechaFin = null;
+   }
+
 }
