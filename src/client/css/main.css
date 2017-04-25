@@ -25,6 +25,13 @@ body .ui-widget:disabled {
   cursor: default !important;
   color: #000;
 }
+/** -- Datepicker -- */
+.ui-datepicker select.ui-datepicker-month {
+   width: 54%;
+}
+.ui-datepicker select.ui-datepicker-year {
+   width: 40%;
+}
 
 /*
 ----------------- Cambios Theme AdminLTE ---------------------------------
