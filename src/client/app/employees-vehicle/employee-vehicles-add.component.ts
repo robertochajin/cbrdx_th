@@ -88,6 +88,9 @@ export class EmployeesVehicleAddComponent {
       this.employeeVehicle.idCiudad =null;
     }
     if (this.ciudadPlaca == this.backupCiudadPlaca) {
+       if(this.employeeVehicle.modelo<1900){
+          this.employeeVehicle.modelo=1900;
+       }
       this.employeeVehicleService.add(this.employeeVehicle)
         .subscribe(data => {
           this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
