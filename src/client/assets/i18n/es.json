@@ -190,7 +190,7 @@
       "MSG_FECHADEFUNCIONREQUERIDO":"Fecha de Defunción es requerido",
       "LBL_INSTITUCION":"Institución",
       "LBL_CONFIRMADA":"Confirmada",
-      "LBL_OTRAINSTITUCION":"Institución",
+      "LBL_OTRAINSTITUCION":"Otra institución",
       "MSG_AREAESTUDIOREQUERIDO":"Area de Estudio es requerido",
       "MSG_TITULOREQUERIDO":"Título es requerido",
       "MSG_OTRAINSTITUCIONREQUERIDO":"Otra Institución es requerido",
@@ -314,7 +314,7 @@
    "ADMIN_FORMULARIOS":{
    "LBL_FUNCIONALIDAD":"Funcionalidad",
    "MSG_FUNCIONALIDADREQUERIDA":"Funcionalidad requerida",
-   "LBL_AÑADIRFUNCIONALIDAD":"Añadir funcionalidad",
+   "LBL_AÑADIRFUNCIONALIDAD":"Nueva funcionalidad",
    "LBL_SECCION":"Sección",
    "LBL_CLASIFICACION":"Clasificación",
    "LBL_CLASIFICACIONINFORMACION":"Clasificación Información",

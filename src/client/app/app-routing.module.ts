@@ -261,6 +261,7 @@ const routes = [
   {path: 'roles', component: RolesComponent, canActivate: [AuthGuard]},
   {path: 'roles/add', component: RolesAddComponent, canActivate: [AuthGuard]},
   {path: 'roles/update/:id', component: RolesUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'roles/update/:id/:msj', component: RolesUpdateComponent, canActivate: [AuthGuard]},
   {path: 'roles-funcionalities-config/:id', component: RolFuncionalitiesConfigComponent, canActivate: [AuthGuard]},
 
   // Usuarios
