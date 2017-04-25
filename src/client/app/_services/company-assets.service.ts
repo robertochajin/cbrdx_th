@@ -16,11 +16,11 @@ export class CompanyAssetsServices {
    }
 
    getAll() {
-      return this.http.get(this.serviceURL).map((res: Response) => res.json() as CompanyAssets[]);
+      return this.http.get(this.serviceURL, {headers: this.headers}).map((res: Response) => res.json() as CompanyAssets[]);
    }
 
    getAllByPosition(id: number): Observable<CompanyAssets[]> {
-      return this.http.get(this.serviceURL + 'buscarCargo/'+ id).map((res: Response) => res.json() as CompanyAssets[]);
+      return this.http.get(this.serviceURL + 'buscarCargo/'+ id, {headers: this.headers}).map((res: Response) => res.json() as CompanyAssets[]);
    }
 
    add(f: CompanyAssets) {
@@ -33,7 +33,7 @@ export class CompanyAssetsServices {
    }
 
    get(id: number) {
-      return this.http.get(this.serviceURL + 'buscarId/' + id)
+      return this.http.get(this.serviceURL + 'buscarId/' + id, {headers: this.headers})
          .map((res: Response) => res.json() as CompanyAssets);
    }
 

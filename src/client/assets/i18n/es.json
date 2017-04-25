@@ -37,13 +37,14 @@
   "LBL_EPS":"Eps",
   "LBL_TELEFONO":"Teléfono Fijo",
   "LBL_PERTENECE":"Pertenece",
+   "LBL_VERMAS" : "Ver más",
 
   "MSG_CONFIRMACION":"Si continúa perderá la información no guardada. ¿Está seguro que desea salir?",
   "MSG_GUARDADO":"Guardado",
   "MSG_REGISTRO":"Registro",
   "MSG_NORECORDSFOUND":"Su búsqueda no obtuvo ningún resultado",
 
-
+   "LBL_BUSCAR":"Buscar...",
 
   "FIN_COMUNES":"====================================================================",
   "INICIO_REFERENCIA":"==============================================================",
@@ -300,6 +301,58 @@
       "MSG_DEBEINGRESARCONTRASEÑA":"Debe ingresar una contraseña",
   "FIN_SEGURIDAD":"=================================================================",
 
+   "WIDGETS":{
+   "MSG_CODIGOREQUERIDO":"Código requerido",
+   "MSG_CODIGOREPETIDO":"Ya se encuentra registrado ese código",
+   "MSG_NOMBREREQUERIDO":"Nombre  requerido",
+   "MSG_URLREQUERIDA":"Url requerida",
+   "LBL_AGREGANDO":"Agregando widgets",
+   "LBL_EDITANDO":"Editando widgets",
+   "LBL_DETALLEWIDGETS":"Detalle widgets",
+   "LBL_CONFIGURARWIDGETS":"Configurar Widgets"
+   },
+   "ADMIN_FORMULARIOS":{
+   "LBL_FUNCIONALIDAD":"Funcionalidad",
+   "MSG_FUNCIONALIDADREQUERIDA":"Funcionalidad requerida",
+   "LBL_AÑADIRFUNCIONALIDAD":"Añadir funcionalidad",
+   "LBL_SECCION":"Sección",
+   "LBL_CLASIFICACION":"Clasificación",
+   "LBL_CLASIFICACIONINFORMACION":"Clasificación Información",
+   "LBL_CLASIFICACIONDATO":"Clasificación Dato",
+   "LBL_VISIBLE":"Visible",
+   "LBL_IMPRIMIR":"Imprimir",
+   "LBL_CAMPO":"Campo",
+   "LBL_TERMINAR":"Terminar",
+   "LBL_OBLIGATORIO":"Obligatorio",
+   "MSG_CODIGOREPETIDO":"Ya se encuentra registrado ese código",
+   "MSG_NOMBREREQUERIDO":"Nombre  requerido",
+   "MSG_CODIGOREQUERIDO":"Código requerido",
+   "MSG_CLASIFICACIONREQUERIDA":"Clasificación requerida"
+   },
+
+   "TEMPLATE":{
+      "LBL_MENUPRINCIPAL": "MENÚ PRINCIPAL",
+      "LBL_USUARIODESDE":"Usuario desde",
+      "LBL_TEMASDISPONIBLES": "Temas Disponible",
+      "LBL_EDITARCONTRASENA":"Editar Contraseña",
+      "LBL_CERRARSESION": "Cerrar Sesión"
+   },
+
+   "USER_SESSION":{
+      "LBL_USUARIO":"Usuario",
+      "LBL_CEDULA":"Cédula",
+      "LBL_NUEVOAVATAR": "Nuevo Avatar",
+      "LBL_CAMBIOCONTRASENA":"Cambio de Contraseña",
+      "LBL_CONTRASENAACTUAL":"Contraseña actual",
+      "LBL_NUEVACONTRASENA":"Nueva Contraseña",
+      "LBL_REPETIRCONTRASENA":"Repetir nueva contraseña",
+      "LBL_CONTRASENAACTUALREQUERIDA":"Contraseña actual es requerida.",
+      "LBL_CONTRASENANUEVAREQUERIDA":"Contraseña Nueva es requerida."
+   },
+   "ROLES":{
+      "LBL_CONTROLES":"Controles",
+      "LBL_SECCIONES":"Secciones"
+   },
   "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 
 

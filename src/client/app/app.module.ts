@@ -33,6 +33,9 @@ import {ProductivityModule} from "./position-productivity/productivity.module";
 
 //proyección laboral
 import {JobProjectionModule} from "./job-projection/job-projection.module";
+
+// administrador de formularios
+import {FormManagerModule} from "./form-manager/form-manager.module";
 //Estructura física
 import {PhysicStructureModule} from "./physic-structure/physic-structure.module";
 
@@ -69,6 +72,9 @@ import {WidgetModule} from "./widgets/widgets.module";
 // Administracion
 import { MenuManagerModule } from "./menuManager/menuManager.module";
 
+// Auth JWT module
+import {AuthModule} from "./shared/auth.module";
+
 
 //CarsModule,
 @NgModule({
@@ -93,6 +99,8 @@ import { MenuManagerModule } from "./menuManager/menuManager.module";
       OrganizationalStructurePositionsModule,
       CompetenciesGroupsModule,
       WidgetModule,
+      FormManagerModule,
+      AuthModule,
       SharedModule.forRoot(),
       TranslateModule.forRoot({
          provide: TranslateLoader,

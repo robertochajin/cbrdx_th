@@ -9,7 +9,6 @@ export class ClinicalInformationService {
   public headers = new Headers({'Content-Type': 'application/json'});
 
   private masterService = '<%= SVC_TH_URL %>/api/tercerosDatosClinicos/';
-  private detailService  = '<%= SVC_TH_URL %>/api/tercerosDatosClinicos/';
 
   constructor(private http: Http,
               private authenticationService: AuthenticationService
@@ -26,7 +25,7 @@ export class ClinicalInformationService {
   }
 
   add(c: EmployeesClinicalData) {
-    return this.http.post(this.masterService,c).map((res:Response) => res.json() as EmployeesClinicalData);
+    return this.http.post(this.masterService,c, {headers: this.headers}).map((res:Response) => res.json() as EmployeesClinicalData);
   }
 
   update(f: EmployeesClinicalData) {

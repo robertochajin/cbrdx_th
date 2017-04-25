@@ -1,74 +1,75 @@
-<div class="row">
-  <div class="col-md-6 col-xs-12 " style="text-align: left"><label>{{ 'LBL_ULTIMOINGRESO' | translate:param }}: </label>
-  </div>
-  <div class="col-md-6 col-xs-12 ">
-    <button class=" pull-right" (click)="displayDialog=true" type="button" pButton icon="fa-plus" label="Configurar Widgets"></button>
-  </div>
+<div class="row" style="margin-bottom: 10px;">
+   <div class="col-md-6 col-xs-12 " style="text-align: left">
+     <label>{{ 'LBL_ULTIMOINGRESO' | translate:param }}: </label>
+   </div>
+   <div class="col-md-6 col-xs-12 ">
+      <button class=" pull-right" (click)="displayDialog=true" type="button" pButton icon="fa-plus"
+              label="{{ 'WIDGETS.LBL_CONFIGURARWIDGETS' | translate:param }}"></button>
+   </div>
 </div>
+
 <div class="row">
-  <div class="col-md-12">
-    <form>
-      <div class="col-md-8" id="rolesSistema" style="padding: 0.5% 0.5% 0.5% 0.5%"
-           *ngIf="rolesSistema" >
-        <p-panel>
-          <p-header>
-            <div class="ui-helper-clearfix">
-              <span class="ui-panel-title">{{ usuariosTitle }}</span>
-              <button class="pull-right" type="text" (click)="rolesSistema = !rolesSistema" icon=""><i class="fa fa-close"></i></button>
-              <!--<input pButton=""  [style]="{'float':'right'}" label="Save" icon="fa-check" (onClick)="save()" [model]="items"></input>-->
-            </div>
-          </p-header>
-          <div *ngIf="isData" style="height: 100%;">
-            <p-chart type="doughnut" [data]="data" height="140"></p-chart>
-          </div>
-        </p-panel>
-      </div>
+         <div class="col-md-8" id="rolesSistema"
+              *ngIf="rolesSistema">
+            <p-panel>
+               <p-header>
+                  <div class="ui-helper-clearfix">
+                     <span class="ui-panel-title">{{ usuariosTitle }}</span>
+                     <button class="pull-right" type="text" (click)="rolesSistema = !rolesSistema" icon=""><i
+                        class="fa fa-close"></i></button>
+                     <!--<input pButton=""  [style]="{'float':'right'}" label="Save" icon="fa-check" (onClick)="save()" [model]="items"></input>-->
+                  </div>
+               </p-header>
+               <div *ngIf="isData" style="height: 100%;">
+                  <p-chart type="doughnut" [data]="data" height="140"></p-chart>
+               </div>
+            </p-panel>
+         </div>
 
-      <div class="col-md-4" id="usuariosAct"
-           *ngIf="usuariosAct">
+         <div class="col-md-4" id="usuariosAct"
+              *ngIf="usuariosAct">
 
-        <p-panel>
-          <p-header>
-            <div class="ui-helper-clearfix">
-              <span class="ui-panel-title">{{ 'LBL_USUARIOS' | translate:param }} {{ 'LBL_ACTIVO' | translate:param }}/{{ 'LBL_INACTIVO' | translate:param }}</span>
-              <button class="pull-right" type="text" (click)="usuariosAct = !usuariosAct" icon=""><i class="fa fa-close"></i></button>
-              <!--<input pButton=""  [style]="{'float':'right'}" label="Save" icon="fa-check" (onClick)="save()" [model]="items"></input>-->
-            </div>
-          </p-header>
-          <div class="ui-grid-row ">
+            <p-panel>
+               <p-header>
+                  <div class="ui-helper-clearfix">
+                     <span class="ui-panel-title">{{ 'LBL_USUARIOS' | translate:param }} {{ 'LBL_ACTIVO' | translate:param }}/{{ 'LBL_INACTIVO' | translate:param }}</span>
+                     <button class="pull-right" type="text" (click)="usuariosAct = !usuariosAct" icon=""><i
+                        class="fa fa-close"></i></button>
+                     <!--<input pButton=""  [style]="{'float':'right'}" label="Save" icon="fa-check" (onClick)="save()" [model]="items"></input>-->
+                  </div>
+               </p-header>
+               <div class="ui-grid-row ">
 
-            <div class="info-box" style="background: #f9f9f9;">
-              <span class="info-box-icon bg-green"><i class="fa fa-user"></i></span>
-              <div class="info-box-content">
-                <span class="info-box-text">{{ 'LBL_USUARIOS' | translate:param }} {{ 'LBL_ACTIVO' | translate:param }}</span>
-                <span class="info-box-number" style="text-align: center;font-size: 2.4em;">{{usuariosActivos}}</span>
-              </div>
-            </div>
+                  <div class="info-box" style="background: #f9f9f9;">
+                     <span class="info-box-icon bg-green"><i class="fa fa-user"></i></span>
+                     <div class="info-box-content">
+                        <span class="info-box-text">{{ 'LBL_USUARIOS' | translate:param }} {{ 'LBL_ACTIVO' | translate:param }}</span>
+                        <span class="info-box-number"
+                              style="text-align: center;font-size: 2.4em;">{{usuariosActivos}}</span>
+                     </div>
+                  </div>
 
-            <div class="info-box" style="background: #f9f9f9;">
-              <span class="info-box-icon bg-yellow"><i class="fa fa-user-times"></i></span>
-              <div class="info-box-content">
-                <span class="info-box-text">{{ 'LBL_USUARIOS' | translate:param }} {{ 'LBL_INACTIVO' | translate:param }}</span>
-                <span class="info-box-number" style="text-align: center;font-size: 2.4em;">{{usuariosInactivos}}</span>
-              </div>
-            </div>
-
-
-
-            <div class="pull-right">
-              <a (click)="user()" class="verMás btn btn-primary btn-sm">
-                Ver Más <i class="fa fa-chevron-right"></i>
-              </a>
-            </div>
-
-          </div>
+                  <div class="info-box" style="background: #f9f9f9;">
+                     <span class="info-box-icon bg-yellow"><i class="fa fa-user-times"></i></span>
+                     <div class="info-box-content">
+                        <span class="info-box-text">{{ 'LBL_USUARIOS' | translate:param }} {{ 'LBL_INACTIVO' | translate:param }}</span>
+                        <span class="info-box-number"
+                              style="text-align: center;font-size: 2.4em;">{{usuariosInactivos}}</span>
+                     </div>
+                  </div>
 
 
-        </p-panel>
-      </div>
+                  <div class="pull-right">
+                     <a (click)="user()" class="verMás btn btn-primary btn-sm">
+                        Ver Más <i class="fa fa-chevron-right"></i>
+                     </a>
+                  </div>
 
-    </form>
-  </div>
+               </div>
+
+
+            </p-panel>
+         </div>
 
 </div>
 
@@ -76,14 +77,27 @@
 <!--{{item.panel}}-->
 <!--</div>-->
 
-<p-dialog header="{{ 'CONF_WIDGETS' | translate:param }}" [(visible)]="displayDialog"
-          responsive="true" modal="true">
-
-  <div class="ui-g-12">
-    <p-checkbox name="widgets" [(ngModel)]="rolesSistema" label="Roles Sistema" binary="true"></p-checkbox>
-  </div>
-  <div class="ui-g-12">
-    <p-checkbox name="widgets" [(ngModel)]="usuariosAct" label="Usuarios Act/Inact" binary="true"></p-checkbox>
-  </div>
-
+<p-dialog header="{{ 'CONF_WIDGETS' | translate:param }}" [(visible)]="displayDialog" responsive="true" modal="true">
+   <template ngFor let-widget [ngForOf]="widgets" let-i="index">
+      <div class="col-md-3">
+         <p-checkbox name="widgets"  value="{{widget.idWidget}}" [(ngModel)]="selectedWidgets"></p-checkbox>
+         {{widget.widget}}
+      </div>
+   </template>
+   <div class="col-md-3">
+   <p-checkbox name="widgets" [(ngModel)]="rolesSistema" label="Roles Sistema" binary="true"></p-checkbox>
+   </div>
+      <div class="col-md-3">
+   <p-checkbox name="widgets" [(ngModel)]="usuariosAct" label="Usuarios Act/Inact" binary="true"></p-checkbox>
+      </div>
+   <!--<div class="ui-g-12">-->
+   <!--</div>-->
+   <!--<div class="ui-g-12">-->
+   <!--</div>-->
+   <p-footer>
+      <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+         <button type="button" pButton icon="fa-check" (click)="displayDialog=false" label="{{ 'BTN_ACEPTAR' | translate:param }}"></button>
+      </div>
+      Selected Widgets: <span *ngFor="let widget of selectedWidgets" style="margin-right:10px">{{widget}}</span>
+   </p-footer>
 </p-dialog>

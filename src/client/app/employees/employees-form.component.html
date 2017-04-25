@@ -306,7 +306,7 @@
                         </div>
                         <div class="form-group col-md-3" *ngIf="employee.indicadorVivo == false">
                             <label for="NGdeathDate">{{'LBL_VIVO' | translate:param }}</label>
-                            <p-calendar id="NGdeathDate" name="NGdeathDate"  [showIcon]="true" [disabled]="disabled"
+                            <p-calendar id="NGdeathDate" name="NGdeathDate" [locale]="es" [showIcon]="true" [disabled]="disabled"
                                         [dataType]="date"  #NGdeathDate="ngModel" [required]="!employee.indicadorVivo"
                                         [(ngModel)]="deathDate" (onSelect)="onDeathDate($event)"
                             ></p-calendar>

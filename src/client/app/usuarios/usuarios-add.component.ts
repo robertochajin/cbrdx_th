@@ -75,18 +75,9 @@ export class UsuariosAddComponent implements OnInit {
                 private tercerosService: TercerosService,
                 private listasService: ListaService,
                 private router: Router) {
-        listasService.getMasterByCodigo("TIPDOC").subscribe(res => {
-            this.datatypeMaster = res;
-            listasService.getMasterDetails(this.datatypeMaster.idLista).subscribe(res => {
-                this.datatypeDetails = res;
-                for (let dataType of this.datatypeDetails) {
-                    if (dataType.indicadorPredeterminado) {
-                        this.selectedTipo = dataType.idListaItem;
-                        break;
-                    }
-                }
-            });
-        });
+       listasService.getMasterDetails('ListasTiposDocumentos').subscribe(res => {
+          this.datatypeDetails = res;
+       });
         usuariosService.listUsers().subscribe(res => {
             this.usuarios = res;
         });

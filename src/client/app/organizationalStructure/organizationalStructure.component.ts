@@ -8,6 +8,8 @@ import { ListEmployeesService } from "../_services/lists-employees.service";
 import { LocateService } from "../_services/locate.service";
 import { Localizaciones } from "../_models/localizaciones";
 import { PoliticalDivisionService } from "../_services/political-division.service";
+import {ListaItem} from "../_models/listaItem";
+import {ListaService} from "../_services/lista.service";
 
 @Component( {
                moduleId: module.id,
@@ -40,6 +42,7 @@ export class OrganizationalStructureComponent implements OnInit {
    
    constructor( private router: Router,
                 private organizationalStructureService: OrganizationalStructureService,
+                private listaService: ListaService,
                 private listEmployeesService: ListEmployeesService,
                 private politicalDivisionService: PoliticalDivisionService,
                 private locateService: LocateService ) {
@@ -65,27 +68,19 @@ export class OrganizationalStructureComponent implements OnInit {
             this.newCompany();
          }
       } );
-      
-      this.listEmployeesService.getDocumentTypes().subscribe( res => {
-         this.documentTypes.push( { label: "Seleccione", value: null } );
-         for ( let dp of res ) {
-            this.documentTypes.push( {
-                                        label: dp.nombreListaTipoDocumento,
-                                        value: dp.idListaTipoDocumento
-                                     } );
-         }
-      } );
-      
-      this.organizationalStructureService.getStrctureTypes().subscribe( res => {
-         this.structureTypes.push( { label: "Seleccione", value: null } );
-         for ( let dp of res ) {
-            this.structureTypes.push( {
-                                         label: dp.nombre,
-                                         value: dp.idListaTipoEstructura
-                                      } );
-         }
-      } );
-      
+
+      this.listaService.getMasterDetails('ListasTiposDocumentos').subscribe(res => {
+         this.documentTypes.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => this.documentTypes.push({label: s.nombre, value: s.idLista}));
+      });
+
+      this.listaService.getMasterDetails('ListasTiposEstructuras').subscribe(res => {
+         this.structureTypes.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => {
+            this.structureTypes.push({label: s.nombre, value: s.idLista});
+         });
+      });
+
       this.organizationalStructureService.getCostTypes().subscribe( res => {
          this.costTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {

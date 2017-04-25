@@ -9,7 +9,6 @@ import { ReferencesDetailComponent }  from './references-detail.component';
 import { ReferencesAddComponent }  from './references-add.component';
 import { ReferencesUpdateComponent }  from './references-update.component';
 import { ReferencesService } from './references.service';
-import { ReferencesTypesService } from '../_services/references-type.service';
 import { LocateService } from '../_services/locate.service';
 import {SharedModule} from "../shared/shared.module";
 import { PoliticalDivisionService } from "../_services/political-division.service";
@@ -21,6 +20,7 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
   AutoCompleteModule,
   FileUploadModule
 } from 'primeng/primeng';
+import {ListaService} from "../_services/lista.service";
 
 
 @NgModule({
@@ -39,7 +39,7 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
                     ReferencesUpdateComponent
                     ],
     bootstrap:    [ReferencesComponent],
-    providers:    [ReferencesService,ReferencesTypesService,LocateService, PoliticalDivisionService],
+    providers:    [ReferencesService,LocateService, PoliticalDivisionService,ListaService],
     exports: 	  [ReferencesComponent]
 })
 export class ReferencesModule { }

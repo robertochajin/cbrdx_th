@@ -18,9 +18,9 @@ import {AuthenticationService} from "./authentication.service";
 @Injectable()
 export class UsuariosService extends TercerosService {
 
-    private usuariosServiceURL = '<%= SVC_SP_URL %>/usuarios/';
-    private usuariosGruposServiceURL = '<%= SVC_SP_URL %>/usuariosGruposGestion/';
-    private usuariosRolesServiceURL = '<%= SVC_SP_URL %>/usuariosRoles/';
+    private usuariosServiceURL = '<%= SVC_TH_URL %>/api/usuarios/';
+    private usuariosGruposServiceURL = '<%= SVC_TH_URL %>/api/usuariosGruposGestion/';
+    private usuariosRolesServiceURL = '<%= SVC_TH_URL %>/api/usuariosRoles/';
 
     listUsers() {
         return this.http.get(this.usuariosServiceURL, {headers: this.headers}).map((res: Response) => res.json() as Usuario[]);
@@ -44,6 +44,10 @@ export class UsuariosService extends TercerosService {
 
     updateUser(c: Usuario) {
         return this.http.put(this.usuariosServiceURL, JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
+    }
+   
+    updatePass(c: Usuario) {
+         return this.http.put(this.usuariosServiceURL+ "cambiarPass/" + c.contrasenaAntigua+'/', JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
     }
 
     createUserGroup(p: UsuarioGrupoGestion): Promise<UsuarioGrupoGestion> {

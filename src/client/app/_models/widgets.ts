@@ -4,10 +4,10 @@ import { Injectable } from '@angular/core';
 export class Widgets {
 
    public idWidget:  number;
-   public widget:  string;
    public codigoWidget:  string;
    public descripcion:  string;
-   public indicadorHabilitado:  number;
+   public widget:  string;
+   public indicadorHabilitado:  boolean=true;
    public auditoriaUsuario:  number;
    public auditoriaFecha:  string;
 

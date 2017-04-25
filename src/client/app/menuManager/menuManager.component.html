@@ -49,7 +49,7 @@
                         <div class=" col-sm-9">
                            <input type="text" pInputText class="form-control" id="nombre"
                                   name="nombre"
-                                  [(ngModel)]="menus.nombre"
+                                  [(ngModel)]="menus.menu"
                                   #nombre="ngModel"
                                   (keyup)="capitalizeName()"
                                   required/>
@@ -63,7 +63,7 @@
                   <div *ngIf="!modulo">
                      <div class="row">
                         <div class="form-group">
-                           <label for="ruta" class="control-label col-sm-3">* Formulario </label>
+                           <label for="ruta" class="control-label col-sm-3">* Enlace </label>
                            <div class=" col-sm-9">
                               <input type="text" pInputText class="form-control" id="ruta" name="ruta"
                                      [(ngModel)]="menus.ruta"
@@ -71,7 +71,7 @@
                                      required/>
                               <div class="ui-message ui-messages-error ui-corner-all"
                                    *ngIf="f.submitted && !ruta.valid">
-                                 Ruta del Formulario es requerido
+                                 Enlace es requerido
                               </div>
                            </div>
                         </div>

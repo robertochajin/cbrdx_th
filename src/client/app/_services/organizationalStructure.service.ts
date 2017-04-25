@@ -45,11 +45,7 @@ export class OrganizationalStructureService {
       console.error( 'Error:', error );
       return Promise.reject( error.message || error );
    }
-   
-   getStrctureTypes() {
-      return this.http.get( this.serviceURL+'listasTiposEstructuras/enabled', { headers: this.headers } ).map( ( res: Response ) => res.json()  );
-   }
-   
+
    getCostTypes() {
       return this.http.get( this.serviceURL+'centrosCostos/enabled', { headers: this.headers } ).map( ( res: Response ) => res.json()  );
    }

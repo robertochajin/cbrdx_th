@@ -5,6 +5,8 @@ import { Location }                 from '@angular/common';
 import { FaultsAndSanctions }       from '../_models/faultsAndSanctions';
 import { SelectItem, Message, ConfirmDialog, ConfirmationService } from 'primeng/primeng';
 import {FaultsAndSanctionsService} from '../_services/faultsAndSanctions.service';
+import {ListaItem} from "../_models/listaItem";
+import {ListaService} from "../_services/lista.service";
 
 
 @Component({
@@ -25,29 +27,23 @@ export class FaultsAndSanctionsUpdateComponent {
   
   constructor(
     private faultsAndSanctionsService: FaultsAndSanctionsService,
-    private router: Router,
+    private listaService: ListaService,
     private route: ActivatedRoute,
     private location: Location,
     private confirmationService: ConfirmationService
   ) {
-    this.faultsAndSanctionsService.getListfaultsTypes().subscribe(res => {
-      this.faultsTypes.push({label: "Seleccione", value: null});
-      for (let dp of res) {
-        this.faultsTypes.push({
-          label: dp.nombre,
-          value: dp.idListaTipoFalta
+     this.listaService.getMasterDetails('ListasTiposFaltas').subscribe(res => {
+        this.faultsTypes.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.faultsTypes.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
-    this.faultsAndSanctionsService.getListfaultsStatus().subscribe(res => {
-      this.faultsStatus.push({label: "Seleccione", value: null});
-      for (let dp of res) {
-        this.faultsStatus.push({
-          label: dp.nombre,
-          value: dp.idListaEstadoFalta
+     });
+     this.listaService.getMasterDetails('ListasEstadosFaltas').subscribe(res => {
+        this.faultsStatus.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.faultsStatus.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
     
   }
   

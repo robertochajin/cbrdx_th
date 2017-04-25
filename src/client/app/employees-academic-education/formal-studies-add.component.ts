@@ -8,10 +8,7 @@ import {SelectItem, Message, ConfirmDialog, ConfirmationService} from 'primeng/p
 import {FormBuilder, FormGroup, Validators, FormControl, NgForm} from '@angular/forms';
 import * as moment from 'moment/moment';
 import {StudyLevelServices} from '../_services/study-level.service';
-import {StudyAreaServices} from '../_services/study-area.service';
 import {PoliticalDivisionService} from '../_services/political-division.service';
-import {StudyStateServices} from '../_services/study-state.service';
-import {InstituteServices} from '../_services/institute.service';
 import {StudyLevels} from "../_models/studyLevels";
 import {StudyAreas} from "../_models/studyAreas";
 import {StudyStates} from "../_models/studyStates";
@@ -19,6 +16,8 @@ import {Institutes} from "../_models/institutes";
 import {DivisionPolitica} from "../_models/divisionPolitica";
 import {NavService} from "../_services/_nav.service";
 import {TranslateService} from 'ng2-translate';
+import {ListaService} from "../_services/lista.service";
+import {ListaItem} from "../_models/listaItem";
 
 @Component({
   moduleId: module.id,
@@ -38,8 +37,8 @@ export class FormalStudiesAddComponent implements OnInit {
   studyLevelList: any[] = [];
   studyAreaList: any[] = [];
   studyStateList: any[] = [];
-  instituteList: Institutes[] = [];
-  selectedInstitute: Institutes;
+  instituteList: ListaItem[] = [];
+  selectedInstitute: ListaItem;
   minDate: Date = null;
   maxDate: Date = null;
   maxDateFinal: Date = null;
@@ -52,15 +51,10 @@ export class FormalStudiesAddComponent implements OnInit {
 
   constructor(private academicEducationService: AcademicEducationService,
               private politicalDivisionService: PoliticalDivisionService,
-              private instituteServices: InstituteServices,
+              private listaService: ListaService,
               private studyLevelServices: StudyLevelServices,
-              private studyAreaServices: StudyAreaServices,
-              private studyStateServices: StudyStateServices,
               private route: ActivatedRoute,
-              private router: Router,
               private location: Location,
-              private fb: FormBuilder,
-              private translate: TranslateService,
               private confirmationService: ConfirmationService,
               private _nav: NavService) {
   }
@@ -88,24 +82,23 @@ export class FormalStudiesAddComponent implements OnInit {
     this.maxDateFinal.setFullYear(year);
     this.range = `${lastYear}:${year}`;
 
-    this.studyLevelServices.getAllEnabled().subscribe(studyLevelList => {
-      this.studyLevelList.push({label: 'Seleccione', value: null});
-      studyLevelList.map((s: StudyLevels) => {
-        this.studyLevelList.push({label: s.nombreListaNivelEstudio, value: s.idListaNivelEstudio});
-      });
-    });
-    this.studyAreaServices.getAllEnabled().subscribe(studyAreaList => {
+     this.listaService.getMasterDetails('ListasNivelesEstudios').subscribe(res => {
+        this.studyLevelList.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => this.studyLevelList.push({label: s.nombre, value: s.idLista}));
+     });
+    this.listaService.getMasterDetails('ListasAreasEstudios').subscribe(studyAreaList => {
       this.studyAreaList .push({label: 'Seleccione', value: null});
-      studyAreaList.map((s: StudyAreas) => {
-        this.studyAreaList.push({label: s.nombreListaAreaEstudio, value: s.idListaAreaEstudio});
+      studyAreaList.map((s: ListaItem) => {
+        this.studyAreaList.push({label: s.nombre, value: s.idLista});
       });
     });
-    this.studyStateServices.getAllEnabled().subscribe(studyStateList => {
-      this.studyStateList.push({label: 'Seleccione', value: null});
-      studyStateList.map((s: StudyStates) => {
-        this.studyStateList.push({label: s.nombreListaEstadoEstudio, value: s.idListaEstadoEstudio});
-      });
-    });
+     this.listaService.getMasterDetails('ListasEstadosEstudios').subscribe(res => {
+        this.studyStateList.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.studyStateList.push({label: s.nombre, value: s.idLista});
+        });
+     });
+
     this.route.params.subscribe((params: Params) => {
       this.idTercero = params['tercero'];
     });
@@ -114,13 +107,13 @@ export class FormalStudiesAddComponent implements OnInit {
   onSubmit(value: string) {
     this.submitted = true;
     if (this.selectedCity !== undefined && this.selectedCity.idDivisionPolitica !== undefined) {
-      if (this.fstudy.otraInstitucion !== '' || (this.selectedInstitute != undefined && this.selectedInstitute.idListaInstitucion != undefined)) {
+      if (this.fstudy.otraInstitucion !== '' || (this.selectedInstitute != undefined && this.selectedInstitute.idLista != undefined)) {
         this.msgs = [];
         this.fstudy.idCiudad = this.selectedCity.idDivisionPolitica;
         this.fstudy.idTercero = this.idTercero;
         this.fstudy.indicadorHabilitado = true;
         if (this.selectedInstitute !== null){
-          this.fstudy.idInstitucion = this.selectedInstitute.idListaInstitucion;
+          this.fstudy.idInstitucion = this.selectedInstitute.idLista;
         }else {
           this.fstudy.idInstitucion = null;
         }
@@ -159,13 +152,13 @@ export class FormalStudiesAddComponent implements OnInit {
   }
 
   instituteSearch(event: any) {
-    this.instituteServices.getByWildCard(event.query).subscribe(
+     this.listaService.getMasterDetailsByWildCard('ListasInstituciones',event.query).subscribe(
       instituteList => this.instituteList = instituteList
     );
   }
 
   captureInstituteId(event: any) {
-    this.fstudy.idInstitucion = this.selectedInstitute.idListaInstitucion;
+    this.fstudy.idInstitucion = this.selectedInstitute.idLista;
     this.fstudy.otraInstitucion = '';
     this.wrongInstitute = false;
   }

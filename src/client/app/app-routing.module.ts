@@ -69,7 +69,6 @@ import {ConstanteDetailComponent} from "./constantes/constante-detail.component"
 
 // Listas
 import {ListaComponent} from "./listas/lista.component";
-import {ListaAddComponent} from "./listas/lista-add.component";
 import {ListaDetailComponent} from "./listas/lista-detail.component";
 import {ListaEditComponent} from "./listas/lista-edit.component";
 
@@ -88,6 +87,8 @@ import {GruposGestionEditComponent} from "./gruposGestion/gruposGestion-edit.com
 // Roles
 import {RolesComponent} from "./roles/roles.component";
 import {RolesAddComponent} from "./roles/roles-add.component";
+import { RolesUpdateComponent } from "./roles/roles-update.component";
+import { RolFuncionalitiesConfigComponent } from "./roles/rol-functionalities-config.component";
 
 // Usuarios
 import {UsuariosComponent} from "./usuarios/usuarios.component";
@@ -141,6 +142,14 @@ import {PhysicStructureAddComponent} from "./physic-structure/physic-structure-a
 import {PhysicStructureDetailComponent} from "./physic-structure/physic-structure-detail.component";
 import {PhysicStructureUpdateComponent} from "./physic-structure/physic-structure-update.component";
 
+// widgets
+import {WidgetsAddComponent} from "./widgets/widgets-add.component";
+import {WidgetsUpdateComponent} from "./widgets/widgets-update.component";
+
+// administrador de formularios
+import {FormManagerComponent} from "./form-manager/form-manager.component";
+import {FormManagerAddComponent} from "./form-manager/form-manager-add.component";
+import {FormManagerUpdateComponent} from "./form-manager/form-manager-update.component";
 // cargos posición en caso de ausencia
 import {AbsenceComponent} from "./position-absence/position-absence.component";
 import {PersonalityComponent} from "./position-personality/personality.component";
@@ -156,6 +165,8 @@ import {WidgetsComponent} from "./widgets/widgets.component";
 
 //Administracion
 import {MenuManagerComponent} from "./menuManager/menuManager.component";
+import { UserSessionComponent } from "./usuarios/userSession.component";
+
 
 
 
@@ -231,7 +242,6 @@ const routes = [
 
   // Listas
   {path: 'listas', component: ListaComponent, canActivate: [AuthGuard]},
-  {path: 'listas/add', component: ListaAddComponent, canActivate: [AuthGuard]},
   {path: 'listas/detail/:id', component: ListaDetailComponent, canActivate: [AuthGuard]},
   {path: 'listas/edit/:id', component: ListaEditComponent, canActivate: [AuthGuard]},
 
@@ -250,12 +260,15 @@ const routes = [
   // Roles
   {path: 'roles', component: RolesComponent, canActivate: [AuthGuard]},
   {path: 'roles/add', component: RolesAddComponent, canActivate: [AuthGuard]},
+  {path: 'roles/update/:id', component: RolesUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'roles-funcionalities-config/:id', component: RolFuncionalitiesConfigComponent, canActivate: [AuthGuard]},
 
   // Usuarios
-  {path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard]},
-  {path: 'usuarios/add', component: UsuariosAddComponent, canActivate: [AuthGuard]},
-  {path: 'usuarios/detail/:id', component: UsuarioDetailComponent, canActivate: [AuthGuard]},
-  {path: 'usuarios/edit/:id', component: UsuariosEditComponent, canActivate: [AuthGuard]},
+  {path: 'usuarios', component: UsuariosComponent},
+  {path: 'usuarios/add', component: UsuariosAddComponent},
+  {path: 'usuarios/detail/:id', component: UsuarioDetailComponent},
+  {path: 'usuarios/edit/:id', component: UsuariosEditComponent},
+  {path: 'user-session', component: UserSessionComponent},
 
   // Tipos De Area
   {path: 'tipoArea', component: TipoDeAreaComponent, canActivate: [AuthGuard]},
@@ -315,6 +328,13 @@ const routes = [
    {path: 'physic-structure/detail/:id', component: PhysicStructureDetailComponent, canActivate: [AuthGuard]},
    {path: 'physic-structure/update/:id', component: PhysicStructureUpdateComponent, canActivate: [AuthGuard]},
 
+   // widgets
+   {path: 'widgets/add', component: WidgetsAddComponent, canActivate: [AuthGuard]},
+   {path: 'widgets/update/:id', component: WidgetsUpdateComponent, canActivate: [AuthGuard]},
+   // adminstrador de formularios
+   {path: 'form-manager', component: FormManagerComponent, canActivate: [AuthGuard]},
+   {path: 'form-manager/add', component: FormManagerAddComponent, canActivate: [AuthGuard]},
+   {path: 'form-manager/update/:id', component: FormManagerUpdateComponent, canActivate: [AuthGuard]},
 
   // cargos factores de riesgo
   {path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [AuthGuard]},

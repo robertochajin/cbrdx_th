@@ -8,7 +8,7 @@ import {AuthenticationService} from "./authentication.service";
 export class GruposGestionService {
 
     headers = new Headers({'Content-Type': 'application/json'});
-    private serviceURL = '<%= SVC_SP_URL %>/gruposGestion/';
+    private serviceURL = '<%= SVC_TH_URL %>/api/gruposGestion/';
 
     constructor(private http: Http,
                 private authenticationService: AuthenticationService
