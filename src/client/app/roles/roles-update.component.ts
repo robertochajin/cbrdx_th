@@ -126,7 +126,7 @@ export class RolesUpdateComponent {
          let momFin: moment.Moment = moment( this.fechaFin, 'MM/DD/YYYY' );
          this.rol.fechaFin = momFin.format( 'YYYY-MM-DD' );
       }
-      this.rolesService.addRole( this.rol ).then( res => {
+      this.rolesService.updateRole( this.rol ).then( res => {
          this.router.navigate( [ 'roles/update/' + res.idRol ] );
       } );
       

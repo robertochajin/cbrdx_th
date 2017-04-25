@@ -25,6 +25,8 @@ export class RolFuncionalitiesComponent {
    msgs: Message[] = [];
    menus: SelectItem[] = [];
    idRol:number;
+   isUpdating : boolean = false;
+   
    constructor( private rolFuncionalitiesService: RolFuncionalitiesServices,
                 private router: Router,
                 private route: ActivatedRoute,
@@ -72,8 +74,11 @@ export class RolFuncionalitiesComponent {
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       } else {
+         
          this.rolFuncionalitiesService.update( this.rolFuncionality )
          .subscribe( data => {
+            this.isUpdating = false;
+            this.menus.splice(0,1);
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
             this.rolFuncionalitiesService.getAllByRol( this.idRol ).subscribe(
                funcionalities => this.funcionalities = funcionalities
@@ -96,11 +101,18 @@ export class RolFuncionalitiesComponent {
       this.msgs = [];
       this.rolFuncionality = f;
       this.show_form = true;
+      this.isUpdating = true;
+      this.menus.unshift( { label: f.menu, value: f.idFuncionalidad } );
+      
    }
    
    goBackUpdate() {
       this.msgs = [];
       this.show_form = false;
+      if(this.isUpdating == true){
+         this.isUpdating = false
+         this.menus.splice(0,1);
+      }
    }
    
    config(r: RolFuncionalities) {
