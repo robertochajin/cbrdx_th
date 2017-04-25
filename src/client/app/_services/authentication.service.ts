@@ -45,6 +45,7 @@ export class AuthenticationService {
       if (token) {
         this.token = token;
         localStorage.setItem('currentUser', JSON.stringify({username: username, token: token}));
+        localStorage.setItem('token', token);
         return true;
       } else {
         return false;
@@ -58,5 +59,6 @@ export class AuthenticationService {
     // clear token remove user from local storage to log user out
     this.token = null;
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('token');
   }
 }

@@ -67,6 +67,9 @@ export class ProjectConfig extends SeedConfig {
        name: 'ng2-translate',
     //   // Path to the package's bundle
        path: 'node_modules/ng2-translate/bundles/ng2-translate.umd.js'
+     },{
+        name: 'angular2-jwt',
+        path: 'node_modules/angular2-jwt/angular2-jwt.js'
      }];
     //
      this.addPackagesBundles(additionalPackages);
