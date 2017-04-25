@@ -4,7 +4,7 @@
 export class TipoDeArea {
 
     idEstructuraArea: number;
-    estructuraArea: string;
+    estructuraArea: string = '';
     codigoArea: string;
     indicadorHabilitado: boolean = true;
     auditoriaUsuario: number;
