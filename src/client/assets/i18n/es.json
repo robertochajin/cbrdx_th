@@ -263,7 +263,9 @@
       "LBL_NUEVACONTRASENA":"Nueva Contraseña",
       "LBL_REPETIRCONTRASENA":"Repetir nueva contraseña",
       "LBL_CONTRASENAACTUALREQUERIDA":"Contraseña actual es requerida.",
-      "LBL_CONTRASENANUEVAREQUERIDA":"Contraseña Nueva es requerida."
+      "LBL_CONTRASENANUEVAREQUERIDA":"Contraseña Nueva es requerida.",
+      "LBL_NUEVADIFERENTEALAACTUAL":"Contraseña nueva debe ser diferente de la Actual",
+      "LBL_DEBECOINCIDIRCONTRASENA": "Debe coincidir con la Contraseña nueva"
    },
   "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 }
