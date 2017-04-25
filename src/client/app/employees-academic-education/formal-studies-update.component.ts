@@ -83,9 +83,15 @@ export class FormalStudiesUpdateComponent implements OnInit {
         this.selectedCity = new DivisionPolitica();
         this.selectedCity.camino = this.fstudy.ciudad;
         this.selectedCity.idDivisionPolitica = this.fstudy.idCiudad;
+        if(this.fstudy.idCiudad){
+           this.wrongCity = false;
+        }
         this.selectedInstitute = new ListaItem();
         this.selectedInstitute.nombre = this.fstudy.institucion;
         this.selectedInstitute.idLista = this.fstudy.idInstitucion;
+        if(this.fstudy.idInstitucion){
+           this.wrongInstitute = false;
+        }
         this.idTercero = this.fstudy.idTercero;
         let fi: moment.Moment = moment(this.fstudy.fechaIngresa, 'YYYY-MM-DD');
         this.fstudy.fechaIngresa = fi.format('MM/DD/YYYY');

@@ -59,7 +59,7 @@ export class RolWidgetsComponent{
         this.msgs = [];
         this.show_form  = false;
         
-        if(this.rolWidget.idRolWidgets == null || this.rolWidget.idRolWidgets == 0) {
+        if(this.rolWidget.idRolWidget == null || this.rolWidget.idRolWidget == 0) {
            this.rolWidget.idRol = this.idRol;
             this.rolWidgetsServices.add(this.rolWidget)
             .subscribe(data => {
