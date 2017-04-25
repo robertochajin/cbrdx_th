@@ -19,6 +19,7 @@ export class RolesUpdateComponent {
    
    rol: Rol = new Rol();
    roles: Rol[];
+   show_msg:string;
    msgs: Message[] = [];
    codeExists: boolean = false;
    range: string;
@@ -45,6 +46,13 @@ export class RolesUpdateComponent {
    }
    
    ngOnInit() {
+      
+      this.route.params.subscribe(params => {
+         this.show_msg = params['msj'];
+         if(this.show_msg){
+            this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
+         }
+      });
       
       this.route.params
       .switchMap( ( params: Params ) => this.rolesService.viewRole( +params[ 'id' ] ) )
