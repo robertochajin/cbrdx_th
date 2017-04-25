@@ -14,7 +14,7 @@ import { SelectItem, Message, ConfirmationService} from 'primeng/primeng';
     selector: 'rol-fucionalities-config',
     providers:  [ConfirmationService]
 })
-export class RolFuncionalitiesConfigComponent{
+export class RolFuncionalitiesConfigComponent {
    
     rolFuncionality: RolFuncionalities;
     listaFuncionalityControl: RolFunctionalityControl[];
@@ -50,11 +50,13 @@ export class RolFuncionalitiesConfigComponent{
                 this.fControles = new RolFunctionalityControl();
                 if(this.listaFuncionalityControl.find(d => d.idFuncionalidadControl = s.idFuncionalidadControl)){
                    this.fControles = this.listaFuncionalityControl.find(d => d.idFuncionalidadControl = s.idFuncionalidadControl)
+                   this.fControles.codigo = s.codigo;
                 }else {
                    this.fControles.idFuncionalidadControl = s.idFuncionalidadControl;
                    this.fControles.idRol = this.rolFuncionality.idRol;
                    this.fControles.rol = this.rolFuncionality.rol;
                    this.fControles.control = s.control;
+                   this.fControles.codigo = s.codigo;
                    this.fControles.indicadorHabilitado = false;
                    this.fControles.indicadorEditar = false;
                    this.fControles.indicadorSeccion = false;
@@ -73,39 +75,25 @@ export class RolFuncionalitiesConfigComponent{
        
     }
     
-    onSubmit() {
-        this.msgs = [];
-        this.show_form  = false;
-        /*this.funcionality.idRol = this.rol.idRol;
-        if(this.funcionality.idRolFuncionalidad == null || this.funcionality.idRolFuncionalidad == 0) {
-            this.rolFuncionalitiesService.add(this.funcionality)
-            .subscribe(data => {
-               this.menus.splice(this.menus.indexOf(this.menus.find(m => m.value == this.funcionality.idMenu)),1);
-                this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
-                this.rolFuncionalitiesService.getAllByRol(this.rol.idRol).subscribe(
-                   funcionalities => this.funcionalities = funcionalities
-                );
-            }, error => {
-              this.show_form  = true;
-              this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
-            });
-        }else{
-            this.rolFuncionalitiesService.update(this.funcionality)
-            .subscribe(data => {
-                this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
-                this.rolFuncionalitiesService.getAllByRol(this.rol.idRol).subscribe(
-                   funcionalities => this.funcionalities = funcionalities
-                );
-            }, error => {
-              this.show_form  = true;
-              this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
-            });
-        }*/
-      
-    }
-   
    changeControl(fc:RolFunctionalityControl){
-       
+       console.info(fc);
+      this.msgs = [];
+      if(fc.idRolFuncionalidadControl == null ) {
+         this.rolFuncionalitiesService.addControl(fc).subscribe(data => {
+            this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
+            fc.idRolFuncionalidadControl = data.idRolFuncionalidadControl
+         }, error => {
+            this.show_form  = true;
+            this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
+         });
+      }else{
+         this.rolFuncionalitiesService.updateControl(fc).subscribe(data => {
+            this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
+         }, error => {
+            this.show_form  = true;
+            this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
+         });
+      }
    }
     
 }
