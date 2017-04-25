@@ -123,9 +123,9 @@ export class RolesUpdateComponent {
    }
    
    capitalizeName() {
-      let input = this.rol.descripcion;
+      let input = this.rol.rol;
       if ( input != "" && input != null ) {
-         this.rol.descripcion = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+         this.rol.rol = input.toUpperCase();
       }
    }
    

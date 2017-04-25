@@ -31,8 +31,14 @@
             </div>
             <div class="ui-grid-col-8">
                <label for="nombre">* Nombre</label>
-               <input pInputText type="text" id="nombre" name="nombre"
-                      [(ngModel)]="rol.rol" #nombre="ngModel" required/>
+               <!--<input pInputText type="text" id="nombre" name="nombre"
+                      [(ngModel)]="rol.rol" #nombre="ngModel" (keyup)="capitalizeName()" required/>-->
+               <p-inputMask id="nombre" name="nombre" [(ngModel)]="rol.rol" mask="ROLE_?********************************************************"
+                            (keyup)="capitalizeName()" requiredb slotChar=""
+                            #nombre="ngModel"
+               >
+                  
+               </p-inputMask>
                <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="f.submitted && !nombre.valid">
                   <i class="fa fa-close"></i>
