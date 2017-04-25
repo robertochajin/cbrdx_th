@@ -20,15 +20,8 @@
             <label class="col-md-3 col-sm-6 col-xs-4 control-label">Id:</label>
             <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{masterList.idLista}}</strong></label>
 
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Habilitado:</label>
-            <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{habilitado}}</strong></label>
-          </div>
-          <div class="row">
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label" *ngIf="masterList.dependeLista">Depende de Item:</label>
-            <label class="col-md-3 col-sm-6 col-xs-8" *ngIf="masterList.dependeLista"><strong>{{masterList.dependeItem}}</strong></label>
-
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Depende de Lista:</label>
-            <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{masterList.dependeLista}}</strong></label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Editable:</label>
+            <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{masterList.indicadorEditable}}</strong></label>
           </div>
       </fieldset>
     </form>
