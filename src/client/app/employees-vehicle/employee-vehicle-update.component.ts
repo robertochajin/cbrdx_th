@@ -29,7 +29,7 @@ export class EmployeesVehicleUpdateComponent {
   listTypeService: SelectItem[] = [];
   listBrandVehicle: SelectItem[] = [];
   msgs: Message[] = [];
-  year: Number;
+  year: number;
   anioValid: boolean = false;
   ciudadPlaca: String;
   backupCiudadPlaca: String;
@@ -58,7 +58,7 @@ export class EmployeesVehicleUpdateComponent {
 
     let today = new Date();
     let year = today.getFullYear();
-    this.year = year;
+    this.year = year+1;
 
      this.listaService.getMasterDetails('ListasTiposVehiculos').subscribe(res => {
         this.listTypeVehicle.push({label: 'Seleccione', value: null});
@@ -104,6 +104,16 @@ export class EmployeesVehicleUpdateComponent {
     let modelo = this.employeeVehicle.modelo + "";
     if (this.employeeVehicle.modelo != null) {
       this.employeeVehicle.modelo = Number(modelo.replace(/[^0-9]/g, ''));
+       if(this.employeeVehicle.modelo>this.year){
+          this.employeeVehicle.modelo=this.year;
+       }
+       if(this.employeeVehicle.modelo===0){
+          this.employeeVehicle.modelo=1900;
+       }
+       let m =this.employeeVehicle.modelo.toString();
+       if(m.length===4 && this.employeeVehicle.modelo<1900){
+          this.employeeVehicle.modelo=1900;
+       }
     }
   }
 

@@ -53,6 +53,11 @@ export class RolesAddComponent {
          monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre' ],
          monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
+      let today = new Date();
+      let month = today.getMonth();
+      let year = today.getFullYear();
+      let nextYear = year + 3;
+      this.range = `${year}:${nextYear}`;
    }
    
    onFechaInicio( event: any ) {
@@ -94,9 +99,9 @@ export class RolesAddComponent {
    }
    
    capitalizeName() {
-      let input = this.rol.descripcion;
+      let input = this.rol.rol;
       if ( input != "" && input != null ) {
-         this.rol.descripcion = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+         this.rol.rol = input.toUpperCase();
       }
    }
    
