@@ -18,11 +18,11 @@ export class CompetenciesServices {
    }
 
    getAllEnabledByGroup(idGrupo: number): Observable<Competencies[]> {
-      return this.http.get(this.masterService + 'enabled/' + idGrupo).map((res: Response) => res.json() as Competencies[]);
+      return this.http.get(this.masterService + 'enabled/' + idGrupo, {headers: this.headers}).map((res: Response) => res.json() as Competencies[]);
    }
 
    getAllByGroup(idGrupo: number): Observable<Competencies[]> {
-      return this.http.get(this.masterService + 'buscarGrupo/' + idGrupo).map((res: Response) => res.json() as Competencies[]);
+      return this.http.get(this.masterService + 'buscarGrupo/' + idGrupo, {headers: this.headers}).map((res: Response) => res.json() as Competencies[]);
    }
 
 
@@ -36,7 +36,7 @@ export class CompetenciesServices {
    }
 
    get(id: number) {
-      return this.http.get(this.masterService + 'buscarId/' + id)
+      return this.http.get(this.masterService + 'buscarId/' + id, {headers: this.headers})
          .map((res: Response) => res.json() as Competencies);
    }
 

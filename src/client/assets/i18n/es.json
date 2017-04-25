@@ -267,5 +267,9 @@
       "LBL_NUEVADIFERENTEALAACTUAL":"Contraseña nueva debe ser diferente de la Actual",
       "LBL_DEBECOINCIDIRCONTRASENA": "Debe coincidir con la Contraseña nueva"
    },
+   "ROLES":{
+      "LBL_CONTROLES":"Controles",
+      "LBL_SECCIONES":"Secciones"
+   },
   "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 }

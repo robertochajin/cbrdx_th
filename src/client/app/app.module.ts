@@ -72,6 +72,9 @@ import {WidgetModule} from "./widgets/widgets.module";
 // Administracion
 import { MenuManagerModule } from "./menuManager/menuManager.module";
 
+// Auth JWT module
+import {AuthModule} from "./shared/auth.module";
+
 
 //CarsModule,
 @NgModule({
@@ -97,6 +100,7 @@ import { MenuManagerModule } from "./menuManager/menuManager.module";
       CompetenciesGroupsModule,
       WidgetModule,
       FormManagerModule,
+      AuthModule,
       SharedModule.forRoot(),
       TranslateModule.forRoot({
          provide: TranslateLoader,

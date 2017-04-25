@@ -8,6 +8,7 @@ export class RolFunctionalityControl {
    public idRol: number;
    public rol:  string;
    public control:  string;
+   public codigo:  string;
    public indicadorHabilitado:  boolean=true;
    public indicadorSeccion:  boolean=true;
    public indicadorEditar:  boolean=true;
@@ -16,5 +17,11 @@ export class RolFunctionalityControl {
    constructor() {
       this.auditoriaFecha = null;
       this.auditoriaUsuario = null;
+      this.idRolFuncionalidadControl = null;
+      this.idFuncionalidadControl = null;
+      this.idRol = null;
+      this.rol = "";
+      this.control = "";
+      this.codigo = "";
    }
 }

@@ -16,11 +16,11 @@ export class RolWidgetsServices {
   }
 
   getAll() {
-    return this.http.get(this.serviceURL).map((res: Response) => res.json() as RolWidgets[]);
+    return this.http.get(this.serviceURL, { headers: this.headers }).map((res: Response) => res.json() as RolWidgets[]);
   }
 
   getAllByRol(id: number): Observable<RolWidgets[]> {
-    return this.http.get(this.serviceURL + 'buscarRol/'+ id).map((res: Response) => res.json() as RolWidgets[]);
+    return this.http.get(this.serviceURL + 'buscarRol/'+ id, { headers: this.headers }).map((res: Response) => res.json() as RolWidgets[]);
   }
 
   add(f: RolWidgets) {
@@ -33,7 +33,7 @@ export class RolWidgetsServices {
   }
 
   get(id: number) {
-    return this.http.get(this.serviceURL + 'buscarId/' + id)
+    return this.http.get(this.serviceURL + 'buscarId/' + id, { headers: this.headers })
       .map((res: Response) => res.json() as RolWidgets);
   }
 

@@ -40,6 +40,7 @@ export class TipoDeAreaAddComponent {
   
     capitalize() {
       let input = this.areas.estructuraArea;
+      if(input)
       this.areas.estructuraArea = input.substring(0,1).toUpperCase()+input.substring(1).toLowerCase();
     }
 }

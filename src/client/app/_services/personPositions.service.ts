@@ -18,11 +18,11 @@ export class PersonPositionsServices {
    }
 
    getAllEnabled() {
-      return this.http.get(this.masterService + 'enabled/').map((res: Response) => res.json() as PersonPositions[]);
+      return this.http.get(this.masterService + 'enabled/',{headers: this.headers}).map((res: Response) => res.json() as PersonPositions[]);
    }
 
    getAllByOrganizationalStructure(idOrganizationalStructure: number) {
-      return this.http.get(this.masterService + 'buscarEstructura/' + idOrganizationalStructure).map((res: Response) => res.json() as PersonPositions[]);
+      return this.http.get(this.masterService + 'buscarEstructura/' + idOrganizationalStructure,{headers: this.headers}).map((res: Response) => res.json() as PersonPositions[]);
    }
 
    add(f: PersonPositions) {
@@ -35,7 +35,7 @@ export class PersonPositionsServices {
    }
 
    get(id: number) {
-      return this.http.get(this.masterService + 'buscarId/' + id)
+      return this.http.get(this.masterService + 'buscarId/' + id,{headers: this.headers})
          .map((res: Response) => res.json() as PersonPositions);
    }
 

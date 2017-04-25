@@ -18,7 +18,7 @@
 </div>
 <div>
    <p-tabView>
-      <p-tabPanel header="{{ 'MSG_SECCIONES' | translate }}" >
+      <p-tabPanel header="{{ 'ROLES.LBL_SECCIONES' | translate }}" >
          <div class="row datable-header">
             <div class="col-md-6 col-xs-12 datatable-header-add">
             </div>
@@ -42,7 +42,7 @@
             </p-column>
          </p-dataTable>
       </p-tabPanel>
-      <p-tabPanel header="{{ 'MSG_CONTROLES' | translate }}" >
+      <p-tabPanel header="{{ 'ROLES.LBL_CONTROLES' | translate }}" >
          <div class="row datable-header">
             <div class="col-md-6 col-xs-12 datatable-header-add">
             </div>
@@ -56,7 +56,7 @@
          <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="controles" [paginator]="true"
                       [rows]="10" [responsive]="true" [globalFilter]="gb">
             <p-column field="idFuncionalidadControl" header="Id" [sortable]="true"></p-column>
-            <p-column field="codigo" header="Codigo" [sortable]="true"></p-column>
+            <p-column field="codigo" header="Código" [sortable]="true"></p-column>
             <p-column field="control" header="Nombre" [sortable]="true"></p-column>
             <p-column field="indicadorHabilitado" header="Visualizar" [sortable]="true" styleClass="datatable-col-center">
                <template let-lfuncionalityControl="rowData" pTemplate="body">
