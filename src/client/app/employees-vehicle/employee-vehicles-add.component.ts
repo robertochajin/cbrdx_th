@@ -106,6 +106,13 @@ export class EmployeesVehicleAddComponent {
       if(this.employeeVehicle.modelo>this.year){
          this.employeeVehicle.modelo=this.year;
       }
+      if(this.employeeVehicle.modelo===0){
+         this.employeeVehicle.modelo=1900;
+      }
+       let m =this.employeeVehicle.modelo.toString();
+       if(m.length===4 && this.employeeVehicle.modelo<1900){
+          this.employeeVehicle.modelo=1900;
+       }
     }
   }
   inputPlaca() {

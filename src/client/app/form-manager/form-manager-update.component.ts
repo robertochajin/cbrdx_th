@@ -95,8 +95,15 @@ export class FormManagerUpdateComponent {
       this.formManagerService.getFunctionality().subscribe(res => {
          this.formManagerService.getAllFunctionality().subscribe(rest => {
             this.listFunctionalities = rest;
+            this.functionality;
             this.listFunctionality.push({label: "Seleccione", value: null});
             for (let dp of res) {
+               if(this.functionality.idMenu===dp.idMenu){
+                  this.listFunctionality.push({
+                     label: dp.menu,
+                     value: dp.idMenu
+                  });
+               }
                let bandera = false;
                for (let r of this.listFunctionalities) {
                   if (dp.idMenu === r.idMenu) {
