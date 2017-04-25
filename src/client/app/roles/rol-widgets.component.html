@@ -57,7 +57,7 @@
          </div>
       </div>
    </div>
-   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="contacts" [paginator]="true"
+   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="rolWidgets" [paginator]="true"
                 [rows]="10" [responsive]="true" [globalFilter]="gb">
       <p-column field="widget" header="Widget" [sortable]="true"></p-column>
       <p-column header="Acciones" styleClass="datatable-col-action">
