@@ -47,6 +47,7 @@
                            [maxDate]="maxDate" [locale]="es" readonlyInput="true"
                            [(ngModel)]="fechaInicio" #fInicio="ngModel"
                            (onSelect)="onFechaInicio($event)"
+                           [yearRange]="range" [monthNavigator]="true" [yearNavigator]="true"
                >
                </p-calendar>
             </div>
@@ -62,6 +63,7 @@
                            [minDate]="minDate" [locale]="es" readonlyInput="true" [disabled]="fechaInicio == null"
                            [(ngModel)]="fechaFin" #fFin="ngModel" [required]="fechaInicio != null"
                            (onSelect)="onFechaFin($event)"
+                           [yearRange]="range" [monthNavigator]="true" [yearNavigator]="true"
                >
                </p-calendar>
                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fFin.valid && fechaInicio != null">
@@ -78,8 +80,8 @@
                </div>
             </div>
          </div>
-         <div class="row">
-            <div class=" col-sm-12">
+         <div class="ui-grid-row">
+            <div class="form-group col-sm-12">
                <label for="descripcion">Descripción</label>
                <textarea pInputTextarea id="descripcion" name="descripcion"
                          [(ngModel)]="rol.descripcion" maxlength="500"

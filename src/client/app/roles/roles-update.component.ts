@@ -69,6 +69,11 @@ export class RolesUpdateComponent {
          monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre' ],
          monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
+      let today = new Date();
+      let month = today.getMonth();
+      let year = today.getFullYear();
+      let nextYear = year + 3;
+      this.range = `${year}:${nextYear}`;
    }
    
    onFechaInicio( event: any ) {
