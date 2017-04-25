@@ -8,6 +8,7 @@ import { PositionsService } from "../_services/positions.service";
 import { ListPositionsService } from "../_services/lists-positions.service";
 import { TipoDeAreaService } from "../_services/tipoDeArea.service";
 import {ListaService} from "../_services/lista.service";
+import {ListaItem} from "../_models/listaItem";
 
 @Component( {
                moduleId: module.id,
@@ -47,12 +48,10 @@ export class PositionsAddComponent {
                                          } );
          }
       } );
-      this.positionsService.getListStudies().subscribe( res => {
-         this.listStudies.push( { label: "Seleccione", value: null } );
-         for ( let dp of res ) {
-            this.listStudies.push( {label: dp.nombreListaNivelEstudio,value: dp.idListaNivelEstudio} );
-         }
-      } );
+      this.listaService.getMasterDetails('ListasNivelesEstudios').subscribe(res => {
+         this.listStudies.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => this.listStudies.push({label: s.nombre, value: s.idLista}));
+      });
       this.tipoDeAreaService.getlistAreas().subscribe( res => {
          this.areaTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
