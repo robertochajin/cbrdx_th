@@ -21,6 +21,7 @@ export class GruposGestionEditComponent {
     displayDialog: boolean = false;
     isRequired = false;
     isGreater = true;
+   private es: any;
 
     constructor(private gruposGestionService: GruposGestionService, private router: Router, private route: ActivatedRoute) {
         route.params.switchMap((params: Params) => gruposGestionService.viewGruposGestion(+params['id']))
@@ -36,6 +37,15 @@ export class GruposGestionEditComponent {
                     this.gruposGestion = res.filter(t => t.idGrupoGestion != this.grupoGestion.idGrupoGestion);
                 });
             });
+
+       this.es = {
+          firstDayOfWeek: 1,
+          dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
+          dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
+          dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+          monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+          monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
+       };
     }
 
     clearSelection() {
