@@ -117,6 +117,7 @@
       "LBL_ESTRATO":"Estrato",
   "FIN_DIVISIONPOLITICA":"=================================================================",
 
+
   "EMPLOYEES":{
 
     "LBL_ACTIVIDAD":"Actividad",
@@ -269,7 +270,7 @@
    "ADMIN_FORMULARIOS":{
    "LBL_FUNCIONALIDAD":"Funcionalidad",
    "MSG_FUNCIONALIDADREQUERIDA":"Funcionalidad requerida",
-   "LBL_AÑADIRFUNCIONALIDAD":"Añadir funcionalidad",
+   "LBL_AÑADIRFUNCIONALIDAD":"Nueva funcionalidad",
    "LBL_SECCION":"Sección",
    "LBL_CLASIFICACION":"Clasificación",
    "LBL_CLASIFICACIONINFORMACION":"Clasificación Información",
@@ -302,7 +303,9 @@
       "LBL_NUEVACONTRASENA":"Nueva Contraseña",
       "LBL_REPETIRCONTRASENA":"Repetir nueva contraseña",
       "LBL_CONTRASENAACTUALREQUERIDA":"Contraseña actual es requerida.",
-      "LBL_CONTRASENANUEVAREQUERIDA":"Contraseña Nueva es requerida."
+      "LBL_CONTRASENANUEVAREQUERIDA":"Contraseña Nueva es requerida.",
+      "LBL_NUEVADIFERENTEALAACTUAL":"Contraseña nueva debe ser diferente de la Actual",
+      "LBL_DEBECOINCIDIRCONTRASENA": "Debe coincidir con la Contraseña nueva"
    },
    "ROLES":{
       "LBL_CONTROLES":"Controles",

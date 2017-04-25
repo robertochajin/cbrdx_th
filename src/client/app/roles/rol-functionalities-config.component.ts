@@ -100,7 +100,7 @@ export class RolFuncionalitiesConfigComponent {
       });
    }
    goBack(){
-      this.location.back();
+      this.router.navigate( [ 'roles/update/' + this.rolFuncionality.idRol] );
    }
     
 }
