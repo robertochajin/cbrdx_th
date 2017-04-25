@@ -10,7 +10,7 @@
                   <div class="ui-grid-col-10">
                      <label for="idWidget">Widget</label>
                      <p-dropdown id="idWidget" name="idWidget" #idWidget="ngModel" [options]="widgets"
-                                 [autoWidth]="false"
+                                 [autoWidth]="false" [readonly]="isUpdating"
                                  [(ngModel)]="rolWidget.idWidget" required></p-dropdown>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="rw.submitted && !idWidget.valid">
