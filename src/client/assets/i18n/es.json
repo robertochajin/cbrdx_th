@@ -226,6 +226,8 @@
       "MSG_VIVIENDAREQUERIDA":"La Vivienda es requerido",
       "MSG_TIPOCONSTRUCCIONREQUERIDA":"Tipo de Construción es requerido",
       "MSG_NUMEROPISOSREQUERIDA":"Número de Pisos es requerido",
+      "MSG_ANOCONSTRUCCIONREQUERIDA":"Año de Construcción es requerido",
+      "MSG_NUMEROSOTANOSREQUERIDO":"Número de Sótanos es requerido",
 
 
   "FIN_EMPLOYEES":"=================================================================",

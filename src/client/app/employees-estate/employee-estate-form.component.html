@@ -67,27 +67,27 @@
           <div class="ui-message ui-messages-error ui-corner-all"
                *ngIf="f.submitted && !numeroPisos.valid">
             <i class="fa fa-close"></i>
-            Pisos requeridos
+            {{ 'MSG_NUMEROPISOSREQUERIDA' | translate:param }}
           </div>
         </div>
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-6">
-          <label for="anioConstruccion">Año de Construcción</label>
+          <label for="anioConstruccion">{{ 'LBL_ANOCONSTRUCCION' | translate:param }}</label>
           <input id="anioConstruccion" name="anioConstruccion" #anioConstruccion="ngModel" pInputText type="text"
                  (keyup)="inputNumber()" (paste)="inputNumber()" (change)="anioValidate()"
                  [(ngModel)]="employeeEstate.anioConstruccion" required maxlength="4"/>
           <div class="ui-message ui-messages-error ui-corner-all"
                *ngIf="(f.submitted && !anioConstruccion.valid )&& !anioValid">
             <i class="fa fa-close"></i>
-            Año construcción requerido
+            {{ 'MSG_ANOCONSTRUCCIONREQUERIDA' | translate:param }}
           </div>
           <!--<div *ngIf="anioValid" class="alert alert-danger">-->
             <!--Año no valido-->
           <!--</div>-->
         </div>
         <div class="ui-grid-col-6">
-          <label for="numeroSotanos">Número de Sotanos</label>
+          <label for="numeroSotanos">{{ 'LBL_NUMEROSOTANOS' | translate:param }}</label>
           <input id="numeroSotanos" name="numeroSotanos" #numeroSotanos="ngModel" pInputText type="text"
                  (keyup)="inputNumberSotanos()"
                  (paste)="inputNumberSotanos()"
@@ -95,13 +95,13 @@
           <div class="ui-message ui-messages-error ui-corner-all"
                *ngIf="f.submitted && !numeroSotanos.valid ">
             <i class="fa fa-close"></i>
-           Sotanos requeridos
+           {{ 'MSG_NUMEROSOTANOSREQUERIDO' | translate:param }}
           </div>
         </div>
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-6">
-          <label for="idEstrato">Estrato</label>
+          <label for="idEstrato">{{ 'LBL_ESTRATO' | translate:param }}</label>
           <p-dropdown id="idEstrato" name="idEstrato" required="true"
                       [options]="listStratum" [autoWidth]="false"
                       [(ngModel)]="employeeEstate.idEstrato"
@@ -110,7 +110,7 @@
           <div class="ui-message ui-messages-error ui-corner-all"
                *ngIf="f.submitted && !idEstrato.valid">
             <i class="fa fa-close"></i>
-            Estrato requerido
+            {{ 'LBL_ESTRATO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
           </div>
         </div>
       </div>
