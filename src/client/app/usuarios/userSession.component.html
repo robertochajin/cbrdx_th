@@ -14,15 +14,13 @@
          </div>
          <div class="clearfix card-header">
             <div class="col-md-4">
-               <img class="img-circle img-responsive user-avatar" src="assets/images/user-160x160.jpg">
-
+               <img class="img-circle img-responsive user-avatar" src="assets/images/user-160x160.jpg" />
             </div>
             <div class="col-md-8">
                <h4>{{employee.nombreCompleto}} - {{employee.fechaNacimiento}}</h4>
                <span>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</span><br/>
                <p-fileUpload name="myfile[]" url="http://localhost:3000/upload" auto="true"
                              chooseLabel="{{'USER_SESSION.LBL_NUEVOAVATAR' | translate:param}}"></p-fileUpload>
-
 
                <div *ngIf="user">
                   <div class="header" style=" margin-top: 40px;">
@@ -57,7 +55,7 @@
                         <div class="ui-message ui-messages-error ui-corner-all"
                              *ngIf="f.submitted && newPass == oldPass">
                            <i class="fa fa-close"></i>
-                           Contraseña nueva debe ser diferente de la Actual
+                           {{"USER_SESSION.LBL_NUEVADIFERENTEALAACTUAL" | translate:param}}
                         </div>
                      </div>
                   </div>
@@ -74,7 +72,7 @@
                         <div class="ui-message ui-messages-error ui-corner-all"
                              *ngIf="f.submitted && newPassConfirm != newPass && newPass != null && newPass != ''">
                            <i class="fa fa-close"></i>
-                           Debe coincidir con la Contraseña nueva
+                           {{"USER_SESSION.LBL_DEBECOINCIDIRCONTRASENA" | translate:param}}
                         </div>
                      </div>
                   </div>
