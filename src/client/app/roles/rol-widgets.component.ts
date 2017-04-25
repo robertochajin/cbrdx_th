@@ -26,6 +26,7 @@ export class RolWidgetsComponent{
     widgets: SelectItem[] = [];
     listWidgets: Widgets[] = [];
     idRol:number;
+   isUpdating : boolean = false;
    
     constructor(private rolWidgetsServices: RolWidgetsServices,
                 private router: Router,
@@ -72,8 +73,11 @@ export class RolWidgetsComponent{
               this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
             });
         }else{
+           this.isUpdating = false;
             this.rolWidgetsServices.update(this.rolWidget)
             .subscribe(data => {
+               this.isUpdating = false;
+               this.widgets.splice(0,1);
                 this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
                 this.rolWidgetsServices.getAllByRol(this.idRol).subscribe(
                    rolWidgets => this.rolWidgets = rolWidgets
@@ -96,11 +100,18 @@ export class RolWidgetsComponent{
       this.msgs = [];
       this.rolWidget = f;
       this.show_form  = true;
+       this.isUpdating = true;
+       this.widgets.unshift( { label: f.widget, value: f.idWidget } );
+   
     }
     
     goBackUpdate(){
       this.msgs = [];
       this.show_form  = false;
+       if(this.isUpdating == true){
+          this.isUpdating = false
+          this.widgets.splice(0,1);
+       }
     }
     
 }
