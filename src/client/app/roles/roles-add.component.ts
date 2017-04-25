@@ -116,4 +116,8 @@ export class RolesAddComponent {
       
    }
    
+   clearSelectionRol() {
+      this.fechaInicio = null;
+      this.fechaFin = null;
+   }
 }
