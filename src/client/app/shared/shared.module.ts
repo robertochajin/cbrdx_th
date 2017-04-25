@@ -16,54 +16,58 @@ import {WindowRefService} from '../_services/window-ref.service';
  */
 
 @NgModule({
-  imports: [CommonModule, RouterModule, TranslateModule],
-  declarations: [ToolbarComponent, NavbarComponent, BreadcrumbComponent],
-  exports: [ToolbarComponent, NavbarComponent, BreadcrumbComponent,
-    CommonModule, FormsModule, RouterModule, TranslateModule]
+   imports: [CommonModule, RouterModule, TranslateModule],
+   declarations: [ToolbarComponent, NavbarComponent, BreadcrumbComponent],
+   exports: [ToolbarComponent, NavbarComponent, BreadcrumbComponent,
+      CommonModule, FormsModule, RouterModule, TranslateModule]
 })
 export class SharedModule {
 
-  private _window: Window;
-  topInvalid: number;
+   private _window: Window;
+   topInvalid: number;
 
 
-  constructor(private router: Router, windowRef: WindowRefService) {
+   constructor(private router: Router, windowRef: WindowRefService) {
 
-    this._window = windowRef.nativeWindow;
+      this._window = windowRef.nativeWindow;
 
-    router.events.subscribe((val) => {
-      if (val instanceof NavigationEnd) {
+      router.events.subscribe((val) => {
+         if (val instanceof NavigationEnd) {
 
-        // Fix Footer -
-        setTimeout(() => {
-          jQuery(window).resize();
-        }, 500);
-
-        // ScrollTop
-        jQuery('#wrapper').animate({scrollTop: 0}, 'fast');
-
-        // Focus Primer campo
-        jQuery('input[type=text]:enabled:visible:first').select().focus();
-
-        // Focus primer invalid campo
-        jQuery('button').click(function () {
-          if (jQuery('input.ng-invalid').length) {
-            jQuery('body').scrollTop(jQuery('input.ng-invalid:first').position().top);
+            // Fix Footer -
             setTimeout(() => {
-              jQuery('input.ng-invalid:first').select().focus();
+               jQuery(window).resize();
             }, 500);
-          }
-        });
-      }
-    });
-  }
 
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: SharedModule,
-      providers: [TranslateService]
-    };
-  }
+            // ScrollTop
+            jQuery('#wrapper').animate({scrollTop: 0}, 'fast');
+
+            // Focus Primer campo
+            jQuery('input[type=text]:enabled:visible:first').select().focus();
+
+            // Focus primer invalid campo
+
+            setTimeout(() => {
+               jQuery('button').click(function () {
+                  if (jQuery('input.ng-invalid').length) {
+                     jQuery('body').scrollTop(jQuery('input.ng-invalid:first').position().top);
+                     console.log('Focus Error!');
+                     setTimeout(() => {
+                        jQuery('input.ng-invalid:first').select().focus();
+                     }, 500);
+                  }
+               });
+            }, 1000);
+         }
+      });
+   }
+
+   static forRoot(): ModuleWithProviders {
+      return {
+         ngModule: SharedModule,
+         providers: [TranslateService]
+      };
+   }
 
 
 }
