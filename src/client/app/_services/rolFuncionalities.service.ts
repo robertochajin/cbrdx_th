@@ -23,8 +23,8 @@ export class RolFuncionalitiesServices {
   getAllByRol(id: number): Observable<RolFuncionalities[]> {
     return this.http.get(this.serviceURL + 'buscarRol/'+ id).map((res: Response) => res.json() as RolFuncionalities[]);
   }
-   getControlByFuncionality(id: number): Observable<RolFunctionalityControl[]> {
-      return this.http.get(this.serviceControlURL + 'buscarFuncionalidad/'+ id).map((res: Response) => res.json() as RolFunctionalityControl[]);
+   getControlByFuncionality(idRol: number, idFun: number): Observable<RolFunctionalityControl[]> {
+      return this.http.get(this.serviceControlURL + 'buscarFuncionalidad/'+ idRol+'/'+idFun).map((res: Response) => res.json() as RolFunctionalityControl[]);
    }
 
   add(f: RolFuncionalities) {
