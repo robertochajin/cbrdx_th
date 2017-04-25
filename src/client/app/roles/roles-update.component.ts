@@ -117,7 +117,7 @@ export class RolesUpdateComponent {
                                            header: 'Corfirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
-                                              this.location.back();
+                                              this.router.navigate( [ 'roles'] );
                                            }
                                         } );
    }
