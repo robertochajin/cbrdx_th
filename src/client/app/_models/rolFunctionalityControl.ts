@@ -17,5 +17,11 @@ export class RolFunctionalityControl {
    constructor() {
       this.auditoriaFecha = null;
       this.auditoriaUsuario = null;
+      this.idRolFuncionalidadControl = null;
+      this.idFuncionalidadControl = null;
+      this.idRol = null;
+      this.rol = "";
+      this.control = "";
+      this.codigo = "";
    }
 }
