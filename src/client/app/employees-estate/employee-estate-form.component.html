@@ -18,7 +18,7 @@
     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
       <div class="ui-grid-row">
         <div class="ui-grid-col-6">
-          <label for="idTipoVivienda">Tipo Inmueble</label>
+          <label for="idTipoVivienda">{{ 'LBL_TIPOINMUEBLE' | translate:param }}</label>
           <p-dropdown id="idTipoVivienda" name="idTipoVivienda" required="true"
                       [options]="listTypeEstate" [autoWidth]="false"
                       [(ngModel)]="employeeEstate.idTipoVivienda"
@@ -27,11 +27,11 @@
           <div class="ui-message ui-messages-error ui-corner-all"
                *ngIf="f.submitted && !idTipoVivienda.valid">
             <i class="fa fa-close"></i>
-            Tipo inmueble requerido
+            {{ 'MSG_TIPOINMUEBLEREQUERIDO' | translate:param }}
           </div>
         </div>
         <div class="ui-grid-col-6">
-          <label for="idClaseVivienda">La Vivenda es?</label>
+          <label for="idClaseVivienda">{{ 'LBL_VIVIENDA' | translate:param }}</label>
           <p-dropdown id="idClaseVivienda" name="idClaseVivienda" required="true"
                       [options]="listClassEstate" [autoWidth]="false"
                       [(ngModel)]="employeeEstate.idClaseVivienda"
@@ -40,13 +40,13 @@
           <div class="ui-message ui-messages-error ui-corner-all"
                *ngIf="f.submitted && !idClaseVivienda.valid">
             <i class="fa fa-close"></i>
-            Clase vivienda requerida
+            {{ 'MSG_VIVIENDAREQUERIDA' | translate:param }}
           </div>
         </div>
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-6">
-          <label for="idTipoConstruccionVivienda">Tipo Contrucción</label>
+          <label for="idTipoConstruccionVivienda">{{ 'LBL_TIPOCONSTRUCCION' | translate:param }}</label>
           <p-dropdown id="idTipoConstruccionVivienda" name="idTipoConstruccionVivienda" required="true"
                       [options]="listTypeConstruction" [autoWidth]="false"
                       [(ngModel)]="employeeEstate.idTipoConstruccionVivienda"
@@ -55,11 +55,11 @@
           <div class="ui-message ui-messages-error ui-corner-all"
                *ngIf="f.submitted && !idTipoConstruccionVivienda.valid">
             <i class="fa fa-close"></i>
-            Tipo construcción requerido
+            {{ 'MSG_TIPOCONSTRUCCIONREQUERIDA' | translate:param }}
           </div>
         </div>
         <div class="ui-grid-col-6">
-          <label for="numeroPisos">Número Pisos</label>
+          <label for="numeroPisos">{{ 'LBL_NUMEROPISOS' | translate:param }}</label>
           <input id="numeroPisos" name="numeroPisos" #numeroPisos="ngModel" pInputText type="text"
                  (keyup)="inputNumberPisos()"
                  (paste)="inputNumberPisos()"
@@ -127,4 +127,3 @@
     </div>
   </form>
 </div>
-
