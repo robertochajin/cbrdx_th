@@ -27,7 +27,8 @@ export class ClinicalInformationComponent {
   tfechaInicio: string;
   tfechaFin: string;
   es: any;
-  range: string;
+  rangeInicio: string;
+  rangeFin: string;
   wrongDiagnostic: boolean = true;
 
   clinicalInformations: EmployeesClinicalData[];
@@ -60,7 +61,10 @@ export class ClinicalInformationComponent {
     let month = today.getMonth();
     let year = today.getFullYear();
     let last18Year = year - 18;
+    let last40Year = year - 40;
+    let last80Year = year - 80;
     let lastYear = year - 100;
+    let next40Year = year + 40;
     this.maxDateInicio = new Date();
     this.minDateInicio = new Date();
     this.minDateFin = new Date();
@@ -68,12 +72,12 @@ export class ClinicalInformationComponent {
     if (this.employee.idTipoDocumento === this.idMayorDeEdad) {
       this.minDateInicio.setFullYear(lastYear, month);
       this.minDateFin.setFullYear(lastYear, month);
-      this.range = `${lastYear}:${last18Year}`;
     } else {
       this.minDateInicio.setFullYear(last18Year, month);
       this.minDateFin.setFullYear(last18Year, month);
-      this.range = `${last18Year}:${year}`;
     }
+     this.rangeInicio = `${last80Year}:${year}`;
+     this.rangeFin = `${last40Year}:${next40Year}`;
     this.maxDateInicio = today;
     this.maxDateFin = today;
   }

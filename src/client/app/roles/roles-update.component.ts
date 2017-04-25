@@ -19,6 +19,7 @@ export class RolesUpdateComponent {
    
    rol: Rol = new Rol();
    roles: Rol[];
+   show_msg:string;
    msgs: Message[] = [];
    codeExists: boolean = false;
    range: string;
@@ -46,6 +47,13 @@ export class RolesUpdateComponent {
    
    ngOnInit() {
       
+      this.route.params.subscribe(params => {
+         this.show_msg = params['msj'];
+         if(this.show_msg){
+            this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
+         }
+      });
+      
       this.route.params
       .switchMap( ( params: Params ) => this.rolesService.viewRole( +params[ 'id' ] ) )
       .subscribe( rol => {
@@ -69,6 +77,11 @@ export class RolesUpdateComponent {
          monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre' ],
          monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
+      let today = new Date();
+      let month = today.getMonth();
+      let year = today.getFullYear();
+      let nextYear = year + 3;
+      this.range = `${year}:${nextYear}`;
    }
    
    onFechaInicio( event: any ) {
@@ -104,7 +117,7 @@ export class RolesUpdateComponent {
                                            header: 'Corfirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
-                                              this.location.back();
+                                              this.router.navigate( [ 'roles'] );
                                            }
                                         } );
    }
