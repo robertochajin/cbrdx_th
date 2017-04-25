@@ -34,9 +34,9 @@ export class LocationUpdateComponent implements OnInit {
 
   idTercero: Number;
   tipoDireccion: {value: null, label: string};
-  principalNomenclatureList: any;
-  complementaryNomenclatureList: any;
-  addressTypeList: any;
+  principalNomenclatureList: SelectItem[] = [];
+  complementaryNomenclatureList: SelectItem[] = [];
+  addressTypeList: SelectItem[] = [];
   selectedPrincipalNomenclature: number;
   selectedAddressType: number;
   labelPrincipalNomenclature: string;
@@ -126,26 +126,21 @@ export class LocationUpdateComponent implements OnInit {
         });
      });
 
-    this.locationService.getPrincipalNomenclatureList().subscribe(
-      principalNomenclatureList => {
-        this.principalNomenclatureList = principalNomenclatureList;
-        this.principalNomenclatureList.unshift({label: 'Seleccione', value: null});
-      });
-    this.locationService.getComplementaryNomenclatureList().subscribe(
-      complementaryNomenclatureList => {
-        this.complementaryNomenclatureList = complementaryNomenclatureList;
-        this.complementaryNomenclatureList.map((cn: any) => {
-          cn.value = cn.label;
-        });
-        this.complementaryNomenclatureList.unshift({label: 'Seleccione', value: null});
-      });
-    this.locationService.getAddressTypeList().subscribe(
-      addressTypeList => {
-        this.addressTypeList = addressTypeList;
-        this.addressTypeList.unshift({label: 'Seleccione', value: null});
-      });
+     this.listaService.getMasterDetails('ListasTiposDirecciones').subscribe(res => {
+        this.addressTypeList.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => this.addressTypeList.push({label: s.nombre, value: s.idLista}));
+     });
+     this.listaService.getMasterDetails('ListasTiposNomenclaturas').subscribe(res => {
+        this.principalNomenclatureList.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => this.principalNomenclatureList.push({label: s.nombre, value: s.idLista}));
+     });
+     this.listaService.getMasterDetails('ListasTiposNomenclaturasComplementarias').subscribe(res => {
+        this.complementaryNomenclatureList.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => this.complementaryNomenclatureList.push({label: s.nombre, value: s.nombre}));
+     });
 
-    this.focusUP();
+
+     this.focusUP();
   }
 
   createLocation() {
