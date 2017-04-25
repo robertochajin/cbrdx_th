@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class RolWidgets {
-   public idRolWidgets: number;
+   public idRolWidget: number;
    public idRol: number;
    public idWidget: number;
    public widget: string;
