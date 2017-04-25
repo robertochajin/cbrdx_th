@@ -61,7 +61,7 @@
         <div class="ui-grid-col-6">
           <label for="modelo">Modelo</label>
           <input id="modelo" name="modelo" #modelo="ngModel" pInputText type="number" [max]="year" [min]="1900"
-                 [(ngModel)]="employeeVehicle.modelo" min="1" (keyup)="inputNumber()" required maxlength="4"/>
+                 [(ngModel)]="employeeVehicle.modelo" (keyup)="inputNumber()" required maxlength="4"/>
           <div class="ui-message ui-messages-error ui-corner-all"
                *ngIf="f.submitted && !modelo.valid">
             <i class="fa fa-close"></i>
