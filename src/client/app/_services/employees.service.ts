@@ -56,7 +56,6 @@ export class EmployeesService {
     validateDocument(numeroDocumento: string, idTipoDocumento: number) {
       return this.http.get(this.serviceURL+'terceros/'+ numeroDocumento+'/'+ idTipoDocumento+'/' ,{headers: this.headers}).map((res:Response) => res.json() as Employee);
       
-      
       /*.map((res:Response) => {
          //if (res.text() != '') {
             res.json() as Employee
