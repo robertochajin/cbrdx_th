@@ -86,9 +86,13 @@ export class FormalStudiesUpdateComponent implements OnInit {
         if(this.fstudy.idCiudad){
            this.wrongCity = false;
         }
-        this.selectedInstitute = new ListaItem();
-        this.selectedInstitute.nombre = this.fstudy.institucion;
-        this.selectedInstitute.idLista = this.fstudy.idInstitucion;
+        if (this.fstudy.idInstitucion){
+           this.selectedInstitute = new ListaItem();
+           this.selectedInstitute.nombre = this.fstudy.institucion;
+           this.selectedInstitute.idLista = this.fstudy.idInstitucion;
+        } else {
+           this.selectedInstitute = null;
+        }
         if(this.fstudy.idInstitucion){
            this.wrongInstitute = false;
         }

@@ -85,9 +85,8 @@ export class FamilyInformationAddComponent implements OnInit {
       this.idTercero = params['tercero'];
     });
 
-    this.listEmployeesService.getTerType("TERFAM").subscribe(
-      res => {
-        this.idTipoTercero = res.idListaTipoTercero
+     this.listaService.getMasterDetailsByCode('ListasTiposTerceros','TERFAM').subscribe(res => {
+        this.idTipoTercero = res.idLista
       });
 
     let today = new Date();
@@ -257,20 +256,21 @@ export class FamilyInformationAddComponent implements OnInit {
   }
 
   focusUP() {
-    const element = document.querySelector("#formulario");
-    if (element) {
-      element.scrollIntoView(element);
-    }
+     jQuery('body').animate({scrollTop: 0}, 'fast');
   }
 
    validateDocument() {
       if(this.familyInformation.numeroDocumento !="" && this.familyInformation.numeroDocumento != null && this.selectedDocument != null){
          this.employeesService.validateDocument(this.familyInformation.numeroDocumento, this.selectedDocument).subscribe(res => {
-            if(res.idTercero > 0) {
+            if(res != undefined && res.idTercero > 0) {
                this.repeatedDocument = true;
                this.familyInformation.numeroDocumento = '';
             }
          });
       }
+   }
+
+   childInputCleanUp(value: string) {
+      this.familyInformation.telefonoFijo = value.toUpperCase().replace(/[^1-9]/g, '').replace(' ', '').trim();
    }
 }
