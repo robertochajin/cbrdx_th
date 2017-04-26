@@ -54,12 +54,7 @@
             <div class="ui-grid-col-6">
                <label for="URL">Url</label>
                <input id="URL" name="URL" #URL="ngModel" pInputText type="text"
-                      [(ngModel)]="widgets.descripcion" required="true" />
-               <div class="ui-message ui-messages-error ui-corner-all"
-                    *ngIf="f.submitted && !URL.valid">
-                  <i class="fa fa-close"></i>
-                  {{ 'WIDGETS.MSG_URLREQUERIDA' | translate:param }}
-               </div>
+                      [(ngModel)]="widgets.descripcion" />
             </div>
             <div class="ui-grid-col-6">
                <br><br>
