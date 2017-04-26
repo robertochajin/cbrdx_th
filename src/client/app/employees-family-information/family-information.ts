@@ -2,12 +2,12 @@ export interface FamilyInformation {
   idTerceroFamiliar: number;
   idTercero: number;
   idTipoDocumento: number;
-  nombreListaTipoDocumento: string;
+  tipoDocumento: string;
   telefonoFijo: string;
   telefonoCelular: string;
   numeroDocumento: string;
   idConvivencia: number;
-  nombreListaParentezco: any;
+  parentesco: any;
   idParentesco: number;
   idFamiliar: number;
   primerNombre: string;

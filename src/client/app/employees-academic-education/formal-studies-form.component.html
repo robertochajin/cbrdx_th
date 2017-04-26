@@ -71,7 +71,7 @@
             </div>
           </div>
           <div class="ui-grid-col-6">
-            <label for="estadoEstudio">>{{ 'LBL_ESTADOS' | translate:param }}</label>
+            <label for="estadoEstudio">{{ 'LBL_ESTADOS' | translate:param }}</label>
             <p-dropdown name="estadoEstudio" id="estadoEstudio" #estadoEstudio="ngModel" required="true" (onChange)="updateEnd()"
                         [autoWidth]="false" [(ngModel)]="fstudy.idEstado" [options]="studyStateList"></p-dropdown>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !estadoEstudio.valid">
