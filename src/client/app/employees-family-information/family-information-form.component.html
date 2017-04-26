@@ -107,8 +107,10 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-5">
                     <label for="telefonoFijo">* Teléfono 1</label>
-                    <input id="telefonoFijo" name="telefonoFijo" #telefonoFijo="ngModel" pInputText type="text"
-                           [(ngModel)]="familyInformation.telefonoFijo"required/>
+                    <input id="telefonoFijo" name="telefonoFijo" #telefonoFijo="ngModel"  required
+                           [(ngModel)]="familyInformation.telefonoFijo" pInputText pattern="[1-9]"
+                           (keyup)="childInputCleanUp($event.target.value)" type="text"
+                           (paste)="childInputCleanUp($event.target.value)"/>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !telefonoFijo.valid">
                         <i class="fa fa-close"></i>
                         Teléfono es requerido
@@ -117,7 +119,7 @@
                 <div class="ui-grid-col-5">
                     <label for="telefonoCelular">Teléfono 2</label>
                     <input id="telefonoCelular" name="telefonoCelular" #telefonoCelular="ngModel" pInputText type="text"
-                           [(ngModel)]="familyInformation.telefonoCelular" />
+                           [(ngModel)]="familyInformation.telefonoCelular" pattern="[1-9]" />
                 </div>
                 <div class="ui-grid-col-2">
                     <label for="idConvivencia">Convive</label>
