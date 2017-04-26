@@ -5,12 +5,12 @@ export class ConstructorFamilyInformation {
   idTerceroFamiliar: number;
   idTercero: number;
   idTipoDocumento: number;
-  nombreListaTipoDocumento: string;
+  TipoDocumento: string;
   telefonoFijo: string;
   telefonoCelular: string;
   numeroDocumento: string;
   idConvivencia: number;
-  nombreListaParentezco: any;
+  Parentezco: any;
   idParentesco: number;
   idFamiliar: number;
   primerNombre: string;

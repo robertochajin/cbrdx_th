@@ -33,6 +33,7 @@ export class DashboardComponent implements OnInit {
   widgets: any[] = [];
   selectedWidgets: number[] = [];
   usuariosTitle:string;
+  options : any;
 
 
   constructor(private router: Router, private rolesService: RolesService, private  tercerosServices: TercerosService,
@@ -135,6 +136,11 @@ export class DashboardComponent implements OnInit {
 
       }
       this.isData = true;
+      this.options = {
+         responsive: false,
+         maintainAspectRatio: false,
+         position: "right"
+      };
     });
    this.widgetServices.getAll().subscribe(rest=>{
       this.widgets= rest;
