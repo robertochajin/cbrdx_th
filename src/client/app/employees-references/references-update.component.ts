@@ -6,11 +6,12 @@ import { References } from './references';
 import { ReferencesService } from './references.service';
 import { SelectItem, Message, ConfirmDialog, ConfirmationService } from 'primeng/primeng';
 
-import { ReferencesTypesService } from '../_services/references-type.service';
 import { LocateService } from '../_services/locate.service';
 import { NavService } from '../_services/_nav.service';
 import { Localizaciones } from "../_models/localizaciones";
 import {PoliticalDivisionService} from "../_services/political-division.service";
+import {ListaService} from "../_services/lista.service";
+import {ListaItem} from "../_models/listaItem";
 
 @Component({
   moduleId: module.id,
@@ -33,24 +34,24 @@ export class ReferencesUpdateComponent implements OnInit  {
 
   constructor (
     private referencesService: ReferencesService,
-    private router: Router,
     private route: ActivatedRoute,
     private location: Location,
     private locateService: LocateService,
     private politicalDivisionService: PoliticalDivisionService,
-    private referencesTypesServices: ReferencesTypesService,
     private confirmationService: ConfirmationService,
+    private listaService: ListaService,
     private _nav:NavService
 
   ) {}
 
   ngOnInit () {
-    this.referencesTypesServices.getAll().subscribe(referencesTypes => {
-      this.referencesTypes.unshift({label:'seleccione', value:null});
-      referencesTypes.forEach((x:any) => {
-        this.referencesTypes.push({label:x.nombreListaTipoReferencia, value: x.idListaTipoReferencia});
-      });
-    });
+
+     this.listaService.getMasterDetails('ListasTiposReferencias').subscribe(res => {
+        this.referencesTypes.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.referencesTypes.push({label: s.nombre, value: s.idLista});
+        });
+     });
     this.route.params.subscribe((params: Params) => {
       this.idTercero = params['tercero'];
       this.referencesService.get(+params['id']).subscribe(reference => {

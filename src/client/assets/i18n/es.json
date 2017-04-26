@@ -17,11 +17,16 @@
   "LBL_ID":"Id",
   "LBL_CODIGO":"Código",
   "LBL_NOMBRE":"Nombre",
+<<<<<<< HEAD
   "LBL_ESTADO":"Estado",
+=======
+  "LBL_ESTADO":"Estado ",
+>>>>>>> cbrdx_th_stable_master
   "LBL_ACCIONES":"Acciones",
   "LBL_DETALLE":"Detalle",
   "LBL_HABILITADO":"Habilitado",
   "LBL_CONFIRMACION":"Confirmación",
+  "LBL_DESCRIPCION":"Descripción ",
   "LBL_USUARIOS":"Usuarios",
   "LBL_USUARIO":"Usuario",
   "LBL_TIPO":"Tipo",
@@ -34,14 +39,21 @@
   "LBL_ANTERIOR":"Anterior",
   "LBL_DE":"de",
   "LBL_EPS":"Eps",
-  "LBL_TELEFONO":"Teléfono",
+  "LBL_TELEFONO":"Teléfono Fijo",
+  "LBL_PERTENECE":"Pertenece",
+   "LBL_VERMAS" : "Ver más",
 
   "MSG_CONFIRMACION":"Si continúa perderá la información no guardada. ¿Está seguro que desea salir?",
   "MSG_GUARDADO":"Guardado",
   "MSG_REGISTRO":"Registro",
+<<<<<<< HEAD
   "MSG_NORECORDSFOUND":"La búsqueda no arrojó ningún resultado",
 
+=======
+  "MSG_NORECORDSFOUND":"Su búsqueda no obtuvo ningún resultado",
+>>>>>>> cbrdx_th_stable_master
 
+   "LBL_BUSCAR":"Buscar...",
 
   "FIN_COMUNES":"====================================================================",
   "INICIO_REFERENCIA":"==============================================================",
@@ -65,7 +77,11 @@
       "LBL_COMPLEMENTARIA":"Complementaria",
       "LBL_LATITID":"Latitud",
       "LBL_LONGITUD":"Longitud",
+<<<<<<< HEAD
       "LBL_COMOLLEGAR":"¿Como Llegar?",
+=======
+      "LBL_COMOLLEGAR":"Cómo Llegar",
+>>>>>>> cbrdx_th_stable_master
       "LBL_CELULAR":"Celular",
 
   "FIN_UBICACION":"=================================================================",
@@ -92,7 +108,10 @@
      "LBL_CONSTANTE":"Constante",
      "LBL_CONSTANTES":"Constantes",
      "LBL_TIPODATO":"Tipo Dato",
+<<<<<<< HEAD
      "LBL_DESCIPCION":"Descripción ",
+=======
+>>>>>>> cbrdx_th_stable_master
      "LBL_VALOR":"Valor",
   "FIN_CONSTANTES":"=================================================================",
 
@@ -101,10 +120,15 @@
       "LBL_ACTIVO":"Activo",
       "LBL_INACTIVO":"Inactivo",
       "LBL_SISTEMA":"Sistema",
+<<<<<<< HEAD
       "LBL_ULTIMOINGRESO":"Última Vez que Ingresó",
+=======
+      "LBL_ULTIMOINGRESO":"Última vez que Ingresó",
+>>>>>>> cbrdx_th_stable_master
   "FIN_DASHBOARD":"=================================================================",
 
   "INICIO_DIVISIONPOLITICA":"==============================================================",
+      "LBL_DIVSIONPOLITICA":"División Política ",
       "LBL_PAIS":"País",
       "LBL_DEPARTAMENTO":"Departamento",
       "LBL_MUNICIPIO":"Municipio",
@@ -120,12 +144,21 @@
       "LBL_DESDE":"Desde",
       "LBL_AGREGANDO":"Agregando",
       "LBL_NATURALEZA":"Naturaleza",
+<<<<<<< HEAD
       "LBL_FECHAEXPEDICION":"Fecha de Expedición Documento",
       "LBL_CIUDADEXPEDICION":"Ciudad Expedición",
       "LBL_PRIMER":"Primer",
       "LBL_SEGUNDO":"Segundo",
       "LBL_APELLIDO":"Apellido",
       "LBL_NACIMIENTO":"Nacimiento",
+=======
+      "LBL_FECHAEXPEDICION":"Fecha de Expedición",
+      "LBL_CIUDADEXPEDICION":"Ciudad Expedición",
+      "LBL_PRIMER":"Primer Nombre",
+      "LBL_SEGUNDO":"Segundo Nombre",
+      "LBL_APELLIDO":"Apellido",
+      "LBL_NACIMIENTO":"Fecha de Nacimiento",
+>>>>>>> cbrdx_th_stable_master
       "LBL_GENERO":"Género",
       "LBL_ESTADOCIVIL":"Estado Civil",
       "LBL_COBERTURASALUD":"Cobertura Salud",
@@ -141,6 +174,90 @@
       "LBL_PLANDEBENEFICIO":"Plan de Beneficio",
       "LBL_EXAMENESOCUPACIONALES":"Exámenes Ocupacionales",
       "LBL_DOTACIONES":"Dotaciones",
+      "LBL_PESO":"Peso (KG)",
+      "MSG_PESOREQUERIDO":"Peso es requerido",
+      "LBL_ESTATURA":"Estatura (CM)",
+      "MSG_ESTATURAREQUERIDO":"Estatura es requerido",
+      "LBL_IMC":"IMC",
+      "LBL_LATERALIDAD":"Lateralidad",
+      "MSG_LATERALIDADREQUERIDA":"Lateralidad es requerida",
+      "LBL_TALLACAMISA":"Talla Camisa",
+      "MSG_TALLACAMISAREQUERIDA":"Talla de Camisa es requerida",
+      "LBL_TALLAPANTALON":"Talla Pantalón",
+      "MSG_TALLAPANTALONREQUERIDO":"Talla de Pantalón es requerida",
+      "LBL_TALLACALZADO":"Talla Calzado",
+      "MSG_TALLACALZADOREQUERIDO":"Talla de Calzado es requerida",
+      "LBL_CIUDADNACIMIENTO":"Ciudad de Nacimiento",
+      "LBL_NACIONALIDAD":"Nacionalidad",
+      "LBL_FACTORRH":"Factor RH",
+      "LBL_NUMEROHIJOS":"Número de Hijos",
+      "LBL_PRIMERAPELLIDO":"Primer Apellido",
+      "LBL_SEGUNDOAPELLIDO":"Segundo Apellido",
+      "MSG_NATURALEZAREQUERIDA":"Naturaleza  es requerida",
+      "MSG_TIPODOCUMENTOREQUERIDO":"Tipo de Documento es requerido",
+      "MSG_NUMERODOCUMENTOREQUERIDO":"Numero de Documento es requerido",
+      "MSG_FECHAEXPEDICIONREQUERIDA":"Fecha de Expedición es requerido",
+      "MSG_CIUDADEXPEDICIONREQUERIDA":"Ciudad de Expedición es requerido",
+      "MSG_PRIMERNOMBREREQUERIDO":"Primer nombre es requerido",
+      "MSG_PRIMERAPELLIDOREQUERIDO":"Primer Apellido es requerido",
+      "MSG_NACIMIENTOREQUERIDA":"Fecha de Nacimiento es requerido",
+      "MSG_CIUDADNACIMIENTOREQUERIDA":"Ciudad de Expedición es requerido",
+      "MSG_GENROREQUERIDA":"Género es requerido",
+      "MSG_ESTADOCIVILRQUERIDA":"Estado Civil es requerido",
+      "MSG_FACTORRHREQUERIDO":"Estado Civil es requerido",
+      "MSG_COBERTURASALUDREQUERIDO":"Cobertura Salud es requerido",
+      "LBL_AFILIACION":"Tipo de Afiliación",
+      "MSG_TIPOAFILIACIONREQUERIDO":"Tipo de Afiliación es requerido",
+      "MSG_NIVELESTUDIOSREQUERIDO":"Nivel de Estudios es requerido",
+      "LBL_TIPOOCUPACION":"Tipo de Ocupación",
+      "MSG_TIPOOCUPACIONREQUERIDO":"Tipo de Ocupación es requerido",
+      "LBL_OCUPACION":"Ocupación",
+      "MSG_OCUPACIONREQUERIDO":"Ocupación es requerido",
+      "LBL_SECTOR":"Ocupación",
+      "MSG_SECTORREQUERIDO":"Ocupación es requerido",
+      "LBL_ACTIVIDAD":"Actividad",
+      "MSG_ACTIVIDADREQUERIDA":"Actividad es requerido",
+      "MSG_FECHADEFUNCIONREQUERIDO":"Fecha de Defunción es requerido",
+      "LBL_INSTITUCION":"Institución",
+      "LBL_CONFIRMADA":"Confirmada",
+      "LBL_OTRAINSTITUCION":"Otra institución",
+      "MSG_AREAESTUDIOREQUERIDO":"Area de Estudio es requerido",
+      "MSG_TITULOREQUERIDO":"Título es requerido",
+      "MSG_OTRAINSTITUCIONREQUERIDO":"Otra Institución es requerido",
+      "MSG_CIUDADREQUERIDA":"Ciudad es requerido",
+      "MSG_ESTADOSREQUERIDOS":"Estados de Estudios es requerido",
+      "MSG_INGRESOREQUERIDO":"Ingreso es requerido",
+      "MSG_FINALIZACIONREQUERIDO":"Finalización es requerido",
+      "LBL_INTENSIDAD":"Intensidad Horaria",
+      "MSG_INTENSIDADREQUERIDO":"Intensidad Horaria es requerido",
+      "LBL_TIPOESTUDIO":"Tipo de Estudio",
+      "MSG_TIPOESTUDIOREQUERIDO":"Tipo de Estudio es requerido",
+      "LBL_OTROTIPOESTUDIO":"Otro Tipo de Estudio",
+      "MSG_OTROTIPOESTUDIOREQUERIDO":"Otro Tipo de Estudio es requerido",
+      "LBL_ESTUDIOTERMINAOD":"Estudio Terminado",
+      "MSG_ESTUDIOTERMINADOREQUERIDO":"Estudio Terminado es requerido",
+      "LBL_DIAGNOSTICO":"Diagnóstico",
+      "MSG_DIAGNOSTICOREQUERIDO":"Diagnóstico es requerido",
+      "MSG_FECHAINICIOREQUERIDO":"Fecha Inico es requerido",
+      "MSG_FECHAFINREQUERIDO":"Fecha Inico es requerido",
+      "LBL_NOMBRECONTACTO":"Nombre Contácto",
+      "MSG_NOMBRECONTACTOREQUERIDO":"Nombre Contácto es requerido",
+      "LBL_RELACION":"Relación",
+      "MSG_RELACIONREQUERIDO":"Parentesco es requerido",
+      "LBL_SITIOWEB":"Sitio Web",
+      "LBL_TIPOINMUEBLE":"Tipo Inmueble",
+      "MSG_TIPOINMUEBLEREQUERIDO":"Tipo Inmueble es requerido",
+      "LBL_INMUEBLEES":"El Inmueble es",
+      "LBL_TIPOCONSTRUCCION":"Tipo de Construcción",
+      "LBL_NUMEROPISOS":"Número de Pisos",
+      "LBL_ANOCONSTRUCCION":"Año de Construcción",
+      "LBL_NUMEROSOTANOS":"Número de Sótanos",
+      "LBL_VIVIENDA":"La Vivienda es?",
+      "MSG_VIVIENDAREQUERIDA":"La Vivienda es requerido",
+      "MSG_TIPOCONSTRUCCIONREQUERIDA":"Tipo de Construción es requerido",
+      "MSG_NUMEROPISOSREQUERIDA":"Número de Pisos es requerido",
+
+
   "FIN_EMPLOYEES":"=================================================================",
 
   "INICIO_ACADEMICEDUCATION":"==============================================================",
@@ -148,10 +265,14 @@
       "LBL_FORMAL":"Formal",
       "LBL_NIVELESTUDIOS":"Nivel de Estudio",
       "LBL_AREAESTUDIOS":"Área de Estudio",
+<<<<<<< HEAD
       "LBL_TITULO":"Titulo",
+=======
+      "LBL_TITULO":"Título",
+>>>>>>> cbrdx_th_stable_master
       "LBL_INSTITUTO":"Instituto",
       "LBL_OTROS":"Otro",
-      "LBL_ESTADOS":"Estado",
+      "LBL_ESTADOS":"Estado Estudios",
       "LBL_INGRESO":"Ingreso",
       "LBL_FINALIZACION":"Finalización",
   "FIN_ACADEMICEDUCATION":"=================================================================",
@@ -167,10 +288,10 @@
       "LBL_EMPRESA":"Empresa",
    "FIN_LABORALEXPERIENCE":"=================================================================",
 
-  "INICIO_GRGrupos de GestiónUPOGESTION":"==============================================================",
+  "INICIO_GRUPOSDEGESTION":"==============================================================",
       "LBL_GESTION":"Grupos Gestión",
       "LBL_FUNCIONES":"Funciones",
-      "LBL_RESPONSBILIDADES":"Responsabilidades",
+      "LBL_RESPONSABILIDADES":"Responsabilidades",
   "FIN_GRUPOGESTION":"=================================================================",
 
   "INICIO_LOCATION":"==============================================================",
@@ -190,12 +311,16 @@
       "LBL_ROL":"Rol",
       "LBL_ROLES":"Roles",
       "LBL_PERIODOHABILITACION":"Periodo Habilitación ",
+<<<<<<< HEAD
       "MSG_NORECORDSFOUNDUSERS":"Para visualizar los usuarios, debe realizar una búsqueda válida",
+=======
+      "MSG_NORECORDSFOUNDUSERS":"Para visualizar los usuarios debe realizar una búsqueda válida",
+>>>>>>> cbrdx_th_stable_master
       "LBL_DATOSTERCERO":"Datos Tercero",
       "LBL_HISTORIAL":"Historial",
       "LBL_INFORMACION":"Información",
       "LBL_ ADMINISTRADOR":"Administrador",
-      "LBL_BUSCARTERCERO":"Buscar Tercero para Asignar Usuario",
+      "LBL_BUSCARTERCERO":"Buscar tercero para asignar usuario",
       "LBL_DATOSUSUARIO":"Datos de Usuario",
       "MSG_INGRESARNUMERODOCUMENTO":"Debe ingresar un número de documento",
       "MSG_NUMERODOCUMENTON20":"El número de documento no debe tener más de  20 caracteres",
@@ -205,13 +330,79 @@
       "LBL_CONTRASEÑA":"Contraseña",
       "LBL_INICIARSESION":"Iniciar Sesión",
       "LBL_OLVIDE":"Olvidé mi",
-      "LBL_RECUPERACUENTA":"Recupera tu Cuenta",
+      "LBL_RECUPERACUENTA":"Recuperar Cuenta",
       "MSG_USUARIOREQUERIDO":"El nombre de usuario es requerido.",
       "MSG_USUARIOCONTENER":"El usuario debe contener solo letras, números o los caracteres. _ y/o -",
+<<<<<<< HEAD
       "MSG_CONFIRMACIONDATOSCORRECTOS":"Si los datos coinciden con los registrados en el sistema se enviará a su correo la contraseña nueva. ¿Está seguro  que desea continuar?",
       "MSG_CORREOREQUERIDO":"El correo electrónico es requerido.",
       "MSG_CORREOFORMATO":"El correo electrónico debe tener el formato wwwwwwww@xxxxxx.yyy[.zz]",
       "MSG_DEBEINGRESARCONTRASEÑA":"Debe ingresar una contraseña",
   "FIN_SEGURIDAD":"=================================================================",
+=======
+      "MSG_CONFIRMACIONDATOSCORRECTOS":"Si los datos coinciden con los registrados en el sistema se enviará a su correo la contraseña nueva. Está seguro  que desea continuar?",
+      "MSG_CORREOREQUERIDO":"El correo electrónico es requerido.",
+      "MSG_CORREOFORMATO":"El correo electrónico debe tener el formato wwwwwwww@dominio.yyy[.zz]",
+      "MSG_DEBEINGRESARCONTRASEÑA":"Debe ingresar una contraseña",
+  "FIN_SEGURIDAD":"=================================================================",
+
+   "WIDGETS":{
+   "MSG_CODIGOREQUERIDO":"Código requerido",
+   "MSG_CODIGOREPETIDO":"Ya se encuentra registrado ese código",
+   "MSG_NOMBREREQUERIDO":"Nombre  requerido",
+   "MSG_URLREQUERIDA":"Url requerida",
+   "LBL_AGREGANDO":"Agregando widgets",
+   "LBL_EDITANDO":"Editando widgets",
+   "LBL_DETALLEWIDGETS":"Detalle widgets",
+   "LBL_CONFIGURARWIDGETS":"Configurar Widgets"
+   },
+   "ADMIN_FORMULARIOS":{
+   "LBL_FUNCIONALIDAD":"Funcionalidad",
+   "MSG_FUNCIONALIDADREQUERIDA":"Funcionalidad requerida",
+   "LBL_AÑADIRFUNCIONALIDAD":"Nueva funcionalidad",
+   "LBL_SECCION":"Sección",
+   "LBL_CLASIFICACION":"Clasificación",
+   "LBL_CLASIFICACIONINFORMACION":"Clasificación Información",
+   "LBL_CLASIFICACIONDATO":"Clasificación Dato",
+   "LBL_VISIBLE":"Visible",
+   "LBL_IMPRIMIR":"Imprimir",
+   "LBL_CAMPO":"Campo",
+   "LBL_TERMINAR":"Terminar",
+   "LBL_OBLIGATORIO":"Obligatorio",
+   "MSG_CODIGOREPETIDO":"Ya se encuentra registrado ese código",
+   "MSG_NOMBREREQUERIDO":"Nombre  requerido",
+   "MSG_CODIGOREQUERIDO":"Código requerido",
+   "MSG_CLASIFICACIONREQUERIDA":"Clasificación requerida"
+   },
+
+   "TEMPLATE":{
+      "LBL_MENUPRINCIPAL": "MENÚ PRINCIPAL",
+      "LBL_USUARIODESDE":"Usuario desde",
+      "LBL_TEMASDISPONIBLES": "Temas Disponible",
+      "LBL_EDITARCONTRASENA":"Editar Contraseña",
+      "LBL_CERRARSESION": "Cerrar Sesión"
+   },
+
+   "USER_SESSION":{
+      "LBL_USUARIO":"Usuario",
+      "LBL_CEDULA":"Cédula",
+      "LBL_NUEVOAVATAR": "Nuevo Avatar",
+      "LBL_CAMBIOCONTRASENA":"Cambio de Contraseña",
+      "LBL_CONTRASENAACTUAL":"Contraseña actual",
+      "LBL_NUEVACONTRASENA":"Nueva Contraseña",
+      "LBL_REPETIRCONTRASENA":"Repetir nueva contraseña",
+      "LBL_CONTRASENAACTUALREQUERIDA":"Contraseña actual es requerida.",
+      "LBL_CONTRASENANUEVAREQUERIDA":"Contraseña Nueva es requerida.",
+      "LBL_NUEVADIFERENTEALAACTUAL":"Contraseña nueva debe ser diferente de la Actual",
+      "LBL_DEBECOINCIDIRCONTRASENA": "Debe coincidir con la Contraseña nueva"
+   },
+   "ROLES":{
+      "LBL_CONTROLES":"Controles",
+      "LBL_SECCIONES":"Secciones"
+   },
+>>>>>>> cbrdx_th_stable_master
   "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
+
+
+
 }

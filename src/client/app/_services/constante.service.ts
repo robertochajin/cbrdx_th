@@ -25,7 +25,7 @@ export class ConstanteService {
         return this.http.post(this.serviceURL+ "constantes/", JSON.stringify(c), {headers: this.headers}).toPromise().then(res => res.json() as Constante).catch(this.handleError);
     };
 
-    updateConstant(c: Constante): Promise<Constante> {
+    updateConstant(c: Constante): Promise<any> {
         return this.http.put(this.serviceURL+ "constantes/", JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
     }
 
@@ -36,9 +36,5 @@ export class ConstanteService {
     handleError(error: any): Promise<any> {
         console.error('Error:', error);
         return Promise.reject(error.message || error);
-    }
-    
-    getTiposConstantes()  {
-      return this.http.get(this.serviceURL+"listasTiposDatos/enabled/",{headers: this.headers}).map((res:Response) => res.json());
     }
 }

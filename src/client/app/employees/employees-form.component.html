@@ -19,7 +19,7 @@
                 <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="NGpersonTypes">Naturaleza</label>
+                            <label for="NGpersonTypes">{{ 'LBL_NATURALEZA' | translate:param }}</label>
                             <p-dropdown id="NGpersonTypes"  name="NGpersonTypes" required="true"
                                         [options]="personTypes" [autoWidth]="false"
                                         [(ngModel)]="employee.idTipoPersona"
@@ -28,11 +28,11 @@
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !NGpersonTypes.valid">
                               <i class="fa fa-close"></i>
-                              Naturaleza es requerida
+                              {{ 'MSG_NATURALEZAREQUERIDA' | translate:param }}
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="NGdocumentTypes">Tipo de documento</label>
+                            <label for="NGdocumentTypes">{{ 'LBL_TIPODOCUMENTO' | translate:param }}</label>
                             <p-dropdown id="NGdocumentTypes"  name="NGdocumentTypes" required="true"
                                         [options]="documentTypes" [autoWidth]="false"
                                         [(ngModel)]="employee.idTipoDocumento"
@@ -42,13 +42,13 @@
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !NGdocumentTypes.valid">
                               <i class="fa fa-close"></i>
-                              Tipo documento es requerido
+                              {{ 'MSG_TIPODOCUMENTOREQUERIDO' | translate:param }}
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-8">
-                            <label for="numeroDocumento">Número de documento</label>
+                            <label for="numeroDocumento">{{ 'LBL_NUMERODOCUMENTO' | translate:param }}</label>
                             <input id="numeroDocumento" type="text" pInputText  name="numeroDocumento"
                                    [(ngModel)]="employee.numeroDocumento"
                                    #numeroDocumento="ngModel" required
@@ -58,11 +58,11 @@
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !numeroDocumento.valid">
                               <i class="fa fa-close"></i>
-                              Número de documento es requerido
+                              {{ 'MSG_NUMERODOCUMENTOREQUERIDO' | translate:param }}
                             </div>
                         </div>
                         <div class="form-group col-md-4">
-                          <label for="NGexpeditionDate">Fecha expedición documento</label>
+                          <label for="NGexpeditionDate">{{ 'LBL_FECHAEXPEDICION' | translate:param }}</label>
                           <p-calendar id="NGexpeditionDate" name="NGexpeditionDate"  [showIcon]="true" [disabled]="disabled"
                                       [maxDate]="maxDateDocumento" [monthNavigator]="true" [yearNavigator]="true"
                                       [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
@@ -72,13 +72,13 @@
                           <div class="ui-message ui-messages-error ui-corner-all"
                                *ngIf="f.submitted && !NGexpeditionDate.valid">
                             <i class="fa fa-close"></i>
-                            Fecha expedición es requerido
+                            {{ 'MSG_FECHAEXPEDICIONREQUERIDA' | translate:param }}
                           </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="expCity">Ciudad de expedición</label>
+                            <label for="expCity">{{ 'LBL_CIUDADEXPEDICION' | translate:param }}</label>
                             <p-autoComplete placeholder="Ciudad de expedición " field="camino" name="expCity" id="expCity" #expCity="ngModel" required="true"
                                             [(ngModel)]="ciudadExpDocumento"
                                             [suggestions]="resultExpeditionCity"
@@ -88,24 +88,24 @@
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !expCity.valid">
                               <i class="fa fa-close"></i>
-                              Ciudad expedición es requerido
+                              {{ 'MSG_CIUDADEXPEDICIONREQUERIDA' | translate:param }}
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="primerNombre">Primer nombre</label>
+                            <label for="primerNombre">{{ 'LBL_PRIMER' | translate:param }}</label>
                             <input type="text" pInputText id="primerNombre" name="primerNombre"
                                    [(ngModel)]="employee.primerNombre" #primerNombre="ngModel" (keyup)="capitalize($event)"
                                    required/>
                           <div class="ui-message ui-messages-error ui-corner-all"
                                *ngIf="f.submitted && !primerNombre.valid">
                             <i class="fa fa-close"></i>
-                            Primer nombre es requerido
+                            {{ 'MSG_PRIMERNOMBREREQUERIDO' | translate:param }}
                           </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="segundoNombre">Segundo nombre</label>
+                            <label for="segundoNombre">{{ 'LBL_SEGUNDO' | translate:param }}</label>
                             <input type="text" pInputText id="segundoNombre"  name="segundoNombre"
                                    [(ngModel)]="employee.segundoNombre" #segundoNombre="ngModel" (keyup)="capitalize($event)"
                             />
@@ -113,18 +113,18 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="primerApellido">Primer apellido</label>
+                            <label for="primerApellido">{{ 'LBL_PRIMERAPELLIDO' | translate:param }}</label>
                             <input type="text" pInputText id="primerApellido" name="primerApellido"
                                    [(ngModel)]="employee.primerApellido" #primerApellido="ngModel" (keyup)="capitalize($event)"
                                    required />
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !primerApellido.valid">
                               <i class="fa fa-close"></i>
-                              Primer apellido es requerido
+                            {{ 'MSG_PRIMERAPELLIDOREQUERIDO' | translate:param }}
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="segundoApellido">Segundo apellido</label>
+                            <label for="segundoApellido">{{ 'LBL_SEGUNDOAPELLIDO' | translate:param }}</label>
                             <input type="text" pInputText id="segundoApellido" name="segundoApellido"
                                    [(ngModel)]="employee.segundoApellido" #segundoApellido="ngModel" (keyup)="capitalize($event)"
                             />
@@ -132,7 +132,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4">
-                               <label for="NGbirthDate">Fecha de Nacimieto</label>
+                               <label for="NGbirthDate">{{ 'LBL_NACIMIENTO' | translate:param }}</label>
                                <p-calendar id="NGbirthDate" name="NGbirthDate"  [showIcon]="true" [disabled]="disabled"
                                            [maxDate]="maxDate" [monthNavigator]="true" [yearNavigator]="true"
                                            [locale]="es" readonlyInput="readonlyInput" [yearRange]="range"
@@ -140,11 +140,11 @@
                                            [(ngModel)]="birthDate" (onSelect)="onBirthDate($event)"
                                ></p-calendar>
                                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !NGbirthDate.valid">
-                                 Fecha expedición documento es requerido
+                                 {{ 'MSG_NACIMIENTOREQUERIDA' | translate:param }}
                                </div>
                         </div>
                         <div class="form-group col-md-8">
-                           <label for="birthPlace">Ciudad de nacimieto</label>
+                           <label for="birthPlace">{{ 'LBL_CIUDADNACIMIENTO' | translate:param }}</label>
                            <p-autoComplete placeholder="Lugar de nacimieto" field="camino" name="birthPlace" id="birthPlace" #birthPlace="ngModel" required="true"
                                            [(ngModel)]="ciudadNacimiento"
                                            [suggestions]="resultBirthPlace"
@@ -154,13 +154,13 @@
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !birthPlace.valid">
                               <i class="fa fa-close"></i>
-                              Ciudad de naciento es requerido
+                              {{ 'MSG_CIUDADNACIMIENTOREQUERIDA' | translate:param }}
                             </div>
                         </div>
                    </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="NGgenderTypes">Genero</label>
+                            <label for="NGgenderTypes">{{ 'LBL_GENERO' | translate:param }}</label>
                             <p-dropdown id="NGgenderTypes"  name="NGgenderTypes" required="true"
                                         [options]="genderTypes" [autoWidth]="false"
                                         [(ngModel)]="employee.idGenero"
@@ -169,11 +169,11 @@
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !NGgenderTypes.valid">
                               <i class="fa fa-close"></i>
-                              Genero es requerido
+                              {{ 'MSG_GENROREQUERIDA' | translate:param }}
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="NGmaritalStatusTypes">Estado civil</label>
+                            <label for="NGmaritalStatusTypes">{{ 'LBL_ESTADOCIVIL' | translate:param }}</label>
                             <p-dropdown id="NGmaritalStatusTypes"  name="NGmaritalStatusTypes" required="true"
                                         [options]="maritalStatusTypes" [autoWidth]="false"
                                         [(ngModel)]="employee.idEstadoCivil"
@@ -182,11 +182,11 @@
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !NGmaritalStatusTypes.valid">
                               <i class="fa fa-close"></i>
-                              Estado civil es requerido
+                              {{ 'MSG_ESTADOCIVILRQUERIDA' | translate:param }}
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="NGrhRactorTypes">Factor RH</label>
+                            <label for="NGrhRactorTypes">{{ 'LBL_FACTORRH' | translate:param }}</label>
                             <p-dropdown id="NGrhRactorTypes"  name="NGgenderTypes" required="true"
                                         [options]="rhRactorTypes" [autoWidth]="false"
                                         [(ngModel)]="employee.idFactorRh"
@@ -195,11 +195,11 @@
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !NGrhRactorTypes.valid">
                               <i class="fa fa-close"></i>
-                              Factor RH es requerido
+                              {{ 'MSG_FACTORRHREQUERIDO' | translate:param }}
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="NGhealthTypes">Cobertura Salud</label>
+                            <label for="NGhealthTypes">{{ 'LBL_COBERTURASALUD' | translate:param }}</label>
                             <p-dropdown id="NGhealthTypes"  name="NGhealthTypes" required="true"
                                         [options]="healthTypes" [autoWidth]="false"
                                         [(ngModel)]="employee.idCoberturaSalud"
@@ -208,13 +208,13 @@
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !NGhealthTypes.valid">
                               <i class="fa fa-close"></i>
-                              Cobertura Salud es requerido
+                              {{ 'MSG_COBERTURASALUDREQUERIDO' | translate:param }}
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="NGaffiliationType">Tipo Afiliación</label>
+                            <label for="NGaffiliationType">{{'LBL_AFILIACION' | translate:param }}</label>
                             <p-dropdown id="NGaffiliationType"  name="NGaffiliationType" required="true"
                                         [options]="affiliationTypes" [autoWidth]="false"
                                         [(ngModel)]="employee.idTipoAfiliacion"
@@ -223,11 +223,11 @@
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !NGaffiliationType.valid">
                               <i class="fa fa-close"></i>
-                              Tipo Afiliación es requerido
+                              {{ 'MSG_TIPOAFILIACIONREQUERIDO' | translate:param }}
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="NGacademicLevelTypes">Nivel academico</label>
+                            <label for="NGacademicLevelTypes">{{'LBL_NIVELESTUDIOS' | translate:param }}</label>
                             <p-dropdown id="NGacademicLevelTypes"  name="NGacademicLevelTypes" required="true"
                                         [options]="academicLevelTypes" [autoWidth]="false"
                                         [(ngModel)]="employee.idNivelEducacion"
@@ -236,13 +236,13 @@
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !NGacademicLevelTypes.valid">
                               <i class="fa fa-close"></i>
-                              Nivel academico es requerido
+                              {{ 'MSG_NIVELESTUDIOSREQUERIDO' | translate:param }}
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="NGoccupationsTypes">Tipo Ocupación</label>
+                            <label for="NGoccupationsTypes">{{'LBL_TIPOOCUPACION' | translate:param }}</label>
                             <p-dropdown id="NGoccupationsTypes"  name="NGoccupationsTypes" required="true"
                                         [options]="occupationsTypes" [autoWidth]="false"
                                         [(ngModel)]="employee.idTipoOcupacion"
@@ -251,11 +251,11 @@
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !NGoccupationsTypes.valid">
                               <i class="fa fa-close"></i>
-                              Tipo Ocupación es requerido
+                              {{ 'MSG_TIPOOCUPACIONREQUERIDO' | translate:param }}
                             </div>
                         </div>
                         <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 2">
-                          <label for="NGoccupations">Ocupación</label>
+                          <label for="NGoccupations">{{'LBL_OCUPACION' | translate:param }}</label>
                           <p-dropdown id="NGoccupations"  name="NGoccupations" required="true" filter="filter"
                                       [options]="occupations" [autoWidth]="false"
                                       [(ngModel)]="employee.idOcupacion"
@@ -264,13 +264,13 @@
                           <div class="ui-message ui-messages-error ui-corner-all"
                                *ngIf="f.submitted && !NGoccupations.valid">
                             <i class="fa fa-close"></i>
-                            Ocupación es requerido
+                            {{ 'MSG_OCUPACIONREQUERIDO' | translate:param }}
                           </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 1">
-                            <label for="NGsector">Sector</label>
+                            <label for="NGsector">{{'LBL_SECTOR' | translate:param }}</label>
                             <p-dropdown id="NGsector"  name="NGsector" required="true"
                                         [options]="sector" [autoWidth]="false"
                                         [(ngModel)]="employee.idSectorEconomico"
@@ -280,11 +280,11 @@
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !NGsector.valid">
                               <i class="fa fa-close"></i>
-                              Sector es requerido
+                              {{ 'MSG_SECTORREQUERIDO' | translate:param }}
                             </div>
                         </div>
                         <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 1">
-                            <label for="NGactivities">Actividad</label>
+                            <label for="NGactivities">{{'LBL_ACTIVIDAD' | translate:param }}</label>
                             <p-dropdown id="NGactivities"  name="NGactivities" required="true" filter="filter"
                                         [options]="activities" [autoWidth]="false"
                                         [(ngModel)]="employee.idActividadEconomica"
@@ -293,11 +293,11 @@
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !NGactivities.valid">
                               <i class="fa fa-close"></i>
-                              Actividad es requerido
+                              {{ 'MSG_ACTIVIDADREQUERIDA' | translate:param }}
                             </div>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="Ngalive">Vivo</label>
+                            <label for="Ngalive">{{'LBL_VIVO' | translate:param }}</label>
                             <p-checkbox id="Ngalive"  name="Ngalive" binary="true"
                                         [(ngModel)]="employee.indicadorVivo"
                                         #Ngalive="ngModel"
@@ -305,13 +305,13 @@
                             </p-checkbox>
                         </div>
                         <div class="form-group col-md-3" *ngIf="employee.indicadorVivo == false">
-                            <label for="NGdeathDate">Fecha defunción</label>
-                            <p-calendar id="NGdeathDate" name="NGdeathDate"  [showIcon]="true" [disabled]="disabled"
+                            <label for="NGdeathDate">{{'LBL_VIVO' | translate:param }}</label>
+                            <p-calendar id="NGdeathDate" name="NGdeathDate" [locale]="es" [showIcon]="true" [disabled]="disabled"
                                         [dataType]="date"  #NGdeathDate="ngModel" [required]="!employee.indicadorVivo"
                                         [(ngModel)]="deathDate" (onSelect)="onDeathDate($event)"
                             ></p-calendar>
                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !employee.indicadorVivo && !NGdeathDate.valid">
-                              Fecha de defuncion es requerido
+                              {{ 'MSG_FECHADEFUNCIONREQUERIDO' | translate:param }}
                             </div>
                         </div>
                     </div>
@@ -319,7 +319,7 @@
                         <div class="form-group col-md-5">
                         </div>
                         <div class="form-group col-md-4">
-                          <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+                          <label for="indicador" class="control-label col-sm-3">{{'LBL_HABILITADO' | translate:param }}</label>
                           <div class=" col-sm-9">
                             <p-checkbox binary="true" id="indicador" name="indicador"
                                         [(ngModel)]="employee.indicadorHabilitado"
@@ -330,7 +330,7 @@
                 </div>
                 <div class="row form-footer-buttons">
                     <div class="form-group col-md-12">
-                        <a (click)="goBack()" class="cancelar">Cancelar</a>
+                        <a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate:param }}</a>
                         <button icon="fa-plus" label="Guardar" type="submit"
                                 pButton></button>
 

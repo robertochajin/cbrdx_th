@@ -16,41 +16,58 @@ import {WindowRefService} from '../_services/window-ref.service';
  */
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
-  declarations: [ToolbarComponent, NavbarComponent, BreadcrumbComponent],
-  exports: [ToolbarComponent, NavbarComponent, BreadcrumbComponent,
-    CommonModule, FormsModule, RouterModule, TranslateModule]
+   imports: [CommonModule, RouterModule, TranslateModule],
+   declarations: [ToolbarComponent, NavbarComponent, BreadcrumbComponent],
+   exports: [ToolbarComponent, NavbarComponent, BreadcrumbComponent,
+      CommonModule, FormsModule, RouterModule, TranslateModule]
 })
 export class SharedModule {
 
-  private _window: Window;
+   private _window: Window;
+   topInvalid: number;
 
 
-  constructor(private router: Router, windowRef: WindowRefService) {
+   constructor(private router: Router, windowRef: WindowRefService) {
 
-    this._window = windowRef.nativeWindow;
+      this._window = windowRef.nativeWindow;
 
-    router.events.subscribe((val) => {
-      if (val instanceof NavigationEnd) {
-        //console.log('router yeah');
-        //this._window.scrollTo(0, 0);
-        //<any>changePage();
+      router.events.subscribe((val) => {
+         if (val instanceof NavigationEnd) {
 
-        // ScrollTop
-        jQuery('#wrapper').animate({scrollTop:0},'fast');
+            // Fix Footer -
+            setTimeout(() => {
+               jQuery(window).resize();
+            }, 500);
 
-        // Focus Primer campo
-        jQuery(':input:enabled:visible:first').select().focus();
-      }
-    });
-  }
+            // ScrollTop
+            jQuery('#wrapper').animate({scrollTop: 0}, 'fast');
 
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: SharedModule,
-      providers: [TranslateService]
-    };
-  }
+            // Focus Primer campo
+            jQuery('input[type=text]:enabled:visible:first').select().focus();
+
+            // Focus primer invalid campo
+
+            setTimeout(() => {
+               jQuery('button').click(function () {
+                  if (jQuery('input.ng-invalid').length) {
+                     jQuery('body').scrollTop(jQuery('input.ng-invalid:first').position().top);
+                     console.log('Focus Error!');
+                     setTimeout(() => {
+                        jQuery('input.ng-invalid:first').select().focus();
+                     }, 500);
+                  }
+               });
+            }, 1000);
+         }
+      });
+   }
+
+   static forRoot(): ModuleWithProviders {
+      return {
+         ngModule: SharedModule,
+         providers: [TranslateService]
+      };
+   }
 
 
 }

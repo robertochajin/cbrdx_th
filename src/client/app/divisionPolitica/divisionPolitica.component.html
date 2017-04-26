@@ -40,14 +40,14 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <label for="codigoDivisionPolitica" class="control-label col-sm-3">* Código </label>
+                                <label for="codigoDivisionPolitica" class="control-label col-sm-3">* {{ 'LBL_CODIGO' | translate }} </label>
                                 <div class=" col-sm-9">
                                     <input type="text" pInputText class="form-control" id="codigoDivisionPolitica"
                                            name="codigoDivisionPolitica"
                                            [(ngModel)]="politicalDivision.codigoDivisionPolitica"
                                            (change)="validateCode()"
                                            (keyup)="capitalizeCodigo()"
-                                           #codigoDivisionPolitica="ngModel"
+                                           #codigoDivisionPolitica="ngModel" maxlength="10"
                                            required/>
                                     <div *ngIf="fdivision.submitted && !codigoDivisionPolitica.valid"
                                          class="help-block">
@@ -97,7 +97,7 @@
                         </div>
                         <div class="row" *ngIf="tabselected > 1">
                             <div class="form-group">
-                                <label for="codigoPostal" class="control-label col-sm-3">Código Postal </label>
+                                <label for="codigoPostal" class="control-label col-sm-3">{{ 'LBL_CODIGO' | translate }} {{ 'LBL_POSTAL' | translate }}</label>
                                 <div class=" col-sm-9">
                                     <input type="text" pInputText class="form-control" id="codigoPostal"
                                            name="codigoPostal"
@@ -108,7 +108,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group" *ngIf="tabselected == 4">
-                                <label for="estratoDivisionPolitica" class="control-label col-sm-3">Estrato </label>
+                                <label for="estratoDivisionPolitica" class="control-label col-sm-3">{{ 'LBL_ESTRATO' | translate }} </label>
                                 <div class=" col-sm-9">
                                     <p-dropdown id="estratoDivisionPolitica" name="estratoDivisionPolitica"
                                                 [options]="divisionPoliticaEstrato" [autoWidth]="false"
@@ -119,7 +119,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <label for="divisionPoliticaTipo" class="control-label col-sm-3">Tipo </label>
+                                <label for="divisionPoliticaTipo" class="control-label col-sm-3">{{ 'LBL_TIPO' | translate }} </label>
                                 <div class=" col-sm-9">
                                     <p-dropdown id="divisionPoliticaTipo" name="divisionPoliticaTipo"
                                                 [options]="divisionPoliticaTipos" [autoWidth]="false"
@@ -132,7 +132,7 @@
                         </div>
                         <div class="row" *ngIf="tabselected == 4 && Comunas">
                             <div class="form-group">
-                                <label for="comuna" class="control-label col-sm-3">Pertenece a </label>
+                                <label for="comuna" class="control-label col-sm-3">"LBL_PERTENECE":"Teléfono"a </label>
                                 <div class=" col-sm-9">
                                     <p-dropdown id="comuna" name="comuna" [options]="divisionPoliticaComunas"
                                                 [autoWidth]="false"
@@ -143,7 +143,7 @@
                         </div>
                         <div class="row" *ngIf="tabselected == 4 && Localidades">
                             <div class="form-group">
-                                <label for="localidad" class="control-label col-sm-3">Pertenece a </label>
+                                <label for="localidad" class="control-label col-sm-3">"LBL_PERTENECE":"Teléfono" a </label>
                                 <div class=" col-sm-9">
                                     <p-dropdown id="localidad" name="localidad" [options]="divisionPoliticaLocalidades"
                                                 [autoWidth]="false"
@@ -154,7 +154,7 @@
                         </div>
                         <div class="row" *ngIf="tabselected == 4 && Resguardos">
                             <div class="form-group">
-                                <label for="resguardo" class="control-label col-sm-3">Pertenece a </label>
+                                <label for="resguardo" class="control-label col-sm-3"> "LBL_PERTENECE":"Teléfono", a </label>
                                 <div class=" col-sm-9">
                                     <p-dropdown id="resguardo" name="resguardo" [options]="divisionPoliticaResguardos"
                                                 [autoWidth]="false"
@@ -165,7 +165,7 @@
                         </div>
                         <div class="row" *ngIf="tabselected == 3">
                             <div class="form-group">
-                                <label for="DPArea" class="control-label col-sm-3">Area </label>
+                                <label for="DPArea" class="control-label col-sm-3">{{ 'LBL_AREA' | translate }} </label>
                                 <div class=" col-sm-9">
                                     <p-dropdown id="DPArea" name="DPArea" [options]="divisionPoliticaAreas"
                                                 [autoWidth]="false"
@@ -178,7 +178,7 @@
 
                         <div class="row">
                             <div class="form-group">
-                                <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+                                <label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate }}</label>
                                 <div class=" col-sm-9">
                                     <p-checkbox binary="true" id="indicador" name="indicador"
                                                 [(ngModel)]="politicalDivision.indicadorHabilitado"
@@ -188,8 +188,8 @@
                         </div>
                         <div class="row form-footer-buttons">
                             <div class="form-group col-md-12">
-                                <a (click)="displayDialog=true" class="cancelar">Cancelar</a>
-                                <button pButton type="submit" formaction="" label="Guardar"></button>
+                                <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+                                <button pButton type="submit" formaction="" label="{{ 'BTN_GUARDAR' | translate }}"></button>
                             </div>
                         </div>
                     </form>
@@ -198,7 +198,7 @@
         </p-fieldset>
         <p-dialog header="Confirmación" [(visible)]="displayDialog"
                   responsive="true" modal="true">
-            <p>Si continua perdera la información no guardada.Esta seguro que desea salir?.</p>
+            <p>{{ 'MSG_CONFIRMACION' | translate }}</p>
             <p-footer>
                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                     <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>

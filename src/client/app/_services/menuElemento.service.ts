@@ -8,7 +8,7 @@ import {AuthenticationService} from "./authentication.service";
 export class MenuElementoService {
 
     headers = new Headers({'Content-Type': 'application/json'});
-    private serviceURL = '<%= SVC_SP_URL %>/menusElementos/';
+    private serviceURL = '<%= SVC_TH_URL %>/api/menusElementos/';
 
     constructor(private http: Http,
                 private authenticationService: AuthenticationService
@@ -24,7 +24,7 @@ export class MenuElementoService {
         return this.http.post(this.serviceURL, JSON.stringify(c), {headers: this.headers}).toPromise().then(res => res.json() as MenuElemento).catch(this.handleError);
     };
 
-    updateMenuElemento(c: MenuElemento): Promise<MenuElemento> {
+    updateMenuElemento(c: MenuElemento): Promise<any> {
         return this.http.put(this.serviceURL, JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
     }
 

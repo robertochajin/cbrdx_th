@@ -1,0 +1,72 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+  </p-footer>
+
+</p-confirmDialog>
+<div *ngIf="productivity">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="header">
+        <h4 class="title">{{header}}</h4>
+      </div>
+    </div>
+  </div>
+  <form (ngSubmit)="p.valid && onSubmit()" #p="ngForm" novalidate id="formulario">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">
+          <label for="idProductividad">Productividad</label>
+          <p-dropdown id="idProductividad" name="idProductividad" required="true"
+                      [options]="ListProductivity" [autoWidth]="false"
+                      [(ngModel)]="productivity.idProductividad"
+                      #idProductividad="ngModel"
+          ></p-dropdown>
+          <div class="ui-message ui-messages-error ui-corner-all"
+               *ngIf="p.submitted && !idProductividad.valid">
+            <i class="fa fa-close"></i>
+            Productividad requerida
+          </div>
+        </div>
+        <div class="ui-grid-col-6">
+          <label for="idNivelIQ">Nivel IQ</label>
+          <p-dropdown id="idNivelIQ" name="idNivelIQ" required="true"
+                      [options]="ListIQLevel" [autoWidth]="false"
+                      [(ngModel)]="productivity.idProductividadIq"
+                      #idNivelIQ="ngModel"
+          ></p-dropdown>
+          <div class="ui-message ui-messages-error ui-corner-all"
+               *ngIf="p.submitted && !idNivelIQ.valid">
+            <i class="fa fa-close"></i>
+           Nivel IQ requerido
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">
+          <label for="idNivelAptitude">Nivel de Aptitud</label>
+          <p-dropdown id="idNivelAptitude" name="idNivelAptitude" required="true"
+                      [options]="ListAptitudeLevel" [autoWidth]="false"
+                      [(ngModel)]="productivity.idProductividadAptitud"
+                      #idNivelAptitude="ngModel"
+          ></p-dropdown>
+          <div class="ui-message ui-messages-error ui-corner-all"
+               *ngIf="p.submitted && !idNivelAptitude.valid">
+            <i class="fa fa-close"></i>
+            Nivel aptitud requerido
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-row form-footer-buttons">
+        <div class="ui-grid-col-8"></div>
+        <div class="ui-grid-col-3">
+          <button pButton icon="fa-arrow-right" label="Guardar y Siguiente" type="submit"></button>
+        </div>
+        <div class="ui-grid-col-5"></div>
+      </div>
+    </div>
+  </form>
+</div>
+

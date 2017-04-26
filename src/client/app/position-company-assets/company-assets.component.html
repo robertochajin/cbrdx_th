@@ -1,0 +1,24 @@
+<p-messages *ngIf="alert" [value]="msgsAlert"></p-messages>
+<div>
+   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listCompanyAssets"
+                [paginator]="false" [responsive]="true" >
+      <p-column header="Elementos">
+         <template let-asset="rowData" pTemplate="body">
+            {{asset.codigo}} - {{asset.nombre}}
+         </template>
+      </p-column>
+      <p-column header="Descripción">
+         <template let-asset="rowData" pTemplate="body">
+            <input type="text" pInputText [(ngModel)]="asset.descripcion" style="width: 100%"/>
+         </template>
+      </p-column>
+   </p-dataTable>
+
+</div>
+<div class="row">
+   <div class="col-md-3 pull-right">
+      <button pButton label="Siguiente" (click)="next()" type="button" class="pull-right"></button>
+   </div>
+</div>
+
+<p-confirmDialog width="400"></p-confirmDialog>

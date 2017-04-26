@@ -4,6 +4,9 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../_services/authentication.service";
+import {LoginService} from "../_services/login.service";
+import {AppComponent} from "../app.component";
+
 @Component({
     moduleId: module.id,
     templateUrl: 'cambioContrasena.component.html',
@@ -20,10 +23,21 @@ export class CambioContrasenaComponent implements OnInit {
     error: string;
     notice: string;
     enviando: boolean = false;
-    constructor(private loginService: AuthenticationService, private router: Router) {
+    constructor(private authenticationService: AuthenticationService,
+                private loginService: LoginService,
+                private router: Router,
+                private appmain: AppComponent,) {
     }
 
     ngOnInit(): void {
+      this.loginService.setSession(false);
+      this.appmain.setSession(false);
+
+      /* Generar random de la imagen de fondo */
+      var min = 1;
+      var max = 6;
+      var random = Math.floor(Math.random() * (max - min + 1)) + min;
+      jQuery('#loginBg').css('background-image','url("/assets/images/bg-login'+random+'.jpg")');
 
     }
 
@@ -45,14 +59,14 @@ export class CambioContrasenaComponent implements OnInit {
         this.enviando = true;
         this.displayDialog1 = false;
         this.recordarUsuario = false;
-        this.loginService.forgetUser(this.correoElectronico).then(res => {
+        this.authenticationService.forgetUser(this.correoElectronico).then(res => {
             this.enviando = false;
         });
     }
-  
+
   envioContrasena() {
     this.enviando = true;
-    this.loginService.forgetPass(this.correoElectronico, this.usuario).then(res => {
+    this.authenticationService.forgetPass(this.correoElectronico, this.usuario).then(res => {
       if (res) {
         this.enviando = false;
         this.notice = "Se notifico al administrador del Sistema de su solicitud de cambio de contraseña";

@@ -1,0 +1,17 @@
+<h3>Nivel de Aptitud</h3>
+
+<p-dataTable [value]="ListAptitudeLevel" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+  <p-column field="nombre" header="Nivel del Cargo" [sortable]="true"></p-column>
+  <p-column field="idListaMarcaVehiculo" header="Nivel  Cargo" [sortable]="true"></p-column>
+  <p-column  header="Check" [sortable]="true">
+    <template  pTemplate="body" let-aptitude="rowData">
+      <p-checkbox value="{{aptitude.idListaMarcaVehiculo}}" [(ngModel)]="ListAptitudeLevelCheck"></p-checkbox>
+    </template>
+  </p-column>
+</p-dataTable>
+<div class="ui-grid-row form-footer-buttons">
+  <div class="ui-grid-col-2 pull-right">
+    <button icon="fa-arrow-right" pButton label="Siguiente" type="button" (click)="next()"></button>
+  </div>
+  <div class="ui-grid-col-5"></div>
+</div>

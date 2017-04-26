@@ -8,7 +8,7 @@ import {AuthenticationService} from "./authentication.service";
 export class GruposGestionService {
 
     headers = new Headers({'Content-Type': 'application/json'});
-    private serviceURL = '<%= SVC_SP_URL %>/gruposGestion/';
+    private serviceURL = '<%= SVC_TH_URL %>/api/gruposGestion/';
 
     constructor(private http: Http,
                 private authenticationService: AuthenticationService
@@ -32,7 +32,7 @@ export class GruposGestionService {
         return this.http.post(this.serviceURL, JSON.stringify(g), {headers: this.headers}).toPromise().then(res => res.json() as GruposGestion).catch(this.handleError);
     };
 
-    updateGruposGestion(g: GruposGestion): Promise<GruposGestion> {
+    updateGruposGestion(g: GruposGestion): Promise<any> {
         if (g.fechaInicio != null) {
             g.fechaInicio.setHours(23);
             g.fechaFin.setHours(23);

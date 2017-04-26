@@ -1,0 +1,24 @@
+<div>
+   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listPersonality"
+                [paginator]="false" [responsive]="true" >
+      <p-column header="Atributos">
+         <template let-personality="rowData" pTemplate="body">
+            {{personality.codigo}} - {{personality.nombre}}
+         </template>
+      </p-column>
+      <p-column header="Descripción">
+         <template let-personality="rowData" pTemplate="body">
+            <input type="text" pInputText [(ngModel)]="personality.descripcion" style="width: 100%"/>
+         </template>
+      </p-column>
+   </p-dataTable>
+</div>
+<div class="ui-grid-row form-footer-buttons">
+   <div class="ui-grid-col-10">
+      <p-messages *ngIf="alert" [value]="msgsAlert"></p-messages>
+   </div>
+   <div class="ui-grid-col-2 pull-right">
+      <button pButton label="Siguiente" type="button" (click)="next()"></button>
+   </div>
+</div>
+<p-confirmDialog width="400"></p-confirmDialog>

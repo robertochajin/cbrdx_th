@@ -26,7 +26,6 @@ export class FamilyInformationComponent implements OnInit {
 
     ngOnInit() {
 
-      //this.familyInformationService.getAll().subscribe(
         this.familyInformationService.getAllByEmployee(this.employee.idTercero).subscribe(
             familyInformations => {
               this.familyInformations = familyInformations;

@@ -14,6 +14,8 @@ import {NavService} from '../_services/_nav.service';
 import {ListEmployeesService}     from '../_services/lists-employees.service';
 import {TerceroResidencias} from "../_models/terceroResidencias";
 import {TercerosResidenciasServices} from "../_services/terceros-residencias.service";
+import {ListaService} from "../_services/lista.service";
+import {ListaItem} from "../_models/listaItem";
 
 @Component({
   moduleId: module.id,
@@ -37,9 +39,9 @@ export class LocationAddComponent implements OnInit {
 
   idTercero: Number;
   tipoDireccion: {value: null, label: string};
-  principalNomenclatureList: any;
-  complementaryNomenclatureList: any;
-  addressTypeList: any;
+  principalNomenclatureList: SelectItem[] = [];
+  complementaryNomenclatureList: SelectItem[] = [];
+  addressTypeList: SelectItem[] = [];
   selectedPrincipalNomenclature: number;
   selectedAddressType: number;
   labelPrincipalNomenclature: string;
@@ -61,6 +63,7 @@ export class LocationAddComponent implements OnInit {
 
   constructor(private location: Location,
               private politicalDivisionServices: PoliticalDivisionService,
+              private listaService: ListaService,
               private locationService: LocationService,
               private locateService: LocateService,
               private listEmployeesService: ListEmployeesService,
@@ -72,66 +75,46 @@ export class LocationAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.locationService.getPrincipalNomenclatureList().subscribe(
-      principalNomenclatureList => {
-        this.principalNomenclatureList = principalNomenclatureList;
-        this.principalNomenclatureList.unshift({label: 'Seleccione', value: null});
-      });
+     this.listaService.getMasterDetails('ListasTiposDirecciones').subscribe(res => {
+        this.addressTypeList.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => this.addressTypeList.push({label: s.nombre, value: s.idLista}));
+     });
+     this.listaService.getMasterDetails('ListasTiposNomenclaturas').subscribe(res => {
+        this.principalNomenclatureList.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => this.principalNomenclatureList.push({label: s.nombre, value: s.idLista}));
+     });
+     this.listaService.getMasterDetails('ListasTiposNomenclaturasComplementarias').subscribe(res => {
+        this.complementaryNomenclatureList.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => this.complementaryNomenclatureList.push({label: s.nombre, value: s.nombre}));
+     });
 
-    this.locationService.getComplementaryNomenclatureList().subscribe(
-      complementaryNomenclatureList => {
-        this.complementaryNomenclatureList = complementaryNomenclatureList;
-        this.complementaryNomenclatureList.map((cn: any) => {
-          cn.value = cn.label;
+     this.listaService.getMasterDetails('ListasTiposViviendas').subscribe(res => {
+        this.listTypeEstate.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listTypeEstate.push({label: s.nombre, value: s.idLista});
         });
-        this.complementaryNomenclatureList.unshift({label: 'Seleccione', value: null});
-      });
+     });
 
-    this.listEmployeesService.getlistTypeEstate().subscribe(rest => {
-      this.listTypeEstate.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listTypeEstate.push({
-          label: dp.nombre,
-          value: dp.idListaTipoVivienda
+     this.listaService.getMasterDetails('ListasClasesViviendas').subscribe(res => {
+        this.listClassEstate.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listClassEstate.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
 
-    this.listEmployeesService.getlistClassEstate().subscribe(rest => {
-      this.listClassEstate.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listClassEstate.push({
-          label: dp.nombre,
-          value: dp.idListaClaseVivienda
+     this.listaService.getMasterDetails('ListasTiposConstruccionViviendas').subscribe(res => {
+        this.listTypeConstruction.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listTypeConstruction.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
 
-    this.listEmployeesService.getlistTypeConstruction().subscribe(rest => {
-      this.listTypeConstruction.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listTypeConstruction.push({
-          label: dp.nombre,
-          value: dp.idListaTipoConstruccionVivienda
+     this.listaService.getMasterDetails('ListasEstratos').subscribe(res => {
+        this.listStratum.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listStratum.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
-
-    this.listEmployeesService.getlistStratum().subscribe(rest => {
-      this.listStratum.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listStratum.push({
-          label: dp.nombre,
-          value: dp.idListaEstrato
-        });
-      }
-    });
-
-    this.locationService.getAddressTypeList().subscribe(
-      addressTypeList => {
-        this.addressTypeList = addressTypeList;
-        this.addressTypeList.unshift({label: 'Seleccione', value: null});
-      });
+     });
 
     this.route.params.subscribe((params: Params) => {
       this.idTercero = +params['id'];

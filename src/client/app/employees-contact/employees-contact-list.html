@@ -7,7 +7,7 @@
         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
           <div class="row">
             <div class="form-group col-md-8">
-              <label for="nombre">* Nombre Contacto</label>
+              <label for="nombre">*{{ 'LBL_NOMBRECONTACTO' | translate:param }}</label>
               <input type="text" pInputText id="nombre" name="nombre"
                      [(ngModel)]="contact.contacto" #contacto="ngModel" required
                      (keyup)="capitalize()"
@@ -15,22 +15,22 @@
               <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="fe.submitted && !contacto.valid">
                  <i class="fa fa-close"></i>
-                Nombre Contacto es requerido
+                {{ 'MSG_NOMBRECONTACTOREQUERIDO' | translate:param }}
                </div>
             </div>
             <div class="ui-grid-col-4">
-              <label for="idParentezco">* Relación</label>
+              <label for="idParentezco">*{{ 'LBL_RELACION' | translate:param }}</label>
               <p-dropdown id="idParentezco"  name="idParentezco" #idParentezco="ngModel" [options]="relationship" [autoWidth]="false"
                           [(ngModel)]="contact.idListaParentesco" required></p-dropdown>
               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="fe.submitted && !idParentezco.valid">
                 <i class="fa fa-close"></i>
-                Parentezco es requerido
+                {{ 'MSG_RELACIONREQUERIDO' | translate:param }}
               </div>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="fijo">Teléfono fijo</label>
+              <label for="fijo">{{ 'LBL_TELEFONO' | translate:param }}</label>
 <!--              <input type="text" pInputText id="fijo" name="fijo"
                      [(ngModel)]="contact.telefono" #telefonoFijo="ngModel"
               />-->
@@ -40,7 +40,7 @@
               ></p-inputMask>
             </div>
             <div class="form-group col-md-6">
-              <label for="cel">Teléfono Celular</label>
+              <label for="cel">{{ 'LBL_CELULAR' | translate:param }}</label>
               <!--<input type="text" pInputText id="cel" name="cel"
                      [(ngModel)]="contact.celular" #telefonoCelular="ngModel"
 
@@ -54,7 +54,7 @@
         </div>
         <div class="row form-footer-buttons">
           <div class="form-group col-md-12">
-            <a (click)="goBackUpdate()" class="cancelar">Cancelar</a>
+            <a (click)="goBackUpdate()" class="cancelar">{{ 'BTN_CANCELAR' | translate:param }}</a>
             <button icon="fa-plus" label="Guardar" type="submit"
                     pButton></button>
           </div>

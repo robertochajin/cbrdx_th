@@ -8,7 +8,7 @@
             <div class=" col-sm-9">
                 <input type="text" pInputText class="form-control" id="codigoGrupoGestion" name="codigoGrupoGestion"
                        #codigoGrupoGestion="ngModel"
-                       [(ngModel)]="grupoGestion.codigoGrupoGestion" required maxlength="10" pattern="[A-Z]{0,10}"
+                       [(ngModel)]="grupoGestion.codigoGrupoGestion" required maxlength="10" pattern="[A-Z0-9]{0,10}"
                        (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
                        (paste)="inputCleanUp($event.target.value)">
                 <div *ngIf="codeExists" class="alert alert-danger">
@@ -28,7 +28,8 @@
             <label for="gGestion" class="control-label col-sm-3">Nombre </label>
             <div class=" col-sm-9">
                 <input type="text" pInputText class="form-control" id="gGestion" name="gGestion" #gGestion="ngModel"
-                       [(ngModel)]="grupoGestion.grupoGestion" required maxlength="64" pattern="[A-Z]{1}.*">
+                       [(ngModel)]="grupoGestion.grupoGestion" required maxlength="64"
+                       pattern="[A-Z]{1}.*" (keyup)="capitalizeName()">
                 <div *ngIf="f.submitted&&!gGestion.valid" class="alert alert-danger">
                     <div [hidden]="!gGestion.errors.required">Debe ingresar un nombre para el grupo de gestión</div>
                     <div [hidden]="!gGestion.errors.maxlength">El código no debe tener mas de 64 caracteres.</div>
@@ -40,7 +41,7 @@
             <label for="fechaInicio" class="control-label col-sm-3">Fecha Inicio</label>
             <div class=" col-sm-8 form-inline">
                 <p-calendar id="fechaInicio" name="fechaInicio" [(ngModel)]="grupoGestion.fechaInicio" [showIcon]="true"
-                            dateFormat="yy-mm-dd" [minDate]="currentDate"
+                            dateFormat="yy-mm-dd" [minDate]="currentDate" [locale]="es"
                             readonlyInput="true" (onSelect)="isRequired=true;validateGreater();"></p-calendar>
 
             </div>
@@ -53,7 +54,7 @@
         <div class="form-group">
             <label for="fechaFin" class="control-label col-sm-3">Fecha Fin</label>
             <div class=" col-sm-9">
-                <p-calendar id="fechaFin" name="fechaFin" [(ngModel)]="grupoGestion.fechaFin"
+                <p-calendar id="fechaFin" name="fechaFin" [(ngModel)]="grupoGestion.fechaFin" [locale]="es"
                             [showIcon]="true" dateFormat="yy-mm-dd" [minDate]="grupoGestion.fechaInicio"
                             [required]="isRequired" [disabled]="!isRequired" (onSelect)="validateGreater();"
                             readonlyInput="true" #fechaFin="ngModel"></p-calendar>

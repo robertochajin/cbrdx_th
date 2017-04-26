@@ -64,3 +64,11 @@ function changePage(){
   $('#wrapper').animate({scrollTop:0},'slow');
 }
 
+/**
+ */
+function focusNGInvalid(){
+  topInvalid = jQuery('.ng-invalid:first').position().top + 10;
+  console.log(topInvalid);
+  jQuery('#wrapper').scrollTop(topInvalid);
+  jQuery('.ng-invalid:first').select().focus();
+}

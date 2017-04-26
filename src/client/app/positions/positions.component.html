@@ -1,0 +1,37 @@
+<h3 class="first">Cargos</h3>
+<div>
+    <div class="row datable-header">
+        <div class="col-md-6 col-xs-12 datatable-header-add">
+            <button type="button" icon="fa-plus" label="Nuevo Cargo"
+                    pButton (click)="add()"></button>
+        </div>
+        <div class="col-md-6 col-xs-12 datatable-header-search" >
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            <input #gb type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
+          </div>
+
+        </div>
+    </div>
+
+    <p-dataTable [value]="positions" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+        <p-column field="codigoCargo" header="Codigo" [sortable]="true"></p-column>
+        <p-column field="cargo" header="Nombre " [sortable]="true"></p-column>
+       <p-column field="indHab" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true" styleClass="datatable-col-center">
+          <template let-position="rowData" pTemplate="body">
+             <p-checkbox [(ngModel)]="position.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
+          </template>
+       </p-column>
+        <p-column header="Acciones" styleClass="datatable-col-action">
+            <template let-position="rowData" pTemplate="body">
+
+                    <button type="button" icon="fa-pencil" class="ui-button-success"
+                            pButton (click)="update(position)"></button>
+              <!--<button type="button" icon="fa-trash" class="ui-button-danger"
+                      pButton (click)="del(employee)" ></button>-->
+
+            </template>
+        </p-column>
+    </p-dataTable>
+</div>
+<p-confirmDialog width="400"></p-confirmDialog>

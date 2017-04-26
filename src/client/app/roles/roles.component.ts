@@ -1,6 +1,3 @@
-/**
- * Created by Felipe Aguirre - Jenniferth Escobar on 26/02/2017.
- */
 import {Component} from "@angular/core";
 import {Rol} from "../_models/rol";
 import {RolesService} from "../_services/roles.service";
@@ -19,15 +16,11 @@ export class RolesComponent {
         });
     }
 
-    addRole() {
+    add() {
         this.router.navigate(['roles/add']);
     }
-
-    viewRole(r: Rol) {
-        this.router.navigate(['roles/view/'], r.idRol);
-    }
-
-    editRole(r: Rol) {
-        this.router.navigate(['roles/edit'], r.idRol);
+   
+   update(r: Rol) {
+        this.router.navigate(['roles/update/'+r.idRol]);
     }
 }

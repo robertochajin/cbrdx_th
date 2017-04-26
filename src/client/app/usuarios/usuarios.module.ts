@@ -1,41 +1,41 @@
-/**
- * Created by jenni on 13/02/2017.
- */
-import {NgModule}      from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgModule } from "@angular/core";
+import "rxjs/add/operator/toPromise";
+import { UsuariosComponent } from "./usuarios.component";
+import { UsuarioDetailComponent } from "./usuarios-detail.component";
+import { UsuariosAddComponent } from "./usuarios-add.component";
+import { UsuariosEditComponent } from "./usuarios-edit.component";
+import { UserSessionComponent } from "./userSession.component";
 
-import {FormsModule} from '@angular/forms';
-import 'rxjs/add/operator/toPromise';
+import { UsuariosService } from "../_services/usuarios.service";
+import { RolesService } from "../_services/roles.service";
+import { GruposGestionService } from "../_services/grupoGestion.service";
+import { TercerosService } from "../_services/terceros.service";
+import { ListaService } from "../_services/lista.service";
 
-import {UsuariosComponent}  from './usuarios.component';
-import {SharedModule} from "../shared/shared.module";
-import {UsuarioDetailComponent}  from './usuarios-detail.component';
-import {UsuariosAddComponent}  from './usuarios-add.component';
-import {UsuariosService} from '../_services/usuarios.service';
-import {
-    InputTextModule,
-    DataTableModule,
-    ButtonModule,
-    DialogModule,
-    PanelModule,
-    CalendarModule,
-    TabViewModule,
-    DropdownModule,
-    FieldsetModule,
-    CheckboxModule
-} from 'primeng/primeng';
-import {RolesService} from "../_services/roles.service";
-import {GruposGestionService} from "../_services/grupoGestion.service";
-import {TercerosService} from "../_services/terceros.service";
-import {ListaService} from "../_services/lista.service";
-import {UsuariosEditComponent} from "./usuarios-edit.component";
+import { SharedModule } from "../shared/shared.module";
+import { FormSharedModule } from "../shared/form-shared.module";
 
-@NgModule({
-    imports: [CommonModule, InputTextModule, FormsModule, DataTableModule, ButtonModule, DialogModule, PanelModule, TabViewModule, CalendarModule, DropdownModule, FieldsetModule, CheckboxModule,SharedModule],
-    declarations: [UsuariosComponent, UsuarioDetailComponent, UsuariosAddComponent,UsuariosEditComponent],
-    bootstrap: [UsuariosComponent],
-    providers: [UsuariosService, GruposGestionService, RolesService, TercerosService, ListaService],
-    exports: [UsuariosComponent]
-})
+@NgModule( {
+              imports: [
+                 SharedModule,
+                 FormSharedModule,
+              ],
+              declarations: [
+                 UsuariosComponent,
+                 UsuarioDetailComponent,
+                 UsuariosAddComponent,
+                 UsuariosEditComponent,
+                 UserSessionComponent
+              ],
+              bootstrap: [ UsuariosComponent ],
+              providers: [
+                 UsuariosService,
+                 GruposGestionService,
+                 RolesService,
+                 TercerosService,
+                 ListaService
+              ],
+              exports: [ UsuariosComponent,UserSessionComponent ]
+           } )
 export class UsuariosModule {
 }

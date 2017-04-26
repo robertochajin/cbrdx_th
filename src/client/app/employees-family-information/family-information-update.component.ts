@@ -11,10 +11,11 @@ import {NavService} from '../_services/_nav.service';
 import {Localizaciones} from "../_models/localizaciones";
 import {LocateService} from "../_services/locate.service";
 import {ListEmployeesService} from "../_services/lists-employees.service";
-import {RelationTypeServices} from "../_services/relation-type.service";
 import {Employee} from "../_models/employees";
 import {EmployeesService} from "../_services/employees.service";
 import {PoliticalDivisionService} from "../_services/political-division.service";
+import {ListaItem} from "../_models/listaItem";
+import {ListaService} from "../_services/lista.service";
 
 @Component({
   moduleId: module.id,
@@ -42,16 +43,17 @@ export class FamilyInformationUpdateComponent implements OnInit {
   es: any;
   range: string;
   addinglocation: boolean = true;
+  repeatedDocument: boolean = false;
   idTipoTercero: number;
   idMayorDeEdad: number = 1;
   //Es necesario crear la constante y consultarla
 
   constructor(private familyInformationService: FamilyInformationService,
+              private listaService: ListaService,
               private route: ActivatedRoute,
               private fb: FormBuilder,
               private locateService: LocateService,
               private employeesService: EmployeesService,
-              private relationTypeServices: RelationTypeServices,
               private listEmployeesService: ListEmployeesService,
               private confirmationService: ConfirmationService,
               private politicalDivisionService: PoliticalDivisionService,
@@ -78,24 +80,18 @@ export class FamilyInformationUpdateComponent implements OnInit {
     this.maxDate.setFullYear(year);
     this.range = `${lastYear}:${year}`;
 
-
-    this.listEmployeesService.getDocumentTypes().subscribe(
-      documentTypes => {
+     this.listaService.getMasterDetails('ListasTiposDocumentos').subscribe(res => {
         this.documentTypes.push({label: 'Seleccione', value: null});
-        documentTypes.map((s: any) => {
-          this.documentTypes.push({label: s.nombreListaTipoDocumento, value: s.idListaTipoDocumento});
-        });
-      }
-    );
+        res.map((s: ListaItem) => this.documentTypes.push({label: s.nombre, value: s.idLista}));
+     });
 
-    this.relationTypeServices.getAllEnabled().subscribe(
-      relationship => {
-        this.relationship.unshift({label: 'Seleccione', value: null});
-        relationship.map((s: any) => {
-          this.relationship.push({label: s.nombreListaParentesco, value: s.idListaParentesco});
+     this.listaService.getMasterDetails('ListasParentescos').subscribe(res => {
+        this.relationship.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.relationship.push({label: s.nombre, value: s.idLista});
         });
-      }
-    );
+     });
+
 
     this.listEmployeesService.getTerType("TERFAM").subscribe(
       res => {
@@ -291,4 +287,18 @@ export class FamilyInformationUpdateComponent implements OnInit {
     }
   }
 
+   validateDocument() {
+      if(this.familyInformation.numeroDocumento !="" && this.familyInformation.numeroDocumento != null && this.selectedDocument != null){
+         this.employeesService.validateDocument(this.familyInformation.numeroDocumento, this.selectedDocument).subscribe(res => {
+            if(res.idTercero > 0) {
+               this.repeatedDocument = true;
+               this.familyInformation.numeroDocumento = '';
+            }
+         });
+      }
+   }
+
+   childInputCleanUp(value: string) {
+      this.familyInformation.telefonoFijo = value.toUpperCase().replace(/[^1-9]/g, '').replace(' ', '').trim();
+   }
 }

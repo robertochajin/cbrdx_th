@@ -9,7 +9,6 @@ import { FamilyInformationDetailComponent }  from './family-information-detail.c
 import { FamilyInformationAddComponent }  from './family-information-add.component';
 import { FamilyInformationUpdateComponent }  from './family-information-update.component';
 import { FamilyInformationService } from './family-information.service';
-import { RelationTypeServices } from '../_services/relation-type.service';
 import {SharedModule} from "../shared/shared.module";
 import {LocationsModule} from "../locations/locations.module";
 
@@ -26,7 +25,7 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,InputTextarea
                     FamilyInformationUpdateComponent,
                     ],
     bootstrap:    [FamilyInformationComponent],
-    providers:    [FamilyInformationService,RelationTypeServices],
+    providers:    [FamilyInformationService],
     exports: 	  [FamilyInformationComponent]
 })
 export class FamilyInformationModule { }

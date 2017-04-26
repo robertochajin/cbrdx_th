@@ -15,6 +15,12 @@ import {LocationModule} from "./employees-location/employee-location.module";
 import {EmployeesEstateModule} from "./employees-estate/employee-estate.module";
 import {EmployeesVehicleModule} from "./employees-vehicle/employee-vehicles.module";
 import {WorkExperienceModule} from "./employees-work-experience/work-experience.module";
+import {FaultsAndSanctionsModule} from "./faultsAndSanctions/faults-and-sanctions.module";
+import {PositionsModule} from "./positions/positions.module";
+import {PersonalityModule} from "./position-personality/personality.module";
+import {CompanyAssetsModule} from "./position-company-assets/company-assets.module"
+
+
 import {LoginModule} from "./seguridad/login.module";
 import {LoginService} from "./_services/login.service";
 import {AuthGuard} from "./_guards/auth.guard";
@@ -23,7 +29,22 @@ import {GrowlModule} from "primeng/primeng";
 import {DashboardModule} from "./dashboard/dashboard.module";
 import {TranslateModule, TranslateLoader, TranslateStaticLoader} from "ng2-translate";
 
+import {ProductivityModule} from "./position-productivity/productivity.module";
+
+//proyección laboral
+import {JobProjectionModule} from "./job-projection/job-projection.module";
+
+// administrador de formularios
+import {FormManagerModule} from "./form-manager/form-manager.module";
+//Estructura física
+import {PhysicStructureModule} from "./physic-structure/physic-structure.module";
+
+import {RiskModule} from "./position-risks/position-risks.module";
+import {AbsenceModule} from "./position-absence/position-absence.module";
+// import {ResponsibilityModule} from "./position-responsibility/responsibility.module";
 // Copy sp
+//riesgos
+import {RisksModule} from "./risks/risks.module";
 
 import {ConstanteModule} from "./constantes/constante.module";
 import {ListaModule} from "./listas/lista.module";
@@ -36,58 +57,96 @@ import {DivisionPoliticaModule} from "./divisionPolitica/divisionPolitica.module
 import {OcupacionesModule} from "./ocupaciones/ocupaciones.module";
 import {ActividadEconomicaModule} from "./actividadEconomica/actividadEconomica.module";
 import {ClinicalInformationModule} from "./employees-clinical-information/clinical-information.module";
+import {EvaluationCriteriasModule} from "./position-evaluation-criterias/evaluation-criterias.module";
+import {PositionResponsabilitiesModule} from "./position-responsabilities/position-responsabilities.module";
+import {PositionRolesModule} from "./position-roles/position-roles.module";
+import {PositionCompetenciesModule} from "./position-competencies/position-competencies.module";
+import {CompetenciesGroupsModule} from "./competencies-groups/competencies-groups.module";
+
+
+import { OrganizationalStructureModule } from "./organizationalStructure/organizationalStructure.module";
+import { OrganizationalStructurePositionsModule } from "./organizationalStructurePositions/organizational-structure-positions.module";
+import {WidgetModule} from "./widgets/widgets.module";
+
+
+// Administracion
+import { MenuManagerModule } from "./menuManager/menuManager.module";
+
+// Auth JWT module
+import {AuthModule} from "./shared/auth.module";
 
 
 //CarsModule,
 @NgModule({
-  imports: [BrowserModule, HttpModule, AppRoutingModule,
-    EmployeesModule,
-    FamilyInformationModule,
-    LocationModule,
-    EmployeesEstateModule,
-    EmployeesVehicleModule,
-    ReferencesModule,
-    AcademicEducationModule,
-    WorkExperienceModule,
-    ClinicalInformationModule,
-    LoginModule,
-    GrowlModule,
-    DashboardModule,
-    SharedModule.forRoot(),
-    TranslateModule.forRoot({
-      provide: TranslateLoader,
-      useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
-      deps: [Http]
-    }),
-    ConstanteModule,
-    ListaModule,
-    CentroCostosModule,
-    GruposGestionModule,
-    RolesModule,
-    UsuariosModule,
-    TipoDeAreaModule,
-    DivisionPoliticaModule,
-    OcupacionesModule,
-    ActividadEconomicaModule,
-  ],
+   imports: [BrowserModule, HttpModule, AppRoutingModule,
+      EmployeesModule,
+      FamilyInformationModule,
+      LocationModule,
+      EmployeesEstateModule,
+      EmployeesVehicleModule,
+      ReferencesModule,
+      AcademicEducationModule,
+      WorkExperienceModule,
+      ClinicalInformationModule,
+      LoginModule,
+      GrowlModule,
+      DashboardModule,
+      EvaluationCriteriasModule,
+      PositionResponsabilitiesModule,
+      PositionRolesModule,
+      PositionCompetenciesModule,
+      OrganizationalStructureModule,
+      OrganizationalStructurePositionsModule,
+      CompetenciesGroupsModule,
+      WidgetModule,
+      FormManagerModule,
+      AuthModule,
+      SharedModule.forRoot(),
+      TranslateModule.forRoot({
+         provide: TranslateLoader,
+         useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
+         deps: [Http]
+      }),
+      ConstanteModule,
+      ListaModule,
+      CentroCostosModule,
+      GruposGestionModule,
+      RolesModule,
+      UsuariosModule,
+      TipoDeAreaModule,
+      DivisionPoliticaModule,
+      OcupacionesModule,
+      ActividadEconomicaModule,
+      FaultsAndSanctionsModule,
+      PositionsModule,
+      ProductivityModule,
+      JobProjectionModule,
+      PhysicStructureModule,
+      RiskModule,
+      PersonalityModule,
+      AbsenceModule,
+      RisksModule,
+      MenuManagerModule,
+      CompanyAssetsModule
+   ],
 
-  declarations: [AppComponent],
-  providers: [
-    WindowRefService,
-    {
-      provide: APP_BASE_HREF,
-      useValue: '<%= APP_BASE %>'
-    },
-    AuthGuard,
-    AuthenticationService,
-    LoginService,
-    {
-      provide: APP_BASE_HREF,
-      useValue: '<%= APP_BASE %>',
-    }
-  ],
+   declarations: [AppComponent],
+   providers: [
+      WindowRefService,
+      {
+         provide: APP_BASE_HREF,
+         useValue: '<%= APP_BASE %>'
+      },
+      AuthGuard,
+      AuthenticationService,
+      LoginService,
+      {
+         provide: APP_BASE_HREF,
+         useValue: '<%= APP_BASE %>',
+      }
+   ],
 
-  bootstrap: [AppComponent]
+   bootstrap: [AppComponent]
 
 })
 export class AppModule {

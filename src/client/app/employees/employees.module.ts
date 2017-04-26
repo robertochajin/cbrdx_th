@@ -13,6 +13,7 @@ import { PoliticalDivisionService } from "../_services/political-division.servic
 
 import {NavService}                 from '../_services/_nav.service';
 
+import {SharedModule } from '../shared/shared.module';
 import {FormSharedModule } from '../shared/form-shared.module';
 
 import {FamilyInformationModule} from './../employees-family-information/family-information.module';
@@ -24,6 +25,7 @@ import {ClinicalInformationModule} from "../employees-clinical-information/clini
 import {EmployeesContactModule} from "../employees-contact/employees-contact.module";
 import {EmployeesEstateModule} from "../employees-estate/employee-estate.module";
 import {EmployeesVehicleModule} from "../employees-vehicle/employee-vehicles.module";
+import {ListaService} from "../_services/lista.service";
 
 
 @NgModule({
@@ -34,6 +36,7 @@ import {EmployeesVehicleModule} from "../employees-vehicle/employee-vehicles.mod
     WorkExperienceModule,
     LocationModule,
     ClinicalInformationModule,
+    SharedModule,
     FormSharedModule,
     EmployeesContactModule,
     EmployeesEstateModule,
@@ -42,7 +45,7 @@ import {EmployeesVehicleModule} from "../employees-vehicle/employee-vehicles.mod
 
   declarations: [EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent,EmployeesAdditionalDataComponent],
   bootstrap: [EmployeesComponent],
-  providers: [EmployeesService,ListEmployeesService, PoliticalDivisionService, NavService],
+  providers: [EmployeesService,ListEmployeesService, PoliticalDivisionService, NavService, ListaService],
   exports: [EmployeesComponent]
 })
 export class EmployeesModule {

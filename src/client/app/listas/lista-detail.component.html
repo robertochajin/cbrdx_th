@@ -20,15 +20,8 @@
             <label class="col-md-3 col-sm-6 col-xs-4 control-label">Id:</label>
             <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{masterList.idLista}}</strong></label>
 
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Habilitado:</label>
-            <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{habilitado}}</strong></label>
-          </div>
-          <div class="row">
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label" *ngIf="masterList.dependeLista">Depende de Item:</label>
-            <label class="col-md-3 col-sm-6 col-xs-8" *ngIf="masterList.dependeLista"><strong>{{masterList.dependeItem}}</strong></label>
-
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Depende de Lista:</label>
-            <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{masterList.dependeLista}}</strong></label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Editable:</label>
+            <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{masterList.indicadorEditable ? 'Si' : 'No'}}</strong></label>
           </div>
       </fieldset>
     </form>
@@ -39,15 +32,9 @@
 <p-fieldset legend="Elementos de la Lista">
     <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="detailsList" [paginator]="true" [rows]="10" [responsive]="true">
         <header>Listas</header>
-        <p-column field="codigoItem" header="Código"></p-column>
-        <p-column field="item" header="Item"></p-column>
-        <p-column field="descripcion" header="Descripcion"></p-column>
-        <p-column field="indicadorPredeterminado" header="Predeterminado">
-            <template let-const="rowData" pTemplate="body">
-                <p-checkbox [(ngModel)]="const.indicadorPredeterminado" binary="true" disabled="true"></p-checkbox>
-            </template>
-        </p-column>
-        <p-column field="indicadorHabilitado" header="Habilitado">
+       <p-column field="codigo" header="Código"></p-column>
+       <p-column field="nombre" header="Item"></p-column>
+       <p-column field="indicadorHabilitado" header="Habilitado">
             <template let-const="rowData" pTemplate="body">
                 <p-checkbox [(ngModel)]="const.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
             </template>

@@ -4,8 +4,10 @@
         <button type="button" pButton icon="fa-plus" (click)="addUser()" label="{{ 'LBL_NUEVO' | translate:param }} {{ 'LBL_USUARIOS' | translate:param }}"></button>
     </div>
     <div class="col-md-6 col-xs-12 datatable-header-search">
-        <i class="fa fa-search"></i>
-        <input type="text" pInputText size="40" placeholder="Buscar..." (keyup)="showData($event.target.value)">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input type="text" pInputText size="40" placeholder="Buscar..." (keyup)="showData($event.target.value)" class="form-control">
+      </div>
     </div>
 </div>
 <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUNDUSERS' | translate:param }}"  [value]="usuarios" [paginator]="true" [rows]="10" [responsive]="true">
@@ -13,7 +15,7 @@
     <p-column field="nombre" header="{{ 'LBL_NOMBRE' | translate:param }}" [sortable]="true"></p-column>
     <p-column field="documento" header="{{ 'LBL_NUMERODOCUMENTO' | translate:param }}" [sortable]="true"></p-column>
     <p-column field="usuario" header="{{ 'LBL_USUARIO' | translate:param }}" [sortable]="true"></p-column>
-    <p-column field="indHab" header="{{ 'LBL_HABILITADO' | translate:param }}" [sortable]="true">
+    <p-column field="indHab" header="{{ 'LBL_HABILITADO' | translate:param }}" [sortable]="true" styleClass="datatable-col-center">
         <template let-const="rowData" pTemplate="body">
             <p-checkbox [(ngModel)]="const.indHab" binary="true" disabled="true"></p-checkbox>
         </template>

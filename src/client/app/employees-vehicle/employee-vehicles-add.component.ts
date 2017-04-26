@@ -11,6 +11,8 @@ import {PoliticalDivisionService} from "../_services/political-division.service"
 import {DivisionPolitica}         from "../_models/divisionPolitica";
 import * as moment from 'moment/moment';
 import {NavService} from '../_services/_nav.service';
+import {ListaService} from "../_services/lista.service";
+import {ListaItem} from "../_models/listaItem";
 @Component({
   moduleId: module.id,
   selector: 'employees-vehicle',
@@ -27,13 +29,14 @@ export class EmployeesVehicleAddComponent {
   listTypeService: SelectItem[] = [];
   listBrandVehicle: SelectItem[] = [];
   msgs: Message[] = [];
-  year: Number;
+  year: number;
   anioValid: boolean = false;
   ciudadPlaca: string;
   backupCiudadPlaca: string;
   resultCity: DivisionPolitica[];
 
   constructor(private employeeVehicleService: EmployeeVehicleService,
+              private listaService: ListaService,
               private router: Router,
               private route: ActivatedRoute,
               private location: Location,
@@ -49,41 +52,33 @@ export class EmployeesVehicleAddComponent {
 
     let today = new Date();
     let year = today.getFullYear();
-    this.year = year;
+    this.year = year+1;
 
     this.route.params.subscribe((params: Params) => {
       this.employeeVehicle.idTercero = Number(+params['idTercero']);
     });
 
-    this.listEmployeesService.getlistTypeVehicle().subscribe(rest => {
-      this.listTypeVehicle.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listTypeVehicle.push({
-          label: dp.nombre,
-          value: dp.idListaTipoVehiculo
+     this.listaService.getMasterDetails('ListasTiposVehiculos').subscribe(res => {
+        this.listTypeVehicle.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listTypeVehicle.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
 
-    this.listEmployeesService.getlistTypeService().subscribe(rest => {
-      this.listTypeService.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listTypeService.push({
-          label: dp.nombre,
-          value: dp.idListaTipoServicioVehiculo
+     this.listaService.getMasterDetails('ListasTiposServiciosVehiculos').subscribe(res => {
+        this.listTypeService.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listTypeService.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
 
-    this.listEmployeesService.getlistBrand().subscribe(rest => {
-      this.listBrandVehicle.push({label: "Seleccione", value: null});
-      for (let dp of rest) {
-        this.listBrandVehicle.push({
-          label: dp.nombre,
-          value: dp.idListaMarcaVehiculo
+     this.listaService.getMasterDetails('ListasMarcasVehiculos').subscribe(res => {
+        this.listBrandVehicle.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.listBrandVehicle.push({label: s.nombre, value: s.idLista});
         });
-      }
-    });
+     });
+
 
   }
 
@@ -93,6 +88,9 @@ export class EmployeesVehicleAddComponent {
       this.employeeVehicle.idCiudad =null;
     }
     if (this.ciudadPlaca == this.backupCiudadPlaca) {
+       if(this.employeeVehicle.modelo<1900){
+          this.employeeVehicle.modelo=1900;
+       }
       this.employeeVehicleService.add(this.employeeVehicle)
         .subscribe(data => {
           this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
@@ -108,6 +106,16 @@ export class EmployeesVehicleAddComponent {
     let modelo = this.employeeVehicle.modelo + "";
     if (this.employeeVehicle.modelo != null) {
       this.employeeVehicle.modelo = Number(modelo.replace(/[^0-9]/g, ''));
+      if(this.employeeVehicle.modelo>this.year){
+         this.employeeVehicle.modelo=this.year;
+      }
+      if(this.employeeVehicle.modelo===0){
+         this.employeeVehicle.modelo=1900;
+      }
+       let m =this.employeeVehicle.modelo.toString();
+       if(m.length===4 && this.employeeVehicle.modelo<1900){
+          this.employeeVehicle.modelo=1900;
+       }
     }
   }
   inputPlaca() {

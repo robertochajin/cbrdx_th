@@ -1,0 +1,3 @@
+.table-overflow .ui-datatable-data>tr>td{
+   overflow: visible!important;
+}

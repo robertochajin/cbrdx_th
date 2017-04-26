@@ -11,8 +11,8 @@ import { AuthenticationService } from '../_services/authentication.service';
 @Injectable()
 export class RolesService {
     public headers:Headers;
-    private masterService = '<%= SVC_SP_URL %>/roles/';
-    private detailService = '<%= SVC_SP_URL %>/rolesMenuElementos/';
+    private masterService = '<%= SVC_TH_URL %>/api/roles/';
+    private detailService = '<%= SVC_TH_URL %>/api/rolesMenuElementos/';
 
     constructor(private http: Http,
                 private authenticationService: AuthenticationService
@@ -40,7 +40,7 @@ export class RolesService {
         return this.http.post(this.masterService, JSON.stringify(c), {headers: this.headers}).toPromise().then(res => res.json() as Rol).catch(this.handleError);
     };
 
-    updateRole(c: Rol): Promise<Rol> {
+    updateRole(c: Rol): Promise<any> {
         return this.http.put(this.masterService, JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
     }
 

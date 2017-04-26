@@ -7,16 +7,11 @@ import {Noformalstudies} from './no-formal-studies';
 import {Message, ConfirmationService} from 'primeng/primeng';
 import * as moment from 'moment/moment';
 import {StudyLevelServices} from '../_services/study-level.service';
-import {StudyAreaServices} from '../_services/study-area.service';
-import {StudyTypeServices} from '../_services/study-type.service';
-import {StudyIntensityServices} from '../_services/study-intensity.service';
 import {StudyLevels} from "../_models/studyLevels";
-import {StudyAreas} from "../_models/studyAreas";
-import {StudyTypes} from "../_models/studyTypes";
-import {Intensity} from "../_models/intensity";
-import {DivisionPolitica} from "../_models/divisionPolitica";
 import {NavService} from "../_services/_nav.service";
 import {PoliticalDivisionService} from "../_services/political-division.service";
+import {ListaItem} from "../_models/listaItem";
+import {ListaService} from "../_services/lista.service";
 
 @Component({
   moduleId: module.id,
@@ -50,10 +45,8 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
 
   constructor(private academicEducationService: AcademicEducationService,
               private studyLevelServices: StudyLevelServices,
-              private studyAreaServices: StudyAreaServices,
-              private studyTypeServices: StudyTypeServices,
+              private listaService: ListaService,
               private confirmationService: ConfirmationService,
-              private studyIntensityServices: StudyIntensityServices,
               private politicalDivisionService: PoliticalDivisionService,
               private route: ActivatedRoute,
               private router: Router,
@@ -64,31 +57,29 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
   ngOnInit(): void {
 
     this.setInitRanges();
-    this.studyLevelServices.getAllEnabled().subscribe(studyLevelList => {
-      this.studyLevelList.push({label: 'Seleccione', value: null});
-      studyLevelList.map((s: StudyLevels) => {
-        this.studyLevelList.push({label: s.nombreListaNivelEstudio, value: s.idListaNivelEstudio});
-      });
-    });
-    this.studyAreaServices.getAllEnabled().subscribe(studyAreaList => {
-      this.studyAreaList.push({label: 'Seleccione', value: null});
-      studyAreaList.map((s: StudyAreas) => {
-        this.studyAreaList.push({label: s.nombreListaAreaEstudio, value: s.idListaAreaEstudio});
-      });
-    });
+     this.listaService.getMasterDetails('ListasNivelesEstudios').subscribe(res => {
+        this.studyLevelList.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => this.studyLevelList.push({label: s.nombre, value: s.idLista}));
+     });
+     this.listaService.getMasterDetails('ListasAreasEstudios').subscribe(studyAreaList => {
+        this.studyAreaList .push({label: 'Seleccione', value: null});
+        studyAreaList.map((s: ListaItem) => {
+           this.studyAreaList.push({label: s.nombre, value: s.idLista});
+        });
+     });
 
-    this.studyTypeServices.getAllEnabled().subscribe(studyTypeList => {
-      this.studyTypeList.push({label: 'Seleccione', value: null});
-      studyTypeList.map((s: StudyTypes) => {
-        this.studyTypeList.push({label: s.nombreListaTipoEstudio, value: s.idListaTipoEstudio});
-      });
-    });
-    this.studyIntensityServices.getAllEnabled().subscribe(studyIntensityList => {
-      this.studyIntensityList.push({label: 'Seleccione', value: null});
-      studyIntensityList.map((s: Intensity) => {
-        this.studyIntensityList.push({label: s.nombreListaIntensidad, value: s.idListaIntensidad});
-      });
-    });
+     this.listaService.getMasterDetails('ListasTiposEstudios').subscribe(res => {
+        this.studyTypeList.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.studyTypeList.push({label: s.nombre, value: s.idLista});
+        });
+     });
+     this.listaService.getMasterDetails('ListasIntensidades').subscribe(res => {
+        this.studyIntensityList.push({label: 'Seleccione', value: null});
+        res.map((s: ListaItem) => {
+           this.studyIntensityList.push({label: s.nombre, value: s.idLista});
+        });
+     });
 
     this.route.params.subscribe((params: Params) => {
       this.idTercero = params['tercero'];

@@ -8,6 +8,8 @@ import {Usuario} from "../_models/usuario";
 import {UsuariosService} from "../_services/usuarios.service";
 import {RolCantidad} from "../_models/RolCantidad";
 import {TranslateService} from 'ng2-translate';
+import {Widgets} from "../_models/widgets";
+import {WidgetServices} from "../_services/widget.service";
 
 @Component({
   moduleId: module.id,
@@ -29,11 +31,14 @@ export class DashboardComponent implements OnInit {
   rolesSistema: boolean = true;
   usuariosAct: boolean = true;
   widgets: any[] = [];
+  selectedWidgets: number[] = [];
   usuariosTitle:string;
+  options : any;
 
 
   constructor(private router: Router, private rolesService: RolesService, private  tercerosServices: TercerosService,
               private usuarioService: UsuariosService,
+              private widgetServices: WidgetServices,
               private _translate:TranslateService
     ) {
 
@@ -131,8 +136,15 @@ export class DashboardComponent implements OnInit {
 
       }
       this.isData = true;
+      this.options = {
+         responsive: false,
+         maintainAspectRatio: false,
+         position: "right"
+      };
     });
-
+   this.widgetServices.getAll().subscribe(rest=>{
+      this.widgets= rest;
+   });
   }
 
 

@@ -69,7 +69,6 @@ import {ConstanteDetailComponent} from "./constantes/constante-detail.component"
 
 // Listas
 import {ListaComponent} from "./listas/lista.component";
-import {ListaAddComponent} from "./listas/lista-add.component";
 import {ListaDetailComponent} from "./listas/lista-detail.component";
 import {ListaEditComponent} from "./listas/lista-edit.component";
 
@@ -88,6 +87,8 @@ import {GruposGestionEditComponent} from "./gruposGestion/gruposGestion-edit.com
 // Roles
 import {RolesComponent} from "./roles/roles.component";
 import {RolesAddComponent} from "./roles/roles-add.component";
+import { RolesUpdateComponent } from "./roles/roles-update.component";
+import { RolFuncionalitiesConfigComponent } from "./roles/rol-functionalities-config.component";
 
 // Usuarios
 import {UsuariosComponent} from "./usuarios/usuarios.component";
@@ -105,6 +106,68 @@ import {TipoDeAreaAddComponent} from "./areas/tipoDeArea-add.component";
 import {DivisionPoliticaComponent} from "./divisionPolitica/divisionPolitica.component";
 import {OcupacionesComponent} from "./ocupaciones/ocupaciones.component";
 import {ActividadEconomicaComponent} from "./actividadEconomica/actividadEconomica.component";
+
+// Cargos Productividad
+import {ProductivityComponent} from "./position-productivity/productivity.component";
+
+//Cargos factores de riesgo
+import {RiskComponent} from "./position-risks/position-risks.component";
+// Faltas
+import {FaultsAndSanctionsComponent} from "./faultsAndSanctions/faults-and-sanctions.component";
+import {FaultsAndSanctionsAddComponent} from "./faultsAndSanctions/faults-and-sanctions-add.component";
+import {FaultsAndSanctionsUpdateComponent} from "./faultsAndSanctions/faults-and-sanctions-update.component";
+
+// Estrctura Organizacional
+import {OrganizationalStructureComponent} from "./organizationalStructure/organizationalStructure.component";
+
+// Cargos
+import {PositionsComponent} from "./positions/positions.component";
+import {PositionsAddComponent} from "./positions/positions-add.component";
+import {PositionsUpdateComponent} from "./positions/positions-update.component";
+import {EvaluationCriteriasComponent} from "./position-evaluation-criterias/evaluation-criterias.component";
+import {PositionResponsabilitiesComponent} from "./position-responsabilities/position-responsabilities.component";
+import {PositionRolesComponent} from "./position-roles/position-roles.component";
+import {PositionCompetenciesComponent} from "./position-competencies/position-competencies.component";
+import {CompanyAssetsComponent} from "./position-company-assets/company-assets.component";
+// proyecciòn laboral
+import {JobProjectionComponent} from "./job-projection/job-projection.component";
+import {JobProjectionUpdateComponent} from "./job-projection/job-projection-positions-update.component";
+import {JobProjectionApprobeComponent} from "./job-projection/job-projection-positions-approve.component";
+import {JobProjectionAddComponent} from "./job-projection/job-projection-positions-add.component";
+import {JobProjectionDetailComponent} from "./job-projection/job-projection-positions-detail.component";
+
+// estructura física
+import {PhysicStructureComponent} from "./physic-structure/physic-structure.component";
+import {PhysicStructureAddComponent} from "./physic-structure/physic-structure-add.component";
+import {PhysicStructureDetailComponent} from "./physic-structure/physic-structure-detail.component";
+import {PhysicStructureUpdateComponent} from "./physic-structure/physic-structure-update.component";
+
+// widgets
+import {WidgetsAddComponent} from "./widgets/widgets-add.component";
+import {WidgetsUpdateComponent} from "./widgets/widgets-update.component";
+
+// administrador de formularios
+import {FormManagerComponent} from "./form-manager/form-manager.component";
+import {FormManagerAddComponent} from "./form-manager/form-manager-add.component";
+import {FormManagerUpdateComponent} from "./form-manager/form-manager-update.component";
+// cargos posición en caso de ausencia
+import {AbsenceComponent} from "./position-absence/position-absence.component";
+import {PersonalityComponent} from "./position-personality/personality.component";
+//riesgo
+import {RisksComponent} from "./risks/risks-component";
+import {RisksAddComponent} from "./risks/risks-add.component";
+import {RisksUpdateComponent} from "./risks/risks-update.component";
+import {CompetenciesGroupsComponent} from "./competencies-groups/competencies-groups.component";
+import {OrganizationalStructurePositionsComponent} from "./organizationalStructurePositions/organizational-structure-positions.component";
+
+import {PositionAuthoritiesComponent} from "./positions/position-authorities.component";
+import {WidgetsComponent} from "./widgets/widgets.component";
+
+//Administracion
+import {MenuManagerComponent} from "./menuManager/menuManager.component";
+import { UserSessionComponent } from "./usuarios/userSession.component";
+
+
 
 
 const routes = [
@@ -169,6 +232,7 @@ const routes = [
   {path: 'login', component: LoginComponent},
   {path: 'cambioContrasena', component: CambioContrasenaComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  {path: 'widgets', component: WidgetsComponent, canActivate: [AuthGuard]},
 
   // Constantes
   {path: 'constantes', component: ConstanteComponent, canActivate: [AuthGuard]},
@@ -178,7 +242,6 @@ const routes = [
 
   // Listas
   {path: 'listas', component: ListaComponent, canActivate: [AuthGuard]},
-  {path: 'listas/add', component: ListaAddComponent, canActivate: [AuthGuard]},
   {path: 'listas/detail/:id', component: ListaDetailComponent, canActivate: [AuthGuard]},
   {path: 'listas/edit/:id', component: ListaEditComponent, canActivate: [AuthGuard]},
 
@@ -197,12 +260,16 @@ const routes = [
   // Roles
   {path: 'roles', component: RolesComponent, canActivate: [AuthGuard]},
   {path: 'roles/add', component: RolesAddComponent, canActivate: [AuthGuard]},
+  {path: 'roles/update/:id', component: RolesUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'roles/update/:id/:msj', component: RolesUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'roles-funcionalities-config/:id', component: RolFuncionalitiesConfigComponent, canActivate: [AuthGuard]},
 
   // Usuarios
-  {path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard]},
-  {path: 'usuarios/add', component: UsuariosAddComponent, canActivate: [AuthGuard]},
-  {path: 'usuarios/detail/:id', component: UsuarioDetailComponent, canActivate: [AuthGuard]},
-  {path: 'usuarios/edit/:id', component: UsuariosEditComponent, canActivate: [AuthGuard]},
+  {path: 'usuarios', component: UsuariosComponent},
+  {path: 'usuarios/add', component: UsuariosAddComponent},
+  {path: 'usuarios/detail/:id', component: UsuarioDetailComponent},
+  {path: 'usuarios/edit/:id', component: UsuariosEditComponent},
+  {path: 'user-session', component: UserSessionComponent},
 
   // Tipos De Area
   {path: 'tipoArea', component: TipoDeAreaComponent, canActivate: [AuthGuard]},
@@ -210,11 +277,76 @@ const routes = [
   {path: 'tipoArea/detail/:id', component: TipoDeAreaDetailComponent, canActivate: [AuthGuard]},
   {path: 'tipoArea/edit/:id', component: TipoDeAreaEditComponent, canActivate: [AuthGuard]},
 
+  // Temporales
+  {path: 'criterios', component: EvaluationCriteriasComponent, canActivate: [AuthGuard]},
+  {path: 'activos', component: CompanyAssetsComponent, canActivate: [AuthGuard]},
+  {path: 'responsabilidades', component: PositionResponsabilitiesComponent, canActivate: [AuthGuard]},
+  {path: 'cargosroles', component: PositionRolesComponent, canActivate: [AuthGuard]},
+  {path: 'competencias', component: PositionCompetenciesComponent, canActivate: [AuthGuard]},
+
   // Arboles
   {path: 'divisionPolitica', component: DivisionPoliticaComponent, canActivate: [AuthGuard]},
   {path: 'ocupaciones', component: OcupacionesComponent, canActivate: [AuthGuard]},
   {path: 'actividadeconomica', component: ActividadEconomicaComponent, canActivate: [AuthGuard]},
 
+  // Faltas
+  {path: 'faults', component: FaultsAndSanctionsComponent, canActivate: [AuthGuard]},
+  {path: 'faults/add', component: FaultsAndSanctionsAddComponent, canActivate: [AuthGuard]},
+  {path: 'faults/update/:id', component: FaultsAndSanctionsUpdateComponent, canActivate: [AuthGuard]},
+
+   // Temporales
+   {path: 'competencies-groups', component: CompetenciesGroupsComponent, canActivate: [AuthGuard]},
+
+   // Temporales
+   {path: 'organizational-structure-positions', component: OrganizationalStructurePositionsComponent, canActivate: [AuthGuard]},
+
+  // Cargos
+  {path: 'positions', component: PositionsComponent, canActivate: [AuthGuard]},
+  {path: 'positions/add', component: PositionsAddComponent, canActivate: [AuthGuard]},
+  {path: 'positions/update/:id', component: PositionsUpdateComponent, canActivate: [AuthGuard]},
+   
+   // Estrctura Organizacional
+   {path: 'organizational-structure', component: OrganizationalStructureComponent, canActivate: [AuthGuard]},
+
+  //  Cargos Productividad
+  {path: 'productivity/:idCargo', component: ProductivityComponent, canActivate: [AuthGuard]},
+   //riesgos
+
+   {path: 'risks', component: RisksComponent, canActivate: [AuthGuard]},
+   {path: 'risks/add', component: RisksAddComponent, canActivate: [AuthGuard]},
+   {path: 'risks/update/:idRiesgo', component: RisksUpdateComponent, canActivate: [AuthGuard]},
+
+   //proyecciòn laboral
+   {path: 'job-projection', component: JobProjectionComponent, canActivate: [AuthGuard]},
+   {path: 'job-projection/update/:id', component: JobProjectionUpdateComponent, canActivate: [AuthGuard]},
+   {path: 'job-projection/approbe/:id', component: JobProjectionApprobeComponent, canActivate: [AuthGuard]},
+   {path: 'job-projection/add/:id', component: JobProjectionAddComponent, canActivate: [AuthGuard]},
+   {path: 'job-projection/detail/:id', component: JobProjectionDetailComponent, canActivate: [AuthGuard]},
+
+   // estructura física
+   {path: 'physic-structure', component: PhysicStructureComponent, canActivate: [AuthGuard]},
+   {path: 'physic-structure/add', component: PhysicStructureAddComponent, canActivate: [AuthGuard]},
+   {path: 'physic-structure/detail/:id', component: PhysicStructureDetailComponent, canActivate: [AuthGuard]},
+   {path: 'physic-structure/update/:id', component: PhysicStructureUpdateComponent, canActivate: [AuthGuard]},
+
+   // widgets
+   {path: 'widgets/add', component: WidgetsAddComponent, canActivate: [AuthGuard]},
+   {path: 'widgets/update/:id', component: WidgetsUpdateComponent, canActivate: [AuthGuard]},
+   // adminstrador de formularios
+   {path: 'form-manager', component: FormManagerComponent, canActivate: [AuthGuard]},
+   {path: 'form-manager/add', component: FormManagerAddComponent, canActivate: [AuthGuard]},
+   {path: 'form-manager/update/:id', component: FormManagerUpdateComponent, canActivate: [AuthGuard]},
+
+  // cargos factores de riesgo
+  {path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [AuthGuard]},
+  //cargos posición en caso de ausencia
+  {path: 'position-absence/:idCargo', component: AbsenceComponent, canActivate: [AuthGuard]},
+
+
+  {path: 'position-activities/:idCargo', component: PositionAuthoritiesComponent, canActivate: [AuthGuard]},
+   
+   //Administracion
+   {path: 'menus', component: MenuManagerComponent, canActivate: [AuthGuard]},
 
 ];
 
