@@ -31,5 +31,6 @@ export class ConstructorFamilyInformation {
   constructor() {
     this.auditoriaFecha = "";
     this.auditoriaUsuario = 1;
+    this.direccion = '';
   }
 }
