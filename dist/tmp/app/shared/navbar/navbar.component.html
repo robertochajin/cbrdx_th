@@ -11,11 +11,11 @@
          <li *ngFor="let modulo of treeMenu;" class="treeview" routerLinkActive="active">
                <a href="#" *ngIf="modulo.children.length > 1">
                   <i class="{{modulo.data.clase}}" aria-hidden="true" style="font-size: 1.5em;"></i>
-                  <span>{{modulo.label}}</span>
+                  <span>{{modulo.label}} </span>
                </a>
                <ul class="treeview-menu" *ngIf="modulo.children.length > 1">
                   <li routerLinkActive="active" *ngFor="let menu of modulo.children;">
-                     <a routerLink="{{menu.data.ruta}}"><i class="{{menu.data.clase}}"></i>{{menu.data.menu}}</a>
+                     <a routerLink="{{menu.data.ruta}}"><i class="{menu.data.clase"></i>{{menu.data.menu}}</a>
                   </li>
                </ul>
                <a routerLink="{{modulo.children[0].data.ruta}}" *ngIf="modulo.children.length == 1 ">
