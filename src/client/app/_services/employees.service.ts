@@ -18,7 +18,7 @@ export class EmployeesService {
    }
 
     getAll()  {
-        return this.http.get(this.serviceURL+'vterceros' ,{headers: this.headers}).map((res:Response) => res.json());
+        return this.http.get(this.serviceURL+'vterceros' ,{headers: this.headers}).map((res:Response) => res.json() as Employee[]);
     }
     getByTipo(type:string)  {
         return this.http.get(this.serviceURL+'vterceros/buscarTerceros/'+type+"/" ,{headers: this.headers}).map((res:Response) => res.json());
