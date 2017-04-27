@@ -1,15 +1,20 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-import {RolesService} from "../_services/roles.service";
+
 import {TercerosService} from "../_services/terceros.service";
 import {Rol} from "../_models/rol";
 import {Tercero} from "../_models/tercero";
 import {Usuario} from "../_models/usuario";
 import {UsuariosService} from "../_services/usuarios.service";
 import {RolCantidad} from "../_models/RolCantidad";
+
 import {TranslateService} from 'ng2-translate';
+
+import {RolesService} from "../_services/roles.service";
+
 import {Widgets} from "../_models/widgets";
 import {WidgetServices} from "../_services/widget.service";
+import {JwtHelper} from 'angular2-jwt';
 
 @Component({
   moduleId: module.id,
@@ -28,20 +33,43 @@ export class DashboardComponent implements OnInit {
   rolCantidad: RolCantidad[];
   isData: boolean = false;
   funcionalidades: boolean = true;
-  rolesSistema: boolean = true;
-  usuariosAct: boolean = true;
-  widgets: any[] = [];
-  selectedWidgets: number[] = [];
   usuariosTitle:string;
   options : any;
-
+   
+   
+   rolWidgets : Widgets[]
+  usuarioLogueado: any = {sub : '', usuario: '', nombre: ''};
+   jwtHelper: JwtHelper = new JwtHelper();
+   
+  allWidgets:any = [
+     { codigo :"WROLES",  habilitado : false, visible : true, nombre:""},
+     { codigo :"WUSUACT", habilitado : false, visible : true, nombre:""},
+     { codigo :"WCUMPLE", habilitado : false, visible : true, nombre:""},
+  ];
 
   constructor(private router: Router, private rolesService: RolesService, private  tercerosServices: TercerosService,
               private usuarioService: UsuariosService,
               private widgetServices: WidgetServices,
               private _translate:TranslateService
     ) {
-
+   
+     let token = localStorage.getItem('token');
+   
+     if (token != null)
+        this.usuarioLogueado = this.jwtHelper.decodeToken(token);
+   
+     let idUsuario = this.usuarioLogueado.usuario.idUsuario;
+     widgetServices.getByUsuario(idUsuario).subscribe(res => {
+        this.rolWidgets = res;
+        for (let i = 0; i < this.allWidgets.length; i++){
+           let rolWidget = this.rolWidgets.find(d => d.codigoWidget == this.allWidgets[i].codigo);
+           if (rolWidget) {
+              this.allWidgets[i].habilitado = true;
+              this.allWidgets[i].nombre = rolWidget.widget;
+           }
+        }
+     });
+     
     usuarioService.listUsers().subscribe(res => {
       this.listaUsuarios = res;
       for (let u of this.listaUsuarios) {
@@ -142,9 +170,6 @@ export class DashboardComponent implements OnInit {
          position: "right"
       };
     });
-   this.widgetServices.getAll().subscribe(rest=>{
-      this.widgets= rest;
-   });
   }
 
 

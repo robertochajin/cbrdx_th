@@ -42,4 +42,13 @@ export class MenuManagerService {
       return Promise.reject( error.message || error );
    }
    
+   getByPadre( id: number) {
+      return this.http.get( this.serviceURL+'menus/buscarPadre/'+id, { headers: this.headers } ).map( ( res: Response ) => res.json() as MenuManager[] );
+   }
+   
+   getMenusSession( ) {
+      return this.http.get( this.serviceURL+'menus/rol', { headers: this.headers } ).map( ( res: Response ) => res.json() as MenuManager[] );
+   }
+   
+   
 }
