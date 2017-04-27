@@ -12,7 +12,7 @@ import {FormsModule, FormBuilder} from '@angular/forms'
 import './operators';
 import {LoginService} from "./_services/login.service";
 import {TranslateService} from 'ng2-translate';
-
+import 'moment/locale/es';
 /**
  * This class represents the main application component.
  */

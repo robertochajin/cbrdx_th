@@ -226,6 +226,8 @@
       "MSG_VIVIENDAREQUERIDA":"La Vivienda es requerido",
       "MSG_TIPOCONSTRUCCIONREQUERIDA":"Tipo de Construción es requerido",
       "MSG_NUMEROPISOSREQUERIDA":"Número de Pisos es requerido",
+      "LBL_JURIDICO":"Estado juridico",
+      "MSG_JURIDICOREQUERIDO":"Estado juridico requerido",
 
 
   "FIN_EMPLOYEES":"=================================================================",
