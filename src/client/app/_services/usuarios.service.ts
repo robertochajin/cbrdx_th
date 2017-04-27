@@ -47,7 +47,13 @@ export class UsuariosService extends TercerosService {
     }
    
     updatePass(c: Usuario) {
-         return this.http.put(this.usuariosServiceURL+ "cambiarPass/" + c.contrasenaAntigua+'/', JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
+         return this.http.put(this.usuariosServiceURL+ "cambiarPass/" + c.contrasenaAntigua+'/', JSON.stringify(c), {headers: this.headers}).toPromise().then(res => {
+            if (res.json() == true) {
+               return true;
+            } else {
+               return false;
+            }
+         }).catch(this.handleError);
     }
 
     createUserGroup(p: UsuarioGrupoGestion): Promise<UsuarioGrupoGestion> {

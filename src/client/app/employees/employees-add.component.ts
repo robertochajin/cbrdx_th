@@ -50,7 +50,7 @@ export class EmployeesAddComponent {
    occupations: SelectItem[] = [];
    legalStatusTypes: SelectItem[] = [];
    msgs: Message[] = [];
-
+   juridicos: SelectItem[] = [];
    maxDate: Date = null;
    maxDateDocumento: Date = null;
    range: string;
@@ -81,6 +81,14 @@ export class EmployeesAddComponent {
          this.documentTypes.push({label: 'Seleccione', value: null});
          res.map((s: ListaItem) => {
             this.documentTypes.push({label: s.nombre, value: s.idLista});
+         });
+         this.employee.idTipoDocumento = null;
+      });
+
+      this.listaService.getMasterDetails('ListasEstadosJuridicos').subscribe(res => {
+         this.juridicos.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => {
+            this.juridicos.push({label: s.nombre, value: s.idLista});
          });
          this.employee.idTipoDocumento = null;
       });
