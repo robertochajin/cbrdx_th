@@ -6,18 +6,18 @@
         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
           <div class="row">
             <div class="form-group col-md-12">
-                <label for="correoElectronico">* {{ 'LBL_CORREOELECTRONICO' | translate:param }}</label>
+                <label for="correoElectronico">*{{'LBL_CORREOELECTRONICO' | translate:param}}</label>
                 <input id="correoElectronico" name="correoElectronico" #correoElectronico="ngModel" pInputText type="text" required
                        [(ngModel)]="employee.correoElectronico" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"/>
                 <div class="ui-message ui-messages-error ui-corner-all" *ngIf="fcont.submitted && !correoElectronico.valid ">
                   <i class="fa fa-close"></i>
-                  {{ 'MSG_CORREOREQUERIDO' | translate:param }}
+                  {{'LBL_CORREOELECTRONICO' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
                 </div>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-md-12">
-              <label for="sitio">{{ 'LBL_SITIOWEB' | translate:param }}</label>
+              <label for="sitio">{{'EMPLOYEES.LBL_SITIOWEB' | translate:param}}</label>
               <input type="text" pInputText id="sitio" name="sitio"
                      [(ngModel)]="employee.sitioWeb" #web="ngModel"
               />
@@ -42,7 +42,7 @@
         </div>
         <div class="row form-footer-buttons">
           <div class="form-group col-md-12">
-            <button icon="fa-plus" label="Guardar" type="submit"
+            <button icon="fa-plus" label="{{'BTN_GUARDAR' | translate:param }}" type="submit"
                     pButton></button>
           </div>
         </div>

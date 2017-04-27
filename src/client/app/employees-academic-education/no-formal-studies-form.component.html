@@ -109,11 +109,11 @@
               </div>
             </div>
             <div class="ui-grid-col-6">
-                  <label for="intensidad">{{ 'LBL_INTENSIDAD' | translate:param }}</label>
+                  <label for="intensidad">{{'EMPLOYEES.LBL_INTENSIDAD' | translate:param}}</label>
                   <p-dropdown name="intensidad" id="intensidad" #intensidad="ngModel" required="true"
                             [autoWidth]="false" [(ngModel)]="nfstudy.idIntensidadHoraria" [options]="studyIntensityList"></p-dropdown>
                   <div  class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !intensidad.valid" >
-                      {{ 'MSG_INTENSIDADREQUERIDO' | translate:param }}
+                      {{'EMPLOYEES.LBL_INTENSIDAD' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
                   </div>
               </div>
           </div>
@@ -132,7 +132,7 @@
               <a (click)="goBack()" class="cancelar">{{ 'BTN_CANCELAR' | translate:param }}</a>
             </div>
             <div class="ui-grid-col-2">
-              <button icon="fa-plus" label="Guardar" type="submit" pButton></button>
+              <button icon="fa-plus" label="{{'BTN_GUARDAR' | translate:param}}" type="submit" pButton></button>
             </div>
             <div class="ui-grid-col-5"></div>
           </div>
