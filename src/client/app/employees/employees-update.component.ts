@@ -362,16 +362,18 @@ export class EmployeesUpdateComponent {
    }
 
    updateActivities(value: number) {
-      this.activities = [];
-      this.actividadEconomicaService.listLastChild(value).subscribe(res => {
-         this.activities.push({label: "Seleccione", value: null});
-         for (let dp of res) {
-            this.activities.push({
-               label: dp.actividadEconomica,
-               value: dp.idActividadEconomica
-            });
-         }
-      });
+      if(value!==null) {
+         this.activities = [];
+         this.actividadEconomicaService.listLastChild(value).subscribe(res => {
+            this.activities.push({label: "Seleccione", value: null});
+            for (let dp of res) {
+               this.activities.push({
+                  label: dp.actividadEconomica,
+                  value: dp.idActividadEconomica
+               });
+            }
+         });
+      }
    }
 
    validateDocument() {
