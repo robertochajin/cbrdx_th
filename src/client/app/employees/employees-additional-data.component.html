@@ -7,7 +7,7 @@
           <div class="row">
 
             <div class="form-group col-md-4">
-              <label for="peso">Peso (Kg)</label>
+              <label for="peso">{{ 'LBL_PESO' | translate:param }}</label>
               <input type="text" pInputText id="peso" name="peso"
                      [(ngModel)]="employee.peso" #weight="ngModel" (change)="getimc()"
                      (keyup)="inputNumberPeso()"
@@ -16,11 +16,11 @@
               <div class="ui-message ui-messages-error ui-corner-all"
                    *ngIf="f.submitted && !weight.valid">
                 <i class="fa fa-close"></i>
-                Peso es requerido
+                {{ 'MSG_PESOREQUERIDO' | translate:param }}
               </div>
             </div>
             <div class="form-group col-md-4">
-              <label for="talla">Estatura (Cm)</label>
+              <label for="talla">{{ 'LBL_ESTATURA' | translate:param }}</label>
               <input type="text" pInputText id="talla" name="talla"
                      [(ngModel)]="employee.talla" #size="ngModel" (change)="getimc()"
                      (keyup)="inputNumber()"
@@ -29,11 +29,11 @@
               <div class="ui-message ui-messages-error ui-corner-all"
                    *ngIf="f.submitted && !size.valid">
                 <i class="fa fa-close"></i>
-                Talla es requerida
+                {{ 'MSG_ESTATURAREQUERIDO' | translate:param }}
               </div>
             </div>
             <div class="form-group col-md-4">
-              <label for="imc">IMC</label>
+              <label for="imc">{{ 'LBL_IMC' | translate:param }}</label>
               <input type="text" pInputText id="imc" name="imc"
                      [(ngModel)]="employee.imc" #imc="ngModel"
                      required readonly disabled/>
@@ -41,7 +41,7 @@
           </div>
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="idLateralidad">Lateralidad</label>
+              <label for="idLateralidad">{{ 'LBL_LATERALIDAD' | translate:param }}</label>
               <p-dropdown id="idLateralidad" name="idLateralidad" required="true"
                           [options]="lateralityTypes" [autoWidth]="false"
                           [(ngModel)]="employee.idLateralidad"
@@ -50,11 +50,11 @@
               <div class="ui-message ui-messages-error ui-corner-all"
                    *ngIf="f.submitted && !idlaterality.valid">
                 <i class="fa fa-close"></i>
-                Lateralidad requerida
+                {{ 'MSG_LATERALIDADREQUERIDA' | translate:param }}
               </div>
             </div>
             <div class="form-group col-md-6">
-              <label for="tallaCamisa">Talla Camisa</label>
+              <label for="tallaCamisa">{{ 'LBL_TALLACAMISA' | translate:param }}</label>
               <p-dropdown id="tallaCamisa" name="tallaCamisa" required="true"
                           [options]="listSizeShirt" [autoWidth]="false"
                           [(ngModel)]="employee.idTallaCamisa"
@@ -63,13 +63,13 @@
               <div class="ui-message ui-messages-error ui-corner-all"
                    *ngIf="f.submitted && !sizeShirt.valid">
                 <i class="fa fa-close"></i>
-                Talla de camisa requeria
+                {{ 'MSG_TALLACAMISAREQUERIDA' | translate:param }}
               </div>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="tallaPantalon">Talla Pantalón</label>
+              <label for="tallaPantalon">{{ 'LBL_TALLAPANTALON' | translate:param }}</label>
               <p-dropdown id="tallaPantalon" name="tallaPantalon" required="true"
                           [options]="listSizePants" [autoWidth]="false"
                           [(ngModel)]="employee.idTallaPantalon"
@@ -78,11 +78,11 @@
               <div class="ui-message ui-messages-error ui-corner-all"
                    *ngIf="f.submitted && !sizePants.valid">
                 <i class="fa fa-close"></i>
-                Talla de pantalon requerida
+                {{ 'MSG_TALLAPANTALONREQUERIDO' | translate:param }}
               </div>
             </div>
             <div class="form-group col-md-6">
-              <label for="tallaCalzado">Talla Calzado</label>
+              <label for="tallaCalzado">{{ 'LBL_TALLACALZADO' | translate:param }}</label>
               <p-dropdown id="tallaCalzado" name="tallaCalzado" required="true"
                           [options]="listSizeFootwear" [autoWidth]="false"
                           [(ngModel)]="employee.idTallaCalzado"
@@ -91,7 +91,7 @@
               <div class="ui-message ui-messages-error ui-corner-all"
                    *ngIf="f.submitted && !sizeFootwear.valid">
                 <i class="fa fa-close"></i>
-                Talla de calzado requerida
+                {{ 'MSG_TALLACALZADOREQUERIDO' | translate:param }}
               </div>
             </div>
           </div>

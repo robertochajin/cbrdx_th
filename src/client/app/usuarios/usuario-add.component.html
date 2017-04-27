@@ -62,27 +62,20 @@
             <div class="col-md-9">
                 <div class="ui-grid-col-4">
                     <label>Género :</label>
-                    <p></p>
+                    <p>{{tercero.genero}}</p>
                     <label>Ciudad :</label>
-                    <p></p>
+                    <p>{{tercero.ciudadNacimiento}}</p>
                 </div>
                 <div class="ui-grid-col-4">
                     <label>Estado civil :</label>
-                    <p></p>
-                    <label>Dirección :</label>
-                    <p></p>
-                </div>
-                <div class="ui-grid-col-4">
-                    <label>EPS :</label>
-                    <p></p>
-                    <label>Teléfono :</label>
-                    <p></p>
+                    <p>{{tercero.estadoCivil}}</p>
+                    
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12" *ngIf="usuario.idUsuario">
                 <div class="pull-right">
                     <label>Editar información de Tercero </label>
-                    <button pButton type="button" icon="glyphicon-pencil" iconPos="right" label="Editar"></button>
+                    <button   pButton type="button" icon="glyphicon-pencil" iconPos="right" label="Editar"></button>
                 </div>
             </div>
         </p-fieldset>

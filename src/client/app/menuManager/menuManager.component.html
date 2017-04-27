@@ -76,22 +76,38 @@
                            </div>
                         </div>
                      </div>
-                     <div class="row">
-                        <div class="form-group">
-                           <label for="secuencia" class="control-label col-sm-3">* Secuencia </label>
-                           <div class=" col-sm-9">
-                              <input type="text" pInputText class="form-control" id="secuencia" name="secuencia"
-                                     [(ngModel)]="menus.secuencia"
-                                     #orden="ngModel"
-                                     required/>
-                              <div class="ui-message ui-messages-error ui-corner-all"
-                                   *ngIf="f.submitted && !orden.valid">
-                                 Secuencia es requerido
-                              </div>
+                  </div>
+                  <div class="row">
+                     <div class="form-group">
+                        <label for="secuencia" class="control-label col-sm-3">* Secuencia </label>
+                        <div class=" col-sm-9">
+                           <input type="text" pInputText class="form-control" id="secuencia" name="secuencia"
+                                  [(ngModel)]="menus.secuencia"
+                                  #orden="ngModel"
+                                  required/>
+                           <div class="ui-message ui-messages-error ui-corner-all"
+                                *ngIf="f.submitted && !orden.valid">
+                              Secuencia es requerido
                            </div>
                         </div>
                      </div>
                   </div>
+                  <div class="row">
+                     <div class="form-group">
+                        <label for="clase" class="control-label col-sm-3">* Clase </label>
+                        <div class=" col-sm-9">
+                           <input type="text" pInputText class="form-control" id="clase" name="clase"
+                                  [(ngModel)]="menus.clase"
+                                  #clase="ngModel"
+                                  required/>
+                           <div class="ui-message ui-messages-error ui-corner-all"
+                                *ngIf="f.submitted && !clase.valid">
+                              Clase de estilo es requerido
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  
                   <div class="row">
                      <div class="form-group">
                         <label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate }}</label>

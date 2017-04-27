@@ -155,9 +155,9 @@ export class EmployeesUpdateComponent {
          }
       });
 
-      this.listEmployeesService.getTerType("TERCOL").subscribe(
+      this.listaService.getMasterDetailsByCode('ListasTiposTerceros', "TERCOL").subscribe(
          res => {
-            this.idTipoTercero = res.idListaTipoTercero
+            this.idTipoTercero = res.idLista;
          });
 
    }
@@ -170,13 +170,15 @@ export class EmployeesUpdateComponent {
             this.employee = employee;
             this.updateActivities(this.employee.idSectorEconomico);
 
+            if(this.employee.fechaDocumento != null) {
+               let mom: moment.Moment = moment(this.employee.fechaDocumento, 'YYYY-MM-DD');
+               this.expeditionDate = mom.format('MM/DD/YYYY');
+            }
 
-            let mom: moment.Moment = moment(this.employee.fechaDocumento, 'YYYY-MM-DD');
-            this.expeditionDate = mom.format('MM/DD/YYYY');
-
-            let mom2: moment.Moment = moment(this.employee.fechaNacimiento, 'YYYY-MM-DD');
-            this.birthDate = mom2.format('MM/DD/YYYY');
-
+            if(this.employee.fechaNacimiento != null) {
+               let mom2: moment.Moment = moment(this.employee.fechaNacimiento, 'YYYY-MM-DD');
+               this.birthDate = mom2.format('MM/DD/YYYY');
+            }
 
             if (this.employee.indicadorVivo == false) {
                let mom3: moment.Moment = moment(this.employee.fechaDefuncion, 'YYYY-MM-DD');

@@ -38,6 +38,10 @@ export class WidgetServices {
       console.error('Error:', error);
       return Promise.reject(error.message || error);
    }
+   
+   getByUsuario(id: number): Observable<Widgets[]> {
+      return this.http.get(this.masterService + '/buscarUsuario/'+ id, { headers: this.headers }).map((res: Response) => res.json() as Widgets[]);
+   }
 
 }
 
