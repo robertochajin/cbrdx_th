@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {JwtHelper} from 'angular2-jwt';
 import { Router, CanActivate } from '@angular/router';
+import {AuthenticationService} from "../../_services/authentication.service";
 /**
  * This class represents the toolbar component.
  */
@@ -16,7 +17,7 @@ export class ToolbarComponent {
 
    jwtHelper: JwtHelper = new JwtHelper();
 
-   constructor(private router: Router) {
+   constructor(private router: Router, private authService: AuthenticationService) {
       let token = localStorage.getItem('token');
 
       if (token != null)
@@ -25,6 +26,8 @@ export class ToolbarComponent {
    
    logout(): void {
       // clear token remove user from local storage to log user out
+
+      this.authService.announceLogout();
       localStorage.removeItem('currentUser');
       localStorage.removeItem('token');
       this.router.navigate(['/login']);
