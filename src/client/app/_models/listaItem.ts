@@ -3,7 +3,7 @@ export class ListaItem {
    codigo : string;
    nombre : string;
    orden : number ;
-   indicadorHabilitado : boolean ;
+   indicadorHabilitado : boolean=true ;
    auditoriaUsuario : number ;
    auditoriaFecha : Date;
 }
