@@ -21,7 +21,7 @@
                                [(ngModel)]="numeroDocumento" required maxlength="20" (keyup)="changeEvent($event)"
                               (paste)="changeEvent($event)"/>
                         <div *ngIf="fc.submitted&&!numDocumento.valid" class="alert alert-danger">
-                            <div [hidden]="!numDocumento.errors.required">Debe ingresar un numero de documento.</div>
+                            <div [hidden]="!numDocumento.errors.required">{{ 'LBL_NUMERODOCUMENTO' | translate:param }} {{ 'LBL_REQUERIDO' | translate:param }}.</div>
                             <div [hidden]="!numDocumento.errors.maxlength">El número de documento no debe tener mas de
                                 20 caracteres.
                             </div>

@@ -1,26 +1,26 @@
 <div *ngIf="masterList">
   <div class="row">
     <div class="col-md-12">
-      <h3 class="first">Listas</h3>
+      <h3 class="first">{{ 'LISTAS.LBL_LISTAS' | translate }}</h3>
     </div>
   </div>
-  <p-fieldset legend="Parámetros Lista">
+  <p-fieldset legend="{{ 'LISTAS.LBL_PARAMETROSLISTA' | translate }}">
   <div class="row">
     <div class="col-md-offset-2 col-md-8 col-sm-12">
     <form class="form-horizontal">
       <fieldset>
           <div class="row">
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Codigo:</label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_CODIGO' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{masterList.codigoLista}}</strong></label>
 
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Lista:</label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LISTAS.LBL_LISTA' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{masterList.lista}}</strong></label>
           </div>
           <div class="row">
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Id:</label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_ID' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{masterList.idLista}}</strong></label>
 
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Editable:</label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LISTAS.LBL_EDITABLE' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{masterList.indicadorEditable ? 'Si' : 'No'}}</strong></label>
           </div>
       </fieldset>
@@ -29,12 +29,12 @@
   </div>
   </p-fieldset>
 
-<p-fieldset legend="Elementos de la Lista">
+<p-fieldset legend="{{ 'LISTAS.LBL_ELEMENTLISTA' | translate }}">
     <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="detailsList" [paginator]="true" [rows]="10" [responsive]="true">
         <header>Listas</header>
-       <p-column field="codigo" header="Código"></p-column>
-       <p-column field="nombre" header="Item"></p-column>
-       <p-column field="indicadorHabilitado" header="Habilitado">
+       <p-column field="codigo" header="{{ 'LBL_CODIGO' | translate }}"></p-column>
+       <p-column field="nombre" header="{{ 'LISTAS.LBL_ITEMLISTA' | translate }}"></p-column>
+       <p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}">
             <template let-const="rowData" pTemplate="body">
                 <p-checkbox [(ngModel)]="const.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
             </template>
@@ -43,7 +43,7 @@
 </p-fieldset>
   <div class="row form-footer-buttons">
     <div class="form-group col-md-12">
-      <button icon="fa-arrow-left" label="Regresar" type="button"
+      <button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate }}" type="button"
               pButton (click)="goBack()"></button>
     </div>
   </div>

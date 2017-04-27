@@ -1,4 +1,4 @@
-<h3>Usuarios</h3>
+<h3>{{ 'LBL_USUARIOS' | translate }}</h3>
 <div class="row datable-header">
     <div class="col-md-6 col-xs-12 datatable-header-add">
         <button type="button" pButton icon="fa-plus" (click)="addUser()" label="{{ 'LBL_NUEVO' | translate:param }} {{ 'LBL_USUARIOS' | translate:param }}"></button>
@@ -6,7 +6,7 @@
     <div class="col-md-6 col-xs-12 datatable-header-search">
       <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-search"></i></div>
-        <input type="text" pInputText size="40" placeholder="Buscar..." (keyup)="showData($event.target.value)" class="form-control">
+        <input type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" (keyup)="showData($event.target.value)" class="form-control">
       </div>
     </div>
 </div>
