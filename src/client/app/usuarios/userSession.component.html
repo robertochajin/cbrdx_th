@@ -33,8 +33,17 @@
                   <div class="row">
                      <label for="pass_actual" class="control-label col-sm-4">{{"USER_SESSION.LBL_CONTRASENAACTUAL" | translate:param}}</label>
                      <div class=" col-sm-8">
-                        <input type="text" pInputText id="pass_actual" name="pass_actual" class="form-control"
-                               [(ngModel)]="oldPass" #pass_actual="ngModel" required/>
+                        <div class="input-group">
+                           <input [type]="showOldPass" pInputText id="pass_actual" name="pass_actual"
+                                  class="form-control" [(ngModel)]="oldPass" #pass_actual="ngModel" required/>
+                           <span class="input-group-btn">
+                              <button type="button"
+                                      (click)="show()"
+                                      class="btn btn-default"
+                              > <i class="fa fa-eye"></i>
+                              </button>
+                           </span>
+                        </div>
                         <div class="ui-message ui-messages-error ui-corner-all"
                              *ngIf="f.submitted && !pass_actual.valid">
                            <i class="fa fa-close"></i>
@@ -45,7 +54,7 @@
                   <div class="row">
                      <label for="pass_nueva" class="control-label col-sm-4">{{"USER_SESSION.LBL_NUEVACONTRASENA" | translate:param}}</label>
                      <div class=" col-sm-8">
-                        <input type="text" pInputText id="pass_nueva" name="pass_nueva" class="form-control"
+                        <input [type]="showPass" pInputText id="pass_nueva" name="pass_nueva" class="form-control"
                                [(ngModel)]="newPass" #pass_nueva="ngModel" required/>
                         <div class="ui-message ui-messages-error ui-corner-all"
                              *ngIf="f.submitted && !pass_nueva.valid">
@@ -62,7 +71,7 @@
                   <div class="row">
                      <label for="pass_nueva2" class="control-label col-sm-4">{{"USER_SESSION.LBL_REPETIRCONTRASENA" | translate:param}}</label>
                      <div class=" col-sm-8">
-                        <input type="text" pInputText id="pass_nueva2" name="pass_nueva" class="form-control"
+                        <input [type]="showConfim" pInputText id="pass_nueva2" name="pass_nueva" class="form-control"
                                [(ngModel)]="newPassConfirm" #pass_nueva2="ngModel" required/>
                         <div class="ui-message ui-messages-error ui-corner-all"
                              *ngIf="f.submitted && !pass_nueva2.valid">

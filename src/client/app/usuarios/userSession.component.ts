@@ -31,6 +31,9 @@ export class UserSessionComponent implements OnInit {
    newPass : string = "";
    newPassConfirm : string = "";
    usuarioLogueado: any;
+   showOldPass: string = "password";
+   showPass: string = "password";
+   showConfim: string = "password";
    
    constructor( private employeeService: EmployeesService,
                 private usuariosService: UsuariosService,
@@ -65,6 +68,7 @@ export class UserSessionComponent implements OnInit {
          this.user.contrasenaAntigua = this.oldPass;
          this.user.contrasena = this.newPass;
          this.usuariosService.updatePass( this.user ).then( res => {
+            console.info(res);
             if ( res ) {
                this.msgs[ 0 ] = { severity: 'info', summary: 'Exito', detail: 'Contraseña actualizada correctamente.' };
             } else {
@@ -74,13 +78,21 @@ export class UserSessionComponent implements OnInit {
                };
             }
          }, error => {
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } ;
          } );
       }
    }
    
    goBack(): void {
       this.location.back();
+   }
+   show(){
+      if(this.showOldPass == "password"){
+         this.showOldPass = "text";
+      }else{
+         this.showOldPass = "password";
+      }
+      console.info(this.showOldPass);
    }
    
 }

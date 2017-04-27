@@ -19,7 +19,7 @@
                   </li>
                </ul>
                <a routerLink="{{modulo.children[0].data.ruta}}" *ngIf="modulo.children.length == 1 ">
-                  <i class="{{modulo.children[0].data.clase}}"></i>
+                  <i class="{{modulo.data.clase}}"></i>
                   <span>{{modulo.children[0].label}}</span>
                </a>
          </li>
