@@ -4,6 +4,7 @@ export class MenuManager {
    codigoMenu : string;
    menu : string;
    ruta : string;
+   clase : string;
    secuencia : number;
    idPadre : number;
    indicadorHabilitado : boolean;

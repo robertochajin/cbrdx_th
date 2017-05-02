@@ -42,4 +42,17 @@ export class MenuManagerService {
       return Promise.reject( error.message || error );
    }
    
+   getByPadre( id: number) {
+      return this.http.get( this.serviceURL+'menus/buscarPadre/'+id, { headers: this.headers } ).map( ( res: Response ) => res.json() as MenuManager[] );
+   }
+   
+   getMenusSession( ) {
+      console.log('MenuService: ',this.headers.get('Authorization'));
+       let headers = new Headers( {
+         'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')
+      } );
+      return this.http.get( this.serviceURL+'menus/rol', { headers: headers } ).map( ( res: Response ) => res.json() as MenuManager[] );
+   }
+   
+   
 }

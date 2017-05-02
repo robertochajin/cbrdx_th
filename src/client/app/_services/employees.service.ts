@@ -18,7 +18,7 @@ export class EmployeesService {
    }
 
     getAll()  {
-        return this.http.get(this.serviceURL+'vterceros' ,{headers: this.headers}).map((res:Response) => res.json());
+        return this.http.get(this.serviceURL+'vterceros' ,{headers: this.headers}).map((res:Response) => res.json() as Employee[]);
     }
     getByTipo(type:string)  {
         return this.http.get(this.serviceURL+'vterceros/buscarTerceros/'+type+"/" ,{headers: this.headers}).map((res:Response) => res.json());
@@ -55,6 +55,14 @@ export class EmployeesService {
   
     validateDocument(numeroDocumento: string, idTipoDocumento: number) {
       return this.http.get(this.serviceURL+'terceros/'+ numeroDocumento+'/'+ idTipoDocumento+'/' ,{headers: this.headers}).map((res:Response) => res.json() as Employee);
+      
+      /*.map((res:Response) => {
+         //if (res.text() != '') {
+            res.json() as Employee
+         //} else {
+            return undefined;
+         //}
+      });*/
     }
 
 }

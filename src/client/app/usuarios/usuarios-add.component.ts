@@ -125,9 +125,11 @@ export class UsuariosAddComponent implements OnInit {
         if (!this.userExists && this.terceroExiste) {
             this.tercerosService.validateDocument(this.numeroDocumento,this.selectedTipo).subscribe(res => {
                 if (res.idTercero != null) {
-                    this.tercero = res;
-                    this.isTerceroSet = true;
-                    this.usuario.idTercero = this.tercero.idTercero;
+                   this.tercerosService.get(res.idTercero).subscribe(rest=>{
+                      this.tercero = rest;
+                      this.isTerceroSet = true;
+                      this.usuario.idTercero = this.tercero.idTercero;
+                   });
                 } else {
                     this.isTerceroEmpty = true;
                 }

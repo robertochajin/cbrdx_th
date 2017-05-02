@@ -17,6 +17,7 @@ export class UsuariosComponent {
 
     usuario: Usuario = new Usuario();
     usuarios: VUsuario[];
+    usuariosFull: boolean=false;
 
     constructor(private UsuariosService: UsuariosService, private router: Router) {
     }
@@ -36,10 +37,13 @@ export class UsuariosComponent {
     showData(s: any) {
         if (s.length > 0) {
             this.UsuariosService.listVUsers().subscribe(
-                usuarios => this.usuarios = usuarios.filter(t => t.nombre != null && t.nombre.toLowerCase().includes(s.toLowerCase()) || t.usuario != null && t.usuario.toLowerCase().includes(s.toLowerCase()) || t.documento != null && t.documento.includes(s))
-            );
+                usuarios => {
+                   this.usuariosFull=true;
+                   this.usuarios = usuarios.filter(t => t.nombre != null && t.nombre.toLowerCase().includes(s.toLowerCase()) || t.usuario != null && t.usuario.toLowerCase().includes(s.toLowerCase()) || t.documento != null && t.documento.includes(s))
+                });
         } else {
             this.usuarios = [];
+           this.usuariosFull=false;
         }
     }
 }

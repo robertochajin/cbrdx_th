@@ -1,23 +1,23 @@
-<h3>Grupos de Gestión</h3>
+<h3>{{ 'LBL_NUEVO' | translate }} {{ 'GRUPOSDEGESTION.LBL_GRUPOGESTION' | translate }}</h3>
 <div class="row datable-header">
     <div class="col-md-6 col-xs-12 datatable-header-add">
-        <button type="button" pButton icon="fa-plus" (click)="addGrupoGestion()" label="Nuevo Grupo de Gestión"></button>
+        <button type="button" pButton icon="fa-plus" (click)="addGrupoGestion()" label="{{ 'LBL_AGREGAR' | translate }} {{ 'GRUPOSDEGESTION.LBL_GRUPOGESTION' | translate }}"></button>
     </div>
     <div class="col-md-6 col-xs-12 datatable-header-search">
         <i class="fa fa-search"></i>
-        <input #gb type="text" pInputText size="40" placeholder="Buscar...">
+        <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate:param }}">
     </div>
 </div>
 <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="gruposGestion" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb" emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}">
-    <p-column field="idGrupoGestion" header="Id" [sortable]="true"></p-column>
-    <p-column field="codigoGrupoGestion" header="Código" [sortable]="true"></p-column>
-    <p-column field="grupoGestion" header="Nombre" [sortable]="true"></p-column>
-    <p-column field="indicadorHabilitado" header="Estado" [sortable]="true" styleClass="datatable-col-center">
+    <p-column field="idGrupoGestion" header="{{ 'LBL_ID' | translate }}" [sortable]="true"></p-column>
+    <p-column field="codigoGrupoGestion" header="{{ 'LBL_CODIGO' | translate }}" [sortable]="true"></p-column>
+    <p-column field="grupoGestion" header="{{ 'LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
+    <p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true" styleClass="datatable-col-center">
         <template let-const="rowData" pTemplate="body">
             <p-checkbox [(ngModel)]="const.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
         </template>
     </p-column>
-    <p-column header="Acciones" styleClass="datatable-col-action">
+    <p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
         <template let-constantData="rowData" pTemplate="body">
             <div class="btn-group" role="group">
                 <button type="button" class="ui-button btn" icon="fa-eye"

@@ -6,9 +6,7 @@ import {Router, Params, ActivatedRoute} from "@angular/router";
 import {UsuariosService} from "../_services/usuarios.service";
 import {Usuario} from "../_models/usuario";
 import "rxjs/add/operator/switchMap";
-import {Tercero} from "../_models/tercero";
 import {RolesService} from "../_services/roles.service";
-import {TercerosService} from "../_services/terceros.service";
 import {ListaService} from "../_services/lista.service";
 import {Lista} from "../_models/lista";
 import {ListaItem} from "../_models/listaItem";
@@ -20,6 +18,8 @@ import {UsuarioGrupoGestion} from "../_models/usuarioGrupoGestion";
 import {VUsuarioRol} from "../_models/vUsuarioRol";
 import {VUsuarioGrupoGestion} from "../_models/vUsuarioGrupoGestion";
 import {VHistoricoUsuario} from "../_models/vHistoricoUsuario";
+import {Employee} from '../_models/employees';
+import {EmployeesService} from '../_services/employees.service';
 
 @Component({
     moduleId: module.id,
@@ -33,8 +33,8 @@ export class UsuariosEditComponent implements OnInit {
     }
 
     usuario: Usuario = new Usuario();
-    tercero: Tercero = new Tercero();
-    terceros: Tercero[] = [];
+    tercero: Employee = new Employee();
+    terceros: Employee[] = [];
     usuarios: Usuario[] = [];
     roles: Rol[] = [];
     gruposGestion: GruposGestion[] = [];
@@ -56,7 +56,7 @@ export class UsuariosEditComponent implements OnInit {
     userExists: boolean = false;
     terceroExiste: boolean = true;
     sameUser: boolean = false;
-    terceroObtenido: Tercero;
+    terceroObtenido: Employee;
 
     isRequiredRol = false;
     isGreaterRol = true;
@@ -72,23 +72,22 @@ export class UsuariosEditComponent implements OnInit {
     constructor(private usuariosService: UsuariosService,
                 private rolesService: RolesService,
                 private gruposGestionService: GruposGestionService,
-                private tercerosService: TercerosService,
+                private tercerosService: EmployeesService,
                 private listasService: ListaService,
                 private router: Router,
                 private route: ActivatedRoute) {
         route.params.switchMap((params: Params) => usuariosService.viewUser(+params['id']))
             .subscribe(data => {
                 this.usuario = data;
-                console.info(this.usuario);
                 this.updateRolesLists();
                 this.updateHistoric();
                 this.updateGroupLists();
                 usuariosService.listUsers().subscribe(res => {
                     this.usuarios = res.filter(t => t.idUsuario != this.usuario.idUsuario);
-                    console.info(this.usuarios);
                 });
-                tercerosService.listarTerceros().subscribe(res => {
-                    this.tercero = res.find(t => t.idTercero === this.usuario.idTercero);
+                tercerosService.getAll().subscribe(res => {
+                   this.terceros = res;
+                    this.tercero = this.terceros.find(t => t.idTercero === this.usuario.idTercero);
                 });
             });
     }
@@ -193,14 +192,14 @@ export class UsuariosEditComponent implements OnInit {
         });
     }
 
-    removeRole(c: number) {
-        this.usuariosService.readUserRol(c).subscribe(res => {
-            let u: UsuarioRol = res;
-            u.indicadorHabilitado = false;
-            this.usuariosService.updateUserRole(u).then(res => {
+    removeRole(c: UsuarioRol) {
+        //this.usuariosService.readUserRol(c).subscribe(res => {
+            //let u: UsuarioRol = res;
+            c.indicadorHabilitado = false;
+            this.usuariosService.updateUserRole(c).then(res => {
                 this.updateRolesLists();
             });
-        });
+        //});
     }
 
     removeGroup(c: number) {
@@ -260,4 +259,7 @@ export class UsuariosEditComponent implements OnInit {
             this.historico = res;
         });
     }
+   goTercero(){
+      this.router.navigate(['employees/update/'+this.usuario.idTercero]);
+   }
 }

@@ -7,163 +7,21 @@
          <li class="header">
             {{ 'TEMPLATE.LBL_MENUPRINCIPAL' | translate:param }}
          </li>
-
-         <li class="treeview" routerLinkActive="active">
-            <a routerLink="/dashboard">
-               <i class="icon-THDashboard icon-mainmenu"></i>
-               <span>Dashboard</span>
-            </a>
-         </li>
-
-
-         <li class="treeview" routerLinkActive="active">
-            <a routerLink="/employees">
-               <i class="fa fa-users" aria-hidden="true" style="font-size: 1.5em;"></i>
-               <span>Colaboradores</span>
-            </a>
-         </li>
-
-
-         <li class="treeview" routerLinkActive="active">
-            <a href="#">
-               <i class="fa fa-cogs" aria-hidden="true" style="font-size: 1.5em;"></i>
-               <span> Sistema </span>
-            </a>
-            <ul class="treeview-menu">
-               <li routerLinkActive="active">
-                  <a routerLink="/usuarios"><i class="fa fa-circle-o"></i> Usuarios</a>
-               </li>
-               <li routerLinkActive="active">
-                  <a routerLink="/constantes" routerLinkActive="active"><i class="fa fa-circle-o"></i> Constantes</a>
-               </li>
-               <li routerLinkActive="active">
-                  <a routerLink="/gruposGestion" routerLinkActive="active"><i class="fa fa-circle-o"></i> Grupos de Gestión</a>
-               </li>
-               <li routerLinkActive="active">
-                  <a routerLink="/listas" routerLinkActive="active"><i class="fa fa-circle-o"></i> Listas</a>
-               </li>
-               <li routerLinkActive="active">
-                  <a routerLink="/menus" routerLinkActive="active"><i class="fa fa-circle-o"></i> Menús
-                     <span class="pull-right-container">
-                        <small class="label pull-right bg-green">new</small>
-                     </span>
-                  </a>
-               </li>
-               <li routerLinkActive="active">
-                  <a routerLink="/roles" routerLinkActive="active"><i class="fa fa-circle-o"></i> Roles
-                     <span class="pull-right-container">
-                        <small class="label pull-right bg-green">new</small>
-                     </span>
-                  </a>
-               </li>
-               <li routerLinkActive="active">
-                  <a routerLink="/ocupaciones" routerLinkActive="active"><i class="fa fa-circle-o"></i> Ocupaciones</a>
-               </li>
-               <li routerLinkActive="active">
-                  <a routerLink="/divisionPolitica" routerLinkActive="active"><i class="fa fa-circle-o"></i> División Política</a>
-               </li>
-               <li routerLinkActive="active">
-                  <a routerLink="/actividadeconomica" routerLinkActive="active"><i class="fa fa-circle-o"></i> Actividad Económica</a>
-               </li>
-               <li routerLinkActive="active">
-                  <a routerLink="/form-manager" routerLinkActive="active"><i class="fa fa-circle-o"></i> Administrador<br />de Menús
-                     <span class="pull-right-container">
-                        <small class="label pull-right bg-green">new</small>
-                     </span>
-                  </a>
-               </li>
-               <li routerLinkActive="active">
-                  <a routerLink="/widgets" routerLinkActive="active"><i class="fa fa-circle-o"></i> Administración<br />de Widgets
-                     <span class="pull-right-container">
-                        <small class="label pull-right bg-green">new</small>
-                     </span>
-                  </a>
-               </li>
-
-            </ul>
-         </li>
-
-
-         <li class="treeview" routerLinkActive="active">
-            <a href="#">
-               <i class="icon-THApl icon-mainmenu"></i>
-               <span> Administración </span>
-            </a>
-            <ul class="treeview-menu">
-               <li routerLinkActive="active">
-                  <a routerLink="/centroCostos" routerLinkActive="active"><i class="fa fa-circle-o"></i> Centros de Costos</a>
-               </li>
-               <li routerLinkActive="active">
-                  <a routerLink="/tipoArea" routerLinkActive="active"><i class="fa fa-circle-o"></i> Tipos de Áreas</a>
-               </li>
-               <li routerLinkActive="active">
-                  <a routerLink="/faults" routerLinkActive="active"><i class="fa fa-circle-o"></i> Faltas y<br />Sanciones
-                     <span class="pull-right-container">
-                        <small class="label pull-right bg-green">new</small>
-                     </span>
-                  </a>
-               </li>
-               <li routerLinkActive="active">
-                  <a routerLink="/competencies-groups" routerLinkActive="active"><i class="fa fa-circle-o"></i> Competencias<br/>Habilidades
-                     <span class="pull-right-container">
-                        <small class="label pull-right bg-green">new</small>
-                     </span>
-                  </a>
-               </li>
-               <li routerLinkActive="active">
-                  <a routerLink="/risks" routerLinkActive="active"><i class="fa fa-circle-o"></i> Riesgos<br />Laborales
-                     <span class="pull-right-container">
-                        <small class="label pull-right bg-green">new</small>
-                     </span>
-                  </a>
-               </li>
-               <li routerLinkActive="active">
-                  <a routerLink="/positions" routerLinkActive="active"><i class="fa fa-circle-o"></i> Cargos
-                     <span class="pull-right-container">
-                        <small class="label pull-right bg-green">new</small>
-                     </span>
-                  </a>
-               </li>
-            </ul>
-         </li>
-
-
-         <li class="treeview" routerLinkActive="active">
-            <a href="#">
-               <i class="icon-THDO icon-mainmenu"></i>
-               <span> Organización </span>
-            </a>
-            <ul class="treeview-menu">
-               <li routerLinkActive="active">
-                  <a routerLink="/physic-structure"><i class="fa fa-circle-o"></i> Estructura Física
-                     <span class="pull-right-container">
-                        <small class="label pull-right bg-green">new</small>
-                     </span>
-                  </a>
-               </li>
-               <li routerLinkActive="active">
-                  <a routerLink="/organizational-structure"><i class="fa fa-circle-o"></i> Estructura<br/>Organizacional
-                     <span class="pull-right-container">
-                        <small class="label pull-right bg-green">new</small>
-                     </span>
-                  </a>
-               </li>
-               <li routerLinkActive="active">
-                  <a routerLink="/organizational-structure-positions"><i class="fa fa-circle-o"></i> Planta de<br/>Colaboradores
-                     <span class="pull-right-container">
-                        <small class="label pull-right bg-green">new</small>
-                     </span>
-                  </a>
-               </li>
-               <li routerLinkActive="active">
-                  <a routerLink="/job-projection"><i class="fa fa-circle-o"></i> Proyección<br/>Laboral
-                     <span class="pull-right-container">
-                        <small class="label pull-right bg-green">new</small>
-                     </span>
-                  </a>
-               </li>
-
-            </ul>
+         
+         <li *ngFor="let modulo of treeMenu;" class="treeview" routerLinkActive="active">
+               <a href="#" *ngIf="modulo.children.length > 1">
+                  <i class="{{modulo.data.clase}}" aria-hidden="true" style="font-size: 1.5em;"></i>
+                  <span>{{modulo.label}}</span>
+               </a>
+               <ul class="treeview-menu" *ngIf="modulo.children.length > 1">
+                  <li routerLinkActive="active" *ngFor="let menu of modulo.children;">
+                     <a routerLink="{{menu.data.ruta}}"><i class="{{menu.data.clase}}"></i>{{menu.data.menu}}</a>
+                  </li>
+               </ul>
+               <a routerLink="{{modulo.children[0].data.ruta}}" *ngIf="modulo.children.length == 1 ">
+                  <i class="{{modulo.data.clase}}"></i>
+                  <span>{{modulo.children[0].label}}</span>
+               </a>
          </li>
       </ul>
    </section>
