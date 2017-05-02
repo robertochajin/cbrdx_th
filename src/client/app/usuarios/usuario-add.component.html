@@ -7,7 +7,7 @@
                     <div class="ui-grid-col-3" style="text-align: center"><label>{{ 'LBL_TIPODOCUMENTO' | translate:param }}:</label>
                     </div>
                     <div class="ui-grid-col-3">
-                        <select [(ngModel)]="selectedTipo" id="idTipoDato" name="idTipoDato" class="form-control"
+                        <select [(ngModel)]="selectedTipo" id="idTipoDato" name="idTipoDato" class="form-control" (change)="terceroExiste=true"
                                 required #idTipoDato="ngModel">
                             <option *ngFor="let c of datatypeDetails" [ngValue]="c.idLista">
                                 {{c.codigo}} - {{c.nombre}}
