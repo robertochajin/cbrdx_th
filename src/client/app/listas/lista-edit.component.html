@@ -48,6 +48,7 @@
     <form *ngIf="!isEdit && masterList.indicadorEditable" name="form" (ngSubmit)="!detailCodeExists&&fd.form.valid && createDetail(fd)" #fd="ngForm"
           novalidate
           (keydown.enter)="$event.preventDefault()">
+       <p-messages [value]="msgs"></p-messages>
         <div class="row">
             <div class="col-xs-6">
                 <div class="form-group" [ngClass]="{ 'has-error':fd.submitted&&!codigo.valid}">

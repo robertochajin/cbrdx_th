@@ -4,6 +4,8 @@ import {Lista} from "../_models/lista";
 import {ListaService} from "../_services/lista.service";
 import {Router, Params, ActivatedRoute} from "@angular/router";
 import {ListaItem} from "../_models/listaItem";
+import {Message} from 'primeng/primeng';
+
 import "rxjs/add/operator/switchMap";
 @Component({
    moduleId: module.id,
@@ -22,6 +24,7 @@ export class ListaEditComponent implements OnInit {
    displayDetailDialog: boolean = false;
    isEdit: boolean = false;
    displayUpdateDialog: boolean = false;
+   msgs: Message[] = [];
 
 
    constructor(private listaService: ListaService, private router: Router, private route: ActivatedRoute) {
@@ -67,6 +70,7 @@ export class ListaEditComponent implements OnInit {
    createDetail(f: NgForm) {
       this.editableDetail.orden = 2; //pendiente definir ordenamiento de los items
       this.listaService.createDetail(this.editableDetail, this.masterList.nombreTabla).then(res => {
+         this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
          this.editableDetail = new ListaItem;
          this.isEdit = true;
          this.listaService.getMasterAllDetails(this.masterList.nombreTabla).subscribe(res => {
@@ -78,6 +82,7 @@ export class ListaEditComponent implements OnInit {
 
    updateDetail(f: NgForm) {
       this.listaService.updateDetail(this.editableDetail, this.masterList.nombreTabla).then(res => {
+         this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro modificado correctamente.'});
          this.editableDetail = new ListaItem;
          this.isEdit = false;
          this.listaService.getMasterAllDetails(this.masterList.nombreTabla).subscribe(res => {

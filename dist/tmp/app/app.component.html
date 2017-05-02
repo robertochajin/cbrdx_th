@@ -1,0 +1,29 @@
+<div id="wrapper" class="wrapper">
+
+  <sd-toolbar *ngIf="sessionStart"></sd-toolbar>
+
+  <sd-navbar *ngIf="sessionStart"></sd-navbar>
+
+  <div id="content-wrapper" [ngClass]="sessionStart ? 'content-wrapper' : 'wrapper-login'">
+    <!-- Content Header (Page header) -->
+    <section class="content-header" *ngIf="sessionStart">
+      <sd-breadcrumb></sd-breadcrumb>
+    </section>
+
+    <!-- Main content -->
+    <section id="main" class="content clearfix">
+      <router-outlet></router-outlet>
+    </section>
+    <!-- /.content -->
+  </div>
+
+  <footer class="main-footer" *ngIf="sessionStart">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 0.0.1
+    </div>
+    Copyright &copy; 2017 <a href="http://ciberdix.com">Ciberdix</a>.
+    All right
+    reserved.
+  </footer>
+
+</div>
