@@ -10,7 +10,7 @@ export class ListPositionsService {
    constructor( private authHttp: AuthHttp ) {
    }
    
-   getCategoryTypes() {w
+   getCategoryTypes() {
       return this.authHttp.get( this.serviceURL + "categorias/enabled" ).map( ( res: Response ) => res.json() );
    }
    
