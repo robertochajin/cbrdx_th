@@ -1,7 +1,7 @@
-<h3>Administrador de Usuarios</h3>
+<h3>{{ 'USUARIOS.LBL_USUARIOS' | translate }}</h3>
 <p-tabView>
-    <p-tabPanel header="Datos de Usuario">
-        <p-fieldset legend="Datos Tercero" *ngIf="isTerceroSet">
+    <p-tabPanel header="{{ 'USUARIOS.LBL_DATOSUSER' | translate }}">
+        <p-fieldset legend="{{ 'USUARIOS.LBL_DATOSTERCERO' | translate }}" *ngIf="isTerceroSet">
 
             <div class="col-md-3">
                 <div class="ui-grid-col-10">
@@ -22,53 +22,51 @@
             </div>
             <div class="col-md-9">
                 <div class="ui-grid-col-4">
-                    <label>Género :</label>
+                    <label>{{ 'LBL_GENERO' | translate }} :</label>
                     <p></p>
-                    <label>Ciudad :</label>
-                    <p></p>
-                </div>
-                <div class="ui-grid-col-4">
-                    <label>Estado civil :</label>
-                    <p></p>
-                    <label>Dirección :</label>
+                    <label>{{ 'LBL_CIUDAD' | translate }} :</label>
                     <p></p>
                 </div>
                 <div class="ui-grid-col-4">
-                    <label>EPS :</label>
+                    <label>{{ 'LBL_ESTADOCIVIL' | translate }}:</label>
                     <p></p>
-                    <label>Teléfono :</label>
+                    <label>{{ 'LBL_DIRECCION' | translate }} :</label>
+                    <p></p>
+                </div>
+                <div class="ui-grid-col-4">
+                    <label>{{ 'LBL_EPS' | translate }} :</label>
+                    <p></p>
+                    <label>{{ 'LBL_TELEFONO' | translate }} :</label>
                     <p></p>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="pull-right">
-                    <label>Editar información de Tercero </label>
-                    <button pButton type="button" icon="glyphicon-pencil" iconPos="right" label="Editar"></button>
+                    <label> {{ 'USUARIOS.LBL_EDITAINFOTERCERO' | translate }} </label>
+                    <button pButton type="button" icon="glyphicon-pencil" iconPos="right" label="{{ 'BTN_EDITAR' | translate }}"></button>
                 </div>
             </div>
         </p-fieldset>
 
-        <p-fieldset legend="Información Contacto" *ngIf="isTerceroSet">
+        <p-fieldset legend="{{ 'USUARIOS.LBL_INFOCONTACTO' | translate }}" *ngIf="isTerceroSet">
             <form class="form-horizontal" #fu="ngForm" (ngSubmit)="!sameUser&&fu.form.valid && displayUpdate()"
                   novalidate autocomplete="off">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="uSistema" class="control-label col-sm-4">Usuario Sistema</label>
+                        <label for="uSistema" class="control-label col-sm-4">{{ 'USUARIOS.LBL_USUARIOSISTEMA' | translate }}</label>
                         <div class="col-sm-8">
                             <input name="uSistema" id="uSistema" type="text" pInputText #uSistema="ngModel"
                                    [(ngModel)]="usuario.usuarioSistema" required maxlength="80"
                                    pattern="[a-z0-9]+([-._]?[a-z0-9]+)+"
                                    (keyup)="userCleanUp($event.target.value);validateCreationUser();"/>
-                            <div *ngIf="sameUser" class="alert alert-danger">El usuario ya existe para otro tercero
+                            <div *ngIf="sameUser" class="alert alert-danger">{{ 'USUARIOS.MSG_USUARIOEXISTE' | translate }}
                             </div>
                             <div *ngIf="fu.submitted&&!uSistema.valid" class="alert alert-danger">
-                                <div [hidden]="!uSistema.errors.required">Debe ingresar un valor para el Usuario
+                                <div [hidden]="!uSistema.errors.required">{{ 'USUARIOS.MSG_VALORUSUARIO' | translate }}
                                 </div>
-                                <div [hidden]="!uSistema.errors.pattern">El nombre de usuario solo debe contener letras
-                                    y los caracteres . - y/o _
+                                <div [hidden]="!uSistema.errors.pattern">{{ 'USUARIOS.MSG_NOMCARACT' | translate }}
                                 </div>
-                                <div [hidden]="!uSistema.errors.maxlength">El nombre de usuario no debe tener mas de 80
-                                    caracteres.
+                                <div [hidden]="!uSistema.errors.maxlength">{{ 'USUARIOS.MSG_USER80CARACT' | translate }}
                                 </div>
                             </div>
                         </div>
@@ -76,7 +74,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="email" class="control-label col-sm-4">Correo Electronico</label>
+                        <label for="email" class="control-label col-sm-4">{{ 'USUARIOS.LBL_CORREOELECTRONICO' | translate }}</label>
                         <div class="col-sm-8">
                             <input name="email" id="email" type="email" pInputText #email="ngModel"
                                    [(ngModel)]="usuario.correoElectronico" required maxlength="80"
@@ -84,11 +82,10 @@
                                    (keyup)="emailCleanUp($event.target.value)"
                             />
                             <div *ngIf=" fu.submitted&&!email.valid" class="alert alert-danger">
-                                <div [hidden]="!email.errors.required">Debe ingresar un valor para el correo</div>
-                                <div [hidden]="!email.errors.maxlength">El valor no debe tener mas de 80 caracteres.
+                                <div [hidden]="!email.errors.required">{{ 'USUARIOS.MSG_VALORCORREO' | translate }}</div>
+                                <div [hidden]="!email.errors.maxlength">{{ 'USUARIOS.MSG_VALOR80CARACT' | translate }}
                                 </div>
-                                <div [hidden]="!email.errors.pattern">El correo electronico no cumple con el estandar
-                                    xxxxx@yyyyy.com[.zz]
+                                <div [hidden]="!email.errors.pattern">{{ 'USUARIOS.MSG_ESTANDAR' | translate }}
                                 </div>
                             </div>
                         </div>
@@ -96,7 +93,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="usuarioLDAP" class="control-label col-sm-4">Usuario LDAP</label>
+                        <label for="usuarioLDAP" class="control-label col-sm-4">{{ 'USUARIOS.LBL_LDAP' | translate }}</label>
                         <div class="ui-grid-col-6">
                             <p-checkbox name="usuarioLDAP" id="usuarioLDAP" #usuarioLDAP="ngModel"
                                         [(ngModel)]="usuario.usuarioLdap" binary="true"></p-checkbox>
@@ -105,22 +102,22 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="habilitado" class="control-label col-sm-4">Habilitado</label>
+                        <label for="habilitado" class="control-label col-sm-4">{{ 'LBL_HABILITADO' | translate }}</label>
                         <div class="col-sm-8">
                             <p-checkbox name="habilitado" id="habilitado" #habilitado="ngModel"
                                         [(ngModel)]="usuario.indicadorHabilitado" binary="true"></p-checkbox>
                         </div>
                     </div>
                     <div class="form-group">
-                        <a (click)="displayDialog=true" class="cancelar">Cancelar</a>
-                        <button pButton type="submit" label="Actualizar"></button>
+                        <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+                        <button pButton type="submit" label="{{ 'BTN_ACTUALIZAR' | translate }}"></button>
                     </div>
                 </div>
             </form>
         </p-fieldset>
 
     </p-tabPanel>
-    <p-tabPanel header="Roles y Grupos de Gestión" *ngIf="isUserCreated">
+    <p-tabPanel header="{{ 'USUARIOS.LBL_ROLESGRUPOS' | translate }}" *ngIf="isUserCreated">
         <p-fieldset>
             <div class="ui-grid-row">
                 <div class="col-sm-6">
@@ -136,7 +133,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-4">Fecha Inicio</label>
+                            <label class="control-label col-sm-4">{{ 'LBL_FECHAINICIO' | translate }}</label>
                             <div class="col-sm-7">
                                 <p-calendar [(ngModel)]="curUsuarioRol.fechaInicio" name="fechaInicio"
                                             id="fechaInicio" dateFormat="yy-mm-dd" [showIcon]="true"
@@ -150,26 +147,23 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-4">Fecha Fin</label>
+                            <label class="control-label col-sm-4">{{ 'LBL_FECHAFIN' | translate }}</label>
                             <div class="col-sm-8">
                                 <p-calendar [(ngModel)]="curUsuarioRol.fechaFin" name="fechaFin" id="fechaFin"
                                             dateFormat="yy-mm-dd" [minDate]="curUsuarioRol.fechaInicio" [showIcon]="true"
                                             [required]="isRequiredRol" [disabled]="!isRequiredRol"
                                             (onSelect)="validateGreaterRol();"
                                             readonlyInput="true" #fechaFin="ngModel"></p-calendar>
-                                <div *ngIf="rolesForm.submitted&&!isGreater" class="alert alert-danger">La fecha Final
-                                    debe ser mayor que la
-                                    Inicial
+                                <div *ngIf="rolesForm.submitted&&!isGreater" class="alert alert-danger">{{ 'USUARIOS.MSG_FECHAFINALMAYOR' | translate }}
                                 </div>
                                 <div *ngIf="rolesForm.submitted&&isRequiredRol&&curUsuarioRol.fechaFin==null"
-                                     class="alert alert-danger">Debe
-                                    seleccionar una fecha final
+                                     class="alert alert-danger">{{ 'USUARIOS.MSG_FECHAFINAL' | translate }}
                                 </div>
                             </div>
                         </div>
                         <div class="row form-footer-buttons">
                                 <div class="form-group col-md-6 pull-right">
-                                <button pButton type="submit" label="Agregar"></button>
+                                <button pButton type="submit" label="{{ 'LBL_AGREGAR' | translate }}"></button>
                             </div>
                         </div>
                     </form>
@@ -178,7 +172,7 @@
                     <form #gruposForm="ngForm" class="form-horizontal" *ngIf="creatingGroup"
                           (ngSubmit)="isGreaterGroup&&gruposForm.form.valid&&createUserGroup()">
                         <div class="form-group">
-                            <label for="rol" class="control-label col-sm-4">Grupo Gestion</label>
+                            <label for="rol" class="control-label col-sm-4">{{ 'USUARIOS.LBL_GRUPOGESTION' | translate }}</label>
                             <div class="col-sm-8">
                                 <select [(ngModel)]="curUsuarioGrupo.idGrupoGestion" name="rol" id="rol"
                                         class="form-control" required>
@@ -189,7 +183,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-4">Fecha Inicio</label>
+                            <label class="control-label col-sm-4">{{ 'LBL_FECHAINICIO' | translate }}</label>
                             <div class="col-sm-7">
                                 <p-calendar [(ngModel)]="curUsuarioGrupo.fechaInicio" name="rfechaInicio"
                                             id="rfechaInicio" [minDate]="currentDate" [showIcon]="true"
@@ -203,7 +197,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-4">Fecha Fin</label>
+                            <label class="control-label col-sm-4">{{ 'LBL_FECHAFIN' | translate }}</label>
                             <div class="col-sm-8">
                                 <p-calendar [(ngModel)]="curUsuarioGrupo.fechaFin" name="rfechaFin" id="rfechaFin"
                                             [minDate]="curUsuarioGrupo.fechaInicio" [showIcon]="true"
@@ -211,20 +205,16 @@
                                             [disabled]="!isRequiredGroup"
                                             (onSelect)="validateGreaterGroup();"
                                             readonlyInput="true" #fechaFin="ngModel"></p-calendar>
-                                <div *ngIf="gruposForm.submitted&&!isGreater" class="alert alert-danger">La fecha Final
-                                    debe ser
-                                    mayor que la
-                                    Inicial
+                                <div *ngIf="gruposForm.submitted&&!isGreater" class="alert alert-danger">{{ 'USUARIOS.MSG_FECHAFINALMAYOR' | translate }}
                                 </div>
                                 <div *ngIf="gruposForm.submitted&&isRequiredGroup&&curUsuarioGrupo.fechaFin==null"
-                                     class="alert alert-danger">Debe
-                                    seleccionar una fecha final
+                                     class="alert alert-danger">{{ 'USUARIOS.MSG_FECHAFINAL' | translate }}
                                 </div>
                             </div>
                         </div>
                         <div class="row form-footer-buttons">
                             <div class="form-group col-md-6 pull-right">
-                                <button pButton type="submit" label="Agregar"></button>
+                                <button pButton type="submit" label="{{ 'BTN_AGREGAR' | translate }}"></button>
                             </div>
                         </div>
                     </form>
@@ -235,13 +225,13 @@
                 <div class="ui-grid-col-6">
                     <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="curRoles" [paginator]="true" [rows]="10"
                                  [responsive]="true">
-                        <p-column field="rol" header="Rol"></p-column>
-                        <p-column header="Periodo Habilitación">
+                        <p-column field="rol" header="{{ 'USUARIOS.LBL_ROL' | translate }}"></p-column>
+                        <p-column header="{{ 'USUARIOS.MSG_PERIODOHAB' | translate }}">
                             <template let-const="rowData" pTemplate="body">
                                 <p>FI:{{const.fechaInicio}}<br>FF:{{const.fechaFin}}</p>
                             </template>
                         </p-column>
-                        <p-column header="Acción" styleClass="datatable-col-action">
+                        <p-column header="{{ 'LBL_ACCION' | translate }}" styleClass="datatable-col-action">
                             <template let-constantData="rowData" pTemplate="body">
                                 <div class="btn-group" role="group">
                                     <button type="button" class="ui-button ui-button-danger btn" icon="fa-close"
@@ -254,13 +244,13 @@
                 <div class="ui-grid-col-6">
                     <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="curGrupos" [paginator]="true" [rows]="10"
                                  [responsive]="true">
-                        <p-column field="grupoGestion" header="GrupoGestion"></p-column>
-                        <p-column header="Periodo Habilitación">
+                        <p-column field="grupoGestion" header="{{ 'USUARIOS.LBL_GRUPOGESTION' | translate }}"></p-column>
+                        <p-column header="{{ 'USUARIOS.MSG_PERIODOHAB' | translate }}">
                             <template let-const="rowData" pTemplate="body">
                                 <p>FI:{{const.fechaInicio}}<br>FF:{{const.fechaFin}}</p>
                             </template>
                         </p-column>
-                        <p-column header="Acción" styleClass="datatable-col-action">
+                        <p-column header="{{ 'LBL_ACCION' | translate }}" styleClass="datatable-col-action">
                             <template let-constantData="rowData" pTemplate="body">
                                 <div class="btn-group" role="group">
                                     <button type="button" class="ui-button ui-button-danger btn" icon="fa-close"
@@ -273,45 +263,45 @@
             </div>
 
             <div class="pull-right form-footer-buttons">
-                <a (click)="displayDialog=true" class="cancelar">Regresar</a>
+                <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_REGRESAR' | translate }}</a>
             </div>
         </p-fieldset>
     </p-tabPanel>
-    <p-tabPanel header="Historial" rightIcon="fa-calendar" *ngIf="isUserCreated">
+    <p-tabPanel header="{{ 'USUARIOS.LBL_HISTORIAL' | translate }}" rightIcon="fa-calendar" *ngIf="isUserCreated">
         <div class="row datable-header">
             <div class="col-md-6 col-xs-12 datatable-header-add">
             </div>
             <div class="col-md-6 col-xs-12 datatable-header-search">
                 <i class="fa fa-search"></i>
-                <input #gbs type="text" pInputText size="40" placeholder="Buscar...">
+                <input #gbs type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}">
             </div>
         </div>
         <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="historico" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gbs">
-            <p-column field="idAuditoria" header="Id" [sortable]="true"></p-column>
-            <p-column field="historia" header="Historia" [sortable]="true"></p-column>
-            <p-column field="valorAnterior" header="Valor Anterior" [sortable]="true"></p-column>
-            <p-column field="valorNuevo" header="Valor Nuevo" [sortable]="true"></p-column>
+            <p-column field="idAuditoria" header="{{ 'LBL_ID' | translate }}" [sortable]="true"></p-column>
+            <p-column field="historia" header="{{ 'USUARIOS.LBL_HISTORIA' | translate }}" [sortable]="true"></p-column>
+            <p-column field="valorAnterior" header="{{ 'USUARIOS.LBL_VALORANTERIOR' | translate }}" [sortable]="true"></p-column>
+            <p-column field="valorNuevo" header="{{ 'USUARIOS.LBL_VALORNUEVO' | translate }}" [sortable]="true"></p-column>
         </p-dataTable>
     </p-tabPanel>
 </p-tabView>
-<p-dialog header="Confirmación" [(visible)]="displayDialog"
+<p-dialog header="{{ 'LBL_CONFIRMACION' | translate }}" [(visible)]="displayDialog"
           responsive="true" modal="true">
-    <p>Si continua perdera la información no guardada.Esta seguro que desea salir?.</p>
+    <p>{{ 'USUARIOS.MSG_CONFIRMASALIR' | translate }}</p>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>
-            <button type="button" pButton icon="fa-check" (click)="goBack()" label="Si"></button>
+            <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="{{ 'BTN_NO' | translate }}"></button>
+            <button type="button" pButton icon="fa-check" (click)="goBack()" label="{{ 'BTN_SI' | translate }}"></button>
         </div>
     </p-footer>
 </p-dialog>
 
-<p-dialog header="Confirmación" [(visible)]="displayUpdateDialog"
+<p-dialog header="{{ 'LBL_CONFIRMACION' | translate }}" [(visible)]="displayUpdateDialog"
           responsive="true" modal="true">
-    <p>Si continua se actualizara la información del usuario.Esta seguro que desea continuar?.</p>
+    <p>{{ 'USUARIOS.MSG_CONFIRMACION' | translate }}</p>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="fa-close" (click)="displayUpdateDialog=false" label="No"></button>
-            <button type="button" pButton icon="fa-check" (click)="createUser()" label="Si"></button>
+            <button type="button" pButton icon="fa-close" (click)="displayUpdateDialog=false" label="{{ 'BTN_NO' | translate }}"></button>
+            <button type="button" pButton icon="fa-check" (click)="createUser()" label="{{ 'BNT_SI' | translate }}"></button>
         </div>
     </p-footer>
 </p-dialog>

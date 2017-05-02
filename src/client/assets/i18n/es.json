@@ -8,9 +8,13 @@
    "BTN_VOLVER": "Volver",
    "BTN_REGRESAR": "Regresar",
    "BTN_ACTUALIZAR": "Actualizar",
+   "BTN_CREARTERCERO": "Crear Tercero",
+   "BTN_NUEVOAREA" : "Nuevo Tipo de Área",
+   "BTN_NUEVOCENTROCOSTOS" : "Nuevo Centro de Costos",
    "BTN_SI": "Si",
    "BTN_NO": "No",
    "LBL_ACCIONES": "Acciones",
+   "LBL_ACCION":"Acción",
    "LBL_AGREGAR": "Agregar",
    "LBL_REQUERIDO": "requerido",
    "LBL_NUEVO": "Nuevo",
@@ -37,6 +41,7 @@
    "LBL_DE": "de",
    "LBL_EPS": "Eps",
    "LBL_TELEFONO": "Teléfono Fijo",
+   "LBL_DIRECCION":"Dirección",
    "LBL_PERTENECE": "Pertenece",
    "LBL_VERMAS": "Ver más",
    "MSG_CONFIRMACION": "Si continúa perderá la información no guardada. ¿Está seguro que desea salir?",
@@ -83,9 +88,6 @@
    "LBL_ACTIVIDADESECONOMICAS": "Actividades Económicas",
    "FIN_ACTIVIDADECONOMICA": "=================================================================",
 
-   "INICIO_CENTROSDECOSTOS": "==============================================================",
-   "LBL_CENTROCOSTOS": "Centro de Costos",
-   "FIN_CENTROSDECOSTOS": "=================================================================",
 
    "CONSTANTES": {
       "LBL_CONSTANTE": "Constante",
@@ -296,22 +298,47 @@
    "LBL_OCUPACIONES":"Ocupaciones",
    "FIN_OCUPACIONES":"=================================================================",
 
-   "INICIO_USUARIOS":"==============================================================",
-   "LBL_LDAP":"LDAP",
-   "LBL_CORREOELECTRONICO":"Correo Electrónico",
-   "LBL_ROL":"Rol",
-   "LBL_ROLES":"Roles",
-   "LBL_PERIODOHABILITACION":"Periodo Habilitación ",
-   "MSG_NORECORDSFOUNDUSERS":"Para visualizar los usuarios debe realizar una búsqueda válida",
-   "LBL_DATOSTERCERO":"Datos Tercero",
-   "LBL_HISTORIAL":"Historial",
-   "LBL_INFORMACION":"Información",
-   "LBL_ ADMINISTRADOR":"Administrador",
-   "LBL_BUSCARTERCERO":"Buscar tercero para asignar usuario",
-   "LBL_DATOSUSUARIO":"Datos de Usuario",
-   "MSG_INGRESARNUMERODOCUMENTO":"Debe ingresar un número de documento",
-   "MSG_NUMERODOCUMENTON20":"El número de documento no debe tener más de  20 caracteres",
-   "FIN_USUARIOS":"=================================================================",
+   "USUARIOS": {
+      "LBL_LDAP": "Usuario LDAP",
+      "LBL_EDITAINFOTERCERO": "Editar información del tercero",
+      "LBL_CORREOELECTRONICO": "Correo Electrónico",
+      "LBL_ROL": "Rol",
+      "LBL_ROLES": "Roles",
+      "LBL_INFOCONTACTO" :"Información de Contacto",
+      "LBL_ROLESGRUPOS":"Roles y Grupos de Gestión",
+      "LBL_USUARIOSISTEMA" :"Usuario Sistema",
+      "LBL_PERIODOHABILITACION": "Periodo Habilitación ",
+      "MSG_NORECORDSFOUNDUSERS": "Para visualizar los usuarios debe realizar una búsqueda válida",
+      "LBL_DATOSTERCERO": "Datos Tercero",
+      "LBL_HISTORIAL": "Historial",
+      "LBL_HISTORIA" : "Historia",
+      "LBL_INFORMACION": "Información",
+      "LBL_ ADMINISTRADOR": "Administrador",
+      "LBL_VALORANTERIOR" : "Valor anterior",
+      "LBL_VALORNUEVO" : "Valor nuevo",
+      "LBL_GRUPOGESTION":"Grupo Gestión",
+      "LBL_BUSCARTERCERO": "Buscar tercero para asignar usuario",
+      "MSG_TERCERONOEXISTE": "El tercero no existe",
+      "MSG_TERCEROUSUARIO": "El Tercero ya posee un usuario.",
+      "MSG_INGRESARNUMERODOCUMENTO": "Debe ingresar un número de documento",
+      "MSG_DOCUMENTOREQUERIDO": "El número de documento es requerido",
+      "MSG_CONFIRMACION" : "Si continúa se actualizará la información del usuario. Está seguro que desea continuar?.",
+      "MSG_CONFIRMASALIR" : "Si continúa perderá la información no guardada. Está seguro que desea salir?.",
+      "MSG_FECHAFINALMAYOR":"La fecha final debe ser mayor que la Inicial",
+      "MSG_FECHAFINAL":"Debe seleccionar una fecha final",
+      "MSG_PERIODOHAB":"Periodo Habilitación",
+      "MSG_VALORCORREO" : "Debe ingresar un valor para el correo",
+      "MSG_VALOR80CARACT": "El valor no debe tener más de 80 caracteres.",
+      "MSG_ESTANDAR":"El correo electrónico no cumple con el estándar xxxxx@yyyyy.com[.zz]",
+      "MSG_NUMERODOCUMENTON20": "El número de documento no debe tener más de  20 caracteres",
+      "MSG_USER80CARACT" : "El nombre de usuario no debe tener más de 80 caracteres.",
+      "MSG_USUARIOEXISTE" :"El usuario ya existe para otro tercero",
+      "MSG_VALORUSUARIO" :"Debe ingresar un valor para el Usuario",
+      "MSG_NOMCARACT" : "El nombre de usuario sólo debe contener letras y los caracteres . - y/o _",
+      "LBL_USUARIOS":"Administrador de Usuarios",
+      "LBL_DATOSUSER":"Datos de Usuario"
+
+   },
 
    "INICIO_SEGURIDAD":"==============================================================",
    "LBL_CONTRASEÑA":"Contraseña",
@@ -403,10 +430,40 @@
       "MSG_CONFIRMACIONSALIR":"Si continúa perderá la información no guardada. Está seguro que desea salir?.",
       "LBL_ACTUALIZACORRECTO":"Actualizacion Correcta",
       "MSG_INFOACTUALIZADA":"Información actualizada."
+   },
+
+   "CENTROSDECOSTOS":{
+      "LBL_CENTROCOSTOS": "Centro de Costos",
+      "LBL_NUEVOCENTROCOSTOS" : "Nuevo Centro de Costos",
+      "LBL_EDITACENTROCOSTOS" : "Editar Centro de Costos",
+      "MSG_CODIGOREGISTRADO" : "Ya se encuentra registrado ese código",
+      "MSG_INGRESACODIGO" : "Debe ingresar un código para el centro de costo",
+      "MSG_COD30CARACTERES" : "El código no debe tener mas de 30 caracteres.",
+      "MSG_CODMAYUSCULA" : "El código debe ser solo letras mayúsculas",
+      "MSG_NOMBRECENTRO" : "Debe ingresar un nombre para el centro de costo",
+      "MSG_NOM60CARACT" : "El nombre no debe tener mas de 60 caracteres.",
+      "MSG_NOMBMAYUSCULA" : "El nombre del centro de costos debe comenzar por una letra Mayúscula",
+      "MSG_CONFIRMACIONSALIR" : "Si continúa perderá la información no guardada. ¿Está seguro que desea salir?."
 
 
    },
 
+   "TIPODEAREA":{
+      "LBL_TIPOAREA": "Tipos de Área",
+      "LBL_NUEVOAREA" : "Nuevo Tipo de Área",
+      "LBL_EDITAREA" : "Editar tipo de área",
+      "LBL_DETALLETIPO" : "Detalle Tipo de Área",
+      "MSG_CODIGOREGISTRADO" : "Ya se encuentra registrado ese código",
+      "MSG_INGRESACODIGO" : "Debe ingresar un código para el tipo de área",
+      "MSG_COD8CARACTERES" : "El código no debe tener mas de 8 caracteres.",
+      "MSG_CODLETRAYNUMERO" : "El código debe ser solo letras y números",
+      "MSG_NOMBRECENTRO" : "Debe ingresar un nombre para el tipo de área",
+      "MSG_NOM40CARACT" : "El nombre no debe tener mas de 40 caracteres.",
+      "MSG_NOMBMAYUSCULA" : "El nombre del tipo de área debe comenzar por una letra mayúscula.",
+      "MSG_CONFIRMACIONSALIR" : "Si continúa perderá la información no guardada. ¿Está seguro que desea salir?."
+
+
+   },
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 
 
