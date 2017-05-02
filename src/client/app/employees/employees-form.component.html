@@ -296,37 +296,50 @@
                               {{ 'MSG_ACTIVIDADREQUERIDA' | translate:param }}
                             </div>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label for="Ngalive">{{'LBL_VIVO' | translate:param }}</label>
-                            <p-checkbox id="Ngalive"  name="Ngalive" binary="true"
-                                        [(ngModel)]="employee.indicadorVivo"
-                                        #Ngalive="ngModel"
-                            >
-                            </p-checkbox>
-                        </div>
-                        <div class="form-group col-md-3" *ngIf="employee.indicadorVivo == false">
-                            <label for="NGdeathDate">{{'LBL_VIVO' | translate:param }}</label>
-                            <p-calendar id="NGdeathDate" name="NGdeathDate" [locale]="es" [showIcon]="true" [disabled]="disabled"
-                                        [dataType]="date"  #NGdeathDate="ngModel" [required]="!employee.indicadorVivo"
-                                        [(ngModel)]="deathDate" (onSelect)="onDeathDate($event)"
-                            ></p-calendar>
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !employee.indicadorVivo && !NGdeathDate.valid">
-                              {{ 'MSG_FECHADEFUNCIONREQUERIDO' | translate:param }}
-                            </div>
-                        </div>
                     </div>
-                    <div class="row">
-                        <div class="form-group col-md-5">
-                        </div>
-                        <div class="form-group col-md-4">
-                          <label for="indicador" class="control-label col-sm-3">{{'LBL_HABILITADO' | translate:param }}</label>
-                          <div class=" col-sm-9">
+                   <div class="row">
+                      <div class="form-group col-md-6">
+                         <label for="juridico">{{'LBL_JURIDICO' | translate:param }}</label>
+                         <p-dropdown id="juridico" name="juridico" required="true"
+                                     [options]="juridicos" [autoWidth]="false"
+                                     [(ngModel)]="employee.idEstadoJuridico"
+                                     #juridico="ngModel"
+                         ></p-dropdown>
+                         <div class="ui-message ui-messages-error ui-corner-all"
+                              *ngIf="f.submitted && !juridico.valid">
+                            <i class="fa fa-close"></i>
+                            {{ 'MSG_JURIDICOREQUERIDO' | translate:param }}
+                         </div>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="form-group col-md-3">
+                         <label for="Ngalive">{{'LBL_VIVO' | translate:param }}</label>
+                         <p-checkbox id="Ngalive"  name="Ngalive" binary="true"
+                                     [(ngModel)]="employee.indicadorVivo"
+                                     #Ngalive="ngModel"
+                         >
+                         </p-checkbox>
+                      </div>
+                      <div class="form-group col-md-3" *ngIf="employee.indicadorVivo == false">
+                         <label for="NGdeathDate">{{'LBL_VIVO' | translate:param }}</label>
+                         <p-calendar id="NGdeathDate" name="NGdeathDate" [locale]="es" [showIcon]="true" [disabled]="disabled"
+                                     [dataType]="date"  #NGdeathDate="ngModel" [required]="!employee.indicadorVivo"
+                                     [(ngModel)]="deathDate" (onSelect)="onDeathDate($event)"
+                         ></p-calendar>
+                         <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !employee.indicadorVivo && !NGdeathDate.valid">
+                            {{ 'MSG_FECHADEFUNCIONREQUERIDO' | translate:param }}
+                         </div>
+                      </div>
+                      <div class="form-group col-md-4">
+                         <label for="indicador" class="control-label col-sm-3">{{'LBL_HABILITADO' | translate:param }}</label>
+                         <div class=" col-sm-9">
                             <p-checkbox binary="true" id="indicador" name="indicador"
                                         [(ngModel)]="employee.indicadorHabilitado"
                                         #indicador="ngModel"></p-checkbox>
-                          </div>
-                        </div>
-                    </div>
+                         </div>
+                      </div>
+                   </div>
                 </div>
                 <div class="row form-footer-buttons">
                     <div class="form-group col-md-12">

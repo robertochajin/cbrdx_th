@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, AfterViewInit} from '@angular/core';
 import { TreeNode } from "primeng/components/common/api";
 import { MenuManager } from "../../_models/menuManager";
 import { MenuManagerService } from "../../_services/menuManager.service";
+import {AuthenticationService} from "../../_services/authentication.service";
 /**
  * This class represents the navigation bar component.
  */
@@ -11,20 +12,44 @@ import { MenuManagerService } from "../../_services/menuManager.service";
   templateUrl: 'navbar.component.html',
   styleUrls: ['navbar.component.css'],
 })
-export class NavbarComponent {
+export class NavbarComponent implements AfterViewInit {
    listModulos: MenuManager[];
    listmenu: MenuManager[];
    treeMenu: TreeNode[] = [];
    constructor(
-      private menuManagerService: MenuManagerService
+      private menuManagerService: MenuManagerService,
+      private authService: AuthenticationService
    ) {
-      menuManagerService.getByPadre(0).subscribe( mod => {
+      authService.loginAnnounced$.subscribe(
+         token => {
+            if(token){
+               // this.reloadNav();
+            }
+         }
+      );
+
+      authService.logoutAnnounced$.subscribe(
+         token => {
+            if (token == null){
+               this.destroitNav();
+            }
+         }
+      );
+   }
+
+   ngAfterViewInit() {
+      this.reloadNav();
+
+   }
+
+   reloadNav() {
+      this.menuManagerService.getByPadre(0).subscribe( mod => {
          this.listModulos = mod;
          this.listModulos.sort(function (a, b) {
             //return a.menu.localeCompare(b.menu);
             return a.secuencia - b.secuencia;
          });
-         menuManagerService.getMenusSession().subscribe( men => {
+         this.menuManagerService.getMenusSession().subscribe( men => {
             this.listmenu = men;
             this.listmenu.sort(function (a, b) {
                //return a.menu.localeCompare(b.menu);
@@ -34,10 +59,10 @@ export class NavbarComponent {
                let chilNodes: TreeNode[] = [];
                for ( let c of this.listmenu.filter( t => t.idPadre == p.idMenu ) ) {
                   chilNodes.push( {
-                                     "label": c.menu,
-                                     "data": c,
-                                     "parent": p,
-                                  } );
+                     "label": c.menu,
+                     "data": c,
+                     "parent": p,
+                  } );
                }
                let companyNode = {
                   "label": p.menu,
@@ -50,5 +75,9 @@ export class NavbarComponent {
             }
          } );
       } );
+   }
+
+   destroitNav(){
+      this.treeMenu = [];
    }
 }

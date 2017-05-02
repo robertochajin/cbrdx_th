@@ -48,6 +48,7 @@ export class EmployeesUpdateComponent {
    occupationsTypes: SelectItem[] = [];
    academicLevelTypes: SelectItem[] = [];
    affiliationTypes: SelectItem[] = [];
+   juridicos: SelectItem[] = [];
    sector: SelectItem[] = [];
    activities: SelectItem[] = [];
    occupations: SelectItem[] = [];
@@ -82,6 +83,14 @@ export class EmployeesUpdateComponent {
          res.map((s: ListaItem) => {
             this.personTypes.push({label: s.nombre, value: s.idLista});
          });
+      });
+
+      this.listaService.getMasterDetails('ListasEstadosJuridicos').subscribe(res => {
+         this.juridicos.push({label: 'Seleccione', value: null});
+         res.map((s: ListaItem) => {
+            this.juridicos.push({label: s.nombre, value: s.idLista});
+         });
+         this.employee.idTipoDocumento = null;
       });
 
       this.listaService.getMasterDetails('ListasTiposDocumentos').subscribe(res => {
@@ -362,16 +371,18 @@ export class EmployeesUpdateComponent {
    }
 
    updateActivities(value: number) {
-      this.activities = [];
-      this.actividadEconomicaService.listLastChild(value).subscribe(res => {
-         this.activities.push({label: "Seleccione", value: null});
-         for (let dp of res) {
-            this.activities.push({
-               label: dp.actividadEconomica,
-               value: dp.idActividadEconomica
-            });
-         }
-      });
+      if(value!==null) {
+         this.activities = [];
+         this.actividadEconomicaService.listLastChild(value).subscribe(res => {
+            this.activities.push({label: "Seleccione", value: null});
+            for (let dp of res) {
+               this.activities.push({
+                  label: dp.actividadEconomica,
+                  value: dp.idActividadEconomica
+               });
+            }
+         });
+      }
    }
 
    validateDocument() {
