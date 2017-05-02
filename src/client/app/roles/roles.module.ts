@@ -6,7 +6,6 @@ import { RolesService } from "../_services/roles.service";
 import { RolesComponent } from "./roles.component";
 import { RolesAddComponent } from "./roles-add.component";
 import { RolesUpdateComponent } from "./roles-update.component";
-import { MenuElementoService } from "../_services/menuElemento.service";
 import { SharedModule } from "../shared/shared.module";
 import { FormSharedModule } from "../shared/form-shared.module";
 import { RolFuncionalitiesComponent } from "./rol-functionalities.component";
@@ -31,7 +30,6 @@ import { RolFuncionalitiesConfigComponent } from "./rol-functionalities-config.c
               bootstrap: [ RolesComponent ],
               providers: [
                  RolesService,
-                 MenuElementoService,
                  RolFuncionalitiesServices,
                  RolWidgetsServices
               ],

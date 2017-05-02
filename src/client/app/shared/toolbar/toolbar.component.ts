@@ -1,6 +1,7 @@
 import { Component, Renderer, ElementRef } from '@angular/core';
 import {JwtHelper} from 'angular2-jwt';
 import { Router, CanActivate } from '@angular/router';
+import * as moment from 'moment/moment';
 /**
  * This class represents the toolbar component.
  */
@@ -15,7 +16,8 @@ export class ToolbarComponent {
    usuarioLogueado: any = {sub : '', usuario: '', nombre: ''};
    jwtHelper: JwtHelper = new JwtHelper();
    timeoutID: any;
-
+   ultimaActualizacion : string;
+   
    constructor(
       public router: Router,
       renderer: Renderer,
@@ -25,7 +27,7 @@ export class ToolbarComponent {
 
       if (token != null)
          this.usuarioLogueado = this.jwtHelper.decodeToken(token);
-   
+      
       this.startTimer();
       renderer.listenGlobal('document', 'mousemove', (event:any) => {
          this.resetTimer()
@@ -42,6 +44,11 @@ export class ToolbarComponent {
       renderer.listenGlobal('document', 'touchmove', (event:any) => {
          this.resetTimer()
       });
+      
+      if(this.usuarioLogueado.usuario != null) {
+         let mom: moment.Moment = moment(this.usuarioLogueado.usuario.auditoriaFecha);
+         this.ultimaActualizacion = mom.format('MM/DD/YYYY');
+      }
    }
    
    logout(): void {

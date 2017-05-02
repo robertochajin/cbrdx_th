@@ -1,37 +1,34 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
-import {EmployeesContact} from '../_models/employeesContactList';
-import {AuthenticationService} from "./authentication.service";
+import { Injectable } from "@angular/core";
+import { Response } from "@angular/http";
+import { EmployeesContact } from "../_models/employeesContactList";
+import { AuthHttp } from "angular2-jwt";
 
 @Injectable()
 export class EmployeesContactService {
-  
-    private serviceURL = '<%= SVC_TH_URL %>/api/';
-    headers = new Headers({'Content-Type': 'application/json'});
    
-   constructor(private http: Http,
-               private authenticationService: AuthenticationService
-   ) {
-      this.headers = new Headers({'Content-Type': 'application/json', 'Authorization': this.authenticationService.token});
+   private serviceURL = '<%= SVC_TH_URL %>/api/';
+   
+   constructor( private authHttp: AuthHttp ) {
    }
-
-    getAll()  {
-        return this.http.get(this.serviceURL+'tercerosContactos' ,{headers: this.headers}).map((res:Response) => res.json());
-    }
-    getByEmployee(id:number)  {
-        return this.http.get(this.serviceURL+'tercerosContactos/buscarTercero/'+id ,{headers: this.headers}).map((res:Response) => res.json() as EmployeesContact[]);
-    }
-
-    add(c: EmployeesContact) {
-        return this.http.post(this.serviceURL+'tercerosContactos',c ,{headers: this.headers}).map((res:Response) => res.json());
-    };
-
-    update(c: EmployeesContact) {
-        return this.http.put(this.serviceURL+'tercerosContactos',c ,{headers: this.headers}).map((res:Response) => res);
-    }
-
-    get(id: number) {
-        return this.http.get(this.serviceURL+'tercerosContactos/'+ id ,{headers: this.headers}).map((res:Response) => res.json() as EmployeesContact);
-    }
-
+   
+   getAll() {
+      return this.authHttp.get( this.serviceURL + 'tercerosContactos' ).map( ( res: Response ) => res.json() );
+   }
+   
+   getByEmployee( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'tercerosContactos/buscarTercero/' + id ).map( ( res: Response ) => res.json() as EmployeesContact[] );
+   }
+   
+   add( c: EmployeesContact ) {
+      return this.authHttp.post( this.serviceURL + 'tercerosContactos', c ).map( ( res: Response ) => res.json() );
+   };
+   
+   update( c: EmployeesContact ) {
+      return this.authHttp.put( this.serviceURL + 'tercerosContactos', c ).map( ( res: Response ) => res );
+   }
+   
+   get( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'tercerosContactos/' + id ).map( ( res: Response ) => res.json() as EmployeesContact );
+   }
+   
 }
