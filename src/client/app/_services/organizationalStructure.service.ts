@@ -1,61 +1,56 @@
 import { Injectable } from "@angular/core";
-import { Headers, Http, Response } from "@angular/http";
+import { Response } from "@angular/http";
 import "rxjs/add/operator/toPromise";
-import { AuthenticationService } from "./authentication.service";
 import { OrganizationalStructure } from "../_models/organizationalStructure";
+import { AuthHttp } from "angular2-jwt";
 
 @Injectable()
 export class OrganizationalStructureService {
-   
-   headers = new Headers( { 'Content-Type': 'application/json' } );
+
    private serviceURL = '<%= SVC_TH_URL %>/api/';
-   
-   constructor( private http: Http,
-                private authenticationService: AuthenticationService ) {
-      this.headers = new Headers( {
-         'Content-Type': 'application/json', 'Authorization': this.authenticationService.token
-      } );
+
+   constructor( private authHttp: AuthHttp ) {
    }
-   
+
    listOrganizationalStructure() {
-      return this.http.get( this.serviceURL+'estructuraOrganizacional', { headers: this.headers } ).map( ( res: Response ) => res.json() as OrganizationalStructure[] );
+      return this.authHttp.get( this.serviceURL + 'estructuraOrganizacional' ).map( ( res: Response ) => res.json() as OrganizationalStructure[] );
    }
-   
+
    getAllEnabled() {
-      return this.http.get( this.serviceURL+'estructuraOrganizacional/enabled', { headers: this.headers } ).map( ( res: Response ) => res.json() as OrganizationalStructure[] );
+      return this.authHttp.get( this.serviceURL + 'estructuraOrganizacional/enabled' ).map( ( res: Response ) => res.json() as OrganizationalStructure[] );
    }
-   
+
    addOrganizationalStructure( c: OrganizationalStructure ): Promise<OrganizationalStructure> {
-      return this.http.post( this.serviceURL+'estructuraOrganizacional', JSON.stringify( c ), { headers: this.headers } ).toPromise().then( res => res.json() as OrganizationalStructure ).catch( this.handleError );
+      return this.authHttp.post( this.serviceURL + 'estructuraOrganizacional', JSON.stringify( c ) ).toPromise().then( res => res.json() as OrganizationalStructure ).catch( this.handleError );
    };
-   
+
    updateOrganizationalStructure( c: OrganizationalStructure ): Promise<any> {
-      return this.http.put( this.serviceURL+'estructuraOrganizacional', JSON.stringify( c ), { headers: this.headers } ).toPromise().catch( this.handleError );
+      return this.authHttp.put( this.serviceURL + 'estructuraOrganizacional', JSON.stringify( c ) ).toPromise().catch( this.handleError );
    }
-   
+
    viewOrganizationalStructure( id: number ) {
-      return this.http.get( this.serviceURL+'estructuraOrganizacional/' + id, { headers: this.headers } ).map( res => res.json() as OrganizationalStructure );
+      return this.authHttp.get( this.serviceURL + 'estructuraOrganizacional/' + id ).map( res => res.json() as OrganizationalStructure );
    }
-   
+
    viewPadreOrganizationalStructure( id: number ) {
-      return this.http.get( this.serviceURL+'estructuraOrganizacional/' + "buscarPadre/" + id, { headers: this.headers } ).map( res => res.json() as OrganizationalStructure );
+      return this.authHttp.get( this.serviceURL + 'estructuraOrganizacional/' + "buscarPadre/" + id ).map( res => res.json() as OrganizationalStructure );
    }
-   
+
    handleError( error: any ): Promise<any> {
       console.error( 'Error:', error );
       return Promise.reject( error.message || error );
    }
 
    getCostTypes() {
-      return this.http.get( this.serviceURL+'centrosCostos/enabled', { headers: this.headers } ).map( ( res: Response ) => res.json()  );
+      return this.authHttp.get( this.serviceURL + 'centrosCostos/enabled' ).map( ( res: Response ) => res.json() );
    }
-   
+
    getAreaTypes() {
-      return this.http.get( this.serviceURL+'estructuraAreas/enabled', { headers: this.headers } ).map( ( res: Response ) => res.json()  );
+      return this.authHttp.get( this.serviceURL + 'estructuraAreas/enabled' ).map( ( res: Response ) => res.json() );
    }
-   
+
    getPhysicalTypes() {
-      return this.http.get( this.serviceURL+'estructuraFisica/enabled', { headers: this.headers } ).map( ( res: Response ) => res.json()  );
+      return this.authHttp.get( this.serviceURL + 'estructuraFisica/enabled' ).map( ( res: Response ) => res.json() );
    }
-   
+
 }
