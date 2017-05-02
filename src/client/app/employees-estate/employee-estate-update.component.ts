@@ -29,6 +29,9 @@ export class EmployeesEstateUpdateComponent {
   listClassEstate: SelectItem[] = [];
   listLocalizacion: SelectItem[] = [];
   msgs: Message[] = [];
+   year:Number;
+   anioValid: boolean = false;
+
 
   constructor(private employeesEstatesService: EmployeeEstateService,
               private listaService: ListaService,
@@ -41,6 +44,10 @@ export class EmployeesEstateUpdateComponent {
   }
 
   ngOnInit() {
+
+     let today = new Date();
+     let year = today.getFullYear();
+     this.year= year;
 
     this.route.params.switchMap((params: Params) => this.employeesEstatesService.getById(+params['id']))
       .subscribe(data => {
@@ -95,6 +102,27 @@ export class EmployeesEstateUpdateComponent {
     }
   }
 
+   inputNumberPisos() {
+      var piso = this.employeeEstate.numeroPisos + "";
+      if (this.employeeEstate.numeroPisos != null) {
+         this.employeeEstate.numeroPisos = Number(piso.replace(/[^0-9]/g, ''));
+      }
+   }
+
+   inputNumberSotanos() {
+      var sotano = this.employeeEstate.numeroSotanos + "";
+      if (this.employeeEstate.numeroSotanos != null) {
+         this.employeeEstate.numeroSotanos = Number(sotano.replace(/[^0-9]/g, ''));
+      }
+   }
+   anioValidate(){
+      var anio = this.employeeEstate.anioConstruccion;
+      if (anio> this.year){
+         this.anioValid=true;
+      }else{
+         this.anioValid=false;
+      }
+   }
   goBack(): void {
     this.confirmationService.confirm({
       message: ` ¿Esta seguro que desea salir sin guardar?`,
