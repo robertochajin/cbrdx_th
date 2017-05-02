@@ -2,6 +2,8 @@
 import { Http, Headers } from "@angular/http";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/toPromise";
+import { Subject }    from 'rxjs/Subject';
+import {toPromise} from "rxjs/operator/toPromise";
 import { tokenNotExpired } from "angular2-jwt";
 
 @Injectable()
@@ -9,6 +11,21 @@ export class AuthenticationService {
    public token: string;
    public headers = new Headers( { 'Content-Type': 'application/json' } );
    private masterService = '<%= SVC_TH_URL %>/auth';
+   
+   private missionAnnouncedSource = new Subject<string>();
+   private logoutAnnoucedSource = new Subject<string>();
+   
+   loginAnnounced$ = this.missionAnnouncedSource.asObservable();
+   logoutAnnounced$ = this.logoutAnnoucedSource.asObservable();
+   
+   announceLogin(mission: string) {
+      this.missionAnnouncedSource.next(mission);
+   }
+   
+   announceLogout(){
+      this.token = null;
+      this.logoutAnnoucedSource.next(null);
+   }
    
    constructor( private http: Http ) {
       // set token if saved in local storage
@@ -50,6 +67,7 @@ export class AuthenticationService {
          if ( token ) {
             this.token = token;
             localStorage.setItem( 'token', token );
+            this.announceLogin(token);
             return true;
          } else {
             return false;
@@ -63,5 +81,6 @@ export class AuthenticationService {
       // clear token remove user from local storage to log user out
       this.token = null;
       localStorage.removeItem( 'token' );
+      this.announceLogout();
    }
 }

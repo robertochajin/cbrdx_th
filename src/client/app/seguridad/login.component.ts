@@ -28,7 +28,9 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private appmain: AppComponent,
               private authenticationService: AuthenticationService) {
-    this.loginService.getSession();
+     authenticationService.token = null;
+     localStorage.removeItem('currentUser');
+     localStorage.removeItem('token');
   }
 
   ngOnInit(): void {
@@ -57,6 +59,7 @@ export class LoginComponent implements OnInit {
       this.authenticationService.login(this.model.username, this.model.password).then(res => {
         if (res) {
           this.user();
+           this.loginService.setSession(true);
         } else {
           this.intentos++;
           this.error = 'Usuario o Contraseña incorrecta';

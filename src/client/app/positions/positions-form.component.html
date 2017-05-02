@@ -502,7 +502,7 @@
                                  <div class="form-group col-md-8">
                                     <label for="salario">Salario al 100%</label>
                                     <input type="text" pInputText id="salario" name="salario"
-                                           [(ngModel)]="position.salario" #salario="ngModel"
+                                           [(ngModel)]="position.salario" #salario="ngModel" (keyup)="salario"
                                     />
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f14.submitted && !salario.valid">

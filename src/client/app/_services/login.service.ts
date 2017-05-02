@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class LoginService {
-    sessionStart:boolean = true;
+    sessionStart:boolean = false;
     constructor(private http: Http) {
     }
     getSession(){

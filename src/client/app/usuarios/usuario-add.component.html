@@ -7,7 +7,7 @@
                     <div class="ui-grid-col-3" style="text-align: center"><label>{{ 'LBL_TIPODOCUMENTO' | translate:param }}:</label>
                     </div>
                     <div class="ui-grid-col-3">
-                        <select [(ngModel)]="selectedTipo" id="idTipoDato" name="idTipoDato" class="form-control"
+                        <select [(ngModel)]="selectedTipo" id="idTipoDato" name="idTipoDato" class="form-control" (change)="terceroExiste=true"
                                 required #idTipoDato="ngModel">
                             <option *ngFor="let c of datatypeDetails" [ngValue]="c.idLista">
                                 {{c.codigo}} - {{c.nombre}}
@@ -41,43 +41,43 @@
         </p-fieldset>
 
         <p-fieldset legend="Datos Tercero" *ngIf="isTerceroSet">
-
-            <div class="col-md-3">
-                <div class="ui-grid-col-10">
+           <div>
+              <div class="col-md-3">
+                 <div class="ui-grid-col-10">
                     <img class="thumbnail img-responsive"
                          src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg ">
-                </div>
-            </div>
-
-            <div class="col-md-9">
-                <div class="ui-grid-col-6">
-                    <p>{{tercero.primerNombre}} {{tercero.segundoNombre}} {{tercero.primerApellido}}
-                        {{tercero.segundoApellido}}</p>
-                    <p>{{tercero.numeroDocumento}}</p>
-                </div>
-                <div class="ui-grid-col-6">
-                    <p></p>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="ui-grid-col-4">
-                    <label>Género :</label>
-                    <p>{{tercero.genero}}</p>
-                    <label>Ciudad :</label>
-                    <p>{{tercero.ciudadNacimiento}}</p>
-                </div>
-                <div class="ui-grid-col-4">
-                    <label>Estado civil :</label>
-                    <p>{{tercero.estadoCivil}}</p>
-                    
-                </div>
-            </div>
-            <div class="col-md-12" *ngIf="usuario.idUsuario">
-                <div class="pull-right">
+                 </div>
+              </div>
+              <div class="col-md-9">
+                 <div class="row">
+                    <div class="col-md-9 col-sm-9 col-xs-12"><strong><h3>{{tercero.primerNombre}}
+                       {{tercero.segundoNombre}} {{tercero.primerApellido}} {{tercero.segundoApellido}}</h3></strong>
+                    </div>
+                 </div>
+                 <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12 control-label">{{tercero.tipoDocumento}}:</div>
+                    <div class="col-md-3 col-sm-6 col-xs-12"><strong>{{tercero.numeroDocumento}}</strong></div>
+                 </div>
+                 <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12 control-label">Género:</div>
+                    <div class="col-md-3 col-sm-6 col-xs-12"><strong>{{tercero.genero}}</strong></div>
+                 </div>
+                 <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12 control-label">Ciudad:</div>
+                    <div class="col-md-9 col-sm-6 col-xs-12"><strong>{{tercero.ciudadNacimiento}}</strong></div>
+                 </div>
+                 <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12 control-label">Estado civil:</div>
+                    <div class="col-md-3 col-sm-6 col-xs-12"><strong>{{tercero.estadoCivil}}</strong></div>
+                 </div>
+              </div>
+              <div class="col-md-12" *ngIf="usuario.idUsuario">
+                 <div class="pull-right">
                     <label>Editar información de Tercero </label>
-                    <button   pButton type="button" icon="glyphicon-pencil" iconPos="right" label="Editar"></button>
-                </div>
-            </div>
+                    <button pButton type="button" icon="glyphicon-pencil" iconPos="right" label="Editar"></button>
+                 </div>
+              </div>
+           </div>
         </p-fieldset>
 
         <p-fieldset legend="Información Contacto" *ngIf="isTerceroSet">

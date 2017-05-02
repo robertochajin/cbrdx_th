@@ -26,7 +26,6 @@ import { AuthenticationService } from "./_services/authentication.service";
   providers: [FormBuilder]
 })
 export class AppComponent implements AfterViewInit, AfterViewChecked {
-   
   sessionStart: boolean;
    msgs: Message[] = [];
    msgAdd: Message;
@@ -40,6 +39,10 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
      
     this.sessionStart = authenticationService.loggedIn();
     //console.log('Environment config', Config);
+
+      //authService.loginAnnounced$.subscribe(token => (token) ? this.setSession(true):'');
+      //authService.logoutAnnounced$.subscribe(token => (token == null) ? this.setSession(false):'');
+
     translate.setDefaultLang('es');
     translate.use('es');
      this.msgAdd = ({ severity: 'info', summary: 'Exito', detail: 'Registro agregado correctamente.' });
@@ -49,10 +52,9 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   }
 
   ngAfterViewInit() {
-     /*this.showMessage(this.msg1);
-     this.showMessage(this.msg2);*/
-     // Add script theme
-     jQuery.getScript('assets/js/app.js', function () {});
+
+    // Add script theme
+    jQuery.getScript('assets/js/app.js', function () {});
 
   }
 
