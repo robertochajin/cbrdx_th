@@ -10,7 +10,7 @@
       </div>
     </div>
 </div>
-<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUNDUSERS' | translate:param }}"  [value]="usuarios" [paginator]="true" [rows]="10" [responsive]="true">
+<p-dataTable emptyMessage="{{ 'USUARIOS.MSG_NORECORDSFOUNDUSERS' | translate:param }}"  [value]="usuarios" [paginator]="true" [rows]="10" [responsive]="true">
     <p-column field="idUsuario" header="{{ 'LBL_ID' | translate:param }}" [sortable]="true"></p-column>
     <p-column field="nombre" header="{{ 'LBL_NOMBRE' | translate:param }}" [sortable]="true"></p-column>
     <p-column field="documento" header="{{ 'LBL_NUMERODOCUMENTO' | translate:param }}" [sortable]="true"></p-column>
