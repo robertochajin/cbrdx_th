@@ -470,6 +470,11 @@ a.cancelar:hover {
 .datatable-header-search i {
     margin: 4px 4px 0 0;
 }
+@media (min-width: 768px){
+   .datatable-header-search {
+      margin-top: 10px;
+   }
+}
 
 .datatable-col-action {
     text-align: center;
