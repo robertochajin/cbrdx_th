@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Employee } from '../_models/employees';
-import {AuthenticationService} from "./authentication.service";
+import { AuthHttp } from 'angular2-jwt';
+
 @Injectable()
 export class EmployeesService {
 
@@ -9,52 +10,48 @@ export class EmployeesService {
   private serviceURL = '<%= SVC_TH_URL %>/api/';
   private serviceURLTerceros = '<%= SVC_TH_URL %>/tercerosCargos/';
 
-    headers = new Headers({'Content-Type': 'application/json'});
-   
-   constructor(private http: Http,
-               private authenticationService: AuthenticationService
+   constructor(private authHttp: AuthHttp
    ) {
-      this.headers = new Headers({'Content-Type': 'application/json', 'Authorization': this.authenticationService.token});
    }
 
     getAll()  {
-        return this.http.get(this.serviceURL+'vterceros' ,{headers: this.headers}).map((res:Response) => res.json() as Employee[]);
+        return this.authHttp.get(this.serviceURL+'vterceros').map((res:Response) => res.json() as Employee[]);
     }
     getByTipo(type:string)  {
-        return this.http.get(this.serviceURL+'vterceros/buscarTerceros/'+type+"/" ,{headers: this.headers}).map((res:Response) => res.json());
+        return this.authHttp.get(this.serviceURL+'vterceros/buscarTerceros/'+type+"/").map((res:Response) => res.json());
     }
 
     getTerColWithoutPosition(query:string)  {
-        return this.http.get(this.serviceURL+'vterceros/asignarColaborador/'+query.trim()+'/' ,{headers: this.headers}).map((res:Response) => res.json());
+        return this.authHttp.get(this.serviceURL+'vterceros/asignarColaborador/'+query.trim()+'/').map((res:Response) => res.json());
     }
 
     add(c: Employee) {
-        return this.http.post(this.serviceURL+'terceros',c ,{headers: this.headers}).map((res:Response) => res.json());
+        return this.authHttp.post(this.serviceURL+'terceros',c).map((res:Response) => res.json());
     };
 
     update(c: Employee) {
-        return this.http.put(this.serviceURL+'terceros',c ,{headers: this.headers}).map((res:Response) => res);
+        return this.authHttp.put(this.serviceURL+'terceros',c).map((res:Response) => res);
     }
 
     get(id: number) {
-        return this.http.get(this.serviceURL+'vterceros/'+ id ,{headers: this.headers}).map((res:Response) => res.json() as Employee);
+        return this.authHttp.get(this.serviceURL+'vterceros/'+ id).map((res:Response) => res.json() as Employee);
     }
 
     getNacionalidad(id: number) {
-        return this.http.get(this.serviceURL+'/vista/'+ id ,{headers: this.headers}).map((res:Response) => res.json());
+        return this.authHttp.get(this.serviceURL+'/vista/'+ id).map((res:Response) => res.json());
     }
 
     getCargoActual(id: number) {
-        return this.http.get(this.serviceURLTerceros+'/tercerosCargos/'+ id ,{headers: this.headers}).map((res:Response) => res.json());
+        return this.authHttp.get(this.serviceURLTerceros+'/tercerosCargos/'+ id).map((res:Response) => res.json());
     }
 
     delete(c: Employee) {
-        const respuesta =  this.http.delete(this.serviceURL+'/'+ c.idTercero ,{headers: this.headers});
+        const respuesta =  this.authHttp.delete(this.serviceURL+'/'+ c.idTercero);
         return respuesta.map((res:Response) => res.json());
     }
   
     validateDocument(numeroDocumento: string, idTipoDocumento: number) {
-      return this.http.get(this.serviceURL+'terceros/'+ numeroDocumento+'/'+ idTipoDocumento+'/' ,{headers: this.headers}).map((res:Response) => res.json() as Employee);
+      return this.authHttp.get(this.serviceURL+'terceros/'+ numeroDocumento+'/'+ idTipoDocumento+'/').map((res:Response) => res.json() as Employee);
       
       /*.map((res:Response) => {
          //if (res.text() != '') {

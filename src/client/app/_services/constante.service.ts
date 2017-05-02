@@ -1,40 +1,36 @@
-import {Injectable} from "@angular/core";
-import {Headers, Http, Response} from "@angular/http";
-import {VConstante} from "../_models/vConstante";
-import {Constante} from "../_models/constante";
+import { Injectable } from "@angular/core";
+import { Response } from "@angular/http";
+import { VConstante } from "../_models/vConstante";
+import { Constante } from "../_models/constante";
 import "rxjs/add/operator/toPromise";
-import {AuthenticationService} from "./authentication.service";
+import { AuthHttp } from "angular2-jwt";
 
 @Injectable()
 export class ConstanteService {
-
-    headers = new Headers({'Content-Type': 'application/json'});
-    private serviceURL = '<%= SVC_TH_URL %>/api/';
-
-    constructor(private http: Http,
-                private authenticationService: AuthenticationService
-    ) {
-        this.headers = new Headers({'Content-Type': 'application/json', 'Authorization': this.authenticationService.token});
-    }
-
-    listConstants() {
-        return this.http.get(this.serviceURL + "constantes/",{headers: this.headers}).map((res: Response) => res.json() as VConstante[]);
-    }
-
-    addConstant(c: Constante): Promise<Constante> {
-        return this.http.post(this.serviceURL+ "constantes/", JSON.stringify(c), {headers: this.headers}).toPromise().then(res => res.json() as Constante).catch(this.handleError);
-    };
-
-    updateConstant(c: Constante): Promise<any> {
-        return this.http.put(this.serviceURL+ "constantes/", JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
-    }
-
-    viewConstant(id: number) {
-        return this.http.get(this.serviceURL+ "constantes/" + id,{headers: this.headers}).map(res => res.json() as Constante);
-    }
-
-    handleError(error: any): Promise<any> {
-        console.error('Error:', error);
-        return Promise.reject(error.message || error);
-    }
+   
+   private serviceURL = '<%= SVC_TH_URL %>/api/';
+   
+   constructor( private authHttp: AuthHttp ) {
+   }
+   
+   listConstants() {
+      return this.authHttp.get( this.serviceURL + "constantes/" ).map( ( res: Response ) => res.json() as VConstante[] );
+   }
+   
+   addConstant( c: Constante ): Promise<Constante> {
+      return this.authHttp.post( this.serviceURL + "constantes/", JSON.stringify( c ) ).toPromise().then( res => res.json() as Constante ).catch( this.handleError );
+   };
+   
+   updateConstant( c: Constante ): Promise<any> {
+      return this.authHttp.put( this.serviceURL + "constantes/", JSON.stringify( c ) ).toPromise().catch( this.handleError );
+   }
+   
+   viewConstant( id: number ) {
+      return this.authHttp.get( this.serviceURL + "constantes/" + id ).map( res => res.json() as Constante );
+   }
+   
+   handleError( error: any ): Promise<any> {
+      console.error( 'Error:', error );
+      return Promise.reject( error.message || error );
+   }
 }
