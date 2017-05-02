@@ -8,6 +8,7 @@ import {EmployeeEstateService} from '../_services/employee-estate.service';
 import {ListEmployeesService}     from '../_services/lists-employees.service';
 import {LocationService}     from '../_services/employee-location.service';
 import * as moment from 'moment/moment';
+import {NavService} from '../_services/_nav.service';
 import {ListaService} from "../_services/lista.service";
 import {ListaItem} from "../_models/listaItem";
 
@@ -39,7 +40,9 @@ export class EmployeesEstateUpdateComponent {
               private route: ActivatedRoute,
               private location: Location,
               private listEmployeesService: ListEmployeesService,
-              private confirmationService: ConfirmationService) {
+              private confirmationService: ConfirmationService,
+              private _nav: NavService
+  ) {
 
   }
 
@@ -129,7 +132,9 @@ export class EmployeesEstateUpdateComponent {
       header: 'Corfirmación',
       icon: 'fa fa-question-circle',
       accept: () => {
-        this.router.navigate(['/employees-estate']);
+        // this.router.navigate(['/employees-estate']);
+         this._nav.setTab(5);
+         this.location.back();
       }
     });
   }
