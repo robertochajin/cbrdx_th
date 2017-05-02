@@ -13,6 +13,7 @@ import './operators';
 import {LoginService} from "./_services/login.service";
 import {TranslateService} from 'ng2-translate';
 import 'moment/locale/es';
+import {AuthenticationService} from "./_services/authentication.service";
 /**
  * This class represents the main application component.
  */
@@ -24,12 +25,14 @@ import 'moment/locale/es';
 })
 export class AppComponent implements AfterViewInit, AfterViewChecked {
   sessionStart: boolean;
-
   constructor(private loginService: LoginService,
               private translate: TranslateService,
+              private authService: AuthenticationService,
               private formBuilder: FormBuilder) {
-    this.sessionStart = loginService.getSession();
-    //console.log('Environment config', Config);
+
+      authService.loginAnnounced$.subscribe(token => (token) ? this.setSession(true):'');
+      authService.logoutAnnounced$.subscribe(token => (token == null) ? this.setSession(false):'');
+
     translate.setDefaultLang('es');
     translate.use('es');
   }
@@ -38,7 +41,6 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
     // Add script theme
     jQuery.getScript('assets/js/app.js', function () {});
-
   }
 
   ngAfterViewChecked() {

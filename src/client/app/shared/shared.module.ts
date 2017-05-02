@@ -10,6 +10,7 @@ import {BreadcrumbComponent} from './breadcrumb/breadcrumb.component';
 import {TranslateService, TranslateModule} from 'ng2-translate';
 
 import {WindowRefService} from '../_services/window-ref.service';
+import {AuthenticationService} from "../_services/authentication.service";
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -19,7 +20,8 @@ import {WindowRefService} from '../_services/window-ref.service';
    imports: [CommonModule, RouterModule, TranslateModule],
    declarations: [ToolbarComponent, NavbarComponent, BreadcrumbComponent],
    exports: [ToolbarComponent, NavbarComponent, BreadcrumbComponent,
-      CommonModule, FormsModule, RouterModule, TranslateModule]
+      CommonModule, FormsModule, RouterModule, TranslateModule],
+   providers: [AuthenticationService]
 })
 export class SharedModule {
 

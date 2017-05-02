@@ -47,7 +47,11 @@ export class MenuManagerService {
    }
    
    getMenusSession( ) {
-      return this.http.get( this.serviceURL+'menus/idPadreDifCero/', { headers: this.headers } ).map( ( res: Response ) => res.json() as MenuManager[] );
+      console.log('MenuService: ',this.headers.get('Authorization'));
+       let headers = new Headers( {
+         'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')
+      } );
+      return this.http.get( this.serviceURL+'menus/rol', { headers: headers } ).map( ( res: Response ) => res.json() as MenuManager[] );
    }
    
    
