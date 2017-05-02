@@ -14,6 +14,7 @@ import {LoginService} from "./_services/login.service";
 import {TranslateService} from 'ng2-translate';
 import 'moment/locale/es';
 import { Message } from "primeng/primeng";
+import { AuthenticationService } from "./_services/authentication.service";
 
 /**
  * This class represents the main application component.
@@ -34,8 +35,10 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
   constructor(private loginService: LoginService,
               private translate: TranslateService,
+              private authenticationService: AuthenticationService,
               private formBuilder: FormBuilder) {
-    this.sessionStart = loginService.getSession();
+     
+    this.sessionStart = authenticationService.loggedIn();
     //console.log('Environment config', Config);
     translate.setDefaultLang('es');
     translate.use('es');
