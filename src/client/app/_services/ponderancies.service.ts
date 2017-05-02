@@ -1,27 +1,25 @@
-import {Injectable} from '@angular/core';
-import {Http, Response, Headers} from '@angular/http';
-import {AuthenticationService} from "./authentication.service";
-import {Ponderancies} from "../_models/ponderancies";
-import {Observable} from "rxjs/Rx";
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
+import { Ponderancies } from "../_models/ponderancies";
+import { Observable } from "rxjs/Rx";
+import { AuthHttp } from "angular2-jwt";
 
 @Injectable()
 export class PonderanciesServices {
 
-  public headers = new Headers({'Content-Type': 'application/json'});
-  private masterService = '<%= SVC_TH_URL %>/api/ponderaciones/';
-  private detailService = '<%= SVC_TH_URL %>/api/ponderaciones/';
+   private masterService = '<%= SVC_TH_URL %>/api/ponderaciones/';
+   private detailService = '<%= SVC_TH_URL %>/api/ponderaciones/';
 
-  constructor(private http: Http, private authenticationService: AuthenticationService) {
-    this.headers = new Headers({'Content-Type': 'application/json', 'Authorization': this.authenticationService.token});
-  }
+   constructor( private authHttp: AuthHttp ) {
+   }
 
-  getAllEnabled(): Observable<Ponderancies[]> {
-    return this.http.get(this.masterService + 'enabled/', { headers: this.headers }).map((res: Response) => res.json() as Ponderancies[]);
-  }
+   getAllEnabled(): Observable<Ponderancies[]> {
+      return this.authHttp.get( this.masterService + 'enabled/' ).map( ( res: Response ) => res.json() as Ponderancies[] );
+   }
 
-  getAllEnabledByPosition(idPosition: number): Observable<Ponderancies[]> {
-    return this.http.get(this.masterService + 'noAsignadas/'+idPosition, { headers: this.headers }).map((res: Response) => res.json() as Ponderancies[]);
-  }
+   getAllEnabledByPosition( idPosition: number ): Observable<Ponderancies[]> {
+      return this.authHttp.get( this.masterService + 'noAsignadas/' + idPosition ).map( ( res: Response ) => res.json() as Ponderancies[] );
+   }
 
 }
 
