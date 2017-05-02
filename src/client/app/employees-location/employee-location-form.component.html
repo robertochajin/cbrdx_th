@@ -2,8 +2,8 @@
 <p-messages [value]="msgs"></p-messages>
 <p-confirmDialog width="400" #cd>
   <p-footer>
-    <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
-    <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+    <button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate:param }}" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate:param }}" (click)="cd.accept()"></button>
   </p-footer>
 </p-confirmDialog>
 <div *ngIf="localizacion">
@@ -23,7 +23,7 @@
           <p-dropdown id="tipoDireccionLabel" name="tipoDireccionLabel" [options]="addressTypeList" [autoWidth]="false"
                       required [(ngModel)]="selectedAddressType" #eltipoDireccion="ngModel"></p-dropdown>
           <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !eltipoDireccion.valid">
-            <i class="fa fa-close"></i> Tipo de Dirección es requerido
+            <i class="fa fa-close"></i> {{'UBICACION.LBL_TIPODIRECCION' | translate:param }}
           </div>
         </div>
         <div class="ui-grid-col-8">
@@ -34,18 +34,18 @@
                           (completeMethod)="hoodSearch($event)" (onSelect)="captureHoodId($event)">
           </p-autoComplete>
           <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !barrio.valid">
-            <i class="fa fa-close"></i> Barrio es requerida
+            <i class="fa fa-close"></i> {{'UBICACION.LBL_BARRIO' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
           </div>
         </div>
       </div>
 
       <div class="ui-grid-row">
         <div class="ui-grid-col-4">
-          <label for="ppal">Nomenclatura principal</label>
+          <label for="ppal">{{'UBICACION.LBL_NOMENCLATURAPRINCIPAL' | translate:param }}</label>
           <p-dropdown [options]="principalNomenclatureList" id="ppal" name="ppal" #elppal="ngModel" [autoWidth]="false"
                       [(ngModel)]="selectedPrincipalNomenclature" required="true"></p-dropdown>
           <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !elppal.valid">
-            <i class="fa fa-close"></i> Nomenclatura principal es requerido
+            <i class="fa fa-close"></i> {{'UBICACION.LBL_NOMENCLATURAPRINCIPAL' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
           </div>
         </div>
         <div class="ui-grid-col-3">
@@ -54,7 +54,7 @@
                  (change)="composeAddress()" [(ngModel)]="principalNomenclature"
                  #pncl="ngModel" required="true"/>
           <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !pncl.valid">
-            <i class="fa fa-close"></i> Campo requerido
+            <i class="fa fa-close"></i> {{'LBL_CAMPO' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
           </div>
         </div>
         <div class="ui-grid-col-3">
@@ -73,7 +73,7 @@
 
       <div class="ui-grid-row" *ngFor="let cpml of complementaries; let i = index">
           <div class="ui-grid-col-4">
-            <label for="cpl{{i}}">Nomenclatura complementaria</label>
+            <label for="cpl{{i}}">{{'UBICACION.LBL_NOMENCLATURACOMPLEMENTARIA' | translate:param }}</label>
             <p-dropdown [options]="complementaryNomenclatureList" id="cpl{{i}}" name="cpl{{i}}" [autoWidth]="false"
                         (onChange)="composeAddress()"
                         [(ngModel)]="cpml.tipo"></p-dropdown>
@@ -94,7 +94,7 @@
         <div class="ui-grid-col-6 ">
           <div class="ui-grid-row">
             <div class="ui-grid-col-12">
-              <label for="comollegar">Cómo llegar</label>
+              <label for="comollegar">{{'UBICACION.LBL_COMOLLEGAR' | translate:param }}</label>
               <input pInputText type="text" id="comollegar" name="comollegar" [(ngModel)]="localizacion.comoLlegar"
                      #comoLlegar="ngModel"
               />
@@ -102,14 +102,14 @@
           </div>
           <div class="ui-grid-row">
             <div class="ui-grid-col-12">
-              <label for="direccion">Dirección</label>
+              <label for="direccion">{{'UBICACION.LBL_DIRECCION' | translate:param }}</label>
               <textarea id="direccion" name="direccion" pInputTextarea rows="5" disabled="true"
                         [(ngModel)]="finalAddress"></textarea>
             </div>
           </div>
           <div class="ui-grid-row">
             <div class="ui-grid-col-12">
-              <label for="latitud">Latitud</label>
+              <label for="latitud">{{'UBICACION.LBL_LATITUD' | translate:param }}</label>
               <input type="text" pInputText id="latitud" name="latitud" [(ngModel)]="localizacion.latitud"
                      #latitud="ngModel" disabled
               />
@@ -117,7 +117,7 @@
           </div>
           <div class="ui-grid-row">
             <div class="ui-grid-col-12">
-              <label for="longitud">Longitud</label>
+              <label for="longitud">{{'UBICACION.LBL_LONGITUD' | translate:param }}</label>
               <input type="text" pInputText id="longitud" name="longitud" [(ngModel)]="localizacion.longitud"
                      #longitud="ngModel" disabled/>
             </div>
