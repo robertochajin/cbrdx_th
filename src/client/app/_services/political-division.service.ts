@@ -13,22 +13,22 @@ export class PoliticalDivisionService {
    }
 
    getHoodsByWildCard( qr: any ) {
-      return this.authHttp.get( this.masterService + 'buscarLocalizaciones/' + qr + '/', { headers: this.headers } )
+      return this.authHttp.get( this.masterService + 'buscarLocalizaciones/' + qr + '/')
          .map( ( res: Response ) => res.json() );
    }
 
    getAllCities( qr: any ) {
-      return this.authHttp.get( this.masterService + 'buscarCiudad/' + qr + '/', { headers: this.headers } )
+      return this.authHttp.get( this.masterService + 'buscarCiudad/' + qr + '/')
          .map( ( res: Response ) => res.json() );
    }
 
    getById( id: number ) {
-      return this.authHttp.get( this.masterService + 'buscarId/' + id, { headers: this.headers } )
+      return this.authHttp.get( this.masterService + 'buscarId/' + id)
          .map( ( res: Response ) => res.json() as DivisionPolitica );
    }
 
    getLocation( id: number ) {
-      return this.authHttp.get( this.masterService + 'buscarLocalizacion/' + id, { headers: this.headers } )
+      return this.authHttp.get( this.masterService + 'buscarLocalizacion/' + id)
          .map( ( res: Response ) => res.json() );
    }
 }
