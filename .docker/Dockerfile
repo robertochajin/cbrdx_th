@@ -7,7 +7,7 @@
 #RUN powershell.exe 'wget -Uri https://nodejs.org/dist/v%NODE_VERSION%/node-v%NODE_VERSION%-x64.msi -OutFile node.msi -UseBasicParsing'
 #RUN msiexec.exe /q /i node-v6.10.3-x64.msi
 
-FROM microsoft/windowsservercore AS download
+FROM microsoft/windowsservercore
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
@@ -46,7 +46,7 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 
 ENV NPM_CONFIG_LOGLEVEL info
 
-COPY --from=download /nodejs /nodejs
+COPY --from=microsoft/windowsservercore /nodejs /nodejs
 
 RUN New-Item $($env:APPDATA + '\npm') ; \
     $env:PATH = 'C:\nodejs;{0}\npm;{1}' -f $env:APPDATA, $env:PATH ; \
