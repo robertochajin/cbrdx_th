@@ -74,7 +74,7 @@ export class PositionsAddComponent {
    
    onSubmit0() {
       this.msgs = [];
-      this.position.idEstado = this.defaultState.idListaEstadoCargo;
+      this.position.idEstado = this.defaultState.idLista;
       this.position.paso = 2;
       //console.info( this.position);
       this.positionsService.add( this.position )
