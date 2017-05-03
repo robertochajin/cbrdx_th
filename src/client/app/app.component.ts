@@ -15,6 +15,7 @@ import {TranslateService} from 'ng2-translate';
 import 'moment/locale/es';
 import { Message } from "primeng/primeng";
 import { AuthenticationService } from "./_services/authentication.service";
+import { NavService } from "./_services/_nav.service";
 
 /**
  * This class represents the main application component.
@@ -35,7 +36,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   constructor(private loginService: LoginService,
               private translate: TranslateService,
               private authenticationService: AuthenticationService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private navService:NavService) {
      
     this.sessionStart = authenticationService.loggedIn();
     //console.log('Environment config', Config);
@@ -49,6 +51,12 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
      this.msgUpdate = ({ severity: 'info', summary: 'Exito', detail: 'Registro actualizado correctamente.' });
      this.msgError = ({ severity: 'error', summary: 'Error', detail: 'Error al guardar / Intente nuevamente.' });
      
+        navService.getMessage$.subscribe(
+           msgs => {
+              this.resetMessage();
+              this.msgs.push(msgs);
+              window.setTimeout(this.resetMessage, 60000);
+        });
   }
 
   ngAfterViewInit() {
