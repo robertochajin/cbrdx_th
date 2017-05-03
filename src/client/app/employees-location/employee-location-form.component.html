@@ -132,7 +132,7 @@
       <div class="ui-grid-row">
         <div class="ui-grid-col-6">
 
-          <label for="reside">Reside en esta ubicación?</label>
+          <label for="reside">{{'UBICACION.LBL_RESIDE' | translate:param }}</label>
           <p-checkbox id="reside"  name="reside" #reside="ngModel"
                       [(ngModel)]="residencia.indicadorHabilitado" binary="true"></p-checkbox>
         </div>
@@ -140,7 +140,7 @@
 
       <div class="ui-grid-row" *ngIf="residencia.indicadorHabilitado" >
         <div class="ui-grid-col-6">
-          <label for="idTipoVivienda">Tipo Inmueble</label>
+          <label for="idTipoVivienda">{{'EMPLOYEES.LBL_TIPOINMUEBLE' | translate:param }}</label>
           <p-dropdown id="idTipoVivienda" name="idTipoVivienda" [required]="residencia.indicadorHabilitado"
                       [options]="listTypeEstate" [autoWidth]="false"
                       [(ngModel)]="residencia.idTipoVivienda"
@@ -149,11 +149,11 @@
           <div class="ui-message ui-messages-error ui-corner-all"
                *ngIf="l.submitted && !idTipoVivienda.valid">
             <i class="fa fa-close"></i>
-            Tipo inmueble requerido
+            {{'EMPLOYEES.LBL_TIPOINMUEBLE' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
           </div>
         </div>
         <div class="ui-grid-col-6">
-          <label for="idClaseVivienda">La Vivenda es?</label>
+          <label for="idClaseVivienda">{{'EMPLOYEES.LBL_VIVIENDA' | translate:param }}</label>
           <p-dropdown id="idClaseVivienda" name="idClaseVivienda" [required]="residencia.indicadorHabilitado"
                       [options]="listClassEstate" [autoWidth]="false"
                       [(ngModel)]="residencia.idClasesViviendas"
@@ -162,14 +162,14 @@
           <div class="ui-message ui-messages-error ui-corner-all"
                *ngIf="l.submitted && !idClaseVivienda.valid">
             <i class="fa fa-close"></i>
-            Clase vivienda requerida
+            {{'EMPLOYEES.LBL_CLASEVIVIENDA' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
           </div>
         </div>
       </div>
 
       <div class="ui-grid-row" *ngIf="residencia.indicadorHabilitado">
         <div class="ui-grid-col-6">
-          <label for="idTipoConstruccionVivienda">Tipo Contrucción</label>
+          <label for="idTipoConstruccionVivienda">{{'EMPLOYEES.LBL_TIPOCONSTRUCCION' | translate:param }}</label>
           <p-dropdown id="idTipoConstruccionVivienda" name="idTipoConstruccionVivienda" [required]="residencia.indicadorHabilitado"
                       [options]="listTypeConstruction" [autoWidth]="false"
                       [(ngModel)]="residencia.idTipoConstruccionVivienda"
@@ -178,11 +178,11 @@
           <div class="ui-message ui-messages-error ui-corner-all"
                *ngIf="l.submitted && !idTipoConstruccionVivienda.valid">
             <i class="fa fa-close"></i>
-            Tipo construcción requerido
+            {{'EMPLOYEES.LBL_TIPOCONSTRUCCION' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
           </div>
         </div>
         <div class="ui-grid-col-6">
-          <label for="idEstrato">Estrato</label>
+          <label for="idEstrato">{{'EMPLOYEES.LBL_ESTRATO' | translate:param }}</label>
           <p-dropdown id="idEstrato" name="idEstrato" [required]="residencia.indicadorHabilitado"
                       [options]="listStratum" [autoWidth]="false"
                       [(ngModel)]="residencia.idEstrato"
@@ -191,7 +191,7 @@
           <div class="ui-message ui-messages-error ui-corner-all"
                *ngIf="l.submitted && !idEstrato.valid">
             <i class="fa fa-close"></i>
-            Estrato requerido
+            {{'EMPLOYEES.LBL_ESTRATO' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
           </div>
         </div>
       </div>
@@ -199,10 +199,10 @@
       <div class="ui-grid-row form-footer-buttons">
         <div class="ui-grid-col-4"></div>
         <div class="ui-grid-col-1">
-          <a (click)="goBack()" class="cancelar">Cancelar</a>
+          <a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate:param }}</a>
         </div>
         <div class="ui-grid-col-2">
-          <button pButton icon="fa-plus" label="Guardar" type="submit"></button>
+          <button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate:param }}" type="submit"></button>
         </div>
         <div class="ui-grid-col-5"></div>
       </div>

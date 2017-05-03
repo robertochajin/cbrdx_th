@@ -36,6 +36,7 @@
   "LBL_TIPODOCUMENTO":"Tipo Documento ",
   "LBL_NUMERODOCUMENTO":"Número de Documento",
   "LBL_CIUDAD":"Ciudad",
+  "LBL_MUNICIPIO":"Municipio",
   "LBL_ANTERIOR":"Anterior",
   "LBL_DE":"de",
   "LBL_EPS":"Eps",
@@ -113,7 +114,9 @@
 
   "UBICACION":{
       "LBL_UBICACION":"Ubicación",
+      "LBL_UBICACIONES":"Ubicaciones",
       "LBL_DIRECCION":"Dirección",
+      "LBL_TIPODIRECCION":"Tipo Dirección",
       "LBL_COMOLEGAR":"Cómo Llegar",
       "LBL_BARRIO":"Barrio",
       "LBL_TIPODIRECCION":"Tipo de Dirección",
@@ -124,7 +127,9 @@
       "LBL_LATITUD":"Latitud",
       "LBL_LONGITUD":"Longitud",
       "LBL_COMOLLEGAR":"Cómo Llegar",
+      "LBL_RESIDE":"Reside en esta Ubicación?",
       "LBL_CELULAR":"Celular"
+
     },
 
   "INICIO_FORMACIONACADEMICA":"==============================================================",
@@ -195,6 +200,7 @@
     "LBL_AREAESTUDIOS":"Área de Estudio",
     "LBL_CIUDADEXPEDICION":"Ciudad Expedición",
     "LBL_CIUDADNACIMIENTO":"Ciudad de Nacimiento",
+    "LBL_CLASEVIVIENDA":"Clase Vivienda",
     "LBL_COBERTURASALUD":"Cobertura Salud",
     "LBL_COLABORADOR":"Colaborador",
     "LBL_COLABORADORES":"Colaboradores",
@@ -212,6 +218,7 @@
     "LBL_EDAD":"Edad",
     "LBL_EDUCACION":"Educación Formal",
     "LBL_EDUCACIONNOFORMAL":"Educación no Formal",
+    "LBL_EMPRESA":"Empresa",
     "LBL_ESTADOCIVIL":"Estado Civil",
     "LBL_ESTADOS":"Estado de Estudios",
     "LBL_ESTATURA":"Estatura (CM)",
@@ -245,6 +252,7 @@
     "LBL_NATURALEZA":"Naturaleza",
     "LBL_NIVELESTUDIOS":"Nivel de Estudio",
     "LBL_NOMBRECONTACTO":"Nombre Contácto",
+    "LBL_NOMBREEMPRESA":"Nombre Empresa",
     "LBL_NOVEDADES":"Novedades",
     "LBL_NUEVOCOLABORADOR":"Nuevo Colaborador",
     "LBL_NUEVOCONTACTO":"Nuevo Contacto",
@@ -282,6 +290,7 @@
     "LBL_TIPOINMUEBLE":"Tipo Inmueble",
     "LBL_TIPOINMUEBLEES":"Tipo Inmueble es",
     "LBL_TIPOOCUPACION":"Tipo de Ocupación",
+    "LBL_TIPOREFERENCIA":"Tipo de Referencia",
     "LBL_TITULO":"Título Estudio",
     "LBL_TITULOOBTENIDO":"Título Obtenido",
     "LBL_VIVIENDA":"La Vivienda es",
