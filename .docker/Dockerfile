@@ -31,8 +31,6 @@ RUN mkdir 'C:\app'
 ENV HOME=C:\app
 WORKDIR $HOME
 
-RUN mkdir 'th-app'
-
 ENV APP_NAME=th-app
 
 COPY . $HOME/$APP_NAME/
