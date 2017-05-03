@@ -7,12 +7,16 @@
               *ngIf="btnsubactivity.show"></button>
    </div>
    <div class="col-md-6 col-xs-12 datatable-header-search">
-      <p-autoComplete placeholder="Buscar..." field="label" name="buscar" id="buscar" #buscar="ngModel"
-                      [(ngModel)]="selectedSearch"
-                      [suggestions]="resultSearch"
-                      (completeMethod)="search($event)"
-                      (onSelect)="captureId($event)">
-      </p-autoComplete>
+      <div class="input-group">
+         <div class="input-group-addon"><i class="fa fa-search"></i></div>
+         <p-autoComplete placeholder="Buscar..." field="label" name="buscar" id="buscar" #buscar="ngModel"
+                         [(ngModel)]="selectedSearch"
+                         [suggestions]="resultSearch"
+                         (completeMethod)="search($event)"
+                         (onSelect)="captureId($event)">
+         </p-autoComplete>
+      </div>
+
    </div>
 </div>
 <div class="ui-grid-row">

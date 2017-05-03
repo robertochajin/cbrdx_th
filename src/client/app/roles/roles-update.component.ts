@@ -4,7 +4,6 @@ import { Rol } from "../_models/rol";
 import { RolesService } from "../_services/roles.service";
 import { Router,ActivatedRoute, Params } from "@angular/router";
 import { VRolMenuElemento } from "../_models/vRolMenuElemento";
-import { MenuElementoService } from "../_services/menuElemento.service";
 import { MenuElemento } from "../_models/menuElemento";
 import {ConfirmationService, Message} from "primeng/primeng";
 import * as moment from "moment/moment";
@@ -37,7 +36,6 @@ export class RolesUpdateComponent {
    constructor( private rolesService: RolesService,
                 private router: Router,
                 private route: ActivatedRoute,
-                private menuElementoService: MenuElementoService,
                 private location: Location,
                 private confirmationService: ConfirmationService ) {
       rolesService.listRoles().subscribe( res => {

@@ -1,6 +1,3 @@
-/**
- * Created by Felipe Aguirre - Jenniferth Escobar on 03/02/2017.
- */
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {Ocupaciones} from "../_models/ocupaciones";
@@ -9,6 +6,7 @@ import {OcupacionesService} from "../_services/ocupaciones.service";
 import {TreeNode, SelectItem} from "primeng/components/common/api";
 import {Message} from "primeng/primeng";
 import {Search} from "../_models/search";
+import { AppComponent } from "../app.component";
 
 @Component({
     moduleId: module.id,
@@ -16,7 +14,7 @@ import {Search} from "../_models/search";
     selector: 'ocupaciones'
 })
 export class OcupacionesComponent implements OnInit {
-    msgs: Message[] = [];
+    msg: Message;
     ocupaciones: Ocupaciones = new Ocupaciones();
     listadoOcupaciones: Ocupaciones[];
     ocupacionesTypes: OcupacionesTipos[] = [];
@@ -50,7 +48,9 @@ export class OcupacionesComponent implements OnInit {
 
 
     constructor(private router: Router,
-                private ocupacionesService: OcupacionesService) {
+                private ocupacionesService: OcupacionesService,
+                private appmain: AppComponent
+    ) {
 
         ocupacionesService.listOcupaciones().subscribe(res => {
             this.listadoOcupaciones = res;
@@ -180,10 +180,11 @@ export class OcupacionesComponent implements OnInit {
 
 
     save() {
+     
         if (this.ocupaciones.idOcupacion == null || this.ocupaciones.idOcupacion == 0) {
-            this.msgs.push({severity: 'info', summary: 'Guardando...', detail: 'Nuevo registro'});
-
             this.ocupacionesService.addOcupaciones(this.ocupaciones).then(data => {
+               let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+               this.appmain.showMessage(typeMessage, this.msg);
                 let chil: any[] = [];
                 if (this.tabselected <= 3) {
                     chil = [{
@@ -212,10 +213,14 @@ export class OcupacionesComponent implements OnInit {
                 }
 
 
-            });
+            }, error => {
+               let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
+               this.appmain.showMessage(typeMessage, this.msg);
+            } );
         } else {
-            this.msgs.push({severity: 'info', summary: 'Guardando...', detail: 'Actualizando registro'});
             this.ocupacionesService.updateOcupaciones(this.ocupaciones).then(data => {
+               let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+               this.appmain.showMessage(typeMessage, this.msg);
                 this.selectedNode.label = this.ocupaciones.ocupacion;
                 this.header = this.ocupaciones.ocupacion;
                 for (let i = 0; i < this.listadoOcupaciones.length; i++) {
@@ -225,7 +230,10 @@ export class OcupacionesComponent implements OnInit {
                     }
                 }
 
-            });
+            }, error => {
+               let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
+               this.appmain.showMessage(typeMessage, this.msg);
+            } );
         }
     }
 

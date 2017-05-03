@@ -271,6 +271,6 @@ export class FamilyInformationAddComponent implements OnInit {
    }
 
    childInputCleanUp(value: string) {
-      this.familyInformation.telefonoFijo = value.toUpperCase().replace(/[^1-9]/g, '').replace(' ', '').trim();
+      this.familyInformation.telefonoFijo = value.toUpperCase().replace(/[^0-9]/g, '').replace(' ', '').trim();
    }
 }

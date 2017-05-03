@@ -64,12 +64,12 @@
             <li class="user-header">
             <img src="assets/images/user-160x160.jpg" class="img-circle" alt="User Image">
               <p>
-                Carlos Enrique Torres Barrios
-                <small>{{ 'TEMPLATE.LBL_USUARIODESDE' | translate:param }} 10/12/2014</small>
+                 {{usuarioLogueado.nombre}}
+                <small>{{ 'TEMPLATE.LBL_USUARIODESDE' | translate:param }} {{ultimaActualizacion}}</small>
               </p>
             </li>
 
-            <li class="disabled menu-theme-title"><a href="#">{{ 'TEMPLATE.LBL_USUARIODESDE' | translate:param }}</a></li>
+            <li class="disabled menu-theme-title"><a href="#">{{ 'TEMPLATE.LBL_TEMASDISPONIBLES' | translate:param }}</a></li>
             <li class="menu-theme">
               <span class="colortheme colorwhite" onclick="changeTheme('skin-black')" ></span>
               <span class="colortheme colorpurple" onclick="changeTheme('skin-purple')"></span>
