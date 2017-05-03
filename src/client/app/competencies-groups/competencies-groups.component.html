@@ -9,7 +9,7 @@
                   <div class="row">
                      <div class="form-group col-md-8">
                         <label for="nombre">* Nombre</label>
-                        <input type="text" pInputText id="nombre" name="nombre"
+                        <input type="text" pInputText id="nombre" name="nombre" [disabled]="group.idGrupoCompetencia"
                                [(ngModel)]="group.grupoCompetencia" #nombre="ngModel"
                                required/>
                         <div class="ui-message ui-messages-error ui-corner-all"
