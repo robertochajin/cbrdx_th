@@ -13,7 +13,8 @@
                                  <div class="form-group col-md-3">
                                     <label for="codigo">* Código </label>
                                     <input type="text" pInputText id="codigo" name="codigo"
-                                           [(ngModel)]="position.codigoCargo" #codigo="ngModel"
+                                           [(ngModel)]="position.codigoCargo" #codigo="ngModel" (keyup)="inputCleanUp($event.target.value)"
+                                           (paste)="inputCleanUp($event.target.value)"
                                            required/>
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !codigo.valid">
@@ -50,8 +51,9 @@
                                  </div>
                                  <div class="form-group col-md-6">
                                     <label for="personaACargoDir">* Personas a cargo Directas</label>
-                                    <input type="text" pInputText id="personaACargoDir" name="personaACargoDir" type="number" min="0"
-                                           [(ngModel)]="position.personaACargoDir" #personaACargoDir="ngModel" required
+                                    <input type="text" pInputText id="personaACargoDir" name="personaACargoDir" type="text"
+                                           [(ngModel)]="position.personaACargoDir" #personaACargoDir="ngModel" required (keyup)="inputNumber()"
+                                           (paste)="inputNumber()"
                                     />
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !personaACargoDir.valid">
@@ -77,8 +79,8 @@
                                  <div class="form-group col-md-6">
                                     <label for="personaACargoInd">* Personas a cargo Indirectas</label>
                                     <input type="text" pInputText id="personaACargoInd" name="personaACargoInd" required
-                                           [(ngModel)]="position.personaACargoInd" #personaACargoInd="ngModel" type="number" min="0"
-                                    />
+                                           [(ngModel)]="position.personaACargoInd" #personaACargoInd="ngModel" type="text"
+                                           (keyup)="inputNumber()" (paste)="inputNumber()"   />
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !personaACargoInd.valid">
                                        <i class="fa fa-close"></i>
