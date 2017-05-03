@@ -26,7 +26,7 @@ RUN powershell -Command \
 
 CMD [ "node.exe" ]
 
-RUN mkdir 'C:\app'
+RUN mkdir ["app"]
 
 ENV HOME=C:\app
 WORKDIR $HOME
