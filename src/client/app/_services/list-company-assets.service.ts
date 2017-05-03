@@ -1,22 +1,17 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
-import {AuthenticationService} from "./authentication.service";
+import { Injectable } from "@angular/core";
+import { Response } from "@angular/http";
+import { AuthHttp } from "angular2-jwt";
 
 @Injectable()
 export class CompanyAssetsTypesServices {
-
-   public headers = new Headers({'Content-Type': 'application/json'});
-
+   
    private serviceURL = '<%= SVC_TH_URL %>/api/listasTiposElementos/';
-
-   constructor(private http: Http,
-               private authenticationService: AuthenticationService
-   ) {
-      this.headers = new Headers({'Content-Type': 'application/json', 'Authorization': this.authenticationService.token});
+   
+   constructor( private authHttp: AuthHttp ) {
    }
-
-   getAllEnabled()  {
-      return this.http.get(this.serviceURL + "enabled",{headers: this.headers}).map((res:Response) => res.json());
+   
+   getAllEnabled() {
+      return this.authHttp.get( this.serviceURL + "enabled" ).map( ( res: Response ) => res.json() );
    }
-
+   
 }

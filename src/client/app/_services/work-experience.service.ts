@@ -1,43 +1,39 @@
-import {Injectable} from '@angular/core';
-import {Http, Response, Headers} from '@angular/http';
-import {Workexperience} from '../_models/work-experience';
-import {AuthenticationService} from "./authentication.service";
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
+import { Workexperience } from '../_models/work-experience';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class WorkExperienceService {
-  
-  private serviceURL = '<%= SVC_TH_URL %>/api/';
-  //private serviceURLTerceros = '<%= SVC_TH_URL %>/tercerosCargos/';
-  
-  
-  headers = new Headers({'Content-Type': 'application/json'});
-   constructor(private http: Http, private authenticationService: AuthenticationService) {
-      this.headers = new Headers({'Content-Type': 'application/json', 'Authorization': this.authenticationService.token});
+
+   private serviceURL = '<%= SVC_TH_URL %>/api/';
+
+   constructor( private authHttp: AuthHttp ) {
    }
 
-  getAll() {
-      return this.http.get(this.serviceURL+'tercerosExperienciasLaborales', { headers: this.headers }).map((res:Response) => res.json());
-  }
-  
-  get(id:number) {
-    return this.http.get(this.serviceURL+'tercerosExperienciasLaborales/buscarId/'+ id, { headers: this.headers }).map((res:Response) => res.json());
-  }
-  
-  getByEmployee(idTercero:number) {
-    return this.http.get(this.serviceURL+'tercerosExperienciasLaborales/buscarTercero/'+ idTercero, { headers: this.headers }).map((res:Response) => res.json());
-  }
+   getAll() {
+      return this.authHttp.get( this.serviceURL + 'tercerosExperienciasLaborales' ).map( ( res: Response ) => res.json() );
+   }
 
-  add(c: Workexperience) {
-    return this.http.post(this.serviceURL+'tercerosExperienciasLaborales',c, { headers: this.headers }).map((res:Response) => res.json());
-  };
-  
-  update(c: Workexperience) {
-    return this.http.put(this.serviceURL+'tercerosExperienciasLaborales',c, { headers: this.headers }).map((res:Response) => res);
-  }
+   get( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'tercerosExperienciasLaborales/buscarId/' + id ).map( ( res: Response ) => res.json() );
+   }
 
-  delete(f: Workexperience) {
-    const respuesta = this.http.delete('/api/workexperience/' + f.idTerceroExperienciaLaboral, { headers: this.headers });
-    return respuesta.map((res: Response) => res.json());
-  }
+   getByEmployee( idTercero: number ) {
+      return this.authHttp.get( this.serviceURL + 'tercerosExperienciasLaborales/buscarTercero/' + idTercero ).map( ( res: Response ) => res.json() );
+   }
+
+   add( c: Workexperience ) {
+      return this.authHttp.post( this.serviceURL + 'tercerosExperienciasLaborales', c ).map( ( res: Response ) => res.json() );
+   };
+
+   update( c: Workexperience ) {
+      return this.authHttp.put( this.serviceURL + 'tercerosExperienciasLaborales', c ).map( ( res: Response ) => res );
+   }
+
+   delete( f: Workexperience ) {
+      const respuesta = this.authHttp.delete( '/api/workexperience/' + f.idTerceroExperienciaLaboral );
+      return respuesta.map( ( res: Response ) => res.json() );
+   }
 
 }

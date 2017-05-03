@@ -1,58 +1,52 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
-import { EmployeesLocation } from '../_models/employee-location';
-import { Employee } from "../_models/employees";
-import {AuthenticationService} from "./authentication.service";
+import { Injectable } from "@angular/core";
+import { Response } from "@angular/http";
+import { AuthHttp } from "angular2-jwt";
 
 @Injectable()
 export class LocationService {
-
-   private serviceURL = '<%= SVC_TH_URL %>';
-   headers = new Headers({'Content-Type': 'application/json'});
    
-   constructor(private http: Http,
-               private authenticationService: AuthenticationService
-   ) {
-      this.headers = new Headers({'Content-Type': 'application/json', 'Authorization': this.authenticationService.token});
+   private serviceURL = '<%= SVC_TH_URL %>';
+   
+   constructor( private authHttp: AuthHttp ) {
    }
    
-  get(id: Number){
-    return this.http.get(this.serviceURL + '/api/tercerosLocalizaciones/loc/' + id,{headers: this.headers})
-      .map((res: Response) => res.json());
-  }
-
-  getAllByEmployee(id: number) {
-    return this.http.get(this.serviceURL + '/api/tercerosLocalizaciones/' + id,{headers: this.headers})
-      .map((res: Response) => res.json());
-  }
-
-  getPrincipalNomenclatureList() {
-    return this.http.get(this.serviceURL + '/nomenclatures/principal',{headers: this.headers})
-      .map((res: Response) => res.json());
-  }
-
-  getComplementaryNomenclatureList() {
-    return this.http.get(this.serviceURL + '/nomenclatures/complementary',{headers: this.headers})
-      .map((res: Response) => res.json());
-  }
-
-  getAddressTypeList() {
-    return this.http.get(this.serviceURL + '/nomenclatures/addressType',{headers: this.headers})
-      .map((res: Response) => res.json());
-  }
-
-  add(f: any) {
-    return this.http.post(this.serviceURL + '/api/tercerosLocalizaciones', f,{headers: this.headers})
-      .map((res: Response) => res.json());
-  };
-
-  update(f: any) {
-    return this.http.put(this.serviceURL + '/api/tercerosLocalizaciones', f,{headers: this.headers})
-      .map((res: Response) => res);
-  }
-
-  delete(f: any) {
-    return this.http.put(this.serviceURL + '/api/tercerosLocalizaciones', f,{headers: this.headers})
-      .map((res: Response) => res);
-  }
+   get( id: Number ) {
+      return this.authHttp.get( this.serviceURL + '/api/tercerosLocalizaciones/loc/' + id )
+      .map( ( res: Response ) => res.json() );
+   }
+   
+   getAllByEmployee( id: number ) {
+      return this.authHttp.get( this.serviceURL + '/api/tercerosLocalizaciones/' + id )
+      .map( ( res: Response ) => res.json() );
+   }
+   
+   getPrincipalNomenclatureList() {
+      return this.authHttp.get( this.serviceURL + '/nomenclatures/principal' )
+      .map( ( res: Response ) => res.json() );
+   }
+   
+   getComplementaryNomenclatureList() {
+      return this.authHttp.get( this.serviceURL + '/nomenclatures/complementary' )
+      .map( ( res: Response ) => res.json() );
+   }
+   
+   getAddressTypeList() {
+      return this.authHttp.get( this.serviceURL + '/nomenclatures/addressType' )
+      .map( ( res: Response ) => res.json() );
+   }
+   
+   add( f: any ) {
+      return this.authHttp.post( this.serviceURL + '/api/tercerosLocalizaciones', f )
+      .map( ( res: Response ) => res.json() );
+   };
+   
+   update( f: any ) {
+      return this.authHttp.put( this.serviceURL + '/api/tercerosLocalizaciones', f )
+      .map( ( res: Response ) => res );
+   }
+   
+   delete( f: any ) {
+      return this.authHttp.put( this.serviceURL + '/api/tercerosLocalizaciones', f )
+      .map( ( res: Response ) => res );
+   }
 }

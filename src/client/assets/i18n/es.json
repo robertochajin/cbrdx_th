@@ -432,7 +432,7 @@
 
    "TEMPLATE":{
       "LBL_MENUPRINCIPAL": "MENÚ PRINCIPAL",
-      "LBL_USUARIODESDE":"Usuario desde",
+      "LBL_USUARIODESDE":"Última Actualización",
       "LBL_TEMASDISPONIBLES": "Temas Disponible",
       "LBL_EDITARCONTRASENA":"Editar Contraseña",
       "LBL_CERRARSESION": "Cerrar Sesión"
