@@ -58,6 +58,8 @@ export class NavbarComponent implements AfterViewInit {
             for ( let p of this.listModulos.filter( t => t.idPadre == 0 || t.idPadre == null ) ) {
                let chilNodes: TreeNode[] = [];
                for ( let c of this.listmenu.filter( t => t.idPadre == p.idMenu ) ) {
+                  
+                  c.nuevo = (c.clase.search("new") > 0) ? true : false;
                   chilNodes.push( {
                      "label": c.menu,
                      "data": c,
