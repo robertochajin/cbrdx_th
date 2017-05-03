@@ -1,49 +1,44 @@
-import {Injectable} from '@angular/core';
-import {Http, Response, Headers} from '@angular/http';
-import {AuthenticationService} from "./authentication.service";
-import {Observable} from "rxjs/Rx";
-import {Competencies} from "../_models/competencies";
+import { Injectable } from "@angular/core";
+import { Response } from "@angular/http";
+import { Observable } from "rxjs/Rx";
+import { Competencies } from "../_models/competencies";
+import { AuthHttp } from "angular2-jwt";
 
 @Injectable()
 export class CompetenciesServices {
-
-   public headers = new Headers({'Content-Type': 'application/json'});
+   
    private masterService = '<%= SVC_TH_URL %>/api/competencias/';
-
-   constructor(private http: Http, private authenticationService: AuthenticationService) {
-      this.headers = new Headers({
-         'Content-Type': 'application/json',
-         'Authorization': this.authenticationService.token
-      });
+   
+   constructor( private authHttp: AuthHttp ) {
+      
    }
-
-   getAllEnabledByGroup(idGrupo: number): Observable<Competencies[]> {
-      return this.http.get(this.masterService + 'enabled/' + idGrupo, {headers: this.headers}).map((res: Response) => res.json() as Competencies[]);
+   
+   getAllEnabledByGroup( idGrupo: number ): Observable<Competencies[]> {
+      return this.authHttp.get( this.masterService + 'enabled/' + idGrupo ).map( ( res: Response ) => res.json() as Competencies[] );
    }
-
-   getAllByGroup(idGrupo: number): Observable<Competencies[]> {
-      return this.http.get(this.masterService + 'buscarGrupo/' + idGrupo, {headers: this.headers}).map((res: Response) => res.json() as Competencies[]);
+   
+   getAllByGroup( idGrupo: number ): Observable<Competencies[]> {
+      return this.authHttp.get( this.masterService + 'buscarGrupo/' + idGrupo ).map( ( res: Response ) => res.json() as Competencies[] );
    }
-
-
-   add(f: Competencies) {
-      return this.http.post(this.masterService, f, {headers: this.headers})
-         .map((res: Response) => res.json());
+   
+   add( f: Competencies ) {
+      return this.authHttp.post( this.masterService, f )
+      .map( ( res: Response ) => res.json() );
    };
-
-   update(f: Competencies) {
-      return this.http.put(this.masterService, JSON.stringify(f), {headers: this.headers}).catch(this.handleError);
+   
+   update( f: Competencies ) {
+      return this.authHttp.put( this.masterService, JSON.stringify( f ) ).catch( this.handleError );
    }
-
-   get(id: number) {
-      return this.http.get(this.masterService + 'buscarId/' + id, {headers: this.headers})
-         .map((res: Response) => res.json() as Competencies);
+   
+   get( id: number ) {
+      return this.authHttp.get( this.masterService + 'buscarId/' + id )
+      .map( ( res: Response ) => res.json() as Competencies );
    }
-
-   handleError(error: any): Promise<any> {
-      console.error('Error:', error);
-      return Promise.reject(error.message || error);
+   
+   handleError( error: any ): Promise<any> {
+      console.error( 'Error:', error );
+      return Promise.reject( error.message || error );
    }
-
+   
 }
 

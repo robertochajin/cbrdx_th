@@ -92,11 +92,14 @@ export class FamilyInformationUpdateComponent implements OnInit {
         });
      });
 
-
-    this.listEmployeesService.getTerType("TERFAM").subscribe(
-      res => {
-        this.idTipoTercero = res.idListaTipoTercero
-      });
+     this.listaService.getMasterDetailsByCode('ListasTiposTerceros','TERFAM').subscribe(
+        res => {
+           this.idTipoTercero = res.idLista
+     });
+    // this.listEmployeesService.getTerType("TERFAM").subscribe(
+    //   res => {
+    //     this.idTipoTercero = res.idListaTipoTercero
+    //   });
 
     this.familyInformation.idConvivencia = 0;
     this.route.params.subscribe((params: Params) => {
@@ -299,6 +302,6 @@ export class FamilyInformationUpdateComponent implements OnInit {
    }
 
    childInputCleanUp(value: string) {
-      this.familyInformation.telefonoFijo = value.toUpperCase().replace(/[^1-9]/g, '').replace(' ', '').trim();
+      this.familyInformation.telefonoFijo = value.toUpperCase().replace(/[^0-9]/g, '').replace(' ', '').trim();
    }
 }

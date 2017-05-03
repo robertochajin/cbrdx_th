@@ -1,25 +1,19 @@
 import { Injectable } from "@angular/core";
-import { Http, Response, Headers } from "@angular/http";
-import { AuthenticationService } from "./authentication.service";
+import { Response } from "@angular/http";
+import { AuthHttp } from "angular2-jwt";
 
 @Injectable()
 export class ListPositionsService {
    
-   public headers = new Headers( { 'Content-Type': 'application/json' } );
-   
    private serviceURL = '<%= SVC_TH_URL %>/api/';
    
-   constructor( private http: Http,
-                private authenticationService: AuthenticationService ) {
-      this.headers = new Headers( {
-         'Content-Type': 'application/json', 'Authorization': this.authenticationService.token
-      } );
+   constructor( private authHttp: AuthHttp ) {
    }
    
    getCategoryTypes() {
-      return this.http.get( this.serviceURL + "categorias/enabled", { headers: this.headers } ).map( ( res: Response ) => res.json() );
+      return this.authHttp.get( this.serviceURL + "categorias/enabled" ).map( ( res: Response ) => res.json() );
    }
-
+   
    handleError( error: any ): Promise<any> {
       console.error( 'Error:', error );
       return Promise.reject( error.message || error );
