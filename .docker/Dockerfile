@@ -31,7 +31,7 @@ RUN mkdir ["app"]
 ENV HOME=C:\\app
 WORKDIR $HOME
 
-ENV APP_NAME=th-app
+ENV APP_NAME=angular-seed
 
 COPY . $HOME/$APP_NAME/
 WORKDIR $HOME/$APP_NAME
