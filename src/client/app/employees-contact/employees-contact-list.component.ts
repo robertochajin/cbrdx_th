@@ -9,6 +9,7 @@ import {EmployeesService} from "../_services/employees.service";
 import {SelectItem, Message, ConfirmationService} from 'primeng/primeng';
 import {ListaItem} from "../_models/listaItem";
 import {ListaService} from "../_services/lista.service";
+import {NavService} from '../_services/_nav.service';
 
 @Component({
     moduleId: module.id,
@@ -34,6 +35,7 @@ export class EmployeesContactListComponent{
                 private confirmationService: ConfirmationService,
                 private employeesService: EmployeesService,
                 private listaService: ListaService,
+                private _nav: NavService
     ) {
        this.listaService.getMasterDetails('ListasParentescos').subscribe(res => {
           this.relationship.push({label: 'Seleccione', value: null});
@@ -159,6 +161,7 @@ export class EmployeesContactListComponent{
       this.msgs = [];
       this.contact = new EmployeesContact();
       this.show_form  = true;
+      this._nav.setTab(3);
     }
     
     update(f: EmployeesContact) {

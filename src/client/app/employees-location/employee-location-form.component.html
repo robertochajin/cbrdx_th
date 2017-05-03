@@ -36,6 +36,9 @@
           <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !barrio.valid">
             <i class="fa fa-close"></i> Barrio es requerida
           </div>
+           <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!wrongCity">
+            <i class="fa fa-close"></i> Barrio es requerida
+          </div>
         </div>
       </div>
 
@@ -43,7 +46,7 @@
         <div class="ui-grid-col-4">
           <label for="ppal">Nomenclatura principal</label>
           <p-dropdown [options]="principalNomenclatureList" id="ppal" name="ppal" #elppal="ngModel" [autoWidth]="false"
-                      [(ngModel)]="selectedPrincipalNomenclature" required="true"></p-dropdown>
+                      [(ngModel)]="selectedPrincipalNomenclature" required="true" (onChange)="capturePrincipalNomenclature()" ></p-dropdown>
           <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !elppal.valid">
             <i class="fa fa-close"></i> Nomenclatura principal es requerido
           </div>
