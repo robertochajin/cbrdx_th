@@ -1,4 +1,4 @@
-FROM windowsservercore
+FROM microsoft/windowsservercore
 
 #RUN powershell -Command wget -Uri https://nodejs.org/dist/v%NODE_VERSION%/node-v%NODE_VERSION%-x64.msi -OutFile node.msi -UseBasicParsing
 #RUN msiexec.exe /q /i node.msi
