@@ -28,7 +28,7 @@ CMD [ "node.exe" ]
 
 RUN mkdir ["app"]
 
-ENV HOME=C:\app
+ENV HOME=C:\\app
 WORKDIR $HOME
 
 ENV APP_NAME=th-app
