@@ -48,8 +48,7 @@ export class OcupacionesComponent implements OnInit {
 
 
     constructor(private router: Router,
-                private ocupacionesService: OcupacionesService,
-                private appmain: AppComponent
+                private ocupacionesService: OcupacionesService
     ) {
 
         ocupacionesService.listOcupaciones().subscribe(res => {
@@ -184,7 +183,7 @@ export class OcupacionesComponent implements OnInit {
         if (this.ocupaciones.idOcupacion == null || this.ocupaciones.idOcupacion == 0) {
             this.ocupacionesService.addOcupaciones(this.ocupaciones).then(data => {
                let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
-               this.appmain.showMessage(typeMessage, this.msg);
+               this.ocupacionesService.setMesage(typeMessage, this.msg);
                 let chil: any[] = [];
                 if (this.tabselected <= 3) {
                     chil = [{
@@ -215,12 +214,12 @@ export class OcupacionesComponent implements OnInit {
 
             }, error => {
                let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
-               this.appmain.showMessage(typeMessage, this.msg);
+               this.ocupacionesService.setMesage(typeMessage, this.msg);
             } );
         } else {
             this.ocupacionesService.updateOcupaciones(this.ocupaciones).then(data => {
                let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
-               this.appmain.showMessage(typeMessage, this.msg);
+               this.ocupacionesService.setMesage(typeMessage, this.msg);
                 this.selectedNode.label = this.ocupaciones.ocupacion;
                 this.header = this.ocupaciones.ocupacion;
                 for (let i = 0; i < this.listadoOcupaciones.length; i++) {
@@ -232,7 +231,7 @@ export class OcupacionesComponent implements OnInit {
 
             }, error => {
                let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
-               this.appmain.showMessage(typeMessage, this.msg);
+               this.ocupacionesService.setMesage(typeMessage, this.msg);
             } );
         }
     }

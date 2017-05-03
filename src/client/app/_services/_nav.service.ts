@@ -5,33 +5,17 @@ import { Subject } from "rxjs/Subject";
 export class NavService {
    
    private _navTab: number;
-   msgs: Message;
-   msgAdd: Message ;
-   msgUpdate: Message;
-   msgError: Message;
+   msgs: Message = { severity: 'error', summary: 'Error', detail: 'Error al guardar / Intente nuevamente.' };
+   msgAdd: Message = { severity: 'info', summary: 'Exito', detail: 'Registro agregado correctamente.' };
+   msgUpdate: Message = { severity: 'info', summary: 'Exito', detail: 'Registro actualizado correctamente.' };
+   msgError: Message = { severity: 'error', summary: 'Error', detail: 'Error al guardar / Intente nuevamente.' };
    subject = new Subject<Message>();
    
    // Observable string streams
    getMessage$ = this.subject.asObservable();
    
-   constructor() {
-      
-      this.msgAdd = ({ severity: 'info', summary: 'Exito', detail: 'Registro agregado correctamente.' });
-      this.msgUpdate = ({ severity: 'info', summary: 'Exito', detail: 'Registro actualizado correctamente.' });
-      this.msgError = ({ severity: 'error', summary: 'Error', detail: 'Error al guardar / Intente nuevamente.' });
-      
-   }
-   
-   setTab( number: number ) {
-      this._navTab = number;
-   }
-   
-   getTab() {
-      return this._navTab;
-   }
-   
    setMesage( type: number, msgCustom: Message ) {
-
+      
       switch ( type ) {
          case 1:
             this.msgs = this.msgAdd;
@@ -48,5 +32,19 @@ export class NavService {
       }
       this.subject.next(this.msgs);
    }
+   
+   constructor() {
+     
+   }
+   
+   setTab( number: number ) {
+      this._navTab = number;
+   }
+   
+   getTab() {
+      return this._navTab;
+   }
+   
+   
    
 }

@@ -24,7 +24,7 @@ import { NavService } from "./_services/_nav.service";
   moduleId: module.id,
   selector: 'sd-app',
   templateUrl: 'app.component.html',
-  providers: [FormBuilder]
+  providers: [FormBuilder,NavService],
 })
 export class AppComponent implements AfterViewInit, AfterViewChecked {
   sessionStart: boolean;
@@ -47,15 +47,15 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
     translate.setDefaultLang('es');
     translate.use('es');
-     this.msgAdd = ({ severity: 'info', summary: 'Exito', detail: 'Registro agregado correctamente.' });
-     this.msgUpdate = ({ severity: 'info', summary: 'Exito', detail: 'Registro actualizado correctamente.' });
-     this.msgError = ({ severity: 'error', summary: 'Error', detail: 'Error al guardar / Intente nuevamente.' });
-     
+     this.msgAdd = { severity: 'info', summary: 'Exito', detail: 'Registro agregado correctamente.' };
+     this.msgUpdate = { severity: 'info', summary: 'Exito', detail: 'Registro actualizado correctamente.' };
+     this.msgError = { severity: 'error', summary: 'Error', detail: 'Error al guardar / Intente nuevamente.'};
+     //this.msgs[0] = this.msgAdd;
         navService.getMessage$.subscribe(
            msgs => {
-              this.resetMessage();
-              this.msgs.push(msgs);
-              window.setTimeout(this.resetMessage, 60000);
+              //this.resetMessage();
+              this.msgs[0] = msgs;
+              //window.setTimeout(this.resetMessage, 60000);
         });
   }
 
