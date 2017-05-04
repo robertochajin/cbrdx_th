@@ -317,7 +317,7 @@
                </div>
                <div class="row">
                   <div class="form-group col-md-3">
-                     <label for="Ngalive">{{'EMPLOYEES.LBL_ACTIVIDAD' | translate:param}}</label>
+                     <label for="Ngalive">{{'EMPLOYEES.LBL_VIVO' | translate:param}}</label>
                      <p-checkbox id="Ngalive" name="Ngalive" binary="true"
                                  [(ngModel)]="employee.indicadorVivo"
                                  #Ngalive="ngModel"
@@ -325,9 +325,9 @@
                      </p-checkbox>
                   </div>
                   <div class="form-group col-md-3" *ngIf="employee.indicadorVivo == false">
-                     <label for="NGdeathDate">{{'EMPLOYEES.LBL_VIVO' | translate:param}}</label>
+                     <label for="NGdeathDate">{{'EMPLOYEES.LBL_FECHADEFUNCION' | translate:param}}</label>
                      <p-calendar id="NGdeathDate" name="NGdeathDate" [locale]="es" [showIcon]="true"
-                                 [disabled]="disabled"
+                                 [disabled]="disabled" [maxDate]="maxDate"
                                  [dataType]="date" #NGdeathDate="ngModel" [required]="!employee.indicadorVivo"
                                  [(ngModel)]="deathDate" (onSelect)="onDeathDate($event)"
                      ></p-calendar>

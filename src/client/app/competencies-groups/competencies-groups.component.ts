@@ -1,10 +1,10 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {Router} from '@angular/router';
-import {SelectItem, Message, ConfirmationService} from 'primeng/primeng';
-import {CompetenciesServices} from "../_services/competencies.service";
-import {Competencies} from "../_models/competencies";
-import {GroupCompetenciesServices} from "../_services/groupCompetencies.service";
-import {GroupCompetencies} from "../_models/groupCompetencies";
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { Message, ConfirmationService } from "primeng/primeng";
+import { CompetenciesServices } from "../_services/competencies.service";
+import { Competencies } from "../_models/competencies";
+import { GroupCompetenciesServices } from "../_services/groupCompetencies.service";
+import { GroupCompetencies } from "../_models/groupCompetencies";
 
 @Component({
    moduleId: module.id,
@@ -97,7 +97,7 @@ export class CompetenciesGroupsComponent {
          icon: 'fa fa-question-circle',
 
          accept: () => {
-            this.competencie = new Competencies();
+            this.competencie = null;
             this.editingCompetencie = false;
          }
       });
@@ -112,14 +112,14 @@ export class CompetenciesGroupsComponent {
                this.groups[this.groups.indexOf(this.groups.find(z => this.competencie.idGrupoCompetencia == z.idGrupoCompetencia))]
                   .competencies.map(c => {
                   if(c.idCompetencia == this.competencie.idCompetencia){
-                     c = this.competencie;
+                     c.descripcion = this.competencie.descripcion;
+                     c.indicadorHabilitado = this.competencie.indicadorHabilitado;
                   }
                });
 
                this.competencie = new Competencies();
                this.editingCompetencie = false;
             }
-            
          });
 
       } else {

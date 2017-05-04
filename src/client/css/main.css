@@ -66,12 +66,38 @@ body .ui-widget:disabled {
 .sidebar-menu .treeview-menu > li > a {
    padding: 5px 5px 5px 26px;
    white-space: pre-line;
+   padding-right: 36px;
 }
 .sidebar-menu .treeview-menu > li > a > .fa{
    margin-left: -24px;
 }
 .sidebar-menu li > a > .pull-right-container {
-   right: 0px;
+   right: -10px;
+}
+.sidebar-menu li > a > .pull-right-container:after { /* This adds the second part of our dropshadow */
+   content:"";
+   height: 3px;
+   background: rgba(0,0,0,.3);
+   display: block;
+   position: absolute;
+   bottom: -3px;
+   left: 58px;
+   right:3px;
+}
+.sidebar-menu li > a > .pull-right-container > small {
+   margin-right: 0;
+}
+
+.sidebar-menu li > a > .pull-right-container > small:after {
+   content:"";
+   position:absolute;
+   z-index:-1;
+   top:100%;
+   border-style:solid;
+   border-color:transparent #006235;
+   left:auto;
+   right:0;
+   border-width:0 0 10px 10px;
 }
 .header-help{
    padding-top: 12px!important;
@@ -473,6 +499,11 @@ a.cancelar:hover {
 
 .datatable-header-search i {
     margin: 4px 4px 0 0;
+}
+@media (min-width: 768px){
+   .datatable-header-search {
+      margin-top: 10px;
+   }
 }
 
 .datatable-col-action {
