@@ -10,7 +10,7 @@
                      <div class="form-group col-md-8">
                         <label for="nombre">* Nombre</label>
                         <input type="text" pInputText id="nombre" name="nombre" [disabled]="group.idGrupoCompetencia"
-                               [(ngModel)]="group.grupoCompetencia" #nombre="ngModel"
+                               [(ngModel)]="group.grupoCompetencia" #nombre="ngModel" (keyup)="capitalize()"
                                required/>
                         <div class="ui-message ui-messages-error ui-corner-all"
                              *ngIf="fg.submitted && !nombre.valid">
@@ -89,7 +89,7 @@
                               <label for="cNombre">* Competencia / Habilidad</label>
                               <input type="text" pInputText id="cNombre" name="cNombre"
                                      [(ngModel)]="competencie.competencia" #cNombre="ngModel"  [readonly]="competencie.idCompetencia != null"
-                                     required/>
+                                     required (keyup)="capitalizec()"/>
                               <div class="ui-message ui-messages-error ui-corner-all"
                                    *ngIf="fc.submitted && !cNombre.valid">
                                  <i class="fa fa-close"></i>

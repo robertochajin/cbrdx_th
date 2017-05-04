@@ -7,11 +7,13 @@ import {SharedModule} from "../shared/shared.module";
 import {FormSharedModule} from "../shared/form-shared.module";
 import {PositionsService} from "../_services/positions.service";
 import {ListaService} from "../_services/lista.service";
+import {TooltipModule} from 'primeng/primeng';
 
 @NgModule({
    imports:      [CommonModule,
       SharedModule,
-      FormSharedModule
+      FormSharedModule,
+      TooltipModule
    ],
    declarations: [
       OrganizationalStructurePositionsComponent

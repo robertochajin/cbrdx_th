@@ -45,7 +45,7 @@ export class SharedModule {
             jQuery('#wrapper').animate({scrollTop: 0}, 'fast');
 
             // Focus Primer campo
-            jQuery('input[type=text]:enabled:visible:first').select().focus();
+            jQuery('input[type=text]:enabled:visible, p-dropdown>div').first().select().focus().addClass('ui-state-focus');
 
             // Focus primer invalid campo
 
