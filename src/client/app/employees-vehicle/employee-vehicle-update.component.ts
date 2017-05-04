@@ -123,7 +123,7 @@ export class EmployeesVehicleUpdateComponent {
   inputPlaca() {
     let placa = this.employeeVehicle.placa;
     if (this.employeeVehicle.placa != null) {
-      this.employeeVehicle.placa = placa.replace(' ', '');
+      this.employeeVehicle.placa = placa.replace(' ', '').toUpperCase();
     }
   }
   goBack(): void {

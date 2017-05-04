@@ -68,8 +68,8 @@ export class ToolbarComponent {
    }
    
    goInactive() {
-      localStorage.removeItem('currentUser');
-      localStorage.removeItem('token');
+      // localStorage.removeItem('currentUser');
+      // localStorage.removeItem('token');
    }
    goActive() {
       this.startTimer();

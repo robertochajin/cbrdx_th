@@ -1,7 +1,7 @@
-<h3>{{ 'LBL_ ADMINISTRADOR' | translate:param }} {{ 'LBL_USUARIOS' | translate:param }}</h3>
+<h3>{{ 'USUARIOS.LBL_USUARIOS' | translate }}</h3>
 <p-tabView>
-    <p-tabPanel header="{{ 'LBL_DATOSUSUARIO' | translate:param }}">
-        <p-fieldset legend="{{ 'LBL_DATOSTERCERO' | translate:param }}">
+    <p-tabPanel header="{{ 'USUARIOS.LBL_DATOSUSER' | translate:param }}">
+        <p-fieldset legend="{{ 'USUARIOS.LBL_DATOSTERCERO' | translate:param }}">
 
             <div class="col-md-3">
                 <div class="ui-grid-col-10">
@@ -42,22 +42,22 @@
             </div>
             <div class="col-md-12">
                 <div class="pull-right">
-                    <label>Editar información de Tercero </label>
+                    <label>{{ 'USUARIOS.LBL_EDITAINFOTERCERO' | translate }}</label>
                     <button pButton type="button" icon="glyphicon-pencil" iconPos="right" label="Editar"></button>
                 </div>
             </div>
         </p-fieldset>
 
-        <p-fieldset legend="Información Contacto">
+        <p-fieldset legend="{{ 'USUARIOS.LBL_INFOCONTACTO' | translate }}">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="uSistema" class="control-label col-sm-4">{{ 'LBL_USUARIO' | translate:param }}{{ 'LBL_SISTEMA' | translate:param }}</label>
+                    <label for="uSistema" class="control-label col-sm-4">{{ 'USUARIOS.LBL_USUARIOSISTEMA' | translate }}</label>
                     <div class="col-sm-8">
                         <input type="text" pInputText disabled [(ngModel)]="usuario.usuarioSistema"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-4">{{ 'LBL_USUARIO' | translate:param }} {{ 'LBL_LDAP' | translate:param }}</label>
+                    <label class="control-label col-sm-4">{{ 'USUARIOS.LBL_LDAP' | translate }}</label>
                     <div class="ui-grid-col-6">
                         <p-checkbox [(ngModel)]="usuario.usuarioLdap" binary="true" disabled></p-checkbox>
                     </div>
@@ -65,7 +65,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label class="control-label col-sm-4">{{ 'LBL_CORREOELECTRONICO' | translate:param }}</label>
+                    <label class="control-label col-sm-4">{{ 'USUARIOS.LBL_CORREOELECTRONICO' | translate:param }}</label>
                     <div class="col-sm-8">
                         <input pInputText [(ngModel)]="usuario.correoElectronico" disabled type="email"/>
                     </div>
@@ -83,13 +83,13 @@
         </p-fieldset>
 
     </p-tabPanel>
-    <p-tabPanel header="{{ 'LBL_ROLES' | translate:param }} Y {{ 'LBL_GESTION' | translate:param }}">
+    <p-tabPanel header="{{ 'USUARIOS.LBL_ROLESGRUPOS' | translate }}">
         <div class="ui-grid-row">
             <div class="ui-grid-col-6">
                 <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="curRoles" [paginator]="true" [rows]="10"
                              [responsive]="true">
-                    <p-column field="rol" header="{{ 'LBL_ROL' | translate:param }}"></p-column>
-                    <p-column header="{{ 'LBL_PERIODOHABILITACION' | translate:param }}">
+                    <p-column field="rol" header="{{ 'USUARIOS.LBL_ROL' | translate:param }}"></p-column>
+                    <p-column header="{{ 'USUARIOS.LBL_PERIODOHABILITACION' | translate:param }}">
                         <template let-const="rowData" pTemplate="body">
                             <p>FI:{{const.fechaInicio}}<br>FF:{{const.fechaFin}}</p>
                         </template>
@@ -99,8 +99,8 @@
             <div class="ui-grid-col-6">
                 <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="curGrupos" [paginator]="true" [rows]="10"
                              [responsive]="true">
-                    <p-column field="grupoGestion" header="{{ 'LBL_GESTION' | translate:param }}"></p-column>
-                    <p-column header="{{ 'LBL_PERIODOHABILITACION' | translate:param }}">
+                    <p-column field="grupoGestion" header="{{ 'USUARIOS.LBL_GRUPOGESTION' | translate:param }}"></p-column>
+                    <p-column header="{{ 'USUARIOS.LBL_PERIODOHABILITACION' | translate:param }}">
                         <template let-const="rowData" pTemplate="body">
                             <p>FI:{{const.fechaInicio}}<br>FF:{{const.fechaFin}}</p>
                         </template>
@@ -110,23 +110,23 @@
         </div>
 
         <div class="col-md-12, pull-right">
-            <a (click)="goBack()" class="cancelar">{{ 'LBL_REGRESAR' | translate:param }}</a>
+            <a (click)="goBack()" class="cancelar">{{ 'BTN_REGRESAR' | translate:param }}</a>
         </div>
     </p-tabPanel>
-    <p-tabPanel header="{{ 'LBL_HISTORIAL' | translate:param }}" rightIcon="fa-calendar">
+    <p-tabPanel header="{{ 'USUARIOS.LBL_HISTORIAL' | translate }}" rightIcon="fa-calendar">
         <div class="row datable-header">
             <div class="col-md-6 col-xs-12 datatable-header-add">
             </div>
             <div class="col-md-6 col-xs-12 datatable-header-search">
                 <i class="fa fa-search"></i>
-                <input #gbs type="text" pInputText size="40" placeholder="Buscar...">
+                <input #gbs type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}">
             </div>
         </div>
-        <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="historico" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gbs">
-            <p-column field="idAuditoria" header="{{ 'LBL_ID' | translate:param }}" [sortable]="true"></p-column>
-            <p-column field="historia" header="{{ 'LBL_HISTORIAL' | translate:param }}" [sortable]="true"></p-column>
-            <p-column field="valorAnterior" header="{{ 'LBL_VALOR' | translate:param }} {{ 'LBL_ANTERIOR' | translate:param }}" [sortable]="true"></p-column>
-            <p-column field="valorNuevo" header="{{ 'LBL_VALORL' | translate:param }}{{ 'LBL_NUEVO' | translate:param }}" [sortable]="true"></p-column>
+        <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="historico" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gbs">
+            <p-column field="idAuditoria" header="{{ 'LBL_ID' | translate }}" [sortable]="true"></p-column>
+            <p-column field="historia" header="{{ 'USUARIOS.LBL_HISTORIAL' | translate }}" [sortable]="true"></p-column>
+            <p-column field="valorAnterior" header="{{ 'USUARIOS.LBL_VALORANTERIOR' | translate }}" [sortable]="true"></p-column>
+            <p-column field="valorNuevo" header="{{ 'USUARIOS.LBL_VALORNUEVO' | translate }}" [sortable]="true"></p-column>
         </p-dataTable>
     </p-tabPanel>
 </p-tabView>
