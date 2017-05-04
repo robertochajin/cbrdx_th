@@ -82,7 +82,7 @@ export class CompetenciesGroupsComponent {
    editCompetencie(competencie: Competencies, groupId: number) {
       this.editingCompetencie = true;
       if (competencie !== null) {
-         this.competencie = competencie;
+         this.competencie = Object.assign({},competencie) ;
       } else {
          this.competencie.idGrupoCompetencia = groupId;
          this.competencie.indicadorHabilitado = true;
@@ -119,6 +119,7 @@ export class CompetenciesGroupsComponent {
                this.competencie = new Competencies();
                this.editingCompetencie = false;
             }
+            
          });
 
       } else {
