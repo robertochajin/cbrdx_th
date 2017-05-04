@@ -20,6 +20,7 @@ export class CompetenciesGroupsComponent {
    editingCompetencie: boolean = false;
    msgs: Message[] = [];
    private competencie: Competencies = new Competencies();
+   private tempCompetencie: Competencies = new Competencies();
 
 
    constructor(private router: Router,
@@ -82,7 +83,10 @@ export class CompetenciesGroupsComponent {
    editCompetencie(competencie: Competencies, groupId: number) {
       this.editingCompetencie = true;
       if (competencie !== null) {
-         this.competencie = competencie;
+         //this.competencie = competencie;
+         this.competencie = Object.assign({}, competencie, {});
+         this.tempCompetencie = Object.assign({}, competencie, {});
+         
       } else {
          this.competencie.idGrupoCompetencia = groupId;
          this.competencie.indicadorHabilitado = true;
@@ -97,7 +101,16 @@ export class CompetenciesGroupsComponent {
          icon: 'fa fa-question-circle',
 
          accept: () => {
-            this.competencie = new Competencies();
+            this.competencie = null;
+            this.groups[this.groups.indexOf(this.groups.find(z => this.tempCompetencie.idGrupoCompetencia == z.idGrupoCompetencia))]
+            .competencies.map(c => {
+               if(c.idCompetencia == this.tempCompetencie.idCompetencia){
+                  console.info(this.tempCompetencie);
+                  //c = this.tempCompetencie;
+                  c = new Competencies();
+               }
+            });
+            this.tempCompetencie = new Competencies();
             this.editingCompetencie = false;
          }
       });
@@ -109,10 +122,12 @@ export class CompetenciesGroupsComponent {
       if (this.competencie.idCompetencia !== null && this.competencie.idCompetencia !== undefined) {
          this.competenciesServices.update(this.competencie).subscribe(res => {
             if(res.ok){
+               console.info(this.competencie);
                this.groups[this.groups.indexOf(this.groups.find(z => this.competencie.idGrupoCompetencia == z.idGrupoCompetencia))]
                   .competencies.map(c => {
                   if(c.idCompetencia == this.competencie.idCompetencia){
-                     c = this.competencie;
+                     c.descripcion = this.competencie.descripcion;
+                     c.indicadorHabilitado = this.competencie.indicadorHabilitado;
                   }
                });
 
