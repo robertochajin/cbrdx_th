@@ -134,7 +134,7 @@
                 <textarea id="direccion" name="direccion" #direccion="ngModel" pInputTextarea  rows="5" disabled
                           [(ngModel)]="familyInformation.direccion" required></textarea>
                 <div class="ui-message ui-messages-error ui-corner-all"
-                     *ngIf="familyInformation.direccion===''">
+                     *ngIf="f.submitted && familyInformation.direccion===''">
                   <i class="fa fa-close"></i>
                   {{'EMPLOYEES.LBL_DIRECCIONRESIDENCIA' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
                 </div>

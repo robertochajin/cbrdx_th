@@ -105,15 +105,17 @@ export class EmployeesAdditionalDataComponent {
   }
 
   inputNumberPeso() {
-    var peso = this.employee.peso+"";
+    let peso = this.employee.peso+"";
     if (this.employee.peso != null) {
+       if(peso==="0"){peso="1"}
        this.employee.peso = Number(peso.replace(/[^0-9]/g, ''));
     }
   }
 
   inputNumber() {
-    var size = this.employee.talla+"";
+    let size = this.employee.talla+"";
     if (this.employee.talla != null) {
+       if(size==="0"){size="1"}
       this.employee.talla = Number(size.replace(/[^0-9]/g, ''));
     }
   }

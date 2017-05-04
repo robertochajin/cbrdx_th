@@ -31,7 +31,7 @@
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !nombre.valid">
                                        <i class="fa fa-close"></i>
-                                       Nombre es requerida
+                                       Nombre es requerido
                                     </div>
                                  </div>
                               </div>
@@ -46,7 +46,8 @@
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !idEstructuraArea.valid">
                                        <i class="fa fa-close"></i>
-                                       Lateralidad requerida
+                                          Área es requerido
+
                                     </div>
                                  </div>
                                  <div class="form-group col-md-6">
@@ -143,16 +144,16 @@
                   </div>
                </div>
                <positions-observations-list *ngIf="(position.idEstado == aprobado || position.idEstado == noAprobado) && position.idCargo > 0" [position]="position"></positions-observations-list>
-               
-            
+
+
             </fieldset>
          </p-accordionTab>
-         
+
          <p-accordionTab header="Producto de valor esperado y criterios de desempeño" [selected]="acordion == 1"
                          [disabled]="step == 1">
                <evaluation-criterias (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></evaluation-criterias>
          </p-accordionTab>
-         
+
          <p-accordionTab header="Interrelaciones" [selected]="acordion == 2"
                          [disabled]="step >0 && step <3">
             <fieldset>
@@ -196,20 +197,20 @@
                      </div>
                   </div>
                </div>
-   
+
             </fieldset>
          </p-accordionTab>
-         
+
          <p-accordionTab header="Rol dentro del proceso" [selected]="acordion == 3"
                          [disabled]="step >0 && step < 4">
             <position-roles (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-roles>
          </p-accordionTab>
-         
+
          <p-accordionTab header="Responsabilidades principales" [selected]="acordion == 4"
                          [disabled]="step >0 && step <5">
             <position-responsabilities (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-responsabilities>
          </p-accordionTab>
-         
+
          <p-accordionTab header="Responsabilidades complemenarias" [selected]="acordion == 5"
                          [disabled]="step >0 && step <6">
             <fieldset>
@@ -218,7 +219,7 @@
                      <div class="col-md-12">
                         <form name="formulario" (ngSubmit)="f5.valid && onSubmit5()" #f5="ngForm" novalidate>
                            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-                     
+
                               <div class="row">
                                  <div class=" col-sm-12">
                                     <label for="responsabilidadesAd">Responsabilidades Complementarias</label>
@@ -244,15 +245,15 @@
                      </div>
                   </div>
                </div>
-   
+
             </fieldset>
          </p-accordionTab>
-         
+
          <p-accordionTab header="Posición en caso de ausencia" [selected]="acordion == 6"
                          [disabled]="step >0 && step <7">
             <position-absence (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-absence>
          </p-accordionTab>
-         
+
          <p-accordionTab header="Autoridades" [selected]="acordion == 7"
                          [disabled]="step >0 && step <8">
             <fieldset>
@@ -264,9 +265,15 @@
                               <div class="row">
                                  <div class="form-group col-md-12">
                                     <label for="tomaDecisiones">* ¿Que desiciones toma en el desempeño del cargo?</label>
-                                    <input type="text" pInputText id="tomaDecisiones" name="tomaDecisiones"
-                                           [(ngModel)]="position.tomaDecisiones" #tomaDecisiones="ngModel"
-                                           required/>
+                                    <textarea pInputTextarea id="tomaDecisiones" name="tomaDecisiones" maxlength="500"
+                                              [(ngModel)]="position.tomaDecisiones"
+                                              #tomaDecisiones="ngModel"
+                                              [required]="true"></textarea>
+
+
+                                    <!--<input type="text" pInputText id="tomaDecisiones" name="tomaDecisiones"-->
+                                           <!--[(ngModel)]="position.tomaDecisiones" #tomaDecisiones="ngModel"-->
+                                           <!--required/>-->
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f7.submitted && !tomaDecisiones.valid">
                                        <i class="fa fa-close"></i>
@@ -306,9 +313,9 @@
                   </div>
                </div>
             </fieldset>
-            
+
          </p-accordionTab>
-         
+
          <p-accordionTab header="Requisitos generales" [selected]="acordion == 8"
                          [disabled]="step >0 && step <9">
             <fieldset>
@@ -317,7 +324,7 @@
                      <div class="col-md-12">
                         <form name="formulario" (ngSubmit)="f8.valid &&validarOcupaciones()" #f8="ngForm" novalidate>
                            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-                     
+
                               <div class="row">
                                  <div class=" col-sm-12">
                                     <label for="interrelacionesInternas">¿Que conocimientos basicos requiere para el
@@ -404,7 +411,7 @@
                                     </div>
                                  </div>
                               </div>
-                  
+
                            </div>
                            <position-activities *ngIf="position.idCargo" [position]="position"></position-activities>
                            <div class="ui-grid-row form-footer-buttons">
@@ -425,35 +432,35 @@
                      </div>
                   </div>
                </div>
-   
+
             </fieldset>
          </p-accordionTab>
-         
+
          <p-accordionTab header="Competencias y/o Habilidades requeridas" [selected]="acordion == 9"
                          [disabled]="step >0 && step <10">
             <position-competencies (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-competencies>
          </p-accordionTab>
-   
+
          <p-accordionTab header="Responsabilidades sobre activos de la compañia" [selected]="acordion == 10"
                          [disabled]="step >0 && step <11">
             <company-assets (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></company-assets>
          </p-accordionTab>
-         
+
          <p-accordionTab header="Productividad" [selected]="acordion == 11"
                          [disabled]="step >0 && step <12">
             <productivity (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></productivity>
          </p-accordionTab>
-         
+
          <p-accordionTab header="Personalidad" [selected]="acordion == 12"
                          [disabled]="step >0 && step <13">
             <personality  (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></personality>
          </p-accordionTab>
-         
+
          <p-accordionTab header="Factores de riesgo ocupacional" [selected]="acordion == 13"
                          [disabled]="step >0 && step <14">
             <position-risks (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-risks>
          </p-accordionTab>
-         
+
          <p-accordionTab header="Valoración salarial del cargo" [selected]="acordion == 14"
                          [disabled]="step >0 && step <15">
             <fieldset>
@@ -475,7 +482,7 @@
                                        Código es requerido
                                     </div>
                                  </div>
-                                 
+
                               </div>
                               <div class="row">
                                  <div class="form-group col-md-9">
@@ -528,10 +535,10 @@
                      </div>
                   </div>
                </div>
-               
+
             </fieldset>
          </p-accordionTab>
-         
+
          <p-accordionTab header="Relación organizacional" [selected]="acordion == 15"
                          [disabled]="step >0 && step <16">
             <p-tree [value]="treeArrray" layout="horizontal" selectionMode="single" [(selection)]="selectedNode" ></p-tree>
@@ -542,8 +549,8 @@
                </div>
             </div>
          </p-accordionTab>
-      
+
       </p-accordion>
-   
+
    </div>
 </div>

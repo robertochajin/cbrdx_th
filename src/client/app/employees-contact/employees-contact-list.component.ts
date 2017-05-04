@@ -164,9 +164,12 @@ export class EmployeesContactListComponent{
     }
     
     update(f: EmployeesContact) {
-      this.msgs = [];
-      this.contact = f;
-      this.show_form  = true;
+       this.msgs = [];
+       this.show_form  = true;
+       this.employeesContactService.get(f.idTerceroContacto).subscribe(r => {
+          this.contact = r ;
+       });
+
     }
     
     goBackUpdate(){

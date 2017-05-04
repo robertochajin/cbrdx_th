@@ -150,5 +150,18 @@ export class CompetenciesGroupsComponent {
          }
       });
    }
-
+   capitalize() {
+      let input = this.group.grupoCompetencia;
+      input = input.toLowerCase().replace(/^.|\s\S/g, function(a) {
+         return a.toUpperCase();
+      });
+      this.group.grupoCompetencia = input;
+   }
+   capitalizec() {
+      let input = this.competencie.competencia;
+      input = input.toLowerCase().replace(/^.|\s\S/g, function(a) {
+         return a.toUpperCase();
+      });
+      this.competencie.competencia = input;
+   }
 }
