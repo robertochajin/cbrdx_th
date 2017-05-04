@@ -86,6 +86,7 @@ body .ui-widget:disabled {
 }
 .sidebar-menu li > a > .pull-right-container > small {
    margin-right: 0;
+   border-bottom-right-radius: 0;
 }
 
 .sidebar-menu li > a > .pull-right-container > small:after {
