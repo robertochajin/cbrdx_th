@@ -161,7 +161,6 @@ export class EmployeesContactListComponent{
       this.msgs = [];
       this.contact = new EmployeesContact();
       this.show_form  = true;
-      this._nav.setTab(3);
     }
     
     update(f: EmployeesContact) {
