@@ -64,13 +64,13 @@
             <p-column field="idFuncionalidadControl" header="{{ 'LBL_ID' | translate}}" [sortable]="true"></p-column>
             <p-column field="codigo" header="{{ 'LBL_CODIGO' | translate}}" [sortable]="true"></p-column>
             <p-column field="control" header="{{ 'LBL_NOMBRE' | translate}}" [sortable]="true"></p-column>
-            <p-column field="indicadorHabilitado" header="{{ 'LBL_VISUALIZAR' | translate}}" [sortable]="true" styleClass="datatable-col-center">
+            <p-column field="indicadorHabilitado" header="{{ 'ROLES.LBL_VISUALIZAR' | translate}}" [sortable]="true" styleClass="datatable-col-center">
                <template let-lfuncionalityControl="rowData" pTemplate="body">
                   <p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="lfuncionalityControl.indicadorHabilitado"
                                  (onChange)="changeControl(lfuncionalityControl)"></p-inputSwitch>
                </template>
             </p-column>
-            <p-column field="indicadorEditar" header="{{ 'LBL_EDITAR' | translate}}" [sortable]="true" styleClass="datatable-col-center">
+            <p-column field="indicadorEditar" header="{{ 'ROLES.LBL_EDITAR' | translate}}" [sortable]="true" styleClass="datatable-col-center">
                <template let-lfuncionalityControl="rowData" pTemplate="body">
                   <p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="lfuncionalityControl.indicadorEditar"
                                  (onChange)="changeControl(lfuncionalityControl)"></p-inputSwitch>

@@ -1,8 +1,8 @@
 <h3>{{ 'ADMINMENUS.LBL_ADMINMENU' | translate }}</h3>
 <div class="row datable-header">
    <div class="col-md-6 col-xs-12 datatable-header-add">
-      <button type="button" pButton icon="fa-plus" (click)="newModule()" label="{{ 'BTN_AGREGARMODULO' | translate }}"></button>
-      <button type="button" pButton icon="fa-plus" (click)="newMenu()" label="{{ 'BTN_AGREGARMENU' | translate }}"
+      <button type="button" pButton icon="fa-plus" (click)="newModule()" label="{{ 'ADMINMENUS.BTN_AGREGARMODULO' | translate }}"></button>
+      <button type="button" pButton icon="fa-plus" (click)="newMenu()" label="{{ 'ADMINMENUS.BTN_AGREGARMENU' | translate }}"
               *ngIf="modulo"></button>
    </div>
 </div>
@@ -72,7 +72,7 @@
                   </div>
                   <div class="row">
                      <div class="form-group">
-                        <label for="secuencia" class="control-label col-sm-3">* {{ 'LBL_SECUENCIA' | translate }} </label>
+                        <label for="secuencia" class="control-label col-sm-3">* {{ 'ADMINMENUS.LBL_SECUENCIA' | translate }} </label>
                         <div class=" col-sm-9">
                            <input type="text" pInputText class="form-control" id="secuencia" name="secuencia"
                                   [(ngModel)]="menus.secuencia"

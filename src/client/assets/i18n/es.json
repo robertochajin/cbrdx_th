@@ -409,6 +409,8 @@
       "MSG_CODREQUERIDO":"El código es requerido",
       "MSG_NOMBREREQUERIDO":"El nombre es requerido",
       "LBL_BORRAR":"Borrar",
+      "LBL_VISUALIZAR":"Visualizar",
+      "LBL_EDITAR":"Editar",
       "MSG_FECHAFINREQ":"Fecha fin es requerida",
       "MSG_WIDGETREQ":"Widget es requerido",
       "LBL_FUNCIONALIDADES":"Funcionalidades",
@@ -480,12 +482,15 @@
    },
 
    "ADMINMENUS": {
-     "LBL_ADMINMENU":"Administrador de Menús",
+      "LBL_ADMINMENU":"Administrador de Menús",
       "MSG_CODREQUERIDO":"Código es requerido",
       "MSG_CODREGISTRADO":"Ya se encuentra registrado este código",
       "MSG_NOMBREREQUERIDO":"Nombre es requerido",
       "MSG_ENLACEREQUERIDO":"Enlace es requerido",
       "MSG_SECUENCIAREQUERIDO":"Secuencia es requerido",
+      "BTN_AGREGARMODULO":"Agregar Módulo",
+      "BTN_AGREGARMENU":"Agregar Menú",
+      "LBL_SECUENCIA":"Secuencia",
       "MSG_CLASEREQUERIDO": "Clase de estilo es requerido"
    },
 
