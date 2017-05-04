@@ -20,7 +20,8 @@ export class CompetenciesGroupsComponent {
    editingCompetencie: boolean = false;
    msgs: Message[] = [];
    private competencie: Competencies = new Competencies();
-   
+
+
    constructor(private router: Router,
                private competenciesServices: CompetenciesServices,
                private groupCompetenciesServices: GroupCompetenciesServices,
@@ -81,7 +82,7 @@ export class CompetenciesGroupsComponent {
    editCompetencie(competencie: Competencies, groupId: number) {
       this.editingCompetencie = true;
       if (competencie !== null) {
-         this.competencie = Object.assign({}, competencie, {});
+         this.competencie = Object.assign({},competencie) ;
       } else {
          this.competencie.idGrupoCompetencia = groupId;
          this.competencie.indicadorHabilitado = true;
