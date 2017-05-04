@@ -1,15 +1,15 @@
 <p-messages [value]="msgs"></p-messages>
 <p-confirmDialog width="400" #cd>
    <p-footer>
-      <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
-      <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+      <button type="button" pButton icon="fa-close" label="{{ 'BTN_SI' | translate}}" (click)="cd.reject()"></button>
+      <button type="button" pButton icon="fa-check" label="{{ 'BTN_NO' | translate}}" (click)="cd.accept()"></button>
    </p-footer>
 </p-confirmDialog>
 <div *ngIf="rol">
    <div class="row">
       <div class="col-md-12">
          <div class="header">
-            <h4 class="title">Administrador de Roles</h4>
+            <h4 class="title">{{ 'ROLES.LBL_ADMINROLES' | translate}}</h4>
          </div>
       </div>
    </div>
@@ -17,7 +17,7 @@
       <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
          <div class="ui-grid-row">
             <div class="ui-grid-col-4">
-               <label for="codigoRol">* Código</label>
+               <label for="codigoRol">* {{ 'LBL_CODIGO' | translate}}</label>
                <input type="text" pInputText id="codigoRol" name="codigoRol" [readonly]="rol.idRol!==null"
                       [(ngModel)]="rol.codigoRol" maxlength="6"
                       (change)="validateCode()" (keyup)="capitalizeCode()"
@@ -25,12 +25,10 @@
                
                <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="f.submitted && !codigoRol.valid">
-                  <i class="fa fa-close"></i>
-                  Código es requerido
-               </div>
+                  <i class="fa fa-close"></i>{{ 'ROLES.MSG_CODREQUERIDO' | translate}}</div>
             </div>
             <div class="ui-grid-col-8">
-               <label for="nombre">* Nombre</label>
+               <label for="nombre">* {{ 'LBL_NOMBRE' | translate}}</label>
                <!--<input pInputText type="text" id="nombre" name="nombre"
                       [(ngModel)]="rol.rol" #nombre="ngModel" (keyup)="capitalizeName()" required/>-->
                <p-inputMask id="nombre" name="nombre" [(ngModel)]="rol.rol" mask="ROLE_?********************************************************"
@@ -41,14 +39,13 @@
                </p-inputMask>
                <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="f.submitted && !nombre.valid">
-                  <i class="fa fa-close"></i>
-                  Nombre es requerido
+                  <i class="fa fa-close"></i>{{ 'ROLES.MSG_NOMBREREQUERIDO' | translate}}
                </div>
             </div>
          </div>
          <div class="ui-grid-row">
             <div class="ui-grid-col-3">
-               <label for="fInicio">* Fecha Inicio</label>
+               <label for="fInicio">* {{ 'LBL_FECHAINICIO' | translate}}</label>
                <p-calendar id="fInicio" name="fInicio" [showIcon]="true" [dataType]="date"
                            [maxDate]="maxDate" [locale]="es" readonlyInput="true"
                            [(ngModel)]="fechaInicio" #fInicio="ngModel"
@@ -58,13 +55,13 @@
                </p-calendar>
             </div>
             <div class="col-sm-1 pull-right">
-               <label for="fInicio">Borrar</label>
+               <label for="fInicio">{{ 'ROLES.LBL_BORRAR' | translate}}</label>
                <button pButton type="button" class="ui-button-danger"
                        (click)="clearSelectionRol()"
                        icon="fa-close"></button>
             </div>
             <div class="ui-grid-col-3">
-               <label for="fFin">* Fecha Fin</label>
+               <label for="fFin">* {{ 'LBL_FECHAFIN' | translate}}</label>
                <p-calendar id="fFin" name="fFin" [showIcon]="true" [dataType]="date"
                            [minDate]="minDate" [locale]="es" readonlyInput="true" [disabled]="fechaInicio == null"
                            [(ngModel)]="fechaFin" #fFin="ngModel" [required]="fechaInicio != null"
@@ -74,11 +71,11 @@
                </p-calendar>
                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fFin.valid && fechaInicio != null">
                   <i class="fa fa-close"></i>
-                  Fecha Fin es requerida
+                  {{ 'ROLES.MSG_FECHAFINREQ' | translate}}
                </div>
             </div>
             <div class="form-group col-md-4">
-               <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+               <label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate}}</label>
                <div class=" col-sm-9">
                   <p-checkbox binary="true" id="indicador" name="indicador"
                               [(ngModel)]="rol.indicadorHabilitado"
@@ -88,7 +85,7 @@
          </div>
          <div class="ui-grid-row">
             <div class="form-group col-sm-12">
-               <label for="descripcion">Descripción</label>
+               <label for="descripcion">{{ 'LBL_DESCRIPCION' | translate}}</label>
                <textarea pInputTextarea id="descripcion" name="descripcion"
                          [(ngModel)]="rol.descripcion" maxlength="500"
                          ></textarea>
@@ -97,11 +94,11 @@
          <div class="ui-grid-row form-footer-buttons">
             <div class="ui-grid-col-4"></div>
             <div class="ui-grid-col-2">
-               <button icon="fa-arrow-left" label="Regresar" type="button"
+               <button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate}}" type="button"
                        pButton (click)="goBack()"></button>
             </div>
             <div class="ui-grid-col-2">
-               <button pButton icon="fa-plus" label="Guardar" type="submit"></button>
+               <button pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate}}" type="submit"></button>
             </div>
             <div class="ui-grid-col-5"></div>
          </div>
@@ -110,10 +107,10 @@
 </div>
 
 <p-tabView *ngIf="rol.idRol">
-   <p-tabPanel header="Funcionalidades">
+   <p-tabPanel header="{{ 'ROLES.LBL_FUNCIONALIDADES' | translate}}">
       <rol-fucionalities *ngIf="rol.idRol" [rol]="rol"></rol-fucionalities>
    </p-tabPanel>
-   <p-tabPanel header="Widgets">
+   <p-tabPanel header="{{ 'ROLES.LBL_WIDGETS' | translate}}">
       <rol-widges *ngIf="rol.idRol" [rol]="rol"></rol-widges>
    </p-tabPanel>
 </p-tabView>
