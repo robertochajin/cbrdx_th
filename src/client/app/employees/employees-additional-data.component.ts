@@ -107,7 +107,7 @@ export class EmployeesAdditionalDataComponent {
   inputNumberPeso() {
     let peso = this.employee.peso+"";
     if (this.employee.peso != null) {
-       if(peso==="0"){peso="1"}
+       if(peso==="0" ||peso===""){peso="1"}
        this.employee.peso = Number(peso.replace(/[^0-9]/g, ''));
     }
   }
@@ -115,7 +115,7 @@ export class EmployeesAdditionalDataComponent {
   inputNumber() {
     let size = this.employee.talla+"";
     if (this.employee.talla != null) {
-       if(size==="0"){size="1"}
+       if(size==="0"||size===""){size="1"}
       this.employee.talla = Number(size.replace(/[^0-9]/g, ''));
     }
   }
