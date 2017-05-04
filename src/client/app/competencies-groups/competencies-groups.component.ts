@@ -1,10 +1,10 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {Router} from '@angular/router';
-import {SelectItem, Message, ConfirmationService} from 'primeng/primeng';
-import {CompetenciesServices} from "../_services/competencies.service";
-import {Competencies} from "../_models/competencies";
-import {GroupCompetenciesServices} from "../_services/groupCompetencies.service";
-import {GroupCompetencies} from "../_models/groupCompetencies";
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { Message, ConfirmationService } from "primeng/primeng";
+import { CompetenciesServices } from "../_services/competencies.service";
+import { Competencies } from "../_models/competencies";
+import { GroupCompetenciesServices } from "../_services/groupCompetencies.service";
+import { GroupCompetencies } from "../_models/groupCompetencies";
 
 @Component({
    moduleId: module.id,
@@ -20,9 +20,7 @@ export class CompetenciesGroupsComponent {
    editingCompetencie: boolean = false;
    msgs: Message[] = [];
    private competencie: Competencies = new Competencies();
-   private tempCompetencie: Competencies = new Competencies();
-
-
+   
    constructor(private router: Router,
                private competenciesServices: CompetenciesServices,
                private groupCompetenciesServices: GroupCompetenciesServices,
@@ -83,10 +81,7 @@ export class CompetenciesGroupsComponent {
    editCompetencie(competencie: Competencies, groupId: number) {
       this.editingCompetencie = true;
       if (competencie !== null) {
-         //this.competencie = competencie;
          this.competencie = Object.assign({}, competencie, {});
-         this.tempCompetencie = Object.assign({}, competencie, {});
-         
       } else {
          this.competencie.idGrupoCompetencia = groupId;
          this.competencie.indicadorHabilitado = true;
@@ -102,15 +97,6 @@ export class CompetenciesGroupsComponent {
 
          accept: () => {
             this.competencie = null;
-            this.groups[this.groups.indexOf(this.groups.find(z => this.tempCompetencie.idGrupoCompetencia == z.idGrupoCompetencia))]
-            .competencies.map(c => {
-               if(c.idCompetencia == this.tempCompetencie.idCompetencia){
-                  console.info(this.tempCompetencie);
-                  //c = this.tempCompetencie;
-                  c = new Competencies();
-               }
-            });
-            this.tempCompetencie = new Competencies();
             this.editingCompetencie = false;
          }
       });
@@ -122,7 +108,6 @@ export class CompetenciesGroupsComponent {
       if (this.competencie.idCompetencia !== null && this.competencie.idCompetencia !== undefined) {
          this.competenciesServices.update(this.competencie).subscribe(res => {
             if(res.ok){
-               console.info(this.competencie);
                this.groups[this.groups.indexOf(this.groups.find(z => this.competencie.idGrupoCompetencia == z.idGrupoCompetencia))]
                   .competencies.map(c => {
                   if(c.idCompetencia == this.competencie.idCompetencia){
