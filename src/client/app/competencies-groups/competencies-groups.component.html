@@ -10,7 +10,7 @@
                      <div class="form-group col-md-8">
                         <label for="nombre">* Nombre</label>
                         <input type="text" pInputText id="nombre" name="nombre" [disabled]="group.idGrupoCompetencia"
-                               [(ngModel)]="group.grupoCompetencia" #nombre="ngModel"
+                               [(ngModel)]="group.grupoCompetencia" #nombre="ngModel" (keyup)="capitalize()"
                                required/>
                         <div class="ui-message ui-messages-error ui-corner-all"
                              *ngIf="fg.submitted && !nombre.valid">
@@ -89,7 +89,7 @@
                               <label for="cNombre">* Competencia / Habilidad</label>
                               <input type="text" pInputText id="cNombre" name="cNombre"
                                      [(ngModel)]="competencie.competencia" #cNombre="ngModel"  [readonly]="competencie.idCompetencia != null"
-                                     required/>
+                                     required (keyup)="capitalizec()"/>
                               <div class="ui-message ui-messages-error ui-corner-all"
                                    *ngIf="fc.submitted && !cNombre.valid">
                                  <i class="fa fa-close"></i>
@@ -137,12 +137,12 @@
             </div>
          </div>
          <div class="row" *ngIf="!editingCompetencie">
-            <div class="col-md-6">
+            <div class="col-md-9">
                <button type="button" pButton icon="fa-pencil" (click)="editGroup(group)" label="Editar grupo"></button>
-            </div>
-            <div class="col-md-6">
                <button type="button" pButton icon="fa-plus" (click)="editCompetencie(null, group.idGrupoCompetencia)"
                        label="Agregar Competencia"></button>
+            </div>
+            <div class="col-md-6">
             </div>
          </div>
          <div class="row" *ngIf="!editingCompetencie">
@@ -151,12 +151,12 @@
                             [responsive]="true" id="positionCompetenciesDT" styleClass="dejemeverelcombo">
                   <p-column field="competencia" header="Competencia" [sortable]="true"></p-column>
                   <p-column field="descripcion" header="Descripción" [sortable]="true"></p-column>
-                  <p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true">
+                  <p-column header="{{ 'LBL_HABILITADO' | translate }}"  styleClass="datatable-col-action">
                      <template let-competencie="rowData" pTemplate="body">
                         <p-checkbox [(ngModel)]="competencie.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
                      </template>
                   </p-column>
-                  <p-column header="Acciones">
+                  <p-column header="Acciones" styleClass="datatable-col-action">
                      <template let-competencie="rowData" pTemplate="body">
                         <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil"
                                 pButton (click)="editCompetencie(competencie, group.idGrupoCompetencia)"></button>

@@ -129,7 +129,7 @@ export class PositionsUpdateComponent {
    }
    
    ngOnInit() {
-   
+      this.acordion = 0;
       this.route.params.subscribe( ( params: Params ) => {
          this.positionsService.get( +params[ 'id' ] ).subscribe( position => {
             this.position = position;

@@ -14,27 +14,25 @@
       </div>
    </div>
    <form (ngSubmit)="fr.valid && onSubmitREE()" #fr="ngForm" novalidate id="formulario" *ngIf="!guardandoA">
-      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-         <div class="ui-grid-row">
-            <div class="ui-grid-col-12">
-               <label for="idCargoREE"><h3>Reemplaza a</h3></label>
+      <div class="ui-grid-row">
+         <div class="ui-grid-col-12">
+            <label for="idCargoREP"><h3>Reemplaza a</h3></label>
+         </div>
+      </div>
+      <div class="ui-grid-row">
+         <div class="ui-grid-col-9">
+            <p-dropdown id="idCargoREE" name="idCargoREE" required="true"
+                        [options]="listPositionREE" [autoWidth]="false"
+                        [(ngModel)]="idCargoRelacionREE" #idCargoREE="ngModel"
+            ></p-dropdown>
+            <div class="ui-message ui-messages-error ui-corner-all"
+                 *ngIf="fr.submitted && !idCargoREE.valid">
+               <i class="fa fa-close"></i>
+               Cargo requerido
             </div>
          </div>
-         <div class="ui-grid-row">
-            <div class="ui-grid-col-9">
-               <p-dropdown id="idCargoREE" name="idCargoREE" required="true"
-                           [options]="listPositionREE" [autoWidth]="false"
-                           [(ngModel)]="idCargoRelacionREE" #idCargoREE="ngModel"
-               ></p-dropdown>
-               <div class="ui-message ui-messages-error ui-corner-all"
-                    *ngIf="fr.submitted && !idCargoREE.valid">
-                  <i class="fa fa-close"></i>
-                  Cargo requerido
-               </div>
-            </div>
-            <div class="ui-grid-col-3">
-               <button pButton icon="fa-plus" label="Agregar" type="submit"></button>
-            </div>
+         <div class="ui-grid-col-3">
+            <button pButton icon="fa-plus" label="Agregar" type="submit"></button>
          </div>
       </div>
    </form>
@@ -53,27 +51,25 @@
       </div>
    </div>
    <form (ngSubmit)="f.valid && onSubmitREP()" #f="ngForm" novalidate id="formularioREP" *ngIf="!guardandoP">
-      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-         <div class="ui-grid-row">
-            <div class="ui-grid-col-12">
-               <label for="idCargoREP"><h3>Reemplazado por</h3></label>
+      <div class="ui-grid-row">
+         <div class="ui-grid-col-12">
+            <label for="idCargoREP"><h3>Reemplazado por</h3></label>
+         </div>
+      </div>
+      <div class="ui-grid-row">
+         <div class="ui-grid-col-9">
+            <p-dropdown id="idCargoREP" name="idCargoREP" required="true"
+                        [options]="listPositionREP" [autoWidth]="false"
+                        [(ngModel)]="idCargoRelacionREP" #idCargoREP="ngModel"
+            ></p-dropdown>
+            <div class="ui-message ui-messages-error ui-corner-all"
+                 *ngIf="f.submitted && !idCargoREP.valid">
+               <i class="fa fa-close"></i>
+               Cargo requerido
             </div>
          </div>
-         <div class="ui-grid-row">
-            <div class="ui-grid-col-9">
-               <p-dropdown id="idCargoREP" name="idCargoREP" required="true"
-                           [options]="listPositionREP" [autoWidth]="false"
-                           [(ngModel)]="idCargoRelacionREP" #idCargoREP="ngModel"
-               ></p-dropdown>
-               <div class="ui-message ui-messages-error ui-corner-all"
-                    *ngIf="f.submitted && !idCargoREP.valid">
-                  <i class="fa fa-close"></i>
-                  Cargo requerido
-               </div>
-            </div>
-            <div class="ui-grid-col-3">
-               <button pButton icon="fa-plus" label="Agregar" type="submit"></button>
-            </div>
+         <div class="ui-grid-col-3">
+            <button pButton icon="fa-plus" label="Agregar" type="submit"></button>
          </div>
       </div>
    </form>

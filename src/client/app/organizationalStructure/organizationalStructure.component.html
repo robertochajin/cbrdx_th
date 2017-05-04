@@ -225,13 +225,14 @@
                                  <div class="ui-message ui-messages-error ui-corner-all"
                                       *ngIf="f.submitted && !tiposArea.valid">
                                     Tipo de Área es requerido
+
                                  </div>
                               </div>
                            </div>
                         </div>
                         <div class="row">
                            <div class="form-group" >
-                              <label for="estructuraFisica" class="control-label col-sm-3">* Estructura Fisica</label>
+                              <label for="estructuraFisica" class="control-label col-sm-3">* Estructura Física</label>
                               <div class=" col-sm-9">
                                  <p-dropdown id="estructuraFisica" name="estructuraFisica"
                                              [options]="physicalTypes" [autoWidth]="false" required="true"
@@ -239,7 +240,8 @@
                                              #estructuraFisica="ngModel"></p-dropdown>
                                  <div class="ui-message ui-messages-error ui-corner-all"
                                       *ngIf="f.submitted && !estructuraFisica.valid">
-                                    Estructura Fisica es requerido
+                                    Estructura física es requerido
+
                                  </div>
                               </div>
                            </div>

@@ -46,7 +46,8 @@
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !idEstructuraArea.valid">
                                        <i class="fa fa-close"></i>
-                                       Área es requerido
+                                          Área es requerido
+
                                     </div>
                                  </div>
                                  <div class="form-group col-md-6">
@@ -264,9 +265,15 @@
                               <div class="row">
                                  <div class="form-group col-md-12">
                                     <label for="tomaDecisiones">* ¿Que desiciones toma en el desempeño del cargo?</label>
-                                    <input type="text" pInputText id="tomaDecisiones" name="tomaDecisiones"
-                                           [(ngModel)]="position.tomaDecisiones" #tomaDecisiones="ngModel"
-                                           required/>
+                                    <textarea pInputTextarea id="tomaDecisiones" name="tomaDecisiones" maxlength="500"
+                                              [(ngModel)]="position.tomaDecisiones"
+                                              #tomaDecisiones="ngModel"
+                                              [required]="true"></textarea>
+
+
+                                    <!--<input type="text" pInputText id="tomaDecisiones" name="tomaDecisiones"-->
+                                           <!--[(ngModel)]="position.tomaDecisiones" #tomaDecisiones="ngModel"-->
+                                           <!--required/>-->
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f7.submitted && !tomaDecisiones.valid">
                                        <i class="fa fa-close"></i>
@@ -355,7 +362,7 @@
                               <div class="row">
                                  <div class="col-md-3">
                                     <label for="edad">Edad</label>
-                                    <input type="text" pInputText id="edad" name="edad" type="number" min="1" max="99" pattern="(?:\b|-)([1-9]{1,2}?|99)\b"
+                                    <input type="text" pInputText id="edad" name="edad" type="number" min="1" max="99" pattern="(?:\b|-)([0-9]{1,2}?|99)\b"
                                            [(ngModel)]="position.edad" #edad="ngModel" required
                                     />
                                     <div class="ui-message ui-messages-error ui-corner-all"

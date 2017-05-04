@@ -161,13 +161,15 @@ export class EmployeesContactListComponent{
       this.msgs = [];
       this.contact = new EmployeesContact();
       this.show_form  = true;
-      this._nav.setTab(3);
     }
     
     update(f: EmployeesContact) {
-      this.msgs = [];
-      this.contact = f;
-      this.show_form  = true;
+       this.msgs = [];
+       this.show_form  = true;
+       this.employeesContactService.get(f.idTerceroContacto).subscribe(r => {
+          this.contact = r ;
+       });
+
     }
     
     goBackUpdate(){

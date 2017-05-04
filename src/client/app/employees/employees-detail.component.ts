@@ -22,7 +22,9 @@ export class EmployeesDetailComponent implements OnInit   {
         private location: Location,
         private _nav:NavService,
         private router: Router
-    ) {}
+    ) {
+
+    }
 
     ngOnInit(): void {
       this.route.params.subscribe((params: Params) => {
@@ -32,6 +34,7 @@ export class EmployeesDetailComponent implements OnInit   {
             this.employee.segundoNombre+' '+
             this.employee.primerApellido+' '+
             this.employee.segundoApellido;
+           // this.acordion=0;
 		  //
           //   if( this.employee.ciudadExpDocumento === null ) this.employee.ciudadExpDocumento='';
           //   if( this.employee.ciudadNacimiento === null ) this.employee.ciudadNacimiento='';

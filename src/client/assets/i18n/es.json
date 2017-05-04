@@ -248,6 +248,7 @@
     "LBL_VEHICULOS":"Vehiculos",
     "LBL_VIVIENDA":"La Vivienda es",
     "LBL_VIVO":"Vivo",
+    "LBL_JURIDICO":"Estado juridico",
     "MSG_DOCUMENTO":"El documento que intenta ingresar ya está asignado a otra persona y no puede ser duplicado"
 
   },
