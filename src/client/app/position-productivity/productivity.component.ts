@@ -59,6 +59,7 @@ export class ProductivityComponent {
   }
 
   onSubmit() {
+     this.msgs=[];
     if (this.productivity.idCargoProductividad == null) {
       this.productivityService.add(this.productivity)
         .subscribe(data => {

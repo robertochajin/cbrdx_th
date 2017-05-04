@@ -1,6 +1,6 @@
 <h3>{{ 'LBL_NUEVO' | translate }} {{ 'GRUPOSDEGESTION.LBL_GRUPOGESTION' | translate }}</h3>
 <div class="col-sm-6 col-sm-offset-3">
-    <h2 class="text-center">{{ 'LBL_AGREGAR' | translate }} {{ 'GRUPOSDEGESTION.LBL_GRUPOGESTION' | translate }}</h2>
+    <h2 class="text-center">{{ 'BTN_AGREGAR' | translate }} {{ 'GRUPOSDEGESTION.LBL_GRUPOGESTION' | translate }}</h2>
     <form class="form-horizontal" #f="ngForm" (ngSubmit)="isGreater&&!codeExists&&f.form.valid&&createGruposGestion()"
           (keydown.enter)="$event.preventDefault()" novalidate>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !codigoGrupoGestion.valid }">

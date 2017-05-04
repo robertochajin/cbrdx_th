@@ -60,6 +60,7 @@ export class LocationAddComponent implements OnInit {
   residencia: TerceroResidencias = new TerceroResidencias();
   submitted: boolean;
   msgs: Message[] = [];
+  wrongCity: boolean = true;
 
   constructor(private location: Location,
               private politicalDivisionServices: PoliticalDivisionService,
@@ -128,32 +129,37 @@ export class LocationAddComponent implements OnInit {
   }
 
   createLocation() {
-    this.localizacion.direccion = this.finalAddress;
-    this.localizacion.idTipoDireccion = this.selectedAddressType;
-    this.localizacion.nomenclaturaPrincipal = this.selectedPrincipalNomenclature;
-    this.localizacion.idDivisionPolitica = this.localizacion.locacion.idDivisionPolitica;
-    this.localizacion.indicadorHabilitado = true;
+     this.submitted = true;
+     if(this.localizacion.locacion.idDivisionPolitica!==undefined){
+       this.localizacion.direccion = this.finalAddress;
+       this.localizacion.idTipoDireccion = this.selectedAddressType;
+       this.localizacion.nomenclaturaPrincipal = this.selectedPrincipalNomenclature;
+       this.localizacion.idDivisionPolitica = this.localizacion.locacion.idDivisionPolitica;
+       this.localizacion.indicadorHabilitado = true;
 
-    this.locateService.add(this.localizacion).subscribe(res => {
-      this.terceroLocalizacion.idTercero = this.idTercero;
-      this.terceroLocalizacion.idlocalizacion = res.idLocalizacion;
-      this.terceroLocalizacion.indicadorHabilitado = true;
-      this.terceroLocalizacion.auditoriaUsuario = 1;
+       this.locateService.add(this.localizacion).subscribe(res => {
+         this.terceroLocalizacion.idTercero = this.idTercero;
+         this.terceroLocalizacion.idlocalizacion = res.idLocalizacion;
+         this.terceroLocalizacion.indicadorHabilitado = true;
+         this.terceroLocalizacion.auditoriaUsuario = 1;
 
-      this.locationService.add(this.terceroLocalizacion).subscribe(res2 => {
+         this.locationService.add(this.terceroLocalizacion).subscribe(res2 => {
 
-        if (this.residencia.indicadorHabilitado) {
-          this.residencia.idTerceroLocalizacion = res2.idTerceroLocalizacion;
-          this.tercerosResidenciasServices.add(this.residencia).subscribe(res3 => {
-            this._nav.setTab(4);
-            this.location.back();
-          });
-        } else {
-          this._nav.setTab(4);
-          this.location.back();
-        }
-      });
-    });
+           if (this.residencia.indicadorHabilitado) {
+             this.residencia.idTerceroLocalizacion = res2.idTerceroLocalizacion;
+             this.tercerosResidenciasServices.add(this.residencia).subscribe(res3 => {
+               this._nav.setTab(4);
+               this.location.back();
+             });
+           } else {
+             this._nav.setTab(4);
+             this.location.back();
+           }
+         });
+       });
+     }else{
+        this.wrongCity=false;
+     }
   }
 
   hoodSearch(event: any) {
@@ -166,10 +172,16 @@ export class LocationAddComponent implements OnInit {
     this.localizacion.locacion.idDivisionPolitica = event.idDivisionPolitica;
     this.localizacion.locacion.camino = event.camino;
     this.composeAddress();
+     this.wrongCity=true;
   }
 
-  capturePrincipalNomenclature(label: any) {
-    this.labelPrincipalNomenclature = label;
+  capturePrincipalNomenclature() {
+     for(let n of this.principalNomenclatureList){
+        if(n.value=== this.selectedPrincipalNomenclature){
+           this.labelPrincipalNomenclature = n.label
+           break;
+        }
+     }
     this.composeAddress();
   }
 

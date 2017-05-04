@@ -1,27 +1,27 @@
-<h3 class="first">Vehiculos</h3>
+<h3 class="first">{{'EMPLOYEES.LBL_VEHICULOS' | translate:param }}</h3>
 <div>
   <div class="row datable-header">
     <div class="col-md-6 col-xs-12 datatable-header-add">
-      <button type="button" icon="fa-plus" label="Nuevo Vehiculo"
+      <button type="button" icon="fa-plus" label="{{'EMPLOYEES.LBL_NUEVOVEHICULO' | translate:param }}"
               pButton (click)="add()"></button>
     </div>
     <div class="col-md-6 col-xs-12 datatable-header-search" >
 
       <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-search"></i></div>
-        <input #gb type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
+        <input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate:param }}" class="form-control">
       </div>
 
     </div>
   </div>
 
   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="employeesVehicle" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-    <p-column field="tipoVehiculo" header="Tipo Vehiculo" [sortable]="true"></p-column>
-    <p-column field="tipoServicio" header="Tipo de Servicio " [sortable]="true"></p-column>
-    <p-column field="marca" header="Marca" [sortable]="true"></p-column>
-    <p-column field="modelo" header="Modelo" [sortable]="true"></p-column>
-    <p-column field="placa" header="Placa" [sortable]="true"></p-column>
-    <p-column header="Acciones" styleClass="datatable-col-action">
+    <p-column field="tipoVehiculo" header="{{'EMPLOYEES.LBL_TIPOVEHICULO' | translate:param }}" [sortable]="true"></p-column>
+    <p-column field="tipoServicio" header="{{'EMPLOYEES.LBL_TIPOSERVICIO' | translate:param }}" [sortable]="true"></p-column>
+    <p-column field="marca" header="{{'EMPLOYEES.LBL_MARCA' | translate:param }}" [sortable]="true"></p-column>
+    <p-column field="modelo" header="{{'EMPLOYEES.LBL_MODELO' | translate:param }}" [sortable]="true"></p-column>
+    <p-column field="placa" header="{{'EMPLOYEES.LBL_PLACA' | translate:param }}" [sortable]="true"></p-column>
+    <p-column header="{{'LBL_ACCIONES' | translate:param }}" styleClass="datatable-col-action">
       <template let-employeeVehicle="rowData" pTemplate="body">
 
         <!--<button type="button" icon="fa-eye" class="ui-button-info"-->
@@ -36,4 +36,3 @@
   </p-dataTable>
 </div>
 <p-confirmDialog width="400"></p-confirmDialog>
-

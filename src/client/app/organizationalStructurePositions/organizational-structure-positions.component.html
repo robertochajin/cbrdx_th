@@ -264,10 +264,10 @@
                   <p-column header="Acciones" styleClass="datatable-col-action">
                      <template let-pp="rowData" pTemplate="body">
                         <div class="btn-group" role="group">
-                           <button type="button" class="ui-button ui-button-success btn" icon="fa-child"
+                           <button type="button" class="ui-button ui-button-success btn" icon="fa-child" pTooltip="Asignar colaborador" tooltipPosition="top"
                                    pButton (click)="editPersonSlot(pp)"></button>
                            <button *ngIf="pp.idTercero != 0" type="button" class="ui-button ui-button-danger btn"
-                                   icon="fa-mail-forward"
+                                   icon="fa-trash"
                                    pButton (click)="removePerson(pp)"></button>
                         </div>
                      </template>

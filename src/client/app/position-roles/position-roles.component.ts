@@ -60,7 +60,7 @@ export class PositionRolesComponent {
             if (elemento.asignadoAlCargo)
                num++;
          }
-         if(num != 1 && objUpdate.indicadorHabilitado == false ) {
+         if(num == 0 && objUpdate.indicadorHabilitado == false ) {
             this.msgsAlert[0] = {severity: 'alert', summary: 'Error', detail: 'Debe seleccional al menos un rol'};
             objUpdate.indicadorHabilitado = true;
          }else{

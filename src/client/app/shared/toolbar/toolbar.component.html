@@ -3,11 +3,11 @@
   <a routerLink="/dashboard" routerLinkActive="active" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini">
-      <img id="logoAppIcon" src="assets/images/gestionamos_green_icon.png"/>
+      <img id="logoAppIcon" src="assets/images/header-icono-th.png"/>
     </span>
     <!-- logo for regular state and mobile devices -->
     <span class="logo-lg">
-      <img id="logoApp" src="assets/images/gestionamos_green.png"/>
+      <img id="logoApp" src="assets/images/header-logo-th.png"/>
     </span>
   </a>
   <!-- Header Navbar: style can be found in header.less -->
@@ -56,20 +56,20 @@
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="assets/images/user-160x160.jpg" class="user-image" alt="User Image">
+            <img src="assets/images/perfil/{{usuarioLogueado.usuario.idUsuario}}.jpg" class="user-image" alt="User Image">
              <span class="hidden-xs">{{usuarioLogueado.nombre}}</span>
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-            <img src="assets/images/user-160x160.jpg" class="img-circle" alt="User Image">
+            <img src="assets/images/perfil/{{usuarioLogueado.usuario.idUsuario}}.jpg" class="img-circle" alt="User Image">
               <p>
-                Carlos Enrique Torres Barrios
-                <small>{{ 'TEMPLATE.LBL_USUARIODESDE' | translate:param }} 10/12/2014</small>
+                 {{usuarioLogueado.nombre}}
+                <small>{{ 'TEMPLATE.LBL_USUARIODESDE' | translate:param }} {{ultimaActualizacion}}</small>
               </p>
             </li>
 
-            <li class="disabled menu-theme-title"><a href="#">{{ 'TEMPLATE.LBL_USUARIODESDE' | translate:param }}</a></li>
+            <li class="disabled menu-theme-title"><a href="#">{{ 'TEMPLATE.LBL_TEMASDISPONIBLES' | translate:param }}</a></li>
             <li class="menu-theme">
               <span class="colortheme colorwhite" onclick="changeTheme('skin-black')" ></span>
               <span class="colortheme colorpurple" onclick="changeTheme('skin-purple')"></span>

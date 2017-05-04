@@ -9,7 +9,7 @@
       </div>
    </div>
    <div class="ui-grid-row">
-      
+
       <div class="col-md-4">
          <p-tree id="treedCompany" [(value)]="treedCompany" selectionMode="single"
                  [(selection)]="selectedNode"
@@ -18,7 +18,7 @@
          ></p-tree>
          {{empty}}
       </div>
-      
+
       <div class="col-md-8">
          <p-fieldset legend="{{header}}">
             <div class="row-fluid">
@@ -121,7 +121,7 @@
                                  <input type="url" pInputText class="form-control" id="pagina" name="pagina"
                                         [(ngModel)]="organizationalStructure.paginaWeb"
                                         #pagina="ngModel"/>
-                                
+
                               </div>
                            </div>
                         </div>
@@ -139,7 +139,7 @@
                               </div>
                               <div class=" col-sm-1">
                                  <button pButton icon="fa-plus" label="Editar Dirección" (click)="toggleform()"></button>
-   
+
                               </div>
                            </div>
                         </div>
@@ -194,7 +194,7 @@
                                              #strctureTypes="ngModel"></p-dropdown>
                                  <div class="ui-message ui-messages-error ui-corner-all"
                                       *ngIf="f.submitted && !strctureTypes.valid">
-                                    Nombre es requerido
+                                    Tipo estructura es requerido
                                  </div>
                               </div>
                            </div>
@@ -224,14 +224,15 @@
                                              #tiposArea="ngModel"></p-dropdown>
                                  <div class="ui-message ui-messages-error ui-corner-all"
                                       *ngIf="f.submitted && !tiposArea.valid">
-                                    Centro de Costo es requerido
+                                    Tipo de Área es requerido
+
                                  </div>
                               </div>
                            </div>
                         </div>
                         <div class="row">
                            <div class="form-group" >
-                              <label for="estructuraFisica" class="control-label col-sm-3">* Estructura Fisica</label>
+                              <label for="estructuraFisica" class="control-label col-sm-3">* Estructura Física</label>
                               <div class=" col-sm-9">
                                  <p-dropdown id="estructuraFisica" name="estructuraFisica"
                                              [options]="physicalTypes" [autoWidth]="false" required="true"
@@ -239,7 +240,8 @@
                                              #estructuraFisica="ngModel"></p-dropdown>
                                  <div class="ui-message ui-messages-error ui-corner-all"
                                       *ngIf="f.submitted && !estructuraFisica.valid">
-                                    Centro de Costo es requerido
+                                    Estructura física es requerido
+
                                  </div>
                               </div>
                            </div>

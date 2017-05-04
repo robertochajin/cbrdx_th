@@ -10,9 +10,9 @@
         </div>
     </div>
     <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="nfstudies"  [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-        <p-column field="tituloEstudio" header="{{'ACADEMICEDUCATION.LBL_TITULOOBTENIDO' | translate:param}}" [sortable]="true"></p-column>
-        <p-column field="fechaIngresa" header="{{'ACADEMICEDUCATION.LBL_INGRESO' | translate:param}} " [sortable]="true"></p-column>
-        <p-column field="fechaTermina" header="{{'ACADEMICEDUCATION.LBL_FINALIZACION' | translate:param}}" [sortable]="true"></p-column>
+        <p-column field="tituloEstudio" header="{{'EMPLOYEES.LBL_TITULOOBTENIDO' | translate:param}}" [sortable]="true"></p-column>
+        <p-column field="fechaIngresa" header="{{'EMPLOYEES.LBL_INGRESO' | translate:param}} " [sortable]="true"></p-column>
+        <p-column field="fechaTermina" header="{{'EMPLOYEES.LBL_FINALIZACION' | translate:param}}" [sortable]="true"></p-column>
         <p-column field="ciudad" header="{{'LBL_CIUDAD' | translate:param}}" [sortable]="true"></p-column>
         <p-column field="institucion" header="{{'EMPLOYEES.LBL_INSTITUCION' | translate:param}}" [sortable]="true"></p-column>
         <p-column header="Acciones" styleClass="datatable-col-action">

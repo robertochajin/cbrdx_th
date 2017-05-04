@@ -14,13 +14,13 @@
          </div>
          <div class="clearfix card-header">
             <div class="col-md-4">
-               <img class="img-circle img-responsive user-avatar" src="assets/images/user-160x160.jpg" />
+               <img class="img-circle img-responsive user-avatar" src="assets/images/perfil/{{usuarioLogueado.usuario.idUsuario}}.jpg" />
             </div>
             <div class="col-md-8">
                <h4>{{employee.nombreCompleto}} - {{employee.fechaNacimiento}}</h4>
                <span>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</span><br/>
-               <p-fileUpload name="myfile[]" url="http://localhost:3000/upload" auto="true"
-                             chooseLabel="{{'USER_SESSION.LBL_NUEVOAVATAR' | translate:param}}"></p-fileUpload>
+               <!--<p-fileUpload name="myfile[]" url="http://localhost:3000/upload" auto="true"-->
+                             <!--chooseLabel="{{'USER_SESSION.LBL_NUEVOAVATAR' | translate:param}}"></p-fileUpload>-->
 
                <div *ngIf="user">
                   <div class="header" style=" margin-top: 40px;">
@@ -97,8 +97,7 @@
 
             </div>
          </div>
-         
+
 
       </div>
    </div>
-

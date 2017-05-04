@@ -1,9 +1,8 @@
 <h3 class="first">{{'EMPLOYEES.LBL_DATOS' | translate:param}}</h3>
 <p-messages [value]="msgs"></p-messages>
-<div *ngIf="show_form">
-  <div class="row-fluid">
+  <div class="row-fluid" >
     <div class="col-md-12">
-      <form name="formulario emergencia" (ngSubmit)="fe.valid && onSubmit()" #fe="ngForm" novalidate id="formulario">
+      <form name="formulario emergencia" (ngSubmit)="fe.valid && onSubmit()" #fe="ngForm" novalidate id="formulario" *ngIf="show_form" >
         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
           <div class="row">
             <div class="form-group col-md-8">
@@ -31,21 +30,18 @@
           <div class="row">
             <div class="form-group col-md-6">
               <label for="fijo">{{ 'LBL_TELEFONO' | translate:param }}</label>
-<!--              <input type="text" pInputText id="fijo" name="fijo"
-                     [(ngModel)]="contact.telefono" #telefonoFijo="ngModel"
-              />-->
               <p-inputMask id="fijo" name="fijo"
-                           mask="?(999) 999-9999 Ext 9999" placeholder="(999) 999-9999 Ext 99999"
+                           mask="?(999) 999-9999 Ext 9999" placeholder="(999) 999-9999 Ext 99999" [required]="!contact.celular"
                            [(ngModel)]="contact.telefono" #telefonoFijo="ngModel"
               ></p-inputMask>
+               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="fe.submitted && (!telefonoFijo.valid && !celular.valid)">
+                  <i class="fa fa-close"></i>
+                  {{'LBL_TELEFONO' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+               </div>
             </div>
             <div class="form-group col-md-6">
               <label for="cel">{{ 'LBL_CELULAR' | translate:param }}</label>
-              <!--<input type="text" pInputText id="cel" name="cel"
-                     [(ngModel)]="contact.celular" #telefonoCelular="ngModel"
-
-              />-->
-              <p-inputMask id="cel" name="cel"
+              <p-inputMask id="cel" name="cel" [required]="!contact.telefono"
                            mask="?(999) 999-9999" placeholder="(999) 999-9999"
                            [(ngModel)]="contact.celular" #celular="ngModel"
               ></p-inputMask>
@@ -62,7 +58,6 @@
       </form>
     </div>
   </div>
-</div>
 <div>
     <div class="row datable-header">
         <div class="col-md-6 col-xs-12 datatable-header-add">

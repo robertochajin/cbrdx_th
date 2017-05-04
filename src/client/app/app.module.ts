@@ -75,10 +75,15 @@ import { MenuManagerModule } from "./menuManager/menuManager.module";
 // Auth JWT module
 import {AuthModule} from "./shared/auth.module";
 
+// Global Messages
+import {
+   MessagesModule,
+} from 'primeng/primeng';
 
 //CarsModule,
 @NgModule({
    imports: [BrowserModule, HttpModule, AppRoutingModule,
+      MessagesModule,
       EmployeesModule,
       FamilyInformationModule,
       LocationModule,

@@ -9,6 +9,7 @@ import {EmployeesService} from "../_services/employees.service";
 import {SelectItem, Message, ConfirmationService} from 'primeng/primeng';
 import {ListaItem} from "../_models/listaItem";
 import {ListaService} from "../_services/lista.service";
+import {NavService} from '../_services/_nav.service';
 
 @Component({
     moduleId: module.id,
@@ -23,7 +24,7 @@ export class EmployeesContactListComponent{
     contact: EmployeesContact = new EmployeesContact();
     lcontact: EmployeesContact = new EmployeesContact();
     dialogObjet: EmployeesContact = new EmployeesContact();
-    contacts: EmployeesContact[];
+    contacts: EmployeesContact[]=[];
     show_form: boolean = false;
     msgs: Message[] = [];
     relationship: SelectItem[] = [];
@@ -34,6 +35,7 @@ export class EmployeesContactListComponent{
                 private confirmationService: ConfirmationService,
                 private employeesService: EmployeesService,
                 private listaService: ListaService,
+                private _nav: NavService
     ) {
        this.listaService.getMasterDetails('ListasParentescos').subscribe(res => {
           this.relationship.push({label: 'Seleccione', value: null});
@@ -49,10 +51,26 @@ export class EmployeesContactListComponent{
         .subscribe(contacts => {
           this.contacts = contacts
         });*/
-  
-        this.employeesContactService.getByEmployee(this.employee.idTercero).subscribe(
-          contacts => this.contacts = contacts
-        );
+
+       this.employeesContactService.getByEmployee(this.employee.idTercero).subscribe(
+          contacts =>{
+             for(let c of contacts){
+                let bandera = false;
+                let label="";
+                for(let ct of this.relationship){
+                   if(c.idListaParentesco == ct.value){
+                      label = ct.label;
+                      bandera=true;
+                      break;
+                   }
+                }
+                if(bandera){
+                   c.nombreListaParentesco=label;
+                   this.contacts.push(c);
+                }
+             }
+          }
+       );
         
     }
     
@@ -64,9 +82,25 @@ export class EmployeesContactListComponent{
             this.employeesContactService.add(this.contact)
             .subscribe(data => {
                 this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
-                this.employeesContactService.getByEmployee(this.employee.idTercero).subscribe(
-                  contacts => this.contacts = contacts
-                );
+               this.employeesContactService.getByEmployee(this.employee.idTercero).subscribe(
+                  contacts =>{
+                     for(let c of contacts){
+                        let bandera = false;
+                        let label="";
+                        for(let ct of this.relationship){
+                           if(c.idListaParentesco == ct.value){
+                              label = ct.label;
+                              bandera=true;
+                              break;
+                           }
+                        }
+                        if(bandera){
+                           c.nombreListaParentesco=label;
+                           this.contacts.push(c);
+                        }
+                     }
+                  }
+               );
             }, error => {
               this.show_form  = true;
               this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
@@ -75,9 +109,27 @@ export class EmployeesContactListComponent{
             this.employeesContactService.update(this.contact)
             .subscribe(data => {
                 this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
-                this.employeesContactService.getByEmployee(this.employee.idTercero).subscribe(
-                  contacts => this.contacts = contacts
-                );
+
+               this.employeesContactService.getByEmployee(this.employee.idTercero).subscribe(
+                  contacts =>{
+                     for(let c of contacts){
+                        let bandera = false;
+                        let label="";
+                        for(let ct of this.relationship){
+                           if(c.idListaParentesco == ct.value){
+                              label = ct.label;
+                              bandera=true;
+                              break;
+                           }
+                        }
+                        if(bandera){
+                           c.nombreListaParentesco=label;
+                           this.contacts.push(c);
+                        }
+                     }
+                  }
+               );
+
             }, error => {
               this.show_form  = true;
               this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
@@ -112,9 +164,12 @@ export class EmployeesContactListComponent{
     }
     
     update(f: EmployeesContact) {
-      this.msgs = [];
-      this.contact = f;
-      this.show_form  = true;
+       this.msgs = [];
+       this.show_form  = true;
+       this.employeesContactService.get(f.idTerceroContacto).subscribe(r => {
+          this.contact = r ;
+       });
+
     }
     
     goBackUpdate(){
