@@ -1,8 +1,7 @@
 <h3 class="first">{{'EMPLOYEES.LBL_DATOS' | translate:param}}</h3>
 <p-messages [value]="msgs"></p-messages>
-<div *ngIf="show_form">
-  <div class="row-fluid">
-    <div class="col-md-12">
+  <div class="row-fluid" >
+    <div class="col-md-12"*ngIf="show_form" >
       <form name="formulario emergencia" (ngSubmit)="fe.valid && onSubmit()" #fe="ngForm" novalidate id="formulario">
         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
           <div class="row">
@@ -62,7 +61,6 @@
       </form>
     </div>
   </div>
-</div>
 <div>
     <div class="row datable-header">
         <div class="col-md-6 col-xs-12 datatable-header-add">
