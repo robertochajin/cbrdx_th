@@ -14,8 +14,11 @@
   "BTN_SI":"Si",
   "BTN_NO":"No",
   "LBL_ACCIONES":"Acciones",
+  "LBL_ACCION":"Acción",
   "LBL_ADJUNTAR":"Adjuntar Archivos",
   "LBL_REQUERIDO":"requerido",
+  "LBL_GENERO":"Género",
+  "LBL_ESTADOCIVIL":"Estado Civil",
   "LBL_NUEVO":"Nuevo",
   "LBL_NUEVA":"Nueva",
   "LBL_ID":"Id",
@@ -209,7 +212,7 @@
     "LBL_NUMEROSOTANOS":"Número de Sótanos",
     "LBL_OCUPACION":"Ocupación",
     "LBL_OTROS":"Otro",
-    "LBL_OTRAINSTITUCION":"Institución",
+    "LBL_OTRAINSTITUCION":"Otra Institución",
     "LBL_OTROTIPOESTUDIO":"Otro Tipo de Estudio",
     "LBL_PESO":"Peso (KG)",
     "LBL_PLANBENEFICIO":"Plan de Beneficio",
@@ -293,6 +296,7 @@
       "LBL_EDITAINFOTERCERO": "Editar información del tercero",
       "LBL_CORREOELECTRONICO": "Correo Electrónico",
       "LBL_ROL": "Rol",
+      "BTN_CREARTERCERO": "Crear Tercero",
       "LBL_ROLES": "Roles",
       "LBL_INFOCONTACTO" :"Información de Contacto",
       "LBL_ROLESGRUPOS":"Roles y Grupos de Gestión",
@@ -329,6 +333,9 @@
       "LBL_DATOSUSER":"Datos de Usuario"
 
    },
+
+
+
 
    "INICIO_SEGURIDAD":"==============================================================",
    "LBL_CONTRASEÑA":"Contraseña",
@@ -426,6 +433,7 @@
       "LBL_CENTROCOSTOS": "Centro de Costos",
       "LBL_NUEVOCENTROCOSTOS" : "Nuevo Centro de Costos",
       "LBL_EDITACENTROCOSTOS" : "Editar Centro de Costos",
+      "BTN_NUEVOCENTROCOSTO" : "Nuevo Centro de Costos",
       "MSG_CODIGOREGISTRADO" : "Ya se encuentra registrado ese código",
       "MSG_INGRESACODIGO" : "Debe ingresar un código para el centro de costo",
       "MSG_COD30CARACTERES" : "El código no debe tener mas de 30 caracteres.",
