@@ -1,7 +1,7 @@
 <div *ngIf="centroCostos">
   <div class="row">
     <div class="col-md-12">
-      <h3 class="first">Centro de Costos</h3>
+      <h3 class="first">{{ 'CENTROSDECOSTOS.LBL_CENTROCOSTOS' | translate }}</h3>
     </div>
   </div>
 
@@ -10,14 +10,14 @@
     <form class="form-horizontal">
       <fieldset>
           <div class="row">
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Codigo:</label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_CODIGO' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{centroCostos.codigoCentroCostos}}</strong></label>
 
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Nombre:</label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_NOMBRE' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{centroCostos.centroCostos}}</strong></label>
           </div>
           <div class="row">
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">Habilitado:</label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_HABILITADO' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{habilitado}}</strong></label>
           </div>
       </fieldset>
@@ -28,7 +28,7 @@
 
 <div class="row form-footer-buttons">
   <div class="form-group col-md-12">
-    <button icon="fa-arrow-left" label="Regresar" type="button"
+    <button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate }}" type="button"
             pButton (click)="goBack()"></button>
   </div>
 </div>

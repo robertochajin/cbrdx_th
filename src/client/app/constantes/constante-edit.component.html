@@ -1,27 +1,27 @@
-<h3>Constantes</h3>
+<h3>{{ 'CONSTANTES.LBL_CONSTANTES' | translate:param }}</h3>
 <div class="col-sm-6 col-sm-offset-3">
-    <h2 class="text-center">Editar Constante</h2>
+    <h2 class="text-center">{{ 'CONSTANTES.LBL_EDITACONSTANTE' | translate }}</h2>
     <form class="form-horizontal" #f="ngForm" (ngSubmit)="!codeExists&&f.form.valid&&createConstant()" novalidate
           (keydown.enter)="$event.preventDefault()">
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !constante.valid }">
-            <label for="constante" class="control-label col-sm-3">Constante</label>
+            <label for="constante" class="control-label col-sm-3">{{ 'CONSTANTES.LBL_CONSTANTE' | translate }}</label>
             <div class=" col-sm-9">
                 <input type="text" pInputText class="form-control" id="constante" name="constante" #constante="ngModel"
                        [(ngModel)]="constant.constante" required maxlength="6" pattern="[A-Z0-9]{0,6}"
                        (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
                        (paste)="inputCleanUp($event.target.value)">
                 <div *ngIf="codeExists" class="alert alert-danger">
-                    Ya se encuentra registrado ese codigo
+                   {{ 'CONSTANTES.LBL_CODREGISTRADO' | translate }}
                 </div>
                 <div *ngIf="f.submitted&&!constante.valid" class="alert alert-danger">
-                    <div [hidden]="!constante.errors.required">Debe ingresar un nombre para la Constante</div>
-                    <div [hidden]="!constante.errors.maxlength">El codigo no debe tener mas de 6 caracteres.</div>
-                    <div [hidden]="!constante.errors.pattern">El codigo debe ser solo letras Mayusculas</div>
+                    <div [hidden]="!constante.errors.required">{{ 'CONSTANTES.MSG_ADDNOMBRECONSTANTE' | translate }}</div>
+                    <div [hidden]="!constante.errors.maxlength">{{ 'CONSTANTES.MSG_COD6CARACTERES' | translate }}</div>
+                    <div [hidden]="!constante.errors.pattern">{{ 'CONSTANTES.MSG_CODMAYUSCULA' | translate }}</div>
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label for="idTipoDato" class="control-label col-sm-3">Tipo de Dato</label>
+            <label for="idTipoDato" class="control-label col-sm-3">{{ 'CONSTANTES.LBL_TIPODATO' | translate }}</label>
             <div class="col-sm-9">
                 <select [(ngModel)]="constant.idTipoDato" id="idTipoDato" name="idTipoDato" class="form-control"
                         required
@@ -32,12 +32,12 @@
                       </option>
                 </select>
                 <div *ngIf="f.submitted&&!idTipoDato.valid" class="alert alert-danger">
-                    <div [hidden]="!idTipoDato.errors.required">Debe seleccionar un valor</div>
+                    <div [hidden]="!idTipoDato.errors.required">{{ 'CONSTANTES.MSG_SELECCIONAVALOR' | translate }}</div>
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label for="valor" class="control-label col-sm-3">Valor</label>
+            <label for="valor" class="control-label col-sm-3">{{ 'CONSTANTES.LBL_VALOR' | translate }}</label>
             <div class=" col-sm-9">
                 <input type="text" pInputText class="form-control" id="valor" name="valor" #valor="ngModel"
                        [(ngModel)]="constant.valor" required maxlength="512" [pattern]="regex"
@@ -46,27 +46,27 @@
                        (paste)="inputValue()"
                 >
                 <div *ngIf="f.submitted&&!valor.valid" class="alert alert-danger">
-                    <div [hidden]="!valor.errors.required">Debe ingresar un valor para la Constante</div>
-                    <div [hidden]="!valor.errors.maxlength">El valor no debe tener mas de 20 caracteres.</div>
-                    <div [hidden]="!valor.errors.pattern">El codigo debe ser solo numeros</div>
+                    <div [hidden]="!valor.errors.required">{{ 'CONSTANTES.MSG_VALORCONSTANTE' | translate }}</div>
+                    <div [hidden]="!valor.errors.maxlength">{{ 'CONSTANTES.MSG_VALOR20' | translate }}</div>
+                    <div [hidden]="!valor.errors.pattern">{{ 'CONSTANTES.MSG_CODNUMERO' | translate }}</div>
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label for="descripcion" class="control-label col-sm-3">Descripción</label>
+            <label for="descripcion" class="control-label col-sm-3">{{ 'LBL_DESCRIPCION' | translate }}</label>
             <div class=" col-sm-9">
                 <input type="text" pInputText class="form-control" id="descripcion" name="descripcion"
                        #descripcion="ngModel"
                        [(ngModel)]="constant.descripcion" maxlength="50">
                 <div *ngIf="f.submitted&&!descripcion.valid"
                      class="alert alert-danger">
-                    <div [hidden]="!descripcion.errors.maxlength">La descripción no debe tener mas de 50 caracteres.
+                    <div [hidden]="!descripcion.errors.maxlength">{{ 'CONSTANTES.MSG_DESCRIPCION50' | translate }}
                     </div>
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+            <label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate }}</label>
             <div class=" col-sm-9">
                 <p-checkbox [(ngModel)]="constant.indicadorHabilitado" binary="true" id="indicador" name="indicador"
                             #indicador="ngModel"></p-checkbox>
@@ -74,19 +74,19 @@
         </div>
         <div class="row form-footer-buttons">
             <div class="form-group col-md-12">
-            <a (click)="displayDialog=true" class="cancelar">Cancelar</a>
-            <button type="submit" pButton icon="fa-plus" label="Guardar" (keydown.enter)="submit.click()"
+            <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+            <button type="submit" pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate }}" (keydown.enter)="submit.click()"
                     #submit></button>
         </div>
         </div>
     </form>
     <p-dialog header="Confirmación" [(visible)]="displayDialog"
               responsive="true" modal="true">
-        <p>Si continua perdera la información no guardada.Esta seguro que desea salir?.</p>
+        <p>{{ 'CONSTANTES.MSG_CONFIRMAGUARDAR' | translate }}</p>
         <p-footer>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>
-                <button type="button" pButton icon="fa-check" (click)="goBack()" label="Si"></button>
+                <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="{{ 'BTN_NO' | translate }}"></button>
+                <button type="button" pButton icon="fa-check" (click)="goBack()" label="{{ 'BTN_SI' | translate }}"></button>
             </div>
         </p-footer>
     </p-dialog>

@@ -77,6 +77,10 @@ body .ui-widget:disabled {
    padding-top: 12px!important;
    padding-bottom: 9px!important;
 }
+.main-header .logo {
+   background-color: #FFF!important;
+}
+
 /**
 ------------------------ Main CSS ------------------------------------
  */
