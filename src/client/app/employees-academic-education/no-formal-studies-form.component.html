@@ -47,22 +47,22 @@
                 </div>
               </div>
               <div class="ui-grid-col-6">
-                <label for="titulo">{{'ACADEMICEDUCATION.LBL_TITULO' | translate:param}}</label>
+                <label for="titulo">{{'EMPLOYEES.LBL_TITULO' | translate:param}}</label>
                 <input type="text" pInputText name="titulo" id="titulo"  #titulo="ngModel" required="true"
                        [(ngModel)]="nfstudy.tituloEstudio"  />
                 <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !titulo.valid">
-                  {{'ACADEMICEDUCATION.LBL_TITULO' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                  {{'EMPLOYEES.LBL_TITULO' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
                 </div>
               </div>
 
           </div>
           <div class="ui-grid-row">
             <div class="ui-grid-col-6">
-              <label for="areaEstudio">{{'ACADEMICEDUCATION.LBL_AREAESTUDIOS' | translate:param}}</label>
+              <label for="areaEstudio">{{'EMPLOYEES.LBL_AREAESTUDIOS' | translate:param}}</label>
               <p-dropdown name="areaEstudio" id="areaEstudio" #areaEstudio="ngModel" required="true"
                           [autoWidth]="false" [(ngModel)]="nfstudy.idAreaEstudio" [options]="studyAreaList"></p-dropdown>
               <div class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !areaEstudio.valid">
-                {{'ACADEMICEDUCATION.LBL_AREAESTUDIOS' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                {{'EMPLOYEES.LBL_AREAESTUDIOS' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
               </div>
             </div>
               <div class="ui-grid-col-6">
@@ -77,25 +77,25 @@
           </div>
           <div class="ui-grid-row">
             <div class="ui-grid-col-6">
-              <label for="ingreso">{{'ACADEMICEDUCATION.LBL_INGRESO' | translate:param}} </label>
+              <label for="ingreso">{{'EMPLOYEES.LBL_INGRESO' | translate:param}} </label>
               <p-calendar id="ingreso" name="ingreso"  [showIcon]="true" [disabled]="disabled"
                           [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true"
                           [maxDate]="maxDate"
                           [dataType]="date" (onSelect)="onSelectBegin($event)" #ingreso="ngModel" required="true"
                           [(ngModel)]="fechaIngresa"></p-calendar>
               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ingreso.valid">
-                {{'ACADEMICEDUCATION.LBL_INGRESO' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                {{'EMPLOYEES.LBL_INGRESO' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
               </div>
             </div>
             <div class="ui-grid-col-6" *ngIf="(indicadorTerminacion.value)">
-              <label for="finalizacion">{{'ACADEMICEDUCATION.LBL_FINALIZACION' | translate:param}}</label>
+              <label for="finalizacion">{{'EMPLOYEES.LBL_FINALIZACION' | translate:param}}</label>
               <p-calendar id="finalizacion" name="finalizacion"  [showIcon]="true" [disabled]="disabled"
                           [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true"
                           [minDate]="minDate" [maxDate]="maxDateFinal"
                           [dataType]="date" (onSelect)="onSelectEnd($event)" #finalizacion="ngModel" [required]="indicadorTerminacion.value"
                           [(ngModel)]="fechaTermina"></p-calendar>
               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !finalizacion.valid">
-                {{'ACADEMICEDUCATION.LBL_FINALIZACION' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                {{'EMPLOYEES.LBL_FINALIZACION' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
               </div>
             </div>
           </div>

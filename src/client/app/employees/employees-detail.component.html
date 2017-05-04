@@ -104,7 +104,7 @@
                     </fieldset>
                   </p-accordionTab>
 
-                  <p-accordionTab header="{{'EMPLOYEES.LBL_IINFROMACIONFAMILIAR' | translate:param}}" [selected]="acordion == 3">
+                  <p-accordionTab header="{{'EMPLOYEES.LBL_INFORMACIONFAMILIAR' | translate:param}}" [selected]="acordion == 3">
                     <family-information *ngIf="employee.idTercero" [employee]="employee"></family-information>
                   </p-accordionTab>
 
@@ -122,7 +122,7 @@
                     <academic-education-no-formal *ngIf="employee.idTercero" [employee]="employee"></academic-education-no-formal>
                   </p-accordionTab>
 
-                  <p-accordionTab header="{{'LABORALEXPERIENCE.LBL_EXPERIENCIALABORAL' | translate:param}}" [selected]="acordion == 7">
+                  <p-accordionTab header="{{'EMPLOYEES.LBL_EXPERIENCIALABORAL' | translate:param}}" [selected]="acordion == 7">
                      <work-experience *ngIf="employee.idTercero" [employee]="employee"></work-experience>
                   </p-accordionTab>
 
