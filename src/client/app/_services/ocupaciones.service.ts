@@ -5,17 +5,16 @@ import { Ocupaciones } from "../_models/ocupaciones";
 import { OcupacionesTipos } from "../_models/ocupacionesTipos";
 import { Search } from "../_models/search";
 import { AuthHttp } from "angular2-jwt";
-import { NavService } from "./_nav.service";
 
 @Injectable()
-export class OcupacionesService extends NavService {
+export class OcupacionesService {
 
    private serviceURL_SP = '<%= SVC_TH_URL %>/api/ocupaciones/';
    private serviceTiposURL = '<%= SVC_TH_URL %>/api/ocupacionesTipos/';
    private serviceURL = '<%= SVC_TH_URL %>/api/';
 
    constructor( private authHttp: AuthHttp ) {
-      super();
+
    }
 
    listOcupaciones() {

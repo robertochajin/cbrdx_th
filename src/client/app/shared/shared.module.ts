@@ -57,6 +57,12 @@ export class SharedModule {
                      setTimeout(() => {
                         jQuery('input.ng-invalid:first').select().focus();
                      }, 500);
+                  }else {
+                     setTimeout( () => {
+                        if ( jQuery( 'div.ui-messages' ).length ) {
+                           jQuery( 'body' ).scrollTop( jQuery( 'div.ui-messages:first' ).position().top );
+                        }
+                     }, 500 );
                   }
                });
             }, 1000);
