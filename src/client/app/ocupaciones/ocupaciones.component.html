@@ -48,12 +48,12 @@
                                            (keyup)="capitalizeCodigo()"
                                            #codigoOcupacion="ngModel" [maxlength]="tabselected"
                                            [minlength]="tabselected" required>
-                                    <div *ngIf="f.submitted && !codigoOcupacion.valid" class="ui-message  ui-corner-all">
+                                    <div *ngIf="f.submitted && !codigoOcupacion.valid" class="ui-message  ui-corner-all alert-danger">
                                         <p [hidden]="!codigoOcupacion.errors.required">Código es requerido</p>
                                         <p [hidden]="!codigoOcupacion.errors.minlength">Código debe ser de
                                             {{tabselected}} numeros</p>
                                     </div>
-                                    <div *ngIf="codeExists" class="ui-message  ui-corner-all">
+                                    <div *ngIf="codeExists" class="ui-message  ui-corner-all alert-danger">
                                         Ya se encuentra registrado ese código
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
                                               required [(ngModel)]="ocupaciones.ocupacion" #ocupacion="ngModel"
                                               (keyup)="capitalizeName()"
                                     ></textarea>
-                                    <div *ngIf="f.submitted && !ocupacion.valid" class="ui-message  ui-corner-all">
+                                    <div *ngIf="f.submitted && !ocupacion.valid" class="ui-message  ui-corner-all alert-danger">
                                         {{labelfieldocupacion}} es requerido
                                     </div>
                                 </div>
