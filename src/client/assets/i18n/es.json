@@ -234,6 +234,7 @@
     "LBL_TALLAPANTALON":"Talla Pantalón",
     "LBL_TELEFONO1":"Teléfono 1",
     "LBL_TELEFONO2":"Teléfono 2",
+    "LBL_CELULAR":"Celular",
     "LBL_TIEMPOEXPERIENCIA":"Tiempo de Experiencia",
     "LBL_TIPOCONSTRUCCION":"Tipo de Construcción",
     "LBL_TIPOESTUDIO":"Tipo de Estudio",
@@ -451,6 +452,7 @@
    "TIPODEAREA":{
       "LBL_TIPOAREA": "Tipos de Área",
       "BTN_NUEVOAREA" : "Nuevo Tipo de Área",
+      "LBL_NUEVOAREA" : "Nuevo Tipo de Área",
       "LBL_EDITAREA" : "Editar tipo de área",
       "LBL_DETALLETIPO" : "Detalle Tipo de Área",
       "MSG_CODIGOREGISTRADO" : "Ya se encuentra registrado ese código",

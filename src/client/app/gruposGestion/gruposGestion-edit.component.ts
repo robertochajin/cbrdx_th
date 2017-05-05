@@ -74,7 +74,7 @@ export class GruposGestionEditComponent {
     }
 
     inputCleanUp(value: string) {
-        this.grupoGestion.codigoGrupoGestion = value.toUpperCase().replace(' ', '').trim();
+        this.grupoGestion.codigoGrupoGestion = value.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
     }
 
     goBack(): void {

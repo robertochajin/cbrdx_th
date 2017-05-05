@@ -34,7 +34,7 @@ export class CentroCostosAddComponent {
     }
 
     inputCleanUp(value: string) {
-        this.centroCostos.codigoCentroCostos = value.toUpperCase().replace(' ', '').trim();
+        this.centroCostos.codigoCentroCostos =value.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
     }
 
     goBack(): void {
