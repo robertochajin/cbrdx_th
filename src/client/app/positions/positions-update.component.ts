@@ -1,5 +1,5 @@
 import "rxjs/add/operator/switchMap";
-import { Component, Input } from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import { ActivatedRoute, Router, Params } from "@angular/router";
 import { Location } from "@angular/common";
 import { Positions } from "../_models/positions";
@@ -19,7 +19,7 @@ import {ListaService} from "../_services/lista.service";
                templateUrl: 'positions-form.component.html',
                providers: [ ConfirmationService ]
             } )
-export class PositionsUpdateComponent {
+export class PositionsUpdateComponent implements  OnInit {
    @Input()
    position: Positions = new Positions();
    allPosition: Positions[] = [];

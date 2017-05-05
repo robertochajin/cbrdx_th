@@ -40,7 +40,6 @@ export class ProjectConfig extends SeedConfig {
     this.NPM_DEPENDENCIES = [
       ...this.NPM_DEPENDENCIES,
       {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
-      // {src: 'lodash/lodash.min.js', inject: 'libs'},
       {src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs'},
       {src: 'bootstrap/dist/css/bootstrap.min.css', inject: true},
       {src: 'font-awesome/css/font-awesome.min.css', inject: true},
@@ -60,6 +59,11 @@ export class ProjectConfig extends SeedConfig {
       ...this.APP_ASSETS,
       // {src: `${this.APP_SRC}/your-path-to-lib/libs/jquery-ui.js`, inject: true, vendor: false}
       // {src: `${this.CSS_SRC}/path-to-lib/test-lib.css`, inject: true, vendor: false},
+
+       {src: `${this.ASSETS_SRC}/css/AdminLTE.css`, inject: true, vendor: true},
+       {src: `${this.ASSETS_SRC}/css/skins/_all-skins.min.css`, inject: true, vendor: true},
+       {src: `${this.ASSETS_SRC}/font/style-th.css`, inject: true, vendor: true}
+
     ];
 
     // Add packages (e.g. ng2-translate)

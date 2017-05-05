@@ -43,24 +43,8 @@ export class AbsenceComponent {
    ngOnInit() {
 
       this.absence.idCargo = this.position.idCargo;
-      this.absenceService.getReemplazaA(this.absence.idCargo).subscribe(
-         rest => {
-            for (let r of rest) {
-               this.absenceService.getPositionById(r.idCargoRelacion).subscribe(res => {
-                  r.cargoRelacion = res.cargo;
-               });
-               this.listAbsenceREE.push(r);
-            }
-         });
-      this.absenceService.getReemplazado(this.absence.idCargo).subscribe(
-         rest => {
-            for (let r of rest) {
-               this.absenceService.getPositionById(r.idCargoRelacion).subscribe(res => {
-                  r.cargoRelacion = res.cargo;
-               });
-               this.listAbsenceREP.push(r);
-            }
-         });
+      this.absenceService.getReemplazaA(this.absence.idCargo).subscribe(rest => { this.listAbsenceREE = rest});
+      this.absenceService.getReemplazado(this.absence.idCargo).subscribe(rest => {this.listAbsenceREP = rest});
       this.absenceService.getPositionAll().subscribe(rest => {
          this.listPositionREE.push({label: 'Seleccione...', value: null});
          for (let dp of rest) {
