@@ -61,7 +61,6 @@
       "LBL_TIPODIRECCION":"Tipo Dirección",
       "LBL_COMOLEGAR":"Cómo Llegar",
       "LBL_BARRIO":"Barrio",
-      "LBL_TIPODIRECCION":"Tipo de Dirección",
       "LBL_NOMENCLATURA":"Nomenclatura",
       "LBL_NOMENCLATURACOMPLEMENTARIA":"Nomenclatura Complementaria",
       "LBL_NOMENCLATURAPRINCIPAL":"Nomenclatura Principal",
@@ -74,12 +73,19 @@
 
     },
 
-  "INICIO_ACTIVIDADECONOMICA":"==============================================================",
+  "ACTIVIDADECONOMICA":{
      "LBL_SECCION":"Sección",
      "LBL_DIVISION":"División",
      "LBL_CLASE":"Clase",
-     "LBL_ACTIVIDADESECONOMICAS":"Actividades Económicas",
-  "FIN_ACTIVIDADECONOMICA":"=================================================================",
+     "MSG_CODREQUERIDO":"Código es requerido",
+     "MSG_CODNUM":"Código debe ser de",
+     "MSG_NUM":"Números",
+     "MSG_ESREQ":"es requerido",
+     "MSG_SOLONUMEROS":"Sólo números",
+     "MSG_CODREGISTRADO":"Ya se encuentra registrado este código",
+     "MSG_NOMBREREQUERIDO":"Nombre es requerido",
+     "LBL_ACTIVIDADESECONOMICAS":"Actividades Económicas"
+  },
 
    "CONSTANTES": {
       "LBL_CONSTANTE": "Constante",
@@ -116,13 +122,15 @@
       "MSG_CODIGOREPETIDO":"Ya se encuentra registrado ese código",
       "MSG_NOMBREREQUERIDO":"Nombre  requerido",
       "MSG_URLREQUERIDA":"Url requerida",
-      "LBL_AGREGANDO":"Agregando widgets",
+      "LBL_AGREGANDO":"Agregar widgets",
+      "LBL_ADMINWIDGETS":"Administrador de Widgets",
+      "BTN_AGREGARWIDGETS":"Agregar Widgets",
       "LBL_EDITANDO":"Editando widgets",
       "LBL_DETALLEWIDGETS":"Detalle widgets",
       "LBL_CONFIGURARWIDGETS":"Configurar Widgets"
    },
 
-  "INICIO_DIVISIONPOLITICA":"==============================================================",
+  "DIVISIONPOLITICA":{
       "LBL_AREA":"Área ",
       "LBL_DIVSIONPOLITICA":"División Política ",
       "LBL_PAIS":"País",
@@ -130,10 +138,17 @@
       "LBL_MUNICIPIO":"Municipio",
       "LBL_BARRIO":"Barrio",
       "LBL_INDICATIVO":"Indicativo",
-      "LBL_POSTAL":"Postal",
+      "LBL_CODIGOPOSTAL":"Código Postal",
       "LBL_ESTRATO":"Estrato",
-  "FIN_DIVISIONPOLITICA":"=================================================================",
+      "MSG_CODREQUERIDO":"Código es requerido",
+      "MSG_CODNUM":"Código debe ser de",
+      "MSG_NUM":"Números",
+      "MSG_ESREQ":"Requerido",
+      "MSG_SOLONUMEROS":"Sólo números",
+      "MSG_CODREGISTRADO":"Ya se encuentra registrado este código",
+      "MSG_NOMBREREQUERIDO":"Nombre es requerido"
 
+  },
 
   "EMPLOYEES":{
 
@@ -377,6 +392,8 @@
       "LBL_CAMPO":"Campo",
       "LBL_TERMINAR":"Terminar",
       "LBL_OBLIGATORIO":"Obligatorio",
+      "LBL_DETALLESECCION":"Detalle Sección",
+      "LBL_DETALLECAMPO":"Detalle Campo",
       "MSG_CODIGOREPETIDO":"Ya se encuentra registrado ese código",
       "MSG_NOMBREREQUERIDO":"Nombre  requerido",
       "MSG_CODIGOREQUERIDO":"Código requerido",
