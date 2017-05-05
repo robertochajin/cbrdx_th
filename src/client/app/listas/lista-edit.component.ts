@@ -68,6 +68,7 @@ export class ListaEditComponent implements OnInit {
    }
 
    createDetail(f: NgForm) {
+      this.msgs=[];
       this.editableDetail.orden = 2; //pendiente definir ordenamiento de los items
       this.listaService.createDetail(this.editableDetail, this.masterList.nombreTabla).then(res => {
          this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
@@ -81,6 +82,7 @@ export class ListaEditComponent implements OnInit {
    }
 
    updateDetail(f: NgForm) {
+      this.msgs=[];
       this.listaService.updateDetail(this.editableDetail, this.masterList.nombreTabla).then(res => {
          this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro modificado correctamente.'});
          this.editableDetail = new ListaItem;
