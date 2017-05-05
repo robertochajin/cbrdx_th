@@ -29,6 +29,8 @@ export class EmployeesContactListComponent{
     msgs: Message[] = [];
     relationship: SelectItem[] = [];
    idTer:number
+   tel:boolean=false;
+   cel:boolean=true;
     
     constructor(private employeesContactService: EmployeesContactService,
                 private router: Router,
@@ -159,5 +161,24 @@ export class EmployeesContactListComponent{
         });
         this.contact.contacto = input;
     }
+
+   validarTelefono(){
+      if(this.contact.telefono==="(___) ___-____ Ext ____"){
+         this.tel=true;
+         this.cel=true;
+      }else{
+         this.tel=false;
+         this.cel=false;
+      }
+   }
+   validarCelular(){
+      if(this.contact.celular==="(___) ___-____"){
+         this.tel=true;
+         this.cel=true;
+      }else{
+         this.tel=false;
+         this.cel=false;
+      }
+   }
     
 }
