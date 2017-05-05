@@ -16,7 +16,7 @@ export class ListaService {
    constructor( private authHttp: AuthHttp ) {
    }
    
-   getDetail( tableName: string, code: string ) {
+   getDetail( tableName: string, code: number ) {
       return this.authHttp.get( this.masterService + 'tabla/' + tableName + '/idItem/' + code + '/' ).map( res => res.json() as ListaItem );
    }
    
