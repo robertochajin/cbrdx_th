@@ -252,6 +252,8 @@
     "LBL_VIVIENDA":"La Vivienda es",
     "LBL_VIVO":"Vivo",
     "LBL_JURIDICO":"Estado jurídico",
+    "LBL_FECHADEFUNCION":"Fecha de defunción",
+    "LBL_FECHADEFUNCIONREQUERIDA":"Fecha de defunción requerida",
     "MSG_DOCUMENTO":"El documento que intenta ingresar ya está asignado a otra persona y no puede ser duplicado"
 
   },
@@ -451,7 +453,7 @@
 
    "TIPODEAREA":{
       "LBL_TIPOAREA": "Tipos de Área",
-      "LBL_NUEVOAREA" : "Nuevo Tipo de Área",
+      "BTN_NUEVOAREA" : "Nuevo Tipo de Área",
       "LBL_EDITAREA" : "Editar tipo de área",
       "LBL_DETALLETIPO" : "Detalle Tipo de Área",
       "MSG_CODIGOREGISTRADO" : "Ya se encuentra registrado ese código",

@@ -327,13 +327,13 @@
                   <div class="form-group col-md-3" *ngIf="employee.indicadorVivo == false">
                      <label for="NGdeathDate">{{'EMPLOYEES.LBL_FECHADEFUNCION' | translate:param}}</label>
                      <p-calendar id="NGdeathDate" name="NGdeathDate" [locale]="es" [showIcon]="true"
-                                 [disabled]="disabled"
+                                 [disabled]="disabled" [maxDate]="maxDate"
                                  [dataType]="date" #NGdeathDate="ngModel" [required]="!employee.indicadorVivo"
                                  [(ngModel)]="deathDate" (onSelect)="onDeathDate($event)"
                      ></p-calendar>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !employee.indicadorVivo && !NGdeathDate.valid">
-                        {{'EMPLOYEES.LBL_FECHADEFUNCION' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_FECHADEFUNCIONREQUERIDA' | translate:param}}
                      </div>
                   </div>
                </div>
