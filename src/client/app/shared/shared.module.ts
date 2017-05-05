@@ -51,19 +51,19 @@ export class SharedModule {
 
             setTimeout(() => {
                jQuery('button').click(function () {
-                  if (jQuery('input.ng-invalid').length) {
-                     jQuery('body').scrollTop(jQuery('input.ng-invalid:first').position().top);
-                     console.log('Focus Error!');
-                     setTimeout(() => {
-                        jQuery('input.ng-invalid:first').select().focus();
-                     }, 500);
-                  }else {
-                     setTimeout( () => {
-                        if ( jQuery( 'div.ui-messages' ).length ) {
-                           jQuery( 'body' ).scrollTop( jQuery( 'div.ui-messages:first' ).position().top );
-                        }
-                     }, 500 );
-                  }
+                  setTimeout(() => {
+                     if (jQuery('input.ng-invalid').length > 0) {
+                        jQuery('body').scrollTop(jQuery('input.ng-invalid:first').position().top);
+                        console.log('Focus Error!');
+                        setTimeout(() => {
+                           jQuery('input.ng-invalid:first').select().focus();
+                        }, 500);
+                     }else {
+                           if ( jQuery( 'div.ui-messages' ).length ) {
+                              jQuery( 'body' ).scrollTop( jQuery( 'div.ui-messages:first' ).position().top );
+                           }
+                     }
+                  }, 500);
                });
             }, 1000);
          }

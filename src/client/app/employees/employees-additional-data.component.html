@@ -8,26 +8,26 @@
 
             <div class="form-group col-md-4">
               <label for="peso">{{'EMPLOYEES.LBL_PESO' | translate:param}}</label>
-              <input type="text" pInputText id="peso" name="peso"
+              <input type="number" pInputText id="peso" name="peso" min="1"
                      [(ngModel)]="employee.peso" #weight="ngModel" (change)="getimc()"
                      (keyup)="inputNumberPeso()"
                      (paste)="inputNumberPeso()"
                      required/>
               <div class="ui-message ui-messages-error ui-corner-all"
-                   *ngIf="f.submitted && !weight.valid">
+                   *ngIf="f.submitted && !peso">
                 <i class="fa fa-close"></i>
                 {{'EMPLOYEES.LBL_PESO' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
               </div>
             </div>
             <div class="form-group col-md-4">
               <label for="talla">{{'EMPLOYEES.LBL_ESTATURA' | translate:param}}</label>
-              <input type="text" pInputText id="talla" name="talla"
-                     [(ngModel)]="employee.talla" #size="ngModel" (change)="getimc()"
+              <input type="number" pInputText id="talla" name="talla" min="1"
+                     [(ngModel)]="employee.talla" #tal="ngModel" (change)="getimc()"
                      (keyup)="inputNumber()"
                      (paste)="inputNumber()"
                      required/>
               <div class="ui-message ui-messages-error ui-corner-all"
-                   *ngIf="f.submitted && !size.valid">
+                   *ngIf="f.submitted && !size">
                 <i class="fa fa-close"></i>
                 {{'EMPLOYEES.LBL_ESTATURA' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
               </div>

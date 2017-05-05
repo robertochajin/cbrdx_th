@@ -264,7 +264,7 @@ export class ActividadEconomicaComponent implements OnInit {
    newActivity() {
       this.actividadEconomica = new ActividadEconomica();
       this.tabselected = 1;
-      this.header = 'Nuevo Grandes Grupos';
+      this.header = 'Nueva Sección';
       this.labelfieldactividad = "Nombre";
       this.actividadEconomica.idActividadPadre = 0;
       this.actividadEconomica.idActividadTipo = this.getIdTypebyCodigo("1");

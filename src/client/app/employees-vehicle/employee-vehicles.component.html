@@ -18,9 +18,9 @@
   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="employeesVehicle" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
     <p-column field="tipoVehiculo" header="{{'EMPLOYEES.LBL_TIPOVEHICULO' | translate:param }}" [sortable]="true"></p-column>
     <p-column field="tipoServicio" header="{{'EMPLOYEES.LBL_TIPOSERVICIO' | translate:param }}" [sortable]="true"></p-column>
-    <p-column field="{{'EMPLOYEES.LBL_MARCA' | translate:param }}" header="Marca" [sortable]="true"></p-column>
-    <p-column field="{{'EMPLOYEES.LBL_MODELO' | translate:param }}" header="Modelo" [sortable]="true"></p-column>
-    <p-column field="{{'EMPLOYEES.LBL_PLACA' | translate:param }}" header="Placa" [sortable]="true"></p-column>
+    <p-column field="marca" header="{{'EMPLOYEES.LBL_MARCA' | translate:param }}" [sortable]="true"></p-column>
+    <p-column field="modelo" header="{{'EMPLOYEES.LBL_MODELO' | translate:param }}" [sortable]="true"></p-column>
+    <p-column field="placa" header="{{'EMPLOYEES.LBL_PLACA' | translate:param }}" [sortable]="true"></p-column>
     <p-column header="{{'LBL_ACCIONES' | translate:param }}" styleClass="datatable-col-action">
       <template let-employeeVehicle="rowData" pTemplate="body">
 

@@ -30,12 +30,14 @@ export class FamilyInformationDetailComponent implements OnInit   {
         this.route.params
             .subscribe((params: Params) => {
               this.familyInformationService.get(+params['id'])
-              .subscribe(familyInformation => { this.familyInformation = familyInformation })
+              .subscribe(familyInformation => {
+                 this.familyInformation = familyInformation
+              });
             } );
     }
 
     goBack(): void {
-        this._nav.setTab(1);
+        this._nav.setTab(3);
         this.location.back();
     }
 }

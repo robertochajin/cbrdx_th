@@ -1,8 +1,8 @@
-<h3 class="first">Colaboradores</h3>
+<h3 class="first">{{'EMPLOYEES.LBL_COLABORADORES' | translate:param}}</h3>
 <div>
     <div class="row datable-header">
         <div class="col-md-6 col-xs-12 datatable-header-add">
-            <button type="button" icon="fa-plus" label="Nuevo Colaborador"
+            <button type="button" icon="fa-plus" label="{{'EMPLOYEES.LBL_NUEVOCOLABORADOR' | translate:param}}"
                     pButton (click)="add()"></button>
         </div>
         <div class="col-md-6 col-xs-12 datatable-header-search" >
@@ -17,11 +17,11 @@
     </div>
 
     <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="employees" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-        <p-column field="numeroDocumento" header="Número de documento" [sortable]="true"></p-column>
-        <p-column field="nombreCompleto" header="Nombre " [sortable]="true"></p-column>
-        <p-column field="fechaCreacion" header="Desde" [sortable]="true"></p-column>
+        <p-column field="numeroDocumento" header="{{'LBL_NUMERODOCUMENTO' | translate:param}}" [sortable]="true"></p-column>
+        <p-column field="nombreCompleto" header="{{'LBL_NOMBRE' | translate:param}}" [sortable]="true"></p-column>
+        <p-column field="fechaCreacion" header="{{'EMPLOYEES.LBL_DESDE' | translate:param}}" [sortable]="true"></p-column>
         <!--<p-column field="cargoActual" header="Cargo Actual" [sortable]="true"></p-column>-->
-        <p-column header="Acciones" styleClass="datatable-col-action">
+        <p-column header="{{'LBL_ACCIONES' | translate:param}}" styleClass="datatable-col-action">
             <template let-employee="rowData" pTemplate="body">
 
                     <button type="button" icon="fa-eye" class="ui-button-info"

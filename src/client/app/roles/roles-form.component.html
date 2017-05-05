@@ -33,8 +33,8 @@
                <label for="nombre">* Nombre</label>
                <!--<input pInputText type="text" id="nombre" name="nombre"
                       [(ngModel)]="rol.rol" #nombre="ngModel" (keyup)="capitalizeName()" required/>-->
-               <p-inputMask id="nombre" name="nombre" [(ngModel)]="rol.rol" mask="ROLE_?********************************************************"
-                            (keyup)="capitalizeName()" requiredb slotChar=""
+               <p-inputMask id="nombre" name="nombre" [(ngModel)]="rol.rol" mask="ROLE_*?*******************************************************"
+                            (keyup)="capitalizeName()" required slotChar=""
                             #nombre="ngModel"
                >
                   

@@ -8,7 +8,7 @@
             </div>
         </div>
     </div>
-  <form  (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+  <form  (ngSubmit)="f.form.valid && !wrongCity && !wrongInstitute && onSubmit()" #f="ngForm" novalidate>
     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
