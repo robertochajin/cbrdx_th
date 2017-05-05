@@ -546,6 +546,81 @@
       "MSG_CLASEREQUERIDO": "Clase de estilo es requerido"
    },
 
+   "ESTRUCTURAFISICA": {
+      "LBL_ESTRUCTURA":"Estructura Física",
+      "BTN_AGREGARNUEVO":"Agregar Nuevo",
+      "BTN_AGREGADIRECCION":"Agregar Dirección",
+      "BTN_EDITADIRECCION":"Editar Dirección",
+      "LBL_TELEFONOREQ":"Teléfono requerido",
+      "LBL_DETALLEESTRUCT":"Detalle Estructura Física",
+      "LBL_VIRTUAL":"Ind. Virtual",
+      "LBL_VIRTUAL2":"Virtual",
+      "LBL_CATEGORIA":"Categoría",
+      "MSG_CODREQUERIDO":"Código es requerido",
+      "MSG_DIRREQUERIDO":"Dirección es requerida",
+      "MSG_NUM":"Números",
+      "MSG_CODREGISTRADO":"Ya se encuentra registrado este código",
+      "MSG_NOMBREREQUERIDO":"Nombre es requerido",
+      "MSG_ENLACEREQUERIDO":"Enlace es requerido",
+      "MSG_SECUENCIAREQUERIDO":"Secuencia es requerido",
+      "MSG_CATEGORIAREQ":"Categoria es requerida",
+      "MSG_CORREONOVALIDO": "Correo electrónico no válido"
+   },
+
+   "ESTRUCTURAORGANIZACIONAL": {
+      "LBL_ESTRUCTURA":"Estructura Organizacional",
+      "BTN_AGREGAREMPRESA":"Agregar Empresa",
+      "BTN_AGREGARAREA":"Agregar Área",
+      "BTN_EDITADIRECCION":"Editar Dirección",
+      "MSG_TIPODOCREQUERIDO":"Tipo documento es requerido",
+      "LBL_NUMEROIDENTI":"Número de Identificación",
+      "LBL_RAZONSOCIAL":"Razón Social",
+      "LBL_CENTROCOSTO":"Centro de Costo",
+      "LBL_TIPOAREA":"Tipo de Área",
+      "LBL_TIPOESTRUCTURA":"Tipo de Estructura",
+      "MSG_NUMEROIDENTIREQ":"Número de identificación es requerido",
+      "MSG_RAZONSOCIALREQ":"Razón social es requerido",
+      "MSG_CORREOVALIDO":"Debe escribir un correo válido",
+      "LBL_PAGINAWEB":"Página Web",
+      "MSG_DIRECCIONREQ":"Dirección es requerido",
+      "MSG_TIPOESTRUCTREQ":"Tipo estructura es requerido",
+      "MSG_CODIGOREQ":"Código es requerido",
+      "MSG_NOMBREREQ":"Nombre es requerido",
+      "MSG_CENTROCOSTOREQ":"Centro de costo es requerido",
+      "MSG_TIPOAREAREQ":"Tipo de área es requerido",
+      "LBL_ESTRUCTFISICA":"Estructura Física",
+      "MSG_ESTRUCTFISICAREQ":"Estructura física es requerido",
+      "MSG_REGISTRADOCOD":"Ya se encuentra registrado ese código",
+      "MSG_CODIGOREGISTRADO":"Ya se encuentra registrado ese código"
+
+   },
+
+   "PLANTACOLABORADORES": {
+      "LBL_PLANTACOLAB":"Planta de Colaboradores",
+      "LBL_AREATRABAJO":"Área de trabajo",
+      "MSG_NODO":"Por favor, seleccione un nodo de tipo área de la estructura organizacional",
+      "MSG_INFOAREA":"Información del área",
+      "LBL_NOMBREAREA":"Nombre del área",
+      "LBL_TIPOESTRUCTURA":"Tipo de Estructura",
+      "LBL_CENTROCOSTOS":"Centro de costos",
+      "LBL_TIPOAREA":"Tipo de Area",
+      "MSG_CREANDOEDITAREA":"Creando / editando cargo para el área",
+      "LBL_CARGO":"Cargo",
+      "LBL_NUMEROPLAZAS":"Número de plazas",
+      "LBL_SALARIOTOTAL":"Salario total",
+      "LBL_OCUPADOS":"Ocupados",
+      "LBL_VACANTES":"Vacantes",
+      "LBL_PLAZAS":"No de plazas",
+      "LBL_COSTOPLANTA":"Costo planta",
+      "MSG_NUMEROPLAZASMENOR":"El número de plazas no puede ser menor a",
+      "MSG_CARGOASIGNADO":"El cargo que intentó seleccionar ya fue asignado a esta área",
+      "MSG_CARGOREQ":"Cargo es requerido",
+      "MSG_PLAZASREQ":"Número de plazas es requerido",
+      "LBL_ESTRUCTFISICA":"Estructura Fisica"
+
+
+   },
+
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 
 

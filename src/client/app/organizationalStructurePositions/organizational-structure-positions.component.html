@@ -1,4 +1,4 @@
-<h3>Planta de colaboradores</h3>
+<h3>{{ 'PLANTACOLABORADORES.LBL_PLANTACOLAB' | translate }}</h3>
 <div class="row">
    <div class="col-md-4">
       <p-tree id="treedCompany" [(value)]="treedCompany" selectionMode="single"
@@ -10,33 +10,33 @@
    </div>
    <div class="col-md-8" *ngIf="area.idEstructuraOrganizacional == null">
       <p-tabView>
-         <p-tabPanel header="área de trabajo">
-            <h4>Por favor, seleccione un nodo de tipo área de la estructura organizacional</h4>
+         <p-tabPanel header="{{ 'PLANTACOLABORADORES.LBL_AREATRABAJO' | translate }}">
+            <h4>{{ 'PLANTACOLABORADORES.MSG_NODO' | translate }}</h4>
          </p-tabPanel>
       </p-tabView>
    </div>
    <div class="col-md-8" *ngIf="area.idEstructuraOrganizacional != null">
       <p-tabView (onChange)="handleChangeTab($event.index)">
-         <p-tabPanel header="Información del area" [selected]="true">
+         <p-tabPanel header="{{ 'PLANTACOLABORADORES.MSG_INFOAREA' | translate }}" [selected]="true">
             <form class="form-horizontal">
                <fieldset>
                   <div class="form-group">
                      <div class="row">
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Código:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'LBL_CODIGO' | translate }}:</label>
                         <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.codigo}}</strong></label>
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nombre del área:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'PLANTACOLABORADORES.LBL_NOMBREAREA' | translate }}:</label>
                         <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.nombre}}</strong></label>
                      </div>
                      <div class="row">
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tipo Estructura:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'PLANTACOLABORADORES.LBL_TIPOESTRUCTURA' | translate }}:</label>
                         <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.tipoEstructura}}</strong></label>
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Centro de costos:</label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'PLANTACOLABORADORES.LBL_CENTROCOSTOS' | translate }}:</label>
                         <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.centroCostos}}</strong></label>
                      </div>
                      <div class="row">
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tipo de Area: </label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'PLANTACOLABORADORES.LBL_TIPOAREA' | translate }}: </label>
                         <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.tipoArea}}</strong></label>
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">Estructura Fisica: </label>
+                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'PLANTACOLABORADORES.LBL_ESTRUCTFISICA' | translate }}: </label>
                         <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.estructuraFisica}}</strong></label>
                      </div>
                   </div>
@@ -47,11 +47,11 @@
                   <div class="col-md-12">
                      <form name="positionForm" (ngSubmit)="fp.valid && ((osPosition.plazas - osPosition.ocupados) >= 0) && savePosition()" #fp="ngForm" novalidate>
                         <fieldset>
-                           <legend>Creando / editando cargo para el área:</legend>
+                           <legend>{{ 'PLANTACOLABORADORES.MSG_CREANDOEDITAREA' | translate }}:</legend>
                            <div class="form-group container">
                               <div class="row">
                                  <div class="form-group col-md-8">
-                                    <label for="cargo">* Cargo</label>
+                                    <label for="cargo">* {{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}</label>
                                     <p-autoComplete placeholder="Buscar cargo" field="cargo" name="cargo" id="cargo"
                                                     minLength="3" delay="500"
                                                     [suggestions]="positionList" required="true"
@@ -61,51 +61,51 @@
                                     <div class="ui-message ui-messages-warning ui-corner-all"
                                          *ngIf="positionRepeated">
                                        <i class="fa fa-close"></i>
-                                       El cargo que intentaste seleccionar ya fue asignado a esta área
+                                       {{ 'PLANTACOLABORADORES.MSG_CARGOASIGNADO' | translate }}
                                     </div>
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="fp.submitted && badPostion">
                                        <i class="fa fa-close"></i>
-                                       Cargo es requerido
+                                       {{ 'PLANTACOLABORADORES.MSG_CARGOREQ' | translate }}
                                     </div>
                                  </div>
                               </div>
                               <div class="row">
                                  <div class="form-group col-md-4">
-                                    <label for="nPlazas">* Número de plazas</label>
+                                    <label for="nPlazas">* {{ 'PLANTACOLABORADORES.LBL_NUMEROPLAZAS' | translate }}</label>
                                     <input type="number" min="1" pInputText id="nPlazas" name="nPlazas"
                                            [(ngModel)]="osPosition.plazas" #nPlazas="ngModel" required/>
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="fp.submitted && !nPlazas.valid">
                                        <i class="fa fa-close"></i>
-                                       Numero de plazas es requerido
+                                       {{ 'PLANTACOLABORADORES.MSG_PLAZASREQ' | translate }}
                                     </div>
                                  </div>
 
                                  <div class="form-group col-md-2">
-                                    <label>Ocupados: {{osPosition.ocupados}}</label>
+                                    <label>{{ 'PLANTACOLABORADORES.LBL_OCUPADOS' | translate }}: {{osPosition.ocupados}}</label>
                                  </div>
                                  <div class="form-group col-md-2">
-                                    <label>Vacantes: {{osPosition.plazas - osPosition.ocupados}}</label>
+                                    <label>{{ 'PLANTACOLABORADORES.LBL_VACANTES' | translate }}: {{osPosition.plazas - osPosition.ocupados}}</label>
                                  </div>
                               </div>
                               <div class="row">
                                  <div class="form-group col-md-4">
-                                    <label for="cEnabled">Habilitado</label>
+                                    <label for="cEnabled">{{ 'LBL_HABILITADO' | translate }}</label>
                                     <p-checkbox id="cEnabled"  name="cEnabled" binary="true"
                                                 [(ngModel)]="osPosition.indicadorHabilitado" ></p-checkbox>
                                  </div>
                                  <div class="form-group col-md-4">
                                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="(osPosition.plazas - osPosition.ocupados) < 0">
                                     <i class="fa fa-close"></i>
-                                    El numero de plazas no puede ser menor a {{osPosition.ocupados}}
+                                       {{ 'PLANTACOLABORADORES.MSG_NUMEROPLAZASMENOR' | translate }} {{osPosition.ocupados}}
                                  </div>
                                  </div>
                               </div>
                               <div class="row form-footer-buttons">
                                  <div class="form-group col-md-8">
-                                    <a (click)="cancelEditingPosition()" class="cancelar">Cancelar</a>
-                                    <button pButton type="submit" label="Guardar"></button>
+                                    <a (click)="cancelEditingPosition()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+                                    <button pButton type="submit" label="{{ 'BTN_GUARDAR' | translate }}"></button>
                                  </div>
                               </div>
                            </div>
@@ -121,29 +121,29 @@
                      </div>
                      <div class="col-md-6 col-xs-12 datatable-header-search">
                         <i class="fa fa-search"></i>
-                        <input #gb type="text" pInputText size="40" placeholder="Buscar...">
+                        <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}">
                      </div>
                   </div>
                   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="osPositions"
                                [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-                     <p-column field="cargo" header="Cargo" [sortable]="true"></p-column>
+                     <p-column field="cargo" header="{{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}" [sortable]="true"></p-column>
                      <p-column header="Salario" [sortable]="true">
                         <template let-osp="rowData" pTemplate="body">
                            {{(osp.salario).toLocaleString()}}
                         </template></p-column>
-                     <p-column field="plazas" header="Número de plazas" [sortable]="true"></p-column>
-                     <p-column header="Salario total" [sortable]="true">
+                     <p-column field="plazas" header="{{ 'PLANTACOLABORADORES.LBL_NUMEROPLAZAS' | translate }}" [sortable]="true"></p-column>
+                     <p-column header="{{ 'PLANTACOLABORADORES.LBL_SALARIOTOTAL' | translate }}" [sortable]="true">
                         <template let-osp="rowData" pTemplate="body">
                            {{(osp.salario*osp.plazas).toLocaleString()}}
                         </template>
                      </p-column>
-                     <p-column field="ocupados" header="Ocupados" [sortable]="true"></p-column>
+                     <p-column field="ocupados" header="{{ 'PLANTACOLABORADORES.LBL_OCUPADOS' | translate }}" [sortable]="true"></p-column>
                      <p-column header="Vacantes" [sortable]="true">
                         <template let-osp="rowData" pTemplate="body">
                            {{osp.plazas-osp.ocupados}}
                         </template>
                      </p-column>
-                     <p-column *ngIf="!area.indicadorPlantaConfirmada" header="Acciones" styleClass="datatable-col-action">
+                     <p-column *ngIf="!area.indicadorPlantaConfirmada" header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
                         <template let-osp="rowData" pTemplate="body">
                            <div class="btn-group" role="group" >
                               <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil"
@@ -159,15 +159,15 @@
                      <div class="panel-body">
                         <div class="row">
                            <div class="col-md-4">
-                              <strong>No de cargos:</strong>
+                              <strong>{{ 'PLANTACOLABORADORES.LBL_NUMCARGOS' | translate }}:</strong>
                               {{osPositions.length}}
                            </div>
                            <div class="col-md-4">
-                              <strong>No de plazas:</strong>
+                              <strong>{{ 'PLANTACOLABORADORES.LBL_PLAZAS' | translate }}:</strong>
                               {{countSlots}}
                            </div>
                            <div class="col-md-4">
-                              <strong>Costo planta:</strong>
+                              <strong>{{ 'PLANTACOLABORADORES.LBL_COSTOPLANTA' | translate }}:</strong>
                               ${{countCost.toLocaleString()}}
                            </div>
                         </div>
@@ -184,7 +184,7 @@
                </div>
             </div>
          </p-tabPanel>
-         <p-tabPanel header="Colaboradores">
+         <p-tabPanel header="{{ 'EMPLOYEES.LBL_COLABORADORES' | translate }}">
             <div class="row" *ngIf="editingPerson">
                <div class="col-md-12">
                   <form name="personForm" (ngSubmit)="pp.valid && !badEmployee && savePersonPosition()" #pp="ngForm"
