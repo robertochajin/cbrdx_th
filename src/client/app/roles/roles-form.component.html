@@ -31,7 +31,7 @@
                <label for="nombre">* {{ 'LBL_NOMBRE' | translate}}</label>
                <!--<input pInputText type="text" id="nombre" name="nombre"
                       [(ngModel)]="rol.rol" #nombre="ngModel" (keyup)="capitalizeName()" required/>-->
-               <p-inputMask id="nombre" name="nombre" [(ngModel)]="rol.rol" mask="ROLE_?********************************************************"
+               <p-inputMask id="nombre" name="nombre" [(ngModel)]="rol.rol" mask="ROLE_*?*******************************************************"
                             (keyup)="capitalizeName()" required slotChar=""
                             #nombre="ngModel"
                >
