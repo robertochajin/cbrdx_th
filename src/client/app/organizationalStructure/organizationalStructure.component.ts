@@ -129,7 +129,7 @@ export class OrganizationalStructureComponent implements OnInit {
    capitalizeCode() {
       let input = this.organizationalStructure.codigo;
       if ( input != "" && input != null ) {
-         this.organizationalStructure.codigo = input.toUpperCase().replace( ' ', '' ).trim();
+         this.organizationalStructure.codigo = input.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
       }
    }
    

@@ -450,7 +450,7 @@ export class ActividadEconomicaComponent implements OnInit {
    capitalizeCodigo() {
       let input = this.actividadEconomica.codigoActividadEconomica;
       if(input != "" && input != null){
-         this.actividadEconomica.codigoActividadEconomica = input.toUpperCase().replace(' ', '').trim();
+         this.actividadEconomica.codigoActividadEconomica = input.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
    
       }
    }
