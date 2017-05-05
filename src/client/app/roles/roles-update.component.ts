@@ -105,7 +105,7 @@ export class RolesUpdateComponent {
    capitalizeCode() {
       let input = this.rol.codigoRol;
       if ( input != "" && input != null ) {
-         this.rol.codigoRol = input.toUpperCase().replace( ' ', '' ).trim();
+         this.rol.codigoRol = input.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
       }
    }
    

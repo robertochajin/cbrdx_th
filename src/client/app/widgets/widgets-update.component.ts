@@ -45,7 +45,7 @@ export class WidgetsUpdateComponent {
       });
    }
    inputCleanUp(value: string) {
-      this.widgets.codigoWidget = value.toUpperCase().replace(' ', '').trim();
+      this.widgets.codigoWidget = value.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
    }
 
    validateCode() {

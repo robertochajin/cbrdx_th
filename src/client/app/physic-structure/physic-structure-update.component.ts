@@ -63,7 +63,7 @@ export class PhysicStructureUpdateComponent {
    }
 
    inputCleanUp(value: string) {
-      this.physicStructure.codigo = value.toUpperCase().replace(' ', '').trim();
+      this.physicStructure.codigo = value.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
    }
    validateCode() {
       this.codExists = this.ListPhysicStructure.filter(t => t.codigo === this.physicStructure.codigo).length > 0;

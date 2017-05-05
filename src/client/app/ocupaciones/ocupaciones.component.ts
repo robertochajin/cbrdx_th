@@ -444,7 +444,7 @@ export class OcupacionesComponent implements OnInit {
     capitalizeCodigo() {
       let input = this.ocupaciones.codigoOcupacion;
       if(input != "" && input != null){
-        this.ocupaciones.codigoOcupacion = input.toUpperCase().replace(' ', '').trim();
+        this.ocupaciones.codigoOcupacion = input.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
       }
     }
     

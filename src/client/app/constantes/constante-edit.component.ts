@@ -51,7 +51,7 @@ export class ConstanteEditComponent implements OnInit {
    }
 
    inputCleanUp(value: string) {
-      this.constant.constante = value.toUpperCase().replace(' ', '').trim();
+      this.constant.constante = value.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
    }
 
    alterPattern() {

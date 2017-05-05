@@ -52,7 +52,7 @@ export class PhysicStructureAddComponent {
    }
 
    inputCleanUp(value: string) {
-      this.physicStructure.codigo = value.toUpperCase().replace(' ', '').trim();
+      this.physicStructure.codigo = value.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
    }
 
    validateCode() {
