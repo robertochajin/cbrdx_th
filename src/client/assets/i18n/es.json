@@ -478,6 +478,7 @@
      "COMPETENCIES":{
        "LBL_GRUPO" : "Grupo",
        "LBL_COMPETENCIA" : "Competencia",
+       "LBL_HABILIDAD" : "Habilidad",
        "LBL_PONDERACION" : "Ponderación",
        "MSG_PONDERACION" : "Es necesario una ponderación válida entre 1 y 100"
 
