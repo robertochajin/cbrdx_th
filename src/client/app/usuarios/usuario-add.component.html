@@ -1,6 +1,16 @@
 <h3>{{ 'USUARIOS.LBL_USUARIOS' | translate:param }}</h3>
 <p-tabView>
     <p-tabPanel header="{{ 'USUARIOS.LBL_DATOSUSER' | translate:param }}">
+       <p-dialog header="Información" [(visible)]="!terceroExiste" modal="modal" width="500" responsive="true">
+          <p>No es posible crear un usuario sin antes crear un tercero de tipo <b>colaborador</b></p>
+          <p>¿Qué desea hacer?</p>
+          <p-footer>
+             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <button type="button" pButton (click)="limpiarValidaciones()" label="Intentar con otro documento"></button>
+                <button type="button" pButton (click)="crearTercero()" label="Crear colaborador"></button>
+             </div>
+          </p-footer>
+       </p-dialog>
         <p-fieldset legend="{{ 'USUARIOS.LBL_BUSCARTERCERO' | translate:param }}" *ngIf="!isTerceroSet">
             <form #fc="ngForm">
                 <div class="ui-grid-row">
