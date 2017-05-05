@@ -94,7 +94,7 @@ export class ListaEditComponent implements OnInit {
    }
 
    detailEdit(event: ListaItem) {
-      this.listaService.getDetail(this.masterList.nombreTabla, event.codigo).subscribe(res => {
+      this.listaService.getDetail(this.masterList.nombreTabla, event.idLista).subscribe(res => {
          this.isEdit = true;
          this.editableDetail = res;
       });

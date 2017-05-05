@@ -17,7 +17,7 @@ export class ListaService {
    }
    
    getDetail( tableName: string, code: string ) {
-      return this.authHttp.get( this.masterService + 'tabla/' + tableName + '/code/' + code + '/' ).map( res => res.json() as ListaItem );
+      return this.authHttp.get( this.masterService + 'tabla/' + tableName + '/idItem/' + code + '/' ).map( res => res.json() as ListaItem );
    }
    
    getMaster( id: number ) {
