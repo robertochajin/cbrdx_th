@@ -108,6 +108,11 @@ export class UsuariosAddComponent implements OnInit {
         }
     }
 
+   crearTercero(){
+       //Navega a la pantalla de creación de terceros
+      this.router.navigate(['employees/add']);
+   }
+
     validateUser() {
         if (this.terceroObtenido != null) {
             this.userExists = this.usuarios.filter(t => t.idTercero === this.terceroObtenido.idTercero).length > 0;
