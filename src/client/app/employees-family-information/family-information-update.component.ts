@@ -46,6 +46,8 @@ export class FamilyInformationUpdateComponent implements OnInit {
   repeatedDocument: boolean = false;
   idTipoTercero: number;
   idMayorDeEdad: number = 1;
+  cel:boolean=false;
+  tel:boolean=false;
   //Es necesario crear la constante y consultarla
 
   constructor(private familyInformationService: FamilyInformationService,
@@ -116,6 +118,16 @@ export class FamilyInformationUpdateComponent implements OnInit {
           let mom: moment.Moment = moment(this.familyInformation.fechaNacimiento, 'YYYY-MM-DD');
           this.familyInformation.fechaNacimiento = mom.format('MM/DD/YYYY');
           this.convive = this.familyInformation.idConvivencia == 1 ? true : false;
+           if(this.familyInformation.telefonoFijo!==null || this.familyInformation.telefonoFijo!==""){
+              this.cel= true;
+           }else{
+              this.cel=false;
+           }
+           if(this.familyInformation.telefonoCelular!==null || this.familyInformation.telefonoCelular!==""){
+              this.tel= true;
+           }else{
+              this.tel=false;
+           }
 
           if (this.selectedDocument === this.idMayorDeEdad) {
             this.maxDate.setFullYear(last18Year);
@@ -302,6 +314,23 @@ export class FamilyInformationUpdateComponent implements OnInit {
    }
 
    childInputCleanUp(value: string) {
+      if(this.familyInformation.telefonoFijo.length===7||this.familyInformation.telefonoFijo.length===10){
+         this.tel=true;
+         this.cel=true;
+      }else{
+         this.cel=false;
+         this.tel=false;
+      }
       this.familyInformation.telefonoFijo = value.toUpperCase().replace(/[^0-9]/g, '').replace(' ', '').trim();
+   }
+   childInputCleanUp1(value: string) {
+      if(this.familyInformation.telefonoCelular.length===7||this.familyInformation.telefonoCelular.length===10){
+         this.cel=true;
+         this.tel=true;
+      }else{
+         this.tel=false;
+         this.cel=false;
+      }
+      this.familyInformation.telefonoCelular = value.toUpperCase().replace(/[^0-9]/g, '').replace(' ', '').trim();
    }
 }
