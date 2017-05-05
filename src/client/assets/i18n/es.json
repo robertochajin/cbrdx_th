@@ -16,6 +16,8 @@
   "LBL_ACCIONES":"Acciones",
   "LBL_ACCION":"Acción",
   "LBL_ADJUNTAR":"Adjuntar Archivos",
+  "LBL_CREAR":"Crear",
+  "LBL_EDITAR":"Editar",
   "LBL_REQUERIDO":"requerido",
   "LBL_GENERO":"Género",
   "LBL_ESTADOCIVIL":"Estado Civil",
@@ -172,6 +174,7 @@
     "LBL_EXPERIENCIALABORAL":"Experiencia Laboral",
     "LBL_FACTORRH":"Factor RH",
     "LBL_FECHAEXPEDICION":"Fecha de Expedición",
+    "LBL_FECHADEFUNCION":"Fecha de Defunción",
     "LBL_FINALIZACION":"Finalización",
     "LBL_FORMACIONACADEMICA":"Formación Académica",
     "LBL_FORMACIONCAPACITACION":"Formación y Capacitación",
@@ -248,7 +251,7 @@
     "LBL_VEHICULOS":"Vehiculos",
     "LBL_VIVIENDA":"La Vivienda es",
     "LBL_VIVO":"Vivo",
-    "LBL_JURIDICO":"Estado juridico",
+    "LBL_JURIDICO":"Estado jurídico",
     "MSG_DOCUMENTO":"El documento que intenta ingresar ya está asignado a otra persona y no puede ser duplicado"
 
   },
@@ -460,8 +463,25 @@
       "MSG_NOMBMAYUSCULA" : "El nombre del tipo de área debe comenzar por una letra mayúscula.",
       "MSG_CONFIRMACIONSALIR" : "Si continúa perderá la información no guardada. ¿Está seguro que desea salir?."
 
-
    },
+
+   "FAULTSANDSANCTIONS":{
+     "LBL_FALTASANCION" : "Falta y Sanción",
+     "LBL_FALTA" : "Falta",
+     "LBL_SANCION" : "Sanción",
+     "LBL_TIPOFALTA" : "Tipo de Falta",
+     "LBL_ACCIONSUGERIDA" : "Acción Sugerida"
+     },
+
+     "COMPETENCIES":{
+       "LBL_GRUPO" : "Grupo",
+       "LBL_COMPETENCIA" : "Competencia",
+       "LBL_PONDERACION" : "Ponderación",
+       "MSG_PONDERACION" : "Es necesario una ponderación válida entre 1 y 100"
+
+
+
+       },
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 
 
