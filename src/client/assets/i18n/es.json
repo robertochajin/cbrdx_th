@@ -449,7 +449,7 @@
 
    "TIPODEAREA":{
       "LBL_TIPOAREA": "Tipos de Área",
-      "LBL_NUEVOAREA" : "Nuevo Tipo de Área",
+      "BTN_NUEVOAREA" : "Nuevo Tipo de Área",
       "LBL_EDITAREA" : "Editar tipo de área",
       "LBL_DETALLETIPO" : "Detalle Tipo de Área",
       "MSG_CODIGOREGISTRADO" : "Ya se encuentra registrado ese código",
