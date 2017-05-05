@@ -41,8 +41,9 @@ export class CompetenciesGroupsComponent {
 
    editGroup(group: GroupCompetencies) {
       this.editingGroup = true;
+      this.group = null;
       if (group !== null) {
-         this.group = group;
+         this.group  = Object.assign({},group) ;
       }
    }
 
@@ -73,7 +74,7 @@ export class CompetenciesGroupsComponent {
          icon: 'fa fa-question-circle',
 
          accept: () => {
-            this.group = new GroupCompetencies();
+            this.group = null;
             this.editingGroup = false;
          }
       });
