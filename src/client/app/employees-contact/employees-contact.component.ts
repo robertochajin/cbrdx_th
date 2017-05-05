@@ -19,7 +19,8 @@ export class EmployeesContactComponent {
   @Input() employee:Employee;
 
   msgs: Message[] = [];
-
+   tel:boolean=false;
+   cel:boolean=true;
   constructor(private employeesService: EmployeesService,
               private route: ActivatedRoute,
               private router: Router,
@@ -31,7 +32,7 @@ export class EmployeesContactComponent {
   }
 
   ngOnInit() {
-   
+
   }
 
   onSubmit() {
@@ -67,5 +68,22 @@ export class EmployeesContactComponent {
       this.employee.talla = Number(size.replace(/[^0-9]/g, ''));
     }
   }*/
-
+   validarTelefono(){
+      if(this.employee.telefonoFijo==="(___) ___-____ Ext ____"){
+         this.tel=true;
+         this.cel=true;
+      }else{
+         this.tel=false;
+         this.cel=false;
+      }
+   }
+   validarCelular(){
+      if(this.employee.telefonoCelular==="(___) ___-____"){
+         this.tel=true;
+         this.cel=true;
+      }else{
+         this.tel=false;
+         this.cel=false;
+      }
+   }
 }
