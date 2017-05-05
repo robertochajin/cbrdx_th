@@ -35,7 +35,7 @@ export class TipoDeAreaEditComponent {
     }
 
     inputCleanUp(value: string) {
-        this.areas.codigoArea = value.toUpperCase().replace(' ', '').trim();
+        this.areas.codigoArea = value.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
     }
 
     goBack(): void {
