@@ -1,10 +1,10 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {Router} from '@angular/router';
-import {SelectItem, Message, ConfirmationService} from 'primeng/primeng';
-import {CompetenciesServices} from "../_services/competencies.service";
-import {Competencies} from "../_models/competencies";
-import {GroupCompetenciesServices} from "../_services/groupCompetencies.service";
-import {GroupCompetencies} from "../_models/groupCompetencies";
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { Message, ConfirmationService } from "primeng/primeng";
+import { CompetenciesServices } from "../_services/competencies.service";
+import { Competencies } from "../_models/competencies";
+import { GroupCompetenciesServices } from "../_services/groupCompetencies.service";
+import { GroupCompetencies } from "../_models/groupCompetencies";
 
 @Component({
    moduleId: module.id,
@@ -41,8 +41,9 @@ export class CompetenciesGroupsComponent {
 
    editGroup(group: GroupCompetencies) {
       this.editingGroup = true;
+      this.group = null;
       if (group !== null) {
-         this.group = group;
+         this.group  = Object.assign({},group) ;
       }
    }
 
@@ -73,7 +74,7 @@ export class CompetenciesGroupsComponent {
          icon: 'fa fa-question-circle',
 
          accept: () => {
-            this.group = new GroupCompetencies();
+            this.group = null;
             this.editingGroup = false;
          }
       });
@@ -82,7 +83,7 @@ export class CompetenciesGroupsComponent {
    editCompetencie(competencie: Competencies, groupId: number) {
       this.editingCompetencie = true;
       if (competencie !== null) {
-         this.competencie = competencie;
+         this.competencie = Object.assign({},competencie) ;
       } else {
          this.competencie.idGrupoCompetencia = groupId;
          this.competencie.indicadorHabilitado = true;
@@ -97,7 +98,7 @@ export class CompetenciesGroupsComponent {
          icon: 'fa fa-question-circle',
 
          accept: () => {
-            this.competencie = new Competencies();
+            this.competencie = null;
             this.editingCompetencie = false;
          }
       });
@@ -112,7 +113,8 @@ export class CompetenciesGroupsComponent {
                this.groups[this.groups.indexOf(this.groups.find(z => this.competencie.idGrupoCompetencia == z.idGrupoCompetencia))]
                   .competencies.map(c => {
                   if(c.idCompetencia == this.competencie.idCompetencia){
-                     c = this.competencie;
+                     c.descripcion = this.competencie.descripcion;
+                     c.indicadorHabilitado = this.competencie.indicadorHabilitado;
                   }
                });
 

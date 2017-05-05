@@ -49,17 +49,17 @@ export class SharedModule {
 
             // Focus primer invalid campo
 
-            setTimeout(() => {
                jQuery('button').click(function () {
-                  if (jQuery('input.ng-invalid').length) {
-                     jQuery('body').scrollTop(jQuery('input.ng-invalid:first').position().top);
-                     console.log('Focus Error!');
-                     setTimeout(() => {
-                        jQuery('input.ng-invalid:first').select().focus();
-                     }, 500);
-                  }
+                  setTimeout(() => {
+                     if (jQuery('input.ng-invalid').length > 0) {
+                        jQuery('body').scrollTop(jQuery('input.ng-invalid:first').position().top);
+                        console.log('Focus Error!');
+                        setTimeout(() => {
+                           jQuery('input.ng-invalid:first').select().focus();
+                        }, 500);
+                     }
+                  }, 500);
                });
-            }, 1000);
          }
       });
    }
