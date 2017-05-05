@@ -41,8 +41,8 @@ export class CompetenciesGroupsComponent {
 
    editGroup(group: GroupCompetencies) {
       this.editingGroup = true;
-      this.group = null;
       if (group !== null) {
+         this.group = null;
          this.group  = Object.assign({},group) ;
       }
    }
