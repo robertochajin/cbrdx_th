@@ -104,7 +104,7 @@ export class PositionsAddComponent {
       }
    }
    inputCleanUp(value: string) {
-      this.position.codigoCargo = value.toUpperCase().replace(' ', '').trim();
+      this.position.codigoCargo= value.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
    }
    inputNumber() {
       var numero = this.position.personaACargoDir + "";

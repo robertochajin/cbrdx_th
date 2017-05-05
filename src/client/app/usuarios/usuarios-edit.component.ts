@@ -192,14 +192,13 @@ export class UsuariosEditComponent implements OnInit {
         });
     }
 
-    removeRole(c: UsuarioRol) {
-        //this.usuariosService.readUserRol(c).subscribe(res => {
-            //let u: UsuarioRol = res;
-            c.indicadorHabilitado = false;
-            this.usuariosService.updateUserRole(c).then(res => {
+    removeRole(c: number) {
+        this.usuariosService.readUserRol(c).subscribe(res=>{
+            res.indicadorHabilitado = false;
+            this.usuariosService.updateUserRole(res).then(rest => {
                 this.updateRolesLists();
             });
-        //});
+        });
     }
 
     removeGroup(c: number) {

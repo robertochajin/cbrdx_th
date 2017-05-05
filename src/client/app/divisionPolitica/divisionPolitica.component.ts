@@ -554,7 +554,7 @@ export class DivisionPoliticaComponent implements OnInit {
   capitalizeCodigo() {
     let input = this.politicalDivision.codigoDivisionPolitica;
     if(input != "" && input != null){
-      this.politicalDivision.codigoDivisionPolitica = input.toUpperCase().replace(' ', '').trim();
+      this.politicalDivision.codigoDivisionPolitica = input.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
     }
   }
 

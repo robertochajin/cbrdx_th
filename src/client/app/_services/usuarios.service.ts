@@ -93,7 +93,7 @@ export class UsuariosService extends TercerosService {
    }
 
    readUserRol( p: number ) {
-      return this.authHttp.get( this.usuariosRolesServiceURL + p).map( ( res: Response ) => res.json() as UsuarioRol );
+      return this.authHttp.get( this.usuariosRolesServiceURL+"query/" + p).map( ( res: Response ) => res.json() as UsuarioRol );
    }
 
    updateUserGroup( c: UsuarioGrupoGestion ) {
