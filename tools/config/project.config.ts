@@ -7,27 +7,37 @@ import { ExtendPackages } from './seed.config.interfaces';
  * This class extends the basic seed configuration, allowing for project specific overrides. A few examples can be found
  * below.
  */
+export const FONT_AWESOME_SRC     = 'node_modules/font-awesome/';
 export class ProjectConfig extends SeedConfig {
 
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
 
+/*
 
   FONTS_DEST = `${this.APP_DEST}/fonts`;
   FONTS_SRC = [
-      'src/client/assets/font/sp/**',
-     'node_modules/font-awesome/fonts/**'
-  ];
 
-  PRIME_NG_THEME = 'bootstrap';
+
+  ];*/
+
+
+   PRIME_NG_THEME = 'bootstrap';
+   THEME_FONTS_DEST = `${this.APP_DEST}/css/fonts`;
+   THEME_FONTS_SRC = [
+      'node_modules/primeng/resources/themes/' + this.PRIME_NG_THEME + '/fonts/**',
+      //'node_modules/font-awesome/fonts/**',
+      'src/client/assets/font/sp/**',
+   ];
+
+
+
+
   CSS_IMAGE_DEST = `${this.CSS_DEST}/images`;
   CSS_IMAGE_SRC = [
     'node_modules/primeng/resources/themes/' + this.PRIME_NG_THEME + '/images/**'
   ];
 
-  THEME_FONTS_DEST = `${this.APP_DEST}/css/fonts`;
-  THEME_FONTS_SRC = [
-      'node_modules/primeng/resources/themes/' + this.PRIME_NG_THEME + '/fonts/**',
-  ];
+
 
   constructor() {
     super();
