@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ConfirmationService, SelectItem, Message } from 'primeng/primeng';
 import { PhysicStructure } from '../_models/physic-structure';
@@ -14,17 +14,17 @@ import { ListaService } from '../_services/lista.service';
                selector: 'physic-structure',
                providers: [ ConfirmationService ]
             } )
-export class PhysicStructureAddComponent {
+export class PhysicStructureAddComponent implements OnInit{
    physicStructure: PhysicStructure = new PhysicStructure();
    dialogObjet: PhysicStructure = new PhysicStructure();
    ListCategory: SelectItem[] = [];
    ListPhysicStructure: PhysicStructure[];
    msgs: Message[] = [];
-   header: string = "Agregando Estructura Física";
+   header = "Agregando Estructura Física";
    submitted: boolean;
-   codExists: boolean = false;
+   codExists = false;
    direcValid: boolean;
-   addinglocation: boolean = true;
+   addinglocation = true;
    localizacion: Localizaciones = new Localizaciones();
 
    constructor( private physicStructureService: PhysicStructureService,
@@ -96,7 +96,7 @@ export class PhysicStructureAddComponent {
    }
 
    focusUP() {
-      const element = document.querySelector( "#formulario" );
+      const element = document.querySelector( '#formulario' );
       if ( element ) {
          element.scrollIntoView( element );
       }
