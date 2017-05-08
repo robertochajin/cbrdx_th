@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ProductivityService } from '../_services/productivity.service';
 import { SelectItem, ConfirmationService, Message } from 'primeng/primeng';
 import { Productivity } from '../_models/productivity';
@@ -11,7 +11,7 @@ import { Positions } from '../_models/positions';
                selector: 'productivity-component',
                providers: [ ConfirmationService ]
             } )
-export class ProductivityComponent implements OnInit {
+export class ProductivityComponent implements OnInit{
    @Input()
    position: Positions;
    productivity: Productivity = new Productivity();

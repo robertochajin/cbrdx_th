@@ -26,27 +26,27 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    private editingPosition = false;
    private editingPerson = false;
    private badPostion = false;
-   private positionRepeated = false;
-   private countSlots: number = 0;
-   private countCost: number = 0;
-   private area: OrganizationalStructure = new OrganizationalStructure();
+   public positionRepeated = false;
+   public countSlots = 0;
+   private countCost = 0;
+   public area: OrganizationalStructure = new OrganizationalStructure();
    private listOrganizationalStructure: OrganizationalStructure[];
-   private osPosition: OrganizationalStructurePositions = new OrganizationalStructurePositions();
+   public osPosition: OrganizationalStructurePositions = new OrganizationalStructurePositions();
    private backUpOSPosition: OrganizationalStructurePositions = new OrganizationalStructurePositions();
    private osPositions: OrganizationalStructurePositions[] = [];
    private personsPosition: PersonPositions = new PersonPositions();
    private backUpPersonsPosition: PersonPositions = new PersonPositions();
    private personsPositions: PersonPositions[] = [];
    private postionSlots: PersonPositions[] = [];
-   private positionList: Positions[] = [];
+   public positionList: Positions[] = [];
    private selectedPosition: Positions = new Positions();
    private employeeList: Employee [] = [];
-   private selectedEmployee: Employee = null;
-   private badEmployee: boolean = true;
+   public selectedEmployee: Employee = null;
+   private badEmployee = true;
    private range: string;
    private contracTypeList: SelectItem [] = [];
-   treedCompany: TreeNode[] = [];
-   selectedNode: TreeNode;
+   private treedCompany: TreeNode[] = [];
+   private selectedNode: TreeNode;
    private es: any;
    private maxDate: Date = null;
 
@@ -102,7 +102,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
 
    nodeExpand( node: any ) {
       let chilNodes: TreeNode[] = [];
-      for ( let c of this.listOrganizationalStructure.filter( t => t.idPadre == node.data.idEstructuraOrganizacional ) ) {
+      for ( let c of this.listOrganizationalStructure.filter( t => t.idPadre === node.data.idEstructuraOrganizacional ) ) {
          chilNodes.push( {
                             'label': c.nombre,
                             'data': c,
@@ -273,13 +273,16 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               if ( this.backUpOSPosition !== null ) {
+                                                 //Verificar si es necesario reestablecer el objeto
+                                                 // en la tabla
+                                                 // this.osPositions[this.osPositions.indexOf(this.backUpOSPosition)] =
+                                                 // this.backUpOSPosition;
                                                  this.backUpOSPosition = null;
                                               }
                                               this.editingPosition = false;
                                            }
                                         } );
    }
-
    cancelEditingPerson() {
 
       this.confirmationService.confirm( {
@@ -351,7 +354,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    }
 
    addSlots( idCargo: number, nombreCargo: string, idEstructuraOrganizacionalCargo: number, slots: number ) {
-      let index = this.postionSlots.findIndex( ps => ps.idCargo == idCargo );
+      let index = this.postionSlots.findIndex( ps => ps.idCargo === idCargo );
       for ( let i = 1; i <= slots; i++ ) {
          let personPosition: PersonPositions = new PersonPositions();
          personPosition.cargo = nombreCargo;
@@ -374,10 +377,12 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    }
 
    assingPerson( person: PersonPositions, index: number = null ) {
-      if ( index === null )
-         index = this.postionSlots.findIndex( ps => (ps.idCargo == person.idCargo && ps.idTercero == 0) );
-      if ( index !== -1 )
+      if ( index === null ) {
+         index = this.postionSlots.findIndex( ps => (ps.idCargo === person.idCargo && ps.idTercero === 0) );
+      }
+      if ( index !== -1 ) {
          this.postionSlots[ index ] = person;
+      }
    }
 
    confirmStructure() {

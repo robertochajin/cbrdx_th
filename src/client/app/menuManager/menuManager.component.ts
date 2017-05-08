@@ -11,7 +11,7 @@ import { Message } from 'primeng/primeng';
                selector: 'menu-manager',
 
             } )
-export class MenuManagerComponent implements OnInit {
+export class MenuManagerComponent {
    msgs: Message[] = [];
    menus: MenuManager = new MenuManager();
    listmenu: MenuManager[];
@@ -38,9 +38,6 @@ export class MenuManagerComponent implements OnInit {
          }
          this.newModule();
       } );
-   }
-
-   ngOnInit(): void {
    }
 
    validateCode() {

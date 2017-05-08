@@ -10,6 +10,7 @@ import { ConfirmationService } from 'primeng/primeng';
                selector: 'physic-structure',
                providers: [ ConfirmationService ]
             } )
+
 export class PhysicStructureComponent implements OnInit {
    physicStructure: PhysicStructure = new PhysicStructure();
    dialogObjet: PhysicStructure = new PhysicStructure();

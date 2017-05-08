@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Risks } from '../_models/risks';
 import { RisksService } from '../_services/risks.service';
 import { Router } from '@angular/router';
@@ -7,11 +7,11 @@ import { ConfirmationService, Message } from 'primeng/primeng';
 @Component( {
                moduleId: module.id,
                templateUrl: 'risks-component.html',
-               selector: 'risks',
+               selector: 'risks-list',
                providers: [ ConfirmationService ]
             } )
 
-export class RisksComponent {
+export class RisksComponent implements OnInit {
 
    risk: Risks = new Risks();
    risks: Risks[] = [];

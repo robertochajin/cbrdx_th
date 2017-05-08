@@ -15,6 +15,7 @@ import { ListaService } from '../_services/lista.service';
                selector: 'physic-structure',
                providers: [ ConfirmationService ]
             } )
+
 export class PhysicStructureUpdateComponent  implements OnInit {
    physicStructure: PhysicStructure = new PhysicStructure();
    dialogObjet: PhysicStructure = new PhysicStructure();
@@ -25,7 +26,7 @@ export class PhysicStructureUpdateComponent  implements OnInit {
    ListCategory: SelectItem[] = [];
    submitted: boolean;
    msgs: Message[] = [];
-   header = "Editando Estructura Física";
+   header = 'Editando Estructura Física';
 
    constructor( private physicStructureService: PhysicStructureService,
       private listaService: ListaService,

@@ -61,7 +61,7 @@ export class PositionAuthoritiesComponent implements OnInit {
 
    onSubmit() {
       this.msgs = [];
-      this.absence.idTipoRelacion = 3; // Reemplaza a
+      this.absence.idTipoRelacion = 3;// Reemplaza a
       this.absenceService.add( this.absence )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );

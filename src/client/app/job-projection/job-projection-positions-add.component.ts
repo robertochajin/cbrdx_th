@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { JobProjection } from '../_models/jobProjection';
@@ -11,11 +11,11 @@ import { NavService } from '../_services/_nav.service';
 @Component( {
                moduleId: module.id,
                templateUrl: 'job-projection-positions-add.component.html',
-               selector: 'projections',
+               selector: 'projections-add',
                providers: [ ConfirmationService ]
             } )
 
-export class JobProjectionAddComponent {
+export class JobProjectionAddComponent implements OnInit {
    jobProjectionAdd: JobProjection;
    @Input()
    id: number;
@@ -25,7 +25,7 @@ export class JobProjectionAddComponent {
    positions: Positions = new Positions();
    ListPositions: SelectItem[] = [];
    constante: Constante = new Constante();
-   header: string = 'Editando Proyección';
+   header = 'Editando Proyección';
    msgs: Message[] = [];
    year: Number;
    @Output()
@@ -53,7 +53,7 @@ export class JobProjectionAddComponent {
          this.jobProjectionAdd.costoProyectado = null;
          this.jobProjectionAdd.plazasProyectadas = null;
          this.jobProjectionService.getPositions().subscribe( rest => {
-            this.ListPositions.push( { label: "Seleccione", value: null } );
+            this.ListPositions.push( { label: 'Seleccione', value: null } );
             for ( let dp of rest ) {
                let bandera = false;
                for ( let r of this.ListJobProjection ) {
@@ -75,7 +75,7 @@ export class JobProjectionAddComponent {
 
       this.jobProjectionService.getConstantes().subscribe( rest => {
          for ( let c of rest ) {
-            if ( c.constante === "AUMSUE" ) {
+            if ( c.constante === 'AUMSUE' ) {
                this.constante = c;
                break;
             }
@@ -105,7 +105,7 @@ export class JobProjectionAddComponent {
       this.jobProjectionAdd.idProyecccionLaboral = null;
       this.jobProjectionAdd.costoActual = 0;
       this.jobProjectionAdd.idEstadoProyeccion = 1;
-      this.jobProjectionAdd.estadoProyeccion = "Solicitado";
+      this.jobProjectionAdd.estadoProyeccion = 'Solicitado';
       this.jobProjectionAdd.cargo = this.positions.cargo;
       this.create.emit( this.jobProjectionAdd );
 

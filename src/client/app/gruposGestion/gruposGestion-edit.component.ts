@@ -16,12 +16,12 @@ export class GruposGestionEditComponent {
 
    grupoGestion: GruposGestion = new GruposGestion();
    gruposGestion: GruposGestion[];
-   codeExists: boolean = false;
+   codeExists = false;
    currentDate: Date = new Date( Date.now() );
-   displayDialog: boolean = false;
+   displayDialog = false;
    isRequired = false;
    isGreater = true;
-   private es: any;
+   public es: any;
 
    constructor( private gruposGestionService: GruposGestionService, private router: Router, private route: ActivatedRoute ) {
       route.params.switchMap( ( params: Params ) => gruposGestionService.viewGruposGestion( +params[ 'id' ] ) )
@@ -44,8 +44,7 @@ export class GruposGestionEditComponent {
          dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
          dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
          monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre',
-            'diciembre'
-         ],
+            'diciembre' ],
          monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
    }
@@ -58,7 +57,8 @@ export class GruposGestionEditComponent {
    }
 
    validateGreater() {
-      if ( this.grupoGestion.fechaInicio !== null && this.grupoGestion.fechaFin !== null && this.grupoGestion.fechaInicio < this.grupoGestion.fechaFin ) {
+      if ( this.grupoGestion.fechaInicio !== null && this.grupoGestion.fechaFin !== null &&
+           this.grupoGestion.fechaInicio < this.grupoGestion.fechaFin ) {
          this.isGreater = true;
       } else {
          this.isGreater = false;

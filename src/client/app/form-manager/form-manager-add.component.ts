@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Functionality } from '../_models/functionality';
 import { FunctionalityControl } from '../_models/functionalityContorl';
 import { NavService } from '../_services/_nav.service';
@@ -16,7 +16,7 @@ import { ListaItem } from '../_models/listaItem';
                providers: [ ConfirmationService ]
             } )
 
-export class FormManagerAddComponent {
+export class FormManagerAddComponent implements OnInit {
 
    functionality: Functionality = new Functionality();
    functionalityControl: FunctionalityControl = new FunctionalityControl();

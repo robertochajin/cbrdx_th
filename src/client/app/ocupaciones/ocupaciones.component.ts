@@ -11,7 +11,7 @@ import { NavService } from '../_services/_nav.service';
 @Component( {
                moduleId: module.id,
                templateUrl: 'ocupaciones.component.html',
-               selector: 'ocupaciones'
+               selector: 'ocupaciones-list'
             } )
 export class OcupacionesComponent implements OnInit {
    msg: Message;
@@ -21,15 +21,15 @@ export class OcupacionesComponent implements OnInit {
    treeocupaciones: any[] = [];
    treeselected: TreeNode;
    selectedNode: Tree;
-   tabselected: number = 1;
+   tabselected = 1;
    labeltabselected: string;
    header: string;
    labelPadre: string;
    labelTipo: string;
    labelfieldocupacion: string;
-   codeExists: boolean = false;
-   displayDialog: boolean = false;
-   submitted: boolean = false;
+   codeExists = false;
+   displayDialog = false;
+   submitted = false;
    resultSearch: Search[];
    selectedSearch: SelectItem;
 
@@ -52,27 +52,26 @@ export class OcupacionesComponent implements OnInit {
 
       ocupacionesService.listOcupaciones().subscribe( res => {
          this.listadoOcupaciones = res;
-         for ( let c of this.listadoOcupaciones.filter( t => t.idOcupacionPadre == 0 ) ) {
+         for ( let c of this.listadoOcupaciones.filter( t => t.idOcupacionPadre === 0 ) ) {
             this.treeocupaciones.push( {
-                                          "value": c.idOcupacion,
-                                          "label": c.ocupacion,
-                                          "level": 1,
-                                          "codigo": c.codigoOcupacion,
-                                          "children": [ {
-                                             "value": 0,
-                                             "label": '+ Cargando...',
-                                             "level": 2,
-                                             "codigo": '',
-                                             "children": {}
-                                          }
-                                          ]
+                                          'value': c.idOcupacion,
+                                          'label': c.ocupacion,
+                                          'level': 1,
+                                          'codigo': c.codigoOcupacion,
+                                          'children': [ {
+                                             'value': 0,
+                                             'label': '+ Cargando...',
+                                             'level': 2,
+                                             'codigo': '',
+                                             'children': {}
+                                          } ]
                                        } );
          }
 
       } );
       ocupacionesService.listOcupacionesTipos().subscribe( listadoOcupacionesTipos => {
          this.ocupacionesTypes = listadoOcupacionesTipos;
-         this.ocupaciones.idOcupacionTipo = this.getIdTypebyCodigo( "1" );
+         this.ocupaciones.idOcupacionTipo = this.getIdTypebyCodigo( '1' );
       } );
    }
 
@@ -87,26 +86,25 @@ export class OcupacionesComponent implements OnInit {
    nodeExpand( node: any ) {
       let ocupacionesNivel: any[] = [];
       let chil: any;
-      if ( node.level == 3 ) {
+      if ( node.level === 3 ) {
          chil = [];
       } else {
 
          chil = [ {
-            "value": 0,
-            "label": '+ Cargando...',
-            "level": node.level + 2,
-            "codigo": '',
-         }
-         ]
+            'value': 0,
+            'label': '+ Cargando...',
+            'level': node.level + 2,
+            'codigo': '',
+         } ]
       }
-      for ( let c of this.listadoOcupaciones.filter( t => t.idOcupacionPadre == node.value ) ) {
+      for ( let c of this.listadoOcupaciones.filter( t => t.idOcupacionPadre === node.value ) ) {
          ocupacionesNivel.push( {
-                                   "value": c.idOcupacion,
-                                   "label": c.ocupacion,
-                                   "level": node.level + 1,
-                                   "codigo": c.codigoOcupacion,
-                                   "parent": node,
-                                   "children": chil
+                                   'value': c.idOcupacion,
+                                   'label': c.ocupacion,
+                                   'level': node.level + 1,
+                                   'codigo': c.codigoOcupacion,
+                                   'parent': node,
+                                   'children': chil
                                 } );
       }
       node.children = ocupacionesNivel;
@@ -122,9 +120,9 @@ export class OcupacionesComponent implements OnInit {
 
       switch ( this.tabselected ) {
          case 1:
-            this.labelfieldocupacion = "Nombre";
+            this.labelfieldocupacion = 'Nombre';
             this.labelPadre = '';
-            this.labelTipo = "Tipo: " + this.getTypebyCodigo( '1' );
+            this.labelTipo = 'Tipo: ' + this.getTypebyCodigo( '1' );
             this.btnoccupation = {
                show: true,
                label: 'Agregar Grandes Grupos',
@@ -140,9 +138,9 @@ export class OcupacionesComponent implements OnInit {
             break;
 
          case 2:
-            this.labelfieldocupacion = "Nombre " + this.getTypebyCodigo( '2' );
-            this.labelPadre = this.getTypebyCodigo( '1' ) + ": " + node.parent.label;
-            this.labelTipo = "Tipo: " + this.getTypebyCodigo( '2' );
+            this.labelfieldocupacion = 'Nombre ' + this.getTypebyCodigo( '2' );
+            this.labelPadre = this.getTypebyCodigo( '1' ) + ': ' + node.parent.label;
+            this.labelTipo = 'Tipo: ' + this.getTypebyCodigo( '2' );
             this.btnsubocupation = {
                show: true,
                label: 'Agregar ' + this.getTypebyCodigo( '3' ),
@@ -152,9 +150,9 @@ export class OcupacionesComponent implements OnInit {
             break;
 
          case 3:
-            this.labelfieldocupacion = "Nombre " + this.getTypebyCodigo( '3' );
-            this.labelPadre = this.getTypebyCodigo( '2' ) + ": " + node.parent.label;
-            this.labelTipo = "Tipo: " + this.getTypebyCodigo( '3' );
+            this.labelfieldocupacion = 'Nombre ' + this.getTypebyCodigo( '3' );
+            this.labelPadre = this.getTypebyCodigo( '2' ) + ': ' + node.parent.label;
+            this.labelTipo = 'Tipo: ' + this.getTypebyCodigo( '3' );
             this.btnsubocupation = {
                show: true,
                label: 'Agregar ' + this.getTypebyCodigo( '4' ),
@@ -164,9 +162,9 @@ export class OcupacionesComponent implements OnInit {
             break;
 
          case 4:
-            this.labelfieldocupacion = "Nombre " + this.getTypebyCodigo( '3' );
-            this.labelPadre = this.getTypebyCodigo( '3' ) + ": " + node.parent.label;
-            this.labelTipo = "Tipo: " + this.getTypebyCodigo( '4' );
+            this.labelfieldocupacion = 'Nombre ' + this.getTypebyCodigo( '3' );
+            this.labelPadre = this.getTypebyCodigo( '3' ) + ': ' + node.parent.label;
+            this.labelTipo = 'Tipo: ' + this.getTypebyCodigo( '4' );
             break;
 
       }
@@ -180,34 +178,31 @@ export class OcupacionesComponent implements OnInit {
 
    save() {
 
-      if ( this.ocupaciones.idOcupacion == null || this.ocupaciones.idOcupacion == 0 ) {
+      if ( this.ocupaciones.idOcupacion === null || this.ocupaciones.idOcupacion === 0 ) {
          this.ocupacionesService.addOcupaciones( this.ocupaciones ).then( data => {
             let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
             this.navService.setMesage( typeMessage, this.msg );
             let chil: any[] = [];
             if ( this.tabselected <= 3 ) {
                chil = [ {
-                  "value": 0,
-                  "label": '+ Cargando...',
-                  "level": this.tabselected + 1,
-                  "codigo": ''
-               }
-               ]
+                  'value': 0,
+                  'label': '+ Cargando...',
+                  'level': this.tabselected + 1,
+                  'codigo': ''
+               } ]
             }
             let newChil: any = {
-               "label": this.ocupaciones.ocupacion,
-               "value": data.idOcupacion,
-               "level": this.tabselected,
-               "codigo": this.ocupaciones.codigoOcupacion,
-               "children": chil
+               'label': this.ocupaciones.ocupacion,
+               'value': data.idOcupacion,
+               'level': this.tabselected,
+               'codigo': this.ocupaciones.codigoOcupacion,
+               'children': chil
             };
             this.listadoOcupaciones.push( data );
-            if ( this.ocupaciones.idOcupacionPadre == 0 ) {
+            if ( this.ocupaciones.idOcupacionPadre === 0 ) {
                this.treeocupaciones.push( newChil );
                this.newOccupation();
             } else {
-               //this.selectedNode.expanded = false;
-               //this.nodeExpand(this.selectedNode);
                this.selectedNode.children.push( newChil );
                this.newSubOccupation();
             }
@@ -237,7 +232,7 @@ export class OcupacionesComponent implements OnInit {
    }
 
    doCancel() {
-      if ( this.ocupaciones.idOcupacion == null || this.ocupaciones.idOcupacion == 0 ) {
+      if ( this.ocupaciones.idOcupacion === null || this.ocupaciones.idOcupacion === 0 ) {
          this.ocupaciones = new Ocupaciones;
       } else {
          this.ocupacionesService.viewOcupaciones( this.ocupaciones.idOcupacion ).subscribe( res => {
@@ -253,12 +248,12 @@ export class OcupacionesComponent implements OnInit {
       this.ocupaciones = new Ocupaciones();
       this.tabselected = 1;
       this.header = 'Nuevo Grandes Grupos';
-      this.labelfieldocupacion = "Nombre";
+      this.labelfieldocupacion = 'Nombre';
       this.ocupaciones.idOcupacionPadre = 0;
-      this.ocupaciones.idOcupacionTipo = this.getIdTypebyCodigo( "1" );
+      this.ocupaciones.idOcupacionTipo = this.getIdTypebyCodigo( '1' );
       this.ocupaciones.indicadorHabilitado = true;
       this.labelPadre = '';
-      this.labelTipo = "Tipo: " + this.getTypebyCodigo( '1' );
+      this.labelTipo = 'Tipo: ' + this.getTypebyCodigo( '1' );
 
    }
 
@@ -269,30 +264,29 @@ export class OcupacionesComponent implements OnInit {
       this.tabselected = this.selectedNode.level + 1;
       this.labeltabselected = this.tabselected.toString();
       this.header = 'Nuevo ' + this.getTypebyCodigo( this.labeltabselected );
-      this.labelfieldocupacion = "Nombre " + this.getTypebyCodigo( this.labeltabselected );
+      this.labelfieldocupacion = 'Nombre ' + this.getTypebyCodigo( this.labeltabselected );
       this.ocupaciones.idOcupacionPadre = this.btnsubocupation.idparent;
       this.ocupaciones.codigoOcupacion = this.selectedNode.codigo;
       this.ocupaciones.idOcupacionTipo = this.getIdTypebyCodigo( this.labeltabselected );
       this.ocupaciones.indicadorHabilitado = true;
-      this.labelPadre = this.getTypebyCodigo( this.selectedNode.level.toString() ) + ": " + this.btnsubocupation.parent;
-      this.labelTipo = "Tipo: " + this.getTypebyCodigo( this.labeltabselected );
+      this.labelPadre = this.getTypebyCodigo( this.selectedNode.level.toString() ) + ': ' + this.btnsubocupation.parent;
+      this.labelTipo = 'Tipo: ' + this.getTypebyCodigo( this.labeltabselected );
 
-      //console.info(this.tabselected);
    }
 
    getTypebyCodigo( id: string ) {
-      let nameactividadEconomica: string = '';
+      let nameactividadEconomica = '';
 
-      for ( let c of  this.ocupacionesTypes.filter( t => t.codigoOcupacionTipo.toString() == id ) ) {
+      for ( let c of  this.ocupacionesTypes.filter( t => t.codigoOcupacionTipo.toString() === id ) ) {
          nameactividadEconomica = c.descripcionOcupacionTipo;
       }
       return nameactividadEconomica;
    }
 
    getIdTypebyCodigo( id: string ) {
-      let idOcupacionTipo: number = 0;
+      let idOcupacionTipo = 0;
 
-      for ( let c of  this.ocupacionesTypes.filter( t => t.codigoOcupacionTipo.toString() == id ) ) {
+      for ( let c of  this.ocupacionesTypes.filter( t => t.codigoOcupacionTipo.toString() === id ) ) {
          idOcupacionTipo = c.idOcupacionTipo;
       }
       return idOcupacionTipo;
@@ -329,7 +323,7 @@ export class OcupacionesComponent implements OnInit {
          } else {
             this.labelPadre = '';
          }
-         this.labelTipo = "Tipo: " + this.ocupacionesTypes.find( t => t.idOcupacionTipo == res.idOcupacionTipo ).descripcionOcupacionTipo;
+         this.labelTipo = 'Tipo: ' + this.ocupacionesTypes.find( t => t.idOcupacionTipo === res.idOcupacionTipo ).descripcionOcupacionTipo;
 
          // Scroll to Select
          setTimeout( () => {
@@ -343,30 +337,30 @@ export class OcupacionesComponent implements OnInit {
    }
 
    private searchRecursive( res: Ocupaciones ) {
-      let node4: number = 0;
-      let node3: number = 0;
-      let node2: number = 0;
-      let node1: number = 0;
-      let nivel = this.ocupacionesTypes.find( t => t.idOcupacionTipo == res.idOcupacionTipo ).codigoOcupacionTipo;
+      let node4 = 0;
+      let node3 = 0;
+      let node2 = 0;
+      let node1 = 0;
+      let nivel = this.ocupacionesTypes.find( t => t.idOcupacionTipo === res.idOcupacionTipo ).codigoOcupacionTipo;
 
       switch ( nivel.toString() ) {
-         case "1":
+         case '1':
             node1 = res.idOcupacion;
             break;
-         case "2":
+         case '2':
             node2 = res.idOcupacion;
             node1 = res.idOcupacionPadre;
             break;
-         case "3":
+         case '3':
             node3 = res.idOcupacion;
             node2 = res.idOcupacionPadre;
-            node1 = this.listadoOcupaciones.find( t => t.idOcupacion == res.idOcupacionPadre ).idOcupacionPadre;
+            node1 = this.listadoOcupaciones.find( t => t.idOcupacion === res.idOcupacionPadre ).idOcupacionPadre;
             break;
-         case "4":
+         case '4':
             node4 = res.idOcupacion;
             node3 = res.idOcupacionPadre;
-            node2 = this.listadoOcupaciones.find( t => t.idOcupacion == node3 ).idOcupacionPadre;
-            node1 = this.listadoOcupaciones.find( t => t.idOcupacion == node2 ).idOcupacionPadre;
+            node2 = this.listadoOcupaciones.find( t => t.idOcupacion === node3 ).idOcupacionPadre;
+            node1 = this.listadoOcupaciones.find( t => t.idOcupacion === node2 ).idOcupacionPadre;
             break;
       }
       if ( node1 > 0 ) {
@@ -389,9 +383,9 @@ export class OcupacionesComponent implements OnInit {
 
    private searchLevel( id: number, tipo: number ) {
 
-      if ( tipo == 1 ) {
+      if ( tipo === 1 ) {
          this.treeocupaciones.forEach( node => {
-            if ( node.value == id ) {
+            if ( node.value === id ) {
                node.expanded = true;
                this.nodeExpand( node );
                this.selectedNode = node;
@@ -402,7 +396,7 @@ export class OcupacionesComponent implements OnInit {
       } else {
          if ( this.selectedNode.children ) {
             this.selectedNode.children.forEach( childNode => {
-               if ( childNode.value == id ) {
+               if ( childNode.value === id ) {
                   childNode.expanded = true;
                   this.nodeExpand( childNode );
                   this.selectedNode = childNode;
@@ -417,25 +411,24 @@ export class OcupacionesComponent implements OnInit {
    private nodeExpandRecursive( node: any ) {
       let ocupacionesNivel: any[] = [];
       let chil: any;
-      if ( node.level == 3 ) {
+      if ( node.level === 3 ) {
          chil = [];
       } else {
 
          chil = [ {
-            "value": 0,
-            "label": '+ Cargando...',
-            "level": node.level + 2,
-            "codigo": ''
-         }
-         ]
+            'value': 0,
+            'label': '+ Cargando...',
+            'level': node.level + 2,
+            'codigo': ''
+         } ]
       }
-      for ( let c of this.listadoOcupaciones.filter( t => t.idOcupacionPadre == node.value ) ) {
+      for ( let c of this.listadoOcupaciones.filter( t => t.idOcupacionPadre === node.value ) ) {
          ocupacionesNivel.push( {
-                                   "value": c.idOcupacion,
-                                   "label": c.ocupacion,
-                                   "level": node.level + 1,
-                                   "codigo": c.codigoOcupacion,
-                                   "children": chil
+                                   'value': c.idOcupacion,
+                                   'label': c.ocupacion,
+                                   'level': node.level + 1,
+                                   'codigo': c.codigoOcupacion,
+                                   'children': chil
                                 } );
       }
       node.children = ocupacionesNivel;

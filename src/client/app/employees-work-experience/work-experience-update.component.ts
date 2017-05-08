@@ -56,7 +56,7 @@ export class WorkExperienceUpdateComponent implements OnInit {
       private _nav: NavService ) {
 
       this.actividadEconomicaService.listByPadre( 0 ).subscribe( res => {
-         this.sector.push( { label: "Seleccione", value: null } );
+         this.sector.push( { label: 'Seleccione', value: null } );
          for ( let dp of res ) {
             this.sector.push( {
                                  label: dp.actividadEconomica,
@@ -77,13 +77,11 @@ export class WorkExperienceUpdateComponent implements OnInit {
    ngOnInit() {
       this.es = {
          firstDayOfWeek: 1,
-         dayNames: [ "domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado" ],
-         dayNamesShort: [ "dom", "lun", "mar", "mié", "jue", "vie", "sáb" ],
-         dayNamesMin: [ "D", "L", "M", "X", "J", "V", "S" ],
-         monthNames: [ "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre",
-            "diciembre"
-         ],
-         monthNamesShort: [ "ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic" ]
+         dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
+         dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
+         dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
+         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre' ],
+         monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
       this.route.params
       .switchMap( ( params: Params ) => this.workExperienceService.get( +params[ 'id' ] ) )
@@ -94,7 +92,7 @@ export class WorkExperienceUpdateComponent implements OnInit {
          let mom: moment.Moment = moment( this.experience.fechaIngresa, 'YYYY-MM-DD' );
          this.fechaIngresa = mom.format( 'MM/DD/YYYY' );
          this.onSelectMethodCalendarIngreso( this.fechaIngresa );
-         if ( this.experience.indicadorActualmente == false ) {
+         if ( this.experience.indicadorActualmente === false ) {
             let mom3: moment.Moment = moment( this.experience.fechaTermina, 'YYYY-MM-DD' );
             this.fechaTermina = mom3.format( 'MM/DD/YYYY' );
             this.onSelectMethodCalendarFinalizacion( this.fechaTermina );
@@ -121,12 +119,12 @@ export class WorkExperienceUpdateComponent implements OnInit {
          this.experience.idCiudad = null;
       }
 
-      if ( this.city == this.backupcity ) {
+      if ( this.city === this.backupcity ) {
          this.msgs = [];
          let mom: moment.Moment = moment( this.fechaIngresa, 'MM/DD/YYYY' );
          this.experience.fechaIngresa = mom.format( 'YYYY-MM-DD' );
 
-         if ( this.experience.indicadorActualmente == false ) {
+         if ( this.experience.indicadorActualmente === false ) {
             let mom3: moment.Moment = moment( this.fechaTermina, 'MM/DD/YYYY' );
             this.experience.fechaTermina = mom3.format( 'YYYY-MM-DD' );
          } else {
@@ -190,7 +188,7 @@ export class WorkExperienceUpdateComponent implements OnInit {
    updateActivities( value: number ) {
       this.activities = [];
       this.actividadEconomicaService.listLastChild( value ).subscribe( res => {
-         this.activities.push( { label: "Seleccione", value: null } );
+         this.activities.push( { label: 'Seleccione', value: null } );
          for ( let dp of res ) {
             this.activities.push( {
                                      label: dp.actividadEconomica,

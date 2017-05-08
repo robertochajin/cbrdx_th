@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { FaultsAndSanctions } from '../_models/faultsAndSanctions';
@@ -15,11 +15,11 @@ import { ListaService } from '../_services/lista.service';
                providers: [ ConfirmationService ]
             } )
 
-export class FaultsAndSanctionsUpdateComponent {
+export class FaultsAndSanctionsUpdateComponent implements OnInit {
    @Input()
 
    fault: FaultsAndSanctions = new FaultsAndSanctions();
-   header: string = 'Agregando Falta o Sanción';
+   header = 'Agregando Falta o Sanción';
    faultsTypes: SelectItem[] = [];
    faultsStatus: SelectItem[] = [];
    msgs: Message[] = [];

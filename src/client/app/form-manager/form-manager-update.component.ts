@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Functionality } from '../_models/functionality';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FunctionalityControl } from '../_models/functionalityContorl';
@@ -16,7 +16,7 @@ import { ListaItem } from '../_models/listaItem';
                providers: [ ConfirmationService ]
             } )
 
-export class FormManagerUpdateComponent {
+export class FormManagerUpdateComponent implements OnInit {
 
    functionality: Functionality = new Functionality();
    functionalityControl: FunctionalityControl = new FunctionalityControl();
@@ -93,8 +93,6 @@ export class FormManagerUpdateComponent {
       this.formManagerService.getFunctionality().subscribe( res => {
          this.formManagerService.getAllFunctionality().subscribe( rest => {
             this.listFunctionalities = rest;
-            this.functionality;
-            // this.listFunctionality.push({label: 'Seleccione', value: null});
             for ( let dp of res ) {
                if ( this.functionality.idMenu === dp.idMenu ) {
                   this.listFunctionality.push( {
@@ -132,7 +130,7 @@ export class FormManagerUpdateComponent {
    onTabShow( e: any ) {
       this._nav.setTab( e.index );
       this.acordion = this._nav.getTab();
-      if ( this.acordion == 2 ) {
+      if ( this.acordion === 2 ) {
          this.functionalitySection = [];
          this.formManagerService.getSectionByIdFuncionalidad( this.functionality.idFuncionalidad ).subscribe( rest => {
             for ( let s of rest ) {

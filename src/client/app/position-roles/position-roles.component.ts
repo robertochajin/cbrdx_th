@@ -14,7 +14,7 @@ import { ListaService } from '../_services/lista.service';
                selector: 'position-roles',
                providers: [ ConfirmationService ]
             } )
-export class PositionRolesComponent implements OnInit {
+export class PositionRolesComponent implements OnInit{
    @Input()
    position: Positions;
    processRoles: ProcessRoles[] = [];

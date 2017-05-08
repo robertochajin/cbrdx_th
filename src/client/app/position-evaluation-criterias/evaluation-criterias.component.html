@@ -94,7 +94,7 @@
   </div>
   <div *ngIf="!editing">
     <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="positionCriterias" [paginator]="true"
-                 [rows]="10" [responsive]="true" [globalFilter]="gb">
+                 [rows]="10" [responsive]="true" >
       <p-column field="criterio" header="Criterio de desempeño" [sortable]="true"></p-column>
       <p-column field="descripcion" header="Descripción" [sortable]="true"></p-column>
       <p-column field="factor" header="Factor" [sortable]="true"></p-column>

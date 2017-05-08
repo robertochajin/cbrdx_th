@@ -26,8 +26,8 @@ export class CompanyAssetsComponent implements OnInit {
    nextStep: EventEmitter<number> = new EventEmitter<number>();
 
    description: string;
-   permitirSiguiente: boolean = false;
-   alert: boolean = false;
+   permitirSiguiente = false;
+   alert = false;
    msgsAlert: Message[] = [];
 
    constructor( private router: Router,
@@ -45,8 +45,9 @@ export class CompanyAssetsComponent implements OnInit {
             this.companyAssets = res;
             this.listCompanyAssets.map( ( lca: ListaItem ) => {
                this.companyAssets.map( ( ca: CompanyAssets ) => {
-                  if ( ca.idTipoElemento == lca.idLista )
-                     lca.nombre = ca.descripcion
+                  if ( ca.idTipoElemento === lca.idLista ) {
+                     lca.nombre = ca.descripcion;
+                  }
                } );
             } );
          } );
@@ -56,17 +57,17 @@ export class CompanyAssetsComponent implements OnInit {
    update( lca: ListaItem ) {
       this.companyAssetsService.getAllByPosition( this.position.idCargo ).subscribe( res => {
          this.companyAssets = res;
-         let obj = this.companyAssets.find( o => lca.idLista == o.idTipoElemento );
+         let obj = this.companyAssets.find( o => lca.idLista === o.idTipoElemento );
 
          if ( obj !== undefined ) {
             obj.descripcion = lca.nombre;
             this.companyAssetsService.update( obj ).subscribe( res => {
                if ( res.ok ) {
-                  if ( this.permitirSiguiente == false && obj.descripcion !== '' ) {
+                  if ( this.permitirSiguiente === false && obj.descripcion !== '' ) {
                      this.nextStep.emit( 11 );
                      this.permitirSiguiente = true;
                   }
-                  if ( obj.descripcion == '' )
+                  if ( obj.descripcion === '' )
                      this.permitirSiguiente = false;
                }
 
@@ -89,7 +90,7 @@ export class CompanyAssetsComponent implements OnInit {
 
       this.companyAssetsService.add( companyAssets ).subscribe( res => {
          if ( res.ok ) {
-            if ( this.permitirSiguiente == false ) {
+            if ( this.permitirSiguiente === false ) {
                this.nextStep.emit( 11 );
                this.permitirSiguiente = true;
             }
@@ -100,10 +101,9 @@ export class CompanyAssetsComponent implements OnInit {
    next() {
       let num = 0;
       for ( let elemento of this.listCompanyAssets ) {
-         if ( elemento.nombre == '' || elemento.nombre == null )
-            num++;
+         if ( elemento.nombre === '' || elemento.nombre === null ){ num++; }
       }
-      if ( this.listCompanyAssets.length == num ) {
+      if ( this.listCompanyAssets.length === num ) {
          this.alert = true;
       } else {
          this.alert = false;
@@ -111,7 +111,7 @@ export class CompanyAssetsComponent implements OnInit {
             if ( elemento.nombre !== undefined && elemento.nombre !== null )
                this.update( elemento );
          }
-         if ( this.permitirSiguiente == true ) {
+         if ( this.permitirSiguiente === true ) {
             this.nextStep.emit( 11 );
          }
       }
