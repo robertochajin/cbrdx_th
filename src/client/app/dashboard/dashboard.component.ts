@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
    funcionalidades: boolean = true;
    usuariosTitle: string;
    options: any;
-
+   displayDialog:boolean;
    rolWidgets: Widgets[];
    usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
    jwtHelper: JwtHelper = new JwtHelper();

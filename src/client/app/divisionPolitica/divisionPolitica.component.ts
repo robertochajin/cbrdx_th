@@ -533,7 +533,8 @@ export class DivisionPoliticaComponent implements OnInit {
 
    validateCode() {
       this.codeExists = this.listadoTodo.filter(
-            t => (t.codigoDivisionPolitica === this.politicalDivision.codigoDivisionPolitica && t.idDivisionPolitica !== this.politicalDivision.idDivisionPolitica ) ).length > 0;
+            t => (t.codigoDivisionPolitica === this.politicalDivision.codigoDivisionPolitica &&
+                  t.idDivisionPolitica !== this.politicalDivision.idDivisionPolitica ) ).length > 0;
    }
 
    inputNumberCodigo() {
