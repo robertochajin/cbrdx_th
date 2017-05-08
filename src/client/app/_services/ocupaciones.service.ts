@@ -14,6 +14,7 @@ export class OcupacionesService {
    private serviceURL = '<%= SVC_TH_URL %>/api/';
 
    constructor( private authHttp: AuthHttp ) {
+
    }
 
    listOcupaciones() {
