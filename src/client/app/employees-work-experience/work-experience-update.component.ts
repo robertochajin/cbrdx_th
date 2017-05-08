@@ -92,7 +92,7 @@ export class WorkExperienceUpdateComponent implements OnInit {
          let mom: moment.Moment = moment( this.experience.fechaIngresa, 'YYYY-MM-DD' );
          this.fechaIngresa = mom.format( 'MM/DD/YYYY' );
          this.onSelectMethodCalendarIngreso( this.fechaIngresa );
-         if ( this.experience.indicadorActualmente == false ) {
+         if ( this.experience.indicadorActualmente === false ) {
             let mom3: moment.Moment = moment( this.experience.fechaTermina, 'YYYY-MM-DD' );
             this.fechaTermina = mom3.format( 'MM/DD/YYYY' );
             this.onSelectMethodCalendarFinalizacion( this.fechaTermina );
@@ -119,12 +119,12 @@ export class WorkExperienceUpdateComponent implements OnInit {
          this.experience.idCiudad = null;
       }
 
-      if ( this.city == this.backupcity ) {
+      if ( this.city === this.backupcity ) {
          this.msgs = [];
          let mom: moment.Moment = moment( this.fechaIngresa, 'MM/DD/YYYY' );
          this.experience.fechaIngresa = mom.format( 'YYYY-MM-DD' );
 
-         if ( this.experience.indicadorActualmente == false ) {
+         if ( this.experience.indicadorActualmente === false ) {
             let mom3: moment.Moment = moment( this.fechaTermina, 'MM/DD/YYYY' );
             this.experience.fechaTermina = mom3.format( 'YYYY-MM-DD' );
          } else {

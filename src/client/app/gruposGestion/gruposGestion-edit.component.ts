@@ -21,7 +21,7 @@ export class GruposGestionEditComponent {
    displayDialog = false;
    isRequired = false;
    isGreater = true;
-   private es: any;
+   public es: any;
 
    constructor( private gruposGestionService: GruposGestionService, private router: Router, private route: ActivatedRoute ) {
       route.params.switchMap( ( params: Params ) => gruposGestionService.viewGruposGestion( +params[ 'id' ] ) )
