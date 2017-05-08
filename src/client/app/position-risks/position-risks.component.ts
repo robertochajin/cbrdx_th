@@ -259,7 +259,7 @@ export class RiskComponent {
    //       .subscribe(data => {
    //         this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
    //       }, error => {
-   //         this.show_form = true;
+   //         this.showForm = true;
    //         this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
    //       })
    //   } else {
@@ -268,7 +268,7 @@ export class RiskComponent {
    //       .subscribe(data => {
    //         this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
    //       }, error => {
-   //         this.show_form = true;
+   //         this.showForm = true;
    //         this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
    //       });
    //   }
@@ -280,7 +280,7 @@ export class RiskComponent {
    //       .subscribe(data => {
    //         this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
    //       }, error => {
-   //         this.show_form = true;
+   //         this.showForm = true;
    //         this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
    //       })
    //   } else {
@@ -289,7 +289,7 @@ export class RiskComponent {
    //       .subscribe(data => {
    //         this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
    //       }, error => {
-   //         this.show_form = true;
+   //         this.showForm = true;
    //         this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
    //       });
    //   }
