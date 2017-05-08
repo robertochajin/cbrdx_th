@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../_services/usuarios.service';
 import { Usuario } from '../_models/usuario';
@@ -24,10 +24,7 @@ import { EmployeesService } from '../_services/employees.service';
                templateUrl: './usuario-add.component.html',
             } )
 
-export class UsuariosAddComponent implements OnInit {
-   ngOnInit(): void {
-
-   }
+export class UsuariosAddComponent {
 
    usuario: Usuario = new Usuario();
    tercero: Employee = new Employee();
@@ -49,9 +46,9 @@ export class UsuariosAddComponent implements OnInit {
    isTerceroSet = false;
    isTerceroEmpty = false;
    isUserCreated = false;
-   userExists: boolean = false;
-   terceroExiste: boolean = true;
-   sameUser: boolean = false;
+   userExists = false;
+   terceroExiste = true;
+   sameUser = false;
    terceroObtenido: Employee;
 
    isRequiredRol = false;
@@ -83,7 +80,7 @@ export class UsuariosAddComponent implements OnInit {
 
    changeEvent( event?: any ) {
       this.documentCleanUp( event.target.value );
-      if ( event.keyCode == 13 ) {
+      if ( event.keyCode===13 ) {
          this.findPerson();
       } else {
          this.limpiarValidaciones();
@@ -171,7 +168,7 @@ export class UsuariosAddComponent implements OnInit {
 
    createUserRole() {
       this.usuariosService.readAllUserRoles().subscribe( res => {
-         let ur = res.find( t => t.idUsuario == this.usuario.idUsuario && t.idRol == this.curUsuarioRol.idRol );
+         let ur = res.find( t => t.idUsuario === this.usuario.idUsuario && t.idRol === this.curUsuarioRol.idRol );
          if ( ur !== null ) {
             this.creatingRol = false;
             ur.fechaInicio = this.curUsuarioRol.fechaInicio;
@@ -202,7 +199,7 @@ export class UsuariosAddComponent implements OnInit {
 
    createUserGroup() {
       this.usuariosService.readAllUserGroups().subscribe( res => {
-         let ug = res.find( t => t.idUsuario == this.usuario.idUsuario && t.idGrupoGestion == this.curUsuarioGrupo.idGrupoGestion );
+         let ug = res.find( t => t.idUsuario === this.usuario.idUsuario && t.idGrupoGestion === this.curUsuarioGrupo.idGrupoGestion );
          if ( ug !== null ) {
             this.creatingGroup = false;
             ug.fechaInicio = this.curUsuarioGrupo.fechaInicio;
@@ -264,7 +261,7 @@ export class UsuariosAddComponent implements OnInit {
    }
 
    validateCreationUser() {
-      this.sameUser = this.usuarios.filter( t => t.usuarioSistema == this.usuario.usuarioSistema ).length > 0;
+      this.sameUser = this.usuarios.filter( t => t.usuarioSistema === this.usuario.usuarioSistema ).length > 0;
    }
 
    validateGreaterRol() {

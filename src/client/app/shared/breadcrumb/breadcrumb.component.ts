@@ -58,7 +58,8 @@ export class BreadcrumbComponent implements OnInit, OnChanges {
       }
 
       if ( url.lastIndexOf( '/' ) > 0 ) {
-         this.generateBreadcrumbTrail( url.substr( 0, url.lastIndexOf( '/' ) ) ); //Find last '/' and add everything before it as a parent route
+         this.generateBreadcrumbTrail( url.substr( 0, url.lastIndexOf( '/' ) ) ); //Find last '/' and add everything before it as a parent
+                                                                                  // route
       } else if ( this.prefix.length > 0 ) {
          this._urls.unshift( this.prefix );
       }

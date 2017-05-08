@@ -23,24 +23,25 @@ export class ToolbarComponent {
       elementRef: ElementRef ) {
       let token = localStorage.getItem( 'token' );
 
-      if ( token !== null )
+      if ( token !== null ){
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+      }
 
       this.startTimer();
       renderer.listenGlobal( 'document', 'mousemove', ( event: any ) => {
-         this.resetTimer()
+         this.resetTimer();
       } );
       renderer.listenGlobal( 'document', 'keypress', ( event: any ) => {
-         this.resetTimer()
+         this.resetTimer();
       } );
       renderer.listenGlobal( 'document', 'DOMMouseScroll', ( event: any ) => {
-         this.resetTimer()
+         this.resetTimer();
       } );
       renderer.listenGlobal( 'document', 'mousewheel', ( event: any ) => {
-         this.resetTimer()
+         this.resetTimer();
       } );
       renderer.listenGlobal( 'document', 'touchmove', ( event: any ) => {
-         this.resetTimer()
+         this.resetTimer();
       } );
 
       if ( this.usuarioLogueado.usuario !== null ) {
