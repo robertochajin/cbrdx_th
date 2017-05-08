@@ -79,6 +79,9 @@ export class LocationsComponent implements OnInit {
     this.finalAddress = this.localizacion.direccion;
     this.selectedAddressType = this.localizacion.idTipoDireccion;
     this.selectedPrincipalNomenclature = this.localizacion.nomenclaturaPrincipal;
+    if(this.localizacion.idDivisionPolitica!==null && this.localizacion.idDivisionPolitica!==undefined ){
+       this.badSelect=false;
+    }
   }
 
   ngAfterViewInit() {
