@@ -82,7 +82,7 @@ export class EmployeesVehicleUpdateComponent {
 
    onSubmit() {
       if ( this.ciudadPlaca !== this.backupCiudadPlaca ) {
-         this.ciudadPlaca = "";
+         this.ciudadPlaca = '';
          this.employeeVehicle.idCiudad = null;
       }
       if ( this.ciudadPlaca == this.backupCiudadPlaca ) {
@@ -101,7 +101,7 @@ export class EmployeesVehicleUpdateComponent {
    }
 
    inputNumber() {
-      let modelo = this.employeeVehicle.modelo + "";
+      let modelo = this.employeeVehicle.modelo + '';
       if ( this.employeeVehicle.modelo !== null ) {
          this.employeeVehicle.modelo = Number( modelo.replace( /[^0-9]/g, '' ) );
          if ( this.employeeVehicle.modelo > this.year ) {

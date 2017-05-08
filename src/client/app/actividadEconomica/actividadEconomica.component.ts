@@ -24,7 +24,7 @@ export class ActividadEconomicaComponent implements OnInit {
    tabselected: number = 1;
    labeltabselected: string;
    header: string;
-   labelPadre: string = "";
+   labelPadre: string = '';
    labelTipo: string;
    labelfieldactividad: string;
    btnactivity: { show: boolean, label: string, idparent: number, parent: string } = {
@@ -60,7 +60,7 @@ export class ActividadEconomicaComponent implements OnInit {
                                                     "value": 0,
                                                     "label": '+ Cargando...',
                                                     "level": 2,
-                                                    "codigo": "",
+                                                    "codigo": '',
                                                     "data": c,
                                                     "children": {}
                                                  } ]
@@ -123,7 +123,7 @@ export class ActividadEconomicaComponent implements OnInit {
       switch ( this.tabselected ) {
          case 1:
             this.labelfieldactividad = "Nombre";
-            this.labelPadre = "";
+            this.labelPadre = '';
             this.labelTipo = "Tipo: " + this.getTypebyCodigo( '1' );
             this.btnactivity = {
                show: true,
@@ -272,7 +272,7 @@ export class ActividadEconomicaComponent implements OnInit {
       this.actividadEconomica.idActividadPadre = 0;
       this.actividadEconomica.idActividadTipo = this.getIdTypebyCodigo( "1" );
       this.actividadEconomica.indicadorHabilitado = true;
-      this.labelPadre = "";
+      this.labelPadre = '';
       this.labelTipo = "Tipo: " + this.getTypebyCodigo( '1' );
 
    }
@@ -292,7 +292,7 @@ export class ActividadEconomicaComponent implements OnInit {
    }
 
    getTypebyCodigo( id: string ) {
-      let nameactividadEconomica = "";
+      let nameactividadEconomica = '';
       for ( let c of  this.activityTypes.filter( t => t.codigoActividadTipo.toString() == id ) ) {
          nameactividadEconomica = c.descripcionActividadTipo;
       }
@@ -335,7 +335,7 @@ export class ActividadEconomicaComponent implements OnInit {
 
             } );
          } else {
-            this.labelPadre = "";
+            this.labelPadre = '';
          }
          this.labelTipo = "Tipo: " + this.activityTypes
             .find( t => t.idActividadEconomicaTipo == res.idActividadTipo ).descripcionActividadTipo;
@@ -426,7 +426,7 @@ export class ActividadEconomicaComponent implements OnInit {
 
    capitalizeCodigo() {
       let input = this.actividadEconomica.codigoActividadEconomica;
-      if ( input !== "" && input !== null ) {
+      if ( input !== '' && input !== null ) {
          this.actividadEconomica.codigoActividadEconomica = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
 
       }
@@ -434,7 +434,7 @@ export class ActividadEconomicaComponent implements OnInit {
 
    capitalizeName() {
       let input = this.actividadEconomica.actividadEconomica;
-      if ( input !== "" && input !== null ) {
+      if ( input !== '' && input !== null ) {
          this.actividadEconomica.actividadEconomica = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }

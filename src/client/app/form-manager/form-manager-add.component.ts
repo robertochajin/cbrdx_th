@@ -160,8 +160,8 @@ export class FormManagerAddComponent {
                this.functionalitySection.push( s );
             }
          } );
-         this.functionalityControl.control = "";
-         this.functionalityControl.codigo = "";
+         this.functionalityControl.control = '';
+         this.functionalityControl.codigo = '';
          this.functionalityControl.idClasificacion = null;
       } );
       this.formManagerService.getAllFunctionalityControl().subscribe( rest => {
@@ -187,8 +187,8 @@ export class FormManagerAddComponent {
                }
             } );
          } );
-         this.functionalityControl.control = "";
-         this.functionalityControl.codigo = "";
+         this.functionalityControl.control = '';
+         this.functionalityControl.codigo = '';
          this.functionalityControl.idClasificacion = null;
       } else {
          this.functionalityField = [];
@@ -203,8 +203,8 @@ export class FormManagerAddComponent {
                this.functionalityField = rest;
             } );
          } );
-         this.functionalityControl.control = "";
-         this.functionalityControl.codigo = "";
+         this.functionalityControl.control = '';
+         this.functionalityControl.codigo = '';
          this.functionalityControl.idClasificacion = null;
       }
       this.formManagerService.getAllFunctionalityControl().subscribe( rest => {

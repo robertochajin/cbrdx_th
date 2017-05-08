@@ -118,7 +118,7 @@ export class OrganizationalStructureComponent implements OnInit {
    }
 
    validateCode() {
-      if ( this.organizationalStructure.codigo !== "" && this.organizationalStructure.codigo !== null ) {
+      if ( this.organizationalStructure.codigo !== '' && this.organizationalStructure.codigo !== null ) {
          this.codeExists = this.listOrganizationalStructure.filter(
                t => (t.codigo === this.organizationalStructure.codigo && t.idEstructuraOrganizacional !== this.organizationalStructure.idEstructuraOrganizacional ) ).length > 0;
       } else {
@@ -129,13 +129,13 @@ export class OrganizationalStructureComponent implements OnInit {
 
    capitalizeCode() {
       let input = this.organizationalStructure.codigo;
-      if ( input !== "" && input !== null ) {
+      if ( input !== '' && input !== null ) {
          this.organizationalStructure.codigo = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
       }
    }
 
    validateDocument() {
-      if ( this.organizationalStructure.numeroDocumento !== "" && this.organizationalStructure.idTipoDocumento !== null ) {
+      if ( this.organizationalStructure.numeroDocumento !== '' && this.organizationalStructure.idTipoDocumento !== null ) {
          this.documentExists = this.listOrganizationalStructure.filter(
                t => (t.numeroDocumento === this.organizationalStructure.numeroDocumento && t.idTipoDocumento === this.organizationalStructure.idTipoDocumento && t.idEstructuraOrganizacional !== this.organizationalStructure.idEstructuraOrganizacional ) ).length > 0;
       } else {
@@ -145,7 +145,7 @@ export class OrganizationalStructureComponent implements OnInit {
 
    capitalizeName() {
       let input = this.organizationalStructure.nombre;
-      if ( input !== "" && input !== null ) {
+      if ( input !== '' && input !== null ) {
          this.organizationalStructure.nombre = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }
@@ -255,7 +255,7 @@ export class OrganizationalStructureComponent implements OnInit {
             this.guardando = false;
             this.empresa = false;
             this.btnEmpresa = false;
-            this.empty = "";
+            this.empty = '';
 
             this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Registro guardado con exito!' } );
             let newChil: any = {

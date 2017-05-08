@@ -101,7 +101,7 @@ export class WorkExperienceAddComponent implements OnInit {
    onSubmit() {
       this.focusUP();
       if ( this.city !== this.backupcity ) {
-         this.city = "";
+         this.city = '';
          this.experience.idCiudad = null;
       }
 

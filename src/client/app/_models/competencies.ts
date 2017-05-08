@@ -17,7 +17,7 @@ export class Competencies {
    constructor() {
       this.indicadorHabilitado = true;
       this.auditoriaUsuario = 1;
-      this.auditoriaFecha = "";
+      this.auditoriaFecha = '';
       this.cargoCompetencia = new PositionCompetencies();
    }
 }

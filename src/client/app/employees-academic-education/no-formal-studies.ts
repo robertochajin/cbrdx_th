@@ -27,12 +27,12 @@ export class Noformalstudies {
    public auditoriaFecha: string;
 
    constructor() {
-      this.auditoriaFecha = "";
+      this.auditoriaFecha = '';
       this.auditoriaUsuario = 1;
-      this.descripcion = "";
-      this.fechaIngresa = "";
-      this.fechaTermina = "";
-      this.fechaVerificado = "";
+      this.descripcion = '';
+      this.fechaIngresa = '';
+      this.fechaTermina = '';
+      this.fechaVerificado = '';
       this.idAdjunto = 0;
       this.idAreaEstudio = 0;
       this.idCiudad = 0;
@@ -42,8 +42,8 @@ export class Noformalstudies {
       this.indicadorHabilitado = true;
       this.indicadorTerminacion = true;
       this.indicadorVerificado = false;
-      this.institucion = "";
-      this.otroEstudio = "";
-      this.tituloEstudio = "";
+      this.institucion = '';
+      this.otroEstudio = '';
+      this.tituloEstudio = '';
    }
 }

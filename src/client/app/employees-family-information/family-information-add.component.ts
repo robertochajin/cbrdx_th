@@ -260,7 +260,7 @@ export class FamilyInformationAddComponent implements OnInit {
    }
 
    validateDocument() {
-      if ( this.familyInformation.numeroDocumento !== "" && this.familyInformation.numeroDocumento !== null && this.selectedDocument !== null ) {
+      if ( this.familyInformation.numeroDocumento !== '' && this.familyInformation.numeroDocumento !== null && this.selectedDocument !== null ) {
          this.employeesService.validateDocument( this.familyInformation.numeroDocumento, this.selectedDocument ).subscribe( res => {
             if ( res !== undefined && res.idTercero > 0 ) {
                this.repeatedDocument = true;

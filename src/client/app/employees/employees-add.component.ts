@@ -198,11 +198,11 @@ export class EmployeesAddComponent {
    onSubmit() {
       this.focusUP();
       if ( this.ciudadExpDocumento !== this.backupCiudadExpDocumento ) {
-         this.ciudadExpDocumento = "";
+         this.ciudadExpDocumento = '';
          this.employee.ciudadExpDocumento = '';
       }
       if ( this.ciudadNacimiento !== this.backupCiudadNacimiento ) {
-         this.ciudadNacimiento = "";
+         this.ciudadNacimiento = '';
          this.employee.ciudadNacimiento = '';
       }
       if ( this.ciudadExpDocumento == this.backupCiudadExpDocumento && this.ciudadNacimiento == this.backupCiudadNacimiento ) {
@@ -352,7 +352,7 @@ export class EmployeesAddComponent {
    }
 
    validateDocument() {
-      if ( this.employee.numeroDocumento !== "" && this.employee.numeroDocumento !== null ) {
+      if ( this.employee.numeroDocumento !== '' && this.employee.numeroDocumento !== null ) {
          this.employeesService.validateDocument( this.employee.numeroDocumento, this.employee.idTipoDocumento ).subscribe( res => {
             if ( res.idTercero > 0 ) {
                this.confirmationService.confirm( {

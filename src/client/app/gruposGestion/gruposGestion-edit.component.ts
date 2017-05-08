@@ -83,7 +83,7 @@ export class GruposGestionEditComponent {
 
    capitalizeName() {
       let input = this.grupoGestion.grupoGestion;
-      if ( input !== "" && input !== null ) {
+      if ( input !== '' && input !== null ) {
          this.grupoGestion.grupoGestion = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }

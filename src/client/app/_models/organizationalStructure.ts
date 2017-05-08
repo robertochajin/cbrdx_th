@@ -32,24 +32,24 @@ export class OrganizationalStructure {
 
    constructor() {
       this.idTipoEstructura = null;
-      this.codigo = "";
-      this.nombre = "";
-      this.numeroDocumento = "";
+      this.codigo = '';
+      this.nombre = '';
+      this.numeroDocumento = '';
       this.idCentroCostos = null;
       this.idEstructuraFisica = null;
       this.idEstructuraOrganizacional = null;
       this.idLocalizacion = null;
-      this.localizacion = "";
+      this.localizacion = '';
       this.idLogo = null;
       this.idPadre = null;
       this.idTipoArea = null;
       this.idTipoDocumento = null;
       this.indicadorHabilitado = true;
-      this.paginaWeb = "";
-      this.razonSocial = "";
-      this.telefono = "";
-      this.celular = "";
-      this.correoElectronico = "";
+      this.paginaWeb = '';
+      this.razonSocial = '';
+      this.telefono = '';
+      this.celular = '';
+      this.correoElectronico = '';
 
    }
 }

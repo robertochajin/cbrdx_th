@@ -52,7 +52,7 @@ export class EmployeesContactListComponent {
          contacts => {
             for ( let c of contacts ) {
                let bandera = false;
-               let label = "";
+               let label = '';
                for ( let ct of this.relationship ) {
                   if ( c.idListaParentesco == ct.value ) {
                      label = ct.label;

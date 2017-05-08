@@ -73,7 +73,7 @@ export class JobProjectionUpdateComponent {
    }
 
    inputNumber() {
-      let plazas = this.jobProjection.plazasProyectadas + "";
+      let plazas = this.jobProjection.plazasProyectadas + '';
       if ( this.jobProjection.plazasProyectadas !== null ) {
          this.jobProjection.plazasProyectadas = Number( plazas.replace( /[^0-9]/g, '' ) );
       }

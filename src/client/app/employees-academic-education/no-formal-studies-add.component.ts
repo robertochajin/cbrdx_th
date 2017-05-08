@@ -115,7 +115,7 @@ export class NoFormalStudiesAddComponent implements OnInit {
    onSubmit( value: string ) {
       this.submitted = true;
       if ( this.nfstudy.ciudad !== this.selectedCity ) {
-         this.selectedCity = "";
+         this.selectedCity = '';
          this.nfstudy.idCiudad = null;
       }
       if ( this.nfstudy.ciudad == this.selectedCity ) {

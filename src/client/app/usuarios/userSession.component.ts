@@ -25,9 +25,9 @@ export class UserSessionComponent implements OnInit {
    user: Usuario = new Usuario();
    acordion: number;
    msgs: Message[] = [];
-   oldPass: string = "";
-   newPass: string = "";
-   newPassConfirm: string = "";
+   oldPass: string = '';
+   newPass: string = '';
+   newPassConfirm: string = '';
    usuarioLogueado: any;
    showOldPass: string = "password";
    showPass: string = "password";

@@ -29,24 +29,24 @@ export class Workexperience {
 
    constructor() {
       this.idTercero = null;
-      this.empresa = "";
-      this.cargo = "";
+      this.empresa = '';
+      this.cargo = '';
       this.idNivelCargo = null;
-      this.nivelCargo = "";
-      this.telefonoEmpresa = "";
+      this.nivelCargo = '';
+      this.telefonoEmpresa = '';
       this.idSectorEmpresa = null;
-      this.sectorEmpresa = "";
+      this.sectorEmpresa = '';
       this.idSubSectorEmpresa = null;
-      this.subSectorEmpresa = "";
-      this.areaCargo = "";
-      this.jefeInmediato = "";
-      this.tiempoExperiencia = "";
+      this.subSectorEmpresa = '';
+      this.areaCargo = '';
+      this.jefeInmediato = '';
+      this.tiempoExperiencia = '';
       this.idCiudad = null;
-      this.ciudad = "";
+      this.ciudad = '';
       this.indicadorActualmente = false;
       this.indicadorHabilitado = true;
-      this.fechaIngresa = "";
-      this.fechaTermina = "";
+      this.fechaIngresa = '';
+      this.fechaTermina = '';
       this.idAdjunto = null;
       this.auditoriaUsuario = 1;
    }

@@ -71,7 +71,7 @@ export class RolesAddComponent {
    }
 
    validateCode() {
-      if ( this.rol.codigoRol !== "" && this.rol.codigoRol !== null ) {
+      if ( this.rol.codigoRol !== '' && this.rol.codigoRol !== null ) {
          this.codeExists = this.roles.filter( t => (t.codigoRol === this.rol.codigoRol && t.idRol !== this.rol.idRol ) ).length > 0;
       } else {
          this.codeExists = false;
@@ -80,7 +80,7 @@ export class RolesAddComponent {
 
    capitalizeCode() {
       let input = this.rol.codigoRol;
-      if ( input !== "" && input !== null ) {
+      if ( input !== '' && input !== null ) {
          this.rol.codigoRol = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
       }
    }
@@ -98,7 +98,7 @@ export class RolesAddComponent {
 
    capitalizeName() {
       let input = this.rol.rol;
-      if ( input !== "" && input !== null ) {
+      if ( input !== '' && input !== null ) {
          this.rol.rol = input.toUpperCase();
       }
    }

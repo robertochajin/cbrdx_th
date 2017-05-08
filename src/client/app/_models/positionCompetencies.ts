@@ -11,6 +11,6 @@ export class PositionCompetencies {
 
    constructor() {
       this.auditoriaUsuario = 1;
-      this.auditoriaFecha = "";
+      this.auditoriaFecha = '';
    }
 }

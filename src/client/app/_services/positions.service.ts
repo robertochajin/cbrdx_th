@@ -75,7 +75,7 @@ export class PositionsService {
 
    get( id: number ) {
       return this.authHttp.get( this.serviceURL + 'cargos/' + id ).map( ( res: Response ) => {
-         if ( res.text() !== "" ) {
+         if ( res.text() !== '' ) {
             return res.json() as Positions
          } else {
             return new Positions;

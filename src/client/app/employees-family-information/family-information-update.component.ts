@@ -118,12 +118,12 @@ export class FamilyInformationUpdateComponent implements OnInit {
                let mom: moment.Moment = moment( this.familyInformation.fechaNacimiento, 'YYYY-MM-DD' );
                this.familyInformation.fechaNacimiento = mom.format( 'MM/DD/YYYY' );
                this.convive = this.familyInformation.idConvivencia == 1 ? true : false;
-               if ( this.familyInformation.telefonoFijo !== null || this.familyInformation.telefonoFijo !== "" ) {
+               if ( this.familyInformation.telefonoFijo !== null || this.familyInformation.telefonoFijo !== '' ) {
                   this.cel = true;
                } else {
                   this.cel = false;
                }
-               if ( this.familyInformation.telefonoCelular !== null || this.familyInformation.telefonoCelular !== "" ) {
+               if ( this.familyInformation.telefonoCelular !== null || this.familyInformation.telefonoCelular !== '' ) {
                   this.tel = true;
                } else {
                   this.tel = false;
@@ -303,7 +303,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
    }
 
    validateDocument() {
-      if ( this.familyInformation.numeroDocumento !== "" && this.familyInformation.numeroDocumento !== null && this.selectedDocument !== null ) {
+      if ( this.familyInformation.numeroDocumento !== '' && this.familyInformation.numeroDocumento !== null && this.selectedDocument !== null ) {
          this.employeesService.validateDocument( this.familyInformation.numeroDocumento, this.selectedDocument ).subscribe( res => {
             if ( res.idTercero > 0 ) {
                this.repeatedDocument = true;

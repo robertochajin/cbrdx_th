@@ -44,7 +44,7 @@ export class MenuManagerComponent implements OnInit {
    }
 
    validateCode() {
-      if ( this.menus.codigoMenu !== "" && this.menus.codigoMenu !== null ) {
+      if ( this.menus.codigoMenu !== '' && this.menus.codigoMenu !== null ) {
          this.codeExists = this.listmenu.filter(
                t => (t.codigoMenu === this.menus.codigoMenu && t.idMenu !== this.menus.idMenu ) ).length > 0;
       } else {
@@ -55,14 +55,14 @@ export class MenuManagerComponent implements OnInit {
 
    capitalizeCode() {
       let input = this.menus.codigoMenu;
-      if ( input !== "" && input !== null ) {
+      if ( input !== '' && input !== null ) {
          this.menus.codigoMenu = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
       }
    }
 
    capitalizeName() {
       let input = this.menus.menu;
-      if ( input !== "" && input !== null ) {
+      if ( input !== '' && input !== null ) {
          this.menus.menu = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }

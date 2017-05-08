@@ -15,6 +15,6 @@ export class RolWidgets {
       this.indicadorHabilitado = true;
       this.indicadorObligatorio = false;
       this.auditoriaUsuario = 1;
-      this.auditoriaFecha = "";
+      this.auditoriaFecha = '';
    }
 }

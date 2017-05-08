@@ -94,21 +94,21 @@ export class EmployeesEstateUpdateComponent {
    }
 
    inputNumber() {
-      var anio = this.employeeEstate.anioConstruccion + "";
+      var anio = this.employeeEstate.anioConstruccion + '';
       if ( this.employeeEstate.anioConstruccion !== null ) {
          this.employeeEstate.anioConstruccion = Number( anio.replace( /[^0-9]/g, '' ) );
       }
    }
 
    inputNumberPisos() {
-      var piso = this.employeeEstate.numeroPisos + "";
+      var piso = this.employeeEstate.numeroPisos + '';
       if ( this.employeeEstate.numeroPisos !== null ) {
          this.employeeEstate.numeroPisos = Number( piso.replace( /[^0-9]/g, '' ) );
       }
    }
 
    inputNumberSotanos() {
-      var sotano = this.employeeEstate.numeroSotanos + "";
+      var sotano = this.employeeEstate.numeroSotanos + '';
       if ( this.employeeEstate.numeroSotanos !== null ) {
          this.employeeEstate.numeroSotanos = Number( sotano.replace( /[^0-9]/g, '' ) );
       }

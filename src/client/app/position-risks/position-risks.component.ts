@@ -162,9 +162,9 @@ export class RiskComponent {
                                                     let tipo = this.allTipoRiesgos.find( s2 => s2.idRiesgoTipo == riesgo.idTipoRiesgo )
                                                     let subtipo = this.allSubtipoRiesgo.find(
                                                        s2 => s2.idRiesgoSubTipo == riesgo.idSubTipoRiesgo )
-                                                    this.risk.riesgo = riesgo.riesgo ? riesgo.riesgo : "";
-                                                    this.risk.tipo = tipo.riesgoTipo ? riesgo.riesgoTipo : "";
-                                                    this.risk.subtipo = subtipo.riesgoSubTipo ? riesgo.riesgoSubTipo : "";
+                                                    this.risk.riesgo = riesgo.riesgo ? riesgo.riesgo : '';
+                                                    this.risk.tipo = tipo.riesgoTipo ? riesgo.riesgoTipo : '';
+                                                    this.risk.subtipo = subtipo.riesgoSubTipo ? riesgo.riesgoSubTipo : '';
                                                     this.listRisks.push( this.risk );
                                                     this.idTypeRisk = null;
                                                     this.idSubtypeRisk = null;

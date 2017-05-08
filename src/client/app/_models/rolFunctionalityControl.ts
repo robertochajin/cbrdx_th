@@ -21,8 +21,8 @@ export class RolFunctionalityControl {
       this.idRolFuncionalidadControl = null;
       this.idFuncionalidadControl = null;
       this.idRol = null;
-      this.rol = "";
-      this.control = "";
-      this.codigo = "";
+      this.rol = '';
+      this.control = '';
+      this.codigo = '';
    }
 }

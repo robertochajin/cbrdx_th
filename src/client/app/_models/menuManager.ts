@@ -13,9 +13,9 @@ export class MenuManager {
    auditoriaUsuario: number;
 
    constructor() {
-      this.codigoMenu = "";
-      this.menu = "";
-      this.ruta = "";
+      this.codigoMenu = '';
+      this.menu = '';
+      this.ruta = '';
       this.secuencia = null;
       this.indicadorHabilitado = true;
       this.idPadre = 0;

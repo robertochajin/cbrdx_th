@@ -197,8 +197,8 @@ export class FormManagerUpdateComponent {
                this.functionalitySection.push( s );
             }
          } );
-         this.functionalityControl.control = "";
-         this.functionalityControl.codigo = "";
+         this.functionalityControl.control = '';
+         this.functionalityControl.codigo = '';
          this.functionalityControl.idClasificacion = null;
       } );
       this.formManagerService.getAllFunctionalityControl().subscribe( rest => {
@@ -229,8 +229,8 @@ export class FormManagerUpdateComponent {
                }
             } );
          } );
-         this.functionalityControl.control = "";
-         this.functionalityControl.codigo = "";
+         this.functionalityControl.control = '';
+         this.functionalityControl.codigo = '';
          this.functionalityControl.idClasificacion = null;
       } else {
          this.functionalityField = [];
@@ -245,8 +245,8 @@ export class FormManagerUpdateComponent {
                this.functionalityField = rest;
             } );
          } );
-         this.functionalityControl.control = "";
-         this.functionalityControl.codigo = "";
+         this.functionalityControl.control = '';
+         this.functionalityControl.codigo = '';
          this.functionalityControl.idClasificacion = null;
       }
 

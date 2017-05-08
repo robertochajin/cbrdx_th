@@ -126,7 +126,7 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
    onSubmit( value: string ) {
       this.submitted = true;
       if ( this.nfstudy.ciudad !== this.selectedCity ) {
-         this.selectedCity = "";
+         this.selectedCity = '';
          this.nfstudy.idCiudad = null;
       }
       if ( this.nfstudy.ciudad == this.selectedCity ) {
@@ -179,7 +179,7 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
 
    updateEnd(): void {
       if ( this.nfstudy.indicadorTerminacion ) {
-         this.nfstudy.fechaTermina = "";
+         this.nfstudy.fechaTermina = '';
       }
    }
 

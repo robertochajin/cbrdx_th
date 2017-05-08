@@ -56,14 +56,14 @@ export class EmployeesContactComponent {
     }
 
     inputNumberPeso() {
-    var peso = this.employee.peso+"";
+    var peso = this.employee.peso+'';
     if (this.employee.peso !== null) {
     this.employee.peso = Number(peso.replace(/[^0-9]/g, ''));
     }
     }
 
     inputNumber() {
-    var size = this.employee.talla+"";
+    var size = this.employee.talla+'';
     if (this.employee.talla !== null) {
     this.employee.talla = Number(size.replace(/[^0-9]/g, ''));
     }

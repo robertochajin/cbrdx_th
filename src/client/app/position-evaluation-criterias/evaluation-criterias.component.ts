@@ -43,7 +43,7 @@ export class EvaluationCriteriasComponent {
                                            criterio: null,
                                            indicadorHabilitado: false,
                                            auditoriaUsuario: 1,
-                                           auditoriaFecha: "",
+                                           auditoriaFecha: '',
                                            label: "seleccione...",
                                            value: null
                                         } );

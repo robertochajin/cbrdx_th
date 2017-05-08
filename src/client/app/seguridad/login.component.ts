@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
       username: "mayerly.gamboa"
    };
    intentos: number = 0;
-   error: string = "";
+   error: string = '';
    captcha: boolean = false;
 
    constructor( private loginService: LoginService,

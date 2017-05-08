@@ -17,8 +17,8 @@ export class EmployeesContact {
 
    constructor() {
       this.indicadorHabilitado = true;
-      this.telefono = "";
-      this.celular = "";
+      this.telefono = '';
+      this.celular = '';
       this.idTerceroContacto = null;
       this.idListaParentesco = null;
    }

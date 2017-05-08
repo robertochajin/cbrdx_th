@@ -5,10 +5,10 @@ export class Localizaciones {
 
    idLocalizacion: number;
    idTipoDireccion: number;
-   direccion: string = "";
-   latitud: string = "";
-   longitud: string = "";
-   comoLlegar: string = "";
+   direccion: string = '';
+   latitud: string = '';
+   longitud: string = '';
+   comoLlegar: string = '';
    indicadorHabilitado: boolean = true;
    idDivisionPolitica: number = null;
    auditoriaUsuario: number;

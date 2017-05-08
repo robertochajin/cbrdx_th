@@ -121,14 +121,14 @@ export class EmployeesAdditionalDataComponent {
    }
 
    inputNumberPeso() {
-      let peso = this.employee.peso + "";
+      let peso = this.employee.peso + '';
       if ( this.employee.peso !== null ) {
          this.employee.peso = Number( peso.replace( /[^0-9]/g, '' ) );
       }
    }
 
    inputNumber() {
-      let size = this.employee.talla + "";
+      let size = this.employee.talla + '';
       if ( this.employee.talla !== null ) {
          this.employee.talla = Number( size.replace( /[^0-9]/g, '' ) );
       }

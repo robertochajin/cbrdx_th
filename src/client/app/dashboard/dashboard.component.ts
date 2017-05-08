@@ -35,9 +35,9 @@ export class DashboardComponent implements OnInit {
    jwtHelper: JwtHelper = new JwtHelper();
 
    allWidgets: any = [
-      { codigo: "WROLES", habilitado: false, visible: true, nombre: "" },
-      { codigo: "WUSUACT", habilitado: false, visible: true, nombre: "" },
-      { codigo: "WCUMPLE", habilitado: false, visible: true, nombre: "" },
+      { codigo: "WROLES", habilitado: false, visible: true, nombre: '' },
+      { codigo: "WUSUACT", habilitado: false, visible: true, nombre: '' },
+      { codigo: "WCUMPLE", habilitado: false, visible: true, nombre: '' },
    ];
 
    constructor( private router: Router, private rolesService: RolesService, private  tercerosServices: TercerosService,

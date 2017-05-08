@@ -60,16 +60,16 @@ export class PersonalityComponent implements OnInit {
             obj.descripcion = lca.nombre;
             this.personalityService.update( obj ).subscribe( res => {
                if ( res.ok ) {
-                  if ( this.permitirSiguiente == false && obj.descripcion !== "" ) {
+                  if ( this.permitirSiguiente == false && obj.descripcion !== '' ) {
                      this.nextStep.emit( 13 );
                      this.permitirSiguiente = true;
                   }
-                  if ( obj.descripcion == "" )
+                  if ( obj.descripcion == '' )
                      this.permitirSiguiente = false;
                }
             } );
          } else {
-            if ( lca.nombre !== "" ) {
+            if ( lca.nombre !== '' ) {
                this.save( lca );
             } else {
                this.permitirSiguiente = false;
@@ -97,7 +97,7 @@ export class PersonalityComponent implements OnInit {
    next() {
       let num = 0;
       for ( let elemento of this.listPersonality ) {
-         if ( elemento.nombre == "" || elemento.nombre == null )
+         if ( elemento.nombre == '' || elemento.nombre == null )
             num++;
       }
       if ( this.listPersonality.length == num ) {

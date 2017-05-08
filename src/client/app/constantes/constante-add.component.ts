@@ -17,7 +17,7 @@ export class ConstanteAddComponent implements OnInit {
    constantList: VConstante[];
    constantType: ListaItem[];
    codeExists: boolean = false;
-   regex: string = "";
+   regex: string = '';
    displayDialog: boolean = false;
 
    constructor( private constanteService: ConstanteService, private router: Router, private listaService: ListaService ) {
@@ -52,7 +52,7 @@ export class ConstanteAddComponent implements OnInit {
       if ( dataType.codigo == "NUM" ) {
          this.regex = "[0-9]{0,20}";
       } else {
-         this.regex = "";
+         this.regex = '';
       }
 
    }
@@ -63,7 +63,7 @@ export class ConstanteAddComponent implements OnInit {
 
    inputValue() {
       let label = this.constant.valor;
-      if ( label !== "" && label !== null && this.constant.idTipoDato !== null ) {
+      if ( label !== '' && label !== null && this.constant.idTipoDato !== null ) {
          let dataType = this.constantType.find( t => t.idLista == this.constant.idTipoDato );
          if ( dataType.codigo === "NUM" ) {
             this.constant.valor = this.constant.valor.replace( /[^0-9]/g, '' );

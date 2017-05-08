@@ -17,7 +17,7 @@ export class OrganizationalStructurePositions {
    constructor() {
       this.indicadorHabilitado = true;
       this.auditoriaUsuario = 1;
-      this.auditoriaFecha = "";
+      this.auditoriaFecha = '';
       this.ocupados = 0;
    }
 }
