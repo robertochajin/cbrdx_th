@@ -12,7 +12,7 @@ export class NavService {
    msgUpdate: Message = { severity: 'info', summary: 'Exito', detail: 'Registro actualizado correctamente.' };
    msgError: Message = { severity: 'error', summary: 'Error', detail: 'Error al guardar / Intente nuevamente.' };
    subject = new Subject<Message>();
-   arraySearch : any[] = [{id:'', strSearch:''}];
+   arraySearch: any[] = [ { id: '', strSearch: '' } ];
    
    // Observable string streams
    getMessage$ = this.subject.asObservable();
@@ -33,7 +33,7 @@ export class NavService {
             this.msgs = msgCustom;
             break;
       }
-      this.subject.next(this.msgs);
+      this.subject.next( this.msgs );
    }
    
    setTab( number: number ) {
@@ -44,22 +44,20 @@ export class NavService {
       return this._navTab;
    }
    
-   setSearch(id:string, strSearch:string){
-      if(this.arraySearch.find(c => c.id === id )){
-         this.arraySearch.find(c => c.id === id ).strSearch = strSearch;
-      }else{
-         this.arraySearch.push({id:id, strSearch:strSearch});
+   setSearch( id: string, strSearch: string ) {
+      if ( this.arraySearch.find( c => c.id === id ) ) {
+         this.arraySearch.find( c => c.id === id ).strSearch = strSearch;
+      } else {
+         this.arraySearch.push( { id: id, strSearch: strSearch } );
       }
    }
    
-   getSearch(id:string){
-      if(this.arraySearch.find(c => c.id === id )){
-         return this.arraySearch.find(c => c.id === id ).strSearch;
-      }else{
-        return '';
+   getSearch( id: string ) {
+      if ( this.arraySearch.find( c => c.id === id ) ) {
+         return this.arraySearch.find( c => c.id === id ).strSearch;
+      } else {
+         return '';
       }
    }
-   
-   
    
 }

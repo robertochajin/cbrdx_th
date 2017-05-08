@@ -2,8 +2,7 @@
 import { Http, Headers } from "@angular/http";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/toPromise";
-import { Subject }    from 'rxjs/Subject';
-import {toPromise} from "rxjs/operator/toPromise";
+import { Subject } from "rxjs/Subject";
 import { tokenNotExpired } from "angular2-jwt";
 
 @Injectable()
@@ -18,13 +17,13 @@ export class AuthenticationService {
    loginAnnounced$ = this.missionAnnouncedSource.asObservable();
    logoutAnnounced$ = this.logoutAnnoucedSource.asObservable();
    
-   announceLogin(mission: string) {
-      this.missionAnnouncedSource.next(mission);
+   announceLogin( mission: string ) {
+      this.missionAnnouncedSource.next( mission );
    }
    
-   announceLogout(){
+   announceLogout() {
       this.token = null;
-      this.logoutAnnoucedSource.next(null);
+      this.logoutAnnoucedSource.next( null );
    }
    
    constructor( private http: Http ) {
@@ -67,7 +66,7 @@ export class AuthenticationService {
          if ( token ) {
             this.token = token;
             localStorage.setItem( 'token', token );
-            this.announceLogin(token);
+            this.announceLogin( token );
             return true;
          } else {
             return false;

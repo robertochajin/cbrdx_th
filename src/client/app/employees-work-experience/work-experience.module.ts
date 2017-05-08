@@ -10,21 +10,21 @@ import { SharedModule } from "../shared/shared.module";
 import { FormSharedModule } from "../shared/form-shared.module";
 import { WorkExperienceService } from "../_services/work-experience.service";
 
-@NgModule({
-  imports: [
-     SharedModule,
-     FormSharedModule,
-    ReactiveFormsModule
-  ],
-  declarations: [
-    WorkExperienceComponent,
-    WorkExperienceAddComponent,
-    WorkExperienceUpdateComponent,
-    WorkExperienceDetailComponent,
-  ],
-  bootstrap: [WorkExperienceComponent],
-  providers: [WorkExperienceService],
-  exports: [WorkExperienceComponent]
-})
+@NgModule( {
+              imports: [
+                 SharedModule,
+                 FormSharedModule,
+                 ReactiveFormsModule
+              ],
+              declarations: [
+                 WorkExperienceComponent,
+                 WorkExperienceAddComponent,
+                 WorkExperienceUpdateComponent,
+                 WorkExperienceDetailComponent,
+              ],
+              bootstrap: [ WorkExperienceComponent ],
+              providers: [ WorkExperienceService ],
+              exports: [ WorkExperienceComponent ]
+           } )
 export class WorkExperienceModule {
 }

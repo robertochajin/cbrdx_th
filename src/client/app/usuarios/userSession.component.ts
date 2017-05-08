@@ -2,11 +2,9 @@ import "rxjs/add/operator/switchMap";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Message, ConfirmationService } from "primeng/primeng";
-import { Location }                 from '@angular/common';
-
+import { Location } from "@angular/common";
 import { EmployeesService } from "../_services/employees.service";
 import { Employee } from "../_models/employees";
-
 import { Usuario } from "../_models/usuario";
 import { UsuariosService } from "../_services/usuarios.service";
 import { JwtHelper } from "angular2-jwt";
@@ -16,7 +14,7 @@ import { JwtHelper } from "angular2-jwt";
                selector: 'userSession',
                templateUrl: 'userSession.component.html',
                providers: [ ConfirmationService ],
-               styleUrls: ['userSession.component.css'],
+               styleUrls: [ 'userSession.component.css' ],
             } )
 
 export class UserSessionComponent implements OnInit {
@@ -27,9 +25,9 @@ export class UserSessionComponent implements OnInit {
    user: Usuario = new Usuario();
    acordion: number;
    msgs: Message[] = [];
-   oldPass : string = "";
-   newPass : string = "";
-   newPassConfirm : string = "";
+   oldPass: string = "";
+   newPass: string = "";
+   newPassConfirm: string = "";
    usuarioLogueado: any;
    showOldPass: string = "password";
    showPass: string = "password";
@@ -45,14 +43,14 @@ export class UserSessionComponent implements OnInit {
    
    ngOnInit(): void {
       
-      let token = localStorage.getItem('token');
-   
-      if (token != null)
-         this.usuarioLogueado = this.jwtHelper.decodeToken(token);
+      let token = localStorage.getItem( 'token' );
+      
+      if ( token != null )
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
       
       let idUsuario = this.usuarioLogueado.usuario.idUsuario;
       
-      this.usuariosService.viewUser( idUsuario ).subscribe(data => {
+      this.usuariosService.viewUser( idUsuario ).subscribe( data => {
          this.user = data;
          this.employeeService.get( this.user.idTercero ).subscribe( employee => {
             this.employee = employee;
@@ -61,14 +59,15 @@ export class UserSessionComponent implements OnInit {
                this.employee.primerApellido + ' ' +
                this.employee.segundoApellido;
          } );
-      });
+      } );
    }
+   
    onSubmit() {
-      if(this.oldPass != this.newPass && this.newPass == this.newPassConfirm) {
+      if ( this.oldPass != this.newPass && this.newPass == this.newPassConfirm ) {
          this.user.contrasenaAntigua = this.oldPass;
          this.user.contrasena = this.newPass;
          this.usuariosService.updatePass( this.user ).then( res => {
-            console.info(res);
+            console.info( res );
             if ( res ) {
                this.msgs[ 0 ] = { severity: 'info', summary: 'Exito', detail: 'Contraseña actualizada correctamente.' };
             } else {
@@ -78,7 +77,7 @@ export class UserSessionComponent implements OnInit {
                };
             }
          }, error => {
-            this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } ;
+            this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Error al guardar.' };
          } );
       }
    }
@@ -86,13 +85,14 @@ export class UserSessionComponent implements OnInit {
    goBack(): void {
       this.location.back();
    }
-   show(){
-      if(this.showOldPass == "password"){
+   
+   show() {
+      if ( this.showOldPass == "password" ) {
          this.showOldPass = "text";
-      }else{
+      } else {
          this.showOldPass = "password";
       }
-      console.info(this.showOldPass);
+      console.info( this.showOldPass );
    }
    
 }

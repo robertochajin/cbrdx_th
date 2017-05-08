@@ -2,10 +2,10 @@ import { Component } from "@angular/core";
 import { Location } from "@angular/common";
 import { Rol } from "../_models/rol";
 import { RolesService } from "../_services/roles.service";
-import { Router,ActivatedRoute, Params } from "@angular/router";
+import { Router, ActivatedRoute, Params } from "@angular/router";
 import { VRolMenuElemento } from "../_models/vRolMenuElemento";
 import { MenuElemento } from "../_models/menuElemento";
-import {ConfirmationService, Message} from "primeng/primeng";
+import { ConfirmationService, Message } from "primeng/primeng";
 import * as moment from "moment/moment";
 
 @Component( {
@@ -18,7 +18,7 @@ export class RolesUpdateComponent {
    
    rol: Rol = new Rol();
    roles: Rol[];
-   show_msg:string;
+   show_msg: string;
    msgs: Message[] = [];
    codeExists: boolean = false;
    range: string;
@@ -45,28 +45,28 @@ export class RolesUpdateComponent {
    
    ngOnInit() {
       
-      this.route.params.subscribe(params => {
-         this.show_msg = params['msj'];
-         if(this.show_msg){
-            this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
+      this.route.params.subscribe( params => {
+         this.show_msg = params[ 'msj' ];
+         if ( this.show_msg ) {
+            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          }
-      });
+      } );
       
       this.route.params
       .switchMap( ( params: Params ) => this.rolesService.viewRole( +params[ 'id' ] ) )
       .subscribe( rol => {
          this.rol = rol;
          if ( this.rol.fechaInicio != null ) {
-            let momInicio: moment.Moment = moment( this.rol.fechaInicio, 'YYYY-MM-DD');
-            this.fechaInicio = momInicio.format(  'MM/DD/YYYY'  );
+            let momInicio: moment.Moment = moment( this.rol.fechaInicio, 'YYYY-MM-DD' );
+            this.fechaInicio = momInicio.format( 'MM/DD/YYYY' );
          }
          if ( this.rol.fechaFin != null ) {
-            let momFin: moment.Moment = moment( this.rol.fechaFin, 'YYYY-MM-DD'  );
+            let momFin: moment.Moment = moment( this.rol.fechaFin, 'YYYY-MM-DD' );
             this.fechaFin = momFin.format( 'MM/DD/YYYY' );
          }
-
+         
       } );
-
+      
       this.es = {
          firstDayOfWeek: 1,
          dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
@@ -105,7 +105,7 @@ export class RolesUpdateComponent {
    capitalizeCode() {
       let input = this.rol.codigoRol;
       if ( input != "" && input != null ) {
-         this.rol.codigoRol = input.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
+         this.rol.codigoRol = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
       }
    }
    
@@ -115,7 +115,7 @@ export class RolesUpdateComponent {
                                            header: 'Corfirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
-                                              this.router.navigate( [ 'roles'] );
+                                              this.router.navigate( [ 'roles' ] );
                                            }
                                         } );
    }
@@ -137,20 +137,20 @@ export class RolesUpdateComponent {
          let momFin: moment.Moment = moment( this.fechaFin, 'MM/DD/YYYY' );
          this.rol.fechaFin = momFin.format( 'YYYY-MM-DD' );
       }
-      this.rolesService.updateRole(this.rol).then(res => {
+      this.rolesService.updateRole( this.rol ).then( res => {
          this.msgs = [];
-         this.msgs.push({
-            severity: 'info',
-            summary: 'Exito',
-            detail: 'El rol ha sido actualizado con exito'
-         });
-      });
-
+         this.msgs.push( {
+                            severity: 'info',
+                            summary: 'Exito',
+                            detail: 'El rol ha sido actualizado con exito'
+                         } );
+      } );
+      
    }
-
+   
    clearSelectionRol() {
       this.fechaInicio = null;
       this.fechaFin = null;
    }
-
+   
 }

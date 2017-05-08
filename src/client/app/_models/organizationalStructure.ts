@@ -1,38 +1,36 @@
 export class OrganizationalStructure {
    
-   idTipoEstructura : number;
-   codigo : string;
-   nombre : string;
-   numeroDocumento : string;
-   idCentroCostos : number;
-   idEstructuraFisica : number;
+   idTipoEstructura: number;
+   codigo: string;
+   nombre: string;
+   numeroDocumento: string;
+   idCentroCostos: number;
+   idEstructuraFisica: number;
    
-   idEstructuraOrganizacional : number;
-   idLocalizacion : number;
-   idLogo : number;
-   idPadre : number;
-   idTipoArea : number;
-   idTipoDocumento : number;
-   indicadorHabilitado : boolean;
-   indicadorPlantaConfirmada : boolean;
-   paginaWeb : string;
-   razonSocial : string;
-   localizacion : string;
-   telefono : string;
-   celular : string;
-   correoElectronico : string;
-   auditoriaFecha : Date;
-   auditoriaUsuario : number;
+   idEstructuraOrganizacional: number;
+   idLocalizacion: number;
+   idLogo: number;
+   idPadre: number;
+   idTipoArea: number;
+   idTipoDocumento: number;
+   indicadorHabilitado: boolean;
+   indicadorPlantaConfirmada: boolean;
+   paginaWeb: string;
+   razonSocial: string;
+   localizacion: string;
+   telefono: string;
+   celular: string;
+   correoElectronico: string;
+   auditoriaFecha: Date;
+   auditoriaUsuario: number;
    
-   tipoEstructura : string;
-   centroCostos : string;
-   tipoArea : string;
-   estructuraFisica : string;
-   tipoDocumento : string;
+   tipoEstructura: string;
+   centroCostos: string;
+   tipoArea: string;
+   estructuraFisica: string;
+   tipoDocumento: string;
    
-   
-   
-   constructor(){
+   constructor() {
       this.idTipoEstructura = null;
       this.codigo = "";
       this.nombre = "";

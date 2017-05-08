@@ -10,7 +10,7 @@ export class EmployeeEstateService {
    headers = new Headers( { 'Content-Type': 'application/json' } );
    
    constructor( private authHttp: AuthHttp ) {
-     
+      
    }
    
    getAll() {

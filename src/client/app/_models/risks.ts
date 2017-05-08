@@ -1,4 +1,3 @@
-
 export class Risks {
    idRiesgo: number;
    idSubTipoRiesgo: number;
@@ -9,9 +8,10 @@ export class Risks {
    indicadorHabilitado: boolean;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
-constructor() {
-   this.auditoriaFecha = null;
-   this.auditoriaUsuario = null;
-   this.idRiesgo = null;
-}
+   
+   constructor() {
+      this.auditoriaFecha = null;
+      this.auditoriaUsuario = null;
+      this.idRiesgo = null;
+   }
 }

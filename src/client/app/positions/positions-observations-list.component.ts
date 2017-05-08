@@ -1,14 +1,12 @@
 import { Component, Input } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Positions } from "../_models/positions";
-import { ListStates } from "../_models/listStates";
 import { PositionsObservations } from "../_models/positionsObservations";
 import { PositionsService } from "../_services/positions.service";
 import { ListPositionsService } from "../_services/lists-positions.service";
-
-import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
-import {ListaItem} from "../_models/listaItem";
-import {ListaService} from "../_services/lista.service";
+import { Message, ConfirmationService } from "primeng/primeng";
+import { ListaItem } from "../_models/listaItem";
+import { ListaService } from "../_services/lista.service";
 
 @Component( {
                moduleId: module.id,
@@ -18,7 +16,7 @@ import {ListaService} from "../_services/lista.service";
             } )
 export class PositionsObservationsListComponent {
    
-   @Input()  position: Positions;
+   @Input() position: Positions;
    observation: PositionsObservations = new PositionsObservations();
    dialogObjet: PositionsObservations = new PositionsObservations();
    observations: PositionsObservations[];
@@ -33,15 +31,15 @@ export class PositionsObservationsListComponent {
                 private route: ActivatedRoute,
                 private listaService: ListaService,
                 private confirmationService: ConfirmationService,
-                private listPositionsService: ListPositionsService) {
+                private listPositionsService: ListPositionsService ) {
       
    }
    
    ngOnInit() {
-      if(this.position.idCargo){
+      if ( this.position.idCargo ) {
          this.positionsService.getObservationsbyPosition( this.position.idCargo ).subscribe( observations => {
             this.observations = observations;
-            this.listaService.getMasterDetails('ListasTiposViviendas').subscribe(res => {
+            this.listaService.getMasterDetails( 'ListasTiposViviendas' ).subscribe( res => {
                this.liststateTypes = res;
                this.nombresEstados();
             } );
@@ -60,11 +58,10 @@ export class PositionsObservationsListComponent {
          .subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
             this.positionsService.getObservationsbyPosition( this.position.idCargo ).subscribe(
-              observations => {
-                 this.observations = observations;
-                 this.nombresEstados()
-              }
-              
+               observations => {
+                  this.observations = observations;
+                  this.nombresEstados()
+               }
             );
          }, error => {
             this.show_form = true;
@@ -122,12 +119,14 @@ export class PositionsObservationsListComponent {
       this.msgs = [];
       this.show_form = false;
    }
-   nombresEstados(){
-      for ( let i = 0;  i < this.observations.length; i++ ) {
-         if(this.observations[i].idEstadoCargo != null){
-            this.stateTypes = this.liststateTypes.filter(estado => {
-               return estado.idLista == this.observations[i].idEstadoCargo; });
-            this.observations[i].estadoCargo = this.stateTypes[0].nombre;
+   
+   nombresEstados() {
+      for ( let i = 0; i < this.observations.length; i++ ) {
+         if ( this.observations[ i ].idEstadoCargo != null ) {
+            this.stateTypes = this.liststateTypes.filter( estado => {
+               return estado.idLista == this.observations[ i ].idEstadoCargo;
+            } );
+            this.observations[ i ].estadoCargo = this.stateTypes[ 0 ].nombre;
          }
       }
    }

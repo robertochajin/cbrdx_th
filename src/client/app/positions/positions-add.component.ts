@@ -1,14 +1,14 @@
 import "rxjs/add/operator/switchMap";
 import { Component } from "@angular/core";
-import { Router,ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { Positions } from "../_models/positions";
 import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
 import { PositionsService } from "../_services/positions.service";
 import { ListPositionsService } from "../_services/lists-positions.service";
 import { TipoDeAreaService } from "../_services/tipoDeArea.service";
-import {ListaService} from "../_services/lista.service";
-import {ListaItem} from "../_models/listaItem";
+import { ListaService } from "../_services/lista.service";
+import { ListaItem } from "../_models/listaItem";
 
 @Component( {
                moduleId: module.id,
@@ -38,7 +38,6 @@ export class PositionsAddComponent {
                 private tipoDeAreaService: TipoDeAreaService,
                 private confirmationService: ConfirmationService ) {
       
-      
       this.positionsService.getListPositions().subscribe( res => {
          this.bossPositionTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
@@ -48,24 +47,23 @@ export class PositionsAddComponent {
                                          } );
          }
       } );
-      this.listaService.getMasterDetails('ListasNivelesEstudios').subscribe(res => {
-         this.listStudies.push({label: 'Seleccione', value: null});
-         res.map((s: ListaItem) => this.listStudies.push({label: s.nombre, value: s.idLista}));
-      });
+      this.listaService.getMasterDetails( 'ListasNivelesEstudios' ).subscribe( res => {
+         this.listStudies.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => this.listStudies.push( { label: s.nombre, value: s.idLista } ) );
+      } );
       this.tipoDeAreaService.getlistAreas().subscribe( res => {
          this.areaTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
             this.areaTypes.push( {
-                                            label: dp.estructuraArea,
-                                            value: dp.idEstructuraArea
-                                         } );
+                                    label: dp.estructuraArea,
+                                    value: dp.idEstructuraArea
+                                 } );
          }
       } );
       
-
-      this.listaService.getMasterDetailsByCode("ListasEstadosCargos","CONST").subscribe( res => {
+      this.listaService.getMasterDetailsByCode( "ListasEstadosCargos", "CONST" ).subscribe( res => {
          this.defaultState = res;
-      });
+      } );
       
    }
    
@@ -80,7 +78,7 @@ export class PositionsAddComponent {
       this.positionsService.add( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
-         this.router.navigate(['positions/update/'+data.idCargo]);
+         this.router.navigate( [ 'positions/update/' + data.idCargo ] );
       }, error => {
          this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
       } );
@@ -99,21 +97,23 @@ export class PositionsAddComponent {
    
    capitalizeNombre() {
       let input = this.position.cargo;
-      if(input != "" && input != null ){
+      if ( input != "" && input != null ) {
          this.position.cargo = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }
-   inputCleanUp(value: string) {
-      this.position.codigoCargo= value.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
+   
+   inputCleanUp( value: string ) {
+      this.position.codigoCargo = value.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
    }
+   
    inputNumber() {
       var numero = this.position.personaACargoDir + "";
-      if (this.position.personaACargoDir != null) {
-         this.position.personaACargoDir = Number(numero.replace(/[^0-9]/g, ''));
+      if ( this.position.personaACargoDir != null ) {
+         this.position.personaACargoDir = Number( numero.replace( /[^0-9]/g, '' ) );
       }
       var numeroi = this.position.personaACargoInd + "";
-      if (this.position.personaACargoInd != null) {
-         this.position.personaACargoInd = Number(numeroi.replace(/[^0-9]/g, ''));
+      if ( this.position.personaACargoInd != null ) {
+         this.position.personaACargoInd = Number( numeroi.replace( /[^0-9]/g, '' ) );
       }
    }
 }

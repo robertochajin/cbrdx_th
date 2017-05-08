@@ -8,19 +8,19 @@ import { SharedModule } from "../shared/shared.module";
 import { FormSharedModule } from "../shared/form-shared.module";
 import { EmployeesContactService } from "../_services/employees-contact.service";
 
-@NgModule({
-  imports: [
-     SharedModule,
-    FormSharedModule,
-    ReactiveFormsModule
-  ],
-  declarations: [
-    EmployeesContactComponent,
-    EmployeesContactListComponent
-  ],
-  bootstrap: [EmployeesContactComponent,EmployeesContactListComponent],
-  providers: [EmployeesContactService],
-  exports: [EmployeesContactComponent,EmployeesContactListComponent]
-})
+@NgModule( {
+              imports: [
+                 SharedModule,
+                 FormSharedModule,
+                 ReactiveFormsModule
+              ],
+              declarations: [
+                 EmployeesContactComponent,
+                 EmployeesContactListComponent
+              ],
+              bootstrap: [ EmployeesContactComponent, EmployeesContactListComponent ],
+              providers: [ EmployeesContactService ],
+              exports: [ EmployeesContactComponent, EmployeesContactListComponent ]
+           } )
 export class EmployeesContactModule {
 }

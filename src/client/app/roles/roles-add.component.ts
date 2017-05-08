@@ -42,7 +42,7 @@ export class RolesAddComponent {
    }
    
    ngOnInit() {
-      this.rol.idRol=null;
+      this.rol.idRol = null;
       this.es = {
          firstDayOfWeek: 1,
          dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
@@ -81,7 +81,7 @@ export class RolesAddComponent {
    capitalizeCode() {
       let input = this.rol.codigoRol;
       if ( input != "" && input != null ) {
-         this.rol.codigoRol = input.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
+         this.rol.codigoRol = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
       }
    }
    
@@ -114,7 +114,7 @@ export class RolesAddComponent {
          this.rol.fechaFin = momFin.format( 'YYYY-MM-DD' );
       }
       this.rolesService.addRole( this.rol ).then( res => {
-         this.router.navigate( [ 'roles/update/' + res.idRol +'/true'] );
+         this.router.navigate( [ 'roles/update/' + res.idRol + '/true' ] );
       } );
       
    }

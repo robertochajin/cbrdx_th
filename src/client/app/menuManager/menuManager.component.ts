@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { MenuManagerService } from "../_services/menuManager.service";
 import { MenuManager } from "../_models/menuManager";
 import { TreeNode } from "primeng/components/common/api";
-import { SelectItem, Message } from "primeng/primeng";
+import { Message } from "primeng/primeng";
 
 @Component( {
                moduleId: module.id,
@@ -15,7 +15,7 @@ export class MenuManagerComponent implements OnInit {
    msgs: Message[] = [];
    menus: MenuManager = new MenuManager();
    listmenu: MenuManager[];
-      
+   
    treeMenu: TreeNode[] = [];
    selectedNode: TreeNode;
    modulo: boolean = true;
@@ -25,19 +25,18 @@ export class MenuManagerComponent implements OnInit {
    guardando: boolean = false;
    
    constructor( private router: Router,
-                private menuManagerService: MenuManagerService
-   ) {
+                private menuManagerService: MenuManagerService ) {
       menuManagerService.getAll().subscribe( res => {
          this.listmenu = res;
-            for ( let c of this.listmenu.filter( t => t.idPadre == 0 || t.idPadre == null ) ) {
-               let companyNode = {
-                  "label": c.menu,
-                  "data": c,
-                  "leaf": false,
-               };
-               this.treeMenu.push( companyNode );
-            }
-            this.newModule();
+         for ( let c of this.listmenu.filter( t => t.idPadre == 0 || t.idPadre == null ) ) {
+            let companyNode = {
+               "label": c.menu,
+               "data": c,
+               "leaf": false,
+            };
+            this.treeMenu.push( companyNode );
+         }
+         this.newModule();
       } );
    }
    
@@ -56,11 +55,10 @@ export class MenuManagerComponent implements OnInit {
    capitalizeCode() {
       let input = this.menus.codigoMenu;
       if ( input != "" && input != null ) {
-         this.menus.codigoMenu = input.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
+         this.menus.codigoMenu = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
       }
    }
    
-      
    capitalizeName() {
       let input = this.menus.menu;
       if ( input != "" && input != null ) {
@@ -92,7 +90,7 @@ export class MenuManagerComponent implements OnInit {
                             "data": c,
                             "parent": node,
                             "leaf": true,
-                            "children" : []
+                            "children": []
                          } );
       }
       node.children = chilNodes;
@@ -127,7 +125,7 @@ export class MenuManagerComponent implements OnInit {
             let newChil: any = {
                "label": this.menus.menu,
                "data": data,
-               "children" : []
+               "children": []
             };
             this.listmenu.push( data );
             if ( this.menus.idPadre == 0 || this.menus.idPadre == null ) {

@@ -8,8 +8,8 @@ import { ListEmployeesService } from "../_services/lists-employees.service";
 import { LocateService } from "../_services/locate.service";
 import { Localizaciones } from "../_models/localizaciones";
 import { PoliticalDivisionService } from "../_services/political-division.service";
-import {ListaItem} from "../_models/listaItem";
-import {ListaService} from "../_services/lista.service";
+import { ListaItem } from "../_models/listaItem";
+import { ListaService } from "../_services/lista.service";
 
 @Component( {
                moduleId: module.id,
@@ -68,19 +68,19 @@ export class OrganizationalStructureComponent implements OnInit {
             this.newCompany();
          }
       } );
-
-      this.listaService.getMasterDetails('ListasTiposDocumentos').subscribe(res => {
-         this.documentTypes.push({label: 'Seleccione', value: null});
-         res.map((s: ListaItem) => this.documentTypes.push({label: s.nombre, value: s.idLista}));
-      });
-
-      this.listaService.getMasterDetails('ListasTiposEstructuras').subscribe(res => {
-         this.structureTypes.push({label: 'Seleccione', value: null});
-         res.map((s: ListaItem) => {
-            this.structureTypes.push({label: s.nombre, value: s.idLista});
-         });
-      });
-
+      
+      this.listaService.getMasterDetails( 'ListasTiposDocumentos' ).subscribe( res => {
+         this.documentTypes.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => this.documentTypes.push( { label: s.nombre, value: s.idLista } ) );
+      } );
+      
+      this.listaService.getMasterDetails( 'ListasTiposEstructuras' ).subscribe( res => {
+         this.structureTypes.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => {
+            this.structureTypes.push( { label: s.nombre, value: s.idLista } );
+         } );
+      } );
+      
       this.organizationalStructureService.getCostTypes().subscribe( res => {
          this.costTypes.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
@@ -129,7 +129,7 @@ export class OrganizationalStructureComponent implements OnInit {
    capitalizeCode() {
       let input = this.organizationalStructure.codigo;
       if ( input != "" && input != null ) {
-         this.organizationalStructure.codigo = input.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
+         this.organizationalStructure.codigo = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
       }
    }
    
@@ -174,7 +174,7 @@ export class OrganizationalStructureComponent implements OnInit {
                             "data": c,
                             "parent": node,
                             "leaf": false,
-                            "children" : []
+                            "children": []
                          } );
       }
       node.children = chilNodes;
@@ -260,7 +260,7 @@ export class OrganizationalStructureComponent implements OnInit {
                "label": this.organizationalStructure.nombre,
                "data": data,
                "leaf": false,
-               "children" : []
+               "children": []
             };
             this.listOrganizationalStructure.push( data );
             if ( this.organizationalStructure.idPadre == 0 || this.organizationalStructure.idPadre == null ) {

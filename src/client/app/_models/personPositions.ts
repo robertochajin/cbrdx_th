@@ -2,18 +2,18 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class PersonPositions {
-   idTerceroCargo: number; 
+   idTerceroCargo: number;
    idSede: number;
    idArea: number;
    idCargo: number;
    idTipoContrato: number;
-   indicadorHabilitado : boolean;
-   auditoriaUsuario: number; 
+   indicadorHabilitado: boolean;
+   auditoriaUsuario: number;
    auditoriaFecha: string;
    idTercero: number;
    idEstructuraOrganizacionalCargo: number;
    asignadoDesde: string;
-
+   
    //Atributos auxiliares
    cargo: string;
    primerNombre: string;

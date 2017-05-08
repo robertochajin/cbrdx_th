@@ -1,11 +1,11 @@
 export class Rol {
-    idRol: number;
-    codigoRol: string;
-    rol: string;
-    descripcion: string;
-    fechaInicio: string;
-    fechaFin: string;
-    indicadorHabilitado: boolean = true;
-    auditoriaUsuario: number;
-    auditoriaFecha: Date;
+   idRol: number;
+   codigoRol: string;
+   rol: string;
+   descripcion: string;
+   fechaInicio: string;
+   fechaFin: string;
+   indicadorHabilitado: boolean = true;
+   auditoriaUsuario: number;
+   auditoriaFecha: Date;
 }
