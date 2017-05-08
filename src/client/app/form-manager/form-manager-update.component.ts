@@ -287,8 +287,8 @@ export class FormManagerUpdateComponent implements OnInit {
             } );
             this.editingField = false;
          } );
-         this.functionalityControlField.control = " ";
-         this.functionalityControlField.codigo = " ";
+         this.functionalityControlField.control = ' ';
+         this.functionalityControlField.codigo = ' ';
       } else {
          this.functionalityField = [];
          this.functionalityControlField.idFuncionalidad = this.functionality.idFuncionalidad;
@@ -299,8 +299,8 @@ export class FormManagerUpdateComponent implements OnInit {
             } );
             this.editingField = false;
          } );
-         this.functionalityControlField.control = " ";
-         this.functionalityControlField.codigo = " ";
+         this.functionalityControlField.control = ' ';
+         this.functionalityControlField.codigo = ' ';
       }
    }
 
@@ -320,8 +320,8 @@ export class FormManagerUpdateComponent implements OnInit {
                this.functionalitySection.push( s );
             }
          } );
-         this.functionalityControl.control = " ";
-         this.functionalityControl.codigo = " ";
+         this.functionalityControl.control = ' ';
+         this.functionalityControl.codigo = ' ';
       } );
       this.editingSection = false;
       this.acordion = 3;
@@ -349,9 +349,9 @@ export class FormManagerUpdateComponent implements OnInit {
    detailSectionF( f: FunctionalityControl ) {
       this.detailSection = true;
       this.functionalityControlSectionDetail = f;
-      this.functionalityControlSectionDetail.indicadorImprimir ? this.indicadorImprime = "Si" : this.indicadorImprime = "No";
-      this.functionalityControlSectionDetail.indicadorVisible ? this.indicadorVisible = "Si" : this.indicadorVisible = "No";
-      this.functionalityControlSectionDetail.indicadorHabilitado ? this.indicadorHabilitado = "Si" : this.indicadorHabilitado = "No";
+      this.functionalityControlSectionDetail.indicadorImprimir ? this.indicadorImprime = 'Si' : this.indicadorImprime = 'No';
+      this.functionalityControlSectionDetail.indicadorVisible ? this.indicadorVisible = 'Si' : this.indicadorVisible = 'No';
+      this.functionalityControlSectionDetail.indicadorHabilitado ? this.indicadorHabilitado = 'Si' : this.indicadorHabilitado = 'No';
    }
 
    goBackDetail() {
@@ -361,9 +361,9 @@ export class FormManagerUpdateComponent implements OnInit {
    detailDetailF( f: FunctionalityControl ) {
       this.detailField = true;
       this.functionalityControlFieldDetail = f;
-      this.functionalityControlFieldDetail.indicadorImprimir ? this.indicadorImprime = "Si" : this.indicadorImprime = "No";
-      this.functionalityControlFieldDetail.indicadorVisible ? this.indicadorVisible = "Si" : this.indicadorVisible = "No";
-      this.functionalityControlFieldDetail.indicadorHabilitado ? this.indicadorHabilitado = "Si" : this.indicadorHabilitado = "No";
+      this.functionalityControlFieldDetail.indicadorImprimir ? this.indicadorImprime = 'Si' : this.indicadorImprime = 'No';
+      this.functionalityControlFieldDetail.indicadorVisible ? this.indicadorVisible = 'Si' : this.indicadorVisible = 'No';
+      this.functionalityControlFieldDetail.indicadorHabilitado ? this.indicadorHabilitado = 'Si' : this.indicadorHabilitado = 'No';
    }
 
    goBackDetailField() {
@@ -376,7 +376,7 @@ export class FormManagerUpdateComponent implements OnInit {
 
    capitalize( event: any ) {
       let input = event.target.value;
-      if ( input.substring( 0, 1 ) === " " ) {
+      if ( input.substring( 0, 1 ) === ' ' ) {
          input = input.replace( ' ', '' );
       }
       event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();

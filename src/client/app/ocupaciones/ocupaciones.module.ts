@@ -13,8 +13,10 @@ import { OcupacionesComponent } from './ocupaciones.component';
 import { AutoCompleteModule } from 'primeng/components/autocomplete/autocomplete';
 
 @NgModule( {
-              imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule, CalendarModule, TreeModule, TabViewModule, DropdownModule,
-                 FieldsetModule, AutoCompleteModule, GrowlModule, SharedModule ],
+              imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule,
+                 CalendarModule, TreeModule, TabViewModule, DropdownModule,
+                 FieldsetModule, AutoCompleteModule, GrowlModule, SharedModule
+              ],
               declarations: [ OcupacionesComponent ],
               bootstrap: [ OcupacionesComponent ],
               providers: [ OcupacionesService ],

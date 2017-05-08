@@ -1,8 +1,8 @@
-import {join} from 'path';
+import { join } from 'path';
 import * as slash from 'slash';
-import {argv} from 'yargs';
+import { argv } from 'yargs';
 
-import {BuildType, ExtendPackages, InjectableDependency} from './seed.config.interfaces';
+import { BuildType, ExtendPackages, InjectableDependency } from './seed.config.interfaces';
 
 /************************* DO NOT CHANGE ************************
  *
@@ -314,7 +314,7 @@ export class SeedConfig {
    //IP = 'localhost';
    SVC_SP_PORT = '8447';
 
-   SVC_SP_URL = "http://" + this.IP + ":" + this.SVC_SP_PORT;
+   SVC_SP_URL = 'http://' + this.IP + ':' + this.SVC_SP_PORT;
 
    /**
     * Se definen la IP y el PUERTO con la cual la vista se conecta a los servicios Talento Humano
@@ -322,8 +322,8 @@ export class SeedConfig {
     */
    SVC_TH_PORT_D = '8444';
    SVC_TH_PORT = '8448';
-   SVC_TH_URL_D = "http://" + this.IP + ":" + this.SVC_TH_PORT_D;
-   SVC_TH_URL = "http://" + this.IP + ":" + this.SVC_TH_PORT;
+   SVC_TH_URL_D = 'http://' + this.IP + ':' + this.SVC_TH_PORT_D;
+   SVC_TH_URL = 'http://' + this.IP + ':' + this.SVC_TH_PORT;
 
    /**
     * The list of NPM dependcies to be injected in the `index.html`.

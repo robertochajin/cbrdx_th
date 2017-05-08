@@ -1,7 +1,4 @@
-/**
- * Created by jenni on 13/02/2017.
- */
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { UsuariosService } from '../_services/usuarios.service';
 import { Usuario } from '../_models/usuario';
@@ -27,10 +24,7 @@ import { EmployeesService } from '../_services/employees.service';
                templateUrl: './usuario-edit.component.html',
             } )
 
-export class UsuariosEditComponent implements OnInit {
-   ngOnInit(): void {
-
-   }
+export class UsuariosEditComponent {
 
    usuario: Usuario = new Usuario();
    tercero: Employee = new Employee();
@@ -53,9 +47,9 @@ export class UsuariosEditComponent implements OnInit {
    isTerceroSet = true;
    isTerceroEmpty = false;
    isUserCreated = true;
-   userExists: boolean = false;
-   terceroExiste: boolean = true;
-   sameUser: boolean = false;
+   userExists = false;
+   terceroExiste = true;
+   sameUser = false;
    terceroObtenido: Employee;
 
    isRequiredRol = false;
@@ -131,7 +125,7 @@ export class UsuariosEditComponent implements OnInit {
 
    createUserRole() {
       this.usuariosService.readAllUserRoles().subscribe( res => {
-         let ur = res.find( t => t.idUsuario == this.usuario.idUsuario && t.idRol == this.curUsuarioRol.idRol );
+         let ur = res.find( t => t.idUsuario === this.usuario.idUsuario && t.idRol === this.curUsuarioRol.idRol );
          if ( ur !== null ) {
             this.creatingRol = false;
             ur.fechaInicio = this.curUsuarioRol.fechaInicio;
@@ -162,7 +156,7 @@ export class UsuariosEditComponent implements OnInit {
 
    createUserGroup() {
       this.usuariosService.readAllUserGroups().subscribe( res => {
-         let ug = res.find( t => t.idUsuario == this.usuario.idUsuario && t.idGrupoGestion == this.curUsuarioGrupo.idGrupoGestion );
+         let ug = res.find( t => t.idUsuario === this.usuario.idUsuario && t.idGrupoGestion === this.curUsuarioGrupo.idGrupoGestion );
          if ( ug !== null ) {
             this.creatingGroup = false;
             ug.fechaInicio = this.curUsuarioGrupo.fechaInicio;
@@ -175,7 +169,7 @@ export class UsuariosEditComponent implements OnInit {
                this.isRequiredGroup = false;
                this.isGreaterGroup = true;
                this.creatingGroup = true;
-            } )
+            } );
          } else {
             this.creatingGroup = false;
             this.curUsuarioGrupo.idUsuario = this.usuario.idUsuario;
@@ -219,11 +213,13 @@ export class UsuariosEditComponent implements OnInit {
    }
 
    validateCreationUser() {
-      this.sameUser = this.usuarios.filter( t => t.usuarioSistema == this.usuario.usuarioSistema ).length > 0;
+      this.sameUser = this.usuarios.filter( t => t.usuarioSistema === this.usuario.usuarioSistema ).length > 0;
    }
 
    validateGreaterRol() {
-      if ( this.curUsuarioRol.fechaInicio !== null && this.curUsuarioRol.fechaFin !== null && this.curUsuarioRol.fechaInicio < this.curUsuarioRol.fechaFin ) {
+      if ( this.curUsuarioRol.fechaInicio !== null &&
+           this.curUsuarioRol.fechaFin !== null &&
+           this.curUsuarioRol.fechaInicio < this.curUsuarioRol.fechaFin ) {
          this.isGreaterRol = true;
       } else {
          this.isGreaterRol = false;
@@ -238,7 +234,9 @@ export class UsuariosEditComponent implements OnInit {
    }
 
    validateGreaterGroup() {
-      if ( this.curUsuarioGrupo.fechaInicio !== null && this.curUsuarioGrupo.fechaFin !== null && this.curUsuarioGrupo.fechaInicio < this.curUsuarioGrupo.fechaFin ) {
+      if ( this.curUsuarioGrupo.fechaInicio !== null &&
+           this.curUsuarioGrupo.fechaFin !== null &&
+           this.curUsuarioGrupo.fechaInicio < this.curUsuarioGrupo.fechaFin ) {
          this.isGreaterGroup = true;
       } else {
          this.isGreaterGroup = false;

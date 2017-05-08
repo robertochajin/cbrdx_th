@@ -59,7 +59,7 @@ export class GruposGestionAddComponent implements OnInit {
 
    createGruposGestion() {
       this.gruposGestionService.addGruposGestion( this.grupoGestion ).then( data => {
-         this.router.navigate( [ 'gruposGestion' ] );
+         this.router.navigate( [ 'gruposGestion' ] )
       } );
    }
 

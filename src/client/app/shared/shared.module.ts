@@ -18,7 +18,8 @@ import { AuthenticationService } from '../_services/authentication.service';
               imports: [ CommonModule, RouterModule, TranslateModule ],
               declarations: [ ToolbarComponent, NavbarComponent ],
               exports: [ ToolbarComponent, NavbarComponent,
-                 CommonModule, FormsModule, RouterModule, TranslateModule ],
+                 CommonModule, FormsModule, RouterModule, TranslateModule
+              ],
               providers: [ AuthenticationService ]
            } )
 export class SharedModule {

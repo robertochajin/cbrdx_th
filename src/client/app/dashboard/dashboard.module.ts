@@ -13,7 +13,8 @@ import { UsuariosService } from '../_services/usuarios.service';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule( {
-              imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, DialogModule, FieldsetModule, PanelModule, ChartModule, CheckboxModule, DragDropModule,
+              imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, DialogModule, FieldsetModule,
+                 PanelModule, ChartModule, CheckboxModule, DragDropModule,
                  SharedModule
               ],
               declarations: [ DashboardComponent ],

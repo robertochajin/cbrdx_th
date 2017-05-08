@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { RolFuncionalities } from '../_models/rolFuncionalities';
@@ -57,7 +57,7 @@ export class RolFuncionalitiesConfigComponent implements OnInit {
 
    changeControl( fc: RolFunctionalityControl ) {
       this.msgs = [];
-      if ( fc.idRolFuncionalidadControl == null ) {
+      if ( fc.idRolFuncionalidadControl === null ) {
          this.rolFuncionalitiesService.addControl( fc ).subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
             fc.idRolFuncionalidadControl = data.idRolFuncionalidadControl;
@@ -78,7 +78,7 @@ export class RolFuncionalitiesConfigComponent implements OnInit {
    cosntrucObj() {
       this.lfControles.map( ( s: any ) => {
          this.fControles = new RolFunctionalityControl();
-         if ( this.listaFuncionalityControl.find( d => d.idFuncionalidadControl == s.idFuncionalidadControl ) ) {
+         if ( this.listaFuncionalityControl.find( d => d.idFuncionalidadControl === s.idFuncionalidadControl ) ) {
             this.fControles = this.listaFuncionalityControl.find( d => d.idFuncionalidadControl = s.idFuncionalidadControl );
             this.fControles.codigo = s.codigo;
          } else {
@@ -92,7 +92,7 @@ export class RolFuncionalitiesConfigComponent implements OnInit {
             this.fControles.indicadorEditar = false;
             this.fControles.indicadorSeccion = false;
          }
-         if ( s.indicadorSeccion == true ) {
+         if ( s.indicadorSeccion === true ) {
             this.secciones.push( this.fControles );
          } else {
             this.controles.push( this.fControles );

@@ -14,8 +14,10 @@ import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule( {
-              imports: [ CommonModule, FormsModule, InputTextModule, ButtonModule, DialogModule, CaptchaModule, FieldsetModule, PasswordModule, RecaptchaModule.forRoot(), RecaptchaFormsModule,
-                 SharedModule ],
+              imports: [ CommonModule, FormsModule, InputTextModule, ButtonModule, DialogModule, CaptchaModule, FieldsetModule,
+                 PasswordModule, RecaptchaModule.forRoot(), RecaptchaFormsModule,
+                 SharedModule
+              ],
               declarations: [ LoginComponent, CambioContrasenaComponent ],
               bootstrap: [ LoginComponent ],
               providers: [ LoginService, AuthenticationService ],

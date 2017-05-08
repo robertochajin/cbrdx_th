@@ -70,13 +70,13 @@ export class CambioContrasenaComponent implements OnInit {
       this.authenticationService.forgetPass( this.correoElectronico, this.usuario ).then( res => {
          if ( res ) {
             this.enviando = false;
-            this.notice = "Se notifico al administrador del Sistema de su solicitud de cambio de contraseña";
+            this.notice = 'Se notifico al administrador del Sistema de su solicitud de cambio de contraseña';
          } else {
-            this.notice = "Se envió un correo electronico con su nueva contraseña de acceso al sistema";
+            this.notice = 'Se envió un correo electronico con su nueva contraseña de acceso al sistema';
          }
       }, error => {
          this.enviando = false;
-         this.error = "El correo y/o el usuario no coinciden con lo registrado"
+         this.error = 'El correo y/o el usuario no coinciden con lo registrado';
       } );
       this.displayDialog = false;
    }
