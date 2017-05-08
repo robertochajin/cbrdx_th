@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
 @Component( {
                moduleId: module.id,
                templateUrl: 'risks-form.component.html',
-               selector: 'risks',
+               selector: 'risks-update',
                providers: [ ConfirmationService ]
             } )
 
