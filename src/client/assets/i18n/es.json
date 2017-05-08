@@ -603,6 +603,8 @@
       "LBL_NOMBREAREA":"Nombre del área",
       "LBL_TIPOESTRUCTURA":"Tipo de Estructura",
       "LBL_CENTROCOSTOS":"Centro de costos",
+      "BTN_CONFIRMAPLANTA":"Confirmar Planta",
+      "LBL_BUSCACOLAB":"Buscar colaborador",
       "LBL_TIPOAREA":"Tipo de Area",
       "MSG_CREANDOEDITAREA":"Creando / editando cargo para el área",
       "LBL_CARGO":"Cargo",
@@ -610,16 +612,55 @@
       "LBL_SALARIOTOTAL":"Salario total",
       "LBL_OCUPADOS":"Ocupados",
       "LBL_VACANTES":"Vacantes",
-      "LBL_PLAZAS":"No de plazas",
+      "LBL_ASIGNADODESDE":"Asignado desde",
+      "LBL_FECHAINGRESOREQ":"Fecha ingreso es requerido",
+      "LBL_TIPOCONTRATO":"Tipo de contrato",
+      "LBL_NUMCARGOS":"No. de cargos",
+      "LBL_PLAZAS":"No. de plazas",
       "LBL_COSTOPLANTA":"Costo planta",
+      "MSG_ASIGNACOLABORADOR":"Asignar colaborador",
       "MSG_NUMEROPLAZASMENOR":"El número de plazas no puede ser menor a",
+      "MSG_COLABREQUERIDO":"Colaborador es requerido",
       "MSG_CARGOASIGNADO":"El cargo que intentó seleccionar ya fue asignado a esta área",
       "MSG_CARGOREQ":"Cargo es requerido",
       "MSG_PLAZASREQ":"Número de plazas es requerido",
+      "MSG_ASIGNACOLABORADORCARGO":"Asignando colaborador al cargo",
       "LBL_ESTRUCTFISICA":"Estructura Fisica"
 
-
    },
+
+
+   "PROYECCIONLABORAL": {
+      "LBL_PROYLAB":"Proyección laboral",
+      "LBL_ANO":"Año",
+      "LBL_ACTUAL":"Actual",
+      "LBL_DETALLEPROYECCION":"Detalle Proyección Laboral",
+      "LBL_OBSERVAPROBACION":"Observaciones de Aprobación",
+      "LBL_MOTIVOSOLICITUD":"Motivo solicitud",
+      "LBL_MOTIVONOAPRUEBA":"Motivo no aprobación",
+      "LBL_OBSERVACIONES":"Observaciones",
+      "LBL_APROBADO":"Aprobado",
+      "LBL_NUMCARGOS":"No de Cargos",
+      "LBL_NUMPLAZAS":"No de plazas",
+      "LBL_COSTOPLANTA":"Costo planta",
+      "LBL_PROYECTADO":"Proyectado",
+      "LBL_INCREMENTO":"Incremento",
+      "LBL_PLAZASATUALES":"Plazas Actuales",
+      "LBL_PLAZASPROYECT":"Plazas Proyectadas",
+      "LBL_COSTOACTUAL":"Costo Actual",
+      "LBL_ESTADOS":"Estados",
+      "LBL_COSTOPROYECT":"Costo Proyectado",
+      "BTN_GENERAPROY":"Generar Proyección",
+      "BTN_NUEVOCARGO":"Nuevo Cargo",
+      "BTN_CONFIRMAR":"Confirmar",
+      "BTN_ELIMINAR":"Eliminar",
+      "BTN_CONFIRMAPROY":"Confirmar Proyección",
+      "MSG_OBSERVACIONREQ":"Observación requerida",
+      "MSG_CARGOREQUERIDO":"Cargo requerido",
+      "MSG_PLAZASPROYREQ":"Plazas proyectadas requeridas",
+      "MSG_CLASEREQUERIDO": "Clase de estilo es requerido"
+   },
+
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 

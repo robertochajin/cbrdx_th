@@ -176,7 +176,7 @@
                            </div>
                            <div class="col-md-4">
                               <button type="button" class="ui-button ui-button-danger btn" icon="fa-check-square-o" *ngIf="!area.indicadorPlantaConfirmada"
-                                      pButton (click)="confirmStructure()" label="Confirmar planta"></button>
+                                      pButton (click)="confirmStructure()" label="{{ 'PLANTACOLABORADORES.BTN_CONFIRMAPLANTA' | translate }}"></button>
                            </div>
                         </div>
                      </div>
@@ -190,12 +190,12 @@
                   <form name="personForm" (ngSubmit)="pp.valid && !badEmployee && savePersonPosition()" #pp="ngForm"
                         novalidate>
                      <fieldset>
-                        <legend>Asignando colaborador al cargo</legend>
+                        <legend>{{ 'PLANTACOLABORADORES.MSG_ASIGNACOLABORADORCARGO' | translate }}</legend>
                         <div class="form-group container">
                            <div class="row">
                               <div class="form-group col-md-8">
-                                 <label for="colaborador">* Colaborador</label>
-                                 <p-autoComplete placeholder="Buscar colaborador" field="nombreCompleto"
+                                 <label for="colaborador">* {{ 'EMPLOYEES.LBL_COLABORADOR' | translate }}</label>
+                                 <p-autoComplete placeholder="{{ 'PLANTACOLABORADORES.MSG_ASIGNACOLABORADORCARGO' | translate }}" field="nombreCompleto"
                                                  name="colaborador" id="colaborador"
                                                  minLength="3" delay="500" [suggestions]="employeeList" required="true"
                                                  (completeMethod)="employeeSearch($event)"
@@ -204,13 +204,13 @@
                                  <div class="ui-message ui-messages-error ui-corner-all"
                                       *ngIf="pp.submitted && badEmployee">
                                     <i class="fa fa-close"></i>
-                                    Colaborador es requerido
+                                    {{ 'PLANTACOLABORADORES.MSG_COLABREQUERIDO' | translate }}
                                  </div>
                               </div>
                            </div>
                            <div class="row">
                               <div class="form-group col-md-3">
-                                 <label for="ingreso">* Asignado desde</label>
+                                 <label for="ingreso">* {{ 'PLANTACOLABORADORES.LBL_ASIGNADODESDE' | translate }}</label>
                                  <p-calendar id="ingreso" name="ingreso" [showIcon]="true" [maxDate]="maxDate"
                                              [yearNavigator]="true" [locale]="es" readonlyInput="true"
                                              #ingreso="ngModel" required="true" [dataType]="date"
@@ -219,11 +219,11 @@
                                  <div class="ui-message ui-messages-error ui-corner-all"
                                       *ngIf="pp.submitted && !ingreso.valid">
                                     <i class="fa fa-close"></i>
-                                    Fecha ingreso es requerido
+                                    {{ 'PLANTACOLABORADORES.LBL_FECHAINGRESOREQ' | translate }}
                                  </div>
                               </div>
                               <div class="form-group col-md-5">
-                                 <label for="tipoContrato">* Tipo de contrato</label>
+                                 <label for="tipoContrato">* {{ 'PLANTACOLABORADORES.LBL_TIPOCONTRATO' | translate }}</label>
                                  <p-dropdown name="tipoContrato" id="tipoContrato" #tipoContrato="ngModel"
                                              required="true"
                                              [autoWidth]="false" [(ngModel)]="personsPosition.idTipoContrato"
@@ -231,14 +231,14 @@
                                  <div class="ui-message ui-messages-error ui-corner-all"
                                       *ngIf="pp.submitted && !ingreso.valid">
                                     <i class="fa fa-close"></i>
-                                    Tipo de contrato es requerido
+                                    {{ 'PLANTACOLABORADORES.LBL_TIPOCONTRATO' | translate }}
                                  </div>
                               </div>
                            </div>
                            <div class="row form-footer-buttons">
                               <div class="form-group col-md-8">
-                                 <a (click)="cancelEditingPerson()" class="cancelar">Cancelar</a>
-                                 <button pButton type="submit" label="Guardar"></button>
+                                 <a (click)="cancelEditingPerson()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+                                 <button pButton type="submit" label="{{ 'BTN_GUARDAR' | translate }}"></button>
                               </div>
                            </div>
                         </div>
@@ -252,19 +252,19 @@
                   </div>
                   <div class="col-md-6 col-xs-12 datatable-header-search">
                      <i class="fa fa-search"></i>
-                     <input #pl type="text" pInputText size="40" placeholder="Buscar...">
+                     <input #pl type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}">
                   </div>
                </div>
                <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="postionSlots"
                             [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="pl" #dt>
-                  <p-column field="cargo" header="Cargo" [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains">
+                  <p-column field="cargo" header="{{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}" [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains">
                   </p-column>
-                  <p-column field="nombreCompleto" header="Colaborador" [sortable]="true"></p-column>
-                  <p-column field="asignadoDesde" header="Asignado desde" [sortable]="true"></p-column>
-                  <p-column header="Acciones" styleClass="datatable-col-action">
+                  <p-column field="nombreCompleto" header="{{ 'EMPLOYEES.LBL_COLABORADOR' | translate }}" [sortable]="true"></p-column>
+                  <p-column field="asignadoDesde" header="{{ 'PLANTACOLABORADORES.LBL_ASIGNADODESDE' | translate }}" [sortable]="true"></p-column>
+                  <p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
                      <template let-pp="rowData" pTemplate="body">
                         <div class="btn-group" role="group">
-                           <button type="button" class="ui-button ui-button-success btn" icon="fa-child" pTooltip="Asignar colaborador" tooltipPosition="top"
+                           <button type="button" class="ui-button ui-button-success btn" icon="fa-child" pTooltip="{{ 'PLANTACOLABORADORES.MSG_ASIGNACOLABORADOR' | translate }}" tooltipPosition="top"
                                    pButton (click)="editPersonSlot(pp)"></button>
                            <button *ngIf="pp.idTercero != 0" type="button" class="ui-button ui-button-danger btn"
                                    icon="fa-trash"
