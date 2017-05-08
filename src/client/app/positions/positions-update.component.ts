@@ -283,7 +283,7 @@ export class PositionsUpdateComponent implements OnInit {
          this._nav.setTab( 15 );
          this.acordion = 15;
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
-      }, error => {
+         }, error => {
          this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
       } );
    }
@@ -300,7 +300,7 @@ export class PositionsUpdateComponent implements OnInit {
       this.positionsService.updateEstado( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
-      }, error => {
+        }, error => {
          this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
       } );
    }

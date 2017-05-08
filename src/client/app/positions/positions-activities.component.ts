@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/switchMap';
 import { Positions } from '../_models/positions';
 import { PositionsActivities } from '../_models/positionsActivities';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
 import { PositionsService } from '../_services/positions.service';
@@ -13,7 +13,7 @@ import { PositionsService } from '../_services/positions.service';
                providers: [ ConfirmationService ]
             } )
 
-export class PositionActivitiesComponent {
+export class PositionActivitiesComponent implements OnInit{
 
    @Input() position: Positions;
    positionsActivities: PositionsActivities = new PositionsActivities();
@@ -71,7 +71,7 @@ export class PositionActivitiesComponent {
             data.ocupacion = res.ocupacion;
          } );
          this.listPositionsActivities.push( data );
-         this.listActivities = []
+         this.listActivities = [];
          this.positionsService.getListActivities().subscribe( rest => {
             this.listActivities.push( { label: 'Seleccione...', value: null } );
             for ( let dp of rest ) {

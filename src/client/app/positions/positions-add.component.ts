@@ -38,7 +38,7 @@ export class PositionsAddComponent {
       private confirmationService: ConfirmationService ) {
 
       this.positionsService.getListPositions().subscribe( res => {
-         this.bossPositionTypes.push( { label: "Seleccione", value: null } );
+         this.bossPositionTypes.push( { label: 'Seleccione', value: null } );
          for ( let dp of res ) {
             this.bossPositionTypes.push( {
                                             label: dp.cargo,
@@ -51,7 +51,7 @@ export class PositionsAddComponent {
          res.map( ( s: ListaItem ) => this.listStudies.push( { label: s.nombre, value: s.idLista } ) );
       } );
       this.tipoDeAreaService.getlistAreas().subscribe( res => {
-         this.areaTypes.push( { label: "Seleccione", value: null } );
+         this.areaTypes.push( { label: 'Seleccione', value: null } );
          for ( let dp of res ) {
             this.areaTypes.push( {
                                     label: dp.estructuraArea,
@@ -60,13 +60,10 @@ export class PositionsAddComponent {
          }
       } );
 
-      this.listaService.getMasterDetailsByCode( "ListasEstadosCargos", "CONST" ).subscribe( res => {
+      this.listaService.getMasterDetailsByCode( 'ListasEstadosCargos', 'CONST' ).subscribe( res => {
          this.defaultState = res;
       } );
 
-   }
-
-   ngOnInit() {
    }
 
    onSubmit0() {
