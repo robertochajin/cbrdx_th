@@ -124,7 +124,7 @@
                         <input #gb type="text" pInputText size="40" placeholder="Buscar...">
                      </div>
                   </div>
-                  <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="osPositions"
+                  <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="osPositions"
                                [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
                      <p-column field="cargo" header="Cargo" [sortable]="true"></p-column>
                      <p-column header="Salario" [sortable]="true">
@@ -255,7 +255,7 @@
                      <input #pl type="text" pInputText size="40" placeholder="Buscar...">
                   </div>
                </div>
-               <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="postionSlots"
+               <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="postionSlots"
                             [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="pl" #dt>
                   <p-column field="cargo" header="Cargo" [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains">
                   </p-column>

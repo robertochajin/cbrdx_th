@@ -58,8 +58,8 @@
                              pButton (click)="toggleform()"></button>
                   </div>
                </div>
-               <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="ListJobProjection" [paginator]="true" [rows]="10" [responsive]="true"
-                           >
+               <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="ListJobProjection" [paginator]="true" [rows]="10" [responsive]="true"
+                            >
                   <p-column field="cargo" header="Cargo" [sortable]="true"></p-column>
                   <p-column field="plazasActuales" header="Plazas Actuales" [sortable]="true"></p-column>
                   <p-column field="plazasProyectadas" header="Plazas Proyectdas" [sortable]="true"></p-column>

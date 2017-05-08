@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
 import { PositionResponsabilitiesService } from '../_services/position-responsabilities.service';
@@ -14,7 +14,7 @@ import { Message } from 'primeng/components/common/api';
                selector: 'position-responsabilities',
                providers: [ ConfirmationService ]
             } )
-export class PositionResponsabilitiesComponent {
+export class PositionResponsabilitiesComponent implements OnInit {
 
    @Input()
    position: Positions;
@@ -92,6 +92,7 @@ export class PositionResponsabilitiesComponent {
                                                  );
                                               } );
                                            }, reject: () => {
+                                              return;
          }
                                         } );
    }

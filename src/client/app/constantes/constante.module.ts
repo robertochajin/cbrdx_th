@@ -13,7 +13,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { TercerosService } from '../_services/terceros.service';
 @NgModule( {
-              imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule, SharedModule ],
+              imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule,
+                 SharedModule
+              ],
               declarations: [ ConstanteComponent, ConstanteAddComponent, ConstanteEditComponent, ConstanteDetailComponent ],
               bootstrap: [ ConstanteComponent ],
               providers: [ ConstanteService, ListaService, TercerosService ],

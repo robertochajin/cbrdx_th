@@ -448,7 +448,7 @@
 
          <p-accordionTab header="Productividad" [selected]="acordion == 11"
                          [disabled]="step >0 && step <12">
-            <productivity (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></productivity>
+            <productivity-component (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></productivity-component>
          </p-accordionTab>
 
          <p-accordionTab header="Personalidad" [selected]="acordion == 12"

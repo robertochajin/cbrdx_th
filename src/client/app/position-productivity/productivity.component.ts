@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ProductivityService } from '../_services/productivity.service';
 import { SelectItem, ConfirmationService, Message } from 'primeng/primeng';
 import { Productivity } from '../_models/productivity';
@@ -8,7 +8,7 @@ import { Positions } from '../_models/positions';
 @Component( {
                moduleId: module.id,
                templateUrl: 'productivity.component.html',
-               selector: 'productivity',
+               selector: 'productivity-component',
                providers: [ ConfirmationService ]
             } )
 export class ProductivityComponent implements OnInit{
@@ -18,7 +18,7 @@ export class ProductivityComponent implements OnInit{
    ListProductivity: SelectItem[] = [];
    ListIQLevel: SelectItem[] = [];
    ListAptitudeLevel: SelectItem[] = [];
-   header: string = 'Productividad';
+   header = 'Productividad';
    msgs: Message[] = [];
 
    @Output()

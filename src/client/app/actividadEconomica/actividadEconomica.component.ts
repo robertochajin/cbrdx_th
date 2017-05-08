@@ -63,7 +63,8 @@ export class ActividadEconomicaComponent implements OnInit {
                                                     "codigo": '',
                                                     "data": c,
                                                     "children": {}
-                                                 } ]
+                                                 }
+                                                 ]
                                               } );
          }
       } );
@@ -94,7 +95,8 @@ export class ActividadEconomicaComponent implements OnInit {
             "label": '+ Cargando...',
             "level": node.level + 2,
             "codigo": ''
-         } ]
+         }
+         ]
       }
 
       for ( let c of this.listadoActividadEconomica.filter( t => t.idActividadPadre == node.value ) ) {
@@ -203,7 +205,8 @@ export class ActividadEconomicaComponent implements OnInit {
                   "label": '+ Cargando...',
                   "level": this.tabselected + 1,
                   "codigo": ''
-               } ];
+               }
+               ];
 
             } else {
                if ( nivel <= 3 ) {
@@ -212,7 +215,8 @@ export class ActividadEconomicaComponent implements OnInit {
                      "label": '+ Cargando...',
                      "level": this.tabselected + 1,
                      "codigo": ''
-                  } ];
+                  }
+                  ];
                }
             }
 

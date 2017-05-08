@@ -13,7 +13,7 @@ import { ListaItem } from '../_models/listaItem';
 @Component( {
                moduleId: module.id,
                selector: 'positions-form',
-               templateUrl: 'positions-form.component.html',
+               templateUrl: 'positions-add.component.html',
                providers: [ ConfirmationService ]
             } )
 
@@ -111,4 +111,5 @@ export class PositionsAddComponent {
          this.position.personaACargoInd = Number( numeroi.replace( /[^0-9]/g, '' ) );
       }
    }
+
 }

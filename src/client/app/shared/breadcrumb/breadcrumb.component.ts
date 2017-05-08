@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { BreadcrumbService } from './breadcrumb.service';
 
@@ -13,9 +13,9 @@ import { BreadcrumbService } from './breadcrumb.service';
                styleUrls: [ 'breadcrumb.component.css' ],
 
             } )
-export class BreadcrumbComponent implements OnInit, OnChanges {
-   @Input() useBootstrap: boolean = true;
-   @Input() prefix: string = '';
+export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
+   @Input() useBootstrap = true;
+   @Input() prefix = '';
 
    public _urls: string[];
    public _routerSubscription: any;
@@ -34,7 +34,7 @@ export class BreadcrumbComponent implements OnInit, OnChanges {
       this._routerSubscription = this.router.events.subscribe( ( navigationEnd: NavigationEnd ) => {
 
          if ( navigationEnd instanceof NavigationEnd ) {
-            this._urls.length = 0; //Fastest way to clear out array
+            this._urls.length = 0; // Fastest way to clear out array
             this.generateBreadcrumbTrail( navigationEnd.urlAfterRedirects ? navigationEnd.urlAfterRedirects : navigationEnd.url );
          }
       } );
@@ -52,13 +52,14 @@ export class BreadcrumbComponent implements OnInit, OnChanges {
 
    generateBreadcrumbTrail( url: string ): void {
       if ( !this.breadcrumbService.isRouteHidden( url ) ) {
-         //Add url to beginning of array (since the url is being recursively broken down from full url to its parent)
-         //if (this.prefix !== url && url.lastIndexOf('/') !== 0)
+         // Add url to beginning of array (since the url is being recursively broken down from full url to its parent)
+         // if (this.prefix !== url && url.lastIndexOf('/') !== 0)
          this._urls.unshift( url );
       }
 
       if ( url.lastIndexOf( '/' ) > 0 ) {
-         this.generateBreadcrumbTrail( url.substr( 0, url.lastIndexOf( '/' ) ) ); //Find last '/' and add everything before it as a parent route
+         this.generateBreadcrumbTrail( url.substr( 0, url.lastIndexOf( '/' ) ) ); // Find last '/' and add everything before it as a parent
+                                                                                  // route
       } else if ( this.prefix.length > 0 ) {
          this._urls.unshift( this.prefix );
       }

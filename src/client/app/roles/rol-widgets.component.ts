@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Rol } from '../_models/rol';
 import { Widgets } from '../_models/widgets';
@@ -13,7 +13,7 @@ import { RolWidgetsServices } from '../_services/rolWidgets.service';
                selector: 'rol-widges',
                providers: [ ConfirmationService ]
             } )
-export class RolWidgetsComponent {
+export class RolWidgetsComponent implements OnInit {
 
    @Input() rol: Rol;
 
@@ -21,7 +21,7 @@ export class RolWidgetsComponent {
    lfrolWidget: RolWidgets = new RolWidgets();
    dialogObjet: RolWidgets = new RolWidgets();
    rolWidgets: RolWidgets[];
-   show_form: boolean = false;
+   showForm: boolean = false;
    msgs: Message[] = [];
    widgets: SelectItem[] = [];
    listWidgets: Widgets[] = [];
@@ -44,7 +44,7 @@ export class RolWidgetsComponent {
             widgets => {
                this.widgets.unshift( { label: 'Seleccione', value: null } );
                widgets.map( ( s: any ) => {
-                  if ( this.rolWidgets.filter( w => w.idWidget == s.idWidget ).length == 0 ) {
+                  if ( this.rolWidgets.filter( w => w.idWidget === s.idWidget ).length === 0 ) {
                      this.widgets.push( { label: s.widget, value: s.idWidget } );
                   }
                } );
@@ -56,19 +56,19 @@ export class RolWidgetsComponent {
 
    onSubmit() {
       this.msgs = [];
-      this.show_form = false;
+      this.showForm = false;
 
-      if ( this.rolWidget.idRolWidget == null || this.rolWidget.idRolWidget == 0 ) {
+      if ( this.rolWidget.idRolWidget === null || this.rolWidget.idRolWidget === 0 ) {
          this.rolWidget.idRol = this.idRol;
          this.rolWidgetsServices.add( this.rolWidget )
          .subscribe( data => {
-            this.widgets.splice( this.widgets.indexOf( this.widgets.find( m => m.value == this.rolWidget.idWidget ) ), 1 );
+            this.widgets.splice( this.widgets.indexOf( this.widgets.find( m => m.value === this.rolWidget.idWidget ) ), 1 );
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
             this.rolWidgetsServices.getAllByRol( this.idRol ).subscribe(
                rolWidgets => this.rolWidgets = rolWidgets
             );
          }, error => {
-            this.show_form = true;
+            this.showForm = true;
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       } else {
@@ -82,7 +82,7 @@ export class RolWidgetsComponent {
                rolWidgets => this.rolWidgets = rolWidgets
             );
          }, error => {
-            this.show_form = true;
+            this.showForm = true;
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       }
@@ -92,13 +92,13 @@ export class RolWidgetsComponent {
    add() {
       this.msgs = [];
       this.rol = new Rol();
-      this.show_form = true;
+      this.showForm = true;
    }
 
    update( f: RolWidgets ) {
       this.msgs = [];
       this.rolWidget = f;
-      this.show_form = true;
+      this.showForm = true;
       this.isUpdating = true;
       this.widgets.unshift( { label: f.widget, value: f.idWidget } );
 
@@ -106,8 +106,8 @@ export class RolWidgetsComponent {
 
    goBackUpdate() {
       this.msgs = [];
-      this.show_form = false;
-      if ( this.isUpdating == true ) {
+      this.showForm = false;
+      if ( this.isUpdating === true ) {
          this.isUpdating = false
          this.widgets.splice( 0, 1 );
       }

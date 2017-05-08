@@ -29,7 +29,7 @@ export class NavbarComponent implements AfterViewInit {
 
       authService.logoutAnnounced$.subscribe(
          token => {
-            if ( token == null ) {
+            if ( token === null ) {
                this.destroitNav();
             }
          }
@@ -54,21 +54,21 @@ export class NavbarComponent implements AfterViewInit {
                //return a.menu.localeCompare(b.menu);
                return a.secuencia - b.secuencia;
             } );
-            for ( let p of this.listModulos.filter( t => t.idPadre == 0 || t.idPadre == null ) ) {
+            for ( let p of this.listModulos.filter( t => t.idPadre === 0 || t.idPadre === null ) ) {
                let chilNodes: TreeNode[] = [];
-               for ( let c of this.listmenu.filter( t => t.idPadre == p.idMenu ) ) {
+               for ( let c of this.listmenu.filter( t => t.idPadre === p.idMenu ) ) {
 
-                  c.nuevo = (c.clase.search( "new" ) > 0) ? true : false;
+                  c.nuevo = (c.clase.search( 'new' ) > 0) ? true : false;
                   chilNodes.push( {
-                                     "label": c.menu,
-                                     "data": c,
-                                     "parent": p,
+                                     'label': c.menu,
+                                     'data': c,
+                                     'parent': p,
                                   } );
                }
                let companyNode = {
-                  "label": p.menu,
-                  "data": p,
-                  "children": chilNodes,
+                  'label': p.menu,
+                  'data': p,
+                  'children': chilNodes,
                };
                if ( chilNodes.length > 0 ) {
                   this.treeMenu.push( companyNode );

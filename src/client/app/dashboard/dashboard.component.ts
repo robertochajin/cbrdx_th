@@ -151,7 +151,8 @@ export class DashboardComponent implements OnInit {
                      '#90EE90',
                      '#D3D3D3',
                   ]
-               } ]
+               }
+            ]
 
          };
          this.isData = true;
