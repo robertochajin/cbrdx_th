@@ -1,69 +1,68 @@
-import {Component,Input} from '@angular/core';
-import {EmployeeEstate} from '../_models/employee-estate';
-import {EmployeeEstateService} from '../_services/employee-estate.service';
-import {Router} from '@angular/router';
-import {ConfirmationService} from 'primeng/primeng';
+import { Component, Input } from '@angular/core';
+import { EmployeeEstate } from '../_models/employee-estate';
+import { EmployeeEstateService } from '../_services/employee-estate.service';
+import { Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/primeng';
 import { Employee } from '../_models/employees';
 
-@Component({
-  moduleId: module.id,
-  templateUrl: 'employee-estate.component.html',
-  selector: 'employees-estate',
-  providers:  [ConfirmationService]
-})
+@Component( {
+               moduleId: module.id,
+               templateUrl: 'employee-estate.component.html',
+               selector: 'employees-estate',
+               providers: [ ConfirmationService ]
+            } )
 export class EmployeesEstateComponent {
-  @Input() employee:Employee;
-  employeeEstate: EmployeeEstate = new EmployeeEstate();
-  dialogObjet: EmployeeEstate = new EmployeeEstate();
+   @Input() employee: Employee;
+   employeeEstate: EmployeeEstate = new EmployeeEstate();
+   dialogObjet: EmployeeEstate = new EmployeeEstate();
 
-  employeesEstate: EmployeeEstate[];
+   employeesEstate: EmployeeEstate[];
 
-  constructor(
-    private employeesEstateService: EmployeeEstateService,
-    private router: Router,
-    private confirmationService: ConfirmationService
-  ) {
-  }
+   constructor( private employeesEstateService: EmployeeEstateService,
+      private router: Router,
+      private confirmationService: ConfirmationService ) {
+   }
 
-  ngOnInit() {
+   ngOnInit() {
 
-    this.employeesEstateService.getByEmployee(this.employee.idTercero).subscribe(
-      employeesEstate => {
-        this.employeesEstate = employeesEstate;
+      this.employeesEstateService.getByEmployee( this.employee.idTercero ).subscribe(
+         employeesEstate => {
+            this.employeesEstate = employeesEstate;
 
-      }
-    );
+         }
+      );
 
-  }
+   }
 
-  del(employeeEstate: EmployeeEstate) {
+   del( employeeEstate: EmployeeEstate ) {
       this.dialogObjet = employeeEstate;
-      this.confirmationService.confirm({
-        message: `¿Esta seguro que lo desea eliminar?`,
-        header: 'Corfirmación',
-        icon: 'fa fa-question-circle',
-        accept: () => {
-          this.dialogObjet.indicadorHabilitado = false;
-          this.employeesEstateService.update(this.dialogObjet).subscribe( r => {
-            this.employeesEstate.splice(this.employeesEstate.indexOf(this.dialogObjet), 1);
-            this.dialogObjet = null;
-          });
-        },
-        reject: () => {
-          this.dialogObjet = null;
-        }
-      });
-  }
+      this.confirmationService.confirm( {
+                                           message: `¿Esta seguro que lo desea eliminar?`,
+                                           header: 'Corfirmación',
+                                           icon: 'fa fa-question-circle',
+                                           accept: () => {
+                                              this.dialogObjet.indicadorHabilitado = false;
+                                              this.employeesEstateService.update( this.dialogObjet ).subscribe( r => {
+                                                 this.employeesEstate.splice( this.employeesEstate.indexOf( this.dialogObjet ), 1 );
+                                                 this.dialogObjet = null;
+                                              } );
+                                           },
+                                           reject: () => {
+                                              this.dialogObjet = null;
+                                           }
+                                        } );
+   }
 
-  detail(f: EmployeeEstate) {
-    this.router.navigate(['employees-estate/detail/'+f.idTerceroInmueble]);
-  }
+   detail( f: EmployeeEstate ) {
+      this.router.navigate( [ 'employees-estate/detail/' + f.idTerceroInmueble ] );
+   }
 
-  update(c: EmployeeEstate) {
-    this.router.navigate(['employees-estate/update/'+c.idTerceroInmueble]);
-  }
-  add() {
-    this.router.navigate(['employees-estate/add/'+this.employee.idTercero]);
-    //this.router.navigate(['employees-estate/add/'+179 ]);
-  }
+   update( c: EmployeeEstate ) {
+      this.router.navigate( [ 'employees-estate/update/' + c.idTerceroInmueble ] );
+   }
+
+   add() {
+      this.router.navigate( [ 'employees-estate/add/' + this.employee.idTercero ] );
+      //this.router.navigate(['employees-estate/add/'+179 ]);
+   }
 }

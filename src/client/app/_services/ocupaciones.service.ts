@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { Response } from "@angular/http";
-import "rxjs/add/operator/toPromise";
-import { Ocupaciones } from "../_models/ocupaciones";
-import { OcupacionesTipos } from "../_models/ocupacionesTipos";
-import { Search } from "../_models/search";
-import { AuthHttp } from "angular2-jwt";
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+import { Ocupaciones } from '../_models/ocupaciones';
+import { OcupacionesTipos } from '../_models/ocupacionesTipos';
+import { Search } from '../_models/search';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class OcupacionesService {
@@ -14,6 +14,7 @@ export class OcupacionesService {
    private serviceURL = '<%= SVC_TH_URL %>/api/';
 
    constructor( private authHttp: AuthHttp ) {
+
    }
 
    listOcupaciones() {
@@ -21,7 +22,8 @@ export class OcupacionesService {
    }
 
    addOcupaciones( c: Ocupaciones ): Promise<Ocupaciones> {
-      return this.authHttp.post( this.serviceURL_SP, JSON.stringify( c ) ).toPromise().then( res => res.json() as Ocupaciones ).catch( this.handleError );
+      return this.authHttp.post( this.serviceURL_SP, JSON.stringify( c ) ).toPromise().then( res => res.json() as Ocupaciones )
+      .catch( this.handleError );
    };
 
    updateOcupaciones( c: Ocupaciones ): Promise<any> {

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { Responsabilities } from "../_models/responsabilities";
-import { Observable } from "rxjs/Rx";
-import { AuthHttp } from "angular2-jwt";
+import { Responsabilities } from '../_models/responsabilities';
+import { Observable } from 'rxjs/Rx';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class ResponsabilitiesServices {
@@ -18,7 +18,8 @@ export class ResponsabilitiesServices {
    }
 
    getAllEnabledByPosition( idPosition: number ): Observable<Responsabilities[]> {
-      return this.authHttp.get( this.masterService + 'noAsignadas/' + idPosition ).map( ( res: Response ) => res.json() as Responsabilities[] );
+      return this.authHttp.get( this.masterService + 'noAsignadas/' + idPosition )
+      .map( ( res: Response ) => res.json() as Responsabilities[] );
    }
 
 }
