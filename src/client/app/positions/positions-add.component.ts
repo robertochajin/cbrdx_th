@@ -24,7 +24,6 @@ export class PositionsAddComponent {
    bossPositionTypes: SelectItem[] = [];
    listStudies: SelectItem[] = [];
    stateTypes: SelectItem[] = [];
-   disableTabs: boolean = true;
    msgs: Message[] = [];
    defaultState: any;
    step = 1;
@@ -74,7 +73,6 @@ export class PositionsAddComponent {
       this.msgs = [];
       this.position.idEstado = this.defaultState.idLista;
       this.position.paso = 2;
-      //console.info( this.position);
       this.positionsService.add( this.position )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );

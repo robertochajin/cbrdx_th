@@ -59,7 +59,7 @@ export class PositionsUpdateComponent implements OnInit {
 
       this.listPositionsService.getCategoryTypes().subscribe( res => {
          this.listcategoryTypes = res;
-         this.categoryTypes.push( { label: "Seleccione", value: null } );
+         this.categoryTypes.push( { label: 'Seleccione', value: null } );
          for ( let dp of res ) {
             this.categoryTypes.push( {
                                         label: dp.categoria,
@@ -80,7 +80,7 @@ export class PositionsUpdateComponent implements OnInit {
       } );
 
       this.tipoDeAreaService.getlistAreas().subscribe( res => {
-         this.areaTypes.push( { label: "Seleccione", value: null } );
+         this.areaTypes.push( { label: 'Seleccione', value: null } );
          for ( let dp of res ) {
             this.areaTypes.push( {
                                     label: dp.estructuraArea,
@@ -101,13 +101,13 @@ export class PositionsUpdateComponent implements OnInit {
                                      value: dp.idLista
                                   } );
             switch ( dp.codigo ) {
-               case "APROB":
+               case 'APROB':
                   this.aprobado = dp.idLista;
                   break;
-               case "NOAPR":
+               case 'NOAPR':
                   this.noAprobado = dp.idLista;
                   break;
-               case "CONST":
+               case 'CONST':
                   this.construccion = dp.idLista;
                   break;
             }
@@ -133,7 +133,6 @@ export class PositionsUpdateComponent implements OnInit {
          this.positionsService.get( +params[ 'id' ] ).subscribe( position => {
             this.position = position;
             this.step = this.position.paso;
-            //this.step = 3;
             if ( this.step > 0 && this.step < 16 ) {
                if ( this._nav.getTab() > 0 && this._nav.getTab() !== null ) {
                   this.acordion = this._nav.getTab();
@@ -144,7 +143,7 @@ export class PositionsUpdateComponent implements OnInit {
             this.getCategory();
             this.positionsService.getListPositions().subscribe( res => {
                this.allPosition = res;
-               this.bossPositionTypes.push( { label: "Seleccione", value: null } );
+               this.bossPositionTypes.push( { label: 'Seleccione', value: null } );
                for ( let dp of res ) {
                   if ( res.idCargo !== this.position.idCargo ) {
                      this.bossPositionTypes.push( {
@@ -153,7 +152,7 @@ export class PositionsUpdateComponent implements OnInit {
                                                   } );
                   }
                }
-               if ( this.position.indicadorHabilitado == false ) {
+               if ( this.position.indicadorHabilitado === false ) {
                   this.allPosition.push( this.position );
                }
                this.buildParent();
@@ -187,7 +186,7 @@ export class PositionsUpdateComponent implements OnInit {
 
    onSubmit0() {
       this.msgs = [];
-      if ( this.position.paso == 1 ) {
+      if ( this.position.paso === 1 ) {
          this.position.paso = 2;
          this.step = 2;
       }
@@ -197,10 +196,9 @@ export class PositionsUpdateComponent implements OnInit {
          this._nav.setTab( 1 );
          this.acordion = 1;
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
-         //this.router.navigate(['positions/update/'+data.idCargo]);
          this.positionsService.getListPositions().subscribe( res => {
             this.allPosition = res;
-            if ( this.position.indicadorHabilitado == false ) {
+            if ( this.position.indicadorHabilitado === false ) {
                this.allPosition.push( this.position );
             }
             this.buildParent();
@@ -298,10 +296,10 @@ export class PositionsUpdateComponent implements OnInit {
    updateEstado( value: number ) {
       this.msgs = [];
       this.position.idEstado = value;
-      if ( this.position.idEstado == this.aprobado ) {
+      if ( this.position.idEstado === this.aprobado ) {
          this.position.indicadorHabilitado = true;
       }
-      if ( this.position.idEstado == this.noAprobado ) {
+      if ( this.position.idEstado === this.noAprobado ) {
          this.position.indicadorHabilitado = false;
       }
       this.positionsService.updateEstado( this.position )
@@ -331,20 +329,20 @@ export class PositionsUpdateComponent implements OnInit {
 
    buildParent() {
       this.treeArrray = [];
-      for ( let c of this.allPosition.filter( t => t.idCargoJefe == 0 || t.idCargoJefe == null ) ) {
+      for ( let c of this.allPosition.filter( t => t.idCargoJefe === 0 || t.idCargoJefe === null ) ) {
          let node: TreeNode;
          let treeNode: TreeNode[] = [];
 
-         if ( this.allPosition.filter( x => x.idCargoJefe == c.idCargo ).length > 0 ) {
+         if ( this.allPosition.filter( x => x.idCargoJefe === c.idCargo ).length > 0 ) {
             treeNode = this.buildChild( c );
          }
          node = {
-            "label": c.cargo,
-            "children": treeNode,
-            "expanded": true
+            'label': c.cargo,
+            'children': treeNode,
+            'expanded': true
          };
          this.treeArrray.push( node );
-         if ( this.position.idCargo == c.idCargo ) {
+         if ( this.position.idCargo === c.idCargo ) {
             this.selectedNode = node;
          }
 
@@ -354,19 +352,19 @@ export class PositionsUpdateComponent implements OnInit {
    buildChild( dadInfo: Positions ) {
       let treeChild: TreeNode[] = [];
 
-      for ( let p of this.allPosition.filter( x => x.idCargoJefe == dadInfo.idCargo ) ) {
+      for ( let p of this.allPosition.filter( x => x.idCargoJefe === dadInfo.idCargo ) ) {
          let node: TreeNode = [];
          let treeNode: TreeNode[] = [];
-         if ( this.allPosition.filter( y => y.idCargoJefe == p.idCargo ).length > 0 ) {
+         if ( this.allPosition.filter( y => y.idCargoJefe === p.idCargo ).length > 0 ) {
             treeNode = this.buildChild( p );
          }
          node = {
-            "label": p.cargo,
-            "children": treeNode,
-            "expanded": treeNode.length > 0 ? true : false
-         }
+            'label': p.cargo,
+            'children': treeNode,
+            'expanded': treeNode.length > 0 ? true : false
+         };
          treeChild.push( node );
-         if ( this.position.idCargo == p.idCargo ) {
+         if ( this.position.idCargo === p.idCargo ) {
             this.selectedNode = node;
          }
       }
@@ -391,7 +389,7 @@ export class PositionsUpdateComponent implements OnInit {
          rest => {
             let contador = 0;
             for ( let r of rest ) {
-               if ( r.indicadorHabilitado == true ) {
+               if ( r.indicadorHabilitado === true ) {
                   contador++;
                }
             }
