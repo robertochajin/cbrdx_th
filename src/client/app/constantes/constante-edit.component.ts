@@ -56,7 +56,7 @@ export class ConstanteEditComponent implements OnInit {
 
    alterPattern() {
       this.inputValue();
-      let dataType = this.constantType.find(t => t.idListaTipoDato == this.constant.idTipoDato);
+      let dataType = this.constantType.find(t => t.idLista == this.constant.idTipoDato);
       if (dataType.codigo == "NUM") {
          this.regex = "[0-9]{0,20}";
       } else {
@@ -72,7 +72,7 @@ export class ConstanteEditComponent implements OnInit {
    inputValue() {
       let label = this.constant.valor;
       if (label != "" && label != null && this.constant.idTipoDato != null) {
-         let dataType = this.constantType.find(t => t.idListaTipoDato == this.constant.idTipoDato);
+         let dataType = this.constantType.find(t => t.idLista == this.constant.idTipoDato);
          if (dataType.codigo === "NUM") {
             this.constant.valor = this.constant.valor.replace(/[^0-9]/g, '');
          } else {
