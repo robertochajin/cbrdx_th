@@ -23,7 +23,7 @@ export class ToolbarComponent {
       elementRef: ElementRef ) {
       let token = localStorage.getItem( 'token' );
 
-      if ( token !== null ){
+      if ( token !== null ) {
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
       }
 

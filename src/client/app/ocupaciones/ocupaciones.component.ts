@@ -64,7 +64,8 @@ export class OcupacionesComponent implements OnInit {
                                              "level": 2,
                                              "codigo": '',
                                              "children": {}
-                                          } ]
+                                          }
+                                          ]
                                        } );
          }
 
@@ -95,7 +96,8 @@ export class OcupacionesComponent implements OnInit {
             "label": '+ Cargando...',
             "level": node.level + 2,
             "codigo": '',
-         } ]
+         }
+         ]
       }
       for ( let c of this.listadoOcupaciones.filter( t => t.idOcupacionPadre == node.value ) ) {
          ocupacionesNivel.push( {
@@ -189,7 +191,8 @@ export class OcupacionesComponent implements OnInit {
                   "label": '+ Cargando...',
                   "level": this.tabselected + 1,
                   "codigo": ''
-               } ]
+               }
+               ]
             }
             let newChil: any = {
                "label": this.ocupaciones.ocupacion,
@@ -423,7 +426,8 @@ export class OcupacionesComponent implements OnInit {
             "label": '+ Cargando...',
             "level": node.level + 2,
             "codigo": ''
-         } ]
+         }
+         ]
       }
       for ( let c of this.listadoOcupaciones.filter( t => t.idOcupacionPadre == node.value ) ) {
          ocupacionesNivel.push( {

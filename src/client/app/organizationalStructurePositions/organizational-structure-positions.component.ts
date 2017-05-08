@@ -79,7 +79,9 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
          dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
          dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
          dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
-         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre' ],
+         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre',
+            'diciembre'
+         ],
          monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
 
@@ -273,7 +275,8 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
                                            accept: () => {
                                               if ( this.backUpOSPosition !== null ) {
                                                  //Verificar si es necesario reestablecer el objeto en la tabla
-                                                 // this.osPositions[this.osPositions.indexOf(this.backUpOSPosition)] = this.backUpOSPosition;
+                                                 // this.osPositions[this.osPositions.indexOf(this.backUpOSPosition)] =
+                                                 // this.backUpOSPosition;
                                                  this.backUpOSPosition = null;
                                               }
                                               this.editingPosition = false;

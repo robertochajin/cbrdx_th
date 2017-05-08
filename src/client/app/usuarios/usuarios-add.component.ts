@@ -80,7 +80,7 @@ export class UsuariosAddComponent {
 
    changeEvent( event?: any ) {
       this.documentCleanUp( event.target.value );
-      if ( event.keyCode===13 ) {
+      if ( event.keyCode === 13 ) {
          this.findPerson();
       } else {
          this.limpiarValidaciones();

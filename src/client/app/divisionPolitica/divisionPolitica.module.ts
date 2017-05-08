@@ -16,7 +16,8 @@ import { SharedModule } from '../shared/shared.module';
 import { AutoCompleteModule } from 'primeng/components/autocomplete/autocomplete';
 
 @NgModule( {
-              imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule, CalendarModule, TreeModule, TabViewModule, DropdownModule, SharedModule,
+              imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule,
+                 CalendarModule, TreeModule, TabViewModule, DropdownModule, SharedModule,
                  FieldsetModule,
                  GrowlModule,
                  AutoCompleteModule

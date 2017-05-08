@@ -145,8 +145,7 @@ export class RiskComponent {
                                               this.guardando = true;
 
                                               if ( this.listRisks.filter(
-                                                    r => r.idRiesgo == this.risk.idRiesgo && r.idCargo == this.risk.idCargo ).length > 0 )
-                                              {
+                                                    r => r.idRiesgo == this.risk.idRiesgo && r.idCargo == this.risk.idCargo ).length > 0 ) {
                                                  this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'El riesgo ya existe!' };
                                                  this.guardando = false;
                                               } else {

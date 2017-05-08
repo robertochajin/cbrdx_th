@@ -535,14 +535,16 @@ export let fakeBackendProvider = {
          { 'value': 103, 'label': 'Floridablanca - Cesar - Colombia' },
          { 'value': 104, 'label': 'Bucaramanga - Santander - Colombia' },
          { 'value': 105, 'label': 'Bogota - Cundinamarca - Colombia' },
-         { 'value': 106, 'label': 'Cartagena - Bolivar - Colombia' }, ];
+         { 'value': 106, 'label': 'Cartagena - Bolivar - Colombia' },
+      ];
 
       let institutes: any[] = [ { 'value': 101, 'label': 'Bogota Universidad Nacional' },
          { 'value': 102, 'label': 'Bucaramanga Universidad Nacional' },
          { 'value': 103, 'label': 'Medellin Universidad Nacional' },
          { 'value': 104, 'label': 'Cali Universidad Nacional' },
          { 'value': 105, 'label': 'Pasto Universidad Nacional' },
-         { 'value': 106, 'label': 'Barranquilla Universidad Nacional' } ];
+         { 'value': 106, 'label': 'Barranquilla Universidad Nacional' }
+      ];
 
       let documentTypes: any[] = [
          { 'value': null, 'label': "Seleccione" },
@@ -604,8 +606,8 @@ export let fakeBackendProvider = {
 
             // obtiene un colaborador por el id
             if ( connection.request.url.match( /\/api\/employees\/\d+$/ ) && connection.request.method === RequestMethod.Get ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-               // find user by id in users array
+               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               // application find user by id in users array
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matchedUsers = employees.filter( employee => {
@@ -638,8 +640,8 @@ export let fakeBackendProvider = {
 
             // actualizar un colaborador
             if ( connection.request.url.match( /\/api\/employees\/\d+$/ ) && connection.request.method === RequestMethod.Put ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-               // find user by id in users array
+               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               // application find user by id in users array
                let updColaborador = JSON.parse( connection.request.getBody() );
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
@@ -692,8 +694,8 @@ export let fakeBackendProvider = {
 
             // obtiene un Ubicacion por el id
             if ( connection.request.url.match( /\/api\/employees-location\/\d+$/ ) && connection.request.method === RequestMethod.Get ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-               // find user by id in users array
+               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               // application find user by id in users array
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matched = locations.filter( location => {
@@ -735,8 +737,8 @@ export let fakeBackendProvider = {
 
             // actualizar un Ubicacion
             if ( connection.request.url.match( /\/api\/employees-location\/\d+$/ ) && connection.request.method === RequestMethod.Put ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-               // find user by id in users array
+               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               // application find user by id in users array
                let newlocation = JSON.parse( connection.request.getBody() );
 
                let matchedAddressType = addressTypeList.filter( rel => {
@@ -786,8 +788,8 @@ export let fakeBackendProvider = {
 
             // obtiene un listado de ciudades filtrado por el query
             if ( connection.request.url.match( /\/api\/cities\/s\/\w+/ ) && connection.request.method === RequestMethod.Get ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-               // find user by id in users array
+               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               // application find user by id in users array
                let urlParts = connection.request.url.split( '/' );
                let qr = urlParts[ urlParts.length - 1 ];
                let matched = cities.filter( cities => {
@@ -839,8 +841,7 @@ export let fakeBackendProvider = {
 
             // obtiene el listado de familiares
             if ( connection.request.url.endsWith(
-                  '/api/employees-family-information' ) && connection.request.method === RequestMethod.Get )
-            {
+                  '/api/employees-family-information' ) && connection.request.method === RequestMethod.Get ) {
 
                connection.mockRespond( new Response( new ResponseOptions( {
                   status: 200,
@@ -851,10 +852,9 @@ export let fakeBackendProvider = {
 
             // obtiene un familiar por el id
             if ( connection.request.url.match(
-                  /\/api\/employees-family-information\/\d+$/ ) && connection.request.method === RequestMethod.Get )
-            {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-               // find user by id in users array
+                  /\/api\/employees-family-information\/\d+$/ ) && connection.request.method === RequestMethod.Get ) {
+               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               // application find user by id in users array
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matched = familys.filter( family => {
@@ -871,8 +871,7 @@ export let fakeBackendProvider = {
 
             // crea un familiar en el local
             if ( connection.request.url.endsWith(
-                  '/api/employees-family-information' ) && connection.request.method === RequestMethod.Post )
-            {
+                  '/api/employees-family-information' ) && connection.request.method === RequestMethod.Post ) {
                // get new user object from post body
                let newFamily = JSON.parse( connection.request.getBody() );
 
@@ -899,10 +898,9 @@ export let fakeBackendProvider = {
 
             // actualizar un familiar
             if ( connection.request.url.match(
-                  /\/api\/employees-family-information\/\d+$/ ) && connection.request.method === RequestMethod.Put )
-            {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-               // find user by id in users array
+                  /\/api\/employees-family-information\/\d+$/ ) && connection.request.method === RequestMethod.Put ) {
+               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               // application find user by id in users array
                let newFamily = JSON.parse( connection.request.getBody() );
 
                let matchedTypes = documentTypes.filter( types => {
@@ -935,8 +933,7 @@ export let fakeBackendProvider = {
 
             // elimina un familiar del localstorage
             if ( connection.request.url.match(
-                  /\/api\/employees-family-information\/\d+$/ ) && connection.request.method === RequestMethod.Delete )
-            {
+                  /\/api\/employees-family-information\/\d+$/ ) && connection.request.method === RequestMethod.Delete ) {
 
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
@@ -967,8 +964,8 @@ export let fakeBackendProvider = {
 
             // obtiene una referencia por el id
             if ( connection.request.url.match( /\/api\/references\/\d+$/ ) && connection.request.method === RequestMethod.Get ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-               // find user by id in users array
+               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               // application find user by id in users array
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matched = references.filter( reference => {
@@ -1007,8 +1004,8 @@ export let fakeBackendProvider = {
 
             // actualizar una referencia
             if ( connection.request.url.match( /\/api\/references\/\d+$/ ) && connection.request.method === RequestMethod.Put ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-               // find user by id in users array
+               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               // application find user by id in users array
                let newReference = JSON.parse( connection.request.getBody() );
                let matchedreferencesType = referencesTypeList.filter( rel => {
                   return rel.value == newReference.tipodeReferencia.value;
@@ -1106,8 +1103,8 @@ export let fakeBackendProvider = {
 
             // obtiene un listado de instituciones filtrado por el query
             if ( connection.request.url.match( /\/api\/institute\/s\/\w+/ ) && connection.request.method === RequestMethod.Get ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-               // find user by id in users array
+               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               // application find user by id in users array
                let urlParts = connection.request.url.split( '/' );
                let qr = urlParts[ urlParts.length - 1 ];
                let matched = institutes.filter( institude => {
@@ -1136,8 +1133,8 @@ export let fakeBackendProvider = {
 
             // obtiene una  por el id
             if ( connection.request.url.match( /\/api\/formalstudies\/\d+$/ ) && connection.request.method === RequestMethod.Get ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-               // find user by id in users array
+               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               // application find user by id in users array
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matched = fstudies.filter( fstudy => {
@@ -1175,8 +1172,8 @@ export let fakeBackendProvider = {
 
             // actualizar una
             if ( connection.request.url.match( /\/api\/formalstudies\/\d+$/ ) && connection.request.method === RequestMethod.Put ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-               // find user by id in users array
+               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               // application find user by id in users array
                let news = JSON.parse( connection.request.getBody() );
                news.nombreCompleto = news.primerNombre + ' ' + news.segundoNombre + ' ' + news.primerApellido + ' ' + news.segundoApellido;
                let urlParts = connection.request.url.split( '/' );
@@ -1230,8 +1227,8 @@ export let fakeBackendProvider = {
 
             // obtiene una  por el id
             if ( connection.request.url.match( /\/api\/noformalstudies\/\d+$/ ) && connection.request.method === RequestMethod.Get ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-               // find user by id in users array
+               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               // application find user by id in users array
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matched = nfstudies.filter( fstudy => {
@@ -1270,8 +1267,8 @@ export let fakeBackendProvider = {
 
             // actualizar una
             if ( connection.request.url.match( /\/api\/noformalstudies\/\d+$/ ) && connection.request.method === RequestMethod.Put ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-               // find user by id in users array
+               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               // application find user by id in users array
                let news = JSON.parse( connection.request.getBody() );
                news.nombreCompleto = news.primerNombre + ' ' + news.segundoNombre + ' ' + news.primerApellido + ' ' + news.segundoApellido;
                let urlParts = connection.request.url.split( '/' );
@@ -1325,8 +1322,8 @@ export let fakeBackendProvider = {
 
             // obtiene una  por el id
             if ( connection.request.url.match( /\/api\/workexperience\/\d+$/ ) && connection.request.method === RequestMethod.Get ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-               // find user by id in users array
+               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               // application find user by id in users array
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matched = experiences.filter( experience => {
@@ -1360,8 +1357,8 @@ export let fakeBackendProvider = {
 
             // actualizar una
             if ( connection.request.url.match( /\/api\/workexperience\/\d+$/ ) && connection.request.method === RequestMethod.Put ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-               // find user by id in users array
+               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               // application find user by id in users array
                let news = JSON.parse( connection.request.getBody() );
                //news.nombreCompleto = news.primerNombre+' '+news.segundoNombre+' '+news.primerApellido+' '+news.segundoApellido;
                let urlParts = connection.request.url.split( '/' );

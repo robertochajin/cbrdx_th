@@ -33,12 +33,17 @@ import {
                  InputMaskModule,
                  LocationsModule,
               ],
-              declarations: [ PhysicStructureComponent, PhysicStructureAddComponent, PhysicStructureDetailComponent, PhysicStructureUpdateComponent
+              declarations: [ PhysicStructureComponent, PhysicStructureAddComponent, PhysicStructureDetailComponent,
+                 PhysicStructureUpdateComponent
 
               ],
-              bootstrap: [ PhysicStructureComponent, PhysicStructureAddComponent, PhysicStructureDetailComponent, PhysicStructureUpdateComponent ],
+              bootstrap: [ PhysicStructureComponent, PhysicStructureAddComponent, PhysicStructureDetailComponent,
+                 PhysicStructureUpdateComponent
+              ],
               providers: [ PhysicStructureService ],
-              exports: [ PhysicStructureComponent, PhysicStructureAddComponent, PhysicStructureDetailComponent, PhysicStructureUpdateComponent ]
+              exports: [ PhysicStructureComponent, PhysicStructureAddComponent, PhysicStructureDetailComponent,
+                 PhysicStructureUpdateComponent
+              ]
            } )
 export class PhysicStructureModule {
 }

@@ -15,7 +15,9 @@ import 'rxjs/add/operator/switchMap';
  */
 
 @NgModule( {
-              imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule, CalendarModule, SharedModule ],
+              imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule,
+                 CalendarModule, SharedModule
+              ],
               declarations: [ CentroCostosComponent, CentroCostosAddComponent, CentroCostosEditComponent, CentroCostosDetailComponent ],
               bootstrap: [ CentroCostosComponent ],
               providers: [ CentroCostosService ],
