@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Risks } from '../_models/risks';
 import { RisksService } from '../_services/risks.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -12,14 +12,14 @@ import { Location } from '@angular/common';
                providers: [ ConfirmationService ]
             } )
 
-export class RisksUpdateComponent {
+export class RisksUpdateComponent implements OnInit {
 
    risk: Risks = new Risks();
    risks: Risks[] = [];
    listTypeService: SelectItem[] = [];
    listTypeRisks: SelectItem[] = [];
    listSubTypeRisks: SelectItem[] = [];
-   header: string = 'Agregando Riesgo';
+   header = 'Agregando Riesgo';
    dialogObjet: Risks = new Risks();
    habilitado: boolean;
    msgs: Message[] = [];

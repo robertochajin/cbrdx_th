@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { RolFuncionalities } from '../_models/rolFuncionalities';
@@ -14,7 +14,7 @@ import { Message, ConfirmationService } from 'primeng/primeng';
                selector: 'rol-fucionalities-config',
                providers: [ ConfirmationService ]
             } )
-export class RolFuncionalitiesConfigComponent {
+export class RolFuncionalitiesConfigComponent implements OnInit {
 
    rolFuncionality: RolFuncionalities;
    listaFuncionalityControl: RolFunctionalityControl[];
@@ -42,7 +42,7 @@ export class RolFuncionalitiesConfigComponent {
                this.formManagerService.getFuncionalidadesControlesEnabled().subscribe(
                   lfControles => {
                      this.lfControles = lfControles;
-                     this.cosntrucObj()
+                     this.cosntrucObj();
                   }
                );
             } );
@@ -60,7 +60,7 @@ export class RolFuncionalitiesConfigComponent {
       if ( fc.idRolFuncionalidadControl == null ) {
          this.rolFuncionalitiesService.addControl( fc ).subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
-            fc.idRolFuncionalidadControl = data.idRolFuncionalidadControl
+            fc.idRolFuncionalidadControl = data.idRolFuncionalidadControl;
          }, error => {
             this.show_form = true;
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
@@ -79,7 +79,7 @@ export class RolFuncionalitiesConfigComponent {
       this.lfControles.map( ( s: any ) => {
          this.fControles = new RolFunctionalityControl();
          if ( this.listaFuncionalityControl.find( d => d.idFuncionalidadControl == s.idFuncionalidadControl ) ) {
-            this.fControles = this.listaFuncionalityControl.find( d => d.idFuncionalidadControl = s.idFuncionalidadControl )
+            this.fControles = this.listaFuncionalityControl.find( d => d.idFuncionalidadControl = s.idFuncionalidadControl );
             this.fControles.codigo = s.codigo;
          } else {
             this.fControles.idRolFuncionalidadControl = null;
