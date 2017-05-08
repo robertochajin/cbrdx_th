@@ -2,7 +2,7 @@ import 'rxjs/add/operator/switchMap';
 import { Absence } from '../_models/position-absence';
 import { Positions } from '../_models/positions';
 import { AbsenceService } from '../_services/position-absence.service';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
 
@@ -13,7 +13,7 @@ import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
                providers: [ ConfirmationService ]
             } )
 
-export class AbsenceComponent {
+export class AbsenceComponent implements OnInit{
 
    @Input()
    position: Positions;

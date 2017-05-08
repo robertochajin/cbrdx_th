@@ -29,15 +29,15 @@ export class OrganizationalStructureComponent implements OnInit {
 
    treedCompany: TreeNode[] = [];
    selectedNode: TreeNode;
-   empresa: boolean = true;
-   btnEmpresa: boolean = true;
+   empresa = true;
+   btnEmpresa = true;
    header: string;
-   displayDialog: boolean = false;
-   codeExists: boolean = false;
-   documentExists: boolean = false;
+   displayDialog= false;
+   codeExists = false;
+   documentExists = false;
    empty: string;
-   addinglocation: boolean = true;
-   guardando: boolean = false;
+   addinglocation = true;
+   guardando = false;
    localizacion: Localizaciones = new Localizaciones();
 
    constructor( private router: Router,
