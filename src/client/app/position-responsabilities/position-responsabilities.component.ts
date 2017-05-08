@@ -21,7 +21,7 @@ export class PositionResponsabilitiesComponent {
    responsabilities: SelectItem[] = [];
    tr: PositionResponsabilities = new PositionResponsabilities();
    positionResponsabilities: PositionResponsabilities [] = [];
-   guardando: boolean = false;
+   guardando = false;
    msgsAlert: Message[] = [];
 
    @Output()

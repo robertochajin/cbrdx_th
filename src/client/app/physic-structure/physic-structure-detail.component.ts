@@ -25,8 +25,8 @@ export class PhysicStructureDetailComponent {
       route.params.switchMap( ( params: Params ) => physicStructureService.getById( +params[ 'id' ] ) )
       .subscribe( data => {
          this.physicStructure = data;
-         this.habilitado = data.indicadorHabilitado ? "Si" : "No";
-         this.virtual = data.indicadorVirtual ? "Si" : "No";
+         this.habilitado = data.indicadorHabilitado ? 'Si' : 'No';
+         this.virtual = data.indicadorVirtual ? 'Si' : 'No';
       } );
    }
 

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/primeng';
 import { Positions } from '../_models/positions';
@@ -14,8 +14,7 @@ import { ListaService } from '../_services/lista.service';
                selector: 'position-roles',
                providers: [ ConfirmationService ]
             } )
-export class PositionRolesComponent {
-
+export class PositionRolesComponent implements OnInit{
    @Input()
    position: Positions;
    processRoles: ProcessRoles[] = [];
@@ -40,7 +39,7 @@ export class PositionRolesComponent {
             this.positionRoles = prs;
             this.processRoles.map( ( r: ProcessRoles ) => {
                this.positionRoles.map( ( pr: PositionRoles ) => {
-                  if ( pr.idRolProceso == r.idLista ) {
+                  if ( pr.idRolProceso === r.idLista ) {
                      r.asignadoAlCargo = true;
                   }
                } );
@@ -51,25 +50,25 @@ export class PositionRolesComponent {
 
    updateProcessRol( rol: ProcessRoles ) {
       this.msgsAlert = [];
-      let objUpdate = this.positionRoles.find( s => rol.idLista == s.idRolProceso );
+      let objUpdate = this.positionRoles.find( s => rol.idLista === s.idRolProceso );
       if ( objUpdate !== undefined ) {
-         //Update the existing one
+         // Update the existing one
          objUpdate.indicadorHabilitado = rol.asignadoAlCargo;
          let num = 0;
          for ( let elemento of this.processRoles ) {
             if ( elemento.asignadoAlCargo )
                num++;
          }
-         if ( num == 0 && objUpdate.indicadorHabilitado == false ) {
+         if ( num === 0 && objUpdate.indicadorHabilitado === false ) {
             this.msgsAlert[ 0 ] = { severity: 'alert', summary: 'Error', detail: 'Debe seleccional al menos un rol' };
             objUpdate.indicadorHabilitado = true;
          } else {
             this.positionRolesServices.update( objUpdate ).subscribe( data => {
-               //Enviar mensaje de guardado correcto
+               // Enviar mensaje de guardado correcto
             } );
          }
       } else {
-         //Add new record to PotitionRoles
+         // Add new record to PotitionRoles
          let objAdd: PositionRoles = new PositionRoles();
          objAdd.idRolProceso = rol.idLista;
          objAdd.idCargo = this.position.idCargo;
@@ -98,12 +97,8 @@ export class PositionRolesComponent {
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               r.indicadorHabilitado = false;
-                                              this.positionRolesServices.update( r ).subscribe( res => {
-
-                                              } );
-                                           }, reject: () => {
-         }
-                                        } );
+                                              this.positionRolesServices.update( r ).subscribe( );
+                                           }, reject: () => {}} );
    }
 
    next() {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Positions } from '../_models/positions';
 import { PositionsService } from '../_services/positions.service';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { ConfirmationService } from 'primeng/primeng';
                providers: [ ConfirmationService ]
             } )
 
-export class PositionsComponent {
+export class PositionsComponent implements OnInit {
 
    position: Positions = new Positions();
    positions: Positions[];

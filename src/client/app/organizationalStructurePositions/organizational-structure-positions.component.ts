@@ -23,10 +23,10 @@ import { ListaService } from '../_services/lista.service';
 
 export class OrganizationalStructurePositionsComponent implements OnInit {
 
-   private editingPosition: boolean = false;
-   private editingPerson: boolean = false;
-   private badPostion: boolean = false;
-   private positionRepeated: boolean = false;
+   private editingPosition = false;
+   private editingPerson = false;
+   private badPostion = false;
+   private positionRepeated = false;
    private countSlots: number = 0;
    private countCost: number = 0;
    private area: OrganizationalStructure = new OrganizationalStructure();
@@ -60,12 +60,12 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
 
       organizationalStructureService.getAllEnabled().subscribe( res => {
          this.listOrganizationalStructure = res;
-         for ( let c of this.listOrganizationalStructure.filter( t => t.idPadre == 0 || t.idPadre == null ) ) {
+         for ( let c of this.listOrganizationalStructure.filter( t => t.idPadre === 0 || t.idPadre === null ) ) {
             let companyNode = {
-               "label": c.nombre,
-               "data": c,
-               "leaf": false,
-               "expanded": true
+               'label': c.nombre,
+               'data': c,
+               'leaf': false,
+               'expanded': true
             };
             this.treedCompany.push( companyNode );
             this.nodeExpand( companyNode );
@@ -79,9 +79,8 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
          dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
          dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
          dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
-         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre',
-            'diciembre'
-         ],
+         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre',
+            'octubre', 'noviembre', 'diciembre' ],
          monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
 
@@ -105,11 +104,11 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
       let chilNodes: TreeNode[] = [];
       for ( let c of this.listOrganizationalStructure.filter( t => t.idPadre == node.data.idEstructuraOrganizacional ) ) {
          chilNodes.push( {
-                            "label": c.nombre,
-                            "data": c,
-                            "parent": node,
-                            "leaf": false,
-                            "children": []
+                            'label': c.nombre,
+                            'data': c,
+                            'parent': node,
+                            'leaf': false,
+                            'children': []
                          } );
       }
       node.children = chilNodes;
@@ -244,7 +243,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
 
          let fi: moment.Moment = moment( this.personsPosition.asignadoDesde, 'MM/DD/YYYY' );
          this.personsPosition.asignadoDesde = fi.add( 2, 'days' ).format( 'YYYY-MM-DD' );
-         if ( this.personsPosition.idTerceroCargo == null ) {
+         if ( this.personsPosition.idTerceroCargo === null ) {
             this.personPositionService.add( this.personsPosition ).subscribe( res => {
                res.nombreCompleto = this.selectedEmployee.nombreCompleto;
                res.cargo = this.personsPosition.cargo;
@@ -274,9 +273,6 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               if ( this.backUpOSPosition !== null ) {
-                                                 //Verificar si es necesario reestablecer el objeto en la tabla
-                                                 // this.osPositions[this.osPositions.indexOf(this.backUpOSPosition)] =
-                                                 // this.backUpOSPosition;
                                                  this.backUpOSPosition = null;
                                               }
                                               this.editingPosition = false;
@@ -311,7 +307,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    }
 
    handleChangeTab( index: number ) {
-      if ( index == 1 ) {
+      if ( index === 1 ) {
          this.postionSlots = [];
          for ( let osp of this.osPositions ) {
             this.addSlots( osp.idCargo, osp.cargo, osp.idEstructuraOrganizacionalCargo, osp.plazas );
@@ -378,7 +374,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    }
 
    assingPerson( person: PersonPositions, index: number = null ) {
-      if ( index == null )
+      if ( index === null )
          index = this.postionSlots.findIndex( ps => (ps.idCargo == person.idCargo && ps.idTercero == 0) );
       if ( index !== -1 )
          this.postionSlots[ index ] = person;
@@ -387,12 +383,14 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    confirmStructure() {
       //actualizar la estructura
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que confirmar esta planta? Después de confirmar no podrá hacer modificaciones sobre los cargos`,
+                                           message: ` ¿Esta seguro que confirmar esta planta? Después de confirmar no 
+                                           podrá hacer modificaciones sobre los cargos`,
                                            header: 'Corfirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.area.indicadorPlantaConfirmada = true;
-                                              this.organizationalStructureService.updateOrganizationalStructure( this.area )
+                                              this.organizationalStructureService
+                                                 .updateOrganizationalStructure( this.area )
                                               .then( ( r: any ) => {
                                                  if ( !r.ok ) {
                                                     this.area.indicadorPlantaConfirmada = true;

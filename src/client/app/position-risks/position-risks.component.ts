@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/switchMap';
 import { Risk } from '../_models/position-risks';
 import { RiskService } from '../_services/positios-risks.service';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Exam } from '../_models/position-exam';
 import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
@@ -15,7 +15,7 @@ import { ListaService } from '../_services/lista.service';
                selector: 'position-risks',
                providers: [ ConfirmationService ]
             } )
-export class RiskComponent {
+export class RiskComponent implements OnInit{
 
    @Input()
    position: Positions;
@@ -24,11 +24,11 @@ export class RiskComponent {
    @Output()
    nextStep: EventEmitter<number> = new EventEmitter<number>();
 
-   header: string = 'Riesgos Laborales';
+   header = 'Riesgos Laborales';
    risk: Risk = new Risk();
    exam: Exam = new Exam();
    dialogObjet: Risk = new Risk();
-   show_form: boolean = true;
+   show_form = true;
    msgs: Message[] = [];
    listRisk: Risk[] = [];
    listRisks: Risk[] = [];
@@ -43,7 +43,7 @@ export class RiskComponent {
    PositionExam: Exam[];
    idTypeRisk: string;
    idSubtypeRisk: string;
-   guardando: boolean = false;
+   guardando = false;
    msgsAlert: Message[] = [];
 
    constructor( private riskService: RiskService,
@@ -54,7 +54,7 @@ export class RiskComponent {
 
       this.riskService.getTypeRisk().subscribe( rest => {
          this.allTipoRiesgos = rest;
-         this.listTipoRiesgos.push( { label: "Seleccione", value: null } );
+         this.listTipoRiesgos.push( { label: 'Seleccione', value: null } );
          for ( let dp of rest ) {
             this.listTipoRiesgos.push( {
                                           label: dp.riesgoTipo,
@@ -145,7 +145,8 @@ export class RiskComponent {
                                               this.guardando = true;
 
                                               if ( this.listRisks.filter(
-                                                    r => r.idRiesgo == this.risk.idRiesgo && r.idCargo == this.risk.idCargo ).length > 0 ) {
+                                                    r => r.idRiesgo === this.risk.idRiesgo && r.idCargo === this.risk.idCargo ).length > 0 )
+                                              {
                                                  this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'El riesgo ya existe!' };
                                                  this.guardando = false;
                                               } else {
@@ -157,10 +158,10 @@ export class RiskComponent {
                                                        summary: 'Exito',
                                                        detail: 'Registro guardado correctamente.'
                                                     };
-                                                    let riesgo = this.allRiesgo.find( s1 => s1.idRiesgo == this.risk.idRiesgo );
-                                                    let tipo = this.allTipoRiesgos.find( s2 => s2.idRiesgoTipo == riesgo.idTipoRiesgo )
+                                                    let riesgo = this.allRiesgo.find( s1 => s1.idRiesgo === this.risk.idRiesgo );
+                                                    let tipo = this.allTipoRiesgos.find( s2 => s2.idRiesgoTipo === riesgo.idTipoRiesgo );
                                                     let subtipo = this.allSubtipoRiesgo.find(
-                                                       s2 => s2.idRiesgoSubTipo == riesgo.idSubTipoRiesgo )
+                                                       s2 => s2.idRiesgoSubTipo === riesgo.idSubTipoRiesgo );
                                                     this.risk.riesgo = riesgo.riesgo ? riesgo.riesgo : '';
                                                     this.risk.tipo = tipo.riesgoTipo ? riesgo.riesgoTipo : '';
                                                     this.risk.subtipo = subtipo.riesgoSubTipo ? riesgo.riesgoSubTipo : '';
@@ -183,7 +184,7 @@ export class RiskComponent {
       this.listRiesgo = [];
       this.risk.idRiesgo = null;
       this.idSubtypeRisk = null;
-      this.listSubtipoRiesgo.push( { label: "Seleccione", value: null } );
+      this.listSubtipoRiesgo.push( { label: 'Seleccione', value: null } );
       for ( let dp of this.allSubtipoRiesgo ) {
          if ( dp.idRiesgoTipo === this.idTypeRisk ) {
             this.listSubtipoRiesgo.push( {
@@ -197,7 +198,7 @@ export class RiskComponent {
    changeSubtype() {
       this.listRiesgo = [];
       this.risk.idRiesgo = null;
-      this.listRiesgo.push( { label: "Seleccione", value: null } );
+      this.listRiesgo.push( { label: 'Seleccione', value: null } );
       this.riskService.getRiskByIdCargo( this.risk.idCargo ).subscribe(
          risk => {
             for ( let dp of this.allRiesgo ) {
@@ -238,7 +239,7 @@ export class RiskComponent {
          }, error => {
             this.show_form = true;
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
-         } )
+         } );
       } else {
          e.idCargo = this.exam.idCargo;
          this.riskService.addPositionExam( e )
