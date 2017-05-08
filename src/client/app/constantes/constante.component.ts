@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component( {
                moduleId: module.id,
                templateUrl: 'constante.component.html',
-               selector: 'constante'
+               selector: 'constante-list'
             } )
 export class ConstanteComponent implements OnInit {
 

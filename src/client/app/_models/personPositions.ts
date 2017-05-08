@@ -14,7 +14,7 @@ export class PersonPositions {
    idEstructuraOrganizacionalCargo: number;
    asignadoDesde: string;
 
-   //Atributos auxiliares
+   // Atributos auxiliares
    cargo: string;
    primerNombre: string;
    primerApellido: string;

@@ -20,7 +20,7 @@ export class TipoDeAreaDetailComponent {
       route.params.switchMap( ( params: Params ) => tipoDeAreaService.viewArea( +params[ 'id' ] ) )
       .subscribe( data => {
          this.areas = data;
-         this.habilitado = data.indicadorHabilitado ? "Si" : "No";
+         this.habilitado = data.indicadorHabilitado ? 'Si' : 'No';
       } );
    }
 

@@ -11,7 +11,7 @@ export class Competencies {
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
 
-   //Campo auxiliar
+   // Campo auxiliar
    public cargoCompetencia: PositionCompetencies;
 
    constructor() {
