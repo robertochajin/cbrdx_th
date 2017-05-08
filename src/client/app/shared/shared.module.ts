@@ -6,7 +6,7 @@ import {RouterModule, Router, NavigationEnd} from '@angular/router';
 /** Componentes de la Template principal **/
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {NavbarComponent} from './navbar/navbar.component';
-import {BreadcrumbComponent} from './breadcrumb/breadcrumb.component';
+//import {BreadcrumbComponent} from './breadcrumb/breadcrumb.component';
 import {TranslateService, TranslateModule} from 'ng2-translate';
 
 import {WindowRefService} from '../_services/window-ref.service';
@@ -18,8 +18,8 @@ import {AuthenticationService} from "../_services/authentication.service";
 
 @NgModule({
    imports: [CommonModule, RouterModule, TranslateModule],
-   declarations: [ToolbarComponent, NavbarComponent, BreadcrumbComponent],
-   exports: [ToolbarComponent, NavbarComponent, BreadcrumbComponent,
+   declarations: [ToolbarComponent, NavbarComponent],
+   exports: [ToolbarComponent, NavbarComponent,
       CommonModule, FormsModule, RouterModule, TranslateModule],
    providers: [AuthenticationService]
 })
@@ -45,10 +45,11 @@ export class SharedModule {
             jQuery('#wrapper').animate({scrollTop: 0}, 'fast');
 
             // Focus Primer campo
-            jQuery('input[type=text]:enabled:visible, p-dropdown>div').first().select().focus().addClass('ui-state-focus');
+            jQuery('input[type=text]:enabled:visible:first').select().focus();
 
             // Focus primer invalid campo
 
+            setTimeout(() => {
                jQuery('button').click(function () {
                   setTimeout(() => {
                      if (jQuery('input.ng-invalid').length > 0) {
@@ -57,9 +58,14 @@ export class SharedModule {
                         setTimeout(() => {
                            jQuery('input.ng-invalid:first').select().focus();
                         }, 500);
+                     }else {
+                           if ( jQuery( 'div.ui-messages' ).length ) {
+                              jQuery( 'body' ).scrollTop( jQuery( 'div.ui-messages:first' ).position().top );
+                           }
                      }
                   }, 500);
                });
+            }, 1000);
          }
       });
    }

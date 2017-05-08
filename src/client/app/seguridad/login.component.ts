@@ -16,8 +16,8 @@ import {Http, Headers} from "@angular/http";
 })
 export class LoginComponent implements OnInit {
   model: any = {
-    password: '5707dd7d-d',
-    username: "laura.calderon"
+    password: '7848d99b-d',
+    username: "mayerly.gamboa"
   };
   intentos: number = 0;
   error: string = "";
