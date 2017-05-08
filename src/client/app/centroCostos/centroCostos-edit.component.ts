@@ -16,6 +16,7 @@ export class CentroCostosEditComponent {
    centroCostos: CentroCostos = new CentroCostos();
    centrosExistentes: CentroCostos[];
    codeExists: boolean = false;
+   displayDialog:boolean;
 
    constructor( private centroCostosService: CentroCostosService, private router: Router, private route: ActivatedRoute ) {
       route.params.switchMap( ( params: Params ) => centroCostosService.viewCentroCostos( +params[ 'id' ] ) )
@@ -29,7 +30,7 @@ export class CentroCostosEditComponent {
 
    createGruposGestion() {
       this.centroCostosService.updateCentroCostos( this.centroCostos ).then( data => {
-         this.router.navigate( [ 'centroCostos' ] )
+         this.router.navigate( [ 'centroCostos' ] );
       } );
    }
 

@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 @Component( {
                moduleId: module.id,
                templateUrl: 'tipoDeArea.component.html',
-               selector: 'tipoDeArea'
+               selector: 'tipoDeArea-list'
             } )
 export class TipoDeAreaComponent implements OnInit {
 
