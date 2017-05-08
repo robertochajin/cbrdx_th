@@ -1,8 +1,8 @@
-<h3>Administración de Menús</h3>
+<h3>{{ 'ADMINMENUS.LBL_ADMINMENU' | translate }}</h3>
 <div class="row datable-header">
    <div class="col-md-6 col-xs-12 datatable-header-add">
-      <button type="button" pButton icon="fa-plus" (click)="newModule()" label="Agregar Módulo"></button>
-      <button type="button" pButton icon="fa-plus" (click)="newMenu()" label="Agregar Menú"
+      <button type="button" pButton icon="fa-plus" (click)="newModule()" label="{{ 'ADMINMENUS.BTN_AGREGARMODULO' | translate }}"></button>
+      <button type="button" pButton icon="fa-plus" (click)="newMenu()" label="{{ 'ADMINMENUS.BTN_AGREGARMENU' | translate }}"
               *ngIf="modulo"></button>
    </div>
 </div>
@@ -33,19 +33,15 @@
                                   #codigo="ngModel" maxlength="10"
                                   required/>
                            <div class="ui-message ui-messages-error ui-corner-all"
-                                *ngIf="f.submitted && !codigo.valid">
-                              Código es requerido
-                           </div>
+                                *ngIf="f.submitted && !codigo.valid">{{ 'ADMINMENUS.MSG_CODREQUERIDO' | translate }}                           </div>
                            <div class="ui-message ui-messages-error ui-corner-all"
-                                *ngIf="codeExists">
-                              Ya se encuentra registrado ese código
-                           </div>
+                                *ngIf="codeExists">{{ 'ADMINMENUS.MSG_CODREGISTRADO' | translate }}</div>
                         </div>
                      </div>
                   </div>
                   <div class="row">
                      <div class="form-group">
-                        <label for="nombre" class="control-label col-sm-3">* Nombre </label>
+                        <label for="nombre" class="control-label col-sm-3">* {{ 'LBL_NOMBRE' | translate }} </label>
                         <div class=" col-sm-9">
                            <input type="text" pInputText class="form-control" id="nombre"
                                   name="nombre"
@@ -54,8 +50,7 @@
                                   (keyup)="capitalizeName()"
                                   required/>
                            <div class="ui-message ui-messages-error ui-corner-all"
-                                *ngIf="f.submitted && !nombre.valid">
-                              Nombre es requerido
+                                *ngIf="f.submitted && !nombre.valid">{{ 'ADMINMENUS.MSG_NOMBREREQUERIDO' | translate }}
                            </div>
                         </div>
                      </div>
@@ -63,46 +58,42 @@
                   <div *ngIf="!modulo">
                      <div class="row">
                         <div class="form-group">
-                           <label for="ruta" class="control-label col-sm-3">* Enlace </label>
+                           <label for="ruta" class="control-label col-sm-3">* {{ 'ADMINMENUS.LBL_ENLACE' | translate }} </label>
                            <div class=" col-sm-9">
                               <input type="text" pInputText class="form-control" id="ruta" name="ruta"
                                      [(ngModel)]="menus.ruta"
                                      #ruta="ngModel"
                                      required/>
                               <div class="ui-message ui-messages-error ui-corner-all"
-                                   *ngIf="f.submitted && !ruta.valid">
-                                 Enlace es requerido
-                              </div>
+                                   *ngIf="f.submitted && !ruta.valid">{{ 'ADMINMENUS.MSG_ENLACEREQUERIDO' | translate }}                              </div>
                            </div>
                         </div>
                      </div>
                   </div>
                   <div class="row">
                      <div class="form-group">
-                        <label for="secuencia" class="control-label col-sm-3">* Secuencia </label>
+                        <label for="secuencia" class="control-label col-sm-3">* {{ 'ADMINMENUS.LBL_SECUENCIA' | translate }} </label>
                         <div class=" col-sm-9">
                            <input type="text" pInputText class="form-control" id="secuencia" name="secuencia"
                                   [(ngModel)]="menus.secuencia"
                                   #orden="ngModel"
                                   required/>
                            <div class="ui-message ui-messages-error ui-corner-all"
-                                *ngIf="f.submitted && !orden.valid">
-                              Secuencia es requerido
+                                *ngIf="f.submitted && !orden.valid">{{ 'ADMINMENUS.MSG_SECUENCIAREQUERIDO' | translate }}
                            </div>
                         </div>
                      </div>
                   </div>
                   <div class="row">
                      <div class="form-group">
-                        <label for="clase" class="control-label col-sm-3">* Clase </label>
+                        <label for="clase" class="control-label col-sm-3">* {{ 'ADMINMENUS.LBL_CLASE' | translate }} </label>
                         <div class=" col-sm-9">
                            <input type="text" pInputText class="form-control" id="clase" name="clase"
                                   [(ngModel)]="menus.clase"
                                   #clase="ngModel"
                                   required/>
                            <div class="ui-message ui-messages-error ui-corner-all"
-                                *ngIf="f.submitted && !clase.valid">
-                              Clase de estilo es requerido
+                                *ngIf="f.submitted && !clase.valid">{{ 'ADMINMENUS.MSG_CLASEREQUERIDO' | translate }}
                            </div>
                         </div>
                      </div>
@@ -128,13 +119,13 @@
             </div>
          </div>
       </p-fieldset>
-      <p-dialog header="Confirmación" [(visible)]="displayDialog"
+      <p-dialog header="{{ 'LBL_CONFIRMACION' | translate }}" [(visible)]="displayDialog"
                 responsive="true" modal="true">
          <p>{{ 'MSG_CONFIRMACION' | translate }}</p>
          <p-footer>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-               <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>
-               <button type="button" pButton icon="fa-check" (click)="doCancel()" label="Si"></button>
+               <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="{{ 'BTN_NO' | translate }}"></button>
+               <button type="button" pButton icon="fa-check" (click)="doCancel()" label="{{ 'BTN_SI' | translate }}"></button>
             </div>
          </p-footer>
       </p-dialog>

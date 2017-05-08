@@ -67,7 +67,6 @@
       "LBL_TIPODIRECCION":"Tipo Dirección",
       "LBL_COMOLEGAR":"Cómo Llegar",
       "LBL_BARRIO":"Barrio",
-      "LBL_TIPODIRECCION":"Tipo de Dirección",
       "LBL_NOMENCLATURA":"Nomenclatura",
       "LBL_NOMENCLATURACOMPLEMENTARIA":"Nomenclatura Complementaria",
       "LBL_NOMENCLATURAPRINCIPAL":"Nomenclatura Principal",
@@ -80,12 +79,19 @@
 
     },
 
-  "INICIO_ACTIVIDADECONOMICA":"==============================================================",
+  "ACTIVIDADECONOMICA":{
      "LBL_SECCION":"Sección",
      "LBL_DIVISION":"División",
      "LBL_CLASE":"Clase",
-     "LBL_ACTIVIDADESECONOMICAS":"Actividades Económicas",
-  "FIN_ACTIVIDADECONOMICA":"=================================================================",
+     "MSG_CODREQUERIDO":"Código es requerido",
+     "MSG_CODNUM":"Código debe ser de",
+     "MSG_NUM":"Números",
+     "MSG_ESREQ":"es requerido",
+     "MSG_SOLONUMEROS":"Sólo números",
+     "MSG_CODREGISTRADO":"Ya se encuentra registrado este código",
+     "MSG_NOMBREREQUERIDO":"Nombre es requerido",
+     "LBL_ACTIVIDADESECONOMICAS":"Actividades Económicas"
+  },
 
    "CONSTANTES": {
       "LBL_CONSTANTE": "Constante",
@@ -109,15 +115,28 @@
       "MSG_CONFIRMAGUARDAR":"Si continúa perderá la información no guardada. Está seguro que desea salir?."
    },
 
-  "INICIO_DASHBOARD":"==============================================================",
-      "CONF_WIDGETS":"Configuración de Widgets",
-      "LBL_ACTIVO":"Activo",
-      "LBL_INACTIVO":"Inactivo",
-      "LBL_SISTEMA":"Sistema",
-      "LBL_ULTIMOINGRESO":"Última vez que Ingresó",
-  "FIN_DASHBOARD":"=================================================================",
+   "INICIO_DASHBOARD":{
+   "CONF_WIDGETS": "Configuración de Widgets",
+   "LBL_ACTIVO": "Activo",
+   "LBL_INACTIVO": "Inactivo",
+   "LBL_SISTEMA": "Sistema",
+   "LBL_ULTIMOINGRESO": "Última vez que Ingresó"
+   },
 
-  "INICIO_DIVISIONPOLITICA":"==============================================================",
+   "WIDGETS":{
+      "MSG_CODIGOREQUERIDO":"Código requerido",
+      "MSG_CODIGOREPETIDO":"Ya se encuentra registrado ese código",
+      "MSG_NOMBREREQUERIDO":"Nombre  requerido",
+      "MSG_URLREQUERIDA":"Url requerida",
+      "LBL_AGREGANDO":"Agregar widgets",
+      "LBL_ADMINWIDGETS":"Administrador de Widgets",
+      "BTN_AGREGARWIDGETS":"Agregar Widgets",
+      "LBL_EDITANDO":"Editando widgets",
+      "LBL_DETALLEWIDGETS":"Detalle widgets",
+      "LBL_CONFIGURARWIDGETS":"Configurar Widgets"
+   },
+
+  "DIVISIONPOLITICA":{
       "LBL_AREA":"Área ",
       "LBL_DIVSIONPOLITICA":"División Política ",
       "LBL_PAIS":"País",
@@ -125,10 +144,17 @@
       "LBL_MUNICIPIO":"Municipio",
       "LBL_BARRIO":"Barrio",
       "LBL_INDICATIVO":"Indicativo",
-      "LBL_POSTAL":"Postal",
+      "LBL_CODIGOPOSTAL":"Código Postal",
       "LBL_ESTRATO":"Estrato",
-  "FIN_DIVISIONPOLITICA":"=================================================================",
+      "MSG_CODREQUERIDO":"Código es requerido",
+      "MSG_CODNUM":"Código debe ser de",
+      "MSG_NUM":"Números",
+      "MSG_ESREQ":"Requerido",
+      "MSG_SOLONUMEROS":"Sólo números",
+      "MSG_CODREGISTRADO":"Ya se encuentra registrado este código",
+      "MSG_NOMBREREQUERIDO":"Nombre es requerido"
 
+  },
 
   "EMPLOYEES":{
 
@@ -360,16 +386,7 @@
    "MSG_DEBEINGRESARCONTRASEÑA":"Debe ingresar una contraseña",
    "FIN_SEGURIDAD":"=================================================================",
 
-   "WIDGETS":{
-      "MSG_CODIGOREQUERIDO":"Código requerido",
-      "MSG_CODIGOREPETIDO":"Ya se encuentra registrado ese código",
-      "MSG_NOMBREREQUERIDO":"Nombre  requerido",
-      "MSG_URLREQUERIDA":"Url requerida",
-      "LBL_AGREGANDO":"Agregando widgets",
-      "LBL_EDITANDO":"Editando widgets",
-      "LBL_DETALLEWIDGETS":"Detalle widgets",
-      "LBL_CONFIGURARWIDGETS":"Configurar Widgets"
-   },
+
    "ADMIN_FORMULARIOS":{
       "LBL_FUNCIONALIDAD":"Funcionalidad",
       "MSG_FUNCIONALIDADREQUERIDA":"Funcionalidad requerida",
@@ -383,6 +400,8 @@
       "LBL_CAMPO":"Campo",
       "LBL_TERMINAR":"Terminar",
       "LBL_OBLIGATORIO":"Obligatorio",
+      "LBL_DETALLESECCION":"Detalle Sección",
+      "LBL_DETALLECAMPO":"Detalle Campo",
       "MSG_CODIGOREPETIDO":"Ya se encuentra registrado ese código",
       "MSG_NOMBREREQUERIDO":"Nombre  requerido",
       "MSG_CODIGOREQUERIDO":"Código requerido",
@@ -410,8 +429,25 @@
       "LBL_NUEVADIFERENTEALAACTUAL":"Contraseña nueva debe ser diferente de la Actual",
       "LBL_DEBECOINCIDIRCONTRASENA": "Debe coincidir con la Contraseña nueva"
    },
+
    "ROLES":{
       "LBL_CONTROLES":"Controles",
+      "LBL_ADMINROLES":"Administrador de Roles",
+      "MSG_CODREQUERIDO":"El código es requerido",
+      "MSG_NOMBREREQUERIDO":"El nombre es requerido",
+      "LBL_BORRAR":"Borrar",
+      "LBL_VISUALIZAR":"Visualizar",
+      "LBL_EDITAR":"Editar",
+      "MSG_FECHAFINREQ":"Fecha fin es requerida",
+      "MSG_WIDGETREQ":"Widget es requerido",
+      "LBL_FUNCIONALIDADES":"Funcionalidades",
+      "LBL_FUNCIONALIDAD":"Funcionalidad",
+      "LBL_CONSULTAR":"Consultar",
+      "BTN_NUEVOROL": "Nuevo Rol",
+      "LBL_ROL":"Rol",
+      "LBL_WIDGETS":"Widgets",
+      "LBL_OBLIGATORIO":"Obligatorio",
+      "BTN_NUEVOWIDGET":"Nuevo Widget",
       "LBL_SECCIONES":"Secciones"
    },
 
@@ -546,6 +582,148 @@
 
 
            },
+
+   "ADMINMENUS": {
+      "LBL_ADMINMENU":"Administrador de Menús",
+      "MSG_CODREQUERIDO":"Código es requerido",
+      "MSG_CODREGISTRADO":"Ya se encuentra registrado este código",
+      "MSG_NOMBREREQUERIDO":"Nombre es requerido",
+      "MSG_ENLACEREQUERIDO":"Enlace es requerido",
+      "MSG_SECUENCIAREQUERIDO":"Secuencia es requerido",
+      "BTN_AGREGARMODULO":"Agregar Módulo",
+      "BTN_AGREGARMENU":"Agregar Menú",
+      "LBL_SECUENCIA":"Secuencia",
+      "LBL_CLASE":"Clase",
+      "LBL_ENLACE":"Enlace",
+      "MSG_CLASEREQUERIDO": "Clase de estilo es requerido"
+   },
+
+   "OCUPACIONES": {
+      "LBL_OCUPACIONES":"Ocupaciones",
+      "MSG_CODREQUERIDO":"Código es requerido",
+      "MSG_CODNUM":"Código debe ser de",
+      "MSG_NUM":"Números",
+      "MSG_CODREGISTRADO":"Ya se encuentra registrado este código",
+      "MSG_NOMBREREQUERIDO":"Nombre es requerido",
+      "MSG_ENLACEREQUERIDO":"Enlace es requerido",
+      "MSG_SECUENCIAREQUERIDO":"Secuencia es requerido",
+      "MSG_CLASEREQUERIDO": "Clase de estilo es requerido"
+   },
+
+   "ESTRUCTURAFISICA": {
+      "LBL_ESTRUCTURA":"Estructura Física",
+      "BTN_AGREGARNUEVO":"Agregar Nuevo",
+      "BTN_AGREGADIRECCION":"Agregar Dirección",
+      "BTN_EDITADIRECCION":"Editar Dirección",
+      "LBL_TELEFONOREQ":"Teléfono requerido",
+      "LBL_DETALLEESTRUCT":"Detalle Estructura Física",
+      "LBL_VIRTUAL":"Ind. Virtual",
+      "LBL_VIRTUAL2":"Virtual",
+      "LBL_CATEGORIA":"Categoría",
+      "MSG_CODREQUERIDO":"Código es requerido",
+      "MSG_DIRREQUERIDO":"Dirección es requerida",
+      "MSG_NUM":"Números",
+      "MSG_CODREGISTRADO":"Ya se encuentra registrado este código",
+      "MSG_NOMBREREQUERIDO":"Nombre es requerido",
+      "MSG_ENLACEREQUERIDO":"Enlace es requerido",
+      "MSG_SECUENCIAREQUERIDO":"Secuencia es requerido",
+      "MSG_CATEGORIAREQ":"Categoria es requerida",
+      "MSG_CORREONOVALIDO": "Correo electrónico no válido"
+   },
+
+   "ESTRUCTURAORGANIZACIONAL": {
+      "LBL_ESTRUCTURA":"Estructura Organizacional",
+      "BTN_AGREGAREMPRESA":"Agregar Empresa",
+      "BTN_AGREGARAREA":"Agregar Área",
+      "BTN_EDITADIRECCION":"Editar Dirección",
+      "MSG_TIPODOCREQUERIDO":"Tipo documento es requerido",
+      "LBL_NUMEROIDENTI":"Número de Identificación",
+      "LBL_RAZONSOCIAL":"Razón Social",
+      "LBL_CENTROCOSTO":"Centro de Costo",
+      "LBL_TIPOAREA":"Tipo de Área",
+      "LBL_TIPOESTRUCTURA":"Tipo de Estructura",
+      "MSG_NUMEROIDENTIREQ":"Número de identificación es requerido",
+      "MSG_RAZONSOCIALREQ":"Razón social es requerido",
+      "MSG_CORREOVALIDO":"Debe escribir un correo válido",
+      "LBL_PAGINAWEB":"Página Web",
+      "MSG_DIRECCIONREQ":"Dirección es requerido",
+      "MSG_TIPOESTRUCTREQ":"Tipo estructura es requerido",
+      "MSG_CODIGOREQ":"Código es requerido",
+      "MSG_NOMBREREQ":"Nombre es requerido",
+      "MSG_CENTROCOSTOREQ":"Centro de costo es requerido",
+      "MSG_TIPOAREAREQ":"Tipo de área es requerido",
+      "LBL_ESTRUCTFISICA":"Estructura Física",
+      "MSG_ESTRUCTFISICAREQ":"Estructura física es requerido",
+      "MSG_REGISTRADOCOD":"Ya se encuentra registrado ese código",
+      "MSG_CODIGOREGISTRADO":"Ya se encuentra registrado ese código"
+
+   },
+
+   "PLANTACOLABORADORES": {
+      "LBL_PLANTACOLAB":"Planta de Colaboradores",
+      "LBL_AREATRABAJO":"Área de trabajo",
+      "MSG_NODO":"Por favor, seleccione un nodo de tipo área de la estructura organizacional",
+      "MSG_INFOAREA":"Información del área",
+      "LBL_NOMBREAREA":"Nombre del área",
+      "LBL_TIPOESTRUCTURA":"Tipo de Estructura",
+      "LBL_CENTROCOSTOS":"Centro de costos",
+      "BTN_CONFIRMAPLANTA":"Confirmar Planta",
+      "LBL_BUSCACOLAB":"Buscar colaborador",
+      "LBL_TIPOAREA":"Tipo de Area",
+      "MSG_CREANDOEDITAREA":"Creando / editando cargo para el área",
+      "LBL_CARGO":"Cargo",
+      "LBL_NUMEROPLAZAS":"Número de plazas",
+      "LBL_SALARIOTOTAL":"Salario total",
+      "LBL_OCUPADOS":"Ocupados",
+      "LBL_VACANTES":"Vacantes",
+      "LBL_ASIGNADODESDE":"Asignado desde",
+      "LBL_FECHAINGRESOREQ":"Fecha ingreso es requerido",
+      "LBL_TIPOCONTRATO":"Tipo de contrato",
+      "LBL_NUMCARGOS":"No. de cargos",
+      "LBL_PLAZAS":"No. de plazas",
+      "LBL_COSTOPLANTA":"Costo planta",
+      "MSG_ASIGNACOLABORADOR":"Asignar colaborador",
+      "MSG_NUMEROPLAZASMENOR":"El número de plazas no puede ser menor a",
+      "MSG_COLABREQUERIDO":"Colaborador es requerido",
+      "MSG_CARGOASIGNADO":"El cargo que intentó seleccionar ya fue asignado a esta área",
+      "MSG_CARGOREQ":"Cargo es requerido",
+      "MSG_PLAZASREQ":"Número de plazas es requerido",
+      "MSG_ASIGNACOLABORADORCARGO":"Asignando colaborador al cargo",
+      "LBL_ESTRUCTFISICA":"Estructura Fisica"
+
+   },
+
+
+   "PROYECCIONLABORAL": {
+      "LBL_PROYLAB":"Proyección laboral",
+      "LBL_ANO":"Año",
+      "LBL_ACTUAL":"Actual",
+      "LBL_DETALLEPROYECCION":"Detalle Proyección Laboral",
+      "LBL_OBSERVAPROBACION":"Observaciones de Aprobación",
+      "LBL_MOTIVOSOLICITUD":"Motivo solicitud",
+      "LBL_MOTIVONOAPRUEBA":"Motivo no aprobación",
+      "LBL_OBSERVACIONES":"Observaciones",
+      "LBL_APROBADO":"Aprobado",
+      "LBL_NUMCARGOS":"No de Cargos",
+      "LBL_NUMPLAZAS":"No de plazas",
+      "LBL_COSTOPLANTA":"Costo planta",
+      "LBL_PROYECTADO":"Proyectado",
+      "LBL_INCREMENTO":"Incremento",
+      "LBL_PLAZASATUALES":"Plazas Actuales",
+      "LBL_PLAZASPROYECT":"Plazas Proyectadas",
+      "LBL_COSTOACTUAL":"Costo Actual",
+      "LBL_ESTADOS":"Estados",
+      "LBL_COSTOPROYECT":"Costo Proyectado",
+      "BTN_GENERAPROY":"Generar Proyección",
+      "BTN_NUEVOCARGO":"Nuevo Cargo",
+      "BTN_CONFIRMAR":"Confirmar",
+      "BTN_ELIMINAR":"Eliminar",
+      "BTN_CONFIRMAPROY":"Confirmar Proyección",
+      "MSG_OBSERVACIONREQ":"Observación requerida",
+      "MSG_CARGOREQUERIDO":"Cargo requerido",
+      "MSG_PLAZASPROYREQ":"Plazas proyectadas requeridas",
+      "MSG_CLASEREQUERIDO": "Clase de estilo es requerido"
+   },
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 
