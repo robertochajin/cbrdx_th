@@ -1,4 +1,4 @@
-<h3>{{ 'CONSTANTES.LBL_CONSTANTES' | translate:param }}</h3>
+<h3>{{ 'CONSTANTES.LBL_CONSTANTES' | translate }}</h3>
 <div class="col-sm-6 col-sm-offset-3">
     <h2 class="text-center">{{ 'CONSTANTES.LBL_EDITACONSTANTE' | translate }}</h2>
     <form class="form-horizontal" #f="ngForm" (ngSubmit)="!codeExists&&f.form.valid&&createConstant()" novalidate

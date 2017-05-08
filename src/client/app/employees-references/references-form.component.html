@@ -1,8 +1,8 @@
 <p-messages [value]="msgs"></p-messages>
 <p-confirmDialog width="400" #cd>
   <p-footer>
-    <button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate:param }}" (click)="cd.reject()"></button>
-    <button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate:param }}" (click)="cd.accept()"></button>
+    <button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
   </p-footer>
 </p-confirmDialog>
 
@@ -19,35 +19,35 @@
         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4">
-                    <label for="tipodeReferencia">* {{'EMPLOYEES.LBL_TIPOREFERENCIA' | translate:param }}</label>
+                    <label for="tipodeReferencia">* {{'EMPLOYEES.LBL_TIPOREFERENCIA' | translate }}</label>
                     <p-dropdown  id="tipodeReferencia" name="tipodeReferencia" [options]="referencesTypes" [autoWidth]="false" required="true"
                                  [(ngModel)]="reference.idTipoReferencia"  #tipodeReferencia="ngModel"  ></p-dropdown>
                     <div class="ui-message ui-messages-error ui-corner-all"
                          *ngIf="f.submitted && !tipodeReferencia.valid">
                       <i class="fa fa-close"></i>
-                      {{'EMPLOYEES.LBL_TIPOREFERENCIA' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                      {{'EMPLOYEES.LBL_TIPOREFERENCIA' | translate }} {{'LBL_REQUERIDO' | translate }}
                     </div>
                 </div>
                 <div class="ui-grid-col-8">
-                    <label for="empresa">* {{'EMPLOYEES.LBL_NOMBREEMPRESA' | translate:param }}</label>
+                    <label for="empresa">* {{'EMPLOYEES.LBL_NOMBREEMPRESA' | translate }}</label>
                     <input pInputText type="text" id="empresa" name="empresa" #empresa="ngModel"
                            [(ngModel)]="reference.empresa" #empresa="ngModel" required/>
                     <div class="ui-message ui-messages-error ui-corner-all"
                          *ngIf="f.submitted && !empresa.valid">
                       <i class="fa fa-close"></i>
-                      {{'EMPLOYEES.LBL_NOMBREEMPRESA' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                      {{'EMPLOYEES.LBL_NOMBREEMPRESA' | translate }} {{'LBL_REQUERIDO' | translate }}
                     </div>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-6">
-                    <label for="primerNombre">* {{'EMPLOYEES.LBL_PRIMER' | translate:param }}</label>
+                    <label for="primerNombre">* {{'EMPLOYEES.LBL_PRIMER' | translate }}</label>
                     <input pInputText type="text" id="primerNombre" name="primerNombre" #primerNombre="ngModel"
                            [(ngModel)]="reference.primerNombre" (keyup)="capitalize($event)" required/>
                     <div class="ui-message ui-messages-error ui-corner-all"
                          *ngIf="f.submitted && !primerNombre.valid">
                       <i class="fa fa-close"></i>
-                      {{'EMPLOYEES.LBL_PRIMER' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                      {{'EMPLOYEES.LBL_PRIMER' | translate }} {{'LBL_REQUERIDO' | translate }}
                     </div>
                 </div>
                 <div class="ui-grid-col-6">
@@ -58,56 +58,56 @@
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-6">
-                    <label for="primerApellido">* {{'EMPLOYEES.LBL_PRIMERAPELLIDO' | translate:param }}</label>
+                    <label for="primerApellido">* {{'EMPLOYEES.LBL_PRIMERAPELLIDO' | translate }}</label>
                     <input pInputText type="text" id="primerApellido" name="primerApellido" #primerApellido="ngModel"
                            [(ngModel)]="reference.primerApellido" (keyup)="capitalize($event)" required/>
                     <div class="ui-message ui-messages-error ui-corner-all"
                          *ngIf="f.submitted && !primerApellido.valid">
                       <i class="fa fa-close"></i>
-                      {{'EMPLOYEES.LBL_PRIMERAPELLIDO' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                      {{'EMPLOYEES.LBL_PRIMERAPELLIDO' | translate }} {{'LBL_REQUERIDO' | translate }}
                     </div>
                 </div>
                 <div class="ui-grid-col-6">
-                    <label for="segundoApellido">{{'EMPLOYEES.LBL_SEGUNDOAPELLIDO' | translate:param }}</label>
+                    <label for="segundoApellido">{{'EMPLOYEES.LBL_SEGUNDOAPELLIDO' | translate }}</label>
                     <input pInputText type="text" id="segundoApellido" name="segundoApellido"
                            [(ngModel)]="reference.segundoApellido" (keyup)="capitalize($event)" />
                 </div>
             </div>
             <div class="ui-grid-row">
               <div class="ui-grid-col-6">
-                <label for="celular">* {{'LBL_CELULAR' | translate:param }}</label>
+                <label for="celular">* {{'LBL_CELULAR' | translate }}</label>
                 <input pInputText type="text" id="celular" name="celular" #celular="ngModel"
                        [(ngModel)]="reference.telefonoMovil" required/>
                 <div class="ui-message ui-messages-error ui-corner-all"
                      *ngIf="f.submitted && !celular.valid">
                   <i class="fa fa-close"></i>
-                  {{'LBL_CELULAR' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                  {{'LBL_CELULAR' | translate }} {{'LBL_REQUERIDO' | translate }}
                 </div>
               </div>
                 <div class="ui-grid-col-6">
-                    <label for="telefono">{{'LBL_TELEFONO' | translate:param }}</label>
+                    <label for="telefono">{{'LBL_TELEFONO' | translate }}</label>
                     <input pInputText type="text" id="telefono" name="telefono" #telefono="ngModel"
                            [(ngModel)]="reference.telefonoFijo" />
                     <div class="ui-message ui-messages-error ui-corner-all"
                          *ngIf="f.submitted && !telefono.valid">
                       <i class="fa fa-close"></i>
-                      {{'LBL_TELEFONO' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                      {{'LBL_TELEFONO' | translate }} {{'LBL_REQUERIDO' | translate }}
                     </div>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-10">
-                    <label for="direccion">* {{'LBL_DIRECCION' | translate:param }}</label>
+                    <label for="direccion">* {{'LBL_DIRECCION' | translate }}</label>
                     <textarea id="direccion" name="direccion" pInputTextarea  rows="5" #direccion="ngModel" disabled="true" required
                               [(ngModel)]="reference.direccion" ></textarea>
                     <div class="ui-message ui-messages-error ui-corner-all"
                          *ngIf="f.submitted && reference.direccion===''">
                       <i class="fa fa-close"></i>
-                      {{'LBL_DIRECCION' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                      {{'LBL_DIRECCION' | translate }} {{'LBL_REQUERIDO' | translate }}
                     </div>
                 </div>
                 <div class="ui-grid-col-2">
-                  <button pButton icon="fa-plus" label="{{'BTN_EDITARDIRECCION' | translate:param }}" (click)="toggleform()"></button>
+                  <button pButton icon="fa-plus" label="{{'BTN_EDITARDIRECCION' | translate }}" (click)="toggleform()"></button>
                 </div>
             </div>
             <!--<div class="ui-grid-row">
@@ -131,10 +131,10 @@
           <div class="ui-grid-row form-footer-buttons">
             <div class="ui-grid-col-4"></div>
             <div class="ui-grid-col-1">
-              <a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate:param }}</a>
+              <a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
             </div>
             <div class="ui-grid-col-2">
-              <button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate:param }}" type="submit" (click)="focusUP()"></button>
+              <button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit" (click)="focusUP()"></button>
             </div>
             <div class="ui-grid-col-5"></div>
           </div>

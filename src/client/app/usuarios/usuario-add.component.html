@@ -1,6 +1,6 @@
-<h3>{{ 'USUARIOS.LBL_USUARIOS' | translate:param }}</h3>
+<h3>{{ 'USUARIOS.LBL_USUARIOS' | translate }}</h3>
 <p-tabView>
-    <p-tabPanel header="{{ 'USUARIOS.LBL_DATOSUSER' | translate:param }}">
+    <p-tabPanel header="{{ 'USUARIOS.LBL_DATOSUSER' | translate }}">
        <p-dialog header="Información" [(visible)]="!terceroExiste" modal="modal" width="500" responsive="true">
           <p>No es posible crear un usuario sin antes crear un tercero de tipo <b>colaborador</b></p>
           <p>¿Qué desea hacer?</p>
@@ -11,10 +11,10 @@
              </div>
           </p-footer>
        </p-dialog>
-        <p-fieldset legend="{{ 'USUARIOS.LBL_BUSCARTERCERO' | translate:param }}" *ngIf="!isTerceroSet">
+        <p-fieldset legend="{{ 'USUARIOS.LBL_BUSCARTERCERO' | translate }}" *ngIf="!isTerceroSet">
             <form #fc="ngForm">
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-3" style="text-align: center"><label>{{ 'LBL_TIPODOCUMENTO' | translate:param }}:</label>
+                    <div class="ui-grid-col-3" style="text-align: center"><label>{{ 'LBL_TIPODOCUMENTO' | translate }}:</label>
                     </div>
                     <div class="ui-grid-col-3">
                         <select [(ngModel)]="selectedTipo" id="idTipoDato" name="idTipoDato" class="form-control"
@@ -24,7 +24,7 @@
                             </option>
                         </select>
                     </div>
-                    <div class="ui-grid-col-3" style="text-align: center"><label for="numDocumento">{{ 'LBL_NUMERODOCUMENTO' | translate:param }}
+                    <div class="ui-grid-col-3" style="text-align: center"><label for="numDocumento">{{ 'LBL_NUMERODOCUMENTO' | translate }}
                         :</label></div>
                     <div class="ui-grid-col-3">
                         <input id="numDocumento" name="numDocumento" #numDocumento="ngModel" type="text" pInputText
@@ -296,7 +296,7 @@
 
             <div class="ui-grid-row">
                 <div class="ui-grid-col-6">
-                    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="curRoles" [paginator]="true" [rows]="10"
+                    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="curRoles" [paginator]="true" [rows]="10"
                                  [responsive]="true">
                         <p-column field="rol" header="{{ 'USUARIOS.LBL_ROL' | translate }}"></p-column>
                         <p-column header="{{ 'USUARIOS.LBL_PERIODOHABILITACION' | translate }}">
@@ -315,7 +315,7 @@
                     </p-dataTable>
                 </div>
                 <div class="ui-grid-col-6">
-                    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="curGrupos" [paginator]="true" [rows]="10"
+                    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="curGrupos" [paginator]="true" [rows]="10"
                                  [responsive]="true">
                         <p-column field="grupoGestion" header="{{ 'USUARIOS.LBL_GRUPOGESTION' | translate }}"></p-column>
                         <p-column header="{{ 'USUARIOS.LBL_PERIODOHABILITACION' | translate }}">
@@ -349,7 +349,7 @@
                 <input #gbs type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}">
             </div>
         </div>
-        <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="historico" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gbs">
+        <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="historico" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gbs">
             <p-column field="idAuditoria" header="Id" [sortable]="true"></p-column>
             <p-column field="historia" header="Historia" [sortable]="true"></p-column>
             <p-column field="valorAnterior" header="Valor Anterior" [sortable]="true"></p-column>
