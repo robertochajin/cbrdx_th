@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
 @Component( {
                moduleId: module.id,
                templateUrl: 'risks-form.component.html',
-               selector: 'risks',
+               selector: 'risks-update',
                providers: [ ConfirmationService ]
             } )
 
@@ -19,7 +19,7 @@ export class RisksUpdateComponent {
    listTypeService: SelectItem[] = [];
    listTypeRisks: SelectItem[] = [];
    listSubTypeRisks: SelectItem[] = [];
-   header: string = "Agregando Riesgo";
+   header: string = 'Agregando Riesgo';
    dialogObjet: Risks = new Risks();
    habilitado: boolean;
    msgs: Message[] = [];
@@ -39,7 +39,7 @@ export class RisksUpdateComponent {
       } );
 
       this.risksService.getTypeRisks().subscribe( rest => {
-         this.listTypeRisks.push( { label: "Seleccione", value: null } );
+         this.listTypeRisks.push( { label: 'Seleccione', value: null } );
          for ( let dp of rest ) {
             this.listTypeRisks.push( {
                                         label: dp.riesgoTipo,
@@ -48,7 +48,7 @@ export class RisksUpdateComponent {
          }
       } );
       this.risksService.getSubTypeRisks().subscribe( rest => {
-         this.listSubTypeRisks.push( { label: "Seleccione", value: null } );
+         this.listSubTypeRisks.push( { label: 'Seleccione', value: null } );
          for ( let dp of rest ) {
             this.listSubTypeRisks.push( {
                                            label: dp.riesgoSubTipo,

@@ -13,7 +13,7 @@ import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
                providers: [ ConfirmationService ]
             } )
 
-export class AbsenceComponent implements OnInit{
+export class AbsenceComponent implements OnInit {
 
    @Input()
    position: Positions;
@@ -27,8 +27,8 @@ export class AbsenceComponent implements OnInit{
    listAbsenceREP: Absence[] = [];
    idCargoRelacionREE: number;
    idCargoRelacionREP: number;
-   guardandoA: boolean = false;
-   guardandoP: boolean = false;
+   guardandoA = false;
+   guardandoP = false;
    msgsAlert: Message[] = [];
    @Output()
    nextStep: EventEmitter<number> = new EventEmitter<number>();
@@ -44,10 +44,10 @@ export class AbsenceComponent implements OnInit{
 
       this.absence.idCargo = this.position.idCargo;
       this.absenceService.getReemplazaA( this.absence.idCargo ).subscribe( rest => {
-         this.listAbsenceREE = rest
+         this.listAbsenceREE = rest;
       } );
       this.absenceService.getReemplazado( this.absence.idCargo ).subscribe( rest => {
-         this.listAbsenceREP = rest
+         this.listAbsenceREP = rest;
       } );
       this.absenceService.getPositionAll().subscribe( rest => {
          this.listPositionREE.push( { label: 'Seleccione...', value: null } );
@@ -84,7 +84,7 @@ export class AbsenceComponent implements OnInit{
 
    onSubmitREE() {
       this.msgs = [];
-      this.absence.idTipoRelacion = 2; //Reemplaza a
+      this.absence.idTipoRelacion = 2; // Reemplaza a
       this.absence.idCargoRelacion = this.idCargoRelacionREE;
       this.guardandoA = true;
       this.absenceService.add( this.absence )
@@ -96,7 +96,7 @@ export class AbsenceComponent implements OnInit{
          } );
          this.idCargoRelacionREE = null;
          this.listAbsenceREE.push( data );
-         this.listPositionREE = []
+         this.listPositionREE = [];
          this.absenceService.getPositionAll().subscribe( rest => {
             this.listPositionREE.push( { label: 'Seleccione...', value: null } );
             for ( let dp of rest ) {
@@ -121,7 +121,7 @@ export class AbsenceComponent implements OnInit{
    onSubmitREP() {
       this.msgs = [];
       this.guardandoP = true;
-      this.absence.idTipoRelacion = 4;//Reemplazado por
+      this.absence.idTipoRelacion = 4;// Reemplazado por
       this.absence.idCargoRelacion = this.idCargoRelacionREP;
       this.absenceService.add( this.absence )
       .subscribe( data => {
@@ -129,7 +129,7 @@ export class AbsenceComponent implements OnInit{
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          this.absenceService.getPositionById( data.idCargoRelacion ).subscribe( res => {
             data.cargoRelacion = res.cargo;
-            this.listPositionREP.splice( this.listPositionREP.indexOf( res ), 1 )
+            this.listPositionREP.splice( this.listPositionREP.indexOf( res ), 1 );
          } );
          this.idCargoRelacionREP = null;
          this.listAbsenceREP.push( data );
@@ -168,7 +168,7 @@ export class AbsenceComponent implements OnInit{
                                                  this.guardandoA = false;
                                                  this.listAbsenceREE.splice( this.listAbsenceREE.indexOf( this.dialogObjet ), 1 );
                                                  this.dialogObjet = null;
-                                                 this.listPositionREE = []
+                                                 this.listPositionREE = [];
                                                  this.absenceService.getPositionAll().subscribe( rest => {
                                                     this.listPositionREE.push( { label: 'Seleccione...', value: null } );
                                                     for ( let dp of rest ) {
@@ -205,7 +205,7 @@ export class AbsenceComponent implements OnInit{
                                                  this.guardandoP = false;
                                                  this.listAbsenceREP.splice( this.listAbsenceREP.indexOf( this.dialogObjet ), 1 );
                                                  this.dialogObjet = null;
-                                                 this.listPositionREP = []
+                                                 this.listPositionREP = [];
                                                  this.absenceService.getPositionAll().subscribe( rest => {
                                                     this.listPositionREP.push( { label: 'Seleccione...', value: null } );
                                                     for ( let dp of rest ) {
