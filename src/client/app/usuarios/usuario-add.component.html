@@ -227,7 +227,8 @@
                                             [required]="isRequiredRol" [disabled]="!isRequiredRol"
                                             (onSelect)="validateGreaterRol();"
                                             readonlyInput="true" #fechaFin="ngModel"></p-calendar>
-                                <div *ngIf="rolesForm.submitted&&!isGreater" class="alert alert-danger">{{ 'USUARIOS.MSG_FECHAFINALMAYOR' | translate }}
+                                <div *ngIf="rolesForm.submitted&&!isGreaterRol" class="alert alert-danger">{{
+	                                'USUARIOS.MSG_FECHAFINALMAYOR' | translate }}
                                 </div>
                                 <div *ngIf="rolesForm.submitted&&isRequiredRol&&curUsuarioRol.fechaFin==null"
                                      class="alert alert-danger">{{ 'USUARIOS.MSG_FECHAFINAL' | translate }}
@@ -278,7 +279,8 @@
                                             [disabled]="!isRequiredGroup"
                                             (onSelect)="validateGreaterGroup();"
                                             readonlyInput="true" #fechaFin="ngModel"></p-calendar>
-                                <div *ngIf="gruposForm.submitted&&!isGreater" class="alert alert-danger">{{ 'USUARIOS.MSG_FECHAFINALMAYOR' | translate }}
+                                <div *ngIf="gruposForm.submitted&&!isGreaterGroup" class="alert alert-danger">{{
+	                                'USUARIOS.MSG_FECHAFINALMAYOR' | translate }}
                                 </div>
                                 <div *ngIf="gruposForm.submitted&&isRequiredGroup&&curUsuarioGrupo.fechaFin==null"
                                      class="alert alert-danger">{{ 'USUARIOS.MSG_FECHAFINAL' | translate }}

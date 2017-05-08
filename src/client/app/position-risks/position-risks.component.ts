@@ -15,7 +15,7 @@ import { ListaService } from '../_services/lista.service';
                selector: 'position-risks',
                providers: [ ConfirmationService ]
             } )
-export class RiskComponent implements OnInit{
+export class RiskComponent implements OnInit {
 
    @Input()
    position: Positions;
@@ -28,7 +28,7 @@ export class RiskComponent implements OnInit{
    risk: Risk = new Risk();
    exam: Exam = new Exam();
    dialogObjet: Risk = new Risk();
-   show_form = true;
+   showForm = true;
    msgs: Message[] = [];
    listRisk: Risk[] = [];
    listRisks: Risk[] = [];
@@ -145,8 +145,8 @@ export class RiskComponent implements OnInit{
                                               this.guardando = true;
 
                                               if ( this.listRisks.filter(
-                                                    r => r.idRiesgo === this.risk.idRiesgo && r.idCargo === this.risk.idCargo ).length > 0 )
-                                              {
+                                                    r => r.idRiesgo === this.risk.idRiesgo && r.idCargo === this.risk.idCargo )
+                                                      .length > 0 ) {
                                                  this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'El riesgo ya existe!' };
                                                  this.guardando = false;
                                               } else {
@@ -171,7 +171,7 @@ export class RiskComponent implements OnInit{
                                                     this.risk.idRiesgo = null;
                                                     this.guardando = false;
                                                  }, error => {
-                                                    this.show_form = true;
+                                                    this.showForm = true;
                                                     this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Error al guardar.' };
                                                  } );
                                               }
@@ -237,7 +237,7 @@ export class RiskComponent implements OnInit{
          .subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          }, error => {
-            this.show_form = true;
+            this.showForm = true;
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       } else {
@@ -246,7 +246,7 @@ export class RiskComponent implements OnInit{
          .subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          }, error => {
-            this.show_form = true;
+            this.showForm = true;
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       }

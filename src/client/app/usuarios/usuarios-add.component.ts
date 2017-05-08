@@ -105,7 +105,7 @@ export class UsuariosAddComponent {
    }
 
    crearTercero() {
-      //Navega a la pantalla de creación de terceros
+      // Navega a la pantalla de creación de terceros
       this.router.navigate( [ 'employees/add' ] );
    }
 
@@ -265,7 +265,9 @@ export class UsuariosAddComponent {
    }
 
    validateGreaterRol() {
-      if ( this.curUsuarioRol.fechaInicio !== null && this.curUsuarioRol.fechaFin !== null && this.curUsuarioRol.fechaInicio < this.curUsuarioRol.fechaFin ) {
+      if ( this.curUsuarioRol.fechaInicio !== null &&
+           this.curUsuarioRol.fechaFin !== null &&
+           this.curUsuarioRol.fechaInicio < this.curUsuarioRol.fechaFin ) {
          this.isGreaterRol = true;
       } else {
          this.isGreaterRol = false;
@@ -280,7 +282,9 @@ export class UsuariosAddComponent {
    }
 
    validateGreaterGroup() {
-      if ( this.curUsuarioGrupo.fechaInicio !== null && this.curUsuarioGrupo.fechaFin !== null && this.curUsuarioGrupo.fechaInicio < this.curUsuarioGrupo.fechaFin ) {
+      if ( this.curUsuarioGrupo.fechaInicio !== null &&
+           this.curUsuarioGrupo.fechaFin !== null &&
+           this.curUsuarioGrupo.fechaInicio < this.curUsuarioGrupo.fechaFin ) {
          this.isGreaterGroup = true;
       } else {
          this.isGreaterGroup = false;

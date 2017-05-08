@@ -13,7 +13,7 @@ import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
                providers: [ ConfirmationService ]
             } )
 
-export class AbsenceComponent implements OnInit{
+export class AbsenceComponent implements OnInit {
 
    @Input()
    position: Positions;

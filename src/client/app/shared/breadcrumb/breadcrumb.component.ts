@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { BreadcrumbService } from './breadcrumb.service';
 
@@ -13,9 +13,9 @@ import { BreadcrumbService } from './breadcrumb.service';
                styleUrls: [ 'breadcrumb.component.css' ],
 
             } )
-export class BreadcrumbComponent implements OnInit, OnChanges {
-   @Input() useBootstrap: boolean = true;
-   @Input() prefix: string = '';
+export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
+   @Input() useBootstrap = true;
+   @Input() prefix = '';
 
    public _urls: string[];
    public _routerSubscription: any;

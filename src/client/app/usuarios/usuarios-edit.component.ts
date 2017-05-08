@@ -48,7 +48,7 @@ export class UsuariosEditComponent {
    isTerceroEmpty = false;
    isUserCreated = true;
    userExists = false;
-   terceroExiste: boolean = true;
+   terceroExiste = true;
    sameUser = false;
    terceroObtenido: Employee;
 

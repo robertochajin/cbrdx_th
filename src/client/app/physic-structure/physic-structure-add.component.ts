@@ -14,7 +14,7 @@ import { ListaService } from '../_services/lista.service';
                selector: 'physic-structure',
                providers: [ ConfirmationService ]
             } )
-export class PhysicStructureAddComponent implements OnInit{
+export class PhysicStructureAddComponent implements OnInit {
    physicStructure: PhysicStructure = new PhysicStructure();
    dialogObjet: PhysicStructure = new PhysicStructure();
    ListCategory: SelectItem[] = [];

@@ -8,17 +8,17 @@ import { Positions } from '../_models/positions';
 @Component( {
                moduleId: module.id,
                templateUrl: 'productivity.component.html',
-               selector: 'productivity',
+               selector: 'productivity-component',
                providers: [ ConfirmationService ]
             } )
-export class ProductivityComponent implements OnInit{
+export class ProductivityComponent implements OnInit {
    @Input()
    position: Positions;
    productivity: Productivity = new Productivity();
    ListProductivity: SelectItem[] = [];
    ListIQLevel: SelectItem[] = [];
    ListAptitudeLevel: SelectItem[] = [];
-   header: string = 'Productividad';
+   header = 'Productividad';
    msgs: Message[] = [];
 
    @Output()
