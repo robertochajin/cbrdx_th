@@ -17,12 +17,12 @@ export class CambioContrasenaComponent implements OnInit {
 
    usuario: string;
    correoElectronico: string;
-   recordarUsuario: boolean = false;
-   displayDialog1: boolean = false;
-   displayDialog: boolean = false;
+   recordarUsuario = false;
+   displayDialog1 = false;
+   displayDialog = false;
    error: string;
    notice: string;
-   enviando: boolean = false;
+   enviando = false;
 
    constructor( private authenticationService: AuthenticationService,
       private loginService: LoginService,

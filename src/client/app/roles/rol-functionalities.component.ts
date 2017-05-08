@@ -108,7 +108,7 @@ export class RolFuncionalitiesComponent {
       this.msgs = [];
       this.show_form = false;
       if ( this.isUpdating == true ) {
-         this.isUpdating = false
+         this.isUpdating = false;
          this.menus.splice( 0, 1 );
       }
    }

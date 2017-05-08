@@ -17,7 +17,7 @@ import { Http, Headers } from '@angular/http';
 export class LoginComponent implements OnInit {
    model: any = {
       password: '7848d99b-d',
-      username: "mayerly.gamboa"
+      username: 'mayerly.gamboa'
    };
    intentos: number = 0;
    error: string = '';
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
    login() {
       this.error = '';
       if ( this.intentos >= 3 && !this.captcha ) {
-         this.error = "Error en la Validacion Captcha";
+         this.error = 'Error en la Validacion Captcha';
       } else {
          this.authenticationService.login( this.model.username, this.model.password ).then( res => {
             if ( res ) {
