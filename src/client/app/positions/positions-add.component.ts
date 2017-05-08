@@ -107,11 +107,11 @@ export class PositionsAddComponent {
    }
 
    inputNumber() {
-      var numero = this.position.personaACargoDir + '';
+      let numero = this.position.personaACargoDir + '';
       if ( this.position.personaACargoDir !== null ) {
          this.position.personaACargoDir = Number( numero.replace( /[^0-9]/g, '' ) );
       }
-      var numeroi = this.position.personaACargoInd + '';
+      let numeroi = this.position.personaACargoInd + '';
       if ( this.position.personaACargoInd !== null ) {
          this.position.personaACargoInd = Number( numeroi.replace( /[^0-9]/g, '' ) );
       }

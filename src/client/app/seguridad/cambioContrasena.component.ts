@@ -35,9 +35,9 @@ export class CambioContrasenaComponent implements OnInit {
       this.appmain.setSession( false );
 
       /* Generar random de la imagen de fondo */
-      var min = 1;
-      var max = 6;
-      var random = Math.floor( Math.random() * (max - min + 1) ) + min;
+      let min = 1;
+      let max = 6;
+      let random = Math.floor( Math.random() * (max - min + 1) ) + min;
       jQuery( '#loginBg' ).css( 'background-image', 'url("/assets/images/bg-login' + random + '.jpg")' );
 
    }

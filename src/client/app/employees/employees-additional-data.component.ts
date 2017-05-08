@@ -113,7 +113,7 @@ export class EmployeesAdditionalDataComponent {
       }
       if ( this.employee.peso !== null && this.employee.talla !== null ) {
          if ( !isNaN( this.employee.peso ) && !isNaN( this.employee.talla ) ) {
-            var imc = (this.employee.peso / Math.pow( (this.employee.talla / 100), 2 ));
+            let imc = (this.employee.peso / Math.pow( (this.employee.talla / 100), 2 ));
             this.employee.imc = Number( imc.toFixed( 2 ) );
          }
       }
