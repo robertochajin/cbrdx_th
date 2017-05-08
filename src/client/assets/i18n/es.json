@@ -531,6 +531,8 @@
       "BTN_AGREGARMODULO":"Agregar Módulo",
       "BTN_AGREGARMENU":"Agregar Menú",
       "LBL_SECUENCIA":"Secuencia",
+      "LBL_CLASE":"Clase",
+      "LBL_ENLACE":"Enlace",
       "MSG_CLASEREQUERIDO": "Clase de estilo es requerido"
    },
 
