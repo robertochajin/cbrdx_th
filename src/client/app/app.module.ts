@@ -76,9 +76,12 @@ import { MenuManagerModule } from "./menuManager/menuManager.module";
 import {AuthModule} from "./shared/auth.module";
 
 // Global Messages
-import {
-   MessagesModule,
-} from 'primeng/primeng';
+import { MessagesModule} from 'primeng/primeng';
+
+// BreadCrumb
+//import {Ng2BreadcrumbModule,BreadcrumbService} from 'ng2-breadcrumb/ng2-breadcrumb';
+import { BreadcrumbModule, BreadcrumbService} from "./shared/breadcrumb/breadcrumb";
+
 
 //CarsModule,
 @NgModule({
@@ -107,6 +110,7 @@ import {
       FormManagerModule,
       AuthModule,
       SharedModule.forRoot(),
+      BreadcrumbModule.forRoot(),
       TranslateModule.forRoot({
          provide: TranslateLoader,
          useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
@@ -145,6 +149,7 @@ import {
       AuthGuard,
       AuthenticationService,
       LoginService,
+      BreadcrumbService,
       {
          provide: APP_BASE_HREF,
          useValue: '<%= APP_BASE %>',

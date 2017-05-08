@@ -377,7 +377,7 @@ export class EmployeesAddComponent {
    }
 
    inputCleanUp(value: string) {
-      this.employee.numeroDocumento = value.toUpperCase().replace(' ', '').trim();
+      this.employee.numeroDocumento = value.toUpperCase().replace(/[^0-9]/g, '').trim();
    }
 
 }

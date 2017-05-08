@@ -3,6 +3,7 @@ import {Employee} from '../_models/employees';
 import {EmployeesService} from '../_services/employees.service';
 import {Router} from '@angular/router';
 import {ConfirmationService} from 'primeng/primeng';
+import { NavService } from "../_services/_nav.service";
 
 @Component({
     moduleId: module.id,
@@ -15,14 +16,18 @@ export class EmployeesComponent {
 
     employee: Employee = new Employee();
     dialogObjet: Employee = new Employee();
-
+   
     employees: Employee[];
     codigoTipo: number;
+    busqueda: string;
+    
     constructor(
         private employeesService: EmployeesService,
         private router: Router,
-        private confirmationService: ConfirmationService
+        private confirmationService: ConfirmationService,
+        private navService: NavService
         ) {
+       this.busqueda = navService.getSearch('employees.component');
     }
 
     ngOnInit() {
@@ -65,6 +70,9 @@ export class EmployeesComponent {
     update(c: Employee) {
         this.router.navigate(['employees/update/'+c.idTercero]);
     }
+   setSearch(){
+       this.navService.setSearch('employees.component',this.busqueda)
+   }
 
 
 }
