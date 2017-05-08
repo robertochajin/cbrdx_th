@@ -1,33 +1,33 @@
-<h3 class="first">Estructura Física</h3>
+<h3 class="first">{{ 'ESTRUCTURAFISICA.LBL_ESTRUCTURA' | translate}}</h3>
 <div>
    <div class="row datable-header">
       <div class="col-md-6 col-xs-12 datatable-header-add">
-         <button type="button" icon="fa-plus" label="Agregar Nuevo"
+         <button type="button" icon="fa-plus" label="{{ 'ESTRUCTURAFISICA.BTN_AGREGARNUEVO' | translate}}"
                  pButton (click)="add()"></button>
       </div>
       <div class="col-md-6 col-xs-12 datatable-header-search">
          <div class="input-group">
             <div class="input-group-addon"><i class="fa fa-search"></i></div>
-            <input #gb type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
+            <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate}}" class="form-control">
          </div>
       </div>
    </div>
    <p-dataTable [value]="ListPhysicStructure" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-      <p-column field="codigo" header="Código" [sortable]="true"></p-column>
-      <p-column field="estructuraFisica" header="Nombre" [sortable]="true"></p-column>
-      <p-column field="clasificacionSede" header="Categoría" [sortable]="true"></p-column>
-      <p-column field="direccion" header="Dirección" [sortable]="true"></p-column>
-      <p-column header="Ind. Virtual" styleClass="datatable-col-action">
+      <p-column field="codigo" header="{{ 'LBL_CODIGO' | translate}}" [sortable]="true"></p-column>
+      <p-column field="estructuraFisica" header="{{ 'LBL_NOMBRE' | translate}}" [sortable]="true"></p-column>
+      <p-column field="clasificacionSede" header="{{ 'ESTRUCTURAFISICA.LBL_CATEGORIA' | translate}}" [sortable]="true"></p-column>
+      <p-column field="direccion" header="{{ 'LBL_DIRECCION' | translate}}" [sortable]="true"></p-column>
+      <p-column header="{{ 'ESTRUCTURAFISICA.LBL_VIRTUAL' | translate}}" styleClass="datatable-col-action">
          <template let-physicStructure="rowData" pTemplate="body">
             <p-checkbox name="indicadorVirtual" [(ngModel)]="physicStructure.indicadorVirtual" binary="true" disabled="true" ></p-checkbox>
          </template>
       </p-column>
-      <p-column header="Ind. Habilitado" styleClass="datatable-col-action">
+      <p-column header="{{ 'LBL_HABILITADO' | translate}}" styleClass="datatable-col-action">
          <template let-physicStructure="rowData" pTemplate="body">
             <p-checkbox name="indicadorHabilitado" [(ngModel)]="physicStructure.indicadorHabilitado" binary="true" disabled="true" ></p-checkbox>
          </template>
       </p-column>
-      <p-column header="Acciones" styleClass="datatable-col-action">
+      <p-column header="{{ 'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
          <template let-physicStructure="rowData" pTemplate="body">
             <button type="button" icon="fa-eye" class="ui-button-info"
                     pButton (click)="detail(physicStructure)"></button>

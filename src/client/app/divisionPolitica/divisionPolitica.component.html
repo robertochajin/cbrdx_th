@@ -1,4 +1,4 @@
-<h3>División Politica</h3>
+<h3>{{ 'DIVISIONPOLITICA.LBL_DIVSIONPOLITICA' | translate}}</h3>
 <div class="row datable-header">
     <div class="col-md-6 col-xs-12 datatable-header-add">
         <button type="button" pButton icon="fa-plus" (click)="newCountry()" label="{{btnnuevopais.label}}"
@@ -13,7 +13,7 @@
     <div class="col-md-6 col-xs-12 datatable-header-search">
        <div class="input-group">
           <div class="input-group-addon"><i class="fa fa-search"></i></div>
-          <p-autoComplete placeholder="Buscar..." field="label" name="buscar" id="buscar" #buscar="ngModel"
+          <p-autoComplete placeholder="{{ 'LBL_BUSCAR' | translate}}" field="label" name="buscar" id="buscar" #buscar="ngModel"
                           [(ngModel)]="selectedSearch"
                           [suggestions]="resultSearch"
                           (completeMethod)="search($event)"
@@ -55,10 +55,10 @@
                                            required/>
                                     <div *ngIf="fdivision.submitted && !codigoDivisionPolitica.valid"
                                          class="help-block">
-                                        Código es requerido
+                                       {{ 'DIVISIONPOLITICA.MSG_CODREQUERIDO' | translate}}
                                     </div>
                                     <div *ngIf="codeExists" class="ui-message  ui-corner-all">
-                                      Ya se encuentra registrado ese código
+                                       {{ 'DIVISIONPOLITICA.MSG_CODREGISTRADO' | translate}}
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                                            required/>
                                     <div *ngIf="fdivision.submitted && !descripcionDivisonPolitica.valid"
                                          class="help-block">
-                                        {{labeldescripcionDivisonPolitica}} es requerido
+                                        {{labeldescripcionDivisonPolitica}} {{ 'DIVISIONPOLITICA.MSG_ESREQ' | translate}}
                                     </div>
                                 </div>
                             </div>
@@ -94,14 +94,14 @@
                                             maxlength="20" (keyup)="inputNumberIndicativo()"
                                     >
                                     <div class="ui-message ui-corner-all" *ngIf="fdivision.submitted && !indicativoDivisonPolitica.valid">
-                                        <i class="fa fa-close"></i>Solo números
+                                        <i class="fa fa-close"></i> {{ 'DIVISIONPOLITICA.MSG_SOLONUMEROS' | translate}}
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row" *ngIf="tabselected > 1">
                             <div class="form-group">
-                                <label for="codigoPostal" class="control-label col-sm-3">{{ 'LBL_CODIGO' | translate }} {{ 'LBL_POSTAL' | translate }}</label>
+                                <label for="codigoPostal" class="control-label col-sm-3">{{ 'DIVISIONPOLITICA.LBL_CODIGOPOSTAL' | translate }}</label>
                                 <div class=" col-sm-9">
                                     <input type="text" pInputText class="form-control" id="codigoPostal"
                                            name="codigoPostal"
@@ -112,7 +112,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group" *ngIf="tabselected == 4">
-                                <label for="estratoDivisionPolitica" class="control-label col-sm-3">{{ 'LBL_ESTRATO' | translate }} </label>
+                                <label for="estratoDivisionPolitica" class="control-label col-sm-3">{{ 'DIVISIONPOLITICA.LBL_ESTRATO' | translate }} </label>
                                 <div class=" col-sm-9">
                                     <p-dropdown id="estratoDivisionPolitica" name="estratoDivisionPolitica"
                                                 [options]="divisionPoliticaEstrato" [autoWidth]="false"
@@ -169,7 +169,7 @@
                         </div>
                         <div class="row" *ngIf="tabselected == 3">
                             <div class="form-group">
-                                <label for="DPArea" class="control-label col-sm-3">{{ 'LBL_AREA' | translate }} </label>
+                                <label for="DPArea" class="control-label col-sm-3">{{ 'DIVISIONPOLITICA.LBL_AREA' | translate }} </label>
                                 <div class=" col-sm-9">
                                     <p-dropdown id="DPArea" name="DPArea" [options]="divisionPoliticaAreas"
                                                 [autoWidth]="false"
@@ -200,13 +200,13 @@
                 </div>
             </div>
         </p-fieldset>
-        <p-dialog header="Confirmación" [(visible)]="displayDialog"
+        <p-dialog header="{{ 'LBL_CONFIRMACION' | translate }}" [(visible)]="displayDialog"
                   responsive="true" modal="true">
             <p>{{ 'MSG_CONFIRMACION' | translate }}</p>
             <p-footer>
                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                    <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>
-                    <button type="button" pButton icon="fa-check" (click)="doCancel()" label="Si"></button>
+                    <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="{{ 'BTN_NO' | translate }}"></button>
+                    <button type="button" pButton icon="fa-check" (click)="doCancel()" label="{{ 'BTN_SI' | translate }}"></button>
                 </div>
             </p-footer>
         </p-dialog>
