@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Functionality } from '../_models/functionality';
 import { NavService } from '../_services/_nav.service';
 import { FormManagerService } from '../_services/form-manager.service';
@@ -12,7 +12,7 @@ import { ConfirmationService, Message } from 'primeng/primeng';
                providers: [ ConfirmationService ]
             } )
 
-export class FormManagerComponent {
+export class FormManagerComponent implements OnInit {
    functionality: Functionality = new Functionality();
    listFunctionalities: Functionality[];
    msgs: Message[] = [];
@@ -32,9 +32,6 @@ export class FormManagerComponent {
       } );
    }
 
-   // update(c: Functionality) {
-   //    this.router.navigate(['form-manager/update/'+c.idFuncionalidad]);
-   // }
    add() {
       this.router.navigate( [ 'form-manager/add' ] );
    }

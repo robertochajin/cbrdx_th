@@ -28,7 +28,7 @@ export class ListaDetailComponent implements OnInit {
       .switchMap( ( params: Params ) => this.listasService.getMaster( +params[ 'id' ] ) )
       .subscribe( data => {
          this.masterList = data;
-         this.habilitado = data.indicadorEditable ? "Si" : "No";
+         this.habilitado = data.indicadorEditable ? 'Si' : 'No';
          this.listasService.getMasterAllDetails( this.masterList.nombreTabla ).subscribe( res => {
             this.detailsList = res;
          } );

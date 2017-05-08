@@ -59,7 +59,7 @@
                   </div>
                </div>
                <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="ListJobProjection" [paginator]="true" [rows]="10" [responsive]="true"
-                            [globalFilter]="gb">
+                           >
                   <p-column field="cargo" header="Cargo" [sortable]="true"></p-column>
                   <p-column field="plazasActuales" header="Plazas Actuales" [sortable]="true"></p-column>
                   <p-column field="plazasProyectadas" header="Plazas Proyectdas" [sortable]="true"></p-column>
@@ -142,8 +142,8 @@
             <p-confirmDialog width="400"></p-confirmDialog>
          </div>
          <div *ngIf="!addinglocation">
-            <projections (dismiss)="toggleform()" (create)="bindLocation($event)"
-                         [id]="jobProjection.idEstructuraOrganizacional" [anio]="jobProjection.anio"></projections>
+            <projections-add (dismiss)="toggleform()" (create)="bindLocation($event)"
+                             [id]="jobProjection.idEstructuraOrganizacional" [anio]="jobProjection.anio"></projections-add>
          </div>
       </div>
       <div *ngIf="!detailprojection">

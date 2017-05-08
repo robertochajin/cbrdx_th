@@ -8,20 +8,16 @@ import { Router } from '@angular/router';
 @Component( {
                moduleId: module.id,
                templateUrl: 'gruposGestion.component.html',
-               selector: 'gruposGestion'
+               selector: 'gruposGestion-list'
             } )
-export class GruposGestionComponent implements OnInit {
+export class GruposGestionComponent {
 
    gruposGestion: GruposGestion[];
 
    constructor( private gruposGestionService: GruposGestionService, private router: Router ) {
       gruposGestionService.listGruposGestion().subscribe( res => {
          this.gruposGestion = res;
-      } )
-   }
-
-   ngOnInit(): void {
-
+      } );
    }
 
    addGrupoGestion() {
