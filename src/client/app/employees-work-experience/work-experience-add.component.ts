@@ -57,7 +57,7 @@ export class WorkExperienceAddComponent implements OnInit {
       private _nav: NavService ) {
 
       this.actividadEconomicaService.listByPadre( 0 ).subscribe( res => {
-         this.sector.push( { label: "Seleccione", value: null } );
+         this.sector.push( { label: 'Seleccione', value: null } );
          for ( let dp of res ) {
             this.sector.push( {
                                  label: dp.actividadEconomica,
@@ -78,11 +78,11 @@ export class WorkExperienceAddComponent implements OnInit {
    ngOnInit() {
       this.es = {
          firstDayOfWeek: 1,
-         dayNames: [ "domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado" ],
-         dayNamesShort: [ "dom", "lun", "mar", "mié", "jue", "vie", "sáb" ],
-         dayNamesMin: [ "D", "L", "M", "X", "J", "V", "S" ],
-         monthNames: [ "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" ],
-         monthNamesShort: [ "ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic" ]
+         dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
+         dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
+         dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
+         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre' ],
+         monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
       this.route.params.subscribe( ( params: Params ) => {
          this.idTercero = params[ 'tercero' ];
@@ -171,7 +171,7 @@ export class WorkExperienceAddComponent implements OnInit {
    updateActivities( value: number ) {
       this.activities = [];
       this.actividadEconomicaService.listLastChild( value ).subscribe( res => {
-         this.activities.push( { label: "Seleccione", value: null } );
+         this.activities.push( { label: 'Seleccione', value: null } );
          for ( let dp of res ) {
             this.activities.push( {
                                      label: dp.actividadEconomica,

@@ -11,18 +11,18 @@ import { Message } from 'primeng/primeng';
                selector: 'menu-manager',
 
             } )
-export class MenuManagerComponent implements OnInit {
+export class MenuManagerComponent {
    msgs: Message[] = [];
    menus: MenuManager = new MenuManager();
    listmenu: MenuManager[];
 
    treeMenu: TreeNode[] = [];
    selectedNode: TreeNode;
-   modulo: boolean = true;
+   modulo = true;
    header: string;
-   displayDialog: boolean = false;
-   codeExists: boolean = false;
-   guardando: boolean = false;
+   displayDialog = false;
+   codeExists = false;
+   guardando = false;
 
    constructor( private router: Router,
       private menuManagerService: MenuManagerService ) {
@@ -30,17 +30,14 @@ export class MenuManagerComponent implements OnInit {
          this.listmenu = res;
          for ( let c of this.listmenu.filter( t => t.idPadre == 0 || t.idPadre == null ) ) {
             let companyNode = {
-               "label": c.menu,
-               "data": c,
-               "leaf": false,
+               'label': c.menu,
+               'data': c,
+               'leaf': false,
             };
             this.treeMenu.push( companyNode );
          }
          this.newModule();
       } );
-   }
-
-   ngOnInit(): void {
    }
 
    validateCode() {
@@ -87,11 +84,11 @@ export class MenuManagerComponent implements OnInit {
       let chilNodes: TreeNode[] = [];
       for ( let c of this.listmenu.filter( t => t.idPadre == node.data.idMenu ) ) {
          chilNodes.push( {
-                            "label": c.menu,
-                            "data": c,
-                            "parent": node,
-                            "leaf": true,
-                            "children": []
+                            'label': c.menu,
+                            'data': c,
+                            'parent': node,
+                            'leaf': true,
+                            'children': []
                          } );
       }
       node.children = chilNodes;
@@ -124,9 +121,9 @@ export class MenuManagerComponent implements OnInit {
             this.guardando = false;
             this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Registro guardado con exito!' } );
             let newChil: any = {
-               "label": this.menus.menu,
-               "data": data,
-               "children": []
+               'label': this.menus.menu,
+               'data': data,
+               'children': []
             };
             this.listmenu.push( data );
             if ( this.menus.idPadre == 0 || this.menus.idPadre == null ) {

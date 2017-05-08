@@ -20,7 +20,7 @@ export class GruposGestionDetailComponent {
       route.params.switchMap( ( params: Params ) => gruposGestionService.viewGruposGestion( +params[ 'id' ] ) )
       .subscribe( data => {
          this.grupoGestion = data;
-         this.habilitado = data.indicadorHabilitado ? "Si" : "No";
+         this.habilitado = data.indicadorHabilitado ? 'Si' : 'No';
       } );
    }
 

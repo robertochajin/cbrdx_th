@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import 'rxjs/add/operator/toPromise';
-//import 'rxjs/add/operator/toPromise';
 import { WorkExperienceComponent } from './work-experience.component';
 import { WorkExperienceDetailComponent } from './work-experience-detail.component';
 import { WorkExperienceAddComponent } from './work-experience-add.component';

@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { JobProjection } from '../_models/jobProjection';
@@ -15,14 +15,14 @@ import { NavService } from '../_services/_nav.service';
                providers: [ ConfirmationService ]
             } )
 
-export class JobProjectionUpdateComponent {
+export class JobProjectionUpdateComponent implements OnInit {
    @Input()
    jobProjection: JobProjection = new JobProjection();
    @Output()
    update: EventEmitter<JobProjection> = new EventEmitter<JobProjection>();
    positions: Positions = new Positions();
    constante: Constante = new Constante();
-   header: string = 'Editando Proyección';
+   header = 'Editando Proyección';
    msgs: Message[] = [];
    year: Number;
    @Output()
@@ -40,7 +40,7 @@ export class JobProjectionUpdateComponent {
    ngOnInit() {
       this.jobProjectionService.getConstantes().subscribe( rest => {
          for ( let c of rest ) {
-            if ( c.constante === "AUMSUE" ) {
+            if ( c.constante === 'AUMSUE' ) {
                this.constante = c;
                break;
             }
@@ -61,7 +61,7 @@ export class JobProjectionUpdateComponent {
 
    onCreate() {
       this.jobProjection.idEstadoProyeccion = 4;
-      this.jobProjection.estadoProyeccion = "Pendiente Por Aprobar";
+      this.jobProjection.estadoProyeccion = 'Pendiente Por Aprobar';
       this.jobProjectionService.update( this.jobProjection ).subscribe( rest => {
          this.update.emit( this.jobProjection );
       } );

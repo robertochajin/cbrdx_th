@@ -24,7 +24,7 @@ export class WorkExperienceComponent implements OnInit {
 
    ngOnInit() {
       this.workExperienceService.getByEmployee( this.employee.idTercero ).subscribe(
-         //this.workExperienceService.getByEmployee(11).subscribe(
+         // this.workExperienceService.getByEmployee(11).subscribe(
          fstudies => this.experiences = fstudies
       );
    }

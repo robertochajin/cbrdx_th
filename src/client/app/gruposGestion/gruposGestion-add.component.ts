@@ -15,9 +15,9 @@ export class GruposGestionAddComponent implements OnInit {
 
    grupoGestion: GruposGestion = new GruposGestion();
    gruposGestion: GruposGestion[];
-   codeExists: boolean = false;
+   codeExists = false;
    currentDate: Date = new Date( Date.now() );
-   displayDialog: boolean = false;
+   displayDialog = false;
    isRequired = false;
    isGreater = true;
    private es: any;
@@ -41,7 +41,8 @@ export class GruposGestionAddComponent implements OnInit {
    }
 
    validateGreater() {
-      if ( this.grupoGestion.fechaInicio !== null && this.grupoGestion.fechaFin !== null && this.grupoGestion.fechaInicio < this.grupoGestion.fechaFin ) {
+      if ( this.grupoGestion.fechaInicio !== null && this.grupoGestion.fechaFin !== null &&
+           this.grupoGestion.fechaInicio < this.grupoGestion.fechaFin ) {
          this.isGreater = true;
       } else {
          this.isGreater = false;
@@ -57,7 +58,7 @@ export class GruposGestionAddComponent implements OnInit {
 
    createGruposGestion() {
       this.gruposGestionService.addGruposGestion( this.grupoGestion ).then( data => {
-         this.router.navigate( [ 'gruposGestion' ] )
+         this.router.navigate( [ 'gruposGestion' ] );
       } );
    }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { JobProjection } from '../_models/jobProjection';
 import { JobProjectionService } from '../_services/jobProjection.service';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { ListaService } from '../_services/lista.service';
                providers: [ ConfirmationService ]
             } )
 
-export class JobProjectionComponent {
+export class JobProjectionComponent implements OnInit {
 
    jobProjection: JobProjection = new JobProjection();
    ListJobProjection: JobProjection[] = [];
@@ -21,20 +21,20 @@ export class JobProjectionComponent {
    ListaAreas: SelectItem[] = [];
    anioSelect: SelectItem[] = [];
    dialogObjet: JobProjection = new JobProjection();
-   addinglocation: boolean = true;
-   detailprojection: boolean = true;
-   updateprojection: boolean = true;
-   approveprojection: boolean = true;
+   addinglocation = true;
+   detailprojection = true;
+   updateprojection = true;
+   approveprojection = true;
    msgs: Message[] = [];
    estadoArea: string;
    idEstrucArea: number;
-   nuevoCargo: boolean = false;
-   viewanio: boolean = false;
+   nuevoCargo = false;
+   viewanio = false;
    cargos: string;
-   cargosA: number = 0;
-   plazasA: number = 0;
-   costoA: string = "0";
-   costoAA: number = 0;
+   cargosA = 0;
+   plazasA = 0;
+   costoA = '0';
+   costoAA = 0;
    costo: string;
    plazasP: string;
    costoP: string;
@@ -54,7 +54,7 @@ export class JobProjectionComponent {
    ngOnInit() {
       this.minanio = this.year;
       this.jobProjectionService.getLisTypeStructure().subscribe( rest => {
-         this.ListaTiposAreas.push( { label: "Seleccione", value: null } );
+         this.ListaTiposAreas.push( { label: 'Seleccione', value: null } );
          for ( let dp of rest ) {
             this.ListaTiposAreas.push( {
                                           label: dp.estructuraArea,
@@ -67,7 +67,7 @@ export class JobProjectionComponent {
    calculateCostA() {
       this.plazasA = 0;
       this.cargosA = 0;
-      this.costoA = "0";
+      this.costoA = '0';
       let costoa = 0;
       this.jobProjectionService.getLisStructurePositions( this.jobProjection.idEstructuraOrganizacional ).subscribe( res => {
          for ( let r of res ) {
@@ -76,7 +76,7 @@ export class JobProjectionComponent {
             costoa += Number( r.plazas ) * Number( r.salario );
             this.costoAA += Number( r.plazas ) * Number( r.salario );
          }
-         this.costoA = new Intl.NumberFormat( [ "ban", "id" ] ).format( costoa );
+         this.costoA = new Intl.NumberFormat( [ 'ban', 'id' ] ).format( costoa );
       } );
    }
 
@@ -88,7 +88,7 @@ export class JobProjectionComponent {
       this.ListaAreas = [];
       this.ListJobProjection = [];
       this.jobProjectionService.getLisStructure( this.jobProjection.idCargo ).subscribe( rest => {
-         this.ListaAreas.push( { label: "Seleccione", value: null } );
+         this.ListaAreas.push( { label: 'Seleccione', value: null } );
          for ( let dp of rest ) {
             this.ListaAreas.push( {
                                      label: dp.nombre,
@@ -102,7 +102,7 @@ export class JobProjectionComponent {
       this.minanio = this.year;
       this.plazasA = 0;
       this.cargosA = 0;
-      this.costoA = "0";
+      this.costoA = '0';
       this.calculateCostA();
       this.jobProjection.anio = null;
       this.viewanio = true;
@@ -135,8 +135,8 @@ export class JobProjectionComponent {
          if ( Number( this.jobProjection.anio ) === p.anio ) {
             let v = p.costoProyectado;
             let va = p.costoActual;
-            p.costoPP = new Intl.NumberFormat( [ "ban", "id" ] ).format( v );
-            p.costoAP = new Intl.NumberFormat( [ "ban", "id" ] ).format( va );
+            p.costoPP = new Intl.NumberFormat( [ 'ban', 'id' ] ).format( v );
+            p.costoAP = new Intl.NumberFormat( [ 'ban', 'id' ] ).format( va );
             this.ListJobProjection.push( p );
          }
       }
@@ -148,9 +148,9 @@ export class JobProjectionComponent {
             ok = false;
          }
       }
-      ok ? this.estadoArea = "Area Totalmente Aprobada" : this.estadoArea = "Area Parciamente Aprobada";
+      ok ? this.estadoArea = 'Area Totalmente Aprobada' : this.estadoArea = 'Area Parciamente Aprobada';
       this.plazasP = plazasP.toFixed( 0 );
-      this.costoP = new Intl.NumberFormat( [ "ban", "id" ] ).format( costoP );
+      this.costoP = new Intl.NumberFormat( [ 'ban', 'id' ] ).format( costoP );
       this.cargos = cargos.toFixed( 0 );
       this.plazasI = (((plazasP - this.plazasA) / this.plazasA) * 100).toFixed( 2 );
       this.cargosI = (((cargos - this.cargosA) / this.cargosA) * 100).toFixed( 2 );
@@ -242,9 +242,9 @@ export class JobProjectionComponent {
             ok = false;
          }
       }
-      ok ? this.estadoArea = "Area Totalmente Aprobada" : this.estadoArea = "Area Parciamente Aprobada";
+      ok ? this.estadoArea = 'Area Totalmente Aprobada' : this.estadoArea = 'Area Parciamente Aprobada';
       this.plazasP = plazasP.toFixed( 0 );
-      this.costoP = new Intl.NumberFormat( [ "ban", "id" ] ).format( costoP );
+      this.costoP = new Intl.NumberFormat( [ 'ban', 'id' ] ).format( costoP );
       this.cargos = cargos.toFixed( 0 );
       this.plazasI = (((plazasP - this.plazasA) / this.plazasA) * 100).toFixed( 2 );
       this.cargosI = (((cargos - this.cargosA) / this.cargosA) * 100).toFixed( 2 );
@@ -272,9 +272,9 @@ export class JobProjectionComponent {
             ok = false;
          }
       }
-      ok ? this.estadoArea = "Area Totalmente Aprobada" : this.estadoArea = "Area Parciamente Aprobada";
+      ok ? this.estadoArea = 'Area Totalmente Aprobada' : this.estadoArea = 'Area Parciamente Aprobada';
       this.plazasP = plazasP.toFixed( 0 );
-      this.costoP = new Intl.NumberFormat( [ "ban", "id" ] ).format( costoP );
+      this.costoP = new Intl.NumberFormat( [ 'ban', 'id' ] ).format( costoP );
       this.cargos = cargos.toFixed( 0 );
       this.plazasI = (((plazasP - this.plazasA) / this.plazasA) * 100).toFixed( 2 );
       this.cargosI = (((cargos - this.cargosA) / this.cargosA) * 100).toFixed( 2 );
@@ -302,9 +302,9 @@ export class JobProjectionComponent {
             ok = false;
          }
       }
-      ok ? this.estadoArea = "Area Totalmente Aprobada" : this.estadoArea = "Area Parciamente Aprobada";
+      ok ? this.estadoArea = 'Area Totalmente Aprobada' : this.estadoArea = 'Area Parciamente Aprobada';
       this.plazasP = plazasP.toFixed( 0 );
-      this.costoP = new Intl.NumberFormat( [ "ban", "id" ] ).format( costoP );
+      this.costoP = new Intl.NumberFormat( [ 'ban', 'id' ] ).format( costoP );
       this.cargos = cargos.toFixed( 0 );
       this.plazasI = (((plazasP - this.plazasA) / this.plazasA) * 100).toFixed( 2 );
       this.cargosI = (((cargos - this.cargosA) / this.cargosA) * 100).toFixed( 2 );
@@ -332,7 +332,7 @@ export class JobProjectionComponent {
             ok = false;
          }
       }
-      ok ? this.estadoArea = "Area Totalmente Aprobada" : this.estadoArea = "Area Parciamente Aprobada";
+      ok ? this.estadoArea = 'Area Totalmente Aprobada' : this.estadoArea = 'Area Parciamente Aprobada';
 
    }
 
@@ -354,9 +354,9 @@ export class JobProjectionComponent {
             ok = false;
          }
       }
-      ok ? this.estadoArea = "Area Totalmente Aprobada" : this.estadoArea = "Area Parciamente Aprobada";
+      ok ? this.estadoArea = 'Area Totalmente Aprobada' : this.estadoArea = 'Area Parciamente Aprobada';
       this.plazasP = plazasP.toFixed( 0 );
-      this.costoP = new Intl.NumberFormat( [ "ban", "id" ] ).format( costoP );
+      this.costoP = new Intl.NumberFormat( [ 'ban', 'id' ] ).format( costoP );
       this.cargos = cargos.toFixed( 0 );
       this.plazasI = (((plazasP - this.plazasA) / this.plazasA) * 100).toFixed( 2 );
       this.cargosI = (((cargos - this.cargosA) / this.cargosA) * 100).toFixed( 2 );
@@ -367,9 +367,9 @@ export class JobProjectionComponent {
    confirmProjection() {
       this.jobProjectionService.getPending().subscribe( rest => {
          this.msgs = [];
-         let str = "Existen las siguientes areas con algun inconveniente";
+         let str = 'Existen las siguientes areas con algun inconveniente';
          for ( let r of rest ) {
-            str = "Area:" + r.area + "|--Estado:" + r.estado + "|--Cantidad:" + r.cantidad;
+            str = 'Area:' + r.area + '|--Estado:' + r.estado + '|--Cantidad:' + r.cantidad;
             this.msgs.push( {
                                severity: 'info',
                                summary: '#',

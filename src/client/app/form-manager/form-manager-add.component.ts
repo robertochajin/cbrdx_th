@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Functionality } from '../_models/functionality';
 import { FunctionalityControl } from '../_models/functionalityContorl';
 import { NavService } from '../_services/_nav.service';
@@ -16,7 +16,7 @@ import { ListaItem } from '../_models/listaItem';
                providers: [ ConfirmationService ]
             } )
 
-export class FormManagerAddComponent {
+export class FormManagerAddComponent implements OnInit {
 
    functionality: Functionality = new Functionality();
    functionalityControl: FunctionalityControl = new FunctionalityControl();
@@ -33,20 +33,20 @@ export class FormManagerAddComponent {
    listClassificationCampo: SelectItem[] = [];
    msgs: Message[] = [];
    acordion: number;
-   campodisabled: boolean = true;
-   secciondisabled: boolean = true;
-   indicadorSeccion: boolean = true;
+   campodisabled = true;
+   secciondisabled = true;
+   indicadorSeccion = true;
    indicadorVisible: string;
    indicadorImprime: string;
    indicadorHabilitado: string;
    idPadre: number;
-   editingField: boolean = false;
-   detailSection: boolean = false;
-   detailField: boolean = false;
-   editingSection: boolean = false;
-   codExists: boolean = false;
-   showFrom: boolean = true;
-   showFormF: boolean = true;
+   editingField = false;
+   detailSection = false;
+   detailField = false;
+   editingSection = false;
+   codExists = false;
+   showFrom = true;
+   showFormF = true;
 
    constructor( private formManagerService: FormManagerService,
       private router: Router,
