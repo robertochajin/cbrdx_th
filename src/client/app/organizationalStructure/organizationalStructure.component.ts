@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { OrganizationalStructureService } from '../_services/organizationalStructure.service';
 import { OrganizationalStructure } from '../_models/organizationalStructure';
 import { TreeNode } from 'primeng/components/common/api';
 import { SelectItem, Message } from 'primeng/primeng';
-import { ListEmployeesService } from '../_services/lists-employees.service';
 import { LocateService } from '../_services/locate.service';
 import { Localizaciones } from '../_models/localizaciones';
 import { PoliticalDivisionService } from '../_services/political-division.service';
@@ -17,7 +15,7 @@ import { ListaService } from '../_services/lista.service';
                selector: 'organizationalStructure',
 
             } )
-export class OrganizationalStructureComponent implements OnInit {
+export class OrganizationalStructureComponent {
    msgs: Message[] = [];
    organizationalStructure: OrganizationalStructure = new OrganizationalStructure();
    listOrganizationalStructure: OrganizationalStructure[];
@@ -40,21 +38,20 @@ export class OrganizationalStructureComponent implements OnInit {
    guardando = false;
    localizacion: Localizaciones = new Localizaciones();
 
-   constructor( private router: Router,
+   constructor(
       private organizationalStructureService: OrganizationalStructureService,
       private listaService: ListaService,
-      private listEmployeesService: ListEmployeesService,
       private politicalDivisionService: PoliticalDivisionService,
       private locateService: LocateService ) {
       organizationalStructureService.listOrganizationalStructure().subscribe( res => {
          this.listOrganizationalStructure = res;
          if ( this.listOrganizationalStructure.length > 0 ) {
             this.empresa = false;
-            for ( let c of this.listOrganizationalStructure.filter( t => t.idPadre == 0 || t.idPadre == null ) ) {
+            for ( let c of this.listOrganizationalStructure.filter( t => t.idPadre === 0 || t.idPadre === null ) ) {
                let companyNode = {
-                  "label": c.nombre,
-                  "data": c,
-                  "leaf": false,
+                  'label': c.nombre,
+                  'data': c,
+                  'leaf': false,
                };
                this.treedCompany.push( companyNode );
                this.selectedNode = companyNode;
@@ -64,7 +61,7 @@ export class OrganizationalStructureComponent implements OnInit {
          } else {
 
             this.empresa = true;
-            this.empty = "No hay elementos registrados";
+            this.empty = 'No hay elementos registrados';
             this.newCompany();
          }
       } );
@@ -82,7 +79,7 @@ export class OrganizationalStructureComponent implements OnInit {
       } );
 
       this.organizationalStructureService.getCostTypes().subscribe( res => {
-         this.costTypes.push( { label: "Seleccione", value: null } );
+         this.costTypes.push( { label: 'Seleccione', value: null } );
          for ( let dp of res ) {
             this.costTypes.push( {
                                     label: dp.centroCostos,
@@ -92,7 +89,7 @@ export class OrganizationalStructureComponent implements OnInit {
       } );
 
       this.organizationalStructureService.getAreaTypes().subscribe( res => {
-         this.areaTypes.push( { label: "Seleccione", value: null } );
+         this.areaTypes.push( { label: 'Seleccione', value: null } );
          for ( let dp of res ) {
             this.areaTypes.push( {
                                     label: dp.estructuraArea,
@@ -102,7 +99,7 @@ export class OrganizationalStructureComponent implements OnInit {
       } );
 
       this.organizationalStructureService.getPhysicalTypes().subscribe( res => {
-         this.physicalTypes.push( { label: "Seleccione", value: null } );
+         this.physicalTypes.push( { label: 'Seleccione', value: null } );
          for ( let dp of res ) {
             this.physicalTypes.push( {
                                         label: dp.estructuraFisica,
@@ -113,14 +110,12 @@ export class OrganizationalStructureComponent implements OnInit {
 
    }
 
-   ngOnInit(): void {
-      this.localizacion.direccion
-   }
 
    validateCode() {
       if ( this.organizationalStructure.codigo !== '' && this.organizationalStructure.codigo !== null ) {
          this.codeExists = this.listOrganizationalStructure.filter(
-               t => (t.codigo === this.organizationalStructure.codigo && t.idEstructuraOrganizacional !== this.organizationalStructure.idEstructuraOrganizacional ) ).length > 0;
+               t => (t.codigo === this.organizationalStructure.codigo
+                     && t.idEstructuraOrganizacional !== this.organizationalStructure.idEstructuraOrganizacional ) ).length > 0;
       } else {
          this.codeExists = false;
       }
@@ -137,7 +132,9 @@ export class OrganizationalStructureComponent implements OnInit {
    validateDocument() {
       if ( this.organizationalStructure.numeroDocumento !== '' && this.organizationalStructure.idTipoDocumento !== null ) {
          this.documentExists = this.listOrganizationalStructure.filter(
-               t => (t.numeroDocumento === this.organizationalStructure.numeroDocumento && t.idTipoDocumento === this.organizationalStructure.idTipoDocumento && t.idEstructuraOrganizacional !== this.organizationalStructure.idEstructuraOrganizacional ) ).length > 0;
+               t => (t.numeroDocumento === this.organizationalStructure.numeroDocumento
+                     && t.idTipoDocumento === this.organizationalStructure.idTipoDocumento
+                     && t.idEstructuraOrganizacional !== this.organizationalStructure.idEstructuraOrganizacional ) ).length > 0;
       } else {
          this.documentExists = false;
       }
@@ -170,13 +167,13 @@ export class OrganizationalStructureComponent implements OnInit {
 
    nodeExpand( node: any ) {
       let chilNodes: TreeNode[] = [];
-      for ( let c of this.listOrganizationalStructure.filter( t => t.idPadre == node.data.idEstructuraOrganizacional ) ) {
+      for ( let c of this.listOrganizationalStructure.filter( t => t.idPadre === node.data.idEstructuraOrganizacional ) ) {
          chilNodes.push( {
-                            "label": c.nombre,
-                            "data": c,
-                            "parent": node,
-                            "leaf": false,
-                            "children": []
+                            'label': c.nombre,
+                            'data': c,
+                            'parent': node,
+                            'leaf': false,
+                            'children': []
                          } );
       }
       node.children = chilNodes;
@@ -185,18 +182,13 @@ export class OrganizationalStructureComponent implements OnInit {
 
    nodeSelect( node: any ) {
 
-      if ( node.data.idPadre == 0 || node.data.idPadre == null ) {
-         this.empresa = true;
-
-      } else {
-         this.empresa = false;
-      }
+      this.empresa = node.data.idPadre === 0 || node.data.idPadre === null;
       this.organizationalStructureService.viewOrganizationalStructure( node.data.idEstructuraOrganizacional ).subscribe(
          organizationalStructure => {
             this.organizationalStructure = organizationalStructure;
             this.codeExists = false;
             this.documentExists = false;
-            if ( node.data.idPadre == 0 || node.data.idPadre == null ) {
+            if ( node.data.idPadre === 0 || node.data.idPadre === null ) {
                this.header = this.organizationalStructure.nombre;
                if ( this.organizationalStructure.idLocalizacion !== null ) {
                   this.locateService.getById( this.organizationalStructure.idLocalizacion ).subscribe( localizacion => {
@@ -221,10 +213,10 @@ export class OrganizationalStructureComponent implements OnInit {
 
    save() {
 
-      if ( this.empresa == true ) {
+      if ( this.empresa === true ) {
          if ( this.organizationalStructure.localizacion !== '' && this.organizationalStructure.localizacion !== null ) {
 
-            if ( this.organizationalStructure.idLocalizacion == null || this.organizationalStructure.idLocalizacion == 0 ) {
+            if ( this.organizationalStructure.idLocalizacion === null || this.organizationalStructure.idLocalizacion === 0 ) {
                this.localizacion.indicadorHabilitado = true;
                this.locateService.add( this.localizacion ).subscribe(
                   data => {
@@ -233,7 +225,7 @@ export class OrganizationalStructureComponent implements OnInit {
                   } );
             } else {
                this.locateService.update( this.localizacion ).subscribe(
-                  data => {
+                  () => {
                      return this.saveEO();
                   } );
             }
@@ -249,7 +241,8 @@ export class OrganizationalStructureComponent implements OnInit {
 
    saveEO() {
 
-      if ( this.organizationalStructure.idEstructuraOrganizacional == null || this.organizationalStructure.idEstructuraOrganizacional == 0 ) {
+      if ( this.organizationalStructure.idEstructuraOrganizacional === null
+           || this.organizationalStructure.idEstructuraOrganizacional === 0 ) {
          this.guardando = true;
          this.organizationalStructureService.addOrganizationalStructure( this.organizationalStructure ).then( data => {
             this.guardando = false;
@@ -259,13 +252,13 @@ export class OrganizationalStructureComponent implements OnInit {
 
             this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Registro guardado con exito!' } );
             let newChil: any = {
-               "label": this.organizationalStructure.nombre,
-               "data": data,
-               "leaf": false,
-               "children": []
+               'label': this.organizationalStructure.nombre,
+               'data': data,
+               'leaf': false,
+               'children': []
             };
             this.listOrganizationalStructure.push( data );
-            if ( this.organizationalStructure.idPadre == 0 || this.organizationalStructure.idPadre == null ) {
+            if ( this.organizationalStructure.idPadre === 0 || this.organizationalStructure.idPadre === null ) {
                this.treedCompany.push( newChil );
                this.selectedNode = newChil;
                this.newBranch();
@@ -279,14 +272,15 @@ export class OrganizationalStructureComponent implements OnInit {
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       } else {
-         this.organizationalStructureService.updateOrganizationalStructure( this.organizationalStructure ).then( data => {
+         this.organizationalStructureService.updateOrganizationalStructure( this.organizationalStructure ).then( () => {
             this.guardando = false;
             this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Registro actualizado con exito!' } );
             this.selectedNode.data = this.organizationalStructure;
             this.selectedNode.label = this.organizationalStructure.nombre;
             this.header = this.organizationalStructure.nombre;
             for ( let i = 0; i < this.listOrganizationalStructure.length; i++ ) {
-               if ( this.listOrganizationalStructure[ i ].idEstructuraOrganizacional === this.organizationalStructure.idEstructuraOrganizacional ) {
+               if ( this.listOrganizationalStructure[ i ].idEstructuraOrganizacional
+                    === this.organizationalStructure.idEstructuraOrganizacional ) {
                   this.listOrganizationalStructure[ i ] = this.organizationalStructure;
                   return;
                }
@@ -299,7 +293,8 @@ export class OrganizationalStructureComponent implements OnInit {
    }
 
    doCancel() {
-      if ( this.organizationalStructure.idEstructuraOrganizacional == null || this.organizationalStructure.idEstructuraOrganizacional == 0 ) {
+      if ( this.organizationalStructure.idEstructuraOrganizacional === null
+           || this.organizationalStructure.idEstructuraOrganizacional === 0 ) {
          this.organizationalStructure = new OrganizationalStructure;
       } else {
          this.organizationalStructureService.viewOrganizationalStructure( this.organizationalStructure.idEstructuraOrganizacional )

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/primeng';
 import { PositionCriterias } from '../_models/positionCriterias';
@@ -13,18 +13,17 @@ import { EvaluationCriteriasServices } from '../_services/evaluation-criterias.s
                selector: 'evaluation-criterias',
                providers: [ ConfirmationService ]
             } )
-export class EvaluationCriteriasComponent {
+export class EvaluationCriteriasComponent implements OnInit {
 
    @Input()
    position: Positions;
-   editing: boolean = false;
+   editing = false;
    positionCriterias: PositionCriterias[] = [];
    backUpPositionCriterias: PositionCriterias[];
-   //criteria: PositionCriterias = new PositionCriterias();
    evaluationCriterias: EvaluationCriterias[] = [];
-   oneHundred: boolean = false;
-   criteriaRepeated: boolean = false;
-   total: number = 0;
+   oneHundred = false;
+   criteriaRepeated = false;
+   total = 0;
 
    @Output()
    nextStep: EventEmitter<number> = new EventEmitter<number>();
@@ -44,7 +43,7 @@ export class EvaluationCriteriasComponent {
                                            indicadorHabilitado: false,
                                            auditoriaUsuario: 1,
                                            auditoriaFecha: '',
-                                           label: "seleccione...",
+                                           label: 'seleccione...',
                                            value: null
                                         } );
 
@@ -54,7 +53,7 @@ export class EvaluationCriteriasComponent {
             this.positionCriterias = positionCriterias;
             this.positionCriterias.map( p => {
                p.idCargo = this.position.idCargo;
-               p.criterio = this.evaluationCriterias.find( e => e.idCriterio == p.idCriterio ).criterio;
+               p.criterio = this.evaluationCriterias.find( e => e.idCriterio === p.idCriterio ).criterio;
             } );
          } );
 
@@ -70,7 +69,7 @@ export class EvaluationCriteriasComponent {
       this.positionCriterias = this.backUpPositionCriterias;
       this.positionCriteriasService.addInBulk( this.positionCriterias ).subscribe( data => {
          this.positionCriterias.map( pc => {
-            pc.criterio = this.evaluationCriterias.find( e => e.idCriterio == pc.idCriterio ).criterio;
+            pc.criterio = this.evaluationCriterias.find( e => e.idCriterio === pc.idCriterio ).criterio;
          } )
       } );
 
@@ -87,13 +86,13 @@ export class EvaluationCriteriasComponent {
             if ( pc1.idCriterio !== null && pc2.idCriterio === pc1.idCriterio ) {
                cont = cont + 1;
             }
-            if ( cont > 1 ) break
+            if ( cont > 1 ){ break; }
          }
-         if ( cont > 1 ) break
+         if ( cont > 1 ){ break; }
       }
 
       if ( cont > 1 ) {
-         //lanza un mensaje advirtiendo que no se puede guardar dos criterios iguales
+         // lanza un mensaje advirtiendo que no se puede guardar dos criterios iguales
          this.criteriaRepeated = true;
       } else {
          this.criteriaRepeated = false;
@@ -116,12 +115,12 @@ export class EvaluationCriteriasComponent {
 
    assignCriteria( criteria: PositionCriterias ) {
       this.positionCriterias[ this.positionCriterias.indexOf( criteria ) ].criterio = this.evaluationCriterias.find(
-         e => e.idCriterio == criteria.idCriterio ).criterio;
+         e => e.idCriterio === criteria.idCriterio ).criterio;
    }
 
    editCriterias() {
       this.backUpPositionCriterias = this.positionCriterias.slice( 0 );
-      if ( this.backUpPositionCriterias.length == 0 ) {
+      if ( this.backUpPositionCriterias.length === 0 ) {
          let nc = new PositionCriterias();
          nc.indicadorHabilitado = true;
          nc.idCargo = this.position.idCargo;
@@ -161,7 +160,7 @@ export class EvaluationCriteriasComponent {
                                                  this.positionCriterias.map( p => {
                                                     p.idCargo = this.position.idCargo;
                                                     p.criterio = this.evaluationCriterias.find(
-                                                       e => e.idCriterio == p.idCriterio ).criterio;
+                                                       e => e.idCriterio === p.idCriterio ).criterio;
                                                  } );
                                                  this.editing = false;
                                               } );
