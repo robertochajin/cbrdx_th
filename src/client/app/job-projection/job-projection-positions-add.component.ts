@@ -11,7 +11,7 @@ import { NavService } from '../_services/_nav.service';
 @Component( {
                moduleId: module.id,
                templateUrl: 'job-projection-positions-add.component.html',
-               selector: 'projections',
+               selector: 'projections-add',
                providers: [ ConfirmationService ]
             } )
 
