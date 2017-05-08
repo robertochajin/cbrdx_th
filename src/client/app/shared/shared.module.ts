@@ -6,7 +6,7 @@ import {RouterModule, Router, NavigationEnd} from '@angular/router';
 /** Componentes de la Template principal **/
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {NavbarComponent} from './navbar/navbar.component';
-import {BreadcrumbComponent} from './breadcrumb/breadcrumb.component';
+//import {BreadcrumbComponent} from './breadcrumb/breadcrumb.component';
 import {TranslateService, TranslateModule} from 'ng2-translate';
 
 import {WindowRefService} from '../_services/window-ref.service';
@@ -18,8 +18,8 @@ import {AuthenticationService} from "../_services/authentication.service";
 
 @NgModule({
    imports: [CommonModule, RouterModule, TranslateModule],
-   declarations: [ToolbarComponent, NavbarComponent, BreadcrumbComponent],
-   exports: [ToolbarComponent, NavbarComponent, BreadcrumbComponent,
+   declarations: [ToolbarComponent, NavbarComponent],
+   exports: [ToolbarComponent, NavbarComponent,
       CommonModule, FormsModule, RouterModule, TranslateModule],
    providers: [AuthenticationService]
 })

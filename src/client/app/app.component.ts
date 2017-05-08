@@ -16,6 +16,7 @@ import 'moment/locale/es';
 import { Message } from "primeng/primeng";
 import { AuthenticationService } from "./_services/authentication.service";
 import { NavService } from "./_services/_nav.service";
+import { BreadcrumbService } from "./shared/breadcrumb/breadcrumb.service";
 
 /**
  * This class represents the main application component.
@@ -34,10 +35,11 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
               private translate: TranslateService,
               private authenticationService: AuthenticationService,
               private formBuilder: FormBuilder,
-              private navService:NavService) {
+              private navService:NavService,
+              private breadcrumbService: BreadcrumbService) {
      
     this.sessionStart = authenticationService.loggedIn();
-
+     
     translate.setDefaultLang('es');
     translate.use('es');
         navService.getMessage$.subscribe(
