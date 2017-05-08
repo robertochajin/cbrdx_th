@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Positions {
@@ -41,7 +41,7 @@ export class Positions {
    public idEstado: number;
    public estado: string;
    public paso: number;
-   
+
    constructor() {
       this.idCargo = null;
       this.cargo = null;

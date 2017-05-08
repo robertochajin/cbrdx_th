@@ -6,36 +6,34 @@ import { EmployeesLocation } from '../_models/employee-location';
 import { LocationService } from '../_services/employee-location.service';
 import { NavService } from '../_services/_nav.service';
 
-@Component({
-    moduleId: module.id,
-    selector: 'family-information',
-    templateUrl: 'employee-location-detail.component.html',
-})
-
+@Component( {
+               moduleId: module.id,
+               selector: 'family-information',
+               templateUrl: 'employee-location-detail.component.html',
+            } )
 
 export class LocationDetailComponent implements OnInit {
-    @Input()
-    employeeLocation: EmployeesLocation = new EmployeesLocation();
+   @Input()
+   employeeLocation: EmployeesLocation = new EmployeesLocation();
 
-    constructor(
-        private locationService: LocationService,
-        private route: ActivatedRoute,
-        private location: Location,
-        private _nav: NavService
-    ) { }
+   constructor( private locationService: LocationService,
+      private route: ActivatedRoute,
+      private location: Location,
+      private _nav: NavService ) {
+   }
 
-    ngOnInit(): void {
-        this.route.params
-            .switchMap((params: Params) => this.locationService.get(+params['id']))
-            .subscribe(este => {
-                console.log(este)
-                this.employeeLocation = este;
-            });
-    }
+   ngOnInit(): void {
+      this.route.params
+      .switchMap( ( params: Params ) => this.locationService.get( +params[ 'id' ] ) )
+      .subscribe( este => {
+         console.log( este )
+         this.employeeLocation = este;
+      } );
+   }
 
-    goBack(): void {
-        this._nav.setTab(2);
-        this.location.back();
-    }
+   goBack(): void {
+      this._nav.setTab( 2 );
+      this.location.back();
+   }
 }
 

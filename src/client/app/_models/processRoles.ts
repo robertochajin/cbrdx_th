@@ -1,8 +1,7 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ProcessRoles {
-
 
    public idLista: number;
    public codigo: string;
@@ -15,7 +14,7 @@ export class ProcessRoles {
    //Atributo auxiliar
    public asignadoAlCargo: boolean;
 
-   constructor(idLista: number, codigo: string, nombre: string, orden: number) {
+   constructor( idLista: number, codigo: string, nombre: string, orden: number ) {
       this.idLista = idLista;
       this.codigo = codigo;
       this.nombre = nombre;

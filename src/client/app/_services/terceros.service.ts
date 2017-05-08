@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { Response } from "@angular/http";
-import "rxjs/add/operator/toPromise";
-import any = jasmine.any;
-import { Tercero } from "../_models/tercero";
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+import { Tercero } from '../_models/tercero';
 import { AuthHttp } from 'angular2-jwt';
+import any = jasmine.any;
 
 @Injectable()
 export class TercerosService {
@@ -14,12 +14,12 @@ export class TercerosService {
    }
 
    listarTerceros() {
-      return this.authHttp.get( this.serviceURL).map( ( res: Response ) => res.json() as Tercero[] );
+      return this.authHttp.get( this.serviceURL ).map( ( res: Response ) => res.json() as Tercero[] );
    }
 
    consultarTercero( tipoDocumento: number, numeroDocumento: string ) {
-      return this.authHttp.get( this.serviceURL + tipoDocumento + "/" + numeroDocumento)
-         .map( res => res.json() as Tercero ).catch( this.handleError );
+      return this.authHttp.get( this.serviceURL + tipoDocumento + "/" + numeroDocumento )
+      .map( res => res.json() as Tercero ).catch( this.handleError );
    }
 
    handleError( error: any ): Promise<any> {

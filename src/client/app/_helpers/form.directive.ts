@@ -1,5 +1,5 @@
-import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive } from '@angular/core';
 
-@Directive({ selector: '[myUnless]'})
+@Directive( { selector: '[myUnless]' } )
 export class UnlessDirective {
 }
