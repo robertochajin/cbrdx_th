@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PhysicStructure } from '../_models/physic-structure';
 import { PhysicStructureService } from '../_services/physic-structure.service';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { ConfirmationService } from 'primeng/primeng';
                selector: 'physic-structure',
                providers: [ ConfirmationService ]
             } )
-export class PhysicStructureComponent {
+export class PhysicStructureComponent implements OnInit{
    physicStructure: PhysicStructure = new PhysicStructure();
    dialogObjet: PhysicStructure = new PhysicStructure();
 
