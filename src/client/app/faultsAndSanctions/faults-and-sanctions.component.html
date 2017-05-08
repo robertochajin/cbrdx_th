@@ -1,4 +1,4 @@
-<h3 class="first">Faltas y Sanciones</h3>
+<h3 class="first"> {{'FAULTSANDSANCTIONS.LBL_FALTASANCION' | translate:param }}</h3>
 <div>
     <div class="row datable-header">
         <div class="col-md-6 col-xs-12 datatable-header-add">
@@ -9,22 +9,22 @@
 
           <div class="input-group">
             <div class="input-group-addon"><i class="fa fa-search"></i></div>
-            <input #gb type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
+            <input #gb type="text" pInputText size="40" placeholder=" {{'LBL_BUSCAR' | translate:param }}" class="form-control">
           </div>
 
         </div>
     </div>
 
     <p-dataTable [value]="faults" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-        <p-column field="tipoFalta" header="Tipo" [sortable]="true"></p-column>
-        <p-column field="falta" header="Nombre" [sortable]="true"></p-column>
-        <p-column field="accion" header="Acción " [sortable]="true"></p-column>
-        <p-column field="indicadorHabilitado" header="Estado" [sortable]="true" styleClass="datatable-col-center">
+        <p-column field="tipoFalta" header="{{'LBL_TIPO' | translate:param }}" [sortable]="true"></p-column>
+        <p-column field="falta" header="{{'LBL_NOMBRE' | translate:param }}" [sortable]="true"></p-column>
+        <p-column field="accion" header="{{'LBL_ACCION' | translate:param }} " [sortable]="true"></p-column>
+        <p-column field="indicadorHabilitado" header="{{'LBL_ESTADO' | translate:param }}" [sortable]="true" styleClass="datatable-col-center">
            <template let-fault="rowData" pTemplate="body">
               <p-checkbox [(ngModel)]="fault.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
            </template>
         </p-column>
-        <p-column header="Acciones" styleClass="datatable-col-action">
+        <p-column header="{{'LBL_ACCIONES' | translate:param }}" styleClass="datatable-col-action">
             <template let-fault="rowData" pTemplate="body">
                     <!--<button type="button" icon="fa-eye" class="ui-button-info"
                             pButton (click)="detail(employee)"></button>-->

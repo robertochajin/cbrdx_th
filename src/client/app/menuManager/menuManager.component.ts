@@ -56,7 +56,7 @@ export class MenuManagerComponent implements OnInit {
    capitalizeCode() {
       let input = this.menus.codigoMenu;
       if ( input != "" && input != null ) {
-         this.menus.codigoMenu = input.toUpperCase().replace( ' ', '' ).trim();
+         this.menus.codigoMenu = input.toUpperCase().replace(/[^A-Z0-9]/,'').trim();
       }
    }
    

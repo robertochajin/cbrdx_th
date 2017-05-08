@@ -107,7 +107,7 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-5">
                     <label for="telefonoFijo">* {{'EMPLOYEES.LBL_TELEFONO1' | translate:param }}</label>
-                    <input id="telefonoFijo" name="telefonoFijo" #telefonoFijo="ngModel"  required
+                    <input id="telefonoFijo" name="telefonoFijo" #telefonoFijo="ngModel"  [required]="!cel"
                            [(ngModel)]="familyInformation.telefonoFijo" pInputText pattern="[0-9]{7,10}"
                            (keyup)="childInputCleanUp($event.target.value)" type="text"
                            (paste)="childInputCleanUp($event.target.value)"/>
@@ -117,10 +117,14 @@
                     </div>
                 </div>
                 <div class="ui-grid-col-5">
-                    <label for="telefonoCelular">{{'EMPLOYEES.LBL_TELEFONO2' | translate:param }}</label>
+                    <label for="telefonoCelular">{{'EMPLOYEES.LBL_CELULAR' | translate:param }}</label>
                     <input id="telefonoCelular" name="telefonoCelular" #telefonoCelular="ngModel" pInputText type="text"
-                           [(ngModel)]="familyInformation.telefonoCelular" pattern="[0-9]{7,10}"
+                           [(ngModel)]="familyInformation.telefonoCelular" pattern="[0-9]{7,10}"  [required]="!tel"
                            (keyup)="childInputCleanUp1($event.target.value)"/>
+                   <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !telefonoCelular.valid">
+                      <i class="fa fa-close"></i>
+                      {{'EMPLOYEES.LBL_CELULAR' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                   </div>
                 </div>
                 <div class="ui-grid-col-2">
                     <label for="idConvivencia">{{'EMPLOYEES.LBL_CONVIVE' | translate:param }}</label>
