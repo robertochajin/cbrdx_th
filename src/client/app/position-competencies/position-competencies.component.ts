@@ -92,7 +92,8 @@ export class PositionCompetenciesComponent implements OnInit {
       // verificar el idPonderación si llega nulo para definir si se debe actualizar o agregar
       let skill = competencie.cargoCompetencia;
       if ( skill.idCargoCompetencia !== null && skill.idCargoCompetencia !== undefined ) {
-         this.positionCompetenciesService.update( skill ).subscribe( r => { return ;
+         this.positionCompetenciesService.update( skill ).subscribe( r => {
+            return;
          } );
       } else {
          if ( skill.idPonderacion !== undefined && skill.idPonderacion !== null ) {

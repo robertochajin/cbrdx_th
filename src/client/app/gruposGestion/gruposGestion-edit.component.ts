@@ -22,6 +22,7 @@ export class GruposGestionEditComponent {
    isGreater = true;
    public es: any;
    msg: Message;
+
    constructor( private gruposGestionService: GruposGestionService, private router: Router, private route: ActivatedRoute,
       private navService: NavService ) {
       route.params.switchMap( ( params: Params ) => gruposGestionService.viewGruposGestion( +params[ 'id' ] ) )
@@ -44,7 +45,8 @@ export class GruposGestionEditComponent {
          dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
          dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
          monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre',
-            'diciembre' ],
+            'diciembre'
+         ],
          monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
    }

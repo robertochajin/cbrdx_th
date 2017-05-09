@@ -24,6 +24,7 @@ export class GruposGestionAddComponent implements OnInit {
    isGreater = true;
    private es: any;
    msg: Message;
+
    constructor( private gruposGestionService: GruposGestionService, private router: Router, private navService: NavService ) {
       gruposGestionService.listGruposGestion().subscribe( res => {
          this.gruposGestion = res;
@@ -38,7 +39,8 @@ export class GruposGestionAddComponent implements OnInit {
          dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
          dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
          monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre',
-            'diciembre' ],
+            'diciembre'
+         ],
          monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
    }

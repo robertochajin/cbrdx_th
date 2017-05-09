@@ -20,13 +20,12 @@ export class ToolbarComponent {
    timeoutID: any;
    ultimaActualizacion: string;
    svcThUrl = '<%= SVC_TH_URL %>/api/upload';
-   avatar:string;
+   avatar: string;
 
    constructor( public router: Router,
       renderer: Renderer,
       elementRef: ElementRef,
-      navService: NavService,
-   ) {
+      navService: NavService, ) {
       let token = localStorage.getItem( 'token' );
 
       if ( token !== null ) {
@@ -58,7 +57,7 @@ export class ToolbarComponent {
          res => {
             this.avatar = res;
          } );
-      navService.setAvatar(this.usuarioLogueado.avatar);
+      navService.setAvatar( this.usuarioLogueado.avatar );
    }
 
    logout(): void {

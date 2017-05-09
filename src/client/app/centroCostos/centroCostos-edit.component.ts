@@ -17,10 +17,11 @@ export class CentroCostosEditComponent {
    centroCostos: CentroCostos = new CentroCostos();
    centrosExistentes: CentroCostos[];
    codeExists: boolean = false;
-   displayDialog:boolean;
+   displayDialog: boolean;
    msg: Message;
+
    constructor( private centroCostosService: CentroCostosService, private router: Router, private route: ActivatedRoute,
-      private navService: NavService) {
+      private navService: NavService ) {
       route.params.switchMap( ( params: Params ) => centroCostosService.viewCentroCostos( +params[ 'id' ] ) )
       .subscribe( data => {
          this.centroCostos = data;

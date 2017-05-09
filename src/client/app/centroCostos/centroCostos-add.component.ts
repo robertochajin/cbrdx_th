@@ -17,8 +17,9 @@ export class CentroCostosAddComponent {
    centroCostos: CentroCostos = new CentroCostos();
    centrosExistentes: CentroCostos[];
    codeExists: boolean = false;
-   displayDialog:boolean;
+   displayDialog: boolean;
    msg: Message;
+
    constructor( private centroCostosService: CentroCostosService, private router: Router, private navService: NavService ) {
       centroCostosService.listCentroCostos().subscribe( res => {
          this.centrosExistentes = res;

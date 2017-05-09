@@ -21,8 +21,9 @@ export class ConstanteEditComponent implements OnInit {
    regex: string = '';
    displayDialog: boolean = false;
    msg: Message;
+
    constructor( private constanteService: ConstanteService, private listaService: ListaService, private router: Router,
-      private route: ActivatedRoute , private navService: NavService) {
+      private route: ActivatedRoute, private navService: NavService ) {
       route.params.switchMap( ( params: Params ) => constanteService.viewConstant( +params[ 'id' ] ) )
       .subscribe( data => {
          this.constant = data;

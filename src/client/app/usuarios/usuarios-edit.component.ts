@@ -124,7 +124,7 @@ export class UsuariosEditComponent {
    }
 
    createUserRole() {
-      if(this.isGreaterRol) {
+      if ( this.isGreaterRol ) {
          this.usuariosService.readAllUserRoles().subscribe( res => {
             let ur = res.find( t => t.idUsuario === this.usuario.idUsuario && t.idRol === this.curUsuarioRol.idRol );
             if ( ur ) {

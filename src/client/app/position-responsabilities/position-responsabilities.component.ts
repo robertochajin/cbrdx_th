@@ -92,7 +92,7 @@ export class PositionResponsabilitiesComponent implements OnInit {
                                                  );
                                               } );
                                            }, reject: () => {
-                                              return;
+            return;
          }
                                         } );
    }

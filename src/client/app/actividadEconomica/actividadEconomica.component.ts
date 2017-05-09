@@ -192,7 +192,7 @@ export class ActividadEconomicaComponent {
             console.info( this.selectedNode );
             let chil: any[] = [];
             let nivel = 1;
-            if ( this.selectedNode ){
+            if ( this.selectedNode ) {
                nivel = this.selectedNode.level;
             } else {
                nivel = 1;
@@ -354,6 +354,7 @@ export class ActividadEconomicaComponent {
       } );
 
    }
+
    searchRecursive( res: ActividadEconomica ) {
       let node4: number = 0;
       let node3: number = 0;

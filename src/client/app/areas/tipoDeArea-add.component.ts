@@ -14,8 +14,9 @@ export class TipoDeAreaAddComponent {
    areas: TipoDeArea = new TipoDeArea();
    areasExistentes: TipoDeArea[];
    codeExists: boolean = false;
-   displayDialog:boolean;
+   displayDialog: boolean;
    msg: Message;
+
    constructor( private tipoDeAreasService: TipoDeAreaService, private router: Router, private navService: NavService ) {
       tipoDeAreasService.listAreas().subscribe( res => {
          this.areasExistentes = res;

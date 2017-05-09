@@ -118,12 +118,12 @@ export class UsuariosService extends TercerosService {
       return this.authHttp.put( this.usuariosRolesServiceURL, JSON.stringify( c ) ).toPromise().catch( this.handleError );
    }
 
-   refreshToken(){
-      return this.authHttp.get(this.refreshServiceURL).toPromise().then( res => {
+   refreshToken() {
+      return this.authHttp.get( this.refreshServiceURL ).toPromise().then( res => {
          let token = res.json().token;
          if ( token ) {
             localStorage.setItem( 'token', token );
          }
-      });
+      } );
    }
 }

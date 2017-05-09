@@ -24,12 +24,12 @@ export class NavService {
    // Observable avatar
    getAvatar$ = this.avatar.asObservable();
 
-   constructor( ) {
+   constructor() {
       let token = localStorage.getItem( 'token' );
 
       if ( token !== null ) {
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
-         this.setAvatar(this.usuarioLogueado.avatar);
+         this.setAvatar( this.usuarioLogueado.avatar );
       }
    }
 
@@ -75,6 +75,7 @@ export class NavService {
          return '';
       }
    }
+
    setAvatar( avatar: string ) {
       this.avatar.next( avatar );
    }

@@ -14,10 +14,11 @@ export class TipoDeAreaEditComponent {
    areas: TipoDeArea = new TipoDeArea();
    areasExistentes: TipoDeArea[];
    codeExists: boolean = false;
-   displayDialog:boolean;
+   displayDialog: boolean;
    msg: Message;
+
    constructor( private tipoDeAreasService: TipoDeAreaService, private router: Router, private route: ActivatedRoute,
-      private navService: NavService) {
+      private navService: NavService ) {
       route.params.switchMap( ( params: Params ) => tipoDeAreasService.viewArea( +params[ 'id' ] ) )
       .subscribe( data => {
          this.areas = data;
