@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Functionality } from '../_models/functionality';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FunctionalityControl } from '../_models/functionalityContorl';
@@ -16,7 +16,7 @@ import { ListaItem } from '../_models/listaItem';
                providers: [ ConfirmationService ]
             } )
 
-export class FormManagerUpdateComponent {
+export class FormManagerUpdateComponent implements OnInit {
 
    functionality: Functionality = new Functionality();
    functionalityControl: FunctionalityControl = new FunctionalityControl();
@@ -33,20 +33,20 @@ export class FormManagerUpdateComponent {
    listClassificationCampo: SelectItem[] = [];
    msgs: Message[] = [];
    acordion: number = 0;
-   campodisabled: boolean = true;
-   seccion: boolean = false;
-   indicadorSeccion: boolean = true;
+   campodisabled = true;
+   seccion = false;
+   indicadorSeccion = true;
    indicadorVisible: string;
    indicadorImprime: string;
    indicadorHabilitado: string;
    idPadre: number;
-   editingField: boolean = false;
-   detailSection: boolean = false;
-   detailField: boolean = false;
-   editingSection: boolean = false;
-   codExists: boolean = false;
-   showForm: boolean = true;
-   showFormF: boolean = true;
+   editingField = false;
+   detailSection = false;
+   detailField = false;
+   editingSection = false;
+   codExists = false;
+   showForm = true;
+   showFormF = true;
 
    constructor( private formManagerService: FormManagerService,
       private router: Router,
@@ -93,8 +93,6 @@ export class FormManagerUpdateComponent {
       this.formManagerService.getFunctionality().subscribe( res => {
          this.formManagerService.getAllFunctionality().subscribe( rest => {
             this.listFunctionalities = rest;
-            this.functionality;
-            // this.listFunctionality.push({label: "Seleccione", value: null});
             for ( let dp of res ) {
                if ( this.functionality.idMenu === dp.idMenu ) {
                   this.listFunctionality.push( {
@@ -132,7 +130,7 @@ export class FormManagerUpdateComponent {
    onTabShow( e: any ) {
       this._nav.setTab( e.index );
       this.acordion = this._nav.getTab();
-      if ( this.acordion == 2 ) {
+      if ( this.acordion === 2 ) {
          this.functionalitySection = [];
          this.formManagerService.getSectionByIdFuncionalidad( this.functionality.idFuncionalidad ).subscribe( rest => {
             for ( let s of rest ) {
@@ -289,8 +287,8 @@ export class FormManagerUpdateComponent {
             } );
             this.editingField = false;
          } );
-         this.functionalityControlField.control = " ";
-         this.functionalityControlField.codigo = " ";
+         this.functionalityControlField.control = ' ';
+         this.functionalityControlField.codigo = ' ';
       } else {
          this.functionalityField = [];
          this.functionalityControlField.idFuncionalidad = this.functionality.idFuncionalidad;
@@ -301,8 +299,8 @@ export class FormManagerUpdateComponent {
             } );
             this.editingField = false;
          } );
-         this.functionalityControlField.control = " ";
-         this.functionalityControlField.codigo = " ";
+         this.functionalityControlField.control = ' ';
+         this.functionalityControlField.codigo = ' ';
       }
    }
 
@@ -322,8 +320,8 @@ export class FormManagerUpdateComponent {
                this.functionalitySection.push( s );
             }
          } );
-         this.functionalityControl.control = " ";
-         this.functionalityControl.codigo = " ";
+         this.functionalityControl.control = ' ';
+         this.functionalityControl.codigo = ' ';
       } );
       this.editingSection = false;
       this.acordion = 3;
@@ -351,9 +349,9 @@ export class FormManagerUpdateComponent {
    detailSectionF( f: FunctionalityControl ) {
       this.detailSection = true;
       this.functionalityControlSectionDetail = f;
-      this.functionalityControlSectionDetail.indicadorImprimir ? this.indicadorImprime = "Si" : this.indicadorImprime = "No";
-      this.functionalityControlSectionDetail.indicadorVisible ? this.indicadorVisible = "Si" : this.indicadorVisible = "No";
-      this.functionalityControlSectionDetail.indicadorHabilitado ? this.indicadorHabilitado = "Si" : this.indicadorHabilitado = "No";
+      this.functionalityControlSectionDetail.indicadorImprimir ? this.indicadorImprime = 'Si' : this.indicadorImprime = 'No';
+      this.functionalityControlSectionDetail.indicadorVisible ? this.indicadorVisible = 'Si' : this.indicadorVisible = 'No';
+      this.functionalityControlSectionDetail.indicadorHabilitado ? this.indicadorHabilitado = 'Si' : this.indicadorHabilitado = 'No';
    }
 
    goBackDetail() {
@@ -363,9 +361,9 @@ export class FormManagerUpdateComponent {
    detailDetailF( f: FunctionalityControl ) {
       this.detailField = true;
       this.functionalityControlFieldDetail = f;
-      this.functionalityControlFieldDetail.indicadorImprimir ? this.indicadorImprime = "Si" : this.indicadorImprime = "No";
-      this.functionalityControlFieldDetail.indicadorVisible ? this.indicadorVisible = "Si" : this.indicadorVisible = "No";
-      this.functionalityControlFieldDetail.indicadorHabilitado ? this.indicadorHabilitado = "Si" : this.indicadorHabilitado = "No";
+      this.functionalityControlFieldDetail.indicadorImprimir ? this.indicadorImprime = 'Si' : this.indicadorImprime = 'No';
+      this.functionalityControlFieldDetail.indicadorVisible ? this.indicadorVisible = 'Si' : this.indicadorVisible = 'No';
+      this.functionalityControlFieldDetail.indicadorHabilitado ? this.indicadorHabilitado = 'Si' : this.indicadorHabilitado = 'No';
    }
 
    goBackDetailField() {
@@ -378,7 +376,7 @@ export class FormManagerUpdateComponent {
 
    capitalize( event: any ) {
       let input = event.target.value;
-      if ( input.substring( 0, 1 ) === " " ) {
+      if ( input.substring( 0, 1 ) === ' ' ) {
          input = input.replace( ' ', '' );
       }
       event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();

@@ -1,28 +1,28 @@
-<h3 class="first">{{'ADMIN_FORMULARIOS.LBL_FUNCIONALIDAD' | translate:param }}</h3>
+<h3 class="first">{{'ADMIN_FORMULARIOS.LBL_FUNCIONALIDAD' | translate }}</h3>
 <div *ngIf="functionality">
    <div class="row datable-header">
       <div class="col-md-6 col-xs-12 datatable-header-add">
-         <button type="button" icon="fa-plus" label="{{'ADMIN_FORMULARIOS.LBL_AÑADIRFUNCIONALIDAD' | translate:param }}"
+         <button type="button" icon="fa-plus" label="{{'ADMIN_FORMULARIOS.LBL_AÑADIRFUNCIONALIDAD' | translate }}"
                  pButton (click)="add()"></button>
       </div>
       <div class="col-md-6 col-xs-12 datatable-header-search" >
          <div class="input-group">
             <div class="input-group-addon"><i class="fa fa-search"></i></div>
-            <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate:param }}" class="form-control">
+            <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control">
          </div>
       </div>
    </div>
-   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="listFunctionalities" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listFunctionalities" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
       <!--<p-column field="idFuncionalidad" header="Id" [sortable]="true"></p-column>-->
-      <!--<p-column field="codigo" header="{{'LBL_CODIGO' | translate:param }}" [sortable]="true"></p-column>-->
-      <!--<p-column field="menu" header="{{'LBL_NOMBRE' | translate:param }} " [sortable]="true"></p-column>-->
-      <p-column field="menu" header="{{'ADMIN_FORMULARIOS.LBL_FUNCIONALIDAD' | translate:param }}" [sortable]="true"></p-column>
-      <p-column header="{{'LBL_HABILITADO' | translate:param }}" styleClass="datatable-col-action">
+      <!--<p-column field="codigo" header="{{'LBL_CODIGO' | translate }}" [sortable]="true"></p-column>-->
+      <!--<p-column field="menu" header="{{'LBL_NOMBRE' | translate }} " [sortable]="true"></p-column>-->
+      <p-column field="menu" header="{{'ADMIN_FORMULARIOS.LBL_FUNCIONALIDAD' | translate }}" [sortable]="true"></p-column>
+      <p-column header="{{'LBL_HABILITADO' | translate }}" styleClass="datatable-col-action">
          <template let-func="rowData" pTemplate="body">
             <p-checkbox name="indicadorHabilitado" [(ngModel)]="func.indicadorHabilitado" binary="true" disabled="true" ></p-checkbox>
          </template>
       </p-column>
-      <p-column header="{{'LBL_ACCIONES' | translate:param }}" styleClass="datatable-col-action">
+      <p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
          <template let-func="rowData" pTemplate="body">
             <button type="button" icon="fa-pencil" class="ui-button-success"
                     pButton (click)="update(func)"></button>

@@ -25,13 +25,13 @@ export class UserSessionComponent implements OnInit {
    user: Usuario = new Usuario();
    acordion: number;
    msgs: Message[] = [];
-   oldPass: string = '';
-   newPass: string = '';
-   newPassConfirm: string = '';
+   oldPass = '';
+   newPass = '';
+   newPassConfirm = '';
    usuarioLogueado: any;
-   showOldPass: string = "password";
-   showPass: string = "password";
-   showConfim: string = "password";
+   showOldPass = 'password';
+   showPass = 'password';
+   showConfim = 'password';
 
    constructor( private employeeService: EmployeesService,
       private usuariosService: UsuariosService,
@@ -63,7 +63,7 @@ export class UserSessionComponent implements OnInit {
    }
 
    onSubmit() {
-      if ( this.oldPass !== this.newPass && this.newPass == this.newPassConfirm ) {
+      if ( this.oldPass !== this.newPass && this.newPass === this.newPassConfirm ) {
          this.user.contrasenaAntigua = this.oldPass;
          this.user.contrasena = this.newPass;
          this.usuariosService.updatePass( this.user ).then( res => {
@@ -87,10 +87,10 @@ export class UserSessionComponent implements OnInit {
    }
 
    show() {
-      if ( this.showOldPass == "password" ) {
-         this.showOldPass = "text";
+      if ( this.showOldPass === 'password' ) {
+         this.showOldPass = 'text';
       } else {
-         this.showOldPass = "password";
+         this.showOldPass = 'password';
       }
       console.info( this.showOldPass );
    }

@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { JobProjection } from '../_models/jobProjection';
@@ -15,7 +15,7 @@ import { NavService } from '../_services/_nav.service';
                providers: [ ConfirmationService ]
             } )
 
-export class JobProjectionApprobeComponent {
+export class JobProjectionApprobeComponent implements OnInit {
    @Input()
    jobProjection: JobProjection = new JobProjection();
    @Output()
@@ -24,7 +24,7 @@ export class JobProjectionApprobeComponent {
    dismiss: EventEmitter<number> = new EventEmitter<number>();
    positions: Positions = new Positions();
    constante: Constante = new Constante();
-   header: string = 'Editando Proyección';
+   header = 'Editando Proyección';
    msgs: Message[] = [];
    year: Number;
    aprobacion: boolean;
@@ -47,10 +47,10 @@ export class JobProjectionApprobeComponent {
    onCreate() {
       if ( this.aprobacion === true ) {
          this.jobProjection.idEstadoProyeccion = 2;
-         this.jobProjection.estadoProyeccion = "Aprobada";
+         this.jobProjection.estadoProyeccion = 'Aprobada';
       } else {
          this.jobProjection.idEstadoProyeccion = 3;
-         this.jobProjection.estadoProyeccion = "No Aprobado";
+         this.jobProjection.estadoProyeccion = 'No Aprobado';
       }
       this.jobProjectionService.update( this.jobProjection ).subscribe( rest => {
          this.approve.emit( this.jobProjection );

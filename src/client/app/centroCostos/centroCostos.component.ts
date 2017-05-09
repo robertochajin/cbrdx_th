@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component( {
                moduleId: module.id,
                templateUrl: 'centroCostos.component.html',
-               selector: 'centroCostos'
+               selector: 'centroCostos-list'
             } )
 export class CentroCostosComponent implements OnInit {
 

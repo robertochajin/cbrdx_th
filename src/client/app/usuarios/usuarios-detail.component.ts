@@ -1,7 +1,4 @@
-/**
- * Created by jenni on 13/02/2017.
- */
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UsuariosService } from '../_services/usuarios.service';
 import { Usuario } from '../_models/usuario';
@@ -18,10 +15,7 @@ import { VHistoricoUsuario } from '../_models/vHistoricoUsuario';
                templateUrl: './usuario-detail.component.html',
             } )
 
-export class UsuarioDetailComponent implements OnInit {
-   ngOnInit(): void {
-
-   }
+export class UsuarioDetailComponent {
 
    usuario: Usuario = new Usuario();
    tercero: Tercero = new Tercero();

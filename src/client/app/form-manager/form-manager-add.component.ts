@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Functionality } from '../_models/functionality';
 import { FunctionalityControl } from '../_models/functionalityContorl';
 import { NavService } from '../_services/_nav.service';
@@ -16,7 +16,7 @@ import { ListaItem } from '../_models/listaItem';
                providers: [ ConfirmationService ]
             } )
 
-export class FormManagerAddComponent {
+export class FormManagerAddComponent implements OnInit {
 
    functionality: Functionality = new Functionality();
    functionalityControl: FunctionalityControl = new FunctionalityControl();
@@ -33,20 +33,20 @@ export class FormManagerAddComponent {
    listClassificationCampo: SelectItem[] = [];
    msgs: Message[] = [];
    acordion: number;
-   campodisabled: boolean = true;
-   secciondisabled: boolean = true;
-   indicadorSeccion: boolean = true;
+   campodisabled = true;
+   secciondisabled = true;
+   indicadorSeccion = true;
    indicadorVisible: string;
    indicadorImprime: string;
    indicadorHabilitado: string;
    idPadre: number;
-   editingField: boolean = false;
-   detailSection: boolean = false;
-   detailField: boolean = false;
-   editingSection: boolean = false;
-   codExists: boolean = false;
-   showFrom: boolean = true;
-   showFormF: boolean = true;
+   editingField = false;
+   detailSection = false;
+   detailField = false;
+   editingSection = false;
+   codExists = false;
+   showFrom = true;
+   showFormF = true;
 
    constructor( private formManagerService: FormManagerService,
       private router: Router,
@@ -96,7 +96,7 @@ export class FormManagerAddComponent {
    onTabShow( e: any ) {
       this._nav.setTab( e.index );
       this.acordion = this._nav.getTab();
-      if ( this.acordion == 2 ) {
+      if ( this.acordion === 2 ) {
          this.functionalitySection = [];
          this.formManagerService.getSectionByIdFuncionalidad( this.functionality.idFuncionalidad ).subscribe( rest => {
             for ( let s of rest ) {
@@ -229,8 +229,8 @@ export class FormManagerAddComponent {
             } );
             this.editingField = false;
          } );
-         this.functionalityControlField.control = " ";
-         this.functionalityControlField.codigo = " ";
+         this.functionalityControlField.control = ' ';
+         this.functionalityControlField.codigo = ' ';
       } else {
          this.functionalityField = [];
          this.functionalityControlField.idFuncionalidad = this.functionality.idFuncionalidad;
@@ -241,8 +241,8 @@ export class FormManagerAddComponent {
             } );
             this.editingField = false;
          } );
-         this.functionalityControlField.control = " ";
-         this.functionalityControlField.codigo = " ";
+         this.functionalityControlField.control = ' ';
+         this.functionalityControlField.codigo = ' ';
       }
    }
 
@@ -262,8 +262,8 @@ export class FormManagerAddComponent {
                this.functionalitySection.push( s );
             }
          } );
-         this.functionalityControl.control = " ";
-         this.functionalityControl.codigo = " ";
+         this.functionalityControl.control = ' ';
+         this.functionalityControl.codigo = ' ';
       } );
       this.editingSection = false;
       this.acordion = 3;
@@ -300,9 +300,9 @@ export class FormManagerAddComponent {
    detailSectionF( f: FunctionalityControl ) {
       this.detailSection = true;
       this.functionalityControlSectionDetail = f;
-      this.functionalityControlSectionDetail.indicadorImprimir ? this.indicadorImprime = "Si" : this.indicadorImprime = "No";
-      this.functionalityControlSectionDetail.indicadorVisible ? this.indicadorVisible = "Si" : this.indicadorVisible = "No";
-      this.functionalityControlSectionDetail.indicadorHabilitado ? this.indicadorHabilitado = "Si" : this.indicadorHabilitado = "No";
+      this.functionalityControlSectionDetail.indicadorImprimir ? this.indicadorImprime = 'Si' : this.indicadorImprime = 'No';
+      this.functionalityControlSectionDetail.indicadorVisible ? this.indicadorVisible = 'Si' : this.indicadorVisible = 'No';
+      this.functionalityControlSectionDetail.indicadorHabilitado ? this.indicadorHabilitado = 'Si' : this.indicadorHabilitado = 'No';
    }
 
    goBackDetail() {
@@ -320,9 +320,9 @@ export class FormManagerAddComponent {
    detailDetailF( f: FunctionalityControl ) {
       this.detailField = true;
       this.functionalityControlFieldDetail = f;
-      this.functionalityControlFieldDetail.indicadorImprimir ? this.indicadorImprime = "Si" : this.indicadorImprime = "No";
-      this.functionalityControlFieldDetail.indicadorVisible ? this.indicadorVisible = "Si" : this.indicadorVisible = "No";
-      this.functionalityControlFieldDetail.indicadorHabilitado ? this.indicadorHabilitado = "Si" : this.indicadorHabilitado = "No";
+      this.functionalityControlFieldDetail.indicadorImprimir ? this.indicadorImprime = 'Si' : this.indicadorImprime = 'No';
+      this.functionalityControlFieldDetail.indicadorVisible ? this.indicadorVisible = 'Si' : this.indicadorVisible = 'No';
+      this.functionalityControlFieldDetail.indicadorHabilitado ? this.indicadorHabilitado = 'Si' : this.indicadorHabilitado = 'No';
    }
 
    goBackDetailField() {
@@ -335,7 +335,7 @@ export class FormManagerAddComponent {
 
    capitalize( event: any ) {
       let input = event.target.value;
-      if ( input.substring( 0, 1 ) === " " ) {
+      if ( input.substring( 0, 1 ) === ' ' ) {
          input = input.replace( ' ', '' );
       }
       event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();

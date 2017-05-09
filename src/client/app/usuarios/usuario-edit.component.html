@@ -154,7 +154,8 @@
                                             [required]="isRequiredRol" [disabled]="!isRequiredRol"
                                             (onSelect)="validateGreaterRol();"
                                             readonlyInput="true" #fechaFin="ngModel"></p-calendar>
-                                <div *ngIf="rolesForm.submitted&&!isGreater" class="alert alert-danger">{{ 'USUARIOS.MSG_FECHAFINALMAYOR' | translate }}
+                                <div *ngIf="rolesForm.submitted&&!isGreaterRol" class="alert alert-danger">{{
+	                                'USUARIOS.MSG_FECHAFINALMAYOR' | translate }}
                                 </div>
                                 <div *ngIf="rolesForm.submitted&&isRequiredRol&&curUsuarioRol.fechaFin==null"
                                      class="alert alert-danger">{{ 'USUARIOS.MSG_FECHAFINAL' | translate }}
@@ -205,7 +206,7 @@
                                             [disabled]="!isRequiredGroup"
                                             (onSelect)="validateGreaterGroup();"
                                             readonlyInput="true" #fechaFin="ngModel"></p-calendar>
-                                <div *ngIf="gruposForm.submitted&&!isGreater" class="alert alert-danger">{{ 'USUARIOS.MSG_FECHAFINALMAYOR' | translate }}
+                                <div *ngIf="gruposForm.submitted&&!isGreaterGroup" class="alert alert-danger">{{ 'USUARIOS.MSG_FECHAFINALMAYOR' | translate }}
                                 </div>
                                 <div *ngIf="gruposForm.submitted&&isRequiredGroup&&curUsuarioGrupo.fechaFin==null"
                                      class="alert alert-danger">{{ 'USUARIOS.MSG_FECHAFINAL' | translate }}
@@ -223,7 +224,7 @@
 
             <div class="ui-grid-row">
                 <div class="ui-grid-col-6">
-                    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="curRoles" [paginator]="true" [rows]="10"
+                    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="curRoles" [paginator]="true" [rows]="10"
                                  [responsive]="true">
                         <p-column field="rol" header="{{ 'USUARIOS.LBL_ROL' | translate }}"></p-column>
                         <p-column header="{{ 'USUARIOS.MSG_PERIODOHAB' | translate }}">
@@ -242,7 +243,7 @@
                     </p-dataTable>
                 </div>
                 <div class="ui-grid-col-6">
-                    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="curGrupos" [paginator]="true" [rows]="10"
+                    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="curGrupos" [paginator]="true" [rows]="10"
                                  [responsive]="true">
                         <p-column field="grupoGestion" header="{{ 'USUARIOS.LBL_GRUPOGESTION' | translate }}"></p-column>
                         <p-column header="{{ 'USUARIOS.MSG_PERIODOHAB' | translate }}">
@@ -276,7 +277,7 @@
                 <input #gbs type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}">
             </div>
         </div>
-        <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="historico" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gbs">
+        <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="historico" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gbs">
             <p-column field="idAuditoria" header="{{ 'LBL_ID' | translate }}" [sortable]="true"></p-column>
             <p-column field="historia" header="{{ 'USUARIOS.LBL_HISTORIA' | translate }}" [sortable]="true"></p-column>
             <p-column field="valorAnterior" header="{{ 'USUARIOS.LBL_VALORANTERIOR' | translate }}" [sortable]="true"></p-column>

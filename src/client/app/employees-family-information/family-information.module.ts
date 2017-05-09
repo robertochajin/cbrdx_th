@@ -15,7 +15,9 @@ import {
 } from 'primeng/primeng';
 
 @NgModule( {
-              imports: [ CommonModule, InputTextModule, FormsModule, ReactiveFormsModule, DataTableModule, ButtonModule, DialogModule, InputTextareaModule, CalendarModule, DropdownModule, ConfirmDialogModule, CheckboxModule, MessagesModule, LocationsModule, SharedModule
+              imports: [ CommonModule, InputTextModule, FormsModule, ReactiveFormsModule, DataTableModule, ButtonModule, DialogModule,
+                 InputTextareaModule, CalendarModule, DropdownModule, ConfirmDialogModule, CheckboxModule, MessagesModule, LocationsModule,
+                 SharedModule
 
               ],
               declarations: [ FamilyInformationComponent,

@@ -25,7 +25,7 @@ export class ConstanteDetailComponent {
       route.params.switchMap( ( params: Params ) => constanteService.viewConstant( +params[ 'id' ] ) )
       .subscribe( data => {
          this.constant = data;
-         this.habilitado = data.indicadorHabilitado ? "Si" : "No";
+         this.habilitado = data.indicadorHabilitado ? 'Si' : 'No';
          listaService.getMasterDetailsByIdItem( 'ListasTiposDatos', this.constant.idTipoDato ).subscribe( res => {
             if ( res.nombre !== null ) {
                this.dataType = res.nombre;

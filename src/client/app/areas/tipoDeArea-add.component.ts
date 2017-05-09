@@ -13,6 +13,7 @@ export class TipoDeAreaAddComponent {
    areas: TipoDeArea = new TipoDeArea();
    areasExistentes: TipoDeArea[];
    codeExists: boolean = false;
+   displayDialog:boolean;
 
    constructor( private tipoDeAreasService: TipoDeAreaService, private router: Router ) {
       tipoDeAreasService.listAreas().subscribe( res => {
@@ -22,7 +23,7 @@ export class TipoDeAreaAddComponent {
 
    createArea() {
       this.tipoDeAreasService.addArea( this.areas ).then( data => {
-         this.router.navigate( [ 'tipoArea' ] )
+         this.router.navigate( [ 'tipoArea' ] );
       } );
    }
 

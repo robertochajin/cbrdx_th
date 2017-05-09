@@ -37,7 +37,9 @@ import { ListaService } from '../_services/lista.service';
                  EmployeesVehicleModule
               ],
 
-              declarations: [ EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent, EmployeesAdditionalDataComponent ],
+              declarations: [ EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent,
+                 EmployeesAdditionalDataComponent
+              ],
               bootstrap: [ EmployeesComponent ],
               providers: [ EmployeesService, ListEmployeesService, PoliticalDivisionService, NavService, ListaService ],
               exports: [ EmployeesComponent ]

@@ -15,7 +15,8 @@ import { ActividadEconomicaService } from '../_services/actividadEconomica.servi
 import { ActividadEconomicaComponent } from './actividadEconomica.component';
 
 @NgModule( {
-              imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule, CalendarModule, TreeModule, TabViewModule, DropdownModule, SharedModule,
+              imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule,
+                 CalendarModule, TreeModule, TabViewModule, DropdownModule, SharedModule,
 
                  FieldsetModule,
 

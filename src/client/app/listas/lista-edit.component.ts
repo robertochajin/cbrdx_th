@@ -15,14 +15,14 @@ export class ListaEditComponent implements OnInit {
    othersDetailsList: ListaItem[];
    detailsList: ListaItem[];
    editableDetail: ListaItem = new ListaItem();
-   codeExists: boolean = false;
-   detailCodeExists: boolean = false;
-   isEnabled: boolean = true;
-   displayDialog: boolean = false;
-   displayReturnDialog: boolean = false;
-   displayDetailDialog: boolean = false;
-   isEdit: boolean = false;
-   displayUpdateDialog: boolean = false;
+   codeExists = false;
+   detailCodeExists = false;
+   isEnabled = true;
+   displayDialog = false;
+   displayReturnDialog = false;
+   displayDetailDialog = false;
+   isEdit = false;
+   displayUpdateDialog = false;
    msgs: Message[] = [];
 
    constructor( private listaService: ListaService, private router: Router, private route: ActivatedRoute ) {
@@ -68,7 +68,7 @@ export class ListaEditComponent implements OnInit {
 
    createDetail( f: NgForm ) {
       this.msgs = [];
-      this.editableDetail.orden = 2; //pendiente definir ordenamiento de los items
+      this.editableDetail.orden = 2; // pendiente definir ordenamiento de los items
       this.listaService.createDetail( this.editableDetail, this.masterList.nombreTabla ).then( res => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          this.editableDetail = new ListaItem;
@@ -102,7 +102,7 @@ export class ListaEditComponent implements OnInit {
    clearDetail() {
       this.displayDetailDialog = false;
       if ( this.isEdit ) {
-         this.isEdit = false
+         this.isEdit = false;
       }
       this.editableDetail = new ListaItem;
       this.listaService.getMasterAllDetails( this.masterList.nombreTabla ).subscribe( res => {

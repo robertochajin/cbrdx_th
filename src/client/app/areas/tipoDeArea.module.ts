@@ -16,7 +16,9 @@ import 'rxjs/add/operator/switchMap';
  */
 
 @NgModule( {
-              imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule, CalendarModule, SharedModule ],
+              imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule,
+                 CalendarModule, SharedModule
+              ],
               declarations: [ TipoDeAreaComponent, TipoDeAreaAddComponent, TipoDeAreaEditComponent, TipoDeAreaDetailComponent ],
               bootstrap: [ TipoDeAreaComponent ],
               providers: [ TipoDeAreaService ],

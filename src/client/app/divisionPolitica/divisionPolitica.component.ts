@@ -71,7 +71,8 @@ export class DivisionPoliticaComponent implements OnInit {
                                                "children": [ {
                                                   "label": '+ Cargando...',
                                                   "data": ''
-                                               } ]
+                                               }
+                                               ]
                                             } );
          }
       } );
@@ -148,7 +149,8 @@ export class DivisionPoliticaComponent implements OnInit {
       } else {
          chil = [ {
             "label": '+ Cargando...',
-         } ]
+         }
+         ]
       }
       for ( let c of this.listadoTodo.filter( t => t.idDivisionPoliticaPadre == node.data.idDivisionPolitica ) ) {
          divisionPoliticaNivel.push( {
@@ -244,7 +246,8 @@ export class DivisionPoliticaComponent implements OnInit {
             if ( this.tabselected <= 3 ) {
                chil = [ {
                   "label": '+ Cargando...',
-               } ]
+               }
+               ]
             }
             let newChil: any = {
                "label": this.politicalDivision.descripcionDivisonPolitica,
@@ -353,8 +356,7 @@ export class DivisionPoliticaComponent implements OnInit {
    getTiposHijos( id: string ): void {
       this.divisionPoliticaTipos = [];
       for ( let dp of this.listadoDivisionPoliticaTipos.filter(
-         t => t.codigoDivisionPoliticaTipo.startsWith( id ) && t.codigoDivisionPoliticaTipo.length == id.length + 1 ) )
-      {
+         t => t.codigoDivisionPoliticaTipo.startsWith( id ) && t.codigoDivisionPoliticaTipo.length == id.length + 1 ) ) {
          this.divisionPoliticaTipos.push( {
                                              label: dp.descripcionTipo,
                                              value: dp.idDivisionPoliticaTipo
@@ -533,7 +535,8 @@ export class DivisionPoliticaComponent implements OnInit {
 
    validateCode() {
       this.codeExists = this.listadoTodo.filter(
-            t => (t.codigoDivisionPolitica === this.politicalDivision.codigoDivisionPolitica && t.idDivisionPolitica !== this.politicalDivision.idDivisionPolitica ) ).length > 0;
+            t => (t.codigoDivisionPolitica === this.politicalDivision.codigoDivisionPolitica &&
+                  t.idDivisionPolitica !== this.politicalDivision.idDivisionPolitica ) ).length > 0;
    }
 
    inputNumberCodigo() {

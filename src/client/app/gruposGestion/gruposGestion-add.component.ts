@@ -15,9 +15,9 @@ export class GruposGestionAddComponent implements OnInit {
 
    grupoGestion: GruposGestion = new GruposGestion();
    gruposGestion: GruposGestion[];
-   codeExists: boolean = false;
+   codeExists = false;
    currentDate: Date = new Date( Date.now() );
-   displayDialog: boolean = false;
+   displayDialog = false;
    isRequired = false;
    isGreater = true;
    private es: any;
@@ -35,13 +35,15 @@ export class GruposGestionAddComponent implements OnInit {
          dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
          dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
          dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
-         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre' ],
+         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre',
+            'diciembre' ],
          monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
    }
 
    validateGreater() {
-      if ( this.grupoGestion.fechaInicio !== null && this.grupoGestion.fechaFin !== null && this.grupoGestion.fechaInicio < this.grupoGestion.fechaFin ) {
+      if ( this.grupoGestion.fechaInicio !== null && this.grupoGestion.fechaFin !== null &&
+           this.grupoGestion.fechaInicio < this.grupoGestion.fechaFin ) {
          this.isGreater = true;
       } else {
          this.isGreater = false;

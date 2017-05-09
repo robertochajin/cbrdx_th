@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Localizaciones } from '../_models/localizaciones';
 import { SelectItem, ConfirmationService, Message } from 'primeng/primeng';
@@ -18,7 +18,7 @@ declare let google: any;
                providers: [ PoliticalDivisionService, ConfirmationService ]
             } )
 
-export class LocationsComponent implements OnInit {
+export class LocationsComponent implements OnInit, AfterViewInit{
 
    @Input()
    localizacion: Localizaciones = new Localizaciones();
@@ -51,7 +51,7 @@ export class LocationsComponent implements OnInit {
 
    submitted: boolean;
    msgs: Message[] = [];
-   badSelect: boolean = true;
+   badSelect = true;
 
    constructor( private location: Location,
       private politicalDivisionServices: PoliticalDivisionService,
@@ -132,12 +132,13 @@ export class LocationsComponent implements OnInit {
       this.finalAddress += this.numberOne === undefined ? '' : this.numberOne + ' - ';
       this.finalAddress += this.numberTwo === undefined ? '' : this.numberTwo + ' ';
 
-      if ( this.finalAddress !== '' && this.localizacion.locacion !== undefined && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined ) {
+      if ( this.finalAddress !== '' && this.localizacion.locacion !== undefined && this.localizacion.locacion.camino !== '' &&
+           this.localizacion.locacion.camino !== undefined ) {
          let geocoder = new google.maps.Geocoder();
 
-         //Asumiendo que el camino obtenido de la busqueda tiene un máximo de 4 níveles
-         //Se hace el conteo de 3 comas par identificar si la selección fue de una división politica de nivel 4 (barrio/vereda)
-         //para hacerle el tratamiento al string con el cual se hace la busqueda en el API de maps.google
+         // Asumiendo que el camino obtenido de la busqueda tiene un máximo de 4 níveles
+         // Se hace el conteo de 3 comas par identificar si la selección fue de una división politica de nivel 4 (barrio/vereda)
+         // para hacerle el tratamiento al string con el cual se hace la busqueda en el API de maps.google
          let strToSearch = '';
          if ( ((this.localizacion.locacion.camino.match( /,/g ) || []).length) === 3 ) {
             strToSearch = this.localizacion.locacion.camino.substr( this.localizacion.locacion.camino.indexOf( ',' ) );
@@ -163,7 +164,8 @@ export class LocationsComponent implements OnInit {
          }
       }
 
-      if ( this.localizacion.locacion !== undefined && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined ) {
+      if ( this.localizacion.locacion !== undefined && this.localizacion.locacion.camino !== '' &&
+           this.localizacion.locacion.camino !== undefined ) {
          this.finalAddress += this.localizacion.locacion.camino;
       }
    }
@@ -183,7 +185,7 @@ export class LocationsComponent implements OnInit {
       } else {
          this.localizacion.latitud = l;
          this.localizacion.longitud = t;
-         document.getElementById( 'graphMap' ).innerHTML = "La busqueda no arroja ningun resultado";
+         document.getElementById( 'graphMap' ).innerHTML = 'La busqueda no arroja ningun resultado';
       }
    }
 
@@ -202,7 +204,7 @@ export class LocationsComponent implements OnInit {
    }
 
    focusUP() {
-      const element = document.querySelector( "#formulario" );
+      const element = document.querySelector( '#formulario' );
       if ( element ) {
          element.scrollIntoView( element );
       }

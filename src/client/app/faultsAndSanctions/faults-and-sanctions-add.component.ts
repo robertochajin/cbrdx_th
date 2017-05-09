@@ -19,7 +19,7 @@ export class FaultsAndSanctionsAddComponent {
    @Input()
 
    fault: FaultsAndSanctions = new FaultsAndSanctions();
-   header: string = 'Agregando Falta o Sanción';
+   header = 'Agregando Falta o Sanción';
    faultsTypes: SelectItem[] = [];
    faultsStatus: SelectItem[] = [];
    msgs: Message[] = [];
@@ -43,11 +43,7 @@ export class FaultsAndSanctionsAddComponent {
       } );
    }
 
-   ngOnInit() {
-
-   }
-
-   onSubmit() {
+     onSubmit() {
       this.msgs = [];
       this.faultsAndSanctionsService.add( this.fault )
       .subscribe( data => {
