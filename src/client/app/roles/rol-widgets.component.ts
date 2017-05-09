@@ -108,7 +108,7 @@ export class RolWidgetsComponent implements OnInit {
       this.msgs = [];
       this.showForm = false;
       if ( this.isUpdating === true ) {
-         this.isUpdating = false
+         this.isUpdating = false;
          this.widgets.splice( 0, 1 );
       }
    }

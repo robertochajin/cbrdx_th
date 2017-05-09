@@ -45,13 +45,11 @@ export class NavbarComponent implements AfterViewInit {
       this.menuManagerService.getByPadre( 0 ).subscribe( mod => {
          this.listModulos = mod;
          this.listModulos.sort( function ( a, b ) {
-            //return a.menu.localeCompare(b.menu);
             return a.secuencia - b.secuencia;
          } );
          this.menuManagerService.getMenusSession().subscribe( men => {
             this.listmenu = men;
             this.listmenu.sort( function ( a, b ) {
-               //return a.menu.localeCompare(b.menu);
                return a.secuencia - b.secuencia;
             } );
             for ( let p of this.listModulos.filter( t => t.idPadre === 0 || t.idPadre === null ) ) {

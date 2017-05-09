@@ -5,7 +5,6 @@ import { RouterModule, Router, NavigationEnd } from '@angular/router';
 /** Componentes de la Template principal **/
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NavbarComponent } from './navbar/navbar.component';
-//import {BreadcrumbComponent} from './breadcrumb/breadcrumb.component';
 import { TranslateService, TranslateModule } from 'ng2-translate';
 import { WindowRefService } from '../_services/window-ref.service';
 import { AuthenticationService } from '../_services/authentication.service';
@@ -24,8 +23,8 @@ import { AuthenticationService } from '../_services/authentication.service';
            } )
 export class SharedModule {
 
-   private _window: Window;
    topInvalid: number;
+   private _window: Window;
 
    constructor( private router: Router, windowRef: WindowRefService ) {
 

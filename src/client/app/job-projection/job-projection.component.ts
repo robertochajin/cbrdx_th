@@ -8,7 +8,7 @@ import { ListaService } from '../_services/lista.service';
 @Component( {
                moduleId: module.id,
                templateUrl: 'job-projection.component.html',
-               selector: 'projection',
+               selector: 'job-projection',
                providers: [ ConfirmationService ]
             } )
 

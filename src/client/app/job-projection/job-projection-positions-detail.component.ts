@@ -1,6 +1,3 @@
-/**
- * Created by Jenniferth Escobar - Felipe Aguirre on 28/02/2017.
- */
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
 import { JobProjection } from '../_models/jobProjection';
@@ -24,7 +21,6 @@ export class JobProjectionDetailComponent {
       private router: Router,
       private route: ActivatedRoute,
       private location: Location, ) {
-      this.jobProjection;
    }
 
    goBack(): void {

@@ -6,8 +6,8 @@ export class UsuarioGrupoGestion {
    idUsuario: number;
    idGrupoGestion: number;
    auditoriaUsuario: number;
-   auditoriaFecha: Date;
-   fechaInicio: Date;
-   fechaFin: Date;
+   auditoriaFecha: Date = null;
+   fechaInicio: Date = null;
+   fechaFin: Date = null;
    indicadorHabilitado: boolean = true;
 }

@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Rol } from '../_models/rol';
 import { RolesService } from '../_services/roles.service';
 import { Router } from '@angular/router';
 import { VRolMenuElemento } from '../_models/vRolMenuElemento';
 import { MenuElemento } from '../_models/menuElemento';
-import { ConfirmationService } from 'primeng/primeng';
+import { ConfirmationService, Message } from 'primeng/primeng';
 import * as moment from 'moment/moment';
 
 @Component( {
@@ -14,11 +14,11 @@ import * as moment from 'moment/moment';
                selector: 'roles-form.component',
                providers: [ ConfirmationService ]
             } )
-export class RolesAddComponent {
+export class RolesAddComponent implements OnInit {
 
    rol: Rol = new Rol();
    roles: Rol[];
-
+   msgs: Message[] = [];
    codeExists: boolean = false;
    range: string;
    es: any;

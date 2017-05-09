@@ -453,7 +453,7 @@
 
          <p-accordionTab header="Personalidad" [selected]="acordion == 12"
                          [disabled]="step >0 && step <13">
-            <personality  (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></personality>
+            <personality-component  (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></personality-component>
          </p-accordionTab>
 
          <p-accordionTab header="Factores de riesgo ocupacional" [selected]="acordion == 13"

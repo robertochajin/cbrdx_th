@@ -417,4 +417,11 @@ export class PositionsUpdateComponent implements OnInit {
          this.position.personaACargoInd = Number( numeroi.replace( /[^0-9]/g, '' ) );
       }
    }
+
+   capitalizeNombre() {
+      let input = this.position.cargo;
+      if ( input !== '' && input !== null ) {
+         this.position.cargo = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+      }
+   }
 }

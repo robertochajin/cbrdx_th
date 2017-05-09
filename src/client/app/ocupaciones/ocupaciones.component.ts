@@ -95,7 +95,7 @@ export class OcupacionesComponent implements OnInit {
             'label': '+ Cargando...',
             'level': node.level + 2,
             'codigo': '',
-         } ]
+         } ];
       }
       for ( let c of this.listadoOcupaciones.filter( t => t.idOcupacionPadre === node.value ) ) {
          ocupacionesNivel.push( {
@@ -189,7 +189,7 @@ export class OcupacionesComponent implements OnInit {
                   'label': '+ Cargando...',
                   'level': this.tabselected + 1,
                   'codigo': ''
-               } ]
+               } ];
             }
             let newChil: any = {
                'label': this.ocupaciones.ocupacion,
@@ -244,7 +244,6 @@ export class OcupacionesComponent implements OnInit {
 
    newOccupation() {
       this.submitted = false;
-      //let oForm = document.getElementById('formName').reset();
       this.ocupaciones = new Ocupaciones();
       this.tabselected = 1;
       this.header = 'Nuevo Grandes Grupos';
@@ -259,7 +258,6 @@ export class OcupacionesComponent implements OnInit {
 
    newSubOccupation() {
       this.submitted = false;
-      //let oForm = document.getElementById('formName').reset();
       this.ocupaciones = new Ocupaciones();
       this.tabselected = this.selectedNode.level + 1;
       this.labeltabselected = this.tabselected.toString();
@@ -336,7 +334,7 @@ export class OcupacionesComponent implements OnInit {
 
    }
 
-   private searchRecursive( res: Ocupaciones ) {
+   searchRecursive( res: Ocupaciones ) {
       let node4 = 0;
       let node3 = 0;
       let node2 = 0;
@@ -381,7 +379,7 @@ export class OcupacionesComponent implements OnInit {
       this.nodeSelect( this.selectedNode );
    }
 
-   private searchLevel( id: number, tipo: number ) {
+   searchLevel( id: number, tipo: number ) {
 
       if ( tipo === 1 ) {
          this.treeocupaciones.forEach( node => {
@@ -408,7 +406,7 @@ export class OcupacionesComponent implements OnInit {
       }
    }
 
-   private nodeExpandRecursive( node: any ) {
+   nodeExpandRecursive( node: any ) {
       let ocupacionesNivel: any[] = [];
       let chil: any;
       if ( node.level === 3 ) {
@@ -420,7 +418,7 @@ export class OcupacionesComponent implements OnInit {
             'label': '+ Cargando...',
             'level': node.level + 2,
             'codigo': ''
-         } ]
+         } ];
       }
       for ( let c of this.listadoOcupaciones.filter( t => t.idOcupacionPadre === node.value ) ) {
          ocupacionesNivel.push( {

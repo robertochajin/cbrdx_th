@@ -18,7 +18,7 @@ declare let google: any;
                providers: [ PoliticalDivisionService, ConfirmationService ]
             } )
 
-export class LocationsComponent implements OnInit, AfterViewInit{
+export class LocationsComponent implements OnInit, AfterViewInit {
 
    @Input()
    localizacion: Localizaciones = new Localizaciones();

@@ -121,7 +121,7 @@ export class AbsenceComponent implements OnInit {
    onSubmitREP() {
       this.msgs = [];
       this.guardandoP = true;
-      this.absence.idTipoRelacion = 4;// Reemplazado por
+      this.absence.idTipoRelacion = 4; // Reemplazado por
       this.absence.idCargoRelacion = this.idCargoRelacionREP;
       this.absenceService.add( this.absence )
       .subscribe( data => {

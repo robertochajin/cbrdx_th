@@ -25,7 +25,7 @@ export class ProjectConfig extends SeedConfig {
    THEME_FONTS_DEST = `${this.APP_DEST}/css/fonts`;
    THEME_FONTS_SRC = [
       'node_modules/primeng/resources/themes/' + this.PRIME_NG_THEME + '/fonts/**',
-      //'node_modules/font-awesome/fonts/**',
+      // 'node_modules/font-awesome/fonts/**',
       'src/client/assets/font/sp/**',
    ];
 
@@ -81,7 +81,7 @@ export class ProjectConfig extends SeedConfig {
        name: 'ng2-translate',
     //   // Path to the package's bundle
        path: 'node_modules/ng2-translate/bundles/ng2-translate.umd.js'
-     },{
+     }, {
         name: 'angular2-jwt',
         path: 'node_modules/angular2-jwt/angular2-jwt.js'
      }];
