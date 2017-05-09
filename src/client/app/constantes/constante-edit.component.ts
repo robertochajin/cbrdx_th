@@ -4,6 +4,8 @@ import { VConstante } from '../_models/vConstante';
 import { ConstanteService } from '../_services/constante.service';
 import { ListaService } from '../_services/lista.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { NavService } from '../_services/_nav.service';
+import { Message } from 'primeng/primeng';
 
 @Component( {
                moduleId: module.id,
@@ -18,9 +20,9 @@ export class ConstanteEditComponent implements OnInit {
    codeExists: boolean = false;
    regex: string = '';
    displayDialog: boolean = false;
-
+   msg: Message;
    constructor( private constanteService: ConstanteService, private listaService: ListaService, private router: Router,
-      private route: ActivatedRoute ) {
+      private route: ActivatedRoute , private navService: NavService) {
       route.params.switchMap( ( params: Params ) => constanteService.viewConstant( +params[ 'id' ] ) )
       .subscribe( data => {
          this.constant = data;
@@ -42,6 +44,8 @@ export class ConstanteEditComponent implements OnInit {
    createConstant() {
       this.constanteService.updateConstant( this.constant ).then( data => {
          this.router.navigate( [ 'constantes' ] );
+         let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+         this.navService.setMesage( typeMessage, this.msg );
       } );
    }
 
