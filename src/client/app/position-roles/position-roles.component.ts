@@ -14,7 +14,7 @@ import { ListaService } from '../_services/lista.service';
                selector: 'position-roles',
                providers: [ ConfirmationService ]
             } )
-export class PositionRolesComponent implements OnInit{
+export class PositionRolesComponent implements OnInit {
    @Input()
    position: Positions;
    processRoles: ProcessRoles[] = [];
@@ -56,8 +56,9 @@ export class PositionRolesComponent implements OnInit{
          objUpdate.indicadorHabilitado = rol.asignadoAlCargo;
          let num = 0;
          for ( let elemento of this.processRoles ) {
-            if ( elemento.asignadoAlCargo )
+            if ( elemento.asignadoAlCargo ) {
                num++;
+            }
          }
          if ( num === 0 && objUpdate.indicadorHabilitado === false ) {
             this.msgsAlert[ 0 ] = { severity: 'alert', summary: 'Error', detail: 'Debe seleccional al menos un rol' };
@@ -104,8 +105,9 @@ export class PositionRolesComponent implements OnInit{
    next() {
       let num = 0;
       for ( let elemento of this.processRoles ) {
-         if ( elemento.asignadoAlCargo )
+         if ( elemento.asignadoAlCargo ) {
             num++;
+         }
       }
       if ( num > 0 ) {
          this.nextStep.emit( 4 );

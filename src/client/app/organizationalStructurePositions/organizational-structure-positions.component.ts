@@ -23,32 +23,32 @@ import { ListaService } from '../_services/lista.service';
 
 export class OrganizationalStructurePositionsComponent implements OnInit {
 
-   private editingPosition = false;
-   private editingPerson = false;
-   private badPostion = false;
-   public positionRepeated = false;
-   public countSlots = 0;
-   private countCost = 0;
-   public area: OrganizationalStructure = new OrganizationalStructure();
-   private listOrganizationalStructure: OrganizationalStructure[];
-   public osPosition: OrganizationalStructurePositions = new OrganizationalStructurePositions();
-   private backUpOSPosition: OrganizationalStructurePositions = new OrganizationalStructurePositions();
-   private osPositions: OrganizationalStructurePositions[] = [];
-   private personsPosition: PersonPositions = new PersonPositions();
-   private backUpPersonsPosition: PersonPositions = new PersonPositions();
-   private personsPositions: PersonPositions[] = [];
-   private postionSlots: PersonPositions[] = [];
-   public positionList: Positions[] = [];
-   private selectedPosition: Positions = new Positions();
-   private employeeList: Employee [] = [];
-   public selectedEmployee: Employee = null;
-   private badEmployee = true;
-   private range: string;
-   private contracTypeList: SelectItem [] = [];
-   private treedCompany: TreeNode[] = [];
-   private selectedNode: TreeNode;
-   private es: any;
-   private maxDate: Date = null;
+   countSlots = 0;
+   positionRepeated = false;
+   editingPosition = false;
+   editingPerson = false;
+   badPostion = false;
+   countCost = 0;
+   area: OrganizationalStructure = new OrganizationalStructure();
+   listOrganizationalStructure: OrganizationalStructure[];
+   osPosition: OrganizationalStructurePositions = new OrganizationalStructurePositions();
+   backUpOSPosition: OrganizationalStructurePositions = new OrganizationalStructurePositions();
+   osPositions: OrganizationalStructurePositions[] = [];
+   personsPosition: PersonPositions = new PersonPositions();
+   backUpPersonsPosition: PersonPositions = new PersonPositions();
+   personsPositions: PersonPositions[] = [];
+   postionSlots: PersonPositions[] = [];
+   positionList: Positions[] = [];
+   selectedPosition: Positions = new Positions();
+   employeeList: Employee [] = [];
+   selectedEmployee: Employee = null;
+   badEmployee = true;
+   range: string;
+   contracTypeList: SelectItem [] = [];
+   treedCompany: TreeNode[] = [];
+   selectedNode: TreeNode;
+   es: any;
+   maxDate: Date = null;
 
    constructor( private positionsService: PositionsService,
       private ospService: OrganizationalStructurePositionsServices,
@@ -273,10 +273,6 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               if ( this.backUpOSPosition !== null ) {
-                                                 //Verificar si es necesario reestablecer el objeto
-                                                 // en la tabla
-                                                 // this.osPositions[this.osPositions.indexOf(this.backUpOSPosition)] =
-                                                 // this.backUpOSPosition;
                                                  this.backUpOSPosition = null;
                                               }
                                               this.editingPosition = false;
@@ -386,7 +382,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    }
 
    confirmStructure() {
-      //actualizar la estructura
+      // actualizar la estructura
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que confirmar esta planta? Después de confirmar no 
                                            podrá hacer modificaciones sobre los cargos`,

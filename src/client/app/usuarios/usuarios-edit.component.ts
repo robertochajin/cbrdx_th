@@ -124,65 +124,69 @@ export class UsuariosEditComponent {
    }
 
    createUserRole() {
-      this.usuariosService.readAllUserRoles().subscribe( res => {
-         let ur = res.find( t => t.idUsuario === this.usuario.idUsuario && t.idRol === this.curUsuarioRol.idRol );
-         if ( ur !== null ) {
-            this.creatingRol = false;
-            ur.fechaInicio = this.curUsuarioRol.fechaInicio;
-            ur.fechaFin = this.curUsuarioRol.fechaFin;
-            ur.indicadorHabilitado = true;
-            this.usuariosService.updateUserRole( ur ).then( res => {
-               this.updateRolesLists();
-               this.updateHistoric();
-               this.curUsuarioRol = new UsuarioRol();
-               this.isRequiredRol = false;
-               this.isGreaterRol = true;
-               this.creatingRol = true;
-            } );
-         } else {
-            this.creatingRol = false;
-            this.curUsuarioRol.idUsuario = this.usuario.idUsuario;
-            this.usuariosService.createUserRole( this.curUsuarioRol ).then( res => {
-               this.updateRolesLists();
-               this.updateHistoric();
-               this.curUsuarioRol = new UsuarioRol();
-               this.isRequiredRol = false;
-               this.isGreaterRol = true;
-               this.creatingRol = true;
-            } );
-         }
-      } );
+      if(this.isGreaterRol) {
+         this.usuariosService.readAllUserRoles().subscribe( res => {
+            let ur = res.find( t => t.idUsuario === this.usuario.idUsuario && t.idRol === this.curUsuarioRol.idRol );
+            if ( ur ) {
+               ur.fechaInicio = this.curUsuarioRol.fechaInicio;
+               ur.fechaFin = this.curUsuarioRol.fechaFin;
+               ur.indicadorHabilitado = true;
+               this.creatingRol = false;
+               this.usuariosService.updateUserRole( ur ).then( res => {
+                  this.updateRolesLists();
+                  this.updateHistoric();
+                  this.curUsuarioRol = new UsuarioRol();
+                  this.isRequiredRol = false;
+                  this.isGreaterRol = true;
+                  this.creatingRol = true;
+               } );
+            } else {
+               this.curUsuarioRol.idUsuario = this.usuario.idUsuario;
+               this.creatingRol = false;
+               this.usuariosService.createUserRole( this.curUsuarioRol ).then( res => {
+                  this.updateRolesLists();
+                  this.updateHistoric();
+                  this.curUsuarioRol = new UsuarioRol();
+                  this.isRequiredRol = false;
+                  this.isGreaterRol = true;
+                  this.creatingRol = true;
+               } );
+            }
+         } );
+      }
    }
 
    createUserGroup() {
-      this.usuariosService.readAllUserGroups().subscribe( res => {
-         let ug = res.find( t => t.idUsuario === this.usuario.idUsuario && t.idGrupoGestion === this.curUsuarioGrupo.idGrupoGestion );
-         if ( ug !== null ) {
-            this.creatingGroup = false;
-            ug.fechaInicio = this.curUsuarioGrupo.fechaInicio;
-            ug.fechaFin = this.curUsuarioGrupo.fechaFin;
-            ug.indicadorHabilitado = true;
-            this.usuariosService.updateUserGroup( ug ).then( res => {
-               this.updateGroupLists();
-               this.updateHistoric();
-               this.curUsuarioGrupo = new UsuarioGrupoGestion();
-               this.isRequiredGroup = false;
-               this.isGreaterGroup = true;
-               this.creatingGroup = true;
-            } );
-         } else {
-            this.creatingGroup = false;
-            this.curUsuarioGrupo.idUsuario = this.usuario.idUsuario;
-            this.usuariosService.createUserGroup( this.curUsuarioGrupo ).then( res => {
-               this.updateGroupLists();
-               this.updateHistoric();
-               this.curUsuarioGrupo = new UsuarioGrupoGestion();
-               this.isRequiredGroup = false;
-               this.isGreaterGroup = true;
-               this.creatingGroup = true;
-            } );
-         }
-      } );
+      if ( this.isGreaterGroup ) {
+         this.usuariosService.readAllUserGroups().subscribe( res => {
+            let ug = res.find( t => t.idUsuario === this.usuario.idUsuario && t.idGrupoGestion === this.curUsuarioGrupo.idGrupoGestion );
+            if ( ug ) {
+               ug.fechaInicio = this.curUsuarioGrupo.fechaInicio;
+               ug.fechaFin = this.curUsuarioGrupo.fechaFin;
+               ug.indicadorHabilitado = true;
+               this.creatingGroup = false;
+               this.usuariosService.updateUserGroup( ug ).then( res => {
+                  this.updateGroupLists();
+                  this.updateHistoric();
+                  this.curUsuarioGrupo = new UsuarioGrupoGestion();
+                  this.isRequiredGroup = false;
+                  this.isGreaterGroup = true;
+                  this.creatingGroup = true;
+               } );
+            } else {
+               this.curUsuarioGrupo.idUsuario = this.usuario.idUsuario;
+               this.creatingGroup = false;
+               this.usuariosService.createUserGroup( this.curUsuarioGrupo ).then( res => {
+                  this.updateGroupLists();
+                  this.updateHistoric();
+                  this.curUsuarioGrupo = new UsuarioGrupoGestion();
+                  this.isRequiredGroup = false;
+                  this.isGreaterGroup = true;
+                  this.creatingGroup = true;
+               } );
+            }
+         } );
+      }
    }
 
    removeRole( c: number ) {
@@ -217,8 +221,8 @@ export class UsuariosEditComponent {
    }
 
    validateGreaterRol() {
-      if ( this.curUsuarioRol.fechaInicio !== null &&
-           this.curUsuarioRol.fechaFin !== null &&
+      if ( this.curUsuarioRol.fechaInicio != null &&
+           this.curUsuarioRol.fechaFin != null &&
            this.curUsuarioRol.fechaInicio < this.curUsuarioRol.fechaFin ) {
          this.isGreaterRol = true;
       } else {

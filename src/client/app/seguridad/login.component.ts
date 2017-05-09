@@ -1,6 +1,3 @@
-/**
- * Created by Jenniferth Escobar - Felipe Aguirre on 9/03/2017.
- */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../_services/login.service';
@@ -80,8 +77,8 @@ export class LoginComponent implements OnInit {
 
    resolved( captchaResponse: string ) {
       let headers = new Headers( { 'Content-Type': 'application/x-www-form-urlencoded' } );
-      this.http.post( "https://www.google.com/recaptcha/api/siteverify",
-                      "secret=6LckLxkUAAAAAGf_9vx0BYTT7Q1fpk5X70BVDM6S&response=" + captchaResponse, { headers: headers } )
+      this.http.post( 'https://www.google.com/recaptcha/api/siteverify',
+                      'secret=6LckLxkUAAAAAGf_9vx0BYTT7Q1fpk5X70BVDM6S&response=' + captchaResponse, { headers: headers } )
       .subscribe( res => {
          let response = res.json().success;
          this.captcha = response;

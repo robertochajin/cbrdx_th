@@ -10,7 +10,7 @@ import { ListaItem } from '../_models/listaItem';
 @Component( {
                moduleId: module.id,
                templateUrl: 'personality.component.html',
-               selector: 'personality',
+               selector: 'personality-component',
                providers: [ ConfirmationService ]
             } )
 
@@ -43,8 +43,9 @@ export class PersonalityComponent implements OnInit {
             this.personality = res;
             this.listPersonality.map( ( lca: ListaItem ) => {
                this.personality.map( ( ca: PositionPersonality ) => {
-                  if ( ca.idAtributo == lca.idLista )
-                     lca.nombre = ca.descripcion
+                  if ( ca.idAtributo === lca.idLista ) {
+                     lca.nombre = ca.descripcion;
+                  }
                } );
             } );
          } );
@@ -54,18 +55,19 @@ export class PersonalityComponent implements OnInit {
    update( lca: ListaItem ) {
       this.personalityService.getAllByPosition( this.position.idCargo ).subscribe( res => {
          this.personality = res;
-         let obj = this.personality.find( o => lca.idLista == o.idAtributo );
+         let obj = this.personality.find( o => lca.idLista === o.idAtributo );
 
          if ( obj !== undefined ) {
             obj.descripcion = lca.nombre;
             this.personalityService.update( obj ).subscribe( res => {
                if ( res.ok ) {
-                  if ( this.permitirSiguiente == false && obj.descripcion !== '' ) {
+                  if ( this.permitirSiguiente === false && obj.descripcion !== '' ) {
                      this.nextStep.emit( 13 );
                      this.permitirSiguiente = true;
                   }
-                  if ( obj.descripcion == '' )
+                  if ( obj.descripcion === '' ) {
                      this.permitirSiguiente = false;
+                  }
                }
             } );
          } else {
@@ -86,7 +88,7 @@ export class PersonalityComponent implements OnInit {
 
       this.personalityService.add( personality ).subscribe( res => {
          if ( res.ok ) {
-            if ( this.permitirSiguiente == false ) {
+            if ( this.permitirSiguiente === false ) {
                this.nextStep.emit( 13 );
                this.permitirSiguiente = true;
             }
@@ -97,19 +99,22 @@ export class PersonalityComponent implements OnInit {
    next() {
       let num = 0;
       for ( let elemento of this.listPersonality ) {
-         if ( elemento.nombre == '' || elemento.nombre == null )
+         if ( elemento.nombre === '' || elemento.nombre === null ) {
             num++;
+         }
       }
-      if ( this.listPersonality.length == num ) {
+      if ( this.listPersonality.length === num ) {
          this.alert = true;
       } else {
          this.alert = false;
          for ( let elemento of this.listPersonality ) {
-            if ( elemento.nombre !== undefined && elemento.nombre !== null )
+            if ( elemento.nombre !== undefined && elemento.nombre !== null ) {
                this.update( elemento );
+            }
          }
-         if ( this.permitirSiguiente )
+         if ( this.permitirSiguiente ) {
             this.nextStep.emit( 13 );
+         }
       }
    }
 }

@@ -76,7 +76,6 @@ export class RisksAddComponent implements OnInit {
             }
          }
       } );
-      ;
    }
 
 }

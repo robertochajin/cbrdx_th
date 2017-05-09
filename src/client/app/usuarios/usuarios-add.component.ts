@@ -212,7 +212,7 @@ export class UsuariosAddComponent {
                this.isRequiredGroup = false;
                this.isGreaterGroup = true;
                this.creatingGroup = true;
-            } )
+            } );
          } else {
             this.creatingGroup = false;
             this.curUsuarioGrupo.idUsuario = this.usuario.idUsuario;

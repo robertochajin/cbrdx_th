@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/primeng';
 import { Widgets } from '../_models/widgets';
@@ -7,10 +7,10 @@ import { WidgetServices } from '../_services/widget.service';
 @Component( {
                moduleId: module.id,
                templateUrl: 'widgets.component.html',
-               selector: 'widgets',
+               selector: 'widgets-list',
                providers: [ ConfirmationService ]
             } )
-export class WidgetsComponent {
+export class WidgetsComponent implements OnInit {
    widgets: Widgets = new Widgets();
    listWidgets: Widgets [];
 

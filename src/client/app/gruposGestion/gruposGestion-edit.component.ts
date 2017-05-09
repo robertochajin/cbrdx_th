@@ -1,6 +1,3 @@
-/**
- * Created by Felipe Aguirre - Jenniferth Escobar on 24/02/2017.
- */
 import { Component } from '@angular/core';
 import { GruposGestion } from '../_models/gruposGestion';
 import { GruposGestionService } from '../_services/grupoGestion.service';
@@ -29,8 +26,8 @@ export class GruposGestionEditComponent {
          this.grupoGestion = data;
          if ( this.grupoGestion.fechaInicio !== null ) {
             this.isRequired = true;
-            this.grupoGestion.fechaInicio = moment( this.grupoGestion.fechaInicio, "YYYY-MM-DD" ).toDate();
-            this.grupoGestion.fechaFin = moment( this.grupoGestion.fechaFin, "YYYY-MM-DD" ).toDate();
+            this.grupoGestion.fechaInicio = moment( this.grupoGestion.fechaInicio, 'YYYY-MM-DD' ).toDate();
+            this.grupoGestion.fechaFin = moment( this.grupoGestion.fechaFin, 'YYYY-MM-DD' ).toDate();
             this.validateGreater();
          }
          gruposGestionService.listGruposGestion().subscribe( res => {
@@ -67,7 +64,7 @@ export class GruposGestionEditComponent {
 
    createGruposGestion() {
       this.gruposGestionService.updateGruposGestion( this.grupoGestion ).then( data => {
-         this.router.navigate( [ 'gruposGestion' ] )
+         this.router.navigate( [ 'gruposGestion' ] );
       } );
    }
 

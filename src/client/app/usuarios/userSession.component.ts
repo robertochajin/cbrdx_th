@@ -11,7 +11,7 @@ import { JwtHelper } from 'angular2-jwt';
 
 @Component( {
                moduleId: module.id,
-               selector: 'userSession',
+               selector: 'user-session',
                templateUrl: 'userSession.component.html',
                providers: [ ConfirmationService ],
                styleUrls: [ 'userSession.component.css' ],
@@ -45,8 +45,9 @@ export class UserSessionComponent implements OnInit {
 
       let token = localStorage.getItem( 'token' );
 
-      if ( token !== null )
+      if ( token !== null ) {
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+      }
 
       let idUsuario = this.usuarioLogueado.usuario.idUsuario;
 

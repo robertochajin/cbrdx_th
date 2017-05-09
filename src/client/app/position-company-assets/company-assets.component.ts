@@ -67,8 +67,9 @@ export class CompanyAssetsComponent implements OnInit {
                      this.nextStep.emit( 11 );
                      this.permitirSiguiente = true;
                   }
-                  if ( obj.descripcion === '' )
+                  if ( obj.descripcion === '' ) {
                      this.permitirSiguiente = false;
+                  }
                }
 
             } );
@@ -101,15 +102,16 @@ export class CompanyAssetsComponent implements OnInit {
    next() {
       let num = 0;
       for ( let elemento of this.listCompanyAssets ) {
-         if ( elemento.nombre === '' || elemento.nombre === null ){ num++; }
+         if ( elemento.nombre === '' || elemento.nombre === null ) { num++; }
       }
       if ( this.listCompanyAssets.length === num ) {
          this.alert = true;
       } else {
          this.alert = false;
          for ( let elemento of this.listCompanyAssets ) {
-            if ( elemento.nombre !== undefined && elemento.nombre !== null )
+            if ( elemento.nombre !== undefined && elemento.nombre !== null ) {
                this.update( elemento );
+            }
          }
          if ( this.permitirSiguiente === true ) {
             this.nextStep.emit( 11 );
