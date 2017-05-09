@@ -8,7 +8,7 @@ export class Risks {
    indicadorHabilitado: boolean;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
-   
+
    constructor() {
       this.auditoriaFecha = null;
       this.auditoriaUsuario = null;

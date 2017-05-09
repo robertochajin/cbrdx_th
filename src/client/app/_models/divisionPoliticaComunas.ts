@@ -4,5 +4,5 @@ export class DivisionPoliticaComunas {
    indicadorHabilitado: boolean;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
-   
+
 }

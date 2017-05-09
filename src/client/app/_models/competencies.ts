@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { PositionCompetencies } from "./positionCompetencies";
+import { Injectable } from '@angular/core';
+import { PositionCompetencies } from './positionCompetencies';
 
 @Injectable()
 export class Competencies {
@@ -10,14 +10,14 @@ export class Competencies {
    public indicadorHabilitado: boolean;
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
-   
-   //Campo auxiliar
+
+   // Campo auxiliar
    public cargoCompetencia: PositionCompetencies;
-   
+
    constructor() {
       this.indicadorHabilitado = true;
       this.auditoriaUsuario = 1;
-      this.auditoriaFecha = "";
+      this.auditoriaFecha = '';
       this.cargoCompetencia = new PositionCompetencies();
    }
 }

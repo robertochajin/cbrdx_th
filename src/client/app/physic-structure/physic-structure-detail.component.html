@@ -1,7 +1,7 @@
 <div *ngIf="physicStructure">
    <div class="row">
       <div class="col-md-12">
-         <h3 class="first">Detalle Estructura Física</h3>
+         <h3 class="first">{{ 'ESTRUCTURAFISICA.LBL_DETALLEESTRUCT' | translate}}</h3>
       </div>
    </div>
    <div class="row">
@@ -9,24 +9,24 @@
          <form class="form-horizontal">
             <fieldset>
                <div class="row">
-                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">Código:</label>
+                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_CODIGO' | translate}}:</label>
                   <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{physicStructure.codigo}}</strong></label>
 
-                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">Nombre:</label>
+                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_NOMBRE' | translate}}:</label>
                   <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{physicStructure.estructuraFisica}}</strong></label>
                </div>
                <div class="row">
-                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">Categoría:</label>
+                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'ESTRUCTURAFISICA.LBL_CATEGORIA' | translate}}:</label>
                   <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{physicStructure.clasificacionSede}}</strong></label>
 
-                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">Dirección:</label>
+                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_DIRECCION' | translate}}:</label>
                   <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{physicStructure.direccion}}</strong></label>
                </div>
                <div class="row">
-                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">Habilitado:</label>
+                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_HABILITADO' | translate}}:</label>
                   <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{habilitado}}</strong></label>
 
-                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">Virtual:</label>
+                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'ESTRUCTURAFISICA.LBL_VIRTUAL' | translate}}:</label>
                   <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{virtual}}</strong></label>
                </div>
             </fieldset>
@@ -36,7 +36,7 @@
 </div>
 <div class="row form-footer-buttons">
    <div class="form-group col-md-12">
-      <button icon="fa-arrow-left" label="Regresar" type="button"
+      <button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate}}" type="button"
               pButton (click)="goBack()"></button>
    </div>
 </div>

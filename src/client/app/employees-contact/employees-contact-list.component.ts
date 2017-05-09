@@ -1,13 +1,13 @@
-import { Component, Input } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { Employee } from "../_models/employees";
-import { EmployeesContact } from "../_models/employeesContactList";
-import { EmployeesContactService } from "../_services/employees-contact.service";
-import { EmployeesService } from "../_services/employees.service";
-import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
-import { ListaItem } from "../_models/listaItem";
-import { ListaService } from "../_services/lista.service";
-import { NavService } from "../_services/_nav.service";
+import { Component, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Employee } from '../_models/employees';
+import { EmployeesContact } from '../_models/employeesContactList';
+import { EmployeesContactService } from '../_services/employees-contact.service';
+import { EmployeesService } from '../_services/employees.service';
+import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
+import { ListaItem } from '../_models/listaItem';
+import { ListaService } from '../_services/lista.service';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -16,9 +16,9 @@ import { NavService } from "../_services/_nav.service";
                providers: [ ConfirmationService ]
             } )
 export class EmployeesContactListComponent {
-   
+
    @Input() employee: Employee;
-   
+
    contact: EmployeesContact = new EmployeesContact();
    lcontact: EmployeesContact = new EmployeesContact();
    dialogObjet: EmployeesContact = new EmployeesContact();
@@ -29,14 +29,14 @@ export class EmployeesContactListComponent {
    idTer: number
    tel: boolean = false;
    cel: boolean = true;
-   
+
    constructor( private employeesContactService: EmployeesContactService,
-                private router: Router,
-                private route: ActivatedRoute,
-                private confirmationService: ConfirmationService,
-                private employeesService: EmployeesService,
-                private listaService: ListaService,
-                private _nav: NavService ) {
+      private router: Router,
+      private route: ActivatedRoute,
+      private confirmationService: ConfirmationService,
+      private employeesService: EmployeesService,
+      private listaService: ListaService,
+      private _nav: NavService ) {
       this.listaService.getMasterDetails( 'ListasParentescos' ).subscribe( res => {
          this.relationship.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
@@ -44,15 +44,15 @@ export class EmployeesContactListComponent {
          } );
       } );
    }
-   
+
    ngOnInit() {
-      
+
       this.idTer = this.employee.idTercero;
       this.employeesContactService.getByEmployee( this.idTer ).subscribe(
          contacts => {
             for ( let c of contacts ) {
                let bandera = false;
-               let label = "";
+               let label = '';
                for ( let ct of this.relationship ) {
                   if ( c.idListaParentesco == ct.value ) {
                      label = ct.label;
@@ -67,9 +67,9 @@ export class EmployeesContactListComponent {
             }
          }
       );
-      
+
    }
-   
+
    onSubmit() {
       this.msgs = [];
       this.show_form = false;
@@ -95,7 +95,7 @@ export class EmployeesContactListComponent {
          this.employeesContactService.update( this.contact )
          .subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
-            
+
             this.employeesContactService.getByEmployee( this.employee.idTercero ).subscribe(
                contacts => {
                   this.contacts = [];
@@ -105,15 +105,15 @@ export class EmployeesContactListComponent {
                   }
                }
             );
-            
+
          }, error => {
             this.show_form = true;
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       }
-      
+
    }
-   
+
    delete( f: EmployeesContact ) {
       this.dialogObjet = f;
       this.confirmationService.confirm( {
@@ -132,25 +132,25 @@ export class EmployeesContactListComponent {
                                            }
                                         } );
    }
-   
+
    add() {
       this.msgs = [];
       this.contact = new EmployeesContact();
       this.show_form = true;
    }
-   
+
    update( f: EmployeesContact ) {
       this.msgs = [];
       this.show_form = true;
       this.contact = Object.assign( {}, f );
-      
+
    }
-   
+
    goBackUpdate() {
       this.msgs = [];
       this.show_form = false;
    }
-   
+
    capitalize() {
       let input = this.contact.contacto;
       input = input.toLowerCase().replace( /^.|\s\S/g, function ( a ) {
@@ -158,7 +158,7 @@ export class EmployeesContactListComponent {
       } );
       this.contact.contacto = input;
    }
-   
+
    validarTelefono() {
       if ( this.contact.telefono === "(___) ___-____ Ext ____" ) {
          this.tel = true;
@@ -168,7 +168,7 @@ export class EmployeesContactListComponent {
          this.cel = false;
       }
    }
-   
+
    validarCelular() {
       if ( this.contact.celular === "(___) ___-____" ) {
          this.tel = true;
@@ -178,5 +178,5 @@ export class EmployeesContactListComponent {
          this.cel = false;
       }
    }
-   
+
 }

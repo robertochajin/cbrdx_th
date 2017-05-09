@@ -1,8 +1,8 @@
-import {join} from 'path';
+import { join } from 'path';
 import * as slash from 'slash';
-import {argv} from 'yargs';
+import { argv } from 'yargs';
 
-import {BuildType, ExtendPackages, InjectableDependency} from './seed.config.interfaces';
+import { BuildType, ExtendPackages, InjectableDependency } from './seed.config.interfaces';
 
 /************************* DO NOT CHANGE ************************
  *
@@ -309,12 +309,12 @@ export class SeedConfig {
     * Se definen la IP y el PUERTO con la cual la vista se conecta a los servicios Solucion de proteccion
     * @type {string}
     */
-      //IP = '192.168.253.37'; //_CREZCAMOS
-   IP = '40.71.92.147'; //_CIBERDIX
-   //IP = 'localhost';
+      // IP = '192.168.253.37'; //_CREZCAMOS
+   IP = '40.71.92.147'; // _CIBERDIX
+   // IP = 'localhost';
    SVC_SP_PORT = '8447';
 
-   SVC_SP_URL = "http://" + this.IP + ":" + this.SVC_SP_PORT;
+   SVC_SP_URL = 'http://' + this.IP + ':' + this.SVC_SP_PORT;
 
    /**
     * Se definen la IP y el PUERTO con la cual la vista se conecta a los servicios Talento Humano
@@ -322,8 +322,8 @@ export class SeedConfig {
     */
    SVC_TH_PORT_D = '8444';
    SVC_TH_PORT = '8448';
-   SVC_TH_URL_D = "http://" + this.IP + ":" + this.SVC_TH_PORT_D;
-   SVC_TH_URL = "http://" + this.IP + ":" + this.SVC_TH_PORT;
+   SVC_TH_URL_D = 'http://' + this.IP + ':' + this.SVC_TH_PORT_D;
+   SVC_TH_URL = 'http://' + this.IP + ':' + this.SVC_TH_PORT;
 
    /**
     * The list of NPM dependcies to be injected in the `index.html`.
@@ -391,7 +391,6 @@ export class SeedConfig {
          '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
          'traceur': 'node_modules/traceur/bin/traceur.js',
-         //'ng2-translate': 'node_modules/ng2-translate/ng2-translate.js',
          'primeng': '${this.APP_BASE}node_modules/primeng',
 
 
@@ -680,7 +679,7 @@ function filterDependency(type: string, d: InjectableDependency): boolean {
  * @return {number} The applications version.
  */
 function appVersion(): number | string {
-   var pkg = require('../../package.json');
+   let pkg = require('../../package.json');
    return pkg.version;
 }
 

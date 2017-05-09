@@ -1,11 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { ActividadEconomica } from "../_models/actividadEconomica";
-import { ActividadEconomicaTipos } from "../_models/actividadEconomicaTipos";
-import { ActividadEconomicaService } from "../_services/actividadEconomica.service";
-import { TreeNode } from "primeng/components/common/api";
-import { Message, SelectItem } from "primeng/primeng";
-import { Search } from "../_models/search";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ActividadEconomica } from '../_models/actividadEconomica';
+import { ActividadEconomicaTipos } from '../_models/actividadEconomicaTipos';
+import { ActividadEconomicaService } from '../_services/actividadEconomica.service';
+import { TreeNode } from 'primeng/components/common/api';
+import { Message, SelectItem } from 'primeng/primeng';
+import { Search } from '../_models/search';
 
 @Component( {
                moduleId: module.id,
@@ -13,7 +13,7 @@ import { Search } from "../_models/search";
                selector: 'actividadEconomica'
             } )
 export class ActividadEconomicaComponent implements OnInit {
-   
+
    msgs: Message[] = [];
    actividadEconomica: ActividadEconomica = new ActividadEconomica();
    listadoActividadEconomica: ActividadEconomica[];
@@ -24,7 +24,7 @@ export class ActividadEconomicaComponent implements OnInit {
    tabselected: number = 1;
    labeltabselected: string;
    header: string;
-   labelPadre: string = "";
+   labelPadre: string = '';
    labelTipo: string;
    labelfieldactividad: string;
    btnactivity: { show: boolean, label: string, idparent: number, parent: string } = {
@@ -43,10 +43,10 @@ export class ActividadEconomicaComponent implements OnInit {
    displayDialog: boolean = false;
    resultSearch: Search[];
    selectedSearch: SelectItem;
-   
+
    constructor( private router: Router,
-                private actividadEconomicaService: ActividadEconomicaService ) {
-      
+      private actividadEconomicaService: ActividadEconomicaService ) {
+
       actividadEconomicaService.listActividadEconomica().subscribe( res => {
          this.listadoActividadEconomica = res;
          for ( let c of this.listadoActividadEconomica.filter( t => t.idActividadPadre == 0 ) ) {
@@ -54,37 +54,38 @@ export class ActividadEconomicaComponent implements OnInit {
                                                  "value": c.idActividadEconomica,
                                                  "label": c.actividadEconomica,
                                                  "level": 1,
-               
+
                                                  "codigo": c.codigoActividadEconomica,
                                                  "children": [ {
                                                     "value": 0,
                                                     "label": '+ Cargando...',
                                                     "level": 2,
-                                                    "codigo": "",
+                                                    "codigo": '',
                                                     "data": c,
                                                     "children": {}
-                                                 } ]
+                                                 }
+                                                 ]
                                               } );
          }
       } );
-      
+
       actividadEconomicaService.listActividadEconomicaTipos().subscribe( listActividadEconomicaTipos => {
          this.activityTypes = listActividadEconomicaTipos;
          this.newActivity();
       } );
    }
-   
+
    ngOnInit(): void {
-      
+
    }
-   
+
    goBack(): void {
       this.router.navigate( [ 'actividadEconomica' ] );
    }
-   
+
    nodeExpand( node: any ) {
       let actividadEconomicaNivel: any[] = [];
-      
+
       let chil: any;
       if ( node.level == 3 ) {
          chil = [];
@@ -94,9 +95,10 @@ export class ActividadEconomicaComponent implements OnInit {
             "label": '+ Cargando...',
             "level": node.level + 2,
             "codigo": ''
-         } ]
+         }
+         ]
       }
-      
+
       for ( let c of this.listadoActividadEconomica.filter( t => t.idActividadPadre == node.value ) ) {
          actividadEconomicaNivel.push( {
                                           "value": c.idActividadEconomica,
@@ -106,24 +108,24 @@ export class ActividadEconomicaComponent implements OnInit {
                                           "data": c,
                                           "codigo": c.codigoActividadEconomica,
                                           "children": chil
-            
+
                                        } );
       }
       node.children = actividadEconomicaNivel;
    }
-   
+
    nodeSelect( node: any ) {
-      
+
       this.selectedNode = node;
       this.treeselected = node;
       this.tabselected = node.level;
       this.header = node.label;
       this.btnsubactivity.show = false;
-      
+
       switch ( this.tabselected ) {
          case 1:
             this.labelfieldactividad = "Nombre";
-            this.labelPadre = "";
+            this.labelPadre = '';
             this.labelTipo = "Tipo: " + this.getTypebyCodigo( '1' );
             this.btnactivity = {
                show: true,
@@ -134,56 +136,56 @@ export class ActividadEconomicaComponent implements OnInit {
             this.btnsubactivity = {
                show: true,
                label: 'Agregar ' + this.getTypebyCodigo( '2' ),
-               
+
                parent: node.label,
                idparent: node.value
             };
             break;
-         
+
          case 2:
-            
+
             this.labelfieldactividad = "Nombre " + this.getTypebyCodigo( '2' );
             this.labelPadre = this.getTypebyCodigo( '1' ) + ": " + node.parent.label;
             this.labelTipo = "Tipo: " + this.getTypebyCodigo( '2' );
             this.btnsubactivity = {
                show: true,
                label: 'Agregar ' + this.getTypebyCodigo( '3' ),
-               
+
                parent: node.label,
                idparent: node.value
             };
             break;
-         
+
          case 3:
-            
+
             this.labelfieldactividad = "Nombre " + this.getTypebyCodigo( '3' );
             this.labelPadre = this.getTypebyCodigo( '2' ) + ": " + node.parent.label;
             this.labelTipo = "Tipo: " + this.getTypebyCodigo( '3' );
             this.btnsubactivity = {
                show: true,
                label: 'Agregar ' + this.getTypebyCodigo( '4' ),
-               
+
                parent: node.label,
                idparent: node.value
             };
             break;
-         
+
          case 4:
-            
+
             this.labelfieldactividad = "Nombre " + this.getTypebyCodigo( '3' );
             this.labelPadre = this.getTypebyCodigo( '3' ) + ": " + node.parent.label;
             this.labelTipo = "Tipo: " + this.getTypebyCodigo( '4' );
             break;
-         
+
       }
       this.actividadEconomicaService.viewActividadEconomica( node.value ).subscribe(
          actividadEconomica => {
             this.actividadEconomica = actividadEconomica;
             this.validateCode();
          } );
-      
+
    }
-   
+
    save() {
       if ( this.actividadEconomica.idActividadEconomica == null || this.actividadEconomica.idActividadEconomica == 0 ) {
          this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Nuevo registro' } );
@@ -196,15 +198,16 @@ export class ActividadEconomicaComponent implements OnInit {
                nivel = this.selectedNode.level;
             else
                nivel = 1;
-            
+
             if ( this.tabselected == 1 ) {
                chil = [ {
                   "value": 0,
                   "label": '+ Cargando...',
                   "level": this.tabselected + 1,
                   "codigo": ''
-               } ];
-               
+               }
+               ];
+
             } else {
                if ( nivel <= 3 ) {
                   chil = [ {
@@ -212,10 +215,11 @@ export class ActividadEconomicaComponent implements OnInit {
                      "label": '+ Cargando...',
                      "level": this.tabselected + 1,
                      "codigo": ''
-                  } ];
+                  }
+                  ];
                }
             }
-            
+
             let newChil: any = {
                "label": this.actividadEconomica.actividadEconomica,
                "value": data.idActividadEconomica,
@@ -231,11 +235,15 @@ export class ActividadEconomicaComponent implements OnInit {
                this.selectedNode.children.push( newChil );
                this.newSubActivity();
             }
-            
+
          } );
       } else {
-         this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Actualizando registro' } );
-         this.actividadEconomicaService.updateActividadEconomica( this.actividadEconomica ).then( data => {
+         this.msgs.push( {
+                            severity: 'info', summary: 'Guardando...',
+                            detail: 'Actualizando registro'
+                         } );
+         this.actividadEconomicaService.updateActividadEconomica( this.actividadEconomica )
+         .then( () => {
             this.selectedNode.label = this.actividadEconomica.actividadEconomica;
             this.header = this.actividadEconomica.actividadEconomica;
             for ( let i = 0; i < this.listadoActividadEconomica.length; i++ ) {
@@ -247,18 +255,19 @@ export class ActividadEconomicaComponent implements OnInit {
          } );
       }
    }
-   
+
    doCancel() {
       if ( this.actividadEconomica.actividadEconomica == null || this.actividadEconomica.idActividadEconomica == 0 ) {
          this.actividadEconomica = new ActividadEconomica;
       } else {
-         this.actividadEconomicaService.viewActividadEconomica( this.actividadEconomica.idActividadEconomica ).subscribe( res => {
+         this.actividadEconomicaService.viewActividadEconomica( this.actividadEconomica.idActividadEconomica )
+         .subscribe( res => {
             this.actividadEconomica = res;
          } );
       }
       this.displayDialog = false;
    }
-   
+
    newActivity() {
       this.actividadEconomica = new ActividadEconomica();
       this.tabselected = 1;
@@ -267,11 +276,11 @@ export class ActividadEconomicaComponent implements OnInit {
       this.actividadEconomica.idActividadPadre = 0;
       this.actividadEconomica.idActividadTipo = this.getIdTypebyCodigo( "1" );
       this.actividadEconomica.indicadorHabilitado = true;
-      this.labelPadre = "";
+      this.labelPadre = '';
       this.labelTipo = "Tipo: " + this.getTypebyCodigo( '1' );
-      
+
    }
-   
+
    newSubActivity() {
       this.actividadEconomica = new ActividadEconomica();
       this.tabselected = this.selectedNode.level + 1;
@@ -285,71 +294,75 @@ export class ActividadEconomicaComponent implements OnInit {
       this.labelPadre = this.getTypebyCodigo( this.selectedNode.level.toString() ) + ": " + this.btnsubactivity.parent;
       this.labelTipo = "Tipo: " + this.getTypebyCodigo( this.labeltabselected );
    }
-   
+
    getTypebyCodigo( id: string ) {
-      let nameactividadEconomica: string = "";
+      let nameactividadEconomica = '';
       for ( let c of  this.activityTypes.filter( t => t.codigoActividadTipo.toString() == id ) ) {
          nameactividadEconomica = c.descripcionActividadTipo;
       }
       return nameactividadEconomica;
-      
+
    }
-   
+
    getIdTypebyCodigo( id: string ) {
-      let idActividadEconomicaTipo: number = 0;
-      
+      let idActividadEconomicaTipo = 0;
+
       for ( let c of  this.activityTypes.filter( t => t.codigoActividadTipo.toString() == id ) ) {
          idActividadEconomicaTipo = c.idActividadEconomicaTipo;
       }
       return idActividadEconomicaTipo;
    }
-   
+
    validateCode() {
-      this.codeExists = this.listadoActividadEconomica.filter( t => (t.codigoActividadEconomica === this.actividadEconomica.codigoActividadEconomica && this.actividadEconomica.idActividadEconomica != t.idActividadEconomica) ).length > 0;
+      this.codeExists = this.listadoActividadEconomica
+                        .filter( t => (t.codigoActividadEconomica === this.actividadEconomica.codigoActividadEconomica &&
+                                       this.actividadEconomica.idActividadEconomica !== t.idActividadEconomica) ).length > 0;
    }
-   
+
    search( event: any ) {
       this.actividadEconomicaService.getSearch( event.query ).subscribe(
          lis => this.resultSearch = lis
       );
    }
-   
+
    captureId( event: Search ) {
       // ScrollTo 0;
       jQuery( '#trvActividadEconomica' ).scrollTop( 0 );
-      
+
       this.actividadEconomicaService.viewActividadEconomica( event.value ).subscribe( res => {
          this.actividadEconomica = res;
          this.searchRecursive( res );
          this.header = res.actividadEconomica;
-         if ( res.idActividadPadre != 0 ) {
+         if ( res.idActividadPadre !== 0 ) {
             this.actividadEconomicaService.viewActividadEconomica( res.idActividadPadre ).subscribe( res => {
                this.labelPadre = res.actividadEconomica;
-               
+
             } );
          } else {
-            this.labelPadre = "";
+            this.labelPadre = '';
          }
-         this.labelTipo = "Tipo: " + this.activityTypes.find( t => t.idActividadEconomicaTipo == res.idActividadTipo ).descripcionActividadTipo;
-         
+         this.labelTipo = "Tipo: " + this.activityTypes
+            .find( t => t.idActividadEconomicaTipo == res.idActividadTipo ).descripcionActividadTipo;
+
          setTimeout( () => {
             // Scroll to Select
             jQuery( '#trvActividadEconomica' ).scrollTop(
-               jQuery( '.ui-state-highlight' ).position().top - jQuery( '#trvActividadEconomica' ).height() / 2
+               jQuery( '.ui-state-highlight' )
+               .position().top - jQuery( '#trvActividadEconomica' ).height() / 2
             );
          }, 500 );
-         
+
       } );
-      
+
    }
-   
+
    private searchRecursive( res: ActividadEconomica ) {
       let node4: number = 0;
       let node3: number = 0;
       let node2: number = 0;
       let node1: number = 0;
       let nivel = this.activityTypes.find( t => t.idActividadEconomicaTipo == res.idActividadTipo ).codigoActividadTipo;
-      
+
       switch ( nivel.toString() ) {
          case "1":
             node1 = res.idActividadEconomica;
@@ -382,14 +395,14 @@ export class ActividadEconomicaComponent implements OnInit {
       if ( node4 > 0 ) {
          this.searchLevel( node4, 4 );
       }
-      
+
       this.treeselected = this.selectedNode;
       this.selectedSearch = null;
       this.nodeSelect( this.selectedNode );
    }
-   
+
    private searchLevel( id: number, tipo: number ) {
-      
+
       if ( tipo == 1 ) {
          this.treeActividadEconomica.forEach( node => {
             if ( node.value == id ) {
@@ -414,48 +427,22 @@ export class ActividadEconomicaComponent implements OnInit {
          }
       }
    }
-   
-   private nodeExpandRecursive( node: any ) {
-      let ocupacionesNivel: any[] = [];
-      let chil: any;
-      if ( node.level == 3 ) {
-         chil = [];
-      } else {
-         
-         chil = [ {
-            "value": 0,
-            "label": '+ Cargando...',
-            "level": node.level + 2,
-            "codigo": ''
-         } ]
-      }
-      for ( let c of this.listadoActividadEconomica.filter( t => t.idActividadPadre == node.value ) ) {
-         ocupacionesNivel.push( {
-                                   "value": c.idActividadEconomica,
-                                   "label": c.actividadEconomica,
-                                   "level": node.level + 1,
-                                   "codigo": c.codigoActividadEconomica,
-                                   "children": chil
-                                } );
-      }
-      node.children = ocupacionesNivel;
-   }
-   
+
    capitalizeCodigo() {
       let input = this.actividadEconomica.codigoActividadEconomica;
-      if ( input != "" && input != null ) {
+      if ( input !== '' && input !== null ) {
          this.actividadEconomica.codigoActividadEconomica = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
-         
+
       }
    }
-   
+
    capitalizeName() {
       let input = this.actividadEconomica.actividadEconomica;
-      if ( input != "" && input != null ) {
+      if ( input !== '' && input !== null ) {
          this.actividadEconomica.actividadEconomica = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }
-   
+
 }
 class Tree {
    value: number;

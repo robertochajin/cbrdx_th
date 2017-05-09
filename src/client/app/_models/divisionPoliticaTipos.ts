@@ -1,5 +1,5 @@
 export class DivisionPoliticaTipos {
-   
+
    idDivisionPoliticaTipo: number;
    descripcionTipo: string;
    codigoDivisionPoliticaTipo: string;

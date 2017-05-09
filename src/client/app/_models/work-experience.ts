@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Workexperience {
-   
+
    public idTerceroExperienciaLaboral?: number;
    public idTercero: number;
    public empresa?: string;
@@ -26,27 +26,27 @@ export class Workexperience {
    public idAdjunto?: string;
    public auditoriaUsuario: number;
    public auditoriaFecha: Date;
-   
+
    constructor() {
       this.idTercero = null;
-      this.empresa = "";
-      this.cargo = "";
+      this.empresa = '';
+      this.cargo = '';
       this.idNivelCargo = null;
-      this.nivelCargo = "";
-      this.telefonoEmpresa = "";
+      this.nivelCargo = '';
+      this.telefonoEmpresa = '';
       this.idSectorEmpresa = null;
-      this.sectorEmpresa = "";
+      this.sectorEmpresa = '';
       this.idSubSectorEmpresa = null;
-      this.subSectorEmpresa = "";
-      this.areaCargo = "";
-      this.jefeInmediato = "";
-      this.tiempoExperiencia = "";
+      this.subSectorEmpresa = '';
+      this.areaCargo = '';
+      this.jefeInmediato = '';
+      this.tiempoExperiencia = '';
       this.idCiudad = null;
-      this.ciudad = "";
+      this.ciudad = '';
       this.indicadorActualmente = false;
       this.indicadorHabilitado = true;
-      this.fechaIngresa = "";
-      this.fechaTermina = "";
+      this.fechaIngresa = '';
+      this.fechaTermina = '';
       this.idAdjunto = null;
       this.auditoriaUsuario = 1;
    }

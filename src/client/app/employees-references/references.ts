@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class References {
@@ -19,14 +19,14 @@ export class References {
    public auditoriaFecha: string;
    public indicadorVerificado: boolean;
    public fechaVerificado: string;
-   
+
    public nombreCompleto?: string;
    public ciudad?: string;
    public direccion?: string;
    public tipodeReferencia?: { value: number, label: string }
-   
+
    public numeroContacto?: string;
-   
+
    constructor() {
       this.nombreCompleto = '';
       this.segundoNombre = '';

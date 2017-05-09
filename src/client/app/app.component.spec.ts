@@ -1,16 +1,16 @@
-import { Component } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { TestBed, async } from "@angular/core/testing";
-import { APP_BASE_HREF } from "@angular/common";
-import { RouterTestingModule } from "@angular/router/testing";
-import { AppComponent } from "./app.component";
-import { ToolbarComponent } from "./shared/toolbar/toolbar.component";
-import { NavbarComponent } from "./shared/navbar/navbar.component";
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { TestBed, async } from '@angular/core/testing';
+import { APP_BASE_HREF } from '@angular/common';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppComponent } from './app.component';
+import { ToolbarComponent } from './shared/toolbar/toolbar.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 export function main() {
-   
+
    describe( 'App component', () => {
-      
+
       beforeEach( () => {
          TestBed.configureTestingModule( {
                                             imports: [
@@ -28,7 +28,7 @@ export function main() {
                                             ]
                                          } );
       } );
-      
+
       it( 'should build without a problem',
           async( () => {
              TestBed
@@ -36,7 +36,7 @@ export function main() {
              .then( () => {
                 let fixture = TestBed.createComponent( TestComponent );
                 let compiled = fixture.nativeElement;
-            
+
                 expect( compiled ).toBeTruthy();
              } );
           } ) );

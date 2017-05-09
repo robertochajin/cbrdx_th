@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Employee {
-   
+
    public idTercero: number;
    public primerNombre: string;
    public segundoNombre: string;
@@ -62,7 +62,7 @@ export class Employee {
    public idSectorEconomico: number;
    public idActividadEconomica: number;
    public idTipoTercero: number;
-   
+
    public idTallaCamisa: number;
    public idTallaPantalon: number;
    public idTallaCalzado: number;
@@ -73,18 +73,18 @@ export class Employee {
    public tipoTercero: number;
    public sectorEconomico: string;
    public coberturaSalud: string;
-   
+
    constructor() {
       this.nombreCompleto = '';
       this.gentilicio = '';
       this.cargoActual = '';
       this.genero = '';
       this.razonSocial = '';
-      
+
       this.auditoriaUsuario = 1;
-      this.correoElectronico = "";
-      this.sitioWeb = "";
-      this.factorRh = "";
+      this.correoElectronico = '';
+      this.sitioWeb = '';
+      this.factorRh = '';
       this.idActividadEconomica = null;
       this.idCiudadExpDocumento = null;
       this.idCiudadNacimiento = null;
@@ -103,28 +103,28 @@ export class Employee {
       this.idTipoOcupacion = null;
       this.idTipoPersona = null;
       this.idTipoTercero = null;
-      this.imagen = "";
+      this.imagen = '';
       this.imc = 0;
       this.indicadorVivo = true;
       this.indicadorHabilitado = true;
       this.nroHijos = 0,
-         this.numeroDocumento = "";
+         this.numeroDocumento = '';
       this.peso = 0;
-      this.primerApellido = "";
-      this.primerNombre = "";
-      this.razonSocial = "";
-      this.segundoApellido = "";
-      this.segundoNombre = "";
+      this.primerApellido = '';
+      this.primerNombre = '';
+      this.razonSocial = '';
+      this.segundoApellido = '';
+      this.segundoNombre = '';
       this.talla = 0;
       this.tallaCalzado = 0;
       this.tallaCamisa = 0;
       this.tallaPantalon = 0;
-      this.telefonoCelular = "";
-      this.telefonoFijo = "";
-      this.fechaCreacion = "";
-      this.fechaDefuncion = "";
-      this.fechaDocumento = "";
-      this.fechaNacimiento = "";
+      this.telefonoCelular = '';
+      this.telefonoFijo = '';
+      this.fechaCreacion = '';
+      this.fechaDefuncion = '';
+      this.fechaDocumento = '';
+      this.fechaNacimiento = '';
    }
 }
 

@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class StudyStates {
-   
+
    idListaEstadoEstudio: number;
    codigoListaEstadoEstudio: string;
    nombreListaEstadoEstudio: string;
@@ -12,5 +12,5 @@ export class StudyStates {
    auditoriaFecha: string;
    label: string;
    value: number;
-   
+
 }

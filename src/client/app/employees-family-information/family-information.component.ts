@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { Router } from "@angular/router";
-import { FamilyInformationService } from "./family-information.service";
-import { ConstructorFamilyInformation } from "./family-information.construct";
-import { ConfirmationService } from "primeng/primeng";
-import { Employee } from "../_models/employees";
-import * as moment from "moment/moment";
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { FamilyInformationService } from './family-information.service';
+import { ConstructorFamilyInformation } from './family-information.construct';
+import { ConfirmationService } from 'primeng/primeng';
+import { Employee } from '../_models/employees';
+import * as moment from 'moment/moment';
 
 @Component( {
                moduleId: module.id,
@@ -17,14 +17,14 @@ export class FamilyInformationComponent implements OnInit {
    familyInformation: ConstructorFamilyInformation = new ConstructorFamilyInformation();
    dialogObjet: ConstructorFamilyInformation = new ConstructorFamilyInformation();
    familyInformations: ConstructorFamilyInformation[];
-   
+
    constructor( private familyInformationService: FamilyInformationService,
-                private router: Router,
-                private confirmationService: ConfirmationService ) {
+      private router: Router,
+      private confirmationService: ConfirmationService ) {
    }
-   
+
    ngOnInit() {
-      
+
       this.familyInformationService.getAllByEmployee( this.employee.idTercero ).subscribe(
          familyInformations => {
             this.familyInformations = familyInformations;
@@ -35,7 +35,7 @@ export class FamilyInformationComponent implements OnInit {
          }
       );
    }
-   
+
    del( f: ConstructorFamilyInformation ) {
       this.dialogObjet = f;
       this.confirmationService.confirm( {
@@ -53,17 +53,17 @@ export class FamilyInformationComponent implements OnInit {
                                            }
                                         } );
    }
-   
+
    detail( f: ConstructorFamilyInformation ) {
       return this.router.navigate( [ 'employees-family-information/detail/' + f.idTerceroFamiliar ] );
    }
-   
+
    add() {
       return this.router.navigate( [ 'employees-family-information/add/' + this.employee.idTercero ] );
    }
-   
+
    update( f: ConstructorFamilyInformation ) {
       return this.router.navigate( [ 'employees-family-information/update/' + f.idTerceroFamiliar + '/' + this.employee.idTercero ] );
    }
-   
+
 }

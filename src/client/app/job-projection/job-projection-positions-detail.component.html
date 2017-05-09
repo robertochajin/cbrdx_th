@@ -1,7 +1,7 @@
 <div *ngIf="jobProjection">
    <div class="row">
       <div class="col-md-12">
-         <h3 class="first">Detalle Proyección Laboral</h3>
+         <h3 class="first">{{ 'PROYECCIONLABORAL.LBL_DETALLEPROYECCION' | translate }}</h3>
       </div>
    </div>
    <div class="row">
@@ -9,25 +9,25 @@
          <form class="form-horizontal">
             <fieldset>
                <div class="row">
-                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">Cargo:</label>
+                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}:</label>
                   <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{jobProjection.cargo}}</strong></label>
                </div>
                <div class="row">
-                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">Plazas Actuales:</label>
+                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'PROYECCIONLABORAL.LBL_PLAZASATUALES' | translate }}:</label>
                   <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{jobProjection.plazasActuales}}</strong></label>
-                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">Costo Actual:</label>
+                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'PROYECCIONLABORAL.LBL_COSTOACTUAL' | translate }}:</label>
                   <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{jobProjection.costoActual}}</strong></label>
                </div>
                <div class="row">
-                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">Plazas Proyectadas:</label>
+                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'PROYECCIONLABORAL.LBL_PLAZASPROYECT' | translate }}:</label>
                   <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{jobProjection.plazasProyectadas}}</strong></label>
-                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">Costo Proyectado:</label>
+                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'PROYECCIONLABORAL.LBL_COSTOPROYECT' | translate }}:</label>
                   <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{jobProjection.costoProyectado}}</strong></label>
                </div>
                <div class="row">
-                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">Observaciones:</label>
+                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'PROYECCIONLABORAL.LBL_OBSERVACIONES' | translate }}:</label>
                   <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{jobProjection.observacion}}</strong></label>
-                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">Observaciones de Aprobación:</label>
+                  <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'PROYECCIONLABORAL.LBL_OBSERVAPROBACION' | translate }}:</label>
                   <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{jobProjection.observacionAprobacion}}</strong></label>
                </div>
             </fieldset>
@@ -37,7 +37,7 @@
 </div>
 <div class="row form-footer-buttons">
    <div class="form-group col-md-12">
-      <button icon="fa-arrow-left" label="Regresar" type="button"
+      <button icon="fa-arrow-left" label="{{ 'LBL_REGRESAR' | translate }}" type="button"
               pButton (click)="goBack()"></button>
    </div>
 </div>

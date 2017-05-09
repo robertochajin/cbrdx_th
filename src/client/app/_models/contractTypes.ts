@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ContractTypes {
-   
+
    idListaTipoContrato: number;
    codigo: string;
    nombre: string;

@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class FaultsAndSanctions {
-   
+
    public idFalta: number;
    public falta: string;
    public idTipoFalta: number;
@@ -11,7 +11,7 @@ export class FaultsAndSanctions {
    public indicadorHabilitado: boolean;
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
-   
+
    constructor() {
       this.indicadorHabilitado = true;
    }

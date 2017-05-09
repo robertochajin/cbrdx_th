@@ -1,16 +1,16 @@
-import "rxjs/add/operator/switchMap";
-import { Component, Input, OnInit } from "@angular/core";
-import { AcademicEducationService } from "../_services/academic-education.service";
-import { Location } from "@angular/common";
-import { Router, ActivatedRoute, Params } from "@angular/router";
-import { Noformalstudies } from "./no-formal-studies";
-import { Message, ConfirmationService } from "primeng/primeng";
-import * as moment from "moment/moment";
-import { StudyLevelServices } from "../_services/study-level.service";
-import { NavService } from "../_services/_nav.service";
-import { PoliticalDivisionService } from "../_services/political-division.service";
-import { ListaItem } from "../_models/listaItem";
-import { ListaService } from "../_services/lista.service";
+import 'rxjs/add/operator/switchMap';
+import { Component, Input, OnInit } from '@angular/core';
+import { AcademicEducationService } from '../_services/academic-education.service';
+import { Location } from '@angular/common';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Noformalstudies } from './no-formal-studies';
+import { Message, ConfirmationService } from 'primeng/primeng';
+import * as moment from 'moment/moment';
+import { StudyLevelServices } from '../_services/study-level.service';
+import { NavService } from '../_services/_nav.service';
+import { PoliticalDivisionService } from '../_services/political-division.service';
+import { ListaItem } from '../_models/listaItem';
+import { ListaService } from '../_services/lista.service';
 
 @Component( {
                moduleId: module.id,
@@ -20,7 +20,7 @@ import { ListaService } from "../_services/lista.service";
             } )
 
 export class NoFormalStudiesUpdateComponent implements OnInit {
-   
+
    @Input()
    nfstudy: Noformalstudies = new Noformalstudies();
    cityList: any;
@@ -41,20 +41,20 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
    fechaIngresa: string;
    fechaTermina: string;
    //hace falta definir acceso a constantes en servicio
-   
+
    constructor( private academicEducationService: AcademicEducationService,
-                private studyLevelServices: StudyLevelServices,
-                private listaService: ListaService,
-                private confirmationService: ConfirmationService,
-                private politicalDivisionService: PoliticalDivisionService,
-                private route: ActivatedRoute,
-                private router: Router,
-                private location: Location,
-                private _nav: NavService ) {
+      private studyLevelServices: StudyLevelServices,
+      private listaService: ListaService,
+      private confirmationService: ConfirmationService,
+      private politicalDivisionService: PoliticalDivisionService,
+      private route: ActivatedRoute,
+      private router: Router,
+      private location: Location,
+      private _nav: NavService ) {
    }
-   
+
    ngOnInit(): void {
-      
+
       this.setInitRanges();
       this.listaService.getMasterDetails( 'ListasNivelesEstudios' ).subscribe( res => {
          this.studyLevelList.push( { label: 'Seleccione', value: null } );
@@ -66,7 +66,7 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
             this.studyAreaList.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
-      
+
       this.listaService.getMasterDetails( 'ListasTiposEstudios' ).subscribe( res => {
          this.studyTypeList.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
@@ -79,7 +79,7 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
             this.studyIntensityList.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
-      
+
       this.route.params.subscribe( ( params: Params ) => {
          this.idTercero = params[ 'tercero' ];
          this.academicEducationService.getNoFormal( +params[ 'id' ] ).subscribe( nfstudy => {
@@ -96,16 +96,18 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
             }
          } );
       } );
-      
+
    }
-   
+
    setInitRanges() {
       this.es = {
          firstDayOfWeek: 1,
          dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
          dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
          dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
-         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre' ],
+         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre',
+            'diciembre'
+         ],
          monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
       let today = new Date();
@@ -122,18 +124,18 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
       this.maxDateFinal.setFullYear( year );
       this.range = `${lastYear}:${year}`;
    }
-   
+
    onSubmit( value: string ) {
       this.submitted = true;
-      if ( this.nfstudy.ciudad != this.selectedCity ) {
-         this.selectedCity = "";
+      if ( this.nfstudy.ciudad !== this.selectedCity ) {
+         this.selectedCity = '';
          this.nfstudy.idCiudad = null;
       }
       if ( this.nfstudy.ciudad == this.selectedCity ) {
          this.msgs = [];
          this.nfstudy.idTercero = this.idTercero;
          this.nfstudy.indicadorHabilitado = true;
-         
+
          let fi: moment.Moment = moment( this.fechaIngresa, 'MM/DD/YYYY' );
          this.nfstudy.fechaIngresa = fi.format( 'YYYY-MM-DD' );
          if ( this.nfstudy.indicadorTerminacion == true ) {
@@ -152,37 +154,37 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
          } );
       }
    }
-   
+
    citySearch( event: any ) {
       this.politicalDivisionService.getAllCities( event.query ).subscribe(
          cities => this.cityList = cities
       );
    }
-   
+
    captureCityId( event: any ) {
       this.nfstudy.idCiudad = event.idDivisionPolitica;
       this.nfstudy.ciudad = event.camino;
       this.selectedCity = event.camino;
    }
-   
+
    onSelectBegin( event: any ) {
       let d = new Date( Date.parse( event ) );
       this.fechaIngresa = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
       this.minDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
    }
-   
+
    onSelectEnd( event: any ) {
       let d = new Date( Date.parse( event ) );
       this.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
       this.maxDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
    }
-   
+
    updateEnd(): void {
       if ( this.nfstudy.indicadorTerminacion ) {
-         this.nfstudy.fechaTermina = "";
+         this.nfstudy.fechaTermina = '';
       }
    }
-   
+
    goBack(): void {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea Cancelar?`,
@@ -194,17 +196,17 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
                                            }
                                         } );
    }
-   
+
    changeTipoestudio( event: any ) {
       if ( this.nfstudy.idTipoEstudio !== null ) {
          this.nfstudy.otroEstudio = '';
       }
    }
-   
+
    removeEstudio() {
       if ( this.nfstudy.otroEstudio !== '' ) {
          this.nfstudy.idTipoEstudio = null;
       }
    }
-   
+
 }

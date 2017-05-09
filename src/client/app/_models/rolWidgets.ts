@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class RolWidgets {
@@ -10,11 +10,11 @@ export class RolWidgets {
    public indicadorObligatorio: boolean;
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
-   
+
    constructor() {
       this.indicadorHabilitado = true;
       this.indicadorObligatorio = false;
       this.auditoriaUsuario = 1;
-      this.auditoriaFecha = "";
+      this.auditoriaFecha = '';
    }
 }

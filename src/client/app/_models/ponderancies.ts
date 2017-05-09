@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Ponderancies {
@@ -9,10 +9,10 @@ export class Ponderancies {
    public indicadorHabilitado: boolean;
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
-   
+
    constructor() {
       this.indicadorHabilitado = true;
       this.auditoriaUsuario = 1;
-      this.auditoriaFecha = "";
+      this.auditoriaFecha = '';
    }
 }

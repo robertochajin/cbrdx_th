@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TerceroResidencias {
@@ -11,9 +11,9 @@ export class TerceroResidencias {
    public indicadorHabilitado: boolean;
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
-   
+
    constructor() {
       this.indicadorHabilitado = false;
    }
-   
+
 }

@@ -1,10 +1,10 @@
-import "rxjs/add/operator/switchMap";
-import { Absence } from "../_models/position-absence";
-import { Positions } from "../_models/positions";
-import { AbsenceService } from "../_services/position-absence.service";
-import { Component, Input } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
+import 'rxjs/add/operator/switchMap';
+import { Absence } from '../_models/position-absence';
+import { Positions } from '../_models/positions';
+import { AbsenceService } from '../_services/position-absence.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
 
 @Component( {
                moduleId: module.id,
@@ -13,24 +13,23 @@ import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
                providers: [ ConfirmationService ]
             } )
 
-export class PositionAuthoritiesComponent {
-   
+export class PositionAuthoritiesComponent implements OnInit {
    @Input() position: Positions;
    absence: Absence = new Absence();
    dialogObjet: Absence = new Absence();
    msgs: Message[] = [];
    listPosition: SelectItem[] = [];
    listAbsenceSUP: Absence[] = [];
-   
+
    constructor( private absenceService: AbsenceService,
-                private router: Router,
-                private route: ActivatedRoute,
-                private confirmationService: ConfirmationService, ) {
-      
+      private router: Router,
+      private route: ActivatedRoute,
+      private confirmationService: ConfirmationService, ) {
+
    }
-   
+
    ngOnInit() {
-      
+
       this.absence.idCargo = this.position.idCargo;
       this.absenceService.getSupervisa( this.absence.idCargo ).subscribe(
          rest => {
@@ -41,7 +40,7 @@ export class PositionAuthoritiesComponent {
                this.listAbsenceSUP.push( r );
             }
          } );
-      
+
       this.absenceService.getPositionAll().subscribe( rest => {
          this.listPosition.push( { label: 'Seleccione...', value: null } );
          for ( let dp of rest ) {
@@ -57,12 +56,12 @@ export class PositionAuthoritiesComponent {
             }
          }
       } );
-      
+
    }
-   
+
    onSubmit() {
       this.msgs = [];
-      this.absence.idTipoRelacion = 3; //Reemplaza a
+      this.absence.idTipoRelacion = 3; // Reemplaza a
       this.absenceService.add( this.absence )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
@@ -70,7 +69,7 @@ export class PositionAuthoritiesComponent {
             data.cargoRelacion = res.cargo;
          } );
          this.listAbsenceSUP.push( data );
-         this.listPosition = []
+         this.listPosition = [];
          this.absenceService.getPositionAll().subscribe( rest => {
             this.listPosition.push( { label: 'Seleccione...', value: null } );
             for ( let dp of rest ) {
@@ -90,7 +89,7 @@ export class PositionAuthoritiesComponent {
          this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
       } );
    }
-   
+
    del( a: Absence ) {
       this.dialogObjet = a;
       this.confirmationService.confirm( {
@@ -102,7 +101,7 @@ export class PositionAuthoritiesComponent {
                                               this.absenceService.update( this.dialogObjet ).subscribe( r => {
                                                  this.listAbsenceSUP.splice( this.listAbsenceSUP.indexOf( this.dialogObjet ), 1 );
                                                  this.dialogObjet = null;
-                                                 this.listPosition = []
+                                                 this.listPosition = [];
                                                  this.absenceService.getPositionAll().subscribe( rest => {
                                                     this.listPosition.push( { label: 'Seleccione...', value: null } );
                                                     for ( let dp of rest ) {
@@ -114,9 +113,7 @@ export class PositionAuthoritiesComponent {
                                                           }
                                                        }
                                                        if ( !bandera ) {
-                                                          this.listPosition.push( {
-                                                                                     label: dp.cargo, value: dp.idCargo
-                                                                                  } );
+                                                          this.listPosition.push( { label: dp.cargo, value: dp.idCargo } );
                                                        }
                                                     }
                                                  } );
@@ -127,5 +124,5 @@ export class PositionAuthoritiesComponent {
                                            }
                                         } );
    }
-   
+
 }

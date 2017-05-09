@@ -1,29 +1,29 @@
-import { Component } from "@angular/core";
-import { Risks } from "../_models/risks";
-import { RisksService } from "../_services/risks.service";
-import { Router } from "@angular/router";
-import { ConfirmationService, Message } from "primeng/primeng";
+import { Component, OnInit } from '@angular/core';
+import { Risks } from '../_models/risks';
+import { RisksService } from '../_services/risks.service';
+import { Router } from '@angular/router';
+import { ConfirmationService, Message } from 'primeng/primeng';
 
 @Component( {
                moduleId: module.id,
                templateUrl: 'risks-component.html',
-               selector: 'risks',
+               selector: 'risks-list',
                providers: [ ConfirmationService ]
             } )
 
-export class RisksComponent {
-   
+export class RisksComponent implements OnInit {
+
    risk: Risks = new Risks();
    risks: Risks[] = [];
    dialogObjet: Risks = new Risks();
    habilitado: boolean;
    msgs: Message[] = [];
-   
+
    constructor( private risksService: RisksService,
-                private router: Router,
-                private confirmationService: ConfirmationService ) {
+      private router: Router,
+      private confirmationService: ConfirmationService ) {
    }
-   
+
    ngOnInit() {
       this.risksService.getAll().subscribe(
          risks => {
@@ -40,9 +40,9 @@ export class RisksComponent {
             }
          }
       );
-      
+
    }
-   
+
    del( risks: Risks ) {
       this.dialogObjet = risks;
       this.confirmationService.confirm( {
@@ -61,7 +61,7 @@ export class RisksComponent {
                                            }
                                         } );
    }
-   
+
    change( r: Risks ) {
       this.risksService.update( r )
       .subscribe( data => {
@@ -70,17 +70,17 @@ export class RisksComponent {
          this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
       } );
    }
-   
+
    // detail(r: Risks) {
    //    this.router.navigate(['risks/detail/' + r.idRiesgo]);
    // }
-   
+
    add() {
       this.router.navigate( [ 'risks/add' ] );
    }
-   
+
    update( r: Risks ) {
       this.router.navigate( [ 'risks/update/' + r.idRiesgo ] );
    }
-   
+
 }

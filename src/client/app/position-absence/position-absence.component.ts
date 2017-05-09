@@ -1,10 +1,10 @@
-import "rxjs/add/operator/switchMap";
-import { Absence } from "../_models/position-absence";
-import { Positions } from "../_models/positions";
-import { AbsenceService } from "../_services/position-absence.service";
-import { Component, Input, Output, EventEmitter } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
+import 'rxjs/add/operator/switchMap';
+import { Absence } from '../_models/position-absence';
+import { Positions } from '../_models/positions';
+import { AbsenceService } from '../_services/position-absence.service';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
 
 @Component( {
                moduleId: module.id,
@@ -13,11 +13,11 @@ import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
                providers: [ ConfirmationService ]
             } )
 
-export class AbsenceComponent {
-   
+export class AbsenceComponent implements OnInit {
+
    @Input()
    position: Positions;
-   
+
    absence: Absence = new Absence();
    dialogObjet: Absence = new Absence();
    msgs: Message[] = [];
@@ -27,40 +27,28 @@ export class AbsenceComponent {
    listAbsenceREP: Absence[] = [];
    idCargoRelacionREE: number;
    idCargoRelacionREP: number;
-   guardandoA: boolean = false;
-   guardandoP: boolean = false;
+   guardandoA = false;
+   guardandoP = false;
    msgsAlert: Message[] = [];
    @Output()
    nextStep: EventEmitter<number> = new EventEmitter<number>();
-   
+
    constructor( private absenceService: AbsenceService,
-                private router: Router,
-                private route: ActivatedRoute,
-                private confirmationService: ConfirmationService, ) {
-      
+      private router: Router,
+      private route: ActivatedRoute,
+      private confirmationService: ConfirmationService, ) {
+
    }
-   
+
    ngOnInit() {
-      
+
       this.absence.idCargo = this.position.idCargo;
-      this.absenceService.getReemplazaA( this.absence.idCargo ).subscribe(
-         rest => {
-            for ( let r of rest ) {
-               this.absenceService.getPositionById( r.idCargoRelacion ).subscribe( res => {
-                  r.cargoRelacion = res.cargo;
-               } );
-               this.listAbsenceREE.push( r );
-            }
-         } );
-      this.absenceService.getReemplazado( this.absence.idCargo ).subscribe(
-         rest => {
-            for ( let r of rest ) {
-               this.absenceService.getPositionById( r.idCargoRelacion ).subscribe( res => {
-                  r.cargoRelacion = res.cargo;
-               } );
-               this.listAbsenceREP.push( r );
-            }
-         } );
+      this.absenceService.getReemplazaA( this.absence.idCargo ).subscribe( rest => {
+         this.listAbsenceREE = rest;
+      } );
+      this.absenceService.getReemplazado( this.absence.idCargo ).subscribe( rest => {
+         this.listAbsenceREP = rest;
+      } );
       this.absenceService.getPositionAll().subscribe( rest => {
          this.listPositionREE.push( { label: 'Seleccione...', value: null } );
          for ( let dp of rest ) {
@@ -91,12 +79,12 @@ export class AbsenceComponent {
             }
          }
       } );
-      
+
    }
-   
+
    onSubmitREE() {
       this.msgs = [];
-      this.absence.idTipoRelacion = 2; //Reemplaza a
+      this.absence.idTipoRelacion = 2; // Reemplaza a
       this.absence.idCargoRelacion = this.idCargoRelacionREE;
       this.guardandoA = true;
       this.absenceService.add( this.absence )
@@ -108,7 +96,7 @@ export class AbsenceComponent {
          } );
          this.idCargoRelacionREE = null;
          this.listAbsenceREE.push( data );
-         this.listPositionREE = []
+         this.listPositionREE = [];
          this.absenceService.getPositionAll().subscribe( rest => {
             this.listPositionREE.push( { label: 'Seleccione...', value: null } );
             for ( let dp of rest ) {
@@ -129,11 +117,11 @@ export class AbsenceComponent {
          this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
       } );
    }
-   
+
    onSubmitREP() {
       this.msgs = [];
       this.guardandoP = true;
-      this.absence.idTipoRelacion = 4;//Reemplazado por
+      this.absence.idTipoRelacion = 4; // Reemplazado por
       this.absence.idCargoRelacion = this.idCargoRelacionREP;
       this.absenceService.add( this.absence )
       .subscribe( data => {
@@ -141,7 +129,7 @@ export class AbsenceComponent {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          this.absenceService.getPositionById( data.idCargoRelacion ).subscribe( res => {
             data.cargoRelacion = res.cargo;
-            this.listPositionREP.splice( this.listPositionREP.indexOf( res ), 1 )
+            this.listPositionREP.splice( this.listPositionREP.indexOf( res ), 1 );
          } );
          this.idCargoRelacionREP = null;
          this.listAbsenceREP.push( data );
@@ -166,7 +154,7 @@ export class AbsenceComponent {
          this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
       } );
    }
-   
+
    delREE( a: Absence ) {
       this.dialogObjet = a;
       this.confirmationService.confirm( {
@@ -180,11 +168,9 @@ export class AbsenceComponent {
                                                  this.guardandoA = false;
                                                  this.listAbsenceREE.splice( this.listAbsenceREE.indexOf( this.dialogObjet ), 1 );
                                                  this.dialogObjet = null;
-                                                 this.listPositionREE = []
+                                                 this.listPositionREE = [];
                                                  this.absenceService.getPositionAll().subscribe( rest => {
-                                                    this.listPositionREE.push( {
-                                                                                  label: 'Seleccione...', value: null
-                                                                               } );
+                                                    this.listPositionREE.push( { label: 'Seleccione...', value: null } );
                                                     for ( let dp of rest ) {
                                                        let bandera = false;
                                                        for ( let r of this.listAbsenceREE ) {
@@ -194,10 +180,7 @@ export class AbsenceComponent {
                                                           }
                                                        }
                                                        if ( !bandera ) {
-                                                          this.listPositionREE.push( {
-                                                                                        label: dp.cargo,
-                                                                                        value: dp.idCargo
-                                                                                     } );
+                                                          this.listPositionREE.push( { label: dp.cargo, value: dp.idCargo } );
                                                        }
                                                     }
                                                  } );
@@ -208,7 +191,7 @@ export class AbsenceComponent {
                                            }
                                         } );
    }
-   
+
    delREP( a: Absence ) {
       this.dialogObjet = a;
       this.confirmationService.confirm( {
@@ -222,11 +205,9 @@ export class AbsenceComponent {
                                                  this.guardandoP = false;
                                                  this.listAbsenceREP.splice( this.listAbsenceREP.indexOf( this.dialogObjet ), 1 );
                                                  this.dialogObjet = null;
-                                                 this.listPositionREP = []
+                                                 this.listPositionREP = [];
                                                  this.absenceService.getPositionAll().subscribe( rest => {
-                                                    this.listPositionREP.push( {
-                                                                                  label: 'Seleccione...', value: null
-                                                                               } );
+                                                    this.listPositionREP.push( { label: 'Seleccione...', value: null } );
                                                     for ( let dp of rest ) {
                                                        let bandera = false;
                                                        for ( let r of this.listAbsenceREP ) {
@@ -236,10 +217,7 @@ export class AbsenceComponent {
                                                           }
                                                        }
                                                        if ( !bandera ) {
-                                                          this.listPositionREP.push( {
-                                                                                        label: dp.cargo,
-                                                                                        value: dp.idCargo
-                                                                                     } );
+                                                          this.listPositionREP.push( { label: dp.cargo, value: dp.idCargo } );
                                                        }
                                                     }
                                                  } );
@@ -250,7 +228,7 @@ export class AbsenceComponent {
                                            }
                                         } );
    }
-   
+
    next() {
       if ( this.listAbsenceREP.length > 0 && this.listAbsenceREE.length > 0 ) {
          this.nextStep.emit( 7 );
@@ -258,7 +236,7 @@ export class AbsenceComponent {
       } else {
          this.msgsAlert[ 0 ] = {
             severity: 'alert', summary: 'Error', detail: 'Debe llenar al menos una opción en cada' +
-            ' posición'
+                                                         ' posición'
          };
       }
    }

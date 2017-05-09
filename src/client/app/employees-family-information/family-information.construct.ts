@@ -23,9 +23,9 @@ export class ConstructorFamilyInformation {
    edad: string;
    auditoriaFecha: string;
    auditoriaUsuario: number;
-   
+
    constructor() {
-      this.auditoriaFecha = "";
+      this.auditoriaFecha = '';
       this.auditoriaUsuario = 1;
       this.direccion = '';
    }

@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class PositionRoles {
@@ -8,13 +8,13 @@ export class PositionRoles {
    public indicadorHabilitado: boolean;
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
-   
+
    public cragoRolProceso: string;
    public cargo: string;
-   
+
    constructor() {
       this.indicadorHabilitado = true;
       this.auditoriaUsuario = 1;
-      this.auditoriaFecha = "";
+      this.auditoriaFecha = '';
    }
 }

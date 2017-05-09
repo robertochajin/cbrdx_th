@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Risk {
-   
+
    idCargoRiesgo: number;
    idCargo: number;
    idRiesgo: number;
@@ -11,11 +11,11 @@ export class Risk {
    riesgo: string;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
-   
+
    constructor() {
       this.auditoriaUsuario = null;
       this.auditoriaFecha = null;
       this.idCargoRiesgo = null;
    }
-   
+
 }

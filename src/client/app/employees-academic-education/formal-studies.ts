@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class FormalStudies {
-   
+
    public idTerceroEstudioFormal: number;
    public idTercero: number;
    public idNivelEstudio: number;
@@ -25,7 +25,7 @@ export class FormalStudies {
    public institucion: string;
    public ciudad: string;
    public estadoEstudio: string;
-   
+
    constructor() {
    }
 }

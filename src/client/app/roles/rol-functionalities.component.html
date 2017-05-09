@@ -1,5 +1,5 @@
 <p-messages [value]="msgs"></p-messages>
-<div *ngIf="show_form">
+<div *ngIf="showForm">
    <div class="row-fluid">
       <div class="col-md-12">
          <form name="func" (ngSubmit)="rf.valid && onSubmit()" #rf="ngForm" novalidate>

@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class PositionCompetencies {
@@ -8,9 +8,9 @@ export class PositionCompetencies {
    public idPonderacion: number;
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
-   
+
    constructor() {
       this.auditoriaUsuario = 1;
-      this.auditoriaFecha = "";
+      this.auditoriaFecha = '';
    }
 }

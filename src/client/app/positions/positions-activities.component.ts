@@ -1,10 +1,10 @@
-import "rxjs/add/operator/switchMap";
-import { Positions } from "../_models/positions";
-import { PositionsActivities } from "../_models/positionsActivities";
-import { Component, Input } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
-import { PositionsService } from "../_services/positions.service";
+import 'rxjs/add/operator/switchMap';
+import { Positions } from '../_models/positions';
+import { PositionsActivities } from '../_models/positionsActivities';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
+import { PositionsService } from '../_services/positions.service';
 
 @Component( {
                moduleId: module.id,
@@ -13,24 +13,24 @@ import { PositionsService } from "../_services/positions.service";
                providers: [ ConfirmationService ]
             } )
 
-export class PositionActivitiesComponent {
-   
+export class PositionActivitiesComponent implements OnInit {
+
    @Input() position: Positions;
    positionsActivities: PositionsActivities = new PositionsActivities();
    dialogObjet: PositionsActivities = new PositionsActivities();
    msgs: Message[] = [];
    listActivities: SelectItem[] = [];
    listPositionsActivities: PositionsActivities[] = [];
-   
+
    constructor( private positionsService: PositionsService,
-                private router: Router,
-                private route: ActivatedRoute,
-                private confirmationService: ConfirmationService, ) {
-      
+      private router: Router,
+      private route: ActivatedRoute,
+      private confirmationService: ConfirmationService, ) {
+
    }
-   
+
    ngOnInit() {
-      
+
       this.positionsActivities.idCargo = this.position.idCargo;
       this.positionsService.getPositionActivitiesById( this.positionsActivities.idCargo ).subscribe(
          rest => {
@@ -43,7 +43,7 @@ export class PositionActivitiesComponent {
                }
             }
          } );
-      
+
       this.positionsService.getListActivities().subscribe( rest => {
          this.listActivities.push( { label: 'Seleccione...', value: null } );
          for ( let dp of rest ) {
@@ -59,9 +59,9 @@ export class PositionActivitiesComponent {
             }
          }
       } );
-      
+
    }
-   
+
    onSubmit() {
       this.msgs = [];
       this.positionsService.addPositionsActivities( this.positionsActivities )
@@ -71,7 +71,7 @@ export class PositionActivitiesComponent {
             data.ocupacion = res.ocupacion;
          } );
          this.listPositionsActivities.push( data );
-         this.listActivities = []
+         this.listActivities = [];
          this.positionsService.getListActivities().subscribe( rest => {
             this.listActivities.push( { label: 'Seleccione...', value: null } );
             for ( let dp of rest ) {
@@ -91,7 +91,7 @@ export class PositionActivitiesComponent {
          this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
       } );
    }
-   
+
    del( a: PositionsActivities ) {
       this.dialogObjet = a;
       this.confirmationService.confirm( {
@@ -101,7 +101,8 @@ export class PositionActivitiesComponent {
                                            accept: () => {
                                               this.dialogObjet.indicadorHabilitado = false;
                                               this.positionsService.updatePositionsActivities( this.dialogObjet ).subscribe( r => {
-                                                 this.listPositionsActivities.splice( this.listPositionsActivities.indexOf( this.dialogObjet ), 1 );
+                                                 this.listPositionsActivities.splice(
+                                                    this.listPositionsActivities.indexOf( this.dialogObjet ), 1 );
                                                  this.dialogObjet = null;
                                                  this.listActivities = [];
                                                  this.positionsService.getListActivities().subscribe( rest => {
@@ -115,10 +116,7 @@ export class PositionActivitiesComponent {
                                                           }
                                                        }
                                                        if ( !bandera ) {
-                                                          this.listActivities.push( {
-                                                                                       label: dp.ocupacion,
-                                                                                       value: dp.idOcupacion
-                                                                                    } );
+                                                          this.listActivities.push( { label: dp.ocupacion, value: dp.idOcupacion } );
                                                        }
                                                     }
                                                  } );
@@ -129,5 +127,5 @@ export class PositionActivitiesComponent {
                                            }
                                         } );
    }
-   
+
 }

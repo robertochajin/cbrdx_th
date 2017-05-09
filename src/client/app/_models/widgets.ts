@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Widgets {
-   
+
    public idWidget: number;
    public codigoWidget: string;
    public descripcion: string;
@@ -10,5 +10,5 @@ export class Widgets {
    public indicadorHabilitado: boolean = true;
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
-   
+
 }

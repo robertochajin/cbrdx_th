@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class PositionsObservations {
-   
+
    public idCargoEstadoObservacion: number;
    public observacion: string;
    public idCargo: number;
@@ -11,7 +11,7 @@ export class PositionsObservations {
    public indicadorHabilitado: boolean;
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
-   
+
    constructor() {
       this.indicadorHabilitado = true;
    }

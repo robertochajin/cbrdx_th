@@ -5,5 +5,5 @@ export class ActividadEconomicaTipos {
    indicadorHabilitado: boolean = true;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
-   
+
 }

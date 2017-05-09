@@ -1,10 +1,10 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { ActivatedRoute, Params } from "@angular/router";
-import { Location } from "@angular/common";
-import { FamilyInformationService } from "./family-information.service";
-import { ConstructorFamilyInformation } from "./family-information.construct";
-import { NavService } from "../_services/_nav.service";
-import "rxjs/add/operator/switchMap";
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+import { FamilyInformationService } from './family-information.service';
+import { ConstructorFamilyInformation } from './family-information.construct';
+import { NavService } from '../_services/_nav.service';
+import 'rxjs/add/operator/switchMap';
 
 @Component( {
                moduleId: module.id,
@@ -14,15 +14,15 @@ import "rxjs/add/operator/switchMap";
 
 export class FamilyInformationDetailComponent implements OnInit {
    @Input()
-   
+
    familyInformation: ConstructorFamilyInformation = new ConstructorFamilyInformation();
-   
+
    constructor( private familyInformationService: FamilyInformationService,
-                private route: ActivatedRoute,
-                private location: Location,
-                private _nav: NavService ) {
+      private route: ActivatedRoute,
+      private location: Location,
+      private _nav: NavService ) {
    }
-   
+
    ngOnInit(): void {
       this.route.params
       .subscribe( ( params: Params ) => {
@@ -32,7 +32,7 @@ export class FamilyInformationDetailComponent implements OnInit {
          } );
       } );
    }
-   
+
    goBack(): void {
       this._nav.setTab( 3 );
       this.location.back();

@@ -1,19 +1,19 @@
-import "rxjs/add/operator/switchMap";
-import { Component, OnInit } from "@angular/core";
-import { LocationService } from "../_services/employee-location.service";
-import { LocateService } from "../_services/locate.service";
-import { EmployeesLocation } from "../_models/employee-location";
-import { Localizaciones } from "../_models/localizaciones";
-import { SelectItem, ConfirmationService, Message } from "primeng/primeng";
-import { ActivatedRoute, Params } from "@angular/router";
-import { Location } from "@angular/common";
-import { NavService } from "../_services/_nav.service";
-import { PoliticalDivisionService } from "../_services/political-division.service";
-import { ListEmployeesService } from "../_services/lists-employees.service";
-import { TerceroResidencias } from "../_models/terceroResidencias";
-import { TercerosResidenciasServices } from "../_services/terceros-residencias.service";
-import { ListaItem } from "../_models/listaItem";
-import { ListaService } from "../_services/lista.service";
+import 'rxjs/add/operator/switchMap';
+import { Component, OnInit } from '@angular/core';
+import { LocationService } from '../_services/employee-location.service';
+import { LocateService } from '../_services/locate.service';
+import { EmployeesLocation } from '../_models/employee-location';
+import { Localizaciones } from '../_models/localizaciones';
+import { SelectItem, ConfirmationService, Message } from 'primeng/primeng';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+import { NavService } from '../_services/_nav.service';
+import { PoliticalDivisionService } from '../_services/political-division.service';
+import { ListEmployeesService } from '../_services/lists-employees.service';
+import { TerceroResidencias } from '../_models/terceroResidencias';
+import { TercerosResidenciasServices } from '../_services/terceros-residencias.service';
+import { ListaItem } from '../_models/listaItem';
+import { ListaService } from '../_services/lista.service';
 declare let google: any;
 
 @Component( {
@@ -24,14 +24,14 @@ declare let google: any;
             } )
 
 export class LocationUpdateComponent implements OnInit {
-   
+
    // @Input()
    // employLocation: Localizaciones = new Localizaciones();
    header: string = 'Editando Ubicación';
-   
+
    localizacion: Localizaciones = new Localizaciones();
    terceroLocalizacion: EmployeesLocation = new EmployeesLocation();
-   
+
    idTercero: Number;
    tipoDireccion: { value: null, label: string };
    principalNomenclatureList: SelectItem[] = [];
@@ -43,7 +43,7 @@ export class LocationUpdateComponent implements OnInit {
    principalNomenclature: string;
    numberOne: string;
    numberTwo: string;
-   
+
    listTypeEstate: SelectItem[] = [];
    listTypeConstruction: SelectItem[] = [];
    listStratum: SelectItem[] = [];
@@ -54,25 +54,25 @@ export class LocationUpdateComponent implements OnInit {
    cityList: any;
    hoodList: any;
    map: any;
-   
+
    submitted: boolean;
    msgs: Message[] = [];
    wrongCity: boolean = true;
-   
+
    constructor( private location: Location,
-                private politicalDivisionServices: PoliticalDivisionService,
-                private locationService: LocationService,
-                private locateService: LocateService,
-                private confirmationService: ConfirmationService,
-                private listEmployeesService: ListEmployeesService,
-                private listaService: ListaService,
-                private tercerosResidenciasServices: TercerosResidenciasServices,
-                private route: ActivatedRoute,
-                private _nav: NavService,
-                private politicalDivisionService: PoliticalDivisionService, ) {
+      private politicalDivisionServices: PoliticalDivisionService,
+      private locationService: LocationService,
+      private locateService: LocateService,
+      private confirmationService: ConfirmationService,
+      private listEmployeesService: ListEmployeesService,
+      private listaService: ListaService,
+      private tercerosResidenciasServices: TercerosResidenciasServices,
+      private route: ActivatedRoute,
+      private _nav: NavService,
+      private politicalDivisionService: PoliticalDivisionService, ) {
       this.complementaries = [ { tipo: null, detalle: '' } ];
    }
-   
+
    ngOnInit() {
       this.route.params.subscribe( ( params: Params ) => {
          this.idTercero = +params[ 'tercero' ];
@@ -86,7 +86,7 @@ export class LocationUpdateComponent implements OnInit {
                this.localizacion.locacion.camino = ciudad.camino;
                this.localizacion.locacion.idDivisionPolitica = ciudad.idDivisionPolitica;
             } );
-            
+
             this.locationService.get( this.localizacion.idLocalizacion ).subscribe( l => {
                this.terceroLocalizacion = l;
                this.tercerosResidenciasServices.getByTerceroLocalizacion( l.idTerceroLocalizacion ).subscribe( residencia => {
@@ -95,37 +95,37 @@ export class LocationUpdateComponent implements OnInit {
                } );
             } );
          } );
-         
+
       } );
-      
+
       this.listaService.getMasterDetails( 'ListasTiposViviendas' ).subscribe( res => {
          this.listTypeEstate.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
             this.listTypeEstate.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
-      
+
       this.listaService.getMasterDetails( 'ListasClasesViviendas' ).subscribe( res => {
          this.listClassEstate.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
             this.listClassEstate.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
-      
+
       this.listaService.getMasterDetails( 'ListasTiposConstruccionViviendas' ).subscribe( res => {
          this.listTypeConstruction.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
             this.listTypeConstruction.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
-      
+
       this.listaService.getMasterDetails( 'ListasEstratos' ).subscribe( res => {
          this.listStratum.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
             this.listStratum.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
-      
+
       this.listaService.getMasterDetails( 'ListasTiposDirecciones' ).subscribe( res => {
          this.addressTypeList.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => this.addressTypeList.push( { label: s.nombre, value: s.idLista } ) );
@@ -138,10 +138,10 @@ export class LocationUpdateComponent implements OnInit {
          this.complementaryNomenclatureList.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => this.complementaryNomenclatureList.push( { label: s.nombre, value: s.nombre } ) );
       } );
-      
+
       this.focusUP();
    }
-   
+
    createLocation() {
       this.submitted = true;
       if ( this.localizacion.locacion.idDivisionPolitica !== undefined ) {
@@ -149,7 +149,7 @@ export class LocationUpdateComponent implements OnInit {
          this.localizacion.idTipoDireccion = this.selectedAddressType;
          this.localizacion.nomenclaturaPrincipal = this.selectedPrincipalNomenclature;
          this.localizacion.idDivisionPolitica = this.localizacion.locacion.idDivisionPolitica;
-         
+
          this.locateService.update( this.localizacion ).subscribe( res => {
             if ( this.residencia.indicadorHabilitado ) {
                if ( this.residencia.idTerceroResidencia !== null && this.residencia.idTerceroResidencia !== undefined ) {
@@ -158,7 +158,7 @@ export class LocationUpdateComponent implements OnInit {
                      this.location.back();
                   } );
                } else {
-                  
+
                   this.residencia.idTerceroLocalizacion = this.terceroLocalizacion.idTerceroLocalizacion;
                   this.tercerosResidenciasServices.add( this.residencia ).subscribe( res3 => {
                      this._nav.setTab( 4 );
@@ -174,20 +174,20 @@ export class LocationUpdateComponent implements OnInit {
          this.wrongCity = false;
       }
    }
-   
+
    hoodSearch( event: any ) {
       this.politicalDivisionServices.getHoodsByWildCard( event.query ).subscribe(
          hoods => this.hoodList = hoods
       );
    }
-   
+
    captureHoodId( event: any ) {
       this.localizacion.locacion.idDivisionPolitica = event.idDivisionPolitica;
       this.localizacion.locacion.camino = event.camino;
       this.composeAddress();
       this.wrongCity = true;
    }
-   
+
    capturePrincipalNomenclature() {
       for ( let n of this.principalNomenclatureList ) {
          if ( n.value === this.selectedPrincipalNomenclature ) {
@@ -197,31 +197,30 @@ export class LocationUpdateComponent implements OnInit {
       }
       this.composeAddress();
    }
-   
+
    captureTipoDireccion( event: any ) {
       this.tipoDireccion = event;
    }
-   
+
    composeAddress(): void {
-      
+
       this.finalAddress = '';
       this.finalAddress += this.labelPrincipalNomenclature === undefined ? '' : this.labelPrincipalNomenclature + ' ';
       this.finalAddress += this.principalNomenclature === undefined ? '' : this.principalNomenclature + ' # ';
       this.finalAddress += this.numberOne === undefined ? '' : this.numberOne + ' - ';
       this.finalAddress += this.numberTwo === undefined ? '' : this.numberTwo + ' ';
-      
-      if ( this.finalAddress !== '' && this.localizacion.locacion != undefined && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined ) {
+
+      if ( this.finalAddress !== '' && this.localizacion.locacion !== undefined && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined ) {
          let geocoder = new google.maps.Geocoder();
-         
+
          const assingLocation = ( l: any, t: any ) => {
             this.localizacion.latitud = l;
             this.localizacion.longitud = t;
          };
-         
+
          //Asumiendo que el camino obtenido de la busqueda tiene un máximo de 4 níveles
-         //Se hace el conteo de 3 comas par identificar si la selección fue de una división politica de nivel 4
-         // (barrio/vereda) para hacerle el tratamiento al string con el cual se hace la busqueda en el API de
-         // maps.google
+         //Se hace el conteo de 3 comas par identificar si la selección fue de una división politica de nivel 4 (barrio/vereda)
+         //para hacerle el tratamiento al string con el cual se hace la busqueda en el API de maps.google
          let strToSearch = '';
          if ( ((this.localizacion.locacion.camino.match( /,/g ) || []).length) === 3 ) {
             strToSearch = this.localizacion.locacion.camino.substr( this.localizacion.locacion.camino.indexOf( ',' ) );
@@ -233,7 +232,7 @@ export class LocationUpdateComponent implements OnInit {
                               if ( status === google.maps.GeocoderStatus.OK ) {
                                  let latitude = results[ 0 ].geometry.location.lat();
                                  let longitude = results[ 0 ].geometry.location.lng();
-               
+
                                  let latLng = new google.maps.LatLng( latitude, longitude );
                                  let mapOptions = {
                                     center: latLng,
@@ -242,7 +241,7 @@ export class LocationUpdateComponent implements OnInit {
                                  };
                                  let map = new google.maps.Map( document.getElementById( 'graphMap' ), mapOptions );
                                  let marker = new google.maps.Marker( { position: latLng, map: map } );
-               
+
                                  assingLocation( latitude, longitude );
                               } else {
                                  document.getElementById( 'graphMap' ).innerHTML = "La busqueda no arroja ningun resultado";
@@ -250,31 +249,31 @@ export class LocationUpdateComponent implements OnInit {
                               }
                            } );
       }
-      
+
       for ( let c of this.complementaries ) {
-         if ( c.tipo != null )
+         if ( c.tipo !== null )
             this.finalAddress += c.tipo + ' ' + c.detalle + ' ';
       }
-      
+
       if ( this.localizacion.locacion !== undefined && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined ) {
          this.finalAddress += this.localizacion.locacion.camino;
       }
    }
-   
+
    addComplementary(): void {
       let complementary = { 'tipo': 0, 'detalle': '' };
       this.complementaries.push( complementary );
    }
-   
+
    removeComplementary( id: any ): void {
       this.complementaries.splice( id, 1 );
       this.composeAddress();
    }
-   
+
    // discard(): void {
    //   this.dismiss.emit(1);
    // }
-   
+
    goBack(): void {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea Cancelar?`,
@@ -289,7 +288,7 @@ export class LocationUpdateComponent implements OnInit {
                                            }
                                         } );
    }
-   
+
    focusUP() {
       const element = document.querySelector( '#formulario' );
       if ( element ) {

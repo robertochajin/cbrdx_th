@@ -1,12 +1,12 @@
-import { Component, Input } from "@angular/core";
-import { Router } from "@angular/router";
-import { ConfirmationService } from "primeng/primeng";
-import { Employee } from "../_models/employees";
-import { EmployeesClinicalData } from "../_models/employeesClinicalData";
-import { ClinicalInformationService } from "../_services/clinical-information.service";
-import { DiagnosticosCIE } from "../_models/diagnosticosCIE";
-import { DiagnosticCIEServices } from "../_services/diagnosticCIE.service";
-import * as moment from "moment/moment";
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/primeng';
+import { Employee } from '../_models/employees';
+import { EmployeesClinicalData } from '../_models/employeesClinicalData';
+import { ClinicalInformationService } from '../_services/clinical-information.service';
+import { DiagnosticosCIE } from '../_models/diagnosticosCIE';
+import { DiagnosticCIEServices } from '../_services/diagnosticCIE.service';
+import * as moment from 'moment/moment';
 
 @Component( {
                moduleId: module.id,
@@ -30,30 +30,33 @@ export class ClinicalInformationComponent {
    rangeInicio: string;
    rangeFin: string;
    wrongDiagnostic: boolean = true;
-   
+
    clinicalInformations: EmployeesClinicalData[];
    idMayorDeEdad: number = 1; //Es necesario crear la constante y consultarla
    editing: boolean = false;
    ecdBackUp: EmployeesClinicalData;
-   
+
    constructor( private clinicalInformationService: ClinicalInformationService,
-                private diagnosticCIEServices: DiagnosticCIEServices,
-                private router: Router,
-                private confirmationService: ConfirmationService ) {
+      private diagnosticCIEServices: DiagnosticCIEServices,
+      private router: Router,
+      private confirmationService: ConfirmationService ) {
    }
-   
+
    ngOnInit() {
       this.setInitRanges();
-      this.clinicalInformationService.getAllByEmployee( this.employee.idTercero ).subscribe( employeesClinicalData => this.clinicalInformations = employeesClinicalData );
+      this.clinicalInformationService.getAllByEmployee( this.employee.idTercero )
+      .subscribe( employeesClinicalData => this.clinicalInformations = employeesClinicalData );
    }
-   
+
    setInitRanges() {
       this.es = {
          firstDayOfWeek: 1,
          dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
          dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
          dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
-         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre' ],
+         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre',
+            'diciembre'
+         ],
          monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
       let today = new Date();
@@ -80,29 +83,29 @@ export class ClinicalInformationComponent {
       this.maxDateInicio = today;
       this.maxDateFin = today;
    }
-   
+
    captureDiagnosticId( event: any ) {
       this.ecd.idDiagnostico = this.ecd.diagnostico.idDiagnosticoCie;
       this.wrongDiagnostic = false;
    }
-   
+
    diagnosticSearch( event: any ) {
       this.diagnosticCIEServices.getByWildCard( event.query ).subscribe( diagnostics => {
          this.diagnosticList = diagnostics;
          this.diagnosticList.map( d => d.label = d.codigo + ' : ' + d.descripcion )
       } );
    }
-   
+
    add() {
       this.ecd = new EmployeesClinicalData();
       this.editing = false;
    }
-   
+
    saveDiagnostic() {
       //toma el temporal y lo agrega a la lista despues de recibir success en la solicitud del guardado
       if ( this.ecd.idDiagnostico === this.ecd.diagnostico.idDiagnosticoCie ) {
          this.ecd.idTercero = this.employee.idTercero;
-         
+
          let fi: moment.Moment = moment( this.tfechaInicio, 'MM/DD/YYYY' );
          let ff: moment.Moment;
          //this.ecd.fechaInicio = fi.format('YYYY-MM-DD');
@@ -112,8 +115,8 @@ export class ClinicalInformationComponent {
             this.ecd.fechaFin = ff.add( 3, 'days' ).format( 'YYYY-MM-DD' );
             //this.ecd.fechaFin = ff.format('YYYY-MM-DD');
          }
-         
-         if ( this.ecd.idTerceroDatoClinico != null && this.ecd.idTerceroDatoClinico != undefined ) {
+
+         if ( this.ecd.idTerceroDatoClinico !== null && this.ecd.idTerceroDatoClinico !== undefined ) {
             this.clinicalInformationService.update( this.ecd ).subscribe( data => {
                if ( data.ok ) {
                   this.ecd.codigo = this.ecd.diagnostico.codigo;
@@ -140,28 +143,28 @@ export class ClinicalInformationComponent {
                }
             } );
          }
-         
+
       } else {
          this.wrongDiagnostic = true;
       }
    }
-   
+
    onSelectInicio( event: any ) {
       let d = new Date( Date.parse( event ) );
       this.tfechaInicio = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
       this.minDateFin.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
    }
-   
+
    onSelectFin( event: any ) {
       let d = new Date( Date.parse( event ) );
       this.tfechaFin = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
       this.maxDateInicio.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
    }
-   
+
    detail( f: EmployeesClinicalData ) {
-      
+
    }
-   
+
    update( f: EmployeesClinicalData ) {
       this.ecdBackUp = f;
       let fi: moment.Moment = moment( f.fechaInicio, 'YYYY-MM-DD' );
@@ -186,7 +189,7 @@ export class ClinicalInformationComponent {
       this.editing = true;
       this.maxDateFin = new Date();
    }
-   
+
    goBack(): void {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea Cancelar?`,

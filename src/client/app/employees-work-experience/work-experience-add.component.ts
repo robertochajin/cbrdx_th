@@ -1,20 +1,20 @@
-import "rxjs/add/operator/switchMap";
-import { Component, Input, OnInit } from "@angular/core";
-import { Router, ActivatedRoute, Params } from "@angular/router";
-import { Location } from "@angular/common";
-import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
-import { Workexperience } from "../_models/work-experience";
+import 'rxjs/add/operator/switchMap';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
+import { Workexperience } from '../_models/work-experience';
 /* Services */
-import { ActividadEconomicaService } from "../_services/actividadEconomica.service";
-import { WorkExperienceService } from "../_services/work-experience.service";
-import { PoliticalDivisionService } from "../_services/political-division.service";
-import { DivisionPolitica } from "../_models/divisionPolitica";
-import { ListEmployeesService } from "../_services/lists-employees.service";
-import { NavService } from "../_services/_nav.service";
+import { ActividadEconomicaService } from '../_services/actividadEconomica.service';
+import { WorkExperienceService } from '../_services/work-experience.service';
+import { PoliticalDivisionService } from '../_services/political-division.service';
+import { DivisionPolitica } from '../_models/divisionPolitica';
+import { ListEmployeesService } from '../_services/lists-employees.service';
+import { NavService } from '../_services/_nav.service';
 /* Library */
-import * as moment from "moment/moment";
-import { ListaItem } from "../_models/listaItem";
-import { ListaService } from "../_services/lista.service";
+import * as moment from 'moment/moment';
+import { ListaItem } from '../_models/listaItem';
+import { ListaService } from '../_services/lista.service';
 
 @Component( {
                moduleId: module.id,
@@ -25,7 +25,7 @@ import { ListaService } from "../_services/lista.service";
 
 export class WorkExperienceAddComponent implements OnInit {
    @Input()
-   
+
    experience: Workexperience = new Workexperience();
    header: String = 'Agregando Experiencia Laboral';
    cityList: any;
@@ -44,20 +44,20 @@ export class WorkExperienceAddComponent implements OnInit {
    fechaIngresa: string;
    fechaTermina: string;
    idTercero: number;
-   
+
    constructor( private workExperienceService: WorkExperienceService,
-                private router: Router,
-                private confirmationService: ConfirmationService,
-                private location: Location,
-                private actividadEconomicaService: ActividadEconomicaService,
-                private politicalDivisionService: PoliticalDivisionService,
-                private listaService: ListaService,
-                private listEmployeesService: ListEmployeesService,
-                private route: ActivatedRoute,
-                private _nav: NavService ) {
-      
+      private router: Router,
+      private confirmationService: ConfirmationService,
+      private location: Location,
+      private actividadEconomicaService: ActividadEconomicaService,
+      private politicalDivisionService: PoliticalDivisionService,
+      private listaService: ListaService,
+      private listEmployeesService: ListEmployeesService,
+      private route: ActivatedRoute,
+      private _nav: NavService ) {
+
       this.actividadEconomicaService.listByPadre( 0 ).subscribe( res => {
-         this.sector.push( { label: "Seleccione", value: null } );
+         this.sector.push( { label: 'Seleccione', value: null } );
          for ( let dp of res ) {
             this.sector.push( {
                                  label: dp.actividadEconomica,
@@ -65,24 +65,24 @@ export class WorkExperienceAddComponent implements OnInit {
                               } );
          }
       } );
-      
+
       this.listaService.getMasterDetails( 'ListasNivelesCargos' ).subscribe( res => {
          this.officeLevel.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
             this.officeLevel.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
-      
+
    }
-   
+
    ngOnInit() {
       this.es = {
          firstDayOfWeek: 1,
-         dayNames: [ "domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado" ],
-         dayNamesShort: [ "dom", "lun", "mar", "mié", "jue", "vie", "sáb" ],
-         dayNamesMin: [ "D", "L", "M", "X", "J", "V", "S" ],
-         monthNames: [ "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" ],
-         monthNamesShort: [ "ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic" ]
+         dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
+         dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
+         dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
+         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre' ],
+         monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
       this.route.params.subscribe( ( params: Params ) => {
          this.idTercero = params[ 'tercero' ];
@@ -95,21 +95,21 @@ export class WorkExperienceAddComponent implements OnInit {
       this.minDate.setFullYear( lastYear, month );
       this.range = `${lastYear}:${year}`;
       this.focusUP();
-      
+
    }
-   
+
    onSubmit() {
       this.focusUP();
-      if ( this.city != this.backupcity ) {
-         this.city = "";
+      if ( this.city !== this.backupcity ) {
+         this.city = '';
          this.experience.idCiudad = null;
       }
-      
-      if ( this.city == this.backupcity ) {
+
+      if ( this.city === this.backupcity ) {
          this.msgs = [];
          let mom: moment.Moment = moment( this.fechaIngresa, 'MM/DD/YYYY' );
          this.experience.fechaIngresa = mom.format( 'YYYY-MM-DD' );
-         if ( this.experience.indicadorActualmente == false ) {
+         if ( this.experience.indicadorActualmente === false ) {
             let mom3: moment.Moment = moment( this.fechaTermina, 'MM/DD/YYYY' );
             this.experience.fechaTermina = mom3.format( 'YYYY-MM-DD' );
          }
@@ -124,7 +124,7 @@ export class WorkExperienceAddComponent implements OnInit {
          } );
       }
    }
-   
+
    goBack(): void {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea salir sin guardar?`,
@@ -136,42 +136,42 @@ export class WorkExperienceAddComponent implements OnInit {
                                            }
                                         } );
    }
-   
+
    onSelectMethodCalendarIngreso( event: any ) {
       let d = new Date( Date.parse( event ) );
       this.fechaIngresa = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
       this.minDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
    }
-   
+
    onSelectMethodCalendarFinalizacion( event: any ) {
       let d = new Date( Date.parse( event ) );
       this.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
       this.maxDateIngreso.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
    }
-   
+
    focusUP() {
       const element = document.querySelector( '#formulario' );
       if ( element ) {
          element.scrollIntoView( element );
       }
    }
-   
+
    searchCity( event: any ) {
       this.politicalDivisionService.getAllCities( event.query ).subscribe(
          lis => this.cityList = lis
       );
    }
-   
+
    captureCity( event: any ) {
       this.experience.idCiudad = event.idDivisionPolitica;
       this.city = event.camino;
       this.backupcity = event.camino;
    }
-   
+
    updateActivities( value: number ) {
       this.activities = [];
       this.actividadEconomicaService.listLastChild( value ).subscribe( res => {
-         this.activities.push( { label: "Seleccione", value: null } );
+         this.activities.push( { label: 'Seleccione', value: null } );
          for ( let dp of res ) {
             this.activities.push( {
                                      label: dp.actividadEconomica,
@@ -180,7 +180,7 @@ export class WorkExperienceAddComponent implements OnInit {
          }
       } );
    }
-   
+
 }
 
 

@@ -1,9 +1,9 @@
-import { Component, Input } from "@angular/core";
-import { EmployeeEstate } from "../_models/employee-estate";
-import { EmployeeEstateService } from "../_services/employee-estate.service";
-import { Router } from "@angular/router";
-import { ConfirmationService } from "primeng/primeng";
-import { Employee } from "../_models/employees";
+import { Component, Input } from '@angular/core';
+import { EmployeeEstate } from '../_models/employee-estate';
+import { EmployeeEstateService } from '../_services/employee-estate.service';
+import { Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/primeng';
+import { Employee } from '../_models/employees';
 
 @Component( {
                moduleId: module.id,
@@ -15,25 +15,25 @@ export class EmployeesEstateComponent {
    @Input() employee: Employee;
    employeeEstate: EmployeeEstate = new EmployeeEstate();
    dialogObjet: EmployeeEstate = new EmployeeEstate();
-   
+
    employeesEstate: EmployeeEstate[];
-   
+
    constructor( private employeesEstateService: EmployeeEstateService,
-                private router: Router,
-                private confirmationService: ConfirmationService ) {
+      private router: Router,
+      private confirmationService: ConfirmationService ) {
    }
-   
+
    ngOnInit() {
-      
+
       this.employeesEstateService.getByEmployee( this.employee.idTercero ).subscribe(
          employeesEstate => {
             this.employeesEstate = employeesEstate;
-            
+
          }
       );
-      
+
    }
-   
+
    del( employeeEstate: EmployeeEstate ) {
       this.dialogObjet = employeeEstate;
       this.confirmationService.confirm( {
@@ -52,15 +52,15 @@ export class EmployeesEstateComponent {
                                            }
                                         } );
    }
-   
+
    detail( f: EmployeeEstate ) {
       this.router.navigate( [ 'employees-estate/detail/' + f.idTerceroInmueble ] );
    }
-   
+
    update( c: EmployeeEstate ) {
       this.router.navigate( [ 'employees-estate/update/' + c.idTerceroInmueble ] );
    }
-   
+
    add() {
       this.router.navigate( [ 'employees-estate/add/' + this.employee.idTercero ] );
       //this.router.navigate(['employees-estate/add/'+179 ]);

@@ -1,5 +1,5 @@
 export class MenuManager {
-   
+
    idMenu: number;
    codigoMenu: string;
    menu: string;
@@ -11,11 +11,11 @@ export class MenuManager {
    indicadorHabilitado: boolean;
    auditoriaFecha: Date;
    auditoriaUsuario: number;
-   
+
    constructor() {
-      this.codigoMenu = "";
-      this.menu = "";
-      this.ruta = "";
+      this.codigoMenu = '';
+      this.menu = '';
+      this.ruta = '';
       this.secuencia = null;
       this.indicadorHabilitado = true;
       this.idPadre = 0;

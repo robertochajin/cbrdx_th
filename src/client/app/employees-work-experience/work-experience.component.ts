@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { Router } from "@angular/router";
-import { Employee } from "../_models/employees";
-import { Workexperience } from "../_models/work-experience";
-import { WorkExperienceService } from "../_services/work-experience.service";
-import { ConfirmationService } from "primeng/primeng";
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { Employee } from '../_models/employees';
+import { Workexperience } from '../_models/work-experience';
+import { WorkExperienceService } from '../_services/work-experience.service';
+import { ConfirmationService } from 'primeng/primeng';
 
 @Component( {
                moduleId: module.id,
@@ -16,19 +16,19 @@ export class WorkExperienceComponent implements OnInit {
    experience: Workexperience = new Workexperience();
    dialogObjet: Workexperience = new Workexperience();
    experiences: Workexperience[];
-   
+
    constructor( private workExperienceService: WorkExperienceService,
-                private router: Router,
-                private confirmationService: ConfirmationService ) {
+      private router: Router,
+      private confirmationService: ConfirmationService ) {
    }
-   
+
    ngOnInit() {
       this.workExperienceService.getByEmployee( this.employee.idTercero ).subscribe(
-         //this.workExperienceService.getByEmployee(11).subscribe(
+         // this.workExperienceService.getByEmployee(11).subscribe(
          fstudies => this.experiences = fstudies
       );
    }
-   
+
    delete( f: Workexperience ) {
       this.dialogObjet = f;
       this.confirmationService.confirm( {
@@ -47,15 +47,15 @@ export class WorkExperienceComponent implements OnInit {
                                            }
                                         } );
    }
-   
+
    detail( f: Workexperience ) {
       this.router.navigate( [ 'employees-work-experience/detail/' + f.idTerceroExperienciaLaboral ] );
    }
-   
+
    add() {
       this.router.navigate( [ 'employees-work-experience/add/' + this.employee.idTercero ] );
    }
-   
+
    update( f: Workexperience ) {
       this.router.navigate( [ 'employees-work-experience/update/' + f.idTerceroExperienciaLaboral ] );
    }

@@ -1,9 +1,9 @@
-import { Component, Input } from "@angular/core";
-import { EmployeeVehicle } from "../_models/employee-vehicle";
-import { EmployeeVehicleService } from "../_services/employee-vehicles.service";
-import { Router } from "@angular/router";
-import { ConfirmationService } from "primeng/primeng";
-import { Employee } from "../_models/employees";
+import { Component, Input } from '@angular/core';
+import { EmployeeVehicle } from '../_models/employee-vehicle';
+import { EmployeeVehicleService } from '../_services/employee-vehicles.service';
+import { Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/primeng';
+import { Employee } from '../_models/employees';
 
 @Component( {
                moduleId: module.id,
@@ -15,25 +15,25 @@ export class EmployeesVehicleComponent {
    @Input() employee: Employee;
    employeeVehicle: EmployeeVehicle = new EmployeeVehicle();
    dialogObjet: EmployeeVehicle = new EmployeeVehicle();
-   
+
    employeesVehicle: EmployeeVehicle[];
-   
+
    constructor( private employeesVehicleService: EmployeeVehicleService,
-                private router: Router,
-                private confirmationService: ConfirmationService ) {
+      private router: Router,
+      private confirmationService: ConfirmationService ) {
    }
-   
+
    ngOnInit() {
-      
+
       this.employeesVehicleService.getByIdTercero( this.employee.idTercero ).subscribe(
          employeesVehicle => {
             this.employeesVehicle = employeesVehicle;
-            
+
          }
       );
-      
+
    }
-   
+
    del( employeeVehicle: EmployeeVehicle ) {
       this.dialogObjet = employeeVehicle;
       this.confirmationService.confirm( {
@@ -52,15 +52,15 @@ export class EmployeesVehicleComponent {
                                            }
                                         } );
    }
-   
+
    detail( f: EmployeeVehicle ) {
       this.router.navigate( [ 'employees-vehicle/detail/' + f.idTerceroVehiculo ] );
    }
-   
+
    update( c: EmployeeVehicle ) {
       this.router.navigate( [ 'employees-vehicle/update/' + c.idTerceroVehiculo ] );
    }
-   
+
    add() {
       this.router.navigate( [ 'employees-vehicle/add/' + this.employee.idTercero ] );
    }

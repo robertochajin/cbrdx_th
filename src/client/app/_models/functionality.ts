@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Functionality {
-   
+
    public idFuncionalidad: number;
    public idMenu: number;
    public menu: string;
@@ -10,7 +10,7 @@ export class Functionality {
    public indicadorSeccion: boolean = true;
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
-   
+
    constructor() {
       this.auditoriaFecha = null;
       this.auditoriaUsuario = null;

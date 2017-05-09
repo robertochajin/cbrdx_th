@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class EmployeesContact {
-   
+
    public idTerceroContacto: number;
    public idTercero: number;
    public contacto: string;
@@ -14,11 +14,11 @@ export class EmployeesContact {
    public indicadorHabilitado: boolean;
    public auditoriaUsuario: number;
    public auditoriaFecha: Date;
-   
+
    constructor() {
       this.indicadorHabilitado = true;
-      this.telefono = "";
-      this.celular = "";
+      this.telefono = '';
+      this.celular = '';
       this.idTerceroContacto = null;
       this.idListaParentesco = null;
    }

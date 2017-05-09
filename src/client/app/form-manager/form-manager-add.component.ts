@@ -1,13 +1,13 @@
-import { Component } from "@angular/core";
-import { Functionality } from "../_models/functionality";
-import { FunctionalityControl } from "../_models/functionalityContorl";
-import { NavService } from "../_services/_nav.service";
-import { FormManagerService } from "../_services/form-manager.service";
-import { Router } from "@angular/router";
-import { ConfirmationService, Message, SelectItem } from "primeng/primeng";
-import { Location } from "@angular/common";
-import { ListaService } from "../_services/lista.service";
-import { ListaItem } from "../_models/listaItem";
+import { Component, OnInit } from '@angular/core';
+import { Functionality } from '../_models/functionality';
+import { FunctionalityControl } from '../_models/functionalityContorl';
+import { NavService } from '../_services/_nav.service';
+import { FormManagerService } from '../_services/form-manager.service';
+import { Router } from '@angular/router';
+import { ConfirmationService, Message, SelectItem } from 'primeng/primeng';
+import { Location } from '@angular/common';
+import { ListaService } from '../_services/lista.service';
+import { ListaItem } from '../_models/listaItem';
 
 @Component( {
                moduleId: module.id,
@@ -16,8 +16,8 @@ import { ListaItem } from "../_models/listaItem";
                providers: [ ConfirmationService ]
             } )
 
-export class FormManagerAddComponent {
-   
+export class FormManagerAddComponent implements OnInit {
+
    functionality: Functionality = new Functionality();
    functionalityControl: FunctionalityControl = new FunctionalityControl();
    functionalityControlField: FunctionalityControl = new FunctionalityControl();
@@ -33,39 +33,39 @@ export class FormManagerAddComponent {
    listClassificationCampo: SelectItem[] = [];
    msgs: Message[] = [];
    acordion: number;
-   campodisabled: boolean = true;
-   secciondisabled: boolean = true;
-   indicadorSeccion: boolean = true;
+   campodisabled = true;
+   secciondisabled = true;
+   indicadorSeccion = true;
    indicadorVisible: string;
    indicadorImprime: string;
    indicadorHabilitado: string;
    idPadre: number;
-   editingField: boolean = false;
-   detailSection: boolean = false;
-   detailField: boolean = false;
-   editingSection: boolean = false;
-   codExists: boolean = false;
-   showFrom: boolean = true;
-   showFormF: boolean = true;
-   
+   editingField = false;
+   detailSection = false;
+   detailField = false;
+   editingSection = false;
+   codExists = false;
+   showFrom = true;
+   showFormF = true;
+
    constructor( private formManagerService: FormManagerService,
-                private router: Router,
-                private location: Location,
-                private listaService: ListaService,
-                private _nav: NavService,
-                private confirmationService: ConfirmationService ) {
+      private router: Router,
+      private location: Location,
+      private listaService: ListaService,
+      private _nav: NavService,
+      private confirmationService: ConfirmationService ) {
    }
-   
+
    ngOnInit() {
       this.acordion = 0;
       this.formManagerService.getAllFunctionalityControl().subscribe( rest => {
          this.listAllfunctionalityControl = rest;
       } );
-      
+
       this.formManagerService.getFunctionality().subscribe( res => {
          this.formManagerService.getAllFunctionality().subscribe( rest => {
             this.listFunctionalities = rest;
-            this.listFunctionality.push( { label: "Seleccione", value: null } );
+            this.listFunctionality.push( { label: 'Seleccione', value: null } );
             for ( let dp of res ) {
                let bandera = false;
                for ( let r of this.listFunctionalities ) {
@@ -92,11 +92,11 @@ export class FormManagerAddComponent {
          res.map( ( s: ListaItem ) => this.listClassificationCampo.push( { label: s.nombre, value: s.idLista } ) );
       } );
    }
-   
+
    onTabShow( e: any ) {
       this._nav.setTab( e.index );
       this.acordion = this._nav.getTab();
-      if ( this.acordion == 2 ) {
+      if ( this.acordion === 2 ) {
          this.functionalitySection = [];
          this.formManagerService.getSectionByIdFuncionalidad( this.functionality.idFuncionalidad ).subscribe( rest => {
             for ( let s of rest ) {
@@ -111,9 +111,9 @@ export class FormManagerAddComponent {
             }
          } );
       }
-      
+
    }
-   
+
    onCreateF( n: number ) {
       this.formManagerService.add( this.functionality ).subscribe( rest => {
          this.functionality = rest;
@@ -134,10 +134,10 @@ export class FormManagerAddComponent {
                }
             } );
          }
-         
+
       } );
    }
-   
+
    onCreateS() {
       this.functionalitySection = [];
       this.functionalityControl.indicadorSeccion = true;
@@ -160,15 +160,15 @@ export class FormManagerAddComponent {
                this.functionalitySection.push( s );
             }
          } );
-         this.functionalityControl.control = "";
-         this.functionalityControl.codigo = "";
+         this.functionalityControl.control = '';
+         this.functionalityControl.codigo = '';
          this.functionalityControl.idClasificacion = null;
       } );
       this.formManagerService.getAllFunctionalityControl().subscribe( rest => {
          this.listAllfunctionalityControl = rest;
       } );
    }
-   
+
    onCreateC( n: number ) {
       if ( this.indicadorSeccion === false ) {
          this.functionalityField = [];
@@ -187,8 +187,8 @@ export class FormManagerAddComponent {
                }
             } );
          } );
-         this.functionalityControl.control = "";
-         this.functionalityControl.codigo = "";
+         this.functionalityControl.control = '';
+         this.functionalityControl.codigo = '';
          this.functionalityControl.idClasificacion = null;
       } else {
          this.functionalityField = [];
@@ -203,17 +203,17 @@ export class FormManagerAddComponent {
                this.functionalityField = rest;
             } );
          } );
-         this.functionalityControl.control = "";
-         this.functionalityControl.codigo = "";
+         this.functionalityControl.control = '';
+         this.functionalityControl.codigo = '';
          this.functionalityControl.idClasificacion = null;
       }
       this.formManagerService.getAllFunctionalityControl().subscribe( rest => {
          this.listAllfunctionalityControl = rest;
       } );
    }
-   
+
    onUpdateC() {
-      this.functionalityControlField;
+      this.functionalityControlField = new FunctionalityControl();
       if ( this.indicadorSeccion === false ) {
          this.functionalityField = [];
          this.functionalityControlField.idPadre = null;
@@ -229,8 +229,8 @@ export class FormManagerAddComponent {
             } );
             this.editingField = false;
          } );
-         this.functionalityControlField.control = " ";
-         this.functionalityControlField.codigo = " ";
+         this.functionalityControlField.control = ' ';
+         this.functionalityControlField.codigo = ' ';
       } else {
          this.functionalityField = [];
          this.functionalityControlField.idFuncionalidad = this.functionality.idFuncionalidad;
@@ -241,11 +241,11 @@ export class FormManagerAddComponent {
             } );
             this.editingField = false;
          } );
-         this.functionalityControlField.control = " ";
-         this.functionalityControlField.codigo = " ";
+         this.functionalityControlField.control = ' ';
+         this.functionalityControlField.codigo = ' ';
       }
    }
-   
+
    onUpdateS() {
       this.functionalitySection = [];
       this.formManagerService.updateSection( this.functionalityControlSection ).subscribe( res => {
@@ -262,19 +262,19 @@ export class FormManagerAddComponent {
                this.functionalitySection.push( s );
             }
          } );
-         this.functionalityControl.control = " ";
-         this.functionalityControl.codigo = " ";
+         this.functionalityControl.control = ' ';
+         this.functionalityControl.codigo = ' ';
       } );
       this.editingSection = false;
       this.acordion = 3;
    }
-   
+
    updateField( c: FunctionalityControl ) {
       this.editingField = true;
       c.index = this.functionalityField.indexOf( c );
       this.functionalityControlField = c;
    }
-   
+
    updateSection( f: FunctionalityControl ) {
       this.editingSection = true;
       this.functionalityControlSection = f;
@@ -283,7 +283,7 @@ export class FormManagerAddComponent {
       } );
       this.secciondisabled = false;
    }
-   
+
    addField( f: FunctionalityControl ) {
       this.acordion = 3;
       this.formManagerService.getFieldByIdFather( f.idFuncionalidadControl ).subscribe( rest => {
@@ -291,56 +291,56 @@ export class FormManagerAddComponent {
       } );
       this.secciondisabled = false;
    }
-   
+
    validateCode() {
       this.functionalityControl.codigo = this.functionalityControl.codigo.toUpperCase();
       this.codExists = this.listAllfunctionalityControl.filter( t => t.codigo === this.functionalityControl.codigo ).length > 0;
    }
-   
+
    detailSectionF( f: FunctionalityControl ) {
       this.detailSection = true;
       this.functionalityControlSectionDetail = f;
-      this.functionalityControlSectionDetail.indicadorImprimir ? this.indicadorImprime = "Si" : this.indicadorImprime = "No";
-      this.functionalityControlSectionDetail.indicadorVisible ? this.indicadorVisible = "Si" : this.indicadorVisible = "No";
-      this.functionalityControlSectionDetail.indicadorHabilitado ? this.indicadorHabilitado = "Si" : this.indicadorHabilitado = "No";
+      this.functionalityControlSectionDetail.indicadorImprimir ? this.indicadorImprime = 'Si' : this.indicadorImprime = 'No';
+      this.functionalityControlSectionDetail.indicadorVisible ? this.indicadorVisible = 'Si' : this.indicadorVisible = 'No';
+      this.functionalityControlSectionDetail.indicadorHabilitado ? this.indicadorHabilitado = 'Si' : this.indicadorHabilitado = 'No';
    }
-   
+
    goBackDetail() {
       this.detailSection = false;
    }
-   
+
    goBackField() {
       this.editingField = false;
    }
-   
+
    goBackSectionEdi() {
       this.editingSection = false;
    }
-   
+
    detailDetailF( f: FunctionalityControl ) {
       this.detailField = true;
       this.functionalityControlFieldDetail = f;
-      this.functionalityControlFieldDetail.indicadorImprimir ? this.indicadorImprime = "Si" : this.indicadorImprime = "No";
-      this.functionalityControlFieldDetail.indicadorVisible ? this.indicadorVisible = "Si" : this.indicadorVisible = "No";
-      this.functionalityControlFieldDetail.indicadorHabilitado ? this.indicadorHabilitado = "Si" : this.indicadorHabilitado = "No";
+      this.functionalityControlFieldDetail.indicadorImprimir ? this.indicadorImprime = 'Si' : this.indicadorImprime = 'No';
+      this.functionalityControlFieldDetail.indicadorVisible ? this.indicadorVisible = 'Si' : this.indicadorVisible = 'No';
+      this.functionalityControlFieldDetail.indicadorHabilitado ? this.indicadorHabilitado = 'Si' : this.indicadorHabilitado = 'No';
    }
-   
+
    goBackDetailField() {
       this.detailField = false;
    }
-   
+
    goBack() {
       this.location.back();
    }
-   
+
    capitalize( event: any ) {
       let input = event.target.value;
-      if ( input.substring( 0, 1 ) === " " ) {
+      if ( input.substring( 0, 1 ) === ' ' ) {
          input = input.replace( ' ', '' );
       }
       event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
    }
-   
+
    inputCleanUp( event: any ) {
       let input = event.target.value;
       event.target.value = input.toUpperCase().replace( ' ', '' ).trim();

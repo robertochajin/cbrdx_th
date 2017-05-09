@@ -1,15 +1,15 @@
-import "rxjs/add/operator/switchMap";
-import { Component, Input } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { Location } from "@angular/common";
-import { Employee } from "../_models/employees";
-import { SelectItem, Message } from "primeng/primeng";
-import { EmployeesService } from "../_services/employees.service";
-import { ListEmployeesService } from "../_services/lists-employees.service";
-import { DivisionPolitica } from "../_models/divisionPolitica";
-import { NavService } from "../_services/_nav.service";
-import { ListaItem } from "../_models/listaItem";
-import { ListaService } from "../_services/lista.service";
+import 'rxjs/add/operator/switchMap';
+import { Component, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { Employee } from '../_models/employees';
+import { SelectItem, Message } from 'primeng/primeng';
+import { EmployeesService } from '../_services/employees.service';
+import { ListEmployeesService } from '../_services/lists-employees.service';
+import { DivisionPolitica } from '../_models/divisionPolitica';
+import { NavService } from '../_services/_nav.service';
+import { ListaItem } from '../_models/listaItem';
+import { ListaService } from '../_services/lista.service';
 
 @Component( {
                moduleId: module.id,
@@ -21,12 +21,12 @@ import { ListaService } from "../_services/lista.service";
 export class EmployeesAdditionalDataComponent {
    @Input() employee: Employee;
    header: string = 'Datos Adicionales ';
-   
+
    personTypes: SelectItem[] = [];
    documentTypes: SelectItem[] = [];
    resultExpeditionCity: DivisionPolitica[];
    resultBirthPlace: DivisionPolitica[] = [];
-   
+
    lateralityTypes: SelectItem[] = [];
    listSizeShirt: SelectItem[] = [];
    listSizePants: SelectItem[] = [];
@@ -35,15 +35,15 @@ export class EmployeesAdditionalDataComponent {
    peso: boolean = true;
    submitted: boolean = false;
    msgs: Message[] = [];
-   
+
    constructor( private employeesService: EmployeesService,
-                private listaService: ListaService,
-                private route: ActivatedRoute,
-                private router: Router,
-                private location: Location,
-                private listEmployeesService: ListEmployeesService,
-                private _nav: NavService ) {
-      
+      private listaService: ListaService,
+      private route: ActivatedRoute,
+      private router: Router,
+      private location: Location,
+      private listEmployeesService: ListEmployeesService,
+      private _nav: NavService ) {
+
       this.listaService.getMasterDetails( 'ListasLateralidades' ).subscribe( res => {
          this.lateralityTypes.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
@@ -68,9 +68,9 @@ export class EmployeesAdditionalDataComponent {
                                         } );
          }
       } );
-      
+
    }
-   
+
    ngOnInit() {
       this.submitted = true;
       let tipo = this.employee.genero == "Masculino" ? "PANH" : "PANM"
@@ -84,7 +84,7 @@ export class EmployeesAdditionalDataComponent {
          }
       } );
    }
-   
+
    onSubmit() {
       this.msgs = [];
       this.submitted = true;
@@ -103,7 +103,7 @@ export class EmployeesAdditionalDataComponent {
          }
       }
    }
-   
+
    getimc(): void {
       if ( this.employee.peso !== 0 ) {
          this.peso = true;
@@ -111,27 +111,27 @@ export class EmployeesAdditionalDataComponent {
       if ( this.employee.talla !== 0 ) {
          this.size = true;
       }
-      if ( this.employee.peso != null && this.employee.talla != null ) {
+      if ( this.employee.peso !== null && this.employee.talla !== null ) {
          if ( !isNaN( this.employee.peso ) && !isNaN( this.employee.talla ) ) {
-            var imc = (this.employee.peso / Math.pow( (this.employee.talla / 100), 2 ));
+            let imc = (this.employee.peso / Math.pow( (this.employee.talla / 100), 2 ));
             this.employee.imc = Number( imc.toFixed( 2 ) );
          }
       }
-      
+
    }
-   
+
    inputNumberPeso() {
-      let peso = this.employee.peso + "";
-      if ( this.employee.peso != null ) {
+      let peso = this.employee.peso + '';
+      if ( this.employee.peso !== null ) {
          this.employee.peso = Number( peso.replace( /[^0-9]/g, '' ) );
       }
    }
-   
+
    inputNumber() {
-      let size = this.employee.talla + "";
-      if ( this.employee.talla != null ) {
+      let size = this.employee.talla + '';
+      if ( this.employee.talla !== null ) {
          this.employee.talla = Number( size.replace( /[^0-9]/g, '' ) );
       }
    }
-   
+
 }

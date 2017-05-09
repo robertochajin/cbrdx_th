@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import { Response } from "@angular/http";
-import { PhysicStructure } from "../_models/physic-structure";
-import { AuthHttp } from "angular2-jwt";
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
+import { PhysicStructure } from '../_models/physic-structure';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class PhysicStructureService {

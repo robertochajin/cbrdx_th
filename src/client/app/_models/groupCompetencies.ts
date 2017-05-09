@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { Competencies } from "./competencies";
+import { Injectable } from '@angular/core';
+import { Competencies } from './competencies';
 
 @Injectable()
 export class GroupCompetencies {
@@ -10,13 +10,13 @@ export class GroupCompetencies {
    public indicadorHabilitado: boolean;
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
-   
+
    //Auziliar
    public competencies: Competencies[] = [];
-   
+
    constructor() {
       this.indicadorHabilitado = true;
       this.auditoriaUsuario = 1;
-      this.auditoriaFecha = "";
+      this.auditoriaFecha = '';
    }
 }

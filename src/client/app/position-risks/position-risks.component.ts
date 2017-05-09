@@ -1,13 +1,13 @@
-import "rxjs/add/operator/switchMap";
-import { Risk } from "../_models/position-risks";
-import { RiskService } from "../_services/positios-risks.service";
-import { Component, Input, Output, EventEmitter } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { Exam } from "../_models/position-exam";
-import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
-import { Positions } from "../_models/positions";
-import { ListaItem } from "../_models/listaItem";
-import { ListaService } from "../_services/lista.service";
+import 'rxjs/add/operator/switchMap';
+import { Risk } from '../_models/position-risks';
+import { RiskService } from '../_services/positios-risks.service';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Exam } from '../_models/position-exam';
+import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
+import { Positions } from '../_models/positions';
+import { ListaItem } from '../_models/listaItem';
+import { ListaService } from '../_services/lista.service';
 
 @Component( {
                moduleId: module.id,
@@ -15,20 +15,20 @@ import { ListaService } from "../_services/lista.service";
                selector: 'position-risks',
                providers: [ ConfirmationService ]
             } )
-export class RiskComponent {
-   
+export class RiskComponent implements OnInit {
+
    @Input()
    position: Positions;
    Risk: Risk;
-   
+
    @Output()
    nextStep: EventEmitter<number> = new EventEmitter<number>();
-   
-   header: string = 'Riesgos Laborales';
+
+   header = 'Riesgos Laborales';
    risk: Risk = new Risk();
    exam: Exam = new Exam();
    dialogObjet: Risk = new Risk();
-   show_form: boolean = true;
+   showForm = true;
    msgs: Message[] = [];
    listRisk: Risk[] = [];
    listRisks: Risk[] = [];
@@ -43,18 +43,18 @@ export class RiskComponent {
    PositionExam: Exam[];
    idTypeRisk: string;
    idSubtypeRisk: string;
-   guardando: boolean = false;
+   guardando = false;
    msgsAlert: Message[] = [];
-   
+
    constructor( private riskService: RiskService,
-                private listaService: ListaService,
-                private router: Router,
-                private route: ActivatedRoute,
-                private confirmationService: ConfirmationService ) {
-      
+      private listaService: ListaService,
+      private router: Router,
+      private route: ActivatedRoute,
+      private confirmationService: ConfirmationService ) {
+
       this.riskService.getTypeRisk().subscribe( rest => {
          this.allTipoRiesgos = rest;
-         this.listTipoRiesgos.push( { label: "Seleccione", value: null } );
+         this.listTipoRiesgos.push( { label: 'Seleccione', value: null } );
          for ( let dp of rest ) {
             this.listTipoRiesgos.push( {
                                           label: dp.riesgoTipo,
@@ -62,27 +62,27 @@ export class RiskComponent {
                                        } );
          }
       } );
-      
+
       this.riskService.getSubypeRisk().subscribe( rest => {
          this.allSubtipoRiesgo = rest;
       } );
-      
+
       this.riskService.getRisk().subscribe( rest => {
          this.allRiesgo = rest;
       } );
-      
+
    }
-   
+
    ngOnInit() {
-      
+
       this.risk.idCargo = this.position.idCargo;
       this.exam.idCargo = this.position.idCargo;
-      
+
       this.listaService.getMasterDetails( 'ListasExamenes' ).subscribe( res => {
          res.map( ( s: ListaItem ) => {
             this.listExam.push( { label: s.nombre, value: s.idLista } );
          } );
-         
+
          this.riskService.getExamByIdCargo( this.risk.idCargo ).subscribe(
             exam => {
                this.ListPositionExam = exam;
@@ -108,7 +108,7 @@ export class RiskComponent {
             }
          );
       } );
-      
+
       this.riskService.getRiskByIdCargo( this.risk.idCargo ).subscribe(
          risk => {
             for ( let rk of risk ) {
@@ -118,7 +118,7 @@ export class RiskComponent {
                r.idRiesgo = rk.idRiesgo;
                r.auditoriaFecha = rk.auditoriaFecha;
                r.auditoriaFecha = rk.auditoriaFecha;
-               
+
                this.riskService.getRiskById( rk.idRiesgo ).subscribe( rest => {
                   r.riesgo = rest.riesgo;
                   this.riskService.getTypeRiskById( rest.idTipoRiesgo ).subscribe( restT => {
@@ -132,9 +132,9 @@ export class RiskComponent {
             }
          }
       );
-      
+
    }
-   
+
    onSubmit() {
       this.msgs = [];
       this.confirmationService.confirm( {
@@ -143,11 +143,9 @@ export class RiskComponent {
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.guardando = true;
-            
-                                              if ( this.listRisks.filter( r => r.idRiesgo == this.risk.idRiesgo && r.idCargo == this.risk.idCargo ).length > 0 ) {
-                                                 this.msgs[ 0 ] = {
-                                                    severity: 'error', summary: 'Error', detail: 'El riesgo ya existe!'
-                                                 };
+                                              if ( this.listRisks.filter( r => r.idRiesgo === this.risk.idRiesgo &&
+                                                                               r.idCargo === this.risk.idCargo ).length > 0 ) {
+                                                 this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'El riesgo ya existe!' };
                                                  this.guardando = false;
                                               } else {
                                                  this.riskService.add( this.risk )
@@ -158,34 +156,33 @@ export class RiskComponent {
                                                        summary: 'Exito',
                                                        detail: 'Registro guardado correctamente.'
                                                     };
-                                                    let riesgo = this.allRiesgo.find( s1 => s1.idRiesgo == this.risk.idRiesgo );
-                                                    let tipo = this.allTipoRiesgos.find( s2 => s2.idRiesgoTipo == riesgo.idTipoRiesgo )
-                                                    let subtipo = this.allSubtipoRiesgo.find( s2 => s2.idRiesgoSubTipo == riesgo.idSubTipoRiesgo )
-                                                    this.risk.riesgo = riesgo.riesgo ? riesgo.riesgo : "";
-                                                    this.risk.tipo = tipo.riesgoTipo ? riesgo.riesgoTipo : "";
-                                                    this.risk.subtipo = subtipo.riesgoSubTipo ? riesgo.riesgoSubTipo : "";
+                                                    let riesgo = this.allRiesgo.find( s1 => s1.idRiesgo === this.risk.idRiesgo );
+                                                    let tipo = this.allTipoRiesgos.find( s2 => s2.idRiesgoTipo === riesgo.idTipoRiesgo );
+                                                    let subtipo = this.allSubtipoRiesgo.find(
+                                                       s2 => s2.idRiesgoSubTipo === riesgo.idSubTipoRiesgo );
+                                                    this.risk.riesgo = riesgo.riesgo ? riesgo.riesgo : '';
+                                                    this.risk.tipo = tipo.riesgoTipo ? riesgo.riesgoTipo : '';
+                                                    this.risk.subtipo = subtipo.riesgoSubTipo ? riesgo.riesgoSubTipo : '';
                                                     this.listRisks.push( this.risk );
                                                     this.idTypeRisk = null;
                                                     this.idSubtypeRisk = null;
                                                     this.risk.idRiesgo = null;
                                                     this.guardando = false;
                                                  }, error => {
-                                                    this.show_form = true;
-                                                    this.msgs[ 0 ] = {
-                                                       severity: 'error', summary: 'Error', detail: 'Error al guardar.'
-                                                    };
+                                                    this.showForm = true;
+                                                    this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Error al guardar.' };
                                                  } );
                                               }
                                            }
                                         } );
    }
-   
+
    changeType() {
       this.listSubtipoRiesgo = [];
       this.listRiesgo = [];
       this.risk.idRiesgo = null;
       this.idSubtypeRisk = null;
-      this.listSubtipoRiesgo.push( { label: "Seleccione", value: null } );
+      this.listSubtipoRiesgo.push( { label: 'Seleccione', value: null } );
       for ( let dp of this.allSubtipoRiesgo ) {
          if ( dp.idRiesgoTipo === this.idTypeRisk ) {
             this.listSubtipoRiesgo.push( {
@@ -195,11 +192,11 @@ export class RiskComponent {
          }
       }
    }
-   
+
    changeSubtype() {
       this.listRiesgo = [];
       this.risk.idRiesgo = null;
-      this.listRiesgo.push( { label: "Seleccione", value: null } );
+      this.listRiesgo.push( { label: 'Seleccione', value: null } );
       this.riskService.getRiskByIdCargo( this.risk.idCargo ).subscribe(
          risk => {
             for ( let dp of this.allRiesgo ) {
@@ -230,37 +227,37 @@ export class RiskComponent {
       //    }
       // }
    }
-   
+
    changeExam( e: Exam ) {
       this.msgs = [];
-      if ( e.idCargoExamen != null ) {
+      if ( e.idCargoExamen !== null ) {
          this.riskService.updatePositionExam( e )
          .subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          }, error => {
-            this.show_form = true;
+            this.showForm = true;
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
-         } )
+         } );
       } else {
          e.idCargo = this.exam.idCargo;
          this.riskService.addPositionExam( e )
          .subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          }, error => {
-            this.show_form = true;
+            this.showForm = true;
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       }
    }
-   
+
    //
    // periodicidad(e: Exam) {
-   //   if (e.idCargoExamen != null) {
+   //   if (e.idCargoExamen !== null) {
    //     this.riskService.updatePositionExam(e)
    //       .subscribe(data => {
    //         this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
    //       }, error => {
-   //         this.show_form = true;
+   //         this.showForm = true;
    //         this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
    //       })
    //   } else {
@@ -269,19 +266,19 @@ export class RiskComponent {
    //       .subscribe(data => {
    //         this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
    //       }, error => {
-   //         this.show_form = true;
+   //         this.showForm = true;
    //         this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
    //       });
    //   }
    // }
    //
    // retiro(e: Exam) {
-   //   if (e.idCargoExamen != null) {
+   //   if (e.idCargoExamen !== null) {
    //     this.riskService.updatePositionExam(e)
    //       .subscribe(data => {
    //         this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
    //       }, error => {
-   //         this.show_form = true;
+   //         this.showForm = true;
    //         this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
    //       })
    //   } else {
@@ -290,7 +287,7 @@ export class RiskComponent {
    //       .subscribe(data => {
    //         this.msgs.push({severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
    //       }, error => {
-   //         this.show_form = true;
+   //         this.showForm = true;
    //         this.msgs.push({severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
    //       });
    //   }
@@ -302,9 +299,9 @@ export class RiskComponent {
       } else {
          this.msgsAlert[ 0 ] = { severity: 'alert', summary: 'Error', detail: 'Debe llenar al menos un Riesgo' };
       }
-      
+
    }
-   
+
 }
 
 

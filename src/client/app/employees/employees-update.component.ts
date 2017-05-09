@@ -1,21 +1,21 @@
-import "rxjs/add/operator/switchMap";
-import { Component, Input } from "@angular/core";
-import { Router, ActivatedRoute, Params } from "@angular/router";
-import { Location } from "@angular/common";
-import { Employee } from "../_models/employees";
-import { SelectItem, Message, ConfirmationService } from "primeng/primeng";
-import { EmployeesService } from "../_services/employees.service";
-import { ListEmployeesService } from "../_services/lists-employees.service";
-import { PoliticalDivisionService } from "../_services/political-division.service";
-import { DivisionPolitica } from "../_models/divisionPolitica";
-import { NavService } from "../_services/_nav.service";
-import { Ocupaciones } from "../_models/ocupaciones";
-import { OcupacionesService } from "../_services/ocupaciones.service";
-import { ActividadEconomica } from "../_models/actividadEconomica";
-import { ActividadEconomicaService } from "../_services/actividadEconomica.service";
-import * as moment from "moment/moment";
-import { ListaItem } from "../_models/listaItem";
-import { ListaService } from "../_services/lista.service";
+import 'rxjs/add/operator/switchMap';
+import { Component, Input } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+import { Employee } from '../_models/employees';
+import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
+import { EmployeesService } from '../_services/employees.service';
+import { ListEmployeesService } from '../_services/lists-employees.service';
+import { PoliticalDivisionService } from '../_services/political-division.service';
+import { DivisionPolitica } from '../_models/divisionPolitica';
+import { NavService } from '../_services/_nav.service';
+import { Ocupaciones } from '../_models/ocupaciones';
+import { OcupacionesService } from '../_services/ocupaciones.service';
+import { ActividadEconomica } from '../_models/actividadEconomica';
+import { ActividadEconomicaService } from '../_services/actividadEconomica.service';
+import * as moment from 'moment/moment';
+import { ListaItem } from '../_models/listaItem';
+import { ListaService } from '../_services/lista.service';
 
 @Component( {
                moduleId: module.id,
@@ -28,7 +28,7 @@ export class EmployeesUpdateComponent {
    @Input()
    employee: Employee = new Employee();
    header: string = 'Agregando Colaborador';
-   
+
    personTypes: SelectItem[] = [];
    documentTypes: SelectItem[] = [];
    resultExpeditionCity: DivisionPolitica[];
@@ -52,7 +52,7 @@ export class EmployeesUpdateComponent {
    listadoOcupaciones: Ocupaciones[];
    listadoActividadEconomica: ActividadEconomica[];
    msgs: Message[] = [];
-   
+
    maxDate: Date = null;
    maxDateDocumento: Date = null;
    range: string;
@@ -61,26 +61,26 @@ export class EmployeesUpdateComponent {
    birthDate: string;
    deathDate: string;
    idTipoTercero: number;
-   
+
    constructor( private employeesService: EmployeesService,
-                private route: ActivatedRoute,
-                private router: Router,
-                private location: Location,
-                private listaService: ListaService,
-                private listEmployeesService: ListEmployeesService,
-                private politicalDivisionService: PoliticalDivisionService,
-                private actividadEconomicaService: ActividadEconomicaService,
-                private ocupacionesService: OcupacionesService,
-                private confirmationService: ConfirmationService,
-                private _nav: NavService ) {
-      
+      private route: ActivatedRoute,
+      private router: Router,
+      private location: Location,
+      private listaService: ListaService,
+      private listEmployeesService: ListEmployeesService,
+      private politicalDivisionService: PoliticalDivisionService,
+      private actividadEconomicaService: ActividadEconomicaService,
+      private ocupacionesService: OcupacionesService,
+      private confirmationService: ConfirmationService,
+      private _nav: NavService ) {
+
       listaService.getMasterDetails( 'ListasTiposPersonas' ).subscribe( res => {
          this.personTypes.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
             this.personTypes.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
-      
+
       this.listaService.getMasterDetails( 'ListasEstadosJuridicos' ).subscribe( res => {
          this.juridicos.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
@@ -88,21 +88,21 @@ export class EmployeesUpdateComponent {
          } );
          this.employee.idTipoDocumento = null;
       } );
-      
+
       this.listaService.getMasterDetails( 'ListasTiposDocumentos' ).subscribe( res => {
          this.documentTypes.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
             this.documentTypes.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
-      
+
       this.listaService.getMasterDetails( 'ListasGeneros' ).subscribe( res => {
          this.genderTypes.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
             this.genderTypes.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
-      
+
       this.listaService.getMasterDetails( 'ListasEstadosCiviles' ).subscribe( res => {
          this.maritalStatusTypes.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
@@ -139,7 +139,7 @@ export class EmployeesUpdateComponent {
             this.affiliationTypes.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
-      
+
       this.actividadEconomicaService.listByPadre( 0 ).subscribe( res => {
          this.sector.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
@@ -149,7 +149,7 @@ export class EmployeesUpdateComponent {
                               } );
          }
       } );
-      
+
       this.ocupacionesService.listByNivel( 4 ).subscribe( res => {
          this.occupations.push( { label: "Seleccione", value: null } );
          for ( let dp of res ) {
@@ -159,49 +159,51 @@ export class EmployeesUpdateComponent {
                                    } );
          }
       } );
-      
+
       this.listaService.getMasterDetailsByCode( 'ListasTiposTerceros', "TERCOL" ).subscribe(
          res => {
             this.idTipoTercero = res.idLista;
          } );
-      
+
    }
-   
+
    ngOnInit() {
-      
+
       this.route.params
       .switchMap( ( params: Params ) => this.employeesService.get( +params[ 'id' ] ) )
       .subscribe( employee => {
          this.employee = employee;
          this.updateActivities( this.employee.idSectorEconomico );
-         
-         if ( this.employee.fechaDocumento != null ) {
+
+         if ( this.employee.fechaDocumento !== null ) {
             let mom: moment.Moment = moment( this.employee.fechaDocumento, 'YYYY-MM-DD' );
             this.expeditionDate = mom.format( 'MM/DD/YYYY' );
          }
-         
-         if ( this.employee.fechaNacimiento != null ) {
+
+         if ( this.employee.fechaNacimiento !== null ) {
             let mom2: moment.Moment = moment( this.employee.fechaNacimiento, 'YYYY-MM-DD' );
             this.birthDate = mom2.format( 'MM/DD/YYYY' );
          }
-         
+
          if ( this.employee.indicadorVivo == false ) {
             let mom3: moment.Moment = moment( this.employee.fechaDefuncion, 'YYYY-MM-DD' );
             this.deathDate = mom3.format( 'MM/DD/YYYY' );
          }
-         
+
          this.ciudadExpDocumento = this.employee.ciudadExpDocumento;
          this.backupCiudadExpDocumento = this.employee.ciudadExpDocumento;
          this.ciudadNacimiento = this.employee.ciudadNacimiento;
          this.backupCiudadNacimiento = this.employee.ciudadNacimiento;
       } );
-      
+
       this.es = {
          firstDayOfWeek: 1,
          dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
          dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
          dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
-         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre' ],
+         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre',
+            'diciembre'
+         ],
          monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
       let today = new Date();
@@ -220,15 +222,15 @@ export class EmployeesUpdateComponent {
       this.range = `${lasYear}:${year}`;
       this.focusUP();
    }
-   
+
    onSubmit() {
       this.focusUP();
-      if ( this.ciudadExpDocumento != this.backupCiudadExpDocumento ) {
-         this.ciudadExpDocumento = "";
+      if ( this.ciudadExpDocumento !== this.backupCiudadExpDocumento ) {
+         this.ciudadExpDocumento = '';
          this.employee.ciudadExpDocumento = '';
       }
-      if ( this.ciudadNacimiento != this.backupCiudadNacimiento ) {
-         this.ciudadNacimiento = "";
+      if ( this.ciudadNacimiento !== this.backupCiudadNacimiento ) {
+         this.ciudadNacimiento = '';
          this.employee.ciudadNacimiento = '';
       }
       if ( this.ciudadExpDocumento == this.backupCiudadExpDocumento && this.ciudadNacimiento == this.backupCiudadNacimiento ) {
@@ -237,7 +239,7 @@ export class EmployeesUpdateComponent {
          this.employee.segundoNombre = this.capitalizeSave( this.employee.segundoNombre );
          this.employee.primerApellido = this.capitalizeSave( this.employee.primerApellido );
          this.employee.segundoApellido = this.capitalizeSave( this.employee.segundoApellido );
-         
+
          let mom: moment.Moment = moment( this.expeditionDate, 'MM/DD/YYYY' );
          this.employee.fechaDocumento = mom.format( 'YYYY-MM-DD' );
          let mom2: moment.Moment = moment( this.birthDate, 'MM/DD/YYYY' );
@@ -247,7 +249,7 @@ export class EmployeesUpdateComponent {
             this.employee.fechaDefuncion = mom3.format( 'YYYY-MM-DD' );
          }
          this.employee.idTipoTercero = this.idTipoTercero;
-         
+
          this.employeesService.update( this.employee )
          .subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
@@ -258,7 +260,7 @@ export class EmployeesUpdateComponent {
          } );
       }
    }
-   
+
    goBack(): void {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea salir sin guardar?`,
@@ -270,44 +272,44 @@ export class EmployeesUpdateComponent {
                                            }
                                         } );
    }
-   
+
    searchExpeditionCity( event: any ) {
       this.politicalDivisionService.getAllCities( event.query ).subscribe(
          lis => this.resultExpeditionCity = lis
       );
    }
-   
+
    captureExpeditionCity( event: any ) {
       this.employee.idCiudadExpDocumento = event.idDivisionPolitica;
       this.ciudadExpDocumento = event.camino;
       this.backupCiudadExpDocumento = event.camino;
    }
-   
+
    searchBirthPlace( event: any ) {
       this.politicalDivisionService.getAllCities( event.query ).subscribe(
          lis => this.resultBirthPlace = lis
       );
    }
-   
+
    captureBirthPlace( event: any ) {
       this.employee.idCiudadNacimiento = event.idDivisionPolitica;
       this.ciudadNacimiento = event.camino;
       this.backupCiudadNacimiento = event.camino;
    }
-   
+
    focusUP() {
       const element = document.querySelector( '#formulario' );
       if ( element ) {
          element.scrollIntoView( element );
       }
    }
-   
+
    updateDate() {
-      
+
       let tipo = this.employee.idTipoDocumento;
       let exp = this.expeditionDate;
       let dateExpo = new Date( exp );
-      
+
       let today = new Date();
       let month = today.getMonth();
       let year = today.getFullYear();
@@ -316,7 +318,7 @@ export class EmployeesUpdateComponent {
       let lastYear = prev18Year - 80;
       this.maxDate = new Date();
       this.maxDate.setMonth( month );
-      
+
       if ( tipo === 1 ) {
          this.maxDate.setFullYear( prev18Year );
       } else if ( tipo === 2 ) {
@@ -327,7 +329,7 @@ export class EmployeesUpdateComponent {
       if ( this.maxDate > dateExpo ) {
          this.maxDate = dateExpo;
       }
-      
+
       if ( (this.employee.fechaNacimiento) !== null && (this.employee.fechaNacimiento) !== '' ) {
          let timestamp2 = new Date( this.maxDate ).getTime();
          let timestamp1 = new Date( this.employee.fechaNacimiento ).getTime();
@@ -337,34 +339,34 @@ export class EmployeesUpdateComponent {
          }
       }
       this.validateDocument();
-      
+
    }
-   
+
    capitalize( event: any ) {
       let input = event.target.value;
       event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
    }
-   
+
    capitalizeSave( input: any ) {
       return input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
    }
-   
+
    onExpeditionDate( event: any ) {
       let d = new Date( Date.parse( event ) );
       this.expeditionDate = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
       this.updateDate();
    }
-   
+
    onBirthDate( event: any ) {
       let d = new Date( Date.parse( event ) );
       this.birthDate = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
    }
-   
+
    onDeathDate( event: any ) {
       let d = new Date( Date.parse( event ) );
       this.deathDate = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
    }
-   
+
    updateActivities( value: number ) {
       if ( value !== null ) {
          this.activities = [];
@@ -379,11 +381,11 @@ export class EmployeesUpdateComponent {
          } );
       }
    }
-   
+
    validateDocument() {
-      if ( this.employee.numeroDocumento != "" && this.employee.numeroDocumento != null ) {
+      if ( this.employee.numeroDocumento !== '' && this.employee.numeroDocumento !== null ) {
          this.employeesService.validateDocument( this.employee.numeroDocumento, this.employee.idTipoDocumento ).subscribe( res => {
-            if ( res.idTercero > 0 && this.employee.idTercero != res.idTercero ) {
+            if ( res.idTercero > 0 && this.employee.idTercero !== res.idTercero ) {
                this.confirmationService.confirm( {
                                                     message: ` ¿La cedula que ha ingresado ya existe, desea ver el colaborador existente?`,
                                                     header: 'Corfirmación',
@@ -399,9 +401,9 @@ export class EmployeesUpdateComponent {
          } );
       }
    }
-   
+
    inputCleanUp( value: string ) {
       this.employee.numeroDocumento = value.toUpperCase().replace( ' ', '' ).trim();
    }
-   
+
 }

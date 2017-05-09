@@ -1,10 +1,10 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { SharedModule } from "../shared/shared.module";
-import { FormSharedModule } from "../shared/form-shared.module";
-import { CompanyAssetsComponent } from "./company-assets.component";
-import { CompanyAssetsServices } from "../_services/company-assets.service";
-import { CompanyAssetsTypesServices } from "../_services/list-company-assets.service";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
+import { FormSharedModule } from '../shared/form-shared.module';
+import { CompanyAssetsComponent } from './company-assets.component';
+import { CompanyAssetsServices } from '../_services/company-assets.service';
+import { CompanyAssetsTypesServices } from '../_services/list-company-assets.service';
 
 @NgModule( {
               imports: [ CommonModule,
@@ -18,5 +18,5 @@ import { CompanyAssetsTypesServices } from "../_services/list-company-assets.ser
            } )
 
 export class CompanyAssetsModule {
-   
+
 }

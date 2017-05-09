@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class EmployeeVehicle {
@@ -17,7 +17,7 @@ export class EmployeeVehicle {
    tipoServicio: String;
    marca: String;
    ciudad: String;
-   
+
    constructor() {
       this.indicadorHabilitado = true;
       this.auditoriaFecha = null;

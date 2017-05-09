@@ -1,7 +1,7 @@
 <div *ngIf="employeeLocation">
   <div class="row">
     <div class="col-md-12">
-      <h3 class="first">{{'EMPLOYEES.LBL_INFORMACIONFAMILIAR' | translate:param }}</h3>
+      <h3 class="first">{{'EMPLOYEES.LBL_INFORMACIONFAMILIAR' | translate }}</h3>
     </div>
   </div>
   <div class="row">
@@ -9,21 +9,21 @@
       <fieldset>
         <div class="form-group">
           <div class="row">
-            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'UBICACION.LBL_TIPODIRECCION' | translate:param }}:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'UBICACION.LBL_TIPODIRECCION' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeLocation.tipoDireccion.label}}</strong></label>
 
-            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'UBICACION.LBL_DIRECCION' | translate:param }}:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'UBICACION.LBL_DIRECCION' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-12" *ngIf="employeeLocation.ciudad"><strong>{{employeeLocation.ciudad.label}}</strong></label>
           </div>
           <div class="row">
-            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'UBICACION.LBL_DIRECCION' | translate:param }}:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'UBICACION.LBL_DIRECCION' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeLocation.direccion}}</strong></label>
 
-            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'UBICACION.LBL_BARRIO' | translate:param }}:</label>
+            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'UBICACION.LBL_BARRIO' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-12" *ngIf="employeeLocation.barrio"><strong>{{employeeLocation.barrio.label}}</strong></label>
           </div>
           <div class="row">
-            <label class="col-md-3 col-sm-12 col-xs-12 control-label">{{'UBICACION.LBL_COMOLLEGAR' | translate:param }}:</label>
+            <label class="col-md-3 col-sm-12 col-xs-12 control-label">{{'UBICACION.LBL_COMOLLEGAR' | translate }}:</label>
             <label class="col-md-9 col-sm-12 col-xs-12"><strong>{{employeeLocation.comoLlegar}}</strong></label>
           </div>
           <!--<div class="row">
@@ -47,7 +47,7 @@
 
 <div class="row form-footer-buttons">
   <div class="form-group col-md-12">
-    <button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate:param }}" type="button"
+    <button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
             pButton (click)="goBack()"></button>
   </div>
 </div>

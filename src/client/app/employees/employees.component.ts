@@ -1,9 +1,9 @@
-import { Component } from "@angular/core";
-import { Employee } from "../_models/employees";
-import { EmployeesService } from "../_services/employees.service";
-import { Router } from "@angular/router";
-import { ConfirmationService } from "primeng/primeng";
-import { NavService } from "../_services/_nav.service";
+import { Component } from '@angular/core';
+import { Employee } from '../_models/employees';
+import { EmployeesService } from '../_services/employees.service';
+import { Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/primeng';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -13,21 +13,21 @@ import { NavService } from "../_services/_nav.service";
             } )
 
 export class EmployeesComponent {
-   
+
    employee: Employee = new Employee();
    dialogObjet: Employee = new Employee();
-   
+
    employees: Employee[];
    codigoTipo: number;
    busqueda: string;
-   
+
    constructor( private employeesService: EmployeesService,
-                private router: Router,
-                private confirmationService: ConfirmationService,
-                private navService: NavService ) {
+      private router: Router,
+      private confirmationService: ConfirmationService,
+      private navService: NavService ) {
       this.busqueda = navService.getSearch( 'employees.component' );
    }
-   
+
    ngOnInit() {
       this.employeesService.getByTipo( "TERCOL" ).subscribe(
          employees => {
@@ -37,9 +37,9 @@ export class EmployeesComponent {
             } );
          }
       );
-      
+
    }
-   
+
    del( employee: Employee ) {
       this.dialogObjet = employee;
       this.confirmationService.confirm( {
@@ -56,21 +56,21 @@ export class EmployeesComponent {
                                            }
                                         } );
    }
-   
+
    detail( f: Employee ) {
       this.router.navigate( [ 'employees/detail/' + f.idTercero ] );
    }
-   
+
    add() {
       this.router.navigate( [ 'employees/add' ] );
    }
-   
+
    update( c: Employee ) {
       this.router.navigate( [ 'employees/update/' + c.idTercero ] );
    }
-   
+
    setSearch() {
       this.navService.setSearch( 'employees.component', this.busqueda )
    }
-   
+
 }

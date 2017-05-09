@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class FunctionalityField {
-   
+
    public idFuncionalidadCampo: number;
    public codigo: number;
    public nombre: string;
@@ -12,7 +12,7 @@ export class FunctionalityField {
    public idListaClasificacion: number;
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
-   
+
    constructor() {
       this.auditoriaFecha = null;
       this.auditoriaUsuario = null;

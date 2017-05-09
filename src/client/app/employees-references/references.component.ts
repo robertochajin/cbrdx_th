@@ -1,9 +1,9 @@
-import { Component, Input } from "@angular/core";
-import { Router } from "@angular/router";
-import { References } from "./references";
-import { ReferencesService } from "./references.service";
-import { ConfirmationService } from "primeng/primeng";
-import { Employee } from "../_models/employees";
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { References } from './references';
+import { ReferencesService } from './references.service';
+import { ConfirmationService } from 'primeng/primeng';
+import { Employee } from '../_models/employees';
 
 @Component( {
                moduleId: module.id,
@@ -15,14 +15,14 @@ export class ReferencesComponent {
    @Input() employee: Employee;
    reference: References = new References();
    dialogObjet: References = new References();
-   
+
    references: References[];
-   
+
    constructor( private referencesService: ReferencesService,
-                private router: Router,
-                private confirmationService: ConfirmationService ) {
+      private router: Router,
+      private confirmationService: ConfirmationService ) {
    }
-   
+
    ngOnInit() {
       this.referencesService.getAllgetAllByEmployee( this.employee.idTercero ).subscribe(
          references => {
@@ -42,16 +42,16 @@ export class ReferencesComponent {
          }
       );
    }
-   
+
    del( f: References ) {
-      
+
       this.dialogObjet = f;
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que lo desea eliminar?`,
                                            header: 'Corfirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
-            
+
                                               this.referencesService.get( this.dialogObjet.idTerceroReferencia ).subscribe(
                                                  ref => {
                                                     ref.indicadorHabilitado = false;
@@ -66,15 +66,15 @@ export class ReferencesComponent {
                                            }
                                         } );
    }
-   
+
    detail( f: References ) {
       this.router.navigate( [ 'employees-references/detail/' + f.idTerceroReferencia ] );
    }
-   
+
    add() {
       this.router.navigate( [ 'employees-references/add/' + this.employee.idTercero ] );
    }
-   
+
    update( f: References ) {
       this.router.navigate( [ 'employees-references/update/' + f.idTerceroReferencia + '/' + this.employee.idTercero ] );
    }

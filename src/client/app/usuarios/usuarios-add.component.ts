@@ -1,22 +1,22 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { UsuariosService } from "../_services/usuarios.service";
-import { Usuario } from "../_models/usuario";
-import "rxjs/add/operator/switchMap";
-import { RolesService } from "../_services/roles.service";
-import { ListaService } from "../_services/lista.service";
-import { Lista } from "../_models/lista";
-import { ListaItem } from "../_models/listaItem";
-import { Rol } from "../_models/rol";
-import { GruposGestionService } from "../_services/grupoGestion.service";
-import { GruposGestion } from "../_models/gruposGestion";
-import { UsuarioRol } from "../_models/usuarioRol";
-import { UsuarioGrupoGestion } from "../_models/usuarioGrupoGestion";
-import { VUsuarioRol } from "../_models/vUsuarioRol";
-import { VUsuarioGrupoGestion } from "../_models/vUsuarioGrupoGestion";
-import { VHistoricoUsuario } from "../_models/vHistoricoUsuario";
-import { Employee } from "../_models/employees";
-import { EmployeesService } from "../_services/employees.service";
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { UsuariosService } from '../_services/usuarios.service';
+import { Usuario } from '../_models/usuario';
+import 'rxjs/add/operator/switchMap';
+import { RolesService } from '../_services/roles.service';
+import { ListaService } from '../_services/lista.service';
+import { Lista } from '../_models/lista';
+import { ListaItem } from '../_models/listaItem';
+import { Rol } from '../_models/rol';
+import { GruposGestionService } from '../_services/grupoGestion.service';
+import { GruposGestion } from '../_models/gruposGestion';
+import { UsuarioRol } from '../_models/usuarioRol';
+import { UsuarioGrupoGestion } from '../_models/usuarioGrupoGestion';
+import { VUsuarioRol } from '../_models/vUsuarioRol';
+import { VUsuarioGrupoGestion } from '../_models/vUsuarioGrupoGestion';
+import { VHistoricoUsuario } from '../_models/vHistoricoUsuario';
+import { Employee } from '../_models/employees';
+import { EmployeesService } from '../_services/employees.service';
 
 @Component( {
                moduleId: module.id,
@@ -24,11 +24,8 @@ import { EmployeesService } from "../_services/employees.service";
                templateUrl: './usuario-add.component.html',
             } )
 
-export class UsuariosAddComponent implements OnInit {
-   ngOnInit(): void {
-      
-   }
-   
+export class UsuariosAddComponent {
+
    usuario: Usuario = new Usuario();
    tercero: Employee = new Employee();
    terceros: Employee[] = [];
@@ -41,7 +38,7 @@ export class UsuariosAddComponent implements OnInit {
    curGrupos: VUsuarioGrupoGestion[] = [];
    currentDate: Date = new Date( Date.now() );
    displayDialog = false;
-   
+
    datatypeMaster: Lista;
    datatypeDetails: ListaItem[];
    selectedTipo: number;
@@ -49,27 +46,27 @@ export class UsuariosAddComponent implements OnInit {
    isTerceroSet = false;
    isTerceroEmpty = false;
    isUserCreated = false;
-   userExists: boolean = false;
-   terceroExiste: boolean = true;
-   sameUser: boolean = false;
+   userExists = false;
+   terceroExiste = true;
+   sameUser = false;
    terceroObtenido: Employee;
-   
+
    isRequiredRol = false;
    isGreaterRol = true;
-   
+
    isRequiredGroup = false;
    isGreaterGroup = true;
-   
+
    creatingRol = true;
    creatingGroup = true;
    historico: VHistoricoUsuario[] = [];
-   
+
    constructor( private usuariosService: UsuariosService,
-                private rolesService: RolesService,
-                private gruposGestionService: GruposGestionService,
-                private tercerosService: EmployeesService,
-                private listasService: ListaService,
-                private router: Router ) {
+      private rolesService: RolesService,
+      private gruposGestionService: GruposGestionService,
+      private tercerosService: EmployeesService,
+      private listasService: ListaService,
+      private router: Router ) {
       listasService.getMasterDetails( 'ListasTiposDocumentos' ).subscribe( res => {
          this.datatypeDetails = res;
       } );
@@ -80,54 +77,55 @@ export class UsuariosAddComponent implements OnInit {
          this.terceros = res;
       } );
    }
-   
+
    changeEvent( event?: any ) {
       this.documentCleanUp( event.target.value );
-      if ( event.keyCode == 13 ) {
+      if ( event.keyCode === 13 ) {
          this.findPerson();
       } else {
          this.limpiarValidaciones();
       }
    }
-   
+
    limpiarValidaciones() {
       this.userExists = false;
       this.terceroExiste = true;
    }
-   
+
    validarTercero() {
       this.limpiarValidaciones();
-      this.terceroObtenido = this.terceros.filter( t => t.idTipoDocumento === this.selectedTipo ).find( s => s.numeroDocumento.toLowerCase() === this.numeroDocumento.toLowerCase() );
-      if ( this.terceroObtenido != null ) {
+      this.terceroObtenido = this.terceros.filter( t => t.idTipoDocumento === this.selectedTipo )
+      .find( s => s.numeroDocumento.toLowerCase() === this.numeroDocumento.toLowerCase() );
+      if ( this.terceroObtenido !== null ) {
          this.terceroExiste = true;
          this.validateUser();
       } else {
          this.terceroExiste = false;
       }
    }
-   
+
    crearTercero() {
-      //Navega a la pantalla de creación de terceros
+      // Navega a la pantalla de creación de terceros
       this.router.navigate( [ 'employees/add' ] );
    }
-   
+
    validateUser() {
-      if ( this.terceroObtenido != null ) {
+      if ( this.terceroObtenido !== null ) {
          this.userExists = this.usuarios.filter( t => t.idTercero === this.terceroObtenido.idTercero ).length > 0;
       } else {
          this.userExists = false;
       }
    }
-   
+
    goBack(): void {
       this.router.navigate( [ 'usuarios' ] );
    }
-   
+
    findPerson() {
       this.validarTercero();
       if ( !this.userExists && this.terceroExiste ) {
          this.tercerosService.validateDocument( this.numeroDocumento, this.selectedTipo ).subscribe( res => {
-            if ( res.idTercero != null ) {
+            if ( res.idTercero !== null ) {
                this.tercerosService.get( res.idTercero ).subscribe( rest => {
                   this.tercero = rest;
                   this.isTerceroSet = true;
@@ -139,7 +137,7 @@ export class UsuariosAddComponent implements OnInit {
          } );
       }
    }
-   
+
    createUser() {
       this.usuariosService.createUser( this.usuario ).then( res => {
          this.usuario = res;
@@ -149,7 +147,7 @@ export class UsuariosAddComponent implements OnInit {
          this.updateHistoric();
       } );
    }
-   
+
    updateRolesLists() {
       this.rolesService.getAvaliableFunctions( this.usuario.idUsuario ).subscribe( res => {
          this.roles = res;
@@ -158,7 +156,7 @@ export class UsuariosAddComponent implements OnInit {
          this.curRoles = res;
       } );
    }
-   
+
    updateGroupLists() {
       this.gruposGestionService.listAvaliableGruposGestion( this.usuario.idUsuario ).subscribe( res => {
          this.gruposGestion = res;
@@ -167,11 +165,11 @@ export class UsuariosAddComponent implements OnInit {
          this.curGrupos = res;
       } );
    }
-   
+
    createUserRole() {
       this.usuariosService.readAllUserRoles().subscribe( res => {
-         let ur = res.find( t => t.idUsuario == this.usuario.idUsuario && t.idRol == this.curUsuarioRol.idRol );
-         if ( ur != null ) {
+         let ur = res.find( t => t.idUsuario === this.usuario.idUsuario && t.idRol === this.curUsuarioRol.idRol );
+         if ( ur !== null ) {
             this.creatingRol = false;
             ur.fechaInicio = this.curUsuarioRol.fechaInicio;
             ur.fechaFin = this.curUsuarioRol.fechaFin;
@@ -198,11 +196,11 @@ export class UsuariosAddComponent implements OnInit {
          }
       } );
    }
-   
+
    createUserGroup() {
       this.usuariosService.readAllUserGroups().subscribe( res => {
-         let ug = res.find( t => t.idUsuario == this.usuario.idUsuario && t.idGrupoGestion == this.curUsuarioGrupo.idGrupoGestion );
-         if ( ug != null ) {
+         let ug = res.find( t => t.idUsuario === this.usuario.idUsuario && t.idGrupoGestion === this.curUsuarioGrupo.idGrupoGestion );
+         if ( ug !== null ) {
             this.creatingGroup = false;
             ug.fechaInicio = this.curUsuarioGrupo.fechaInicio;
             ug.fechaFin = this.curUsuarioGrupo.fechaFin;
@@ -214,7 +212,7 @@ export class UsuariosAddComponent implements OnInit {
                this.isRequiredGroup = false;
                this.isGreaterGroup = true;
                this.creatingGroup = true;
-            } )
+            } );
          } else {
             this.creatingGroup = false;
             this.curUsuarioGrupo.idUsuario = this.usuario.idUsuario;
@@ -229,7 +227,7 @@ export class UsuariosAddComponent implements OnInit {
          }
       } );
    }
-   
+
    removeRole( c: number ) {
       this.usuariosService.readUserRol( c ).subscribe( res => {
          let u: UsuarioRol = res;
@@ -239,7 +237,7 @@ export class UsuariosAddComponent implements OnInit {
          } );
       } );
    }
-   
+
    removeGroup( c: number ) {
       this.usuariosService.readUserGroup( c ).subscribe( res => {
          let u: UsuarioGrupoGestion = res;
@@ -249,53 +247,57 @@ export class UsuariosAddComponent implements OnInit {
          } );
       } );
    }
-   
+
    documentCleanUp( value: string ) {
       this.numeroDocumento = value.replace( ' ', '' ).trim();
    }
-   
+
    emailCleanUp( value: string ) {
       this.usuario.correoElectronico = value.toLowerCase().replace( ' ', '' ).trim();
    }
-   
+
    userCleanUp( value: string ) {
       this.usuario.usuarioSistema = value.toLowerCase().replace( ' ', '' ).replace( 'ñ', 'n' ).trim();
    }
-   
+
    validateCreationUser() {
-      this.sameUser = this.usuarios.filter( t => t.usuarioSistema == this.usuario.usuarioSistema ).length > 0;
+      this.sameUser = this.usuarios.filter( t => t.usuarioSistema === this.usuario.usuarioSistema ).length > 0;
    }
-   
+
    validateGreaterRol() {
-      if ( this.curUsuarioRol.fechaInicio != null && this.curUsuarioRol.fechaFin != null && this.curUsuarioRol.fechaInicio < this.curUsuarioRol.fechaFin ) {
+      if ( this.curUsuarioRol.fechaInicio !== null &&
+           this.curUsuarioRol.fechaFin !== null &&
+           this.curUsuarioRol.fechaInicio < this.curUsuarioRol.fechaFin ) {
          this.isGreaterRol = true;
       } else {
          this.isGreaterRol = false;
       }
    }
-   
+
    clearSelectionRol() {
       this.isRequiredRol = false;
       this.isGreaterRol = true;
       this.curUsuarioRol.fechaFin = null;
       this.curUsuarioRol.fechaInicio = null;
    }
-   
+
    validateGreaterGroup() {
-      if ( this.curUsuarioGrupo.fechaInicio != null && this.curUsuarioGrupo.fechaFin != null && this.curUsuarioGrupo.fechaInicio < this.curUsuarioGrupo.fechaFin ) {
+      if ( this.curUsuarioGrupo.fechaInicio !== null &&
+           this.curUsuarioGrupo.fechaFin !== null &&
+           this.curUsuarioGrupo.fechaInicio < this.curUsuarioGrupo.fechaFin ) {
          this.isGreaterGroup = true;
       } else {
          this.isGreaterGroup = false;
       }
    }
-   
+
    clearSelectionGroup() {
       this.isRequiredGroup = false;
       this.isGreaterGroup = true;
       this.curUsuarioGrupo.fechaFin = null;
       this.curUsuarioGrupo.fechaInicio = null;
    }
-   
+
    updateHistoric() {
       this.usuariosService.listHistory( this.usuario.idUsuario ).subscribe( res => {
          this.historico = res;

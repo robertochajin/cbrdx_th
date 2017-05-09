@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class EmployeesLocation {
@@ -8,8 +8,8 @@ export class EmployeesLocation {
    indicadorHabilitado: boolean;
    auditoriaUsuario: Number;
    auditoriaFecha: Date;
-   
+
    constructor() {
    }
-   
+
 }

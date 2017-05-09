@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class EmployeesClinicalData {
@@ -14,7 +14,7 @@ export class EmployeesClinicalData {
    codigo: string;
    descripcion: string;
    diagnostico: { idDiagnosticoCie: number, codigo: string, descripcion: string, label: string };
-   
+
    constructor() {
       this.indicadorHabilitado = true;
    }

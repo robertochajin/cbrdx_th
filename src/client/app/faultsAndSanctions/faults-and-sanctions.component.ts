@@ -1,8 +1,8 @@
-import { Component } from "@angular/core";
-import { FaultsAndSanctions } from "../_models/faultsAndSanctions";
-import { FaultsAndSanctionsService } from "../_services/faultsAndSanctions.service";
-import { Router } from "@angular/router";
-import { ConfirmationService } from "primeng/primeng";
+import { Component } from '@angular/core';
+import { FaultsAndSanctions } from '../_models/faultsAndSanctions';
+import { FaultsAndSanctionsService } from '../_services/faultsAndSanctions.service';
+import { Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/primeng';
 
 @Component( {
                moduleId: module.id,
@@ -12,16 +12,16 @@ import { ConfirmationService } from "primeng/primeng";
             } )
 
 export class FaultsAndSanctionsComponent {
-   
+
    fault: FaultsAndSanctions = new FaultsAndSanctions();
    dialogObjet: FaultsAndSanctions = new FaultsAndSanctions();
    faults: FaultsAndSanctions[];
-   
+
    constructor( private faultsAndSanctionsService: FaultsAndSanctionsService,
-                private router: Router,
-                private confirmationService: ConfirmationService ) {
+      private router: Router,
+      private confirmationService: ConfirmationService ) {
    }
-   
+
    ngOnInit() {
       this.faultsAndSanctionsService.getAll().subscribe(
          faults => {
@@ -29,7 +29,7 @@ export class FaultsAndSanctionsComponent {
          }
       );
    }
-   
+
    del( FaS: FaultsAndSanctions ) {
       this.dialogObjet = FaS;
       this.confirmationService.confirm( {
@@ -48,13 +48,13 @@ export class FaultsAndSanctionsComponent {
                                            }
                                         } );
    }
-   
+
    add() {
       this.router.navigate( [ 'faults/add' ] );
    }
-   
+
    update( FaS: FaultsAndSanctions ) {
       this.router.navigate( [ 'faults/update/' + FaS.idFalta ] );
    }
-   
+
 }

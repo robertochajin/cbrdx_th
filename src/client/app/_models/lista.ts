@@ -1,5 +1,5 @@
 export class Lista {
-   
+
    public idLista: number;
    public nombreTabla: string;
    public lista: string;

@@ -12,12 +12,12 @@
                      src="./assets/images/logo_login_th.png" >
 
 
-                  <h3 class="text-center">{{ 'LBL_RECUPERACUENTA' | translate:param }}</h3>
+                  <h3 class="text-center">{{ 'LBL_RECUPERACUENTA' | translate }}</h3>
 
                   <form #f="ngForm" (ngSubmit)="f.valid&&doPost();" novalidate class="form-signin" *ngIf="!enviando">
 
                       <div class="form-group">
-                          <label for="correo">{{ 'LBL_CORREOELECTRONICO' | translate:param }}</label>
+                          <label for="correo">{{ 'LBL_CORREOELECTRONICO' | translate }}</label>
                           <div>
                             <div class="input-group input-block-level">
                               <span class="input-group-addon"> <i class="fa fa-envelope"></i> </span>
@@ -28,10 +28,10 @@
                               </div>
                               <div *ngIf="f.submitted&&!correo.valid" class="alert alert-danger">
                                   <div [hidden]="!correo.errors.required">
-                                       {{ 'MSG_CORREOREQUERIDO' | translate:param }}
+                                       {{ 'MSG_CORREOREQUERIDO' | translate }}
                                     </div>
                                     <div [hidden]="!correo.errors.pattern">
-                                        {{ 'MSG_CORREOFORMATO' | translate:param }}
+                                        {{ 'MSG_CORREOFORMATO' | translate }}
                                   </div>
                               </div>
                           </div>
@@ -39,7 +39,7 @@
 
 
                       <div class="form-group" *ngIf="!recordarUsuario">
-                          <label for="uSistema" >{{ 'LBL_USUARIO' | translate:param }}</label>
+                          <label for="uSistema" >{{ 'LBL_USUARIO' | translate }}</label>
                           <div>
                             <div class="input-group input-block-level">
                               <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
@@ -50,28 +50,28 @@
                               </div>
                               <div *ngIf="f.submitted&&!uSistema.valid" class="alert alert-danger">
                                   <div [hidden]="!uSistema.errors.required">
-                                     {{ 'MSG_USUARIOREQUERIDO' | translate:param }}
+                                     {{ 'MSG_USUARIOREQUERIDO' | translate }}
                                     </div>
                                     <div [hidden]="!uSistema.errors.pattern">
-                                        {{ 'MSG_USUARIOCONTENER' | translate:param }}
+                                        {{ 'MSG_USUARIOCONTENER' | translate }}
                                   </div>
                               </div>
                           </div>
                       </div>
 
                           <div class="text-center">
-                              <a (click)="olvideUsuario()" class="recordarUsuario" *ngIf="!recordarUsuario">{{ 'LBL_OLVIDE' | translate:param }} {{ 'LBL_USUARIO' | translate:param }}</a>
+                              <a (click)="olvideUsuario()" class="recordarUsuario" *ngIf="!recordarUsuario">{{ 'LBL_OLVIDE' | translate }} {{ 'LBL_USUARIO' | translate }}</a>
                           </div>
 
 
 
                       <div class="form-group text-center" style="margin-top:10px;">
-                          <a (click)="goBack()" class="cancelar" *ngIf="!recordarUsuario">{{ 'BTN_CANCELAR' | translate:param }}</a>
-                          <a (click)="regresarUsuario()" class="regresar" *ngIf="recordarUsuario">{{ 'BTN_REGRESAR' | translate:param }}</a>
+                          <a (click)="goBack()" class="cancelar" *ngIf="!recordarUsuario">{{ 'BTN_CANCELAR' | translate }}</a>
+                          <a (click)="regresarUsuario()" class="regresar" *ngIf="recordarUsuario">{{ 'BTN_REGRESAR' | translate }}</a>
                           <button *ngIf="!recordarUsuario" pButton type="submit"
-                                  label="{{ 'BTN_ACEPTAR' | translate:param }}"></button>
+                                  label="{{ 'BTN_ACEPTAR' | translate }}"></button>
                           <button *ngIf="recordarUsuario" pButton type="submit"
-                                  label="{{ 'BTN_ACEPTAR' | translate:param }}"></button>
+                                  label="{{ 'BTN_ACEPTAR' | translate }}"></button>
 
                       </div>
 
@@ -83,10 +83,10 @@
       </div>
   </div>
 
-<p-dialog header="{{ 'LBL_CONFIRMACION' | translate:param }}" [(visible)]="displayDialog"
+<p-dialog header="{{ 'LBL_CONFIRMACION' | translate }}" [(visible)]="displayDialog"
           responsive="true" modal="true">
     <p>
-        {{ 'MSG_CONFIRMACIONDATOSCORRECTOS' | translate:param }}
+        {{ 'MSG_CONFIRMACIONDATOSCORRECTOS' | translate }}
     </p>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
@@ -97,10 +97,10 @@
 </p-dialog>
 
 
-<p-dialog header="{{ 'LBL_CONFIRMACION' | translate:param }}" [(visible)]="displayDialog1"
+<p-dialog header="{{ 'LBL_CONFIRMACION' | translate }}" [(visible)]="displayDialog1"
           responsive="true" modal="true">
     <p>
-        {{ 'MSG_CONFIRMACIONDATOSCORRECTOS' | translate:param }}
+        {{ 'MSG_CONFIRMACIONDATOSCORRECTOS' | translate }}
     </p>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">

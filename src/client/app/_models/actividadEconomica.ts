@@ -3,13 +3,13 @@
  */
 export class ActividadEconomica {
    idActividadEconomica: number;
-   
+
    idActividadPadre: number = 0;
    idActividadTipo: number = 0;
    codigoActividadEconomica: string;
    actividadEconomica: string;
    indicadorHabilitado: boolean = true;
-   
+
    auditoriaUsuario: number;
    auditoriaFecha: Date;
 }

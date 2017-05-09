@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class PersonPositions {
@@ -13,8 +13,8 @@ export class PersonPositions {
    idTercero: number;
    idEstructuraOrganizacionalCargo: number;
    asignadoDesde: string;
-   
-   //Atributos auxiliares
+
+   // Atributos auxiliares
    cargo: string;
    primerNombre: string;
    primerApellido: string;

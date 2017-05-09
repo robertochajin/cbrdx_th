@@ -1,36 +1,36 @@
-import { Component } from "@angular/core";
-import { Positions } from "../_models/positions";
-import { PositionsService } from "../_services/positions.service";
-import { Router } from "@angular/router";
-import { ConfirmationService } from "primeng/primeng";
+import {Component, OnInit} from '@angular/core';
+import { Positions } from '../_models/positions';
+import { PositionsService } from '../_services/positions.service';
+import { Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/primeng';
 
 @Component( {
                moduleId: module.id,
                templateUrl: 'positions.component.html',
-               selector: 'positions',
+               selector: 'positions-list',
                providers: [ ConfirmationService ]
             } )
 
-export class PositionsComponent {
-   
+export class PositionsComponent implements OnInit {
+
    position: Positions = new Positions();
    positions: Positions[];
    dialogObjet: Positions = new Positions();
-   
+
    constructor( private positionsService: PositionsService,
-                private router: Router,
-                private confirmationService: ConfirmationService ) {
+      private router: Router,
+      private confirmationService: ConfirmationService ) {
    }
-   
+
    ngOnInit() {
       this.positionsService.getAll().subscribe(
          positions => {
             this.positions = positions;
          }
       );
-      
+
    }
-   
+
    del( positions: Positions ) {
       this.dialogObjet = positions;
       this.confirmationService.confirm( {
@@ -49,17 +49,17 @@ export class PositionsComponent {
                                            }
                                         } );
    }
-   
+
    detail( f: Positions ) {
       this.router.navigate( [ 'positions/detail/' + f.idCargo ] );
    }
-   
+
    add() {
       this.router.navigate( [ 'positions/add' ] );
    }
-   
+
    update( c: Positions ) {
       this.router.navigate( [ 'positions/update/' + c.idCargo ] );
    }
-   
+
 }
