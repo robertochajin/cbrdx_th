@@ -1,8 +1,8 @@
 <p-messages [value]="msgs"></p-messages>
 <p-confirmDialog width="400" #cd>
    <p-footer>
-      <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
-      <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+      <button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+      <button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate }}" (click)="cd.accept()"></button>
    </p-footer>
 </p-confirmDialog>
 <div *ngIf="positionsActivities">
@@ -10,7 +10,7 @@
       <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
          <div class="ui-grid-row">
             <div class="ui-grid-col-12">
-               <label for="idOcupacion"><h3>Ocupación </h3></label>
+               <label for="idOcupacion"><h3>{{ 'POSITION.LBL_OCUPACIONES' | translate }} </h3></label>
             </div>
          </div>
          <div class="ui-grid-row">
@@ -22,11 +22,11 @@
                <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="fr.submitted && !idOcupacion.valid">
                   <i class="fa fa-close"></i>
-                  Cargo requerido
+                  {{ 'POSITION.LBL_CARGO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
                </div>
             </div>
             <div class="ui-grid-col-3">
-               <button pButton icon="fa-plus" label="Agregar" type="submit"></button>
+               <button pButton icon="fa-plus" label="{{ 'BTN_AGREGAR' | translate }}" type="submit"></button>
             </div>
          </div>
       </div>
@@ -34,8 +34,8 @@
    <div class="row">
       <div class="col-md-12">
          <p-dataTable [value]="listPositionsActivities" [paginator]="true" [rows]="10" [responsive]="true">
-            <p-column field="ocupacion" header="Ocupación" [sortable]="true"></p-column>
-            <p-column header="Acciones" styleClass="datatable-col-action">
+            <p-column field="ocupacion" header="{{ 'POSITION.LBL_OCUPACION' | translate }}" [sortable]="true"></p-column>
+            <p-column header="{{ 'POSITION.LBL_ACCION' | translate }}" styleClass="datatable-col-action">
                <template let-PA="rowData" pTemplate="body">
                   <button type="button" icon="fa-trash" class="ui-button-danger"
                           pButton (click)="del(PA)"></button>

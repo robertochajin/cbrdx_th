@@ -60,7 +60,7 @@
                         <div>{{ 'LISTAS.LBL_CODIGOREGISTRADO' | translate }}</div>
                     </div>
                     <div *ngIf="fd.submitted&&codigo.errors" class="alert alert-danger">
-                        <div [hidden]="!codigo.errors.required">{{ 'LISTAS.LBL_INGRESACODIGO' | translate }}</div>
+                        <div [hidden]="!codigo.errors.required">{{ 'LISTAS.MSG_INGRESACODIGO' | translate }}</div>
                         <div [hidden]="!codigo.errors.pattern">{{ 'LISTAS.LBL_CODLETRAS' | translate }}</div>
                         <div [hidden]="!codigo.errors.maxlength">{{ 'LISTAS.LBL_COD10CARACTERES' | translate }}</div>
                     </div>

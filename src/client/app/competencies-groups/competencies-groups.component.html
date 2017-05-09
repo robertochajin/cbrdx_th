@@ -54,7 +54,7 @@
                      <div class="form-group col-md-4">
                      </div>
                      <div class="form-group col-md-2">
-                        <a (click)="cancelEditingGroup()" class="{{'BTN_CANCELAR' | translate }}">Cancelar</a>
+                        <a (click)="cancelEditingGroup()" class="{{'BTN_CANCELAR' | translate:param }}">{{'BTN_CANCELAR' | translate:param }}</a>
                      </div>
                       <div class="form-group col-md-2">
                         <button pButton type="submit" label="{{'BTN_GUARDAR' | translate }}"></button>
@@ -69,7 +69,7 @@
 <div *ngIf="!editingGroup">
    <div class="row">
       <div class="col-md-6">
-         <button type="button" pButton icon="fa-plus" (click)="editGroup(null)" label="Agregar grupo"></button>
+         <button type="button" pButton icon="fa-plus" (click)="editGroup(null)" label="{{'BTN_AGREGAR' | translate:param }} {{'COMPETENCIES.LBL_GRUPO' | translate:param }}"></button>
       </div>
    </div>
    <p-tabView orientation="left">
@@ -82,18 +82,18 @@
                <form name="competencieForm" (ngSubmit)="fc.valid && saveCompetencie()" #fc="ngForm" novalidate>
                   <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                      <fieldset>
-                        <legend>Creando / editando grupo:</legend>
+                        <legend>{{'LBL_CREAR' | translate:param }} / {{'LBL_EDITAR' | translate:param }} {{'COMPETENCIES.LBL_COMPETENCIA' | translate:param }}:</legend>
                         <div class="row">
                            <div class="form-group col-md-1"></div>
                            <div class="form-group col-md-10">
-                              <label for="cNombre">* Competencia / Habilidad</label>
+                              <label for="cNombre">* {{'COMPETENCIES.LBL_COMPETENCIA' | translate:param }}/ {{'COMPETENCIES.LBL_HABILIDAD' | translate:param }}</label>
                               <input type="text" pInputText id="cNombre" name="cNombre"
                                      [(ngModel)]="competencie.competencia" #cNombre="ngModel"  [readonly]="competencie.idCompetencia != null"
                                      required (keyup)="capitalizec()"/>
                               <div class="ui-message ui-messages-error ui-corner-all"
                                    *ngIf="fc.submitted && !cNombre.valid">
                                  <i class="fa fa-close"></i>
-                                 Competencia / Habilidad es requerido
+                                 {{'COMPETENCIES.LBL_COMPETENCIA' | translate:param }}/ {{'COMPETENCIES.LBL_HABILIDAD' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
                               </div>
                            </div>
                            <div class="form-group col-md-1"></div>
@@ -101,14 +101,14 @@
                         <div class="row">
                            <div class="form-group col-md-1"></div>
                            <div class="form-group col-md-10">
-                              <label for="cDescription">* Descripción</label>
+                              <label for="cDescription">* {{'LBL_DESCRIPCION' | translate:param }}</label>
                               <textarea id="cDescription" name="cDescription" #cDescription="ngModel" pInputTextarea
                                         rows="5"
                                         [(ngModel)]="competencie.descripcion" required></textarea>
                               <div class="ui-message ui-messages-error ui-corner-all"
                                    *ngIf="fc.submitted && !cDescription.valid">
                                  <i class="fa fa-close"></i>
-                                 Descripción es requerido
+                                 {{'LBL_DESCRIPCION' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
                               </div>
                            </div>
                            <div class="form-group col-md-1"></div>
@@ -116,7 +116,7 @@
                         <div class="row">
                            <div class="form-group col-md-1"></div>
                            <div class="form-group col-md-10">
-                              <label for="cEnabled">Habilitado</label>
+                              <label for="cEnabled">{{'LBL_HABILITADO' | translate:param }}</label>
                               <p-checkbox id="cEnabled" name="cEnabled" #cEnabled="ngModel"
                                           [(ngModel)]="competencie.indicadorHabilitado" binary="true"></p-checkbox>
                            </div>
@@ -125,10 +125,10 @@
                         <div class="row form-footer-buttons">
                            <div class="form-group col-md-2"></div>
                            <div class="form-group col-md-2">
-                              <a (click)="cancelEditingCompetencie()" class="cancelar">Cancelar</a>
+                              <a (click)="cancelEditingCompetencie()" class="cancelar">{{'BTN_CANCELAR' | translate:param }}</a>
                            </div>
                            <div class="form-group col-md-2">
-                              <button pButton type="submit" label="Guardar"></button>
+                              <button pButton type="submit" label="{{'BTN_GUARDAR' | translate:param }}"></button>
                            </div>
                         </div>
                      </fieldset>
@@ -138,9 +138,9 @@
          </div>
          <div class="row" *ngIf="!editingCompetencie">
             <div class="col-md-9">
-               <button type="button" pButton icon="fa-pencil" (click)="editGroup(group)" label="Editar grupo"></button>
+               <button type="button" pButton icon="fa-pencil" (click)="editGroup(group)" label="{{'BTN_EDITAR' | translate:param }} {{'COMPETENCIES.LBL_GRUPO' | translate:param }}"></button>
                <button type="button" pButton icon="fa-plus" (click)="editCompetencie(null, group.idGrupoCompetencia)"
-                       label="Agregar Competencia"></button>
+                       label="{{'BTN_AGREGAR' | translate:param }} {{'COMPETENCIES.LBL_COMPETENCIA' | translate:param }}"></button>
             </div>
             <div class="col-md-6">
             </div>
@@ -149,14 +149,14 @@
             <div class="col-md-12">
                <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="group.competencies"
                             [responsive]="true" id="positionCompetenciesDT" styleClass="dejemeverelcombo">
-                  <p-column field="competencia" header="Competencia" [sortable]="true"></p-column>
-                  <p-column field="descripcion" header="Descripción" [sortable]="true"></p-column>
+                  <p-column field="competencia" header="{{'COMPETENCIES.LBL_COMPETENCIA' | translate:param }}" [sortable]="true"></p-column>
+                  <p-column field="descripcion" header="{{'LBL_DESCRIPCION' | translate:param }}" [sortable]="true"></p-column>
                   <p-column header="{{ 'LBL_HABILITADO' | translate }}"  styleClass="datatable-col-action">
                      <template let-competencie="rowData" pTemplate="body">
                         <p-checkbox [(ngModel)]="competencie.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
                      </template>
                   </p-column>
-                  <p-column header="Acciones" styleClass="datatable-col-action">
+                  <p-column header="{{'LBL_ACCIONES' | translate:param }}" styleClass="datatable-col-action">
                      <template let-competencie="rowData" pTemplate="body">
                         <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil"
                                 pButton (click)="editCompetencie(competencie, group.idGrupoCompetencia)"></button>
