@@ -1,12 +1,12 @@
-<h3 class="first">{{'EMPLOYEES.LBL_DATOS' | translate:param}}</h3>
+<h3 class="first">{{'EMPLOYEES.LBL_DATOS' | translate}}</h3>
 <p-messages [value]="msgs"></p-messages>
   <div class="row-fluid" >
     <div class="col-md-12">
-      <form name="formulario emergencia" (ngSubmit)="fe.valid && onSubmit()" #fe="ngForm" novalidate id="formulario" *ngIf="show_form" >
+      <form name="formulario emergencia" (ngSubmit)="fe.valid && onSubmit()" #fe="ngForm" novalidate id="formulario" *ngIf="showForm" >
         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
           <div class="row">
             <div class="form-group col-md-8">
-              <label for="nombre">*{{'EMPLOYEES.LBL_NOMBRECONTACTO' | translate:param}}</label>
+              <label for="nombre">*{{'EMPLOYEES.LBL_NOMBRECONTACTO' | translate}}</label>
               <input type="text" pInputText id="nombre" name="nombre"
                      [(ngModel)]="contact.contacto" #contacto="ngModel" required
                      (keyup)="capitalize()"
@@ -14,47 +14,47 @@
               <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="fe.submitted && !contacto.valid">
                  <i class="fa fa-close"></i>
-                {{'EMPLOYEES.LBL_NOMBRECONTACTO' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                {{'EMPLOYEES.LBL_NOMBRECONTACTO' | translate}} {{'LBL_REQUERIDO' | translate}}
                </div>
             </div>
             <div class="ui-grid-col-4">
-              <label for="idParentezco">*{{'EMPLOYEES.LBL_RELACION' | translate:param}}</label>
+              <label for="idParentezco">*{{'EMPLOYEES.LBL_RELACION' | translate}}</label>
               <p-dropdown id="idParentezco"  name="idParentezco" #idParentezco="ngModel" [options]="relationship" [autoWidth]="false"
                           [(ngModel)]="contact.idListaParentesco" required></p-dropdown>
               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="fe.submitted && !idParentezco.valid">
                 <i class="fa fa-close"></i>
-                {{'EMPLOYEES.LBL_RELACION' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                {{'EMPLOYEES.LBL_RELACION' | translate}} {{'LBL_REQUERIDO' | translate}}
               </div>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="fijo">{{ 'LBL_TELEFONO' | translate:param }}</label>
+              <label for="fijo">{{ 'LBL_TELEFONO' | translate }}</label>
               <p-inputMask id="fijo" name="fijo"
                            mask="?(999) 999-9999 Ext 9999" placeholder="(999) 999-9999 Ext 99999" [required]="cel" (keyup)="validarTelefono()"
                            [(ngModel)]="contact.telefono" #telefonoFijo="ngModel"
               ></p-inputMask>
                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="fe.submitted && !telefonoFijo.valid">
                   <i class="fa fa-close"></i>
-                  {{'LBL_TELEFONO' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                  {{'LBL_TELEFONO' | translate}} {{'LBL_REQUERIDO' | translate}}
                </div>
             </div>
             <div class="form-group col-md-6">
-              <label for="cel">{{ 'LBL_CELULAR' | translate:param }}</label>
+              <label for="cel">{{ 'LBL_CELULAR' | translate }}</label>
               <p-inputMask id="cel" name="cel" [required]="tel" (keyup)="validarCelular()"
                            mask="?(999) 999-9999" placeholder="(999) 999-9999"
                            [(ngModel)]="contact.celular" #celular="ngModel"
               ></p-inputMask>
                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="fe.submitted && !celular.valid">
                   <i class="fa fa-close"></i>
-                  {{'LBL_CELULAR' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                  {{'LBL_CELULAR' | translate}} {{'LBL_REQUERIDO' | translate}}
                </div>
             </div>
           </div>
         </div>
         <div class="row form-footer-buttons">
           <div class="form-group col-md-12">
-            <a (click)="goBackUpdate()" class="cancelar">{{ 'BTN_CANCELAR' | translate:param }}</a>
+            <a (click)="goBackUpdate()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
             <button icon="fa-plus" label="Guardar" type="submit"
                     pButton></button>
           </div>
@@ -65,21 +65,21 @@
 <div>
     <div class="row datable-header">
         <div class="col-md-6 col-xs-12 datatable-header-add">
-            <button type="button" pButton icon="fa-plus" (click)="add()" label="{{'EMPLOYEES.LBL_NUEVOCONTACTO' | translate:param}}"></button>
+            <button type="button" pButton icon="fa-plus" (click)="add()" label="{{'EMPLOYEES.LBL_NUEVOCONTACTO' | translate}}"></button>
         </div>
         <div class="col-md-6 col-xs-12 datatable-header-search" >
           <div class="input-group">
             <div class="input-group-addon"><i class="fa fa-search"></i></div>
-            <input #gb type="text" pInputText size="30" placeholder="{{'LBL_BUSCAR' | translate:param}}" class="form-control">
+            <input #gb type="text" pInputText size="30" placeholder="{{'LBL_BUSCAR' | translate}}" class="form-control">
           </div>
         </div>
     </div>
-    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="contacts" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-        <p-column field="contacto" header="{{'EMPLOYEES.LBL_NOMBRECONTACTO' | translate:param}}" [sortable]="true"></p-column>
-        <p-column field="nombreListaParentesco" header="{{'EMPLOYEES.LBL_PARENTESCO' | translate:param}}" [sortable]="true"></p-column>
-        <p-column field="telefono" header="{{'LBL_TELEFONO' | translate:param}}" [sortable]="true"></p-column>
-        <p-column field="celular" header="{{'LBL_CELULAR' | translate:param}}" [sortable]="true"></p-column>
-        <p-column header="{{'LBL_ACCIONES' | translate:param}}" styleClass="datatable-col-action">
+    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="contacts" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+        <p-column field="contacto" header="{{'EMPLOYEES.LBL_NOMBRECONTACTO' | translate}}" [sortable]="true"></p-column>
+        <p-column field="nombreListaParentesco" header="{{'EMPLOYEES.LBL_PARENTESCO' | translate}}" [sortable]="true"></p-column>
+        <p-column field="telefono" header="{{'LBL_TELEFONO' | translate}}" [sortable]="true"></p-column>
+        <p-column field="celular" header="{{'LBL_CELULAR' | translate}}" [sortable]="true"></p-column>
+        <p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
             <template let-lcontact="rowData" pTemplate="body">
                 <div class="btn-group" role="group">
                     <button type="button"  class="ui-button ui-button-success btn" icon="fa-pencil"

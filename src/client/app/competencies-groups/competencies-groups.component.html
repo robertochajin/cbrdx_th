@@ -4,22 +4,22 @@
       <div class="col-md-12">
          <form name="formulario" (ngSubmit)="fg.valid && saveGroup()" #fg="ngForm" novalidate>
             <fieldset>
-               <legend> {{'LBL_CREAR' | translate:param }} / {{'LBL_EDITAR' | translate:param }} {{'COMPETENCIES.LBL_GRUPO' | translate:param }}:</legend>
+               <legend> {{'LBL_CREAR' | translate }} / {{'LBL_EDITAR' | translate }} {{'COMPETENCIES.LBL_GRUPO' | translate }}:</legend>
                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                   <div class="row">
                      <div class="form-group col-md-8">
-                        <label for="nombre">* {{'LBL_NOMBRE' | translate:param }}</label>
+                        <label for="nombre">* {{'LBL_NOMBRE' | translate }}</label>
                         <input type="text" pInputText id="nombre" name="nombre" [disabled]="group.idGrupoCompetencia"
                                [(ngModel)]="group.grupoCompetencia" #nombre="ngModel" (keyup)="capitalize()"
                                required/>
                         <div class="ui-message ui-messages-error ui-corner-all"
                              *ngIf="fg.submitted && !nombre.valid">
                            <i class="fa fa-close"></i>
-                           {{'LBL_NOMBRE' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                           {{'LBL_NOMBRE' | translate }} {{'LBL_REQUERIDO' | translate }}
                         </div>
                      </div>
                      <div class="form-group col-md-4">
-                        <label for="ponderancie">* {{'COMPETENCIES.LBL_PONDERACION' | translate:param }}</label>
+                        <label for="ponderancie">* {{'COMPETENCIES.LBL_PONDERACION' | translate }}</label>
                         <input type="number" maxlength="3" size="3" pattern="(?:\b|-)([1-9]{1,2}[0]?|100)\b" min="1"
                                max="100" pInputText id="ponderancie" name="ponderancie"
                                [(ngModel)]="group.ponderacion" #ponderancie="ngModel"
@@ -27,25 +27,25 @@
                         <div class="ui-message ui-messages-error ui-corner-all"
                              *ngIf="fg.submitted && !ponderancie.valid">
                            <i class="fa fa-close"></i>
-                           {{'COMPETENCIES.MSG_PONDERACION' | translate:param }}
+                           {{'COMPETENCIES.MSG_PONDERACION' | translate }}
                         </div>
                      </div>
                   </div>
                   <div class="row">
                      <div class="form-group col-md-12">
-                        <label for="description">* {{'LBL_DESCRIPCION' | translate:param }}</label>
+                        <label for="description">* {{'LBL_DESCRIPCION' | translate }}</label>
                         <textarea id="description" name="description" #description="ngModel" pInputTextarea rows="5"
                                   [(ngModel)]="group.descripcion" required></textarea>
                         <div class="ui-message ui-messages-error ui-corner-all"
                              *ngIf="fg.submitted && !description.valid">
                            <i class="fa fa-close"></i>
-                           {{'LBL_DESCRIPCION' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                           {{'LBL_DESCRIPCION' | translate }} {{'LBL_REQUERIDO' | translate }}
                         </div>
                      </div>
                   </div>
                   <div class="row">
                      <div class="form-group col-md-12">
-                        <label for="enabledGroup">{{'LBL_HABILITADO' | translate:param }}</label>
+                        <label for="enabledGroup">{{'LBL_HABILITADO' | translate }}</label>
                         <p-checkbox id="enabledGroup" name="enabledGroup" #enabledGroup="ngModel"
                                     [(ngModel)]="group.indicadorHabilitado" binary="true"></p-checkbox>
                      </div>
@@ -57,7 +57,7 @@
                         <a (click)="cancelEditingGroup()" class="{{'BTN_CANCELAR' | translate:param }}">{{'BTN_CANCELAR' | translate:param }}</a>
                      </div>
                       <div class="form-group col-md-2">
-                        <button pButton type="submit" label="{{'BTN_GUARDAR' | translate:param }}"></button>
+                        <button pButton type="submit" label="{{'BTN_GUARDAR' | translate }}"></button>
                      </div>
                   </div>
                </div>

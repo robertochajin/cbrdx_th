@@ -1,17 +1,17 @@
 export class PhysicStructure {
    idEstructuraFisica: number;
-   codigo:string;
+   codigo: string;
    estructuraFisica: string;
    idClasificacionSede: number;
-   clasificacionSede:string;
+   clasificacionSede: string;
    idLocalizacion: number;
-   direccion:string;
+   direccion: string;
    camino: string;
    telefono: number;
    celular: string;
    correoElectronico: string;
-   indicadorVirtual:boolean;
-   indicadorHabilitado: boolean=true;
+   indicadorVirtual: boolean;
+   indicadorHabilitado: boolean = true;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
 
@@ -19,8 +19,8 @@ export class PhysicStructure {
       this.auditoriaFecha = null;
       this.auditoriaUsuario = null;
       this.idEstructuraFisica = null;
-      this.direccion='';
-      this.telefono=null;
-      this.celular=null;
+      this.direccion = '';
+      this.telefono = null;
+      this.celular = null;
    }
 }

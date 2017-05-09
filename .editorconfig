@@ -3,8 +3,21 @@ charset=utf-8
 end_of_line=lf
 insert_final_newline=false
 indent_style=space
+indent_size=3
+
+[{*.ng,*.sht,*.html,*.shtm,*.shtml,*.htm}]
+indent_style=tab
 tab_width=3
 
-[{.eslintrc,.babelrc,.stylelintrc,*.json,*.jsb3,*.jsb2,*.bowerrc,*.css,*.ats,*.ts,*.html}]
+[{*.jhm,*.xslt,*.xul,*.rng,*.xsl,*.xsd,*.ant,*.svg,*.tld,*.fxml,*.jrxml,*.xml,*.jnlp,*.wsdl}]
+indent_style=tab
+tab_width=3
+
+[{*.applejs,*.js}]
+indent_style=tab
+tab_width=3
+
+[{.analysis_options,*.yml,*.yaml}]
 indent_style=space
 indent_size=3
+

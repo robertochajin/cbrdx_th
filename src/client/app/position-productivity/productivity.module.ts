@@ -1,4 +1,4 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CheckboxModule } from "primeng/primeng";
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
@@ -12,8 +12,7 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,
 
 @NgModule({
   imports:[CommonModule,
-    SharedModule,
-    InputTextModule,
+    SharedModule,InputTextModule,
     FormsModule,
     ReactiveFormsModule,
     DataTableModule,
@@ -26,10 +25,11 @@ import { InputTextModule,DataTableModule,ButtonModule,DialogModule,
   ],
   declarations: [ProductivityComponent,
 
-  ],
-  bootstrap:    [ProductivityComponent],
-  providers:    [ProductivityService],
-  exports: 	  [ProductivityComponent]
-})
+              ],
+              bootstrap: [ ProductivityComponent ],
+              providers: [ ProductivityService ],
+              exports: [ ProductivityComponent ]
+           } )
 
-export class ProductivityModule { }
+export class ProductivityModule {
+}

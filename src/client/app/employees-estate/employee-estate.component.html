@@ -1,21 +1,21 @@
-<h3 class="first">{{ 'EMPLOYEES.LBL_INMUEBLES' | translate:param }}</h3>
+<h3 class="first">{{ 'EMPLOYEES.LBL_INMUEBLES' | translate }}</h3>
 <div>
   <div class="row datable-header">
     <div class="col-md-6 col-xs-12 datatable-header-add">
-      <button type="button" icon="fa-plus" label="{{ 'EMPLOYEES.LBL_NUEVOINMUEBLE' | translate:param }}"
+      <button type="button" icon="fa-plus" label="{{ 'EMPLOYEES.LBL_NUEVOINMUEBLE' | translate }}"
               pButton (click)="add()"></button>
     </div>
     <div class="col-md-6 col-xs-12 datatable-header-search" >
 
       <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-search"></i></div>
-        <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate:param }}" class="form-control">
+        <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control">
       </div>
 
     </div>
   </div>
 
-  <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="employeesEstate" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+  <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="employeesEstate" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
     <p-column field="tipoVivienda" header="Tipo Vivienda" [sortable]="true"></p-column>
     <p-column field="claseVivienda" header="La Vivienda es? " [sortable]="true"></p-column>
     <p-column field="tipoConstruccionVivienda" header="Tipo Construcción" [sortable]="true"></p-column>

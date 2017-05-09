@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { Observable } from "rxjs/Rx";
-import { PositionPersonality } from "../_models/positionPersonality";
-import { AuthHttp } from "angular2-jwt";
+import { Observable } from 'rxjs/Rx';
+import { PositionPersonality } from '../_models/positionPersonality';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class PositionPersonalityServices {
@@ -22,7 +22,7 @@ export class PositionPersonalityServices {
 
    add( f: PositionPersonality ) {
       return this.authHttp.post( this.serviceURL, f )
-         .map( ( res: Response ) => res.json() );
+      .map( ( res: Response ) => res.json() );
    };
 
    update( f: PositionPersonality ) {
@@ -31,7 +31,7 @@ export class PositionPersonalityServices {
 
    get( id: number ) {
       return this.authHttp.get( this.serviceURL + 'buscarId/' + id )
-         .map( ( res: Response ) => res.json() as PositionPersonality );
+      .map( ( res: Response ) => res.json() as PositionPersonality );
    }
 
    handleError( error: any ): Promise<any> {

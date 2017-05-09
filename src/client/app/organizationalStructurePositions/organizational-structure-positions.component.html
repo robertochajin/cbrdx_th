@@ -124,7 +124,7 @@
                         <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}">
                      </div>
                   </div>
-                  <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="osPositions"
+                  <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="osPositions"
                                [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
                      <p-column field="cargo" header="{{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}" [sortable]="true"></p-column>
                      <p-column header="Salario" [sortable]="true">
@@ -168,7 +168,7 @@
                            </div>
                            <div class="col-md-4">
                               <strong>{{ 'PLANTACOLABORADORES.LBL_COSTOPLANTA' | translate }}:</strong>
-                              ${{countCost.toLocaleString()}}
+                              $ {{countCost.toLocaleString()}}
                            </div>
                         </div>
                         <div class="row">
@@ -255,7 +255,7 @@
                      <input #pl type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}">
                   </div>
                </div>
-               <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="postionSlots"
+               <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="postionSlots"
                             [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="pl" #dt>
                   <p-column field="cargo" header="{{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}" [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains">
                   </p-column>

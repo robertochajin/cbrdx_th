@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Risk } from '../_models/position-risks';
 import { Exam } from '../_models/position-exam';
-import { AuthHttp } from "angular2-jwt";
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class RiskService {

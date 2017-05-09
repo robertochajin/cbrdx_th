@@ -3,14 +3,14 @@
  */
 export class GruposGestion {
 
-    idGrupoGestion: number;
-    grupoGestion: string;
-    codigoGrupoGestion: string;
-    funciones: string;
-    fechaInicio: Date;
-    fechaFin: Date;
-    indicadorHabilitado: boolean = true;
-    responsabilidades: string;
-    auditoriaUsuario: number;
-    auditoriaFecha: Date;
+   idGrupoGestion: number;
+   grupoGestion: string;
+   codigoGrupoGestion: string;
+   funciones: string;
+   fechaInicio: Date;
+   fechaFin: Date;
+   indicadorHabilitado: boolean = true;
+   responsabilidades: string;
+   auditoriaUsuario: number;
+   auditoriaFecha: Date;
 }

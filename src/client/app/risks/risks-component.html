@@ -12,7 +12,7 @@
          </div>
       </div>
    </div>
-   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="risks" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="risks" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
       <p-column field="tipo" header="{{'RISKS.LBL_TIPO' | translate:param }}" [sortable]="true"></p-column>
       <p-column field="subtipo" header="{{'RISKS.LBL_SUBTIPO' | translate:param }}" [sortable]="true"></p-column>
       <p-column field="riesgo" header="{{'RISKS.LBL_RIESGO' | translate:param }}" [sortable]="true"></p-column>

@@ -5,10 +5,10 @@
     </div>
     <div class="col-md-6 col-xs-12 datatable-header-search">
         <i class="fa fa-search"></i>
-        <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate:param }}">
+        <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}">
     </div>
 </div>
-<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="gruposGestion" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb" emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}">
+<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="gruposGestion" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb" emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}">
     <p-column field="idGrupoGestion" header="{{ 'LBL_ID' | translate }}" [sortable]="true"></p-column>
     <p-column field="codigoGrupoGestion" header="{{ 'LBL_CODIGO' | translate }}" [sortable]="true"></p-column>
     <p-column field="grupoGestion" header="{{ 'LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>

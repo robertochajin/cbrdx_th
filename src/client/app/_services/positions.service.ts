@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { Response } from "@angular/http";
-import { Positions } from "../_models/positions";
-import { PositionsObservations } from "../_models/positionsObservations";
-import { PositionsActivities } from "../_models/positionsActivities";
-import { AuthHttp } from "angular2-jwt";
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
+import { Positions } from '../_models/positions';
+import { PositionsObservations } from '../_models/positionsObservations';
+import { PositionsActivities } from '../_models/positionsActivities';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class PositionsService {
@@ -75,7 +75,7 @@ export class PositionsService {
 
    get( id: number ) {
       return this.authHttp.get( this.serviceURL + 'cargos/' + id ).map( ( res: Response ) => {
-         if ( res.text() != "" ) {
+         if ( res.text() !== '' ) {
             return res.json() as Positions
          } else {
             return new Positions;
@@ -109,7 +109,8 @@ export class PositionsService {
    }
 
    getPositionActivitiesById( id: number ) {
-      return this.authHttp.get( this.serviceURL + 'cargosOcupaciones/buscarCargo/' + id ).map( ( res: Response ) => res.json() as PositionsActivities[] );
+      return this.authHttp.get( this.serviceURL + 'cargosOcupaciones/buscarCargo/' + id )
+      .map( ( res: Response ) => res.json() as PositionsActivities[] );
    }
 
    getActivitiesById( id: number ) {

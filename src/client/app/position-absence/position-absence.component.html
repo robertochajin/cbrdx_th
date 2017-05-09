@@ -38,8 +38,7 @@
    </form>
    <div class="row">
       <div class="col-md-12">
-         <p-dataTable [value]="listAbsenceREE" [paginator]="true" [rows]="10" [responsive]="true"
-                      [globalFilter]="gb">
+         <p-dataTable [value]="listAbsenceREE" [paginator]="true" [rows]="10" [responsive]="true">
             <p-column field="cargoRelacion" header="{{'POSITION.LBL_CARGO' | translate:param}}" [sortable]="true"></p-column>
             <p-column header="Acciones" styleClass="datatable-col-action">
                <template let-absence="rowData" pTemplate="body">
@@ -75,7 +74,7 @@
    </form>
    <div class="row">
       <div class="col-md-12">
-         <p-dataTable [value]="listAbsenceREP" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+         <p-dataTable [value]="listAbsenceREP" [paginator]="true" [rows]="10" [responsive]="true">
             <p-column field="cargoRelacion" header="{{'POSITION.LBL_CARGO' | translate:param}}" [sortable]="true"></p-column>
             <p-column header="Acciones" styleClass="datatable-col-action">
                <template let-absence="rowData" pTemplate="body">
