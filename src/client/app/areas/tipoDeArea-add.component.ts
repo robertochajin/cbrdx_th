@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { TipoDeArea } from '../_models/tipoDeArea';
 import { TipoDeAreaService } from '../_services/tipoDeArea.service';
 import { Router } from '@angular/router';
-
+import { NavService } from '../_services/_nav.service';
+import { Message } from 'primeng/primeng';
 @Component( {
                moduleId: module.id,
                templateUrl: 'tipoDeArea-add.component.html',
@@ -14,8 +15,8 @@ export class TipoDeAreaAddComponent {
    areasExistentes: TipoDeArea[];
    codeExists: boolean = false;
    displayDialog:boolean;
-
-   constructor( private tipoDeAreasService: TipoDeAreaService, private router: Router ) {
+   msg: Message;
+   constructor( private tipoDeAreasService: TipoDeAreaService, private router: Router, private navService: NavService ) {
       tipoDeAreasService.listAreas().subscribe( res => {
          this.areasExistentes = res;
       } );
@@ -24,6 +25,8 @@ export class TipoDeAreaAddComponent {
    createArea() {
       this.tipoDeAreasService.addArea( this.areas ).then( data => {
          this.router.navigate( [ 'tipoArea' ] );
+         let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+         this.navService.setMesage( typeMessage, this.msg );
       } );
    }
 

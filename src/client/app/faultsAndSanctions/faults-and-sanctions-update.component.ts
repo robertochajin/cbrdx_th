@@ -7,7 +7,7 @@ import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
 import { FaultsAndSanctionsService } from '../_services/faultsAndSanctions.service';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
-
+import { NavService } from '../_services/_nav.service';
 @Component( {
                moduleId: module.id,
                templateUrl: 'faults-and-sanctions-form.component.html',
@@ -22,13 +22,13 @@ export class FaultsAndSanctionsUpdateComponent implements OnInit {
    header = 'Agregando Falta o Sanción';
    faultsTypes: SelectItem[] = [];
    faultsStatus: SelectItem[] = [];
-   msgs: Message[] = [];
-
+   msg: Message;
    constructor( private faultsAndSanctionsService: FaultsAndSanctionsService,
       private listaService: ListaService,
       private route: ActivatedRoute,
       private location: Location,
-      private confirmationService: ConfirmationService ) {
+      private confirmationService: ConfirmationService,
+      private navService: NavService ) {
       this.listaService.getMasterDetails( 'ListasTiposFaltas' ).subscribe( res => {
          this.faultsTypes.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
@@ -54,13 +54,14 @@ export class FaultsAndSanctionsUpdateComponent implements OnInit {
    }
 
    onSubmit() {
-      this.msgs = [];
       this.faultsAndSanctionsService.update( this.fault )
       .subscribe( data => {
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+         this.navService.setMesage( typeMessage, this.msg );
          this.location.back();
       }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         let typeMessage = 3; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+         this.navService.setMesage( typeMessage, this.msg );
       } );
    }
 

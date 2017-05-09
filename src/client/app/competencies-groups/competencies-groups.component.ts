@@ -5,6 +5,7 @@ import { CompetenciesServices } from '../_services/competencies.service';
 import { Competencies } from '../_models/competencies';
 import { GroupCompetenciesServices } from '../_services/groupCompetencies.service';
 import { GroupCompetencies } from '../_models/groupCompetencies';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -18,13 +19,14 @@ export class CompetenciesGroupsComponent {
    group: GroupCompetencies = new GroupCompetencies();
    editingGroup: boolean = false;
    editingCompetencie: boolean = false;
-   msgs: Message[] = [];
+   msg: Message;
    private competencie: Competencies = new Competencies();
 
    constructor( private router: Router,
       private competenciesServices: CompetenciesServices,
       private groupCompetenciesServices: GroupCompetenciesServices,
-      private confirmationService: ConfirmationService ) {
+      private confirmationService: ConfirmationService,
+      private navService: NavService ) {
    }
 
    ngOnInit() {
@@ -55,6 +57,8 @@ export class CompetenciesGroupsComponent {
                this.group = new GroupCompetencies();
                this.editingGroup = false;
             }
+            let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
          } );
       } else {
          this.groupCompetenciesServices.add( this.group ).subscribe( res => {
@@ -63,6 +67,8 @@ export class CompetenciesGroupsComponent {
                this.group = new GroupCompetencies();
                this.editingGroup = false;
             }
+            let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
          } );
       }
    }
@@ -121,6 +127,8 @@ export class CompetenciesGroupsComponent {
                this.competencie = new Competencies();
                this.editingCompetencie = false;
             }
+            let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
          } );
 
       } else {
@@ -132,6 +140,8 @@ export class CompetenciesGroupsComponent {
                this.competencie = new Competencies();
                this.editingCompetencie = false;
             }
+            let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
          } );
       }
    }
