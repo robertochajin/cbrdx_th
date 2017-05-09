@@ -16,6 +16,7 @@ export class CentroCostosAddComponent {
    centroCostos: CentroCostos = new CentroCostos();
    centrosExistentes: CentroCostos[];
    codeExists: boolean = false;
+   displayDialog:boolean;
 
    constructor( private centroCostosService: CentroCostosService, private router: Router ) {
       centroCostosService.listCentroCostos().subscribe( res => {
@@ -25,7 +26,7 @@ export class CentroCostosAddComponent {
 
    createGruposGestion() {
       this.centroCostosService.addCentroCostos( this.centroCostos ).then( data => {
-         this.router.navigate( [ 'centroCostos' ] )
+         this.router.navigate( [ 'centroCostos' ] );
       } );
    }
 

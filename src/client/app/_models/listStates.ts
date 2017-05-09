@@ -14,4 +14,3 @@ export class ListStates {
       this.indicadorHabilitado = true;
    }
 }
-

@@ -13,6 +13,7 @@ export class TipoDeAreaEditComponent {
    areas: TipoDeArea = new TipoDeArea();
    areasExistentes: TipoDeArea[];
    codeExists: boolean = false;
+   displayDialog:boolean;
 
    constructor( private tipoDeAreasService: TipoDeAreaService, private router: Router, private route: ActivatedRoute ) {
       route.params.switchMap( ( params: Params ) => tipoDeAreasService.viewArea( +params[ 'id' ] ) )

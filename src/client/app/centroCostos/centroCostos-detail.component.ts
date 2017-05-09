@@ -20,7 +20,7 @@ export class CentroCostosDetailComponent {
       route.params.switchMap( ( params: Params ) => centroCostosService.viewCentroCostos( +params[ 'id' ] ) )
       .subscribe( data => {
          this.centroCostos = data;
-         this.habilitado = data.indicadorHabilitado ? "Si" : "No";
+         this.habilitado = data.indicadorHabilitado ? 'Si' : 'No';
       } );
    }
 
