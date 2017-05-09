@@ -9,7 +9,7 @@ import { Message } from 'primeng/primeng';
 @Component( {
                moduleId: module.id,
                templateUrl: 'gruposGestion-edit.component.html',
-               selector: 'gruposGestion-edit'
+               selector: 'gruposgestion-edit'
             } )
 export class GruposGestionEditComponent {
 

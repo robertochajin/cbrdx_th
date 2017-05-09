@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component( {
                moduleId: module.id,
                templateUrl: 'gruposGestion.component.html',
-               selector: 'gruposGestion-list'
+               selector: 'gruposgestion-list'
             } )
 export class GruposGestionComponent {
 
