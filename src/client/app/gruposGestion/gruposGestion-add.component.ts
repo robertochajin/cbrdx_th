@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import { GruposGestion } from '../_models/gruposGestion';
 import { GruposGestionService } from '../_services/grupoGestion.service';
 import { Router } from '@angular/router';
+import { NavService } from '../_services/_nav.service';
+import { Message } from 'primeng/primeng';
 
 @Component( {
                moduleId: module.id,
@@ -21,8 +23,8 @@ export class GruposGestionAddComponent implements OnInit {
    isRequired = false;
    isGreater = true;
    private es: any;
-
-   constructor( private gruposGestionService: GruposGestionService, private router: Router ) {
+   msg: Message;
+   constructor( private gruposGestionService: GruposGestionService, private router: Router, private navService: NavService ) {
       gruposGestionService.listGruposGestion().subscribe( res => {
          this.gruposGestion = res;
       } );
@@ -59,7 +61,9 @@ export class GruposGestionAddComponent implements OnInit {
 
    createGruposGestion() {
       this.gruposGestionService.addGruposGestion( this.grupoGestion ).then( data => {
-         this.router.navigate( [ 'gruposGestion' ] )
+         this.router.navigate( [ 'gruposGestion' ] );
+         let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+         this.navService.setMesage( typeMessage, this.msg );
       } );
    }
 

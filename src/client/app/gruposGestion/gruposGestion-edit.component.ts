@@ -3,6 +3,8 @@ import { GruposGestion } from '../_models/gruposGestion';
 import { GruposGestionService } from '../_services/grupoGestion.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import * as moment from 'moment/moment';
+import { NavService } from '../_services/_nav.service';
+import { Message } from 'primeng/primeng';
 
 @Component( {
                moduleId: module.id,
@@ -19,8 +21,9 @@ export class GruposGestionEditComponent {
    isRequired = false;
    isGreater = true;
    public es: any;
-
-   constructor( private gruposGestionService: GruposGestionService, private router: Router, private route: ActivatedRoute ) {
+   msg: Message;
+   constructor( private gruposGestionService: GruposGestionService, private router: Router, private route: ActivatedRoute,
+      private navService: NavService ) {
       route.params.switchMap( ( params: Params ) => gruposGestionService.viewGruposGestion( +params[ 'id' ] ) )
       .subscribe( data => {
          this.grupoGestion = data;
@@ -65,6 +68,8 @@ export class GruposGestionEditComponent {
    createGruposGestion() {
       this.gruposGestionService.updateGruposGestion( this.grupoGestion ).then( data => {
          this.router.navigate( [ 'gruposGestion' ] );
+         let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+         this.navService.setMesage( typeMessage, this.msg );
       } );
    }
 

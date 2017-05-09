@@ -7,7 +7,7 @@ import { Localizaciones } from '../_models/localizaciones';
 import { LocateService } from '../_services/locate.service';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
-
+import { NavService } from '../_services/_nav.service';
 @Component( {
                moduleId: module.id,
                templateUrl: 'physic-structure-form.component.html',
@@ -27,12 +27,13 @@ export class PhysicStructureAddComponent implements OnInit {
    direcValid: boolean;
    addinglocation = true;
    localizacion: Localizaciones = new Localizaciones();
-
+   msg: Message;
    constructor( private physicStructureService: PhysicStructureService,
       private listaService: ListaService,
       private locateService: LocateService,
       private location: Location,
-      private confirmationService: ConfirmationService ) {
+      private confirmationService: ConfirmationService,
+      private navService: NavService ) {
    }
 
    ngOnInit() {
@@ -79,10 +80,12 @@ export class PhysicStructureAddComponent implements OnInit {
                this.physicStructure.idLocalizacion = data.idLocalizacion;
                this.physicStructureService.add( this.physicStructure ).subscribe(
                   data => {
-                     this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+                     let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+                     this.navService.setMesage( typeMessage, this.msg );
                      this.location.back();
                   }, error => {
-                     this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+                     let typeMessage = 3; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+                     this.navService.setMesage( typeMessage, this.msg );
                   }
                );
             } );
