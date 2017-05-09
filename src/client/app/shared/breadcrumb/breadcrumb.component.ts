@@ -219,17 +219,13 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
       this.breadcrumbService.addFriendlyNameForRoute( '/actividadeconomica', 'Actividades Económicas' );
 
       this.breadcrumbService.addFriendlyNameForRoute( '/faults', 'Faltas y Sanciones' );
-      this.breadcrumbService.addFriendlyNameForRoute( '/faults/add', 'ocupaciones' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/faults/add', 'Nuevo' );
       this.breadcrumbService.addFriendlyNameForRoute( '/faults/update', 'Actualizar' );
       this.breadcrumbService.hideRouteRegex( '/faults/update/[0-9]' );
 
-      this.breadcrumbService.addFriendlyNameForRoute( '/faults', 'Faltas y Sanciones' );
-      this.breadcrumbService.addFriendlyNameForRoute( '/faults/add', 'ocupaciones' );
-      this.breadcrumbService.addFriendlyNameForRoute( '/faults/update', 'Actualizar' );
-      this.breadcrumbService.hideRouteRegex( '/faults/update/[0-9]' );
 
       this.breadcrumbService.addFriendlyNameForRoute( '/positions', 'Cargos' );
-      this.breadcrumbService.addFriendlyNameForRoute( '/positions/add', 'ocupaciones' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/positions/add', 'Nuevo' );
       this.breadcrumbService.addFriendlyNameForRoute( '/positions/update', 'Actualizar' );
       this.breadcrumbService.hideRouteRegex( '/positions/update/[0-9]' );
 
@@ -237,6 +233,11 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
       this.breadcrumbService.addFriendlyNameForRoute( '/widgets', 'Widgets' );
       this.breadcrumbService.addFriendlyNameForRoute( '/form-manager', 'Administrador de Formularios' );
       this.breadcrumbService.addFriendlyNameForRoute( '/menus', 'Menues' );
+
+      this.breadcrumbService.addFriendlyNameForRoute( '/ physic-structure', 'Estructura Física' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/physic-structure/add', 'Nuevo' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/physic-structure/update', 'Actualizar' );
+      this.breadcrumbService.hideRouteRegex( '/physic-structure/update/[0-9]' );
 
    }
 

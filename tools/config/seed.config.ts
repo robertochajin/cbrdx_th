@@ -309,9 +309,9 @@ export class SeedConfig {
     * Se definen la IP y el PUERTO con la cual la vista se conecta a los servicios Solucion de proteccion
     * @type {string}
     */
-      //IP = '192.168.253.37'; //_CREZCAMOS
-   IP = '40.71.92.147'; //_CIBERDIX
-   //IP = 'localhost';
+      // IP = '192.168.253.37'; //_CREZCAMOS
+   IP = '40.71.92.147'; // _CIBERDIX
+   // IP = 'localhost';
    SVC_SP_PORT = '8447';
 
    SVC_SP_URL = 'http://' + this.IP + ':' + this.SVC_SP_PORT;
@@ -391,7 +391,6 @@ export class SeedConfig {
          '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
          'traceur': 'node_modules/traceur/bin/traceur.js',
-         //'ng2-translate': 'node_modules/ng2-translate/ng2-translate.js',
          'primeng': '${this.APP_BASE}node_modules/primeng',
 
 
@@ -680,7 +679,7 @@ function filterDependency(type: string, d: InjectableDependency): boolean {
  * @return {number} The applications version.
  */
 function appVersion(): number | string {
-   var pkg = require('../../package.json');
+   let pkg = require('../../package.json');
    return pkg.version;
 }
 

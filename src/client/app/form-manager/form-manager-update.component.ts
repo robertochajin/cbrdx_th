@@ -205,9 +205,6 @@ export class FormManagerUpdateComponent implements OnInit {
 
    }
 
-   onSubmit() {
-   }
-
    onCreateC( n: number ) {
 
       if ( this.indicadorSeccion === false ) {
@@ -271,13 +268,12 @@ export class FormManagerUpdateComponent implements OnInit {
    }
 
    onUpdateC() {
-      this.functionalityControlField;
       if ( this.indicadorSeccion === false ) {
          this.functionalityField = [];
          this.functionalityControlField.idPadre = null;
          this.functionalityControlField.idFuncionalidad = this.functionality.idFuncionalidad;
          this.functionalityControlField.indicadorSeccion = false;
-         this.formManagerService.updateField( this.functionalityControlField ).subscribe( rest => {
+         this.formManagerService.updateField( this.functionalityControlField ).subscribe( res => {
             this.formManagerService.getFieldByIdFuncionalidad( this.functionality.idFuncionalidad ).subscribe( rest => {
                for ( let r of rest ) {
                   if ( r.indicadorSeccion === false && r.idPadre === null ) {
@@ -287,8 +283,8 @@ export class FormManagerUpdateComponent implements OnInit {
             } );
             this.editingField = false;
          } );
-         this.functionalityControlField.control = ' ';
-         this.functionalityControlField.codigo = ' ';
+         this.functionalityControlField.control = '';
+         this.functionalityControlField.codigo = '';
       } else {
          this.functionalityField = [];
          this.functionalityControlField.idFuncionalidad = this.functionality.idFuncionalidad;

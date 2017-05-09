@@ -11,17 +11,16 @@ import { ListaService } from '../_services/lista.service';
             } )
 
 export class ListaDetailComponent implements OnInit {
-
-   constructor( private listasService: ListaService,
-      private route: ActivatedRoute,
-      private location: Location ) {
-   }
-
    masterList: Lista = new Lista();
    othersList: Lista[];
    othersDetailsList: ListaItem[];
    detailsList: ListaItem[];
    habilitado: string;
+
+   constructor( private listasService: ListaService,
+      private route: ActivatedRoute,
+      private location: Location ) {
+   }
 
    ngOnInit(): void {
       this.route.params

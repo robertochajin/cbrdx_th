@@ -109,11 +109,6 @@
                                                 [(ngModel)]="position.idEstado" disabled="true"
                                                 #idEstado="ngModel"
                                     ></p-dropdown>
-                                    <!--disabled="true"<div class="ui-message ui-messages-error ui-corner-all"
-                                         *ngIf="f0.submitted && !idEstado.valid">
-                                       <i class="fa fa-close"></i>
-                                       Estado es requerida
-                                    </div>-->
                                  </div>
                                  <div class="form-group col-md-6">
                                     <label for="indicador" class="control-label col-sm-3">Habilitado</label>
@@ -129,14 +124,6 @@
                               <div class="form-group col-md-12">
                                  <button icon="fa-arrow-right" label="Siguiente" type="submit"
                                          pButton></button>
-                              </div>
-                           </div>
-                           <div class="row form-footer-buttons" *ngIf="position.paso == 16">
-                              <div class="form-group col-md-12">
-                                 <button icon="fa-plus" label="Aprobar" type="button"
-                                         pButton (click)="updateEstado(aprobado)"></button>
-                                 <button icon="fa-plus" label="No aprobar" type="button"
-                                         pButton (click)="updateEstado(noAprobado)"></button>
                               </div>
                            </div>
                         </form>

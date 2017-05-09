@@ -13,7 +13,7 @@ import { PositionsService } from '../_services/positions.service';
                providers: [ ConfirmationService ]
             } )
 
-export class PositionActivitiesComponent implements OnInit{
+export class PositionActivitiesComponent implements OnInit {
 
    @Input() position: Positions;
    positionsActivities: PositionsActivities = new PositionsActivities();

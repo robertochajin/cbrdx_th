@@ -12,7 +12,7 @@ import { ListaService } from '../_services/lista.service';
 @Component( {
                moduleId: module.id,
                templateUrl: 'organizationalStructure.component.html',
-               selector: 'organizationalStructure',
+               selector: 'organizational-structure',
 
             } )
 export class OrganizationalStructureComponent {

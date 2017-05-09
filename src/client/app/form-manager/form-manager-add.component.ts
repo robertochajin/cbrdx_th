@@ -65,7 +65,7 @@ export class FormManagerAddComponent implements OnInit {
       this.formManagerService.getFunctionality().subscribe( res => {
          this.formManagerService.getAllFunctionality().subscribe( rest => {
             this.listFunctionalities = rest;
-            this.listFunctionality.push( { label: "Seleccione", value: null } );
+            this.listFunctionality.push( { label: 'Seleccione', value: null } );
             for ( let dp of res ) {
                let bandera = false;
                for ( let r of this.listFunctionalities ) {
@@ -213,7 +213,7 @@ export class FormManagerAddComponent implements OnInit {
    }
 
    onUpdateC() {
-      this.functionalityControlField;
+      this.functionalityControlField = new FunctionalityControl();
       if ( this.indicadorSeccion === false ) {
          this.functionalityField = [];
          this.functionalityControlField.idPadre = null;

@@ -7,7 +7,7 @@ export class UsuarioRol {
    idRol: number;
    auditoriaUsuario: number = null;
    auditoriaFecha: Date = null;
-   fechaInicio: Date;
-   fechaFin: Date;
+   fechaInicio: Date = null;
+   fechaFin: Date = null;
    indicadorHabilitado: boolean = true;
 }

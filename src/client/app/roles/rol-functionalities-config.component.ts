@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { RolFuncionalities } from '../_models/rolFuncionalities';
@@ -20,7 +20,7 @@ export class RolFuncionalitiesConfigComponent implements OnInit {
    listaFuncionalityControl: RolFunctionalityControl[];
    funcionalityControl: RolFunctionalityControl = new RolFunctionalityControl();
    lfuncionalityControl: RolFunctionalityControl = new RolFunctionalityControl();
-   show_form: boolean = false;
+   showForm: boolean = false;
    msgs: Message[] = [];
    lfControles: FunctionalityControl[] = [];
    fControles: RolFunctionalityControl;
@@ -62,14 +62,14 @@ export class RolFuncionalitiesConfigComponent implements OnInit {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
             fc.idRolFuncionalidadControl = data.idRolFuncionalidadControl;
          }, error => {
-            this.show_form = true;
+            this.showForm = true;
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       } else {
          this.rolFuncionalitiesService.updateControl( fc ).subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          }, error => {
-            this.show_form = true;
+            this.showForm = true;
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       }

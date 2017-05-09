@@ -34,7 +34,7 @@
           <re-captcha *ngIf="intentos>=3" siteKey="6LckLxkUAAAAAFgI2q1qZaYlXAukMs-L41Gv5k72"
                       (resolved)="resolved($event)"></re-captcha>
           <div class="form-group">
-            <button id="btnIniciarSesion" [disabled]="loading" pButton label="{{ 'LBL_INICIARSESION' | translate }}"></button>
+            <button id="btnIniciarSesion" pButton label="{{ 'LBL_INICIARSESION' | translate }}"></button>
           </div>
           <div *ngIf="error" class="alert alert-danger">{{error}}</div>
 

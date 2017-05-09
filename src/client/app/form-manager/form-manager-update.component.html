@@ -58,7 +58,7 @@
                <div *ngIf="!detailSection">
                   <div *ngIf="showForm">
                      <h3 class="first">{{ 'ADMIN_FORMULARIOS.LBL_SECCION' | translate }}</h3>
-                     <form (ngSubmit)="fs.valid && onCreateS() && onSubmit()" #fs="ngForm" novalidate
+                     <form (ngSubmit)="fs.valid && onCreateS()" #fs="ngForm" novalidate
                            id="formularioseccion">
                         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                            <div class="ui-grid-row">

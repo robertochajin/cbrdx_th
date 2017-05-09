@@ -79,4 +79,19 @@ export class RisksUpdateComponent implements OnInit {
                                            }
                                         } );
    }
+
+   changeType() {
+      this.listSubTypeRisks = [];
+      this.risksService.getSubTypeRisks().subscribe( rest => {
+         this.listSubTypeRisks.push( { label: 'Seleccione...', value: null } );
+         for ( let dp of rest ) {
+            if ( dp.idRiesgoTipo === this.risk.idTipoRiesgo ) {
+               this.listSubTypeRisks.push( {
+                                              label: dp.riesgoSubTipo,
+                                              value: dp.idRiesgoSubTipo
+                                           } );
+            }
+         }
+      } );
+   }
 }

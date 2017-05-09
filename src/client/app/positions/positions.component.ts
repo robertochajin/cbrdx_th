@@ -7,7 +7,7 @@ import { ConfirmationService } from 'primeng/primeng';
 @Component( {
                moduleId: module.id,
                templateUrl: 'positions.component.html',
-               selector: 'positions',
+               selector: 'positions-list',
                providers: [ ConfirmationService ]
             } )
 
