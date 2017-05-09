@@ -2,6 +2,8 @@ import { Component, Renderer, ElementRef } from '@angular/core';
 import { JwtHelper } from 'angular2-jwt';
 import { Router } from '@angular/router';
 import * as moment from 'moment/moment';
+import { NavService } from '../../_services/_nav.service';
+
 /**
  * This class represents the toolbar component.
  */
@@ -17,10 +19,14 @@ export class ToolbarComponent {
    jwtHelper: JwtHelper = new JwtHelper();
    timeoutID: any;
    ultimaActualizacion: string;
+   svcThUrl = '<%= SVC_TH_URL %>/api/upload';
+   avatar:string;
 
    constructor( public router: Router,
       renderer: Renderer,
-      elementRef: ElementRef ) {
+      elementRef: ElementRef,
+      navService: NavService,
+   ) {
       let token = localStorage.getItem( 'token' );
 
       if ( token !== null ) {
@@ -48,6 +54,11 @@ export class ToolbarComponent {
          let mom: moment.Moment = moment( this.usuarioLogueado.usuario.auditoriaFecha );
          this.ultimaActualizacion = mom.format( 'MM/DD/YYYY' );
       }
+      navService.getAvatar$.subscribe(
+         res => {
+            this.avatar = res;
+         } );
+      navService.setAvatar(this.usuarioLogueado.avatar);
    }
 
    logout(): void {

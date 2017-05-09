@@ -17,6 +17,7 @@ import any = jasmine.any;
 @Injectable()
 export class UsuariosService extends TercerosService {
 
+   private refreshServiceURL = '<%= SVC_TH_URL %>/auth/refresh';
    private usuariosServiceURL = '<%= SVC_TH_URL %>/api/usuarios/';
    private usuariosGruposServiceURL = '<%= SVC_TH_URL %>/api/usuariosGruposGestion/';
    private usuariosRolesServiceURL = '<%= SVC_TH_URL %>/api/usuariosRoles/';
@@ -115,5 +116,14 @@ export class UsuariosService extends TercerosService {
          c.fechaFin.setHours( 23 );
       }
       return this.authHttp.put( this.usuariosRolesServiceURL, JSON.stringify( c ) ).toPromise().catch( this.handleError );
+   }
+
+   refreshToken(){
+      return this.authHttp.get(this.refreshServiceURL).toPromise().then( res => {
+         let token = res.json().token;
+         if ( token ) {
+            localStorage.setItem( 'token', token );
+         }
+      });
    }
 }
