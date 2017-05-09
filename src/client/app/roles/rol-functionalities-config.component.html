@@ -8,13 +8,13 @@
                   <div class="form-group col-md-1">
                   </div>
                   <div class="ui-grid-col-10">
-                     <h3><label >Funcionalidad: </label>{{rolFuncionality.menu}}</h3>
+                     <h3><label >{{ 'ROLES.LBL_FUNCIONALIDAD' | translate}}: </label>{{rolFuncionality.menu}}</h3>
                   </div>
                </div>
             </div>
             <div class="row form-footer-buttons">
                <div class="form-group col-md-12">
-                  <button icon="fa-arrow-left" label="Regresar" type="button"
+                  <button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate}}" type="button"
                           pButton (click)="goBack()"></button>
                </div>
             </div>
@@ -31,16 +31,16 @@
             <div class="col-md-6 col-xs-12 datatable-header-search">
                <div class="input-group">
                   <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                  <input #gb type="text" pInputText size="30" placeholder="Buscar..." class="form-control">
+                  <input #gb type="text" pInputText size="30" placeholder="{{ 'LBL_BUSCAR' | translate}}" class="form-control">
                </div>
             </div>
          </div>
          <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="secciones" [paginator]="true"
                       [rows]="10" [responsive]="true" [globalFilter]="gb">
-            <p-column field="idFuncionalidadControl" header="Id" [sortable]="true"></p-column>
-            <p-column field="codigo" header="Codigo" [sortable]="true"></p-column>
-            <p-column field="control" header="Nombre" [sortable]="true"></p-column>
-            <p-column field="indicadorHabilitado" header="Consultar" [sortable]="true" styleClass="datatable-col-center">
+            <p-column field="idFuncionalidadControl" header="{{ 'LBL_ID' | translate}}" [sortable]="true"></p-column>
+            <p-column field="codigo" header="{{ 'LBL_CODIGO' | translate}}" [sortable]="true"></p-column>
+            <p-column field="control" header="{{ 'LBL_NOMBRE' | translate}}" [sortable]="true"></p-column>
+            <p-column field="indicadorHabilitado" header="{{ 'ROLES.LBL_CONSULTAR' | translate}}" [sortable]="true" styleClass="datatable-col-center">
                <template let-lfuncionalityControl="rowData" pTemplate="body">
                   <p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="lfuncionalityControl.indicadorHabilitado"
                                  (onChange)="changeControl(lfuncionalityControl)"></p-inputSwitch>
@@ -55,22 +55,22 @@
             <div class="col-md-6 col-xs-12 datatable-header-search">
                <div class="input-group">
                   <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                  <input #gb type="text" pInputText size="30" placeholder="Buscar..." class="form-control">
+                  <input #gb type="text" pInputText size="30" placeholder="{{ 'LBL_BUSCAR' | translate}}" class="form-control">
                </div>
             </div>
          </div>
-         <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="controles" [paginator]="true"
+         <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="controles" [paginator]="true"
                       [rows]="10" [responsive]="true" [globalFilter]="gb">
-            <p-column field="idFuncionalidadControl" header="Id" [sortable]="true"></p-column>
-            <p-column field="codigo" header="Código" [sortable]="true"></p-column>
-            <p-column field="control" header="Nombre" [sortable]="true"></p-column>
-            <p-column field="indicadorHabilitado" header="Visualizar" [sortable]="true" styleClass="datatable-col-center">
+            <p-column field="idFuncionalidadControl" header="{{ 'LBL_ID' | translate}}" [sortable]="true"></p-column>
+            <p-column field="codigo" header="{{ 'LBL_CODIGO' | translate}}" [sortable]="true"></p-column>
+            <p-column field="control" header="{{ 'LBL_NOMBRE' | translate}}" [sortable]="true"></p-column>
+            <p-column field="indicadorHabilitado" header="{{ 'ROLES.LBL_VISUALIZAR' | translate}}" [sortable]="true" styleClass="datatable-col-center">
                <template let-lfuncionalityControl="rowData" pTemplate="body">
                   <p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="lfuncionalityControl.indicadorHabilitado"
                                  (onChange)="changeControl(lfuncionalityControl)"></p-inputSwitch>
                </template>
             </p-column>
-            <p-column field="indicadorEditar" header="Editar" [sortable]="true" styleClass="datatable-col-center">
+            <p-column field="indicadorEditar" header="{{ 'ROLES.LBL_EDITAR' | translate}}" [sortable]="true" styleClass="datatable-col-center">
                <template let-lfuncionalityControl="rowData" pTemplate="body">
                   <p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="lfuncionalityControl.indicadorEditar"
                                  (onChange)="changeControl(lfuncionalityControl)"></p-inputSwitch>

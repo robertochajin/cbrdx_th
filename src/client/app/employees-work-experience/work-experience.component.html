@@ -6,16 +6,16 @@
         <div class="col-md-6 col-xs-12 datatable-header-search" >
           <div class="input-group">
             <div class="input-group-addon"><i class="fa fa-search"></i></div>
-            <input #gb type="text" pInputText size="30" placeholder="{{'LBL_BUSCAR' | translate:param }}" class="form-control">
+            <input #gb type="text" pInputText size="30" placeholder="{{'LBL_BUSCAR' | translate }}" class="form-control">
           </div>
         </div>
     </div>
-    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="experiences" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-        <p-column field="empresa" header="{{'EMPLOYEES.LBL_EMPRESA' | translate:param }}" [sortable]="true"></p-column>
-        <p-column field="cargo" header="{{'EMPLOYEES.LBL_CARGO' | translate:param }}" [sortable]="true"></p-column>
-        <p-column field="fechaTermina" header="{{'EMPLOYEES.LBL_FINALIZACION' | translate:param }}" [sortable]="true"></p-column>
-        <p-column field="ciudad" header="{{'LBL_CIUDAD' | translate:param }}" [sortable]="true"></p-column>
-        <p-column header="{{'LBL_ACCIONES' | translate:param }}" styleClass="datatable-col-action">
+    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="experiences" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+        <p-column field="empresa" header="{{'EMPLOYEES.LBL_EMPRESA' | translate }}" [sortable]="true"></p-column>
+        <p-column field="cargo" header="{{'EMPLOYEES.LBL_CARGO' | translate }}" [sortable]="true"></p-column>
+        <p-column field="fechaTermina" header="{{'EMPLOYEES.LBL_FINALIZACION' | translate }}" [sortable]="true"></p-column>
+        <p-column field="ciudad" header="{{'LBL_CIUDAD' | translate }}" [sortable]="true"></p-column>
+        <p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
             <template let-experience="rowData" pTemplate="body">
                 <div class="btn-group" role="group">
                     <button type="button"  class="ui-button btn" icon="fa-eye"

@@ -12,34 +12,34 @@
 
         <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate class="form-signin">
           <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-            <label for="username">{{ 'LBL_USUARIO' | translate:param }}</label>
+            <label for="username">{{ 'LBL_USUARIO' | translate }}</label>
             <div class="input-group input-block-level">
               <span class="input-group-addon"> <i class="fa fa-user"></i> </span>
               <input type="text" id="username" class="form-control" name="username"
                      [(ngModel)]="model.username" #username="ngModel" required/>
             </div>
-            <div *ngIf="f.submitted && !username.valid" class="help-block">{{ 'MSG_USUARIOREQUERIDO' | translate:param }}
+            <div *ngIf="f.submitted && !username.valid" class="help-block">{{ 'MSG_USUARIOREQUERIDO' | translate }}
             </div>
           </div>
           <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-            <label for="password">{{ 'LBL_CONTRASEÑA' | translate:param }}</label>
+            <label for="password">{{ 'LBL_CONTRASEÑA' | translate }}</label>
             <div class="input-group input-block-level">
               <span class="input-group-addon"> <i class="fa fa-key"></i> </span>
               <input type="password" id="password" class="form-control" name="password"
                      [(ngModel)]="model.password" #password="ngModel" required/>
             </div>
-            <div *ngIf="f.submitted && !password.valid" class="help-block">{{ 'MSG_DEBEINGRESARCONTRASEÑA' | translate:param }}
+            <div *ngIf="f.submitted && !password.valid" class="help-block">{{ 'MSG_DEBEINGRESARCONTRASEÑA' | translate }}
             </div>
           </div>
           <re-captcha *ngIf="intentos>=3" siteKey="6LckLxkUAAAAAFgI2q1qZaYlXAukMs-L41Gv5k72"
                       (resolved)="resolved($event)"></re-captcha>
           <div class="form-group">
-            <button id="btnIniciarSesion" [disabled]="loading" pButton label="{{ 'LBL_INICIARSESION' | translate:param }}"></button>
+            <button id="btnIniciarSesion" pButton label="{{ 'LBL_INICIARSESION' | translate }}"></button>
           </div>
           <div *ngIf="error" class="alert alert-danger">{{error}}</div>
 
           <div id="recordarcontrasena">
-            <a (click)="cambioContrasena()">{{ 'LBL_OLVIDE' | translate:param }} {{ 'LBL_CONTRASEÑA' | translate:param }}</a>
+            <a (click)="cambioContrasena()">{{ 'LBL_OLVIDE' | translate }} {{ 'LBL_CONTRASEÑA' | translate }}</a>
           </div>
         </form>
 

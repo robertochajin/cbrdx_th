@@ -1,8 +1,8 @@
 <p-messages [value]="msgs"></p-messages>
 <p-confirmDialog width="400" #cd>
    <p-footer>
-      <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
-      <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+      <button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate}}" (click)="cd.reject()"></button>
+      <button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate}}" (click)="cd.accept()"></button>
    </p-footer>
 </p-confirmDialog>
 <div *ngIf="addinglocation">
@@ -18,51 +18,51 @@
          <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
             <div class="ui-grid-row">
                <div class="ui-grid-col-8">
-                  <label for="nombre">Nombre</label>
+                  <label for="nombre">{{ 'LBL_NOMBRE' | translate}}</label>
                   <input id="nombre" name="nombre" #nombre="ngModel" pInputText type="text"
                          [(ngModel)]="physicStructure.estructuraFisica" required="true" (keyup)="capitalize($event)"/>
                   <div class="ui-message ui-messages-error ui-corner-all"
                        *ngIf="f.submitted && !nombre.valid">
                      <i class="fa fa-close"></i>
-                     Nombre requerido
+                     {{ 'ESTRUCTURAFISICA.MSG_NOMBREREQUERIDO' | translate}}
                   </div>
                </div>
                <div class="ui-grid-col-4">
-                  <label for="codigo">Código</label>
+                  <label for="codigo">{{ 'LBL_CODIGO' | translate}}</label>
                   <input id="codigo" name="codigo" #codigo="ngModel" pInputText type="text"
                          [(ngModel)]="physicStructure.codigo" required="true" maxlength="15" pattern="[A-Z0-9]{0,15}"
                          (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
                          (paste)="inputCleanUp($event.target.value)"/>
                   <div *ngIf="codExists" class="alert alert-danger">
-                     Ya se encuentra registrado ese codigo
+                     {{ 'ESTRUCTURAFISICA.MSG_CODREGISTRADO' | translate}}
                   </div>
                   <div class="ui-message ui-messages-error ui-corner-all"
                        *ngIf="f.submitted && !codigo.valid">
                      <i class="fa fa-close"></i>
-                     Codigo requerido
+                     {{ 'ESTRUCTURAFISICA.MSG_CODREQUERIDO' | translate}}
                   </div>
                </div>
             </div>
             <div class="ui-grid-row">
                <div class="ui-grid-col-9">
-                  <label for="direccion">Dirección</label>
+                  <label for="direccion">{{ 'LBL_DIRECCION' | translate}}</label>
                   <input id="direccion" name="direccion" #direc="ngModel" pInputText type="text"
                          [(ngModel)]="physicStructure.direccion" required disabled/>
                   <div class="ui-message ui-messages-error ui-corner-all"
                        *ngIf="f.submitted && physicStructure.direccion===''">
                      <i class="fa fa-close"></i>
-                     Dirección requerida
+                     {{ 'ESTRUCTURAFISICA.MSG_DIRREQUERIDO' | translate}}
                   </div>
                </div>
                <div class="ui-grid-col-3">
                   <label for="direccion"></label>
-                  <button *ngIf="physicStructure.idEstructuraFisica===null"pButton icon="fa-plus" label="Agregar Dirección" (click)="toggleform()"></button>
-                  <button *ngIf="physicStructure.idEstructuraFisica!==null" pButton icon="fa-plus" label="Editar Dirección" (click)="toggleform()"></button>
+                  <button *ngIf="physicStructure.idEstructuraFisica===null"pButton icon="fa-plus" label="{{ 'ESTRUCTURAFISICA.BTN_AGREGADIRECCION' | translate}}" (click)="toggleform()"></button>
+                  <button *ngIf="physicStructure.idEstructuraFisica!==null" pButton icon="fa-plus" label="{{ 'ESTRUCTURAFISICA.BTN_EDITADIRECCION' | translate}}" (click)="toggleform()"></button>
                </div>
             </div>
             <div class="ui-grid-row">
                <div class="ui-grid-col-6">
-                  <label for="telefono">Teléfono</label>
+                  <label for="telefono">{{ 'LBL_TELEFONO' | translate}}</label>
                   <p-inputMask id="telefono" name="telefono"
                                mask="?(999) 999-9999 Ext 9999" placeholder="(999) 999-9999 Ext 99999"
                                [(ngModel)]="physicStructure.telefono" #telefono="ngModel"
@@ -70,12 +70,12 @@
                   <div class="ui-message ui-messages-error ui-corner-all"
                        *ngIf="f.submitted && physicStructure.telefono===null">
                      <i class="fa fa-close"></i>
-                     Teléfono requerido
+                     {{ 'ESTRUCTURAFISICA.LBL_TELEFONOREQ' | translate}}
                   </div>
 
                </div>
                <div class="ui-grid-col-6">
-                  <label for="celular">Celular</label>
+                  <label for="celular">{{ 'LBL_CELULAR' | translate}}</label>
                   <p-inputMask id="celular" name="celular"
                                mask="?(999) 999-9999" placeholder="(999) 999-9999"
                                [(ngModel)]="physicStructure.celular" #celular="ngModel"
@@ -84,19 +84,19 @@
             </div>
             <div class="ui-grid-row">
                <div class="ui-grid-col-12">
-                  <label for="correo">Correo Electrónico</label>
+                  <label for="correo">{{ 'LBL_CORREOELECTRONICO' | translate}}</label>
                   <input id="correo" name="correo" #correo="ngModel" pInputText type="text"
                          [(ngModel)]="physicStructure.correoElectronico" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"/>
                   <div class="ui-message ui-messages-error ui-corner-all"
                        *ngIf="f.submitted &&!correo.valid">
                      <i class="fa fa-close"></i>
-                     Correo Electrónico no valido
+                     {{ 'ESTRUCTURAFISICA.MSG_CORREONOVALIDO' | translate}}
                   </div>
                </div>
             </div>
             <div class="ui-grid-row">
                <div class="ui-grid-col-12">
-                  <label for="categoria">Categoría</label>
+                  <label for="categoria">{{ 'ESTRUCTURAFISICA.LBL_CATEGORIA' | translate}}</label>
                   <p-dropdown id="categoria" name="categoria" required="true"
                               [options]="ListCategory" [autoWidth]="false"
                               [(ngModel)]="physicStructure.idClasificacionSede"
@@ -105,18 +105,18 @@
                   <div class="ui-message ui-messages-error ui-corner-all"
                        *ngIf="f.submitted && !categoria.valid">
                      <i class="fa fa-close"></i>
-                     Categoria requerida
+                     {{ 'ESTRUCTURAFISICA.MSG_CATEGORIAREQ' | translate}}
                   </div>
                </div>
             </div>
             <div class="ui-grid-row">
                <div class="ui-grid-col-3">
-                  <label for="Habilitado">Habilitado</label>
+                  <label for="Habilitado">{{ 'LBL_HABILITADO' | translate}}</label>
                   <p-checkbox id="Habilitado" name="Habilitado" [(ngModel)]="physicStructure.indicadorHabilitado"
                               binary="true"></p-checkbox>
                </div>
                <div class="ui-grid-col-3">
-                  <label for="virtual">Virtual</label>
+                  <label for="virtual">{{ 'ESTRUCTURAFISICA.LBL_VIRTUAL' | translate}}</label>
                   <p-checkbox id="virtual" name="virtual" [(ngModel)]="physicStructure.indicadorVirtual"
                               binary="true"></p-checkbox>
                </div>
@@ -124,10 +124,10 @@
             <div class="ui-grid-row form-footer-buttons">
                <div class="ui-grid-col-4"></div>
                <div class="ui-grid-col-1">
-                  <a (click)="goBack()" class="cancelar">Cancelar</a>
+                  <a (click)="goBack()" class="cancelar">{{ 'BTN_CANCELAR' | translate}}</a>
                </div>
                <div class="ui-grid-col-2">
-                  <button pButton icon="fa-plus" label="Guardar" type="submit" (click)="focusUP()"></button>
+                  <button pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate}}" type="submit" (click)="focusUP()"></button>
                </div>
                <div class="ui-grid-col-5"></div>
             </div>

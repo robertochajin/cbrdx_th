@@ -1,26 +1,27 @@
-<h3 class="first">{{'EMPLOYEES.LBL_COLABORADORES' | translate:param}}</h3>
+<h3 class="first">{{'EMPLOYEES.LBL_COLABORADORES' | translate}}</h3>
 <div>
     <div class="row datable-header">
         <div class="col-md-6 col-xs-12 datatable-header-add">
-            <button type="button" icon="fa-plus" label="{{'EMPLOYEES.LBL_NUEVOCOLABORADOR' | translate:param}}"
+            <button type="button" icon="fa-plus" label="{{'EMPLOYEES.LBL_NUEVOCOLABORADOR' | translate}}"
                     pButton (click)="add()"></button>
         </div>
         <div class="col-md-6 col-xs-12 datatable-header-search" >
 
           <div class="input-group">
             <div class="input-group-addon"><i class="fa fa-search"></i></div>
-            <input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate:param}}" class="form-control">
+            <input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate}}" class="form-control"
+                   [(ngModel)]="busqueda" (change)="setSearch()">
           </div>
 
         </div>
     </div>
 
-    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="employees" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-        <p-column field="numeroDocumento" header="{{'LBL_NUMERODOCUMENTO' | translate:param}}" [sortable]="true"></p-column>
-        <p-column field="nombreCompleto" header="{{'LBL_NOMBRE' | translate:param}}" [sortable]="true"></p-column>
-        <p-column field="fechaCreacion" header="{{'EMPLOYEES.LBL_DESDE' | translate:param}}" [sortable]="true"></p-column>
+    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="employees" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+        <p-column field="numeroDocumento" header="{{'LBL_NUMERODOCUMENTO' | translate}}" [sortable]="true"></p-column>
+        <p-column field="nombreCompleto" header="{{'LBL_NOMBRE' | translate}}" [sortable]="true"></p-column>
+        <p-column field="fechaCreacion" header="{{'EMPLOYEES.LBL_DESDE' | translate}}" [sortable]="true"></p-column>
         <!--<p-column field="cargoActual" header="Cargo Actual" [sortable]="true"></p-column>-->
-        <p-column header="{{'LBL_ACCIONES' | translate:param}}" styleClass="datatable-col-action">
+        <p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
             <template let-employee="rowData" pTemplate="body">
 
                     <button type="button" icon="fa-eye" class="ui-button-info"

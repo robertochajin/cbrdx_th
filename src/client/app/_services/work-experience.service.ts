@@ -20,7 +20,8 @@ export class WorkExperienceService {
    }
 
    getByEmployee( idTercero: number ) {
-      return this.authHttp.get( this.serviceURL + 'tercerosExperienciasLaborales/buscarTercero/' + idTercero ).map( ( res: Response ) => res.json() );
+      return this.authHttp.get( this.serviceURL + 'tercerosExperienciasLaborales/buscarTercero/' + idTercero )
+      .map( ( res: Response ) => res.json() );
    }
 
    add( c: Workexperience ) {

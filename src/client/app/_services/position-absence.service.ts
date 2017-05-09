@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Absence } from '../_models/position-absence';
-import { AuthHttp } from "angular2-jwt";
+import { AuthHttp } from 'angular2-jwt';
 @Injectable()
 export class AbsenceService {
 
@@ -11,15 +11,18 @@ export class AbsenceService {
    }
 
    getReemplazaA( id: number ) {
-      return this.authHttp.get( this.serviceURL + 'cargosRelacionados/buscarRelacion/REE/' + id ).map( ( res: Response ) => res.json() as Absence[] );
+      return this.authHttp.get( this.serviceURL + 'cargosRelacionados/buscarRelacion/REE/' + id )
+      .map( ( res: Response ) => res.json() as Absence[] );
    }
 
    getSupervisa( id: number ) {
-      return this.authHttp.get( this.serviceURL + 'cargosRelacionados/buscarRelacion/SUP/' + id ).map( ( res: Response ) => res.json() as Absence[] );
+      return this.authHttp.get( this.serviceURL + 'cargosRelacionados/buscarRelacion/SUP/' + id )
+      .map( ( res: Response ) => res.json() as Absence[] );
    }
 
    getReemplazado( id: number ) {
-      return this.authHttp.get( this.serviceURL + 'cargosRelacionados/buscarRelacion/REP/' + id ).map( ( res: Response ) => res.json() as Absence[] );
+      return this.authHttp.get( this.serviceURL + 'cargosRelacionados/buscarRelacion/REP/' + id )
+      .map( ( res: Response ) => res.json() as Absence[] );
    }
 
    getPositionAll() {
