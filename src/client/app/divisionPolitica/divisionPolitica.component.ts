@@ -14,7 +14,7 @@ import { Search } from '../_models/search';
 @Component( {
                moduleId: module.id,
                templateUrl: 'divisionPolitica.component.html',
-               selector: 'divisionPolitica',
+               selector: 'division-politica',
 
             } )
 export class DivisionPoliticaComponent implements OnInit {
@@ -127,13 +127,13 @@ export class DivisionPoliticaComponent implements OnInit {
       this.divisionPoliticaService.listDivisionPoliticaTipos().subscribe( res => {
          this.listadoDivisionPoliticaTipos = res;
          this.newCountry();
-         //console.info(res);
+         //  console.info(res);
       } );
 
    }
 
    ngOnInit(): void {
-      //this.newCountry();
+      //  this.newCountry();
    }
 
    goBack(): void {
@@ -150,7 +150,7 @@ export class DivisionPoliticaComponent implements OnInit {
          chil = [ {
             'label': '+ Cargando...',
          }
-         ]
+         ];
       }
       for ( let c of this.listadoTodo.filter( t => t.idDivisionPoliticaPadre === node.data.idDivisionPolitica ) ) {
          divisionPoliticaNivel.push( {
@@ -169,7 +169,7 @@ export class DivisionPoliticaComponent implements OnInit {
       let nodeCode = this.getCodigoTypebyId( node.data.idDivisionPoliticaTipo );
 
       this.tabselected = nodeCode.length;
-      //console.info(node.data);
+      //  console.info(node.data);
 
       this.header = node.data.descripcionDivisonPolitica;
       this.btnnuevodepartamento.show = false;
@@ -238,7 +238,7 @@ export class DivisionPoliticaComponent implements OnInit {
 
    save() {
       if ( this.politicalDivision.idDivisionPolitica === null || this.politicalDivision.idDivisionPolitica === 0 ) {
-         //console.info(this.politicalDivision);
+         // console.info(this.politicalDivision);
 
          this.divisionPoliticaService.addDivisionPolitica( this.politicalDivision ).then( data => {
             this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Nuevo registro' } );
@@ -247,14 +247,14 @@ export class DivisionPoliticaComponent implements OnInit {
                chil = [ {
                   'label': '+ Cargando...',
                }
-               ]
+               ];
             }
             let newChil: any = {
                'label': this.politicalDivision.descripcionDivisonPolitica,
                'data': data,
                'children': chil
             };
-            //console.info(this.politicalDivision);
+            // console.info(this.politicalDivision);
             this.listadoTodo.push( data );
             if ( this.politicalDivision.idDivisionPoliticaPadre === 0 ) {
                this.treedivisionPolitica.push( newChil );
@@ -364,7 +364,7 @@ export class DivisionPoliticaComponent implements OnInit {
       }
       this.politicalDivision.idDivisionPoliticaTipo = this.divisionPoliticaTipos[ 0 ].value;
       this.changeTipoID( this.politicalDivision.idDivisionPoliticaTipo );
-      //console.log(this.politicalDivision);
+      // console.log(this.politicalDivision);
    }
 
    getCodigoTypebyId( id: number ) {
@@ -429,7 +429,7 @@ export class DivisionPoliticaComponent implements OnInit {
 
    captureId( event: Search ) {
 
-      // ScrollTo 0;
+      //  ScrollTo 0;
       jQuery( '#trvDivisionPolitica' ).scrollTop( 0 );
 
       this.divisionPoliticaService.viewDivisionPolitica( event.value ).subscribe( res => {
@@ -448,7 +448,7 @@ export class DivisionPoliticaComponent implements OnInit {
             this.labelPadre = '';
          }
 
-         // Scroll to Select
+         //  Scroll to Select
          setTimeout( () => {
             jQuery( '#trvDivisionPolitica' ).scrollTop(
                jQuery( '.ui-state-highlight' ).position().top - jQuery( '#trvDivisionPolitica' ).height() / 2
@@ -458,7 +458,7 @@ export class DivisionPoliticaComponent implements OnInit {
       } );
    }
 
-   private searchRecursive( res: DivisionPolitica ) {
+   searchRecursive( res: DivisionPolitica ) {
       let node4: number = 0;
       let node3: number = 0;
       let node2: number = 0;
@@ -504,7 +504,7 @@ export class DivisionPoliticaComponent implements OnInit {
 
    }
 
-   private searchLevel( id: number, tipo: number ) {
+   searchLevel( id: number, tipo: number ) {
 
       if ( tipo === 1 ) {
          this.treedivisionPolitica.forEach( node => {

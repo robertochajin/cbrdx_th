@@ -103,7 +103,8 @@ export class FormalStudiesAddComponent implements OnInit {
    onSubmit( value: string ) {
       this.submitted = true;
       if ( this.selectedCity !== undefined && this.selectedCity.idDivisionPolitica !== undefined ) {
-         if ( (this.fstudy.otraInstitucion !== '' && this.fstudy.otraInstitucion !== null) || (this.selectedInstitute !== null && this.selectedInstitute.idLista !== null) ) {
+         if ( (this.fstudy.otraInstitucion !== '' && this.fstudy.otraInstitucion !== null) ||
+              (this.selectedInstitute !== null && this.selectedInstitute.idLista !== null) ) {
             this.msgs = [];
             this.fstudy.idCiudad = this.selectedCity.idDivisionPolitica;
             this.fstudy.idTercero = this.idTercero;

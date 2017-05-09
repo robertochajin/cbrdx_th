@@ -5,7 +5,7 @@ import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod } fr
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
 export let fakeBackendProvider = {
-   // use fake backend in place of Http service for backend-less development
+   //  use fake backend in place of Http service for backend-less development
    provide: Http,
    useFactory: ( backend: MockBackend, options: BaseRequestOptions ) => {
 
@@ -586,15 +586,15 @@ export let fakeBackendProvider = {
          { 'value': '4', 'label': 'Sub Sector D' },
          { 'value': '5', 'label': 'Sub Sector E' },
          { 'value': '6', 'label': 'Sub Sector F' },
-      ]
+      ];
 
-      // configure fake backend
+      //  configure fake backend
       backend.connections.subscribe( ( connection: MockConnection ) => {
-         // wrap in timeout to simulate server api call
+         //  wrap in timeout to simulate server api call
          setTimeout( () => {
 
             /*================ Colaboradores ================*/
-            // obtiene todos los Colaboradores
+            //  obtiene todos los Colaboradores
             if ( connection.request.url.endsWith( '/api/employees' ) && connection.request.method === RequestMethod.Get ) {
 
                connection.mockRespond( new Response( new ResponseOptions( {
@@ -604,10 +604,10 @@ export let fakeBackendProvider = {
 
             }
 
-            // obtiene un colaborador por el id
+            //  obtiene un colaborador por el id
             if ( connection.request.url.match( /\/api\/employees\/\d+$/ ) && connection.request.method === RequestMethod.Get ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
-               // application find user by id in users array
+               //  check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               //  application find user by id in users array
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matchedUsers = employees.filter( employee => {
@@ -615,53 +615,53 @@ export let fakeBackendProvider = {
                } );
                let employee = matchedUsers.length ? matchedUsers[ 0 ] : null;
 
-               // respond 200 OK with user
+               //  respond 200 OK with user
                connection.mockRespond( new Response( new ResponseOptions( { status: 200, body: { data: employee } } ) ) );
 
                return;
 
             }
 
-            // crea un colaborador en el local
+            //  crea un colaborador en el local
             if ( connection.request.url.endsWith( '/api/employees' ) && connection.request.method === RequestMethod.Post ) {
-               // get new user object from post body
+               //  get new user object from post body
                let newColaborador = JSON.parse( connection.request.getBody() );
 
-               // save new user
+               //  save new user
                newColaborador.idColaborador = employees.length + 1;
                employees.push( newColaborador );
                localStorage.setItem( 'employees', JSON.stringify( employees ) );
 
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
 
                return;
             }
 
-            // actualizar un colaborador
+            //  actualizar un colaborador
             if ( connection.request.url.match( /\/api\/employees\/\d+$/ ) && connection.request.method === RequestMethod.Put ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
-               // application find user by id in users array
+               //  check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               //  application find user by id in users array
                let updColaborador = JSON.parse( connection.request.getBody() );
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                for ( let i = 0; i < employees.length; i++ ) {
                   let col = employees[ i ];
                   if ( col.idColaborador === id ) {
-                     // delete user
+                     //  delete user
                      employees[ i ] = updColaborador;
                      localStorage.setItem( 'employees', JSON.stringify( employees ) );
                      break;
                   }
                }
 
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
 
                return;
             }
 
-            // elimina un colaborador del localstorage
+            //  elimina un colaborador del localstorage
             if ( connection.request.url.match( /\/api\/employees\/\d+$/ ) && connection.request.method === RequestMethod.Delete ) {
 
                let urlParts = connection.request.url.split( '/' );
@@ -670,19 +670,19 @@ export let fakeBackendProvider = {
                for ( let i = 0; i < employees.length; i++ ) {
                   let col = employees[ i ];
                   if ( col.idColaborador === id ) {
-                     // delete user
+                     //  delete user
                      employees.splice( i, 1 );
                      localStorage.setItem( 'employees', JSON.stringify( employees ) );
                      break;
                   }
                }
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
             }
 
             /*================ Ubicaciones ================*/
 
-            // obtiene el listado de Ubicaciones
+            //  obtiene el listado de Ubicaciones
             if ( connection.request.url.endsWith( '/api/employees-location' ) && connection.request.method === RequestMethod.Get ) {
 
                connection.mockRespond( new Response( new ResponseOptions( {
@@ -692,10 +692,10 @@ export let fakeBackendProvider = {
 
             }
 
-            // obtiene un Ubicacion por el id
+            //  obtiene un Ubicacion por el id
             if ( connection.request.url.match( /\/api\/employees-location\/\d+$/ ) && connection.request.method === RequestMethod.Get ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
-               // application find user by id in users array
+               //  check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               //  application find user by id in users array
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matched = locations.filter( location => {
@@ -703,19 +703,19 @@ export let fakeBackendProvider = {
                } );
                let location = matched.length ? matched[ 0 ] : null;
 
-               // respond 200 OK with user
+               //  respond 200 OK with user
                connection.mockRespond( new Response( new ResponseOptions( { status: 200, body: { data: location } } ) ) );
 
                return;
 
             }
 
-            // crea un Ubicacion en el local
+            //  crea un Ubicacion en el local
             if ( connection.request.url.endsWith( '/api/employees-location' ) && connection.request.method === RequestMethod.Post ) {
-               // get new user object from post body
+               //  get new user object from post body
                let newlocation = JSON.parse( connection.request.getBody() );
 
-               // save new user
+               //  save new user
                newlocation.idUbicacion = locations.length + 1;
 
                let matchedAddressType = addressTypeList.filter( rel => {
@@ -729,16 +729,16 @@ export let fakeBackendProvider = {
                locations.push( newlocation );
                localStorage.setItem( 'locations', JSON.stringify( locations ) );
 
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
 
                return;
             }
 
-            // actualizar un Ubicacion
+            //  actualizar un Ubicacion
             if ( connection.request.url.match( /\/api\/employees-location\/\d+$/ ) && connection.request.method === RequestMethod.Put ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
-               // application find user by id in users array
+               //  check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               //  application find user by id in users array
                let newlocation = JSON.parse( connection.request.getBody() );
 
                let matchedAddressType = addressTypeList.filter( rel => {
@@ -754,20 +754,20 @@ export let fakeBackendProvider = {
                for ( let i = 0; i < locations.length; i++ ) {
                   let col = locations[ i ];
                   if ( col.idUbicacion === id ) {
-                     // delete user
+                     //  delete user
                      locations[ i ] = newlocation;
                      localStorage.setItem( 'locations', JSON.stringify( locations ) );
                      break;
                   }
                }
 
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
 
                return;
             }
 
-            // elimina un Ubicacion del localstorage
+            //  elimina un Ubicacion del localstorage
             if ( connection.request.url.match( /\/api\/employees-location\/\d+$/ ) && connection.request.method === RequestMethod.Delete ) {
 
                let urlParts = connection.request.url.split( '/' );
@@ -776,38 +776,38 @@ export let fakeBackendProvider = {
                for ( let i = 0; i < locations.length; i++ ) {
                   let col = locations[ i ];
                   if ( col.idUbicacion === id ) {
-                     // delete user
+                     //  delete user
                      locations.splice( i, 1 );
                      localStorage.setItem( 'locations', JSON.stringify( locations ) );
                      break;
                   }
                }
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
             }
 
-            // obtiene un listado de ciudades filtrado por el query
+            //  obtiene un listado de ciudades filtrado por el query
             if ( connection.request.url.match( /\/api\/cities\/s\/\w+/ ) && connection.request.method === RequestMethod.Get ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
-               // application find user by id in users array
+               //  check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               //  application find user by id in users array
                let urlParts = connection.request.url.split( '/' );
                let qr = urlParts[ urlParts.length - 1 ];
                let matched = cities.filter( cities => {
-                  //return cities.value.match(/^qr.*$/);
+                  // return cities.value.match(/^qr.*$/);
                   if ( cities.label.match( /[qr]+/ ) ) {
                      return cities;
                   }
                } );
                matched = matched.length ? matched : null;
 
-               // respond 200 OK with user
+               //  respond 200 OK with user
                connection.mockRespond( new Response( new ResponseOptions( { status: 200, body: { data: matched } } ) ) );
 
                return;
 
             }
 
-            //Listado de nomenclaturas principales
+            // Listado de nomenclaturas principales
             if ( connection.request.url.endsWith( '/api/principal-nomenclature' ) && connection.request.method === RequestMethod.Get ) {
 
                connection.mockRespond( new Response( new ResponseOptions( {
@@ -817,7 +817,7 @@ export let fakeBackendProvider = {
 
             }
 
-            //Listado de tipos de nomenclaturas complementarias
+            // Listado de tipos de nomenclaturas complementarias
             if ( connection.request.url.endsWith( '/api/complementary-nomenclature' ) && connection.request.method === RequestMethod.Get ) {
 
                connection.mockRespond( new Response( new ResponseOptions( {
@@ -827,7 +827,7 @@ export let fakeBackendProvider = {
 
             }
 
-            //Listado de tipos de direcciones
+            // Listado de tipos de direcciones
             if ( connection.request.url.endsWith( '/api/address-types' ) && connection.request.method === RequestMethod.Get ) {
 
                connection.mockRespond( new Response( new ResponseOptions( {
@@ -839,7 +839,7 @@ export let fakeBackendProvider = {
 
             /*================ Familiares ================*/
 
-            // obtiene el listado de familiares
+            //  obtiene el listado de familiares
             if ( connection.request.url.endsWith(
                   '/api/employees-family-information' ) && connection.request.method === RequestMethod.Get ) {
 
@@ -850,11 +850,11 @@ export let fakeBackendProvider = {
 
             }
 
-            // obtiene un familiar por el id
+            //  obtiene un familiar por el id
             if ( connection.request.url.match(
                   /\/api\/employees-family-information\/\d+$/ ) && connection.request.method === RequestMethod.Get ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
-               // application find user by id in users array
+               //  check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               //  application find user by id in users array
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matched = familys.filter( family => {
@@ -862,20 +862,20 @@ export let fakeBackendProvider = {
                } );
                let family = matched.length ? matched[ 0 ] : null;
 
-               // respond 200 OK with user
+               //  respond 200 OK with user
                connection.mockRespond( new Response( new ResponseOptions( { status: 200, body: { data: family } } ) ) );
 
                return;
 
             }
 
-            // crea un familiar en el local
+            //  crea un familiar en el local
             if ( connection.request.url.endsWith(
                   '/api/employees-family-information' ) && connection.request.method === RequestMethod.Post ) {
-               // get new user object from post body
+               //  get new user object from post body
                let newFamily = JSON.parse( connection.request.getBody() );
 
-               // save new user
+               //  save new user
                newFamily.idFamiliar = familys.length + 1;
                let matchedTypes = documentTypes.filter( types => {
                   return types.value === newFamily.tipoDeDocumento;
@@ -890,17 +890,17 @@ export let fakeBackendProvider = {
                familys.push( newFamily );
                localStorage.setItem( 'familys', JSON.stringify( familys ) );
 
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
 
                return;
             }
 
-            // actualizar un familiar
+            //  actualizar un familiar
             if ( connection.request.url.match(
                   /\/api\/employees-family-information\/\d+$/ ) && connection.request.method === RequestMethod.Put ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
-               // application find user by id in users array
+               //  check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               //  application find user by id in users array
                let newFamily = JSON.parse( connection.request.getBody() );
 
                let matchedTypes = documentTypes.filter( types => {
@@ -918,20 +918,20 @@ export let fakeBackendProvider = {
                for ( let i = 0; i < familys.length; i++ ) {
                   let col = familys[ i ];
                   if ( col.idFamiliar === id ) {
-                     // delete user
+                     //  delete user
                      familys[ i ] = newFamily;
                      localStorage.setItem( 'familys', JSON.stringify( familys ) );
                      break;
                   }
                }
 
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
 
                return;
             }
 
-            // elimina un familiar del localstorage
+            //  elimina un familiar del localstorage
             if ( connection.request.url.match(
                   /\/api\/employees-family-information\/\d+$/ ) && connection.request.method === RequestMethod.Delete ) {
 
@@ -941,18 +941,18 @@ export let fakeBackendProvider = {
                for ( let i = 0; i < familys.length; i++ ) {
                   let col = familys[ i ];
                   if ( col.idFamiliar === id ) {
-                     // delete user
+                     //  delete user
                      familys.splice( i, 1 );
                      localStorage.setItem( 'familys', JSON.stringify( familys ) );
                      break;
                   }
                }
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
             }
-//Referencias
+// Referencias
 
-            // obtiene el referencias
+            //  obtiene el referencias
             if ( connection.request.url.endsWith( '/api/references' ) && connection.request.method === RequestMethod.Get ) {
 
                connection.mockRespond( new Response( new ResponseOptions( {
@@ -962,10 +962,10 @@ export let fakeBackendProvider = {
 
             }
 
-            // obtiene una referencia por el id
+            //  obtiene una referencia por el id
             if ( connection.request.url.match( /\/api\/references\/\d+$/ ) && connection.request.method === RequestMethod.Get ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
-               // application find user by id in users array
+               //  check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               //  application find user by id in users array
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matched = references.filter( reference => {
@@ -973,16 +973,16 @@ export let fakeBackendProvider = {
                } );
                let reference = matched.length ? matched[ 0 ] : null;
 
-               // respond 200 OK with user
+               //  respond 200 OK with user
                connection.mockRespond( new Response( new ResponseOptions( { status: 200, body: { data: reference } } ) ) );
 
                return;
 
             }
 
-            // crea una referencia en el localstorage
+            //  crea una referencia en el localstorage
             if ( connection.request.url.endsWith( '/api/references' ) && connection.request.method === RequestMethod.Post ) {
-               // get new user object from post body
+               //  get new user object from post body
                let newReference = JSON.parse( connection.request.getBody() );
 
                let matchedreferencesType = referencesTypeList.filter( rel => {
@@ -991,21 +991,21 @@ export let fakeBackendProvider = {
 
                newReference.tipodeReferencia = matchedreferencesType.length ? matchedreferencesType[ 0 ] : null;
 
-               // save new user
+               //  save new user
                newReference.idReferencia = references.length + 1;
                references.push( newReference );
                localStorage.setItem( 'references', JSON.stringify( references ) );
 
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
 
                return;
             }
 
-            // actualizar una referencia
+            //  actualizar una referencia
             if ( connection.request.url.match( /\/api\/references\/\d+$/ ) && connection.request.method === RequestMethod.Put ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
-               // application find user by id in users array
+               //  check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               //  application find user by id in users array
                let newReference = JSON.parse( connection.request.getBody() );
                let matchedreferencesType = referencesTypeList.filter( rel => {
                   return rel.value === newReference.tipodeReferencia.value;
@@ -1017,20 +1017,20 @@ export let fakeBackendProvider = {
                for ( let i = 0; i < references.length; i++ ) {
                   let col = references[ i ];
                   if ( col.idReferencia === id ) {
-                     // delete user
+                     //  delete user
                      references[ i ] = newReference;
                      localStorage.setItem( 'references', JSON.stringify( references ) );
                      break;
                   }
                }
 
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
 
                return;
             }
 
-            // elimina una referencias del localstorage
+            //  elimina una referencias del localstorage
             if ( connection.request.url.match( /\/api\/references\/\d+$/ ) && connection.request.method === RequestMethod.Delete ) {
 
                let urlParts = connection.request.url.split( '/' );
@@ -1039,19 +1039,19 @@ export let fakeBackendProvider = {
                for ( let i = 0; i < references.length; i++ ) {
                   let col = references[ i ];
                   if ( col.idReferencia === id ) {
-                     // delete user
+                     //  delete user
                      references.splice( i, 1 );
                      localStorage.setItem( 'references', JSON.stringify( references ) );
                      break;
                   }
                }
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
             }
 
-//Estudios formales
+// Estudios formales
 
-            //Listado de tipos de nivel de estudios
+            // Listado de tipos de nivel de estudios
             if ( connection.request.url.endsWith( '/api/study-level' ) && connection.request.method === RequestMethod.Get ) {
 
                connection.mockRespond( new Response( new ResponseOptions( {
@@ -1061,7 +1061,7 @@ export let fakeBackendProvider = {
 
             }
 
-            //Listado de tipos de areas de estudio
+            // Listado de tipos de areas de estudio
             if ( connection.request.url.endsWith( '/api/study-area' ) && connection.request.method === RequestMethod.Get ) {
 
                connection.mockRespond( new Response( new ResponseOptions( {
@@ -1071,7 +1071,7 @@ export let fakeBackendProvider = {
 
             }
 
-            //Listado de estados de estudio
+            // Listado de estados de estudio
             if ( connection.request.url.endsWith( '/api/study-state' ) && connection.request.method === RequestMethod.Get ) {
 
                connection.mockRespond( new Response( new ResponseOptions( {
@@ -1081,7 +1081,7 @@ export let fakeBackendProvider = {
 
             }
 
-            //Listado de estados de estudio
+            // Listado de estados de estudio
             if ( connection.request.url.endsWith( '/api/study-type' ) && connection.request.method === RequestMethod.Get ) {
 
                connection.mockRespond( new Response( new ResponseOptions( {
@@ -1091,7 +1091,7 @@ export let fakeBackendProvider = {
 
             }
 
-            //Listado de estados de estudio
+            // Listado de estados de estudio
             if ( connection.request.url.endsWith( '/api/study-intensity' ) && connection.request.method === RequestMethod.Get ) {
 
                connection.mockRespond( new Response( new ResponseOptions( {
@@ -1101,10 +1101,10 @@ export let fakeBackendProvider = {
 
             }
 
-            // obtiene un listado de instituciones filtrado por el query
+            //  obtiene un listado de instituciones filtrado por el query
             if ( connection.request.url.match( /\/api\/institute\/s\/\w+/ ) && connection.request.method === RequestMethod.Get ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
-               // application find user by id in users array
+               //  check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               //  application find user by id in users array
                let urlParts = connection.request.url.split( '/' );
                let qr = urlParts[ urlParts.length - 1 ];
                let matched = institutes.filter( institude => {
@@ -1114,14 +1114,14 @@ export let fakeBackendProvider = {
                } );
                matched = matched.length ? matched : null;
 
-               // respond 200 OK with user
+               //  respond 200 OK with user
                connection.mockRespond( new Response( new ResponseOptions( { status: 200, body: { data: matched } } ) ) );
 
                return;
 
             }
 
-            // obtiene todos
+            //  obtiene todos
             if ( connection.request.url.endsWith( '/api/formalstudies' ) && connection.request.method === RequestMethod.Get ) {
 
                connection.mockRespond( new Response( new ResponseOptions( {
@@ -1131,10 +1131,10 @@ export let fakeBackendProvider = {
 
             }
 
-            // obtiene una  por el id
+            //  obtiene una  por el id
             if ( connection.request.url.match( /\/api\/formalstudies\/\d+$/ ) && connection.request.method === RequestMethod.Get ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
-               // application find user by id in users array
+               //  check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               //  application find user by id in users array
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matched = fstudies.filter( fstudy => {
@@ -1142,19 +1142,19 @@ export let fakeBackendProvider = {
                } );
                let study = matched.length ? matched[ 0 ] : null;
 
-               // respond 200 OK with user
+               //  respond 200 OK with user
                connection.mockRespond( new Response( new ResponseOptions( { status: 200, body: { data: study } } ) ) );
 
                return;
 
             }
 
-            // crea una  en el localstorage
+            //  crea una  en el localstorage
             if ( connection.request.url.endsWith( '/api/formalstudies' ) && connection.request.method === RequestMethod.Post ) {
-               // get new user object from post body
+               //  get new user object from post body
                let news = JSON.parse( connection.request.getBody() );
 
-               // save new formal study
+               //  save new formal study
                news.idEstudio = fstudies.length + 1;
                news.ciudad = cities.find( c => c.value === news.ciudad.value );
                news.estadoEstudio = studyStateList.find( s => s.value === news.estadoEstudio.value );
@@ -1164,16 +1164,16 @@ export let fakeBackendProvider = {
                fstudies.push( news );
                localStorage.setItem( 'fstudies', JSON.stringify( fstudies ) );
 
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
 
                return;
             }
 
-            // actualizar una
+            //  actualizar una
             if ( connection.request.url.match( /\/api\/formalstudies\/\d+$/ ) && connection.request.method === RequestMethod.Put ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
-               // application find user by id in users array
+               //  check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               //  application find user by id in users array
                let news = JSON.parse( connection.request.getBody() );
                news.nombreCompleto = news.primerNombre + ' ' + news.segundoNombre + ' ' + news.primerApellido + ' ' + news.segundoApellido;
                let urlParts = connection.request.url.split( '/' );
@@ -1181,20 +1181,20 @@ export let fakeBackendProvider = {
                for ( let i = 0; i < fstudies.length; i++ ) {
                   let col = fstudies[ i ];
                   if ( col.idEstudio === id ) {
-                     // delete user
+                     //  delete user
                      fstudies[ i ] = news;
                      localStorage.setItem( 'references', JSON.stringify( fstudies ) );
                      break;
                   }
                }
 
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
 
                return;
             }
 
-            // elimina una  del localstorage
+            //  elimina una  del localstorage
             if ( connection.request.url.match( /\/api\/formalstudies\/\d+$/ ) && connection.request.method === RequestMethod.Delete ) {
 
                let urlParts = connection.request.url.split( '/' );
@@ -1203,19 +1203,19 @@ export let fakeBackendProvider = {
                for ( let i = 0; i < fstudies.length; i++ ) {
                   let col = fstudies[ i ];
                   if ( col.idEstudio === id ) {
-                     // delete user
+                     //  delete user
                      fstudies.splice( i, 1 );
                      localStorage.setItem( 'references', JSON.stringify( fstudies ) );
                      break;
                   }
                }
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
             }
 
-//Estudios no formales
+// Estudios no formales
 
-            // obtiene todos
+            //  obtiene todos
             if ( connection.request.url.endsWith( '/api/noformalstudies' ) && connection.request.method === RequestMethod.Get ) {
 
                connection.mockRespond( new Response( new ResponseOptions( {
@@ -1225,10 +1225,10 @@ export let fakeBackendProvider = {
 
             }
 
-            // obtiene una  por el id
+            //  obtiene una  por el id
             if ( connection.request.url.match( /\/api\/noformalstudies\/\d+$/ ) && connection.request.method === RequestMethod.Get ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
-               // application find user by id in users array
+               //  check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               //  application find user by id in users array
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matched = nfstudies.filter( fstudy => {
@@ -1236,19 +1236,19 @@ export let fakeBackendProvider = {
                } );
                let study = matched.length ? matched[ 0 ] : null;
 
-               // respond 200 OK with user
+               //  respond 200 OK with user
                connection.mockRespond( new Response( new ResponseOptions( { status: 200, body: { data: study } } ) ) );
 
                return;
 
             }
 
-            // crea una  en el localstorage
+            //  crea una  en el localstorage
             if ( connection.request.url.endsWith( '/api/noformalstudies' ) && connection.request.method === RequestMethod.Post ) {
-               // get new user object from post body
+               //  get new user object from post body
                let news = JSON.parse( connection.request.getBody() );
 
-               // save new user
+               //  save new user
                news.idEstudio = nfstudies.length + 1;
                news.ciudad = cities.find( c => c.value === news.ciudad.value );
                news.estadoEstudio = studyStateList.find( s => s.value === news.estadoEstudio.value );
@@ -1259,16 +1259,16 @@ export let fakeBackendProvider = {
                nfstudies.push( news );
                localStorage.setItem( 'references', JSON.stringify( nfstudies ) );
 
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
 
                return;
             }
 
-            // actualizar una
+            //  actualizar una
             if ( connection.request.url.match( /\/api\/noformalstudies\/\d+$/ ) && connection.request.method === RequestMethod.Put ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
-               // application find user by id in users array
+               //  check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               //  application find user by id in users array
                let news = JSON.parse( connection.request.getBody() );
                news.nombreCompleto = news.primerNombre + ' ' + news.segundoNombre + ' ' + news.primerApellido + ' ' + news.segundoApellido;
                let urlParts = connection.request.url.split( '/' );
@@ -1276,20 +1276,20 @@ export let fakeBackendProvider = {
                for ( let i = 0; i < nfstudies.length; i++ ) {
                   let col = nfstudies[ i ];
                   if ( col.idEstudio === id ) {
-                     // delete user
+                     //  delete user
                      nfstudies[ i ] = news;
                      localStorage.setItem( 'references', JSON.stringify( nfstudies ) );
                      break;
                   }
                }
 
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
 
                return;
             }
 
-            // elimina una  del localstorage
+            //  elimina una  del localstorage
             if ( connection.request.url.match( /\/api\/noformalstudies\/\d+$/ ) && connection.request.method === RequestMethod.Delete ) {
 
                let urlParts = connection.request.url.split( '/' );
@@ -1298,19 +1298,19 @@ export let fakeBackendProvider = {
                for ( let i = 0; i < nfstudies.length; i++ ) {
                   let col = nfstudies[ i ];
                   if ( col.idEstudio === id ) {
-                     // delete user
+                     //  delete user
                      nfstudies.splice( i, 1 );
                      localStorage.setItem( 'references', JSON.stringify( nfstudies ) );
                      break;
                   }
                }
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
             }
 
-            //Experiencia laboral
+            // Experiencia laboral
 
-            // obtiene todos
+            //  obtiene todos
             if ( connection.request.url.endsWith( '/api/workexperience' ) && connection.request.method === RequestMethod.Get ) {
 
                connection.mockRespond( new Response( new ResponseOptions( {
@@ -1320,10 +1320,10 @@ export let fakeBackendProvider = {
 
             }
 
-            // obtiene una  por el id
+            //  obtiene una  por el id
             if ( connection.request.url.match( /\/api\/workexperience\/\d+$/ ) && connection.request.method === RequestMethod.Get ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
-               // application find user by id in users array
+               //  check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               //  application find user by id in users array
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matched = experiences.filter( experience => {
@@ -1331,55 +1331,55 @@ export let fakeBackendProvider = {
                } );
                let experience = matched.length ? matched[ 0 ] : null;
 
-               // respond 200 OK with user
+               //  respond 200 OK with user
                connection.mockRespond( new Response( new ResponseOptions( { status: 200, body: { data: experience } } ) ) );
 
                return;
 
             }
 
-            // crea una  en el localstorage
+            //  crea una  en el localstorage
             if ( connection.request.url.endsWith( '/api/workexperience' ) && connection.request.method === RequestMethod.Post ) {
-               // get new user object from post body
+               //  get new user object from post body
                let news = JSON.parse( connection.request.getBody() );
 
-               // save new user
+               //  save new user
                news.idEstudio = nfstudies.length + 1;
-               //news.nombreCompleto = news.primerNombre+' '+news.segundoNombre+' '+news.primerApellido+' '+news.segundoApellido;
+               // news.nombreCompleto = news.primerNombre+' '+news.segundoNombre+' '+news.primerApellido+' '+news.segundoApellido;
                experiences.push( news );
                localStorage.setItem( 'experiences', JSON.stringify( experiences ) );
 
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
 
                return;
             }
 
-            // actualizar una
+            //  actualizar una
             if ( connection.request.url.match( /\/api\/workexperience\/\d+$/ ) && connection.request.method === RequestMethod.Put ) {
-               // check for fake auth token in header and return user if valid, this security is implemented server side in a real
-               // application find user by id in users array
+               //  check for fake auth token in header and return user if valid, this security is implemented server side in a real
+               //  application find user by id in users array
                let news = JSON.parse( connection.request.getBody() );
-               //news.nombreCompleto = news.primerNombre+' '+news.segundoNombre+' '+news.primerApellido+' '+news.segundoApellido;
+               // news.nombreCompleto = news.primerNombre+' '+news.segundoNombre+' '+news.primerApellido+' '+news.segundoApellido;
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                for ( let i = 0; i < experiences.length; i++ ) {
                   let col = experiences[ i ];
                   if ( col.idExperiencia === id ) {
-                     // delete user
+                     //  delete user
                      experiences[ i ] = news;
                      localStorage.setItem( 'experiences', JSON.stringify( experiences ) );
                      break;
                   }
                }
 
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
 
                return;
             }
 
-            // elimina una  del localstorage
+            //  elimina una  del localstorage
             if ( connection.request.url.match( /\/api\/workexperience\/\d+$/ ) && connection.request.method === RequestMethod.Delete ) {
 
                let urlParts = connection.request.url.split( '/' );
@@ -1388,19 +1388,19 @@ export let fakeBackendProvider = {
                for ( let i = 0; i < experiences.length; i++ ) {
                   let col = experiences[ i ];
                   if ( col.idEstudio === id ) {
-                     // delete user
+                     //  delete user
                      experiences.splice( i, 1 );
                      localStorage.setItem( 'experiences', JSON.stringify( experiences ) );
                      break;
                   }
                }
-               // respond 200 OK
+               //  respond 200 OK
                connection.mockRespond( new Response( new ResponseOptions( { status: 200 } ) ) );
             }
 
-//Tipos documentos
+// Tipos documentos
 
-            // obtiene todos
+            //  obtiene todos
             if ( connection.request.url.endsWith( '/api/document-types' ) && connection.request.method === RequestMethod.Get ) {
 
                connection.mockRespond( new Response( new ResponseOptions( {
@@ -1410,9 +1410,9 @@ export let fakeBackendProvider = {
 
             }
 
-            //Parenetesco
+            // Parenetesco
 
-            // obtiene todos
+            //  obtiene todos
             if ( connection.request.url.endsWith( '/api/relationship' ) && connection.request.method === RequestMethod.Get ) {
 
                connection.mockRespond( new Response( new ResponseOptions( {
@@ -1423,8 +1423,8 @@ export let fakeBackendProvider = {
                } ) ) );
 
             }
-// Tipos referencias
-            // obtiene todos
+//  Tipos referencias
+            //  obtiene todos
             if ( connection.request.url.endsWith( '/api/references-types' ) && connection.request.method === RequestMethod.Get ) {
 
                connection.mockRespond( new Response( new ResponseOptions( {
@@ -1434,7 +1434,7 @@ export let fakeBackendProvider = {
 
             }
 
-            // companySectorList
+            //  companySectorList
             if ( connection.request.url.endsWith( '/api/companyselector' ) && connection.request.method === RequestMethod.Get ) {
                connection.mockRespond( new Response( new ResponseOptions( {
                   status: 200,
@@ -1444,7 +1444,7 @@ export let fakeBackendProvider = {
                } ) ) );
             }
 
-            //companySubSectorList
+            // companySubSectorList
             if ( connection.request.url.endsWith( '/api/companysubselector' ) && connection.request.method === RequestMethod.Get ) {
                connection.mockRespond( new Response( new ResponseOptions( {
                   status: 200,

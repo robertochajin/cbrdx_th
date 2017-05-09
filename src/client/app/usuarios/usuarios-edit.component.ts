@@ -221,8 +221,8 @@ export class UsuariosEditComponent {
    }
 
    validateGreaterRol() {
-      if ( this.curUsuarioRol.fechaInicio != null &&
-           this.curUsuarioRol.fechaFin != null &&
+      if ( this.curUsuarioRol.fechaInicio !== null &&
+           this.curUsuarioRol.fechaFin !== null &&
            this.curUsuarioRol.fechaInicio < this.curUsuarioRol.fechaFin ) {
          this.isGreaterRol = true;
       } else {

@@ -13,7 +13,7 @@ import { JwtHelper } from 'angular2-jwt';
 @Component( {
                moduleId: module.id,
                templateUrl: 'dashboard.component.html',
-               selector: 'dashboard',
+               selector: 'dashboard-component',
                styleUrls: [ 'dashboard.css' ],
             } )
 export class DashboardComponent implements OnInit {
@@ -47,8 +47,9 @@ export class DashboardComponent implements OnInit {
 
       let token = localStorage.getItem( 'token' );
 
-      if ( token !== null )
+      if ( token !== null ) {
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+      }
 
       let idUsuario = this.usuarioLogueado.usuario.idUsuario;
       widgetServices.getByUsuario( idUsuario ).subscribe( res => {

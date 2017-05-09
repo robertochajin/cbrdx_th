@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Message, ConfirmationService } from 'primeng/primeng';
 import { CompetenciesServices } from '../_services/competencies.service';
@@ -13,14 +13,15 @@ import { NavService } from '../_services/_nav.service';
                selector: 'competencies-groups',
                providers: [ ConfirmationService ]
             } )
-export class CompetenciesGroupsComponent {
+export class CompetenciesGroupsComponent implements OnInit {
 
-   private groups: GroupCompetencies[];
+   groups: GroupCompetencies[];
    group: GroupCompetencies = new GroupCompetencies();
    editingGroup: boolean = false;
    editingCompetencie: boolean = false;
    msg: Message;
-   private competencie: Competencies = new Competencies();
+   msgs: Message[];
+   competencie: Competencies = new Competencies();
 
    constructor( private router: Router,
       private competenciesServices: CompetenciesServices,

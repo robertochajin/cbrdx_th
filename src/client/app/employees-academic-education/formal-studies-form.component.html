@@ -82,9 +82,9 @@
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
             <label for="ingreso">{{'EMPLOYEES.LBL_INGRESO' | translate}}</label>
-            <p-calendar id="ingreso" name="ingreso"  [showIcon]="true" [disabled]="disabled"
+            <p-calendar id="ingreso" name="ingreso"  [showIcon]="true"
                         [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true" [maxDate]="maxDate"
-                        [dataType]="date" (onSelect)="onSelectBegin($event)" #ingreso="ngModel" required="true"
+                        dataType="date" (onSelect)="onSelectBegin($event)" #ingreso="ngModel" required="true"
                         [(ngModel)]="fstudy.fechaIngresa"></p-calendar>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ingreso.valid">
               {{'EMPLOYEES.LBL_INGRESO' | translate}} {{'LBL_REQUERIDO' | translate}}
@@ -93,9 +93,9 @@
 
           <div class="ui-grid-col-6"  *ngIf="(estadoEstudio.value == id_estado_estudio_finalizado) && (ingreso.value !== undefined)">
             <label for="fechaTermina">{{'EMPLOYEES.LBL_FINALIZACION' | translate}} </label>
-            <p-calendar id="fechaTermina" name="fechaTermina"  [showIcon]="true" [disabled]="disabled"
+            <p-calendar id="fechaTermina" name="fechaTermina"  [showIcon]="true"
                         [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true" [minDate]="minDate" [maxDate]="maxDateFinal"
-                        [dataType]="date" (onSelect)="onSelectEnd($event)" #fechaTermina="ngModel" [required]="estadoEstudio.value == id_estado_estudio_finalizado"
+                        dataType="date" (onSelect)="onSelectEnd($event)" #fechaTermina="ngModel" [required]="estadoEstudio.value == id_estado_estudio_finalizado"
                         [(ngModel)]="fstudy.fechaTermina"></p-calendar>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fechaTermina.valid">
               {{'EMPLOYEES.LBL_FINALIZACION' | translate}} {{'LBL_REQUERIDO' | translate}}

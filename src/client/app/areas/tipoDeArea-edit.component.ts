@@ -7,7 +7,7 @@ import { Message } from 'primeng/primeng';
 @Component( {
                moduleId: module.id,
                templateUrl: 'tipoDeArea-edit.component.html',
-               selector: 'tipoDeArea-edit'
+               selector: 'tipodearea-edit'
             } )
 export class TipoDeAreaEditComponent {
 
