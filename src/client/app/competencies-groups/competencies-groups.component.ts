@@ -53,7 +53,7 @@ export class CompetenciesGroupsComponent {
          this.groupCompetenciesServices.update( this.group ).subscribe( res => {
             if ( res.ok ) {
                this.groups[ this.groups.indexOf(
-                  this.groups.find( z => this.group.idGrupoCompetencia == z.idGrupoCompetencia ) ) ] = this.group;
+                  this.groups.find( z => this.group.idGrupoCompetencia === z.idGrupoCompetencia ) ) ] = this.group;
                this.group = new GroupCompetencies();
                this.editingGroup = false;
             }
@@ -116,9 +116,9 @@ export class CompetenciesGroupsComponent {
       if ( this.competencie.idCompetencia !== null && this.competencie.idCompetencia !== undefined ) {
          this.competenciesServices.update( this.competencie ).subscribe( res => {
             if ( res.ok ) {
-               this.groups[ this.groups.indexOf( this.groups.find( z => this.competencie.idGrupoCompetencia == z.idGrupoCompetencia ) ) ]
+               this.groups[ this.groups.indexOf( this.groups.find( z => this.competencie.idGrupoCompetencia === z.idGrupoCompetencia ) ) ]
                .competencies.map( c => {
-                  if ( c.idCompetencia == this.competencie.idCompetencia ) {
+                  if ( c.idCompetencia === this.competencie.idCompetencia ) {
                      c.descripcion = this.competencie.descripcion;
                      c.indicadorHabilitado = this.competencie.indicadorHabilitado;
                   }
@@ -134,7 +134,7 @@ export class CompetenciesGroupsComponent {
       } else {
          this.competenciesServices.add( this.competencie ).subscribe( res => {
             if ( res.idCompetencia ) {
-               this.groups[ this.groups.indexOf( this.groups.find( z => this.competencie.idGrupoCompetencia == z.idGrupoCompetencia ) ) ]
+               this.groups[ this.groups.indexOf( this.groups.find( z => this.competencie.idGrupoCompetencia === z.idGrupoCompetencia ) ) ]
                .competencies.push( res );
 
                this.competencie = new Competencies();
@@ -155,7 +155,7 @@ export class CompetenciesGroupsComponent {
                                               competencie.indicadorHabilitado = false;
                                               this.competenciesServices.update( competencie ).subscribe( res => {
                                                  let group = this.groups.find(
-                                                    z => competencie.idGrupoCompetencia == z.idGrupoCompetencia );
+                                                    z => competencie.idGrupoCompetencia === z.idGrupoCompetencia );
                                                  let groupIndex = this.groups.indexOf( group );
                                                  let competenceIndex = this.groups[ groupIndex ].competencies.indexOf( competencie );
                                                  this.groups[ groupIndex ].competencies.splice( competenceIndex, 1 );

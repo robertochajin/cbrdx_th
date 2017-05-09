@@ -35,7 +35,7 @@ import { FormManagerModule } from './form-manager/form-manager.module';
 import { PhysicStructureModule } from './physic-structure/physic-structure.module';
 import { RiskModule } from './position-risks/position-risks.module';
 import { AbsenceModule } from './position-absence/position-absence.module';
-// import {ResponsibilityModule} from "./position-responsibility/responsibility.module";
+// import {ResponsibilityModule} from './position-responsibility/responsibility.module';
 // Copy sp
 //riesgos
 import { RisksModule } from './risks/risks.module';

@@ -244,7 +244,7 @@ export class LocationUpdateComponent implements OnInit {
 
                                  assingLocation( latitude, longitude );
                               } else {
-                                 document.getElementById( 'graphMap' ).innerHTML = "La busqueda no arroja ningun resultado";
+                                 document.getElementById( 'graphMap' ).innerHTML = 'La busqueda no arroja ningun resultado';
                                  assingLocation( '', '' );
                               }
                            } );

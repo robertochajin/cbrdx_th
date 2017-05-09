@@ -17,7 +17,7 @@ export class GruposGestionService {
    }
 
    listAvaliableGruposGestion( c: number ) {
-      return this.authHttp.get( this.serviceURL + "usuario/" + c ).map( ( res: Response ) => res.json() as GruposGestion[] );
+      return this.authHttp.get( this.serviceURL + 'usuario/' + c ).map( ( res: Response ) => res.json() as GruposGestion[] );
    }
 
    addGruposGestion( g: GruposGestion ): Promise<GruposGestion> {

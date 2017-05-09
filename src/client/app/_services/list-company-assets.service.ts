@@ -11,7 +11,7 @@ export class CompanyAssetsTypesServices {
    }
 
    getAllEnabled() {
-      return this.authHttp.get( this.serviceURL + "enabled" ).map( ( res: Response ) => res.json() );
+      return this.authHttp.get( this.serviceURL + 'enabled' ).map( ( res: Response ) => res.json() );
    }
 
 }

@@ -18,7 +18,7 @@ export class TercerosService {
    }
 
    consultarTercero( tipoDocumento: number, numeroDocumento: string ) {
-      return this.authHttp.get( this.serviceURL + tipoDocumento + "/" + numeroDocumento )
+      return this.authHttp.get( this.serviceURL + tipoDocumento + '/' + numeroDocumento )
       .map( res => res.json() as Tercero ).catch( this.handleError );
    }
 

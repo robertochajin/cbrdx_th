@@ -69,7 +69,7 @@ export class EmployeesContactComponent {
     }
     }*/
    validarTelefono() {
-      if ( this.employee.telefonoFijo === "(___) ___-____ Ext ____" ) {
+      if ( this.employee.telefonoFijo === '(___) ___-____ Ext ____' ) {
          this.tel = true;
          this.cel = true;
       } else {
@@ -79,7 +79,7 @@ export class EmployeesContactComponent {
    }
 
    validarCelular() {
-      if ( this.employee.telefonoCelular === "(___) ___-____" ) {
+      if ( this.employee.telefonoCelular === '(___) ___-____' ) {
          this.tel = true;
          this.cel = true;
       } else {

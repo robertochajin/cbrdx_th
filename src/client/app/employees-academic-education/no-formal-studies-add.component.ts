@@ -120,14 +120,14 @@ export class NoFormalStudiesAddComponent implements OnInit {
          this.selectedCity = '';
          this.nfstudy.idCiudad = null;
       }
-      if ( this.nfstudy.ciudad == this.selectedCity ) {
+      if ( this.nfstudy.ciudad === this.selectedCity ) {
          this.msgs = [];
          this.nfstudy.idTercero = this.idTercero;
          this.nfstudy.indicadorHabilitado = true;
 
          let fi: moment.Moment = moment( this.fechaIngresa, 'MM/DD/YYYY' );
          this.nfstudy.fechaIngresa = fi.format( 'YYYY-MM-DD' );
-         if ( this.nfstudy.indicadorTerminacion == true ) {
+         if ( this.nfstudy.indicadorTerminacion === true ) {
             let ff: moment.Moment = moment( this.fechaTermina, 'MM/DD/YYYY' );
             this.nfstudy.fechaTermina = ff.format( 'YYYY-MM-DD' );
          } else {

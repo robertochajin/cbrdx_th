@@ -85,7 +85,7 @@ export class EmployeesVehicleUpdateComponent {
          this.ciudadPlaca = '';
          this.employeeVehicle.idCiudad = null;
       }
-      if ( this.ciudadPlaca == this.backupCiudadPlaca ) {
+      if ( this.ciudadPlaca === this.backupCiudadPlaca ) {
          if ( this.employeeVehicle.modelo < 1900 ) {
             this.employeeVehicle.modelo = 1900;
          }

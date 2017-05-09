@@ -141,7 +141,7 @@ export class EmployeesUpdateComponent {
       } );
 
       this.actividadEconomicaService.listByPadre( 0 ).subscribe( res => {
-         this.sector.push( { label: "Seleccione", value: null } );
+         this.sector.push( { label: 'Seleccione', value: null } );
          for ( let dp of res ) {
             this.sector.push( {
                                  label: dp.actividadEconomica,
@@ -151,7 +151,7 @@ export class EmployeesUpdateComponent {
       } );
 
       this.ocupacionesService.listByNivel( 4 ).subscribe( res => {
-         this.occupations.push( { label: "Seleccione", value: null } );
+         this.occupations.push( { label: 'Seleccione', value: null } );
          for ( let dp of res ) {
             this.occupations.push( {
                                       label: dp.ocupacion,
@@ -160,7 +160,7 @@ export class EmployeesUpdateComponent {
          }
       } );
 
-      this.listaService.getMasterDetailsByCode( 'ListasTiposTerceros', "TERCOL" ).subscribe(
+      this.listaService.getMasterDetailsByCode( 'ListasTiposTerceros', 'TERCOL' ).subscribe(
          res => {
             this.idTipoTercero = res.idLista;
          } );
@@ -185,7 +185,7 @@ export class EmployeesUpdateComponent {
             this.birthDate = mom2.format( 'MM/DD/YYYY' );
          }
 
-         if ( this.employee.indicadorVivo == false ) {
+         if ( this.employee.indicadorVivo === false ) {
             let mom3: moment.Moment = moment( this.employee.fechaDefuncion, 'YYYY-MM-DD' );
             this.deathDate = mom3.format( 'MM/DD/YYYY' );
          }
@@ -233,7 +233,7 @@ export class EmployeesUpdateComponent {
          this.ciudadNacimiento = '';
          this.employee.ciudadNacimiento = '';
       }
-      if ( this.ciudadExpDocumento == this.backupCiudadExpDocumento && this.ciudadNacimiento == this.backupCiudadNacimiento ) {
+      if ( this.ciudadExpDocumento === this.backupCiudadExpDocumento && this.ciudadNacimiento === this.backupCiudadNacimiento ) {
          this.msgs = [];
          this.employee.primerNombre = this.capitalizeSave( this.employee.primerNombre );
          this.employee.segundoNombre = this.capitalizeSave( this.employee.segundoNombre );
@@ -244,7 +244,7 @@ export class EmployeesUpdateComponent {
          this.employee.fechaDocumento = mom.format( 'YYYY-MM-DD' );
          let mom2: moment.Moment = moment( this.birthDate, 'MM/DD/YYYY' );
          this.employee.fechaNacimiento = mom2.format( 'YYYY-MM-DD' );
-         if ( this.employee.indicadorVivo == false ) {
+         if ( this.employee.indicadorVivo === false ) {
             let mom3: moment.Moment = moment( this.deathDate, 'MM/DD/YYYY' );
             this.employee.fechaDefuncion = mom3.format( 'YYYY-MM-DD' );
          }
@@ -371,7 +371,7 @@ export class EmployeesUpdateComponent {
       if ( value !== null ) {
          this.activities = [];
          this.actividadEconomicaService.listLastChild( value ).subscribe( res => {
-            this.activities.push( { label: "Seleccione", value: null } );
+            this.activities.push( { label: 'Seleccione', value: null } );
             for ( let dp of res ) {
                this.activities.push( {
                                         label: dp.actividadEconomica,

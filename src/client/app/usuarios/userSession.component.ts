@@ -105,7 +105,7 @@ export class UserSessionComponent implements OnInit {
 
    onBeforeSend(event: any){
       debugger;
-      event.xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+      event.xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
    }
    onUpload(event: any) {
       this.image = event.xhr.responseText;

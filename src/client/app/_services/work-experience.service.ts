@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import { Response } from "@angular/http";
-import { Workexperience } from "../_models/work-experience";
-import { AuthHttp } from "angular2-jwt";
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
+import { Workexperience } from '../_models/work-experience';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class WorkExperienceService {

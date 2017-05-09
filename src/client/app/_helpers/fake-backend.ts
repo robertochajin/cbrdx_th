@@ -611,7 +611,7 @@ export let fakeBackendProvider = {
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matchedUsers = employees.filter( employee => {
-                  return employee.idColaborador == id;
+                  return employee.idColaborador === id;
                } );
                let employee = matchedUsers.length ? matchedUsers[ 0 ] : null;
 
@@ -647,7 +647,7 @@ export let fakeBackendProvider = {
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                for ( let i = 0; i < employees.length; i++ ) {
                   let col = employees[ i ];
-                  if ( col.idColaborador == id ) {
+                  if ( col.idColaborador === id ) {
                      // delete user
                      employees[ i ] = updColaborador;
                      localStorage.setItem( 'employees', JSON.stringify( employees ) );
@@ -699,7 +699,7 @@ export let fakeBackendProvider = {
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matched = locations.filter( location => {
-                  return location.idUbicacion == id;
+                  return location.idUbicacion === id;
                } );
                let location = matched.length ? matched[ 0 ] : null;
 
@@ -719,7 +719,7 @@ export let fakeBackendProvider = {
                newlocation.idUbicacion = locations.length + 1;
 
                let matchedAddressType = addressTypeList.filter( rel => {
-                  return rel.value == newlocation.tipoDireccion.value;
+                  return rel.value === newlocation.tipoDireccion.value;
                } );
 
                newlocation.tipoDireccion = matchedAddressType.length ? matchedAddressType[ 0 ] : null;
@@ -742,7 +742,7 @@ export let fakeBackendProvider = {
                let newlocation = JSON.parse( connection.request.getBody() );
 
                let matchedAddressType = addressTypeList.filter( rel => {
-                  return rel.value == newlocation.tipoDireccion.value;
+                  return rel.value === newlocation.tipoDireccion.value;
                } );
 
                newlocation.tipoDireccion = matchedAddressType.length ? matchedAddressType[ 0 ] : null;
@@ -753,7 +753,7 @@ export let fakeBackendProvider = {
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                for ( let i = 0; i < locations.length; i++ ) {
                   let col = locations[ i ];
-                  if ( col.idUbicacion == id ) {
+                  if ( col.idUbicacion === id ) {
                      // delete user
                      locations[ i ] = newlocation;
                      localStorage.setItem( 'locations', JSON.stringify( locations ) );
@@ -775,7 +775,7 @@ export let fakeBackendProvider = {
 
                for ( let i = 0; i < locations.length; i++ ) {
                   let col = locations[ i ];
-                  if ( col.idUbicacion == id ) {
+                  if ( col.idUbicacion === id ) {
                      // delete user
                      locations.splice( i, 1 );
                      localStorage.setItem( 'locations', JSON.stringify( locations ) );
@@ -858,7 +858,7 @@ export let fakeBackendProvider = {
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matched = familys.filter( family => {
-                  return family.idFamiliar == id;
+                  return family.idFamiliar === id;
                } );
                let family = matched.length ? matched[ 0 ] : null;
 
@@ -878,10 +878,10 @@ export let fakeBackendProvider = {
                // save new user
                newFamily.idFamiliar = familys.length + 1;
                let matchedTypes = documentTypes.filter( types => {
-                  return types.value == newFamily.tipoDeDocumento;
+                  return types.value === newFamily.tipoDeDocumento;
                } );
                let matchedRelationship = relationship.filter( rel => {
-                  return rel.value == newFamily.parentesco;
+                  return rel.value === newFamily.parentesco;
                } );
 
                newFamily.tipoDeDocumento = matchedTypes.length ? matchedTypes[ 0 ] : null;
@@ -904,10 +904,10 @@ export let fakeBackendProvider = {
                let newFamily = JSON.parse( connection.request.getBody() );
 
                let matchedTypes = documentTypes.filter( types => {
-                  return types.value == newFamily.tipoDeDocumento;
+                  return types.value === newFamily.tipoDeDocumento;
                } );
                let matchedRelationship = relationship.filter( rel => {
-                  return rel.value == newFamily.parentesco;
+                  return rel.value === newFamily.parentesco;
                } );
 
                newFamily.tipoDeDocumento = matchedTypes.length ? matchedTypes[ 0 ] : null;
@@ -917,7 +917,7 @@ export let fakeBackendProvider = {
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                for ( let i = 0; i < familys.length; i++ ) {
                   let col = familys[ i ];
-                  if ( col.idFamiliar == id ) {
+                  if ( col.idFamiliar === id ) {
                      // delete user
                      familys[ i ] = newFamily;
                      localStorage.setItem( 'familys', JSON.stringify( familys ) );
@@ -940,7 +940,7 @@ export let fakeBackendProvider = {
 
                for ( let i = 0; i < familys.length; i++ ) {
                   let col = familys[ i ];
-                  if ( col.idFamiliar == id ) {
+                  if ( col.idFamiliar === id ) {
                      // delete user
                      familys.splice( i, 1 );
                      localStorage.setItem( 'familys', JSON.stringify( familys ) );
@@ -969,7 +969,7 @@ export let fakeBackendProvider = {
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matched = references.filter( reference => {
-                  return reference.idReferencia == id;
+                  return reference.idReferencia === id;
                } );
                let reference = matched.length ? matched[ 0 ] : null;
 
@@ -986,7 +986,7 @@ export let fakeBackendProvider = {
                let newReference = JSON.parse( connection.request.getBody() );
 
                let matchedreferencesType = referencesTypeList.filter( rel => {
-                  return rel.value == newReference.tipodeReferencia.value;
+                  return rel.value === newReference.tipodeReferencia.value;
                } );
 
                newReference.tipodeReferencia = matchedreferencesType.length ? matchedreferencesType[ 0 ] : null;
@@ -1008,7 +1008,7 @@ export let fakeBackendProvider = {
                // application find user by id in users array
                let newReference = JSON.parse( connection.request.getBody() );
                let matchedreferencesType = referencesTypeList.filter( rel => {
-                  return rel.value == newReference.tipodeReferencia.value;
+                  return rel.value === newReference.tipodeReferencia.value;
                } );
                newReference.tipodeReferencia = matchedreferencesType.length ? matchedreferencesType[ 0 ] : null;
 
@@ -1016,7 +1016,7 @@ export let fakeBackendProvider = {
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                for ( let i = 0; i < references.length; i++ ) {
                   let col = references[ i ];
-                  if ( col.idReferencia == id ) {
+                  if ( col.idReferencia === id ) {
                      // delete user
                      references[ i ] = newReference;
                      localStorage.setItem( 'references', JSON.stringify( references ) );
@@ -1038,7 +1038,7 @@ export let fakeBackendProvider = {
 
                for ( let i = 0; i < references.length; i++ ) {
                   let col = references[ i ];
-                  if ( col.idReferencia == id ) {
+                  if ( col.idReferencia === id ) {
                      // delete user
                      references.splice( i, 1 );
                      localStorage.setItem( 'references', JSON.stringify( references ) );
@@ -1138,7 +1138,7 @@ export let fakeBackendProvider = {
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matched = fstudies.filter( fstudy => {
-                  return fstudy.idEstudio == id;
+                  return fstudy.idEstudio === id;
                } );
                let study = matched.length ? matched[ 0 ] : null;
 
@@ -1180,7 +1180,7 @@ export let fakeBackendProvider = {
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                for ( let i = 0; i < fstudies.length; i++ ) {
                   let col = fstudies[ i ];
-                  if ( col.idEstudio == id ) {
+                  if ( col.idEstudio === id ) {
                      // delete user
                      fstudies[ i ] = news;
                      localStorage.setItem( 'references', JSON.stringify( fstudies ) );
@@ -1202,7 +1202,7 @@ export let fakeBackendProvider = {
 
                for ( let i = 0; i < fstudies.length; i++ ) {
                   let col = fstudies[ i ];
-                  if ( col.idEstudio == id ) {
+                  if ( col.idEstudio === id ) {
                      // delete user
                      fstudies.splice( i, 1 );
                      localStorage.setItem( 'references', JSON.stringify( fstudies ) );
@@ -1232,7 +1232,7 @@ export let fakeBackendProvider = {
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matched = nfstudies.filter( fstudy => {
-                  return fstudy.idEstudio == id;
+                  return fstudy.idEstudio === id;
                } );
                let study = matched.length ? matched[ 0 ] : null;
 
@@ -1275,7 +1275,7 @@ export let fakeBackendProvider = {
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                for ( let i = 0; i < nfstudies.length; i++ ) {
                   let col = nfstudies[ i ];
-                  if ( col.idEstudio == id ) {
+                  if ( col.idEstudio === id ) {
                      // delete user
                      nfstudies[ i ] = news;
                      localStorage.setItem( 'references', JSON.stringify( nfstudies ) );
@@ -1297,7 +1297,7 @@ export let fakeBackendProvider = {
 
                for ( let i = 0; i < nfstudies.length; i++ ) {
                   let col = nfstudies[ i ];
-                  if ( col.idEstudio == id ) {
+                  if ( col.idEstudio === id ) {
                      // delete user
                      nfstudies.splice( i, 1 );
                      localStorage.setItem( 'references', JSON.stringify( nfstudies ) );
@@ -1327,7 +1327,7 @@ export let fakeBackendProvider = {
                let urlParts = connection.request.url.split( '/' );
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                let matched = experiences.filter( experience => {
-                  return experience.idExperiencia == id;
+                  return experience.idExperiencia === id;
                } );
                let experience = matched.length ? matched[ 0 ] : null;
 
@@ -1365,7 +1365,7 @@ export let fakeBackendProvider = {
                let id = parseInt( urlParts[ urlParts.length - 1 ] );
                for ( let i = 0; i < experiences.length; i++ ) {
                   let col = experiences[ i ];
-                  if ( col.idExperiencia == id ) {
+                  if ( col.idExperiencia === id ) {
                      // delete user
                      experiences[ i ] = news;
                      localStorage.setItem( 'experiences', JSON.stringify( experiences ) );
@@ -1387,7 +1387,7 @@ export let fakeBackendProvider = {
 
                for ( let i = 0; i < experiences.length; i++ ) {
                   let col = experiences[ i ];
-                  if ( col.idEstudio == id ) {
+                  if ( col.idEstudio === id ) {
                      // delete user
                      experiences.splice( i, 1 );
                      localStorage.setItem( 'experiences', JSON.stringify( experiences ) );

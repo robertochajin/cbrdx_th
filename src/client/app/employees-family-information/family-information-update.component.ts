@@ -100,7 +100,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
          res => {
             this.idTipoTercero = res.idLista
          } );
-      // this.listEmployeesService.getTerType("TERFAM").subscribe(
+      // this.listEmployeesService.getTerType('TERFAM').subscribe(
       //   res => {
       //     this.idTipoTercero = res.idListaTipoTercero
       //   });
@@ -119,7 +119,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
                this.selectedRelationship = this.familyInformation.idParentesco;
                let mom: moment.Moment = moment( this.familyInformation.fechaNacimiento, 'YYYY-MM-DD' );
                this.familyInformation.fechaNacimiento = mom.format( 'MM/DD/YYYY' );
-               this.convive = this.familyInformation.idConvivencia == 1 ? true : false;
+               this.convive = this.familyInformation.idConvivencia === 1 ? true : false;
                if ( this.familyInformation.telefonoFijo !== null || this.familyInformation.telefonoFijo !== '' ) {
                   this.cel = true;
                } else {

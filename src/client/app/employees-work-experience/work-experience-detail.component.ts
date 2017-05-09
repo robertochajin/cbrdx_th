@@ -34,7 +34,7 @@ export class WorkExperienceDetailComponent implements OnInit {
             this.experience.tiempoExperiencia = moment( this.experience.fechaIngresa, 'YYYY-MM-DD' ).toNow( true ).toString();
          } else {
             this.experience.tiempoExperiencia = moment( this.experience.fechaTermina, 'YYYY-MM-DD' )
-                                                .diff( moment( this.experience.fechaIngresa, 'YYYY-MM-DD' ), 'days' ).toString() + " Días";
+                                                .diff( moment( this.experience.fechaIngresa, 'YYYY-MM-DD' ), 'days' ).toString() + ' Días';
          }
       } );
    }

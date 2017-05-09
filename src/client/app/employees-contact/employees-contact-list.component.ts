@@ -54,7 +54,7 @@ export class EmployeesContactListComponent {
                let bandera = false;
                let label = '';
                for ( let ct of this.relationship ) {
-                  if ( c.idListaParentesco == ct.value ) {
+                  if ( c.idListaParentesco === ct.value ) {
                      label = ct.label;
                      bandera = true;
                      break;
@@ -74,7 +74,7 @@ export class EmployeesContactListComponent {
       this.msgs = [];
       this.show_form = false;
       this.contact.idTercero = this.idTer;
-      if ( this.contact.idTerceroContacto == null || this.contact.idTerceroContacto == 0 ) {
+      if ( this.contact.idTerceroContacto === null || this.contact.idTerceroContacto === 0 ) {
          this.employeesContactService.add( this.contact )
          .subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
@@ -82,7 +82,7 @@ export class EmployeesContactListComponent {
                contacts => {
                   this.contacts = [];
                   for ( let c of contacts ) {
-                     c.nombreListaParentesco = this.relationship.find( s => s.value == c.idListaParentesco ).label;
+                     c.nombreListaParentesco = this.relationship.find( s => s.value === c.idListaParentesco ).label;
                      this.contacts.push( c );
                   }
                }
@@ -100,7 +100,7 @@ export class EmployeesContactListComponent {
                contacts => {
                   this.contacts = [];
                   for ( let c of contacts ) {
-                     c.nombreListaParentesco = this.relationship.find( s => s.value == c.idListaParentesco ).label;
+                     c.nombreListaParentesco = this.relationship.find( s => s.value === c.idListaParentesco ).label;
                      this.contacts.push( c );
                   }
                }
@@ -160,7 +160,7 @@ export class EmployeesContactListComponent {
    }
 
    validarTelefono() {
-      if ( this.contact.telefono === "(___) ___-____ Ext ____" ) {
+      if ( this.contact.telefono === '(___) ___-____ Ext ____' ) {
          this.tel = true;
          this.cel = true;
       } else {
@@ -170,7 +170,7 @@ export class EmployeesContactListComponent {
    }
 
    validarCelular() {
-      if ( this.contact.celular === "(___) ___-____" ) {
+      if ( this.contact.celular === '(___) ___-____' ) {
          this.tel = true;
          this.cel = true;
       } else {

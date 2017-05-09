@@ -103,7 +103,7 @@ export class ReferencesAddComponent implements OnInit {
    }
 
    focusUP() {
-      const element = document.querySelector( "#formulario" );
+      const element = document.querySelector( '#formulario' );
       if ( element ) {
          element.scrollIntoView( element );
       }

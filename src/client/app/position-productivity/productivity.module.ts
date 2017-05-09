@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CheckboxModule } from "primeng/primeng";
+import { CheckboxModule } from 'primeng/primeng';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import 'rxjs/add/operator/toPromise';
 import { ProductivityComponent }  from './productivity.component';
 import {ProductivityService} from '../_services/productivity.service';
-import {SharedModule} from "../shared/shared.module";
+import {SharedModule} from '../shared/shared.module';
 import { InputTextModule,DataTableModule,ButtonModule,DialogModule,
   DropdownModule, MessagesModule, ConfirmDialogModule} from 'primeng/primeng';
 
