@@ -1,4 +1,4 @@
-<h3>Ocupaciones</h3>
+<h3>{{ 'OCUPACIONES.LBL_OCUPACIONES' | translate}}</h3>
 <div class="row datable-header">
     <div class="col-md-6 col-xs-12 datatable-header-add">
         <button type="button" pButton icon="fa-plus" (click)="newOccupation()" label="{{btnoccupation.label}}"
@@ -9,7 +9,7 @@
     <div class="col-md-6 col-xs-12 datatable-header-search">
        <div class="input-group">
           <div class="input-group-addon"><i class="fa fa-search"></i></div>
-          <p-autoComplete placeholder="Buscar..." field="label" name="buscar" id="buscar" #buscar="ngModel"
+          <p-autoComplete placeholder="{{ 'LBL_BUSCAR' | translate}}" field="label" name="buscar" id="buscar" #buscar="ngModel"
                           [(ngModel)]="selectedSearch"
                           [suggestions]="resultSearch"
                           (completeMethod)="search($event)"
@@ -49,12 +49,12 @@
                                            #codigoOcupacion="ngModel" [maxlength]="tabselected"
                                            [minlength]="tabselected" required>
                                     <div *ngIf="f.submitted && !codigoOcupacion.valid" class="ui-message  ui-corner-all alert-danger">
-                                        <p [hidden]="!codigoOcupacion.errors.required">Código es requerido</p>
-                                        <p [hidden]="!codigoOcupacion.errors.minlength">Código debe ser de
-                                            {{tabselected}} numeros</p>
+                                        <p [hidden]="!codigoOcupacion.errors.required">{{ 'OCUPACIONES.MSG_CODREQUERIDO' | translate}}</p>
+                                        <p [hidden]="!codigoOcupacion.errors.minlength">{{ 'OCUPACIONES.MSG_CODNUM' | translate}}
+                                            {{tabselected}} {{ 'OCUPACIONES.MSG_NUM' | translate}}</p>
                                     </div>
                                     <div *ngIf="codeExists" class="ui-message  ui-corner-all alert-danger">
-                                        Ya se encuentra registrado ese código
+                                       {{ 'OCUPACIONES.MSG_CODREGISTRADO' | translate}}
                                     </div>
                                 </div>
                             </div>
@@ -95,13 +95,13 @@
                 </div>
             </div>
         </p-fieldset>
-        <p-dialog header="Confirmación" [(visible)]="displayDialog"
+        <p-dialog header="{{ 'LBL_CONFIRMACION' | translate }}" [(visible)]="displayDialog"
                   responsive="true" modal="true">
             <p> {{ 'MSG_CONFIRMACION' | translate }}</p>
             <p-footer>
                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                    <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>
-                    <button type="button" pButton icon="fa-check" (click)="doCancel()" label="Si"></button>
+                    <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="{{ 'BTN_NO' | translate }}"></button>
+                    <button type="button" pButton icon="fa-check" (click)="doCancel()" label="{{ 'BTN_SI' | translate }}"></button>
                 </div>
             </p-footer>
         </p-dialog>
