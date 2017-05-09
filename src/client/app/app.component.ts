@@ -48,7 +48,6 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
    }
 
    ngAfterViewChecked() {
-      //console.log('AfterViewChecked');
    }
 
    onSubmit() {

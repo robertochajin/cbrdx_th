@@ -194,10 +194,11 @@ export class ActividadEconomicaComponent implements OnInit {
             console.info( this.selectedNode );
             let chil: any[] = [];
             let nivel = 1;
-            if ( this.selectedNode )
+            if ( this.selectedNode ) {
                nivel = this.selectedNode.level;
-            else
+            } else {
                nivel = 1;
+            }
 
             if ( this.tabselected == 1 ) {
                chil = [ {
