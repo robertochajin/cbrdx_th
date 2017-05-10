@@ -98,7 +98,7 @@ export class UserSessionComponent implements OnInit {
          this.eye = 'fa-eye';
       } else {
          this.showOldPass = 'password';
-         this.eye = 'fa-eye-slash'
+         this.eye = 'fa-eye-slash';
       }
       console.info( this.showOldPass );
    }

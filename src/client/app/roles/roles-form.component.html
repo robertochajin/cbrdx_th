@@ -46,7 +46,7 @@
          <div class="ui-grid-row">
             <div class="ui-grid-col-3">
                <label for="fInicio">* {{ 'LBL_FECHAINICIO' | translate}}</label>
-               <p-calendar id="fInicio" name="fInicio" [showIcon]="true" [dataType]="date"
+               <p-calendar id="fInicio" name="fInicio" [showIcon]="true" dataType="date"
                            [maxDate]="maxDate" [locale]="es" readonlyInput="true"
                            [(ngModel)]="fechaInicio" #fInicio="ngModel"
                            (onSelect)="onFechaInicio($event)"
@@ -62,7 +62,7 @@
             </div>
             <div class="ui-grid-col-3">
                <label for="fFin">* {{ 'LBL_FECHAFIN' | translate}}</label>
-               <p-calendar id="fFin" name="fFin" [showIcon]="true" [dataType]="date"
+               <p-calendar id="fFin" name="fFin" [showIcon]="true" dataType="date"
                            [minDate]="minDate" [locale]="es" readonlyInput="true" [disabled]="fechaInicio == null"
                            [(ngModel)]="fechaFin" #fFin="ngModel" [required]="fechaInicio != null"
                            (onSelect)="onFechaFin($event)"

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Employee } from '../_models/employees';
 import { EmployeesContact } from '../_models/employeesContactList';
@@ -15,7 +15,7 @@ import { NavService } from '../_services/_nav.service';
                selector: 'employees-contact-list',
                providers: [ ConfirmationService ]
             } )
-export class EmployeesContactListComponent {
+export class EmployeesContactListComponent implements OnInit {
 
    @Input() employee: Employee;
 

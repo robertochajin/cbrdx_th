@@ -127,7 +127,7 @@
                   </p-accordionTab>
 
                   <p-accordionTab header="{{'EMPLOYEES.LBL_REFERENCIAS' | translate}}" [selected]="acordion == 8">
-                    <references *ngIf="employee.idTercero" [employee]="employee"></references>
+                    <references-component *ngIf="employee.idTercero" [employee]="employee"></references-component>
                   </p-accordionTab>
 
                   <p-accordionTab header="{{'EMPLOYEES.LBL_DATOSCLINICOS' | translate}}" [selected]="acordion == 9">

@@ -32,7 +32,7 @@ export class ClinicalInformationComponent implements OnInit {
    wrongDiagnostic: boolean = true;
 
    clinicalInformations: EmployeesClinicalData[];
-   idMayorDeEdad: number = 1; //Es necesario crear la constante y consultarla
+   idMayorDeEdad: number = 1; // Es necesario crear la constante y consultarla
    editing: boolean = false;
    ecdBackUp: EmployeesClinicalData;
 
@@ -102,18 +102,18 @@ export class ClinicalInformationComponent implements OnInit {
    }
 
    saveDiagnostic() {
-      //toma el temporal y lo agrega a la lista despues de recibir success en la solicitud del guardado
+      // toma el temporal y lo agrega a la lista despues de recibir success en la solicitud del guardado
       if ( this.ecd.idDiagnostico === this.ecd.diagnostico.idDiagnosticoCie ) {
          this.ecd.idTercero = this.employee.idTercero;
 
          let fi: moment.Moment = moment( this.tfechaInicio, 'MM/DD/YYYY' );
          let ff: moment.Moment;
-         //this.ecd.fechaInicio = fi.format('YYYY-MM-DD');
+         // this.ecd.fechaInicio = fi.format('YYYY-MM-DD');
          this.ecd.fechaInicio = fi.add( 3, 'days' ).format( 'YYYY-MM-DD' );
          if ( this.tfechaFin !== undefined && this.tfechaFin !== '' ) {
             ff = moment( this.tfechaFin, 'MM/DD/YYYY' );
             this.ecd.fechaFin = ff.add( 3, 'days' ).format( 'YYYY-MM-DD' );
-            //this.ecd.fechaFin = ff.format('YYYY-MM-DD');
+            // this.ecd.fechaFin = ff.format('YYYY-MM-DD');
          }
 
          if ( this.ecd.idTerceroDatoClinico !== null && this.ecd.idTerceroDatoClinico !== undefined ) {
@@ -159,10 +159,6 @@ export class ClinicalInformationComponent implements OnInit {
       let d = new Date( Date.parse( event ) );
       this.tfechaFin = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
       this.maxDateInicio.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
-   }
-
-   detail( f: EmployeesClinicalData ) {
-
    }
 
    update( f: EmployeesClinicalData ) {

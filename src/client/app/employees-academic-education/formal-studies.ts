@@ -26,6 +26,4 @@ export class FormalStudies {
    public ciudad: string;
    public estadoEstudio: string;
 
-   constructor() {
-   }
 }

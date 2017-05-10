@@ -76,7 +76,7 @@
                 <div class="ui-grid-col-4">
                     <label for="fechaNacimiento">* {{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate }}</label>
                     <p-calendar id="fechaNacimiento" name="fechaNacimiento" #fechaNacimiento="ngModel"  [showIcon]="true"
-                                [maxDate]="maxDate" [minDate]="minDate" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
+                                [maxDate]="maxDate"  [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
                                 dataType="date" (onSelect)="onSelectMethod($event)"
                                 [(ngModel)]="familyInformation.fechaNacimiento"required></p-calendar>
 
@@ -163,5 +163,5 @@
 </div>
 </div>
 <div *ngIf="!addinglocation">
-  <locations [parentTitle]="'Información familiar'" (dismiss)="toggleform()" (create)="bindLocation($event)" [localizacion]="localizacion"></locations>
+  <locations-form [parentTitle]="'Información familiar'" (dismiss)="toggleform()" (create)="bindLocation($event)" [localizacion]="localizacion"></locations-form>
 </div>

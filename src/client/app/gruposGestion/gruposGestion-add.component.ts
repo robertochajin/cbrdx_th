@@ -1,6 +1,3 @@
-/**
- * Created by Felipe Aguirre - Jenniferth Escobar on 24/02/2017.
- */
 import { Component, OnInit } from '@angular/core';
 import { GruposGestion } from '../_models/gruposGestion';
 import { GruposGestionService } from '../_services/grupoGestion.service';
@@ -11,7 +8,7 @@ import { Message } from 'primeng/primeng';
 @Component( {
                moduleId: module.id,
                templateUrl: 'gruposGestion-add.component.html',
-               selector: 'gruposGestion-add'
+               selector: 'gruposgestion-add'
             } )
 export class GruposGestionAddComponent implements OnInit {
 
@@ -22,10 +19,14 @@ export class GruposGestionAddComponent implements OnInit {
    displayDialog = false;
    isRequired = false;
    isGreater = true;
-   private es: any;
+   es: any;
    msg: Message;
 
-   constructor( private gruposGestionService: GruposGestionService, private router: Router, private navService: NavService ) {
+   constructor(
+      private gruposGestionService: GruposGestionService,
+      private router: Router,
+      private navService: NavService
+   ) {
       gruposGestionService.listGruposGestion().subscribe( res => {
          this.gruposGestion = res;
       } );

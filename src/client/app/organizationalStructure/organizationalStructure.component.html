@@ -281,6 +281,6 @@
    </div>
 </div>
 <div *ngIf="!addinglocation">
-   <locations [parentTitle]="'Estructura Organizacional'" (dismiss)="toggleform()" (create)="bindLocation($event)" [localizacion]="localizacion"></locations>
+   <locations-form [parentTitle]="'Estructura Organizacional'" (dismiss)="toggleform()" (create)="bindLocation($event)" [localizacion]="localizacion"></locations-form>
 </div>
 <p-growl [value]="msgs"></p-growl>

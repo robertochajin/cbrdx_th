@@ -206,9 +206,7 @@ export class NoFormalStudiesAddComponent implements OnInit {
       }
 
       // this.msgs = [];
-      //t his.msgs.push({severity: 'info', summary: 'File Uploaded', detail: ''});
+      // this.msgs.push({severity: 'info', summary: 'File Uploaded', detail: ''});
    }
 
 }
-
-
