@@ -38,7 +38,7 @@ export class CompanyAssetsComponent implements OnInit {
    }
 
    ngOnInit() {
-      this.msgsAlert.push( { severity: 'alert', summary: 'Error', detail: 'Debe llenar al menos un registro' } );
+      this.msgsAlert.push( { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un registro' } );
       this.listaService.getMasterDetails( 'ListasTiposElementos' ).subscribe( listCompanyAssets => {
          this.listCompanyAssets = listCompanyAssets;
          this.companyAssetsService.getAllByPosition( this.position.idCargo ).subscribe( res => {

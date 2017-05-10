@@ -102,7 +102,7 @@ export class PositionResponsabilitiesComponent implements OnInit {
          this.nextStep.emit( 5 );
          this.msgsAlert = [];
       } else {
-         this.msgsAlert[ 0 ] = { severity: 'alert', summary: 'Error', detail: 'Debe llenar al menos una responsabilidad' };
+         this.msgsAlert[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos una responsabilidad' };
       }
    }
 

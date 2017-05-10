@@ -104,7 +104,6 @@ export class UserSessionComponent implements OnInit {
    }
 
    onBeforeSend( event: any ) {
-      debugger;
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
    }
 
