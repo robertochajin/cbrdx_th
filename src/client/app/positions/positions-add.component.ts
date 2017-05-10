@@ -92,7 +92,7 @@ export class PositionsAddComponent {
 
    capitalizeNombre() {
       let input = this.position.cargo;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.position.cargo = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }

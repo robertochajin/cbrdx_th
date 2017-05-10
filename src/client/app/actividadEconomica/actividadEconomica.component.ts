@@ -6,6 +6,7 @@ import { ActividadEconomicaService } from '../_services/actividadEconomica.servi
 import { TreeNode } from 'primeng/components/common/api';
 import { Message, SelectItem } from 'primeng/primeng';
 import { Search } from '../_models/search';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -14,7 +15,7 @@ import { Search } from '../_models/search';
             } )
 export class ActividadEconomicaComponent {
 
-   msgs: Message[] = [];
+   msg: Message;
    actividadEconomica: ActividadEconomica = new ActividadEconomica();
    listadoActividadEconomica: ActividadEconomica[];
    activityTypes: ActividadEconomicaTipos[] = [];
@@ -47,7 +48,9 @@ export class ActividadEconomicaComponent {
    selectedSearch: SelectItem;
 
    constructor( private router: Router,
-      private actividadEconomicaService: ActividadEconomicaService ) {
+      private actividadEconomicaService: ActividadEconomicaService,
+      private navService: NavService
+   ) {
 
       actividadEconomicaService.listActividadEconomica().subscribe( res => {
          this.listadoActividadEconomica = res;
@@ -186,10 +189,9 @@ export class ActividadEconomicaComponent {
 
    save() {
       if ( this.actividadEconomica.idActividadEconomica === null || this.actividadEconomica.idActividadEconomica === 0 ) {
-         this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Nuevo registro' } );
          this.actividadEconomicaService.addActividadEconomica( this.actividadEconomica ).then( data => {
-            console.info( this.tabselected );
-            console.info( this.selectedNode );
+            let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
             let chil: any[] = [];
             let nivel = 1;
             if ( this.selectedNode ) {
@@ -235,14 +237,15 @@ export class ActividadEconomicaComponent {
                this.newSubActivity();
             }
 
+         }, error => {
+            let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
          } );
       } else {
-         this.msgs.push( {
-                            severity: 'info', summary: 'Guardando...',
-                            detail: 'Actualizando registro'
-                         } );
          this.actividadEconomicaService.updateActividadEconomica( this.actividadEconomica )
          .then( () => {
+            let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
             this.selectedNode.label = this.actividadEconomica.actividadEconomica;
             this.header = this.actividadEconomica.actividadEconomica;
             for ( let i = 0; i < this.listadoActividadEconomica.length; i++ ) {
@@ -251,6 +254,9 @@ export class ActividadEconomicaComponent {
                   return;
                }
             }
+         }, error => {
+            let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
          } );
       }
    }
@@ -429,7 +435,7 @@ export class ActividadEconomicaComponent {
 
    capitalizeCodigo() {
       let input = this.actividadEconomica.codigoActividadEconomica;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.actividadEconomica.codigoActividadEconomica = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
 
       }
@@ -437,7 +443,7 @@ export class ActividadEconomicaComponent {
 
    capitalizeName() {
       let input = this.actividadEconomica.actividadEconomica;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.actividadEconomica.actividadEconomica = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }

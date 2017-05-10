@@ -395,7 +395,7 @@ export class PositionsUpdateComponent implements OnInit {
             } else {
                this.alertOcu = true;
                this.msgOcupaciones[ 0 ] = {
-                  severity: 'alert', summary: 'Error', detail: 'Debe agregar al menos una' +
+                  severity: 'error', summary: 'Error', detail: 'Debe agregar al menos una' +
                                                                ' ocuapación'
                };
                return false;
@@ -420,7 +420,7 @@ export class PositionsUpdateComponent implements OnInit {
 
    capitalizeNombre() {
       let input = this.position.cargo;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined) {
          this.position.cargo = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }

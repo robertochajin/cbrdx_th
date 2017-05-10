@@ -68,14 +68,14 @@ export class ReferencesComponent implements OnInit {
    }
 
    detail( f: References ) {
-      this.router.navigate( [ 'employees-references/detail/' + f.idTerceroReferencia ] );
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/references/detail/' + f.idTerceroReferencia ] );
    }
 
    add() {
-      this.router.navigate( [ 'employees-references/add/' + this.employee.idTercero ] );
+      this.router.navigate( [ 'employees/detail/' + this.employee.idTercero + '/references/add/' ] );
    }
 
    update( f: References ) {
-      this.router.navigate( [ 'employees-references/update/' + f.idTerceroReferencia + '/' + this.employee.idTercero ] );
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/references/update/' + f.idTerceroReferencia ] );
    }
 }

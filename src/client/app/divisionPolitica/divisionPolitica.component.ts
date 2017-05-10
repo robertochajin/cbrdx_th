@@ -10,6 +10,7 @@ import { DivisionPoliticaTipos } from '../_models/divisionPoliticaTipos';
 import { TreeNode } from 'primeng/components/common/api';
 import { SelectItem, Message } from 'primeng/primeng';
 import { Search } from '../_models/search';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -18,7 +19,7 @@ import { Search } from '../_models/search';
 
             } )
 export class DivisionPoliticaComponent implements OnInit {
-   msgs: Message[] = [];
+   msg: Message;
    politicalDivision: DivisionPolitica = new DivisionPolitica();
    listadoDivisionPolitica: DivisionPolitica[];
    listadoTodo: DivisionPolitica[];
@@ -61,7 +62,11 @@ export class DivisionPoliticaComponent implements OnInit {
    selectedSearch: SelectItem;
    codeExists: boolean = false;
 
-   constructor( private router: Router, private divisionPoliticaService: DivisionPoliticaService ) {
+   constructor(
+      private router: Router,
+      private divisionPoliticaService: DivisionPoliticaService,
+      private navService: NavService
+   ) {
       divisionPoliticaService.listByPadreDivisionPolitica( 0 ).subscribe( res => {
          this.listadoDivisionPolitica = res;
          for ( let c of this.listadoDivisionPolitica ) {
@@ -241,7 +246,9 @@ export class DivisionPoliticaComponent implements OnInit {
          // console.info(this.politicalDivision);
 
          this.divisionPoliticaService.addDivisionPolitica( this.politicalDivision ).then( data => {
-            this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Nuevo registro' } );
+            let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
+
             let chil: any[] = [];
             if ( this.tabselected <= 3 ) {
                chil = [ {
@@ -274,11 +281,14 @@ export class DivisionPoliticaComponent implements OnInit {
                }
             }
          }, error => {
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
          } );
       } else {
-         this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Nuevo registro' } );
          this.divisionPoliticaService.updateDivisionPolitica( this.politicalDivision ).then( data => {
+            let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
+
             this.selectedNode.data = this.politicalDivision;
             this.selectedNode.label = this.politicalDivision.descripcionDivisonPolitica;
             this.header = this.politicalDivision.descripcionDivisonPolitica;
@@ -288,6 +298,9 @@ export class DivisionPoliticaComponent implements OnInit {
                   return;
                }
             }
+         } , error => {
+            let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
          } );
       }
    }
@@ -555,14 +568,14 @@ export class DivisionPoliticaComponent implements OnInit {
 
    capitalize() {
       let input = this.politicalDivision.descripcionDivisonPolitica;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined) {
          this.politicalDivision.descripcionDivisonPolitica = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }
 
    capitalizeCodigo() {
       let input = this.politicalDivision.codigoDivisionPolitica;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined) {
          this.politicalDivision.codigoDivisionPolitica = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
       }
    }

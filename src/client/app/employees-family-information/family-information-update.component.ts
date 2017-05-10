@@ -318,24 +318,10 @@ export class FamilyInformationUpdateComponent implements OnInit {
    }
 
    childInputCleanUp( value: string ) {
-      if ( this.familyInformation.telefonoFijo.length === 7 || this.familyInformation.telefonoFijo.length === 10 ) {
-         this.tel = true;
-         this.cel = true;
-      } else {
-         this.cel = false;
-         this.tel = false;
-      }
       this.familyInformation.telefonoFijo = value.toUpperCase().replace( /[^0-9]/g, '' ).replace( ' ', '' ).trim();
    }
 
    childInputCleanUp1( value: string ) {
-      if ( this.familyInformation.telefonoCelular.length === 7 || this.familyInformation.telefonoCelular.length === 10 ) {
-         this.cel = true;
-         this.tel = true;
-      } else {
-         this.tel = false;
-         this.cel = false;
-      }
       this.familyInformation.telefonoCelular = value.toUpperCase().replace( /[^0-9]/g, '' ).replace( ' ', '' ).trim();
    }
 }
