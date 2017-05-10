@@ -50,18 +50,16 @@
                                     [(ngModel)]="group.indicadorHabilitado" binary="true"></p-checkbox>
                      </div>
                   </div>
-                  <div class="row form-footer-buttons">
-                     <div class="form-group col-md-4">
-                     </div>
-                     <div class="form-group col-md-2">
-                        <a (click)="cancelEditingGroup()" class="{{'BTN_CANCELAR' | translate }}">{{'BTN_CANCELAR' | translate }}</a>
-                     </div>
-                      <div class="form-group col-md-2">
-                        <button pButton type="submit" label="{{'BTN_GUARDAR' | translate }}"></button>
-                     </div>
-                  </div>
                </div>
             </fieldset>
+	         <div class="row form-footer-buttons">
+		         <div class="form-group col-md-12">
+			         <a (click)="cancelEditingGroup()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+			         <button icon="fa-plus" label="Guardar" type="submit"
+			                 pButton></button>
+		
+		         </div>
+	         </div>
          </form>
       </div>
    </div>
@@ -121,18 +119,16 @@
                                           [(ngModel)]="competencie.indicadorHabilitado" binary="true"></p-checkbox>
                            </div>
                         </div>
-                        <div class="form-group col-md-1"></div>
-                        <div class="row form-footer-buttons">
-                           <div class="form-group col-md-2"></div>
-                           <div class="form-group col-md-2">
-                              <a (click)="cancelEditingCompetencie()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
-                           </div>
-                           <div class="form-group col-md-2">
-                              <button pButton type="submit" label="{{'BTN_GUARDAR' | translate }}"></button>
-                           </div>
-                        </div>
                      </fieldset>
                   </div>
+	
+	               <div class="row form-footer-buttons">
+		               <div class="form-group col-md-12">
+			               <a (click)="cancelEditingCompetencie()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+			               <button icon="fa-plus" label="Guardar" type="submit"
+			                       pButton></button>
+		               </div>
+	               </div>
                </form>
             </div>
          </div>
