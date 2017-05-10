@@ -12,13 +12,16 @@ export class ProjectConfig extends SeedConfig {
 
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
 
-/*
+
 
   FONTS_DEST = `${this.APP_DEST}/fonts`;
+  CUSTOMFONTS_DEST = `${this.APP_DEST}/css/th`;
   FONTS_SRC = [
-
-
-  ];*/
+      'node_modules/font-awesome/fonts/**'
+  ];
+  CUSTOMFONTS_SRC = [
+      'src/client/assets/font/th/**'
+  ];
 
 
    PRIME_NG_THEME = 'bootstrap';
