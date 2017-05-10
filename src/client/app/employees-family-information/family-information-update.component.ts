@@ -48,7 +48,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
    idMayorDeEdad: number = 1;
    cel: boolean = false;
    tel: boolean = false;
-   //Es necesario crear la constante y consultarla
+   // Es necesario crear la constante y consultarla
 
    constructor( private familyInformationService: FamilyInformationService,
       private listaService: ListaService,

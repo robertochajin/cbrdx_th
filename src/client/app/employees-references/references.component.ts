@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { References } from './references';
 import { ReferencesService } from './references.service';
@@ -8,10 +8,10 @@ import { Employee } from '../_models/employees';
 @Component( {
                moduleId: module.id,
                templateUrl: 'references.component.html',
-               selector: 'references',
+               selector: 'references-component',
                providers: [ ConfirmationService ]
             } )
-export class ReferencesComponent {
+export class ReferencesComponent implements OnInit {
    @Input() employee: Employee;
    reference: References = new References();
    dialogObjet: References = new References();

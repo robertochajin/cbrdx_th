@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EmployeeEstate } from '../_models/employee-estate';
 import { EmployeeEstateService } from '../_services/employee-estate.service';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { Employee } from '../_models/employees';
                selector: 'employees-estate',
                providers: [ ConfirmationService ]
             } )
-export class EmployeesEstateComponent {
+export class EmployeesEstateComponent implements OnInit {
    @Input() employee: Employee;
    employeeEstate: EmployeeEstate = new EmployeeEstate();
    dialogObjet: EmployeeEstate = new EmployeeEstate();
@@ -63,6 +63,5 @@ export class EmployeesEstateComponent {
 
    add() {
       this.router.navigate( [ 'employees-estate/add/' + this.employee.idTercero ] );
-      //this.router.navigate(['employees-estate/add/'+179 ]);
    }
 }

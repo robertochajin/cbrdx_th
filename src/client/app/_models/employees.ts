@@ -106,7 +106,7 @@ export class Employee {
       this.imc = 0;
       this.indicadorVivo = true;
       this.indicadorHabilitado = true;
-      this.nroHijos = 0,
+      this.nroHijos = 0;
       this.numeroDocumento = '';
       this.peso = 0;
       this.primerApellido = '';

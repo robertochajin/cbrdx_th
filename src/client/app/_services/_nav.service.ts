@@ -52,8 +52,8 @@ export class NavService {
       this.subject.next( this.msgs );
    }
 
-   setTab( number: number ) {
-      this._navTab = number;
+   setTab( numero: number ) {
+      this._navTab = numero;
    }
 
    getTab() {

@@ -23,9 +23,14 @@ import { AuthenticationService } from '../_services/authentication.service';
            } )
 export class SharedModule {
 
-   topInvalid: number;
+   private topInvalid: number;
    private _window: Window;
-
+   static forRoot(): ModuleWithProviders {
+      return {
+         ngModule: SharedModule,
+         providers: [ TranslateService ]
+      };
+   }
    constructor( private router: Router, windowRef: WindowRefService ) {
 
       this._window = windowRef.nativeWindow;
@@ -67,11 +72,6 @@ export class SharedModule {
       } );
    }
 
-   static forRoot(): ModuleWithProviders {
-      return {
-         ngModule: SharedModule,
-         providers: [ TranslateService ]
-      };
-   }
+
 
 }

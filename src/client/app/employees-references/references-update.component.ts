@@ -105,8 +105,6 @@ export class ReferencesUpdateComponent implements OnInit {
                                            accept: () => {
                                               this._nav.setTab( 5 );
                                               this.location.back();
-                                           },
-                                           reject: () => {
                                            }
                                         } );
    }

@@ -39,7 +39,7 @@ export class FormalStudiesUpdateComponent implements OnInit {
    maxDateFinal: Date = null;
    es: any;
    range: string;
-   idEstadoEstudioFinalizado = 1; //hace falta definir acceso a constantes en servicio
+   idEstadoEstudioFinalizado = 1; // hace falta definir acceso a constantes en servicio
    idTercero: number;
    wrongCity: boolean = true;
    wrongInstitute: boolean = true;
@@ -204,7 +204,7 @@ export class FormalStudiesUpdateComponent implements OnInit {
    onSelectEnd( event: any ) {
       let d = new Date( Date.parse( event ) );
       this.fstudy.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-      this.maxDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() ) - 1;
+      this.maxDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1);
    }
 
    updateEnd(): void {

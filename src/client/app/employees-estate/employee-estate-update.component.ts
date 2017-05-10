@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { EmployeeEstate } from '../_models/employee-estate';
@@ -17,7 +17,7 @@ import { ListaItem } from '../_models/listaItem';
                providers: [ ConfirmationService ]
             } )
 
-export class EmployeesEstateUpdateComponent {
+export class EmployeesEstateUpdateComponent implements OnInit {
    @Input()
    employeeEstate: EmployeeEstate = new EmployeeEstate();
    header: string = 'Agregando Inmueble';
