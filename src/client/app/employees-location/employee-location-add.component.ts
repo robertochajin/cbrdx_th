@@ -196,7 +196,9 @@ export class LocationAddComponent implements OnInit {
       this.finalAddress += this.numberOne === undefined ? '' : this.numberOne + ' - ';
       this.finalAddress += this.numberTwo === undefined ? '' : this.numberTwo + ' ';
 
-      if ( this.finalAddress !== '' && this.localizacion.locacion !== undefined && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined ) {
+      if ( this.finalAddress !== '' && this.localizacion.locacion !== undefined &&
+           this.localizacion.locacion.camino !== '' &&
+           this.localizacion.locacion.camino !== undefined ) {
          let geocoder = new google.maps.Geocoder();
 
          const assingLocation = ( l: any, t: any ) => {
@@ -241,7 +243,9 @@ export class LocationAddComponent implements OnInit {
             this.finalAddress += c.tipo + ' ' + c.detalle + ' ';
       }
 
-      if ( this.localizacion.locacion !== undefined && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined ) {
+      if ( this.localizacion.locacion !== undefined &&
+           this.localizacion.locacion.camino !== '' &&
+           this.localizacion.locacion.camino !== undefined ) {
          this.finalAddress += this.localizacion.locacion.camino;
       }
    }

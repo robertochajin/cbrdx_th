@@ -90,7 +90,7 @@ export class FamilyInformationAddComponent implements OnInit {
       } );
 
       this.listaService.getMasterDetailsByCode( 'ListasTiposTerceros', 'TERFAM' ).subscribe( res => {
-         this.idTipoTercero = res.idLista
+         this.idTipoTercero = res.idLista;
       } );
 
       let today = new Date();
@@ -243,7 +243,7 @@ export class FamilyInformationAddComponent implements OnInit {
       if ( input !== undefined ) {
          return input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       } else {
-         return ''
+         return '';
       }
    }
 
@@ -262,7 +262,9 @@ export class FamilyInformationAddComponent implements OnInit {
    }
 
    validateDocument() {
-      if ( this.familyInformation.numeroDocumento !== '' && this.familyInformation.numeroDocumento !== null && this.selectedDocument !== null ) {
+      if ( this.familyInformation.numeroDocumento !== '' &&
+           this.familyInformation.numeroDocumento !== null &&
+           this.selectedDocument !== null ) {
          this.employeesService.validateDocument( this.familyInformation.numeroDocumento, this.selectedDocument ).subscribe( res => {
             if ( res !== undefined && res.idTercero > 0 ) {
                this.repeatedDocument = true;

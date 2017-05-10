@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Employee } from '../_models/employees';
@@ -19,12 +19,12 @@ import { ListaService } from '../_services/lista.service';
 
 @Component( {
                moduleId: module.id,
-               selector: 'employees',
+               selector: 'employees-form',
                templateUrl: 'employees-form.component.html',
                providers: [ ConfirmationService ]
             } )
 
-export class EmployeesUpdateComponent {
+export class EmployeesUpdateComponent implements OnInit {
    @Input()
    employee: Employee = new Employee();
    header: string = 'Agregando Colaborador';
@@ -253,7 +253,6 @@ export class EmployeesUpdateComponent {
          this.employeesService.update( this.employee )
          .subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
-            //this.router.navigate(['/employees']);
             this.location.back();
          }, error => {
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );

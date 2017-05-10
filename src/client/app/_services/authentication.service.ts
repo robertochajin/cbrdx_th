@@ -9,10 +9,10 @@ import { tokenNotExpired } from 'angular2-jwt';
 export class AuthenticationService {
    public token: string;
    public headers = new Headers( { 'Content-Type': 'application/json' } );
-   private masterService = '<%= SVC_TH_URL %>/auth';
+   masterService = '<%= SVC_TH_URL %>/auth';
 
-   private missionAnnouncedSource = new Subject<string>();
-   private logoutAnnoucedSource = new Subject<string>();
+   missionAnnouncedSource = new Subject<string>();
+   logoutAnnoucedSource = new Subject<string>();
 
    loginAnnounced$ = this.missionAnnouncedSource.asObservable();
    logoutAnnounced$ = this.logoutAnnoucedSource.asObservable();

@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Employee } from '../_models/employees';
@@ -18,7 +18,7 @@ import { ListaService } from '../_services/lista.service';
                providers: []
             } )
 
-export class EmployeesAdditionalDataComponent {
+export class EmployeesAdditionalDataComponent implements OnInit {
    @Input() employee: Employee;
    header: string = 'Datos Adicionales ';
 
@@ -73,7 +73,7 @@ export class EmployeesAdditionalDataComponent {
 
    ngOnInit() {
       this.submitted = true;
-      let tipo = this.employee.genero === 'Masculino' ? 'PANH' : 'PANM'
+      let tipo = this.employee.genero === 'Masculino' ? 'PANH' : 'PANM';
       this.listaService.getMasterDetailsStartsByCode( 'ListasTallas', tipo ).subscribe( rest => {
          this.listSizePants.push( { label: 'Seleccione', value: null } );
          for ( let dp of rest ) {

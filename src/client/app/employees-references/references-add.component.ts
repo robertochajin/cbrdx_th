@@ -96,10 +96,8 @@ export class ReferencesAddComponent implements OnInit {
                                            accept: () => {
                                               this._nav.setTab( 8 );
                                               this.location.back();
-                                           },
-                                           reject: () => {
                                            }
-                                        } );
+                                        });
    }
 
    focusUP() {

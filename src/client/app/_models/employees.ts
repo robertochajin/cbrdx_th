@@ -52,13 +52,13 @@ export class Employee {
    public cargoActual?: string;
    public gentilicio?: string;
    public fechaDefuncion?: string;
-   public indicadorVivo: boolean;//eje: (true, false)
-   public indicadorHabilitado: boolean;//eje: (true, false)
-   public idCoberturaSalud: number;//eje: (Contributivo, Subsidiado Total/Parcial,Ninguno)
-   public idEstadoJuridico: number;//eje: (Contributivo, Subsidiado Total/Parcial,Ninguno)
-   public idTipoAfiliacion: number;//eje: (cotizante)
-   public idTipoOcupacion: number;//eje: (Independiente, Dependiente)
-   public idOcupacion: number; //eje: (Comercial,)
+   public indicadorVivo: boolean; // eje: (true, false)
+   public indicadorHabilitado: boolean; // eje: (true, false)
+   public idCoberturaSalud: number; // eje: (Contributivo, Subsidiado Total/Parcial,Ninguno)
+   public idEstadoJuridico: number; // eje: (Contributivo, Subsidiado Total/Parcial,Ninguno)
+   public idTipoAfiliacion: number; // eje: (cotizante)
+   public idTipoOcupacion: number; // eje: (Independiente, Dependiente)
+   public idOcupacion: number; // eje: (Comercial,)
    public idSectorEconomico: number;
    public idActividadEconomica: number;
    public idTipoTercero: number;
@@ -80,7 +80,6 @@ export class Employee {
       this.cargoActual = '';
       this.genero = '';
       this.razonSocial = '';
-
       this.auditoriaUsuario = 1;
       this.correoElectronico = '';
       this.sitioWeb = '';
@@ -108,7 +107,7 @@ export class Employee {
       this.indicadorVivo = true;
       this.indicadorHabilitado = true;
       this.nroHijos = 0,
-         this.numeroDocumento = '';
+      this.numeroDocumento = '';
       this.peso = 0;
       this.primerApellido = '';
       this.primerNombre = '';

@@ -38,7 +38,7 @@ export class FormalStudiesAddComponent implements OnInit {
    maxDateFinal: Date = null;
    es: any;
    range: string;
-   id_estado_estudio_finalizado = 1;//hace falta definir acceso a constantes en servicio
+   idEstadoEstudioFinalizado = 1; // hace falta definir acceso a constantes en servicio
    idTercero: number;
    wrongCity: boolean = true;
    wrongInstitute: boolean = true;
@@ -116,7 +116,7 @@ export class FormalStudiesAddComponent implements OnInit {
             }
             let fi: moment.Moment = moment( this.fstudy.fechaIngresa, 'MM/DD/YYYY' );
             this.fstudy.fechaIngresa = fi.format( 'YYYY-MM-DD' );
-            if ( this.fstudy.idEstado === this.id_estado_estudio_finalizado ) {
+            if ( this.fstudy.idEstado === this.idEstadoEstudioFinalizado ) {
                let ff: moment.Moment = moment( this.fstudy.fechaTermina, 'MM/DD/YYYY' );
                this.fstudy.fechaTermina = ff.format( 'YYYY-MM-DD' );
             } else {
@@ -179,7 +179,7 @@ export class FormalStudiesAddComponent implements OnInit {
    }
 
    updateEnd(): void {
-      if ( this.fstudy.idEstado !== this.id_estado_estudio_finalizado ) {
+      if ( this.fstudy.idEstado !== this.idEstadoEstudioFinalizado ) {
          this.fstudy.fechaTermina = undefined;
       }
    }

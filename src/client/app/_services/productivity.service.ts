@@ -19,7 +19,7 @@ export class ProductivityService {
       return this.authHttp.get( this.serviceURL + 'cargosProductividades/buscarId/' + id )
       .map( ( res: Response ) => {
          if ( res.text() !== '' ) {
-            return res.json() as Productivity
+            return res.json() as Productivity;
          } else {
             return undefined;
          }

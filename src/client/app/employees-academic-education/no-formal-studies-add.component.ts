@@ -42,7 +42,7 @@ export class NoFormalStudiesAddComponent implements OnInit {
    fechaTermina: string;
    files: string;
    uploadedFiles: any[] = [];
-   //hace falta definir acceso a constantes en servicio
+   // hace falta definir acceso a constantes en servicio
 
    constructor( private academicEducationService: AcademicEducationService,
       private studyLevelServices: StudyLevelServices,
@@ -205,8 +205,8 @@ export class NoFormalStudiesAddComponent implements OnInit {
          this.uploadedFiles.push( file );
       }
 
-      //this.msgs = [];
-      //this.msgs.push({severity: 'info', summary: 'File Uploaded', detail: ''});
+      // this.msgs = [];
+      //t his.msgs.push({severity: 'info', summary: 'File Uploaded', detail: ''});
    }
 
 }

@@ -40,7 +40,7 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
    idTercero: number;
    fechaIngresa: string;
    fechaTermina: string;
-   //hace falta definir acceso a constantes en servicio
+   // hace falta definir acceso a constantes en servicio
 
    constructor( private academicEducationService: AcademicEducationService,
       private studyLevelServices: StudyLevelServices,

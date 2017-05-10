@@ -23,10 +23,10 @@ export class EmployeesContactListComponent {
    lcontact: EmployeesContact = new EmployeesContact();
    dialogObjet: EmployeesContact = new EmployeesContact();
    contacts: EmployeesContact[] = [];
-   show_form: boolean = false;
+   showForm: boolean = false;
    msgs: Message[] = [];
    relationship: SelectItem[] = [];
-   idTer: number
+   idTer: number;
    tel: boolean = false;
    cel: boolean = true;
 
@@ -72,7 +72,7 @@ export class EmployeesContactListComponent {
 
    onSubmit() {
       this.msgs = [];
-      this.show_form = false;
+      this.showForm = false;
       this.contact.idTercero = this.idTer;
       if ( this.contact.idTerceroContacto === null || this.contact.idTerceroContacto === 0 ) {
          this.employeesContactService.add( this.contact )
@@ -88,7 +88,7 @@ export class EmployeesContactListComponent {
                }
             );
          }, error => {
-            this.show_form = true;
+            this.showForm = true;
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       } else {
@@ -107,7 +107,7 @@ export class EmployeesContactListComponent {
             );
 
          }, error => {
-            this.show_form = true;
+            this.showForm = true;
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       }
@@ -136,19 +136,19 @@ export class EmployeesContactListComponent {
    add() {
       this.msgs = [];
       this.contact = new EmployeesContact();
-      this.show_form = true;
+      this.showForm = true;
    }
 
    update( f: EmployeesContact ) {
       this.msgs = [];
-      this.show_form = true;
+      this.showForm = true;
       this.contact = Object.assign( {}, f );
 
    }
 
    goBackUpdate() {
       this.msgs = [];
-      this.show_form = false;
+      this.showForm = false;
    }
 
    capitalize() {

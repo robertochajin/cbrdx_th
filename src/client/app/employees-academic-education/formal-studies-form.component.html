@@ -91,11 +91,11 @@
             </div>
           </div>
 
-          <div class="ui-grid-col-6"  *ngIf="(estadoEstudio.value == id_estado_estudio_finalizado) && (ingreso.value !== undefined)">
+          <div class="ui-grid-col-6"  *ngIf="(estadoEstudio.value == idEstadoEstudioFinalizado) && (ingreso.value !== undefined)">
             <label for="fechaTermina">{{'EMPLOYEES.LBL_FINALIZACION' | translate}} </label>
             <p-calendar id="fechaTermina" name="fechaTermina"  [showIcon]="true"
                         [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true" [minDate]="minDate" [maxDate]="maxDateFinal"
-                        dataType="date" (onSelect)="onSelectEnd($event)" #fechaTermina="ngModel" [required]="estadoEstudio.value == id_estado_estudio_finalizado"
+                        dataType="date" (onSelect)="onSelectEnd($event)" #fechaTermina="ngModel" [required]="estadoEstudio.value == idEstadoEstudioFinalizado"
                         [(ngModel)]="fstudy.fechaTermina"></p-calendar>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fechaTermina.valid">
               {{'EMPLOYEES.LBL_FINALIZACION' | translate}} {{'LBL_REQUERIDO' | translate}}

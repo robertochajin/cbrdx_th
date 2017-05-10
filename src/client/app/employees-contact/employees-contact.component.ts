@@ -31,9 +31,6 @@ export class EmployeesContactComponent {
 
    }
 
-   ngOnInit() {
-
-   }
 
    onSubmit() {
       this.msgs = [];

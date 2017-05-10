@@ -7,7 +7,7 @@ import { Employee } from '../_models/employees';
 import { NavService } from '../_services/_nav.service';
 @Component( {
                moduleId: module.id,
-               selector: 'employee',
+               selector: 'employees-detail',
                templateUrl: 'employees-detail.component.html'
             } )
 

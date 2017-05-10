@@ -42,8 +42,7 @@ export class AppComponent implements AfterViewInit {
    ngAfterViewInit() {
 
       // Add script theme
-      jQuery.getScript( 'assets/js/app.js', function () {
-      } );
+      jQuery.getScript( 'assets/js/app.js');
 
    }
 

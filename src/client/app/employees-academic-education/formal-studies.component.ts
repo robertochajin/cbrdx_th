@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormalStudies } from './formal-studies';
 import { AcademicEducationService } from '../_services/academic-education.service';
@@ -11,7 +11,7 @@ import { Employee } from '../_models/employees';
                selector: 'academic-education-formal',
                providers: [ ConfirmationService ]
             } )
-export class FormalStudiesComponent {
+export class FormalStudiesComponent implements OnInit {
 
    @Input() employee: Employee;
 

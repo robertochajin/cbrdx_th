@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Employee } from '../_models/employees';
@@ -16,12 +16,12 @@ import { ListaItem } from '../_models/listaItem';
 
 @Component( {
                moduleId: module.id,
-               selector: 'employees',
+               selector: 'employees-form',
                templateUrl: 'employees-form.component.html',
                providers: [ ConfirmationService ]
             } )
 
-export class EmployeesAddComponent {
+export class EmployeesAddComponent implements OnInit {
    @Input()
    employee: Employee = new Employee();
    header: string = 'Agregando Colaborador';
@@ -164,7 +164,7 @@ export class EmployeesAddComponent {
 
       this.listaService.getMasterDetailsByCode( 'ListasTiposTerceros', 'TERCOL' ).subscribe(
          res => {
-            this.idTipoTercero = res.idLista
+            this.idTipoTercero = res.idLista;
          } );
 
    }
@@ -227,7 +227,6 @@ export class EmployeesAddComponent {
          this.employeesService.add( this.employee )
          .subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
-            //this.router.navigate(['/employees']);
             this.location.back();
          }, error => {
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );

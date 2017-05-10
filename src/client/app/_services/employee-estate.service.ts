@@ -5,8 +5,8 @@ import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class EmployeeEstateService {
-   private serviceURL = '<%= SVC_TH_URL %>/api/';
 
+   serviceURL = '<%= SVC_TH_URL %>/api/';
    headers = new Headers( { 'Content-Type': 'application/json' } );
 
    constructor( private authHttp: AuthHttp ) {
