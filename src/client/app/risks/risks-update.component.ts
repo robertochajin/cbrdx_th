@@ -4,7 +4,7 @@ import { RisksService } from '../_services/risks.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ConfirmationService, Message, SelectItem } from 'primeng/primeng';
 import { Location } from '@angular/common';
-
+import { NavService } from '../_services/_nav.service';
 @Component( {
                moduleId: module.id,
                templateUrl: 'risks-form.component.html',
@@ -22,13 +22,14 @@ export class RisksUpdateComponent implements OnInit {
    header = 'Agregando Riesgo';
    dialogObjet: Risks = new Risks();
    habilitado: boolean;
-   msgs: Message[] = [];
+   msg: Message;
 
    constructor( private risksService: RisksService,
       private router: Router,
       private location: Location,
       private route: ActivatedRoute,
-      private confirmationService: ConfirmationService ) {
+      private confirmationService: ConfirmationService,
+      private navService: NavService ) {
    }
 
    ngOnInit() {
@@ -62,10 +63,12 @@ export class RisksUpdateComponent implements OnInit {
    onSubmit() {
       this.risksService.update( this.risk )
       .subscribe( data => {
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+         this.navService.setMesage( typeMessage, this.msg );
          this.location.back();
       }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         let typeMessage = 3; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+         this.navService.setMesage( typeMessage, this.msg );
       } );
    }
 

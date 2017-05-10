@@ -8,7 +8,7 @@ import { Localizaciones } from '../_models/localizaciones';
 import { LocateService } from '../_services/locate.service';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
-
+import { NavService } from '../_services/_nav.service';
 @Component( {
                moduleId: module.id,
                templateUrl: 'physic-structure-form.component.html',
@@ -25,7 +25,8 @@ export class PhysicStructureUpdateComponent  implements OnInit {
    ListPhysicStructure: PhysicStructure[];
    ListCategory: SelectItem[] = [];
    submitted: boolean;
-   msgs: Message[] = [];
+   msg: Message;
+   msgs: Message[]=[];
    header = 'Editando Estructura Física';
 
    constructor( private physicStructureService: PhysicStructureService,
@@ -34,7 +35,8 @@ export class PhysicStructureUpdateComponent  implements OnInit {
       private router: Router,
       private route: ActivatedRoute,
       private location: Location,
-      private confirmationService: ConfirmationService ) {
+      private confirmationService: ConfirmationService,
+      private navService: NavService ) {
    }
 
    ngOnInit() {
@@ -80,7 +82,6 @@ export class PhysicStructureUpdateComponent  implements OnInit {
    }
 
    onSubmit() {
-      this.msgs = [];
       if ( this.physicStructure.direccion !== '' ) {
          this.submitted = true;
          this.localizacion.indicadorHabilitado = true;
@@ -89,10 +90,12 @@ export class PhysicStructureUpdateComponent  implements OnInit {
                this.physicStructure.idLocalizacion = data.idLocalizacion;
                this.physicStructureService.update( this.physicStructure ).subscribe(
                   data => {
-                     this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+                     let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+                     this.navService.setMesage( typeMessage, this.msg );
                      this.location.back();
                   }, error => {
-                     this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+                     let typeMessage = 3; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+                     this.navService.setMesage( typeMessage, this.msg );
                   }
                );
             } );

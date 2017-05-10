@@ -8,6 +8,7 @@ import { Employee } from '../_models/employees';
 import { Usuario } from '../_models/usuario';
 import { UsuariosService } from '../_services/usuarios.service';
 import { JwtHelper } from 'angular2-jwt';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -32,23 +33,27 @@ export class UserSessionComponent implements OnInit {
    showOldPass = 'password';
    showPass = 'password';
    showConfim = 'password';
-
+   svcThUrl = '<%= SVC_TH_URL %>/api/upload';
+   image: string;
+   eye = 'fa-eye-slash';
    constructor( private employeeService: EmployeesService,
       private usuariosService: UsuariosService,
       private route: ActivatedRoute,
       private location: Location,
       private router: Router,
-      private confirmationService: ConfirmationService ) {
+      private confirmationService: ConfirmationService,
+      private navService: NavService
+   ) {
    }
 
    ngOnInit(): void {
 
       let token = localStorage.getItem( 'token' );
-
       if ( token !== null ) {
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
       }
 
+      this.image = this.usuarioLogueado.avatar;
       let idUsuario = this.usuarioLogueado.usuario.idUsuario;
 
       this.usuariosService.viewUser( idUsuario ).subscribe( data => {
@@ -90,11 +95,22 @@ export class UserSessionComponent implements OnInit {
    show() {
       if ( this.showOldPass === 'password' ) {
          this.showOldPass = 'text';
+         this.eye = 'fa-eye';
       } else {
          this.showOldPass = 'password';
+         this.eye = 'fa-eye-slash'
       }
       console.info( this.showOldPass );
    }
 
+   onBeforeSend(event: any){
+      debugger;
+      event.xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+   }
+   onUpload(event: any) {
+      this.image = event.xhr.responseText;
+      this.usuariosService.refreshToken();
+      this.navService.setAvatar(this.image);
+   }
 }
 
