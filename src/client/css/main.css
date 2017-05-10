@@ -175,7 +175,15 @@ a{
   border-left: 10px solid #adadad;
 }
 
-
+/** -- Notificaciones Globales -- */
+#msgNotificacion{
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: 99999999;
+   width: 99%;
+   margin: 6px;
+}
 
 
 

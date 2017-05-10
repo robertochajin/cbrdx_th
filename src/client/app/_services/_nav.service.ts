@@ -8,9 +8,9 @@ import { JwtHelper } from 'angular2-jwt';
 export class NavService {
 
    _navTab: number;
-   msgs: Message = { severity: 'error', summary: 'Error', detail: 'Error al guardar / Intente nuevamente.' };
-   msgAdd: Message = { severity: 'info', summary: 'Exito', detail: 'Registro agregado correctamente.' };
-   msgUpdate: Message = { severity: 'info', summary: 'Exito', detail: 'Registro actualizado correctamente.' };
+   msgs: Message = { severity: 'info', summary: 'Error', detail: 'Error al guardar / Intente nuevamente.' };
+   msgAdd: Message = { severity: 'success', summary: 'Exito', detail: 'Registro agregado correctamente.' };
+   msgUpdate: Message = { severity: 'success', summary: 'Exito', detail: 'Registro actualizado correctamente.' };
    msgError: Message = { severity: 'error', summary: 'Error', detail: 'Error al guardar / Intente nuevamente.' };
    subject = new Subject<Message>();
    avatar = new Subject<string>();
@@ -34,6 +34,8 @@ export class NavService {
    }
 
    setMesage( type: number, msgCustom: Message ) {
+
+      this.msgs = [];
 
       switch ( type ) {
          case 1:
