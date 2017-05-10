@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Productivity } from '../_models/productivity';
-import { AuthHttp } from "angular2-jwt";
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class ProductivityService {
@@ -12,18 +12,18 @@ export class ProductivityService {
    }
 
    getlistProductivity() {
-      return this.authHttp.get( this.serviceURL + "productividades").map( ( res: Response ) => res.json() );
+      return this.authHttp.get( this.serviceURL + 'productividades' ).map( ( res: Response ) => res.json() );
    }
 
    getlistProductivityByIdCargo( id: number ) {
-      return this.authHttp.get( this.serviceURL + "cargosProductividades/buscarId/" + id)
-         .map( ( res: Response ) => {
-            if ( res.text() != '' ) {
-               return res.json() as Productivity
-            } else {
-               return undefined;
-            }
-         } );
+      return this.authHttp.get( this.serviceURL + 'cargosProductividades/buscarId/' + id )
+      .map( ( res: Response ) => {
+         if ( res.text() !== '' ) {
+            return res.json() as Productivity;
+         } else {
+            return undefined;
+         }
+      } );
    }
 
    add( c: Productivity ) {

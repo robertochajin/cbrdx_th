@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { Ponderancies } from "../_models/ponderancies";
-import { Observable } from "rxjs/Rx";
-import { AuthHttp } from "angular2-jwt";
+import { Ponderancies } from '../_models/ponderancies';
+import { Observable } from 'rxjs/Rx';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class PonderanciesServices {

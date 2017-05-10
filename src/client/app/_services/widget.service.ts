@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { Observable } from "rxjs/Rx";
-import { Widgets } from "../_models/widgets";
+import { Observable } from 'rxjs/Rx';
+import { Widgets } from '../_models/widgets';
 import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()

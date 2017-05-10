@@ -24,6 +24,8 @@
     "clean.prod",
     "tslint",
     "build.assets.prod",
+    "build.fonts",
+    "build.customfonts",
     "build.html_css",
     "copy.prod",
     "build.js.prod",

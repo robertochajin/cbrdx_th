@@ -1,8 +1,8 @@
 <p-messages [value]="msgs"></p-messages>
 <p-confirmDialog width="400" #cd>
     <p-footer>
-        <button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate:param }}" (click)="cd.reject()"></button>
-        <button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate:param }}" (click)="cd.accept()"></button>
+        <button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
     </p-footer>
 </p-confirmDialog>
 <div *ngIf="experience">
@@ -19,31 +19,31 @@
                 <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="empresa">{{'EMPLOYEES.LBL_EMPRESA' | translate:param }}</label>
+                            <label for="empresa">{{'EMPLOYEES.LBL_EMPRESA' | translate }}</label>
                             <input id="empresa" type="text" pInputText name="empresa"
                                    [(ngModel)]="experience.empresa" #empresa="ngModel"
                                    required/>
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !empresa.valid">
                               <i class="fa fa-close"></i>
-                              {{'EMPLOYEES.LBL_EMPRESA' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                              {{'EMPLOYEES.LBL_EMPRESA' | translate }} {{'LBL_REQUERIDO' | translate }}
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                          <label for="telefonoEmpresa">{{'LBL_TELEFONO' | translate:param }} {{'EMPLOYEES.LBL_EMPRESA' | translate:param }}</label>
+                          <label for="telefonoEmpresa">{{'LBL_TELEFONO' | translate }} {{'EMPLOYEES.LBL_EMPRESA' | translate }}</label>
                           <input id="telefonoEmpresa" type="text" pInputText name="telefonoEmpresa"
                                  [(ngModel)]="experience.telefonoEmpresa" #telefonoEmpresa="ngModel"
                                  required/>
                           <div class="ui-message ui-messages-error ui-corner-all"
                                *ngIf="f.submitted && !telefonoEmpresa.valid">
                             <i class="fa fa-close"></i>
-                            {{'LBL_TELEFONO' | translate:param }} {{'EMPLOYEES.LBL_EMPRESA' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                            {{'LBL_TELEFONO' | translate }} {{'EMPLOYEES.LBL_EMPRESA' | translate }} {{'LBL_REQUERIDO' | translate }}
                           </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="sectorEmpresa">{{'EMPLOYEES.LBL_SECTOR' | translate:param }} {{'EMPLOYEES.LBL_EMPRESA' | translate:param }}</label>
+                            <label for="sectorEmpresa">{{'EMPLOYEES.LBL_SECTOR' | translate }} {{'EMPLOYEES.LBL_EMPRESA' | translate }}</label>
                             <p-dropdown name="sectorEmpresa" id="sectorEmpresa"  required="true" [autoWidth]="false"
                                         [(ngModel)]="experience.idSectorEmpresa"
                                         [options]="sector" #sectorEmpresa="ngModel"
@@ -52,11 +52,11 @@
                             <div class="ui-message ui-messages-error ui-corner-all"
                                 *ngIf="f.submitted && !sectorEmpresa.valid">
                                 <i class="fa fa-close"></i>
-                                {{'EMPLOYEES.LBL_SECTOR' | translate:param }} {{'EMPLOYEES.LBL_EMPRESA' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                                {{'EMPLOYEES.LBL_SECTOR' | translate }} {{'EMPLOYEES.LBL_EMPRESA' | translate }} {{'LBL_REQUERIDO' | translate }}
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="subsectorEmpresa">{{'EMPLOYEES.LBL_ACTIVIDADECONOMICA' | translate:param }}</label>
+                            <label for="subsectorEmpresa">{{'EMPLOYEES.LBL_ACTIVIDADECONOMICA' | translate }}</label>
                             <p-dropdown name="subSectorEmpresa" id="subSectorEmpresa" [autoWidth]="false" required="true"
                                         [(ngModel)]="experience.idSubSectorEmpresa" filter="filter"
                                         [options]="activities" #subSectorEmpresa="ngModel"
@@ -64,24 +64,24 @@
                             <div  class="ui-message ui-messages-error ui-corner-all"
                                   *ngIf="f.submitted && !subSectorEmpresa.valid">
                                 <i class="fa fa-close"></i>
-                                {{'EMPLOYEES.LBL_ACTIVIDADECONOMICA' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                                {{'EMPLOYEES.LBL_ACTIVIDADECONOMICA' | translate }} {{'LBL_REQUERIDO' | translate }}
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="cargo">{{'EMPLOYEES.LBL_CARGO' | translate:param }}</label>
+                            <label for="cargo">{{'EMPLOYEES.LBL_CARGO' | translate }}</label>
                             <input id="cargo" type="text" pInputText name="cargo"
                                    [(ngModel)]="experience.cargo" #cargo="ngModel"
                                    required/>
                             <div  class="ui-message ui-messages-error ui-corner-all"
                                   *ngIf="f.submitted && !cargo.valid">
                               <i class="fa fa-close"></i>
-                              {{'EMPLOYEES.LBL_CARGO' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                              {{'EMPLOYEES.LBL_CARGO' | translate }} {{'LBL_REQUERIDO' | translate }}
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="nivelCargo">{{'EMPLOYEES.LBL_NIVELCARGO' | translate:param }}</label>
+                            <label for="nivelCargo">{{'EMPLOYEES.LBL_NIVELCARGO' | translate }}</label>
                             <p-dropdown name="nivelCargo" id="nivelCargo" [autoWidth]="false" required="true"
                                         [(ngModel)]="experience.idNivelCargo"
                                         [options]="officeLevel" #nivelCargo="ngModel"
@@ -89,37 +89,37 @@
                             <div  class="ui-message ui-messages-error ui-corner-all"
                                   *ngIf="f.submitted && !nivelCargo.valid">
                               <i class="fa fa-close"></i>
-                              {{'EMPLOYEES.LBL_NIVELCARGO' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                              {{'EMPLOYEES.LBL_NIVELCARGO' | translate }} {{'LBL_REQUERIDO' | translate }}
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="areaCargo">{{'EMPLOYEES.LBL_AREACARGO' | translate:param }}</label>
+                            <label for="areaCargo">{{'EMPLOYEES.LBL_AREACARGO' | translate }}</label>
                             <input id="areaCargo" type="text" pInputText name="areaCargo"
                                    [(ngModel)]="experience.areaCargo" #areaCargo="ngModel"
                                    required/>
                             <div  class="ui-message ui-messages-error ui-corner-all"
                                   *ngIf="f.submitted && !areaCargo.valid">
                               <i class="fa fa-close"></i>
-                              {{'EMPLOYEES.LBL_AREACARGO' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                              {{'EMPLOYEES.LBL_AREACARGO' | translate }} {{'LBL_REQUERIDO' | translate }}
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="jefeInmediato">{{'EMPLOYEES.LBL_JEFEINMEDIATO' | translate:param }}</label>
+                            <label for="jefeInmediato">{{'EMPLOYEES.LBL_JEFEINMEDIATO' | translate }}</label>
                             <input id="jefeInmediato" type="text" pInputText name="jefeInmediato"
                                    [(ngModel)]="experience.jefeInmediato" #jefeInmediato="ngModel"
                                    required/>
                             <div  class="ui-message ui-messages-error ui-corner-all"
                                   *ngIf="f.submitted && !jefeInmediato.valid">
                               <i class="fa fa-close"></i>
-                              {{'EMPLOYEES.LBL_JEFEINMEDIATO' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                              {{'EMPLOYEES.LBL_JEFEINMEDIATO' | translate }} {{'LBL_REQUERIDO' | translate }}
                             </div>
                           </div>
                     </div>
                     <div class="row">
                       <div class="form-group col-md-12">
-                        <label for="ciudad">{{'LBL_CIUDAD' | translate:param }}</label>
+                        <label for="ciudad">{{'LBL_CIUDAD' | translate }}</label>
                         <p-autoComplete placeholder="Buscar Ciudad " field="camino" name="ciudad" id="ciudad" #ciudad="ngModel" required="true"
                                         [(ngModel)]="city"
                                         [suggestions]="cityList"
@@ -129,45 +129,45 @@
                         <div  class="ui-message ui-messages-error ui-corner-all"
                               *ngIf="f.submitted && !ciudad.valid">
                           <i class="fa fa-close"></i>
-                          {{'LBL_CIUDAD' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                          {{'LBL_CIUDAD' | translate }} {{'LBL_REQUERIDO' | translate }}
                         </div>
                       </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4"
                              [ngClass]="{ 'has-error': f.submitted && !ingreso.valid }">
-                          <label for="ingreso">{{'EMPLOYEES.LBL_INGRESO' | translate:param }}</label>
+                          <label for="ingreso">{{'EMPLOYEES.LBL_INGRESO' | translate }}</label>
                           <p-calendar id="ingreso" name="ingreso" #ingreso="ngModel"
                                       (onSelect)="onSelectMethodCalendarIngreso($event)" [showIcon]="true"
                                       [maxDate]="maxDateIngreso" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range"
-                                      [locale]="es" readonlyInput="true" [dataType]="date" required="true"
-                                      [disabled]="disabled" [(ngModel)]="fechaIngresa">
+                                      [locale]="es" readonlyInput="true" dataType="date" required="true"
+                                      [(ngModel)]="fechaIngresa">
                           </p-calendar>
                           <div  class="ui-message ui-messages-error ui-corner-all"
                                 *ngIf="f.submitted && !ingreso.valid">
                             <i class="fa fa-close"></i>
-                            {{'EMPLOYEES.LBL_INGRESO' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                            {{'EMPLOYEES.LBL_INGRESO' | translate }} {{'LBL_REQUERIDO' | translate }}
                           </div>
                         </div>
                         <div class="form-group col-md-2">
-                          <label for="actualmente">{{'EMPLOYEES.LBL_ACTUALMENTE' | translate:param }}</label>
+                          <label for="actualmente">{{'EMPLOYEES.LBL_ACTUALMENTE' | translate }}</label>
                           <p-toggleButton id="actualmente" name="actualmente" onLabel="Si" offLabel="No" #actualmente="ngModel"
                                           onIcon="fa-check-square" offIcon="fa-square"
                                           [(ngModel)]="experience.indicadorActualmente">
                           </p-toggleButton>
                         </div>
                         <div class="form-group col-md-4" *ngIf="!experience.indicadorActualmente">
-                          <label for="finalizacion">{{'EMPLOYEES.LBL_FINALIZACION' | translate:param }}</label>
+                          <label for="finalizacion">{{'EMPLOYEES.LBL_FINALIZACION' | translate }}</label>
                           <p-calendar id="finalizacion" name="finalizacion" #finalizacion="ngModel"
                                       (onSelect)="onSelectMethodCalendarFinalizacion($event)" [showIcon]="true" required="true"
                                       [minDate]="minDate" [maxDate]="maxDateFinal" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range"
-                                      [locale]="es"  readonlyInput="true" [dataType]="date"
-                                      [disabled]="disabled" [(ngModel)]="fechaTermina">
+                                      [locale]="es"  readonlyInput="true" dataType="date"
+                                      [(ngModel)]="fechaTermina">
                           </p-calendar>
                           <div  class="ui-message ui-messages-error ui-corner-all"
                                 *ngIf="f.submitted && !finalizacion.valid">
                             <i class="fa fa-close"></i>
-                            {{'EMPLOYEES.LBL_FINALIZACION' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                            {{'EMPLOYEES.LBL_FINALIZACION' | translate }} {{'LBL_REQUERIDO' | translate }}
                           </div>
                       </div>
 
@@ -187,8 +187,8 @@
                 </div>
               <div class="row form-footer-buttons">
                 <div class="form-group col-md-12">
-                  <a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate:param }}</a>
-                  <button pButton type="submit" label="{{'BTN_GUARDAR' | translate:param }}"></button>
+                  <a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+                  <button pButton type="submit" label="{{'BTN_GUARDAR' | translate }}"></button>
                 </div>
               </div>
             </form>

@@ -1,8 +1,7 @@
-<p-messages [value]="msgs"></p-messages>
 <p-confirmDialog width="400" #cd>
     <p-footer>
-        <button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate:param }}" (click)="cd.reject()"></button>
-        <button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate:param }}" (click)="cd.accept()"></button>
+        <button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
     </p-footer>
 </p-confirmDialog>
 <div *ngIf="fault">
@@ -19,17 +18,17 @@
                 <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                     <div class="row">
                         <div class="form-group col-md-9">
-                            <label for="falta">* {{'FAULTSANDSANCTIONS.LBL_FALTA' | translate:param }}</label>
+                            <label for="falta">* {{'FAULTSANDSANCTIONS.LBL_FALTA' | translate }}</label>
                             <input pInputText type="text" id="falta" name="falta" #falta="ngModel" [readonly]="fault.idFalta != null"
                                  [(ngModel)]="fault.falta" required/>
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !falta.valid">
                               <i class="fa fa-close"></i>
-                              {{'FAULTSANDSANCTIONS.LBL_FALTA' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                              {{'FAULTSANDSANCTIONS.LBL_FALTA' | translate }} {{'LBL_REQUERIDO' | translate }}
                             </div>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="types">* {{'FAULTSANDSANCTIONS.LBL_TIPOFALTA' | translate:param }}</label>
+                            <label for="types">* {{'FAULTSANDSANCTIONS.LBL_TIPOFALTA' | translate }}</label>
                             <p-dropdown id="types"  name="types" required="true"
                                         [options]="faultsTypes" [autoWidth]="false"
                                         [(ngModel)]="fault.idTipoFalta"
@@ -38,7 +37,7 @@
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !types.valid">
                               <i class="fa fa-close"></i>
-                              {{'FAULTSANDSANCTIONS.LBL_TIPOFALTA' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                              {{'FAULTSANDSANCTIONS.LBL_TIPOFALTA' | translate }} {{'LBL_REQUERIDO' | translate }}
                             </div>
                         </div>
                       <!--<div class="form-group col-md-3">
@@ -57,7 +56,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="accion">* {{'FAULTSANDSANCTIONS.LBL_ACCIONSUGERIDA' | translate:param }}</label>
+                            <label for="accion">* {{'FAULTSANDSANCTIONS.LBL_ACCIONSUGERIDA' | translate }}</label>
                             <textarea id="accion" name="accion" pInputTextarea  rows="5"
                                       #accion="ngModel" required
                                       [(ngModel)]="fault.accion"
@@ -65,7 +64,7 @@
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !accion.valid">
                               <i class="fa fa-close"></i>
-                              {{'FAULTSANDSANCTIONS.LBL_ACCIONSUGERIDA' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                              {{'FAULTSANDSANCTIONS.LBL_ACCIONSUGERIDA' | translate }} {{'LBL_REQUERIDO' | translate }}
                             </div>
                         </div>
                     </div>
@@ -73,7 +72,7 @@
                         <div class="form-group col-md-5">
                         </div>
                         <div class="form-group col-md-4">
-                          <label for="indicador" class="control-label col-sm-3">{{'LBL_HABILITADO' | translate:param }}</label>
+                          <label for="indicador" class="control-label col-sm-3">{{'LBL_HABILITADO' | translate }}</label>
                           <div class=" col-sm-9">
                             <p-checkbox binary="true" id="indicador" name="indicador"
                                         [(ngModel)]="fault.indicadorHabilitado"

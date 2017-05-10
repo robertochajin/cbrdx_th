@@ -3,11 +3,11 @@
  */
 export class CentroCostos {
 
-    idCentroCostos: number;
-    centroCostos: string;
-    codigoCentroCostos: string;
-    indicadorHabilitado: boolean = true;
-    auditoriaUsuario: number;
-    auditoriaFecha: Date;
+   idCentroCostos: number;
+   centroCostos: string;
+   codigoCentroCostos: string;
+   indicadorHabilitado: boolean = true;
+   auditoriaUsuario: number;
+   auditoriaFecha: Date;
 
 }

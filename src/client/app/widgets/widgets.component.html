@@ -1,27 +1,27 @@
-<h3 class="first">Widgets</h3>
+<h3 class="first">{{ 'WIDGETS.LBL_ADMINWIDGETS' | translate }}</h3>
 <div>
    <div class="row datable-header">
       <div class="col-md-6 col-xs-12 datatable-header-add">
-         <button type="button" icon="fa-plus" label="{{ 'BTN_AGREGAR' | translate:param }} Widgets"
+         <button type="button" icon="fa-plus" label="{{ 'WIDGETS.BTN_AGREGARWIDGETS' | translate }}"
                  pButton (click)="add()"></button>
       </div>
       <div class="col-md-6 col-xs-12 datatable-header-search" >
          <div class="input-group">
             <div class="input-group-addon"><i class="fa fa-search"></i></div>
-            <input #gb type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
+            <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control">
          </div>
       </div>
    </div>
-   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="listWidgets" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-      <p-column field="codigoWidget" header="{{ 'LBL_CODIGO' | translate:param }}" [sortable]="true"></p-column>
-      <p-column field="widget" header="{{ 'LBL_NOMBRE' | translate:param }} " [sortable]="true"></p-column>
+   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="listWidgets" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+      <p-column field="codigoWidget" header="{{ 'LBL_CODIGO' | translate }}" [sortable]="true"></p-column>
+      <p-column field="widget" header="{{ 'LBL_NOMBRE' | translate }} " [sortable]="true"></p-column>
       <p-column field="descripcion" header="Url" [sortable]="true"></p-column>
-      <p-column header="{{ 'LBL_HABILITADO' | translate:param }}" styleClass="datatable-col-action">
+      <p-column header="{{ 'LBL_HABILITADO' | translate }}" styleClass="datatable-col-action">
          <template let-widget="rowData" pTemplate="body">
             <p-checkbox name="indicadorVirtual" [(ngModel)]="widget.indicadorHabilitado" binary="true" disabled="true" ></p-checkbox>
          </template>
       </p-column>
-      <p-column header="{{ 'LBL_ACCIONES' | translate:param }}" styleClass="datatable-col-action">
+      <p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
          <template let-widget="rowData" pTemplate="body">
             <button type="button" icon="fa-pencil" class="ui-button-success"
                     pButton (click)="update(widget)"></button>
