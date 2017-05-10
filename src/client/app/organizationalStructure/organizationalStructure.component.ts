@@ -30,7 +30,7 @@ export class OrganizationalStructureComponent {
    empresa = true;
    btnEmpresa = true;
    header: string;
-   displayDialog= false;
+   displayDialog = false;
    codeExists = false;
    documentExists = false;
    empty: string;
@@ -38,8 +38,7 @@ export class OrganizationalStructureComponent {
    guardando = false;
    localizacion: Localizaciones = new Localizaciones();
 
-   constructor(
-      private organizationalStructureService: OrganizationalStructureService,
+   constructor( private organizationalStructureService: OrganizationalStructureService,
       private listaService: ListaService,
       private politicalDivisionService: PoliticalDivisionService,
       private locateService: LocateService ) {
@@ -109,7 +108,6 @@ export class OrganizationalStructureComponent {
       } );
 
    }
-
 
    validateCode() {
       if ( this.organizationalStructure.codigo !== '' && this.organizationalStructure.codigo !== null ) {

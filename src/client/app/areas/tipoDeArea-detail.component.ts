@@ -9,7 +9,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 @Component( {
                moduleId: module.id,
                templateUrl: 'tipoDeArea-detail.component.html',
-               selector: 'tipoDeArea-detail'
+               selector: 'tipodearea-detail'
             } )
 export class TipoDeAreaDetailComponent {
 

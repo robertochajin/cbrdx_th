@@ -1,4 +1,4 @@
-import { Component, AfterViewChecked, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import './operators';
 import { LoginService } from './_services/login.service';
@@ -18,7 +18,7 @@ import { BreadcrumbService } from './shared/breadcrumb/breadcrumb.service';
                templateUrl: 'app.component.html',
                providers: [ FormBuilder, NavService ],
             } )
-export class AppComponent implements AfterViewInit, AfterViewChecked {
+export class AppComponent implements AfterViewInit {
    sessionStart: boolean;
    msgs: Message[] = [];
 
@@ -42,13 +42,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
    ngAfterViewInit() {
 
       // Add script theme
-      jQuery.getScript( 'assets/js/app.js', function () {
-      } );
+      jQuery.getScript( 'assets/js/app.js');
 
-   }
-
-   ngAfterViewChecked() {
-      //console.log('AfterViewChecked');
    }
 
    onSubmit() {

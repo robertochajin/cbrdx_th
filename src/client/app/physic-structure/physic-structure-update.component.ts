@@ -16,7 +16,7 @@ import { NavService } from '../_services/_nav.service';
                providers: [ ConfirmationService ]
             } )
 
-export class PhysicStructureUpdateComponent  implements OnInit {
+export class PhysicStructureUpdateComponent implements OnInit {
    physicStructure: PhysicStructure = new PhysicStructure();
    dialogObjet: PhysicStructure = new PhysicStructure();
    codExists = false;
@@ -26,7 +26,7 @@ export class PhysicStructureUpdateComponent  implements OnInit {
    ListCategory: SelectItem[] = [];
    submitted: boolean;
    msg: Message;
-   msgs: Message[]=[];
+   msgs: Message[] = [];
    header = 'Editando Estructura Física';
 
    constructor( private physicStructureService: PhysicStructureService,

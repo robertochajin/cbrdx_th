@@ -28,7 +28,7 @@ export class DivisionPoliticaService {
    }
 
    listByPadreDivisionPolitica( id: number ) {
-      return this.authHttp.get( this.serviceURL + "buscarHijos/" + id ).map( ( res: Response ) => res.json() as DivisionPolitica[] );
+      return this.authHttp.get( this.serviceURL + 'buscarHijos/' + id ).map( ( res: Response ) => res.json() as DivisionPolitica[] );
    }
 
    addDivisionPolitica( c: DivisionPolitica ): Promise<DivisionPolitica> {
@@ -41,7 +41,7 @@ export class DivisionPoliticaService {
    }
 
    viewDivisionPolitica( id: number ) {
-      return this.authHttp.get( this.serviceURL + "buscarId/" + id ).map( res => res.json() as DivisionPolitica );
+      return this.authHttp.get( this.serviceURL + 'buscarId/' + id ).map( res => res.json() as DivisionPolitica );
    }
 
    listDivisionPoliticaAreas() {

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/primeng';
 import { Employee } from '../_models/employees';
@@ -14,7 +14,7 @@ import * as moment from 'moment/moment';
                selector: 'clinical-information',
                providers: [ ConfirmationService ]
             } )
-export class ClinicalInformationComponent {
+export class ClinicalInformationComponent implements OnInit {
    @Input()
    employee: Employee;
    clinicalInformation: EmployeesClinicalData = new EmployeesClinicalData;
@@ -92,7 +92,7 @@ export class ClinicalInformationComponent {
    diagnosticSearch( event: any ) {
       this.diagnosticCIEServices.getByWildCard( event.query ).subscribe( diagnostics => {
          this.diagnosticList = diagnostics;
-         this.diagnosticList.map( d => d.label = d.codigo + ' : ' + d.descripcion )
+         this.diagnosticList.map( d => d.label = d.codigo + ' : ' + d.descripcion );
       } );
    }
 

@@ -7,7 +7,7 @@ import { JwtHelper } from 'angular2-jwt';
 @Injectable()
 export class NavService {
 
-   private _navTab: number;
+   _navTab: number;
    msgs: Message = { severity: 'error', summary: 'Error', detail: 'Error al guardar / Intente nuevamente.' };
    msgAdd: Message = { severity: 'info', summary: 'Exito', detail: 'Registro agregado correctamente.' };
    msgUpdate: Message = { severity: 'info', summary: 'Exito', detail: 'Registro actualizado correctamente.' };
@@ -24,12 +24,12 @@ export class NavService {
    // Observable avatar
    getAvatar$ = this.avatar.asObservable();
 
-   constructor( ) {
+   constructor() {
       let token = localStorage.getItem( 'token' );
 
       if ( token !== null ) {
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
-         this.setAvatar(this.usuarioLogueado.avatar);
+         this.setAvatar( this.usuarioLogueado.avatar );
       }
    }
 
@@ -75,6 +75,7 @@ export class NavService {
          return '';
       }
    }
+
    setAvatar( avatar: string ) {
       this.avatar.next( avatar );
    }

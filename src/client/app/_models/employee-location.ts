@@ -9,7 +9,4 @@ export class EmployeesLocation {
    auditoriaUsuario: Number;
    auditoriaFecha: Date;
 
-   constructor() {
-   }
-
 }

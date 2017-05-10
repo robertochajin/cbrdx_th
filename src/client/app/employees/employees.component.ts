@@ -29,7 +29,7 @@ export class EmployeesComponent {
    }
 
    ngOnInit() {
-      this.employeesService.getByTipo( "TERCOL" ).subscribe(
+      this.employeesService.getByTipo( 'TERCOL' ).subscribe(
          employees => {
             this.employees = employees;
             this.employees.forEach( e => {

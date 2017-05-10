@@ -16,6 +16,5 @@ export class Localizaciones {
    nomenclaturaPrincipal: number;
    locacion: { camino: string, idDivisionPolitica: number };
 
-   constructor() {
-   }
 }
+

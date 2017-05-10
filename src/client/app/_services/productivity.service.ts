@@ -12,14 +12,14 @@ export class ProductivityService {
    }
 
    getlistProductivity() {
-      return this.authHttp.get( this.serviceURL + "productividades" ).map( ( res: Response ) => res.json() );
+      return this.authHttp.get( this.serviceURL + 'productividades' ).map( ( res: Response ) => res.json() );
    }
 
    getlistProductivityByIdCargo( id: number ) {
-      return this.authHttp.get( this.serviceURL + "cargosProductividades/buscarId/" + id )
+      return this.authHttp.get( this.serviceURL + 'cargosProductividades/buscarId/' + id )
       .map( ( res: Response ) => {
          if ( res.text() !== '' ) {
-            return res.json() as Productivity
+            return res.json() as Productivity;
          } else {
             return undefined;
          }

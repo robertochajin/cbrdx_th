@@ -28,6 +28,7 @@ export class PhysicStructureAddComponent implements OnInit {
    addinglocation = true;
    localizacion: Localizaciones = new Localizaciones();
    msg: Message;
+
    constructor( private physicStructureService: PhysicStructureService,
       private listaService: ListaService,
       private locateService: LocateService,

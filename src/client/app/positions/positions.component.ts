@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Positions } from '../_models/positions';
 import { PositionsService } from '../_services/positions.service';
 import { Router } from '@angular/router';

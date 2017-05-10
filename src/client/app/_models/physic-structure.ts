@@ -14,7 +14,7 @@ export class PhysicStructure {
    indicadorHabilitado: boolean = true;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
-   
+
    constructor() {
       this.auditoriaFecha = null;
       this.auditoriaUsuario = null;
