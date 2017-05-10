@@ -29,7 +29,7 @@ export class ListaService {
    }
 
    getMasterByCodigo( codigo: string ) {
-      return this.authHttp.get( this.masterService + "codigo/" + codigo ).map( res => res.json() as Lista );
+      return this.authHttp.get( this.masterService + 'codigo/' + codigo ).map( res => res.json() as Lista );
    }
 
    createMaster( l: Lista ): Promise<Lista> {
@@ -72,7 +72,7 @@ export class ListaService {
    }
 
    clearDetail( li: number ) {
-      return this.authHttp.get( this.masterService + "clear/" + li );
+      return this.authHttp.get( this.masterService + 'clear/' + li );
    }
 
    updateMaster( l: Lista ) {
@@ -90,6 +90,6 @@ export class ListaService {
    }
 
    getTipoDato( id: number ) {
-      return this.authHttp.get( this.masterService + "listasTiposDatos/" + id ).map( res => res.json() as ListaTipoDato );
+      return this.authHttp.get( this.masterService + 'listasTiposDatos/' + id ).map( res => res.json() as ListaTipoDato );
    }
 }

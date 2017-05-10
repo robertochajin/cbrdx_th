@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import 'rxjs/add/operator/toPromise';
-//import 'rxjs/add/operator/toPromise';
 import { EmployeesContactComponent } from '../employees-contact/employees-contact.component';
 import { EmployeesContactListComponent } from '../employees-contact/employees-contact-list.component';
 import { SharedModule } from '../shared/shared.module';

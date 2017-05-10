@@ -124,7 +124,7 @@ export class UsuariosEditComponent {
    }
 
    createUserRole() {
-      if(this.isGreaterRol) {
+      if ( this.isGreaterRol ) {
          this.usuariosService.readAllUserRoles().subscribe( res => {
             let ur = res.find( t => t.idUsuario === this.usuario.idUsuario && t.idRol === this.curUsuarioRol.idRol );
             if ( ur ) {
@@ -221,8 +221,8 @@ export class UsuariosEditComponent {
    }
 
    validateGreaterRol() {
-      if ( this.curUsuarioRol.fechaInicio != null &&
-           this.curUsuarioRol.fechaFin != null &&
+      if ( this.curUsuarioRol.fechaInicio !== null &&
+           this.curUsuarioRol.fechaFin !== null &&
            this.curUsuarioRol.fechaInicio < this.curUsuarioRol.fechaFin ) {
          this.isGreaterRol = true;
       } else {

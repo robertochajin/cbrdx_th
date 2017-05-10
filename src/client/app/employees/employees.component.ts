@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Employee } from '../_models/employees';
 import { EmployeesService } from '../_services/employees.service';
 import { Router } from '@angular/router';
@@ -8,11 +8,11 @@ import { NavService } from '../_services/_nav.service';
 @Component( {
                moduleId: module.id,
                templateUrl: 'employees.component.html',
-               selector: 'employees',
+               selector: 'employees-component',
                providers: [ ConfirmationService ]
             } )
 
-export class EmployeesComponent {
+export class EmployeesComponent implements OnInit {
 
    employee: Employee = new Employee();
    dialogObjet: Employee = new Employee();
@@ -29,7 +29,7 @@ export class EmployeesComponent {
    }
 
    ngOnInit() {
-      this.employeesService.getByTipo( "TERCOL" ).subscribe(
+      this.employeesService.getByTipo( 'TERCOL' ).subscribe(
          employees => {
             this.employees = employees;
             this.employees.forEach( e => {
@@ -70,7 +70,7 @@ export class EmployeesComponent {
    }
 
    setSearch() {
-      this.navService.setSearch( 'employees.component', this.busqueda )
+      this.navService.setSearch( 'employees.component', this.busqueda );
    }
 
 }

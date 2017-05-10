@@ -10,8 +10,6 @@ export class GroupCompetencies {
    public indicadorHabilitado: boolean;
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
-
-   //Auziliar
    public competencies: Competencies[] = [];
 
    constructor() {

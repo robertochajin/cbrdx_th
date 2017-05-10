@@ -9,7 +9,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 @Component( {
                moduleId: module.id,
                templateUrl: 'gruposGestion-detail.component.html',
-               selector: 'gruposGestion-detail'
+               selector: 'gruposgestion-detail'
             } )
 export class GruposGestionDetailComponent {
 

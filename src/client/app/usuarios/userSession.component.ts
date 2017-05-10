@@ -36,14 +36,14 @@ export class UserSessionComponent implements OnInit {
    svcThUrl = '<%= SVC_TH_URL %>/api/upload';
    image: string;
    eye = 'fa-eye-slash';
+
    constructor( private employeeService: EmployeesService,
       private usuariosService: UsuariosService,
       private route: ActivatedRoute,
       private location: Location,
       private router: Router,
       private confirmationService: ConfirmationService,
-      private navService: NavService
-   ) {
+      private navService: NavService ) {
    }
 
    ngOnInit(): void {
@@ -98,19 +98,20 @@ export class UserSessionComponent implements OnInit {
          this.eye = 'fa-eye';
       } else {
          this.showOldPass = 'password';
-         this.eye = 'fa-eye-slash'
+         this.eye = 'fa-eye-slash';
       }
       console.info( this.showOldPass );
    }
 
-   onBeforeSend(event: any){
+   onBeforeSend( event: any ) {
       debugger;
-      event.xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
    }
-   onUpload(event: any) {
+
+   onUpload( event: any ) {
       this.image = event.xhr.responseText;
       this.usuariosService.refreshToken();
-      this.navService.setAvatar(this.image);
+      this.navService.setAvatar( this.image );
    }
 }
 

@@ -9,7 +9,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 @Component( {
                moduleId: module.id,
                templateUrl: 'centroCostos-detail.component.html',
-               selector: 'centroCostos-detail'
+               selector: 'centrocostos-detail'
             } )
 export class CentroCostosDetailComponent {
 

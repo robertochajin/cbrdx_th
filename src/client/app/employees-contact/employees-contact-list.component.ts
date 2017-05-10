@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Employee } from '../_models/employees';
 import { EmployeesContact } from '../_models/employeesContactList';
@@ -15,7 +15,7 @@ import { NavService } from '../_services/_nav.service';
                selector: 'employees-contact-list',
                providers: [ ConfirmationService ]
             } )
-export class EmployeesContactListComponent {
+export class EmployeesContactListComponent implements OnInit {
 
    @Input() employee: Employee;
 
@@ -23,10 +23,10 @@ export class EmployeesContactListComponent {
    lcontact: EmployeesContact = new EmployeesContact();
    dialogObjet: EmployeesContact = new EmployeesContact();
    contacts: EmployeesContact[] = [];
-   show_form: boolean = false;
+   showForm: boolean = false;
    msgs: Message[] = [];
    relationship: SelectItem[] = [];
-   idTer: number
+   idTer: number;
    tel: boolean = false;
    cel: boolean = true;
 
@@ -54,7 +54,7 @@ export class EmployeesContactListComponent {
                let bandera = false;
                let label = '';
                for ( let ct of this.relationship ) {
-                  if ( c.idListaParentesco == ct.value ) {
+                  if ( c.idListaParentesco === ct.value ) {
                      label = ct.label;
                      bandera = true;
                      break;
@@ -72,9 +72,9 @@ export class EmployeesContactListComponent {
 
    onSubmit() {
       this.msgs = [];
-      this.show_form = false;
+      this.showForm = false;
       this.contact.idTercero = this.idTer;
-      if ( this.contact.idTerceroContacto == null || this.contact.idTerceroContacto == 0 ) {
+      if ( this.contact.idTerceroContacto === null || this.contact.idTerceroContacto === 0 ) {
          this.employeesContactService.add( this.contact )
          .subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
@@ -82,13 +82,13 @@ export class EmployeesContactListComponent {
                contacts => {
                   this.contacts = [];
                   for ( let c of contacts ) {
-                     c.nombreListaParentesco = this.relationship.find( s => s.value == c.idListaParentesco ).label;
+                     c.nombreListaParentesco = this.relationship.find( s => s.value === c.idListaParentesco ).label;
                      this.contacts.push( c );
                   }
                }
             );
          }, error => {
-            this.show_form = true;
+            this.showForm = true;
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       } else {
@@ -100,14 +100,14 @@ export class EmployeesContactListComponent {
                contacts => {
                   this.contacts = [];
                   for ( let c of contacts ) {
-                     c.nombreListaParentesco = this.relationship.find( s => s.value == c.idListaParentesco ).label;
+                     c.nombreListaParentesco = this.relationship.find( s => s.value === c.idListaParentesco ).label;
                      this.contacts.push( c );
                   }
                }
             );
 
          }, error => {
-            this.show_form = true;
+            this.showForm = true;
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       }
@@ -136,19 +136,19 @@ export class EmployeesContactListComponent {
    add() {
       this.msgs = [];
       this.contact = new EmployeesContact();
-      this.show_form = true;
+      this.showForm = true;
    }
 
    update( f: EmployeesContact ) {
       this.msgs = [];
-      this.show_form = true;
+      this.showForm = true;
       this.contact = Object.assign( {}, f );
 
    }
 
    goBackUpdate() {
       this.msgs = [];
-      this.show_form = false;
+      this.showForm = false;
    }
 
    capitalize() {
@@ -160,7 +160,7 @@ export class EmployeesContactListComponent {
    }
 
    validarTelefono() {
-      if ( this.contact.telefono === "(___) ___-____ Ext ____" ) {
+      if ( this.contact.telefono === '(___) ___-____ Ext ____' ) {
          this.tel = true;
          this.cel = true;
       } else {
@@ -170,7 +170,7 @@ export class EmployeesContactListComponent {
    }
 
    validarCelular() {
-      if ( this.contact.celular === "(___) ___-____" ) {
+      if ( this.contact.celular === '(___) ___-____' ) {
          this.tel = true;
          this.cel = true;
       } else {

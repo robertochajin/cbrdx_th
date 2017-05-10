@@ -13,7 +13,7 @@ declare let google: any;
 
 @Component( {
                moduleId: module.id,
-               selector: 'locations',
+               selector: 'locations-form',
                templateUrl: 'locations-form.component.html',
                providers: [ PoliticalDivisionService, ConfirmationService ]
             } )

@@ -98,8 +98,9 @@ export class PositionRolesComponent implements OnInit {
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               r.indicadorHabilitado = false;
-                                              this.positionRolesServices.update( r ).subscribe( );
-                                           }} );
+                                              this.positionRolesServices.update( r ).subscribe();
+                                           }
+                                        } );
    }
 
    next() {

@@ -39,7 +39,7 @@ export class FormalStudiesUpdateComponent implements OnInit {
    maxDateFinal: Date = null;
    es: any;
    range: string;
-   id_estado_estudio_finalizado = 1; //hace falta definir acceso a constantes en servicio
+   idEstadoEstudioFinalizado = 1; // hace falta definir acceso a constantes en servicio
    idTercero: number;
    wrongCity: boolean = true;
    wrongInstitute: boolean = true;
@@ -133,7 +133,8 @@ export class FormalStudiesUpdateComponent implements OnInit {
    onSubmit( value: string ) {
       this.submitted = true;
       if ( this.selectedCity !== undefined && this.selectedCity.idDivisionPolitica !== undefined ) {
-         if ( (this.fstudy.otraInstitucion !== '' && this.fstudy.otraInstitucion !== null) || (this.selectedInstitute !== null && this.selectedInstitute.idLista !== null) ) {
+         if ( (this.fstudy.otraInstitucion !== '' && this.fstudy.otraInstitucion !== null) ||
+              (this.selectedInstitute !== null && this.selectedInstitute.idLista !== null) ) {
             this.msgs = [];
             this.fstudy.idCiudad = this.selectedCity.idDivisionPolitica;
             this.fstudy.idTercero = this.idTercero;
@@ -145,7 +146,7 @@ export class FormalStudiesUpdateComponent implements OnInit {
             }
             let fi: moment.Moment = moment( this.fstudy.fechaIngresa, 'MM/DD/YYYY' );
             this.fstudy.fechaIngresa = fi.format( 'YYYY-MM-DD' );
-            if ( this.fstudy.idEstado === this.id_estado_estudio_finalizado ) {
+            if ( this.fstudy.idEstado === this.idEstadoEstudioFinalizado ) {
                let ff: moment.Moment = moment( this.fstudy.fechaTermina, 'MM/DD/YYYY' );
                this.fstudy.fechaTermina = ff.format( 'YYYY-MM-DD' );
             } else {
@@ -203,11 +204,11 @@ export class FormalStudiesUpdateComponent implements OnInit {
    onSelectEnd( event: any ) {
       let d = new Date( Date.parse( event ) );
       this.fstudy.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-      this.maxDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() ) - 1;
+      this.maxDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1);
    }
 
    updateEnd(): void {
-      if ( this.fstudy.idEstado !== this.id_estado_estudio_finalizado ) {
+      if ( this.fstudy.idEstado !== this.idEstadoEstudioFinalizado ) {
          this.fstudy.fechaTermina = undefined;
       }
    }

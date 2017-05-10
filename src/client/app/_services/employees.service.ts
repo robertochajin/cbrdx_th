@@ -17,7 +17,7 @@ export class EmployeesService {
    }
 
    getByTipo( type: string ) {
-      return this.authHttp.get( this.serviceURL + 'vterceros/buscarTerceros/' + type + "/" ).map( ( res: Response ) => res.json() );
+      return this.authHttp.get( this.serviceURL + 'vterceros/buscarTerceros/' + type + '/' ).map( ( res: Response ) => res.json() );
    }
 
    getTerColWithoutPosition( query: string ) {

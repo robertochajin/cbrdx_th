@@ -22,22 +22,22 @@ import { LoginModule } from './seguridad/login.module';
 import { LoginService } from './_services/login.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { AuthenticationService } from './_services/authentication.service';
-// Global Messages
+//  Global Messages
 import { GrowlModule, MessagesModule } from 'primeng/primeng';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
 import { ProductivityModule } from './position-productivity/productivity.module';
-//proyección laboral
+// proyección laboral
 import { JobProjectionModule } from './job-projection/job-projection.module';
-// administrador de formularios
+//  administrador de formularios
 import { FormManagerModule } from './form-manager/form-manager.module';
-//Estructura física
+// Estructura física
 import { PhysicStructureModule } from './physic-structure/physic-structure.module';
 import { RiskModule } from './position-risks/position-risks.module';
 import { AbsenceModule } from './position-absence/position-absence.module';
-// import {ResponsibilityModule} from "./position-responsibility/responsibility.module";
-// Copy sp
-//riesgos
+//  import {ResponsibilityModule} from './position-responsibility/responsibility.module\';
+//  Copy sp
+// riesgos
 import { RisksModule } from './risks/risks.module';
 import { ConstanteModule } from './constantes/constante.module';
 import { ListaModule } from './listas/lista.module';
@@ -58,15 +58,15 @@ import { CompetenciesGroupsModule } from './competencies-groups/competencies-gro
 import { OrganizationalStructureModule } from './organizationalStructure/organizationalStructure.module';
 import { OrganizationalStructurePositionsModule } from './organizationalStructurePositions/organizational-structure-positions.module';
 import { WidgetModule } from './widgets/widgets.module';
-// Administracion
+//  Administracion
 import { MenuManagerModule } from './menuManager/menuManager.module';
-// Auth JWT module
+//  Auth JWT module
 import { AuthModule } from './shared/auth.module';
-// BreadCrumb
-//import {Ng2BreadcrumbModule,BreadcrumbService} from 'ng2-breadcrumb/ng2-breadcrumb';
+//  BreadCrumb
+//  import {Ng2BreadcrumbModule,BreadcrumbService} from 'ng2-breadcrumb/ng2-breadcrumb';
 import { BreadcrumbModule, BreadcrumbService } from './shared/breadcrumb/breadcrumb';
 
-//CarsModule,
+// CarsModule,
 @NgModule( {
               imports: [ BrowserModule, HttpModule, AppRoutingModule,
                  MessagesModule,

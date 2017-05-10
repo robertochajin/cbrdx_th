@@ -11,7 +11,7 @@ export class ListPositionsService {
    }
 
    getCategoryTypes() {
-      return this.authHttp.get( this.serviceURL + "categorias/enabled" ).map( ( res: Response ) => res.json() );
+      return this.authHttp.get( this.serviceURL + 'categorias/enabled' ).map( ( res: Response ) => res.json() );
    }
 
    handleError( error: any ): Promise<any> {

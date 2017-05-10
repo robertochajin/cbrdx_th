@@ -26,7 +26,6 @@ export class LocationDetailComponent implements OnInit {
       this.route.params
       .switchMap( ( params: Params ) => this.locationService.get( +params[ 'id' ] ) )
       .subscribe( este => {
-         console.log( este )
          this.employeeLocation = este;
       } );
    }

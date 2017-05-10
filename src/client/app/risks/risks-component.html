@@ -1,27 +1,27 @@
-<h3 class="first">{{'RISKS.LBL_RIESGOS' | translate:param }}</h3>
+<h3 class="first">{{'RISKS.LBL_RIESGOS' | translate }}</h3>
 <div>
    <div class="row datable-header">
       <div class="col-md-6 col-xs-12 datatable-header-add">
-         <button type="button" icon="fa-plus" label="{{'LBL_NUEVO' | translate:param }} {{'RISKS.LBL_RIESGO' | translate:param }}"
+         <button type="button" icon="fa-plus" label="{{'LBL_NUEVO' | translate }} {{'RISKS.LBL_RIESGO' | translate }}"
                  pButton (click)="add()"></button>
       </div>
       <div class="col-md-6 col-xs-12 datatable-header-search" >
          <div class="input-group">
             <div class="input-group-addon"><i class="fa fa-search"></i></div>
-            <input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate:param }}" class="form-control">
+            <input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate }}" class="form-control">
          </div>
       </div>
    </div>
    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="risks" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-      <p-column field="tipo" header="{{'RISKS.LBL_TIPO' | translate:param }}" [sortable]="true"></p-column>
-      <p-column field="subtipo" header="{{'RISKS.LBL_SUBTIPO' | translate:param }}" [sortable]="true"></p-column>
-      <p-column field="riesgo" header="{{'RISKS.LBL_RIESGO' | translate:param }}" [sortable]="true"></p-column>
-      <p-column header="{{'LBL_HABILITADO' | translate:param }}" styleClass="datatable-col-action">
+      <p-column field="tipo" header="{{'RISKS.LBL_TIPO' | translate }}" [sortable]="true"></p-column>
+      <p-column field="subtipo" header="{{'RISKS.LBL_SUBTIPO' | translate }}" [sortable]="true"></p-column>
+      <p-column field="riesgo" header="{{'RISKS.LBL_RIESGO' | translate }}" [sortable]="true"></p-column>
+      <p-column header="{{'LBL_HABILITADO' | translate }}" styleClass="datatable-col-action">
          <template let-risk="rowData" pTemplate="body">
             <p-checkbox name="indicadorHabilitado" [(ngModel)]="risk.indicadorHabilitado" binary="true" disabled="true" ></p-checkbox>
          </template>
       </p-column>
-      <p-column header="{{'LBL_ACCIONES' | translate:param }}" styleClass="datatable-col-action">
+      <p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
          <template let-risk="rowData" pTemplate="body">
             <button type="button" icon="fa-pencil" class="ui-button-success"
                     pButton (click)="update(risk)"></button>

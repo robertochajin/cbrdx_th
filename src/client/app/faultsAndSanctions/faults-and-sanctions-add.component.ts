@@ -44,7 +44,7 @@ export class FaultsAndSanctionsAddComponent {
       } );
    }
 
-     onSubmit() {
+   onSubmit() {
       this.faultsAndSanctionsService.add( this.fault )
       .subscribe( data => {
          let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom

@@ -9,10 +9,10 @@ import { tokenNotExpired } from 'angular2-jwt';
 export class AuthenticationService {
    public token: string;
    public headers = new Headers( { 'Content-Type': 'application/json' } );
-   private masterService = '<%= SVC_TH_URL %>/auth';
+   masterService = '<%= SVC_TH_URL %>/auth';
 
-   private missionAnnouncedSource = new Subject<string>();
-   private logoutAnnoucedSource = new Subject<string>();
+   missionAnnouncedSource = new Subject<string>();
+   logoutAnnoucedSource = new Subject<string>();
 
    loginAnnounced$ = this.missionAnnouncedSource.asObservable();
    logoutAnnounced$ = this.logoutAnnoucedSource.asObservable();
@@ -33,7 +33,7 @@ export class AuthenticationService {
    }
 
    forgetUser( mail: string ) {
-      return this.http.post( this.masterService + "/rememberUser/", JSON.stringify( {
+      return this.http.post( this.masterService + '/rememberUser/', JSON.stringify( {
                                                                                        correoElectronico: mail
                                                                                     } ), { headers: this.headers } ).toPromise()
       .then( res => {
@@ -42,7 +42,7 @@ export class AuthenticationService {
    }
 
    forgetPass( mail: string, user: string ): Promise<boolean> {
-      return this.http.post( this.masterService + "/reset/", JSON.stringify( {
+      return this.http.post( this.masterService + '/reset/', JSON.stringify( {
                                                                                 correoElectronico: mail,
                                                                                 usuarioSistema: user
                                                                              } ), { headers: this.headers } ).toPromise().then( res => {
@@ -59,7 +59,7 @@ export class AuthenticationService {
    }
 
    login( username: string, password: string ): Promise<boolean> {
-      return this.http.post( this.masterService + "/login", JSON.stringify( {
+      return this.http.post( this.masterService + '/login', JSON.stringify( {
                                                                                username: username,
                                                                                password: password
                                                                             } ), { headers: this.headers } ).toPromise().then( res => {

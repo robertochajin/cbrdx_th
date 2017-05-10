@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Constante } from '../_models/constante';
 import { VConstante } from '../_models/vConstante';
 import { ConstanteService } from '../_services/constante.service';
@@ -12,7 +12,7 @@ import { Message } from 'primeng/primeng';
                templateUrl: 'constante-edit.component.html',
                selector: 'constante-edit'
             } )
-export class ConstanteEditComponent implements OnInit {
+export class ConstanteEditComponent {
 
    constant: Constante = new Constante();
    constantList: VConstante[];
@@ -21,8 +21,9 @@ export class ConstanteEditComponent implements OnInit {
    regex: string = '';
    displayDialog: boolean = false;
    msg: Message;
+
    constructor( private constanteService: ConstanteService, private listaService: ListaService, private router: Router,
-      private route: ActivatedRoute , private navService: NavService) {
+      private route: ActivatedRoute, private navService: NavService ) {
       route.params.switchMap( ( params: Params ) => constanteService.viewConstant( +params[ 'id' ] ) )
       .subscribe( data => {
          this.constant = data;
@@ -37,9 +38,6 @@ export class ConstanteEditComponent implements OnInit {
 
    }
 
-   ngOnInit(): void {
-
-   }
 
    createConstant() {
       this.constanteService.updateConstant( this.constant ).then( data => {

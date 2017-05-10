@@ -22,6 +22,7 @@ export class ConstanteAddComponent implements OnInit {
    regex: string = '';
    displayDialog: boolean = false;
    msg: Message;
+
    constructor( private constanteService: ConstanteService, private router: Router, private listaService: ListaService,
       private navService: NavService ) {
       this.listaService.getMasterDetails( 'ListasTiposDatos' ).subscribe( res => {
