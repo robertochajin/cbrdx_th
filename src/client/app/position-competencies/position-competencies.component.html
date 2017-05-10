@@ -4,7 +4,7 @@
                [selected]="i == 0" >
       <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="group.competencies"
                     [responsive]="true" id="positionCompetenciesDT" styleClass="table-overflow" >
-         <p-column field="{{ 'POSITION.LBL_COMPETENCIA' | translate }}" header="Competencia" [sortable]="true"></p-column>
+         <p-column field="competencia" header="{{ 'POSITION.LBL_COMPETENCIA' | translate }}" [sortable]="true"></p-column>
          <p-column header="{{ 'POSITION.LBL_PONDERACION' | translate }}" field="cargoCompetencia" >
             <template let-competencie="rowData" pTemplate="body">
              <p-dropdown [options]="ponderanciesList" [(ngModel)]="competencie.cargoCompetencia.idPonderacion"

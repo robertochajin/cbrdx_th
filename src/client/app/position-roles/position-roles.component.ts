@@ -114,7 +114,7 @@ export class PositionRolesComponent implements OnInit {
          this.nextStep.emit( 4 );
          this.msgsAlert = [];
       } else {
-         this.msgsAlert[ 0 ] = { severity: 'alert', summary: 'Error', detail: 'Debe seleccional al menos un rol' };
+         this.msgsAlert[ 0 ] = { severity: 'info', summary: 'Alerta', detail: 'Debe seleccional al menos un rol' };
       }
    }
 }
