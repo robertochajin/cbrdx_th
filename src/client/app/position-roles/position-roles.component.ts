@@ -61,7 +61,7 @@ export class PositionRolesComponent implements OnInit {
             }
          }
          if ( num === 0 && objUpdate.indicadorHabilitado === false ) {
-            this.msgsAlert[ 0 ] = { severity: 'alert', summary: 'Error', detail: 'Debe seleccional al menos un rol' };
+            this.msgsAlert[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Debe seleccional al menos un rol' };
             objUpdate.indicadorHabilitado = true;
          } else {
             this.positionRolesServices.update( objUpdate ).subscribe( data => {
@@ -114,7 +114,7 @@ export class PositionRolesComponent implements OnInit {
          this.nextStep.emit( 4 );
          this.msgsAlert = [];
       } else {
-         this.msgsAlert[ 0 ] = { severity: 'alert', summary: 'Error', detail: 'Debe seleccional al menos un rol' };
+         this.msgsAlert[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Debe seleccional al menos un rol' };
       }
    }
 }

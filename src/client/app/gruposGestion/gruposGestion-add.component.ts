@@ -90,7 +90,7 @@ export class GruposGestionAddComponent implements OnInit {
 
    capitalizeName() {
       let input = this.grupoGestion.grupoGestion;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined) {
          this.grupoGestion.grupoGestion = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }

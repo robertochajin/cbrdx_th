@@ -4,6 +4,7 @@ import { MenuManagerService } from '../_services/menuManager.service';
 import { MenuManager } from '../_models/menuManager';
 import { TreeNode } from 'primeng/components/common/api';
 import { Message } from 'primeng/primeng';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -12,7 +13,7 @@ import { Message } from 'primeng/primeng';
 
             } )
 export class MenuManagerComponent {
-   msgs: Message[] = [];
+   msg: Message;
    menus: MenuManager = new MenuManager();
    listmenu: MenuManager[];
 
@@ -25,7 +26,8 @@ export class MenuManagerComponent {
    guardando = false;
 
    constructor( private router: Router,
-      private menuManagerService: MenuManagerService ) {
+      private menuManagerService: MenuManagerService,
+      private navService: NavService) {
       menuManagerService.getAll().subscribe( res => {
          this.listmenu = res;
          for ( let c of this.listmenu.filter( t => t.idPadre === 0 || t.idPadre === null ) ) {
@@ -41,7 +43,7 @@ export class MenuManagerComponent {
    }
 
    validateCode() {
-      if ( this.menus.codigoMenu !== '' && this.menus.codigoMenu !== null ) {
+      if ( this.menus.codigoMenu !== '' && this.menus.codigoMenu !== null && this.menus.codigoMenu !== undefined) {
          this.codeExists = this.listmenu.filter(
                t => (t.codigoMenu === this.menus.codigoMenu && t.idMenu !== this.menus.idMenu ) ).length > 0;
       } else {
@@ -52,14 +54,14 @@ export class MenuManagerComponent {
 
    capitalizeCode() {
       let input = this.menus.codigoMenu;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.menus.codigoMenu = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
       }
    }
 
    capitalizeName() {
       let input = this.menus.menu;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.menus.menu = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }
@@ -119,7 +121,8 @@ export class MenuManagerComponent {
          this.guardando = true;
          this.menuManagerService.add( this.menus ).then( data => {
             this.guardando = false;
-            this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Registro guardado con exito!' } );
+            let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
             let newChil: any = {
                'label': this.menus.menu,
                'data': data,
@@ -137,12 +140,14 @@ export class MenuManagerComponent {
             }
          }, error => {
             this.guardando = false;
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            let typeMessage = 3; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
          } );
       } else {
          this.menuManagerService.update( this.menus ).then( data => {
             this.guardando = false;
-            this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Registro actualizado con exito!' } );
+            let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
             this.selectedNode.data = this.menus;
             this.selectedNode.label = this.menus.menu;
             this.header = this.menus.menu;
@@ -154,7 +159,8 @@ export class MenuManagerComponent {
             }
          }, error => {
             this.guardando = false;
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al actualizar.' } );
+            let typeMessage = 3; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
          } );
       }
    }
