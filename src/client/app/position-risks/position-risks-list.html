@@ -10,7 +10,7 @@
     <div class="col-md-12">
       <div>
         <p-dataTable [value]="PositionExam" [paginator]="true" [rows]="10" [responsive]="true" >
-          <p-column field="{{ 'POSITION.LBL_EXAMEN' | translate }}" header="{{ 'POSITION.LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
+          <p-column field="examen" header="{{ 'POSITION.LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
           <p-column header="{{ 'POSITION.LBL_INGRESO' | translate }}">
             <template let-exam="rowData" pTemplate="body">
               <p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="exam.indicadorIngreso"
