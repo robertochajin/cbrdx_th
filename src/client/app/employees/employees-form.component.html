@@ -19,7 +19,7 @@
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                <div class="row">
                   <div class="form-group col-md-6">
-                     <label for="NGpersonTypes">{{'EMPLOYEES.LBL_NATURALEZA' | translate:param}}</label>
+                     <label for="NGpersonTypes">{{'EMPLOYEES.LBL_NATURALEZA' | translate}}</label>
                      <p-dropdown id="NGpersonTypes" name="NGpersonTypes" required="true"
                                  [options]="personTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idTipoPersona"
@@ -28,11 +28,11 @@
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGpersonTypes.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_NATURALEZA' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_NATURALEZA' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                   <div class="form-group col-md-6">
-                     <label for="NGdocumentTypes">{{ 'LBL_TIPODOCUMENTO' | translate:param }}</label>
+                     <label for="NGdocumentTypes">{{ 'LBL_TIPODOCUMENTO' | translate }}</label>
                      <p-dropdown id="NGdocumentTypes" name="NGdocumentTypes" required="true"
                                  [options]="documentTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idTipoDocumento"
@@ -42,13 +42,13 @@
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGdocumentTypes.valid">
                         <i class="fa fa-close"></i>
-                        {{ 'LBL_TIPODOCUMENTO' | translate:param }} {{'LBL_REQUERIDO' | translate:param}}
+                        {{ 'LBL_TIPODOCUMENTO' | translate }} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                </div>
                <div class="row">
                   <div class="form-group col-md-8">
-                     <label for="numeroDocumento">{{ 'LBL_NUMERODOCUMENTO' | translate:param }}</label>
+                     <label for="numeroDocumento">{{ 'LBL_NUMERODOCUMENTO' | translate }}</label>
                      <input id="numeroDocumento" type="text" pInputText name="numeroDocumento"
                             [(ngModel)]="employee.numeroDocumento"
                             #numeroDocumento="ngModel" required
@@ -58,27 +58,27 @@
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !numeroDocumento.valid">
                         <i class="fa fa-close"></i>
-                        {{ 'LBL_NUMERODOCUMENTO' | translate:param }} {{'LBL_REQUERIDO' | translate:param}}
+                        {{ 'LBL_NUMERODOCUMENTO' | translate }} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                   <div class="form-group col-md-4">
-                     <label for="NGexpeditionDate">{{'EMPLOYEES.LBL_FECHAEXPEDICION' | translate:param}}</label>
-                     <p-calendar id="NGexpeditionDate" name="NGexpeditionDate" [showIcon]="true" [disabled]="disabled"
+                     <label for="NGexpeditionDate">{{'EMPLOYEES.LBL_FECHAEXPEDICION' | translate}}</label>
+                     <p-calendar id="NGexpeditionDate" name="NGexpeditionDate" [showIcon]="true"
                                  [maxDate]="maxDateDocumento" [monthNavigator]="true" [yearNavigator]="true"
                                  [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
-                                 [dataType]="date" #NGexpeditionDate="ngModel" required="true"
+                                 dataType="date" #NGexpeditionDate="ngModel" required="true"
                                  [(ngModel)]="expeditionDate" (onSelect)="onExpeditionDate($event)"
                      ></p-calendar>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGexpeditionDate.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_FECHAEXPEDICION' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_FECHAEXPEDICION' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                </div>
                <div class="row">
                   <div class="form-group col-md-12">
-                     <label for="expCity">{{'EMPLOYEES.LBL_CIUDADEXPEDICION' | translate:param}}</label>
+                     <label for="expCity">{{'EMPLOYEES.LBL_CIUDADEXPEDICION' | translate}}</label>
                      <p-autoComplete placeholder="Ciudad de expedición " field="camino" name="expCity" id="expCity"
                                      #expCity="ngModel" required="true"
                                      [(ngModel)]="ciudadExpDocumento"
@@ -89,24 +89,24 @@
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !expCity.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_CIUDADEXPEDICION' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_CIUDADEXPEDICION' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                </div>
                <div class="row">
                   <div class="form-group col-md-6">
-                     <label for="primerNombre">{{'EMPLOYEES.LBL_PRIMER' | translate:param}}</label>
+                     <label for="primerNombre">{{'EMPLOYEES.LBL_PRIMER' | translate}}</label>
                      <input type="text" pInputText id="primerNombre" name="primerNombre"
                             [(ngModel)]="employee.primerNombre" #primerNombre="ngModel" (keyup)="capitalize($event)"
                             required/>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !primerNombre.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_PRIMER' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_PRIMER' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                   <div class="form-group col-md-6">
-                     <label for="segundoNombre">{{'EMPLOYEES.LBL_SEGUNDO' | translate:param}}</label>
+                     <label for="segundoNombre">{{'EMPLOYEES.LBL_SEGUNDO' | translate}}</label>
                      <input type="text" pInputText id="segundoNombre" name="segundoNombre"
                             [(ngModel)]="employee.segundoNombre" #segundoNombre="ngModel" (keyup)="capitalize($event)"
                      />
@@ -114,18 +114,18 @@
                </div>
                <div class="row">
                   <div class="form-group col-md-6">
-                     <label for="primerApellido">{{'EMPLOYEES.LBL_PRIMERAPELLIDO' | translate:param}}</label>
+                     <label for="primerApellido">{{'EMPLOYEES.LBL_PRIMERAPELLIDO' | translate}}</label>
                      <input type="text" pInputText id="primerApellido" name="primerApellido"
                             [(ngModel)]="employee.primerApellido" #primerApellido="ngModel" (keyup)="capitalize($event)"
                             required/>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !primerApellido.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_PRIMERAPELLIDO' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_PRIMERAPELLIDO' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                   <div class="form-group col-md-6">
-                     <label for="segundoApellido">{{'EMPLOYEES.LBL_SEGUNDOAPELLIDO' | translate:param}}</label>
+                     <label for="segundoApellido">{{'EMPLOYEES.LBL_SEGUNDOAPELLIDO' | translate}}</label>
                      <input type="text" pInputText id="segundoApellido" name="segundoApellido"
                             [(ngModel)]="employee.segundoApellido" #segundoApellido="ngModel"
                             (keyup)="capitalize($event)"
@@ -134,19 +134,19 @@
                </div>
                <div class="row">
                   <div class="form-group col-md-4">
-                     <label for="NGbirthDate">{{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate:param}}</label>
-                     <p-calendar id="NGbirthDate" name="NGbirthDate" [showIcon]="true" [disabled]="disabled"
+                     <label for="NGbirthDate">{{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate}}</label>
+                     <p-calendar id="NGbirthDate" name="NGbirthDate" [showIcon]="true"
                                  [maxDate]="maxDate" [monthNavigator]="true" [yearNavigator]="true"
                                  [locale]="es" readonlyInput="readonlyInput" [yearRange]="range"
-                                 [dataType]="date" #NGbirthDate="ngModel" [required]="true"
+                                 dataType="date" #NGbirthDate="ngModel" [required]="true"
                                  [(ngModel)]="birthDate" (onSelect)="onBirthDate($event)"
                      ></p-calendar>
                      <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !NGbirthDate.valid">
-                        {{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                   <div class="form-group col-md-8">
-                     <label for="birthPlace">{{'EMPLOYEES.LBL_CIUDADNACIMIENTO' | translate:param}}</label>
+                     <label for="birthPlace">{{'EMPLOYEES.LBL_CIUDADNACIMIENTO' | translate}}</label>
                      <p-autoComplete placeholder="Lugar de nacimieto" field="camino" name="birthPlace" id="birthPlace"
                                      #birthPlace="ngModel" required="true"
                                      [(ngModel)]="ciudadNacimiento"
@@ -157,13 +157,13 @@
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !birthPlace.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_CIUDADNACIMIENTO' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_CIUDADNACIMIENTO' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                </div>
                <div class="row">
                   <div class="form-group col-md-6">
-                     <label for="NGgenderTypes">{{'EMPLOYEES.LBL_GENERO' | translate:param}}</label>
+                     <label for="NGgenderTypes">{{'EMPLOYEES.LBL_GENERO' | translate}}</label>
                      <p-dropdown id="NGgenderTypes" name="NGgenderTypes" required="true"
                                  [options]="genderTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idGenero"
@@ -172,11 +172,11 @@
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGgenderTypes.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_GENERO' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_GENERO' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                   <div class="form-group col-md-6">
-                     <label for="NGmaritalStatusTypes">{{'EMPLOYEES.LBL_ESTADOCIVIL' | translate:param}}</label>
+                     <label for="NGmaritalStatusTypes">{{'EMPLOYEES.LBL_ESTADOCIVIL' | translate}}</label>
                      <p-dropdown id="NGmaritalStatusTypes" name="NGmaritalStatusTypes" required="true"
                                  [options]="maritalStatusTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idEstadoCivil"
@@ -185,11 +185,11 @@
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGmaritalStatusTypes.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_ESTADOCIVIL' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_ESTADOCIVIL' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                   <div class="form-group col-md-6">
-                     <label for="NGrhRactorTypes">{{'EMPLOYEES.LBL_FACTORRH' | translate:param}} </label>
+                     <label for="NGrhRactorTypes">{{'EMPLOYEES.LBL_FACTORRH' | translate}} </label>
                      <p-dropdown id="NGrhRactorTypes" name="NGgenderTypes" required="true"
                                  [options]="rhRactorTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idFactorRh"
@@ -198,11 +198,11 @@
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGrhRactorTypes.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_FACTORRH' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_FACTORRH' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                   <div class="form-group col-md-6">
-                     <label for="NGhealthTypes">{{'EMPLOYEES.LBL_COBERTURASALUD' | translate:param}}</label>
+                     <label for="NGhealthTypes">{{'EMPLOYEES.LBL_COBERTURASALUD' | translate}}</label>
                      <p-dropdown id="NGhealthTypes" name="NGhealthTypes" required="true"
                                  [options]="healthTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idCoberturaSalud"
@@ -211,13 +211,13 @@
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGhealthTypes.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_COBERTURASALUD' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_COBERTURASALUD' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                </div>
                <div class="row">
                   <div class="form-group col-md-6">
-                     <label for="NGaffiliationType">{{'EMPLOYEES.LBL_AFILIACION' | translate:param}}</label>
+                     <label for="NGaffiliationType">{{'EMPLOYEES.LBL_AFILIACION' | translate}}</label>
                      <p-dropdown id="NGaffiliationType" name="NGaffiliationType" required="true"
                                  [options]="affiliationTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idTipoAfiliacion"
@@ -226,11 +226,11 @@
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGaffiliationType.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_AFILIACION' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_AFILIACION' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                   <div class="form-group col-md-6">
-                     <label for="NGacademicLevelTypes">{{'EMPLOYEES.LBL_NIVELESTUDIOS' | translate:param}}</label>
+                     <label for="NGacademicLevelTypes">{{'EMPLOYEES.LBL_NIVELESTUDIOS' | translate}}</label>
                      <p-dropdown id="NGacademicLevelTypes" name="NGacademicLevelTypes" required="true"
                                  [options]="academicLevelTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idNivelEducacion"
@@ -239,13 +239,13 @@
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGacademicLevelTypes.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_NIVELESTUDIOS' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_NIVELESTUDIOS' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                </div>
                <div class="row">
                   <div class="form-group col-md-6">
-                     <label for="NGoccupationsTypes">{{'EMPLOYEES.LBL_TIPOOCUPACION' | translate:param}}</label>
+                     <label for="NGoccupationsTypes">{{'EMPLOYEES.LBL_TIPOOCUPACION' | translate}}</label>
                      <p-dropdown id="NGoccupationsTypes" name="NGoccupationsTypes" required="true"
                                  [options]="occupationsTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idTipoOcupacion"
@@ -254,11 +254,11 @@
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGoccupationsTypes.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_TIPOOCUPACION' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_TIPOOCUPACION' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                   <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 2">
-                     <label for="NGoccupations">{{'EMPLOYEES.LBL_OCUPACION' | translate:param}}</label>
+                     <label for="NGoccupations">{{'EMPLOYEES.LBL_OCUPACION' | translate}}</label>
                      <p-dropdown id="NGoccupations" name="NGoccupations" required="true" filter="filter"
                                  [options]="occupations" [autoWidth]="false"
                                  [(ngModel)]="employee.idOcupacion"
@@ -267,13 +267,13 @@
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGoccupations.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_OCUPACION' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_OCUPACION' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                </div>
                <div class="row">
                   <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 1">
-                     <label for="NGsector">{{'EMPLOYEES.LBL_SECTOR' | translate:param}}</label>
+                     <label for="NGsector">{{'EMPLOYEES.LBL_SECTOR' | translate}}</label>
                      <p-dropdown id="NGsector" name="NGsector" required="true"
                                  [options]="sector" [autoWidth]="false"
                                  [(ngModel)]="employee.idSectorEconomico"
@@ -283,11 +283,11 @@
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGsector.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_SECTOR' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_SECTOR' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                   <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 1">
-                     <label for="NGactivities">{{'EMPLOYEES.LBL_ACTIVIDAD' | translate:param}}</label>
+                     <label for="NGactivities">{{'EMPLOYEES.LBL_ACTIVIDAD' | translate}}</label>
                      <p-dropdown id="NGactivities" name="NGactivities" required="true" filter="filter"
                                  [options]="activities" [autoWidth]="false"
                                  [(ngModel)]="employee.idActividadEconomica"
@@ -296,13 +296,13 @@
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGactivities.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_ACTIVIDAD' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_ACTIVIDAD' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                </div>
                <div class="row">
                   <div class="form-group col-md-6">
-                     <label for="juridico">{{'EMPLOYEES.LBL_JURIDICO' | translate:param }}</label>
+                     <label for="juridico">{{'EMPLOYEES.LBL_JURIDICO' | translate }}</label>
                      <p-dropdown id="juridico" name="juridico" required="true"
                                  [options]="juridicos" [autoWidth]="false"
                                  [(ngModel)]="employee.idEstadoJuridico"
@@ -311,13 +311,13 @@
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !juridico.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_JURIDICO' | translate:param }} {{'LBL_REQUERIDO' | translate:param}}
+                        {{'EMPLOYEES.LBL_JURIDICO' | translate }} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
                </div>
                <div class="row">
                   <div class="form-group col-md-3">
-                     <label for="Ngalive">{{'EMPLOYEES.LBL_VIVO' | translate:param}}</label>
+                     <label for="Ngalive">{{'EMPLOYEES.LBL_VIVO' | translate}}</label>
                      <p-checkbox id="Ngalive" name="Ngalive" binary="true"
                                  [(ngModel)]="employee.indicadorVivo"
                                  #Ngalive="ngModel"
@@ -325,15 +325,15 @@
                      </p-checkbox>
                   </div>
                   <div class="form-group col-md-3" *ngIf="employee.indicadorVivo == false">
-                     <label for="NGdeathDate">{{'EMPLOYEES.LBL_FECHADEFUNCION' | translate:param}}</label>
+                     <label for="NGdeathDate">{{'EMPLOYEES.LBL_FECHADEFUNCION' | translate}}</label>
                      <p-calendar id="NGdeathDate" name="NGdeathDate" [locale]="es" [showIcon]="true"
-                                 [disabled]="disabled" [maxDate]="maxDate"
-                                 [dataType]="date" #NGdeathDate="ngModel" [required]="!employee.indicadorVivo"
+                                 [maxDate]="maxDate"
+                                 dataType="date" #NGdeathDate="ngModel" [required]="!employee.indicadorVivo"
                                  [(ngModel)]="deathDate" (onSelect)="onDeathDate($event)"
                      ></p-calendar>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !employee.indicadorVivo && !NGdeathDate.valid">
-                        {{'EMPLOYEES.LBL_FECHADEFUNCIONREQUERIDA' | translate:param}}
+                        {{'EMPLOYEES.LBL_FECHADEFUNCIONREQUERIDA' | translate}}
                      </div>
                   </div>
                </div>
@@ -342,7 +342,7 @@
                   <div class="form-group col-md-5">
                   </div>
                   <div class="form-group col-md-4">
-                     <label for="indicador" class="control-label col-sm-3">{{'LBL_HABILITADO' | translate:param
+                     <label for="indicador" class="control-label col-sm-3">{{'LBL_HABILITADO' | translate
                         }}</label>
                      <div class=" col-sm-9">
                         <p-checkbox binary="true" id="indicador" name="indicador"
@@ -354,7 +354,7 @@
             </div>
             <div class="row form-footer-buttons">
                <div class="form-group col-md-12">
-                  <a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate:param }}</a>
+                  <a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
                   <button icon="fa-plus" label="Guardar" type="submit"
                           pButton></button>
 

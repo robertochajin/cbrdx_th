@@ -1,5 +1,8 @@
 {
   "INICIO_COMUNES":"==============================================================",
+
+  "LBL_APROBAR":"Aprobar",
+  "LBL_NOAPROBAR":"No Aprobar",
   "BTN_EDITAR":"Editar",
   "BTN_EDITARDIRECCION":"Editar Dirección",
   "BTN_ACEPTAR":"Aceptar",
@@ -49,6 +52,7 @@
   "LBL_PERTENECE":"Pertenece",
   "LBL_VERMAS" : "Ver más",
   "LBL_CAMPO" : "Campo",
+  "BTN_SIGUIENTE" : "Siguiente",
   "MSG_CONFIRMACION":"Si continúa perderá la información no guardada. ¿Está seguro que desea salir?",
   "MSG_GUARDADO":"Guardado",
   "MSG_REGISTRO":"Registro",
@@ -513,13 +517,72 @@
      "LBL_ACCIONSUGERIDA" : "Acción Sugerida"
      },
 
-     "COMPETENCIES": {
-        "LBL_GRUPO": "Grupo",
-        "LBL_COMPETENCIA": "Competencia",
-        "LBL_PONDERACION": "Ponderación",
-        "MSG_PONDERACION": "Es necesario una ponderación válida entre 1 y 100"
-     },
+     "COMPETENCIES":{
+       "LBL_COMPETENCIASYHABILIDADES" : "Competencias y Habilidades",
+       "LBL_GRUPO" : "Grupo",
+       "LBL_COMPETENCIA" : "Competencia",
+       "LBL_HABILIDAD" : "Habilidad",
+       "LBL_PONDERACION" : "Ponderación",
+       "MSG_PONDERACION" : "Es necesario una ponderación válida entre 1 y 100"
+       },
 
+       "RISKS":{
+         "LBL_RIESGOS" : "Riesgos",
+         "LBL_RIESGO" : "Riesgo",
+         "LBL_TIPO" : "Tipo",
+         "LBL_SUBTIPO" : "Subtipo"
+         },
+
+         "POSITION":{
+           "LBL_AREA" : "Área",
+           "LBL_POSICION" : "Posicion en caso de ausencia",
+           "LBL_REEMPLAZA" : "Reemplaza a:",
+           "LBL_ATRIBUTOS" : "Atributos",
+           "LBL_REEMPLAZAPOR" : "Reemplaza por:",
+           "LBL_ELEMENTOS" : "Elementos",
+           "LBL_DESCRIPCION" : "Descripción",
+           "LBL_COMPETENCIA" : "Competencia",
+           "LBL_EVALUACION" : "Desempeño",
+           "LBL_EXAMEN" : "Exámen",
+           "LBL_NOMBRE" : "Nombre",
+           "LBL_INGRESO" : "Ingreso",
+           "LBL_IDENTIFICACION" : "Identificación del Cargo",
+           "LBL_INTERNAS" : "Internas",
+           "LBL_EXTERNAS" : "Externas",
+           "LBL_INTERRELACIONES" : "Interrelaciones",
+           "LBL_CRITERIO" : "Criterio",
+           "LBL_CRITERIOS" : "Criterios de Desempeño",
+           "LBL_PONDERACION" : "Ponderación",
+           "LBL_CARGO" : "Cargo",
+           "LBL_CARGODEPENDE" : "Cargo que depende",
+           "LBL_CODIGO" : "Código",
+           "LBL_CARGOSUPERVISA" : "¿Que cargo supervisa?",
+           "LBL_FACTOR" : "Factor",
+           "LBL_META" : "Meta",
+           "LBL_MISION" : "Misión del Cargo",
+           "LBL_NIVEL" : "Nivel IQ",
+           "LBL_NOMBRE" : "Nombre",
+           "LBL_NIVELAPTITUD" : "Nivel Aptitud",
+           "LBL_PERIOCIDAD" : "Periocidad",
+           "LBL_PERSONASDIRECTAS" : "Personas a cargo directas",
+           "LBL_PERSONASINDIRECTAS" : "Personas a cargo indirectas",
+           "LBL_PRODUCTIVIDAD" : "Productividad",
+           "LBL_RESPONSABILIDAD" : "Responsabilidad",
+           "LBL_RETIRO" : "Retiro",
+           "LBL_RESPONSABILIDADES" : "Responsabilidades de Cargo",
+           "LBL_ROL" : "Rol",
+           "LBL_RIESGO" : "Riesgo",
+           "LBL_TIPO" : "Tipo",
+           "LBL_SUBTIPO" : "Subtipo",
+           "LBL_OCUPACION" : "Ocupación",
+           "LBL_PRODUCTO" : "Producto de valor esperado y criterios de desempeño",
+           "MSG_CRITERIOSREPETIDOS" : "No puede tener criterios repetidos",
+           "MSG_CRITERIOSSUMA" : "La suma es 100, perfecto!",
+           "MSG_CRITERIO" : "Lo siento, debe sumar 100",
+           "MSG_CRITERIOS" : "La suma de factores para todos los críterios debe ser 100 para poder guardar"
+
+
+           },
 
    "ADMINMENUS": {
       "LBL_ADMINMENU":"Administrador de Menús",
@@ -662,7 +725,6 @@
       "MSG_PLAZASPROYREQ":"Plazas proyectadas requeridas",
       "MSG_CLASEREQUERIDO": "Clase de estilo es requerido"
    },
-
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 

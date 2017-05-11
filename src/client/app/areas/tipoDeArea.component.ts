@@ -1,43 +1,38 @@
-import {Component, OnInit} from "@angular/core";
-import {TipoDeArea} from "../_models/tipoDeArea";
-import {TipoDeAreaService} from "../_services/tipoDeArea.service";
-import {Router} from "@angular/router";
+import { Component } from '@angular/core';
+import { TipoDeArea } from '../_models/tipoDeArea';
+import { TipoDeAreaService } from '../_services/tipoDeArea.service';
+import { Router } from '@angular/router';
 
 /**
  * Created by Jenniferth Escobar - Felipe Aguirre on 28/02/2017.
  */
 
-@Component({
-    moduleId: module.id,
-    templateUrl: 'tipoDeArea.component.html',
-    selector: 'tipoDeArea'
-})
-export class TipoDeAreaComponent implements OnInit {
+@Component( {
+               moduleId: module.id,
+               templateUrl: 'tipoDeArea.component.html',
+               selector: 'tipodearea-list'
+            } )
+export class TipoDeAreaComponent {
 
-    listadoAreas: TipoDeArea[];
+   listadoAreas: TipoDeArea[];
 
+   constructor( private tipoDeAreaService: TipoDeAreaService, private router: Router ) {
+      tipoDeAreaService.listAreas().subscribe( res => {
+         this.listadoAreas = res;
+      } );
+   }
 
-    constructor(private tipoDeAreaService: TipoDeAreaService, private router: Router) {
-        tipoDeAreaService.listAreas().subscribe(res => {
-            this.listadoAreas = res;
-        });
-    }
+   addArea() {
+      this.router.navigate( [ 'tipoArea/add' ] );
+   }
 
-    ngOnInit(): void {
+   editArea( areaData: TipoDeArea ) {
+      this.router.navigate( [ 'tipoArea/edit/', areaData.idEstructuraArea ] );
+   }
 
-    }
-
-    addArea() {
-        this.router.navigate(['tipoArea/add']);
-    }
-
-    editArea(areaData: TipoDeArea) {
-        this.router.navigate(['tipoArea/edit/', areaData.idEstructuraArea]);
-    }
-
-    viewArea(areaData: TipoDeArea) {
-        this.router.navigate(['tipoArea/detail/', areaData.idEstructuraArea]);
-    }
+   viewArea( areaData: TipoDeArea ) {
+      this.router.navigate( [ 'tipoArea/detail/', areaData.idEstructuraArea ] );
+   }
 }
 
 

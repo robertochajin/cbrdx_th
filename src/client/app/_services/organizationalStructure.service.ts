@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { Response } from "@angular/http";
-import "rxjs/add/operator/toPromise";
-import { OrganizationalStructure } from "../_models/organizationalStructure";
-import { AuthHttp } from "angular2-jwt";
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+import { OrganizationalStructure } from '../_models/organizationalStructure';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class OrganizationalStructureService {
@@ -13,15 +13,18 @@ export class OrganizationalStructureService {
    }
 
    listOrganizationalStructure() {
-      return this.authHttp.get( this.serviceURL + 'estructuraOrganizacional' ).map( ( res: Response ) => res.json() as OrganizationalStructure[] );
+      return this.authHttp.get( this.serviceURL + 'estructuraOrganizacional' )
+      .map( ( res: Response ) => res.json() as OrganizationalStructure[] );
    }
 
    getAllEnabled() {
-      return this.authHttp.get( this.serviceURL + 'estructuraOrganizacional/enabled' ).map( ( res: Response ) => res.json() as OrganizationalStructure[] );
+      return this.authHttp.get( this.serviceURL + 'estructuraOrganizacional/enabled' )
+      .map( ( res: Response ) => res.json() as OrganizationalStructure[] );
    }
 
    addOrganizationalStructure( c: OrganizationalStructure ): Promise<OrganizationalStructure> {
-      return this.authHttp.post( this.serviceURL + 'estructuraOrganizacional', JSON.stringify( c ) ).toPromise().then( res => res.json() as OrganizationalStructure ).catch( this.handleError );
+      return this.authHttp.post( this.serviceURL + 'estructuraOrganizacional', JSON.stringify( c ) ).toPromise()
+      .then( res => res.json() as OrganizationalStructure ).catch( this.handleError );
    };
 
    updateOrganizationalStructure( c: OrganizationalStructure ): Promise<any> {
@@ -33,7 +36,8 @@ export class OrganizationalStructureService {
    }
 
    viewPadreOrganizationalStructure( id: number ) {
-      return this.authHttp.get( this.serviceURL + 'estructuraOrganizacional/' + "buscarPadre/" + id ).map( res => res.json() as OrganizationalStructure );
+      return this.authHttp.get( this.serviceURL + 'estructuraOrganizacional/' + 'buscarPadre/' + id )
+      .map( res => res.json() as OrganizationalStructure );
    }
 
    handleError( error: any ): Promise<any> {

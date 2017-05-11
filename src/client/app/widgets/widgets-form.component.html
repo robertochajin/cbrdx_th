@@ -1,16 +1,16 @@
 <p-messages [value]="msgs"></p-messages>
 <p-confirmDialog width="400" #cd>
    <p-footer>
-      <button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate:param }}" (click)="cd.reject()"></button>
-      <button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate:param }}" (click)="cd.accept()"></button>
+      <button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+      <button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate }}" (click)="cd.accept()"></button>
    </p-footer>
 </p-confirmDialog>
 <div *ngIf="widgets">
    <div class="row">
       <div class="col-md-12">
          <div class="header">
-            <h4 *ngIf="widgets.idWidget===undefined" class="title">{{ 'WIDGETS.LBL_AGREGANDO' | translate:param }}</h4>
-            <h4 *ngIf="widgets.idWidget!==undefined" class="title">{{ 'WIDGETS.LBL_EDITANDO' | translate:param }}</h4>
+            <h4 *ngIf="widgets.idWidget===undefined" class="title">{{ 'WIDGETS.LBL_AGREGANDO' | translate }}</h4>
+            <h4 *ngIf="widgets.idWidget!==undefined" class="title">{{ 'WIDGETS.LBL_EDITANDO' | translate }}</h4>
          </div>
       </div>
    </div>
@@ -18,7 +18,7 @@
       <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
          <div class="ui-grid-row">
             <div class="ui-grid-col-6">
-               <label for="codigoadd">{{ 'LBL_CODIGO' | translate:param }}</label>
+               <label for="codigoadd">{{ 'LBL_CODIGO' | translate }}</label>
                <div *ngIf="widgets.idWidget===undefined">
                   <input id="codigoadd" name="codigoadd" #codigoadd="ngModel"
                          pInputText type="text" maxlength="15"
@@ -27,12 +27,12 @@
                          (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
                          (paste)="inputCleanUp($event.target.value)"/>
                   <div *ngIf="codExists" class="alert alert-danger">
-                     {{ 'WIDGETS.MSG_CODIGOREPETIDO' | translate:param }}
+                     {{ 'WIDGETS.MSG_CODIGOREPETIDO' | translate }}
                   </div>
                   <div class="ui-message ui-messages-error ui-corner-all"
                        *ngIf="f.submitted && !codigoadd.valid ">
                      <i class="fa fa-close"></i>
-                     {{ 'WIDGETS.MSG_CODIGOREQUERIDO' | translate:param }}
+                     {{ 'WIDGETS.MSG_CODIGOREQUERIDO' | translate }}
                   </div>
                </div>
                <input *ngIf="widgets.idWidget!==undefined" id="codigo" name="codigo" #codigo="ngModel" pInputText
@@ -40,13 +40,13 @@
                       [(ngModel)]="widgets.codigoWidget"/>
             </div>
             <div class="ui-grid-col-6">
-               <label for="nombre">{{ 'LBL_NOMBRE' | translate:param }}</label>
+               <label for="nombre">{{ 'LBL_NOMBRE' | translate }}</label>
                <input id="nombre" name="nombre" #nombre="ngModel" pInputText type="text"
                       [(ngModel)]="widgets.widget" required="true" (keyup)="capitalize($event)"/>
                <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="f.submitted && !nombre.valid">
                   <i class="fa fa-close"></i>
-                  {{ 'WIDGETS.MSG_NOMBREREQUERIDO' | translate:param }}
+                  {{ 'WIDGETS.MSG_NOMBREREQUERIDO' | translate }}
                </div>
             </div>
          </div>
@@ -58,12 +58,12 @@
                <!--<div class="ui-message ui-messages-error ui-corner-all"-->
                     <!--*ngIf="f.submitted && !URL.valid">-->
                   <!--<i class="fa fa-close"></i>-->
-                  <!--{{ 'WIDGETS.MSG_URLREQUERIDA' | translate:param }}-->
+                  <!--{{ 'WIDGETS.MSG_URLREQUERIDA' | translate }}-->
                <!--</div>-->
             </div>
             <div class="ui-grid-col-6">
                <br><br>
-               <label for="habilitdo">{{ 'LBL_HABILITADO' | translate:param }}</label>
+               <label for="habilitdo">{{ 'LBL_HABILITADO' | translate }}</label>
                <p-checkbox id="habilitdo" name="habilitdo" [(ngModel)]="widgets.indicadorHabilitado"
                            binary="true"></p-checkbox>
             </div>
@@ -71,10 +71,10 @@
          <div class="ui-grid-row form-footer-buttons">
             <div class="ui-grid-col-4"></div>
             <div class="ui-grid-col-1">
-               <a (click)="goBack()" class="cancelar">{{ 'BTN_CANCELAR' | translate:param }}</a>
+               <a (click)="goBack()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
             </div>
             <div class="ui-grid-col-2">
-               <button pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate:param }}" type="submit"></button>
+               <button pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate }}" type="submit"></button>
             </div>
             <div class="ui-grid-col-5"></div>
          </div>

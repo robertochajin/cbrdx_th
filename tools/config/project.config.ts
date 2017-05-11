@@ -7,27 +7,40 @@ import { ExtendPackages } from './seed.config.interfaces';
  * This class extends the basic seed configuration, allowing for project specific overrides. A few examples can be found
  * below.
  */
+export const FONT_AWESOME_SRC     = 'node_modules/font-awesome/';
 export class ProjectConfig extends SeedConfig {
 
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
 
 
+
   FONTS_DEST = `${this.APP_DEST}/fonts`;
+  CUSTOMFONTS_DEST = `${this.APP_DEST}/css/th`;
   FONTS_SRC = [
-      'src/client/assets/font/sp/**',
-     'node_modules/font-awesome/fonts/**'
+      'node_modules/font-awesome/fonts/**'
+  ];
+  CUSTOMFONTS_SRC = [
+      'src/client/assets/font/th/**'
   ];
 
-  PRIME_NG_THEME = 'bootstrap';
+
+   PRIME_NG_THEME = 'bootstrap';
+   THEME_FONTS_DEST = `${this.APP_DEST}/css/fonts`;
+   THEME_FONTS_SRC = [
+      'node_modules/primeng/resources/themes/' + this.PRIME_NG_THEME + '/fonts/**',
+      // 'node_modules/font-awesome/fonts/**',
+      'src/client/assets/font/sp/**',
+   ];
+
+
+
+
   CSS_IMAGE_DEST = `${this.CSS_DEST}/images`;
   CSS_IMAGE_SRC = [
     'node_modules/primeng/resources/themes/' + this.PRIME_NG_THEME + '/images/**'
   ];
 
-  THEME_FONTS_DEST = `${this.APP_DEST}/css/fonts`;
-  THEME_FONTS_SRC = [
-      'node_modules/primeng/resources/themes/' + this.PRIME_NG_THEME + '/fonts/**',
-  ];
+
 
   constructor() {
     super();
@@ -40,7 +53,6 @@ export class ProjectConfig extends SeedConfig {
     this.NPM_DEPENDENCIES = [
       ...this.NPM_DEPENDENCIES,
       {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
-      // {src: 'lodash/lodash.min.js', inject: 'libs'},
       {src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs'},
       {src: 'bootstrap/dist/css/bootstrap.min.css', inject: true},
       {src: 'font-awesome/css/font-awesome.min.css', inject: true},
@@ -60,6 +72,11 @@ export class ProjectConfig extends SeedConfig {
       ...this.APP_ASSETS,
       // {src: `${this.APP_SRC}/your-path-to-lib/libs/jquery-ui.js`, inject: true, vendor: false}
       // {src: `${this.CSS_SRC}/path-to-lib/test-lib.css`, inject: true, vendor: false},
+
+       {src: `${this.ASSETS_SRC}/css/AdminLTE.css`, inject: true, vendor: true},
+       {src: `${this.ASSETS_SRC}/css/skins/_all-skins.min.css`, inject: true, vendor: true},
+       {src: `${this.ASSETS_SRC}/font/style-th.css`, inject: true, vendor: true}
+
     ];
 
     // Add packages (e.g. ng2-translate)
@@ -67,7 +84,7 @@ export class ProjectConfig extends SeedConfig {
        name: 'ng2-translate',
     //   // Path to the package's bundle
        path: 'node_modules/ng2-translate/bundles/ng2-translate.umd.js'
-     },{
+     }, {
         name: 'angular2-jwt',
         path: 'node_modules/angular2-jwt/angular2-jwt.js'
      }];

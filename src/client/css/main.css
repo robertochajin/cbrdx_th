@@ -55,6 +55,9 @@ body .ui-widget:disabled {
 .sidebar-menu > li > a {
   padding: 10px 10px ;
 }
+.sidebar-menu > li > a > .fa{
+   font-size: 1.3em;
+}
 
 /** fix Menu top border */
 @media (min-width: 768px){
@@ -64,15 +67,14 @@ body .ui-widget:disabled {
 }
 
 .sidebar-menu .treeview-menu > li > a {
-   padding: 5px 5px 5px 26px;
+   padding: 5px 36px 5px 26px!important;
    white-space: pre-line;
-   padding-right: 36px;
 }
 .sidebar-menu .treeview-menu > li > a > .fa{
    margin-left: -24px;
 }
 .sidebar-menu li > a > .pull-right-container {
-   right: -10px;
+   right: -10px!important;
 }
 .sidebar-menu li > a > .pull-right-container:after { /* This adds the second part of our dropshadow */
    content:"";
@@ -86,6 +88,7 @@ body .ui-widget:disabled {
 }
 .sidebar-menu li > a > .pull-right-container > small {
    margin-right: 0;
+   border-bottom-right-radius: 0!important;
 }
 
 .sidebar-menu li > a > .pull-right-container > small:after {
@@ -172,7 +175,25 @@ a{
   border-left: 10px solid #adadad;
 }
 
+/** -- Notificaciones Globales -- */
+#msgNotificacion{
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: 99999999;
+   width: 99%;
+   margin: 6px;
+}
+#msgNotificacion > .ui-messages{
+   border-width: 4px;
 
+   box-shadow: 4px 4px 8px -2px #242424;
+   -webkit-box-shadow: 4px 4px 8px -2px #242424;
+   -moz-box-shadow: 4px 4px 8px -2px #242424;
+   -o-box-shadow: 4px 4px 8px -2px #242424;
+
+   text-align: center;
+}
 
 
 

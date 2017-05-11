@@ -1,24 +1,41 @@
-import "rxjs/add/operator/share";
-import { Message } from "primeng/primeng";
-import { Subject } from "rxjs/Subject";
-import { Injectable } from "@angular/core";
+import 'rxjs/add/operator/share';
+import { Message } from 'primeng/primeng';
+import { Subject } from 'rxjs/Subject';
+import { Injectable } from '@angular/core';
+import { JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class NavService {
-   
-   private _navTab: number;
-   msgs: Message = { severity: 'error', summary: 'Error', detail: 'Error al guardar / Intente nuevamente.' };
-   msgAdd: Message = { severity: 'info', summary: 'Exito', detail: 'Registro agregado correctamente.' };
-   msgUpdate: Message = { severity: 'info', summary: 'Exito', detail: 'Registro actualizado correctamente.' };
+
+   _navTab: number;
+   msgs: Message = { severity: 'info', summary: 'Error', detail: 'Error al guardar / Intente nuevamente.' };
+   msgAdd: Message = { severity: 'success', summary: 'Exito', detail: 'Registro agregado correctamente.' };
+   msgUpdate: Message = { severity: 'success', summary: 'Exito', detail: 'Registro actualizado correctamente.' };
    msgError: Message = { severity: 'error', summary: 'Error', detail: 'Error al guardar / Intente nuevamente.' };
+
    subject = new Subject<Message>();
-   arraySearch : any[] = [{id:'', strSearch:''}];
-   
+   avatar = new Subject<string>();
+   arraySearch: any[] = [ { id: '', strSearch: '' } ];
+   jwtHelper: JwtHelper = new JwtHelper();
+   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
+
    // Observable string streams
    getMessage$ = this.subject.asObservable();
-   
+
+   // Observable avatar
+   getAvatar$ = this.avatar.asObservable();
+
+   constructor() {
+      let token = localStorage.getItem( 'token' );
+
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.setAvatar( this.usuarioLogueado.avatar );
+      }
+   }
+
    setMesage( type: number, msgCustom: Message ) {
-      
+
       switch ( type ) {
          case 1:
             this.msgs = this.msgAdd;
@@ -33,33 +50,43 @@ export class NavService {
             this.msgs = msgCustom;
             break;
       }
-      this.subject.next(this.msgs);
+
+
+      jQuery('#msgNotificacion').hide();
+      this.subject.next( this.msgs );
+      jQuery('#msgNotificacion').slideDown(400);
+      setTimeout( () => {
+         jQuery('#msgNotificacion').slideUp(200);
+      }, 3000 );
    }
-   
-   setTab( number: number ) {
-      this._navTab = number;
+
+
+   setTab( numero: number ) {
+      this._navTab = numero;
    }
-   
+
    getTab() {
       return this._navTab;
    }
-   
-   setSearch(id:string, strSearch:string){
-      if(this.arraySearch.find(c => c.id === id )){
-         this.arraySearch.find(c => c.id === id ).strSearch = strSearch;
-      }else{
-         this.arraySearch.push({id:id, strSearch:strSearch});
+
+   setSearch( id: string, strSearch: string ) {
+      if ( this.arraySearch.find( c => c.id === id ) ) {
+         this.arraySearch.find( c => c.id === id ).strSearch = strSearch;
+      } else {
+         this.arraySearch.push( { id: id, strSearch: strSearch } );
       }
    }
-   
-   getSearch(id:string){
-      if(this.arraySearch.find(c => c.id === id )){
-         return this.arraySearch.find(c => c.id === id ).strSearch;
-      }else{
-        return '';
+
+   getSearch( id: string ) {
+      if ( this.arraySearch.find( c => c.id === id ) ) {
+         return this.arraySearch.find( c => c.id === id ).strSearch;
+      } else {
+         return '';
       }
    }
-   
-   
-   
+
+   setAvatar( avatar: string ) {
+      this.avatar.next( avatar );
+   }
+
 }
