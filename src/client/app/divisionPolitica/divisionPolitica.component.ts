@@ -391,9 +391,7 @@ export class DivisionPoliticaComponent implements OnInit {
    }
 
    doCancel() {
-      if ( this.politicalDivision.idDivisionPolitica === null ||
-           this.politicalDivision.idDivisionPolitica === 0  ||
-           this.politicalDivision.idDivisionPolitica === undefined ) {
+      if ( this.politicalDivision.idDivisionPolitica === null || this.politicalDivision.idDivisionPolitica === 0 ) {
          this.politicalDivision = new DivisionPolitica;
       } else {
          this.divisionPoliticaService.viewDivisionPolitica( this.politicalDivision.idDivisionPolitica ).subscribe( res => {
