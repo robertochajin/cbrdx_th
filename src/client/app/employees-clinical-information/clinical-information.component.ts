@@ -99,6 +99,8 @@ export class ClinicalInformationComponent implements OnInit {
    add() {
       this.ecd = new EmployeesClinicalData();
       this.editing = false;
+      this.tfechaFin = '';
+      this.tfechaInicio = '';
    }
 
    saveDiagnostic() {
