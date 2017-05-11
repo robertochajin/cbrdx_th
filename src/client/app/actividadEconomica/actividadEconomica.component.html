@@ -61,12 +61,12 @@
                            >
 
                            <div *ngIf="f.submitted && !codigoActividadEconomica.valid"
-                                class="ui-message  ui-corner-all">
+										  class="alert alert-danger">
                               <p [hidden]="!codigoActividadEconomica.errors.required">{{ 'ACTIVIDADECONOMICA.MSG_CODREQUERIDO' | translate}}</p>
                               <p [hidden]="!codigoActividadEconomica.errors.minlength">{{ 'ACTIVIDADECONOMICA.MSG_CODNUM' | translate}}
                                  {{tabselected}} {{ 'ACTIVIDADECONOMICA.MSG_NUM' | translate}} </p>
                            </div>
-                           <div *ngIf="codeExists" class="ui-message  ui-corner-all">
+                           <div *ngIf="codeExists" class="alert alert-danger">
                               {{ 'ACTIVIDADECONOMICA.MSG_CODREGISTRADO' | translate}}
                            </div>
 
@@ -84,7 +84,7 @@
                                         [required]="true" (keyup)="capitalizeName()"
                               ></textarea>
                               <div *ngIf="f.submitted && !aEconomica.valid"
-                                   class="ui-message  ui-corner-all">
+											  class="alert alert-danger">
                                   {{labelfieldactividad}} {{ 'ACTIVIDADECONOMICA.MSG_ESREQ' | translate}}
                               </div>
 
