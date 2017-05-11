@@ -152,6 +152,9 @@
       "MSG_NUM":"Números",
       "MSG_ESREQ":"Requerido",
       "MSG_SOLONUMEROS":"Sólo números",
+      "LBL_COMUNA":"Comuna",
+      "LBL_LOCALIDAD":"Localidad",
+      "LBL_RESGUARDO":"Resguardo",
       "MSG_CODREGISTRADO":"Ya se encuentra registrado este código",
       "MSG_NOMBREREQUERIDO":"Nombre es requerido"
 

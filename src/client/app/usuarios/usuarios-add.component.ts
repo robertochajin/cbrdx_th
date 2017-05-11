@@ -125,7 +125,7 @@ export class UsuariosAddComponent {
       this.validarTercero();
       if ( !this.userExists && this.terceroExiste ) {
          this.tercerosService.validateDocument( this.numeroDocumento, this.selectedTipo ).subscribe( res => {
-            if ( res.idTercero !== null ) {
+            if ( res !== undefined && res.idTercero > 0 ) {
                this.tercerosService.get( res.idTercero ).subscribe( rest => {
                   this.tercero = rest;
                   this.isTerceroSet = true;

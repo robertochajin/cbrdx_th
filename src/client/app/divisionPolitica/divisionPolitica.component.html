@@ -136,7 +136,7 @@
                         </div>
                         <div class="row" *ngIf="tabselected == 4 && Comunas">
                             <div class="form-group">
-                                <label for="comuna" class="control-label col-sm-3">"LBL_PERTENECE":"Teléfono"a </label>
+                                <label for="comuna" class="control-label col-sm-3">{{"DIVISIONPOLITICA.LBL_COMUNA" | translate}}</label>
                                 <div class=" col-sm-9">
                                     <p-dropdown id="comuna" name="comuna" [options]="divisionPoliticaComunas"
                                                 [autoWidth]="false"
@@ -147,7 +147,7 @@
                         </div>
                         <div class="row" *ngIf="tabselected == 4 && Localidades">
                             <div class="form-group">
-                                <label for="localidad" class="control-label col-sm-3">"LBL_PERTENECE":"Teléfono" a </label>
+                                <label for="localidad" class="control-label col-sm-3">{{"DIVISIONPOLITICA.LBL_LOCALIDAD" | translate}}</label>
                                 <div class=" col-sm-9">
                                     <p-dropdown id="localidad" name="localidad" [options]="divisionPoliticaLocalidades"
                                                 [autoWidth]="false"
@@ -158,7 +158,7 @@
                         </div>
                         <div class="row" *ngIf="tabselected == 4 && Resguardos">
                             <div class="form-group">
-                                <label for="resguardo" class="control-label col-sm-3"> "LBL_PERTENECE":"Teléfono", a </label>
+                                <label for="resguardo" class="control-label col-sm-3"> {{"DIVISIONPOLITICA.LBL_RESGUARDO" | translate}}</label>
                                 <div class=" col-sm-9">
                                     <p-dropdown id="resguardo" name="resguardo" [options]="divisionPoliticaResguardos"
                                                 [autoWidth]="false"

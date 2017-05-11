@@ -355,7 +355,7 @@ export class EmployeesAddComponent implements OnInit {
    validateDocument() {
       if ( this.employee.numeroDocumento !== '' && this.employee.numeroDocumento !== null ) {
          this.employeesService.validateDocument( this.employee.numeroDocumento, this.employee.idTipoDocumento ).subscribe( res => {
-            if ( res.idTercero > 0 ) {
+            if ( res !== undefined && res.idTercero > 0 ) {
                this.confirmationService.confirm( {
                                                     message: ` ¿La cedula que ha ingresado ya existe, desea ver el colaborador existente?`,
                                                     header: 'Corfirmación',
