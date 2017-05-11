@@ -31,7 +31,7 @@ export class PositionCompetenciesComponent implements OnInit {
    @Output()
    nextStep: EventEmitter<number> = new EventEmitter<number>();
 
-   private groups: GroupCompetencies[];
+   private groups: GroupCompetencies[]=[];
    private ponderancies: Ponderancies[];
 
    constructor( private router: Router,
@@ -56,30 +56,32 @@ export class PositionCompetenciesComponent implements OnInit {
             this.ponderanciesList.splice( 0, 1 );
          }
          this.groupCompetenciesServices.getAllEnabled().subscribe( groups => {
-            this.groups = groups;
-            this.groups.map( g => {
+            groups.map( g => {
                this.competenciesServices.getAllEnabledByGroup( g.idGrupoCompetencia ).subscribe(
                   competencies => {
 
-                     g.competencies = competencies;
+                     if ( competencies.length > 0) {
+                        g.competencies = competencies;
 
-                     g.competencies.map( c => {
-                        let skill = this.positionCompetencies.find(
-                           ( element: PositionCompetencies, index: number, array: PositionCompetencies[] ) => {
-                              if ( element.idCargo === this.position.idCargo && element.idCompetencia === c.idCompetencia ) {
-                                 return true;
-                              } else {
-                                 return false;
-                              }
-                           } );
+                        g.competencies.map( c => {
+                           let skill = this.positionCompetencies.find(
+                              ( element: PositionCompetencies, index: number, array: PositionCompetencies[] ) => {
+                                 if ( element.idCargo === this.position.idCargo && element.idCompetencia === c.idCompetencia ) {
+                                    return true;
+                                 } else {
+                                    return false;
+                                 }
+                              } );
 
-                        if ( skill !== undefined ) {
-                           c.cargoCompetencia = skill;
-                        } else {
-                           c.cargoCompetencia = new PositionCompetencies();
-                        }
+                           if ( skill !== undefined ) {
+                              c.cargoCompetencia = skill;
+                           } else {
+                              c.cargoCompetencia = new PositionCompetencies();
+                           }
 
-                     } );
+                        } );
+                        this.groups.push( g );
+                     }
                   }
                );
             } );
