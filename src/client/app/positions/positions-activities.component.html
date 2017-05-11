@@ -35,7 +35,7 @@
       <div class="col-md-12">
          <p-dataTable [value]="listPositionsActivities" [paginator]="true" [rows]="10" [responsive]="true">
             <p-column field="ocupacion" header="{{ 'POSITION.LBL_OCUPACION' | translate }}" [sortable]="true"></p-column>
-            <p-column header="{{ 'POSITION.LBL_ACCION' | translate }}" styleClass="datatable-col-action">
+            <p-column header="{{ 'LBL_ACCION' | translate }}" styleClass="datatable-col-action">
                <template let-PA="rowData" pTemplate="body">
                   <button type="button" icon="fa-trash" class="ui-button-danger"
                           pButton (click)="del(PA)"></button>

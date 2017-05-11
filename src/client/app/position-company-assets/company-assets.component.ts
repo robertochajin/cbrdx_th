@@ -102,7 +102,7 @@ export class CompanyAssetsComponent implements OnInit {
    next() {
       let num = 0;
       for ( let elemento of this.listCompanyAssets ) {
-         if ( elemento.nombre === '' || elemento.nombre === null ) {
+         if ( elemento.nombre === '' || elemento.nombre === null || elemento.nombre === undefined ) {
             num++;
          }
       }
