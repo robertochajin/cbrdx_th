@@ -32,6 +32,7 @@ export class NavService {
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
          this.setAvatar( this.usuarioLogueado.avatar );
       }
+      this.arraySearch = [];
    }
 
    setMesage( type: number, msgCustom: Message ) {
@@ -83,6 +84,10 @@ export class NavService {
       } else {
          return '';
       }
+   }
+
+   resetSearch(){
+      this.arraySearch = [ ];
    }
 
    setAvatar( avatar: string ) {
