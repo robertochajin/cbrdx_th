@@ -44,7 +44,9 @@ export class CentroCostosEditComponent {
    }
 
    inputCleanUp( value: string ) {
-      this.centroCostos.codigoCentroCostos = value.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
+      if(value) {
+         this.centroCostos.codigoCentroCostos = value.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
+      }
    }
 
    goBack(): void {
@@ -53,6 +55,8 @@ export class CentroCostosEditComponent {
 
    capitalize() {
       let input = this.centroCostos.centroCostos;
-      this.centroCostos.centroCostos = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+      if (input) {
+         this.centroCostos.centroCostos = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+      }
    }
 }

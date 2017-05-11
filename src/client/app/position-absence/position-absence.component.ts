@@ -92,7 +92,7 @@ export class AbsenceComponent implements OnInit {
          this.guardandoA = false;
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          this.absenceService.getPositionById( data.idCargoRelacion ).subscribe( res => {
-            data.cargoRelacion = res.cargo;
+            data.cargo = res.cargo;
          } );
          this.idCargoRelacionREE = null;
          this.listAbsenceREE.push( data );
@@ -128,7 +128,7 @@ export class AbsenceComponent implements OnInit {
          this.guardandoP = false;
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          this.absenceService.getPositionById( data.idCargoRelacion ).subscribe( res => {
-            data.cargoRelacion = res.cargo;
+            data.cargo = res.cargo;
             this.listPositionREP.splice( this.listPositionREP.indexOf( res ), 1 );
          } );
          this.idCargoRelacionREP = null;

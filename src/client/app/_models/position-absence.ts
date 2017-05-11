@@ -10,6 +10,7 @@ export class Absence {
    auditoriaFecha: Date;
    idCargoRelacion: number;
    cargoRelacion: string;
+   cargo: string;
    indicadorHabilitado: boolean;
 
    constructor() {
