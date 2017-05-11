@@ -36,8 +36,6 @@ export class NavService {
 
    setMesage( type: number, msgCustom: Message ) {
 
-      this.clearMesage();
-
       switch ( type ) {
          case 1:
             this.msgs = this.msgAdd;
@@ -53,18 +51,15 @@ export class NavService {
             break;
       }
 
+
       jQuery('#msgNotificacion').hide();
       this.subject.next( this.msgs );
       jQuery('#msgNotificacion').slideDown(400);
       setTimeout( () => {
          jQuery('#msgNotificacion').slideUp(200);
-      }, 4000 );
+      }, 3000 );
    }
 
-   clearMesage(){
-      console.log('ClearMSG');
-      this.subject.next('');
-   }
 
    setTab( numero: number ) {
       this._navTab = numero;
