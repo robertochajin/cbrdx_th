@@ -188,7 +188,7 @@ export class ActividadEconomicaComponent {
    }
 
    save() {
-      if ( this.actividadEconomica.idActividadEconomica === null || this.actividadEconomica.idActividadEconomica === 0 ) {
+      if ( this.actividadEconomica.idActividadEconomica === undefined ||  this.actividadEconomica.idActividadEconomica === null || this.actividadEconomica.idActividadEconomica === 0 ) {
          this.actividadEconomicaService.addActividadEconomica( this.actividadEconomica ).then( data => {
             let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
             this.navService.setMesage( typeMessage, this.msg );
