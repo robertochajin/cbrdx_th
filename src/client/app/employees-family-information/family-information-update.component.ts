@@ -48,7 +48,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
    idMayorDeEdad: number = 1;
    cel: boolean = false;
    tel: boolean = false;
-   //Es necesario crear la constante y consultarla
+   // Es necesario crear la constante y consultarla
 
    constructor( private familyInformationService: FamilyInformationService,
       private listaService: ListaService,
@@ -98,9 +98,9 @@ export class FamilyInformationUpdateComponent implements OnInit {
 
       this.listaService.getMasterDetailsByCode( 'ListasTiposTerceros', 'TERFAM' ).subscribe(
          res => {
-            this.idTipoTercero = res.idLista
+            this.idTipoTercero = res.idLista;
          } );
-      // this.listEmployeesService.getTerType("TERFAM").subscribe(
+      // this.listEmployeesService.getTerType('TERFAM').subscribe(
       //   res => {
       //     this.idTipoTercero = res.idListaTipoTercero
       //   });
@@ -119,7 +119,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
                this.selectedRelationship = this.familyInformation.idParentesco;
                let mom: moment.Moment = moment( this.familyInformation.fechaNacimiento, 'YYYY-MM-DD' );
                this.familyInformation.fechaNacimiento = mom.format( 'MM/DD/YYYY' );
-               this.convive = this.familyInformation.idConvivencia == 1 ? true : false;
+               this.convive = this.familyInformation.idConvivencia === 1 ? true : false;
                if ( this.familyInformation.telefonoFijo !== null || this.familyInformation.telefonoFijo !== '' ) {
                   this.cel = true;
                } else {
@@ -283,7 +283,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
       if ( input !== undefined ) {
          return input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       } else {
-         return ''
+         return '';
       }
    }
 
@@ -305,7 +305,9 @@ export class FamilyInformationUpdateComponent implements OnInit {
    }
 
    validateDocument() {
-      if ( this.familyInformation.numeroDocumento !== '' && this.familyInformation.numeroDocumento !== null && this.selectedDocument !== null ) {
+      if ( this.familyInformation.numeroDocumento !== '' &&
+           this.familyInformation.numeroDocumento !== null &&
+           this.selectedDocument !== null ) {
          this.employeesService.validateDocument( this.familyInformation.numeroDocumento, this.selectedDocument ).subscribe( res => {
             if ( res.idTercero > 0 ) {
                this.repeatedDocument = true;
@@ -316,24 +318,10 @@ export class FamilyInformationUpdateComponent implements OnInit {
    }
 
    childInputCleanUp( value: string ) {
-      if ( this.familyInformation.telefonoFijo.length === 7 || this.familyInformation.telefonoFijo.length === 10 ) {
-         this.tel = true;
-         this.cel = true;
-      } else {
-         this.cel = false;
-         this.tel = false;
-      }
       this.familyInformation.telefonoFijo = value.toUpperCase().replace( /[^0-9]/g, '' ).replace( ' ', '' ).trim();
    }
 
    childInputCleanUp1( value: string ) {
-      if ( this.familyInformation.telefonoCelular.length === 7 || this.familyInformation.telefonoCelular.length === 10 ) {
-         this.cel = true;
-         this.tel = true;
-      } else {
-         this.tel = false;
-         this.cel = false;
-      }
       this.familyInformation.telefonoCelular = value.toUpperCase().replace( /[^0-9]/g, '' ).replace( ' ', '' ).trim();
    }
 }

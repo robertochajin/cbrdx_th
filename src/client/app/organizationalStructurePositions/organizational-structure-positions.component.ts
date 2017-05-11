@@ -80,7 +80,8 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
          dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
          dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
          monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre',
-            'octubre', 'noviembre', 'diciembre' ],
+            'octubre', 'noviembre', 'diciembre'
+         ],
          monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
 
@@ -279,6 +280,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
                                            }
                                         } );
    }
+
    cancelEditingPerson() {
 
       this.confirmationService.confirm( {
@@ -391,7 +393,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
                                            accept: () => {
                                               this.area.indicadorPlantaConfirmada = true;
                                               this.organizationalStructureService
-                                                 .updateOrganizationalStructure( this.area )
+                                              .updateOrganizationalStructure( this.area )
                                               .then( ( r: any ) => {
                                                  if ( !r.ok ) {
                                                     this.area.indicadorPlantaConfirmada = true;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CentroCostos } from '../_models/centroCostos';
 import { CentroCostosService } from '../_services/centroCostos.service';
 import { Router } from '@angular/router';
@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
 @Component( {
                moduleId: module.id,
                templateUrl: 'centroCostos.component.html',
-               selector: 'centroCostos-list'
+               selector: 'centrocostos-list'
             } )
-export class CentroCostosComponent implements OnInit {
+export class CentroCostosComponent {
 
    listadoCentroCostos: CentroCostos[];
 
@@ -18,10 +18,6 @@ export class CentroCostosComponent implements OnInit {
       centroCostosService.listCentroCostos().subscribe( res => {
          this.listadoCentroCostos = res;
       } );
-   }
-
-   ngOnInit(): void {
-
    }
 
    addCentroCostos() {

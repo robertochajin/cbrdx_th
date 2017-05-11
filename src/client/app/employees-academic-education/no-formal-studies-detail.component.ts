@@ -31,7 +31,7 @@ export class NoFormalStudiesDetailComponent implements OnInit {
       .switchMap( ( params: Params ) => this.academicEducationService.getNoFormal( +params[ 'id' ] ) )
       .subscribe( study => {
          this.study = study;
-         this.studysType = this.study.idTipoEstudio == null ? this.study.otroEstudio : this.study.tipoEstudio;
+         this.studysType = this.study.idTipoEstudio === null ? this.study.otroEstudio : this.study.tipoEstudio;
       } );
    }
 

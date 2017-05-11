@@ -5,9 +5,10 @@ import { Location } from '@angular/common';
 import { EmployeesService } from '../_services/employees.service';
 import { Employee } from '../_models/employees';
 import { NavService } from '../_services/_nav.service';
+
 @Component( {
                moduleId: module.id,
-               selector: 'employee',
+               selector: 'employees-detail',
                templateUrl: 'employees-detail.component.html'
             } )
 
@@ -20,8 +21,8 @@ export class EmployeesDetailComponent implements OnInit {
       private route: ActivatedRoute,
       private location: Location,
       private _nav: NavService,
-      private router: Router ) {
-
+      private router: Router
+   ) {
    }
 
    ngOnInit(): void {
@@ -32,6 +33,8 @@ export class EmployeesDetailComponent implements OnInit {
                                            this.employee.segundoNombre + ' ' +
                                            this.employee.primerApellido + ' ' +
                                            this.employee.segundoApellido;
+
+
             // this.acordion=0;
             //
             //   if( this.employee.ciudadExpDocumento === null ) this.employee.ciudadExpDocumento='';

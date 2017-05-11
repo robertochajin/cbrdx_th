@@ -23,8 +23,7 @@ export class References {
    public nombreCompleto?: string;
    public ciudad?: string;
    public direccion?: string;
-   public tipodeReferencia?: { value: number, label: string }
-
+   public tipodeReferencia?: { value: number, label: string };
    public numeroContacto?: string;
 
    constructor() {

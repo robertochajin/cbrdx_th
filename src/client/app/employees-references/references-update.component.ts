@@ -105,14 +105,12 @@ export class ReferencesUpdateComponent implements OnInit {
                                            accept: () => {
                                               this._nav.setTab( 5 );
                                               this.location.back();
-                                           },
-                                           reject: () => {
                                            }
                                         } );
    }
 
    focusUP() {
-      const element = document.querySelector( "#formulario" );
+      const element = document.querySelector( '#formulario' );
       if ( element ) {
          element.scrollIntoView( element );
       }

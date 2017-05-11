@@ -10,8 +10,6 @@ export class ProcessRoles {
    public indicadorHabilitado: boolean;
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
-
-   //Atributo auxiliar
    public asignadoAlCargo: boolean;
 
    constructor( idLista: number, codigo: string, nombre: string, orden: number ) {

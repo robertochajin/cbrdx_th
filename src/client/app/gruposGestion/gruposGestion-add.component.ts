@@ -1,15 +1,14 @@
-/**
- * Created by Felipe Aguirre - Jenniferth Escobar on 24/02/2017.
- */
 import { Component, OnInit } from '@angular/core';
 import { GruposGestion } from '../_models/gruposGestion';
 import { GruposGestionService } from '../_services/grupoGestion.service';
 import { Router } from '@angular/router';
+import { NavService } from '../_services/_nav.service';
+import { Message } from 'primeng/primeng';
 
 @Component( {
                moduleId: module.id,
                templateUrl: 'gruposGestion-add.component.html',
-               selector: 'gruposGestion-add'
+               selector: 'gruposgestion-add'
             } )
 export class GruposGestionAddComponent implements OnInit {
 
@@ -20,9 +19,14 @@ export class GruposGestionAddComponent implements OnInit {
    displayDialog = false;
    isRequired = false;
    isGreater = true;
-   private es: any;
+   es: any;
+   msg: Message;
 
-   constructor( private gruposGestionService: GruposGestionService, private router: Router ) {
+   constructor(
+      private gruposGestionService: GruposGestionService,
+      private router: Router,
+      private navService: NavService
+   ) {
       gruposGestionService.listGruposGestion().subscribe( res => {
          this.gruposGestion = res;
       } );
@@ -36,7 +40,8 @@ export class GruposGestionAddComponent implements OnInit {
          dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
          dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
          monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre',
-            'diciembre' ],
+            'diciembre'
+         ],
          monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
    }
@@ -59,7 +64,9 @@ export class GruposGestionAddComponent implements OnInit {
 
    createGruposGestion() {
       this.gruposGestionService.addGruposGestion( this.grupoGestion ).then( data => {
-         this.router.navigate( [ 'gruposGestion' ] )
+         this.router.navigate( [ 'gruposGestion' ] );
+         let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+         this.navService.setMesage( typeMessage, this.msg );
       } );
    }
 
@@ -83,7 +90,7 @@ export class GruposGestionAddComponent implements OnInit {
 
    capitalizeName() {
       let input = this.grupoGestion.grupoGestion;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined) {
          this.grupoGestion.grupoGestion = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }

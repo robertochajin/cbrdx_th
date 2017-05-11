@@ -36,7 +36,7 @@ export class PersonalityComponent implements OnInit {
    }
 
    ngOnInit() {
-      this.msgsAlert.push( { severity: 'alert', summary: 'Error', detail: 'Debe llenar al menos un registro' } );
+      this.msgsAlert.push( { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un registro' } );
       this.listaService.getMasterDetails( 'ListasAtributosCargos' ).subscribe( res => {
          this.listPersonality = res;
          this.personalityService.getAllByPosition( this.position.idCargo ).subscribe( res => {

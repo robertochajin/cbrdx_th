@@ -40,7 +40,7 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
    idTercero: number;
    fechaIngresa: string;
    fechaTermina: string;
-   //hace falta definir acceso a constantes en servicio
+   // hace falta definir acceso a constantes en servicio
 
    constructor( private academicEducationService: AcademicEducationService,
       private studyLevelServices: StudyLevelServices,
@@ -89,7 +89,7 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
             let fi: moment.Moment = moment( this.nfstudy.fechaIngresa, 'YYYY-MM-DD' );
             this.fechaIngresa = fi.format( 'MM/DD/YYYY' );
             this.onSelectBegin( this.fechaIngresa );
-            if ( this.nfstudy.indicadorTerminacion == true ) {
+            if ( this.nfstudy.indicadorTerminacion === true ) {
                let ff: moment.Moment = moment( this.nfstudy.fechaTermina, 'YYYY-MM-DD' );
                this.fechaTermina = ff.format( 'MM/DD/YYYY' );
                this.onSelectEnd( this.fechaTermina );
@@ -131,14 +131,14 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
          this.selectedCity = '';
          this.nfstudy.idCiudad = null;
       }
-      if ( this.nfstudy.ciudad == this.selectedCity ) {
+      if ( this.nfstudy.ciudad === this.selectedCity ) {
          this.msgs = [];
          this.nfstudy.idTercero = this.idTercero;
          this.nfstudy.indicadorHabilitado = true;
 
          let fi: moment.Moment = moment( this.fechaIngresa, 'MM/DD/YYYY' );
          this.nfstudy.fechaIngresa = fi.format( 'YYYY-MM-DD' );
-         if ( this.nfstudy.indicadorTerminacion == true ) {
+         if ( this.nfstudy.indicadorTerminacion === true ) {
             let ff: moment.Moment = moment( this.fechaTermina, 'MM/DD/YYYY' );
             this.nfstudy.fechaTermina = ff.format( 'YYYY-MM-DD' );
          } else {

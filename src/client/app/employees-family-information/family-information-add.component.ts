@@ -90,7 +90,7 @@ export class FamilyInformationAddComponent implements OnInit {
       } );
 
       this.listaService.getMasterDetailsByCode( 'ListasTiposTerceros', 'TERFAM' ).subscribe( res => {
-         this.idTipoTercero = res.idLista
+         this.idTipoTercero = res.idLista;
       } );
 
       let today = new Date();
@@ -200,7 +200,9 @@ export class FamilyInformationAddComponent implements OnInit {
          this.range = `${prev18Year}:${year}`;
       }
 
-      if ( (this.familyInformation.fechaNacimiento) === null || (this.familyInformation.fechaNacimiento) === '' ) {
+      if ( (this.familyInformation.fechaNacimiento) === null ||
+           (this.familyInformation.fechaNacimiento) === ''  ||
+           (this.familyInformation.fechaNacimiento) === undefined ) {
          this.familyInformation.fechaNacimiento = `${this.maxDate.getMonth() + 1}/${this.maxDate.getDate()}/${this.maxDate.getFullYear()}`;
       } else {
          let timestamp2 = new Date( this.maxDate ).getTime();
@@ -243,7 +245,7 @@ export class FamilyInformationAddComponent implements OnInit {
       if ( input !== undefined ) {
          return input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       } else {
-         return ''
+         return '';
       }
    }
 
@@ -262,7 +264,9 @@ export class FamilyInformationAddComponent implements OnInit {
    }
 
    validateDocument() {
-      if ( this.familyInformation.numeroDocumento !== '' && this.familyInformation.numeroDocumento !== null && this.selectedDocument !== null ) {
+      if ( this.familyInformation.numeroDocumento !== '' &&
+           this.familyInformation.numeroDocumento !== null &&
+           this.selectedDocument !== null ) {
          this.employeesService.validateDocument( this.familyInformation.numeroDocumento, this.selectedDocument ).subscribe( res => {
             if ( res !== undefined && res.idTercero > 0 ) {
                this.repeatedDocument = true;
@@ -273,24 +277,11 @@ export class FamilyInformationAddComponent implements OnInit {
    }
 
    childInputCleanUp( value: string ) {
-      if ( this.familyInformation.telefonoFijo.length === 7 || this.familyInformation.telefonoFijo.length === 10 ) {
-         this.tel = true;
-         this.cel = true;
-      } else {
-         this.cel = false;
-         this.tel = false;
-      }
       this.familyInformation.telefonoFijo = value.toUpperCase().replace( /[^0-9]/g, '' ).replace( ' ', '' ).trim();
    }
 
    childInputCleanUp1( value: string ) {
-      if ( this.familyInformation.telefonoCelular.length === 7 || this.familyInformation.telefonoCelular.length === 10 ) {
-         this.cel = true;
-         this.tel = true;
-      } else {
-         this.tel = false;
-         this.cel = false;
-      }
+
       this.familyInformation.telefonoCelular = value.toUpperCase().replace( /[^0-9]/g, '' ).replace( ' ', '' ).trim();
    }
 }

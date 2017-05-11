@@ -10,7 +10,7 @@ import { ListaService } from '../_services/lista.service';
 
 @Component( {
                moduleId: module.id,
-               selector: 'references',
+               selector: 'references-detail',
                templateUrl: './references-detail.component.html',
             } )
 

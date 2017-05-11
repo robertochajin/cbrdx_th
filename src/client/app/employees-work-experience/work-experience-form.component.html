@@ -140,8 +140,8 @@
                           <p-calendar id="ingreso" name="ingreso" #ingreso="ngModel"
                                       (onSelect)="onSelectMethodCalendarIngreso($event)" [showIcon]="true"
                                       [maxDate]="maxDateIngreso" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range"
-                                      [locale]="es" readonlyInput="true" [dataType]="date" required="true"
-                                      [disabled]="disabled" [(ngModel)]="fechaIngresa">
+                                      [locale]="es" readonlyInput="true" dataType="date" required="true"
+                                      [(ngModel)]="fechaIngresa">
                           </p-calendar>
                           <div  class="ui-message ui-messages-error ui-corner-all"
                                 *ngIf="f.submitted && !ingreso.valid">
@@ -161,8 +161,8 @@
                           <p-calendar id="finalizacion" name="finalizacion" #finalizacion="ngModel"
                                       (onSelect)="onSelectMethodCalendarFinalizacion($event)" [showIcon]="true" required="true"
                                       [minDate]="minDate" [maxDate]="maxDateFinal" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range"
-                                      [locale]="es"  readonlyInput="true" [dataType]="date"
-                                      [disabled]="disabled" [(ngModel)]="fechaTermina">
+                                      [locale]="es"  readonlyInput="true" dataType="date"
+                                      [(ngModel)]="fechaTermina">
                           </p-calendar>
                           <div  class="ui-message ui-messages-error ui-corner-all"
                                 *ngIf="f.submitted && !finalizacion.valid">

@@ -36,7 +36,7 @@ export class OrganizationalStructureService {
    }
 
    viewPadreOrganizationalStructure( id: number ) {
-      return this.authHttp.get( this.serviceURL + 'estructuraOrganizacional/' + "buscarPadre/" + id )
+      return this.authHttp.get( this.serviceURL + 'estructuraOrganizacional/' + 'buscarPadre/' + id )
       .map( res => res.json() as OrganizationalStructure );
    }
 

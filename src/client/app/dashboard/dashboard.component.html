@@ -1,6 +1,6 @@
 <div class="row" style="margin-bottom: 10px;">
    <div class="col-md-6 col-xs-12 " style="text-align: left">
-     <label>{{ 'LBL_ULTIMOINGRESO' | translate }}: </label>
+     <label>{{ 'INICIO_DASHBOARD.LBL_ULTIMOINGRESO' | translate }}: </label>
    </div>
    <div class="col-md-6 col-xs-12 ">
       <button class=" pull-right" (click)="displayDialog=true" type="button" pButton icon="fa-plus"
@@ -32,7 +32,7 @@
             <p-panel>
                <p-header>
                   <div class="ui-helper-clearfix">
-                     <span class="ui-panel-title">{{ 'LBL_USUARIOS' | translate:param }} {{ 'INICIO_DASHBOARD.LBL_ACTIVO' | translate:param }}/{{ 'INICIO_DASHBOARD.LBL_INACTIVO' | translate:param }}</span>
+                     <span class="ui-panel-title">{{ 'LBL_USUARIOS' | translate }} {{ 'INICIO_DASHBOARD.LBL_ACTIVO' | translate }}/{{ 'INICIO_DASHBOARD.LBL_INACTIVO' | translate }}</span>
                      <button class="pull-right" type="text" (click)="allWidgets[1].visible = !allWidgets[1].visible" icon=""><i
                         class="fa fa-close"></i></button>
                      <!--<input pButton=""  [style]="{'float':'right'}" label="Save" icon="fa-check" (onClick)="save()" [model]="items"></input>-->
@@ -43,7 +43,7 @@
                   <div class="info-box" style="background: #f9f9f9;">
                      <span class="info-box-icon bg-green"><i class="fa fa-user"></i></span>
                      <div class="info-box-content">
-                        <span class="info-box-text">{{ 'LBL_USUARIOS' | translate:param }} {{ 'INICIO_DASHBOARD.LBL_ACTIVO' | translate:param }}</span>
+                        <span class="info-box-text">{{ 'LBL_USUARIOS' | translate }} {{ 'INICIO_DASHBOARD.LBL_ACTIVO' | translate }}</span>
                         <span class="info-box-number"
                               style="text-align: center;font-size: 2.4em;">{{usuariosActivos}}</span>
                      </div>
@@ -52,7 +52,7 @@
                   <div class="info-box" style="background: #f9f9f9;">
                      <span class="info-box-icon bg-yellow"><i class="fa fa-user-times"></i></span>
                      <div class="info-box-content">
-                        <span class="info-box-text">{{ 'LBL_USUARIOS' | translate:param }} {{ 'INICIO_DASHBOARD.LBL_INACTIVO' | translate:param }}</span>
+                        <span class="info-box-text">{{ 'LBL_USUARIOS' | translate }} {{ 'INICIO_DASHBOARD.LBL_INACTIVO' | translate }}</span>
                         <span class="info-box-number"
                               style="text-align: center;font-size: 2.4em;">{{usuariosInactivos}}</span>
                      </div>
@@ -74,7 +74,7 @@
 </div>
 
 
-<p-dialog header="{{ 'INICIO_DASHBOARD.CONF_WIDGETS' | translate:param }}" [(visible)]="displayDialog" responsive="true" modal="true">
+<p-dialog header="{{ 'INICIO_DASHBOARD.CONF_WIDGETS' | translate }}" [(visible)]="displayDialog" responsive="true" modal="true">
    <template ngFor let-widget [ngForOf]="allWidgets" let-i="index">
       <div class="col-md-12">
          <p-checkbox name="widgets" *ngIf="widget.habilitado"  value="{{widget.codigo}}" [(ngModel)]="widget.visible" label="{{widget.nombre}}" binary="true"></p-checkbox>

@@ -10,9 +10,8 @@ import { PhysicStructureService } from '../_services/physic-structure.service';
 import { SharedModule } from '../shared/shared.module';
 import { LocationsModule } from '../locations/locations.module';
 import {
-   InputTextModule, DataTableModule, ButtonModule, DialogModule, InputTextareaModule,
-   CalendarModule, AutoCompleteModule, DropdownModule, CheckboxModule, InputMaskModule,
-   MessagesModule, ConfirmDialogModule
+   InputTextModule, DataTableModule, ButtonModule, DialogModule, InputTextareaModule, CalendarModule, AutoCompleteModule, DropdownModule,
+   CheckboxModule, InputMaskModule, MessagesModule, ConfirmDialogModule
 } from 'primeng/primeng';
 
 @NgModule( {
@@ -39,10 +38,12 @@ import {
 
               ],
               bootstrap: [ PhysicStructureComponent, PhysicStructureAddComponent,
-                 PhysicStructureDetailComponent, PhysicStructureUpdateComponent ],
+                 PhysicStructureDetailComponent, PhysicStructureUpdateComponent
+              ],
               providers: [ PhysicStructureService ],
               exports: [ PhysicStructureComponent, PhysicStructureAddComponent,
-                 PhysicStructureDetailComponent, PhysicStructureUpdateComponent ]
+                 PhysicStructureDetailComponent, PhysicStructureUpdateComponent
+              ]
            } )
 export class PhysicStructureModule {
 }

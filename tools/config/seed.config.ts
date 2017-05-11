@@ -48,7 +48,7 @@ export class SeedConfig {
     * The default port is `5555`, which can be overriden by the  `--port` flag when running `npm start`.
     * @type {number}
     */
-   PORT = argv['port'] || 5556;
+   PORT = argv['port'] || 5557;
 
    /**
     * The root folder of the project (up two levels from the current directory).
@@ -310,7 +310,7 @@ export class SeedConfig {
     * @type {string}
     */
       // IP = '192.168.253.37'; //_CREZCAMOS
-   IP = '40.71.92.147'; // _CIBERDIX
+   IP = '190.147.208.155'; // _CIBERDIX
    // IP = 'localhost';
    SVC_SP_PORT = '8447';
 
@@ -387,7 +387,8 @@ export class SeedConfig {
          '@angular/core/testing': 'node_modules/@angular/core/bundles/core-testing.umd.js',
          '@angular/http/testing': 'node_modules/@angular/http/bundles/http-testing.umd.js',
          '@angular/platform-browser/testing': 'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
-         '@angular/platform-browser-dynamic/testing': 'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
+         '@angular/platform-browser-dynamic/testing':
+            'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
          '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
          'traceur': 'node_modules/traceur/bin/traceur.js',

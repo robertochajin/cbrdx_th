@@ -28,7 +28,7 @@ export class FamilyInformationDetailComponent implements OnInit {
       .subscribe( ( params: Params ) => {
          this.familyInformationService.get( +params[ 'id' ] )
          .subscribe( familyInformation => {
-            this.familyInformation = familyInformation
+            this.familyInformation = familyInformation;
          } );
       } );
    }

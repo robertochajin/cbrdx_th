@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { References } from './references';
 import { ReferencesService } from './references.service';
@@ -8,10 +8,10 @@ import { Employee } from '../_models/employees';
 @Component( {
                moduleId: module.id,
                templateUrl: 'references.component.html',
-               selector: 'references',
+               selector: 'references-component',
                providers: [ ConfirmationService ]
             } )
-export class ReferencesComponent {
+export class ReferencesComponent implements OnInit {
    @Input() employee: Employee;
    reference: References = new References();
    dialogObjet: References = new References();
@@ -68,14 +68,14 @@ export class ReferencesComponent {
    }
 
    detail( f: References ) {
-      this.router.navigate( [ 'employees-references/detail/' + f.idTerceroReferencia ] );
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/references/detail/' + f.idTerceroReferencia ] );
    }
 
    add() {
-      this.router.navigate( [ 'employees-references/add/' + this.employee.idTercero ] );
+      this.router.navigate( [ 'employees/detail/' + this.employee.idTercero + '/references/add/' ] );
    }
 
    update( f: References ) {
-      this.router.navigate( [ 'employees-references/update/' + f.idTerceroReferencia + '/' + this.employee.idTercero ] );
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/references/update/' + f.idTerceroReferencia ] );
    }
 }

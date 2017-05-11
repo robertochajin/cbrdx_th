@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { TranslateService, TranslateModule } from 'ng2-translate';
 import { WindowRefService } from '../_services/window-ref.service';
 import { AuthenticationService } from '../_services/authentication.service';
+import {NavService} from "../_services/_nav.service";
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -23,10 +24,15 @@ import { AuthenticationService } from '../_services/authentication.service';
            } )
 export class SharedModule {
 
-   topInvalid: number;
+   private topInvalid: number;
    private _window: Window;
-
-   constructor( private router: Router, windowRef: WindowRefService ) {
+   static forRoot(): ModuleWithProviders {
+      return {
+         ngModule: SharedModule,
+         providers: [ TranslateService ]
+      };
+   }
+   constructor( private router: Router, windowRef: WindowRefService,private navService: NavService ) {
 
       this._window = windowRef.nativeWindow;
 
@@ -45,7 +51,6 @@ export class SharedModule {
             jQuery( 'input[type=text]:enabled:visible:first' ).select().focus();
 
             // Focus primer invalid campo
-
             setTimeout( () => {
                jQuery( 'button' ).click( function () {
                   setTimeout( () => {
@@ -63,15 +68,12 @@ export class SharedModule {
                   }, 500 );
                } );
             }, 1000 );
+
+
          }
       } );
    }
 
-   static forRoot(): ModuleWithProviders {
-      return {
-         ngModule: SharedModule,
-         providers: [ TranslateService ]
-      };
-   }
+
 
 }

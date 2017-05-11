@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FaultsAndSanctions } from '../_models/faultsAndSanctions';
 import { FaultsAndSanctionsService } from '../_services/faultsAndSanctions.service';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { ConfirmationService } from 'primeng/primeng';
                providers: [ ConfirmationService ]
             } )
 
-export class FaultsAndSanctionsComponent {
+export class FaultsAndSanctionsComponent implements OnInit {
 
    fault: FaultsAndSanctions = new FaultsAndSanctions();
    dialogObjet: FaultsAndSanctions = new FaultsAndSanctions();

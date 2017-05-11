@@ -1,18 +1,9 @@
-<!--<div class="btn-group btn-breadcrumb">
-  <a routerLink="/dashboard" class="btn btn-default"><i class="glyphicon glyphicon-home"></i></a>
-  <a routerLink="" class="btn btn-default">Página Actual</a>
-  &lt;!&ndash;
-  <a href="#" class="btn btn-default">item a</a>
-  <a href="#" class="btn btn-default">hijo del item a</a>
-  <a href="#" class="btn btn-default">Actual</a>
-  &ndash;&gt;
-</div>-->
 <ul [class.breadcrumb]="useBootstrap">
-   <li class="breadcrumb-item"><a role="button" (click)="navigateTo('/dashboard')"><i class="glyphicon glyphicon-home"></i></a></li>
+   <li class="breadcrumb-item"><a role="button" (click)="navigateTo('/dashboard')"><i class="fa fa-home"></i></a></li>
    <li *ngFor="let url of _urls; let last = last" [ngClass]="{'breadcrumb-item': useBootstrap, 'active': last}"> <!-- disable link of last item -->
-      <a role="button" *ngIf="!last && url == prefix" (click)="navigateTo(url)"><i class="glyphicon glyphicon-home"></i></a>
+      <a role="button" *ngIf="!last && url == prefix" (click)="navigateTo(url)"><i class="fa fa-home"></i></a>
       <a role="button" *ngIf="!last && url != prefix" (click)="navigateTo(url)">{{friendlyName(url)}}</a>
-      <span *ngIf="last && url == prefix"><i class="glyphicon glyphicon-home"></i></span>
+      <span *ngIf="last && url == prefix"><i class="fa fa-home"></i></span>
       <span *ngIf="last && url != prefix">{{friendlyName(url)}}</span>
    </li>
 </ul>

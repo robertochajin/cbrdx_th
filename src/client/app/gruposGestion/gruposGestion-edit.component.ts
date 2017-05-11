@@ -3,11 +3,13 @@ import { GruposGestion } from '../_models/gruposGestion';
 import { GruposGestionService } from '../_services/grupoGestion.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import * as moment from 'moment/moment';
+import { NavService } from '../_services/_nav.service';
+import { Message } from 'primeng/primeng';
 
 @Component( {
                moduleId: module.id,
                templateUrl: 'gruposGestion-edit.component.html',
-               selector: 'gruposGestion-edit'
+               selector: 'gruposgestion-edit'
             } )
 export class GruposGestionEditComponent {
 
@@ -19,8 +21,10 @@ export class GruposGestionEditComponent {
    isRequired = false;
    isGreater = true;
    public es: any;
+   msg: Message;
 
-   constructor( private gruposGestionService: GruposGestionService, private router: Router, private route: ActivatedRoute ) {
+   constructor( private gruposGestionService: GruposGestionService, private router: Router, private route: ActivatedRoute,
+      private navService: NavService ) {
       route.params.switchMap( ( params: Params ) => gruposGestionService.viewGruposGestion( +params[ 'id' ] ) )
       .subscribe( data => {
          this.grupoGestion = data;
@@ -41,7 +45,8 @@ export class GruposGestionEditComponent {
          dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
          dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
          monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre',
-            'diciembre' ],
+            'diciembre'
+         ],
          monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
    }
@@ -65,6 +70,8 @@ export class GruposGestionEditComponent {
    createGruposGestion() {
       this.gruposGestionService.updateGruposGestion( this.grupoGestion ).then( data => {
          this.router.navigate( [ 'gruposGestion' ] );
+         let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+         this.navService.setMesage( typeMessage, this.msg );
       } );
    }
 
@@ -82,7 +89,7 @@ export class GruposGestionEditComponent {
 
    capitalizeName() {
       let input = this.grupoGestion.grupoGestion;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.grupoGestion.grupoGestion = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }
