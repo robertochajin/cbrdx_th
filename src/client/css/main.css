@@ -32,6 +32,10 @@ body .ui-widget:disabled {
 .ui-datepicker select.ui-datepicker-year {
    width: 40%;
 }
+/** -- dropdown -- */
+.ui-dropdown-panel{
+   z-index : 800!important;
+}
 
 /*
 ----------------- Cambios Theme AdminLTE ---------------------------------
