@@ -180,7 +180,9 @@ export class OcupacionesComponent implements OnInit {
 
    save() {
 
-      if ( this.ocupaciones.idOcupacion === null || this.ocupaciones.idOcupacion === 0 ) {
+      if ( this.ocupaciones.idOcupacion === null ||
+           this.ocupaciones.idOcupacion === 0 ||
+           this.ocupaciones.idOcupacion === undefined ) {
          this.ocupacionesService.addOcupaciones( this.ocupaciones ).then( data => {
             let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
             this.navService.setMesage( typeMessage, this.msg );
@@ -235,7 +237,7 @@ export class OcupacionesComponent implements OnInit {
    }
 
    doCancel() {
-      if ( this.ocupaciones.idOcupacion === null || this.ocupaciones.idOcupacion === 0 ) {
+      if ( this.ocupaciones.idOcupacion === null || this.ocupaciones.idOcupacion === 0  || this.ocupaciones.idOcupacion === undefined ) {
          this.ocupaciones = new Ocupaciones;
       } else {
          this.ocupacionesService.viewOcupaciones( this.ocupaciones.idOcupacion ).subscribe( res => {

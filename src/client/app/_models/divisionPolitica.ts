@@ -3,7 +3,7 @@ export class DivisionPolitica {
    idDivisionPoliticaPadre: number = 0;
    codigoDivisionPolitica: string;
    descripcionDivisonPolitica: string;
-   indicativoDivisonPolitica: string;
+   indicativoDivisonPolitica: string = '';
    codigoPostalDivisionPolitica: string;
    idDivisionPoliticaTipo: number;
    idDivisionPoliticaArea: number;
