@@ -58,7 +58,9 @@ export class RolWidgetsComponent implements OnInit {
       this.msgs = [];
       this.showForm = false;
 
-      if ( this.rolWidget.idRolWidget === null || this.rolWidget.idRolWidget === 0 ) {
+      if ( this.rolWidget.idRolWidget === null ||
+           this.rolWidget.idRolWidget === 0 ||
+           this.rolWidget.idRolWidget === undefined ) {
          this.rolWidget.idRol = this.idRol;
          this.rolWidgetsServices.add( this.rolWidget )
          .subscribe( data => {

@@ -6,7 +6,7 @@
 
   <div id="content-wrapper" [ngClass]="sessionStart ? 'content-wrapper' : 'wrapper-login'">
     <!-- Content Header (Page header) -->
-    <section class="content-header" *ngIf="fase">
+    <section class="content-header" *ngIf="sessionStart">
       <sd-breadcrumb></sd-breadcrumb>
     </section>
      <p-messages id="msgNotificacion" [value]="msgs"></p-messages>
