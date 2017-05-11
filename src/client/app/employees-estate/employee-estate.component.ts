@@ -54,7 +54,7 @@ export class EmployeesEstateComponent implements OnInit {
    }
 
    add() {
-      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/estate/add/' ] );
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/estate/add' ] );
    }
 
    detail( c: EmployeeEstate ) {

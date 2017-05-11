@@ -180,19 +180,19 @@ const routes = [
 
    // Información de formacion academica
    { path: 'employees/detail/:tercero/formal-studies', component: FormalStudiesComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:tercero/formal-studies/add/', component: FormalStudiesAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:tercero/formal-studies/add', component: FormalStudiesAddComponent, canActivate: [ AuthGuard ] },
    { path: 'employees/detail/:tercero/formal-studies/detail/:id', component: FormalStudiesDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'employees/detail/:tercero/formal-studies/update/:id', component: FormalStudiesUpdateComponent, canActivate: [ AuthGuard ] },
 
    { path: 'employees/detail/:tercero/no-formal-studies', component: NoFormalStudiesComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:tercero/no-formal-studies/add/', component: NoFormalStudiesAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:tercero/no-formal-studies/add', component: NoFormalStudiesAddComponent, canActivate: [ AuthGuard ] },
    { path: 'employees/detail/:tercero/no-formal-studies/detail/:id', component: NoFormalStudiesDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'employees/detail/:tercero/no-formal-studies/update/:id', component: NoFormalStudiesUpdateComponent, canActivate: [ AuthGuard ] },
 
    // Experiencia laboral
 
    { path: 'employees/detail/:tercero/work-experience', component: WorkExperienceComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:tercero/work-experience/add/', component: WorkExperienceAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:tercero/work-experience/add', component: WorkExperienceAddComponent, canActivate: [ AuthGuard ] },
    { path: 'employees/detail/:tercero/work-experience/detail/:id', component: WorkExperienceDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'employees/detail/:tercero/work-experience/update/:id', component: WorkExperienceUpdateComponent, canActivate: [ AuthGuard ] },
 
