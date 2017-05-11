@@ -284,6 +284,13 @@ a{
       -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
+
+/** ------ Error Form ----- */
+form.ng-invalid .alert-danger{
+   padding: 0 3px;
+   margin-top: 3px;
+}
+
 /**
 ------------------------ General CSS ------------------------------------
  */
