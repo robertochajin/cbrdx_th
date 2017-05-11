@@ -117,7 +117,7 @@ export class LocationAddComponent implements OnInit {
       } );
 
       this.route.params.subscribe( ( params: Params ) => {
-         this.idTercero = +params[ 'id' ];
+         this.idTercero = +params[ 'tercero' ];
       } );
 
       this.finalAddress = this.localizacion.direccion;
