@@ -35,7 +35,7 @@
     <div class="col-md-8">
         <p-fieldset legend="{{header}}">
             <div class="row-fluid">
-                <div class="col-md-12">
+                <div class="col-md-12" *ngIf="!guardado">
                     <form name="form" (ngSubmit)="!codeExists&&fdivision.valid && save()" #fdivision="ngForm" novalidate>
                         <div class="row">
                             <div class="form-group">

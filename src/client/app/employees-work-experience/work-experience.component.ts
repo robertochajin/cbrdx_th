@@ -24,7 +24,6 @@ export class WorkExperienceComponent implements OnInit {
 
    ngOnInit() {
       this.workExperienceService.getByEmployee( this.employee.idTercero ).subscribe(
-         // this.workExperienceService.getByEmployee(11).subscribe(
          fstudies => this.experiences = fstudies
       );
    }
@@ -48,15 +47,15 @@ export class WorkExperienceComponent implements OnInit {
                                         } );
    }
 
-   detail( f: Workexperience ) {
-      this.router.navigate( [ 'employees-work-experience/detail/' + f.idTerceroExperienciaLaboral ] );
-   }
-
    add() {
-      this.router.navigate( [ 'employees-work-experience/add/' + this.employee.idTercero ] );
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/work-experience/add/' ] );
    }
 
-   update( f: Workexperience ) {
-      this.router.navigate( [ 'employees-work-experience/update/' + f.idTerceroExperienciaLaboral ] );
+   detail( c: Workexperience ) {
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/work-experience/detail/' + c.idTerceroExperienciaLaboral ] );
+   }
+
+   update( c: Workexperience ) {
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/work-experience/update/' + c.idTerceroExperienciaLaboral  ] );
    }
 }
