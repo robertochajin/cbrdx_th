@@ -175,7 +175,25 @@ a{
   border-left: 10px solid #adadad;
 }
 
+/** -- Notificaciones Globales -- */
+#msgNotificacion{
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: 99999999;
+   width: 99%;
+   margin: 6px;
+}
+#msgNotificacion > .ui-messages{
+   border-width: 4px;
 
+   box-shadow: 4px 4px 8px -2px #242424;
+   -webkit-box-shadow: 4px 4px 8px -2px #242424;
+   -moz-box-shadow: 4px 4px 8px -2px #242424;
+   -o-box-shadow: 4px 4px 8px -2px #242424;
+
+   text-align: center;
+}
 
 
 
