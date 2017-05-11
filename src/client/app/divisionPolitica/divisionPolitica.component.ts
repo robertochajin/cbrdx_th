@@ -242,8 +242,9 @@ export class DivisionPoliticaComponent implements OnInit {
    }
 
    save() {
-      if ( this.politicalDivision.idDivisionPolitica === null || this.politicalDivision.idDivisionPolitica === 0 ) {
-         // console.info(this.politicalDivision);
+      if ( this.politicalDivision.idDivisionPolitica === null ||
+           this.politicalDivision.idDivisionPolitica === 0||
+           this.politicalDivision.idDivisionPolitica === undefined ) {
 
          this.divisionPoliticaService.addDivisionPolitica( this.politicalDivision ).then( data => {
             let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
@@ -390,7 +391,9 @@ export class DivisionPoliticaComponent implements OnInit {
    }
 
    doCancel() {
-      if ( this.politicalDivision.idDivisionPolitica === null || this.politicalDivision.idDivisionPolitica === 0 ) {
+      if ( this.politicalDivision.idDivisionPolitica === null ||
+           this.politicalDivision.idDivisionPolitica === 0  ||
+           this.politicalDivision.idDivisionPolitica === undefined ) {
          this.politicalDivision = new DivisionPolitica;
       } else {
          this.divisionPoliticaService.viewDivisionPolitica( this.politicalDivision.idDivisionPolitica ).subscribe( res => {
