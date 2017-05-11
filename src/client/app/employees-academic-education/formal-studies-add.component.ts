@@ -41,7 +41,7 @@ export class FormalStudiesAddComponent implements OnInit {
    idEstadoEstudioFinalizado = 1; // hace falta definir acceso a constantes en servicio
    idTercero: number;
    wrongCity: boolean = true;
-   wrongInstitute: boolean = true;
+   wrongInstitute: boolean = false;
 
    constructor( private academicEducationService: AcademicEducationService,
       private politicalDivisionService: PoliticalDivisionService,
@@ -104,7 +104,7 @@ export class FormalStudiesAddComponent implements OnInit {
       this.submitted = true;
       if ( this.selectedCity !== undefined && this.selectedCity.idDivisionPolitica !== undefined ) {
          if ( (this.fstudy.otraInstitucion !== '' && this.fstudy.otraInstitucion !== null) ||
-              (this.selectedInstitute !== null && this.selectedInstitute.idLista !== null) ) {
+              (this.selectedInstitute !== null && this.selectedInstitute !== undefined && this.selectedInstitute.idLista !== null) ) {
             this.msgs = [];
             this.fstudy.idCiudad = this.selectedCity.idDivisionPolitica;
             this.fstudy.idTercero = this.idTercero;

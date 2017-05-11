@@ -438,14 +438,14 @@ export class OcupacionesComponent implements OnInit {
 
    capitalizeCodigo() {
       let input = this.ocupaciones.codigoOcupacion;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.ocupaciones.codigoOcupacion = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
       }
    }
 
    capitalizeName() {
       let input = this.ocupaciones.ocupacion;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.ocupaciones.ocupacion = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }

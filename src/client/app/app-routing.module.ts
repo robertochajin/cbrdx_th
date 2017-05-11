@@ -155,10 +155,10 @@ const routes = [
    { path: 'employees-family-information/detail/:id', component: FamilyInformationDetailComponent, canActivate: [ AuthGuard ] },
 
    // Información de referencia de employees
-   { path: 'employees-references', component: ReferencesComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees-references/add/:tercero', component: ReferencesAddComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees-references/update/:id/:tercero', component: ReferencesUpdateComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees-references/detail/:id', component: ReferencesDetailComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:idtercero/references', component: ReferencesComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:idtercero/references/add', component: ReferencesAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:idtercero/references/update/:id', component: ReferencesUpdateComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:idtercero/references/detail/:id', component: ReferencesDetailComponent, canActivate: [ AuthGuard ] },
 
    // Información de formacion academica
    { path: 'employees-formal-studies', component: FormalStudiesComponent, canActivate: [ AuthGuard ] },

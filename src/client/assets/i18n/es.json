@@ -518,6 +518,7 @@
      },
 
      "COMPETENCIES":{
+       "LBL_COMPETENCIASYHABILIDADES" : "Competencias y Habilidades",
        "LBL_GRUPO" : "Grupo",
        "LBL_COMPETENCIA" : "Competencia",
        "LBL_HABILIDAD" : "Habilidad",

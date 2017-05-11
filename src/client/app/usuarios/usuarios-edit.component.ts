@@ -17,6 +17,8 @@ import { VUsuarioGrupoGestion } from '../_models/vUsuarioGrupoGestion';
 import { VHistoricoUsuario } from '../_models/vHistoricoUsuario';
 import { Employee } from '../_models/employees';
 import { EmployeesService } from '../_services/employees.service';
+import { LocationService } from '../_services/employee-location.service';
+import { Localizaciones } from '../_models/localizaciones';
 
 @Component( {
                moduleId: module.id,
@@ -61,12 +63,14 @@ export class UsuariosEditComponent {
    creatingRol = true;
    creatingGroup = true;
    historico: VHistoricoUsuario[] = [];
+   private locations: Localizaciones[] = [];
 
    constructor( private usuariosService: UsuariosService,
       private rolesService: RolesService,
       private gruposGestionService: GruposGestionService,
       private tercerosService: EmployeesService,
       private listasService: ListaService,
+      private locationService: LocationService,
       private router: Router,
       private route: ActivatedRoute ) {
       route.params.switchMap( ( params: Params ) => usuariosService.viewUser( +params[ 'id' ] ) )
@@ -78,9 +82,9 @@ export class UsuariosEditComponent {
          usuariosService.listUsers().subscribe( res => {
             this.usuarios = res.filter( t => t.idUsuario !== this.usuario.idUsuario );
          } );
-         tercerosService.getAll().subscribe( res => {
-            this.terceros = res;
-            this.tercero = this.terceros.find( t => t.idTercero === this.usuario.idTercero );
+         tercerosService.get(this.usuario.idTercero).subscribe( res => {
+            this.tercero = res;
+            this.locationService.getAllByEmployee(this.usuario.idTercero).subscribe(locations => this.locations = locations );
          } );
       } );
    }
@@ -214,6 +218,10 @@ export class UsuariosEditComponent {
 
    userCleanUp( value: string ) {
       this.usuario.usuarioSistema = value.toLowerCase().replace( ' ', '' ).replace( 'ñ', 'n' ).trim();
+   }
+
+   editEmployee(idTercero: number){
+      this.router.navigate( [ 'employees/update/' + idTercero ] );
    }
 
    validateCreationUser() {

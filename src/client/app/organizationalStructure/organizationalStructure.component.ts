@@ -8,6 +8,7 @@ import { Localizaciones } from '../_models/localizaciones';
 import { PoliticalDivisionService } from '../_services/political-division.service';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -16,7 +17,7 @@ import { ListaService } from '../_services/lista.service';
 
             } )
 export class OrganizationalStructureComponent {
-   msgs: Message[] = [];
+   msg: Message;
    organizationalStructure: OrganizationalStructure = new OrganizationalStructure();
    listOrganizationalStructure: OrganizationalStructure[];
    documentTypes: SelectItem[] = [];
@@ -41,7 +42,9 @@ export class OrganizationalStructureComponent {
    constructor( private organizationalStructureService: OrganizationalStructureService,
       private listaService: ListaService,
       private politicalDivisionService: PoliticalDivisionService,
-      private locateService: LocateService ) {
+      private locateService: LocateService,
+      private navService: NavService
+   ) {
       organizationalStructureService.listOrganizationalStructure().subscribe( res => {
          this.listOrganizationalStructure = res;
          if ( this.listOrganizationalStructure.length > 0 ) {
@@ -122,7 +125,7 @@ export class OrganizationalStructureComponent {
 
    capitalizeCode() {
       let input = this.organizationalStructure.codigo;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.organizationalStructure.codigo = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
       }
    }
@@ -140,7 +143,7 @@ export class OrganizationalStructureComponent {
 
    capitalizeName() {
       let input = this.organizationalStructure.nombre;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined) {
          this.organizationalStructure.nombre = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }
@@ -218,13 +221,24 @@ export class OrganizationalStructureComponent {
                this.localizacion.indicadorHabilitado = true;
                this.locateService.add( this.localizacion ).subscribe(
                   data => {
+                     let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+                     this.navService.setMesage( typeMessage, this.msg );
+
                      this.organizationalStructure.idLocalizacion = data.idLocalizacion;
                      return this.saveEO();
+                  }, error => {
+                     let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
+                     this.navService.setMesage( typeMessage, this.msg );
                   } );
             } else {
                this.locateService.update( this.localizacion ).subscribe(
                   () => {
+                     let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+                     this.navService.setMesage( typeMessage, this.msg );
                      return this.saveEO();
+                  }, error => {
+                     let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
+                     this.navService.setMesage( typeMessage, this.msg );
                   } );
             }
          } else {
@@ -248,7 +262,9 @@ export class OrganizationalStructureComponent {
             this.btnEmpresa = false;
             this.empty = '';
 
-            this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Registro guardado con exito!' } );
+            let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
+
             let newChil: any = {
                'label': this.organizationalStructure.nombre,
                'data': data,
@@ -267,12 +283,15 @@ export class OrganizationalStructureComponent {
             }
          }, error => {
             this.guardando = false;
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
          } );
       } else {
          this.organizationalStructureService.updateOrganizationalStructure( this.organizationalStructure ).then( () => {
             this.guardando = false;
-            this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Registro actualizado con exito!' } );
+            let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
+
             this.selectedNode.data = this.organizationalStructure;
             this.selectedNode.label = this.organizationalStructure.nombre;
             this.header = this.organizationalStructure.nombre;
@@ -285,7 +304,8 @@ export class OrganizationalStructureComponent {
             }
          }, error => {
             this.guardando = false;
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al actualizar.' } );
+            let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
          } );
       }
    }
