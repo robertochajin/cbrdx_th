@@ -74,7 +74,9 @@ export class EmployeesContactListComponent implements OnInit {
       this.msgs = [];
       this.showForm = false;
       this.contact.idTercero = this.idTer;
-      if ( this.contact.idTerceroContacto === null || this.contact.idTerceroContacto === 0 ) {
+      if ( this.contact.idTerceroContacto === null ||
+           this.contact.idTerceroContacto === 0  ||
+           this.contact.idTerceroContacto === undefined ) {
          this.employeesContactService.add( this.contact )
          .subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );

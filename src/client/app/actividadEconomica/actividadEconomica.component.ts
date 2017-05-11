@@ -188,7 +188,10 @@ export class ActividadEconomicaComponent {
    }
 
    save() {
-      if ( this.actividadEconomica.idActividadEconomica === undefined ||  this.actividadEconomica.idActividadEconomica === null || this.actividadEconomica.idActividadEconomica === 0 ) {
+
+      if ( this.actividadEconomica.idActividadEconomica === null ||
+           this.actividadEconomica.idActividadEconomica === 0 ||
+           this.actividadEconomica.idActividadEconomica === undefined ) {
          this.actividadEconomicaService.addActividadEconomica( this.actividadEconomica ).then( data => {
             let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
             this.navService.setMesage( typeMessage, this.msg );
@@ -262,7 +265,9 @@ export class ActividadEconomicaComponent {
    }
 
    doCancel() {
-      if ( this.actividadEconomica.actividadEconomica === null || this.actividadEconomica.idActividadEconomica === 0 ) {
+      if ( this.actividadEconomica.actividadEconomica === null ||
+           this.actividadEconomica.idActividadEconomica === 0 ||
+           this.actividadEconomica.idActividadEconomica === undefined ) {
          this.actividadEconomica = new ActividadEconomica;
       } else {
          this.actividadEconomicaService.viewActividadEconomica( this.actividadEconomica.idActividadEconomica )

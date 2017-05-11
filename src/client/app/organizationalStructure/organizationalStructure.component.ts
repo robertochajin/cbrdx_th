@@ -183,13 +183,13 @@ export class OrganizationalStructureComponent {
 
    nodeSelect( node: any ) {
 
-      this.empresa = node.data.idPadre === 0 || node.data.idPadre === null;
+      this.empresa = node.data.idPadre === 0 || node.data.idPadre === null || node.data.idPadre === undefined;
       this.organizationalStructureService.viewOrganizationalStructure( node.data.idEstructuraOrganizacional ).subscribe(
          organizationalStructure => {
             this.organizationalStructure = organizationalStructure;
             this.codeExists = false;
             this.documentExists = false;
-            if ( node.data.idPadre === 0 || node.data.idPadre === null ) {
+            if ( node.data.idPadre === 0 || node.data.idPadre === null || node.data.idPadre === undefined ) {
                this.header = this.organizationalStructure.nombre;
                if ( this.organizationalStructure.idLocalizacion !== null ) {
                   this.locateService.getById( this.organizationalStructure.idLocalizacion ).subscribe( localizacion => {
@@ -217,7 +217,9 @@ export class OrganizationalStructureComponent {
       if ( this.empresa === true ) {
          if ( this.organizationalStructure.localizacion !== '' && this.organizationalStructure.localizacion !== null ) {
 
-            if ( this.organizationalStructure.idLocalizacion === null || this.organizationalStructure.idLocalizacion === 0 ) {
+            if ( this.organizationalStructure.idLocalizacion === null ||
+                 this.organizationalStructure.idLocalizacion === 0 ||
+                 this.organizationalStructure.idLocalizacion === undefined ) {
                this.localizacion.indicadorHabilitado = true;
                this.locateService.add( this.localizacion ).subscribe(
                   data => {
@@ -253,8 +255,9 @@ export class OrganizationalStructureComponent {
 
    saveEO() {
 
-      if ( this.organizationalStructure.idEstructuraOrganizacional === null
-           || this.organizationalStructure.idEstructuraOrganizacional === 0 ) {
+      if ( this.organizationalStructure.idEstructuraOrganizacional === null ||
+           this.organizationalStructure.idEstructuraOrganizacional === 0 ||
+           this.organizationalStructure.idEstructuraOrganizacional === undefined ) {
          this.guardando = true;
          this.organizationalStructureService.addOrganizationalStructure( this.organizationalStructure ).then( data => {
             this.guardando = false;
@@ -272,7 +275,9 @@ export class OrganizationalStructureComponent {
                'children': []
             };
             this.listOrganizationalStructure.push( data );
-            if ( this.organizationalStructure.idPadre === 0 || this.organizationalStructure.idPadre === null ) {
+            if ( this.organizationalStructure.idPadre === 0 ||
+                 this.organizationalStructure.idPadre === null ||
+                 this.organizationalStructure.idPadre === undefined ) {
                this.treedCompany.push( newChil );
                this.selectedNode = newChil;
                this.newBranch();
@@ -312,7 +317,8 @@ export class OrganizationalStructureComponent {
 
    doCancel() {
       if ( this.organizationalStructure.idEstructuraOrganizacional === null
-           || this.organizationalStructure.idEstructuraOrganizacional === 0 ) {
+           || this.organizationalStructure.idEstructuraOrganizacional === 0
+           || this.organizationalStructure.idEstructuraOrganizacional === undefined ) {
          this.organizationalStructure = new OrganizationalStructure;
       } else {
          this.organizationalStructureService.viewOrganizationalStructure( this.organizationalStructure.idEstructuraOrganizacional )

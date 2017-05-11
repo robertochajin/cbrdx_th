@@ -200,7 +200,9 @@ export class FamilyInformationAddComponent implements OnInit {
          this.range = `${prev18Year}:${year}`;
       }
 
-      if ( (this.familyInformation.fechaNacimiento) === null || (this.familyInformation.fechaNacimiento) === '' ) {
+      if ( (this.familyInformation.fechaNacimiento) === null ||
+           (this.familyInformation.fechaNacimiento) === ''  ||
+           (this.familyInformation.fechaNacimiento) === undefined ) {
          this.familyInformation.fechaNacimiento = `${this.maxDate.getMonth() + 1}/${this.maxDate.getDate()}/${this.maxDate.getFullYear()}`;
       } else {
          let timestamp2 = new Date( this.maxDate ).getTime();

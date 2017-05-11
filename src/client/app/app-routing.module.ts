@@ -149,16 +149,16 @@ const routes = [
    { path: 'employees/update/:id', component: EmployeesUpdateComponent, canActivate: [ AuthGuard ] },
 
    // Información familiar de employees
-   { path: 'employees-family-information', component: FamilyInformationComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees-family-information/add/:tercero', component: FamilyInformationAddComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees-family-information/update/:id/:tercero', component: FamilyInformationUpdateComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees-family-information/detail/:id', component: FamilyInformationDetailComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:tercero/employees-family-information', component: FamilyInformationComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:tercero/employees-family-information/add', component: FamilyInformationAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:tercero/employees-family-information/update/:id', component: ReferencesUpdateComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:tercero/employees-family-information/detail/:id', component: ReferencesDetailComponent, canActivate: [ AuthGuard ] },
 
    // Información de referencia de employees
-   { path: 'employees/detail/:idtercero/references', component: ReferencesComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:idtercero/references/add', component: ReferencesAddComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:idtercero/references/update/:id', component: ReferencesUpdateComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:idtercero/references/detail/:id', component: ReferencesDetailComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:tercero/references', component: ReferencesComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:tercero/references/add', component: ReferencesAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:tercero/references/update/:id', component: ReferencesUpdateComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:tercero/references/detail/:id', component: ReferencesDetailComponent, canActivate: [ AuthGuard ] },
 
    // Información de formacion academica
    { path: 'employees-formal-studies', component: FormalStudiesComponent, canActivate: [ AuthGuard ] },
