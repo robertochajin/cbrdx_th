@@ -110,7 +110,7 @@ export class UsuariosAddComponent {
    }
 
    validateUser() {
-      if ( this.terceroObtenido !== null ) {
+      if ( this.terceroObtenido !== null && this.terceroObtenido !== undefined) {
          this.userExists = this.usuarios.filter( t => t.idTercero === this.terceroObtenido.idTercero ).length > 0;
       } else {
          this.userExists = false;
