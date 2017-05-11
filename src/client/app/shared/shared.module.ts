@@ -69,8 +69,7 @@ export class SharedModule {
                } );
             }, 1000 );
 
-            // Clear MSG
-            this.navService.setMesage(4,{});
+
          }
       } );
    }

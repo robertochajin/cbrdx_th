@@ -12,6 +12,7 @@ export class NavService {
    msgAdd: Message = { severity: 'success', summary: 'Exito', detail: 'Registro agregado correctamente.' };
    msgUpdate: Message = { severity: 'success', summary: 'Exito', detail: 'Registro actualizado correctamente.' };
    msgError: Message = { severity: 'error', summary: 'Error', detail: 'Error al guardar / Intente nuevamente.' };
+
    subject = new Subject<Message>();
    avatar = new Subject<string>();
    arraySearch: any[] = [ { id: '', strSearch: '' } ];
@@ -35,7 +36,7 @@ export class NavService {
 
    setMesage( type: number, msgCustom: Message ) {
 
-      this.msgs = [];
+      this.clearMesage();
 
       switch ( type ) {
          case 1:
@@ -51,7 +52,18 @@ export class NavService {
             this.msgs = msgCustom;
             break;
       }
+
+      jQuery('#msgNotificacion').hide();
       this.subject.next( this.msgs );
+      jQuery('#msgNotificacion').slideDown(400);
+      setTimeout( () => {
+         jQuery('#msgNotificacion').slideUp(200);
+      }, 4000 );
+   }
+
+   clearMesage(){
+      console.log('ClearMSG');
+      this.subject.next('');
    }
 
    setTab( numero: number ) {
