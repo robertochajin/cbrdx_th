@@ -48,8 +48,8 @@ export class EmployeesEstateAddComponent implements OnInit {
       this.year = year;
 
       this.route.params.subscribe( ( params: Params ) => {
-         this.employeeEstate.idTercero = Number( +params[ 'idTercero' ] );
-         this.idTercero = Number( +params[ 'idTercero' ] );
+         this.employeeEstate.idTercero = Number( +params[ 'tercero' ] );
+         this.idTercero = Number( +params[ 'tercero' ] );
       } );
 
       this.listaService.getMasterDetails( 'ListasTiposViviendas' ).subscribe( res => {
@@ -81,6 +81,7 @@ export class EmployeesEstateAddComponent implements OnInit {
    }
 
    onSubmit() {
+      this.employeeEstate.idTercero = this.idTercero;
       this.employeesEsatesService.add( this.employeeEstate )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
