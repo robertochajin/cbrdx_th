@@ -46,6 +46,7 @@ export class ActividadEconomicaComponent {
    displayDialog: boolean = false;
    resultSearch: Search[];
    selectedSearch: SelectItem;
+   guardado = false;
 
    constructor( private router: Router,
       private actividadEconomicaService: ActividadEconomicaService,
@@ -188,8 +189,13 @@ export class ActividadEconomicaComponent {
    }
 
    save() {
-      if ( this.actividadEconomica.idActividadEconomica === undefined ||  this.actividadEconomica.idActividadEconomica === null || this.actividadEconomica.idActividadEconomica === 0 ) {
+
+      if ( this.actividadEconomica.idActividadEconomica === null ||
+           this.actividadEconomica.idActividadEconomica === 0 ||
+           this.actividadEconomica.idActividadEconomica === undefined ) {
+         this.guardado = true;
          this.actividadEconomicaService.addActividadEconomica( this.actividadEconomica ).then( data => {
+            this.guardado = false;
             let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
             this.navService.setMesage( typeMessage, this.msg );
             let chil: any[] = [];
@@ -238,12 +244,15 @@ export class ActividadEconomicaComponent {
             }
 
          }, error => {
+            this.guardado = false;
             let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
             this.navService.setMesage( typeMessage, this.msg );
          } );
       } else {
+         this.guardado = true;
          this.actividadEconomicaService.updateActividadEconomica( this.actividadEconomica )
          .then( () => {
+            this.guardado = false;
             let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
             this.navService.setMesage( typeMessage, this.msg );
             this.selectedNode.label = this.actividadEconomica.actividadEconomica;
@@ -262,7 +271,9 @@ export class ActividadEconomicaComponent {
    }
 
    doCancel() {
-      if ( this.actividadEconomica.actividadEconomica === null || this.actividadEconomica.idActividadEconomica === 0 ) {
+      if ( this.actividadEconomica.actividadEconomica === null ||
+           this.actividadEconomica.idActividadEconomica === 0 ||
+           this.actividadEconomica.idActividadEconomica === undefined ) {
          this.actividadEconomica = new ActividadEconomica;
       } else {
          this.actividadEconomicaService.viewActividadEconomica( this.actividadEconomica.idActividadEconomica )

@@ -61,6 +61,7 @@ export class DivisionPoliticaComponent implements OnInit {
    resultSearch: Search[];
    selectedSearch: SelectItem;
    codeExists: boolean = false;
+   guardado = false;
 
    constructor(
       private router: Router,
@@ -242,10 +243,12 @@ export class DivisionPoliticaComponent implements OnInit {
    }
 
    save() {
-      if ( this.politicalDivision.idDivisionPolitica === undefined ||  this.politicalDivision.idDivisionPolitica === null || this.politicalDivision.idDivisionPolitica === 0 ) {
-         // console.info(this.politicalDivision);
-
+      if ( this.politicalDivision.idDivisionPolitica === null ||
+           this.politicalDivision.idDivisionPolitica === 0||
+           this.politicalDivision.idDivisionPolitica === undefined ) {
+         this.guardado = true;
          this.divisionPoliticaService.addDivisionPolitica( this.politicalDivision ).then( data => {
+            this.guardado = false;
             let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
             this.navService.setMesage( typeMessage, this.msg );
 
@@ -281,11 +284,14 @@ export class DivisionPoliticaComponent implements OnInit {
                }
             }
          }, error => {
+            this.guardado = false;
             let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
             this.navService.setMesage( typeMessage, this.msg );
          } );
       } else {
+         this.guardado = true;
          this.divisionPoliticaService.updateDivisionPolitica( this.politicalDivision ).then( data => {
+            this.guardado = false;
             let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
             this.navService.setMesage( typeMessage, this.msg );
 
@@ -299,6 +305,7 @@ export class DivisionPoliticaComponent implements OnInit {
                }
             }
          } , error => {
+            this.guardado = false;
             let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
             this.navService.setMesage( typeMessage, this.msg );
          } );
