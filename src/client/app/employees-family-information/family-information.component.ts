@@ -54,16 +54,16 @@ export class FamilyInformationComponent implements OnInit {
                                         } );
    }
 
-   detail( f: ConstructorFamilyInformation ) {
-      return this.router.navigate( [ 'employees-family-information/detail/' + f.idTerceroFamiliar ] );
-   }
-
    add() {
-      return this.router.navigate( [ 'employees-family-information/add/' + this.employee.idTercero ] );
+      return this.router.navigate( [ 'employees/detail/'+ this.employee.idTercero + '/family-information/add'  ] );
    }
 
    update( f: ConstructorFamilyInformation ) {
-      return this.router.navigate( [ 'employees-family-information/update/' + f.idTerceroFamiliar + '/' + this.employee.idTercero ] );
+      return this.router.navigate( [ 'employees/detail/'+ this.employee.idTercero + '/family-information/update/' + f.idTerceroFamiliar] );
+   }
+
+   detail( f: ConstructorFamilyInformation ) {
+      return this.router.navigate( [ 'employees/detail/'+ this.employee.idTercero + '/family-information/detail/' + f.idTerceroFamiliar ] );
    }
 
 }

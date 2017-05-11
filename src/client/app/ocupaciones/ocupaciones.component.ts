@@ -32,6 +32,7 @@ export class OcupacionesComponent implements OnInit {
    submitted = false;
    resultSearch: Search[];
    selectedSearch: SelectItem;
+   guardado = false;
 
    btnoccupation: { show: boolean, label: string, idparent: number, parent: string } = {
       show: true,
@@ -183,7 +184,9 @@ export class OcupacionesComponent implements OnInit {
       if ( this.ocupaciones.idOcupacion === null ||
            this.ocupaciones.idOcupacion === 0 ||
            this.ocupaciones.idOcupacion === undefined ) {
+         this.guardado = true;
          this.ocupacionesService.addOcupaciones( this.ocupaciones ).then( data => {
+            this.guardado = false;
             let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
             this.navService.setMesage( typeMessage, this.msg );
             let chil: any[] = [];
@@ -213,11 +216,14 @@ export class OcupacionesComponent implements OnInit {
             }
 
          }, error => {
+            this.guardado = false;
             let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
             this.navService.setMesage( typeMessage, this.msg );
          } );
       } else {
+         this.guardado = true;
          this.ocupacionesService.updateOcupaciones( this.ocupaciones ).then( data => {
+            this.guardado = false;
             let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
             this.navService.setMesage( typeMessage, this.msg );
             this.selectedNode.label = this.ocupaciones.ocupacion;
@@ -230,6 +236,7 @@ export class OcupacionesComponent implements OnInit {
             }
 
          }, error => {
+            this.guardado = false;
             let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
             this.navService.setMesage( typeMessage, this.msg );
          } );

@@ -141,6 +141,7 @@ export class UsuariosAddComponent {
    createUser() {
       this.usuariosService.createUser( this.usuario ).then( res => {
          this.usuario = res;
+         this.router.navigate( [ 'usuarios/edit/'+this.usuario.idUsuario ] );
          this.isUserCreated = true;
          this.updateGroupLists();
          this.updateRolesLists();

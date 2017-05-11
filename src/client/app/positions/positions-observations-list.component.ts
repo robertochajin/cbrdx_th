@@ -39,7 +39,7 @@ export class PositionsObservationsListComponent implements OnInit {
       if ( this.position.idCargo ) {
          this.positionsService.getObservationsbyPosition( this.position.idCargo ).subscribe( observations => {
             this.observations = observations;
-            this.listaService.getMasterDetails( 'ListasTiposViviendas' ).subscribe( res => {
+            this.listaService.getMasterDetails( 'ListasEstadosCargos' ).subscribe( res => {
                this.liststateTypes = res;
                this.nombresEstados();
             } );
@@ -53,7 +53,9 @@ export class PositionsObservationsListComponent implements OnInit {
       this.observation.idCargo = this.position.idCargo;
       this.observation.idEstadoCargo = this.position.idEstado;
 
-      if ( this.observation.idCargoEstadoObservacion === null || this.observation.idCargoEstadoObservacion === 0 ) {
+      if ( this.observation.idCargoEstadoObservacion === null ||
+           this.observation.idCargoEstadoObservacion === 0  ||
+           this.observation.idCargoEstadoObservacion === undefined ) {
          this.positionsService.addObservations( this.observation )
          .subscribe( data => {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
