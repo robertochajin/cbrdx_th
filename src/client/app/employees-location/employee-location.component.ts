@@ -57,15 +57,15 @@ export class LocationComponent implements OnInit {
                                         } );
    }
 
-   detail( l: any ) {
-      this.router.navigate( [ 'employees-location/detail/' + l.idLocalizacion ] );
+   add() {
+      this.router.navigate( [ 'employees/detail/'+this.colaborador.idTercero+'/location/add/' ] );
    }
 
-   add() {
-      this.router.navigate( [ 'employees-location/add/' + this.colaborador.idTercero ] );
+   detail( l: any ) {
+      this.router.navigate( [ 'employees/detail/'+this.colaborador.idTercero+'/location/detail/' + l.idLocalizacion ] );
    }
 
    update( l: any ) {
-      this.router.navigate( [ 'employees-location/update/' + l.idLocalizacion + '/' + this.colaborador.idTercero ] );
+      this.router.navigate( [ 'employees/detail/'+this.colaborador.idTercero+'/location/update/' + l.idLocalizacion  ] );
    }
 }

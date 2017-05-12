@@ -4,6 +4,7 @@ import { LoginService } from '../_services/login.service';
 import { AppComponent } from '../app.component';
 import { AuthenticationService } from '../_services/authentication.service';
 import { Http, Headers } from '@angular/http';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
       private http: Http,
       private router: Router,
       private appmain: AppComponent,
-      private authenticationService: AuthenticationService ) {
+      private authenticationService: AuthenticationService,
+      private navService: NavService) {
       authenticationService.token = null;
       localStorage.removeItem( 'currentUser' );
       localStorage.removeItem( 'token' );
@@ -69,6 +71,7 @@ export class LoginComponent implements OnInit {
       this.loginService.setSession( true );
       this.appmain.setSession( true );
       this.router.navigate( [ '/dashboard' ] );
+      this.navService.resetSearch();
    }
 
    cambioContrasena() {

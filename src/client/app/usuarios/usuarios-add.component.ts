@@ -96,7 +96,7 @@ export class UsuariosAddComponent {
       this.limpiarValidaciones();
       this.terceroObtenido = this.terceros.filter( t => t.idTipoDocumento === this.selectedTipo )
       .find( s => s.numeroDocumento.toLowerCase() === this.numeroDocumento.toLowerCase() );
-      if ( this.terceroObtenido !== null ) {
+      if ( this.terceroObtenido !== null && this.terceroObtenido !== undefined ) {
          this.terceroExiste = true;
          this.validateUser();
       } else {
@@ -110,7 +110,7 @@ export class UsuariosAddComponent {
    }
 
    validateUser() {
-      if ( this.terceroObtenido !== null ) {
+      if ( this.terceroObtenido !== null && this.terceroObtenido !== undefined) {
          this.userExists = this.usuarios.filter( t => t.idTercero === this.terceroObtenido.idTercero ).length > 0;
       } else {
          this.userExists = false;
@@ -125,7 +125,7 @@ export class UsuariosAddComponent {
       this.validarTercero();
       if ( !this.userExists && this.terceroExiste ) {
          this.tercerosService.validateDocument( this.numeroDocumento, this.selectedTipo ).subscribe( res => {
-            if ( res.idTercero !== null ) {
+            if ( res !== undefined && res.idTercero > 0 ) {
                this.tercerosService.get( res.idTercero ).subscribe( rest => {
                   this.tercero = rest;
                   this.isTerceroSet = true;
@@ -141,6 +141,7 @@ export class UsuariosAddComponent {
    createUser() {
       this.usuariosService.createUser( this.usuario ).then( res => {
          this.usuario = res;
+         this.router.navigate( [ 'usuarios/edit/'+this.usuario.idUsuario ] );
          this.isUserCreated = true;
          this.updateGroupLists();
          this.updateRolesLists();

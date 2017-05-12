@@ -52,7 +52,7 @@ export class EmployeesVehicleAddComponent implements OnInit {
       this.year = year + 1;
 
       this.route.params.subscribe( ( params: Params ) => {
-         this.employeeVehicle.idTercero = Number( +params[ 'idTercero' ] );
+         this.employeeVehicle.idTercero = Number( +params[ 'tercero' ] );
       } );
 
       this.listaService.getMasterDetails( 'ListasTiposVehiculos' ).subscribe( res => {

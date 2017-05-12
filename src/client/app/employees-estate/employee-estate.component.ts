@@ -53,15 +53,15 @@ export class EmployeesEstateComponent implements OnInit {
                                         } );
    }
 
-   detail( f: EmployeeEstate ) {
-      this.router.navigate( [ 'employees-estate/detail/' + f.idTerceroInmueble ] );
+   add() {
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/estate/add' ] );
+   }
+
+   detail( c: EmployeeEstate ) {
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/estate/detail/' + c.idTerceroInmueble ] );
    }
 
    update( c: EmployeeEstate ) {
-      this.router.navigate( [ 'employees-estate/update/' + c.idTerceroInmueble ] );
-   }
-
-   add() {
-      this.router.navigate( [ 'employees-estate/add/' + this.employee.idTercero ] );
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/estate/update/' + c.idTerceroInmueble  ] );
    }
 }
