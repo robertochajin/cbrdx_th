@@ -53,7 +53,9 @@ export class ConstanteEditComponent {
    }
 
    inputCleanUp( value: string ) {
-      this.constant.constante = value.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
+      if(value){
+         this.constant.constante = value.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
+      }
    }
 
    alterPattern() {
@@ -73,7 +75,7 @@ export class ConstanteEditComponent {
 
    inputValue() {
       let label = this.constant.valor;
-      if ( label !== '' && label !== null && this.constant.idTipoDato !== null ) {
+      if ( label !== '' && label !== null && label !== undefined && this.constant.idTipoDato !== null ) {
          let dataType = this.constantType.find( t => t.idLista === this.constant.idTipoDato );
          if ( dataType.codigo === 'NUM' ) {
             this.constant.valor = this.constant.valor.replace( /[^0-9]/g, '' );

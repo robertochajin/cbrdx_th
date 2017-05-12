@@ -39,8 +39,7 @@ export class ConstanteAddComponent implements OnInit {
    createConstant() {
       this.constanteService.addConstant( this.constant ).then( data => {
          this.router.navigate( [ 'constantes' ] );
-         let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
-         this.navService.setMesage( typeMessage, this.msg );
+         this.navService.setMesage( 1, this.msg );
       } );
    }
 
@@ -49,7 +48,9 @@ export class ConstanteAddComponent implements OnInit {
    }
 
    inputCleanUp( value: string ) {
-      this.constant.constante = value.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
+      if(value){
+         this.constant.constante = value.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
+      }
    }
 
    alterPattern() {
@@ -68,14 +69,14 @@ export class ConstanteAddComponent implements OnInit {
    }
 
    inputValue() {
-      let label = this.constant.constante;
-      if ( label !== '' && label !== null && this.constant.idTipoDato !== null ) {
+      let label = this.constant.valor;
+      if ( label !== '' && label !== null && label !== undefined && this.constant.idTipoDato !== null ) {
          let dataType = this.constantType.find( t => t.idLista === this.constant.idTipoDato );
          if ( dataType.codigo === 'NUM' ) {
-            this.constant.constante = this.constant.valor.replace( /[^0-9]/g, '' );
+            this.constant.valor = this.constant.valor.replace( /[^0-9]/g, '' );
          } else {
 
-            this.constant.constante = label.replace( ' ', '' ).trim();
+            this.constant.valor = label.replace( ' ', '' ).trim();
          }
       }
    }
