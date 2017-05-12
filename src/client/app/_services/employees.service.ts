@@ -54,7 +54,7 @@ export class EmployeesService {
       return this.authHttp.get( this.serviceURL + 'terceros/' + numeroDocumento + '/' + idTipoDocumento + '/' )
       .map((res:Response) => {
        if (res.text() !== '') {
-         res.json() as Employee
+         return res.json() as Employee
        } else {
          return undefined;
        }
