@@ -1,9 +1,9 @@
 <div>
-   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listPersonality"
+   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="atributos"
                 [paginator]="false" [responsive]="true" >
       <p-column header="{{ 'POSITION.LBL_ATRIBUTOS' | translate }}">
          <template let-personality="rowData" pTemplate="body">
-            {{personality.codigo}} - {{personality.nombre}}
+	         {{personality.codigoLista}} - {{personality.nombreLista}}
          </template>
       </p-column>
       <p-column header="{{ 'POSITION.LBL_DESCRIPCION' | translate }}">
