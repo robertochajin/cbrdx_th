@@ -6,18 +6,18 @@
         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
           <div class="row">
             <div class="form-group col-md-12">
-                <label for="correoElectronico">*{{'LBL_CORREOELECTRONICO' | translate:param}}</label>
+                <label for="correoElectronico">*{{'LBL_CORREOELECTRONICO' | translate}}</label>
                 <input id="correoElectronico" name="correoElectronico" #correoElectronico="ngModel" pInputText type="text" required
                        [(ngModel)]="employee.correoElectronico" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"/>
                 <div class="ui-message ui-messages-error ui-corner-all" *ngIf="fcont.submitted && !correoElectronico.valid ">
                   <i class="fa fa-close"></i>
-                  {{'LBL_CORREOELECTRONICO' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                  {{'LBL_CORREOELECTRONICO' | translate}} {{'LBL_REQUERIDO' | translate}}
                 </div>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-md-12">
-              <label for="sitio">{{'EMPLOYEES.LBL_SITIOWEB' | translate:param}}</label>
+              <label for="sitio">{{'EMPLOYEES.LBL_SITIOWEB' | translate}}</label>
               <input type="text" pInputText id="sitio" name="sitio"
                      [(ngModel)]="employee.sitioWeb" #web="ngModel"
               />
@@ -25,32 +25,32 @@
           </div>
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="fijo">{{ 'LBL_TELEFONO' | translate:param }}</label>
+              <label for="fijo">{{ 'LBL_TELEFONO' | translate }}</label>
               <p-inputMask id="fijo" name="fijo"
                            mask="?(999) 999-9999 Ext 9999" placeholder="(999) 999-9999 Ext 99999"
                            [(ngModel)]="employee.telefonoFijo" #telefonoFijo="ngModel" [required]="cel" (keyup)="validarTelefono()"
               ></p-inputMask>
                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="fcont.submitted && !telefonoFijo.valid">
                   <i class="fa fa-close"></i>
-                  {{'LBL_TELEFONO' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                  {{'LBL_TELEFONO' | translate}} {{'LBL_REQUERIDO' | translate}}
                </div>
             </div>
             <div class="form-group col-md-6">
-              <label for="cel">{{ 'LBL_CELULAR' | translate:param }}</label>
+              <label for="cel">{{ 'LBL_CELULAR' | translate }}</label>
               <p-inputMask id="cel" name="cel" [required]="tel" (keyup)="validarCelular()"
                            mask="?(999) 999-9999" placeholder="(999) 999-9999"
                            [(ngModel)]="employee.telefonoCelular" #celular="ngModel"
               ></p-inputMask>
                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="fcont.submitted && !celular.valid">
                   <i class="fa fa-close"></i>
-                  {{'LBL_CELULAR' | translate:param}} {{'LBL_REQUERIDO' | translate:param}}
+                  {{'LBL_CELULAR' | translate}} {{'LBL_REQUERIDO' | translate}}
                </div>
             </div>
           </div>
         </div>
         <div class="row form-footer-buttons">
           <div class="form-group col-md-12">
-            <button icon="fa-plus" label="{{'BTN_GUARDAR' | translate:param }}" type="submit"
+            <button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
                     pButton></button>
           </div>
         </div>

@@ -1,13 +1,13 @@
 <p-messages [value]="msgs"></p-messages>
 <p-confirmDialog width="400" #cd>
   <p-footer>
-    <button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate:param }}" (click)="cd.reject()"></button>
-    <button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate:param }}" (click)="cd.accept()"></button>
+    <button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
   </p-footer>
 
 </p-confirmDialog>
 <p-dialog header="Documento repetido" [(visible)]="repeatedDocument" modal="modal" width="300" responsive="true">
-   {{'EMPLOYEES.MSG_DOCUMENTO' | translate:param }}
+   {{'EMPLOYEES.MSG_DOCUMENTO' | translate }}
 </p-dialog>
 <div *ngIf="addinglocation">
 <div *ngIf="familyInformation">
@@ -22,112 +22,114 @@
         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-6">
-                    <label for="idTipoDocumento">* {{'LBL_TIPODOCUMENTO' | translate:param }}</label>
+                    <label for="idTipoDocumento">* {{'LBL_TIPODOCUMENTO' | translate }}</label>
                     <p-dropdown id="idTipoDocumento"  name="idTipoDocumento" #idTipoDocumento="ngModel" [options]="documentTypes" [autoWidth]="false" (onChange)="onChangeMethod($event)"
                                 [(ngModel)]="selectedDocument"required></p-dropdown>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !idTipoDocumento.valid">
                         <i class="fa fa-close"></i>
-                        {{'LBL_TIPODOCUMENTO' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                        {{'LBL_TIPODOCUMENTO' | translate }} {{'LBL_REQUERIDO' | translate }}
                     </div>
                 </div>
                 <div class="ui-grid-col-6">
-                    <label for="numeroDocumento">* {{'LBL_NUMERODOCUMENTO' | translate:param }}</label>
+                    <label for="numeroDocumento">* {{'LBL_NUMERODOCUMENTO' | translate }}</label>
                     <input id="numeroDocumento" name="numeroDocumento" #numeroDocumento="ngModel" pInputText type="text"
                            [(ngModel)]="familyInformation.numeroDocumento" required (change)="validateDocument()" />
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !numeroDocumento.valid">
                         <i class="fa fa-close"></i>
-                        {{'LBL_NUMERODOCUMENTO' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                        {{'LBL_NUMERODOCUMENTO' | translate }} {{'LBL_REQUERIDO' | translate }}
                     </div>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-6">
-                    <label for="primerNombre">* {{'EMPLOYEES.LBL_PRIMER' | translate:param }}</label>
+                    <label for="primerNombre">* {{'EMPLOYEES.LBL_PRIMER' | translate }}</label>
                     <input id="primerNombre" name="primerNombre" #primerNombre="ngModel" pInputText type="text"
                            [(ngModel)]="familyInformation.primerNombre" (keyup)="capitalize($event)"required/>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !primerNombre.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_PRIMER' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                        {{'EMPLOYEES.LBL_PRIMER' | translate }} {{'LBL_REQUERIDO' | translate }}
                     </div>
                 </div>
                 <div class="ui-grid-col-6">
-                    <label for="segundoNombre">{{'EMPLOYEES.LBL_SEGUNDO' | translate:param }}</label>
+                    <label for="segundoNombre">{{'EMPLOYEES.LBL_SEGUNDO' | translate }}</label>
                     <input id="segundoNombre" name="segundoNombre" #segundoNombre="ngModel" pInputText type="text"
                            [(ngModel)]="familyInformation.segundoNombre" (keyup)="capitalize($event)"/>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-6">
-                    <label for="primerApellido">* {{'EMPLOYEES.LBL_PRIMERAPELLIDO' | translate:param }}</label>
+                    <label for="primerApellido">* {{'EMPLOYEES.LBL_PRIMERAPELLIDO' | translate }}</label>
                     <input id="primerApellido" name="primerApellido" #primerApellido="ngModel" pInputText type="text"
                            [(ngModel)]="familyInformation.primerApellido" (keyup)="capitalize($event)"required/>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !primerApellido.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_PRIMERAPELLIDO' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                        {{'EMPLOYEES.LBL_PRIMERAPELLIDO' | translate }} {{'LBL_REQUERIDO' | translate }}
                     </div>
                 </div>
                 <div class="ui-grid-col-6">
-                    <label for="segundoApellido">{{'EMPLOYEES.LBL_SEGUNDOAPELLIDO' | translate:param }}</label>
+                    <label for="segundoApellido">{{'EMPLOYEES.LBL_SEGUNDOAPELLIDO' | translate }}</label>
                     <input id="segundoApellido" name="segundoApellido" #segundoApellido="ngModel" pInputText type="text"
                            [(ngModel)]="familyInformation.segundoApellido" (keyup)="capitalize($event)"/>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-4">
-                    <label for="fechaNacimiento">* {{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate:param }}</label>
+                    <label for="fechaNacimiento">* {{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate }}</label>
                     <p-calendar id="fechaNacimiento" name="fechaNacimiento" #fechaNacimiento="ngModel"  [showIcon]="true"
-                                [maxDate]="maxDate" [minDate]="minDate" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
-                                [dataType]="date" (onSelect)="onSelectMethod($event)" [disabled]="disabled"
+                                [maxDate]="maxDate"  [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
+                                dataType="date" (onSelect)="onSelectMethod($event)"
                                 [(ngModel)]="familyInformation.fechaNacimiento"required></p-calendar>
 
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fechaNacimiento.valid ">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                        {{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate }} {{'LBL_REQUERIDO' | translate }}
                     </div>
                 </div>
                 <div class="ui-grid-col-4">
-                    <label for="correoElectronico">* {{'LBL_CORREOELECTRONICO' | translate:param }}</label>
+                    <label for="correoElectronico">* {{'LBL_CORREOELECTRONICO' | translate }}</label>
                     <input id="correoElectronico" name="correoElectronico" #correoElectronico="ngModel" pInputText type="text"required
                            [(ngModel)]="familyInformation.correoElectronico" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"/>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !correoElectronico.valid ">
                         <i class="fa fa-close"></i>
-                        {{'LBL_CORREOELECTRONICO' | translate:param }}  {{'LBL_REQUERIDO' | translate:param }}
+                        {{'LBL_CORREOELECTRONICO' | translate }}  {{'LBL_REQUERIDO' | translate }}
                     </div>
                 </div>
                 <div class="ui-grid-col-4">
-                    <label for="idParentezco">* {{'EMPLOYEES.LBL_PARENTESCO' | translate:param }}</label>
+                    <label for="idParentezco">* {{'EMPLOYEES.LBL_PARENTESCO' | translate }}</label>
                     <p-dropdown id="idParentezco"  name="idParentezco" #idParentezco="ngModel" [options]="relationship" [autoWidth]="false"
                                 [(ngModel)]="selectedRelationship" required></p-dropdown>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !idParentezco.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_PARENTESCO' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                        {{'EMPLOYEES.LBL_PARENTESCO' | translate }} {{'LBL_REQUERIDO' | translate }}
                     </div>
                 </div>
             </div>
             <div class="ui-grid-row">
                 <div class="ui-grid-col-5">
-                    <label for="telefonoFijo">* {{'EMPLOYEES.LBL_TELEFONO1' | translate:param }}</label>
-                    <input id="telefonoFijo" name="telefonoFijo" #telefonoFijo="ngModel"  [required]="!cel"
+                    <label for="telefonoFijo">* {{'EMPLOYEES.LBL_TELEFONO1' | translate }}</label>
+                    <input id="telefonoFijo" name="telefonoFijo" #telefonoFijo="ngModel"
+                           [required]="telefonoCelular.value === '' || telefonoCelular.value === undefined "
                            [(ngModel)]="familyInformation.telefonoFijo" pInputText pattern="[0-9]{7,10}"
                            (keyup)="childInputCleanUp($event.target.value)" type="text"
                            (paste)="childInputCleanUp($event.target.value)"/>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !telefonoFijo.valid">
                         <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_TELEFONO1' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                        {{'EMPLOYEES.LBL_TELEFONO1' | translate }} {{'LBL_REQUERIDO' | translate }}
                     </div>
                 </div>
                 <div class="ui-grid-col-5">
-                    <label for="telefonoCelular">{{'EMPLOYEES.LBL_CELULAR' | translate:param }}</label>
+                    <label for="telefonoCelular">{{'EMPLOYEES.LBL_CELULAR' | translate }}</label>
                     <input id="telefonoCelular" name="telefonoCelular" #telefonoCelular="ngModel" pInputText type="text"
-                           [(ngModel)]="familyInformation.telefonoCelular" pattern="[0-9]{7,10}"  [required]="!tel"
+                           [(ngModel)]="familyInformation.telefonoCelular" pattern="[0-9]{7,10}"
+                           [required]="telefonoFijo.value === '' || telefonoFijo.value === undefined"
                            (keyup)="childInputCleanUp1($event.target.value)"/>
                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !telefonoCelular.valid">
                       <i class="fa fa-close"></i>
-                      {{'EMPLOYEES.LBL_CELULAR' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                      {{'EMPLOYEES.LBL_CELULAR' | translate }} {{'LBL_REQUERIDO' | translate }}
                    </div>
                 </div>
                 <div class="ui-grid-col-2">
-                    <label for="idConvivencia">{{'EMPLOYEES.LBL_CONVIVE' | translate:param }}</label>
+                    <label for="idConvivencia">{{'EMPLOYEES.LBL_CONVIVE' | translate }}</label>
                     <p-checkbox id="idConvivencia"  name="idConvivencia" #idConvivencia="ngModel"
                                 [(ngModel)]="convive" binary="true"></p-checkbox>
 
@@ -135,26 +137,26 @@
             </div>
             <div class="ui-grid-row">
               <div class="ui-grid-col-10">
-                <label for="direccion">* {{'EMPLOYEES.LBL_DIRECCIONRESIDENCIA' | translate:param }}</label>
+                <label for="direccion">* {{'EMPLOYEES.LBL_DIRECCIONRESIDENCIA' | translate }}</label>
                 <textarea id="direccion" name="direccion" #direccion="ngModel" pInputTextarea  rows="5" disabled
                           [(ngModel)]="familyInformation.direccion" required></textarea>
                 <div class="ui-message ui-messages-error ui-corner-all"
                      *ngIf="f.submitted && familyInformation.direccion===''">
                   <i class="fa fa-close"></i>
-                  {{'EMPLOYEES.LBL_DIRECCIONRESIDENCIA' | translate:param }} {{'LBL_REQUERIDO' | translate:param }}
+                  {{'EMPLOYEES.LBL_DIRECCIONRESIDENCIA' | translate }} {{'LBL_REQUERIDO' | translate }}
                 </div>
               </div>
               <div class="ui-grid-col-2">
-                <button pButton icon="fa-plus" label="{{'BTN_EDITARDIRECCION' | translate:param }}" (click)="toggleform()"></button>
+                <button pButton icon="fa-plus" label="{{'BTN_EDITARDIRECCION' | translate }}" (click)="toggleform()"></button>
               </div>
             </div>
             <div class="ui-grid-row form-footer-buttons">
                 <div class="ui-grid-col-4"></div>
                 <div class="ui-grid-col-1">
-                    <a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate:param }}</a>
+                    <a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
                 </div>
                 <div class="ui-grid-col-2">
-                  <button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate:param }}" type="submit" ></button>
+                  <button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit" ></button>
                 </div>
                 <div class="ui-grid-col-5"></div>
             </div>
@@ -163,5 +165,5 @@
 </div>
 </div>
 <div *ngIf="!addinglocation">
-  <locations [parentTitle]="'Información familiar'" (dismiss)="toggleform()" (create)="bindLocation($event)" [localizacion]="localizacion"></locations>
+  <locations-form [parentTitle]="'Información familiar'" (dismiss)="toggleform()" (create)="bindLocation($event)" [localizacion]="localizacion"></locations-form>
 </div>

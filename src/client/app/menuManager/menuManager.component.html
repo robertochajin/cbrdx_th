@@ -74,7 +74,7 @@
                      <div class="form-group">
                         <label for="secuencia" class="control-label col-sm-3">* {{ 'ADMINMENUS.LBL_SECUENCIA' | translate }} </label>
                         <div class=" col-sm-9">
-                           <input type="text" pInputText class="form-control" id="secuencia" name="secuencia"
+                           <input type="number" pInputText class="form-control" id="secuencia" name="secuencia"
                                   [(ngModel)]="menus.secuencia"
                                   #orden="ngModel"
                                   required/>
@@ -131,4 +131,3 @@
       </p-dialog>
    </div>
 </div>
-<p-growl [value]="msgs"></p-growl>

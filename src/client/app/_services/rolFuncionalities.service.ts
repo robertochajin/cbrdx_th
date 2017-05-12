@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { Observable } from "rxjs";
-import { RolFuncionalities } from "../_models/rolFuncionalities";
-import { RolFunctionalityControl } from "../_models/rolFunctionalityControl";
+import { Observable } from 'rxjs';
+import { RolFuncionalities } from '../_models/rolFuncionalities';
+import { RolFunctionalityControl } from '../_models/rolFunctionalityControl';
 import { AuthHttp } from 'angular2-jwt';
 @Injectable()
 export class RolFuncionalitiesServices {
@@ -14,7 +14,7 @@ export class RolFuncionalitiesServices {
    }
 
    getAll() {
-      return this.authHttp.get( this.serviceURL).map( ( res: Response ) => res.json() as RolFuncionalities[] );
+      return this.authHttp.get( this.serviceURL ).map( ( res: Response ) => res.json() as RolFuncionalities[] );
    }
 
    getAllByRol( id: number ): Observable<RolFuncionalities[]> {
@@ -22,30 +22,31 @@ export class RolFuncionalitiesServices {
    }
 
    getControlByFuncionality( idRol: number, idFun: number ): Observable<RolFunctionalityControl[]> {
-      return this.authHttp.get( this.serviceControlURL + 'buscarFuncionalidad/' + idRol + '/' + idFun ).map( ( res: Response ) => res.json() as RolFunctionalityControl[] );
+      return this.authHttp.get( this.serviceControlURL + 'buscarFuncionalidad/' + idRol + '/' + idFun )
+      .map( ( res: Response ) => res.json() as RolFunctionalityControl[] );
    }
 
    add( f: RolFuncionalities ) {
-      return this.authHttp.post( this.serviceURL, f)
-         .map( ( res: Response ) => res.json() );
+      return this.authHttp.post( this.serviceURL, f )
+      .map( ( res: Response ) => res.json() );
    };
 
    update( f: RolFuncionalities ) {
-      return this.authHttp.put( this.serviceURL, JSON.stringify( f )).catch( this.handleError );
+      return this.authHttp.put( this.serviceURL, JSON.stringify( f ) ).catch( this.handleError );
    }
 
    get( id: number ) {
       return this.authHttp.get( this.serviceURL + '/' + id )
-         .map( ( res: Response ) => res.json() as RolFuncionalities );
+      .map( ( res: Response ) => res.json() as RolFuncionalities );
    }
 
    addControl( f: RolFunctionalityControl ) {
-      return this.authHttp.post( this.serviceControlURL, f)
-         .map( ( res: Response ) => res.json() );
+      return this.authHttp.post( this.serviceControlURL, f )
+      .map( ( res: Response ) => res.json() );
    };
 
    updateControl( f: RolFunctionalityControl ) {
-      return this.authHttp.put( this.serviceControlURL, JSON.stringify( f )).catch( this.handleError );
+      return this.authHttp.put( this.serviceControlURL, JSON.stringify( f ) ).catch( this.handleError );
    }
 
    handleError( error: any ): Promise<any> {

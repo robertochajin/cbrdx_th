@@ -8,7 +8,7 @@
         <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}">
     </div>
 </div>
-<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="listadoCentroCostos" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="listadoCentroCostos" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
     <p-column field="idCentroCostos" header="{{ 'LBL_ID' | translate }}" [sortable]="true"></p-column>
     <p-column field="codigoCentroCostos" header="{{ 'LBL_CODIGO' | translate }}" [sortable]="true"></p-column>
     <p-column field="centroCostos" header="{{ 'LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>

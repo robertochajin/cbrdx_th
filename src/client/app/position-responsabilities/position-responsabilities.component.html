@@ -30,7 +30,7 @@
    </div>
    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="positionResponsabilities"
                 [paginator]="true"
-                [rows]="10" [responsive]="true" [globalFilter]="gb">
+                [rows]="10" [responsive]="true" >
       <p-column field="responsabilidad" header="{{ 'POSITION.LBL_RESPONSABILIDAD' | translate }}" [sortable]="true"></p-column>
       <p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
          <template let-positionResponsability="rowData" pTemplate="body">

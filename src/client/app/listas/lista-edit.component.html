@@ -7,8 +7,7 @@
                 <label class="control-label col-sm-4" for="lista">{{ 'LISTAS.LBL_LISTA' | translate }}</label>
                 <div class="col-sm-8">
                     <input class="form-control" type="text" pInputText [(ngModel)]="masterList.lista" id="lista"
-                           required maxlength="40" #lista="ngModel" name="lista" pattern="[A-Z]{1}.*"
-                           [disabled]="isMasterCreated">
+                           required maxlength="40" #lista="ngModel" name="lista" pattern="[A-Z]{1}.*">
                     <div *ngIf="f.submitted&&lista.errors" class="alert alert-danger">
                         <div [hidden]="!lista.errors.required">{{ 'LISTAS.MSG_NOMBRELISTA' | translate }}</div>
                         <div [hidden]="!lista.errors.pattern">{{ 'LISTAS.MSG_LISTAMAYUSCULA' | translate }}</div>
@@ -150,7 +149,7 @@
             </div>
         </div>
     </form>
-    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="detailsList" [paginator]="true" [rows]="10" [responsive]="true">
+    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="detailsList" [paginator]="true" [rows]="10" [responsive]="true">
         <header>Listas</header>
         <p-column field="codigo" header="{{ 'LBL_CODIGO' | translate }}"></p-column>
         <p-column field="nombre" header="{{ 'LISTAS.LBL_ITEMLISTA' | translate }}"></p-column>

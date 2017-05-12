@@ -1,5 +1,5 @@
 <p-messages [value]="msgs"></p-messages>
-<div *ngIf="show_form">
+<div *ngIf="showForm">
    <div class="row-fluid">
       <div class="col-md-12">
          <form name="func" (ngSubmit)="rw.valid && onSubmit()" #rw="ngForm" novalidate>
@@ -56,7 +56,7 @@
          </div>
       </div>
    </div>
-   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}" [value]="rolWidgets" [paginator]="true"
+   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="rolWidgets" [paginator]="true"
                 [rows]="10" [responsive]="true" [globalFilter]="gb">
       <p-column field="widget" header="{{ 'ROLES.LBL_WIDGETS' | translate}}" [sortable]="true"></p-column>
       <p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate}}" [sortable]="true" styleClass="datatable-col-center">

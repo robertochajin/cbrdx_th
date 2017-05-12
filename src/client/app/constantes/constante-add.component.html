@@ -11,7 +11,9 @@
                          [(ngModel)]="constant.constante" required maxlength="6" pattern="[A-Z0-9]{0,6}"
                          (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
                          (paste)="inputCleanUp($event.target.value)">
-                  <div *ngIf="codeExists" class="alert alert-danger">{{ 'CONSTANTES.LBL_CODREGISTRADO' | translate}}</div>
+                  <div *ngIf="codeExists" class="alert alert-danger">
+	                  {{ 'CONSTANTES.LBL_CODREGISTRADO' | translate}}
+                  </div>
                   <div *ngIf="f.submitted&&!constante.valid" class="alert alert-danger">
                       <div [hidden]="!constante.errors.required">{{ 'CONSTANTES.MSG_ADDNOMBRECONSTANTE' | translate}}</div>
                       <div [hidden]="!constante.errors.maxlength">{{ 'CONSTANTES.MSG_COD6CARACTERES' | translate}}</div>

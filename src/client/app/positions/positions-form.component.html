@@ -448,12 +448,12 @@
 
          <p-accordionTab header="Productividad" [selected]="acordion == 11"
                          [disabled]="step >0 && step <12">
-            <productivity (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></productivity>
+            <productivity-component (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></productivity-component>
          </p-accordionTab>
 
          <p-accordionTab header="Personalidad" [selected]="acordion == 12"
                          [disabled]="step >0 && step <13">
-            <personality  (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></personality>
+            <personality-component  (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></personality-component>
          </p-accordionTab>
 
          <p-accordionTab header="Factores de riesgo ocupacional" [selected]="acordion == 13"

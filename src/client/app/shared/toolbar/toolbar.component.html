@@ -50,26 +50,26 @@
                 <!--</li>-->
               <!--</ul>-->
             <!--</li>-->
-            <!--<li class="footer"><a href="#">{{ 'LBL_VERMAS' | translate:param }}</a></li>-->
+            <!--<li class="footer"><a href="#">{{ 'LBL_VERMAS' | translate }}</a></li>-->
           <!--</ul>-->
         <!--</li>-->
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="assets/images/perfil/{{usuarioLogueado.usuario.idUsuario}}.jpg" class="user-image" alt="User Image">
+            <img src="{{svcThUrl}}/file/{{avatar}}" class="user-image" alt="User Image">
              <span class="hidden-xs">{{usuarioLogueado.nombre}}</span>
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-            <img src="assets/images/perfil/{{usuarioLogueado.usuario.idUsuario}}.jpg" class="img-circle" alt="User Image">
+            <img src="{{svcThUrl}}/file/{{avatar}}" class="img-circle" alt="User Image">
               <p>
                  {{usuarioLogueado.nombre}}
-                <small>{{ 'TEMPLATE.LBL_USUARIODESDE' | translate:param }} {{ultimaActualizacion}}</small>
+                <small>{{ 'TEMPLATE.LBL_USUARIODESDE' | translate }} {{ultimaActualizacion}}</small>
               </p>
             </li>
 
-            <li class="disabled menu-theme-title"><a href="#">{{ 'TEMPLATE.LBL_TEMASDISPONIBLES' | translate:param }}</a></li>
+            <li class="disabled menu-theme-title"><a href="#">{{ 'TEMPLATE.LBL_TEMASDISPONIBLES' | translate }}</a></li>
             <li class="menu-theme">
               <span class="colortheme colorwhite" onclick="changeTheme('skin-black')" ></span>
               <span class="colortheme colorpurple" onclick="changeTheme('skin-purple')"></span>
@@ -81,10 +81,10 @@
             <!-- Menu Footer-->
             <li class="user-footer">
                <div class="pull-left">
-                  <a routerLink="/user-session" class="btn btn-default">{{ 'TEMPLATE.LBL_EDITARCONTRASENA' | translate:param }}</a>
+                  <a routerLink="/user-session" class="btn btn-default">{{ 'TEMPLATE.LBL_EDITARCONTRASENA' | translate }}</a>
                </div>
               <div class="pull-right">
-                <a href="javascript:void(0)" (click)="logout()" class="btn btn-danger">{{ 'TEMPLATE.LBL_CERRARSESION' | translate:param }}</a>
+                <a href="javascript:void(0)" (click)="logout()" class="btn btn-danger">{{ 'TEMPLATE.LBL_CERRARSESION' | translate }}</a>
               </div>
             </li>
           </ul>

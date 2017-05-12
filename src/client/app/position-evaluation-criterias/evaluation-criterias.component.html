@@ -26,7 +26,7 @@
             </div>
             <div class="col-md-5 col-xs-12">
                <div class="form-group">
-                    <label for="descripcion{{i}}" class="control-label">{{ 'POSITION.LBL_DESCRIPCION' | translate }} </label>
+                    <label for="descripcion{{i}}" class="control-label">* {{ 'POSITION.LBL_DESCRIPCION' | translate }} </label>
                     <textarea id="descripcion{{i}}" name="descripcion{{i}}" pInputTextarea  rows="2" cols="35" #descripcion="ngModel"
                               [(ngModel)]="criteria.descripcion" required class="form-control"></textarea>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !descripcion.valid">
@@ -94,7 +94,7 @@
   </div>
   <div *ngIf="!editing">
     <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="positionCriterias" [paginator]="true"
-                 [rows]="10" [responsive]="true" [globalFilter]="gb">
+                 [rows]="10" [responsive]="true" >
       <p-column field="criterio" header="{{ 'POSITION.LBL_CRITERIOS' | translate }}" [sortable]="true"></p-column>
       <p-column field="descripcion" header="{{ 'POSITION.LBL_DESCRIPCION' | translate }}" [sortable]="true"></p-column>
       <p-column field="factor" header="{{ 'POSITION.LBL_FACTOR' | translate }}" [sortable]="true"></p-column>

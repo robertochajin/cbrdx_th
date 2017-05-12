@@ -9,8 +9,8 @@
   <div class="row">
     <div class="col-md-12">
       <div>
-        <p-dataTable [value]="PositionExam" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-          <p-column field="{{ 'POSITION.LBL_EXAMEN' | translate }}" header="{{ 'POSITION.LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
+        <p-dataTable [value]="PositionExam" [paginator]="true" [rows]="10" [responsive]="true" >
+          <p-column field="examen" header="{{ 'POSITION.LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
           <p-column header="{{ 'POSITION.LBL_INGRESO' | translate }}">
             <template let-exam="rowData" pTemplate="body">
               <p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="exam.indicadorIngreso"
@@ -98,7 +98,7 @@
   <div class="row">
     <div class="col-md-12">
       <div>
-        <p-dataTable [value]="listRisks" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+        <p-dataTable [value]="listRisks" [paginator]="true" [rows]="10" [responsive]="true" >
           <p-column field="riesgo" header="{{ 'POSITION.LBL_TIPO' | translate }}" [sortable]="true"></p-column>
           <p-column field="tipo" header="{{ 'POSITION.LBL_SUBTIPO' | translate }}" [sortable]="true"></p-column>
           <p-column field="subtipo" header="{{ 'POSITION.LBL_RIESGO' | translate }}" [sortable]="true"></p-column>
@@ -115,3 +115,4 @@
     </div>
   </div>
 </div>
+
