@@ -52,9 +52,6 @@ export class PositionCompetenciesComponent implements OnInit {
 
       this.positionCompetenciesService.getAllByPosition( this.position.idCargo ).subscribe( pcs => {
          this.positionCompetencies = pcs;
-         if ( this.positionCompetencies.length > 0 ) {
-            this.ponderanciesList.splice( 0, 1 );
-         }
          this.groupCompetenciesServices.getAllEnabled().subscribe( groups => {
             groups.map( g => {
                this.competenciesServices.getAllEnabledByGroup( g.idGrupoCompetencia ).subscribe(
