@@ -62,8 +62,9 @@ export class CompetenciesGroupsComponent implements OnInit {
             this.navService.setMesage( typeMessage, this.msg );
          } );
       } else {
-         this.groupCompetenciesServices.add( this.group ).subscribe( res => {
+         this.groupCompetenciesServices.add( this.group ).subscribe( (res: GroupCompetencies) => {
             if ( res.idGrupoCompetencia ) {
+               res.competencies = [];
                this.groups.push( res ); // se debe cambiar por lo que retorna el servicio
                this.group = new GroupCompetencies();
                this.editingGroup = false;

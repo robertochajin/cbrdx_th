@@ -96,7 +96,7 @@ export class UsuariosAddComponent {
       this.limpiarValidaciones();
       this.terceroObtenido = this.terceros.filter( t => t.idTipoDocumento === this.selectedTipo )
       .find( s => s.numeroDocumento.toLowerCase() === this.numeroDocumento.toLowerCase() );
-      if ( this.terceroObtenido !== null ) {
+      if ( this.terceroObtenido !== null && this.terceroObtenido !== undefined ) {
          this.terceroExiste = true;
          this.validateUser();
       } else {
@@ -110,7 +110,7 @@ export class UsuariosAddComponent {
    }
 
    validateUser() {
-      if ( this.terceroObtenido !== null ) {
+      if ( this.terceroObtenido !== null && this.terceroObtenido !== undefined) {
          this.userExists = this.usuarios.filter( t => t.idTercero === this.terceroObtenido.idTercero ).length > 0;
       } else {
          this.userExists = false;
