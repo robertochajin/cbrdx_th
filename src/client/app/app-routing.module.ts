@@ -169,8 +169,8 @@ const routes = [
    // employees-Inmuebles
    { path: 'employees/detail/:tercero/estate', component: EmployeesEstateComponent, canActivate: [ AuthGuard ] },
    { path: 'employees/detail/:tercero/estate/add', component: EmployeesEstateAddComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:tercero/estate/update/:id', component: EmployeeEstateDetailComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:tercero/estate/detail/:id', component: EmployeesEstateUpdateComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:tercero/estate/update/:id', component: EmployeesEstateUpdateComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:tercero/estate/detail/:id', component: EmployeeEstateDetailComponent, canActivate: [ AuthGuard ] },
 
    // employees-Vehiculos
    { path: 'employees/detail/:tercero/vehicle', component: EmployeesVehicleComponent, canActivate: [ AuthGuard ] },

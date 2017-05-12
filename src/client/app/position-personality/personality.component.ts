@@ -77,7 +77,7 @@ export class PersonalityComponent implements OnInit {
                         it = it + 1;
                         elemento.idCargoPersonalidadAtributo = res.idCargoPersonalidadAtributo;
                         elemento.auditoriaUsuario = res.auditoriaUsuario;
-                        elemento.auditoriaFecha = res.auditoriaFechad;
+                        elemento.auditoriaFecha = res.auditoriaFecha;
                         if(it >= this.atributos.length){
                            this.nextStep.emit( 13 );
                         }
@@ -87,7 +87,6 @@ export class PersonalityComponent implements OnInit {
                   it = it + 1;
                }
             } else {
-               elemento.auditoriaFecha = '';
                this.personalityService.update( elemento ).subscribe( res => {
                   if ( res.ok ) {
                      it = it + 1;
