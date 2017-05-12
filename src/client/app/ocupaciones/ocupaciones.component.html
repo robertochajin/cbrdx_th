@@ -30,7 +30,7 @@
     <div class="col-md-8">
         <p-fieldset legend="{{header}}">
             <div class="row-fluid">
-                <div class="col-md-12">
+                <div class="col-md-12" *ngIf="!guardado">
                     <form name="form" (ngSubmit)="!codeExists&&f.valid && save()" #f="ngForm" id="formName" novalidate>
                             <div class="form-group">
                                 <h4>{{labelPadre}}</h4>

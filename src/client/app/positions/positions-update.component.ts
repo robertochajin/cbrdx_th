@@ -55,7 +55,7 @@ export class PositionsUpdateComponent implements OnInit {
       private confirmationService: ConfirmationService,
       private listEmployeesService: ListEmployeesService,
       private listaService: ListaService,
-      private _nav: NavService, ) {
+      private _nav: NavService ) {
 
       this.listPositionsService.getCategoryTypes().subscribe( res => {
          this.listcategoryTypes = res;

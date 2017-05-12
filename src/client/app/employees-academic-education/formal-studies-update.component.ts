@@ -91,7 +91,7 @@ export class FormalStudiesUpdateComponent implements OnInit {
             } else {
                this.selectedInstitute = null;
             }
-            if ( this.fstudy.idInstitucion ) {
+            if ( this.fstudy.idInstitucion || this.fstudy.otraInstitucion ) {
                this.wrongInstitute = false;
             }
             this.idTercero = this.fstudy.idTercero;

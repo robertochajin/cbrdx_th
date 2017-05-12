@@ -99,7 +99,7 @@ export class MenuManagerComponent {
 
    nodeSelect( node: any ) {
 
-      if ( node.data.idPadre === 0 || node.data.idPadre === null ) {
+      if ( node.data.idPadre === 0 || node.data.idPadre === null || node.data.idPadre === undefined ) {
          this.modulo = true;
          this.header = 'Módulo';
 
@@ -117,7 +117,7 @@ export class MenuManagerComponent {
 
    save() {
 
-      if ( this.menus.idMenu === null || this.menus.idMenu === 0 ) {
+      if ( this.menus.idMenu === null || this.menus.idMenu === 0 || this.menus.idMenu === undefined ) {
          this.guardando = true;
          this.menuManagerService.add( this.menus ).then( data => {
             this.guardando = false;
@@ -129,7 +129,7 @@ export class MenuManagerComponent {
                'children': []
             };
             this.listmenu.push( data );
-            if ( this.menus.idPadre === 0 || this.menus.idPadre === null ) {
+            if ( this.menus.idPadre === 0 || this.menus.idPadre === null || this.menus.idPadre === undefined ) {
                this.treeMenu.push( newChil );
                this.selectedNode = newChil;
                this.newModule();
@@ -166,7 +166,7 @@ export class MenuManagerComponent {
    }
 
    doCancel() {
-      if ( this.menus.idMenu === null || this.menus.idMenu === 0 ) {
+      if ( this.menus.idMenu === null || this.menus.idMenu === 0 || this.menus.idMenu === undefined ) {
          this.menus = new MenuManager;
       } else {
          this.menuManagerService.view( this.menus.idMenu ).subscribe( res => {

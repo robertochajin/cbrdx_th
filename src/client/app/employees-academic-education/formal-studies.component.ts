@@ -49,15 +49,16 @@ export class FormalStudiesComponent implements OnInit {
                                         } );
    }
 
-   detail( f: FormalStudies ) {
-      this.router.navigate( [ 'employees-formal-studies/detail/' + f.idTerceroEstudioFormal ] );
-   }
-
    add() {
-      this.router.navigate( [ 'employees-formal-studies/add/' + this.employee.idTercero ] );
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/formal-studies/add' ] );
    }
 
-   update( f: FormalStudies ) {
-      this.router.navigate( [ 'employees-formal-studies/update/' + f.idTerceroEstudioFormal + '/' + this.employee.idTercero ] );
+   detail( c: FormalStudies ) {
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/formal-studies/detail/' + c.idTerceroEstudioFormal ] );
    }
+
+   update( c: FormalStudies ) {
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/formal-studies/update/' + c.idTerceroEstudioFormal  ] );
+   }
+
 }
