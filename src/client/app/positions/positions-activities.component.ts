@@ -44,7 +44,7 @@ export class PositionActivitiesComponent implements OnInit {
             }
          } );
 
-      this.positionsService.getListActivities().subscribe( rest => {
+      this.positionsService.getListActivitiesByLevel(4).subscribe( rest => {
          this.listActivities.push( { label: 'Seleccione...', value: null } );
          for ( let dp of rest ) {
             let bandera = false;
