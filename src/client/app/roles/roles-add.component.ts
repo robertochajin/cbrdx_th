@@ -116,7 +116,7 @@ export class RolesAddComponent implements OnInit {
          this.rol.fechaFin = momFin.format( 'YYYY-MM-DD' );
       }
       this.rolesService.addRole( this.rol ).then( res => {
-         this.router.navigate( [ 'roles/update/' + res.idRol + '/true' ] );
+         this.router.navigate( [ 'roles/update/' + res.idRol + '/1' ] );
       } );
 
    }
