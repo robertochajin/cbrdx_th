@@ -86,9 +86,13 @@ export class EvaluationCriteriasComponent implements OnInit {
             if ( pc1.idCriterio !== null && pc2.idCriterio === pc1.idCriterio ) {
                cont = cont + 1;
             }
-            if ( cont > 1 ) { break; }
+            if ( cont > 1 ) {
+               break;
+            }
          }
-         if ( cont > 1 ) { break; }
+         if ( cont > 1 ) {
+            break;
+         }
       }
 
       if ( cont > 1 ) {

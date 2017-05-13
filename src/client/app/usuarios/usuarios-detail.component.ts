@@ -8,6 +8,10 @@ import { VUsuarioRol } from '../_models/vUsuarioRol';
 import { VUsuarioGrupoGestion } from '../_models/vUsuarioGrupoGestion';
 import { TercerosService } from '../_services/terceros.service';
 import { VHistoricoUsuario } from '../_models/vHistoricoUsuario';
+import { EmployeesService } from '../_services/employees.service';
+import { LocationService } from '../_services/employee-location.service';
+import { Employee } from '../_models/employees';
+import { Localizaciones } from '../_models/localizaciones';
 
 @Component( {
                moduleId: module.id,
@@ -18,13 +22,15 @@ import { VHistoricoUsuario } from '../_models/vHistoricoUsuario';
 export class UsuarioDetailComponent {
 
    usuario: Usuario = new Usuario();
-   tercero: Tercero = new Tercero();
+   tercero: Employee = new Employee();
    curRoles: VUsuarioRol[] = [];
    curGrupos: VUsuarioGrupoGestion[] = [];
    historico: VHistoricoUsuario[] = [];
+   private locations: Localizaciones[] = [];
 
    constructor( private usuariosService: UsuariosService,
-      private tercerosService: TercerosService,
+      private tercerosService: EmployeesService,
+      private locationService: LocationService,
       private router: Router,
       private route: ActivatedRoute ) {
       route.params.switchMap( ( params: Params ) => usuariosService.viewUser( +params[ 'id' ] ) )
@@ -33,8 +39,9 @@ export class UsuarioDetailComponent {
          this.updateRolesLists();
          this.updateHistoric();
          this.updateGroupLists();
-         tercerosService.listarTerceros().subscribe( res => {
-            this.tercero = res.find( t => t.idTercero === this.usuario.idTercero );
+         tercerosService.get(this.usuario.idTercero).subscribe( res => {
+            this.tercero = res;
+            this.locationService.getAllByEmployee(this.usuario.idTercero).subscribe(locations => this.locations = locations );
          } );
       } );
 

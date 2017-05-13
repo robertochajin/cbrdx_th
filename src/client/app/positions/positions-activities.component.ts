@@ -5,6 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
 import { PositionsService } from '../_services/positions.service';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -18,12 +19,14 @@ export class PositionActivitiesComponent implements OnInit {
    @Input() position: Positions;
    positionsActivities: PositionsActivities = new PositionsActivities();
    dialogObjet: PositionsActivities = new PositionsActivities();
+   msg: Message;
    msgs: Message[] = [];
    listActivities: SelectItem[] = [];
    listPositionsActivities: PositionsActivities[] = [];
 
    constructor( private positionsService: PositionsService,
       private router: Router,
+      private navService: NavService,
       private route: ActivatedRoute,
       private confirmationService: ConfirmationService, ) {
 
@@ -44,7 +47,7 @@ export class PositionActivitiesComponent implements OnInit {
             }
          } );
 
-      this.positionsService.getListActivities().subscribe( rest => {
+      this.positionsService.getListActivitiesByLevel(4).subscribe( rest => {
          this.listActivities.push( { label: 'Seleccione...', value: null } );
          for ( let dp of rest ) {
             let bandera = false;
@@ -63,33 +66,38 @@ export class PositionActivitiesComponent implements OnInit {
    }
 
    onSubmit() {
-      this.msgs = [];
-      this.positionsService.addPositionsActivities( this.positionsActivities )
-      .subscribe( data => {
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
-         this.positionsService.getActivitiesById( data.idOcupacion ).subscribe( res => {
-            data.ocupacion = res.ocupacion;
-         } );
-         this.listPositionsActivities.push( data );
-         this.listActivities = [];
-         this.positionsService.getListActivities().subscribe( rest => {
-            this.listActivities.push( { label: 'Seleccione...', value: null } );
-            for ( let dp of rest ) {
-               let bandera = false;
-               for ( let r of this.listPositionsActivities ) {
-                  if ( dp.idOcupacion === r.idOcupacion ) {
-                     bandera = true;
-                     break;
+      if ( this.positionsActivities.idOcupacion ) {
+         this.positionsService.addPositionsActivities( this.positionsActivities )
+         .subscribe( data => {
+
+            let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
+            this.positionsActivities = new PositionsActivities();
+            this.positionsService.getActivitiesById( data.idOcupacion ).subscribe( res => {
+               data.ocupacion = res.ocupacion;
+            } );
+            this.listPositionsActivities.push( data );
+            this.listActivities = [];
+            this.positionsService.getListActivities().subscribe( rest => {
+               this.listActivities.push( { label: 'Seleccione...', value: null } );
+               for ( let dp of rest ) {
+                  let bandera = false;
+                  for ( let r of this.listPositionsActivities ) {
+                     if ( dp.idOcupacion === r.idOcupacion ) {
+                        bandera = true;
+                        break;
+                     }
+                  }
+                  if ( !bandera ) {
+                     this.listActivities.push( { label: dp.ocupacion, value: dp.idOcupacion } );
                   }
                }
-               if ( !bandera ) {
-                  this.listActivities.push( { label: dp.ocupacion, value: dp.idOcupacion } );
-               }
-            }
+            } );
+         }, error => {
+            let typeMessage = 3; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
          } );
-      }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
-      } );
+      }
    }
 
    del( a: PositionsActivities ) {

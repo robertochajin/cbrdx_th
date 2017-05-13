@@ -17,7 +17,7 @@ export class EmployeesService {
    }
 
    getByTipo( type: string ) {
-      return this.authHttp.get( this.serviceURL + 'vterceros/buscarTerceros/' + type + "/" ).map( ( res: Response ) => res.json() );
+      return this.authHttp.get( this.serviceURL + 'vterceros/buscarTerceros/' + type + '/' ).map( ( res: Response ) => res.json() );
    }
 
    getTerColWithoutPosition( query: string ) {
@@ -52,15 +52,13 @@ export class EmployeesService {
 
    validateDocument( numeroDocumento: string, idTipoDocumento: number ) {
       return this.authHttp.get( this.serviceURL + 'terceros/' + numeroDocumento + '/' + idTipoDocumento + '/' )
-      .map( ( res: Response ) => res.json() as Employee );
-
-      /*.map((res:Response) => {
-       //if (res.text() !== '') {
-       res.json() as Employee
-       //} else {
-       return undefined;
-       //}
-       });*/
+      .map((res:Response) => {
+       if (res.text() !== '') {
+         return res.json() as Employee
+       } else {
+         return undefined;
+       }
+       });
    }
 
 }

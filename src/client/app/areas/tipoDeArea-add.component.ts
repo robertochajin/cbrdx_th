@@ -7,15 +7,16 @@ import { Message } from 'primeng/primeng';
 @Component( {
                moduleId: module.id,
                templateUrl: 'tipoDeArea-add.component.html',
-               selector: 'tipoDeAreas-add'
+               selector: 'tipodeareas-add'
             } )
 export class TipoDeAreaAddComponent {
 
    areas: TipoDeArea = new TipoDeArea();
    areasExistentes: TipoDeArea[];
    codeExists: boolean = false;
-   displayDialog:boolean;
+   displayDialog: boolean;
    msg: Message;
+
    constructor( private tipoDeAreasService: TipoDeAreaService, private router: Router, private navService: NavService ) {
       tipoDeAreasService.listAreas().subscribe( res => {
          this.areasExistentes = res;
@@ -44,7 +45,8 @@ export class TipoDeAreaAddComponent {
 
    capitalize() {
       let input = this.areas.estructuraArea;
-      if ( input )
+      if ( input ) {
          this.areas.estructuraArea = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+      }
    }
 }

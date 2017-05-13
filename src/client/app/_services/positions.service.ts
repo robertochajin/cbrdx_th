@@ -76,7 +76,7 @@ export class PositionsService {
    get( id: number ) {
       return this.authHttp.get( this.serviceURL + 'cargos/' + id ).map( ( res: Response ) => {
          if ( res.text() !== '' ) {
-            return res.json() as Positions
+            return res.json() as Positions;
          } else {
             return new Positions;
          }
@@ -106,6 +106,10 @@ export class PositionsService {
 
    getListActivities() {
       return this.authHttp.get( this.serviceURL + 'ocupaciones' ).map( ( res: Response ) => res.json() );
+   }
+
+   getListActivitiesByLevel(level: number) {
+      return this.authHttp.get( this.serviceURL + 'ocupaciones/tipo/' + level ).map( ( res: Response ) => res.json() );
    }
 
    getPositionActivitiesById( id: number ) {

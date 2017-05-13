@@ -34,7 +34,6 @@ export class JobProjectionUpdateComponent implements OnInit {
       private location: Location,
       private confirmationService: ConfirmationService,
       private _nav: NavService ) {
-      this.jobProjection;
    }
 
    ngOnInit() {

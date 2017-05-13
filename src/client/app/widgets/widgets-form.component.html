@@ -1,8 +1,8 @@
 <p-messages [value]="msgs"></p-messages>
 <p-confirmDialog width="400" #cd>
    <p-footer>
-      <button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate:param }}" (click)="cd.reject()"></button>
-      <button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate:param }}" (click)="cd.accept()"></button>
+      <button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+      <button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate }}" (click)="cd.accept()"></button>
    </p-footer>
 </p-confirmDialog>
 <div *ngIf="widgets">
@@ -54,7 +54,7 @@
             <div class="ui-grid-col-6">
                <label for="URL">Url</label>
                <input id="URL" name="URL" #URL="ngModel" pInputText type="text"
-                      [(ngModel)]="widgets.descripcion" required="true" />
+                      [(ngModel)]="widgets.descripcion"/>
                <!--<div class="ui-message ui-messages-error ui-corner-all"-->
                     <!--*ngIf="f.submitted && !URL.valid">-->
                   <!--<i class="fa fa-close"></i>-->

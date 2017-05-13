@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/primeng';
 import { Employee } from '../_models/employees';
@@ -14,7 +14,7 @@ import * as moment from 'moment/moment';
                selector: 'clinical-information',
                providers: [ ConfirmationService ]
             } )
-export class ClinicalInformationComponent {
+export class ClinicalInformationComponent implements OnInit {
    @Input()
    employee: Employee;
    clinicalInformation: EmployeesClinicalData = new EmployeesClinicalData;
@@ -32,7 +32,7 @@ export class ClinicalInformationComponent {
    wrongDiagnostic: boolean = true;
 
    clinicalInformations: EmployeesClinicalData[];
-   idMayorDeEdad: number = 1; //Es necesario crear la constante y consultarla
+   idMayorDeEdad: number = 1; // Es necesario crear la constante y consultarla
    editing: boolean = false;
    ecdBackUp: EmployeesClinicalData;
 
@@ -92,28 +92,30 @@ export class ClinicalInformationComponent {
    diagnosticSearch( event: any ) {
       this.diagnosticCIEServices.getByWildCard( event.query ).subscribe( diagnostics => {
          this.diagnosticList = diagnostics;
-         this.diagnosticList.map( d => d.label = d.codigo + ' : ' + d.descripcion )
+         this.diagnosticList.map( d => d.label = d.codigo + ' : ' + d.descripcion );
       } );
    }
 
    add() {
       this.ecd = new EmployeesClinicalData();
       this.editing = false;
+      this.tfechaFin = '';
+      this.tfechaInicio = '';
    }
 
    saveDiagnostic() {
-      //toma el temporal y lo agrega a la lista despues de recibir success en la solicitud del guardado
+      // toma el temporal y lo agrega a la lista despues de recibir success en la solicitud del guardado
       if ( this.ecd.idDiagnostico === this.ecd.diagnostico.idDiagnosticoCie ) {
          this.ecd.idTercero = this.employee.idTercero;
 
          let fi: moment.Moment = moment( this.tfechaInicio, 'MM/DD/YYYY' );
          let ff: moment.Moment;
-         //this.ecd.fechaInicio = fi.format('YYYY-MM-DD');
-         this.ecd.fechaInicio = fi.add( 3, 'days' ).format( 'YYYY-MM-DD' );
+         // this.ecd.fechaInicio = fi.format('YYYY-MM-DD');
+         this.ecd.fechaInicio = fi.format( 'YYYY-MM-DD' );
          if ( this.tfechaFin !== undefined && this.tfechaFin !== '' ) {
             ff = moment( this.tfechaFin, 'MM/DD/YYYY' );
-            this.ecd.fechaFin = ff.add( 3, 'days' ).format( 'YYYY-MM-DD' );
-            //this.ecd.fechaFin = ff.format('YYYY-MM-DD');
+            this.ecd.fechaFin = ff.format( 'YYYY-MM-DD' );
+            // this.ecd.fechaFin = ff.format('YYYY-MM-DD');
          }
 
          if ( this.ecd.idTerceroDatoClinico !== null && this.ecd.idTerceroDatoClinico !== undefined ) {
@@ -121,8 +123,8 @@ export class ClinicalInformationComponent {
                if ( data.ok ) {
                   this.ecd.codigo = this.ecd.diagnostico.codigo;
                   this.ecd.descripcion = this.ecd.diagnostico.descripcion;
-                  this.ecd.fechaFin = ff.subtract( 3, 'days' ).format( 'YYYY-MM-DD' );
-                  this.ecd.fechaInicio = fi.subtract( 3, 'days' ).format( 'YYYY-MM-DD' );
+                  this.ecd.fechaFin = ff.format( 'YYYY-MM-DD' );
+                  this.ecd.fechaInicio = fi.format( 'YYYY-MM-DD' );
                   this.clinicalInformations.push( this.ecd );
                   this.tfechaFin = '';
                   this.tfechaInicio = '';
@@ -161,10 +163,6 @@ export class ClinicalInformationComponent {
       this.maxDateInicio.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
    }
 
-   detail( f: EmployeesClinicalData ) {
-
-   }
-
    update( f: EmployeesClinicalData ) {
       this.ecdBackUp = f;
       let fi: moment.Moment = moment( f.fechaInicio, 'YYYY-MM-DD' );
@@ -188,6 +186,8 @@ export class ClinicalInformationComponent {
       this.clinicalInformations.splice( this.clinicalInformations.indexOf( f ), 1 );
       this.editing = true;
       this.maxDateFin = new Date();
+      let d = new Date( Date.parse( this.tfechaInicio ) );
+      this.minDateFin.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
    }
 
    goBack(): void {

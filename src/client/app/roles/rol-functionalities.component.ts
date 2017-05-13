@@ -58,7 +58,9 @@ export class RolFuncionalitiesComponent implements OnInit {
       this.msgs = [];
       this.showForm = false;
 
-      if ( this.rolFuncionality.idRolFuncionalidad === null || this.rolFuncionality.idRolFuncionalidad === 0 ) {
+      if ( this.rolFuncionality.idRolFuncionalidad === null ||
+           this.rolFuncionality.idRolFuncionalidad === 0 ||
+           this.rolFuncionality.idRolFuncionalidad === undefined ) {
          this.rolFuncionality.idRol = this.idRol;
          this.rolFuncionalitiesService.add( this.rolFuncionality )
          .subscribe( data => {
@@ -114,7 +116,7 @@ export class RolFuncionalitiesComponent implements OnInit {
    }
 
    config( r: RolFuncionalities ) {
-      this.router.navigate( [ 'roles-funcionalities-config/' + r.idRolFuncionalidad ] );
+      this.router.navigate( [ 'roles/update/'+r.idRol+'/funcionalities-config/' + r.idRolFuncionalidad ] );
    }
 
 }

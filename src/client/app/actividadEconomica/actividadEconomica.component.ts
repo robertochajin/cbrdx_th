@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActividadEconomica } from '../_models/actividadEconomica';
 import { ActividadEconomicaTipos } from '../_models/actividadEconomicaTipos';
@@ -6,15 +6,16 @@ import { ActividadEconomicaService } from '../_services/actividadEconomica.servi
 import { TreeNode } from 'primeng/components/common/api';
 import { Message, SelectItem } from 'primeng/primeng';
 import { Search } from '../_models/search';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
                templateUrl: 'actividadEconomica.component.html',
-               selector: 'actividadEconomica'
+               selector: 'actividad-economica'
             } )
-export class ActividadEconomicaComponent implements OnInit {
+export class ActividadEconomicaComponent {
 
-   msgs: Message[] = [];
+   msg: Message;
    actividadEconomica: ActividadEconomica = new ActividadEconomica();
    listadoActividadEconomica: ActividadEconomica[];
    activityTypes: ActividadEconomicaTipos[] = [];
@@ -33,36 +34,41 @@ export class ActividadEconomicaComponent implements OnInit {
       parent: '',
       idparent: 0
    };
+
    btnsubactivity: { show: boolean, label: string, idparent: number, parent: string } = {
       show: false,
       label: '',
       parent: '',
       idparent: 0
    };
+
    codeExists: boolean = false;
    displayDialog: boolean = false;
    resultSearch: Search[];
    selectedSearch: SelectItem;
+   guardado = false;
 
    constructor( private router: Router,
-      private actividadEconomicaService: ActividadEconomicaService ) {
+      private actividadEconomicaService: ActividadEconomicaService,
+      private navService: NavService
+   ) {
 
       actividadEconomicaService.listActividadEconomica().subscribe( res => {
          this.listadoActividadEconomica = res;
-         for ( let c of this.listadoActividadEconomica.filter( t => t.idActividadPadre == 0 ) ) {
+         for ( let c of this.listadoActividadEconomica.filter( t => t.idActividadPadre === 0 ) ) {
             this.treeActividadEconomica.push( {
-                                                 "value": c.idActividadEconomica,
-                                                 "label": c.actividadEconomica,
-                                                 "level": 1,
+                                                 'value': c.idActividadEconomica,
+                                                 'label': c.actividadEconomica,
+                                                 'level': 1,
 
-                                                 "codigo": c.codigoActividadEconomica,
-                                                 "children": [ {
-                                                    "value": 0,
-                                                    "label": '+ Cargando...',
-                                                    "level": 2,
-                                                    "codigo": '',
-                                                    "data": c,
-                                                    "children": {}
+                                                 'codigo': c.codigoActividadEconomica,
+                                                 'children': [ {
+                                                    'value': 0,
+                                                    'label': '+ Cargando...',
+                                                    'level': 2,
+                                                    'codigo': '',
+                                                    'data': c,
+                                                    'children': {}
                                                  }
                                                  ]
                                               } );
@@ -75,10 +81,6 @@ export class ActividadEconomicaComponent implements OnInit {
       } );
    }
 
-   ngOnInit(): void {
-
-   }
-
    goBack(): void {
       this.router.navigate( [ 'actividadEconomica' ] );
    }
@@ -87,27 +89,27 @@ export class ActividadEconomicaComponent implements OnInit {
       let actividadEconomicaNivel: any[] = [];
 
       let chil: any;
-      if ( node.level == 3 ) {
+      if ( node.level === 3 ) {
          chil = [];
       } else {
          chil = [ {
-            "value": 0,
-            "label": '+ Cargando...',
-            "level": node.level + 2,
-            "codigo": ''
+            'value': 0,
+            'label': '+ Cargando...',
+            'level': node.level + 2,
+            'codigo': ''
          }
-         ]
+         ];
       }
 
-      for ( let c of this.listadoActividadEconomica.filter( t => t.idActividadPadre == node.value ) ) {
+      for ( let c of this.listadoActividadEconomica.filter( t => t.idActividadPadre === node.value ) ) {
          actividadEconomicaNivel.push( {
-                                          "value": c.idActividadEconomica,
-                                          "label": c.actividadEconomica,
-                                          "level": node.level + 1,
-                                          "parent": node,
-                                          "data": c,
-                                          "codigo": c.codigoActividadEconomica,
-                                          "children": chil
+                                          'value': c.idActividadEconomica,
+                                          'label': c.actividadEconomica,
+                                          'level': node.level + 1,
+                                          'parent': node,
+                                          'data': c,
+                                          'codigo': c.codigoActividadEconomica,
+                                          'children': chil
 
                                        } );
       }
@@ -124,9 +126,9 @@ export class ActividadEconomicaComponent implements OnInit {
 
       switch ( this.tabselected ) {
          case 1:
-            this.labelfieldactividad = "Nombre";
+            this.labelfieldactividad = 'Nombre';
             this.labelPadre = '';
-            this.labelTipo = "Tipo: " + this.getTypebyCodigo( '1' );
+            this.labelTipo = 'Tipo: ' + this.getTypebyCodigo( '1' );
             this.btnactivity = {
                show: true,
                label: 'Agregar Sección',
@@ -144,9 +146,9 @@ export class ActividadEconomicaComponent implements OnInit {
 
          case 2:
 
-            this.labelfieldactividad = "Nombre " + this.getTypebyCodigo( '2' );
-            this.labelPadre = this.getTypebyCodigo( '1' ) + ": " + node.parent.label;
-            this.labelTipo = "Tipo: " + this.getTypebyCodigo( '2' );
+            this.labelfieldactividad = 'Nombre ' + this.getTypebyCodigo( '2' );
+            this.labelPadre = this.getTypebyCodigo( '1' ) + ': ' + node.parent.label;
+            this.labelTipo = 'Tipo: ' + this.getTypebyCodigo( '2' );
             this.btnsubactivity = {
                show: true,
                label: 'Agregar ' + this.getTypebyCodigo( '3' ),
@@ -158,9 +160,9 @@ export class ActividadEconomicaComponent implements OnInit {
 
          case 3:
 
-            this.labelfieldactividad = "Nombre " + this.getTypebyCodigo( '3' );
-            this.labelPadre = this.getTypebyCodigo( '2' ) + ": " + node.parent.label;
-            this.labelTipo = "Tipo: " + this.getTypebyCodigo( '3' );
+            this.labelfieldactividad = 'Nombre ' + this.getTypebyCodigo( '3' );
+            this.labelPadre = this.getTypebyCodigo( '2' ) + ': ' + node.parent.label;
+            this.labelTipo = 'Tipo: ' + this.getTypebyCodigo( '3' );
             this.btnsubactivity = {
                show: true,
                label: 'Agregar ' + this.getTypebyCodigo( '4' ),
@@ -172,9 +174,9 @@ export class ActividadEconomicaComponent implements OnInit {
 
          case 4:
 
-            this.labelfieldactividad = "Nombre " + this.getTypebyCodigo( '3' );
-            this.labelPadre = this.getTypebyCodigo( '3' ) + ": " + node.parent.label;
-            this.labelTipo = "Tipo: " + this.getTypebyCodigo( '4' );
+            this.labelfieldactividad = 'Nombre ' + this.getTypebyCodigo( '3' );
+            this.labelPadre = this.getTypebyCodigo( '3' ) + ': ' + node.parent.label;
+            this.labelTipo = 'Tipo: ' + this.getTypebyCodigo( '4' );
             break;
 
       }
@@ -187,48 +189,53 @@ export class ActividadEconomicaComponent implements OnInit {
    }
 
    save() {
-      if ( this.actividadEconomica.idActividadEconomica == null || this.actividadEconomica.idActividadEconomica == 0 ) {
-         this.msgs.push( { severity: 'info', summary: 'Guardando...', detail: 'Nuevo registro' } );
+
+      if ( this.actividadEconomica.idActividadEconomica === null ||
+           this.actividadEconomica.idActividadEconomica === 0 ||
+           this.actividadEconomica.idActividadEconomica === undefined ) {
+         this.guardado = true;
          this.actividadEconomicaService.addActividadEconomica( this.actividadEconomica ).then( data => {
-            console.info( this.tabselected );
-            console.info( this.selectedNode );
+            this.guardado = false;
+            let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
             let chil: any[] = [];
             let nivel = 1;
-            if ( this.selectedNode )
+            if ( this.selectedNode ) {
                nivel = this.selectedNode.level;
-            else
+            } else {
                nivel = 1;
+            }
 
-            if ( this.tabselected == 1 ) {
+            if ( this.tabselected === 1 ) {
                chil = [ {
-                  "value": 0,
-                  "label": '+ Cargando...',
-                  "level": this.tabselected + 1,
-                  "codigo": ''
+                  'value': 0,
+                  'label': '+ Cargando...',
+                  'level': this.tabselected + 1,
+                  'codigo': ''
                }
                ];
 
             } else {
                if ( nivel <= 3 ) {
                   chil = [ {
-                     "value": 0,
-                     "label": '+ Cargando...',
-                     "level": this.tabselected + 1,
-                     "codigo": ''
+                     'value': 0,
+                     'label': '+ Cargando...',
+                     'level': this.tabselected + 1,
+                     'codigo': ''
                   }
                   ];
                }
             }
 
             let newChil: any = {
-               "label": this.actividadEconomica.actividadEconomica,
-               "value": data.idActividadEconomica,
-               "level": this.tabselected,
-               "codigo": this.actividadEconomica.codigoActividadEconomica,
-               "children": chil
+               'label': this.actividadEconomica.actividadEconomica,
+               'value': data.idActividadEconomica,
+               'level': this.tabselected,
+               'codigo': this.actividadEconomica.codigoActividadEconomica,
+               'children': chil
             };
             this.listadoActividadEconomica.push( data );
-            if ( this.actividadEconomica.idActividadPadre == 0 ) {
+            if ( this.actividadEconomica.idActividadPadre === 0 ) {
                this.treeActividadEconomica.push( newChil );
                this.newActivity();
             } else {
@@ -236,14 +243,18 @@ export class ActividadEconomicaComponent implements OnInit {
                this.newSubActivity();
             }
 
+         }, error => {
+            this.guardado = false;
+            let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
          } );
       } else {
-         this.msgs.push( {
-                            severity: 'info', summary: 'Guardando...',
-                            detail: 'Actualizando registro'
-                         } );
+         this.guardado = true;
          this.actividadEconomicaService.updateActividadEconomica( this.actividadEconomica )
          .then( () => {
+            this.guardado = false;
+            let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
             this.selectedNode.label = this.actividadEconomica.actividadEconomica;
             this.header = this.actividadEconomica.actividadEconomica;
             for ( let i = 0; i < this.listadoActividadEconomica.length; i++ ) {
@@ -252,12 +263,17 @@ export class ActividadEconomicaComponent implements OnInit {
                   return;
                }
             }
+         }, error => {
+            let typeMessage = 3; // 1 = Add, 2 = Update, 3 = Error, 4 Custom
+            this.navService.setMesage( typeMessage, this.msg );
          } );
       }
    }
 
    doCancel() {
-      if ( this.actividadEconomica.actividadEconomica == null || this.actividadEconomica.idActividadEconomica == 0 ) {
+      if ( this.actividadEconomica.actividadEconomica === null ||
+           this.actividadEconomica.idActividadEconomica === 0 ||
+           this.actividadEconomica.idActividadEconomica === undefined ) {
          this.actividadEconomica = new ActividadEconomica;
       } else {
          this.actividadEconomicaService.viewActividadEconomica( this.actividadEconomica.idActividadEconomica )
@@ -272,12 +288,12 @@ export class ActividadEconomicaComponent implements OnInit {
       this.actividadEconomica = new ActividadEconomica();
       this.tabselected = 1;
       this.header = 'Nueva Sección';
-      this.labelfieldactividad = "Nombre";
+      this.labelfieldactividad = 'Nombre';
       this.actividadEconomica.idActividadPadre = 0;
-      this.actividadEconomica.idActividadTipo = this.getIdTypebyCodigo( "1" );
+      this.actividadEconomica.idActividadTipo = this.getIdTypebyCodigo( '1' );
       this.actividadEconomica.indicadorHabilitado = true;
       this.labelPadre = '';
-      this.labelTipo = "Tipo: " + this.getTypebyCodigo( '1' );
+      this.labelTipo = 'Tipo: ' + this.getTypebyCodigo( '1' );
 
    }
 
@@ -286,18 +302,18 @@ export class ActividadEconomicaComponent implements OnInit {
       this.tabselected = this.selectedNode.level + 1;
       this.labeltabselected = this.tabselected.toString();
       this.header = 'Nuevo ' + this.getTypebyCodigo( this.labeltabselected );
-      this.labelfieldactividad = "Nombre " + this.getTypebyCodigo( this.labeltabselected );
+      this.labelfieldactividad = 'Nombre ' + this.getTypebyCodigo( this.labeltabselected );
       this.actividadEconomica.idActividadPadre = this.btnsubactivity.idparent;
       this.actividadEconomica.codigoActividadEconomica = this.selectedNode.codigo;
       this.actividadEconomica.idActividadTipo = this.getIdTypebyCodigo( this.labeltabselected );
       this.actividadEconomica.indicadorHabilitado = true;
-      this.labelPadre = this.getTypebyCodigo( this.selectedNode.level.toString() ) + ": " + this.btnsubactivity.parent;
-      this.labelTipo = "Tipo: " + this.getTypebyCodigo( this.labeltabselected );
+      this.labelPadre = this.getTypebyCodigo( this.selectedNode.level.toString() ) + ': ' + this.btnsubactivity.parent;
+      this.labelTipo = 'Tipo: ' + this.getTypebyCodigo( this.labeltabselected );
    }
 
    getTypebyCodigo( id: string ) {
       let nameactividadEconomica = '';
-      for ( let c of  this.activityTypes.filter( t => t.codigoActividadTipo.toString() == id ) ) {
+      for ( let c of  this.activityTypes.filter( t => t.codigoActividadTipo.toString() === id ) ) {
          nameactividadEconomica = c.descripcionActividadTipo;
       }
       return nameactividadEconomica;
@@ -307,7 +323,7 @@ export class ActividadEconomicaComponent implements OnInit {
    getIdTypebyCodigo( id: string ) {
       let idActividadEconomicaTipo = 0;
 
-      for ( let c of  this.activityTypes.filter( t => t.codigoActividadTipo.toString() == id ) ) {
+      for ( let c of  this.activityTypes.filter( t => t.codigoActividadTipo.toString() === id ) ) {
          idActividadEconomicaTipo = c.idActividadEconomicaTipo;
       }
       return idActividadEconomicaTipo;
@@ -341,8 +357,8 @@ export class ActividadEconomicaComponent implements OnInit {
          } else {
             this.labelPadre = '';
          }
-         this.labelTipo = "Tipo: " + this.activityTypes
-            .find( t => t.idActividadEconomicaTipo == res.idActividadTipo ).descripcionActividadTipo;
+         this.labelTipo = 'Tipo: ' + this.activityTypes
+            .find( t => t.idActividadEconomicaTipo === res.idActividadTipo ).descripcionActividadTipo;
 
          setTimeout( () => {
             // Scroll to Select
@@ -356,31 +372,31 @@ export class ActividadEconomicaComponent implements OnInit {
 
    }
 
-   private searchRecursive( res: ActividadEconomica ) {
+   searchRecursive( res: ActividadEconomica ) {
       let node4: number = 0;
       let node3: number = 0;
       let node2: number = 0;
       let node1: number = 0;
-      let nivel = this.activityTypes.find( t => t.idActividadEconomicaTipo == res.idActividadTipo ).codigoActividadTipo;
+      let nivel = this.activityTypes.find( t => t.idActividadEconomicaTipo === res.idActividadTipo ).codigoActividadTipo;
 
       switch ( nivel.toString() ) {
-         case "1":
+         case '1':
             node1 = res.idActividadEconomica;
             break;
-         case "2":
+         case '2':
             node2 = res.idActividadEconomica;
             node1 = res.idActividadPadre;
             break;
-         case "3":
+         case '3':
             node3 = res.idActividadEconomica;
             node2 = res.idActividadPadre;
-            node1 = this.listadoActividadEconomica.find( t => t.idActividadEconomica == res.idActividadPadre ).idActividadPadre;
+            node1 = this.listadoActividadEconomica.find( t => t.idActividadEconomica === res.idActividadPadre ).idActividadPadre;
             break;
-         case "4":
+         case '4':
             node4 = res.idActividadEconomica;
             node3 = res.idActividadPadre;
-            node2 = this.listadoActividadEconomica.find( t => t.idActividadEconomica == node3 ).idActividadPadre;
-            node1 = this.listadoActividadEconomica.find( t => t.idActividadEconomica == node2 ).idActividadPadre;
+            node2 = this.listadoActividadEconomica.find( t => t.idActividadEconomica === node3 ).idActividadPadre;
+            node1 = this.listadoActividadEconomica.find( t => t.idActividadEconomica === node2 ).idActividadPadre;
             break;
       }
       if ( node1 > 0 ) {
@@ -401,11 +417,11 @@ export class ActividadEconomicaComponent implements OnInit {
       this.nodeSelect( this.selectedNode );
    }
 
-   private searchLevel( id: number, tipo: number ) {
+   searchLevel( id: number, tipo: number ) {
 
-      if ( tipo == 1 ) {
+      if ( tipo === 1 ) {
          this.treeActividadEconomica.forEach( node => {
-            if ( node.value == id ) {
+            if ( node.value === id ) {
                node.expanded = true;
                this.nodeExpand( node );
                this.selectedNode = node;
@@ -416,7 +432,7 @@ export class ActividadEconomicaComponent implements OnInit {
       } else {
          if ( this.selectedNode.children ) {
             this.selectedNode.children.forEach( childNode => {
-               if ( childNode.value == id ) {
+               if ( childNode.value === id ) {
                   childNode.expanded = true;
                   this.nodeExpand( childNode );
                   this.selectedNode = childNode;
@@ -430,7 +446,7 @@ export class ActividadEconomicaComponent implements OnInit {
 
    capitalizeCodigo() {
       let input = this.actividadEconomica.codigoActividadEconomica;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.actividadEconomica.codigoActividadEconomica = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
 
       }
@@ -438,7 +454,7 @@ export class ActividadEconomicaComponent implements OnInit {
 
    capitalizeName() {
       let input = this.actividadEconomica.actividadEconomica;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.actividadEconomica.actividadEconomica = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }

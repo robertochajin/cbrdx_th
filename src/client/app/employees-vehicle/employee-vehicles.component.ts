@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EmployeeVehicle } from '../_models/employee-vehicle';
 import { EmployeeVehicleService } from '../_services/employee-vehicles.service';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { Employee } from '../_models/employees';
                selector: 'employees-vehicle',
                providers: [ ConfirmationService ]
             } )
-export class EmployeesVehicleComponent {
+export class EmployeesVehicleComponent implements OnInit {
    @Input() employee: Employee;
    employeeVehicle: EmployeeVehicle = new EmployeeVehicle();
    dialogObjet: EmployeeVehicle = new EmployeeVehicle();
@@ -53,15 +53,16 @@ export class EmployeesVehicleComponent {
                                         } );
    }
 
-   detail( f: EmployeeVehicle ) {
-      this.router.navigate( [ 'employees-vehicle/detail/' + f.idTerceroVehiculo ] );
+
+   add() {
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/vehicle/add/' ] );
+   }
+
+   detail( c: EmployeeVehicle ) {
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/vehicle/detail/' + c.idTerceroVehiculo ] );
    }
 
    update( c: EmployeeVehicle ) {
-      this.router.navigate( [ 'employees-vehicle/update/' + c.idTerceroVehiculo ] );
-   }
-
-   add() {
-      this.router.navigate( [ 'employees-vehicle/add/' + this.employee.idTercero ] );
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/vehicle/update/' + c.idTerceroVehiculo  ] );
    }
 }

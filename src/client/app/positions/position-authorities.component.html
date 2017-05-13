@@ -35,7 +35,7 @@
       <div class="col-md-12">
          <p-dataTable [value]="listAbsenceSUP" [paginator]="true" [rows]="10" [responsive]="true">
             <p-column field="cargoRelacion" header="{{ 'POSITION.LBL_CARGO' | translate }}" [sortable]="true"></p-column>
-            <p-column header="{{ 'POSITION.LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+            <p-column header="{{ 'LBL_ACCION' | translate }}" styleClass="datatable-col-action">
                <template let-absence="rowData" pTemplate="body">
                   <button type="button" icon="fa-trash" class="ui-button-danger"
                           pButton (click)="del(absence)"></button>

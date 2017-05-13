@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { EmployeeEstate } from '../_models/employee-estate';
@@ -17,7 +17,7 @@ import { ListaService } from '../_services/lista.service';
                providers: [ ConfirmationService ]
             } )
 
-export class EmployeesEstateAddComponent {
+export class EmployeesEstateAddComponent implements OnInit {
    @Input()
    employeeEstate: EmployeeEstate = new EmployeeEstate();
    header: string = 'Agregando Inmueble';
@@ -48,8 +48,8 @@ export class EmployeesEstateAddComponent {
       this.year = year;
 
       this.route.params.subscribe( ( params: Params ) => {
-         this.employeeEstate.idTercero = Number( +params[ 'idTercero' ] );
-         this.idTercero = Number( +params[ 'idTercero' ] );
+         this.employeeEstate.idTercero = Number( +params[ 'tercero' ] );
+         this.idTercero = Number( +params[ 'tercero' ] );
       } );
 
       this.listaService.getMasterDetails( 'ListasTiposViviendas' ).subscribe( res => {
@@ -81,6 +81,7 @@ export class EmployeesEstateAddComponent {
    }
 
    onSubmit() {
+      this.employeeEstate.idTercero = this.idTercero;
       this.employeesEsatesService.add( this.employeeEstate )
       .subscribe( data => {
          this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );

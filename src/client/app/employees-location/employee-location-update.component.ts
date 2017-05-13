@@ -90,8 +90,9 @@ export class LocationUpdateComponent implements OnInit {
             this.locationService.get( this.localizacion.idLocalizacion ).subscribe( l => {
                this.terceroLocalizacion = l;
                this.tercerosResidenciasServices.getByTerceroLocalizacion( l.idTerceroLocalizacion ).subscribe( residencia => {
-                  if ( residencia !== undefined )
+                  if ( residencia !== undefined ) {
                      this.residencia = residencia;
+                  }
                } );
             } );
          } );
@@ -191,7 +192,7 @@ export class LocationUpdateComponent implements OnInit {
    capturePrincipalNomenclature() {
       for ( let n of this.principalNomenclatureList ) {
          if ( n.value === this.selectedPrincipalNomenclature ) {
-            this.labelPrincipalNomenclature = n.label
+            this.labelPrincipalNomenclature = n.label;
             break;
          }
       }
@@ -210,7 +211,9 @@ export class LocationUpdateComponent implements OnInit {
       this.finalAddress += this.numberOne === undefined ? '' : this.numberOne + ' - ';
       this.finalAddress += this.numberTwo === undefined ? '' : this.numberTwo + ' ';
 
-      if ( this.finalAddress !== '' && this.localizacion.locacion !== undefined && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined ) {
+      if ( this.finalAddress !== '' && this.localizacion.locacion !== undefined &&
+           this.localizacion.locacion.camino !== '' &&
+           this.localizacion.locacion.camino !== undefined ) {
          let geocoder = new google.maps.Geocoder();
 
          const assingLocation = ( l: any, t: any ) => {
@@ -218,9 +221,9 @@ export class LocationUpdateComponent implements OnInit {
             this.localizacion.longitud = t;
          };
 
-         //Asumiendo que el camino obtenido de la busqueda tiene un máximo de 4 níveles
-         //Se hace el conteo de 3 comas par identificar si la selección fue de una división politica de nivel 4 (barrio/vereda)
-         //para hacerle el tratamiento al string con el cual se hace la busqueda en el API de maps.google
+         // Asumiendo que el camino obtenido de la busqueda tiene un máximo de 4 níveles
+         // Se hace el conteo de 3 comas par identificar si la selección fue de una división politica de nivel 4 (barrio/vereda)
+         // para hacerle el tratamiento al string con el cual se hace la busqueda en el API de maps.google
          let strToSearch = '';
          if ( ((this.localizacion.locacion.camino.match( /,/g ) || []).length) === 3 ) {
             strToSearch = this.localizacion.locacion.camino.substr( this.localizacion.locacion.camino.indexOf( ',' ) );
@@ -244,18 +247,21 @@ export class LocationUpdateComponent implements OnInit {
 
                                  assingLocation( latitude, longitude );
                               } else {
-                                 document.getElementById( 'graphMap' ).innerHTML = "La busqueda no arroja ningun resultado";
+                                 document.getElementById( 'graphMap' ).innerHTML = 'La busqueda no arroja ningun resultado';
                                  assingLocation( '', '' );
                               }
                            } );
       }
 
       for ( let c of this.complementaries ) {
-         if ( c.tipo !== null )
+         if ( c.tipo !== null ) {
             this.finalAddress += c.tipo + ' ' + c.detalle + ' ';
+         }
       }
 
-      if ( this.localizacion.locacion !== undefined && this.localizacion.locacion.camino !== '' && this.localizacion.locacion.camino !== undefined ) {
+      if ( this.localizacion.locacion !== undefined &&
+           this.localizacion.locacion.camino !== '' &&
+           this.localizacion.locacion.camino !== undefined ) {
          this.finalAddress += this.localizacion.locacion.camino;
       }
    }
@@ -270,9 +276,6 @@ export class LocationUpdateComponent implements OnInit {
       this.composeAddress();
    }
 
-   // discard(): void {
-   //   this.dismiss.emit(1);
-   // }
 
    goBack(): void {
       this.confirmationService.confirm( {
@@ -280,11 +283,8 @@ export class LocationUpdateComponent implements OnInit {
                                            header: 'Corfirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
-                                              //this.router.navigate(['/employees-family-information']);
                                               this._nav.setTab( 4 );
                                               this.location.back();
-                                           },
-                                           reject: () => {
                                            }
                                         } );
    }

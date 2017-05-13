@@ -21,15 +21,15 @@ export class RolesService {
    }
 
    getDashboardData() {
-      return this.authHttp.get( this.masterService + "dashboard/" ).map( ( res: Response ) => res.json() as RolCantidad[] );
+      return this.authHttp.get( this.masterService + 'dashboard/' ).map( ( res: Response ) => res.json() as RolCantidad[] );
    }
 
    getAvaliableFunctions( c: number ) {
-      return this.authHttp.get( this.masterService + "usuario/" + c ).map( ( res: Response ) => res.json() as Rol[] );
+      return this.authHttp.get( this.masterService + 'usuario/' + c ).map( ( res: Response ) => res.json() as Rol[] );
    }
 
    getAssignedFunctions( c: number ) {
-      return this.authHttp.get( this.detailService + "vista/" + c ).map( ( res: Response ) => res.json() as VRolMenuElemento[] );
+      return this.authHttp.get( this.detailService + 'vista/' + c ).map( ( res: Response ) => res.json() as VRolMenuElemento[] );
    }
 
    addRole( c: Rol ): Promise<Rol> {

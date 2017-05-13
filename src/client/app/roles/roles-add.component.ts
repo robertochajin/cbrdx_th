@@ -73,7 +73,7 @@ export class RolesAddComponent implements OnInit {
    }
 
    validateCode() {
-      if ( this.rol.codigoRol !== '' && this.rol.codigoRol !== null ) {
+      if ( this.rol.codigoRol !== '' && this.rol.codigoRol !== null && this.rol.codigoRol !== undefined ) {
          this.codeExists = this.roles.filter( t => (t.codigoRol === this.rol.codigoRol && t.idRol !== this.rol.idRol ) ).length > 0;
       } else {
          this.codeExists = false;
@@ -82,7 +82,7 @@ export class RolesAddComponent implements OnInit {
 
    capitalizeCode() {
       let input = this.rol.codigoRol;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined) {
          this.rol.codigoRol = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
       }
    }
@@ -100,23 +100,23 @@ export class RolesAddComponent implements OnInit {
 
    capitalizeName() {
       let input = this.rol.rol;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.rol.rol = input.toUpperCase();
       }
    }
 
    onSubmit() {
 
-      if ( this.fechaInicio !== null ) {
+      if ( this.fechaInicio !== null && this.fechaInicio !== '' && this.fechaInicio !== undefined ) {
          let momInicio: moment.Moment = moment( this.fechaInicio, 'MM/DD/YYYY' );
          this.rol.fechaInicio = momInicio.format( 'YYYY-MM-DD' );
       }
-      if ( this.fechaFin !== null ) {
+      if ( this.fechaFin !== null && this.fechaFin !== '' && this.fechaFin !== undefined ) {
          let momFin: moment.Moment = moment( this.fechaFin, 'MM/DD/YYYY' );
          this.rol.fechaFin = momFin.format( 'YYYY-MM-DD' );
       }
       this.rolesService.addRole( this.rol ).then( res => {
-         this.router.navigate( [ 'roles/update/' + res.idRol + '/true' ] );
+         this.router.navigate( [ 'roles/update/' + res.idRol + '/1' ] );
       } );
 
    }

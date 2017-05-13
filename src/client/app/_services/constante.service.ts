@@ -14,20 +14,20 @@ export class ConstanteService {
    }
 
    listConstants() {
-      return this.authHttp.get( this.serviceURL + "constantes/" ).map( ( res: Response ) => res.json() as VConstante[] );
+      return this.authHttp.get( this.serviceURL + 'constantes/' ).map( ( res: Response ) => res.json() as VConstante[] );
    }
 
    addConstant( c: Constante ): Promise<Constante> {
-      return this.authHttp.post( this.serviceURL + "constantes/", JSON.stringify( c ) ).toPromise().then( res => res.json() as Constante )
+      return this.authHttp.post( this.serviceURL + 'constantes/', JSON.stringify( c ) ).toPromise().then( res => res.json() as Constante )
       .catch( this.handleError );
    };
 
    updateConstant( c: Constante ): Promise<any> {
-      return this.authHttp.put( this.serviceURL + "constantes/", JSON.stringify( c ) ).toPromise().catch( this.handleError );
+      return this.authHttp.put( this.serviceURL + 'constantes/', JSON.stringify( c ) ).toPromise().catch( this.handleError );
    }
 
    viewConstant( id: number ) {
-      return this.authHttp.get( this.serviceURL + "constantes/" + id ).map( res => res.json() as Constante );
+      return this.authHttp.get( this.serviceURL + 'constantes/' + id ).map( res => res.json() as Constante );
    }
 
    handleError( error: any ): Promise<any> {

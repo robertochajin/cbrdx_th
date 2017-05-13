@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormalStudies } from './formal-studies';
 import { AcademicEducationService } from '../_services/academic-education.service';
@@ -11,7 +11,7 @@ import { Employee } from '../_models/employees';
                selector: 'academic-education-formal',
                providers: [ ConfirmationService ]
             } )
-export class FormalStudiesComponent {
+export class FormalStudiesComponent implements OnInit {
 
    @Input() employee: Employee;
 
@@ -49,15 +49,16 @@ export class FormalStudiesComponent {
                                         } );
    }
 
-   detail( f: FormalStudies ) {
-      this.router.navigate( [ 'employees-formal-studies/detail/' + f.idTerceroEstudioFormal ] );
-   }
-
    add() {
-      this.router.navigate( [ 'employees-formal-studies/add/' + this.employee.idTercero ] );
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/formal-studies/add' ] );
    }
 
-   update( f: FormalStudies ) {
-      this.router.navigate( [ 'employees-formal-studies/update/' + f.idTerceroEstudioFormal + '/' + this.employee.idTercero ] );
+   detail( c: FormalStudies ) {
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/formal-studies/detail/' + c.idTerceroEstudioFormal ] );
    }
+
+   update( c: FormalStudies ) {
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/formal-studies/update/' + c.idTerceroEstudioFormal  ] );
+   }
+
 }

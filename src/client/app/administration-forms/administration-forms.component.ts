@@ -10,6 +10,4 @@ export class AdministrationFormsComponent {
    constructor( private router: Router ) {
    }
 
-   ngOnInit() {
-   }
 }

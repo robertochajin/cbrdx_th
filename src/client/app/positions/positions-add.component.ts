@@ -9,6 +9,7 @@ import { ListPositionsService } from '../_services/lists-positions.service';
 import { TipoDeAreaService } from '../_services/tipoDeArea.service';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -24,9 +25,10 @@ export class PositionsAddComponent {
    bossPositionTypes: SelectItem[] = [];
    listStudies: SelectItem[] = [];
    stateTypes: SelectItem[] = [];
-   msgs: Message[] = [];
+   msg: Message;
    defaultState: any;
    step = 1;
+   acordion = 0;
 
    constructor( private positionsService: PositionsService,
       private router: Router,
@@ -35,7 +37,9 @@ export class PositionsAddComponent {
       private location: Location,
       private listPositionsService: ListPositionsService,
       private tipoDeAreaService: TipoDeAreaService,
-      private confirmationService: ConfirmationService ) {
+      private confirmationService: ConfirmationService,
+      private _nav: NavService
+   ) {
 
       this.positionsService.getListPositions().subscribe( res => {
          this.bossPositionTypes.push( { label: 'Seleccione', value: null } );
@@ -67,15 +71,15 @@ export class PositionsAddComponent {
    }
 
    onSubmit0() {
-      this.msgs = [];
       this.position.idEstado = this.defaultState.idLista;
       this.position.paso = 2;
       this.positionsService.add( this.position )
       .subscribe( data => {
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         this._nav.setTab(1);
+         this._nav.setMesage( 1, this.msg );
          this.router.navigate( [ 'positions/update/' + data.idCargo ] );
       }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         this._nav.setMesage( 3, this.msg );
       } );
    }
 
@@ -92,7 +96,7 @@ export class PositionsAddComponent {
 
    capitalizeNombre() {
       let input = this.position.cargo;
-      if ( input !== '' && input !== null ) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.position.cargo = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }

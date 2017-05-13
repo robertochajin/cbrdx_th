@@ -17,6 +17,7 @@ import any = jasmine.any;
 @Injectable()
 export class UsuariosService extends TercerosService {
 
+   private refreshServiceURL = '<%= SVC_TH_URL %>/auth/refresh';
    private usuariosServiceURL = '<%= SVC_TH_URL %>/api/usuarios/';
    private usuariosGruposServiceURL = '<%= SVC_TH_URL %>/api/usuariosGruposGestion/';
    private usuariosRolesServiceURL = '<%= SVC_TH_URL %>/api/usuariosRoles/';
@@ -26,12 +27,12 @@ export class UsuariosService extends TercerosService {
    }
 
    listHistory( id: number ) {
-      return this.authHttp.get( this.usuariosServiceURL + "auditoria/Usuarios/" + id )
+      return this.authHttp.get( this.usuariosServiceURL + 'auditoria/Usuarios/' + id )
       .map( ( res: Response ) => res.json() as VHistoricoUsuario[] );
    }
 
    listVUsers() {
-      return this.authHttp.get( this.usuariosServiceURL + "vista/" ).map( ( res: Response ) => res.json() as VUsuario[] );
+      return this.authHttp.get( this.usuariosServiceURL + 'vista/' ).map( ( res: Response ) => res.json() as VUsuario[] );
    }
 
    createUser( p: Usuario ): Promise<Usuario> {
@@ -40,7 +41,7 @@ export class UsuariosService extends TercerosService {
    }
 
    viewUser( id: number ) {
-      return this.authHttp.get( this.usuariosServiceURL + "query/" + id ).map( res => res.json() as Usuario );
+      return this.authHttp.get( this.usuariosServiceURL + 'query/' + id ).map( res => res.json() as Usuario );
    }
 
    updateUser( c: Usuario ) {
@@ -48,9 +49,9 @@ export class UsuariosService extends TercerosService {
    }
 
    updatePass( c: Usuario ) {
-      return this.authHttp.put( this.usuariosServiceURL + "cambiarPass/" + c.contrasenaAntigua + '/', JSON.stringify( c ) ).toPromise()
+      return this.authHttp.put( this.usuariosServiceURL + 'cambiarPass/' + c.contrasenaAntigua + '/', JSON.stringify( c ) ).toPromise()
       .then( res => {
-         if ( res.json() == true ) {
+         if ( res.json() === true ) {
             return true;
          } else {
             return false;
@@ -77,12 +78,12 @@ export class UsuariosService extends TercerosService {
    }
 
    readUserGroups( p: number ) {
-      return this.authHttp.get( this.usuariosGruposServiceURL + "vista/" + p )
+      return this.authHttp.get( this.usuariosGruposServiceURL + 'vista/' + p )
       .map( ( res: Response ) => res.json() as VUsuarioGrupoGestion[] );
    }
 
    readUserRoles( p: number ) {
-      return this.authHttp.get( this.usuariosRolesServiceURL + "vista/" + p ).map( ( res: Response ) => res.json() as VUsuarioRol[] );
+      return this.authHttp.get( this.usuariosRolesServiceURL + 'vista/' + p ).map( ( res: Response ) => res.json() as VUsuarioRol[] );
    }
 
    readAllUserRoles() {
@@ -98,7 +99,7 @@ export class UsuariosService extends TercerosService {
    }
 
    readUserRol( p: number ) {
-      return this.authHttp.get( this.usuariosRolesServiceURL + "query/" + p ).map( ( res: Response ) => res.json() as UsuarioRol );
+      return this.authHttp.get( this.usuariosRolesServiceURL + 'query/' + p ).map( ( res: Response ) => res.json() as UsuarioRol );
    }
 
    updateUserGroup( c: UsuarioGrupoGestion ) {
@@ -115,5 +116,14 @@ export class UsuariosService extends TercerosService {
          c.fechaFin.setHours( 23 );
       }
       return this.authHttp.put( this.usuariosRolesServiceURL, JSON.stringify( c ) ).toPromise().catch( this.handleError );
+   }
+
+   refreshToken() {
+      return this.authHttp.get( this.refreshServiceURL ).toPromise().then( res => {
+         let token = res.json().token;
+         if ( token ) {
+            localStorage.setItem( 'token', token );
+         }
+      } );
    }
 }

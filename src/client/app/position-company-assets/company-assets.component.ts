@@ -21,6 +21,7 @@ export class CompanyAssetsComponent implements OnInit {
    position: Positions;
    listCompanyAssets: ListaItem[] = [];
    companyAssets: CompanyAssets[] = [];
+   elementos: CompanyAssets[] = [];
 
    @Output()
    nextStep: EventEmitter<number> = new EventEmitter<number>();
@@ -38,84 +39,68 @@ export class CompanyAssetsComponent implements OnInit {
    }
 
    ngOnInit() {
-      this.msgsAlert.push( { severity: 'alert', summary: 'Error', detail: 'Debe llenar al menos un registro' } );
+      this.msgsAlert.push( { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un registro' } );
       this.listaService.getMasterDetails( 'ListasTiposElementos' ).subscribe( listCompanyAssets => {
          this.listCompanyAssets = listCompanyAssets;
          this.companyAssetsService.getAllByPosition( this.position.idCargo ).subscribe( res => {
             this.companyAssets = res;
             this.listCompanyAssets.map( ( lca: ListaItem ) => {
-               this.companyAssets.map( ( ca: CompanyAssets ) => {
-                  if ( ca.idTipoElemento === lca.idLista ) {
-                     lca.nombre = ca.descripcion;
-                  }
-               } );
+               let item : CompanyAssets = new CompanyAssets();
+               item = this.companyAssets.find(cas => cas.idTipoElemento === lca.idLista);
+               if(item === undefined) item = new CompanyAssets();
+               item.idCargo = this.position.idCargo;
+               item.nombreLista = lca.nombre;
+               item.codigoLista = lca.codigo;
+               item.idTipoElemento = lca.idLista;
+               this.elementos.push( item );
             } );
          } );
       } );
    }
 
-   update( lca: ListaItem ) {
-      this.companyAssetsService.getAllByPosition( this.position.idCargo ).subscribe( res => {
-         this.companyAssets = res;
-         let obj = this.companyAssets.find( o => lca.idLista === o.idTipoElemento );
-
-         if ( obj !== undefined ) {
-            obj.descripcion = lca.nombre;
-            this.companyAssetsService.update( obj ).subscribe( res => {
-               if ( res.ok ) {
-                  if ( this.permitirSiguiente === false && obj.descripcion !== '' ) {
-                     this.nextStep.emit( 11 );
-                     this.permitirSiguiente = true;
-                  }
-                  if ( obj.descripcion === '' ) {
-                     this.permitirSiguiente = false;
-                  }
-               }
-
-            } );
-         } else {
-            if ( lca.nombre !== '' ) {
-               this.save( lca );
-            } else {
-               this.permitirSiguiente = false;
-            }
-         }
-      } );
-   }
-
-   save( lca: ListaItem ) {
-      let companyAssets = new CompanyAssets();
-      companyAssets.idCargo = this.position.idCargo;
-      companyAssets.idTipoElemento = lca.idLista;
-      companyAssets.descripcion = lca.nombre;
-
-      this.companyAssetsService.add( companyAssets ).subscribe( res => {
-         if ( res.ok ) {
-            if ( this.permitirSiguiente === false ) {
-               this.nextStep.emit( 11 );
-               this.permitirSiguiente = true;
-            }
-         }
-      } );
-   }
-
    next() {
       let num = 0;
-      for ( let elemento of this.listCompanyAssets ) {
-         if ( elemento.nombre === '' || elemento.nombre === null ) { num++; }
+      for ( let elemento of this.elementos ) {
+         if ( elemento.descripcion === undefined || elemento.descripcion === '' || elemento.descripcion === null ) {
+            num++;
+         }
       }
-      if ( this.listCompanyAssets.length === num ) {
+      if ( this.elementos.length === num ) {
          this.alert = true;
       } else {
          this.alert = false;
-         for ( let elemento of this.listCompanyAssets ) {
-            if ( elemento.nombre !== undefined && elemento.nombre !== null ) {
-               this.update( elemento );
+         let it = 1;
+         for ( let elemento of this.elementos ) {
+            if ( elemento.idCargoElemento === undefined ||
+                 elemento.idCargoElemento === 0 || elemento.idCargoElemento === null ) {
+               if ( elemento.descripcion !== '' && elemento.descripcion !== null && elemento.descripcion !== undefined ) {
+                  this.companyAssetsService.add( elemento ).subscribe( res => {
+                     if ( res.idCargoElemento > 0 ) {
+                        it = it + 1;
+                        elemento.idCargoElemento = res.idCargoElemento;
+                        elemento.auditoriaUsuario = res.auditoriaUsuario;
+                        elemento.auditoriaFecha = res.auditoriaFecha;
+                        if(it >= this.elementos.length){
+                           this.nextStep.emit( 11 );
+                        }
+                     }
+                  } );
+               } else {
+                  it = it + 1;
+               }
+            } else {
+               this.companyAssetsService.update( elemento ).subscribe( res => {
+                  if ( res.ok ) {
+                     it = it + 1;
+                     if(it >= this.elementos.length){
+                        this.nextStep.emit( 11 );
+                     }
+                  }
+               } );
             }
+
          }
-         if ( this.permitirSiguiente === true ) {
-            this.nextStep.emit( 11 );
-         }
+
       }
    }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EmployeeEstate } from '../_models/employee-estate';
 import { EmployeeEstateService } from '../_services/employee-estate.service';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { Employee } from '../_models/employees';
                selector: 'employees-estate',
                providers: [ ConfirmationService ]
             } )
-export class EmployeesEstateComponent {
+export class EmployeesEstateComponent implements OnInit {
    @Input() employee: Employee;
    employeeEstate: EmployeeEstate = new EmployeeEstate();
    dialogObjet: EmployeeEstate = new EmployeeEstate();
@@ -53,16 +53,15 @@ export class EmployeesEstateComponent {
                                         } );
    }
 
-   detail( f: EmployeeEstate ) {
-      this.router.navigate( [ 'employees-estate/detail/' + f.idTerceroInmueble ] );
+   add() {
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/estate/add' ] );
+   }
+
+   detail( c: EmployeeEstate ) {
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/estate/detail/' + c.idTerceroInmueble ] );
    }
 
    update( c: EmployeeEstate ) {
-      this.router.navigate( [ 'employees-estate/update/' + c.idTerceroInmueble ] );
-   }
-
-   add() {
-      this.router.navigate( [ 'employees-estate/add/' + this.employee.idTercero ] );
-      //this.router.navigate(['employees-estate/add/'+179 ]);
+      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/estate/update/' + c.idTerceroInmueble  ] );
    }
 }

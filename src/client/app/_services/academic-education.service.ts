@@ -30,7 +30,7 @@ export class AcademicEducationService {
    }
 
    getFormal( id: number ) {
-      return this.authHttp.get( this.masterService + 'buscarId/' + id ).map( ( res: Response ) => res.json() as FormalStudies )
+      return this.authHttp.get( this.masterService + 'buscarId/' + id ).map( ( res: Response ) => res.json() as FormalStudies );
    }
 
    getAllNoFormalByEmployee( id: number ) {

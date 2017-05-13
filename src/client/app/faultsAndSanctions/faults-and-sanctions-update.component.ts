@@ -23,6 +23,7 @@ export class FaultsAndSanctionsUpdateComponent implements OnInit {
    faultsTypes: SelectItem[] = [];
    faultsStatus: SelectItem[] = [];
    msg: Message;
+
    constructor( private faultsAndSanctionsService: FaultsAndSanctionsService,
       private listaService: ListaService,
       private route: ActivatedRoute,

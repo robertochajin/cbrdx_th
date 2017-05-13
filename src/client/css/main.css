@@ -32,6 +32,10 @@ body .ui-widget:disabled {
 .ui-datepicker select.ui-datepicker-year {
    width: 40%;
 }
+/** -- dropdown -- */
+.ui-dropdown-panel{
+   z-index : 800!important;
+}
 
 /*
 ----------------- Cambios Theme AdminLTE ---------------------------------
@@ -50,10 +54,13 @@ body .ui-widget:disabled {
   text-align: center;
 }
 .icon-mainmenu{
-  font-size: 2em;
+   font-size: 1.6em;
 }
 .sidebar-menu > li > a {
   padding: 10px 10px ;
+}
+.sidebar-menu > li > a > .fa{
+   font-size: 1.3em;
 }
 
 /** fix Menu top border */
@@ -64,15 +71,14 @@ body .ui-widget:disabled {
 }
 
 .sidebar-menu .treeview-menu > li > a {
-   padding: 5px 5px 5px 26px;
+   padding: 5px 36px 5px 26px!important;
    white-space: pre-line;
-   padding-right: 36px;
 }
 .sidebar-menu .treeview-menu > li > a > .fa{
    margin-left: -24px;
 }
 .sidebar-menu li > a > .pull-right-container {
-   right: -10px;
+   right: -10px!important;
 }
 .sidebar-menu li > a > .pull-right-container:after { /* This adds the second part of our dropshadow */
    content:"";
@@ -86,6 +92,7 @@ body .ui-widget:disabled {
 }
 .sidebar-menu li > a > .pull-right-container > small {
    margin-right: 0;
+   border-bottom-right-radius: 0!important;
 }
 
 .sidebar-menu li > a > .pull-right-container > small:after {
@@ -172,7 +179,25 @@ a{
   border-left: 10px solid #adadad;
 }
 
+/** -- Notificaciones Globales -- */
+#msgNotificacion{
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: 99999999;
+   width: 99%;
+   margin: 6px;
+}
+#msgNotificacion > .ui-messages{
+   border-width: 4px;
 
+   -webkit-box-shadow: 4px 4px 8px -2px #242424;
+      -moz-box-shadow: 4px 4px 8px -2px #242424;
+        -o-box-shadow: 4px 4px 8px -2px #242424;
+           box-shadow: 4px 4px 8px -2px #242424;
+
+   text-align: center;
+}
 
 
 
@@ -233,9 +258,9 @@ a{
     height: 20px;
     border: 1px solid #ccc;
     display: inline-block;
-    -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    border-radius: 5px;
+       -moz-border-radius: 5px;
+            border-radius: 5px;
 }
 
 .colorwhite {
@@ -263,6 +288,13 @@ a{
       -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
+
+/** ------ Error Form ----- */
+form.ng-invalid .alert-danger{
+   padding: 0 3px;
+   margin-top: 3px;
+}
+
 /**
 ------------------------ General CSS ------------------------------------
  */
@@ -615,9 +647,9 @@ body .ui-tree .ui-treenode .ui-treenode-content .ui-tree-toggler {
 body.skin-blue .ui-button:focus,
 body.skin-blue .ui-button:enabled:hover {
   background-color: #29ABE2!important;
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(41, 171, 226, 0.6);
   -webkit-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(41, 171, 226, 0.6);
-  -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(41, 171, 226, 0.6);
+     -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(41, 171, 226, 0.6);
+          box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(41, 171, 226, 0.6);
 }
 /* -- Paginador Blue -- */
 body.skin-blue .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active:hover {
@@ -630,7 +662,9 @@ body.skin-blue .ui-inputtext:focus {
 }
 body.skin-blue .form-control:focus{
   border-color: #29ABE2!important;
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(41, 171, 226, 0.6);
+   -webkit-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(41, 171, 226, 0.6);
+      -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(41, 171, 226, 0.6);
+           box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(41, 171, 226, 0.6);
 }
 body.skin-blue .user-avatar{
    border: 4px solid #29ABE2;
@@ -642,9 +676,9 @@ body.skin-blue .user-avatar{
 body.skin-black .ui-button:focus,
 body.skin-black .ui-button:enabled:hover {
   background-color: #b1c800!important;
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(177, 200, 0, 0.6);
   -webkit-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(177, 200, 0, 0.6);
-  -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(177, 200, 0, 0.6);
+     -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(177, 200, 0, 0.6);
+          box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(177, 200, 0, 0.6);
 }
 /* -- Paginador Black -- */
 body.skin-black .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active:hover {
@@ -657,7 +691,9 @@ body.skin-black .ui-inputtext:focus {
 }
 body.skin-black .form-control:focus{
   border-color: #29ABE2!important;
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(41, 171, 226, 0.6);
+   -webkit-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(41, 171, 226, 0.6);
+      -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(41, 171, 226, 0.6);
+           box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(41, 171, 226, 0.6);
 }
 body.skin-black .user-avatar{
    border: 4px solid #29ABE2;
@@ -670,9 +706,9 @@ body.skin-black .user-avatar{
 body.skin-green .ui-button:focus,
 body.skin-green .ui-button:enabled:hover {
   background-color: #009c41!important;
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(0, 156, 65, 0.6);
   -webkit-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(0, 156, 65, 0.6);
-  -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(0, 156, 65, 0.6);
+     -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(0, 156, 65, 0.6);
+          box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(0, 156, 65, 0.6);
 }
 /* -- Paginador Green -- */
 body.skin-green .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active:hover {
@@ -698,9 +734,9 @@ body.skin-green .user-avatar{
 body.skin-purple .ui-button:focus,
 body.skin-purple .ui-button:enabled:hover {
   background-color: #605ca8!important;
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(96, 92, 168, 0.6);
   -webkit-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(96, 92, 168, 0.6);
-  -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(96, 92, 168, 0.6);
+     -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(96, 92, 168, 0.6);
+          box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(96, 92, 168, 0.6);
 }
 /* -- Paginador Purple -- */
 body.skin-purple .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active:hover {

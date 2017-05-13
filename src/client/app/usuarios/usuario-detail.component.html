@@ -20,26 +20,31 @@
                     <p></p>
                 </div>
             </div>
-            <div class="col-md-9">
-                <div class="ui-grid-col-4">
-                    <label>{{ 'LBL_GENERO' | translate }} :</label>
-                    <p></p>
-                    <label>{{ 'LBL_CIUDAD' | translate }} :</label>
-                    <p></p>
-                </div>
-                <div class="ui-grid-col-4">
-                    <label>{{ 'LBL_ESTADOCIVIL' | translate }} :</label>
-                    <p></p>
-                    <label>{{ 'LBL_DIRECCIONRESIDENCIA' | translate }} :</label>
-                    <p></p>
-                </div>
-                <div class="ui-grid-col-4">
-                    <label>{{ 'LBL_EPS' | translate }} :</label>
-                    <p></p>
-                    <label>{{ 'LBL_TELEFONO' | translate }} :</label>
-                    <p></p>
-                </div>
-            </div>
+	         <div class="col-md-9">
+		        <div class="ui-grid-col-4">
+			        <label>{{ 'LBL_GENERO' | translate }} :</label>
+			        <p>{{tercero.genero}}</p>
+			        <label>{{ 'LBL_CIUDAD' | translate }} :</label>
+			        <p>{{tercero.ciudadNacimiento}}</p>
+		        </div>
+		        <div class="ui-grid-col-4">
+			        <label>{{ 'LBL_ESTADOCIVIL' | translate }}:</label>
+			        <p>{{tercero.estadoCivil}}</p>
+			        <label>{{ 'EMPLOYEES.LBL_DIRECCIONRESIDENCIA' | translate }}:</label>
+			        <div>
+				        <ul>
+					        <li *ngFor="let l of locations">{{l.direccion}}</li>
+				        </ul>
+			        </div>
+			        <p></p>
+		        </div>
+		        <div class="ui-grid-col-4">
+			        <label>{{ 'LBL_EPS' | translate }} :</label>
+			        <p><i>pendiente diligenciar</i></p>
+			        <label>{{ 'LBL_TELEFONO' | translate }} :</label>
+			        <p>{{tercero.telefonoFijo}}</p>
+		        </div>
+	        </div>
             <div class="col-md-12">
                 <div class="pull-right">
                     <label>{{ 'USUARIOS.LBL_EDITAINFOTERCERO' | translate }}</label>
@@ -117,10 +122,12 @@
         <div class="row datable-header">
             <div class="col-md-6 col-xs-12 datatable-header-add">
             </div>
-            <div class="col-md-6 col-xs-12 datatable-header-search">
-                <i class="fa fa-search"></i>
-                <input #gbs type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}">
-            </div>
+			  <div class="col-md-6 col-xs-12 datatable-header-search">
+				  <div class="input-group">
+					  <div class="input-group-addon"><i class="fa fa-search"></i></div>
+					  <input #gbs type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control">
+				  </div>
+			  </div>
         </div>
         <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="historico" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gbs">
             <p-column field="idAuditoria" header="{{ 'LBL_ID' | translate }}" [sortable]="true"></p-column>
