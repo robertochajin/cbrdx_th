@@ -2,10 +2,12 @@
 <div class="row datable-header">
     <div class="col-md-6 col-xs-12 datatable-header-add">
     </div>
-    <div class="col-md-6 col-xs-12 datatable-header-search">
-        <i class="fa fa-search"></i>
-        <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate}}">
-    </div>
+	<div class="col-md-6 col-xs-12 datatable-header-search">
+		<div class="input-group">
+			<div class="input-group-addon"><i class="fa fa-search"></i></div>
+			<input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control">
+		</div>
+	</div>
 </div>
 <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="listadoListas" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
     <p-column field="idLista" header="{{ 'LBL_ID' | translate}}" [sortable]="true"></p-column>

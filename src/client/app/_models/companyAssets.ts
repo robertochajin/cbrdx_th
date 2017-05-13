@@ -5,4 +5,12 @@ export class CompanyAssets {
    public descripcion: string;
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
+   public nombreLista: string;
+   public codigoLista: string;
+
+   constructor() {
+      this.idCargoElemento = null;
+      this.auditoriaUsuario = null;
+      this.auditoriaFecha = null;
+   }
 }
