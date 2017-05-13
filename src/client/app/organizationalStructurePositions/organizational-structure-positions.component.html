@@ -257,8 +257,7 @@
                </div>
                <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="postionSlots"
                             [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="pl" #dt>
-                  <p-column field="cargo" header="{{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}" [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains">
-                  </p-column>
+                  <p-column field="cargo" header="{{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}" ></p-column>
                   <p-column field="nombreCompleto" header="{{ 'EMPLOYEES.LBL_COLABORADOR' | translate }}" [sortable]="true"></p-column>
                   <p-column field="asignadoDesde" header="{{ 'PLANTACOLABORADORES.LBL_ASIGNADODESDE' | translate }}" [sortable]="true"></p-column>
                   <p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
