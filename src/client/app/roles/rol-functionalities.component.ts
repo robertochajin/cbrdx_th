@@ -116,7 +116,7 @@ export class RolFuncionalitiesComponent implements OnInit {
    }
 
    config( r: RolFuncionalities ) {
-      this.router.navigate( [ 'roles-funcionalities-config/' + r.idRolFuncionalidad ] );
+      this.router.navigate( [ 'roles/update/'+r.idRol+'/funcionalities-config/' + r.idRolFuncionalidad ] );
    }
 
 }

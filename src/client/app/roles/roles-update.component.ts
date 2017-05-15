@@ -36,7 +36,7 @@ export class RolesUpdateComponent implements OnInit {
    ngOnInit() {
       this.route.params.subscribe( params => {
          this.showMsg = params[ 'msj' ];
-         if ( this.showMsg ) {
+         if ( this.showMsg === '1' ) {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          }
       } );

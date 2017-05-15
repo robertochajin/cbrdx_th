@@ -182,12 +182,11 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
 
       this.breadcrumbService.addFriendlyNameForRoute( '/roles', 'Administrador de Roles' );
       this.breadcrumbService.addFriendlyNameForRoute( '/roles/add', 'Nuevo' );
-      this.breadcrumbService.addFriendlyNameForRoute( '/roles/detail', 'Detalle' );
-      this.breadcrumbService.hideRouteRegex( '^/roles/detail/[0-9]*' );
-      this.breadcrumbService.addFriendlyNameForRoute( '/roles/update', 'Actualizar' );
-      this.breadcrumbService.hideRouteRegex( '^/roles/update/[0-9]*' );
-      this.breadcrumbService.hideRouteRegex( '^/roles/update/[0-9]/[0-9]*' );
-
+      this.breadcrumbService.hideRoute( '/roles/update');
+      this.breadcrumbService.addFriendlyNameForRouteRegex( '^/roles/update/[0-9]*$', 'Detalles' );
+      this.breadcrumbService.hideRouteRegex( '^/roles/update/[0-9]*/[0-9]*$' );
+      this.breadcrumbService.hideRouteRegex( '^/roles/update/[0-9]*/funcionalities-config$' );
+      this.breadcrumbService.addFriendlyNameForRouteRegex( '^/roles/update/[0-9]*/funcionalities-config/[0-9]*$','Funcionalidad' );
       this.breadcrumbService.addFriendlyNameForRoute( '/roles-funcionalities-config/[0-9]*', 'Roles Funcionalidades' );
 
       this.breadcrumbService.addFriendlyNameForRoute( '/usuarios', 'Usuarios' );

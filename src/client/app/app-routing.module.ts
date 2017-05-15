@@ -171,8 +171,8 @@ const routes = [
    // employees-Inmuebles
    { path: 'employees/detail/:tercero/estate', component: EmployeesEstateComponent, canActivate: [ AuthGuard ] },
    { path: 'employees/detail/:tercero/estate/add', component: EmployeesEstateAddComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:tercero/estate/update/:id', component: EmployeeEstateDetailComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:tercero/estate/detail/:id', component: EmployeesEstateUpdateComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:tercero/estate/update/:id', component: EmployeesEstateUpdateComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/detail/:tercero/estate/detail/:id', component: EmployeeEstateDetailComponent, canActivate: [ AuthGuard ] },
 
    // employees-Vehiculos
    { path: 'employees/detail/:tercero/vehicle', component: EmployeesVehicleComponent, canActivate: [ AuthGuard ] },
@@ -239,8 +239,7 @@ const routes = [
    { path: 'roles/add', component: RolesAddComponent, canActivate: [ AuthGuard ] },
    { path: 'roles/update/:id', component: RolesUpdateComponent, canActivate: [ AuthGuard ] },
    { path: 'roles/update/:id/:msj', component: RolesUpdateComponent, canActivate: [ AuthGuard ] },
-   { path: 'roles-funcionalities-config/:id', component: RolFuncionalitiesConfigComponent, canActivate: [ AuthGuard ] },
-
+   { path: 'roles/update/:role/funcionalities-config/:id', component: RolFuncionalitiesConfigComponent, canActivate: [ AuthGuard ] },
    //  Usuarios
    { path: 'usuarios', component: UsuariosComponent },
    { path: 'usuarios/add', component: UsuariosAddComponent },

@@ -118,6 +118,10 @@ export class PositionsService {
       return this.authHttp.get( this.serviceURL + 'ocupaciones' ).map( ( res: Response ) => res.json() );
    }
 
+   getListActivitiesByLevel(level: number) {
+      return this.authHttp.get( this.serviceURL + 'ocupaciones/tipo/' + level ).map( ( res: Response ) => res.json() );
+   }
+
    getPositionActivitiesById( id: number ) {
       return this.authHttp.get( this.serviceURL + 'cargosOcupaciones/buscarCargo/' + id )
       .map( ( res: Response ) => res.json() as PositionsActivities[] );

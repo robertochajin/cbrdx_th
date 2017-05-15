@@ -99,6 +99,8 @@ export class ClinicalInformationComponent implements OnInit {
    add() {
       this.ecd = new EmployeesClinicalData();
       this.editing = false;
+      this.tfechaFin = '';
+      this.tfechaInicio = '';
    }
 
    saveDiagnostic() {
@@ -109,10 +111,10 @@ export class ClinicalInformationComponent implements OnInit {
          let fi: moment.Moment = moment( this.tfechaInicio, 'MM/DD/YYYY' );
          let ff: moment.Moment;
          // this.ecd.fechaInicio = fi.format('YYYY-MM-DD');
-         this.ecd.fechaInicio = fi.add( 3, 'days' ).format( 'YYYY-MM-DD' );
+         this.ecd.fechaInicio = fi.format( 'YYYY-MM-DD' );
          if ( this.tfechaFin !== undefined && this.tfechaFin !== '' ) {
             ff = moment( this.tfechaFin, 'MM/DD/YYYY' );
-            this.ecd.fechaFin = ff.add( 3, 'days' ).format( 'YYYY-MM-DD' );
+            this.ecd.fechaFin = ff.format( 'YYYY-MM-DD' );
             // this.ecd.fechaFin = ff.format('YYYY-MM-DD');
          }
 
@@ -121,8 +123,8 @@ export class ClinicalInformationComponent implements OnInit {
                if ( data.ok ) {
                   this.ecd.codigo = this.ecd.diagnostico.codigo;
                   this.ecd.descripcion = this.ecd.diagnostico.descripcion;
-                  this.ecd.fechaFin = ff.subtract( 3, 'days' ).format( 'YYYY-MM-DD' );
-                  this.ecd.fechaInicio = fi.subtract( 3, 'days' ).format( 'YYYY-MM-DD' );
+                  this.ecd.fechaFin = ff.format( 'YYYY-MM-DD' );
+                  this.ecd.fechaInicio = fi.format( 'YYYY-MM-DD' );
                   this.clinicalInformations.push( this.ecd );
                   this.tfechaFin = '';
                   this.tfechaInicio = '';
@@ -184,6 +186,8 @@ export class ClinicalInformationComponent implements OnInit {
       this.clinicalInformations.splice( this.clinicalInformations.indexOf( f ), 1 );
       this.editing = true;
       this.maxDateFin = new Date();
+      let d = new Date( Date.parse( this.tfechaInicio ) );
+      this.minDateFin.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
    }
 
    goBack(): void {

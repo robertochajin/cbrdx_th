@@ -51,7 +51,8 @@
       </div>
       </form>
     </div>
-    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="clinicalInformations"   [paginator]="true" [rows]="10" [responsive]="true">
+    <p-dataTable *ngIf="!ecd" emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="clinicalInformations"   [paginator]="true" [rows]="10"
+                  [responsive]="true">
         <p-column field="codigo" header="{{'LBL_CODIGO' | translate}}" [sortable]="true"></p-column>
         <p-column field="descripcion" header="{{'EMPLOYEES.LBL_DIAGNOSTICO' | translate}}" [sortable]="true"></p-column>
         <p-column field="fechaInicio" header="{{'LBL_FECHAINICIO' | translate}}" [sortable]="true"></p-column>
@@ -65,4 +66,4 @@
         </p-column>
     </p-dataTable>
 </div>
-<p-confirmDialog width="400"></p-confirmDialog>
+	<p-confirmDialog width="400" acceptLabel="{{'BTN_SI' | translate:param }}" rejectLabel="{{'BTN_NO' | translate:param }}"></p-confirmDialog> 

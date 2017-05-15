@@ -32,6 +32,10 @@ body .ui-widget:disabled {
 .ui-datepicker select.ui-datepicker-year {
    width: 40%;
 }
+/** -- dropdown -- */
+.ui-dropdown-panel{
+   z-index : 800!important;
+}
 
 /*
 ----------------- Cambios Theme AdminLTE ---------------------------------
@@ -50,7 +54,7 @@ body .ui-widget:disabled {
   text-align: center;
 }
 .icon-mainmenu{
-  font-size: 2em;
+   font-size: 1.6em;
 }
 .sidebar-menu > li > a {
   padding: 10px 10px ;
