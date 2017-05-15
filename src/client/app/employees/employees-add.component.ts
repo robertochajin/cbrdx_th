@@ -48,6 +48,7 @@ export class EmployeesAddComponent implements OnInit {
    msgs: Message[] = [];
    juridicos: SelectItem[] = [];
    maxDate: Date = null;
+   today: Date = null;
    maxDateDocumento: Date = null;
    range: string;
    es: any;
@@ -187,6 +188,9 @@ export class EmployeesAddComponent implements OnInit {
       this.maxDate = new Date();
       this.maxDate.setMonth( month );
       this.maxDate.setFullYear( year );
+      this.today = new Date();
+      this.today.setMonth( month );
+      this.today.setFullYear( year );
       this.maxDateDocumento = new Date();
       this.maxDateDocumento.setMonth( month );
       this.maxDateDocumento.setFullYear( year );

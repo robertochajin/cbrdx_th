@@ -17,8 +17,8 @@ export class EmployeesClinicalData {
 
    constructor() {
       this.indicadorHabilitado = true;
-      this.fechaInicio= '';
-      this.fechaFin= '';
+      this.fechaInicio = '';
+      this.fechaFin = '';
       this.idDiagnostico = null;
    }
 }

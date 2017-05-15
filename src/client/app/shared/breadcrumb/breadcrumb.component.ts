@@ -80,77 +80,75 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
 
    setAllFriendlyName() {
 
-            this.breadcrumbService.hideRoute( '/dashboard' );
+      this.breadcrumbService.hideRoute( '/dashboard' );
 
       this.breadcrumbService.addFriendlyNameForRoute( '/employees', 'Colaboradores' );
       this.breadcrumbService.addFriendlyNameForRoute( '/employees/add', 'Nuevo' );
-      this.breadcrumbService.hideRoute( '/employees/detail');
+      this.breadcrumbService.hideRoute( '/employees/detail' );
       this.breadcrumbService.addFriendlyNameForRouteRegex( '^/employees/detail/[0-9]*$', 'Detalle' );
-      this.breadcrumbService.hideRoute( '/employees/update');
+      this.breadcrumbService.hideRoute( '/employees/update' );
       this.breadcrumbService.addFriendlyNameForRouteRegex( '^/employees/update/[0-9]*$', 'Actualizar' );
 
-      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/references$');
+      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/references$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex( '^/employees/detail/[0-9]*/references/add$', 'Nueva Referencia' );
-      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/references/detail$');
+      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/references/detail$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex( '^/employees/detail/[0-9]*/references/detail/[0-9]*$', 'Detalles Referencia' );
       this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/references/update$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex( '^/employees/detail/[0-9]*/references/update/[0-9]*$', 'Actualizar Referencia' );
 
-      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/family-information$');
+      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/family-information$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex( '^/employees/detail/[0-9]*/family-information/add$', 'Nuevo Familiar' );
-      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/family-information/detail$');
+      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/family-information/detail$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex(
          '^/employees/detail/[0-9]*/family-information/detail/[0-9]*$', 'Detalles del Familiar' );
       this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/family-information/update$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex(
          '^/employees/detail/[0-9]*/family-information/update/[0-9]*$', 'Actualizar Familiar' );
 
-      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/location$');
+      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/location$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex( '^/employees/detail/[0-9]*/location/add$', 'Nueva Ubicación' );
       this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/location/update$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex(
          '^/employees/detail/[0-9]*/location/update/[0-9]*$', 'Actualizar Ubicación' );
 
-      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/estate$');
+      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/estate$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex( '^/employees/detail/[0-9]*/estate/add$', 'Nuevo Inmueble' );
       this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/estate/update$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex(
          '^/employees/detail/[0-9]*/estate/update/[0-9]*$', 'Actualizar Inmueble' );
 
-      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/vehicle$');
+      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/vehicle$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex( '^/employees/detail/[0-9]*/vehicle/add$', 'Nuevo Vehículo' );
       this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/vehicle/update$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex(
          '^/employees/detail/[0-9]*/vehicle/update/[0-9]*$', 'Actualizar Vehículo' );
 
-      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/formal-studies$');
+      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/formal-studies$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex( '^/employees/detail/[0-9]*/formal-studies/add$', 'Nuevo Estudio' );
       this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/formal-studies/update$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex(
          '^/employees/detail/[0-9]*/formal-studies/update/[0-9]*$', 'Actualizar Estudio' );
-      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/formal-studies/detail$');
+      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/formal-studies/detail$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex(
          '^/employees/detail/[0-9]*/formal-studies/detail/[0-9]*$', 'Detalles del Estudio' );
 
-      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/no-formal-studies$');
+      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/no-formal-studies$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex( '^/employees/detail/[0-9]*/no-formal-studies/add$', 'Nuevo estudio no formal' );
       this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/no-formal-studies/update$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex(
          '^/employees/detail/[0-9]*/no-formal-studies/update/[0-9]*$', 'Actualizar Estudio' );
-      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/no-formal-studies/detail$');
+      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/no-formal-studies/detail$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex(
          '^/employees/detail/[0-9]*/no-formal-studies/detail/[0-9]*$', 'Detalles del Estudio' );
 
-
-      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/work-experience$');
+      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/work-experience$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex( '^/employees/detail/[0-9]*/work-experience/add$', 'Nueva Experiencia' );
       this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/work-experience/update$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex(
          '^/employees/detail/[0-9]*/work-experience/update/[0-9]*$', 'Actualizar Experiencia' );
-      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/work-experience/detail$');
+      this.breadcrumbService.hideRouteRegex( '^/employees/detail/[0-9]*/work-experience/detail$' );
       this.breadcrumbService.addFriendlyNameForRouteRegex(
          '^/employees/detail/[0-9]*/work-experience/detail/[0-9]*$', 'Detalles Experiencia' );
-
 
       this.breadcrumbService.addFriendlyNameForRoute( '/constantes', 'Constantes' );
       this.breadcrumbService.addFriendlyNameForRoute( '/constantes/add', 'Nuevo' );
@@ -182,12 +180,11 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
 
       this.breadcrumbService.addFriendlyNameForRoute( '/roles', 'Administrador de Roles' );
       this.breadcrumbService.addFriendlyNameForRoute( '/roles/add', 'Nuevo' );
-      this.breadcrumbService.addFriendlyNameForRoute( '/roles/detail', 'Detalle' );
-      this.breadcrumbService.hideRouteRegex( '^/roles/detail/[0-9]*' );
-      this.breadcrumbService.addFriendlyNameForRoute( '/roles/update', 'Actualizar' );
-      this.breadcrumbService.hideRouteRegex( '^/roles/update/[0-9]*' );
-      this.breadcrumbService.hideRouteRegex( '^/roles/update/[0-9]/[0-9]*' );
-
+      this.breadcrumbService.hideRoute( '/roles/update' );
+      this.breadcrumbService.addFriendlyNameForRouteRegex( '^/roles/update/[0-9]*$', 'Detalles' );
+      this.breadcrumbService.hideRouteRegex( '^/roles/update/[0-9]*/[0-9]*$' );
+      this.breadcrumbService.hideRouteRegex( '^/roles/update/[0-9]*/funcionalities-config$' );
+      this.breadcrumbService.addFriendlyNameForRouteRegex( '^/roles/update/[0-9]*/funcionalities-config/[0-9]*$', 'Funcionalidad' );
       this.breadcrumbService.addFriendlyNameForRoute( '/roles-funcionalities-config/[0-9]*', 'Roles Funcionalidades' );
 
       this.breadcrumbService.addFriendlyNameForRoute( '/usuarios', 'Usuarios' );

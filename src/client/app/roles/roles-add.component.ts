@@ -82,7 +82,7 @@ export class RolesAddComponent implements OnInit {
 
    capitalizeCode() {
       let input = this.rol.codigoRol;
-      if ( input !== '' && input !== null && input !== undefined) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.rol.codigoRol = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
       }
    }
@@ -116,7 +116,7 @@ export class RolesAddComponent implements OnInit {
          this.rol.fechaFin = momFin.format( 'YYYY-MM-DD' );
       }
       this.rolesService.addRole( this.rol ).then( res => {
-         this.router.navigate( [ 'roles/update/' + res.idRol + '/true' ] );
+         this.router.navigate( [ 'roles/update/' + res.idRol + '/1' ] );
       } );
 
    }

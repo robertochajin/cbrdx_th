@@ -1,10 +1,10 @@
 <p-messages *ngIf="alert" [value]="msgsAlert"></p-messages>
 <div>
-   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listCompanyAssets"
+   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="elementos"
                 [paginator]="false" [responsive]="true" >
       <p-column header="{{ 'POSITION.LBL_ELEMENTOS' | translate }}">
          <template let-asset="rowData" pTemplate="body">
-            {{asset.codigo}} - {{asset.nombre}}
+	         {{asset.codigoLista}} - {{asset.nombreLista}}
          </template>
       </p-column>
       <p-column header="{{ 'POSITION.LBL_DESCRIPCION' | translate }}">

@@ -50,16 +50,15 @@ export class NoFormalStudiesComponent implements OnInit {
                                         } );
    }
 
-
    add() {
-      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/no-formal-studies/add' ] );
+      this.router.navigate( [ 'employees/detail/' + this.employee.idTercero + '/no-formal-studies/add' ] );
    }
 
    detail( c: Noformalstudies ) {
-      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/no-formal-studies/detail/' + c.idTerceroEstudioNoFormal ] );
+      this.router.navigate( [ 'employees/detail/' + this.employee.idTercero + '/no-formal-studies/detail/' + c.idTerceroEstudioNoFormal ] );
    }
 
    update( c: Noformalstudies ) {
-      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/no-formal-studies/update/' + c.idTerceroEstudioNoFormal  ] );
+      this.router.navigate( [ 'employees/detail/' + this.employee.idTercero + '/no-formal-studies/update/' + c.idTerceroEstudioNoFormal ] );
    }
 }

@@ -43,9 +43,11 @@ export class PersonalityComponent implements OnInit {
          this.personalityService.getAllByPosition( this.position.idCargo ).subscribe( res => {
             this.personality = res;
             this.listPersonality.map( ( lca: ListaItem ) => {
-               let item : PositionPersonality = new PositionPersonality();
-               item = this.personality.find(cas => cas.idAtributo === lca.idLista);
-               if(item === undefined) item = new PositionPersonality();
+               let item: PositionPersonality = new PositionPersonality();
+               item = this.personality.find( cas => cas.idAtributo === lca.idLista );
+               if ( item === undefined ) {
+                  item = new PositionPersonality();
+               }
                item.idCargo = this.position.idCargo;
                item.nombreLista = lca.nombre;
                item.codigoLista = lca.codigo;
@@ -77,8 +79,8 @@ export class PersonalityComponent implements OnInit {
                         it = it + 1;
                         elemento.idCargoPersonalidadAtributo = res.idCargoPersonalidadAtributo;
                         elemento.auditoriaUsuario = res.auditoriaUsuario;
-                        elemento.auditoriaFecha = res.auditoriaFechad;
-                        if(it >= this.atributos.length){
+                        elemento.auditoriaFecha = res.auditoriaFecha;
+                        if ( it >= this.atributos.length ) {
                            this.nextStep.emit( 13 );
                         }
                      }
@@ -87,11 +89,10 @@ export class PersonalityComponent implements OnInit {
                   it = it + 1;
                }
             } else {
-               elemento.auditoriaFecha = '';
                this.personalityService.update( elemento ).subscribe( res => {
                   if ( res.ok ) {
                      it = it + 1;
-                     if(it >= this.atributos.length){
+                     if ( it >= this.atributos.length ) {
                         this.nextStep.emit( 13 );
                      }
                   }

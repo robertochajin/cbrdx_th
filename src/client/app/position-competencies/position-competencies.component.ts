@@ -31,7 +31,7 @@ export class PositionCompetenciesComponent implements OnInit {
    @Output()
    nextStep: EventEmitter<number> = new EventEmitter<number>();
 
-   private groups: GroupCompetencies[]=[];
+   private groups: GroupCompetencies[] = [];
    private ponderancies: Ponderancies[];
 
    constructor( private router: Router,
@@ -52,15 +52,12 @@ export class PositionCompetenciesComponent implements OnInit {
 
       this.positionCompetenciesService.getAllByPosition( this.position.idCargo ).subscribe( pcs => {
          this.positionCompetencies = pcs;
-         if ( this.positionCompetencies.length > 0 ) {
-            this.ponderanciesList.splice( 0, 1 );
-         }
          this.groupCompetenciesServices.getAllEnabled().subscribe( groups => {
             groups.map( g => {
                this.competenciesServices.getAllEnabledByGroup( g.idGrupoCompetencia ).subscribe(
                   competencies => {
 
-                     if ( competencies.length > 0) {
+                     if ( competencies.length > 0 ) {
                         g.competencies = competencies;
 
                         g.competencies.map( c => {
