@@ -54,7 +54,7 @@ export class PhysicStructureAddComponent implements OnInit {
    }
 
    inputCleanUp( value: string ) {
-      this.physicStructure.codigo = value.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
+      this.physicStructure.codigo = value.toUpperCase().replace( /[^A-Z0-9]/gi, '' ).trim();
    }
 
    validateCode() {
