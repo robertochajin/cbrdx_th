@@ -83,6 +83,16 @@ export class PositionsService {
       } ).catch( this.handleError );
    }
 
+   getEnabledByEmployee( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'cargos/enabledByEmployee' + id ).map( ( res: Response ) => {
+         if ( res.text() !== '' ) {
+            return res.json() as Positions;
+         } else {
+            return new Positions;
+         }
+      } ).catch( this.handleError );
+   }
+
    getListfaultsTypes() {
       return this.authHttp.get( this.serviceURL + 'cargos' ).map( ( res: Response ) => res.json() );
    }
