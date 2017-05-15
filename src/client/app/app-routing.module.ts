@@ -139,6 +139,9 @@ import { WidgetsComponent } from './widgets/widgets.component';
 import { MenuManagerComponent } from './menuManager/menuManager.component';
 import { UserSessionComponent } from './usuarios/userSession.component';
 
+// asignación a profesional
+import { AssignmentProfessionalComponent } from './assignment-professional/assignment-professional-component';
+
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
@@ -325,6 +328,9 @@ const routes = [
 
    // Administracion
    { path: 'menus', component: MenuManagerComponent, canActivate: [ AuthGuard ] },
+
+   // asignación a profesional
+   { path: 'assignment-professional', component: AssignmentProfessionalComponent, canActivate: [ AuthGuard ] },
 
 ];
 

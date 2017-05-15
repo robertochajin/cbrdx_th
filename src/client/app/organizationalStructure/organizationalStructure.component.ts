@@ -126,7 +126,7 @@ export class OrganizationalStructureComponent {
    capitalizeCode() {
       let input = this.organizationalStructure.codigo;
       if ( input !== '' && input !== null && input !== undefined ) {
-         this.organizationalStructure.codigo = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
+         this.organizationalStructure.codigo = input.toUpperCase().replace( /[^A-Z0-9]/gi, '' ).trim();
       }
    }
 

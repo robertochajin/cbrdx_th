@@ -104,7 +104,7 @@
                                 <label for="codigoPostal" class="control-label col-sm-3">{{ 'DIVISIONPOLITICA.LBL_CODIGOPOSTAL' | translate }}</label>
                                 <div class=" col-sm-9">
                                     <input type="text" pInputText class="form-control" id="codigoPostal"
-                                           name="codigoPostal"
+                                           name="codigoPostal" maxlength="10"
                                            [(ngModel)]="politicalDivision.codigoPostalDivisionPolitica"
                                            #codigoPostal="ngModel">
                                 </div>
