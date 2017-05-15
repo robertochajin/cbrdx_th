@@ -3,10 +3,10 @@
  */
 export class TipoDeArea {
 
-    idEstructuraArea: number;
-    estructuraArea: string;
-    codigoArea: string;
-    indicadorHabilitado: boolean = true;
-    auditoriaUsuario: number;
-    auditoriaFecha: Date;
+   idEstructuraArea: number;
+   estructuraArea: string = '';
+   codigoArea: string;
+   indicadorHabilitado: boolean = true;
+   auditoriaUsuario: number;
+   auditoriaFecha: Date;
 }

@@ -1,47 +1,46 @@
-<h3>Tipo de Área</h3>
+<h3>{{ 'TIPODEAREA.LBL_TIPOAREA' | translate }}</h3>
 <div class="col-sm-6 col-sm-offset-3">
-    <h2 class="text-center">Editar Tipo de Área</h2>
+    <h2 class="text-center">{{ 'TIPODEAREA.LBL_EDITAREA' | translate }}</h2>
     <form class="form-horizontal" #f="ngForm" (ngSubmit)="!codeExists&&f.form.valid&&updateArea()" novalidate
           (keydown.enter)="$event.preventDefault()">
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !codigoArea.valid }">
-            <label for="codigoArea" class="control-label col-sm-3">Código </label>
+            <label for="codigoArea" class="control-label col-sm-3">{{ 'LBL_CODIGO' | translate }} </label>
             <div class=" col-sm-9">
                 <input type="text" pInputText class="form-control" id="codigoArea" name="codigoArea"
                        #codigoArea="ngModel"
                        [(ngModel)]="areas.codigoArea" required maxlength="8" pattern="[A-Z0-9]{0,8}"
-                       (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
+                       (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)" disabled
                        (paste)="inputCleanUp($event.target.value)">
-                <div *ngIf="codeExists" class="alert alert-danger">
-                    Ya se encuentra registrado ese código
-                </div>
-                <div *ngIf="f.submitted&&!codigoArea.valid" class="alert alert-danger">
-                    <div [hidden]="!codigoArea.errors.required">Debe ingresar un codigo para el tipo de área.
-                    </div>
-                    <div [hidden]="!codigoArea.errors.maxlength">El código no debe tener mas de 8 caracteres.
-                    </div>
-                    <div [hidden]="!codigoArea.errors.pattern">El código debe ser solo letras y númenos</div>
-                </div>
+                <!--<div *ngIf="codeExists" class="alert alert-danger">-->
+                    <!--Ya se encuentra registrado ese código-->
+                <!--</div>-->
+                <!--<div *ngIf="f.submitted&&!codigoArea.valid" class="alert alert-danger">-->
+                    <!--<div [hidden]="!codigoArea.errors.required">Debe ingresar un codigo para el tipo de área.-->
+                    <!--</div>-->
+                    <!--<div [hidden]="!codigoArea.errors.maxlength">El código no debe tener mas de 8 caracteres.-->
+                    <!--</div>-->
+                    <!--<div [hidden]="!codigoArea.errors.pattern">El código debe ser solo letras y númenos</div>-->
+                <!--</div>-->
             </div>
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !estructuraArea.valid }">
-            <label for="estructuraArea" class="control-label col-sm-3">Nombre </label>
+            <label for="estructuraArea" class="control-label col-sm-3">{{ 'LBL_NOMBRE' | translate }} </label>
             <div class=" col-sm-9">
                 <input type="text" pInputText class="form-control" id="estructuraArea" name="estructuraArea" #estructuraArea="ngModel"
                        [(ngModel)]="areas.estructuraArea" required maxlength="40" pattern="[A-Z]{1}.*"
                        (keyup)="capitalize()"
                 >
                 <div *ngIf="f.submitted&&!estructuraArea.valid" class="alert alert-danger">
-                    <div [hidden]="!estructuraArea.errors.required">Debe ingresar un nombre para el tipo de área</div>
-                    <div [hidden]="!estructuraArea.errors.maxlength">El nombre no debe tener mas de 40 caracteres.</div>
-                    <div [hidden]="!estructuraArea.errors.pattern">El nombre del tipo de área debe comenzar por una letra
-                        Mayuscula.
+                    <div [hidden]="!estructuraArea.errors.required">{{ 'TIPODEAREA.MSG_NOMBRECENTRO' | translate }}</div>
+                    <div [hidden]="!estructuraArea.errors.maxlength">{{ 'TIPODEAREA.MSG_NOM40CARACT' | translate }}</div>
+                    <div [hidden]="!estructuraArea.errors.pattern">{{ 'TIPODEAREA.MSG_NOMBMAYUSCULA' | translate }}
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+            <label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate }}</label>
             <div class=" col-sm-9">
                 <p-checkbox [(ngModel)]="areas.indicadorHabilitado" binary="true" id="indicador" name="indicador"
                             #indicador="ngModel"></p-checkbox>
@@ -49,19 +48,19 @@
         </div>
         <div class="row form-footer-buttons">
             <div class="form-group col-md-12">
-            <a (click)="displayDialog=true" class="cancelar">Cancelar</a>
-            <button type="submit" pButton icon="fa-plus" label="Guardar" #submit
+            <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+            <button type="submit" pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate }}" #submit
                     (keydown.enter)="submit.click()"></button>
         </div>
         </div>
     </form>
-    <p-dialog header="Confirmación" [(visible)]="displayDialog"
+    <p-dialog header="{{ 'LBL_CONFIRMACION' | translate }}" [(visible)]="displayDialog"
               responsive="true" modal="true">
-        <p>Si continua perdera la información no guardada. ¿Esta seguro que desea salir?.</p>
+        <p>{{ 'TIPODEAREA.MSG_CONFIRMACIONSALIR' | translate }}</p>
         <p-footer>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>
-                <button type="button" pButton icon="fa-check" (click)="goBack()" label="Si"></button>
+                <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="{{ 'BTN_NO' | translate }}"></button>
+                <button type="button" pButton icon="fa-check" (click)="goBack()" label="{{ 'BTN_SI' | translate }}"></button>
             </div>
         </p-footer>
     </p-dialog>

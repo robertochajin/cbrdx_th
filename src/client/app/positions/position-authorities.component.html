@@ -1,0 +1,47 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+   <p-footer>
+      <button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+      <button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+   </p-footer>
+</p-confirmDialog>
+<div *ngIf="absence">
+   <form (ngSubmit)="fr.valid && onSubmit()" #fr="ngForm" novalidate id="formulario">
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+         <div class="row">
+            <div class="col-md-12">
+               <label for="idCargo"><h3>{{ 'POSITION.LBL_CARGOSUPERVISA' | translate }}</h3></label>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-9">
+               <p-dropdown id="idCargo" name="idCargo" required="true"
+                           [options]="listPosition" [autoWidth]="false"
+                           [(ngModel)]="absence.idCargoRelacion" #idCargo="ngModel"
+               ></p-dropdown>
+               <div class="ui-message ui-messages-error ui-corner-all"
+                    *ngIf="fr.submitted && !idCargo.valid">
+                  <i class="fa fa-close"></i>
+                  {{ 'POSITION.LBL_CARGO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+               </div>
+            </div>
+            <div class="col-md-3">
+               <button pButton icon="fa-plus" label="{{ 'BTN_AGREGAR' | translate }}" type="submit"></button>
+            </div>
+         </div>
+      </div>
+   </form>
+   <div class="row">
+      <div class="col-md-12">
+         <p-dataTable [value]="listAbsenceSUP" [paginator]="true" [rows]="10" [responsive]="true">
+            <p-column field="cargoRelacion" header="{{ 'POSITION.LBL_CARGO' | translate }}" [sortable]="true"></p-column>
+            <p-column header="{{ 'LBL_ACCION' | translate }}" styleClass="datatable-col-action">
+               <template let-absence="rowData" pTemplate="body">
+                  <button type="button" icon="fa-trash" class="ui-button-danger"
+                          pButton (click)="del(absence)"></button>
+               </template>
+            </p-column>
+         </p-dataTable>
+      </div>
+   </div>
+</div>

@@ -1,6 +1,5 @@
 <p-messages [value]="msgs"></p-messages>
-<p-confirmDialog width="400"></p-confirmDialog>
-<div *ngIf="fstudy">
+<p-confirmDialog width="400" acceptLabel="{{'BTN_SI' | translate:param }}" rejectLabel="{{'BTN_NO' | translate:param }}"></p-confirmDialog> <div *ngIf="fstudy">
     <div class="row">
         <div class="col-md-12">
             <div class="header">
@@ -8,107 +7,119 @@
             </div>
         </div>
     </div>
-  <form  (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+  <form  (ngSubmit)="f.form.valid && !wrongCity && !wrongInstitute && onSubmit()" #f="ngForm" novalidate>
     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
-            <label for="nivelEstudio">Nivel de Estudios</label>
+            <label for="nivelEstudio">{{'EMPLOYEES.LBL_NIVELESTUDIOS' | translate}}</label>
             <p-dropdown name="nivelEstudio" id="nivelEstudio" #nivelEstudio="ngModel" required="true"
                         [autoWidth]="false" [(ngModel)]="fstudy.idNivelEstudio" [options]="studyLevelList"></p-dropdown>
             <div class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !nivelEstudio.valid">
-              Nivel de Estudios es requerido
+              {{'EMPLOYEES.LBL_NIVELESTUDIOS' | translate}} {{'LBL_REQUERIDO' | translate}}
             </div>
           </div>
           <div class="ui-grid-col-6">
-            <label for="areaEstudio">Area de Estudios</label>
+            <label for="areaEstudio">{{'EMPLOYEES.LBL_AREAESTUDIOS' | translate}}</label>
             <p-dropdown name="areaEstudio" id="areaEstudio" #areaEstudio="ngModel" required="true"
                         [autoWidth]="false" [(ngModel)]="fstudy.idAreaEstudio" [options]="studyAreaList"></p-dropdown>
             <div class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !areaEstudio.valid">
-              area de estudio es requerida
+              {{'EMPLOYEES.LBL_AREAESTUDIOS' | translate}} {{'LBL_REQUERIDO' | translate}}
             </div>
           </div>
         </div>
         <div class="ui-grid-row">
           <div class="form-group col-md-12">
-            <label for="titulo">Título</label>
+            <label for="titulo">{{'EMPLOYEES.LBL_TITULO' | translate}}</label>
             <input type="text" pInputText name="titulo" id="titulo"  #titulo="ngModel" required="true"
                    [(ngModel)]="fstudy.tituloEstudio"  />
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !titulo.valid">
-              Título es requerido
+              {{'EMPLOYEES.LBL_TITULO' | translate}} {{'LBL_REQUERIDO' | translate}}
             </div>
           </div>
         </div>
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
-            <label for="institucion">Institución</label>
-            <p-autoComplete placeholder="Buscar institucion" field="nombreListaInstitucion" #institucion="ngModel"
-                            name="institucion" id="institucion" [required]="otraInstitucion.value === undefined || otraInstitucion.value === ''"
+            <label for="inst">{{'EMPLOYEES.LBL_INSTITUCION' | translate}}</label>
+            <p-autoComplete placeholder="Buscar institucion" field="nombre" #institucion="ngModel"
+                            name="inst" id="inst"
+                   [required]="otraInstitucion.value === undefined || otraInstitucion.value === null || otraInstitucion.value === ''"
                             [(ngModel)]="selectedInstitute" [suggestions]="instituteList"
                             (completeMethod)="instituteSearch($event)" (onSelect)="captureInstituteId($event)" >
             </p-autoComplete>
-            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && wrongInstitute && (otraInstitucion.value === undefined || otraInstitucion.value === '')">
-              Institución es requerido
+            <div class="ui-message ui-messages-error ui-corner-all"
+                 *ngIf="f.submitted && wrongInstitute && (otraInstitucion.value === undefined || otraInstitucion.value === null || otraInstitucion.value === '')">
+              {{'EMPLOYEES.LBL_INSTITUCION' | translate}} {{'LBL_REQUERIDO' | translate}}
             </div>
           </div>
           <div class="ui-grid-col-6">
-            <label for="otraInstitucion">Otra Institución</label>
-            <input type="text" pInputText name="otraInstitucion" id="otraInstitucion"  #otraInstitucion="ngModel" (change)="removeInstitute()"
-                   [(ngModel)]="fstudy.otraInstitucion" [required]="institucion.value === undefined || institucion.value === ''" />
+            <label for="otraInst">{{'EMPLOYEES.LBL_OTRAINSTITUCION' | translate}}</label>
+            <input type="text" pInputText name="otraInst" id="otraInst"  #otraInstitucion="ngModel" (change)="removeInstitute()"
+                   [(ngModel)]="fstudy.otraInstitucion"
+                   [required]="institucion.value === undefined || institucion.value === null  || institucion.value === ''" />
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !otraInstitucion.valid">
-              Otra Institución es requerido
+              {{'EMPLOYEES.LBL_OTRAINSTITUCION' | translate}} {{'LBL_REQUERIDO' | translate}}
             </div>
           </div>
         </div>
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
-            <label for="ciudad">Ciudad</label>
+            <label for="ciudad">{{ 'LBL_CIUDAD' | translate }}</label>
             <p-autoComplete placeholder="Buscar ciudad" field="camino" #ciudad="ngModel" name="ciudad" id="ciudad"
                             [(ngModel)]="selectedCity" [suggestions]="cityList" required="true"
                             (completeMethod)="citySearch($event)" (onSelect)="captureCityId($event)" >
             </p-autoComplete>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && wrongCity">
-              Ciudad es requerido
+              {{ 'LBL_CIUDAD' | translate }} {{'LBL_REQUERIDO' | translate}}
             </div>
           </div>
           <div class="ui-grid-col-6">
-            <label for="estadoEstudio">Estado Estudio</label>
+            <label for="estadoEstudio">{{'EMPLOYEES.LBL_ESTADOS' | translate}}</label>
             <p-dropdown name="estadoEstudio" id="estadoEstudio" #estadoEstudio="ngModel" required="true" (onChange)="updateEnd()"
                         [autoWidth]="false" [(ngModel)]="fstudy.idEstado" [options]="studyStateList"></p-dropdown>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !estadoEstudio.valid">
-              Estado Estudio es requerido
+              {{'EMPLOYEES.LBL_ESTADOS' | translate}} {{'LBL_REQUERIDO' | translate}}
             </div>
           </div>
         </div>
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
-            <label for="ingreso">Ingreso</label>
-            <p-calendar id="ingreso" name="ingreso"  [showIcon]="true" [disabled]="disabled"
+            <label for="ingreso">{{'EMPLOYEES.LBL_INGRESO' | translate}}</label>
+            <p-calendar id="ingreso" name="ingreso"  [showIcon]="true"
                         [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true" [maxDate]="maxDate"
-                        [dataType]="date" (onSelect)="onSelectBegin($event)" #ingreso="ngModel" required="true"
+                        dataType="date" (onSelect)="onSelectBegin($event)" #ingreso="ngModel" required="true"
                         [(ngModel)]="fstudy.fechaIngresa"></p-calendar>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ingreso.valid">
-              Ingreso es requerido
+              {{'EMPLOYEES.LBL_INGRESO' | translate}} {{'LBL_REQUERIDO' | translate}}
             </div>
           </div>
-          <div class="ui-grid-col-6"  *ngIf="(estadoEstudio.value == id_estado_estudio_finalizado) && (ingreso.value !== undefined)">
-            <label for="fechaTermina">Finalización</label>
-            <p-calendar id="fechaTermina" name="fechaTermina"  [showIcon]="true" [disabled]="disabled"
+
+          <div class="ui-grid-col-6"  *ngIf="(estadoEstudio.value == idEstadoEstudioFinalizado) && (ingreso.value !== undefined)">
+            <label for="fechaTermina">{{'EMPLOYEES.LBL_FINALIZACION' | translate}} </label>
+            <p-calendar id="fechaTermina" name="fechaTermina"  [showIcon]="true"
                         [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true" [minDate]="minDate" [maxDate]="maxDateFinal"
-                        [dataType]="date" (onSelect)="onSelectEnd($event)" #fechaTermina="ngModel" [required]="estadoEstudio.value == id_estado_estudio_finalizado"
+                        dataType="date" (onSelect)="onSelectEnd($event)" #fechaTermina="ngModel" [required]="estadoEstudio.value == idEstadoEstudioFinalizado"
                         [(ngModel)]="fstudy.fechaTermina"></p-calendar>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fechaTermina.valid">
-              Finalización es requerido
+              {{'EMPLOYEES.LBL_FINALIZACION' | translate}} {{'LBL_REQUERIDO' | translate}}
             </div>
           </div>
+
+           <!--<div class="ui-grid-col-6">-->
+              <!--<label >{{'LBL_ADJUNTAR' | translate}} </label>-->
+              <!--<p-fileUpload  name="files" url="http://localhost:5556/assets/upload/upload.html"-->
+                            <!--auto="auto" (onUpload)="onUpload($event)" >-->
+              <!--</p-fileUpload>-->
+           <!--</div>-->
+
         </div>
 
         <div class="ui-grid-row form-footer-buttons">
           <div class="ui-grid-col-4"></div>
           <div class="ui-grid-col-1">
-            <a (click)="goBack()" class="cancelar">Cancelar</a>
+            <a (click)="goBack()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
           </div>
           <div class="ui-grid-col-2">
-            <button icon="fa-plus" label="{{'BTN_GUARDAR' | translate:param}}" type="submit" pButton></button>
+            <button icon="fa-plus" label="{{'BTN_GUARDAR' | translate}}" type="submit" pButton></button>
           </div>
           <div class="ui-grid-col-5"></div>
         </div>
@@ -117,4 +128,3 @@
 
 
 </div>
-

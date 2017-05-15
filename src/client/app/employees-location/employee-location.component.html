@@ -1,28 +1,23 @@
-<h3 class="first">Ubicaciones</h3>
+<h3 class="first">{{'UBICACION.LBL_UBICACIONES' | translate }}</h3>
 <div>
     <div class="row datable-header">
         <div class="col-md-6 col-xs-12 datatable-header-add">
             <button type="button" pButton icon="fa-plus" (click)="add()" label="Nueva Ubicación"></button>
         </div>
-        <div class="col-md-6 col-xs-12 datatable-header-search" >
-            <i class="fa fa-search"></i>
-            <input #gb type="text" pInputText size="40" placeholder="Buscar...">
-        </div>
+		 <div class="col-md-6 col-xs-12 datatable-header-search">
+			 <div class="input-group">
+				 <div class="input-group-addon"><i class="fa fa-search"></i></div>
+				 <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control">
+			 </div>
+		 </div>
     </div>
-    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="employeesLocations" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-        <p-column field="nombreListaTipoDireccion" header="Tipo Dirección" [sortable]="true"></p-column>
-        <!--<p-column field="localizacion.direccion" header="Dirección" [sortable]="true"></p-column>-->
-        <!--<p-column field="localizacion.barrio.label" header="Barrio" [sortable]="true"></p-column>
-        <p-column field="localizacion.ciudad.label" header="Ciudad" [sortable]="true"></p-column>
-        <p-column field="localizacion.departamento.label" header="Departamento" [sortable]="true"></p-column>
-        <p-column field="localizacion.pais.label" header="Pais" [sortable]="true"></p-column>-->
-        <p-column field="direccion" header="Dirección" [sortable]="true"></p-column>
-        <p-column field="divisionPolitica" header="Ubicación" [sortable]="true"></p-column>
+    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="employeesLocations" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+        <p-column field="nombre" header="{{'UBICACION.LBL_TIPODIRECCION' | translate }}" [sortable]="true"></p-column>
+        <p-column field="direccion" header="{{'UBICACION.LBL_DIRECCION' | translate }}" [sortable]="true"></p-column>
+        <p-column field="divisionPolitica" header="{{'UBICACION.LBL_UBICACION' | translate }}" [sortable]="true"></p-column>
         <p-column header="Acciones" styleClass="datatable-col-action" >
             <template let-elocation="rowData" pTemplate="body">
                 <div class="btn-group" role="group">
-                    <!--<button type="button" pButton class="ui-button btn" icon="fa-eye"
-                            pButton (click)="detail(elocation)" ></button>-->
                     <button type="button" pButton class="ui-button ui-button-success btn" icon="fa-pencil"
                             pButton (click)="update(elocation)" ></button>
                     <button type="button" pButton class="ui-button ui-button-danger btn" icon="fa-trash"

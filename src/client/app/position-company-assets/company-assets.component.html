@@ -1,0 +1,24 @@
+<p-messages *ngIf="alert" [value]="msgsAlert"></p-messages>
+<div>
+   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="elementos"
+                [paginator]="false" [responsive]="true" >
+      <p-column header="{{ 'POSITION.LBL_ELEMENTOS' | translate }}">
+         <template let-asset="rowData" pTemplate="body">
+	         {{asset.codigoLista}} - {{asset.nombreLista}}
+         </template>
+      </p-column>
+      <p-column header="{{ 'POSITION.LBL_DESCRIPCION' | translate }}">
+         <template let-asset="rowData" pTemplate="body">
+            <input type="text" pInputText [(ngModel)]="asset.descripcion" style="width: 100%"/>
+         </template>
+      </p-column>
+   </p-dataTable>
+
+</div>
+<div class="row">
+   <div class="col-md-3 pull-right">
+      <button pButton label="{{ 'BTN_SIGUIENTE' | translate }}" (click)="next()" type="button" class="pull-right"></button>
+   </div>
+</div>
+
+<p-confirmDialog width="400"></p-confirmDialog>

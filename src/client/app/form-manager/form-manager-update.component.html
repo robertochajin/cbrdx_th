@@ -1,0 +1,639 @@
+<p-messages [value]="msgs"></p-messages>
+<div class="row">
+   <div class="col-md-12">
+      <p-accordion (onOpen)="onTabShow($event)" id="accordion">
+         <p-accordionTab header="{{ 'ADMIN_FORMULARIOS.LBL_FUNCIONALIDAD' | translate }}"
+                         [selected]="acordion == 0 || acordion == null ">
+            <div *ngIf="functionality">
+               <form (ngSubmit)="f.valid && onCreateF(acordion)" #f="ngForm" novalidate id="formulario">
+                  <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                     <div class="ui-grid-row">
+                        <div class="ui-grid-col-4">
+                           <label for="funcionalidad">{{ 'ADMIN_FORMULARIOS.LBL_FUNCIONALIDAD' | translate
+                              }}</label>
+                           <p-dropdown id="funcionalidad" name="funcionalidad" required="true"
+                                       [options]="listFunctionality" [autoWidth]="false"
+                                       [(ngModel)]="functionality.idMenu"
+                                       #funcionalidad="ngModel"
+                           ></p-dropdown>
+                           <div class="ui-message ui-messages-error ui-corner-all"
+                                *ngIf="f.submitted && !funcionalidad.valid">
+                              <i class="fa fa-close"></i>
+                              Funcionalidad requerida
+                           </div>
+                        </div>
+                        <div class="ui-grid-col-4">
+                           <label></label><br>
+                           <p-checkbox id="seccion" name="seccion" [(ngModel)]="indicadorSeccion"
+                                       binary="true" disabled="true"
+                                       label="{{ 'ADMIN_FORMULARIOS.LBL_SECCION' | translate }}"></p-checkbox>
+                        </div>
+                        <div class="ui-grid-col-4">
+                           <label></label><br>
+                           <p-checkbox id="Habilitado" name="Habilitado" [(ngModel)]="functionality.indicadorHabilitado"
+                                       binary="true" label="{{'LBL_HABILITADO' | translate }}"></p-checkbox>
+                        </div>
+                     </div>
+                     <div class="ui-grid-row form-footer-buttons">
+                        <div class="ui-grid-col-4"></div>
+                        <div class="ui-grid-col-1">
+                           <a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+                        </div>
+                        <div class="ui-grid-col-2">
+                           <button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}"
+                                   type="submit"></button>
+                        </div>
+                        <div class="ui-grid-col-5"></div>
+                     </div>
+                  </div>
+               </form>
+            </div>
+            <p-confirmDialog width="400"></p-confirmDialog>
+            <!--<button icon="fa-arrow-right" label="Siguiente" type="button" (click)="step()" pButton></button>-->
+            <!--<p-checkbox id="Habilitado" name="Habilitado" [(ngModel)]="seccion" binary="true" label="Sección"></p-checkbox>-->
+         </p-accordionTab>
+         <p-accordionTab *ngIf="indicadorSeccion" header="{{ 'ADMIN_FORMULARIOS.LBL_SECCION' | translate }}"
+                         [selected]="acordion==2">
+            <div *ngIf="!editingSection">
+               <div *ngIf="!detailSection">
+                  <div *ngIf="showForm">
+                     <h3 class="first">{{ 'ADMIN_FORMULARIOS.LBL_SECCION' | translate }}</h3>
+                     <form (ngSubmit)="fs.valid && onCreateS()" #fs="ngForm" novalidate
+                           id="formularioseccion">
+                        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                           <div class="ui-grid-row">
+                              <div class="ui-grid-col-6">
+                                 <label for="nombre">{{ 'LBL_NOMBRE' | translate }}</label>
+                                 <input id="nombre" name="nombre" #nombre="ngModel" pInputText type="text"
+                                        [(ngModel)]="functionalityControl.control" required
+                                        (keyup)="capitalize($event)"/>
+                                 <div class="ui-message ui-messages-error ui-corner-all"
+                                      *ngIf="fs.submitted && !nombre.valid">
+                                    <i class="fa fa-close"></i>
+                                    {{ 'ADMIN_FORMULARIOS.MSG_NOMBREREQUERIDO' | translate }}
+                                 </div>
+                              </div>
+                              <div class="ui-grid-col-6">
+                                 <label for="codigo">{{'LBL_CODIGO' | translate }}</label>
+                                 <input id="codigo" name="codigo" #codigo="ngModel" pInputText type="text"
+                                        [(ngModel)]="functionalityControl.codigo" (change)="validateCode()" required
+                                        (keyup)="inputCleanUp($event)" (paste)="inputCleanUp($event)"/>
+                                 <div *ngIf="codExists" class="alert alert-danger">
+                                    {{ 'ADMIN_FORMULARIOS.MSG_CODIGOREPETIDO' | translate }}
+                                 </div>
+                                 <div class="ui-message ui-messages-error ui-corner-all"
+                                      *ngIf="fs.submitted && !codigo.valid">
+                                    <i class="fa fa-close"></i>
+                                    {{ 'ADMIN_FORMULARIOS.MSG_CODIGOREQUERIDO' | translate }}
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="ui-grid-row">
+                              <div class="ui-grid-col-6">
+                                 <label for="clasificacion">{{ 'ADMIN_FORMULARIOS.LBL_CLASIFICACION' | translate
+                                    }}</label>
+                                 <p-dropdown id="clasificacion" name="clasificacion" required="true"
+                                             [options]="listClassificationSeccion" [autoWidth]="false"
+                                             [(ngModel)]="functionalityControl.idClasificacion"
+                                             #clasificacion="ngModel"
+                                 ></p-dropdown>
+                                 <div class="ui-message ui-messages-error ui-corner-all"
+                                      *ngIf="fs.submitted && !clasificacion.valid">
+                                    <i class="fa fa-close"></i>
+                                    {{ 'ADMIN_FORMULARIOS.MSG_CLASIFICACIONREQUERIDA' | translate }}
+                                 </div>
+                              </div>
+                              <div class="ui-grid-col-3">
+                                 <label></label><br>
+                                 <p-checkbox id="visible" name="visible"
+                                             [(ngModel)]="functionalityControl.indicadorVisible"
+                                             binary="true"
+                                             label="{{ 'ADMIN_FORMULARIOS.LBL_VISIBLE' | translate }}"></p-checkbox>
+                              </div>
+                              <div class="ui-grid-col-3">
+                                 <label></label><br>
+                                 <p-checkbox id="imprimir" name="imprimir"
+                                             [(ngModel)]="functionalityControl.indicadorImprimir"
+                                             binary="true"
+                                             label="{{ 'ADMIN_FORMULARIOS.LBL_IMPRIMIR' | translate }}"></p-checkbox>
+                              </div>
+                           </div>
+                           <div class="ui-grid-row form-footer-buttons">
+                              <div class="ui-grid-col-4"></div>
+                              <div class="ui-grid-col-1">
+                              </div>
+                              <div class="ui-grid-col-5"></div>
+                              <div class="ui-grid-col-2">
+                                 <button pButton icon="fa-plus" label="{{ 'BTN_AGREGAR' | translate }}"
+                                         type="submit"></button>
+                              </div>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+                  <div>
+                     <div class="row datable-header">
+                        <div class="col-md-6 col-xs-12 datatable-header-add">
+                           <!--<button type="button" icon="fa-plus" label="Añadir funcionalidad"-->
+                           <!--pButton (click)="add()"></button>-->
+                        </div>
+                        <div class="col-md-6 col-xs-12 datatable-header-search">
+                           <div class="input-group">
+                              <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                              <input #gbs type="text" pInputText size="40"
+                                     placeholder="{{ 'LBL_BUSCAR' | translate }}"
+                                     class="form-control">
+                           </div>
+                        </div>
+                     </div>
+                     <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"
+                                  [value]="functionalitySection"
+                                  [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gbs">
+                        <!--<p-column field="idFuncionalidadControl" header="Id" [sortable]="true"></p-column>-->
+                        <p-column field="codigo" header="{{'LBL_CODIGO' | translate }}"
+                                  [sortable]="true"></p-column>
+                        <p-column field="control" header="{{'LBL_NOMBRE' | translate }} "
+                                  [sortable]="true"></p-column>
+                        <p-column field="clasificacion"
+                                  header="{{'ADMIN_FORMULARIOS.LBL_CLASIFICACIONINFORMACION' | translate }} "
+                                  [sortable]="true"></p-column>
+                        <p-column header="{{'LBL_HABILITADO' | translate }}" styleClass="datatable-col-action">
+                           <template let-func="rowData" pTemplate="body">
+                              <p-checkbox name="indicadorHabilitado" [(ngModel)]="func.indicadorHabilitado"
+                                          binary="true"
+                                          disabled="true"></p-checkbox>
+                           </template>
+                        </p-column>
+                        <p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+                           <template let-func="rowData" pTemplate="body">
+                              <button *ngIf="func.notFoundFiel" type="button" icon="fa-plus" class="ui-button-success"
+                                      pButton (click)="addField(func)"></button>
+                              <button *ngIf="!func.notFoundFiel" type="button" icon="fa-pencil"
+                                      class="ui-button-success"
+                                      pButton (click)="updateSection(func)"></button>
+                              <button type="button" icon="fa-eye" class="ui-button-success"
+                                      pButton (click)="detailSectionF(func)"></button>
+                           </template>
+                        </p-column>
+                     </p-dataTable>
+                  </div>
+               </div>
+               <div *ngIf="detailSection">
+                  <div *ngIf="functionalityControlSectionDetail">
+                     <div class="row">
+                        <div class="col-md-12">
+                           <h3 class="first">{{'ADMIN_FORMULARIOS.LBL_DETALLESECCION' | translate }}</h3>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-offset-2 col-md-8 col-sm-12">
+                           <form class="form-horizontal">
+                              <fieldset>
+                                 <div class="row">
+                                    <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'LBL_CODIGO' |
+                                       translate }}:</label>
+                                    <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{functionalityControlSectionDetail.codigo}}</strong></label>
+
+                                    <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'LBL_NOMBRE' |
+                                       translate }}:</label>
+                                    <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{functionalityControlSectionDetail.control}}</strong></label>
+                                 </div>
+                                 <div class="row">
+                                    <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'ADMIN_FORMULARIOS.LBL_CLASIFICACIONINFORMACION'
+                                       | translate }}:</label>
+                                    <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{functionalityControlSectionDetail.clasificacion}}</strong></label>
+
+                                    <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'ADMIN_FORMULARIOS.LBL_VISIBLE'
+                                       | translate }}:</label>
+                                    <label
+                                       class="col-md-3 col-sm-6 col-xs-8"><strong>{{indicadorVisible}}</strong></label>
+                                 </div>
+                                 <div class="row">
+                                    <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'ADMIN_FORMULARIOS.LBL_IMPRIMIR'
+                                       | translate }}:</label>
+                                    <label
+                                       class="col-md-3 col-sm-6 col-xs-8 "><strong>{{indicadorImprime}}</strong></label>
+
+                                    <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'LBL_HABILITADO' |
+                                       translate }}:</label>
+                                    <label
+                                       class="col-md-3 col-sm-6 col-xs-8"><strong>{{indicadorHabilitado}}</strong></label>
+                                 </div>
+                              </fieldset>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row form-footer-buttons">
+                     <div class="form-group col-md-12">
+                        <button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+                                pButton (click)="goBackDetail()"></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div *ngIf="editingSection">
+               <h3 class="first">{{ 'ADMIN_FORMULARIOS.LBL_SECCION' | translate }}</h3>
+               <form (ngSubmit)="fs.valid && onUpdateS()" #fs="ngForm" novalidate id="formularioseccionu">
+                  <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                     <div class="ui-grid-row">
+                        <div class="ui-grid-col-6">
+                           <label for="nombre">{{ 'LBL_NOMBRE' | translate }}</label>
+                           <input id="nombres" name="nombres" #nombres="ngModel" pInputText type="text"
+                                  [(ngModel)]="functionalityControlSection.control" required
+                                  (keyup)="capitalize($event)"/>
+                           <div class="ui-message ui-messages-error ui-corner-all"
+                                *ngIf="fs.submitted && !nombres.valid">
+                              <i class="fa fa-close"></i>
+                              {{ 'ADMIN_FORMULARIOS.MSG_NOMBREREQUERIDO' | translate }}
+                           </div>
+                        </div>
+                        <div class="ui-grid-col-6">
+                           <label for="codigos">{{'LBL_CODIGO' | translate }}</label>
+                           <input id="codigos" name="codigos" #codigos="ngModel" pInputText type="text"
+                                  [(ngModel)]="functionalityControlSection.codigo" required disabled/>
+                           <div class="ui-message ui-messages-error ui-corner-all"
+                                *ngIf="fs.submitted && !codigos.valid">
+                              <i class="fa fa-close"></i>
+                              {{ 'ADMIN_FORMULARIOS.MSG_CODIGOREQUERIDO' | translate }}
+                           </div>
+                        </div>
+                     </div>
+                     <div class="ui-grid-row">
+                        <div class="ui-grid-col-6">
+                           <label for="clasificacions">{{ 'ADMIN_FORMULARIOS.LBL_CLASIFICACION' | translate
+                              }}</label>
+                           <p-dropdown id="clasificacions" name="clasificacions" required="true"
+                                       [options]="listClassificationSeccion" [autoWidth]="false"
+                                       [(ngModel)]="functionalityControlSection.idClasificacion"
+                                       #clasificacions="ngModel"
+                           ></p-dropdown>
+                           <div class="ui-message ui-messages-error ui-corner-all"
+                                *ngIf="fs.submitted && !clasificacions.valid">
+                              <i class="fa fa-close"></i>
+                              {{ 'ADMIN_FORMULARIOS.MSG_CLASIFICACIONREQUERIDA' | translate }}
+                           </div>
+                        </div>
+                        <div class="ui-grid-col-3">
+                           <label></label><br>
+                           <p-checkbox id="visibles" name="visibles"
+                                       [(ngModel)]="functionalityControlSection.indicadorVisible"
+                                       binary="true"
+                                       label="{{ 'ADMIN_FORMULARIOS.LBL_VISIBLE' | translate }}"></p-checkbox>
+                        </div>
+                        <div class="ui-grid-col-3">
+                           <label></label><br>
+                           <p-checkbox id="imprimirs" name="imprimirs"
+                                       [(ngModel)]="functionalityControlSection.indicadorImprimir"
+                                       binary="true"
+                                       label="{{ 'ADMIN_FORMULARIOS.LBL_IMPRIMIR' | translate }}"></p-checkbox>
+                        </div>
+                     </div>
+                     <div class="ui-grid-row form-footer-buttons">
+                        <div class="ui-grid-col-4"></div>
+
+                        <div class="ui-grid-col-5"></div>
+                        <div class="ui-grid-col-1">
+                           <a (click)="goBackSectionEdi()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+                        </div>
+                        <div class="ui-grid-col-2">
+                           <button pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate }}"
+                                   type="submit"></button>
+                        </div>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </p-accordionTab>
+         <p-accordionTab header="{{ 'ADMIN_FORMULARIOS.LBL_CAMPO' | translate }}" [selected]="acordion==3"
+                         [disabled]="campodisabled">
+            <div *ngIf="!detailField">
+               <div *ngIf="!editingSection">
+                  <div *ngIf="!editingField">
+                     <div *ngIf="showFormF">
+                        <h3 class="first">{{ 'ADMIN_FORMULARIOS.LBL_CAMPO' | translate }}</h3>
+                        <form (ngSubmit)="fc.valid && onCreateC(acordion)" #fc="ngForm" novalidate
+                              id="formulariocampou">
+                           <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                              <div class="ui-grid-row">
+                                 <div class="ui-grid-col-6">
+                                    <label for="nombrec">{{ 'LBL_NOMBRE' | translate }}</label>
+                                    <input id="nombrec" name="nombrec" #nombrec="ngModel" pInputText type="text"
+                                           [(ngModel)]="functionalityControl.control" required
+                                           (keyup)="capitalize($event)"/>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="fc.submitted && !nombrec.valid">
+                                       <i class="fa fa-close"></i>
+                                       {{ 'ADMIN_FORMULARIOS.MSG_NOMBREREQUERIDO' | translate }}
+                                    </div>
+                                 </div>
+                                 <div class="ui-grid-col-6">
+                                    <label for="codigoc">{{ 'LBL_CODIGO' | translate }}</label>
+                                    <input id="codigoc" name="codigoc" #codigoc="ngModel" pInputText type="text"
+                                           [(ngModel)]="functionalityControl.codigo" (change)="validateCode()" required
+                                           (keyup)="inputCleanUp($event)" (paste)="inputCleanUp($event)"/>
+                                    <div *ngIf="codExists" class="alert alert-danger">
+                                       {{ 'ADMIN_FORMULARIOS.MSG_CODIGOREPETIDO' | translate }}
+                                    </div>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="fc.submitted && !codigoc.valid">
+                                       <i class="fa fa-close"></i>
+                                       {{ 'ADMIN_FORMULARIOS.MSG_CODIGOREQUERIDO' | translate }}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="ui-grid-row">
+                                 <div class="ui-grid-col-6">
+                                    <label for="clasificacionc">{{ 'ADMIN_FORMULARIOS.LBL_CLASIFICACION' |
+                                       translate}}</label>
+
+                                    <p-dropdown id="clasificacionc" name="clasificacionc" required="true"
+                                                [options]="listClassificationCampo" [autoWidth]="false"
+                                                [(ngModel)]="functionalityControl.idClasificacion"
+                                                #clasificacionc="ngModel"
+                                    ></p-dropdown>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="fc.submitted && !clasificacionc.valid">
+                                       <i class="fa fa-close"></i>
+                                       {{ 'ADMIN_FORMULARIOS.MSG_CLASIFICACIONREQUERIDA' | translate }}
+                                    </div>
+                                 </div>
+                                 <div class="ui-grid-col-3">
+                                    <label></label><br>
+                                    <p-checkbox id="visiblec" name="visiblec"
+                                                [(ngModel)]="functionalityControl.indicadorVisible"
+                                                binary="true"
+                                                label="{{ 'ADMIN_FORMULARIOS.LBL_VISIBLE' | translate }}"></p-checkbox>
+                                 </div>
+                                 <div class="ui-grid-col-3">
+                                    <label></label><br>
+                                    <p-checkbox id="obligatorio" name="obligatorio"
+                                                [(ngModel)]="functionalityControl.indicadorImprimir" binary="true"
+                                                label="{{ 'ADMIN_FORMULARIOS.LBL_OBLIGATORIO' | translate }}"></p-checkbox>
+                                 </div>
+                              </div>
+                              <div class="ui-grid-row form-footer-buttons">
+                                 <div class="ui-grid-col-4"></div>
+                                 <div class="ui-grid-col-1">
+                                 </div>
+                                 <div class="ui-grid-col-5"></div>
+                                 <div class="ui-grid-col-2">
+                                    <button pButton icon="fa-plus" label="{{ 'BTN_AGREGAR' | translate }}"
+                                            type="submit"></button>
+                                 </div>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                     <div class="row-fluid">
+                        <div class="row datable-header">
+                           <div class="col-md-6 col-xs-12 datatable-header-add">
+                              <!--<button type="button" icon="fa-plus" label="Añadir funcionalidad"-->
+                              <!--pButton (click)="add()"></button>-->
+                           </div>
+                           <div class="col-md-6 col-xs-12 datatable-header-search">
+                              <div class="input-group">
+                                 <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                 <input #gbc type="text" pInputText size="40"
+                                        placeholder="{{ 'LBL_BUSCAR' | translate }}"
+                                        class="form-control">
+                              </div>
+                           </div>
+                        </div>
+                        <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"
+                                     [value]="functionalityField"
+                                     [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gbc">
+                           <!--<p-column field="idFuncionalidadControl" header="Id" [sortable]="true"></p-column>-->
+                           <p-column field="codigo" header="{{'LBL_CODIGO' | translate }}"
+                                     [sortable]="true"></p-column>
+                           <p-column field="control" header="{{'LBL_NOMBRE' | translate }} "
+                                     [sortable]="true"></p-column>
+                           <p-column field="clasificacion"
+                                     header="{{'ADMIN_FORMULARIOS.LBL_CLASIFICACIONINFORMACION' | translate }}"
+                                     [sortable]="true"></p-column>
+                           <p-column header="{{'LBL_HABILITADO' | translate }}" styleClass="datatable-col-action">
+                              <template let-func="rowData" pTemplate="body">
+                                 <p-checkbox name="indicadorHabilitado" [(ngModel)]="func.indicadorHabilitado"
+                                             binary="true"
+                                             disabled="true"></p-checkbox>
+                              </template>
+                           </p-column>
+                           <p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+                              <template let-func="rowData" pTemplate="body">
+                                 <button type="button" icon="fa-pencil" class="ui-button-success"
+                                         pButton (click)="updateField(func)"></button>
+                                 <button type="button" icon="fa-eye" class="ui-button-success"
+                                         pButton (click)="detailDetailF(func)"></button>
+                              </template>
+                           </p-column>
+                        </p-dataTable>
+                        <br>
+                        <div class="row form-footer-buttons">
+                           <div class="form-group col-md-3 col-md-offset-9">
+                              <button label="{{'ADMIN_FORMULARIOS.LBL_TERMINAR' | translate }}" type="button"
+                                      (click)="goBack()"
+                                      pButton></button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div *ngIf="editingField">
+                     <form (ngSubmit)="fc.valid && onUpdateC(acordion)" #fc="ngForm" novalidate id="formulariocampo">
+                        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                           <div class="ui-grid-row">
+                              <div class="ui-grid-col-6">
+                                 <label for="nombreca">{{ 'LBL_NOMBRE' | translate }}</label>
+                                 <input id="nombreca" name="nombreca" #nombreca="ngModel" pInputText type="text"
+                                        [(ngModel)]="functionalityControlField.control" required
+                                        (keyup)="capitalize($event)"/>
+                                 <div class="ui-message ui-messages-error ui-corner-all"
+                                      *ngIf="fc.submitted && !nombreca.valid">
+                                    <i class="fa fa-close"></i>
+                                    {{ 'ADMIN_FORMULARIOS.MSG_NOMBREREQUERIDO' | translate }}
+                                 </div>
+                              </div>
+                              <div class="ui-grid-col-6">
+                                 <label for="codigoca">{{ 'LBL_CODIGO' | translate }}</label>
+                                 <input id="codigoca" name="codigoca" #codigoca="ngModel" pInputText type="text"
+                                        [(ngModel)]="functionalityControlField.codigo" required disabled/>
+                              </div>
+                           </div>
+                           <div class="ui-grid-row">
+                              <div class="ui-grid-col-6">
+                                 <label for="clasificacionc">{{ 'ADMIN_FORMULARIOS.LBL_CLASIFICACION' |
+                                    translate}}</label>
+
+                                 <p-dropdown id="clasificacionca" name="clasificacionca" required="true"
+                                             [options]="listClassificationCampo" [autoWidth]="false"
+                                             [(ngModel)]="functionalityControlField.idClasificacion"
+                                             #clasificacionca="ngModel"
+                                 ></p-dropdown>
+                                 <div class="ui-message ui-messages-error ui-corner-all"
+                                      *ngIf="fc.submitted && !clasificacionca.valid">
+                                    <i class="fa fa-close"></i>
+                                    {{ 'ADMIN_FORMULARIOS.MSG_CLASIFICACIONREQUERIDA' | translate }}
+                                 </div>
+                              </div>
+                              <div class="ui-grid-col-3">
+                                 <label></label><br>
+                                 <p-checkbox id="visibleca" name="visibleca"
+                                             [(ngModel)]="functionalityControlField.indicadorVisible"
+                                             binary="true"
+                                             label="{{ 'ADMIN_FORMULARIOS.LBL_VISIBLE' | translate }}"></p-checkbox>
+                              </div>
+                              <div class="ui-grid-col-3">
+                                 <label></label><br>
+                                 <p-checkbox id="obligatorioa" name="obligatorioa"
+                                             [(ngModel)]="functionalityControlField.indicadorImprimir" binary="true"
+                                             label="{{ 'ADMIN_FORMULARIOS.LBL_OBLIGATORIO' | translate }}"></p-checkbox>
+                              </div>
+                           </div>
+                           <div class="ui-grid-row form-footer-buttons">
+                              <div class="ui-grid-col-4"></div>
+                              <div class="ui-grid-col-5"></div>
+                              <div class="ui-grid-col-1">
+                                 <a (click)="goBackField()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+                              </div>
+                              <div class="ui-grid-col-2">
+                                 <button pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate }}"
+                                         type="submit"></button>
+                              </div>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+
+               </div>
+               <!--<div *ngIf="editingSection">-->
+               <!--<h3 class="first">{{ 'ADMIN_FORMULARIOS.LBL_SECCION' | translate }}</h3>-->
+               <!--<form (ngSubmit)="fs.valid && onUpdateS()" #fs="ngForm" novalidate id="formularioseccionu">-->
+               <!--<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">-->
+               <!--<div class="ui-grid-row">-->
+               <!--<div class="ui-grid-col-6">-->
+               <!--<label for="nombre">{{ 'LBL_NOMBRE' | translate }}</label>-->
+               <!--<input id="nombres" name="nombres" #nombres="ngModel" pInputText type="text"-->
+               <!--[(ngModel)]="functionalityControlSection.control" required-->
+               <!--(keyup)="capitalize($event)"/>-->
+               <!--<div class="ui-message ui-messages-error ui-corner-all"-->
+               <!--*ngIf="fs.submitted && !nombres.valid">-->
+               <!--<i class="fa fa-close"></i>-->
+               <!--{{ 'ADMIN_FORMULARIOS.MSG_NOMBREREQUERIDO' | translate }}-->
+               <!--</div>-->
+               <!--</div>-->
+               <!--<div class="ui-grid-col-6">-->
+               <!--<label for="codigos">{{'LBL_CODIGO' | translate }}</label>-->
+               <!--<input id="codigos" name="codigos" #codigos="ngModel" pInputText type="text"-->
+               <!--[(ngModel)]="functionalityControlSection.codigo" required disabled/>-->
+               <!--<div class="ui-message ui-messages-error ui-corner-all"-->
+               <!--*ngIf="fs.submitted && !codigos.valid">-->
+               <!--<i class="fa fa-close"></i>-->
+               <!--{{ 'ADMIN_FORMULARIOS.MSG_CODIGOREQUERIDO' | translate }}-->
+               <!--</div>-->
+               <!--</div>-->
+               <!--</div>-->
+               <!--<div class="ui-grid-row">-->
+               <!--<div class="ui-grid-col-6">-->
+               <!--<label for="clasificacions">{{ 'ADMIN_FORMULARIOS.LBL_CLASIFICACION' | translate-->
+               <!--}}</label>-->
+               <!--<p-dropdown id="clasificacions" name="clasificacions" required="true"-->
+               <!--[options]="listClassificationSeccion" [autoWidth]="false"-->
+               <!--[(ngModel)]="functionalityControlSection.idClasificacion"-->
+               <!--#clasificacions="ngModel"-->
+               <!--&gt;</p-dropdown>-->
+               <!--<div class="ui-message ui-messages-error ui-corner-all"-->
+               <!--*ngIf="fs.submitted && !clasificacions.valid">-->
+               <!--<i class="fa fa-close"></i>-->
+               <!--{{ 'ADMIN_FORMULARIOS.MSG_CLASIFICACIONREQUERIDO' | translate }}-->
+               <!--</div>-->
+               <!--</div>-->
+               <!--<div class="ui-grid-col-3">-->
+               <!--<label></label><br>-->
+               <!--<p-checkbox id="visibles" name="visibles"-->
+               <!--[(ngModel)]="functionalityControlSection.indicadorVisible"-->
+               <!--binary="true"-->
+               <!--label="{{ 'ADMIN_FORMULARIOS.LBL_VISIBLE' | translate }}"></p-checkbox>-->
+               <!--</div>-->
+               <!--<div class="ui-grid-col-3">-->
+               <!--<label></label><br>-->
+               <!--<p-checkbox id="imprimirs" name="imprimirs"-->
+               <!--[(ngModel)]="functionalityControlSection.indicadorImprimir"-->
+               <!--binary="true"-->
+               <!--label="{{ 'ADMIN_FORMULARIOS.LBL_IMPRIMIR' | translate }}"></p-checkbox>-->
+               <!--</div>-->
+               <!--</div>-->
+               <!--<div class="ui-grid-row form-footer-buttons">-->
+               <!--<div class="ui-grid-col-4"></div>-->
+
+               <!--<div class="ui-grid-col-5"></div>-->
+               <!--<div class="ui-grid-col-1">-->
+               <!--<a (click)="goBackSectionEdi()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>-->
+               <!--</div>-->
+               <!--<div class="ui-grid-col-2">-->
+               <!--<button pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate }}"-->
+               <!--type="submit"></button>-->
+               <!--</div>-->
+               <!--</div>-->
+               <!--</div>-->
+               <!--</form>-->
+               <!--</div>-->
+               <!--</div>-->
+               <div *ngIf="detailField">
+                  <div *ngIf="functionalityControlSectionDetail">
+                     <div class="row">
+                        <div class="col-md-12">
+                           <h3 class="first">{{ 'ADMIN_FORMULARIOS.LBL_DETALLECAMPO' | translate }}</h3>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-offset-2 col-md-8 col-sm-12">
+                           <form class="form-horizontal">
+                              <fieldset>
+                                 <div class="row">
+                                    <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'LBL_CODIGO' |
+                                       translate
+                                       }}:</label>
+                                    <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{functionalityControlFieldDetail.codigo}}</strong></label>
+
+                                    <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'LBL_NOMBRE' |
+                                       translate
+                                       }}:</label>
+                                    <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{functionalityControlFieldDetail.control}}</strong></label>
+                                 </div>
+                                 <div class="row">
+                                    <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'ADMIN_FORMULARIOS.LBL_CLASIFICACIONDATO'
+                                       | translate }}:</label>
+                                    <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{functionalityControlFieldDetail.clasificacion}}</strong></label>
+
+                                    <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'ADMIN_FORMULARIOS.LBL_VISIBLE'
+                                       | translate }}:</label>
+                                    <label
+                                       class="col-md-3 col-sm-6 col-xs-8"><strong>{{indicadorVisible}}</strong></label>
+                                 </div>
+                                 <div class="row">
+                                    <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'ADMIN_FORMULARIOS.LBL_OBLIGATORIO'
+                                       | translate }}:</label>
+                                    <label
+                                       class="col-md-3 col-sm-6 col-xs-8 "><strong>{{indicadorImprime}}</strong></label>
+
+                                    <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{'LBL_HABILITADO' |
+                                       translate }}:</label>
+                                    <label
+                                       class="col-md-3 col-sm-6 col-xs-8"><strong>{{indicadorHabilitado}}</strong></label>
+                                 </div>
+                              </fieldset>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row form-footer-buttons">
+                     <div class="form-group col-md-12">
+                        <button icon="fa-arrow-left" label="{'BTN_REGRESAR' | translate }}" type="button"
+                                pButton (click)="goBackDetailField()"></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </p-accordionTab>
+      </p-accordion>
+   </div>
+</div>

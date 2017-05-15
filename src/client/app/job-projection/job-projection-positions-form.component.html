@@ -1,0 +1,85 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+   <p-footer>
+      <button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+      <button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+   </p-footer>
+</p-confirmDialog>
+<div *ngIf="jobProjection">
+   <div class="row">
+      <div class="col-md-12">
+         <div class="header">
+            <h4 class="title">{{header}}</h4>
+         </div>
+      </div>
+   </div>
+   <label for="costoP">{{jobProjection.index}}</label>
+   <form (ngSubmit)="f.valid && onCreate()" #f="ngForm" novalidate id="formulario">
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+         <div class="ui-grid-row">
+            <div class="ui-grid-col-6">
+               <label for="cargo">Cargo</label>
+               <input id="cargo" name="cargo" #cargo="ngModel" pInputText type="text"
+                      [(ngModel)]="jobProjection.cargo" required disabled/>
+            </div>
+         </div>
+         <div class="ui-grid-row">
+            <div class="ui-grid-col-6">
+               <label for="actuales">{{ 'PROYECCIONLABORAL.LBL_PLAZASATUALES' | translate }}</label>
+               <input id="actuales" name="actuales" #actuales="ngModel" pInputText type="text"
+                      [(ngModel)]="jobProjection.plazasActuales" required disabled/>
+            </div>
+            <div class="ui-grid-col-6">
+               <label for="costoA">{{ 'PROYECCIONLABORAL.LBL_COSTOACTUAL' | translate }}</label>
+               <input id="costoA" name="costoA" #costoA="ngModel" pInputText type="text"
+                      [(ngModel)]="jobProjection.costoActual" required disabled/>
+            </div>
+         </div>
+         <div class="ui-grid-row">
+            <div class="ui-grid-col-6">
+               <label for="proyectadas">{{ 'PROYECCIONLABORAL.LBL_PLAZASPROYECT' | translate }}</label>
+               <input id="proyectadas" name="proyectadas" #proyectadas="ngModel" pInputText type="text"
+                      [(ngModel)]="jobProjection.plazasProyectadas" required (keyup)="calculate()" (keyup)="inputNumber()"/>
+               <div class="ui-message ui-messages-error ui-corner-all"
+                    *ngIf="f.submitted && !proyectadas.valid">
+                  <i class="fa fa-close"></i>
+                  Plazas requeridas
+               </div>
+            </div>
+            <div class="ui-grid-col-6">
+               <label for="costoP">{{ 'PROYECCIONLABORAL.LBL_COSTOPROYECT' | translate }}</label>
+               <input id="costoP" name="costoP" #costoP="ngModel" pInputText type="text"
+                      [(ngModel)]="jobProjection.costoProyectado" required disabled/>
+            </div>
+         </div>
+         <div class="ui-grid-row" *ngIf="jobProjection.idEstadoProyeccion===3">
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'PROYECCIONLABORAL.LBL_MOTIVONOAPRUEBA' | translate }}:</label>
+            <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{jobProjection.observacionAprobacion}}</strong></label>
+         </div>
+         <div class="ui-grid-row">
+            <div class="ui-grid-col-12">
+               <label for="observaciones">{{ 'PROYECCIONLABORAL.LBL_OBSERVACIONES' | translate }}</label>
+               <textarea id="observaciones" name="observaciones" #observaciones="ngModel" pInputTextarea rows="2" cols="35"
+                         [(ngModel)]="jobProjection.observacion" required >p</textarea>
+               <div class="ui-message ui-messages-error ui-corner-all"
+                    *ngIf="f.submitted && !observaciones.valid">
+                  <i class="fa fa-close"></i>
+                  {{ 'PROYECCIONLABORAL.MSG_OBSERVACIONREQ' | translate }}
+               </div>
+            </div>
+         </div>
+         <div class="ui-grid-row form-footer-buttons">
+            <div class="ui-grid-col-4"></div>
+            <div class="ui-grid-col-1">
+               <a (click)="goBack()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+            </div>
+            <div class="ui-grid-col-2">
+               <button pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate }}" type="submit" ></button>
+            </div>
+            <div class="ui-grid-col-5"></div>
+         </div>
+      </div>
+   </form>
+</div>
+
+

@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Positions {
@@ -41,7 +41,7 @@ export class Positions {
    public idEstado: number;
    public estado: string;
    public paso: number;
-   
+
    constructor() {
       this.idCargo = null;
       this.cargo = null;
@@ -50,17 +50,17 @@ export class Positions {
       this.personaACargoDir = null;
       this.personaACargoInd = null;
       this.idCargoJefe = null;
-      this.cargoJefe = "";
-      this.mision = "";
+      this.cargoJefe = '';
+      this.mision = '';
       this.puntos = null;
       this.idCategoria = null;
-      this.categoria = "";
-      this.salario = null;
+      this.categoria = '';
+      this.salario = 0;
       this.indicadorRequiereFormacion = true;
       this.indicadorHabilitado = false;
-      this.interrelacionesInternas = "";
-      this.interrelacionesExternas = "";
-      this.responsabilidadesAd = "";
+      this.interrelacionesInternas = '';
+      this.interrelacionesExternas = '';
+      this.responsabilidadesAd = '';
       this.tomaDecisiones = null;
       this.actividadesSupervisa = null;
       this.idNivelEducacion = null;
@@ -69,12 +69,12 @@ export class Positions {
       this.tiempoExperiencia = null;
       this.otrosRequisitos = null;
       this.edad = null;
-      this.cargaFisica = "";
-      this.cargaMental = "";
+      this.cargaFisica = '';
+      this.cargaMental = '';
       this.nivelPsicoSocial = null;
-      this.codigoCargo = "";
+      this.codigoCargo = '';
       this.idEstructuraArea = null;
-      this.estructuraArea = "";
+      this.estructuraArea = '';
       this.idEstado = null;
       this.paso = 1;
    }

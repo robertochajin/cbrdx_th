@@ -1,29 +1,29 @@
 <p-messages [value]="msgs"></p-messages>
 <p-confirmDialog width="400" #cd>
   <p-footer>
-    <button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
-    <button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+    <button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate }}" (click)="cd.accept()"></button>
   </p-footer>
 </p-confirmDialog>
 <div *ngIf="risk">
   <div class="row">
     <div class="col-md-12">
       <div>
-        <p-dataTable [value]="PositionExam" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-          <p-column field="examen" header="Nombre" [sortable]="true"></p-column>
-          <p-column header="Ingreso">
+        <p-dataTable [value]="PositionExam" [paginator]="true" [rows]="10" [responsive]="true" >
+          <p-column field="examen" header="{{ 'POSITION.LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
+          <p-column header="{{ 'POSITION.LBL_INGRESO' | translate }}">
             <template let-exam="rowData" pTemplate="body">
               <p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="exam.indicadorIngreso"
                              (onChange)="changeExam(exam)"></p-inputSwitch>
             </template>
           </p-column>
-          <p-column header="Periodicidad">
+          <p-column header="{{ 'POSITION.LBL_PERIOCIDAD' | translate }}">
             <template let-exam="rowData" pTemplate="body">
               <p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="exam.indicadorPeriodicidad"
                              (onChange)="changeExam(exam)"></p-inputSwitch>
             </template>
           </p-column>
-          <p-column header="Retiro">
+          <p-column header="{{ 'POSITION.LBL_RETIRO' | translate }}">
             <template let-exam="rowData" pTemplate="body">
               <p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="exam.indicadorRetiro"
                              (onChange)="changeExam(exam)"></p-inputSwitch>
@@ -40,11 +40,11 @@
       </div>
     </div>
   </div>
-  <form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+  <form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario" *ngIf="!guardando">
     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
       <div class="ui-grid-row">
         <div class="ui-grid-col-6">
-          <label for="idTipoRiesgo">Tipo</label>
+          <label for="idTipoRiesgo">{{ 'POSITION.LBL_TIPO' | translate }}</label>
           <p-dropdown id="idTipoRiesgo" name="idTipoRiesgo" required="true" (onChange)="changeType()"
                       [options]="listTipoRiesgos" [autoWidth]="false"
                       [(ngModel)]="idTypeRisk" #idTipoRiesgo="ngModel"
@@ -52,11 +52,11 @@
           <div class="ui-message ui-messages-error ui-corner-all"
                *ngIf="f.submitted && !idTipoRiesgo.valid">
             <i class="fa fa-close"></i>
-            Tipo de riesgo requerido
+            {{ 'POSITION.LBL_TIPO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
           </div>
         </div>
         <div class="ui-grid-col-6">
-          <label for="idSubtipoRiesgo">Subtipo</label>
+          <label for="idSubtipoRiesgo">{{ 'POSITION.LBL_SUBTIPO' | translate }}</label>
           <p-dropdown id="idSubtipoRiesgo" name="idSubtipoRiesgo" required="true" (onChange)="changeSubtype()"
                       [options]="listSubtipoRiesgo" [autoWidth]="false"
                       [(ngModel)]="idSubtypeRisk"
@@ -65,13 +65,13 @@
           <div class="ui-message ui-messages-error ui-corner-all"
                *ngIf="f.submitted && !idSubtipoRiesgo.valid">
             <i class="fa fa-close"></i>
-            Subtipo de riesgo requerido
+            {{ 'POSITION.LBL_SUBTIPO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
           </div>
         </div>
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-12">
-          <label for="idRiesgo">Riesgo</label>
+          <label for="idRiesgo">{{ 'POSITION.LBL_RIESGO' | translate }}</label>
           <p-dropdown id="idRiesgo" name="idRiesgo" required="true"
                       [options]="listRiesgo" [autoWidth]="false"
                       [(ngModel)]="risk.idRiesgo"
@@ -80,7 +80,7 @@
           <div class="ui-message ui-messages-error ui-corner-all"
                *ngIf="f.submitted && !idRiesgo.valid">
             <i class="fa fa-close"></i>
-            Riesgo requerido
+            {{ 'POSITION.LBL_RIESGO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
           </div>
         </div>
       </div>
@@ -89,7 +89,7 @@
         <div class="ui-grid-col-1">
         </div>
         <div class="ui-grid-col-2">
-          <button pButton icon="fa-plus" label="Guardar" type="submit"></button>
+          <button pButton icon="fa-plus" label="{{ 'BTN_AGREGAR' | translate }}" type="submit"></button>
         </div>
         <div class="ui-grid-col-5"></div>
       </div>
@@ -98,18 +98,21 @@
   <div class="row">
     <div class="col-md-12">
       <div>
-        <p-dataTable [value]="listRisks" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-          <p-column field="riesgo" header="Tipo" [sortable]="true"></p-column>
-          <p-column field="tipo" header="Subtipo" [sortable]="true"></p-column>
-          <p-column field="subtipo" header="Riesgo" [sortable]="true"></p-column>
+        <p-dataTable [value]="listRisks" [paginator]="true" [rows]="10" [responsive]="true" >
+          <p-column field="riesgo" header="{{ 'POSITION.LBL_TIPO' | translate }}" [sortable]="true"></p-column>
+          <p-column field="tipo" header="{{ 'POSITION.LBL_SUBTIPO' | translate }}" [sortable]="true"></p-column>
+          <p-column field="subtipo" header="{{ 'POSITION.LBL_RIESGO' | translate }}" [sortable]="true"></p-column>
         </p-dataTable>
       </div>
     </div>
   </div>
-  <!--<div class="ui-grid-row form-footer-buttons">-->
-    <!--<div class="ui-grid-col-2 pull-right">-->
-      <!--<button pButton label="Siguiente" type="button"></button>-->
-    <!--</div>-->
-  <!--</div>-->
+  <div class="ui-grid-row form-footer-buttons">
+     <div class="ui-grid-col-10">
+        <p-messages [value]="msgsAlert"></p-messages>
+     </div>
+    <div class="ui-grid-col-2 pull-right">
+      <button icon="fa-arrow-right" pButton label="{{ 'BTN_SIGUIENTE' | translate }}" type="button" (click)="next()"></button>
+    </div>
+  </div>
 </div>
 

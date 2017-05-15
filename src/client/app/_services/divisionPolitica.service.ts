@@ -1,79 +1,76 @@
-import {Injectable} from "@angular/core";
-import {Headers, Http, Response} from "@angular/http";
-import "rxjs/add/operator/toPromise";
-import {AuthenticationService} from "./authentication.service";
-import {DivisionPolitica} from "../_models/divisionPolitica";
-import {DivisionPoliticaAreas} from "../_models/divisionPoliticaAreas";
-import {DivisionPoliticaLocalidades} from "../_models/divisionPoliticaLocalidades";
-import {DivisionPoliticaResguardos} from "../_models/divisionPoliticaResguardos";
-import {DivisionPoliticaComunas} from "../_models/divisionPoliticaComunas";
-import {DivisionPoliticaTipos} from "../_models/divisionPoliticaTipos";
-import {Search} from "../_models/search";
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+import { DivisionPolitica } from '../_models/divisionPolitica';
+import { DivisionPoliticaAreas } from '../_models/divisionPoliticaAreas';
+import { DivisionPoliticaLocalidades } from '../_models/divisionPoliticaLocalidades';
+import { DivisionPoliticaResguardos } from '../_models/divisionPoliticaResguardos';
+import { DivisionPoliticaComunas } from '../_models/divisionPoliticaComunas';
+import { DivisionPoliticaTipos } from '../_models/divisionPoliticaTipos';
+import { Search } from '../_models/search';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class DivisionPoliticaService {
 
-    headers = new Headers({'Content-Type': 'application/json'});
-    private serviceURL = '<%= SVC_TH_URL %>/api/divisionPolitica/';
-    private serviceAreasURL = '<%= SVC_TH_URL %>/api/divisionPoliticaAreas/';
-    private serviceTiposURL = '<%= SVC_TH_URL %>/api/divisionPoliticaTipos/';
-    private serviceComunasURL = '<%= SVC_TH_URL %>/api/divisionPoliticaComunas/';
-    private serviceLocalidadesURL = '<%= SVC_TH_URL %>/api/divisionPoliticaLocalidades/';
-    private serviceResguardosURL = '<%= SVC_TH_URL %>/api/divisionPoliticaResguardos/';
+   private serviceURL = '<%= SVC_TH_URL %>/api/divisionPolitica/';
+   private serviceAreasURL = '<%= SVC_TH_URL %>/api/divisionPoliticaAreas/';
+   private serviceTiposURL = '<%= SVC_TH_URL %>/api/divisionPoliticaTipos/';
+   private serviceComunasURL = '<%= SVC_TH_URL %>/api/divisionPoliticaComunas/';
+   private serviceLocalidadesURL = '<%= SVC_TH_URL %>/api/divisionPoliticaLocalidades/';
+   private serviceResguardosURL = '<%= SVC_TH_URL %>/api/divisionPoliticaResguardos/';
 
-    constructor(private http: Http,
-                private authenticationService: AuthenticationService
-    ) {
-        this.headers = new Headers({'Content-Type': 'application/json', 'Authorization': this.authenticationService.token});
-    }
+   constructor( private authHttp: AuthHttp ) {
+   }
 
-    listDivisionPolitica() {
-        return this.http.get(this.serviceURL,{headers: this.headers}).map((res: Response) => res.json() as DivisionPolitica[]);
-    }
+   listDivisionPolitica() {
+      return this.authHttp.get( this.serviceURL ).map( ( res: Response ) => res.json() as DivisionPolitica[] );
+   }
 
-    listByPadreDivisionPolitica(id:number) {
-        return this.http.get(this.serviceURL+"buscarHijos/"+id,{headers: this.headers}).map((res: Response) => res.json() as DivisionPolitica[]);
-    }
-    addDivisionPolitica(c: DivisionPolitica): Promise<DivisionPolitica> {
-        return this.http.post(this.serviceURL, JSON.stringify(c), {headers: this.headers}).toPromise().then(res => res.json() as DivisionPolitica).catch(this.handleError);
-    };
+   listByPadreDivisionPolitica( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'buscarHijos/' + id ).map( ( res: Response ) => res.json() as DivisionPolitica[] );
+   }
 
-    updateDivisionPolitica(c: DivisionPolitica): Promise<any> {
-        return this.http.put(this.serviceURL, JSON.stringify(c), {headers: this.headers}).toPromise().catch(this.handleError);
-    }
+   addDivisionPolitica( c: DivisionPolitica ): Promise<DivisionPolitica> {
+      return this.authHttp.post( this.serviceURL, JSON.stringify( c ) ).toPromise().then( res => res.json() as DivisionPolitica )
+      .catch( this.handleError );
+   };
 
-    viewDivisionPolitica(id: number) {
-        return this.http.get(this.serviceURL+"buscarId/" + id,{headers: this.headers}).map(res => res.json() as DivisionPolitica);
-    }
+   updateDivisionPolitica( c: DivisionPolitica ): Promise<any> {
+      return this.authHttp.put( this.serviceURL, JSON.stringify( c ) ).toPromise().catch( this.handleError );
+   }
 
-    listDivisionPoliticaAreas() {
-        return this.http.get(this.serviceAreasURL,{headers: this.headers}).map((res: Response) => res.json() as DivisionPoliticaAreas[]);
-    }
+   viewDivisionPolitica( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'buscarId/' + id ).map( res => res.json() as DivisionPolitica );
+   }
 
-    listDivisionPoliticaTipos() {
-        return this.http.get(this.serviceTiposURL,{headers: this.headers}).map((res: Response) => res.json() as DivisionPoliticaTipos[]);
-    }
+   listDivisionPoliticaAreas() {
+      return this.authHttp.get( this.serviceAreasURL ).map( ( res: Response ) => res.json() as DivisionPoliticaAreas[] );
+   }
 
-    listDivisionPoliticaComunas() {
-        return this.http.get(this.serviceComunasURL,{headers: this.headers}).map((res: Response) => res.json() as DivisionPoliticaComunas[]);
-    }
+   listDivisionPoliticaTipos() {
+      return this.authHttp.get( this.serviceTiposURL ).map( ( res: Response ) => res.json() as DivisionPoliticaTipos[] );
+   }
 
-    listDivisionPoliticaLocalidades() {
-        return this.http.get(this.serviceLocalidadesURL,{headers: this.headers}).map((res: Response) => res.json() as DivisionPoliticaLocalidades[]);
-    }
+   listDivisionPoliticaComunas() {
+      return this.authHttp.get( this.serviceComunasURL ).map( ( res: Response ) => res.json() as DivisionPoliticaComunas[] );
+   }
 
-    listDivisionPoliticaResguardos() {
-        return this.http.get(this.serviceResguardosURL,{headers: this.headers}).map((res: Response) => res.json() as DivisionPoliticaResguardos[]);
-    }
+   listDivisionPoliticaLocalidades() {
+      return this.authHttp.get( this.serviceLocalidadesURL ).map( ( res: Response ) => res.json() as DivisionPoliticaLocalidades[] );
+   }
 
-    getSearch(val: string) {
-        return this.http.get(this.serviceURL +'search/'+ val+'/',{headers: this.headers}).map(res => res.json() as Search[]);
-    }
+   listDivisionPoliticaResguardos() {
+      return this.authHttp.get( this.serviceResguardosURL ).map( ( res: Response ) => res.json() as DivisionPoliticaResguardos[] );
+   }
 
-    handleError(error: any): Promise<any> {
-        console.error('Error:', error);
-        return Promise.reject(error.message || error);
-    }
+   getSearch( val: string ) {
+      return this.authHttp.get( this.serviceURL + 'search/' + val + '/' ).map( res => res.json() as Search[] );
+   }
 
+   handleError( error: any ): Promise<any> {
+      console.error( 'Error:', error );
+      return Promise.reject( error.message || error );
+   }
 
 }

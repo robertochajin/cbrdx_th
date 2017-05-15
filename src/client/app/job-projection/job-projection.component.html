@@ -1,0 +1,162 @@
+<div *ngIf="approveprojection">
+   <div *ngIf="updateprojection">
+      <div *ngIf="detailprojection">
+         <div *ngIf="addinglocation">
+            <p-messages [value]="msgs"></p-messages>
+            <h3 class="first">{{ 'PROYECCIONLABORAL.LBL_PROYLAB' | translate }}</h3>
+            <form (ngSubmit)="f.valid " #f="ngForm" novalidate id="formulario">
+               <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                  <div class="ui-grid-row">
+                     <div class="ui-grid-col-3">
+                        <label for="idTipoArea">{{ 'PLANTACOLABORADORES.LBL_TIPOAREA' | translate }}</label>
+                        <p-dropdown id="idTipoArea" name="idTipoArea"
+                                    [options]="ListaTiposAreas" [autoWidth]="false"
+                                    [(ngModel)]="jobProjection.idCargo" (onChange)="changeTypeArea()"
+                                    #idTypeArea="ngModel"
+                        ></p-dropdown>
+                     </div>
+                     <div class="ui-grid-col-3">
+                        <label for="idArea">{{ 'DIVISIONPOLITICA.LBL_AREA' | translate }}</label>
+                        <p-dropdown id="idArea" name="idArea" required="true"
+                                    [options]="ListaAreas" [autoWidth]="false" (onChange)="changeArea()"
+                                    [(ngModel)]="jobProjection.idEstructuraOrganizacional"
+                                    #idArea="ngModel"
+                        ></p-dropdown>
+                     </div>
+                     <div class="ui-grid-col-2">
+                        <label for="anio">{{ 'PROYECCIONLABORAL.LBL_ANO' | translate }}</label>
+                        <input *ngIf="viewanio" id="anio" name="anio" #anio="ngModel" pInputText type="number"
+                               [min]="minanio"
+                               [(ngModel)]="jobProjection.anio" required (change)="changeAnio()"/>
+                     </div>
+                     <div class="ui-grid-col-2">
+                        <label for="idArea"><strong>{{ 'LBL_ESTADO' | translate }} </strong></label><br>
+                        <label for="idArea">{{estadoArea}}</label>
+                     </div>
+                     <div class="ui-grid-col-2">
+                        <label for="idArea">.</label>
+                        <button pButton label="{{ 'PROYECCIONLABORAL.BTN_GENERAPROY' | translate }}" type="button" (click)="genProyec()"></button>
+                     </div>
+                  </div>
+               </div>
+            </form>
+            <br><br>
+            <div>
+               <div class="row datable-header">
+                  <div *ngIf="nuevoCargo" class="col-md-6 col-xs-12 datatable-header-add">
+                     <button type="button" icon="fa-plus" label="{{ 'PROYECCIONLABORAL.BTN_NUEVOCARGO' | translate }}"
+                             pButton (click)="toggleform()"></button>
+                  </div>
+               </div>
+               <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="ListJobProjection" [paginator]="true" [rows]="10" [responsive]="true"
+                            >
+                  <p-column field="cargo" header="{{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}" [sortable]="true"></p-column>
+                  <p-column field="plazasActuales" header="{{ 'PROYECCIONLABORAL.LBL_PLAZASATUALES' | translate }}" [sortable]="true"></p-column>
+                  <p-column field="plazasProyectadas" header="{{ 'PROYECCIONLABORAL.LBL_PLAZASPROYECT' | translate }}" [sortable]="true"></p-column>
+                  <p-column field="costoAP" header="{{ 'PROYECCIONLABORAL.LBL_COSTOACTUAL' | translate }}" [sortable]="true"></p-column>
+                  <p-column field="costoPP" header="{{ 'PROYECCIONLABORAL.LBL_COSTOPROYECT' | translate }}" [sortable]="true"></p-column>
+                  <p-column field="estadoProyeccion" header="{{ 'PROYECCIONLABORAL.LBL_ESTADOS' | translate }}" [sortable]="true"></p-column>
+                  <p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+                     <template let-projection="rowData" pTemplate="body">
+                        <button *ngIf="projection.idProyecccionLaboral!==null" type="button" icon="fa-eye"
+                                class="ui-button-info"
+                                pButton (click)="detail(projection)"></button>
+                        <button
+                           *ngIf="(projection.idEstadoProyeccion===1 ||projection.idEstadoProyeccion===3 ||projection.idEstadoProyeccion===4) &&projection.idProyecccionLaboral!==null"
+                           type="button" icon="fa-pencil" class="ui-button-success"
+                           pButton (click)="update(projection)"></button>
+                        <button *ngIf="projection.idEstadoProyeccion!==2 &&projection.idProyecccionLaboral!==null"
+                                type="button" icon="fa-check" class="ui-button-danger"
+                                pButton (click)="approve(projection)"></button>
+                        <button *ngIf="projection.idProyecccionLaboral===null" type="button" label="{{ 'PROYECCIONLABORAL.BTN_CONFIRMAR' | translate }}"
+                                class="ui-button-danger"
+                                pButton (click)="confirmar(projection)"></button>
+                        <button *ngIf="projection.idProyecccionLaboral===null" type="button" label="{{ 'PROYECCIONLABORAL.BTN_ELIMINAR' | translate }}"
+                                class="ui-button-danger"
+                                pButton (click)="delete(projection)"></button>
+                     </template>
+                  </p-column>
+               </p-dataTable>
+            </div>
+            <br><br>
+            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+               <div class="ui-grid-row">
+                  <div class="ui-grid-col-2">
+                  </div>
+                  <div class="ui-grid-col-3">
+                     <label><strong>{{ 'PROYECCIONLABORAL.LBL_ACTUAL' | translate }}</strong></label>
+                     <div class="row">
+                        <label class="col-md-6 col-sm-6 col-xs-6 control-label">{{ 'PROYECCIONLABORAL.LBL_NUMCARGOS' | translate }}:</label>
+                        <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{cargosA}}</strong></label>
+                     </div>
+                     <div class="row">
+                        <label class="col-md-6 col-sm-6 col-xs-4 control-label">{{ 'PROYECCIONLABORAL.LBL_NUMPLAZAS' | translate }}:</label>
+                        <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{plazasA}}</strong></label>
+                     </div>
+                     <div class="row">
+                        <label class="col-md-6 col-sm-6 col-xs-4 control-label">{{ 'PROYECCIONLABORAL.LBL_COSTOPLANTA' | translate }}:</label>
+                        <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{costoA}}</strong></label>
+                     </div>
+                  </div>
+                  <div class="ui-grid-col-3">
+                     <label><strong>{{ 'PROYECCIONLABORAL.LBL_PROYECTADO' | translate }}</strong></label>
+                     <div class="row">
+                        <label class="col-md-6 col-sm-6 col-xs-6 control-label">{{ 'PROYECCIONLABORAL.LBL_NUMCARGOS' | translate }}:</label>
+                        <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{cargos}}</strong></label>
+                     </div>
+                     <div class="row">
+                        <label class="col-md-6 col-sm-6 col-xs-4 control-label">{{ 'PROYECCIONLABORAL.LBL_NUMPLAZAS' | translate }}:</label>
+                        <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{plazasP}}</strong></label>
+                     </div>
+                     <div class="row">
+                        <label class="col-md-6 col-sm-6 col-xs-4 control-label">{{ 'PROYECCIONLABORAL.LBL_COSTOPLANTA' | translate }}:</label>
+                        <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{costoP}}</strong></label>
+                     </div>
+                  </div>
+                  <div class="ui-grid-col-3">
+                     <label><strong>{{ 'PROYECCIONLABORAL.LBL_INCREMENTO' | translate }} %</strong></label>
+                     <div class="row">
+                        <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{cargosI}} %</strong></label>
+                     </div>
+                     <div class="row">
+                        <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{plazasI}} %</strong></label>
+                     </div>
+                     <div class="row">
+                        <label class="col-md-6 col-sm-6 col-xs-8 "><strong>{{costoI}} %</strong></label>
+                     </div>
+                  </div>
+                  <div class="ui-grid-col-1">
+                  </div>
+               </div>
+            </div>
+	         <div class="row form-footer-buttons">
+		         <div class="form-group col-md-12">
+				      <button pButton label="{{ 'PROYECCIONLABORAL.BTN_CONFIRMAPROY' | translate }}" type="button"
+				              (click)="confirmProjection()"></button>
+		         </div>
+	         </div>
+            <p-confirmDialog width="400" #cd>
+               <p-footer>
+                  <button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+                  <button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+               </p-footer>
+            </p-confirmDialog>
+         </div>
+         <div *ngIf="!addinglocation">
+            <projections-add (dismiss)="toggleform()" (create)="bindLocation($event)"
+                             [id]="jobProjection.idEstructuraOrganizacional" [anio]="jobProjection.anio"></projections-add>
+         </div>
+      </div>
+      <div *ngIf="!detailprojection">
+         <projections-detail (dismiss)="detailBack()" [jobProjection]="jobProjection"></projections-detail>
+      </div>
+   </div>
+   <div *ngIf="!updateprojection">
+      <projections-update (dismiss)="updateBack()" (update)="updateProjection($event)"
+                          [jobProjection]="jobProjection"></projections-update>
+   </div>
+</div>
+<div *ngIf="!approveprojection">
+   <projections-approve (dismiss)="approveBack()" (approve)="approveProjection($event)"
+                        [jobProjection]="jobProjection"></projections-approve>
+</div>

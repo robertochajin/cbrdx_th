@@ -1,7 +1,7 @@
 <div *ngIf="study">
     <div class="row">
         <div class="col-md-12">
-            <h3 class="first">Estudio no Formal</h3>
+            <h3 class="first">{{'EMPLOYEES.LBL_EDUCACION' | translate}}</h3>
         </div>
     </div>
 
@@ -11,36 +11,36 @@
           <div class="form-group">
 
             <div class="row">
-              <label class="col-md-3 col-sm-6 col-xs-12 control-label">Titulo:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_TITULO' | translate}}:</label>
               <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.tituloEstudio}}</strong></label>
 
-              <label class="col-md-3 col-sm-6 col-xs-12 control-label">Ciudad:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'LBL_CIUDAD' | translate }}:</label>
               <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.ciudad}}</strong></label>
             </div>
             <div class="row">
-              <label class="col-md-3 col-sm-6 col-xs-12 control-label">Ingreso:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_INGRESO' | translate}}:</label>
               <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.fechaIngresa}}</strong></label>
 
-              <label class="col-md-3 col-sm-6 col-xs-12 control-label">Finalizacion:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'EMPLOYEES.LBL_FINALIZACION' | translate }}:</label>
               <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.fechaTermina}}</strong></label>
             </div>
             <div class="row">
-              <label class="col-md-3 col-sm-6 col-xs-12 control-label">Institucion:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_INSTITUCION' | translate}}:</label>
               <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.institucion}}</strong></label>
 
             </div>
             <div class="row">
-              <label class="col-md-3 col-sm-6 col-xs-12 control-label">Intensidad:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_INTENSIDAD' | translate}}:</label>
               <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.intensidadHoraria}}</strong></label>
 
-              <label class="col-md-3 col-sm-6 col-xs-12 control-label">Tipo estudio:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_TIPOESTUDIO' | translate}}:</label>
               <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{studysType}}</strong></label>
             </div>
             <div class="row">
-              <label class="col-md-3 col-sm-6 col-xs-12 control-label">Descripción:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'LBL_DESCRIPCION' | translate }}:</label>
               <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.descripcion}}</strong></label>
 
-              <label class="col-md-3 col-sm-6 col-xs-12 control-label">Area de estudio:</label>
+              <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_AREAESTUDIOS' | translate}}:</label>
               <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{study.areaEstudio}}</strong></label>
             </div>
           </div>
@@ -52,7 +52,7 @@
 
 <div class="row form-footer-buttons">
   <div class="form-group col-md-12">
-    <button icon="fa-arrow-left" label="Regresar" type="button"
+    <button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate}}" type="button"
             pButton (click)="goBack()"></button>
   </div>
 </div>

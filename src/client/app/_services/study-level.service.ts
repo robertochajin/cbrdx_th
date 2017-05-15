@@ -1,22 +1,20 @@
 import { Injectable } from '@angular/core';
-import {Http, Response, Headers} from '@angular/http';
-import {AuthenticationService} from "./authentication.service";
-import {StudyLevels} from "../_models/studyLevels";
+import { Response } from '@angular/http';
+import { StudyLevels } from '../_models/studyLevels';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class StudyLevelServices {
 
-  public headers = new Headers({'Content-Type': 'application/json'});
-  private masterService = '<%= SVC_TH_URL %>/api/nivelesEstudios/';
-  private detailService  = '<%= SVC_TH_URL %>/api/nivelesEstudios/';
+   private masterService = '<%= SVC_TH_URL %>/api/nivelesEstudios/';
+   private detailService = '<%= SVC_TH_URL %>/api/nivelesEstudios/';
 
-  constructor(private http: Http, private authenticationService: AuthenticationService) {
-    this.headers = new Headers({'Content-Type': 'application/json', 'Authorization': this.authenticationService.token});
-  }
+   constructor( private authHttp: AuthHttp ) {
+   }
 
-  getAllEnabled() {
-    return this.http.get(this.masterService+'enabled/').map((res:Response) => res.json() as StudyLevels[]);
-  }
+   getAllEnabled() {
+      return this.authHttp.get( this.masterService + 'enabled/' ).map( ( res: Response ) => res.json() as StudyLevels[] );
+   }
 
 }
 

@@ -1,7 +1,7 @@
 <div *ngIf="grupoGestion">
   <div class="row">
     <div class="col-md-12">
-      <h3 class="first">Grupos de Gestión</h3>
+      <h3 class="first">{{ 'GRUPOSDEGESTION.LBL_GESTION' | translate }}</h3>
     </div>
   </div>
 
@@ -10,31 +10,31 @@
     <form class="form-horizontal">
       <fieldset>
           <div class="row">
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_CODIGO' | translate:param }}:</label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_CODIGO' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{grupoGestion.codigoGrupoGestion}}</strong></label>
 
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_NOMBRE' | translate:param }}:</label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_NOMBRE' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{grupoGestion.grupoGestion}}</strong></label>
           </div>
           <div class="row">
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_FECHAINICIO' | translate:param }}:</label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_FECHAINICIO' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{grupoGestion.fechaInicio}}</strong></label>
 
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_FECHAFIN' | translate:param }}:</label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_FECHAFIN' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{grupoGestion.fechaFin}}</strong></label>
           </div>
           <div class="row">
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_FUNCIONES' | translate:param }}:</label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'GRUPOSDEGESTION.LBL_FUNCIONES' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{grupoGestion.funciones}}</strong></label>
 
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_RESPONSABILIDADES' | translate:param }}:</label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'GRUPOSDEGESTION.LBL_RESPONSABILIDADES' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{grupoGestion.responsabilidades}}</strong></label>
           </div>
           <div class="row">
-            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_HABILITADO' | translate:param }}:</label>
+            <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_HABILITADO' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{habilitado}}</strong></label>
           </div>
-      </fieldset>
+      </fieldset> 
     </form>
     </div>
   </div>
@@ -43,7 +43,7 @@
 
 <div class="row form-footer-buttons">
   <div class="form-group col-md-12">
-    <button icon="fa-arrow-left" label="Regresar" type="button"
+    <button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate }}" type="button"
             pButton (click)="goBack()"></button>
   </div>
 </div>

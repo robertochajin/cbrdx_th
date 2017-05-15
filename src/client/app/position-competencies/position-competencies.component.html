@@ -1,0 +1,26 @@
+<p-messages [value]="msgs"></p-messages>
+<p-tabView>
+   <p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}"
+               [selected]="i == 0" >
+      <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="group.competencies"
+                    [responsive]="true" id="positionCompetenciesDT" styleClass="table-overflow" >
+         <p-column field="competencia" header="{{ 'POSITION.LBL_COMPETENCIA' | translate }}" [sortable]="true"></p-column>
+         <p-column header="{{ 'POSITION.LBL_PONDERACION' | translate }}" field="cargoCompetencia" >
+            <template let-competencie="rowData" pTemplate="body">
+             <p-dropdown [options]="ponderanciesList" [(ngModel)]="competencie.cargoCompetencia.idPonderacion"
+                         [autoWidth]="false" (onChange)="update(competencie, i)"></p-dropdown>
+            </template>
+         </p-column>
+      </p-dataTable>
+   </p-tabPanel>
+   <p-tabPanel header="" *ngIf="1 != 1"></p-tabPanel>
+</p-tabView>
+<p-confirmDialog width="400"></p-confirmDialog>
+<div class="row">
+   <div class="col-md-10">
+   </div>
+   <div class="col-md-2">
+      <button type="button" pButton icon="fa-arrow-right" (click)="next()"
+              label="{{ 'BTN_SIGUIENTE' | translate }}"></button>
+   </div>
+</div>

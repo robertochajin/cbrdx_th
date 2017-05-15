@@ -1,109 +1,68 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
-import {AuthenticationService} from "./authentication.service";
-import { TiposPersonas }            from '../_models/tiposPersonas';
+import { Response } from '@angular/http';
+import { TiposPersonas } from '../_models/tiposPersonas';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class ListEmployeesService {
 
-  public headers = new Headers({'Content-Type': 'application/json'});
+   private serviceURL = '<%= SVC_TH_URL %>/api/';
 
-  private serviceURL = '<%= SVC_TH_URL %>/api/';
+   constructor( private authHttp: AuthHttp ) {
+   }
 
-  constructor(private http: Http,
-              private authenticationService: AuthenticationService
-  ) {
-    this.headers = new Headers({'Content-Type': 'application/json', 'Authorization': this.authenticationService.token});
-  }
+   getListPersonTypes() {
+      return this.authHttp.get( this.serviceURL + 'tiposPersonas/' ).map( ( res: Response ) => res.json() as TiposPersonas[] );
+   }
 
-  getListPersonTypes()  {
-    return this.http.get(this.serviceURL+"tiposPersonas/",{headers: this.headers}).map((res:Response) => res.json() as TiposPersonas[]);
-  }
+   getDocumentTypes() {
+      return this.authHttp.get( this.serviceURL + 'tiposDocumentos/' ).map( ( res: Response ) => res.json() );
+   }
 
-  getDocumentTypes()  {
-    return this.http.get(this.serviceURL+"tiposDocumentos/",{headers: this.headers}).map((res:Response) => res.json());
-  }
+   getGenderTypes() {
+      return this.authHttp.get( this.serviceURL + 'generos/' ).map( ( res: Response ) => res.json() );
+   }
 
-  getGenderTypes()  {
-    return this.http.get(this.serviceURL+"generos/",{headers: this.headers}).map((res:Response) => res.json());
-  }
+   getMaritalStatusTypes() {
+      return this.authHttp.get( this.serviceURL + 'estadosCiviles/' ).map( ( res: Response ) => res.json() );
+   }
 
-  getMaritalStatusTypes()  {
-    return this.http.get(this.serviceURL+"estadosCiviles/",{headers: this.headers}).map((res:Response) => res.json());
-  }
+   getRhRactorTypes() {
+      return this.authHttp.get( this.serviceURL + 'factorRh/' ).map( ( res: Response ) => res.json() );
+   }
 
-  getRhRactorTypes()  {
-    return this.http.get(this.serviceURL+"factorRh/",{headers: this.headers}).map((res:Response) => res.json());
-  }
+   getHealthTypes() {
+      return this.authHttp.get( this.serviceURL + 'coberturasSalud/' ).map( ( res: Response ) => res.json() );
+   }
 
-  getHealthTypes()  {
-    return this.http.get(this.serviceURL+"coberturasSalud/",{headers: this.headers}).map((res:Response) => res.json());
-  }
+   getOccupationsTypes() {
+      return this.authHttp.get( this.serviceURL + 'tiposOcupaciones/' ).map( ( res: Response ) => res.json() );
+   }
 
-  getOccupationsTypes()  {
-    return this.http.get(this.serviceURL+"tiposOcupaciones/",{headers: this.headers}).map((res:Response) => res.json());
-  }
+   getAcademicLevelTypes() {
+      return this.authHttp.get( this.serviceURL + 'nivelesEstudios/' ).map( ( res: Response ) => res.json() );
+   }
 
-  getAcademicLevelTypes()  {
-    return this.http.get(this.serviceURL+"nivelesEstudios/",{headers: this.headers}).map((res:Response) => res.json());
-  }
+   getAffiliationTypes() {
+      return this.authHttp.get( this.serviceURL + 'tiposAfiliacion/' ).map( ( res: Response ) => res.json() );
+   }
 
-  getAffiliationTypes()  {
-    return this.http.get(this.serviceURL+"tiposAfiliacion/",{headers: this.headers}).map((res:Response) => res.json());
-  }
+   getTerType( val: string ) {
+      return this.authHttp.get( this.serviceURL + 'listasTiposTerceros/buscarCodigo/' + val + '/' ).map( ( res: Response ) => res.json() );
+   }
 
-  getOfficeLevelTypes()  {
-    return this.http.get(this.serviceURL+"listasNivelesCargos/enabled/",{headers: this.headers}).map((res:Response) => res.json());
-  }
+   getlistStratum() {
+      return this.authHttp.get( this.serviceURL + 'listasEstratos' ).map( ( res: Response ) => res.json() );
+   }
 
-  getTerType(val:string)  {
-    return this.http.get(this.serviceURL+"listasTiposTerceros/buscarCodigo/"+val+"/",{headers: this.headers}).map((res:Response) => res.json());
-  }
+   getlistLocation( c: number ) {
+      return this.authHttp.get( this.serviceURL + '/localizaciones/buscarTercero/' + c ).map( ( res: Response ) => res.json() );
+   }
 
-  getLateralityTypes()  {
-    return this.http.get(this.serviceURL+"listasLateralidades/enabled",{headers: this.headers}).map((res:Response) => res.json());
-
-  }
-  getlistSizeShirt()  {
-    return this.http.get(this.serviceURL+"listasTallas/enabled/CAM",{headers: this.headers}).map((res:Response) => res.json());
-
-  }
-  getlistSizeFootwear()  {
-    return this.http.get(this.serviceURL+"listasTallas/enabled/ZAPA",{headers: this.headers}).map((res:Response) => res.json());
-
-  }
-  getlistSizePants(tipo:string)  {
-    return this.http.get(this.serviceURL+"listasTallas/enabled/"+tipo,{headers: this.headers}).map((res:Response) => res.json());
-  }
-  getlistStratum()  {
-    return this.http.get(this.serviceURL+"listasEstratos",{headers: this.headers}).map((res:Response) => res.json());
-  }
-  getlistTypeConstruction()  {
-    return this.http.get(this.serviceURL+"listasTiposConstruccionViviendas",{headers: this.headers}).map((res:Response) => res.json());
-  }
-  getlistTypeEstate()  {
-    return this.http.get(this.serviceURL+"listasTiposViviendas",{headers: this.headers}).map((res:Response) => res.json());
-  }
-  getlistClassEstate()  {
-    return this.http.get(this.serviceURL+"listasClasesViviendas",{headers: this.headers}).map((res:Response) => res.json());
-  }
-  getlistLocation(c: number)  {
-    return this.http.get(this.serviceURL+"/localizaciones/buscarTercero/"+c,{headers: this.headers}).map((res:Response) => res.json());
-  }
-  handleError(error: any): Promise<any> {
-    console.error('Error:', error);
-    return Promise.reject(error.message || error);
-  }
-
-  getlistTypeVehicle()  {
-    return this.http.get(this.serviceURL+"listasTiposVehiculos",{headers: this.headers}).map((res:Response) => res.json());
-  }
-  getlistTypeService()  {
-    return this.http.get(this.serviceURL+"listasTiposServiciosVehiculos",{headers: this.headers}).map((res:Response) => res.json());
-  }
-  getlistBrand()  {
-    return this.http.get(this.serviceURL+"listasMarcasVehiculos",{headers: this.headers}).map((res:Response) => res.json());
-  }
+   handleError( error: any ): Promise<any> {
+      console.error( 'Error:', error );
+      return Promise.reject( error.message || error );
+   }
 
 }
 

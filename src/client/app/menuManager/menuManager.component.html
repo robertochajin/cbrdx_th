@@ -1,0 +1,133 @@
+<h3>{{ 'ADMINMENUS.LBL_ADMINMENU' | translate }}</h3>
+<div class="row datable-header">
+   <div class="col-md-6 col-xs-12 datatable-header-add">
+      <button type="button" pButton icon="fa-plus" (click)="newModule()" label="{{ 'ADMINMENUS.BTN_AGREGARMODULO' | translate }}"></button>
+      <button type="button" pButton icon="fa-plus" (click)="newMenu()" label="{{ 'ADMINMENUS.BTN_AGREGARMENU' | translate }}"
+              *ngIf="modulo"></button>
+   </div>
+</div>
+<div class="ui-grid-row">
+   
+   <div class="col-md-4">
+      <p-tree id="treedCompany" [(value)]="treeMenu" selectionMode="single"
+              [(selection)]="selectedNode"
+              (onNodeSelect)="nodeSelect($event.node)"
+              (onNodeExpand)="nodeExpand($event.node)"
+      ></p-tree>
+   </div>
+   
+   <div class="col-md-8">
+      <p-fieldset legend="{{header}}">
+         <div class="row-fluid">
+            <div class="col-md-12">
+               <form *ngIf="!guardando" (ngSubmit)="!codeExists&&f.valid && save()" #f="ngForm" novalidate>
+                  <div class="row">
+                     <div class="form-group">
+                        <label for="codigo" class="control-label col-sm-3">* {{ 'LBL_CODIGO' | translate }} </label>
+                        <div class=" col-sm-9">
+                           <input type="text" pInputText class="form-control" id="codigo"
+                                  name="codigo"
+                                  [(ngModel)]="menus.codigoMenu"
+                                  (change)="validateCode()"
+                                  (keyup)="capitalizeCode()"
+                                  #codigo="ngModel" maxlength="10"
+                                  required/>
+                           <div class="ui-message ui-messages-error ui-corner-all"
+                                *ngIf="f.submitted && !codigo.valid">{{ 'ADMINMENUS.MSG_CODREQUERIDO' | translate }}                           </div>
+                           <div class="ui-message ui-messages-error ui-corner-all"
+                                *ngIf="codeExists">{{ 'ADMINMENUS.MSG_CODREGISTRADO' | translate }}</div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="form-group">
+                        <label for="nombre" class="control-label col-sm-3">* {{ 'LBL_NOMBRE' | translate }} </label>
+                        <div class=" col-sm-9">
+                           <input type="text" pInputText class="form-control" id="nombre"
+                                  name="nombre"
+                                  [(ngModel)]="menus.menu"
+                                  #nombre="ngModel"
+                                  (keyup)="capitalizeName()"
+                                  required/>
+                           <div class="ui-message ui-messages-error ui-corner-all"
+                                *ngIf="f.submitted && !nombre.valid">{{ 'ADMINMENUS.MSG_NOMBREREQUERIDO' | translate }}
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div *ngIf="!modulo">
+                     <div class="row">
+                        <div class="form-group">
+                           <label for="ruta" class="control-label col-sm-3">* {{ 'ADMINMENUS.LBL_ENLACE' | translate }} </label>
+                           <div class=" col-sm-9">
+                              <input type="text" pInputText class="form-control" id="ruta" name="ruta"
+                                     [(ngModel)]="menus.ruta"
+                                     #ruta="ngModel"
+                                     required/>
+                              <div class="ui-message ui-messages-error ui-corner-all"
+                                   *ngIf="f.submitted && !ruta.valid">{{ 'ADMINMENUS.MSG_ENLACEREQUERIDO' | translate }}                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="form-group">
+                        <label for="secuencia" class="control-label col-sm-3">* {{ 'ADMINMENUS.LBL_SECUENCIA' | translate }} </label>
+                        <div class=" col-sm-9">
+                           <input type="number" pInputText class="form-control" id="secuencia" name="secuencia"
+                                  [(ngModel)]="menus.secuencia"
+                                  #orden="ngModel"
+                                  required/>
+                           <div class="ui-message ui-messages-error ui-corner-all"
+                                *ngIf="f.submitted && !orden.valid">{{ 'ADMINMENUS.MSG_SECUENCIAREQUERIDO' | translate }}
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="form-group">
+                        <label for="clase" class="control-label col-sm-3">* {{ 'ADMINMENUS.LBL_CLASE' | translate }} </label>
+                        <div class=" col-sm-9">
+                           <input type="text" pInputText class="form-control" id="clase" name="clase"
+                                  [(ngModel)]="menus.clase"
+                                  #clase="ngModel"
+                                  required/>
+                           <div class="ui-message ui-messages-error ui-corner-all"
+                                *ngIf="f.submitted && !clase.valid">{{ 'ADMINMENUS.MSG_CLASEREQUERIDO' | translate }}
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  
+                  <div class="row">
+                     <div class="form-group">
+                        <label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate }}</label>
+                        <div class=" col-sm-9">
+                           <p-checkbox binary="true" id="indicador" name="indicador"
+                                       [(ngModel)]="menus.indicadorHabilitado"
+                                       #indicador="ngModel"></p-checkbox>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row form-footer-buttons">
+                     <div class="form-group col-md-12">
+                        <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+                        <button pButton type="submit" formaction="" label="{{ 'BTN_GUARDAR' | translate }}"></button>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </p-fieldset>
+      <p-dialog header="{{ 'LBL_CONFIRMACION' | translate }}" [(visible)]="displayDialog"
+                responsive="true" modal="true">
+         <p>{{ 'MSG_CONFIRMACION' | translate }}</p>
+         <p-footer>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+               <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="{{ 'BTN_NO' | translate }}"></button>
+               <button type="button" pButton icon="fa-check" (click)="doCancel()" label="{{ 'BTN_SI' | translate }}"></button>
+            </div>
+         </p-footer>
+      </p-dialog>
+   </div>
+</div>

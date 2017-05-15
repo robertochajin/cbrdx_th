@@ -1,19 +1,21 @@
 <div>
     <div class="row datable-header">
         <div class="col-md-6 col-xs-12 datatable-header-add">
-            <button type="button" pButton icon="fa-plus" (click)="add()" label="Nuevo Familiar"></button>
+            <button type="button" pButton icon="fa-plus" (click)="add()" label="{{ 'EMPLOYEES.LBL_NUEVOFAMILIAR' | translate }}"></button>
         </div>
-        <div class="col-md-6 col-xs-12 datatable-header-search" >
-            <i class="fa fa-search"></i>
-            <input #gb type="text" pInputText size="40" placeholder="Buscar...">
-        </div>
+		 <div class="col-md-6 col-xs-12 datatable-header-search">
+			 <div class="input-group">
+				 <div class="input-group-addon"><i class="fa fa-search"></i></div>
+				 <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control">
+			 </div>
+		 </div>
     </div>
-    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="familyInformations"   [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-        <p-column field="nombreCompleto" header="Nombre" [sortable]="true"></p-column>
-        <p-column field="nombreListaTipoDocumento" header="Tipo de documento" [sortable]="true"></p-column>
-        <p-column field="numeroDocumento" header="Número de documento" [sortable]="true"></p-column>
-        <p-column field="nombreListaParentesco" header="Parentezco" [sortable]="true"></p-column>
-        <p-column field="edad" header="Edad" [sortable]="true"></p-column>
+    <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="familyInformations"   [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+        <p-column field="nombreCompleto" header="{{ 'LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
+        <p-column field="tipoDocumento" header="{{ 'LBL_TIPODOCUMENTO' | translate }}" [sortable]="true"></p-column>
+        <p-column field="numeroDocumento" header="{{ 'LBL_NUMERODOCUMENTO' | translate }}" [sortable]="true"></p-column>
+        <p-column field="parentesco" header="{{ 'EMPLOYEES.LBL_PARENTESCO' | translate }}" [sortable]="true"></p-column>
+        <p-column field="edad" header="{{ 'EMPLOYEES.LBL_EDAD' | translate }}" [sortable]="true"></p-column>
         <p-column header="Acciones" styleClass="datatable-col-action" >
             <template let-family="rowData" pTemplate="body">
                 <div class="btn-group" role="group">

@@ -1,4 +1,4 @@
-<h3>Ocupaciones</h3>
+<h3>{{ 'OCUPACIONES.LBL_OCUPACIONES' | translate}}</h3>
 <div class="row datable-header">
     <div class="col-md-6 col-xs-12 datatable-header-add">
         <button type="button" pButton icon="fa-plus" (click)="newOccupation()" label="{{btnoccupation.label}}"
@@ -7,12 +7,16 @@
                 *ngIf="btnsubocupation.show"></button>
     </div>
     <div class="col-md-6 col-xs-12 datatable-header-search">
-        <p-autoComplete placeholder="Buscar..." field="label" name="buscar" id="buscar" #buscar="ngModel"
-                        [(ngModel)]="selectedSearch"
-                        [suggestions]="resultSearch"
-                        (completeMethod)="search($event)"
-                        (onSelect)="captureId($event)">
-        </p-autoComplete>
+       <div class="input-group">
+          <div class="input-group-addon"><i class="fa fa-search"></i></div>
+          <p-autoComplete placeholder="{{ 'LBL_BUSCAR' | translate}}" field="label" name="buscar" id="buscar" #buscar="ngModel"
+                          [(ngModel)]="selectedSearch"
+                          [suggestions]="resultSearch"
+                          (completeMethod)="search($event)"
+                          (onSelect)="captureId($event)">
+          </p-autoComplete>
+       </div>
+
     </div>
 </div>
 <div class="ui-grid-row">
@@ -26,7 +30,7 @@
     <div class="col-md-8">
         <p-fieldset legend="{{header}}">
             <div class="row-fluid">
-                <div class="col-md-12">
+                <div class="col-md-12" *ngIf="!guardado">
                     <form name="form" (ngSubmit)="!codeExists&&f.valid && save()" #f="ngForm" id="formName" novalidate>
                             <div class="form-group">
                                 <h4>{{labelPadre}}</h4>
@@ -44,13 +48,13 @@
                                            (keyup)="capitalizeCodigo()"
                                            #codigoOcupacion="ngModel" [maxlength]="tabselected"
                                            [minlength]="tabselected" required>
-                                    <div *ngIf="f.submitted && !codigoOcupacion.valid" class="ui-message  ui-corner-all">
-                                        <p [hidden]="!codigoOcupacion.errors.required">Código es requerido</p>
-                                        <p [hidden]="!codigoOcupacion.errors.minlength">Código debe ser de
-                                            {{tabselected}} numeros</p>
+                                    <div *ngIf="f.submitted && !codigoOcupacion.valid" class="ui-message  ui-corner-all alert-danger">
+                                        <p [hidden]="!codigoOcupacion.errors.required">{{ 'OCUPACIONES.MSG_CODREQUERIDO' | translate}}</p>
+                                        <p [hidden]="!codigoOcupacion.errors.minlength">{{ 'OCUPACIONES.MSG_CODNUM' | translate}}
+                                            {{tabselected}} {{ 'OCUPACIONES.MSG_NUM' | translate}}</p>
                                     </div>
-                                    <div *ngIf="codeExists" class="ui-message  ui-corner-all">
-                                        Ya se encuentra registrado ese código
+                                    <div *ngIf="codeExists" class="ui-message  ui-corner-all alert-danger">
+                                       {{ 'OCUPACIONES.MSG_CODREGISTRADO' | translate}}
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +67,7 @@
                                               required [(ngModel)]="ocupaciones.ocupacion" #ocupacion="ngModel"
                                               (keyup)="capitalizeName()"
                                     ></textarea>
-                                    <div *ngIf="f.submitted && !ocupacion.valid" class="ui-message  ui-corner-all">
+                                    <div *ngIf="f.submitted && !ocupacion.valid" class="ui-message  ui-corner-all alert-danger">
                                         {{labelfieldocupacion}} es requerido
                                     </div>
                                 </div>
@@ -91,16 +95,15 @@
                 </div>
             </div>
         </p-fieldset>
-        <p-dialog header="Confirmación" [(visible)]="displayDialog"
+        <p-dialog header="{{ 'LBL_CONFIRMACION' | translate }}" [(visible)]="displayDialog"
                   responsive="true" modal="true">
             <p> {{ 'MSG_CONFIRMACION' | translate }}</p>
             <p-footer>
                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                    <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>
-                    <button type="button" pButton icon="fa-check" (click)="doCancel()" label="Si"></button>
+                    <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="{{ 'BTN_NO' | translate }}"></button>
+                    <button type="button" pButton icon="fa-check" (click)="doCancel()" label="{{ 'BTN_SI' | translate }}"></button>
                 </div>
             </p-footer>
         </p-dialog>
     </div>
 </div>
-<p-growl [value]="msgs"></p-growl>

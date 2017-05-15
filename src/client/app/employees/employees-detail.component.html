@@ -6,7 +6,7 @@
     <div class="col-md-12">
 
       <div class="header">
-        <h4 class="title">Colaboradores</h4>
+        <h4 class="title">{{'EMPLOYEES.LBL_COLABORADORES' | translate}}</h4>
       </div>
 
       <div class="clearfix card-header">
@@ -20,7 +20,7 @@
           <span>{{employee.cargoActual}}({{employee.fechaCreacion}})</span>
         </div>
         <div class="col-md-2">
-          <a href="#" class="btn btn-primary">Historial Laboral</a>
+          <!--<a href="#" class="btn btn-primary">{{'EMPLOYEES.LBL_HISTORIALABORAL' | translate}}</a>-->
         </div>
       </div>
 
@@ -33,42 +33,42 @@
                       <fieldset>
                         <div class="form-group">
                           <div class="row">
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Fecha de Exp.:</label>
+                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_FECHAEXPEDICION' | translate}}:</label>
                             <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.fechaDocumento}}</strong></label>
 
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Ciudad de Exp.:</label>
+                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_CIUDADEXPEDICION' | translate}}:</label>
                             <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.ciudadExpDocumento}}</strong></label>
 
                           </div>
                           <div class="row">
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Fecha de Nacimiento:</label>
+                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate}}:</label>
                             <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.fechaNacimiento}}</strong></label>
 
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">ciudad de Nacimiento:</label>
+                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_CIUDADNACIMIENTO' | translate}}:</label>
                             <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.ciudadNacimiento}}</strong></label>
 
                           </div>
                           <div class="row">
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nacionalidad:</label>
+                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_NACIONALIDAD' | translate}}:</label>
                             <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.gentilicio}}</strong></label>
 
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Genero:</label>
+                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_GENERO' | translate}}</label>
                             <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.genero}}</strong></label>
 
                           </div>
                           <div class="row">
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Estado Civil:</label>
+                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_ESTADOCIVIL' | translate}}:</label>
                             <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.estadoCivil}}</strong></label>
 
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Factor RH:</label>
+                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_FACTORRH' | translate}}:</label>
                             <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.factorRh}}</strong></label>
 
                           </div>
                           <div class="row">
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Numero de Hijos:</label>
+                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_NUMEROHIJOS' | translate}}:</label>
                             <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.nroHijos}}</strong></label>
 
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">Nivel Educativo:</label>
+                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_NIVELESTUDIOS' | translate}}:</label>
                             <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.nivelEstudio}}</strong></label>
 
                           </div>
@@ -82,7 +82,7 @@
                           </div>
                           <div class="row form-footer-buttons">
                             <div class="form-group col-md-12">
-                              <button type="button" icon="fa-pencil" label="Editar" class="ui-button-success"
+                              <button type="button" icon="fa-pencil" label="{{'BTN_EDITAR' | translate}}" class="ui-button-success"
                                       pButton (click)="update(employee.idTercero)"></button>
                             </div>
                           </div>
@@ -91,46 +91,46 @@
                     </form>
                   </p-accordionTab>
 
-                  <p-accordionTab header="Datos adicionales" [selected]="acordion == 1">
+                  <p-accordionTab header="{{'EMPLOYEES.LBL_DATOSADICIONALES' | translate}}" [selected]="acordion == 1">
                     <fieldset>
                       <employees-additional-data *ngIf="employee.idTercero" [employee]="employee"></employees-additional-data>
                     </fieldset>
                   </p-accordionTab>
 
-                  <p-accordionTab header="Datos de Contacto" [selected]="acordion == 2">
+                  <p-accordionTab header="{{'EMPLOYEES.LBL_DATOSCONTACTO' | translate}}" [selected]="acordion == 2">
                     <fieldset *ngIf="employee.idTercero">
                       <employees-contact  [employee]="employee"></employees-contact>
                       <employees-contact-list [employee]="employee"></employees-contact-list>
                     </fieldset>
                   </p-accordionTab>
 
-                  <p-accordionTab header="Información Familiar" [selected]="acordion == 3">
+                  <p-accordionTab header="{{'EMPLOYEES.LBL_INFORMACIONFAMILIAR' | translate}}" [selected]="acordion == 3">
                     <family-information *ngIf="employee.idTercero" [employee]="employee"></family-information>
                   </p-accordionTab>
 
-                  <p-accordionTab header="Ubicación" [selected]="acordion == 4">
+                  <p-accordionTab header="{{'UBICACION.LBL_UBICACION' | translate}}" [selected]="acordion == 4">
                     <employees-locations *ngIf="employee.idTercero" [colaborador]="employee"></employees-locations>
                   </p-accordionTab>
 
-                  <p-accordionTab header="Activos" [selected]="acordion == 5">
+                  <p-accordionTab header="{{'EMPLOYEES.LBL_ACTIVOS' | translate}}" [selected]="acordion == 5">
                     <employees-estate *ngIf="employee.idTercero" [employee]="employee"></employees-estate>
                     <employees-vehicle *ngIf="employee.idTercero" [employee]="employee"></employees-vehicle>
                   </p-accordionTab>
 
-                  <p-accordionTab header="Formación Academica" [selected]="acordion == 6">
+                  <p-accordionTab header="{{'EMPLOYEES.LBL_FORMACIONACADEMICA' | translate}}" [selected]="acordion == 6">
                     <academic-education-formal *ngIf="employee.idTercero" [employee]="employee"></academic-education-formal>
                     <academic-education-no-formal *ngIf="employee.idTercero" [employee]="employee"></academic-education-no-formal>
                   </p-accordionTab>
 
-                  <p-accordionTab header="Experiencia Laboral" [selected]="acordion == 7">
+                  <p-accordionTab header="{{'EMPLOYEES.LBL_EXPERIENCIALABORAL' | translate}}" [selected]="acordion == 7">
                      <work-experience *ngIf="employee.idTercero" [employee]="employee"></work-experience>
                   </p-accordionTab>
 
-                  <p-accordionTab header="Referencias" [selected]="acordion == 8">
-                    <references *ngIf="employee.idTercero" [employee]="employee"></references>
+                  <p-accordionTab header="{{'EMPLOYEES.LBL_REFERENCIAS' | translate}}" [selected]="acordion == 8">
+                    <references-component *ngIf="employee.idTercero" [employee]="employee"></references-component>
                   </p-accordionTab>
 
-                  <p-accordionTab header="Datos clínicos" [selected]="acordion == 9">
+                  <p-accordionTab header="{{'EMPLOYEES.LBL_DATOSCLINICOS' | translate}}" [selected]="acordion == 9">
                     <clinical-information *ngIf="employee.idTercero" [employee]="employee"></clinical-information>
                   </p-accordionTab>
 
@@ -138,31 +138,31 @@
 
           </p-tabPanel>
         <p-tabPanel header="Reclutamiento">
-          <h3>Reclutamiento</h3>
+          <h3>{{'EMPLOYEES.LBL_RECLUTAMIENTO' | translate}}</h3>
         </p-tabPanel>
         <p-tabPanel header="Novedades">
-          <h3>Novedades</h3>
+          <h3>{{'EMPLOYEES.LBL_NOVEDADES' | translate}}</h3>
         </p-tabPanel>
         <p-tabPanel header="Formación y Capacitación">
-          <h3>Formación y Capacitación</h3>
+          <h3>{{'EMPLOYEES.LBL_FORMACIONCAPACITACION' | translate}}</h3>
         </p-tabPanel>
         <p-tabPanel header="Evaluación de Competencias">
-          <h3>Evaluación de Competencias</h3>
+          <h3>{{'EMPLOYEES.LBL_EVALUACIONCOPETENCIAS' | translate}}</h3>
         </p-tabPanel>
         <p-tabPanel header="Rituales Gerenciales">
-          <h3>Rituales Gerenciales</h3>
+          <h3>{{'EMPLOYEES.LBL_RITUALESGERENCIALES' | translate}}</h3>
         </p-tabPanel>
         <p-tabPanel header="Procesos Disciplinarios">
-          <h3>Procesos Disciplinarios</h3>
+          <h3>{{'EMPLOYEES.LBL_PROCESOSDISCIPLINARIOS' | translate}}</h3>
         </p-tabPanel>
         <p-tabPanel header="Plan de Beneficio">
-          <h3>Plan de Beneficio</h3>
+          <h3>{{'EMPLOYEES.LBL_PLANBENEFICIO' | translate}}</h3>
         </p-tabPanel>
         <p-tabPanel header="Examenes Ocupacionales">
-          <h3>Examenes Ocupacionales</h3>
+          <h3>{{'EMPLOYEES.LBL_EXAMENESOCUPACIONALES' | translate}}</h3>
         </p-tabPanel>
         <p-tabPanel header="Dotaciones">
-          <h3>Dotaciones</h3>
+          <h3>{{'EMPLOYEES.LBL_DOTACIONES' | translate}}</h3>
         </p-tabPanel>
       </p-tabView>
 

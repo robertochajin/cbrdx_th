@@ -1,23 +1,26 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ProcessRoles {
 
-  public idListaRolProceso: number;
-  public codigo: string;
-  public nombre: string;
-  public orden: number;
-  public indicadorHabilitado: boolean;
-  public auditoriaUsuario: number;
-  public auditoriaFecha: string;
+   public idLista: number;
+   public codigo: string;
+   public nombre: string;
+   public orden: number;
+   public indicadorHabilitado: boolean;
+   public auditoriaUsuario: number;
+   public auditoriaFecha: string;
+   public asignadoAlCargo: boolean;
 
-  //Atributo auxiliar
-  public asignadoAlCargo: boolean;
-
-  constructor() {
-    this.indicadorHabilitado = true;
-    this.auditoriaUsuario = 1;
-    this.auditoriaFecha = "";
-  }
+   constructor( idLista: number, codigo: string, nombre: string, orden: number ) {
+      this.idLista = idLista;
+      this.codigo = codigo;
+      this.nombre = nombre;
+      this.orden = orden;
+      this.asignadoAlCargo = false;
+      this.indicadorHabilitado = true;
+      this.auditoriaUsuario = 1;
+      this.auditoriaFecha = '';
+   }
 
 }

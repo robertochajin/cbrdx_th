@@ -1,23 +1,25 @@
-<h3>Centro de Costo</h3>
+<h3>{{ 'CENTROSDECOSTOS.LBL_CENTROCOSTOS' | translate }}</h3>
 <div class="row datable-header">
     <div class="col-md-6 col-xs-12 datatable-header-add">
-        <button type="button" pButton icon="fa-plus" (click)="addCentroCostos()" label="Nuevo Centro de Costo"></button>
+        <button type="button" pButton icon="fa-plus" (click)="addCentroCostos()" label="{{'CENTROSDECOSTOS.BTN_NUEVOCENTROCOSTO' | translate }}"></button>
     </div>
     <div class="col-md-6 col-xs-12 datatable-header-search">
-        <i class="fa fa-search"></i>
-        <input #gb type="text" pInputText size="40" placeholder="Buscar...">
-    </div>
+    	<div class="input-group">
+			<div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control">
+		</div>
+	 </div>
 </div>
-<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate:param }}"  [value]="listadoCentroCostos" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-    <p-column field="idCentroCostos" header="Id" [sortable]="true"></p-column>
-    <p-column field="codigoCentroCostos" header="Código" [sortable]="true"></p-column>
-    <p-column field="centroCostos" header="Nombre" [sortable]="true"></p-column>
-    <p-column field="indicadorHabilitado" header="Estado" [sortable]="true">
+<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="listadoCentroCostos" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+    <p-column field="idCentroCostos" header="{{ 'LBL_ID' | translate }}" [sortable]="true"></p-column>
+    <p-column field="codigoCentroCostos" header="{{ 'LBL_CODIGO' | translate }}" [sortable]="true"></p-column>
+    <p-column field="centroCostos" header="{{ 'LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
+    <p-column field="indicadorHabilitado" header="{{ 'LBL_ESTADO' | translate }}" [sortable]="true" styleClass="datatable-col-center">
         <template let-const="rowData" pTemplate="body">
             <p-checkbox [(ngModel)]="const.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
         </template>
     </p-column>
-    <p-column header="Acciones" styleClass="datatable-col-action">
+    <p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
         <template let-constantData="rowData" pTemplate="body">
             <div class="btn-group" role="group">
                 <button type="button" class="ui-button btn" icon="fa-eye"
