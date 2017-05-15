@@ -117,7 +117,7 @@ export class EmployeesVehicleAddComponent implements OnInit {
 
    inputPlaca() {
       let placa = this.employeeVehicle.placa;
-      if ( this.employeeVehicle.placa !== null ) {
+      if ( this.employeeVehicle.placa !== undefined && this.employeeVehicle.placa !== null ) {
          this.employeeVehicle.placa = placa.replace( ' ', '' ).toUpperCase();
       }
    }
