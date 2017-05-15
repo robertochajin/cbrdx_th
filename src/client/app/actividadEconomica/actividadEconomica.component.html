@@ -1,4 +1,4 @@
-<h3>Actividades Económicas</h3>
+<h3>{{ 'ACTIVIDADECONOMICA.LBL_ACTIVIDADESECONOMICAS' | translate}}</h3>
 <div class="row datable-header">
    <div class="col-md-6 col-xs-12 datatable-header-add">
       <button type="button" pButton icon="fa-plus" (click)="newActivity()" label="{{btnactivity.label}}"
@@ -7,19 +7,22 @@
               *ngIf="btnsubactivity.show"></button>
    </div>
    <div class="col-md-6 col-xs-12 datatable-header-search">
-      <p-autoComplete placeholder="Buscar..." field="label" name="buscar" id="buscar" #buscar="ngModel"
-                      [(ngModel)]="selectedSearch"
-                      [suggestions]="resultSearch"
-                      (completeMethod)="search($event)"
-                      (onSelect)="captureId($event)">
-      </p-autoComplete>
+      <div class="input-group">
+         <div class="input-group-addon"><i class="fa fa-search"></i></div>
+         <p-autoComplete placeholder="{{ 'LBL_BUSCAR' | translate}}" field="label" name="buscar" id="buscar" #buscar="ngModel"
+                         [(ngModel)]="selectedSearch"
+                         [suggestions]="resultSearch"
+                         (completeMethod)="search($event)"
+                         (onSelect)="captureId($event)">
+         </p-autoComplete>
+      </div>
+
    </div>
 </div>
 <div class="ui-grid-row">
    <div class="col-md-4">
 
-      <p-tree id="trvActividadEconomica" [(value)]="treeActividadEconomica" selectionMode="single"
-              [(selection)]="treeselected"
+      <p-tree id="trvActividadEconomica" [(value)]="treeActividadEconomica" selectionMode="single" [(selection)]="treeselected"
               (onNodeSelect)="nodeSelect($event.node)"
               (onNodeExpand)="nodeExpand($event.node)">
       </p-tree>
@@ -29,7 +32,7 @@
    <div class="col-md-8">
       <p-fieldset legend="{{header}}">
          <div class="row-fluid">
-            <div class="col-md-12">
+            <div class="col-md-12" *ngIf="!guardado">
 
                <form (ngSubmit)="!codeExists&&f.valid && save()" #f="ngForm" novalidate id="formName">
 
@@ -45,8 +48,7 @@
                   </div>
                   <div class="row">
                      <div class="form-group">
-                        <label for="codigoActividadEconomica" class="control-label col-sm-3">* {{ 'LBL_CODIGO' |
-                           translate }} </label>
+                        <label for="codigoActividadEconomica" class="control-label col-sm-3">* {{ 'LBL_CODIGO' | translate }} </label>
                         <div class=" col-sm-9">
 
                            <input type="text" pInputText class="form-control" id="codigoActividadEconomica"
@@ -55,16 +57,17 @@
                                   #codigoActividadEconomica="ngModel"
                                   [maxlength]="tabselected" [minlength]="tabselected"
                                   (change)="validateCode()" required
-                                  (keyup)="capitalizeCodigo()">
+                                  (keyup)="capitalizeCodigo()"
+                           >
 
                            <div *ngIf="f.submitted && !codigoActividadEconomica.valid"
-                                class="ui-message  ui-corner-all">
-                              <p [hidden]="!codigoActividadEconomica.errors.required">Código es requerido</p>
-                              <p [hidden]="!codigoActividadEconomica.errors.minlength">Código debe ser de
-                                 {{tabselected}} números</p>
+										  class="alert alert-danger">
+                              <p [hidden]="!codigoActividadEconomica.errors.required">{{ 'ACTIVIDADECONOMICA.MSG_CODREQUERIDO' | translate}}</p>
+                              <p [hidden]="!codigoActividadEconomica.errors.minlength">{{ 'ACTIVIDADECONOMICA.MSG_CODNUM' | translate}}
+                                 {{tabselected}} {{ 'ACTIVIDADECONOMICA.MSG_NUM' | translate}} </p>
                            </div>
-                           <div *ngIf="codeExists" class="ui-message  ui-corner-all">
-                              Ya se encuentra registrado ese código
+                           <div *ngIf="codeExists" class="alert alert-danger">
+                              {{ 'ACTIVIDADECONOMICA.MSG_CODREGISTRADO' | translate}}
                            </div>
 
                         </div>
@@ -76,16 +79,17 @@
                         <label for="aEconomica" class="control-label col-sm-3">*
                            {{labelfieldactividad}} </label>
                         <div class=" col-sm-9">
-                                    <textarea pInputTextarea class="form-control" id="aEconomica" name="aEconomica"
-                                              [(ngModel)]="actividadEconomica.actividadEconomica" #aEconomica="ngModel"
-                                              [required]="true" (keyup)="capitalizeName()"></textarea>
-                           <div *ngIf="f.submitted && !aEconomica.valid"
-                                class="ui-message  ui-corner-all">
-                              {{labelfieldactividad}} es requerido
-                           </div>
+                              <textarea pInputTextarea class="form-control" id="aEconomica" name="aEconomica"
+                                        [(ngModel)]="actividadEconomica.actividadEconomica" #aEconomica="ngModel"
+                                        [required]="true" (keyup)="capitalizeName()"
+                              ></textarea>
+                              <div *ngIf="f.submitted && !aEconomica.valid"
+											  class="alert alert-danger">
+                                  {{labelfieldactividad}} {{ 'ACTIVIDADECONOMICA.MSG_ESREQ' | translate}}
+                              </div>
 
-                        </div>
-                     </div>
+                          </div>
+                      </div>
                   </div>
 
                   <div class="row">
@@ -110,21 +114,18 @@
             </div>
          </div>
       </p-fieldset>
-
-      <p-dialog header="Confirmación" [(visible)]="displayDialog"
+      <p-dialog header="{{ 'LBL_CONFIRMACION' | translate }}" [(visible)]="displayDialog"
                 responsive="true" modal="true">
          <p>{{ 'MSG_CONFIRMACION' | translate }}</p>
          <p-footer>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-               <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="No"></button>
+               <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="{{ 'BTN_NO' | translate }}"></button>
 
-               <button type="button" pButton icon="fa-check" (click)="doCancel()" label="Si"></button>
+               <button type="button" pButton icon="fa-check" (click)="doCancel()" label="{{ 'BTN_SI' | translate }}"></button>
 
             </div>
          </p-footer>
       </p-dialog>
    </div>
 </div>
-
-<p-growl [value]="msgs"></p-growl>
 
