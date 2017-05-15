@@ -68,7 +68,7 @@ export class ToolbarComponent {
    }
 
    startTimer() {
-      this.timeoutID = window.setTimeout( this.goInactive, 300000 );
+      this.timeoutID = window.setTimeout( this.goInactive, 1500000 );
    }
 
    resetTimer() {
@@ -77,8 +77,8 @@ export class ToolbarComponent {
    }
 
    goInactive() {
-      // localStorage.removeItem('currentUser');
-      // localStorage.removeItem('token');
+      localStorage.removeItem('currentUser');
+      localStorage.removeItem('token');
    }
 
    goActive() {

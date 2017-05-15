@@ -730,6 +730,19 @@
       "MSG_CLASEREQUERIDO": "Clase de estilo es requerido"
    },
 
+   "VACANCIES":{
+      "LBL_REQUESTS" : "Requerimientos",
+      "LBL_VACANCYBYDEPARTMENT" : "Vacantes por planta",
+      "LBL_VACANCYMANAGER" : "Administrador de Vacantes",
+      "LBL_VACANCY" : "Vacante",
+      "LBL_DATE" : "Fecha de Creación",
+      "LBL_AREA" : "Area",
+      "LBL_OFFICE" : "Oficina",
+      "LBL_REASON" : "Motivo",
+      "LBL_AUTHORIZATION" : "Autorización",
+      "LBL_STATE" : "Estado"
+   },
+
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 
 

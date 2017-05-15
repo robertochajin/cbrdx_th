@@ -1,0 +1,75 @@
+<h3 class="first">{{ 'VACANCIES.LBL_VACANCYMANAGER' | translate }}</h3>
+<p-tabView>
+	<p-tabPanel header="{{ 'VACANCIES.LBL_REQUESTS' | translate}}">
+		<div class="row datable-header">
+			<div class="col-md-6 col-xs-12 datatable-header-search">
+				<div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-search"></i></div>
+					<input #gb type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
+				</div>
+			</div>
+		</div>
+		<p-dataTable [value]="vacancies" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb" #dt>
+			<p-column field="vacante" header="{{ 'VACANCIES.LBL_VACANCY' | translate }}" [sortable]="true" [filter]="true"
+			          filterPlaceholder="Buscar"></p-column>
+			<p-column field="fechaCreacion" header="{{ 'VACANCIES.LBL_DATE' | translate }} " [sortable]="true"></p-column>
+			<p-column field="area" header="{{ 'VACANCIES.LBL_AREA' | translate }} " [sortable]="true"></p-column>
+			<p-column field="oficina" header="{{ 'VACANCIES.LBL_OFFICE' | translate }} " [sortable]="true"></p-column>
+			<p-column field="motivo" header="{{ 'VACANCIES.LBL_REASON' | translate }}" [sortable]="true"></p-column>
+			<!--<p-column field="motivo" header="{{ 'VACANCIES.LBL_REASON' | translate }} " [filter]="true" [style]="{'overflow':'visible'}"
+			          filterMatchMode="equals">
+				<ng-template pTemplate="filter" let-vacancy="rowData">
+					<p-dropdown [options]="reasons" [style]="{'width':'100%'}"
+					            (onChange)="dt.filter($event.value,vacancy.motivo,vacancy.filterMatchMode)"
+					            styleClass="ui-column-filter"></p-dropdown>
+				</ng-template>
+			</p-column>-->
+			<p-column field="autorizacion" header="{{ 'VACANCIES.LBL_AUTHORIZATION' | translate }} " [sortable]="true"></p-column>
+			<p-column field="estado" header="{{ 'VACANCIES.LBL_STATE' | translate }} " [sortable]="true"></p-column>
+			<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+				<template let-vacancy="rowData" pTemplate="body">
+					<button type="button" icon="fa-eye" class="ui-button-info"
+					        pButton (click)="detail(vacancy)"></button>
+					<button type="button" icon="fa-pencil" class="ui-button-success"
+					        pButton (click)="update(vacancy)"></button>
+				</template>
+			</p-column>
+		</p-dataTable>
+	</p-tabPanel>
+	<p-tabPanel header="{{ 'VACANCIES.LBL_VACANCYBYDEPARTMENT' | translate}}">
+		<div class="row datable-header">
+			<div class="col-md-6 col-xs-12 datatable-header-search">
+				<div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-search"></i></div>
+					<input #gb type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
+				</div>
+			</div>
+		</div>
+		<p-dataTable [value]="vacancies" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb" #dt>
+			<p-column field="vacante" header="{{ 'VACANCIES.LBL_VACANCY' | translate }}" [sortable]="true" [filter]="true"
+			          filterPlaceholder="Buscar"></p-column>
+			<p-column field="fechaCreacion" header="{{ 'VACANCIES.LBL_DATE' | translate }} " [sortable]="true"></p-column>
+			<p-column field="area" header="{{ 'VACANCIES.LBL_AREA' | translate }} " [sortable]="true"></p-column>
+			<p-column field="oficina" header="{{ 'VACANCIES.LBL_OFFICE' | translate }} " [sortable]="true"></p-column>
+			<p-column field="motivo" header="{{ 'VACANCIES.LBL_REASON' | translate }}" [sortable]="true"></p-column>
+			<!--<p-column field="motivo" header="{{ 'VACANCIES.LBL_REASON' | translate }} " [filter]="true" [style]="{'overflow':'visible'}"
+			          filterMatchMode="equals">
+				<ng-template pTemplate="filter" let-vacancy="rowData">
+					<p-dropdown [options]="reasons" [style]="{'width':'100%'}"
+					            (onChange)="dt.filter($event.value,vacancy.motivo,vacancy.filterMatchMode)"
+					            styleClass="ui-column-filter"></p-dropdown>
+				</ng-template>
+			</p-column>-->
+			<p-column field="autorizacion" header="{{ 'VACANCIES.LBL_AUTHORIZATION' | translate }} " [sortable]="true"></p-column>
+			<p-column field="estado" header="{{ 'VACANCIES.LBL_STATE' | translate }} " [sortable]="true"></p-column>
+			<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+				<template let-vacancy="rowData" pTemplate="body">
+					<button type="button" icon="fa-eye" class="ui-button-info"
+					        pButton (click)="detail(vacancy)"></button>
+					<button type="button" icon="fa-pencil" class="ui-button-success"
+					        pButton (click)="update(vacancy)"></button>
+				</template>
+			</p-column>
+		</p-dataTable>
+	</p-tabPanel>
+</p-tabView>
