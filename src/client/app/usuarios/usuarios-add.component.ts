@@ -110,7 +110,7 @@ export class UsuariosAddComponent {
    }
 
    validateUser() {
-      if ( this.terceroObtenido !== null && this.terceroObtenido !== undefined) {
+      if ( this.terceroObtenido !== null && this.terceroObtenido !== undefined ) {
          this.userExists = this.usuarios.filter( t => t.idTercero === this.terceroObtenido.idTercero ).length > 0;
       } else {
          this.userExists = false;
@@ -141,7 +141,7 @@ export class UsuariosAddComponent {
    createUser() {
       this.usuariosService.createUser( this.usuario ).then( res => {
          this.usuario = res;
-         this.router.navigate( [ 'usuarios/edit/'+this.usuario.idUsuario ] );
+         this.router.navigate( [ 'usuarios/edit/' + this.usuario.idUsuario ] );
          this.isUserCreated = true;
          this.updateGroupLists();
          this.updateRolesLists();

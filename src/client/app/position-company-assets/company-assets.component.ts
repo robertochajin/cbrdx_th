@@ -45,9 +45,11 @@ export class CompanyAssetsComponent implements OnInit {
          this.companyAssetsService.getAllByPosition( this.position.idCargo ).subscribe( res => {
             this.companyAssets = res;
             this.listCompanyAssets.map( ( lca: ListaItem ) => {
-               let item : CompanyAssets = new CompanyAssets();
-               item = this.companyAssets.find(cas => cas.idTipoElemento === lca.idLista);
-               if(item === undefined) item = new CompanyAssets();
+               let item: CompanyAssets = new CompanyAssets();
+               item = this.companyAssets.find( cas => cas.idTipoElemento === lca.idLista );
+               if ( item === undefined ) {
+                  item = new CompanyAssets();
+               }
                item.idCargo = this.position.idCargo;
                item.nombreLista = lca.nombre;
                item.codigoLista = lca.codigo;
@@ -80,7 +82,7 @@ export class CompanyAssetsComponent implements OnInit {
                         elemento.idCargoElemento = res.idCargoElemento;
                         elemento.auditoriaUsuario = res.auditoriaUsuario;
                         elemento.auditoriaFecha = res.auditoriaFecha;
-                        if(it >= this.elementos.length){
+                        if ( it >= this.elementos.length ) {
                            this.nextStep.emit( 11 );
                         }
                      }
@@ -92,7 +94,7 @@ export class CompanyAssetsComponent implements OnInit {
                this.companyAssetsService.update( elemento ).subscribe( res => {
                   if ( res.ok ) {
                      it = it + 1;
-                     if(it >= this.elementos.length){
+                     if ( it >= this.elementos.length ) {
                         this.nextStep.emit( 11 );
                      }
                   }

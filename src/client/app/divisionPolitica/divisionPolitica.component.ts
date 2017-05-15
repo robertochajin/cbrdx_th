@@ -244,7 +244,7 @@ export class DivisionPoliticaComponent implements OnInit {
 
    save() {
       if ( this.politicalDivision.idDivisionPolitica === null ||
-           this.politicalDivision.idDivisionPolitica === 0||
+           this.politicalDivision.idDivisionPolitica === 0 ||
            this.politicalDivision.idDivisionPolitica === undefined ) {
          this.guardado = true;
          this.divisionPoliticaService.addDivisionPolitica( this.politicalDivision ).then( data => {

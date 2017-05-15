@@ -38,7 +38,6 @@ export class ConstanteEditComponent {
 
    }
 
-
    createConstant() {
       this.constanteService.updateConstant( this.constant ).then( data => {
          this.router.navigate( [ 'constantes' ] );
@@ -53,7 +52,7 @@ export class ConstanteEditComponent {
    }
 
    inputCleanUp( value: string ) {
-      if(value){
+      if ( value ) {
          this.constant.constante = value.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
       }
    }
