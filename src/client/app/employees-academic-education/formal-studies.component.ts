@@ -50,15 +50,15 @@ export class FormalStudiesComponent implements OnInit {
    }
 
    add() {
-      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/formal-studies/add' ] );
+      this.router.navigate( [ 'employees/detail/' + this.employee.idTercero + '/formal-studies/add' ] );
    }
 
    detail( c: FormalStudies ) {
-      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/formal-studies/detail/' + c.idTerceroEstudioFormal ] );
+      this.router.navigate( [ 'employees/detail/' + this.employee.idTercero + '/formal-studies/detail/' + c.idTerceroEstudioFormal ] );
    }
 
    update( c: FormalStudies ) {
-      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/formal-studies/update/' + c.idTerceroEstudioFormal  ] );
+      this.router.navigate( [ 'employees/detail/' + this.employee.idTercero + '/formal-studies/update/' + c.idTerceroEstudioFormal ] );
    }
 
 }

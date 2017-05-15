@@ -53,16 +53,15 @@ export class EmployeesVehicleComponent implements OnInit {
                                         } );
    }
 
-
    add() {
-      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/vehicle/add/' ] );
+      this.router.navigate( [ 'employees/detail/' + this.employee.idTercero + '/vehicle/add/' ] );
    }
 
    detail( c: EmployeeVehicle ) {
-      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/vehicle/detail/' + c.idTerceroVehiculo ] );
+      this.router.navigate( [ 'employees/detail/' + this.employee.idTercero + '/vehicle/detail/' + c.idTerceroVehiculo ] );
    }
 
    update( c: EmployeeVehicle ) {
-      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/vehicle/update/' + c.idTerceroVehiculo  ] );
+      this.router.navigate( [ 'employees/detail/' + this.employee.idTercero + '/vehicle/update/' + c.idTerceroVehiculo ] );
    }
 }

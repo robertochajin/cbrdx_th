@@ -62,7 +62,7 @@ export class CompetenciesGroupsComponent implements OnInit {
             this.navService.setMesage( typeMessage, this.msg );
          } );
       } else {
-         this.groupCompetenciesServices.add( this.group ).subscribe( (res: GroupCompetencies) => {
+         this.groupCompetenciesServices.add( this.group ).subscribe( ( res: GroupCompetencies ) => {
             if ( res.idGrupoCompetencia ) {
                res.competencies = [];
                this.groups.push( res ); // se debe cambiar por lo que retorna el servicio
@@ -167,7 +167,7 @@ export class CompetenciesGroupsComponent implements OnInit {
    }
 
    capitalize() {
-      let input = this.group.grupoCompetencia;
+      let input = this.group.grupoCompetencia ? this.group.grupoCompetencia : '';
       input = input.toLowerCase().replace( /^.|\s\S/g, function ( a ) {
          return a.toUpperCase();
       } );
@@ -175,7 +175,7 @@ export class CompetenciesGroupsComponent implements OnInit {
    }
 
    capitalizec() {
-      let input = this.competencie.competencia;
+      let input = this.competencie.competencia ? this.competencie.competencia : '';
       input = input.toLowerCase().replace( /^.|\s\S/g, function ( a ) {
          return a.toUpperCase();
       } );

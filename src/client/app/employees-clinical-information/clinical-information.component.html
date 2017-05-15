@@ -9,7 +9,7 @@
           <div class="col-md-1 col-xs-1" >
           </div>
           <div class="col-md-4 col-xs-12" >
-          <label >{{'EMPLOYEES.LBL_DIAGNOSTICO' | translate}}</label>
+          <label >{{'EMPLOYEES.LBL_DIAGNOSTICO' | translate }}</label>
           <p-autoComplete placeholder="Buscar diagnóstico" field="label" name="diagnostico" id="diagnostico" [(ngModel)]="ecd.diagnostico" [disabled]="editing"
                           #diagnostico="ngModel" [suggestions]="diagnosticList" [required]="!editing" (completeMethod)="diagnosticSearch($event)" (onSelect)="captureDiagnosticId($event)">
           </p-autoComplete>
@@ -66,4 +66,4 @@
         </p-column>
     </p-dataTable>
 </div>
-<p-confirmDialog width="400"></p-confirmDialog>
+	<p-confirmDialog width="400" acceptLabel="{{'BTN_SI' | translate }}" rejectLabel="{{'BTN_NO' | translate }}"></p-confirmDialog>

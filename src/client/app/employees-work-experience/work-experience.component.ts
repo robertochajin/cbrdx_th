@@ -48,14 +48,16 @@ export class WorkExperienceComponent implements OnInit {
    }
 
    add() {
-      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/work-experience/add' ] );
+      this.router.navigate( [ 'employees/detail/' + this.employee.idTercero + '/work-experience/add' ] );
    }
 
    detail( c: Workexperience ) {
-      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/work-experience/detail/' + c.idTerceroExperienciaLaboral ] );
+      this.router.navigate(
+         [ 'employees/detail/' + this.employee.idTercero + '/work-experience/detail/' + c.idTerceroExperienciaLaboral ] );
    }
 
    update( c: Workexperience ) {
-      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/work-experience/update/' + c.idTerceroExperienciaLaboral  ] );
+      this.router.navigate(
+         [ 'employees/detail/' + this.employee.idTercero + '/work-experience/update/' + c.idTerceroExperienciaLaboral ] );
    }
 }

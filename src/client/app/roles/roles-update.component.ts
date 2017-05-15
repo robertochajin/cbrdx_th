@@ -35,7 +35,7 @@ export class RolesUpdateComponent implements OnInit {
 
    ngOnInit() {
       this.route.params.subscribe( params => {
-         this.showMsg = params[ 'msj' ].toString();
+         this.showMsg = params[ 'msj' ];
          if ( this.showMsg === '1' ) {
             this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          }
@@ -94,7 +94,7 @@ export class RolesUpdateComponent implements OnInit {
 
    capitalizeCode() {
       let input = this.rol.codigoRol;
-      if ( input !== '' && input !== null && input !== undefined) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.rol.codigoRol = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
       }
    }
@@ -112,7 +112,7 @@ export class RolesUpdateComponent implements OnInit {
 
    capitalizeName() {
       let input = this.rol.rol;
-      if ( input !== '' && input !== null && input !== undefined) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.rol.rol = input.toUpperCase();
       }
    }
