@@ -82,9 +82,9 @@ export class UsuariosEditComponent {
          usuariosService.listUsers().subscribe( res => {
             this.usuarios = res.filter( t => t.idUsuario !== this.usuario.idUsuario );
          } );
-         tercerosService.get(this.usuario.idTercero).subscribe( res => {
+         tercerosService.get( this.usuario.idTercero ).subscribe( res => {
             this.tercero = res;
-            this.locationService.getAllByEmployee(this.usuario.idTercero).subscribe(locations => this.locations = locations );
+            this.locationService.getAllByEmployee( this.usuario.idTercero ).subscribe( locations => this.locations = locations );
          } );
       } );
    }
@@ -220,7 +220,7 @@ export class UsuariosEditComponent {
       this.usuario.usuarioSistema = value.toLowerCase().replace( ' ', '' ).replace( 'ñ', 'n' ).trim();
    }
 
-   editEmployee(idTercero: number){
+   editEmployee( idTercero: number ) {
       this.router.navigate( [ 'employees/update/' + idTercero ] );
    }
 
