@@ -65,6 +65,7 @@ import { AuthModule } from './shared/auth.module';
 //  BreadCrumb
 //  import {Ng2BreadcrumbModule,BreadcrumbService} from 'ng2-breadcrumb/ng2-breadcrumb';
 import { BreadcrumbModule, BreadcrumbService } from './shared/breadcrumb/breadcrumb';
+import { PersonnelRequirementModule } from './personnel-requirement/personnel-requirement.module';
 
 // CarsModule,
 @NgModule( {
@@ -88,6 +89,7 @@ import { BreadcrumbModule, BreadcrumbService } from './shared/breadcrumb/breadcr
                  PositionCompetenciesModule,
                  OrganizationalStructureModule,
                  OrganizationalStructurePositionsModule,
+                 PersonnelRequirementModule,
                  CompetenciesGroupsModule,
                  WidgetModule,
                  FormManagerModule,

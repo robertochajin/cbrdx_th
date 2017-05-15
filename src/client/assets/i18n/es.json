@@ -696,10 +696,13 @@
    },
 
    "REQUERIMIENTOPERSONAL": {
+      "LBL_REQUERIMIENTOPERSONAL":"Requerimiento de personal",
+      "BTN_AGREGARNUEVO":"Agregar nuevo requerimiento de personal",
       "LBL_DATOSSOLICITANTE":"Datos Solicitante",
       "LBL_NOMBRESOLICITANTE":"Nombre del Solicitante",
       "LBL_CARGOSOLICITANTE":"Cargo del solicitante",
       "LBL_AREA":"Área / Regional / Oficina",
+      "LBL_DIRECIONGENERAL":"Dirección General",
       "LBL_CORREOSOLICITANTE":"Correo electrónico del solicitante",
       "LBL_DATOSVACANTE":"Datos de la vacante",
       "LBL_MOTIVOREQUERIMIENTO":"Por porqué se genera requerimiento",
@@ -711,6 +714,7 @@
       "LBL_NOMBREJEFEINMEDIATO":"Nombre del jefe inmediato",
       "LBL_CARGOJEFEINMEDIATO":"Cargo del jefe inmediato",
       "LBL_CANTIDADACONTRATAR":"Nro de personas a contratar",
+      "LBL_CANTIDADAPLAZAS":"Nro de plazas",
       "LBL_CANTIDADAENTREVISTAR":"No a entrevistar",
       "LBL_DATOSREFERIDO":"Datos de referidos",
       "LBL_NOMBREREFERIDO":"Nombre",
