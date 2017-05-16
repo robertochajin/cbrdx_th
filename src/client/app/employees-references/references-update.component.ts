@@ -84,7 +84,8 @@ export class ReferencesUpdateComponent implements OnInit {
                this.referencesService.update( this.reference )
                .subscribe(
                   data => {
-                     this.msgs.push( { severity: 'info', summary: 'Success', detail: 'Guardando' } );
+                     // 1:add 2:update 3:error
+                     this._nav.setMesage( 1, this.msgs );
                      this._nav.setTab( 8 );
                      this.location.back();
                   } );

@@ -211,7 +211,7 @@
             <position-responsabilities (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-responsabilities>
          </p-accordionTab>
 
-         <p-accordionTab header="Responsabilidades complemenarias" [selected]="acordion == 5"
+         <p-accordionTab header="Responsabilidades complementarias" [selected]="acordion == 5"
                          [disabled]="step >0 && step <6">
             <fieldset>
                <div *ngIf="position">
@@ -222,7 +222,7 @@
 
                               <div class="row">
                                  <div class=" col-sm-12">
-                                    <label for="responsabilidadesAd">Responsabilidades Complementarias</label>
+                                    <label for="responsabilidadesAd">* Responsabilidades Complementarias</label>
                                     <textarea pInputTextarea id="responsabilidadesAd"
                                               name="responsabilidadesAd" maxlength="500"
                                               [(ngModel)]="position.responsabilidadesAd"
@@ -327,7 +327,7 @@
 
                               <div class="row">
                                  <div class=" col-sm-12">
-                                    <label for="interrelacionesInternas">¿Que conocimientos basicos requiere para el
+                                    <label for="interrelacionesInternas">* ¿Que conocimientos basicos requiere para el
                                        desempeño de las funciones del cargo?</label>
                                     <textarea pInputTextarea id="conocimientosBasicos" name="conocimientosBasicos"
                                               [(ngModel)]="position.conocimientosBasicos"
@@ -341,7 +341,7 @@
                               </div>
                               <div class="row">
                                  <div class="col-md-12">
-                                    <label for="tiempoExperiencia">Tiempo de experiencia laboral</label>
+                                    <label for="tiempoExperiencia">* Tiempo de experiencia laboral</label>
                                     <input type="text" pInputText id="tiempoExperiencia" name="tiempoExperiencia"
                                            [(ngModel)]="position.tiempoExperiencia" #tiempoExperiencia="ngModel" required
                                     />
@@ -361,18 +361,18 @@
                               </div>
                               <div class="row">
                                  <div class="col-md-3">
-                                    <label for="edad">Edad</label>
+                                    <label for="edad">* Edad</label>
                                     <input type="text" pInputText id="edad" name="edad" type="number" min="1" max="99" pattern="(?:\b|-)([0-9]{1,2}?|99)\b"
                                            [(ngModel)]="position.edad" #edad="ngModel" required
                                     />
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f8.submitted && !edad.valid">
                                        <i class="fa fa-close"></i>
-                                       Edad es invalido
+                                       Edad es requqrida
                                     </div>
                                  </div>
                                  <div class="form-group col-md-3">
-                                    <label for="idGenero">Genero</label>
+                                    <label for="idGenero">* Genero</label>
                                     <p-dropdown id="idGenero" name="idGenero" required="true"
                                                 [options]="genderTypes" [autoWidth]="false"
                                                 [(ngModel)]="position.idGenero"
@@ -381,11 +381,11 @@
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f8.submitted && !idGenero.valid">
                                        <i class="fa fa-close"></i>
-                                       Cargo que depende es requerida
+                                       Genero es requerido
                                     </div>
                                  </div>
                                  <div class="form-group col-md-3">
-                                    <label for="idEstadoCivil">Estado civil</label>
+                                    <label for="idEstadoCivil">* Estado civil</label>
                                     <p-dropdown id="idEstadoCivil" name="idEstadoCivil" required="true"
                                                 [options]="maritalStatusTypes" [autoWidth]="false"
                                                 [(ngModel)]="position.idEstadoCivil"
@@ -394,11 +394,11 @@
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f8.submitted && !idEstadoCivil.valid">
                                        <i class="fa fa-close"></i>
-                                       Cargo que depende es requerida
+                                       Estado civil es requerido
                                     </div>
                                  </div>
                                  <div class="form-group col-md-3">
-                                    <label for="idNivelEducacionn">Educación</label>
+                                    <label for="idNivelEducacionn">* Educación</label>
                                     <p-dropdown id="idNivelEducacionn" name="idNivelEducacionn" required="true"
                                                 [options]="listStudies" [autoWidth]="false"
                                                 [(ngModel)]="position.idNivelEducacion"
