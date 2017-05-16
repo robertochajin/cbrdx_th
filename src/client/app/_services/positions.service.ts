@@ -3,14 +3,22 @@ import { Response } from '@angular/http';
 import { Positions } from '../_models/positions';
 import { PositionsObservations } from '../_models/positionsObservations';
 import { PositionsActivities } from '../_models/positionsActivities';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class PositionsService {
 
    private serviceURL = '<%= SVC_TH_URL %>/api/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    getAll() {
@@ -30,46 +38,57 @@ export class PositionsService {
    }
 
    add( c: Positions ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'cargos', c ).map( ( res: Response ) => res.json() );
    };
 
    addPositionsActivities( c: PositionsActivities ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'cargosOcupaciones', c ).map( ( res: Response ) => res.json() );
    };
 
    updatePositionsActivities( c: PositionsActivities ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'cargosOcupaciones', c ).map( ( res: Response ) => res );
    }
 
    update( c: Positions ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'cargos', c ).map( ( res: Response ) => res );
    }
 
    updateEstado( c: Positions ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'cargos/tab2', c ).map( ( res: Response ) => res );
    }
 
    update1( c: Positions ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'cargos/tab1/', c ).map( ( res: Response ) => res );
    }
 
    update2( c: Positions ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'cargos/tab3', c ).map( ( res: Response ) => res );
    }
 
    update3( c: Positions ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'cargos/tab4', c ).map( ( res: Response ) => res );
    }
 
    update4( c: Positions ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'cargos/tab5', c ).map( ( res: Response ) => res );
    }
 
    update5( c: Positions ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'cargos/tab6', c ).map( ( res: Response ) => res );
    }
 
    update6( c: Positions ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'cargos/tab7', c ).map( ( res: Response ) => res );
    }
 
@@ -91,12 +110,14 @@ export class PositionsService {
       return this.authHttp.get( this.serviceURL + 'cargosEstadosObservaciones/buscarCargo/' + id ).map( ( res: Response ) => res.json() );
    }
 
-   updateObservations( obj: PositionsObservations ) {
-      return this.authHttp.put( this.serviceURL + 'cargosEstadosObservaciones', obj ).map( ( res: Response ) => res );
+   updateObservations( c: PositionsObservations ) {
+      c.auditoriaUsuario = this.idUsuario;
+      return this.authHttp.put( this.serviceURL + 'cargosEstadosObservaciones', c ).map( ( res: Response ) => res );
    }
 
-   addObservations( obj: PositionsObservations ) {
-      return this.authHttp.post( this.serviceURL + 'cargosEstadosObservaciones', obj ).map( ( res: Response ) => res.json() );
+   addObservations( c: PositionsObservations ) {
+      c.auditoriaUsuario = this.idUsuario;
+      return this.authHttp.post( this.serviceURL + 'cargosEstadosObservaciones', c ).map( ( res: Response ) => res.json() );
    };
 
    handleError( error: any ): Promise<any> {

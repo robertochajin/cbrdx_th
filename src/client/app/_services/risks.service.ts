@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Risks } from '../_models/risks';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class RisksService {
 
    private serviceURL = '<%= SVC_TH_URL %>/api/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    getAll() {
@@ -36,10 +44,12 @@ export class RisksService {
    }
 
    add( r: Risks ) {
+      r.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'riesgos', r ).map( ( res: Response ) => res.json() );
    };
 
    update( r: Risks ) {
+      r.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'riesgos', r ).map( ( res: Response ) => res );
    }
 

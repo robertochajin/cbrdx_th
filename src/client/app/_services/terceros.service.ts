@@ -2,15 +2,23 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Tercero } from '../_models/tercero';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import any = jasmine.any;
 
 @Injectable()
 export class TercerosService {
 
    private serviceURL = '<%= SVC_TH_URL %>/api/terceros/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
-   constructor( public authHttp: AuthHttp ) {
+   constructor( private authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    listarTerceros() {

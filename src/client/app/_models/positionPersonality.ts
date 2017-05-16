@@ -3,7 +3,7 @@ export class PositionPersonality {
    public descripcion: string;
    public idAtributo: number;
    public idCargo: number;
-   public auditoriaUsuario: string;
+   public auditoriaUsuario: number;
    public auditoriaFecha: string;
    public nombreLista: string;
    public codigoLista: string;
