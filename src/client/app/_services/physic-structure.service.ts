@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { PhysicStructure } from '../_models/physic-structure';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class PhysicStructureService {
 
    private serviceURL = '<%= SVC_TH_URL %>/api/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    getAll() {
@@ -19,12 +27,14 @@ export class PhysicStructureService {
       return this.authHttp.get( this.serviceURL + 'estructuraFisica/' + id ).map( ( res: Response ) => res.json() as PhysicStructure );
    }
 
-   add( r: PhysicStructure ) {
-      return this.authHttp.post( this.serviceURL + 'estructuraFisica', r ).map( ( res: Response ) => res.json() );
+   add( c: PhysicStructure ) {
+      c.auditoriaUsuario = this.idUsuario;
+      return this.authHttp.post( this.serviceURL + 'estructuraFisica', c ).map( ( res: Response ) => res.json() );
    };
 
-   update( r: PhysicStructure ) {
-      return this.authHttp.put( this.serviceURL + 'estructuraFisica', r ).map( ( res: Response ) => res );
+   update( c: PhysicStructure ) {
+      c.auditoriaUsuario = this.idUsuario;
+      return this.authHttp.put( this.serviceURL + 'estructuraFisica', c ).map( ( res: Response ) => res );
    }
 
 }

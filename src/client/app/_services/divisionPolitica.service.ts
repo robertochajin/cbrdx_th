@@ -8,7 +8,7 @@ import { DivisionPoliticaResguardos } from '../_models/divisionPoliticaResguardo
 import { DivisionPoliticaComunas } from '../_models/divisionPoliticaComunas';
 import { DivisionPoliticaTipos } from '../_models/divisionPoliticaTipos';
 import { Search } from '../_models/search';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class DivisionPoliticaService {
@@ -19,8 +19,16 @@ export class DivisionPoliticaService {
    private serviceComunasURL = '<%= SVC_TH_URL %>/api/divisionPoliticaComunas/';
    private serviceLocalidadesURL = '<%= SVC_TH_URL %>/api/divisionPoliticaLocalidades/';
    private serviceResguardosURL = '<%= SVC_TH_URL %>/api/divisionPoliticaResguardos/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    listDivisionPolitica() {
@@ -32,11 +40,13 @@ export class DivisionPoliticaService {
    }
 
    addDivisionPolitica( c: DivisionPolitica ): Promise<DivisionPolitica> {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL, JSON.stringify( c ) ).toPromise().then( res => res.json() as DivisionPolitica )
       .catch( this.handleError );
    };
 
    updateDivisionPolitica( c: DivisionPolitica ): Promise<any> {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL, JSON.stringify( c ) ).toPromise().catch( this.handleError );
    }
 
