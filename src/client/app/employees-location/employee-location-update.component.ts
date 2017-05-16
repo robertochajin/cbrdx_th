@@ -170,6 +170,8 @@ export class LocationUpdateComponent implements OnInit {
                this._nav.setTab( 4 );
                this.location.back();
             }
+            // 1: add 2: update 3: error
+            this._nav.setMesage(2,this.msgs);
          } );
       } else {
          this.wrongCity = false;

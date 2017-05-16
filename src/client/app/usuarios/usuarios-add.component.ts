@@ -17,6 +17,8 @@ import { VUsuarioGrupoGestion } from '../_models/vUsuarioGrupoGestion';
 import { VHistoricoUsuario } from '../_models/vHistoricoUsuario';
 import { Employee } from '../_models/employees';
 import { EmployeesService } from '../_services/employees.service';
+import { Message } from 'primeng/primeng';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -61,11 +63,14 @@ export class UsuariosAddComponent {
    creatingGroup = true;
    historico: VHistoricoUsuario[] = [];
 
+   msgs: Message[] = [];
+
    constructor( private usuariosService: UsuariosService,
       private rolesService: RolesService,
       private gruposGestionService: GruposGestionService,
       private tercerosService: EmployeesService,
       private listasService: ListaService,
+      private _nav: NavService,
       private router: Router ) {
       listasService.getMasterDetails( 'ListasTiposDocumentos' ).subscribe( res => {
          this.datatypeDetails = res;
@@ -146,6 +151,8 @@ export class UsuariosAddComponent {
          this.updateGroupLists();
          this.updateRolesLists();
          this.updateHistoric();
+         // 1: add 2: update 3: error
+         this._nav.setMesage( 1, this.msgs );
       } );
    }
 
