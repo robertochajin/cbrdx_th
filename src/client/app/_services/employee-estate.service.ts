@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Response, Headers } from '@angular/http';
 import { EmployeeEstate } from '../_models/employee-estate';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class EmployeeEstateService {
 
    serviceURL = '<%= SVC_TH_URL %>/api/';
    headers = new Headers( { 'Content-Type': 'application/json' } );
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
-
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    getAll() {
