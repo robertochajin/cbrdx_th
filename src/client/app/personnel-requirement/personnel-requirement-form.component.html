@@ -54,15 +54,105 @@
 				</div>
 				
 				<div class="row">
-					<div class="form-group col-md-6">
+					<div class="form-group col-md-12">
 						<label for="tipoSolicitud">* {{'REQUERIMIENTOPERSONAL.LBL_MOTIVOREQUERIMIENTO' | translate }}</label>
 						<p-dropdown id="tipoSolicitud" name="tipoSolicitud"
 						            [options]="requirementTypes" [(ngModel)]="personnelRequirement.idTipoSolicitud"
-						            (onChange)="onChangeMethod($event)"
+						            (onChange)="onChangeTypeMethod($event)"
 						            #ngTipoSolicitud="ngModel"  required [autoWidth]="false"></p-dropdown> 
 						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngTipoSolicitud.valid">
 							<i class="fa fa-close"></i>
 							{{'REQUERIMIENTOPERSONAL.LBL_MOTIVOREQUERIMIENTO' | translate }} {{'LBL_REQUERIDO' | translate }}
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="positionName">{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBRECARGO' | translate }}:</label>
+						<input id="positionName" type="text" pInputText name="positionName"
+						       [(ngModel)]="personnelRequirement.nombreCargo"
+						       #ngPositionName="ngModel" required />
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !ngPositionName.valid">
+							<i class="fa fa-close"></i>
+							{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBRECARGO' | translate }} {{'LBL_REQUERIDO' | translate}}
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="positionFunction">{{ 'REQUERIMIENTOPERSONAL.LBL_FUNCIONCARGO' | translate }}:</label>
+						<textarea id="positionFunction" name="positionFunction" pInputTextarea
+						          [(ngModel)]="personnelRequirement.funcionCargo"
+						          #ngPositionFunction="ngModel" maxlength="500" required></textarea>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !ngPositionFunction.valid">
+							<i class="fa fa-close"></i>
+							{{ 'REQUERIMIENTOPERSONAL.LBL_FUNCIONCARGO' | translate }} {{'LBL_REQUERIDO' | translate}}
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="zone">{{ 'REQUERIMIENTOPERSONAL.LBL_ZONA' | translate }}:</label>
+						<p-dropdown id="zone" name="zone" #ngZone="ngModel" [options]="zones" [autoWidth]="false"
+						            (onChange)="onChangeMethod($event)" [(ngModel)]="personnelRequirement.idZona" required></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngZone.valid">
+							<i class="fa fa-close"></i>
+							{{ 'REQUERIMIENTOPERSONAL.LBL_ZONA' | translate }} {{'LBL_REQUERIDO' | translate}}
+						</div>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="category">* {{'REQUERIMIENTOPERSONAL.LBL_CATEGORIA' | translate }}</label>
+						<p-dropdown id="category" name="category" #ngCategory="ngModel" [options]="categoryTypes" [autoWidth]="false"
+						            (onChange)="onChangeMethod($event)" [(ngModel)]="personnelRequirement.idCategoria" required></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngCategory.valid">
+							<i class="fa fa-close"></i>
+							{{'REQUERIMIENTOPERSONAL.LBL_CATEGORIA' | translate }} {{'LBL_REQUERIDO' | translate }}
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="contractForm">* {{'REQUERIMIENTOPERSONAL.LBL_FORMACONTRATACION' | translate }}</label>
+						<p-dropdown id="contractForm" name="contractForm" #ngContractForm="ngModel" [options]="contractForms" [autoWidth]="false"
+						            (onChange)="onChangeMethod($event)" [(ngModel)]="personnelRequirement.idFormaContratacion"
+						            required></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngContractForm.valid">
+							<i class="fa fa-close"></i>
+							{{'REQUERIMIENTOPERSONAL.LBL_FORMACONTRATACION' | translate }} {{'LBL_REQUERIDO' | translate }}
+						</div>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="contractType">* {{'REQUERIMIENTOPERSONAL.LBL_TIPOCONTRATACION' | translate }}</label>
+						<p-dropdown id="contractType" name="contractType" #ngContractType="ngModel" [options]="contractTypes" [autoWidth]="false"
+						            (onChange)="onChangeMethod($event)" [(ngModel)]="personnelRequirement.idTipoContratacion"
+						            required></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngContractType.valid">
+							<i class="fa fa-close"></i>
+							{{'REQUERIMIENTOPERSONAL.LBL_TIPOCONTRATACION' | translate }} {{'LBL_REQUERIDO' | translate }}
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="$name$">* {{'$label$' | translate }}:</label>
+						<p-autoComplete id="$name$"  name="$name$" field="$field$"
+						                placeholder="{{ 'PH_BUSCAR' | translate}} {{'$label$' | translate }}"
+						                [(ngModel)]="$var$"
+						                #$ngName$="ngModel" [suggestions]="$list$" required="true"
+						                (completeMethod)="$name$Search($event)" (onSelect)="$name$CaptureId($event)">
+						</p-autoComplete>
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !$ngName$.valid">
+							<i class="fa fa-close"></i> {{'$label$' | translate }} {{'LBL_REQUERIDO' | translate }}
+						</div>
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!is$name$Wrong">
+							<i class="fa fa-close"></i> {{'$label$' | translate }} {{'LBL_REQUERIDO' | translate }}
 						</div>
 					</div>
 					<div class="form-group col-md-6">

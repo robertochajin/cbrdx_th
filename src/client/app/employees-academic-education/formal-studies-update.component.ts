@@ -5,7 +5,6 @@ import { Location } from '@angular/common';
 import { FormalStudies } from './formal-studies';
 import { AcademicEducationService } from '../_services/academic-education.service';
 import { Message, ConfirmationService } from 'primeng/primeng';
-import { StudyLevelServices } from '../_services/study-level.service';
 import * as moment from 'moment/moment';
 import { PoliticalDivisionService } from '../_services/political-division.service';
 import { DivisionPolitica } from '../_models/divisionPolitica';
@@ -46,7 +45,6 @@ export class FormalStudiesUpdateComponent implements OnInit {
 
    constructor( private academicEducationService: AcademicEducationService,
       private politicalDivisionService: PoliticalDivisionService,
-      private studyLevelServices: StudyLevelServices,
       private listaService: ListaService,
       private route: ActivatedRoute,
       private location: Location,

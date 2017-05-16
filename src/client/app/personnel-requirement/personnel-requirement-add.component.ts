@@ -11,6 +11,12 @@ import { UsuariosService } from '../_services/usuarios.service';
 import { EmployeesService } from '../_services/employees.service';
 import { Positions } from '../_models/positions';
 import { PositionsService } from '../_services/positions.service';
+import { SelectItem } from 'primeng/components/common/api';
+import { ListaService } from '../_services/lista.service';
+import { ListaItem } from '../_models/listaItem';
+import { ListPositionsService } from '../_services/lists-positions.service';
+import { ZonesServices } from '../_services/zones.service';
+import { Zones } from '../_models/zones';
 
 @Component( {
                moduleId: module.id,
@@ -27,15 +33,52 @@ export class PersonnelRequirementAddComponent implements OnInit {
    tokendecoded: any = { sub: '', usuario: '', nombre: '' };
    jwtHelper: JwtHelper = new JwtHelper();
    personnelRequirement: PersonnelRequirement = new PersonnelRequirement();
+   requirementTypes: SelectItem[] = [];
+   categoryTypes: SelectItem[] = [];
    idUser: number;
+   private contractTypes: SelectItem[] = [];
+   private contractForms: SelectItem[] = [];
+   private zones: Zones[] = [];
 
    constructor( private personnelRequirementServices: PersonnelRequirementServices,
       private router: Router,
       private usuariosService: UsuariosService,
+      private listaService: ListaService,
+      private listPositionsService: ListPositionsService,
       private employeesService: EmployeesService,
+      private zonesServices: ZonesServices,
       private positionsService: PositionsService,
       private location: Location,
       private confirmationService: ConfirmationService ) {
+
+      listaService.getMasterDetails( 'ListasTiposSolicitudes' ).subscribe( res => {
+         this.requirementTypes.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => this.requirementTypes.push( { label: s.nombre, value: s.idLista } ) );
+      } );
+
+      listPositionsService.getCategoryTypes().subscribe( res => {
+         this.categoryTypes.push( { label: 'Seleccione', value: null } );
+         for ( let dp of res ) {
+            this.categoryTypes.push( {
+                                        label: dp.categoria,
+                                        value: dp.idCategoria
+                                     } );
+         }
+      } );
+
+      listaService.getMasterDetails( 'ListasTiposContratos' ).subscribe( res => {
+         this.contractTypes.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => this.contractTypes.push( { label: s.nombre, value: s.idLista } ) );
+      } );
+
+      listaService.getMasterDetails( 'LISTAFORMACONTRATACION' ).subscribe( res => {
+         this.contractForm.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => this.contractForm.push( { label: s.nombre, value: s.idLista } ) );
+      } );
+
+      zonesServices.getAll().subscribe(zones => { this.zones = zones});
+
+
    }
 
    ngOnInit() {
@@ -55,6 +98,10 @@ export class PersonnelRequirementAddComponent implements OnInit {
    }
 
    onSubmit(){
+
+   }
+
+   onChangeTypeMethod(event: any){
 
    }
 

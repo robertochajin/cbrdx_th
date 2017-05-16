@@ -58,6 +58,7 @@
   "MSG_REGISTRO":"Registro",
   "MSG_NORECORDSFOUND":"Su búsqueda no obtuvo ningún resultado",
   "LBL_BUSCAR":"Buscar...",
+  "PH_BUSCAR":"Buscar ",
   "LBL_INVALIDO" : "Invalido",
   "FIN_COMUNES":"====================================================================",
 
@@ -708,6 +709,8 @@
       "LBL_DATOSVACANTE":"Datos de la vacante",
       "LBL_MOTIVOREQUERIMIENTO":"Por porqué se genera requerimiento",
       "LBL_CARGO":"Cargo",
+      "LBL_NOMBRECARGO":"Nombre cargo",
+      "LBL_FUNCIONCARGO":"Función cargo",
       "LBL_ZONA":"Zona",
       "LBL_CATEGORIA":"Categoría",
       "LBL_FORMACONTRATACION":"Forma de contratación",
