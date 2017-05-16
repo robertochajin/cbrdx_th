@@ -73,6 +73,7 @@ export class Employee {
    public tipoTercero: number;
    public sectorEconomico: string;
    public coberturaSalud: string;
+   public edad: string;
 
    constructor() {
       this.nombreCompleto = '';
@@ -124,6 +125,7 @@ export class Employee {
       this.fechaDefuncion = '';
       this.fechaDocumento = '';
       this.fechaNacimiento = '';
+      this.edad = '';
    }
 }
 
