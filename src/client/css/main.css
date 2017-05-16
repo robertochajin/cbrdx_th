@@ -69,7 +69,9 @@ body .ui-widget:disabled {
       top: 2px;
    }
 }
-
+.sidebar-menu .treeview-menu{
+   margin-top:-1px;
+}
 .sidebar-menu .treeview-menu > li > a {
    padding: 5px 36px 5px 26px!important;
    white-space: pre-line;
