@@ -67,7 +67,7 @@
                                  [maxDate]="maxDateDocumento" [monthNavigator]="true" [yearNavigator]="true"
                                  [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
                                  dataType="date" #NGexpeditionDate="ngModel" required="true"
-                                 [(ngModel)]="expeditionDate" (onSelect)="onExpeditionDate($event)"
+                                 [(ngModel)]="employee.fechaDocumento" (onSelect)="onExpeditionDate($event)"
                      ></p-calendar>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGexpeditionDate.valid">
@@ -139,7 +139,7 @@
                                  [maxDate]="maxDate" [monthNavigator]="true" [yearNavigator]="true"
                                  [locale]="es" readonlyInput="readonlyInput" [yearRange]="range"
                                  dataType="date" #NGbirthDate="ngModel" [required]="true"
-                                 [(ngModel)]="birthDate" (onSelect)="onBirthDate($event)"
+                                 [(ngModel)]="employee.fechaNacimiento" (onSelect)="onBirthDate($event)"
                      ></p-calendar>
                      <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !NGbirthDate.valid">
                         {{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate}} {{'LBL_REQUERIDO' | translate}}
@@ -329,7 +329,7 @@
                      <p-calendar id="NGdeathDate" name="NGdeathDate" [locale]="es" [showIcon]="true"
                                  [maxDate]="today"
                                  dataType="date" #NGdeathDate="ngModel" [required]="!employee.indicadorVivo"
-                                 [(ngModel)]="deathDate" (onSelect)="onDeathDate($event)"
+                                 [(ngModel)]="employee.fechaDefuncion" (onSelect)="onDeathDate($event)"
                      ></p-calendar>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !employee.indicadorVivo && !NGdeathDate.valid">

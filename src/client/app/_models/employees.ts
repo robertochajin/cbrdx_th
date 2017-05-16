@@ -12,10 +12,10 @@ export class Employee {
    public idTipoDocumento: number;
    public tipoDocumento?: string;
    public numeroDocumento: string;
-   public fechaDocumento: string;
+   public fechaDocumento: Date;
    public idCiudadExpDocumento: number;
    public ciudadExpDocumento: string;
-   public fechaNacimiento: string;
+   public fechaNacimiento: Date;
    public idCiudadNacimiento: number;
    public ciudadNacimiento: string;
    public idGenero: number;
@@ -33,7 +33,7 @@ export class Employee {
    public tallaCalzado?: number;
    public correoElectronico: string;
    public sitioWeb: string;
-   public fechaCreacion?: string;
+   public fechaCreacion?: Date;
    public idTipoPersona: number;
    public razonSocial?: string;
    public talla: number;
@@ -51,7 +51,7 @@ export class Employee {
    public imagen?: string;
    public cargoActual?: string;
    public gentilicio?: string;
-   public fechaDefuncion?: string;
+   public fechaDefuncion?: Date;
    public indicadorVivo: boolean; // eje: (true, false)
    public indicadorHabilitado: boolean; // eje: (true, false)
    public idCoberturaSalud: number; // eje: (Contributivo, Subsidiado Total/Parcial,Ninguno)
@@ -120,10 +120,10 @@ export class Employee {
       this.tallaPantalon = 0;
       this.telefonoCelular = '';
       this.telefonoFijo = '';
-      this.fechaCreacion = '';
-      this.fechaDefuncion = '';
-      this.fechaDocumento = '';
-      this.fechaNacimiento = '';
+      this.fechaCreacion = null;
+      this.fechaDefuncion = null;
+      this.fechaDocumento = null;
+      this.fechaNacimiento = null;
    }
 }
 
