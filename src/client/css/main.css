@@ -785,3 +785,9 @@ body .ui-tabview .ui-tabview-panel{
 .upload-avatar .ui-fileupload-content {
    display: none;
 }
+
+.ui-panel-title {
+   font-weight: 600!important;
+   font-size: 1.2em!important;
+
+}
