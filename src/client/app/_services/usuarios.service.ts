@@ -1,7 +1,7 @@
 /**
  * Created by jenni on 13/02/2017.
  */
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { TercerosService } from './terceros.service';
@@ -12,15 +12,27 @@ import { UsuarioRol } from '../_models/usuarioRol';
 import { VUsuarioRol } from '../_models/vUsuarioRol';
 import { VUsuarioGrupoGestion } from '../_models/vUsuarioGrupoGestion';
 import { VHistoricoUsuario } from '../_models/vHistoricoUsuario';
+import { JwtHelper, AuthHttp } from 'angular2-jwt';
 import any = jasmine.any;
 
 @Injectable()
-export class UsuariosService extends TercerosService {
+export class UsuariosService {
 
    private refreshServiceURL = '<%= SVC_TH_URL %>/auth/refresh';
    private usuariosServiceURL = '<%= SVC_TH_URL %>/api/usuarios/';
    private usuariosGruposServiceURL = '<%= SVC_TH_URL %>/api/usuariosGruposGestion/';
    private usuariosRolesServiceURL = '<%= SVC_TH_URL %>/api/usuariosRoles/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
+
+   constructor( public authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
+   }
 
    listUsers() {
       return this.authHttp.get( this.usuariosServiceURL ).map( ( res: Response ) => res.json() as Usuario[] );
@@ -36,6 +48,7 @@ export class UsuariosService extends TercerosService {
    }
 
    createUser( p: Usuario ): Promise<Usuario> {
+      p.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.usuariosServiceURL, JSON.stringify( p ) ).toPromise().then( res => res.json() as Usuario )
       .catch( this.handleError );
    }
@@ -45,10 +58,12 @@ export class UsuariosService extends TercerosService {
    }
 
    updateUser( c: Usuario ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.usuariosServiceURL, JSON.stringify( c ) ).toPromise().catch( this.handleError );
    }
 
    updatePass( c: Usuario ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.usuariosServiceURL + 'cambiarPass/' + c.contrasenaAntigua + '/', JSON.stringify( c ) ).toPromise()
       .then( res => {
          if ( res.json() === true ) {
@@ -60,6 +75,7 @@ export class UsuariosService extends TercerosService {
    }
 
    createUserGroup( p: UsuarioGrupoGestion ): Promise<UsuarioGrupoGestion> {
+      p.auditoriaUsuario = this.idUsuario;
       if ( p.fechaInicio !== null ) {
          p.fechaInicio.setHours( 23 );
          p.fechaFin.setHours( 23 );
@@ -69,6 +85,7 @@ export class UsuariosService extends TercerosService {
    }
 
    createUserRole( p: UsuarioRol ): Promise<UsuarioRol> {
+      p.auditoriaUsuario = this.idUsuario;
       if ( p.fechaInicio !== null ) {
          p.fechaInicio.setHours( 23 );
          p.fechaFin.setHours( 23 );
@@ -103,6 +120,7 @@ export class UsuariosService extends TercerosService {
    }
 
    updateUserGroup( c: UsuarioGrupoGestion ) {
+      c.auditoriaUsuario = this.idUsuario;
       if ( c.fechaInicio !== null && c.indicadorHabilitado ) {
          c.fechaInicio.setHours( 23 );
          c.fechaFin.setHours( 23 );
@@ -125,5 +143,10 @@ export class UsuariosService extends TercerosService {
             localStorage.setItem( 'token', token );
          }
       } );
+   }
+
+   handleError( error: any ): Promise<any> {
+      console.error( 'Error:', error );
+      return Promise.reject( error.message || error );
    }
 }

@@ -2,14 +2,22 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { PositionResponsabilities } from '../_models/positionResponsabilities';
 import { Observable } from 'rxjs';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class PositionResponsabilitiesService {
 
    private serviceURL = '<%= SVC_TH_URL %>/api/cargosResponsabilidades/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    getAll() {
@@ -22,11 +30,13 @@ export class PositionResponsabilitiesService {
    }
 
    add( f: PositionResponsabilities ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL, f )
       .map( ( res: Response ) => res.json() );
    };
 
    update( f: PositionResponsabilities ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL, JSON.stringify( f ) ).catch( this.handleError );
    }
 

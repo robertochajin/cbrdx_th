@@ -8,8 +8,16 @@ import { AuthHttp } from 'angular2-jwt';
 export class PositionCompetenciesServices {
 
    private serviceURL = '<%= SVC_TH_URL %>/api/cargosCompetencias/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    getAll() {
@@ -21,11 +29,13 @@ export class PositionCompetenciesServices {
    }
 
    add( f: PositionCompetencies ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL, f )
       .map( ( res: Response ) => res.json() );
    };
 
    update( f: PositionCompetencies ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL, JSON.stringify( f ) ).catch( this.handleError );
    }
 

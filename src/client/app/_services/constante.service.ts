@@ -3,14 +3,22 @@ import { Response } from '@angular/http';
 import { VConstante } from '../_models/vConstante';
 import { Constante } from '../_models/constante';
 import 'rxjs/add/operator/toPromise';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class ConstanteService {
 
    private serviceURL = '<%= SVC_TH_URL %>/api/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    listConstants() {
@@ -18,11 +26,13 @@ export class ConstanteService {
    }
 
    addConstant( c: Constante ): Promise<Constante> {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'constantes/', JSON.stringify( c ) ).toPromise().then( res => res.json() as Constante )
       .catch( this.handleError );
    };
 
    updateConstant( c: Constante ): Promise<any> {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'constantes/', JSON.stringify( c ) ).toPromise().catch( this.handleError );
    }
 
