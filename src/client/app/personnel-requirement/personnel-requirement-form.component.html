@@ -26,7 +26,7 @@
 					<div class="form-group col-md-6">
 						<label for="petitionerPosition">{{ 'REQUERIMIENTOPERSONAL.LBL_CARGOSOLICITANTE' | translate }}:</label>
 						<input id="petitionerPosition" type="text" pInputText name="petitionerPosition"
-						       [(ngModel)]="" disabled />
+						       [(ngModel)]="position.codigoCargo+' - '+position.cargo" disabled />
 					</div>
 				</div>
 				
