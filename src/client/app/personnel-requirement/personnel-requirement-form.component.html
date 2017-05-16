@@ -47,7 +47,23 @@
 					<div class="form-group col-md-6">
 						<label for="petitionerEmail">{{ 'REQUERIMIENTOPERSONAL.LBL_CORREOSOLICITANTE' | translate }}:</label>
 						<input id="petitionerEmail" type="text" pInputText name="petitionerEmail"
-						       [(ngModel)]="" disabled/>
+						       [(ngModel)]="user.correoElectronico" disabled/>
+					</div>
+					<div class="form-group col-md-6">
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="tipoSolicitud">* {{'REQUERIMIENTOPERSONAL.LBL_MOTIVOREQUERIMIENTO' | translate }}</label>
+						<p-dropdown id="tipoSolicitud" name="tipoSolicitud"
+						            [options]="requirementTypes" [(ngModel)]="personnelRequirement.idTipoSolicitud"
+						            (onChange)="onChangeMethod($event)"
+						            #ngTipoSolicitud="ngModel"  required [autoWidth]="false"></p-dropdown> 
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngTipoSolicitud.valid">
+							<i class="fa fa-close"></i>
+							{{'REQUERIMIENTOPERSONAL.LBL_MOTIVOREQUERIMIENTO' | translate }} {{'LBL_REQUERIDO' | translate }}
+						</div>
 					</div>
 					<div class="form-group col-md-6">
 					</div>
