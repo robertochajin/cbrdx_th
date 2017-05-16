@@ -3,14 +3,22 @@ import { Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { RolFuncionalities } from '../_models/rolFuncionalities';
 import { RolFunctionalityControl } from '../_models/rolFunctionalityControl';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 @Injectable()
 export class RolFuncionalitiesServices {
 
    private serviceURL = '<%= SVC_TH_URL %>/api/rolesFuncionalidades/';
    private serviceControlURL = '<%= SVC_TH_URL %>/api/rolesFuncionalidadesControles/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    getAll() {
@@ -27,11 +35,13 @@ export class RolFuncionalitiesServices {
    }
 
    add( f: RolFuncionalities ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL, f )
       .map( ( res: Response ) => res.json() );
    };
 
    update( f: RolFuncionalities ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL, JSON.stringify( f ) ).catch( this.handleError );
    }
 
@@ -41,11 +51,13 @@ export class RolFuncionalitiesServices {
    }
 
    addControl( f: RolFunctionalityControl ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceControlURL, f )
       .map( ( res: Response ) => res.json() );
    };
 
    updateControl( f: RolFunctionalityControl ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceControlURL, JSON.stringify( f ) ).catch( this.handleError );
    }
 

@@ -5,15 +5,23 @@ import { ListaTipoDato } from '../_models/listaTipoDato';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import any = jasmine.any;
 
 @Injectable()
 export class ListaService {
 
    private masterService = '<%= SVC_TH_URL %>/api/listas/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    getDetail( tableName: string, code: number ) {
@@ -33,6 +41,7 @@ export class ListaService {
    }
 
    createMaster( l: Lista ): Promise<Lista> {
+      l.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.masterService, JSON.stringify( l ) ).toPromise().then( res => res.json() as Lista )
       .catch( this.handleError );
    }
@@ -67,6 +76,7 @@ export class ListaService {
    }
 
    createDetail( li: ListaItem, tableName: string ) {
+      li.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.masterService + 'tabla/' + tableName + '/', JSON.stringify( li ) ).toPromise()
       .then( res => res.json() as ListaItem ).catch( this.handleError );
    }
@@ -76,6 +86,7 @@ export class ListaService {
    }
 
    updateMaster( l: Lista ) {
+      l.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.masterService, JSON.stringify( l ) ).toPromise().catch( this.handleError );
    }
 
