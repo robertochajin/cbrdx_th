@@ -1,4 +1,4 @@
-<h3 class="first">Observaciones del cargo</h3>
+<h3 class="first">{{ 'POSITION.LBL_OBSERVACIONCARGO' | translate }}</h3>
 <p-messages [value]="msgs"></p-messages>
 <div *ngIf="showForm">
    <div class="row-fluid">
@@ -7,20 +7,20 @@
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                <div class="row">
                   <div class=" col-sm-12">
-                     <label for="obs">Observación</label>
+                     <label for="obs">{{ 'POSITION.LBL_OBSERVACION' | translate }}</label>
                      <textarea pInputTextarea id="obs" name="obs"
                                [(ngModel)]="observation.observacion" #obs="ngModel"
                                [required]="true"></textarea>
                      <div *ngIf="fobs.submitted && !obs.valid"
                           class="ui-message ui-messages-error ui-corner-all">
-                        Observación es requerido
+                        {{ 'POSITION.LBL_OBSERVACION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
                      </div>
                   </div>
                </div>
             </div>
             <div class="row form-footer-buttons">
                <div class="form-group col-md-12">
-                  <button icon="fa-plus" label="Agregar Observación" type="submit"
+                  <button icon="fa-plus" label="{{ 'BTN_AGREGAR' | translate }} {{ 'POSITION.LBL_OBSERVACION' | translate }}" type="submit"
                           pButton></button>
                </div>
             </div>
@@ -31,20 +31,20 @@
 <div>
    <div class="row datable-header">
       <div class="col-md-6 col-xs-12 datatable-header-add">
-         <button type="button" pButton icon="fa-plus" (click)="add()" label="Nueva Observación"></button>
+         <button type="button" pButton icon="fa-plus" (click)="add()" label="{{ 'LBL_NUEVA' | translate }} {{ 'POSITION.LBL_OBSERVACION' | translate }}"></button>
       </div>
       <div class="col-md-6 col-xs-12 datatable-header-search">
          <div class="input-group">
             <div class="input-group-addon"><i class="fa fa-search"></i></div>
-            <input #gb type="text" pInputText size="30" placeholder="Buscar..." class="form-control">
+            <input #gb type="text" pInputText size="30" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control">
          </div>
       </div>
    </div>
    <p-dataTable [value]="observations" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-      <p-column field="idCargoEstadoObservacion" header="Id" [sortable]="true"></p-column>
-      <p-column field="estadoCargo" header="Estado" [sortable]="true"></p-column>
-      <p-column field="observacion" header="Observación" [sortable]="true"></p-column>
-      <p-column field="auditoriaFecha" header="Fecha" [sortable]="true"></p-column>
+      <p-column field="idCargoEstadoObservacion" header="{{ 'LBL_ID' | translate }}" [sortable]="true"></p-column>
+      <p-column field="estadoCargo" header="{{ 'LBL_ESTADO' | translate }}" [sortable]="true"></p-column>
+      <p-column field="observacion" header="{{ 'POSITION.LBL_OBSERVACION' | translate }}" [sortable]="true"></p-column>
+      <p-column field="auditoriaFecha" header="{{ 'LBL_FECHA' | translate }}" [sortable]="true"></p-column>
       <!--<p-column header="Acciones" styleClass="datatable-col-action">
          <template let-lcontact="rowData" pTemplate="body">
             <div class="btn-group" role="group">
