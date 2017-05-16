@@ -97,7 +97,7 @@ export class ReferencesAddComponent implements OnInit {
                                               this._nav.setTab( 8 );
                                               this.location.back();
                                            }
-                                        });
+                                        } );
    }
 
    focusUP() {

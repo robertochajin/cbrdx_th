@@ -82,7 +82,7 @@ export class RolesAddComponent implements OnInit {
 
    capitalizeCode() {
       let input = this.rol.codigoRol;
-      if ( input !== '' && input !== null && input !== undefined) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.rol.codigoRol = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
       }
    }

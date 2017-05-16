@@ -68,7 +68,7 @@ export class ReferencesComponent implements OnInit {
    }
 
    detail( f: References ) {
-      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/references/detail/' + f.idTerceroReferencia ] );
+      this.router.navigate( [ 'employees/detail/' + this.employee.idTercero + '/references/detail/' + f.idTerceroReferencia ] );
    }
 
    add() {
@@ -76,6 +76,6 @@ export class ReferencesComponent implements OnInit {
    }
 
    update( f: References ) {
-      this.router.navigate( [ 'employees/detail/'+this.employee.idTercero+'/references/update/' + f.idTerceroReferencia ] );
+      this.router.navigate( [ 'employees/detail/' + this.employee.idTercero + '/references/update/' + f.idTerceroReferencia ] );
    }
 }

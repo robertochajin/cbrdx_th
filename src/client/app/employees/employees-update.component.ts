@@ -52,7 +52,7 @@ export class EmployeesUpdateComponent implements OnInit {
    listadoOcupaciones: Ocupaciones[];
    listadoActividadEconomica: ActividadEconomica[];
    msgs: Message[] = [];
-
+   today: Date = null;
    maxDate: Date = null;
    maxDateDocumento: Date = null;
    range: string;
@@ -213,6 +213,9 @@ export class EmployeesUpdateComponent implements OnInit {
       this.maxDate = new Date();
       this.maxDate.setMonth( month );
       this.maxDate.setFullYear( year );
+      this.today = new Date();
+      this.today.setMonth( month );
+      this.today.setFullYear( year );
       this.maxDateDocumento = new Date();
       this.maxDateDocumento.setMonth( month );
       this.maxDateDocumento.setFullYear( year );

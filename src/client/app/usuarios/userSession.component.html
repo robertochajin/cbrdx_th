@@ -10,20 +10,21 @@
    <div id="#profile" class="row">
       <div class="col-md-offset-3 col-md-6">
          <div class="header">
-            <h4 class="title">{{"USER_SESSION.LBL_USUARIO" | translate}}</h4>
+            <h3 class="title">{{"USER_SESSION.LBL_USUARIO" | translate}}</h3>
          </div>
          <div class="clearfix card-header">
-            <div class="col-md-4">
+            <div class="col-md-5">
                <img class="img-circle img-responsive user-avatar" src="{{svcThUrl}}/file/{{image}}" />
-            </div>
-            <div class="col-md-8">
-               <h4>{{employee.nombreCompleto}} - {{employee.fechaNacimiento}}</h4>
+					<p-fileUpload name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
+									  chooseLabel="{{'USER_SESSION.LBL_NUEVOAVATAR' | translate}}"
+									  (onBeforeSend)="onBeforeSend($event)"
+									  (onUpload)="onUpload($event)"
+					></p-fileUpload>
+				</div>
+            <div class="col-md-7">
+               <h3>{{employee.nombreCompleto}}</h3>
+					<h4>{{employee.fechaNacimiento}}</h4>
                <span>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</span><br/>
-               <p-fileUpload name="file" url="{{svcThUrl}}" auto="true"
-                             chooseLabel="{{'USER_SESSION.LBL_NUEVOAVATAR' | translate}}"
-                             (onBeforeSend)="onBeforeSend($event)"
-                             (onUpload)="onUpload($event)"
-               ></p-fileUpload>
 
                <div *ngIf="user">
                   <div class="header" style=" margin-top: 40px;">
