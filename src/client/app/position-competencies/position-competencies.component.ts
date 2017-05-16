@@ -132,7 +132,7 @@ export class PositionCompetenciesComponent implements OnInit {
       } else {
          // lanzar mensaje advirtiendo que un grupo no tiene asignado ningun factor
          this.msgs.push( {
-                            severity: 'warning', summary: 'Formulario incompleto',
+                            severity: 'warn', summary: 'Formulario incompleto',
                             detail: 'Es necesario asignar ponderación a todas las competencias.'
                          } );
       }

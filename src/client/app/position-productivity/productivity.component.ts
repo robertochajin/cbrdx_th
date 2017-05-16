@@ -63,7 +63,7 @@ export class ProductivityComponent implements OnInit {
       if ( this.productivity.idCargoProductividad === null ) {
          this.productivityService.add( this.productivity )
          .subscribe( data => {
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            // this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
             this.next();
          }, error => {
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
@@ -71,7 +71,7 @@ export class ProductivityComponent implements OnInit {
       } else {
          this.productivityService.update( this.productivity )
          .subscribe( data => {
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            // this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
             this.next();
          }, error => {
             this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );

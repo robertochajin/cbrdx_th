@@ -63,9 +63,9 @@ export class SharedModule {
                            jQuery( 'input.ng-invalid:first' ).select().focus();
                         }, 500 );
                      } else {
-                        if ( jQuery( 'div.ui-messages' ).length ) {
-                           jQuery( 'body' ).scrollTop( jQuery( 'div.ui-messages:first' ).position().top );
-                        }
+                        // if ( jQuery( 'div.ui-messages' ).length ) {
+                        //    jQuery( 'body' ).scrollTop( jQuery( 'div.ui-messages:first' ).position().top );
+                        // }
                      }
                   }, 500 );
                } );

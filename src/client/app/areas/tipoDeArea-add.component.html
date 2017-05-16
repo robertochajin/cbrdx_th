@@ -26,7 +26,7 @@
             <label for="estructuraArea" class="control-label col-sm-3">{{ 'LBL_NOMBRE' | translate }}</label>
             <div class=" col-sm-9">
                 <input type="text" pInputText class="form-control" id="estructuraArea" name="estructuraArea" #estructuraArea="ngModel"
-                       [(ngModel)]="areas.estructuraArea" required maxlength="40" pattern="[A-Z]{1}.*"
+                       [(ngModel)]="areas.estructuraArea" required maxlength="40" pattern="[A-ZÁÉÍÓÚ]{1}.*"
                        (keyup)="capitalize()"
                 >
                 <div *ngIf="f.submitted&&!estructuraArea.valid" class="alert alert-danger">

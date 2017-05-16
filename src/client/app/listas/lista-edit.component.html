@@ -158,7 +158,7 @@
         <header>Listas</header>
         <p-column field="codigo" header="{{ 'LBL_CODIGO' | translate }}"></p-column>
         <p-column field="nombre" header="{{ 'LISTAS.LBL_ITEMLISTA' | translate }}"></p-column>
-        <p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}">
+        <p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}" styleClass="datatable-col-center">
             <template let-const="rowData" pTemplate="body">
                 <p-checkbox [(ngModel)]="const.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
             </template>
