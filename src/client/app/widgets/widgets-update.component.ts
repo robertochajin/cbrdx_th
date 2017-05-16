@@ -47,7 +47,7 @@ export class WidgetsUpdateComponent implements OnInit {
    }
 
    inputCleanUp( value: string ) {
-      this.widgets.codigoWidget = value.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
+      this.widgets.codigoWidget = value.toUpperCase().replace( /[^A-Z0-9]/gi, '' ).trim();
    }
 
    validateCode() {

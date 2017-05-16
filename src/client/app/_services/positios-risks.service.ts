@@ -2,14 +2,22 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Risk } from '../_models/position-risks';
 import { Exam } from '../_models/position-exam';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class RiskService {
 
    private serviceURL = '<%= SVC_TH_URL %>/api/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    getTypeRisk() {
@@ -45,18 +53,22 @@ export class RiskService {
    }
 
    add( c: Risk ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'cargosRiesgos', c ).map( ( res: Response ) => res.json() );
    };
 
    addPositionExam( c: Exam ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'cargosExamenes', c ).map( ( res: Response ) => res.json() );
    };
 
    updatePositionExam( c: Exam ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'cargosExamenes', c ).map( ( res: Response ) => res );
    };
 
    update( c: Risk ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'tercerosContactos', c ).map( ( res: Response ) => res );
    }
 

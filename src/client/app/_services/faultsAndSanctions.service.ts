@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { FaultsAndSanctions } from '../_models/faultsAndSanctions';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class FaultsAndSanctionsService {
 
    private serviceURL = '<%= SVC_TH_URL %>/api/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    getAll() {
@@ -16,10 +24,12 @@ export class FaultsAndSanctionsService {
    }
 
    add( c: FaultsAndSanctions ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'faltas', c ).map( ( res: Response ) => res.json() );
    };
 
    update( c: FaultsAndSanctions ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'faltas', c ).map( ( res: Response ) => res );
    }
 

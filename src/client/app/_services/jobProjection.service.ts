@@ -4,14 +4,22 @@ import { JobProjection } from '../_models/jobProjection';
 import { OrganizationalStructure } from '../_models/organizationalStructure';
 import { OrganizationalStructurePositions } from '../_models/organizationalStructurePositions';
 import { Constante } from '../_models/constante';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class JobProjectionService {
 
    private serviceURL = '<%= SVC_TH_URL %>/api/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    getAll() {
@@ -66,10 +74,12 @@ export class JobProjectionService {
    };
 
    update( jp: JobProjection ) {
+      jp.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'proyeccionesLaborales', jp ).map( ( res: Response ) => res );
    }
 
    add( jp: JobProjection ) {
+      jp.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'proyeccionesLaborales', jp ).map( ( res: Response ) => res.json() as JobProjection );
    }
 

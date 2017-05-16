@@ -2,14 +2,22 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { MenuManager } from '../_models/menuManager';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class MenuManagerService {
 
    private serviceURL = '<%= SVC_TH_URL %>/api/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    getAll() {
@@ -21,11 +29,13 @@ export class MenuManagerService {
    }
 
    add( c: MenuManager ): Promise<MenuManager> {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'menus', JSON.stringify( c ) ).toPromise().then( res => res.json() as MenuManager )
       .catch( this.handleError );
    };
 
    update( c: MenuManager ): Promise<any> {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'menus', JSON.stringify( c ) ).toPromise().catch( this.handleError );
    }
 

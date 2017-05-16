@@ -49,7 +49,7 @@ export class ConstanteAddComponent implements OnInit {
 
    inputCleanUp( value: string ) {
       if ( value ) {
-         this.constant.constante = value.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
+         this.constant.constante = value.toUpperCase().replace( /[^A-Z0-9]/gi, '' ).trim();
       }
    }
 
