@@ -33,7 +33,7 @@
                       [maxDate]="maxDateFin" [minDate]="minDateFin" [monthNavigator]="true" [yearNavigator]="true"
                       [yearRange]="rangeFin" [locale]="es" readonlyInput="readonlyInput" [required]="editing"
                       (onSelect)="onSelectFin($event)" dataType="date" [(ngModel)]="tfechaFin" ></p-calendar>
-          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !fechaInicio.valid && editing">
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !fechaFin.valid && editing">
             <i class="fa fa-close"></i>{{'LBL_FECHAFIN' | translate}} {{'LBL_REQUERIDO' | translate}}
           </div>
         </div>
