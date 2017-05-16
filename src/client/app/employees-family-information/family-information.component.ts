@@ -55,15 +55,17 @@ export class FamilyInformationComponent implements OnInit {
    }
 
    add() {
-      return this.router.navigate( [ 'employees/detail/'+ this.employee.idTercero + '/family-information/add'  ] );
+      return this.router.navigate( [ 'employees/detail/' + this.employee.idTercero + '/family-information/add' ] );
    }
 
    update( f: ConstructorFamilyInformation ) {
-      return this.router.navigate( [ 'employees/detail/'+ this.employee.idTercero + '/family-information/update/' + f.idTerceroFamiliar] );
+      return this.router.navigate(
+         [ 'employees/detail/' + this.employee.idTercero + '/family-information/update/' + f.idTerceroFamiliar ] );
    }
 
    detail( f: ConstructorFamilyInformation ) {
-      return this.router.navigate( [ 'employees/detail/'+ this.employee.idTercero + '/family-information/detail/' + f.idTerceroFamiliar ] );
+      return this.router.navigate(
+         [ 'employees/detail/' + this.employee.idTercero + '/family-information/detail/' + f.idTerceroFamiliar ] );
    }
 
 }

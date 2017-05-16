@@ -8,7 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { TranslateService, TranslateModule } from 'ng2-translate';
 import { WindowRefService } from '../_services/window-ref.service';
 import { AuthenticationService } from '../_services/authentication.service';
-import {NavService} from "../_services/_nav.service";
+import { NavService } from '../_services/_nav.service';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -26,13 +26,15 @@ export class SharedModule {
 
    private topInvalid: number;
    private _window: Window;
+
    static forRoot(): ModuleWithProviders {
       return {
          ngModule: SharedModule,
          providers: [ TranslateService ]
       };
    }
-   constructor( private router: Router, windowRef: WindowRefService,private navService: NavService ) {
+
+   constructor( private router: Router, windowRef: WindowRefService, private navService: NavService ) {
 
       this._window = windowRef.nativeWindow;
 
@@ -69,11 +71,8 @@ export class SharedModule {
                } );
             }, 1000 );
 
-
          }
       } );
    }
-
-
 
 }

@@ -52,15 +52,13 @@ export class NavService {
             break;
       }
 
-
-      jQuery('#msgNotificacion').hide();
+      jQuery( '#msgNotificacion' ).hide();
       this.subject.next( this.msgs );
-      jQuery('#msgNotificacion').slideDown(400);
+      jQuery( '#msgNotificacion' ).slideDown( 400 );
       setTimeout( () => {
-         jQuery('#msgNotificacion').slideUp(200);
+         jQuery( '#msgNotificacion' ).slideUp( 200 );
       }, 3000 );
    }
-
 
    setTab( numero: number ) {
       this._navTab = numero;
@@ -86,8 +84,8 @@ export class NavService {
       }
    }
 
-   resetSearch(){
-      this.arraySearch = [ ];
+   resetSearch() {
+      this.arraySearch = [];
    }
 
    setAvatar( avatar: string ) {
