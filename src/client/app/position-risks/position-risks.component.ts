@@ -8,6 +8,7 @@ import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
 import { Positions } from '../_models/positions';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -49,6 +50,7 @@ export class RiskComponent implements OnInit {
    constructor( private riskService: RiskService,
       private listaService: ListaService,
       private router: Router,
+      private _nav: NavService,
       private route: ActivatedRoute,
       private confirmationService: ConfirmationService ) {
 
@@ -151,11 +153,7 @@ export class RiskComponent implements OnInit {
                                                  this.riskService.add( this.risk )
                                                  .subscribe( data => {
                                                     this.msgsAlert = [];
-                                                    this.msgs[ 0 ] = {
-                                                       severity: 'info',
-                                                       summary: 'Exito',
-                                                       detail: 'Registro guardado correctamente.'
-                                                    };
+                                                    this._nav.setMesage( 1, this.msgs );
                                                     let riesgo = this.allRiesgo.find( s1 => s1.idRiesgo === this.risk.idRiesgo );
                                                     let tipo = this.allTipoRiesgos.find( s2 => s2.idRiesgoTipo === riesgo.idTipoRiesgo );
                                                     let subtipo = this.allSubtipoRiesgo.find(
@@ -170,7 +168,7 @@ export class RiskComponent implements OnInit {
                                                     this.guardando = false;
                                                  }, error => {
                                                     this.showForm = true;
-                                                    this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Error al guardar.' };
+                                                    this._nav.setMesage( 3, this.msgs );
                                                  } );
                                               }
                                            }
@@ -233,19 +231,19 @@ export class RiskComponent implements OnInit {
       if ( e.idCargoExamen !== null ) {
          this.riskService.updatePositionExam( e )
          .subscribe( data => {
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            this._nav.setMesage( 2, this.msgs );
          }, error => {
             this.showForm = true;
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            this._nav.setMesage( 3, this.msgs );
          } );
       } else {
          e.idCargo = this.exam.idCargo;
          this.riskService.addPositionExam( e )
          .subscribe( data => {
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            this._nav.setMesage( 1, this.msgs );
          }, error => {
             this.showForm = true;
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            this._nav.setMesage( 3, this.msgs );
          } );
       }
    }

@@ -5,6 +5,7 @@ import { AbsenceService } from '../_services/position-absence.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -24,6 +25,7 @@ export class PositionAuthoritiesComponent implements OnInit {
    constructor( private absenceService: AbsenceService,
       private router: Router,
       private route: ActivatedRoute,
+      private _nav: NavService,
       private confirmationService: ConfirmationService, ) {
 
    }
@@ -64,7 +66,7 @@ export class PositionAuthoritiesComponent implements OnInit {
       this.absence.idTipoRelacion = 3; // Reemplaza a
       this.absenceService.add( this.absence )
       .subscribe( data => {
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         this._nav.setMesage( 1, this.msgs );
          this.absenceService.getPositionById( data.idCargoRelacion ).subscribe( res => {
             data.cargoRelacion = res.cargo;
          } );
@@ -86,7 +88,7 @@ export class PositionAuthoritiesComponent implements OnInit {
             }
          } );
       }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         this._nav.setMesage( 3, this.msgs );
       } );
    }
 

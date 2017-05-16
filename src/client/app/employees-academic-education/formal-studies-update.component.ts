@@ -154,7 +154,8 @@ export class FormalStudiesUpdateComponent implements OnInit {
             }
             this.academicEducationService.updateFormal( this.fstudy ).subscribe(
                data => {
-                  this.msgs.push( { severity: 'info', summary: 'Success', detail: 'Guardando' } );
+                  // 1:add 2:update 3:error
+                  this._nav.setMesage( 2, this.msgs );
                   this._nav.setTab( 6 );
                   this.location.back();
                } );
