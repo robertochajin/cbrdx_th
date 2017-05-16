@@ -178,9 +178,9 @@ export class PositionsUpdateComponent implements OnInit {
       .subscribe( data => {
          this._nav.setTab( step );
          this.acordion = step;
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         this._nav.setMesage( 1, this.msgs );
       }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         this._nav.setMesage( 3, this.msgs );
       } );
    }
 
@@ -195,7 +195,7 @@ export class PositionsUpdateComponent implements OnInit {
       .subscribe( data => {
          this._nav.setTab( 1 );
          this.acordion = 1;
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         this._nav.setMesage( 1, this.msgs );
          this.positionsService.getListPositions().subscribe( res => {
             this.allPosition = res;
             if ( this.position.indicadorHabilitado === false ) {
@@ -204,7 +204,7 @@ export class PositionsUpdateComponent implements OnInit {
             this.buildParent();
          } );
       }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         this._nav.setMesage( 3, this.msgs );
       } );
    }
 
@@ -218,9 +218,9 @@ export class PositionsUpdateComponent implements OnInit {
       .subscribe( data => {
          this._nav.setTab( 3 );
          this.acordion = 3;
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         this._nav.setMesage( 1, this.msgs );
       }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         this._nav.setMesage( 3, this.msgs );
       } );
    }
 
@@ -234,9 +234,9 @@ export class PositionsUpdateComponent implements OnInit {
       .subscribe( data => {
          this._nav.setTab( 6 );
          this.acordion = 6;
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         this._nav.setMesage( 1, this.msgs );
       }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         this._nav.setMesage( 3, this.msgs );
       } );
    }
 
@@ -250,9 +250,9 @@ export class PositionsUpdateComponent implements OnInit {
       this.acordion = 8;
       this.positionsService.update4( this.position )
       .subscribe( data => {
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         this._nav.setMesage( 1, this.msgs );
       }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         this._nav.setMesage( 3, this.msgs );
       } );
    }
 
@@ -266,9 +266,9 @@ export class PositionsUpdateComponent implements OnInit {
       .subscribe( data => {
          this._nav.setTab( 9 );
          this.acordion = 9;
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         this._nav.setMesage( 1, this.msgs );
       }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         this._nav.setMesage( 3, this.msgs );
       } );
    }
 
@@ -282,9 +282,9 @@ export class PositionsUpdateComponent implements OnInit {
       .subscribe( data => {
          this._nav.setTab( 15 );
          this.acordion = 15;
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         this._nav.setMesage( 1, this.msgs );
       }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         this._nav.setMesage( 3, this.msgs );
       } );
    }
 
@@ -299,9 +299,9 @@ export class PositionsUpdateComponent implements OnInit {
       }
       this.positionsService.updateEstado( this.position )
       .subscribe( data => {
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         this._nav.setMesage( 1, this.msgs );
       }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         this._nav.setMesage( 3, this.msgs );
       } );
    }
 
@@ -420,7 +420,7 @@ export class PositionsUpdateComponent implements OnInit {
 
    capitalizeNombre() {
       let input = this.position.cargo;
-      if ( input !== '' && input !== null && input !== undefined) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.position.cargo = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }

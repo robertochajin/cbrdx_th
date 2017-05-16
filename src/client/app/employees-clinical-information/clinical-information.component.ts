@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/primeng';
+import { ConfirmationService, Message } from 'primeng/primeng';
 import { Employee } from '../_models/employees';
 import { EmployeesClinicalData } from '../_models/employeesClinicalData';
 import { ClinicalInformationService } from '../_services/clinical-information.service';
 import { DiagnosticosCIE } from '../_models/diagnosticosCIE';
 import { DiagnosticCIEServices } from '../_services/diagnosticCIE.service';
 import * as moment from 'moment/moment';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -30,6 +31,7 @@ export class ClinicalInformationComponent implements OnInit {
    rangeInicio: string;
    rangeFin: string;
    wrongDiagnostic: boolean = true;
+   msgs: Message[] = [];
 
    clinicalInformations: EmployeesClinicalData[];
    idMayorDeEdad: number = 1; // Es necesario crear la constante y consultarla
@@ -39,6 +41,7 @@ export class ClinicalInformationComponent implements OnInit {
    constructor( private clinicalInformationService: ClinicalInformationService,
       private diagnosticCIEServices: DiagnosticCIEServices,
       private router: Router,
+      private _nav: NavService,
       private confirmationService: ConfirmationService ) {
    }
 
@@ -131,6 +134,8 @@ export class ClinicalInformationComponent implements OnInit {
                   this.ecd = null;
                   this.editing = false;
                }
+               // 1:add 2:update 3:error
+               this._nav.setMesage( 2, this.msgs );
             } );
          } else {
             this.clinicalInformationService.add( this.ecd ).subscribe( data => {
@@ -143,6 +148,8 @@ export class ClinicalInformationComponent implements OnInit {
                   this.ecd = null;
                   this.editing = false;
                }
+               // 1:add 2:update 3:error
+               this._nav.setMesage( 1, this.msgs );
             } );
          }
 

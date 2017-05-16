@@ -196,8 +196,8 @@ export class FamilyInformationUpdateComponent implements OnInit {
                   this.familyInformationService.update( this.familyInformation )
                   .subscribe(
                      data => {
-
-                        this.msgs.push( { severity: 'info', summary: 'Success', detail: 'Guardando' } );
+                        // 1:add 2:update 3:error
+                        this._nav.setMesage( 2, this.msgs );
                         this._nav.setTab( 3 );
                         this.location.back();
                      } );

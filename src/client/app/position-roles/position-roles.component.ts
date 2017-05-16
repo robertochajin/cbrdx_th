@@ -7,6 +7,7 @@ import { ProcessRoles } from '../_models/processRoles';
 import { PositionRolesServices } from '../_services/position-roles.service';
 import { Message } from 'primeng/components/common/api';
 import { ListaService } from '../_services/lista.service';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -20,13 +21,14 @@ export class PositionRolesComponent implements OnInit {
    processRoles: ProcessRoles[] = [];
    positionRoles: PositionRoles [] = [];
    msgsAlert: Message[] = [];
-
+   msgs: Message[] = [];
    @Output()
    nextStep: EventEmitter<number> = new EventEmitter<number>();
 
    constructor( private router: Router,
       private positionRolesServices: PositionRolesServices,
       private listaService: ListaService,
+      private _nav: NavService,
       private confirmationService: ConfirmationService ) {
    }
 
@@ -65,7 +67,7 @@ export class PositionRolesComponent implements OnInit {
             objUpdate.indicadorHabilitado = true;
          } else {
             this.positionRolesServices.update( objUpdate ).subscribe( data => {
-               // Enviar mensaje de guardado correcto
+               this._nav.setMesage( 2, this.msgs );
             } );
          }
       } else {
@@ -75,6 +77,7 @@ export class PositionRolesComponent implements OnInit {
          objAdd.idCargo = this.position.idCargo;
          this.positionRolesServices.add( objAdd ).subscribe( data => {
             this.positionRoles.push( data );
+            this._nav.setMesage( 1, this.msgs );
          } );
       }
    }
@@ -83,6 +86,7 @@ export class PositionRolesComponent implements OnInit {
       pr.indicadorHabilitado = true;
       pr.idCargo = this.position.idCargo;
       this.positionRolesServices.add( pr ).subscribe( res => {
+         this._nav.setMesage( 1, this.msgs );
          if ( res.idResponsabilidad ) {
             this.positionRolesServices.getAllByPosition( this.position.idCargo ).subscribe( prs => {
                this.positionRoles = prs;
