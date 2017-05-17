@@ -330,8 +330,8 @@ export class EmployeesAddComponent implements OnInit {
    }
 
    onExpeditionDate( event: any ) {
-      let d = new Date( Date.parse( event ) );
-      this.expeditionDate = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      // let d = new Date( Date.parse( event ) );
+      // this.expeditionDate = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
       this.updateDate();
    }
 
