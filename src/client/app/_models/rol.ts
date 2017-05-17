@@ -3,8 +3,8 @@ export class Rol {
    codigoRol: string;
    rol: string;
    descripcion: string;
-   fechaInicio: string;
-   fechaFin: string;
+   fechaInicio: Date;
+   fechaFin: Date;
    indicadorHabilitado: boolean = true;
    auditoriaUsuario: number;
    auditoriaFecha: Date;

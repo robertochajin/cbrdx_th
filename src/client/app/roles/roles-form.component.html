@@ -29,13 +29,9 @@
             </div>
             <div class="ui-grid-col-8">
                <label for="nombre">* {{ 'LBL_NOMBRE' | translate}}</label>
-               <!--<input pInputText type="text" id="nombre" name="nombre"
-                      [(ngModel)]="rol.rol" #nombre="ngModel" (keyup)="capitalizeName()" required/>-->
                <p-inputMask id="nombre" name="nombre" [(ngModel)]="rol.rol" mask="ROLE_*?*******************************************************"
                             (keyup)="capitalizeName()" required slotChar=""
-                            #nombre="ngModel"
-               >
-                  
+                            #nombre="ngModel" >
                </p-inputMask>
                <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="f.submitted && !nombre.valid">
@@ -48,8 +44,8 @@
                <label for="fInicio">* {{ 'LBL_FECHAINICIO' | translate}}</label>
                <p-calendar id="fInicio" name="fInicio" [showIcon]="true" dataType="date"
                            [maxDate]="maxDate" [locale]="es" readonlyInput="true"
-                           [(ngModel)]="fechaInicio" #fInicio="ngModel"
-                           (onSelect)="onFechaInicio($event)"
+                           [(ngModel)]="rol.fechaInicio" #fInicio="ngModel"
+                           (onSelect)="onFechaInicio($event)" dateFormat="yy'-'mm'-'dd"
                            [yearRange]="range" [monthNavigator]="true" [yearNavigator]="true"
                >
                </p-calendar>
@@ -63,9 +59,9 @@
             <div class="ui-grid-col-3">
                <label for="fFin">* {{ 'LBL_FECHAFIN' | translate}}</label>
                <p-calendar id="fFin" name="fFin" [showIcon]="true" dataType="date"
-                           [minDate]="minDate" [locale]="es" readonlyInput="true" [disabled]="fechaInicio == null"
-                           [(ngModel)]="fechaFin" #fFin="ngModel" [required]="fechaInicio != null"
-                           (onSelect)="onFechaFin($event)"
+                           [minDate]="minDate" [locale]="es" readonlyInput="true" [disabled]="rol.fechaInicio == null"
+                           [(ngModel)]="rol.fechaFin" #fFin="ngModel" [required]="rol.fechaInicio != null"
+                           (onSelect)="onFechaFin($event)" dateFormat="yy'-'mm'-'dd"
                            [yearRange]="range" [monthNavigator]="true" [yearNavigator]="true"
                >
                </p-calendar>

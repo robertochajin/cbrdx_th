@@ -109,12 +109,12 @@ export class WorkExperienceAddComponent implements OnInit {
 
       if ( this.city === this.backupcity ) {
          this.msgs = [];
-         let mom: moment.Moment = moment( this.fechaIngresa, 'MM/DD/YYYY' );
-         this.experience.fechaIngresa = mom.format( 'YYYY-MM-DD' );
-         if ( this.experience.indicadorActualmente === false ) {
-            let mom3: moment.Moment = moment( this.fechaTermina, 'MM/DD/YYYY' );
-            this.experience.fechaTermina = mom3.format( 'YYYY-MM-DD' );
-         }
+         // let mom: moment.Moment = moment( this.fechaIngresa, 'MM/DD/YYYY' );
+         // this.experience.fechaIngresa = mom.format( 'YYYY-MM-DD' );
+         // if ( this.experience.indicadorActualmente === false ) {
+         //    let mom3: moment.Moment = moment( this.fechaTermina, 'MM/DD/YYYY' );
+         //    this.experience.fechaTermina = mom3.format( 'YYYY-MM-DD' );
+         // }
          this.experience.idTercero = this.idTercero;
          this.workExperienceService.add( this.experience )
          .subscribe( data => {
@@ -143,14 +143,14 @@ export class WorkExperienceAddComponent implements OnInit {
 
    onSelectMethodCalendarIngreso( event: any ) {
       let d = new Date( Date.parse( event ) );
-      this.fechaIngresa = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      this.minDate= new Date();
       this.minDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
    }
 
    onSelectMethodCalendarFinalizacion( event: any ) {
       let d = new Date( Date.parse( event ) );
-      this.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-      this.maxDateIngreso.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
+      this.maxDateIngreso= new Date();
+      this.maxDateIngreso.setFullYear( d.getFullYear(), d.getMonth(), );
    }
 
    focusUP() {

@@ -117,8 +117,6 @@ export class FamilyInformationUpdateComponent implements OnInit {
                this.familyInformation = familyInformation;
                this.selectedDocument = this.familyInformation.idTipoDocumento;
                this.selectedRelationship = this.familyInformation.idParentesco;
-               let mom: moment.Moment = moment( this.familyInformation.fechaNacimiento, 'YYYY-MM-DD' );
-               this.familyInformation.fechaNacimiento = mom.format( 'MM/DD/YYYY' );
                this.convive = this.familyInformation.idConvivencia === 1 ? true : false;
                if ( this.familyInformation.telefonoFijo !== null || this.familyInformation.telefonoFijo !== '' ) {
                   this.cel = true;
@@ -178,8 +176,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
                this.terceroFamiliar.segundoNombre = this.capitalizeSave( this.familyInformation.segundoNombre );
                this.terceroFamiliar.primerApellido = this.capitalizeSave( this.familyInformation.primerApellido );
                this.terceroFamiliar.segundoApellido = this.capitalizeSave( this.familyInformation.segundoApellido );
-               // let mom: moment.Moment = moment( this.familyInformation.fechaNacimiento, 'MM/DD/YYYY' );
-               this.terceroFamiliar.fechaNacimiento = moment( this.terceroFamiliar.fechaNacimiento, 'YYYY-MM-DD' ).toDate();
+               this.terceroFamiliar.fechaNacimiento =this.familyInformation.fechaNacimiento;
                this.terceroFamiliar.indicadorHabilitado = true;
                this.terceroFamiliar.idTipoTercero = this.idTipoTercero;
 
@@ -226,11 +223,6 @@ export class FamilyInformationUpdateComponent implements OnInit {
                                         } );
    }
 
-   onSelectMethod( event: any ) {
-      let d = new Date( Date.parse( event ) );
-      this.familyInformation.fechaNacimiento = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-   }
-
    onChangeMethod( event: any ) {
 
       let today = new Date();
@@ -253,12 +245,12 @@ export class FamilyInformationUpdateComponent implements OnInit {
          this.range = `${prev20Year}:${year}`;
       }
 
-      if ( (this.familyInformation.fechaNacimiento) !== null && (this.familyInformation.fechaNacimiento) !== '' ) {
+      if ( (this.familyInformation.fechaNacimiento) !== null && (this.familyInformation.fechaNacimiento) !== undefined ) {
          let timestamp2 = new Date( this.maxDate ).getTime();
          let timestamp1 = new Date( this.familyInformation.fechaNacimiento ).getTime();
          let timeDiff = Math.round( timestamp2 - timestamp1 );
          if ( timeDiff < 0 ) {
-            this.familyInformation.fechaNacimiento = '';
+            this.familyInformation.fechaNacimiento = null;
          }
       }
 

@@ -1,58 +1,60 @@
 <h3>{{ 'LISTAS.LBL_LISTAS' | translate }}</h3>
-<p-fieldset legend="{{ 'LISTAS.LBL_PARAMETROSLISTA' | translate }}">
+<div class="col-md-6 col-sm-offset-3">
+<h4>{{ 'LISTAS.LBL_PARAMETROSLISTA' | translate }}</h4>
     <form #f="ngForm" class="form-horizontal" (ngSubmit)="!codeExists&&f.form.valid&&createMaster(f)" novalidate
           (keydown.enter)="$event.preventDefault()">
-        <div class="col-sm-6">
-            <div class="form-group" [ngClass]="{ 'has-error':f.submitted&&!lista.valid}">
-                <label class="control-label col-sm-4" for="lista">{{ 'LISTAS.LBL_LISTA' | translate }}</label>
-                <div class="col-sm-8">
-                    <input class="form-control" type="text" pInputText [(ngModel)]="masterList.lista" id="lista"
-                           required maxlength="40" #lista="ngModel" name="lista" pattern="[A-Z]{1}.*">
-                    <div *ngIf="f.submitted&&lista.errors" class="alert alert-danger">
-                        <div [hidden]="!lista.errors.required">{{ 'LISTAS.MSG_NOMBRELISTA' | translate }}</div>
-                        <div [hidden]="!lista.errors.pattern">{{ 'LISTAS.MSG_LISTAMAYUSCULA' | translate }}</div>
-                        <div [hidden]="!lista.errors.maxlength">{{ 'LISTAS.MSG_LISTA40CARACTERES' | translate }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-           <div class="form-group" >
-              <label class="control-label col-sm-4" for="listDescription">{{ 'LBL_DESCRIPCION' | translate }}</label>
-              <textarea id="listDescription" name="listDescription" pInputTextarea  rows="5" #listDescription="ngModel"
-                        [(ngModel)]="masterList.descripcion" ></textarea>
-           </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label class="control-label col-sm-4" for="idLista">{{ 'LBL_ID' | translate }}</label>
-                <div class="col-sm-8">
-                    <p id="idLista">{{masterList.idLista}}</p>
-                </div>
-            </div>
-            <div class="col-md-11 col-md-offset-1">
-                <div class="row form-footer-buttons">
-                    <div class="col-md-12">
-                        <button class="pull-right" type="submit" pButton icon="fa-check" label="{{ 'BTN_ACTUALIZAR' | translate }}"
-                                (keydown.enter)="submit.click()"
-                                #submit></button>
-                        <a (click)="displayDialog=true" class="cancelar pull-right">{{ 'BTN_CANCELAR' | translate }}</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+		 <div class="row">
+
+			 <div class="form-group">
+				 <label class="control-label col-md-3" for="idLista">{{ 'LBL_ID' | translate }}</label>
+				 <div class="col-md-9">
+					 <p id="idLista">{{masterList.idLista}}</p>
+				 </div>
+			 </div>
+
+			 <div class="form-group">
+				 <label class="control-label col-md-3" for="lista">{{ 'LISTAS.LBL_LISTA' | translate }}</label>
+				 <div class="col-md-9">
+					 <input class="form-control" type="text" pInputText [(ngModel)]="masterList.lista" id="lista"
+							  required maxlength="40" #lista="ngModel" name="lista" pattern="[A-Z]{1}.*">
+					 <div *ngIf="f.submitted&&lista.errors" class="alert alert-danger">
+						 <div [hidden]="!lista.errors.required">{{ 'LISTAS.MSG_NOMBRELISTA' | translate }}</div>
+						 <div [hidden]="!lista.errors.pattern">{{ 'LISTAS.MSG_LISTAMAYUSCULA' | translate }}</div>
+						 <div [hidden]="!lista.errors.maxlength">{{ 'LISTAS.MSG_LISTA40CARACTERES' | translate }}</div>
+					 </div>
+				 </div>
+			 </div>
+
+			 <div class="form-group">
+				 <label class="control-label col-md-3" for="listDescription">{{ 'LBL_DESCRIPCION' | translate }}</label>
+				 <div class="col-md-9">
+					 <textarea id="listDescription" name="listDescription" pInputTextarea  rows="5" class="form-control" #listDescription="ngModel"
+								  [(ngModel)]="masterList.descripcion" ></textarea>
+				 </div>
+			 </div>
+
+			 <div class="form-footer-buttons" style="margin-bottom: 15px">
+				 <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+				 <button type="submit" pButton icon="fa-check" label="{{ 'BTN_ACTUALIZAR' | translate }}"
+							(keydown.enter)="submit.click()"
+							#submit></button>
+			 </div>
+		 </div>
     </form>
-</p-fieldset>
-<p-fieldset legend="{{ 'LISTAS.LBL_ELEMENTLISTA' | translate }}">
+</div>
+<div class="col-md-12">
+<p-panel header="{{ 'LISTAS.LBL_ELEMENTLISTA' | translate }}">
     <form *ngIf="!isEdit && masterList.indicadorEditable" name="form" (ngSubmit)="!detailCodeExists&&fd.form.valid && createDetail(fd)" #fd="ngForm"
           novalidate
           (keydown.enter)="$event.preventDefault()">
        <p-messages [value]="msgs"></p-messages>
+
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-md-6 col-md-offset-3">
                 <div class="form-group" [ngClass]="{ 'has-error':fd.submitted&&!codigo.valid}">
-                    <label for="codigo">{{ 'LBL_CODIGO' | translate }}</label>
-                    <input class="form-control" id="codigo" name="codigo" type="text" pInputText
+                    <label class="control-label col-md-3" for="codigo">{{ 'LBL_CODIGO' | translate }}</label>
+						 <div class="col-md-9">
+						 <input class="form-control" id="codigo" name="codigo" type="text" pInputText
                            [(ngModel)]="editableDetail.codigo" maxlength="10" required #codigo="ngModel"
                            (keyup)="childInputCleanUp($event.target.value)" (change)="validateDetailCode()"
                            (paste)="childInputCleanUp($event.target.value)" pattern="[A-Z]{0,10}"/>
@@ -64,39 +66,42 @@
                         <div [hidden]="!codigo.errors.pattern">{{ 'LISTAS.LBL_CODLETRAS' | translate }}</div>
                         <div [hidden]="!codigo.errors.maxlength">{{ 'LISTAS.LBL_COD10CARACTERES' | translate }}</div>
                     </div>
+						 </div>
                 </div>
                 <div class="form-group" [ngClass]="{ 'has-error':fd.submitted&&!item.valid}">
-                    <label for="item">{{ 'LISTAS.LBL_ITEMLISTA' | translate }}</label>
-                    <input class="form-control" id="item" name="item" type="text" pInputText
+                    <label class="control-label col-md-3" for="item">{{ 'LISTAS.LBL_ITEMLISTA' | translate }}</label>
+						 <div class="col-md-9">
+						 <input class="form-control" id="item" name="item" type="text" pInputText
                            [(ngModel)]="editableDetail.nombre" #item="ngModel" maxlength="30" required/>
                     <div *ngIf="fd.submitted&&item.errors" class="alert alert-danger">
                         <div [hidden]="!item.errors.required">{{ 'LISTAS.MSG_NOMBRELEMENTO' | translate }}</div>
                         <div [hidden]="!item.errors.maxlength">{{ 'LISTAS.MSG_ELEMENT30CARACT' | translate }}</div>
                     </div>
+						 </div>
                 </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="form-group">
-                    <label for="habilitado">{{ 'LBL_HABILITADO' | translate }}</label>
-                    <p-checkbox id="habilitado" [(ngModel)]="editableDetail.indicadorHabilitado"
-                                binary="true" name="habilitado"></p-checkbox>
-                </div>
-                <div class="form-group">
+					<div class="form-group">
+						<div class="form-group">
+							<label class="control-label col-md-3" for="habilitado">{{ 'LBL_HABILITADO' | translate }}</label>
+							<div class="col-md-9">
+							<p-checkbox id="habilitado" [(ngModel)]="editableDetail.indicadorHabilitado"
+											binary="true" name="habilitado"></p-checkbox>
+						</div>
+						</div>
+					</div>
+				</div>
+			  <div class="col-md-6 col-md-offset-3">
+						<div class="row form-footer-buttons">
+							<div class="col-md-12 ">
+								<a (click)="displayDetailDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+								<button type="submit" pButton icon="fa-check" label="{{ 'BTN_AGREGAR' | translate }}"
+										  (keydown.enter)="submitDetail.click()"
+										  #submitDetail></button>
 
-                </div>
-                <div class="col-md-11 col-md-offset-1">
-                    <div class="row form-footer-buttons">
-                        <div class="col-md-12 ">
-                            <button type="submit" pButton icon="fa-check" label="{{ 'BTN_AGREGAR' | translate }}" class="pull-right"
-                                    (keydown.enter)="submitDetail.click()"
-                                    #submitDetail></button>
-                            <a (click)="displayDetailDialog=true" class="cancelar pull-right">{{ 'BTN_CANCELAR' | translate }}</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
+							</div>
+						</div>
+			  </div>
+		  </div>
+	 </form>
     <form *ngIf="isEdit && masterList.indicadorEditable" name="formEdit" (ngSubmit)="!detailCodeExists&&fe.form.valid && updateDetail(fe)" #fe="ngForm"
           novalidate (keydown.enter)="$event.preventDefault()">
         <div class="row">
@@ -158,7 +163,7 @@
                 <p-checkbox [(ngModel)]="const.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
             </template>
         </p-column>
-        <p-column header="{{ 'LBL_ACCIONES' | translate }}" *ngIf="masterList.indicadorEditable">
+        <p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-center" *ngIf="masterList.indicadorEditable">
             <template let-const="rowData" pTemplate="body">
                 <div class="btn-group" role="group">
                     <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" pButton
@@ -167,10 +172,14 @@
             </template>
         </p-column>
     </p-dataTable>
-    <div class="pull-right form-footer-buttons">
-        <a (click)="displayReturnDialog=true" class="cancelar">{{ 'BTN_REGRESAR' | translate }}</a>
-    </div>
-</p-fieldset>
+	<div class="row form-footer-buttons">
+		<div class="form-group col-md-12">
+			<button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate }}" type="button"
+					  pButton (click)="goBack()"></button>
+		</div>
+	</div>
+</p-panel>
+</div>
 <p-dialog header="Confirmación" [(visible)]="displayDialog"
           responsive="true" modal="true">
     <p>{{ 'LISTAS.MSG_CONFIRMACIONCANCELAR' | translate }}</p>

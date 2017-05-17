@@ -137,11 +137,11 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                           <label for="ingreso">* {{'EMPLOYEES.LBL_INGRESO' | translate }}</label>
-                          <p-calendar id="ingreso" name="ingreso" #ingreso="ngModel"
+                          <p-calendar id="ingreso" name="ingreso" #ingreso="ngModel" dateFormat="yy'-'mm'-'dd"
                                       (onSelect)="onSelectMethodCalendarIngreso($event)" [showIcon]="true"
                                       [maxDate]="maxDateIngreso" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range"
                                       [locale]="es" readonlyInput="true" dataType="date" required="true"
-                                      [(ngModel)]="fechaIngresa">
+                                      [(ngModel)]="experience.fechaIngresa">
                           </p-calendar>
                           <div  class="ui-message ui-messages-error ui-corner-all"
                                 *ngIf="f.submitted && !ingreso.valid">
@@ -158,11 +158,11 @@
                         </div>
                         <div class="form-group col-md-4" *ngIf="!experience.indicadorActualmente">
                           <label for="finalizacion">* {{'EMPLOYEES.LBL_FINALIZACION' | translate }}</label>
-                          <p-calendar id="finalizacion" name="finalizacion" #finalizacion="ngModel"
+                          <p-calendar id="finalizacion" name="finalizacion" #finalizacion="ngModel" dateFormat="yy'-'mm'-'dd"
                                       (onSelect)="onSelectMethodCalendarFinalizacion($event)" [showIcon]="true" required="true"
                                       [minDate]="minDate" [maxDate]="maxDateFinal" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range"
                                       [locale]="es"  readonlyInput="true" dataType="date"
-                                      [(ngModel)]="fechaTermina">
+                                      [(ngModel)]="experience.fechaTermina">
                           </p-calendar>
                           <div  class="ui-message ui-messages-error ui-corner-all"
                                 *ngIf="f.submitted && !finalizacion.valid">

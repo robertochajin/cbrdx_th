@@ -14,7 +14,7 @@ export class ConstructorFamilyInformation {
    segundoNombre: string;
    primerApellido: string;
    segundoApellido: string;
-   fechaNacimiento: string;
+   fechaNacimiento: Date;
    correoElectronico: string;
    direccion: string;
    indicadorHabilitado: boolean;

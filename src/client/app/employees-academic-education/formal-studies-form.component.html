@@ -1,5 +1,6 @@
 <p-messages [value]="msgs"></p-messages>
-<p-confirmDialog width="400" acceptLabel="{{'BTN_SI' | translate }}" rejectLabel="{{'BTN_NO' | translate }}"></p-confirmDialog> <div *ngIf="fstudy">
+<p-confirmDialog width="400" acceptLabel="{{'BTN_SI' | translate:param }}" rejectLabel="{{'BTN_NO' | translate:param }}"></p-confirmDialog>
+<div *ngIf="fstudy">
     <div class="row">
         <div class="col-md-12">
             <div class="header">
@@ -86,18 +87,19 @@
             <label for="ingreso">{{'EMPLOYEES.LBL_INGRESO' | translate}}</label>
             <p-calendar id="ingreso" name="ingreso"  [showIcon]="true"
                         [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true" [maxDate]="maxDate"
-                        dataType="date" (onSelect)="onSelectBegin($event)" #ingreso="ngModel" required="true"
-                        [(ngModel)]="fstudy.fechaIngresa"></p-calendar>
+                        dataType="date" #ingreso="ngModel" required="true" (onSelect)="onSelectBegin($event)"
+                        [(ngModel)]="fstudy.fechaIngresa" dateFormat="yy'-'mm'-'dd"></p-calendar>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ingreso.valid">
               {{'EMPLOYEES.LBL_INGRESO' | translate}} {{'LBL_REQUERIDO' | translate}}
             </div>
           </div>
 
-          <div class="ui-grid-col-6"  *ngIf="(estadoEstudio.value == idEstadoEstudioFinalizado) && (ingreso.value !== undefined)">
+          <div class="ui-grid-col-6"  *ngIf="(estadoEstudio.value == idEstadoEstudioFinalizado)">
             <label for="fechaTermina">{{'EMPLOYEES.LBL_FINALIZACION' | translate}} </label>
-            <p-calendar id="fechaTermina" name="fechaTermina"  [showIcon]="true"
-                        [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true" [minDate]="minDate" [maxDate]="maxDateFinal"
-                        dataType="date" (onSelect)="onSelectEnd($event)" #fechaTermina="ngModel" [required]="estadoEstudio.value == idEstadoEstudioFinalizado"
+            <p-calendar id="fechaTermina" name="fechaTermina"  [showIcon]="true" dateFormat="yy'-'mm'-'dd"
+                        [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true" [minDate]="minDate"
+                        [maxDate]="maxDateFinal" (onSelect)="onSelectEnd($event)"
+                        dataType="date" #fechaTermina="ngModel" [required]="estadoEstudio.value == idEstadoEstudioFinalizado"
                         [(ngModel)]="fstudy.fechaTermina"></p-calendar>
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fechaTermina.valid">
               {{'EMPLOYEES.LBL_FINALIZACION' | translate}} {{'LBL_REQUERIDO' | translate}}

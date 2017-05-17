@@ -95,10 +95,10 @@ export class FormalStudiesUpdateComponent implements OnInit {
                this.wrongInstitute = false;
             }
             this.idTercero = this.fstudy.idTercero;
-            let fi: moment.Moment = moment( this.fstudy.fechaIngresa, 'YYYY-MM-DD' );
-            this.fstudy.fechaIngresa = fi.format( 'MM/DD/YYYY' );
-            let ff: moment.Moment = moment( this.fstudy.fechaTermina, 'YYYY-MM-DD' );
-            this.fstudy.fechaTermina = ff.format( 'MM/DD/YYYY' );
+            // let fi: moment.Moment = moment( this.fstudy.fechaIngresa, 'YYYY-MM-DD' );
+            // this.fstudy.fechaIngresa = fi.format( 'MM/DD/YYYY' );
+            // let ff: moment.Moment = moment( this.fstudy.fechaTermina, 'YYYY-MM-DD' );
+            // this.fstudy.fechaTermina = ff.format( 'MM/DD/YYYY' );
          } );
       } );
 
@@ -144,14 +144,14 @@ export class FormalStudiesUpdateComponent implements OnInit {
             } else {
                this.fstudy.idInstitucion = null;
             }
-            let fi: moment.Moment = moment( this.fstudy.fechaIngresa, 'MM/DD/YYYY' );
-            this.fstudy.fechaIngresa = fi.format( 'YYYY-MM-DD' );
-            if ( this.fstudy.idEstado === this.idEstadoEstudioFinalizado ) {
-               let ff: moment.Moment = moment( this.fstudy.fechaTermina, 'MM/DD/YYYY' );
-               this.fstudy.fechaTermina = ff.format( 'YYYY-MM-DD' );
-            } else {
-               this.fstudy.fechaTermina = null;
-            }
+            // let fi: moment.Moment = moment( this.fstudy.fechaIngresa, 'MM/DD/YYYY' );
+            // this.fstudy.fechaIngresa = fi.format( 'YYYY-MM-DD' );
+            // if ( this.fstudy.idEstado === this.idEstadoEstudioFinalizado ) {
+            //    let ff: moment.Moment = moment( this.fstudy.fechaTermina, 'MM/DD/YYYY' );
+            //    this.fstudy.fechaTermina = ff.format( 'YYYY-MM-DD' );
+            // } else {
+            //    this.fstudy.fechaTermina = null;
+            // }
             this.academicEducationService.updateFormal( this.fstudy ).subscribe(
                data => {
                   // 1:add 2:update 3:error
@@ -198,13 +198,13 @@ export class FormalStudiesUpdateComponent implements OnInit {
 
    onSelectBegin( event: any ) {
       let d = new Date( Date.parse( event ) );
-      this.fstudy.fechaIngresa = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      this.minDate= new Date();
       this.minDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
    }
 
    onSelectEnd( event: any ) {
       let d = new Date( Date.parse( event ) );
-      this.fstudy.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      this.maxDate = new Date();
       this.maxDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
    }
 
