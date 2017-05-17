@@ -6,6 +6,11 @@ import { ConfirmationService } from 'primeng/primeng';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
 import { SelectItem } from 'primeng/primeng';
+import { OrganizationalStructurePositions } from '../_models/organizationalStructurePositions';
+import { OrganizationalStructurePositionsServices } from '../_services/organizationalStructurePositions.service';
+import { OrganizationalStructureService } from '../_services/organizationalStructure.service';
+import { OrganizationalStructure } from '../_models/organizationalStructure';
+import { find } from 'rxjs/operator/find';
 
 @Component( {
                moduleId: module.id,
@@ -22,14 +27,26 @@ export class VacanciesComponent implements OnInit {
    listEstados: SelectItem[] = [];
    listAcciones: SelectItem[] = [];
    listAutotizacion: SelectItem[] = [];
+   listArea: SelectItem[] = [];
+   listCargo: SelectItem[] = [];
+   listOficina: SelectItem[] = [];
+
    es: any;
-   fechaInicio: Date;
-   fechaFin: Date;
+   fechaInicio: string;
+   fechaFin: string;
    today: Date;
+   osPositions: OrganizationalStructurePositions[] = [];
+   listPositions: OrganizationalStructurePositions[] = [];
+   countPlazas = 0;
+   countOcupados = 0;
+   listOrganizationalStructure: OrganizationalStructure[];
+
    constructor( private vacanciesService: VacanciesService,
       private router: Router,
       private confirmationService: ConfirmationService,
-      private listaService: ListaService
+      private listaService: ListaService,
+      private organizationalStructureService: OrganizationalStructureService,
+      private ospService: OrganizationalStructurePositionsServices,
    ) {
 
       this.listaService.getMasterDetails( 'ListasTiposSolicitudes' ).subscribe( res => {
@@ -55,6 +72,47 @@ export class VacanciesComponent implements OnInit {
          } );
       } );
 
+      organizationalStructureService.listOrganizationalStructure().subscribe( res => {
+         this.listOrganizationalStructure = res;
+         this.listArea.push({label: 'Todos', value:''});
+         this.listCargo.push({label: 'Todos', value:''});
+         this.listOficina.push({label: 'Todos', value:''});
+
+         this.ospService.getAllEnabled( ).subscribe( list => {
+            this.osPositions = list;
+            this.countPlazas = 0;
+            this.countOcupados = 0;
+            for ( let position of this.osPositions ) {
+               if((Number( position.plazas )- Number( position.ocupados )) > 0 ){
+                  this.countPlazas = this.countPlazas + Number( position.plazas );
+                  this.countOcupados = this.countOcupados + Number( position.ocupados );
+                  position.estructuraOrganizacional = this.listOrganizationalStructure.find(r => r.idEstructuraOrganizacional === position.idEstructuraOrganizacional ).nombre;
+                  position.estructuraFisica = this.listOrganizationalStructure.find(r => r.idEstructuraOrganizacional === position.idEstructuraOrganizacional ).estructuraFisica;
+                  if(this.listCargo.filter(t => t.value === position.cargo).length  === 0){
+                     if(position.cargo !== '' && position.cargo !== null) {
+                        this.listCargo.push( { label: position.cargo, value: position.cargo } );
+                     }
+                  }
+                  this.listPositions.push(position);
+               }
+            }
+         } );
+         this.listOrganizationalStructure.map(os =>{
+
+            if(this.listArea.filter(t => t.value === os.nombre).length  === 0){
+               if(os.nombre !== '' && os.nombre !== null) {
+                  this.listArea.push( { label: os.nombre, value: os.nombre } );
+               }
+            }
+            if(this.listOficina.filter(t => t.value === os.estructuraFisica ).length  === 0){
+               if(os.estructuraFisica !== '' && os.estructuraFisica !== null){
+                  this.listOficina.push({label: os.estructuraFisica, value:os.estructuraFisica});
+               }
+            }
+         });
+
+      });
+
    }
 
    ngOnInit() {
@@ -66,6 +124,8 @@ export class VacanciesComponent implements OnInit {
             });
          }
       );
+
+
       this.es = {
          firstDayOfWeek: 1,
          dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
@@ -80,15 +140,12 @@ export class VacanciesComponent implements OnInit {
       let date = today.getDate();
       let month = today.getMonth();
       let year = today.getFullYear();
-      this.today = today;
-      this.fechaFin = new Date();
-      this.fechaFin.setMonth( month );
-      this.fechaFin.setFullYear( year );
-      this.fechaFin.setDate( date );
+
    }
 
    update( c: Vacancies ) {
       this.router.navigate( [ 'vacancies/update/' + c.idRequerimiento ] );
    }
+
 
 }

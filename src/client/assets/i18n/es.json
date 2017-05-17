@@ -695,6 +695,7 @@
 
    "PLANTACOLABORADORES": {
       "LBL_PLANTACOLAB":"Planta de Colaboradores",
+      "LBL_AREA":"Área",
       "LBL_AREATRABAJO":"Área de trabajo",
       "MSG_NODO":"Por favor, seleccione un nodo de tipo área de la estructura organizacional",
       "MSG_INFOAREA":"Información del área",
