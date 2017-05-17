@@ -76,8 +76,12 @@
             <div class="ui-grid-row">
               <div class="ui-grid-col-6">
                 <label for="celular">* {{'LBL_CELULAR' | translate }}</label>
-                <input pInputText type="text" id="celular" name="celular" #celular="ngModel"
-                       [(ngModel)]="reference.telefonoMovil" required/>
+	              <p-inputMask id="celular" name="celular" #celular="ngModel"
+	                           [(ngModel)]="reference.telefonoMovil" required
+	                           mask="?(999) 999-9999" placeholder="(999) 999-9999"
+	              ></p-inputMask>
+                <!--<input pInputText type="text" id="celular" name="celular" #celular="ngModel"-->
+                       <!--[(ngModel)]="reference.telefonoMovil" required/>-->
                 <div class="ui-message ui-messages-error ui-corner-all"
                      *ngIf="f.submitted && !celular.valid">
                   <i class="fa fa-close"></i>
@@ -86,8 +90,12 @@
               </div>
                 <div class="ui-grid-col-6">
                     <label for="telefono">{{'LBL_TELEFONO' | translate }}</label>
-                    <input pInputText type="text" id="telefono" name="telefono" #telefono="ngModel"
-                           [(ngModel)]="reference.telefonoFijo" />
+	                <p-inputMask id="telefono" name="telefono"
+	                             mask="?(999) 999-9999 Ext 9999" placeholder="(999) 999-9999 Ext 99999"
+	                             #telefono="ngModel" [(ngModel)]="reference.telefonoFijo" type="text"
+	                ></p-inputMask>
+                    <!--<input pInputText type="text" id="telefono" name="telefono" #telefono="ngModel"-->
+                           <!--[(ngModel)]="reference.telefonoFijo" />-->
                     <div class="ui-message ui-messages-error ui-corner-all"
                          *ngIf="f.submitted && !telefono.valid">
                       <i class="fa fa-close"></i>
