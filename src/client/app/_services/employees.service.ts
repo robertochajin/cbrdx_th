@@ -49,6 +49,10 @@ export class EmployeesService {
       return this.authHttp.get( this.serviceURL + 'vterceros/' + id ).map( ( res: Response ) => res.json() as Employee );
    }
 
+   getInfoPositionEmployee(id: number) {
+      return this.authHttp.get( this.serviceURL + 'terceros/tercerosCargosAreasFisicas/' + id ).map( ( res: Response ) => res.json());
+   }
+
    getNacionalidad( id: number ) {
       return this.authHttp.get( this.serviceURL + '/vista/' + id ).map( ( res: Response ) => res.json() );
    }

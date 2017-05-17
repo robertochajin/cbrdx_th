@@ -728,6 +728,7 @@
    "REQUERIMIENTOPERSONAL": {
       "LBL_REQUERIMIENTOPERSONAL":"Requerimiento de personal",
       "BTN_AGREGARNUEVO":"Agregar nuevo requerimiento de personal",
+      "LBL_DATOSSOLICITUD":"Datos básico solicitud",
       "LBL_DATOSSOLICITANTE":"Datos Solicitante",
       "LBL_NOMBRESOLICITANTE":"Nombre del Solicitante",
       "LBL_CARGOSOLICITANTE":"Cargo del solicitante",
@@ -758,6 +759,7 @@
       "LBL_RECURSOSTIC":"Recursos requeridos en DTIC",
       "LBL_FECHA": "Fecha",
       "LBL_ESTADO": "Estado",
+      "BTN_SENDREQUEST": "Enviar solicitud",
       "":""
    },
 

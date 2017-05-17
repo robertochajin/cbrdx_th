@@ -18,6 +18,7 @@ import { ListPositionsService } from '../_services/lists-positions.service';
 import { ZonesServices } from '../_services/zones.service';
 import { Zones } from '../_models/zones';
 import { NavService } from '../_services/_nav.service';
+import { RequirementReferral } from '../_models/requirementReferral';
 
 @Component( {
                moduleId: module.id,
@@ -36,6 +37,9 @@ export class PersonnelRequirementAddComponent implements OnInit {
    jwtHelper: JwtHelper = new JwtHelper();
    personnelRequirement: PersonnelRequirement = new PersonnelRequirement();
    requirementTypes: SelectItem[] = [];
+   requirementReferrals: RequirementReferral[] = [];
+   requirementReferral: RequirementReferral = new RequirementReferral();
+   requirementReferralBU: RequirementReferral;
    categoryTypes: SelectItem[] = [];
    idUser: number;
    private contractTypes: SelectItem[] = [];
@@ -120,7 +124,7 @@ export class PersonnelRequirementAddComponent implements OnInit {
          this.tokendecoded = this.jwtHelper.decodeToken( token );
          this.usuariosService.viewUser( this.tokendecoded.usuario.idUsuario ).subscribe( u => {
             this.user = u;
-            this.employeesService.get( this.user.idTercero ).subscribe( e => {
+            this.employeesService.getInfoPositionEmployee( this.user.idTercero ).subscribe( e => {
                this.employee = e;
             } );
             // this.positionsService.getEnabledByEmployee( this.user.idTercero ).subscribe( p => {
@@ -145,6 +149,12 @@ export class PersonnelRequirementAddComponent implements OnInit {
 
    }
 
+   emailCleanUp( value: string ) {
+      if (value !== undefined && value !== '' && value !== null){
+         this.requirementReferral.correoElectronico = value.toLowerCase().replace( ' ', '' ).trim();
+      }
+   }
+
    inputVacancyCleanUp( value: string ) {
       if ( value !== undefined && value !== '' && value !== null ) {
          let quantity = value.toUpperCase().replace( /[^0-9]/g, '' ).trim();
@@ -155,7 +165,7 @@ export class PersonnelRequirementAddComponent implements OnInit {
    inputInterviewCleanUp( value: string ) {
       if ( value !== undefined && value !== '' && value !== null ) {
          let quantity = value.toUpperCase().replace( /[^0-9]/g, '' ).trim();
-         this.personnelRequirement.cantidadVacantes = Number( quantity );
+         this.personnelRequirement.cantidadConvocados = Number( quantity );
       }
    }
 
@@ -165,8 +175,8 @@ export class PersonnelRequirementAddComponent implements OnInit {
       this.dispFuncionCargo = false;
       this.dispFechaInicioRemplazo = false;
       this.dispFechaFinRemplazo = false;
-      this.dispCargo = false;
 
+      this.dispCargo = true;
       this.dispZona = true;
       this.dispCategoria = true;
       this.dispFormaContratacion = true;
@@ -175,15 +185,49 @@ export class PersonnelRequirementAddComponent implements OnInit {
       this.dispNumeroContratar = true;
       this.dispNumeroEntrevistar = true;
 
-      if ( code === 'RMPLZ' || code === 'RDP' || code === 'PLNCRR' ) {
-
-      } else if (code === 'APLNT' || code === 'CRGNV'){
-      } else if (code === 'DMNPLNT'){
-      } else if (code === 'CRGELMN'){
-      } else if (code === 'VCNT'){
+      if ( code === 'RMPLZ' ) {
+         this.dispFechaInicioRemplazo = true;
+         this.dispFechaFinRemplazo = true;
+      } else if ( code === 'DMNPLNT' ) {
+         this.dispNumeroEntrevistar = false;
+         this.dispZona = false;
+         this.dispCategoria = false;
+         this.dispFormaContratacion = false;
+         this.dispTipoContratacion = false;
+         this.dispColaboradorJefeInmediato = false;
+      } else if ( code === 'CRGNVO' ) {
+         this.dispCargo = false;
+         this.dispNombreCargo = true;
+         this.dispFuncionCargo = true;
+      } else if ( code === 'CRGELMN' ) {
+         this.dispZona = false;
+         this.dispCategoria = false;
+         this.dispFormaContratacion = false;
+         this.dispTipoContratacion = false;
+         this.dispColaboradorJefeInmediato = false;
+         this.dispNumeroContratar = false;
+         this.dispNumeroEntrevistar = false;
+      } else if ( code === 'VCNT' ) {
+      } else if ( code === 'RDP' || code === 'PLNCRR' ) {
+      } else if ( code === 'APLNT' || code === 'CRGNVAREA' ) {
       } else {
-
       }
+   }
+
+   addReferred(){
+
+   }
+
+   onSubmitReferred() {
+
+   }
+
+   cancelReferred(){
+
+   }
+
+   sendRequest(){
+
    }
 
    goBack(): void {
