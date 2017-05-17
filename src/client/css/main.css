@@ -55,8 +55,9 @@ body .ui-widget:disabled {
 .ui-dropdown-panel{
    z-index : 800!important;
 }
-/** -- tabview Rigth -- */
-.ui-tabview.ui-tabview-right>.ui-tabview-nav{
+/** -- tabview Left/Rigth -- */
+.ui-tabview.ui-tabview-right>.ui-tabview-nav,
+.ui-tabview.ui-tabview-left>.ui-tabview-nav{
    height: auto!important;
 }
 /*
