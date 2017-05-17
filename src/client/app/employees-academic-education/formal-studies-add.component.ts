@@ -114,14 +114,14 @@ export class FormalStudiesAddComponent implements OnInit {
             } else {
                this.fstudy.idInstitucion = null;
             }
-            let fi: moment.Moment = moment( this.fstudy.fechaIngresa, 'MM/DD/YYYY' );
-            this.fstudy.fechaIngresa = fi.format( 'YYYY-MM-DD' );
-            if ( this.fstudy.idEstado === this.idEstadoEstudioFinalizado ) {
-               let ff: moment.Moment = moment( this.fstudy.fechaTermina, 'MM/DD/YYYY' );
-               this.fstudy.fechaTermina = ff.format( 'YYYY-MM-DD' );
-            } else {
-               this.fstudy.fechaTermina = null;
-            }
+            // let fi: moment.Moment = moment( this.fstudy.fechaIngresa, 'MM/DD/YYYY' );
+            // this.fstudy.fechaIngresa = fi.format( 'YYYY-MM-DD' );
+            // if ( this.fstudy.idEstado === this.idEstadoEstudioFinalizado ) {
+            //    let ff: moment.Moment = moment( this.fstudy.fechaTermina, 'MM/DD/YYYY' );
+            //    this.fstudy.fechaTermina = ff.format( 'YYYY-MM-DD' );
+            // } else {
+            //    this.fstudy.fechaTermina = null;
+            // }
             this.academicEducationService.addFormal( this.fstudy )
             .subscribe(
                data => {
@@ -167,17 +167,17 @@ export class FormalStudiesAddComponent implements OnInit {
       }
    }
 
-   onSelectBegin( event: any ) {
-      let d = new Date( Date.parse( event ) );
-      this.fstudy.fechaIngresa = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-      this.minDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
-   }
-
-   onSelectEnd( event: any ) {
-      let d = new Date( Date.parse( event ) );
-      this.fstudy.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-      this.maxDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
-   }
+   // onSelectBegin( event: any ) {
+   //    let d = new Date( Date.parse( event ) );
+   //    this.fstudy.fechaIngresa = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+   //    this.minDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
+   // }
+   //
+   // onSelectEnd( event: any ) {
+   //    let d = new Date( Date.parse( event ) );
+   //    this.fstudy.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+   //    this.maxDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
+   // }
 
    updateEnd(): void {
       if ( this.fstudy.idEstado !== this.idEstadoEstudioFinalizado ) {

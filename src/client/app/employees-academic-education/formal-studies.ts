@@ -12,8 +12,8 @@ export class FormalStudies {
    public otraInstitucion: string;
    public idCiudad: number;
    public idEstado: number;
-   public fechaIngresa: string;
-   public fechaTermina: string;
+   public fechaIngresa: Date;
+   public fechaTermina: Date;
    public idAdjunto: number;
    public indicadorHabilitado: boolean;
    public auditoriaUsuario: number;

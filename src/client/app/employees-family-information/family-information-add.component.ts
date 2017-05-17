@@ -124,8 +124,9 @@ export class FamilyInformationAddComponent implements OnInit {
                   this.terceroFamiliar.segundoNombre = this.capitalizeSave( this.familyInformation.segundoNombre );
                   this.terceroFamiliar.primerApellido = this.capitalizeSave( this.familyInformation.primerApellido );
                   this.terceroFamiliar.segundoApellido = this.capitalizeSave( this.familyInformation.segundoApellido );
-                  let mom: moment.Moment = moment( this.familyInformation.fechaNacimiento, 'MM/DD/YYYY' );
-                  this.terceroFamiliar.fechaNacimiento = mom.format( 'YYYY-MM-DD' );
+                  // let mom: moment.Moment = moment( this.familyInformation.fechaNacimiento, 'MM/DD/YYYY' );
+                  // this.terceroFamiliar.fechaNacimiento = mom.format( 'YYYY-MM-DD' );
+                  this.terceroFamiliar.fechaNacimiento = moment( this.terceroFamiliar.fechaNacimiento, 'YYYY-MM-DD' ).toDate();
                   this.terceroFamiliar.indicadorHabilitado = true;
                   this.terceroFamiliar.idTipoTercero = this.idTipoTercero;
 
