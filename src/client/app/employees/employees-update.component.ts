@@ -89,13 +89,6 @@ export class EmployeesUpdateComponent implements OnInit {
          this.employee.idTipoDocumento = null;
       } );
 
-      this.listaService.getMasterDetails( 'ListasTiposDocumentos' ).subscribe( res => {
-         this.documentTypes.push( { label: 'Seleccione', value: null } );
-         res.map( ( s: ListaItem ) => {
-            this.documentTypes.push( { label: s.nombre, value: s.idLista } );
-         } );
-      } );
-
       this.listaService.getMasterDetails( 'ListasGeneros' ).subscribe( res => {
          this.genderTypes.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
@@ -168,6 +161,12 @@ export class EmployeesUpdateComponent implements OnInit {
    }
 
    ngOnInit() {
+      this.listaService.getMasterDetails( 'ListasTiposDocumentos' ).subscribe( res => {
+         this.documentTypes.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => {
+            this.documentTypes.push( { label: s.nombre, value: s.idLista } );
+         } );
+      } );
 
       this.route.params
       .switchMap( ( params: Params ) => this.employeesService.get( +params[ 'id' ] ) )
