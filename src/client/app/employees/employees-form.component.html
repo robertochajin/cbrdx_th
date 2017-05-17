@@ -65,7 +65,7 @@
                      <label for="NGexpeditionDate">{{'EMPLOYEES.LBL_FECHAEXPEDICION' | translate}}</label>
                      <p-calendar id="NGexpeditionDate" name="NGexpeditionDate" [showIcon]="true"
                                  [maxDate]="maxDateDocumento" [monthNavigator]="true" [yearNavigator]="true"
-                                 [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
+                                 [yearRange]="range" [locale]="es" readonlyInput="readonlyInput" dateFormat="yy'-'mm'-'dd"
                                  dataType="date" #NGexpeditionDate="ngModel" required="true"
                                  [(ngModel)]="employee.fechaDocumento" (onSelect)="onExpeditionDate($event)"
                      ></p-calendar>
@@ -135,11 +135,11 @@
                <div class="row">
                   <div class="form-group col-md-4">
                      <label for="NGbirthDate">{{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate}}</label>
-                     <p-calendar id="NGbirthDate" name="NGbirthDate" [showIcon]="true"
+                     <p-calendar id="NGbirthDate" name="NGbirthDate" [showIcon]="true" dateFormat="yy'-'mm'-'dd"
                                  [maxDate]="maxDate" [monthNavigator]="true" [yearNavigator]="true"
                                  [locale]="es" readonlyInput="readonlyInput" [yearRange]="range"
                                  dataType="date" #NGbirthDate="ngModel" [required]="true"
-                                 [(ngModel)]="employee.fechaNacimiento" (onSelect)="onBirthDate($event)"
+                                 [(ngModel)]="employee.fechaNacimiento"
                      ></p-calendar>
                      <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !NGbirthDate.valid">
                         {{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate}} {{'LBL_REQUERIDO' | translate}}
@@ -327,7 +327,7 @@
                   <div class="form-group col-md-3" *ngIf="employee.indicadorVivo == false">
                      <label for="NGdeathDate">{{'EMPLOYEES.LBL_FECHADEFUNCION' | translate}}</label>
                      <p-calendar id="NGdeathDate" name="NGdeathDate" [locale]="es" [showIcon]="true"
-                                 [maxDate]="today"
+                                 [maxDate]="today" dateFormat="yy'-'mm'-'dd"
                                  dataType="date" #NGdeathDate="ngModel" [required]="!employee.indicadorVivo"
                                  [(ngModel)]="employee.fechaDefuncion" (onSelect)="onDeathDate($event)"
                      ></p-calendar>
