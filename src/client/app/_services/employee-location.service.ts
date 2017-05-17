@@ -19,6 +19,10 @@ export class LocationService {
       return this.authHttp.get( this.serviceURL + '/api/tercerosLocalizaciones/' + id )
       .map( ( res: Response ) => res.json() );
    }
+   getAllResiden( id: number ) {
+      return this.authHttp.get( this.serviceURL + '/api/localizaciones/localizacionTercero/' + id )
+      .map( ( res: Response ) => res.json() );
+   }
 
    getPrincipalNomenclatureList() {
       return this.authHttp.get( this.serviceURL + '/nomenclatures/principal' )
