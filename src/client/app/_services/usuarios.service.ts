@@ -76,20 +76,12 @@ export class UsuariosService {
 
    createUserGroup( p: UsuarioGrupoGestion ): Promise<UsuarioGrupoGestion> {
       p.auditoriaUsuario = this.idUsuario;
-      if ( p.fechaInicio !== null ) {
-         p.fechaInicio.setHours( 23 );
-         p.fechaFin.setHours( 23 );
-      }
       return this.authHttp.post( this.usuariosGruposServiceURL, JSON.stringify( p ) ).toPromise()
       .then( res => res.json() as UsuarioGrupoGestion ).catch( this.handleError );
    }
 
    createUserRole( p: UsuarioRol ): Promise<UsuarioRol> {
       p.auditoriaUsuario = this.idUsuario;
-      if ( p.fechaInicio !== null ) {
-         p.fechaInicio.setHours( 23 );
-         p.fechaFin.setHours( 23 );
-      }
       return this.authHttp.post( this.usuariosRolesServiceURL, JSON.stringify( p ) ).toPromise().then( res => res.json() as UsuarioRol )
       .catch( this.handleError );
    }
@@ -100,7 +92,7 @@ export class UsuariosService {
    }
 
    readUserRoles( p: number ) {
-      return this.authHttp.get( this.usuariosRolesServiceURL + 'vista/' + p ).map( ( res: Response ) => res.json() as VUsuarioRol[] );
+      return this.authHttp.get( this.usuariosRolesServiceURL + 'secure/' + p ).map( ( res: Response ) => res.json() as VUsuarioRol[] );
    }
 
    readAllUserRoles() {
@@ -121,18 +113,10 @@ export class UsuariosService {
 
    updateUserGroup( c: UsuarioGrupoGestion ) {
       c.auditoriaUsuario = this.idUsuario;
-      if ( c.fechaInicio !== null && c.indicadorHabilitado ) {
-         c.fechaInicio.setHours( 23 );
-         c.fechaFin.setHours( 23 );
-      }
       return this.authHttp.put( this.usuariosGruposServiceURL, JSON.stringify( c ) ).toPromise().catch( this.handleError );
    }
 
    updateUserRole( c: UsuarioRol ) {
-      if ( c.fechaInicio !== null && c.indicadorHabilitado ) {
-         c.fechaInicio.setHours( 23 );
-         c.fechaFin.setHours( 23 );
-      }
       return this.authHttp.put( this.usuariosRolesServiceURL, JSON.stringify( c ) ).toPromise().catch( this.handleError );
    }
 
