@@ -12,9 +12,9 @@
 			</div>
 		</div>
 	</div>
-	<p-dataTable [value]="" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+	<p-dataTable  emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="personnelRequirements" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
 		<p-column field="" header="{{ 'POSITION.LBL_CARGO' | translate}}" [sortable]="true"></p-column>
-		<p-column field="" header="{{ 'LBL_CANTIDADAPLAZAS' | translate}}" [sortable]="true"></p-column>
+		<p-column field="" header="{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAPLAZAS' | translate}}" [sortable]="true"></p-column>
 		<p-column field="" header="{{ 'LBL_FECHA' | translate}}" [sortable]="true"></p-column>
 		<p-column field="" header="{{ 'LBL_ESTADO' | translate}}" [sortable]="true"></p-column>
 		<p-column header="{{ 'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">

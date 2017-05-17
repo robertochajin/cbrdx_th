@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PersonnelRequirement } from '../_models/personnelRequirement';
 import { PersonnelRequirementServices } from '../_services/personnelRequirement.service';
 import { Router } from '@angular/router';
+import { JwtHelper } from 'angular2-jwt';
+import { Location } from '@angular/common';
 import { ConfirmationService } from 'primeng/primeng';
 
 @Component( {
@@ -16,15 +18,24 @@ export class PersonnelRequirementComponent implements OnInit {
    personnelRequirement: PersonnelRequirement = new PersonnelRequirement();
    dialogObjet: PersonnelRequirement = new PersonnelRequirement();
    personnelRequirements: PersonnelRequirement[];
-   idUser: number;
+   jwtHelper: JwtHelper = new JwtHelper();
+   tokendecoded: any = { sub: '', usuario: '', nombre: '' };
 
    constructor( private personnelRequirementServices: PersonnelRequirementServices,
+      private location: Location,
       private router: Router,
       private confirmationService: ConfirmationService ) {
+      let token = localStorage.getItem( 'token' );
+
+      if ( token !== null && token !== undefined ) {
+         this.tokendecoded = this.jwtHelper.decodeToken( token );
+      } else {
+         location.back();
+      }
    }
 
    ngOnInit() {
-      this.personnelRequirementServices.getAllEnabledByUser(this.idUser).subscribe(
+      this.personnelRequirementServices.getAllEnabledByUser(this.tokendecoded.usuario.idUsuario).subscribe(
          personnelRequirements => {
             this.personnelRequirements = personnelRequirements;
          }

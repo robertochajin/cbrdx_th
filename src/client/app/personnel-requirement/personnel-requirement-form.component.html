@@ -33,13 +33,11 @@
 				<div class="row">
 					<div class="form-group col-md-6">
 						<label for="petitionerArea">{{ 'REQUERIMIENTOPERSONAL.LBL_AREA' | translate }}:</label>
-						<input id="petitionerArea" type="text" pInputText name="petitionerArea"
-						       [(ngModel)]="" disabled/>
+						<input id="petitionerArea" type="text" pInputText name="petitionerArea" disabled/>
 					</div>
 					<div class="form-group col-md-6">
 						<label for="petitionerEO">{{ 'REQUERIMIENTOPERSONAL.LBL_DIRECIONGENERAL' | translate }}:</label>
-						<input id="petitionerEO" type="text" pInputText name="petitionerEO"
-						       [(ngModel)]="" disabled/>
+						<input id="petitionerEO" type="text" pInputText name="petitionerEO"  disabled/>
 					</div>
 				</div>
 				
@@ -141,21 +139,53 @@
 				
 				<div class="row">
 					<div class="form-group col-md-6">
-						<label for="$name$">* {{'$label$' | translate }}:</label>
-						<p-autoComplete id="$name$"  name="$name$" field="$field$"
-						                placeholder="{{ 'PH_BUSCAR' | translate}} {{'$label$' | translate }}"
-						                [(ngModel)]="$var$"
-						                #$ngName$="ngModel" [suggestions]="$list$" required="true"
-						                (completeMethod)="$name$Search($event)" (onSelect)="$name$CaptureId($event)">
+						<label for="boss">* {{'REQUERIMIENTOPERSONAL.LBL_NOMBREJEFEINMEDIATO' | translate }}:</label>
+						<p-autoComplete id="boss" name="boss" field="nombreCompleto"
+						                placeholder="{{ 'PH_BUSCAR' | translate}} {{'REQUERIMIENTOPERSONAL.LBL_NOMBREJEFEINMEDIATO' | translate }}"
+						                [(ngModel)]="selectedBoss"
+						                #ngBoss="ngModel" [suggestions]="bossList" required="true"
+						                (completeMethod)="bossSearch($event)" (onSelect)="bossCaptureId($event)">
 						</p-autoComplete>
-						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !$ngName$.valid">
-							<i class="fa fa-close"></i> {{'$label$' | translate }} {{'LBL_REQUERIDO' | translate }}
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngBoss.valid">
+							<i class="fa fa-close"></i> {{'REQUERIMIENTOPERSONAL.LBL_NOMBREJEFEINMEDIATO' | translate }} {{'LBL_REQUERIDO' |
+							translate }}
 						</div>
-						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!is$name$Wrong">
-							<i class="fa fa-close"></i> {{'$label$' | translate }} {{'LBL_REQUERIDO' | translate }}
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!isbossWrong">
+							<i class="fa fa-close"></i> {{'REQUERIMIENTOPERSONAL.LBL_NOMBREJEFEINMEDIATO' | translate }} {{'LBL_REQUERIDO' |
+							translate }}
 						</div>
 					</div>
 					<div class="form-group col-md-6">
+						<label for="bossPosition">{{ 'REQUERIMIENTOPERSONAL.LBL_CARGOJEFEINMEDIATO' | translate }}:</label>
+						<input id="bossPosition" type="text" pInputText name="bossPosition"
+						       [(ngModel)]="bossPosition"
+						       #ngBossPosition="ngModel" disabled />						
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="vacancyQuantity">{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR' | translate }}:</label>
+						<input id="vacancyQuantity" type="number" pInputText name="vacancyQuantity"
+						       [(ngModel)]="personnelRequirement.cantidadVacantes" min="1"
+						       #ngVQuantity="ngModel" required (keyup)="inputVacancyCleanUp($event.target.value)"
+						/>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !ngVQuantity.valid">
+							<i class="fa fa-close"></i>
+							{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR' | translate }} {{'LBL_REQUERIDO' | translate}}
+						</div>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="interviewQuantity">{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }}:</label>
+						<input id="interviewQuantity" type="text" pInputText name="interviewQuantity"
+						       [(ngModel)]="personnelRequirement.cantidadConvocados"
+						       #ngIQuantity="ngModel" required (keyup)="inputInterviewCleanUp($event.target.value)" />
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !ngIQuantity.valid">
+							<i class="fa fa-close"></i>
+							{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }} {{'LBL_REQUERIDO' | translate}}
+						</div>
 					</div>
 				</div>
 				

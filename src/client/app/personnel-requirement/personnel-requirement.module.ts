@@ -7,6 +7,9 @@ import { PersonnelRequirementServices } from '../_services/personnelRequirement.
 import { PositionsService } from '../_services/positions.service';
 import { UsuariosService } from '../_services/usuarios.service';
 import { EmployeesService } from '../_services/employees.service';
+import { ListaService } from '../_services/lista.service';
+import { ListPositionsService } from '../_services/lists-positions.service';
+import { ZonesServices } from '../_services/zones.service';
 
 @NgModule( {
               imports: [
@@ -18,9 +21,12 @@ import { EmployeesService } from '../_services/employees.service';
               ],
               bootstrap: [ PersonnelRequirementComponent ],
               providers: [ PersonnelRequirementServices,
-                           UsuariosService,
-                           EmployeesService,
-                           PositionsService,
+                 UsuariosService,
+                 EmployeesService,
+                 PositionsService,
+                 ListaService,
+                 ListPositionsService,
+                 ZonesServices
               ],
               exports: [ PersonnelRequirementComponent ]
            } )
