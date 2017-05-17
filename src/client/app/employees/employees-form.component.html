@@ -7,14 +7,14 @@
 </p-confirmDialog>
 <div *ngIf="employee">
    <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-10 col-md-offset-1">
          <div class="header">
             <h3 class="title">{{header}}</h3>
          </div>
       </div>
    </div>
    <div class="row-fluid">
-      <div class="col-md-12">
+      <div class="col-md-10 col-md-offset-1">
          <form name="formulario" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                <div class="row">

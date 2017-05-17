@@ -10,20 +10,21 @@
    <div id="#profile" class="row">
       <div class="col-md-offset-3 col-md-6">
          <div class="header">
-            <h4 class="title">{{"USER_SESSION.LBL_USUARIO" | translate}}</h4>
+            <h3 class="title">{{"USER_SESSION.LBL_USUARIO" | translate}}</h3>
          </div>
          <div class="clearfix card-header">
-            <div class="col-md-4">
+            <div class="col-md-5">
                <img class="img-circle img-responsive user-avatar" src="{{svcThUrl}}/file/{{image}}" />
-            </div>
-            <div class="col-md-8">
-               <h4>{{employee.nombreCompleto}} - {{employee.fechaNacimiento}}</h4>
+					<p-fileUpload name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
+									  chooseLabel="{{'USER_SESSION.LBL_NUEVOAVATAR' | translate}}"
+									  (onBeforeSend)="onBeforeSend($event)"
+									  (onUpload)="onUpload($event)"
+					></p-fileUpload>
+				</div>
+            <div class="col-md-7">
+               <h2>{{employee.nombreCompleto}}</h2>
+					<h4>{{employee.fechaNacimiento}}  ({{employee.edad}})</h4>
                <span>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</span><br/>
-               <p-fileUpload name="file" url="{{svcThUrl}}" auto="true"
-                             chooseLabel="{{'USER_SESSION.LBL_NUEVOAVATAR' | translate}}"
-                             (onBeforeSend)="onBeforeSend($event)"
-                             (onUpload)="onUpload($event)"
-               ></p-fileUpload>
 
                <div *ngIf="user">
                   <div class="header" style=" margin-top: 40px;">
@@ -32,11 +33,10 @@
                      </h4>
                   </div>
                </div>
-               <form class="form-horizontal" #f="ngForm" (ngSubmit)="f.valid && onSubmit()" novalidate>
-                  <div class="row">
-                     <label for="pass_actual" class="control-label col-sm-4">{{"USER_SESSION.LBL_CONTRASENAACTUAL" | translate}}</label>
-                     <div class=" col-sm-8">
-                        <div class="input-group">
+               <form #f="ngForm" (ngSubmit)="f.valid && onSubmit()" novalidate>
+								<div class="form-group">
+									<label for="pass_actual" class="control-label">{{"USER_SESSION.LBL_CONTRASENAACTUAL" | translate}}</label>
+									<div class="input-group">
                            <input [type]="showOldPass" pInputText id="pass_actual" name="pass_actual"
                                   class="form-control" [(ngModel)]="oldPass" #pass_actual="ngModel" required/>
                            <span class="input-group-btn">
@@ -46,17 +46,16 @@
                               > <i class="fa {{eye}}"></i>
                               </button>
                            </span>
+									</div>
                         </div>
                         <div class="ui-message ui-messages-error ui-corner-all"
                              *ngIf="f.submitted && !pass_actual.valid">
                            <i class="fa fa-close"></i>
                            {{"USER_SESSION.LBL_CONTRASENAACTUALREQUERIDA" | translate}}
                         </div>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <label for="pass_nueva" class="control-label col-sm-4">{{"USER_SESSION.LBL_NUEVACONTRASENA" | translate}}</label>
-                     <div class=" col-sm-8">
+						<div class="form-group">
+                     <label for="pass_nueva" class="control-label">{{"USER_SESSION.LBL_NUEVACONTRASENA" | translate}}</label>
+
                         <input [type]="showPass" pInputText id="pass_nueva" name="pass_nueva" class="form-control"
                                [(ngModel)]="newPass" #pass_nueva="ngModel" required/>
                         <div class="ui-message ui-messages-error ui-corner-all"
@@ -69,11 +68,10 @@
                            <i class="fa fa-close"></i>
                            {{"USER_SESSION.LBL_NUEVADIFERENTEALAACTUAL" | translate}}
                         </div>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <label for="pass_nueva2" class="control-label col-sm-4">{{"USER_SESSION.LBL_REPETIRCONTRASENA" | translate}}</label>
-                     <div class=" col-sm-8">
+						</div>
+						<div class="form-group">
+                     <label for="pass_nueva2" class="control-label">{{"USER_SESSION.LBL_REPETIRCONTRASENA" | translate}}</label>
+
                         <input [type]="showConfim" pInputText id="pass_nueva2" name="pass_nueva" class="form-control"
                                [(ngModel)]="newPassConfirm" #pass_nueva2="ngModel" required/>
                         <div class="ui-message ui-messages-error ui-corner-all"
@@ -86,14 +84,12 @@
                            <i class="fa fa-close"></i>
                            {{"USER_SESSION.LBL_DEBECOINCIDIRCONTRASENA" | translate}}
                         </div>
-                     </div>
-                  </div>
+						</div>
                   <div class="form-footer-buttons">
                      <a (click)="goBack()" class="cancelar">{{"BTN_VOLVER" | translate}}</a>
                      <button type="submit" pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate}}"
                              (keydown.enter)="submit.click()" #submit></button>
                   </div>
-
                </form>
             </div>
 
