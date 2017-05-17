@@ -161,7 +161,27 @@ export class PersonnelRequirementAddComponent implements OnInit {
 
    onChangeTypeMethod( event: any ) {
       let code = '';
-      if ( code === 'RMP' ) {
+      this.dispNombreCargo = false;
+      this.dispFuncionCargo = false;
+      this.dispFechaInicioRemplazo = false;
+      this.dispFechaFinRemplazo = false;
+      this.dispCargo = false;
+
+      this.dispZona = true;
+      this.dispCategoria = true;
+      this.dispFormaContratacion = true;
+      this.dispTipoContratacion = true;
+      this.dispColaboradorJefeInmediato = true;
+      this.dispNumeroContratar = true;
+      this.dispNumeroEntrevistar = true;
+
+      if ( code === 'RMPLZ' || code === 'RDP' || code === 'PLNCRR' ) {
+
+      } else if (code === 'APLNT' || code === 'CRGNV'){
+      } else if (code === 'DMNPLNT'){
+      } else if (code === 'CRGELMN'){
+      } else if (code === 'VCNT'){
+      } else {
 
       }
    }
