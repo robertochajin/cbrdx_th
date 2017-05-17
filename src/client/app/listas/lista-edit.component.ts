@@ -6,6 +6,7 @@ import { Router, Params, ActivatedRoute } from '@angular/router';
 import { ListaItem } from '../_models/listaItem';
 import { Message } from 'primeng/primeng';
 import 'rxjs/add/operator/switchMap';
+import { NavService } from '../_services/_nav.service';
 @Component( {
                moduleId: module.id,
                templateUrl: 'lista-edit.component.html'
@@ -25,7 +26,8 @@ export class ListaEditComponent implements OnInit {
    displayUpdateDialog = false;
    msgs: Message[] = [];
 
-   constructor( private listaService: ListaService, private router: Router, private route: ActivatedRoute ) {
+   constructor( private listaService: ListaService, private router: Router, private route: ActivatedRoute,
+      private _nav: NavService, ) {
    }
 
    ngOnInit(): void {
@@ -70,7 +72,7 @@ export class ListaEditComponent implements OnInit {
       this.msgs = [];
       this.editableDetail.orden = 2; // pendiente definir ordenamiento de los items
       this.listaService.createDetail( this.editableDetail, this.masterList.nombreTabla ).then( res => {
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         this._nav.setMesage( 1, this.msgs );
          this.editableDetail = new ListaItem;
          this.isEdit = true;
          this.listaService.getMasterAllDetails( this.masterList.nombreTabla ).subscribe( res => {
@@ -83,7 +85,7 @@ export class ListaEditComponent implements OnInit {
    updateDetail( f: NgForm ) {
       this.msgs = [];
       this.listaService.updateDetail( this.editableDetail, this.masterList.nombreTabla ).then( res => {
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro modificado correctamente.' } );
+         this._nav.setMesage( 2, this.msgs );
          this.editableDetail = new ListaItem;
          this.isEdit = false;
          this.listaService.getMasterAllDetails( this.masterList.nombreTabla ).subscribe( res => {

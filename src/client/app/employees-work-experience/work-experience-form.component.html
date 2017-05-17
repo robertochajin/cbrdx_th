@@ -19,7 +19,7 @@
                 <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="empresa">{{'EMPLOYEES.LBL_EMPRESA' | translate }}</label>
+                            <label for="empresa">* {{'EMPLOYEES.LBL_EMPRESA' | translate }}</label>
                             <input id="empresa" type="text" pInputText name="empresa"
                                    [(ngModel)]="experience.empresa" #empresa="ngModel"
                                    required/>
@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                          <label for="telefonoEmpresa">{{'LBL_TELEFONO' | translate }} {{'EMPLOYEES.LBL_EMPRESA' | translate }}</label>
+                          <label for="telefonoEmpresa">* {{'LBL_TELEFONO' | translate }} {{'EMPLOYEES.LBL_EMPRESA' | translate }}</label>
                           <input id="telefonoEmpresa" type="text" pInputText name="telefonoEmpresa"
                                  [(ngModel)]="experience.telefonoEmpresa" #telefonoEmpresa="ngModel"
                                  required/>
@@ -43,7 +43,8 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="sectorEmpresa">{{'EMPLOYEES.LBL_SECTOR' | translate }} {{'EMPLOYEES.LBL_EMPRESA' | translate }}</label>
+                            <label for="sectorEmpresa">* {{'EMPLOYEES.LBL_SECTOR' | translate }} {{'EMPLOYEES.LBL_EMPRESA' | translate
+	                            }}</label>
                             <p-dropdown name="sectorEmpresa" id="sectorEmpresa"  required="true" [autoWidth]="false"
                                         [(ngModel)]="experience.idSectorEmpresa"
                                         [options]="sector" #sectorEmpresa="ngModel"
@@ -56,7 +57,7 @@
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="subsectorEmpresa">{{'EMPLOYEES.LBL_ACTIVIDADECONOMICA' | translate }}</label>
+                            <label for="subsectorEmpresa">* {{'EMPLOYEES.LBL_ACTIVIDADECONOMICA' | translate }}</label>
                             <p-dropdown name="subSectorEmpresa" id="subSectorEmpresa" [autoWidth]="false" required="true"
                                         [(ngModel)]="experience.idSubSectorEmpresa" filter="filter"
                                         [options]="activities" #subSectorEmpresa="ngModel"
@@ -70,7 +71,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="cargo">{{'EMPLOYEES.LBL_CARGO' | translate }}</label>
+                            <label for="cargo">* {{'EMPLOYEES.LBL_CARGO' | translate }}</label>
                             <input id="cargo" type="text" pInputText name="cargo"
                                    [(ngModel)]="experience.cargo" #cargo="ngModel"
                                    required/>
@@ -81,7 +82,7 @@
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="nivelCargo">{{'EMPLOYEES.LBL_NIVELCARGO' | translate }}</label>
+                            <label for="nivelCargo">* {{'EMPLOYEES.LBL_NIVELCARGO' | translate }}</label>
                             <p-dropdown name="nivelCargo" id="nivelCargo" [autoWidth]="false" required="true"
                                         [(ngModel)]="experience.idNivelCargo"
                                         [options]="officeLevel" #nivelCargo="ngModel"
@@ -95,7 +96,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="areaCargo">{{'EMPLOYEES.LBL_AREACARGO' | translate }}</label>
+                            <label for="areaCargo">* {{'EMPLOYEES.LBL_AREACARGO' | translate }}</label>
                             <input id="areaCargo" type="text" pInputText name="areaCargo"
                                    [(ngModel)]="experience.areaCargo" #areaCargo="ngModel"
                                    required/>
@@ -106,7 +107,7 @@
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="jefeInmediato">{{'EMPLOYEES.LBL_JEFEINMEDIATO' | translate }}</label>
+                            <label for="jefeInmediato">* {{'EMPLOYEES.LBL_JEFEINMEDIATO' | translate }}</label>
                             <input id="jefeInmediato" type="text" pInputText name="jefeInmediato"
                                    [(ngModel)]="experience.jefeInmediato" #jefeInmediato="ngModel"
                                    required/>
@@ -119,7 +120,7 @@
                     </div>
                     <div class="row">
                       <div class="form-group col-md-12">
-                        <label for="ciudad">{{'LBL_CIUDAD' | translate }}</label>
+                        <label for="ciudad">* {{'LBL_CIUDAD' | translate }}</label>
                         <p-autoComplete placeholder="Buscar Ciudad " field="camino" name="ciudad" id="ciudad" #ciudad="ngModel" required="true"
                                         [(ngModel)]="city"
                                         [suggestions]="cityList"
@@ -134,14 +135,13 @@
                       </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-4"
-                             [ngClass]="{ 'has-error': f.submitted && !ingreso.valid }">
-                          <label for="ingreso">{{'EMPLOYEES.LBL_INGRESO' | translate }}</label>
-                          <p-calendar id="ingreso" name="ingreso" #ingreso="ngModel"
+                        <div class="form-group col-md-4">
+                          <label for="ingreso">* {{'EMPLOYEES.LBL_INGRESO' | translate }}</label>
+                          <p-calendar id="ingreso" name="ingreso" #ingreso="ngModel" dateFormat="yy'-'mm'-'dd"
                                       (onSelect)="onSelectMethodCalendarIngreso($event)" [showIcon]="true"
                                       [maxDate]="maxDateIngreso" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range"
                                       [locale]="es" readonlyInput="true" dataType="date" required="true"
-                                      [(ngModel)]="fechaIngresa">
+                                      [(ngModel)]="experience.fechaIngresa">
                           </p-calendar>
                           <div  class="ui-message ui-messages-error ui-corner-all"
                                 *ngIf="f.submitted && !ingreso.valid">
@@ -157,12 +157,12 @@
                           </p-toggleButton>
                         </div>
                         <div class="form-group col-md-4" *ngIf="!experience.indicadorActualmente">
-                          <label for="finalizacion">{{'EMPLOYEES.LBL_FINALIZACION' | translate }}</label>
-                          <p-calendar id="finalizacion" name="finalizacion" #finalizacion="ngModel"
+                          <label for="finalizacion">* {{'EMPLOYEES.LBL_FINALIZACION' | translate }}</label>
+                          <p-calendar id="finalizacion" name="finalizacion" #finalizacion="ngModel" dateFormat="yy'-'mm'-'dd"
                                       (onSelect)="onSelectMethodCalendarFinalizacion($event)" [showIcon]="true" required="true"
                                       [minDate]="minDate" [maxDate]="maxDateFinal" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range"
                                       [locale]="es"  readonlyInput="true" dataType="date"
-                                      [(ngModel)]="fechaTermina">
+                                      [(ngModel)]="experience.fechaTermina">
                           </p-calendar>
                           <div  class="ui-message ui-messages-error ui-corner-all"
                                 *ngIf="f.submitted && !finalizacion.valid">

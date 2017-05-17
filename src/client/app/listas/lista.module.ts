@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FormSharedModule } from '../shared/form-shared.module';
 import { ListaEditComponent } from './lista-edit.component';
 
+
 @NgModule( {
               imports: [ CommonModule, FormsModule, FormSharedModule, SharedModule ],
               declarations: [ ListaComponent, ListaDetailComponent, ListaEditComponent ],

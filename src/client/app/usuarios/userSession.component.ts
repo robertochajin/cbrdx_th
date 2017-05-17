@@ -9,6 +9,8 @@ import { Usuario } from '../_models/usuario';
 import { UsuariosService } from '../_services/usuarios.service';
 import { JwtHelper } from 'angular2-jwt';
 import { NavService } from '../_services/_nav.service';
+import * as moment from 'moment/moment';
+
 
 @Component( {
                moduleId: module.id,
@@ -64,6 +66,7 @@ export class UserSessionComponent implements OnInit {
                                            this.employee.segundoNombre + ' ' +
                                            this.employee.primerApellido + ' ' +
                                            this.employee.segundoApellido;
+            this.employee.edad = moment( this.employee.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
          } );
       } );
    }

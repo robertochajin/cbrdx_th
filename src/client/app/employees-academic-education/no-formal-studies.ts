@@ -17,8 +17,8 @@ export class Noformalstudies {
    public idCiudad: number;
    public ciudad: string;
    public indicadorTerminacion: boolean;
-   public fechaIngresa: string;
-   public fechaTermina: string;
+   public fechaIngresa: Date;
+   public fechaTermina: Date;
    public fechaVerificado: string;
    public idAdjunto: number;
    public indicadorHabilitado: boolean;
@@ -30,8 +30,8 @@ export class Noformalstudies {
       this.auditoriaFecha = '';
       this.auditoriaUsuario = 1;
       this.descripcion = '';
-      this.fechaIngresa = '';
-      this.fechaTermina = '';
+      this.fechaIngresa = null;
+      this.fechaTermina = null;
       this.fechaVerificado = '';
       this.idAdjunto = 0;
       this.idAreaEstudio = 0;

@@ -175,20 +175,17 @@ export class EmployeesUpdateComponent implements OnInit {
          this.employee = employee;
          this.updateActivities( this.employee.idSectorEconomico );
 
-         if ( this.employee.fechaDocumento !== null ) {
-            let mom: moment.Moment = moment( this.employee.fechaDocumento, 'YYYY-MM-DD' );
-            this.expeditionDate = mom.format( 'MM/DD/YYYY' );
-         }
-
-         if ( this.employee.fechaNacimiento !== null ) {
-            let mom2: moment.Moment = moment( this.employee.fechaNacimiento, 'YYYY-MM-DD' );
-            this.birthDate = mom2.format( 'MM/DD/YYYY' );
-         }
-
-         if ( this.employee.indicadorVivo === false ) {
-            let mom3: moment.Moment = moment( this.employee.fechaDefuncion, 'YYYY-MM-DD' );
-            this.deathDate = mom3.format( 'MM/DD/YYYY' );
-         }
+         // if ( this.employee.fechaDocumento !== null ) {
+         //    this.employee.fechaDocumento = moment( this.employee.fechaDocumento, 'YYYY-MM-DD' ).toDate();
+         // }
+         //
+         // if ( this.employee.fechaNacimiento !== null ) {
+         //    this.employee.fechaNacimiento = moment( this.employee.fechaNacimiento, 'YYYY-MM-DD' ).toDate();
+         // }
+         //
+         // if ( this.employee.indicadorVivo === false ) {
+         //    this.employee.fechaDefuncion = moment( this.employee.fechaDefuncion, 'YYYY-MM-DD' ).toDate();
+         // }
 
          this.ciudadExpDocumento = this.employee.ciudadExpDocumento;
          this.backupCiudadExpDocumento = this.employee.ciudadExpDocumento;
@@ -243,22 +240,22 @@ export class EmployeesUpdateComponent implements OnInit {
          this.employee.primerApellido = this.capitalizeSave( this.employee.primerApellido );
          this.employee.segundoApellido = this.capitalizeSave( this.employee.segundoApellido );
 
-         let mom: moment.Moment = moment( this.expeditionDate, 'MM/DD/YYYY' );
-         this.employee.fechaDocumento = mom.format( 'YYYY-MM-DD' );
-         let mom2: moment.Moment = moment( this.birthDate, 'MM/DD/YYYY' );
-         this.employee.fechaNacimiento = mom2.format( 'YYYY-MM-DD' );
-         if ( this.employee.indicadorVivo === false ) {
-            let mom3: moment.Moment = moment( this.deathDate, 'MM/DD/YYYY' );
-            this.employee.fechaDefuncion = mom3.format( 'YYYY-MM-DD' );
-         }
+         // let mom: moment.Moment = moment( this.expeditionDate, 'MM/DD/YYYY' );
+         // this.employee.fechaDocumento = mom.format( 'YYYY-MM-DD' );
+         // let mom2: moment.Moment = moment( this.birthDate, 'MM/DD/YYYY' );
+         // this.employee.fechaNacimiento = mom2.format( 'YYYY-MM-DD' );
+         // if ( this.employee.indicadorVivo === false ) {
+         //    let mom3: moment.Moment = moment( this.deathDate, 'MM/DD/YYYY' );
+         //    this.employee.fechaDefuncion = mom3.format( 'YYYY-MM-DD' );
+         // }
          this.employee.idTipoTercero = this.idTipoTercero;
 
          this.employeesService.update( this.employee )
          .subscribe( data => {
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            this._nav.setMesage( 2, this.msgs );
             this.location.back();
          }, error => {
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            this._nav.setMesage( 3, this.msgs );
          } );
       }
    }
@@ -332,12 +329,12 @@ export class EmployeesUpdateComponent implements OnInit {
          this.maxDate = dateExpo;
       }
 
-      if ( (this.employee.fechaNacimiento) !== null && (this.employee.fechaNacimiento) !== '' ) {
+      if ( (this.employee.fechaNacimiento) !== null && (this.employee.fechaNacimiento) !== null ) {
          let timestamp2 = new Date( this.maxDate ).getTime();
          let timestamp1 = new Date( this.employee.fechaNacimiento ).getTime();
          let timeDiff = Math.round( timestamp2 - timestamp1 );
          if ( timeDiff < 0 ) {
-            this.employee.fechaNacimiento = '';
+            this.employee.fechaNacimiento = null;
          }
       }
       this.validateDocument();
