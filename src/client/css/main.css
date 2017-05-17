@@ -4,6 +4,10 @@
 body{
    height: 100%!important;
 }
+h3{
+   margin-top: 10px;
+   margin-bottom: 10px;
+}
 
 
 /**
@@ -69,7 +73,9 @@ body .ui-widget:disabled {
       top: 2px;
    }
 }
-
+.sidebar-menu .treeview-menu{
+   margin-top:-1px!important;
+}
 .sidebar-menu .treeview-menu > li > a {
    padding: 5px 36px 5px 26px!important;
    white-space: pre-line;
@@ -768,4 +774,22 @@ body .ui-tabview.ui-tabview-top .ui-tabview-nav, body .ui-tabview.ui-tabview-bot
 }
 body .ui-tabview .ui-tabview-panel{
    background-color: #FFF;
+}
+
+.upload-avatar .ui-fileupload-buttonbar{
+   margin-top: 10px;
+   padding: 0!important;
+   border: 0!important;
+   text-align: center!important;
+   background-color: rgba(0,0,0,0)!important;
+}
+
+.upload-avatar .ui-fileupload-content {
+   display: none;
+}
+
+.ui-panel-title {
+   font-weight: 600!important;
+   font-size: 1.2em!important;
+
 }

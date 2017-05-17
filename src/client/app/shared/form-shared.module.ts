@@ -5,8 +5,9 @@ import { RouterModule } from '@angular/router';
 import {
    InputTextModule, DataTableModule, ButtonModule, DialogModule, ConfirmDialogModule, TabViewModule, AccordionModule, MessagesModule,
    AutoCompleteModule, FileUploadModule, DropdownModule, CalendarModule, GrowlModule, TreeModule, FieldsetModule, CheckboxModule,
-   ToggleButtonModule, InputMaskModule, InputTextareaModule, InputSwitchModule
+   ToggleButtonModule, InputMaskModule, InputTextareaModule, InputSwitchModule, PanelModule
 } from 'primeng/primeng';
+
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -36,7 +37,8 @@ import {
                  ToggleButtonModule,
                  InputMaskModule,
                  InputTextareaModule,
-                 InputSwitchModule
+                 InputSwitchModule,
+                 PanelModule
               ],
               declarations: [],
               exports: [
@@ -61,7 +63,8 @@ import {
                  ToggleButtonModule,
                  InputMaskModule,
                  InputTextareaModule,
-                 InputSwitchModule
+                 InputSwitchModule,
+                 PanelModule
 
               ]
            } )

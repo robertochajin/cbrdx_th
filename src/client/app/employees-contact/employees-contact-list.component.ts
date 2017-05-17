@@ -79,7 +79,8 @@ export class EmployeesContactListComponent implements OnInit {
            this.contact.idTerceroContacto === undefined ) {
          this.employeesContactService.add( this.contact )
          .subscribe( data => {
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            // 1:add 2:update 3:error
+            this._nav.setMesage( 1, this.msgs );
             this.employeesContactService.getByEmployee( this.employee.idTercero ).subscribe(
                contacts => {
                   this.contacts = [];
@@ -91,12 +92,14 @@ export class EmployeesContactListComponent implements OnInit {
             );
          }, error => {
             this.showForm = true;
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            // 1:add 2:update 3:error
+            this._nav.setMesage( 3, this.msgs );
          } );
       } else {
          this.employeesContactService.update( this.contact )
          .subscribe( data => {
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            // 1:add 2:update 3:error
+            this._nav.setMesage( 2, this.msgs );
 
             this.employeesContactService.getByEmployee( this.employee.idTercero ).subscribe(
                contacts => {
@@ -110,7 +113,8 @@ export class EmployeesContactListComponent implements OnInit {
 
          }, error => {
             this.showForm = true;
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            // 1:add 2:update 3:error
+            this._nav.setMesage( 3, this.msgs );
          } );
       }
 

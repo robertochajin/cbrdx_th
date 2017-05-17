@@ -67,16 +67,16 @@ export class CambioContrasenaComponent implements OnInit {
 
    envioContrasena() {
       this.enviando = true;
-      this.authenticationService.forgetPass( this.correoElectronico, this.usuario ).then( res => {
+      this.authenticationService.forgetPass( this.correoElectronico, this.usuario ).then( (res) => {
+        this.enviando = false;
          if ( res ) {
-            this.enviando = false;
-            this.notice = 'Se notifico al administrador del Sistema de su solicitud de cambio de contraseña';
+            this.notice = 'Se envió un correo electrónico con su nueva contraseña de acceso al Sistema';
          } else {
-            this.notice = 'Se envió un correo electronico con su nueva contraseña de acceso al sistema';
+            this.notice = 'Se notificó al administrador del Sistema de su solicitud de cambio de contraseña';
          }
       }, error => {
          this.enviando = false;
-         this.error = 'El correo y/o el usuario no coinciden con lo registrado';
+         this.error = 'El correo y/o el usuario no son válidos, intente nuevamente';
       } );
       this.displayDialog = false;
    }

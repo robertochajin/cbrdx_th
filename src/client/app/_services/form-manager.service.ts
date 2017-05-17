@@ -2,37 +2,51 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Functionality } from '../_models/functionality';
 import { FunctionalityControl } from '../_models/functionalityContorl';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class FormManagerService {
 
    private serviceURL = '<%= SVC_TH_URL %>/api/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    add( r: Functionality ) {
+      r.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'funcionalidades', r ).map( ( res: Response ) => res.json() );
    };
 
    update( r: Functionality ) {
+      r.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'funcionalidades', r ).catch( this.handleError );
    };
 
    addSection( r: FunctionalityControl ) {
+      r.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'funcionalidadesControles', r ).map( ( res: Response ) => res.json() );
    };
 
    addField( r: FunctionalityControl ) {
+      r.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'funcionalidadesControles', r ).map( ( res: Response ) => res.json() );
    };
 
    updateField( r: FunctionalityControl ) {
+      r.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'funcionalidadesControles', r ).catch( this.handleError );
    };
 
    updateSection( r: FunctionalityControl ) {
+      r.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'funcionalidadesControles', r ).catch( this.handleError );
    };
 

@@ -96,9 +96,11 @@ export class EmployeesAdditionalDataComponent implements OnInit {
          } else {
             this.employeesService.update( this.employee )
             .subscribe( data => {
-               this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+               // 1:add 2:update 3:error
+               this._nav.setMesage( 1, this.msgs );
             }, error => {
-               this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+               // 1:add 2:update 3:error
+               this._nav.setMesage( 3, this.msgs );
             } );
          }
       }

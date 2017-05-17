@@ -1,14 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { EmployeesClinicalData } from '../_models/employeesClinicalData';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class ClinicalInformationService {
 
    private masterService = '<%= SVC_TH_URL %>/api/tercerosDatosClinicos/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
+
 
    constructor( private authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    getAllByEmployee( id: number ) {
@@ -21,10 +30,12 @@ export class ClinicalInformationService {
    }
 
    add( c: EmployeesClinicalData ) {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.masterService, c ).map( ( res: Response ) => res.json() as EmployeesClinicalData );
    }
 
    update( f: EmployeesClinicalData ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.masterService, JSON.stringify( f ) ).catch( this.handleError );
    }
 

@@ -2,15 +2,23 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { OrganizationalStructurePositions } from '../_models/organizationalStructurePositions';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class OrganizationalStructurePositionsServices {
 
    private masterService = '<%= SVC_TH_URL %>/api/estructuraOrganizacionalCargos/';
    private detailService = '<%= SVC_TH_URL %>/api/estructuraOrganizacionalCargos/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    getAllEnabled(): Observable<OrganizationalStructurePositions[]> {
@@ -24,11 +32,13 @@ export class OrganizationalStructurePositionsServices {
    }
 
    add( f: OrganizationalStructurePositions ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.masterService, f )
       .map( ( res: Response ) => res.json() );
    };
 
    update( f: OrganizationalStructurePositions ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.masterService, JSON.stringify( f ) ).catch( this.handleError );
    }
 

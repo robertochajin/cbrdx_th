@@ -4,7 +4,7 @@ import 'rxjs/add/operator/toPromise';
 import { Ocupaciones } from '../_models/ocupaciones';
 import { OcupacionesTipos } from '../_models/ocupacionesTipos';
 import { Search } from '../_models/search';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class OcupacionesService {
@@ -12,9 +12,16 @@ export class OcupacionesService {
    private serviceUrlOcu = '<%= SVC_TH_URL %>/api/ocupaciones/';
    private serviceTiposURL = '<%= SVC_TH_URL %>/api/ocupacionesTipos/';
    private serviceURL = '<%= SVC_TH_URL %>/api/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
-
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    listOcupaciones() {
@@ -22,11 +29,13 @@ export class OcupacionesService {
    }
 
    addOcupaciones( c: Ocupaciones ): Promise<Ocupaciones> {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceUrlOcu, JSON.stringify( c ) ).toPromise().then( res => res.json() as Ocupaciones )
       .catch( this.handleError );
    };
 
    updateOcupaciones( c: Ocupaciones ): Promise<any> {
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceUrlOcu, JSON.stringify( c ) ).toPromise().catch( this.handleError );
    }
 

@@ -23,7 +23,8 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-6">
                     <label for="idTipoDocumento">* {{'LBL_TIPODOCUMENTO' | translate }}</label>
-                    <p-dropdown id="idTipoDocumento"  name="idTipoDocumento" #idTipoDocumento="ngModel" [options]="documentTypes" [autoWidth]="false" (onChange)="onChangeMethod($event)"
+                    <p-dropdown id="idTipoDocumento"  name="idTipoDocumento" #idTipoDocumento="ngModel" [options]="documentTypes"
+                                [autoWidth]="false" (onChange)="onChangeMethod($event)"
                                 [(ngModel)]="selectedDocument"required></p-dropdown>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !idTipoDocumento.valid">
                         <i class="fa fa-close"></i>
@@ -76,9 +77,9 @@
                 <div class="ui-grid-col-4">
                     <label for="fechaNacimiento">* {{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate }}</label>
                     <p-calendar id="fechaNacimiento" name="fechaNacimiento" #fechaNacimiento="ngModel"  [showIcon]="true"
-                                [maxDate]="maxDate"  [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
-                                dataType="date" (onSelect)="onSelectMethod($event)"
-                                [(ngModel)]="familyInformation.fechaNacimiento"required></p-calendar>
+                                [maxDate]="maxDate"  [monthNavigator]="true" [yearNavigator]="true" [yearRange]="range" [locale]="es"
+                                readonlyInput="readonlyInput" dataType="date" dateFormat="yy'-'mm'-'dd"
+                                [(ngModel)]="familyInformation.fechaNacimiento" required></p-calendar>
 
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fechaNacimiento.valid ">
                         <i class="fa fa-close"></i>
@@ -104,14 +105,15 @@
                     </div>
                 </div>
             </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-5">
+	        <div class="ui-grid-row">
+		        <div class="ui-grid-col-5">
                     <label for="telefonoFijo">* {{'EMPLOYEES.LBL_TELEFONO1' | translate }}</label>
-                    <input id="telefonoFijo" name="telefonoFijo" #telefonoFijo="ngModel"
-                           [required]="telefonoCelular.value === '' || telefonoCelular.value === undefined "
-                           [(ngModel)]="familyInformation.telefonoFijo" pInputText pattern="[0-9]{7,10}"
-                           (keyup)="childInputCleanUp($event.target.value)" type="text"
-                           (paste)="childInputCleanUp($event.target.value)"/>
+	                <p-inputMask id="telefonoFijo" name="telefonoFijo"
+	                             mask="?(999) 999-9999 Ext 9999" placeholder="(999) 999-9999 Ext 99999"  #telefonoFijo="ngModel"
+	                             [required]="telefonoCelular.value === '' || telefonoCelular.value === undefined "
+	                             [(ngModel)]="familyInformation.telefonoFijo"
+	                              type="text"
+	                ></p-inputMask>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !telefonoFijo.valid">
                         <i class="fa fa-close"></i>
                         {{'EMPLOYEES.LBL_TELEFONO1' | translate }} {{'LBL_REQUERIDO' | translate }}
@@ -119,10 +121,12 @@
                 </div>
                 <div class="ui-grid-col-5">
                     <label for="telefonoCelular">{{'EMPLOYEES.LBL_CELULAR' | translate }}</label>
-                    <input id="telefonoCelular" name="telefonoCelular" #telefonoCelular="ngModel" pInputText type="text"
-                           [(ngModel)]="familyInformation.telefonoCelular" pattern="[0-9]{7,10}"
-                           [required]="telefonoFijo.value === '' || telefonoFijo.value === undefined"
-                           (keyup)="childInputCleanUp1($event.target.value)"/>
+	                <p-inputMask id="telefonoCelular" name="telefonoCelular" #telefonoCelular="ngModel"
+	                             [required]="telefonoFijo.value === '' || telefonoFijo.value === undefined"
+	                             [(ngModel)]="familyInformation.telefonoCelular"
+	                             mask="?(999) 999-9999" placeholder="(999) 999-9999"
+	                            
+	                ></p-inputMask>
                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !telefonoCelular.valid">
                       <i class="fa fa-close"></i>
                       {{'EMPLOYEES.LBL_CELULAR' | translate }} {{'LBL_REQUERIDO' | translate }}

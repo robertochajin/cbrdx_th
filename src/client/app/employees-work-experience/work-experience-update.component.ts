@@ -123,23 +123,25 @@ export class WorkExperienceUpdateComponent implements OnInit {
 
       if ( this.city === this.backupcity ) {
          this.msgs = [];
-         let mom: moment.Moment = moment( this.fechaIngresa, 'MM/DD/YYYY' );
-         this.experience.fechaIngresa = mom.format( 'YYYY-MM-DD' );
-
-         if ( this.experience.indicadorActualmente === false ) {
-            let mom3: moment.Moment = moment( this.fechaTermina, 'MM/DD/YYYY' );
-            this.experience.fechaTermina = mom3.format( 'YYYY-MM-DD' );
-         } else {
-            this.experience.fechaTermina = null;
-         }
+         // let mom: moment.Moment = moment( this.fechaIngresa, 'MM/DD/YYYY' );
+         // this.experience.fechaIngresa = mom.format( 'YYYY-MM-DD' );
+         //
+         // if ( this.experience.indicadorActualmente === false ) {
+         //    let mom3: moment.Moment = moment( this.fechaTermina, 'MM/DD/YYYY' );
+         //    this.experience.fechaTermina = mom3.format( 'YYYY-MM-DD' );
+         // } else {
+         //    this.experience.fechaTermina = null;
+         // }
 
          this.workExperienceService.update( this.experience )
          .subscribe( data => {
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            // 1:add 2:update 3:error
+            this._nav.setMesage( 2, this.msgs );
             this._nav.setTab( 7 );
             this.location.back();
          }, error => {
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            // 1:add 2:update 3:error
+            this._nav.setMesage( 3, this.msgs );
          } );
       }
    }
@@ -164,7 +166,7 @@ export class WorkExperienceUpdateComponent implements OnInit {
 
    onSelectMethodCalendarFinalizacion( event: any ) {
       let d = new Date( Date.parse( event ) );
-      this.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      // this.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
       this.maxDateIngreso.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
    }
 

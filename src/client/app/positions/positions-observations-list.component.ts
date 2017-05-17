@@ -7,6 +7,7 @@ import { ListPositionsService } from '../_services/lists-positions.service';
 import { Message, ConfirmationService } from 'primeng/primeng';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -30,6 +31,7 @@ export class PositionsObservationsListComponent implements OnInit {
       private router: Router,
       private route: ActivatedRoute,
       private listaService: ListaService,
+      private _nav: NavService,
       private confirmationService: ConfirmationService,
       private listPositionsService: ListPositionsService ) {
 
@@ -58,7 +60,7 @@ export class PositionsObservationsListComponent implements OnInit {
            this.observation.idCargoEstadoObservacion === undefined ) {
          this.positionsService.addObservations( this.observation )
          .subscribe( data => {
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            this._nav.setMesage( 1, this.msgs );
             this.positionsService.getObservationsbyPosition( this.position.idCargo ).subscribe(
                observations => {
                   this.observations = observations;
@@ -67,12 +69,12 @@ export class PositionsObservationsListComponent implements OnInit {
             );
          }, error => {
             this.showForm = true;
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            this._nav.setMesage( 3, this.msgs );
          } );
       } else {
          this.positionsService.updateObservations( this.observation )
          .subscribe( data => {
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            this._nav.setMesage( 2, this.msgs );
             this.positionsService.getObservationsbyPosition( this.position.idCargo ).subscribe(
                observations => {
                   this.observations = observations;
@@ -81,7 +83,7 @@ export class PositionsObservationsListComponent implements OnInit {
             );
          }, error => {
             this.showForm = true;
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            this._nav.setMesage( 3, this.msgs );
          } );
       }
    }

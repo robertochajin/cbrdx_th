@@ -31,6 +31,9 @@ import { ProductivityModule } from './position-productivity/productivity.module'
 import { JobProjectionModule } from './job-projection/job-projection.module';
 //  administrador de formularios
 import { FormManagerModule } from './form-manager/form-manager.module';
+
+//  asignación a profesional
+import { AssignmentProfessionalModule } from './assignment-professional/assignment-professional.module';
 // Estructura física
 import { PhysicStructureModule } from './physic-structure/physic-structure.module';
 import { RiskModule } from './position-risks/position-risks.module';
@@ -121,7 +124,8 @@ import { PersonnelRequirementModule } from './personnel-requirement/personnel-re
                  AbsenceModule,
                  RisksModule,
                  MenuManagerModule,
-                 CompanyAssetsModule
+                 CompanyAssetsModule,
+                 AssignmentProfessionalModule
               ],
 
               declarations: [ AppComponent ],

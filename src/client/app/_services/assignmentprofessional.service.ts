@@ -1,22 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+import { AuthHttp } from 'angular2-jwt';
 import { Productivity } from '../_models/productivity';
-import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
-export class ProductivityService {
+export class AssignmentProfessionalService {
 
-   private serviceURL = '<%= SVC_TH_URL %>/api/';
-   private jwtHelper: JwtHelper = new JwtHelper();
-   private usuarioLogueado: any;
-   private idUsuario: number;
+   private serviceURL = '<%= SVC_TH_URL %>/api/actividadesEconomicas/';
+   private serviceTiposURL = '<%= SVC_TH_URL %>/api/actividadesEconomicasTipos/';
 
    constructor( private authHttp: AuthHttp ) {
-      let token = localStorage.getItem( 'token' );
-      if ( token !== null ) {
-         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
-         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
-      }
    }
 
    getlistProductivity() {
@@ -35,12 +29,10 @@ export class ProductivityService {
    }
 
    add( c: Productivity ) {
-      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'cargosProductividades', c ).map( ( res: Response ) => res.json() );
    };
 
    update( c: Productivity ) {
-      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'cargosProductividades', c ).map( ( res: Response ) => res );
    }
 }

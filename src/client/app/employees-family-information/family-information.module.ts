@@ -7,17 +7,13 @@ import { FamilyInformationDetailComponent } from './family-information-detail.co
 import { FamilyInformationAddComponent } from './family-information-add.component';
 import { FamilyInformationUpdateComponent } from './family-information-update.component';
 import { FamilyInformationService } from './family-information.service';
-import { SharedModule } from '../shared/shared.module';
 import { LocationsModule } from '../locations/locations.module';
-import {
-   InputTextModule, DataTableModule, ButtonModule, DialogModule, InputTextareaModule, CalendarModule, DropdownModule, ConfirmDialogModule,
-   CheckboxModule, MessagesModule
-} from 'primeng/primeng';
+import { SharedModule } from '../shared/shared.module';
+import { FormSharedModule } from '../shared/form-shared.module';
 
 @NgModule( {
-              imports: [ CommonModule, InputTextModule, FormsModule, ReactiveFormsModule, DataTableModule, ButtonModule, DialogModule,
-                 InputTextareaModule, CalendarModule, DropdownModule, ConfirmDialogModule, CheckboxModule, MessagesModule, LocationsModule,
-                 SharedModule
+              imports: [ CommonModule, FormsModule, ReactiveFormsModule,
+                  LocationsModule, SharedModule,FormSharedModule
 
               ],
               declarations: [ FamilyInformationComponent,
