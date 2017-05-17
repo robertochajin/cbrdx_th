@@ -92,7 +92,7 @@ export class UsuariosService {
    }
 
    readUserRoles( p: number ) {
-      return this.authHttp.get( this.usuariosRolesServiceURL + 'vista/' + p ).map( ( res: Response ) => res.json() as VUsuarioRol[] );
+      return this.authHttp.get( this.usuariosRolesServiceURL + 'secure/' + p ).map( ( res: Response ) => res.json() as VUsuarioRol[] );
    }
 
    readAllUserRoles() {
