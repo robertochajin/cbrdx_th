@@ -76,10 +76,12 @@
               <span class="colortheme colorblue" onclick="changeTheme('skin-blue')"></span>
               <span class="colortheme colorgreen" onclick="changeTheme('skin-green')"></span>
             </li>
-
-
             <!-- Menu Footer-->
             <li class="user-footer">
+					<a routerLink="/employees/detail/{{usuarioLogueado.usuario.idTercero}}"
+						class="btn btn-default" style="margin-bottom: 4px;">
+						Mi Historia Laboral
+					</a>
                <div class="pull-left">
                   <a routerLink="/user-session" class="btn btn-default">{{ 'TEMPLATE.LBL_EDITARCONTRASENA' | translate }}</a>
                </div>
