@@ -158,17 +158,17 @@ export class NoFormalStudiesAddComponent implements OnInit {
       this.selectedCity = event.camino;
    }
 
-   // onSelectBegin( event: any ) {
-   //    let d = new Date( Date.parse( event ) );
-   //    this.fechaIngresa = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-   //    this.minDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
-   // }
-   //
-   // onSelectEnd( event: any ) {
-   //    let d = new Date( Date.parse( event ) );
-   //    this.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-   //    this.maxDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
-   // }
+   onSelectBegin( event: any ) {
+      let d = new Date( Date.parse( event ) );
+      this.minDate= new Date();
+      this.minDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
+   }
+
+   onSelectEnd( event: any ) {
+      let d = new Date( Date.parse( event ) );
+      this.maxDate= new Date();
+      this.maxDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
+   }
 
    updateEnd(): void {
       if ( this.nfstudy.indicadorTerminacion ) {

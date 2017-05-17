@@ -167,17 +167,17 @@ export class FormalStudiesAddComponent implements OnInit {
       }
    }
 
-   // onSelectBegin( event: any ) {
-   //    let d = new Date( Date.parse( event ) );
-   //    this.fstudy.fechaIngresa = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-   //    this.minDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
-   // }
-   //
-   // onSelectEnd( event: any ) {
-   //    let d = new Date( Date.parse( event ) );
-   //    this.fstudy.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-   //    this.maxDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
-   // }
+   onSelectBegin( event: any ) {
+      let d = new Date( Date.parse( event ) );
+      this.minDate= new Date();
+      this.minDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
+   }
+
+   onSelectEnd( event: any ) {
+      let d = new Date( Date.parse( event ) );
+      this.maxDate = new Date();
+      this.maxDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
+   }
 
    updateEnd(): void {
       if ( this.fstudy.idEstado !== this.idEstadoEstudioFinalizado ) {

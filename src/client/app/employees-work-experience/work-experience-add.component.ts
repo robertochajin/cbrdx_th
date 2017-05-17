@@ -143,13 +143,13 @@ export class WorkExperienceAddComponent implements OnInit {
 
    onSelectMethodCalendarIngreso( event: any ) {
       let d = new Date( Date.parse( event ) );
-      // this.fechaIngresa = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      this.minDate= new Date();
       this.minDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
    }
 
    onSelectMethodCalendarFinalizacion( event: any ) {
       let d = new Date( Date.parse( event ) );
-      // this.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      this.maxDateIngreso= new Date();
       this.maxDateIngreso.setFullYear( d.getFullYear(), d.getMonth(), );
    }
 
