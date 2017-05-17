@@ -21,8 +21,8 @@ export class Workexperience {
    public ciudad?: string;
    public indicadorActualmente: boolean;
    public indicadorHabilitado: boolean;
-   public fechaIngresa: string;
-   public fechaTermina: string;
+   public fechaIngresa: Date;
+   public fechaTermina: Date;
    public idAdjunto?: string;
    public auditoriaUsuario: number;
    public auditoriaFecha: Date;
@@ -45,8 +45,8 @@ export class Workexperience {
       this.ciudad = '';
       this.indicadorActualmente = false;
       this.indicadorHabilitado = true;
-      this.fechaIngresa = '';
-      this.fechaTermina = '';
+      this.fechaIngresa = null;
+      this.fechaTermina = null;
       this.idAdjunto = null;
       this.auditoriaUsuario = 1;
    }
