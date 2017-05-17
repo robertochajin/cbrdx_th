@@ -11,8 +11,8 @@ export class VacanciesService {
    constructor( private authHttp: AuthHttp ) {
    }
 
-   getInProcess() {
-      return this.authHttp.get( this.serviceURL + 'requerimentos/buscarEnProceso' ).map( ( res: Response ) => res.json() as Vacancies[] );
+   getAll() {
+      return this.authHttp.get( this.serviceURL + 'requerimientos' ).map( ( res: Response ) => res.json() as Vacancies[] );
    }
    /*getAll() {
       return this.authHttp.get( this.serviceURL + 'vterceros' ).map( ( res: Response ) => res.json() as Vacancies[] );

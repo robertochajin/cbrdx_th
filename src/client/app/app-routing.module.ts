@@ -140,13 +140,10 @@ import { WidgetsComponent } from './widgets/widgets.component';
 import { MenuManagerComponent } from './menuManager/menuManager.component';
 import { UserSessionComponent } from './usuarios/userSession.component';
 
-<<<<<<< HEAD
 // Vacantes
 import { VacanciesComponent } from './vacancies/vacancies.component';
-=======
-// asignación a profesional
-import { AssignmentProfessionalComponent } from './assignment-professional/assignment-professional-component';
->>>>>>> cbrdx_th_stable_master
+import { VacantesActionComponent } from './vacancies/vacancies-action-component';
+
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -333,13 +330,9 @@ const routes = [
    // Administracion
    { path: 'menus', component: MenuManagerComponent, canActivate: [ AuthGuard ] },
 
-<<<<<<< HEAD
    // Vacantes
    { path: 'vacancies', component: VacanciesComponent, canActivate: [ AuthGuard ] },
-=======
-   // asignación a profesional
-   { path: 'assignment-professional', component: AssignmentProfessionalComponent, canActivate: [ AuthGuard ] },
->>>>>>> cbrdx_th_stable_master
+   { path: 'vacancies/update/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
 
 ];
 
