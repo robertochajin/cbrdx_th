@@ -323,12 +323,13 @@ const routes = [
    { path: 'form-manager/add', component: FormManagerAddComponent, canActivate: [ AuthGuard ] },
    { path: 'form-manager/update/:id', component: FormManagerUpdateComponent, canActivate: [ AuthGuard ] },
 
-   //  cargos
    // Requerimiento de personal
    { path: 'personnel-requirement', component: PersonnelRequirementComponent, canActivate: [ AuthGuard ] },
    { path: 'personnel-requirement/add', component: PersonnelRequirementAddComponent, canActivate: [ AuthGuard ] },
 
 
+
+   //  cargos
    //  cargos factores de riesgo
    { path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [ AuthGuard ] },
    { path: 'position-absence/:idCargo', component: AbsenceComponent, canActivate: [ AuthGuard ] },

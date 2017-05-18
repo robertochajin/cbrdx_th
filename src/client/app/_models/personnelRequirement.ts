@@ -25,10 +25,13 @@ export class PersonnelRequirement {
    public idJefe: number;
    public idCategoria: number;
    public idTipoSolicitud: number;
-   public fechaInicio: string;
-   public fechaFin: string;
+   public fechaInicio: Date;
+   public fechaFin: Date;
    public nombreCargo: string;
    public funcionCargo: string;
+   public cargo: string;
+   public nombreResponsableSeleccion: string;
+   public estado: string;
 
    constructor() {
    }

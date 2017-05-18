@@ -29,6 +29,10 @@ export class PositionsService {
       return this.authHttp.get( this.serviceURL + 'cargos' + '/wildcard/' + query ).map( ( res: Response ) => res.json() );
    }
 
+   getByWildCardAndArea( query: string, idArea: number ) {
+      return this.authHttp.get( this.serviceURL + 'cargos' + '/search/' + query + '/' + idArea).map( ( res: Response ) => res.json() );
+   }
+
    getListPositions() {
       return this.authHttp.get( this.serviceURL + 'cargos/enabled' ).map( ( res: Response ) => res.json() );
    }

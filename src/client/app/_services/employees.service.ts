@@ -59,6 +59,11 @@ export class EmployeesService {
       });
    }
 
+   getByNameAndArea( idArea: number, query: string ) {
+      return this.authHttp.get( this.serviceURL + 'terceros/buscarJefes/'+idArea+'/' + query )
+      .map( ( res: Response ) => res.json());
+   }
+
    getNacionalidad( id: number ) {
       return this.authHttp.get( this.serviceURL + '/vista/' + id ).map( ( res: Response ) => res.json() );
    }

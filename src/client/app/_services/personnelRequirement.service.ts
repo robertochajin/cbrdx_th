@@ -7,14 +7,14 @@ import { PersonnelRequirement } from '../_models/personnelRequirement';
 @Injectable()
 export class PersonnelRequirementServices {
 
-   private masterService = '<%= SVC_TH_URL %>/api/requerimientodepersonal/';
+   private masterService = '<%= SVC_TH_URL %>/api/requerimientos/';
 
    constructor( private authHttp: AuthHttp ) {
 
    }
 
    getAllEnabledByUser( idUsuario: number ): Observable<PersonnelRequirement[]> {
-      return this.authHttp.get( this.masterService + 'user/' + idUsuario ).map( ( res: Response ) => res.json() as PersonnelRequirement[] );
+      return this.authHttp.get( this.masterService + 'byUser/' + idUsuario ).map( ( res: Response ) => res.json() as PersonnelRequirement[] );
    }
 
    add( f: PersonnelRequirement ) {
@@ -27,7 +27,7 @@ export class PersonnelRequirementServices {
    }
 
    get( id: number ) {
-      return this.authHttp.get( this.masterService + 'buscarId/' + id )
+      return this.authHttp.get( this.masterService + id )
       .map( ( res: Response ) => res.json() as PersonnelRequirement );
    }
 
