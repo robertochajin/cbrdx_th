@@ -61,15 +61,15 @@ export class PersonnelRequirementComponent implements OnInit {
    }
 
    add() {
-      this.router.navigate( [ 'personnelRequirements/add' ] );
+      this.router.navigate( [ 'personnel-requirement/add' ] );
    }
 
    update( FaS: PersonnelRequirement ) {
-      this.router.navigate( [ 'personnelRequirements/update/' + FaS.idRequerimiento ] );
+      this.router.navigate( [ 'personnel-requirement/update/' + FaS.idRequerimiento ] );
    }
 
    detail( FaS: PersonnelRequirement ) {
-      this.router.navigate( [ 'personnelRequirements/detail/' + FaS.idRequerimiento ] );
+      this.router.navigate( [ 'personnel-requirement/detail/' + FaS.idRequerimiento ] );
    }
 
 }

@@ -58,17 +58,19 @@ export class PersonnelRequirementAddComponent implements OnInit {
    private contractForms: SelectItem[] = [];
    private zones: SelectItem[] = [];
    isbossWrong: boolean;
+   isPositionWrong: boolean;
    es: any;
    private listRT: ListaItem[] = [];
    minDate: Date = null;
    maxDate: Date = null;
    maxDateFinal: Date = null;
-   bossPosition: Positions;
-
+   bossPosition: Positions = new Positions();
+   selectedPosition: Positions = new Positions();
+   positionList: Positions[] = [];
 
    employeeBasics: employeeBasicInfo = new employeeBasicInfo();
-   selectedBoss: Employee;
-   bossList: Employee[] = [];
+   selectedBoss: employeeBasicInfo = new employeeBasicInfo();
+   bossList: employeeBasicInfo[] = [];
 
    // variables de display
    public dispNombreCargo = false;
@@ -185,7 +187,7 @@ export class PersonnelRequirementAddComponent implements OnInit {
    onSubmit() {
       if(this.selectedBoss !== undefined && this.selectedBoss.idTercero !== undefined && this.selectedBoss.idTercero !== null){
          this.personnelRequirement.idJefe = this.selectedBoss.idTercero;
-         this.personnelRequirement.idCargo = this.bossPosition.idCargo;
+         this.personnelRequirement.idCargo = this.selectedPosition.idCargo;
          this.personnelRequirementServices.add(this.personnelRequirement).subscribe(res => {
             if(res.ok){
                this._nav.setMesage( 1, this.msg );
@@ -200,10 +202,9 @@ export class PersonnelRequirementAddComponent implements OnInit {
    }
 
    bossCaptureId( event: any ) {
-      this.personnelRequirement.idJefe = event.idTercero;
       this.selectedBoss.idTercero = event.idTercero;
       this.selectedBoss.nombreCompleto = event.nombreCompleto;
-      this.bossPosition.idCargoJefe = event.idCargo;
+      this.bossPosition.idCargo = event.idCargo;
       this.bossPosition.cargo = event.cargo;
       this.isbossWrong = false;
    }
@@ -212,6 +213,22 @@ export class PersonnelRequirementAddComponent implements OnInit {
       this.employeesService.getByNameAndArea(this.employeeBasics.idArea, event.query).subscribe(
          empl => this.bossList = empl
       );
+   }
+
+   positionSearch( event: any ) {
+      let item = this.listRT.find(rt =>  rt.idLista === this.personnelRequirement.idTipoSolicitud);
+      if (item !== undefined && item.codigo === 'CRGNVO') {
+         this.positionsService.getByWildCard( event.query ).subscribe( list => this.positionList = list );
+      } else {
+         this.positionsService.getByWildCardAndArea( event.query, this.employeeBasics.idArea ).subscribe( list => this.positionList = list );
+      }
+   }
+
+   positionCaptureId(event: any){
+      this.personnelRequirement.idCargo = event.idCargo;
+      this.selectedPosition.idCargo  = event.idCargo;
+      this.selectedPosition.cargo  = event.cargo;
+      this.isPositionWrong = false;
    }
 
    emailCleanUp( value: string ) {

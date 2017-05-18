@@ -93,6 +93,26 @@
 								</div>
 							</div>
 							
+							<div class="row">
+								<div class="form-group col-md-12" *ngIf="dispCargo">
+									<label for="position">* {{'REQUERIMIENTOPERSONAL.LBL_CARGO' | translate }}:</label>
+									<p-autoComplete id="position" name="position" field="cargo"
+									                placeholder="{{ 'PH_BUSCAR' | translate}} {{'REQUERIMIENTOPERSONAL.LBL_CARGO' | translate }}"
+									                [(ngModel)]="selectedPosition"
+									                #ngPosition="ngModel" [suggestions]="positionList" required="true"
+									                (completeMethod)="positionSearch($event)" (onSelect)="positionCaptureId($event)">
+									</p-autoComplete>
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngPosition.valid">
+										<i class="fa fa-close"></i> {{'REQUERIMIENTOPERSONAL.LBL_CARGO' | translate }} {{'LBL_REQUERIDO' | translate
+										}}
+									</div>
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!isPositionWrong">
+										<i class="fa fa-close"></i> {{'REQUERIMIENTOPERSONAL.LBL_CARGO' | translate }} {{'LBL_REQUERIDO' | translate
+										}}
+									</div>
+								</div>
+							</div>
+							
 							<div class="row" *ngIf="dispNombreCargo">
 								<div class="form-group col-md-12">
 									<label for="positionName">{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBRECARGO' | translate }}:</label>
@@ -183,7 +203,7 @@
 								<div class="form-group col-md-6">
 									<label for="bossPosition">{{ 'REQUERIMIENTOPERSONAL.LBL_CARGOJEFEINMEDIATO' | translate }}:</label>
 									<input id="bossPosition" type="text" pInputText name="bossPosition"
-									       [(ngModel)]="bossPosition"
+									       [(ngModel)]="bossPosition.cargo"
 									       #ngBossPosition="ngModel" disabled/>
 								</div>
 							</div>
