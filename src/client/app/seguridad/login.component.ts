@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../_services/login.service';
 import { AppComponent } from '../app.component';
 import { AuthenticationService } from '../_services/authentication.service';
 import { Http, Headers } from '@angular/http';
 import { NavService } from '../_services/_nav.service';
+import { JwtHelper } from 'angular2-jwt';
 
 @Component( {
                moduleId: module.id,
@@ -19,23 +20,41 @@ export class LoginComponent implements OnInit {
    };
    intentos: number = 0;
    error: string = '';
+   token: string = '';
    captcha: boolean = false;
+   jwtHelper: JwtHelper = new JwtHelper();
+   redirect: any;
+   Url = '/dashboard';
 
    constructor( private loginService: LoginService,
       private http: Http,
       private router: Router,
       private appmain: AppComponent,
       private authenticationService: AuthenticationService,
-      private navService: NavService) {
-      authenticationService.token = null;
-      localStorage.removeItem( 'currentUser' );
-      localStorage.removeItem( 'token' );
+      private navService: NavService,
+      private route: ActivatedRoute,
+   ) {
+      if(location.search.length > 0){
+         this.token =  location.search.split('token=')[1];
+         this.redirect = this.jwtHelper.decodeToken( this.token );
+         this.Url = '/'+this.redirect.URL;
+      }
    }
 
    ngOnInit(): void {
-      this.authenticationService.logout();
-      this.loginService.setSession( false );
-      this.appmain.setSession( false );
+
+      if(!this.authenticationService.loggedIn()){
+         this.authenticationService.token = null;
+         localStorage.removeItem( 'currentUser' );
+         localStorage.removeItem( 'token' );
+         this.authenticationService.logout();
+         this.loginService.setSession( false );
+         this.appmain.setSession( false );
+      }else{
+         this.router.navigate( [ this.Url ] );
+      }
+
+
 
       /* Generar random de la imagen de fondo */
       let min = 1;
@@ -70,7 +89,7 @@ export class LoginComponent implements OnInit {
    user() {
       this.loginService.setSession( true );
       this.appmain.setSession( true );
-      this.router.navigate( [ '/dashboard' ] );
+      this.router.navigate( [ this.Url ] );
       this.navService.resetSearch();
    }
 

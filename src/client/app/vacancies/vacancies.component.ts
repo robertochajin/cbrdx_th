@@ -25,7 +25,6 @@ export class VacanciesComponent implements OnInit {
    vacancies: Vacancies[];
    listTipoSolicitud: SelectItem[] = [];
    listEstados: SelectItem[] = [];
-   listAcciones: SelectItem[] = [];
    listAutotizacion: SelectItem[] = [];
    listArea: SelectItem[] = [];
    listCargo: SelectItem[] = [];
@@ -65,12 +64,7 @@ export class VacanciesComponent implements OnInit {
       this.listAutotizacion.push({label: 'Si', value:'Si'});
       this.listAutotizacion.push({label: 'No', value:'No'});
 
-      this.listaService.getMasterDetails( 'ListasRequerimientosAcciones' ).subscribe( res => {
-         this.listAcciones.push( { label: 'Todos', value: '' } );
-         res.map( ( l: ListaItem ) => {
-            this.listAcciones.push( { label: l.nombre, value: l.nombre } );
-         } );
-      } );
+
 
       organizationalStructureService.listOrganizationalStructure().subscribe( res => {
          this.listOrganizationalStructure = res;

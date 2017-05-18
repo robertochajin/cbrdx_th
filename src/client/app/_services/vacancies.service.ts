@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Vacancies } from '../_models/vacancies';
 import { AuthHttp } from 'angular2-jwt';
+import { RequirementsAction } from '../_models/requirementsAction';
 
 @Injectable()
 export class VacanciesService {
@@ -14,10 +15,20 @@ export class VacanciesService {
    getAll() {
       return this.authHttp.get( this.serviceURL + 'requerimientos' ).map( ( res: Response ) => res.json() as Vacancies[] );
    }
+
    getByDate( fInicio: string, fFin: string ) {
       return this.authHttp.get( this.serviceURL + 'requerimientos/fecha/' + fInicio + '/'  + fFin)
       .map( ( res: Response ) => res.json() as Vacancies[] );
    }
+
+   get( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'requerimientos/' + id ).map( ( res: Response ) => res.json() as Vacancies );
+   }
+
+   setAction( c: RequirementsAction ) {
+      return this.authHttp.post( this.serviceURL + 'requerimientosAcciones', c ).map( ( res: Response ) => res.json() );
+   }
+
    /*getAll() {
       return this.authHttp.get( this.serviceURL + 'vterceros' ).map( ( res: Response ) => res.json() as Vacancies[] );
    }

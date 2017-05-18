@@ -68,13 +68,13 @@
 			<div class="col-md-6 col-xs-12 datatable-header-search">
 				<div class="input-group">
 					<div class="input-group-addon"><i class="fa fa-search"></i></div>
-					<input #gb type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
+					<input #gbRequerimientos type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
 				</div>
 			</div>
 		</div>
 		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" sortField="fechaSolicitud" [sortOrder]="-1" [value]="vacancies"
 		             [paginator]="true" [rows]="10" [responsive]="true"
-		             [globalFilter]="gb" #dt>
+		             [globalFilter]="gbRequerimientos" #dt>
 			<p-column field="cargo" header="{{ 'VACANCIES.LBL_VACANCY' | translate }}" [sortable]="true"></p-column>
 			<p-column field="fechaSolicitud" header="{{ 'VACANCIES.LBL_DATE' | translate }}" [sortable]="true"></p-column>
 			<p-column field="estructuraOrganizacional" header="{{ 'VACANCIES.LBL_AREA' | translate }} " [sortable]="true"></p-column>
@@ -128,12 +128,14 @@
 			<div class="col-md-6 col-xs-12 datatable-header-add">
 			</div>
 			<div class="col-md-6 col-xs-12 datatable-header-search">
-				<i class="fa fa-search"></i>
-				<input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}">
+				<div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-search"></i></div>
+					<input #gbVacantes type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control">
+				</div>
 			</div>
 		</div>
 		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listPositions"
-		             [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb" #vp>
+		             [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gbVacantes" #vp>
 			<p-column field="estructuraOrganizacional" header="{{ 'PLANTACOLABORADORES.LBL_AREA' | translate }}" [sortable]="true"></p-column>
 			<p-column field="estructuraFisica" header="{{ 'PLANTACOLABORADORES.LBL_ESTRUCTFISICA' | translate }}" [sortable]="true"></p-column>
 			<p-column field="cargo" header="{{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}" [sortable]="true"></p-column>

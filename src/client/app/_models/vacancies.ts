@@ -19,7 +19,10 @@ export class Vacancies {
    categoria: string;
    idEstado: number;
    estado: string;
+   salario: number;
    idSolicitante: number;
+   idResponsableSeleccion: number;
+   idFormaReclutamiento: number;
    nombreSolicitante: string;
    cantidadVacantes: number;
    cantidadConvocados: number;
