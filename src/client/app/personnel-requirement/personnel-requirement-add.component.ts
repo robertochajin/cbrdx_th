@@ -18,7 +18,11 @@ import { ListPositionsService } from '../_services/lists-positions.service';
 import { ZonesServices } from '../_services/zones.service';
 import { Zones } from '../_models/zones';
 import { NavService } from '../_services/_nav.service';
+import { ResoursesRequiredServices } from '../_services/resourcesRequiredPurchases.service';
+import { ResoursesTicsService } from '../_services/resoursesTics.service';
 import { RequirementReferral } from '../_models/requirementReferral';
+import { ResourcesRequiredPurchases } from '../_models/resourcesRequiredPurchases';
+import { TicsResourses } from '../_models/ticsResourses';
 
 @Component( {
                moduleId: module.id,
@@ -58,7 +62,20 @@ export class PersonnelRequirementAddComponent implements OnInit {
       correoTercero: '',
       correoUsuario: ''
    };
-
+   purchasesList: ListaItem[] = [];
+   ticsList: ListaItem[] = [];
+   purchasesId: any;
+   ticsId: any;
+   ticsResourses: TicsResourses = new TicsResourses();
+   resoursesPurchases: ResourcesRequiredPurchases = new ResourcesRequiredPurchases();
+   listResourses: ResourcesRequiredPurchases[]=[];
+   listResoursesAll: ResourcesRequiredPurchases[]=[];
+   listResoursesTics: TicsResourses[]=[];
+   listResoursesTicsAll: TicsResourses[]=[];
+   wrongResourse: boolean = true;
+   wrongResourseTics: boolean = true;
+   guardandoResourses: boolean=false;
+   guardandoResoursesTics: boolean=false;
    // variables de display
    public dispNombreCargo = false;
    public dispFuncionCargo = false;
@@ -82,6 +99,8 @@ export class PersonnelRequirementAddComponent implements OnInit {
       private employeesService: EmployeesService,
       private zonesServices: ZonesServices,
       private positionsService: PositionsService,
+      private resoursesRequiredServices: ResoursesRequiredServices,
+      private resoursesTicsService: ResoursesTicsService,
       private location: Location,
       private _nav: NavService,
       private confirmationService: ConfirmationService ) {
@@ -126,31 +145,45 @@ export class PersonnelRequirementAddComponent implements OnInit {
       //    this._nav.setMesage( 3, this.msg );
       // } );
 
-      this.zones.push({
-      idZona : 1,
-      zona : 'string1',
-      indicadorHabilitado : true,
-      auditoriaUsuario : 1,
-      auditoriaFecha : '',
-                      });
-      this.zones.push({
-      idZona : 2,
-      zona : 'string2',
-      indicadorHabilitado : true,
-      auditoriaUsuario : 1,
-      auditoriaFecha : '',
-                      });
-      this.zones.push({
-      idZona : 3,
-      zona : 'string3',
-      indicadorHabilitado : true,
-      auditoriaUsuario : 1,
-      auditoriaFecha : '',
-                      });
+      this.zones.push( {
+                          idZona: 1,
+                          zona: 'string1',
+                          indicadorHabilitado: true,
+                          auditoriaUsuario: 1,
+                          auditoriaFecha: '',
+                       } );
+      this.zones.push( {
+                          idZona: 2,
+                          zona: 'string2',
+                          indicadorHabilitado: true,
+                          auditoriaUsuario: 1,
+                          auditoriaFecha: '',
+                       } );
+      this.zones.push( {
+                          idZona: 3,
+                          zona: 'string3',
+                          indicadorHabilitado: true,
+                          auditoriaUsuario: 1,
+                          auditoriaFecha: '',
+                       } );
 
    }
 
    ngOnInit() {
+      // idRequerimiento quemado --> 1
+      this.resoursesRequiredServices.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+         this.listResourses = rest;
+      } );
+      this.resoursesRequiredServices.getAll().subscribe( rest => {
+         this.listResoursesAll = rest;
+      } );
+      // idRequerimiento quemado --> 1
+      this.resoursesTicsService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+         this.listResoursesTics = rest;
+      } );
+      this.resoursesTicsService.getAll().subscribe( rest => {
+         this.listResoursesTicsAll = rest;
+      } );
       let token = localStorage.getItem( 'token' );
 
       if ( token !== null && token !== undefined ) {
@@ -184,7 +217,7 @@ export class PersonnelRequirementAddComponent implements OnInit {
    }
 
    emailCleanUp( value: string ) {
-      if (value !== undefined && value !== '' && value !== null){
+      if ( value !== undefined && value !== '' && value !== null ) {
          this.requirementReferral.correoElectronico = value.toLowerCase().replace( ' ', '' ).trim();
       }
    }
@@ -205,7 +238,7 @@ export class PersonnelRequirementAddComponent implements OnInit {
 
    onChangeTypeMethod( event: any ) {
       let code = '';
-      let item = this.listRT.find(rt =>  rt.idLista === this.personnelRequirement.idTipoSolicitud);
+      let item = this.listRT.find( rt => rt.idLista === this.personnelRequirement.idTipoSolicitud );
       code = item.codigo;
 
       this.dispNombreCargo = false;
@@ -259,7 +292,7 @@ export class PersonnelRequirementAddComponent implements OnInit {
       }
    }
 
-   addReferred(){
+   addReferred() {
 
    }
 
@@ -267,12 +300,163 @@ export class PersonnelRequirementAddComponent implements OnInit {
 
    }
 
-   cancelReferred(){
+   cancelReferred() {
 
    }
 
-   sendRequest(){
+   sendRequest() {
 
+   }
+
+   captureResourseId( event: any ) {
+      this.resoursesPurchases.idCompra = event.idLista;
+      this.resoursesPurchases.idRequerimiento = 1;
+      this.wrongResourse = false;
+   }
+
+   resourseSearch( event: any ) {
+      this.listaService.getMasterDetailsByWildCard( 'ListasTiposCompras', event.query ).subscribe( rest => {
+         this.purchasesList = rest;
+         this.purchasesList.map( d => d.nombre = d.idLista + ' : ' + d.nombre );
+      } );
+   }
+
+   captureResourseTicsId( event: any ) {
+      this.ticsResourses.idTic = event.idLista;
+      this.ticsResourses.idRequerimiento = 1;
+      this.wrongResourseTics = false;
+   }
+
+   resourseTicsSearch( event: any ) {
+      this.listaService.getMasterDetailsByWildCard( 'ListasTICs', event.query ).subscribe( rest => {
+         this.ticsList = rest;
+         this.ticsList.map( d => d.nombre = d.idLista + ' : ' + d.nombre );
+      } );
+   }
+
+   onSubmit3() {
+      let temp: any;
+      if ( this.resoursesPurchases.idCompra === this.purchasesId.idLista ) {
+         this.guardandoResourses=true;
+         this.resoursesPurchases.idRequerimiento = 1; // idRequerimiento quemado --> 1
+         temp = this.listResoursesAll.find(
+            r => r.idCompra === this.resoursesPurchases.idCompra && r.idRequerimiento === this.resoursesPurchases.idRequerimiento );
+         if ( temp ) {
+            if(!temp.indicadorHabilitado){
+               temp.indicadorHabilitado=true;
+               this.resoursesRequiredServices.update( temp ).subscribe( rest => {
+                  this.guardandoResourses=false;
+                  this.wrongResourse=true;
+                  this.purchasesId=null;
+                  this.listResourses = [];
+                  this.listResoursesAll = [];
+                  // idRequerimiento quemado --> 1
+                  this.resoursesRequiredServices.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+                     this.listResourses = rest;
+                  } );
+                  this.resoursesRequiredServices.getAll().subscribe( rest => {
+                     this.listResoursesAll = rest;
+                  } );
+               } );
+            }else{
+               this.guardandoResourses=false;
+               this.wrongResourse=true;
+               this.purchasesId=null;
+               this._nav.setMesage(0, { severity: 'warn', summary: 'Información', detail: 'No es posible agregar mas de una vez un' +
+                                                                                          ' recurso' });
+            }
+         } else {
+            this.resoursesRequiredServices.add( this.resoursesPurchases ).subscribe( rest => {
+               this.guardandoResourses=false;
+               this.wrongResourse=true;
+               this.purchasesId=null;
+               this.listResourses = [];
+               this.listResoursesAll = [];
+               // idRequerimiento quemado --> 1
+               this.resoursesRequiredServices.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+                  this.listResourses = rest;
+               } );
+               this.resoursesRequiredServices.getAll().subscribe( rest => {
+                  this.listResoursesAll = rest;
+               } );
+            } );
+         }
+      }
+   }
+   delResourses(r: ResourcesRequiredPurchases){
+      r.indicadorHabilitado=false;
+      this.resoursesRequiredServices.update(r).subscribe(res=>{
+         this.listResourses=[];
+         this.listResoursesAll = [];
+         this.resoursesRequiredServices.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+            this.listResourses = rest;
+         } );
+         this.resoursesRequiredServices.getAll().subscribe( rest => {
+            this.listResoursesAll = rest;
+         } );
+      });
+   }
+   onSubmit4() {
+      let temp: any;
+      if ( this.ticsResourses.idTic === this.ticsId.idLista ) {
+         this.guardandoResoursesTics=true;
+         this.ticsResourses.idRequerimiento = 1; // idRequerimiento quemado --> 1
+         temp = this.listResoursesTicsAll.find(
+            r => r.idTic === this.ticsResourses.idTic && r.idRequerimiento === this.ticsResourses.idRequerimiento );
+         if ( temp ) {
+            if(!temp.indicadorHabilitado){
+               temp.indicadorHabilitado=true;
+               this.resoursesTicsService.update( temp ).subscribe( rest => {
+                  this.guardandoResoursesTics=false;
+                  this.wrongResourseTics=true;
+                  this.ticsId=null;
+                  this.listResoursesTics = [];
+                  this.listResoursesTicsAll = [];
+                  // idRequerimiento quemado --> 1
+                  this.resoursesTicsService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+                     this.listResoursesTics = rest;
+                  } );
+                  this.resoursesTicsService.getAll().subscribe( rest => {
+                     this.listResoursesTicsAll = rest;
+                  } );
+               } );
+            }else{
+               this.guardandoResoursesTics=false;
+               this.wrongResourseTics=true;
+               this.ticsId=null;
+               this._nav.setMesage(0, { severity: 'warn', summary: 'Información', detail: 'No es posible agregar mas de una vez un' +
+                                                                                          ' recurso' });
+            }
+         } else {
+            this.resoursesTicsService.add( this.ticsResourses ).subscribe( rest => {
+               this.guardandoResoursesTics=false;
+               this.wrongResourseTics=true;
+               this.ticsId=null;
+               this.listResoursesTics = [];
+               this.listResoursesTicsAll = [];
+               // idRequerimiento quemado --> 1
+               this.resoursesTicsService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+                  this.listResoursesTics = rest;
+               } );
+               this.resoursesTicsService.getAll().subscribe( rest => {
+                  this.listResoursesTicsAll = rest;
+               } );
+            } );
+         }
+      }
+   }
+   delResoursesTics(r: TicsResourses){
+      r.indicadorHabilitado=false;
+      this.resoursesTicsService.update(r).subscribe(res=>{
+         this.listResourses=[];
+         this.listResoursesAll = [];
+         this.resoursesTicsService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+            this.listResoursesTics = rest;
+         } );
+         this.resoursesTicsService.getAll().subscribe( rest => {
+            this.listResoursesTicsAll = rest;
+         } );
+      });
    }
 
    goBack(): void {

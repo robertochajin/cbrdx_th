@@ -10,6 +10,8 @@ import { EmployeesService } from '../_services/employees.service';
 import { ListaService } from '../_services/lista.service';
 import { ListPositionsService } from '../_services/lists-positions.service';
 import { ZonesServices } from '../_services/zones.service';
+import { ResoursesRequiredServices } from '../_services/resourcesRequiredPurchases.service';
+import { ResoursesTicsService } from '../_services/resoursesTics.service';
 
 @NgModule( {
               imports: [
@@ -26,7 +28,9 @@ import { ZonesServices } from '../_services/zones.service';
                  PositionsService,
                  ListaService,
                  ListPositionsService,
-                 ZonesServices
+                 ZonesServices,
+                 ResoursesRequiredServices,
+                 ResoursesTicsService
               ],
               exports: [ PersonnelRequirementComponent ]
            } )
