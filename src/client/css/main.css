@@ -555,7 +555,7 @@ a.cancelar:hover {
 }
 
 .datatable-header-search i {
-    margin: 4px 4px 0 0;
+    /* margin: 4px 4px 0 0; */
 }
 @media (max-width: 768px){
    .datatable-header-search {
@@ -593,6 +593,20 @@ body .ui-paginator{
 }
 .table-overflow .ui-datatable-data>tr>td{
    overflow: visible!important;
+}
+/* --- Buscador general unico --- */
+.uniSearch{
+   width: 80%!important;
+   margin-left: 10%!important;
+   margin-top: 40px!important;
+}
+.uniSearch input{
+   border-bottom-right-radius: 2em!important;
+   border-top-right-radius: 2em!important;
+}
+.uniSearch .input-group-addon{
+   border-bottom-left-radius: 2em!important;
+   border-top-left-radius: 2em!important;
 }
 
 /**
