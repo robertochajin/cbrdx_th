@@ -29,6 +29,9 @@ export class PersonnelRequirement {
    public fechaFin: Date;
    public nombreCargo: string;
    public funcionCargo: string;
+   public cargo: string;
+   public nombreResponsableSeleccion: string;
+   public estado: string;
 
    constructor() {
    }
