@@ -135,12 +135,15 @@ import { CompetenciesGroupsComponent } from './competencies-groups/competencies-
 import { OrganizationalStructurePositionsComponent } from './organizationalStructurePositions/organizational-structure-positions.component';
 import { PositionAuthoritiesComponent } from './positions/position-authorities.component';
 import { WidgetsComponent } from './widgets/widgets.component';
+
 // Administracion
 import { MenuManagerComponent } from './menuManager/menuManager.component';
 import { UserSessionComponent } from './usuarios/userSession.component';
 
-// asignación a profesional
-import { AssignmentProfessionalComponent } from './assignment-professional/assignment-professional-component';
+// Vacantes
+import { VacanciesComponent } from './vacancies/vacancies.component';
+import { VacantesActionComponent } from './vacancies/vacancies-action-component';
+
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -319,18 +322,17 @@ const routes = [
    { path: 'form-manager/add', component: FormManagerAddComponent, canActivate: [ AuthGuard ] },
    { path: 'form-manager/update/:id', component: FormManagerUpdateComponent, canActivate: [ AuthGuard ] },
 
-   //  cargos factores de riesgo
+   //  cargos
    { path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [ AuthGuard ] },
-   // cargos posición en caso de ausencia
    { path: 'position-absence/:idCargo', component: AbsenceComponent, canActivate: [ AuthGuard ] },
-
    { path: 'position-activities/:idCargo', component: PositionAuthoritiesComponent, canActivate: [ AuthGuard ] },
 
    // Administracion
    { path: 'menus', component: MenuManagerComponent, canActivate: [ AuthGuard ] },
 
-   // asignación a profesional
-   { path: 'assignment-professional', component: AssignmentProfessionalComponent, canActivate: [ AuthGuard ] },
+   // Vacantes
+   { path: 'vacancies', component: VacanciesComponent, canActivate: [ AuthGuard ] },
+   { path: 'vacancies/update/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
 
 ];
 
