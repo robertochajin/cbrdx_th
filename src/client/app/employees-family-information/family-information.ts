@@ -14,7 +14,7 @@ export interface FamilyInformation {
    segundoNombre: string;
    primerApellido: string;
    segundoApellido: string;
-   fechaNacimiento: string;
+   fechaNacimiento: Date;
    correoElectronico: string;
    direccion: string;
    indicadorHabilitado: boolean;

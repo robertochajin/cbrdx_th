@@ -171,13 +171,13 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
 
    onSelectBegin( event: any ) {
       let d = new Date( Date.parse( event ) );
-      this.fechaIngresa = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      this.minDate= new Date();
       this.minDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
    }
 
    onSelectEnd( event: any ) {
       let d = new Date( Date.parse( event ) );
-      this.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      this.maxDate= new Date();
       this.maxDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
    }
 

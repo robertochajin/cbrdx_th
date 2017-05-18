@@ -23,8 +23,10 @@
           <!--<a href="#" class="btn btn-primary">{{'EMPLOYEES.LBL_HISTORIALABORAL' | translate}}</a>-->
         </div>
       </div>
+		<div id="infoEmploye" class="clearfix">
 
-      <p-tabView id="tbvInfoPersonal" orientation="right">
+
+      <p-tabView id="tbvInfoPersonal" orientation="right" styleClass="clearfix">
           <p-tabPanel header="Info Personal" [selected]="true">
 
               <p-accordion (onOpen)="onTabShow($event)" id="accordion">
@@ -137,7 +139,7 @@
               </p-accordion>
 
           </p-tabPanel>
-        <p-tabPanel header="Reclutamiento">
+        <p-tabPanel header="Reclutamiento" styleClass="clearfix">
           <h3>{{'EMPLOYEES.LBL_RECLUTAMIENTO' | translate}}</h3>
         </p-tabPanel>
         <p-tabPanel header="Novedades">
@@ -166,6 +168,8 @@
         </p-tabPanel>
       </p-tabView>
 
+
+		</div>
 
     </div>
   </div>
