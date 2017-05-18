@@ -70,6 +70,29 @@
 								</div>
 							</div>
 							
+							<div class="row">
+								<div class="form-group col-md-6" *ngIf="dispFechaInicioRemplazo">
+									<label for="initDate">{{'REQUERIMIENTOPERSONAL.LBL_FECHA_INICIO' | translate}}</label>
+									<p-calendar id="initDate" name="initDate" [showIcon]="true"
+									            [locale]="es" readonlyInput="true" [maxDate]="maxDate"
+									            dataType="date" #ngInitDate="ngModel" required (onSelect)="onSelectBegin($event)"
+									            [(ngModel)]="personnelRequirement.fechaInicio" dateFormat="yy'-'mm'-'dd"></p-calendar>
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngInitDate.valid">
+										{{'REQUERIMIENTOPERSONAL.LBL_FECHA_INICIO' | translate}} {{'LBL_REQUERIDO' | translate}}
+									</div>
+								</div>
+								<div class="form-group col-md-6" *ngIf="dispFechaFinRemplazo">
+									<label for="endDate">{{'REQUERIMIENTOPERSONAL.LBL_FECHA_FIN' | translate}}</label>
+									<p-calendar id="endDate" name="endDate" [showIcon]="true"
+									            [locale]="es" readonlyInput="true" [maxDate]="maxDateFinal" [minDate]="minDate"
+									            dataType="date" #ngEndDate="ngModel" required (onSelect)="onSelectEnd($event)"
+									            [(ngModel)]="personnelRequirement.fechaFin" dateFormat="yy'-'mm'-'dd"></p-calendar>
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngEndDate.valid">
+										{{'REQUERIMIENTOPERSONAL.LBL_FECHA_FIN' | translate}} {{'LBL_REQUERIDO' | translate}}
+									</div>
+								</div>
+							</div>
+							
 							<div class="row" *ngIf="dispNombreCargo">
 								<div class="form-group col-md-12">
 									<label for="positionName">{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBRECARGO' | translate }}:</label>
@@ -102,11 +125,7 @@
 								<div class="form-group col-md-6" *ngIf="dispZona">
 									<label for="zone">{{ 'REQUERIMIENTOPERSONAL.LBL_ZONA' | translate }}:</label>
 									<p-dropdown id="zone" name="zone" #ngZone="ngModel" [options]="zones" [autoWidth]="false"
-									            (onChange)="onChangeMethod($event)" [(ngModel)]="personnelRequirement.idZona" required></p-dropdown>
-									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngZone.valid">
-										<i class="fa fa-close"></i>
-										{{ 'REQUERIMIENTOPERSONAL.LBL_ZONA' | translate }} {{'LBL_REQUERIDO' | translate}}
-									</div>
+									            [(ngModel)]="personnelRequirement.idZona" ></p-dropdown>
 								</div>
 								<div class="form-group col-md-6" *ngIf="dispCategoria">
 									<label for="category">* {{'REQUERIMIENTOPERSONAL.LBL_CATEGORIA' | translate }}</label>
@@ -124,8 +143,7 @@
 								<div class="form-group col-md-6" *ngIf="dispFormaContratacion">
 									<label for="contractForm">* {{'REQUERIMIENTOPERSONAL.LBL_FORMACONTRATACION' | translate }}</label>
 									<p-dropdown id="contractForm" name="contractForm" #ngContractForm="ngModel" [options]="contractForms"
-									            [autoWidth]="false"
-									            (onChange)="onChangeMethod($event)" [(ngModel)]="personnelRequirement.idFormaContratacion"
+									            [autoWidth]="false" [(ngModel)]="personnelRequirement.idFormaContratacion"
 									            required></p-dropdown>
 									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngContractForm.valid">
 										<i class="fa fa-close"></i>

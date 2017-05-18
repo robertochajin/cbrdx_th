@@ -20,6 +20,18 @@ import { Zones } from '../_models/zones';
 import { NavService } from '../_services/_nav.service';
 import { RequirementReferral } from '../_models/requirementReferral';
 
+class employeeBasicInfo {
+   idTercero: number;
+   nombreCompleto: string;
+   idCargo: number;
+   cargo: string;
+   idArea: number;
+   area: string;
+   direccionGeneral: string;
+   correoTercero: string;
+   correoUsuario: string;
+};
+
 @Component( {
                moduleId: module.id,
                templateUrl: 'personnel-requirement-form.component.html',
@@ -44,20 +56,19 @@ export class PersonnelRequirementAddComponent implements OnInit {
    idUser: number;
    private contractTypes: SelectItem[] = [];
    private contractForms: SelectItem[] = [];
-   private zones: Zones[] = [];
-   bossList: Employee[] = [];
-   selectedBoss: Employee = new Employee();
+   private zones: SelectItem[] = [];
    isbossWrong: boolean;
-   bossPosition: Positions = new Positions();
-   employeeBasics: any = {
-      idTercero: '',
-      nombreCompleto: '',
-      cargo: '',
-      area: '',
-      direccionGeneral: '',
-      correoTercero: '',
-      correoUsuario: ''
-   };
+   es: any;
+   private listRT: ListaItem[] = [];
+   minDate: Date = null;
+   maxDate: Date = null;
+   maxDateFinal: Date = null;
+   bossPosition: Positions;
+
+
+   employeeBasics: employeeBasicInfo = new employeeBasicInfo();
+   selectedBoss: Employee;
+   bossList: Employee[] = [];
 
    // variables de display
    public dispNombreCargo = false;
@@ -72,7 +83,6 @@ export class PersonnelRequirementAddComponent implements OnInit {
    public dispNumeroEntrevistar = false;
    public dispFechaInicioRemplazo = false;
    public dispFechaFinRemplazo = false;
-   private listRT: ListaItem[] = [];
 
    constructor( private personnelRequirementServices: PersonnelRequirementServices,
       private router: Router,
@@ -85,6 +95,28 @@ export class PersonnelRequirementAddComponent implements OnInit {
       private location: Location,
       private _nav: NavService,
       private confirmationService: ConfirmationService ) {
+
+      this.es = {
+         firstDayOfWeek: 1,
+         dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
+         dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
+         dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
+         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre',
+            'diciembre'
+         ],
+         monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
+      };
+      let today = new Date();
+      let month = today.getMonth();
+      let year = today.getFullYear();
+      let lastYear = year - 100;
+      this.maxDate = new Date();
+      this.maxDate.setFullYear( year + 10, month );
+      this.minDate = new Date();
+      this.minDate.setFullYear( lastYear, month );
+      this.maxDateFinal = new Date();
+      this.maxDateFinal.setMonth( month );
+      this.maxDateFinal.setFullYear( year + 10 );
 
       listaService.getMasterDetails( 'ListasTiposSolicitudes' ).subscribe( res => {
          this.listRT = res;
@@ -120,33 +152,12 @@ export class PersonnelRequirementAddComponent implements OnInit {
          this._nav.setMesage( 3, this.msg );
       } );
 
-      // zonesServices.getAll().subscribe( zones => {
-      //    this.zones = zones
-      // }, error => {
-      //    this._nav.setMesage( 3, this.msg );
-      // } );
-
-      this.zones.push({
-      idZona : 1,
-      zona : 'string1',
-      indicadorHabilitado : true,
-      auditoriaUsuario : 1,
-      auditoriaFecha : '',
-                      });
-      this.zones.push({
-      idZona : 2,
-      zona : 'string2',
-      indicadorHabilitado : true,
-      auditoriaUsuario : 1,
-      auditoriaFecha : '',
-                      });
-      this.zones.push({
-      idZona : 3,
-      zona : 'string3',
-      indicadorHabilitado : true,
-      auditoriaUsuario : 1,
-      auditoriaFecha : '',
-                      });
+      zonesServices.getAll().subscribe( zones => {
+         this.zones.push({label: 'Seleccione...', value: null});
+         zones.map((z: Zones) => this.zones.push( { label: z.zona, value: z.idZona } ));
+      }, error => {
+         this._nav.setMesage( 3, this.msg );
+      } );
 
    }
 
@@ -172,15 +183,35 @@ export class PersonnelRequirementAddComponent implements OnInit {
    }
 
    onSubmit() {
+      if(this.selectedBoss !== undefined && this.selectedBoss.idTercero !== undefined && this.selectedBoss.idTercero !== null){
+         this.personnelRequirement.idJefe = this.selectedBoss.idTercero;
+         this.personnelRequirement.idCargo = this.bossPosition.idCargo;
+         this.personnelRequirementServices.add(this.personnelRequirement).subscribe(res => {
+            if(res.ok){
+               this._nav.setMesage( 1, this.msg );
+            }
+         }, error => {
+            this._nav.setMesage( 3, this.msg );
+         });
+      } else {
+         this.isbossWrong = true;
+      }
 
    }
 
    bossCaptureId( event: any ) {
-
+      this.personnelRequirement.idJefe = event.idTercero;
+      this.selectedBoss.idTercero = event.idTercero;
+      this.selectedBoss.nombreCompleto = event.nombreCompleto;
+      this.bossPosition.idCargoJefe = event.idCargo;
+      this.bossPosition.cargo = event.cargo;
+      this.isbossWrong = false;
    }
 
    bossSearch( event: any ) {
-
+      this.employeesService.getByNameAndArea(this.employeeBasics.idArea, event.query).subscribe(
+         empl => this.bossList = empl
+      );
    }
 
    emailCleanUp( value: string ) {
@@ -212,6 +243,10 @@ export class PersonnelRequirementAddComponent implements OnInit {
       this.dispFuncionCargo = false;
       this.dispFechaInicioRemplazo = false;
       this.dispFechaFinRemplazo = false;
+      this.personnelRequirement.fechaInicio = null;
+      this.personnelRequirement.fechaFin = null;
+      this.personnelRequirement.nombreCargo = '';
+      this.personnelRequirement.funcionCargo = '';
 
       this.dispCargo = true;
       this.dispZona = true;
@@ -257,6 +292,18 @@ export class PersonnelRequirementAddComponent implements OnInit {
          this.dispNumeroContratar = false;
          this.dispNumeroEntrevistar = false;
       }
+   }
+
+   onSelectBegin( event: any ) {
+      let d = new Date( Date.parse( event ) );
+      this.minDate= new Date();
+      this.minDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
+   }
+
+   onSelectEnd( event: any ) {
+      let d = new Date( Date.parse( event ) );
+      this.maxDate = new Date();
+      this.maxDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
    }
 
    addReferred(){

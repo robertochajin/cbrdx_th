@@ -757,6 +757,8 @@
       "LBL_DATOSRECURSOSADICIONALES":"Datos de recursos adicionales",
       "LBL_RECURSOSCOMPRAS":"Recursos requeridos en compras",
       "LBL_RECURSOSTIC":"Recursos requeridos en DTIC",
+      "LBL_FECHA_INICIO": "Fecha inicio",
+      "LBL_FECHA_FIN": "Fecha fin",
       "LBL_FECHA": "Fecha",
       "LBL_ESTADO": "Estado",
       "BTN_SENDREQUEST": "Enviar solicitud",
