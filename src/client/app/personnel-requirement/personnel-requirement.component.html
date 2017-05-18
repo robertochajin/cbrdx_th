@@ -1,0 +1,30 @@
+<h3 class="first">{{ 'REQUERIMIENTOPERSONAL.LBL_REQUERIMIENTOPERSONAL' | translate}}</h3>
+<div>
+	<div class="row datable-header">
+		<div class="col-md-6 col-xs-12 datatable-header-add">
+			<button type="button" icon="fa-plus" label="{{ 'REQUERIMIENTOPERSONAL.BTN_AGREGARNUEVO' | translate}}"
+			        pButton (click)="add()"></button>
+		</div>
+		<div class="col-md-6 col-xs-12 datatable-header-search">
+			<div class="input-group">
+				<div class="input-group-addon"><i class="fa fa-search"></i></div>
+				<input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate}}" class="form-control">
+			</div>
+		</div>
+	</div>
+	<p-dataTable  emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="personnelRequirements" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+		<p-column field="" header="{{ 'POSITION.LBL_CARGO' | translate}}" [sortable]="true"></p-column>
+		<p-column field="" header="{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAPLAZAS' | translate}}" [sortable]="true"></p-column>
+		<p-column field="" header="{{ 'LBL_FECHA' | translate}}" [sortable]="true"></p-column>
+		<p-column field="" header="{{ 'LBL_ESTADO' | translate}}" [sortable]="true"></p-column>
+		<p-column header="{{ 'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
+			<template let-prequest="rowData" pTemplate="body">
+				<button type="button" icon="fa-eye" class="ui-button-info"
+				        pButton (click)="detail(prequest)"></button>
+				<button type="button" icon="fa-pencil" class="ui-button-success"
+				        pButton (click)="update(prequest)"></button>
+			</template>
+		</p-column>
+	</p-dataTable>
+</div>
+<p-confirmDialog width="400"></p-confirmDialog>

@@ -1,0 +1,325 @@
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate}}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate}}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
+<div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="header">
+				<h3 class="title">{{ 'REQUERIMIENTOPERSONAL.LBL_REQUERIMIENTOPERSONAL' | translate}}</h3>
+			</div>
+		</div>
+	</div>
+	
+	<p-accordion id="accordion">
+		
+		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSSOLICITUD' | translate }}" [selected]="true" [disabled]="false">
+			<fieldset>
+				<div class="row-fluid">
+				<div class="col-md-12">
+					<form name="prForm" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="prForm">
+						<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+							<div class="row">
+								<div class="form-group col-md-6">
+									<label for="petitioner">{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBRESOLICITANTE' | translate }}:</label>
+									<input id="petitioner" type="text" pInputText name="petitioner"
+									       [ngModel]="employeeBasics.nombreCompleto" disabled/>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="petitionerPosition">{{ 'REQUERIMIENTOPERSONAL.LBL_CARGOSOLICITANTE' | translate }}:</label>
+									<input id="petitionerPosition" type="text" pInputText name="petitionerPosition"
+									       [ngModel]="employeeBasics.cargo" disabled/>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col-md-6">
+									<label for="petitionerArea">{{ 'REQUERIMIENTOPERSONAL.LBL_AREA' | translate }}:</label>
+									<input id="petitionerArea" type="text" pInputText name="petitionerArea" disabled [ngModel]="employeeBasics.area"/>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="petitionerEO">{{ 'REQUERIMIENTOPERSONAL.LBL_DIRECIONGENERAL' | translate }}:</label>
+									<input id="petitionerEO" type="text" pInputText name="petitionerEO" disabled
+									       [ngModel]="employeeBasics.direccionGeneral"/>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col-md-6">
+									<label for="petitionerEmail">{{ 'REQUERIMIENTOPERSONAL.LBL_CORREOSOLICITANTE' | translate }}:</label>
+									<input id="petitionerEmail" type="text" pInputText name="petitionerEmail"
+									       [ngModel]="employeeBasics.correoUsuario" disabled/>
+								</div>
+								<div class="form-group col-md-6">
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col-md-12">
+									<label for="tipoSolicitud">* {{'REQUERIMIENTOPERSONAL.LBL_MOTIVOREQUERIMIENTO' | translate }}</label>
+									<p-dropdown id="tipoSolicitud" name="tipoSolicitud"
+									            [options]="requirementTypes" [(ngModel)]="personnelRequirement.idTipoSolicitud"
+									            (onChange)="onChangeTypeMethod($event)"
+									            #ngTipoSolicitud="ngModel" required [autoWidth]="false"></p-dropdown>
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngTipoSolicitud.valid">
+										<i class="fa fa-close"></i>
+										{{'REQUERIMIENTOPERSONAL.LBL_MOTIVOREQUERIMIENTO' | translate }} {{'LBL_REQUERIDO' | translate }}
+									</div>
+								</div>
+							</div>
+							
+							<div class="row" *ngIf="dispNombreCargo">
+								<div class="form-group col-md-12">
+									<label for="positionName">{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBRECARGO' | translate }}:</label>
+									<input id="positionName" type="text" pInputText name="positionName"
+									       [(ngModel)]="personnelRequirement.nombreCargo"
+									       #ngPositionName="ngModel" required/>
+									<div class="ui-message ui-messages-error ui-corner-all"
+									     *ngIf="f.submitted && !ngPositionName.valid">
+										<i class="fa fa-close"></i>
+										{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBRECARGO' | translate }} {{'LBL_REQUERIDO' | translate}}
+									</div>
+								</div>
+							</div>
+							
+							<div class="row" *ngIf="dispFuncionCargo">
+								<div class="form-group col-md-12">
+									<label for="positionFunction">{{ 'REQUERIMIENTOPERSONAL.LBL_FUNCIONCARGO' | translate }}:</label>
+									<textarea id="positionFunction" name="positionFunction" pInputTextarea
+									          [(ngModel)]="personnelRequirement.funcionCargo"
+									          #ngPositionFunction="ngModel" maxlength="500" required></textarea>
+									<div class="ui-message ui-messages-error ui-corner-all"
+									     *ngIf="f.submitted && !ngPositionFunction.valid">
+										<i class="fa fa-close"></i>
+										{{ 'REQUERIMIENTOPERSONAL.LBL_FUNCIONCARGO' | translate }} {{'LBL_REQUERIDO' | translate}}
+									</div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col-md-6" *ngIf="dispZona">
+									<label for="zone">{{ 'REQUERIMIENTOPERSONAL.LBL_ZONA' | translate }}:</label>
+									<p-dropdown id="zone" name="zone" #ngZone="ngModel" [options]="zones" [autoWidth]="false"
+									            (onChange)="onChangeMethod($event)" [(ngModel)]="personnelRequirement.idZona" required></p-dropdown>
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngZone.valid">
+										<i class="fa fa-close"></i>
+										{{ 'REQUERIMIENTOPERSONAL.LBL_ZONA' | translate }} {{'LBL_REQUERIDO' | translate}}
+									</div>
+								</div>
+								<div class="form-group col-md-6" *ngIf="dispCategoria">
+									<label for="category">* {{'REQUERIMIENTOPERSONAL.LBL_CATEGORIA' | translate }}</label>
+									<p-dropdown id="category" name="category" #ngCategory="ngModel" [options]="categoryTypes" [autoWidth]="false"
+									            [(ngModel)]="personnelRequirement.idCategoria"
+									            required></p-dropdown>
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngCategory.valid">
+										<i class="fa fa-close"></i>
+										{{'REQUERIMIENTOPERSONAL.LBL_CATEGORIA' | translate }} {{'LBL_REQUERIDO' | translate }}
+									</div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col-md-6" *ngIf="dispFormaContratacion">
+									<label for="contractForm">* {{'REQUERIMIENTOPERSONAL.LBL_FORMACONTRATACION' | translate }}</label>
+									<p-dropdown id="contractForm" name="contractForm" #ngContractForm="ngModel" [options]="contractForms"
+									            [autoWidth]="false"
+									            (onChange)="onChangeMethod($event)" [(ngModel)]="personnelRequirement.idFormaContratacion"
+									            required></p-dropdown>
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngContractForm.valid">
+										<i class="fa fa-close"></i>
+										{{'REQUERIMIENTOPERSONAL.LBL_FORMACONTRATACION' | translate }} {{'LBL_REQUERIDO' | translate }}
+									</div>
+								</div>
+								<div class="form-group col-md-6" *ngIf="dispTipoContratacion">
+									<label for="contractType">* {{'REQUERIMIENTOPERSONAL.LBL_TIPOCONTRATACION' | translate }}</label>
+									<p-dropdown id="contractType" name="contractType" #ngContractType="ngModel" [options]="contractTypes"
+									            [autoWidth]="false" [(ngModel)]="personnelRequirement.idTipoContratacion"
+									            required></p-dropdown>
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngContractType.valid">
+										<i class="fa fa-close"></i>
+										{{'REQUERIMIENTOPERSONAL.LBL_TIPOCONTRATACION' | translate }} {{'LBL_REQUERIDO' | translate }}
+									</div>
+								</div>
+							</div>
+							
+							<div class="row" *ngIf="dispColaboradorJefeInmediato">
+								<div class="form-group col-md-6">
+									<label for="boss">* {{'REQUERIMIENTOPERSONAL.LBL_NOMBREJEFEINMEDIATO' | translate }}:</label>
+									<p-autoComplete id="boss" name="boss" field="nombreCompleto"
+									                placeholder="{{ 'PH_BUSCAR' | translate}} {{'REQUERIMIENTOPERSONAL.LBL_NOMBREJEFEINMEDIATO' | translate }}"
+									                [(ngModel)]="selectedBoss"
+									                #ngBoss="ngModel" [suggestions]="bossList" required="true"
+									                (completeMethod)="bossSearch($event)" (onSelect)="bossCaptureId($event)">
+									</p-autoComplete>
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngBoss.valid">
+										<i class="fa fa-close"></i> {{'REQUERIMIENTOPERSONAL.LBL_NOMBREJEFEINMEDIATO' | translate }} {{'LBL_REQUERIDO' |
+										translate }}
+									</div>
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!isbossWrong">
+										<i class="fa fa-close"></i> {{'REQUERIMIENTOPERSONAL.LBL_NOMBREJEFEINMEDIATO' | translate }} {{'LBL_REQUERIDO' |
+										translate }}
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="bossPosition">{{ 'REQUERIMIENTOPERSONAL.LBL_CARGOJEFEINMEDIATO' | translate }}:</label>
+									<input id="bossPosition" type="text" pInputText name="bossPosition"
+									       [(ngModel)]="bossPosition"
+									       #ngBossPosition="ngModel" disabled/>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col-md-6" *ngIf="dispNumeroContratar">
+									<label for="vacancyQuantity">{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR' | translate }}:</label>
+									<input id="vacancyQuantity" type="number" pInputText name="vacancyQuantity"
+									       [(ngModel)]="personnelRequirement.cantidadVacantes" min="1"
+									       #ngVQuantity="ngModel" required (keyup)="inputVacancyCleanUp($event.target.value)"
+									/>
+									<div class="ui-message ui-messages-error ui-corner-all"
+									     *ngIf="f.submitted && !ngVQuantity.valid">
+										<i class="fa fa-close"></i>
+										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR' | translate }} {{'LBL_REQUERIDO' | translate}}
+									</div>
+								</div>
+								<div class="form-group col-md-6" *ngIf="dispNumeroEntrevistar">
+									<label for="interviewQuantity">{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }}:</label>
+									<input id="interviewQuantity" type="number" pInputText name="interviewQuantity"
+									       [(ngModel)]="personnelRequirement.cantidadConvocados"
+									       #ngIQuantity="ngModel" required (keyup)="inputInterviewCleanUp($event.target.value)"/>
+									<div class="ui-message ui-messages-error ui-corner-all"
+									     *ngIf="f.submitted && !ngIQuantity.valid">
+										<i class="fa fa-close"></i>
+										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }} {{'LBL_REQUERIDO' | translate}}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row form-footer-buttons">
+							<div class="form-group col-md-12">
+								<a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+								<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+								        pButton></button>
+							
+							</div>
+						</div>
+					
+					</form>
+				</div>
+			</div>
+			</fieldset>
+		</p-accordionTab>
+		
+		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSREFERIDO' | translate }}" [selected]="false"
+		                [disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)">
+			<div>
+				<div class="row-fluid">
+					<div class="col-md-12">
+						<form name="referredForm" (ngSubmit)="rf.valid && onSubmitReferred()" #rf="ngForm" novalidate id="referredForm">
+							<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+								<div class="row">
+									<div class="form-group col-md-12">
+										<label for="referedName">{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBREREFERIDO' | translate }}:</label>
+										<input id="referedName" type="text" pInputText name="referedName"
+										       [(ngModel)]="requirementReferral.nombre"
+										       #ngReferedName="ngModel" required/>
+										<div class="ui-message ui-messages-error ui-corner-all"
+										     *ngIf="rf.submitted && !ngReferedName.valid">
+											<i class="fa fa-close"></i>
+											{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBREREFERIDO' | translate }} {{'LBL_REQUERIDO' | translate}}
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-12">
+										<label for="telefonoCelular">{{'REQUERIMIENTOPERSONAL.LBL_TELEFONOREFERIDO' | translate }}</label>
+										<p-inputMask id="telefonoCelular" name="telefonoCelular" #telefonoCelular="ngModel"
+										             [(ngModel)]="requirementReferral.telefono" required
+										             mask="?(999) 999-9999" placeholder="(999) 999-9999"
+										></p-inputMask>
+										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="rf.submitted && !telefonoCelular.valid">
+											<i class="fa fa-close"></i>
+											{{'REQUERIMIENTOPERSONAL.LBL_TELEFONOREFERIDO' | translate }} {{'LBL_REQUERIDO' | translate }}
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-12">
+										<label for="mailReferred">{{ 'REQUERIMIENTOPERSONAL.LBL_CORREOREFERIDO' | translate }}:</label>
+										<input id="mailReferred" type="text" pInputText name="mailReferred"
+										       [(ngModel)]="requirementReferral.correoElectronico"
+										       #ngMailReferred="ngModel" required
+										       pattern="[a-z0-9]+([-._]?[a-z0-9]+)+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"
+										       (keyup)="emailCleanUp($event.target.value)"
+										/>
+										<div class="ui-message ui-messages-error ui-corner-all"
+										     *ngIf="f.submitted && !ngMailReferred.valid">
+											<i class="fa fa-close"></i>
+											{{ 'REQUERIMIENTOPERSONAL.LBL_CORREOREFERIDO' | translate }} {{'LBL_REQUERIDO' | translate}}
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="row form-footer-buttons">
+								<div class="form-group col-md-12">
+									<a (click)="cancelReferred()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+									<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+									        pButton></button>
+								
+								</div>
+							</div>
+						
+						</form>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="row datable-header">
+					<div class="col-md-6 col-xs-12 datatable-header-add">
+						<button type="button" icon="fa-plus" label="{{ 'REQUERIMIENTOPERSONAL.BTN_AGREGARNUEVO' | translate}}"
+						        pButton (click)="addReferred()"></button>
+					</div>
+					<div class="col-md-6 col-xs-12 datatable-header-search">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="fa fa-search"></i></div>
+							<input #rfgb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate}}" class="form-control">
+						</div>
+					</div>
+				</div>
+				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="requirementReferrals" [paginator]="true" [rows]="10"
+				             [responsive]="true" [globalFilter]="rfgb">
+					<p-column field="" header="{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBREREFERIDO' | translate}}" [sortable]="true"></p-column>
+					<p-column field="" header="{{ 'REQUERIMIENTOPERSONAL.LBL_TELEFONOREFERIDO' | translate}}" [sortable]="true"></p-column>
+					<p-column field="" header="{{ 'REQUERIMIENTOPERSONAL.LBL_CORREOREFERIDO' | translate}}" [sortable]="true"></p-column>
+					<p-column field="" header="{{ 'REQUERIMIENTOPERSONAL.LBL_FECHAREFERENCIA' | translate}}" [sortable]="true"></p-column>
+					<p-column header="{{ 'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
+						<template let-referred="rowData" pTemplate="body">
+							<button type="button" icon="fa-eye" class="ui-button-info"
+							        pButton (click)="detail(referred)"></button>
+							<button type="button" icon="fa-pencil" class="ui-button-success"
+							        pButton (click)="update(referred)"></button>
+						</template>
+					</p-column>
+				</p-dataTable>
+			</div>
+		</p-accordionTab>
+		
+		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSOSCOMPRAS' | translate }}" [selected]="false"
+		                [disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)">
+		</p-accordionTab>
+		
+		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSOSTIC' | translate }}" [selected]="false"
+		                [disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)">
+		</p-accordionTab>
+		
+	</p-accordion>
+		
+	<div class="row form-footer-buttons">
+		<div class="form-group col-md-12">
+			<button icon="fa-arrrow btn-success" label="{{'REQUERIMIENTOPERSONAL.BTN_SENDREQUEST' | translate }}" type="button"
+			        (click)="sendRequest()" pButton [disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)"></button>
+		</div>
+	</div>
+</div>

@@ -247,6 +247,9 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
       this.breadcrumbService.addFriendlyNameForRoute( '/ocupaciones', 'Ocupaciones' );
       this.breadcrumbService.addFriendlyNameForRoute( '/actividadeconomica', 'Actividades Económicas' );
 
+      this.breadcrumbService.addFriendlyNameForRoute( '/personnel-requirement', 'Requerimiento de personal' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/personnel-requirement/add', 'Agregando requerimiento de personal' );
+
       this.breadcrumbService.addFriendlyNameForRoute( '/vacancies', 'Gestión de Vacantes' );
       this.breadcrumbService.addFriendlyNameForRoute( '/vacancies/update', 'Cambio de Estado' );
       this.breadcrumbService.hideRouteRegex( '^/vacancies/update/[0-9]*' );
