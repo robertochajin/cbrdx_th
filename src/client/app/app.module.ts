@@ -66,8 +66,10 @@ import { MenuManagerModule } from './menuManager/menuManager.module';
 //  Auth JWT module
 import { AuthModule } from './shared/auth.module';
 //  BreadCrumb
-//  import {Ng2BreadcrumbModule,BreadcrumbService} from 'ng2-breadcrumb/ng2-breadcrumb';
 import { BreadcrumbModule, BreadcrumbService } from './shared/breadcrumb/breadcrumb';
+
+// Vacantes
+import { VacanciesModule } from './vacancies/vacancies.module';
 
 // CarsModule,
 @NgModule( {
@@ -123,7 +125,11 @@ import { BreadcrumbModule, BreadcrumbService } from './shared/breadcrumb/breadcr
                  RisksModule,
                  MenuManagerModule,
                  CompanyAssetsModule,
+<<<<<<< HEAD
+                 VacanciesModule
+=======
                  AssignmentProfessionalModule
+>>>>>>> cbrdx_th_stable_master
               ],
 
               declarations: [ AppComponent ],
