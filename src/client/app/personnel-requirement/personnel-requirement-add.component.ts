@@ -49,6 +49,15 @@ export class PersonnelRequirementAddComponent implements OnInit {
    selectedBoss: Employee = new Employee();
    isbossWrong: boolean;
    bossPosition: Positions = new Positions();
+   employeeBasics: any = {
+      idTercero: '',
+      nombreCompleto: '',
+      cargo: '',
+      area: '',
+      direccionGeneral: '',
+      correoTercero: '',
+      correoUsuario: ''
+   };
 
    // variables de display
    public dispNombreCargo = false;
@@ -63,6 +72,7 @@ export class PersonnelRequirementAddComponent implements OnInit {
    public dispNumeroEntrevistar = false;
    public dispFechaInicioRemplazo = false;
    public dispFechaFinRemplazo = false;
+   private listRT: ListaItem[] = [];
 
    constructor( private personnelRequirementServices: PersonnelRequirementServices,
       private router: Router,
@@ -77,6 +87,7 @@ export class PersonnelRequirementAddComponent implements OnInit {
       private confirmationService: ConfirmationService ) {
 
       listaService.getMasterDetails( 'ListasTiposSolicitudes' ).subscribe( res => {
+         this.listRT = res;
          this.requirementTypes.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => this.requirementTypes.push( { label: s.nombre, value: s.idLista } ) );
       }, error => {
@@ -102,18 +113,40 @@ export class PersonnelRequirementAddComponent implements OnInit {
          this._nav.setMesage( 3, this.msg );
       } );
 
-      // listaService.getMasterDetails( 'LISTAFORMACONTRATACION' ).subscribe( res => {
-      //    this.contractForms.push( { label: 'Seleccione', value: null } );
-      //    res.map( ( s: ListaItem ) => this.contractForms.push( { label: s.nombre, value: s.idLista } ) );
-      // }, error => {
-      //    this._nav.setMesage( 3, this.msg );
-      // } );
+      listaService.getMasterDetails( 'ListasFormasContrataciones' ).subscribe( res => {
+         this.contractForms.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => this.contractForms.push( { label: s.nombre, value: s.idLista } ) );
+      }, error => {
+         this._nav.setMesage( 3, this.msg );
+      } );
 
       // zonesServices.getAll().subscribe( zones => {
       //    this.zones = zones
       // }, error => {
       //    this._nav.setMesage( 3, this.msg );
       // } );
+
+      this.zones.push({
+      idZona : 1,
+      zona : 'string1',
+      indicadorHabilitado : true,
+      auditoriaUsuario : 1,
+      auditoriaFecha : '',
+                      });
+      this.zones.push({
+      idZona : 2,
+      zona : 'string2',
+      indicadorHabilitado : true,
+      auditoriaUsuario : 1,
+      auditoriaFecha : '',
+                      });
+      this.zones.push({
+      idZona : 3,
+      zona : 'string3',
+      indicadorHabilitado : true,
+      auditoriaUsuario : 1,
+      auditoriaFecha : '',
+                      });
 
    }
 
@@ -124,12 +157,13 @@ export class PersonnelRequirementAddComponent implements OnInit {
          this.tokendecoded = this.jwtHelper.decodeToken( token );
          this.usuariosService.viewUser( this.tokendecoded.usuario.idUsuario ).subscribe( u => {
             this.user = u;
-            this.employeesService.getInfoPositionEmployee( this.user.idTercero ).subscribe( e => {
-               this.employee = e;
-            } );
-            // this.positionsService.getEnabledByEmployee( this.user.idTercero ).subscribe( p => {
-            //    this.position = p;
-            // } );
+            if ( this.user.idTercero ) {
+               this.employeesService.getInfoPositionEmployee( this.user.idTercero ).subscribe( e => {
+                  if ( e !== undefined ) {
+                     this.employeeBasics = e;
+                  }
+               } );
+            }
          } );
 
       } else {
@@ -171,6 +205,9 @@ export class PersonnelRequirementAddComponent implements OnInit {
 
    onChangeTypeMethod( event: any ) {
       let code = '';
+      let item = this.listRT.find(rt =>  rt.idLista === this.personnelRequirement.idTipoSolicitud);
+      code = item.codigo;
+
       this.dispNombreCargo = false;
       this.dispFuncionCargo = false;
       this.dispFechaInicioRemplazo = false;
@@ -211,6 +248,14 @@ export class PersonnelRequirementAddComponent implements OnInit {
       } else if ( code === 'RDP' || code === 'PLNCRR' ) {
       } else if ( code === 'APLNT' || code === 'CRGNVAREA' ) {
       } else {
+         this.dispCargo = false;
+         this.dispZona = false;
+         this.dispCategoria = false;
+         this.dispFormaContratacion = false;
+         this.dispTipoContratacion = false;
+         this.dispColaboradorJefeInmediato = false;
+         this.dispNumeroContratar = false;
+         this.dispNumeroEntrevistar = false;
       }
    }
 

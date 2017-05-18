@@ -15,7 +15,7 @@
 	
 	<p-accordion id="accordion">
 		
-		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSSOLICITUD' | translate }}" [selected]="false" [disabled]="false">
+		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSSOLICITUD' | translate }}" [selected]="true" [disabled]="false">
 			<fieldset>
 				<div class="row-fluid">
 				<div class="col-md-12">
@@ -25,23 +25,24 @@
 								<div class="form-group col-md-6">
 									<label for="petitioner">{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBRESOLICITANTE' | translate }}:</label>
 									<input id="petitioner" type="text" pInputText name="petitioner"
-									       [(ngModel)]="employee.nombreCompleto" disabled/>
+									       [ngModel]="employeeBasics.nombreCompleto" disabled/>
 								</div>
 								<div class="form-group col-md-6">
 									<label for="petitionerPosition">{{ 'REQUERIMIENTOPERSONAL.LBL_CARGOSOLICITANTE' | translate }}:</label>
 									<input id="petitionerPosition" type="text" pInputText name="petitionerPosition"
-									       [(ngModel)]="position.codigoCargo+' - '+position.cargo" disabled/>
+									       [ngModel]="employeeBasics.cargo" disabled/>
 								</div>
 							</div>
 							
 							<div class="row">
 								<div class="form-group col-md-6">
 									<label for="petitionerArea">{{ 'REQUERIMIENTOPERSONAL.LBL_AREA' | translate }}:</label>
-									<input id="petitionerArea" type="text" pInputText name="petitionerArea" disabled/>
+									<input id="petitionerArea" type="text" pInputText name="petitionerArea" disabled [ngModel]="employeeBasics.area"/>
 								</div>
 								<div class="form-group col-md-6">
 									<label for="petitionerEO">{{ 'REQUERIMIENTOPERSONAL.LBL_DIRECIONGENERAL' | translate }}:</label>
-									<input id="petitionerEO" type="text" pInputText name="petitionerEO" disabled/>
+									<input id="petitionerEO" type="text" pInputText name="petitionerEO" disabled
+									       [ngModel]="employeeBasics.direccionGeneral"/>
 								</div>
 							</div>
 							
@@ -49,7 +50,7 @@
 								<div class="form-group col-md-6">
 									<label for="petitionerEmail">{{ 'REQUERIMIENTOPERSONAL.LBL_CORREOSOLICITANTE' | translate }}:</label>
 									<input id="petitionerEmail" type="text" pInputText name="petitionerEmail"
-									       [(ngModel)]="user.correoElectronico" disabled/>
+									       [ngModel]="employeeBasics.correoUsuario" disabled/>
 								</div>
 								<div class="form-group col-md-6">
 								</div>
@@ -69,7 +70,7 @@
 								</div>
 							</div>
 							
-							<div class="row">
+							<div class="row" *ngIf="dispNombreCargo">
 								<div class="form-group col-md-12">
 									<label for="positionName">{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBRECARGO' | translate }}:</label>
 									<input id="positionName" type="text" pInputText name="positionName"
@@ -83,7 +84,7 @@
 								</div>
 							</div>
 							
-							<div class="row">
+							<div class="row" *ngIf="dispFuncionCargo">
 								<div class="form-group col-md-12">
 									<label for="positionFunction">{{ 'REQUERIMIENTOPERSONAL.LBL_FUNCIONCARGO' | translate }}:</label>
 									<textarea id="positionFunction" name="positionFunction" pInputTextarea
@@ -98,7 +99,7 @@
 							</div>
 							
 							<div class="row">
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-6" *ngIf="dispZona">
 									<label for="zone">{{ 'REQUERIMIENTOPERSONAL.LBL_ZONA' | translate }}:</label>
 									<p-dropdown id="zone" name="zone" #ngZone="ngModel" [options]="zones" [autoWidth]="false"
 									            (onChange)="onChangeMethod($event)" [(ngModel)]="personnelRequirement.idZona" required></p-dropdown>
@@ -107,7 +108,7 @@
 										{{ 'REQUERIMIENTOPERSONAL.LBL_ZONA' | translate }} {{'LBL_REQUERIDO' | translate}}
 									</div>
 								</div>
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-6" *ngIf="dispCategoria">
 									<label for="category">* {{'REQUERIMIENTOPERSONAL.LBL_CATEGORIA' | translate }}</label>
 									<p-dropdown id="category" name="category" #ngCategory="ngModel" [options]="categoryTypes" [autoWidth]="false"
 									            [(ngModel)]="personnelRequirement.idCategoria"
@@ -120,7 +121,7 @@
 							</div>
 							
 							<div class="row">
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-6" *ngIf="dispFormaContratacion">
 									<label for="contractForm">* {{'REQUERIMIENTOPERSONAL.LBL_FORMACONTRATACION' | translate }}</label>
 									<p-dropdown id="contractForm" name="contractForm" #ngContractForm="ngModel" [options]="contractForms"
 									            [autoWidth]="false"
@@ -131,7 +132,7 @@
 										{{'REQUERIMIENTOPERSONAL.LBL_FORMACONTRATACION' | translate }} {{'LBL_REQUERIDO' | translate }}
 									</div>
 								</div>
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-6" *ngIf="dispTipoContratacion">
 									<label for="contractType">* {{'REQUERIMIENTOPERSONAL.LBL_TIPOCONTRATACION' | translate }}</label>
 									<p-dropdown id="contractType" name="contractType" #ngContractType="ngModel" [options]="contractTypes"
 									            [autoWidth]="false" [(ngModel)]="personnelRequirement.idTipoContratacion"
@@ -143,7 +144,7 @@
 								</div>
 							</div>
 							
-							<div class="row">
+							<div class="row" *ngIf="dispColaboradorJefeInmediato">
 								<div class="form-group col-md-6">
 									<label for="boss">* {{'REQUERIMIENTOPERSONAL.LBL_NOMBREJEFEINMEDIATO' | translate }}:</label>
 									<p-autoComplete id="boss" name="boss" field="nombreCompleto"
@@ -170,7 +171,7 @@
 							</div>
 							
 							<div class="row">
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-6" *ngIf="dispNumeroContratar">
 									<label for="vacancyQuantity">{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR' | translate }}:</label>
 									<input id="vacancyQuantity" type="number" pInputText name="vacancyQuantity"
 									       [(ngModel)]="personnelRequirement.cantidadVacantes" min="1"
@@ -182,7 +183,7 @@
 										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR' | translate }} {{'LBL_REQUERIDO' | translate}}
 									</div>
 								</div>
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-6" *ngIf="dispNumeroEntrevistar">
 									<label for="interviewQuantity">{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }}:</label>
 									<input id="interviewQuantity" type="number" pInputText name="interviewQuantity"
 									       [(ngModel)]="personnelRequirement.cantidadConvocados"
@@ -210,7 +211,8 @@
 			</fieldset>
 		</p-accordionTab>
 		
-		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSREFERIDO' | translate }}" [selected]="false" [disabled]="true">
+		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSREFERIDO' | translate }}" [selected]="false"
+		                [disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)">
 			<div>
 				<div class="row-fluid">
 					<div class="col-md-12">
@@ -304,10 +306,12 @@
 			</div>
 		</p-accordionTab>
 		
-		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSOSCOMPRAS' | translate }}" [selected]="false" [disabled]="true">
+		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSOSCOMPRAS' | translate }}" [selected]="false"
+		                [disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)">
 		</p-accordionTab>
 		
-		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSOSTIC' | translate }}" [selected]="false" [disabled]="true">
+		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSOSTIC' | translate }}" [selected]="false"
+		                [disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)">
 		</p-accordionTab>
 		
 	</p-accordion>
@@ -315,7 +319,7 @@
 	<div class="row form-footer-buttons">
 		<div class="form-group col-md-12">
 			<button icon="fa-arrrow btn-success" label="{{'REQUERIMIENTOPERSONAL.BTN_SENDREQUEST' | translate }}" type="button"
-			        (click)="sendRequest()" pButton></button>
+			        (click)="sendRequest()" pButton [disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)"></button>
 		</div>
 	</div>
 </div>

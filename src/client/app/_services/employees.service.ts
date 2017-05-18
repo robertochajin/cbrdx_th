@@ -50,7 +50,13 @@ export class EmployeesService {
    }
 
    getInfoPositionEmployee(id: number) {
-      return this.authHttp.get( this.serviceURL + 'terceros/tercerosCargosAreasFisicas/' + id ).map( ( res: Response ) => res.json());
+      return this.authHttp.get( this.serviceURL + 'terceros/tercerosCargosAreasFisica/' + id ).map( ( res: Response ) => {
+         if(res.text() !== ''){
+            return res.json();
+         } else {
+            return undefined;
+         }
+      });
    }
 
    getNacionalidad( id: number ) {
