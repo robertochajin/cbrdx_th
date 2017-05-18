@@ -13,6 +13,8 @@ export class OrganizationalStructurePositions {
    public cargo: string;
    public salario: number;
    public ocupados: number;
+   public estructuraOrganizacional: string;
+   public estructuraFisica: string;
 
    constructor() {
       this.indicadorHabilitado = true;

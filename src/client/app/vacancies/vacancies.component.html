@@ -1,0 +1,172 @@
+<h3 class="first">{{ 'VACANCIES.LBL_VACANCYMANAGER' | translate }}</h3>
+<p-tabView>
+	<p-tabPanel header="{{ 'VACANCIES.LBL_REQUESTS' | translate}}">
+		<form class="form-horizontal" novalidate #f="ngForm" (ngSubmit)="false" id="formulario1" name="formulario1">
+			<div class="row datable-header">
+				<div class="col-md-6 col-xs-12 datatable-header-add">
+					<div class="form-group">
+						<label for="motivo" class="control-label col-sm-3">{{ 'VACANCIES.LBL_REASON' | translate }}</label>
+						<div class=" col-sm-9">
+							<p-dropdown id="motivo" [options]="listTipoSolicitud" [style]="{'width':'100%'}"
+							            (onChange)="dt.filter($event.value,'tipoSolicitud','startsWith')"
+							></p-dropdown>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="estado" class="control-label col-sm-3">{{ 'VACANCIES.LBL_STATE' | translate }}</label>
+						<div class=" col-sm-9">
+							<p-dropdown id="estado" [options]="listEstados" [style]="{'width':'100%'}"
+							            (onChange)="dt.filter($event.value,'estado','startsWith')"
+							></p-dropdown>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="autorizacion" class="control-label col-sm-3">{{ 'VACANCIES.LBL_AUTHORIZATION' | translate }}</label>
+						<div class=" col-sm-3">
+							<p-dropdown id="autorizacion" [options]="listAutotizacion"
+							            (onChange)="dt.filter($event.value,'autorizacion','startsWith')"
+							></p-dropdown>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-xs-12 datatable-header-search">
+					<div class="form-group">
+						<label class="control-label col-sm-3 col-md-3">{{ 'VACANCIES.LBL_DATEFROM' | translate }} </label>
+						<div class="col-sm-5 col-md-5">
+							<p-calendar [locale]="es" [showIcon]="true"
+							            id="fInicio" name="fInicio"
+							            dateFormat="yy'-'mm'-'dd" [maxDate]="today"
+							            readonlyInput="true" placeholder='Desde' dataType="date" #fechaI="ngModel"
+							            [(ngModel)]="fechaInicio"  (onSelect)="changeDate();"
+							></p-calendar>
+						</div>
+						<div class="pull-right col-md-1">
+							<div *ngIf="fechaInicio !== undefined && fechaInicio !== null && fechaInicio !== ''" class="col-sm-1 col-md-1">
+								<button pButton type="button" class="ui-button-danger "
+								        (click)="clearDate()"
+								        icon="fa-close"></button>
+							</div>
+						</div>
+					</div>
+					<div class="form-group" *ngIf="fechaInicio !== undefined && fechaInicio != null && fechaInicio !== ''">
+						<label class="control-label col-sm-3 col-md-3">{{ 'VACANCIES.LBL_DATETO' | translate }}</label>
+						<div class="col-sm-5 col-md-5">
+							<p-calendar [locale]="es" [showIcon]="true"
+							            id="fFinal" name="fFinal"
+							            dateFormat="yy'-'mm'-'dd" [maxDate]="today" [minDate]="fechaInicio"
+							            readonlyInput="true" placeholder='Hasta' dataType="date"
+							            [(ngModel)]="fechaFin"  (onSelect)="changeDate();"
+							></p-calendar>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="row datable-header">
+			<div class="col-md-6 col-xs-12 datatable-header-add">
+			</div>
+			<div class="col-md-6 col-xs-12 datatable-header-search">
+				<div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-search"></i></div>
+					<input #gb type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
+				</div>
+			</div>
+		</div>
+		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" sortField="fechaSolicitud" [sortOrder]="-1" [value]="vacancies"
+		             [paginator]="true" [rows]="10" [responsive]="true"
+		             [globalFilter]="gb" #dt>
+			<p-column field="cargo" header="{{ 'VACANCIES.LBL_VACANCY' | translate }}" [sortable]="true"></p-column>
+			<p-column field="fechaSolicitud" header="{{ 'VACANCIES.LBL_DATE' | translate }}" [sortable]="true"></p-column>
+			<p-column field="estructuraOrganizacional" header="{{ 'VACANCIES.LBL_AREA' | translate }} " [sortable]="true"></p-column>
+			<p-column field="estructuraFisica" header="{{ 'VACANCIES.LBL_OFFICE' | translate }} " [sortable]="true"></p-column>
+			<p-column field="tipoSolicitud" header="{{ 'VACANCIES.LBL_REASON' | translate }}" [sortable]="true"></p-column>
+			<p-column field="autorizacion" header="{{ 'VACANCIES.LBL_AUTHORIZATION' | translate }}"
+			          [sortable]="true" styleClass="datatable-col-center"></p-column>
+			<p-column field="estado" header="{{ 'VACANCIES.LBL_STATE' | translate }}" [sortable]="true"></p-column>
+			<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+				<template let-vacancy="rowData" pTemplate="body">
+					<!--<button type="button" icon="fa-eye" class="ui-button-info"
+					        pButton (click)="detail(vacancy)"></button>-->
+					<button type="button" icon="fa-pencil" class="ui-button-success"
+					        pButton (click)="update(vacancy)"></button>
+				</template>
+			</p-column>
+		</p-dataTable>
+	</p-tabPanel>
+	<p-tabPanel header="{{ 'VACANCIES.LBL_VACANCYBYDEPARTMENT' | translate}}">
+		<form class="form-horizontal" novalidate>
+			<div class="row datable-header">
+				<div class="col-md-6 col-xs-12 datatable-header-add">
+					<div class="form-group">
+						<label for="area" class="control-label col-sm-3">{{ 'PLANTACOLABORADORES.LBL_AREA' | translate }}</label>
+						<div class=" col-sm-9">
+							<p-dropdown id="area" [options]="listArea" [style]="{'width':'100%'}"
+							            (onChange)="vp.filter($event.value,'estructuraOrganizacional','startsWith')"
+							></p-dropdown>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="oficina" class="control-label col-sm-3">{{ 'PLANTACOLABORADORES.LBL_ESTRUCTFISICA' | translate }}</label>
+						<div class=" col-sm-9">
+							<p-dropdown id="oficina" [options]="listOficina" [style]="{'width':'100%'}"
+							            (onChange)="vp.filter($event.value,'estructuraFisica','startsWith')"
+							></p-dropdown>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="cargo" class="control-label col-sm-3">{{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}</label>
+						<div class=" col-sm-9">
+							<p-dropdown id="cargo" [options]="listCargo" [style]="{'width':'100%'}"
+							            (onChange)="vp.filter($event.value,'cargo','startsWith')"
+							></p-dropdown>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="row datable-header">
+			<div class="col-md-6 col-xs-12 datatable-header-add">
+			</div>
+			<div class="col-md-6 col-xs-12 datatable-header-search">
+				<i class="fa fa-search"></i>
+				<input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}">
+			</div>
+		</div>
+		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listPositions"
+		             [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb" #vp>
+			<p-column field="estructuraOrganizacional" header="{{ 'PLANTACOLABORADORES.LBL_AREA' | translate }}" [sortable]="true"></p-column>
+			<p-column field="estructuraFisica" header="{{ 'PLANTACOLABORADORES.LBL_ESTRUCTFISICA' | translate }}" [sortable]="true"></p-column>
+			<p-column field="cargo" header="{{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}" [sortable]="true"></p-column>
+			<p-column header="Salario" [sortable]="true">
+				<template let-osp="rowData" pTemplate="body">
+					{{(osp.salario).toLocaleString()}}
+				</template>
+			</p-column>
+			<p-column field="plazas" header="{{ 'PLANTACOLABORADORES.LBL_NUMEROPLAZAS' | translate }}" [sortable]="true"></p-column>
+			<p-column field="ocupados" header="{{ 'PLANTACOLABORADORES.LBL_OCUPADOS' | translate }}" [sortable]="true"></p-column>
+			<p-column header="{{ 'PLANTACOLABORADORES.LBL_VACANTES' | translate }}" [sortable]="true">
+				<template let-osp="rowData" pTemplate="body">
+					{{osp.plazas-osp.ocupados}}
+				</template>
+			</p-column>
+		</p-dataTable>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-4">
+						<strong>{{ 'PLANTACOLABORADORES.LBL_NUMEROPLAZAS' | translate }}:</strong>
+						{{countPlazas}}
+					</div>
+					<div class="col-md-4">
+						<strong>{{ 'PLANTACOLABORADORES.LBL_OCUPADOS' | translate }}:</strong>
+						{{countOcupados}}
+					</div>
+					<div class="col-md-4">
+						<strong>{{ 'PLANTACOLABORADORES.LBL_VACANTES' | translate }}:</strong>
+						{{countPlazas - countOcupados}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</p-tabPanel>
+</p-tabView>
