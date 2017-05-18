@@ -5,8 +5,8 @@ export class EmployeesClinicalData {
    idTerceroDatoClinico: number;
    idTercero: number;
    idDiagnostico: number;
-   fechaInicio: string;
-   fechaFin: string;
+   fechaInicio: Date;
+   fechaFin: Date;
    indicadorHabilitado: boolean;
    auditoriaUsuario: number;
    auditoriaFecha: string;
@@ -17,8 +17,8 @@ export class EmployeesClinicalData {
 
    constructor() {
       this.indicadorHabilitado = true;
-      this.fechaInicio= '';
-      this.fechaFin= '';
+      this.fechaInicio = null;
+      this.fechaFin = null;
       this.idDiagnostico = null;
    }
 }

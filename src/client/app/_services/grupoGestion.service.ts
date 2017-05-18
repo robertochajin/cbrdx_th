@@ -2,14 +2,22 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { GruposGestion } from '../_models/gruposGestion';
 import 'rxjs/add/operator/toPromise';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class GruposGestionService {
 
    private serviceURL = '<%= SVC_TH_URL %>/api/gruposGestion/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    listGruposGestion() {
@@ -21,6 +29,7 @@ export class GruposGestionService {
    }
 
    addGruposGestion( g: GruposGestion ): Promise<GruposGestion> {
+      g.auditoriaUsuario = this.idUsuario;
       if ( g.fechaInicio !== null ) {
          g.fechaInicio.setHours( 23 );
          g.fechaFin.setHours( 23 );
@@ -30,6 +39,7 @@ export class GruposGestionService {
    };
 
    updateGruposGestion( g: GruposGestion ): Promise<any> {
+      g.auditoriaUsuario = this.idUsuario;
       if ( g.fechaInicio !== null ) {
          g.fechaInicio.setHours( 23 );
          g.fechaFin.setHours( 23 );

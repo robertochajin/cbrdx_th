@@ -80,9 +80,8 @@
               <label for="ingreso">{{'EMPLOYEES.LBL_INGRESO' | translate}} </label>
               <p-calendar id="ingreso" name="ingreso"  [showIcon]="true"
                           [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true"
-                          [maxDate]="maxDate"
-                          dataType="date" (onSelect)="onSelectBegin($event)" #ingreso="ngModel" required="true"
-                          [(ngModel)]="fechaIngresa"></p-calendar>
+                          [maxDate]="maxDate" dataType="date" #ingreso="ngModel" required="true" dateFormat="yy'-'mm'-'dd"
+                          [(ngModel)]="nfstudy.fechaIngresa" (onSelect)="onSelectBegin($event)"></p-calendar>
               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ingreso.valid">
                 {{'EMPLOYEES.LBL_INGRESO' | translate}} {{'LBL_REQUERIDO' | translate}}
               </div>
@@ -91,9 +90,9 @@
               <label for="finalizacion">{{'EMPLOYEES.LBL_FINALIZACION' | translate}}</label>
               <p-calendar id="finalizacion" name="finalizacion"  [showIcon]="true"
                           [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true"
-                          [minDate]="minDate" [maxDate]="maxDateFinal"
-                          dataType="date" (onSelect)="onSelectEnd($event)" #finalizacion="ngModel" [required]="indicadorTerminacion.value"
-                          [(ngModel)]="fechaTermina"></p-calendar>
+                          [minDate]="minDate" [maxDate]="maxDateFinal" dateFormat="yy'-'mm'-'dd"
+                          dataType="date" #finalizacion="ngModel" [required]="indicadorTerminacion.value"
+                          [(ngModel)]="nfstudy.fechaTermina" (onSelect)="onSelectEnd($event)"></p-calendar>
               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !finalizacion.valid">
                 {{'EMPLOYEES.LBL_FINALIZACION' | translate}} {{'LBL_REQUERIDO' | translate}}
               </div>

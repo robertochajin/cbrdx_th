@@ -3,10 +3,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UsuariosService } from '../_services/usuarios.service';
 import { Usuario } from '../_models/usuario';
 import 'rxjs/add/operator/switchMap';
-import { Tercero } from '../_models/tercero';
 import { VUsuarioRol } from '../_models/vUsuarioRol';
 import { VUsuarioGrupoGestion } from '../_models/vUsuarioGrupoGestion';
-import { TercerosService } from '../_services/terceros.service';
 import { VHistoricoUsuario } from '../_models/vHistoricoUsuario';
 import { EmployeesService } from '../_services/employees.service';
 import { LocationService } from '../_services/employee-location.service';
@@ -39,9 +37,9 @@ export class UsuarioDetailComponent {
          this.updateRolesLists();
          this.updateHistoric();
          this.updateGroupLists();
-         tercerosService.get(this.usuario.idTercero).subscribe( res => {
+         tercerosService.get( this.usuario.idTercero ).subscribe( res => {
             this.tercero = res;
-            this.locationService.getAllByEmployee(this.usuario.idTercero).subscribe(locations => this.locations = locations );
+            this.locationService.getAllResiden( this.usuario.idTercero ).subscribe( locations => this.locations = locations );
          } );
       } );
 

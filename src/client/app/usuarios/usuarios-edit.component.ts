@@ -19,6 +19,8 @@ import { Employee } from '../_models/employees';
 import { EmployeesService } from '../_services/employees.service';
 import { LocationService } from '../_services/employee-location.service';
 import { Localizaciones } from '../_models/localizaciones';
+import { Message } from 'primeng/primeng';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -65,12 +67,15 @@ export class UsuariosEditComponent {
    historico: VHistoricoUsuario[] = [];
    private locations: Localizaciones[] = [];
 
+   msgs: Message[] = [];
+
    constructor( private usuariosService: UsuariosService,
       private rolesService: RolesService,
       private gruposGestionService: GruposGestionService,
       private tercerosService: EmployeesService,
       private listasService: ListaService,
       private locationService: LocationService,
+      private _nav: NavService,
       private router: Router,
       private route: ActivatedRoute ) {
       route.params.switchMap( ( params: Params ) => usuariosService.viewUser( +params[ 'id' ] ) )
@@ -82,9 +87,9 @@ export class UsuariosEditComponent {
          usuariosService.listUsers().subscribe( res => {
             this.usuarios = res.filter( t => t.idUsuario !== this.usuario.idUsuario );
          } );
-         tercerosService.get(this.usuario.idTercero).subscribe( res => {
+         tercerosService.get( this.usuario.idTercero ).subscribe( res => {
             this.tercero = res;
-            this.locationService.getAllByEmployee(this.usuario.idTercero).subscribe(locations => this.locations = locations );
+            this.locationService.getAllResiden( this.usuario.idTercero ).subscribe( locations => this.locations = locations );
          } );
       } );
    }
@@ -106,6 +111,8 @@ export class UsuariosEditComponent {
             this.updateHistoric();
             this.displayUpdateDialog = false;
          } );
+         // 1: add 2: update 3: error
+         this._nav.setMesage( 2, this.msgs );
       } );
    }
 
@@ -220,7 +227,7 @@ export class UsuariosEditComponent {
       this.usuario.usuarioSistema = value.toLowerCase().replace( ' ', '' ).replace( 'ñ', 'n' ).trim();
    }
 
-   editEmployee(idTercero: number){
+   editEmployee( idTercero: number ) {
       this.router.navigate( [ 'employees/update/' + idTercero ] );
    }
 

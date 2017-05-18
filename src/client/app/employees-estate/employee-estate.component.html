@@ -16,7 +16,7 @@
   </div>
 
   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="employeesEstate" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-    <p-column field="tipoVivienda" header="Tipo Vivienda" [sortable]="true"></p-column>
+    <p-column field="tipoVivienda" header="Tipo" [sortable]="true"></p-column>
     <p-column field="claseVivienda" header="La Vivienda es? " [sortable]="true"></p-column>
     <p-column field="tipoConstruccionVivienda" header="Tipo Construcción" [sortable]="true"></p-column>
     <p-column field="anioConstruccion" header="Año Construcción" [sortable]="true"></p-column>

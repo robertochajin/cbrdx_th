@@ -139,6 +139,9 @@ import { WidgetsComponent } from './widgets/widgets.component';
 import { MenuManagerComponent } from './menuManager/menuManager.component';
 import { UserSessionComponent } from './usuarios/userSession.component';
 
+// asignación a profesional
+import { AssignmentProfessionalComponent } from './assignment-professional/assignment-professional-component';
+
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
@@ -157,8 +160,14 @@ const routes = [
    // Información familiar de employees
    { path: 'employees/detail/:tercero/family-information', component: FamilyInformationComponent, canActivate: [ AuthGuard ] },
    { path: 'employees/detail/:tercero/family-information/add', component: FamilyInformationAddComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:tercero/family-information/update/:id', component: FamilyInformationUpdateComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:tercero/family-information/detail/:id', component: FamilyInformationDetailComponent, canActivate: [ AuthGuard ] },
+   {
+      path: 'employees/detail/:tercero/family-information/update/:id', component: FamilyInformationUpdateComponent,
+      canActivate: [ AuthGuard ]
+   },
+   {
+      path: 'employees/detail/:tercero/family-information/detail/:id', component: FamilyInformationDetailComponent,
+      canActivate: [ AuthGuard ]
+   },
 
    // employees-location
    { path: 'employees/detail/:tercero/location', component: LocationComponent, canActivate: [ AuthGuard ] },
@@ -177,7 +186,6 @@ const routes = [
    { path: 'employees/detail/:tercero/vehicle/add', component: EmployeesVehicleAddComponent, canActivate: [ AuthGuard ] },
    { path: 'employees/detail/:tercero/vehicle/update/:id', component: EmployeesVehicleUpdateComponent, canActivate: [ AuthGuard ] },
 
-
    // Información de formacion academica
    { path: 'employees/detail/:tercero/formal-studies', component: FormalStudiesComponent, canActivate: [ AuthGuard ] },
    { path: 'employees/detail/:tercero/formal-studies/add', component: FormalStudiesAddComponent, canActivate: [ AuthGuard ] },
@@ -186,8 +194,12 @@ const routes = [
 
    { path: 'employees/detail/:tercero/no-formal-studies', component: NoFormalStudiesComponent, canActivate: [ AuthGuard ] },
    { path: 'employees/detail/:tercero/no-formal-studies/add', component: NoFormalStudiesAddComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:tercero/no-formal-studies/detail/:id', component: NoFormalStudiesDetailComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:tercero/no-formal-studies/update/:id', component: NoFormalStudiesUpdateComponent, canActivate: [ AuthGuard ] },
+   {
+      path: 'employees/detail/:tercero/no-formal-studies/detail/:id', component: NoFormalStudiesDetailComponent, canActivate: [ AuthGuard ]
+   },
+   {
+      path: 'employees/detail/:tercero/no-formal-studies/update/:id', component: NoFormalStudiesUpdateComponent, canActivate: [ AuthGuard ]
+   },
 
    // Experiencia laboral
 
@@ -198,10 +210,6 @@ const routes = [
 
    //  employees additional data
    { path: 'employees-additional-data/:id', component: EmployeesAdditionalDataComponent, canActivate: [ AuthGuard ] },
-
-
-
-
 
    // Login
    { path: 'login', component: LoginComponent },
@@ -320,6 +328,9 @@ const routes = [
 
    // Administracion
    { path: 'menus', component: MenuManagerComponent, canActivate: [ AuthGuard ] },
+
+   // asignación a profesional
+   { path: 'assignment-professional', component: AssignmentProfessionalComponent, canActivate: [ AuthGuard ] },
 
 ];
 

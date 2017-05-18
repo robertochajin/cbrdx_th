@@ -3,12 +3,13 @@ export class Rol {
    codigoRol: string;
    rol: string;
    descripcion: string;
-   fechaInicio: string;
-   fechaFin: string ;
+   fechaInicio: Date;
+   fechaFin: Date;
    indicadorHabilitado: boolean = true;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
-   constructor(){
+
+   constructor() {
       this.fechaInicio = null;
       this.fechaFin = null;
       this.descripcion = '';

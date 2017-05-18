@@ -39,10 +39,7 @@ export class LocationComponent implements OnInit {
                                            header: 'Corfirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
-                                              console.log( f );
-
                                               f.indicadorHabilitado = false;
-
                                               this.locateService.update( f ).subscribe( res => {
                                                  this.locationService.get( f.idLocalizacion ).subscribe( tl => {
                                                     this.terceroLocalizacion = tl;
@@ -58,14 +55,14 @@ export class LocationComponent implements OnInit {
    }
 
    add() {
-      this.router.navigate( [ 'employees/detail/'+this.colaborador.idTercero+'/location/add/' ] );
+      this.router.navigate( [ 'employees/detail/' + this.colaborador.idTercero + '/location/add/' ] );
    }
 
    detail( l: any ) {
-      this.router.navigate( [ 'employees/detail/'+this.colaborador.idTercero+'/location/detail/' + l.idLocalizacion ] );
+      this.router.navigate( [ 'employees/detail/' + this.colaborador.idTercero + '/location/detail/' + l.idLocalizacion ] );
    }
 
    update( l: any ) {
-      this.router.navigate( [ 'employees/detail/'+this.colaborador.idTercero+'/location/update/' + l.idLocalizacion  ] );
+      this.router.navigate( [ 'employees/detail/' + this.colaborador.idTercero + '/location/update/' + l.idLocalizacion ] );
    }
 }

@@ -46,7 +46,8 @@ export class AuthenticationService {
                                                                                 correoElectronico: mail,
                                                                                 usuarioSistema: user
                                                                              } ), { headers: this.headers } ).toPromise().then( res => {
-         if ( res ) {
+
+         if ( res.json() ) {
             return true;
          } else {
             return false;

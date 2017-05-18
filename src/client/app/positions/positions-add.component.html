@@ -1,8 +1,7 @@
-<p-messages [value]="msgs"></p-messages>
 <div class="row">
    <div class="col-md-12">
       <p-accordion id="accordion">
-         <p-accordionTab header="Identificación del cargo" [selected]="true">
+         <p-accordionTab header="{{ 'POSITION.LBL_IDENTIFICACION' | translate }}" [selected]="true">
             <fieldset>
                <div *ngIf="position">
                   <div class="row-fluid">
@@ -11,7 +10,7 @@
                            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                               <div class="row">
                                  <div class="form-group col-md-3">
-                                    <label for="codigo">* Código </label>
+                                    <label for="codigo">* {{ 'POSITION.LBL_CODIGO' | translate }} </label>
                                     <input type="text" pInputText id="codigo" name="codigo"
                                            [(ngModel)]="position.codigoCargo" #codigo="ngModel" (keyup)="inputCleanUp($event.target.value)"
                                            (paste)="inputCleanUp($event.target.value)"
@@ -19,11 +18,11 @@
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !codigo.valid">
                                        <i class="fa fa-close"></i>
-                                       Código es requerido
+                                       {{ 'POSITION.LBL_CODIGO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
                                     </div>
                                  </div>
                                  <div class="form-group col-md-9">
-                                    <label for="nombre">* Nombre</label>
+                                    <label for="nombre">* {{ 'POSITION.LBL_NOMBRE' | translate }}</label>
                                     <input type="text" pInputText id="nombre" name="nombre"
                                            [(ngModel)]="position.cargo" #nombre="ngModel"
                                            (keyup) = "capitalizeNombre()"
@@ -31,13 +30,13 @@
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !nombre.valid">
                                        <i class="fa fa-close"></i>
-                                       Nombre es requerido
+                                       {{ 'POSITION.LBL_NOMBRE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
                                     </div>
                                  </div>
                               </div>
                               <div class="row">
                                  <div class="form-group col-md-6">
-                                    <label for="idEstructuraArea">* Area</label>
+                                    <label for="idEstructuraArea">* {{ 'POSITION.LBL_AREA' | translate }}</label>
                                     <p-dropdown id="idEstructuraArea" name="idEstructuraArea" required="true"
                                                 [options]="areaTypes" [autoWidth]="false"
                                                 [(ngModel)]="position.idEstructuraArea"
@@ -46,12 +45,12 @@
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !idEstructuraArea.valid">
                                        <i class="fa fa-close"></i>
-                                          Área es requerido
+                                          {{ 'POSITION.LBL_AREA' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 
                                     </div>
                                  </div>
                                  <div class="form-group col-md-6">
-                                    <label for="personaACargoDir">* Personas a cargo Directas</label>
+                                    <label for="personaACargoDir">* {{ 'POSITION.LBL_PERSONASDIRECTAS' | translate }}</label>
                                     <input type="text" pInputText id="personaACargoDir" name="personaACargoDir" type="text"
                                            [(ngModel)]="position.personaACargoDir" #personaACargoDir="ngModel" required (keyup)="inputNumber()"
                                            (paste)="inputNumber()"
@@ -59,13 +58,13 @@
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !personaACargoDir.valid">
                                        <i class="fa fa-close"></i>
-                                       Personas a cargo es requerido
+                                       {{ 'POSITION.LBL_PERSONASDIRECTAS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
                                     </div>
                                  </div>
                               </div>
                               <div class="row">
                                  <div class="form-group col-md-6">
-                                    <label for="idCargoJefe">Cargo que depende</label>
+                                    <label for="idCargoJefe">{{ 'POSITION.LBL_CARGODEPENDE' | translate }}</label>
                                     <p-dropdown id="idCargoJefe" name="idCargoJefe"
                                                 [options]="bossPositionTypes" [autoWidth]="false"
                                                 [(ngModel)]="position.idCargoJefe"
@@ -78,32 +77,32 @@
                                     </div>-->
                                  </div>
                                  <div class="form-group col-md-6">
-                                    <label for="personaACargoInd">* Personas a cargo Indirectas</label>
+                                    <label for="personaACargoInd">*{{ 'POSITION.LBL_PERSONASINDIRECTAS' | translate }}</label>
                                     <input type="text" pInputText id="personaACargoInd" name="personaACargoInd" required
                                            [(ngModel)]="position.personaACargoInd" #personaACargoInd="ngModel" type="text"
                                            (keyup)="inputNumber()" (paste)="inputNumber()"   />
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !personaACargoInd.valid">
                                        <i class="fa fa-close"></i>
-                                       Personas a cargo es requerido
+                                       {{ 'POSITION.LBL_PERSONASINDIRECTAS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
                                     </div>
                                  </div>
                               </div>
                               <div class="row">
                                  <div class=" col-sm-12">
-                                    <label for="mision">* Misión del cargo</label>
+                                    <label for="mision">* {{ 'POSITION.LBL_MISION' | translate }}</label>
                                     <textarea pInputTextarea id="mision" name="mision"
                                               [(ngModel)]="position.mision" #mision="ngModel" maxlength="500"
                                               [required]="true"></textarea>
                                     <div *ngIf="f0.submitted && !mision.valid"
                                          class="ui-message ui-messages-error ui-corner-all">
-                                       Misión del cargo es requerido
+                                       {{ 'POSITION.LBL_MISION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
                                     </div>
                                  </div>
                               </div>
                               <div class="row" *ngIf="position.paso == 16">
                                  <div class="form-group col-md-6">
-                                    <label for="idEstado">Estado</label>
+                                    <label for="idEstado">{{ 'POSITION.LBL_ESTADO' | translate }} </label>
                                     <p-dropdown id="idEstado" name="idEstado"
                                                 [options]="stateTypes" [autoWidth]="false"
                                                 [(ngModel)]="position.idEstado" disabled="true"
@@ -111,7 +110,7 @@
                                     ></p-dropdown>
                                  </div>
                                  <div class="form-group col-md-6">
-                                    <label for="indicador" class="control-label col-sm-3">Habilitado</label>
+                                    <label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate }} </label>
                                     <div class=" col-sm-9">
                                        <p-checkbox binary="true" id="indicador" name="indicador"
                                                    [(ngModel)]="position.indicadorHabilitado" disabled="true"
@@ -122,7 +121,7 @@
                            </div>
                            <div class="row form-footer-buttons">
                               <div class="form-group col-md-12">
-                                 <button icon="fa-arrow-right" label="Siguiente" type="submit"
+                                 <button icon="fa-arrow-right" label="{{ 'BTN_SIGUIENTE' | translate }}" type="submit"
                                          pButton></button>
                               </div>
                            </div>

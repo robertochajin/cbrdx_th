@@ -154,6 +154,8 @@ export class LocationAddComponent implements OnInit {
                   this._nav.setTab( 4 );
                   this.location.back();
                }
+               // 1: add 2: update 3: error
+               this._nav.setMesage(1,this.msgs);
             } );
          } );
       } else {

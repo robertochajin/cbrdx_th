@@ -4,6 +4,7 @@ import { RolesService } from '../_services/roles.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ConfirmationService, Message } from 'primeng/primeng';
 import * as moment from 'moment/moment';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -27,6 +28,7 @@ export class RolesUpdateComponent implements OnInit {
    constructor( private rolesService: RolesService,
       private router: Router,
       private route: ActivatedRoute,
+      private _nav: NavService,
       private confirmationService: ConfirmationService ) {
       rolesService.listRoles().subscribe( res => {
          this.roles = res;
@@ -37,7 +39,7 @@ export class RolesUpdateComponent implements OnInit {
       this.route.params.subscribe( params => {
          this.showMsg = params[ 'msj' ];
          if ( this.showMsg === '1' ) {
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            this._nav.setMesage( 1, this.msgs );
          }
       } );
 
@@ -45,14 +47,14 @@ export class RolesUpdateComponent implements OnInit {
       .switchMap( ( params: Params ) => this.rolesService.viewRole( +params[ 'id' ] ) )
       .subscribe( rol => {
          this.rol = rol;
-         if ( this.rol.fechaInicio !== null ) {
-            let momInicio: moment.Moment = moment( this.rol.fechaInicio, 'YYYY-MM-DD' );
-            this.fechaInicio = momInicio.format( 'MM/DD/YYYY' );
-         }
-         if ( this.rol.fechaFin !== null ) {
-            let momFin: moment.Moment = moment( this.rol.fechaFin, 'YYYY-MM-DD' );
-            this.fechaFin = momFin.format( 'MM/DD/YYYY' );
-         }
+         // if ( this.rol.fechaInicio !== null ) {
+         //    let momInicio: moment.Moment = moment( this.rol.fechaInicio, 'YYYY-MM-DD' );
+         //    this.fechaInicio = momInicio.format( 'MM/DD/YYYY' );
+         // }
+         // if ( this.rol.fechaFin !== null ) {
+         //    let momFin: moment.Moment = moment( this.rol.fechaFin, 'YYYY-MM-DD' );
+         //    this.fechaFin = momFin.format( 'MM/DD/YYYY' );
+         // }
 
       } );
 
@@ -94,7 +96,7 @@ export class RolesUpdateComponent implements OnInit {
 
    capitalizeCode() {
       let input = this.rol.codigoRol;
-      if ( input !== '' && input !== null && input !== undefined) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.rol.codigoRol = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
       }
    }
@@ -112,28 +114,16 @@ export class RolesUpdateComponent implements OnInit {
 
    capitalizeName() {
       let input = this.rol.rol;
-      if ( input !== '' && input !== null && input !== undefined) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.rol.rol = input.toUpperCase();
       }
    }
 
    onSubmit() {
 
-      if ( this.fechaInicio !== null ) {
-         let momInicio: moment.Moment = moment( this.fechaInicio, 'MM/DD/YYYY' );
-         this.rol.fechaInicio = momInicio.format( 'YYYY-MM-DD' );
-      }
-      if ( this.fechaFin !== null ) {
-         let momFin: moment.Moment = moment( this.fechaFin, 'MM/DD/YYYY' );
-         this.rol.fechaFin = momFin.format( 'YYYY-MM-DD' );
-      }
       this.rolesService.updateRole( this.rol ).then( () => {
          this.msgs = [];
-         this.msgs.push( {
-                            severity: 'info',
-                            summary: 'Exito',
-                            detail: 'El rol ha sido actualizado con exito'
-                         } );
+         this._nav.setMesage( 2, this.msgs );
       } );
 
    }

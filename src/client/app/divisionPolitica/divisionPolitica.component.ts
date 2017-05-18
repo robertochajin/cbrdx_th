@@ -244,7 +244,7 @@ export class DivisionPoliticaComponent implements OnInit {
 
    save() {
       if ( this.politicalDivision.idDivisionPolitica === null ||
-           this.politicalDivision.idDivisionPolitica === 0||
+           this.politicalDivision.idDivisionPolitica === 0 ||
            this.politicalDivision.idDivisionPolitica === undefined ) {
          this.guardado = true;
          this.divisionPoliticaService.addDivisionPolitica( this.politicalDivision ).then( data => {
@@ -583,7 +583,7 @@ export class DivisionPoliticaComponent implements OnInit {
    capitalizeCodigo() {
       let input = this.politicalDivision.codigoDivisionPolitica;
       if ( input !== '' && input !== null && input !== undefined) {
-         this.politicalDivision.codigoDivisionPolitica = input.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
+         this.politicalDivision.codigoDivisionPolitica = input.toUpperCase().replace( /[^A-Z0-9]/gi, '' ).trim();
       }
    }
 
