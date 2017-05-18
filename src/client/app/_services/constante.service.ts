@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { VConstante } from '../_models/vConstante';
+import { VConstante } from '../_models/vconstante';
 import { Constante } from '../_models/constante';
 import 'rxjs/add/operator/toPromise';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
