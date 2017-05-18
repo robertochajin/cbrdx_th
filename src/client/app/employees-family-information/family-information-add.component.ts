@@ -124,8 +124,7 @@ export class FamilyInformationAddComponent implements OnInit {
                   this.terceroFamiliar.segundoNombre = this.capitalizeSave( this.familyInformation.segundoNombre );
                   this.terceroFamiliar.primerApellido = this.capitalizeSave( this.familyInformation.primerApellido );
                   this.terceroFamiliar.segundoApellido = this.capitalizeSave( this.familyInformation.segundoApellido );
-                  let mom: moment.Moment = moment( this.familyInformation.fechaNacimiento, 'MM/DD/YYYY' );
-                  this.terceroFamiliar.fechaNacimiento = mom.format( 'YYYY-MM-DD' );
+                  this.terceroFamiliar.fechaNacimiento = this.familyInformation.fechaNacimiento;
                   this.terceroFamiliar.indicadorHabilitado = true;
                   this.terceroFamiliar.idTipoTercero = this.idTipoTercero;
 
@@ -173,10 +172,6 @@ export class FamilyInformationAddComponent implements OnInit {
                                         } );
    }
 
-   onSelectMethod( event: any ) {
-      let d = new Date( Date.parse( event ) );
-      this.familyInformation.fechaNacimiento = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-   }
 
    onChangeMethod( event: any ) {
 
@@ -194,23 +189,9 @@ export class FamilyInformationAddComponent implements OnInit {
       } else if ( this.selectedDocument === 2 ) {
          this.range = `${prev18Year}:${year}`;
          this.maxDate.setFullYear( year );
-         // this.minDate.setFullYear(last18Year);
       } else {
          this.maxDate.setFullYear( year );
          this.range = `${prev18Year}:${year}`;
-      }
-
-      if ( (this.familyInformation.fechaNacimiento) === null ||
-           (this.familyInformation.fechaNacimiento) === ''  ||
-           (this.familyInformation.fechaNacimiento) === undefined ) {
-         this.familyInformation.fechaNacimiento = `${this.maxDate.getMonth() + 1}/${this.maxDate.getDate()}/${this.maxDate.getFullYear()}`;
-      } else {
-         let timestamp2 = new Date( this.maxDate ).getTime();
-         let timestamp1 = new Date( this.familyInformation.fechaNacimiento ).getTime();
-         let timeDiff = Math.round( timestamp2 - timestamp1 );
-         if ( timeDiff < 0 ) {
-            this.familyInformation.fechaNacimiento = '';
-         }
       }
 
    }

@@ -7,14 +7,14 @@
 </p-confirmDialog>
 <div *ngIf="employee">
    <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-10 col-md-offset-1">
          <div class="header">
             <h3 class="title">{{header}}</h3>
          </div>
       </div>
    </div>
    <div class="row-fluid">
-      <div class="col-md-12">
+      <div class="col-md-10 col-md-offset-1">
          <form name="formulario" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                <div class="row">
@@ -65,9 +65,9 @@
                      <label for="NGexpeditionDate">{{'EMPLOYEES.LBL_FECHAEXPEDICION' | translate}}</label>
                      <p-calendar id="NGexpeditionDate" name="NGexpeditionDate" [showIcon]="true"
                                  [maxDate]="maxDateDocumento" [monthNavigator]="true" [yearNavigator]="true"
-                                 [yearRange]="range" [locale]="es" readonlyInput="readonlyInput"
+                                 [yearRange]="range" [locale]="es" readonlyInput="readonlyInput" dateFormat="yy'-'mm'-'dd"
                                  dataType="date" #NGexpeditionDate="ngModel" required="true"
-                                 [(ngModel)]="expeditionDate" (onSelect)="onExpeditionDate($event)"
+                                 [(ngModel)]="employee.fechaDocumento" (onSelect)="onExpeditionDate($event)"
                      ></p-calendar>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGexpeditionDate.valid">
@@ -135,11 +135,11 @@
                <div class="row">
                   <div class="form-group col-md-4">
                      <label for="NGbirthDate">{{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate}}</label>
-                     <p-calendar id="NGbirthDate" name="NGbirthDate" [showIcon]="true"
+                     <p-calendar id="NGbirthDate" name="NGbirthDate" [showIcon]="true" dateFormat="yy'-'mm'-'dd"
                                  [maxDate]="maxDate" [monthNavigator]="true" [yearNavigator]="true"
                                  [locale]="es" readonlyInput="readonlyInput" [yearRange]="range"
                                  dataType="date" #NGbirthDate="ngModel" [required]="true"
-                                 [(ngModel)]="birthDate" (onSelect)="onBirthDate($event)"
+                                 [(ngModel)]="employee.fechaNacimiento"
                      ></p-calendar>
                      <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !NGbirthDate.valid">
                         {{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate}} {{'LBL_REQUERIDO' | translate}}
@@ -327,9 +327,9 @@
                   <div class="form-group col-md-3" *ngIf="employee.indicadorVivo == false">
                      <label for="NGdeathDate">{{'EMPLOYEES.LBL_FECHADEFUNCION' | translate}}</label>
                      <p-calendar id="NGdeathDate" name="NGdeathDate" [locale]="es" [showIcon]="true"
-                                 [maxDate]="today"
+                                 [maxDate]="today" dateFormat="yy'-'mm'-'dd"
                                  dataType="date" #NGdeathDate="ngModel" [required]="!employee.indicadorVivo"
-                                 [(ngModel)]="deathDate" (onSelect)="onDeathDate($event)"
+                                 [(ngModel)]="employee.fechaDefuncion" (onSelect)="onDeathDate($event)"
                      ></p-calendar>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !employee.indicadorVivo && !NGdeathDate.valid">

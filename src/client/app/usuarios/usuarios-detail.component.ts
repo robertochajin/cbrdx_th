@@ -39,7 +39,7 @@ export class UsuarioDetailComponent {
          this.updateGroupLists();
          tercerosService.get( this.usuario.idTercero ).subscribe( res => {
             this.tercero = res;
-            this.locationService.getAllByEmployee( this.usuario.idTercero ).subscribe( locations => this.locations = locations );
+            this.locationService.getAllResiden( this.usuario.idTercero ).subscribe( locations => this.locations = locations );
          } );
       } );
 

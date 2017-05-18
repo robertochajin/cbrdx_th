@@ -136,14 +136,14 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
          this.nfstudy.idTercero = this.idTercero;
          this.nfstudy.indicadorHabilitado = true;
 
-         let fi: moment.Moment = moment( this.fechaIngresa, 'MM/DD/YYYY' );
-         this.nfstudy.fechaIngresa = fi.format( 'YYYY-MM-DD' );
-         if ( this.nfstudy.indicadorTerminacion === true ) {
-            let ff: moment.Moment = moment( this.fechaTermina, 'MM/DD/YYYY' );
-            this.nfstudy.fechaTermina = ff.format( 'YYYY-MM-DD' );
-         } else {
-            this.nfstudy.fechaTermina = null;
-         }
+         // let fi: moment.Moment = moment( this.fechaIngresa, 'MM/DD/YYYY' );
+         // this.nfstudy.fechaIngresa = fi.format( 'YYYY-MM-DD' );
+         // if ( this.nfstudy.indicadorTerminacion === true ) {
+         //    let ff: moment.Moment = moment( this.fechaTermina, 'MM/DD/YYYY' );
+         //    this.nfstudy.fechaTermina = ff.format( 'YYYY-MM-DD' );
+         // } else {
+         //    this.nfstudy.fechaTermina = null;
+         // }
          this.academicEducationService.updateNoFormal( this.nfstudy )
          .subscribe( data => {
             // 1:add 2:update 3:error
@@ -171,19 +171,19 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
 
    onSelectBegin( event: any ) {
       let d = new Date( Date.parse( event ) );
-      this.fechaIngresa = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      this.minDate= new Date();
       this.minDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
    }
 
    onSelectEnd( event: any ) {
       let d = new Date( Date.parse( event ) );
-      this.fechaTermina = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      this.maxDate= new Date();
       this.maxDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
    }
 
    updateEnd(): void {
       if ( this.nfstudy.indicadorTerminacion ) {
-         this.nfstudy.fechaTermina = '';
+         this.nfstudy.fechaTermina = null;
       }
    }
 

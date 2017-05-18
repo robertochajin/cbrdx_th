@@ -13,6 +13,7 @@ import { ActividadEconomicaService } from '../_services/actividadEconomica.servi
 import * as moment from 'moment/moment';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -65,6 +66,7 @@ export class EmployeesAddComponent implements OnInit {
       private politicalDivisionService: PoliticalDivisionService,
       private actividadEconomicaService: ActividadEconomicaService,
       private ocupacionesService: OcupacionesService,
+      private _nav: NavService,
       private confirmationService: ConfirmationService ) {
       listaService.getMasterDetails( 'ListasTiposPersonas' ).subscribe( res => {
          this.personTypes.push( { label: 'Seleccione', value: null } );
@@ -218,22 +220,22 @@ export class EmployeesAddComponent implements OnInit {
          this.employee.primerApellido = this.capitalizeSave( this.employee.primerApellido );
          this.employee.segundoApellido = this.capitalizeSave( this.employee.segundoApellido );
 
-         let mom: moment.Moment = moment( this.expeditionDate, 'MM/DD/YYYY' );
-         this.employee.fechaDocumento = mom.format( 'YYYY-MM-DD' );
-         let mom2: moment.Moment = moment( this.birthDate, 'MM/DD/YYYY' );
-         this.employee.fechaNacimiento = mom2.format( 'YYYY-MM-DD' );
-         if ( this.employee.indicadorVivo === false ) {
-            let mom3: moment.Moment = moment( this.deathDate, 'MM/DD/YYYY' );
-            this.employee.fechaDefuncion = mom3.format( 'YYYY-MM-DD' );
-         }
+         // let mom: moment.Moment = moment( this.expeditionDate, 'MM/DD/YYYY' );
+         // this.employee.fechaDocumento = mom.format( 'YYYY-MM-DD' );
+         // let mom2: moment.Moment = moment( this.birthDate, 'MM/DD/YYYY' );
+         // this.employee.fechaNacimiento = mom2.format( 'YYYY-MM-DD' );
+         // if ( this.employee.indicadorVivo === false ) {
+         //    let mom3: moment.Moment = moment( this.deathDate, 'MM/DD/YYYY' );
+         //    this.employee.fechaDefuncion = mom3.format( 'YYYY-MM-DD' );
+         // }
          this.employee.idTipoTercero = this.idTipoTercero;
 
          this.employeesService.add( this.employee )
          .subscribe( data => {
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            this._nav.setMesage( 1, this.msgs );
             this.location.back();
          }, error => {
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            this._nav.setMesage( 3, this.msgs );
          } );
       }
    }
@@ -306,12 +308,12 @@ export class EmployeesAddComponent implements OnInit {
          this.maxDate = dateExpo;
       }
 
-      if ( (this.employee.fechaNacimiento) !== null && (this.employee.fechaNacimiento) !== '' ) {
+      if ( (this.employee.fechaNacimiento) !== null && (this.employee.fechaNacimiento) !== null ) {
          let timestamp2 = new Date( this.maxDate ).getTime();
          let timestamp1 = new Date( this.employee.fechaNacimiento ).getTime();
          let timeDiff = Math.round( timestamp2 - timestamp1 );
          if ( timeDiff < 0 ) {
-            this.employee.fechaNacimiento = '';
+            this.employee.fechaNacimiento = null;
          }
       }
       this.validateDocument();
@@ -328,8 +330,6 @@ export class EmployeesAddComponent implements OnInit {
    }
 
    onExpeditionDate( event: any ) {
-      let d = new Date( Date.parse( event ) );
-      this.expeditionDate = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
       this.updateDate();
    }
 

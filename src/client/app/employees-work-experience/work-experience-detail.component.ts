@@ -19,6 +19,7 @@ export class WorkExperienceDetailComponent implements OnInit {
    private companySectorList: any;
    private companySubSectorList: any;
    private cityList: any;
+   tiempoExperiencia = 0;
 
    constructor( private workExperienceService: WorkExperienceService,
       private route: ActivatedRoute,
@@ -26,16 +27,50 @@ export class WorkExperienceDetailComponent implements OnInit {
    }
 
    ngOnInit(): void {
+      let hoy = new Date();
+      let dias = 0;
+      let meses = 0;
+      let años = 0;
+      let año = '';
+      let mes = '';
+      let dia = '';
       let este$ = this.route.params
       .switchMap( ( params: Params ) => this.workExperienceService.get( +params[ 'id' ] ) );
       este$.subscribe( experience => {
          this.experience = experience;
          if ( this.experience.indicadorActualmente ) {
-            this.experience.tiempoExperiencia = moment( this.experience.fechaIngresa, 'YYYY-MM-DD' ).toNow( true ).toString();
+            this.tiempoExperiencia = moment( hoy, 'YYYY-MM-DD' ).diff( moment( this.experience.fechaIngresa ), 'days' );
+            años = Math.floor( this.tiempoExperiencia / 360 );
+            if ( años > 0 ) {
+               año = años + ' ' + 'Años';
+            }
+            meses = Math.floor((this.tiempoExperiencia - años * 360) / 30);
+            if ( meses > 0 ) {
+               mes = meses + ' ' + 'Meses';
+            }
+            dias = Math.floor(this.tiempoExperiencia - años * 360 - meses * 30);
+            if ( dias > 0 ) {
+               dia = dias + ' ' + 'Días';
+            }
+            this.experience.tiempoExperiencia = año+' '+ mes+' '+ dia;
          } else {
-            this.experience.tiempoExperiencia = moment( this.experience.fechaTermina, 'YYYY-MM-DD' )
-                                                .diff( moment( this.experience.fechaIngresa, 'YYYY-MM-DD' ), 'days' ).toString() + ' Días';
+            this.tiempoExperiencia = moment( this.experience.fechaTermina, 'YYYY-MM-DD' )
+            .diff( moment( this.experience.fechaIngresa, 'YYYY-MM-DD' ), 'days' );
+            años = Math.floor( this.tiempoExperiencia / 360 );
+            if ( años > 0 ) {
+               año = años + ' ' + 'Años';
+            }
+            meses = Math.floor((this.tiempoExperiencia - años * 360) / 30);
+            if ( meses > 0 ) {
+               mes = meses + ' ' + 'Meses';
+            }
+            dias = Math.floor(this.tiempoExperiencia - años * 360 - meses * 30);
+            if ( dias > 0 ) {
+               dia = dias + ' ' + 'Días';
+            }
+            this.experience.tiempoExperiencia = año+' '+ mes+' '+ dia;
          }
+
       } );
    }
 

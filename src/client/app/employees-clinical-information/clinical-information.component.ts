@@ -6,7 +6,6 @@ import { EmployeesClinicalData } from '../_models/employeesClinicalData';
 import { ClinicalInformationService } from '../_services/clinical-information.service';
 import { DiagnosticosCIE } from '../_models/diagnosticosCIE';
 import { DiagnosticCIEServices } from '../_services/diagnosticCIE.service';
-import * as moment from 'moment/moment';
 import { NavService } from '../_services/_nav.service';
 
 @Component( {
@@ -102,8 +101,6 @@ export class ClinicalInformationComponent implements OnInit {
    add() {
       this.ecd = new EmployeesClinicalData();
       this.editing = false;
-      this.tfechaFin = '';
-      this.tfechaInicio = '';
    }
 
    saveDiagnostic() {
@@ -111,26 +108,13 @@ export class ClinicalInformationComponent implements OnInit {
       if ( this.ecd.idDiagnostico === this.ecd.diagnostico.idDiagnosticoCie ) {
          this.ecd.idTercero = this.employee.idTercero;
 
-         let fi: moment.Moment = moment( this.tfechaInicio, 'MM/DD/YYYY' );
-         let ff: moment.Moment;
-         // this.ecd.fechaInicio = fi.format('YYYY-MM-DD');
-         this.ecd.fechaInicio = fi.format( 'YYYY-MM-DD' );
-         if ( this.tfechaFin !== undefined && this.tfechaFin !== '' ) {
-            ff = moment( this.tfechaFin, 'MM/DD/YYYY' );
-            this.ecd.fechaFin = ff.format( 'YYYY-MM-DD' );
-            // this.ecd.fechaFin = ff.format('YYYY-MM-DD');
-         }
 
          if ( this.ecd.idTerceroDatoClinico !== null && this.ecd.idTerceroDatoClinico !== undefined ) {
             this.clinicalInformationService.update( this.ecd ).subscribe( data => {
                if ( data.ok ) {
                   this.ecd.codigo = this.ecd.diagnostico.codigo;
                   this.ecd.descripcion = this.ecd.diagnostico.descripcion;
-                  this.ecd.fechaFin = ff.format( 'YYYY-MM-DD' );
-                  this.ecd.fechaInicio = fi.format( 'YYYY-MM-DD' );
                   this.clinicalInformations.push( this.ecd );
-                  this.tfechaFin = '';
-                  this.tfechaInicio = '';
                   this.ecd = null;
                   this.editing = false;
                }
@@ -143,8 +127,6 @@ export class ClinicalInformationComponent implements OnInit {
                   data.codigo = this.ecd.diagnostico.codigo;
                   data.descripcion = this.ecd.diagnostico.descripcion;
                   this.clinicalInformations.push( data );
-                  this.tfechaFin = '';
-                  this.tfechaInicio = '';
                   this.ecd = null;
                   this.editing = false;
                }
@@ -160,26 +142,18 @@ export class ClinicalInformationComponent implements OnInit {
 
    onSelectInicio( event: any ) {
       let d = new Date( Date.parse( event ) );
-      this.tfechaInicio = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      this.minDateFin= new Date();
       this.minDateFin.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
    }
 
    onSelectFin( event: any ) {
       let d = new Date( Date.parse( event ) );
-      this.tfechaFin = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      this.maxDateInicio= new Date();
       this.maxDateInicio.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
    }
 
    update( f: EmployeesClinicalData ) {
       this.ecdBackUp = f;
-      let fi: moment.Moment = moment( f.fechaInicio, 'YYYY-MM-DD' );
-      this.tfechaInicio = fi.format( 'MM/DD/YYYY' );
-      if ( f.fechaFin !== null && f.fechaFin !== undefined && f.fechaFin !== '' ) {
-         let ff: moment.Moment = moment( f.fechaFin, 'YYYY-MM-DD' );
-         this.tfechaFin = ff.format( 'MM/DD/YYYY' );
-      } else {
-         this.tfechaFin = '';
-      }
       this.ecd = new EmployeesClinicalData();
       this.ecd.diagnostico = {
          idDiagnosticoCie: f.idDiagnostico,
@@ -190,10 +164,12 @@ export class ClinicalInformationComponent implements OnInit {
       this.ecd.idDiagnostico = f.idDiagnostico;
       this.ecd.idTercero = f.idTercero;
       this.ecd.idTerceroDatoClinico = f.idTerceroDatoClinico;
+      this.ecd.fechaFin= f.fechaFin;
+      this.ecd.fechaInicio= f.fechaInicio;
       this.clinicalInformations.splice( this.clinicalInformations.indexOf( f ), 1 );
       this.editing = true;
       this.maxDateFin = new Date();
-      let d = new Date( Date.parse( this.tfechaInicio ) );
+      let d = new Date( f.fechaInicio  );
       this.minDateFin.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
    }
 

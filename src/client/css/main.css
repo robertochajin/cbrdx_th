@@ -1,8 +1,27 @@
 /**
+------------------- ClearFix ---------------------------------------------
+ */
+.clearfix:before,
+.clearfix:after {
+   content: " "; /* 1 */
+   display: table; /* 2 */
+}
+.clearfix:after {
+   clear: both;
+}
+.clearfix {
+   *zoom: 1;
+}
+
+/**
 ------------------------- CSS Globales --------------------------------------
  */
 body{
    height: 100%!important;
+}
+h3{
+   margin-top: 10px;
+   margin-bottom: 10px;
 }
 
 
@@ -36,7 +55,11 @@ body .ui-widget:disabled {
 .ui-dropdown-panel{
    z-index : 800!important;
 }
-
+/** -- tabview Left/Rigth -- */
+.ui-tabview.ui-tabview-right>.ui-tabview-nav,
+.ui-tabview.ui-tabview-left>.ui-tabview-nav{
+   height: auto!important;
+}
 /*
 ----------------- Cambios Theme AdminLTE ---------------------------------
  */
@@ -770,4 +793,29 @@ body .ui-tabview.ui-tabview-top .ui-tabview-nav, body .ui-tabview.ui-tabview-bot
 }
 body .ui-tabview .ui-tabview-panel{
    background-color: #FFF;
+}
+
+.upload-avatar .ui-fileupload-buttonbar{
+   margin-top: 10px;
+   padding: 0!important;
+   border: 0!important;
+   text-align: center!important;
+   background-color: rgba(0,0,0,0)!important;
+}
+
+.upload-avatar .ui-fileupload-content {
+   display: none;
+}
+
+.ui-panel-title {
+   font-weight: 600!important;
+   font-size: 1.2em!important;
+
+}
+
+#infoEmploye .ui-tabview.ui-tabview-right>.ui-tabview-nav{
+   width: 14%!important;
+}
+#infoEmploye .ui-tabview.ui-tabview-right>.ui-tabview-panels{
+   width: 86%!important;
 }
