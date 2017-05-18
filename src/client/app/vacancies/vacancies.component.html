@@ -1,7 +1,7 @@
 <h3 class="first">{{ 'VACANCIES.LBL_VACANCYMANAGER' | translate }}</h3>
 <p-tabView>
 	<p-tabPanel header="{{ 'VACANCIES.LBL_REQUESTS' | translate}}">
-		<form class="form-horizontal" novalidate>
+		<form class="form-horizontal" novalidate #f="ngForm" (ngSubmit)="false" id="formulario1" name="formulario1">
 			<div class="row datable-header">
 				<div class="col-md-6 col-xs-12 datatable-header-add">
 					<div class="form-group">
@@ -15,30 +15,9 @@
 					<div class="form-group">
 						<label for="estado" class="control-label col-sm-3">{{ 'VACANCIES.LBL_STATE' | translate }}</label>
 						<div class=" col-sm-9">
-							<p-dropdown id="estado" [options]="listEstados"[style]="{'width':'100%'}"
+							<p-dropdown id="estado" [options]="listEstados" [style]="{'width':'100%'}"
 							            (onChange)="dt.filter($event.value,'estado','startsWith')"
 							></p-dropdown>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-xs-12 datatable-header-search">
-					<div class="form-group">
-						<label class="control-label col-sm-3">{{ 'VACANCIES.LBL_DATE' | translate }}</label>
-						<div class="col-sm-4">
-							<p-calendar [locale]="es" [showIcon]="true"
-							            dateFormat="yy'-'mm'-'dd" [maxDate]="today"
-							            readonlyInput="true"
-							            placeholder = 'Desde'
-							            
-							></p-calendar>
-						</div>
-						<div class="col-sm-4">
-							<p-calendar [locale]="es" [showIcon]="true"
-							            dateFormat="yy'-'mm'-'dd" [maxDate]="today"
-							            readonlyInput="true"
-							            placeholder = 'Hasta'
-							            
-							></p-calendar>
 						</div>
 					</div>
 					<div class="form-group">
@@ -47,6 +26,37 @@
 							<p-dropdown id="autorizacion" [options]="listAutotizacion"
 							            (onChange)="dt.filter($event.value,'autorizacion','startsWith')"
 							></p-dropdown>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-xs-12 datatable-header-search">
+					<div class="form-group">
+						<label class="control-label col-sm-3 col-md-3">{{ 'VACANCIES.LBL_DATEFROM' | translate }} </label>
+						<div class="col-sm-5 col-md-5">
+							<p-calendar [locale]="es" [showIcon]="true"
+							            id="fInicio" name="fInicio"
+							            dateFormat="yy'-'mm'-'dd" [maxDate]="today"
+							            readonlyInput="true" placeholder='Desde' dataType="date" #fechaI="ngModel"
+							            [(ngModel)]="fechaInicio"  (onSelect)="changeDate();"
+							></p-calendar>
+						</div>
+						<div class="pull-right col-md-1">
+							<div *ngIf="fechaInicio !== undefined && fechaInicio !== null && fechaInicio !== ''" class="col-sm-1 col-md-1">
+								<button pButton type="button" class="ui-button-danger "
+								        (click)="clearDate()"
+								        icon="fa-close"></button>
+							</div>
+						</div>
+					</div>
+					<div class="form-group" *ngIf="fechaInicio !== undefined && fechaInicio != null && fechaInicio !== ''">
+						<label class="control-label col-sm-3 col-md-3">{{ 'VACANCIES.LBL_DATETO' | translate }}</label>
+						<div class="col-sm-5 col-md-5">
+							<p-calendar [locale]="es" [showIcon]="true"
+							            id="fFinal" name="fFinal"
+							            dateFormat="yy'-'mm'-'dd" [maxDate]="today" [minDate]="fechaInicio"
+							            readonlyInput="true" placeholder='Hasta' dataType="date"
+							            [(ngModel)]="fechaFin"  (onSelect)="changeDate();"
+							></p-calendar>
 						</div>
 					</div>
 				</div>
@@ -65,7 +75,7 @@
 		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" sortField="fechaSolicitud" [sortOrder]="-1" [value]="vacancies"
 		             [paginator]="true" [rows]="10" [responsive]="true"
 		             [globalFilter]="gb" #dt>
-			<p-column field="cargo" header="{{ 'VACANCIES.LBL_VACANCY' | translate }}" [sortable]="true" ></p-column>
+			<p-column field="cargo" header="{{ 'VACANCIES.LBL_VACANCY' | translate }}" [sortable]="true"></p-column>
 			<p-column field="fechaSolicitud" header="{{ 'VACANCIES.LBL_DATE' | translate }}" [sortable]="true"></p-column>
 			<p-column field="estructuraOrganizacional" header="{{ 'VACANCIES.LBL_AREA' | translate }} " [sortable]="true"></p-column>
 			<p-column field="estructuraFisica" header="{{ 'VACANCIES.LBL_OFFICE' | translate }} " [sortable]="true"></p-column>
@@ -123,14 +133,15 @@
 			</div>
 		</div>
 		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listPositions"
-		             [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb" #vp >
+		             [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb" #vp>
 			<p-column field="estructuraOrganizacional" header="{{ 'PLANTACOLABORADORES.LBL_AREA' | translate }}" [sortable]="true"></p-column>
 			<p-column field="estructuraFisica" header="{{ 'PLANTACOLABORADORES.LBL_ESTRUCTFISICA' | translate }}" [sortable]="true"></p-column>
 			<p-column field="cargo" header="{{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}" [sortable]="true"></p-column>
 			<p-column header="Salario" [sortable]="true">
 				<template let-osp="rowData" pTemplate="body">
 					{{(osp.salario).toLocaleString()}}
-				</template></p-column>
+				</template>
+			</p-column>
 			<p-column field="plazas" header="{{ 'PLANTACOLABORADORES.LBL_NUMEROPLAZAS' | translate }}" [sortable]="true"></p-column>
 			<p-column field="ocupados" header="{{ 'PLANTACOLABORADORES.LBL_OCUPADOS' | translate }}" [sortable]="true"></p-column>
 			<p-column header="{{ 'PLANTACOLABORADORES.LBL_VACANTES' | translate }}" [sortable]="true">

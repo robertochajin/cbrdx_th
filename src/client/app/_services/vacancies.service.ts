@@ -14,6 +14,10 @@ export class VacanciesService {
    getAll() {
       return this.authHttp.get( this.serviceURL + 'requerimientos' ).map( ( res: Response ) => res.json() as Vacancies[] );
    }
+   getByDate( fInicio: string, fFin: string ) {
+      return this.authHttp.get( this.serviceURL + 'requerimientos/fecha/' + fInicio + '/'  + fFin)
+      .map( ( res: Response ) => res.json() as Vacancies[] );
+   }
    /*getAll() {
       return this.authHttp.get( this.serviceURL + 'vterceros' ).map( ( res: Response ) => res.json() as Vacancies[] );
    }

@@ -770,7 +770,9 @@
       "LBL_OFFICE" : "Oficina",
       "LBL_REASON" : "Motivo",
       "LBL_AUTHORIZATION" : "Autorización",
-      "LBL_STATE" : "Estado"
+      "LBL_STATE" : "Estado",
+      "LBL_DATEFROM" : "Fecha Desde",
+      "LBL_DATETO" : "Fecha Hasta"
    },
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="

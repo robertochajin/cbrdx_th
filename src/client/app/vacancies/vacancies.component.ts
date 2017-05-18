@@ -32,8 +32,8 @@ export class VacanciesComponent implements OnInit {
    listOficina: SelectItem[] = [];
 
    es: any;
-   fechaInicio: string;
-   fechaFin: string;
+   fechaInicio: Date;
+   fechaFin: Date;
    today: Date;
    osPositions: OrganizationalStructurePositions[] = [];
    listPositions: OrganizationalStructurePositions[] = [];
@@ -140,12 +140,31 @@ export class VacanciesComponent implements OnInit {
       let date = today.getDate();
       let month = today.getMonth();
       let year = today.getFullYear();
-
+      this.today = today;
+      this.fechaFin = today;
    }
 
    update( c: Vacancies ) {
       this.router.navigate( [ 'vacancies/update/' + c.idRequerimiento ] );
    }
 
+   clearDate() {
+      this.fechaInicio = null;
+      this.fechaFin = this.today;
+   }
+   changeDate(){
+      let i = new Date( this.fechaInicio  );
+      let f = new Date( this.fechaFin );
+      let fechaInicioEnvio = `${i.getFullYear()}-${i.getMonth() + 1}-${i.getDate()}`;
+      let fechaFinEnvio = `${f.getFullYear()}-${f.getMonth() + 1}-${f.getDate()}`;
+      this.vacanciesService.getByDate(fechaInicioEnvio, fechaFinEnvio).subscribe(
+         vacancies => {
+            this.vacancies = vacancies;
+            this.vacancies.forEach(obj=>{
+               obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No'
+            });
+         }
+      );
+   }
 
 }
