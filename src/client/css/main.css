@@ -819,3 +819,11 @@ body .ui-tabview .ui-tabview-panel{
 #infoEmploye .ui-tabview.ui-tabview-right>.ui-tabview-panels{
    width: 86%!important;
 }
+
+.form-group{
+   margin-bottom: 0px;
+}
+
+.ui-grid-col-2 .ui-grid-col-1{
+   margin-top: 24px;
+}
