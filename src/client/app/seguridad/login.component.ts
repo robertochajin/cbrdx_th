@@ -14,7 +14,7 @@ import { NavService } from '../_services/_nav.service';
             } )
 export class LoginComponent implements OnInit {
    model: any = {
-      password: '7848d99b-d',
+      password: '81bd709d-b',
       username: 'mayerly.gamboa'
    };
    intentos: number = 0;
