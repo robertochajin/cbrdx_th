@@ -3,14 +3,16 @@
     <div class="col-md-6 col-xs-12 datatable-header-add">
         <button type="button" pButton icon="fa-plus" (click)="addUser()" label="{{ 'LBL_NUEVO' | translate }} {{ 'LBL_USUARIOS' | translate }}"></button>
     </div>
-    <div class="col-md-6 col-xs-12 datatable-header-search">
+    <div class="col-md-6 col-xs-12 datatable-header-search"  [ngClass]="{'uniSearch form-group-lg' : !usuariosFull}">
       <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-search"></i></div>
-        <input type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" (keyup)="showData($event.target.value)" class="form-control">
+        <input type="text" pInputText size="40" placeholder="{{ 'USUARIOS.LBL_BUSCARUSUARIO' | translate }}"
+               (keyup)="showData($event.target.value)" class="form-control ">
       </div>
     </div>
 </div>
-<p-dataTable emptyMessage="{{ 'USUARIOS.MSG_NORECORDSFOUNDUSERS' | translate }}"  [value]="usuarios" [paginator]="true" [rows]="10" [responsive]="true" >
+<p-dataTable emptyMessage="{{ 'USUARIOS.MSG_NORECORDSFOUNDUSERS' | translate }}"  [value]="usuarios" [paginator]="true" [rows]="10"
+             [responsive]="true" *ngIf="usuariosFull">
     <p-column field="idUsuario" header="{{ 'LBL_ID' | translate }}" [sortable]="true"></p-column>
     <p-column field="nombre" header="{{ 'LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
     <p-column field="documento" header="{{ 'LBL_NUMERODOCUMENTO' | translate }}" [sortable]="true"></p-column>

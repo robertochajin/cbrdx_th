@@ -135,7 +135,6 @@ import { CompetenciesGroupsComponent } from './competencies-groups/competencies-
 import { OrganizationalStructurePositionsComponent } from './organizationalStructurePositions/organizational-structure-positions.component';
 import { PositionAuthoritiesComponent } from './positions/position-authorities.component';
 import { WidgetsComponent } from './widgets/widgets.component';
-
 // Administracion
 import { MenuManagerComponent } from './menuManager/menuManager.component';
 import { UserSessionComponent } from './usuarios/userSession.component';
@@ -331,6 +330,7 @@ const routes = [
 
 
    //  cargos
+   //  cargos factores de riesgo
    { path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [ AuthGuard ] },
    { path: 'position-absence/:idCargo', component: AbsenceComponent, canActivate: [ AuthGuard ] },
    { path: 'position-activities/:idCargo', component: PositionAuthoritiesComponent, canActivate: [ AuthGuard ] },

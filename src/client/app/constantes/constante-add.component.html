@@ -58,7 +58,7 @@
               <div class=" col-sm-9">
                   <input type="text" pInputText class="form-control" id="descripcion" name="descripcion"
                          #descripcion="ngModel"
-                         [(ngModel)]="constant.descripcion" maxlength="50">
+                         [(ngModel)]="constant.descripcion" maxlength="250">
                   <div *ngIf="f.submitted&&!descripcion.valid"
                        class="alert alert-danger">
                       <div [hidden]="!descripcion.errors.maxlength">{{ 'CONSTANTES.MSG_DESCRIPCION50' | translate}}

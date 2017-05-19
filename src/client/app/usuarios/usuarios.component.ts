@@ -34,10 +34,14 @@ export class UsuariosComponent {
       if ( s.length > 0 ) {
          this.UsuariosService.listVUsers().subscribe(
             usuarios => {
-               this.usuariosFull = true;
                this.usuarios = usuarios.filter( t => t.nombre !== null && t.nombre.toLowerCase()
                .includes( s.toLowerCase() ) || t.usuario !== null && t.usuario.toLowerCase()
                .includes( s.toLowerCase() ) || t.documento !== null && t.documento.includes( s ) );
+               if(this.usuarios.length>0){
+                  this.usuariosFull = true;
+               }else{
+                  this.usuariosFull = false;
+               }
             } );
       } else {
          this.usuarios = [];
