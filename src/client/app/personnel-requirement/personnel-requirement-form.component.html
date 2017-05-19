@@ -224,7 +224,7 @@
 							
 							<div class="row">
 								<div class="form-group col-md-6" *ngIf="dispNumeroContratar">
-									<label for="vacancyQuantity">{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR' | translate }}:</label>
+									<label for="vacancyQuantity">{{nroPlazas}}</label>
 									<input id="vacancyQuantity" type="number" pInputText name="vacancyQuantity"
 									       [(ngModel)]="personnelRequirement.cantidadVacantes" min="1"
 									       #ngVQuantity="ngModel" required (keyup)="inputVacancyCleanUp($event.target.value)"
