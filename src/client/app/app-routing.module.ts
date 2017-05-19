@@ -139,7 +139,6 @@ import { WidgetsComponent } from './widgets/widgets.component';
 import { MenuManagerComponent } from './menuManager/menuManager.component';
 import { UserSessionComponent } from './usuarios/userSession.component';
 import { PersonnelRequirementComponent } from './personnel-requirement/personnel-requirement.component';
-import { PersonnelRequirementAddComponent } from './personnel-requirement/personnel-requirement-add.component';
 import { PersonnelRequirementDetailComponent } from './personnel-requirement/personnel-requirement-detail.component';
 import { PersonnelRequirementEditComponent } from './personnel-requirement/personnel-requirement-edit.component';
 // Vacantes

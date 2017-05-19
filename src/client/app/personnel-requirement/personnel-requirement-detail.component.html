@@ -128,14 +128,43 @@
 			</fieldset>
 		</form>
 	</div>
+	<div class="row datable-header">
+		<div class="col-md-6 col-xs-12 col-md-offset-1 datatable-header-add">
+			<h3>{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSREFERIDO' | translate }}</h3>
+		</div>
+	</div>
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
-			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="employeesEstate" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="requirementReferrals" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
 				<p-column field="nombre" header="{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBREREFERIDO' | translate }}" [sortable]="true"></p-column>
 				<p-column field="telefono" header="{{ 'LBL_TELEFONO' | translate }} " [sortable]="true"></p-column>
 				<p-column field="correoElectronico" header="{{ 'REQUERIMIENTOPERSONAL.LBL_CORREOREFERIDO' | translate }}"
 				          [sortable]="true"></p-column>
 				<p-column field="fechaReferencia" header="{{ 'REQUERIMIENTOPERSONAL.LBL_FECHA' | translate }}" [sortable]="true"></p-column>
+			</p-dataTable>
+		</div>
+	</div>
+	<div class="row datable-header">
+		<div class="col-md-6 col-xs-12 col-md-offset-1 datatable-header-add">
+			<h3>{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSOSCOMPRAS' | translate }}</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="listResourses" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+				<p-column field="compra" header="{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSO' | translate }}" [sortable]="true"></p-column>
+			</p-dataTable>
+		</div>
+	</div>
+	<div class="row datable-header">
+		<div class="col-md-6 col-xs-12 col-md-offset-1 datatable-header-add">
+			<h3>{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSOSTIC' | translate }}</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="listResoursesTics" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+				<p-column field="tic" header="{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSOTICS' | translate }}" [sortable]="true"></p-column>
 			</p-dataTable>
 		</div>
 	</div>
