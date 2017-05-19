@@ -449,11 +449,11 @@ export class PersonnelRequirementEditComponent implements OnInit {
          }, error => {
             let typeMessage = 3; // 1 = Add, 2 = Update, 3 Error, 4 Custom
             this._nav.setMesage( typeMessage, this.msg );
-         }  );
+         } );
       } else {
          this.referralsServices.add( this.requirementReferral ).subscribe( res => {
             if ( res ) {
-               this.requirementReferrals.push(res);
+               this.requirementReferrals.push( res );
                this.editingReferred = false;
                let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
                this._nav.setMesage( typeMessage, this.msg );
@@ -525,10 +525,10 @@ export class PersonnelRequirementEditComponent implements OnInit {
                   this.purchasesId = null;
                   this.listResourses = [];
                   this.listResoursesAll = [];
-                  // idRequerimiento quemado --> 1
-                  this.resoursesRequiredServices.getResoursesByIdRequirement( 1 ).subscribe( rest => {
-                     this.listResourses = rest;
-                  } );
+                  this.resoursesRequiredServices.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento ).subscribe(
+                     rest => {
+                        this.listResourses = rest;
+                     } );
                   this.resoursesRequiredServices.getAll().subscribe( rest => {
                      this.listResoursesAll = rest;
                   } );
@@ -591,8 +591,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
                   this.ticsId = null;
                   this.listResoursesTics = [];
                   this.listResoursesTicsAll = [];
-                  // idRequerimiento quemado --> 1
-                  this.resoursesTicsService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+                  this.resoursesTicsService.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento ).subscribe( rest => {
                      this.listResoursesTics = rest;
                   } );
                   this.resoursesTicsService.getAll().subscribe( rest => {
