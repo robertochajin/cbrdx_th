@@ -168,6 +168,19 @@
 			</p-dataTable>
 		</div>
 	</div>
+	<div class="row datable-header">
+		<div class="col-md-6 col-xs-12 col-md-offset-1 datatable-header-add">
+			<h3>{{ 'REQUERIMIENTOPERSONAL.LBL_CUESTIONARIOS' | translate }}</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="listCuestionarios" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+				<p-column field="cuestionario" header="{{ 'REQUERIMIENTOPERSONAL.LBL_CUESTIONARIO' | translate }}"
+				          [sortable]="true"></p-column>
+			</p-dataTable>
+		</div>
+	</div>
 </div>
 <div class="row form-footer-buttons">
 	<div class="form-group col-md-12">

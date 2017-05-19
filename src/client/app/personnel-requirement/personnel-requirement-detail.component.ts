@@ -16,8 +16,10 @@ import { RequirementReferralsServices } from '../_services/requirement-referrals
 import { RequirementReferral } from '../_models/requirementReferral';
 import { ResoursesRequiredServices } from '../_services/resourcesRequiredPurchases.service';
 import { ResoursesTicsService } from '../_services/resoursesTics.service';
+import { CuestionariosService } from '../_services/cuestionarios.service';
 import { ResourcesRequiredPurchases } from '../_models/resourcesRequiredPurchases';
 import { TicsResourses } from '../_models/ticsResourses';
+import { Cuestionarios } from '../_models/cuestionarios';
 
 class employeeBasicInfo {
    idTercero: number;
@@ -49,6 +51,7 @@ export class PersonnelRequirementDetailComponent {
    requirementReferrals: RequirementReferral[] = [];
    listResourses: ResourcesRequiredPurchases[] = [];
    listResoursesTics: TicsResourses[] = [];
+   listCuestionarios: Cuestionarios[] = [];
    msg: Message;
 
    // variables de display
@@ -75,6 +78,7 @@ export class PersonnelRequirementDetailComponent {
       private location: Location,
       private resoursesRequiredServices: ResoursesRequiredServices,
       private resoursesTicsService: ResoursesTicsService,
+      private cuestionariosService: CuestionariosService,
       private route: ActivatedRoute ) {
 
    }
@@ -102,6 +106,9 @@ export class PersonnelRequirementDetailComponent {
          } );
          this.resoursesTicsService.getResoursesByIdRequirement( data.idRequerimiento ).subscribe( rest => {
             this.listResoursesTics = rest;
+         } );
+         this.cuestionariosService.getResoursesByIdRequirement( data.idRequerimiento ).subscribe( rest => {
+            this.listCuestionarios = rest;
          } );
          this.listaService.getMasterDetails( 'ListasTiposSolicitudes' ).subscribe( res => {
             this.listRT = res;
