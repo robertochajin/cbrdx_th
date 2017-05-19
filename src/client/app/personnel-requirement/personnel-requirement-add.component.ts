@@ -18,7 +18,12 @@ import { ListPositionsService } from '../_services/lists-positions.service';
 import { ZonesServices } from '../_services/zones.service';
 import { Zones } from '../_models/zones';
 import { NavService } from '../_services/_nav.service';
+import { ResoursesRequiredServices } from '../_services/resourcesRequiredPurchases.service';
+import { ResoursesTicsService } from '../_services/resoursesTics.service';
 import { RequirementReferral } from '../_models/requirementReferral';
+import { ResourcesRequiredPurchases } from '../_models/resourcesRequiredPurchases';
+import { TicsResourses } from '../_models/ticsResourses';
+import { TranslateService } from 'ng2-translate';
 
 class employeeBasicInfo {
    idTercero: number;
@@ -26,6 +31,7 @@ class employeeBasicInfo {
    idCargo: number;
    cargo: string;
    idArea: number;
+   idEstructuraFisica: number;
    area: string;
    direccionGeneral: string;
    correoTercero: string;
@@ -61,6 +67,8 @@ export class PersonnelRequirementAddComponent implements OnInit {
    isPositionWrong: boolean;
    es: any;
    private listRT: ListaItem[] = [];
+   creationProccesState : ListaItem;
+   requestedState : ListaItem;
    minDate: Date = null;
    maxDate: Date = null;
    maxDateFinal: Date = null;
@@ -72,6 +80,20 @@ export class PersonnelRequirementAddComponent implements OnInit {
    selectedBoss: employeeBasicInfo = new employeeBasicInfo();
    bossList: employeeBasicInfo[] = [];
 
+   purchasesList: ListaItem[] = [];
+   ticsList: ListaItem[] = [];
+   purchasesId: any;
+   ticsId: any;
+   ticsResourses: TicsResourses = new TicsResourses();
+   resoursesPurchases: ResourcesRequiredPurchases = new ResourcesRequiredPurchases();
+   listResourses: ResourcesRequiredPurchases[]=[];
+   listResoursesAll: ResourcesRequiredPurchases[]=[];
+   listResoursesTics: TicsResourses[]=[];
+   listResoursesTicsAll: TicsResourses[]=[];
+   wrongResourse: boolean = true;
+   wrongResourseTics: boolean = true;
+   guardandoResourses: boolean=false;
+   guardandoResoursesTics: boolean=false;
    // variables de display
    public dispNombreCargo = false;
    public dispFuncionCargo = false;
@@ -85,6 +107,7 @@ export class PersonnelRequirementAddComponent implements OnInit {
    public dispNumeroEntrevistar = false;
    public dispFechaInicioRemplazo = false;
    public dispFechaFinRemplazo = false;
+   public nroPlazas: string;
 
    constructor( private personnelRequirementServices: PersonnelRequirementServices,
       private router: Router,
@@ -94,7 +117,10 @@ export class PersonnelRequirementAddComponent implements OnInit {
       private employeesService: EmployeesService,
       private zonesServices: ZonesServices,
       private positionsService: PositionsService,
+      private resoursesRequiredServices: ResoursesRequiredServices,
+      private resoursesTicsService: ResoursesTicsService,
       private location: Location,
+      private translate: TranslateService,
       private _nav: NavService,
       private confirmationService: ConfirmationService ) {
 
@@ -119,6 +145,10 @@ export class PersonnelRequirementAddComponent implements OnInit {
       this.maxDateFinal = new Date();
       this.maxDateFinal.setMonth( month );
       this.maxDateFinal.setFullYear( year + 10 );
+
+      this.listaService.getMasterDetailsByCode('ListasEstadosRequerimientos', 'PRCREQ').subscribe(x => { this.creationProccesState = x });
+
+      this.listaService.getMasterDetailsByCode('ListasEstadosRequerimientos', 'SOLICITADO').subscribe(x => { this.requestedState = x });
 
       listaService.getMasterDetails( 'ListasTiposSolicitudes' ).subscribe( res => {
          this.listRT = res;
@@ -164,6 +194,20 @@ export class PersonnelRequirementAddComponent implements OnInit {
    }
 
    ngOnInit() {
+      // idRequerimiento quemado --> 1
+      this.resoursesRequiredServices.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+         this.listResourses = rest;
+      } );
+      this.resoursesRequiredServices.getAll().subscribe( rest => {
+         this.listResoursesAll = rest;
+      } );
+      // idRequerimiento quemado --> 1
+      this.resoursesTicsService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+         this.listResoursesTics = rest;
+      } );
+      this.resoursesTicsService.getAll().subscribe( rest => {
+         this.listResoursesTicsAll = rest;
+      } );
       let token = localStorage.getItem( 'token' );
 
       if ( token !== null && token !== undefined ) {
@@ -188,8 +232,14 @@ export class PersonnelRequirementAddComponent implements OnInit {
       if(this.selectedBoss !== undefined && this.selectedBoss.idTercero !== undefined && this.selectedBoss.idTercero !== null){
          this.personnelRequirement.idJefe = this.selectedBoss.idTercero;
          this.personnelRequirement.idCargo = this.selectedPosition.idCargo;
+         this.personnelRequirement.idSolicitante = this.user.idUsuario;
+         this.personnelRequirement.idEstructuraOrganizacional = this.employeeBasics.idArea;
+         this.personnelRequirement.idEstructuraFisica = this.employeeBasics.idEstructuraFisica;
+         this.personnelRequirement.fechaSolicitud = new Date();
+         this.personnelRequirement.idEstado = this.creationProccesState.idLista;
          this.personnelRequirementServices.add(this.personnelRequirement).subscribe(res => {
-            if(res.ok){
+            if(res){
+               this.personnelRequirement.idRequerimiento = res.idRequerimiento;
                this._nav.setMesage( 1, this.msg );
             }
          }, error => {
@@ -232,7 +282,7 @@ export class PersonnelRequirementAddComponent implements OnInit {
    }
 
    emailCleanUp( value: string ) {
-      if (value !== undefined && value !== '' && value !== null){
+      if ( value !== undefined && value !== '' && value !== null ) {
          this.requirementReferral.correoElectronico = value.toLowerCase().replace( ' ', '' ).trim();
       }
    }
@@ -253,8 +303,18 @@ export class PersonnelRequirementAddComponent implements OnInit {
 
    onChangeTypeMethod( event: any ) {
       let code = '';
-      let item = this.listRT.find(rt =>  rt.idLista === this.personnelRequirement.idTipoSolicitud);
+      let item = this.listRT.find( rt => rt.idLista === this.personnelRequirement.idTipoSolicitud );
       code = item.codigo;
+
+      if(code === 'DMNPLNT') {
+         this.translate.get('REQUERIMIENTOPERSONAL.LBL_CANTIDADAPLAZASDISMINUIR').subscribe((res: string) => {
+            this.nroPlazas = res;
+         });
+      } else {
+         this.translate.get('REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR').subscribe((res: string) => {
+            this.nroPlazas = res;
+         });
+      }
 
       this.dispNombreCargo = false;
       this.dispFuncionCargo = false;
@@ -274,7 +334,7 @@ export class PersonnelRequirementAddComponent implements OnInit {
       this.dispNumeroContratar = true;
       this.dispNumeroEntrevistar = true;
 
-      if ( code === 'RMPLZ' ) {
+      if ( code === 'RMPLZ' || code === 'RDP' || code === 'PLNCRR' ) {
          this.dispFechaInicioRemplazo = true;
          this.dispFechaFinRemplazo = true;
       } else if ( code === 'DMNPLNT' ) {
@@ -297,7 +357,6 @@ export class PersonnelRequirementAddComponent implements OnInit {
          this.dispNumeroContratar = false;
          this.dispNumeroEntrevistar = false;
       } else if ( code === 'VCNT' ) {
-      } else if ( code === 'RDP' || code === 'PLNCRR' ) {
       } else if ( code === 'APLNT' || code === 'CRGNVAREA' ) {
       } else {
          this.dispCargo = false;
@@ -331,12 +390,163 @@ export class PersonnelRequirementAddComponent implements OnInit {
 
    }
 
-   cancelReferred(){
+   cancelReferred() {
 
    }
 
-   sendRequest(){
+   sendRequest() {
 
+   }
+
+   captureResourseId( event: any ) {
+      this.resoursesPurchases.idCompra = event.idLista;
+      this.resoursesPurchases.idRequerimiento = 1;
+      this.wrongResourse = false;
+   }
+
+   resourseSearch( event: any ) {
+      this.listaService.getMasterDetailsByWildCard( 'ListasTiposCompras', event.query ).subscribe( rest => {
+         this.purchasesList = rest;
+         this.purchasesList.map( d => d.nombre = d.idLista + ' : ' + d.nombre );
+      } );
+   }
+
+   captureResourseTicsId( event: any ) {
+      this.ticsResourses.idTic = event.idLista;
+      this.ticsResourses.idRequerimiento = 1;
+      this.wrongResourseTics = false;
+   }
+
+   resourseTicsSearch( event: any ) {
+      this.listaService.getMasterDetailsByWildCard( 'ListasTICs', event.query ).subscribe( rest => {
+         this.ticsList = rest;
+         this.ticsList.map( d => d.nombre = d.idLista + ' : ' + d.nombre );
+      } );
+   }
+
+   onSubmit3() {
+      let temp: any;
+      if ( this.resoursesPurchases.idCompra === this.purchasesId.idLista ) {
+         this.guardandoResourses=true;
+         this.resoursesPurchases.idRequerimiento = 1; // idRequerimiento quemado --> 1
+         temp = this.listResoursesAll.find(
+            r => r.idCompra === this.resoursesPurchases.idCompra && r.idRequerimiento === this.resoursesPurchases.idRequerimiento );
+         if ( temp ) {
+            if(!temp.indicadorHabilitado){
+               temp.indicadorHabilitado=true;
+               this.resoursesRequiredServices.update( temp ).subscribe( rest => {
+                  this.guardandoResourses=false;
+                  this.wrongResourse=true;
+                  this.purchasesId=null;
+                  this.listResourses = [];
+                  this.listResoursesAll = [];
+                  // idRequerimiento quemado --> 1
+                  this.resoursesRequiredServices.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+                     this.listResourses = rest;
+                  } );
+                  this.resoursesRequiredServices.getAll().subscribe( rest => {
+                     this.listResoursesAll = rest;
+                  } );
+               } );
+            }else{
+               this.guardandoResourses=false;
+               this.wrongResourse=true;
+               this.purchasesId=null;
+               this._nav.setMesage(0, { severity: 'warn', summary: 'Información', detail: 'No es posible agregar mas de una vez un' +
+                                                                                          ' recurso' });
+            }
+         } else {
+            this.resoursesRequiredServices.add( this.resoursesPurchases ).subscribe( rest => {
+               this.guardandoResourses=false;
+               this.wrongResourse=true;
+               this.purchasesId=null;
+               this.listResourses = [];
+               this.listResoursesAll = [];
+               // idRequerimiento quemado --> 1
+               this.resoursesRequiredServices.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+                  this.listResourses = rest;
+               } );
+               this.resoursesRequiredServices.getAll().subscribe( rest => {
+                  this.listResoursesAll = rest;
+               } );
+            } );
+         }
+      }
+   }
+   delResourses(r: ResourcesRequiredPurchases){
+      r.indicadorHabilitado=false;
+      this.resoursesRequiredServices.update(r).subscribe(res=>{
+         this.listResourses=[];
+         this.listResoursesAll = [];
+         this.resoursesRequiredServices.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+            this.listResourses = rest;
+         } );
+         this.resoursesRequiredServices.getAll().subscribe( rest => {
+            this.listResoursesAll = rest;
+         } );
+      });
+   }
+   onSubmit4() {
+      let temp: any;
+      if ( this.ticsResourses.idTic === this.ticsId.idLista ) {
+         this.guardandoResoursesTics=true;
+         this.ticsResourses.idRequerimiento = 1; // idRequerimiento quemado --> 1
+         temp = this.listResoursesTicsAll.find(
+            r => r.idTic === this.ticsResourses.idTic && r.idRequerimiento === this.ticsResourses.idRequerimiento );
+         if ( temp ) {
+            if(!temp.indicadorHabilitado){
+               temp.indicadorHabilitado=true;
+               this.resoursesTicsService.update( temp ).subscribe( rest => {
+                  this.guardandoResoursesTics=false;
+                  this.wrongResourseTics=true;
+                  this.ticsId=null;
+                  this.listResoursesTics = [];
+                  this.listResoursesTicsAll = [];
+                  // idRequerimiento quemado --> 1
+                  this.resoursesTicsService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+                     this.listResoursesTics = rest;
+                  } );
+                  this.resoursesTicsService.getAll().subscribe( rest => {
+                     this.listResoursesTicsAll = rest;
+                  } );
+               } );
+            }else{
+               this.guardandoResoursesTics=false;
+               this.wrongResourseTics=true;
+               this.ticsId=null;
+               this._nav.setMesage(0, { severity: 'warn', summary: 'Información', detail: 'No es posible agregar mas de una vez un' +
+                                                                                          ' recurso' });
+            }
+         } else {
+            this.resoursesTicsService.add( this.ticsResourses ).subscribe( rest => {
+               this.guardandoResoursesTics=false;
+               this.wrongResourseTics=true;
+               this.ticsId=null;
+               this.listResoursesTics = [];
+               this.listResoursesTicsAll = [];
+               // idRequerimiento quemado --> 1
+               this.resoursesTicsService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+                  this.listResoursesTics = rest;
+               } );
+               this.resoursesTicsService.getAll().subscribe( rest => {
+                  this.listResoursesTicsAll = rest;
+               } );
+            } );
+         }
+      }
+   }
+   delResoursesTics(r: TicsResourses){
+      r.indicadorHabilitado=false;
+      this.resoursesTicsService.update(r).subscribe(res=>{
+         this.listResourses=[];
+         this.listResoursesAll = [];
+         this.resoursesTicsService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+            this.listResoursesTics = rest;
+         } );
+         this.resoursesTicsService.getAll().subscribe( rest => {
+            this.listResoursesTicsAll = rest;
+         } );
+      });
    }
 
    goBack(): void {

@@ -371,7 +371,8 @@
       "MSG_VALORUSUARIO" :"Debe ingresar un valor para el Usuario",
       "MSG_NOMCARACT" : "El nombre de usuario sólo debe contener letras y los caracteres . - y/o _",
       "LBL_USUARIOS":"Administrador de Usuarios",
-      "LBL_DATOSUSER":"Datos de Usuario"
+      "LBL_DATOSUSER":"Datos de Usuario",
+      "LBL_BUSCARUSUARIO":"Buscar usuario"
 
    },
 
@@ -738,6 +739,7 @@
       "LBL_CORREOSOLICITANTE":"Correo electrónico del solicitante",
       "LBL_DATOSVACANTE":"Datos de la vacante",
       "LBL_MOTIVOREQUERIMIENTO":"Por porqué se genera requerimiento",
+      "LBL_JUSTIFICACION":"Justificación",
       "LBL_CARGO":"Cargo",
       "LBL_NOMBRECARGO":"Nombre cargo",
       "LBL_FUNCIONCARGO":"Función cargo",
@@ -749,6 +751,7 @@
       "LBL_CARGOJEFEINMEDIATO":"Cargo del jefe inmediato",
       "LBL_CANTIDADACONTRATAR":"Nro de personas a contratar",
       "LBL_CANTIDADAPLAZAS":"Nro de plazas",
+      "LBL_CANTIDADAPLAZASDISMINUIR":"Nro de plazas a disminuir",
       "LBL_CANTIDADAENTREVISTAR":"No a entrevistar",
       "LBL_DATOSREFERIDO":"Datos de referidos",
       "LBL_NOMBREREFERIDO":"Nombre",
@@ -763,6 +766,7 @@
       "LBL_FECHA": "Fecha",
       "LBL_ESTADO": "Estado",
       "BTN_SENDREQUEST": "Enviar solicitud",
+      "LBL_RECURSO": "Recurso",
       "":""
    },
 
