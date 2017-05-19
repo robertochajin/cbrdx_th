@@ -23,6 +23,7 @@ import { ResoursesTicsService } from '../_services/resoursesTics.service';
 import { RequirementReferral } from '../_models/requirementReferral';
 import { ResourcesRequiredPurchases } from '../_models/resourcesRequiredPurchases';
 import { TicsResourses } from '../_models/ticsResourses';
+import { TranslateService } from 'ng2-translate';
 
 class employeeBasicInfo {
    idTercero: number;
@@ -30,6 +31,7 @@ class employeeBasicInfo {
    idCargo: number;
    cargo: string;
    idArea: number;
+   idEstructuraFisica: number;
    area: string;
    direccionGeneral: string;
    correoTercero: string;
@@ -65,6 +67,8 @@ export class PersonnelRequirementAddComponent implements OnInit {
    isPositionWrong: boolean;
    es: any;
    private listRT: ListaItem[] = [];
+   creationProccesState : ListaItem;
+   requestedState : ListaItem;
    minDate: Date = null;
    maxDate: Date = null;
    maxDateFinal: Date = null;
@@ -103,6 +107,7 @@ export class PersonnelRequirementAddComponent implements OnInit {
    public dispNumeroEntrevistar = false;
    public dispFechaInicioRemplazo = false;
    public dispFechaFinRemplazo = false;
+   public nroPlazas: string;
 
    constructor( private personnelRequirementServices: PersonnelRequirementServices,
       private router: Router,
@@ -115,6 +120,7 @@ export class PersonnelRequirementAddComponent implements OnInit {
       private resoursesRequiredServices: ResoursesRequiredServices,
       private resoursesTicsService: ResoursesTicsService,
       private location: Location,
+      private translate: TranslateService,
       private _nav: NavService,
       private confirmationService: ConfirmationService ) {
 
@@ -139,6 +145,10 @@ export class PersonnelRequirementAddComponent implements OnInit {
       this.maxDateFinal = new Date();
       this.maxDateFinal.setMonth( month );
       this.maxDateFinal.setFullYear( year + 10 );
+
+      this.listaService.getMasterDetailsByCode('ListasEstadosRequerimientos', 'PRCREQ').subscribe(x => { this.creationProccesState = x });
+
+      this.listaService.getMasterDetailsByCode('ListasEstadosRequerimientos', 'SOLICITADO').subscribe(x => { this.requestedState = x });
 
       listaService.getMasterDetails( 'ListasTiposSolicitudes' ).subscribe( res => {
          this.listRT = res;
@@ -222,8 +232,14 @@ export class PersonnelRequirementAddComponent implements OnInit {
       if(this.selectedBoss !== undefined && this.selectedBoss.idTercero !== undefined && this.selectedBoss.idTercero !== null){
          this.personnelRequirement.idJefe = this.selectedBoss.idTercero;
          this.personnelRequirement.idCargo = this.selectedPosition.idCargo;
+         this.personnelRequirement.idSolicitante = this.user.idUsuario;
+         this.personnelRequirement.idEstructuraOrganizacional = this.employeeBasics.idArea;
+         this.personnelRequirement.idEstructuraFisica = this.employeeBasics.idEstructuraFisica;
+         this.personnelRequirement.fechaSolicitud = new Date();
+         this.personnelRequirement.idEstado = this.creationProccesState.idLista;
          this.personnelRequirementServices.add(this.personnelRequirement).subscribe(res => {
-            if(res.ok){
+            if(res){
+               this.personnelRequirement.idRequerimiento = res.idRequerimiento;
                this._nav.setMesage( 1, this.msg );
             }
          }, error => {
@@ -290,6 +306,16 @@ export class PersonnelRequirementAddComponent implements OnInit {
       let item = this.listRT.find( rt => rt.idLista === this.personnelRequirement.idTipoSolicitud );
       code = item.codigo;
 
+      if(code === 'DMNPLNT') {
+         this.translate.get('REQUERIMIENTOPERSONAL.LBL_CANTIDADAPLAZASDISMINUIR').subscribe((res: string) => {
+            this.nroPlazas = res;
+         });
+      } else {
+         this.translate.get('REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR').subscribe((res: string) => {
+            this.nroPlazas = res;
+         });
+      }
+
       this.dispNombreCargo = false;
       this.dispFuncionCargo = false;
       this.dispFechaInicioRemplazo = false;
@@ -308,7 +334,7 @@ export class PersonnelRequirementAddComponent implements OnInit {
       this.dispNumeroContratar = true;
       this.dispNumeroEntrevistar = true;
 
-      if ( code === 'RMPLZ' ) {
+      if ( code === 'RMPLZ' || code === 'RDP' || code === 'PLNCRR' ) {
          this.dispFechaInicioRemplazo = true;
          this.dispFechaFinRemplazo = true;
       } else if ( code === 'DMNPLNT' ) {
@@ -331,7 +357,6 @@ export class PersonnelRequirementAddComponent implements OnInit {
          this.dispNumeroContratar = false;
          this.dispNumeroEntrevistar = false;
       } else if ( code === 'VCNT' ) {
-      } else if ( code === 'RDP' || code === 'PLNCRR' ) {
       } else if ( code === 'APLNT' || code === 'CRGNVAREA' ) {
       } else {
          this.dispCargo = false;
