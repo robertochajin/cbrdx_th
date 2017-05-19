@@ -135,12 +135,11 @@ import { CompetenciesGroupsComponent } from './competencies-groups/competencies-
 import { OrganizationalStructurePositionsComponent } from './organizationalStructurePositions/organizational-structure-positions.component';
 import { PositionAuthoritiesComponent } from './positions/position-authorities.component';
 import { WidgetsComponent } from './widgets/widgets.component';
-
 // Administracion
 import { MenuManagerComponent } from './menuManager/menuManager.component';
 import { UserSessionComponent } from './usuarios/userSession.component';
 import { PersonnelRequirementComponent } from './personnel-requirement/personnel-requirement.component';
-import { PersonnelRequirementAddComponent } from './personnel-requirement/personnel-requirement-add.component';
+import { PersonnelRequirementEditComponent } from './personnel-requirement/personnel-requirement-edit.component';
 
 // Vacantes
 import { VacanciesComponent } from './vacancies/vacancies.component';
@@ -326,11 +325,13 @@ const routes = [
 
    // Requerimiento de personal
    { path: 'personnel-requirement', component: PersonnelRequirementComponent, canActivate: [ AuthGuard ] },
-   { path: 'personnel-requirement/add', component: PersonnelRequirementAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'personnel-requirement/add', component: PersonnelRequirementEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'personnel-requirement/update/:requeriment', component: PersonnelRequirementEditComponent, canActivate: [ AuthGuard ] },
 
 
 
    //  cargos
+   //  cargos factores de riesgo
    { path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [ AuthGuard ] },
    { path: 'position-absence/:idCargo', component: AbsenceComponent, canActivate: [ AuthGuard ] },
    { path: 'position-activities/:idCargo', component: PositionAuthoritiesComponent, canActivate: [ AuthGuard ] },

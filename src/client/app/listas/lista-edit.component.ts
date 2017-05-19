@@ -51,7 +51,7 @@ export class ListaEditComponent implements OnInit {
 
    createMaster( f: NgForm ) {
       this.listaService.updateMaster( this.masterList ).then( res => {
-         this.displayUpdateDialog = true;
+         this._nav.setMesage( 1, this.msgs );
       } );
    }
 
