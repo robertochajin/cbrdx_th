@@ -19,7 +19,7 @@ export class PersonnelRequirement {
    public idEstructuraOrganizacional: number;
    public idZona: number;
    public idEstructuraFisica: number;
-   public fechaSolicitud: string;
+   public fechaSolicitud: Date;
    public indicadorAutorizacion: boolean;
    public indicadorAumentoPlazas: boolean;
    public idJefe: number;
