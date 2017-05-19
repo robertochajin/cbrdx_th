@@ -265,7 +265,9 @@
 		
 		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSREFERIDO' | translate }}" [selected]="false"
 		                [disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)">
-			<div *ngIf="editingReferred">
+			
+			<fieldset>
+				<div *ngIf="editingReferred">
 				<div class="row-fluid">
 					<div class="col-md-12">
 						<form name="referredForm" (ngSubmit)="rf.valid && onSubmitReferred()" #rf="ngForm" novalidate id="referredForm">
@@ -327,6 +329,7 @@
 					</div>
 				</div>
 			</div>
+			</fieldset>
 			<div *ngIf="!editingReferred">
 				<div class="row datable-header">
 					<div class="col-md-6 col-xs-12 datatable-header-add">
@@ -342,10 +345,10 @@
 				</div>
 				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="requirementReferrals" [paginator]="true" [rows]="10"
 				             [responsive]="true" [globalFilter]="rfgb">
-					<p-column field="" header="{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBREREFERIDO' | translate}}" [sortable]="true"></p-column>
-					<p-column field="" header="{{ 'REQUERIMIENTOPERSONAL.LBL_TELEFONOREFERIDO' | translate}}" [sortable]="true"></p-column>
-					<p-column field="" header="{{ 'REQUERIMIENTOPERSONAL.LBL_CORREOREFERIDO' | translate}}" [sortable]="true"></p-column>
-					<p-column field="" header="{{ 'REQUERIMIENTOPERSONAL.LBL_FECHAREFERENCIA' | translate}}" [sortable]="true"></p-column>
+					<p-column field="nombre" header="{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBREREFERIDO' | translate}}" [sortable]="true"></p-column>
+					<p-column field="telefono" header="{{ 'REQUERIMIENTOPERSONAL.LBL_TELEFONOREFERIDO' | translate}}" [sortable]="true"></p-column>
+					<p-column field="correoElectronico" header="{{ 'REQUERIMIENTOPERSONAL.LBL_CORREOREFERIDO' | translate}}" [sortable]="true"></p-column>
+					<p-column field="fechaReferencia" header="{{ 'REQUERIMIENTOPERSONAL.LBL_FECHAREFERENCIA' | translate}}" [sortable]="true"></p-column>
 					<p-column header="{{ 'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
 						<template let-referred="rowData" pTemplate="body">
 							<button type="button" icon="fa-pencil" class="ui-button-success"
