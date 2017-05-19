@@ -202,16 +202,8 @@ export class PersonnelRequirementEditComponent implements OnInit {
    }
 
    ngOnInit() {
-      // idRequerimiento quemado --> 1
-      this.resoursesRequiredServices.getResoursesByIdRequirement( 1 ).subscribe( rest => {
-         this.listResourses = rest;
-      } );
       this.resoursesRequiredServices.getAll().subscribe( rest => {
          this.listResoursesAll = rest;
-      } );
-      // idRequerimiento quemado --> 1
-      this.resoursesTicsService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
-         this.listResoursesTics = rest;
       } );
       this.resoursesTicsService.getAll().subscribe( rest => {
          this.listResoursesTicsAll = rest;
@@ -244,13 +236,31 @@ export class PersonnelRequirementEditComponent implements OnInit {
             this.personnelRequirementServices.get( idRequeriment ).subscribe(
                pr => {
                   this.personnelRequirement = pr;
-                  this.employeesService.getInfoPositionEmployee( this.personnelRequirement.idSolicitante ).subscribe( e => {
-                     if ( e !== undefined ) {
-                        this.employeeBasics = e;
+                  this.usuariosService.viewUser( this.personnelRequirement.idSolicitante ).subscribe( u => {
+                     this.user = u;
+                     if ( this.user.idTercero ) {
+                        this.employeesService.getInfoPositionEmployee( this.user.idTercero ).subscribe( e => {
+                           if ( e !== undefined ) {
+                              this.employeeBasics = e;
+                           }
+                        } );
                      }
                   } );
+                  this.onChangeTypeMethod(null);
                }
             );
+
+            this.resoursesRequiredServices.getResoursesByIdRequirement( idRequeriment ).subscribe( rest => {
+               this.listResourses = rest;
+            } );
+
+            this.resoursesTicsService.getResoursesByIdRequirement( idRequeriment ).subscribe( rest => {
+               this.listResoursesTics = rest;
+            } );
+
+            this.referralsServices.getAllRequirement( idRequeriment ).subscribe( ref => {
+               this.requirementReferrals = ref;
+            });
          }
       } );
    }
@@ -365,10 +375,6 @@ export class PersonnelRequirementEditComponent implements OnInit {
       this.dispFuncionCargo = false;
       this.dispFechaInicioRemplazo = false;
       this.dispFechaFinRemplazo = false;
-      this.personnelRequirement.fechaInicio = null;
-      this.personnelRequirement.fechaFin = null;
-      this.personnelRequirement.nombreCargo = '';
-      this.personnelRequirement.funcionCargo = '';
 
       this.dispCargo = true;
       this.dispZona = true;
@@ -378,6 +384,16 @@ export class PersonnelRequirementEditComponent implements OnInit {
       this.dispColaboradorJefeInmediato = true;
       this.dispNumeroContratar = true;
       this.dispNumeroEntrevistar = true;
+
+      if ( code !== 'RMPLZ' && code !== 'RDP' && code !== 'PLNCRR' ) {
+         this.personnelRequirement.fechaInicio = null;
+         this.personnelRequirement.fechaFin = null;
+      }
+
+      if ( code !== 'CRGNVO' ) {
+         this.personnelRequirement.nombreCargo = '';
+         this.personnelRequirement.funcionCargo = '';
+      }
 
       if ( code === 'RMPLZ' || code === 'RDP' || code === 'PLNCRR' ) {
          this.dispFechaInicioRemplazo = true;
@@ -441,6 +457,11 @@ export class PersonnelRequirementEditComponent implements OnInit {
       if ( this.requirementReferral.idRequerimientoReferido !== undefined ) {
          this.referralsServices.update( this.requirementReferral ).subscribe( res => {
             if ( res.ok ) {
+               this.requirementReferrals.map(r => {
+                  if(r.idRequerimientoReferido === this.requirementReferral.idRequerimientoReferido){
+                     r = this.requirementReferral;
+                  }
+               });
                this.requirementReferral = new RequirementReferral();
                this.editingReferred = false;
                let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
@@ -451,6 +472,8 @@ export class PersonnelRequirementEditComponent implements OnInit {
             this._nav.setMesage( typeMessage, this.msg );
          }  );
       } else {
+         this.requirementReferral.idRequerimiento = this.personnelRequirement.idRequerimiento;
+         this.requirementReferral.fechaReferencia = new Date;
          this.referralsServices.add( this.requirementReferral ).subscribe( res => {
             if ( res ) {
                this.requirementReferrals.push(res);
