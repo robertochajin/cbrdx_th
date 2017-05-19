@@ -139,6 +139,8 @@ import { WidgetsComponent } from './widgets/widgets.component';
 // Administracion
 import { MenuManagerComponent } from './menuManager/menuManager.component';
 import { UserSessionComponent } from './usuarios/userSession.component';
+import { PersonnelRequirementComponent } from './personnel-requirement/personnel-requirement.component';
+import { PersonnelRequirementAddComponent } from './personnel-requirement/personnel-requirement-add.component';
 
 // Vacantes
 import { VacanciesComponent } from './vacancies/vacancies.component';
@@ -321,6 +323,12 @@ const routes = [
    { path: 'form-manager', component: FormManagerComponent, canActivate: [ AuthGuard ] },
    { path: 'form-manager/add', component: FormManagerAddComponent, canActivate: [ AuthGuard ] },
    { path: 'form-manager/update/:id', component: FormManagerUpdateComponent, canActivate: [ AuthGuard ] },
+
+   // Requerimiento de personal
+   { path: 'personnel-requirement', component: PersonnelRequirementComponent, canActivate: [ AuthGuard ] },
+   { path: 'personnel-requirement/add', component: PersonnelRequirementAddComponent, canActivate: [ AuthGuard ] },
+
+
 
    //  cargos
    { path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [ AuthGuard ] },

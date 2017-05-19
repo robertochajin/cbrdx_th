@@ -67,6 +67,7 @@ import { MenuManagerModule } from './menuManager/menuManager.module';
 import { AuthModule } from './shared/auth.module';
 //  BreadCrumb
 import { BreadcrumbModule, BreadcrumbService } from './shared/breadcrumb/breadcrumb';
+import { PersonnelRequirementModule } from './personnel-requirement/personnel-requirement.module';
 
 // Vacantes
 import { VacanciesModule } from './vacancies/vacancies.module';
@@ -93,6 +94,7 @@ import { VacanciesModule } from './vacancies/vacancies.module';
                  PositionCompetenciesModule,
                  OrganizationalStructureModule,
                  OrganizationalStructurePositionsModule,
+                 PersonnelRequirementModule,
                  CompetenciesGroupsModule,
                  WidgetModule,
                  FormManagerModule,
