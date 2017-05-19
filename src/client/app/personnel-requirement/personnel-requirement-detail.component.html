@@ -1,7 +1,7 @@
-<div *ngIf="employeeEstate">
+<div *ngIf="vPersonnelRequirement">
 	<div class="row">
 		<div class="col-md-12">
-			<h3 class="first">{{ 'EMPLOYEES.LBL_INMUEBLES' | translate }},</h3>
+			<h3 class="first">{{ 'REQUERIMIENTOPERSONAL.LBL_REQUERIMIENTOPERSONAL' | translate }}</h3>
 		</div>
 	</div>
 	<div class="row">
@@ -9,29 +9,40 @@
 			<fieldset>
 				<div class="form-group">
 					<div class="row">
-						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_TIPOINMUEBLE' | translate }}:</label>
-						<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeEstate.tipoVivienda}}</strong></label>
-						
-						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_TIPOINMUEBLEES' | translate }}:</label>
-						<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeEstate.claseVivienda}}</strong></label>
+						<div class="col-lg-6 col-md-offset-2">
+							<h3 class="first">{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSSOLICITANTE' | translate }}</h3>
+						</div>
 					</div>
 					<div class="row">
-						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_TIPOCONSTRUCCION' | translate }}:</label>
-						<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeEstate.tipoConstruccionVivienda}}</strong></label>
-						
-						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_NUMEROPISOS' | translate }}:</label>
-						<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeEstate.numeroPisos}}</strong></label>
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_NOMBRESOLICITANTE' | translate
+							}}:</label>
+						<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeBasics.nombreCompleto}}</strong></label>
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_CORREOREFERIDO' | translate
+							}}:</label>
+						<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeBasics.correoUsuario}}</strong></label>
 					</div>
 					<div class="row">
-						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_ANOCONSTRUCCION' | translate }}:</label>
-						<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeEstate.anioConstruccion}}</strong></label>
-						
-						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_NUMEROSOTANOS' | translate }}:</label>
-						<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeEstate.numeroSotanos}}</strong></label>
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_AREA' | translate }}:</label>
+						<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeBasics.area}}</strong></label>
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_CARGO' | translate }}:</label>
+						<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeBasics.cargo}}</strong></label>
 					</div>
 					<div class="row">
-						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_ESTRATO' | translate }}:</label>
-						<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeEstate.estrato}}</strong></label>
+						<div class="col-lg-6 col-md-offset-2">
+							<h3 class="first">{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSSOLICITUD' | translate }}</h3>
+						</div>
+					</div>
+					<div class="row">
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_FORMACONTRATACION' | translate }}:</label>
+						<!--<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeEstate.anioConstruccion}}</strong></label>-->
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_AREA' | translate }}:</label>
+						<!--<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeEstate.numeroSotanos}}</strong></label>-->
+					</div>
+					<div class="row">
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_MOTIVOREQUERIMIENTO' | translate }}:</label>
+						<!--<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeEstate.estrato}}</strong></label>-->
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_MOTIVOREQUERIMIENTO' | translate }}:</label>
+						<!--<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeEstate.estrato}}</strong></label>-->
 					</div>
 				</div>
 			</fieldset>

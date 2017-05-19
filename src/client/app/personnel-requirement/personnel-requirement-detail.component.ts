@@ -41,6 +41,20 @@ export class PersonnelRequirementDetailComponent {
    private listRT: ListaItem[] = [];
    msg: Message;
 
+   // variables de display
+   public dispNombreCargo = false;
+   public dispFuncionCargo = false;
+   public dispCargo = false;
+   public dispZona = false;
+   public dispCategoria = false;
+   public dispFormaContratacion = false;
+   public dispTipoContratacion = false;
+   public dispColaboradorJefeInmediato = false;
+   public dispNumeroContratar = false;
+   public dispNumeroEntrevistar = false;
+   public dispFechaInicioRemplazo = false;
+   public dispFechaFinRemplazo = false;
+
    constructor( private personnelRequirementServices: PersonnelRequirementServices,
       private router: Router,
       private usuariosService: UsuariosService,
@@ -50,23 +64,15 @@ export class PersonnelRequirementDetailComponent {
       private location: Location,
       private route: ActivatedRoute ) {
 
-      listaService.getMasterDetails( 'ListasTiposSolicitudes' ).subscribe( res => {
-         this.listRT = res;
-      }, error => {
-         this._nav.setMesage( 3, this.msg );
-      } );
 
 
    }
    ngOnInit(){
-      // this.route.params.switchMap( ( params: Params ) => this.personnelRequirementServices.getByIdRequirement( +params[ 'id' ] ) )
-      // .subscribe( data => {
-      //    this.vPersonnelRequirement = data;
-      // } );
-      let token = localStorage.getItem( 'token' );
-      if ( token !== null && token !== undefined ) {
-         this.tokendecoded = this.jwtHelper.decodeToken( token );
-         this.usuariosService.viewUser( this.tokendecoded.usuario.idUsuario ).subscribe( u => {
+      let code = '';
+      this.route.params.switchMap( ( params: Params ) => this.personnelRequirementServices.getByIdRequirement( +params[ 'id' ] ) )
+      .subscribe( data => {
+         this.vPersonnelRequirement = data;
+         this.usuariosService.viewUser( this.vPersonnelRequirement.idSolicitante ).subscribe( u => {
             this.user = u;
             if ( this.user.idTercero ) {
                this.employeesService.getInfoPositionEmployee( this.user.idTercero ).subscribe( e => {
@@ -76,12 +82,70 @@ export class PersonnelRequirementDetailComponent {
                } );
             }
          } );
+      } );
+      this.listaService.getMasterDetails( 'ListasTiposSolicitudes' ).subscribe( res => {
+         this.listRT = res;
+         let item = this.listRT.find( rt => rt.idLista === this.vPersonnelRequirement.idTipoSolicitud );
+         code = item.codigo;
+         this.dispNombreCargo = false;
+         this.dispFuncionCargo = false;
+         this.dispFechaInicioRemplazo = false;
+         this.dispFechaFinRemplazo = false;
+         this.vPersonnelRequirement.fechaInicio = null;
+         this.vPersonnelRequirement.fechaFin = null;
+         this.vPersonnelRequirement.nombreCargo = '';
+         this.vPersonnelRequirement.funcionCargo = '';
 
-      } else {
-         this.location.back();
-      }
+         this.dispCargo = true;
+         this.dispZona = true;
+         this.dispCategoria = true;
+         this.dispFormaContratacion = true;
+         this.dispTipoContratacion = true;
+         this.dispColaboradorJefeInmediato = true;
+         this.dispNumeroContratar = true;
+         this.dispNumeroEntrevistar = true;
+
+         if ( code === 'RMPLZ' ) {
+            this.dispFechaInicioRemplazo = true;
+            this.dispFechaFinRemplazo = true;
+         } else if ( code === 'DMNPLNT' ) {
+            this.dispNumeroEntrevistar = false;
+            this.dispZona = false;
+            this.dispCategoria = false;
+            this.dispFormaContratacion = false;
+            this.dispTipoContratacion = false;
+            this.dispColaboradorJefeInmediato = false;
+         } else if ( code === 'CRGNVO' ) {
+            this.dispCargo = false;
+            this.dispNombreCargo = true;
+            this.dispFuncionCargo = true;
+         } else if ( code === 'CRGELMN' ) {
+            this.dispZona = false;
+            this.dispCategoria = false;
+            this.dispFormaContratacion = false;
+            this.dispTipoContratacion = false;
+            this.dispColaboradorJefeInmediato = false;
+            this.dispNumeroContratar = false;
+            this.dispNumeroEntrevistar = false;
+         } else if ( code === 'VCNT' ) {
+         } else if ( code === 'RDP' || code === 'PLNCRR' ) {
+         } else if ( code === 'APLNT' || code === 'CRGNVAREA' ) {
+         } else {
+            this.dispCargo = false;
+            this.dispZona = false;
+            this.dispCategoria = false;
+            this.dispFormaContratacion = false;
+            this.dispTipoContratacion = false;
+            this.dispColaboradorJefeInmediato = false;
+            this.dispNumeroContratar = false;
+            this.dispNumeroEntrevistar = false;
+         }
+      }, error => {
+         this._nav.setMesage( 3, this.msg );
+      } );
+
    }
    goBack(): void {
-      this.router.navigate( [ 'employees-estate' ] );
+      this.router.navigate( [ 'personnel-requirement' ] );
    }
 }

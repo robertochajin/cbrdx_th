@@ -41,6 +41,8 @@ export class VPersonnelRequirement {
    public idTipoSolicitud: number;
    public fechaInicio: string;
    public fechaFin: string;
+   public nombreCargo: string;
+   public funcionCargo: string;
 
    constructor() {
    }
