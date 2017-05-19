@@ -369,7 +369,7 @@
       "MSG_USER80CARACT" : "El nombre de usuario no debe tener más de 80 caracteres.",
       "MSG_USUARIOEXISTE" :"El usuario ya existe para otro tercero",
       "MSG_VALORUSUARIO" :"Debe ingresar un valor para el Usuario",
-      "MSG_NOMCARACT" : "El nombre de usuario sólo debe contener letras y los caracteres . - y/o _",
+      "MSG_NOMCARACT" : "El nombre de usuario sólo debe contener letras y el caracter  .",
       "LBL_USUARIOS":"Administrador de Usuarios",
       "LBL_DATOSUSER":"Datos de Usuario",
       "LBL_BUSCARUSUARIO":"Buscar usuario"
