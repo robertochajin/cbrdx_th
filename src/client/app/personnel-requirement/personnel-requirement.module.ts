@@ -3,6 +3,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FormSharedModule } from '../shared/form-shared.module';
 import { PersonnelRequirementComponent } from './personnel-requirement.component';
 import { PersonnelRequirementAddComponent } from './personnel-requirement-add.component';
+import { PersonnelRequirementDetailComponent } from './personnel-requirement-detail.component';
 import { PersonnelRequirementServices } from '../_services/personnelRequirement.service';
 import { PositionsService } from '../_services/positions.service';
 import { UsuariosService } from '../_services/usuarios.service';
@@ -19,7 +20,7 @@ import { ResoursesTicsService } from '../_services/resoursesTics.service';
                  FormSharedModule,
               ],
 
-              declarations: [ PersonnelRequirementComponent, PersonnelRequirementAddComponent
+              declarations: [ PersonnelRequirementComponent, PersonnelRequirementAddComponent,PersonnelRequirementDetailComponent
               ],
               bootstrap: [ PersonnelRequirementComponent ],
               providers: [ PersonnelRequirementServices,

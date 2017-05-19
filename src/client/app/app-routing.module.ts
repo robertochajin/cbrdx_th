@@ -140,6 +140,7 @@ import { MenuManagerComponent } from './menuManager/menuManager.component';
 import { UserSessionComponent } from './usuarios/userSession.component';
 import { PersonnelRequirementComponent } from './personnel-requirement/personnel-requirement.component';
 import { PersonnelRequirementAddComponent } from './personnel-requirement/personnel-requirement-add.component';
+import { PersonnelRequirementDetailComponent } from './personnel-requirement/personnel-requirement-detail.component';
 
 // Vacantes
 import { VacanciesComponent } from './vacancies/vacancies.component';
@@ -326,6 +327,7 @@ const routes = [
    // Requerimiento de personal
    { path: 'personnel-requirement', component: PersonnelRequirementComponent, canActivate: [ AuthGuard ] },
    { path: 'personnel-requirement/add', component: PersonnelRequirementAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'personnel-requirement/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
 
 
 
