@@ -224,7 +224,7 @@ export class UsuariosEditComponent {
    }
 
    userCleanUp( value: string ) {
-      this.usuario.usuarioSistema = value.toLowerCase().replace( ' ', '' ).trim();
+      this.usuario.usuarioSistema = value.toLowerCase().replace(  /[^A-Z0-9_./ñ\-]/gi, '' ).trim();
    }
 
    editEmployee( idTercero: number ) {
