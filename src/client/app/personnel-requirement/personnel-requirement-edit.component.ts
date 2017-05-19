@@ -470,13 +470,13 @@ export class PersonnelRequirementEditComponent implements OnInit {
          }, error => {
             let typeMessage = 3; // 1 = Add, 2 = Update, 3 Error, 4 Custom
             this._nav.setMesage( typeMessage, this.msg );
-         }  );
+         } );
       } else {
          this.requirementReferral.idRequerimiento = this.personnelRequirement.idRequerimiento;
          this.requirementReferral.fechaReferencia = new Date;
          this.referralsServices.add( this.requirementReferral ).subscribe( res => {
             if ( res ) {
-               this.requirementReferrals.push(res);
+               this.requirementReferrals.push( res );
                this.editingReferred = false;
                let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
                this._nav.setMesage( typeMessage, this.msg );
@@ -536,7 +536,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
       let temp: any;
       if ( this.resoursesPurchases.idCompra === this.purchasesId.idLista ) {
          this.guardandoResourses = true;
-         this.resoursesPurchases.idRequerimiento = 1; // idRequerimiento quemado --> 1
+         this.resoursesPurchases.idRequerimiento = this.personnelRequirement.idRequerimiento;
          temp = this.listResoursesAll.find(
             r => r.idCompra === this.resoursesPurchases.idCompra && r.idRequerimiento === this.resoursesPurchases.idRequerimiento );
          if ( temp ) {
@@ -548,10 +548,10 @@ export class PersonnelRequirementEditComponent implements OnInit {
                   this.purchasesId = null;
                   this.listResourses = [];
                   this.listResoursesAll = [];
-                  // idRequerimiento quemado --> 1
-                  this.resoursesRequiredServices.getResoursesByIdRequirement( 1 ).subscribe( rest => {
-                     this.listResourses = rest;
-                  } );
+                  this.resoursesRequiredServices.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento ).subscribe(
+                     rest => {
+                        this.listResourses = rest;
+                     } );
                   this.resoursesRequiredServices.getAll().subscribe( rest => {
                      this.listResoursesAll = rest;
                   } );
@@ -602,7 +602,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
       let temp: any;
       if ( this.ticsResourses.idTic === this.ticsId.idLista ) {
          this.guardandoResoursesTics = true;
-         this.ticsResourses.idRequerimiento = 1; // idRequerimiento quemado --> 1
+         this.ticsResourses.idRequerimiento = this.personnelRequirement.idRequerimiento;
          temp = this.listResoursesTicsAll.find(
             r => r.idTic === this.ticsResourses.idTic && r.idRequerimiento === this.ticsResourses.idRequerimiento );
          if ( temp ) {
@@ -614,8 +614,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
                   this.ticsId = null;
                   this.listResoursesTics = [];
                   this.listResoursesTicsAll = [];
-                  // idRequerimiento quemado --> 1
-                  this.resoursesTicsService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+                  this.resoursesTicsService.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento ).subscribe( rest => {
                      this.listResoursesTics = rest;
                   } );
                   this.resoursesTicsService.getAll().subscribe( rest => {
