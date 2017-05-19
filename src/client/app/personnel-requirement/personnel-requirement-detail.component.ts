@@ -91,10 +91,10 @@ export class PersonnelRequirementDetailComponent {
          this.dispFuncionCargo = false;
          this.dispFechaInicioRemplazo = false;
          this.dispFechaFinRemplazo = false;
-         this.vPersonnelRequirement.fechaInicio = null;
-         this.vPersonnelRequirement.fechaFin = null;
-         this.vPersonnelRequirement.nombreCargo = '';
-         this.vPersonnelRequirement.funcionCargo = '';
+         // this.vPersonnelRequirement.fechaInicio = null;
+         // this.vPersonnelRequirement.fechaFin = null;
+         // this.vPersonnelRequirement.nombreCargo = '';
+         // this.vPersonnelRequirement.funcionCargo = '';
 
          this.dispCargo = true;
          this.dispZona = true;
