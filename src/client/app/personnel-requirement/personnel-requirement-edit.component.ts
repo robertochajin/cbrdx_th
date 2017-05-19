@@ -513,7 +513,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
       let temp: any;
       if ( this.resoursesPurchases.idCompra === this.purchasesId.idLista ) {
          this.guardandoResourses = true;
-         this.resoursesPurchases.idRequerimiento = 1; // idRequerimiento quemado --> 1
+         this.resoursesPurchases.idRequerimiento = this.personnelRequirement.idRequerimiento;
          temp = this.listResoursesAll.find(
             r => r.idCompra === this.resoursesPurchases.idCompra && r.idRequerimiento === this.resoursesPurchases.idRequerimiento );
          if ( temp ) {
@@ -579,7 +579,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
       let temp: any;
       if ( this.ticsResourses.idTic === this.ticsId.idLista ) {
          this.guardandoResoursesTics = true;
-         this.ticsResourses.idRequerimiento = 1; // idRequerimiento quemado --> 1
+         this.ticsResourses.idRequerimiento = this.personnelRequirement.idRequerimiento;
          temp = this.listResoursesTicsAll.find(
             r => r.idTic === this.ticsResourses.idTic && r.idRequerimiento === this.ticsResourses.idRequerimiento );
          if ( temp ) {
