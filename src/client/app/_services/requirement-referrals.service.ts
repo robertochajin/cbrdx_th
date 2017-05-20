@@ -15,6 +15,10 @@ export class RequirementReferralsServices {
       return this.authHttp.get( this.serviceURL ).map( ( res: Response ) => res.json() as RequirementReferral[] );
    }
 
+   getAllRequirement(idRequirement: number) {
+      return this.authHttp.get( this.serviceURL + 'requerimiento/' + idRequirement ).map( ( res: Response ) => res.json() as RequirementReferral[] );
+   }
+
    add( f: RequirementReferral ) {
       return this.authHttp.post( this.serviceURL, f )
       .map( ( res: Response ) => res.json() );
