@@ -13,7 +13,7 @@ import { ListPositionsService } from '../_services/lists-positions.service';
 import { ZonesServices } from '../_services/zones.service';
 import { ResoursesRequiredServices } from '../_services/resourcesRequiredPurchases.service';
 import { ResoursesTicsService } from '../_services/resoursesTics.service';
-import { CuestionariosService } from '../_services/cuestionarios.service';
+import { QuestionnairesService } from '../_services/questionnaires.service';
 import { RequirementReferralsServices } from '../_services/requirement-referrals.service';
 
 @NgModule( {
@@ -36,7 +36,7 @@ import { RequirementReferralsServices } from '../_services/requirement-referrals
                  ZonesServices,
                  ResoursesRequiredServices,
                  ResoursesTicsService,
-                 CuestionariosService
+                 QuestionnairesService
               ],
               exports: [ PersonnelRequirementComponent ]
            } )

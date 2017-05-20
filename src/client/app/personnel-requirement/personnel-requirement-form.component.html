@@ -444,10 +444,9 @@
 			<!---->
 			<!--[disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)"-->
 		</p-accordionTab>
-		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSOSTIC' | translate }}" [selected]="false"
-		               >
+		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSOSTIC' | translate }}" [selected]="false"  >
 			
-			<form (ngSubmit)="frt.valid && onSubmit4()" #frt="ngForm" novalidate id="formulario2" *ngIf="!guardandoResoursesTics">
+			<form (ngSubmit)="frq.valid && onSubmitQuestionnaires()" #frq="ngForm" novalidate id="formulario2" *ngIf="!guardandoResoursesTics">
 				<div class="ui-grid-row">
 					<div class="ui-grid-col-12">
 						<label><h3>{{'REQUERIMIENTOPERSONAL.LBL_CUESTIONARIOS' | translate}} </h3></label>
@@ -455,12 +454,12 @@
 				</div>
 				<div class="ui-grid-row">
 					<div class="ui-grid-col-9">
-						<p-autoComplete placeholder="Buscar cuestionario" field="nombre" name="recusosCues" id="recusosCues"
-						                [(ngModel)]="ticsId"  #recusosCues="ngModel" [suggestions]="ticsList"
-						                required (completeMethod)="resourseTicsSearch($event)" (onSelect)="captureResourseTicsId($event)">
+						<p-autoComplete placeholder="Buscar cuestionario" field="nombre" name="recusosQues" id="recusosQues"
+						                [(ngModel)]="ticsId"  #recusosQues="ngModel" [suggestions]="ticsList"
+						                required (completeMethod)="resourseQuesSearch($event)" (onSelect)="captureResourseQuesId($event)">
 						</p-autoComplete>
 						<div class="ui-message ui-messages-error ui-corner-all"
-						     *ngIf="frt.submitted && wrongResourseTics">
+						     *ngIf="frq.submitted && wrongResourseQues">
 							<i class="fa fa-close"></i>
 							{{'POSITION.LBL_CARGO' | translate}} {{'LBL_REQUERIDO' | translate}}
 						</div>
@@ -478,7 +477,7 @@
 						<p-column header="Acciones" styleClass="datatable-col-action">
 							<template let-recurso="rowData" pTemplate="body">
 								<button type="button" icon="fa-trash" class="ui-button-danger"
-								        pButton (click)="delResoursesTics(recurso)"></button>
+								        pButton (click)="delResoursesQues(recurso)"></button>
 							</template>
 						</p-column>
 					</p-dataTable>

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
-import { Cuestionarios } from '../_models/cuestionarios';
+import { Cuestionarios } from '../_models/questionnaires';
 
 @Injectable()
-export class CuestionariosService {
+export class QuestionnairesService {
 
    private masterService = '<%= SVC_TH_URL %>/api/requerimientosCuestionarios/';
 

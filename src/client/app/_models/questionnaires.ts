@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class Cuestionarios {
+export class Questionnaires {
 
    public idRequerimientoCuestionario: number;
    public idCuestionario: number;
