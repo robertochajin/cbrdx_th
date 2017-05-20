@@ -32,6 +32,10 @@ export class RequirementReferralsServices {
       return this.authHttp.get( this.serviceURL + 'buscarId/' + id )
       .map( ( res: Response ) => res.json() as RequirementReferral );
    }
+   getByIdRequirement( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'requerimiento/' + id )
+      .map( ( res: Response ) => res.json() as RequirementReferral[] );
+   }
 
    handleError( error: any ): Promise<any> {
       console.error( 'Error:', error );

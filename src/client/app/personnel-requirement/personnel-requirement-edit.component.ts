@@ -23,8 +23,10 @@ import { ResoursesTicsService } from '../_services/resoursesTics.service';
 import { RequirementReferral } from '../_models/requirementReferral';
 import { ResourcesRequiredPurchases } from '../_models/resourcesRequiredPurchases';
 import { TicsResourses } from '../_models/ticsResourses';
+import { Questionnaires  } from '../_models/questionnaires';
 import { TranslateService } from 'ng2-translate';
 import { RequirementReferralsServices } from '../_services/requirement-referrals.service';
+import { QuestionnairesService } from '../_services/questionnaires.service';
 
 class employeeBasicInfo {
    idTercero: number;
@@ -85,16 +87,22 @@ export class PersonnelRequirementEditComponent implements OnInit {
    ticsList: ListaItem[] = [];
    purchasesId: any;
    ticsId: any;
+   quesId: any;
    ticsResourses: TicsResourses = new TicsResourses();
    resoursesPurchases: ResourcesRequiredPurchases = new ResourcesRequiredPurchases();
+   questionnaires: Questionnaires = new Questionnaires();
    listResourses: ResourcesRequiredPurchases[] = [];
    listResoursesAll: ResourcesRequiredPurchases[] = [];
    listResoursesTics: TicsResourses[] = [];
+   listResoursesQues: Questionnaires[] = [];
    listResoursesTicsAll: TicsResourses[] = [];
+   listResoursesQuesAll: Questionnaires[] = [];
    wrongResourse: boolean = true;
    wrongResourseTics: boolean = true;
+   wrongResourseQues: boolean = true;
    guardandoResourses: boolean = false;
    guardandoResoursesTics: boolean = false;
+   guardandoResoursesQues: boolean = false;
    // variables de display
    public dispNombreCargo = false;
    public dispFuncionCargo = false;
@@ -123,6 +131,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
       private referralsServices: RequirementReferralsServices,
       private resoursesRequiredServices: ResoursesRequiredServices,
       private resoursesTicsService: ResoursesTicsService,
+      private questionnairesService: QuestionnairesService,
       private location: Location,
       private translate: TranslateService,
       private _nav: NavService,
@@ -518,6 +527,18 @@ export class PersonnelRequirementEditComponent implements OnInit {
          this.purchasesList.map( d => d.nombre = d.idLista + ' : ' + d.nombre );
       } );
    }
+   captureResourseQuesId( event: any ) {
+      this.resoursesPurchases.idCompra = event.idLista;
+      this.resoursesPurchases.idRequerimiento = 1;
+      this.wrongResourseQues = false;
+   }
+
+   resourseQuesSearch( event: any ) {
+      this.listaService.getMasterDetailsByWildCard( 'ListasTiposCompras', event.query ).subscribe( rest => {
+         this.purchasesList = rest;
+         this.purchasesList.map( d => d.nombre = d.idLista + ' : ' + d.nombre );
+      } );
+   }
 
    captureResourseTicsId( event: any ) {
       this.ticsResourses.idTic = event.idLista;
@@ -662,7 +683,71 @@ export class PersonnelRequirementEditComponent implements OnInit {
          } );
       } );
    }
+   onSubmitQuestionnaires() {
+      let temp: any;
+      if ( this.questionnaires.idCuestionario === this.quesId.idLista ) {
+         this.guardandoResoursesQues = true;
+         this.questionnaires.idRequerimiento = 1; // idRequerimiento quemado --> 1
+         temp = this.listResoursesQuesAll.find(
+            r => r.idCuestionario === this.questionnaires.idCuestionario && r.idRequerimiento === this.questionnaires.idRequerimiento );
+         if ( temp ) {
+            if ( !temp.indicadorHabilitado ) {
+               temp.indicadorHabilitado = true;
+               this.questionnairesService.update( temp ).subscribe( rest => {
+                  this.guardandoResoursesQues = false;
+                  this.wrongResourseQues = true;
+                  this.quesId = null;
+                  this.listResoursesQues = [];
+                  this.listResoursesQuesAll = [];
+                  // idRequerimiento quemado --> 1
+                  this.questionnairesService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+                     this.listResoursesQues = rest;
+                  } );
+                  this.questionnairesService.getAll().subscribe( rest => {
+                     this.listResoursesQuesAll = rest;
+                  } );
+               } );
+            } else {
+               this.guardandoResoursesQues = false;
+               this.wrongResourseQues = true;
+               this.quesId = null;
+               this._nav.setMesage( 0, {
+                  severity: 'warn', summary: 'Información', detail: 'No es posible agregar mas de una vez un' +
+                                                                    ' recurso'
+               } );
+            }
+         } else {
+            this.questionnairesService.add( this.questionnaires ).subscribe( rest => {
+               this.guardandoResoursesQues = false;
+               this.wrongResourseQues = true;
+               this.quesId = null;
+               this.listResoursesQues = [];
+               this.listResoursesQuesAll = [];
+               // idRequerimiento quemado --> 1
+               this.questionnairesService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+                  this.listResoursesQues = rest;
+               } );
+               this.questionnairesService.getAll().subscribe( rest => {
+                  this.listResoursesQuesAll = rest;
+               } );
+            } );
+         }
+      }
+   }
 
+   delResoursesQues( r: Questionnaires ) {
+      r.indicadorHabilitado = false;
+      this.questionnairesService.update( r ).subscribe( res => {
+         this.listResoursesQues = [];
+         this.listResoursesQuesAll = [];
+         this.questionnairesService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+            this.listResoursesQues = rest;
+         } );
+         this.questionnairesService.getAll().subscribe( rest => {
+            this.listResoursesQuesAll = rest;
+         } );
+      } );
+   }
    goBack(): void {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea salir sin guardar?`,
