@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Message, SelectItem } from 'primeng/primeng';
 import { NavService } from '../_services/_nav.service';
@@ -7,30 +7,57 @@ import { ListaItem } from '../_models/listaItem';
 import { VacanciesService } from '../_services/vacancies.service';
 import { Vacancies } from '../_models/vacancies';
 import { RequirementsAction } from '../_models/requirementsAction';
-import { Usuario } from '../_models/usuario';
-import { UsuariosService } from '../_services/usuarios.service';
-import { OrganizationalStructureService } from '../_services/organizationalStructure.service';
-import { OrganizationalStructure } from '../_models/organizationalStructure';
+import { Constante } from '../_models/constante';
+import { ConstanteService } from '../_services/constante.service';
 
 @Component( {
                moduleId: module.id,
                templateUrl: 'vacancies-action-component.html',
                selector: 'vacancies-action'
             } )
-export class VacantesActionComponent {
+export class VacantesActionComponent implements OnInit {
 
    msg: Message;
    listEstados: ListaItem[] = [];
-   listAcciones: SelectItem[] = [];
    listUsuarios: SelectItem[] = [];
+   listAcciones: SelectItem[] = [];
    listReclutamiento: SelectItem[] = [];
    vacancy: Vacancies = new Vacancies();
    requirementsAction: RequirementsAction = new RequirementsAction();
-   organizationalStructure: OrganizationalStructure;
+   actions: RequirementsAction[] = [];
    requiereAutorizacion = true;
-   autorizando = true;
-   codigoAsiPro: number;
-   codigoSolAut: number;
+   autorizando = false;
+   permitido = true;
+
+   eCreacion :number;
+   eSolicitado :number;
+   eEnAprobacion :number;
+   eAprobado :number;
+   eRechazado :number;
+   eDevuelto :number;
+   eSeleccion :number;
+   eCerrado :number;
+   eEliminacion :number;
+
+   aSolicitar: number;
+   aDevolver: number;
+   aRealizar: number;
+   aAsignar: number;
+   aAprobar: number;
+   aRechazar: number;
+   aCerrar: number;
+
+   objTiposReqAutorizacion: Constante;
+   tiposReqAutorizacion: any[];
+   objCargosNoReqAutorizacion: Constante;
+   cargosNoReqAutorizacion: {tipo:number, cargo: number}[] = [{tipo:0, cargo: 0}];
+
+   allAcciones: ListaItem[] = [];
+   accionesStep1: SelectItem[] = [];
+   accionesStep2: SelectItem[] = [];
+   accionesStep3: SelectItem[] = [];
+   accionesStep4: SelectItem[] = [];
+   accionesStep5: SelectItem[] = [];
 
    constructor(
       private vacanciesService: VacanciesService,
@@ -38,41 +65,21 @@ export class VacantesActionComponent {
       private listaService: ListaService,
       private navService: NavService,
       private route: ActivatedRoute,
-      private UsuariosService: UsuariosService,
-      private organizationalStructureService: OrganizationalStructureService,
+      private constanteService: ConstanteService,
    ) {
-      this.listaService.getMasterDetails( 'ListasEstadosRequerimientos' ).subscribe( res => {
-         res.map( ( l: ListaItem ) => {
-            this.listEstados.push( l );
-         } );
-      } );
+      this.listAcciones.push( { label: 'Seleccione', value: null } );
 
-      this.listaService.getMasterDetails( 'ListasRequerimientosAcciones' ).subscribe( res => {
-         this.listAcciones.push( { label: 'Seleccione', value: '' } );
-         res.map( ( l: ListaItem ) => {
-            if(l.codigo === 'ASIPRO'){
-               this.codigoAsiPro = l.idLista;
-            }
-            if(l.codigo === 'SOLAUT'){
-               this.codigoSolAut = l.idLista;
-            }
-            if(this.autorizando){
-               if(l.codigo === 'APROVA' || l.codigo === 'RECHAZ'){
+      this.constanteService.getByCode( 'REQAUT' ).subscribe( req => {
+         this.objTiposReqAutorizacion = req;
+         this.tiposReqAutorizacion = this.objTiposReqAutorizacion.valor.split(';');
 
-               }
-            }else{
-               if(this.requiereAutorizacion ){
-                  if(l.codigo !== 'ASIPRO') {
-                     this.listAcciones.push( { label: l.nombre, value: l.idLista } );
-                  }
-               }else{
-                  if(l.codigo !== 'SOLAUT'){
-                     this.listAcciones.push( { label: l.nombre, value: l.idLista } );
-                  }
-               }
-            }
-         } );
-      } );
+      });
+
+      this.constanteService.getByCode( 'CARAUT' ).subscribe( carg => {
+         this.objCargosNoReqAutorizacion = carg;
+         this.cargosNoReqAutorizacion = JSON.parse(this.objCargosNoReqAutorizacion.valor);
+      });
+
       this.listaService.getMasterDetails( 'ListasFormasReclutamientos' ).subscribe( res => {
          this.listReclutamiento.push( { label: 'Seleccione', value: '' } );
          res.map( ( l: ListaItem ) => {
@@ -80,45 +87,187 @@ export class VacantesActionComponent {
          } );
       } );
 
-      this.UsuariosService.listUsers().subscribe(
-         usuarios => {
-            this.listUsuarios.push( { label: 'Seleccione', value: null } );
-            usuarios.map( l => {
-               this.listUsuarios.push( { label: l.usuarioSistema, value: l.idUsuario } );
-            } );
+      this.listaService.getMasterDetails( 'ListasEstadosRequerimientos' ).subscribe( res => {
+         res.map( ( l: ListaItem ) => {
+            this.listEstados.push( l );
+            switch (l.codigo){
+               case 'PRCREQ':
+                  this.eCreacion = l.idLista;
+                  break;
+               case 'SOLICITADO':
+                  this.eSolicitado = l.idLista;
+                  break;
+               case 'ENAPRB':
+                  this.eEnAprobacion = l.idLista;
+                  break;
+               case 'APRB':
+                  this.eAprobado = l.idLista;
+                  break;
+               case 'RCHZ':
+                  this.eRechazado = l.idLista;
+                  break;
+               case 'DVLT':
+                  this.eDevuelto = l.idLista;
+                  break;
+               case 'PRCSEL':
+                  this.eSeleccion = l.idLista;
+                  break;
+               case 'CRRD':
+                  this.eCerrado = l.idLista;
+                  break;
+               case 'PRCREQ':
+                  this.eEliminacion = l.idLista;
+                  break;
+            }
          } );
+      } );
 
-      this.route.params
-      .switchMap( ( params: Params ) => this.vacanciesService.get( +params[ 'id' ] ) )
-      .subscribe( vacancy => {
-         this.vacancy = vacancy;
-         /*if(this.vacancy.idEstructuraOrganizacional){
-            this.organizationalStructureService.viewOrganizationalStructure( this.vacancy.idEstructuraOrganizacional).subscribe( res => {
-               this.organizationalStructure = res;
-            });
-         }*/
+      this.listaService.getMasterDetails( 'ListasRequerimientosAcciones' ).subscribe( res => {
+         res.map( ( l: ListaItem ) => {
+            this.allAcciones.push( l );
+            switch (l.codigo){
+               case 'SOLAUT':
+                  this.aSolicitar = l.idLista;
+                  break;
+               case 'DEVCAM':
+                  this.aDevolver = l.idLista;
+                  break;
+               case 'REALIZ':
+                  this.aRealizar = l.idLista;
+                  break;
+               case 'ASIPRO':
+                  this.aAsignar = l.idLista;
+                  break;
+               case 'APRB':
+                  this.aAprobar = l.idLista;
+                  break;
+               case 'RCHZ':
+                  this.aRechazar = l.idLista;
+                  break;
+               case 'CRRD':
+                  this.aCerrar = l.idLista;
+                  break;
+            }
+            this.buildSteps();
+         } );
       } );
 
    }
 
    ngOnInit() {
+      this.route.params
+      .switchMap( ( params: Params ) => this.vacanciesService.get( +params[ 'id' ] ) )
+      .subscribe( vacancy => {
+         this.vacancy = vacancy;
+         this.historialAcciones();
+         if(this.vacancy.idEstado === this.eCreacion ||
+            this.vacancy.idEstado === this.eRechazado ||
+            this.vacancy.idEstado === this.eDevuelto ||
+            this.vacancy.idEstado === this.eCerrado
+         ){
+            this.permitido = false;
+         }
+         if(this.tiposReqAutorizacion.find(c => c === this.vacancy.idTipoSolicitud)){
+            this.requiereAutorizacion = true;
+               if(this.cargosNoReqAutorizacion.find(c => c.tipo === this.vacancy.idTipoSolicitud &&
+                                                         c.cargo === this.vacancy.idTipoSolicitud)){
+                  this.requiereAutorizacion = false;
+               }
+         }else{
+            this.requiereAutorizacion = true;
+         }
 
-
+         if(this.vacancy.idEstado === this.eEnAprobacion) {
+            this.listAcciones = this.accionesStep1;
+         }else{
+            if(this.requiereAutorizacion && this.vacancy.idEstado === this.eSolicitado){
+               this.listAcciones = this.accionesStep2;
+            }else{
+               this.listAcciones = this.accionesStep3;
+            }
+         }
+      } );
    }
 
    goBack(): void {
       this.router.navigate( [ 'vacancies' ] );
    }
 
-   onSubmit() {
+   showRequerimiento(id: number): void{
+      this.router.navigate( [ 'personnel-requirement/historical/' + id ] );
+   }
 
-      this.vacanciesService.setAction( this.requirementsAction ).subscribe( requirementsAction => {
-         this.navService.setMesage( 1, this.msg );
-         this.requirementsAction = requirementsAction;
-         this.goBack();
+   onSubmit() {
+      if(this.requirementsAction.idAccion === this.aSolicitar){
+         this.vacancy.idEstado =  this.eEnAprobacion;
+      }
+      if(this.requirementsAction.idAccion === this.aAprobar){
+         this.vacancy.idEstado = this.eAprobado;
+      }
+      if(this.requirementsAction.idAccion === this.aAsignar){
+         this.vacancy.idEstado = this.eSeleccion;
+      }
+      if(this.requirementsAction.idAccion === this.aDevolver){
+         this.vacancy.idEstado = this.eDevuelto;
+      }
+      if(this.requirementsAction.idAccion === this.aDevolver){
+         this.vacancy.idEstado = this.eDevuelto;
+      }
+      if(this.requirementsAction.idAccion === this.aRealizar){
+         this.vacancy.idEstado = this.eRechazado;
+      }
+      if(this.requirementsAction.idAccion === this.aCerrar){
+         this.vacancy.idEstado = this.eCerrado;
+      }
+      this.vacanciesService.update( this.vacancy ).subscribe( data => {
+         this.vacanciesService.setAction( this.requirementsAction ).subscribe( requirementsAction => {
+            this.navService.setMesage( 1, this.msg );
+            this.requirementsAction = requirementsAction;
+            this.historialAcciones();
+            this.goBack();
+         }, error => {
+            this.navService.setMesage( 3, this.msg );
+         } );
+
       }, error => {
          this.navService.setMesage( 3, this.msg );
       } );
+   }
+
+   historialAcciones(){
+      this.vacanciesService.getActions(this.vacancy.idRequerimiento).subscribe(
+         actions => {
+         this.actions = actions;
+      });
+   }
+
+   buildSteps(){
+
+      this.accionesStep1.push( { label: 'Seleccione', value: null } );
+      this.accionesStep1.push( { label: this.allAcciones.find( c => c.codigo == 'APRB').nombre,
+                                  value: this.allAcciones.find( c => c.codigo == 'APRB').idLista } );
+      this.accionesStep1.push( { label: this.allAcciones.find( c => c.codigo == 'RCHZ').nombre,
+                                  value: this.allAcciones.find( c => c.codigo == 'RCHZ').idLista } );
+      this.accionesStep1.push( { label: this.allAcciones.find( c => c.codigo == 'DEVCAM').nombre,
+                                  value: this.allAcciones.find( c => c.codigo == 'DEVCAM').idLista } );
+
+
+      this.accionesStep2.push( { label: 'Seleccione', value: null } );
+      this.accionesStep2.push( { label: this.allAcciones.find( c => c.codigo == 'SOLAUT').nombre,
+                                  value: this.allAcciones.find( c => c.codigo == 'SOLAUT').idLista } );
+      this.accionesStep2.push( { label: this.allAcciones.find( c => c.codigo == 'RCHZ').nombre,
+                                  value: this.allAcciones.find( c => c.codigo == 'RCHZ').idLista } );
+      this.accionesStep2.push( { label: this.allAcciones.find( c => c.codigo == 'DEVCAM').nombre,
+                                  value: this.allAcciones.find( c => c.codigo == 'DEVCAM').idLista } );
+
+      this.accionesStep3.push( { label: 'Seleccione', value: null } );
+      this.accionesStep3.push( { label: this.allAcciones.find( c => c.codigo == 'PRCSEL').nombre,
+                                  value: this.allAcciones.find( c => c.codigo == 'PRCSEL').idLista } );
+      this.accionesStep3.push( { label: this.allAcciones.find( c => c.codigo == 'RCHZ').nombre,
+                                  value: this.allAcciones.find( c => c.codigo == 'RCHZ').idLista } );
+      this.accionesStep3.push( { label: this.allAcciones.find( c => c.codigo == 'DEVCAM').nombre,
+                                  value: this.allAcciones.find( c => c.codigo == 'DEVCAM').idLista } );
+
    }
 
 }

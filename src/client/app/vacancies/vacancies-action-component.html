@@ -1,68 +1,97 @@
 <div class="row">
-	<div class="col-md-7">
-		<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
-		<p-fieldset legend="" *ngIf="!isTerceroSet">
-			<div class="clearfix card-header">
-				<div class="col-md-2">
-					<img class="thumbnail pull-left img-responsive"
-					     src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg">
+	<div class="col-md-7" >
+		<p-fieldset legend="" >
+			<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+				<div class="clearfix card-header">
+					<div class="col-md-2">
+						<img class="thumbnail pull-left img-responsive"
+						     src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg">
+					</div>
+					<div class="col-md-8">
+						<h4>{{ vacancy.area }}</h4>
+						<span>{{vacancy.cargo}} / {{vacancy.estructuraFisica}}</span><br/>
+						<span>{{vacancy.fechaSolicitud}}</span><br/>
+						<span>{{ 'VACANCIES.LBL_SALARY' | translate}}: {{vacancy.salario}}</span><br/>
+						<span>{{ 'PLANTACOLABORADORES.LBL_NUMEROPLAZAS' | translate}}: {{vacancy.cantidadVacantes}}</span>
+					</div>
 				</div>
-				<div class="col-md-8">
-					<!--<h4>{{ organizationalStructure.nombre }}</h4>-->
-					<span>{{vacancy.cargo}} / {{vacancy.estructuraFisica}}</span><br/>
-					<span>{{vacancy.fechaSolicitud}}</span><br/>
-					<span>{{ 'VACANCIES.LBL_SALARY' | translate}}: {{vacancy.salario}}</span><br/>
-					<span>{{ 'PLANTACOLABORADORES.LBL_NUMEROPLAZAS' | translate}}: {{vacancy.cantidadVacantes}}</span>
+				<div *ngIf="permitido">
+					<div class="row">
+						<label for="acciones">{{ 'LBL_ACCIONES' | translate}}</label>
+						<p-dropdown id="acciones" name="acciones" required="true"
+						            [options]="listAcciones" [autoWidth]="false"
+						            [(ngModel)]="requirementsAction.idAccion"
+						            #action="ngModel"
+						></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !action.valid">
+							<i class="fa fa-close"></i>{{ 'LBL_ACCIONES' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+						</div>
+					</div>
+					<div class="row" *ngIf="this.vacancy.idEstado === eSeleccion">
+						<label for="profesional">{{ 'VACANCIES.LBL_PROFESSIONAL' | translate}}</label>
+						<p-dropdown id="profesional" name="profesional" required="true"
+						            [options]="listUsuarios" [autoWidth]="false"
+						            [(ngModel)]="vacancy.idResponsableSeleccion"
+						            #professional="ngModel"
+						></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !professional.valid">
+							<i class="fa fa-close"></i>{{ 'VACANCIES.LBL_PROFESSIONAL' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+						</div>
+					</div>
+					<div class="row" *ngIf="this.vacancy.idEstado === eSeleccion">
+						<label for="reclutamiento">{{ 'VACANCIES.LBL_RECRUITMENT' | translate}}</label>
+						<p-dropdown id="reclutamiento" name="reclutamiento" required="true"
+						            [options]="listReclutamiento" [autoWidth]="false"
+						            [(ngModel)]="vacancy.idFormaReclutamiento"
+						            #recruitment="ngModel"
+						></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !recruitment.valid">
+							<i class="fa fa-close"></i>{{ 'VACANCIES.LBL_RECRUITMENT' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+						</div>
+					</div>
+					<div class="row">
+						<label for="acciones">{{ 'VACANCIES.LBL_OBSERVACION' | translate}}</label>
+						<div class=" col-sm-12">
+							<textarea pInputTextarea id="obs" name="obs" [style]="{'width':'100%'}"
+							           [(ngModel)]="requirementsAction.observacion" #obs="ngModel"
+							           [required]="true" maxlength="500" autoResize="autoResize"
+							></textarea>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !obs.valid">
+								{{ 'VACANCIES.LBL_OBSERVACION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 col-md-offset-10">
+							<button pButton  label="{{ 'LBL_ENVIAR' | translate}}" type="submit"></button>
+						</div>
+					</div>
 				</div>
-			
-			</div>
-			<div class="row">
-				<label for="acciones">{{ 'LBL_ACCIONES' | translate}}</label>
-				<p-dropdown id="acciones" name="acciones" required="true"
-				            [options]="listAcciones" [autoWidth]="false"
-				            [(ngModel)]="requirementsAction.idAccion"
-				            #action="ngModel"
-				></p-dropdown>
-				<div class="ui-message ui-messages-error ui-corner-all"
-				     *ngIf="f.submitted && !action.valid">
-					<i class="fa fa-close"></i>{{ 'LBL_ACCIONES' | translate}} {{ 'LBL_REQUERIDO' | translate}}
-				</div>
-			</div>
-			<div class="row" *ngIf="requirementsAction.idAccion === codigoAsiPro">
-				<label for="profesional">{{ 'VACANCIES.LBL_PROFESSIONAL' | translate}}</label>
-				<p-dropdown id="profesional" name="profesional" required="true"
-				            [options]="listUsuarios" [autoWidth]="false"
-				            [(ngModel)]="vacancy.idResponsableSeleccion"
-				            #professional="ngModel"
-				></p-dropdown>
-				<div class="ui-message ui-messages-error ui-corner-all"
-				     *ngIf="f.submitted && !professional.valid">
-					<i class="fa fa-close"></i>{{ 'VACANCIES.LBL_PROFESSIONAL' | translate}} {{ 'LBL_REQUERIDO' | translate}}
-				</div>
-			</div>
-			<div class="row" *ngIf="requirementsAction.idAccion === codigoAsiPro">
-				<label for="reclutamiento">{{ 'VACANCIES.LBL_RECRUITMENT' | translate}}</label>
-				<p-dropdown id="reclutamiento" name="reclutamiento" required="true"
-				            [options]="listReclutamiento" [autoWidth]="false"
-				            [(ngModel)]="vacancy.idFormaReclutamiento"
-				            #recruitment="ngModel"
-				></p-dropdown>
-				<div class="ui-message ui-messages-error ui-corner-all"
-				     *ngIf="f.submitted && !recruitment.valid">
-					<i class="fa fa-close"></i>{{ 'VACANCIES.LBL_RECRUITMENT' | translate}} {{ 'LBL_REQUERIDO' | translate}}
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-2 col-md-offset-10">
-					<button pButton  label="{{ 'LBL_ENVIAR' | translate}}" type="submit"></button>
-				</div>
-			</div>
+			</form>
 		</p-fieldset>
-		</form>
 	</div>
 	<div class="col-md-5">
-		<p-fieldset legend="Ultimas actividades sobre el proceso" *ngIf="!isTerceroSet">
-		
+		<p-fieldset legend="Ultimas actividades sobre el proceso">
+			<section id="cd-timeline" *ngFor="let act of actions">
+				<div class="cd-timeline-block ">
+					<div class="cd-timeline-img col-md-2 ">
+						<img class="thumbnail pull-left img-responsive"
+						     src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg">
+					</div> <!-- cd-timeline-img -->
+					<div class="cd-timeline-content col-md-9">
+						<h4>{{act.accion}}</h4>
+						<span class="cd-date">{{act.auditoriaFecha}}</span>
+						<button type="button" icon="fa-eye" class="pull-right" pButton
+						        (click)="showRequerimiento(act.idRequerimientoHistorico)"></button>
+						<h4>{{act.nombreTercero}}</h4>
+						<span class="cd-date">{{act.cargo}}</span>
+					</div> <!-- cd-timeline-content -->
+				</div> <!-- cd-timeline-block -->
+			</section>
 		</p-fieldset>
 	</div>
 </div>

@@ -10,7 +10,6 @@ import { OrganizationalStructurePositions } from '../_models/organizationalStruc
 import { OrganizationalStructurePositionsServices } from '../_services/organizationalStructurePositions.service';
 import { OrganizationalStructureService } from '../_services/organizationalStructure.service';
 import { OrganizationalStructure } from '../_models/organizationalStructure';
-import { find } from 'rxjs/operator/find';
 
 @Component( {
                moduleId: module.id,
@@ -22,9 +21,10 @@ import { find } from 'rxjs/operator/find';
 export class VacanciesComponent implements OnInit {
 
    vacancy: Vacancies = new Vacancies();
-   vacancies: Vacancies[];
+   vacancies: Vacancies[] = [];
    listTipoSolicitud: SelectItem[] = [];
    listEstados: SelectItem[] = [];
+   allEstados: ListaItem[] = [];
    listAutotizacion: SelectItem[] = [];
    listArea: SelectItem[] = [];
    listCargo: SelectItem[] = [];
@@ -39,6 +39,8 @@ export class VacanciesComponent implements OnInit {
    countPlazas = 0;
    countOcupados = 0;
    listOrganizationalStructure: OrganizationalStructure[];
+   creacion: number;
+   cerrado: number;
 
    constructor( private vacanciesService: VacanciesService,
       private router: Router,
@@ -55,10 +57,14 @@ export class VacanciesComponent implements OnInit {
          } );
       } );
       this.listaService.getMasterDetails( 'ListasEstadosRequerimientos' ).subscribe( res => {
+
          this.listEstados.push( { label: 'Todos', value: '' } );
          res.map( ( l: ListaItem ) => {
             this.listEstados.push( { label: l.nombre, value: l.nombre } );
+            this.allEstados.push( l );
          } );
+         this.creacion =  this.allEstados.find( c => c.codigo === "PRCREQ").idLista;
+         this.cerrado =  this.allEstados.find( c => c.codigo === "CRRD").idLista;
       } );
       this.listAutotizacion.push({label: 'Todos', value:''});
       this.listAutotizacion.push({label: 'Si', value:'Si'});
@@ -110,11 +116,15 @@ export class VacanciesComponent implements OnInit {
    }
 
    ngOnInit() {
+
+
      this.vacanciesService.getAll().subscribe(
          vacancies => {
-            this.vacancies = vacancies;
-            this.vacancies.forEach(obj=>{
-               obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No'
+            vacancies.forEach(obj=>{
+               obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No';
+               if(obj.idEstado !== this.creacion &&  obj.idEstado !== this.cerrado){
+                  this.vacancies.push(obj);
+               }
             });
          }
       );
@@ -153,9 +163,12 @@ export class VacanciesComponent implements OnInit {
       let fechaFinEnvio = `${f.getFullYear()}-${f.getMonth() + 1}-${f.getDate()}`;
       this.vacanciesService.getByDate(fechaInicioEnvio, fechaFinEnvio).subscribe(
          vacancies => {
-            this.vacancies = vacancies;
-            this.vacancies.forEach(obj=>{
-               obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No'
+            this.vacancies = [];
+            vacancies.forEach(obj=>{
+               obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No';
+               if(obj.idEstado !== this.creacion &&  obj.idEstado !== this.cerrado){
+                  this.vacancies.push(obj);
+               }
             });
          }
       );

@@ -74,12 +74,19 @@ export class LoginComponent implements OnInit {
          this.error = 'Error en la Validacion Captcha';
       } else {
          this.authenticationService.login( this.model.username, this.model.password ).then( res => {
-            if ( res ) {
-               this.user();
-               this.loginService.setSession( true );
-            } else {
-               this.intentos++;
-               this.error = 'Usuario o Contraseña incorrecta';
+            switch (res){
+               case 1:
+                  this.user();
+                  this.loginService.setSession( true );
+                  break;
+               case 2:
+                  this.intentos = 0;
+                  this.error = 'Error al ingresar!, Comuniquese con el administrador del sistema';
+                    break;
+               default:
+                  this.intentos++;
+                  this.error = 'Usuario o Contraseña incorrecta';
+                    break;
             }
          } );
       }

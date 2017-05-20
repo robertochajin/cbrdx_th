@@ -25,57 +25,16 @@ export class VacanciesService {
       return this.authHttp.get( this.serviceURL + 'requerimientos/' + id ).map( ( res: Response ) => res.json() as Vacancies );
    }
 
+   update( c: Vacancies ) {
+      return this.authHttp.put( this.serviceURL + 'requerimientos', c ).map( ( res: Response ) => res.json() );
+   }
+
    setAction( c: RequirementsAction ) {
       return this.authHttp.post( this.serviceURL + 'requerimientosAcciones', c ).map( ( res: Response ) => res.json() );
    }
 
-   /*getAll() {
-      return this.authHttp.get( this.serviceURL + 'vterceros' ).map( ( res: Response ) => res.json() as Vacancies[] );
+   getActions( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'requerimientosAcciones/requerimiento/' + id ).map( ( res: Response ) => res.json() as RequirementsAction[] );
    }
-
-   getByTipo( type: string ) {
-      return this.authHttp.get( this.serviceURL + 'vterceros/buscarTerceros/' + type + '/' ).map( ( res: Response ) => res.json() );
-   }
-
-   getTerColWithoutPosition( query: string ) {
-      return this.authHttp.get( this.serviceURL + 'vterceros/asignarColaborador/' + query.trim() + '/' )
-      .map( ( res: Response ) => res.json() );
-   }
-
-   add( c: Vacancies ) {
-      return this.authHttp.post( this.serviceURL + 'terceros', c ).map( ( res: Response ) => res.json() );
-   };
-
-   update( c: Vacancies ) {
-      return this.authHttp.put( this.serviceURL + 'terceros', c ).map( ( res: Response ) => res );
-   }
-
-   get( id: number ) {
-      return this.authHttp.get( this.serviceURL + 'vterceros/' + id ).map( ( res: Response ) => res.json() as Vacancies );
-   }
-
-   getNacionalidad( id: number ) {
-      return this.authHttp.get( this.serviceURL + '/vista/' + id ).map( ( res: Response ) => res.json() );
-   }
-
-   getCargoActual( id: number ) {
-      return this.authHttp.get( this.serviceURLTerceros + '/tercerosCargos/' + id ).map( ( res: Response ) => res.json() );
-   }
-
-   delete( c: Vacancies ) {
-      const respuesta = this.authHttp.delete( this.serviceURL + '/' + c.idTercero );
-      return respuesta.map( ( res: Response ) => res.json() );
-   }
-
-   validateDocument( numeroDocumento: string, idTipoDocumento: number ) {
-      return this.authHttp.get( this.serviceURL + 'terceros/' + numeroDocumento + '/' + idTipoDocumento + '/' )
-      .map( ( res: Response ) => {
-         if ( res.text() !== '' ) {
-            return res.json() as Vacancies;
-         } else {
-            return undefined;
-         }
-      } );
-   }*/
 
 }

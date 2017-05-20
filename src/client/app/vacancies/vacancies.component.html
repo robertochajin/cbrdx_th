@@ -136,7 +136,7 @@
 		</div>
 		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listPositions"
 		             [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gbVacantes" #vp>
-			<p-column field="estructuraOrganizacional" header="{{ 'PLANTACOLABORADORES.LBL_AREA' | translate }}" [sortable]="true"></p-column>
+			<p-column field="area" header="{{ 'PLANTACOLABORADORES.LBL_AREA' | translate }}" [sortable]="true"></p-column>
 			<p-column field="estructuraFisica" header="{{ 'PLANTACOLABORADORES.LBL_ESTRUCTFISICA' | translate }}" [sortable]="true"></p-column>
 			<p-column field="cargo" header="{{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}" [sortable]="true"></p-column>
 			<p-column header="Salario" [sortable]="true">
