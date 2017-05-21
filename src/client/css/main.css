@@ -833,3 +833,23 @@ body .ui-tabview .ui-tabview-panel{
 #infoEmploye .ui-tabview.ui-tabview-right>.ui-tabview-panels{
    width: 86%!important;
 }
+ /* line de tiempo Requerimiento de personal */
+#cd-timeline {
+   position: relative;
+   float: left;
+}
+#cd-timeline::before {
+   /* this is the vertical line */
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 18px;
+   height: 100%;
+   width: 4px;
+   background: #d7e4ed;
+}
+#cd-timeline .cd-timeline-block{
+   padding: 1em 0;
+   border-top: 0.3125rem solid #d7e4ed;
+   margin: 0 0 0 2em;
+}

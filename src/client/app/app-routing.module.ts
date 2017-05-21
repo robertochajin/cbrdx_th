@@ -218,6 +218,7 @@ const routes = [
 
    // Login
    { path: 'login', component: LoginComponent },
+   { path: 'login/:token', component: LoginComponent },
    { path: 'cambioContrasena', component: CambioContrasenaComponent },
    { path: 'dashboard', component: DashboardComponent, canActivate: [ AuthGuard ] },
    { path: 'widgets', component: WidgetsComponent, canActivate: [ AuthGuard ] },
@@ -345,7 +346,7 @@ const routes = [
    // Vacantes
    { path: 'vacancies', component: VacanciesComponent, canActivate: [ AuthGuard ] },
    { path: 'vacancies/update/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
-
+   { path: 'vacancies/approve/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
 ];
 
 @NgModule( {
