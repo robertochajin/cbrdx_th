@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VConstante } from '../_models/vConstante';
+import { VConstante } from '../_models/vconstante';
 import { ConstanteService } from '../_services/constante.service';
 import { Router } from '@angular/router';
 /**

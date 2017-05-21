@@ -49,6 +49,21 @@ export class EmployeesService {
       return this.authHttp.get( this.serviceURL + 'vterceros/' + id ).map( ( res: Response ) => res.json() as Employee );
    }
 
+   getInfoPositionEmployee(id: number) {
+      return this.authHttp.get( this.serviceURL + 'terceros/tercerosCargosAreasFisica/' + id ).map( ( res: Response ) => {
+         if(res.text() !== ''){
+            return res.json();
+         } else {
+            return undefined;
+         }
+      });
+   }
+
+   getByNameAndArea( idArea: number, query: string ) {
+      return this.authHttp.get( this.serviceURL + 'terceros/buscarJefes/'+idArea+'/' + query )
+      .map( ( res: Response ) => res.json());
+   }
+
    getNacionalidad( id: number ) {
       return this.authHttp.get( this.serviceURL + '/vista/' + id ).map( ( res: Response ) => res.json() );
    }
