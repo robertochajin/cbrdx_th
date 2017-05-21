@@ -240,6 +240,9 @@ export class VacantesActionComponent implements OnInit {
       if(this.requirementsAction.idAccion === this.aCerrar){
          this.vacancy.idEstado = this.eCerrado;
       }
+      if(this.requirementsAction.idAccion === this.aAsignar){
+         this.vacancy.idEstado = this.eCerrado;
+      }
       console.info(this.vacancy);
       this.personnelRequirementServices.update( this.vacancy ).subscribe( data => {
          this.requirementsAction.idRequerimiento = this.vacancy.idRequerimiento;
