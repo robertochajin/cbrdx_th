@@ -323,7 +323,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
    }
 
    bossSearch( event: any ) {
-      this.employeesService.getByNameAndArea( this.employeeBasics.idArea, event.query ).subscribe(
+      this.employeesService.getByNameAndArea( this.employeeBasics.idArea, event.query.replace(/[^0-9a-zA-Z]+/g,'') ).subscribe(
          empl => this.bossList = empl
       );
    }
@@ -331,9 +331,9 @@ export class PersonnelRequirementEditComponent implements OnInit {
    positionSearch( event: any ) {
       let item = this.listRT.find( rt => rt.idLista === this.personnelRequirement.idTipoSolicitud );
       if ( item !== undefined && item.codigo === 'CRGNVO' ) {
-         this.positionsService.getByWildCard( event.query ).subscribe( list => this.positionList = list );
+         this.positionsService.getByWildCard( event.query.replace(/[^0-9a-zA-Z]+/g,'') ).subscribe( list => this.positionList = list );
       } else {
-         this.positionsService.getByWildCardAndArea( event.query, this.employeeBasics.idArea )
+         this.positionsService.getByWildCardAndArea( event.query.replace(/[^0-9a-zA-Z]+/g,''), this.employeeBasics.idArea )
          .subscribe( list => this.positionList = list );
       }
    }
@@ -351,17 +351,17 @@ export class PersonnelRequirementEditComponent implements OnInit {
       }
    }
 
-   inputVacancyCleanUp( value: string ) {
+   inputVacancyCleanUp( value: any ) {
       if ( value !== undefined && value !== '' && value !== null ) {
          let quantity = value.toUpperCase().replace( /[^0-9]/g, '' ).trim();
-         this.personnelRequirement.cantidadVacantes = Number( quantity );
+         this.personnelRequirement.cantidadVacantes = Number( quantity.replace('-','') );
       }
    }
 
-   inputInterviewCleanUp( value: string ) {
+   inputInterviewCleanUp( value: any ) {
       if ( value !== undefined && value !== '' && value !== null ) {
          let quantity = value.toUpperCase().replace( /[^0-9]/g, '' ).trim();
-         this.personnelRequirement.cantidadConvocados = Number( quantity );
+         this.personnelRequirement.cantidadConvocados = Number( quantity.replace('-','') );
       }
    }
 

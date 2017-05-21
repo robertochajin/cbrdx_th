@@ -72,7 +72,7 @@
 							
 							<div class="row">
 								<div class="form-group col-md-6" *ngIf="dispFechaInicioRemplazo">
-									<label for="initDate">{{'REQUERIMIENTOPERSONAL.LBL_FECHA_INICIO' | translate}}:</label>
+									<label for="initDate">* {{'REQUERIMIENTOPERSONAL.LBL_FECHA_INICIO' | translate}}:</label>
 									<p-calendar id="initDate" name="initDate" [showIcon]="true"
 									            [locale]="es" readonlyInput="true" [maxDate]="maxDate"
 									            dataType="date" #ngInitDate="ngModel" required (onSelect)="onSelectBegin($event)"
@@ -82,7 +82,7 @@
 									</div>
 								</div>
 								<div class="form-group col-md-6" *ngIf="dispFechaFinRemplazo">
-									<label for="endDate">{{'REQUERIMIENTOPERSONAL.LBL_FECHA_FIN' | translate}}:</label>
+									<label for="endDate">* {{'REQUERIMIENTOPERSONAL.LBL_FECHA_FIN' | translate}}:</label>
 									<p-calendar id="endDate" name="endDate" [showIcon]="true"
 									            [locale]="es" readonlyInput="true" [maxDate]="maxDateFinal" [minDate]="minDate"
 									            dataType="date" #ngEndDate="ngModel" required (onSelect)="onSelectEnd($event)"
@@ -115,7 +115,7 @@
 							
 							<div class="row">
 								<div class="form-group col-md-12">
-									<label for="justification">{{ 'REQUERIMIENTOPERSONAL.LBL_JUSTIFICACION' | translate }}:</label>
+									<label for="justification">* {{ 'REQUERIMIENTOPERSONAL.LBL_JUSTIFICACION' | translate }}:</label>
 									<textarea id="justification" name="justification" pInputTextarea
 									          [(ngModel)]="personnelRequirement.justificacion"
 									          #ngJustification="ngModel" maxlength="500" required></textarea>
@@ -224,7 +224,7 @@
 							
 							<div class="row">
 								<div class="form-group col-md-6" *ngIf="dispNumeroContratar">
-									<label for="vacancyQuantity">{{nroPlazas}}:</label>
+									<label for="vacancyQuantity">* {{nroPlazas}}:</label>
 									<input id="vacancyQuantity" type="number" pInputText name="vacancyQuantity"
 									       [(ngModel)]="personnelRequirement.cantidadVacantes" min="1"
 									       #ngVQuantity="ngModel" required (keyup)="inputVacancyCleanUp($event.target.value)"
@@ -236,10 +236,10 @@
 									</div>
 								</div>
 								<div class="form-group col-md-6" *ngIf="dispNumeroEntrevistar">
-									<label for="interviewQuantity">{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }}:</label>
+									<label for="interviewQuantity">* {{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }}:</label>
 									<input id="interviewQuantity" type="number" pInputText name="interviewQuantity"
 									       [(ngModel)]="personnelRequirement.cantidadConvocados"
-									       #ngIQuantity="ngModel" required (keyup)="inputInterviewCleanUp($event.target.value)"/>
+									       #ngIQuantity="ngModel" required (keyup)="inputInterviewCleanUp($event.value)"/>
 									<div class="ui-message ui-messages-error ui-corner-all"
 									     *ngIf="f.submitted && !ngIQuantity.valid">
 										<i class="fa fa-close"></i>
