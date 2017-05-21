@@ -8,7 +8,7 @@ export class Vacancies {
    cargo: string;
    fechaSolicitud: Date;
    idEstructuraOrganizacional: number;
-   estructuraOrganizacional: string;
+   area: string;
    idEstructuraFisica: number;
    estructuraFisica: string;
    idTipoSolicitud: number;
@@ -19,7 +19,10 @@ export class Vacancies {
    categoria: string;
    idEstado: number;
    estado: string;
+   salario: number;
    idSolicitante: number;
+   idResponsableSeleccion: number;
+   idFormaReclutamiento: number;
    nombreSolicitante: string;
    cantidadVacantes: number;
    cantidadConvocados: number;
