@@ -813,7 +813,11 @@
       "LBL_AUTHORIZATION" : "Autorización",
       "LBL_STATE" : "Estado",
       "LBL_DATEFROM" : "Fecha Desde",
-      "LBL_DATETO" : "Fecha Hasta"
+      "LBL_DATETO" : "Fecha Hasta",
+      "LBL_SALARY" : "Salario",
+      "LBL_PROFESSIONAL" : "Profesional de Reclutamiento",
+      "LBL_RECRUITMENT" : "Forma de reclutamiento",
+      "LBL_OBSERVACION" : "Observación"
    },
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="

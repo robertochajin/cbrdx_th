@@ -59,22 +59,22 @@ export class AuthenticationService {
       return tokenNotExpired();
    }
 
-   login( username: string, password: string ): Promise<boolean> {
+   login( username: string, password: string ): Promise<number> {
       return this.http.post( this.masterService + '/login', JSON.stringify( {
                                                                                username: username,
                                                                                password: password
                                                                             } ), { headers: this.headers } ).toPromise().then( res => {
          let token = res.json().token;
-         if ( token ) {
+         if ( token.length > 0 ) {
             this.token = token;
             localStorage.setItem( 'token', token );
             this.announceLogin( token );
-            return true;
+            return 1;
          } else {
-            return false;
+            return 2;
          }
       }, error => {
-         return false;
+         return 0;
       } );
    }
 
