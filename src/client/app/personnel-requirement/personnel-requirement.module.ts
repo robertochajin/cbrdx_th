@@ -15,6 +15,7 @@ import { ResoursesRequiredServices } from '../_services/resourcesRequiredPurchas
 import { ResoursesTicsService } from '../_services/resoursesTics.service';
 import { QuestionnairesService } from '../_services/questionnaires.service';
 import { RequirementReferralsServices } from '../_services/requirement-referrals.service';
+import { ConstanteService } from '../_services/constante.service';
 
 @NgModule( {
               imports: [
@@ -28,6 +29,7 @@ import { RequirementReferralsServices } from '../_services/requirement-referrals
               bootstrap: [ PersonnelRequirementComponent ],
               providers: [ PersonnelRequirementServices,
                  UsuariosService,
+                 ConstanteService,
                  RequirementReferralsServices,
                  EmployeesService,
                  PositionsService,

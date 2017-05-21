@@ -17,6 +17,15 @@
 		
 		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSSOLICITUD' | translate }}" [selected]="true" [disabled]="false">
 			<fieldset>
+				<p-dialog header="Información" [(visible)]="isPositionBlocked" modal="modal" width="500" responsive="true">
+					<p>No es posible agregar un requerimiento para el tipo seleccionado con ese cargo.</p>
+					<p>Por favor, cambiar el tipo de requerimiento.</p>
+					<p-footer>
+						<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+							<button type="button" pButton (click)="isPositionBlocked=false" label="Seleccionar otro tipo"></button>
+						</div>
+					</p-footer>
+				</p-dialog>
 				<div class="row-fluid">
 				<div class="col-md-12">
 					<form name="prForm" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="prForm">
@@ -308,7 +317,7 @@
 										       (keyup)="emailCleanUp($event.target.value)"
 										/>
 										<div class="ui-message ui-messages-error ui-corner-all"
-										     *ngIf="f.submitted && !ngMailReferred.valid">
+										     *ngIf="rf.submitted && !ngMailReferred.valid">
 											<i class="fa fa-close"></i>
 											{{ 'REQUERIMIENTOPERSONAL.LBL_CORREOREFERIDO' | translate }} {{'LBL_REQUERIDO' | translate}}
 										</div>
