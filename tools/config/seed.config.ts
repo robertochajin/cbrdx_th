@@ -309,20 +309,22 @@ export class SeedConfig {
     * Se definen la IP y el PUERTO con la cual la vista se conecta a los servicios Solucion de proteccion
     * @type {string}
     */
-   // IP = '192.168.253.37'; //_CREZCAMOS
-    IP = '190.147.208.155'; // _CIBERDIX
-   // IP = '192.168.2.53'; // _CIBERDIX
+       //IP = '192.168.253.37'; //_CREZCAMOS
+   IP = '190.147.208.155'; // _CIBERDIX
+   // IP = '192.168.2.53'; // _CIBERDIX Interna
    // IP = 'localhost';
-   SVC_SP_PORT_DEV = '8451';
-   SVC_SP_PORT_PRO = '8447';
+   SVC_SP_PORT = '8447';
+
+   SVC_SP_URL = 'http://' + this.IP + ':' + this.SVC_SP_PORT;
 
    /**
     * Se definen la IP y el PUERTO con la cual la vista se conecta a los servicios Talento Humano
     * @type {string}
     */
-   SVC_TH_PORT_DEV = '8449';
-   SVC_TH_PORT_PRO = '8448';
-   SVC_TH_URL = 'http://' + this.IP + ':' + this.SVC_TH_PORT_DEV;
+   SVC_TH_PORT_D = '8444';
+   SVC_TH_PORT = '8449';
+   SVC_TH_URL_D = 'http://' + this.IP + ':' + this.SVC_TH_PORT_D;
+   SVC_TH_URL = 'http://' + this.IP + ':' + this.SVC_TH_PORT;
 
    /**
     * The list of NPM dependcies to be injected in the `index.html`.

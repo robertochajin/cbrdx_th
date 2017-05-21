@@ -82,7 +82,7 @@ export class CompetenciesGroupsComponent implements OnInit {
                                            icon: 'fa fa-question-circle',
 
                                            accept: () => {
-                                              this.group = null;
+                                              this.group = new GroupCompetencies();
                                               this.editingGroup = false;
                                            }
                                         } );
@@ -106,7 +106,7 @@ export class CompetenciesGroupsComponent implements OnInit {
                                            icon: 'fa fa-question-circle',
 
                                            accept: () => {
-                                              this.competencie = null;
+                                              this.competencie = new Competencies();
                                               this.editingCompetencie = false;
                                            }
                                         } );
