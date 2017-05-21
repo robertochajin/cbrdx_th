@@ -35,6 +35,10 @@ export class PersonnelRequirementServices {
       return this.authHttp.get( this.masterService + id )
       .map( ( res: Response ) => res.json() as VPersonnelRequirement );
    }
+   getHistorical( id: number ) {
+      return this.authHttp.get( this.masterService +'requerimientosHistoricos/'+ id )
+      .map( ( res: Response ) => res.json() as VPersonnelRequirement );
+   }
 
    handleError( error: any ): Promise<any> {
       console.error( 'Error:', error );
