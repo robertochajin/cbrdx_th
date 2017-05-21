@@ -529,7 +529,22 @@ export class PersonnelRequirementEditComponent implements OnInit {
    }
 
    sendRequest() {
-
+      this.confirmationService.confirm( {
+                                           message: ` Al enviar la solicitus, no podrá ejecutar más cambios en el requerimiento. deseas continuar?`,
+                                           header: 'Corfirmación',
+                                           icon: 'fa fa-question-circle',
+                                           accept: () => {
+                                              this.personnelRequirement.idEstado = this.requestedState.idLista;
+                                              this.personnelRequirementServices.update( this.personnelRequirement ).subscribe( res => {
+                                                 if ( res ) {
+                                                    this._nav.setMesage( 1, this.msg );
+                                                    this.router.navigate( [ 'personnel-requirement' ] );
+                                                 }
+                                              }, error => {
+                                                 this._nav.setMesage( 3, this.msg );
+                                              } );
+                                           }
+                                        } );
    }
 
    captureResourseId( event: any ) {
@@ -765,6 +780,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
          } );
       } );
    }
+
    goBack(): void {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea salir sin guardar?`,

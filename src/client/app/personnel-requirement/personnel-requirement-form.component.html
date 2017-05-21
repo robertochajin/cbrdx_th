@@ -456,7 +456,8 @@
 			<!---->
 			<!--[disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)"-->
 		</p-accordionTab>
-		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSOSTIC' | translate }}" [selected]="false"  >
+		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_CUESTIONARIOS' | translate }}" [selected]="false"
+		                [disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)" >
 			
 			<form (ngSubmit)="frq.valid && onSubmitQuestionnaires()" #frq="ngForm" novalidate id="formulario2" *ngIf="!guardandoResoursesTics">
 				<div class="ui-grid-row">
