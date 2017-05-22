@@ -299,11 +299,17 @@ export class PersonnelRequirementEditComponent implements OnInit {
                 this.blockedPositions.find(c => c === this.selectedPosition.codigoCargo)) {
                this.isPositionBlocked = true;
             } else {
-               if(this.dispCargo)
+               if(this.dispCargo) {
                   this.personnelRequirement.idCargo = this.selectedPosition.idCargo;
+                  this.personnelRequirement.indicadorAutorizacion = this.isAuthNeeded(this.personnelRequirement.idTipoSolicitud,
+                                                                                      this.selectedPosition.idCargo);
+               } else {
+                  this.personnelRequirement.indicadorAutorizacion = false;
+               }
                if(this.dispColaboradorJefeInmediato)
                   this.personnelRequirement.idJefe = this.selectedBoss.idTercero;
                this.personnelRequirement.idSolicitante = this.user.idUsuario;
+
                this.personnelRequirement.idEstructuraOrganizacional = this.employeeBasics.idArea;
                this.personnelRequirement.idEstructuraFisica = this.employeeBasics.idEstructuraFisica;
 
@@ -337,6 +343,10 @@ export class PersonnelRequirementEditComponent implements OnInit {
          this.isbossWrong = true;
       }
 
+   }
+
+   isAuthNeeded (idRequestType: number, idPosition: number) : boolean {
+      return true;
    }
 
    bossCaptureId( event: any ) {
