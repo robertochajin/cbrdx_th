@@ -528,7 +528,8 @@ export class PersonnelRequirementEditComponent implements OnInit {
    }
 
    addReferred() {
-      this.editingReferred = true;
+      this.requirementReferral = new RequirementReferral();
+         this.editingReferred = true;
    }
 
    onSubmitReferred() {
