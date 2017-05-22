@@ -17,6 +17,7 @@ import { ResoursesTicsService } from '../_services/resoursesTics.service';
 import { QuestionnairesService } from '../_services/questionnaires.service';
 import { RequirementReferralsServices } from '../_services/requirement-referrals.service';
 import { ConstanteService } from '../_services/constante.service';
+import { VacanciesService } from '../_services/vacancies.service';
 
 @NgModule( {
               imports: [
@@ -30,6 +31,7 @@ import { ConstanteService } from '../_services/constante.service';
               bootstrap: [ PersonnelRequirementComponent ],
               providers: [ PersonnelRequirementServices,
                  UsuariosService,
+                 VacanciesService,
                  ConstanteService,
                  RequirementReferralsServices,
                  EmployeesService,
