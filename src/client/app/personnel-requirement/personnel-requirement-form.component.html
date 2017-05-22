@@ -83,7 +83,7 @@
 								<div class="form-group col-md-12">
 									<label for="justification">* {{ 'REQUERIMIENTOPERSONAL.LBL_JUSTIFICACION' | translate }}:</label>
 									<textarea id="justification" name="justification" pInputTextarea
-									          [(ngModel)]="personnelRequirement.justificacion"
+									          [(ngModel)]="personnelRequirement.justificacion" (keyup)="capitalize()"
 									          #ngJustification="ngModel" maxlength="500" required></textarea>
 									<div class="ui-message ui-messages-error ui-corner-all"
 									     *ngIf="f.submitted && !ngJustification.valid">
@@ -125,11 +125,7 @@
 									                #ngPosition="ngModel" [suggestions]="positionList" required="true"
 									                (completeMethod)="positionSearch($event)" (onSelect)="positionCaptureId($event)">
 									</p-autoComplete>
-									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngPosition.valid">
-										<i class="fa fa-close"></i> {{'REQUERIMIENTOPERSONAL.LBL_CARGO' | translate }} {{'LBL_REQUERIDO' | translate
-										}}
-									</div>
-									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="isPositionWrong">
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="(f.submitted && !ngPosition.valid) || isPositionWrong">
 										<i class="fa fa-close"></i> {{'REQUERIMIENTOPERSONAL.LBL_CARGO' | translate }} {{'LBL_REQUERIDO' | translate
 										}}
 									</div>
@@ -214,11 +210,7 @@
 									                #ngBoss="ngModel" [suggestions]="bossList" required="true"
 									                (completeMethod)="bossSearch($event)" (onSelect)="bossCaptureId($event)">
 									</p-autoComplete>
-									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngBoss.valid">
-										<i class="fa fa-close"></i> {{'REQUERIMIENTOPERSONAL.LBL_NOMBREJEFEINMEDIATO' | translate }} {{'LBL_REQUERIDO' |
-										translate }}
-									</div>
-									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="isbossWrong">
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="(f.submitted && !ngBoss.valid) || isbossWrong">
 										<i class="fa fa-close"></i> {{'REQUERIMIENTOPERSONAL.LBL_NOMBREJEFEINMEDIATO' | translate }} {{'LBL_REQUERIDO' |
 										translate }}
 									</div>
@@ -235,24 +227,24 @@
 								<div class="form-group col-md-6" *ngIf="dispNumeroContratar">
 									<label for="vacancyQuantity">* {{nroPlazas}}:</label>
 									<input id="vacancyQuantity" type="number" pInputText name="vacancyQuantity"
-									       [(ngModel)]="personnelRequirement.cantidadVacantes" min="1"
+									       [(ngModel)]="personnelRequirement.cantidadVacantes" min="0"
 									       #ngVQuantity="ngModel" required (keyup)="inputVacancyCleanUp($event.target.value)"
 									/>
 									<div class="ui-message ui-messages-error ui-corner-all"
 									     *ngIf="f.submitted && !ngVQuantity.valid">
 										<i class="fa fa-close"></i>
-										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR' | translate }} {{'LBL_REQUERIDO' | translate}}
+										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR' | translate }} {{'LBL_INVALIDOVACIO' | translate}}
 									</div>
 								</div>
 								<div class="form-group col-md-6" *ngIf="dispNumeroEntrevistar">
 									<label for="interviewQuantity">* {{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }}:</label>
 									<input id="interviewQuantity" type="number" pInputText name="interviewQuantity"
-									       [(ngModel)]="personnelRequirement.cantidadConvocados"
-									       #ngIQuantity="ngModel" required (keyup)="inputInterviewCleanUp($event.value)"/>
+									       [(ngModel)]="personnelRequirement.cantidadConvocados" min="1"
+									       #ngIQuantity="ngModel" required (keyup)="inputInterviewCleanUp($event.target.value)"/>
 									<div class="ui-message ui-messages-error ui-corner-all"
 									     *ngIf="f.submitted && !ngIQuantity.valid">
 										<i class="fa fa-close"></i>
-										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }} {{'LBL_REQUERIDO' | translate}}
+										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }} {{'LBL_INVALIDOVACIO' | translate}}
 									</div>
 								</div>
 							</div>
@@ -459,7 +451,7 @@
 		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_CUESTIONARIOS' | translate }}" [selected]="false"
 		                [disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)" >
 			
-			<form (ngSubmit)="frq.valid && onSubmitQuestionnaires()" #frq="ngForm" novalidate id="formulario2" *ngIf="!guardandoResoursesTics">
+			<form (ngSubmit)="frq.valid && onSubmitQuestionnaires()" #frq="ngForm" novalidate id="formulario2" *ngIf="!guardandoResoursesQues">
 				<div class="ui-grid-row">
 					<div class="ui-grid-col-12">
 						<label><h3>{{'REQUERIMIENTOPERSONAL.LBL_CUESTIONARIOS' | translate}} </h3></label>
@@ -468,7 +460,7 @@
 				<div class="ui-grid-row">
 					<div class="ui-grid-col-9">
 						<p-autoComplete placeholder="Buscar cuestionario" field="nombre" name="recusosQues" id="recusosQues"
-						                [(ngModel)]="ticsId"  #recusosQues="ngModel" [suggestions]="ticsList"
+						                [(ngModel)]="questId"  #recusosQues="ngModel" [suggestions]="listQuest"
 						                required (completeMethod)="resourseQuesSearch($event)" (onSelect)="captureResourseQuesId($event)">
 						</p-autoComplete>
 						<div class="ui-message ui-messages-error ui-corner-all"
@@ -484,9 +476,9 @@
 			</form>
 			<div class="row">
 				<div class="col-md-12">
-					<p-dataTable  emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="listResoursesTics" [paginator]="true"
+					<p-dataTable  emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="listResoursesQues" [paginator]="true"
 					              [rows]="10" [responsive]="true">
-						<p-column field="tic" header="{{'REQUERIMIENTOPERSONAL.LBL_RECURSO' | translate}}" [sortable]="true"></p-column>
+						<p-column field="cuestionario" header="{{'REQUERIMIENTOPERSONAL.LBL_RECURSO' | translate}}" [sortable]="true"></p-column>
 						<p-column header="Acciones" styleClass="datatable-col-action">
 							<template let-recurso="rowData" pTemplate="body">
 								<button type="button" icon="fa-trash" class="ui-button-danger"
