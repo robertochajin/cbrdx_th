@@ -84,6 +84,9 @@ body .ui-panel{
 /*
 ----------------- Cambios Theme AdminLTE ---------------------------------
  */
+.main-header {
+   z-index: 1000!important;
+}
 .wrapper-login > .content{
   padding: 0px;
 }
@@ -772,40 +775,40 @@ body.skin-green .ui-button:enabled:hover {
 }
 /* -- Paginador Green -- */
 body.skin-green .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active:hover {
-  background-color: #009c41!important;
+  background-color: #00A65A!important;
 }
 /* -- focus input text Green -- */
 body.skin-green .ui-inputtext.ui-state-focus,
 body.skin-green .ui-inputtext:focus {
-  border: 1px solid #009c41;
+  border: 1px solid #00A65A;
 }
 body.skin-green .form-control:focus{
-  border-color: #009c41!important;
+  border-color: #00A65A!important;
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0, 156, 65, 0.6);
 }
 body.skin-green .user-avatar{
-   border: 4px solid #009c41;
+   border: 4px solid #00A65A;
 }
 /* -- Tabs Green -- */
 body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav{
-   background: #009c41;
+   background: #00A65A;
 }
 body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav{
-   background: #009c41;
+   background: #00A65A;
 }
 body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active{
-   border-color: #009c41;
+   border-color: #00A65A;
    color: #009c41;
 }
 body.skin-green .ui-tabview .ui-tabview-panel{
-   border: 1px solid #009c41;
+   border: 1px solid #00A65A;
 }
 body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a{
-   color: #009c41;
+   color: #00A65A;
 }
 /* -- Accordion Green */
 body.skin-green .ui-accordion .ui-accordion-header.ui-state-active {
-   background-color: #009c41;
+   background-color: #00A65A;
 }
 
 
