@@ -122,6 +122,7 @@ export class VacanciesComponent implements OnInit {
    }
 
    ngOnInit() {
+      this.vacancies = [];
      this.vacanciesService.getAll().subscribe(
          vacancies => {
             vacancies.forEach(obj=>{
