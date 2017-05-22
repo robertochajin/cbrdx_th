@@ -7,6 +7,8 @@ import { ListaItem } from '../_models/listaItem';
 import { Message } from 'primeng/primeng';
 import 'rxjs/add/operator/switchMap';
 import { NavService } from '../_services/_nav.service';
+import { FormSharedModule } from '../shared/form-shared.module';
+
 @Component( {
                moduleId: module.id,
                templateUrl: 'lista-edit.component.html'
@@ -49,7 +51,7 @@ export class ListaEditComponent implements OnInit {
 
    createMaster( f: NgForm ) {
       this.listaService.updateMaster( this.masterList ).then( res => {
-         this.displayUpdateDialog = true;
+         this._nav.setMesage( 1, this.msgs );
       } );
    }
 

@@ -135,11 +135,13 @@ import { CompetenciesGroupsComponent } from './competencies-groups/competencies-
 import { OrganizationalStructurePositionsComponent } from './organizationalStructurePositions/organizational-structure-positions.component';
 import { PositionAuthoritiesComponent } from './positions/position-authorities.component';
 import { WidgetsComponent } from './widgets/widgets.component';
-
 // Administracion
 import { MenuManagerComponent } from './menuManager/menuManager.component';
 import { UserSessionComponent } from './usuarios/userSession.component';
-
+import { PersonnelRequirementComponent } from './personnel-requirement/personnel-requirement.component';
+import { PersonnelRequirementDetailComponent } from './personnel-requirement/personnel-requirement-detail.component';
+import { PersonnelRequirementHistoricalComponent } from './personnel-requirement/personnel-requirement-historical.component';
+import { PersonnelRequirementEditComponent } from './personnel-requirement/personnel-requirement-edit.component';
 // Vacantes
 import { VacanciesComponent } from './vacancies/vacancies.component';
 import { VacantesActionComponent } from './vacancies/vacancies-action-component';
@@ -216,6 +218,7 @@ const routes = [
 
    // Login
    { path: 'login', component: LoginComponent },
+   { path: 'login/:token', component: LoginComponent },
    { path: 'cambioContrasena', component: CambioContrasenaComponent },
    { path: 'dashboard', component: DashboardComponent, canActivate: [ AuthGuard ] },
    { path: 'widgets', component: WidgetsComponent, canActivate: [ AuthGuard ] },
@@ -322,7 +325,17 @@ const routes = [
    { path: 'form-manager/add', component: FormManagerAddComponent, canActivate: [ AuthGuard ] },
    { path: 'form-manager/update/:id', component: FormManagerUpdateComponent, canActivate: [ AuthGuard ] },
 
+   // Requerimiento de personal
+   { path: 'personnel-requirement', component: PersonnelRequirementComponent, canActivate: [ AuthGuard ] },
+   { path: 'personnel-requirement/add', component: PersonnelRequirementEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'personnel-requirement/update/:requeriment', component: PersonnelRequirementEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'personnel-requirement/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
+   { path: 'personnel-requirement/historical/:id', component: PersonnelRequirementHistoricalComponent, canActivate: [ AuthGuard ] },
+
+
+
    //  cargos
+   //  cargos factores de riesgo
    { path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [ AuthGuard ] },
    { path: 'position-absence/:idCargo', component: AbsenceComponent, canActivate: [ AuthGuard ] },
    { path: 'position-activities/:idCargo', component: PositionAuthoritiesComponent, canActivate: [ AuthGuard ] },
@@ -333,7 +346,8 @@ const routes = [
    // Vacantes
    { path: 'vacancies', component: VacanciesComponent, canActivate: [ AuthGuard ] },
    { path: 'vacancies/update/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
-
+   { path: 'vacancies/approve/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
+   { path: 'vacancies/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
 ];
 
 @NgModule( {

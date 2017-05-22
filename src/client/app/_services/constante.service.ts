@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { VConstante } from '../_models/vConstante';
+import { VConstante } from '../_models/vconstante';
 import { Constante } from '../_models/constante';
 import 'rxjs/add/operator/toPromise';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
@@ -38,6 +38,10 @@ export class ConstanteService {
 
    viewConstant( id: number ) {
       return this.authHttp.get( this.serviceURL + 'constantes/' + id ).map( res => res.json() as Constante );
+   }
+
+   getByCode( code: string ) {
+      return this.authHttp.get( this.serviceURL + 'constantes/codigo/' + code ).map( res => res.json() as Constante );
    }
 
    handleError( error: any ): Promise<any> {

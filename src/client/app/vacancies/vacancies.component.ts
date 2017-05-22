@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Vacancies } from '../_models/vacancies';
 import { VacanciesService } from '../_services/vacancies.service';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/primeng';
@@ -10,7 +9,7 @@ import { OrganizationalStructurePositions } from '../_models/organizationalStruc
 import { OrganizationalStructurePositionsServices } from '../_services/organizationalStructurePositions.service';
 import { OrganizationalStructureService } from '../_services/organizationalStructure.service';
 import { OrganizationalStructure } from '../_models/organizationalStructure';
-import { find } from 'rxjs/operator/find';
+import { PersonnelRequirement } from '../_models/personnelRequirement';
 
 @Component( {
                moduleId: module.id,
@@ -21,11 +20,11 @@ import { find } from 'rxjs/operator/find';
 
 export class VacanciesComponent implements OnInit {
 
-   vacancy: Vacancies = new Vacancies();
-   vacancies: Vacancies[];
+   vacancy: PersonnelRequirement = new PersonnelRequirement();
+   vacancies: PersonnelRequirement[] = [];
    listTipoSolicitud: SelectItem[] = [];
    listEstados: SelectItem[] = [];
-   listAcciones: SelectItem[] = [];
+   allEstados: ListaItem[] = [];
    listAutotizacion: SelectItem[] = [];
    listArea: SelectItem[] = [];
    listCargo: SelectItem[] = [];
@@ -40,6 +39,8 @@ export class VacanciesComponent implements OnInit {
    countPlazas = 0;
    countOcupados = 0;
    listOrganizationalStructure: OrganizationalStructure[];
+   creacion: number;
+   cerrado: number;
 
    constructor( private vacanciesService: VacanciesService,
       private router: Router,
@@ -56,21 +57,20 @@ export class VacanciesComponent implements OnInit {
          } );
       } );
       this.listaService.getMasterDetails( 'ListasEstadosRequerimientos' ).subscribe( res => {
+
          this.listEstados.push( { label: 'Todos', value: '' } );
          res.map( ( l: ListaItem ) => {
             this.listEstados.push( { label: l.nombre, value: l.nombre } );
+            this.allEstados.push( l );
          } );
+         this.creacion =  this.allEstados.find( c => c.codigo === "PRCREQ").idLista;
+         this.cerrado =  this.allEstados.find( c => c.codigo === "CRRD").idLista;
       } );
       this.listAutotizacion.push({label: 'Todos', value:''});
       this.listAutotizacion.push({label: 'Si', value:'Si'});
       this.listAutotizacion.push({label: 'No', value:'No'});
 
-      this.listaService.getMasterDetails( 'ListasRequerimientosAcciones' ).subscribe( res => {
-         this.listAcciones.push( { label: 'Todos', value: '' } );
-         res.map( ( l: ListaItem ) => {
-            this.listAcciones.push( { label: l.nombre, value: l.nombre } );
-         } );
-      } );
+
 
       organizationalStructureService.listOrganizationalStructure().subscribe( res => {
          this.listOrganizationalStructure = res;
@@ -116,11 +116,15 @@ export class VacanciesComponent implements OnInit {
    }
 
    ngOnInit() {
+
+
      this.vacanciesService.getAll().subscribe(
          vacancies => {
-            this.vacancies = vacancies;
-            this.vacancies.forEach(obj=>{
-               obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No'
+            vacancies.forEach(obj=>{
+               obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No';
+               if(obj.idEstado !== this.creacion &&  obj.idEstado !== this.cerrado){
+                  this.vacancies.push(obj);
+               }
             });
          }
       );
@@ -144,8 +148,12 @@ export class VacanciesComponent implements OnInit {
       this.fechaFin = today;
    }
 
-   update( c: Vacancies ) {
+   update( c: PersonnelRequirement ) {
       this.router.navigate( [ 'vacancies/update/' + c.idRequerimiento ] );
+   }
+
+   detail( c: PersonnelRequirement ) {
+      this.router.navigate( [ 'vacancies/detail/' + c.idRequerimiento ] );
    }
 
    clearDate() {
@@ -159,9 +167,12 @@ export class VacanciesComponent implements OnInit {
       let fechaFinEnvio = `${f.getFullYear()}-${f.getMonth() + 1}-${f.getDate()}`;
       this.vacanciesService.getByDate(fechaInicioEnvio, fechaFinEnvio).subscribe(
          vacancies => {
-            this.vacancies = vacancies;
-            this.vacancies.forEach(obj=>{
-               obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No'
+            this.vacancies = [];
+            vacancies.forEach(obj=>{
+               obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No';
+               if(obj.idEstado !== this.creacion &&  obj.idEstado !== this.cerrado){
+                  this.vacancies.push(obj);
+               }
             });
          }
       );

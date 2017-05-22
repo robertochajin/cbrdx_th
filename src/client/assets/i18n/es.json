@@ -59,6 +59,7 @@
   "MSG_REGISTRO":"Registro",
   "MSG_NORECORDSFOUND":"Su búsqueda no obtuvo ningún resultado",
   "LBL_BUSCAR":"Buscar...",
+  "PH_BUSCAR":"Buscar ",
   "LBL_INVALIDO" : "Invalido",
   "LBL_ENVIAR":"Enviar",
   "FIN_COMUNES":"====================================================================",
@@ -210,7 +211,6 @@
     "LBL_EXPERIENCIALABORAL":"Experiencia Laboral",
     "LBL_FACTORRH":"Factor RH",
     "LBL_FECHAEXPEDICION":"Fecha de Expedición",
-    "LBL_FECHADEFUNCION":"Fecha de Defunción",
     "LBL_FINALIZACION":"Finalización",
     "LBL_FORMACIONACADEMICA":"Formación Académica",
     "LBL_FORMACIONCAPACITACION":"Formación y Capacitación",
@@ -290,6 +290,7 @@
     "LBL_VIVO":"Vivo",
     "LBL_JURIDICO":"Estado jurídico",
     "LBL_FECHADEFUNCIONREQUERIDA":"Fecha de defunción requerida",
+    "LBL_FECHADEFUNCION":"Fecha de defunción",
     "MSG_DOCUMENTO":"El documento que intenta ingresar ya está asignado a otra persona y no puede ser duplicado"
 
   },
@@ -369,9 +370,10 @@
       "MSG_USER80CARACT" : "El nombre de usuario no debe tener más de 80 caracteres.",
       "MSG_USUARIOEXISTE" :"El usuario ya existe para otro tercero",
       "MSG_VALORUSUARIO" :"Debe ingresar un valor para el Usuario",
-      "MSG_NOMCARACT" : "El nombre de usuario sólo debe contener letras y los caracteres . - y/o _",
+      "MSG_NOMCARACT" : "El nombre de usuario sólo debe contener numeros y/o letras y los caracteres  - . _ / una unica vez",
       "LBL_USUARIOS":"Administrador de Usuarios",
-      "LBL_DATOSUSER":"Datos de Usuario"
+      "LBL_DATOSUSER":"Datos de Usuario",
+      "LBL_BUSCARUSUARIO":"Buscar usuario"
 
    },
 
@@ -555,7 +557,6 @@
            "LBL_EVALUACION" : "Desempeño",
            "LBL_EXPERIENCIA" : "Tiempo de experiencia laboral",
            "LBL_EXAMEN" : "Exámen",
-           "LBL_NOMBRE" : "Nombre",
            "LBL_INGRESO" : "Ingreso",
            "LBL_IDENTIFICACION" : "Identificación del Cargo",
            "LBL_INTERNAS" : "Internas",
@@ -727,6 +728,52 @@
 
    },
 
+   "REQUERIMIENTOPERSONAL": {
+      "LBL_REQUERIMIENTOPERSONAL":"Requerimiento de personal",
+      "BTN_AGREGARNUEVO":"Agregar nuevo requerimiento de personal",
+      "LBL_DATOSSOLICITUD":"Datos básico solicitud",
+      "LBL_DATOSSOLICITANTE":"Datos Solicitante",
+      "LBL_NOMBRESOLICITANTE":"Nombre del Solicitante",
+      "LBL_CARGOSOLICITANTE":"Cargo del solicitante",
+      "LBL_AREA":"Área / Regional / Oficina",
+      "LBL_DIRECIONGENERAL":"Dirección General",
+      "LBL_CORREOSOLICITANTE":"Correo electrónico del solicitante",
+      "LBL_DATOSVACANTE":"Datos de la vacante",
+      "LBL_MOTIVOREQUERIMIENTO":"Por qué se genera requerimiento",
+      "LBL_JUSTIFICACION":"Justificación",
+      "LBL_CARGO":"Cargo",
+      "LBL_NOMBRECARGO":"Nombre cargo",
+      "LBL_FUNCIONCARGO":"Función cargo",
+      "LBL_ZONA":"Zona",
+      "LBL_CATEGORIA":"Categoría",
+      "LBL_FORMACONTRATACION":"Forma de contratación",
+      "LBL_TIPOCONTRATACION":"Tipo de contratación",
+      "LBL_NOMBREJEFEINMEDIATO":"Nombre del jefe inmediato",
+      "LBL_CARGOJEFEINMEDIATO":"Cargo del jefe inmediato",
+      "LBL_CANTIDADACONTRATAR":"Número de personas a contratar",
+      "LBL_CANTIDADAPLAZAS":"Número de plazas",
+      "LBL_CANTIDADAPLAZASDISMINUIR":"Número de plazas a disminuir",
+      "LBL_CANTIDADAENTREVISTAR":"Número a entrevistar",
+      "LBL_DATOSREFERIDO":"Datos de referidos",
+      "LBL_NOMBREREFERIDO":"Nombre",
+      "LBL_TELEFONOREFERIDO":"Teléfono de contacto",
+      "LBL_CORREOREFERIDO":"Correo electrónico",
+      "LBL_FECHAREFERENCIA":"Fecha de referencias",
+      "LBL_DATOSRECURSOSADICIONALES":"Datos de recursos adicionales",
+      "LBL_RECURSOSCOMPRAS":"Recursos requeridos en compras",
+      "LBL_RECURSOSTIC":"Recursos requeridos en DTIC",
+      "LBL_FECHA_INICIO": "Fecha inicio",
+      "LBL_FECHA_FIN": "Fecha fin",
+      "LBL_FECHA": "Fecha",
+      "LBL_ESTADO": "Estado",
+      "BTN_SENDREQUEST": "Enviar solicitud",
+      "LBL_RECURSO": "Recurso",
+      "LBL_RECURSOTICS": "Recurso Tic's",
+      "LBL_JUSTIFICACION": "Justificación",
+      "LBL_CUESTIONARIOS": "Datos Cuestionarios",
+      "LBL_CUESTIONARIO": "Cuestionario",
+      "":""
+   },
 
    "PROYECCIONLABORAL": {
       "LBL_PROYLAB":"Proyección laboral",
@@ -771,7 +818,11 @@
       "LBL_AUTHORIZATION" : "Autorización",
       "LBL_STATE" : "Estado",
       "LBL_DATEFROM" : "Fecha Desde",
-      "LBL_DATETO" : "Fecha Hasta"
+      "LBL_DATETO" : "Fecha Hasta",
+      "LBL_SALARY" : "Salario",
+      "LBL_PROFESSIONAL" : "Profesional de Reclutamiento",
+      "LBL_RECRUITMENT" : "Forma de reclutamiento",
+      "LBL_OBSERVACION" : "Observación"
    },
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
