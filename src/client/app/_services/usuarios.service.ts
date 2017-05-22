@@ -129,6 +129,10 @@ export class UsuariosService {
       } );
    }
 
+   getByRol(rol: string) {
+      return this.authHttp.get( this.usuariosServiceURL + 'usuarioRol/' + rol ).map( ( res: Response ) => res.json() as VUsuario[] );
+   }
+
    handleError( error: any ): Promise<any> {
       console.error( 'Error:', error );
       return Promise.reject( error.message || error );
