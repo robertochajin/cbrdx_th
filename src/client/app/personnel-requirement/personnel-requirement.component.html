@@ -21,7 +21,7 @@
 			<template let-prequest="rowData" pTemplate="body">
 				<button type="button" icon="fa-eye" class="ui-button-info"  title="{{'LBL_DETALLE' | translate}}"
 				        pButton (click)="detail(prequest)"></button>
-				<button *ngIf="(prequest.idEstado === creationProccesState.idLista || prequest.idEstado === creationProccesState.idLista)"
+				<button *ngIf="(prequest.idEstado === creationProccesState.idLista || prequest.idEstado === revertedState.idLista)"
 				        type="button" icon="fa-pencil"
 				        class="ui-button-success"  title="{{'LBL_EDITAR' | translate}}"
 				        pButton (click)="update(prequest)"></button>
