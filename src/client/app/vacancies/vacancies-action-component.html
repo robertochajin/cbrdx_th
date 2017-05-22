@@ -28,7 +28,7 @@
 							<i class="fa fa-close"></i>{{ 'LBL_ACCIONES' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 						</div>
 					</div>
-					<div class="row" *ngIf="this.vacancy.idEstado === eSeleccion">
+					<div class="row" *ngIf="requirementsAction.idAccion === aAsignar">
 						<label for="profesional">{{ 'VACANCIES.LBL_PROFESSIONAL' | translate}}</label>
 						<p-dropdown id="profesional" name="profesional" required="true"
 						            [options]="listUsuarios" [autoWidth]="false"
@@ -40,7 +40,7 @@
 							<i class="fa fa-close"></i>{{ 'VACANCIES.LBL_PROFESSIONAL' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 						</div>
 					</div>
-					<div class="row" *ngIf="this.vacancy.idEstado === eSeleccion">
+					<div class="row" *ngIf="requirementsAction.idAccion === aAsignar">
 						<label for="reclutamiento">{{ 'VACANCIES.LBL_RECRUITMENT' | translate}}</label>
 						<p-dropdown id="reclutamiento" name="reclutamiento" required="true"
 						            [options]="listReclutamiento" [autoWidth]="false"
