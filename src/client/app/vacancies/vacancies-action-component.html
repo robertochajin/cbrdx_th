@@ -1,20 +1,17 @@
 <div class="row">
 	<div class="col-md-7" >
-		<p-fieldset legend="" >
+		<p-panel header="Gestión de Vacante">
+
 			<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
-				<div class="clearfix card-header">
-					<div class="col-md-2">
-						<img class="thumbnail pull-left img-responsive"
-						     src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg">
-					</div>
-					<div class="col-md-8">
-						<h4>{{ vacancy.area }}</h4>
-						<span>{{vacancy.cargo}} / {{vacancy.estructuraFisica}}</span><br/>
-						<span>{{vacancy.fechaSolicitud}}</span><br/>
+
+					<div style="margin-bottom: 20px;">
+						<h2>{{ vacancy.area }}</h2>
+						<h3>{{vacancy.cargo}} / {{vacancy.estructuraFisica}}</h3>
+						<h4>{{vacancy.fechaSolicitud}}</h4>
 						<span>{{ 'VACANCIES.LBL_SALARY' | translate}}: {{vacancy.salario}}</span><br/>
 						<span>{{ 'PLANTACOLABORADORES.LBL_NUMEROPLAZAS' | translate}}: {{vacancy.cantidadVacantes}}</span>
 					</div>
-				</div>
+
 				<div *ngIf="permitido">
 					<div class="row">
 						<label for="acciones">{{ 'LBL_ACCIONES' | translate}}</label>
@@ -72,10 +69,11 @@
 					</div>
 				</div>
 			</form>
-		</p-fieldset>
+		</p-panel>
 	</div>
 	<div class="col-md-5">
-		<p-fieldset legend="Ultimas actividades sobre el proceso">
+		<p-panel header="Últimas actividades sobre el proceso">
+			<div class="clearfix">
 			<section id="cd-timeline" *ngFor="let act of actions">
 				<div class="cd-timeline-block ">
 					<div class="cd-timeline-img col-md-2 ">
@@ -92,6 +90,7 @@
 					</div> <!-- cd-timeline-content -->
 				</div> <!-- cd-timeline-block -->
 			</section>
-		</p-fieldset>
+			</div>
+		</p-panel>
 	</div>
 </div>

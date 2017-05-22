@@ -10,6 +10,7 @@ import { EmployeesService } from '../_services/employees.service';
 import { LocationService } from '../_services/employee-location.service';
 import { Employee } from '../_models/employees';
 import { Localizaciones } from '../_models/localizaciones';
+import * as moment from 'moment/moment';
 
 @Component( {
                moduleId: module.id,
@@ -39,6 +40,11 @@ export class UsuarioDetailComponent {
          this.updateGroupLists();
          tercerosService.get( this.usuario.idTercero ).subscribe( res => {
             this.tercero = res;
+            this.tercero.nombreCompleto = this.tercero.primerNombre + ' ' +
+               this.tercero.segundoNombre + ' ' +
+               this.tercero.primerApellido + ' ' +
+               this.tercero.segundoApellido;
+            this.tercero.edad = moment( this.tercero.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
             this.locationService.getAllResiden( this.usuario.idTercero ).subscribe( locations => this.locations = locations );
          } );
       } );
