@@ -23,12 +23,14 @@ import { ResoursesTicsService } from '../_services/resoursesTics.service';
 import { RequirementReferral } from '../_models/requirementReferral';
 import { ResourcesRequiredPurchases } from '../_models/resourcesRequiredPurchases';
 import { TicsResourses } from '../_models/ticsResourses';
-import { Questionnaires  } from '../_models/questionnaires';
+import { Questionnaires } from '../_models/questionnaires';
 import { TranslateService } from 'ng2-translate';
 import { RequirementReferralsServices } from '../_services/requirement-referrals.service';
 import { QuestionnairesService } from '../_services/questionnaires.service';
 import { ConstanteService } from '../_services/constante.service';
 import { Constante } from '../_models/constante';
+import { VacanciesService } from '../_services/vacancies.service';
+import { RequirementsAction } from '../_models/requirementsAction';
 
 class employeeBasicInfo {
    idTercero: number;
@@ -72,6 +74,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
    isPositionWrong = false;
    es: any;
    private listRT: ListaItem[] = [];
+   requestAction: ListaItem;
    creationProccesState: ListaItem;
    requestedState: ListaItem;
    minDate: Date = null;
@@ -81,15 +84,21 @@ export class PersonnelRequirementEditComponent implements OnInit {
    selectedPosition: Positions;
    positionList: Positions[] = [];
 
+   objTiposReqAutorizacion: Constante;
+   tiposReqAutorizacion: any[];
+   objCargosNoReqAutorizacion: Constante;
+   cargosNoReqAutorizacion: { tipo: number, cargo: number }[] = [ { tipo: 0, cargo: 0 } ];
+
    employeeBasics: employeeBasicInfo = new employeeBasicInfo();
    selectedBoss: employeeBasicInfo;
    bossList: employeeBasicInfo[] = [];
 
    purchasesList: ListaItem[] = [];
    ticsList: ListaItem[] = [];
+   listQuest: ListaItem[] = [];
    purchasesId: any;
    ticsId: any;
-   quesId: any;
+   questId: any;
    ticsResourses: TicsResourses = new TicsResourses();
    resoursesPurchases: ResourcesRequiredPurchases = new ResourcesRequiredPurchases();
    questionnaires: Questionnaires = new Questionnaires();
@@ -136,6 +145,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
       private resoursesRequiredServices: ResoursesRequiredServices,
       private resoursesTicsService: ResoursesTicsService,
       private questionnairesService: QuestionnairesService,
+      private vacanciesService: VacanciesService,
       private location: Location,
       private constanteService: ConstanteService,
       private translate: TranslateService,
@@ -164,6 +174,10 @@ export class PersonnelRequirementEditComponent implements OnInit {
       this.maxDateFinal.setMonth( month );
       this.maxDateFinal.setFullYear( year + 10 );
 
+      this.listaService.getMasterDetailsByCode( 'ListasRequerimientosAcciones', 'SOLICITADO' ).subscribe( x => {
+         this.requestAction = x
+      } );
+
       this.listaService.getMasterDetailsByCode( 'ListasEstadosRequerimientos', 'PRCREQ' ).subscribe( x => {
          this.creationProccesState = x
       } );
@@ -172,9 +186,20 @@ export class PersonnelRequirementEditComponent implements OnInit {
          this.requestedState = x
       } );
 
-      constanteService.getByCode('CARREQ').subscribe((x:Constante) => {
-         this.blockedPositions = x.valor.split(';');
-      });
+      this.constanteService.getByCode( 'REQAUT' ).subscribe( req => {
+         this.objTiposReqAutorizacion = req;
+         this.tiposReqAutorizacion = this.objTiposReqAutorizacion.valor.split( ',' );
+
+      } );
+
+      this.constanteService.getByCode( 'CARAUT' ).subscribe( carg => {
+         this.objCargosNoReqAutorizacion = carg;
+         this.cargosNoReqAutorizacion = JSON.parse( this.objCargosNoReqAutorizacion.valor );
+      } );
+
+      constanteService.getByCode( 'CARREQ' ).subscribe( ( x: Constante ) => {
+         this.blockedPositions = x.valor.split( ';' );
+      } );
 
       listaService.getMasterDetails( 'ListasTiposSolicitudes' ).subscribe( res => {
          this.listRT = res;
@@ -226,6 +251,9 @@ export class PersonnelRequirementEditComponent implements OnInit {
       this.resoursesTicsService.getAll().subscribe( rest => {
          this.listResoursesTicsAll = rest;
       } );
+      this.questionnairesService.getAll().subscribe( rest => {
+         this.listResoursesQuesAll = rest;
+      } );
 
       this.route.params.subscribe( ( params: Params ) => {
          let idRequeriment = params[ 'requeriment' ];
@@ -254,6 +282,13 @@ export class PersonnelRequirementEditComponent implements OnInit {
             this.personnelRequirementServices.get( idRequeriment ).subscribe(
                pr => {
                   this.personnelRequirement = pr;
+                  this.selectedPosition = new Positions();
+                  this.selectedPosition.cargo = this.personnelRequirement.cargo;
+                  this.selectedPosition.idCargo = this.personnelRequirement.idCargo;
+                  this.selectedBoss = new employeeBasicInfo();
+                  this.selectedBoss.idTercero = this.personnelRequirement.idJefe;
+                  this.selectedBoss.nombreCompleto = this.personnelRequirement.nombrejefe;
+
                   this.usuariosService.viewUser( this.personnelRequirement.idSolicitante ).subscribe( u => {
                      this.user = u;
                      if ( this.user.idTercero ) {
@@ -264,7 +299,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
                         } );
                      }
                   } );
-                  this.onChangeTypeMethod(null);
+                  this.onChangeTypeMethod( null );
                }
             );
 
@@ -275,25 +310,36 @@ export class PersonnelRequirementEditComponent implements OnInit {
             this.resoursesTicsService.getResoursesByIdRequirement( idRequeriment ).subscribe( rest => {
                this.listResoursesTics = rest;
             } );
+            this.questionnairesService.getResoursesByIdRequirement( idRequeriment ).subscribe( rest => {
+               this.listResoursesQues = rest;
+            } );
 
             this.referralsServices.getAllRequirement( idRequeriment ).subscribe( ref => {
                this.requirementReferrals = ref;
-            });
+            } );
          }
       } );
    }
 
    onSubmit() {
-      if ( this.selectedBoss !== undefined && this.selectedBoss.idTercero !== undefined && this.selectedBoss.idTercero !== null ) {
-         if ( this.selectedPosition !== undefined && this.selectedPosition.idCargo !== undefined && this.selectedPosition.idCargo !== null ) {
+      if ( !this.dispColaboradorJefeInmediato || (this.selectedBoss !== undefined && this.selectedBoss.idTercero !== undefined && this.selectedBoss.idTercero !== null ) ) {
+         if ( !this.dispCargo || (this.selectedPosition !== undefined && this.selectedPosition.idCargo !== undefined && this.selectedPosition.idCargo !== null) ) {
             let item = this.listRT.find( rt => rt.idLista === this.personnelRequirement.idTipoSolicitud );
-            if ((item.codigo === 'RMPLZ' || item.codigo === 'RDP' || item.codigo === 'PLNCRR') &&
-                this.blockedPositions.find(c => c === this.selectedPosition.codigoCargo)) {
+            if ( (item.codigo === 'RMPLZ') &&
+                 this.blockedPositions.find( c => c === this.selectedPosition.codigoCargo ) ) {
                this.isPositionBlocked = true;
             } else {
-               this.personnelRequirement.idJefe = this.selectedBoss.idTercero;
-               this.personnelRequirement.idCargo = this.selectedPosition.idCargo;
+               if ( this.dispCargo ) {
+                  this.personnelRequirement.idCargo = this.selectedPosition.idCargo;
+                  this.personnelRequirement.indicadorAutorizacion = this.isAuthNeeded( this.personnelRequirement.idTipoSolicitud,
+                                                                                       this.selectedPosition.idCargo );
+               } else {
+                  this.personnelRequirement.indicadorAutorizacion = false;
+               }
+               if ( this.dispColaboradorJefeInmediato )
+                  this.personnelRequirement.idJefe = this.selectedBoss.idTercero;
                this.personnelRequirement.idSolicitante = this.user.idUsuario;
+
                this.personnelRequirement.idEstructuraOrganizacional = this.employeeBasics.idArea;
                this.personnelRequirement.idEstructuraFisica = this.employeeBasics.idEstructuraFisica;
 
@@ -329,6 +375,21 @@ export class PersonnelRequirementEditComponent implements OnInit {
 
    }
 
+   isAuthNeeded (idRequestType: number, idPosition: number) : boolean {
+      let requiereAutorizacion = false;
+      if(this.tiposReqAutorizacion !== undefined && this.tiposReqAutorizacion.find(c => c === idRequestType.toString())){
+         console.info(this.cargosNoReqAutorizacion);
+         requiereAutorizacion = true;
+         if(this.cargosNoReqAutorizacion.find(c => c.tipo === idRequestType &&
+                                                   c.cargo === idPosition)){
+            requiereAutorizacion = false;
+         }
+      }else{
+         requiereAutorizacion = false;
+      }
+      return requiereAutorizacion;
+   }
+
    bossCaptureId( event: any ) {
       this.selectedBoss.idTercero = event.idTercero;
       this.selectedBoss.nombreCompleto = event.nombreCompleto;
@@ -354,7 +415,6 @@ export class PersonnelRequirementEditComponent implements OnInit {
    }
 
    positionCaptureId( event: any ) {
-      this.personnelRequirement.idCargo = event.idCargo;
       this.selectedPosition.idCargo = event.idCargo;
       this.selectedPosition.cargo = event.cargo;
       this.isPositionWrong = false;
@@ -383,7 +443,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
    onChangeTypeMethod( event: any ) {
       let code = '';
       let item = this.listRT.find( rt => rt.idLista === this.personnelRequirement.idTipoSolicitud );
-      if ( code !== undefined) {
+      if ( item !== undefined && item !== null) {
          code = item.codigo;
 
          if ( code === 'DMNPLNT' ) {
@@ -454,6 +514,19 @@ export class PersonnelRequirementEditComponent implements OnInit {
             this.dispNumeroContratar = false;
             this.dispNumeroEntrevistar = false;
          }
+      } else {
+         this.dispNombreCargo = false;
+         this.dispFuncionCargo = false;
+         this.dispFechaInicioRemplazo = false;
+         this.dispFechaFinRemplazo = false;
+         this.dispCargo = false;
+         this.dispZona = false;
+         this.dispCategoria = false;
+         this.dispFormaContratacion = false;
+         this.dispTipoContratacion = false;
+         this.dispColaboradorJefeInmediato = false;
+         this.dispNumeroContratar = false;
+         this.dispNumeroEntrevistar = false;
       }
    }
 
@@ -475,7 +548,8 @@ export class PersonnelRequirementEditComponent implements OnInit {
    }
 
    addReferred() {
-      this.editingReferred = true;
+      this.requirementReferral = new RequirementReferral();
+         this.editingReferred = true;
    }
 
    onSubmitReferred() {
@@ -522,7 +596,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
                                            icon: 'fa fa-question-circle',
 
                                            accept: () => {
-                                              this.requirementReferral = null;
+                                              this.requirementReferral = new RequirementReferral();
                                               this.editingReferred = false;
                                            }
                                         } );
@@ -530,15 +604,23 @@ export class PersonnelRequirementEditComponent implements OnInit {
 
    sendRequest() {
       this.confirmationService.confirm( {
-                                           message: ` Al enviar la solicitus, no podrá ejecutar más cambios en el requerimiento. deseas continuar?`,
-                                           header: 'Corfirmación',
+                                           message: ` Al enviar la solicitud, no podrá ejecutar más cambios en el requerimiento. deseas continuar?`,
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.personnelRequirement.idEstado = this.requestedState.idLista;
                                               this.personnelRequirementServices.update( this.personnelRequirement ).subscribe( res => {
                                                  if ( res ) {
-                                                    this._nav.setMesage( 1, this.msg );
-                                                    this.router.navigate( [ 'personnel-requirement' ] );
+                                                    let action : RequirementsAction = new RequirementsAction();
+                                                    action.idRequerimiento = this.personnelRequirement.idRequerimiento;
+                                                    action.idAccion = this.requestAction.idLista;
+                                                    action.observacion = 'Solicitud de requerimiento';
+                                                    this.vacanciesService.setAction(action).subscribe(acc => {
+                                                       if ( acc ){
+                                                          this._nav.setMesage( 1, this.msg );
+                                                          this.router.navigate( [ 'personnel-requirement' ] );
+                                                       }
+                                                    });
                                                  }
                                               }, error => {
                                                  this._nav.setMesage( 3, this.msg );
@@ -549,7 +631,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
 
    captureResourseId( event: any ) {
       this.resoursesPurchases.idCompra = event.idLista;
-      this.resoursesPurchases.idRequerimiento = 1;
+      this.resoursesPurchases.idRequerimiento = this.personnelRequirement.idRequerimiento;
       this.wrongResourse = false;
    }
 
@@ -560,21 +642,21 @@ export class PersonnelRequirementEditComponent implements OnInit {
       } );
    }
    captureResourseQuesId( event: any ) {
-      this.resoursesPurchases.idCompra = event.idLista;
-      this.resoursesPurchases.idRequerimiento = 1;
+      this.questionnaires.idCuestionario = event.idLista;
+      this.questionnaires.idRequerimiento = this.personnelRequirement.idRequerimiento;
       this.wrongResourseQues = false;
    }
 
    resourseQuesSearch( event: any ) {
-      this.listaService.getMasterDetailsByWildCard( 'ListasTiposCompras', event.query ).subscribe( rest => {
-         this.purchasesList = rest;
-         this.purchasesList.map( d => d.nombre = d.idLista + ' : ' + d.nombre );
+      this.listaService.getMasterDetailsByWildCard( 'ListasCuestionarios', event.query ).subscribe( rest => {
+         this.listQuest = rest;
+         this.listQuest.map( d => d.nombre = d.idLista + ' : ' + d.nombre );
       } );
    }
 
    captureResourseTicsId( event: any ) {
       this.ticsResourses.idTic = event.idLista;
-      this.ticsResourses.idRequerimiento = 1;
+      this.ticsResourses.idRequerimiento = this.personnelRequirement.idRequerimiento;
       this.wrongResourseTics = false;
    }
 
@@ -587,52 +669,54 @@ export class PersonnelRequirementEditComponent implements OnInit {
 
    onSubmit3() {
       let temp: any;
-      if ( this.resoursesPurchases.idCompra === this.purchasesId.idLista ) {
-         this.guardandoResourses = true;
-         this.resoursesPurchases.idRequerimiento = this.personnelRequirement.idRequerimiento;
-         temp = this.listResoursesAll.find(
-            r => r.idCompra === this.resoursesPurchases.idCompra && r.idRequerimiento === this.resoursesPurchases.idRequerimiento );
-         if ( temp ) {
-            if ( !temp.indicadorHabilitado ) {
-               temp.indicadorHabilitado = true;
-               this.resoursesRequiredServices.update( temp ).subscribe( rest => {
+      if ( !this.wrongResourse ) {
+         if ( this.resoursesPurchases.idCompra === this.purchasesId.idLista ) {
+            this.guardandoResourses = true;
+            this.resoursesPurchases.idRequerimiento = this.personnelRequirement.idRequerimiento;
+            temp = this.listResoursesAll.find(
+               r => r.idCompra === this.resoursesPurchases.idCompra && r.idRequerimiento === this.resoursesPurchases.idRequerimiento );
+            if ( temp ) {
+               if ( !temp.indicadorHabilitado ) {
+                  temp.indicadorHabilitado = true;
+                  this.resoursesRequiredServices.update( temp ).subscribe( rest => {
+                     this.guardandoResourses = false;
+                     this.wrongResourse = true;
+                     this.purchasesId = null;
+                     this.listResourses = [];
+                     this.listResoursesAll = [];
+                     this.resoursesRequiredServices.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento ).subscribe(
+                        rest => {
+                           this.listResourses = rest;
+                        } );
+                     this.resoursesRequiredServices.getAll().subscribe( rest => {
+                        this.listResoursesAll = rest;
+                     } );
+                  } );
+               } else {
+                  this.guardandoResourses = false;
+                  this.wrongResourse = true;
+                  this.purchasesId = null;
+                  this._nav.setMesage( 0, {
+                     severity: 'warn', summary: 'Información', detail: 'No es posible agregar mas de una vez un' +
+                                                                       ' recurso'
+                  } );
+               }
+            } else {
+               this.resoursesRequiredServices.add( this.resoursesPurchases ).subscribe( rest => {
                   this.guardandoResourses = false;
                   this.wrongResourse = true;
                   this.purchasesId = null;
                   this.listResourses = [];
                   this.listResoursesAll = [];
-                  this.resoursesRequiredServices.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento ).subscribe(
-                     rest => {
-                        this.listResourses = rest;
-                     } );
+                  this.resoursesRequiredServices.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento )
+                  .subscribe( rest => {
+                     this.listResourses = rest;
+                  } );
                   this.resoursesRequiredServices.getAll().subscribe( rest => {
                      this.listResoursesAll = rest;
                   } );
                } );
-            } else {
-               this.guardandoResourses = false;
-               this.wrongResourse = true;
-               this.purchasesId = null;
-               this._nav.setMesage( 0, {
-                  severity: 'warn', summary: 'Información', detail: 'No es posible agregar mas de una vez un' +
-                                                                    ' recurso'
-               } );
             }
-         } else {
-            this.resoursesRequiredServices.add( this.resoursesPurchases ).subscribe( rest => {
-               this.guardandoResourses = false;
-               this.wrongResourse = true;
-               this.purchasesId = null;
-               this.listResourses = [];
-               this.listResoursesAll = [];
-               // idRequerimiento quemado --> 1
-               this.resoursesRequiredServices.getResoursesByIdRequirement( 1 ).subscribe( rest => {
-                  this.listResourses = rest;
-               } );
-               this.resoursesRequiredServices.getAll().subscribe( rest => {
-                  this.listResoursesAll = rest;
-               } );
-            } );
          }
       }
    }
@@ -642,7 +726,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
       this.resoursesRequiredServices.update( r ).subscribe( res => {
          this.listResourses = [];
          this.listResoursesAll = [];
-         this.resoursesRequiredServices.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+         this.resoursesRequiredServices.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento ).subscribe( rest => {
             this.listResourses = rest;
          } );
          this.resoursesRequiredServices.getAll().subscribe( rest => {
@@ -653,15 +737,39 @@ export class PersonnelRequirementEditComponent implements OnInit {
 
    onSubmit4() {
       let temp: any;
-      if ( this.ticsResourses.idTic === this.ticsId.idLista ) {
-         this.guardandoResoursesTics = true;
-         this.ticsResourses.idRequerimiento = this.personnelRequirement.idRequerimiento;
-         temp = this.listResoursesTicsAll.find(
-            r => r.idTic === this.ticsResourses.idTic && r.idRequerimiento === this.ticsResourses.idRequerimiento );
-         if ( temp ) {
-            if ( !temp.indicadorHabilitado ) {
-               temp.indicadorHabilitado = true;
-               this.resoursesTicsService.update( temp ).subscribe( rest => {
+      if ( !this.wrongResourseTics ) {
+         if ( this.ticsResourses.idTic === this.ticsId.idLista ) {
+            this.guardandoResoursesTics = true;
+            this.ticsResourses.idRequerimiento = this.personnelRequirement.idRequerimiento;
+            temp = this.listResoursesTicsAll.find(
+               r => r.idTic === this.ticsResourses.idTic && r.idRequerimiento === this.ticsResourses.idRequerimiento );
+            if ( temp ) {
+               if ( !temp.indicadorHabilitado ) {
+                  temp.indicadorHabilitado = true;
+                  this.resoursesTicsService.update( temp ).subscribe( rest => {
+                     this.guardandoResoursesTics = false;
+                     this.wrongResourseTics = true;
+                     this.ticsId = null;
+                     this.listResoursesTics = [];
+                     this.listResoursesTicsAll = [];
+                     this.resoursesTicsService.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento ).subscribe( rest => {
+                        this.listResoursesTics = rest;
+                     } );
+                     this.resoursesTicsService.getAll().subscribe( rest => {
+                        this.listResoursesTicsAll = rest;
+                     } );
+                  } );
+               } else {
+                  this.guardandoResoursesTics = false;
+                  this.wrongResourseTics = true;
+                  this.ticsId = null;
+                  this._nav.setMesage( 0, {
+                     severity: 'warn', summary: 'Información', detail: 'No es posible agregar mas de una vez un' +
+                                                                       ' recurso'
+                  } );
+               }
+            } else {
+               this.resoursesTicsService.add( this.ticsResourses ).subscribe( rest => {
                   this.guardandoResoursesTics = false;
                   this.wrongResourseTics = true;
                   this.ticsId = null;
@@ -674,30 +782,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
                      this.listResoursesTicsAll = rest;
                   } );
                } );
-            } else {
-               this.guardandoResoursesTics = false;
-               this.wrongResourseTics = true;
-               this.ticsId = null;
-               this._nav.setMesage( 0, {
-                  severity: 'warn', summary: 'Información', detail: 'No es posible agregar mas de una vez un' +
-                                                                    ' recurso'
-               } );
             }
-         } else {
-            this.resoursesTicsService.add( this.ticsResourses ).subscribe( rest => {
-               this.guardandoResoursesTics = false;
-               this.wrongResourseTics = true;
-               this.ticsId = null;
-               this.listResoursesTics = [];
-               this.listResoursesTicsAll = [];
-               // idRequerimiento quemado --> 1
-               this.resoursesTicsService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
-                  this.listResoursesTics = rest;
-               } );
-               this.resoursesTicsService.getAll().subscribe( rest => {
-                  this.listResoursesTicsAll = rest;
-               } );
-            } );
          }
       }
    }
@@ -705,9 +790,9 @@ export class PersonnelRequirementEditComponent implements OnInit {
    delResoursesTics( r: TicsResourses ) {
       r.indicadorHabilitado = false;
       this.resoursesTicsService.update( r ).subscribe( res => {
-         this.listResourses = [];
-         this.listResoursesAll = [];
-         this.resoursesTicsService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+         this.listResoursesTics = [];
+         this.listResoursesTicsAll = [];
+         this.resoursesTicsService.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento ).subscribe( rest => {
             this.listResoursesTics = rest;
          } );
          this.resoursesTicsService.getAll().subscribe( rest => {
@@ -717,52 +802,53 @@ export class PersonnelRequirementEditComponent implements OnInit {
    }
    onSubmitQuestionnaires() {
       let temp: any;
-      if ( this.questionnaires.idCuestionario === this.quesId.idLista ) {
-         this.guardandoResoursesQues = true;
-         this.questionnaires.idRequerimiento = 1; // idRequerimiento quemado --> 1
-         temp = this.listResoursesQuesAll.find(
-            r => r.idCuestionario === this.questionnaires.idCuestionario && r.idRequerimiento === this.questionnaires.idRequerimiento );
-         if ( temp ) {
-            if ( !temp.indicadorHabilitado ) {
-               temp.indicadorHabilitado = true;
-               this.questionnairesService.update( temp ).subscribe( rest => {
+      if ( !this.wrongResourseQues ) {
+         if ( this.questionnaires.idCuestionario === this.questId.idLista ) {
+            this.guardandoResoursesQues = true;
+            this.questionnaires.idRequerimiento = this.personnelRequirement.idRequerimiento;
+            temp = this.listResoursesQuesAll.find(
+               r => r.idCuestionario === this.questionnaires.idCuestionario && r.idRequerimiento === this.questionnaires.idRequerimiento );
+            if ( temp ) {
+               if ( !temp.indicadorHabilitado ) {
+                  temp.indicadorHabilitado = true;
+                  this.questionnairesService.update( temp ).subscribe( rest => {
+                     this.guardandoResoursesQues = false;
+                     this.wrongResourseQues = true;
+                     this.questId = null;
+                     this.listResoursesQues = [];
+                     this.listResoursesQuesAll = [];
+                     this.questionnairesService.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento )
+                     .subscribe( rest => {
+                        this.listResoursesQues = rest;
+                     } );
+                     this.questionnairesService.getAll().subscribe( rest => {
+                        this.listResoursesQuesAll = rest;
+                     } );
+                  } );
+               } else {
                   this.guardandoResoursesQues = false;
                   this.wrongResourseQues = true;
-                  this.quesId = null;
+                  this.questId = null;
+                  this._nav.setMesage( 0, {
+                     severity: 'warn', summary: 'Información', detail: 'No es posible agregar mas de una vez un' +
+                                                                       ' recurso'
+                  } );
+               }
+            } else {
+               this.questionnairesService.add( this.questionnaires ).subscribe( rest => {
+                  this.guardandoResoursesQues = false;
+                  this.wrongResourseQues = true;
+                  this.questId = null;
                   this.listResoursesQues = [];
                   this.listResoursesQuesAll = [];
-                  // idRequerimiento quemado --> 1
-                  this.questionnairesService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+                  this.questionnairesService.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento ).subscribe( rest => {
                      this.listResoursesQues = rest;
                   } );
                   this.questionnairesService.getAll().subscribe( rest => {
                      this.listResoursesQuesAll = rest;
                   } );
                } );
-            } else {
-               this.guardandoResoursesQues = false;
-               this.wrongResourseQues = true;
-               this.quesId = null;
-               this._nav.setMesage( 0, {
-                  severity: 'warn', summary: 'Información', detail: 'No es posible agregar mas de una vez un' +
-                                                                    ' recurso'
-               } );
             }
-         } else {
-            this.questionnairesService.add( this.questionnaires ).subscribe( rest => {
-               this.guardandoResoursesQues = false;
-               this.wrongResourseQues = true;
-               this.quesId = null;
-               this.listResoursesQues = [];
-               this.listResoursesQuesAll = [];
-               // idRequerimiento quemado --> 1
-               this.questionnairesService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
-                  this.listResoursesQues = rest;
-               } );
-               this.questionnairesService.getAll().subscribe( rest => {
-                  this.listResoursesQuesAll = rest;
-               } );
-            } );
          }
       }
    }
@@ -772,7 +858,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
       this.questionnairesService.update( r ).subscribe( res => {
          this.listResoursesQues = [];
          this.listResoursesQuesAll = [];
-         this.questionnairesService.getResoursesByIdRequirement( 1 ).subscribe( rest => {
+         this.questionnairesService.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento ).subscribe( rest => {
             this.listResoursesQues = rest;
          } );
          this.questionnairesService.getAll().subscribe( rest => {

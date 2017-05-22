@@ -19,12 +19,29 @@
 		<p-column field="estado" header="{{ 'LBL_ESTADO' | translate}}" [sortable]="true"></p-column>
 		<p-column header="{{ 'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
 			<template let-prequest="rowData" pTemplate="body">
-				<button type="button" icon="fa-eye" class="ui-button-info"
+				<button type="button" icon="fa-eye" class="ui-button-info"  title="{{'LBL_DETALLE' | translate}}"
 				        pButton (click)="detail(prequest)"></button>
-				<button type="button" icon="fa-pencil" class="ui-button-success"
+				<button *ngIf="(prequest.idEstado === creationProccesState.idLista || prequest.idEstado === creationProccesState.idLista)"
+				        type="button" icon="fa-pencil"
+				        class="ui-button-success"  title="{{'LBL_EDITAR' | translate}}"
 				        pButton (click)="update(prequest)"></button>
+				<button *ngIf="prequest.idEstado !== creationProccesState.idLista" type="button" icon="fa-list-alt" class="ui-button-success"
+				        pButton (click)="observations(prequest)" title="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}"></button>
 			</template>
 		</p-column>
 	</p-dataTable>
 </div>
+<p-dialog header="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}" [(visible)]="displayActions" modal="modal" width="700" responsive="true">
+	<div *ngFor="let acc of requirementsAction">
+		<h4>{{acc.accion}} - {{nombreTercero}}</h4>
+		<h5>{{auditoriaFecha}}</h5>
+		<p>{{acc.observacion}}</p>
+		<hr>
+	</div>
+	<p-footer>
+		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+			<button type="button" pButton (click)="displayActions=false" label="{{'LBL_CERRAR' | translate}}"></button>
+		</div>
+	</p-footer>
+</p-dialog>
 <p-confirmDialog width="400"></p-confirmDialog>
