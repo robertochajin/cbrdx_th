@@ -29,6 +29,8 @@ import { RequirementReferralsServices } from '../_services/requirement-referrals
 import { QuestionnairesService } from '../_services/questionnaires.service';
 import { ConstanteService } from '../_services/constante.service';
 import { Constante } from '../_models/constante';
+import { VacanciesService } from '../_services/vacancies.service';
+import { RequirementsAction } from '../_models/requirementsAction';
 
 class employeeBasicInfo {
    idTercero: number;
@@ -72,6 +74,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
    isPositionWrong = false;
    es: any;
    private listRT: ListaItem[] = [];
+   requestAction: ListaItem;
    creationProccesState: ListaItem;
    requestedState: ListaItem;
    minDate: Date = null;
@@ -137,6 +140,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
       private resoursesRequiredServices: ResoursesRequiredServices,
       private resoursesTicsService: ResoursesTicsService,
       private questionnairesService: QuestionnairesService,
+      private vacanciesService: VacanciesService,
       private location: Location,
       private constanteService: ConstanteService,
       private translate: TranslateService,
@@ -164,6 +168,10 @@ export class PersonnelRequirementEditComponent implements OnInit {
       this.maxDateFinal = new Date();
       this.maxDateFinal.setMonth( month );
       this.maxDateFinal.setFullYear( year + 10 );
+
+      this.listaService.getMasterDetailsByCode( 'ListasRequerimientosAcciones', 'SOLICITADO' ).subscribe( x => {
+         this.requestAction = x
+      } );
 
       this.listaService.getMasterDetailsByCode( 'ListasEstadosRequerimientos', 'PRCREQ' ).subscribe( x => {
          this.creationProccesState = x
@@ -544,8 +552,16 @@ export class PersonnelRequirementEditComponent implements OnInit {
                                               this.personnelRequirement.idEstado = this.requestedState.idLista;
                                               this.personnelRequirementServices.update( this.personnelRequirement ).subscribe( res => {
                                                  if ( res ) {
-                                                    this._nav.setMesage( 1, this.msg );
-                                                    this.router.navigate( [ 'personnel-requirement' ] );
+                                                    let action : RequirementsAction = new RequirementsAction();
+                                                    action.idRequerimiento = this.personnelRequirement.idRequerimiento;
+                                                    action.idAccion = this.requestAction.idLista;
+                                                    action.observacion = 'Solicitud de requerimiento';
+                                                    this.vacanciesService.setAction(action).subscribe(acc => {
+                                                       if ( acc ){
+                                                          this._nav.setMesage( 1, this.msg );
+                                                          this.router.navigate( [ 'personnel-requirement' ] );
+                                                       }
+                                                    });
                                                  }
                                               }, error => {
                                                  this._nav.setMesage( 3, this.msg );
