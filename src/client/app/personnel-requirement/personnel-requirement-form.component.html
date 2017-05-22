@@ -239,8 +239,8 @@
 								<div class="form-group col-md-6" *ngIf="dispNumeroEntrevistar">
 									<label for="interviewQuantity">* {{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }}:</label>
 									<input id="interviewQuantity" type="number" pInputText name="interviewQuantity"
-									       [(ngModel)]="personnelRequirement.cantidadConvocados"
-									       #ngIQuantity="ngModel" required (keyup)="inputInterviewCleanUp($event.value)"/>
+									       [(ngModel)]="personnelRequirement.cantidadConvocados" min="1"
+									       #ngIQuantity="ngModel" required (keyup)="inputInterviewCleanUp($event.target.value)"/>
 									<div class="ui-message ui-messages-error ui-corner-all"
 									     *ngIf="f.submitted && !ngIQuantity.valid">
 										<i class="fa fa-close"></i>
