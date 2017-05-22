@@ -5,10 +5,12 @@ import { NavService } from '../_services/_nav.service';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
 import { VacanciesService } from '../_services/vacancies.service';
-import { Vacancies } from '../_models/vacancies';
 import { RequirementsAction } from '../_models/requirementsAction';
 import { Constante } from '../_models/constante';
 import { ConstanteService } from '../_services/constante.service';
+import { UsuariosService } from '../_services/usuarios.service';
+import { PersonnelRequirement } from '../_models/personnelRequirement';
+import { PersonnelRequirementServices } from '../_services/personnelRequirement.service';
 
 @Component( {
                moduleId: module.id,
@@ -22,7 +24,7 @@ export class VacantesActionComponent implements OnInit {
    listUsuarios: SelectItem[] = [];
    listAcciones: SelectItem[] = [];
    listReclutamiento: SelectItem[] = [];
-   vacancy: Vacancies = new Vacancies();
+   vacancy: PersonnelRequirement = new PersonnelRequirement();
    requirementsAction: RequirementsAction = new RequirementsAction();
    actions: RequirementsAction[] = [];
    requiereAutorizacion = true;
@@ -43,6 +45,7 @@ export class VacantesActionComponent implements OnInit {
    aDevolver: number;
    aRealizar: number;
    aAsignar: number;
+   aSeleccion: number;
    aAprobar: number;
    aRechazar: number;
    aCerrar: number;
@@ -66,12 +69,15 @@ export class VacantesActionComponent implements OnInit {
       private navService: NavService,
       private route: ActivatedRoute,
       private constanteService: ConstanteService,
+      private usuariosService: UsuariosService,
+      private personnelRequirementServices: PersonnelRequirementServices
+
    ) {
       this.listAcciones.push( { label: 'Seleccione', value: null } );
 
       this.constanteService.getByCode( 'REQAUT' ).subscribe( req => {
          this.objTiposReqAutorizacion = req;
-         this.tiposReqAutorizacion = this.objTiposReqAutorizacion.valor.split(';');
+         this.tiposReqAutorizacion = this.objTiposReqAutorizacion.valor.split(',');
 
       });
 
@@ -86,6 +92,13 @@ export class VacantesActionComponent implements OnInit {
             this.listReclutamiento.push( { label: l.nombre, value: l.idLista } );
          } );
       } );
+      this.usuariosService.listVUsers().subscribe(
+         usuarios => {
+            this.listUsuarios.push( { label: 'Seleccione', value: '' } );
+            usuarios.map( l => {
+               this.listUsuarios.push( { label: l.nombre, value: l.idUsuario } );
+            } );
+         } );
 
       this.listaService.getMasterDetails( 'ListasEstadosRequerimientos' ).subscribe( res => {
          res.map( ( l: ListaItem ) => {
@@ -135,6 +148,9 @@ export class VacantesActionComponent implements OnInit {
                case 'REALIZ':
                   this.aRealizar = l.idLista;
                   break;
+               case 'PRCSEL':
+                  this.aSeleccion = l.idLista;
+                  break;
                case 'ASIPRO':
                   this.aAsignar = l.idLista;
                   break;
@@ -148,8 +164,9 @@ export class VacantesActionComponent implements OnInit {
                   this.aCerrar = l.idLista;
                   break;
             }
-            this.buildSteps();
+
          } );
+         this.buildSteps();
       } );
 
    }
@@ -167,16 +184,18 @@ export class VacantesActionComponent implements OnInit {
          ){
             this.permitido = false;
          }
-         if(this.tiposReqAutorizacion.find(c => c === this.vacancy.idTipoSolicitud)){
+
+
+         if(this.tiposReqAutorizacion !== undefined && this.tiposReqAutorizacion.find(c => c === this.vacancy.idTipoSolicitud.toString())){
+            console.info(this.cargosNoReqAutorizacion);
             this.requiereAutorizacion = true;
                if(this.cargosNoReqAutorizacion.find(c => c.tipo === this.vacancy.idTipoSolicitud &&
-                                                         c.cargo === this.vacancy.idTipoSolicitud)){
+                                                         c.cargo === this.vacancy.idCargo)){
                   this.requiereAutorizacion = false;
                }
          }else{
-            this.requiereAutorizacion = true;
+            this.requiereAutorizacion = false;
          }
-
          if(this.vacancy.idEstado === this.eEnAprobacion) {
             this.listAcciones = this.accionesStep1;
          }else{
@@ -185,6 +204,9 @@ export class VacantesActionComponent implements OnInit {
             }else{
                this.listAcciones = this.accionesStep3;
             }
+         }
+         if(this.vacancy.idEstado === this.eSeleccion) {
+            this.listAcciones = this.accionesStep4;
          }
       } );
    }
@@ -204,7 +226,7 @@ export class VacantesActionComponent implements OnInit {
       if(this.requirementsAction.idAccion === this.aAprobar){
          this.vacancy.idEstado = this.eAprobado;
       }
-      if(this.requirementsAction.idAccion === this.aAsignar){
+      if(this.requirementsAction.idAccion === this.aSeleccion){
          this.vacancy.idEstado = this.eSeleccion;
       }
       if(this.requirementsAction.idAccion === this.aDevolver){
@@ -219,7 +241,12 @@ export class VacantesActionComponent implements OnInit {
       if(this.requirementsAction.idAccion === this.aCerrar){
          this.vacancy.idEstado = this.eCerrado;
       }
-      this.vacanciesService.update( this.vacancy ).subscribe( data => {
+      if(this.requirementsAction.idAccion === this.aAsignar){
+         this.vacancy.idEstado = this.eCerrado;
+      }
+      console.info(this.vacancy);
+      this.personnelRequirementServices.update( this.vacancy ).subscribe( data => {
+         this.requirementsAction.idRequerimiento = this.vacancy.idRequerimiento;
          this.vacanciesService.setAction( this.requirementsAction ).subscribe( requirementsAction => {
             this.navService.setMesage( 1, this.msg );
             this.requirementsAction = requirementsAction;
@@ -244,29 +271,36 @@ export class VacantesActionComponent implements OnInit {
    buildSteps(){
 
       this.accionesStep1.push( { label: 'Seleccione', value: null } );
-      this.accionesStep1.push( { label: this.allAcciones.find( c => c.codigo == 'APRB').nombre,
-                                  value: this.allAcciones.find( c => c.codigo == 'APRB').idLista } );
-      this.accionesStep1.push( { label: this.allAcciones.find( c => c.codigo == 'RCHZ').nombre,
-                                  value: this.allAcciones.find( c => c.codigo == 'RCHZ').idLista } );
-      this.accionesStep1.push( { label: this.allAcciones.find( c => c.codigo == 'DEVCAM').nombre,
-                                  value: this.allAcciones.find( c => c.codigo == 'DEVCAM').idLista } );
-
+      this.accionesStep1.push( { label: this.allAcciones.find( c => c.codigo === 'APRB').nombre,
+                                  value: this.allAcciones.find( c => c.codigo === 'APRB').idLista } );
+      this.accionesStep1.push( { label: this.allAcciones.find( c => c.codigo === 'RCHZ').nombre,
+                                  value: this.allAcciones.find( c => c.codigo === 'RCHZ').idLista } );
+      this.accionesStep1.push( { label: this.allAcciones.find( c => c.codigo === 'DEVCAM').nombre,
+                                  value: this.allAcciones.find( c => c.codigo === 'DEVCAM').idLista } );
 
       this.accionesStep2.push( { label: 'Seleccione', value: null } );
-      this.accionesStep2.push( { label: this.allAcciones.find( c => c.codigo == 'SOLAUT').nombre,
-                                  value: this.allAcciones.find( c => c.codigo == 'SOLAUT').idLista } );
-      this.accionesStep2.push( { label: this.allAcciones.find( c => c.codigo == 'RCHZ').nombre,
-                                  value: this.allAcciones.find( c => c.codigo == 'RCHZ').idLista } );
-      this.accionesStep2.push( { label: this.allAcciones.find( c => c.codigo == 'DEVCAM').nombre,
-                                  value: this.allAcciones.find( c => c.codigo == 'DEVCAM').idLista } );
+      this.accionesStep2.push( { label: this.allAcciones.find( c => c.codigo === 'SOLAUT').nombre,
+                                  value: this.allAcciones.find( c => c.codigo === 'SOLAUT').idLista } );
+      this.accionesStep2.push( { label: this.allAcciones.find( c => c.codigo === 'RCHZ').nombre,
+                                  value: this.allAcciones.find( c => c.codigo === 'RCHZ').idLista } );
+      this.accionesStep2.push( { label: this.allAcciones.find( c => c.codigo === 'DEVCAM').nombre,
+                                  value: this.allAcciones.find( c => c.codigo === 'DEVCAM').idLista } );
 
       this.accionesStep3.push( { label: 'Seleccione', value: null } );
-      this.accionesStep3.push( { label: this.allAcciones.find( c => c.codigo == 'PRCSEL').nombre,
-                                  value: this.allAcciones.find( c => c.codigo == 'PRCSEL').idLista } );
-      this.accionesStep3.push( { label: this.allAcciones.find( c => c.codigo == 'RCHZ').nombre,
-                                  value: this.allAcciones.find( c => c.codigo == 'RCHZ').idLista } );
-      this.accionesStep3.push( { label: this.allAcciones.find( c => c.codigo == 'DEVCAM').nombre,
-                                  value: this.allAcciones.find( c => c.codigo == 'DEVCAM').idLista } );
+      this.accionesStep3.push( { label: this.allAcciones.find( c => c.codigo === 'PRCSEL').nombre,
+                                  value: this.allAcciones.find( c => c.codigo === 'PRCSEL').idLista } );
+      this.accionesStep3.push( { label: this.allAcciones.find( c => c.codigo === 'RCHZ').nombre,
+                                  value: this.allAcciones.find( c => c.codigo === 'RCHZ').idLista } );
+      this.accionesStep3.push( { label: this.allAcciones.find( c => c.codigo === 'DEVCAM').nombre,
+                                  value: this.allAcciones.find( c => c.codigo === 'DEVCAM').idLista } );
+
+      this.accionesStep4.push( { label: 'Seleccione', value: null } );
+      this.accionesStep4.push( { label: this.allAcciones.find( c => c.codigo === 'ASIPRO').nombre,
+                                  value: this.allAcciones.find( c => c.codigo === 'ASIPRO').idLista } );
+      this.accionesStep4.push( { label: this.allAcciones.find( c => c.codigo === 'RCHZ').nombre,
+                                  value: this.allAcciones.find( c => c.codigo === 'RCHZ').idLista } );
+      this.accionesStep4.push( { label: this.allAcciones.find( c => c.codigo === 'DEVCAM').nombre,
+                                  value: this.allAcciones.find( c => c.codigo === 'DEVCAM').idLista } );
 
    }
 

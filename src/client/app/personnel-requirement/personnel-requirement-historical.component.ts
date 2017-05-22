@@ -36,10 +36,10 @@ class employeeBasicInfo {
 
 @Component( {
                moduleId: module.id,
-               templateUrl: 'personnel-requirement-detail.component.html',
+               templateUrl: 'personnel-requirement-historicall.component.html',
                selector: 'personnel-requirement'
             } )
-export class PersonnelRequirementDetailComponent {
+export class PersonnelRequirementHistoricalComponent {
 
    vPersonnelRequirement: VPersonnelRequirement = new VPersonnelRequirement();
    tokendecoded: any = { sub: '', usuario: '', nombre: '' };
@@ -85,7 +85,7 @@ export class PersonnelRequirementDetailComponent {
 
    ngOnInit() {
       let code = '';
-      this.route.params.switchMap( ( params: Params ) => this.personnelRequirementServices.getByIdRequirement( +params[ 'id' ] ) )
+      this.route.params.switchMap( ( params: Params ) => this.personnelRequirementServices.getHistorical( +params[ 'id' ] ) )
       .subscribe( data => {
          this.vPersonnelRequirement = data;
          this.usuariosService.viewUser( this.vPersonnelRequirement.idSolicitante ).subscribe( u => {

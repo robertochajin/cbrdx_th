@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { Vacancies } from '../_models/vacancies';
 import { AuthHttp } from 'angular2-jwt';
 import { RequirementsAction } from '../_models/requirementsAction';
-
+import { PersonnelRequirement } from '../_models/personnelRequirement';
 @Injectable()
 export class VacanciesService {
 
@@ -13,20 +12,16 @@ export class VacanciesService {
    }
 
    getAll() {
-      return this.authHttp.get( this.serviceURL + 'requerimientos' ).map( ( res: Response ) => res.json() as Vacancies[] );
+      return this.authHttp.get( this.serviceURL + 'requerimientos' ).map( ( res: Response ) => res.json() as PersonnelRequirement[] );
    }
 
    getByDate( fInicio: string, fFin: string ) {
       return this.authHttp.get( this.serviceURL + 'requerimientos/fecha/' + fInicio + '/'  + fFin)
-      .map( ( res: Response ) => res.json() as Vacancies[] );
+      .map( ( res: Response ) => res.json() as PersonnelRequirement[] );
    }
 
    get( id: number ) {
-      return this.authHttp.get( this.serviceURL + 'requerimientos/' + id ).map( ( res: Response ) => res.json() as Vacancies );
-   }
-
-   update( c: Vacancies ) {
-      return this.authHttp.put( this.serviceURL + 'requerimientos', c ).map( ( res: Response ) => res.json() );
+      return this.authHttp.get( this.serviceURL + 'requerimientos/' + id ).map( ( res: Response ) => res.json() as PersonnelRequirement );
    }
 
    setAction( c: RequirementsAction ) {

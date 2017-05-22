@@ -32,6 +32,14 @@ export class PersonnelRequirement {
    public cargo: string;
    public nombreResponsableSeleccion: string;
    public estado: string;
+   public area: string;
+   public estructuraFisica: string;
+   public tipoSolicitud: string;
+   public cargoJefe: string;
+   public categoria: string;
+   public salario: number;
+   public nombreSolicitante: string;
+   public autorizacion: string;
 
    constructor() {
    }
