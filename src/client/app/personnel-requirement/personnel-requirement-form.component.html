@@ -227,13 +227,13 @@
 								<div class="form-group col-md-6" *ngIf="dispNumeroContratar">
 									<label for="vacancyQuantity">* {{nroPlazas}}:</label>
 									<input id="vacancyQuantity" type="number" pInputText name="vacancyQuantity"
-									       [(ngModel)]="personnelRequirement.cantidadVacantes" min="1"
+									       [(ngModel)]="personnelRequirement.cantidadVacantes" min="0"
 									       #ngVQuantity="ngModel" required (keyup)="inputVacancyCleanUp($event.target.value)"
 									/>
 									<div class="ui-message ui-messages-error ui-corner-all"
 									     *ngIf="f.submitted && !ngVQuantity.valid">
 										<i class="fa fa-close"></i>
-										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR' | translate }} {{'LBL_REQUERIDO' | translate}}
+										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR' | translate }} {{'LBL_INVALIDOVACIO' | translate}}
 									</div>
 								</div>
 								<div class="form-group col-md-6" *ngIf="dispNumeroEntrevistar">
@@ -244,7 +244,7 @@
 									<div class="ui-message ui-messages-error ui-corner-all"
 									     *ngIf="f.submitted && !ngIQuantity.valid">
 										<i class="fa fa-close"></i>
-										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }} {{'LBL_REQUERIDO' | translate}}
+										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }} {{'LBL_INVALIDOVACIO' | translate}}
 									</div>
 								</div>
 							</div>
