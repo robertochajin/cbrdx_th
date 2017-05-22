@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Vacancies } from '../_models/vacancies';
 import { VacanciesService } from '../_services/vacancies.service';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/primeng';
@@ -10,6 +9,7 @@ import { OrganizationalStructurePositions } from '../_models/organizationalStruc
 import { OrganizationalStructurePositionsServices } from '../_services/organizationalStructurePositions.service';
 import { OrganizationalStructureService } from '../_services/organizationalStructure.service';
 import { OrganizationalStructure } from '../_models/organizationalStructure';
+import { PersonnelRequirement } from '../_models/personnelRequirement';
 
 @Component( {
                moduleId: module.id,
@@ -20,8 +20,8 @@ import { OrganizationalStructure } from '../_models/organizationalStructure';
 
 export class VacanciesComponent implements OnInit {
 
-   vacancy: Vacancies = new Vacancies();
-   vacancies: Vacancies[] = [];
+   vacancy: PersonnelRequirement = new PersonnelRequirement();
+   vacancies: PersonnelRequirement[] = [];
    listTipoSolicitud: SelectItem[] = [];
    listEstados: SelectItem[] = [];
    allEstados: ListaItem[] = [];
@@ -148,8 +148,12 @@ export class VacanciesComponent implements OnInit {
       this.fechaFin = today;
    }
 
-   update( c: Vacancies ) {
+   update( c: PersonnelRequirement ) {
       this.router.navigate( [ 'vacancies/update/' + c.idRequerimiento ] );
+   }
+
+   detail( c: PersonnelRequirement ) {
+      this.router.navigate( [ 'vacancies/detail/' + c.idRequerimiento ] );
    }
 
    clearDate() {

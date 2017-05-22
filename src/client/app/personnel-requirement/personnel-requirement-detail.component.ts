@@ -175,6 +175,6 @@ export class PersonnelRequirementDetailComponent {
    }
 
    goBack(): void {
-      this.router.navigate( [ 'personnel-requirement' ] );
+      this.location.back();
    }
 }

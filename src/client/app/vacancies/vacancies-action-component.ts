@@ -189,7 +189,7 @@ export class VacantesActionComponent implements OnInit {
          if(this.tiposReqAutorizacion !== undefined && this.tiposReqAutorizacion.find(c => c === this.vacancy.idTipoSolicitud)){
             this.requiereAutorizacion = true;
                if(this.cargosNoReqAutorizacion.find(c => c.tipo === this.vacancy.idTipoSolicitud &&
-                                                         c.cargo === this.vacancy.idTipoSolicitud)){
+                                                         c.cargo === this.vacancy.idCargo)){
                   this.requiereAutorizacion = false;
                }
          }else{
