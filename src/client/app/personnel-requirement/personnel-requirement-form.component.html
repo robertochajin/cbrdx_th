@@ -125,11 +125,7 @@
 									                #ngPosition="ngModel" [suggestions]="positionList" required="true"
 									                (completeMethod)="positionSearch($event)" (onSelect)="positionCaptureId($event)">
 									</p-autoComplete>
-									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngPosition.valid">
-										<i class="fa fa-close"></i> {{'REQUERIMIENTOPERSONAL.LBL_CARGO' | translate }} {{'LBL_REQUERIDO' | translate
-										}}
-									</div>
-									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="isPositionWrong">
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="(f.submitted && !ngPosition.valid) || isPositionWrong">
 										<i class="fa fa-close"></i> {{'REQUERIMIENTOPERSONAL.LBL_CARGO' | translate }} {{'LBL_REQUERIDO' | translate
 										}}
 									</div>
@@ -214,11 +210,7 @@
 									                #ngBoss="ngModel" [suggestions]="bossList" required="true"
 									                (completeMethod)="bossSearch($event)" (onSelect)="bossCaptureId($event)">
 									</p-autoComplete>
-									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngBoss.valid">
-										<i class="fa fa-close"></i> {{'REQUERIMIENTOPERSONAL.LBL_NOMBREJEFEINMEDIATO' | translate }} {{'LBL_REQUERIDO' |
-										translate }}
-									</div>
-									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="isbossWrong">
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="(f.submitted && !ngBoss.valid) || isbossWrong">
 										<i class="fa fa-close"></i> {{'REQUERIMIENTOPERSONAL.LBL_NOMBREJEFEINMEDIATO' | translate }} {{'LBL_REQUERIDO' |
 										translate }}
 									</div>
