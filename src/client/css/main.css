@@ -67,11 +67,19 @@ body .ui-widget:disabled {
 body .ui-tabview.ui-tabview-top .ui-tabview-nav li{
    background-color: #ccc;
 }
+body .ui-tabview.ui-tabview-top .ui-tabview-nav{
+   padding-top: 10px;
+   padding-left: 10px;
+}
 
 /** -- tabview Left/Rigth -- */
 .ui-tabview.ui-tabview-right>.ui-tabview-nav,
 .ui-tabview.ui-tabview-left>.ui-tabview-nav{
    height: auto!important;
+}
+/** -- Panel -- */
+body .ui-panel{
+   margin-bottom : 10px;
 }
 /*
 ----------------- Cambios Theme AdminLTE ---------------------------------
@@ -607,6 +615,12 @@ body .ui-paginator{
 .table-overflow .ui-datatable-data>tr>td{
    overflow: visible!important;
 }
+body .ui-datatable thead th.ui-state-active{
+   color: #000;
+   font-weight: bold;
+   background-color: #ccc;
+   border: 1px solid #ccc;
+}
 /* --- Buscador general unico --- */
 .uniSearch{
    width: 80%!important;
@@ -693,7 +707,10 @@ body .ui-tree .ui-treenode .ui-treenode-content .ui-tree-toggler {
 ---------------------------- COLOR CSS -------------------------------
 ----------------------------------------------------------------------
  */
-
+/* -- Link Blue -- */
+body.sky-blue a{
+   color: #29ABE2;
+}
 /* -- Botones Blue -- */
 body.skin-blue .ui-button:focus,
 body.skin-blue .ui-button:enabled:hover {
@@ -721,6 +738,9 @@ body.skin-blue .user-avatar{
    border: 4px solid #29ABE2;
 }
 /* -- Tabs Blue-- */
+body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav{
+   background: #29ABE2;
+}
 body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active{
    border-color: #29ABE2;
 }
@@ -730,48 +750,18 @@ body.skin-blue .ui-tabview .ui-tabview-panel{
 body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a{
    color: #0275d8;
 }
-
-
-
-/* -- Botones black -- */
-body.skin-black .ui-button:focus,
-body.skin-black .ui-button:enabled:hover {
-  background-color: #b1c800!important;
-  -webkit-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(177, 200, 0, 0.6);
-     -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(177, 200, 0, 0.6);
-          box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(177, 200, 0, 0.6);
-}
-/* -- Paginador Black -- */
-body.skin-black .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active:hover {
-  background-color: #b1c800!important;
-}
-/* -- focus input text Black -- */
-body.skin-black .ui-inputtext.ui-state-focus,
-body.skin-black .ui-inputtext:focus {
-  border: 1px solid #29ABE2;
-}
-body.skin-black .form-control:focus{
-  border-color: #29ABE2!important;
-   -webkit-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(41, 171, 226, 0.6);
-      -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(41, 171, 226, 0.6);
-           box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(41, 171, 226, 0.6);
-}
-body.skin-black .user-avatar{
-   border: 4px solid #29ABE2;
-}
-/* -- Tabs Black-- */
-body.skin-black .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active{
-   border-color: #29ABE2;
-   color: #0275d8;
-}
-body.skin-black .ui-tabview .ui-tabview-panel{
-   border: 1px solid #29ABE2;
-}
-body.skin-black .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a{
-   color: #0275d8;
+/* -- Accordion Blue */
+body.skin-blue .ui-accordion .ui-accordion-header.ui-state-active {
+   background-color: #3c8dbc;
 }
 
 
+
+
+/* -- Link Green -- */
+body.sky-blue a{
+   color: #009c41;
+}
 /* -- Botones Green -- */
 body.skin-green .ui-button:focus,
 body.skin-green .ui-button:enabled:hover {
@@ -797,6 +787,12 @@ body.skin-green .user-avatar{
    border: 4px solid #009c41;
 }
 /* -- Tabs Green -- */
+body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav{
+   background: #009c41;
+}
+body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav{
+   background: #009c41;
+}
 body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active{
    border-color: #009c41;
    color: #009c41;
@@ -807,9 +803,17 @@ body.skin-green .ui-tabview .ui-tabview-panel{
 body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a{
    color: #009c41;
 }
+/* -- Accordion Green */
+body.skin-green .ui-accordion .ui-accordion-header.ui-state-active {
+   background-color: #009c41;
+}
 
 
 
+/* -- Link Purple -- */
+body.sky-blue a{
+   color: #605ca8;
+}
 /* -- Botones Purple -- */
 body.skin-purple .ui-button:focus,
 body.skin-purple .ui-button:enabled:hover {
@@ -835,6 +839,9 @@ body.skin-purple .user-avatar{
    border: 4px solid #605ca8;
 }
 /* -- Tabs Purple -- */
+body.skin-purple .ui-tabview.ui-tabview-top .ui-tabview-nav{
+   background: #605ca8;
+}
 body.skin-purple .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active{
    border-color: #605ca8;
    color: #605ca8;
@@ -845,7 +852,10 @@ body.skin-purple .ui-tabview .ui-tabview-panel{
 body.skin-purple .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a{
    color: #605ca8;
 }
-
+/* -- Accordion Purple */
+body.skin-purple .ui-accordion .ui-accordion-header.ui-state-active {
+   background-color: #605ca8;
+}
 
 
 
@@ -857,7 +867,10 @@ li.inhabilitado{
    background-color: #ccc!important;
 }
 
-body .ui-tabview.ui-tabview-top .ui-tabview-nav, body .ui-tabview.ui-tabview-bottom .ui-tabview-nav, body .ui-tabview.ui-tabview-left .ui-tabview-nav, body .ui-tabview.ui-tabview-right .ui-tabview-nav{
+body .ui-tabview.ui-tabview-top .ui-tabview-nav,
+body .ui-tabview.ui-tabview-bottom .ui-tabview-nav,
+body .ui-tabview.ui-tabview-left .ui-tabview-nav,
+body .ui-tabview.ui-tabview-right .ui-tabview-nav{
    background: transparent;
 }
 body .ui-tabview .ui-tabview-panel{
