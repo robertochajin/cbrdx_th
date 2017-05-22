@@ -282,6 +282,13 @@ export class PersonnelRequirementEditComponent implements OnInit {
             this.personnelRequirementServices.get( idRequeriment ).subscribe(
                pr => {
                   this.personnelRequirement = pr;
+                  this.selectedPosition = new Positions();
+                  this.selectedPosition.cargo = this.personnelRequirement.cargo;
+                  this.selectedPosition.idCargo = this.personnelRequirement.idCargo;
+                  this.selectedBoss = new employeeBasicInfo();
+                  this.selectedBoss.idTercero = this.personnelRequirement.idJefe;
+                  this.selectedBoss.nombreCompleto = this.personnelRequirement.nombrejefe;
+
                   this.usuariosService.viewUser( this.personnelRequirement.idSolicitante ).subscribe( u => {
                      this.user = u;
                      if ( this.user.idTercero ) {
@@ -368,16 +375,16 @@ export class PersonnelRequirementEditComponent implements OnInit {
 
    }
 
-   isAuthNeeded( idRequestType: number, idPosition: number ): boolean {
+   isAuthNeeded (idRequestType: number, idPosition: number) : boolean {
       let requiereAutorizacion = false;
-      if ( this.tiposReqAutorizacion !== undefined && this.tiposReqAutorizacion.find( c => c === idRequestType.toString() ) ) {
-         console.info( this.cargosNoReqAutorizacion );
+      if(this.tiposReqAutorizacion !== undefined && this.tiposReqAutorizacion.find(c => c === idRequestType.toString())){
+         console.info(this.cargosNoReqAutorizacion);
          requiereAutorizacion = true;
-         if ( this.cargosNoReqAutorizacion.find( c => c.tipo === idRequestType &&
-                                                      c.cargo === idPosition ) ) {
+         if(this.cargosNoReqAutorizacion.find(c => c.tipo === idRequestType &&
+                                                   c.cargo === idPosition)){
             requiereAutorizacion = false;
          }
-      } else {
+      }else{
          requiereAutorizacion = false;
       }
       return requiereAutorizacion;
@@ -392,7 +399,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
    }
 
    bossSearch( event: any ) {
-      this.employeesService.getByNameAndArea( this.employeeBasics.idArea, event.query.replace( /[^0-9a-zA-Z]+/g, '' ) ).subscribe(
+      this.employeesService.getByNameAndArea( this.employeeBasics.idArea, event.query.replace(/[^0-9a-zA-Z]+/g,'') ).subscribe(
          empl => this.bossList = empl
       );
    }
@@ -400,9 +407,9 @@ export class PersonnelRequirementEditComponent implements OnInit {
    positionSearch( event: any ) {
       let item = this.listRT.find( rt => rt.idLista === this.personnelRequirement.idTipoSolicitud );
       if ( item !== undefined && item.codigo === 'CRGNVO' ) {
-         this.positionsService.getByWildCard( event.query.replace( /[^0-9a-zA-Z]+/g, '' ) ).subscribe( list => this.positionList = list );
+         this.positionsService.getByWildCard( event.query.replace(/[^0-9a-zA-Z]+/g,'') ).subscribe( list => this.positionList = list );
       } else {
-         this.positionsService.getByWildCardAndArea( event.query.replace( /[^0-9a-zA-Z]+/g, '' ), this.employeeBasics.idArea )
+         this.positionsService.getByWildCardAndArea( event.query.replace(/[^0-9a-zA-Z]+/g,''), this.employeeBasics.idArea )
          .subscribe( list => this.positionList = list );
       }
    }
@@ -422,21 +429,21 @@ export class PersonnelRequirementEditComponent implements OnInit {
    inputVacancyCleanUp( value: any ) {
       if ( value !== undefined && value !== '' && value !== null ) {
          let quantity = value.toUpperCase().replace( /[^0-9]/g, '' ).trim();
-         this.personnelRequirement.cantidadVacantes = Number( quantity.replace( '-', '' ) );
+         this.personnelRequirement.cantidadVacantes = Number( quantity.replace('-','') );
       }
    }
 
    inputInterviewCleanUp( value: any ) {
       if ( value !== undefined && value !== '' && value !== null ) {
          let quantity = value.toUpperCase().replace( /[^0-9]/g, '' ).trim();
-         this.personnelRequirement.cantidadConvocados = Number( quantity.replace( '-', '' ) );
+         this.personnelRequirement.cantidadConvocados = Number( quantity.replace('-','') );
       }
    }
 
    onChangeTypeMethod( event: any ) {
       let code = '';
       let item = this.listRT.find( rt => rt.idLista === this.personnelRequirement.idTipoSolicitud );
-      if ( code !== undefined ) {
+      if ( item !== undefined && item !== null) {
          code = item.codigo;
 
          if ( code === 'DMNPLNT' ) {
@@ -507,6 +514,19 @@ export class PersonnelRequirementEditComponent implements OnInit {
             this.dispNumeroContratar = false;
             this.dispNumeroEntrevistar = false;
          }
+      } else {
+         this.dispNombreCargo = false;
+         this.dispFuncionCargo = false;
+         this.dispFechaInicioRemplazo = false;
+         this.dispFechaFinRemplazo = false;
+         this.dispCargo = false;
+         this.dispZona = false;
+         this.dispCategoria = false;
+         this.dispFormaContratacion = false;
+         this.dispTipoContratacion = false;
+         this.dispColaboradorJefeInmediato = false;
+         this.dispNumeroContratar = false;
+         this.dispNumeroEntrevistar = false;
       }
    }
 
@@ -529,7 +549,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
 
    addReferred() {
       this.requirementReferral = new RequirementReferral();
-      this.editingReferred = true;
+         this.editingReferred = true;
    }
 
    onSubmitReferred() {
@@ -537,11 +557,11 @@ export class PersonnelRequirementEditComponent implements OnInit {
       if ( this.requirementReferral.idRequerimientoReferido !== undefined ) {
          this.referralsServices.update( this.requirementReferral ).subscribe( res => {
             if ( res.ok ) {
-               this.requirementReferrals.map( r => {
-                  if ( r.idRequerimientoReferido === this.requirementReferral.idRequerimientoReferido ) {
+               this.requirementReferrals.map(r => {
+                  if(r.idRequerimientoReferido === this.requirementReferral.idRequerimientoReferido){
                      r = this.requirementReferral;
                   }
-               } );
+               });
                this.requirementReferral = new RequirementReferral();
                this.editingReferred = false;
                let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
@@ -591,16 +611,16 @@ export class PersonnelRequirementEditComponent implements OnInit {
                                               this.personnelRequirement.idEstado = this.requestedState.idLista;
                                               this.personnelRequirementServices.update( this.personnelRequirement ).subscribe( res => {
                                                  if ( res ) {
-                                                    let action: RequirementsAction = new RequirementsAction();
+                                                    let action : RequirementsAction = new RequirementsAction();
                                                     action.idRequerimiento = this.personnelRequirement.idRequerimiento;
                                                     action.idAccion = this.requestAction.idLista;
                                                     action.observacion = 'Solicitud de requerimiento';
-                                                    this.vacanciesService.setAction( action ).subscribe( acc => {
-                                                       if ( acc ) {
+                                                    this.vacanciesService.setAction(action).subscribe(acc => {
+                                                       if ( acc ){
                                                           this._nav.setMesage( 1, this.msg );
                                                           this.router.navigate( [ 'personnel-requirement' ] );
                                                        }
-                                                    } );
+                                                    });
                                                  }
                                               }, error => {
                                                  this._nav.setMesage( 3, this.msg );
@@ -621,7 +641,6 @@ export class PersonnelRequirementEditComponent implements OnInit {
          this.purchasesList.map( d => d.nombre = d.idLista + ' : ' + d.nombre );
       } );
    }
-
    captureResourseQuesId( event: any ) {
       this.questionnaires.idCuestionario = event.idLista;
       this.questionnaires.idRequerimiento = this.personnelRequirement.idRequerimiento;
@@ -781,7 +800,6 @@ export class PersonnelRequirementEditComponent implements OnInit {
          } );
       } );
    }
-
    onSubmitQuestionnaires() {
       let temp: any;
       if ( !this.wrongResourseQues ) {

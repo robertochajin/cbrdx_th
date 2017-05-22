@@ -40,6 +40,7 @@ export class PersonnelRequirement {
    public salario: number;
    public nombreSolicitante: string;
    public autorizacion: string;
+   public nombrejefe: string;
 
    constructor() {
    }
