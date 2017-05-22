@@ -282,6 +282,13 @@ export class PersonnelRequirementEditComponent implements OnInit {
             this.personnelRequirementServices.get( idRequeriment ).subscribe(
                pr => {
                   this.personnelRequirement = pr;
+                  this.selectedPosition = new Positions();
+                  this.selectedPosition.cargo = this.personnelRequirement.cargo;
+                  this.selectedPosition.idCargo = this.personnelRequirement.idCargo;
+                  this.selectedBoss = new employeeBasicInfo();
+                  this.selectedBoss.idTercero = this.personnelRequirement.idJefe;
+                  this.selectedBoss.nombreCompleto = this.personnelRequirement.nombrejefe;
+
                   this.usuariosService.viewUser( this.personnelRequirement.idSolicitante ).subscribe( u => {
                      this.user = u;
                      if ( this.user.idTercero ) {
@@ -436,7 +443,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
    onChangeTypeMethod( event: any ) {
       let code = '';
       let item = this.listRT.find( rt => rt.idLista === this.personnelRequirement.idTipoSolicitud );
-      if ( code !== undefined) {
+      if ( item !== undefined && item !== null) {
          code = item.codigo;
 
          if ( code === 'DMNPLNT' ) {
@@ -507,6 +514,19 @@ export class PersonnelRequirementEditComponent implements OnInit {
             this.dispNumeroContratar = false;
             this.dispNumeroEntrevistar = false;
          }
+      } else {
+         this.dispNombreCargo = false;
+         this.dispFuncionCargo = false;
+         this.dispFechaInicioRemplazo = false;
+         this.dispFechaFinRemplazo = false;
+         this.dispCargo = false;
+         this.dispZona = false;
+         this.dispCategoria = false;
+         this.dispFormaContratacion = false;
+         this.dispTipoContratacion = false;
+         this.dispColaboradorJefeInmediato = false;
+         this.dispNumeroContratar = false;
+         this.dispNumeroEntrevistar = false;
       }
    }
 
