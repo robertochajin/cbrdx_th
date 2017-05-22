@@ -4,7 +4,7 @@
 		<button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate}}" (click)="cd.accept()"></button>
 	</p-footer>
 </p-confirmDialog>
-<div>
+<div class="col-md-10 col-md-offset-1">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="header">
@@ -83,7 +83,7 @@
 								<div class="form-group col-md-12">
 									<label for="justification">* {{ 'REQUERIMIENTOPERSONAL.LBL_JUSTIFICACION' | translate }}:</label>
 									<textarea id="justification" name="justification" pInputTextarea
-									          [(ngModel)]="personnelRequirement.justificacion"
+									          [(ngModel)]="personnelRequirement.justificacion" (keyup)="capitalize()"
 									          #ngJustification="ngModel" maxlength="500" required></textarea>
 									<div class="ui-message ui-messages-error ui-corner-all"
 									     *ngIf="f.submitted && !ngJustification.valid">
@@ -382,7 +382,7 @@
 						</div>
 					</div>
 					<div class="ui-grid-col-3">
-						<button pButton icon="fa-plus" label="{{'BTN_AGREGAR' | translate}}" type="submit"></button>
+						<button class="btn-block" pButton icon="fa-plus" label="{{'BTN_AGREGAR' | translate}}" type="submit"> </button>
 					</div>
 				</div>
 			</form>
@@ -425,7 +425,7 @@
 						</div>
 					</div>
 					<div class="ui-grid-col-3">
-						<button pButton icon="fa-plus" label="{{'BTN_AGREGAR' | translate}}" type="submit"></button>
+						<button class="btn-block" pButton icon="fa-plus" label="{{'BTN_AGREGAR' | translate}}" type="submit"></button>
 					</div>
 				</div>
 			</form>
@@ -470,7 +470,7 @@
 						</div>
 					</div>
 					<div class="ui-grid-col-3">
-						<button pButton icon="fa-plus" label="{{'BTN_AGREGAR' | translate}}" type="submit"></button>
+						<button class="btn-block" pButton icon="fa-plus" label="{{'BTN_AGREGAR' | translate}}" type="submit"></button>
 					</div>
 				</div>
 			</form>
@@ -494,7 +494,7 @@
 		
 	<div class="row form-footer-buttons">
 		<div class="form-group col-md-12">
-			<button icon="fa-arrrow btn-success" label="{{'REQUERIMIENTOPERSONAL.BTN_SENDREQUEST' | translate }}" type="button"
+			<button icon="fa-arrrow" label="{{'REQUERIMIENTOPERSONAL.BTN_SENDREQUEST' | translate }}" type="button"
 			        (click)="sendRequest()" pButton [disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)"></button>
 		</div>
 	</div>

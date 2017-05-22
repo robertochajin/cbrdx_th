@@ -5,9 +5,9 @@
       <button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate}}" (click)="cd.accept()"></button>
    </p-footer>
 </p-confirmDialog>
+<div class="col-md-10 col-md-offset-1">
 <div *ngIf="rol">
    <div class="row">
-      <div class="col-md-12">
          <div class="header">
             <h3 class="title">{{ 'ROLES.LBL_ADMINROLES' | translate}}</h3>
          </div>
@@ -70,7 +70,7 @@
                   {{ 'ROLES.MSG_FECHAFINREQ' | translate}}
                </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4" style="margin-top: 24px">
                <label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate}}</label>
                <div class=" col-sm-9">
                   <p-checkbox binary="true" id="indicador" name="indicador"
@@ -100,7 +100,6 @@
          </div>
       </div>
    </form>
-</div>
 
 <p-tabView *ngIf="rol.idRol">
    <p-tabPanel header="{{ 'ROLES.LBL_FUNCIONALIDADES' | translate}}">
@@ -110,3 +109,4 @@
       <rol-widges *ngIf="rol.idRol" [rol]="rol"></rol-widges>
    </p-tabPanel>
 </p-tabView>
+</div>

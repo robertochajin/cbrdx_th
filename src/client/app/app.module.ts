@@ -33,7 +33,7 @@ import { JobProjectionModule } from './job-projection/job-projection.module';
 import { FormManagerModule } from './form-manager/form-manager.module';
 
 //  asignación a profesional
-// import { AssignmentProfessionalModule } from './assignment-professional/assignment-professional.module';
+//import { AssignmentProfessionalModule } from './assignment-professional/assignment-professional.module';
 // Estructura física
 import { PhysicStructureModule } from './physic-structure/physic-structure.module';
 import { RiskModule } from './position-risks/position-risks.module';
@@ -128,9 +128,7 @@ import { VacanciesModule } from './vacancies/vacancies.module';
                  MenuManagerModule,
                  CompanyAssetsModule,
                  VacanciesModule,
-
-                 // AssignmentProfessionalModule
-
+                 //AssignmentProfessionalModule
               ],
 
               declarations: [ AppComponent ],
