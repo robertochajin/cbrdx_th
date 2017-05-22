@@ -219,7 +219,7 @@ export class VacantesActionComponent implements OnInit {
             }
          }
          if(this.vacancy.idEstado === this.eSeleccion) {
-            this.listAcciones = this.accionesStep4;
+            this.listAcciones = this.accionesStep5;
          }
       } );
    }
@@ -243,9 +243,6 @@ export class VacantesActionComponent implements OnInit {
          }
 
       }
-      if(this.requirementsAction.idAccion === this.aSeleccion){
-         this.vacancy.idEstado = this.eSeleccion;
-      }
       if(this.requirementsAction.idAccion === this.aDevolver){
          this.vacancy.idEstado = this.eDevuelto;
       }
@@ -259,7 +256,7 @@ export class VacantesActionComponent implements OnInit {
          this.vacancy.idEstado = this.eCerrado;
       }
       if(this.requirementsAction.idAccion === this.aAsignar){
-         this.vacancy.idEstado = this.eCerrado;
+         this.vacancy.idEstado = this.eSeleccion;
       }
       this.personnelRequirementServices.update( this.vacancy ).subscribe( data => {
          this.requirementsAction.idRequerimiento = this.vacancy.idRequerimiento;
@@ -281,6 +278,9 @@ export class VacantesActionComponent implements OnInit {
       this.vacanciesService.getActions(this.vacancy.idRequerimiento).subscribe(
          actions => {
          this.actions = actions;
+         this.actions.sort( function ( a, b ) {
+            return b.idRequerimientoAccion - a.idRequerimientoAccion;
+         } );
       });
    }
 
@@ -289,11 +289,13 @@ export class VacantesActionComponent implements OnInit {
       this.accionesStep2 = [];
       this.accionesStep3 = [];
       this.accionesStep4 = [];
+      this.accionesStep5 = [];
 
       this.accionesStep1.push( { label: 'Seleccione', value: null } );
       this.accionesStep2.push( { label: 'Seleccione', value: null } );
       this.accionesStep3.push( { label: 'Seleccione', value: null } );
       this.accionesStep4.push( { label: 'Seleccione', value: null } );
+      this.accionesStep5.push( { label: 'Seleccione', value: null } );
 
       if( this.allAcciones.find( c => c.codigo === 'APRB')) {
          this.accionesStep1.push( {
@@ -340,7 +342,6 @@ export class VacantesActionComponent implements OnInit {
       }
 
       if( this.allAcciones.find( c => c.codigo === 'ASIPRO')) {
-
          this.accionesStep3.push( {
                                      label: this.allAcciones.find( c => c.codigo === 'ASIPRO' ).nombre,
                                      value: this.allAcciones.find( c => c.codigo === 'ASIPRO' ).idLista
@@ -349,6 +350,14 @@ export class VacantesActionComponent implements OnInit {
                                      label: this.allAcciones.find( c => c.codigo === 'ASIPRO' ).nombre,
                                      value: this.allAcciones.find( c => c.codigo === 'ASIPRO' ).idLista
                                   } );
+      }
+
+      if( this.allAcciones.find( c => c.codigo === 'CRRD')) {
+         this.accionesStep5.push( {
+                                     label: this.allAcciones.find( c => c.codigo === 'CRRD' ).nombre,
+                                     value: this.allAcciones.find( c => c.codigo === 'CRRD' ).idLista
+                                  } );
+
       }
 
    }
