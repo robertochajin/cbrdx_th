@@ -825,7 +825,8 @@
       "LBL_SALARY" : "Salario",
       "LBL_PROFESSIONAL" : "Profesional de Reclutamiento",
       "LBL_RECRUITMENT" : "Forma de reclutamiento",
-      "LBL_OBSERVACION" : "Observación"
+      "LBL_OBSERVACION" : "Observación",
+      "LBL_NOMBREJEFEINMEDIATO":"jefe Directo"
    },
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
