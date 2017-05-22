@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
-import { Cuestionarios } from '../_models/questionnaires';
+import { Questionnaires } from '../_models/questionnaires';
 
 @Injectable()
 export class QuestionnairesService {
@@ -12,22 +12,22 @@ export class QuestionnairesService {
 
    }
 
-   add( f: Cuestionarios ) {
+   add( f: Questionnaires ) {
       return this.authHttp.post( this.masterService, f )
       .map( ( res: Response ) => res.json() );
    };
 
-   update( f: Cuestionarios ) {
+   update( f: Questionnaires ) {
       return this.authHttp.put( this.masterService, JSON.stringify( f ) ).catch( this.handleError );
    }
 
    getResoursesByIdRequirement( id: number ) {
       return this.authHttp.get( this.masterService + 'requerimiento/' + id )
-      .map( ( res: Response ) => res.json() as Cuestionarios[] );
+      .map( ( res: Response ) => res.json() as Questionnaires[] );
    }
    getAll() {
       return this.authHttp.get( this.masterService )
-      .map( ( res: Response ) => res.json() as Cuestionarios[] );
+      .map( ( res: Response ) => res.json() as Questionnaires[] );
    }
 
    handleError( error: any ): Promise<any> {

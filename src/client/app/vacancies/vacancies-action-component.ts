@@ -52,6 +52,8 @@ export class VacantesActionComponent implements OnInit {
 
    objTiposReqAutorizacion: Constante;
    tiposReqAutorizacion: any[];
+   objProfesionalReclutamiento: Constante;
+   profesionalReclutamiento: any[];
    objCargosNoReqAutorizacion: Constante;
    cargosNoReqAutorizacion: {tipo:number, cargo: number}[] = [{tipo:0, cargo: 0}];
 
@@ -85,6 +87,12 @@ export class VacantesActionComponent implements OnInit {
          this.objCargosNoReqAutorizacion = carg;
          this.cargosNoReqAutorizacion = JSON.parse(this.objCargosNoReqAutorizacion.valor);
       });
+
+      /*this.constanteService.getByCode( 'PROREC' ).subscribe( req => {
+         this.objProfesionalReclutamiento = req;
+         this.profesionalReclutamiento = this.objProfesionalReclutamiento.valor.split(',');
+
+      });*/
 
       this.listaService.getMasterDetails( 'ListasFormasReclutamientos' ).subscribe( res => {
          this.listReclutamiento.push( { label: 'Seleccione', value: '' } );
