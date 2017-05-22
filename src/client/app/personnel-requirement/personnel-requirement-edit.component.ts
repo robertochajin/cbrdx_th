@@ -521,7 +521,8 @@ export class PersonnelRequirementEditComponent implements OnInit {
    }
 
    addReferred() {
-      this.editingReferred = true;
+      this.requirementReferral = new RequirementReferral();
+         this.editingReferred = true;
    }
 
    onSubmitReferred() {
@@ -568,7 +569,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
                                            icon: 'fa fa-question-circle',
 
                                            accept: () => {
-                                              this.requirementReferral = null;
+                                              this.requirementReferral = new RequirementReferral();
                                               this.editingReferred = false;
                                            }
                                         } );
