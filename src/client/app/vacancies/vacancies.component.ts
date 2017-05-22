@@ -41,6 +41,9 @@ export class VacanciesComponent implements OnInit {
    listOrganizationalStructure: OrganizationalStructure[];
    creacion: number;
    cerrado: number;
+   devuelto: number;
+   enAprobacion: number;
+   rechazado: number;
 
    constructor( private vacanciesService: VacanciesService,
       private router: Router,
@@ -65,6 +68,9 @@ export class VacanciesComponent implements OnInit {
          } );
          this.creacion =  this.allEstados.find( c => c.codigo === "PRCREQ").idLista;
          this.cerrado =  this.allEstados.find( c => c.codigo === "CRRD").idLista;
+         this.devuelto =  this.allEstados.find( c => c.codigo === "DVLT").idLista;
+         this.enAprobacion =  this.allEstados.find( c => c.codigo === "ENAPRB").idLista;
+         this.rechazado =  this.allEstados.find( c => c.codigo === "RCHZ").idLista;
       } );
       this.listAutotizacion.push({label: 'Todos', value:''});
       this.listAutotizacion.push({label: 'Si', value:'Si'});
@@ -116,19 +122,23 @@ export class VacanciesComponent implements OnInit {
    }
 
    ngOnInit() {
-
-
      this.vacanciesService.getAll().subscribe(
          vacancies => {
             vacancies.forEach(obj=>{
                obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No';
-               if(obj.idEstado !== this.creacion &&  obj.idEstado !== this.cerrado){
+               if(obj.idEstado !== this.creacion &&
+                  obj.idEstado !== this.cerrado &&
+                  obj.idEstado !== this.devuelto &&
+                  obj.idEstado !== this.rechazado){
+                  obj.editar = true;
+                  if(obj.idEstado === this.enAprobacion){
+                     obj.editar = false;
+                  }
                   this.vacancies.push(obj);
                }
             });
          }
       );
-
 
       this.es = {
          firstDayOfWeek: 1,

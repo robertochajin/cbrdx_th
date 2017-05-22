@@ -55,8 +55,8 @@
 					<div class="row">
 						<label for="acciones">{{ 'VACANCIES.LBL_OBSERVACION' | translate}}</label>
 						<div class=" col-sm-12">
-							<textarea pInputTextarea id="obs" name="obs" [style]="{'width':'100%'}"
-							           [(ngModel)]="requirementsAction.observacion" #obs="ngModel"
+							<textarea pInputTextarea id="obs" name="obs" class="form-control"
+							          [(ngModel)]="requirementsAction.observacion" #obs="ngModel"
 							           [required]="true" maxlength="500" autoResize="autoResize"
 							></textarea>
 							<div class="ui-message ui-messages-error ui-corner-all"

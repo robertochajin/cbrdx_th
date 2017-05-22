@@ -40,8 +40,10 @@ export class PersonnelRequirement {
    public salario: number;
    public nombreSolicitante: string;
    public autorizacion: string;
+   public editar: boolean = true;
 
    constructor() {
+      this.editar = true;
    }
 }
 

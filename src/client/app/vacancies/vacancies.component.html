@@ -77,7 +77,7 @@
 		             [globalFilter]="gbRequerimientos" #dt>
 			<p-column field="cargo" header="{{ 'VACANCIES.LBL_VACANCY' | translate }}" [sortable]="true"></p-column>
 			<p-column field="fechaSolicitud" header="{{ 'VACANCIES.LBL_DATE' | translate }}" [sortable]="true"></p-column>
-			<p-column field="estructuraOrganizacional" header="{{ 'VACANCIES.LBL_AREA' | translate }} " [sortable]="true"></p-column>
+			<p-column field="area" header="{{ 'VACANCIES.LBL_AREA' | translate }} " [sortable]="true"></p-column>
 			<p-column field="estructuraFisica" header="{{ 'VACANCIES.LBL_OFFICE' | translate }} " [sortable]="true"></p-column>
 			<p-column field="tipoSolicitud" header="{{ 'VACANCIES.LBL_REASON' | translate }}" [sortable]="true"></p-column>
 			<p-column field="autorizacion" header="{{ 'VACANCIES.LBL_AUTHORIZATION' | translate }}"
@@ -87,7 +87,7 @@
 				<template let-vacancy="rowData" pTemplate="body">
 					<button type="button" icon="fa-eye" class="ui-button-info"
 					        pButton (click)="detail(vacancy)"></button>
-					<button type="button" icon="fa-pencil" class="ui-button-success"
+					<button type="button" icon="fa-pencil" class="ui-button-success" *ngIf="vacancy.editar"
 					        pButton (click)="update(vacancy)"></button>
 				</template>
 			</p-column>

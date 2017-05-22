@@ -77,7 +77,7 @@ export class VacantesActionComponent implements OnInit {
    ) {
       this.listAcciones.push( { label: 'Seleccione', value: null } );
 
-      this.constanteService.getByCode( 'REQAUT' ).subscribe( req => {
+      /*this.constanteService.getByCode( 'REQAUT' ).subscribe( req => {
          this.objTiposReqAutorizacion = req;
          this.tiposReqAutorizacion = this.objTiposReqAutorizacion.valor.split(',');
 
@@ -86,12 +86,6 @@ export class VacantesActionComponent implements OnInit {
       this.constanteService.getByCode( 'CARAUT' ).subscribe( carg => {
          this.objCargosNoReqAutorizacion = carg;
          this.cargosNoReqAutorizacion = JSON.parse(this.objCargosNoReqAutorizacion.valor);
-      });
-
-      /*this.constanteService.getByCode( 'PROREC' ).subscribe( req => {
-         this.objProfesionalReclutamiento = req;
-         this.profesionalReclutamiento = this.objProfesionalReclutamiento.valor.split(',');
-
       });*/
 
       this.listaService.getMasterDetails( 'ListasFormasReclutamientos' ).subscribe( res => {
@@ -100,13 +94,15 @@ export class VacantesActionComponent implements OnInit {
             this.listReclutamiento.push( { label: l.nombre, value: l.idLista } );
          } );
       } );
-      this.usuariosService.listVUsers().subscribe(
-         usuarios => {
-            this.listUsuarios.push( { label: 'Seleccione', value: '' } );
-            usuarios.map( l => {
-               this.listUsuarios.push( { label: l.nombre, value: l.idUsuario } );
+      this.constanteService.getByCode( 'PROSEL' ).subscribe( c => {
+         this.usuariosService.getByRol(c.valor).subscribe(
+            usuarios => {
+               this.listUsuarios.push( { label: 'Seleccione', value: '' } );
+               usuarios.map( l => {
+                  this.listUsuarios.push( { label: l.nombre, value: l.idUsuario } );
+               } );
             } );
-         } );
+      });
 
       this.listaService.getMasterDetails( 'ListasEstadosRequerimientos' ).subscribe( res => {
          res.map( ( l: ListaItem ) => {
@@ -156,9 +152,6 @@ export class VacantesActionComponent implements OnInit {
                case 'REALIZ':
                   this.aRealizar = l.idLista;
                   break;
-               case 'PRCSEL':
-                  this.aSeleccion = l.idLista;
-                  break;
                case 'ASIPRO':
                   this.aAsignar = l.idLista;
                   break;
@@ -192,25 +185,20 @@ export class VacantesActionComponent implements OnInit {
          ){
             this.permitido = false;
          }
+         this.requiereAutorizacion = vacancy.indicadorAutorizacion;
 
-
-         if(this.tiposReqAutorizacion !== undefined && this.tiposReqAutorizacion.find(c => c === this.vacancy.idTipoSolicitud.toString())){
-            console.info(this.cargosNoReqAutorizacion);
-            this.requiereAutorizacion = true;
-               if(this.cargosNoReqAutorizacion.find(c => c.tipo === this.vacancy.idTipoSolicitud &&
-                                                         c.cargo === this.vacancy.idCargo)){
-                  this.requiereAutorizacion = false;
-               }
-         }else{
-            this.requiereAutorizacion = false;
-         }
          if(this.vacancy.idEstado === this.eEnAprobacion) {
             this.listAcciones = this.accionesStep1;
          }else{
             if(this.requiereAutorizacion && this.vacancy.idEstado === this.eSolicitado){
                this.listAcciones = this.accionesStep2;
             }else{
-               this.listAcciones = this.accionesStep3;
+               if(this.vacancy.idEstado === this.eAprobado){
+                  this.listAcciones = this.accionesStep4;
+               }else{
+                  this.listAcciones = this.accionesStep3;
+               }
+
             }
          }
          if(this.vacancy.idEstado === this.eSeleccion) {
@@ -295,8 +283,8 @@ export class VacantesActionComponent implements OnInit {
                                   value: this.allAcciones.find( c => c.codigo === 'DEVCAM').idLista } );
 
       this.accionesStep3.push( { label: 'Seleccione', value: null } );
-      this.accionesStep3.push( { label: this.allAcciones.find( c => c.codigo === 'PRCSEL').nombre,
-                                  value: this.allAcciones.find( c => c.codigo === 'PRCSEL').idLista } );
+      this.accionesStep3.push( { label: this.allAcciones.find( c => c.codigo === 'ASIPRO').nombre,
+                                  value: this.allAcciones.find( c => c.codigo === 'ASIPRO').idLista } );
       this.accionesStep3.push( { label: this.allAcciones.find( c => c.codigo === 'RCHZ').nombre,
                                   value: this.allAcciones.find( c => c.codigo === 'RCHZ').idLista } );
       this.accionesStep3.push( { label: this.allAcciones.find( c => c.codigo === 'DEVCAM').nombre,
@@ -305,10 +293,7 @@ export class VacantesActionComponent implements OnInit {
       this.accionesStep4.push( { label: 'Seleccione', value: null } );
       this.accionesStep4.push( { label: this.allAcciones.find( c => c.codigo === 'ASIPRO').nombre,
                                   value: this.allAcciones.find( c => c.codigo === 'ASIPRO').idLista } );
-      this.accionesStep4.push( { label: this.allAcciones.find( c => c.codigo === 'RCHZ').nombre,
-                                  value: this.allAcciones.find( c => c.codigo === 'RCHZ').idLista } );
-      this.accionesStep4.push( { label: this.allAcciones.find( c => c.codigo === 'DEVCAM').nombre,
-                                  value: this.allAcciones.find( c => c.codigo === 'DEVCAM').idLista } );
+
 
    }
 
