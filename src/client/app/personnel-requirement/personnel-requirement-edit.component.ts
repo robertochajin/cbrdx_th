@@ -292,16 +292,24 @@ export class PersonnelRequirementEditComponent implements OnInit {
    }
 
    onSubmit() {
-      if ( this.selectedBoss !== undefined && this.selectedBoss.idTercero !== undefined && this.selectedBoss.idTercero !== null ) {
-         if ( this.selectedPosition !== undefined && this.selectedPosition.idCargo !== undefined && this.selectedPosition.idCargo !== null ) {
+      if (!this.dispColaboradorJefeInmediato || (this.selectedBoss !== undefined && this.selectedBoss.idTercero !== undefined && this.selectedBoss.idTercero !== null )) {
+         if (!this.dispCargo || (this.selectedPosition !== undefined && this.selectedPosition.idCargo !== undefined && this.selectedPosition.idCargo !== null) ) {
             let item = this.listRT.find( rt => rt.idLista === this.personnelRequirement.idTipoSolicitud );
-            if ((item.codigo === 'RMPLZ' || item.codigo === 'RDP' || item.codigo === 'PLNCRR') &&
+            if ((item.codigo === 'RMPLZ') &&
                 this.blockedPositions.find(c => c === this.selectedPosition.codigoCargo)) {
                this.isPositionBlocked = true;
             } else {
-               this.personnelRequirement.idJefe = this.selectedBoss.idTercero;
-               this.personnelRequirement.idCargo = this.selectedPosition.idCargo;
+               if(this.dispCargo) {
+                  this.personnelRequirement.idCargo = this.selectedPosition.idCargo;
+                  this.personnelRequirement.indicadorAutorizacion = this.isAuthNeeded(this.personnelRequirement.idTipoSolicitud,
+                                                                                      this.selectedPosition.idCargo);
+               } else {
+                  this.personnelRequirement.indicadorAutorizacion = false;
+               }
+               if(this.dispColaboradorJefeInmediato)
+                  this.personnelRequirement.idJefe = this.selectedBoss.idTercero;
                this.personnelRequirement.idSolicitante = this.user.idUsuario;
+
                this.personnelRequirement.idEstructuraOrganizacional = this.employeeBasics.idArea;
                this.personnelRequirement.idEstructuraFisica = this.employeeBasics.idEstructuraFisica;
 
@@ -337,6 +345,10 @@ export class PersonnelRequirementEditComponent implements OnInit {
 
    }
 
+   isAuthNeeded (idRequestType: number, idPosition: number) : boolean {
+      return true;
+   }
+
    bossCaptureId( event: any ) {
       this.selectedBoss.idTercero = event.idTercero;
       this.selectedBoss.nombreCompleto = event.nombreCompleto;
@@ -362,7 +374,6 @@ export class PersonnelRequirementEditComponent implements OnInit {
    }
 
    positionCaptureId( event: any ) {
-      this.personnelRequirement.idCargo = event.idCargo;
       this.selectedPosition.idCargo = event.idCargo;
       this.selectedPosition.cargo = event.cargo;
       this.isPositionWrong = false;
@@ -538,8 +549,8 @@ export class PersonnelRequirementEditComponent implements OnInit {
 
    sendRequest() {
       this.confirmationService.confirm( {
-                                           message: ` Al enviar la solicitus, no podrá ejecutar más cambios en el requerimiento. deseas continuar?`,
-                                           header: 'Corfirmación',
+                                           message: ` Al enviar la solicitud, no podrá ejecutar más cambios en el requerimiento. deseas continuar?`,
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.personnelRequirement.idEstado = this.requestedState.idLista;
