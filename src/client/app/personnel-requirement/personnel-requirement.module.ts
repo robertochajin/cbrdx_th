@@ -3,6 +3,8 @@ import { SharedModule } from '../shared/shared.module';
 import { FormSharedModule } from '../shared/form-shared.module';
 import { PersonnelRequirementComponent } from './personnel-requirement.component';
 import { PersonnelRequirementEditComponent } from './personnel-requirement-edit.component';
+import { PersonnelRequirementDetailComponent } from './personnel-requirement-detail.component';
+import { PersonnelRequirementHistoricalComponent } from './personnel-requirement-historical.component';
 import { PersonnelRequirementServices } from '../_services/personnelRequirement.service';
 import { PositionsService } from '../_services/positions.service';
 import { UsuariosService } from '../_services/usuarios.service';
@@ -12,7 +14,9 @@ import { ListPositionsService } from '../_services/lists-positions.service';
 import { ZonesServices } from '../_services/zones.service';
 import { ResoursesRequiredServices } from '../_services/resourcesRequiredPurchases.service';
 import { ResoursesTicsService } from '../_services/resoursesTics.service';
+import { QuestionnairesService } from '../_services/questionnaires.service';
 import { RequirementReferralsServices } from '../_services/requirement-referrals.service';
+import { ConstanteService } from '../_services/constante.service';
 
 @NgModule( {
               imports: [
@@ -20,11 +24,13 @@ import { RequirementReferralsServices } from '../_services/requirement-referrals
                  FormSharedModule,
               ],
 
-              declarations: [ PersonnelRequirementComponent, PersonnelRequirementEditComponent
+              declarations: [ PersonnelRequirementComponent,PersonnelRequirementDetailComponent,
+              PersonnelRequirementEditComponent,PersonnelRequirementHistoricalComponent
               ],
               bootstrap: [ PersonnelRequirementComponent ],
               providers: [ PersonnelRequirementServices,
                  UsuariosService,
+                 ConstanteService,
                  RequirementReferralsServices,
                  EmployeesService,
                  PositionsService,
@@ -32,7 +38,8 @@ import { RequirementReferralsServices } from '../_services/requirement-referrals
                  ListPositionsService,
                  ZonesServices,
                  ResoursesRequiredServices,
-                 ResoursesTicsService
+                 ResoursesTicsService,
+                 QuestionnairesService
               ],
               exports: [ PersonnelRequirementComponent ]
            } )

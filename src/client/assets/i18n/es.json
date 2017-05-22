@@ -290,6 +290,7 @@
     "LBL_VIVO":"Vivo",
     "LBL_JURIDICO":"Estado jurídico",
     "LBL_FECHADEFUNCIONREQUERIDA":"Fecha de defunción requerida",
+    "LBL_FECHADEFUNCION":"Fecha de defunción",
     "MSG_DOCUMENTO":"El documento que intenta ingresar ya está asignado a otra persona y no puede ser duplicado"
 
   },
@@ -369,7 +370,7 @@
       "MSG_USER80CARACT" : "El nombre de usuario no debe tener más de 80 caracteres.",
       "MSG_USUARIOEXISTE" :"El usuario ya existe para otro tercero",
       "MSG_VALORUSUARIO" :"Debe ingresar un valor para el Usuario",
-      "MSG_NOMCARACT" : "El nombre de usuario sólo debe contener letras y los caracteres . - y/o _",
+      "MSG_NOMCARACT" : "El nombre de usuario sólo debe contener numeros y/o letras y los caracteres  - . _ / una unica vez",
       "LBL_USUARIOS":"Administrador de Usuarios",
       "LBL_DATOSUSER":"Datos de Usuario",
       "LBL_BUSCARUSUARIO":"Buscar usuario"
@@ -767,6 +768,10 @@
       "LBL_ESTADO": "Estado",
       "BTN_SENDREQUEST": "Enviar solicitud",
       "LBL_RECURSO": "Recurso",
+      "LBL_RECURSOTICS": "Recurso Tic's",
+      "LBL_JUSTIFICACION": "Justificación",
+      "LBL_CUESTIONARIOS": "Datos Cuestionarios",
+      "LBL_CUESTIONARIO": "Cuestionario",
       "":""
    },
 
@@ -813,7 +818,11 @@
       "LBL_AUTHORIZATION" : "Autorización",
       "LBL_STATE" : "Estado",
       "LBL_DATEFROM" : "Fecha Desde",
-      "LBL_DATETO" : "Fecha Hasta"
+      "LBL_DATETO" : "Fecha Hasta",
+      "LBL_SALARY" : "Salario",
+      "LBL_PROFESSIONAL" : "Profesional de Reclutamiento",
+      "LBL_RECRUITMENT" : "Forma de reclutamiento",
+      "LBL_OBSERVACION" : "Observación"
    },
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="

@@ -17,6 +17,15 @@
 		
 		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSSOLICITUD' | translate }}" [selected]="true" [disabled]="false">
 			<fieldset>
+				<p-dialog header="Información" [(visible)]="isPositionBlocked" modal="modal" width="500" responsive="true">
+					<p>No es posible agregar un requerimiento para el tipo seleccionado con ese cargo.</p>
+					<p>Por favor, cambiar el tipo de requerimiento.</p>
+					<p-footer>
+						<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+							<button type="button" pButton (click)="isPositionBlocked=false" label="Seleccionar otro tipo"></button>
+						</div>
+					</p-footer>
+				</p-dialog>
 				<div class="row-fluid">
 				<div class="col-md-12">
 					<form name="prForm" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="prForm">
@@ -72,7 +81,7 @@
 							
 							<div class="row">
 								<div class="form-group col-md-6" *ngIf="dispFechaInicioRemplazo">
-									<label for="initDate">{{'REQUERIMIENTOPERSONAL.LBL_FECHA_INICIO' | translate}}:</label>
+									<label for="initDate">* {{'REQUERIMIENTOPERSONAL.LBL_FECHA_INICIO' | translate}}:</label>
 									<p-calendar id="initDate" name="initDate" [showIcon]="true"
 									            [locale]="es" readonlyInput="true" [maxDate]="maxDate"
 									            dataType="date" #ngInitDate="ngModel" required (onSelect)="onSelectBegin($event)"
@@ -82,7 +91,7 @@
 									</div>
 								</div>
 								<div class="form-group col-md-6" *ngIf="dispFechaFinRemplazo">
-									<label for="endDate">{{'REQUERIMIENTOPERSONAL.LBL_FECHA_FIN' | translate}}:</label>
+									<label for="endDate">* {{'REQUERIMIENTOPERSONAL.LBL_FECHA_FIN' | translate}}:</label>
 									<p-calendar id="endDate" name="endDate" [showIcon]="true"
 									            [locale]="es" readonlyInput="true" [maxDate]="maxDateFinal" [minDate]="minDate"
 									            dataType="date" #ngEndDate="ngModel" required (onSelect)="onSelectEnd($event)"
@@ -115,7 +124,7 @@
 							
 							<div class="row">
 								<div class="form-group col-md-12">
-									<label for="justification">{{ 'REQUERIMIENTOPERSONAL.LBL_JUSTIFICACION' | translate }}:</label>
+									<label for="justification">* {{ 'REQUERIMIENTOPERSONAL.LBL_JUSTIFICACION' | translate }}:</label>
 									<textarea id="justification" name="justification" pInputTextarea
 									          [(ngModel)]="personnelRequirement.justificacion"
 									          #ngJustification="ngModel" maxlength="500" required></textarea>
@@ -224,7 +233,7 @@
 							
 							<div class="row">
 								<div class="form-group col-md-6" *ngIf="dispNumeroContratar">
-									<label for="vacancyQuantity">{{nroPlazas}}:</label>
+									<label for="vacancyQuantity">* {{nroPlazas}}:</label>
 									<input id="vacancyQuantity" type="number" pInputText name="vacancyQuantity"
 									       [(ngModel)]="personnelRequirement.cantidadVacantes" min="1"
 									       #ngVQuantity="ngModel" required (keyup)="inputVacancyCleanUp($event.target.value)"
@@ -236,10 +245,10 @@
 									</div>
 								</div>
 								<div class="form-group col-md-6" *ngIf="dispNumeroEntrevistar">
-									<label for="interviewQuantity">{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }}:</label>
+									<label for="interviewQuantity">* {{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }}:</label>
 									<input id="interviewQuantity" type="number" pInputText name="interviewQuantity"
 									       [(ngModel)]="personnelRequirement.cantidadConvocados"
-									       #ngIQuantity="ngModel" required (keyup)="inputInterviewCleanUp($event.target.value)"/>
+									       #ngIQuantity="ngModel" required (keyup)="inputInterviewCleanUp($event.value)"/>
 									<div class="ui-message ui-messages-error ui-corner-all"
 									     *ngIf="f.submitted && !ngIQuantity.valid">
 										<i class="fa fa-close"></i>
@@ -265,7 +274,9 @@
 		
 		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSREFERIDO' | translate }}" [selected]="false"
 		                [disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)">
-			<div *ngIf="editingReferred">
+			
+			<fieldset>
+				<div *ngIf="editingReferred">
 				<div class="row-fluid">
 					<div class="col-md-12">
 						<form name="referredForm" (ngSubmit)="rf.valid && onSubmitReferred()" #rf="ngForm" novalidate id="referredForm">
@@ -306,7 +317,7 @@
 										       (keyup)="emailCleanUp($event.target.value)"
 										/>
 										<div class="ui-message ui-messages-error ui-corner-all"
-										     *ngIf="f.submitted && !ngMailReferred.valid">
+										     *ngIf="rf.submitted && !ngMailReferred.valid">
 											<i class="fa fa-close"></i>
 											{{ 'REQUERIMIENTOPERSONAL.LBL_CORREOREFERIDO' | translate }} {{'LBL_REQUERIDO' | translate}}
 										</div>
@@ -327,6 +338,7 @@
 					</div>
 				</div>
 			</div>
+			</fieldset>
 			<div *ngIf="!editingReferred">
 				<div class="row datable-header">
 					<div class="col-md-6 col-xs-12 datatable-header-add">
@@ -342,10 +354,10 @@
 				</div>
 				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="requirementReferrals" [paginator]="true" [rows]="10"
 				             [responsive]="true" [globalFilter]="rfgb">
-					<p-column field="" header="{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBREREFERIDO' | translate}}" [sortable]="true"></p-column>
-					<p-column field="" header="{{ 'REQUERIMIENTOPERSONAL.LBL_TELEFONOREFERIDO' | translate}}" [sortable]="true"></p-column>
-					<p-column field="" header="{{ 'REQUERIMIENTOPERSONAL.LBL_CORREOREFERIDO' | translate}}" [sortable]="true"></p-column>
-					<p-column field="" header="{{ 'REQUERIMIENTOPERSONAL.LBL_FECHAREFERENCIA' | translate}}" [sortable]="true"></p-column>
+					<p-column field="nombre" header="{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBREREFERIDO' | translate}}" [sortable]="true"></p-column>
+					<p-column field="telefono" header="{{ 'REQUERIMIENTOPERSONAL.LBL_TELEFONOREFERIDO' | translate}}" [sortable]="true"></p-column>
+					<p-column field="correoElectronico" header="{{ 'REQUERIMIENTOPERSONAL.LBL_CORREOREFERIDO' | translate}}" [sortable]="true"></p-column>
+					<p-column field="fechaReferencia" header="{{ 'REQUERIMIENTOPERSONAL.LBL_FECHAREFERENCIA' | translate}}" [sortable]="true"></p-column>
 					<p-column header="{{ 'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
 						<template let-referred="rowData" pTemplate="body">
 							<button type="button" icon="fa-pencil" class="ui-button-success"
@@ -443,6 +455,47 @@
 			<!--[disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)"-->
 			<!---->
 			<!--[disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)"-->
+		</p-accordionTab>
+		<p-accordionTab header="{{ 'REQUERIMIENTOPERSONAL.LBL_CUESTIONARIOS' | translate }}" [selected]="false"
+		                [disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)" >
+			
+			<form (ngSubmit)="frq.valid && onSubmitQuestionnaires()" #frq="ngForm" novalidate id="formulario2" *ngIf="!guardandoResoursesTics">
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-12">
+						<label><h3>{{'REQUERIMIENTOPERSONAL.LBL_CUESTIONARIOS' | translate}} </h3></label>
+					</div>
+				</div>
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-9">
+						<p-autoComplete placeholder="Buscar cuestionario" field="nombre" name="recusosQues" id="recusosQues"
+						                [(ngModel)]="ticsId"  #recusosQues="ngModel" [suggestions]="ticsList"
+						                required (completeMethod)="resourseQuesSearch($event)" (onSelect)="captureResourseQuesId($event)">
+						</p-autoComplete>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="frq.submitted && wrongResourseQues">
+							<i class="fa fa-close"></i>
+							{{'POSITION.LBL_CARGO' | translate}} {{'LBL_REQUERIDO' | translate}}
+						</div>
+					</div>
+					<div class="ui-grid-col-3">
+						<button pButton icon="fa-plus" label="{{'BTN_AGREGAR' | translate}}" type="submit"></button>
+					</div>
+				</div>
+			</form>
+			<div class="row">
+				<div class="col-md-12">
+					<p-dataTable  emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="listResoursesTics" [paginator]="true"
+					              [rows]="10" [responsive]="true">
+						<p-column field="tic" header="{{'REQUERIMIENTOPERSONAL.LBL_RECURSO' | translate}}" [sortable]="true"></p-column>
+						<p-column header="Acciones" styleClass="datatable-col-action">
+							<template let-recurso="rowData" pTemplate="body">
+								<button type="button" icon="fa-trash" class="ui-button-danger"
+								        pButton (click)="delResoursesQues(recurso)"></button>
+							</template>
+						</p-column>
+					</p-dataTable>
+				</div>
+			</div>
 		</p-accordionTab>
 		
 	</p-accordion>
