@@ -5,33 +5,30 @@
 		</div>
 	</div>
 	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
 		<form class="form-horizontal">
-			<fieldset>
 				<div class="form-group">
-					<div class="row">
-						<div class="col-lg-6 col-md-offset-2">
-							<h3 class="first">{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSSOLICITANTE' | translate }}</h3>
+					<p-panel header="{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSSOLICITANTE' | translate }}">
+						<fieldset>
+						<div class="row">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_NOMBRESOLICITANTE' | translate
+								}}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeBasics.nombreCompleto}}</strong></label>
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_CORREOREFERIDO' | translate
+								}}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeBasics.correoUsuario}}</strong></label>
 						</div>
-					</div>
-					<div class="row">
-						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_NOMBRESOLICITANTE' | translate
-							}}:</label>
-						<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeBasics.nombreCompleto}}</strong></label>
-						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_CORREOREFERIDO' | translate
-							}}:</label>
-						<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeBasics.correoUsuario}}</strong></label>
-					</div>
-					<div class="row">
-						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_AREA' | translate }}:</label>
-						<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeBasics.area}}</strong></label>
-						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_CARGO' | translate }}:</label>
-						<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeBasics.cargo}}</strong></label>
-					</div>
-					<div class="row">
-						<div class="col-lg-6 col-md-offset-2">
-							<h3 class="first">{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSSOLICITUD' | translate }}</h3>
+						<div class="row">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_AREA' | translate }}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeBasics.area}}</strong></label>
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_CARGO' | translate }}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeBasics.cargo}}</strong></label>
 						</div>
-					</div>
+						</fieldset>
+					</p-panel>
+
+					<p-panel header="{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSSOLICITUD' | translate }}">
+
 					<div class="row">
 						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_FORMACONTRATACION' | translate
 							}}:</label>
@@ -124,9 +121,10 @@
 							<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{vPersonnelRequirement.cantidadVacantes}}</strong></label>
 						</div>
 					</div>
+					</p-panel>
 				</div>
-			</fieldset>
 		</form>
+		</div>
 	</div>
 	<div class="row datable-header">
 		<div class="col-md-6 col-xs-12 col-md-offset-1 datatable-header-add">
