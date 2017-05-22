@@ -83,7 +83,7 @@
 								<div class="form-group col-md-12">
 									<label for="justification">* {{ 'REQUERIMIENTOPERSONAL.LBL_JUSTIFICACION' | translate }}:</label>
 									<textarea id="justification" name="justification" pInputTextarea
-									          [(ngModel)]="personnelRequirement.justificacion"
+									          [(ngModel)]="personnelRequirement.justificacion" (keyup)="capitalize()"
 									          #ngJustification="ngModel" maxlength="500" required></textarea>
 									<div class="ui-message ui-messages-error ui-corner-all"
 									     *ngIf="f.submitted && !ngJustification.valid">

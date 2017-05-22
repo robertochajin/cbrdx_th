@@ -867,6 +867,13 @@ export class PersonnelRequirementEditComponent implements OnInit {
       } );
    }
 
+   capitalize() {
+      let input = this.personnelRequirement.justificacion;
+      if ( input ) {
+         this.personnelRequirement.justificacion = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+      }
+   }
+
    goBack(): void {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea salir sin guardar?`,
