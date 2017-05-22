@@ -77,7 +77,7 @@ export class VacantesActionComponent implements OnInit {
 
       this.constanteService.getByCode( 'REQAUT' ).subscribe( req => {
          this.objTiposReqAutorizacion = req;
-         this.tiposReqAutorizacion = this.objTiposReqAutorizacion.valor.split(';');
+         this.tiposReqAutorizacion = this.objTiposReqAutorizacion.valor.split(',');
 
       });
 
@@ -186,10 +186,11 @@ export class VacantesActionComponent implements OnInit {
          }
 
 
-         if(this.tiposReqAutorizacion !== undefined && this.tiposReqAutorizacion.find(c => c === this.vacancy.idTipoSolicitud)){
+         if(this.tiposReqAutorizacion !== undefined && this.tiposReqAutorizacion.find(c => c === this.vacancy.idTipoSolicitud.toString())){
+            console.info(this.cargosNoReqAutorizacion);
             this.requiereAutorizacion = true;
                if(this.cargosNoReqAutorizacion.find(c => c.tipo === this.vacancy.idTipoSolicitud &&
-                                                         c.cargo === this.vacancy.idTipoSolicitud)){
+                                                         c.cargo === this.vacancy.idCargo)){
                   this.requiereAutorizacion = false;
                }
          }else{
