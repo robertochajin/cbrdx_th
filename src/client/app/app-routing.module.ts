@@ -347,6 +347,7 @@ const routes = [
    { path: 'vacancies', component: VacanciesComponent, canActivate: [ AuthGuard ] },
    { path: 'vacancies/update/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
    { path: 'vacancies/approve/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
+   { path: 'vacancies/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
 ];
 
 @NgModule( {

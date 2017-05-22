@@ -85,8 +85,8 @@
 			<p-column field="estado" header="{{ 'VACANCIES.LBL_STATE' | translate }}" [sortable]="true"></p-column>
 			<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 				<template let-vacancy="rowData" pTemplate="body">
-					<!--<button type="button" icon="fa-eye" class="ui-button-info"
-					        pButton (click)="detail(vacancy)"></button>-->
+					<button type="button" icon="fa-eye" class="ui-button-info"
+					        pButton (click)="detail(vacancy)"></button>
 					<button type="button" icon="fa-pencil" class="ui-button-success"
 					        pButton (click)="update(vacancy)"></button>
 				</template>
