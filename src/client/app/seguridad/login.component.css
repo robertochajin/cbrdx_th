@@ -10,6 +10,12 @@
     padding: 15px;
     margin: 0 auto;
 }
+.form-signin > .form-group{
+   margin-bottom: 10px;
+}
+.form-signin > .form-group > label{
+   margin-bottom: 0px;
+}
 .form-signin .form-signin-heading, .form-signin .checkbox
 {
     margin-bottom: 10px;

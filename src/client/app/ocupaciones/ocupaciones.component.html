@@ -1,3 +1,4 @@
+<div class="col-md-12">
 <h3>{{ 'OCUPACIONES.LBL_OCUPACIONES' | translate}}</h3>
 <div class="row datable-header">
     <div class="col-md-6 col-xs-12 datatable-header-add">
@@ -19,6 +20,7 @@
 
     </div>
 </div>
+</div>
 <div class="ui-grid-row">
     <div class="col-md-4">
         <p-tree id="trvOcupaciones" [(value)]="treeocupaciones" selectionMode="single" [(selection)]="treeselected"
@@ -28,9 +30,9 @@
     </div>
 
     <div class="col-md-8">
-        <p-fieldset legend="{{header}}">
+        <p-panel header="{{header}}">
             <div class="row-fluid">
-                <div class="col-md-12" *ngIf="!guardado">
+                <div *ngIf="!guardado">
                     <form name="form" (ngSubmit)="!codeExists&&f.valid && save()" #f="ngForm" id="formName" novalidate>
                             <div class="form-group">
                                 <h4>{{labelPadre}}</h4>
@@ -94,7 +96,7 @@
                     </form>
                 </div>
             </div>
-        </p-fieldset>
+        </p-panel>
         <p-dialog header="{{ 'LBL_CONFIRMACION' | translate }}" [(visible)]="displayDialog"
                   responsive="true" modal="true">
             <p> {{ 'MSG_CONFIRMACION' | translate }}</p>
