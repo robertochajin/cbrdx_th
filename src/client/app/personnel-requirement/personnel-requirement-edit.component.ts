@@ -84,6 +84,11 @@ export class PersonnelRequirementEditComponent implements OnInit {
    selectedPosition: Positions;
    positionList: Positions[] = [];
 
+   objTiposReqAutorizacion: Constante;
+   tiposReqAutorizacion: any[];
+   objCargosNoReqAutorizacion: Constante;
+   cargosNoReqAutorizacion: {tipo:number, cargo: number}[] = [{tipo:0, cargo: 0}];
+
    employeeBasics: employeeBasicInfo = new employeeBasicInfo();
    selectedBoss: employeeBasicInfo;
    bossList: employeeBasicInfo[] = [];
@@ -179,6 +184,17 @@ export class PersonnelRequirementEditComponent implements OnInit {
       this.listaService.getMasterDetailsByCode( 'ListasEstadosRequerimientos', 'SOLICITADO' ).subscribe( x => {
          this.requestedState = x
       } );
+
+      this.constanteService.getByCode( 'REQAUT' ).subscribe( req => {
+         this.objTiposReqAutorizacion = req;
+         this.tiposReqAutorizacion = this.objTiposReqAutorizacion.valor.split(',');
+
+      });
+
+      this.constanteService.getByCode( 'CARAUT' ).subscribe( carg => {
+         this.objCargosNoReqAutorizacion = carg;
+         this.cargosNoReqAutorizacion = JSON.parse(this.objCargosNoReqAutorizacion.valor);
+      });
 
       constanteService.getByCode('CARREQ').subscribe((x:Constante) => {
          this.blockedPositions = x.valor.split(';');
@@ -346,7 +362,18 @@ export class PersonnelRequirementEditComponent implements OnInit {
    }
 
    isAuthNeeded (idRequestType: number, idPosition: number) : boolean {
-      return true;
+      let requiereAutorizacion = false;
+      if(this.tiposReqAutorizacion !== undefined && this.tiposReqAutorizacion.find(c => c === idRequestType.toString())){
+         console.info(this.cargosNoReqAutorizacion);
+         requiereAutorizacion = true;
+         if(this.cargosNoReqAutorizacion.find(c => c.tipo === idRequestType &&
+                                                   c.cargo === idPosition)){
+            requiereAutorizacion = false;
+         }
+      }else{
+         requiereAutorizacion = false;
+      }
+      return requiereAutorizacion;
    }
 
    bossCaptureId( event: any ) {
