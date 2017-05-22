@@ -537,7 +537,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
                                            icon: 'fa fa-question-circle',
 
                                            accept: () => {
-                                              this.requirementReferral = null;
+                                              this.requirementReferral = new RequirementReferral();
                                               this.editingReferred = false;
                                            }
                                         } );
@@ -635,7 +635,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
             } else {
                this.guardandoResourses = false;
                this.wrongResourse = true;
-               this.purchasesId = null;
+               this.purchasesId=null;
                this._nav.setMesage( 0, {
                   severity: 'warn', summary: 'Información', detail: 'No es posible agregar mas de una vez un' +
                                                                     ' recurso'
@@ -648,7 +648,6 @@ export class PersonnelRequirementEditComponent implements OnInit {
                this.purchasesId = null;
                this.listResourses = [];
                this.listResoursesAll = [];
-               // idRequerimiento quemado --> 1
                this.resoursesRequiredServices.getResoursesByIdRequirement(  this.personnelRequirement.idRequerimiento ).subscribe( rest => {
                   this.listResourses = rest;
                } );
@@ -713,7 +712,6 @@ export class PersonnelRequirementEditComponent implements OnInit {
                this.ticsId = null;
                this.listResoursesTics = [];
                this.listResoursesTicsAll = [];
-               // idRequerimiento quemado --> 1
                this.resoursesTicsService.getResoursesByIdRequirement(  this.personnelRequirement.idRequerimiento ).subscribe( rest => {
                   this.listResoursesTics = rest;
                } );
@@ -728,8 +726,8 @@ export class PersonnelRequirementEditComponent implements OnInit {
    delResoursesTics( r: TicsResourses ) {
       r.indicadorHabilitado = false;
       this.resoursesTicsService.update( r ).subscribe( res => {
-         this.listResourses = [];
-         this.listResoursesAll = [];
+         this.listResoursesTics = [];
+         this.listResoursesTicsAll = [];
          this.resoursesTicsService.getResoursesByIdRequirement(  this.personnelRequirement.idRequerimiento ).subscribe( rest => {
             this.listResoursesTics = rest;
          } );
@@ -742,7 +740,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
       let temp: any;
       if ( this.questionnaires.idCuestionario === this.questId.idLista ) {
          this.guardandoResoursesQues = true;
-         this.questionnaires.idRequerimiento =  this.personnelRequirement.idRequerimiento; // idRequerimiento quemado --> 1
+         this.questionnaires.idRequerimiento =  this.personnelRequirement.idRequerimiento;
          temp = this.listResoursesQuesAll.find(
             r => r.idCuestionario === this.questionnaires.idCuestionario && r.idRequerimiento === this.questionnaires.idRequerimiento );
          if ( temp ) {
@@ -754,7 +752,6 @@ export class PersonnelRequirementEditComponent implements OnInit {
                   this.questId = null;
                   this.listResoursesQues = [];
                   this.listResoursesQuesAll = [];
-                  // idRequerimiento quemado --> 1
                   this.questionnairesService.getResoursesByIdRequirement(  this.personnelRequirement.idRequerimiento ).subscribe( rest => {
                      this.listResoursesQues = rest;
                   } );
@@ -778,7 +775,6 @@ export class PersonnelRequirementEditComponent implements OnInit {
                this.questId = null;
                this.listResoursesQues = [];
                this.listResoursesQuesAll = [];
-               // idRequerimiento quemado --> 1
                this.questionnairesService.getResoursesByIdRequirement(  this.personnelRequirement.idRequerimiento ).subscribe( rest => {
                   this.listResoursesQues = rest;
                } );
