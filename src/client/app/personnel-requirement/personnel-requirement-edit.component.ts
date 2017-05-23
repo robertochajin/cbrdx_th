@@ -525,6 +525,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
             this.dispColaboradorJefeInmediato = false;
          } else if ( code === 'CRGNVO' ) {
             this.dispCargo = false;
+            this.dispColaboradorJefeInmediato = false;
             this.dispNombreCargo = true;
             this.dispFuncionCargo = true;
          } else if ( code === 'CRGELMN' ) {
