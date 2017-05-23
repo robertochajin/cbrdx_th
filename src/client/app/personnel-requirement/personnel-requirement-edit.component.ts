@@ -419,7 +419,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
 
    positionSearch( event: any ) {
       let item = this.listRT.find( rt => rt.idLista === this.personnelRequirement.idTipoSolicitud );
-      if ( item !== undefined && item.codigo === 'CRGNVO' ) {
+      if ( item !== undefined && item.codigo === 'CRGNVAREA' ) {
          this.positionsService.getByWildCard( event.query.replace(/[^0-9a-zA-Z]+/g,'') ).subscribe( list => this.positionList = list );
       } else {
          this.positionsService.getByWildCardAndArea( event.query.replace(/[^0-9a-zA-Z]+/g,''), this.employeeBasics.idArea )
