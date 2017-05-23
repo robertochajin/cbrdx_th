@@ -119,6 +119,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
    public dispFuncionCargo = false;
    public dispCargo = false;
    public dispZona = false;
+   public dispBoss = false;
    public dispCategoria = false;
    public dispFormaContratacion = false;
    public dispTipoContratacion = false;
@@ -391,6 +392,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
    }
 
    bossCaptureId( event: any ) {
+      this.selectedBoss = new employeeBasicInfo();
       this.selectedBoss.idTercero = event.idTercero;
       this.selectedBoss.nombreCompleto = event.nombreCompleto;
       this.bossPosition.idCargo = event.idCargo;
@@ -399,7 +401,8 @@ export class PersonnelRequirementEditComponent implements OnInit {
    }
 
    bossSearch( event: any ) {
-      this.employeesService.getByNameAndArea( this.employeeBasics.idArea, event.query.replace(/[^0-9a-zA-Z]+/g,'') ).subscribe(
+      this.employeesService.getByNameAndAreaAndCargo( this.employeeBasics.idArea, event.query.replace(/[^0-9a-zA-Z]+/g,'')
+         , this.selectedPosition.idCargoJefe ).subscribe(
          empl => this.bossList = empl
       );
    }
@@ -417,6 +420,16 @@ export class PersonnelRequirementEditComponent implements OnInit {
    positionCaptureId( event: any ) {
       this.selectedPosition.idCargo = event.idCargo;
       this.selectedPosition.cargo = event.cargo;
+      if(event.idCargoJefe === null || event.idCargoJefe === undefined){
+         let noBoss: Message = {severity:'info', summary:'Ups!', detail:'El cargo seleccionado no tiene un cargo jefe'};
+         this._nav.setMesage(4, noBoss);
+         this.selectedPosition.idCargoJefe = event.idCargoJefe;
+         this.dispBoss = false;
+         this.selectedBoss = null;
+      } else {
+         this.dispBoss = true;
+         this.selectedBoss = null;
+      }
       this.isPositionWrong = false;
    }
 
@@ -460,6 +473,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
          this.dispFuncionCargo = false;
          this.dispFechaInicioRemplazo = false;
          this.dispFechaFinRemplazo = false;
+         this.dispBoss = false;
 
          this.dispCargo = true;
          this.dispZona = true;

@@ -28,7 +28,7 @@
 				</p-dialog>
 				<div class="row-fluid">
 				<div class="col-md-12">
-					<form name="prForm" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="prForm">
+					<form name="prForm" (ngSubmit)="f.valid && dispBoss && onSubmit()" #f="ngForm" novalidate id="prForm">
 						<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 							<div class="row">
 								<div class="form-group col-md-6">
@@ -129,6 +129,12 @@
 										<i class="fa fa-close"></i> {{'REQUERIMIENTOPERSONAL.LBL_CARGO' | translate }} {{'LBL_REQUERIDO' | translate
 										}}
 									</div>
+									<li>dispBoss: {{dispBoss}}</li>
+									<div class="ui-message ui-messages-error ui-corner-all"
+									     *ngIf="f.submitted && !dispBoss">
+										<i class="fa fa-close"></i>
+										{{ 'REQUERIMIENTOPERSONAL.MSG_CARGONOCONFIGURADO' | translate }}
+									</div>
 								</div>
 							</div>
 							
@@ -202,7 +208,7 @@
 							</div>
 							
 							<div class="row" *ngIf="dispColaboradorJefeInmediato">
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-6" *ngIf="dispBoss">
 									<label for="boss">* {{'REQUERIMIENTOPERSONAL.LBL_NOMBREJEFEINMEDIATO' | translate }}:</label>
 									<p-autoComplete id="boss" name="boss" field="nombreCompleto"
 									                placeholder="{{ 'PH_BUSCAR' | translate}} {{'REQUERIMIENTOPERSONAL.LBL_NOMBREJEFEINMEDIATO' | translate }}"
@@ -215,12 +221,13 @@
 										translate }}
 									</div>
 								</div>
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-6" *ngIf="dispBoss">
 									<label for="bossPosition">{{ 'REQUERIMIENTOPERSONAL.LBL_CARGOJEFEINMEDIATO' | translate }}:</label>
 									<input id="bossPosition" type="text" pInputText name="bossPosition"
 									       [(ngModel)]="bossPosition.cargo"
 									       #ngBossPosition="ngModel" disabled/>
 								</div>
+								
 							</div>
 							
 							<div class="row">

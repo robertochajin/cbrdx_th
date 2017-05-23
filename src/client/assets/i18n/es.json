@@ -775,6 +775,7 @@
       "LBL_JUSTIFICACION": "Justificación",
       "LBL_CUESTIONARIOS": "Datos Cuestionarios",
       "LBL_CUESTIONARIO": "Cuestionario",
+      "MSG_CARGONOCONFIGURADO": "El cargo seleccionado no tiene configurado un: Cargo depende de.",
       "":""
    },
 
