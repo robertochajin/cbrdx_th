@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VacanciesService } from '../_services/vacancies.service';
 import { Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/primeng';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
 import { SelectItem } from 'primeng/primeng';
@@ -10,6 +9,8 @@ import { OrganizationalStructurePositionsServices } from '../_services/organizat
 import { OrganizationalStructureService } from '../_services/organizationalStructure.service';
 import { OrganizationalStructure } from '../_models/organizationalStructure';
 import { PersonnelRequirement } from '../_models/personnelRequirement';
+import { RequirementsAction } from '../_models/requirementsAction';
+import { ConfirmationService, Message } from 'primeng/primeng';
 
 @Component( {
                moduleId: module.id,
@@ -47,6 +48,8 @@ export class VacanciesComponent implements OnInit {
    seleccion: number;
    eliminacion: number;
    perfil: number;
+   requirementsAction: RequirementsAction[] = [];
+   public displayActions = false;
 
    constructor( private vacanciesService: VacanciesService,
       private router: Router,
@@ -182,9 +185,10 @@ export class VacanciesComponent implements OnInit {
                      obj.idEstado === this.cerrado ||
                      obj.idEstado === this.eliminacion ||
                      obj.idEstado === this.perfil
-                  ) {
-                     this.vacancies.push( obj );
+                  ){
+                     obj.editar = false;
                   }
+                  this.vacancies.push( obj );
                }
             });
          }
@@ -214,6 +218,19 @@ export class VacanciesComponent implements OnInit {
             });
          }
       );
+   }
+
+   observations(pR: PersonnelRequirement) {
+      this.requirementsAction = [];
+      this.vacanciesService.getActions(pR.idRequerimiento).subscribe(acc => {
+         this.requirementsAction = acc;
+         this.displayActions = true;
+      }, error => {
+         let msg: Message;
+         msg.severity = 'error';
+         msg.detail = 'Falla';
+         msg.summary = 'Imposible cargar la información';
+      });
    }
 
 }
