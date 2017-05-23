@@ -64,6 +64,11 @@ export class EmployeesService {
       .map( ( res: Response ) => res.json());
    }
 
+   getByNameAndAreaAndCargo( idArea: number, query: string , idCargo: number) {
+      return this.authHttp.get( this.serviceURL + 'terceros/buscarJefes/'+idArea+'/' + query + '/' +idCargo)
+      .map( ( res: Response ) => res.json());
+   }
+
    getNacionalidad( id: number ) {
       return this.authHttp.get( this.serviceURL + '/vista/' + id ).map( ( res: Response ) => res.json() );
    }
