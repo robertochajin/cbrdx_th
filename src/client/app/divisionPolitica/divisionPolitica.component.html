@@ -41,7 +41,7 @@
 			<fieldset>
 			<div class="row-fluid">
 				<div class="col-md-12" *ngIf="!guardado">
-					<form name="form" (ngSubmit)="!codeExists&&fdivision.valid && save()" #fdivision="ngForm" novalidate>
+					<form name="form" (ngSubmit)="!codeExists&&fdivision.valid && validateCode()&& save()" #fdivision="ngForm" novalidate>
 						<div class="row">
 							<div class="form-group">
 								<h4>{{labelPadre}}</h4>
@@ -180,7 +180,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row" *ngIf="tabselected == 3">
+						<div class="row" *ngIf="tabselected == 4">
 							<div class="form-group">
 								<label for="DPArea" class="control-label col-sm-3">{{ 'DIVISIONPOLITICA.LBL_AREA' | translate
 									}} </label>

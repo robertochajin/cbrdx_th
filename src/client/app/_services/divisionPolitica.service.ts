@@ -3,9 +3,7 @@ import { Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { DivisionPolitica } from '../_models/divisionPolitica';
 import { DivisionPoliticaAreas } from '../_models/divisionPoliticaAreas';
-import { DivisionPoliticaLocalidades } from '../_models/divisionPoliticaLocalidades';
-import { DivisionPoliticaResguardos } from '../_models/divisionPoliticaResguardos';
-import { DivisionPoliticaComunas } from '../_models/divisionPoliticaComunas';
+import { DivisionPoliticaAgrupaciones } from '../_models/divisionPoliticaAgrupaciones';
 import { DivisionPoliticaTipos } from '../_models/divisionPoliticaTipos';
 import { Search } from '../_models/search';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
@@ -16,9 +14,8 @@ export class DivisionPoliticaService {
    private serviceURL = '<%= SVC_TH_URL %>/api/divisionPolitica/';
    private serviceAreasURL = '<%= SVC_TH_URL %>/api/divisionPoliticaAreas/';
    private serviceTiposURL = '<%= SVC_TH_URL %>/api/divisionPoliticaTipos/';
-   private serviceComunasURL = '<%= SVC_TH_URL %>/api/divisionPoliticaComunas/';
-   private serviceLocalidadesURL = '<%= SVC_TH_URL %>/api/divisionPoliticaLocalidades/';
-   private serviceResguardosURL = '<%= SVC_TH_URL %>/api/divisionPoliticaResguardos/';
+   private serviceAgrupacionesURL = '<%= SVC_TH_URL %>/api/divisionPoliticaAgrupaciones';
+
    private jwtHelper: JwtHelper = new JwtHelper();
    private usuarioLogueado: any;
    private idUsuario: number;
@@ -62,17 +59,10 @@ export class DivisionPoliticaService {
       return this.authHttp.get( this.serviceTiposURL ).map( ( res: Response ) => res.json() as DivisionPoliticaTipos[] );
    }
 
-   listDivisionPoliticaComunas() {
-      return this.authHttp.get( this.serviceComunasURL ).map( ( res: Response ) => res.json() as DivisionPoliticaComunas[] );
+   listDivisionPoliticaAgrupaciones() {
+      return this.authHttp.get( this.serviceAgrupacionesURL ).map( ( res: Response ) => res.json() as DivisionPoliticaAgrupaciones[] );
    }
 
-   listDivisionPoliticaLocalidades() {
-      return this.authHttp.get( this.serviceLocalidadesURL ).map( ( res: Response ) => res.json() as DivisionPoliticaLocalidades[] );
-   }
-
-   listDivisionPoliticaResguardos() {
-      return this.authHttp.get( this.serviceResguardosURL ).map( ( res: Response ) => res.json() as DivisionPoliticaResguardos[] );
-   }
 
    getSearch( val: string ) {
       return this.authHttp.get( this.serviceURL + 'search/' + val + '/' ).map( res => res.json() as Search[] );

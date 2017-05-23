@@ -1,5 +1,5 @@
-export class DivisionPoliticaComunas {
-   idDivisionPoliticaComuna: number;
+export class DivisionPoliticaAgrupaciones {
+   idDivisionPoliticaAgrupacion: number;
    descripcion: string;
    indicadorHabilitado: boolean;
    auditoriaUsuario: number;

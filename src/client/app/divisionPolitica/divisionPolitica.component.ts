@@ -3,9 +3,7 @@ import { Router } from '@angular/router';
 import { DivisionPoliticaService } from '../_services/divisionPolitica.service';
 import { DivisionPolitica } from '../_models/divisionPolitica';
 import { DivisionPoliticaAreas } from '../_models/divisionPoliticaAreas';
-import { DivisionPoliticaLocalidades } from '../_models/divisionPoliticaLocalidades';
-import { DivisionPoliticaResguardos } from '../_models/divisionPoliticaResguardos';
-import { DivisionPoliticaComunas } from '../_models/divisionPoliticaComunas';
+import { DivisionPoliticaAgrupaciones } from '../_models/divisionPoliticaAgrupaciones';
 import { DivisionPoliticaTipos } from '../_models/divisionPoliticaTipos';
 import { TreeNode } from 'primeng/components/common/api';
 import { SelectItem, Message } from 'primeng/primeng';
@@ -26,15 +24,11 @@ export class DivisionPoliticaComponent implements OnInit {
    listadoDivisionPolitica: DivisionPolitica[];
    listadoTodo: DivisionPolitica[];
    listadoDivisionPoliticaAreas: DivisionPoliticaAreas[];
-   listadoDivisionPoliticaLocalidades: DivisionPoliticaLocalidades[];
-   listadoDivisionPoliticaResguardos: DivisionPoliticaResguardos[];
-   listadoDivisionPoliticaComunas: DivisionPoliticaComunas[];
+   listadoDivisionPoliticaAgrupaciones: DivisionPoliticaAgrupaciones[];
    listadoDivisionPoliticaTipos: DivisionPoliticaTipos[];
 
    divisionPoliticaAreas: SelectItem[] = [];
-   divisionPoliticaLocalidades: SelectItem[] = [];
-   divisionPoliticaResguardos: SelectItem[] = [];
-   divisionPoliticaComunas: SelectItem[] = [];
+   divisionPoliticaAgrupaciones: SelectItem[] = [];
    divisionPoliticaTipos: SelectItem[] = [];
    divisionPoliticaEstrato: SelectItem[] = [];
 
@@ -105,33 +99,16 @@ export class DivisionPoliticaComponent implements OnInit {
                                              } );
          }
       } );
-      this.divisionPoliticaService.listDivisionPoliticaLocalidades().subscribe( res => {
-         this.listadoDivisionPoliticaLocalidades = res;
-         for ( let dp of this.listadoDivisionPoliticaLocalidades ) {
-            this.divisionPoliticaLocalidades.push( {
+      this.divisionPoliticaService.listDivisionPoliticaAgrupaciones().subscribe( res => {
+         this.listadoDivisionPoliticaAgrupaciones = res;
+         for ( let dp of this.listadoDivisionPoliticaAgrupaciones ) {
+            this.divisionPoliticaAgrupaciones.push( {
                                                       label: dp.descripcion,
-                                                      value: dp.idDivisionPoliticaLocalidad
+                                                      value: dp.idDivisionPoliticaAgrupacion
                                                    } );
          }
       } );
-      this.divisionPoliticaService.listDivisionPoliticaResguardos().subscribe( res => {
-         this.listadoDivisionPoliticaResguardos = res;
-         for ( let dp of this.listadoDivisionPoliticaResguardos ) {
-            this.divisionPoliticaResguardos.push( {
-                                                     label: dp.descripcionDivisionPoliticaResguardo,
-                                                     value: dp.idDivisionPoliticaResguardo
-                                                  } );
-         }
-      } );
-      this.divisionPoliticaService.listDivisionPoliticaComunas().subscribe( res => {
-         this.listadoDivisionPoliticaComunas = res;
-         for ( let dp of this.listadoDivisionPoliticaComunas ) {
-            this.divisionPoliticaComunas.push( {
-                                                  label: dp.descripcion,
-                                                  value: dp.idDivisionPoliticaComuna
-                                               } );
-         }
-      } );
+
       this.divisionPoliticaService.listDivisionPoliticaTipos().subscribe( res => {
          this.listadoDivisionPoliticaTipos = res;
          this.newCountry();
@@ -323,6 +300,7 @@ export class DivisionPoliticaComponent implements OnInit {
       this.politicalDivision.idDivisionPoliticaPadre = 0;
       this.getTipoPais();
       this.codeExists = false;
+
    }
 
    newDepartment() {
