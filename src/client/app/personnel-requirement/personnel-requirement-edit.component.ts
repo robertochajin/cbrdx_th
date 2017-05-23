@@ -288,6 +288,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
                   this.selectedPosition.idCargo = this.personnelRequirement.idCargo;
                   this.selectedBoss = new employeeBasicInfo();
                   this.selectedBoss.idTercero = this.personnelRequirement.idJefe;
+                  this.bossPosition.cargo = this.personnelRequirement.cargoJefe;
                   this.selectedBoss.nombreCompleto = this.personnelRequirement.nombrejefe;
 
                   this.usuariosService.viewUser( this.personnelRequirement.idSolicitante ).subscribe( u => {
