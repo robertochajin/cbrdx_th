@@ -559,7 +559,9 @@ export class PersonnelRequirementEditComponent implements OnInit {
             if ( res.ok ) {
                this.requirementReferrals.map(r => {
                   if(r.idRequerimientoReferido === this.requirementReferral.idRequerimientoReferido){
-                     r = this.requirementReferral;
+                     r.nombre = this.requirementReferral.nombre;
+                     r.correoElectronico = this.requirementReferral.correoElectronico;
+                     r.telefono = this.requirementReferral.telefono;
                   }
                });
                this.requirementReferral = new RequirementReferral();
