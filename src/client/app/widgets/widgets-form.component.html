@@ -77,13 +77,13 @@
             	</div>
 				</div>
 				</div>
-	</form>
 		<div class="row form-footer-buttons">
 			<div class="form-group col-md-12">
-				<a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate}}</a>
+				<a (click)="goBack()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
 				<button type="submit" pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate}}" (keydown.enter)="submit.click()"
 						  #submit></button>
 			</div>
 		</div>
+	</form>
 
 </div>
