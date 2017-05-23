@@ -56,7 +56,8 @@ body .ui-widget:disabled {
    z-index : 800!important;
 }
 /** -- tabview Top-- */
-.ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active{
+.ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active,
+.ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active{
    background-color: #FFF!important;
    font-weight: bold;
 }
@@ -64,7 +65,8 @@ body .ui-widget:disabled {
    margin-top: -2px;
    padding: 20px;
 }
-body .ui-tabview.ui-tabview-top .ui-tabview-nav li{
+body .ui-tabview.ui-tabview-top .ui-tabview-nav li,
+body .ui-tabview.ui-tabview-left .ui-tabview-nav li{
    background-color: #ccc;
 }
 body .ui-tabview.ui-tabview-top .ui-tabview-nav{
@@ -77,6 +79,15 @@ body .ui-tabview.ui-tabview-top .ui-tabview-nav{
 .ui-tabview.ui-tabview-left>.ui-tabview-nav{
    height: auto!important;
 }
+/** -- Panel Left -- */
+body .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active{
+   border-bottom-width: 1px;
+   border-top-width: 1px;
+   border-right-width: 0px;
+   border-left-width:1px;
+}
+
+
 /** -- Panel -- */
 body .ui-panel{
    margin-bottom : 10px;
@@ -740,17 +751,22 @@ body.skin-blue .form-control:focus{
 body.skin-blue .user-avatar{
    border: 4px solid #29ABE2;
 }
-/* -- Tabs Blue-- */
-body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav{
-   background: #29ABE2;
-}
-body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active{
-   border-color: #29ABE2;
-}
+/* -- Tabs -- */
 body.skin-blue .ui-tabview .ui-tabview-panel{
    border: 1px solid #29ABE2;
 }
-body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a{
+/* -- Tabs Top/left Blue-- */
+body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav,
+body.skin-blue .ui-tabview.ui-tabview-left .ui-tabview-nav{
+   background: #29ABE2;
+}
+body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active,
+body.skin-blue .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active{
+   border-color: #29ABE2;
+}
+
+body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a,
+body.skin-blue .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active a{
    color: #0275d8;
 }
 /* -- Accordion Blue */
@@ -934,4 +950,13 @@ body .ui-tabview{
 
 .ui-grid-col-2 .ui-grid-col-1{
    margin-top: 24px;
+}
+
+#tbvCompetenciasHabilidades ul.ui-tabview-nav {
+   height: 470px!important;
+   overflow: scroll;
+}
+
+#tbvCompetenciasHabilidades .ui-tabview-panel.ui-widget-content{
+   min-height: 470px;
 }

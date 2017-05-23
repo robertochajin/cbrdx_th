@@ -67,15 +67,14 @@
 </div>
 <div *ngIf="!editingGroup">
    <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12" style="padding-bottom: 10px">
          <button type="button" pButton icon="fa-plus" (click)="editGroup(null)" label="{{'BTN_AGREGAR' | translate }} {{'COMPETENCIES.LBL_GRUPO' | translate }}"></button>
       </div>
    </div>
-   <p-tabView orientation="left">
+   <p-tabView orientation="left" id="tbvCompetenciasHabilidades">
       <p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}" [selected]="i == 0"
                   headerStyleClass="{{ group.indicadorHabilitado ? '':'inhabilitado' }}"
-                  [disabled]="editingCompetencie"
-      >
+                  [disabled]="editingCompetencie">
          <div class="row" *ngIf="editingCompetencie">
             <div class="col-md-12">
                <form name="competencieForm" (ngSubmit)="fc.valid && saveCompetencie()" #fc="ngForm" novalidate>
@@ -134,7 +133,7 @@
             </div>
          </div>
          <div class="row" *ngIf="!editingCompetencie">
-            <div class="col-md-9">
+            <div class="col-md-12" style="padding: 10px;text-align: center">
                <button type="button" pButton icon="fa-pencil" (click)="editGroup(group)" label="{{'BTN_EDITAR' | translate }} {{'COMPETENCIES.LBL_GRUPO' | translate }}"></button>
                <button type="button" pButton icon="fa-plus" (click)="editCompetencie(null, group.idGrupoCompetencia)"
                        label="{{'BTN_AGREGAR' | translate }} {{'COMPETENCIES.LBL_COMPETENCIA' | translate }}"></button>
@@ -144,7 +143,7 @@
          </div>
          <div class="row" *ngIf="!editingCompetencie">
             <div class="col-md-12">
-               <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="group.competencies"
+               <p-dataTable [rows]="6" [paginator]="true" emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="group.competencies"
                             [responsive]="true" id="positionCompetenciesDT" styleClass="dejemeverelcombo">
                   <p-column field="competencia" header="{{'COMPETENCIES.LBL_COMPETENCIA' | translate }}" [sortable]="true"></p-column>
                   <p-column field="descripcion" header="{{'LBL_DESCRIPCION' | translate }}" [sortable]="true"></p-column>
