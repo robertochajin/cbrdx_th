@@ -202,6 +202,9 @@ export class VacantesActionComponent {
          if ( this.vacancy.idEstado === this.tDisminucionPlanta ) {
             this.vacancy.idEstado = this.eCerrado;
          }
+         if ( this.vacancy.idEstado === this.tCargoNuevo ) {
+            this.vacancy.idEstado = this.ePerfil;
+         }
 
       }
       if ( this.requirementsAction.idAccion === this.aDevolver ) {
@@ -210,7 +213,7 @@ export class VacantesActionComponent {
       if ( this.requirementsAction.idAccion === this.aDevolver ) {
          this.vacancy.idEstado = this.eDevuelto;
       }
-      if ( this.requirementsAction.idAccion === this.aRealizar ) {
+      if ( this.requirementsAction.idAccion === this.aRechazar ) {
          this.vacancy.idEstado = this.eRechazado;
       }
       if ( this.requirementsAction.idAccion === this.aCerrar ) {
