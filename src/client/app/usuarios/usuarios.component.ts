@@ -3,6 +3,7 @@ import { Usuario } from '../_models/usuario';
 import { UsuariosService } from '../_services/usuarios.service';
 import { Router } from '@angular/router';
 import { VUsuario } from '../_models/vUsuario';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -14,8 +15,13 @@ export class UsuariosComponent {
    usuario: Usuario = new Usuario();
    usuarios: VUsuario[];
    usuariosFull = false;
+   busqueda: string;
 
-   constructor( private UsuariosService: UsuariosService, private router: Router ) {
+   constructor( private UsuariosService: UsuariosService,
+      private router: Router,
+      private navService: NavService) {
+      this.busqueda = this.navService.getSearch( 'usuarios.component' );
+      this.showData( this.busqueda );
    }
 
    addUser() {
@@ -47,5 +53,8 @@ export class UsuariosComponent {
          this.usuarios = [];
          this.usuariosFull = false;
       }
+   }
+   setSearch() {
+      this.navService.setSearch( 'usuarios.component', this.busqueda );
    }
 }
