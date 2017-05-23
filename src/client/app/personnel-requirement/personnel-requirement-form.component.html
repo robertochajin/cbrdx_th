@@ -4,7 +4,7 @@
 		<button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate}}" (click)="cd.accept()"></button>
 	</p-footer>
 </p-confirmDialog>
-<div>
+<div class="col-md-10 col-md-offset-1">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="header">
@@ -28,7 +28,7 @@
 				</p-dialog>
 				<div class="row-fluid">
 				<div class="col-md-12">
-					<form name="prForm" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="prForm">
+					<form name="prForm" (ngSubmit)="f.valid && dispBoss && onSubmit()" #f="ngForm" novalidate id="prForm">
 						<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 							<div class="row">
 								<div class="form-group col-md-6">
@@ -83,7 +83,7 @@
 								<div class="form-group col-md-12">
 									<label for="justification">* {{ 'REQUERIMIENTOPERSONAL.LBL_JUSTIFICACION' | translate }}:</label>
 									<textarea id="justification" name="justification" pInputTextarea
-									          [(ngModel)]="personnelRequirement.justificacion"
+									          [(ngModel)]="personnelRequirement.justificacion" (keyup)="capitalize()"
 									          #ngJustification="ngModel" maxlength="500" required></textarea>
 									<div class="ui-message ui-messages-error ui-corner-all"
 									     *ngIf="f.submitted && !ngJustification.valid">
@@ -128,6 +128,11 @@
 									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="(f.submitted && !ngPosition.valid) || isPositionWrong">
 										<i class="fa fa-close"></i> {{'REQUERIMIENTOPERSONAL.LBL_CARGO' | translate }} {{'LBL_REQUERIDO' | translate
 										}}
+									</div>
+									<div class="ui-message ui-messages-error ui-corner-all"
+									     *ngIf="f.submitted && !dispBoss">
+										<i class="fa fa-close"></i>
+										{{ 'REQUERIMIENTOPERSONAL.MSG_CARGONOCONFIGURADO' | translate }}
 									</div>
 								</div>
 							</div>
@@ -202,7 +207,7 @@
 							</div>
 							
 							<div class="row" *ngIf="dispColaboradorJefeInmediato">
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-6" *ngIf="dispBoss">
 									<label for="boss">* {{'REQUERIMIENTOPERSONAL.LBL_NOMBREJEFEINMEDIATO' | translate }}:</label>
 									<p-autoComplete id="boss" name="boss" field="nombreCompleto"
 									                placeholder="{{ 'PH_BUSCAR' | translate}} {{'REQUERIMIENTOPERSONAL.LBL_NOMBREJEFEINMEDIATO' | translate }}"
@@ -215,25 +220,26 @@
 										translate }}
 									</div>
 								</div>
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-6" *ngIf="dispBoss">
 									<label for="bossPosition">{{ 'REQUERIMIENTOPERSONAL.LBL_CARGOJEFEINMEDIATO' | translate }}:</label>
 									<input id="bossPosition" type="text" pInputText name="bossPosition"
 									       [(ngModel)]="bossPosition.cargo"
 									       #ngBossPosition="ngModel" disabled/>
 								</div>
+								
 							</div>
 							
 							<div class="row">
 								<div class="form-group col-md-6" *ngIf="dispNumeroContratar">
 									<label for="vacancyQuantity">* {{nroPlazas}}:</label>
 									<input id="vacancyQuantity" type="number" pInputText name="vacancyQuantity"
-									       [(ngModel)]="personnelRequirement.cantidadVacantes" min="1"
+									       [(ngModel)]="personnelRequirement.cantidadVacantes" min="0"
 									       #ngVQuantity="ngModel" required (keyup)="inputVacancyCleanUp($event.target.value)"
 									/>
 									<div class="ui-message ui-messages-error ui-corner-all"
 									     *ngIf="f.submitted && !ngVQuantity.valid">
 										<i class="fa fa-close"></i>
-										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR' | translate }} {{'LBL_REQUERIDO' | translate}}
+										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR' | translate }} {{'LBL_INVALIDOVACIO' | translate}}
 									</div>
 								</div>
 								<div class="form-group col-md-6" *ngIf="dispNumeroEntrevistar">
@@ -244,7 +250,7 @@
 									<div class="ui-message ui-messages-error ui-corner-all"
 									     *ngIf="f.submitted && !ngIQuantity.valid">
 										<i class="fa fa-close"></i>
-										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }} {{'LBL_REQUERIDO' | translate}}
+										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }} {{'LBL_INVALIDOVACIO' | translate}}
 									</div>
 								</div>
 							</div>
@@ -320,7 +326,7 @@
 							<div class="row form-footer-buttons">
 								<div class="form-group col-md-12">
 									<a (click)="cancelReferred()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
-									<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+									<button icon="fa-plus" label="{{'BTN_AGREGAR' | translate }}" type="submit"
 									        pButton></button>
 								
 								</div>
@@ -382,7 +388,7 @@
 						</div>
 					</div>
 					<div class="ui-grid-col-3">
-						<button pButton icon="fa-plus" label="{{'BTN_AGREGAR' | translate}}" type="submit"></button>
+						<button class="btn-block" pButton icon="fa-plus" label="{{'BTN_AGREGAR' | translate}}" type="submit"> </button>
 					</div>
 				</div>
 			</form>
@@ -425,7 +431,7 @@
 						</div>
 					</div>
 					<div class="ui-grid-col-3">
-						<button pButton icon="fa-plus" label="{{'BTN_AGREGAR' | translate}}" type="submit"></button>
+						<button class="btn-block" pButton icon="fa-plus" label="{{'BTN_AGREGAR' | translate}}" type="submit"></button>
 					</div>
 				</div>
 			</form>
@@ -470,7 +476,7 @@
 						</div>
 					</div>
 					<div class="ui-grid-col-3">
-						<button pButton icon="fa-plus" label="{{'BTN_AGREGAR' | translate}}" type="submit"></button>
+						<button class="btn-block" pButton icon="fa-plus" label="{{'BTN_AGREGAR' | translate}}" type="submit"></button>
 					</div>
 				</div>
 			</form>
@@ -494,7 +500,7 @@
 		
 	<div class="row form-footer-buttons">
 		<div class="form-group col-md-12">
-			<button icon="fa-arrrow btn-success" label="{{'REQUERIMIENTOPERSONAL.BTN_SENDREQUEST' | translate }}" type="button"
+			<button icon="fa-arrrow" label="{{'REQUERIMIENTOPERSONAL.BTN_SENDREQUEST' | translate }}" type="button"
 			        (click)="sendRequest()" pButton [disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)"></button>
 		</div>
 	</div>

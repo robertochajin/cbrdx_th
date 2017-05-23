@@ -5,6 +5,7 @@
     <button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
   </p-footer>
 </p-confirmDialog>
+<div class="col-md-10 col-md-offset-1">
 
   <div *ngIf="addinglocation">
     <div *ngIf="reference">
@@ -114,7 +115,7 @@
                       {{'LBL_DIRECCION' | translate }} {{'LBL_REQUERIDO' | translate }}
                     </div>
                 </div>
-                <div class="ui-grid-col-2">
+                <div class="ui-grid-col-2" style="margin-top: 24px;">
                   <button pButton icon="fa-plus" label="{{'BTN_EDITARDIRECCION' | translate }}" (click)="toggleform()"></button>
                 </div>
             </div>
@@ -153,3 +154,4 @@
   <div *ngIf="!addinglocation">
     <locations-form [parentTitle]="'Referencias'" (dismiss)="toggleform()" (create)="bindLocation($event)" [localizacion]="localizacion"></locations-form>
   </div>
+</div>

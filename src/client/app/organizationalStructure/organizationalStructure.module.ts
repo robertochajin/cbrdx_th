@@ -7,6 +7,7 @@ import { OrganizationalStructureService } from '../_services/organizationalStruc
 import { OrganizationalStructureComponent } from './organizationalStructure.component';
 import { LocationsModule } from '../locations/locations.module';
 
+
 @NgModule( {
               imports: [
                  SharedModule,

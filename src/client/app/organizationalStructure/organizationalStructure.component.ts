@@ -9,6 +9,8 @@ import { PoliticalDivisionService } from '../_services/political-division.servic
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
 import { NavService } from '../_services/_nav.service';
+import { FormSharedModule } from '../shared/form-shared.module';
+
 
 @Component( {
                moduleId: module.id,

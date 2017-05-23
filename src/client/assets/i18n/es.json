@@ -22,6 +22,7 @@
   "LBL_CREAR":"Crear",
   "LBL_EDITAR":"Editar",
   "LBL_REQUERIDO":"requerido",
+  "LBL_INVALIDOVACIO":"invalido o vacío",
   "LBL_GENERO":"Género",
   "LBL_ESTADOCIVIL":"Estado Civil",
   "LBL_NUEVO":"Nuevo",
@@ -774,6 +775,7 @@
       "LBL_JUSTIFICACION": "Justificación",
       "LBL_CUESTIONARIOS": "Datos Cuestionarios",
       "LBL_CUESTIONARIO": "Cuestionario",
+      "MSG_CARGONOCONFIGURADO": "El cargo seleccionado no tiene configurado un: Cargo depende de.",
       "":""
    },
 
@@ -824,7 +826,8 @@
       "LBL_SALARY" : "Salario",
       "LBL_PROFESSIONAL" : "Profesional de Reclutamiento",
       "LBL_RECRUITMENT" : "Forma de reclutamiento",
-      "LBL_OBSERVACION" : "Observación"
+      "LBL_OBSERVACION" : "Observación",
+      "LBL_NOMBREJEFEINMEDIATO":"jefe Directo"
    },
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
