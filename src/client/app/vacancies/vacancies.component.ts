@@ -167,7 +167,11 @@ export class VacanciesComponent implements OnInit {
             this.vacancies = [];
             vacancies.forEach(obj=>{
                obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No';
-               if(obj.idEstado !== this.creacion &&  obj.idEstado !== this.cerrado){
+               if(obj.idEstado !== this.creacion ){
+                  obj.editar = true;
+                  if(obj.idEstado === this.enAprobacion){
+                     obj.editar = false;
+                  }
                   this.vacancies.push(obj);
                }
             });
