@@ -28,7 +28,7 @@
 				</p-dialog>
 				<div class="row-fluid">
 				<div class="col-md-12">
-					<form name="prForm" (ngSubmit)="f.valid && dispBoss && onSubmit()" #f="ngForm" novalidate id="prForm">
+					<form name="prForm" (ngSubmit)="f.valid && isPositionConfigured && onSubmit()" #f="ngForm" novalidate id="prForm">
 						<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 							<div class="row">
 								<div class="form-group col-md-6">
@@ -130,7 +130,7 @@
 										}}
 									</div>
 									<div class="ui-message ui-messages-error ui-corner-all"
-									     *ngIf="f.submitted && !dispBoss">
+									     *ngIf="f.submitted && !isPositionConfigured">
 										<i class="fa fa-close"></i>
 										{{ 'REQUERIMIENTOPERSONAL.MSG_CARGONOCONFIGURADO' | translate }}
 									</div>
@@ -233,13 +233,26 @@
 								<div class="form-group col-md-6" *ngIf="dispNumeroContratar">
 									<label for="vacancyQuantity">* {{nroPlazas}}:</label>
 									<input id="vacancyQuantity" type="number" pInputText name="vacancyQuantity"
-									       [(ngModel)]="personnelRequirement.cantidadVacantes" min="0"
+									       [(ngModel)]="personnelRequirement.cantidadVacantes" min="1"
 									       #ngVQuantity="ngModel" required (keyup)="inputVacancyCleanUp($event.target.value)"
 									/>
 									<div class="ui-message ui-messages-error ui-corner-all"
 									     *ngIf="f.submitted && !ngVQuantity.valid">
 										<i class="fa fa-close"></i>
 										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR' | translate }} {{'LBL_INVALIDOVACIO' | translate}}
+									</div>
+									<div class="ui-message ui-messages-error ui-corner-all"
+									     *ngIf="f.submitted && wrongVacancies">
+										<i class="fa fa-close"></i>
+										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR' | translate }} {{'REQUERIMIENTOPERSONAL.LBL_MENORAUNO' |
+										translate}}
+									</div>
+									<div class="ui-message ui-messages-error ui-corner-all"
+									     *ngIf="f.submitted && wrongDecrease">
+										<i class="fa fa-close"></i>
+										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR' | translate }}
+										{{'REQUERIMIENTOPERSONAL.LBL_VACANTESNOREDUCIBLES' |
+										translate}}
 									</div>
 								</div>
 								<div class="form-group col-md-6" *ngIf="dispNumeroEntrevistar">
@@ -251,6 +264,12 @@
 									     *ngIf="f.submitted && !ngIQuantity.valid">
 										<i class="fa fa-close"></i>
 										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }} {{'LBL_INVALIDOVACIO' | translate}}
+									</div>
+									<div class="ui-message ui-messages-error ui-corner-all"
+									     *ngIf="f.submitted && wrongConvocados">
+										<i class="fa fa-close"></i>
+										{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate }} {{'REQUERIMIENTOPERSONAL.LBL_MENORAUNO'
+										| translate}} | {{'REQUERIMIENTOPERSONAL.LBL_MENORACONVOCADOS' | translate}}
 									</div>
 								</div>
 							</div>
