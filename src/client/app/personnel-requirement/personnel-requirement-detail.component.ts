@@ -20,6 +20,7 @@ import { QuestionnairesService } from '../_services/questionnaires.service';
 import { ResourcesRequiredPurchases } from '../_models/resourcesRequiredPurchases';
 import { TicsResourses } from '../_models/ticsResourses';
 import { Questionnaires } from '../_models/questionnaires';
+import { TranslateService } from 'ng2-translate';
 
 class employeeBasicInfo {
    idTercero: number;
@@ -52,6 +53,7 @@ export class PersonnelRequirementDetailComponent {
    listResourses: ResourcesRequiredPurchases[] = [];
    listResoursesTics: TicsResourses[] = [];
    listQuestionnaires: Questionnaires[] = [];
+   public nroPlazas: string;
    msg: Message;
 
    // variables de display
@@ -76,6 +78,7 @@ export class PersonnelRequirementDetailComponent {
       private referralsServices: RequirementReferralsServices,
       private _nav: NavService,
       private location: Location,
+      private translate: TranslateService,
       private resoursesRequiredServices: ResoursesRequiredServices,
       private resoursesTicsService: ResoursesTicsService,
       private questionnairesService: QuestionnairesService,
@@ -131,6 +134,16 @@ export class PersonnelRequirementDetailComponent {
             this.dispColaboradorJefeInmediato = true;
             this.dispNumeroContratar = true;
             this.dispNumeroEntrevistar = true;
+
+            if ( code === 'DMNPLNT' ) {
+               this.translate.get( 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAPLAZASDISMINUIR' ).subscribe( ( res: string ) => {
+                  this.nroPlazas = res;
+               } );
+            } else {
+               this.translate.get( 'REQUERIMIENTOPERSONAL.LBL_CANTIDADACONTRATAR' ).subscribe( ( res: string ) => {
+                  this.nroPlazas = res;
+               } );
+            }
 
             if ( code === 'RMPLZ' ) {
                this.dispFechaInicioRemplazo = true;
