@@ -52,7 +52,7 @@ export class VacanciesComponent implements OnInit {
       private organizationalStructureService: OrganizationalStructureService,
       private ospService: OrganizationalStructurePositionsServices,
    ) {
-
+      this.vacancies = [];
       this.listaService.getMasterDetails( 'ListasTiposSolicitudes' ).subscribe( res => {
          this.listTipoSolicitud.push( { label: 'Todos', value: '' } );
          res.map( ( l: ListaItem ) => {
@@ -71,6 +71,7 @@ export class VacanciesComponent implements OnInit {
          this.devuelto =  this.allEstados.find( c => c.codigo === "DVLT").idLista;
          this.enAprobacion =  this.allEstados.find( c => c.codigo === "ENAPRB").idLista;
          this.rechazado =  this.allEstados.find( c => c.codigo === "RCHZ").idLista;
+         this.getData();
       } );
       this.listAutotizacion.push({label: 'Todos', value:''});
       this.listAutotizacion.push({label: 'Si', value:'Si'});
@@ -122,24 +123,7 @@ export class VacanciesComponent implements OnInit {
    }
 
    ngOnInit() {
-      this.vacancies = [];
-     this.vacanciesService.getAll().subscribe(
-         vacancies => {
-            vacancies.forEach(obj=>{
-               obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No';
-               if(obj.idEstado !== this.creacion &&
-                  obj.idEstado !== this.cerrado &&
-                  obj.idEstado !== this.devuelto &&
-                  obj.idEstado !== this.rechazado){
-                  obj.editar = true;
-                  if(obj.idEstado === this.enAprobacion){
-                     obj.editar = false;
-                  }
-                  this.vacancies.push(obj);
-               }
-            });
-         }
-      );
+
 
       this.es = {
          firstDayOfWeek: 1,
@@ -182,6 +166,27 @@ export class VacanciesComponent implements OnInit {
             vacancies.forEach(obj=>{
                obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No';
                if(obj.idEstado !== this.creacion &&  obj.idEstado !== this.cerrado){
+                  this.vacancies.push(obj);
+               }
+            });
+         }
+      );
+   }
+
+   getData(){
+      this.vacancies = [];
+      this.vacanciesService.getAll().subscribe(
+         vacancies => {
+            vacancies.forEach(obj=>{
+               obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No';
+               if(obj.idEstado !== this.creacion &&
+                  obj.idEstado !== this.cerrado &&
+                  obj.idEstado !== this.devuelto &&
+                  obj.idEstado !== this.rechazado){
+                  obj.editar = true;
+                  if(obj.idEstado === this.enAprobacion){
+                     obj.editar = false;
+                  }
                   this.vacancies.push(obj);
                }
             });
