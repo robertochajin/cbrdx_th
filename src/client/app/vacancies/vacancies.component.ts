@@ -63,7 +63,9 @@ export class VacanciesComponent implements OnInit {
 
          this.listEstados.push( { label: 'Todos', value: '' } );
          res.map( ( l: ListaItem ) => {
-            this.listEstados.push( { label: l.nombre, value: l.nombre } );
+            if(l.codigo !== "PRCREQ") {
+               this.listEstados.push( { label: l.nombre, value: l.nombre } );
+            }
             this.allEstados.push( l );
          } );
          this.creacion =  this.allEstados.find( c => c.codigo === "PRCREQ").idLista;
@@ -179,10 +181,11 @@ export class VacanciesComponent implements OnInit {
          vacancies => {
             vacancies.forEach(obj=>{
                obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No';
-               if(obj.idEstado !== this.creacion &&
-                  obj.idEstado !== this.cerrado &&
+               if(obj.idEstado !== this.creacion /* &&
+                   obj.idEstado !== this.cerrado &&
                   obj.idEstado !== this.devuelto &&
-                  obj.idEstado !== this.rechazado){
+                  obj.idEstado !== this.rechazado */
+                  ){
                   obj.editar = true;
                   if(obj.idEstado === this.enAprobacion){
                      obj.editar = false;

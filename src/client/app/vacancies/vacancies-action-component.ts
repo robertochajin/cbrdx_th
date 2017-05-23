@@ -210,7 +210,7 @@ export class VacantesActionComponent {
       if ( this.requirementsAction.idAccion === this.aDevolver ) {
          this.vacancy.idEstado = this.eDevuelto;
       }
-      if ( this.requirementsAction.idAccion === this.aRealizar ) {
+      if ( this.requirementsAction.idAccion === this.aRechazar ) {
          this.vacancy.idEstado = this.eRechazado;
       }
       if ( this.requirementsAction.idAccion === this.aCerrar ) {
