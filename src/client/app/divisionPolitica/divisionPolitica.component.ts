@@ -176,6 +176,7 @@ export class DivisionPoliticaComponent implements OnInit {
             } );
             break;
          case 4:
+
             this.labeldescripcionDivisonPolitica = 'Nombre del Barrio';
             this.labelPadre = 'Ciudad: ' + node.parent.label;
             this.divisionPoliticaService.listDivisionPoliticaAgrupaciones( node.data.idDivisionPoliticaPadre ).subscribe( res => {
@@ -189,6 +190,11 @@ export class DivisionPoliticaComponent implements OnInit {
             this.politicalDivision = politicalDivision;
             this.validateCode();
             this.changeArea( this.politicalDivision.idDivisionPoliticaArea );
+            if ( this.tabselected === 4 ) {
+               let codigoArea = this.listadoDivisionPoliticaAreas.find(
+                  a => a.idDivisionPoliticaArea === this.politicalDivision.idDivisionPoliticaArea ).codigo;
+               this.getTiposbyCode( this.tabselected.toString() + '' + codigoArea )
+            }
          } );
    }
 
@@ -315,14 +321,15 @@ export class DivisionPoliticaComponent implements OnInit {
 
    getTiposbyCode( id: string ): void {
       this.divisionPoliticaTipos = [];
-      for ( let dp of this.listadoDivisionPoliticaTipos.filter( t => t.codigoDivisionPoliticaTipo === id ) ) {
+      for ( let dp of this.listadoDivisionPoliticaTipos.filter( t => t.codigoDivisionPoliticaTipo.startsWith( id ) ) ) {
          this.divisionPoliticaTipos.push( {
                                              label: dp.descripcionTipo,
                                              value: dp.idDivisionPoliticaTipo
                                           } );
       }
-      this.politicalDivision.idDivisionPoliticaTipo = this.divisionPoliticaTipos[ 0 ].value;
-      // this.changeTipoID( this.politicalDivision.idDivisionPoliticaTipo );
+      if ( this.divisionPoliticaTipos.length > 0 ) {
+         this.politicalDivision.idDivisionPoliticaTipo = this.divisionPoliticaTipos[ 0 ].value;
+      }
    }
 
    getCodigoTypebyId( id: number ) {
@@ -354,23 +361,25 @@ export class DivisionPoliticaComponent implements OnInit {
    captureId( event: Search ) {
 
       //  ScrollTo 0;
-      jQuery( '#trvDivisionPolitica' ).scrollTop( 0 );
+       jQuery( '#trvDivisionPolitica' ).scrollTop( 0 );
 
       this.divisionPoliticaService.viewDivisionPolitica( event.value ).subscribe( res => {
          this.politicalDivision = res;
          this.header = res.descripcionDivisonPolitica;
          let nodeCode = this.getCodigoTypebyId( res.idDivisionPoliticaTipo );
-         this.tabselected = Number( nodeCode );
+         this.tabselected = Number( parseInt(nodeCode ));
          this.getTiposbyCode( nodeCode );
+         this.searchRecursive( res );
          if ( res.idDivisionPolitica !== 0 ) {
-            this.divisionPoliticaService.viewDivisionPolitica( res.idDivisionPoliticaPadre ).subscribe( res => {
-               this.labelPadre = res.descripcionDivisonPolitica;
-               this.codeExists = false;
-            } );
+            if ( this.listadoDivisionPolitica.find( t => t.idDivisionPolitica === res.idDivisionPoliticaPadre ) ) {
+               this.labelPadre = this.listadoDivisionPolitica.find(
+                  t => t.idDivisionPolitica === res.idDivisionPoliticaPadre ).descripcionDivisonPolitica;
+            }
+            this.codeExists = false;
          } else {
             this.labelPadre = '';
          }
-         this.searchRecursive( res );
+
          //  Scroll to Select
          setTimeout( () => {
             jQuery( '#trvDivisionPolitica' ).scrollTop(
@@ -386,8 +395,8 @@ export class DivisionPoliticaComponent implements OnInit {
       let node3: number = 0;
       let node2: number = 0;
       let node1: number = 0;
-      let nivel = this.getCodigoTypebyId( res.idDivisionPoliticaTipo );
-
+      let nivel = this.getCodigoTypebyId( res.idDivisionPoliticaTipo ).substring( 0, 1 );
+      let busqueda = true;
       switch ( nivel ) {
          case '1':
             node1 = res.idDivisionPolitica;
@@ -399,7 +408,7 @@ export class DivisionPoliticaComponent implements OnInit {
          case '3':
             node3 = res.idDivisionPolitica;
             node2 = res.idDivisionPoliticaPadre;
-            if ( this.listadoDivisionPolitica.find( t => t.idDivisionPolitica === res.idDivisionPoliticaPadre ) ) {
+            if ( this.listadoDivisionPolitica.filter( t => t.idDivisionPolitica === res.idDivisionPoliticaPadre ).length > 0 ) {
                node1 = this.listadoDivisionPolitica.find(
                   t => t.idDivisionPolitica === res.idDivisionPoliticaPadre ).idDivisionPoliticaPadre;
             } else {
@@ -408,22 +417,26 @@ export class DivisionPoliticaComponent implements OnInit {
                                                                ' Base de Datos'
                };
                this.navService.setMesage( 4, this.msg );
+               this.newCountry();
+               busqueda = false;
             }
 
             break;
          case '4':
             node4 = res.idDivisionPolitica;
             node3 = res.idDivisionPoliticaPadre;
-            if ( this.listadoDivisionPolitica.find( t => t.idDivisionPolitica === node3 ) ) {
+            if ( this.listadoDivisionPolitica.filter( t => t.idDivisionPolitica === node3 ).length > 0 ) {
                node2 = this.listadoDivisionPolitica.find( t => t.idDivisionPolitica === node3 ).idDivisionPoliticaPadre;
-               if ( this.listadoDivisionPolitica.find( t => t.idDivisionPolitica === node2 ) ) {
-                  node2 = this.listadoDivisionPolitica.find( t => t.idDivisionPolitica === node2 ).idDivisionPoliticaPadre;
+               if ( this.listadoDivisionPolitica.filter( t => t.idDivisionPolitica === node2 ).length > 0 ) {
+                  node1 = this.listadoDivisionPolitica.find( t => t.idDivisionPolitica === node2 ).idDivisionPoliticaPadre;
                } else {
                   this.msg = {
                      severity: 'error', summary: 'Error!', detail: 'El registro buscado no se encuentra bien relacionado en la' +
                                                                    ' Base de Datos'
                   };
                   this.navService.setMesage( 4, this.msg );
+                  this.newCountry();
+                  busqueda = false;
                }
             } else {
                this.msg = {
@@ -431,23 +444,27 @@ export class DivisionPoliticaComponent implements OnInit {
                                                                 ' Base de Datos'
                };
                this.navService.setMesage( 4, this.msg );
+               this.newCountry();
+               busqueda = false;
             }
             break;
       }
-      if ( node1 > 0 ) {
-         this.searchLevel( node1, 1 );
+      if( busqueda === true) {
+         if ( node1 > 0 ) {
+            this.searchLevel( node1, 1 );
+         }
+         if ( node2 > 0 ) {
+            this.searchLevel( node2, 2 );
+         }
+         if ( node3 > 0 ) {
+            this.searchLevel( node3, 3 );
+         }
+         if ( node4 > 0 ) {
+            this.searchLevel( node4, 4 );
+         }
+         this.selectedSearch = null;
+         this.nodeSelect( this.selectedNode );
       }
-      if ( node2 > 0 ) {
-         this.searchLevel( node2, 2 );
-      }
-      if ( node3 > 0 ) {
-         this.searchLevel( node3, 3 );
-      }
-      if ( node4 > 0 ) {
-         this.searchLevel( node4, 4 );
-      }
-      this.selectedSearch = null;
-      this.nodeSelect( this.selectedNode );
 
    }
 
@@ -517,6 +534,7 @@ export class DivisionPoliticaComponent implements OnInit {
 
    changeArea( idArea: number ) {
       this.divisionPoliticaAgrupaciones = [];
+
       this.divisionPoliticaAgrupaciones.push( { label: 'Seleccione', value: null } );
       if ( idArea !== null ) {
          for ( let dp of this.listadoDivisionPoliticaAgrupaciones.filter( d => d.idDivisionPoliticaArea === idArea ) ) {
@@ -525,7 +543,11 @@ export class DivisionPoliticaComponent implements OnInit {
                                                        value: dp.idDivisionPoliticaAgrupacion
                                                     } );
          }
+         let codigoArea = this.listadoDivisionPoliticaAreas.find(
+            a => a.idDivisionPoliticaArea === idArea ).codigo;
+         this.getTiposbyCode( this.tabselected.toString() + '' + codigoArea )
       }
+
    }
 
 }

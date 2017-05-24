@@ -163,10 +163,10 @@
 						</div>
 						<div class="row" *ngIf="tabselected === 4 && divisionPoliticaAgrupaciones.length > 1">
 							<div class="form-group">
-								<label for="comuna" class="control-label col-sm-3">{{"DIVISIONPOLITICA.LBL_AGRUPACION" |
+								<label for="pertenecea" class="control-label col-sm-3">{{"DIVISIONPOLITICA.LBL_PERTENECEA" |
 									translate}}</label>
 								<div class=" col-sm-9">
-									<p-dropdown id="comuna" name="comuna" [options]="divisionPoliticaAgrupaciones"
+									<p-dropdown id="pertenecea" name="comuna" [options]="divisionPoliticaAgrupaciones"
 													[autoWidth]="false"
 													[(ngModel)]="politicalDivision.idDivisionPoliticaAgrupacion"
 													#agrupa="ngModel"></p-dropdown>

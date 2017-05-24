@@ -160,7 +160,7 @@
       "LBL_COMUNA":"Comuna",
       "LBL_LOCALIDAD":"Localidad",
       "LBL_RESGUARDO":"Resguardo",
-      "LBL_AGRUPACION":"Agrupación",
+      "LBL_PERTENECEA":"Pertenece A",
       "MSG_CODREGISTRADO":"Ya se encuentra registrado este código",
       "MSG_NOMBREREQUERIDO":"Nombre es requerido"
 
