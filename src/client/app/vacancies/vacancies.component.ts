@@ -165,6 +165,7 @@ export class VacanciesComponent implements OnInit {
    clearDate() {
       this.fechaInicio = null;
       this.fechaFin = this.today;
+      this.getData();
    }
    changeDate(){
       let i = new Date( this.fechaInicio  );
