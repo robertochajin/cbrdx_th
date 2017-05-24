@@ -22,7 +22,7 @@
                </div>
             </div>
             <div class="ui-grid-col-3">
-               <button class="ui-button ui-button-success btn" icon="fa-plus" pButton icon="fa-plus" type="submit"
+               <button class="ui-button ui-button-success btn-block btn" icon="fa-plus" pButton icon="fa-plus" type="submit"
                        label="{{ 'BTN_AGREGAR' | translate }}"></button>
             </div>
          </div>
@@ -43,13 +43,21 @@
    </p-dataTable>
 </div>
 <div>
-   <div class="ui-grid-row form-footer-buttons">
+   <div class="ui-grid-row">
       <div class="ui-grid-col-10">
          <p-messages [value]="msgsAlert"></p-messages>
       </div>
-      <div class="ui-grid-col-2 pull-right">
-         <button pButton label="{{ 'BTN_SIGUIENTE' | translate }}" type="button" (click)="next()"></button>
-      </div>
+		<div class="row form-footer-buttons">
+			<div class="form-group col-md-12">
+				<button icon="fa-arrow-right" label="{{ 'BTN_SIGUIENTE' | translate }}" type="button" type="button" (click)="next()"
+						  pButton></button>
+			</div>
+		</div>
    </div>
 </div>
-<p-confirmDialog width="400"></p-confirmDialog>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
