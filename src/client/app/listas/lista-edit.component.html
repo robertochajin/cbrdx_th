@@ -24,7 +24,20 @@
 					 </div>
 				 </div>
 			 </div>
-
+			 <div class="form-group">
+				 <label class="control-label col-md-3" for="lista">{{ 'LISTAS.LBL_ROLMODIFICA' | translate }}</label>
+				 <div class="col-md-9">
+					 <select [(ngModel)]="masterList.idRol" name="roles" id="roles"
+					         class="form-control" required>
+						 <option *ngFor="let c of roles" [ngValue]="c.idRol">{{c.rol}}</option>
+					 </select>
+					 <div class="ui-message ui-messages-error ui-corner-all"
+					      *ngIf="f.submitted && !masterList.idRol">
+						 <i class="fa fa-close"></i>
+						 {{ 'LISTAS.MSG_ROLMODIFICAREQUERIDO' | translate }}
+					 </div>
+				 </div>
+			 </div>
 			 <div class="form-group">
 				 <label class="control-label col-md-3" for="listDescription">{{ 'LBL_DESCRIPCION' | translate }}</label>
 				 <div class="col-md-9">

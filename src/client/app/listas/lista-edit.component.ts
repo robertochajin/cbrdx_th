@@ -8,6 +8,9 @@ import { Message } from 'primeng/primeng';
 import 'rxjs/add/operator/switchMap';
 import { NavService } from '../_services/_nav.service';
 import { FormSharedModule } from '../shared/form-shared.module';
+import { ConstanteService } from '../_services/constante.service';
+import { Rol } from '../_models/rol';
+import { RolesService } from '../_services/roles.service';
 
 @Component( {
                moduleId: module.id,
@@ -27,8 +30,14 @@ export class ListaEditComponent implements OnInit {
    isEdit = false;
    displayUpdateDialog = false;
    msgs: Message[] = [];
+   constante: string[] = [];
+   roles: Rol[] = [];
 
-   constructor( private listaService: ListaService, private router: Router, private route: ActivatedRoute,
+   constructor( private listaService: ListaService,
+      private router: Router,
+      private route: ActivatedRoute,
+      private rolesService: RolesService,
+      private constanteService: ConstanteService,
       private _nav: NavService, ) {
    }
 
@@ -38,6 +47,25 @@ export class ListaEditComponent implements OnInit {
          this.masterList = data;
          this.listaService.getMasterAllDetails( this.masterList.nombreTabla ).subscribe( res => {
             this.detailsList = res;
+         } );
+      } );
+      this.constanteService.listConstants().subscribe( data => {
+         let temp2: string;
+         let temp = data.find( c => c.constante === 'ADMLIS' );
+
+         this.rolesService.listRoles().subscribe( data => {
+            if ( temp ) {
+               temp2 = temp.valor;
+               this.constante = temp2.split( ',' );
+               for ( let c of this.constante ) {
+                  let rol = data.find( r => r.codigoRol === c );
+                  if ( rol ) {
+                     this.roles.push( rol );
+                  }
+               }
+            } else {
+               this.roles=data;
+            }
          } );
       } );
    }

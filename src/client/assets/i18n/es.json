@@ -467,6 +467,8 @@
       "LBL_PARAMETROSLISTA":"Parámetros Lista",
       "LBL_LISTA":"Lista",
       "LBL_EDITABLE":"Editable",
+      "LBL_ROLMODIFICA":"Rol que modifica",
+      "MSG_ROLMODIFICAREQUERIDO":"Rol que modifica es requerido",
       "LBL_ELEMENTLISTA":"Elementos de la Lista",
       "LBL_ITEMLISTA":"Item",
       "MSG_NOMBRELISTA":"Debe ingresar el nombre de la Lista.",
