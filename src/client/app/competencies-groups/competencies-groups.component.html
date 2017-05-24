@@ -2,7 +2,7 @@
 <h3>{{ 'COMPETENCIES.LBL_COMPETENCIASYHABILIDADES' | translate}}</h3>
 <div *ngIf="editingGroup">
    <div class="row-fluid">
-      <div class="col-md-12">
+      <div class="col-md-10 col-md-offset-1">
          <form name="formulario" (ngSubmit)="fg.valid && saveGroup()" #fg="ngForm" novalidate>
             <fieldset>
                <legend> {{'LBL_CREAR' | translate }} / {{'LBL_EDITAR' | translate }} {{'COMPETENCIES.LBL_GRUPO' | translate }}:</legend>
@@ -167,4 +167,9 @@
       <p-tabPanel header="" *ngIf="1!=1" ></p-tabPanel>
    </p-tabView>
 </div>
-<p-confirmDialog width="400"></p-confirmDialog>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
