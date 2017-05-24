@@ -57,14 +57,18 @@ export class ListaEditComponent implements OnInit {
             if ( temp ) {
                temp2 = temp.valor;
                this.constante = temp2.split( ',' );
-               for ( let c of this.constante ) {
-                  let rol = data.find( r => r.codigoRol === c );
-                  if ( rol ) {
-                     this.roles.push( rol );
+               if ( this.constante.length > 0 ) {
+                  for ( let c of this.constante ) {
+                     let rol = data.find( r => r.codigoRol === c );
+                     if ( rol ) {
+                        this.roles.push( rol );
+                     }
                   }
+               } else {
+                  this.roles = data;
                }
             } else {
-               this.roles=data;
+               this.roles = data;
             }
          } );
       } );
