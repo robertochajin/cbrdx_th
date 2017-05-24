@@ -173,6 +173,14 @@ body .ui-panel{
 .main-header .logo {
    background-color: #FFF!important;
 }
+/* -- TimeLine -- */
+.timeline > li > .fa{
+   color: #FFF!important;
+}
+.timeline > li > .timeline-item > .timeline-header{
+   background-color: #f5f5f5;
+   border: 1px solid #e6e6e6;
+}
 
 /**
 ------------------------ Main CSS ------------------------------------
@@ -776,7 +784,10 @@ body.skin-blue .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active a{
 body.skin-blue .ui-accordion .ui-accordion-header.ui-state-active {
    background-color: #3c8dbc;
 }
-
+/* -- TimeLine -- */
+body.skin-blue .timeline > li > .fa{
+   background-color: #3c8dbc;
+}
 
 
 
@@ -829,7 +840,10 @@ body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a{
 body.skin-green .ui-accordion .ui-accordion-header.ui-state-active {
    background-color: #00A65A;
 }
-
+/* -- TimeLine -- */
+body.skin-green .timeline > li > .fa{
+   background-color: #00A65A;
+}
 
 
 /* -- Link Purple -- */
@@ -878,7 +892,10 @@ body.skin-purple .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a
 body.skin-purple .ui-accordion .ui-accordion-header.ui-state-active {
    background-color: #605ca8;
 }
-
+/* -- TimeLine -- */
+body.skin-purple .timeline > li > .fa{
+   background-color: #605ca8;
+}
 
 
 
@@ -963,3 +980,5 @@ body .ui-tabview{
 #tbvCompetenciasHabilidades .ui-tabview-panel.ui-widget-content{
    min-height: 470px;
 }
+
+
