@@ -18,6 +18,7 @@ import { QuestionnairesService } from '../_services/questionnaires.service';
 import { RequirementReferralsServices } from '../_services/requirement-referrals.service';
 import { ConstanteService } from '../_services/constante.service';
 import { VacanciesService } from '../_services/vacancies.service';
+import { OrganizationalStructurePositionsServices } from '../_services/organizationalStructurePositions.service';
 
 @NgModule( {
               imports: [
@@ -34,6 +35,7 @@ import { VacanciesService } from '../_services/vacancies.service';
                  VacanciesService,
                  ConstanteService,
                  RequirementReferralsServices,
+                 OrganizationalStructurePositionsServices,
                  EmployeesService,
                  PositionsService,
                  ListaService,
