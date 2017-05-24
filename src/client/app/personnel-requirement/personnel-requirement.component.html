@@ -13,7 +13,12 @@
 		</div>
 	</div>
 	<p-dataTable  emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="personnelRequirements" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-		<p-column field="cargo" header="{{ 'POSITION.LBL_CARGO' | translate}}" [sortable]="true"></p-column>
+		<p-column header="{{ 'POSITION.LBL_CARGO' | translate}}" [sortable]="true">
+			<template let-req="rowData" pTemplate="body">
+				<p *ngIf="req.idCargo">{{req.cargo}}</p>
+				<p *ngIf="!req.idCargo">{{req.nombreCargo}}</p>
+			</template>
+		</p-column>
 		<p-column field="cantidadVacantes" header="{{ 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAPLAZAS' | translate}}" [sortable]="true"></p-column>
 		<p-column field="fechaSolicitud" header="{{ 'LBL_FECHA' | translate}}" [sortable]="true"></p-column>
 		<p-column field="estado" header="{{ 'LBL_ESTADO' | translate}}" [sortable]="true"></p-column>
