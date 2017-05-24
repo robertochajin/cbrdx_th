@@ -70,7 +70,7 @@
 									<label for="tipoSolicitud">* {{'REQUERIMIENTOPERSONAL.LBL_MOTIVOREQUERIMIENTO' | translate }}:</label>
 									<p-dropdown id="tipoSolicitud" name="tipoSolicitud"
 									            [options]="requirementTypes" [(ngModel)]="personnelRequirement.idTipoSolicitud"
-									            (onChange)="onChangeTypeMethod($event)"
+									            (onChange)="onChangeTypeMethod()"
 									            #ngTipoSolicitud="ngModel" required [autoWidth]="false"></p-dropdown>
 									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngTipoSolicitud.valid">
 										<i class="fa fa-close"></i>
