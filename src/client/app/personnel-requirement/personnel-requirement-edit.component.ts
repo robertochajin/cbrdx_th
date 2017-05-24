@@ -516,6 +516,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
          if ( code === 'RMPLZ' || code === 'RDP' || code === 'PLNCRR' ) {
             this.dispFechaInicioRemplazo = true;
             this.dispFechaFinRemplazo = true;
+            this.dispBoss = true;
          } else if ( code === 'DMNPLNT' ) {
             this.dispNumeroEntrevistar = false;
             this.dispZona = false;
@@ -537,7 +538,9 @@ export class PersonnelRequirementEditComponent implements OnInit {
             this.dispNumeroContratar = false;
             this.dispNumeroEntrevistar = false;
          } else if ( code === 'VCNT' ) {
+            this.dispBoss = true;
          } else if ( code === 'APLNT' || code === 'CRGNVAREA' ) {
+            this.dispBoss = true;
          } else {
             this.dispCargo = false;
             this.dispZona = false;
