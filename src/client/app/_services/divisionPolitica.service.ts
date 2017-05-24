@@ -14,7 +14,7 @@ export class DivisionPoliticaService {
    private serviceURL = '<%= SVC_TH_URL %>/api/divisionPolitica/';
    private serviceAreasURL = '<%= SVC_TH_URL %>/api/divisionPoliticaAreas/';
    private serviceTiposURL = '<%= SVC_TH_URL %>/api/divisionPoliticaTipos/';
-   private serviceAgrupacionesURL = '<%= SVC_TH_URL %>/api/divisionPoliticaAgrupaciones';
+   private serviceAgrupacionesURL = '<%= SVC_TH_URL %>/api/divisionPoliticaAgrupaciones/buscarAgrupacion/';
 
    private jwtHelper: JwtHelper = new JwtHelper();
    private usuarioLogueado: any;
@@ -59,8 +59,8 @@ export class DivisionPoliticaService {
       return this.authHttp.get( this.serviceTiposURL ).map( ( res: Response ) => res.json() as DivisionPoliticaTipos[] );
    }
 
-   listDivisionPoliticaAgrupaciones() {
-      return this.authHttp.get( this.serviceAgrupacionesURL ).map( ( res: Response ) => res.json() as DivisionPoliticaAgrupaciones[] );
+   listDivisionPoliticaAgrupaciones(id : number) {
+      return this.authHttp.get( this.serviceAgrupacionesURL + id ).map( ( res: Response ) => res.json() as DivisionPoliticaAgrupaciones[] );
    }
 
 

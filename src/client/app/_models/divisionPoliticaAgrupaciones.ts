@@ -1,6 +1,8 @@
 export class DivisionPoliticaAgrupaciones {
    idDivisionPoliticaAgrupacion: number;
-   descripcion: string;
+   agrupacion: string;
+   idDivisionPoliticaArea: number;
+   idTipoAgrupacion: number;
    indicadorHabilitado: boolean;
    auditoriaUsuario: number;
    auditoriaFecha: Date;

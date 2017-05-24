@@ -90,7 +90,7 @@
 						<div class="row">
 							<div class="form-group">
 								<label for="indicativoDivisonPolitica"
-										 class="control-label col-sm-3">Indicativo </label>
+										 class="control-label col-sm-3">* {{ 'DIVISIONPOLITICA.LBL_INDICATIVO' | translate}} </label>
 								<div class=" col-sm-9">
 									<input type="text" pInputText class="form-control" id="indicativoDivisonPolitica"
 											 name="indicativoDivisonPolitica"
@@ -108,7 +108,7 @@
 						</div>
 						<div class="row" *ngIf="tabselected > 1">
 							<div class="form-group">
-								<label for="codigoPostal" class="control-label col-sm-3">{{ 'DIVISIONPOLITICA.LBL_CODIGOPOSTAL'
+								<label for="codigoPostal" class="control-label col-sm-3">* {{ 'DIVISIONPOLITICA.LBL_CODIGOPOSTAL'
 									| translate }}</label>
 								<div class=" col-sm-9">
 									<input type="text" pInputText class="form-control" id="codigoPostal"
@@ -120,80 +120,59 @@
 						</div>
 						<div class="row">
 							<div class="form-group" *ngIf="tabselected == 4">
-								<label for="estratoDivisionPolitica" class="control-label col-sm-3">{{
+								<label for="estratoDivisionPolitica" class="control-label col-sm-3">* {{
 									'DIVISIONPOLITICA.LBL_ESTRATO' | translate }} </label>
 								<div class=" col-sm-9">
 									<p-dropdown id="estratoDivisionPolitica" name="estratoDivisionPolitica"
 													[options]="divisionPoliticaEstrato" [autoWidth]="false"
 													[(ngModel)]="politicalDivision.idEstratoDivisionPolitica"
-													#estratoDivisionPolitica="ngModel"></p-dropdown>
+													#estratoDivisionPolitica="ngModel"
+									></p-dropdown>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="form-group">
-								<label for="divisionPoliticaTipo" class="control-label col-sm-3">{{ 'LBL_TIPO' | translate
+								<label for="divisionPoliticaTipo" class="control-label col-sm-3">* {{ 'LBL_TIPO' | translate
 									}} </label>
 								<div class=" col-sm-9">
 									<p-dropdown id="divisionPoliticaTipo" name="divisionPoliticaTipo"
 													[options]="divisionPoliticaTipos" [autoWidth]="false"
 													[(ngModel)]="politicalDivision.idDivisionPoliticaTipo"
 													#divisionPoliticaTipo="ngModel"
-													(onChange)="changeTipo($event)"
 									></p-dropdown>
 								</div>
 							</div>
 						</div>
-						<div class="row" *ngIf="tabselected == 4 && Comunas">
+						<div class="row" *ngIf="tabselected === 4">
 							<div class="form-group">
-								<label for="comuna" class="control-label col-sm-3">{{"DIVISIONPOLITICA.LBL_COMUNA" |
-									translate}}</label>
-								<div class=" col-sm-9">
-									<p-dropdown id="comuna" name="comuna" [options]="divisionPoliticaComunas"
-													[autoWidth]="false"
-													[(ngModel)]="politicalDivision.idDivisionPoliticaComuna"
-													#comuna="ngModel"></p-dropdown>
-								</div>
-							</div>
-						</div>
-						<div class="row" *ngIf="tabselected == 4 && Localidades">
-							<div class="form-group">
-								<label for="localidad" class="control-label col-sm-3">{{"DIVISIONPOLITICA.LBL_LOCALIDAD" |
-									translate}}</label>
-								<div class=" col-sm-9">
-									<p-dropdown id="localidad" name="localidad" [options]="divisionPoliticaLocalidades"
-													[autoWidth]="false"
-													[(ngModel)]="politicalDivision.idDIvisionPoliticaLocalidad"
-													#localidad="ngModel"></p-dropdown>
-								</div>
-							</div>
-						</div>
-						<div class="row" *ngIf="tabselected == 4 && Resguardos">
-							<div class="form-group">
-								<label for="resguardo" class="control-label col-sm-3"> {{"DIVISIONPOLITICA.LBL_RESGUARDO" |
-									translate}}</label>
-								<div class=" col-sm-9">
-									<p-dropdown id="resguardo" name="resguardo" [options]="divisionPoliticaResguardos"
-													[autoWidth]="false"
-													[(ngModel)]="politicalDivision.idDivisionPoliticaResguardo"
-													#resguardo="ngModel"></p-dropdown>
-								</div>
-							</div>
-						</div>
-						<div class="row" *ngIf="tabselected == 4">
-							<div class="form-group">
-								<label for="DPArea" class="control-label col-sm-3">{{ 'DIVISIONPOLITICA.LBL_AREA' | translate
+								<label for="DPArea" class="control-label col-sm-3">* {{ 'DIVISIONPOLITICA.LBL_AREA' | translate
 									}} </label>
 								<div class=" col-sm-9">
 									<p-dropdown id="DPArea" name="DPArea" [options]="divisionPoliticaAreas"
-													[autoWidth]="false"
-													[(ngModel)]="politicalDivision.idDivisionPoliticaArea"
-													#DPArea="ngModel"></p-dropdown>
+									            [autoWidth]="false" required="true"
+									            [(ngModel)]="politicalDivision.idDivisionPoliticaArea"
+									            #DPArea="ngModel" (onChange)="changeArea($event.value)"
+									></p-dropdown>
+									<div *ngIf="fdivision.submitted && !DPArea.valid"
+									     class="alert alert-danger">
+										{{ 'DIVISIONPOLITICA.LBL_AREA' | translate }} {{ 'DIVISIONPOLITICA.MSG_ESREQ' | translate}}
+									</div>
 								</div>
 							</div>
 						</div>
-
-
+						<div class="row" *ngIf="tabselected === 4 ">
+							<div class="form-group">
+								<label for="comuna" class="control-label col-sm-3">* {{"DIVISIONPOLITICA.LBL_AGRUPACION" |
+									translate}}</label>
+								<div class=" col-sm-9">
+									<p-dropdown id="comuna" name="comuna" [options]="divisionPoliticaAgrupaciones"
+													[autoWidth]="false"
+													[(ngModel)]="politicalDivision.idDivisionPoliticaAgrupacion"
+													#agrupa="ngModel"></p-dropdown>
+								</div>
+							</div>
+						</div>
 						<div class="row">
 							<div class="form-group">
 								<label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate }}</label>
