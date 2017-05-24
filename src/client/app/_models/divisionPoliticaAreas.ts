@@ -5,4 +5,5 @@ export class DivisionPoliticaAreas {
    indicadorHabilitado: boolean = true;
    auditoriaUsuario: string;
    auditoriaFecha: Date;
+   codigo: string;
 }
