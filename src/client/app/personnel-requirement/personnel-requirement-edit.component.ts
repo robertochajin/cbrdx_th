@@ -31,6 +31,7 @@ import { ConstanteService } from '../_services/constante.service';
 import { Constante } from '../_models/constante';
 import { VacanciesService } from '../_services/vacancies.service';
 import { RequirementsAction } from '../_models/requirementsAction';
+import { OrganizationalStructurePositionsServices } from '../_services/organizationalStructurePositions.service';
 
 class employeeBasicInfo {
    idTercero: number;
@@ -72,6 +73,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
    private zones: SelectItem[] = [];
    isbossWrong = false;
    isPositionWrong = false;
+   isPositionConfigured = true;
    es: any;
    private listRT: ListaItem[] = [];
    requestAction: ListaItem;
@@ -119,6 +121,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
    public dispFuncionCargo = false;
    public dispCargo = false;
    public dispZona = false;
+   public dispBoss = false;
    public dispCategoria = false;
    public dispFormaContratacion = false;
    public dispTipoContratacion = false;
@@ -131,12 +134,17 @@ export class PersonnelRequirementEditComponent implements OnInit {
    private editingReferred = false;
    private blockedPositions: any[];
    public isPositionBlocked = false;
+   private wrongVacancies = false;
+   private wrongConvocados = false;
+   private wrongDecrease = false;
+   private maxDecrease: number;
 
    constructor( private personnelRequirementServices: PersonnelRequirementServices,
       private router: Router,
       private usuariosService: UsuariosService,
       private listaService: ListaService,
       private route: ActivatedRoute,
+      private ospService: OrganizationalStructurePositionsServices,
       private listPositionsService: ListPositionsService,
       private employeesService: EmployeesService,
       private zonesServices: ZonesServices,
@@ -287,6 +295,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
                   this.selectedPosition.idCargo = this.personnelRequirement.idCargo;
                   this.selectedBoss = new employeeBasicInfo();
                   this.selectedBoss.idTercero = this.personnelRequirement.idJefe;
+                  this.bossPosition.cargo = this.personnelRequirement.cargoJefe;
                   this.selectedBoss.nombreCompleto = this.personnelRequirement.nombrejefe;
 
                   this.usuariosService.viewUser( this.personnelRequirement.idSolicitante ).subscribe( u => {
@@ -329,41 +338,44 @@ export class PersonnelRequirementEditComponent implements OnInit {
                  this.blockedPositions.find( c => c === this.selectedPosition.codigoCargo ) ) {
                this.isPositionBlocked = true;
             } else {
-               if ( this.dispCargo ) {
-                  this.personnelRequirement.idCargo = this.selectedPosition.idCargo;
-                  this.personnelRequirement.indicadorAutorizacion = this.isAuthNeeded( this.personnelRequirement.idTipoSolicitud,
-                                                                                       this.selectedPosition.idCargo );
-               } else {
-                  this.personnelRequirement.indicadorAutorizacion = false;
-               }
-               if ( this.dispColaboradorJefeInmediato )
-                  this.personnelRequirement.idJefe = this.selectedBoss.idTercero;
-               this.personnelRequirement.idSolicitante = this.user.idUsuario;
+               if ( this.areSpotsOk()) {
+                  if ( this.dispCargo ) {
+                     this.personnelRequirement.idCargo = this.selectedPosition.idCargo;
+                     this.personnelRequirement.indicadorAutorizacion = this.isAuthNeeded( this.personnelRequirement.idTipoSolicitud,
+                                                                                          this.selectedPosition.idCargo );
+                  } else {
+                     this.personnelRequirement.indicadorAutorizacion = false;
+                  }
+                  if ( this.dispColaboradorJefeInmediato )
+                     this.personnelRequirement.idJefe = this.selectedBoss.idTercero;
+                  this.personnelRequirement.idSolicitante = this.user.idUsuario;
 
-               this.personnelRequirement.idEstructuraOrganizacional = this.employeeBasics.idArea;
-               this.personnelRequirement.idEstructuraFisica = this.employeeBasics.idEstructuraFisica;
+                  this.personnelRequirement.idEstructuraOrganizacional = this.employeeBasics.idArea;
+                  this.personnelRequirement.idEstructuraFisica = this.employeeBasics.idEstructuraFisica;
 
-               if ( this.personnelRequirement.idRequerimiento !== undefined && this.personnelRequirement.idRequerimiento !== null ) {
-                  this.personnelRequirementServices.update( this.personnelRequirement ).subscribe( res => {
-                     if ( res ) {
-                        this._nav.setMesage( 1, this.msg );
-                     }
-                  }, error => {
-                     this._nav.setMesage( 3, this.msg );
-                  } );
-               } else {
-                  this.personnelRequirement.idEstado = this.creationProccesState.idLista;
-                  this.personnelRequirement.fechaSolicitud = new Date();
-                  this.personnelRequirementServices.add( this.personnelRequirement ).subscribe( res => {
-                     if ( res ) {
-                        this.personnelRequirement.idRequerimiento = res.idRequerimiento;
-                        this.personnelRequirement.auditoriaFecha = res.auditoriaFecha;
-                        this.personnelRequirement.auditoriaUsuario = res.auditoriaUsuario;
-                        this._nav.setMesage( 1, this.msg );
-                     }
-                  }, error => {
-                     this._nav.setMesage( 3, this.msg );
-                  } );
+                  if ( this.personnelRequirement.idRequerimiento !== undefined && this.personnelRequirement.idRequerimiento !== null ) {
+                     this.personnelRequirementServices.update( this.personnelRequirement ).subscribe( res => {
+                        if ( res ) {
+                           this._nav.setMesage( 1, this.msg );
+                        }
+                     }, error => {
+                        this._nav.setMesage( 3, this.msg );
+                     } );
+                  } else {
+                     this.personnelRequirement.idEstado = this.creationProccesState.idLista;
+                     this.personnelRequirement.fechaSolicitud = new Date();
+                     this.personnelRequirementServices.add( this.personnelRequirement ).subscribe( res => {
+                        if ( res ) {
+                           this.personnelRequirement.idRequerimiento = res.idRequerimiento;
+                           this.personnelRequirement.auditoriaFecha = res.auditoriaFecha;
+                           this.personnelRequirement.auditoriaUsuario = res.auditoriaUsuario;
+                           this.router.navigate( [ 'personnel-requirement/update/' + this.personnelRequirement.idRequerimiento] );
+                           this._nav.setMesage( 1, this.msg );
+                        }
+                     }, error => {
+                        this._nav.setMesage( 3, this.msg );
+                     } );
+                  }
                }
             }
          } else {
@@ -378,7 +390,6 @@ export class PersonnelRequirementEditComponent implements OnInit {
    isAuthNeeded (idRequestType: number, idPosition: number) : boolean {
       let requiereAutorizacion = false;
       if(this.tiposReqAutorizacion !== undefined && this.tiposReqAutorizacion.find(c => c === idRequestType.toString())){
-         console.info(this.cargosNoReqAutorizacion);
          requiereAutorizacion = true;
          if(this.cargosNoReqAutorizacion.find(c => c.tipo === idRequestType &&
                                                    c.cargo === idPosition)){
@@ -391,6 +402,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
    }
 
    bossCaptureId( event: any ) {
+      this.selectedBoss = new employeeBasicInfo();
       this.selectedBoss.idTercero = event.idTercero;
       this.selectedBoss.nombreCompleto = event.nombreCompleto;
       this.bossPosition.idCargo = event.idCargo;
@@ -399,14 +411,15 @@ export class PersonnelRequirementEditComponent implements OnInit {
    }
 
    bossSearch( event: any ) {
-      this.employeesService.getByNameAndArea( this.employeeBasics.idArea, event.query.replace(/[^0-9a-zA-Z]+/g,'') ).subscribe(
+      this.employeesService.getByNameAndAreaAndCargo( this.employeeBasics.idArea, event.query.replace(/[^0-9a-zA-Z]+/g,'')
+         , this.selectedPosition.idCargoJefe ).subscribe(
          empl => this.bossList = empl
       );
    }
 
    positionSearch( event: any ) {
       let item = this.listRT.find( rt => rt.idLista === this.personnelRequirement.idTipoSolicitud );
-      if ( item !== undefined && item.codigo === 'CRGNVO' ) {
+      if ( item !== undefined && item.codigo === 'CRGNVAREA' ) {
          this.positionsService.getByWildCard( event.query.replace(/[^0-9a-zA-Z]+/g,'') ).subscribe( list => this.positionList = list );
       } else {
          this.positionsService.getByWildCardAndArea( event.query.replace(/[^0-9a-zA-Z]+/g,''), this.employeeBasics.idArea )
@@ -417,6 +430,18 @@ export class PersonnelRequirementEditComponent implements OnInit {
    positionCaptureId( event: any ) {
       this.selectedPosition.idCargo = event.idCargo;
       this.selectedPosition.cargo = event.cargo;
+      if(event.idCargoJefe === null || event.idCargoJefe === undefined){
+         let noBoss: Message = {severity:'info', summary:'Ups!', detail:'El cargo seleccionado no tiene un cargo jefe'};
+         this._nav.setMesage(4, noBoss);
+         this.selectedPosition.idCargoJefe = event.idCargoJefe;
+         this.dispBoss = false;
+         this.isPositionConfigured = false;
+         this.selectedBoss = null;
+      } else {
+         this.isPositionConfigured = true;
+         this.dispBoss = true;
+         this.selectedBoss = null;
+      }
       this.isPositionWrong = false;
    }
 
@@ -447,6 +472,13 @@ export class PersonnelRequirementEditComponent implements OnInit {
          code = item.codigo;
 
          if ( code === 'DMNPLNT' ) {
+            this.ospService.getByPositionAndOrganizationalStructure(this.personnelRequirement.idCargo,
+                                                                    this.personnelRequirement.idEstructuraOrganizacional )
+            .subscribe(pc => {
+               if(pc){
+                  this.maxDecrease = Number(pc.plazas) - Number(pc.ocupados);
+               }
+            });
             this.translate.get( 'REQUERIMIENTOPERSONAL.LBL_CANTIDADAPLAZASDISMINUIR' ).subscribe( ( res: string ) => {
                this.nroPlazas = res;
             } );
@@ -460,6 +492,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
          this.dispFuncionCargo = false;
          this.dispFechaInicioRemplazo = false;
          this.dispFechaFinRemplazo = false;
+         this.dispBoss = false;
 
          this.dispCargo = true;
          this.dispZona = true;
@@ -483,6 +516,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
          if ( code === 'RMPLZ' || code === 'RDP' || code === 'PLNCRR' ) {
             this.dispFechaInicioRemplazo = true;
             this.dispFechaFinRemplazo = true;
+            this.dispBoss = true;
          } else if ( code === 'DMNPLNT' ) {
             this.dispNumeroEntrevistar = false;
             this.dispZona = false;
@@ -492,6 +526,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
             this.dispColaboradorJefeInmediato = false;
          } else if ( code === 'CRGNVO' ) {
             this.dispCargo = false;
+            this.dispColaboradorJefeInmediato = false;
             this.dispNombreCargo = true;
             this.dispFuncionCargo = true;
          } else if ( code === 'CRGELMN' ) {
@@ -503,7 +538,9 @@ export class PersonnelRequirementEditComponent implements OnInit {
             this.dispNumeroContratar = false;
             this.dispNumeroEntrevistar = false;
          } else if ( code === 'VCNT' ) {
+            this.dispBoss = true;
          } else if ( code === 'APLNT' || code === 'CRGNVAREA' ) {
+            this.dispBoss = true;
          } else {
             this.dispCargo = false;
             this.dispZona = false;
@@ -885,5 +922,38 @@ export class PersonnelRequirementEditComponent implements OnInit {
                                               this.location.back();
                                            }
                                         } );
+   }
+
+   private areSpotsOk() : boolean {
+      let isValid = true;
+      if(this.personnelRequirement.cantidadVacantes === 0){
+         isValid = false;
+         this.wrongVacancies = true;
+      }
+      if(this.personnelRequirement.cantidadConvocados === 0){
+         isValid = false;
+         this.wrongConvocados = true;
+      }
+      let item = this.listRT.find( rt => rt.idLista === this.personnelRequirement.idTipoSolicitud );
+      if(item !== undefined && item !== null){
+         if ( item.codigo === 'DMNPLNT' ) {
+            if (this.maxDecrease < this.personnelRequirement.cantidadVacantes){
+               isValid = false;
+               this.wrongDecrease = true;
+            }
+         } else {
+            if(this.personnelRequirement.cantidadConvocados <= this.personnelRequirement.cantidadVacantes){
+               isValid = false;
+               this.wrongConvocados = true;
+            }
+         }
+      }
+
+      if(isValid){
+         this.wrongDecrease = false;
+         this.wrongConvocados = false;
+         this.wrongVacancies = false;
+      }
+      return isValid;
    }
 }

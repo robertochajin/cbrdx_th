@@ -7,7 +7,8 @@
       <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-search"></i></div>
         <input type="text" pInputText size="40" placeholder="{{ 'USUARIOS.LBL_BUSCARUSUARIO' | translate }}"
-               (keyup)="showData($event.target.value)" class="form-control ">
+               (keyup)="showData($event.target.value)" class="form-control" class="form-control" [(ngModel)]="busqueda"
+               (change)="setSearch()">
       </div>
     </div>
 </div>

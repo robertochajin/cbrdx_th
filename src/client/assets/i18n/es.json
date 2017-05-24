@@ -775,6 +775,10 @@
       "LBL_JUSTIFICACION": "Justificación",
       "LBL_CUESTIONARIOS": "Datos Cuestionarios",
       "LBL_CUESTIONARIO": "Cuestionario",
+      "LBL_MENORAUNO": "no puede ser menor a uno",
+      "LBL_MENORACONVOCADOS": "no puede ser menor a la cantidad de convocados",
+      "LBL_VACANTESNOREDUCIBLES": "no puede ser mayor a la cantidad de plazas sin asignación",
+      "MSG_CARGONOCONFIGURADO": "El cargo seleccionado no tiene configurado un: Cargo depende de.",
       "":""
    },
 

@@ -37,29 +37,28 @@ export class PersonnelRequirementComponent implements OnInit {
       private listaService: ListaService,
       private router: Router,
       private confirmationService: ConfirmationService ) {
-      let token = localStorage.getItem( 'token' );
 
-      this.listaService.getMasterDetailsByCode( 'ListasEstadosRequerimientos', 'PRCREQ' ).subscribe( x => {
-         this.creationProccesState = x
-      } );
-
-      this.listaService.getMasterDetailsByCode( 'ListasEstadosRequerimientos', 'DVLT' ).subscribe( x => {
-         this.revertedState = x
-      } );
-
-      if ( token !== null && token !== undefined ) {
-         this.tokendecoded = this.jwtHelper.decodeToken( token );
-      } else {
-         location.back();
-      }
    }
 
    ngOnInit() {
-      this.personnelRequirementServices.getAllEnabledByUser(this.tokendecoded.usuario.idUsuario).subscribe(
-         personnelRequirements => {
-            this.personnelRequirements = personnelRequirements;
-         }
-      );
+      this.listaService.getMasterDetailsByCode( 'ListasEstadosRequerimientos', 'PRCREQ' ).subscribe( x => {
+         this.creationProccesState = x
+         this.listaService.getMasterDetailsByCode( 'ListasEstadosRequerimientos', 'DVLT' ).subscribe( x => {
+            this.revertedState = x
+            let token = localStorage.getItem( 'token' );
+
+            if ( token !== null && token !== undefined ) {
+               this.tokendecoded = this.jwtHelper.decodeToken( token );
+            } else {
+               this.location.back();
+            }
+            this.personnelRequirementServices.getAllEnabledByUser(this.tokendecoded.usuario.idUsuario).subscribe(
+               personnelRequirements => {
+                  this.personnelRequirements = personnelRequirements;
+               }
+            );
+         } );
+      } );
    }
 
    del( FaS: PersonnelRequirement ) {

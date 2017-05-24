@@ -189,21 +189,25 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    }
 
    savePosition() {
-      if ( this.osPosition.idEstructuraOrganizacionalCargo !== undefined && this.osPosition.idEstructuraOrganizacionalCargo !== null ) {
-         this.ospService.update( this.osPosition ).subscribe( data => {
-            this.osPositions[ this.osPositions.indexOf( this.backUpOSPosition ) ] = this.osPosition;
-            this.editingPosition = false;
-            this.osPosition = new OrganizationalStructurePositions();
-            this.sumPositions();
-         } );
+      if ( this.osPosition.cargo != undefined && this.osPosition.idCargo != undefined ) {
+         if ( this.osPosition.idEstructuraOrganizacionalCargo !== undefined && this.osPosition.idEstructuraOrganizacionalCargo !== null ) {
+            this.ospService.update( this.osPosition ).subscribe( data => {
+               this.osPositions[ this.osPositions.indexOf( this.backUpOSPosition ) ] = this.osPosition;
+               this.editingPosition = false;
+               this.osPosition = new OrganizationalStructurePositions();
+               this.sumPositions();
+            } );
+         } else {
+            this.osPosition.idEstructuraOrganizacional = this.area.idEstructuraOrganizacional;
+            this.ospService.add( this.osPosition ).subscribe( data => {
+               this.osPosition.idEstructuraOrganizacionalCargo = data.idEstructuraOrganizacionalCargo;
+               this.osPositions.push( this.osPosition );
+               this.editingPosition = false;
+               this.sumPositions();
+            } );
+         }
       } else {
-         this.osPosition.idEstructuraOrganizacional = this.area.idEstructuraOrganizacional;
-         this.ospService.add( this.osPosition ).subscribe( data => {
-            this.osPosition.idEstructuraOrganizacionalCargo = data.idEstructuraOrganizacionalCargo;
-            this.osPositions.push( this.osPosition );
-            this.editingPosition = false;
-            this.sumPositions();
-         } );
+         this.badPostion = true;
       }
    }
 
