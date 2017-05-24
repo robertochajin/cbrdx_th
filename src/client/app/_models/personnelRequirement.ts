@@ -42,6 +42,7 @@ export class PersonnelRequirement {
    public autorizacion: string;
    public nombrejefe: string;
    public editar: boolean = true;
+   public idCargoJefe: number;
 
    constructor() {
       this.editar = true;
