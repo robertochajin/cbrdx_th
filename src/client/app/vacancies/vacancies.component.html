@@ -89,6 +89,8 @@
 					        pButton (click)="detail(vacancy)"></button>
 					<button type="button" icon="fa-pencil" class="ui-button-success" *ngIf="vacancy.editar"
 					        pButton (click)="update(vacancy)"></button>
+					<button *ngIf="!vacancy.editar" type="button" icon="fa-list-alt" class="ui-button-success"
+					        pButton (click)="observations(vacancy)" title="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}"></button>
 				</template>
 			</p-column>
 		</p-dataTable>
@@ -172,3 +174,19 @@
 		</div>
 	</p-tabPanel>
 </p-tabView>
+<p-dialog header="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}" [(visible)]="displayActions"
+          modal="modal" width="700" responsive="true" draggable="false" >
+	<div style="overflow: scroll; height: 300px;">
+		<div *ngFor="let acc of requirementsAction">
+			<h4>{{acc.accion}} - {{nombreTercero}}</h4>
+			<h5>{{auditoriaFecha}}</h5>
+			<p>{{acc.observacion}}</p>
+			<hr>
+		</div>
+	</div>
+	<p-footer>
+		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+			<button type="button" pButton (click)="displayActions=false" label="{{'LBL_CERRAR' | translate}}"></button>
+		</div>
+	</p-footer>
+</p-dialog>

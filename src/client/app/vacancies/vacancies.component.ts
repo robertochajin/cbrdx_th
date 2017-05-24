@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VacanciesService } from '../_services/vacancies.service';
 import { Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/primeng';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
 import { SelectItem } from 'primeng/primeng';
@@ -10,6 +9,8 @@ import { OrganizationalStructurePositionsServices } from '../_services/organizat
 import { OrganizationalStructureService } from '../_services/organizationalStructure.service';
 import { OrganizationalStructure } from '../_models/organizationalStructure';
 import { PersonnelRequirement } from '../_models/personnelRequirement';
+import { RequirementsAction } from '../_models/requirementsAction';
+import { ConfirmationService, Message } from 'primeng/primeng';
 
 @Component( {
                moduleId: module.id,
@@ -44,6 +45,11 @@ export class VacanciesComponent implements OnInit {
    devuelto: number;
    enAprobacion: number;
    rechazado: number;
+   seleccion: number;
+   eliminacion: number;
+   perfil: number;
+   requirementsAction: RequirementsAction[] = [];
+   public displayActions = false;
 
    constructor( private vacanciesService: VacanciesService,
       private router: Router,
@@ -73,6 +79,9 @@ export class VacanciesComponent implements OnInit {
          this.devuelto =  this.allEstados.find( c => c.codigo === "DVLT").idLista;
          this.enAprobacion =  this.allEstados.find( c => c.codigo === "ENAPRB").idLista;
          this.rechazado =  this.allEstados.find( c => c.codigo === "RCHZ").idLista;
+         this.seleccion =  this.allEstados.find( c => c.codigo === "PRCSEL").idLista;
+         this.eliminacion =  this.allEstados.find( c => c.codigo === "PRCELIM").idLista;
+         this.perfil =  this.allEstados.find( c => c.codigo === "CTRPER").idLista;
          this.getData();
       } );
       this.listAutotizacion.push({label: 'Todos', value:''});
@@ -156,6 +165,7 @@ export class VacanciesComponent implements OnInit {
    clearDate() {
       this.fechaInicio = null;
       this.fechaFin = this.today;
+      this.getData();
    }
    changeDate(){
       let i = new Date( this.fechaInicio  );
@@ -167,8 +177,19 @@ export class VacanciesComponent implements OnInit {
             this.vacancies = [];
             vacancies.forEach(obj=>{
                obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No';
-               if(obj.idEstado !== this.creacion &&  obj.idEstado !== this.cerrado){
-                  this.vacancies.push(obj);
+               if(obj.idEstado !== this.creacion ){
+                  obj.editar = true;
+                  if(obj.idEstado === this.enAprobacion ||
+                     obj.idEstado === this.rechazado||
+                     obj.idEstado === this.devuelto ||
+                     obj.idEstado === this.seleccion ||
+                     obj.idEstado === this.cerrado ||
+                     obj.idEstado === this.eliminacion ||
+                     obj.idEstado === this.perfil
+                  ){
+                     obj.editar = false;
+                  }
+                  this.vacancies.push( obj );
                }
             });
          }
@@ -181,13 +202,16 @@ export class VacanciesComponent implements OnInit {
          vacancies => {
             vacancies.forEach(obj=>{
                obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No';
-               if(obj.idEstado !== this.creacion /* &&
-                   obj.idEstado !== this.cerrado &&
-                  obj.idEstado !== this.devuelto &&
-                  obj.idEstado !== this.rechazado */
-                  ){
+               if(obj.idEstado !== this.creacion ){
                   obj.editar = true;
-                  if(obj.idEstado === this.enAprobacion){
+                  if(obj.idEstado === this.enAprobacion ||
+                     obj.idEstado === this.rechazado||
+                     obj.idEstado === this.devuelto ||
+                     obj.idEstado === this.seleccion ||
+                     obj.idEstado === this.cerrado ||
+                     obj.idEstado === this.eliminacion ||
+                     obj.idEstado === this.perfil
+                  ){
                      obj.editar = false;
                   }
                   this.vacancies.push(obj);
@@ -195,6 +219,19 @@ export class VacanciesComponent implements OnInit {
             });
          }
       );
+   }
+
+   observations(pR: PersonnelRequirement) {
+      this.requirementsAction = [];
+      this.vacanciesService.getActions(pR.idRequerimiento).subscribe(acc => {
+         this.requirementsAction = acc;
+         this.displayActions = true;
+      }, error => {
+         let msg: Message;
+         msg.severity = 'error';
+         msg.detail = 'Falla';
+         msg.summary = 'Imposible cargar la información';
+      });
    }
 
 }
