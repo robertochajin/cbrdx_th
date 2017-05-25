@@ -16,7 +16,7 @@
 				 <label class="control-label col-md-3" for="lista">{{ 'LISTAS.LBL_LISTA' | translate }}</label>
 				 <div class="col-md-9">
 					 <input class="form-control" type="text" pInputText [(ngModel)]="masterList.lista" id="lista"
-							  required maxlength="40" #lista="ngModel" name="lista" pattern="[A-Z]{1}.*">
+							  required maxlength="250" #lista="ngModel" name="lista" pattern="[A-Z]{1}.*">
 					 <div *ngIf="f.submitted&&lista.errors" class="alert alert-danger">
 						 <div [hidden]="!lista.errors.required">{{ 'LISTAS.MSG_NOMBRELISTA' | translate }}</div>
 						 <div [hidden]="!lista.errors.pattern">{{ 'LISTAS.MSG_LISTAMAYUSCULA' | translate }}</div>
