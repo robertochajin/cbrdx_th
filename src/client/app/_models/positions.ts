@@ -41,6 +41,7 @@ export class Positions {
    public idEstado: number;
    public estado: string;
    public paso: number;
+   public indicadorZona:boolean;
 
    constructor() {
       this.idCargo = null;
