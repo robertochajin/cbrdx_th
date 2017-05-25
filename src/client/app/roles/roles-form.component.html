@@ -83,8 +83,13 @@
             <div class="form-group col-sm-12">
                <label for="descripcion">{{ 'LBL_DESCRIPCION' | translate}}</label>
                <textarea pInputTextarea id="descripcion" name="descripcion"
-                         [(ngModel)]="rol.descripcion" maxlength="500"
+                         [(ngModel)]="rol.descripcion" maxlength="128"
                          ></textarea>
+	         <!--<label>Maximo de 500 carateres</label>-->
+	         <!--<div class="ui-message ui-messages-error ui-corner-all"-->
+	              <!--*ngIf="f.submitted && !rol.descripcion.maxlength">-->
+		         <!--<i class="fa fa-close"></i>{{ 'ROLES.MSG_NOMBREREQUERIDO' | translate}}-->
+	         <!--</div>-->
             </div>
          </div>
          <div class="ui-grid-row form-footer-buttons">
