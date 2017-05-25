@@ -16,6 +16,10 @@ export class ZonesServices {
       return this.authHttp.get( this.serviceURL ).map( ( res: Response ) => res.json() as Zones[] );
    }
 
+   getAllByOrganizationalStructure(idOrganizationalStructure: number) {
+      return this.authHttp.get( this.serviceURL + 'byEO/' + idOrganizationalStructure ).map( ( res: Response ) => res.json() as Zones[] );
+   }
+
    add( f: Zones ) {
       return this.authHttp.post( this.serviceURL, f )
       .map( ( res: Response ) => res.json() );

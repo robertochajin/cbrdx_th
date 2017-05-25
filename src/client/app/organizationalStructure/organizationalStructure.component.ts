@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { OrganizationalStructureService } from '../_services/organizationalStructure.service';
 import { OrganizationalStructure } from '../_models/organizationalStructure';
-import { TreeNode } from 'primeng/components/common/api';
+import { TreeNode, ConfirmationService } from 'primeng/components/common/api';
 import { SelectItem, Message } from 'primeng/primeng';
 import { LocateService } from '../_services/locate.service';
 import { Localizaciones } from '../_models/localizaciones';
@@ -9,7 +9,8 @@ import { PoliticalDivisionService } from '../_services/political-division.servic
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
 import { NavService } from '../_services/_nav.service';
-import { FormSharedModule } from '../shared/form-shared.module';
+import { ZonesServices } from '../_services/zones.service';
+import { Zones } from '../_models/zones';
 
 
 @Component( {
@@ -41,11 +42,19 @@ export class OrganizationalStructureComponent {
    guardando = false;
    localizacion: Localizaciones = new Localizaciones();
 
+   // variables para administracion de zonas
+   zone : Zones;
+   zones : Zones[] = [];
+   editingZone = false;
+
    constructor( private organizationalStructureService: OrganizationalStructureService,
       private listaService: ListaService,
       private politicalDivisionService: PoliticalDivisionService,
       private locateService: LocateService,
-      private navService: NavService
+      private zonesServices: ZonesServices,
+      private navService: NavService,
+      private confirmationService: ConfirmationService
+
    ) {
       organizationalStructureService.listOrganizationalStructure().subscribe( res => {
          this.listOrganizationalStructure = res;
@@ -340,5 +349,39 @@ export class OrganizationalStructureComponent {
    toggleform() {
       this.addinglocation = !this.addinglocation;
    }
+   saveZone(){
+      this.zones.push(this.zone);
+      this.editingZone = false;
+   }
+
+   cancelEditingZone() {
+      this.confirmationService.confirm( {
+                                           message: ` ¿Esta seguro que cancelar la edición?`,
+                                           header: 'Corfirmación',
+                                           icon: 'fa fa-question-circle',
+                                           accept: () => {
+                                              this.zone = new Zones();
+                                              this.editingZone = false;
+                                           }
+                                        } );
+   }
+
+   editZone(zone: Zones){
+      if ( zone !== null ) {
+         this.zone = new Zones();
+         this.zone.codigo = zone.codigo;
+         this.zone.zona = zone.zona;
+      } else {
+         this.zone = new Zones();
+      }
+      this.editingZone = true;
+   }
+
+   zoneCleanUp(value: any){
+      if(value) {
+         this.zone.zona = value.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
+      }
+   }
+
 
 }
