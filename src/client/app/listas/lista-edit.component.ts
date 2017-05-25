@@ -149,4 +149,8 @@ export class ListaEditComponent implements OnInit {
    goBack(): void {
       this.router.navigate( [ 'listas' ] );
    }
+   capitalize( event: any ) {
+      let input = event.target.value;
+      event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+   }
 }

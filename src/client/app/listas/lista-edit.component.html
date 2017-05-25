@@ -16,7 +16,7 @@
 				 <label class="control-label col-md-3" for="lista">{{ 'LISTAS.LBL_LISTA' | translate }}</label>
 				 <div class="col-md-9">
 					 <input class="form-control" type="text" pInputText [(ngModel)]="masterList.lista" id="lista"
-							  required maxlength="250" #lista="ngModel" name="lista" pattern="[A-Z]{1}.*">
+							  required maxlength="250" #lista="ngModel" name="lista" pattern="[A-Z]{1}.*" (keyup)="capitalize($event)">
 					 <div *ngIf="f.submitted&&lista.errors" class="alert alert-danger">
 						 <div [hidden]="!lista.errors.required">{{ 'LISTAS.MSG_NOMBRELISTA' | translate }}</div>
 						 <div [hidden]="!lista.errors.pattern">{{ 'LISTAS.MSG_LISTAMAYUSCULA' | translate }}</div>
@@ -85,7 +85,7 @@
                     <label class="control-label col-md-3" for="item">{{ 'LISTAS.LBL_ITEMLISTA' | translate }}</label>
 						 <div class="col-md-9">
 						 <input class="form-control" id="item" name="item" type="text" pInputText
-                           [(ngModel)]="editableDetail.nombre" #item="ngModel" maxlength="100" required/>
+                           [(ngModel)]="editableDetail.nombre" #item="ngModel" maxlength="100" required (keyup)="capitalize($event)"/>
                     <div *ngIf="fd.submitted&&item.errors" class="alert alert-danger">
                         <div [hidden]="!item.errors.required">{{ 'LISTAS.MSG_NOMBRELEMENTO' | translate }}</div>
                         <div [hidden]="!item.errors.maxlength">{{ 'LISTAS.MSG_ELEMENT30CARACT' | translate }}</div>
