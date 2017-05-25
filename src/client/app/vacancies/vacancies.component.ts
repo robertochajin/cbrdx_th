@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Vacancies } from '../_models/vacancies';
 import { VacanciesService } from '../_services/vacancies.service';
 import { Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/primeng';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
 import { SelectItem } from 'primeng/primeng';
@@ -10,7 +8,9 @@ import { OrganizationalStructurePositions } from '../_models/organizationalStruc
 import { OrganizationalStructurePositionsServices } from '../_services/organizationalStructurePositions.service';
 import { OrganizationalStructureService } from '../_services/organizationalStructure.service';
 import { OrganizationalStructure } from '../_models/organizationalStructure';
-import { find } from 'rxjs/operator/find';
+import { PersonnelRequirement } from '../_models/personnelRequirement';
+import { RequirementsAction } from '../_models/requirementsAction';
+import { ConfirmationService, Message } from 'primeng/primeng';
 
 @Component( {
                moduleId: module.id,
@@ -21,11 +21,11 @@ import { find } from 'rxjs/operator/find';
 
 export class VacanciesComponent implements OnInit {
 
-   vacancy: Vacancies = new Vacancies();
-   vacancies: Vacancies[];
+   vacancy: PersonnelRequirement = new PersonnelRequirement();
+   vacancies: PersonnelRequirement[] = [];
    listTipoSolicitud: SelectItem[] = [];
    listEstados: SelectItem[] = [];
-   listAcciones: SelectItem[] = [];
+   allEstados: ListaItem[] = [];
    listAutotizacion: SelectItem[] = [];
    listArea: SelectItem[] = [];
    listCargo: SelectItem[] = [];
@@ -40,6 +40,16 @@ export class VacanciesComponent implements OnInit {
    countPlazas = 0;
    countOcupados = 0;
    listOrganizationalStructure: OrganizationalStructure[];
+   creacion: number;
+   cerrado: number;
+   devuelto: number;
+   enAprobacion: number;
+   rechazado: number;
+   seleccion: number;
+   eliminacion: number;
+   perfil: number;
+   requirementsAction: RequirementsAction[] = [];
+   public displayActions = false;
 
    constructor( private vacanciesService: VacanciesService,
       private router: Router,
@@ -48,7 +58,7 @@ export class VacanciesComponent implements OnInit {
       private organizationalStructureService: OrganizationalStructureService,
       private ospService: OrganizationalStructurePositionsServices,
    ) {
-
+      this.vacancies = [];
       this.listaService.getMasterDetails( 'ListasTiposSolicitudes' ).subscribe( res => {
          this.listTipoSolicitud.push( { label: 'Todos', value: '' } );
          res.map( ( l: ListaItem ) => {
@@ -56,21 +66,29 @@ export class VacanciesComponent implements OnInit {
          } );
       } );
       this.listaService.getMasterDetails( 'ListasEstadosRequerimientos' ).subscribe( res => {
+
          this.listEstados.push( { label: 'Todos', value: '' } );
          res.map( ( l: ListaItem ) => {
-            this.listEstados.push( { label: l.nombre, value: l.nombre } );
+            if(l.codigo !== "PRCREQ") {
+               this.listEstados.push( { label: l.nombre, value: l.nombre } );
+            }
+            this.allEstados.push( l );
          } );
+         this.creacion =  this.allEstados.find( c => c.codigo === "PRCREQ").idLista;
+         this.cerrado =  this.allEstados.find( c => c.codigo === "CRRD").idLista;
+         this.devuelto =  this.allEstados.find( c => c.codigo === "DVLT").idLista;
+         this.enAprobacion =  this.allEstados.find( c => c.codigo === "ENAPRB").idLista;
+         this.rechazado =  this.allEstados.find( c => c.codigo === "RCHZ").idLista;
+         this.seleccion =  this.allEstados.find( c => c.codigo === "PRCSEL").idLista;
+         this.eliminacion =  this.allEstados.find( c => c.codigo === "PRCELIM").idLista;
+         this.perfil =  this.allEstados.find( c => c.codigo === "CTRPER").idLista;
+         this.getData();
       } );
       this.listAutotizacion.push({label: 'Todos', value:''});
       this.listAutotizacion.push({label: 'Si', value:'Si'});
       this.listAutotizacion.push({label: 'No', value:'No'});
 
-      this.listaService.getMasterDetails( 'ListasRequerimientosAcciones' ).subscribe( res => {
-         this.listAcciones.push( { label: 'Todos', value: '' } );
-         res.map( ( l: ListaItem ) => {
-            this.listAcciones.push( { label: l.nombre, value: l.nombre } );
-         } );
-      } );
+
 
       organizationalStructureService.listOrganizationalStructure().subscribe( res => {
          this.listOrganizationalStructure = res;
@@ -116,14 +134,6 @@ export class VacanciesComponent implements OnInit {
    }
 
    ngOnInit() {
-     this.vacanciesService.getAll().subscribe(
-         vacancies => {
-            this.vacancies = vacancies;
-            this.vacancies.forEach(obj=>{
-               obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No'
-            });
-         }
-      );
 
 
       this.es = {
@@ -144,13 +154,18 @@ export class VacanciesComponent implements OnInit {
       this.fechaFin = today;
    }
 
-   update( c: Vacancies ) {
+   update( c: PersonnelRequirement ) {
       this.router.navigate( [ 'vacancies/update/' + c.idRequerimiento ] );
+   }
+
+   detail( c: PersonnelRequirement ) {
+      this.router.navigate( [ 'vacancies/detail/' + c.idRequerimiento ] );
    }
 
    clearDate() {
       this.fechaInicio = null;
       this.fechaFin = this.today;
+      this.getData();
    }
    changeDate(){
       let i = new Date( this.fechaInicio  );
@@ -159,12 +174,64 @@ export class VacanciesComponent implements OnInit {
       let fechaFinEnvio = `${f.getFullYear()}-${f.getMonth() + 1}-${f.getDate()}`;
       this.vacanciesService.getByDate(fechaInicioEnvio, fechaFinEnvio).subscribe(
          vacancies => {
-            this.vacancies = vacancies;
-            this.vacancies.forEach(obj=>{
-               obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No'
+            this.vacancies = [];
+            vacancies.forEach(obj=>{
+               obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No';
+               if(obj.idEstado !== this.creacion ){
+                  obj.editar = true;
+                  if(obj.idEstado === this.enAprobacion ||
+                     obj.idEstado === this.rechazado||
+                     obj.idEstado === this.devuelto ||
+                     obj.idEstado === this.seleccion ||
+                     obj.idEstado === this.cerrado ||
+                     obj.idEstado === this.eliminacion ||
+                     obj.idEstado === this.perfil
+                  ){
+                     obj.editar = false;
+                  }
+                  this.vacancies.push( obj );
+               }
             });
          }
       );
+   }
+
+   getData(){
+      this.vacancies = [];
+      this.vacanciesService.getAll().subscribe(
+         vacancies => {
+            vacancies.forEach(obj=>{
+               obj.autorizacion = obj.indicadorAutorizacion ? 'Si': 'No';
+               if(obj.idEstado !== this.creacion ){
+                  obj.editar = true;
+                  if(obj.idEstado === this.enAprobacion ||
+                     obj.idEstado === this.rechazado||
+                     obj.idEstado === this.devuelto ||
+                     obj.idEstado === this.seleccion ||
+                     obj.idEstado === this.cerrado ||
+                     obj.idEstado === this.eliminacion ||
+                     obj.idEstado === this.perfil
+                  ){
+                     obj.editar = false;
+                  }
+                  this.vacancies.push(obj);
+               }
+            });
+         }
+      );
+   }
+
+   observations(pR: PersonnelRequirement) {
+      this.requirementsAction = [];
+      this.vacanciesService.getActions(pR.idRequerimiento).subscribe(acc => {
+         this.requirementsAction = acc;
+         this.displayActions = true;
+      }, error => {
+         let msg: Message;
+         msg.severity = 'error';
+         msg.detail = 'Falla';
+         msg.summary = 'Imposible cargar la información';
+      });
    }
 
 }

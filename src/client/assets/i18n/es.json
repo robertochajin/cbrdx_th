@@ -22,6 +22,7 @@
   "LBL_CREAR":"Crear",
   "LBL_EDITAR":"Editar",
   "LBL_REQUERIDO":"requerido",
+  "LBL_INVALIDOVACIO":"invalido o vacío",
   "LBL_GENERO":"Género",
   "LBL_ESTADOCIVIL":"Estado Civil",
   "LBL_NUEVO":"Nuevo",
@@ -48,6 +49,7 @@
   "LBL_MUNICIPIO":"Municipio",
   "LBL_ANTERIOR":"Anterior",
   "LBL_DE":"de",
+  "LBL_CERRAR":"Cerrar",
   "LBL_EPS":"Eps",
   "LBL_TELEFONO":"Teléfono",
   "LBL_PERTENECE":"Pertenece",
@@ -158,6 +160,7 @@
       "LBL_COMUNA":"Comuna",
       "LBL_LOCALIDAD":"Localidad",
       "LBL_RESGUARDO":"Resguardo",
+      "LBL_PERTENECEA":"Pertenece A",
       "MSG_CODREGISTRADO":"Ya se encuentra registrado este código",
       "MSG_NOMBREREQUERIDO":"Nombre es requerido"
 
@@ -290,6 +293,7 @@
     "LBL_VIVO":"Vivo",
     "LBL_JURIDICO":"Estado jurídico",
     "LBL_FECHADEFUNCIONREQUERIDA":"Fecha de defunción requerida",
+    "LBL_FECHADEFUNCION":"Fecha de defunción",
     "MSG_DOCUMENTO":"El documento que intenta ingresar ya está asignado a otra persona y no puede ser duplicado"
 
   },
@@ -369,9 +373,10 @@
       "MSG_USER80CARACT" : "El nombre de usuario no debe tener más de 80 caracteres.",
       "MSG_USUARIOEXISTE" :"El usuario ya existe para otro tercero",
       "MSG_VALORUSUARIO" :"Debe ingresar un valor para el Usuario",
-      "MSG_NOMCARACT" : "El nombre de usuario sólo debe contener letras y los caracteres . - y/o _",
+      "MSG_NOMCARACT" : "El nombre de usuario sólo debe contener numeros y/o letras y los caracteres  - . _ / una unica vez",
       "LBL_USUARIOS":"Administrador de Usuarios",
-      "LBL_DATOSUSER":"Datos de Usuario"
+      "LBL_DATOSUSER":"Datos de Usuario",
+      "LBL_BUSCARUSUARIO":"Buscar usuario"
 
    },
 
@@ -737,7 +742,8 @@
       "LBL_DIRECIONGENERAL":"Dirección General",
       "LBL_CORREOSOLICITANTE":"Correo electrónico del solicitante",
       "LBL_DATOSVACANTE":"Datos de la vacante",
-      "LBL_MOTIVOREQUERIMIENTO":"Por porqué se genera requerimiento",
+      "LBL_MOTIVOREQUERIMIENTO":"Por qué se genera requerimiento",
+      "LBL_JUSTIFICACION":"Justificación",
       "LBL_CARGO":"Cargo",
       "LBL_NOMBRECARGO":"Nombre cargo",
       "LBL_FUNCIONCARGO":"Función cargo",
@@ -747,9 +753,10 @@
       "LBL_TIPOCONTRATACION":"Tipo de contratación",
       "LBL_NOMBREJEFEINMEDIATO":"Nombre del jefe inmediato",
       "LBL_CARGOJEFEINMEDIATO":"Cargo del jefe inmediato",
-      "LBL_CANTIDADACONTRATAR":"Nro de personas a contratar",
-      "LBL_CANTIDADAPLAZAS":"Nro de plazas",
-      "LBL_CANTIDADAENTREVISTAR":"No a entrevistar",
+      "LBL_CANTIDADACONTRATAR":"Número de personas a contratar",
+      "LBL_CANTIDADAPLAZAS":"Número de plazas",
+      "LBL_CANTIDADAPLAZASDISMINUIR":"Número de plazas a disminuir",
+      "LBL_CANTIDADAENTREVISTAR":"Número a entrevistar",
       "LBL_DATOSREFERIDO":"Datos de referidos",
       "LBL_NOMBREREFERIDO":"Nombre",
       "LBL_TELEFONOREFERIDO":"Teléfono de contacto",
@@ -763,6 +770,16 @@
       "LBL_FECHA": "Fecha",
       "LBL_ESTADO": "Estado",
       "BTN_SENDREQUEST": "Enviar solicitud",
+      "LBL_RECURSO": "Recurso",
+      "LBL_RECURSOTICS": "Recurso Tic's",
+      "LBL_OBSERVACIONES": "Observaciones",
+      "LBL_JUSTIFICACION": "Justificación",
+      "LBL_CUESTIONARIOS": "Datos Cuestionarios",
+      "LBL_CUESTIONARIO": "Cuestionario",
+      "LBL_MENORAUNO": "no puede ser menor a uno",
+      "LBL_MENORACONVOCADOS": "no puede ser menor a la cantidad de convocados",
+      "LBL_VACANTESNOREDUCIBLES": "no puede ser mayor a la cantidad de plazas sin asignación",
+      "MSG_CARGONOCONFIGURADO": "El cargo seleccionado no tiene configurado un: Cargo depende de.",
       "":""
    },
 
@@ -809,7 +826,12 @@
       "LBL_AUTHORIZATION" : "Autorización",
       "LBL_STATE" : "Estado",
       "LBL_DATEFROM" : "Fecha Desde",
-      "LBL_DATETO" : "Fecha Hasta"
+      "LBL_DATETO" : "Fecha Hasta",
+      "LBL_SALARY" : "Salario",
+      "LBL_PROFESSIONAL" : "Profesional de Reclutamiento",
+      "LBL_RECRUITMENT" : "Forma de reclutamiento",
+      "LBL_OBSERVACION" : "Observación",
+      "LBL_NOMBREJEFEINMEDIATO":"jefe Directo"
    },
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="

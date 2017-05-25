@@ -1,214 +1,210 @@
+<div class="col-md-12">
 <h3>{{ 'DIVISIONPOLITICA.LBL_DIVSIONPOLITICA' | translate}}</h3>
 <div class="row datable-header">
-    <div class="col-md-6 col-xs-12 datatable-header-add">
-        <button type="button" pButton icon="fa-plus" (click)="newCountry()" label="{{btnnuevopais.label}}"
-                *ngIf="btnnuevopais.show"></button>
-        <button type="button" pButton icon="fa-plus" (click)="newDepartment()" label="{{btnnuevodepartamento.label}}"
-                *ngIf="btnnuevodepartamento.show"></button>
-        <button type="button" pButton icon="fa-plus" (click)="newCity()" label="{{btnnuevomunicipio.label}}"
-                *ngIf="btnnuevomunicipio.show"></button>
-        <button type="button" pButton icon="fa-plus" (click)="newNeighborhood()" label="{{btnnuevobarrio.label}}"
-                *ngIf="btnnuevobarrio.show"></button>
-    </div>
-    <div class="col-md-6 col-xs-12 datatable-header-search">
-       <div class="input-group">
-          <div class="input-group-addon"><i class="fa fa-search"></i></div>
-          <p-autoComplete placeholder="{{ 'LBL_BUSCAR' | translate}}" field="label" name="buscar" id="buscar" #buscar="ngModel"
-                          [(ngModel)]="selectedSearch"
-                          [suggestions]="resultSearch"
-                          (completeMethod)="search($event)"
-                          (onSelect)="captureId($event)">
-          </p-autoComplete>
-       </div>
+	<div class="col-md-6 col-xs-12 datatable-header-add">
+		<button type="button" pButton icon="fa-plus" (click)="newCountry()" label="{{btnnuevopais.label}}"
+				  *ngIf="btnnuevopais.show"></button>
+		<button type="button" pButton icon="fa-plus" (click)="newDepartment()" label="{{btnnuevodepartamento.label}}"
+				  *ngIf="btnnuevodepartamento.show"></button>
+		<button type="button" pButton icon="fa-plus" (click)="newCity()" label="{{btnnuevomunicipio.label}}"
+				  *ngIf="btnnuevomunicipio.show"></button>
+		<button type="button" pButton icon="fa-plus" (click)="newNeighborhood()" label="{{btnnuevobarrio.label}}"
+				  *ngIf="btnnuevobarrio.show"></button>
+	</div>
+	<div class="col-md-6 col-xs-12 datatable-header-search">
+		<div class="input-group">
+			<div class="input-group-addon"><i class="fa fa-search"></i></div>
+			<p-autoComplete placeholder="{{ 'LBL_BUSCAR' | translate}}" field="label" name="buscar" id="buscar"
+								 #buscar="ngModel"
+								 [(ngModel)]="selectedSearch"
+								 [suggestions]="resultSearch"
+								 (completeMethod)="search($event)"
+								 (onSelect)="captureId($event)">
+			</p-autoComplete>
+		</div>
 
-    </div>
+	</div>
+</div>
 </div>
 <div class="ui-grid-row">
 
-    <div class="col-md-4">
-        <p-tree id="trvDivisionPolitica" [(value)]="treedivisionPolitica" selectionMode="single" [(selection)]="selectedNode"
-                (onNodeSelect)="nodeSelect($event.node)"
-                (onNodeExpand)="nodeExpand($event.node)"
-        ></p-tree>
-    </div>
+	<div class="col-md-4">
+		<p-tree id="trvDivisionPolitica" [(value)]="treedivisionPolitica" selectionMode="single"
+				  [(selection)]="selectedNode"
+				  (onNodeSelect)="nodeSelect($event.node)"
+				  (onNodeExpand)="nodeExpand($event.node)"
+		></p-tree>
+	</div>
 
-    <div class="col-md-8">
-        <p-fieldset legend="{{header}}">
-            <div class="row-fluid">
-                <div class="col-md-12" *ngIf="!guardado">
-                    <form name="form" (ngSubmit)="!codeExists&&fdivision.valid && save()" #fdivision="ngForm" novalidate>
-                        <div class="row">
-                            <div class="form-group">
-                                <h4>{{labelPadre}}</h4>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="codigoDivisionPolitica" class="control-label col-sm-3">* {{ 'LBL_CODIGO' | translate }} </label>
-                                <div class=" col-sm-9">
-                                    <input type="text" pInputText class="form-control" id="codigoDivisionPolitica"
-                                           name="codigoDivisionPolitica"
-                                           [(ngModel)]="politicalDivision.codigoDivisionPolitica"
-                                           (change)="validateCode()"
-                                           (keyup)="capitalizeCodigo()"
-                                           #codigoDivisionPolitica="ngModel" maxlength="10"
-                                           required/>
-                                    <div *ngIf="fdivision.submitted && !codigoDivisionPolitica.valid"
-													  class="alert alert-danger">
-                                       {{ 'DIVISIONPOLITICA.MSG_CODREQUERIDO' | translate}}
-                                    </div>
-                                    <div *ngIf="codeExists" class="alert alert-danger">
-                                       {{ 'DIVISIONPOLITICA.MSG_CODREGISTRADO' | translate}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="descripcionDivisonPolitica" class="control-label col-sm-3">*
-                                    {{labeldescripcionDivisonPolitica}} </label>
-                                <div class=" col-sm-9">
-                                    <input type="text" pInputText class="form-control" id="descripcionDivisonPolitica"
-                                           name="descripcionDivisonPolitica"
-                                           [(ngModel)]="politicalDivision.descripcionDivisonPolitica"
-                                           #descripcionDivisonPolitica="ngModel"
-                                           (keyup)="capitalize()"
-                                           required/>
-                                    <div *ngIf="fdivision.submitted && !descripcionDivisonPolitica.valid"
-													  class="alert alert-danger">
-                                        {{labeldescripcionDivisonPolitica}} {{ 'DIVISIONPOLITICA.MSG_ESREQ' | translate}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="indicativoDivisonPolitica"
-                                       class="control-label col-sm-3">Indicativo </label>
-                                <div class=" col-sm-9">
-                                    <input type="text" pInputText class="form-control" id="indicativoDivisonPolitica"
-                                           name="indicativoDivisonPolitica"
-                                           [(ngModel)]="politicalDivision.indicativoDivisonPolitica"
-                                           #indicativoDivisonPolitica="ngModel"
-                                           pattern="[0-9]{0,20}"
-                                            maxlength="20" (keyup)="inputNumberIndicativo()"
-                                    >
-                                    <div class="alert alert-danger" *ngIf="fdivision.submitted && !indicativoDivisonPolitica.valid">
-                                        <i class="fa fa-close"></i> {{ 'DIVISIONPOLITICA.MSG_SOLONUMEROS' | translate}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" *ngIf="tabselected > 1">
-                            <div class="form-group">
-                                <label for="codigoPostal" class="control-label col-sm-3">{{ 'DIVISIONPOLITICA.LBL_CODIGOPOSTAL' | translate }}</label>
-                                <div class=" col-sm-9">
-                                    <input type="text" pInputText class="form-control" id="codigoPostal"
-                                           name="codigoPostal" maxlength="10"
-                                           [(ngModel)]="politicalDivision.codigoPostalDivisionPolitica"
-                                           #codigoPostal="ngModel">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group" *ngIf="tabselected == 4">
-                                <label for="estratoDivisionPolitica" class="control-label col-sm-3">{{ 'DIVISIONPOLITICA.LBL_ESTRATO' | translate }} </label>
-                                <div class=" col-sm-9">
-                                    <p-dropdown id="estratoDivisionPolitica" name="estratoDivisionPolitica"
-                                                [options]="divisionPoliticaEstrato" [autoWidth]="false"
-                                                [(ngModel)]="politicalDivision.idEstratoDivisionPolitica"
-                                                #estratoDivisionPolitica="ngModel"></p-dropdown>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="divisionPoliticaTipo" class="control-label col-sm-3">{{ 'LBL_TIPO' | translate }} </label>
-                                <div class=" col-sm-9">
-                                    <p-dropdown id="divisionPoliticaTipo" name="divisionPoliticaTipo"
-                                                [options]="divisionPoliticaTipos" [autoWidth]="false"
-                                                [(ngModel)]="politicalDivision.idDivisionPoliticaTipo"
-                                                #divisionPoliticaTipo="ngModel"
-                                                (onChange)="changeTipo($event)"
-                                    ></p-dropdown>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" *ngIf="tabselected == 4 && Comunas">
-                            <div class="form-group">
-                                <label for="comuna" class="control-label col-sm-3">{{"DIVISIONPOLITICA.LBL_COMUNA" | translate}}</label>
-                                <div class=" col-sm-9">
-                                    <p-dropdown id="comuna" name="comuna" [options]="divisionPoliticaComunas"
-                                                [autoWidth]="false"
-                                                [(ngModel)]="politicalDivision.idDivisionPoliticaComuna"
-                                                #comuna="ngModel"></p-dropdown>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" *ngIf="tabselected == 4 && Localidades">
-                            <div class="form-group">
-                                <label for="localidad" class="control-label col-sm-3">{{"DIVISIONPOLITICA.LBL_LOCALIDAD" | translate}}</label>
-                                <div class=" col-sm-9">
-                                    <p-dropdown id="localidad" name="localidad" [options]="divisionPoliticaLocalidades"
-                                                [autoWidth]="false"
-                                                [(ngModel)]="politicalDivision.idDIvisionPoliticaLocalidad"
-                                                #localidad="ngModel"></p-dropdown>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" *ngIf="tabselected == 4 && Resguardos">
-                            <div class="form-group">
-                                <label for="resguardo" class="control-label col-sm-3"> {{"DIVISIONPOLITICA.LBL_RESGUARDO" | translate}}</label>
-                                <div class=" col-sm-9">
-                                    <p-dropdown id="resguardo" name="resguardo" [options]="divisionPoliticaResguardos"
-                                                [autoWidth]="false"
-                                                [(ngModel)]="politicalDivision.idDivisionPoliticaResguardo"
-                                                #resguardo="ngModel"></p-dropdown>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" *ngIf="tabselected == 3">
-                            <div class="form-group">
-                                <label for="DPArea" class="control-label col-sm-3">{{ 'DIVISIONPOLITICA.LBL_AREA' | translate }} </label>
-                                <div class=" col-sm-9">
-                                    <p-dropdown id="DPArea" name="DPArea" [options]="divisionPoliticaAreas"
-                                                [autoWidth]="false"
-                                                [(ngModel)]="politicalDivision.idDivisionPoliticaArea"
-                                                #DPArea="ngModel"></p-dropdown>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate }}</label>
-                                <div class=" col-sm-9">
-                                    <p-checkbox binary="true" id="indicador" name="indicador"
-                                                [(ngModel)]="politicalDivision.indicadorHabilitado"
-                                                #indicador="ngModel"></p-checkbox>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row form-footer-buttons">
-                            <div class="form-group col-md-12">
-                                <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
-                                <button pButton type="submit" formaction="" label="{{ 'BTN_GUARDAR' | translate }}"></button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </p-fieldset>
-        <p-dialog header="{{ 'LBL_CONFIRMACION' | translate }}" [(visible)]="displayDialog"
-                  responsive="true" modal="true">
-            <p>{{ 'MSG_CONFIRMACION' | translate }}</p>
-            <p-footer>
-                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                    <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="{{ 'BTN_NO' | translate }}"></button>
-                    <button type="button" pButton icon="fa-check" (click)="doCancel()" label="{{ 'BTN_SI' | translate }}"></button>
-                </div>
-            </p-footer>
-        </p-dialog>
-    </div>
+	<div class="col-md-8">
+		<p-panel header="{{header}}">
+			<fieldset>
+			<div class="row-fluid">
+				<div class="col-md-12" *ngIf="!guardado">
+					<form name="form" (ngSubmit)="!codeExists&&fdivision.valid && validateCode()&& save()" #fdivision="ngForm" novalidate>
+						<div class="row">
+							<div class="form-group">
+								<h4>{{labelPadre}}</h4>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group">
+								<label for="codigoDivisionPolitica" class="control-label col-sm-3">* {{ 'LBL_CODIGO' | translate
+									}} </label>
+								<div class=" col-sm-9">
+									<input type="text" pInputText class="form-control" id="codigoDivisionPolitica"
+											 name="codigoDivisionPolitica"
+											 [(ngModel)]="politicalDivision.codigoDivisionPolitica"
+											 (change)="validateCode()"
+											 (keyup)="capitalizeCodigo()"
+											 #codigoDivisionPolitica="ngModel" maxlength="10"
+											 required/>
+									<div *ngIf="fdivision.submitted && !codigoDivisionPolitica.valid"
+										  class="alert alert-danger">
+										{{ 'DIVISIONPOLITICA.MSG_CODREQUERIDO' | translate}}
+									</div>
+									<div *ngIf="codeExists" class="alert alert-danger">
+										{{ 'DIVISIONPOLITICA.MSG_CODREGISTRADO' | translate}}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group">
+								<label for="descripcionDivisonPolitica" class="control-label col-sm-3">*
+									{{labeldescripcionDivisonPolitica}} </label>
+								<div class=" col-sm-9">
+									<input type="text" pInputText class="form-control" id="descripcionDivisonPolitica"
+											 name="descripcionDivisonPolitica"
+											 [(ngModel)]="politicalDivision.descripcionDivisonPolitica"
+											 #descripcionDivisonPolitica="ngModel"
+											 (keyup)="capitalize()"
+											 required/>
+									<div *ngIf="fdivision.submitted && !descripcionDivisonPolitica.valid"
+										  class="alert alert-danger">
+										{{labeldescripcionDivisonPolitica}} {{ 'DIVISIONPOLITICA.MSG_ESREQ' | translate}}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group">
+								<label for="indicativoDivisonPolitica"
+										 class="control-label col-sm-3">* {{ 'DIVISIONPOLITICA.LBL_INDICATIVO' | translate}} </label>
+								<div class=" col-sm-9">
+									<input type="text" pInputText class="form-control" id="indicativoDivisonPolitica"
+											 name="indicativoDivisonPolitica"
+											 [(ngModel)]="politicalDivision.indicativoDivisonPolitica"
+											 #indicativoDivisonPolitica="ngModel"
+											 pattern="[0-9]{0,20}"
+											 maxlength="20" (keyup)="inputNumberIndicativo()"
+									>
+									<div class="alert alert-danger"
+										  *ngIf="fdivision.submitted && !indicativoDivisonPolitica.valid">
+										<i class="fa fa-close"></i> {{ 'DIVISIONPOLITICA.MSG_SOLONUMEROS' | translate}}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row" *ngIf="tabselected > 1">
+							<div class="form-group">
+								<label for="codigoPostal" class="control-label col-sm-3">{{ 'DIVISIONPOLITICA.LBL_CODIGOPOSTAL'
+									| translate }}</label>
+								<div class=" col-sm-9">
+									<input type="text" pInputText class="form-control" id="codigoPostal"
+											 name="codigoPostal" maxlength="10"
+											 [(ngModel)]="politicalDivision.codigoPostalDivisionPolitica"
+											 #codigoPostal="ngModel">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group" *ngIf="tabselected == 4">
+								<label for="estratoDivisionPolitica" class="control-label col-sm-3">* {{
+									'DIVISIONPOLITICA.LBL_ESTRATO' | translate }} </label>
+								<div class=" col-sm-9">
+									<p-dropdown id="estratoDivisionPolitica" name="estratoDivisionPolitica"
+													[options]="divisionPoliticaEstrato" [autoWidth]="false"
+													[(ngModel)]="politicalDivision.idEstratoDivisionPolitica"
+													#estratoDivisionPolitica="ngModel"
+									></p-dropdown>
+								</div>
+							</div>
+						</div>
+						<div class="row" *ngIf="tabselected ===  4 ">
+							<div class="form-group">
+								<label for="DPArea" class="control-label col-sm-3">* {{ 'DIVISIONPOLITICA.LBL_AREA' | translate
+									}} </label>
+								<div class=" col-sm-9">
+									<p-dropdown id="DPArea" name="DPArea" [options]="divisionPoliticaAreas"
+									            [autoWidth]="false" required="true"
+									            [(ngModel)]="politicalDivision.idDivisionPoliticaArea"
+									            #DPArea="ngModel" (onChange)="changeArea($event.value)"
+									></p-dropdown>
+									<div *ngIf="fdivision.submitted && !DPArea.valid"
+									     class="alert alert-danger">
+										{{ 'DIVISIONPOLITICA.LBL_AREA' | translate }} {{ 'DIVISIONPOLITICA.MSG_ESREQ' | translate}}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group">
+								<label for="divisionPoliticaTipo" class="control-label col-sm-3">* {{ 'LBL_TIPO' | translate
+									}} </label>
+								<div class=" col-sm-9">
+									<p-dropdown id="divisionPoliticaTipo" name="divisionPoliticaTipo"
+													[options]="divisionPoliticaTipos" [autoWidth]="false"
+													[(ngModel)]="politicalDivision.idDivisionPoliticaTipo"
+													#divisionPoliticaTipo="ngModel"
+									></p-dropdown>
+								</div>
+							</div>
+						</div>
+						<div class="row" *ngIf="tabselected === 4 && divisionPoliticaAgrupaciones.length > 1">
+							<div class="form-group">
+								<label for="pertenecea" class="control-label col-sm-3">{{"DIVISIONPOLITICA.LBL_PERTENECEA" |
+									translate}}</label>
+								<div class=" col-sm-9">
+									<p-dropdown id="pertenecea" name="comuna" [options]="divisionPoliticaAgrupaciones"
+													[autoWidth]="false"
+													[(ngModel)]="politicalDivision.idDivisionPoliticaAgrupacion"
+													#agrupa="ngModel"></p-dropdown>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group">
+								<label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate }}</label>
+								<div class=" col-sm-9">
+									<p-checkbox binary="true" id="indicador" name="indicador"
+													[(ngModel)]="politicalDivision.indicadorHabilitado"
+													#indicador="ngModel"></p-checkbox>
+								</div>
+							</div>
+						</div>
+						<div class="row form-footer-buttons">
+							<div class="form-group col-md-12">
+								<a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+								<button pButton type="submit" formaction="" label="{{ 'BTN_GUARDAR' | translate }}"></button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			</fieldset>
+		</p-panel>
+		<p-dialog header="{{ 'LBL_CONFIRMACION' | translate }}" [(visible)]="displayDialog"
+					 responsive="true" modal="true">
+			<p>{{ 'MSG_CONFIRMACION' | translate }}</p>
+			<p-footer>
+				<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+					<button type="button" pButton icon="fa-close" (click)="displayDialog=false"
+							  label="{{ 'BTN_NO' | translate }}"></button>
+					<button type="button" pButton icon="fa-check" (click)="doCancel()"
+							  label="{{ 'BTN_SI' | translate }}"></button>
+				</div>
+			</p-footer>
+		</p-dialog>
+	</div>
 </div>

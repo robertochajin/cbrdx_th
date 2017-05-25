@@ -8,11 +8,10 @@ export class DivisionPolitica {
    idDivisionPoliticaTipo: number;
    idDivisionPoliticaArea: number;
    idEstratoDivisionPolitica: number = 0;
-   idDivisionPoliticaResguardo: number;
-   idDivisionPoliticaComuna: number;
-   idDIvisionPoliticaLocalidad: number;
+   idDivisionPoliticaAgrupacion: number;
    indicadorHabilitado: boolean = true;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
    camino: string;
+   nivel: number;
 }

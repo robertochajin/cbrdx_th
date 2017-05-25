@@ -1,0 +1,184 @@
+<div *ngIf="vPersonnelRequirement">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="first">{{ 'REQUERIMIENTOPERSONAL.LBL_REQUERIMIENTOPERSONAL' | translate }}</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+		<form class="form-horizontal">
+				<div class="form-group">
+					<p-panel header="{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSSOLICITANTE' | translate }}">
+						<fieldset>
+						<div class="row">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_NOMBRESOLICITANTE' | translate
+								}}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeBasics.nombreCompleto}}</strong></label>
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_CORREOREFERIDO' | translate
+								}}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeBasics.correoUsuario}}</strong></label>
+						</div>
+						<div class="row">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_AREA' | translate }}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeBasics.area}}</strong></label>
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_CARGO' | translate }}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeBasics.cargo}}</strong></label>
+						</div>
+						</fieldset>
+					</p-panel>
+
+					<p-panel header="{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSSOLICITUD' | translate }}">
+
+					<div class="row">
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_AREA' | translate }}:</label>
+						<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{vPersonnelRequirement.area}}</strong></label>
+					</div>
+					<div class="row">
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_MOTIVOREQUERIMIENTO' | translate
+							}}:</label>
+						<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{vPersonnelRequirement.tipoSolicitud}}</strong></label>
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_DIRECIONGENERAL' | translate
+							}}:</label>
+						<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{vPersonnelRequirement.estructuraFisica}}</strong></label>
+					</div>
+					<div class="row">
+						<div *ngIf="dispFechaInicioRemplazo">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_FECHA_INICIO' | translate
+								}}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{vPersonnelRequirement.fechaInicio}}</strong></label>
+						</div>
+						<div *ngIf="dispFechaFinRemplazo">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_FECHA_FIN' | translate
+								}}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{vPersonnelRequirement.fechaFin}}</strong></label>
+						</div>
+					</div>
+					<div class="row">
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_JUSTIFICACION' | translate
+							}}:</label>
+						<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{vPersonnelRequirement.justificacion}}</strong></label>
+					</div>
+					<div class="row">
+						<div *ngIf="dispZona">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_ZONA' | translate
+								}}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{vPersonnelRequirement.zona}}</strong></label>
+						</div>
+						<div *ngIf="dispCategoria">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_CATEGORIA' | translate
+								}}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{vPersonnelRequirement.categoria}}</strong></label>
+						</div>
+					</div>
+					<div class="row">
+						<div *ngIf="dispColaboradorJefeInmediato">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_NOMBREJEFEINMEDIATO' | translate
+								}}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{vPersonnelRequirement.nombrejefe}}</strong></label>
+						</div>
+						<div *ngIf="dispNumeroEntrevistar">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_CANTIDADAENTREVISTAR' | translate
+								}}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{vPersonnelRequirement.cantidadConvocados}}</strong></label>
+						</div>
+					</div>
+					<div class="row">
+						<div *ngIf="dispFormaContratacion">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_FORMACONTRATACION' | translate
+								}}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{vPersonnelRequirement.formaContratacion}}</strong></label>
+						</div>
+						<div *ngIf="dispTipoContratacion">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_TIPOCONTRATACION' | translate
+								}}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{vPersonnelRequirement.tipoContratacion}}</strong></label>
+						</div>
+					</div>
+					<div class="row">
+						<div *ngIf="dispNombreCargo">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_NOMBRECARGO' | translate
+								}}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{vPersonnelRequirement.nombreCargo}}</strong></label>
+						</div>
+						<div *ngIf="dispFuncionCargo">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_FUNCIONCARGO' | translate
+								}}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{vPersonnelRequirement.funcionCargo}}</strong></label>
+						</div>
+					</div>
+					<div class="row">
+						<div *ngIf="dispCargo">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'REQUERIMIENTOPERSONAL.LBL_CARGO' | translate
+								}}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{vPersonnelRequirement.cargo}}</strong></label>
+						</div>
+						<div *ngIf="dispNumeroContratar">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{nroPlazas}}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{vPersonnelRequirement.cantidadVacantes}}</strong></label>
+						</div>
+					</div>
+					</p-panel>
+				</div>
+		</form>
+		</div>
+	</div>
+	<div class="row datable-header">
+		<div class="col-md-6 col-xs-12 col-md-offset-1 datatable-header-add">
+			<h3>{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSREFERIDO' | translate }}</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="requirementReferrals" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+				<p-column field="nombre" header="{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBREREFERIDO' | translate }}" [sortable]="true"></p-column>
+				<p-column field="telefono" header="{{ 'LBL_TELEFONO' | translate }} " [sortable]="true"></p-column>
+				<p-column field="correoElectronico" header="{{ 'REQUERIMIENTOPERSONAL.LBL_CORREOREFERIDO' | translate }}"
+				          [sortable]="true"></p-column>
+				<p-column field="fechaReferencia" header="{{ 'REQUERIMIENTOPERSONAL.LBL_FECHA' | translate }}" [sortable]="true"></p-column>
+			</p-dataTable>
+		</div>
+	</div>
+	<div class="row datable-header">
+		<div class="col-md-6 col-xs-12 col-md-offset-1 datatable-header-add">
+			<h3>{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSOSCOMPRAS' | translate }}</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="listResourses" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+				<p-column field="compra" header="{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSO' | translate }}" [sortable]="true"></p-column>
+			</p-dataTable>
+		</div>
+	</div>
+	<div class="row datable-header">
+		<div class="col-md-6 col-xs-12 col-md-offset-1 datatable-header-add">
+			<h3>{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSOSTIC' | translate }}</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="listResoursesTics" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+				<p-column field="tic" header="{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSOTICS' | translate }}" [sortable]="true"></p-column>
+			</p-dataTable>
+		</div>
+	</div>
+	<div class="row datable-header">
+		<div class="col-md-6 col-xs-12 col-md-offset-1 datatable-header-add">
+			<h3>{{ 'REQUERIMIENTOPERSONAL.LBL_CUESTIONARIOS' | translate }}</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="listCuestionarios" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+				<p-column field="cuestionario" header="{{ 'REQUERIMIENTOPERSONAL.LBL_CUESTIONARIO' | translate }}"
+				          [sortable]="true"></p-column>
+			</p-dataTable>
+		</div>
+	</div>
+</div>
+<div class="row form-footer-buttons">
+	<div class="form-group col-md-12">
+		<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+		        pButton (click)="goBack()"></button>
+	</div>
+</div>

@@ -78,15 +78,12 @@ export class UserSessionComponent implements OnInit {
          this.usuariosService.updatePass( this.user ).then( res => {
             console.info( res );
             if ( res ) {
-               this.msgs[ 0 ] = { severity: 'info', summary: 'Exito', detail: 'Contraseña actualizada correctamente.' };
+               this.navService.setMesage( 0, { severity: 'info', summary: 'Exito', detail: 'Contraseña actualizada correctamente.' } );
             } else {
-               this.msgs[ 0 ] = {
-                  severity: 'error', summary: 'Error al actualizar',
-                  detail: 'Contraseña actual no es correcta.'
-               };
+               this.navService.setMesage( 0, { severity: 'error', summary: 'Error al actualizar', detail: 'Contraseña actual no es correcta.' });
             }
          }, error => {
-            this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Error al guardar.' };
+            this.navService.setMesage( 3, this.msgs );
          } );
       }
    }

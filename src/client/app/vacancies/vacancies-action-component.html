@@ -1,70 +1,100 @@
 <div class="row">
 	<div class="col-md-7">
-		<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
-		<p-fieldset legend="" *ngIf="!isTerceroSet">
-			<div class="clearfix card-header">
-				<div class="col-md-2">
-					<img class="thumbnail pull-left img-responsive"
-					     src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg">
-				</div>
-				<div class="col-md-8">
-					<h4>{{employee.nombreCompleto}} - {{employee.fechaNacimiento}}</h4>
-					<span>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</span><br/>
-					<span>{{employee.cargoActual}}({{employee.fechaCreacion}})</span>
-					<span>{{employee.cargoActual}}({{employee.fechaCreacion}})</span>
-				</div>
+		<p-panel header="Gestión de Vacante">
 			
-			</div>
-			<div class="row">
-				<label for="acciones">Acciones</label>
-				<p-dropdown id="acciones" name="acciones" required="true"
-				            [options]="listCategory" [autoWidth]="false"
-				            [(ngModel)]="employee.idTipoDocumento"
-				            #acciones="ngModel"
-				></p-dropdown>
-				<div class="ui-message ui-messages-error ui-corner-all"
-				     *ngIf="f.submitted && !acciones.valid">
-					<i class="fa fa-close"></i>
-					{{ 'ESTRUCTURAFISICA.MSG_CATEGORIAREQ' | translate}}
+			<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+				
+				<div style="margin-bottom: 20px;">
+					<span class="pull-right">{{ vacancy.tipoSolicitud }}</span>
+					<h2>{{ vacancy.cargo }}</h2>
+					<h3>{{ vacancy.area }} / {{vacancy.estructuraFisica}}</h3>
+					<h4>{{vacancy.fechaSolicitud}}</h4>
+					<span>{{ 'VACANCIES.LBL_SALARY' | translate}}: {{vacancy.salario}}</span><br/>
+					<span>{{ 'PLANTACOLABORADORES.LBL_NUMEROPLAZAS' | translate}}: {{ vacancy.cantidadVacantes }}</span><br/>
+					<span>{{ 'ESTRUCTURAFISICA.LBL_CATEGORIA' | translate}}: {{ vacancy.categoria }}</span><br/>
+					<span>{{ 'VACANCIES.LBL_NOMBREJEFEINMEDIATO' | translate}}: {{ vacancy.nombrejefe }}</span><br/>
+					<p>{{ vacancy.justificacion }}</p>
 				</div>
-			</div>
-			<div class="row">
-				<label for="profesional">Profecional de reclutamiento y selección</label>
-				<p-dropdown id="profesional" name="profesional" required="true"
-				            [options]="listCategory" [autoWidth]="false"
-				            [(ngModel)]="employee.idTipoDocumento"
-				            #profesional="ngModel"
-				></p-dropdown>
-				<div class="ui-message ui-messages-error ui-corner-all"
-				     *ngIf="f.submitted && !profesional.valid">
-					<i class="fa fa-close"></i>
-					{{ 'ESTRUCTURAFISICA.MSG_CATEGORIAREQ' | translate}}
+				
+				<div *ngIf="permitido">
+					<div class="row">
+						<label for="acciones">{{ 'LBL_ACCIONES' | translate}}</label>
+						<p-dropdown id="acciones" name="acciones" required="true"
+						            [options]="listAcciones" [autoWidth]="false"
+						            [(ngModel)]="requirementsAction.idAccion"
+						            #action="ngModel"
+						></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !action.valid">
+							<i class="fa fa-close"></i>{{ 'LBL_ACCIONES' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+						</div>
+					</div>
+					<div class="row" *ngIf="requirementsAction.idAccion === aAsignar">
+						<label for="profesional">{{ 'VACANCIES.LBL_PROFESSIONAL' | translate}}</label>
+						<p-dropdown id="profesional" name="profesional" required="true"
+						            [options]="listUsuarios" [autoWidth]="false"
+						            [(ngModel)]="vacancy.idResponsableSeleccion"
+						            #professional="ngModel"
+						></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !professional.valid">
+							<i class="fa fa-close"></i>{{ 'VACANCIES.LBL_PROFESSIONAL' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+						</div>
+					</div>
+					<div class="row" *ngIf="requirementsAction.idAccion === aAsignar">
+						<label for="reclutamiento">{{ 'VACANCIES.LBL_RECRUITMENT' | translate}}</label>
+						<p-dropdown id="reclutamiento" name="reclutamiento" required="true"
+						            [options]="listReclutamiento" [autoWidth]="false"
+						            [(ngModel)]="vacancy.idFormaReclutamiento"
+						            #recruitment="ngModel"
+						></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !recruitment.valid">
+							<i class="fa fa-close"></i>{{ 'VACANCIES.LBL_RECRUITMENT' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+						</div>
+					</div>
+					<div class="row">
+						<label for="acciones">{{ 'VACANCIES.LBL_OBSERVACION' | translate}}</label>
+						<div class=" col-sm-12">
+							<textarea pInputTextarea id="obs" name="obs" class="form-control"
+							          [(ngModel)]="requirementsAction.observacion" #obs="ngModel"
+							          [required]="true" maxlength="500" autoResize="autoResize"
+							></textarea>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !obs.valid">
+								{{ 'VACANCIES.LBL_OBSERVACION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 col-md-offset-10">
+							<button pButton label="{{ 'LBL_ENVIAR' | translate}}" type="submit"></button>
+						</div>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<label for="reclutamiento">Forma de reclutamiento</label>
-				<p-dropdown id="reclutamiento" name="reclutamiento" required="true"
-				            [options]="listCategory" [autoWidth]="false"
-				            [(ngModel)]="employee.idTipoDocumento"
-				            #reclutamiento="ngModel"
-				></p-dropdown>
-				<div class="ui-message ui-messages-error ui-corner-all"
-				     *ngIf="f.submitted && !reclutamiento.valid">
-					<i class="fa fa-close"></i>
-					{{ 'ESTRUCTURAFISICA.MSG_CATEGORIAREQ' | translate}}
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-2 col-md-offset-10">
-					<button pButton  label="{{ 'LBL_ENVIAR' | translate}}" type="submit"></button>
-				</div>
-			</div>
-		</p-fieldset>
-		</form>
+			</form>
+		</p-panel>
 	</div>
 	<div class="col-md-5">
-		<p-fieldset legend="Ultimas actividades sobre el proceso" *ngIf="!isTerceroSet">
-		
-		</p-fieldset>
+		<p-panel header="Últimas actividades sobre el proceso">
+			<div class="clearfix">
+				<section id="cd-timeline" *ngFor="let act of actions">
+					<div class="cd-timeline-block ">
+						<div class="cd-timeline-img col-md-2 ">
+							<img class="thumbnail pull-left img-responsive"
+							     src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg">
+						</div> <!-- cd-timeline-img -->
+						<div class="cd-timeline-content col-md-9">
+							<h4>{{act.accion}}</h4>
+							<span class="cd-date">{{act.auditoriaFecha}}</span>
+							<button type="button" icon="fa-eye" class="pull-right" pButton
+							        (click)="showRequerimiento(act.idRequerimientoHistorico)"></button>
+							<h4>{{act.nombreTercero}}</h4>
+							<span class="cd-date">{{act.cargo}}</span>
+						</div> <!-- cd-timeline-content -->
+					</div> <!-- cd-timeline-block -->
+				</section>
+			</div>
+		</p-panel>
 	</div>
 </div>

@@ -68,16 +68,16 @@
 			<div class="col-md-6 col-xs-12 datatable-header-search">
 				<div class="input-group">
 					<div class="input-group-addon"><i class="fa fa-search"></i></div>
-					<input #gb type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
+					<input #gbRequerimientos type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
 				</div>
 			</div>
 		</div>
 		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" sortField="fechaSolicitud" [sortOrder]="-1" [value]="vacancies"
 		             [paginator]="true" [rows]="10" [responsive]="true"
-		             [globalFilter]="gb" #dt>
+		             [globalFilter]="gbRequerimientos" #dt>
 			<p-column field="cargo" header="{{ 'VACANCIES.LBL_VACANCY' | translate }}" [sortable]="true"></p-column>
 			<p-column field="fechaSolicitud" header="{{ 'VACANCIES.LBL_DATE' | translate }}" [sortable]="true"></p-column>
-			<p-column field="estructuraOrganizacional" header="{{ 'VACANCIES.LBL_AREA' | translate }} " [sortable]="true"></p-column>
+			<p-column field="area" header="{{ 'VACANCIES.LBL_AREA' | translate }} " [sortable]="true"></p-column>
 			<p-column field="estructuraFisica" header="{{ 'VACANCIES.LBL_OFFICE' | translate }} " [sortable]="true"></p-column>
 			<p-column field="tipoSolicitud" header="{{ 'VACANCIES.LBL_REASON' | translate }}" [sortable]="true"></p-column>
 			<p-column field="autorizacion" header="{{ 'VACANCIES.LBL_AUTHORIZATION' | translate }}"
@@ -85,10 +85,12 @@
 			<p-column field="estado" header="{{ 'VACANCIES.LBL_STATE' | translate }}" [sortable]="true"></p-column>
 			<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 				<template let-vacancy="rowData" pTemplate="body">
-					<!--<button type="button" icon="fa-eye" class="ui-button-info"
-					        pButton (click)="detail(vacancy)"></button>-->
-					<button type="button" icon="fa-pencil" class="ui-button-success"
+					<button type="button" icon="fa-eye" class="ui-button-info"
+					        pButton (click)="detail(vacancy)"></button>
+					<button type="button" icon="fa-pencil" class="ui-button-success" *ngIf="vacancy.editar"
 					        pButton (click)="update(vacancy)"></button>
+					<button *ngIf="!vacancy.editar" type="button" icon="fa-list-alt" class="ui-button-success"
+					        pButton (click)="observations(vacancy)" title="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}"></button>
 				</template>
 			</p-column>
 		</p-dataTable>
@@ -128,13 +130,15 @@
 			<div class="col-md-6 col-xs-12 datatable-header-add">
 			</div>
 			<div class="col-md-6 col-xs-12 datatable-header-search">
-				<i class="fa fa-search"></i>
-				<input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}">
+				<div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-search"></i></div>
+					<input #gbVacantes type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control">
+				</div>
 			</div>
 		</div>
 		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listPositions"
-		             [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb" #vp>
-			<p-column field="estructuraOrganizacional" header="{{ 'PLANTACOLABORADORES.LBL_AREA' | translate }}" [sortable]="true"></p-column>
+		             [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gbVacantes" #vp>
+			<p-column field="area" header="{{ 'PLANTACOLABORADORES.LBL_AREA' | translate }}" [sortable]="true"></p-column>
 			<p-column field="estructuraFisica" header="{{ 'PLANTACOLABORADORES.LBL_ESTRUCTFISICA' | translate }}" [sortable]="true"></p-column>
 			<p-column field="cargo" header="{{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}" [sortable]="true"></p-column>
 			<p-column header="Salario" [sortable]="true">
@@ -170,3 +174,19 @@
 		</div>
 	</p-tabPanel>
 </p-tabView>
+<p-dialog header="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}" [(visible)]="displayActions"
+          modal="modal" width="700" responsive="true" draggable="false" >
+	<div style="overflow: scroll; height: 300px;">
+		<div *ngFor="let acc of requirementsAction">
+			<h4>{{acc.accion}} - {{nombreTercero}}</h4>
+			<h5>{{auditoriaFecha}}</h5>
+			<p>{{acc.observacion}}</p>
+			<hr>
+		</div>
+	</div>
+	<p-footer>
+		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+			<button type="button" pButton (click)="displayActions=false" label="{{'LBL_CERRAR' | translate}}"></button>
+		</div>
+	</p-footer>
+</p-dialog>

@@ -3,6 +3,7 @@ import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from 'angular2-jwt';
 import { PersonnelRequirement } from '../_models/personnelRequirement';
+import { VPersonnelRequirement } from '../_models/vPersonnelRequirement';
 
 @Injectable()
 export class PersonnelRequirementServices {
@@ -29,6 +30,14 @@ export class PersonnelRequirementServices {
    get( id: number ) {
       return this.authHttp.get( this.masterService + id )
       .map( ( res: Response ) => res.json() as PersonnelRequirement );
+   }
+   getByIdRequirement( id: number ) {
+      return this.authHttp.get( this.masterService + id )
+      .map( ( res: Response ) => res.json() as VPersonnelRequirement );
+   }
+   getHistorical( id: number ) {
+      return this.authHttp.get( this.masterService +'requerimientosHistoricos/'+ id )
+      .map( ( res: Response ) => res.json() as VPersonnelRequirement );
    }
 
    handleError( error: any ): Promise<any> {

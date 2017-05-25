@@ -1,4 +1,4 @@
-<div *ngIf="addinglocation">
+<div class="col-md-12" *ngIf="addinglocation">
    <h3>{{ 'ESTRUCTURAORGANIZACIONAL.LBL_ESTRUCTURA' | translate}}</h3>
    <div class="row datable-header">
       <div class="col-md-6 col-xs-12 datatable-header-add">
@@ -20,8 +20,9 @@
       </div>
 
       <div class="col-md-8">
-         <p-fieldset legend="{{header}}">
-            <div class="row-fluid">
+         <p-panel header="{{header}}">
+            <fieldset>
+				<div class="row-fluid">
                <div class="col-md-12">
                   <form *ngIf="!guardando" (ngSubmit)="!codeExists&&!documentExists&&f.valid && save()" #f="ngForm" novalidate>
                      <div *ngIf="empresa">
@@ -266,7 +267,8 @@
                   </form>
                </div>
             </div>
-         </p-fieldset>
+				</fieldset>
+         </p-panel>
          <p-dialog header="Confirmación" [(visible)]="displayDialog"
                    responsive="true" modal="true">
             <p>{{ 'MSG_CONFIRMACION' | translate }}</p>

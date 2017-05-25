@@ -40,6 +40,10 @@ export class ConstanteService {
       return this.authHttp.get( this.serviceURL + 'constantes/' + id ).map( res => res.json() as Constante );
    }
 
+   getByCode( code: string ) {
+      return this.authHttp.get( this.serviceURL + 'constantes/codigo/' + code ).map( res => res.json() as Constante );
+   }
+
    handleError( error: any ): Promise<any> {
       console.error( 'Error:', error );
       return Promise.reject( error.message || error );
