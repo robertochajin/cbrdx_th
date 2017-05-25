@@ -94,7 +94,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
 
    purchasesList: ListaItem[] = [];
    ticsList: ListaItem[] = [];
-   listQuest: ListaItem[] = [];
+   listQuest: SelectItem[] = [];
    purchasesId: any;
    ticsId: any;
    questId: any;
@@ -109,7 +109,6 @@ export class PersonnelRequirementEditComponent implements OnInit {
    listResoursesQuesAll: Questionnaires[] = [];
    wrongResourse: boolean = true;
    wrongResourseTics: boolean = true;
-   wrongResourseQues: boolean = true;
    guardandoResourses: boolean = false;
    guardandoResoursesTics: boolean = false;
    guardandoResoursesQues: boolean = false;
@@ -246,7 +245,10 @@ export class PersonnelRequirementEditComponent implements OnInit {
       }, ( error ) => {
          this._nav.setMesage( 3, this.msg );
       } );
-
+      this.listaService.getMasterDetails( 'ListasCuestionarios' ).subscribe( rest => {
+         this.listQuest.push( { label: 'Seleccione', value: null } );
+         rest.map( ( s: ListaItem ) => { this.listQuest.push( { label: s.nombre, value: s.idLista } ) } );
+      } );
    }
 
    ngOnInit() {
@@ -319,6 +321,8 @@ export class PersonnelRequirementEditComponent implements OnInit {
             } );
             this.questionnairesService.getResoursesByIdRequirement( idRequeriment ).subscribe( rest => {
                this.listResoursesQues = rest;
+               this.listResoursesQues.map(rq =>
+                  this.listQuest.splice(this.listQuest.indexOf(this.listQuest.find(lq => lq.value == rq.idCuestionario)),1));
             } );
 
             this.referralsServices.getAllRequirement( idRequeriment ).subscribe( ref => {
@@ -411,7 +415,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
    }
 
    bossSearch( event: any ) {
-      if ( '' !== event.query.replace( /[^0-9a-zA-Z]+/g, '' )) {
+      if ( '' !== event.query.replace( /[^0-9a-zA-Z]+/g, '' ) ) {
          this.employeesService.getByNameAndAreaAndCargo( this.employeeBasics.idArea, event.query.replace( /[^0-9a-zA-Z]+/g, '' )
             , this.selectedPosition.idCargoJefe ).subscribe(
             empl => this.bossList = empl
@@ -422,16 +426,17 @@ export class PersonnelRequirementEditComponent implements OnInit {
    }
 
    positionSearch( event: any ) {
-      if ( '' !== event.query.replace( /[^0-9a-zA-Z]+/g, '' )) {
+      if ( '' !== event.query.replace( /[^0-9a-zA-Z]+/g, '' ) ) {
          let item = this.listRT.find( rt => rt.idLista === this.personnelRequirement.idTipoSolicitud );
          if ( item !== undefined && item.codigo === 'CRGNVAREA' ) {
-            this.positionsService.getByWildCard( event.query.replace( /[^0-9a-zA-Z]+/g, '' ) ).subscribe( list => this.positionList = list );
+            this.positionsService.getByWildCard( event.query.replace( /[^0-9a-zA-Z]+/g, '' ) )
+            .subscribe( list => this.positionList = list );
          } else {
             this.positionsService.getByWildCardAndArea( event.query.replace( /[^0-9a-zA-Z]+/g, '' ), this.employeeBasics.idArea )
             .subscribe( list => this.positionList = list );
          }
       } else {
-         this.selectedPosition =  null;
+         this.selectedPosition = null;
       }
    }
 
@@ -524,7 +529,9 @@ export class PersonnelRequirementEditComponent implements OnInit {
          if ( code === 'RMPLZ' || code === 'RDP' || code === 'PLNCRR' ) {
             this.dispFechaInicioRemplazo = true;
             this.dispFechaFinRemplazo = true;
-            if(this.selectedPosition !== undefined && this.selectedPosition.idCargoJefe !== undefined){this.dispBoss = true;}
+            if ( this.selectedPosition !== undefined && this.selectedPosition.idCargoJefe !== undefined ) {
+               this.dispBoss = true;
+            }
          } else if ( code === 'DMNPLNT' ) {
             this.dispNumeroEntrevistar = false;
             this.dispZona = false;
@@ -546,9 +553,13 @@ export class PersonnelRequirementEditComponent implements OnInit {
             this.dispNumeroContratar = false;
             this.dispNumeroEntrevistar = false;
          } else if ( code === 'VCNT' ) {
-            if(this.selectedPosition !== undefined && this.selectedPosition.idCargoJefe !== undefined){this.dispBoss = true;}
+            if ( this.selectedPosition !== undefined && this.selectedPosition.idCargoJefe !== undefined ) {
+               this.dispBoss = true;
+            }
          } else if ( code === 'APLNT' || code === 'CRGNVAREA' ) {
-            if(this.selectedPosition !== undefined && this.selectedPosition.idCargoJefe !== undefined){this.dispBoss = true;}
+            if ( this.selectedPosition !== undefined && this.selectedPosition.idCargoJefe !== undefined ) {
+               this.dispBoss = true;
+            }
          } else {
             this.dispCargo = false;
             this.dispZona = false;
@@ -686,19 +697,6 @@ export class PersonnelRequirementEditComponent implements OnInit {
       this.listaService.getMasterDetailsByWildCard( 'ListasTiposCompras', event.query ).subscribe( rest => {
          this.purchasesList = rest;
          this.purchasesList.map( d => d.nombre = d.idLista + ' : ' + d.nombre );
-      } );
-   }
-
-   captureResourseQuesId( event: any ) {
-      this.questionnaires.idCuestionario = event.idLista;
-      this.questionnaires.idRequerimiento = this.personnelRequirement.idRequerimiento;
-      this.wrongResourseQues = false;
-   }
-
-   resourseQuesSearch( event: any ) {
-      this.listaService.getMasterDetailsByWildCard( 'ListasCuestionarios', event.query ).subscribe( rest => {
-         this.listQuest = rest;
-         this.listQuest.map( d => d.nombre = d.idLista + ' : ' + d.nombre );
       } );
    }
 
@@ -851,60 +849,59 @@ export class PersonnelRequirementEditComponent implements OnInit {
 
    onSubmitQuestionnaires() {
       let temp: any;
-      if ( !this.wrongResourseQues ) {
-         if ( this.questionnaires.idCuestionario === this.questId.idLista ) {
-            this.guardandoResoursesQues = true;
-            this.questionnaires.idRequerimiento = this.personnelRequirement.idRequerimiento;
-            temp = this.listResoursesQuesAll.find(
-               r => r.idCuestionario === this.questionnaires.idCuestionario && r.idRequerimiento === this.questionnaires.idRequerimiento );
-            if ( temp ) {
-               if ( !temp.indicadorHabilitado ) {
-                  temp.indicadorHabilitado = true;
-                  this.questionnairesService.update( temp ).subscribe( () => {
-                     this.guardandoResoursesQues = false;
-                     this.wrongResourseQues = true;
-                     this.questId = null;
-                     this.listResoursesQues = [];
-                     this.listResoursesQuesAll = [];
-                     this.questionnairesService.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento )
-                     .subscribe( rest => {
-                        this.listResoursesQues = rest;
-                     } );
-                     this.questionnairesService.getAll().subscribe( rest => {
-                        this.listResoursesQuesAll = rest;
-                     } );
-                  } );
-               } else {
+
+      this.guardandoResoursesQues = true;
+      this.questionnaires.idCuestionario = this.questId;
+      this.questionnaires.idRequerimiento = this.personnelRequirement.idRequerimiento;
+      temp = this.listResoursesQuesAll.find(
+         r => r.idCuestionario === this.questionnaires.idCuestionario && r.idRequerimiento === this.questionnaires.idRequerimiento );
+      if ( temp ) {
+         if ( !temp.indicadorHabilitado ) {
+            temp.indicadorHabilitado = true;
+            this.questionnairesService.update( temp ).subscribe( () => {
+               this.listQuest.splice(this.listQuest.indexOf(this.listQuest.find(e => e.value === this.questId)),1);
+               this.questId = null;
+               this.listResoursesQues = [];
+               this.listResoursesQuesAll = [];
+               this.questionnairesService.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento )
+               .subscribe( rest => {
+                  this.listResoursesQues = rest;
                   this.guardandoResoursesQues = false;
-                  this.wrongResourseQues = true;
-                  this.questId = null;
-                  this._nav.setMesage( 0, {
-                     severity: 'warn', summary: 'Información', detail: 'No es posible agregar mas de una vez un' +
-                                                                       ' recurso'
-                  } );
-               }
-            } else {
-               this.questionnairesService.add( this.questionnaires ).subscribe( () => {
-                  this.guardandoResoursesQues = false;
-                  this.wrongResourseQues = true;
-                  this.questId = null;
-                  this.listResoursesQues = [];
-                  this.listResoursesQuesAll = [];
-                  this.questionnairesService.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento ).subscribe( rest => {
-                     this.listResoursesQues = rest;
-                  } );
-                  this.questionnairesService.getAll().subscribe( rest => {
-                     this.listResoursesQuesAll = rest;
-                  } );
                } );
-            }
+               this.questionnairesService.getAll().subscribe( rest => {
+                  this.listResoursesQuesAll = rest;
+               } );
+            } );
+         } else {
+            this.guardandoResoursesQues = false;
+            this.questId = null;
+            this._nav.setMesage( 0, {
+               severity: 'warn', summary: 'Información', detail: 'No es posible agregar mas de una vez un' +
+                                                                 ' recurso'
+            } );
          }
+      } else {
+         this.questionnaires.idRequerimiento = this.personnelRequirement.idRequerimiento;
+         this.questionnairesService.add( this.questionnaires ).subscribe( () => {
+            this.guardandoResoursesQues = false;
+            this.listQuest.splice(this.listQuest.indexOf(this.listQuest.find(e => e.value === this.questId)),1);
+            this.questId = null;
+            this.listResoursesQues = [];
+            this.listResoursesQuesAll = [];
+            this.questionnairesService.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento ).subscribe( rest => {
+               this.listResoursesQues = rest;
+            } );
+            this.questionnairesService.getAll().subscribe( rest => {
+               this.listResoursesQuesAll = rest;
+            } );
+         } );
       }
    }
 
    delResoursesQues( r: Questionnaires ) {
       r.indicadorHabilitado = false;
       this.questionnairesService.update( r ).subscribe( () => {
+         this.listQuest.push({value: r.idCuestionario, label: r.cuestionario});
          this.listResoursesQues = [];
          this.listResoursesQuesAll = [];
          this.questionnairesService.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento ).subscribe( rest => {
