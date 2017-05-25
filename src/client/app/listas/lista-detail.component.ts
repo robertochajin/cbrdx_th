@@ -4,6 +4,8 @@ import { Location } from '@angular/common';
 import { ListaItem } from '../_models/listaItem';
 import { Lista } from '../_models/lista';
 import { ListaService } from '../_services/lista.service';
+import { FormSharedModule } from '../shared/form-shared.module';
+
 
 @Component( {
                moduleId: module.id,

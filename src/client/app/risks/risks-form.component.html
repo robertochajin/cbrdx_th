@@ -5,13 +5,12 @@
    </p-footer>
 </p-confirmDialog>
 <div *ngIf="risk">
-   <div class="row">
-      <div class="col-md-12">
+	<div class="col-md-10 col-md-offset-1">
+	<div class="row">
          <div class="header">
             <h3 class="title">{{header}}</h3>
          </div>
-      </div>
-   </div>
+		</div>
    <form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
       <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
          <div class="ui-grid-row">
@@ -86,4 +85,5 @@
          </div>
       </div>
    </form>
+</div>
 </div>
