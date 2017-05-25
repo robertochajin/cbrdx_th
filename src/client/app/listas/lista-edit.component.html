@@ -85,7 +85,7 @@
                     <label class="control-label col-md-3" for="item">{{ 'LISTAS.LBL_ITEMLISTA' | translate }}</label>
 						 <div class="col-md-9">
 						 <input class="form-control" id="item" name="item" type="text" pInputText
-                           [(ngModel)]="editableDetail.nombre" #item="ngModel" maxlength="30" required/>
+                           [(ngModel)]="editableDetail.nombre" #item="ngModel" maxlength="100" required/>
                     <div *ngIf="fd.submitted&&item.errors" class="alert alert-danger">
                         <div [hidden]="!item.errors.required">{{ 'LISTAS.MSG_NOMBRELEMENTO' | translate }}</div>
                         <div [hidden]="!item.errors.maxlength">{{ 'LISTAS.MSG_ELEMENT30CARACT' | translate }}</div>
