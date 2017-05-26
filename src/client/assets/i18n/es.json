@@ -29,6 +29,7 @@
   "LBL_NUEVA":"Nueva",
   "LBL_ID":"Id",
   "LBL_CODIGO":"Código",
+  "LBL_OBLIGATORIO":"Obligatorio",
   "LBL_NOMBRE":"Nombre",
   "LBL_ESTADO":"Estado ",
   "LBL_DETALLE":"Detalle",
@@ -422,7 +423,7 @@
       "LBL_MENUPRINCIPAL": "MENÚ PRINCIPAL",
       "LBL_USUARIODESDE":"Última Actualización",
       "LBL_TEMASDISPONIBLES": "Temas Disponible",
-      "LBL_EDITARCONTRASENA":"Editar Contraseña",
+      "LBL_EDITARCONTRASENA":"Actualizar Perfil",
       "LBL_CERRARSESION": "Cerrar Sesión"
    },
 
@@ -468,8 +469,11 @@
       "LBL_PARAMETROSLISTA":"Parámetros Lista",
       "LBL_LISTA":"Lista",
       "LBL_EDITABLE":"Editable",
+      "LBL_ROLMODIFICA":"Rol que modifica",
+      "MSG_ROLMODIFICAREQUERIDO":"Rol que modifica es requerido",
       "LBL_ELEMENTLISTA":"Elementos de la Lista",
       "LBL_ITEMLISTA":"Item",
+      "LISTAS.LBL_CODIGOREGISTRADO":"Este código ya se encuentra regstrado ",
       "MSG_NOMBRELISTA":"Debe ingresar el nombre de la Lista.",
       "MSG_LISTAMAYUSCULA":"El nombre debe comenzar por una letra mayúscula.",
       "MSG_LISTA40CARACTERES":"La lista no debe tener mas de 40 caracteres.",
@@ -553,6 +557,7 @@
            "LBL_ATRIBUTOS" : "Atributos",
            "LBL_REEMPLAZAPOR" : "Reemplaza por:",
            "LBL_EDAD" : "Edad",
+           "LBL_ZONA" : "Requiere zona",
            "LBL_ELEMENTOS" : "Elementos",
            "LBL_DESCRIPCION" : "Descripción",
            "LBL_COMPETENCIA" : "Competencia",
@@ -692,13 +697,18 @@
       "LBL_ESTRUCTFISICA":"Estructura Física",
       "MSG_ESTRUCTFISICAREQ":"Estructura física es requerido",
       "MSG_REGISTRADOCOD":"Ya se encuentra registrado ese código",
-      "MSG_CODIGOREGISTRADO":"Ya se encuentra registrado ese código"
-
+      "MSG_CODIGOREGISTRADO":"Ya se encuentra registrado ese código",
+      "MSG_CODIGOREGISTRADO":"Ya se encuentra registrado ese código",
+      "LBL_INDICADORZONAS": "Maneja zona",
+      "LBL_ZONAS": "Zonas del área",
+      "LBL_CODIGOZONA": "Código",
+      "LBL_ZONA": "Zona"
    },
 
    "PLANTACOLABORADORES": {
       "LBL_PLANTACOLAB":"Planta de Colaboradores",
       "LBL_AREA":"Área",
+      "LBL_ZONA":"Zona",
       "LBL_AREATRABAJO":"Área de trabajo",
       "MSG_NODO":"Por favor, seleccione un nodo de tipo área de la estructura organizacional",
       "MSG_INFOAREA":"Información del área",
@@ -776,10 +786,6 @@
       "LBL_JUSTIFICACION": "Justificación",
       "LBL_CUESTIONARIOS": "Datos Cuestionarios",
       "LBL_CUESTIONARIO": "Cuestionario",
-      "LBL_MENORAUNO": "no puede ser menor a uno",
-      "LBL_MENORACONVOCADOS": "no puede ser menor a la cantidad de convocados",
-      "LBL_VACANTESNOREDUCIBLES": "no puede ser mayor a la cantidad de plazas sin asignación",
-      "MSG_CARGONOCONFIGURADO": "El cargo seleccionado no tiene configurado un: Cargo depende de.",
       "":""
    },
 

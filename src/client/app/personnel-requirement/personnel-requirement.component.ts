@@ -29,6 +29,7 @@ export class PersonnelRequirementComponent implements OnInit {
    tokendecoded: any = { sub: '', usuario: '', nombre: '' };
    public requirementsAction: RequirementsAction[] = [];
    public displayActions = false;
+   busqueda: string;
 
    constructor( private personnelRequirementServices: PersonnelRequirementServices,
       private location: Location,
@@ -37,6 +38,7 @@ export class PersonnelRequirementComponent implements OnInit {
       private listaService: ListaService,
       private router: Router,
       private confirmationService: ConfirmationService ) {
+      this.busqueda = this._nav.getSearch( 'personnel-requirement.component' );
 
    }
 
@@ -103,6 +105,9 @@ export class PersonnelRequirementComponent implements OnInit {
          msg.summary = 'Imposible cargar la información';
          this._nav.setMesage( 4, msg );
       });
+   }
+   setSearch() {
+      this._nav.setSearch( 'personnel-requirement.component', this.busqueda );
    }
 
 }

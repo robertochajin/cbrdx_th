@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/primeng';
 import { Widgets } from '../_models/widgets';
 import { WidgetServices } from '../_services/widget.service';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -13,10 +14,13 @@ import { WidgetServices } from '../_services/widget.service';
 export class WidgetsComponent implements OnInit {
    widgets: Widgets = new Widgets();
    listWidgets: Widgets [];
+   busqueda: string;
 
    constructor( private router: Router,
       private widgetServices: WidgetServices,
+      private navService:NavService,
       private confirmationService: ConfirmationService ) {
+      this.busqueda = this.navService.getSearch( 'widgets.component' );
    }
 
    ngOnInit() {
@@ -34,6 +38,9 @@ export class WidgetsComponent implements OnInit {
 
    add() {
       this.router.navigate( [ 'widgets/add' ] );
+   }
+   setSearch() {
+      this.navService.setSearch( 'widgets.component', this.busqueda );
    }
 
 }

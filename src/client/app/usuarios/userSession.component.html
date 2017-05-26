@@ -25,15 +25,15 @@
                <h2>{{employee.nombreCompleto}}</h2>
 					<h4>{{employee.fechaNacimiento}}  ({{employee.edad}})</h4>
                <span>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</span><br/>
-
-               <div *ngIf="user">
-                  <div class="header" style=" margin-top: 40px;">
-                     <h4 class="title" style="border-bottom: 1px solid #ccc;padding-bottom: 8px;">
-                        {{"USER_SESSION.LBL_CAMBIOCONTRASENA" | translate}}
-                     </h4>
-                  </div>
-               </div>
-               <form #f="ngForm" (ngSubmit)="f.valid && onSubmit()" novalidate>
+					<div *ngIf="!ldap">
+	               <div *ngIf="user">
+	                  <div class="header" style=" margin-top: 40px;">
+	                     <h4 class="title" style="border-bottom: 1px solid #ccc;padding-bottom: 8px;">
+	                        {{"USER_SESSION.LBL_CAMBIOCONTRASENA" | translate}}
+	                     </h4>
+	                  </div>
+	               </div>
+	               <form #f="ngForm" (ngSubmit)="f.valid && onSubmit()" novalidate>
 								<div class="form-group">
 									<label for="pass_actual" class="control-label">{{"USER_SESSION.LBL_CONTRASENAACTUAL" | translate}}</label>
 									<div class="input-group">
@@ -91,6 +91,7 @@
                              (keydown.enter)="submit.click()" #submit></button>
                   </div>
                </form>
+					</div>
             </div>
 
 

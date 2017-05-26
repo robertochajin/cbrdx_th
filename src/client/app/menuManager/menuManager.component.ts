@@ -175,4 +175,11 @@ export class MenuManagerComponent {
       }
       this.displayDialog = false;
    }
+   inputNumber(){
+      let temp = this.menus.secuencia+'';
+      if ( this.menus.secuencia !== null ) {
+         this.menus.secuencia = Number( temp.replace( /[^0-9]/g, '' ) );
+
+      }
+   }
 }

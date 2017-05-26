@@ -6,6 +6,7 @@ import { Lista } from '../_models/lista';
 import { ListaService } from '../_services/lista.service';
 import { FormSharedModule } from '../shared/form-shared.module';
 
+import { RolesService } from '../_services/roles.service';
 
 @Component( {
                moduleId: module.id,
@@ -18,9 +19,11 @@ export class ListaDetailComponent implements OnInit {
    othersDetailsList: ListaItem[];
    detailsList: ListaItem[];
    habilitado: string;
+   rolModifica: string;
 
    constructor( private listasService: ListaService,
       private route: ActivatedRoute,
+      private rolesService: RolesService,
       private location: Location ) {
    }
 
@@ -29,6 +32,11 @@ export class ListaDetailComponent implements OnInit {
       .switchMap( ( params: Params ) => this.listasService.getMaster( +params[ 'id' ] ) )
       .subscribe( data => {
          this.masterList = data;
+         this.rolesService.listRoles().subscribe( data => {
+            if(data.find(r=> r.idRol ===this.masterList.idRol)){
+               this.rolModifica = data.find(r=> r.idRol ===this.masterList.idRol).rol;
+            }
+         });
          this.habilitado = data.indicadorEditable ? 'Si' : 'No';
          this.listasService.getMasterAllDetails( this.masterList.nombreTabla ).subscribe( res => {
             this.detailsList = res;

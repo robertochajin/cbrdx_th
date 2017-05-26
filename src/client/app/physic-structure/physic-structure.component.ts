@@ -3,6 +3,7 @@ import { PhysicStructure } from '../_models/physic-structure';
 import { PhysicStructureService } from '../_services/physic-structure.service';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/primeng';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -16,10 +17,13 @@ export class PhysicStructureComponent implements OnInit {
    dialogObjet: PhysicStructure = new PhysicStructure();
 
    ListPhysicStructure: PhysicStructure[];
+   busqueda: string;
 
    constructor( private physicStructureService: PhysicStructureService,
       private router: Router,
+      private navService:NavService,
       private confirmationService: ConfirmationService ) {
+      this.busqueda = this.navService.getSearch( 'physic-structure.component' );
    }
 
    ngOnInit() {
@@ -44,5 +48,8 @@ export class PhysicStructureComponent implements OnInit {
 
    update( e: PhysicStructure ) {
       this.router.navigate( [ 'physic-structure/update/' + e.idEstructuraFisica ] );
+   }
+   setSearch() {
+      this.navService.setSearch( 'physic-structure.component', this.busqueda );
    }
 }

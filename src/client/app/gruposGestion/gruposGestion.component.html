@@ -6,7 +6,8 @@
     <div class="col-md-6 col-xs-12 datatable-header-search">
 		 <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-search"></i></div>
-			 <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control">
+			 <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control"
+			        [(ngModel)]="busqueda" (change)="setSearch()">
 		 </div>
 	 </div>
 </div>

@@ -3,6 +3,7 @@ import { Risks } from '../_models/risks';
 import { RisksService } from '../_services/risks.service';
 import { Router } from '@angular/router';
 import { ConfirmationService, Message } from 'primeng/primeng';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -18,10 +19,13 @@ export class RisksComponent implements OnInit {
    dialogObjet: Risks = new Risks();
    habilitado: boolean;
    msgs: Message[] = [];
+   busqueda: string;
 
    constructor( private risksService: RisksService,
       private router: Router,
+      private navService:NavService,
       private confirmationService: ConfirmationService ) {
+      this.busqueda = this.navService.getSearch( 'risks.component' );
    }
 
    ngOnInit() {
@@ -81,6 +85,9 @@ export class RisksComponent implements OnInit {
 
    update( r: Risks ) {
       this.router.navigate( [ 'risks/update/' + r.idRiesgo ] );
+   }
+   setSearch() {
+      this.navService.setSearch( 'risks.component', this.busqueda );
    }
 
 }
