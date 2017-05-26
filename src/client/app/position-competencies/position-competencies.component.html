@@ -1,5 +1,5 @@
 <p-messages [value]="msgs"></p-messages>
-<p-tabView>
+<p-tabView orientation="left">
    <p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}"
                [selected]="i == 0" >
       <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="group.competencies"
@@ -15,12 +15,18 @@
    </p-tabPanel>
    <p-tabPanel header="" *ngIf="1 != 1"></p-tabPanel>
 </p-tabView>
-<p-confirmDialog width="400"></p-confirmDialog>
-<div class="row">
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog><div class="row">
    <div class="col-md-10">
    </div>
-   <div class="col-md-2">
-      <button type="button" pButton icon="fa-arrow-right" (click)="next()"
-              label="{{ 'BTN_SIGUIENTE' | translate }}"></button>
-   </div>
+	<div class="row form-footer-buttons">
+		<div class="form-group col-md-12">
+			<button icon="fa-arrow-right" label="{{ 'BTN_SIGUIENTE' | translate }}" type="button" (click)="next()"
+					  pButton></button>
+		</div>
+	</div>
 </div>

@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-md-12">
       <div>
-        <p-dataTable [value]="PositionExam" [paginator]="true" [rows]="10" [responsive]="true" >
+        <p-dataTable [value]="PositionExam" [paginator]="true" [rows]="10" [responsive]="true" class="datatable-col-center">
           <p-column field="examen" header="{{ 'POSITION.LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
           <p-column header="{{ 'POSITION.LBL_INGRESO' | translate }}">
             <template let-exam="rowData" pTemplate="body">
@@ -106,13 +106,16 @@
       </div>
     </div>
   </div>
-  <div class="ui-grid-row form-footer-buttons">
+  <div class="ui-grid-row">
      <div class="ui-grid-col-10">
         <p-messages [value]="msgsAlert"></p-messages>
      </div>
-    <div class="ui-grid-col-2 pull-right">
-      <button icon="fa-arrow-right" pButton label="{{ 'BTN_SIGUIENTE' | translate }}" type="button" (click)="next()"></button>
-    </div>
+	  <div class="row form-footer-buttons">
+		  <div class="form-group col-md-12">
+			  <button icon="fa-arrow-right" label="{{ 'BTN_SIGUIENTE' | translate }}" type="button" (click)="next()"
+						 pButton></button>
+		  </div>
+	  </div>
   </div>
 </div>
 

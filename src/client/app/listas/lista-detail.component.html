@@ -1,10 +1,11 @@
 <div *ngIf="masterList">
-  <div class="row">
+  <div class="col-md-10 col-md-offset-1">
+	<div class="row">
     <div class="col-md-12">
       <h3 class="first">{{ 'LISTAS.LBL_LISTAS' | translate }}</h3>
     </div>
   </div>
-  <p-fieldset legend="{{ 'LISTAS.LBL_PARAMETROSLISTA' | translate }}">
+  <p-panel header="{{ 'LISTAS.LBL_PARAMETROSLISTA' | translate }}">
   <div class="row">
     <div class="col-md-offset-2 col-md-8 col-sm-12">
     <form class="form-horizontal">
@@ -27,9 +28,9 @@
     </form>
     </div>
   </div>
-  </p-fieldset>
+  </p-panel>
 
-<p-fieldset legend="{{ 'LISTAS.LBL_ELEMENTLISTA' | translate }}">
+<p-panel header="{{ 'LISTAS.LBL_ELEMENTLISTA' | translate }}">
     <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="detailsList" [paginator]="true" [rows]="10" [responsive]="true">
         <header>Listas</header>
        <p-column field="codigo" header="{{ 'LBL_CODIGO' | translate }}"></p-column>
@@ -40,11 +41,12 @@
             </template>
         </p-column>
     </p-dataTable>
-</p-fieldset>
+</p-panel>
   <div class="row form-footer-buttons">
     <div class="form-group col-md-12">
       <button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate }}" type="button"
               pButton (click)="goBack()"></button>
     </div>
   </div>
+</div>
 </div>
