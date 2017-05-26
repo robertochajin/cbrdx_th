@@ -115,17 +115,17 @@
                                        Estado es requerida
                                     </div>-->
                                  </div>
-                                 <div class="form-group col-md-3">
-                                    <label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate }}</label>
-                                    <div class=" col-sm-9">
+                                 <div class="form-group col-md-3 col-sm-3">
+                                    <label for="indicador" class="control-label col-md-6 col-sm-6">{{ 'LBL_HABILITADO' | translate }}</label>
+                                    <div class=" col-md-6">
                                        <p-checkbox binary="true" id="indicador" name="indicador"
                                                    [(ngModel)]="position.indicadorHabilitado" disabled="true"
                                                    #indicador="ngModel"></p-checkbox>
                                     </div>
                                  </div>
 	                              <div class="form-group col-md-3">
-		                              <label for="indicadorzona" class="control-label col-sm-6">{{ 'POSITION.LBL_ZONA' | translate }}</label>
-		                              <div class=" col-sm-6">
+		                              <label for="indicadorzona" class="control-label col-md-6">{{ 'POSITION.LBL_ZONA' | translate }}</label>
+		                              <div class=" col-md-6">
 			                              <p-checkbox binary="true" id="indicadorzona" name="indicadorzona"
 			                                          [(ngModel)]="position.indicadorZona"
 			                                          #indicador="ngModel"></p-checkbox>
