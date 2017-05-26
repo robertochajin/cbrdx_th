@@ -42,9 +42,10 @@ export class OrganizationalStructureComponent {
    localizacion: Localizaciones = new Localizaciones();
 
    // variables para administracion de zonas
-   zone: Zones;
-   zones: Zones[] = [];
-   editingZone = false;
+   public zone: Zones;
+   public zones: Zones[] = [];
+   public editingZone = false;
+   public safeZones= false;
 
    constructor( private organizationalStructureService: OrganizationalStructureService,
       private listaService: ListaService,
@@ -219,8 +220,14 @@ export class OrganizationalStructureComponent {
 
             if ( this.organizationalStructure.indicadorZona ) {
                this.zonesServices.getAllByOrganizationalStructure( node.data.idEstructuraOrganizacional ).subscribe(
-                  zones => this.zones = zones
+                  zones => {
+                     this.zones = zones;
+                     this.safeZones = true;
+                  }
                );
+            } else {
+               this.zones = [];
+               this.safeZones = false;
             }
 
          } );
@@ -289,6 +296,7 @@ export class OrganizationalStructureComponent {
                'leaf': false,
                'children': []
             };
+            this.safeZones = this.organizationalStructure.indicadorZona;
             this.listOrganizationalStructure.push( data );
             if ( this.organizationalStructure.idPadre === 0 ||
                  this.organizationalStructure.idPadre === null ||
@@ -311,7 +319,7 @@ export class OrganizationalStructureComponent {
             this.guardando = false;
             let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
             this.navService.setMesage( typeMessage, this.msg );
-
+            this.safeZones = this.organizationalStructure.indicadorZona;
             this.selectedNode.data = this.organizationalStructure;
             this.selectedNode.label = this.organizationalStructure.nombre;
             this.header = this.organizationalStructure.nombre;
@@ -355,8 +363,29 @@ export class OrganizationalStructureComponent {
    }
 
    saveZone() {
-      this.zones.push( this.zone );
-      this.editingZone = false;
+      if ( this.zone.idZona !== undefined && this.zone.idZona !== null ) {
+         this.zonesServices.update( this.zone ).subscribe( res => {
+            if ( res.ok ) {
+               this.zones[this.zones.indexOf(this.zones.find(z => z.idZona === this.zone.idZona))] = this.zone;
+               this.navService.setMesage( 2 );
+               this.editingZone = false;
+            }
+         }, error => {
+            this.navService.setMesage( 3 );
+         } );
+      } else {
+         this.zone.idEstructuraOrganizacional = this.organizationalStructure.idEstructuraOrganizacional;
+         this.zone.indicadorHabilitado = true;
+         this.zonesServices.add( this.zone ).subscribe( res => {
+            if ( res ) {
+               this.zones.push( res );
+               this.editingZone = false;
+               this.navService.setMesage( 1 );
+            }
+         }, error => {
+            this.navService.setMesage( 3 );
+         } );
+      }
    }
 
    cancelEditingZone() {
@@ -375,6 +404,11 @@ export class OrganizationalStructureComponent {
       if ( zone !== null ) {
          this.zone = new Zones();
          this.zone.codigo = zone.codigo;
+         this.zone.idZona = zone.idZona;
+         this.zone.idEstructuraOrganizacional = zone.idEstructuraOrganizacional;
+         this.zone.indicadorHabilitado = zone.indicadorHabilitado;
+         this.zone.auditoriaUsuario = zone.auditoriaUsuario;
+         this.zone.auditoriaFecha = zone.auditoriaFecha;
          this.zone.zona = zone.zona;
       } else {
          this.zone = new Zones();
@@ -393,8 +427,8 @@ export class OrganizationalStructureComponent {
       return lastCode;
    }
 
-   capitalizeZone(value: any ) {
-      if ( value !== '' && value !== null && value !== undefined) {
+   capitalizeZone( value: any ) {
+      if ( value !== '' && value !== null && value !== undefined ) {
          this.zone.zona = value.substring( 0, 1 ).toUpperCase() + value.substring( 1 ).toLowerCase();
       }
    }

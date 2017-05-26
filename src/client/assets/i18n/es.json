@@ -694,6 +694,7 @@
       "MSG_REGISTRADOCOD":"Ya se encuentra registrado ese código",
       "MSG_CODIGOREGISTRADO":"Ya se encuentra registrado ese código",
       "MSG_CODIGOREGISTRADO":"Ya se encuentra registrado ese código",
+      "LBL_INDICADORZONAS": "Maneja zona",
       "LBL_ZONAS": "Zonas del área",
       "LBL_CODIGOZONA": "Código",
       "LBL_ZONA": "Zona"
