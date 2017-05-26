@@ -17,7 +17,7 @@ export class ZonesServices {
    }
 
    getAllByOrganizationalStructure(idOrganizationalStructure: number) {
-      return this.authHttp.get( this.serviceURL + 'byEO/' + idOrganizationalStructure ).map( ( res: Response ) => res.json() as Zones[] );
+      return this.authHttp.get( this.serviceURL + 'byEstrucOrganizacional/' + idOrganizationalStructure ).map( ( res: Response ) => res.json() as Zones[] );
    }
 
    add( f: Zones ) {

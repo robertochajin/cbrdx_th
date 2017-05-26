@@ -29,6 +29,7 @@ export class OrganizationalStructure {
    tipoArea: string;
    estructuraFisica: string;
    tipoDocumento: string;
+   indicadorZona: boolean = false;
 
    constructor() {
       this.idTipoEstructura = null;

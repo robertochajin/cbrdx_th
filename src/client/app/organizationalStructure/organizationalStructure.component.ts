@@ -12,12 +12,11 @@ import { NavService } from '../_services/_nav.service';
 import { ZonesServices } from '../_services/zones.service';
 import { Zones } from '../_models/zones';
 
-
 @Component( {
                moduleId: module.id,
                templateUrl: 'organizationalStructure.component.html',
                selector: 'organizational-structure',
-
+               providers: [ ConfirmationService ]
             } )
 export class OrganizationalStructureComponent {
    msg: Message;
@@ -43,8 +42,8 @@ export class OrganizationalStructureComponent {
    localizacion: Localizaciones = new Localizaciones();
 
    // variables para administracion de zonas
-   zone : Zones;
-   zones : Zones[] = [];
+   zone: Zones;
+   zones: Zones[] = [];
    editingZone = false;
 
    constructor( private organizationalStructureService: OrganizationalStructureService,
@@ -53,9 +52,7 @@ export class OrganizationalStructureComponent {
       private locateService: LocateService,
       private zonesServices: ZonesServices,
       private navService: NavService,
-      private confirmationService: ConfirmationService
-
-   ) {
+      private confirmationService: ConfirmationService ) {
       organizationalStructureService.listOrganizationalStructure().subscribe( res => {
          this.listOrganizationalStructure = res;
          if ( this.listOrganizationalStructure.length > 0 ) {
@@ -154,7 +151,7 @@ export class OrganizationalStructureComponent {
 
    capitalizeName() {
       let input = this.organizationalStructure.nombre;
-      if ( input !== '' && input !== null && input !== undefined) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.organizationalStructure.nombre = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }
@@ -194,6 +191,7 @@ export class OrganizationalStructureComponent {
 
    nodeSelect( node: any ) {
 
+      this.editingZone = false;
       this.empresa = node.data.idPadre === 0 || node.data.idPadre === null || node.data.idPadre === undefined;
       this.organizationalStructureService.viewOrganizationalStructure( node.data.idEstructuraOrganizacional ).subscribe(
          organizationalStructure => {
@@ -217,6 +215,12 @@ export class OrganizationalStructureComponent {
                }
             } else {
                this.header = this.organizationalStructure.nombre;
+            }
+
+            if ( this.organizationalStructure.indicadorZona ) {
+               this.zonesServices.getAllByOrganizationalStructure( node.data.idEstructuraOrganizacional ).subscribe(
+                  zones => this.zones = zones
+               );
             }
 
          } );
@@ -349,8 +353,9 @@ export class OrganizationalStructureComponent {
    toggleform() {
       this.addinglocation = !this.addinglocation;
    }
-   saveZone(){
-      this.zones.push(this.zone);
+
+   saveZone() {
+      this.zones.push( this.zone );
       this.editingZone = false;
    }
 
@@ -366,22 +371,32 @@ export class OrganizationalStructureComponent {
                                         } );
    }
 
-   editZone(zone: Zones){
+   editZone( zone: Zones ) {
       if ( zone !== null ) {
          this.zone = new Zones();
          this.zone.codigo = zone.codigo;
          this.zone.zona = zone.zona;
       } else {
          this.zone = new Zones();
+         this.zone.codigo = this.organizationalStructure.codigo + '-' + this.getNextCode( this.zones );
       }
       this.editingZone = true;
    }
 
-   zoneCleanUp(value: any){
-      if(value) {
-         this.zone.zona = value.toUpperCase().replace( /[^A-Z0-9]/, '' ).trim();
+   private getNextCode( zones: Zones[] ): string {
+      let lastCode = '1';
+      if ( zones.length > 0 ) {
+         lastCode = (Number( zones.sort( ( a, b ) => {
+            return Number( a.codigo.split( '-' )[ 1 ] ) - Number( b.codigo.split( '-' )[ 1 ] )
+         } )[ zones.length - 1 ].codigo.split( '-' )[ 1 ] ) + 1).toString();
       }
+      return lastCode;
    }
 
+   capitalizeZone(value: any ) {
+      if ( value !== '' && value !== null && value !== undefined) {
+         this.zone.zona = value.substring( 0, 1 ).toUpperCase() + value.substring( 1 ).toLowerCase();
+      }
+   }
 
 }
