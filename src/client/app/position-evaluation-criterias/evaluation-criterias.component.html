@@ -10,7 +10,7 @@
         <p>{{ 'POSITION.MSG_CRITERIOS' | translate }}</p>
       </div>
       <form (ngSubmit)="d.valid && oneHundred && !criteriaRepeated && savePositionCriterias()" #d="ngForm" novalidate id="criteriasForm">
-        <div class="container">
+        <div class="container col-md-10 col-md-offset-1">
           <div class="row"  *ngFor="let criteria of backUpPositionCriterias; let i = index">
             <div class="col-md-2 col-xs-12">
                <div class="form-group">
@@ -63,7 +63,7 @@
             </div>
           </div>
            <div class="row">
-              <div class="col-md-3 ">
+              <div class="col-md-3">
                  <div class="alert alert-warning" [hidden]="(!criteriaRepeated)" role="alert">{{ 'POSITION.MSG_CRITERIOSREPETIDOS' | translate }}</div>
               </div>
               <div class="col-md-offset-3 col-md-3">
@@ -101,14 +101,20 @@
       <p-column field="meta" header="{{ 'POSITION.LBL_META' | translate }}" [sortable]="true"></p-column>
     </p-dataTable>
      <div class="row">
-        <div class="col-md-10">
-        </div>
-        <div class="col-md-2">
-           <button type="button" pButton icon="fa-arrow-right" (click)="next()"
-                   label="{{ 'BTN_SIGUIENTE' | translate }}"></button>
-        </div>
+		  <div class="row form-footer-buttons">
+			  <div class="form-group col-md-12">
+				  <button icon="fa-arrow-right" label="{{ 'BTN_SIGUIENTE' | translate }}" type="button" (click)="next()"
+							 pButton></button>
+			  </div>
+		  </div>
      </div>
   </div>
 
 </div>
-<p-confirmDialog width="400"></p-confirmDialog>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
+

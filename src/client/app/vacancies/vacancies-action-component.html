@@ -16,7 +16,7 @@
 					<p>{{ vacancy.justificacion }}</p>
 				</div>
 				
-				<div *ngIf="permitido">
+				<div *ngIf="permitido" style="width: 80%; margin: 0 auto;">
 					<div class="row">
 						<label for="acciones">{{ 'LBL_ACCIONES' | translate}}</label>
 						<p-dropdown id="acciones" name="acciones" required="true"
@@ -67,7 +67,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-2 col-md-offset-10">
+						<div class="form-footer-buttons">
 							<button pButton label="{{ 'LBL_ENVIAR' | translate}}" type="submit"></button>
 						</div>
 					</div>
@@ -76,14 +76,39 @@
 		</p-panel>
 	</div>
 	<div class="col-md-5">
-		<p-panel header="Últimas actividades sobre el proceso">
+		
+		<h4>Últimas actividades sobre el proceso</h4>
+
 			<div class="clearfix">
+				
+				<ul class="timeline">
+					
+					<li *ngFor="let act of actions">
+						<i class="fa fa-circle"></i>
+						<div class="timeline-item">
+							<span class="time">
+								<i class="fa fa-clock-o"></i> {{act.auditoriaFecha}}
+							</span>
+							<h3 class="timeline-header">{{act.accion}}</h3>
+							<div class="timeline-body">
+								<h4>{{act.nombreTercero}}</h4>
+								<span>{{act.cargo}}</span>
+							</div>
+							<div class="timeline-footer">
+								<button type="button" icon="fa-eye" pButton class="btn-sm"
+								        (click)="showRequerimiento(act.idRequerimientoHistorico)"></button>
+							</div>
+						</div>
+					</li>
+					
+				</ul>
+				<!--
 				<section id="cd-timeline" *ngFor="let act of actions">
 					<div class="cd-timeline-block ">
 						<div class="cd-timeline-img col-md-2 ">
 							<img class="thumbnail pull-left img-responsive"
 							     src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg">
-						</div> <!-- cd-timeline-img -->
+						</div>
 						<div class="cd-timeline-content col-md-9">
 							<h4>{{act.accion}}</h4>
 							<span class="cd-date">{{act.auditoriaFecha}}</span>
@@ -91,10 +116,10 @@
 							        (click)="showRequerimiento(act.idRequerimientoHistorico)"></button>
 							<h4>{{act.nombreTercero}}</h4>
 							<span class="cd-date">{{act.cargo}}</span>
-						</div> <!-- cd-timeline-content -->
-					</div> <!-- cd-timeline-block -->
+						</div>
+					</div>
 				</section>
+				-->
 			</div>
-		</p-panel>
 	</div>
 </div>

@@ -57,4 +57,13 @@
       </p-column>-->
    </p-dataTable>
 </div>
-<p-confirmDialog width="400"></p-confirmDialog>
+<p-dialog header="Confirmación" [(visible)]="displayDialog"
+			 responsive="true" modal="true">
+	<p>{{ 'CONSTANTES.MSG_CONFIRMAGUARDAR' | translate }}</p>
+	<p-footer>
+		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+			<button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="{{ 'BTN_NO' | translate }}"></button>
+			<button type="button" pButton icon="fa-check" (click)="goBack()" label="{{ 'BTN_SI' | translate }}"></button>
+		</div>
+	</p-footer>
+</p-dialog>
