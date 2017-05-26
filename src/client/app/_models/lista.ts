@@ -7,4 +7,5 @@ export class Lista {
    public auditoriaUsuario: number;
    public auditoriaFecha: Date;
    public descripcion: string;
+   public idRol: number;
 }

@@ -5,14 +5,17 @@ import { Component } from '@angular/core';
 import { Lista } from '../_models/lista';
 import { ListaService } from '../_services/lista.service';
 import { Router } from '@angular/router';
+import { NavService } from '../_services/_nav.service';
 @Component( {
                moduleId: module.id,
                templateUrl: 'lista.component.html'
             } )
 export class ListaComponent {
    listadoListas: Lista[];
+   busqueda:string;
 
-   constructor( private listaService: ListaService, private router: Router ) {
+   constructor( private listaService: ListaService, private router: Router, private navService:NavService ) {
+      this.busqueda = this.navService.getSearch( 'listas.component' );
       listaService.getMasterList().subscribe( res => {
          this.listadoListas = res;
       } );
@@ -28,5 +31,8 @@ export class ListaComponent {
 
    addList() {
       this.router.navigate( [ 'listas/add' ] );
+   }
+   setSearch() {
+      this.navService.setSearch( 'listas.component', this.busqueda );
    }
 }

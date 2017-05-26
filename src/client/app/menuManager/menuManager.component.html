@@ -44,10 +44,8 @@
                         <label for="nombre" class="control-label col-sm-3">* {{ 'LBL_NOMBRE' | translate }} </label>
                         <div class=" col-sm-9">
                            <input type="text" pInputText class="form-control" id="nombre"
-                                  name="nombre"
-                                  [(ngModel)]="menus.menu"
-                                  #nombre="ngModel"
-                                  (keyup)="capitalizeName()"
+                                  name="nombre" [(ngModel)]="menus.menu" #nombre="ngModel"
+                                  (keyup)="capitalizeName()" maxlength="64"
                                   required/>
                            <div class="ui-message ui-messages-error ui-corner-all"
                                 *ngIf="f.submitted && !nombre.valid">{{ 'ADMINMENUS.MSG_NOMBREREQUERIDO' | translate }}
@@ -74,8 +72,8 @@
                      <div class="form-group">
                         <label for="secuencia" class="control-label col-sm-3">* {{ 'ADMINMENUS.LBL_SECUENCIA' | translate }} </label>
                         <div class=" col-sm-9">
-                           <input type="number" pInputText class="form-control" id="secuencia" name="secuencia"
-                                  [(ngModel)]="menus.secuencia"
+                           <input type="text" pInputText class="form-control" id="secuencia" name="secuencia"
+                                  [(ngModel)]="menus.secuencia" (keyup)="inputNumber()"
                                   #orden="ngModel"
                                   required/>
                            <div class="ui-message ui-messages-error ui-corner-all"
@@ -89,7 +87,7 @@
                         <label for="clase" class="control-label col-sm-3">* {{ 'ADMINMENUS.LBL_CLASE' | translate }} </label>
                         <div class=" col-sm-9">
                            <input type="text" pInputText class="form-control" id="clase" name="clase"
-                                  [(ngModel)]="menus.clase"
+                                  [(ngModel)]="menus.clase" maxlength="100"
                                   #clase="ngModel"
                                   required/>
                            <div class="ui-message ui-messages-error ui-corner-all"

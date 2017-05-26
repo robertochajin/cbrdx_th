@@ -3,6 +3,7 @@ import { FaultsAndSanctions } from '../_models/faultsAndSanctions';
 import { FaultsAndSanctionsService } from '../_services/faultsAndSanctions.service';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/primeng';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -16,10 +17,13 @@ export class FaultsAndSanctionsComponent implements OnInit {
    fault: FaultsAndSanctions = new FaultsAndSanctions();
    dialogObjet: FaultsAndSanctions = new FaultsAndSanctions();
    faults: FaultsAndSanctions[];
+   busqueda: string;
 
    constructor( private faultsAndSanctionsService: FaultsAndSanctionsService,
       private router: Router,
+      private navService:NavService,
       private confirmationService: ConfirmationService ) {
+      this.busqueda = this.navService.getSearch( 'faults-and-sanctions.component' );
    }
 
    ngOnInit() {
@@ -55,6 +59,9 @@ export class FaultsAndSanctionsComponent implements OnInit {
 
    update( FaS: FaultsAndSanctions ) {
       this.router.navigate( [ 'faults/update/' + FaS.idFalta ] );
+   }
+   setSearch() {
+      this.navService.setSearch( 'faults-and-sanctions.component', this.busqueda );
    }
 
 }
