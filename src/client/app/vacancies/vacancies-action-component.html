@@ -16,7 +16,7 @@
 					<p>{{ vacancy.justificacion }}</p>
 				</div>
 				
-				<div *ngIf="permitido">
+				<div *ngIf="permitido" style="width: 80%; margin: 0 auto;">
 					<div class="row">
 						<label for="acciones">{{ 'LBL_ACCIONES' | translate}}</label>
 						<p-dropdown id="acciones" name="acciones" required="true"
@@ -67,7 +67,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-2 col-md-offset-10">
+						<div class="form-footer-buttons">
 							<button pButton label="{{ 'LBL_ENVIAR' | translate}}" type="submit"></button>
 						</div>
 					</div>
