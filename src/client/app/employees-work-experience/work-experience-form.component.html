@@ -139,7 +139,7 @@
                       </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-5">
                           <label for="ingreso">* {{'EMPLOYEES.LBL_INGRESO' | translate }}</label>
                           <p-calendar id="ingreso" name="ingreso" #ingreso="ngModel" dateFormat="yy'-'mm'-'dd"
                                       (onSelect)="onSelectMethodCalendarIngreso($event)" [showIcon]="true"
@@ -160,7 +160,7 @@
                                           [(ngModel)]="experience.indicadorActualmente">
                           </p-toggleButton>
                         </div>
-                        <div class="form-group col-md-4" *ngIf="!experience.indicadorActualmente">
+                        <div class="form-group col-md-5" *ngIf="!experience.indicadorActualmente">
                           <label for="finalizacion">* {{'EMPLOYEES.LBL_FINALIZACION' | translate }}</label>
                           <p-calendar id="finalizacion" name="finalizacion" #finalizacion="ngModel" dateFormat="yy'-'mm'-'dd"
                                       (onSelect)="onSelectMethodCalendarFinalizacion($event)" [showIcon]="true" required="true"

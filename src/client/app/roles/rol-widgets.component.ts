@@ -6,6 +6,7 @@ import { WidgetServices } from '../_services/widget.service';
 import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
 import { RolWidgets } from '../_models/rolWidgets';
 import { RolWidgetsServices } from '../_services/rolWidgets.service';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -31,6 +32,7 @@ export class RolWidgetsComponent implements OnInit {
    constructor( private rolWidgetsServices: RolWidgetsServices,
       private router: Router,
       private route: ActivatedRoute,
+      private _nav: NavService,
       private confirmationService: ConfirmationService,
       private widgetServices: WidgetServices, ) {
 
@@ -65,13 +67,13 @@ export class RolWidgetsComponent implements OnInit {
          this.rolWidgetsServices.add( this.rolWidget )
          .subscribe( data => {
             this.widgets.splice( this.widgets.indexOf( this.widgets.find( m => m.value === this.rolWidget.idWidget ) ), 1 );
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            this._nav.setMesage( 1, this.msgs );
             this.rolWidgetsServices.getAllByRol( this.idRol ).subscribe(
                rolWidgets => this.rolWidgets = rolWidgets
             );
          }, error => {
             this.showForm = true;
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            this._nav.setMesage( 3, this.msgs );
          } );
       } else {
          this.isUpdating = false;
@@ -79,13 +81,13 @@ export class RolWidgetsComponent implements OnInit {
          .subscribe( data => {
             this.isUpdating = false;
             this.widgets.splice( 0, 1 );
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            this._nav.setMesage( 2, this.msgs );
             this.rolWidgetsServices.getAllByRol( this.idRol ).subscribe(
                rolWidgets => this.rolWidgets = rolWidgets
             );
          }, error => {
             this.showForm = true;
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            this._nav.setMesage( 3, this.msgs );
          } );
       }
 

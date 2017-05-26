@@ -13,6 +13,7 @@ import { Employee } from '../_models/employees';
 import * as moment from 'moment/moment';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
+import { ZonesServices } from '../_services/zones.service';
 
 @Component( {
                moduleId: module.id,
@@ -45,10 +46,12 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    badEmployee = true;
    range: string;
    contracTypeList: SelectItem [] = [];
+   listZonas: SelectItem [] = [];
    treedCompany: TreeNode[] = [];
    selectedNode: TreeNode;
    es: any;
    maxDate: Date = null;
+   indicadorZonaPosition = false;
 
    constructor( private positionsService: PositionsService,
       private ospService: OrganizationalStructurePositionsServices,
@@ -56,6 +59,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
       private organizationalStructureService: OrganizationalStructureService,
       private personPositionService: PersonPositionsServices,
       private listaService: ListaService,
+      private zonesServices: ZonesServices,
       private confirmationService: ConfirmationService ) {
 
       organizationalStructureService.getAllEnabled().subscribe( res => {
@@ -220,6 +224,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
          this.osPosition.idCargo = event.idCargo;
          this.osPosition.cargo = event.cargo;
          this.osPosition.salario = event.salario;
+         this.indicadorZonaPosition = event.indicadorZona;
          this.badPostion = false;
          this.positionRepeated = false;
       } else {
@@ -330,7 +335,15 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    }
 
    editPersonSlot( pp: PersonPositions ) {
-
+      this.positionsService.get(pp.idCargo).subscribe(res=>{
+         this.indicadorZonaPosition= res.indicadorZona;
+      });
+      this.zonesServices.getAllByOrganizationalStructure( this.area.idEstructuraOrganizacional ).subscribe( res => {
+         this.listZonas.push( { label: 'Seleccione', value: null } );
+         for(let s of res) {
+            this.listZonas.push( { label: s.zona, value: s.idZona } );
+         }
+      } );
       this.backUpPersonsPosition = new PersonPositions();
       this.backUpPersonsPosition = pp;
       this.personsPosition = JSON.parse( JSON.stringify( pp ) );

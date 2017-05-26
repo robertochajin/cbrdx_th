@@ -38,6 +38,7 @@ export class UserSessionComponent implements OnInit {
    svcThUrl = '<%= SVC_TH_URL %>/api/upload';
    image: string;
    eye = 'fa-eye-slash';
+   ldap = false;
 
    constructor( private employeeService: EmployeesService,
       private usuariosService: UsuariosService,
@@ -57,7 +58,7 @@ export class UserSessionComponent implements OnInit {
 
       this.image = this.usuarioLogueado.avatar;
       let idUsuario = this.usuarioLogueado.usuario.idUsuario;
-
+      this.ldap = this.usuarioLogueado.usuario.usuarioLdap;
       this.usuariosService.viewUser( idUsuario ).subscribe( data => {
          this.user = data;
          this.employeeService.get( this.user.idTercero ).subscribe( employee => {
