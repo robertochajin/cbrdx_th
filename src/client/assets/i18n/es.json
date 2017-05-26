@@ -29,6 +29,7 @@
   "LBL_NUEVA":"Nueva",
   "LBL_ID":"Id",
   "LBL_CODIGO":"Código",
+  "LBL_OBLIGATORIO":"Obligatorio",
   "LBL_NOMBRE":"Nombre",
   "LBL_ESTADO":"Estado ",
   "LBL_DETALLE":"Detalle",
@@ -472,6 +473,7 @@
       "MSG_ROLMODIFICAREQUERIDO":"Rol que modifica es requerido",
       "LBL_ELEMENTLISTA":"Elementos de la Lista",
       "LBL_ITEMLISTA":"Item",
+      "LISTAS.LBL_CODIGOREGISTRADO":"Este código ya se encuentra regstrado ",
       "MSG_NOMBRELISTA":"Debe ingresar el nombre de la Lista.",
       "MSG_LISTAMAYUSCULA":"El nombre debe comenzar por una letra mayúscula.",
       "MSG_LISTA40CARACTERES":"La lista no debe tener mas de 40 caracteres.",
@@ -702,6 +704,7 @@
    "PLANTACOLABORADORES": {
       "LBL_PLANTACOLAB":"Planta de Colaboradores",
       "LBL_AREA":"Área",
+      "LBL_ZONA":"Zona",
       "LBL_AREATRABAJO":"Área de trabajo",
       "MSG_NODO":"Por favor, seleccione un nodo de tipo área de la estructura organizacional",
       "MSG_INFOAREA":"Información del área",
