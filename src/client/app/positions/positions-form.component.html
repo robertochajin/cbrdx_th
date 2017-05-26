@@ -1,6 +1,6 @@
 <p-messages [value]="msgs"></p-messages>
 <div class="row">
-   <div class="col-md-12">
+   <div class="col-md-10 col-md-offset-1">
       <p-accordion (onOpen)="onTabShow($event)" id="accordion">
          <p-accordionTab header="{{ 'POSITION.LBL_IDENTIFICACION' | translate }}" [selected]="acordion == 0 || acordion == null " [disabled]="step ==1">
             <fieldset>
@@ -195,12 +195,12 @@
                                  </div>
                               </div>
                            </div>
-                           <div class="row form-footer-buttons">
-                              <div class="form-group col-md-12">
-                                 <button icon="fa-arrow-right" label="{{ 'BTN_SIGUIENTE' | translate }}" type="submit"
-                                         pButton></button>
-                              </div>
-                           </div>
+									<div class="row form-footer-buttons">
+										<div class="form-group col-md-12">
+											<button icon="fa-arrow-right" label=" {{ 'BTN_SIGUIENTE' | translate }}" type="submit"
+													  pButton></button>
+										</div>
+									</div>
                         </form>
                      </div>
                   </div>
@@ -307,14 +307,16 @@
                               </div>
                            </div>
                            <position-authorities *ngIf="position.idCargo" [position]="position"></position-authorities>
-                           <div class="row form-footer-buttons">
+                           <div class="row">
                               <div class="form-group">
                                  <div class="col-md-10">
                                  </div>
-                                 <div class="form-group col-md-2">
-                                    <button icon="fa-arrow-right" label="{{ 'BTN_SIGUIENTE' | translate }}" type="submit"
-                                            pButton></button>
-                                 </div>
+											<div class="row form-footer-buttons">
+												<div class="form-group col-md-12">
+													<button icon="fa-arrow-right" label="{{ 'BTN_SIGUIENTE' | translate }}" type="submit"
+															  pButton></button>
+												</div>
+											</div>
                               </div>
                            </div>
                         </form>
@@ -422,13 +424,16 @@
 
                            </div>
                            <position-activities *ngIf="position.idCargo" [position]="position"></position-activities>
-                           <div class="ui-grid-row form-footer-buttons">
+                           <div class="ui-grid-row">
                               <div class="ui-grid-col-10">
                                  <p-messages *ngIf="alertOcu" [value]="msgOcupaciones"></p-messages>
                               </div>
-                              <div class="ui-grid-col-2 pull-right">
-                                 <button pButton label="Siguiente" type="submit" ></button>
-                              </div>
+										<div class="row form-footer-buttons">
+											<div class="form-group col-md-12">
+												<button icon="fa-arrow-right" label="{{ 'BTN_SIGUIENTE' | translate }}" type="submit"
+														  pButton></button>
+											</div>
+										</div>
                            </div>
                            <!--<div class="row form-footer-buttons">
                               <div class="form-group col-md-12">

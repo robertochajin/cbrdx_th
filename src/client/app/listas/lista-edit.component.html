@@ -1,10 +1,11 @@
+<div class="col-md-10 col-md-offset-1">
 <h3>{{ 'LISTAS.LBL_LISTAS' | translate }}</h3>
-<div class="col-md-6 col-sm-offset-3">
-<h4>{{ 'LISTAS.LBL_PARAMETROSLISTA' | translate }}</h4>
-    <form #f="ngForm" class="form-horizontal" (ngSubmit)="!codeExists&&f.form.valid&&createMaster(f)" novalidate
+	<div class="col-md-12">
+   <p-panel header="{{ 'LISTAS.LBL_PARAMETROSLISTA' | translate }}">
+		<fieldset>
+	<form #f="ngForm" class="form-horizontal" (ngSubmit)="!codeExists&&f.form.valid&&createMaster(f)" novalidate
           (keydown.enter)="$event.preventDefault()">
-		 <div class="row">
-
+		 <div class="row col-md-6 col-md-offset-3">
 			 <div class="form-group">
 				 <label class="control-label col-md-3" for="idLista">{{ 'LBL_ID' | translate }}</label>
 				 <div class="col-md-9">
@@ -54,7 +55,9 @@
 			 </div>
 		 </div>
     </form>
-</div>
+		</fieldset>
+	</p-panel>
+	</div>
 <div class="col-md-12">
 <p-panel header="{{ 'LISTAS.LBL_ELEMENTLISTA' | translate }}">
     <form *ngIf="!isEdit && masterList.indicadorEditable" name="form" (ngSubmit)="!detailCodeExists&&fd.form.valid && createDetail(fd)" #fd="ngForm"
@@ -105,7 +108,7 @@
 			  <div class="col-md-6 col-md-offset-3">
 						<div class="row form-footer-buttons">
 							<div class="col-md-12 ">
-								<a (click)="displayDetailDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+								<a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
 								<button type="submit" pButton icon="fa-check" label="{{ 'BTN_AGREGAR' | translate }}"
 										  (keydown.enter)="submitDetail.click()"
 										  #submitDetail></button>
@@ -199,29 +202,9 @@
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="{{ 'BTN_NO' | translate }}" autofocus></button>
-            <button type="button" pButton icon="fa-check" (click)="clearMaster()" label="{{ 'BTN_SI' | translate }}"></button>
-        </div>
-    </p-footer>
-</p-dialog>
-<p-dialog header="Confirmación" [(visible)]="displayReturnDialog"
-          responsive="true" modal="true">
-    <p>{{ 'LISTAS.MSG_CONFIRMACIONCANCELAR' | translate }}</p>
-    <p-footer>
-        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="fa-close" (click)="displayReturnDialog=false" label="{{ 'BTN_NO' | translate }}"
-                    autofocus></button>
             <button type="button" pButton icon="fa-check" (click)="goBack()" label="{{ 'BTN_SI' | translate }}"></button>
         </div>
     </p-footer>
 </p-dialog>
-<p-dialog *ngIf="displayDetailDialog" header="{{ 'LBL_CONFIRMACION' | translate }}" [(visible)]="displayDetailDialog"
-          responsive="true" modal="true">
-    <p>{{ 'LISTAS.MSG_CONFIRMACIONSALIR' | translate }}</p>
-    <p-footer>
-        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="fa-close" (click)="displayDetailDialog=false" label="{{ 'BTN_NO' | translate }}"
-                    autofocus></button>
-            <button type="button" pButton icon="fa-check" (click)="clearDetail()" label="{{ 'BTN_SI' | translate }}"></button>
-        </div>
-    </p-footer>
-</p-dialog>
+
+</div>
