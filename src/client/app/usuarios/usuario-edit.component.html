@@ -57,7 +57,7 @@
 
         <p-panel header="{{ 'USUARIOS.LBL_INFOCONTACTO' | translate }}" *ngIf="isTerceroSet">
 			  <fieldset>
-            <form class="form-horizontal" #fu="ngForm" (ngSubmit)="!sameUser&&fu.form.valid && displayUpdate()"
+            <form class="form-horizontal" #fu="ngForm" novalidate (ngSubmit)="!sameUser&&fu.form.valid && displayUpdate()"
                   novalidate autocomplete="off">
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -117,14 +117,14 @@
                         </div>
                     </div>
                 </div>
+					<div class="row form-footer-buttons">
+					   <div class="form-group col-md-12">
+					      <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+					      <button pButton type="submit" label="{{ 'BTN_ACTUALIZAR' | translate }}"></button>
+					   </div>
+					</div>
             </form>
 			  </fieldset>
-			  <div class="row form-footer-buttons">
-				  <div class="form-group col-md-12">
-					  <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
-					  <button pButton type="submit" label="{{ 'BTN_ACTUALIZAR' | translate }}"></button>
-				  </div>
-			  </div>
         </p-panel>
 
     </p-tabPanel>
