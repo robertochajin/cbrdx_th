@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <p-dataTable [value]="faults" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+    <p-dataTable  emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="faults" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
         <p-column field="tipoFalta" header="{{'LBL_TIPO' | translate }}" [sortable]="true"></p-column>
         <p-column field="falta" header="{{'LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
         <p-column field="accion" header="{{'LBL_ACCION' | translate }} " [sortable]="true"></p-column>
