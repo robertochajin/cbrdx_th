@@ -1,8 +1,8 @@
 <h3>{{ 'USUARIOS.LBL_USUARIOS' | translate }}</h3>
 <p-tabView>
     <p-tabPanel header="{{ 'USUARIOS.LBL_DATOSUSER' | translate }}">
-        <p-fieldset legend="{{ 'USUARIOS.LBL_DATOSTERCERO' | translate }}" *ngIf="isTerceroSet">
-
+        <p-panel header="{{ 'USUARIOS.LBL_DATOSTERCERO' | translate }}" *ngIf="isTerceroSet">
+				<fieldset>
             <div class="col-md-3">
                 <div class="ui-grid-col-10">
                     <img class="thumbnail img-responsive"
@@ -52,9 +52,11 @@
                             label="{{ 'BTN_EDITAR' | translate }}"></button>
                 </div>
             </div>
-        </p-fieldset>
+				</fieldset>
+        </p-panel>
 
-        <p-fieldset legend="{{ 'USUARIOS.LBL_INFOCONTACTO' | translate }}" *ngIf="isTerceroSet">
+        <p-panel header="{{ 'USUARIOS.LBL_INFOCONTACTO' | translate }}" *ngIf="isTerceroSet">
+			  <fieldset>
             <form class="form-horizontal" #fu="ngForm" (ngSubmit)="!sameUser&&fu.form.valid && displayUpdate()"
                   novalidate autocomplete="off">
                 <div class="col-sm-6">
@@ -63,7 +65,7 @@
                         <div class="col-sm-8">
                             <input name="uSistema" id="uSistema" type="text" pInputText #uSistema="ngModel"
                                    [(ngModel)]="usuario.usuarioSistema" required maxlength="80"
-                                   pattern="[a-z0-9]+([-._]?[a-z0-9]+)+"
+                                   pattern="([0-9]+|([a-z0-9ñ]+([-._/]{1}[a-z0-9ñ]+))?)"
                                    (keyup)="userCleanUp($event.target.value);validateCreationUser();"/>
                             <div *ngIf="sameUser" class="alert alert-danger">{{ 'USUARIOS.MSG_USUARIOEXISTE' | translate }}
                             </div>
@@ -114,17 +116,21 @@
                                         [(ngModel)]="usuario.indicadorHabilitado" binary="true"></p-checkbox>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
-                        <button pButton type="submit" label="{{ 'BTN_ACTUALIZAR' | translate }}"></button>
-                    </div>
                 </div>
             </form>
-        </p-fieldset>
+			  </fieldset>
+			  <div class="row form-footer-buttons">
+				  <div class="form-group col-md-12">
+					  <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+					  <button pButton type="submit" label="{{ 'BTN_ACTUALIZAR' | translate }}"></button>
+				  </div>
+			  </div>
+        </p-panel>
 
     </p-tabPanel>
     <p-tabPanel header="{{ 'USUARIOS.LBL_ROLESGRUPOS' | translate }}" *ngIf="isUserCreated">
-        <p-fieldset>
+        <p-panel header="Agregar Rol o Grupo de Gestión">
+			  <fieldset>
             <div class="ui-grid-row">
                 <div class="col-sm-6">
                     <form #rolesForm="ngForm" class="form-horizontal" *ngIf="creatingRol"
@@ -169,7 +175,7 @@
                             </div>
                         </div>
                         <div class="row form-footer-buttons">
-                                <div class="form-group col-md-6 pull-right">
+                                <div class="form-group col-md-6">
                                 <button pButton type="submit" label="{{ 'BTN_AGREGAR' | translate }}"></button>
                             </div>
                         </div>
@@ -268,11 +274,14 @@
                     </p-dataTable>
                 </div>
             </div>
-
-            <div class="pull-right form-footer-buttons">
-                <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_REGRESAR' | translate }}</a>
-            </div>
-        </p-fieldset>
+				  <div class="row form-footer-buttons">
+					  <div class="form-group col-md-12">
+						  <button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate }}" type="button"
+									 pButton (click)="goBack()"></button>
+					  </div>
+				  </div>
+			  </fieldset>
+        </p-panel>
     </p-tabPanel>
     <p-tabPanel header="{{ 'USUARIOS.LBL_HISTORIAL' | translate }}" rightIcon="fa-calendar" *ngIf="isUserCreated">
         <div class="row datable-header">

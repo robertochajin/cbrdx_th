@@ -7,6 +7,11 @@ import { ListaItem } from '../_models/listaItem';
 import { Message } from 'primeng/primeng';
 import 'rxjs/add/operator/switchMap';
 import { NavService } from '../_services/_nav.service';
+import { FormSharedModule } from '../shared/form-shared.module';
+import { ConstanteService } from '../_services/constante.service';
+import { Rol } from '../_models/rol';
+import { RolesService } from '../_services/roles.service';
+
 @Component( {
                moduleId: module.id,
                templateUrl: 'lista-edit.component.html'
@@ -25,8 +30,14 @@ export class ListaEditComponent implements OnInit {
    isEdit = false;
    displayUpdateDialog = false;
    msgs: Message[] = [];
+   constante: string[] = [];
+   roles: Rol[] = [];
 
-   constructor( private listaService: ListaService, private router: Router, private route: ActivatedRoute,
+   constructor( private listaService: ListaService,
+      private router: Router,
+      private route: ActivatedRoute,
+      private rolesService: RolesService,
+      private constanteService: ConstanteService,
       private _nav: NavService, ) {
    }
 
@@ -36,6 +47,29 @@ export class ListaEditComponent implements OnInit {
          this.masterList = data;
          this.listaService.getMasterAllDetails( this.masterList.nombreTabla ).subscribe( res => {
             this.detailsList = res;
+         } );
+      } );
+      this.constanteService.listConstants().subscribe( data => {
+         let temp2: string;
+         let temp = data.find( c => c.constante === 'ADMLIS' );
+
+         this.rolesService.listRoles().subscribe( data => {
+            if ( temp ) {
+               temp2 = temp.valor;
+               this.constante = temp2.split( ',' );
+               if ( this.constante.length > 0 ) {
+                  for ( let c of this.constante ) {
+                     let rol = data.find( r => r.codigoRol === c );
+                     if ( rol ) {
+                        this.roles.push( rol );
+                     }
+                  }
+               } else {
+                  this.roles = data;
+               }
+            } else {
+               this.roles = data;
+            }
          } );
       } );
    }
@@ -49,7 +83,7 @@ export class ListaEditComponent implements OnInit {
 
    createMaster( f: NgForm ) {
       this.listaService.updateMaster( this.masterList ).then( res => {
-         this.displayUpdateDialog = true;
+         this._nav.setMesage( 1, this.msgs );
       } );
    }
 
@@ -114,5 +148,9 @@ export class ListaEditComponent implements OnInit {
 
    goBack(): void {
       this.router.navigate( [ 'listas' ] );
+   }
+   capitalize( event: any ) {
+      let input = event.target.value;
+      event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
    }
 }

@@ -1,6 +1,3 @@
-/**
- * Created by Felipe Aguirre - Jenniferth Escobar on 03/02/2017.
- */
 import { NgModule } from '@angular/core';
 import {
    InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule, CalendarModule, TreeModule, TabViewModule, DropdownModule,
@@ -14,12 +11,14 @@ import { DivisionPoliticaService } from '../_services/divisionPolitica.service';
 import { DivisionPoliticaComponent } from './divisionPolitica.component';
 import { SharedModule } from '../shared/shared.module';
 import { AutoCompleteModule } from 'primeng/components/autocomplete/autocomplete';
+import { FormSharedModule } from '../shared/form-shared.module';
+
 
 @NgModule( {
               imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule,
                  CalendarModule, TreeModule, TabViewModule, DropdownModule, SharedModule,
                  FieldsetModule,
-                 GrowlModule,
+                 GrowlModule, FormSharedModule,
                  AutoCompleteModule
               ],
               declarations: [ DivisionPoliticaComponent ],

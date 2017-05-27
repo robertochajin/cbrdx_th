@@ -6,7 +6,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Noformalstudies } from './no-formal-studies';
 import { Message, ConfirmationService } from 'primeng/primeng';
 import * as moment from 'moment/moment';
-import { StudyLevelServices } from '../_services/study-level.service';
 import { NavService } from '../_services/_nav.service';
 import { PoliticalDivisionService } from '../_services/political-division.service';
 import { ListaService } from '../_services/lista.service';
@@ -45,7 +44,6 @@ export class NoFormalStudiesAddComponent implements OnInit {
    // hace falta definir acceso a constantes en servicio
 
    constructor( private academicEducationService: AcademicEducationService,
-      private studyLevelServices: StudyLevelServices,
       private listaService: ListaService,
       private confirmationService: ConfirmationService,
       private politicalDivisionService: PoliticalDivisionService,

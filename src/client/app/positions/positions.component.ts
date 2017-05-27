@@ -3,6 +3,7 @@ import { Positions } from '../_models/positions';
 import { PositionsService } from '../_services/positions.service';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/primeng';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -16,10 +17,13 @@ export class PositionsComponent implements OnInit {
    position: Positions = new Positions();
    positions: Positions[];
    dialogObjet: Positions = new Positions();
+   busqueda: string;
 
    constructor( private positionsService: PositionsService,
       private router: Router,
+      private navService:NavService,
       private confirmationService: ConfirmationService ) {
+      this.busqueda = this.navService.getSearch( 'positions.component' );
    }
 
    ngOnInit() {
@@ -60,6 +64,9 @@ export class PositionsComponent implements OnInit {
 
    update( c: Positions ) {
       this.router.navigate( [ 'positions/update/' + c.idCargo ] );
+   }
+   setSearch() {
+      this.navService.setSearch( 'positions.component', this.busqueda );
    }
 
 }

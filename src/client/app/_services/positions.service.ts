@@ -29,6 +29,10 @@ export class PositionsService {
       return this.authHttp.get( this.serviceURL + 'cargos' + '/wildcard/' + query ).map( ( res: Response ) => res.json() );
    }
 
+   getByWildCardAndArea( query: string, idArea: number ) {
+      return this.authHttp.get( this.serviceURL + 'cargos' + '/search/' + query + '/' + idArea).map( ( res: Response ) => res.json() );
+   }
+
    getListPositions() {
       return this.authHttp.get( this.serviceURL + 'cargos/enabled' ).map( ( res: Response ) => res.json() );
    }
@@ -94,6 +98,16 @@ export class PositionsService {
 
    get( id: number ) {
       return this.authHttp.get( this.serviceURL + 'cargos/' + id ).map( ( res: Response ) => {
+         if ( res.text() !== '' ) {
+            return res.json() as Positions;
+         } else {
+            return new Positions;
+         }
+      } ).catch( this.handleError );
+   }
+
+   getEnabledByEmployee( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'cargos/enabledByEmployee' + id ).map( ( res: Response ) => {
          if ( res.text() !== '' ) {
             return res.json() as Positions;
          } else {

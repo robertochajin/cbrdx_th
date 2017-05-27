@@ -52,5 +52,15 @@ export class OrganizationalStructurePositionsServices {
       return Promise.reject( error.message || error );
    }
 
+   getByPositionAndOrganizationalStructure(idPosition:number, idOrganizationalEstructure:number) {
+      return this.authHttp.get( this.masterService + 'buscarCargoEstructura/' + idPosition +'/'+ idOrganizationalEstructure )
+      .map( ( res: Response ) => {
+         if(res.text() !== ''){
+            return res.json() as OrganizationalStructurePositions;
+         } else {
+            return undefined;
+         }
+      });
+   }
 }
 

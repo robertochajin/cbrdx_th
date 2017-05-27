@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { VConstante } from '../_models/vConstante';
+import { VConstante } from '../_models/vconstante';
 import { ConstanteService } from '../_services/constante.service';
 import { Router } from '@angular/router';
+import { NavService } from '../_services/_nav.service';
 /**
  * Created by Felipe Aguirre - Jenniferth Escobar on 24/02/2017.
  */
@@ -13,8 +14,10 @@ import { Router } from '@angular/router';
 export class ConstanteComponent implements OnInit {
 
    listadoConstantes: VConstante[];
+   busqueda: string;
 
-   constructor( private constanteService: ConstanteService, private router: Router ) {
+   constructor( private constanteService: ConstanteService, private router: Router, private navService: NavService ) {
+      this.busqueda = this.navService.getSearch( 'constante.component' );
    }
 
    ngOnInit(): void {
@@ -31,5 +34,9 @@ export class ConstanteComponent implements OnInit {
 
    viewConstant( constanData: VConstante ) {
       this.router.navigate( [ 'constantes/detail/', constanData.idConstante ] );
+   }
+
+   setSearch() {
+      this.navService.setSearch( 'constante.component', this.busqueda );
    }
 }

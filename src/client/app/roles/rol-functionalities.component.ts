@@ -5,6 +5,7 @@ import { RolFuncionalities } from '../_models/rolFuncionalities';
 import { RolFuncionalitiesServices } from '../_services/rolFuncionalities.service';
 import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
 import { FormManagerService } from '../_services/form-manager.service';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -29,6 +30,7 @@ export class RolFuncionalitiesComponent implements OnInit {
    constructor( private rolFuncionalitiesService: RolFuncionalitiesServices,
       private router: Router,
       private route: ActivatedRoute,
+      private _nav: NavService,
       private confirmationService: ConfirmationService,
       private formManagerService: FormManagerService, ) {
 
@@ -65,13 +67,13 @@ export class RolFuncionalitiesComponent implements OnInit {
          this.rolFuncionalitiesService.add( this.rolFuncionality )
          .subscribe( data => {
             this.menus.splice( this.menus.indexOf( this.menus.find( m => m.value === this.rolFuncionality.idFuncionalidad ) ), 1 );
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            this._nav.setMesage( 1, this.msgs );
             this.rolFuncionalitiesService.getAllByRol( this.idRol ).subscribe(
                funcionalities => this.funcionalities = funcionalities
             );
          }, error => {
             this.showForm = true;
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            this._nav.setMesage( 3, this.msgs );
          } );
       } else {
 
@@ -79,13 +81,13 @@ export class RolFuncionalitiesComponent implements OnInit {
          .subscribe( data => {
             this.isUpdating = false;
             this.menus.splice( 0, 1 );
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            this._nav.setMesage( 2, this.msgs );
             this.rolFuncionalitiesService.getAllByRol( this.idRol ).subscribe(
                funcionalities => this.funcionalities = funcionalities
             );
          }, error => {
             this.showForm = true;
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            this._nav.setMesage( 3, this.msgs );
          } );
       }
 

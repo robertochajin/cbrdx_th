@@ -55,14 +55,49 @@ body .ui-widget:disabled {
 .ui-dropdown-panel{
    z-index : 800!important;
 }
+/** -- tabview Top-- */
+.ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active,
+.ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active{
+   background-color: #FFF!important;
+   font-weight: bold;
+}
+.ui-tabview.ui-tabview-top .ui-tabview-panel{
+   margin-top: -2px;
+   padding: 20px;
+}
+body .ui-tabview.ui-tabview-top .ui-tabview-nav li,
+body .ui-tabview.ui-tabview-left .ui-tabview-nav li{
+   background-color: #ccc;
+}
+body .ui-tabview.ui-tabview-top .ui-tabview-nav{
+   padding-top: 10px;
+   padding-left: 10px;
+}
+
 /** -- tabview Left/Rigth -- */
 .ui-tabview.ui-tabview-right>.ui-tabview-nav,
 .ui-tabview.ui-tabview-left>.ui-tabview-nav{
    height: auto!important;
 }
+/** -- Panel Left -- */
+body .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active{
+   border-bottom-width: 1px;
+   border-top-width: 1px;
+   border-right-width: 0px;
+   border-left-width:1px;
+}
+
+
+/** -- Panel -- */
+body .ui-panel{
+   margin-bottom : 10px;
+}
 /*
 ----------------- Cambios Theme AdminLTE ---------------------------------
  */
+.main-header {
+   z-index: 1000!important;
+}
 .wrapper-login > .content{
   padding: 0px;
 }
@@ -137,6 +172,14 @@ body .ui-widget:disabled {
 }
 .main-header .logo {
    background-color: #FFF!important;
+}
+/* -- TimeLine -- */
+.timeline > li > .fa{
+   color: #FFF!important;
+}
+.timeline > li > .timeline-item > .timeline-header{
+   background-color: #f5f5f5;
+   border: 1px solid #e6e6e6;
 }
 
 /**
@@ -222,6 +265,9 @@ a{
            box-shadow: 4px 4px 8px -2px #242424;
 
    text-align: center;
+   margin-left: 48px;
+   margin-top: 45px;
+
 }
 
 
@@ -555,9 +601,9 @@ a.cancelar:hover {
 }
 
 .datatable-header-search i {
-    margin: 4px 4px 0 0;
+    /* margin: 4px 4px 0 0; */
 }
-@media (min-width: 768px){
+@media (max-width: 768px){
    .datatable-header-search {
       margin-top: 10px;
    }
@@ -594,6 +640,26 @@ body .ui-paginator{
 .table-overflow .ui-datatable-data>tr>td{
    overflow: visible!important;
 }
+body .ui-datatable thead th.ui-state-active{
+   color: #000;
+   font-weight: bold;
+   background-color: #ccc;
+   border: 1px solid #ccc;
+}
+/* --- Buscador general unico --- */
+.uniSearch{
+   width: 80%!important;
+   margin-left: 10%!important;
+   margin-top: 40px!important;
+}
+.uniSearch input{
+   border-bottom-right-radius: 2em!important;
+   border-top-right-radius: 2em!important;
+}
+.uniSearch .input-group-addon{
+   border-bottom-left-radius: 2em!important;
+   border-top-left-radius: 2em!important;
+}
 
 /**
 ------------------------ Edit PrimeNG CSS ------------------------------
@@ -602,7 +668,6 @@ body .ui-paginator{
     overflow: auto;
 }
 body .ui-button,
-body .ui-state-active,
 body .ui-state-highlight{
     background-color: #5d5d5d!important;
 }
@@ -667,7 +732,10 @@ body .ui-tree .ui-treenode .ui-treenode-content .ui-tree-toggler {
 ---------------------------- COLOR CSS -------------------------------
 ----------------------------------------------------------------------
  */
-
+/* -- Link Blue -- */
+body.sky-blue a{
+   color: #29ABE2;
+}
 /* -- Botones Blue -- */
 body.skin-blue .ui-button:focus,
 body.skin-blue .ui-button:enabled:hover {
@@ -694,39 +762,39 @@ body.skin-blue .form-control:focus{
 body.skin-blue .user-avatar{
    border: 4px solid #29ABE2;
 }
+/* -- Tabs -- */
+body.skin-blue .ui-tabview .ui-tabview-panel{
+   border: 1px solid #29ABE2;
+}
+/* -- Tabs Top/left Blue-- */
+body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav,
+body.skin-blue .ui-tabview.ui-tabview-left .ui-tabview-nav{
+   background: #29ABE2;
+}
+body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active,
+body.skin-blue .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active{
+   border-color: #29ABE2;
+}
 
-
-
-/* -- Botones black -- */
-body.skin-black .ui-button:focus,
-body.skin-black .ui-button:enabled:hover {
-  background-color: #b1c800!important;
-  -webkit-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(177, 200, 0, 0.6);
-     -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(177, 200, 0, 0.6);
-          box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 2px rgba(177, 200, 0, 0.6);
+body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a,
+body.skin-blue .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active a{
+   color: #0275d8;
 }
-/* -- Paginador Black -- */
-body.skin-black .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active:hover {
-  background-color: #b1c800!important;
+/* -- Accordion Blue */
+body.skin-blue .ui-accordion .ui-accordion-header.ui-state-active {
+   background-color: #3c8dbc;
 }
-/* -- focus input text Black -- */
-body.skin-black .ui-inputtext.ui-state-focus,
-body.skin-black .ui-inputtext:focus {
-  border: 1px solid #29ABE2;
-}
-body.skin-black .form-control:focus{
-  border-color: #29ABE2!important;
-   -webkit-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(41, 171, 226, 0.6);
-      -moz-box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(41, 171, 226, 0.6);
-           box-shadow : inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(41, 171, 226, 0.6);
-}
-body.skin-black .user-avatar{
-   border: 4px solid #29ABE2;
+/* -- TimeLine -- */
+body.skin-blue .timeline > li > .fa{
+   background-color: #3c8dbc;
 }
 
 
 
-
+/* -- Link Green -- */
+body.sky-blue a{
+   color: #009c41;
+}
 /* -- Botones Green -- */
 body.skin-green .ui-button:focus,
 body.skin-green .ui-button:enabled:hover {
@@ -737,24 +805,51 @@ body.skin-green .ui-button:enabled:hover {
 }
 /* -- Paginador Green -- */
 body.skin-green .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active:hover {
-  background-color: #009c41!important;
+  background-color: #00A65A!important;
 }
 /* -- focus input text Green -- */
 body.skin-green .ui-inputtext.ui-state-focus,
 body.skin-green .ui-inputtext:focus {
-  border: 1px solid #009c41;
+  border: 1px solid #00A65A;
 }
 body.skin-green .form-control:focus{
-  border-color: #009c41!important;
+  border-color: #00A65A!important;
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0, 156, 65, 0.6);
 }
 body.skin-green .user-avatar{
-   border: 4px solid #009c41;
+   border: 4px solid #00A65A;
+}
+/* -- Tabs Green -- */
+body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav{
+   background: #00A65A;
+}
+body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav{
+   background: #00A65A;
+}
+body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active{
+   border-color: #00A65A;
+   color: #009c41;
+}
+body.skin-green .ui-tabview .ui-tabview-panel{
+   border: 1px solid #00A65A;
+}
+body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a{
+   color: #00A65A;
+}
+/* -- Accordion Green */
+body.skin-green .ui-accordion .ui-accordion-header.ui-state-active {
+   background-color: #00A65A;
+}
+/* -- TimeLine -- */
+body.skin-green .timeline > li > .fa{
+   background-color: #00A65A;
 }
 
 
-
-
+/* -- Link Purple -- */
+body.sky-blue a{
+   color: #605ca8;
+}
 /* -- Botones Purple -- */
 body.skin-purple .ui-button:focus,
 body.skin-purple .ui-button:enabled:hover {
@@ -779,6 +874,29 @@ body.skin-purple .form-control:focus{
 body.skin-purple .user-avatar{
    border: 4px solid #605ca8;
 }
+/* -- Tabs Purple -- */
+body.skin-purple .ui-tabview.ui-tabview-top .ui-tabview-nav{
+   background: #605ca8;
+}
+body.skin-purple .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active{
+   border-color: #605ca8;
+   color: #605ca8;
+}
+body.skin-purple .ui-tabview .ui-tabview-panel{
+   border: 1px solid #605ca8;
+}
+body.skin-purple .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a{
+   color: #605ca8;
+}
+/* -- Accordion Purple */
+body.skin-purple .ui-accordion .ui-accordion-header.ui-state-active {
+   background-color: #605ca8;
+}
+/* -- TimeLine -- */
+body.skin-purple .timeline > li > .fa{
+   background-color: #605ca8;
+}
+
 
 
 
@@ -788,11 +906,17 @@ li.inhabilitado{
    background-color: #ccc!important;
 }
 
-body .ui-tabview.ui-tabview-top .ui-tabview-nav, body .ui-tabview.ui-tabview-bottom .ui-tabview-nav, body .ui-tabview.ui-tabview-left .ui-tabview-nav, body .ui-tabview.ui-tabview-right .ui-tabview-nav{
+body .ui-tabview.ui-tabview-top .ui-tabview-nav,
+body .ui-tabview.ui-tabview-bottom .ui-tabview-nav,
+body .ui-tabview.ui-tabview-left .ui-tabview-nav,
+body .ui-tabview.ui-tabview-right .ui-tabview-nav{
    background: transparent;
 }
 body .ui-tabview .ui-tabview-panel{
    background-color: #FFF;
+}
+body .ui-tabview{
+   background-color: transparent;
 }
 
 .upload-avatar .ui-fileupload-buttonbar{
@@ -819,3 +943,42 @@ body .ui-tabview .ui-tabview-panel{
 #infoEmploye .ui-tabview.ui-tabview-right>.ui-tabview-panels{
    width: 86%!important;
 }
+ /* line de tiempo Requerimiento de personal */
+#cd-timeline {
+   position: relative;
+   float: left;
+}
+#cd-timeline::before {
+   /* this is the vertical line */
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 18px;
+   height: 100%;
+   width: 4px;
+   background: #d7e4ed;
+}
+#cd-timeline .cd-timeline-block{
+   padding: 1em 0;
+   border-top: 0.3125rem solid #d7e4ed;
+   margin: 0 0 0 2em;
+}
+
+.form-group{
+   margin-bottom: 0px;
+}
+
+.ui-grid-col-2 .ui-grid-col-1{
+   margin-top: 24px;
+}
+
+#tbvCompetenciasHabilidades ul.ui-tabview-nav {
+   height: 470px!important;
+   overflow: scroll;
+}
+
+#tbvCompetenciasHabilidades .ui-tabview-panel.ui-widget-content{
+   min-height: 470px;
+}
+
+

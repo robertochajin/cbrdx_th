@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Constante } from '../_models/constante';
-import { VConstante } from '../_models/vConstante';
+import { VConstante } from '../_models/vconstante';
 import { ConstanteService } from '../_services/constante.service';
 import { ListaService } from '../_services/lista.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';

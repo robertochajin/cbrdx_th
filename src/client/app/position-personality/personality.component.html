@@ -13,12 +13,20 @@
       </p-column>
    </p-dataTable>
 </div>
-<div class="ui-grid-row form-footer-buttons">
+<div class="ui-grid-row">
    <div class="ui-grid-col-10">
       <p-messages *ngIf="alert" [value]="msgsAlert"></p-messages>
    </div>
-   <div class="ui-grid-col-2 pull-right">
-      <button pButton label="{{ 'BTN_SIGUIENTE' | translate }}" type="button" (click)="next()"></button>
-   </div>
+	<div class="row form-footer-buttons">
+		<div class="form-group col-md-12">
+			<button icon="fa-arrow-right" label="{{ 'BTN_SIGUIENTE' | translate }}" type="button" (click)="next()"
+					  pButton></button>
+		</div>
+	</div>
 </div>
-<p-confirmDialog width="400"></p-confirmDialog>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>

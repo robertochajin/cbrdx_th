@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { OrganizationalStructureService } from '../_services/organizationalStructure.service';
 import { OrganizationalStructure } from '../_models/organizationalStructure';
-import { TreeNode } from 'primeng/components/common/api';
+import { TreeNode, ConfirmationService } from 'primeng/components/common/api';
 import { SelectItem, Message } from 'primeng/primeng';
 import { LocateService } from '../_services/locate.service';
 import { Localizaciones } from '../_models/localizaciones';
@@ -9,12 +9,14 @@ import { PoliticalDivisionService } from '../_services/political-division.servic
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
 import { NavService } from '../_services/_nav.service';
+import { ZonesServices } from '../_services/zones.service';
+import { Zones } from '../_models/zones';
 
 @Component( {
                moduleId: module.id,
                templateUrl: 'organizationalStructure.component.html',
                selector: 'organizational-structure',
-
+               providers: [ ConfirmationService ]
             } )
 export class OrganizationalStructureComponent {
    msg: Message;
@@ -39,12 +41,19 @@ export class OrganizationalStructureComponent {
    guardando = false;
    localizacion: Localizaciones = new Localizaciones();
 
+   // variables para administracion de zonas
+   public zone: Zones;
+   public zones: Zones[] = [];
+   public editingZone = false;
+   public safeZones= false;
+
    constructor( private organizationalStructureService: OrganizationalStructureService,
       private listaService: ListaService,
       private politicalDivisionService: PoliticalDivisionService,
       private locateService: LocateService,
-      private navService: NavService
-   ) {
+      private zonesServices: ZonesServices,
+      private navService: NavService,
+      private confirmationService: ConfirmationService ) {
       organizationalStructureService.listOrganizationalStructure().subscribe( res => {
          this.listOrganizationalStructure = res;
          if ( this.listOrganizationalStructure.length > 0 ) {
@@ -143,7 +152,7 @@ export class OrganizationalStructureComponent {
 
    capitalizeName() {
       let input = this.organizationalStructure.nombre;
-      if ( input !== '' && input !== null && input !== undefined) {
+      if ( input !== '' && input !== null && input !== undefined ) {
          this.organizationalStructure.nombre = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }
@@ -183,6 +192,7 @@ export class OrganizationalStructureComponent {
 
    nodeSelect( node: any ) {
 
+      this.editingZone = false;
       this.empresa = node.data.idPadre === 0 || node.data.idPadre === null || node.data.idPadre === undefined;
       this.organizationalStructureService.viewOrganizationalStructure( node.data.idEstructuraOrganizacional ).subscribe(
          organizationalStructure => {
@@ -206,6 +216,18 @@ export class OrganizationalStructureComponent {
                }
             } else {
                this.header = this.organizationalStructure.nombre;
+            }
+
+            if ( this.organizationalStructure.indicadorZona ) {
+               this.zonesServices.getAllByOrganizationalStructure( node.data.idEstructuraOrganizacional ).subscribe(
+                  zones => {
+                     this.zones = zones;
+                     this.safeZones = true;
+                  }
+               );
+            } else {
+               this.zones = [];
+               this.safeZones = false;
             }
 
          } );
@@ -274,6 +296,7 @@ export class OrganizationalStructureComponent {
                'leaf': false,
                'children': []
             };
+            this.safeZones = this.organizationalStructure.indicadorZona;
             this.listOrganizationalStructure.push( data );
             if ( this.organizationalStructure.idPadre === 0 ||
                  this.organizationalStructure.idPadre === null ||
@@ -296,7 +319,7 @@ export class OrganizationalStructureComponent {
             this.guardando = false;
             let typeMessage = 2; // 1 = Add, 2 = Update, 3 Error, 4 Custom
             this.navService.setMesage( typeMessage, this.msg );
-
+            this.safeZones = this.organizationalStructure.indicadorZona;
             this.selectedNode.data = this.organizationalStructure;
             this.selectedNode.label = this.organizationalStructure.nombre;
             this.header = this.organizationalStructure.nombre;
@@ -337,6 +360,77 @@ export class OrganizationalStructureComponent {
 
    toggleform() {
       this.addinglocation = !this.addinglocation;
+   }
+
+   saveZone() {
+      if ( this.zone.idZona !== undefined && this.zone.idZona !== null ) {
+         this.zonesServices.update( this.zone ).subscribe( res => {
+            if ( res.ok ) {
+               this.zones[this.zones.indexOf(this.zones.find(z => z.idZona === this.zone.idZona))] = this.zone;
+               this.navService.setMesage( 2 );
+               this.editingZone = false;
+            }
+         }, error => {
+            this.navService.setMesage( 3 );
+         } );
+      } else {
+         this.zone.idEstructuraOrganizacional = this.organizationalStructure.idEstructuraOrganizacional;
+         this.zone.indicadorHabilitado = true;
+         this.zonesServices.add( this.zone ).subscribe( res => {
+            if ( res ) {
+               this.zones.push( res );
+               this.editingZone = false;
+               this.navService.setMesage( 1 );
+            }
+         }, error => {
+            this.navService.setMesage( 3 );
+         } );
+      }
+   }
+
+   cancelEditingZone() {
+      this.confirmationService.confirm( {
+                                           message: ` ¿Esta seguro que cancelar la edición?`,
+                                           header: 'Corfirmación',
+                                           icon: 'fa fa-question-circle',
+                                           accept: () => {
+                                              this.zone = new Zones();
+                                              this.editingZone = false;
+                                           }
+                                        } );
+   }
+
+   editZone( zone: Zones ) {
+      if ( zone !== null ) {
+         this.zone = new Zones();
+         this.zone.codigo = zone.codigo;
+         this.zone.idZona = zone.idZona;
+         this.zone.idEstructuraOrganizacional = zone.idEstructuraOrganizacional;
+         this.zone.indicadorHabilitado = zone.indicadorHabilitado;
+         this.zone.auditoriaUsuario = zone.auditoriaUsuario;
+         this.zone.auditoriaFecha = zone.auditoriaFecha;
+         this.zone.zona = zone.zona;
+      } else {
+         this.zone = new Zones();
+         this.zone.codigo = this.organizationalStructure.codigo + '-' + this.getNextCode( this.zones );
+      }
+      this.editingZone = true;
+   }
+
+   private getNextCode( zones: Zones[] ): string {
+      let lastCode = '1';
+      if ( zones.length > 0 ) {
+         lastCode = (Number( zones.sort( ( a, b ) => {
+            return Number( a.codigo.split( '-' )[ 1 ] ) - Number( b.codigo.split( '-' )[ 1 ] )
+         } )[ zones.length - 1 ].codigo.split( '-' )[ 1 ] ) + 1).toString();
+      }
+      return lastCode;
+   }
+
+   capitalizeZone( value: any ) {
+      if ( value !== '' && value !== null && value !== undefined ) {
+         this.zone.zona = value.substring( 0, 1 ).toUpperCase() + value.substring( 1 ).toLowerCase();
+      }
    }
 
 }

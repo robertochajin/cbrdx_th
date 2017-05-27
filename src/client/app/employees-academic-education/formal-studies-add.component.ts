@@ -6,7 +6,6 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { FormalStudies } from './formal-studies';
 import { Message, ConfirmationService } from 'primeng/primeng';
 import * as moment from 'moment/moment';
-import { StudyLevelServices } from '../_services/study-level.service';
 import { PoliticalDivisionService } from '../_services/political-division.service';
 import { DivisionPolitica } from '../_models/divisionPolitica';
 import { NavService } from '../_services/_nav.service';
@@ -46,7 +45,6 @@ export class FormalStudiesAddComponent implements OnInit {
    constructor( private academicEducationService: AcademicEducationService,
       private politicalDivisionService: PoliticalDivisionService,
       private listaService: ListaService,
-      private studyLevelServices: StudyLevelServices,
       private route: ActivatedRoute,
       private location: Location,
       private confirmationService: ConfirmationService,

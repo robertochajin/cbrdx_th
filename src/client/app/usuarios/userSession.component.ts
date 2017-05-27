@@ -38,6 +38,7 @@ export class UserSessionComponent implements OnInit {
    svcThUrl = '<%= SVC_TH_URL %>/api/upload';
    image: string;
    eye = 'fa-eye-slash';
+   ldap = false;
 
    constructor( private employeeService: EmployeesService,
       private usuariosService: UsuariosService,
@@ -57,7 +58,7 @@ export class UserSessionComponent implements OnInit {
 
       this.image = this.usuarioLogueado.avatar;
       let idUsuario = this.usuarioLogueado.usuario.idUsuario;
-
+      this.ldap = this.usuarioLogueado.usuario.usuarioLdap;
       this.usuariosService.viewUser( idUsuario ).subscribe( data => {
          this.user = data;
          this.employeeService.get( this.user.idTercero ).subscribe( employee => {
@@ -78,15 +79,12 @@ export class UserSessionComponent implements OnInit {
          this.usuariosService.updatePass( this.user ).then( res => {
             console.info( res );
             if ( res ) {
-               this.msgs[ 0 ] = { severity: 'info', summary: 'Exito', detail: 'Contraseña actualizada correctamente.' };
+               this.navService.setMesage( 0, { severity: 'info', summary: 'Exito', detail: 'Contraseña actualizada correctamente.' } );
             } else {
-               this.msgs[ 0 ] = {
-                  severity: 'error', summary: 'Error al actualizar',
-                  detail: 'Contraseña actual no es correcta.'
-               };
+               this.navService.setMesage( 0, { severity: 'error', summary: 'Error al actualizar', detail: 'Contraseña actual no es correcta.' });
             }
          }, error => {
-            this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Error al guardar.' };
+            this.navService.setMesage( 3, this.msgs );
          } );
       }
    }

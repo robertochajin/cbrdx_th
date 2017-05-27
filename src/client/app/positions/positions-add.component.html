@@ -1,5 +1,5 @@
 <div class="row">
-   <div class="col-md-12">
+   <div class="col-md-10 col-md-offset-1">
       <p-accordion id="accordion">
          <p-accordionTab header="{{ 'POSITION.LBL_IDENTIFICACION' | translate }}" [selected]="true">
             <fieldset>
@@ -109,7 +109,7 @@
                                                 #idEstado="ngModel"
                                     ></p-dropdown>
                                  </div>
-                                 <div class="form-group col-md-6">
+                                 <div class="form-group col-md-3">
                                     <label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate }} </label>
                                     <div class=" col-sm-9">
                                        <p-checkbox binary="true" id="indicador" name="indicador"
@@ -117,6 +117,14 @@
                                                    #indicador="ngModel"></p-checkbox>
                                     </div>
                                  </div>
+	                              <div class="form-group col-md-3">
+		                              <label for="indicadorzona" class="control-label col-sm-6">{{ 'POSITION.LBL_ZONA' | translate }}</label>
+		                              <div class=" col-sm-6">
+			                              <p-checkbox binary="true" id="indicadorzona" name="indicadorzona"
+			                                          [(ngModel)]="position.indicadorZona"
+			                                          #indicador="ngModel"></p-checkbox>
+		                              </div>
+	                              </div>
                               </div>
                            </div>
                            <div class="row form-footer-buttons">

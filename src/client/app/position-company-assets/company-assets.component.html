@@ -15,10 +15,16 @@
    </p-dataTable>
 
 </div>
-<div class="row">
-   <div class="col-md-3 pull-right">
-      <button pButton label="{{ 'BTN_SIGUIENTE' | translate }}" (click)="next()" type="button" class="pull-right"></button>
-   </div>
+<div class="row form-footer-buttons">
+	<div class="form-group col-md-12">
+		<button icon="fa-arrow-right" label="{{ 'BTN_SIGUIENTE' | translate }}" type="button" (click)="next()"
+				  pButton></button>
+	</div>
 </div>
 
-<p-confirmDialog width="400"></p-confirmDialog>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>

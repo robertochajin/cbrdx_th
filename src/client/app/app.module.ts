@@ -33,7 +33,7 @@ import { JobProjectionModule } from './job-projection/job-projection.module';
 import { FormManagerModule } from './form-manager/form-manager.module';
 
 //  asignación a profesional
-import { AssignmentProfessionalModule } from './assignment-professional/assignment-professional.module';
+//import { AssignmentProfessionalModule } from './assignment-professional/assignment-professional.module';
 // Estructura física
 import { PhysicStructureModule } from './physic-structure/physic-structure.module';
 import { RiskModule } from './position-risks/position-risks.module';
@@ -66,8 +66,11 @@ import { MenuManagerModule } from './menuManager/menuManager.module';
 //  Auth JWT module
 import { AuthModule } from './shared/auth.module';
 //  BreadCrumb
-//  import {Ng2BreadcrumbModule,BreadcrumbService} from 'ng2-breadcrumb/ng2-breadcrumb';
 import { BreadcrumbModule, BreadcrumbService } from './shared/breadcrumb/breadcrumb';
+import { PersonnelRequirementModule } from './personnel-requirement/personnel-requirement.module';
+
+// Vacantes
+import { VacanciesModule } from './vacancies/vacancies.module';
 
 // CarsModule,
 @NgModule( {
@@ -91,6 +94,7 @@ import { BreadcrumbModule, BreadcrumbService } from './shared/breadcrumb/breadcr
                  PositionCompetenciesModule,
                  OrganizationalStructureModule,
                  OrganizationalStructurePositionsModule,
+                 PersonnelRequirementModule,
                  CompetenciesGroupsModule,
                  WidgetModule,
                  FormManagerModule,
@@ -123,7 +127,8 @@ import { BreadcrumbModule, BreadcrumbService } from './shared/breadcrumb/breadcr
                  RisksModule,
                  MenuManagerModule,
                  CompanyAssetsModule,
-                 AssignmentProfessionalModule
+                 VacanciesModule,
+                 //AssignmentProfessionalModule
               ],
 
               declarations: [ AppComponent ],

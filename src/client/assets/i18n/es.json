@@ -22,12 +22,14 @@
   "LBL_CREAR":"Crear",
   "LBL_EDITAR":"Editar",
   "LBL_REQUERIDO":"requerido",
+  "LBL_INVALIDOVACIO":"invalido o vacío",
   "LBL_GENERO":"Género",
   "LBL_ESTADOCIVIL":"Estado Civil",
   "LBL_NUEVO":"Nuevo",
   "LBL_NUEVA":"Nueva",
   "LBL_ID":"Id",
   "LBL_CODIGO":"Código",
+  "LBL_OBLIGATORIO":"Obligatorio",
   "LBL_NOMBRE":"Nombre",
   "LBL_ESTADO":"Estado ",
   "LBL_DETALLE":"Detalle",
@@ -48,6 +50,7 @@
   "LBL_MUNICIPIO":"Municipio",
   "LBL_ANTERIOR":"Anterior",
   "LBL_DE":"de",
+  "LBL_CERRAR":"Cerrar",
   "LBL_EPS":"Eps",
   "LBL_TELEFONO":"Teléfono",
   "LBL_PERTENECE":"Pertenece",
@@ -59,6 +62,7 @@
   "MSG_REGISTRO":"Registro",
   "MSG_NORECORDSFOUND":"Su búsqueda no obtuvo ningún resultado",
   "LBL_BUSCAR":"Buscar...",
+  "PH_BUSCAR":"Buscar ",
   "LBL_INVALIDO" : "Invalido",
   "LBL_ENVIAR":"Enviar",
   "FIN_COMUNES":"====================================================================",
@@ -157,6 +161,7 @@
       "LBL_COMUNA":"Comuna",
       "LBL_LOCALIDAD":"Localidad",
       "LBL_RESGUARDO":"Resguardo",
+      "LBL_PERTENECEA":"Pertenece A",
       "MSG_CODREGISTRADO":"Ya se encuentra registrado este código",
       "MSG_NOMBREREQUERIDO":"Nombre es requerido"
 
@@ -210,7 +215,6 @@
     "LBL_EXPERIENCIALABORAL":"Experiencia Laboral",
     "LBL_FACTORRH":"Factor RH",
     "LBL_FECHAEXPEDICION":"Fecha de Expedición",
-    "LBL_FECHADEFUNCION":"Fecha de Defunción",
     "LBL_FINALIZACION":"Finalización",
     "LBL_FORMACIONACADEMICA":"Formación Académica",
     "LBL_FORMACIONCAPACITACION":"Formación y Capacitación",
@@ -290,6 +294,7 @@
     "LBL_VIVO":"Vivo",
     "LBL_JURIDICO":"Estado jurídico",
     "LBL_FECHADEFUNCIONREQUERIDA":"Fecha de defunción requerida",
+    "LBL_FECHADEFUNCION":"Fecha de defunción",
     "MSG_DOCUMENTO":"El documento que intenta ingresar ya está asignado a otra persona y no puede ser duplicado"
 
   },
@@ -369,9 +374,10 @@
       "MSG_USER80CARACT" : "El nombre de usuario no debe tener más de 80 caracteres.",
       "MSG_USUARIOEXISTE" :"El usuario ya existe para otro tercero",
       "MSG_VALORUSUARIO" :"Debe ingresar un valor para el Usuario",
-      "MSG_NOMCARACT" : "El nombre de usuario sólo debe contener letras y los caracteres . - y/o _",
+      "MSG_NOMCARACT" : "El nombre de usuario sólo debe contener numeros y/o letras y los caracteres  - . _ / una unica vez",
       "LBL_USUARIOS":"Administrador de Usuarios",
-      "LBL_DATOSUSER":"Datos de Usuario"
+      "LBL_DATOSUSER":"Datos de Usuario",
+      "LBL_BUSCARUSUARIO":"Buscar usuario"
 
    },
 
@@ -417,7 +423,7 @@
       "LBL_MENUPRINCIPAL": "MENÚ PRINCIPAL",
       "LBL_USUARIODESDE":"Última Actualización",
       "LBL_TEMASDISPONIBLES": "Temas Disponible",
-      "LBL_EDITARCONTRASENA":"Editar Contraseña",
+      "LBL_EDITARCONTRASENA":"Actualizar Perfil",
       "LBL_CERRARSESION": "Cerrar Sesión"
    },
 
@@ -463,8 +469,11 @@
       "LBL_PARAMETROSLISTA":"Parámetros Lista",
       "LBL_LISTA":"Lista",
       "LBL_EDITABLE":"Editable",
+      "LBL_ROLMODIFICA":"Rol que modifica",
+      "MSG_ROLMODIFICAREQUERIDO":"Rol que modifica es requerido",
       "LBL_ELEMENTLISTA":"Elementos de la Lista",
       "LBL_ITEMLISTA":"Item",
+      "LISTAS.LBL_CODIGOREGISTRADO":"Este código ya se encuentra regstrado ",
       "MSG_NOMBRELISTA":"Debe ingresar el nombre de la Lista.",
       "MSG_LISTAMAYUSCULA":"El nombre debe comenzar por una letra mayúscula.",
       "MSG_LISTA40CARACTERES":"La lista no debe tener mas de 40 caracteres.",
@@ -548,6 +557,7 @@
            "LBL_ATRIBUTOS" : "Atributos",
            "LBL_REEMPLAZAPOR" : "Reemplaza por:",
            "LBL_EDAD" : "Edad",
+           "LBL_ZONA" : "Requiere zona",
            "LBL_ELEMENTOS" : "Elementos",
            "LBL_DESCRIPCION" : "Descripción",
            "LBL_COMPETENCIA" : "Competencia",
@@ -555,7 +565,6 @@
            "LBL_EVALUACION" : "Desempeño",
            "LBL_EXPERIENCIA" : "Tiempo de experiencia laboral",
            "LBL_EXAMEN" : "Exámen",
-           "LBL_NOMBRE" : "Nombre",
            "LBL_INGRESO" : "Ingreso",
            "LBL_IDENTIFICACION" : "Identificación del Cargo",
            "LBL_INTERNAS" : "Internas",
@@ -688,12 +697,18 @@
       "LBL_ESTRUCTFISICA":"Estructura Física",
       "MSG_ESTRUCTFISICAREQ":"Estructura física es requerido",
       "MSG_REGISTRADOCOD":"Ya se encuentra registrado ese código",
-      "MSG_CODIGOREGISTRADO":"Ya se encuentra registrado ese código"
-
+      "MSG_CODIGOREGISTRADO":"Ya se encuentra registrado ese código",
+      "MSG_CODIGOREGISTRADO":"Ya se encuentra registrado ese código",
+      "LBL_INDICADORZONAS": "Maneja zona",
+      "LBL_ZONAS": "Zonas del área",
+      "LBL_CODIGOZONA": "Código",
+      "LBL_ZONA": "Zona"
    },
 
    "PLANTACOLABORADORES": {
       "LBL_PLANTACOLAB":"Planta de Colaboradores",
+      "LBL_AREA":"Área",
+      "LBL_ZONA":"Zona",
       "LBL_AREATRABAJO":"Área de trabajo",
       "MSG_NODO":"Por favor, seleccione un nodo de tipo área de la estructura organizacional",
       "MSG_INFOAREA":"Información del área",
@@ -726,6 +741,53 @@
 
    },
 
+   "REQUERIMIENTOPERSONAL": {
+      "LBL_REQUERIMIENTOPERSONAL":"Requerimiento de personal",
+      "BTN_AGREGARNUEVO":"Agregar nuevo requerimiento de personal",
+      "LBL_DATOSSOLICITUD":"Datos básico solicitud",
+      "LBL_DATOSSOLICITANTE":"Datos Solicitante",
+      "LBL_NOMBRESOLICITANTE":"Nombre del Solicitante",
+      "LBL_CARGOSOLICITANTE":"Cargo del solicitante",
+      "LBL_AREA":"Área / Regional / Oficina",
+      "LBL_DIRECIONGENERAL":"Dirección General",
+      "LBL_CORREOSOLICITANTE":"Correo electrónico del solicitante",
+      "LBL_DATOSVACANTE":"Datos de la vacante",
+      "LBL_MOTIVOREQUERIMIENTO":"Por qué se genera requerimiento",
+      "LBL_JUSTIFICACION":"Justificación",
+      "LBL_CARGO":"Cargo",
+      "LBL_NOMBRECARGO":"Nombre cargo",
+      "LBL_FUNCIONCARGO":"Función cargo",
+      "LBL_ZONA":"Zona",
+      "LBL_CATEGORIA":"Categoría",
+      "LBL_FORMACONTRATACION":"Forma de contratación",
+      "LBL_TIPOCONTRATACION":"Tipo de contratación",
+      "LBL_NOMBREJEFEINMEDIATO":"Nombre del jefe inmediato",
+      "LBL_CARGOJEFEINMEDIATO":"Cargo del jefe inmediato",
+      "LBL_CANTIDADACONTRATAR":"Número de personas a contratar",
+      "LBL_CANTIDADAPLAZAS":"Número de plazas",
+      "LBL_CANTIDADAPLAZASDISMINUIR":"Número de plazas a disminuir",
+      "LBL_CANTIDADAENTREVISTAR":"Número a entrevistar",
+      "LBL_DATOSREFERIDO":"Datos de referidos",
+      "LBL_NOMBREREFERIDO":"Nombre",
+      "LBL_TELEFONOREFERIDO":"Teléfono de contacto",
+      "LBL_CORREOREFERIDO":"Correo electrónico",
+      "LBL_FECHAREFERENCIA":"Fecha de referencias",
+      "LBL_DATOSRECURSOSADICIONALES":"Datos de recursos adicionales",
+      "LBL_RECURSOSCOMPRAS":"Recursos requeridos en compras",
+      "LBL_RECURSOSTIC":"Recursos requeridos en DTIC",
+      "LBL_FECHA_INICIO": "Fecha inicio",
+      "LBL_FECHA_FIN": "Fecha fin",
+      "LBL_FECHA": "Fecha",
+      "LBL_ESTADO": "Estado",
+      "BTN_SENDREQUEST": "Enviar solicitud",
+      "LBL_RECURSO": "Recurso",
+      "LBL_RECURSOTICS": "Recurso Tic's",
+      "LBL_OBSERVACIONES": "Observaciones",
+      "LBL_JUSTIFICACION": "Justificación",
+      "LBL_CUESTIONARIOS": "Datos Cuestionarios",
+      "LBL_CUESTIONARIO": "Cuestionario",
+      "":""
+   },
 
    "PROYECCIONLABORAL": {
       "LBL_PROYLAB":"Proyección laboral",
@@ -756,6 +818,26 @@
       "MSG_CARGOREQUERIDO":"Cargo requerido",
       "MSG_PLAZASPROYREQ":"Plazas proyectadas requeridas",
       "MSG_CLASEREQUERIDO": "Clase de estilo es requerido"
+   },
+
+   "VACANCIES":{
+      "LBL_REQUESTS" : "Requerimientos",
+      "LBL_VACANCYBYDEPARTMENT" : "Vacantes por planta",
+      "LBL_VACANCYMANAGER" : "Administrador de Vacantes",
+      "LBL_VACANCY" : "Vacante",
+      "LBL_DATE" : "Fecha de Creación",
+      "LBL_AREA" : "Area",
+      "LBL_OFFICE" : "Oficina",
+      "LBL_REASON" : "Motivo",
+      "LBL_AUTHORIZATION" : "Autorización",
+      "LBL_STATE" : "Estado",
+      "LBL_DATEFROM" : "Fecha Desde",
+      "LBL_DATETO" : "Fecha Hasta",
+      "LBL_SALARY" : "Salario",
+      "LBL_PROFESSIONAL" : "Profesional de Reclutamiento",
+      "LBL_RECRUITMENT" : "Forma de reclutamiento",
+      "LBL_OBSERVACION" : "Observación",
+      "LBL_NOMBREJEFEINMEDIATO":"jefe Directo"
    },
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="

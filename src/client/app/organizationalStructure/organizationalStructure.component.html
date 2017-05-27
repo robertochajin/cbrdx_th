@@ -1,7 +1,7 @@
-<div *ngIf="addinglocation">
+<div class="col-md-12" *ngIf="addinglocation">
    <h3>{{ 'ESTRUCTURAORGANIZACIONAL.LBL_ESTRUCTURA' | translate}}</h3>
    <div class="row datable-header">
-      <div class="col-md-6 col-xs-12 datatable-header-add">
+      <div class="col-md-4 col-xs-12 datatable-header-add">
          <button type="button" pButton icon="fa-plus" (click)="newCompany()" label="{{ 'ESTRUCTURAORGANIZACIONAL.BTN_AGREGAREMPRESA' | translate}}"
                  *ngIf="btnEmpresa"></button>
          <button type="button" pButton icon="fa-plus" (click)="newBranch()" label="{{ 'ESTRUCTURAORGANIZACIONAL.BTN_AGREGARAREA' | translate}}"
@@ -20,263 +20,350 @@
       </div>
 
       <div class="col-md-8">
-         <p-fieldset legend="{{header}}">
-            <div class="row-fluid">
-               <div class="col-md-12">
-                  <form *ngIf="!guardando" (ngSubmit)="!codeExists&&!documentExists&&f.valid && save()" #f="ngForm" novalidate>
-                     <div *ngIf="empresa">
-                        <div class="row">
-                           <div class="form-group" >
-                              <label for="tiposDocumentos" class="control-label col-sm-3">* {{ 'LBL_TIPODOCUMENTO' | translate}}</label>
-                              <div class=" col-sm-9">
-                                 <p-dropdown id="tiposDocumentos" name="tiposDocumentos"
-                                             [options]="documentTypes" [autoWidth]="false"
-                                             [(ngModel)]="organizationalStructure.idTipoDocumento"
-                                             (change)="validateDocument()" required
-                                             #tiposDocumentos="ngModel"></p-dropdown>
-                                 <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="f.submitted && !tiposDocumentos.valid">
-                                    {{ 'ESTRUCTURAORGANIZACIONAL.MSG_TIPODOCREQUERIDO' | translate}}
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="row">
-                           <div class="form-group">
-                              <label for="numeroDocumento" class="control-label col-sm-3">* {{ 'ESTRUCTURAORGANIZACIONAL.LBL_NUMEROIDENTI' | translate}} </label>
-                              <div class=" col-sm-9">
-                                 <input type="text" pInputText class="form-control" id="numeroDocumento" name="numeroDocumento"
-                                        [(ngModel)]="organizationalStructure.numeroDocumento"
-                                        (change)="validateDocument()"
-                                        #numeroDocumento="ngModel" maxlength="20"
-                                        required/>
-                                 <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="f.submitted && !numeroDocumento.valid">
-                                    {{ 'ESTRUCTURAORGANIZACIONAL.MSG_NUMEROIDENTIREQ' | translate}}
-                                 </div>
-                                 <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="documentExists">
-                                    {{ 'ESTRUCTURAORGANIZACIONAL.MSG_CODIGOREGISTRADO' | translate}}
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="row">
-                           <div class="form-group">
-                              <label for="razonSocial" class="control-label col-sm-3">* {{ 'ESTRUCTURAORGANIZACIONAL.LBL_RAZONSOCIAL' | translate}} </label>
-                              <div class=" col-sm-9">
-                                 <input type="text" pInputText class="form-control" id="razonSocial" name="razonSocial"
-                                        [(ngModel)]="organizationalStructure.nombre"
-                                        #razonSocial="ngModel" (keyup)="capitalizeName()"
-                                        required/>
-                                 <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="f.submitted && !razonSocial.valid">
-                                    {{ 'ESTRUCTURAORGANIZACIONAL.MSG_RAZONSOCIALREQ' | translate}}
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="row">
-                           <div class="form-group">
-                              <label for="telefonoFijo" class="control-label col-sm-3">{{ 'LBL_TELEFONO' | translate}} </label>
-                              <div class=" col-sm-9">
-                                 <p-inputMask id="telefonoFijo" name="telefonoFijo"
-                                              mask="?(999) 999-9999 Ext 9999" placeholder="(999) 999-9999 Ext 99999"
-                                              [(ngModel)]="organizationalStructure.telefono" #telefonoFijo="ngModel"
-                                 ></p-inputMask>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="row">
-                           <div class="form-group">
-                              <label for="cel" class="control-label col-sm-3">{{ 'LBL_CELULAR' | translate}} </label>
-                              <div class=" col-sm-9">
-                                 <p-inputMask id="cel" name="cel"
-                                              mask="?(999) 999-9999" placeholder="(999) 999-9999"
-                                              [(ngModel)]="organizationalStructure.celular" #cel="ngModel"
-                                 ></p-inputMask>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="row">
-                           <div class="form-group">
-                              <label for="correo" class="control-label col-sm-3">{{ 'LBL_CORREOELECTRONICO' | translate}}</label>
-                              <div class=" col-sm-9">
-                                 <input  type="email" pInputText class="form-control" id="correo" name="correo"
-                                        [(ngModel)]="organizationalStructure.correoElectronico"
-                                         pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"
-                                        #email="ngModel"
-                                        />
-                                 <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="f.submitted && !email.valid">
-                                    {{ 'ESTRUCTURAORGANIZACIONAL.MSG_CORREOVALIDO' | translate}}
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="row">
-                           <div class="form-group">
-                              <label for="pagina" class="control-label col-sm-3">{{ 'ESTRUCTURAORGANIZACIONAL.LBL_PAGINAWEB' | translate}} </label>
-                              <div class=" col-sm-9">
-                                 <input type="url" pInputText class="form-control" id="pagina" name="pagina"
-                                        [(ngModel)]="organizationalStructure.paginaWeb"
-                                        #pagina="ngModel"/>
-
-                              </div>
-                           </div>
-                        </div>
-                        <div class="row">
-                           <div class="form-group">
-                              <label for="direccion" class="control-label col-sm-3">* {{ 'LBL_DIRECCION' | translate}}</label>
-                              <div class=" col-sm-7">
+	      <p-tabView>
+		      <p-tabPanel header="{{header}}" [selected]="true">
+			      <fieldset>
+				      <div class="row-fluid">
+					      <div class="col-md-12">
+						      <form *ngIf="!guardando" (ngSubmit)="!codeExists&&!documentExists&&f.valid && save()" #f="ngForm" novalidate>
+							      <div *ngIf="empresa">
+								      <div class="row">
+									      <div class="form-group" >
+										      <label for="tiposDocumentos" class="control-label col-sm-3">* {{ 'LBL_TIPODOCUMENTO' | translate}}</label>
+										      <div class=" col-sm-9">
+											      <p-dropdown id="tiposDocumentos" name="tiposDocumentos"
+											                  [options]="documentTypes" [autoWidth]="false"
+											                  [(ngModel)]="organizationalStructure.idTipoDocumento"
+											                  (change)="validateDocument()" required
+											                  #tiposDocumentos="ngModel"></p-dropdown>
+											      <div class="ui-message ui-messages-error ui-corner-all"
+											           *ngIf="f.submitted && !tiposDocumentos.valid">
+												      {{ 'ESTRUCTURAORGANIZACIONAL.MSG_TIPODOCREQUERIDO' | translate}}
+											      </div>
+										      </div>
+									      </div>
+								      </div>
+								      <div class="row">
+									      <div class="form-group">
+										      <label for="numeroDocumento" class="control-label col-sm-3">* {{ 'ESTRUCTURAORGANIZACIONAL.LBL_NUMEROIDENTI' | translate}} </label>
+										      <div class=" col-sm-9">
+											      <input type="text" pInputText class="form-control" id="numeroDocumento" name="numeroDocumento"
+											             [(ngModel)]="organizationalStructure.numeroDocumento"
+											             (change)="validateDocument()"
+											             #numeroDocumento="ngModel" maxlength="20"
+											             required/>
+											      <div class="ui-message ui-messages-error ui-corner-all"
+											           *ngIf="f.submitted && !numeroDocumento.valid">
+												      {{ 'ESTRUCTURAORGANIZACIONAL.MSG_NUMEROIDENTIREQ' | translate}}
+											      </div>
+											      <div class="ui-message ui-messages-error ui-corner-all"
+											           *ngIf="documentExists">
+												      {{ 'ESTRUCTURAORGANIZACIONAL.MSG_CODIGOREGISTRADO' | translate}}
+											      </div>
+										      </div>
+									      </div>
+								      </div>
+								      <div class="row">
+									      <div class="form-group">
+										      <label for="razonSocial" class="control-label col-sm-3">* {{ 'ESTRUCTURAORGANIZACIONAL.LBL_RAZONSOCIAL' | translate}} </label>
+										      <div class=" col-sm-9">
+											      <input type="text" pInputText class="form-control" id="razonSocial" name="razonSocial"
+											             [(ngModel)]="organizationalStructure.nombre"
+											             #razonSocial="ngModel" (keyup)="capitalizeName()"
+											             required/>
+											      <div class="ui-message ui-messages-error ui-corner-all"
+											           *ngIf="f.submitted && !razonSocial.valid">
+												      {{ 'ESTRUCTURAORGANIZACIONAL.MSG_RAZONSOCIALREQ' | translate}}
+											      </div>
+										      </div>
+									      </div>
+								      </div>
+								      <div class="row">
+									      <div class="form-group">
+										      <label for="telefonoFijo" class="control-label col-sm-3">{{ 'LBL_TELEFONO' | translate}} </label>
+										      <div class=" col-sm-9">
+											      <p-inputMask id="telefonoFijo" name="telefonoFijo"
+											                   mask="?(999) 999-9999 Ext 9999" placeholder="(999) 999-9999 Ext 99999"
+											                   [(ngModel)]="organizationalStructure.telefono" #telefonoFijo="ngModel"
+											      ></p-inputMask>
+										      </div>
+									      </div>
+								      </div>
+								      <div class="row">
+									      <div class="form-group">
+										      <label for="cel" class="control-label col-sm-3">{{ 'LBL_CELULAR' | translate}} </label>
+										      <div class=" col-sm-9">
+											      <p-inputMask id="cel" name="cel"
+											                   mask="?(999) 999-9999" placeholder="(999) 999-9999"
+											                   [(ngModel)]="organizationalStructure.celular" #cel="ngModel"
+											      ></p-inputMask>
+										      </div>
+									      </div>
+								      </div>
+								      <div class="row">
+									      <div class="form-group">
+										      <label for="correo" class="control-label col-sm-3">{{ 'LBL_CORREOELECTRONICO' | translate}}</label>
+										      <div class=" col-sm-9">
+											      <input  type="email" pInputText class="form-control" id="correo" name="correo"
+											              [(ngModel)]="organizationalStructure.correoElectronico"
+											              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"
+											              #email="ngModel"
+											      />
+											      <div class="ui-message ui-messages-error ui-corner-all"
+											           *ngIf="f.submitted && !email.valid">
+												      {{ 'ESTRUCTURAORGANIZACIONAL.MSG_CORREOVALIDO' | translate}}
+											      </div>
+										      </div>
+									      </div>
+								      </div>
+								      <div class="row">
+									      <div class="form-group">
+										      <label for="pagina" class="control-label col-sm-3">{{ 'ESTRUCTURAORGANIZACIONAL.LBL_PAGINAWEB' | translate}} </label>
+										      <div class=" col-sm-9">
+											      <input type="url" pInputText class="form-control" id="pagina" name="pagina"
+											             [(ngModel)]="organizationalStructure.paginaWeb"
+											             #pagina="ngModel"/>
+										
+										      </div>
+									      </div>
+								      </div>
+								      <div class="row">
+									      <div class="form-group">
+										      <label for="direccion" class="control-label col-sm-3">* {{ 'LBL_DIRECCION' | translate}}</label>
+										      <div class=" col-sm-7">
                                  <textarea id="direccion" name="direccion" pInputTextarea  rows="5" #direccion="ngModel" disabled="true" required="true"
-                                        [(ngModel)]="organizationalStructure.localizacion" ></textarea>
-                                 <div class="ui-message ui-messages-error ui-corner-all"
-                                   *ngIf="f.submitted && organizationalStructure.localizacion==''">
-                                 <i class="fa fa-close"></i>
-                                    {{ 'ESTRUCTURAORGANIZACIONAL.MSG_DIRECCIONREQ' | translate}}
-                                 </div>
-                              </div>
-                              <div class=" col-sm-1">
-                                 <button pButton icon="fa-plus" label="{{ 'ESTRUCTURAORGANIZACIONAL.BTN_EDITADIRECCION' | translate}}" (click)="toggleform()"></button>
-
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div *ngIf="!empresa">
-                        <div class="row">
-                           <div class="form-group">
-                              <label for="codigo" class="control-label col-sm-3">* {{ 'LBL_CODIGO' | translate }} </label>
-                              <div class=" col-sm-9">
-                                 <input type="text" pInputText class="form-control" id="codigo"
-                                        name="codigo"
-                                        [(ngModel)]="organizationalStructure.codigo"
-                                        (change)="validateCode()"
-                                        (keyup)="capitalizeCode()"
-                                        #codigo="ngModel" maxlength="10"
-                                        required/>
-                                 <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="f.submitted && !codigo.valid">
-                                    {{ 'ESTRUCTURAORGANIZACIONAL.MSG_CODIGOREQ' | translate}}
-                                 </div>
-                                 <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="codeExists">
-                                    {{ 'ESTRUCTURAORGANIZACIONAL.MSG_REGISTRADOCOD' | translate}}
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="row">
-                           <div class="form-group">
-                              <label for="nombre" class="control-label col-sm-3">* {{ 'LBL_NOMBRE' | translate }} </label>
-                              <div class=" col-sm-9">
-                                 <input type="text" pInputText class="form-control" id="nombre"
-                                        name="nombre"
-                                        [(ngModel)]="organizationalStructure.nombre"
-                                        #nombre="ngModel"
-                                        (keyup)="capitalizeName()"
-                                        required/>
-                                 <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="f.submitted && !nombre.valid">
-                                    {{ 'ESTRUCTURAORGANIZACIONAL.MSG_NOMBREREQ' | translate}}
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="row">
-                           <div class="form-group" >
-                              <label for="strctureTypes" class="control-label col-sm-3">* {{ 'ESTRUCTURAORGANIZACIONAL.LBL_TIPOESTRUCTURA' | translate}} </label>
-                              <div class=" col-sm-9">
-                                 <p-dropdown id="strctureTypes" name="strctureTypes"
-                                             [options]="structureTypes" [autoWidth]="false" required="true"
-                                             [(ngModel)]="organizationalStructure.idTipoEstructura"
-                                             #strctureTypes="ngModel"></p-dropdown>
-                                 <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="f.submitted && !strctureTypes.valid">
-                                    {{ 'ESTRUCTURAORGANIZACIONAL.MSG_TIPOESTRUCTREQ' | translate}}
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="row">
-                           <div class="form-group" >
-                              <label for="costCenter" class="control-label col-sm-3">* {{ 'ESTRUCTURAORGANIZACIONAL.LBL_CENTROCOSTO' | translate}}</label>
-                              <div class=" col-sm-9">
-                                 <p-dropdown id="costCenter" name="costCenter"
-                                             [options]="costTypes" [autoWidth]="false" required="true"
-                                             [(ngModel)]="organizationalStructure.idCentroCostos"
-                                             #costCenter="ngModel"></p-dropdown>
-                                 <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="f.submitted && !costCenter.valid">
-                                    {{ 'ESTRUCTURAORGANIZACIONAL.MSG_CENTROCOSTOREQ' | translate}}
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="row">
-                           <div class="form-group" >
-                              <label for="tiposArea" class="control-label col-sm-3">* {{ 'ESTRUCTURAORGANIZACIONAL.LBL_TIPOAREA' | translate}}</label>
-                              <div class=" col-sm-9">
-                                 <p-dropdown id="tiposArea" name="tiposArea"
-                                             [options]="areaTypes" [autoWidth]="false" required="true"
-                                             [(ngModel)]="organizationalStructure.idTipoArea"
-                                             #tiposArea="ngModel"></p-dropdown>
-                                 <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="f.submitted && !tiposArea.valid">
-                                    {{ 'ESTRUCTURAORGANIZACIONAL.MSG_TIPOAREAREQ' | translate}}
-
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="row">
-                           <div class="form-group" >
-                              <label for="estructuraFisica" class="control-label col-sm-3">* {{ 'ESTRUCTURAORGANIZACIONAL.LBL_ESTRUCTFISICA' | translate}}</label>
-                              <div class=" col-sm-9">
-                                 <p-dropdown id="estructuraFisica" name="estructuraFisica"
-                                             [options]="physicalTypes" [autoWidth]="false" required="true"
-                                             [(ngModel)]="organizationalStructure.idEstructuraFisica"
-                                             #estructuraFisica="ngModel"></p-dropdown>
-                                 <div class="ui-message ui-messages-error ui-corner-all"
-                                      *ngIf="f.submitted && !estructuraFisica.valid">
-                                    {{ 'ESTRUCTURAORGANIZACIONAL.MSG_ESTRUCTFISICAREQ' | translate}}
-
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="form-group">
-                           <label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate }}</label>
-                           <div class=" col-sm-9">
-                              <p-checkbox binary="true" id="indicador" name="indicador"
-                                          [(ngModel)]="organizationalStructure.indicadorHabilitado"
-                                          #indicador="ngModel"></p-checkbox>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="row form-footer-buttons">
-                        <div class="form-group col-md-12">
-                           <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
-                           <button pButton type="submit" formaction="" label="{{ 'BTN_GUARDAR' | translate }}"></button>
-                        </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </p-fieldset>
-         <p-dialog header="Confirmación" [(visible)]="displayDialog"
-                   responsive="true" modal="true">
-            <p>{{ 'MSG_CONFIRMACION' | translate }}</p>
-            <p-footer>
-               <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                  <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="{{ 'BTN_NO' | translate }}"></button>
-                  <button type="button" pButton icon="fa-check" (click)="doCancel()" label="{{ 'BTN_SI' | translate }}"></button>
-               </div>
-            </p-footer>
-         </p-dialog>
+                                           [(ngModel)]="organizationalStructure.localizacion" ></textarea>
+											      <div class="ui-message ui-messages-error ui-corner-all"
+											           *ngIf="f.submitted && organizationalStructure.localizacion==''">
+												      <i class="fa fa-close"></i>
+												      {{ 'ESTRUCTURAORGANIZACIONAL.MSG_DIRECCIONREQ' | translate}}
+											      </div>
+										      </div>
+										      <div class=" col-sm-1">
+											      <button pButton icon="fa-plus" label="{{ 'ESTRUCTURAORGANIZACIONAL.BTN_EDITADIRECCION' | translate}}" (click)="toggleform()"></button>
+										
+										      </div>
+									      </div>
+								      </div>
+							      </div>
+							      <div *ngIf="!empresa">
+								      <div class="row">
+									      <div class="form-group">
+										      <label for="codigo" class="control-label col-sm-3">* {{ 'LBL_CODIGO' | translate }} </label>
+										      <div class=" col-sm-9">
+											      <input type="text" pInputText class="form-control" id="codigo"
+											             name="codigo"
+											             [(ngModel)]="organizationalStructure.codigo"
+											             (change)="validateCode()"
+											             (keyup)="capitalizeCode()"
+											             #codigo="ngModel" maxlength="10"
+											             required/>
+											      <div class="ui-message ui-messages-error ui-corner-all"
+											           *ngIf="f.submitted && !codigo.valid">
+												      {{ 'ESTRUCTURAORGANIZACIONAL.MSG_CODIGOREQ' | translate}}
+											      </div>
+											      <div class="ui-message ui-messages-error ui-corner-all"
+											           *ngIf="codeExists">
+												      {{ 'ESTRUCTURAORGANIZACIONAL.MSG_REGISTRADOCOD' | translate}}
+											      </div>
+										      </div>
+									      </div>
+								      </div>
+								      <div class="row">
+									      <div class="form-group">
+										      <label for="nombre" class="control-label col-sm-3">* {{ 'LBL_NOMBRE' | translate }} </label>
+										      <div class=" col-sm-9">
+											      <input type="text" pInputText class="form-control" id="nombre"
+											             name="nombre"
+											             [(ngModel)]="organizationalStructure.nombre"
+											             #nombre="ngModel"
+											             (keyup)="capitalizeName()"
+											             required/>
+											      <div class="ui-message ui-messages-error ui-corner-all"
+											           *ngIf="f.submitted && !nombre.valid">
+												      {{ 'ESTRUCTURAORGANIZACIONAL.MSG_NOMBREREQ' | translate}}
+											      </div>
+										      </div>
+									      </div>
+								      </div>
+								      <div class="row">
+									      <div class="form-group" >
+										      <label for="strctureTypes" class="control-label col-sm-3">* {{ 'ESTRUCTURAORGANIZACIONAL.LBL_TIPOESTRUCTURA' | translate}} </label>
+										      <div class=" col-sm-9">
+											      <p-dropdown id="strctureTypes" name="strctureTypes"
+											                  [options]="structureTypes" [autoWidth]="false" required="true"
+											                  [(ngModel)]="organizationalStructure.idTipoEstructura"
+											                  #strctureTypes="ngModel"></p-dropdown>
+											      <div class="ui-message ui-messages-error ui-corner-all"
+											           *ngIf="f.submitted && !strctureTypes.valid">
+												      {{ 'ESTRUCTURAORGANIZACIONAL.MSG_TIPOESTRUCTREQ' | translate}}
+											      </div>
+										      </div>
+									      </div>
+								      </div>
+								      <div class="row">
+									      <div class="form-group" >
+										      <label for="costCenter" class="control-label col-sm-3">* {{ 'ESTRUCTURAORGANIZACIONAL.LBL_CENTROCOSTO' | translate}}</label>
+										      <div class=" col-sm-9">
+											      <p-dropdown id="costCenter" name="costCenter"
+											                  [options]="costTypes" [autoWidth]="false" required="true"
+											                  [(ngModel)]="organizationalStructure.idCentroCostos"
+											                  #costCenter="ngModel"></p-dropdown>
+											      <div class="ui-message ui-messages-error ui-corner-all"
+											           *ngIf="f.submitted && !costCenter.valid">
+												      {{ 'ESTRUCTURAORGANIZACIONAL.MSG_CENTROCOSTOREQ' | translate}}
+											      </div>
+										      </div>
+									      </div>
+								      </div>
+								      <div class="row">
+									      <div class="form-group" >
+										      <label for="tiposArea" class="control-label col-sm-3">* {{ 'ESTRUCTURAORGANIZACIONAL.LBL_TIPOAREA' | translate}}</label>
+										      <div class=" col-sm-9">
+											      <p-dropdown id="tiposArea" name="tiposArea"
+											                  [options]="areaTypes" [autoWidth]="false" required="true"
+											                  [(ngModel)]="organizationalStructure.idTipoArea"
+											                  #tiposArea="ngModel"></p-dropdown>
+											      <div class="ui-message ui-messages-error ui-corner-all"
+											           *ngIf="f.submitted && !tiposArea.valid">
+												      {{ 'ESTRUCTURAORGANIZACIONAL.MSG_TIPOAREAREQ' | translate}}
+											
+											      </div>
+										      </div>
+									      </div>
+								      </div>
+								      <div class="row">
+									      <div class="form-group" >
+										      <label for="estructuraFisica" class="control-label col-sm-3">* {{ 'ESTRUCTURAORGANIZACIONAL.LBL_ESTRUCTFISICA' | translate}}</label>
+										      <div class=" col-sm-9">
+											      <p-dropdown id="estructuraFisica" name="estructuraFisica"
+											                  [options]="physicalTypes" [autoWidth]="false" required="true"
+											                  [(ngModel)]="organizationalStructure.idEstructuraFisica"
+											                  #estructuraFisica="ngModel"></p-dropdown>
+											      <div class="ui-message ui-messages-error ui-corner-all"
+											           *ngIf="f.submitted && !estructuraFisica.valid">
+												      {{ 'ESTRUCTURAORGANIZACIONAL.MSG_ESTRUCTFISICAREQ' | translate}}
+											
+											      </div>
+										      </div>
+									      </div>
+								      </div>
+							      </div>
+							      <div class="row">
+								      <div class="form-group col-md-5">
+									      <label for="indicador" class="control-label col-sm-3">{{ 'LBL_HABILITADO' | translate }}</label>
+									      <div class=" col-sm-9">
+										      <p-checkbox binary="true" id="indicador" name="indicador"
+										                  [(ngModel)]="organizationalStructure.indicadorHabilitado"
+										                  #indicador="ngModel"></p-checkbox>
+									      </div>
+								      </div>
+								      <div class="form-group col-md-5">
+									      <label for="indicadorZona" class="control-label col-sm-4">{{
+										      'ESTRUCTURAORGANIZACIONAL.LBL_INDICADORZONAS' | translate
+										      }}</label>
+									      <div class=" col-sm-8">
+										      <p-checkbox binary="true" id="indicadorZona" name="indicadorZona"
+										                  [(ngModel)]="organizationalStructure.indicadorZona"
+										                  #indicador="ngModel"></p-checkbox>
+									      </div>
+								      </div>
+							      </div>
+							      <div class="row form-footer-buttons">
+								      <div class="form-group col-md-12">
+									      <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+									      <button pButton type="submit" formaction="" label="{{ 'BTN_GUARDAR' | translate }}"></button>
+								      </div>
+							      </div>
+						      </form>
+					      </div>
+				      </div>
+			      </fieldset>
+			      <p-dialog header="Confirmación" [(visible)]="displayDialog"
+			                responsive="true" modal="true">
+				      <p>{{ 'MSG_CONFIRMACION' | translate }}</p>
+				      <p-footer>
+					      <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+						      <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="{{ 'BTN_NO' | translate }}"></button>
+						      <button type="button" pButton icon="fa-check" (click)="doCancel()" label="{{ 'BTN_SI' | translate }}"></button>
+					      </div>
+				      </p-footer>
+			      </p-dialog>
+		      </p-tabPanel>
+		      <p-tabPanel *ngIf="safeZones" header="{{ 'ESTRUCTURAORGANIZACIONAL.LBL_ZONAS' | translate }}">
+			      <div class="row" *ngIf="editingZone">
+				      <div class="col-md-12">
+					      <form name="personForm" (ngSubmit)="z.valid  && saveZone()" #z="ngForm"
+					            novalidate>
+						      <fieldset>
+							      <legend>{{ 'PLANTACOLABORADORES.MSG_ASIGNACOLABORADORCARGO' | translate }}</legend>
+							      <div class="form-group container">
+								      <div class="row">
+									      <div class="form-group col-md-12">
+										      <label>{{ 'ESTRUCTURAORGANIZACIONAL.LBL_CODIGOZONA' | translate }}:</label>
+										      {{zone.codigo}}
+									      </div>
+								      </div>
+								      <div class="row">
+									      <div class="form-group col-md-12">
+										      <label for="zoneName">{{ 'ESTRUCTURAORGANIZACIONAL.LBL_ZONA' | translate }}:</label>
+										      <input id="zoneName" type="text" pInputText name="zoneName"
+										             [(ngModel)]="zone.zona" #zoneName="ngModel" required
+										             (keyup)="capitalizeZone($event.target.value)"
+										      />
+										      <div class="ui-message ui-messages-error ui-corner-all"
+										           *ngIf="z.submitted && !zoneName.valid">
+											      <i class="fa fa-close"></i>
+											      {{ 'ESTRUCTURAORGANIZACIONAL.LBL_ZONA' | translate }} {{'LBL_REQUERIDO' | translate}}
+										      </div>
+									      </div>
+								      </div>
+								      <div class="row form-footer-buttons">
+									      <div class="form-group col-md-8">
+										      <a (click)="cancelEditingZone()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+										      <button pButton type="submit" label="{{ 'BTN_GUARDAR' | translate }}"></button>
+									      </div>
+								      </div>
+							      </div>
+						      </fieldset>
+					      </form>
+				      </div>
+				
+				      <p-confirmDialog width="400" #cd>
+					      <p-footer>
+						      <button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+						      <button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+					      </p-footer>
+				      </p-confirmDialog>
+			      </div>
+			      <div *ngIf="!editingZone">
+				      <div class="row datable-header">
+					      <div class="col-md-6">
+						      <button type="button" pButton icon="fa-plus" (click)="editZone(null)"
+						              label="{{ 'LBL_NUEVA' | translate }} {{ 'ESTRUCTURAORGANIZACIONAL.LBL_ZONA' | translate }}"></button>
+					      </div>
+					      <div class="col-md-6 col-xs-12 datatable-header-search">
+						      <i class="fa fa-search"></i>
+						      <input #pl type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}">
+					      </div>
+				      </div>
+				      <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="zones"
+				                   [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="pl" #dt>
+					      <p-column field="codigo" header="{{ 'ESTRUCTURAORGANIZACIONAL.LBL_CODIGOZONA' | translate }}" ></p-column>
+					      <p-column field="zona" header="{{ 'ESTRUCTURAORGANIZACIONAL.LBL_ZONA' | translate }}" [sortable]="true"></p-column>
+					      <!--<p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true"></p-column>-->
+					      <p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+						      <template let-pp="rowData" pTemplate="body">
+							      <div class="btn-group" role="group">
+								      <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil"
+								              pButton (click)="editZone(pp)"></button>
+							      </div>
+						      </template>
+					      </p-column>
+				      </p-dataTable>
+			      </div>
+		      </p-tabPanel>
+	      </p-tabView>
       </div>
    </div>
 </div>

@@ -7,6 +7,7 @@ import { TreeNode, SelectItem } from 'primeng/components/common/api';
 import { Message } from 'primeng/primeng';
 import { Search } from '../_models/search';
 import { NavService } from '../_services/_nav.service';
+import { FormSharedModule } from '../shared/form-shared.module';
 
 @Component( {
                moduleId: module.id,

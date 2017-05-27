@@ -35,7 +35,7 @@ export class NavService {
       this.arraySearch = [];
    }
 
-   setMesage( type: number, msgCustom: Message ) {
+   setMesage( type: number, msgCustom: Message = null ) {
 
       switch ( type ) {
          case 1:
