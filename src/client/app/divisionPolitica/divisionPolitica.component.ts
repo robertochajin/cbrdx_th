@@ -528,11 +528,13 @@ export class DivisionPoliticaComponent implements OnInit {
       this.divisionPoliticaTipos = [];
       this.divisionPoliticaAgrupaciones.push( { label: 'Seleccione', value: null } );
       if ( idArea !== null ) {
-         for ( let dp of this.listadoDivisionPoliticaAgrupaciones.filter( d => d.idDivisionPoliticaArea === idArea ) ) {
-            this.divisionPoliticaAgrupaciones.push( {
-                                                       label: dp.agrupacion,
-                                                       value: dp.idDivisionPoliticaAgrupacion
-                                                    } );
+         if ( this.listadoDivisionPoliticaAgrupaciones) {
+            for ( let dp of this.listadoDivisionPoliticaAgrupaciones.filter( d => d.idDivisionPoliticaArea === idArea ) ) {
+               this.divisionPoliticaAgrupaciones.push( {
+                                                          label: dp.agrupacion,
+                                                          value: dp.idDivisionPoliticaAgrupacion
+                                                       } );
+            }
          }
          if(this.listadoDivisionPoliticaAreas.filter(
                a => a.idDivisionPoliticaArea === idArea ).length > 0) {
