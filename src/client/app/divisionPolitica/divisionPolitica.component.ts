@@ -318,7 +318,7 @@ export class DivisionPoliticaComponent implements OnInit {
                                              value: dp.idDivisionPoliticaTipo
                                           } );
       }
-      if ( this.divisionPoliticaTipos.length > 0 && this.politicalDivision.idDivisionPoliticaTipo ) {
+      if ( this.divisionPoliticaTipos.length > 0 && this.politicalDivision.idDivisionPoliticaTipo === null ) {
          this.politicalDivision.idDivisionPoliticaTipo = this.divisionPoliticaTipos[ 0 ].value;
       }
    }
