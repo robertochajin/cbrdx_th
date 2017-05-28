@@ -268,6 +268,9 @@ export class DivisionPoliticaComponent implements OnInit {
       this.labelPadre = '';
       this.politicalDivision.idDivisionPoliticaPadre = 0;
       this.codeExists = false;
+      if ( this.divisionPoliticaTipos.length > 0 ) {
+         this.politicalDivision.idDivisionPoliticaTipo = this.divisionPoliticaTipos[ 0 ].value;
+      }
 
    }
 
@@ -282,6 +285,9 @@ export class DivisionPoliticaComponent implements OnInit {
       this.politicalDivision.codigoDivisionPolitica = this.selectedNode.data.codigoDivisionPolitica;
       // let nodeCode = this.getCodigoTypebyId( this.selectedNode.data.idDivisionPoliticaTipo );
       this.codeExists = false;
+      if ( this.divisionPoliticaTipos.length > 0 ) {
+         this.politicalDivision.idDivisionPoliticaTipo = this.divisionPoliticaTipos[ 0 ].value;
+      }
    }
 
    newCity() {
@@ -295,6 +301,9 @@ export class DivisionPoliticaComponent implements OnInit {
       this.politicalDivision.codigoDivisionPolitica = this.selectedNode.data.codigoDivisionPolitica;
       // let nodeCode = this.getCodigoTypebyId( this.selectedNode.data.idDivisionPoliticaTipo );
       this.codeExists = false;
+      if ( this.divisionPoliticaTipos.length > 0 ) {
+         this.politicalDivision.idDivisionPoliticaTipo = this.divisionPoliticaTipos[ 0 ].value;
+      }
    }
 
    newNeighborhood() {
@@ -308,6 +317,9 @@ export class DivisionPoliticaComponent implements OnInit {
       this.politicalDivision.codigoDivisionPolitica = this.selectedNode.data.codigoDivisionPolitica;
       // let nodeCode = this.getCodigoTypebyId( this.selectedNode.data.idDivisionPoliticaTipo );
       this.codeExists = false;
+      if ( this.divisionPoliticaTipos.length > 0 ) {
+         this.politicalDivision.idDivisionPoliticaTipo = this.divisionPoliticaTipos[ 0 ].value;
+      }
    }
 
    getTiposbyCode( id: string ): void {
@@ -317,9 +329,6 @@ export class DivisionPoliticaComponent implements OnInit {
                                              label: dp.descripcionTipo,
                                              value: dp.idDivisionPoliticaTipo
                                           } );
-      }
-      if ( this.divisionPoliticaTipos.length > 0 && this.politicalDivision.idDivisionPoliticaTipo === null ) {
-         this.politicalDivision.idDivisionPoliticaTipo = this.divisionPoliticaTipos[ 0 ].value;
       }
    }
 
