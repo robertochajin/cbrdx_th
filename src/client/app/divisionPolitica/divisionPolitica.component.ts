@@ -198,7 +198,11 @@ export class DivisionPoliticaComponent implements OnInit {
             this.guardado = false;
             let typeMessage = 1; // 1 = Add, 2 = Update, 3 Error, 4 Custom
             this.navService.setMesage( typeMessage, this.msg );
-            data.nivel = this.tabselected + 1;
+            if ( this.politicalDivision.idDivisionPoliticaPadre === 0 ) {
+               data.nivel = 1;
+            }else{
+               data.nivel = this.tabselected + 1;
+            }
             let chil: any[] = [];
             if ( this.tabselected <= 3 ) {
                chil = [ {
