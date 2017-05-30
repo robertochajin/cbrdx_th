@@ -338,6 +338,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
       this.positionsService.get(pp.idCargo).subscribe(res=>{
          this.indicadorZonaPosition= res.indicadorZona;
       });
+      this.listZonas=[];
       this.zonesServices.getAllByOrganizationalStructure( this.area.idEstructuraOrganizacional ).subscribe( res => {
          this.listZonas.push( { label: 'Seleccione', value: null } );
          for(let s of res) {

@@ -620,6 +620,7 @@
            "MSG_CRITERIOSREPETIDOS" : "No puede tener criterios repetidos",
            "MSG_CRITERIOSSUMA" : "La suma es 100, perfecto!",
            "MSG_CRITERIO" : "Lo siento, debe sumar 100",
+           "MSG_DOSEARCH" : "Para visualizar los cargos debe realizar una búsqueda válida",
            "MSG_CRITERIOS" : "La suma de factores para todos los críterios debe ser 100 para poder guardar"
 
 
