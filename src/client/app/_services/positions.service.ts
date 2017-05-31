@@ -43,7 +43,7 @@ export class PositionsService {
 
    add( c: Positions ) {
       c.auditoriaUsuario = this.idUsuario;
-      return this.authHttp.post( this.serviceURL + 'cargos', c ).map( ( res: Response ) => res.json() );
+      return this.authHttp.post( this.serviceURL + 'cargos', c ).map( ( res: Response ) => res.json() as Positions );
    };
 
    addPositionsActivities( c: PositionsActivities ) {
