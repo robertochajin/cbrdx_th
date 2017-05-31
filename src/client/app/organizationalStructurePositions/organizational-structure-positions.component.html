@@ -293,7 +293,11 @@
 						<p-column field="cargo" header="{{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}"></p-column>
 						<p-column field="nombreCompleto" header="{{ 'EMPLOYEES.LBL_COLABORADOR' | translate }}" [sortable]="true"></p-column>
 						<p-column field="asignadoDesde" header="{{ 'PLANTACOLABORADORES.LBL_ASIGNADODESDE' | translate }}"
-						          [sortable]="true"></p-column>
+						          [sortable]="true">
+							<template let-pp="rowData" pTemplate="body">
+								{{ pp.asignadoDesde | date: 'yyyy-MM-dd'}}
+							</template>
+						</p-column>
 						<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 							<template let-pp="rowData" pTemplate="body">
 								<div class="btn-group" role="group">

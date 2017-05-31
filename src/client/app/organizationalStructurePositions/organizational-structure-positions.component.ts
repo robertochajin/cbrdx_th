@@ -257,6 +257,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
             this.personPositionService.add( this.personsPosition ).subscribe( res => {
                res.nombreCompleto = this.selectedEmployee.nombreCompleto;
                res.cargo = this.personsPosition.cargo;
+               res.idCargo = this.personsPosition.idCargo;
 
                // res.asignadoDesde = fi.subtract( 2, 'days' ).format( 'YYYY-MM-DD' );
                this.postionSlots[ this.postionSlots.indexOf( this.backUpPersonsPosition ) ] = res;
@@ -347,7 +348,8 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
       } );
       this.backUpPersonsPosition = new PersonPositions();
       this.backUpPersonsPosition = pp;
-      this.personsPosition = JSON.parse( JSON.stringify( pp ) );
+      this.personsPosition = Object.assign( {}, pp );
+      // this.personsPosition = JSON.parse( JSON.stringify( pp ) );
       if ( this.personsPosition.asignadoDesde !== undefined ) {
          // let fi: moment.Moment = moment( this.personsPosition.asignadoDesde, 'YYYY-MM-DD' );
          // this.personsPosition.asignadoDesde = fi.format( 'MM/DD/YYYY' );
