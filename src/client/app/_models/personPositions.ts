@@ -12,7 +12,7 @@ export class PersonPositions {
    auditoriaFecha: string;
    idTercero: number;
    idEstructuraOrganizacionalCargo: number;
-   asignadoDesde: string;
+   asignadoDesde: Date;
 
    // Atributos auxiliares
    cargo: string;
