@@ -224,11 +224,16 @@
 									<div class="row">
 										<div class="form-group col-md-3">
 											<label for="ingreso">* {{ 'PLANTACOLABORADORES.LBL_ASIGNADODESDE' | translate }}</label>
-											<p-calendar id="ingreso" name="ingreso" [showIcon]="true" [maxDate]="maxDate"
-											            [yearNavigator]="true" [locale]="es" readonlyInput="true"
-											            #ingreso="ngModel" required="true" [dataType]="date"
-											            (onSelect)="onSelectBegin($event)" [yearRange]="range"
-											            [(ngModel)]="personsPosition.asignadoDesde"></p-calendar>
+											<p-calendar id="ingreso" name="ingreso"  [showIcon]="true"
+											            [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true"
+											            [maxDate]="maxDate"  dataType="date" #ingreso="ngModel" required="true"
+											            [(ngModel)]="personsPosition.asignadoDesde" dateFormat="yy'-'mm'-'dd"></p-calendar>
+											
+											<!--<p-calendar id="ingreso" name="ingreso" [showIcon]="true" [maxDate]="maxDate"-->
+											            <!--[yearNavigator]="true" [locale]="es" readonlyInput="true"-->
+											            <!--#ingreso="ngModel" required="true" [dataType]="date"-->
+											            <!--[yearRange]="range" -->
+											            <!--&gt;</p-calendar>-->
 											<div class="ui-message ui-messages-error ui-corner-all"
 											     *ngIf="pp.submitted && !ingreso.valid">
 												<i class="fa fa-close"></i>
@@ -237,12 +242,12 @@
 										</div>
 										<div class="form-group col-md-5">
 											<label for="tipoContrato">* {{ 'PLANTACOLABORADORES.LBL_TIPOCONTRATO' | translate }}</label>
-											<p-dropdown name="tipoContrato" id="tipoContrato" #tipoContrato="ngModel"
+											<p-dropdown name="tipoContrato" id="tipoContrato" #idtipoContrato="ngModel"
 											            required="true"
 											            [autoWidth]="false" [(ngModel)]="personsPosition.idTipoContrato"
 											            [options]="contracTypeList"></p-dropdown>
 											<div class="ui-message ui-messages-error ui-corner-all"
-											     *ngIf="pp.submitted && !ingreso.valid">
+											     *ngIf="pp.submitted && !idtipoContrato.valid">
 												<i class="fa fa-close"></i>
 												{{ 'PLANTACOLABORADORES.LBL_TIPOCONTRATO' | translate }}
 											</div>
@@ -259,7 +264,7 @@
 											<div class="ui-message ui-messages-error ui-corner-all"
 											     *ngIf="pp.submitted && !zona.valid">
 												<i class="fa fa-close"></i>
-												{{'EMPLOYEES.LBL_TIPOVEHICULO' | translate }} {{'LBL_REQUERIDO' | translate }}
+												{{'PLANTACOLABORADORES.LBL_ZONA' | translate }} {{'LBL_REQUERIDO' | translate }}
 											</div>
 										</div>
 									</div>
@@ -288,7 +293,11 @@
 						<p-column field="cargo" header="{{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}"></p-column>
 						<p-column field="nombreCompleto" header="{{ 'EMPLOYEES.LBL_COLABORADOR' | translate }}" [sortable]="true"></p-column>
 						<p-column field="asignadoDesde" header="{{ 'PLANTACOLABORADORES.LBL_ASIGNADODESDE' | translate }}"
-						          [sortable]="true"></p-column>
+						          [sortable]="true">
+							<template let-pp="rowData" pTemplate="body">
+								{{ pp.asignadoDesde | date: 'yyyy-MM-dd'}}
+							</template>
+						</p-column>
 						<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 							<template let-pp="rowData" pTemplate="body">
 								<div class="btn-group" role="group">
