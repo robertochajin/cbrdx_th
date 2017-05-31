@@ -23,6 +23,10 @@ export class VacanciesService {
    getAll() {
       return this.authHttp.get( this.serviceURL + 'requerimientos' ).map( ( res: Response ) => res.json() as PersonnelRequirement[] );
    }
+   getByRespSelecAndIdEstad(idR: number, idE: number) {
+      return this.authHttp.get( this.serviceURL + 'requerimientos/filtroReq/'+idE+'/'+idR ).map( ( res: Response ) =>
+      res.json() as PersonnelRequirement[] );
+   }
 
    getByDate( fInicio: string, fFin: string ) {
       return this.authHttp.get( this.serviceURL + 'requerimientos/fecha/' + fInicio + '/'  + fFin)
