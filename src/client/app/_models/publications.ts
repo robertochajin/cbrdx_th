@@ -6,11 +6,11 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class Publications {
 
-   idRequerimientosPublicaciones: number;
+   idPublicacion: number;
    idRequermiento: number;
    fechaInicio: Date;
    fechaFin: Date;
-   indicadorMostrarSalario: boolean;
+   indicadorSalario: boolean;
    indicadorBonificacion: boolean;
    idNivelEducacion: number;
    idTipoTrabajo: number;
@@ -18,12 +18,13 @@ export class Publications {
    lugarDeTrabajo: string;
    competenciasLaborales: string;
    observacion: string;
-   indicadorObservacion: boolean= true;
+   indicadorObservacion: boolean;
+   indicadorHabilitado: boolean= true;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
 
    constructor() {
-      this.idRequerimientosPublicaciones = null;
+      this.idPublicacion = null;
       this.auditoriaUsuario = null;
       this.auditoriaFecha = null;
    }

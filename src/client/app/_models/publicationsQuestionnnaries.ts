@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class PublicationsQuestionnaries {
 
-   idPublicacionCuestionarios: number;
+   idPublicacion: number;
    idCuestionario: number;
    orden: number;
    indicadorHabilitado: boolean= true;
@@ -14,7 +14,7 @@ export class PublicationsQuestionnaries {
    auditoriaFecha: Date;
 
    constructor() {
-      this.idPublicacionCuestionarios = null;
+      this.idPublicacion = null;
       this.auditoriaUsuario = null;
       this.auditoriaFecha = null;
    }
