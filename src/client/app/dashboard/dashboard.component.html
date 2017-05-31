@@ -9,6 +9,7 @@
 </div>
 
 <div class="row">
+	
          <div class="col-md-8" id="rolesSistema"
               *ngIf="allWidgets[0].habilitado && allWidgets[0].visible">
             <p-panel>
@@ -70,6 +71,38 @@
 
             </p-panel>
          </div>
+	
+			<div class="col-md-4" id="VACANTES" *ngIf="allWidgets[1].habilitado && allWidgets[1].visible">
+				<p-panel>
+					<p-header>
+						<div class="ui-helper-clearfix">
+							<span class="ui-panel-title"></span>
+							<button class="pull-right" type="text" (click)="allWidgets[2].visible = !allWidgets[2].visible" icon=""><i
+								class="fa fa-close"></i></button>
+						</div>
+					</p-header>
+					<div class="ui-grid-row ">
+						
+						<div class="info-box" style="background: #f9f9f9;">
+							<span class="info-box-icon bg-green"><i class="fa fa-user"></i></span>
+							<div class="info-box-content">
+								<span class="info-box-text">{{ 'LBL_USUARIOS' | translate }} {{ 'INICIO_DASHBOARD.LBL_ACTIVO' | translate }}</span>
+								<span class="info-box-number"
+								      style="text-align: center;font-size: 2.4em;">{{usuariosActivos}}</span>
+							</div>
+						</div>
+						
+						<div class="pull-right">
+							<a (click)="user()" class="verMás btn btn-primary btn-sm">
+								Ver Más <i class="fa fa-chevron-right"></i>
+							</a>
+						</div>
+					
+					</div>
+				
+				
+				</p-panel>
+			</div>
 
 </div>
 

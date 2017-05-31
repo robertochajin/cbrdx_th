@@ -38,6 +38,7 @@ export class DashboardComponent implements OnInit {
       { codigo: 'WROLES', habilitado: false, visible: true, nombre: '' },
       { codigo: 'WUSUACT', habilitado: false, visible: true, nombre: '' },
       { codigo: 'WCUMPLE', habilitado: false, visible: true, nombre: '' },
+      { codigo: 'VACANTES', habilitado: false, visible: true, nombre: '' },
    ];
 
    constructor( private router: Router, private rolesService: RolesService, private  tercerosServices: TercerosService,
@@ -209,6 +210,27 @@ export class DashboardComponent implements OnInit {
       this._translate.get( 'Usuarios del Sistema' ).subscribe( ( res: string ) => {
          this.usuariosTitle = res;
       } );
+   }
+
+   idWidgetRendered(code: string) : boolean {
+      let rolWidget = this.rolWidgets.find(d => d.codigoWidget === code);
+      if( rolWidget ) {
+         this.allWidgets.map( (aw:any) => {
+            if(code === aw.codigo) {
+               aw.visible = true;
+               aw.habilitado = true;
+            }
+         });
+         return true;
+      } else {
+         this.allWidgets.map( (aw:any) => {
+            if(code === aw.codigo) {
+               aw.visible = false;
+               aw.habilitado = false;
+            }
+         });
+         return false;
+      }
    }
 
 }
