@@ -840,6 +840,25 @@
       "LBL_OBSERVACION" : "Observación",
       "LBL_NOMBREJEFEINMEDIATO":"jefe Directo"
    },
+   "PROCESOSELECCION":{
+      "LBL_PROCESOSELECCION" : "Proceso de selección",
+      "LBL_VACANTE" : "Vacante",
+      "LBL_FORMA" : "Forma",
+      "LBL_POSTULADOS" : "Postulados",
+      "LBL_FECHADESDE" : "Fecha Desde",
+      "LBL_FECHAHASTA" : "Fecha Hasta",
+      "LBL_AREA" : "Area",
+      "LBL_OFICINA" : "Oficina",
+      "LBL_SALARIO" : "Salario",
+      "LBL_PUBLICARVACANTE" : "Publicar vacante",
+      "LBL_CUESTIONARIOS" : "Cuestionarios",
+      "LBL_ESTADO" : "Estado",
+      "LBL_PROFESSIONAL" : "Profesional de Reclutamiento",
+      "LBL_RECRUITMENT" : "Forma de reclutamiento",
+      "LBL_OBSERVACION" : "Observación",
+      "LBL_NOMBREJEFEINMEDIATO":"jefe Directo"
+   },
+
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 
