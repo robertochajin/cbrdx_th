@@ -72,29 +72,29 @@
             </p-panel>
          </div>
 	
-			<div class="col-md-4" id="VACANTES" *ngIf="allWidgets[1].habilitado && allWidgets[1].visible">
+			<div class="col-md-4" id="VACANTES" *ngIf="allWidgets[2].habilitado && allWidgets[2].visible">
 				<p-panel>
 					<p-header>
 						<div class="ui-helper-clearfix">
-							<span class="ui-panel-title"></span>
+							<span class="ui-panel-title">{{ 'WIDGETS.LBL_VACANTES' | translate }}</span>
 							<button class="pull-right" type="text" (click)="allWidgets[2].visible = !allWidgets[2].visible" icon=""><i
 								class="fa fa-close"></i></button>
 						</div>
 					</p-header>
 					<div class="ui-grid-row ">
 						
-						<div class="info-box" style="background: #f9f9f9;">
-							<span class="info-box-icon bg-green"><i class="fa fa-user"></i></span>
-							<div class="info-box-content">
-								<span class="info-box-text">{{ 'LBL_USUARIOS' | translate }} {{ 'INICIO_DASHBOARD.LBL_ACTIVO' | translate }}</span>
-								<span class="info-box-number"
-								      style="text-align: center;font-size: 2.4em;">{{usuariosActivos}}</span>
-							</div>
-						</div>
+						<ul class="list-group">
+							<li *ngFor="let vacancy of publications" class="list-group-item">
+								<h4>{{vacancy.cargo}}</h4>
+								<h5>{{ 'WIDGETS.LBL_FECHALIMITE' | translate}}: {{vacancy.fechaFin}}</h5>
+								<p>{{vacancy.descripcionGeneral}}</p>
+								<button pButton icon="fa-check" label="{{'WIDGETS.BTN_APLICAR' | translate }}" (click)="aplicar()"></button>
+							</li>
+						</ul>
 						
 						<div class="pull-right">
 							<a (click)="user()" class="verMás btn btn-primary btn-sm">
-								Ver Más <i class="fa fa-chevron-right"></i>
+								{{ 'WIDGETS.BTN_VERMAS' | translate }} <i class="fa fa-chevron-right"></i>
 							</a>
 						</div>
 					

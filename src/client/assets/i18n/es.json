@@ -140,6 +140,10 @@
       "BTN_AGREGARWIDGETS":"Agregar Widgets",
       "LBL_EDITANDO":"Editando widgets",
       "LBL_DETALLEWIDGETS":"Detalle widgets",
+      "LBL_VACANTES":"Vacantes recientes",
+      "LBL_FECHALIMITE":"Fecha límite",
+      "BTN_APLICAR":"Aplicar",
+      "BTN_VERMAS":"Ver más",
       "LBL_CONFIGURARWIDGETS":"Configurar Widgets"
    },
 

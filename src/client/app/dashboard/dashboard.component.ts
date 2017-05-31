@@ -9,6 +9,7 @@ import { RolesService } from '../_services/roles.service';
 import { Widgets } from '../_models/widgets';
 import { WidgetServices } from '../_services/widget.service';
 import { JwtHelper } from 'angular2-jwt';
+import { Publications } from '../_models/publications';
 
 @Component( {
                moduleId: module.id,
@@ -31,14 +32,15 @@ export class DashboardComponent implements OnInit {
    options: any;
    displayDialog: boolean;
    rolWidgets: Widgets[];
+   publications: Publications[] = []
    usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
    jwtHelper: JwtHelper = new JwtHelper();
 
    allWidgets: any = [
       { codigo: 'WROLES', habilitado: false, visible: true, nombre: '' },
       { codigo: 'WUSUACT', habilitado: false, visible: true, nombre: '' },
-      { codigo: 'WCUMPLE', habilitado: false, visible: true, nombre: '' },
       { codigo: 'VACANTES', habilitado: false, visible: true, nombre: '' },
+      { codigo: 'WCUMPLE', habilitado: false, visible: true, nombre: '' },
    ];
 
    constructor( private router: Router, private rolesService: RolesService, private  tercerosServices: TercerosService,
@@ -164,6 +166,45 @@ export class DashboardComponent implements OnInit {
             position: 'right'
          };
       } );
+
+      this.publications.push({
+      idPublicacion: 1,
+      idRequermiento: 1,
+      fechaInicio: new Date,
+      fechaFin: new Date,
+      indicadorSalario: true,
+      indicadorBonificacion: true,
+      idNivelEducacion: 1,
+      idTipoTrabajo: 1,
+      descripcionGeneral: 'Esta es una descripción general',
+      lugarDeTrabajo: '',
+      competenciasLaborales: '',
+      observacion: '',
+      indicadorObservacion: true,
+      indicadorHabilitado: true,
+      auditoriaUsuario: 1,
+      auditoriaFecha: new Date,
+      cargo: 'un cargo'
+                             });
+      this.publications.push({
+      idPublicacion: 1,
+      idRequermiento: 1,
+      fechaInicio: new Date,
+      fechaFin: new Date,
+      indicadorSalario: true,
+      indicadorBonificacion: true,
+      idNivelEducacion: 1,
+      idTipoTrabajo: 1,
+      descripcionGeneral: 'Esta es otra descripción general',
+      lugarDeTrabajo: '',
+      competenciasLaborales: '',
+      observacion: '',
+      indicadorObservacion: true,
+      indicadorHabilitado: true,
+      auditoriaUsuario: 1,
+      auditoriaFecha: new Date,
+      cargo: 'otro cargo'
+                             });
    }
 
    user() {
