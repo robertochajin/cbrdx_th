@@ -6,8 +6,11 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class PublicationsQuestionnaries {
 
+   idPublicacionCustionario: number;
    idPublicacion: number;
    idCuestionario: number;
+   cuestionario: string;
+   descripcion: string;
    orden: number;
    indicadorHabilitado: boolean= true;
    auditoriaUsuario: number;

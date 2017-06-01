@@ -14,7 +14,7 @@ import { ListPositionsService } from '../_services/lists-positions.service';
 import { ZonesServices } from '../_services/zones.service';
 import { ResoursesRequiredServices } from '../_services/resourcesRequiredPurchases.service';
 import { ResoursesTicsService } from '../_services/resoursesTics.service';
-import { QuestionnairesService } from '../_services/questionnaires.service';
+import { RequirementQuestionnairesService } from '../_services/requirement-questionnaires.service';
 import { RequirementReferralsServices } from '../_services/requirement-referrals.service';
 import { ConstanteService } from '../_services/constante.service';
 import { VacanciesService } from '../_services/vacancies.service';
@@ -43,7 +43,7 @@ import { OrganizationalStructurePositionsServices } from '../_services/organizat
                  ZonesServices,
                  ResoursesRequiredServices,
                  ResoursesTicsService,
-                 QuestionnairesService
+                 RequirementQuestionnairesService
               ],
               exports: [ PersonnelRequirementComponent ]
            } )

@@ -1,6 +1,3 @@
-/**
- * Created by Andres on 30/05/2017.
- */
 import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -16,6 +13,10 @@ import { Publications } from '../_models/publications';
 import { VacanciesService } from '../_services/vacancies.service';
 import { PersonnelRequirement } from '../_models/personnelRequirement';
 import { PositionsService } from '../_services/positions.service';
+import { PublicationsQuestionnaries } from '../_models/publicationsQuestionnnaries';
+import { PublicationQuestionnairesService } from '../_services/publication-questionnaires.service';
+import { QuestionnairesService } from '../_services/questionnaires.service';
+import { Questionnaries } from '../_models/questionnaries';
 import { PublicationsService } from '../_services/publications.service';
 import { RequirementReferralsServices } from '../_services/requirement-referrals.service';
 import { RequirementReferral } from '../_models/requirementReferral';
@@ -41,12 +42,22 @@ export class SelectionProcessAddComponent implements OnInit {
    maxDate: Date = null;
    range: string;
 
+   // var cuestionarios
+   publicationsQuestionnaires:PublicationsQuestionnaries[] =[];
+   allPublicationsQuestionnaires:PublicationsQuestionnaries[] =[];
+   private questionnaries: Questionnaries[] = [];
+   private questionnariesList: SelectItem[] = [];
+   private questionnarie: Questionnaries;
+   // fin var cuestionarios
+
    constructor( private employeeVehicleService: EmployeeVehicleService,
       private listaService: ListaService,
       private router: Router,
       private route: ActivatedRoute,
       private location: Location,
       private vacanciesService: VacanciesService,
+      private questionnairesService: QuestionnairesService,
+      private publicationQuestionnairesService: PublicationQuestionnairesService,
       private positionsService: PositionsService,
       private publicationsService: PublicationsService,
       private referralsServices: RequirementReferralsServices,
@@ -109,6 +120,22 @@ export class SelectionProcessAddComponent implements OnInit {
          } );
       } );
 
+      this.publicationQuestionnairesService.getAllByPublication(9).subscribe( res => {
+         this.allPublicationsQuestionnaires = res;
+         this.questionnairesService.getAllEnabled().subscribe(qst => {
+            this.questionnariesList.push({label:'Seleccione...', value :null});
+            this.questionnaries = qst;
+            this.allPublicationsQuestionnaires.map(pq => {
+               if(pq.indicadorHabilitado === false){
+                  this.pushQuestionnaireOption( pq.idCuestionario);
+               } else {
+                  this.publicationsQuestionnaires.push(pq);
+               }
+            })
+         });
+      });
+
+
    }
 
    onSubmit() {
@@ -141,5 +168,96 @@ export class SelectionProcessAddComponent implements OnInit {
    captureCity( event: any ) {
 
    }
+
+   // funciones cuestionarios
+
+   sendBefore(questionnaire:PublicationsQuestionnaries){
+      let myIndex = this.publicationsQuestionnaires.indexOf(questionnaire);
+      if(myIndex < this.publicationsQuestionnaires.length){
+         let newOrder = this.publicationsQuestionnaires[myIndex].orden;
+         this.publicationsQuestionnaires[myIndex].orden = this.publicationsQuestionnaires[myIndex+1].orden;
+         this.publicationQuestionnairesService.update(this.publicationsQuestionnaires[myIndex]).subscribe(res => {
+            if(res.ok) {
+               this.publicationsQuestionnaires[myIndex+1].orden = newOrder;
+               this.publicationQuestionnairesService.update(this.publicationsQuestionnaires[myIndex+1]).subscribe(res => {
+                  if ( res.ok ) {
+                     this.sortPublicationQuestionaries();
+                  }
+               });
+            }
+         });
+      }
+   }
+
+   sendAfter(questionnaire:PublicationsQuestionnaries){
+      let myIndex = this.publicationsQuestionnaires.indexOf(questionnaire);
+      if(myIndex > 0){
+         let newOrder = this.publicationsQuestionnaires[myIndex].orden;
+         this.publicationsQuestionnaires[myIndex].orden = this.publicationsQuestionnaires[myIndex-1].orden;
+         this.publicationQuestionnairesService.update(this.publicationsQuestionnaires[myIndex]).subscribe(res => {
+            if(res.ok) {
+               this.publicationsQuestionnaires[myIndex-1].orden = newOrder;
+               this.publicationQuestionnairesService.update(this.publicationsQuestionnaires[myIndex-1]).subscribe(res => {
+                  if ( res.ok ) {
+                     this.sortPublicationQuestionaries();
+                  }
+               });
+            }
+         });
+      }
+   }
+
+   disableQuestionnaire(questionnaire:PublicationsQuestionnaries){
+      this.confirmationService.confirm( {
+                                           message: ` ¿Esta seguro que lo desea eliminar?`,
+                                           header: 'Corfirmación',
+                                           icon: 'fa fa-question-circle',
+                                           accept: () => {
+                                              let myIndex = this.publicationsQuestionnaires.indexOf(questionnaire);
+                                              questionnaire.indicadorHabilitado = false;
+                                              this.publicationQuestionnairesService.update(questionnaire).subscribe(res => {
+                                                 if ( res.ok ) {
+                                                    for (let i = myIndex+1; i++; i < this.publicationsQuestionnaires.length) {
+                                                       this.publicationsQuestionnaires[i].orden -= 1;
+                                                    }
+                                                    this.publicationsQuestionnaires.slice(myIndex,1);
+                                                    this.sortPublicationQuestionaries();
+                                                 }
+                                              });
+                                           },
+                                           reject: () => {
+                                           }
+                                        } );
+   }
+
+   private sortPublicationQuestionaries() {
+      this.publicationsQuestionnaires.sort(function ( a, b ) {
+         if(a.orden < b.orden)
+            return -1;
+         else
+            return 1;
+      })
+   }
+
+   addPublicationsQuestionnaire(){
+      let pq: PublicationsQuestionnaries = new PublicationsQuestionnaries();
+      pq = this.allPublicationsQuestionnaires.find(pqs => pqs.idCuestionario === this.questionnarie.idCuestionario);
+      if (pq !== undefined && pq.idPublicacionCustionario !== undefined && pq.idPublicacionCustionario !== null){
+         pq.indicadorHabilitado = true;
+         pq.orden = this.publicationsQuestionnaires.length;
+         this.publicationQuestionnairesService.update(pq).subscribe(res =>{
+            if(res.ok) {
+               this.publicationsQuestionnaires.push(pq);
+            }
+         });
+      }
+   }
+
+   private pushQuestionnaireOption( idCuestionario: number ) {
+      let qst = this.questionnaries.find(q=>q.idCuestionario === idCuestionario);
+      qst ? this.questionnariesList.push({label: qst.codigo+':'+qst.cuestionario,value:qst.idCuestionario}):null;
+   }
+
+   // fin funciones cuestionarios
 
 }
