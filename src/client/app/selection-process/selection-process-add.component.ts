@@ -18,6 +18,8 @@ import { Publications } from '../_models/publications';
 import { VacanciesService } from '../_services/vacancies.service';
 import { PersonnelRequirement } from '../_models/personnelRequirement';
 import { PositionsService } from '../_services/positions.service';
+import { RequirementReferralsServices } from '../_services/requirement-referrals.service';
+import { RequirementReferral } from '../_models/requirementReferral';
 @Component( {
                moduleId: module.id,
                selector: 'selecction-process-add',
@@ -29,13 +31,15 @@ export class SelectionProcessAddComponent implements OnInit {
 
    publication: Publications=new Publications();
    vacancy: PersonnelRequirement= new PersonnelRequirement();
+   requirementReferrals: RequirementReferral[] = [];
    listTypeVehicle: SelectItem[] = [];
-   listTypeService: SelectItem[] = [];
-   listBrandVehicle: SelectItem[] = [];
    msgs: Message[] = [];
    year: number;
-   anioValid: boolean = false;
    acordion:number;
+   es:any;
+   minDate: Date = null;
+   maxDate: Date = null;
+   range: string;
 
    constructor( private employeeVehicleService: EmployeeVehicleService,
       private listaService: ListaService,
@@ -44,6 +48,7 @@ export class SelectionProcessAddComponent implements OnInit {
       private location: Location,
       private vacanciesService: VacanciesService,
       private positionsService: PositionsService,
+      private referralsServices: RequirementReferralsServices,
       private listEmployeesService: ListEmployeesService,
       private politicalDivisionService: PoliticalDivisionService,
       private confirmationService: ConfirmationService,
@@ -55,32 +60,42 @@ export class SelectionProcessAddComponent implements OnInit {
       this.acordion=0;
       let today = new Date();
       let year = today.getFullYear();
-      this.year = year + 1;
+      this.year = year;
+      let lastYear = year + 50;
+      this.range = `${year}:${lastYear}`;
+
+      this.minDate= new Date();
+      this.es = {
+         firstDayOfWeek: 1,
+         dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
+         dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
+         dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
+         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre',
+            'diciembre'
+         ],
+         monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
+      };
 
       this.route.params.subscribe( ( params: Params ) => {
          this.vacanciesService.get( +params[ 'idReq' ]).subscribe(data=>{
             this.vacancy =data;
-
          });
-      } );
-
-      this.listaService.getMasterDetails( 'ListasTiposServiciosVehiculos' ).subscribe( res => {
-         this.listTypeService.push( { label: 'Seleccione', value: null } );
-         res.map( ( s: ListaItem ) => {
-            this.listTypeService.push( { label: s.nombre, value: s.idLista } );
+         this.referralsServices.getAllRequirement( +params[ 'idReq' ] ).subscribe( ref => {
+            this.requirementReferrals = ref;
          } );
       } );
 
-      this.listaService.getMasterDetails( 'ListasMarcasVehiculos' ).subscribe( res => {
-         this.listBrandVehicle.push( { label: 'Seleccione', value: null } );
+      this.listaService.getMasterDetails( 'ListasTiposServiciosVehiculos' ).subscribe( res => {
+         this.listTypeVehicle.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
-            this.listBrandVehicle.push( { label: s.nombre, value: s.idLista } );
+            this.listTypeVehicle.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
 
    }
 
    onSubmit() {
+
 
    }
 

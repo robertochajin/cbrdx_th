@@ -845,8 +845,10 @@
       "LBL_VACANTE" : "Vacante",
       "LBL_FORMA" : "Forma",
       "LBL_POSTULADOS" : "Postulados",
-      "LBL_FECHADESDE" : "Fecha Desde",
-      "LBL_FECHAHASTA" : "Fecha Hasta",
+      "LBL_FECHADESDE" : "Desde",
+      "LBL_FECHAHASTA" : "Hasta",
+      "LBL_FECHA" : "Hasta",
+      "LBL_REQUERIDO" : "Requerido",
       "LBL_AREA" : "Area",
       "LBL_OFICINA" : "Oficina",
       "LBL_SALARIO" : "Salario",
@@ -856,7 +858,11 @@
       "LBL_PROFESSIONAL" : "Profesional de Reclutamiento",
       "LBL_RECRUITMENT" : "Forma de reclutamiento",
       "LBL_OBSERVACION" : "Observación",
-      "LBL_NOMBREJEFEINMEDIATO":"jefe Directo"
+      "LBL_NOMBREJEFEINMEDIATO":"jefe Directo",
+      "LBL_TIPOTRABAJO":"Tipo de trabajo",
+      "LBL_LUGARTRABAJO":"Luagar de trabajo",
+      "LBL_COMPETENCIAS":"Competencias laborales",
+      "LBL_FORMACIONEDUCATIVA":"Formación educativa"
    },
 
 
