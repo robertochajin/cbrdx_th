@@ -40,13 +40,13 @@ export class PublicationsService {
    //    } );
    // }
    //
-   // add( c: Publications ) {
-   //    c.auditoriaUsuario = this.idUsuario;
-   //    return this.authHttp.post( this.serviceURL + 'cargosProductividades', c ).map( ( res: Response ) => res.json() );
-   // };
-   //
-   // update( c: Publications ) {
-   //    c.auditoriaUsuario = this.idUsuario;
-   //    return this.authHttp.put( this.serviceURL + 'cargosProductividades', c ).map( ( res: Response ) => res );
-   // }
+   add( c: Publications ) {
+      c.auditoriaUsuario = this.idUsuario;
+      return this.authHttp.post( this.serviceURL + 'publicaciones', c ).map( ( res: Response ) => res.json() );
+   };
+
+   update( c: Publications ) {
+      c.auditoriaUsuario = this.idUsuario;
+      return this.authHttp.put( this.serviceURL + 'publicaciones', c ).map( ( res: Response ) => res );
+   }
 }

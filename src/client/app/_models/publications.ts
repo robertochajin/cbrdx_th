@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class Publications {
 
    idPublicacion: number;
-   idRequermiento: number;
+   idRequerimiento: number;
    fechaInicio: Date;
    fechaFin: Date;
    indicadorSalario: boolean;
@@ -15,7 +15,7 @@ export class Publications {
    idNivelEducacion: number;
    idTipoTrabajo: number;
    descripcionGeneral: string;
-   lugarDeTrabajo: string;
+   lugarTrabajo: string;
    competenciasLaborales: string;
    observacion: string;
    indicadorObservacion: boolean;
