@@ -42,6 +42,29 @@
 			</p-accordionTab>
 			<p-accordionTab header="{{ 'PROCESOSELECCION.LBL_CUESTIONARIOS' | translate }}"
 			                [selected]="acordion==1">
+				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="publicationsQuestionnaires"
+				             [responsive]="true" >
+					<p-column field="cuestionario" header="{{ 'PROCESOSELECCION.LBL_CUESTIONARIO' | translate }}" [sortable]="false"></p-column>
+					<p-column field="descripcion" header="{{ 'PROCESOSELECCION.LBL_DESCRIPCION' | translate }}" [sortable]="false"></p-column>
+					<p-column header="{{ 'LBL_ORDEN' | translate }}" styleClass="datatable-col-action" >
+						<template let-qstn="rowData" pTemplate="body">
+							<div class="btn-group" role="group">
+								<button type="button"  class="ui-button ui-button-info btn" icon="fa-arrow-down"
+								        pButton (click)="sendBefore(qstn)" ></button>
+								<button type="button"  class="ui-button ui-button-info btn" icon="fa-arrow-up"
+								        pButton (click)="sendAfter(qstn)" ></button>
+							</div>
+						</template>
+					</p-column>
+					<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action" >
+						<template let-qstn="rowData" pTemplate="body">
+							<div class="btn-group" role="group">
+								<button type="button"  class="ui-button ui-button-danger btn" icon="fa-trash"
+								        pButton (click)="disableQuestionnaire(qstn)" ></button>
+							</div>
+						</template>
+					</p-column>
+				</p-dataTable>
 			</p-accordionTab>
 		</p-accordion>
 	</div>

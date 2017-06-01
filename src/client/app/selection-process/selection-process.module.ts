@@ -6,6 +6,8 @@ import { RolFuncionalitiesServices } from '../_services/rolFuncionalities.servic
 import { SelectionProcessComponent } from './selection-process.component';
 import { SelectionProcessAddComponent } from './selection-process-add.component';
 import { RolWidgetsServices } from '../_services/rolWidgets.service';
+import { VacanciesService } from '../_services/vacancies.service';
+import { PublicationQuestionnairesService } from '../_services/publication-questionnaires.service';
 
 @NgModule( {
               imports: [
@@ -17,9 +19,8 @@ import { RolWidgetsServices } from '../_services/rolWidgets.service';
               ],
               bootstrap: [ SelectionProcessComponent ],
               providers: [
-                 RolesService,
-                 RolFuncionalitiesServices,
-                 RolWidgetsServices
+                 VacanciesService,
+                 PublicationQuestionnairesService
               ],
               exports: [ SelectionProcessComponent ]
            } )

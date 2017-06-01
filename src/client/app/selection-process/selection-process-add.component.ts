@@ -1,6 +1,3 @@
-/**
- * Created by Andres on 30/05/2017.
- */
 import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -18,6 +15,8 @@ import { Publications } from '../_models/publications';
 import { VacanciesService } from '../_services/vacancies.service';
 import { PersonnelRequirement } from '../_models/personnelRequirement';
 import { PositionsService } from '../_services/positions.service';
+import { PublicationsQuestionnaries } from '../_models/publicationsQuestionnnaries';
+import { PublicationQuestionnairesService } from '../_services/publication-questionnaires.service';
 @Component( {
                moduleId: module.id,
                selector: 'selecction-process-add',
@@ -37,13 +36,17 @@ export class SelectionProcessAddComponent implements OnInit {
    anioValid: boolean = false;
    acordion:number;
 
+   // var cuestionarios
+   publicationsQuestionnaires:PublicationsQuestionnaries[] =[];
+   // fin var cuestionarios
+
    constructor( private employeeVehicleService: EmployeeVehicleService,
       private listaService: ListaService,
       private router: Router,
       private route: ActivatedRoute,
       private location: Location,
       private vacanciesService: VacanciesService,
-      private positionsService: PositionsService,
+      private publicationQuestionnairesService: PublicationQuestionnairesService,
       private listEmployeesService: ListEmployeesService,
       private politicalDivisionService: PoliticalDivisionService,
       private confirmationService: ConfirmationService,
@@ -78,6 +81,11 @@ export class SelectionProcessAddComponent implements OnInit {
          } );
       } );
 
+      this.publicationQuestionnairesService.getAllByPublication(9).subscribe( res => {
+         this.publicationsQuestionnaires = res;
+      });
+
+
    }
 
    onSubmit() {
@@ -109,5 +117,77 @@ export class SelectionProcessAddComponent implements OnInit {
    captureCity( event: any ) {
 
    }
+
+   // funciones cuestionarios
+
+   sendBefore(questionnaire:PublicationsQuestionnaries){
+      let myIndex = this.publicationsQuestionnaires.indexOf(questionnaire);
+      if(myIndex < this.publicationsQuestionnaires.length){
+         let newOrder = this.publicationsQuestionnaires[myIndex].orden;
+         this.publicationsQuestionnaires[myIndex].orden = this.publicationsQuestionnaires[myIndex+1].orden;
+         this.publicationQuestionnairesService.update(this.publicationsQuestionnaires[myIndex]).subscribe(res => {
+            if(res.ok) {
+               this.publicationsQuestionnaires[myIndex+1].orden = newOrder;
+               this.publicationQuestionnairesService.update(this.publicationsQuestionnaires[myIndex+1]).subscribe(res => {
+                  if ( res.ok ) {
+                     this.sortPublicationQuestionaries();
+                  }
+               });
+            }
+         });
+      }
+   }
+
+   sendAfter(questionnaire:PublicationsQuestionnaries){
+      let myIndex = this.publicationsQuestionnaires.indexOf(questionnaire);
+      if(myIndex > 0){
+         let newOrder = this.publicationsQuestionnaires[myIndex].orden;
+         this.publicationsQuestionnaires[myIndex].orden = this.publicationsQuestionnaires[myIndex-1].orden;
+         this.publicationQuestionnairesService.update(this.publicationsQuestionnaires[myIndex]).subscribe(res => {
+            if(res.ok) {
+               this.publicationsQuestionnaires[myIndex-1].orden = newOrder;
+               this.publicationQuestionnairesService.update(this.publicationsQuestionnaires[myIndex-1]).subscribe(res => {
+                  if ( res.ok ) {
+                     this.sortPublicationQuestionaries();
+                  }
+               });
+            }
+         });
+      }
+   }
+
+   disableQuestionnaire(questionnaire:PublicationsQuestionnaries){
+      this.confirmationService.confirm( {
+                                           message: ` ¿Esta seguro que lo desea eliminar?`,
+                                           header: 'Corfirmación',
+                                           icon: 'fa fa-question-circle',
+                                           accept: () => {
+                                              let myIndex = this.publicationsQuestionnaires.indexOf(questionnaire);
+                                              questionnaire.indicadorHabilitado = false;
+                                              this.publicationQuestionnairesService.update(questionnaire).subscribe(res => {
+                                                 if ( res.ok ) {
+                                                    for (let i = myIndex+1; i++; i < this.publicationsQuestionnaires.length) {
+                                                       this.publicationsQuestionnaires[i].orden -= 1;
+                                                    }
+                                                    this.publicationsQuestionnaires.slice(myIndex,1);
+                                                    this.sortPublicationQuestionaries();
+                                                 }
+                                              });
+                                           },
+                                           reject: () => {
+                                           }
+                                        } );
+   }
+
+   private sortPublicationQuestionaries() {
+      this.publicationsQuestionnaires.sort(function ( a, b ) {
+         if(a.orden < b.orden)
+            return -1;
+         else
+            return 1;
+      })
+   }
+
+   // fin funciones cuestionarios
 
 }
