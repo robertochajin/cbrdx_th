@@ -17,6 +17,8 @@ import { PersonnelRequirement } from '../_models/personnelRequirement';
 import { PositionsService } from '../_services/positions.service';
 import { PublicationsQuestionnaries } from '../_models/publicationsQuestionnnaries';
 import { PublicationQuestionnairesService } from '../_services/publication-questionnaires.service';
+import { QuestionnairesService } from '../_services/questionnaires.service';
+import { Questionnaries } from '../_models/questionnaries';
 @Component( {
                moduleId: module.id,
                selector: 'selecction-process-add',
@@ -38,6 +40,10 @@ export class SelectionProcessAddComponent implements OnInit {
 
    // var cuestionarios
    publicationsQuestionnaires:PublicationsQuestionnaries[] =[];
+   allPublicationsQuestionnaires:PublicationsQuestionnaries[] =[];
+   private questionnaries: Questionnaries[] = [];
+   private questionnariesList: SelectItem[] = [];
+   private questionnarie: Questionnaries;
    // fin var cuestionarios
 
    constructor( private employeeVehicleService: EmployeeVehicleService,
@@ -46,6 +52,7 @@ export class SelectionProcessAddComponent implements OnInit {
       private route: ActivatedRoute,
       private location: Location,
       private vacanciesService: VacanciesService,
+      private questionnairesService: QuestionnairesService,
       private publicationQuestionnairesService: PublicationQuestionnairesService,
       private listEmployeesService: ListEmployeesService,
       private politicalDivisionService: PoliticalDivisionService,
@@ -82,7 +89,18 @@ export class SelectionProcessAddComponent implements OnInit {
       } );
 
       this.publicationQuestionnairesService.getAllByPublication(9).subscribe( res => {
-         this.publicationsQuestionnaires = res;
+         this.allPublicationsQuestionnaires = res;
+         this.questionnairesService.getAllEnabled().subscribe(qst => {
+            this.questionnariesList.push({label:'Seleccione...', value :null});
+            this.questionnaries = qst;
+            this.allPublicationsQuestionnaires.map(pq => {
+               if(pq.indicadorHabilitado === false){
+                  this.pushQuestionnaireOption( pq.idCuestionario);
+               } else {
+                  this.publicationsQuestionnaires.push(pq);
+               }
+            })
+         });
       });
 
 
@@ -186,6 +204,25 @@ export class SelectionProcessAddComponent implements OnInit {
          else
             return 1;
       })
+   }
+
+   addPublicationsQuestionnaire(){
+      let pq: PublicationsQuestionnaries = new PublicationsQuestionnaries();
+      pq = this.allPublicationsQuestionnaires.find(pqs => pqs.idCuestionario === this.questionnarie.idCuestionario);
+      if (pq !== undefined && pq.idPublicacionCustionario !== undefined && pq.idPublicacionCustionario !== null){
+         pq.indicadorHabilitado = true;
+         pq.orden = this.publicationsQuestionnaires.length;
+         this.publicationQuestionnairesService.update(pq).subscribe(res =>{
+            if(res.ok) {
+               this.publicationsQuestionnaires.push(pq);
+            }
+         });
+      }
+   }
+
+   private pushQuestionnaireOption( idCuestionario: number ) {
+      let qst = this.questionnaries.find(q=>q.idCuestionario === idCuestionario);
+      qst ? this.questionnariesList.push({label: qst.codigo+':'+qst.cuestionario,value:qst.idCuestionario}):null;
    }
 
    // fin funciones cuestionarios

@@ -8,6 +8,7 @@ import { SelectionProcessAddComponent } from './selection-process-add.component'
 import { RolWidgetsServices } from '../_services/rolWidgets.service';
 import { VacanciesService } from '../_services/vacancies.service';
 import { PublicationQuestionnairesService } from '../_services/publication-questionnaires.service';
+import { QuestionnairesService } from '../_services/questionnaires.service';
 
 @NgModule( {
               imports: [
@@ -20,6 +21,7 @@ import { PublicationQuestionnairesService } from '../_services/publication-quest
               bootstrap: [ SelectionProcessComponent ],
               providers: [
                  VacanciesService,
+                 QuestionnairesService,
                  PublicationQuestionnairesService
               ],
               exports: [ SelectionProcessComponent ]

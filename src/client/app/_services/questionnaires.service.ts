@@ -26,6 +26,11 @@ export class QuestionnairesService {
       .map( ( res: Response ) => res.json() as Questionnaries[] );
    }
 
+   getAllEnabled() {
+      return this.authHttp.get( this.masterService + 'enabled/' )
+      .map( ( res: Response ) => res.json() as Questionnaries[] );
+   }
+
    handleError( error: any ): Promise<any> {
       console.error( 'Error:', error );
       return Promise.reject( error.message || error );
