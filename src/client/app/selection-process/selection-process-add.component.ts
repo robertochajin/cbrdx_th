@@ -20,6 +20,7 @@ import { Questionnaries } from '../_models/questionnaries';
 import { PublicationsService } from '../_services/publications.service';
 import { RequirementReferralsServices } from '../_services/requirement-referrals.service';
 import { RequirementReferral } from '../_models/requirementReferral';
+import { PhysicStructureService } from '../_services/physic-structure.service';
 @Component( {
                moduleId: module.id,
                selector: 'selecction-process-add',
@@ -35,11 +36,10 @@ export class SelectionProcessAddComponent implements OnInit {
    listTypeJob: SelectItem[] = [];
    listLevelStudy: SelectItem[] = [];
    msgs: Message[] = [];
-   year: number;
    acordion: number;
    es: any;
    minDate: Date = null;
-   maxDate: Date = null;
+   maxDateF: Date = null;
    range: string;
 
    // var cuestionarios
@@ -60,23 +60,21 @@ export class SelectionProcessAddComponent implements OnInit {
       private publicationQuestionnairesService: PublicationQuestionnairesService,
       private positionsService: PositionsService,
       private publicationsService: PublicationsService,
+      private physicStructureService: PhysicStructureService,
       private referralsServices: RequirementReferralsServices,
       private listEmployeesService: ListEmployeesService,
       private politicalDivisionService: PoliticalDivisionService,
       private confirmationService: ConfirmationService,
       private _nav: NavService ) {
-
    }
 
    ngOnInit() {
       this.acordion = 0;
       let today = new Date();
       let year = today.getFullYear();
-      this.year = year;
       let lastYear = year + 50;
       this.range = `${year}:${lastYear}`;
-
-      this.minDate = new Date();
+      this.minDate= new Date;
       this.es = {
          firstDayOfWeek: 1,
          dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
@@ -94,8 +92,12 @@ export class SelectionProcessAddComponent implements OnInit {
             if ( data.idPublicacion ) {
                this.publicationsService.getById( data.idPublicacion ).subscribe( data => {
                   this.publication = data;
+                  this.maxDateF = new Date(this.publication.fechaInicio);
                } );
             } else {
+               this.physicStructureService.getById(this.vacancy.idEstructuraFisica).subscribe(data=>{
+                  this.publication.lugarTrabajo= data.direccion;
+               });
                this.positionsService.get( this.vacancy.idCargo ).subscribe( res => {
                   this.publication.idNivelEducacion = res.idNivelEducacion;
                   this.publication.descripcionGeneral = res.mision;
@@ -154,6 +156,9 @@ export class SelectionProcessAddComponent implements OnInit {
       }
 
 
+   }
+   onSelectBegin(){
+      this.maxDateF= this.publication.fechaInicio;
    }
 
    onTabShow( e: any ) {

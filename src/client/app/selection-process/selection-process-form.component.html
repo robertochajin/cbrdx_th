@@ -28,7 +28,8 @@
 										<div class=" col-sm-9">
 											<p-calendar id="inicio" name="inicio" [showIcon]="true"
 											            [yearNavigator]="true" [locale]="es" readonlyInput="true" [yearRange]="range"
-											            [minDate]="today" dataType="date" #ingreso="ngModel" required="true"
+											             dataType="date" #ingreso="ngModel"
+											            required="true"(onSelect)="onSelectBegin($event)"
 											            [(ngModel)]="publication.fechaInicio" dateFormat="yy'-'mm'-'dd"></p-calendar>
 											<div *ngIf="f.submitted&&!ingreso.valid" class="alert alert-danger">
 												<i class="fa fa-close"></i>
@@ -43,7 +44,7 @@
 										<div class=" col-sm-9">
 											<p-calendar id="final" name="final" [showIcon]="true" [yearRange]="range"
 											            [yearNavigator]="true" [locale]="es" readonlyInput="true"
-											            [minDate]="vacancy.fechaInicio" dataType="date" #final="ngModel" required="true"
+											            [minDate]="maxDateF" dataType="date" #final="ngModel" required="true"
 											            [(ngModel)]="publication.fechaFin" dateFormat="yy'-'mm'-'dd"></p-calendar>
 											<div *ngIf="f.submitted&&!final.valid" class="alert alert-danger">
 												<i class="fa fa-close"></i>

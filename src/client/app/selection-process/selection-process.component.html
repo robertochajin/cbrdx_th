@@ -3,12 +3,11 @@
 	<div class="row datable-header">
 		<div class="col-md-6 col-xs-12" >
 			<div class="input-group">
-				<!--<label>{{'PROCESOSELECCION.LBL_ESTADO' | translate }}</label>-->
-				<!--<p-dropdown id="idTipoVehiculo" name="idTipoVehiculo" required="true"-->
-				            <!--[options]="listTypeVehicle" [autoWidth]="false"-->
-				            <!--[(ngModel)]="employeeVehicle.idTipoVehiculo"-->
-				            <!--#idTipoVehiculo="ngModel"-->
-				<!--&gt;</p-dropdown>-->
+				<label for="estado">{{'PROCESOSELECCION.LBL_ESTADO' | translate }}</label>
+				<p-dropdown id="estado" name="estado" required="true"
+				            [options]="listStatus" [autoWidth]="false" (onChange)="filter()"
+				            [(ngModel)]="filtro"
+				></p-dropdown>
 			</div>
 		</div>
 		<div class="col-md-6 col-xs-12 datatable-header-search" >
