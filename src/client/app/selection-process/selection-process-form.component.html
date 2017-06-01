@@ -102,6 +102,10 @@
 												<label for="lugtrabajo" class="control-label">{{'PROCESOSELECCION.LBL_LUGARTRABAJO' | translate }}</label>
 												<input type="text" pInputText name="lugtrabajo" id="lugtrabajo" #lugtrabajo="ngModel"
 												       [(ngModel)]="publication.lugarDeTrabajo" />
+												<div *ngIf="f.submitted&&!lugtrabajo.valid" class="alert alert-danger">
+													<i class="fa fa-close"></i>
+													{{'PROCESOSELECCION.LBL_LUGARTRABAJO' | translate }} {{'LBL_REQUERIDO' | translate }}
+												</div>
 											</div>
 										</div>
 									</div>

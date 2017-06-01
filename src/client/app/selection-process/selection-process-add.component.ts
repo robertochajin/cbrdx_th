@@ -87,7 +87,7 @@ export class SelectionProcessAddComponent implements OnInit {
             }else{
                this.positionsService.get(this.vacancy.idCargo).subscribe(res=>{
                   this.publication.idNivelEducacion= res.idNivelEducacion;
-                  this.publication.idTipoTrabajo= res.idTipoTrabajo;
+                  this.publication.descripcionGeneral= res.mision;
                });
             }
          });
