@@ -155,4 +155,8 @@ export class PositionsService {
    getActivitiesById( id: number ) {
       return this.authHttp.get( this.serviceURL + 'ocupaciones/' + id ).map( ( res: Response ) => res.json() );
    }
+
+   disableById( idCargo: number) {
+      return this.authHttp.put( this.serviceURL + 'cargos/disabled/' + idCargo, idCargo ).map( ( res: Response ) => res );
+   }
 }

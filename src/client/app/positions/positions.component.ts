@@ -6,9 +6,12 @@ import { ConfirmationService, Message } from 'primeng/primeng';
 import { NavService } from '../_services/_nav.service';
 import { PersonnelRequirement } from '../_models/personnelRequirement';
 import { VacanciesService } from '../_services/vacancies.service';
+import { PersonPositionsServices } from '../_services/personPositions.service';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
 import { RequirementsAction } from '../_models/requirementsAction';
+import { PersonPositions } from '../_models/personPositions';
+import { OrganizationalStructurePositionsServices } from '../_services/organizationalStructurePositions.service';
 
 @Component( {
                moduleId: module.id,
@@ -23,13 +26,18 @@ export class PositionsComponent implements OnInit {
    positions: Positions[];
    dialogObjet: Positions = new Positions();
    busqueda: string;
-   vacancies: PersonnelRequirement[] = [];
+   newPosition: PersonnelRequirement[] = [];
+   deletePosition: PersonnelRequirement[] = [];
    allEstados: ListaItem[] = [];
    allTipoSolicitud: ListaItem[] = [];
    cargoNuevo: number;
+   cargoEliminar: number;
    cosntPerfil: number;
+   eliminPerfil: number;
    requirementsAction: RequirementsAction[] = [];
+   personPositions: PersonPositions[] = [];
    displayActions = false;
+   displayPerson = false;
 
 
    constructor( private positionsService: PositionsService,
@@ -37,6 +45,8 @@ export class PositionsComponent implements OnInit {
       private navService: NavService,
       private confirmationService: ConfirmationService,
       private vacanciesService: VacanciesService,
+      private personPositionsServices: PersonPositionsServices,
+      private OSPositionsServices: OrganizationalStructurePositionsServices,
       private listaService: ListaService ) {
       this.busqueda = this.navService.getSearch( 'positions.component' );
 
@@ -45,11 +55,13 @@ export class PositionsComponent implements OnInit {
             this.allTipoSolicitud.push( l );
          } );
          this.cargoNuevo = this.allTipoSolicitud.find( c => c.codigo === "CRGNVO" ).idLista;
+         this.cargoEliminar = this.allTipoSolicitud.find( c => c.codigo === "CRGELMN" ).idLista;
          this.listaService.getMasterDetails( 'ListasEstadosRequerimientos' ).subscribe( res => {
             res.map( ( l: ListaItem ) => {
                this.allEstados.push( l );
             } );
             this.cosntPerfil = this.allEstados.find( c => c.codigo === "CTRPER" ).idLista;
+            this.eliminPerfil = this.allEstados.find( c => c.codigo === "ENAPRB" ).idLista;
             this.getData();
          } );
       } );
@@ -105,12 +117,20 @@ export class PositionsComponent implements OnInit {
    }
 
    getData() {
-      this.vacancies = [];
-      if ( this.cargoNuevo > 0 && this.cosntPerfil > 0 ) {
+      this.newPosition = [];
+      this.deletePosition = [];
+      if ( this.cargoNuevo > 0 && this.cosntPerfil > 0 && this.eliminPerfil > 0 && this.cargoEliminar > 0 ) {
          this.vacanciesService.getNuevoCargo( this.cosntPerfil, this.cargoNuevo ).subscribe(
-            vacancies => {
-               vacancies.forEach( obj => {
-                  this.vacancies.push( obj );
+            newPosition => {
+               newPosition.forEach( obj => {
+                  this.newPosition.push( obj );
+               } );
+            }
+         );
+         this.vacanciesService.getNuevoCargo( this.eliminPerfil, this.cargoEliminar ).subscribe(
+            deletePosition => {
+               deletePosition.forEach( obj => {
+                  this.deletePosition.push( obj );
                } );
             }
          );
@@ -130,11 +150,24 @@ export class PositionsComponent implements OnInit {
       } );
    }
 
-   newPosition( c: PersonnelRequirement ) {
+   addPosition( c: PersonnelRequirement ) {
       if(c.idCargo !== null && c.idCargo > 0){
          this.router.navigate( [ 'positions/update/' + c.idCargo ] );
       }else {
          this.router.navigate( [ 'positions/add/' + c.idRequerimiento ] );
       }
+   }
+
+   delPosition( c: PersonnelRequirement ) {
+      this.personPositionsServices.check( c.idCargo ).subscribe( personPositions => {
+         this.personPositions = personPositions;
+         if(this.personPositions.length > 0){
+            this.displayPerson = true;
+         }else{
+            this.displayPerson = false;
+            this.OSPositionsServices.disableByPosition(c.idCargo).subscribe();
+            this.positionsService.disableById(c.idCargo).subscribe();
+         }
+      });
    }
 }

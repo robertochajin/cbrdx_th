@@ -62,5 +62,9 @@ export class OrganizationalStructurePositionsServices {
          }
       });
    }
+
+   disableByPosition( idCargo: number) {
+      return this.authHttp.put( this.masterService + 'disabled/' + idCargo, idCargo ).map( ( res: Response ) => res );
+   }
 }
 

@@ -1,6 +1,6 @@
 <h3 class="first">{{ 'POSITION.LBL_CARGOS' | translate }}</h3>
 <p-tabView>
-	<p-tabPanel header="{{ 'VACANCIES.LBL_REQUESTS' | translate}}" *ngIf="vacancies.length > 0">
+	<p-tabPanel header="{{ 'POSITION.LBL_NUEVOCARGO' | translate}}" *ngIf="newPosition.length > 0">
 		<div class="row datable-header">
 			<div class="col-md-6 col-xs-12 datatable-header-add">
 			</div>
@@ -11,7 +11,7 @@
 				</div>
 			</div>
 		</div>
-		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" sortField="fechaSolicitud" [sortOrder]="-1" [value]="vacancies"
+		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" sortField="fechaSolicitud" [sortOrder]="-1" [value]="newPosition"
 		             [paginator]="true" [rows]="10" [responsive]="true"
 		             [globalFilter]="gbRequerimientos" #dt>
 			<p-column field="idRequerimiento" header="{{ 'VACANCIES.LBL_REQUEST' | translate }}" [sortable]="true"></p-column>
@@ -24,13 +24,45 @@
 					<button type="button" icon="fa-eye" class="ui-button-info"
 					        pButton (click)="detailRequirement(vacancy.idRequerimiento)"></button>
 					<button type="button" icon="fa-pencil" class="ui-button-success"
-					        pButton (click)="newPosition(vacancy)"></button>
+					        pButton (click)="addPosition(vacancy)"></button>
 					<button *ngIf="!vacancy.editar" type="button" icon="fa-list-alt" class="ui-button-success"
 					        pButton (click)="observations(vacancy)" title="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}"></button>
 				</template>
 			</p-column>
 		</p-dataTable>
 	</p-tabPanel>
+	<p-tabPanel header="{{ 'POSITION.LBL_ELIMINARCARGO' | translate}}" *ngIf="deletePosition.length > 0">
+		<div class="row datable-header">
+			<div class="col-md-6 col-xs-12 datatable-header-add">
+			</div>
+			<div class="col-md-6 col-xs-12 datatable-header-search">
+				<div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-search"></i></div>
+					<input #gbRequerimientos type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
+				</div>
+			</div>
+		</div>
+		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" sortField="fechaSolicitud" [sortOrder]="-1" [value]="deletePosition"
+		             [paginator]="true" [rows]="10" [responsive]="true"
+		             [globalFilter]="gbRequerimientos" #dt>
+			<p-column field="idRequerimiento" header="{{ 'VACANCIES.LBL_REQUEST' | translate }}" [sortable]="true"></p-column>
+			<p-column field="nombreCargo" header="{{ 'POSITION.LBL_CARGOS' | translate }}" [sortable]="true"></p-column>
+			<p-column field="fechaSolicitud" header="{{ 'VACANCIES.LBL_DATE' | translate }}" [sortable]="true"></p-column>
+			<p-column field="auditoriaFecha" header="{{ 'VACANCIES.LBL_LASTDATE' | translate }} " [sortable]="true"></p-column>
+			<p-column field="tipoSolicitud" header="{{ 'VACANCIES.LBL_REASON' | translate }}" [sortable]="true"></p-column>
+			<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+				<template let-vacancy="rowData" pTemplate="body">
+					<button type="button" icon="fa-eye" class="ui-button-info"
+					        pButton (click)="detailRequirement(vacancy.idRequerimiento)"></button>
+					<button type="button" icon="fa-pencil" class="ui-button-success"
+					        pButton (click)="delPosition(vacancy)"></button>
+					<button *ngIf="!vacancy.editar" type="button" icon="fa-list-alt" class="ui-button-success"
+					        pButton (click)="observations(vacancy)" title="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}"></button>
+				</template>
+			</p-column>
+		</p-dataTable>
+	</p-tabPanel>
+	
 	<p-tabPanel header="{{ 'POSITION.LBL_CARGOS' | translate}}">
 		<div class="row datable-header">
 			<div class="col-md-6 col-xs-12 datatable-header-add">
@@ -83,6 +115,21 @@
 	<p-footer>
 		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
 			<button type="button" pButton (click)="displayActions=false" label="{{'LBL_CERRAR' | translate}}"></button>
+		</div>
+	</p-footer>
+</p-dialog>
+<p-dialog header="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}" [(visible)]="displayPerson"
+          modal="modal" width="700" responsive="true" draggable="false" >
+	<div style="overflow: scroll; height: 300px;">
+		<h3>Terceros que ocupan este cargo</h3>
+		<div *ngFor="let acc of personPositions">
+			<h4>{{acc.primerNombre}} {{acc.primerApellido}}</h4>
+			<hr>
+		</div>
+	</div>
+	<p-footer>
+		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+			<button type="button" pButton (click)="displayPerson=false" label="{{'LBL_CERRAR' | translate}}"></button>
 		</div>
 	</p-footer>
 </p-dialog>
