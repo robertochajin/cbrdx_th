@@ -23,14 +23,14 @@
 	             [responsive]="true" [globalFilter]="gb">
 		<p-column field="cargo" header="{{'PROCESOSELECCION.LBL_VACANTE' | translate }}" [sortable]="true"></p-column>
 		<p-column field="formaReclutamiento" header="{{'PROCESOSELECCION.LBL_FORMA' | translate }}" [sortable]="true"></p-column>
-		<p-column field="area" header="{{'PROCESOSELECCION.LBL_AREA' | translate }}/{{'PROCESOSELECCION.LBL_OFICINA' | translate }}"
-		          [sortable]="true"></p-column>
+		<p-column field="area" header="{{'PROCESOSELECCION.LBL_AREA' | translate }}" [sortable]="true"></p-column>
+		<p-column field="estructuraFisica" header="{{'PROCESOSELECCION.LBL_OFICINA' | translate }}" [sortable]="true"></p-column>
 		<p-column field="modelo" header="{{'PROCESOSELECCION.LBL_POSTULADOS' | translate }}" [sortable]="true"></p-column>
 		<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 			<template let-PR="rowData" pTemplate="body">
-				<button type="button" icon="fa-upload" class="ui-button-success"
+				<button *ngIf="PR.idPublicacion===null ||PR.idPublicacion===undefined" type="button" icon="fa-upload" class="ui-button-success"
 				        pButton (click)="add(PR)"></button>
-				<button type="button" icon="fa-pencil" class="ui-button-success"
+				<button *ngIf="PR.idPublicacion!==null &&PR.idPublicacion!==undefined" type="button" icon="fa-pencil" class="ui-button-success"
 				        pButton (click)="update(PR)"></button>
 				<button type="button" icon="fa-navicon" class="ui-button-danger"
 				        pButton (click)="del(PR)" ></button>

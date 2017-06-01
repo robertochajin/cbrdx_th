@@ -2,12 +2,10 @@ import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { EmployeeVehicle } from '../_models/employee-vehicle';
 import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
 import { EmployeeVehicleService } from '../_services/employee-vehicles.service';
 import { ListEmployeesService } from '../_services/lists-employees.service';
 import { PoliticalDivisionService } from '../_services/political-division.service';
-import { DivisionPolitica } from '../_models/divisionPolitica';
 import { NavService } from '../_services/_nav.service';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
@@ -19,6 +17,9 @@ import { PublicationsQuestionnaries } from '../_models/publicationsQuestionnnari
 import { PublicationQuestionnairesService } from '../_services/publication-questionnaires.service';
 import { QuestionnairesService } from '../_services/questionnaires.service';
 import { Questionnaries } from '../_models/questionnaries';
+import { PublicationsService } from '../_services/publications.service';
+import { RequirementReferralsServices } from '../_services/requirement-referrals.service';
+import { RequirementReferral } from '../_models/requirementReferral';
 @Component( {
                moduleId: module.id,
                selector: 'selecction-process-add',
@@ -30,13 +31,16 @@ export class SelectionProcessAddComponent implements OnInit {
 
    publication: Publications=new Publications();
    vacancy: PersonnelRequirement= new PersonnelRequirement();
-   listTypeVehicle: SelectItem[] = [];
-   listTypeService: SelectItem[] = [];
-   listBrandVehicle: SelectItem[] = [];
+   requirementReferrals: RequirementReferral[] = [];
+   listTypeJob: SelectItem[] = [];
+   listLevelStudy: SelectItem[] = [];
    msgs: Message[] = [];
    year: number;
-   anioValid: boolean = false;
    acordion:number;
+   es:any;
+   minDate: Date = null;
+   maxDate: Date = null;
+   range: string;
 
    // var cuestionarios
    publicationsQuestionnaires:PublicationsQuestionnaries[] =[];
@@ -54,6 +58,9 @@ export class SelectionProcessAddComponent implements OnInit {
       private vacanciesService: VacanciesService,
       private questionnairesService: QuestionnairesService,
       private publicationQuestionnairesService: PublicationQuestionnairesService,
+      private positionsService: PositionsService,
+      private publicationsService: PublicationsService,
+      private referralsServices: RequirementReferralsServices,
       private listEmployeesService: ListEmployeesService,
       private politicalDivisionService: PoliticalDivisionService,
       private confirmationService: ConfirmationService,
@@ -65,26 +72,51 @@ export class SelectionProcessAddComponent implements OnInit {
       this.acordion=0;
       let today = new Date();
       let year = today.getFullYear();
-      this.year = year + 1;
+      this.year = year;
+      let lastYear = year + 50;
+      this.range = `${year}:${lastYear}`;
+
+      this.minDate= new Date();
+      this.es = {
+         firstDayOfWeek: 1,
+         dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
+         dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
+         dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
+         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre',
+            'diciembre'
+         ],
+         monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
+      };
 
       this.route.params.subscribe( ( params: Params ) => {
          this.vacanciesService.get( +params[ 'idReq' ]).subscribe(data=>{
             this.vacancy =data;
-
+            if(data.idPublicacion){
+               this.publicationsService.getById(data.idPublicacion).subscribe(data=>{
+                  this.publication=data;
+               });
+            }else{
+               this.positionsService.get(this.vacancy.idCargo).subscribe(res=>{
+                  this.publication.idNivelEducacion= res.idNivelEducacion;
+                  this.publication.idTipoTrabajo= res.idTipoTrabajo;
+               });
+            }
          });
-      } );
-
-      this.listaService.getMasterDetails( 'ListasTiposServiciosVehiculos' ).subscribe( res => {
-         this.listTypeService.push( { label: 'Seleccione', value: null } );
-         res.map( ( s: ListaItem ) => {
-            this.listTypeService.push( { label: s.nombre, value: s.idLista } );
+         this.referralsServices.getAllRequirement( +params[ 'idReq' ] ).subscribe( ref => {
+            this.requirementReferrals = ref;
          } );
       } );
 
-      this.listaService.getMasterDetails( 'ListasMarcasVehiculos' ).subscribe( res => {
-         this.listBrandVehicle.push( { label: 'Seleccione', value: null } );
+      this.listaService.getMasterDetails( 'ListasTiposTrabajos' ).subscribe( res => {
+         this.listTypeJob.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
-            this.listBrandVehicle.push( { label: s.nombre, value: s.idLista } );
+            this.listTypeJob.push( { label: s.nombre, value: s.idLista } );
+         } );
+      } );
+      this.listaService.getMasterDetails( 'ListasNivelesEstudios' ).subscribe( res => {
+         this.listLevelStudy.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => {
+            this.listLevelStudy.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
 
@@ -107,6 +139,7 @@ export class SelectionProcessAddComponent implements OnInit {
    }
 
    onSubmit() {
+
 
    }
 

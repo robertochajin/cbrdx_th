@@ -3,7 +3,7 @@
  */
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { Productivity } from '../_models/productivity';
+import { Publications } from '../_models/publications';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
@@ -23,27 +23,30 @@ export class PublicationsService {
    }
 
    getlistPublications() {
-      return this.authHttp.get( this.serviceURL + 'productividades' ).map( ( res: Response ) => res.json() );
+      return this.authHttp.get( this.serviceURL + 'publicaciones' ).map( ( res: Response ) => res.json() );
    }
-
-   getlistPublicationsByIdCargo( id: number ) {
-      return this.authHttp.get( this.serviceURL + 'cargosProductividades/buscarId/' + id )
-      .map( ( res: Response ) => {
-         if ( res.text() !== '' ) {
-            return res.json() as Productivity;
-         } else {
-            return undefined;
-         }
-      } );
+   getById(id: number) {
+      return this.authHttp.get( this.serviceURL + 'publicaciones/'+id ).map( ( res: Response ) => res.json() );
    }
-
-   add( c: Productivity ) {
-      c.auditoriaUsuario = this.idUsuario;
-      return this.authHttp.post( this.serviceURL + 'cargosProductividades', c ).map( ( res: Response ) => res.json() );
-   };
-
-   update( c: Productivity ) {
-      c.auditoriaUsuario = this.idUsuario;
-      return this.authHttp.put( this.serviceURL + 'cargosProductividades', c ).map( ( res: Response ) => res );
-   }
+   //
+   // getlistPublicationsByIdCargo( id: number ) {
+   //    return this.authHttp.get( this.serviceURL + 'cargosProductividades/buscarId/' + id )
+   //    .map( ( res: Response ) => {
+   //       if ( res.text() !== '' ) {
+   //          return res.json() as Publications;
+   //       } else {
+   //          return undefined;
+   //       }
+   //    } );
+   // }
+   //
+   // add( c: Publications ) {
+   //    c.auditoriaUsuario = this.idUsuario;
+   //    return this.authHttp.post( this.serviceURL + 'cargosProductividades', c ).map( ( res: Response ) => res.json() );
+   // };
+   //
+   // update( c: Publications ) {
+   //    c.auditoriaUsuario = this.idUsuario;
+   //    return this.authHttp.put( this.serviceURL + 'cargosProductividades', c ).map( ( res: Response ) => res );
+   // }
 }
