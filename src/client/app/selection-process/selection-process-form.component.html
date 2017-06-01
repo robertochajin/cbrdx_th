@@ -175,7 +175,7 @@
 									<div class="form-group">
 										<label for="observacion" class="control-label">{{ 'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}</label>
 										<textarea id="observacion" name="observacion" pInputTextarea rows="3" cols="35" #descripcion="ngModel"
-										          [(ngModel)]="publication.descripcionGeneral" required class="form-control"></textarea>
+										          [(ngModel)]="publication.observacion" required class="form-control"></textarea>
 									</div>
 								</div>
 							</div>
@@ -206,7 +206,7 @@
 									<div class="form-group col-md-6">
 										<label for="qlist">* {{'PROCESOSELECCION.LBL_CUESTIONARIO' | translate }}</label>
 										<p-dropdown id="qlist" name="qlist" #ngQuestionnaire="ngModel" [options]="questionnariesList"
-										            [autoWidth]="false" [(ngModel)]="questionnaire.idCuestionario" required></p-dropdown>
+										            [autoWidth]="false" [(ngModel)]="questionnarie.idCuestionario" required></p-dropdown>
 										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="qf.submitted && !ngQuestionnaire.valid">
 											<i class="fa fa-close"></i>
 											{{'PROCESOSELECCION.LBL_CUESTIONARIO' | translate }} {{'LBL_REQUERIDO' | translate }}

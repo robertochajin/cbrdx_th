@@ -47,7 +47,7 @@ export class SelectionProcessAddComponent implements OnInit {
    allPublicationsQuestionnaires:PublicationsQuestionnaries[] =[];
    private questionnaries: Questionnaries[] = [];
    private questionnariesList: SelectItem[] = [];
-   private questionnarie: Questionnaries;
+   private questionnarie: Questionnaries = new Questionnaries();
    // fin var cuestionarios
 
    constructor( private employeeVehicleService: EmployeeVehicleService,
