@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
-import { RolesService } from '../_services/roles.service';
 import { SharedModule } from '../shared/shared.module';
 import { FormSharedModule } from '../shared/form-shared.module';
-import { RolFuncionalitiesServices } from '../_services/rolFuncionalities.service';
 import { SelectionProcessComponent } from './selection-process.component';
 import { SelectionProcessAddComponent } from './selection-process-add.component';
-import { RolWidgetsServices } from '../_services/rolWidgets.service';
+import { PublicationsService } from '../_services/publications.service';
 
 @NgModule( {
               imports: [
@@ -17,9 +15,7 @@ import { RolWidgetsServices } from '../_services/rolWidgets.service';
               ],
               bootstrap: [ SelectionProcessComponent ],
               providers: [
-                 RolesService,
-                 RolFuncionalitiesServices,
-                 RolWidgetsServices
+                 PublicationsService
               ],
               exports: [ SelectionProcessComponent ]
            } )

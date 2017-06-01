@@ -81,11 +81,11 @@
 							<div class="ui-grid-row">
 								<div class="ui-grid-col-6">
 									<div class="row">
-										<div class="col-md-12">
+										<div class="col-md-10 col-md-offset-1">
 											<div class="form-group">
 												<label for="formeduca" class="control-label">{{'PROCESOSELECCION.LBL_FORMACIONEDUCATIVA' | translate }}</label>
 												<p-dropdown id="formeduca" name="formeduca" required="true"
-												            [options]="listTypeVehicle" [autoWidth]="false"
+												            [options]="listLevelStudy" [autoWidth]="false"
 												            [(ngModel)]="publication.idNivelEducacion"
 												            #idniveleduc="ngModel"
 												></p-dropdown>
@@ -97,19 +97,19 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-md-12">
+										<div class="col-md-10 col-md-offset-1">
 											<div class="  form-group">
 												<label for="lugtrabajo" class="control-label">{{'PROCESOSELECCION.LBL_LUGARTRABAJO' | translate }}</label>
 												<input type="text" pInputText name="lugtrabajo" id="lugtrabajo" #lugtrabajo="ngModel"
-												       [(ngModel)]="publication.lugarDeTrabajo" disabled="true"/>
+												       [(ngModel)]="publication.lugarDeTrabajo" />
 											</div>
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-md-12">
+										<div class="col-md-10 col-md-offset-1">
 											<label for="tipotrabajo">{{'PROCESOSELECCION.LBL_TIPOTRABAJO' | translate }}</label>
 											<p-dropdown id="tipotrabajo" name="tipotrabajo" required="true"
-											            [options]="listTypeVehicle" [autoWidth]="false"
+											            [options]="listTypeJob" [autoWidth]="false"
 											            [(ngModel)]="publication.idTipoTrabajo"
 											            #tipotrabajo="ngModel"
 											></p-dropdown>
@@ -122,7 +122,7 @@
 								</div>
 								<div class="ui-grid-col-6">
 									<div class="row">
-										<div class="col-md-12">
+										<div class="col-md-10 col-md-offset-1">
 											<div class="form-group">
 												<label for="descripcion" class="control-label">* {{ 'POSITION.LBL_DESCRIPCION' | translate }}
 												</label>
@@ -136,12 +136,12 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-md-12">
+										<div class="col-md-10 col-md-offset-1">
 											<div class="form-group">
 												<label for="competencias" class="control-label">* {{ 'PROCESOSELECCION.LBL_COMPETENCIAS' | translate }} </label>
 												<textarea id="competencias" name="competencias" pInputTextarea rows="3" cols="35"
-												          #competencias="ngModel"
-												          [(ngModel)]="criteria.descripcion" required class="form-control"></textarea>
+												          #competencias="ngModel" [(ngModel)]="publication.competenciasLaborales" required
+												          class="form-control"></textarea>
 												<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !competencias.valid">
 													<i class="fa fa-close"></i>
 													{{ 'PROCESOSELECCION.LBL_COMPETENCIAS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
@@ -169,7 +169,7 @@
 							<div class="ui-grid-row">
 								<div class="ui-grid-col-12">
 									<div class="form-group">
-										<label for="observacion" class="control-label">{{ 'POSITION.LBL_OBSERVACIONES' | translate }}</label>
+										<label for="observacion" class="control-label">{{ 'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}</label>
 										<textarea id="observacion" name="observacion" pInputTextarea rows="3" cols="35" #descripcion="ngModel"
 										          [(ngModel)]="publication.descripcionGeneral" required class="form-control"></textarea>
 									</div>

@@ -5,12 +5,10 @@ import 'rxjs/add/operator/switchMap';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { EmployeeVehicle } from '../_models/employee-vehicle';
 import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
 import { EmployeeVehicleService } from '../_services/employee-vehicles.service';
 import { ListEmployeesService } from '../_services/lists-employees.service';
 import { PoliticalDivisionService } from '../_services/political-division.service';
-import { DivisionPolitica } from '../_models/divisionPolitica';
 import { NavService } from '../_services/_nav.service';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
@@ -18,6 +16,7 @@ import { Publications } from '../_models/publications';
 import { VacanciesService } from '../_services/vacancies.service';
 import { PersonnelRequirement } from '../_models/personnelRequirement';
 import { PositionsService } from '../_services/positions.service';
+import { PublicationsService } from '../_services/publications.service';
 import { RequirementReferralsServices } from '../_services/requirement-referrals.service';
 import { RequirementReferral } from '../_models/requirementReferral';
 @Component( {
@@ -32,7 +31,8 @@ export class SelectionProcessAddComponent implements OnInit {
    publication: Publications=new Publications();
    vacancy: PersonnelRequirement= new PersonnelRequirement();
    requirementReferrals: RequirementReferral[] = [];
-   listTypeVehicle: SelectItem[] = [];
+   listTypeJob: SelectItem[] = [];
+   listLevelStudy: SelectItem[] = [];
    msgs: Message[] = [];
    year: number;
    acordion:number;
@@ -48,6 +48,7 @@ export class SelectionProcessAddComponent implements OnInit {
       private location: Location,
       private vacanciesService: VacanciesService,
       private positionsService: PositionsService,
+      private publicationsService: PublicationsService,
       private referralsServices: RequirementReferralsServices,
       private listEmployeesService: ListEmployeesService,
       private politicalDivisionService: PoliticalDivisionService,
@@ -79,16 +80,32 @@ export class SelectionProcessAddComponent implements OnInit {
       this.route.params.subscribe( ( params: Params ) => {
          this.vacanciesService.get( +params[ 'idReq' ]).subscribe(data=>{
             this.vacancy =data;
+            if(data.idPublicacion){
+               this.publicationsService.getById(data.idPublicacion).subscribe(data=>{
+                  this.publication=data;
+               });
+            }else{
+               this.positionsService.get(this.vacancy.idCargo).subscribe(res=>{
+                  this.publication.idNivelEducacion= res.idNivelEducacion;
+                  this.publication.idTipoTrabajo= res.idTipoTrabajo;
+               });
+            }
          });
          this.referralsServices.getAllRequirement( +params[ 'idReq' ] ).subscribe( ref => {
             this.requirementReferrals = ref;
          } );
       } );
 
-      this.listaService.getMasterDetails( 'ListasTiposServiciosVehiculos' ).subscribe( res => {
-         this.listTypeVehicle.push( { label: 'Seleccione', value: null } );
+      this.listaService.getMasterDetails( 'ListasTiposTrabajos' ).subscribe( res => {
+         this.listTypeJob.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
-            this.listTypeVehicle.push( { label: s.nombre, value: s.idLista } );
+            this.listTypeJob.push( { label: s.nombre, value: s.idLista } );
+         } );
+      } );
+      this.listaService.getMasterDetails( 'ListasNivelesEstudios' ).subscribe( res => {
+         this.listLevelStudy.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => {
+            this.listLevelStudy.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
 
