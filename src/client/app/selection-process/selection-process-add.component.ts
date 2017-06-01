@@ -47,7 +47,7 @@ export class SelectionProcessAddComponent implements OnInit {
    allPublicationsQuestionnaires:PublicationsQuestionnaries[] =[];
    private questionnaries: Questionnaries[] = [];
    private questionnariesList: SelectItem[] = [];
-   private questionnarie: Questionnaries;
+   private questionnarie: Questionnaries = new Questionnaries();
    // fin var cuestionarios
 
    constructor( private employeeVehicleService: EmployeeVehicleService,
@@ -125,13 +125,19 @@ export class SelectionProcessAddComponent implements OnInit {
          this.questionnairesService.getAllEnabled().subscribe(qst => {
             this.questionnariesList.push({label:'Seleccione...', value :null});
             this.questionnaries = qst;
-            this.allPublicationsQuestionnaires.map(pq => {
-               if(pq.indicadorHabilitado === false){
-                  this.pushQuestionnaireOption( pq.idCuestionario);
+            this.questionnaries.map(q => {
+               let tpq =  this.allPublicationsQuestionnaires.find(it => it.idCuestionario === q.idCuestionario);
+               if( tpq !== undefined ){
+                  if(tpq.indicadorHabilitado){
+                     this.publicationsQuestionnaires.push(tpq);
+                  } else {
+                     this.pushQuestionnaireOption(q.idCuestionario);
+                  }
                } else {
-                  this.publicationsQuestionnaires.push(pq);
+                  this.pushQuestionnaireOption(q.idCuestionario);
                }
-            })
+            });
+            this.sortPublicationQuestionaries();
          });
       });
 
@@ -217,10 +223,14 @@ export class SelectionProcessAddComponent implements OnInit {
                                               questionnaire.indicadorHabilitado = false;
                                               this.publicationQuestionnairesService.update(questionnaire).subscribe(res => {
                                                  if ( res.ok ) {
-                                                    for (let i = myIndex+1; i++; i < this.publicationsQuestionnaires.length) {
-                                                       this.publicationsQuestionnaires[i].orden -= 1;
+                                                    console.log('index: ',myIndex);
+                                                    for (let i = myIndex+1; i < this.publicationsQuestionnaires.length; i++) {
+                                                       console.log('i: ',i);
+                                                       this.publicationsQuestionnaires[i].orden = this.publicationsQuestionnaires[i].orden-1;
+                                                       this.publicationQuestionnairesService.update(this.publicationsQuestionnaires[i])
+                                                         .subscribe(res => {});
                                                     }
-                                                    this.publicationsQuestionnaires.slice(myIndex,1);
+                                                    this.publicationsQuestionnaires.splice(myIndex,1);
                                                     this.sortPublicationQuestionaries();
                                                  }
                                               });
@@ -244,10 +254,27 @@ export class SelectionProcessAddComponent implements OnInit {
       pq = this.allPublicationsQuestionnaires.find(pqs => pqs.idCuestionario === this.questionnarie.idCuestionario);
       if (pq !== undefined && pq.idPublicacionCustionario !== undefined && pq.idPublicacionCustionario !== null){
          pq.indicadorHabilitado = true;
-         pq.orden = this.publicationsQuestionnaires.length;
+         pq.orden = this.publicationsQuestionnaires.length+1;
          this.publicationQuestionnairesService.update(pq).subscribe(res =>{
             if(res.ok) {
                this.publicationsQuestionnaires.push(pq);
+            }
+         });
+      } else {
+         pq = new PublicationsQuestionnaries();
+         pq.idCuestionario = this.questionnarie.idCuestionario;
+         pq.indicadorHabilitado = true;
+         pq.idPublicacion = 9; // idQuemado
+         pq.orden = this.publicationsQuestionnaires.length+1;
+         this.publicationQuestionnairesService.add(pq).subscribe(res =>{
+            if(res) {
+               let qst = this.questionnaries.find(q=>q.idCuestionario === res.idCuestionario);
+               res.cuestionario = qst.cuestionario;
+               res.descripcion = qst.descripcion;
+               this.questionnarie.idCuestionario = null;
+               this.questionnariesList.splice(
+                  this.questionnariesList.indexOf(this.questionnariesList.find(ql => ql.value === res.idCuestionario)),1);
+               this.publicationsQuestionnaires.push(res);
             }
          });
       }
@@ -255,7 +282,7 @@ export class SelectionProcessAddComponent implements OnInit {
 
    private pushQuestionnaireOption( idCuestionario: number ) {
       let qst = this.questionnaries.find(q=>q.idCuestionario === idCuestionario);
-      qst ? this.questionnariesList.push({label: qst.codigo+':'+qst.cuestionario,value:qst.idCuestionario}):null;
+      this.questionnariesList.push({label: qst.codigo+':'+qst.cuestionario,value:qst.idCuestionario});
    }
 
    // fin funciones cuestionarios
