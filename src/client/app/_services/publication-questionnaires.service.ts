@@ -23,8 +23,7 @@ export class PublicationQuestionnairesService {
    }
 
    getAllByPublication(idPublication: number) {
-      return this.authHttp.get( this.serviceURL ).map( ( res: Response ) => res.json() as PublicationsQuestionnaries[] );
-      // return this.authHttp.get( this.serviceURL + '/' + idPublication).map( ( res: Response ) => res.json() as PublicationsQuestionnaries[] );
+      return this.authHttp.get( this.serviceURL + '/publicacion/' + idPublication).map( ( res: Response ) => res.json() as PublicationsQuestionnaries[] );
    }
 
    getById( id: number ) {

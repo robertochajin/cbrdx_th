@@ -3,8 +3,8 @@ import { SharedModule } from '../shared/shared.module';
 import { FormSharedModule } from '../shared/form-shared.module';
 import { SelectionProcessComponent } from './selection-process.component';
 import { SelectionProcessAddComponent } from './selection-process-add.component';
+import { PublicationDetailComponent } from './selection-process-detail.component';
 import { PublicationsService } from '../_services/publications.service';
-import { RolWidgetsServices } from '../_services/rolWidgets.service';
 import { VacanciesService } from '../_services/vacancies.service';
 import { PublicationQuestionnairesService } from '../_services/publication-questionnaires.service';
 import { QuestionnairesService } from '../_services/questionnaires.service';
@@ -15,7 +15,7 @@ import { QuestionnairesService } from '../_services/questionnaires.service';
                  FormSharedModule
               ],
               declarations: [
-                 SelectionProcessComponent,SelectionProcessAddComponent
+                 SelectionProcessComponent,SelectionProcessAddComponent,PublicationDetailComponent
               ],
               bootstrap: [ SelectionProcessComponent ],
               providers: [

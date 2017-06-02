@@ -14,8 +14,11 @@ export class Publications {
    indicadorBonificacion: boolean;
    indicadorPublicacion: boolean;
    idNivelEducacion: number;
+   nivelEducacion: string;
    idTipoTrabajo: number;
+   tipoTrabajo: string;
    idFormaReclutamiento: number;
+   formaReclutamiento: string;
    descripcionGeneral: string;
    lugarTrabajo: string;
    competenciasLaborales: string;
