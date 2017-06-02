@@ -23,6 +23,10 @@ export class VacanciesService {
    getAll() {
       return this.authHttp.get( this.serviceURL + 'requerimientos' ).map( ( res: Response ) => res.json() as PersonnelRequirement[] );
    }
+   getByRespSelecAndIdEstad(idR: number, idE: number) {
+      return this.authHttp.get( this.serviceURL + 'requerimientos/filtroReq/'+idE+'/'+idR ).map( ( res: Response ) =>
+      res.json() as PersonnelRequirement[] );
+   }
 
    getNuevoCargo(idEstado:number, idTipo:number) {
       let idUsuario = this.idUsuario;
