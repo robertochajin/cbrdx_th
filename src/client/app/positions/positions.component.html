@@ -122,8 +122,9 @@
 	<div style="overflow: scroll; height: 300px;">
 		<h3>Para eliminar el cargo {{cargoAElimiar}} debe retirar a los colaboradores relacionados al cargo en las siguientes areas:
 		</h3>
-		<div *ngFor="let acc of personPositions">
-			<h4>{{acc.primerNombre}} {{acc.primerApellido}}</h4>
+		<hr>
+		<div *ngFor="let acc of organizationalStructurePositions">
+			<h4>{{acc.estructuraOrganizacional}}</h4>
 			<hr>
 		</div>
 	</div>

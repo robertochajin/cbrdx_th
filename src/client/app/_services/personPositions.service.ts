@@ -45,10 +45,6 @@ export class PersonPositionsServices {
       .map( ( res: Response ) => res.json() as PersonPositions );
    }
 
-   check( idCargo: number ) {
-      return this.authHttp.get( this.masterService + 'buscarCargo/' + idCargo ).map( ( res: Response ) => res.json() as PersonPositions[] );
-   }
-
    handleError( error: any ): Promise<any> {
       console.error( 'Error:', error );
       return Promise.reject( error.message || error );

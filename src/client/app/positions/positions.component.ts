@@ -6,12 +6,11 @@ import { ConfirmationService, Message } from 'primeng/primeng';
 import { NavService } from '../_services/_nav.service';
 import { PersonnelRequirement } from '../_models/personnelRequirement';
 import { VacanciesService } from '../_services/vacancies.service';
-import { PersonPositionsServices } from '../_services/personPositions.service';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
 import { RequirementsAction } from '../_models/requirementsAction';
-import { PersonPositions } from '../_models/personPositions';
 import { OrganizationalStructurePositionsServices } from '../_services/organizationalStructurePositions.service';
+import { OrganizationalStructurePositions } from '../_models/organizationalStructurePositions';
 
 @Component( {
                moduleId: module.id,
@@ -36,11 +35,11 @@ export class PositionsComponent implements OnInit {
    eliminPerfil: number;
    aCerrar: number;
    requirementsAction: RequirementsAction[] = [];
-   personPositions: PersonPositions[] = [];
    displayActions = false;
    displayPerson = false;
    cargoAElimiar: string;
    requirementAction: RequirementsAction = new RequirementsAction();
+   organizationalStructurePositions: OrganizationalStructurePositions[];
    msg: Message;
 
    constructor( private positionsService: PositionsService,
@@ -48,7 +47,6 @@ export class PositionsComponent implements OnInit {
       private navService: NavService,
       private confirmationService: ConfirmationService,
       private vacanciesService: VacanciesService,
-      private personPositionsServices: PersonPositionsServices,
       private OSPositionsServices: OrganizationalStructurePositionsServices,
       private listaService: ListaService ) {
       this.busqueda = this.navService.getSearch( 'positions.component' );
@@ -172,9 +170,9 @@ export class PositionsComponent implements OnInit {
 
    delPosition( c: PersonnelRequirement ) {
       this.cargoAElimiar = c.cargo;
-      this.personPositionsServices.check( c.idCargo ).subscribe( personPositions => {
-         this.personPositions = personPositions;
-         if(this.personPositions.length > 0){
+      this.OSPositionsServices.check( c.idCargo ).subscribe( organizationalStructurePositions => {
+         this.organizationalStructurePositions = organizationalStructurePositions;
+         if(this.organizationalStructurePositions.length > 0){
             this.displayPerson = true;
          }else{
             this.displayPerson = false;

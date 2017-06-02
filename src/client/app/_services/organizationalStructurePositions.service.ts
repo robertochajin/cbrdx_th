@@ -62,6 +62,9 @@ export class OrganizationalStructurePositionsServices {
          }
       });
    }
+   check( idCargo: number ) {
+      return this.authHttp.get( this.masterService + 'buscarTercerosHabInEstrucOrgCarg/' + idCargo ).map( ( res: Response ) => res.json() as OrganizationalStructurePositions[] );
+   }
 
    disableByPosition( idCargo: number) {
       return this.authHttp.put( this.masterService + 'disabled/' + idCargo, idCargo ).map( ( res: Response ) => res );
