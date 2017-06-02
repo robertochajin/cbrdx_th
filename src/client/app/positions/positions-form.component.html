@@ -144,6 +144,7 @@
                                  <button icon="fa-plus" label="{{ 'LBL_APROBAR' | translate }}" type="button"
                                          pButton (click)="updateEstado(aprobado)"></button>
                                  <button icon="fa-plus" label="{{ 'LBL_NOAPROBAR' | translate }}" type="button"
+                                         *ngIf="position.paso === 16 && position.idEstado !== noAprobado"
                                          pButton (click)="updateEstado(noAprobado)"></button>
                               </div>
                            </div>
