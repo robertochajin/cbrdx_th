@@ -8,4 +8,5 @@ export class Lista {
    public auditoriaFecha: Date;
    public descripcion: string;
    public idRol: number;
+   public editing: boolean;
 }
