@@ -16,10 +16,10 @@ import { RequirementReferralsServices } from '../_services/requirement-referrals
 import { RequirementReferral } from '../_models/requirementReferral';
 import { ResoursesRequiredServices } from '../_services/resourcesRequiredPurchases.service';
 import { ResoursesTicsService } from '../_services/resoursesTics.service';
-import { QuestionnairesService } from '../_services/questionnaires.service';
+import { RequirementQuestionnairesService } from '../_services/requirement-questionnaires.service';
 import { ResourcesRequiredPurchases } from '../_models/resourcesRequiredPurchases';
 import { TicsResourses } from '../_models/ticsResourses';
-import { Questionnaires } from '../_models/questionnaires';
+import { RequirementQuestionnaires } from '../_models/requirementQuestionnaires';
 import { TranslateService } from 'ng2-translate';
 
 class employeeBasicInfo {
@@ -52,7 +52,7 @@ export class PersonnelRequirementDetailComponent {
    requirementReferrals: RequirementReferral[] = [];
    listResourses: ResourcesRequiredPurchases[] = [];
    listResoursesTics: TicsResourses[] = [];
-   listQuestionnaires: Questionnaires[] = [];
+   listQuestionnaires: RequirementQuestionnaires[] = [];
    public nroPlazas: string;
    msg: Message;
 
@@ -81,7 +81,7 @@ export class PersonnelRequirementDetailComponent {
       private translate: TranslateService,
       private resoursesRequiredServices: ResoursesRequiredServices,
       private resoursesTicsService: ResoursesTicsService,
-      private questionnairesService: QuestionnairesService,
+      private questionnairesService: RequirementQuestionnairesService,
       private route: ActivatedRoute ) {
 
    }

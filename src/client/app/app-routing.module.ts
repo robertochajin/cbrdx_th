@@ -145,6 +145,9 @@ import { PersonnelRequirementEditComponent } from './personnel-requirement/perso
 // Vacantes
 import { VacanciesComponent } from './vacancies/vacancies.component';
 import { VacantesActionComponent } from './vacancies/vacancies-action-component';
+// Preceso de selección
+import { SelectionProcessComponent } from './selection-process/selection-process.component';
+import { SelectionProcessAddComponent } from './selection-process/selection-process-add.component';
 
 
 const routes = [
@@ -348,6 +351,10 @@ const routes = [
    { path: 'vacancies/update/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
    { path: 'vacancies/approve/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
    { path: 'vacancies/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
+
+   // Preceso de selección
+   { path: 'selection-process', component: SelectionProcessComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/add-publication/:idReq', component: SelectionProcessAddComponent, canActivate: [ AuthGuard ] },
 ];
 
 @NgModule( {

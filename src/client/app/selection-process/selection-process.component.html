@@ -1,0 +1,42 @@
+<h3 class="first">{{'PROCESOSELECCION.LBL_PROCESOSELECCION' | translate }}</h3>
+<div>
+	<div class="row datable-header">
+		<div class="col-md-6 col-xs-12">
+			<div class="input-group">
+				<label for="estado" class="col-md-3">{{'PROCESOSELECCION.LBL_FILTRO' | translate }}</label>
+				<div class="col-md-9">
+					<p-dropdown id="estado" name="estado" required="true"
+					            [options]="listStatus" [autoWidth]="false" (onChange)="filter()"
+					            [(ngModel)]="filtro"
+					></p-dropdown>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-xs-12 datatable-header-search">
+			<div class="input-group">
+				<div class="input-group-addon"><i class="fa fa-search"></i></div>
+				<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate }}" class="form-control"
+				       [(ngModel)]="busqueda" (change)="setSearch()">
+			</div>
+		</div>
+	</div>
+	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="vacancies" [paginator]="true" [rows]="10"
+	             [responsive]="true" [globalFilter]="gb">
+		<p-column field="cargo" header="{{'PROCESOSELECCION.LBL_VACANTE' | translate }}" [sortable]="true"></p-column>
+		<p-column field="formaReclutamiento" header="{{'PROCESOSELECCION.LBL_FORMA' | translate }}" [sortable]="true"></p-column>
+		<p-column field="area" header="{{'PROCESOSELECCION.LBL_AREA' | translate }}" [sortable]="true"></p-column>
+		<p-column field="estructuraFisica" header="{{'PROCESOSELECCION.LBL_OFICINA' | translate }}" [sortable]="true"></p-column>
+		<p-column field="modelo" header="{{'PROCESOSELECCION.LBL_POSTULADOS' | translate }}" [sortable]="true"></p-column>
+		<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+			<template let-PR="rowData" pTemplate="body">
+				<button *ngIf="PR.idPublicacion===null ||PR.idPublicacion===undefined" type="button" icon="fa-upload" class="ui-button-success"
+				        pButton (click)="add(PR)"></button>
+				<button *ngIf="PR.idPublicacion!==null &&PR.idPublicacion!==undefined" type="button" icon="fa-pencil" class="ui-button-success"
+				        pButton (click)="update(PR)"></button>
+				<button type="button" icon="fa-navicon" class="ui-button-danger"
+				        pButton (click)="del(PR)"></button>
+			
+			</template>
+		</p-column>
+	</p-dataTable>
+</div>

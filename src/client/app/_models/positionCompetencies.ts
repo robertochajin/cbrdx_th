@@ -5,6 +5,7 @@ export class PositionCompetencies {
    public idCargoCompetencia: number;
    public idCargo: number;
    public idCompetencia: number;
+   public competencia: string;
    public idPonderacion: number;
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
