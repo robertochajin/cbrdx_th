@@ -205,6 +205,9 @@ export class VacantesActionComponent {
          if ( this.vacancy.idTipoSolicitud === this.tCargoNuevo ) {
             this.vacancy.idEstado = this.ePerfil;
          }
+         if ( this.vacancy.idTipoSolicitud === this.tEliminacion ) {
+            this.vacancy.idEstado = this.eEliminacion;
+         }
 
       }
       if ( this.requirementsAction.idAccion === this.aDevolver ) {

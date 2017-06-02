@@ -34,11 +34,14 @@ export class PositionsComponent implements OnInit {
    cargoEliminar: number;
    cosntPerfil: number;
    eliminPerfil: number;
+   aCerrar: number;
    requirementsAction: RequirementsAction[] = [];
    personPositions: PersonPositions[] = [];
    displayActions = false;
    displayPerson = false;
-
+   cargoAElimiar: string;
+   requirementAction: RequirementsAction = new RequirementsAction();
+   msg: Message;
 
    constructor( private positionsService: PositionsService,
       private router: Router,
@@ -61,8 +64,17 @@ export class PositionsComponent implements OnInit {
                this.allEstados.push( l );
             } );
             this.cosntPerfil = this.allEstados.find( c => c.codigo === "CTRPER" ).idLista;
-            this.eliminPerfil = this.allEstados.find( c => c.codigo === "ENAPRB" ).idLista;
+            this.eliminPerfil = this.allEstados.find( c => c.codigo === "PRCELIM" ).idLista;
             this.getData();
+         } );
+      } );
+      this.listaService.getMasterDetails( 'ListasRequerimientosAcciones' ).subscribe( res => {
+         res.map( ( l: ListaItem ) => {
+            switch ( l.codigo ) {
+               case 'CRRD':
+                  this.aCerrar = l.idLista;
+                  break;
+            }
          } );
       } );
 
@@ -159,14 +171,32 @@ export class PositionsComponent implements OnInit {
    }
 
    delPosition( c: PersonnelRequirement ) {
+      this.cargoAElimiar = c.cargo;
       this.personPositionsServices.check( c.idCargo ).subscribe( personPositions => {
          this.personPositions = personPositions;
          if(this.personPositions.length > 0){
             this.displayPerson = true;
          }else{
             this.displayPerson = false;
-            this.OSPositionsServices.disableByPosition(c.idCargo).subscribe();
-            this.positionsService.disableById(c.idCargo).subscribe();
+            this.confirmationService.confirm( {
+                                                 message: ` ¿Esta seguro que lo desea el cargo, se deshabilitará para todos las las Areas?`,
+                                                 header: 'Corfirmación',
+                                                 icon: 'fa fa-question-circle',
+                                                 accept: () => {
+                                                    this.requirementAction.idAccion = this.aCerrar;
+                                                    this.requirementAction.idRequerimiento = c.idRequerimiento;
+                                                    this.requirementAction.observacion = "Requerimiento de Eliminación Completado";
+                                                    this.vacanciesService.setAction( this.requirementAction ).subscribe( requirementAction => {
+                                                       this.navService.setMesage( 1, this.msg );
+                                                    }, error => {
+                                                       this.navService.setMesage( 3, this.msg );
+                                                    } );
+                                                 },
+                                                 reject: () => {
+                                                    this.requirementAction = new RequirementsAction();
+                                                 }
+                                              } );
+
          }
       });
    }

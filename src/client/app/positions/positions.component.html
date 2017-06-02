@@ -46,7 +46,7 @@
 		             [paginator]="true" [rows]="10" [responsive]="true"
 		             [globalFilter]="gbRequerimientos" #dt>
 			<p-column field="idRequerimiento" header="{{ 'VACANCIES.LBL_REQUEST' | translate }}" [sortable]="true"></p-column>
-			<p-column field="nombreCargo" header="{{ 'POSITION.LBL_CARGOS' | translate }}" [sortable]="true"></p-column>
+			<p-column field="cargo" header="{{ 'POSITION.LBL_CARGOS' | translate }}" [sortable]="true"></p-column>
 			<p-column field="fechaSolicitud" header="{{ 'VACANCIES.LBL_DATE' | translate }}" [sortable]="true"></p-column>
 			<p-column field="auditoriaFecha" header="{{ 'VACANCIES.LBL_LASTDATE' | translate }} " [sortable]="true"></p-column>
 			<p-column field="tipoSolicitud" header="{{ 'VACANCIES.LBL_REASON' | translate }}" [sortable]="true"></p-column>
@@ -101,7 +101,6 @@
 		</p-dataTable>
 	</p-tabPanel>
 </p-tabView>
-<p-confirmDialog width="400"></p-confirmDialog>
 <p-dialog header="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}" [(visible)]="displayActions"
           modal="modal" width="700" responsive="true" draggable="false" >
 	<div style="overflow: scroll; height: 300px;">
@@ -121,7 +120,8 @@
 <p-dialog header="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}" [(visible)]="displayPerson"
           modal="modal" width="700" responsive="true" draggable="false" >
 	<div style="overflow: scroll; height: 300px;">
-		<h3>Terceros que ocupan este cargo</h3>
+		<h3>Para eliminar el cargo {{cargoAElimiar}} debe retirar a los colaboradores relacionados al cargo en las siguientes areas:
+		</h3>
 		<div *ngFor="let acc of personPositions">
 			<h4>{{acc.primerNombre}} {{acc.primerApellido}}</h4>
 			<hr>
@@ -133,3 +133,9 @@
 		</div>
 	</p-footer>
 </p-dialog>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
