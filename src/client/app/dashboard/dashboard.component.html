@@ -86,7 +86,7 @@
 						<ul class="list-group">
 							<li *ngFor="let vacancy of publications" class="list-group-item">
 								<h4>{{vacancy.cargo}}</h4>
-								<h5>{{ 'WIDGETS.LBL_FECHALIMITE' | translate}}: {{vacancy.fechaFin}}</h5>
+								<h5>{{ 'WIDGETS.LBL_FECHALIMITE' | translate}}: {{vacancy.fechaFinPublicacion}}</h5>
 								<p>{{vacancy.descripcionGeneral}}</p>
 								<button pButton icon="fa-check" label="{{'WIDGETS.BTN_APLICAR' | translate }}" (click)="aplicar(vacancy)"></button>
 							</li>

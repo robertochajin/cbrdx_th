@@ -251,11 +251,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
          this.badEmployee = true;
       } else {
 
-<<<<<<< HEAD
          // let fi: moment.Moment = moment( this.personsPosition.asignadoDesde, 'MM/DD/YYYY' );
-=======
-         //
->>>>>>> refs/remotes/origin/cbrdx_th_weymar_sprint_3
          // this.personsPosition.asignadoDesde = fi.add( 2, 'days' ).format( 'YYYY-MM-DD' );
          if ( this.personsPosition.idTerceroCargo === null ) {
             this.personPositionService.add( this.personsPosition ).subscribe( res => {
@@ -272,10 +268,6 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
                if ( res.ok ) {
                   this.personsPosition.nombreCompleto = this.selectedEmployee.nombreCompleto;
                   this.personsPosition.cargo = this.personsPosition.cargo;
-<<<<<<< HEAD
-                  // this.personsPosition.asignadoDesde = fi.subtract( 2, 'days' ).format( 'YYYY-MM-DD' );
-=======
->>>>>>> refs/remotes/origin/cbrdx_th_weymar_sprint_3
                   this.postionSlots[ this.postionSlots.indexOf( this.backUpPersonsPosition ) ] = this.personsPosition;
                   this.editingPerson = false;
                }
@@ -355,10 +347,6 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
       } );
       this.backUpPersonsPosition = new PersonPositions();
       this.backUpPersonsPosition = pp;
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/cbrdx_th_weymar_sprint_3
       this.personsPosition = Object.assign( {}, pp );
       // this.personsPosition = JSON.parse( JSON.stringify( pp ) );
       if ( this.personsPosition.asignadoDesde !== undefined ) {
