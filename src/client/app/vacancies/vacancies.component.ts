@@ -192,6 +192,9 @@ export class VacanciesComponent implements OnInit {
                   this.vacancies.push( obj );
                }
             });
+            this.vacancies.sort( function ( a, b ) {
+               return b.idRequerimiento - a.idRequerimiento;
+            } );
          }
       );
    }
@@ -217,6 +220,9 @@ export class VacanciesComponent implements OnInit {
                   this.vacancies.push(obj);
                }
             });
+            this.vacancies.sort( function ( a, b ) {
+               return b.idRequerimiento - a.idRequerimiento;
+            } );
          }
       );
    }

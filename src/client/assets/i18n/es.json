@@ -141,6 +141,10 @@
       "BTN_AGREGARWIDGETS":"Agregar Widgets",
       "LBL_EDITANDO":"Editando widgets",
       "LBL_DETALLEWIDGETS":"Detalle widgets",
+      "LBL_VACANTES":"Vacantes recientes",
+      "LBL_FECHALIMITE":"Fecha límite",
+      "BTN_APLICAR":"Aplicar",
+      "BTN_VERMAS":"Ver más",
       "LBL_CONFIGURARWIDGETS":"Configurar Widgets"
    },
 
@@ -848,6 +852,7 @@
    "PROCESOSELECCION":{
       "LBL_PROCESOSELECCION" : "Proceso de selección",
       "LBL_VACANTE" : "Vacante",
+      "LBL_DETALLEVACANTE" : "Detalle vacante",
       "LBL_FORMA" : "Forma",
       "LBL_FILTRO" : "Filtro",
       "LBL_PUBLICAR" : "Publicar",
@@ -861,6 +866,7 @@
       "LBL_AREA" : "Area",
       "LBL_OFICINA" : "Oficina",
       "LBL_SALARIO" : "Salario",
+      "LBL_VERMAS" : "Ver más",
       "LBL_PUBLICARVACANTE" : "Publicar vacante",
       "LBL_CUESTIONARIOS" : "Cuestionarios",
       "LBL_CUESTIONARIO" : "Cuestionario",

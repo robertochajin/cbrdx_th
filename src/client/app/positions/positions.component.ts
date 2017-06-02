@@ -186,6 +186,7 @@ export class PositionsComponent implements OnInit {
                                                     this.requirementAction.observacion = "Requerimiento de Eliminación Completado";
                                                     this.vacanciesService.setAction( this.requirementAction ).subscribe( requirementAction => {
                                                        this.navService.setMesage( 1, this.msg );
+                                                       this.deletePosition.splice( this.deletePosition.indexOf( c ), 1 );
                                                     }, error => {
                                                        this.navService.setMesage( 3, this.msg );
                                                     } );
