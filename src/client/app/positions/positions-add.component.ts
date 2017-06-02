@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Positions } from '../_models/positions';
@@ -10,6 +10,9 @@ import { TipoDeAreaService } from '../_services/tipoDeArea.service';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
 import { NavService } from '../_services/_nav.service';
+import { VacanciesService } from '../_services/vacancies.service';
+import { PersonnelRequirement } from '../_models/personnelRequirement';
+import { PersonnelRequirementServices } from '../_services/personnelRequirement.service';
 
 @Component( {
                moduleId: module.id,
@@ -18,7 +21,7 @@ import { NavService } from '../_services/_nav.service';
                providers: [ ConfirmationService ]
             } )
 
-export class PositionsAddComponent {
+export class PositionsAddComponent implements OnInit  {
    position: Positions = new Positions();
    categoryTypes: SelectItem[] = [];
    areaTypes: SelectItem[] = [];
@@ -29,6 +32,8 @@ export class PositionsAddComponent {
    defaultState: any;
    step = 1;
    acordion = 0;
+   idRequirement = 0;
+   requirement: PersonnelRequirement = new PersonnelRequirement();
 
    constructor( private positionsService: PositionsService,
       private router: Router,
@@ -38,7 +43,9 @@ export class PositionsAddComponent {
       private listPositionsService: ListPositionsService,
       private tipoDeAreaService: TipoDeAreaService,
       private confirmationService: ConfirmationService,
-      private _nav: NavService
+      private _nav: NavService,
+      private vacanciesService: VacanciesService,
+      private personnelRequirementServices: PersonnelRequirementServices
    ) {
 
       this.positionsService.getListPositions().subscribe( res => {
@@ -70,14 +77,41 @@ export class PositionsAddComponent {
 
    }
 
+   ngOnInit() {
+      this.route.params.subscribe( params => {
+         this.idRequirement = params[ 'id' ];
+         if(Number(this.idRequirement) > 0){
+            this.vacanciesService.get( this.idRequirement ).subscribe(
+               requirement => {
+                  this.requirement = requirement;
+                  this.position.cargo = requirement.nombreCargo;
+                  this.position.mision = requirement.funcionCargo;
+               } );
+         }
+      } );
+
+   }
+
    onSubmit0() {
       this.position.idEstado = this.defaultState.idLista;
       this.position.paso = 2;
       this.positionsService.add( this.position )
       .subscribe( data => {
-         this._nav.setTab(1);
-         this._nav.setMesage( 1, this.msg );
-         this.router.navigate( [ 'positions/update/' + data.idCargo ] );
+         if(Number(this.idRequirement) > 0) {
+            this.requirement.idCargo = data.idCargo;
+            this.personnelRequirementServices.update( this.requirement ).subscribe(req =>{
+               this._nav.setTab(1);
+               this._nav.setMesage( 1, this.msg );
+               this.router.navigate( [ 'positions/update/' + data.idCargo ] );
+            }, error => {
+               this._nav.setMesage( 3, this.msg );
+            } );
+         }else{
+            this._nav.setTab(1);
+            this._nav.setMesage( 1, this.msg );
+            this.router.navigate( [ 'positions/update/' + data.idCargo ] );
+         }
+
       }, error => {
          this._nav.setMesage( 3, this.msg );
       } );

@@ -268,6 +268,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
                if ( res.ok ) {
                   this.personsPosition.nombreCompleto = this.selectedEmployee.nombreCompleto;
                   this.personsPosition.cargo = this.personsPosition.cargo;
+                  // this.personsPosition.asignadoDesde = fi.subtract( 2, 'days' ).format( 'YYYY-MM-DD' );
                   this.postionSlots[ this.postionSlots.indexOf( this.backUpPersonsPosition ) ] = this.personsPosition;
                   this.editingPerson = false;
                }

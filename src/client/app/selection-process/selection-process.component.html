@@ -33,8 +33,8 @@
 				        pButton (click)="add(PR)"></button>
 				<button *ngIf="PR.idPublicacion!==null &&PR.idPublicacion!==undefined" type="button" icon="fa-pencil" class="ui-button-success"
 				        pButton (click)="update(PR)"></button>
-				<button type="button" icon="fa-navicon" class="ui-button-danger"
-				        pButton (click)="del(PR)"></button>
+				<button *ngIf="PR.idPublicacion!==null &&PR.idPublicacion!==undefined" type="button" icon="fa-navicon"
+				        class="ui-button-success" pButton (click)="detail(PR)"></button>
 			
 			</template>
 		</p-column>

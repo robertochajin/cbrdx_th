@@ -51,10 +51,10 @@ export class SelectionProcessComponent implements OnInit {
    }
 
    ngOnInit() {
-      this.today= new Date();
-      this.today.setHours(0);
-      this.today.setMinutes(0);
-      this.today.setSeconds(0);
+      this.today = new Date();
+      this.today.setHours( 0 );
+      this.today.setMinutes( 0 );
+      this.today.setSeconds( 0 );
       this.listaService.getMasterAllDetails( 'ListasEstadosRequerimientos' ).subscribe( data => {
          let temp = data.find( r => r.codigo === 'PRCSEL' );
          if ( temp ) {
@@ -76,24 +76,24 @@ export class SelectionProcessComponent implements OnInit {
       } else {
          for ( let r of this.vacanciesTemp ) {
             if ( this.filtro === 2 ) {
-               let fin = new Date(r.fechaFinPublicacion);
-               fin.setHours(24);
-               fin.setSeconds(1);
-               if(fin>=this.today){
-                  this.vacancies.push(r);
+               let fin = new Date( r.fechaFinPublicacion );
+               fin.setHours( 24 );
+               fin.setSeconds( 1 );
+               if ( fin >= this.today ) {
+                  this.vacancies.push( r );
                }
             }
             if ( this.filtro === 3 ) {
-               if(r.fechaFinPublicacion===null || r.fechaFinPublicacion=== undefined){
-                  this.vacancies.push(r);
+               if ( r.fechaFinPublicacion === null || r.fechaFinPublicacion === undefined ) {
+                  this.vacancies.push( r );
                }
             }
             if ( this.filtro === 4 ) {
-               let fin = new Date(r.fechaFinPublicacion);
-               fin.setHours(24);
-               fin.setSeconds(1);
-               if(fin<this.today){
-                  this.vacancies.push(r);
+               let fin = new Date( r.fechaFinPublicacion );
+               fin.setHours( 24 );
+               fin.setSeconds( 1 );
+               if ( fin < this.today && r.idPublicacion ) {
+                  this.vacancies.push( r );
                }
             }
          }
@@ -102,6 +102,10 @@ export class SelectionProcessComponent implements OnInit {
 
    add( r: PersonnelRequirement ) {
       this.router.navigate( [ 'selection-process/add-publication/' + r.idRequerimiento ] );
+   }
+
+   detail( r: PersonnelRequirement ) {
+      this.router.navigate( [ 'selection-process/detail-publication/' + r.idPublicacion ] );
    }
 
    update( r: PersonnelRequirement ) {

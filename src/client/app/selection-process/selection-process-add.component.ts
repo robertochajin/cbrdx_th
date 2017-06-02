@@ -77,7 +77,7 @@ export class SelectionProcessAddComponent implements OnInit {
       let year = today.getFullYear();
       let lastYear = year + 50;
       this.range = `${year}:${lastYear}`;
-      this.minDate = new Date;
+      this.minDate = new Date();
       this.es = {
          firstDayOfWeek: 1,
          dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
@@ -96,6 +96,26 @@ export class SelectionProcessAddComponent implements OnInit {
                this.publicationsService.getById( data.idPublicacion ).subscribe( data => {
                   this.publication = data;
                   this.maxDateF = new Date( this.publication.fechaInicio );
+               } );
+               this.publicationQuestionnairesService.getAllByPublication( data.idPublicacion ).subscribe( res => {
+                  this.allPublicationsQuestionnaires = res;
+                  this.questionnairesService.getAllEnabled().subscribe(qst => {
+                     this.questionnariesList.push({label:'Seleccione cuestionario...', value :null});
+                     this.questionnaries = qst;
+                     this.questionnaries.map( q => {
+                        let tpq = this.allPublicationsQuestionnaires.find( it => it.idCuestionario === q.idCuestionario );
+                        if ( tpq !== undefined ) {
+                           if ( tpq.indicadorHabilitado ) {
+                              this.publicationsQuestionnaires.push( tpq );
+                           } else {
+                              this.pushQuestionnaireOption( q.idCuestionario );
+                           }
+                        } else {
+                           this.pushQuestionnaireOption( q.idCuestionario );
+                        }
+                     } );
+                     this.sortPublicationQuestionaries();
+                  } );
                } );
             } else {
                this.publication.idFormaReclutamiento= this.vacancy.idFormaReclutamiento;
@@ -140,27 +160,6 @@ export class SelectionProcessAddComponent implements OnInit {
          } );
       } );
 
-      this.publicationQuestionnairesService.getAllByPublication( 9 ).subscribe( res => {
-         this.allPublicationsQuestionnaires = res;
-         this.questionnairesService.getAllEnabled().subscribe(qst => {
-            this.questionnariesList.push({label:'Seleccione cuestionario...', value :null});
-            this.questionnaries = qst;
-            this.questionnaries.map( q => {
-               let tpq = this.allPublicationsQuestionnaires.find( it => it.idCuestionario === q.idCuestionario );
-               if ( tpq !== undefined ) {
-                  if ( tpq.indicadorHabilitado ) {
-                     this.publicationsQuestionnaires.push( tpq );
-                  } else {
-                     this.pushQuestionnaireOption( q.idCuestionario );
-                  }
-               } else {
-                  this.pushQuestionnaireOption( q.idCuestionario );
-               }
-            } );
-            this.sortPublicationQuestionaries();
-         } );
-      } );
-
    }
 
    onSubmit() {
@@ -180,15 +179,25 @@ export class SelectionProcessAddComponent implements OnInit {
       }
 
    }
-
    onSelectBegin() {
-      this.maxDateF = this.publication.fechaInicio;
+      let c = new Date(this.publication.fechaInicio);
+      this.maxDateF = c;
+      this.maxDateF.setHours(24);
+      this.publication.fechaFin=null;
    }
 
    onTabShow( e: any ) {
       this._nav.setTab( e.index );
       this.acordion = this._nav.getTab();
 
+   }
+   goBackPublic(): void {
+      this.location.back();
+   }
+   publicar(){
+      this.publication.indicadorPublicacion= true;
+      this.publicationsService.update(this.publication).subscribe(rest=>{
+      });
    }
 
    goBack(): void {
@@ -296,7 +305,7 @@ export class SelectionProcessAddComponent implements OnInit {
          pq = new PublicationsQuestionnaries();
          pq.idCuestionario = this.questionnarie.idCuestionario;
          pq.indicadorHabilitado = true;
-         pq.idPublicacion = 9; // idQuemado
+         pq.idPublicacion = this.publication.idPublicacion;
          pq.orden = this.publicationsQuestionnaires.length + 1;
          this.publicationQuestionnairesService.add( pq ).subscribe( res => {
             if ( res ) {

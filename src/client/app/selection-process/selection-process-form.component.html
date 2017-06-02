@@ -24,11 +24,12 @@
 							<div class="ui-grid-row">
 								<div class="ui-grid-col-3">
 									<div class="form-group">
-										<label for="inicio" class="control-label col-sm-3">{{ 'LBL_NOMBRE' | translate }} </label>
+										<label for="inicio" class="control-label col-sm-3">{{ 'PROCESOSELECCION.LBL_FECHADESDE' | translate }}
+										</label>
 										<div class=" col-sm-9">
 											<p-calendar id="inicio" name="inicio" [showIcon]="true"
 											            [yearNavigator]="true" [locale]="es" readonlyInput="true" [yearRange]="range"
-											             dataType="date" #ingreso="ngModel"
+											            dataType="date" #ingreso="ngModel" [minDate]="minDate"
 											            required="true"(onSelect)="onSelectBegin($event)"
 											            [(ngModel)]="publication.fechaInicio" dateFormat="yy'-'mm'-'dd"></p-calendar>
 											<div *ngIf="f.submitted&&!ingreso.valid" class="alert alert-danger">
@@ -40,7 +41,7 @@
 								</div>
 								<div class="ui-grid-col-3">
 									<div class="form-group">
-										<label for="final" class="control-label col-sm-3">{{ 'LBL_NOMBRE' | translate }} </label>
+										<label for="final" class="control-label col-sm-3">{{ 'PROCESOSELECCION.LBL_FECHAHASTA' | translate }} </label>
 										<div class=" col-sm-9">
 											<p-calendar id="final" name="final" [showIcon]="true" [yearRange]="range"
 											            [yearNavigator]="true" [locale]="es" readonlyInput="true"
@@ -271,10 +272,14 @@
 		</p-accordion>
 	</div>
 </div>
-<div class="row" *ngIf="publication.idPublicacion">
-	<div class="form-footer-buttons col-md-3 col-md-offset-4">
-		<h3>{{ 'PROCESOSELECCION.LBL_PUBLICAR' | translate }}</h3>
-		<p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="publication.indicadorPublicacion"></p-inputSwitch>
+<div class="row form-footer-buttons " >
+	<div class="form-group col-md-3 col-md-offset-4">
+		<button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate}}" type="button"
+		        pButton (click)="goBackPublic()"></button>
+		<button *ngIf="publication.indicadorPublicacion!==true"
+		        label="{{ 'PROCESOSELECCION.LBL_PUBLICAR' | translate}}"
+		        type="button"
+		        pButton (click)="publicar()"></button>
 	</div>
 </div>
 <p-confirmDialog width="400" acceptLabel="{{'BTN_SI' | translate }}" rejectLabel="{{'BTN_NO' | translate }}"></p-confirmDialog>
