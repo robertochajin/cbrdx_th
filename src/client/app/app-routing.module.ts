@@ -291,6 +291,7 @@ const routes = [
    //  Cargos
    { path: 'positions', component: PositionsComponent, canActivate: [ AuthGuard ] },
    { path: 'positions/add', component: PositionsAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'positions/add/:id', component: PositionsAddComponent, canActivate: [ AuthGuard ] },
    { path: 'positions/update/:id', component: PositionsUpdateComponent, canActivate: [ AuthGuard ] },
 
    //  Estrctura Organizacional
@@ -339,6 +340,7 @@ const routes = [
    { path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [ AuthGuard ] },
    { path: 'position-absence/:idCargo', component: AbsenceComponent, canActivate: [ AuthGuard ] },
    { path: 'position-activities/:idCargo', component: PositionAuthoritiesComponent, canActivate: [ AuthGuard ] },
+   { path: 'position/requirement/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
 
    // Administracion
    { path: 'menus', component: MenuManagerComponent, canActivate: [ AuthGuard ] },

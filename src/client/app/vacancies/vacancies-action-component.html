@@ -46,10 +46,10 @@
 						<p-dropdown id="reclutamiento" name="reclutamiento" required="true"
 						            [options]="listReclutamiento" [autoWidth]="false"
 						            [(ngModel)]="vacancy.idFormaReclutamiento"
-						            #recruitment="ngModel"
+						            #recruitments="ngModel"
 						></p-dropdown>
 						<div class="ui-message ui-messages-error ui-corner-all"
-						     *ngIf="f.submitted && !recruitment.valid">
+						     *ngIf="f.submitted && !recruitments.valid">
 							<i class="fa fa-close"></i>{{ 'VACANCIES.LBL_RECRUITMENT' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 						</div>
 					</div>

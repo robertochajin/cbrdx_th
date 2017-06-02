@@ -24,6 +24,11 @@ export class VacanciesService {
       return this.authHttp.get( this.serviceURL + 'requerimientos' ).map( ( res: Response ) => res.json() as PersonnelRequirement[] );
    }
 
+   getNuevoCargo(idEstado:number, idTipo:number) {
+      let idUsuario = this.idUsuario;
+      return this.authHttp.get( this.serviceURL + 'requerimientos/filtroReq2/'+idEstado+'/'+ idTipo).map( ( res: Response ) => res.json() as PersonnelRequirement[] );
+   }
+
    getByDate( fInicio: string, fFin: string ) {
       return this.authHttp.get( this.serviceURL + 'requerimientos/fecha/' + fInicio + '/'  + fFin)
       .map( ( res: Response ) => res.json() as PersonnelRequirement[] );
@@ -33,6 +38,11 @@ export class VacanciesService {
       return this.authHttp.get( this.serviceURL + 'requerimientos/' + id ).map( ( res: Response ) => res.json() as PersonnelRequirement );
    }
 
+   update( f: PersonnelRequirement ) {
+      f.auditoriaUsuario = this.idUsuario;
+      return this.authHttp.put( this.serviceURL, JSON.stringify( f ) ).catch( this.handleError );
+   }
+
    setAction( c: RequirementsAction ) {
       c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'requerimientosAcciones', c ).map( ( res: Response ) => res.json() );
@@ -40,6 +50,11 @@ export class VacanciesService {
 
    getActions( id: number ) {
       return this.authHttp.get( this.serviceURL + 'requerimientosAcciones/requerimiento/' + id ).map( ( res: Response ) => res.json() as RequirementsAction[] );
+   }
+
+   handleError( error: any ): Promise<any> {
+      console.error( 'Error:', error );
+      return Promise.reject( error.message || error );
    }
 
 }

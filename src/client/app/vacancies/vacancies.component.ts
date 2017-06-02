@@ -135,7 +135,6 @@ export class VacanciesComponent implements OnInit {
 
    ngOnInit() {
 
-
       this.es = {
          firstDayOfWeek: 1,
          dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
@@ -167,6 +166,7 @@ export class VacanciesComponent implements OnInit {
       this.fechaFin = this.today;
       this.getData();
    }
+
    changeDate(){
       let i = new Date( this.fechaInicio  );
       let f = new Date( this.fechaFin );
