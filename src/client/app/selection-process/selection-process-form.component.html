@@ -218,7 +218,7 @@
 				<fieldset>
 					<div>
 						<div class="row-fluid">
-							<div class="col-md-12">
+							<div class="col-md-12" *ngIf="!addingQuestionnarie">
 								<form name="questionnaireForm" (ngSubmit)="qf.valid && addPublicationsQuestionnaire()"
 								      #qf="ngForm"
 								      novalidate
