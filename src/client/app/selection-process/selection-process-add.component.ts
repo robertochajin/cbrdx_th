@@ -134,6 +134,11 @@ export class SelectionProcessAddComponent implements OnInit {
                      }
                   }
                } );
+               this.questionnairesService.getAllEnabled().subscribe(qst => {
+                  this.questionnariesList.push({label:'Seleccione cuestionario...', value :null});
+                  this.questionnaries = qst;
+                  this.questionnaries.map( q => { this.pushQuestionnaireOption( q.idCuestionario );} );
+               } );
             }
          } );
          this.referralsServices.getAllRequirement( +params[ 'idReq' ] ).subscribe( ref => {
