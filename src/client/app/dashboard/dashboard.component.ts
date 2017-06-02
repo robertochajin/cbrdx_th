@@ -245,11 +245,11 @@ export class DashboardComponent implements OnInit {
    }
 
    aplicar(vacancy: PersonnelRequirement){
-
+      this.router.navigate( [ 'selection-process/publications-detail/' + vacancy.idPublicacion ] );
    }
 
    goVacancyList(){
-
+      this.router.navigate( [ 'selection-process/active-publications' ] );
    }
 
 }

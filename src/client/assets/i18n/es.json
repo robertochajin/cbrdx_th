@@ -848,6 +848,7 @@
    "PROCESOSELECCION":{
       "LBL_PROCESOSELECCION" : "Proceso de selección",
       "LBL_VACANTE" : "Vacante",
+      "LBL_DETALLEVACANTE" : "Detalle vacante",
       "LBL_FORMA" : "Forma",
       "LBL_FILTRO" : "Filtro",
       "LBL_PUBLICAR" : "Publicar",

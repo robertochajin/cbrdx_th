@@ -8,6 +8,8 @@ import { RolWidgetsServices } from '../_services/rolWidgets.service';
 import { VacanciesService } from '../_services/vacancies.service';
 import { PublicationQuestionnairesService } from '../_services/publication-questionnaires.service';
 import { QuestionnairesService } from '../_services/questionnaires.service';
+import { VacancyDetailComponent } from './vacancy-detail.component';
+import { SelectionProcessVacanciesComponent } from './selection-process-vacancies.component';
 
 @NgModule( {
               imports: [
@@ -15,7 +17,10 @@ import { QuestionnairesService } from '../_services/questionnaires.service';
                  FormSharedModule
               ],
               declarations: [
-                 SelectionProcessComponent,SelectionProcessAddComponent
+                 SelectionProcessComponent,
+                 SelectionProcessAddComponent,
+                 VacancyDetailComponent,
+                 SelectionProcessVacanciesComponent
               ],
               bootstrap: [ SelectionProcessComponent ],
               providers: [
