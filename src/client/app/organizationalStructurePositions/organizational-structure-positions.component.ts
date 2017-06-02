@@ -251,14 +251,15 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
          this.badEmployee = true;
       } else {
 
-         let fi: moment.Moment = moment( this.personsPosition.asignadoDesde, 'MM/DD/YYYY' );
-         this.personsPosition.asignadoDesde = fi.add( 2, 'days' ).format( 'YYYY-MM-DD' );
+         // let fi: moment.Moment = moment( this.personsPosition.asignadoDesde, 'MM/DD/YYYY' );
+         // this.personsPosition.asignadoDesde = fi.add( 2, 'days' ).format( 'YYYY-MM-DD' );
          if ( this.personsPosition.idTerceroCargo === null ) {
             this.personPositionService.add( this.personsPosition ).subscribe( res => {
                res.nombreCompleto = this.selectedEmployee.nombreCompleto;
                res.cargo = this.personsPosition.cargo;
+               res.idCargo = this.personsPosition.idCargo;
 
-               res.asignadoDesde = fi.subtract( 2, 'days' ).format( 'YYYY-MM-DD' );
+               // res.asignadoDesde = fi.subtract( 2, 'days' ).format( 'YYYY-MM-DD' );
                this.postionSlots[ this.postionSlots.indexOf( this.backUpPersonsPosition ) ] = res;
                this.editingPerson = false;
             } );
@@ -267,7 +268,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
                if ( res.ok ) {
                   this.personsPosition.nombreCompleto = this.selectedEmployee.nombreCompleto;
                   this.personsPosition.cargo = this.personsPosition.cargo;
-                  this.personsPosition.asignadoDesde = fi.subtract( 2, 'days' ).format( 'YYYY-MM-DD' );
+                  // this.personsPosition.asignadoDesde = fi.subtract( 2, 'days' ).format( 'YYYY-MM-DD' );
                   this.postionSlots[ this.postionSlots.indexOf( this.backUpPersonsPosition ) ] = this.personsPosition;
                   this.editingPerson = false;
                }
@@ -326,8 +327,8 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
             this.personsPositions = listPerson;
             this.personsPositions.map( pp => {
                pp.nombreCompleto = pp.primerNombre + ' ' + pp.segundoNombre + ' ' + pp.primerApellido + ' ' + pp.segundoApellido;
-               let fi: moment.Moment = moment( pp.asignadoDesde, 'YYYY-MM-DD' );
-               pp.asignadoDesde = fi.add( 1, 'days' ).format( 'YYYY-MM-DD' );
+               // let fi: moment.Moment = moment( pp.asignadoDesde, 'YYYY-MM-DD' );
+               // pp.asignadoDesde = fi.add( 1, 'days' ).format( 'YYYY-MM-DD' );
                this.assingPerson( pp, null );
             } );
          } );
@@ -347,10 +348,11 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
       } );
       this.backUpPersonsPosition = new PersonPositions();
       this.backUpPersonsPosition = pp;
-      this.personsPosition = JSON.parse( JSON.stringify( pp ) );
+      this.personsPosition = Object.assign( {}, pp );
+      // this.personsPosition = JSON.parse( JSON.stringify( pp ) );
       if ( this.personsPosition.asignadoDesde !== undefined ) {
-         let fi: moment.Moment = moment( this.personsPosition.asignadoDesde, 'YYYY-MM-DD' );
-         this.personsPosition.asignadoDesde = fi.format( 'MM/DD/YYYY' );
+         // let fi: moment.Moment = moment( this.personsPosition.asignadoDesde, 'YYYY-MM-DD' );
+         // this.personsPosition.asignadoDesde = fi.format( 'MM/DD/YYYY' );
       }
 
       if ( this.personsPosition.nombreCompleto !== '' ) {
@@ -366,7 +368,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
 
    onSelectBegin( event: any ) {
       let d = new Date( Date.parse( event ) );
-      this.personsPosition.asignadoDesde = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      // this.personsPosition.asignadoDesde = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
    }
 
    addSlots( idCargo: number, nombreCargo: string, idEstructuraOrganizacionalCargo: number, slots: number ) {

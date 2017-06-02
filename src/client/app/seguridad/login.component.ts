@@ -15,8 +15,8 @@ import { JwtHelper } from 'angular2-jwt';
             } )
 export class LoginComponent implements OnInit {
    model: any = {
-      password: '81bd709d-b',
-      username: 'mayerly.gamboa'
+      password: '',
+      username: ''
    };
    intentos: number = 0;
    error: string = '';
