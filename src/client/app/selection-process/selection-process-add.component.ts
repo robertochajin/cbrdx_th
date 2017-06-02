@@ -21,6 +21,7 @@ import { PublicationsService } from '../_services/publications.service';
 import { RequirementReferralsServices } from '../_services/requirement-referrals.service';
 import { RequirementReferral } from '../_models/requirementReferral';
 import { PhysicStructureService } from '../_services/physic-structure.service';
+import { PositionCompetenciesServices } from '../_services/position-competencies.services';
 @Component( {
                moduleId: module.id,
                selector: 'selecction-process-add',
@@ -35,6 +36,7 @@ export class SelectionProcessAddComponent implements OnInit {
    requirementReferrals: RequirementReferral[] = [];
    listTypeJob: SelectItem[] = [];
    listLevelStudy: SelectItem[] = [];
+   listReclutamien: SelectItem[] = [];
    msgs: Message[] = [];
    acordion: number;
    es: any;
@@ -62,6 +64,7 @@ export class SelectionProcessAddComponent implements OnInit {
       private publicationsService: PublicationsService,
       private physicStructureService: PhysicStructureService,
       private referralsServices: RequirementReferralsServices,
+      private positionCompetenciesServices: PositionCompetenciesServices,
       private listEmployeesService: ListEmployeesService,
       private politicalDivisionService: PoliticalDivisionService,
       private confirmationService: ConfirmationService,
@@ -74,7 +77,7 @@ export class SelectionProcessAddComponent implements OnInit {
       let year = today.getFullYear();
       let lastYear = year + 50;
       this.range = `${year}:${lastYear}`;
-      this.minDate= new Date;
+      this.minDate = new Date;
       this.es = {
          firstDayOfWeek: 1,
          dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
@@ -92,15 +95,24 @@ export class SelectionProcessAddComponent implements OnInit {
             if ( data.idPublicacion ) {
                this.publicationsService.getById( data.idPublicacion ).subscribe( data => {
                   this.publication = data;
-                  this.maxDateF = new Date(this.publication.fechaInicio);
+                  this.maxDateF = new Date( this.publication.fechaInicio );
                } );
             } else {
-               this.physicStructureService.getById(this.vacancy.idEstructuraFisica).subscribe(data=>{
-                  this.publication.lugarTrabajo= data.direccion;
-               });
+               this.publication.idFormaReclutamiento= this.vacancy.idFormaReclutamiento;
+               this.publication.competenciasLaborales = '';
+               this.physicStructureService.getById( this.vacancy.idEstructuraFisica ).subscribe( data => {
+                  this.publication.lugarTrabajo = data.direccion;
+               } );
                this.positionsService.get( this.vacancy.idCargo ).subscribe( res => {
                   this.publication.idNivelEducacion = res.idNivelEducacion;
                   this.publication.descripcionGeneral = res.mision;
+               } );
+               this.positionCompetenciesServices.getAllByPosition( this.vacancy.idCargo ).subscribe( rest => {
+                  for ( let c of rest ) {
+                     if ( c.competencia !== '' && c.competencia !== null && c.competencia !== undefined ) {
+                        this.publication.competenciasLaborales += c.competencia + ', ';
+                     }
+                  }
                } );
             }
          } );
@@ -115,6 +127,12 @@ export class SelectionProcessAddComponent implements OnInit {
             this.listTypeJob.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
+      this.listaService.getMasterDetails( 'ListasFormasReclutamientos' ).subscribe( res => {
+         this.listReclutamien.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => {
+            this.listReclutamien.push( { label: s.nombre, value: s.idLista } );
+         } );
+      } );
       this.listaService.getMasterDetails( 'ListasNivelesEstudios' ).subscribe( res => {
          this.listLevelStudy.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
@@ -127,45 +145,44 @@ export class SelectionProcessAddComponent implements OnInit {
          this.questionnairesService.getAllEnabled().subscribe( qst => {
             this.questionnariesList.push( { label: 'Seleccione...', value: null } );
             this.questionnaries = qst;
-            this.questionnaries.map(q => {
-               let tpq =  this.allPublicationsQuestionnaires.find(it => it.idCuestionario === q.idCuestionario);
-               if( tpq !== undefined ){
-                  if(tpq.indicadorHabilitado){
-                     this.publicationsQuestionnaires.push(tpq);
+            this.questionnaries.map( q => {
+               let tpq = this.allPublicationsQuestionnaires.find( it => it.idCuestionario === q.idCuestionario );
+               if ( tpq !== undefined ) {
+                  if ( tpq.indicadorHabilitado ) {
+                     this.publicationsQuestionnaires.push( tpq );
                   } else {
-                     this.pushQuestionnaireOption(q.idCuestionario);
+                     this.pushQuestionnaireOption( q.idCuestionario );
                   }
                } else {
-                  this.pushQuestionnaireOption(q.idCuestionario);
+                  this.pushQuestionnaireOption( q.idCuestionario );
                }
-            });
+            } );
             this.sortPublicationQuestionaries();
-         });
-      });
-
+         } );
+      } );
 
    }
 
    onSubmit() {
 
-      if(this.publication.idPublicacion===null || this.publication.idPublicacion=== undefined){
+      if ( this.publication.idPublicacion === null || this.publication.idPublicacion === undefined ) {
          this.publication.idRequerimiento = this.vacancy.idRequerimiento;
          this.publicationsService.add( this.publication ).subscribe( res => {
-            this.publication= res;
+            this.publication = res;
             this._nav.setMesage( 1, this.msgs );
-            this.acordion=1;
+            this.acordion = 1;
          } );
-      }else{
+      } else {
          this.publicationsService.update( this.publication ).subscribe( res => {
             this._nav.setMesage( 2, this.msgs );
          } );
-         this.acordion=1;
+         this.acordion = 1;
       }
 
-
    }
-   onSelectBegin(){
-      this.maxDateF= this.publication.fechaInicio;
+
+   onSelectBegin() {
+      this.maxDateF = this.publication.fechaInicio;
    }
 
    onTabShow( e: any ) {
@@ -184,14 +201,6 @@ export class SelectionProcessAddComponent implements OnInit {
                                               this.location.back();
                                            }
                                         } );
-   }
-
-   searchCity( event: any ) {
-
-   }
-
-   captureCity( event: any ) {
-
    }
 
    // funciones cuestionarios
@@ -242,14 +251,15 @@ export class SelectionProcessAddComponent implements OnInit {
                                               questionnaire.indicadorHabilitado = false;
                                               this.publicationQuestionnairesService.update( questionnaire ).subscribe( res => {
                                                  if ( res.ok ) {
-                                                    console.log('index: ',myIndex);
-                                                    for (let i = myIndex+1; i < this.publicationsQuestionnaires.length; i++) {
-                                                       console.log('i: ',i);
-                                                       this.publicationsQuestionnaires[i].orden = this.publicationsQuestionnaires[i].orden-1;
-                                                       this.publicationQuestionnairesService.update(this.publicationsQuestionnaires[i])
-                                                         .subscribe(res => {});
+                                                    console.log( 'index: ', myIndex );
+                                                    for ( let i = myIndex + 1; i < this.publicationsQuestionnaires.length; i++ ) {
+                                                       console.log( 'i: ', i );
+                                                       this.publicationsQuestionnaires[ i ].orden = this.publicationsQuestionnaires[ i ].orden - 1;
+                                                       this.publicationQuestionnairesService.update( this.publicationsQuestionnaires[ i ] )
+                                                       .subscribe( res => {
+                                                       } );
                                                     }
-                                                    this.publicationsQuestionnaires.splice(myIndex,1);
+                                                    this.publicationsQuestionnaires.splice( myIndex, 1 );
                                                     this.sortPublicationQuestionaries();
                                                  }
                                               } );
@@ -273,35 +283,35 @@ export class SelectionProcessAddComponent implements OnInit {
       pq = this.allPublicationsQuestionnaires.find( pqs => pqs.idCuestionario === this.questionnarie.idCuestionario );
       if ( pq !== undefined && pq.idPublicacionCustionario !== undefined && pq.idPublicacionCustionario !== null ) {
          pq.indicadorHabilitado = true;
-         pq.orden = this.publicationsQuestionnaires.length+1;
-         this.publicationQuestionnairesService.update(pq).subscribe(res =>{
-            if(res.ok) {
-               this.publicationsQuestionnaires.push(pq);
+         pq.orden = this.publicationsQuestionnaires.length + 1;
+         this.publicationQuestionnairesService.update( pq ).subscribe( res => {
+            if ( res.ok ) {
+               this.publicationsQuestionnaires.push( pq );
             }
-         });
+         } );
       } else {
          pq = new PublicationsQuestionnaries();
          pq.idCuestionario = this.questionnarie.idCuestionario;
          pq.indicadorHabilitado = true;
          pq.idPublicacion = 9; // idQuemado
-         pq.orden = this.publicationsQuestionnaires.length+1;
-         this.publicationQuestionnairesService.add(pq).subscribe(res =>{
-            if(res) {
-               let qst = this.questionnaries.find(q=>q.idCuestionario === res.idCuestionario);
+         pq.orden = this.publicationsQuestionnaires.length + 1;
+         this.publicationQuestionnairesService.add( pq ).subscribe( res => {
+            if ( res ) {
+               let qst = this.questionnaries.find( q => q.idCuestionario === res.idCuestionario );
                res.cuestionario = qst.cuestionario;
                res.descripcion = qst.descripcion;
                this.questionnarie.idCuestionario = null;
                this.questionnariesList.splice(
-                  this.questionnariesList.indexOf(this.questionnariesList.find(ql => ql.value === res.idCuestionario)),1);
-               this.publicationsQuestionnaires.push(res);
+                  this.questionnariesList.indexOf( this.questionnariesList.find( ql => ql.value === res.idCuestionario ) ), 1 );
+               this.publicationsQuestionnaires.push( res );
             }
-         });
+         } );
       }
    }
 
    private pushQuestionnaireOption( idCuestionario: number ) {
-      let qst = this.questionnaries.find(q=>q.idCuestionario === idCuestionario);
-      this.questionnariesList.push({label: qst.codigo+':'+qst.cuestionario,value:qst.idCuestionario});
+      let qst = this.questionnaries.find( q => q.idCuestionario === idCuestionario );
+      this.questionnariesList.push( { label: qst.codigo + ':' + qst.cuestionario, value: qst.idCuestionario } );
    }
 
    // fin funciones cuestionarios

@@ -126,6 +126,20 @@
 											</div>
 										</div>
 									</div>
+									<div class="row">
+										<div class="col-md-10 col-md-offset-1">
+											<label for="formarecluta">* {{'PROCESOSELECCION.LBL_FORMARECLUTAMIENTO' | translate }}</label>
+											<p-dropdown id="formarecluta" name="formarecluta" required="true"
+											            [options]="listReclutamien" [autoWidth]="false"
+											            [(ngModel)]="publication.idFormaReclutamiento"
+											            #formarecluta="ngModel"
+											></p-dropdown>
+											<div *ngIf="f.submitted&&!formarecluta.valid" class="alert alert-danger">
+												<i class="fa fa-close"></i>
+												{{'PROCESOSELECCION.LBL_FORMARECLUTAMIENTO' | translate }} {{'LBL_REQUERIDO' | translate }}
+											</div>
+										</div>
+									</div>
 								</div>
 								<div class="ui-grid-col-6">
 									<div class="row">
@@ -133,7 +147,7 @@
 											<div class="form-group">
 												<label for="descripcion" class="control-label">* {{ 'POSITION.LBL_DESCRIPCION' | translate }}
 												</label>
-												<textarea id="descripcion" name="descripcion" pInputTextarea rows="3" cols="35" #descripcion="ngModel"
+												<textarea id="descripcion" name="descripcion" pInputTextarea rows="4" cols="35" #descripcion="ngModel"
 												          [(ngModel)]="publication.descripcionGeneral" required class="form-control"></textarea>
 												<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !descripcion.valid">
 													<i class="fa fa-close"></i>
@@ -146,7 +160,7 @@
 										<div class="col-md-10 col-md-offset-1">
 											<div class="form-group">
 												<label for="competencias" class="control-label">* {{ 'PROCESOSELECCION.LBL_COMPETENCIAS' | translate }} </label>
-												<textarea id="competencias" name="competencias" pInputTextarea rows="3" cols="35"
+												<textarea id="competencias" name="competencias" pInputTextarea rows="6" cols="35"
 												          #competencias="ngModel" [(ngModel)]="publication.competenciasLaborales" required
 												          class="form-control"></textarea>
 												<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !competencias.valid">
@@ -256,6 +270,12 @@
 				</div>
 			</p-accordionTab>
 		</p-accordion>
+	</div>
+</div>
+<div class="row" *ngIf="publication.idPublicacion">
+	<div class="form-footer-buttons col-md-3 col-md-offset-4">
+		<h3>{{ 'PROCESOSELECCION.LBL_PUBLICAR' | translate }}</h3>
+		<p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="publication.indicadorPublicacion"></p-inputSwitch>
 	</div>
 </div>
 <p-confirmDialog width="400" acceptLabel="{{'BTN_SI' | translate }}" rejectLabel="{{'BTN_NO' | translate }}"></p-confirmDialog>

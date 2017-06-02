@@ -12,8 +12,10 @@ export class Publications {
    fechaFin: Date;
    indicadorSalario: boolean;
    indicadorBonificacion: boolean;
+   indicadorPublicacion: boolean;
    idNivelEducacion: number;
    idTipoTrabajo: number;
+   idFormaReclutamiento: number;
    descripcionGeneral: string;
    lugarTrabajo: string;
    competenciasLaborales: string;
