@@ -88,12 +88,12 @@
 								<h4>{{vacancy.cargo}}</h4>
 								<h5>{{ 'WIDGETS.LBL_FECHALIMITE' | translate}}: {{vacancy.fechaFin}}</h5>
 								<p>{{vacancy.descripcionGeneral}}</p>
-								<button pButton icon="fa-check" label="{{'WIDGETS.BTN_APLICAR' | translate }}" (click)="aplicar()"></button>
+								<button pButton icon="fa-check" label="{{'WIDGETS.BTN_APLICAR' | translate }}" (click)="aplicar(vacancy)"></button>
 							</li>
 						</ul>
 						
 						<div class="pull-right">
-							<a (click)="user()" class="verMás btn btn-primary btn-sm">
+							<a (click)="goVacancyList()" class="verMás btn btn-primary btn-sm">
 								{{ 'WIDGETS.BTN_VERMAS' | translate }} <i class="fa fa-chevron-right"></i>
 							</a>
 						</div>

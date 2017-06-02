@@ -29,6 +29,11 @@ export class VacanciesService {
       .map( ( res: Response ) => res.json() as PersonnelRequirement[] );
    }
 
+   getNActive( quantity: number ) {
+      return this.authHttp.get( this.serviceURL + 'requerimientos/publicacionFechas/cantidadN/' + quantity)
+      .map( ( res: Response ) => res.json() as PersonnelRequirement[] );
+   }
+
    get( id: number ) {
       return this.authHttp.get( this.serviceURL + 'requerimientos/' + id ).map( ( res: Response ) => res.json() as PersonnelRequirement );
    }

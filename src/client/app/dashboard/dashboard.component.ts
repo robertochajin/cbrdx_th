@@ -10,6 +10,8 @@ import { Widgets } from '../_models/widgets';
 import { WidgetServices } from '../_services/widget.service';
 import { JwtHelper } from 'angular2-jwt';
 import { Publications } from '../_models/publications';
+import { PersonnelRequirement } from '../_models/personnelRequirement';
+import { VacanciesService } from '../_services/vacancies.service';
 
 @Component( {
                moduleId: module.id,
@@ -32,7 +34,7 @@ export class DashboardComponent implements OnInit {
    options: any;
    displayDialog: boolean;
    rolWidgets: Widgets[];
-   publications: Publications[] = []
+   publications: PersonnelRequirement[] = []
    usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
    jwtHelper: JwtHelper = new JwtHelper();
 
@@ -46,6 +48,7 @@ export class DashboardComponent implements OnInit {
    constructor( private router: Router, private rolesService: RolesService, private  tercerosServices: TercerosService,
       private usuarioService: UsuariosService,
       private widgetServices: WidgetServices,
+      private vacanciesService: VacanciesService,
       private _translate: TranslateService ) {
 
       let token = localStorage.getItem( 'token' );
@@ -62,6 +65,11 @@ export class DashboardComponent implements OnInit {
             if ( rolWidget ) {
                this.allWidgets[ i ].habilitado = true;
                this.allWidgets[ i ].nombre = rolWidget.widget;
+               if(i == 2){
+                  this.vacanciesService.getNActive(3).subscribe(res => {
+                     this.publications = res;
+                  });
+               }
             }
          }
       } );
@@ -167,44 +175,6 @@ export class DashboardComponent implements OnInit {
          };
       } );
 
-      this.publications.push({
-      idPublicacion: 1,
-      idRequermiento: 1,
-      fechaInicio: new Date,
-      fechaFin: new Date,
-      indicadorSalario: true,
-      indicadorBonificacion: true,
-      idNivelEducacion: 1,
-      idTipoTrabajo: 1,
-      descripcionGeneral: 'Esta es una descripción general',
-      lugarDeTrabajo: '',
-      competenciasLaborales: '',
-      observacion: '',
-      indicadorObservacion: true,
-      indicadorHabilitado: true,
-      auditoriaUsuario: 1,
-      auditoriaFecha: new Date,
-      cargo: 'un cargo'
-                             });
-      this.publications.push({
-      idPublicacion: 1,
-      idRequermiento: 1,
-      fechaInicio: new Date,
-      fechaFin: new Date,
-      indicadorSalario: true,
-      indicadorBonificacion: true,
-      idNivelEducacion: 1,
-      idTipoTrabajo: 1,
-      descripcionGeneral: 'Esta es otra descripción general',
-      lugarDeTrabajo: '',
-      competenciasLaborales: '',
-      observacion: '',
-      indicadorObservacion: true,
-      indicadorHabilitado: true,
-      auditoriaUsuario: 1,
-      auditoriaFecha: new Date,
-      cargo: 'otro cargo'
-                             });
    }
 
    user() {
@@ -272,6 +242,14 @@ export class DashboardComponent implements OnInit {
          });
          return false;
       }
+   }
+
+   aplicar(vacancy: PersonnelRequirement){
+
+   }
+
+   goVacancyList(){
+
    }
 
 }
