@@ -123,7 +123,7 @@ export class SelectionProcessAddComponent implements OnInit {
       this.publicationQuestionnairesService.getAllByPublication(9).subscribe( res => {
          this.allPublicationsQuestionnaires = res;
          this.questionnairesService.getAllEnabled().subscribe(qst => {
-            this.questionnariesList.push({label:'Seleccione...', value :null});
+            this.questionnariesList.push({label:'Seleccione cuestionario...', value :null});
             this.questionnaries = qst;
             this.questionnaries.map(q => {
                let tpq =  this.allPublicationsQuestionnaires.find(it => it.idCuestionario === q.idCuestionario);
@@ -179,7 +179,7 @@ export class SelectionProcessAddComponent implements OnInit {
 
    sendBefore(questionnaire:PublicationsQuestionnaries){
       let myIndex = this.publicationsQuestionnaires.indexOf(questionnaire);
-      if(myIndex < this.publicationsQuestionnaires.length){
+      if(myIndex < this.publicationsQuestionnaires.length - 1){
          let newOrder = this.publicationsQuestionnaires[myIndex].orden;
          this.publicationsQuestionnaires[myIndex].orden = this.publicationsQuestionnaires[myIndex+1].orden;
          this.publicationQuestionnairesService.update(this.publicationsQuestionnaires[myIndex]).subscribe(res => {
@@ -231,6 +231,7 @@ export class SelectionProcessAddComponent implements OnInit {
                                                          .subscribe(res => {});
                                                     }
                                                     this.publicationsQuestionnaires.splice(myIndex,1);
+                                                    this.pushQuestionnaireOption(questionnaire.idCuestionario);
                                                     this.sortPublicationQuestionaries();
                                                  }
                                               });
@@ -257,6 +258,8 @@ export class SelectionProcessAddComponent implements OnInit {
          pq.orden = this.publicationsQuestionnaires.length+1;
          this.publicationQuestionnairesService.update(pq).subscribe(res =>{
             if(res.ok) {
+               this.questionnariesList.splice(
+                  this.questionnariesList.indexOf(this.questionnariesList.find(ql => ql.value === pq.idCuestionario)),1);
                this.publicationsQuestionnaires.push(pq);
             }
          });

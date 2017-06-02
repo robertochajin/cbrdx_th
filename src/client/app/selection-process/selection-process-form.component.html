@@ -202,8 +202,7 @@
 							      id="questionnaireForm">
 								
 								<div class="row">
-									<div class="form-group col-md-6">
-										<label for="qlist">* {{'PROCESOSELECCION.LBL_CUESTIONARIO' | translate }}</label>
+									<div class="form-group col-md-9">
 										<p-dropdown id="qlist" name="qlist" #ngQuestionnaire="ngModel" [options]="questionnariesList"
 										            [autoWidth]="false" [(ngModel)]="questionnarie.idCuestionario" required></p-dropdown>
 										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="qf.submitted && !ngQuestionnaire.valid">
@@ -211,8 +210,8 @@
 											{{'PROCESOSELECCION.LBL_CUESTIONARIO' | translate }} {{'LBL_REQUERIDO' | translate }}
 										</div>
 									</div>
-									<div class="form-group col-md-6">
-										<button icon="fa-plus" label="{{'BTN_AGREGAR' | translate }}" type="submit"
+									<div class="form-group col-md-3">
+										<button class="ui-button ui-button-success btn-block btn"  icon="fa-plus" label="{{'BTN_AGREGAR' | translate }}" type="submit"
 										        pButton></button>
 									</div>
 								</div>
