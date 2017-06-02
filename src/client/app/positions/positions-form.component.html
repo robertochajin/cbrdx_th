@@ -139,7 +139,7 @@
                                          pButton></button>
                               </div>
                            </div>
-                           <div class="row form-footer-buttons" *ngIf="position.paso == 16">
+                           <div class="row form-footer-buttons" *ngIf="position.paso === 16 && position.idEstado !== aprobado">
                               <div class="form-group col-md-12">
                                  <button icon="fa-plus" label="{{ 'LBL_APROBAR' | translate }}" type="button"
                                          pButton (click)="updateEstado(aprobado)"></button>
