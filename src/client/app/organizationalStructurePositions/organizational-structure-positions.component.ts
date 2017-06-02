@@ -251,12 +251,13 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
          this.badEmployee = true;
       } else {
 
-         //
+         // let fi: moment.Moment = moment( this.personsPosition.asignadoDesde, 'MM/DD/YYYY' );
          // this.personsPosition.asignadoDesde = fi.add( 2, 'days' ).format( 'YYYY-MM-DD' );
          if ( this.personsPosition.idTerceroCargo === null ) {
             this.personPositionService.add( this.personsPosition ).subscribe( res => {
                res.nombreCompleto = this.selectedEmployee.nombreCompleto;
                res.cargo = this.personsPosition.cargo;
+               res.idCargo = this.personsPosition.idCargo;
 
                // res.asignadoDesde = fi.subtract( 2, 'days' ).format( 'YYYY-MM-DD' );
                this.postionSlots[ this.postionSlots.indexOf( this.backUpPersonsPosition ) ] = res;
@@ -267,6 +268,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
                if ( res.ok ) {
                   this.personsPosition.nombreCompleto = this.selectedEmployee.nombreCompleto;
                   this.personsPosition.cargo = this.personsPosition.cargo;
+                  // this.personsPosition.asignadoDesde = fi.subtract( 2, 'days' ).format( 'YYYY-MM-DD' );
                   this.postionSlots[ this.postionSlots.indexOf( this.backUpPersonsPosition ) ] = this.personsPosition;
                   this.editingPerson = false;
                }
@@ -346,7 +348,6 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
       } );
       this.backUpPersonsPosition = new PersonPositions();
       this.backUpPersonsPosition = pp;
-
       this.personsPosition = Object.assign( {}, pp );
       // this.personsPosition = JSON.parse( JSON.stringify( pp ) );
       if ( this.personsPosition.asignadoDesde !== undefined ) {

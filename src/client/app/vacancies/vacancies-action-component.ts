@@ -202,8 +202,11 @@ export class VacantesActionComponent {
          if ( this.vacancy.idEstado === this.tDisminucionPlanta ) {
             this.vacancy.idEstado = this.eCerrado;
          }
-         if ( this.vacancy.idEstado === this.tCargoNuevo ) {
+         if ( this.vacancy.idTipoSolicitud === this.tCargoNuevo ) {
             this.vacancy.idEstado = this.ePerfil;
+         }
+         if ( this.vacancy.idTipoSolicitud === this.tEliminacion ) {
+            this.vacancy.idEstado = this.eEliminacion;
          }
 
       }
