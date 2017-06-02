@@ -32,16 +32,30 @@ export class ListaComponent {
          if ( token !== null ) {
             this.usuarioLogueado = this.jwtHelper.decodeToken( token );
          }
-         this.rolesService.listRoles().subscribe( res => {
-            if ( this.usuarioLogueado.authorities.length > 0 ) {
-               for ( let r of res ) {
-                  if ( r.rol === this.usuarioLogueado.authorities[ 0 ].authority ) {
-                     this.idRol = r.idRol;
+         this.usuariosService.readUserRoles( this.usuarioLogueado.usuario.idUsuario ).subscribe( data => {
+            this.rolesService.listRoles().subscribe( rest => {
+               let adm = rest.find( rl => rl.codigoRol === "ADM" );
+               let roladm:any;
+               if(adm){
+                  roladm= data.find( x => x.rol === adm.rol );
+               }
+               if ( data.length > 0 ) {
+                  for ( let r of res ) {
+                     if ( roladm ) {
+                        r.editing = true;
+                     } else {
+                        let temp = data.find( a => a.idRol === r.idRol );
+                        if ( temp ) {
+                           r.editing = true;
+                        } else {
+                           r.editing = false;
+                        }
+                     }
+
                   }
                }
-            }
+            } );
          } );
-
       } );
 
    }
