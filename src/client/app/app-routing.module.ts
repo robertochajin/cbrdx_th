@@ -150,7 +150,6 @@ import { SelectionProcessComponent } from './selection-process/selection-process
 import { SelectionProcessAddComponent } from './selection-process/selection-process-add.component';
 import { SelectionProcessVacanciesComponent } from './selection-process/selection-process-vacancies.component';
 import { VacancyDetailComponent } from './selection-process/vacancy-detail.component';
-import { PublicationDetailComponent } from './selection-process/selection-process-detail.component';
 
 
 const routes = [
@@ -360,7 +359,6 @@ const routes = [
    // Preceso de selección
    { path: 'selection-process', component: SelectionProcessComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/add-publication/:idReq', component: SelectionProcessAddComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/detail-publication/:idReq', component: PublicationDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/active-publications', component: SelectionProcessVacanciesComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/publications-detail/:idPublication', component: VacancyDetailComponent, canActivate: [ AuthGuard ] },
 ];

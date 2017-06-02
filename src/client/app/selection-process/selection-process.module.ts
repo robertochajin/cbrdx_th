@@ -3,7 +3,6 @@ import { SharedModule } from '../shared/shared.module';
 import { FormSharedModule } from '../shared/form-shared.module';
 import { SelectionProcessComponent } from './selection-process.component';
 import { SelectionProcessAddComponent } from './selection-process-add.component';
-import { PublicationDetailComponent } from './selection-process-detail.component';
 import { PublicationsService } from '../_services/publications.service';
 import { VacanciesService } from '../_services/vacancies.service';
 import { PublicationQuestionnairesService } from '../_services/publication-questionnaires.service';
@@ -19,7 +18,6 @@ import { ConstanteService } from '../_services/constante.service';
               ],
               declarations: [
                  SelectionProcessComponent,
-                 PublicationDetailComponent,
                  SelectionProcessAddComponent,
                  VacancyDetailComponent,
                  SelectionProcessVacanciesComponent

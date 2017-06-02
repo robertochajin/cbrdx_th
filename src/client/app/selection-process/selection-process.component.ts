@@ -105,7 +105,7 @@ export class SelectionProcessComponent implements OnInit {
    }
 
    detail( r: PersonnelRequirement ) {
-      this.router.navigate( [ 'selection-process/detail-publication/' + r.idPublicacion ] );
+      this.router.navigate( [ 'selection-process/publications-detail/' + r.idPublicacion ] );
    }
 
    update( r: PersonnelRequirement ) {
