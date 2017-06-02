@@ -5,7 +5,7 @@
 			<p-accordionTab header="{{ 'PROCESOSELECCION.LBL_PUBLICARVACANTE' | translate }}"
 			                [selected]="acordion == 0 || acordion == null ">
 				<div *ngIf="publication">
-					<form (ngSubmit)="f.valid && onSubmit(acordion)" #f="ngForm" novalidate id="formulario">
+					<form (ngSubmit)="f.valid && onCreateP()" #f="ngForm" novalidate id="formularioP">
 						<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 							<div class="ui-grid-row">
 								<div class="ui-grid-col-1"></div>
@@ -30,7 +30,7 @@
 											<p-calendar id="inicio" name="inicio" [showIcon]="true"
 											            [yearNavigator]="true" [locale]="es" readonlyInput="true" [yearRange]="range"
 											            dataType="date" #ingreso="ngModel" [minDate]="minDate"
-											            required="true"(onSelect)="onSelectBegin($event)"
+											            required="true" (onSelect)="onSelectBegin($event)"
 											            [(ngModel)]="publication.fechaInicio" dateFormat="yy'-'mm'-'dd"></p-calendar>
 											<div *ngIf="f.submitted&&!ingreso.valid" class="alert alert-danger">
 												<i class="fa fa-close"></i>
@@ -105,7 +105,7 @@
 												<label for="lugtrabajo" class="control-label">* {{'PROCESOSELECCION.LBL_LUGARTRABAJO' | translate
 													}}</label>
 												<input type="text" pInputText name="lugtrabajo" id="lugtrabajo" #lugtrabajo="ngModel"
-												       [(ngModel)]="publication.lugarTrabajo" required />
+												       [(ngModel)]="publication.lugarTrabajo" required/>
 												<div *ngIf="f.submitted&&!lugtrabajo.valid" class="alert alert-danger">
 													<i class="fa fa-close"></i>
 													{{'PROCESOSELECCION.LBL_LUGARTRABAJO' | translate }} {{'LBL_REQUERIDO' | translate }}
@@ -148,9 +148,9 @@
 											<div class="form-group">
 												<label for="descripcion" class="control-label">* {{ 'POSITION.LBL_DESCRIPCION' | translate }}
 												</label>
-												<textarea id="descripcion" name="descripcion" pInputTextarea rows="4" cols="35" #descripcion="ngModel"
-												          [(ngModel)]="publication.descripcionGeneral" required class="form-control"></textarea>
-												<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !descripcion.valid">
+												<textarea id="descripcion" name="descripcion" pInputTextarea rows="4" cols="35" #descr="ngModel"
+												          [(ngModel)]="publication.descripcionGeneral" required="true" class="form-control"></textarea>
+												<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !descr.valid">
 													<i class="fa fa-close"></i>
 													{{ 'POSITION.LBL_DESCRIPCION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 												</div>
@@ -160,7 +160,8 @@
 									<div class="row">
 										<div class="col-md-10 col-md-offset-1">
 											<div class="form-group">
-												<label for="competencias" class="control-label">* {{ 'PROCESOSELECCION.LBL_COMPETENCIAS' | translate }} </label>
+												<label for="competencias" class="control-label">* {{ 'PROCESOSELECCION.LBL_COMPETENCIAS' | translate
+													}} </label>
 												<textarea id="competencias" name="competencias" pInputTextarea rows="6" cols="35"
 												          #competencias="ngModel" [(ngModel)]="publication.competenciasLaborales" required
 												          class="form-control"></textarea>
@@ -215,54 +216,56 @@
 			<p-accordionTab header="{{ 'PROCESOSELECCION.LBL_CUESTIONARIOS' | translate }}"
 			                [selected]="acordion==1" [disabled]="!publication.idPublicacion">
 				<fieldset>
-				<div>
-					<div class="row-fluid">
-						<div class="col-md-12">
-							<form name="questionnaireForm" (ngSubmit)="qf.valid && addPublicationsQuestionnaire()"
-							      #qf="ngForm"
-							      novalidate
-							      id="questionnaireForm">
-								
-								<div class="row">
-									<div class="form-group col-md-9">
-										<p-dropdown id="qlist" name="qlist" #ngQuestionnaire="ngModel" [options]="questionnariesList"
-										            [autoWidth]="false" [(ngModel)]="questionnarie.idCuestionario" required></p-dropdown>
-										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="qf.submitted && !ngQuestionnaire.valid">
-											<i class="fa fa-close"></i>
-											{{'PROCESOSELECCION.LBL_CUESTIONARIO' | translate }} {{'LBL_REQUERIDO' | translate }}
+					<div>
+						<div class="row-fluid">
+							<div class="col-md-12">
+								<form name="questionnaireForm" (ngSubmit)="qf.valid && addPublicationsQuestionnaire()"
+								      #qf="ngForm"
+								      novalidate
+								      id="questionnaireForm">
+									
+									<div class="row">
+										<div class="form-group col-md-9">
+											<p-dropdown id="qlist" name="qlist" #ngQuestionnaire="ngModel" [options]="questionnariesList"
+											            [autoWidth]="false" [(ngModel)]="questionnarie.idCuestionario" required></p-dropdown>
+											<div class="ui-message ui-messages-error ui-corner-all" *ngIf="qf.submitted && !ngQuestionnaire.valid">
+												<i class="fa fa-close"></i>
+												{{'PROCESOSELECCION.LBL_CUESTIONARIO' | translate }} {{'LBL_REQUERIDO' | translate }}
+											</div>
+										</div>
+										<div class="form-group col-md-3">
+											<button class="ui-button ui-button-success btn-block btn" icon="fa-plus"
+											        label="{{'BTN_AGREGAR' | translate }}" type="submit"
+											        pButton></button>
 										</div>
 									</div>
-									<div class="form-group col-md-3">
-										<button class="ui-button ui-button-success btn-block btn"  icon="fa-plus" label="{{'BTN_AGREGAR' | translate }}" type="submit"
-										        pButton></button>
-									</div>
-								</div>
-							
-							</form>
+								
+								</form>
+							</div>
 						</div>
 					</div>
-				</div>
 				</fieldset>
 				<div>
-					<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="publicationsQuestionnaires"
-					             [responsive]="true" >
-						<p-column field="cuestionario" header="{{ 'PROCESOSELECCION.LBL_CUESTIONARIO' | translate }}" [sortable]="false"></p-column>
+					<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="publicationsQuestionnaires"
+					             [responsive]="true">
+						<p-column field="cuestionario" header="{{ 'PROCESOSELECCION.LBL_CUESTIONARIO' | translate }}"
+						          [sortable]="false"></p-column>
 						<p-column field="descripcion" header="{{ 'PROCESOSELECCION.LBL_DESCRIPCION' | translate }}" [sortable]="false"></p-column>
-						<p-column header="{{ 'LBL_ORDEN' | translate }}" styleClass="datatable-col-action" >
+						<p-column header="{{ 'LBL_ORDEN' | translate }}" styleClass="datatable-col-action">
 							<template let-qstn="rowData" pTemplate="body">
 								<div class="btn-group" role="group">
-									<button type="button"  class="ui-button ui-button-info btn" icon="fa-arrow-down"
-									        pButton (click)="sendBefore(qstn)" ></button>
-									<button type="button"  class="ui-button ui-button-info btn" icon="fa-arrow-up"
-									        pButton (click)="sendAfter(qstn)" ></button>
+									<button type="button" class="ui-button ui-button-info btn" icon="fa-arrow-down"
+									        pButton (click)="sendBefore(qstn)"></button>
+									<button type="button" class="ui-button ui-button-info btn" icon="fa-arrow-up"
+									        pButton (click)="sendAfter(qstn)"></button>
 								</div>
 							</template>
 						</p-column>
-						<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action" >
+						<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 							<template let-qstn="rowData" pTemplate="body">
 								<div class="btn-group" role="group">
-									<button type="button"  class="ui-button ui-button-danger btn" icon="fa-trash"
-									        pButton (click)="disableQuestionnaire(qstn)" ></button>
+									<button type="button" class="ui-button ui-button-danger btn" icon="fa-trash"
+									        pButton (click)="disableQuestionnaire(qstn)"></button>
 								</div>
 							</template>
 						</p-column>
@@ -272,14 +275,15 @@
 		</p-accordion>
 	</div>
 </div>
-<div class="row form-footer-buttons " >
+<div class="row form-footer-buttons ">
 	<div class="form-group col-md-3 col-md-offset-4">
 		<button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate}}" type="button"
 		        pButton (click)="goBackPublic()"></button>
-		<button *ngIf="publication.indicadorPublicacion!==true"
-		        label="{{ 'PROCESOSELECCION.LBL_PUBLICAR' | translate}}"
-		        type="button"
-		        pButton (click)="publicar()"></button>
+		<button *ngIf="publication.indicadorPublicacion!==true" [disabled]="!publication.idPublicacion"
+			label="{{ 'PROCESOSELECCION.LBL_PUBLICAR' | translate}}"
+			type="button"
+			pButton (click)="publicar()">
+		</button>
 	</div>
 </div>
 <p-confirmDialog width="400" acceptLabel="{{'BTN_SI' | translate }}" rejectLabel="{{'BTN_NO' | translate }}"></p-confirmDialog>
