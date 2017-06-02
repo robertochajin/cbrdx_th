@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RolesService } from '../_services/roles.service';
+import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { NavService } from '../_services/_nav.service';
 import { VacanciesService } from '../_services/vacancies.service';
-import { ListaService } from '../_services/lista.service';
 import moment = require('moment');
+import { PersonnelRequirement } from '../_models/personnelRequirement';
 
 @Component( {
                moduleId: module.id,
@@ -12,17 +11,24 @@ import moment = require('moment');
             } )
 export class SelectionProcessVacanciesComponent implements OnInit {
 
+   publications: PersonnelRequirement[] = [];
 
-
-   constructor( private rolesService: RolesService,
-      private router: Router,
-      private navService: NavService,
-      private listaService: ListaService,
-      private vacanciesService: VacanciesService, ) {
+   constructor(private router: Router, private vacanciesService: VacanciesService) {
+      vacanciesService.getAllActive().subscribe(ps => {
+         this.publications = ps;
+      });
    }
 
    ngOnInit() {
+
    }
+
+
+   aplicar(publication: PersonnelRequirement){
+      this.router.navigate( [ 'selection-process/publications-detail/' + publication.idPublicacion ] );
+   }
+
+
 
 
 }

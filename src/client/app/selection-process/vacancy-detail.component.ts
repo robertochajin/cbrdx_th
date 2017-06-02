@@ -23,7 +23,7 @@ export class VacancyDetailComponent implements OnInit {
       private location: Location,
       private publicationsService: PublicationsService,
       private constanteService: ConstanteService,
-      private vacanciesService: VacanciesService, ) {
+      private vacanciesService: VacanciesService ) {
 
       this.route.params
       .subscribe( ( params: Params ) => {

@@ -38,6 +38,11 @@ export class VacanciesService {
       .map( ( res: Response ) => res.json() as PersonnelRequirement[] );
    }
 
+   getAllActive( ) {
+      return this.authHttp.get( this.serviceURL + 'requerimientos/publicacionFechas/todasActivas/' )
+      .map( ( res: Response ) => res.json() as PersonnelRequirement[] );
+   }
+
    getPublication( idPublicacion: number ) {
       return this.authHttp.get( this.serviceURL + 'requerimientos/publicacion/' + idPublicacion ).map(
          ( res: Response ) => res.json() as PersonnelRequirement );

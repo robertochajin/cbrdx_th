@@ -1,1 +1,30 @@
-<h1>Lista vacantes</h1>
+<div *ngIf="publications">
+	<div class="col-md-10 col-md-offset-1">
+		<div class="row">
+			<p-panel *ngFor="let publication of publications" header="{{publication.cargo}}">
+				<form class="form-horizontal">
+					<fieldset>
+						<div class="row">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_FORMACIONEDUCATIVA' | translate
+								}}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{publication.nivelEducacion}}</strong></label>
+						</div>
+						<div class="row">
+							<label class="col-md-3 col-sm-12 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_DESCRIPCION' | translate
+								}}:</label>
+							<label class="col-md-8 col-sm-12 col-xs-12"><strong><p align="justify">{{publication.descripcionGeneral}}</p></strong></label>
+						</div>
+						
+						<div class="row form-footer-buttons">
+							<div class="form-group col-md-12">
+								<button pButton icon="fa-check" label="{{'PROCESOSELECCION.LBL_VERMAS' | translate }}" (click)="aplicar(publication)"></button>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</p-panel>
+		</div>
+	</div>
+
+</div>
+

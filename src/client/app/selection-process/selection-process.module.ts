@@ -10,6 +10,7 @@ import { PublicationQuestionnairesService } from '../_services/publication-quest
 import { QuestionnairesService } from '../_services/questionnaires.service';
 import { VacancyDetailComponent } from './vacancy-detail.component';
 import { SelectionProcessVacanciesComponent } from './selection-process-vacancies.component';
+import { ConstanteService } from '../_services/constante.service';
 
 @NgModule( {
               imports: [
@@ -26,6 +27,7 @@ import { SelectionProcessVacanciesComponent } from './selection-process-vacancie
               providers: [
                  PublicationsService,
                  VacanciesService,
+                 ConstanteService,
                  QuestionnairesService,
                  PublicationQuestionnairesService
               ],
