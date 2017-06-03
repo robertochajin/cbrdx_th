@@ -41,6 +41,7 @@ export class PositionsComponent implements OnInit {
    requirementAction: RequirementsAction = new RequirementsAction();
    organizationalStructurePositions: OrganizationalStructurePositions[];
    msg: Message;
+   btnhide = false;
 
    constructor( private positionsService: PositionsService,
       private router: Router,
@@ -186,7 +187,11 @@ export class PositionsComponent implements OnInit {
                                                     this.requirementAction.observacion = "Requerimiento de Eliminación Completado";
                                                     this.vacanciesService.setAction( this.requirementAction ).subscribe( requirementAction => {
                                                        this.navService.setMesage( 1, this.msg );
-                                                       this.deletePosition.splice( this.deletePosition.indexOf( c ), 1 );
+                                                       if(this.deletePosition.length > 1){
+                                                          this.deletePosition.splice( this.deletePosition.indexOf( c ), 1 );
+                                                       }else{
+                                                          this.btnhide = true;
+                                                       }
                                                     }, error => {
                                                        this.navService.setMesage( 3, this.msg );
                                                     } );
@@ -199,4 +204,5 @@ export class PositionsComponent implements OnInit {
          }
       });
    }
+
 }
