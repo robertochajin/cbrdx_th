@@ -346,7 +346,12 @@ export class PersonnelRequirementEditComponent implements OnInit {
                      this.personnelRequirement.indicadorAutorizacion = this.isAuthNeeded( this.personnelRequirement.idTipoSolicitud,
                                                                                           this.selectedPosition.idCargo );
                   } else {
-                     this.personnelRequirement.indicadorAutorizacion = false;
+                     if ( item.codigo === 'CRGNVO') {
+                        this.personnelRequirement.indicadorAutorizacion = this.isAuthNeeded( this.personnelRequirement.idTipoSolicitud,
+                                                                                             0 );
+                     } else {
+                        this.personnelRequirement.indicadorAutorizacion = false;
+                     }
                   }
                   if ( this.dispColaboradorJefeInmediato )
                      this.personnelRequirement.idJefe = this.selectedBoss.idTercero;
