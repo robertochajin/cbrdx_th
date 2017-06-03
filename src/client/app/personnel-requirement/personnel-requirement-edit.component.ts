@@ -347,7 +347,8 @@ export class PersonnelRequirementEditComponent implements OnInit {
                                                                                           this.selectedPosition.idCargo );
                   } else {
                      if ( item.codigo === 'CRGNVO') {
-                        this.personnelRequirement.indicadorAutorizacion = true;
+                        this.personnelRequirement.indicadorAutorizacion = this.isAuthNeeded( this.personnelRequirement.idTipoSolicitud,
+                                                                                             0 );
                      } else {
                         this.personnelRequirement.indicadorAutorizacion = false;
                      }
