@@ -50,6 +50,7 @@ export class SelectionProcessAddComponent implements OnInit {
    private questionnaries: Questionnaries[] = [];
    private questionnariesList: SelectItem[] = [];
    private questionnarie: Questionnaries = new Questionnaries();
+   addingQuestionnarie: boolean = false;
    // fin var cuestionarios
 
    constructor( private employeeVehicleService: EmployeeVehicleService,
@@ -99,8 +100,8 @@ export class SelectionProcessAddComponent implements OnInit {
                } );
                this.publicationQuestionnairesService.getAllByPublication( data.idPublicacion ).subscribe( res => {
                   this.allPublicationsQuestionnaires = res;
-                  this.questionnairesService.getAllEnabled().subscribe(qst => {
-                     this.questionnariesList.push({label:'Seleccione cuestionario...', value :null});
+                  this.questionnairesService.getAllEnabled().subscribe( qst => {
+                     this.questionnariesList.push( { label: 'Seleccione cuestionario...', value: null } );
                      this.questionnaries = qst;
                      this.questionnaries.map( q => {
                         let tpq = this.allPublicationsQuestionnaires.find( it => it.idCuestionario === q.idCuestionario );
@@ -118,7 +119,7 @@ export class SelectionProcessAddComponent implements OnInit {
                   } );
                } );
             } else {
-               this.publication.idFormaReclutamiento= this.vacancy.idFormaReclutamiento;
+               this.publication.idFormaReclutamiento = this.vacancy.idFormaReclutamiento;
                this.publication.competenciasLaborales = '';
                this.physicStructureService.getById( this.vacancy.idEstructuraFisica ).subscribe( data => {
                   this.publication.lugarTrabajo = data.direccion;
@@ -133,6 +134,13 @@ export class SelectionProcessAddComponent implements OnInit {
                         this.publication.competenciasLaborales += c.competencia + ', ';
                      }
                   }
+               } );
+               this.questionnairesService.getAllEnabled().subscribe( qst => {
+                  this.questionnariesList.push( { label: 'Seleccione cuestionario...', value: null } );
+                  this.questionnaries = qst;
+                  this.questionnaries.map( q => {
+                     this.pushQuestionnaireOption( q.idCuestionario );
+                  } );
                } );
             }
          } );
@@ -162,8 +170,7 @@ export class SelectionProcessAddComponent implements OnInit {
 
    }
 
-   onSubmit() {
-
+   onCreateP() {
       if ( this.publication.idPublicacion === null || this.publication.idPublicacion === undefined ) {
          this.publication.idRequerimiento = this.vacancy.idRequerimiento;
          this.publicationsService.add( this.publication ).subscribe( res => {
@@ -177,13 +184,13 @@ export class SelectionProcessAddComponent implements OnInit {
          } );
          this.acordion = 1;
       }
-
    }
+
    onSelectBegin() {
-      let c = new Date(this.publication.fechaInicio);
+      let c = new Date( this.publication.fechaInicio );
       this.maxDateF = c;
-      this.maxDateF.setHours(24);
-      this.publication.fechaFin=null;
+      this.maxDateF.setHours( 24 );
+      this.publication.fechaFin = null;
    }
 
    onTabShow( e: any ) {
@@ -191,13 +198,16 @@ export class SelectionProcessAddComponent implements OnInit {
       this.acordion = this._nav.getTab();
 
    }
+
    goBackPublic(): void {
       this.location.back();
    }
-   publicar(){
-      this.publication.indicadorPublicacion= true;
-      this.publicationsService.update(this.publication).subscribe(rest=>{
-      });
+
+   publicar() {
+      this.publication.indicadorPublicacion = true;
+      this.publicationsService.update( this.publication ).subscribe( rest => {
+         this._nav.setMesage( 0, { severity: 'info', summary: 'Info', detail: 'Se ha publicado con exito' } );
+      } );
    }
 
    goBack(): void {
@@ -214,15 +224,15 @@ export class SelectionProcessAddComponent implements OnInit {
 
    // funciones cuestionarios
 
-   sendBefore(questionnaire:PublicationsQuestionnaries){
-      let myIndex = this.publicationsQuestionnaires.indexOf(questionnaire);
-      if(myIndex < this.publicationsQuestionnaires.length - 1){
-         let newOrder = this.publicationsQuestionnaires[myIndex].orden;
-         this.publicationsQuestionnaires[myIndex].orden = this.publicationsQuestionnaires[myIndex+1].orden;
-         this.publicationQuestionnairesService.update(this.publicationsQuestionnaires[myIndex]).subscribe(res => {
-            if(res.ok) {
-               this.publicationsQuestionnaires[myIndex+1].orden = newOrder;
-               this.publicationQuestionnairesService.update(this.publicationsQuestionnaires[myIndex+1]).subscribe(res => {
+   sendBefore( questionnaire: PublicationsQuestionnaries ) {
+      let myIndex = this.publicationsQuestionnaires.indexOf( questionnaire );
+      if ( myIndex < this.publicationsQuestionnaires.length - 1 ) {
+         let newOrder = this.publicationsQuestionnaires[ myIndex ].orden;
+         this.publicationsQuestionnaires[ myIndex ].orden = this.publicationsQuestionnaires[ myIndex + 1 ].orden;
+         this.publicationQuestionnairesService.update( this.publicationsQuestionnaires[ myIndex ] ).subscribe( res => {
+            if ( res.ok ) {
+               this.publicationsQuestionnaires[ myIndex + 1 ].orden = newOrder;
+               this.publicationQuestionnairesService.update( this.publicationsQuestionnaires[ myIndex + 1 ] ).subscribe( res => {
                   if ( res.ok ) {
                      this.sortPublicationQuestionaries();
                   }
@@ -268,8 +278,8 @@ export class SelectionProcessAddComponent implements OnInit {
                                                        .subscribe( res => {
                                                        } );
                                                     }
-                                                    this.publicationsQuestionnaires.splice(myIndex,1);
-                                                    this.pushQuestionnaireOption(questionnaire.idCuestionario);
+                                                    this.publicationsQuestionnaires.splice( myIndex, 1 );
+                                                    this.pushQuestionnaireOption( questionnaire.idCuestionario );
                                                     this.sortPublicationQuestionaries();
                                                  }
                                               } );
@@ -291,14 +301,16 @@ export class SelectionProcessAddComponent implements OnInit {
    addPublicationsQuestionnaire() {
       let pq: PublicationsQuestionnaries = new PublicationsQuestionnaries();
       pq = this.allPublicationsQuestionnaires.find( pqs => pqs.idCuestionario === this.questionnarie.idCuestionario );
+      this.addingQuestionnarie = true;
       if ( pq !== undefined && pq.idPublicacionCustionario !== undefined && pq.idPublicacionCustionario !== null ) {
          pq.indicadorHabilitado = true;
-         pq.orden = this.publicationsQuestionnaires.length+1;
-         this.publicationQuestionnairesService.update(pq).subscribe(res =>{
-            if(res.ok) {
+         pq.orden = this.publicationsQuestionnaires.length + 1;
+         this.publicationQuestionnairesService.update( pq ).subscribe( res => {
+            if ( res.ok ) {
                this.questionnariesList.splice(
-                  this.questionnariesList.indexOf(this.questionnariesList.find(ql => ql.value === pq.idCuestionario)),1);
-               this.publicationsQuestionnaires.push(pq);
+                  this.questionnariesList.indexOf( this.questionnariesList.find( ql => ql.value === pq.idCuestionario ) ), 1 );
+               this.publicationsQuestionnaires.push( pq );
+               this.addingQuestionnarie = false;
             }
          } );
       } else {
@@ -316,6 +328,7 @@ export class SelectionProcessAddComponent implements OnInit {
                this.questionnariesList.splice(
                   this.questionnariesList.indexOf( this.questionnariesList.find( ql => ql.value === res.idCuestionario ) ), 1 );
                this.publicationsQuestionnaires.push( res );
+               this.addingQuestionnarie = false;
             }
          } );
       }

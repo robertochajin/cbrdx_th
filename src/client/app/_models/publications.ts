@@ -27,6 +27,7 @@ export class Publications {
    indicadorHabilitado: boolean= true;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
+   cargo: string;
 
    constructor() {
       this.idPublicacion = null;
