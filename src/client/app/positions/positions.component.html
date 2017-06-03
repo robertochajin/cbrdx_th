@@ -55,7 +55,7 @@
 					<button type="button" icon="fa-eye" class="ui-button-info"
 					        pButton (click)="detailRequirement(vacancy.idRequerimiento)"></button>
 					<button type="button" icon="fa-pencil" class="ui-button-success"
-					        pButton (click)="delPosition(vacancy)"></button>
+					        pButton (click)="delPosition(vacancy)" *ngIf="!btnhide"></button>
 					<button *ngIf="!vacancy.editar" type="button" icon="fa-list-alt" class="ui-button-success"
 					        pButton (click)="observations(vacancy)" title="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}"></button>
 				</template>
