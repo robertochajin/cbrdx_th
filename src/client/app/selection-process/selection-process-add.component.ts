@@ -50,6 +50,7 @@ export class SelectionProcessAddComponent implements OnInit {
    private questionnaries: Questionnaries[] = [];
    private questionnariesList: SelectItem[] = [];
    private questionnarie: Questionnaries = new Questionnaries();
+   addingQuestionnarie: boolean = false;
    // fin var cuestionarios
 
    constructor( private employeeVehicleService: EmployeeVehicleService,
@@ -300,6 +301,7 @@ export class SelectionProcessAddComponent implements OnInit {
    addPublicationsQuestionnaire() {
       let pq: PublicationsQuestionnaries = new PublicationsQuestionnaries();
       pq = this.allPublicationsQuestionnaires.find( pqs => pqs.idCuestionario === this.questionnarie.idCuestionario );
+      this.addingQuestionnarie = true;
       if ( pq !== undefined && pq.idPublicacionCustionario !== undefined && pq.idPublicacionCustionario !== null ) {
          pq.indicadorHabilitado = true;
          pq.orden = this.publicationsQuestionnaires.length + 1;
@@ -308,6 +310,7 @@ export class SelectionProcessAddComponent implements OnInit {
                this.questionnariesList.splice(
                   this.questionnariesList.indexOf( this.questionnariesList.find( ql => ql.value === pq.idCuestionario ) ), 1 );
                this.publicationsQuestionnaires.push( pq );
+               this.addingQuestionnarie = false;
             }
          } );
       } else {
@@ -325,6 +328,7 @@ export class SelectionProcessAddComponent implements OnInit {
                this.questionnariesList.splice(
                   this.questionnariesList.indexOf( this.questionnariesList.find( ql => ql.value === res.idCuestionario ) ), 1 );
                this.publicationsQuestionnaires.push( res );
+               this.addingQuestionnarie = false;
             }
          } );
       }
