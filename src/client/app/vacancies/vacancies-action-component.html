@@ -18,7 +18,7 @@
 				
 				<div *ngIf="permitido" style="width: 80%; margin: 0 auto;">
 					<div class="row">
-						<label for="acciones">{{ 'LBL_ACCIONES' | translate}}</label>
+						<label for="acciones">* {{ 'LBL_ACCIONES' | translate}}</label>
 						<p-dropdown id="acciones" name="acciones" required="true"
 						            [options]="listAcciones" [autoWidth]="false"
 						            [(ngModel)]="requirementsAction.idAccion"
@@ -30,7 +30,7 @@
 						</div>
 					</div>
 					<div class="row" *ngIf="requirementsAction.idAccion === aAsignar">
-						<label for="profesional">{{ 'VACANCIES.LBL_PROFESSIONAL' | translate}}</label>
+						<label for="profesional">* {{ 'VACANCIES.LBL_PROFESSIONAL' | translate}}</label>
 						<p-dropdown id="profesional" name="profesional" required="true"
 						            [options]="listUsuarios" [autoWidth]="false"
 						            [(ngModel)]="vacancy.idResponsableSeleccion"
@@ -42,19 +42,19 @@
 						</div>
 					</div>
 					<div class="row" *ngIf="requirementsAction.idAccion === aAsignar">
-						<label for="reclutamiento">{{ 'VACANCIES.LBL_RECRUITMENT' | translate}}</label>
+						<label for="reclutamiento">* {{ 'VACANCIES.LBL_RECRUITMENT' | translate}}</label>
 						<p-dropdown id="reclutamiento" name="reclutamiento" required="true"
 						            [options]="listReclutamiento" [autoWidth]="false"
 						            [(ngModel)]="vacancy.idFormaReclutamiento"
-						            #recruitment="ngModel"
+						            #recruitments="ngModel"
 						></p-dropdown>
 						<div class="ui-message ui-messages-error ui-corner-all"
-						     *ngIf="f.submitted && !recruitment.valid">
+						     *ngIf="f.submitted && !recruitments.valid">
 							<i class="fa fa-close"></i>{{ 'VACANCIES.LBL_RECRUITMENT' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 						</div>
 					</div>
 					<div class="row">
-						<label for="acciones">{{ 'VACANCIES.LBL_OBSERVACION' | translate}}</label>
+						<label for="acciones">* {{ 'VACANCIES.LBL_OBSERVACION' | translate}}</label>
 						<div class=" col-sm-12">
 							<textarea pInputTextarea id="obs" name="obs" class="form-control"
 							          [(ngModel)]="requirementsAction.observacion" #obs="ngModel"

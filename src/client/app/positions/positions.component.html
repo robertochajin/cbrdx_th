@@ -1,39 +1,142 @@
 <h3 class="first">{{ 'POSITION.LBL_CARGOS' | translate }}</h3>
-<div>
-    <div class="row datable-header">
-        <div class="col-md-6 col-xs-12 datatable-header-add">
-            <button type="button" icon="fa-plus" label="Nuevo Cargo"
-                    pButton (click)="add()"></button>
-        </div>
-        <div class="col-md-6 col-xs-12 datatable-header-search" >
-          <div class="input-group">
-            <div class="input-group-addon"><i class="fa fa-search"></i></div>
-            <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control"
-                   [(ngModel)]="busqueda" (change)="setSearch()">
-          </div>
-
-        </div>
-    </div>
-
-    <p-dataTable  emptyMessage="{{ 'POSITION.MSG_DOSEARCH' | translate }}" [value]="positions" [paginator]="true" [rows]="10"
-                  [responsive]="true" [globalFilter]="gb">
-        <p-column field="codigoCargo" header="{{ 'LBL_CODIGO' | translate }}" [sortable]="true"></p-column>
-        <p-column field="cargo" header="{{ 'LBL_NOMBRE' | translate }} " [sortable]="true"></p-column>
-       <p-column field="indHab" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true" styleClass="datatable-col-center">
-          <template let-position="rowData" pTemplate="body">
-             <p-checkbox [(ngModel)]="position.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
-          </template>
-       </p-column>
-        <p-column header="Acciones" styleClass="datatable-col-action">
-            <template let-position="rowData" pTemplate="body">
-
-                    <button type="button" icon="fa-pencil" class="ui-button-success"
-                            pButton (click)="update(position)"></button>
-              <!--<button type="button" icon="fa-trash" class="ui-button-danger"
-                      pButton (click)="del(employee)" ></button>-->
-
-            </template>
-        </p-column>
-    </p-dataTable>
-</div>
-<p-confirmDialog width="400"></p-confirmDialog>
+<p-tabView>
+	<p-tabPanel header="{{ 'POSITION.LBL_NUEVOCARGO' | translate}}" *ngIf="newPosition.length > 0">
+		<div class="row datable-header">
+			<div class="col-md-6 col-xs-12 datatable-header-add">
+			</div>
+			<div class="col-md-6 col-xs-12 datatable-header-search">
+				<div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-search"></i></div>
+					<input #gbRequerimientos type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
+				</div>
+			</div>
+		</div>
+		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" sortField="fechaSolicitud" [sortOrder]="-1" [value]="newPosition"
+		             [paginator]="true" [rows]="10" [responsive]="true"
+		             [globalFilter]="gbRequerimientos" #dt>
+			<p-column field="idRequerimiento" header="{{ 'VACANCIES.LBL_REQUEST' | translate }}" [sortable]="true"></p-column>
+			<p-column field="nombreCargo" header="{{ 'POSITION.LBL_CARGOS' | translate }}" [sortable]="true"></p-column>
+			<p-column field="fechaSolicitud" header="{{ 'VACANCIES.LBL_DATE' | translate }}" [sortable]="true"></p-column>
+			<p-column field="auditoriaFecha" header="{{ 'VACANCIES.LBL_LASTDATE' | translate }} " [sortable]="true"></p-column>
+			<p-column field="tipoSolicitud" header="{{ 'VACANCIES.LBL_REASON' | translate }}" [sortable]="true"></p-column>
+			<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+				<template let-vacancy="rowData" pTemplate="body">
+					<button type="button" icon="fa-eye" class="ui-button-info"
+					        pButton (click)="detailRequirement(vacancy.idRequerimiento)"></button>
+					<button type="button" icon="fa-pencil" class="ui-button-success"
+					        pButton (click)="addPosition(vacancy)"></button>
+					<button *ngIf="!vacancy.editar" type="button" icon="fa-list-alt" class="ui-button-success"
+					        pButton (click)="observations(vacancy)" title="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}"></button>
+				</template>
+			</p-column>
+		</p-dataTable>
+	</p-tabPanel>
+	<p-tabPanel header="{{ 'POSITION.LBL_ELIMINARCARGO' | translate}}" *ngIf="deletePosition.length > 0">
+		<div class="row datable-header">
+			<div class="col-md-6 col-xs-12 datatable-header-add">
+			</div>
+			<div class="col-md-6 col-xs-12 datatable-header-search">
+				<div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-search"></i></div>
+					<input #gbRequerimientos type="text" pInputText size="40" placeholder="Buscar..." class="form-control">
+				</div>
+			</div>
+		</div>
+		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" sortField="fechaSolicitud" [sortOrder]="-1" [value]="deletePosition"
+		             [paginator]="true" [rows]="10" [responsive]="true"
+		             [globalFilter]="gbRequerimientos" #dt>
+			<p-column field="idRequerimiento" header="{{ 'VACANCIES.LBL_REQUEST' | translate }}" [sortable]="true"></p-column>
+			<p-column field="cargo" header="{{ 'POSITION.LBL_CARGOS' | translate }}" [sortable]="true"></p-column>
+			<p-column field="fechaSolicitud" header="{{ 'VACANCIES.LBL_DATE' | translate }}" [sortable]="true"></p-column>
+			<p-column field="auditoriaFecha" header="{{ 'VACANCIES.LBL_LASTDATE' | translate }} " [sortable]="true"></p-column>
+			<p-column field="tipoSolicitud" header="{{ 'VACANCIES.LBL_REASON' | translate }}" [sortable]="true"></p-column>
+			<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+				<template let-vacancy="rowData" pTemplate="body">
+					<button type="button" icon="fa-eye" class="ui-button-info"
+					        pButton (click)="detailRequirement(vacancy.idRequerimiento)"></button>
+					<button type="button" icon="fa-pencil" class="ui-button-success"
+					        pButton (click)="delPosition(vacancy)" *ngIf="!btnhide"></button>
+					<button *ngIf="!vacancy.editar" type="button" icon="fa-list-alt" class="ui-button-success"
+					        pButton (click)="observations(vacancy)" title="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}"></button>
+				</template>
+			</p-column>
+		</p-dataTable>
+	</p-tabPanel>
+	
+	<p-tabPanel header="{{ 'POSITION.LBL_CARGOS' | translate}}">
+		<div class="row datable-header">
+			<div class="col-md-6 col-xs-12 datatable-header-add">
+				<button type="button" icon="fa-plus" label="Nuevo Cargo"
+				        pButton (click)="add()"></button>
+			</div>
+			<div class="col-md-6 col-xs-12 datatable-header-search">
+				<div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-search"></i></div>
+					<input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control"
+					       [(ngModel)]="busqueda" (change)="setSearch()">
+				</div>
+			
+			</div>
+		</div>
+		
+		<p-dataTable emptyMessage="{{ 'POSITION.MSG_DOSEARCH' | translate }}" [value]="positions" [paginator]="true" [rows]="10"
+		             [responsive]="true" [globalFilter]="gb">
+			<p-column field="codigoCargo" header="{{ 'LBL_CODIGO' | translate }}" [sortable]="true"></p-column>
+			<p-column field="cargo" header="{{ 'LBL_NOMBRE' | translate }} " [sortable]="true"></p-column>
+			<p-column field="indHab" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true" styleClass="datatable-col-center">
+				<template let-position="rowData" pTemplate="body">
+					<p-checkbox [(ngModel)]="position.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
+				</template>
+			</p-column>
+			<p-column header="Acciones" styleClass="datatable-col-action">
+				<template let-position="rowData" pTemplate="body">
+					
+					<button type="button" icon="fa-pencil" class="ui-button-success"
+					        pButton (click)="update(position)"></button>
+					<!--<button type="button" icon="fa-trash" class="ui-button-danger"
+                       pButton (click)="del(employee)" ></button>-->
+				
+				</template>
+			</p-column>
+		</p-dataTable>
+	</p-tabPanel>
+</p-tabView>
+<p-dialog header="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}" [(visible)]="displayActions"
+          modal="modal" width="700" responsive="true" draggable="false" >
+	<div style="overflow: scroll; height: 300px;">
+		<div *ngFor="let acc of requirementsAction">
+			<h4>{{acc.accion}} - {{nombreTercero}}</h4>
+			<h5>{{auditoriaFecha}}</h5>
+			<p>{{acc.observacion}}</p>
+			<hr>
+		</div>
+	</div>
+	<p-footer>
+		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+			<button type="button" pButton (click)="displayActions=false" label="{{'LBL_CERRAR' | translate}}"></button>
+		</div>
+	</p-footer>
+</p-dialog>
+<p-dialog header="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}" [(visible)]="displayPerson"
+          modal="modal" width="700" responsive="true" draggable="false" >
+	<div style="overflow: scroll; height: 300px;">
+		<h3>Para eliminar el cargo {{cargoAElimiar}} debe retirar a los colaboradores relacionados al cargo en las siguientes areas:
+		</h3>
+		<hr>
+		<div *ngFor="let acc of organizationalStructurePositions">
+			<h4>{{acc.estructuraOrganizacional}}</h4>
+			<hr>
+		</div>
+	</div>
+	<p-footer>
+		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+			<button type="button" pButton (click)="displayPerson=false" label="{{'LBL_CERRAR' | translate}}"></button>
+		</div>
+	</p-footer>
+</p-dialog>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
