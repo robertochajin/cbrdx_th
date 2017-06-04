@@ -128,7 +128,7 @@ body .ui-panel{
    }
 }
 .sidebar-menu .treeview-menu{
-   margin-top:-1px!important;
+   margin-top:-3px!important;
 }
 .sidebar-menu .treeview-menu > li > a {
    padding: 5px 36px 5px 26px!important;
