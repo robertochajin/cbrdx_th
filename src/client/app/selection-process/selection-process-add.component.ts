@@ -173,12 +173,16 @@ export class SelectionProcessAddComponent implements OnInit {
    onCreateP() {
       if ( this.publication.idPublicacion === null || this.publication.idPublicacion === undefined ) {
          this.publication.idRequerimiento = this.vacancy.idRequerimiento;
+         this.publication.indicadorPublicacion=false;
          this.publicationsService.add( this.publication ).subscribe( res => {
             this.publication = res;
             this._nav.setMesage( 1, this.msgs );
             this.acordion = 1;
          } );
       } else {
+         if(this.publication.indicadorPublicacion===null){
+            this.publication.indicadorPublicacion= false;
+         }
          this.publicationsService.update( this.publication ).subscribe( res => {
             this._nav.setMesage( 2, this.msgs );
          } );

@@ -149,7 +149,8 @@
 												<label for="descripcion" class="control-label">* {{ 'POSITION.LBL_DESCRIPCION' | translate }}
 												</label>
 												<textarea id="descripcion" name="descripcion" pInputTextarea rows="4" cols="35" #descr="ngModel"
-												          [(ngModel)]="publication.descripcionGeneral" required="true" class="form-control"></textarea>
+												          [(ngModel)]="publication.descripcionGeneral" required="true" class="form-control"
+												          maxlength="500"></textarea>
 												<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !descr.valid">
 													<i class="fa fa-close"></i>
 													{{ 'POSITION.LBL_DESCRIPCION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
@@ -164,7 +165,7 @@
 													}} </label>
 												<textarea id="competencias" name="competencias" pInputTextarea rows="6" cols="35"
 												          #competencias="ngModel" [(ngModel)]="publication.competenciasLaborales" required
-												          class="form-control"></textarea>
+												          class="form-control" maxlength="500"></textarea>
 												<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !competencias.valid">
 													<i class="fa fa-close"></i>
 													{{ 'PROCESOSELECCION.LBL_COMPETENCIAS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
