@@ -534,6 +534,7 @@ a.cancelar:hover {
     }
 }
 
+
 /**
 ------------------------ Vertical Tabs ------------------------------------
  */
@@ -677,6 +678,7 @@ body .ui-datatable thead th.ui-state-active{
     overflow: auto;
 }
 body .ui-button,
+body .ui-state-active,
 body .ui-state-highlight{
     background-color: #5d5d5d!important;
 }
@@ -771,7 +773,7 @@ body.skin-blue .form-control:focus{
 body.skin-blue .user-avatar{
    border: 4px solid #29ABE2;
 }
-/* -- Tabs -- */
+/* -- Tabs Blue -- */
 body.skin-blue .ui-tabview .ui-tabview-panel{
    border: 1px solid #3C8DBC;
 }
@@ -784,7 +786,6 @@ body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active,
 body.skin-blue .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active{
    border-color: #3C8DBC;
 }
-
 body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a,
 body.skin-blue .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active a{
    color: #3C8DBC;
@@ -829,20 +830,20 @@ body.skin-green .user-avatar{
    border: 4px solid #00A65A;
 }
 /* -- Tabs Green -- */
-body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav{
-   background: #00A65A;
-}
-body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav{
-   background: #00A65A;
-}
-body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active{
-   border-color: #00A65A;
-   color: #009c41;
-}
 body.skin-green .ui-tabview .ui-tabview-panel{
-   border: 1px solid #00A65A;
+    border: 1px solid #00A65A;
 }
-body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a{
+/* -- Tabs Top/left Green-- */
+body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav,
+body.skin-green .ui-tabview.ui-tabview-left .ui-tabview-nav{
+   background: #00A65A;
+}
+body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active,
+body.skin-green .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active{
+   border-color: #00A65A;
+}
+body.skin-green .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a,
+body.skin-green .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active a{
    color: #00A65A;
 }
 /* -- Accordion Green */
@@ -884,18 +885,21 @@ body.skin-purple .user-avatar{
    border: 4px solid #605ca8;
 }
 /* -- Tabs Purple -- */
-body.skin-purple .ui-tabview.ui-tabview-top .ui-tabview-nav{
-   background: #605ca8;
-}
-body.skin-purple .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active{
-   border-color: #605ca8;
-   color: #605ca8;
-}
 body.skin-purple .ui-tabview .ui-tabview-panel{
-   border: 1px solid #605ca8;
+    border: 1px solid #605ca8;
 }
-body.skin-purple .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a{
-   color: #605ca8;
+/* -- Tabs Top/left Purple-- */
+body.skin-purple .ui-tabview.ui-tabview-top .ui-tabview-nav,
+body.skin-purple .ui-tabview.ui-tabview-left .ui-tabview-nav{
+    background: #605ca8;
+}
+body.skin-purple .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active,
+body.skin-purple .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active{
+    border-color: #605ca8;
+}
+body.skin-purple .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a,
+body.skin-purple .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active a{
+    color: #605ca8;
 }
 /* -- Accordion Purple */
 body.skin-purple .ui-accordion .ui-accordion-header.ui-state-active {
