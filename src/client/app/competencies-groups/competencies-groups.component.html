@@ -96,7 +96,7 @@
 											translate }}</label>
 										<input type="text" pInputText id="cNombre" name="cNombre"
 										       [(ngModel)]="competencie.competencia" #cNombre="ngModel" [readonly]="competencie.idCompetencia != null"
-										       required (keyup)="capitalizec()"/>
+										       required (keyup)="capitalizec()" maxlength="64"/>
 										<div class="ui-message ui-messages-error ui-corner-all"
 										     *ngIf="fc.submitted && !cNombre.valid">
 											<i class="fa fa-close"></i>
