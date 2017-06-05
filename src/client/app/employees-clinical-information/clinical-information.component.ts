@@ -176,7 +176,7 @@ export class ClinicalInformationComponent implements OnInit {
    goBack(): void {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea Cancelar?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.ecd = null;

@@ -40,7 +40,7 @@ export class LocationComponent implements OnInit {
    del( f: Localizaciones ) {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea eliminar?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               f.indicadorHabilitado = false;

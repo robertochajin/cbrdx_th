@@ -163,7 +163,7 @@ export class FamilyInformationAddComponent implements OnInit {
    goBack(): void {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea Cancelar?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this._nav.setTab( 3 );

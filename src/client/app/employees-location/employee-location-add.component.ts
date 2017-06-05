@@ -267,7 +267,7 @@ export class LocationAddComponent implements OnInit {
       debugger;
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea Cancelar?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               // this.router.navigate(['/employees-family-information']);

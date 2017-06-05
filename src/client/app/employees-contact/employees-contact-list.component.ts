@@ -124,7 +124,7 @@ export class EmployeesContactListComponent implements OnInit {
       this.dialogObjet = f;
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea eliminar el contacto?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.dialogObjet.indicadorHabilitado = false;

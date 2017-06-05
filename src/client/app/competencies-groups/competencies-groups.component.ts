@@ -78,7 +78,7 @@ export class CompetenciesGroupsComponent implements OnInit {
    cancelEditingGroup() {
       this.confirmationService.confirm( {
                                            message: `¿Esta seguro que desea Cancelar?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
 
                                            accept: () => {
@@ -102,7 +102,7 @@ export class CompetenciesGroupsComponent implements OnInit {
 
       this.confirmationService.confirm( {
                                            message: `¿Esta seguro que desea Cancelar?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
 
                                            accept: () => {
@@ -151,7 +151,7 @@ export class CompetenciesGroupsComponent implements OnInit {
    disableCompetencie( competencie: Competencies ) {
       this.confirmationService.confirm( {
                                            message: `¿Esta seguro que desea deshabilitar esta competencia?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               competencie.indicadorHabilitado = false;
