@@ -112,6 +112,9 @@ export class EmployeesEstateUpdateComponent implements OnInit {
    inputNumberSotanos() {
       let sotano = this.employeeEstate.numeroSotanos + '';
       if ( this.employeeEstate.numeroSotanos !== null ) {
+         if(sotano.length>3){
+            sotano= sotano.substring(0,3);
+         }
          this.employeeEstate.numeroSotanos = Number( sotano.replace( /[^0-9]/g, '' ) );
       }
    }
