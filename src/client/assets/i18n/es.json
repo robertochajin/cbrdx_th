@@ -618,6 +618,7 @@
            "LBL_PUNTOS" : "Puntos de valoración",
            "LBL_SALARIO" : "Salario al 100%",
            "LBL_SUBTIPO" : "Subtipo",
+           "LBL_DESICIONES" : "Desiciones",
            "LBL_OCUPACION" : "Ocupación",
            "LBL_OBSERVACION" : "Observación",
            "LBL_OBSERVACIONCARGO" : "Observación del cargo",
