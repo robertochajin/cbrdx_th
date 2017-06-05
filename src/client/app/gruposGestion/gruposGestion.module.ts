@@ -8,6 +8,8 @@ import { GruposGestionAddComponent } from './gruposGestion-add.component';
 import { GruposGestionEditComponent } from './gruposGestion-edit.component';
 import { GruposGestionDetailComponent } from './gruposGestion-detail.component';
 import { SharedModule } from '../shared/shared.module';
+import { FormSharedModule } from '../shared/form-shared.module';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 /**
@@ -15,7 +17,7 @@ import 'rxjs/add/operator/switchMap';
  */
 
 @NgModule( {
-              imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule,
+              imports: [ CommonModule, FormSharedModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule,
                  CalendarModule, SharedModule
               ],
               declarations: [ GruposGestionComponent, GruposGestionAddComponent, GruposGestionEditComponent, GruposGestionDetailComponent ],

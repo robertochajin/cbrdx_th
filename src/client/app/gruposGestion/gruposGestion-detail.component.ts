@@ -5,6 +5,8 @@ import { Component } from '@angular/core';
 import { GruposGestion } from '../_models/gruposGestion';
 import { GruposGestionService } from '../_services/grupoGestion.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { FormSharedModule } from '../shared/form-shared.module';
+
 
 @Component( {
                moduleId: module.id,

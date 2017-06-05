@@ -12,8 +12,11 @@ import { SharedModule } from '../shared/shared.module';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { TercerosService } from '../_services/terceros.service';
+import { FormSharedModule } from '../shared/form-shared.module';
+
+
 @NgModule( {
-              imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule,
+              imports: [ CommonModule, FormSharedModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule,
                  SharedModule
               ],
               declarations: [ ConstanteComponent, ConstanteAddComponent, ConstanteEditComponent, ConstanteDetailComponent ],

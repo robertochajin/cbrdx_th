@@ -1,6 +1,6 @@
 <p-messages [value]="msgs"></p-messages>
 <div class="row">
-   <div class="col-md-12">
+   <div class="col-md-10 col-md-offset-1">
       <p-accordion (onOpen)="onTabShow($event)" id="accordion">
          <p-accordionTab header="{{ 'ADMIN_FORMULARIOS.LBL_FUNCIONALIDAD' | translate }}" [disabled]="true"
                          [selected]="acordion == 0 || acordion == null ">

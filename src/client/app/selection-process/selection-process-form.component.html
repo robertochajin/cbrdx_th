@@ -1,6 +1,6 @@
 <p-messages [value]="msgs"></p-messages>
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-10 col-md-offset-1">
 		<p-accordion (onOpen)="onTabShow($event)" id="accordion">
 			<p-accordionTab header="{{ 'PROCESOSELECCION.LBL_PUBLICARVACANTE' | translate }}"
 			                [selected]="acordion == 0 || acordion == null ">
@@ -276,8 +276,7 @@
 		</p-accordion>
 	</div>
 </div>
-<div class="row form-footer-buttons ">
-	<div class="form-group col-md-3 col-md-offset-4">
+<div class="row form-footer-buttons col-md-12">
 		<button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate}}" type="button"
 		        pButton (click)="goBackPublic()"></button>
 		<button *ngIf="publication.indicadorPublicacion!==true" [disabled]="!publication.idPublicacion"
@@ -285,6 +284,5 @@
 			type="button"
 			pButton (click)="publicar()">
 		</button>
-	</div>
 </div>
 <p-confirmDialog width="400" acceptLabel="{{'BTN_SI' | translate }}" rejectLabel="{{'BTN_NO' | translate }}"></p-confirmDialog>
