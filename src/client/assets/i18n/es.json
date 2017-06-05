@@ -782,6 +782,8 @@
       "LBL_FECHAREFERENCIA":"Fecha de referencias",
       "LBL_DATOSRECURSOSADICIONALES":"Datos de recursos adicionales",
       "LBL_RECURSOSCOMPRAS":"Recursos requeridos en compras",
+      "LBL_MENORAUNO":"No puede ser menor a uno",
+      "LBL_MENORACONVOCADOS":"No puede ser menor a los convocados",
       "LBL_RECURSOSTIC":"Recursos requeridos en DTIC",
       "LBL_FECHA_INICIO": "Fecha inicio",
       "LBL_FECHA_FIN": "Fecha fin",
