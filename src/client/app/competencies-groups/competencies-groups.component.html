@@ -16,6 +16,7 @@
 								<div *ngIf="!group.idGrupoCompetencia">
 									<input type="text" pInputText id="nombre" name="nombre"
 									       [(ngModel)]="group.grupoCompetencia" #nombre="ngModel" (keyup)="capitalize()"
+									       required maxlength="64"/>
 									<div class="ui-message ui-messages-error ui-corner-all"
 									     *ngIf="fg.submitted && !nombre.valid">
 										<i class="fa fa-close"></i>
