@@ -21,8 +21,8 @@
                      </div>
                      <div class="form-group col-md-4">
                         <label for="ponderancie">* {{'COMPETENCIES.LBL_PONDERACION' | translate }}</label>
-                        <input type="number" maxlength="3" size="3" pattern="(?:\b|-)([1-9]{1,2}[0]?|100)\b" min="1"
-                               max="100" pInputText id="ponderancie" name="ponderancie"
+                        <input type="text" maxlength="3" size="3" pattern="(?:\b|-)([1-9]{1,2}[0]?|100)\b" min="1"
+                               max="100" pInputText id="ponderancie" name="ponderancie" (keyup)="inputNumber()"
                                [(ngModel)]="group.ponderacion" #ponderancie="ngModel"
                                required/>
                         <div class="ui-message ui-messages-error ui-corner-all"

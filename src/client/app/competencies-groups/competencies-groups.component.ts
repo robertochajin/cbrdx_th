@@ -181,4 +181,14 @@ export class CompetenciesGroupsComponent implements OnInit {
       } );
       this.competencie.competencia = input;
    }
+
+   inputNumber() {
+      let ponderacion = this.group.ponderacion + '';
+      if ( this.group.ponderacion !== null ) {
+         this.group.ponderacion = Number( ponderacion.replace( /[^0-9]/g, '' ) );
+         if(this.group.ponderacion>100){
+            this.group.ponderacion=100;
+         }
+      }
+   }
 }
