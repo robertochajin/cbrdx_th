@@ -744,6 +744,7 @@
       "MSG_CARGOASIGNADO":"El cargo que intentó seleccionar ya fue asignado a esta área",
       "MSG_CARGOREQ":"Cargo es requerido",
       "MSG_PLAZASREQ":"Número de plazas es requerido",
+      "MSG_PLAZASMAX":"Número de plazas máximo es 9999",
       "MSG_ASIGNACOLABORADORCARGO":"Asignando colaborador al cargo",
       "LBL_ESTRUCTFISICA":"Estructura Fisica"
 
