@@ -174,7 +174,7 @@
 										      <label for="nombre" class="control-label col-sm-3">* {{ 'LBL_NOMBRE' | translate }} </label>
 										      <div class=" col-sm-9">
 											      <input type="text" pInputText class="form-control" id="nombre"
-											             name="nombre"
+											             name="nombre" maxlength="50"
 											             [(ngModel)]="organizationalStructure.nombre"
 											             #nombre="ngModel"
 											             (keyup)="capitalizeName()"
