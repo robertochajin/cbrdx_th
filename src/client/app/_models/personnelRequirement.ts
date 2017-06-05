@@ -44,6 +44,22 @@ export class PersonnelRequirement {
    public editar: boolean = true;
    public idCargoJefe: number;
 
+   // adicional para proceso de seleccion
+   public idPublicacion: number;
+   public fechaInicioPublicacion:Date;
+   public fechaFinPublicacion: Date;
+   public indicadorSalario: boolean;
+   public indicadorBonificacion: boolean;
+   public nivelEducacion: string;
+   public idNivelEducacion: number;
+   public tipoTrabajo: string;
+   public idTipoTrabajo: number;
+   public descripcionGeneral: string;
+   public lugarTrabajo: string;
+   public competenciasLaborales: string;
+   public indicadorObservacion: boolean;
+   public observacion: string;
+
    constructor() {
       this.editar = true;
    }

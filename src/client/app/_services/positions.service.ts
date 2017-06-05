@@ -43,7 +43,7 @@ export class PositionsService {
 
    add( c: Positions ) {
       c.auditoriaUsuario = this.idUsuario;
-      return this.authHttp.post( this.serviceURL + 'cargos', c ).map( ( res: Response ) => res.json() );
+      return this.authHttp.post( this.serviceURL + 'cargos', c ).map( ( res: Response ) => res.json() as Positions );
    };
 
    addPositionsActivities( c: PositionsActivities ) {
@@ -154,5 +154,9 @@ export class PositionsService {
 
    getActivitiesById( id: number ) {
       return this.authHttp.get( this.serviceURL + 'ocupaciones/' + id ).map( ( res: Response ) => res.json() );
+   }
+
+   disableById( idCargo: number) {
+      return this.authHttp.put( this.serviceURL + 'cargos/disabled/' + idCargo, idCargo ).map( ( res: Response ) => res );
    }
 }

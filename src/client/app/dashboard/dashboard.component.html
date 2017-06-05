@@ -9,7 +9,8 @@
 </div>
 
 <div class="row">
-         <div class="col-md-8" id="rolesSistema"
+	
+         <div class="col-md-5" id="rolesSistema"
               *ngIf="allWidgets[0].habilitado && allWidgets[0].visible">
             <p-panel>
                <p-header>
@@ -70,6 +71,38 @@
 
             </p-panel>
          </div>
+	
+			<div class="col-md-3" id="VACANTES" *ngIf="allWidgets[2].habilitado && allWidgets[2].visible">
+				<p-panel>
+					<p-header>
+						<div class="ui-helper-clearfix">
+							<span class="ui-panel-title">{{ 'WIDGETS.LBL_VACANTES' | translate }}</span>
+							<button class="pull-right" type="text" (click)="allWidgets[2].visible = !allWidgets[2].visible" icon=""><i
+								class="fa fa-close"></i></button>
+						</div>
+					</p-header>
+					<div class="ui-grid-row ">
+						
+						<ul class="list-group">
+							<li *ngFor="let vacancy of publications" class="list-group-item">
+								<h4>{{vacancy.cargo}}</h4>
+								<h5>{{ 'WIDGETS.LBL_FECHALIMITE' | translate}}: {{vacancy.fechaFinPublicacion}}</h5>
+								<button pButton icon="fa-check" class="btn-block" label="{{'WIDGETS.BTN_APLICAR' | translate }}"
+								        (click)="aplicar(vacancy)"></button>
+							</li>
+						</ul>
+						
+						<div class="pull-right">
+							<a (click)="goVacancyList()" class="verMás btn btn-primary btn-sm">
+								{{ 'WIDGETS.BTN_VERMAS' | translate }} <i class="fa fa-chevron-right"></i>
+							</a>
+						</div>
+					
+					</div>
+				
+				
+				</p-panel>
+			</div>
 
 </div>
 

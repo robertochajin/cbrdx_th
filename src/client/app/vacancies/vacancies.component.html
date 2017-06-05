@@ -72,7 +72,7 @@
 				</div>
 			</div>
 		</div>
-		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" sortField="fechaSolicitud" [sortOrder]="-1" [value]="vacancies"
+		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="vacancies"
 		             [paginator]="true" [rows]="10" [responsive]="true"
 		             [globalFilter]="gbRequerimientos" #dt>
 			<p-column field="cargo" header="{{ 'VACANCIES.LBL_VACANCY' | translate }}" [sortable]="true"></p-column>

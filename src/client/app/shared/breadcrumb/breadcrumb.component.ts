@@ -210,9 +210,15 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
       this.breadcrumbService.hideRouteRegex( '^/faults/update/[0-9]*' );
 
       this.breadcrumbService.addFriendlyNameForRoute( '/positions', 'Cargos' );
-      this.breadcrumbService.addFriendlyNameForRoute( '/positions/add', 'Nuevo' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/position', 'Cargos' );
+      this.breadcrumbService.addFriendlyNameForRouteRegex( '^/positions/add$', 'Nuevo' );
+      this.breadcrumbService.hideRouteRegex( '^/positions/add/[0-9]*$' );
       this.breadcrumbService.addFriendlyNameForRoute( '/positions/update', 'Actualizar' );
       this.breadcrumbService.hideRouteRegex( '^/positions/update/[0-9]*' );
+
+      this.breadcrumbService.addFriendlyNameForRoute( '/position/requirement' , 'Requerimiento');
+      this.breadcrumbService.hideRoute( '/position/requirement/detail');
+      this.breadcrumbService.hideRouteRegex( '^/position/requirement/detail/[0-9]*$' );
 
       this.breadcrumbService.addFriendlyNameForRoute( '/physic-structure', 'Estructura Física' );
       this.breadcrumbService.addFriendlyNameForRoute( '/physic-structure/add', 'Nuevo' );

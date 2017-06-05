@@ -23,10 +23,10 @@ import { ResoursesTicsService } from '../_services/resoursesTics.service';
 import { RequirementReferral } from '../_models/requirementReferral';
 import { ResourcesRequiredPurchases } from '../_models/resourcesRequiredPurchases';
 import { TicsResourses } from '../_models/ticsResourses';
-import { Questionnaires } from '../_models/questionnaires';
+import { RequirementQuestionnaires } from '../_models/requirementQuestionnaires';
 import { TranslateService } from 'ng2-translate';
 import { RequirementReferralsServices } from '../_services/requirement-referrals.service';
-import { QuestionnairesService } from '../_services/questionnaires.service';
+import { RequirementQuestionnairesService } from '../_services/requirement-questionnaires.service';
 import { ConstanteService } from '../_services/constante.service';
 import { Constante } from '../_models/constante';
 import { VacanciesService } from '../_services/vacancies.service';
@@ -100,13 +100,13 @@ export class PersonnelRequirementEditComponent implements OnInit {
    questId: any;
    ticsResourses: TicsResourses = new TicsResourses();
    resoursesPurchases: ResourcesRequiredPurchases = new ResourcesRequiredPurchases();
-   questionnaires: Questionnaires = new Questionnaires();
+   questionnaires: RequirementQuestionnaires = new RequirementQuestionnaires();
    listResourses: ResourcesRequiredPurchases[] = [];
    listResoursesAll: ResourcesRequiredPurchases[] = [];
    listResoursesTics: TicsResourses[] = [];
-   listResoursesQues: Questionnaires[] = [];
+   listResoursesQues: RequirementQuestionnaires[] = [];
    listResoursesTicsAll: TicsResourses[] = [];
-   listResoursesQuesAll: Questionnaires[] = [];
+   listResoursesQuesAll: RequirementQuestionnaires[] = [];
    wrongResourse: boolean = true;
    wrongResourseTics: boolean = true;
    guardandoResourses: boolean = false;
@@ -148,7 +148,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
       private referralsServices: RequirementReferralsServices,
       private resoursesRequiredServices: ResoursesRequiredServices,
       private resoursesTicsService: ResoursesTicsService,
-      private questionnairesService: QuestionnairesService,
+      private questionnairesService: RequirementQuestionnairesService,
       private vacanciesService: VacanciesService,
       private location: Location,
       private constanteService: ConstanteService,
@@ -346,7 +346,12 @@ export class PersonnelRequirementEditComponent implements OnInit {
                      this.personnelRequirement.indicadorAutorizacion = this.isAuthNeeded( this.personnelRequirement.idTipoSolicitud,
                                                                                           this.selectedPosition.idCargo );
                   } else {
-                     this.personnelRequirement.indicadorAutorizacion = false;
+                     if ( item.codigo === 'CRGNVO') {
+                        this.personnelRequirement.indicadorAutorizacion = this.isAuthNeeded( this.personnelRequirement.idTipoSolicitud,
+                                                                                             0 );
+                     } else {
+                        this.personnelRequirement.indicadorAutorizacion = false;
+                     }
                   }
                   if ( this.dispColaboradorJefeInmediato )
                      this.personnelRequirement.idJefe = this.selectedBoss.idTercero;
@@ -898,7 +903,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
       }
    }
 
-   delResoursesQues( r: Questionnaires ) {
+   delResoursesQues( r: RequirementQuestionnaires ) {
       r.indicadorHabilitado = false;
       this.questionnairesService.update( r ).subscribe( () => {
          this.listQuest.push({value: r.idCuestionario, label: r.cuestionario});

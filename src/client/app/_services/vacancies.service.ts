@@ -23,14 +23,43 @@ export class VacanciesService {
    getAll() {
       return this.authHttp.get( this.serviceURL + 'requerimientos' ).map( ( res: Response ) => res.json() as PersonnelRequirement[] );
    }
+   getByRespSelecAndIdEstad(idR: number, idE: number) {
+      return this.authHttp.get( this.serviceURL + 'requerimientos/filtroReq/'+idE+'/'+idR ).map( ( res: Response ) =>
+      res.json() as PersonnelRequirement[] );
+   }
+
+   getNuevoCargo(idEstado:number, idTipo:number) {
+      let idUsuario = this.idUsuario;
+      return this.authHttp.get( this.serviceURL + 'requerimientos/filtroReq2/'+idEstado+'/'+ idTipo).map( ( res: Response ) => res.json() as PersonnelRequirement[] );
+   }
 
    getByDate( fInicio: string, fFin: string ) {
       return this.authHttp.get( this.serviceURL + 'requerimientos/fecha/' + fInicio + '/'  + fFin)
       .map( ( res: Response ) => res.json() as PersonnelRequirement[] );
    }
 
+   getNActive( quantity: number ) {
+      return this.authHttp.get( this.serviceURL + 'requerimientos/publicacionFechas/cantidadN/' + quantity)
+      .map( ( res: Response ) => res.json() as PersonnelRequirement[] );
+   }
+
+   getAllActive( ) {
+      return this.authHttp.get( this.serviceURL + 'requerimientos/publicacionFechas/todasActivas/' )
+      .map( ( res: Response ) => res.json() as PersonnelRequirement[] );
+   }
+
+   getPublication( idPublicacion: number ) {
+      return this.authHttp.get( this.serviceURL + 'requerimientos/publicacion/' + idPublicacion ).map(
+         ( res: Response ) => res.json() as PersonnelRequirement );
+   }
+
    get( id: number ) {
       return this.authHttp.get( this.serviceURL + 'requerimientos/' + id ).map( ( res: Response ) => res.json() as PersonnelRequirement );
+   }
+
+   update( f: PersonnelRequirement ) {
+      f.auditoriaUsuario = this.idUsuario;
+      return this.authHttp.put( this.serviceURL, JSON.stringify( f ) ).catch( this.handleError );
    }
 
    setAction( c: RequirementsAction ) {
@@ -40,6 +69,11 @@ export class VacanciesService {
 
    getActions( id: number ) {
       return this.authHttp.get( this.serviceURL + 'requerimientosAcciones/requerimiento/' + id ).map( ( res: Response ) => res.json() as RequirementsAction[] );
+   }
+
+   handleError( error: any ): Promise<any> {
+      console.error( 'Error:', error );
+      return Promise.reject( error.message || error );
    }
 
 }

@@ -145,6 +145,11 @@ import { PersonnelRequirementEditComponent } from './personnel-requirement/perso
 // Vacantes
 import { VacanciesComponent } from './vacancies/vacancies.component';
 import { VacantesActionComponent } from './vacancies/vacancies-action-component';
+// Preceso de selección
+import { SelectionProcessComponent } from './selection-process/selection-process.component';
+import { SelectionProcessAddComponent } from './selection-process/selection-process-add.component';
+import { SelectionProcessVacanciesComponent } from './selection-process/selection-process-vacancies.component';
+import { VacancyDetailComponent } from './selection-process/vacancy-detail.component';
 
 
 const routes = [
@@ -291,6 +296,7 @@ const routes = [
    //  Cargos
    { path: 'positions', component: PositionsComponent, canActivate: [ AuthGuard ] },
    { path: 'positions/add', component: PositionsAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'positions/add/:id', component: PositionsAddComponent, canActivate: [ AuthGuard ] },
    { path: 'positions/update/:id', component: PositionsUpdateComponent, canActivate: [ AuthGuard ] },
 
    //  Estrctura Organizacional
@@ -339,6 +345,7 @@ const routes = [
    { path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [ AuthGuard ] },
    { path: 'position-absence/:idCargo', component: AbsenceComponent, canActivate: [ AuthGuard ] },
    { path: 'position-activities/:idCargo', component: PositionAuthoritiesComponent, canActivate: [ AuthGuard ] },
+   { path: 'position/requirement/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
 
    // Administracion
    { path: 'menus', component: MenuManagerComponent, canActivate: [ AuthGuard ] },
@@ -348,6 +355,12 @@ const routes = [
    { path: 'vacancies/update/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
    { path: 'vacancies/approve/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
    { path: 'vacancies/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
+
+   // Preceso de selección
+   { path: 'selection-process', component: SelectionProcessComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/add-publication/:idReq', component: SelectionProcessAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/active-publications', component: SelectionProcessVacanciesComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/publications-detail/:idPublication', component: VacancyDetailComponent, canActivate: [ AuthGuard ] },
 ];
 
 @NgModule( {

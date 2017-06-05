@@ -17,6 +17,7 @@
   "BTN_SI":"Si",
   "BTN_NO":"No",
   "LBL_ACCIONES":"Acciones",
+  "LBL_ORDEN":"Orden",
   "LBL_ACCION":"Acción",
   "LBL_ADJUNTAR":"Adjuntar Archivos",
   "LBL_CREAR":"Crear",
@@ -140,6 +141,10 @@
       "BTN_AGREGARWIDGETS":"Agregar Widgets",
       "LBL_EDITANDO":"Editando widgets",
       "LBL_DETALLEWIDGETS":"Detalle widgets",
+      "LBL_VACANTES":"Vacantes recientes",
+      "LBL_FECHALIMITE":"Fecha límite",
+      "BTN_APLICAR":"Aplicar",
+      "BTN_VERMAS":"Ver más",
       "LBL_CONFIGURARWIDGETS":"Configurar Widgets"
    },
 
@@ -576,6 +581,8 @@
            "LBL_CRITERIOS" : "Criterios de Desempeño",
            "LBL_PONDERACION" : "Ponderación",
            "LBL_CARGO" : "Cargo",
+           "LBL_NUEVOCARGO" : "Nuevo Cargo",
+           "LBL_ELIMINARCARGO" : "Eliminación de Cargo",
            "LBL_CARGOS" : "Cargos",
            "LBL_CATEGORIA" : "Categoria de acuerdo al mapa de cargos",
            "LBL_CARGODEPENDE" : "Cargo que depende",
@@ -620,6 +627,7 @@
            "MSG_CRITERIOSREPETIDOS" : "No puede tener criterios repetidos",
            "MSG_CRITERIOSSUMA" : "La suma es 100, perfecto!",
            "MSG_CRITERIO" : "Lo siento, debe sumar 100",
+           "MSG_DOSEARCH" : "Para visualizar los cargos debe realizar una búsqueda válida",
            "MSG_CRITERIOS" : "La suma de factores para todos los críterios debe ser 100 para poder guardar"
 
 
@@ -822,10 +830,12 @@
 
    "VACANCIES":{
       "LBL_REQUESTS" : "Requerimientos",
+      "LBL_REQUEST" : "Requerimiento",
       "LBL_VACANCYBYDEPARTMENT" : "Vacantes por planta",
       "LBL_VACANCYMANAGER" : "Administrador de Vacantes",
       "LBL_VACANCY" : "Vacante",
       "LBL_DATE" : "Fecha de Creación",
+      "LBL_LASTDATE" : "Fecha Aprobación",
       "LBL_AREA" : "Area",
       "LBL_OFFICE" : "Oficina",
       "LBL_REASON" : "Motivo",
@@ -839,6 +849,40 @@
       "LBL_OBSERVACION" : "Observación",
       "LBL_NOMBREJEFEINMEDIATO":"jefe Directo"
    },
+   "PROCESOSELECCION":{
+      "LBL_PROCESOSELECCION" : "Proceso de selección",
+      "LBL_VACANTE" : "Vacante",
+      "LBL_DETALLEVACANTE" : "Detalle vacante",
+      "LBL_FORMA" : "Forma",
+      "LBL_FILTRO" : "Filtro",
+      "LBL_PUBLICAR" : "Publicar",
+      "LBL_FORMARECLUTAMIENTO" : "Forma de reclutamiento",
+      "LBL_POSTULADOS" : "Postulados",
+      "LBL_FECHADESDE" : "Desde",
+      "LBL_FECHAHASTA" : "Hasta",
+      "LBL_DETALLEPUBLICACION" : "Hasta",
+      "LBL_FECHA" : "Hasta",
+      "LBL_REQUERIDO" : "Requerido",
+      "LBL_AREA" : "Area",
+      "LBL_OFICINA" : "Oficina",
+      "LBL_SALARIO" : "Salario",
+      "LBL_VERMAS" : "Ver más",
+      "LBL_PUBLICARVACANTE" : "Publicar vacante",
+      "LBL_CUESTIONARIOS" : "Cuestionarios",
+      "LBL_CUESTIONARIO" : "Cuestionario",
+      "LBL_DESCRIPCION" : "Descripción",
+      "LBL_ESTADO" : "Estado",
+      "LBL_PROFESSIONAL" : "Profesional de Reclutamiento",
+      "LBL_RECRUITMENT" : "Forma de reclutamiento",
+      "LBL_OBSERVACION" : "Observación",
+      "LBL_NOMBREJEFEINMEDIATO":"jefe Directo",
+      "LBL_TIPOTRABAJO":"Tipo de trabajo",
+      "LBL_LUGARTRABAJO":"Luagar de trabajo",
+      "LBL_COMPETENCIAS":"Competencias laborales",
+      "LBL_OBSERVACIONES":"Observaciones",
+      "LBL_FORMACIONEDUCATIVA":"Formación educativa"
+   },
+
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 

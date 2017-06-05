@@ -9,6 +9,9 @@ import { RolesService } from '../_services/roles.service';
 import { Widgets } from '../_models/widgets';
 import { WidgetServices } from '../_services/widget.service';
 import { JwtHelper } from 'angular2-jwt';
+import { Publications } from '../_models/publications';
+import { PersonnelRequirement } from '../_models/personnelRequirement';
+import { VacanciesService } from '../_services/vacancies.service';
 
 @Component( {
                moduleId: module.id,
@@ -31,18 +34,21 @@ export class DashboardComponent implements OnInit {
    options: any;
    displayDialog: boolean;
    rolWidgets: Widgets[];
+   publications: PersonnelRequirement[] = []
    usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
    jwtHelper: JwtHelper = new JwtHelper();
 
    allWidgets: any = [
       { codigo: 'WROLES', habilitado: false, visible: true, nombre: '' },
       { codigo: 'WUSUACT', habilitado: false, visible: true, nombre: '' },
+      { codigo: 'VACANTES', habilitado: false, visible: true, nombre: '' },
       { codigo: 'WCUMPLE', habilitado: false, visible: true, nombre: '' },
    ];
 
    constructor( private router: Router, private rolesService: RolesService, private  tercerosServices: TercerosService,
       private usuarioService: UsuariosService,
       private widgetServices: WidgetServices,
+      private vacanciesService: VacanciesService,
       private _translate: TranslateService ) {
 
       let token = localStorage.getItem( 'token' );
@@ -59,6 +65,11 @@ export class DashboardComponent implements OnInit {
             if ( rolWidget ) {
                this.allWidgets[ i ].habilitado = true;
                this.allWidgets[ i ].nombre = rolWidget.widget;
+               if(i == 2){
+                  this.vacanciesService.getNActive(3).subscribe(res => {
+                     this.publications = res;
+                  });
+               }
             }
          }
       } );
@@ -163,6 +174,7 @@ export class DashboardComponent implements OnInit {
             position: 'right'
          };
       } );
+
    }
 
    user() {
@@ -209,6 +221,35 @@ export class DashboardComponent implements OnInit {
       this._translate.get( 'Usuarios del Sistema' ).subscribe( ( res: string ) => {
          this.usuariosTitle = res;
       } );
+   }
+
+   idWidgetRendered(code: string) : boolean {
+      let rolWidget = this.rolWidgets.find(d => d.codigoWidget === code);
+      if( rolWidget ) {
+         this.allWidgets.map( (aw:any) => {
+            if(code === aw.codigo) {
+               aw.visible = true;
+               aw.habilitado = true;
+            }
+         });
+         return true;
+      } else {
+         this.allWidgets.map( (aw:any) => {
+            if(code === aw.codigo) {
+               aw.visible = false;
+               aw.habilitado = false;
+            }
+         });
+         return false;
+      }
+   }
+
+   aplicar(vacancy: PersonnelRequirement){
+      this.router.navigate( [ 'selection-process/publications-detail/' + vacancy.idPublicacion ] );
+   }
+
+   goVacancyList(){
+      this.router.navigate( [ 'selection-process/active-publications' ] );
    }
 
 }

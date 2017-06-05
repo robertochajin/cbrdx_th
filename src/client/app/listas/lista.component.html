@@ -23,7 +23,7 @@
             <div class="btn-group" role="group">
                 <button type="button" class="ui-button btn" icon="fa-eye"
                         pButton (click)="viewList(data)"></button>
-                <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" pButton
+                <button *ngIf="data.editing" type="button" class="ui-button ui-button-success btn" icon="fa-pencil" pButton
                         (click)="editList(data)"></button>
             </div>
         </template>
