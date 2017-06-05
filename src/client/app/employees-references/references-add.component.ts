@@ -89,7 +89,12 @@ export class ReferencesAddComponent implements OnInit {
       }
    }
 
-   goBack(): void {
+   goBack( fDirty : boolean ) {
+
+   console.log(fDirty);
+
+      if( fDirty ){
+
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea Cancelar?`,
                                            header: 'Corfirmación',
@@ -99,6 +104,10 @@ export class ReferencesAddComponent implements OnInit {
                                               this.location.back();
                                            }
                                         } );
+      }else{
+         this._nav.setTab( 8 );
+         this.location.back();
+      }
    }
 
    focusUP() {
