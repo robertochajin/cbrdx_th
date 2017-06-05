@@ -49,7 +49,7 @@
 										      <div class=" col-sm-9">
 											      <input type="text" pInputText class="form-control" id="numeroDocumento" name="numeroDocumento"
 											             [(ngModel)]="organizationalStructure.numeroDocumento"
-											             (change)="validateDocument()"
+											             (change)="validateDocument()" (keyup)="inputValid()"
 											             #numeroDocumento="ngModel" maxlength="20"
 											             required/>
 											      <div class="ui-message ui-messages-error ui-corner-all"
