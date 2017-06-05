@@ -305,30 +305,20 @@ export class SeedConfig {
     * @type {string[]}
     */
    EXTRA_WATCH_PATHS: string[] = [];
+
    /**
-    * Se definen la IP y el PUERTO con la cual la vista se conecta a los servicios Solucion de proteccion
+    * Se definen la IP y el PUERTO con la cual la vista se conecta a los servicios
     * @type {string}
     */
-       //IP = '192.168.253.37'; //_CREZCAMOS
-   // IP = '40.71.92.147'; // _CIBERDIX_AZURE
+   IP_PROD = '192.168.253.37'; //_CREZCAMOS
+   // IP_DEV = '40.71.92.147'; // _CIBERDIX_AZURE
 
-   //IP = '190.147.208.155'; // _CIBERDIX
-   IP = '190.184.187.27'; // _CIBERDIX
-   // IP = '192.168.0.53'; // _CIBERDIX Interna
-
-   // IP = 'localhost';
+   // IP_DEV = '190.147.208.155'; // _CIBERDIX
+   IP_DEV = '190.184.187.27'; // _CIBERDIX
+   // IP_DEV = '192.168.0.53'; // _CIBERDIX Interna
    SVC_SP_PORT = '8447';
-
-   SVC_SP_URL = 'http://' + this.IP + ':' + this.SVC_SP_PORT;
-
-   /**
-    * Se definen la IP y el PUERTO con la cual la vista se conecta a los servicios Talento Humano
-    * @type {string}
-    */
-   SVC_TH_PORT_D = '8444';
    SVC_TH_PORT = '8449';
-   SVC_TH_URL_D = 'http://' + this.IP + ':' + this.SVC_TH_PORT_D;
-   SVC_TH_URL = 'http://' + this.IP + ':' + this.SVC_TH_PORT;
+   SVC_TH_URL = this.BUILD_TYPE === BUILD_TYPES.DEVELOPMENT ? 'http://' + this.IP_DEV + ':' + this.SVC_TH_PORT : 'http://' + this.IP_PROD + ':' + this.SVC_TH_PORT;;
 
    /**
     * The list of NPM dependcies to be injected in the `index.html`.

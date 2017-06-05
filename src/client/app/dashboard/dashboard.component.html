@@ -10,7 +10,7 @@
 
 <div class="row">
 	
-         <div class="col-md-8" id="rolesSistema"
+         <div class="col-md-5" id="rolesSistema"
               *ngIf="allWidgets[0].habilitado && allWidgets[0].visible">
             <p-panel>
                <p-header>
@@ -72,7 +72,7 @@
             </p-panel>
          </div>
 	
-			<div class="col-md-4" id="VACANTES" *ngIf="allWidgets[2].habilitado && allWidgets[2].visible">
+			<div class="col-md-3" id="VACANTES" *ngIf="allWidgets[2].habilitado && allWidgets[2].visible">
 				<p-panel>
 					<p-header>
 						<div class="ui-helper-clearfix">
@@ -87,7 +87,8 @@
 							<li *ngFor="let vacancy of publications" class="list-group-item">
 								<h4>{{vacancy.cargo}}</h4>
 								<h5>{{ 'WIDGETS.LBL_FECHALIMITE' | translate}}: {{vacancy.fechaFinPublicacion}}</h5>
-								<button pButton icon="fa-check" label="{{'WIDGETS.BTN_APLICAR' | translate }}" (click)="aplicar(vacancy)"></button>
+								<button pButton icon="fa-check" class="btn-block" label="{{'WIDGETS.BTN_APLICAR' | translate }}"
+								        (click)="aplicar(vacancy)"></button>
 							</li>
 						</ul>
 						
