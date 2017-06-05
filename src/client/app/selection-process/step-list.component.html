@@ -1,8 +1,8 @@
-<h3 class="first">{{'PROCESOSELECCION.LBL_PROCESOSELECCION' | translate }}</h3>
+<h3 class="first">{{'PROCESOSELECCION.LBL_PASOSDELPROCESO' | translate }}</h3>
 <div>
 	<div class="row datable-header">
 		<div class="col-md-6 col-xs-12">
-			
+			<button type="button" pButton icon="fa-plus" (click)="add()" label="{{ 'PROCESOSELECCION.LBL_NUEVOPASO' | translate }}"></button>
 		</div>
 		<div class="col-md-6 col-xs-12 datatable-header-search">
 			<div class="input-group">
@@ -11,23 +11,34 @@
 			</div>
 		</div>
 	</div>
-	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="vacancies" [paginator]="true" [rows]="10"
-	             [responsive]="true" [globalFilter]="gb">
-		<p-column field="cargo" header="{{'PROCESOSELECCION.LBL_VACANTE' | translate }}" [sortable]="true"></p-column>
-		<p-column field="formaReclutamiento" header="{{'PROCESOSELECCION.LBL_FORMA' | translate }}" [sortable]="true"></p-column>
-		<p-column field="area" header="{{'PROCESOSELECCION.LBL_AREA' | translate }}" [sortable]="true"></p-column>
-		<p-column field="estructuraFisica" header="{{'PROCESOSELECCION.LBL_OFICINA' | translate }}" [sortable]="true"></p-column>
-		<p-column field="modelo" header="{{'PROCESOSELECCION.LBL_POSTULADOS' | translate }}" [sortable]="true"></p-column>
+	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="steps" [responsive]="true" [globalFilter]="gb">
+		<p-column field="orden" header="{{'PROCESOSELECCION.LBL_ORDENPASO' | translate }}" [sortable]="true"></p-column>
+		<p-column field="codigo" header="{{'PROCESOSELECCION.LBL_CODIGOPASO' | translate }}" [sortable]="true"></p-column>
+		<p-column field="nombre" header="{{'PROCESOSELECCION.LBL_NOMBREPASO' | translate }}" [sortable]="true"></p-column>
+		<p-column field="descripcion" header="{{'PROCESOSELECCION.LBL_DESCRIPCIONPASO' | translate }}" [sortable]="true"></p-column>
+		<p-column field="idRol" header="{{'PROCESOSELECCION.LBL_ROLPASO' | translate }}" [sortable]="true"></p-column>
+		<p-column field="idTipoConvocatoria" header="{{'PROCESOSELECCION.LBL_TIPOCONVOCATORIA' | translate }}" [sortable]="true"></p-column>
+		<p-column field="indicadorHabilitado" header="{{'LBL_HABILITADO' | translate }}" [sortable]="true"></p-column>
 		<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 			<template let-PR="rowData" pTemplate="body">
-				<button *ngIf="PR.idPublicacion===null ||PR.idPublicacion===undefined" type="button" icon="fa-upload" class="ui-button-success"
-				        pButton (click)="add(PR)"></button>
-				<button *ngIf="PR.idPublicacion!==null &&PR.idPublicacion!==undefined" type="button" icon="fa-pencil" class="ui-button-success"
-				        pButton (click)="update(PR)"></button>
-				<button *ngIf="PR.idPublicacion!==null &&PR.idPublicacion!==undefined" type="button" icon="fa-navicon"
-				        class="ui-button-success" pButton (click)="detail(PR)"></button>
-			
+				<button type="button" icon="fa-pencil" class="ui-button-success" pButton (click)="update(PR)"></button>
+				<button type="button" icon="fa-navicon" class="ui-button-success" pButton (click)="detail(PR)"></button>
 			</template>
 		</p-column>
 	</p-dataTable>
+	
+	<div class="row form-footer-buttons">
+		<div class="form-group col-md-12">
+			<button icon="fa-arrow-right" label="{{ 'PROCESOSELECCION.LBL_NUEVOVERSION' | translate }}" type="button" (click)="newVersion()"
+			        pButton></button>
+			<button icon="fa-arrow-right" label="{{ 'PROCESOSELECCION.LBL_PUBLICARVERSION' | translate }}" type="button" (click)="publishVersion()"
+			        pButton></button>
+		</div>
+	</div>
 </div>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>

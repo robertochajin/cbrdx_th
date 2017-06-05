@@ -21,6 +21,7 @@ export class SelectionStep {
    public indicadorContratado: boolean;
    public indicadorCuestionarios: boolean;
    public idCuestionario: number;
+   public indicadorHabilitado: boolean;
    public indicadorInterfaz: boolean;
    public interfaz: string;
    public descripcion: string;
@@ -28,6 +29,7 @@ export class SelectionStep {
    public auditoriaFecha: Date;
 
    constructor() {
+      this.indicadorHabilitado = true;
       this.auditoriaUsuario = null;
       this.auditoriaFecha = null;
    }
