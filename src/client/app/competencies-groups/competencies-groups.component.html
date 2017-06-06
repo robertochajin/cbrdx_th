@@ -1,171 +1,182 @@
 <p-messages [value]="msgs"></p-messages>
 <h3>{{ 'COMPETENCIES.LBL_COMPETENCIASYHABILIDADES' | translate}}</h3>
 <div *ngIf="editingGroup">
-   <div class="row-fluid">
-      <div class="col-md-10 col-md-offset-1">
-         <form name="formulario" (ngSubmit)="fg.valid && saveGroup()" #fg="ngForm" novalidate>
-            <fieldset>
-               <legend> {{'LBL_CREAR' | translate }} / {{'LBL_EDITAR' | translate }} {{'COMPETENCIES.LBL_GRUPO' | translate }}:</legend>
-               <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-                  <div class="row">
-                     <div class="form-group col-md-8">
-                        <label for="nombre">* {{'LBL_NOMBRE' | translate }}</label>
-                        <input type="text" pInputText id="nombre" name="nombre"
-                               [(ngModel)]="group.grupoCompetencia" #nombre="ngModel" (keyup)="capitalize()"
-                               required [disabled]="group.idGrupoCompetencia"/>
-                        <div class="ui-message ui-messages-error ui-corner-all"
-                             *ngIf="fg.submitted && !nombre.valid">
-                           <i class="fa fa-close"></i>
-                           {{'LBL_NOMBRE' | translate }} {{'LBL_REQUERIDO' | translate }}
-                        </div>
-                     </div>
-                     <div class="form-group col-md-4">
-                        <label for="ponderancie">* {{'COMPETENCIES.LBL_PONDERACION' | translate }}</label>
-                        <input type="number" maxlength="3" size="3" pattern="(?:\b|-)([1-9]{1,2}[0]?|100)\b" min="1"
-                               max="100" pInputText id="ponderancie" name="ponderancie"
-                               [(ngModel)]="group.ponderacion" #ponderancie="ngModel"
-                               required/>
-                        <div class="ui-message ui-messages-error ui-corner-all"
-                             *ngIf="fg.submitted && !ponderancie.valid">
-                           <i class="fa fa-close"></i>
-                           {{'COMPETENCIES.MSG_PONDERACION' | translate }}
-                        </div>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="form-group col-md-12">
-                        <label for="description">* {{'LBL_DESCRIPCION' | translate }}</label>
-                        <textarea id="description" name="description" #description="ngModel" pInputTextarea rows="5"
-                                  [(ngModel)]="group.descripcion" required></textarea>
-                        <div class="ui-message ui-messages-error ui-corner-all"
-                             *ngIf="fg.submitted && !description.valid">
-                           <i class="fa fa-close"></i>
-                           {{'LBL_DESCRIPCION' | translate }} {{'LBL_REQUERIDO' | translate }}
-                        </div>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="form-group col-md-12">
-                        <label for="enabledGroup">{{'LBL_HABILITADO' | translate }}</label>
-                        <p-checkbox id="enabledGroup" name="enabledGroup" #enabledGroup="ngModel"
-                                    [(ngModel)]="group.indicadorHabilitado" binary="true"></p-checkbox>
-                     </div>
-                  </div>
-               </div>
-            </fieldset>
-	         <div class="row form-footer-buttons">
-		         <div class="form-group col-md-12">
-			         <a (click)="cancelEditingGroup()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
-			         <button icon="fa-plus" label="Guardar" type="submit"
-			                 pButton></button>
-		
-		         </div>
-	         </div>
-         </form>
-      </div>
-   </div>
+	<div class="row-fluid">
+		<div class="col-md-10 col-md-offset-1">
+			<form name="formulario" (ngSubmit)="fg.valid && saveGroup()" #fg="ngForm" novalidate>
+				<fieldset>
+					<legend> {{'LBL_CREAR' | translate }} / {{'LBL_EDITAR' | translate }} {{'COMPETENCIES.LBL_GRUPO' | translate }}:</legend>
+					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+						<div class="row">
+							<div class="form-group col-md-8">
+								<label for="nombre">* {{'LBL_NOMBRE' | translate }}</label>
+								<div  *ngIf="group.idGrupoCompetencia">
+									<h3>{{group.grupoCompetencia}}</h3>
+								</div>
+								<div *ngIf="!group.idGrupoCompetencia">
+									<input type="text" pInputText id="nombre" name="nombre"
+									       [(ngModel)]="group.grupoCompetencia" #nombre="ngModel" (keyup)="capitalize()"
+									       required maxlength="64"/>
+									<div class="ui-message ui-messages-error ui-corner-all"
+									     *ngIf="fg.submitted && !nombre.valid">
+										<i class="fa fa-close"></i>
+										{{'LBL_NOMBRE' | translate }} {{'LBL_REQUERIDO' | translate }}
+									</div>
+								</div>
+							</div>
+							<div class="form-group col-md-4">
+								<label for="ponderancie">* {{'COMPETENCIES.LBL_PONDERACION' | translate }}</label>
+								<input type="text" maxlength="4" size="4" min="1"
+								       max="100" pInputText id="ponderancie" name="ponderancie" (change)="inputNumber()"
+								       [(ngModel)]="group.ponderacion" #ponderancie="ngModel"
+								       required/>
+								<div class="ui-message ui-messages-error ui-corner-all"
+								     *ngIf="fg.submitted && !ponderancie.valid">
+									<i class="fa fa-close"></i>
+									{{'COMPETENCIES.MSG_PONDERACION' | translate }}
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label for="description">* {{'LBL_DESCRIPCION' | translate }}</label>
+								<textarea id="description" name="description" #description="ngModel" pInputTextarea rows="5"
+								          [(ngModel)]="group.descripcion" required></textarea>
+								<div class="ui-message ui-messages-error ui-corner-all"
+								     *ngIf="fg.submitted && !description.valid">
+									<i class="fa fa-close"></i>
+									{{'LBL_DESCRIPCION' | translate }} {{'LBL_REQUERIDO' | translate }}
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label for="enabledGroup">{{'LBL_HABILITADO' | translate }}</label>
+								<p-checkbox id="enabledGroup" name="enabledGroup" #enabledGroup="ngModel"
+								            [(ngModel)]="group.indicadorHabilitado" binary="true"></p-checkbox>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<a (click)="cancelEditingGroup()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+						<button icon="fa-plus" label="Guardar" type="submit"
+						        pButton></button>
+					
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 <div *ngIf="!editingGroup">
-   <div class="row">
-      <div class="col-md-12" style="padding-bottom: 10px">
-         <button type="button" pButton icon="fa-plus" (click)="editGroup(null)" label="{{'BTN_AGREGAR' | translate }} {{'COMPETENCIES.LBL_GRUPO' | translate }}"></button>
-      </div>
-   </div>
-   <p-tabView orientation="left" id="tbvCompetenciasHabilidades">
-      <p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}" [selected]="i == 0"
-                  headerStyleClass="{{ group.indicadorHabilitado ? '':'inhabilitado' }}"
-                  [disabled]="editingCompetencie">
-         <div class="row" *ngIf="editingCompetencie">
-            <div class="col-md-12">
-               <form name="competencieForm" (ngSubmit)="fc.valid && saveCompetencie()" #fc="ngForm" novalidate>
-                  <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-                     <fieldset>
-                        <legend>{{'LBL_CREAR' | translate }} / {{'LBL_EDITAR' | translate }} {{'COMPETENCIES.LBL_COMPETENCIA' | translate }}:</legend>
-                        <div class="row">
-                           <div class="form-group col-md-1"></div>
-                           <div class="form-group col-md-10">
-                              <label for="cNombre">* {{'COMPETENCIES.LBL_COMPETENCIA' | translate }}/ {{'COMPETENCIES.LBL_HABILIDAD' | translate }}</label>
-                              <input type="text" pInputText id="cNombre" name="cNombre"
-                                     [(ngModel)]="competencie.competencia" #cNombre="ngModel"  [readonly]="competencie.idCompetencia != null"
-                                     required (keyup)="capitalizec()"/>
-                              <div class="ui-message ui-messages-error ui-corner-all"
-                                   *ngIf="fc.submitted && !cNombre.valid">
-                                 <i class="fa fa-close"></i>
-                                 {{'COMPETENCIES.LBL_COMPETENCIA' | translate }}/ {{'COMPETENCIES.LBL_HABILIDAD' | translate }} {{'LBL_REQUERIDO' | translate }}
-                              </div>
-                           </div>
-                           <div class="form-group col-md-1"></div>
-                        </div>
-                        <div class="row">
-                           <div class="form-group col-md-1"></div>
-                           <div class="form-group col-md-10">
-                              <label for="cDescription">* {{'LBL_DESCRIPCION' | translate }}</label>
-                              <textarea id="cDescription" name="cDescription" #cDescription="ngModel" pInputTextarea
-                                        rows="5"
-                                        [(ngModel)]="competencie.descripcion" required></textarea>
-                              <div class="ui-message ui-messages-error ui-corner-all"
-                                   *ngIf="fc.submitted && !cDescription.valid">
-                                 <i class="fa fa-close"></i>
-                                 {{'LBL_DESCRIPCION' | translate }} {{'LBL_REQUERIDO' | translate }}
-                              </div>
-                           </div>
-                           <div class="form-group col-md-1"></div>
-                        </div>
-                        <div class="row">
-                           <div class="form-group col-md-1"></div>
-                           <div class="form-group col-md-10">
-                              <label for="cEnabled">{{'LBL_HABILITADO' | translate }}</label>
-                              <p-checkbox id="cEnabled" name="cEnabled" #cEnabled="ngModel"
-                                          [(ngModel)]="competencie.indicadorHabilitado" binary="true"></p-checkbox>
-                           </div>
-                        </div>
-                     </fieldset>
-                  </div>
-	
-	               <div class="row form-footer-buttons">
-		               <div class="form-group col-md-12">
-			               <a (click)="cancelEditingCompetencie()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
-			               <button icon="fa-plus" label="Guardar" type="submit"
-			                       pButton></button>
-		               </div>
-	               </div>
-               </form>
-            </div>
-         </div>
-         <div class="row" *ngIf="!editingCompetencie">
-            <div class="col-md-12" style="padding: 10px;text-align: center">
-               <button type="button" pButton icon="fa-pencil" (click)="editGroup(group)" label="{{'BTN_EDITAR' | translate }} {{'COMPETENCIES.LBL_GRUPO' | translate }}"></button>
-               <button type="button" pButton icon="fa-plus" (click)="editCompetencie(null, group.idGrupoCompetencia)"
-                       label="{{'BTN_AGREGAR' | translate }} {{'COMPETENCIES.LBL_COMPETENCIA' | translate }}"></button>
-            </div>
-            <div class="col-md-6">
-            </div>
-         </div>
-         <div class="row" *ngIf="!editingCompetencie">
-            <div class="col-md-12">
-               <p-dataTable [rows]="6" [paginator]="true" emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="group.competencies"
-                            [responsive]="true" id="positionCompetenciesDT" styleClass="dejemeverelcombo">
-                  <p-column field="competencia" header="{{'COMPETENCIES.LBL_COMPETENCIA' | translate }}" [sortable]="true"></p-column>
-                  <p-column field="descripcion" header="{{'LBL_DESCRIPCION' | translate }}" [sortable]="true"></p-column>
-                  <p-column header="{{ 'LBL_HABILITADO' | translate }}"  styleClass="datatable-col-action">
-                     <template let-competencie="rowData" pTemplate="body">
-                        <p-checkbox [(ngModel)]="competencie.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
-                     </template>
-                  </p-column>
-                  <p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
-                     <template let-competencie="rowData" pTemplate="body">
-                        <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil"
-                                pButton (click)="editCompetencie(competencie, group.idGrupoCompetencia)"></button>
-                       <!-- <button type="button" class="ui-button ui-button-danger btn" icon="fa-trash"
-                                pButton (click)="disableCompetencie(competencie)"></button>-->
-                     </template>
-                  </p-column>
-               </p-dataTable>
-            </div>
-         </div>
-      </p-tabPanel>
-      <p-tabPanel header="" *ngIf="1!=1" ></p-tabPanel>
-   </p-tabView>
+	<div class="row">
+		<div class="col-md-12" style="padding-bottom: 10px">
+			<button type="button" pButton icon="fa-plus" (click)="editGroup(null)"
+			        label="{{'BTN_AGREGAR' | translate }} {{'COMPETENCIES.LBL_GRUPO' | translate }}"></button>
+		</div>
+	</div>
+	<p-tabView orientation="left" id="tbvCompetenciasHabilidades">
+		<p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}" [selected]="i == 0"
+		            headerStyleClass="{{ group.indicadorHabilitado ? '':'inhabilitado' }}"
+		            [disabled]="editingCompetencie">
+			<div class="row" *ngIf="editingCompetencie">
+				<div class="col-md-12">
+					<form name="competencieForm" (ngSubmit)="fc.valid && saveCompetencie()" #fc="ngForm" novalidate>
+						<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+							<fieldset>
+								<legend>{{'LBL_CREAR' | translate }} / {{'LBL_EDITAR' | translate }} {{'COMPETENCIES.LBL_COMPETENCIA' | translate
+									}}:
+								</legend>
+								<div class="row">
+									<div class="form-group col-md-1"></div>
+									<div class="form-group col-md-10">
+										<label for="cNombre">* {{'COMPETENCIES.LBL_COMPETENCIA' | translate }}/ {{'COMPETENCIES.LBL_HABILIDAD' |
+											translate }}</label>
+										<input type="text" pInputText id="cNombre" name="cNombre"
+										       [(ngModel)]="competencie.competencia" #cNombre="ngModel" [readonly]="competencie.idCompetencia != null"
+										       required (keyup)="capitalizec()" maxlength="64"/>
+										<div class="ui-message ui-messages-error ui-corner-all"
+										     *ngIf="fc.submitted && !cNombre.valid">
+											<i class="fa fa-close"></i>
+											{{'COMPETENCIES.LBL_COMPETENCIA' | translate }}/ {{'COMPETENCIES.LBL_HABILIDAD' | translate }}
+											{{'LBL_REQUERIDO' | translate }}
+										</div>
+									</div>
+									<div class="form-group col-md-1"></div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-1"></div>
+									<div class="form-group col-md-10">
+										<label for="cDescription">* {{'LBL_DESCRIPCION' | translate }}</label>
+										<textarea id="cDescription" name="cDescription" #cDescription="ngModel" pInputTextarea
+										          rows="5"
+										          [(ngModel)]="competencie.descripcion" required></textarea>
+										<div class="ui-message ui-messages-error ui-corner-all"
+										     *ngIf="fc.submitted && !cDescription.valid">
+											<i class="fa fa-close"></i>
+											{{'LBL_DESCRIPCION' | translate }} {{'LBL_REQUERIDO' | translate }}
+										</div>
+									</div>
+									<div class="form-group col-md-1"></div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-1"></div>
+									<div class="form-group col-md-10">
+										<label for="cEnabled">{{'LBL_HABILITADO' | translate }}</label>
+										<p-checkbox id="cEnabled" name="cEnabled" #cEnabled="ngModel"
+										            [(ngModel)]="competencie.indicadorHabilitado" binary="true"></p-checkbox>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+						
+						<div class="row form-footer-buttons">
+							<div class="form-group col-md-12">
+								<a (click)="cancelEditingCompetencie()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+								<button icon="fa-plus" label="Guardar" type="submit"
+								        pButton></button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="row" *ngIf="!editingCompetencie">
+				<div class="col-md-12" style="padding: 10px;text-align: center">
+					<button type="button" pButton icon="fa-pencil" (click)="editGroup(group)"
+					        label="{{'BTN_EDITAR' | translate }} {{'COMPETENCIES.LBL_GRUPO' | translate }}"></button>
+					<button type="button" pButton icon="fa-plus" (click)="editCompetencie(null, group.idGrupoCompetencia)"
+					        label="{{'BTN_AGREGAR' | translate }} {{'COMPETENCIES.LBL_COMPETENCIA' | translate }}"></button>
+				</div>
+				<div class="col-md-6">
+				</div>
+			</div>
+			<div class="row" *ngIf="!editingCompetencie">
+				<div class="col-md-12">
+					<p-dataTable [rows]="6" [paginator]="true" emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="group.competencies"
+					             [responsive]="true" id="positionCompetenciesDT" styleClass="dejemeverelcombo">
+						<p-column field="competencia" header="{{'COMPETENCIES.LBL_COMPETENCIA' | translate }}" [sortable]="true"></p-column>
+						<p-column field="descripcion" header="{{'LBL_DESCRIPCION' | translate }}" [sortable]="true"></p-column>
+						<p-column header="{{ 'LBL_HABILITADO' | translate }}" styleClass="datatable-col-action">
+							<template let-competencie="rowData" pTemplate="body">
+								<p-checkbox [(ngModel)]="competencie.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
+							</template>
+						</p-column>
+						<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+							<template let-competencie="rowData" pTemplate="body">
+								<button type="button" class="ui-button ui-button-success btn" icon="fa-pencil"
+								        pButton (click)="editCompetencie(competencie, group.idGrupoCompetencia)"></button>
+								<!-- <button type="button" class="ui-button ui-button-danger btn" icon="fa-trash"
+											pButton (click)="disableCompetencie(competencie)"></button>-->
+							</template>
+						</p-column>
+					</p-dataTable>
+				</div>
+			</div>
+		</p-tabPanel>
+		<p-tabPanel header="" *ngIf="1!=1"></p-tabPanel>
+	</p-tabView>
 </div>
 <p-confirmDialog width="400" #cd>
 	<p-footer>

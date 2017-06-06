@@ -61,7 +61,7 @@
             <div class="ui-grid-col-6">
                <label for="descripcion">{{'LBL_DESCRIPCION' | translate }}</label>
                <textarea id="descripcion" name="descripcion" pInputTextarea  rows="2" cols="35" #descripcion="ngModel"
-                         [(ngModel)]="risk.riesgo" required="true">p</textarea>
+                         [(ngModel)]="risk.riesgo" required="true" maxlength="100">p</textarea>
                <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="f.submitted && !descripcion.valid">
                   <i class="fa fa-close"></i>
