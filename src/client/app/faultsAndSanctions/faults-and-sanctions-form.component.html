@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="form-group col-md-9">
                             <label for="falta">* {{'FAULTSANDSANCTIONS.LBL_FALTA' | translate }}</label>
-                            <input pInputText type="text" id="falta" name="falta" #falta="ngModel" [readonly]="fault.idFalta != null"
+                            <input pInputText type="text" id="falta" name="falta" #falta="ngModel" 
                                  [(ngModel)]="fault.falta" required/>
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !falta.valid">

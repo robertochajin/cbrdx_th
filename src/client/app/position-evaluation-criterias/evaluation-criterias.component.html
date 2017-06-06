@@ -12,9 +12,11 @@
       <form (ngSubmit)="d.valid && oneHundred && !criteriaRepeated && savePositionCriterias()" #d="ngForm" novalidate id="criteriasForm">
         <div class="container col-md-10 col-md-offset-1">
           <div class="row"  *ngFor="let criteria of backUpPositionCriterias; let i = index">
+            <div >
             <div class="col-md-2 col-xs-12">
                <div class="form-group">
-                    <label for="evaluationCriteria{{i}}" class="control-label">* {{ 'POSITION.LBL_CRITERIO' | translate }} {{ 'POSITION.LBL_EVALUACION' | translate }}</label>
+                    <label for="evaluationCriteria{{i}}" class="control-label">* {{ 'POSITION.LBL_CRITERIO' |
+	                    translate }} {{ 'POSITION.LBL_EVALUACION' | translate }}</label>
                     <p-dropdown id="evaluationCriteria{{i}}" name="evaluationCriteria{{i}}" class="form-control"
                                 [options]="evaluationCriterias" required #criterio="ngModel"  (onChange)="checkRepeated()"
                                 [autoWidth]="false" [(ngModel)]="criteria.idCriterio"></p-dropdown>
@@ -39,7 +41,8 @@
                <div class="form-group">
                     <label for="factor{{i}}" class="control-label">* {{ 'POSITION.LBL_FACTOR' | translate }}</label>
                     <input type="number" maxlength="3" size="3" pattern="(?:\b|-)([1-9]{1,2}[0]?|100)\b" min="1" max="100" (change)="sumFactors()"
-                           pInputText id="factor{{i}}" name="factor{{i}}" [(ngModel)]="criteria.factor" #factor="ngModel" required class="form-control text-center"/>
+                           pInputText id="factor{{i}}" name="factor{{i}}" [(ngModel)]="criteria.factor" #factor="ngModel" required
+                           class="form-control text-center"/>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !factor.valid">
                       <i class="fa fa-close"></i>
                     {{ 'POSITION.LBL_FACTOR' | translate }} {{ 'LBL_INVALIDO' | translate }}
@@ -49,7 +52,8 @@
             <div class="col-md-2 col-xs-12">
                <div class="form-group">
                     <label for="meta{{i}}" class="control-label">* {{ 'POSITION.LBL_META' | translate }}</label>
-                    <input type="number" pInputText id="meta{{i}}" name="meta{{i}}" min="1"  [(ngModel)]="criteria.meta" #meta="ngModel" required class="form-control text-center"/>
+                    <input type="number" pInputText id="meta{{i}}" name="meta{{i}}" min="1"  [(ngModel)]="criteria.meta" #meta="ngModel"
+                           required class="form-control text-center"/>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="d.submitted && !meta.valid">
                       <i class="fa fa-close"></i>
                       {{ 'POSITION.LBL_META' | translate }} {{ 'LBL_REQUERIDO' | translate }}
@@ -62,6 +66,7 @@
                       (click)="removeCriteria(i)" style="margin-top: 24px;"></button>
             </div>
           </div>
+          </div>
            <div class="row">
               <div class="col-md-3">
                  <div class="alert alert-warning" [hidden]="(!criteriaRepeated)" role="alert">{{ 'POSITION.MSG_CRITERIOSREPETIDOS' | translate }}</div>
@@ -71,7 +76,6 @@
                  <div class="alert alert-warning" [hidden]="(!d.submitted && !oneHundred) || (oneHundred)" role="alert">{{ 'POSITION.MSG_CRITERIO' | translate }}</div>
               </div>
            </div>
-
 
           <div class="row">
             <div class="col-md-2 col-xs-12 text-center col-md-offset-7" style="border-top: 1px solid #ccc;">

@@ -20,7 +20,7 @@
 			<p-tabPanel header="{{ 'PLANTACOLABORADORES.MSG_INFOAREA' | translate }}" [selected]="true">
 				<form class="form-horizontal">
 					<fieldset>
-						<div class="form-group">
+						<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 							<div class="row">
 								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'LBL_CODIGO' | translate }}:</label>
 								<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{area.codigo}}</strong></label>
@@ -54,14 +54,14 @@
 							      #fp="ngForm" novalidate>
 								<fieldset>
 									<legend>{{ 'PLANTACOLABORADORES.MSG_CREANDOEDITAREA' | translate }}:</legend>
-									<div class="form-group container">
-										<div class="row col-md-12">
-											<div class="form-group col-md-8">
+									<div class="form-group ">
+										<div class="row">
+											<div class="form-group col-md-12">
 												<label for="cargo">* {{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}</label>
 												<p-autoComplete placeholder="Buscar cargo" field="cargo" name="cargo" id="cargo"
 												                minLength="3" delay="500"
 												                [suggestions]="positionList" required="true"
-												                (completeMethod)="positionSearch($event)"
+												                (completeMethod)="positionSearch($event)" #nCargo="ngModel"
 												                (onSelect)="capturePosition($event)" [(ngModel)]="selectedPosition">
 												</p-autoComplete>
 												<div class="ui-message ui-messages-warning ui-corner-all"
@@ -70,34 +70,38 @@
 													{{ 'PLANTACOLABORADORES.MSG_CARGOASIGNADO' | translate }}
 												</div>
 												<div class="ui-message ui-messages-error ui-corner-all"
-												     *ngIf="fp.submitted && badPostion">
+												     *ngIf="fp.submitted && (badPostion || !nCargo.valid)">
 													<i class="fa fa-close"></i>
 													{{ 'PLANTACOLABORADORES.MSG_CARGOREQ' | translate }}
 												</div>
 											</div>
 										</div>
 										<div class="row">
-											<div class="form-group col-md-4">
+											<div class="form-group col-md-3">
 												<label for="nPlazas">* {{ 'PLANTACOLABORADORES.LBL_NUMEROPLAZAS' | translate }}</label>
-												<input type="number" min="1" pInputText id="nPlazas" name="nPlazas"
+												<input type="number" min="1" max="9999" pInputText id="nPlazas" name="nPlazas" pattern="[0-9]{1,4}"
+												       maxlength="4"
 												       [(ngModel)]="osPosition.plazas" #nPlazas="ngModel" required/>
 												<div class="ui-message ui-messages-error ui-corner-all"
-												     *ngIf="fp.submitted && !nPlazas.valid">
+												     *ngIf="fp.submitted && !nPlazas.valid && !nPlazas.errors.pattern">
 													<i class="fa fa-close"></i>
 													{{ 'PLANTACOLABORADORES.MSG_PLAZASREQ' | translate }}
 												</div>
+												<div class="ui-message ui-messages-error ui-corner-all"
+												     *ngIf="fp.submitted && !nPlazas.valid && nPlazas.errors.pattern">
+													<i class="fa fa-close"></i>
+													{{ 'PLANTACOLABORADORES.MSG_PLAZASMAX' | translate }}
+												</div>
 											</div>
 											
-											<div class="form-group col-md-2">
+											<div class="form-group col-md-3">
 												<label>{{ 'PLANTACOLABORADORES.LBL_OCUPADOS' | translate }}: {{osPosition.ocupados}}</label>
 											</div>
-											<div class="form-group col-md-2">
+											<div class="form-group col-md-3">
 												<label>{{ 'PLANTACOLABORADORES.LBL_VACANTES' | translate }}: {{osPosition.plazas -
 													osPosition.ocupados}}</label>
 											</div>
-										</div>
-										<div class="row">
-											<div class="form-group col-md-4">
+											<div class="form-group col-md-3">
 												<label for="cEnabled">{{ 'LBL_HABILITADO' | translate }}</label>
 												<p-checkbox id="cEnabled" name="cEnabled" binary="true"
 												            [(ngModel)]="osPosition.indicadorHabilitado"></p-checkbox>
@@ -198,87 +202,87 @@
 				</div>
 			</p-tabPanel>
 			<p-tabPanel header="{{ 'EMPLOYEES.LBL_COLABORADORES' | translate }}">
-				<div class="row" *ngIf="editingPerson">
+				<fieldset>
 					<div class="col-md-12">
-						<form name="personForm" (ngSubmit)="pp.valid && !badEmployee && savePersonPosition()" #pp="ngForm"
-						      novalidate>
-							<fieldset>
-								<legend>{{ 'PLANTACOLABORADORES.MSG_ASIGNACOLABORADORCARGO' | translate }}</legend>
-								<div class="form-group container">
-									<div class="row">
-										<div class="form-group col-md-8">
-											<label for="colaborador">* {{ 'EMPLOYEES.LBL_COLABORADOR' | translate }}</label>
-											<p-autoComplete placeholder="{{ 'PLANTACOLABORADORES.MSG_ASIGNACOLABORADORCARGO' | translate }}"
-											                field="nombreCompleto"  name="colaborador" id="colaborador"
-											                minLength="3" delay="300" [suggestions]="employeeList" required="true"
-											                (completeMethod)="employeeSearch($event)"
-											                (onSelect)="captureEmployee($event)" [(ngModel)]="selectedEmployee">
-											</p-autoComplete>
-											<div class="ui-message ui-messages-error ui-corner-all"
-											     *ngIf="pp.submitted && badEmployee">
-												<i class="fa fa-close"></i>
-												{{ 'PLANTACOLABORADORES.MSG_COLABREQUERIDO' | translate }}
+						<div class="row" *ngIf="editingPerson">
+							<form name="personForm" (ngSubmit)="pp.valid && !badEmployee && savePersonPosition()" #pp="ngForm"
+							      novalidate>
+									<legend>{{ 'PLANTACOLABORADORES.MSG_ASIGNACOLABORADORCARGO' | translate }}</legend>
+									<div class="form-group ">
+										<div class="row">
+											<div class="form-group col-md-12">
+												<label for="colaborador">* {{ 'EMPLOYEES.LBL_COLABORADOR' | translate }}</label>
+												<p-autoComplete placeholder="{{ 'PLANTACOLABORADORES.MSG_ASIGNACOLABORADORCARGO' | translate }}"
+												                field="nombreCompleto"  name="colaborador" id="colaborador"
+												                minLength="3" delay="300" [suggestions]="employeeList" required="true"
+												                (completeMethod)="employeeSearch($event)"
+												                (onSelect)="captureEmployee($event)" [(ngModel)]="selectedEmployee">
+												</p-autoComplete>
+												<div class="ui-message ui-messages-error ui-corner-all"
+												     *ngIf="pp.submitted && badEmployee">
+													<i class="fa fa-close"></i>
+													{{ 'PLANTACOLABORADORES.MSG_COLABREQUERIDO' | translate }}
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-4">
+												<label for="ingreso">* {{ 'PLANTACOLABORADORES.LBL_ASIGNADODESDE' | translate }}</label>
+												<p-calendar id="ingreso" name="ingreso"  [showIcon]="true"
+												            [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true"
+												            [maxDate]="maxDate"  dataType="date" #ingreso="ngModel" required="true"
+												            [(ngModel)]="personsPosition.asignadoDesde" dateFormat="yy'-'mm'-'dd"></p-calendar>
+												
+												<!--<p-calendar id="ingreso" name="ingreso" [showIcon]="true" [maxDate]="maxDate"-->
+												            <!--[yearNavigator]="true" [locale]="es" readonlyInput="true"-->
+												            <!--#ingreso="ngModel" required="true" [dataType]="date"-->
+												            <!--[yearRange]="range" -->
+												            <!--&gt;</p-calendar>-->
+												<div class="ui-message ui-messages-error ui-corner-all"
+												     *ngIf="pp.submitted && !ingreso.valid" >
+													<i class="fa fa-close"></i>
+													{{ 'PLANTACOLABORADORES.LBL_FECHAINGRESOREQ' | translate }}
+												</div>
+											</div>
+											<div class="form-group col-md-5">
+												<label for="tipoContrato">* {{ 'PLANTACOLABORADORES.LBL_TIPOCONTRATO' | translate }}</label>
+												<p-dropdown name="tipoContrato" id="tipoContrato" #idtipoContrato="ngModel"
+												            required="true"
+												            [autoWidth]="false" [(ngModel)]="personsPosition.idTipoContrato"
+												            [options]="contracTypeList"></p-dropdown>
+												<div class="ui-message ui-messages-error ui-corner-all"
+												     *ngIf="pp.submitted && !idtipoContrato.valid">
+													<i class="fa fa-close"></i>
+													{{ 'PLANTACOLABORADORES.LBL_TIPOCONTRATO' | translate }}
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4"*ngIf="indicadorZonaPosition && area.indicadorZona" >
+												<label for="zona">{{'PLANTACOLABORADORES.LBL_ZONA' | translate }}</label>
+												<p-dropdown id="zona" name="zona" required="true"
+												            [options]="listZonas" [autoWidth]="false"
+												            [(ngModel)]="personsPosition.idZona"
+												            #zona="ngModel"
+												></p-dropdown>
+												<div class="ui-message ui-messages-error ui-corner-all"
+												     *ngIf="pp.submitted && !zona.valid">
+													<i class="fa fa-close"></i>
+													{{'PLANTACOLABORADORES.LBL_ZONA' | translate }} {{'LBL_REQUERIDO' | translate }}
+												</div>
+											</div>
+										</div>
+										<div class="row form-footer-buttons">
+											<div class="form-group col-md-8">
+												<a (click)="cancelEditingPerson()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+												<button pButton type="submit" label="{{ 'BTN_GUARDAR' | translate }}"></button>
 											</div>
 										</div>
 									</div>
-									<div class="row">
-										<div class="form-group col-md-3">
-											<label for="ingreso">* {{ 'PLANTACOLABORADORES.LBL_ASIGNADODESDE' | translate }}</label>
-											<p-calendar id="ingreso" name="ingreso"  [showIcon]="true"
-											            [yearNavigator]="true" [yearRange]="range" [locale]="es" readonlyInput="true"
-											            [maxDate]="maxDate"  dataType="date" #ingreso="ngModel" required="true"
-											            [(ngModel)]="personsPosition.asignadoDesde" dateFormat="yy'-'mm'-'dd"></p-calendar>
-											
-											<!--<p-calendar id="ingreso" name="ingreso" [showIcon]="true" [maxDate]="maxDate"-->
-											            <!--[yearNavigator]="true" [locale]="es" readonlyInput="true"-->
-											            <!--#ingreso="ngModel" required="true" [dataType]="date"-->
-											            <!--[yearRange]="range" -->
-											            <!--&gt;</p-calendar>-->
-											<div class="ui-message ui-messages-error ui-corner-all"
-											     *ngIf="pp.submitted && !ingreso.valid" >
-												<i class="fa fa-close"></i>
-												{{ 'PLANTACOLABORADORES.LBL_FECHAINGRESOREQ' | translate }}
-											</div>
-										</div>
-										<div class="form-group col-md-5">
-											<label for="tipoContrato">* {{ 'PLANTACOLABORADORES.LBL_TIPOCONTRATO' | translate }}</label>
-											<p-dropdown name="tipoContrato" id="tipoContrato" #idtipoContrato="ngModel"
-											            required="true"
-											            [autoWidth]="false" [(ngModel)]="personsPosition.idTipoContrato"
-											            [options]="contracTypeList"></p-dropdown>
-											<div class="ui-message ui-messages-error ui-corner-all"
-											     *ngIf="pp.submitted && !idtipoContrato.valid">
-												<i class="fa fa-close"></i>
-												{{ 'PLANTACOLABORADORES.LBL_TIPOCONTRATO' | translate }}
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-4"*ngIf="indicadorZonaPosition && area.indicadorZona" >
-											<label for="zona">{{'PLANTACOLABORADORES.LBL_ZONA' | translate }}</label>
-											<p-dropdown id="zona" name="zona" required="true"
-											            [options]="listZonas" [autoWidth]="false"
-											            [(ngModel)]="personsPosition.idZona"
-											            #zona="ngModel"
-											></p-dropdown>
-											<div class="ui-message ui-messages-error ui-corner-all"
-											     *ngIf="pp.submitted && !zona.valid">
-												<i class="fa fa-close"></i>
-												{{'PLANTACOLABORADORES.LBL_ZONA' | translate }} {{'LBL_REQUERIDO' | translate }}
-											</div>
-										</div>
-									</div>
-									<div class="row form-footer-buttons">
-										<div class="form-group col-md-8">
-											<a (click)="cancelEditingPerson()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
-											<button pButton type="submit" label="{{ 'BTN_GUARDAR' | translate }}"></button>
-										</div>
-									</div>
-								</div>
-							</fieldset>
-						</form>
+							</form>
+						</div>
 					</div>
-				</div>
+				</fieldset>
 				<div *ngIf="!editingPerson">
 					<div class="row datable-header">
 						<div class="col-md-6">
