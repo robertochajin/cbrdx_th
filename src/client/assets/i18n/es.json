@@ -66,6 +66,9 @@
   "PH_BUSCAR":"Buscar ",
   "LBL_INVALIDO" : "Invalido",
   "LBL_ENVIAR":"Enviar",
+  "BTN_VISUALIZAR": "Ver detalle",
+  "BTN_ELIMINAR": "Eliminar",
+  "BTN_CONFIGURAR": "Configuración",
   "FIN_COMUNES":"====================================================================",
 
   "UBICACION":{

@@ -247,7 +247,7 @@
                         <p-column header="{{ 'LBL_ACCION' | translate }}" styleClass="datatable-col-action">
                             <template let-constantData="rowData" pTemplate="body">
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="ui-button ui-button-danger btn" icon="fa-close"
+                                    <button type="button" class="ui-button ui-button-danger btn" icon="fa-close" data-toggle="tooltip" title="{{'BTN_ELIMINAR' | translate}}"
                                             pButton (click)="removeRole(constantData.idUsuarioRol)"></button>
                                 </div>
                             </template>
