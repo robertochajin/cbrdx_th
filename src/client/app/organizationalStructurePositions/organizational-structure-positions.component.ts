@@ -16,6 +16,7 @@ import { ListaService } from '../_services/lista.service';
 import { ZonesServices } from '../_services/zones.service';
 import { NavService } from '../_services/_nav.service';
 import { Message } from 'primeng/primeng';
+import { underline } from 'chalk';
 
 @Component( {
                moduleId: module.id,
@@ -438,5 +439,15 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
                                               } );
                                            }
                                         } );
+   }
+
+   maxlength(event:any){
+    let temp = this.osPosition.plazas+'';
+    if(this.osPosition.plazas!==null && this.osPosition.plazas!== undefined){
+       if(temp.length>4){
+          temp = temp.substring(0,4);
+       }
+       this.osPosition.plazas = Number(temp);
+    }
    }
 }
