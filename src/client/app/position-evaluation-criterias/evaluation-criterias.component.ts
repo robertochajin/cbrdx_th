@@ -138,6 +138,20 @@ export class EvaluationCriteriasComponent implements OnInit {
    }
 
    addCriteria() {
+      let temp  = this.backUpPositionCriterias;
+      this.backUpPositionCriterias=[];
+      for(let c of temp){
+         let nc = new PositionCriterias();
+         nc.idCriterio= c.idCriterio;
+         nc.idCargo=c.idCargo;
+         nc.indicadorHabilitado = c.indicadorHabilitado;
+         nc.descripcion = c.descripcion;
+         nc.meta = c.meta;
+         nc.factor = c.factor;
+         nc.auditoriaFecha = c.auditoriaFecha;
+         nc.auditoriaUsuario = c.auditoriaUsuario;
+         this.backUpPositionCriterias.push(nc);
+      }
       let nc = new PositionCriterias();
       nc.indicadorHabilitado = true;
       nc.idCargo = this.position.idCargo;

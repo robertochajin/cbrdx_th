@@ -353,7 +353,7 @@
                               <div class="row">
                                  <div class="col-md-12">
                                     <label for="tiempoExperiencia">* {{ 'POSITION.LBL_EXPERIENCIA' | translate }}</label>
-                                    <input type="text" pInputText id="tiempoExperiencia" name="tiempoExperiencia"
+                                    <input type="text" pInputText id="tiempoExperiencia" name="tiempoExperiencia" maxlength="200"
                                            [(ngModel)]="position.tiempoExperiencia" #tiempoExperiencia="ngModel" required
                                     />
                                     <div *ngIf="f8.submitted && !tiempoExperiencia.valid"
