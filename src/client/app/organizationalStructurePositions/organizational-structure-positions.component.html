@@ -80,7 +80,7 @@
 											<div class="form-group col-md-3">
 												<label for="nPlazas">* {{ 'PLANTACOLABORADORES.LBL_NUMEROPLAZAS' | translate }}</label>
 												<input type="number" min="1" max="9999" pInputText id="nPlazas" name="nPlazas" pattern="[0-9]{1,4}"
-												       maxlength="4"
+												       maxlength="4" (keyup)="maxlength()"
 												       [(ngModel)]="osPosition.plazas" #nPlazas="ngModel" required/>
 												<div class="ui-message ui-messages-error ui-corner-all"
 												     *ngIf="fp.submitted && !nPlazas.valid && !nPlazas.errors.pattern">

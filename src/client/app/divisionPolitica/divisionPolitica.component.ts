@@ -324,6 +324,9 @@ export class DivisionPoliticaComponent implements OnInit {
       if ( this.divisionPoliticaTipos.length > 0 ) {
          this.politicalDivision.idDivisionPoliticaTipo = this.divisionPoliticaTipos[ 0 ].value;
       }
+      this.divisionPoliticaService.listDivisionPoliticaAgrupaciones( this.btnnuevobarrio.idparent ).subscribe( res => {
+         this.listadoDivisionPoliticaAgrupaciones = res;
+      } );
    }
 
    getTiposbyCode( id: string ): void {

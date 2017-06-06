@@ -560,7 +560,7 @@
            "LBL_POSICION" : "Posicion en caso de ausencia",
            "LBL_REEMPLAZA" : "Reemplaza a:",
            "LBL_ATRIBUTOS" : "Atributos",
-           "LBL_REEMPLAZAPOR" : "Reemplaza por:",
+           "LBL_REEMPLAZAPOR" : "Reemplazado por:",
            "LBL_EDAD" : "Edad",
            "LBL_ZONA" : "Requiere zona",
            "LBL_ELEMENTOS" : "Elementos",
