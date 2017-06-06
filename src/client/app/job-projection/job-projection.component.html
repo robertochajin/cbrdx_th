@@ -4,7 +4,7 @@
       <div *ngIf="detailprojection">
          <div *ngIf="addinglocation">
             <p-messages [value]="msgs"></p-messages>
-            <h3 class="first">{{ 'PROYECCIONLABORAL.LBL_PROYLAB' | translate }}</h3>
+				<p-panel header="{{ 'PROYECCIONLABORAL.LBL_PROYLAB' | translate }}">
             <form (ngSubmit)="f.valid " #f="ngForm" novalidate id="formulario">
                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                   <div class="ui-grid-row">
@@ -136,7 +136,9 @@
 				              (click)="confirmProjection()"></button>
 		         </div>
 	         </div>
-            <p-confirmDialog width="400" #cd>
+				</p-panel>
+
+				<p-confirmDialog width="400" #cd>
                <p-footer>
                   <button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate }}" (click)="cd.reject()"></button>
                   <button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate }}" (click)="cd.accept()"></button>

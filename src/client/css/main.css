@@ -764,21 +764,21 @@ body.skin-blue .user-avatar{
 }
 /* -- Tabs -- */
 body.skin-blue .ui-tabview .ui-tabview-panel{
-   border: 1px solid #29ABE2;
+   border: 1px solid #3C8DBC;
 }
 /* -- Tabs Top/left Blue-- */
 body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav,
 body.skin-blue .ui-tabview.ui-tabview-left .ui-tabview-nav{
-   background: #29ABE2;
+   background: #3C8DBC;
 }
 body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active,
 body.skin-blue .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active{
-   border-color: #29ABE2;
+   border-color: #3C8DBC;
 }
 
 body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a,
 body.skin-blue .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active a{
-   color: #0275d8;
+   color: #3C8DBC;
 }
 /* -- Accordion Blue */
 body.skin-blue .ui-accordion .ui-accordion-header.ui-state-active {
