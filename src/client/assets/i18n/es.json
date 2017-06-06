@@ -745,6 +745,7 @@
       "MSG_CARGOASIGNADO":"El cargo que intentó seleccionar ya fue asignado a esta área",
       "MSG_CARGOREQ":"Cargo es requerido",
       "MSG_PLAZASREQ":"Número de plazas es requerido",
+      "MSG_PLAZASMAX":"Número de plazas máximo es 9999",
       "MSG_ASIGNACOLABORADORCARGO":"Asignando colaborador al cargo",
       "LBL_ESTRUCTFISICA":"Estructura Fisica"
 
@@ -783,6 +784,8 @@
       "LBL_FECHAREFERENCIA":"Fecha de referencias",
       "LBL_DATOSRECURSOSADICIONALES":"Datos de recursos adicionales",
       "LBL_RECURSOSCOMPRAS":"Recursos requeridos en compras",
+      "LBL_MENORAUNO":"No puede ser menor a uno",
+      "LBL_MENORACONVOCADOS":"No puede ser menor a los convocados",
       "LBL_RECURSOSTIC":"Recursos requeridos en DTIC",
       "LBL_FECHA_INICIO": "Fecha inicio",
       "LBL_FECHA_FIN": "Fecha fin",
