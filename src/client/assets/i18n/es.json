@@ -884,6 +884,7 @@
       "LBL_OBSERVACIONES":"Observaciones",
       "LBL_FORMACIONEDUCATIVA":"Formación educativa",
       "LBL_NUEVOPASO":"Agregar nuevo paso",
+      "LBL_EDITARPASO":"Agregar nuevo paso",
       "LBL_NUEVOVERSION":"Crear nueva versión del proceso",
       "LBL_PUBLICARVERSION":"Publicar esta versión",
       "LBL_PASOSDELPROCESO":"Configuración de los pasos en el proceso de selección",

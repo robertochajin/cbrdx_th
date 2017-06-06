@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { SelectionStep } from '../_models/selectionStep';
+import { SelectionProcess } from '../_models/selection-process';
 
 @Injectable()
 export class SelectionStepService {
 
-   private masterService = '<%= SVC_TH_URL %>/api/procesospasos/';
+   private masterService = '<%= SVC_TH_URL %>/api/procesosPasos/';
 
    constructor( private authHttp: AuthHttp ) {
 
@@ -26,7 +27,12 @@ export class SelectionStepService {
       .map( ( res: Response ) => res.json() as SelectionStep[] );
    }
 
-   getCurrentSteps() {
+   getCurrentProcess() {
+      return this.authHttp.get( '<%= SVC_TH_URL %>/api/procesos/current/' )
+      .map( ( res: Response ) => res.json() as SelectionProcess );
+   }
+
+   getAllByProcess(idProcess: number) {
       return this.authHttp.get( this.masterService )
       .map( ( res: Response ) => res.json() as SelectionStep[] );
    }
