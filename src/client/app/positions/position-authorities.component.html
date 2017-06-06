@@ -6,7 +6,7 @@
    </p-footer>
 </p-confirmDialog>
 <div *ngIf="absence">
-   <form (ngSubmit)="fr.valid && onSubmit()" #fr="ngForm" novalidate id="formulario">
+   <form (ngSubmit)="fr.valid && onSubmit()" #fr="ngForm" novalidate id="formulario" *ngIf="!guardando">
       <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
          <div class="row">
             <div class="col-md-12">
@@ -33,7 +33,8 @@
    </form>
    <div class="row">
       <div class="col-md-12">
-         <p-dataTable [value]="listAbsenceSUP" [paginator]="true" [rows]="10" [responsive]="true">
+         <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listAbsenceSUP" [paginator]="true" [rows]="10"
+                      [responsive]="true">
             <p-column field="cargoRelacion" header="{{ 'POSITION.LBL_CARGO' | translate }}" [sortable]="true"></p-column>
             <p-column header="{{ 'LBL_ACCION' | translate }}" styleClass="datatable-col-action">
                <template let-absence="rowData" pTemplate="body">
