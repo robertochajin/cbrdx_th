@@ -318,7 +318,7 @@ export class SeedConfig {
    // IP_DEV = '192.168.0.53'; // _CIBERDIX Interna
    SVC_SP_PORT = '8447';
    SVC_TH_PORT = '8449';
-   SVC_TH_URL = this.BUILD_TYPE === BUILD_TYPES.DEVELOPMENT ? 'http://' + this.IP_DEV + ':' + this.SVC_TH_PORT : 'http://' + this.IP_PROD + ':' + this.SVC_TH_PORT;
+   SVC_TH_URL = this.BUILD_TYPE === BUILD_TYPES.DEVELOPMENT ? 'http://' + this.IP_DEV + ':' + this.SVC_TH_PORT : 'http://' + this.IP_PROD + ':' + this.SVC_TH_PORT;;
 
    /**
     * The list of NPM dependcies to be injected in the `index.html`.

@@ -79,7 +79,6 @@ export class RiskComponent implements OnInit {
 
       this.risk.idCargo = this.position.idCargo;
       this.exam.idCargo = this.position.idCargo;
-      this.loadingListRisk();
 
       this.listaService.getMasterDetails( 'ListasExamenes' ).subscribe( res => {
          res.map( ( s: ListaItem ) => {
@@ -112,9 +111,6 @@ export class RiskComponent implements OnInit {
          );
       } );
 
-   }
-   loadingListRisk(){
-      this.listRisks=[];
       this.riskService.getRiskByIdCargo( this.risk.idCargo ).subscribe(
          risk => {
             for ( let rk of risk ) {
@@ -138,6 +134,7 @@ export class RiskComponent implements OnInit {
             }
          }
       );
+
    }
 
    onSubmit() {
@@ -148,8 +145,6 @@ export class RiskComponent implements OnInit {
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.guardando = true;
-                                            let rk = this.listRisks.find(r=>r.idRiesgo===this.risk.idRiesgo && r.idCargo === this.risk.idCargo);
-                                            rk;
                                               if ( this.listRisks.filter( r => r.idRiesgo === this.risk.idRiesgo &&
                                                                                r.idCargo === this.risk.idCargo ).length > 0 ) {
                                                  this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'El riesgo ya existe!' };
@@ -166,7 +161,7 @@ export class RiskComponent implements OnInit {
                                                     this.risk.riesgo = riesgo.riesgo ? riesgo.riesgo : '';
                                                     this.risk.tipo = tipo.riesgoTipo ? riesgo.riesgoTipo : '';
                                                     this.risk.subtipo = subtipo.riesgoSubTipo ? riesgo.riesgoSubTipo : '';
-                                                    this.loadingListRisk();
+                                                    this.listRisks.push( this.risk );
                                                     this.idTypeRisk = null;
                                                     this.idSubtypeRisk = null;
                                                     this.risk.idRiesgo = null;

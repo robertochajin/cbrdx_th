@@ -14,8 +14,6 @@ import * as moment from 'moment/moment';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
 import { ZonesServices } from '../_services/zones.service';
-import { NavService } from '../_services/_nav.service';
-import { Message } from 'primeng/primeng';
 
 @Component( {
                moduleId: module.id,
@@ -54,8 +52,6 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    es: any;
    maxDate: Date = null;
    indicadorZonaPosition = false;
-   backupPosition:string
-   msg: Message;
 
    constructor( private positionsService: PositionsService,
       private ospService: OrganizationalStructurePositionsServices,
@@ -64,8 +60,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
       private personPositionService: PersonPositionsServices,
       private listaService: ListaService,
       private zonesServices: ZonesServices,
-      private confirmationService: ConfirmationService,
-      private navService: NavService ) {
+      private confirmationService: ConfirmationService ) {
 
       organizationalStructureService.getAllEnabled().subscribe( res => {
          this.listOrganizationalStructure = res;
@@ -146,7 +141,6 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
          this.selectedPosition = new Positions();
          this.selectedPosition.idCargo = osPosition.idCargo;
          this.selectedPosition.cargo = osPosition.cargo;
-         this.backupPosition = osPosition.cargo;
       } else {
          this.osPosition = new OrganizationalStructurePositions();
          this.selectedPosition = null;
@@ -199,33 +193,25 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    }
 
    savePosition() {
-      if ( this.backupPosition === this.selectedPosition.cargo ) {
-         this.badPostion = false;
-         if ( this.osPosition.cargo != undefined && this.osPosition.idCargo != undefined ) {
-            if ( this.osPosition.idEstructuraOrganizacionalCargo !== undefined && this.osPosition.idEstructuraOrganizacionalCargo !== null ) {
-               this.ospService.update( this.osPosition ).subscribe( data => {
-                  this.navService.setMesage( 2, this.msg );
-                  this.osPositions[ this.osPositions.indexOf( this.backUpOSPosition ) ] = this.osPosition;
-                  this.editingPosition = false;
-                  this.osPosition = new OrganizationalStructurePositions();
-                  this.sumPositions();
-               } );
-            } else {
-               this.osPosition.idEstructuraOrganizacional = this.area.idEstructuraOrganizacional;
-               this.ospService.add( this.osPosition ).subscribe( data => {
-                  this.navService.setMesage( 1, this.msg );
-                  this.osPosition.idEstructuraOrganizacionalCargo = data.idEstructuraOrganizacionalCargo;
-                  this.osPositions.push( this.osPosition );
-                  this.editingPosition = false;
-                  this.sumPositions();
-               } );
-            }
+      if ( this.osPosition.cargo != undefined && this.osPosition.idCargo != undefined ) {
+         if ( this.osPosition.idEstructuraOrganizacionalCargo !== undefined && this.osPosition.idEstructuraOrganizacionalCargo !== null ) {
+            this.ospService.update( this.osPosition ).subscribe( data => {
+               this.osPositions[ this.osPositions.indexOf( this.backUpOSPosition ) ] = this.osPosition;
+               this.editingPosition = false;
+               this.osPosition = new OrganizationalStructurePositions();
+               this.sumPositions();
+            } );
          } else {
-            this.badPostion = true;
+            this.osPosition.idEstructuraOrganizacional = this.area.idEstructuraOrganizacional;
+            this.ospService.add( this.osPosition ).subscribe( data => {
+               this.osPosition.idEstructuraOrganizacionalCargo = data.idEstructuraOrganizacionalCargo;
+               this.osPositions.push( this.osPosition );
+               this.editingPosition = false;
+               this.sumPositions();
+            } );
          }
       } else {
-          this.badPostion = true;
-          this.selectedPosition = null;
+         this.badPostion = true;
       }
    }
 
@@ -237,7 +223,6 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
       if ( !this.isRepeated( event.idCargo, this.osPosition.idEstructuraOrganizacionalCargo ) ) {
          this.osPosition.idCargo = event.idCargo;
          this.osPosition.cargo = event.cargo;
-         this.backupPosition = event.cargo;
          this.osPosition.salario = event.salario;
          this.indicadorZonaPosition = event.indicadorZona;
          this.badPostion = false;
@@ -270,7 +255,6 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
          // this.personsPosition.asignadoDesde = fi.add( 2, 'days' ).format( 'YYYY-MM-DD' );
          if ( this.personsPosition.idTerceroCargo === null ) {
             this.personPositionService.add( this.personsPosition ).subscribe( res => {
-               this.navService.setMesage( 1, this.msg );
                res.nombreCompleto = this.selectedEmployee.nombreCompleto;
                res.cargo = this.personsPosition.cargo;
                res.idCargo = this.personsPosition.idCargo;
@@ -282,7 +266,6 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
          } else {
             this.personPositionService.update( this.personsPosition ).subscribe( res => {
                if ( res.ok ) {
-                  this.navService.setMesage( 2, this.msg );
                   this.personsPosition.nombreCompleto = this.selectedEmployee.nombreCompleto;
                   this.personsPosition.cargo = this.personsPosition.cargo;
                   // this.personsPosition.asignadoDesde = fi.subtract( 2, 'days' ).format( 'YYYY-MM-DD' );
