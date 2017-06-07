@@ -165,7 +165,7 @@
 						</p-column>
 						<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 							<template let-competencie="rowData" pTemplate="body">
-								<button type="button" class="ui-button ui-button-success btn" icon="fa-pencil"
+								<button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
 								        pButton (click)="editCompetencie(competencie, group.idGrupoCompetencia)"></button>
 								<!-- <button type="button" class="ui-button ui-button-danger btn" icon="fa-trash"
 											pButton (click)="disableCompetencie(competencie)"></button>-->

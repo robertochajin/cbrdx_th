@@ -7,6 +7,7 @@ import { CentroCostosService } from '../_services/centroCostos.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NavService } from '../_services/_nav.service';
 import { Message } from 'primeng/primeng';
+
 @Component( {
                moduleId: module.id,
                templateUrl: 'centroCostos-edit.component.html',

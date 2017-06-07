@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import * as moment from 'moment/moment';
 import { NavService } from '../_services/_nav.service';
 import { Message } from 'primeng/primeng';
+import { FormSharedModule } from '../shared/form-shared.module';
 
 @Component( {
                moduleId: module.id,
