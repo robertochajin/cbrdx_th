@@ -131,7 +131,9 @@
 									      <div class="form-group">
 										      <label for="direccion" class="control-label col-sm-3">* {{ 'LBL_DIRECCION' | translate}}</label>
 										      <div class=" col-sm-7">
-                                 <textarea id="direccion" name="direccion" pInputTextarea  rows="5" #direccion="ngModel" disabled="true" required="true"
+                                 <textarea class="col-sm-12" id="direccion" name="direccion" pInputTextarea  rows="5" #direccion="ngModel"
+                                           disabled="true"
+                                            required="true"
                                            [(ngModel)]="organizationalStructure.localizacion" ></textarea>
 											      <div class="ui-message ui-messages-error ui-corner-all"
 											           *ngIf="f.submitted && organizationalStructure.localizacion==''">
