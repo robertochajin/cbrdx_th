@@ -9,7 +9,7 @@
               <label for="nombre">*{{'EMPLOYEES.LBL_NOMBRECONTACTO' | translate}}</label>
               <input type="text" pInputText id="nombre" name="nombre"
                      [(ngModel)]="contact.contacto" #contacto="ngModel" required
-                     (keyup)="capitalize()"
+                     (keyup)="capitalize()" maxlength="250"
               />
               <div class="ui-message ui-messages-error ui-corner-all"
                     *ngIf="fe.submitted && !contacto.valid">
