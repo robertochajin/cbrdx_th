@@ -4,6 +4,8 @@ import { TipoDeAreaService } from '../_services/tipoDeArea.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NavService } from '../_services/_nav.service';
 import { Message } from 'primeng/primeng';
+import { FormSharedModule } from '../shared/form-shared.module';
+
 @Component( {
                moduleId: module.id,
                templateUrl: 'tipoDeArea-edit.component.html',

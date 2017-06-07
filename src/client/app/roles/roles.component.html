@@ -23,7 +23,7 @@
     <p-column header="{{ 'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
         <template let-data="rowData" pTemplate="body">
             <div class="btn-group" role="group">
-                <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" pButton
+                <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}" pButton
                         (click)="update(data)"></button>
             </div>
         </template>

@@ -1,13 +1,9 @@
 <div *ngIf="constant">
-  <div class="row">
-    <div class="col-md-12">
-      <h3 class="first">{{ 'CONSTANTES.LBL_DETALLECONST' | translate}}</h3>
-    </div>
-  </div>
 
 <div class="row">
-  <div class="col-md-offset-2 col-md-8 col-sm-12">
+  <div class="col-md-offset-1 col-md-10 col-sm-12">
     <form class="form-horizontal">
+		 <p-panel header="{{ 'CONSTANTES.LBL_DETALLECONST' | translate}}">
       <fieldset>
           <div class="row">
             <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'CONSTANTES.LBL_CONSTANTE' | translate }}:</label>
@@ -27,16 +23,16 @@
             <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_HABILITADO' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{habilitado}}</strong></label>
           </div>
-      </fieldset>
-    </form>
-  </div>
-</div>
 
-</div>
-
-<div class="row form-footer-buttons">
-  <div class="form-group col-md-12">
+	<div class="row form-footer-buttons">
+   <div class="form-group col-md-12">
     <button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate }}" type="button"
             pButton (click)="goBack()"></button>
-  </div>
+   </div>
+	</div>
+
+	  </fieldset>
+	</p-panel>
+	 </form>
+</div>
 </div>

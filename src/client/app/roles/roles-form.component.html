@@ -8,11 +8,8 @@
 <div class="col-md-10 col-md-offset-1">
 <div *ngIf="rol">
    <div class="row">
-         <div class="header">
-            <h3 class="title">{{ 'ROLES.LBL_ADMINROLES' | translate}}</h3>
-         </div>
-      </div>
-   </div>
+      <p-panel header="{{ 'ROLES.LBL_ADMINROLES' | translate}}">
+			<fieldset>
    <form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate>
       <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
          <div class="ui-grid-row">
@@ -105,6 +102,10 @@
          </div>
       </div>
    </form>
+			</fieldset>
+</p-panel>
+	</div>
+</div>
 
 <p-tabView *ngIf="rol.idRol">
    <p-tabPanel header="{{ 'ROLES.LBL_FUNCIONALIDADES' | translate}}">
@@ -114,4 +115,5 @@
       <rol-widges *ngIf="rol.idRol" [rol]="rol"></rol-widges>
    </p-tabPanel>
 </p-tabView>
+
 </div>

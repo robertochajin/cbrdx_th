@@ -22,9 +22,9 @@
         <p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
             <template let-employee="rowData" pTemplate="body">
 
-                    <button type="button" icon="fa-eye" class="ui-button-info"
+                    <button type="button" icon="fa-eye" class="ui-button-info" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
                             pButton (click)="detail(employee)"></button>
-                    <button type="button" icon="fa-pencil" class="ui-button-success"
+                    <button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
                             pButton (click)="update(employee)"></button>
               <!--<button type="button" icon="fa-trash" class="ui-button-danger"
                       pButton (click)="del(employee)" ></button>-->

@@ -55,7 +55,16 @@ body .ui-widget:disabled {
 .ui-dropdown-panel{
    z-index : 800!important;
 }
-/** -- tabview Top-- */
+/** -- tabview Left-- */
+.ui-tabview.ui-tabview-left .ui-tabview-nav{
+   padding-left: 20px!important;
+
+}
+.ui-tabview.ui-tabview-left .ui-tabview-nav li{
+   margin-bottom: 2px!important;
+   margin-top: 2px!important;
+}
+/** -- tabview Top / left-- */
 .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active,
 .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active{
    background-color: #FFF!important;
@@ -128,7 +137,7 @@ body .ui-panel{
    }
 }
 .sidebar-menu .treeview-menu{
-   margin-top:-1px!important;
+   margin-top:-3px!important;
 }
 .sidebar-menu .treeview-menu > li > a {
    padding: 5px 36px 5px 26px!important;
@@ -764,21 +773,21 @@ body.skin-blue .user-avatar{
 }
 /* -- Tabs -- */
 body.skin-blue .ui-tabview .ui-tabview-panel{
-   border: 1px solid #29ABE2;
+   border: 1px solid #3C8DBC;
 }
 /* -- Tabs Top/left Blue-- */
 body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav,
 body.skin-blue .ui-tabview.ui-tabview-left .ui-tabview-nav{
-   background: #29ABE2;
+   background: #3C8DBC;
 }
 body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active,
 body.skin-blue .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active{
-   border-color: #29ABE2;
+   border-color: #3C8DBC;
 }
 
 body.skin-blue .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active a,
 body.skin-blue .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active a{
-   color: #0275d8;
+   color: #3C8DBC;
 }
 /* -- Accordion Blue */
 body.skin-blue .ui-accordion .ui-accordion-header.ui-state-active {
@@ -982,3 +991,51 @@ body .ui-tabview{
 }
 
 
+/** New loading */
+
+.flex-parent {
+   display:flex;
+   flex-direction:row;
+
+}
+.flex-child {
+   padding:1em;
+   min-height: 100vh;
+   width: 100%;
+   align-items: center;
+   display:flex;
+   justify-content: center;
+   flex-direction: column;
+}
+
+.loading-spinner {
+   border-radius: 50%;
+   width: 180px;
+   height: 180px;
+   border: 20px solid rgba(176, 199, 0, 0.2);
+   border-top-color: #00632e;
+   -webkit-animation: rotation .8s infinite cubic-bezier(.6, .3, .3, .6);
+   animation: rotation .8s infinite cubic-bezier(.6, .3, .3, .6);
+}
+
+@keyframes rotation {
+   0% {
+      transform: rotate(0);
+   }
+   100% {
+      transform: rotate(360deg);
+   }
+}
+
+.loading-logo {
+   background: transparent url("../assets/images/logo-loading-th.svg");
+   background-size: 95px 95px;
+   height: 95px;
+   width: 95px;
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   margin: auto;
+}

@@ -66,6 +66,14 @@
   "PH_BUSCAR":"Buscar ",
   "LBL_INVALIDO" : "Invalido",
   "LBL_ENVIAR":"Enviar",
+  "BTN_VISUALIZAR": "Ver detalle",
+  "BTN_ELIMINAR": "Eliminar",
+  "BTN_CONFIGURAR": "Configuración",
+  "BTN_APROBARPROYECCION": "Aprobar Proyección",
+  "BTN_CONFIRMARPROY": "Confirmar Proyección",
+  "BTN_PUBLICAVACANTE": "Publicar Vacante",
+  "BTN_ARRIBA": "Subir",
+  "BTN_ABAJO": "Bajar",
   "FIN_COMUNES":"====================================================================",
 
   "UBICACION":{

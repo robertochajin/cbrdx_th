@@ -30,12 +30,17 @@
       </p-column>
       <p-column header="{{ 'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
          <template let-physicStructure="rowData" pTemplate="body">
-            <button type="button" icon="fa-eye" class="ui-button-info"
+            <button type="button" icon="fa-eye" class="ui-button-info" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
                     pButton (click)="detail(physicStructure)"></button>
-            <button type="button" icon="fa-pencil" class="ui-button-success"
+            <button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
                     pButton (click)="update(physicStructure)"></button>
          </template>
       </p-column>
    </p-dataTable>
 </div>
-<p-confirmDialog width="400"></p-confirmDialog>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>

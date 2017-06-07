@@ -1,12 +1,9 @@
 <div *ngIf="physicStructure">
-   <div class="row">
-      <div class="col-md-12">
-         <h3 class="first">{{ 'ESTRUCTURAFISICA.LBL_DETALLEESTRUCT' | translate}}</h3>
-      </div>
-   </div>
+
    <div class="row">
       <div class="col-md-offset-2 col-md-8 col-sm-12">
          <form class="form-horizontal">
+				<p-panel header="{{ 'ESTRUCTURAFISICA.LBL_DETALLEESTRUCT' | translate}}">
             <fieldset>
                <div class="row">
                   <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_CODIGO' | translate}}:</label>
@@ -30,13 +27,15 @@
                   <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{virtual}}</strong></label>
                </div>
             </fieldset>
+					<div class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate}}" type="button"
+									  pButton (click)="goBack()"></button>
+						</div>
+					</div>
+				</p-panel>
+
          </form>
       </div>
-   </div>
-</div>
-<div class="row form-footer-buttons">
-   <div class="form-group col-md-12">
-      <button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate}}" type="button"
-              pButton (click)="goBack()"></button>
    </div>
 </div>
