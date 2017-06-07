@@ -6,6 +6,7 @@ import { GruposGestion } from '../_models/gruposGestion';
 import { GruposGestionService } from '../_services/grupoGestion.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
+
 @Component( {
                moduleId: module.id,
                templateUrl: 'gruposGestion-detail.component.html',

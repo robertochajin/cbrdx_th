@@ -6,6 +6,8 @@ import { Location } from '@angular/common';
 import { PhysicStructure } from '../_models/physic-structure';
 import { PhysicStructureService } from '../_services/physic-structure.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { FormSharedModule } from '../shared/form-shared.module';
+
 
 @Component( {
                moduleId: module.id,

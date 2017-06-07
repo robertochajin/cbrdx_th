@@ -1,6 +1,6 @@
 <p-messages [value]="msgs"></p-messages>
 <div class="row">
-   <div class="col-md-12">
+   <div class="col-md-10 col-md-offset-1">
       <p-accordion (onOpen)="onTabShow($event)" id="accordion">
          <p-accordionTab header="{{ 'ADMIN_FORMULARIOS.LBL_FUNCIONALIDAD' | translate }}"
                          [selected]="acordion == 0 || acordion == null ">
@@ -168,10 +168,10 @@
                            <template let-func="rowData" pTemplate="body">
                               <button *ngIf="func.notFoundFiel" type="button" icon="fa-plus" class="ui-button-success"
                                       pButton (click)="addField(func)"></button>
-                              <button *ngIf="!func.notFoundFiel" type="button" icon="fa-pencil"
+                              <button *ngIf="!func.notFoundFiel" type="button" icon="fa-pencil" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
                                       class="ui-button-success"
                                       pButton (click)="updateSection(func)"></button>
-                              <button type="button" icon="fa-eye" class="ui-button-success"
+                              <button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
                                       pButton (click)="detailSectionF(func)"></button>
                            </template>
                         </p-column>
@@ -420,9 +420,9 @@
                            </p-column>
                            <p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
                               <template let-func="rowData" pTemplate="body">
-                                 <button type="button" icon="fa-pencil" class="ui-button-success"
+                                 <button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
                                          pButton (click)="updateField(func)"></button>
-                                 <button type="button" icon="fa-eye" class="ui-button-success"
+                                 <button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
                                          pButton (click)="detailDetailF(func)"></button>
                               </template>
                            </p-column>

@@ -10,13 +10,14 @@ import { TipoDeAreaDetailComponent } from './tipoDeArea-detail.component';
 import { SharedModule } from '../shared/shared.module';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import { FormSharedModule } from '../shared/form-shared.module';
 
 /**
  * Created by Jenniferth Escobar - Felipe Aguirre on 28/02/2017.
  */
 
 @NgModule( {
-              imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule,
+              imports: [ CommonModule, FormSharedModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule,
                  CalendarModule, SharedModule
               ],
               declarations: [ TipoDeAreaComponent, TipoDeAreaAddComponent, TipoDeAreaEditComponent, TipoDeAreaDetailComponent ],

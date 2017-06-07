@@ -21,9 +21,9 @@
 			<p-column field="tipoSolicitud" header="{{ 'VACANCIES.LBL_REASON' | translate }}" [sortable]="true"></p-column>
 			<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 				<template let-vacancy="rowData" pTemplate="body">
-					<button type="button" icon="fa-eye" class="ui-button-info"
+					<button type="button" icon="fa-eye" class="ui-button-info" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
 					        pButton (click)="detailRequirement(vacancy.idRequerimiento)"></button>
-					<button type="button" icon="fa-pencil" class="ui-button-success"
+					<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
 					        pButton (click)="addPosition(vacancy)"></button>
 					<button *ngIf="!vacancy.editar" type="button" icon="fa-list-alt" class="ui-button-success"
 					        pButton (click)="observations(vacancy)" title="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}"></button>
@@ -52,9 +52,9 @@
 			<p-column field="tipoSolicitud" header="{{ 'VACANCIES.LBL_REASON' | translate }}" [sortable]="true"></p-column>
 			<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 				<template let-vacancy="rowData" pTemplate="body">
-					<button type="button" icon="fa-eye" class="ui-button-info"
+					<button type="button" icon="fa-eye" class="ui-button-info" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
 					        pButton (click)="detailRequirement(vacancy.idRequerimiento)"></button>
-					<button type="button" icon="fa-pencil" class="ui-button-success"
+					<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
 					        pButton (click)="delPosition(vacancy)" *ngIf="!btnhide"></button>
 					<button *ngIf="!vacancy.editar" type="button" icon="fa-list-alt" class="ui-button-success"
 					        pButton (click)="observations(vacancy)" title="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}"></button>
@@ -91,7 +91,7 @@
 			<p-column header="Acciones" styleClass="datatable-col-action">
 				<template let-position="rowData" pTemplate="body">
 					
-					<button type="button" icon="fa-pencil" class="ui-button-success"
+					<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
 					        pButton (click)="update(position)"></button>
 					<!--<button type="button" icon="fa-trash" class="ui-button-danger"
                        pButton (click)="del(employee)" ></button>-->

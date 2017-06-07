@@ -9,6 +9,8 @@ import { PhysicStructureUpdateComponent } from './physic-structure-update.compon
 import { PhysicStructureService } from '../_services/physic-structure.service';
 import { SharedModule } from '../shared/shared.module';
 import { LocationsModule } from '../locations/locations.module';
+import { FormSharedModule } from '../shared/form-shared.module';
+
 import {
    InputTextModule, DataTableModule, ButtonModule, DialogModule, InputTextareaModule, CalendarModule, AutoCompleteModule, DropdownModule,
    CheckboxModule, InputMaskModule, MessagesModule, ConfirmDialogModule
@@ -19,6 +21,7 @@ import {
                  InputTextModule,
                  FormsModule,
                  ReactiveFormsModule,
+                 FormSharedModule,
                  DataTableModule,
                  ButtonModule,
                  DialogModule,

@@ -66,6 +66,14 @@
   "PH_BUSCAR":"Buscar ",
   "LBL_INVALIDO" : "Invalido",
   "LBL_ENVIAR":"Enviar",
+  "BTN_VISUALIZAR": "Ver detalle",
+  "BTN_ELIMINAR": "Eliminar",
+  "BTN_CONFIGURAR": "Configuración",
+  "BTN_APROBARPROYECCION": "Aprobar Proyección",
+  "BTN_CONFIRMARPROY": "Confirmar Proyección",
+  "BTN_PUBLICAVACANTE": "Publicar Vacante",
+  "BTN_ARRIBA": "Subir",
+  "BTN_ABAJO": "Bajar",
   "FIN_COMUNES":"====================================================================",
 
   "UBICACION":{
@@ -560,7 +568,7 @@
            "LBL_POSICION" : "Posicion en caso de ausencia",
            "LBL_REEMPLAZA" : "Reemplaza a:",
            "LBL_ATRIBUTOS" : "Atributos",
-           "LBL_REEMPLAZAPOR" : "Reemplaza por:",
+           "LBL_REEMPLAZAPOR" : "Reemplazado por:",
            "LBL_EDAD" : "Edad",
            "LBL_ZONA" : "Requiere zona",
            "LBL_ELEMENTOS" : "Elementos",
@@ -618,6 +626,7 @@
            "LBL_PUNTOS" : "Puntos de valoración",
            "LBL_SALARIO" : "Salario al 100%",
            "LBL_SUBTIPO" : "Subtipo",
+           "LBL_DESICIONES" : "Desiciones",
            "LBL_OCUPACION" : "Ocupación",
            "LBL_OBSERVACION" : "Observación",
            "LBL_OBSERVACIONCARGO" : "Observación del cargo",
@@ -744,6 +753,7 @@
       "MSG_CARGOASIGNADO":"El cargo que intentó seleccionar ya fue asignado a esta área",
       "MSG_CARGOREQ":"Cargo es requerido",
       "MSG_PLAZASREQ":"Número de plazas es requerido",
+      "MSG_PLAZASMAX":"Número de plazas máximo es 9999",
       "MSG_ASIGNACOLABORADORCARGO":"Asignando colaborador al cargo",
       "LBL_ESTRUCTFISICA":"Estructura Fisica"
 

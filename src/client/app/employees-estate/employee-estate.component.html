@@ -28,9 +28,9 @@
 
         <!--<button type="button" icon="fa-eye" class="ui-button-info"-->
                 <!--pButton (click)="detail(employeeEstate)"></button>-->
-        <button type="button" icon="fa-pencil" class="ui-button-success"
+        <button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
                 pButton (click)="update(employeeEstate)"></button>
-        <button type="button" icon="fa-trash" class="ui-button-danger"
+        <button type="button" icon="fa-trash" class="ui-button-danger" data-toggle="tooltip" title="{{'BTN_ELIMINAR' | translate}}"
                 pButton (click)="del(employeeEstate)" ></button>
 
       </template>

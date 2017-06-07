@@ -396,7 +396,7 @@ export class PositionsUpdateComponent implements OnInit {
                this.alertOcu = true;
                this.msgOcupaciones[ 0 ] = {
                   severity: 'error', summary: 'Error', detail: 'Debe agregar al menos una' +
-                                                               ' ocuapación'
+                                                               ' ocupación'
                };
                return false;
             }

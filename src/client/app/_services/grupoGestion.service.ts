@@ -30,20 +30,20 @@ export class GruposGestionService {
 
    addGruposGestion( g: GruposGestion ): Promise<GruposGestion> {
       g.auditoriaUsuario = this.idUsuario;
-      if ( g.fechaInicio !== null ) {
-         g.fechaInicio.setHours( 23 );
-         g.fechaFin.setHours( 23 );
-      }
+      // if ( g.fechaInicio !== null ) {
+      //    g.fechaInicio.setHours( 23 );
+      //    g.fechaFin.setHours( 23 );
+      // }
       return this.authHttp.post( this.serviceURL, JSON.stringify( g ) ).toPromise().then( res => res.json() as GruposGestion )
       .catch( this.handleError );
    };
 
    updateGruposGestion( g: GruposGestion ): Promise<any> {
       g.auditoriaUsuario = this.idUsuario;
-      if ( g.fechaInicio !== null ) {
-         g.fechaInicio.setHours( 23 );
-         g.fechaFin.setHours( 23 );
-      }
+      // if ( g.fechaInicio !== null ) {
+      //    g.fechaInicio.setHours( 23 );
+      //    g.fechaFin.setHours( 23 );
+      // }
       return this.authHttp.put( this.serviceURL, JSON.stringify( g ) ).toPromise().catch( this.handleError );
    }
 

@@ -85,9 +85,9 @@
 			<p-column field="estado" header="{{ 'VACANCIES.LBL_STATE' | translate }}" [sortable]="true"></p-column>
 			<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 				<template let-vacancy="rowData" pTemplate="body">
-					<button type="button" icon="fa-eye" class="ui-button-info"
+					<button type="button" icon="fa-eye" class="ui-button-info" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
 					        pButton (click)="detail(vacancy)"></button>
-					<button type="button" icon="fa-pencil" class="ui-button-success" *ngIf="vacancy.editar"
+					<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}" *ngIf="vacancy.editar"
 					        pButton (click)="update(vacancy)"></button>
 					<button *ngIf="!vacancy.editar" type="button" icon="fa-list-alt" class="ui-button-success"
 					        pButton (click)="observations(vacancy)" title="{{'REQUERIMIENTOPERSONAL.LBL_OBSERVACIONES' | translate}}"></button>

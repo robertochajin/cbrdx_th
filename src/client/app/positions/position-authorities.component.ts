@@ -21,7 +21,7 @@ export class PositionAuthoritiesComponent implements OnInit {
    msgs: Message[] = [];
    listPosition: SelectItem[] = [];
    listAbsenceSUP: Absence[] = [];
-
+   guardando: boolean=false;
    constructor( private absenceService: AbsenceService,
       private router: Router,
       private route: ActivatedRoute,
@@ -66,9 +66,13 @@ export class PositionAuthoritiesComponent implements OnInit {
       this.absence.idTipoRelacion = 3; // Reemplaza a
       this.absenceService.add( this.absence )
       .subscribe( data => {
+         this.guardando=true;
          this._nav.setMesage( 1, this.msgs );
          this.absenceService.getPositionById( data.idCargoRelacion ).subscribe( res => {
             data.cargoRelacion = res.cargo;
+            this.absence.idTipoRelacion=null;
+            this.absence.idCargoRelacion=null;
+            this.guardando=false;
          } );
          this.listAbsenceSUP.push( data );
          this.listPosition = [];

@@ -8,18 +8,16 @@
 <div *ngIf="addinglocation">
    <div *ngIf="physicStructure">
       <div class="row">
-         <div class="col-md-12">
+         <div class="col-md-10 col-md-offset-1">
             <div class="header">
                <h4 class="title">{{header}}</h4>
             </div>
-         </div>
-      </div>
       <form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
          <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
             <div class="ui-grid-row">
                <div class="ui-grid-col-8">
                   <label for="nombre">{{ 'LBL_NOMBRE' | translate}}</label>
-                  <input id="nombre" name="nombre" #nombre="ngModel" pInputText type="text"
+                  <input id="nombre" name="nombre" #nombre="ngModel" pInputText type="text" maxlength="50"
                          [(ngModel)]="physicStructure.estructuraFisica" required="true" (keyup)="capitalize($event)"/>
                   <div class="ui-message ui-messages-error ui-corner-all"
                        *ngIf="f.submitted && !nombre.valid">
@@ -133,7 +131,8 @@
             </div>
          </div>
       </form>
-   </div>
+		</div>
+	</div>
 </div>
 <div *ngIf="!addinglocation">
    <locations-form [parentTitle]="'Estructura Física'" (dismiss)="toggleform()" (create)="bindLocation($event)"

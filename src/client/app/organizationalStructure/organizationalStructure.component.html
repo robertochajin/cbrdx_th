@@ -49,7 +49,7 @@
 										      <div class=" col-sm-9">
 											      <input type="text" pInputText class="form-control" id="numeroDocumento" name="numeroDocumento"
 											             [(ngModel)]="organizationalStructure.numeroDocumento"
-											             (change)="validateDocument()"
+											             (change)="validateDocument()" (keyup)="inputValid()"
 											             #numeroDocumento="ngModel" maxlength="20"
 											             required/>
 											      <div class="ui-message ui-messages-error ui-corner-all"
@@ -174,7 +174,7 @@
 										      <label for="nombre" class="control-label col-sm-3">* {{ 'LBL_NOMBRE' | translate }} </label>
 										      <div class=" col-sm-9">
 											      <input type="text" pInputText class="form-control" id="nombre"
-											             name="nombre"
+											             name="nombre" maxlength="50"
 											             [(ngModel)]="organizationalStructure.nombre"
 											             #nombre="ngModel"
 											             (keyup)="capitalizeName()"
