@@ -60,7 +60,7 @@
           <div class="ui-grid-row">
             <div class="ui-grid-col-6">
               <label for="areaEstudio">{{'EMPLOYEES.LBL_AREAESTUDIOS' | translate}}</label>
-              <p-dropdown name="areaEstudio" id="areaEstudio" #areaEstudio="ngModel" required="true"
+              <p-dropdown name="areaEstudio" id="areaEstudio" #areaEstudio="ngModel" required="true" filter="filter"
                           [autoWidth]="false" [(ngModel)]="nfstudy.idAreaEstudio" [options]="studyAreaList"></p-dropdown>
               <div class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !areaEstudio.valid">
                 {{'EMPLOYEES.LBL_AREAESTUDIOS' | translate}} {{'LBL_REQUERIDO' | translate}}

@@ -5,6 +5,8 @@ import { Component } from '@angular/core';
 import { TipoDeArea } from '../_models/tipoDeArea';
 import { TipoDeAreaService } from '../_services/tipoDeArea.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { FormSharedModule } from '../shared/form-shared.module';
+
 
 @Component( {
                moduleId: module.id,

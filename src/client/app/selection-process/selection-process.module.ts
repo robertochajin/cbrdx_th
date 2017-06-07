@@ -10,6 +10,9 @@ import { QuestionnairesService } from '../_services/questionnaires.service';
 import { VacancyDetailComponent } from './vacancy-detail.component';
 import { SelectionProcessVacanciesComponent } from './selection-process-vacancies.component';
 import { ConstanteService } from '../_services/constante.service';
+import { SelectionStepService } from '../_services/selection-step.service';
+import { StepListComponent } from './step-list.component';
+import { StepEditComponent } from './step-edit.component';
 
 @NgModule( {
               imports: [
@@ -20,6 +23,8 @@ import { ConstanteService } from '../_services/constante.service';
                  SelectionProcessComponent,
                  SelectionProcessAddComponent,
                  VacancyDetailComponent,
+                 StepListComponent,
+                 StepEditComponent,
                  SelectionProcessVacanciesComponent
               ],
               bootstrap: [ SelectionProcessComponent ],
@@ -28,6 +33,7 @@ import { ConstanteService } from '../_services/constante.service';
                  VacanciesService,
                  ConstanteService,
                  QuestionnairesService,
+                 SelectionStepService,
                  PublicationQuestionnairesService
               ],
               exports: [ SelectionProcessComponent ]

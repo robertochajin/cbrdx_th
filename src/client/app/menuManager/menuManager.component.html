@@ -1,6 +1,6 @@
 <h3>{{ 'ADMINMENUS.LBL_ADMINMENU' | translate }}</h3>
 <div class="row datable-header">
-   <div class="col-md-6 col-xs-12 datatable-header-add">
+   <div class="col-md-4 col-xs-12 datatable-header-add">
       <button type="button" pButton icon="fa-plus" (click)="newModule()" label="{{ 'ADMINMENUS.BTN_AGREGARMODULO' | translate }}"></button>
       <button type="button" pButton icon="fa-plus" (click)="newMenu()" label="{{ 'ADMINMENUS.BTN_AGREGARMENU' | translate }}"
               *ngIf="modulo"></button>
@@ -17,7 +17,8 @@
    </div>
    
    <div class="col-md-8">
-      <p-fieldset legend="{{header}}">
+      <p-panel header="{{header}}">
+			<fieldset>
          <div class="row-fluid">
             <div class="col-md-12">
                <form *ngIf="!guardando" (ngSubmit)="!codeExists&&f.valid && save()" #f="ngForm" novalidate>
@@ -116,7 +117,8 @@
                </form>
             </div>
          </div>
-      </p-fieldset>
+			</fieldset>
+      </p-panel>
       <p-dialog header="{{ 'LBL_CONFIRMACION' | translate }}" [(visible)]="displayDialog"
                 responsive="true" modal="true">
          <p>{{ 'MSG_CONFIRMACION' | translate }}</p>

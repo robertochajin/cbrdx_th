@@ -25,9 +25,9 @@
     <p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
         <template let-constantData="rowData" pTemplate="body">
             <div class="btn-group" role="group">
-                <button type="button" class="ui-button btn" icon="fa-eye"
+                <button type="button" class="ui-button btn" icon="fa-eye" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
                         pButton (click)="viewConstant(constantData)"></button>
-                <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" pButton
+                <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}" pButton
                         (click)="editConstant(constantData)"></button>
             </div>
         </template>

@@ -112,9 +112,8 @@ export class ClinicalInformationComponent implements OnInit {
          if ( this.ecd.idTerceroDatoClinico !== null && this.ecd.idTerceroDatoClinico !== undefined ) {
             this.clinicalInformationService.update( this.ecd ).subscribe( data => {
                if ( data.ok ) {
-                  this.ecd.codigo = this.ecd.diagnostico.codigo;
-                  this.ecd.descripcion = this.ecd.diagnostico.descripcion;
-                  this.clinicalInformations.push( this.ecd );
+                  this.clinicalInformationService.getAllByEmployee( this.employee.idTercero )
+                  .subscribe( employeesClinicalData => this.clinicalInformations = employeesClinicalData );
                   this.ecd = null;
                   this.editing = false;
                }
@@ -124,9 +123,8 @@ export class ClinicalInformationComponent implements OnInit {
          } else {
             this.clinicalInformationService.add( this.ecd ).subscribe( data => {
                if ( data.idTerceroDatoClinico ) {
-                  data.codigo = this.ecd.diagnostico.codigo;
-                  data.descripcion = this.ecd.diagnostico.descripcion;
-                  this.clinicalInformations.push( data );
+                  this.clinicalInformationService.getAllByEmployee( this.employee.idTercero )
+                  .subscribe( employeesClinicalData => this.clinicalInformations = employeesClinicalData );
                   this.ecd = null;
                   this.editing = false;
                }
