@@ -27,6 +27,8 @@ export class SelectionStep {
    public descripcion: string;
    public auditoriaUsuario: number;
    public auditoriaFecha: Date;
+   public rol: string;
+   public tipoConvocatoria: string;
 
    constructor() {
       this.indicadorHabilitado = true;

@@ -81,4 +81,13 @@ export class StepListComponent implements OnInit {
                                         } );
 
    }
+
+   private sortSteps() {
+      this.steps.sort( function ( a, b ) {
+         if ( a.orden < b.orden )
+            return -1;
+         else
+            return 1;
+      } )
+   }
 }

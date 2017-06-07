@@ -42,6 +42,17 @@ export class SelectionStepService {
       .map( ( res: Response ) => res.json() as SelectionStep );
    }
 
+   getLastStep( idProceso: number ) {
+      return this.authHttp.get( this.masterService + 'ultimoPaso/' + idProceso )
+      .map( ( res: Response ) => {
+         if(res.text() !== ''){
+            return res.json() as SelectionStep;
+         } else {
+            return undefined;
+         }
+      });
+   }
+
    handleError( error: any ): Promise<any> {
       return Promise.reject( error.message || error );
    }

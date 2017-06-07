@@ -50,7 +50,7 @@
 				</div>
 				<div class="row">
 					<div class="form-group col-md-6">
-						<label for="roles">* {{'PROCESOSELECCION.LBL_ROLPASO' | translate }}</label>
+						<label for="roles">* {{'PROCESOSELECCION.LBL_ROLPASO' | translate }}:</label>
 						<p-dropdown id="roles" name="roles" #ngRol="ngModel" [options]="roles" [autoWidth]="false"
 						             [(ngModel)]="step.idRol" required></p-dropdown>
 						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngRol.valid">
@@ -59,7 +59,7 @@
 						</div>
 					</div>
 					<div class="form-group col-md-6">
-						<label for="tipo">* {{'PROCESOSELECCION.LBL_TIPOCONVOCATORIA' | translate }}</label>
+						<label for="tipo">* {{'PROCESOSELECCION.LBL_TIPOCONVOCATORIA' | translate }}:</label>
 						<p-dropdown id="tipo" name="tipo" #ngTipo="ngModel" [options]="convocatoryTypes" [autoWidth]="false"
 						            [(ngModel)]="step.idTipoConvocatoria" required></p-dropdown>
 						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngTipo.valid">
@@ -72,9 +72,9 @@
 					<div class="form-group col-md-6">
 						<label for="urlinterna" class="control-label col-sm-6">{{ 'PROCESOSELECCION.LBL_INTERFAZINTERNA' | translate }}</label>
 						<p-checkbox [(ngModel)]="step.indicadorInterfazInterna" binary="true" id="urlinterna" name="urlinterna"
-						            #indicador="ngModel"></p-checkbox>
+						            #indicador="ngModel" (onChange)="cleanHiddenControls()" ></p-checkbox>
 					</div>
-					<div class="form-group col-md-6">
+					<div *ngIf="step.indicadorInterfazInterna" class="form-group col-md-6">
 						<label for="urli">{{ 'PROCESOSELECCION.LBL_URL' | translate }}:</label>
 						<input id="urli" type="text" pInputText name="urli"
 						       [(ngModel)]="step.interfazInterna" #ngUrli="ngModel" required />
@@ -85,7 +85,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				<div *ngIf="!step.indicadorInterfazInterna" class="row">
 					<div class="form-group col-md-6">
 						<label for="bloqueante" class="control-label col-sm-6">{{ 'PROCESOSELECCION.LBL_BLOQUEANTE' | translate }}</label>
 						<p-checkbox [(ngModel)]="step.indicadorBloqueante" binary="true" id="bloqueante" name="bloqueante"
@@ -98,7 +98,7 @@
 						            #ngIndObs="ngModel"></p-checkbox>
 					</div>
 				</div>
-				<div class="row">
+				<div *ngIf="!step.indicadorInterfazInterna" class="row">
 					<div class="form-group col-md-6">
 						<label for="indCorreo" class="control-label col-sm-6">{{ 'PROCESOSELECCION.LBL_ENVIOCORREO' | translate }}</label>
 						<p-checkbox [(ngModel)]="step.indicadorCorreo" binary="true" id="indCorreo" name="indCorreo"
@@ -110,7 +110,7 @@
 						            #ngIndAdj="ngModel"></p-checkbox>
 					</div>
 				</div>
-				<div class="row">
+				<div *ngIf="!step.indicadorInterfazInterna" class="row">
 					<div class="form-group col-md-6">
 						<label for="indCal" class="control-label col-sm-6">{{ 'PROCESOSELECCION.LBL_REQCALENDARIO' | translate }}</label>
 						<p-checkbox [(ngModel)]="step.indicadorCalendario" binary="true" id="indCal" name="indCal"
@@ -120,15 +120,15 @@
 						
 					</div>
 				</div>
-				<div class="row">
+				<div *ngIf="!step.indicadorInterfazInterna" class="row">
 					<div class="form-group col-md-6">
 						<label for="indCuest" class="control-label col-sm-6">{{ 'PROCESOSELECCION.LBL_MANEJOCUESTIONARIOS' | translate }}</label>
 						<p-checkbox [(ngModel)]="step.indicadorCuestionarios" binary="true" id="indCuest" name="indCuest"
 						            #ngIndCuest="ngModel"></p-checkbox>
 					</div>
-					<div class="form-group col-md-6">
+					<div *ngIf="step.indicadorCuestionarios" class="form-group col-md-6">
 						<label for="cuest">* {{'PROCESOSELECCION.LBL_CUESTIONARIO' | translate }}</label>
-						<p-dropdown id="cuest" name="cuest" #ngCuest="ngModel" [options]="cuestionaries" [autoWidth]="false"
+						<p-dropdown id="cuest" name="cuest" #ngCuest="ngModel" [options]="questionnaires" [autoWidth]="false"
 								      [(ngModel)]="step.idCuestionario" required></p-dropdown>
 						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngCuest.valid">
 							<i class="fa fa-close"></i>
@@ -136,14 +136,14 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				<div *ngIf="!step.indicadorInterfazInterna" class="row">
 					<div class="form-group col-md-6">
 						<label for="indInterfaz" class="control-label col-sm-6">{{ 'PROCESOSELECCION.LBL_MANEJOINTERFAZ' | translate }}</label>
 						<p-checkbox [(ngModel)]="step.indicadorInterfaz" binary="true" id="indInterfaz" name="indInterfaz"
 						            #ngInterfaz="ngModel"></p-checkbox>
 					</div>
-					<div class="form-group col-md-6">
-						<label for="interfaz">{{ 'LBL_URL' | translate }}:</label>
+					<div *ngIf="step.indicadorInterfaz" class="form-group col-md-6">
+						<label for="interfaz">{{ 'PROCESOSELECCION.LBL_URL' | translate }}:</label>
 						<input id="interfaz" type="text" pInputText name="interfaz"
 						       [(ngModel)]="step.interfaz"
 						       #ngInterfaz="ngModel" required />
