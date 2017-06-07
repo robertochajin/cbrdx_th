@@ -5,6 +5,7 @@ import { ConstructorFamilyInformation } from './family-information.construct';
 import { ConfirmationService } from 'primeng/primeng';
 import { Employee } from '../_models/employees';
 import * as moment from 'moment/moment';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -17,10 +18,13 @@ export class FamilyInformationComponent implements OnInit {
    familyInformation: ConstructorFamilyInformation = new ConstructorFamilyInformation();
    dialogObjet: ConstructorFamilyInformation = new ConstructorFamilyInformation();
    familyInformations: ConstructorFamilyInformation[];
+   busqueda: string;
 
    constructor( private familyInformationService: FamilyInformationService,
       private router: Router,
+      private _nav: NavService,
       private confirmationService: ConfirmationService ) {
+      this.busqueda = this._nav.getSearch( 'family-information.component' );
    }
 
    ngOnInit() {
@@ -67,5 +71,7 @@ export class FamilyInformationComponent implements OnInit {
       return this.router.navigate(
          [ 'employees/detail/' + this.employee.idTercero + '/family-information/detail/' + f.idTerceroFamiliar ] );
    }
-
+   setSearch() {
+      this._nav.setSearch( 'family-information.component', this.busqueda );
+   }
 }
