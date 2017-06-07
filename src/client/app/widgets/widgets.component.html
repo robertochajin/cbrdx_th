@@ -24,7 +24,7 @@
       </p-column>
       <p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
          <template let-widget="rowData" pTemplate="body">
-            <button type="button" icon="fa-pencil" class="ui-button-success"
+            <button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
                     pButton (click)="update(widget)"></button>
          </template>
       </p-column>
