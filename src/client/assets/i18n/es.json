@@ -913,6 +913,7 @@
       "LBL_REQCALENDARIO":"Requiere calendario",
       "LBL_CONTRATADO":"Contratado",
       "LBL_MANEJOCUESTIONARIOS":"Manejo de cuestionarios",
+      "MSG_CODIGOREPETIDO":"Este código ya pertenece a otro paso, por favor utiliza otro.",
       "LBL_MANEJOINTERFAZ":"Manejo de interfaz",
       "LBL_DESCRIPCIONPASO":"Descripción",
       "LBL_URL":"URL",
