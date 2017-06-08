@@ -25,6 +25,8 @@ export class StepEditComponent implements OnInit {
    public questionnaires: SelectItem [] = [];
    public convocatoryTypes: SelectItem [] = [];
    process: SelectionProcess;
+   public editing = false;
+   private repeatedCode = false;
 
    constructor( private listaService: ListaService,
       private router: Router,
@@ -66,15 +68,17 @@ export class StepEditComponent implements OnInit {
                   if ( idStep !== undefined ) {
                      this.selectionStepService.get( idStep ).subscribe( step => {
                         this.step = step;
+                        this.editing = true;
                      } );
                   } else {
+                     this.editing = true;
                      this.step = new SelectionStep();
                      this.step.idProceso = this.process.idProceso;
                   }
                } );
             } else {
                this._nav.setMesage( 3 );
-               this.location.back();
+               this.router.navigate( [ 'step-list' ] );
             }
          } );
 
@@ -87,31 +91,40 @@ export class StepEditComponent implements OnInit {
    saveStep() {
       if ( this.step.idProcesoPaso !== undefined && this.step.idProcesoPaso !== null ) {
          this.selectionStepService.update( this.step ).subscribe( res => {
-            if ( res.Ok ) {
+            if ( res.ok ) {
                this._nav.setMesage( 2 );
-               this.location.back();
+               this.router.navigate( [ 'step-list' ] );
             }
          }, () => {
             this._nav.setMesage( 3 );
          } );
       } else {
-         this.selectionStepService.getLastStep( this.step.idProceso ).subscribe( (res : SelectionStep )=> {
+         this.selectionStepService.getByCode(this.step.codigo).subscribe(
+            res => {
+               if(res === undefined){
+                  this.selectionStepService.getLastStep( this.step.idProceso ).subscribe( (res : SelectionStep )=> {
 
-            if(res === undefined){
-               this.step.orden = 1;
-            } else {
-               this.step.orden = res.orden + 1;
-            }
-            this.selectionStepService.add( this.step ).subscribe( res => {
-               if ( res ) {
-                  this._nav.setMesage( 1 );
-                  this.location.back();
+                     if(res === undefined){
+                        this.step.orden = 1;
+                     } else {
+                        this.step.orden = res.orden + 1;
+                     }
+                     this.selectionStepService.add( this.step ).subscribe( res => {
+                        if ( res ) {
+                           this._nav.setMesage( 1 );
+                           this.router.navigate( [ 'step-list' ] );
+                        }
+                     }, () => {
+                        this._nav.setMesage( 3 );
+                     } );
+
+                  } );
+               } else {
+                  this.repeatedCode = true;
                }
-            }, () => {
-               this._nav.setMesage( 3 );
-            } );
+            }
+         );
 
-         } );
       }
 
    }
@@ -136,13 +149,18 @@ export class StepEditComponent implements OnInit {
       }
    }
 
+   capitalize( event: any ) {
+      let input = event.target.value;
+      event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+   }
+
    goBack(): void {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea salir sin guardar?`,
                                            header: 'Corfirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
-                                              this.location.back();
+                                              this.router.navigate( [ 'step-list' ] );
                                            }
                                         } );
    }
