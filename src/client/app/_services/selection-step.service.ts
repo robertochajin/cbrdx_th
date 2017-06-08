@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { SelectionStep } from '../_models/selectionStep';
 import { SelectionProcess } from '../_models/selection-process';
 
@@ -8,9 +8,16 @@ import { SelectionProcess } from '../_models/selection-process';
 export class SelectionStepService {
 
    private masterService = '<%= SVC_TH_URL %>/api/procesosPasos/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
-
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    add( f: SelectionStep ) {
@@ -27,19 +34,39 @@ export class SelectionStepService {
       .map( ( res: Response ) => res.json() as SelectionStep[] );
    }
 
+   newProcess( ) {
+      return this.authHttp.post( '<%= SVC_TH_URL %>/api/procesos/' + this.idUsuario, null ).catch( this.handleError );
+   }
+
+   updateProcess( f: SelectionProcess ) {
+      return this.authHttp.put( '<%= SVC_TH_URL %>/api/procesos/', JSON.stringify( f ) ).catch( this.handleError );
+   }
+
    getCurrentProcess() {
       return this.authHttp.get( '<%= SVC_TH_URL %>/api/procesos/current/' )
       .map( ( res: Response ) => res.json() as SelectionProcess );
    }
 
    getAllByProcess(idProcess: number) {
-      return this.authHttp.get( this.masterService )
+      return this.authHttp.get( this.masterService + 'proceso/' + idProcess )
       .map( ( res: Response ) => res.json() as SelectionStep[] );
    }
 
    get(idSelectionStep: number) {
       return this.authHttp.get( this.masterService + idSelectionStep )
       .map( ( res: Response ) => res.json() as SelectionStep );
+   }
+
+   getByCode(code: string) {
+      return this.authHttp.get( this.masterService + 'codigo/' + code )
+      .map( ( res: Response ) => {
+         let steps = res.json() as SelectionStep[];
+         if(steps.length > 0){
+            return steps[0] as SelectionStep;
+         } else {
+            return undefined;
+         }
+      } );
    }
 
    getLastStep( idProceso: number ) {

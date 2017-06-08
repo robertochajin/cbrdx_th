@@ -8,7 +8,8 @@
 		<div class="col-md-6 col-xs-12 datatable-header-search">
 			<div class="input-group">
 				<div class="input-group-addon"><i class="fa fa-search"></i></div>
-				<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate }}" class="form-control">
+				<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate }}" class="form-control"
+				       [(ngModel)]="busqueda" (change)="setSearch()">
 			</div>
 		</div>
 	</div>
@@ -22,8 +23,7 @@
 		<p-column field="indicadorHabilitado" header="{{'LBL_HABILITADO' | translate }}" [sortable]="true"></p-column>
 		<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 			<template let-PR="rowData" pTemplate="body">
-				<button type="button" icon="fa-pencil" class="ui-button-success" pButton (click)="update(PR)"></button>
-				<button type="button" icon="fa-navicon" class="ui-button-success" pButton (click)="detail(PR)"></button>
+				<button *ngIf="editing" type="button" icon="fa-pencil" class="ui-button-success" pButton (click)="update(PR)"></button>
 			</template>
 		</p-column>
 	</p-dataTable>
