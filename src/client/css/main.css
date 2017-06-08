@@ -699,7 +699,13 @@ body.skin-blue .ui-accordion .ui-accordion-header.ui-state-active {
 body.skin-blue .timeline > li > .fa{
    background-color: #3c8dbc;
 }
-
+/* Ribbon Blue */
+body.skin-blue .ribbon{
+   background-color: #3c8dbc;
+}
+body.skin-blue .ribbon:after{
+   border-color:transparent #2c6689;
+}
 
 
 /* -- Link Green -- */
@@ -755,7 +761,13 @@ body.skin-green .ui-accordion .ui-accordion-header.ui-state-active {
 body.skin-green .timeline > li > .fa{
    background-color: #00A65A;
 }
-
+/* Ribbon Green */
+body.skin-green .ribbon{
+   background-color: #00A65A;
+}
+body.skin-green .ribbon:after{
+   border-color:transparent #006235;
+}
 
 /* -- Link Purple -- */
 body.sky-blue a{
@@ -810,8 +822,13 @@ body.skin-purple .ui-accordion .ui-accordion-header.ui-state-active {
 body.skin-purple .timeline > li > .fa{
    background-color: #605ca8;
 }
-
-
+/* Ribbon Purple */
+body.skin-purple .ribbon{
+   background-color: #605ca8;
+}
+body.skin-purple .ribbon:after{
+   border-color:transparent #46437d;
+}
 
 
 
@@ -893,4 +910,28 @@ body .ui-tabview{
 
 #tbvCompetenciasHabilidades .ui-tabview-panel.ui-widget-content{
    min-height: 470px;
+}
+
+
+/* - Ribbon - */
+.ribbon{
+   right: 6px;
+   top: 52px;
+   position: absolute;
+   padding: 6px 25px;
+   background-color: green;
+   text-transform: uppercase;
+   color: white;
+   border-radius: 8px 0 0 8px;
+   font-weight: 500;
+}
+.ribbon:after{
+   content:"";
+   position:absolute;
+   top:100%;
+   border-style:solid;
+   border-color:transparent darkgreen;
+   left:auto;
+   right:0;
+   border-width:0 0 10px 10px;
 }
