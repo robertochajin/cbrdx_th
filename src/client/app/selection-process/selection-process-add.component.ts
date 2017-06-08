@@ -217,7 +217,7 @@ export class SelectionProcessAddComponent implements OnInit {
    goBack(): void {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea salir sin guardar?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this._nav.setTab( 5 );
@@ -267,7 +267,7 @@ export class SelectionProcessAddComponent implements OnInit {
    disableQuestionnaire( questionnaire: PublicationsQuestionnaries ) {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que lo desea eliminar?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               let myIndex = this.publicationsQuestionnaires.indexOf( questionnaire );

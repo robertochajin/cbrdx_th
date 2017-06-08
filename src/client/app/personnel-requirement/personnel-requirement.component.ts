@@ -67,7 +67,7 @@ export class PersonnelRequirementComponent implements OnInit {
       this.dialogObjet = FaS;
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que lo desea eliminar?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.personnelRequirementServices.update( this.dialogObjet ).subscribe( r => {

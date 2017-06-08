@@ -161,7 +161,7 @@ export class AbsenceComponent implements OnInit {
       this.dialogObjet = a;
       this.confirmationService.confirm( {
                                            message: `¿Esta seguro que lo desea eliminar?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.guardandoA = true;
@@ -198,7 +198,7 @@ export class AbsenceComponent implements OnInit {
       this.dialogObjet = a;
       this.confirmationService.confirm( {
                                            message: `¿Esta seguro que lo desea eliminar?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.guardandoP = true;

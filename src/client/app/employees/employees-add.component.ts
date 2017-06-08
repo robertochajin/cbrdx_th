@@ -243,7 +243,7 @@ export class EmployeesAddComponent implements OnInit {
    goBack(): void {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea salir sin guardar?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.router.navigate( [ '/employees' ] );
@@ -362,7 +362,7 @@ export class EmployeesAddComponent implements OnInit {
             if ( res !== undefined && res.idTercero > 0 ) {
                this.confirmationService.confirm( {
                                                     message: ` ¿La cedula que ha ingresado ya existe, desea ver el colaborador existente?`,
-                                                    header: 'Corfirmación',
+                                                    header: 'Confirmación',
                                                     icon: 'fa fa-question-circle',
                                                     accept: () => {
                                                        this.router.navigate( [ '/employees/update/' + res.idTercero ] );

@@ -89,16 +89,22 @@ export class ReferencesAddComponent implements OnInit {
       }
    }
 
-   goBack(): void {
-      this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea Cancelar?`,
-                                           header: 'Corfirmación',
-                                           icon: 'fa fa-question-circle',
-                                           accept: () => {
-                                              this._nav.setTab( 8 );
-                                              this.location.back();
-                                           }
-                                        } );
+   goBack( fDirty : boolean ) {
+
+      if ( fDirty ) {
+         this.confirmationService.confirm( {
+                                              message: ` ¿Esta seguro que desea Cancelar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this._nav.setTab( 8 );
+                                                 this.location.back();
+                                              }
+                                           } );
+      } else {
+         this._nav.setTab( 8 );
+         this.location.back();
+      }
    }
 
    focusUP() {

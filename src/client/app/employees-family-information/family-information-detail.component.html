@@ -1,73 +1,67 @@
 <div *ngIf="familyInformation">
-    <div class="row">
-        <div class="col-md-12">
-            <h3 class="first">{{ 'EMPLOYEES.LBL_INFORMACIONFAMILIAR' | translate }}</h3>
-        </div>
-    </div>
-
 
 	<div class="row">
-
+      <div class="col-md-10 col-md-offset-1">
+        <p-panel header="{{ 'EMPLOYEES.LBL_INFORMACIONFAMILIAR' | translate }}">
             <form class="form-horizontal">
                 <fieldset>
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'LBL_TIPODOCUMENTO' | translate }}:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{familyInformation.tipoDocumento}}</strong></label>
+                        <label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'LBL_TIPODOCUMENTO' | translate }}:</label>
+                        <label class="col-md-4 col-sm-6 col-xs-12 "><strong>{{familyInformation.tipoDocumento}}</strong></label>
 
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'LBL_NUMERODOCUMENTO' | translate }}:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.numeroDocumento}}</strong></label>
+                        <label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'LBL_NUMERODOCUMENTO' | translate }}:</label>
+                        <label class="col-md-4 col-sm-6 col-xs-12"><strong>{{familyInformation.numeroDocumento}}</strong></label>
                       </div>
                       <div class="row">
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_PRIMER' | translate }}:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.primerNombre}}</strong></label>
+                        <label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_PRIMER' | translate }}:</label>
+                        <label class="col-md-4 col-sm-6 col-xs-12"><strong>{{familyInformation.primerNombre}}</strong></label>
 
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_SEGUNDO' | translate }}:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.segundoNombre}}</strong></label>
+                        <label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_SEGUNDO' | translate }}:</label>
+                        <label class="col-md-4 col-sm-6 col-xs-12"><strong>{{familyInformation.segundoNombre}}</strong></label>
                       </div>
                       <div class="row">
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_PRIMERAPELLIDO' | translate }}:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.primerApellido}}</strong></label>
+                        <label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_PRIMERAPELLIDO' | translate }}:</label>
+                        <label class="col-md-4 col-sm-6 col-xs-12"><strong>{{familyInformation.primerApellido}}</strong></label>
 
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_SEGUNDOAPELLIDO' | translate }}:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.segundoApellido}}</strong></label>
+                        <label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_SEGUNDOAPELLIDO' | translate }}:</label>
+                        <label class="col-md-4 col-sm-6 col-xs-12"><strong>{{familyInformation.segundoApellido}}</strong></label>
                       </div>
                       <div class="row">
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate }}:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.fechaNacimiento}}</strong></label>
+                        <label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate }}:</label>
+                        <label class="col-md-4 col-sm-6 col-xs-12"><strong>{{familyInformation.fechaNacimiento}}</strong></label>
 
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_PARENTESCO' | translate }}:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.parentesco}}</strong></label>
+                        <label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_PARENTESCO' | translate }}:</label>
+                        <label class="col-md-4 col-sm-6 col-xs-12"><strong>{{familyInformation.parentesco}}</strong></label>
                       </div>
                       <div class="row">
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'LBL_CORREOELECTRONICO' | translate }}:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.correoElectronico}}</strong></label>
+                        <label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'LBL_CORREOELECTRONICO' | translate }}:</label>
+                        <label class="col-md-4 col-sm-6 col-xs-12"><strong>{{familyInformation.correoElectronico}}</strong></label>
 
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'LBL_TELEFONO' | translate }}:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.telefonoFijo}}</strong></label>
+                        <label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'LBL_TELEFONO' | translate }}:</label>
+                        <label class="col-md-4 col-sm-6 col-xs-12"><strong>{{familyInformation.telefonoFijo}}</strong></label>
                       </div>
                       <div class="row">
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'LBL_CELULAR' | translate }}:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.telefonoCelular}}</strong></label>
+                        <label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'LBL_CELULAR' | translate }}:</label>
+                        <label class="col-md-4 col-sm-6 col-xs-12"><strong>{{familyInformation.telefonoCelular}}</strong></label>
 
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'LBL_DIRECCION' | translate }}:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.direccion}}</strong></label>
+                        <label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'LBL_DIRECCION' | translate }}:</label>
+                        <label class="col-md-4 col-sm-6 col-xs-12"><strong>{{familyInformation.direccion}}</strong></label>
                       </div>
                       <div class="row">
-                        <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_CONVIVE' | translate }}:</label>
-                        <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{familyInformation.idConvivencia === 1 ? 'Si' : 'No'}}</strong></label>
+                        <label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_CONVIVE' | translate }}:</label>
+                        <label class="col-md-4 col-sm-6 col-xs-12"><strong>{{familyInformation.idConvivencia === 1 ? 'Si' : 'No'}}</strong></label>
                       </div>
                     </div>
                 </fieldset>
+              <div class="row form-footer-buttons">
+                <div class="form-group col-md-12">
+                  <button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+                          pButton (click)="goBack()"></button>
+                </div>
+              </div>
             </form>
-
+        </p-panel>
         </div>
-
-</div>
-
-<div class="row form-footer-buttons">
-    <div class="form-group col-md-12">
-        <button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
-                pButton (click)="goBack()"></button>
     </div>
 </div>
