@@ -13,6 +13,7 @@ import { ConstanteService } from '../_services/constante.service';
 import { SelectionStepService } from '../_services/selection-step.service';
 import { StepListComponent } from './step-list.component';
 import { StepEditComponent } from './step-edit.component';
+import { StepDetailComponent } from './step-detail.component';
 
 @NgModule( {
               imports: [
@@ -25,6 +26,7 @@ import { StepEditComponent } from './step-edit.component';
                  VacancyDetailComponent,
                  StepListComponent,
                  StepEditComponent,
+                 StepDetailComponent,
                  SelectionProcessVacanciesComponent
               ],
               bootstrap: [ SelectionProcessComponent ],
