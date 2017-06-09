@@ -43,7 +43,7 @@
         <div class="col-md-4 col-xs-1" >
         </div>
         <div class="col-md-1 col-xs-1" >
-          <a (click)="goBack()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+            <a (click)="goBack((d.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
         </div>
         <div class="col-md-2 col-xs-1" >
           <button class="ui-button ui-button-success btn" icon="fa-plus" pButton icon="fa-plus" type="submit" label="{{ 'BTN_AGREGAR' | translate }}"></button>

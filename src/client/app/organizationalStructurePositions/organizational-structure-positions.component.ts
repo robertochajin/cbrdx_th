@@ -295,7 +295,8 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
       }
    }
 
-   cancelEditingPosition() {
+   cancelEditingPosition(fpDirty : boolean) {
+       if (fpDirty){
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que cancelar la edición?`,
                                            header: 'Confirmación',
@@ -307,10 +308,14 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
                                               this.editingPosition = false;
                                            }
                                         } );
-   }
 
-   cancelEditingPerson() {
+       }else {
+          this.editingPosition = false;
+       }
+       }
 
+   cancelEditingPerson(ppDirty : boolean) {
+      if (ppDirty){
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que cancelar la edición?`,
                                            header: 'Confirmación',
@@ -324,7 +329,11 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
                                               this.editingPerson = false;
                                            }
                                         } );
-   }
+      }else {
+         this.editingPerson = false;
+      }
+      }
+
 
    sumPositions() {
       this.countCost = 0;

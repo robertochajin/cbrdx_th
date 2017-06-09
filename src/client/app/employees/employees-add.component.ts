@@ -240,15 +240,21 @@ export class EmployeesAddComponent implements OnInit {
       }
    }
 
-   goBack(): void {
-      this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea salir sin guardar?`,
-                                           header: 'Confirmación',
-                                           icon: 'fa fa-question-circle',
-                                           accept: () => {
-                                              this.router.navigate( [ '/employees' ] );
-                                           }
-                                        } );
+   goBack( fDirty : boolean ): void {
+
+      if (fDirty) {
+         this.confirmationService.confirm({
+            message: ` ¿Esta seguro que desea salir sin guardar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this.router.navigate(['/employees']);
+            }
+         });
+
+      } else {
+         this.router.navigate(['/employees']);
+      }
    }
 
    searchExpeditionCity( event: any ) {
@@ -362,7 +368,7 @@ export class EmployeesAddComponent implements OnInit {
             if ( res !== undefined && res.idTercero > 0 ) {
                this.confirmationService.confirm( {
                                                     message: ` ¿La cedula que ha ingresado ya existe, desea ver el colaborador existente?`,
-                                                    header: 'Confirmación',
+                                                    header: 'Corfirmación',
                                                     icon: 'fa fa-question-circle',
                                                     accept: () => {
                                                        this.router.navigate( [ '/employees/update/' + res.idTercero ] );
