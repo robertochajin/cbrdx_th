@@ -164,7 +164,7 @@
 						<label for="descripcion">*{{ 'PROCESOSELECCION.LBL_DESCRIPCIONPASO' | translate }}:</label>
 						<textarea id="descripcion" name="descripcion" pInputTextarea
 						          [(ngModel)]="step.descripcion"
-						          #ngDescripcion="ngModel" maxlength="500" required></textarea>
+						          #ngDescripcion="ngModel" maxlength="200" required></textarea>
 						<div class="ui-message ui-messages-error ui-corner-all"
 						     *ngIf="f.submitted && !ngDescripcion.valid">
 							<i class="fa fa-close"></i>
