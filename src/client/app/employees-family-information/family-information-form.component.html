@@ -158,7 +158,7 @@
             <div class="ui-grid-row form-footer-buttons">
                 <div class="ui-grid-col-4"></div>
                 <div class="ui-grid-col-1" style="margin-top: 24px;">
-                    <a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+                    <a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
                 </div>
                 <div class="ui-grid-col-2" style="margin-top: 24px;">
                   <button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit" ></button>
