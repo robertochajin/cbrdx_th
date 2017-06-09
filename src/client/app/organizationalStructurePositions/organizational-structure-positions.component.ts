@@ -143,7 +143,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    editPosition( osPosition: OrganizationalStructurePositions ) {
       if ( osPosition !== null ) {
          this.backUpOSPosition = osPosition;
-         this.osPosition = osPosition;
+         this.osPosition = Object.assign( {}, osPosition );
          this.selectedPosition = new Positions();
          this.selectedPosition.idCargo = osPosition.idCargo;
          this.selectedPosition.cargo = osPosition.cargo;
