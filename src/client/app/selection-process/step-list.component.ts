@@ -102,6 +102,42 @@ export class StepListComponent implements OnInit {
       this.navService.setSearch( 'step-list.component', this.busqueda );
    }
 
+   sendBefore( step: SelectionStep ) {
+      let myIndex = this.steps.indexOf( step );
+      if ( myIndex < this.steps.length - 1 ) {
+         let newOrder = this.steps[ myIndex ].orden;
+         this.steps[ myIndex ].orden = this.steps[ myIndex + 1 ].orden;
+         this.selectionStepService.update( this.steps[ myIndex ] ).subscribe( res => {
+            if ( res.ok ) {
+               this.steps[ myIndex + 1 ].orden = newOrder;
+               this.selectionStepService.update( this.steps[ myIndex + 1 ] ).subscribe( res => {
+                  if ( res.ok ) {
+                     this.sortSteps();
+                  }
+               } );
+            }
+         } );
+      }
+   }
+
+   sendAfter( step: SelectionStep ) {
+      let myIndex = this.steps.indexOf( step );
+      if ( myIndex > 0 ) {
+         let newOrder = this.steps[ myIndex ].orden;
+         this.steps[ myIndex ].orden = this.steps[ myIndex - 1 ].orden;
+         this.selectionStepService.update( this.steps[ myIndex ] ).subscribe( res => {
+            if ( res.ok ) {
+               this.steps[ myIndex - 1 ].orden = newOrder;
+               this.selectionStepService.update( this.steps[ myIndex - 1 ] ).subscribe( res => {
+                  if ( res.ok ) {
+                     this.sortSteps();
+                  }
+               } );
+            }
+         } );
+      }
+   }
+
    private sortSteps() {
       this.steps.sort( function ( a, b ) {
          if ( a.orden < b.orden )
