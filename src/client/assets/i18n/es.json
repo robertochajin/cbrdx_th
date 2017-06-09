@@ -917,6 +917,7 @@
       "MSG_CODIGOREPETIDO":"Este código ya pertenece a otro paso, por favor utiliza otro.",
       "LBL_MANEJOINTERFAZ":"Manejo de interfaz",
       "LBL_DESCRIPCIONPASO":"Descripción",
+      "LBL_DESCRIPCIONLIMITE" : "no puede exeder los 200 carácteres",
       "LBL_URL":"URL",
       "":""
    },
