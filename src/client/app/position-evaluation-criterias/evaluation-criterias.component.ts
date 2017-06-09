@@ -165,7 +165,8 @@ export class EvaluationCriteriasComponent implements OnInit {
       this.checkRepeated();
    }
 
-   goBack(): void {
+   goBack(dDirty : boolean): void {
+      if ( dDirty ){
       this.confirmationService.confirm( {
                                            message: `¿Esta seguro que desea Cancelar?`,
                                            header: 'Corfirmación',
@@ -184,6 +185,9 @@ export class EvaluationCriteriasComponent implements OnInit {
                                               } );
                                            }
                                         } );
+      }else {
+         this.editing = false;
+      }
    }
 
    next() {

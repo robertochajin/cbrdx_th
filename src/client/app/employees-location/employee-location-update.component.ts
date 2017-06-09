@@ -278,17 +278,21 @@ export class LocationUpdateComponent implements OnInit {
       this.composeAddress();
    }
 
+   goBack(lDirty : boolean): void {
 
-   goBack(): void {
-      this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea Cancelar?`,
-                                           header: 'Corfirmación',
-                                           icon: 'fa fa-question-circle',
-                                           accept: () => {
-                                              this._nav.setTab( 4 );
-                                              this.location.back();
-                                           }
-                                        } );
+      if ( lDirty ){
+         this.confirmationService.confirm( {
+            message: ` ¿Esta seguro que desea salir sin guardar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this._nav.setTab( 0 );
+               this.location.back();
+            }
+         } );
+      }else {
+         this.location.back();
+      }
    }
 
    focusUP() {

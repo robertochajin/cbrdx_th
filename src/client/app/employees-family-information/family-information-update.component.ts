@@ -211,24 +211,22 @@ export class FamilyInformationUpdateComponent implements OnInit {
       }
    }
 
-   goBack( fDirty : boolean ): void {
+    goBack(fDirty : boolean): void {
 
-      if( fDirty ){
-         this.confirmationService.confirm( {
-                                              message: ` ¿Esta seguro que desea Cancelar?`,
-                                              header: 'Corfirmación',
-                                              icon: 'fa fa-question-circle',
-                                              accept: () => {
-                                                 this._nav.setTab( 3 );
-                                                 this.location.back();
-                                              }
-                                           } );
-      }else{
-         this._nav.setTab( 3 );
-         this.location.back();
-      }
-
-   }
+        if ( fDirty ){
+            this.confirmationService.confirm( {
+                message: ` ¿Esta seguro que desea salir sin guardar?`,
+                header: 'Corfirmación',
+                icon: 'fa fa-question-circle',
+                accept: () => {
+                    this._nav.setTab( 0 );
+                    this.location.back();
+                }
+            } );
+        }else {
+            this.location.back();
+        }
+    }
 
    onChangeMethod( event: any ) {
 

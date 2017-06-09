@@ -240,15 +240,21 @@ export class EmployeesAddComponent implements OnInit {
       }
    }
 
-   goBack(): void {
-      this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea salir sin guardar?`,
-                                           header: 'Corfirmación',
-                                           icon: 'fa fa-question-circle',
-                                           accept: () => {
-                                              this.router.navigate( [ '/employees' ] );
-                                           }
-                                        } );
+   goBack( fDirty : boolean ): void {
+
+      if (fDirty) {
+         this.confirmationService.confirm({
+            message: ` ¿Esta seguro que desea salir sin guardar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this.router.navigate(['/employees']);
+            }
+         });
+
+      } else {
+         this.router.navigate(['/employees']);
+      }
    }
 
    searchExpeditionCity( event: any ) {

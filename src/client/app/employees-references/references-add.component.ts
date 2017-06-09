@@ -91,18 +91,17 @@ export class ReferencesAddComponent implements OnInit {
 
    goBack(fDirty : boolean): void {
 
-      if( fDirty ){
+      if ( fDirty ){
          this.confirmationService.confirm( {
-                                              message: ` ¿Esta seguro que desea Cancelar?`,
-                                              header: 'Corfirmación',
-                                              icon: 'fa fa-question-circle',
-                                              accept: () => {
-                                                 this._nav.setTab( 8 );
-                                                 this.location.back();
-                                              }
-                                           } );
-      }else{
-         this._nav.setTab( 8 );
+            message: ` ¿Esta seguro que desea salir sin guardar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this._nav.setTab( 0 );
+               this.location.back();
+            }
+         } );
+      }else {
          this.location.back();
       }
 
