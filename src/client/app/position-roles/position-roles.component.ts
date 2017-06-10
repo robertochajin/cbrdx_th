@@ -98,7 +98,7 @@ export class PositionRolesComponent implements OnInit {
    del( r: PositionRoles ) {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea eliminar?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               r.indicadorHabilitado = false;

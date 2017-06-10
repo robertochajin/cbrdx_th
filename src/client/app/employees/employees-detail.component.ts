@@ -67,6 +67,14 @@ export class EmployeesDetailComponent implements OnInit {
    onTabShow( e: any ) {
       this._nav.setTab( e.index );
       this.acordion = this._nav.getTab();
+
+      // Focus  en accordionTab Activo
+      setTimeout( () => {
+         jQuery( 'body' ).animate({
+            scrollTop : jQuery( 'p-accordiontab > .ui-state-active' ).position().top + 90
+         }, 'fast');
+      }, 1000 );
+
    }
 
    update( id: number ) {
