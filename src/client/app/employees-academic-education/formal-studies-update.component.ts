@@ -220,11 +220,12 @@ export class FormalStudiesUpdateComponent implements OnInit {
             header: 'Corfirmación',
             icon: 'fa fa-question-circle',
             accept: () => {
-               this._nav.setTab( 0 );
+               this._nav.setTab( 6 );
                this.location.back();
             }
          } );
       }else {
+         this._nav.setTab( 6 );
          this.location.back();
       }
    }
