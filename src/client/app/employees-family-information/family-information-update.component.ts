@@ -162,8 +162,6 @@ export class FamilyInformationUpdateComponent implements OnInit {
       this.msgs = [];
       if ( this.familyInformation.direccion !== '' ) {
          this.submitted = true;
-         this.msgs.push( { severity: 'info', summary: 'Success', detail: 'Guardando' } );
-
          this.locateService.update( this.localizacion ).subscribe(
             data => {
 

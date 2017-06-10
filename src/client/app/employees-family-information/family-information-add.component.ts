@@ -109,8 +109,6 @@ export class FamilyInformationAddComponent implements OnInit {
       this.msgs = [];
       if ( this.familyInformation.direccion !== '' ) {
          this.submitted = true;
-         this.msgs.push( { severity: 'info', summary: 'Success', detail: 'Guardando' } );
-
          this.locateService.add( this.localizacion ).subscribe(
             data => {
                if ( data.idLocalizacion ) {
