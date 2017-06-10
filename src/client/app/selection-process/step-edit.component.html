@@ -81,7 +81,7 @@
 					</div>
 					<div *ngIf="step.indicadorInterfazInterna" class="form-group col-md-6">
 						<label for="urli">{{ 'PROCESOSELECCION.LBL_URL' | translate }}:</label>
-						<input id="urli" type="text" pInputText name="urli"
+						<input id="urli" type="text" pInputText name="urli"  maxlength="100"
 						       [(ngModel)]="step.interfazInterna" #ngUrli="ngModel" required />
 						<div class="ui-message ui-messages-error ui-corner-all"
 						     *ngIf="f.submitted && !ngUrli.valid">
@@ -150,7 +150,7 @@
 					<div *ngIf="step.indicadorInterfaz" class="form-group col-md-6">
 						<label for="interfaz">{{ 'PROCESOSELECCION.LBL_URL' | translate }}:</label>
 						<input id="interfaz" type="text" pInputText name="interfaz"
-						       [(ngModel)]="step.interfaz"
+						       [(ngModel)]="step.interfaz" maxlength="100"
 						       #ngInterfaz="ngModel" required />
 						<div class="ui-message ui-messages-error ui-corner-all"
 						     *ngIf="f.submitted && !ngInterfaz.valid">
