@@ -152,6 +152,7 @@ import { SelectionProcessVacanciesComponent } from './selection-process/selectio
 import { VacancyDetailComponent } from './selection-process/vacancy-detail.component';
 import { StepListComponent } from './selection-process/step-list.component';
 import { StepEditComponent } from './selection-process/step-edit.component';
+import { StepDetailComponent } from './selection-process/step-detail.component';
 
 
 const routes = [
@@ -363,9 +364,10 @@ const routes = [
    { path: 'selection-process/add-publication/:idReq', component: SelectionProcessAddComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/active-publications', component: SelectionProcessVacanciesComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/publications-detail/:idPublication', component: VacancyDetailComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/step-list', component: StepListComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/add-step', component: StepEditComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/update-step/:idStep', component: StepEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'step-list', component: StepListComponent, canActivate: [ AuthGuard ] },
+   { path: 'add-step', component: StepEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'update-step/:idStep', component: StepEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
 ];
 
 @NgModule( {

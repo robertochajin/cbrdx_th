@@ -1,11 +1,11 @@
 <div class="row">
 	<div class="col-md-7">
 		<p-panel header="Gestión de Vacante">
-			
-			<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
-				
+
+					<span class="ribbon">{{ vacancy.tipoSolicitud }}</span>
+
+				<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
 				<div style="margin-bottom: 20px;">
-					<span class="pull-right">{{ vacancy.tipoSolicitud }}</span>
 					<h2>{{ vacancy.cargo }}</h2>
 					<h3>{{ vacancy.area }} / {{vacancy.estructuraFisica}}</h3>
 					<h4>{{vacancy.fechaSolicitud}}</h4>

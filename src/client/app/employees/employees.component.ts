@@ -44,7 +44,7 @@ export class EmployeesComponent implements OnInit {
       this.dialogObjet = employee;
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que lo desea eliminar?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.employeesService.delete( this.dialogObjet );
