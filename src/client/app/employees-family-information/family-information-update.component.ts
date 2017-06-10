@@ -322,4 +322,9 @@ export class FamilyInformationUpdateComponent implements OnInit {
    childInputCleanUp1( value: string ) {
       this.familyInformation.telefonoCelular = value.toUpperCase().replace( /[^0-9]/g, '' ).replace( ' ', '' ).trim();
    }
+   inputCorreo() {
+      if ( this.familyInformation.correoElectronico!==null && this.familyInformation.correoElectronico!== undefined) {
+         this.familyInformation.correoElectronico= this.familyInformation.correoElectronico.toLowerCase();
+      }
+   }
 }
