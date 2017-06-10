@@ -146,6 +146,7 @@ export class StepEditComponent implements OnInit {
    inputCleanUp( value: string ) {
       if ( value ) {
          this.step.codigo = value.toUpperCase().replace( /[^A-Z0-9]/gi, '' ).trim();
+         this.repeatedCode = false;
       }
    }
 
