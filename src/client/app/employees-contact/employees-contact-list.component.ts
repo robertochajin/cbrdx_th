@@ -152,9 +152,22 @@ export class EmployeesContactListComponent implements OnInit {
 
    }
 
-   goBackUpdate() {
-      this.msgs = [];
-      this.showForm = false;
+   goBackUpdate(fDirty:boolean) {
+
+      if ( fDirty ){
+         this.confirmationService.confirm( {
+            message: ` ¿Esta seguro que desea salir sin guardar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this.msgs = [];
+               this.showForm = false;
+            }
+         } );
+      }else {
+         this.msgs = [];
+         this.showForm = false;
+      }
    }
 
    capitalize() {
