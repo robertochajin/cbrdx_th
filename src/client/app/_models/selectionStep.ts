@@ -21,6 +21,7 @@ export class SelectionStep {
    public indicadorContratado: boolean;
    public indicadorCuestionarios: boolean;
    public idCuestionario: number;
+   public cuestionario: string;
    public indicadorHabilitado: boolean;
    public indicadorInterfaz: boolean;
    public interfaz: string;

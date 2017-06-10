@@ -126,16 +126,22 @@ export class EmployeesVehicleUpdateComponent implements OnInit {
       }
    }
 
-   goBack(): void {
-      this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea salir sin guardar?`,
-                                           header: 'Confirmación',
-                                           icon: 'fa fa-question-circle',
-                                           accept: () => {
-                                              this._nav.setTab( 5 );
-                                              this.location.back();
-                                           }
-                                        } );
+   goBack(fDirty : boolean): void {
+
+      if ( fDirty ){
+         this.confirmationService.confirm( {
+            message: ` ¿Esta seguro que desea salir sin guardar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this._nav.setTab( 5 );
+               this.location.back();
+            }
+         } );
+      }else {
+         this._nav.setTab( 5 );
+         this.location.back();
+      }
    }
 
    searchCity( event: any ) {

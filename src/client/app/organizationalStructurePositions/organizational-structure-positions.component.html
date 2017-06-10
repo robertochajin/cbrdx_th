@@ -116,7 +116,7 @@
 										</div>
 										<div class="row form-footer-buttons">
 											<div class="form-group col-md-12">
-												<a (click)="cancelEditingPosition()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+												<a (click)="cancelEditingPosition((fp.dirty === true))" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
 												<button pButton type="submit" label="{{ 'BTN_GUARDAR' | translate }}"></button>
 											</div>
 										</div>
@@ -274,7 +274,7 @@
 										</div>
 										<div class="row form-footer-buttons">
 											<div class="form-group col-md-12">
-												<a (click)="cancelEditingPerson()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+												<a (click)="cancelEditingPerson((pp.dirty === true))" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
 												<button pButton type="submit" label="{{ 'BTN_GUARDAR' | translate }}"></button>
 											</div>
 										</div>

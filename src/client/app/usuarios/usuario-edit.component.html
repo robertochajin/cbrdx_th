@@ -119,7 +119,7 @@
                 </div>
 					<div class="row form-footer-buttons">
 					   <div class="form-group col-md-12">
-					      <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+					      <a (click)="(fu.dirty === true) ? displayDialog=true : goBack()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
 					      <button pButton type="submit" label="{{ 'BTN_ACTUALIZAR' | translate }}"></button>
 					   </div>
 					</div>

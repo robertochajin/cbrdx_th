@@ -1,0 +1,81 @@
+<div *ngIf="step">
+	<div class="col-md-10 col-md-offset-1">
+		<div class="row">
+			<p-panel header="{{ 'PROCESOSELECCION.LBL_DETALLEPASO' | translate }}">
+				<form class="form-horizontal">
+					<fieldset>
+						<div class="form-group">
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_CODIGOPASO' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{step.codigo}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_NOMBREPASO' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{step.nombre}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_DESCRIPCIONPASO' | translate }}:</label>
+								<label class="col-md-9 col-sm-6 col-xs-12"><strong>{{step.descripcion}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_ROLPASO' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{step.rol}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_TIPOCONVOCATORIA' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{step.tipoConvocatoria}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_INTERFAZINTERNA' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12">{{step.indicadorInterfazInterna ? 'Si' : 'No'}}</label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_URL' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{step.interfazInterna}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_BLOQUEANTE' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12">{{step.indicadorBloqueante ? 'Si' : 'No'}}</label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_CAMPOOBSERVACION' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12">{{step.indicadorObservacion ? 'Si' : 'No'}}</label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_MANEJOADJUNTO' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12">{{step.indicadorAdjunto ? 'Si' : 'No'}}</label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_ENVIOCORREO' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12">{{step.indicadorCorreo ? 'Si' : 'No'}}</label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_REQCALENDARIO' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12">{{step.indicadorCalendario ? 'Si' : 'No'}}</label>
+								
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_MANEJOINTERFAZ' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12">{{step.indicadorInterfaz ? 'Si' : 'No'}}</label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_URL' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{step.interfaz}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_MANEJOCUESTIONARIOS' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12">{{step.indicadorCuestionarios ? 'Si' : 'No'}}</label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_CUESTIONARIO' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{step.cuestionario}}</strong></label>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+				
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+						        pButton (click)="goBack()"></button>
+					</div>
+				</div>
+			</p-panel>
+		</div>
+	</div>
+
+</div>
+

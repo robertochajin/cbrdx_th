@@ -46,7 +46,7 @@
         </div>
         <div class="row form-footer-buttons">
             <div class="col-md-10">
-                <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+                <a (click)="(f.dirty === true) ? displayDialog=true : goBack()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
                 <button type="submit" pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate }}" #submit
                         (keydown.enter)="submit.click()"></button>
             </div>
