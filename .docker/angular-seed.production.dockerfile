@@ -13,7 +13,7 @@ ENV APP_NAME=angular-seed
 COPY . $HOME/$APP_NAME/
 RUN chown -R app:app $HOME/*
 
-USER app
+USER root
 WORKDIR $HOME/$APP_NAME
 
 RUN npm install
