@@ -143,7 +143,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    editPosition( osPosition: OrganizationalStructurePositions ) {
       if ( osPosition !== null ) {
          this.backUpOSPosition = osPosition;
-         this.osPosition = osPosition;
+         this.osPosition = Object.assign( {}, osPosition );
          this.selectedPosition = new Positions();
          this.selectedPosition.idCargo = osPosition.idCargo;
          this.selectedPosition.cargo = osPosition.cargo;
@@ -158,7 +158,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    delete( osPosition: OrganizationalStructurePositions ) {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea eliminar?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               osPosition.indicadorHabilitado = false;
@@ -173,7 +173,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    removePerson( personPosition: PersonPositions ) {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea retirar este trabajador del cargo?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               personPosition.indicadorHabilitado = false;
@@ -295,10 +295,11 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
       }
    }
 
-   cancelEditingPosition() {
+   cancelEditingPosition(fpDirty : boolean) {
+       if (fpDirty){
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que cancelar la edición?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               if ( this.backUpOSPosition !== null ) {
@@ -307,13 +308,17 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
                                               this.editingPosition = false;
                                            }
                                         } );
-   }
 
-   cancelEditingPerson() {
+       }else {
+          this.editingPosition = false;
+       }
+       }
 
+   cancelEditingPerson(ppDirty : boolean) {
+      if (ppDirty){
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que cancelar la edición?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               if ( this.backUpPersonsPosition !== null ) {
@@ -324,7 +329,11 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
                                               this.editingPerson = false;
                                            }
                                         } );
-   }
+      }else {
+         this.editingPerson = false;
+      }
+      }
+
 
    sumPositions() {
       this.countCost = 0;
@@ -426,7 +435,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que confirmar esta planta? Después de confirmar no 
                                            podrá hacer modificaciones sobre los cargos`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.area.indicadorPlantaConfirmada = true;

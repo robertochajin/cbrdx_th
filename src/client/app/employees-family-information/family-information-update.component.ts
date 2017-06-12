@@ -162,8 +162,6 @@ export class FamilyInformationUpdateComponent implements OnInit {
       this.msgs = [];
       if ( this.familyInformation.direccion !== '' ) {
          this.submitted = true;
-         this.msgs.push( { severity: 'info', summary: 'Success', detail: 'Guardando' } );
-
          this.locateService.update( this.localizacion ).subscribe(
             data => {
 
@@ -211,17 +209,23 @@ export class FamilyInformationUpdateComponent implements OnInit {
       }
    }
 
-   goBack(): void {
-      this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea Cancelar?`,
-                                           header: 'Corfirmación',
-                                           icon: 'fa fa-question-circle',
-                                           accept: () => {
-                                              this._nav.setTab( 3 );
-                                              this.location.back();
-                                           }
-                                        } );
-   }
+    goBack(fDirty : boolean): void {
+
+        if ( fDirty ){
+            this.confirmationService.confirm( {
+                message: ` ¿Esta seguro que desea salir sin guardar?`,
+                header: 'Corfirmación',
+                icon: 'fa fa-question-circle',
+                accept: () => {
+                    this._nav.setTab( 3 );
+                    this.location.back();
+                }
+            } );
+        }else {
+            this._nav.setTab( 3 );
+            this.location.back();
+        }
+    }
 
    onChangeMethod( event: any ) {
 
@@ -315,5 +319,10 @@ export class FamilyInformationUpdateComponent implements OnInit {
 
    childInputCleanUp1( value: string ) {
       this.familyInformation.telefonoCelular = value.toUpperCase().replace( /[^0-9]/g, '' ).replace( ' ', '' ).trim();
+   }
+   inputCorreo() {
+      if ( this.familyInformation.correoElectronico!==null && this.familyInformation.correoElectronico!== undefined) {
+         this.familyInformation.correoElectronico= this.familyInformation.correoElectronico.toLowerCase();
+      }
    }
 }

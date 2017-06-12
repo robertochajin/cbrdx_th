@@ -240,15 +240,21 @@ export class EmployeesAddComponent implements OnInit {
       }
    }
 
-   goBack(): void {
-      this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea salir sin guardar?`,
-                                           header: 'Corfirmación',
-                                           icon: 'fa fa-question-circle',
-                                           accept: () => {
-                                              this.router.navigate( [ '/employees' ] );
-                                           }
-                                        } );
+   goBack( fDirty: boolean ): void {
+
+      if ( fDirty ) {
+         this.confirmationService.confirm( {
+                                              message: ` ¿Esta seguro que desea salir sin guardar?`,
+                                              header: 'Corfirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this.router.navigate( [ '/employees' ] );
+                                              }
+                                           } );
+
+      } else {
+         this.router.navigate( [ '/employees' ] );
+      }
    }
 
    searchExpeditionCity( event: any ) {
@@ -298,7 +304,13 @@ export class EmployeesAddComponent implements OnInit {
       this.maxDate.setMonth( month );
 
       if ( tipo === 1 ) {
-         this.maxDate.setFullYear( prev18Year );
+         if ( this.employee.fechaDocumento !== null ) {
+            let fecha = this.employee.fechaDocumento;
+            let anio= fecha.getFullYear()-18;
+            this.maxDate.setFullYear( anio );
+         }else{
+            this.maxDate.setFullYear( prev18Year );
+         }
       } else if ( tipo === 2 ) {
          this.maxDate.setFullYear( year );
       } else {
@@ -330,6 +342,7 @@ export class EmployeesAddComponent implements OnInit {
    }
 
    onExpeditionDate( event: any ) {
+      this.employee.fechaNacimiento = null;
       this.updateDate();
    }
 

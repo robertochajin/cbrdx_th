@@ -174,16 +174,22 @@ export class NoFormalStudiesAddComponent implements OnInit {
       }
    }
 
-   goBack(): void {
-      this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea Cancelar?`,
-                                           header: 'Corfirmación',
-                                           icon: 'fa fa-question-circle',
-                                           accept: () => {
-                                              this._nav.setTab( 6 );
-                                              this.location.back();
-                                           }
-                                        } );
+   goBack(fDirty : boolean): void {
+
+      if ( fDirty ){
+         this.confirmationService.confirm( {
+            message: ` ¿Esta seguro que desea salir sin guardar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this._nav.setTab( 6 );
+               this.location.back();
+            }
+         } );
+      }else {
+         this._nav.setTab( 6 );
+         this.location.back();
+      }
    }
 
    changeTipoestudio( event: any ) {

@@ -239,17 +239,23 @@ export class EmployeesUpdateComponent implements OnInit {
       }
    }
 
-   goBack(): void {
-      this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea salir sin guardar?`,
-                                           header: 'Corfirmación',
-                                           icon: 'fa fa-question-circle',
-                                           accept: () => {
-                                              this._nav.setTab( 0 );
-                                              this.location.back();
-                                           }
-                                        } );
-   }
+   goBack(fDirty : boolean): void {
+
+      if ( fDirty ){
+         this.confirmationService.confirm( {
+            message: ` ¿Esta seguro que desea salir sin guardar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this._nav.setTab( 0 );
+               this.location.back();
+            }
+         } );
+      }else {
+         this.location.back();
+      }
+      }
+
 
    searchExpeditionCity( event: any ) {
       this.politicalDivisionService.getAllCities( event.query ).subscribe(
@@ -298,7 +304,13 @@ export class EmployeesUpdateComponent implements OnInit {
       this.maxDate.setMonth( month );
 
       if ( tipo === 1 ) {
-         this.maxDate.setFullYear( prev18Year );
+         if ( this.employee.fechaDocumento !== null ) {
+            let fecha = this.employee.fechaDocumento;
+            let anio= fecha.getFullYear()-18;
+            this.maxDate.setFullYear( anio );
+         }else{
+            this.maxDate.setFullYear( prev18Year );
+         }
       } else if ( tipo === 2 ) {
          this.maxDate.setFullYear( year );
       } else {
@@ -332,6 +344,7 @@ export class EmployeesUpdateComponent implements OnInit {
    onExpeditionDate( event: any ) {
       let d = new Date( Date.parse( event ) );
       this.expeditionDate = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      this.employee.fechaNacimiento=null;
       this.updateDate();
    }
 

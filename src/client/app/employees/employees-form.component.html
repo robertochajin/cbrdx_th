@@ -327,7 +327,7 @@
                   <div class="form-group col-md-3" *ngIf="employee.indicadorVivo == false">
                      <label for="NGdeathDate">{{'EMPLOYEES.LBL_FECHADEFUNCION' | translate}}</label>
                      <p-calendar id="NGdeathDate" name="NGdeathDate" [locale]="es" [showIcon]="true"
-                                 [maxDate]="today" dateFormat="yy'-'mm'-'dd"
+                                 [maxDate]="today" dateFormat="yy'-'mm'-'dd" readonlyInput="readonlyInput"
                                  dataType="date" #NGdeathDate="ngModel" [required]="!employee.indicadorVivo"
                                  [(ngModel)]="employee.fechaDefuncion" (onSelect)="onDeathDate($event)"
                      ></p-calendar>
@@ -349,7 +349,7 @@
             </div>
             <div class="row form-footer-buttons">
                <div class="form-group col-md-12">
-                  <a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+                  <a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
                   <button icon="fa-plus" label="Guardar" type="submit"
                           pButton></button>
 

@@ -1,12 +1,8 @@
 <div *ngIf="study">
-    <div class="row">
-        <div class="col-md-12">
-            <h3 class="first">{{'EMPLOYEES.LBL_EDUCACIONNF' | translate}}</h3>
-        </div>
-    </div>
-
+ <div class="col-md-10 col-md-offset-1">
     <div class="row">
       <form class="form-horizontal">
+			<p-panel header="{{'EMPLOYEES.LBL_EDUCACIONNOFORMAL' | translate}}">
         <fieldset>
           <div class="form-group">
 
@@ -45,14 +41,16 @@
             </div>
           </div>
         </fieldset>
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate}}" type="button"
+								  pButton (click)="goBack()"></button>
+					</div>
+				</div>
+			</p-panel>
       </form>
-
     </div>
+ </div>
 </div>
 
-<div class="row form-footer-buttons">
-  <div class="form-group col-md-12">
-    <button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate}}" type="button"
-            pButton (click)="goBack()"></button>
-  </div>
-</div>
+

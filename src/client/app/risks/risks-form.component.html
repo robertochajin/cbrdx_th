@@ -87,7 +87,7 @@
       </div>
 			<div class="row form-footer-buttons">
 				<div class="form-group col-md-12">
-					<a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+                    <a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
 					<button pButton icon="fa-plus" label="{{'BTN_AGREGAR' | translate }}" type="submit"></button>
 				</div>
 			</div>
