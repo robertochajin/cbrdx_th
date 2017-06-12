@@ -153,6 +153,7 @@ import { VacancyDetailComponent } from './selection-process/vacancy-detail.compo
 import { StepListComponent } from './selection-process/step-list.component';
 import { StepEditComponent } from './selection-process/step-edit.component';
 import { StepDetailComponent } from './selection-process/step-detail.component';
+import { StepProcessComponent } from './selection-process/step-process.component';
 
 
 const routes = [
@@ -368,6 +369,7 @@ const routes = [
    { path: 'add-step', component: StepEditComponent, canActivate: [ AuthGuard ] },
    { path: 'update-step/:idStep', component: StepEditComponent, canActivate: [ AuthGuard ] },
    { path: 'detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
+   { path: 'process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
 ];
 
 @NgModule( {
