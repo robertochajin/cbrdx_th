@@ -14,6 +14,7 @@ import * as moment from 'moment/moment';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
 import { NavService } from '../_services/_nav.service';
+import { ConstanteService } from '../_services/constante.service';
 
 @Component( {
                moduleId: module.id,
@@ -57,11 +58,14 @@ export class EmployeesAddComponent implements OnInit {
    birthDate: string;
    deathDate: string;
    idTipoTercero: number;
+   documentoNoSelec: string[];
+   idDocumentoNoSelec: number[] = [];
 
    constructor( private employeesService: EmployeesService,
       private router: Router,
       private location: Location,
       private listaService: ListaService,
+      private constanteService: ConstanteService,
       private listEmployeesService: ListEmployeesService,
       private politicalDivisionService: PoliticalDivisionService,
       private actividadEconomicaService: ActividadEconomicaService,
@@ -76,13 +80,13 @@ export class EmployeesAddComponent implements OnInit {
          this.employee.idTipoPersona = null;
       } );
 
-      this.listaService.getMasterDetails( 'ListasTiposDocumentos' ).subscribe( res => {
-         this.documentTypes.push( { label: 'Seleccione', value: null } );
-         res.map( ( s: ListaItem ) => {
-            this.documentTypes.push( { label: s.nombre, value: s.idLista } );
-         } );
-         this.employee.idTipoDocumento = null;
-      } );
+      // this.listaService.getMasterDetails( 'ListasTiposDocumentos' ).subscribe( res => {
+      //    this.documentTypes.push( { label: 'Seleccione', value: null } );
+      //    res.map( ( s: ListaItem ) => {
+      //       this.documentTypes.push( { label: s.nombre, value: s.idLista } );
+      //    } );
+      //    this.employee.idTipoDocumento = null;
+      // } );
 
       this.listaService.getMasterDetails( 'ListasEstadosJuridicos' ).subscribe( res => {
          this.juridicos.push( { label: 'Seleccione', value: null } );
@@ -201,6 +205,31 @@ export class EmployeesAddComponent implements OnInit {
       this.employee.idTipoOcupacion = 1;
       this.range = `${lasYear}:${year}`;
       this.focusUP();
+      this.constanteService.listConstants().subscribe( rest => {
+         if ( rest.find( c => c.constante === 'DOCNSE' ) ) {
+            this.documentoNoSelec = rest.find( c => c.constante === 'DOCNSE' ).valor.split( ',' );
+         }
+         this.listaService.getMasterDetails( 'ListasTiposDocumentos' ).subscribe( res => {
+            this.documentTypes.push( { label: 'Seleccione', value: null } );
+            let temp: any;
+            for ( let c of this.documentoNoSelec ) {
+               temp = res.find( x => x.codigo === c );
+               if ( temp ) {
+                  this.idDocumentoNoSelec.push( temp.idLista );
+               }
+            }
+            for ( let x of res ) {
+               if ( this.idDocumentoNoSelec.length > 0 ) {
+                  if ( this.idDocumentoNoSelec.find( s => s !== x.idLista ) ) {
+                     this.documentTypes.push( { label: x.nombre, value: x.idLista } );
+                  }
+               } else {
+                  this.documentTypes.push( { label: x.nombre, value: x.idLista } );
+               }
+            }
+            this.employee.idTipoDocumento = null;
+         } );
+      } );
    }
 
    onSubmit() {
