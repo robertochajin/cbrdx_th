@@ -108,13 +108,29 @@ export class RolWidgetsComponent implements OnInit {
 
    }
 
-   goBackUpdate() {
-      this.msgs = [];
-      this.showForm = false;
-      if ( this.isUpdating === true ) {
-         this.isUpdating = false;
-         this.widgets.splice( 0, 1 );
-      }
+   goBackUpdate(rwDirty : boolean) {
+      if (rwDirty) {
+         this.confirmationService.confirm({
+            message: ` ¿Esta seguro que desea salir sin guardar?`,
+            header: 'Confirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this.msgs = [];
+               this.showForm = false;
+               if ( this.isUpdating === true ) {
+                  this.isUpdating = false;
+                  this.widgets.splice( 0, 1 );
+               }
+            }
+         });
+      } else {
+         this.msgs = [];
+         this.showForm = false;
+         if ( this.isUpdating === true ) {
+            this.isUpdating = false;
+            this.widgets.splice( 0, 1 );
+         }      }
+
    }
 
 }

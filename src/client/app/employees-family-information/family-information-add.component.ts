@@ -109,8 +109,6 @@ export class FamilyInformationAddComponent implements OnInit {
       this.msgs = [];
       if ( this.familyInformation.direccion !== '' ) {
          this.submitted = true;
-         this.msgs.push( { severity: 'info', summary: 'Success', detail: 'Guardando' } );
-
          this.locateService.add( this.localizacion ).subscribe(
             data => {
                if ( data.idLocalizacion ) {
@@ -160,25 +158,24 @@ export class FamilyInformationAddComponent implements OnInit {
       }
    }
 
-   goBack(fDirty : boolean): void {
+   goBack( fDirty: boolean ): void {
 
-      if ( fDirty ){
+      if ( fDirty ) {
          this.confirmationService.confirm( {
-            message: ` ¿Esta seguro que desea salir sin guardar?`,
-            header: 'Corfirmación',
-            icon: 'fa fa-question-circle',
-            accept: () => {
-               this._nav.setTab( 3 );
-               this.location.back();
-            }
-         } );
-      }else {
+                                              message: ` ¿Esta seguro que desea salir sin guardar?`,
+                                              header: 'Corfirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this._nav.setTab( 3 );
+                                                 this.location.back();
+                                              }
+                                           } );
+      } else {
          this._nav.setTab( 3 );
          this.location.back();
       }
 
    }
-
 
    onChangeMethod( event: any ) {
 
@@ -257,8 +254,24 @@ export class FamilyInformationAddComponent implements OnInit {
            this.selectedDocument !== null ) {
          this.employeesService.validateDocument( this.familyInformation.numeroDocumento, this.selectedDocument ).subscribe( res => {
             if ( res !== undefined && res.idTercero > 0 ) {
-               this.repeatedDocument = true;
-               this.familyInformation.numeroDocumento = '';
+               this.confirmationService.confirm( {
+                                                    message: `El tercero ya existe, desea relacionarlo como familiar?`,
+                                                    header: 'Confirmación',
+                                                    icon: 'fa fa-question-circle',
+                                                    accept: () => {
+                                                       this.familyInformation.primerNombre = res.primerNombre;
+                                                       this.familyInformation.primerApellido = res.primerApellido;
+                                                       this.familyInformation.segundoNombre = res.segundoNombre;
+                                                       this.familyInformation.segundoApellido = res.segundoApellido;
+                                                       this.familyInformation.fechaNacimiento = res.fechaNacimiento;
+                                                       this.familyInformation.correoElectronico = res.correoElectronico;
+                                                       this.familyInformation.telefonoFijo = res.telefonoFijo;
+                                                       this.familyInformation.telefonoCelular = res.telefonoCelular;
+                                                    },
+                                                    reject: () => {
+                                                       this.familyInformation.numeroDocumento = '';
+                                                    }
+                                                 } );
             }
          } );
       }
@@ -271,5 +284,11 @@ export class FamilyInformationAddComponent implements OnInit {
    childInputCleanUp1( value: string ) {
 
       this.familyInformation.telefonoCelular = value.toUpperCase().replace( /[^0-9]/g, '' ).replace( ' ', '' ).trim();
+   }
+
+   inputCorreo() {
+      if ( this.familyInformation.correoElectronico!==null && this.familyInformation.correoElectronico!== undefined) {
+         this.familyInformation.correoElectronico= this.familyInformation.correoElectronico.toLowerCase();
+      }
    }
 }

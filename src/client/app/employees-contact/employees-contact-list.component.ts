@@ -143,6 +143,11 @@ export class EmployeesContactListComponent implements OnInit {
       this.msgs = [];
       this.contact = new EmployeesContact();
       this.showForm = true;
+      setTimeout( () => {
+         jQuery( 'body' ).animate( {
+                                      scrollTop: jQuery( 'p-accordiontab > .ui-state-active' ).position().top + 90
+                                   }, 'fast' );
+      }, 1000 );
    }
 
    update( f: EmployeesContact ) {
@@ -152,9 +157,22 @@ export class EmployeesContactListComponent implements OnInit {
 
    }
 
-   goBackUpdate() {
-      this.msgs = [];
-      this.showForm = false;
+   goBackUpdate(fDirty:boolean) {
+
+      if ( fDirty ){
+         this.confirmationService.confirm( {
+            message: ` ¿Esta seguro que desea salir sin guardar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this.msgs = [];
+               this.showForm = false;
+            }
+         } );
+      }else {
+         this.msgs = [];
+         this.showForm = false;
+      }
    }
 
    capitalize() {

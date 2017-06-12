@@ -54,7 +54,7 @@
         </div>
         <div class="row form-footer-buttons">
           <div class="form-group col-md-12">
-            <a (click)="goBackUpdate()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+            <a (click)="goBackUpdate((fe.dirty === true))" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
             <button icon="fa-plus" label="Guardar" type="submit"
                     pButton></button>
           </div>
@@ -91,4 +91,9 @@
         </p-column>
     </p-dataTable>
 </div>
-<p-confirmDialog width="400"></p-confirmDialog>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
