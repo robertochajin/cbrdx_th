@@ -68,7 +68,7 @@
 										      <label for="razonSocial" class="control-label col-sm-3">* {{ 'ESTRUCTURAORGANIZACIONAL.LBL_RAZONSOCIAL' | translate}} </label>
 										      <div class=" col-sm-9">
 											      <input type="text" pInputText class="form-control" id="razonSocial" name="razonSocial"
-											             [(ngModel)]="organizationalStructure.nombre"
+											             [(ngModel)]="organizationalStructure.nombre" maxlength="50"
 											             #razonSocial="ngModel" (keyup)="capitalizeName()"
 											             required/>
 											      <div class="ui-message ui-messages-error ui-corner-all"

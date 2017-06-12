@@ -306,8 +306,24 @@ export class FamilyInformationUpdateComponent implements OnInit {
            this.selectedDocument !== null ) {
          this.employeesService.validateDocument( this.familyInformation.numeroDocumento, this.selectedDocument ).subscribe( res => {
             if ( res.idTercero > 0 ) {
-               this.repeatedDocument = true;
-               this.familyInformation.numeroDocumento = '';
+               this.confirmationService.confirm( {
+                                                    message: `El tercero ya existe, desea relacionarlo como familiar?`,
+                                                    header: 'Confirmación',
+                                                    icon: 'fa fa-question-circle',
+                                                    accept: () => {
+                                                       this.familyInformation.primerNombre = res.primerNombre;
+                                                       this.familyInformation.primerApellido = res.primerApellido;
+                                                       this.familyInformation.segundoNombre = res.segundoNombre;
+                                                       this.familyInformation.segundoApellido = res.segundoApellido;
+                                                       this.familyInformation.fechaNacimiento = res.fechaNacimiento;
+                                                       this.familyInformation.correoElectronico = res.correoElectronico;
+                                                       this.familyInformation.telefonoFijo = res.telefonoFijo;
+                                                       this.familyInformation.telefonoCelular = res.telefonoCelular;
+                                                    },
+                                                    reject: () => {
+                                                       this.familyInformation.numeroDocumento = '';
+                                                    }
+                                                 } );
             }
          } );
       }
