@@ -58,7 +58,7 @@ export class EmployeesComponent implements OnInit {
    }
 
    detail( f: Employee ) {
-      this.router.navigate( [ 'employees/detail/' + f.idTercero ] );
+      this.router.navigate( [ 'employees/view/detail/' + f.idTercero ] );
    }
 
    add() {
@@ -66,7 +66,7 @@ export class EmployeesComponent implements OnInit {
    }
 
    update( c: Employee ) {
-      this.router.navigate( [ 'employees/update/' + c.idTercero ] );
+      this.router.navigate( [ 'employees/detail/' + c.idTercero ] );
    }
 
    setSearch() {
