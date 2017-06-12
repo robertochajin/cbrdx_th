@@ -1,0 +1,291 @@
+<div *ngIf="employee">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="first">{{ 'EMPLOYEES.LBL_COLABORADOR' | translate }}</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<p-panel header="{{ 'EMPLOYEES.LBL_DATOSGENERALES' | translate }}">
+						<fieldset>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_NOMBRE' | translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employee.nombreCompleto}}</strong></label>
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{employee.tipoDocumento}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.tipoDocumento}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_FECHAEXPEDICION' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.fechaDocumento}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_CIUDADEXPEDICION' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.ciudadExpDocumento}}</strong></label>
+							
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.fechaNacimiento}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_CIUDADNACIMIENTO' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.ciudadNacimiento}}</strong></label>
+							
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_NACIONALIDAD' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{gentilicio}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_GENERO' | translate}}</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.genero}}</strong></label>
+							
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_ESTADOCIVIL' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.estadoCivil}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_FACTORRH' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.factorRh}}</strong></label>
+							
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_NUMEROHIJOS' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.nroHijos}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_NIVELESTUDIOS' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.nivelEstudio}}</strong></label>
+							
+							</div>
+						</fieldset>
+					</p-panel>
+					<p-panel header="{{ 'EMPLOYEES.LBL_DATOSADICIONALES' | translate }}">
+						<fieldset>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_PESO' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.peso}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_ESTATURA' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.talla}}</strong></label>
+							
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_IMC' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.imc}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_LATERALIDAD' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.lateralidad}}</strong></label>
+							
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_TALLACAMISA' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.tallaCamisa}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_TALLAPANTALON' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.tallaPantalon}}</strong></label>
+							
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_TALLACALZADO' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.tallaCalzado}}</strong></label>
+							</div>
+						</fieldset>
+					</p-panel>
+					<p-panel header="{{ 'EMPLOYEES.LBL_DATOSCONTACTO' | translate }}">
+						<fieldset>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'LBL_CORREOELECTRONICO' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.correoElectronico}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_SITIOWEB' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.sitioWeb}}</strong></label>
+							
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'LBL_TELEFONO' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.telefonoFijo}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'LBL_CELULAR' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.telefonoCelular}}</strong></label>
+							
+							</div>
+							<h3 class="first">{{'EMPLOYEES.LBL_DATOS' | translate}}</h3>
+							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="contacts" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+								<p-column field="contacto" header="{{'EMPLOYEES.LBL_NOMBRECONTACTO' | translate}}" [sortable]="true"></p-column>
+								<p-column field="nombreListaParentesco" header="{{'EMPLOYEES.LBL_PARENTESCO' | translate}}" [sortable]="true"></p-column>
+								<p-column field="telefono" header="{{'LBL_TELEFONO' | translate}}" [sortable]="true"></p-column>
+								<p-column field="celular" header="{{'LBL_CELULAR' | translate}}" [sortable]="true"></p-column>
+							</p-dataTable>
+						</fieldset>
+					</p-panel>
+					<p-panel header="{{ 'EMPLOYEES.LBL_INFORMACIONFAMILIAR' | translate }}">
+					<fieldset>
+						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="familyInformations"   [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+							<p-column field="nombreCompleto" header="{{ 'LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
+							<p-column field="tipoDocumento" header="{{ 'LBL_TIPODOCUMENTO' | translate }}" [sortable]="true"></p-column>
+							<p-column field="numeroDocumento" header="{{ 'LBL_NUMERODOCUMENTO' | translate }}" [sortable]="true"></p-column>
+							<p-column field="parentesco" header="{{ 'EMPLOYEES.LBL_PARENTESCO' | translate }}" [sortable]="true"></p-column>
+							<p-column field="edad" header="{{ 'EMPLOYEES.LBL_EDAD' | translate }}" [sortable]="true"></p-column>
+						</p-dataTable>
+					</fieldset>
+					</p-panel>
+					<p-panel header="{{ 'UBICACION.LBL_UBICACION' | translate }}">
+					<fieldset>
+						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="employeesLocations" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+							<p-column field="nombre" header="{{'UBICACION.LBL_TIPODIRECCION' | translate }}" [sortable]="true"></p-column>
+							<p-column field="direccion" header="{{'UBICACION.LBL_DIRECCION' | translate }}" [sortable]="true"></p-column>
+							<p-column field="divisionPolitica" header="{{'UBICACION.LBL_UBICACION' | translate }}" [sortable]="true"></p-column>
+						</p-dataTable>
+					</fieldset>
+					</p-panel>
+					<p-panel header="{{ 'EMPLOYEES.LBL_ACTIVOS' | translate }}">
+						<fieldset>
+							<h3 class="first">{{ 'EMPLOYEES.LBL_INMUEBLES' | translate }}</h3>
+							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="employeesEstate" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+								<p-column field="tipoVivienda" header="Tipo" [sortable]="true"></p-column>
+								<p-column field="claseVivienda" header="La Vivienda es? " [sortable]="true"></p-column>
+								<p-column field="tipoConstruccionVivienda" header="Tipo Construcción" [sortable]="true"></p-column>
+								<p-column field="anioConstruccion" header="Año Construcción" [sortable]="true"></p-column>
+								<p-column field="numeroSotanos" header="# Sótanos" [sortable]="true"></p-column>
+								<p-column field="numeroPisos" header="# Pisos" [sortable]="true"></p-column>
+								<p-column field="idEstrato" header="Estrato" [sortable]="true"></p-column>
+							</p-dataTable>
+							<h3 class="first">{{'EMPLOYEES.LBL_VEHICULOS' | translate }}</h3>
+							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="employeesVehicle" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+								<p-column field="tipoVehiculo" header="{{'EMPLOYEES.LBL_TIPOVEHICULO' | translate }}" [sortable]="true"></p-column>
+								<p-column field="tipoServicio" header="{{'EMPLOYEES.LBL_TIPOSERVICIO' | translate }}" [sortable]="true"></p-column>
+								<p-column field="marca" header="{{'EMPLOYEES.LBL_MARCA' | translate }}" [sortable]="true"></p-column>
+								<p-column field="modelo" header="{{'EMPLOYEES.LBL_MODELO' | translate }}" [sortable]="true"></p-column>
+								<p-column field="placa" header="{{'EMPLOYEES.LBL_PLACA' | translate }}" [sortable]="true"></p-column>
+							</p-dataTable>
+						</fieldset>
+					</p-panel>
+					<p-panel header="{{ 'EMPLOYEES.LBL_FORMACIONACADEMICA' | translate }}">
+					<fieldset>
+						<h3 class="first">{{'EMPLOYEES.LBL_EDUCACION' | translate}}</h3>
+						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="fstudies" selectionMode="single" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+							<p-column field="tituloEstudio" header="{{'EMPLOYEES.LBL_TITULOOBTENIDO' | translate}}" [sortable]="true"></p-column>
+							<p-column field="fechaIngresa" header="{{'EMPLOYEES.LBL_INGRESO' | translate}} " [sortable]="true"></p-column>
+							<p-column field="fechaTermina" header="{{'EMPLOYEES.LBL_FINALIZACION' | translate}}" [sortable]="true"></p-column>
+							<p-column field="ciudad" header="{{'LBL_CIUDAD' | translate}}" [sortable]="true"></p-column>
+							<p-column  header="{{'EMPLOYEES.LBL_INSTITUCION' | translate}}" [sortable]="true">
+								<template let-const="rowData" pTemplate="body">
+									<p *ngIf="const.idInstitucion == null">{{const.otraInstitucion}}</p>
+									<p *ngIf="const.idInstitucion != null">{{const.institucion}}</p>
+								</template>
+							</p-column>
+							<p-column field="indicadorVerificado" header="{{'EMPLOYEES.LBL_CONFIRMADA' | translate}}" [sortable]="true"></p-column>
+						</p-dataTable>
+						<h3 class="first">{{'EMPLOYEES.LBL_EDUCACIONNOFORMAL' | translate}}</h3>
+						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="nfstudies"  [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+							<p-column field="tituloEstudio" header="{{'EMPLOYEES.LBL_TITULOOBTENIDO' | translate}}" [sortable]="true"></p-column>
+							<p-column field="fechaIngresa" header="{{'EMPLOYEES.LBL_INGRESO' | translate}} " [sortable]="true"></p-column>
+							<p-column field="fechaTermina" header="{{'EMPLOYEES.LBL_FINALIZACION' | translate}}" [sortable]="true"></p-column>
+							<p-column field="ciudad" header="{{'LBL_CIUDAD' | translate}}" [sortable]="true"></p-column>
+							<p-column field="institucion" header="{{'EMPLOYEES.LBL_INSTITUCION' | translate}}" [sortable]="true"></p-column>
+						</p-dataTable>
+					</fieldset>
+					</p-panel>
+					<p-panel header="{{ 'EMPLOYEES.LBL_EXPERIENCIALABORAL' | translate }}">
+					<fieldset>
+						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="experiences" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+							<p-column field="empresa" header="{{'EMPLOYEES.LBL_EMPRESA' | translate }}" [sortable]="true"></p-column>
+							<p-column field="cargo" header="{{'EMPLOYEES.LBL_CARGO' | translate }}" [sortable]="true"></p-column>
+							<p-column field="fechaTermina" header="{{'EMPLOYEES.LBL_FINALIZACION' | translate }}" [sortable]="true"></p-column>
+							<p-column field="ciudad" header="{{'LBL_CIUDAD' | translate }}" [sortable]="true"></p-column>
+							<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+								<template let-experience="rowData" pTemplate="body">
+									<div class="btn-group" role="group">
+										<button type="button"  class="ui-button btn" icon="fa-eye" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
+										        pButton (click)="detail(experience)"></button>
+										<button type="button"  class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
+										        pButton (click)="update(experience)"></button>
+										<button type="button"  class="ui-button ui-button-danger btn" icon="fa-trash" data-toggle="tooltip" title="{{'BTN_ELIMINAR' | translate}}"
+										        pButton (click)="delete(experience)" ></button>
+									</div>
+								</template>
+							</p-column>
+						</p-dataTable>
+					</fieldset>
+					</p-panel>
+					<p-panel header="{{ 'EMPLOYEES.LBL_REFERENCIAS' | translate }}">
+					<fieldset>
+						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="references"   [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+							<p-column field="tipoReferencia" header="{{'EMPLOYEES.LBL_TIPOREFERENCIA' | translate }}" [sortable]="true"></p-column>
+							<p-column field="nombreCompleto" header="{{'LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
+							<p-column field="numeroContacto" header="{{'EMPLOYEES.LBL_NUMEROCONTACTO' | translate }}" [sortable]="true"></p-column>
+							<p-column field="descripcionDivisonPolitica" header="{{'LBL_CIUDAD' | translate }}" [sortable]="true"></p-column>
+						</p-dataTable>
+					</fieldset>
+					</p-panel>
+					<p-panel header="{{ 'EMPLOYEES.LBL_DATOSCLINICOS' | translate }}">
+					<fieldset>
+						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="clinicalInformations" [paginator]="true"
+						             [rows]="10"
+						             [responsive]="true">
+							<p-column field="codigo" header="{{'LBL_CODIGO' | translate}}" [sortable]="true"></p-column>
+							<p-column field="descripcion" header="{{'EMPLOYEES.LBL_DIAGNOSTICO' | translate}}" [sortable]="true"></p-column>
+							<p-column field="fechaInicio" header="{{'LBL_FECHAINICIO' | translate}}" [sortable]="true"></p-column>
+							<p-column field="fechaFin" header="{{'LBL_FECHAFIN' | translate}}" [sortable]="true"></p-column>
+						</p-dataTable>
+					</fieldset>
+					</p-panel>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!--<div class="row datable-header">-->
+	<!--<div class="col-md-6 col-xs-12 col-md-offset-1 datatable-header-add">-->
+	<!--<h3>{{ 'REQUERIMIENTOPERSONAL.LBL_DATOSREFERIDO' | translate }}</h3>-->
+	<!--</div>-->
+	<!--</div>-->
+	<!--<div class="row">-->
+	
+	<!--</div>-->
+	<!--<div class="row datable-header">-->
+	<!--<div class="col-md-6 col-xs-12 col-md-offset-1 datatable-header-add">-->
+	<!--<h3>{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSOSCOMPRAS' | translate }}</h3>-->
+	<!--</div>-->
+	<!--</div>-->
+	<!--<div class="row">-->
+	<!--<div class="col-md-10 col-md-offset-1">-->
+	<!--<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listResourses" [paginator]="true" [rows]="10"-->
+	<!--[responsive]="true" [globalFilter]="gb">-->
+	<!--<p-column field="compra" header="{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSO' | translate }}" [sortable]="true"></p-column>-->
+	<!--</p-dataTable>-->
+	<!--</div>-->
+	<!--</div>-->
+	<!--<div class="row datable-header">-->
+	<!--<div class="col-md-6 col-xs-12 col-md-offset-1 datatable-header-add">-->
+	<!--<h3>{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSOSTIC' | translate }}</h3>-->
+	<!--</div>-->
+	<!--</div>-->
+	<!--<div class="row">-->
+	<!--<div class="col-md-10 col-md-offset-1">-->
+	<!--<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listResoursesTics" [paginator]="true" [rows]="10"-->
+	<!--[responsive]="true" [globalFilter]="gb">-->
+	<!--<p-column field="tic" header="{{ 'REQUERIMIENTOPERSONAL.LBL_RECURSOTICS' | translate }}" [sortable]="true"></p-column>-->
+	<!--</p-dataTable>-->
+	<!--</div>-->
+	<!--</div>-->
+	<!--<div class="row datable-header">-->
+	<!--<div class="col-md-6 col-xs-12 col-md-offset-1 datatable-header-add">-->
+	<!--<h3>{{ 'REQUERIMIENTOPERSONAL.LBL_CUESTIONARIOS' | translate }}</h3>-->
+	<!--</div>-->
+	<!--</div>-->
+	<!--<div class="row">-->
+	<!--<div class="col-md-10 col-md-offset-1">-->
+	<!--<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listCuestionarios" [paginator]="true" [rows]="10"-->
+	<!--[responsive]="true" [globalFilter]="gb">-->
+	<!--<p-column field="cuestionario" header="{{ 'REQUERIMIENTOPERSONAL.LBL_CUESTIONARIO' | translate }}"-->
+	<!--[sortable]="true"></p-column>-->
+	<!--</p-dataTable>-->
+	<!--</div>-->
+	<!--</div>-->
+</div>
+<div class="row form-footer-buttons">
+	<div class="form-group col-md-12">
+		<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+		        pButton (click)="goBack()"></button>
+	</div>
+</div>
