@@ -37,7 +37,7 @@
                      <div class="ui-grid-row form-footer-buttons">
                         <div class="ui-grid-col-4"></div>
                         <div class="ui-grid-col-1">
-                           <a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+                           <a (click)="goBack(f.dirty == true)" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
                         </div>
                         <div class="ui-grid-col-2">
                            <button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}"
@@ -48,7 +48,12 @@
                   </div>
                </form>
             </div>
-            <p-confirmDialog width="400"></p-confirmDialog>
+				<p-confirmDialog width="400" #cd>
+					<p-footer>
+						<button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+						<button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+					</p-footer>
+				</p-confirmDialog>
             <!--<button icon="fa-arrow-right" label="Siguiente" type="button" (click)="step()" pButton></button>-->
             <!--<p-checkbox id="Habilitado" name="Habilitado" [(ngModel)]="seccion" binary="true" label="Sección"></p-checkbox>-->
          </p-accordionTab>
@@ -294,7 +299,7 @@
 
                         <div class="ui-grid-col-5"></div>
                         <div class="ui-grid-col-1">
-                           <a (click)="goBackSectionEdi()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+                           <a (click)="goBackSectionEdi(fs.dirty == true)" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
                         </div>
                         <div class="ui-grid-col-2">
                            <button pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate }}"
@@ -492,7 +497,7 @@
                               <div class="ui-grid-col-4"></div>
                               <div class="ui-grid-col-5"></div>
                               <div class="ui-grid-col-1">
-                                 <a (click)="goBackField()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+                                 <a (click)="goBackField(fc.dirty == true)" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
                               </div>
                               <div class="ui-grid-col-2">
                                  <button pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate }}"
