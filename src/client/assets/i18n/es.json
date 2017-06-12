@@ -919,6 +919,9 @@
       "LBL_MANEJOINTERFAZ":"Manejo de interfaz",
       "LBL_DESCRIPCIONPASO":"Descripción",
       "LBL_DESCRIPCIONLIMITE" : "no puede exeder los 200 carácteres",
+      "LBL_POSTULANTEA" : "Postulante a",
+      "LBL_INFOPOSTULANTE" : "Información del postulante",
+      "LBL_APRUEBAPASO" : "Aprobación del paso",
       "LBL_URL":"URL",
       "":""
    },
