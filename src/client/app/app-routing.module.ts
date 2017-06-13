@@ -154,6 +154,7 @@ import { StepListComponent } from './selection-process/step-list.component';
 import { StepEditComponent } from './selection-process/step-edit.component';
 import { StepDetailComponent } from './selection-process/step-detail.component';
 import { EmployeesViewDetailComponent } from './employees/employees-view-detail.component';
+import { EmployeesCurriculumVitaeComponent } from './employees/employees-curriculum-vitae.component';
 
 
 const routes = [
@@ -165,6 +166,7 @@ const routes = [
    { path: 'employees/view/detail/:id', component: EmployeesViewDetailComponent, canActivate: [ AuthGuard ] }, // solo ver
    { path: 'employees/detail/:id', component: EmployeesDetailComponent, canActivate: [ AuthGuard ] }, // ver editar
    { path: 'employees/update/:id', component: EmployeesUpdateComponent, canActivate: [ AuthGuard ] }, // ver editar
+   { path: 'employees/curriculum/:id', component: EmployeesCurriculumVitaeComponent, canActivate: [ AuthGuard ] }, // hoja de vida
 
    // Información de referencia de employees
    { path: 'employees/detail/:tercero/references', component: ReferencesComponent, canActivate: [ AuthGuard ] },

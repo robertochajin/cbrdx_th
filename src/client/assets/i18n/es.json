@@ -310,7 +310,20 @@
     "LBL_JURIDICO":"Estado jurídico",
     "LBL_FECHADEFUNCIONREQUERIDA":"Fecha de defunción requerida",
     "LBL_FECHADEFUNCION":"Fecha de defunción",
-    "MSG_DOCUMENTO":"El documento que intenta ingresar ya está asignado a otra persona y no puede ser duplicado"
+    "MSG_DOCUMENTO":"El documento que intenta ingresar ya está asignado a otra persona y no puede ser duplicado",
+     "LBL_HOJADEVIDA": "Hoja de vida",
+     "LBL_PERFIL": "Perfil",
+     "LBL_EXPERIENCIA": "Expereiencia",
+     "LBL_EDUCACION": "Educación",
+     "LBL_DIRECCION": "Dirección",
+     "LBL_CONTACTO": "Contacto",
+     "LBL_IDIOMA": "Idioma",
+     "LBL_AREAINTERES": "Área de intéres",
+     "LBL_DEPORTES": "Deportes",
+     "LBL_LIDERAZGO": "Liderazgo",
+     "LBL_HOBBIES": "Hobbies",
+     "LBL_CONTACTOEMERG": "Contacto en caso de emergencia",
+     "LBL_COMPETHABILI": "Competencias y habilidades"
 
   },
 
