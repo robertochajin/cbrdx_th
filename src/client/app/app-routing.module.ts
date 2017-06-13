@@ -154,9 +154,10 @@ import { StepListComponent } from './selection-process/step-list.component';
 import { StepEditComponent } from './selection-process/step-edit.component';
 import { StepDetailComponent } from './selection-process/step-detail.component';
 import { EmployeesViewDetailComponent } from './employees/employees-view-detail.component';
+
+
+// hoja de vida
 import { EmployeesCurriculumVitaeComponent } from './employees/employees-curriculum-vitae.component';
-
-
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
