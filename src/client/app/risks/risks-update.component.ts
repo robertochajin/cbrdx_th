@@ -23,6 +23,8 @@ export class RisksUpdateComponent implements OnInit {
    dialogObjet: Risks = new Risks();
    habilitado: boolean;
    msg: Message;
+   tiporiesgo: string;
+   subtiporiesgo: string;
 
    constructor( private risksService: RisksService,
       private router: Router,
@@ -37,25 +39,30 @@ export class RisksUpdateComponent implements OnInit {
       this.route.params.switchMap( ( params: Params ) => this.risksService.getById( +params[ 'idRiesgo' ] ) )
       .subscribe( data => {
          this.risk = data;
-      } );
-
-      this.risksService.getTypeRisks().subscribe( rest => {
-         this.listTypeRisks.push( { label: 'Seleccione', value: null } );
-         for ( let dp of rest ) {
-            this.listTypeRisks.push( {
-                                        label: dp.riesgoTipo,
-                                        value: dp.idRiesgoTipo
-                                     } );
-         }
-      } );
-      this.risksService.getSubTypeRisks().subscribe( rest => {
-         this.listSubTypeRisks.push( { label: 'Seleccione', value: null } );
-         for ( let dp of rest ) {
-            this.listSubTypeRisks.push( {
-                                           label: dp.riesgoSubTipo,
-                                           value: dp.idRiesgoSubTipo
+         this.risksService.getTypeRisks().subscribe( rest => {
+            this.listTypeRisks.push( { label: 'Seleccione', value: null } );
+            for ( let dp of rest ) {
+               this.listTypeRisks.push( {
+                                           label: dp.riesgoTipo,
+                                           value: dp.idRiesgoTipo
                                         } );
-         }
+               if(dp.idRiesgoTipo===data.idTipoRiesgo){
+                  this.tiporiesgo= dp.riesgoTipo;
+               }
+            }
+         } );
+         this.risksService.getSubTypeRisks().subscribe( rest => {
+            this.listSubTypeRisks.push( { label: 'Seleccione', value: null } );
+            for ( let dp of rest ) {
+               this.listSubTypeRisks.push( {
+                                              label: dp.riesgoSubTipo,
+                                              value: dp.idRiesgoSubTipo
+                                           } );
+               if(dp.idRiesgoSubTipo===data.idSubTipoRiesgo){
+                  this.subtiporiesgo= dp.riesgoSubTipo;
+               }
+            }
+         } );
       } );
 
    }
@@ -72,21 +79,21 @@ export class RisksUpdateComponent implements OnInit {
       } );
    }
 
-    goBack(fDirty : boolean): void {
+   goBack( fDirty: boolean ): void {
 
-        if ( fDirty ){
-            this.confirmationService.confirm( {
-                message: ` ¿Esta seguro que desea salir sin guardar?`,
-                header: 'Corfirmación',
-                icon: 'fa fa-question-circle',
-                accept: () => {
-                    this.location.back();
-                }
-            } );
-        }else {
-            this.location.back();
-        }
-    }
+      if ( fDirty ) {
+         this.confirmationService.confirm( {
+                                              message: ` ¿Esta seguro que desea salir sin guardar?`,
+                                              header: 'Corfirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this.location.back();
+                                              }
+                                           } );
+      } else {
+         this.location.back();
+      }
+   }
 
    changeType() {
       this.listSubTypeRisks = [];
