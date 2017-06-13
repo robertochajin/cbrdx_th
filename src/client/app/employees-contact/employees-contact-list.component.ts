@@ -143,6 +143,11 @@ export class EmployeesContactListComponent implements OnInit {
       this.msgs = [];
       this.contact = new EmployeesContact();
       this.showForm = true;
+      setTimeout( () => {
+         jQuery( 'body' ).animate( {
+                                      scrollTop: jQuery( 'p-accordiontab > .ui-state-active' ).position().top + 90
+                                   }, 'fast' );
+      }, 1000 );
    }
 
    update( f: EmployeesContact ) {
