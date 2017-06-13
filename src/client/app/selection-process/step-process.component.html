@@ -6,7 +6,7 @@
 					<div class="form-group row">
 						<div class="col-md-2">
 							<div class="thumbnail">
-								<img src="/assets/images/perfil/3.jpg" alt="...">
+								<img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-128.png" alt="...">
 							</div>
 						</div>
 						<div class="col-md-10">
@@ -50,7 +50,7 @@
 			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="process">
 				<fieldset>
 					<div class="row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-6" *ngIf="showCalendar">
 							<label for="asignDate">{{'PROCESOSELECCION.LBL_ASIGNARFECHA' | translate}}</label>
 							<p-calendar id="asignDate" name="asignDate" [showIcon]="true"
 							            [locale]="es" readonlyInput="true" [minDate]="minDate"
@@ -60,12 +60,19 @@
 								{{'PROCESOSELECCION.LBL_ASIGNARFECHA' | translate}} {{'LBL_REQUERIDO' | translate}}
 							</div>
 						</div>
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-6" >
+							<label for="responsable">* {{'PROCESOSELECCION.LBL_RESPONSABLE' | translate }}</label>
+							<p-dropdown id="responsable" name="responsable" #ngResponsable="ngModel" [options]="responsables"
+							            [autoWidth]="false" [(ngModel)]="candidateProcess.idResponsable" required></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngResponsable.valid">
+								<i class="fa fa-close"></i>
+								{{'PROCESOSELECCION.LBL_RESPONSABLE' | translate }} {{'LBL_REQUERIDO' | translate }}
+							</div>
 						</div>
 					</div>
 					
 					<div class="row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-6" *ngIf="true">
 							<label for="validStep">* {{'PROCESOSELECCION.LBL_APRUEBAPASO' | translate }}</label>
 							<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
 							            [autoWidth]="false" [(ngModel)]="indApproval"></p-dropdown>

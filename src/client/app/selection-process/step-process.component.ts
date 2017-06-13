@@ -30,6 +30,8 @@ export class StepProcessComponent implements OnInit {
    private es: any;
    private minDate: Date = new Date();
    private stepStates: ListaItem[] = [];
+   public responsables: SelectItem[] = [];
+   private showCalendar = false;
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
@@ -52,8 +54,7 @@ export class StepProcessComponent implements OnInit {
          monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
 
-      let today = new Date();
-      this.minDate.setFullYear( today.getFullYear(), today.getMonth(), today.getDay());
+      this.minDate = new Date( Date.now() );
 
       this.approvalOptions.push({label: 'Seleccione', value:null});
       this.approvalOptions.push({label: 'No aplica este paso', value:2});
@@ -114,7 +115,15 @@ export class StepProcessComponent implements OnInit {
 
    prepareForm(){
       //Se verifica el estado del paso y la la necesidad de mostrar o nó la asignación de fecha
+      if(this.getIdStateByCode('VAC') === this.candidateProcess.idEstadoDiligenciado){
+         this.showCalendar = this.step.indicadorCalendario;
 
+
+      } else if(this.getIdStateByCode('PROG') === this.candidateProcess.idEstadoDiligenciado){
+
+      } else if(this.getIdStateByCode('APROB') === this.candidateProcess.idEstadoDiligenciado){
+
+      }
    }
 
    onSubmit() {
