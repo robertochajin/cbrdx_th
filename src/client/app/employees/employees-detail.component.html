@@ -11,13 +11,15 @@
 
       <div class="clearfix card-header">
         <div class="col-md-2">
-          <img class="thumbnail pull-left img-responsive"
+          <img class="img-circle img-responsive user-avatar"
                src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg">
         </div>
         <div class="col-md-8">
-          <h4>{{employee.nombreCompleto}} - {{employee.fechaNacimiento}}</h4>
-          <span>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</span><br/>
-          <span>{{employee.cargoActual}}({{employee.fechaCreacion}})</span>
+          <h2>{{employee.nombreCompleto}}</h2>
+			  <h4>{{employee.fechaNacimiento}} ({{employee.edad}})</h4>
+          <span>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</span><br />
+          <span>Cargo actual : {{employee.cargoActual}}</span><br />
+			  <span>Usuario desde : {{employee.fechaCreacion}}</span><br />
         </div>
         <div class="col-md-2">
           <!--<a href="#" class="btn btn-primary">{{'EMPLOYEES.LBL_HISTORIALABORAL' | translate}}</a>-->
