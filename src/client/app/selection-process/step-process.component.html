@@ -51,6 +51,21 @@
 				<fieldset>
 					<div class="row">
 						<div class="form-group col-md-6">
+							<label for="asignDate">{{'PROCESOSELECCION.LBL_ASIGNARFECHA' | translate}}</label>
+							<p-calendar id="asignDate" name="asignDate" [showIcon]="true"
+							            [locale]="es" readonlyInput="true" [minDate]="minDate"
+							            dataType="date" #ngMeetDate="ngModel" required
+							            [(ngModel)]="candidateProcess.fechaCita" dateFormat="yy'-'mm'-'dd"></p-calendar>
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngMeetDate.valid">
+								{{'PROCESOSELECCION.LBL_ASIGNARFECHA' | translate}} {{'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-6">
 							<label for="validStep">* {{'PROCESOSELECCION.LBL_APRUEBAPASO' | translate }}</label>
 							<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
 							            [autoWidth]="false" [(ngModel)]="indApproval"></p-dropdown>
