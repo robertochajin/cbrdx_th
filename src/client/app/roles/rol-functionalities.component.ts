@@ -108,13 +108,29 @@ export class RolFuncionalitiesComponent implements OnInit {
 
    }
 
-   goBackUpdate() {
-      this.msgs = [];
-      this.showForm = false;
-      if ( this.isUpdating === true ) {
-         this.isUpdating = false;
-         this.menus.splice( 0, 1 );
-      }
+   goBackUpdate(rfDirty : boolean) {
+      if (rfDirty) {
+         this.confirmationService.confirm({
+            message: ` ¿Esta seguro que desea salir sin guardar?`,
+            header: 'Confirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this.msgs = [];
+               this.showForm = false;
+               if ( this.isUpdating === true ) {
+                  this.isUpdating = false;
+                  this.menus.splice( 0, 1 );
+               }
+            }
+         });
+      } else {
+         this.msgs = [];
+         this.showForm = false;
+         if ( this.isUpdating === true ) {
+            this.isUpdating = false;
+            this.menus.splice( 0, 1 );
+         }      }
+
    }
 
    config( r: RolFuncionalities ) {

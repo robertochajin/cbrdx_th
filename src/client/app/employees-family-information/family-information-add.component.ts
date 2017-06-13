@@ -126,25 +126,39 @@ export class FamilyInformationAddComponent implements OnInit {
                   this.terceroFamiliar.indicadorHabilitado = true;
                   this.terceroFamiliar.idTipoTercero = this.idTipoTercero;
 
-                  this.employeesService.add( this.terceroFamiliar )
-                  .subscribe( data2 => {
-
-                     this.familyInformation.idLocalizacion = data.idLocalizacion;
-                     this.familyInformation.idFamiliar = data2.idTercero;
-                     this.familyInformation.idTercero = this.idTercero;
-                     this.familyInformation.indicadorHabilitado = true;
+                  if(this.familyInformation.idFamiliar !== undefined) {
                      this.familyInformation.idParentesco = this.selectedRelationship;
                      this.familyInformation.idConvivencia = this.convive ? 1 : 0;
-
-                     this.familyInformationService.add( this.familyInformation )
+                     this.familyInformationService.update( this.familyInformation )
                      .subscribe(
                         data => {
                            // 1:add 2:update 3:error
-                           this._nav.setMesage( 1, this.msgs );
+                           this._nav.setMesage( 2, this.msgs );
                            this._nav.setTab( 3 );
                            this.location.back();
                         } );
-                  } );
+
+                  } else {
+                     this.employeesService.add( this.terceroFamiliar )
+                     .subscribe( data2 => {
+
+                        this.familyInformation.idLocalizacion = data.idLocalizacion;
+                        this.familyInformation.idFamiliar = data2.idTercero;
+                        this.familyInformation.idTercero = this.idTercero;
+                        this.familyInformation.indicadorHabilitado = true;
+                        this.familyInformation.idParentesco = this.selectedRelationship;
+                        this.familyInformation.idConvivencia = this.convive ? 1 : 0;
+
+                        this.familyInformationService.add( this.familyInformation )
+                        .subscribe(
+                           data => {
+                              // 1:add 2:update 3:error
+                              this._nav.setMesage( 1, this.msgs );
+                              this._nav.setTab( 3 );
+                              this.location.back();
+                           } );
+                     } );
+                  }
                }
             } );
 
@@ -254,8 +268,28 @@ export class FamilyInformationAddComponent implements OnInit {
            this.selectedDocument !== null ) {
          this.employeesService.validateDocument( this.familyInformation.numeroDocumento, this.selectedDocument ).subscribe( res => {
             if ( res !== undefined && res.idTercero > 0 ) {
-               this.repeatedDocument = true;
-               this.familyInformation.numeroDocumento = '';
+               this.confirmationService.confirm( {
+                                                    message: `El tercero ya existe, desea relacionarlo como familiar?`,
+                                                    header: 'Confirmación',
+                                                    icon: 'fa fa-question-circle',
+                                                    accept: () => {
+                                                       this.familyInformation.idFamiliar = res.idTercero;
+                                                       this.familyInformation.primerNombre = this.capitalizeSave(res.primerNombre);
+                                                       this.familyInformation.primerApellido = this.capitalizeSave(res.primerApellido);
+                                                       this.familyInformation.segundoNombre = this.capitalizeSave(res.segundoNombre);
+                                                       this.familyInformation.segundoApellido = this.capitalizeSave(res.segundoApellido);
+                                                       this.familyInformation.fechaNacimiento = res.fechaNacimiento;
+                                                       this.familyInformation.correoElectronico = res.correoElectronico;
+                                                       this.familyInformation.telefonoFijo = res.telefonoFijo;
+                                                       this.familyInformation.telefonoCelular = res.telefonoCelular;
+                                                       this.familyInformation.idTercero = this.idTercero;
+                                                       this.familyInformation.indicadorHabilitado = true;
+
+                                                    },
+                                                    reject: () => {
+                                                       this.familyInformation.numeroDocumento = '';
+                                                    }
+                                                 } );
             }
          } );
       }
