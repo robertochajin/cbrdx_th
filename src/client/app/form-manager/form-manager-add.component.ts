@@ -309,12 +309,33 @@ export class FormManagerAddComponent implements OnInit {
       this.detailSection = false;
    }
 
-   goBackField() {
-      this.editingField = false;
-   }
+   goBackField(fcDirty : boolean) {
+      if ( fcDirty ){
+         this.confirmationService.confirm( {
+            message: ` ¿Esta seguro que desea salir sin guardar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this.editingSection = false;
+            }
+         } );
+      }else {
+         this.editingSection = false;
+      }   }
 
-   goBackSectionEdi() {
-      this.editingSection = false;
+   goBackSectionEdi(fsDirty : boolean) {
+      if ( fsDirty ){
+         this.confirmationService.confirm( {
+            message: ` ¿Esta seguro que desea salir sin guardar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this.editingSection = false;
+            }
+         } );
+      }else {
+         this.editingSection = false;
+      }
    }
 
    detailDetailF(f: FunctionalityControl) {
@@ -329,8 +350,19 @@ export class FormManagerAddComponent implements OnInit {
       this.detailField = false;
    }
 
-   goBack() {
-      this.location.back();
+   goBack(fDirty : boolean) {
+      if ( fDirty ){
+         this.confirmationService.confirm( {
+            message: ` ¿Esta seguro que desea salir sin guardar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this.location.back();
+            }
+         } );
+      }else {
+         this.location.back();
+      }
    }
 
    capitalize(event: any) {
