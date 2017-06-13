@@ -61,8 +61,7 @@
         <div class="ui-grid-col-6">
           <label for="numeroPisos">{{ 'EMPLOYEES.LBL_NUMEROPISOS' | translate }}</label>
           <input id="numeroPisos" name="numeroPisos" #numeroPisos="ngModel" pInputText type="text"
-                 (keyup)="inputNumberPisos()"
-                 (paste)="inputNumberPisos()"
+                 (keyup)="inputNumberPisos()" maxlength="3" (paste)="inputNumberPisos()"
                  [(ngModel)]="employeeEstate.numeroPisos" min="1" required/>
           <div class="ui-message ui-messages-error ui-corner-all"
                *ngIf="f.submitted && !numeroPisos.valid">

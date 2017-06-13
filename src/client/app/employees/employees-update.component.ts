@@ -335,7 +335,7 @@ export class EmployeesUpdateComponent implements OnInit {
 
       if ( tipo === 1 ) {
          if ( this.employee.fechaDocumento !== null ) {
-            let fecha = this.employee.fechaDocumento;
+            let fecha = new Date(this.employee.fechaDocumento);
             let anio= fecha.getFullYear()-18;
             this.maxDate.setFullYear( anio );
          }else{
