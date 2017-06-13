@@ -17,9 +17,11 @@ import {
 } from 'primeng/primeng';
 import { SharedModule } from '../shared/shared.module';
 import { ListaService } from '../_services/lista.service';
+import { FormSharedModule } from '../shared/form-shared.module';
+
 
 @NgModule( {
-              imports: [ CommonModule, InputTextModule, FormsModule, ReactiveFormsModule, DataTableModule,
+              imports: [ CommonModule, FormSharedModule, InputTextModule, FormsModule, ReactiveFormsModule, DataTableModule,
                  ButtonModule, DialogModule, InputTextareaModule, CalendarModule,
                  DropdownModule, ConfirmDialogModule, AutoCompleteModule, CheckboxModule, MessagesModule, SharedModule, FileUploadModule
               ],

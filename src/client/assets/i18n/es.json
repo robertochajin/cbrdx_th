@@ -306,10 +306,24 @@
     "LBL_VEHICULOS":"Vehiculos",
     "LBL_VIVIENDA":"La Vivienda es",
     "LBL_VIVO":"Vivo",
+    "LBL_NOMBRE":"Nombre",
     "LBL_JURIDICO":"Estado jurídico",
     "LBL_FECHADEFUNCIONREQUERIDA":"Fecha de defunción requerida",
     "LBL_FECHADEFUNCION":"Fecha de defunción",
-    "MSG_DOCUMENTO":"El documento que intenta ingresar ya está asignado a otra persona y no puede ser duplicado"
+    "MSG_DOCUMENTO":"El documento que intenta ingresar ya está asignado a otra persona y no puede ser duplicado",
+     "LBL_HOJADEVIDA": "Hoja de vida",
+     "LBL_PERFIL": "Perfil",
+     "LBL_EXPERIENCIA": "Expereiencia",
+     "LBL_EDUCACION": "Educación",
+     "LBL_DIRECCION": "Dirección",
+     "LBL_CONTACTO": "Contacto",
+     "LBL_IDIOMA": "Idioma",
+     "LBL_AREAINTERES": "Área de intéres",
+     "LBL_DEPORTES": "Deportes",
+     "LBL_LIDERAZGO": "Liderazgo",
+     "LBL_HOBBIES": "Hobbies",
+     "LBL_CONTACTOEMERG": "Contacto en caso de emergencia",
+     "LBL_COMPETHABILI": "Competencias y habilidades"
 
   },
 
@@ -805,8 +819,8 @@
       "LBL_RECURSOTICS": "Recurso Tic's",
       "LBL_OBSERVACIONES": "Observaciones",
       "LBL_JUSTIFICACION": "Justificación",
-      "LBL_CUESTIONARIOS": "Datos Cuestionarios",
-      "LBL_CUESTIONARIO": "Cuestionario",
+      "LBL_CUESTIONARIOS": "Datos pruebas técnicas",
+      "LBL_CUESTIONARIO": "Pruebas técnicas",
       "":""
    },
 
@@ -896,6 +910,7 @@
       "LBL_FORMACIONEDUCATIVA":"Formación educativa",
       "LBL_NUEVOPASO":"Agregar nuevo paso",
       "LBL_EDITARPASO":"Agregar nuevo paso",
+      "LBL_DETALLEPASO":"Detalle del paso",
       "LBL_NUEVOVERSION":"Crear nueva versión del proceso",
       "LBL_PUBLICARVERSION":"Publicar esta versión",
       "LBL_PASOSDELPROCESO":"Configuración de los pasos en el proceso de selección",
@@ -913,8 +928,13 @@
       "LBL_REQCALENDARIO":"Requiere calendario",
       "LBL_CONTRATADO":"Contratado",
       "LBL_MANEJOCUESTIONARIOS":"Manejo de cuestionarios",
+      "MSG_CODIGOREPETIDO":"Este código ya pertenece a otro paso, por favor utiliza otro.",
       "LBL_MANEJOINTERFAZ":"Manejo de interfaz",
       "LBL_DESCRIPCIONPASO":"Descripción",
+      "LBL_DESCRIPCIONLIMITE" : "no puede exeder los 200 carácteres",
+      "LBL_POSTULANTEA" : "Postulante a",
+      "LBL_INFOPOSTULANTE" : "Información del postulante",
+      "LBL_APRUEBAPASO" : "Aprobación del paso",
       "LBL_URL":"URL",
       "":""
    },

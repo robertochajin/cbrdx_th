@@ -21,8 +21,7 @@ export class EmployeesDetailComponent implements OnInit {
       private route: ActivatedRoute,
       private location: Location,
       private _nav: NavService,
-      private router: Router
-   ) {
+      private router: Router ) {
    }
 
    ngOnInit(): void {
@@ -33,7 +32,6 @@ export class EmployeesDetailComponent implements OnInit {
                                            this.employee.segundoNombre + ' ' +
                                            this.employee.primerApellido + ' ' +
                                            this.employee.segundoApellido;
-
 
             // this.acordion=0;
             //
@@ -57,7 +55,9 @@ export class EmployeesDetailComponent implements OnInit {
       } );
 
       this.acordion = this._nav.getTab();
-
+      if ( this.acordion !== 0 ) {
+         this.onFocusTab();
+      }
    }
 
    goBack(): void {
@@ -67,10 +67,22 @@ export class EmployeesDetailComponent implements OnInit {
    onTabShow( e: any ) {
       this._nav.setTab( e.index );
       this.acordion = this._nav.getTab();
+
+      this.onFocusTab();
+
    }
 
    update( id: number ) {
       this.router.navigate( [ 'employees/update/' + id ] );
+   }
+
+   onFocusTab() {
+      // Focus  en accordionTab Activo
+      setTimeout( () => {
+         jQuery( 'body' ).animate( {
+                                      scrollTop: jQuery( 'p-accordiontab > .ui-state-active' ).position().top + 90
+                                   }, 'fast' );
+      }, 1000 );
    }
 
 }

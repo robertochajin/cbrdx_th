@@ -308,7 +308,7 @@ export class PositionsUpdateComponent implements OnInit {
    goBack(): void {
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea salir sin guardar?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.location.back();
@@ -319,6 +319,14 @@ export class PositionsUpdateComponent implements OnInit {
    onTabShow( e: any ) {
       this._nav.setTab( e.index );
       this.acordion = this._nav.getTab();
+
+      // Focus  en accordionTab Activo
+      setTimeout( () => {
+         jQuery( 'body' ).animate({
+            scrollTop : jQuery( 'p-accordiontab > .ui-state-active' ).position().top + 90
+         }, 'fast');
+      }, 1000 );
+
    }
 
    buildParent() {

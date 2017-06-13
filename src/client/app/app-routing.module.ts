@@ -152,16 +152,23 @@ import { SelectionProcessVacanciesComponent } from './selection-process/selectio
 import { VacancyDetailComponent } from './selection-process/vacancy-detail.component';
 import { StepListComponent } from './selection-process/step-list.component';
 import { StepEditComponent } from './selection-process/step-edit.component';
+import { StepDetailComponent } from './selection-process/step-detail.component';
+import { EmployeesViewDetailComponent } from './employees/employees-view-detail.component';
+import { StepProcessComponent } from './selection-process/step-process.component';
 
 
+// hoja de vida
+import { EmployeesCurriculumVitaeComponent } from './employees/employees-curriculum-vitae.component';
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
    // historia de employees
    { path: 'employees', component: EmployeesComponent, canActivate: [ AuthGuard ] },
    { path: 'employees/add', component: EmployeesAddComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:id', component: EmployeesDetailComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/update/:id', component: EmployeesUpdateComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/view/detail/:id', component: EmployeesViewDetailComponent, canActivate: [ AuthGuard ] }, // solo ver
+   { path: 'employees/detail/:id', component: EmployeesDetailComponent, canActivate: [ AuthGuard ] }, // ver editar
+   { path: 'employees/update/:id', component: EmployeesUpdateComponent, canActivate: [ AuthGuard ] }, // ver editar
+   { path: 'employees/curriculum/:id', component: EmployeesCurriculumVitaeComponent, canActivate: [ AuthGuard ] }, // hoja de vida
 
    // Información de referencia de employees
    { path: 'employees/detail/:tercero/references', component: ReferencesComponent, canActivate: [ AuthGuard ] },
@@ -363,9 +370,11 @@ const routes = [
    { path: 'selection-process/add-publication/:idReq', component: SelectionProcessAddComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/active-publications', component: SelectionProcessVacanciesComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/publications-detail/:idPublication', component: VacancyDetailComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/step-list', component: StepListComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/add-step', component: StepEditComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/update-step/:idStep', component: StepEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'step-list', component: StepListComponent, canActivate: [ AuthGuard ] },
+   { path: 'add-step', component: StepEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'update-step/:idStep', component: StepEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
+   { path: 'process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
 ];
 
 @NgModule( {

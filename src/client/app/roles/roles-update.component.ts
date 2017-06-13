@@ -101,16 +101,20 @@ export class RolesUpdateComponent implements OnInit {
       }
    }
 
-   goBack(): void {
+   goBack(fDirty : boolean): void {
+      if (fDirty){
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea salir sin guardar?`,
-                                           header: 'Corfirmación',
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.router.navigate( [ 'roles' ] );
                                            }
                                         } );
-   }
+      }else{
+         this.router.navigate( [ 'roles' ] );
+      }
+      }
 
    capitalizeName() {
       let input = this.rol.rol;

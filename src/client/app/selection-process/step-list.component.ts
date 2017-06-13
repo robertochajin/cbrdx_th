@@ -6,6 +6,7 @@ import { ConfirmationService } from 'primeng/primeng';
 import { SelectionProcess } from '../_models/selection-process';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -18,11 +19,14 @@ export class StepListComponent implements OnInit {
    process: SelectionProcess;
    private processStates: ListaItem[];
    private editing =  false;
+   busqueda: string;
 
    constructor( private router: Router,
       private listaService: ListaService,
+      private navService: NavService,
       private confirmationService: ConfirmationService,
       private selectionStepService: SelectionStepService ) {
+      this.busqueda = this.navService.getSearch( 'step-list.component' );
    }
 
    ngOnInit() {
@@ -41,15 +45,15 @@ export class StepListComponent implements OnInit {
 
 
    add() {
-      this.router.navigate( [ 'selection-process/add-step/' ] );
+      this.router.navigate( [ 'add-step' ] );
    }
 
    detail( r: SelectionStep ) {
-      this.router.navigate( [ 'selection-process/detail-step/' + r.idProcesoPaso ] );
+      this.router.navigate( [ 'detail-step/' + r.idProcesoPaso ] );
    }
 
    update( r: SelectionStep ) {
-      this.router.navigate( [ 'selection-process/update-step/' + r.idProcesoPaso ] );
+      this.router.navigate( [ 'update-step/' + r.idProcesoPaso ] );
    }
 
    newVersion() {
@@ -59,7 +63,12 @@ export class StepListComponent implements OnInit {
                                            header: 'Confirmación creación nueva versión',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
-
+                                              this.selectionStepService.newProcess().subscribe(
+                                                 res => {
+                                                    this.editing = true;
+                                                    this.navService.setMesage( 2 );
+                                                 }
+                                              );
                                            },
                                            reject: () => {
                                            }
@@ -74,12 +83,59 @@ export class StepListComponent implements OnInit {
                                            header: 'Confirmación creación nueva versión',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
-
+                                             this.process.indicadorHabilitado = true;
+                                             this.process.idEstado = this.processStates.find(s => s.codigo === 'PUBLIC').idLista;
+                                             this.selectionStepService.updateProcess(this.process).subscribe(res => {
+                                                if(res.ok){
+                                                   this.editing = false;
+                                                   this.navService.setMesage( 2 );
+                                                }
+                                             });
                                            },
                                            reject: () => {
                                            }
                                         } );
 
+   }
+
+   setSearch() {
+      this.navService.setSearch( 'step-list.component', this.busqueda );
+   }
+
+   sendBefore( step: SelectionStep ) {
+      let myIndex = this.steps.indexOf( step );
+      if ( myIndex < this.steps.length - 1 ) {
+         let newOrder = this.steps[ myIndex ].orden;
+         this.steps[ myIndex ].orden = this.steps[ myIndex + 1 ].orden;
+         this.selectionStepService.update( this.steps[ myIndex ] ).subscribe( res => {
+            if ( res.ok ) {
+               this.steps[ myIndex + 1 ].orden = newOrder;
+               this.selectionStepService.update( this.steps[ myIndex + 1 ] ).subscribe( res => {
+                  if ( res.ok ) {
+                     this.sortSteps();
+                  }
+               } );
+            }
+         } );
+      }
+   }
+
+   sendAfter( step: SelectionStep ) {
+      let myIndex = this.steps.indexOf( step );
+      if ( myIndex > 0 ) {
+         let newOrder = this.steps[ myIndex ].orden;
+         this.steps[ myIndex ].orden = this.steps[ myIndex - 1 ].orden;
+         this.selectionStepService.update( this.steps[ myIndex ] ).subscribe( res => {
+            if ( res.ok ) {
+               this.steps[ myIndex - 1 ].orden = newOrder;
+               this.selectionStepService.update( this.steps[ myIndex - 1 ] ).subscribe( res => {
+                  if ( res.ok ) {
+                     this.sortSteps();
+                  }
+               } );
+            }
+         } );
+      }
    }
 
    private sortSteps() {

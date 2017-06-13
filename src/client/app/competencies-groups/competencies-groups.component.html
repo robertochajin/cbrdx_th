@@ -60,7 +60,7 @@
 				</fieldset>
 				<div class="row form-footer-buttons">
 					<div class="form-group col-md-12">
-						<a (click)="cancelEditingGroup()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+						<a (click)="cancelEditingGroup(fg.dirty == true)" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
 						<button icon="fa-plus" label="Guardar" type="submit"
 						        pButton></button>
 					
@@ -94,15 +94,21 @@
 									<div class="form-group col-md-10">
 										<label for="cNombre">* {{'COMPETENCIES.LBL_COMPETENCIA' | translate }}/ {{'COMPETENCIES.LBL_HABILIDAD' |
 											translate }}</label>
-										<input type="text" pInputText id="cNombre" name="cNombre"
-										       [(ngModel)]="competencie.competencia" #cNombre="ngModel" [readonly]="competencie.idCompetencia != null"
-										       required (keyup)="capitalizec()" maxlength="64"/>
-										<div class="ui-message ui-messages-error ui-corner-all"
-										     *ngIf="fc.submitted && !cNombre.valid">
-											<i class="fa fa-close"></i>
-											{{'COMPETENCIES.LBL_COMPETENCIA' | translate }}/ {{'COMPETENCIES.LBL_HABILIDAD' | translate }}
-											{{'LBL_REQUERIDO' | translate }}
+										<div *ngIf="!competencie.idCompetencia">
+											<input type="text" pInputText id="cNombre" name="cNombre"
+											       [(ngModel)]="competencie.competencia" #cNombre="ngModel"
+											       required (keyup)="capitalizec()" maxlength="64"/>
+											<div class="ui-message ui-messages-error ui-corner-all"
+											     *ngIf="fc.submitted && !cNombre.valid">
+												<i class="fa fa-close"></i>
+												{{'COMPETENCIES.LBL_COMPETENCIA' | translate }}/ {{'COMPETENCIES.LBL_HABILIDAD' | translate }}
+												{{'LBL_REQUERIDO' | translate }}
+											</div>
 										</div>
+										<div *ngIf="competencie.idCompetencia">
+											<p> <strong>{{competencie.competencia}}</strong></p>
+										</div>
+										
 									</div>
 									<div class="form-group col-md-1"></div>
 								</div>
@@ -134,7 +140,7 @@
 						
 						<div class="row form-footer-buttons">
 							<div class="form-group col-md-12">
-								<a (click)="cancelEditingCompetencie()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+								<a (click)="cancelEditingCompetencie(fc.dirty == true)" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
 								<button icon="fa-plus" label="Guardar" type="submit"
 								        pButton></button>
 							</div>

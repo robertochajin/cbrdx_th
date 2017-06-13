@@ -135,6 +135,7 @@ export class ClinicalInformationComponent implements OnInit {
 
       } else {
          this.wrongDiagnostic = true;
+         this.ecd.diagnostico=null;
       }
    }
 
@@ -171,18 +172,27 @@ export class ClinicalInformationComponent implements OnInit {
       this.minDateFin.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
    }
 
-   goBack(): void {
-      this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea Cancelar?`,
-                                           header: 'Corfirmación',
-                                           icon: 'fa fa-question-circle',
-                                           accept: () => {
-                                              this.ecd = null;
-                                              if ( this.editing ) {
-                                                 this.clinicalInformations.push( this.ecdBackUp );
-                                                 this.editing = false;
-                                              }
-                                           }
-                                        } );
+   goBack(dDirty : boolean): void {
+
+      if ( dDirty ) {
+         this.confirmationService.confirm( {
+            message: ` ¿Esta seguro que desea Cancelar?`,
+            header: 'Corfirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this.ecd = null;
+               if ( this.editing ) {
+                  this.clinicalInformations.push( this.ecdBackUp );
+                  this.editing = false;
+               }
+            }
+         } );
+      }else {
+         this.ecd = null;
+         if ( this.editing ) {
+            this.clinicalInformations.push( this.ecdBackUp );
+            this.editing = false;
+         }      }
+
    }
 }
