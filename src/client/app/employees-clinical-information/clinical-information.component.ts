@@ -135,6 +135,7 @@ export class ClinicalInformationComponent implements OnInit {
 
       } else {
          this.wrongDiagnostic = true;
+         this.ecd.diagnostico=null;
       }
    }
 

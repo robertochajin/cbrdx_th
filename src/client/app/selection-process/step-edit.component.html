@@ -81,7 +81,7 @@
 					</div>
 					<div *ngIf="step.indicadorInterfazInterna" class="form-group col-md-6">
 						<label for="urli">{{ 'PROCESOSELECCION.LBL_URL' | translate }}:</label>
-						<input id="urli" type="text" pInputText name="urli"
+						<input id="urli" type="text" pInputText name="urli"  maxlength="100"
 						       [(ngModel)]="step.interfazInterna" #ngUrli="ngModel" required />
 						<div class="ui-message ui-messages-error ui-corner-all"
 						     *ngIf="f.submitted && !ngUrli.valid">
@@ -150,7 +150,7 @@
 					<div *ngIf="step.indicadorInterfaz" class="form-group col-md-6">
 						<label for="interfaz">{{ 'PROCESOSELECCION.LBL_URL' | translate }}:</label>
 						<input id="interfaz" type="text" pInputText name="interfaz"
-						       [(ngModel)]="step.interfaz"
+						       [(ngModel)]="step.interfaz" maxlength="100"
 						       #ngInterfaz="ngModel" required />
 						<div class="ui-message ui-messages-error ui-corner-all"
 						     *ngIf="f.submitted && !ngInterfaz.valid">
@@ -164,7 +164,7 @@
 						<label for="descripcion">*{{ 'PROCESOSELECCION.LBL_DESCRIPCIONPASO' | translate }}:</label>
 						<textarea id="descripcion" name="descripcion" pInputTextarea
 						          [(ngModel)]="step.descripcion"
-						          #ngDescripcion="ngModel" maxlength="500" required></textarea>
+						          #ngDescripcion="ngModel" maxlength="200" required></textarea>
 						<div class="ui-message ui-messages-error ui-corner-all"
 						     *ngIf="f.submitted && !ngDescripcion.valid">
 							<i class="fa fa-close"></i>
@@ -177,7 +177,7 @@
 			
 			<div class="row form-footer-buttons">
 				<div class="form-group col-md-12">
-					<a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+					<a (click)="goBack(f.dirty == true)" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
 					<button pButton type="submit" label="{{'BTN_GUARDAR' | translate }}"></button>
 				</div>
 			</div>

@@ -4,6 +4,7 @@
   "LBL_APROBAR":"Aprobar",
   "LBL_NOAPROBAR":"No Aprobar",
   "BTN_EDITAR":"Editar",
+  "BTN_EDITAR2": "Editar Tercero",
   "BTN_EDITARDIRECCION":"Editar Dirección",
   "BTN_ACEPTAR":"Aceptar",
   "BTN_AGREGAR":"Agregar",
@@ -306,6 +307,7 @@
     "LBL_VEHICULOS":"Vehiculos",
     "LBL_VIVIENDA":"La Vivienda es",
     "LBL_VIVO":"Vivo",
+    "LBL_NOMBRE":"Nombre",
     "LBL_JURIDICO":"Estado jurídico",
     "LBL_FECHADEFUNCIONREQUERIDA":"Fecha de defunción requerida",
     "LBL_FECHADEFUNCION":"Fecha de defunción",
@@ -805,8 +807,8 @@
       "LBL_RECURSOTICS": "Recurso Tic's",
       "LBL_OBSERVACIONES": "Observaciones",
       "LBL_JUSTIFICACION": "Justificación",
-      "LBL_CUESTIONARIOS": "Datos Cuestionarios",
-      "LBL_CUESTIONARIO": "Cuestionario",
+      "LBL_CUESTIONARIOS": "Datos pruebas técnicas",
+      "LBL_CUESTIONARIO": "Pruebas técnicas",
       "":""
    },
 
@@ -917,6 +919,10 @@
       "MSG_CODIGOREPETIDO":"Este código ya pertenece a otro paso, por favor utiliza otro.",
       "LBL_MANEJOINTERFAZ":"Manejo de interfaz",
       "LBL_DESCRIPCIONPASO":"Descripción",
+      "LBL_DESCRIPCIONLIMITE" : "no puede exeder los 200 carácteres",
+      "LBL_POSTULANTEA" : "Postulante a",
+      "LBL_INFOPOSTULANTE" : "Información del postulante",
+      "LBL_APRUEBAPASO" : "Aprobación del paso",
       "LBL_URL":"URL",
       "":""
    },
