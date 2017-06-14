@@ -923,6 +923,11 @@
       "LBL_POSTULANTEA" : "Postulante a",
       "LBL_INFOPOSTULANTE" : "Información del postulante",
       "LBL_APRUEBAPASO" : "Aprobación del paso",
+      "LBL_CANDIDATO" : "Candidato",
+      "LBL_NOASIGNADO" : "No asignado",
+      "LBL_PROGRAMADO" : "Programado",
+      "LBL_APROBO" : "Aprobó",
+      "LBL_NOAPROBO" : "No aprobó",
       "LBL_URL":"URL",
       "":""
    },
