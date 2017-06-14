@@ -75,7 +75,8 @@
   "BTN_PUBLICAVACANTE": "Publicar Vacante",
   "BTN_ARRIBA": "Subir",
   "BTN_ABAJO": "Bajar",
-  "FIN_COMUNES":"====================================================================",
+  "BTN_BORRAR":"Borrar",
+   "FIN_COMUNES":"====================================================================",
 
   "UBICACION":{
       "LBL_UBICACION":"Ubicación",
