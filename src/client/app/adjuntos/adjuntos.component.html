@@ -7,7 +7,7 @@
 					<div class="form-group col-lg-6">
 						<label for="nombrearchivo">{{'PROCESOSELECCION.LBL_NOMBRE' | translate }}</label>
 						<input id="nombrearchivo" name="nombrearchivo" #nombrearchivo="ngModel" pInputText
-						       type="text" maxlength="64"  required [(ngModel)]="adjunto.nombre"/>
+						       type="text" maxlength="64" required [(ngModel)]="adjunto.nombre" (keyup)="nombreArchivo()"/>
 						<div class="ui-message ui-messages-error ui-corner-all"
 						     *ngIf="f.submitted && !nombrearchivo.valid">
 							<i class="fa fa-close"></i>
@@ -15,7 +15,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" *ngIf="fileupload" >
 					<div class="form-group col-lg-12">
 						<label>{{'PROCESOSELECCION.LBL_ARCHIVO' | translate }}</label>
 						<p-fileUpload name="file" url="{{svcSpUrl}}" uploadLabel="Subir" cancelLabel="Cancelar"
@@ -25,14 +25,6 @@
 					</div>
 				</div>
 				<br/>
-				<!--<div class="row">-->
-					<!--<div class="col-md-1 col-md-offset-4">-->
-						<!--<a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>-->
-					<!--</div>-->
-					<!--<div class="col-md-2">-->
-						<!--<button pButton label="Siguiente" type="submit"></button>-->
-					<!--</div>-->
-				<!--</div>-->
 			</div>
 		</div>
 	</form>
@@ -40,15 +32,9 @@
 <div class="row">
 	<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 		<div class="col-md-10 col-md-offset-1">
-			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listInsuranceDocument"
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="adjuntos"
 			             [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-				<p-column field="documento" header="{{'ASEGURADORA.LBL_NOMBRE' | translate }}"
-				          [sortable]="true"></p-column>
-				<p-column field="tipoDocumento" header="{{'ASEGURADORA.LBL_TIPODOCUMENTO' | translate }}"
-				          [sortable]="true"></p-column>
-				<p-column field="sentido" header="{{'ASEGURADORA.LBL_SENTIDO' | translate }}"
-				          [sortable]="true"></p-column>
-				<p-column field="auditoriaFecha" header="{{'ASEGURADORA.LBL_FECHA' | translate }}"
+				<p-column field="documento" header="{{'PROCESOSELECCION.LBL_NOMBREARCHIVO' | translate }}"
 				          [sortable]="true"></p-column>
 				<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 					<template let-doc="rowData" pTemplate="body">

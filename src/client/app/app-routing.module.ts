@@ -160,6 +160,7 @@ import { CandidatesComponent } from './selection-process/candidates.component';
 
 // hoja de vida
 import { EmployeesCurriculumVitaeComponent } from './employees/employees-curriculum-vitae.component';
+import { AdjuntosComponent } from './adjuntos/adjuntos.component';
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
@@ -377,6 +378,7 @@ const routes = [
    { path: 'detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
    { path: 'candidates-list/:idPublication', component: CandidatesComponent, canActivate: [ AuthGuard ] },
+   // { path: 'adjuntos', component: AdjuntosComponent, canActivate: [ AuthGuard ] },
 ];
 
 @NgModule( {

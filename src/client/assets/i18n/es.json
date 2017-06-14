@@ -942,8 +942,9 @@
       "LBL_APROBO" : "Aprobó",
       "LBL_NOAPROBO" : "No aprobó",
       "LBL_URL":"URL",
-      "LBL_NOMBRE":"Nombre",
+      "LBL_NOMBRE":"Nombre Archivo",
       "LBL_ARCHIVO":"Archivo",
+      "LBL_NOMBREARCHIVO":"Nombre Archivo",
       "LBL_URL":"URL",
       "":""
    },
