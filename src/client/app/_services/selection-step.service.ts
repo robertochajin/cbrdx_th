@@ -3,11 +3,14 @@ import { Response } from '@angular/http';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { SelectionStep } from '../_models/selectionStep';
 import { SelectionProcess } from '../_models/selection-process';
+import { CentralRisk } from '../_models/centralRisk';
+import { EmployeeCentralRisk } from '../_models/employeeCentralRisk';
 
 @Injectable()
 export class SelectionStepService {
 
    private masterService = '<%= SVC_TH_URL %>/api/procesosPasos/';
+   private serviceURL = '<%= SVC_TH_URL %>/api/';
    private jwtHelper: JwtHelper = new JwtHelper();
    private usuarioLogueado: any;
    private idUsuario: number;
@@ -21,11 +24,13 @@ export class SelectionStepService {
    }
 
    add( f: SelectionStep ) {
+      f.auditoriaUsuario = this.idUsuario
       return this.authHttp.post( this.masterService, f )
       .map( ( res: Response ) => res.json() );
    };
 
    update( f: SelectionStep ) {
+      f.auditoriaUsuario = this.idUsuario
       return this.authHttp.put( this.masterService, JSON.stringify( f ) ).catch( this.handleError );
    }
 
@@ -39,6 +44,7 @@ export class SelectionStepService {
    }
 
    updateProcess( f: SelectionProcess ) {
+      f.auditoriaUsuario = this.idUsuario
       return this.authHttp.put( '<%= SVC_TH_URL %>/api/procesos/', JSON.stringify( f ) ).catch( this.handleError );
    }
 
@@ -84,5 +90,25 @@ export class SelectionStepService {
       return Promise.reject( error.message || error );
    }
 
+   getcentralRisk( ) {
+      return this.authHttp.get( this.serviceURL + 'centralesRiesgos' )
+      .map( ( res: Response ) => res.json() as CentralRisk[] );
+   }
+
+   getEmployeesCentralRisk(id:number ) {
+      return this.authHttp.get( this.serviceURL + 'tercerosCentralesRiesgos' )
+      .map( ( res: Response ) => res.json() as EmployeeCentralRisk[] );
+   }
+
+   addEmployeesCentralRisk( f: EmployeeCentralRisk ) {
+      f.auditoriaUsuario = this.idUsuario
+      return this.authHttp.post( this.serviceURL + 'tercerosCentralesRiesgos', f )
+      .map( ( res: Response ) => res.json() );
+   };
+
+   updateEmployeesCentralRisk( f: EmployeeCentralRisk ) {
+      f.auditoriaUsuario = this.idUsuario
+      return this.authHttp.put( this.masterService + 'tercerosCentralesRiesgos', f  ).catch( this.handleError );
+   }
 }
 

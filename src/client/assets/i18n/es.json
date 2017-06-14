@@ -74,6 +74,8 @@
   "BTN_PUBLICAVACANTE": "Publicar Vacante",
   "BTN_ARRIBA": "Subir",
   "BTN_ABAJO": "Bajar",
+  "BTN_DOWNLOAD": "Descargar",
+  "BTN_UPLOAD": "Subir archivo",
   "FIN_COMUNES":"====================================================================",
 
   "UBICACION":{
@@ -922,6 +924,12 @@
       "LBL_POSTULANTEA" : "Postulante a",
       "LBL_INFOPOSTULANTE" : "Información del postulante",
       "LBL_APRUEBAPASO" : "Aprobación del paso",
+      "LBL_CENTRALRIESGO":"Central de riesgo",
+      "LBL_CENTRALESRIESGOS":"Centrales de riesgos",
+      "LBL_CONSULTAR":"Consultar",
+      "LBL_ADJUNTAR":"Ajuntar",
+      "LBL_APROBAR":"Aprobar",
+      "LBL_REPORTAR":"Reportar",
       "LBL_URL":"URL",
       "":""
    },
