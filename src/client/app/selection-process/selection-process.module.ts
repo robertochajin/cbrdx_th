@@ -17,6 +17,8 @@ import { StepDetailComponent } from './step-detail.component';
 import { StepProcessComponent } from './step-process.component';
 import { EmployeesService } from '../_services/employees.service';
 import { CandidateProcessService } from '../_services/candidate-process.service';
+import { CandidatesComponent } from './candidates.component';
+import { UsuariosService } from '../_services/usuarios.service';
 
 @NgModule( {
               imports: [
@@ -31,7 +33,8 @@ import { CandidateProcessService } from '../_services/candidate-process.service'
                  StepEditComponent,
                  StepDetailComponent,
                  StepProcessComponent,
-                 SelectionProcessVacanciesComponent
+                 SelectionProcessVacanciesComponent,
+                 CandidatesComponent
               ],
               bootstrap: [ SelectionProcessComponent ],
               providers: [
@@ -42,7 +45,8 @@ import { CandidateProcessService } from '../_services/candidate-process.service'
                  EmployeesService,
                  CandidateProcessService,
                  SelectionStepService,
-                 PublicationQuestionnairesService
+                 PublicationQuestionnairesService,
+                 UsuariosService
               ],
               exports: [ SelectionProcessComponent ]
            } )

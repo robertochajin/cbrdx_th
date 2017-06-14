@@ -155,7 +155,8 @@ export class StepEditComponent implements OnInit {
       event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
    }
 
-   goBack(): void {
+   goBack(fDirty : boolean): void {
+      if (fDirty){
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea salir sin guardar?`,
                                            header: 'Corfirmación',
@@ -164,6 +165,9 @@ export class StepEditComponent implements OnInit {
                                               this.router.navigate( [ 'step-list' ] );
                                            }
                                         } );
+      }else {
+         this.router.navigate( [ 'step-list' ] );
+      }
    }
 
 }

@@ -28,6 +28,7 @@ export class Publications {
    auditoriaUsuario: number;
    auditoriaFecha: Date;
    cargo: string;
+   idProceso: number;
 
    constructor() {
       this.idPublicacion = null;
