@@ -143,7 +143,7 @@ export class RiskComponent implements OnInit {
    onSubmit() {
       this.msgs = [];
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea agregar este riesgo?`,
+                                           message: ` ¿Está seguro que desea agregar este riesgo?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {

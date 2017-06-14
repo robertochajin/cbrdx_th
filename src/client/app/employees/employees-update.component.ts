@@ -273,8 +273,8 @@ export class EmployeesUpdateComponent implements OnInit {
 
       if ( fDirty ){
          this.confirmationService.confirm( {
-            message: ` ¿Esta seguro que desea salir sin guardar?`,
-            header: 'Corfirmación',
+            message: ` ¿Está seguro que desea salir sin guardar?`,
+            header: 'Confirmación',
             icon: 'fa fa-question-circle',
             accept: () => {
                this._nav.setTab( 0 );
@@ -409,7 +409,7 @@ export class EmployeesUpdateComponent implements OnInit {
             if ( res.idTercero > 0 && this.employee.idTercero !== res.idTercero ) {
                this.confirmationService.confirm( {
                                                     message: ` ¿La cedula que ha ingresado ya existe, desea ver el colaborador existente?`,
-                                                    header: 'Corfirmación',
+                                                    header: 'Confirmación',
                                                     icon: 'fa fa-question-circle',
                                                     accept: () => {
                                                        this.router.navigate( [ '/employees/update/' + res.idTercero ] );

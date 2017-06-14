@@ -31,4 +31,9 @@
         </p-column>
     </p-dataTable>
 </div>
-<p-confirmDialog width="400"></p-confirmDialog>
+<p-confirmDialog width="400" #cd> 
+	<p-footer> 
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button> 
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button> 
+	</p-footer> 
+</p-confirmDialog>
