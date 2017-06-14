@@ -160,7 +160,7 @@ export class AbsenceComponent implements OnInit {
    delREE( a: Absence ) {
       this.dialogObjet = a;
       this.confirmationService.confirm( {
-                                           message: `¿Esta seguro que lo desea eliminar?`,
+                                           message: `¿Está seguro que desea inhabilitar este registro?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
@@ -197,7 +197,7 @@ export class AbsenceComponent implements OnInit {
    delREP( a: Absence ) {
       this.dialogObjet = a;
       this.confirmationService.confirm( {
-                                           message: `¿Esta seguro que lo desea eliminar?`,
+                                           message: `¿Está seguro que desea inhabilitar este registro?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
