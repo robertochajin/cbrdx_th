@@ -24,7 +24,9 @@ import { DivisionPoliticaService } from '../_services/divisionPolitica.service';
 @Component( {
                moduleId: module.id,
                selector: 'employees-curriculum-vitae',
-               templateUrl: 'employees-curriculum-vitae.component.html'
+               templateUrl: 'employees-curriculum-vitae.component.html',
+               styleUrls: [ 'employees-curriculum-vitae.component.css' ],
+
             } )
 
 export class EmployeesCurriculumVitaeComponent implements OnInit {
