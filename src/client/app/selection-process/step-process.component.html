@@ -72,6 +72,18 @@
 					</div>
 					
 					<div class="row">
+						<div class="form-group col-md-12" *ngIf="true">
+							<label for="validStep">* {{'PROCESOSELECCION.LBL_DETALLECORREO' | translate }}</label>
+							<textarea id="descripcion" name="descripcion" pInputTextarea rows="4" cols="35" #descr="ngModel"
+							          [(ngModel)]="candidateProcess.observacion" required="true" class="form-control"
+							          maxlength="500"></textarea>
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !descr.valid">
+								<i class="fa fa-close"></i>
+								{{'PROCESOSELECCION.LBL_DETALLECORREO' | translate }} {{'LBL_REQUERIDO' | translate }}
+							</div>
+						</div>
+					</div>
+					<div class="row">
 						<div class="form-group col-md-6" *ngIf="true">
 							<label for="validStep">* {{'PROCESOSELECCION.LBL_APRUEBAPASO' | translate }}</label>
 							<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"

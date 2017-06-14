@@ -15,6 +15,9 @@ import { CandidateProcessService } from '../_services/candidate-process.service'
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
 
+import { JwtHelper } from 'angular2-jwt';
+import { RolesService } from '../_services/roles.service';
+
 @Component( {
                moduleId: module.id,
                selector: 'step-process',
@@ -24,7 +27,7 @@ export class StepProcessComponent implements OnInit {
    private publication: PersonnelRequirement = new PersonnelRequirement();
    private step: SelectionStep = new SelectionStep();
    private candidate: Employee = new Employee();
-   public  indApproval: number;
+   public indApproval: number;
    public approvalOptions: SelectItem[] = [];
    public candidateProcess: CandidateProcess = new CandidateProcess();
    private es: any;
@@ -33,15 +36,25 @@ export class StepProcessComponent implements OnInit {
    public responsables: SelectItem[] = [];
    private showCalendar = false;
 
+   usuarioLogueado: any;
+   idRol: number;
+   jwtHelper: JwtHelper = new JwtHelper();
+
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
       private _nav: NavService,
       private router: Router,
       private listaService: ListaService,
+      private rolesService: RolesService,
       private employeesService: EmployeesService,
       private vacanciesService: VacanciesService,
       private candidateProcessService: CandidateProcessService,
       private selectionStepService: SelectionStepService ) {
+
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+      }
 
       this.es = {
          firstDayOfWeek: 1,
@@ -56,50 +69,62 @@ export class StepProcessComponent implements OnInit {
 
       this.minDate = new Date( Date.now() );
 
-      this.approvalOptions.push({label: 'Seleccione', value:null});
-      this.approvalOptions.push({label: 'No aplica este paso', value:2});
-      this.approvalOptions.push({label: 'Aprueba este paso', value:1});
-      this.approvalOptions.push({label: 'No aprueba este paso', value:0});
+      this.approvalOptions.push( { label: 'Seleccione', value: null } );
+      this.approvalOptions.push( { label: 'No aplica este paso', value: 2 } );
+      this.approvalOptions.push( { label: 'Aprueba este paso', value: 1 } );
+      this.approvalOptions.push( { label: 'No aprueba este paso', value: 0 } );
 
       this.route.params.subscribe( ( params: Params ) => {
-         if ( params[ 'idStep' ] !== undefined && params[ 'idPublication' ] !== undefined && params[ 'idCandidate' ] !== undefined ) {
+         if ( params[ 'idStep' ] !== undefined && params[ 'idTerceroPublication' ] !== undefined ) {
             this.candidateProcess.idProcesoPaso = params[ 'idStep' ];
-            this.candidateProcess.idTercero = params[ 'idCandidate' ];
-            this.candidateProcess.idPublicacion = params[ 'idPublication' ];
-
-
+            this.candidateProcess.idTerceroPublicacion = params[ 'idTerceroPublication' ];
 
             selectionStepService.get( params[ 'idStep' ] ).subscribe( step => {
                this.step = step;
-
-               vacanciesService.getPublication( params[ 'idPublication' ] ).subscribe( pb => {
-                  this.publication = pb;
+               rolesService.listRoles().subscribe( rest => {
+                  let temp = rest.find( r => r.idRol === this.step.idRol );
+                  if ( temp ) {
+                     selectionStepService.getUsuariosRol( temp.codigoRol ).subscribe( data => {
+                        if ( data.length > 0 ) {
+                           this.responsables.push( { label: 'Seleccione', value: null } );
+                           this.responsables.push( { label: this.usuarioLogueado.nombre, value: this.usuarioLogueado.usuario.idUsuario } );
+                           for ( let d of data ) {
+                              this.responsables.push( { label: d.nombre, value: d.idUsuario } );
+                           }
+                        } else {
+                           this.responsables.push( { label: this.usuarioLogueado.nombre, value: this.usuarioLogueado.usuario.idUsuario } );
+                        }
+                     } );
+                  }
+               } );
+               selectionStepService.getTerceroPublicacio( params[ 'idTerceroPublication' ] ).subscribe( res => {
+                  employeesService.get( res.idTercero ).subscribe( cndt => {
+                     this.candidate = cndt;
+                     this.candidate.nombreCompleto = this.candidate.primerNombre + ' ' +
+                                                     this.candidate.segundoNombre + ' ' +
+                                                     this.candidate.primerApellido + ' ' +
+                                                     this.candidate.segundoApellido;
+                     this.candidate.edad = moment( this.candidate.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
+                  } );
+                  vacanciesService.getPublication( res.idPublicacion ).subscribe( pb => {
+                     this.publication = pb;
+                  } );
                } );
 
                this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
                   this.stepStates = res;
                   if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
                      this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
-                     this.candidateProcessService.get(this.candidateProcess.idProcesoSeleccion).subscribe(cp => {
+                     this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
                         this.candidateProcess = cp;
                         this.prepareForm();
-                     });
+                     } );
                   } else {
-                     this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode('VAC');
+                     this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
                      this.prepareForm();
                   }
-               });
+               } );
 
-
-            } );
-
-            employeesService.get( params[ 'idCandidate' ] ).subscribe( cndt => {
-               this.candidate = cndt;
-               this.candidate.nombreCompleto = this.candidate.primerNombre + ' ' +
-                                               this.candidate.segundoNombre + ' ' +
-                                               this.candidate.primerApellido + ' ' +
-                                               this.candidate.segundoApellido;
-               this.candidate.edad = moment( this.candidate.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
             } );
 
          } else {
@@ -107,37 +132,37 @@ export class StepProcessComponent implements OnInit {
             this.router.navigate( [ 'selection-process' ] );
          }
       } );
-   }
 
+
+   }
 
    ngOnInit() {
    }
 
-   prepareForm(){
+   prepareForm() {
       //Se verifica el estado del paso y la la necesidad de mostrar o nó la asignación de fecha
-      if(this.getIdStateByCode('VAC') === this.candidateProcess.idEstadoDiligenciado){
+      if ( this.getIdStateByCode( 'VAC' ) === this.candidateProcess.idEstadoDiligenciado ) {
          this.showCalendar = this.step.indicadorCalendario;
 
+      } else if ( this.getIdStateByCode( 'PROG' ) === this.candidateProcess.idEstadoDiligenciado ) {
 
-      } else if(this.getIdStateByCode('PROG') === this.candidateProcess.idEstadoDiligenciado){
-
-      } else if(this.getIdStateByCode('APROB') === this.candidateProcess.idEstadoDiligenciado){
+      } else if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ) {
 
       }
    }
 
    onSubmit() {
-      if(this.indApproval === 2){
+      if ( this.indApproval === 2 ) {
          this.candidateProcess.indicadorNoAplica = true;
-      } else if(this.indApproval === 1) {
+      } else if ( this.indApproval === 1 ) {
          this.candidateProcess.indicadorContProceso = true;
-      } else if(this.indApproval === 0) {
+      } else if ( this.indApproval === 0 ) {
          this.candidateProcess.indicadorContProceso = false;
       }
 
-      if(this.candidateProcess.idProcesoSeleccion !== undefined) {
-         this.candidateProcessService.update(this.candidateProcess).subscribe(res => {
-            if(res.ok) {
+      if ( this.candidateProcess.idProcesoSeleccion !== undefined ) {
+         this.candidateProcessService.update( this.candidateProcess ).subscribe( res => {
+            if ( res.ok ) {
                this._nav.setMesage( 2 );
                this.router.navigate( [ 'selection-process' ] );
             } else {
@@ -147,10 +172,10 @@ export class StepProcessComponent implements OnInit {
          }, () => {
             this._nav.setMesage( 3 );
             this.router.navigate( [ 'selection-process' ] );
-         });
+         } );
       } else {
-         this.candidateProcessService.add(this.candidateProcess).subscribe(res => {
-            if(res.idProcesoSeleccion) {
+         this.candidateProcessService.add( this.candidateProcess ).subscribe( res => {
+            if ( res.idProcesoSeleccion ) {
                this._nav.setMesage( 1 );
                this.router.navigate( [ 'selection-process' ] );
             } else {
@@ -160,21 +185,20 @@ export class StepProcessComponent implements OnInit {
          }, () => {
             this._nav.setMesage( 3 );
             this.router.navigate( [ 'selection-process' ] );
-         });
+         } );
       }
    }
 
-   getIdStateByCode(code: string) : number {
-      let state:ListaItem = this.stepStates.find(s => s.codigo === code);
-      if(state !== undefined){
+   getIdStateByCode( code: string ): number {
+      let state: ListaItem = this.stepStates.find( s => s.codigo === code );
+      if ( state !== undefined ) {
          return state.idLista;
       } else {
          return 0;
       }
    }
 
-
-   goBack(){
+   goBack() {
 
    }
 }

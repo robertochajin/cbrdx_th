@@ -925,6 +925,7 @@
       "LBL_ASIGNARFECHA" : "Asignar fecha",
       "LBL_RESPONSABLE" : "Asignar responsable",
       "LBL_URL":"URL",
+      "LBL_DETALLECORREO":"Detalle de correo que se envia al postulante",
       "":""
    },
 

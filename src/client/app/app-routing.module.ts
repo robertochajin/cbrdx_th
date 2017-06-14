@@ -371,7 +371,7 @@ const routes = [
    { path: 'add-step', component: StepEditComponent, canActivate: [ AuthGuard ] },
    { path: 'update-step/:idStep', component: StepEditComponent, canActivate: [ AuthGuard ] },
    { path: 'detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
-   { path: 'process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
+   { path: 'process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
 ];
 
 @NgModule( {
