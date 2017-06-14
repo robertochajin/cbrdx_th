@@ -1,0 +1,73 @@
+<h3 class="first">Adjuntos</h3>
+<div class="row">
+	<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+		<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="form-group col-lg-6">
+						<label for="nombrearchivo">{{'PROCESOSELECCION.LBL_NOMBRE' | translate }}</label>
+						<input id="nombrearchivo" name="nombrearchivo" #nombrearchivo="ngModel" pInputText
+						       type="text" maxlength="64"  required [(ngModel)]="adjunto.nombre"/>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !nombrearchivo.valid">
+							<i class="fa fa-close"></i>
+							{{'PROCESOSELECCION.LBL_NOMBRE' | translate }} {{'LBL_REQUERIDO' | translate }}
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-lg-12">
+						<label>{{'PROCESOSELECCION.LBL_ARCHIVO' | translate }}</label>
+						<p-fileUpload name="file" url="{{svcSpUrl}}" uploadLabel="Subir" cancelLabel="Cancelar"
+						              chooseLabel="Examinar" (onUpload)="uploadingOk($event)"
+						              (onBeforeSend)="onBeforeSend($event)">
+						</p-fileUpload>
+					</div>
+				</div>
+				<br/>
+				<!--<div class="row">-->
+					<!--<div class="col-md-1 col-md-offset-4">-->
+						<!--<a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>-->
+					<!--</div>-->
+					<!--<div class="col-md-2">-->
+						<!--<button pButton label="Siguiente" type="submit"></button>-->
+					<!--</div>-->
+				<!--</div>-->
+			</div>
+		</div>
+	</form>
+</div>
+<div class="row">
+	<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+		<div class="col-md-10 col-md-offset-1">
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listInsuranceDocument"
+			             [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+				<p-column field="documento" header="{{'ASEGURADORA.LBL_NOMBRE' | translate }}"
+				          [sortable]="true"></p-column>
+				<p-column field="tipoDocumento" header="{{'ASEGURADORA.LBL_TIPODOCUMENTO' | translate }}"
+				          [sortable]="true"></p-column>
+				<p-column field="sentido" header="{{'ASEGURADORA.LBL_SENTIDO' | translate }}"
+				          [sortable]="true"></p-column>
+				<p-column field="auditoriaFecha" header="{{'ASEGURADORA.LBL_FECHA' | translate }}"
+				          [sortable]="true"></p-column>
+				<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+					<template let-doc="rowData" pTemplate="body">
+						<button type="button" icon="fa-trash" class="ui-button-success" data-toggle="tooltip"
+						        title="{{'BTN_ELIMINAR' | translate}}"
+						        pButton (click)="delete(doc)"></button>
+						<a icon="fa-download" class="ui-button-warning" data-toggle="tooltip" title="{{'BTN_DESCARGAR' | translate}}"
+						   *ngIf="doc.documentoInterno !== null"
+						   pButton alt="Documento" href="{{svcSpUrl}}/file/{{doc.documentoInterno}}"></a>
+					</template>
+				</p-column>
+			</p-dataTable>
+		</div>
+	</div>
+</div>
+
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate}}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate}}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>

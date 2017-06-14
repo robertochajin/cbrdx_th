@@ -936,6 +936,9 @@
       "LBL_INFOPOSTULANTE" : "Información del postulante",
       "LBL_APRUEBAPASO" : "Aprobación del paso",
       "LBL_URL":"URL",
+      "LBL_NOMBRE":"Nombre",
+      "LBL_ARCHIVO":"Archivo",
+      "LBL_URL":"URL",
       "":""
    },
 
