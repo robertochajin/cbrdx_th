@@ -214,7 +214,8 @@ export class SelectionProcessAddComponent implements OnInit {
       } );
    }
 
-   goBack(): void {
+   goBack(fDirty : boolean): void {
+      if (fDirty){
       this.confirmationService.confirm( {
                                            message: ` ¿Esta seguro que desea salir sin guardar?`,
                                            header: 'Confirmación',
@@ -224,6 +225,9 @@ export class SelectionProcessAddComponent implements OnInit {
                                               this.location.back();
                                            }
                                         } );
+      }else {
+         this.location.back();
+      }
    }
 
    // funciones cuestionarios
@@ -266,7 +270,7 @@ export class SelectionProcessAddComponent implements OnInit {
 
    disableQuestionnaire( questionnaire: PublicationsQuestionnaries ) {
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que lo desea eliminar?`,
+                                           message: ` ¿Está seguro que desea inhabilitar este registro?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {

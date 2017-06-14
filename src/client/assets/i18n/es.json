@@ -4,6 +4,7 @@
   "LBL_APROBAR":"Aprobar",
   "LBL_NOAPROBAR":"No Aprobar",
   "BTN_EDITAR":"Editar",
+  "BTN_EDITAR2": "Editar Tercero",
   "BTN_EDITARDIRECCION":"Editar Dirección",
   "BTN_ACEPTAR":"Aceptar",
   "BTN_AGREGAR":"Agregar",
@@ -74,7 +75,8 @@
   "BTN_PUBLICAVACANTE": "Publicar Vacante",
   "BTN_ARRIBA": "Subir",
   "BTN_ABAJO": "Bajar",
-  "FIN_COMUNES":"====================================================================",
+  "BTN_BORRAR":"Borrar",
+   "FIN_COMUNES":"====================================================================",
 
   "UBICACION":{
       "LBL_UBICACION":"Ubicación",
@@ -935,6 +937,11 @@
       "LBL_POSTULANTEA" : "Postulante a",
       "LBL_INFOPOSTULANTE" : "Información del postulante",
       "LBL_APRUEBAPASO" : "Aprobación del paso",
+      "LBL_CANDIDATO" : "Candidato",
+      "LBL_NOASIGNADO" : "No asignado",
+      "LBL_PROGRAMADO" : "Programado",
+      "LBL_APROBO" : "Aprobó",
+      "LBL_NOAPROBO" : "No aprobó",
       "LBL_URL":"URL",
       "":""
    },

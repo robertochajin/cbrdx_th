@@ -160,7 +160,7 @@ export class CompetenciesGroupsComponent implements OnInit {
 
    disableCompetencie( competencie: Competencies ) {
       this.confirmationService.confirm( {
-                                           message: `¿Esta seguro que desea deshabilitar esta competencia?`,
+                                           message: `¿Esta seguro que desea inhabilitar esta competencia?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
