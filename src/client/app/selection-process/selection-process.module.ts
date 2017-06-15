@@ -22,6 +22,7 @@ import { AdjuntosService } from '../_services/adjuntos.service';
 import { AdjuntosModule } from '../adjuntos/adjuntos.module';
 import { CandidatesComponent } from './candidates.component';
 import { UsuariosService } from '../_services/usuarios.service';
+import { CandidateRevisionComponent } from './candidate-revision.component';
 
 @NgModule( {
               imports: [
@@ -38,7 +39,8 @@ import { UsuariosService } from '../_services/usuarios.service';
                  StepDetailComponent,
                  StepProcessComponent,
                  SelectionProcessVacanciesComponent,
-                 CandidatesComponent
+                 CandidatesComponent,
+                 CandidateRevisionComponent
               ],
               bootstrap: [ SelectionProcessComponent ],
               providers: [
