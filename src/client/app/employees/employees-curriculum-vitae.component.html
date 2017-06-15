@@ -4,7 +4,7 @@
 			<h3 class="first">{{ 'EMPLOYEES.LBL_HOJADEVIDA' | translate }}</h3>
 		</div>
 	</div>
-	<div class="row">
+	<div id="curriculum" class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="row clearfix card-header perfil">
 				<div class="col-md-2">
@@ -123,5 +123,7 @@
 	<div class="form-group col-md-12">
 		<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
 		        pButton (click)="goBack()"></button>
+		<button icon="fa-pdf" label="Generar PDF" type="button"
+				  pButton (click)="toPDF()"></button>
 	</div>
 </div>

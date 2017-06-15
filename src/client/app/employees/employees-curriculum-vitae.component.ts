@@ -21,6 +21,10 @@ import { References } from '../employees-references/references';
 import { ReferencesService } from '../employees-references/references.service';
 import { DivisionPoliticaService } from '../_services/divisionPolitica.service';
 
+import * as jsPDF from 'jspdf';
+import * as html2canvas from 'html2canvas';
+
+
 @Component( {
                moduleId: module.id,
                selector: 'employees-curriculum-vitae',
@@ -197,6 +201,15 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
 
    goBack(): void {
       this.location.back();
+   }
+
+   toPDF(): void{
+      html2canvas( jQuery('#curriculum') ).then(function(canvas) {
+         var doc = new jsPDF('p', 'mm', 'a4');
+         var imgData = canvas.toDataURL('image/png');
+         doc.addImage(imgData, 'PNG', 0, 0);
+         doc.save('sample-file.pdf');
+      });
    }
 
 }
