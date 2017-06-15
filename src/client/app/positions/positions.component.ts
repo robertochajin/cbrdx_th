@@ -178,7 +178,7 @@ export class PositionsComponent implements OnInit {
          }else{
             this.displayPerson = false;
             this.confirmationService.confirm( {
-                                                 message: ` ¿Esta seguro que desea inhabilitar el cargo?,recuerde que se deshabilitará para todos las las Areas`,
+                                                 message: ` ¿Está seguro que desea inhabilitar el cargo?,recuerde que se deshabilitará para todos las las Areas`,
                                                  header: 'Confirmación',
                                                  icon: 'fa fa-question-circle',
                                                  accept: () => {
