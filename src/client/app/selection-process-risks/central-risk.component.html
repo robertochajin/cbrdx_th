@@ -59,7 +59,7 @@
 						<!--<button type="button" pButton (click)="uploadFile()" icon="fa-cloud-upload "></button>-->
 						<p-fileUpload name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
 						              chooseLabel="{{'PROCESOSELECCION.LBL_ADJUNTAR' | translate}}"
-						              (onBeforeSend)="onBeforeSend($event)"
+						              (onBeforeSend)="onBeforeSend($event,data)"
 						              (onUpload)="onUpload($event,data)"
 						></p-fileUpload>
 					</template>

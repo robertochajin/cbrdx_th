@@ -28,7 +28,7 @@ export class CentralRiskComponent implements OnInit {
    public url = '';
    public title = '';
    displayDialog: boolean = false;
-
+   respuesta:any;
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
       private _nav: NavService,
@@ -39,49 +39,43 @@ export class CentralRiskComponent implements OnInit {
       private selectionStepService: SelectionStepService ) {
 
       this.route.params.subscribe( ( params: Params ) => {
-         let idCandidate = 11;
-         employeesService.get( idCandidate ).subscribe( cndt => {
-            this.candidate = cndt;
-            this.candidate.nombreCompleto = this.candidate.primerNombre + ' ' +
-                                            this.candidate.segundoNombre + ' ' +
-                                            this.candidate.primerApellido + ' ' +
-                                            this.candidate.segundoApellido;
-            this.candidate.edad = moment( this.candidate.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
-         } );
+         let idTercerosPublicaciones = +params[ 'id' ];
+         this.selectionStepService.getTerceroPublicacio( idTercerosPublicaciones).subscribe(tp =>{
 
+            let idCandidate = tp.idTercero;
+            let idPublicacion = tp.idPublicacion;
+            employeesService.get( idCandidate ).subscribe( cndt => {
+               this.candidate = cndt;
+               this.candidate.nombreCompleto = this.candidate.primerNombre + ' ' +
+                                               this.candidate.segundoNombre + ' ' +
+                                               this.candidate.primerApellido + ' ' +
+                                               this.candidate.segundoApellido;
+               this.candidate.edad = moment( this.candidate.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
+            } );
 
-         selectionStepService.getcentralRisk().subscribe( res => {
-            this.centrales = res;
-            selectionStepService.getEmployeesCentralRisk( idCandidate ).subscribe( res => {
-               res.map( emp => {
-                  let _i = this.centrales.indexOf( this.centrales.find( m => m.idCentralRiesgo === emp.idCentralRiesgo ) );
-                  this.centrales[ _i ].idTerceroCentralRiesgo = emp.idTerceroCentralRiesgo;
-                  this.centrales[ _i ].idTercero = emp.idTercero;
-                  this.centrales[ _i ].adjunto = emp.adjunto;
-                  this.centrales[ _i ].adjunto = 'https://www.subes.sep.gob.mx/archivos/tutor/manual_general.pdf';
-                  this.centrales[ _i ].indicadorReportado = emp.indicadorReportado;
-                  this.centrales[ _i ].indicadorAprobado = emp.indicadorAprobado;
+            selectionStepService.getcentralRisk().subscribe( res => {
+               this.centrales = res;
+               selectionStepService.getEmployeesCentralRisk( idCandidate ).subscribe( res => {
+                  res.map( emp => {
+                     let _i = this.centrales.indexOf( this.centrales.find( m => m.idCentralRiesgo === emp.idCentralRiesgo ) );
+                     this.centrales[ _i ].idTerceroCentralRiesgo = emp.idTerceroCentralRiesgo;
+                     this.centrales[ _i ].idTercero = emp.idTercero;
+                     this.centrales[ _i ].adjunto = emp.adjunto;
+                     this.centrales[ _i ].adjunto = 'https://www.subes.sep.gob.mx/archivos/tutor/manual_general.pdf';
+                     this.centrales[ _i ].indicadorReportado = emp.indicadorReportado;
+                     this.centrales[ _i ].indicadorAprobado = emp.indicadorAprobado;
+                  } );
                } );
             } );
-         } );
 
-         let idPublicacion = 2;
-         let idStep = 40;
-          vacanciesService.getPublication( idPublicacion ).subscribe( pb => {
-             this.publication = pb;
-            /* selectionStepService.get( idStep ).subscribe( step => {
-                this.step = step;
-             } );*/
-          });
-
+            vacanciesService.getPublication( idPublicacion ).subscribe( pb => {
+               this.publication = pb;
+            });
+         });
       } );
    }
 
    ngOnInit() {
-   }
-
-   onSubmit() {
-
    }
 
    goBack() {
@@ -94,14 +88,14 @@ export class CentralRiskComponent implements OnInit {
       this.title = obj.nombre;
    }
 
-   onBeforeSend( event: any ) {
+   onBeforeSend( event: any , data: any  ) {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      event.formData = data;
    }
 
-   onUpload( event: any, data: any ) {
-      /*this.image = event.xhr.responseText;
-       this.usuariosService.refreshToken();
-       this.navService.setAvatar( this.image );*/
+   onUpload( event: any ) {
+      this.respuesta = event.xhr.responseText;
+      console.info(event);
    }
 
    aprobar(f: CentralRisk){
