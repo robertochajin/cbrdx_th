@@ -3,6 +3,7 @@ import { Response } from '@angular/http';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { SelectionStep } from '../_models/selectionStep';
 import { SelectionProcess } from '../_models/selection-process';
+import { TerceroPublicaciones } from '../_models/terceroPublicaciones';
 
 @Injectable()
 export class SelectionStepService {
@@ -78,6 +79,14 @@ export class SelectionStepService {
             return undefined;
          }
       });
+   }
+   getTerceroPublicacio(id:number){
+      return this.authHttp.get( '<%= SVC_TH_URL %>/api/tercerosPublicaciones/'+id )
+      .map( ( res: Response ) => res.json() as TerceroPublicaciones );
+   }
+   getUsuariosRol(codigo:string){
+      return this.authHttp.get( '<%= SVC_TH_URL %>/api/usuarios/usuarioRol/'+codigo )
+      .map( ( res: Response ) => res.json() as any );
    }
 
    handleError( error: any ): Promise<any> {
