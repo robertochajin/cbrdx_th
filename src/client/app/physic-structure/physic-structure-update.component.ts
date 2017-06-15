@@ -122,8 +122,8 @@ export class PhysicStructureUpdateComponent implements OnInit {
 
         if ( fDirty ){
             this.confirmationService.confirm( {
-                message: ` ¿Esta seguro que desea salir sin guardar?`,
-                header: 'Corfirmación',
+                message: ` ¿Está seguro que desea salir sin guardar?`,
+                header: 'Confirmación',
                 icon: 'fa fa-question-circle',
                 accept: () => {
                     this.location.back();

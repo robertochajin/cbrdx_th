@@ -119,7 +119,7 @@ export class PositionsAddComponent implements OnInit  {
 
    goBack(): void {
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea salir sin guardar?`,
+                                           message: ` ¿Está seguro que desea salir sin guardar?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {

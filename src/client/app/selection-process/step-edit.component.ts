@@ -158,8 +158,8 @@ export class StepEditComponent implements OnInit {
    goBack(fDirty : boolean): void {
       if (fDirty){
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea salir sin guardar?`,
-                                           header: 'Corfirmación',
+                                           message: ` ¿Está seguro que desea salir sin guardar?`,
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.router.navigate( [ 'step-list' ] );

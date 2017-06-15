@@ -40,7 +40,7 @@
          </div>
       </div>
    </div>
-   <p-dataTable [value]="observations" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+   <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="observations" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
       <p-column field="idCargoEstadoObservacion" header="{{ 'LBL_ID' | translate }}" [sortable]="true"></p-column>
       <p-column field="estadoCargo" header="{{ 'LBL_ESTADO' | translate }}" [sortable]="true"></p-column>
       <p-column field="observacion" header="{{ 'POSITION.LBL_OBSERVACION' | translate }}" [sortable]="true"></p-column>

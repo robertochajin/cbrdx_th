@@ -217,7 +217,7 @@ export class SelectionProcessAddComponent implements OnInit {
    goBack(fDirty : boolean): void {
       if (fDirty){
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea salir sin guardar?`,
+                                           message: ` ¿Está seguro que desea salir sin guardar?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
@@ -270,7 +270,7 @@ export class SelectionProcessAddComponent implements OnInit {
 
    disableQuestionnaire( questionnaire: PublicationsQuestionnaries ) {
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que lo desea eliminar?`,
+                                           message: ` ¿Está seguro que desea inhabilitar este registro?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {

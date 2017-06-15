@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { CandidateProcess } from '../_models/candidateProcess';
+import { CandidateProgress } from '../_models/candidateProgress';
 
 @Injectable()
 export class CandidateProcessService {
@@ -33,6 +34,11 @@ export class CandidateProcessService {
    getAll() {
       return this.authHttp.get( this.masterService )
       .map( ( res: Response ) => res.json() as CandidateProcess[] );
+   }
+
+   getCandidatesByPublication(idPublication: number) {
+      return this.authHttp.get( this.masterService + 'terceroPublicacion/' + idPublication)
+      .map( ( res: Response ) => res.json() as CandidateProgress[] );
    }
 
    get(idCandidateProcess: number) {
