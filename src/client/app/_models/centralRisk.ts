@@ -12,7 +12,7 @@ export class CentralRisk {
    // Se agrego estos campos a nivel de vista para fasilitar las acciones en el datatable
    idTerceroCentralRiesgo: number = null;
    idTercero: number = null;
-   adjunto: string = null;
+   idAdjunto: number = null;
    indicadorReportado: boolean = false;
    indicadorAprobado: boolean = false;
 }

@@ -108,18 +108,22 @@ export class SelectionStepService {
 
    getEmployeesCentralRisk(id:number ) {
       return this.authHttp.get( this.serviceURL + 'tercerosCentralesRiesgos/tercero/'+id )
-      .map( ( res: Response ) => res.json() as EmployeeCentralRisk[] );
+      .map( ( res: Response ) => res.json() as CentralRisk[] );
    }
 
-   addEmployeesCentralRisk( f: EmployeeCentralRisk ) {
-      f.auditoriaUsuario = this.idUsuario
+   addEmployeesCentralRisk( f: CentralRisk ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'tercerosCentralesRiesgos', f )
       .map( ( res: Response ) => res.json() );
    };
 
-   updateEmployeesCentralRisk( f: EmployeeCentralRisk ) {
-      f.auditoriaUsuario = this.idUsuario
+   updateEmployeesCentralRisk( f: CentralRisk ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'tercerosCentralesRiesgos', f  ).catch( this.handleError );
+   }
+
+   downloadFile(id:number){
+      return this.authHttp.get( this.serviceURL + 'adjuntos/file/'+id ).map( ( res: Response ) => res.text() );
    }
 }
 

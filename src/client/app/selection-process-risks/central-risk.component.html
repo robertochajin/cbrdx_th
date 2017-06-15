@@ -14,6 +14,8 @@
 							<h3>{{candidate.tipoDocumento}} - {{candidate.numeroDocumento}}</h3>
 						</div>
 					</div>
+					<button icon="fa-plus" label="{{'PROCESOSELECCION.LBL_VERHOJADEVIDA' | translate }}" type="button" (click)="curriculum()"
+					        pButton></button>
 				</fieldset>
 			</form>
 		</p-panel>
@@ -60,7 +62,7 @@
 						<p-fileUpload name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
 						              chooseLabel="{{'PROCESOSELECCION.LBL_ADJUNTAR' | translate}}"
 						              (onBeforeSend)="onBeforeSend($event,data)"
-						              (onUpload)="onUpload($event,data)"
+						              (onUpload)="onUpload($event,data)" accept="image/*,application/pdf"
 						></p-fileUpload>
 					</template>
 				</p-column>
@@ -77,26 +79,66 @@
 				</p-column>
 				<p-column field="" header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 					<template let-data="rowData" pTemplate="body" >
-						<button type="button" icon="fa-eye" *ngIf="data.adjunto !== null"
+						<button type="button" icon="fa-eye" *ngIf="data.idAdjunto"
 						        class="ui-button btn" data-toggle="tooltip"
 						        title="{{'BTN_VISUALIZAR' | translate}}"
 						        pButton (click)="previewFile(data)"></button>
 						
+						<button type="button" icon="fa-cloud-download" *ngIf="data.idAdjunto"
+						        class="ui-button-success"  data-toggle="tooltip"
+						        title="{{'BTN_DOWNLOAD' | translate}}"
+						        pButton (click)="downloadFile(data)" ></button>
 						
-						<a download href = "{{data.adjunto}}">
-							<button type="button" icon="fa-cloud-download" *ngIf="data.adjunto !== null"
+						<!--<a download href = "{{fileThUrl}}/{{data.idAdjunto}}" *ngIf="data.idAdjunto">
+							<button type="button" icon="fa-cloud-download"
 							        class="ui-button-success"  data-toggle="tooltip"
 							        title="{{'BTN_DOWNLOAD' | translate}}"
 							        pButton ></button>
 						</a>
-						
-						
-						<button type="button" icon="fa-trash" *ngIf="data.adjunto !== null"
+						-->
+						<button type="button" icon="fa-trash" *ngIf="data.idAdjunto"
 						        class="ui-button btn" data-toggle="tooltip" title="{{'BTN_ELIMINAR' | translate}}"
 						        pButton (click)="deleteFile(data)"></button>
+						<span *ngIf="!data.idAdjunto">{{'PROCESOSELECCION.LBL_NOADJUNTO' | translate}}</span>
 					</template>
 				</p-column>
 			</p-dataTable>
+			
+		</p-panel>
+		<p-panel header="{{'PROCESOSELECCION.LBL_CONTINUARPROCESO' | translate }}">
+			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="process">
+				<fieldset>
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="validStep">* {{'PROCESOSELECCION.LBL_APRUEBAPASO' | translate }}</label>
+							<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
+							            [autoWidth]="false" [(ngModel)]="indApproval"></p-dropdown>
+						</div>
+						<div class="form-group col-md-6">
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-12" >
+							<label for="observacion">* {{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}</label>
+							<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #observa="ngModel"
+							          [(ngModel)]="candidateProcess.observacion" required="true" class="form-control"
+							          maxlength="500"></textarea>
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !observa.valid">
+								<i class="fa fa-close"></i>
+								{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }} {{'LBL_REQUERIDO' | translate }}
+							</div>
+						</div>
+					</div>
+					<div class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+							<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+							        pButton></button>
+						
+						</div>
+					</div>
+				</fieldset>
+			</form>
 		</p-panel>
 	</div>
 </div>

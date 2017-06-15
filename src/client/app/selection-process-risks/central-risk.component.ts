@@ -12,6 +12,7 @@ import { PersonnelRequirement } from '../_models/personnelRequirement';
 import { CandidateProcess } from '../_models/candidateProcess';
 import { CandidateProcessService } from '../_services/candidate-process.service';
 import { CentralRisk } from '../_models/centralRisk';
+import { SelectItem } from 'primeng/components/common/api';
 
 @Component( {
                moduleId: module.id,
@@ -29,6 +30,13 @@ export class CentralRiskComponent implements OnInit {
    public title = '';
    displayDialog: boolean = false;
    respuesta:any;
+
+   public  indApproval: number;
+   public approvalOptions: SelectItem[] = [];
+   svcThUrl = '<%= SVC_TH_URL %>/api/tercerosCentralesRiesgos/file';
+   fileThUrl = '<%= SVC_TH_URL %>/api/adjuntos/file';
+   previewUrl = '<%= SVC_TH_URL %>/api/adjuntos/preview';
+   public idCandidate : number;
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
       private _nav: NavService,
@@ -38,13 +46,19 @@ export class CentralRiskComponent implements OnInit {
       private candidateProcessService: CandidateProcessService,
       private selectionStepService: SelectionStepService ) {
 
+      this.approvalOptions.push({label: 'Seleccione', value:null});
+      this.approvalOptions.push({label: 'No aplica este paso', value:2});
+      this.approvalOptions.push({label: 'Aprueba este paso', value:1});
+      this.approvalOptions.push({label: 'No aprueba este paso', value:0});
+
+
       this.route.params.subscribe( ( params: Params ) => {
          let idTercerosPublicaciones = +params[ 'id' ];
          this.selectionStepService.getTerceroPublicacio( idTercerosPublicaciones).subscribe(tp =>{
 
-            let idCandidate = tp.idTercero;
+            this.idCandidate = tp.idTercero;
             let idPublicacion = tp.idPublicacion;
-            employeesService.get( idCandidate ).subscribe( cndt => {
+            employeesService.get( this.idCandidate ).subscribe( cndt => {
                this.candidate = cndt;
                this.candidate.nombreCompleto = this.candidate.primerNombre + ' ' +
                                                this.candidate.segundoNombre + ' ' +
@@ -55,13 +69,12 @@ export class CentralRiskComponent implements OnInit {
 
             selectionStepService.getcentralRisk().subscribe( res => {
                this.centrales = res;
-               selectionStepService.getEmployeesCentralRisk( idCandidate ).subscribe( res => {
+               selectionStepService.getEmployeesCentralRisk( this.idCandidate ).subscribe( res => {
                   res.map( emp => {
                      let _i = this.centrales.indexOf( this.centrales.find( m => m.idCentralRiesgo === emp.idCentralRiesgo ) );
                      this.centrales[ _i ].idTerceroCentralRiesgo = emp.idTerceroCentralRiesgo;
-                     this.centrales[ _i ].idTercero = emp.idTercero;
-                     this.centrales[ _i ].adjunto = emp.adjunto;
-                     this.centrales[ _i ].adjunto = 'https://www.subes.sep.gob.mx/archivos/tutor/manual_general.pdf';
+                     this.centrales[ _i ].idTercero = this.idCandidate;
+                     this.centrales[ _i ].idAdjunto = emp.idAdjunto;
                      this.centrales[ _i ].indicadorReportado = emp.indicadorReportado;
                      this.centrales[ _i ].indicadorAprobado = emp.indicadorAprobado;
                   } );
@@ -88,14 +101,59 @@ export class CentralRiskComponent implements OnInit {
       this.title = obj.nombre;
    }
 
-   onBeforeSend( event: any , data: any  ) {
+   onBeforeSend( event: any , data: CentralRisk  ) {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      event.formData = data;
+      if(data.idTercero === null || data.idTercero === undefined){
+         data.idTercero = this.idCandidate;
+         data.indicadorReportado = false;
+         data.indicadorAprobado = false;
+      }
+      event.formData.append('obj', JSON.stringify(data));
    }
 
-   onUpload( event: any ) {
-      this.respuesta = event.xhr.responseText;
-      console.info(event);
+   onUpload( event: any, data: CentralRisk ) {
+      let respuesta = JSON.parse(event.xhr.response);
+      data.idTerceroCentralRiesgo = respuesta.idTerceroCentralRiesgo;
+      data.idAdjunto = respuesta.idAdjunto;
+   }
+
+
+   onSubmit() {
+      if(this.indApproval === 2){
+         this.candidateProcess.indicadorNoAplica = true;
+      } else if(this.indApproval === 1) {
+         this.candidateProcess.indicadorContProceso = true;
+      } else if(this.indApproval === 0) {
+         this.candidateProcess.indicadorContProceso = false;
+      }
+
+      if(this.candidateProcess.idProcesoSeleccion !== undefined) {
+         this.candidateProcessService.update(this.candidateProcess).subscribe(res => {
+            if(res.ok) {
+               this._nav.setMesage( 2 );
+               this.router.navigate( [ 'selection-process' ] );
+            } else {
+               this._nav.setMesage( 3 );
+               this.router.navigate( [ 'selection-process' ] );
+            }
+         }, () => {
+            this._nav.setMesage( 3 );
+            this.router.navigate( [ 'selection-process' ] );
+         });
+      } else {
+         this.candidateProcessService.add(this.candidateProcess).subscribe(res => {
+            if(res.idProcesoSeleccion) {
+               this._nav.setMesage( 1 );
+               this.router.navigate( [ 'selection-process' ] );
+            } else {
+               this._nav.setMesage( 3 );
+               this.router.navigate( [ 'selection-process' ] );
+            }
+         }, () => {
+            this._nav.setMesage( 3 );
+            this.router.navigate( [ 'selection-process' ] );
+         });
+      }
    }
 
    aprobar(f: CentralRisk){
@@ -106,7 +164,6 @@ export class CentralRiskComponent implements OnInit {
             this._nav.setMesage( 1, null );
          });
       }else{
-         console.log(f);
          this.selectionStepService.updateEmployeesCentralRisk( f ).subscribe( res => {
             this._nav.setMesage( 2, null );
          });
@@ -114,22 +171,26 @@ export class CentralRiskComponent implements OnInit {
 
    }
    previewFile(f: CentralRisk){
-      let link = 'https://www.subes.sep.gob.mx/archivos/tutor/manual_general.pdf';
-      this.url = link;
-      this.title = f.adjunto;
-      //
+      // let link = 'https://www.subes.sep.gob.mx/archivos/tutor/manual_general.pdf';
+      this.url = this.previewUrl+'/'+ f.idAdjunto;
+      this.title = f.nombre;
       this.displayDialog = true;
 
 
    }
    downloadFile(f: CentralRisk){
-      let link = 'https://www.subes.sep.gob.mx/archivos/tutor/manual_general.pdf';
-      window.open(link);
+
+      this.selectionStepService.downloadFile( f.idAdjunto ).subscribe(res => {
+         window.location.assign(res);
+      });
    }
    deleteFile(f: CentralRisk){
-      f.adjunto = null;
+      f.idAdjunto = null;
       this.selectionStepService.updateEmployeesCentralRisk( f ).subscribe( res => {
          this._nav.setMesage( 2, null );
       });
+   }
+   curriculum() {
+      this.router.navigate( [ 'employees/curriculum/' + this.candidate.idTercero ] );
    }
 }
