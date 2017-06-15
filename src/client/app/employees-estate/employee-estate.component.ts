@@ -37,7 +37,7 @@ export class EmployeesEstateComponent implements OnInit {
    del( employeeEstate: EmployeeEstate ) {
       this.dialogObjet = employeeEstate;
       this.confirmationService.confirm( {
-                                           message: `¿Esta seguro que lo desea eliminar?`,
+                                           message: `¿Está seguro que desea inhabilitar este registro?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {

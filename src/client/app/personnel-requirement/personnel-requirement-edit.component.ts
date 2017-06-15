@@ -652,9 +652,10 @@ export class PersonnelRequirementEditComponent implements OnInit {
 
    }
 
-   cancelReferred() {
+   cancelReferred(rfDirty : boolean) {
+      if (rfDirty){
       this.confirmationService.confirm( {
-                                           message: `¿Esta seguro que desea Cancelar?`,
+                                           message: `¿Está seguro que desea Cancelar?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
 
@@ -663,6 +664,10 @@ export class PersonnelRequirementEditComponent implements OnInit {
                                               this.editingReferred = false;
                                            }
                                         } );
+      }else {
+         this.requirementReferral = new RequirementReferral();
+         this.editingReferred = false;
+      }
    }
 
    sendRequest() {
@@ -925,15 +930,19 @@ export class PersonnelRequirementEditComponent implements OnInit {
       }
    }
 
-   goBack(): void {
+   goBack(fDirty : boolean): void {
+      if (fDirty){
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea salir sin guardar?`,
+                                           message: ` ¿Está seguro que desea salir sin guardar?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.location.back();
                                            }
                                         } );
+      }else {
+         this.location.back();
+      }
    }
 
    private areSpotsOk(): boolean {
