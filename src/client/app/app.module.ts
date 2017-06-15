@@ -73,6 +73,7 @@ import { PersonnelRequirementModule } from './personnel-requirement/personnel-re
 import { VacanciesModule } from './vacancies/vacancies.module';
 // Proceso de seleción
 import { SelectionProcessModule } from './selection-process/selection-process.module';
+import { DinamicModule } from './dinamic/dinamic.module';
 
 // CarsModule,
 @NgModule( {
@@ -131,6 +132,7 @@ import { SelectionProcessModule } from './selection-process/selection-process.mo
                  CompanyAssetsModule,
                  VacanciesModule,
                  SelectionProcessModule,
+                 DinamicModule
                  //AssignmentProfessionalModule
               ],
 

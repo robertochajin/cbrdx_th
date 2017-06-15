@@ -156,6 +156,7 @@ import { StepDetailComponent } from './selection-process/step-detail.component';
 import { EmployeesViewDetailComponent } from './employees/employees-view-detail.component';
 import { StepProcessComponent } from './selection-process/step-process.component';
 import { CandidatesComponent } from './selection-process/candidates.component';
+import { DinamicComponent } from './dinamic/dinamic.component';
 
 
 const routes = [
@@ -374,6 +375,7 @@ const routes = [
    { path: 'detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
    { path: 'candidates-list/:idPublication', component: CandidatesComponent, canActivate: [ AuthGuard ] },
+   { path: 'dinamic', component: DinamicComponent }
 ];
 
 @NgModule( {

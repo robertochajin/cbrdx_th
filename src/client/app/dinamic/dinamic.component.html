@@ -1,0 +1,17 @@
+
+<div *ngFor="let component of componentList; let i=index">
+	
+	<div *ngIf="component.tipo === 'input'">
+		<label [for]="component.codigo">{{component.nombre}}</label>
+		<input type="text" pInputText [id]="component.codigo" [name]="component.codigo"/>
+	</div>
+	<div *ngIf="component.tipo === 'text'">
+		<label [for]="component.codigo">{{component.nombre}}</label>
+		<textarea  pInputTextarea [id]="component.codigo" [name]="component.codigo" rows="5"></textarea>
+	</div>
+	<div *ngIf="component.tipo === 'checkbox'">
+		<label [for]="component.codigo">{{component.nombre}}</label>
+		<p-checkbox [id]="component.codigo" [name]="component.codigo"
+		            binary="true"></p-checkbox>
+	</div>
+</div>
