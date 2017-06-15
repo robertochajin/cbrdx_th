@@ -21,8 +21,9 @@ import { References } from '../employees-references/references';
 import { ReferencesService } from '../employees-references/references.service';
 import { DivisionPoliticaService } from '../_services/divisionPolitica.service';
 
-import * as jsPDF from 'jspdf';
+//import * as JSPdf from 'jspdf';
 import * as html2canvas from 'html2canvas';
+//let jsPDF = require('jspdf');
 
 
 @Component( {
@@ -204,12 +205,27 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
    }
 
    toPDF(): void{
+
+     /**
       html2canvas( jQuery('#curriculum') ).then(function(canvas) {
          var doc = new jsPDF('p', 'mm', 'a4');
          var imgData = canvas.toDataURL('image/png');
          doc.addImage(imgData, 'PNG', 0, 0);
          doc.save('sample-file.pdf');
       });
+      */
+
+     /*
+     let doc = new jsPDF('p', 'mm', 'a4');
+      doc.text(20, 20, 'Hello world!');
+      doc.text(20, 30, 'This is client-side Javascript, pumping out a PDF.');
+      doc.addPage();
+      doc.text(20, 20, 'Do you like that?');
+
+      // Save the PDF
+      doc.save('Test.pdf');
+      */
+
    }
 
 }
