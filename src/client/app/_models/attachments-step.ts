@@ -1,7 +1,7 @@
 /**
  * Created by Felipe Aguirre - Jenniferth Escobar on 23/02/2017.
  */
-export class Adjunto {
+export class Attachments {
    idAdjunto: number;
    nombre: string;
    archivo: string;

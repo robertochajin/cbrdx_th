@@ -3,10 +3,10 @@ import { Response } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
-import { Adjunto } from '../_models/adjuntos';
+import { Adjunto } from '../_models/attachments-step';
 
 @Injectable()
-export class AdjuntosService {
+export class AttachmentsService {
 
    private serviceURL = '<%= SVC_TH_URL %>/api/';
    private jwtHelper: JwtHelper = new JwtHelper();

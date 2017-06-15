@@ -926,6 +926,8 @@
       "LBL_RESPONSABLE" : "Asignar responsable",
       "LBL_URL":"URL",
       "LBL_DETALLECORREO":"Detalle de correo que se envia al postulante",
+      "LBL_NOMBRE":"Nombre Archivo",
+      "LBL_ARCHIVO":"Archivo",
       "":""
    },
 

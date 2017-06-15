@@ -35,6 +35,7 @@ export class StepProcessComponent implements OnInit {
    private stepStates: ListaItem[] = [];
    public responsables: SelectItem[] = [];
    private showCalendar = false;
+   private readonly = false
 
    usuarioLogueado: any;
    idRol: number;
@@ -117,6 +118,7 @@ export class StepProcessComponent implements OnInit {
                      this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
                      this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
                         this.candidateProcess = cp;
+                        this.readonlyCheck();
                         this.prepareForm();
                      } );
                   } else {
@@ -148,6 +150,13 @@ export class StepProcessComponent implements OnInit {
 
       } else if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ) {
 
+      }
+
+      // verificar si el usuario en sesion es responsable para mostrar solo lectura de datos
+      if( this.usuarioLogueado.usuario.idUsuario===this.candidateProcess.idResponsable ){
+         this.readonly=true;
+      }else{
+         this.readonly=false;
       }
    }
 
@@ -196,6 +205,11 @@ export class StepProcessComponent implements OnInit {
       } else {
          return 0;
       }
+   }
+
+   readonlyCheck(){
+
+
    }
 
    goBack() {

@@ -34,7 +34,7 @@
 		<div class="col-md-10 col-md-offset-1">
 			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="adjuntos"
 			             [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-				<p-column field="documento" header="{{'PROCESOSELECCION.LBL_NOMBREARCHIVO' | translate }}"
+				<p-column field="documento" header="{{'PROCESOSELECCION.LBL_NOMBRE' | translate }}"
 				          [sortable]="true"></p-column>
 				<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 					<template let-doc="rowData" pTemplate="body">

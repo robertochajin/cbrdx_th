@@ -17,14 +17,12 @@ import { StepDetailComponent } from './step-detail.component';
 import { StepProcessComponent } from './step-process.component';
 import { EmployeesService } from '../_services/employees.service';
 import { CandidateProcessService } from '../_services/candidate-process.service';
-import { AdjuntosComponent } from '../adjuntos/adjuntos.component';
-import { AdjuntosService } from '../_services/adjuntos.service';
-import { AdjuntosModule } from '../adjuntos/adjuntos.module';
+import { AttachmentsService } from '../_services/attachments-step.service';
+import { AttachmentsComponent } from './attachments.component';
 
 @NgModule( {
               imports: [
                  SharedModule,
-                 AdjuntosModule,
                  FormSharedModule
               ],
               declarations: [
@@ -35,6 +33,7 @@ import { AdjuntosModule } from '../adjuntos/adjuntos.module';
                  StepEditComponent,
                  StepDetailComponent,
                  StepProcessComponent,
+                 AttachmentsComponent,
                  SelectionProcessVacanciesComponent
               ],
               bootstrap: [ SelectionProcessComponent ],
@@ -46,7 +45,7 @@ import { AdjuntosModule } from '../adjuntos/adjuntos.module';
                  EmployeesService,
                  CandidateProcessService,
                  SelectionStepService,
-                 AdjuntosService,
+                 AttachmentsService,
                  PublicationQuestionnairesService
               ],
               exports: [ SelectionProcessComponent ]

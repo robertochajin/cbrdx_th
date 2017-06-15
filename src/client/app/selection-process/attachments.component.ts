@@ -1,23 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Risks } from '../_models/risks';
 import { RisksService } from '../_services/risks.service';
 import { Router } from '@angular/router';
 import { ConfirmationService, Message } from 'primeng/primeng';
 import { NavService } from '../_services/_nav.service';
-import { Adjunto } from '../_models/adjuntos';
-import { AdjuntosService } from '../_services/adjuntos.service';
+import { Attachments } from '../_models/attachments-step';
+import { AttachmentsService } from '../_services/attachments-step.service';
+import { CandidateProcess } from '../_models/candidateProcess';
 
 @Component( {
                moduleId: module.id,
-               templateUrl: 'adjuntos.component.html',
-               selector: 'adjuntos-step.component',
+               templateUrl: 'attachments.component.html',
+               selector: 'adjuntos-step',
                providers: [ ConfirmationService ]
             } )
 
-export class AdjuntosComponent implements OnInit {
+export class AttachmentsComponent implements OnInit {
 
-   adjunto: Adjunto = new Adjunto();
-   adjuntos: Adjunto[]=[];
+   @Input() candidateProcess: CandidateProcess;
+   adjunto: Attachments = new Attachments();
+   adjuntos: Attachments[]=[];
    msgs: Message[] = [];
    busqueda: string;
    fileupload: boolean = true;
@@ -27,13 +29,13 @@ export class AdjuntosComponent implements OnInit {
    constructor( private risksService: RisksService,
       private router: Router,
       private navService: NavService,
-      private adjuntosService: AdjuntosService,
+      private adjuntosService: AttachmentsService,
       private confirmationService: ConfirmationService ) {
       this.busqueda = this.navService.getSearch( 'adjuntos.component' );
    }
 
    ngOnInit() {
-
+         this.candidateProcess;
    }
 
    uploadingOk( event: any ) {

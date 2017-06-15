@@ -51,6 +51,25 @@
 					</form>
 					<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="process">
 						<fieldset>
+							<!--<div *ngIf="readonly">-->
+								<!--<div class="row">-->
+									<!--<div class="col-md-6">-->
+										<!--<label><h3>{{'PROCESOSELECCION.LBL_ASIGNARFECHA' | translate}}</h3></label>-->
+										<!--<p>Area</p>-->
+									<!--</div>-->
+									<!--<div class="col-md-6">-->
+										<!--<label><h3>{{'PROCESOSELECCION.LBL_RESPONSABLE' | translate }}</h3></label>-->
+										<!--<p>responsable</p>-->
+									<!--</div>-->
+								<!--</div>-->
+								<!--<div class="row">-->
+									<!--<div class="col-md-12">-->
+										<!--<label><h3>{{'PROCESOSELECCION.LBL_DETALLECORREO' | translate }}</h3></label>-->
+										<!--<p>detalle correo</p>-->
+									<!--</div>-->
+								<!--</div>-->
+							<!--</div>-->
+							<div>
 							<div class="row">
 								<div class="form-group col-md-6" *ngIf="showCalendar">
 									<label for="asignDate">{{'PROCESOSELECCION.LBL_ASIGNARFECHA' | translate}}</label>
@@ -84,8 +103,9 @@
 									</div>
 								</div>
 							</div>
+							</div>
 							<div class="row">
-								<div class="form-group col-md-12" *ngIf="!step.indicadorObservacion">
+								<div class="form-group col-md-12" *ngIf="step.indicadorObservacion">
 									<label for="observacion">* {{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}</label>
 									<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #observa="ngModel"
 									          [(ngModel)]="candidateProcess.observacion" required="true" class="form-control"
@@ -117,12 +137,9 @@
 						</fieldset>
 					</form>
 				</p-tabPanel>
-				<p-tabPanel *ngIf="!step.indicadorAdjunto" header="Adjuntos" leftIcon="fa-print">
-					<!--<adjuntos-step></adjuntos-step>-->
+				<p-tabPanel *ngIf="step.indicadorAdjunto" header="Adjuntos" leftIcon="fa-print">
+					<adjuntos-step [candidateProcess]="candidateProcess"></adjuntos-step>
 				</p-tabPanel>
-				<!--<p-tabPanel header="Godfather III" leftIcon="fa-bell-o" rightIcon="fa-bookmark-o">-->
-					<!--After a break of more than  15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.-->
-				<!--</p-tabPanel>-->
 			</p-tabView>
 			
 		</p-panel>
