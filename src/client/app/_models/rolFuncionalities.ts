@@ -12,11 +12,13 @@ export class RolFuncionalities {
    public indicadorImprimir: boolean;
    public indicadorExportar: boolean;
    public indicadorInsertar: boolean;
+   public indicadorMostrarEnMenu: boolean;
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
 
    constructor() {
       this.indicadorHabilitado = true;
+      this.indicadorMostrarEnMenu = true;
       this.auditoriaUsuario = 1;
       this.auditoriaFecha = '';
    }

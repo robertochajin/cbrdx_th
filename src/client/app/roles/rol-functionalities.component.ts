@@ -1,18 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Rol } from '../_models/rol';
-import { RolFuncionalities } from '../_models/rolFuncionalities';
-import { RolFuncionalitiesServices } from '../_services/rolFuncionalities.service';
-import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
-import { FormManagerService } from '../_services/form-manager.service';
-import { NavService } from '../_services/_nav.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {Rol} from '../_models/rol';
+import {RolFuncionalities} from '../_models/rolFuncionalities';
+import {RolFuncionalitiesServices} from '../_services/rolFuncionalities.service';
+import {SelectItem, Message, ConfirmationService} from 'primeng/primeng';
+import {FormManagerService} from '../_services/form-manager.service';
+import {NavService} from '../_services/_nav.service';
 
-@Component( {
-               moduleId: module.id,
-               templateUrl: 'rol-functionalities.component.html',
-               selector: 'rol-fucionalities',
-               providers: [ ConfirmationService ]
-            } )
+@Component({
+   moduleId: module.id,
+   templateUrl: 'rol-functionalities.component.html',
+   selector: 'rol-fucionalities',
+   providers: [ConfirmationService]
+})
 export class RolFuncionalitiesComponent implements OnInit {
 
    @Input() rol: Rol;
@@ -27,29 +27,29 @@ export class RolFuncionalitiesComponent implements OnInit {
    idRol: number;
    isUpdating: boolean = false;
 
-   constructor( private rolFuncionalitiesService: RolFuncionalitiesServices,
-      private router: Router,
-      private route: ActivatedRoute,
-      private _nav: NavService,
-      private confirmationService: ConfirmationService,
-      private formManagerService: FormManagerService, ) {
+   constructor(private rolFuncionalitiesService: RolFuncionalitiesServices,
+               private router: Router,
+               private route: ActivatedRoute,
+               private _nav: NavService,
+               private confirmationService: ConfirmationService,
+               private formManagerService: FormManagerService,) {
 
    }
 
    ngOnInit() {
 
       this.idRol = this.rol.idRol;
-      this.rolFuncionalitiesService.getAllByRol( this.idRol ).subscribe(
+      this.rolFuncionalitiesService.getAllByRol(this.idRol).subscribe(
          funcionalities => {
             this.funcionalities = funcionalities;
             this.formManagerService.getAllEnabled().subscribe(
                menus => {
-                  this.menus.unshift( { label: 'Seleccione', value: null } );
-                  menus.map( ( s: any ) => {
-                     if ( this.funcionalities.filter( w => w.idFuncionalidad === s.idFuncionalidad ).length === 0 ) {
-                        this.menus.push( { label: s.menu, value: s.idFuncionalidad } );
+                  this.menus.unshift({label: 'Seleccione', value: null});
+                  menus.map((s: any) => {
+                     if (this.funcionalities.filter(w => w.idFuncionalidad === s.idFuncionalidad).length === 0) {
+                        this.menus.push({label: s.menu, value: s.idFuncionalidad});
                      }
-                  } );
+                  });
                }
             );
          }
@@ -60,35 +60,35 @@ export class RolFuncionalitiesComponent implements OnInit {
       this.msgs = [];
       this.showForm = false;
 
-      if ( this.rolFuncionality.idRolFuncionalidad === null ||
-           this.rolFuncionality.idRolFuncionalidad === 0 ||
-           this.rolFuncionality.idRolFuncionalidad === undefined ) {
+      if (this.rolFuncionality.idRolFuncionalidad === null ||
+         this.rolFuncionality.idRolFuncionalidad === 0 ||
+         this.rolFuncionality.idRolFuncionalidad === undefined) {
          this.rolFuncionality.idRol = this.idRol;
-         this.rolFuncionalitiesService.add( this.rolFuncionality )
-         .subscribe( data => {
-            this.menus.splice( this.menus.indexOf( this.menus.find( m => m.value === this.rolFuncionality.idFuncionalidad ) ), 1 );
-            this._nav.setMesage( 1, this.msgs );
-            this.rolFuncionalitiesService.getAllByRol( this.idRol ).subscribe(
-               funcionalities => this.funcionalities = funcionalities
-            );
-         }, error => {
-            this.showForm = true;
-            this._nav.setMesage( 3, this.msgs );
-         } );
+         this.rolFuncionalitiesService.add(this.rolFuncionality)
+            .subscribe(data => {
+               this.menus.splice(this.menus.indexOf(this.menus.find(m => m.value === this.rolFuncionality.idFuncionalidad)), 1);
+               this._nav.setMesage(1, this.msgs);
+               this.rolFuncionalitiesService.getAllByRol(this.idRol).subscribe(
+                  funcionalities => this.funcionalities = funcionalities
+               );
+            }, error => {
+               this.showForm = true;
+               this._nav.setMesage(3, this.msgs);
+            });
       } else {
 
-         this.rolFuncionalitiesService.update( this.rolFuncionality )
-         .subscribe( data => {
-            this.isUpdating = false;
-            this.menus.splice( 0, 1 );
-            this._nav.setMesage( 2, this.msgs );
-            this.rolFuncionalitiesService.getAllByRol( this.idRol ).subscribe(
-               funcionalities => this.funcionalities = funcionalities
-            );
-         }, error => {
-            this.showForm = true;
-            this._nav.setMesage( 3, this.msgs );
-         } );
+         this.rolFuncionalitiesService.update(this.rolFuncionality)
+            .subscribe(data => {
+               this.isUpdating = false;
+               this.menus.splice(0, 1);
+               this._nav.setMesage(2, this.msgs);
+               this.rolFuncionalitiesService.getAllByRol(this.idRol).subscribe(
+                  funcionalities => this.funcionalities = funcionalities
+               );
+            }, error => {
+               this.showForm = true;
+               this._nav.setMesage(3, this.msgs);
+            });
       }
 
    }
@@ -99,42 +99,26 @@ export class RolFuncionalitiesComponent implements OnInit {
       this.showForm = true;
    }
 
-   update( f: RolFuncionalities ) {
+   update(f: RolFuncionalities) {
       this.msgs = [];
       this.rolFuncionality = f;
       this.showForm = true;
       this.isUpdating = true;
-      this.menus.unshift( { label: f.menu, value: f.idFuncionalidad } );
+      this.menus.unshift({label: f.menu, value: f.idFuncionalidad});
 
    }
 
-   goBackUpdate(rfDirty : boolean) {
-      if (rfDirty) {
-         this.confirmationService.confirm({
-            message: ` ¿Está seguro que desea salir sin guardar?`,
-            header: 'Confirmación',
-            icon: 'fa fa-question-circle',
-            accept: () => {
-               this.msgs = [];
-               this.showForm = false;
-               if ( this.isUpdating === true ) {
-                  this.isUpdating = false;
-                  this.menus.splice( 0, 1 );
-               }
-            }
-         });
-      } else {
-         this.msgs = [];
-         this.showForm = false;
-         if ( this.isUpdating === true ) {
-            this.isUpdating = false;
-            this.menus.splice( 0, 1 );
-         }      }
-
+   goBackUpdate() {
+      this.msgs = [];
+      this.showForm = false;
+      if (this.isUpdating === true) {
+         this.isUpdating = false;
+         this.menus.splice(0, 1);
+      }
    }
 
-   config( r: RolFuncionalities ) {
-      this.router.navigate( [ 'roles/update/' + r.idRol + '/funcionalities-config/' + r.idRolFuncionalidad ] );
+   config(r: RolFuncionalities) {
+      this.router.navigate(['roles/update/' + r.idRol + '/funcionalities-config/' + r.idRolFuncionalidad]);
    }
 
 }
