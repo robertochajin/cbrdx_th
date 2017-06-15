@@ -108,7 +108,7 @@ export class SelectionStepService {
 
    updateEmployeesCentralRisk( f: EmployeeCentralRisk ) {
       f.auditoriaUsuario = this.idUsuario
-      return this.authHttp.put( this.masterService + 'tercerosCentralesRiesgos', f  ).catch( this.handleError );
+      return this.authHttp.put( this.serviceURL + 'tercerosCentralesRiesgos', f  ).catch( this.handleError );
    }
 }
 
