@@ -168,7 +168,7 @@ export class EvaluationCriteriasComponent implements OnInit {
    goBack(dDirty : boolean): void {
       if ( dDirty ){
       this.confirmationService.confirm( {
-                                           message: `¿Esta seguro que desea Cancelar?`,
+                                           message: `¿Está seguro que desea Cancelar?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
 

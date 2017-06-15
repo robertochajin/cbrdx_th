@@ -267,8 +267,8 @@ export class LocationAddComponent implements OnInit {
 
       if ( lDirty ){
          this.confirmationService.confirm( {
-            message: ` ¿Esta seguro que desea salir sin guardar?`,
-            header: 'Corfirmación',
+            message: ` ¿Está seguro que desea salir sin guardar?`,
+            header: 'Confirmación',
             icon: 'fa fa-question-circle',
             accept: () => {
                this._nav.setTab( 4 );
