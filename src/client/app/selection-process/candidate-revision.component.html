@@ -12,6 +12,11 @@
 						<div class="col-md-10">
 							<h2>{{candidate.nombreCompleto}} - {{candidate.fechaNacimiento}} ({{candidate.edad}})</h2>
 							<h3>{{candidate.tipoDocumento}} - {{candidate.numeroDocumento}}</h3>
+							<button icon="fa-user-circle-o" label="{{'PROCESOSELECCION.LBL_VERHOJADEVIDA' | translate }}" type="button"
+							        (click)="curriculum()"
+							        pButton></button>
+							<button icon="fa-dot-circle-o" label="{{'PROCESOSELECCION.LBL_CUESTIONARIOS' | translate }}" type="button"
+							        disabled pButton></button>
 						</div>
 					</div>
 				</fieldset>
@@ -49,6 +54,11 @@
 					</form>
 					<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="process">
 						<fieldset>
+							<div class="row">
+								<div class="form-group col-md-12">
+									<label > {{'PROCESOSELECCION.LBL_COMPROMISOREVISION' | translate }}:</label>
+								</div>
+							</div>
 							<div class="row">
 								<div class="form-group col-md-6" >
 									<label for="validStep">* {{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}</label>

@@ -6,6 +6,7 @@ export class CandidateProcess {
    public idProcesoSeleccion :number;
    public idProcesoPaso :number;
    public idEstadoDiligenciado :number;
+   public idDesicionProcesoSeleccion :number;
    public idAdjunto :number;
    public idResponsable :number;
    public idTerceroPublicacion :number;
