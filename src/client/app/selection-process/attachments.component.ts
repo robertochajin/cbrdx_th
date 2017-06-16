@@ -71,7 +71,7 @@ export class AttachmentsComponent implements OnInit {
       }
    }
 
-   onBeforeUpload( event: any ) {
+   onBeforeSend( event: any ) {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
       event.formData.append( 'obj', JSON.stringify( this.adjunto ) );
    }

@@ -20,7 +20,7 @@
 						<label>{{'PROCESOSELECCION.LBL_ARCHIVO' | translate }}</label>
 						<p-fileUpload name="file" url="{{svcSpUrl}}" uploadLabel="Subir" cancelLabel="Cancelar"
 						              chooseLabel="Examinar" (onUpload)="uploadingOk($event)" accept="image/*,application/pdf"
-						              (onBeforeUpload)="onBeforeUpload($event)">
+						              (onBeforeSend)="onBeforeSend($event)">
 						</p-fileUpload>
 					</div>
 				</div>
