@@ -66,7 +66,7 @@ export class PersonnelRequirementComponent implements OnInit {
    del( FaS: PersonnelRequirement ) {
       this.dialogObjet = FaS;
       this.confirmationService.confirm( {
-                                           message: ` ¿Está seguro que desea inhabilitar este registro?`,
+                                           message: ` ¿Está seguro que desea inactivar este registro?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
