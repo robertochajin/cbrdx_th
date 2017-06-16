@@ -6,10 +6,10 @@ export class CandidateProcess {
    public idProcesoSeleccion :number;
    public idProcesoPaso :number;
    public idEstadoDiligenciado :number;
+   public idDesicionProcesoSeleccion :number;
    public idAdjunto :number;
    public idResponsable :number;
-   public idTercero :number;
-   public idPublicacion :number;
+   public idTerceroPublicacion :number;
    public indicadorContProceso :boolean;
    public observacion :string;
    public fechaCita :Date;

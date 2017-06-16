@@ -17,14 +17,19 @@ import { StepDetailComponent } from './step-detail.component';
 import { StepProcessComponent } from './step-process.component';
 import { EmployeesService } from '../_services/employees.service';
 import { CandidateProcessService } from '../_services/candidate-process.service';
+import { AdjuntosComponent } from '../adjuntos/adjuntos.component';
+import { AdjuntosService } from '../_services/adjuntos.service';
+import { AdjuntosModule } from '../adjuntos/adjuntos.module';
 import { CandidatesComponent } from './candidates.component';
 import { UsuariosService } from '../_services/usuarios.service';
+import { CandidateRevisionComponent } from './candidate-revision.component';
 import { CentralRiskComponent } from '../selection-process-risks/central-risk.component';
 import { SafePipe } from '../_helpers/safePipe';
 
 @NgModule( {
               imports: [
                  SharedModule,
+                 AdjuntosModule,
                  FormSharedModule
               ],
               declarations: [
@@ -37,7 +42,7 @@ import { SafePipe } from '../_helpers/safePipe';
                  StepProcessComponent,
                  SelectionProcessVacanciesComponent,
                  CandidatesComponent,
-                 SelectionProcessVacanciesComponent,
+                 CandidateRevisionComponent,
                  CentralRiskComponent,
                  SafePipe
               ],
@@ -50,6 +55,7 @@ import { SafePipe } from '../_helpers/safePipe';
                  EmployeesService,
                  CandidateProcessService,
                  SelectionStepService,
+                 AdjuntosService,
                  PublicationQuestionnairesService,
                  UsuariosService
               ],
