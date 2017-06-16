@@ -49,9 +49,7 @@ export class AttachmentsComponent implements OnInit {
       if ( token !== null ) {
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
       }
-      this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
-         this.stepStates = res;
-      } );
+
    }
 
    ngOnInit() {
@@ -60,12 +58,16 @@ export class AttachmentsComponent implements OnInit {
       this.attachmentsService.listAttachments( this.adjunto.idProcesoPaso, this.adjunto.idTerceroPublicacion ).subscribe( rest => {
          this.listAttachments = rest;
       } );
-      if ( this.candidateProcess.idEstadoDiligenciado === this.getIdStateByCode( 'RECH' ) ||
-           this.candidateProcess.idEstadoDiligenciado === this.getIdStateByCode( 'APROB' ) ) {
-         this.readonly = true;
-      } else {
-         this.readonly = false;
-      }
+      this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
+         this.stepStates = res;
+         if ( this.candidateProcess.idEstadoDiligenciado === this.getIdStateByCode( 'RECH' ) ||
+              this.candidateProcess.idEstadoDiligenciado === this.getIdStateByCode( 'APROB' ) ) {
+            this.readonly = true;
+         } else {
+            this.readonly = false;
+         }
+      } );
+
 
    }
 
