@@ -3,7 +3,7 @@ import { Response } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
-import { Adjunto } from '../_models/attachments-step';
+import { Attachments } from '../_models/attachments-step';
 
 @Injectable()
 export class AttachmentsService {
@@ -22,11 +22,11 @@ export class AttachmentsService {
    }
 
    listAdjuntos() {
-      return this.authHttp.get( this.serviceURL + 'constantes/' ).map( ( res: Response ) => res.json() as Adjunto[] );
+      return this.authHttp.get( this.serviceURL + 'constantes/' ).map( ( res: Response ) => res.json() as Attachments[] );
    }
 
 
-   addAdjunto( r: Adjunto ) {
+   addAdjunto( r: Attachments ) {
       r.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'riesgos', r ).map( ( res: Response ) => res.json() );
    };

@@ -1,6 +1,6 @@
 <h3 class="first">Adjuntos</h3>
 <div class="row">
-	<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+	<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario" *ngIf="!readonly">
 		<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 			<div class="col-md-10 col-md-offset-1">
 				<div class="row">

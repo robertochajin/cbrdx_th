@@ -4,7 +4,6 @@
 export class Attachments {
    idAdjunto: number;
    nombre: string;
-   archivo: string;
    indicadorHabilitado: boolean = true;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
