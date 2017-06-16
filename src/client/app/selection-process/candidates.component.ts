@@ -80,19 +80,21 @@ export class CandidatesComponent implements OnInit {
    redirecStep( step: CandidateProgress, idStep: number, btn: string ) {
       let myStep = step.pasos.find( s => s.idProcesoPaso === idStep );
       if ( this.userRoles.find( r => r.rol === 'ROLE_PROCESOSELECCION' )
-           || (myStep !== undefined && myStep.idResponsable === this.usuarioLogueado.usuario.idUsuario)) {
+           || (myStep !== undefined && myStep.idResponsable === this.usuarioLogueado.usuario.idUsuario) ) {
          if ( myStep.interfazInterna ) {
             //candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
             //process-step/centralRisk/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
 
             this.router.navigate(
                [ myStep.interfazInterna.replace( ':idStep', myStep.idProcesoPaso.toString() )
-                                       .replace( ':idTerceroPublication', step.idTerceroPublicacion.toString() )
-                                       .replace( ':idProceso', myStep.idProcesoSeleccion ? myStep.idProcesoSeleccion.toString() : '0' )
+               .replace( ':idTerceroPublication', step.idTerceroPublicacion.toString() )
+               .replace( ':idProceso', myStep.idProcesoSeleccion ? myStep.idProcesoSeleccion.toString() : '0' )
                ] );
          } else {
+            let stepProcessUrl = 'process-step/' + idStep.toString() + '/terceroPublication/' + step.idTerceroPublicacion.toString() + '/process/' + myStep.idProcesoSeleccion ?
+               myStep.idProcesoSeleccion.toString() : '0';
             this.router.navigate(
-               [ 'process-step/' + idStep + '/terceroPublication/' + step.idTerceroPublicacion + '/process/' + myStep.idProcesoSeleccion ] );
+               [ stepProcessUrl ] );
          }
       }
    }
