@@ -57,13 +57,15 @@
 					</template>
 				</p-column>
 				<p-column field="" header="{{'PROCESOSELECCION.LBL_ADJUNTAR' | translate }}" styleClass="datatable-col-action">
-					<template let-data="rowData" pTemplate="body">
-						<!--<button type="button" pButton (click)="uploadFile()" icon="fa-cloud-upload "></button>-->
+					<template let-datos="rowData" pTemplate="body">
+						<i class="fa fa-spinner fa-pulse fa-fw" *ngIf="cargando === datos.idCentralRiesgo" ></i>
 						<p-fileUpload name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
 						              chooseLabel="{{'PROCESOSELECCION.LBL_ADJUNTAR' | translate}}"
-						              (onBeforeSend)="onBeforeSend($event,data)"
-						              (onUpload)="onUpload($event,data)" accept="image/*,application/pdf"
+						              (onBeforeSend)="onBeforeSend($event,datos)"
+						              (onUpload)="onUpload($event,datos)" accept="image/*,application/pdf"
+						              [hidden]="cargando === datos.idCentralRiesgo"
 						></p-fileUpload>
+						
 					</template>
 				</p-column>
 				<p-column field="" header="{{'PROCESOSELECCION.LBL_APROBAR' | translate }}" styleClass="datatable-col-action">
@@ -79,6 +81,7 @@
 				</p-column>
 				<p-column field="" header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 					<template let-data="rowData" pTemplate="body" >
+						
 						<button type="button" icon="fa-eye" *ngIf="data.idAdjunto"
 						        class="ui-button btn" data-toggle="tooltip"
 						        title="{{'BTN_VISUALIZAR' | translate}}"
@@ -145,3 +148,9 @@
 <p-dialog header="{{title}}" [(visible)]="displayDialog" [width]="800">
 	<iframe width="100%" height="300" [src]="url | safe"></iframe>
 </p-dialog>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
