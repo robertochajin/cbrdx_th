@@ -24,12 +24,10 @@ import { CentralRiskComponent } from '../selection-process-risks/central-risk.co
 import { SafePipe } from '../_helpers/safePipe';
 import { AttachmentsService } from '../_services/attachments-step.service';
 import { AttachmentsComponent } from './attachments.component';
-import { SafePipe } from '../_helpers/safePipe';
 
 @NgModule( {
               imports: [
                  SharedModule,
-                 AdjuntosModule,
                  FormSharedModule
               ],
               declarations: [

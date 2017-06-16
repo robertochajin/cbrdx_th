@@ -116,7 +116,7 @@ export class StepProcessComponent implements OnInit {
 
                this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
                   this.stepStates = res;
-                  if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
+                  if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== 'null' && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
                      this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
                      this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
                         this.candidateProcess = cp;
@@ -184,27 +184,27 @@ export class StepProcessComponent implements OnInit {
          this.candidateProcessService.update( this.candidateProcess ).subscribe( res => {
             if ( res.ok ) {
                this._nav.setMesage( 2 );
-               this.router.navigate( [ 'selection-process' ] );
+               this.router.navigate( [ 'candidates-list'+ this.publication.idPublicacion ] );
             } else {
                this._nav.setMesage( 3 );
-               this.router.navigate( [ 'selection-process' ] );
+               this.router.navigate( [ 'candidates-list'+ this.publication.idPublicacion ] );
             }
          }, () => {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'selection-process' ] );
+            this.router.navigate( [ 'candidates-list'+ this.publication.idPublicacion ] );
          } );
       } else {
          this.candidateProcessService.add( this.candidateProcess ).subscribe( res => {
             if ( res.idProcesoSeleccion ) {
                this._nav.setMesage( 1 );
-               this.router.navigate( [ 'selection-process' ] );
+               this.router.navigate( [ 'candidates-list'+ this.publication.idPublicacion ] );
             } else {
                this._nav.setMesage( 3 );
-               this.router.navigate( [ 'selection-process' ] );
+               this.router.navigate( [ 'candidates-list'+ this.publication.idPublicacion ] );
             }
          }, () => {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'selection-process' ] );
+            this.router.navigate( [ 'candidates-list'+ this.publication.idPublicacion ] );
          } );
       }
    }
