@@ -57,28 +57,36 @@
 					</template>
 				</p-column>
 				<p-column field="" header="{{'PROCESOSELECCION.LBL_ADJUNTAR' | translate }}" styleClass="datatable-col-action">
-					<template let-data="rowData" pTemplate="body">
-						<!--<button type="button" pButton (click)="uploadFile()" icon="fa-cloud-upload "></button>-->
+					<template let-datos="rowData" pTemplate="body">
+						<i class="fa fa-spinner fa-pulse fa-fw" *ngIf="cargando === datos.idCentralRiesgo" ></i>
 						<p-fileUpload name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
 						              chooseLabel="{{'PROCESOSELECCION.LBL_ADJUNTAR' | translate}}"
-						              (onBeforeSend)="onBeforeSend($event,data)"
-						              (onUpload)="onUpload($event,data)" accept="image/*,application/pdf"
+						              (onBeforeSend)="onBeforeSend($event,datos)"
+						              (onUpload)="onUpload($event,datos)" accept="image/*,application/pdf"
+						              [hidden]="cargando === datos.idCentralRiesgo || datos.idAdjunto"
 						></p-fileUpload>
+						<button *ngIf="datos.idAdjunto" class="btn btn-link" (click)="downloadFile(datos)" type="button">
+							<i class="fa fa-paperclip" aria-hidden="true"></i>
+							Archivo Adjunto
+						</button>
 					</template>
 				</p-column>
 				<p-column field="" header="{{'PROCESOSELECCION.LBL_APROBAR' | translate }}" styleClass="datatable-col-action">
 					<template let-data="rowData" pTemplate="body">
-						<p-checkbox  [(ngModel)]="data.indicadorAprobado" binary="true" (onChange)="aprobar(data)"></p-checkbox>
+						<p-checkbox  [(ngModel)]="data.indicadorAprobado" binary="true" (onChange)="aprobar(data)"
+						             [disabled]="data.idAdjunto === null || data.indicadorReportado === true"></p-checkbox>
 					</template>
 				</p-column>
 				<p-column field="" header="{{'PROCESOSELECCION.LBL_REPORTAR' | translate }}" styleClass="datatable-col-action">
 					<template let-data="rowData" pTemplate="body">
 						<p-checkbox *ngIf="data.indicadorReporta" [(ngModel)]="data.indicadorReportado" binary="true"
+						            [disabled]="data.idAdjunto === null || data.indicadorAprobado === true"
 						            (onChange)="aprobar(data)"></p-checkbox>
 					</template>
 				</p-column>
 				<p-column field="" header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 					<template let-data="rowData" pTemplate="body" >
+						
 						<button type="button" icon="fa-eye" *ngIf="data.idAdjunto"
 						        class="ui-button btn" data-toggle="tooltip"
 						        title="{{'BTN_VISUALIZAR' | translate}}"
@@ -145,3 +153,9 @@
 <p-dialog header="{{title}}" [(visible)]="displayDialog" [width]="800">
 	<iframe width="100%" height="300" [src]="url | safe"></iframe>
 </p-dialog>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>

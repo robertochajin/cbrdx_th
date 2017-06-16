@@ -156,6 +156,7 @@ import { StepDetailComponent } from './selection-process/step-detail.component';
 import { EmployeesViewDetailComponent } from './employees/employees-view-detail.component';
 import { StepProcessComponent } from './selection-process/step-process.component';
 import { CandidatesComponent } from './selection-process/candidates.component';
+import { CandidateRevisionComponent } from './selection-process/candidate-revision.component';
 import { CentralRiskComponent } from './selection-process-risks/central-risk.component';
 
 
@@ -379,8 +380,9 @@ const routes = [
    { path: 'detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
    { path: 'candidates-list/:idPublication', component: CandidatesComponent, canActivate: [ AuthGuard ] },
-   { path: 'process-step/centralRisk/publication/:id', component: CentralRiskComponent, canActivate: [ AuthGuard ] },
-   // { path: 'adjuntos', component: AdjuntosComponent, canActivate: [ AuthGuard ] },
+   { path: 'process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication', component: CentralRiskComponent, canActivate: [ AuthGuard ] },
+   { path: 'candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CandidateRevisionComponent, canActivate: [ AuthGuard ] },
+   { path: 'process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
 ];
 
 @NgModule( {
