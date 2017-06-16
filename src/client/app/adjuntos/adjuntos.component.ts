@@ -10,7 +10,7 @@ import { AdjuntosService } from '../_services/adjuntos.service';
 @Component( {
                moduleId: module.id,
                templateUrl: 'adjuntos.component.html',
-               selector: 'adjuntos-step.component',
+               selector: 'adjuntos.component',
                providers: [ ConfirmationService ]
             } )
 
@@ -66,7 +66,7 @@ export class AdjuntosComponent implements OnInit {
    }
 
    setSearch() {
-      this.navService.setSearch( 'adjuntos.component', this.busqueda );
+      this.navService.setSearch( 'risks.component', this.busqueda );
    }
 
    nombreArchivo() {

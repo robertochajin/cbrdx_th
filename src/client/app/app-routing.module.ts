@@ -160,6 +160,9 @@ import { CandidateRevisionComponent } from './selection-process/candidate-revisi
 import { CentralRiskComponent } from './selection-process-risks/central-risk.component';
 
 
+// hoja de vida
+import { EmployeesCurriculumVitaeComponent } from './employees/employees-curriculum-vitae.component';
+import { AdjuntosComponent } from './adjuntos/adjuntos.component';
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
@@ -169,6 +172,7 @@ const routes = [
    { path: 'employees/view/detail/:id', component: EmployeesViewDetailComponent, canActivate: [ AuthGuard ] }, // solo ver
    { path: 'employees/detail/:id', component: EmployeesDetailComponent, canActivate: [ AuthGuard ] }, // ver editar
    { path: 'employees/update/:id', component: EmployeesUpdateComponent, canActivate: [ AuthGuard ] }, // ver editar
+   { path: 'employees/curriculum/:id', component: EmployeesCurriculumVitaeComponent, canActivate: [ AuthGuard ] }, // hoja de vida
 
    // Información de referencia de employees
    { path: 'employees/detail/:tercero/references', component: ReferencesComponent, canActivate: [ AuthGuard ] },
@@ -376,7 +380,7 @@ const routes = [
    { path: 'detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
    { path: 'candidates-list/:idPublication', component: CandidatesComponent, canActivate: [ AuthGuard ] },
-   { path: 'process-step/centralRisk/publication/:id', component: CentralRiskComponent, canActivate: [ AuthGuard ] },
+   { path: 'process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication', component: CentralRiskComponent, canActivate: [ AuthGuard ] },
    { path: 'candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CandidateRevisionComponent, canActivate: [ AuthGuard ] },
    { path: 'process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
 ];

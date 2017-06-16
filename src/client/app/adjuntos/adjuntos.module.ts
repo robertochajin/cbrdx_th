@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import 'rxjs/add/operator/toPromise';
 import { FormSharedModule } from '../shared/form-shared.module';
+import { RisksService } from '../_services/risks.service';
 import { InputSwitchModule, CheckboxModule } from 'primeng/primeng';
 import { SharedModule } from '../shared/shared.module';
 import { AdjuntosComponent } from './adjuntos.component';
-import { AdjuntosService } from '../_services/adjuntos.service';
 
 @NgModule( {
               imports: [
@@ -19,7 +19,7 @@ import { AdjuntosService } from '../_services/adjuntos.service';
                  AdjuntosComponent
               ],
               bootstrap: [ AdjuntosComponent ],
-              providers: [ AdjuntosService ],
+              providers: [ RisksService ],
               exports: [ AdjuntosComponent ]
            } )
 export class AdjuntosModule {
