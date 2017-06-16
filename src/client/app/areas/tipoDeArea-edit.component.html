@@ -3,14 +3,15 @@
     <h2 class="text-center">{{ 'TIPODEAREA.LBL_EDITAREA' | translate }}</h2>
     <form class="form-horizontal" #f="ngForm" (ngSubmit)="!codeExists&&f.form.valid&&updateArea()" novalidate
           (keydown.enter)="$event.preventDefault()">
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !codigoArea.valid }">
+        <div class="form-group" >
             <label for="codigoArea" class="control-label col-sm-3">{{ 'LBL_CODIGO' | translate }} </label>
             <div class=" col-sm-9">
-                <input type="text" pInputText class="form-control" id="codigoArea" name="codigoArea"
-                       #codigoArea="ngModel"
-                       [(ngModel)]="areas.codigoArea" required maxlength="8" pattern="[A-Z0-9]{0,8}"
-                       (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)" disabled
-                       (paste)="inputCleanUp($event.target.value)">
+	            <p id="codigoArea"> <strong>{{areas.codigoArea}}</strong></p>
+                <!--<input type="text" pInputText class="form-control" id="codigoArea" name="codigoArea"-->
+                       <!--#codigoArea="ngModel"-->
+                       <!--[(ngModel)]="areas.codigoArea" required maxlength="8" pattern="[A-Z0-9]{0,8}"-->
+                       <!--(change)="validateCode()" (keyup)="inputCleanUp($event.target.value)" disabled-->
+                       <!--(paste)="inputCleanUp($event.target.value)">-->
                 <!--<div *ngIf="codeExists" class="alert alert-danger">-->
                     <!--Ya se encuentra registrado ese código-->
                 <!--</div>-->
