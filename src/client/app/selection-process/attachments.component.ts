@@ -9,6 +9,7 @@ import { AttachmentsService } from '../_services/attachments-step.service';
 import { CandidateProcess } from '../_models/candidateProcess';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
+import { JwtHelper } from 'angular2-jwt';
 
 @Component( {
                moduleId: module.id,
@@ -33,6 +34,9 @@ export class AttachmentsComponent implements OnInit {
    displayDialog: boolean = false;
    readonly: boolean = false;
    validfile: boolean = false;
+   usuarioLogueado: any;
+   idRol: number;
+   jwtHelper: JwtHelper = new JwtHelper();
 
    constructor( private risksService: RisksService,
       private router: Router,
@@ -41,6 +45,10 @@ export class AttachmentsComponent implements OnInit {
       private attachmentsService: AttachmentsService,
       private confirmationService: ConfirmationService ) {
 
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+      }
       this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
          this.stepStates = res;
       } );
@@ -113,5 +121,27 @@ export class AttachmentsComponent implements OnInit {
          window.location.assign( res );
       } );
    }
+   prepareForm() {
+      //Se verifica el estado del paso y la la necesidad de mostrar o nó la asignación de fecha
+      if ( this.getIdStateByCode( 'VAC' ) === this.candidateProcess.idEstadoDiligenciado ) {
+         this.readonly=true;
+      } else if ( this.getIdStateByCode( 'PROG' ) === this.candidateProcess.idEstadoDiligenciado ) {
+         this.readonly=false;
+         // verificar si el usuario en sesion es responsable para mostrar solo lectura de datos
+         if ( this.usuarioLogueado.usuario.idUsuario === this.candidateProcess.idResponsable ) {
+            this.readonly = true;
+         } else {
+            this.readonly = false;
+         }
+      } else if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ) {
+         this.readonly = true;
+      } else if ( this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado ) {
+         this.readonly = true;
+      } else if (  this.getIdStateByCode( 'NA' ) === this.candidateProcess.idEstadoDiligenciado) {
+
+      }
+
+   }
+
 
 }

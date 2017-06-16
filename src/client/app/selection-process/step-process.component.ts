@@ -72,13 +72,10 @@ export class StepProcessComponent implements OnInit {
 
       this.minDate = new Date( Date.now() );
       this.listaService.getMasterDetails( 'ListasDecisionesProcesoSeleccion' ).subscribe( res => {
+         this.desitionList=res;
          this.approvalOptions.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => this.approvalOptions.push( { label: s.nombre, value: s.idLista } ) );
       } );
-      // this.approvalOptions.push( { label: 'Seleccione', value: null } );
-      // this.approvalOptions.push( { label: 'No aplica este paso', value: 2 } );
-      // this.approvalOptions.push( { label: 'Aprueba este paso', value: 1 } );
-      // this.approvalOptions.push( { label: 'No aprueba este paso', value: 0 } );
 
       this.route.params.subscribe( ( params: Params ) => {
          if ( params[ 'idStep' ] !== undefined && params[ 'idTerceroPublication' ] !== undefined ) {
@@ -171,13 +168,13 @@ export class StepProcessComponent implements OnInit {
    }
 
    onSubmit() {
-      if ( this.indApproval === 2 ) {
+      if ( this.candidateProcess.idDesicionProcesoSeleccion===this.getIdDesitionByCode('NOAPL') ) {
          this.candidateProcess.indicadorNoAplica = true;
          this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'NA' );
-      } else if ( this.indApproval === 1 ) {
+      } else if ( this.candidateProcess.idDesicionProcesoSeleccion===this.getIdDesitionByCode('APRB') ) {
          this.candidateProcess.indicadorContProceso = true;
          this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'APROB' );
-      } else if ( this.indApproval === 0 ) {
+      } else if ( this.candidateProcess.idDesicionProcesoSeleccion===this.getIdDesitionByCode('NOAPRB') ) {
          this.candidateProcess.indicadorContProceso = false;
          this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'RECH' );
       } else {

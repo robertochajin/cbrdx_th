@@ -112,7 +112,7 @@
 									<p>{{candidateProcess.observacion}}</p>
 								</div>
 							</div>
-							<div class="row">
+							<div class="row" *ngIf="!readonly">
 								<div class="form-group col-md-12" *ngIf="step.indicadorObservacion">
 									<label for="observacion">* {{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}</label>
 									<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #observa="ngModel"
