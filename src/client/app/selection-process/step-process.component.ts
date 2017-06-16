@@ -14,6 +14,7 @@ import { CandidateProcess } from '../_models/candidateProcess';
 import { CandidateProcessService } from '../_services/candidate-process.service';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
+import { Location } from '@angular/common';
 
 import { JwtHelper } from 'angular2-jwt';
 import { RolesService } from '../_services/roles.service';
@@ -47,6 +48,7 @@ export class StepProcessComponent implements OnInit {
       private route: ActivatedRoute,
       private _nav: NavService,
       private router: Router,
+      private location: Location,
       private listaService: ListaService,
       private rolesService: RolesService,
       private employeesService: EmployeesService,
@@ -231,6 +233,6 @@ export class StepProcessComponent implements OnInit {
    }
 
    goBack() {
-
+      this.location.back();
    }
 }

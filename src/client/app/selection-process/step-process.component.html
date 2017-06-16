@@ -124,7 +124,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="row">
+							<div class="row"  *ngIf="!readonly">
 								<div class="form-group col-md-6" *ngIf="true">
 									<label for="validStep">* {{'PROCESOSELECCION.LBL_APRUEBAPASO' | translate }}</label>
 									<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
@@ -133,13 +133,25 @@
 								<div class="form-group col-md-6">
 								</div>
 							</div>
+							<div class="row"  *ngIf="readonly">
+								<div class="form-group col-md-6" *ngIf="true">
+									<label><h3>{{'PROCESOSELECCION.LBL_APRUEBAPASO' | translate }}</h3></label>
+									<p>{{candidateProcess.estadoDiligenciado}}</p>
+								</div>
+								<div class="form-group col-md-6">
+								</div>
+							</div>
 							
 							<div class="row form-footer-buttons">
-								<div class="form-group col-md-12">
+								<div class="form-group col-md-12"  *ngIf="!readonly">
 									<a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
 									<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
 									        pButton></button>
 								
+								</div>
+								<div class="form-group col-md-12" *ngIf="readonly">
+									<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+									        pButton (click)="goBack()"></button>
 								</div>
 							</div>
 						</fieldset>
