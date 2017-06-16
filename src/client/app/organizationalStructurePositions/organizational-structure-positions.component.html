@@ -164,7 +164,7 @@
 										<button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
 										        pButton (click)="editPosition(osp)"></button>
 										<button *ngIf="osp.ocupados == 0" type="button" class="ui-button ui-button-danger btn"
-										        icon="fa-trash" data-toggle="tooltip" title="{{'BTN_ELIMINAR' | translate}}"
+										        icon="fa-trash" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
 										        pButton (click)="delete(osp)"></button>
 									</div>
 								</template>
@@ -308,7 +308,7 @@
 									<button type="button" class="ui-button ui-button-success btn" icon="fa-child" data-toggle="tooltip" title="{{ 'PLANTACOLABORADORES.MSG_ASIGNACOLABORADOR' | translate }}"
 									        pButton (click)="editPersonSlot(pp)"></button>
 									<button *ngIf="pp.idTercero != 0" type="button" class="ui-button ui-button-danger btn"
-									        icon="fa-trash" data-toggle="tooltip" title="{{'BTN_ELIMINAR' | translate}}"
+									        icon="fa-trash" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
 									        pButton (click)="removePerson(pp)"></button>
 								</div>
 							</template>
