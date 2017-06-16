@@ -16,11 +16,7 @@
          <div class="row">
             <div class="col-md-12" *ngIf="risk.idRiesgo">
                <label for="idTipoRiesgou">{{'RISKS.LBL_TIPO' | translate }}</label>
-               <p-dropdown id="idTipoRiesgou" name="idTipoRiesgou" required="true"
-                           [options]="listTypeRisks" [autoWidth]="false"
-                           [(ngModel)]="risk.idTipoRiesgo" (onChange)="changeType()"
-                           #idTipoRiesgo="ngModel" disabled="true"
-               ></p-dropdown>
+	            <p id="idTipoRiesgou"> <strong>{{tiporiesgo}}</strong></p>
               </div>
 			</div>
 			<div class="row">
@@ -42,11 +38,12 @@
 			<div class="row">
 			<div class="col-md-12"  *ngIf="risk.idRiesgo">
                <label for="idSubTipoRiesgou">{{'RISKS.LBL_SUBTIPO' | translate }}</label>
-               <p-dropdown id="idSubTipoRiesgou" name="idSubTipoRiesgou" required="true"
-                           [options]="listSubTypeRisks" [autoWidth]="false"
-                           [(ngModel)]="risk.idSubTipoRiesgo"
-                           #idSubTipoRiesgo="ngModel" disabled="true"
-               ></p-dropdown>
+				<p id="idSubTipoRiesgou"> <strong>{{subtiporiesgo}}</strong></p>
+               <!--<p-dropdown id="idSubTipoRiesgou" name="idSubTipoRiesgou" required="true"-->
+                           <!--[options]="listSubTypeRisks" [autoWidth]="false"-->
+                           <!--[(ngModel)]="risk.idSubTipoRiesgo"-->
+                           <!--#idSubTipoRiesgo="ngModel" disabled="true"-->
+               <!--&gt;</p-dropdown>-->
             </div>
 			</div>
 

@@ -22,6 +22,7 @@ import { EmployeesEstateModule } from '../employees-estate/employee-estate.modul
 import { EmployeesVehicleModule } from '../employees-vehicle/employee-vehicles.module';
 import { ListaService } from '../_services/lista.service';
 import { EmployeesViewDetailComponent } from './employees-view-detail.component';
+import { EmployeesCurriculumVitaeComponent } from './employees-curriculum-vitae.component';
 
 @NgModule( {
               imports: [
@@ -39,7 +40,7 @@ import { EmployeesViewDetailComponent } from './employees-view-detail.component'
               ],
 
               declarations: [ EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent,
-                 EmployeesAdditionalDataComponent,EmployeesViewDetailComponent
+                 EmployeesAdditionalDataComponent,EmployeesViewDetailComponent, EmployeesCurriculumVitaeComponent
               ],
               bootstrap: [ EmployeesComponent ],
               providers: [ EmployeesService, ListEmployeesService, PoliticalDivisionService, NavService, ListaService ],

@@ -16,6 +16,7 @@ export class CandidateProcess {
    public auditoriaUsuario :number;
    public auditoriaFecha :Date;
    public indicadorNoAplica:boolean;
+   public estadoDiligenciado:string;
 
    constructor() {
       this.auditoriaUsuario = 1;

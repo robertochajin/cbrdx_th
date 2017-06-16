@@ -14,6 +14,7 @@ import { CandidateProcess } from '../_models/candidateProcess';
 import { CandidateProcessService } from '../_services/candidate-process.service';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
+import { Location } from '@angular/common';
 
 import { JwtHelper } from 'angular2-jwt';
 import { RolesService } from '../_services/roles.service';
@@ -37,6 +38,7 @@ export class StepProcessComponent implements OnInit {
    private showCalendar = false;
    private showAttachments = false;
    private readonly = false;
+   private readonlyEstado = false;
    private desitionList: ListaItem[] = [];
 
    usuarioLogueado: any;
@@ -47,6 +49,7 @@ export class StepProcessComponent implements OnInit {
       private route: ActivatedRoute,
       private _nav: NavService,
       private router: Router,
+      private location: Location,
       private listaService: ListaService,
       private rolesService: RolesService,
       private employeesService: EmployeesService,
@@ -158,8 +161,12 @@ export class StepProcessComponent implements OnInit {
          }
       } else if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ) {
          this.readonly = true;
+         this.readonlyEstado = true;
+         this.showAttachments = this.step.indicadorAdjunto;
       } else if ( this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado ) {
          this.readonly = true;
+         this.readonlyEstado = true;
+         this.showAttachments = this.step.indicadorAdjunto;
       } else if (  this.getIdStateByCode( 'NA' ) === this.candidateProcess.idEstadoDiligenciado) {
          this.showCalendar = this.step.indicadorCalendario;
          this.showAttachments = this.step.indicadorAdjunto;
@@ -184,27 +191,27 @@ export class StepProcessComponent implements OnInit {
          this.candidateProcessService.update( this.candidateProcess ).subscribe( res => {
             if ( res.ok ) {
                this._nav.setMesage( 2 );
-               this.router.navigate( [ 'candidates-list'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
             } else {
                this._nav.setMesage( 3 );
-               this.router.navigate( [ 'candidates-list'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
             }
          }, () => {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'candidates-list'+ this.publication.idPublicacion ] );
+            this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
          } );
       } else {
          this.candidateProcessService.add( this.candidateProcess ).subscribe( res => {
             if ( res.idProcesoSeleccion ) {
                this._nav.setMesage( 1 );
-               this.router.navigate( [ 'candidates-list'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
             } else {
                this._nav.setMesage( 3 );
-               this.router.navigate( [ 'candidates-list'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
             }
          }, () => {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'candidates-list'+ this.publication.idPublicacion ] );
+            this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
          } );
       }
    }
@@ -231,6 +238,6 @@ export class StepProcessComponent implements OnInit {
    }
 
    goBack() {
-
+      this.location.back();
    }
 }
