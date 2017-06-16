@@ -12,12 +12,13 @@ import { PersonnelRequirement } from '../_models/personnelRequirement';
 import { CandidateProcess } from '../_models/candidateProcess';
 import { CandidateProcessService } from '../_services/candidate-process.service';
 import { CentralRisk } from '../_models/centralRisk';
-import { SelectItem } from 'primeng/components/common/api';
+import { SelectItem, ConfirmationService } from 'primeng/primeng';
 
 @Component( {
                moduleId: module.id,
                selector: 'step-process',
-               templateUrl: 'central-risk.component.html'
+               templateUrl: 'central-risk.component.html',
+               providers: [ ConfirmationService ]
             } )
 export class CentralRiskComponent implements OnInit {
    private publication: PersonnelRequirement = new PersonnelRequirement();
@@ -30,13 +31,14 @@ export class CentralRiskComponent implements OnInit {
    public title = '';
    displayDialog: boolean = false;
    respuesta:any;
-
+   cargando = 0;
    public  indApproval: number;
    public approvalOptions: SelectItem[] = [];
    svcThUrl = '<%= SVC_TH_URL %>/api/tercerosCentralesRiesgos/file';
    fileThUrl = '<%= SVC_TH_URL %>/api/adjuntos/file';
    previewUrl = '<%= SVC_TH_URL %>/api/adjuntos/preview';
    public idCandidate : number;
+
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
       private _nav: NavService,
@@ -44,6 +46,7 @@ export class CentralRiskComponent implements OnInit {
       private employeesService: EmployeesService,
       private vacanciesService: VacanciesService,
       private candidateProcessService: CandidateProcessService,
+      private confirmationService: ConfirmationService,
       private selectionStepService: SelectionStepService ) {
 
       this.approvalOptions.push({label: 'Seleccione', value:null});
@@ -102,6 +105,7 @@ export class CentralRiskComponent implements OnInit {
    }
 
    onBeforeSend( event: any , data: CentralRisk  ) {
+      this.cargando = data.idCentralRiesgo;
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
       if(data.idTercero === null || data.idTercero === undefined){
          data.idTercero = this.idCandidate;
@@ -109,12 +113,16 @@ export class CentralRiskComponent implements OnInit {
          data.indicadorAprobado = false;
       }
       event.formData.append('obj', JSON.stringify(data));
+
+
    }
 
    onUpload( event: any, data: CentralRisk ) {
+      this.cargando = 0;
       let respuesta = JSON.parse(event.xhr.response);
       data.idTerceroCentralRiesgo = respuesta.idTerceroCentralRiesgo;
       data.idAdjunto = respuesta.idAdjunto;
+
    }
 
 
@@ -185,10 +193,19 @@ export class CentralRiskComponent implements OnInit {
       });
    }
    deleteFile(f: CentralRisk){
-      f.idAdjunto = null;
-      this.selectionStepService.updateEmployeesCentralRisk( f ).subscribe( res => {
-         this._nav.setMesage( 2, null );
-      });
+      this.confirmationService.confirm( {
+                                           message: `¿Está seguro que desea Eliminar el adjunto?`,
+                                           header: 'Confirmación',
+                                           icon: 'fa fa-question-circle',
+
+                                           accept: () => {
+                                              f.idAdjunto = null;
+                                              this.selectionStepService.updateEmployeesCentralRisk( f ).subscribe( res => {
+                                                 this._nav.setMesage( 2, null );
+                                              });
+                                           }
+                                        } );
+
    }
    curriculum() {
       this.router.navigate( [ 'employees/curriculum/' + this.candidate.idTercero ] );
