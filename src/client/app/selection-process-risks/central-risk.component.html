@@ -81,7 +81,7 @@
 					<template let-data="rowData" pTemplate="body">
 						<p-checkbox *ngIf="data.indicadorReporta" [(ngModel)]="data.indicadorReportado" binary="true"
 						            [disabled]="data.idAdjunto === null || data.indicadorAprobado === true"
-						            (onChange)="aprobar(data)"></p-checkbox>
+						            (onChange)="reportar(data)"></p-checkbox>
 					</template>
 				</p-column>
 				<p-column field="" header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
@@ -139,7 +139,7 @@
 					</div>
 					<div class="row form-footer-buttons">
 						<div class="form-group col-md-12">
-							<a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+							<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
 							<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
 							        pButton></button>
 						

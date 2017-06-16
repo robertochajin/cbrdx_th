@@ -13,6 +13,8 @@ import { CandidateProcess } from '../_models/candidateProcess';
 import { CandidateProcessService } from '../_services/candidate-process.service';
 import { CentralRisk } from '../_models/centralRisk';
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
+import { ListaItem } from '../_models/listaItem';
+import { ListaService } from '../_services/lista.service';
 
 @Component( {
                moduleId: module.id,
@@ -31,6 +33,8 @@ export class CentralRiskComponent implements OnInit {
    public title = '';
    displayDialog: boolean = false;
    disabled: boolean = false;
+   private stepStates: ListaItem[] = [];
+   private desitionList: ListaItem[] = [];
    respuesta:any;
    cargando = 0;
    public  indApproval: number;
@@ -44,21 +48,25 @@ export class CentralRiskComponent implements OnInit {
       private route: ActivatedRoute,
       private _nav: NavService,
       private router: Router,
+      private listaService: ListaService,
       private employeesService: EmployeesService,
       private vacanciesService: VacanciesService,
       private candidateProcessService: CandidateProcessService,
       private confirmationService: ConfirmationService,
       private selectionStepService: SelectionStepService ) {
 
-      this.approvalOptions.push({label: 'Seleccione', value:null});
-      this.approvalOptions.push({label: 'No aplica este paso', value:2});
-      this.approvalOptions.push({label: 'Aprueba este paso', value:1});
-      this.approvalOptions.push({label: 'No aprueba este paso', value:0});
+      this.listaService.getMasterDetails( 'ListasDecisionesProcesoSeleccion' ).subscribe( res => {
+         this.desitionList=res;
+         this.approvalOptions.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => this.approvalOptions.push( { label: s.nombre, value: s.idLista } ) );
+      } );
 
 
       this.route.params.subscribe( ( params: Params ) => {
          let idTercerosPublicaciones = +params[ 'idTerceroPublication' ];
          let idStep = +params[ 'idStep' ];
+         this.candidateProcess.idProcesoPaso = idStep;
+         this.candidateProcess.idTerceroPublicacion = idTercerosPublicaciones;
          this.selectionStepService.getTerceroPublicacio( idTercerosPublicaciones).subscribe(tp =>{
 
             this.idCandidate = tp.idTercero;
@@ -89,15 +97,22 @@ export class CentralRiskComponent implements OnInit {
             vacanciesService.getPublication( idPublicacion ).subscribe( pb => {
                this.publication = pb;
             });
+
+            this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
+               this.stepStates = res;
+               if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== 'null' && params[ 'idProceso' ] !== null && params[ 'idProceso' ] !== 0 ) {
+                  this.candidateProcessService.get( params[ 'idProceso' ] ).subscribe( cp => {
+                     this.candidateProcess = cp;
+                  } );
+               } else {
+                  this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
+               }
+            } );
          });
       } );
    }
 
    ngOnInit() {
-   }
-
-   goBack() {
-
    }
 
    showDialogo( obj: any ) {
@@ -130,40 +145,44 @@ export class CentralRiskComponent implements OnInit {
 
 
    onSubmit() {
-      if(this.indApproval === 2){
+      if ( this.candidateProcess.idDesicionProcesoSeleccion===this.getIdDesitionByCode('NOAPL') ) {
          this.candidateProcess.indicadorNoAplica = true;
-      } else if(this.indApproval === 1) {
+         this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'NA' );
+      } else if ( this.candidateProcess.idDesicionProcesoSeleccion===this.getIdDesitionByCode('APRB') ) {
          this.candidateProcess.indicadorContProceso = true;
-      } else if(this.indApproval === 0) {
+         this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'APROB' );
+      } else if ( this.candidateProcess.idDesicionProcesoSeleccion===this.getIdDesitionByCode('NOAPRB') ) {
          this.candidateProcess.indicadorContProceso = false;
-      }
-
-      if(this.candidateProcess.idProcesoSeleccion !== undefined) {
-         this.candidateProcessService.update(this.candidateProcess).subscribe(res => {
-            if(res.ok) {
-               this._nav.setMesage( 2 );
-               this.router.navigate( [ 'selection-process' ] );
-            } else {
-               this._nav.setMesage( 3 );
-               this.router.navigate( [ 'selection-process' ] );
-            }
-         }, () => {
-            this._nav.setMesage( 3 );
-            this.router.navigate( [ 'selection-process' ] );
-         });
+         this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'RECH' );
       } else {
-         this.candidateProcessService.add(this.candidateProcess).subscribe(res => {
-            if(res.idProcesoSeleccion) {
-               this._nav.setMesage( 1 );
-               this.router.navigate( [ 'selection-process' ] );
+         this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'PROG' );
+      }
+      if ( this.candidateProcess.idProcesoSeleccion !== undefined ) {
+         this.candidateProcessService.update( this.candidateProcess ).subscribe( res => {
+            if ( res.ok ) {
+               this._nav.setMesage( 2 );
+               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
             } else {
                this._nav.setMesage( 3 );
-               this.router.navigate( [ 'selection-process' ] );
+               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
             }
          }, () => {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'selection-process' ] );
-         });
+            this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+         } );
+      } else {
+         this.candidateProcessService.add( this.candidateProcess ).subscribe( res => {
+            if ( res.idProcesoSeleccion ) {
+               this._nav.setMesage( 1 );
+               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+            } else {
+               this._nav.setMesage( 3 );
+               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+            }
+         }, () => {
+            this._nav.setMesage( 3 );
+            this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+         } );
       }
    }
 
@@ -179,6 +198,23 @@ export class CentralRiskComponent implements OnInit {
             this._nav.setMesage( 2, null );
          });
       }
+
+   }
+   reportar(f: CentralRisk){
+
+      this.confirmationService.confirm( {
+                                           message: `¿Está seguro que desea Reportar el aspirante?`,
+                                           header: 'Confirmación',
+                                           icon: 'fa fa-question-circle',
+
+                                           accept: () => {
+                                              this.selectionStepService.updateEmployeesCentralRisk( f ).subscribe( res => {
+                                                 this._nav.setMesage( 2, null );
+                                              });
+                                           }
+                                        } );
+
+
 
    }
    previewFile(f: CentralRisk){
@@ -215,6 +251,42 @@ export class CentralRiskComponent implements OnInit {
    }
    curriculum() {
       this.router.navigate( [ 'employees/curriculum/' + this.candidate.idTercero ] );
+   }
+
+   getIdStateByCode( code: string ): number {
+      let state: ListaItem = this.stepStates.find( s => s.codigo === code );
+      if ( state !== undefined ) {
+         return state.idLista;
+      } else {
+         return 0;
+      }
+   }
+
+
+   getIdDesitionByCode( code: string ): number {
+      let state: ListaItem = this.desitionList.find( s => s.codigo === code );
+      if ( state !== undefined ) {
+         return state.idLista;
+      } else {
+         return 0;
+      }
+   }
+
+
+   goBack(fDirty : boolean) {
+      if ( fDirty ){
+         this.confirmationService.confirm( {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+                                              }
+                                           } );
+      }else {
+         this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+      }
+
    }
 
 }

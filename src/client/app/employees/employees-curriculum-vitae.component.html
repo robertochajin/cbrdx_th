@@ -4,105 +4,113 @@
 			<h3 class="first">{{ 'EMPLOYEES.LBL_HOJADEVIDA' | translate }}</h3>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-10 col-md-offset-1">
-			<div class="row clearfix card-header">
+	<div id="curriculum" class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="row clearfix card-header perfil">
 				<div class="col-md-2">
-					<img class="thumbnail pull-left img-responsive"
+					<img class="img-circle img-responsive user-avatar"
 					     src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg"><br/>
 					<span>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</span><br/>
-					<h4>{{fechaNacimicento}}</h4>
+					<span>{{fechaNacimicento}}</span>
 				</div>
 				<div class="col-md-10">
 					<h2>{{employee.nombreCompleto}}</h2>
-					<h3>{{ 'EMPLOYEES.LBL_PERFIL' | translate }}</h3>
-					<h4>Sección para descripción del perfil</h4>
+					<h3 class="titulo">{{ 'EMPLOYEES.LBL_PERFIL' | translate }}</h3>
+					<p>Sección para descripción del perfil</p>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row curriculum-content">
 				<div class="col-md-8"><!--principal-->
 					<div class="row">
 						<div class="col-md-12">
-							<h3>{{ 'EMPLOYEES.LBL_EXPERIENCIA' | translate }}</h3>
-							<div *ngFor="let e of experiences">
-								<h4><i>{{e.cargo}}</i></h4>
-								<h4> <i><strong>{{e.empresa}} </strong> {{e.fechaIngresa}}-{{e.fechaTermina}}</i></h4>
-							</div>
+							<h3 class="hv-ribon hv-ribon-left">{{ 'EMPLOYEES.LBL_EXPERIENCIA' | translate }}</h3>
+							<ul class="item experiencia">
+								<li *ngFor="let e of experiences">
+									<strong>{{e.cargo}}</strong><br />
+									<strong>{{e.empresa}} </strong> {{e.fechaIngresa}}-{{e.fechaTermina}}
+								</li>
+							</ul>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<h3>{{ 'EMPLOYEES.LBL_EDUCACION' | translate }}</h3>
-							<div *ngFor="let fe of fstudies">
-								<h4><i>{{fe.tituloEstudio}}--{{fe.institucion}}</i></h4>
-								<h4><i>{{fe.fechaIngresa}} - {{fe.fechaTermina}}</i></h4>
-							</div>
-							<div *ngFor="let fne of nfstudies">
-								<h4><i>{{fne.tituloEstudio}}--{{fne.institucion}}</i></h4>
-								<h4><i>{{fne.fechaIngresa}} - {{fne.fechaTermina}}</i></h4>
-							</div>
+							<h3 class="hv-ribon hv-ribon-left">{{ 'EMPLOYEES.LBL_EDUCACION' | translate }}</h3>
+							<ul class="item educacion">
+								<li *ngFor="let fe of fstudies">
+									<strong>{{fe.tituloEstudio}}</strong> - {{fe.institucion}}<br />
+									{{fe.fechaIngresa}} - {{fe.fechaTermina}}
+								</li>
+							</ul>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<h3>{{ 'EMPLOYEES.LBL_COMPETHABILI' | translate }}</h3>
+							<h3 class="hv-ribon hv-ribon-left">{{ 'EMPLOYEES.LBL_COMPETHABILI' | translate }}</h3>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<h3>{{ 'EMPLOYEES.LBL_REFERENCIAS' | translate }}</h3>
-							<div *ngFor="let r of references">
-								<h4><i>{{r.tipoReferencia}}</i></h4>
-								<h4> <i>{{r.nombreCompleto}} </i></h4>
-								<h4> <i>{{r.numeroContacto}} </i></h4>
-							</div>
+							<h3 class="hv-ribon hv-ribon-left">{{ 'EMPLOYEES.LBL_REFERENCIAS' | translate }}</h3>
+							<ul>
+								<li *ngFor="let r of references">
+									<strong>{{r.tipoReferencia}}</strong><br />
+									{{r.nombreCompleto}}<br />
+									{{r.numeroContacto}}
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-4"><!--lateral derecha-->
 					<div class="row">
 						<div class="col-md-12">
-							<h3>{{ 'EMPLOYEES.LBL_DIRECCION' | translate }}</h3>
-							<h4>{{direcccionResidencia}}</h4>
+							<h3 class="hv-ribon hv-ribon-rigth">{{ 'EMPLOYEES.LBL_DIRECCION' | translate }}</h3>
+							<i class="fa fa-map-marker" aria-hidden="true"></i> {{direcccionResidencia}}
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<h3>{{ 'EMPLOYEES.LBL_CONTACTO' | translate }}</h3>
-							<h4>{{employee.correoElectronico}}</h4>
-							<h4>{{employee.telefonoCelular}}</h4>
-							<h4>{{employee.telefonoFijo}}</h4>
-							<h4><i><strong>{{ 'EMPLOYEES.LBL_CONTACTOEMERG' | translate }}</strong></i></h4>
-							<div *ngFor="let c of contacts">
-								<h5><i>{{c.contacto}} - {{c.nombre}}</i></h5>
-								<h5> <i>{{c.telefono}} </i></h5>
-								<h5> <i>{{c.celular}} </i></h5>
-							</div>
+							<h3 class="hv-ribon hv-ribon-rigth">{{ 'EMPLOYEES.LBL_CONTACTO' | translate }}</h3>
+							<i class="fa fa-envelope" aria-hidden="true"></i> {{employee.correoElectronico}}<br />
+							<i class="fa fa-phone" aria-hidden="true"></i> {{employee.telefonoCelular}}<br />
+							<i class="fa fa-phone" aria-hidden="true"></i> {{employee.telefonoFijo}}
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<h3>{{ 'EMPLOYEES.LBL_IDIOMA' | translate }}</h3>
+							<h3 class="hv-ribon hv-ribon-rigth">{{ 'EMPLOYEES.LBL_CONTACTOEMERG' | translate }}</h3>
+							<ul class="item contacto-emergencia">
+								<li *ngFor="let c of contacts">
+									<i class="fa fa-user-circle"></i> {{c.contacto}} - {{c.nombre}}<br />
+									<i class="fa fa-phone" aria-hidden="true"></i> {{c.telefono}}<br />
+									<i class="fa fa-phone" aria-hidden="true"></i> {{c.celular}}
+								</li>
+							</ul>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<h3>{{ 'EMPLOYEES.LBL_AREAINTERES' | translate }}</h3>
+							<h3 class="hv-ribon hv-ribon-rigth">{{ 'EMPLOYEES.LBL_IDIOMA' | translate }}</h3>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<h3>{{ 'EMPLOYEES.LBL_DEPORTES' | translate }}</h3>
+							<h3 class="hv-ribon hv-ribon-rigth">{{ 'EMPLOYEES.LBL_AREAINTERES' | translate }}</h3>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<h3>{{ 'EMPLOYEES.LBL_LIDERAZGO' | translate }}</h3>
+							<h3 class="hv-ribon hv-ribon-rigth">{{ 'EMPLOYEES.LBL_DEPORTES' | translate }}</h3>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<h3>{{ 'EMPLOYEES.LBL_HOBBIES' | translate }}</h3>
+							<h3 class="hv-ribon hv-ribon-rigth">{{ 'EMPLOYEES.LBL_LIDERAZGO' | translate }}</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<h3 class="hv-ribon hv-ribon-rigth">{{ 'EMPLOYEES.LBL_HOBBIES' | translate }}</h3>
 						</div>
 					</div>
 				</div>
