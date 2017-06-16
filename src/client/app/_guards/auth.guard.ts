@@ -1,6 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import {
-   Router, CanActivate, NavigationEnd, NavigationStart, Event as NavigationEvent, RouterStateSnapshot, ActivatedRouteSnapshot
+   Router, CanActivate, NavigationEnd, NavigationStart, Event as NavigationEvent, RouterStateSnapshot, ActivatedRouteSnapshot, UrlSegment,
+   ActivatedRoute
 } from '@angular/router';
 import { AuthenticationService } from '../_services/authentication.service';
 import { MenuManagerService } from '../_services/menuManager.service';
@@ -22,8 +23,8 @@ export class AuthGuard implements CanActivate {
 
    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
       if ( this.authenticationService.loggedIn() ) {
-         let url: string = state.url;+
-         this.checkUrl( url );
+         let url: string = route.url[0].path;
+         //this.checkUrl( url );
          return true;
       } else {
          this.router.navigate( [ '/login' ] );
@@ -32,10 +33,38 @@ export class AuthGuard implements CanActivate {
    }
 
    checkUrl(url: any) {
-      this.currentUrl = url[0].path;
+      this.currentUrl = url;
       if ( this.currentUrl !== 'login' && this.currentUrl !== 'dashboard' ) {
          this.listmenu = [];
-         this.menuManagerService.getMenusSession().subscribe( men => {
+         this.menuManagerService.getMenusSession().flatMap(result => {
+            // debugger;
+            result.map( r => {
+               this.listmenu.push( r.ruta );
+            } );
+            return result;//this.menuManagerService.getMenusSession();
+         }).subscribe(men => {
+            // debugger;
+            // men.map( r => {
+            //    this.listmenu.push( r.ruta );
+            // } );
+            this.flat = false;
+            this.listmenu.forEach( ( value: any ) => {
+               //debugger;
+               /*if ( new RegExp( value ).exec( this.currentUrl ) ) {
+                  this.flat = true;
+               }*/
+               if (value === '/'+this.currentUrl){
+                  this.flat = true;
+               }
+            });
+
+            if(!this.flat){
+               this.router.navigate( [ '/dashboard' ] );
+            }
+
+            return this.flat;
+         });
+         /*this.menuManagerService.getMenusSession().subscribe( men => {
             men.map( r => {
                this.listmenu.push( r.ruta );
             } );
@@ -49,7 +78,7 @@ export class AuthGuard implements CanActivate {
                this.router.navigate( [ '/dashboard' ] );
 
             }
-         } );
+         } );*/
       }
 
    }

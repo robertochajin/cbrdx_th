@@ -270,7 +270,7 @@ export class SelectionProcessAddComponent implements OnInit {
 
    disableQuestionnaire( questionnaire: PublicationsQuestionnaries ) {
       this.confirmationService.confirm( {
-                                           message: ` ¿Está seguro que desea inhabilitar este registro?`,
+                                           message: ` ¿Está seguro que desea inactivar este registro?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {

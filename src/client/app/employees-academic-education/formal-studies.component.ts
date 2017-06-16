@@ -33,7 +33,7 @@ export class FormalStudiesComponent implements OnInit {
    delete( f: FormalStudies ) {
       this.dialogObjet = f;
       this.confirmationService.confirm( {
-                                           message: ` ¿Está seguro que desea inhabilitar este registro?`,
+                                           message: ` ¿Está seguro que desea inactivar este registro?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
