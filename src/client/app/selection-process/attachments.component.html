@@ -9,7 +9,7 @@
 						<input id="nombrearchivo" name="nombrearchivo" #nombrearchivo="ngModel" pInputText
 						       type="text" maxlength="64" required [(ngModel)]="adjunto.nombre" (keyup)="nombreArchivo()"/>
 						<div class="ui-message ui-messages-error ui-corner-all"
-						     *ngIf="f.submitted && !nombrearchivo.valid">
+						     *ngIf="validfile">
 							<i class="fa fa-close"></i>
 							{{'PROCESOSELECCION.LBL_NOMBRE' | translate }} {{'LBL_REQUERIDO' | translate }}
 						</div>
@@ -19,8 +19,8 @@
 					<div class="form-group col-lg-12">
 						<label>{{'PROCESOSELECCION.LBL_ARCHIVO' | translate }}</label>
 						<p-fileUpload name="file" url="{{svcSpUrl}}" uploadLabel="Subir" cancelLabel="Cancelar"
-						              chooseLabel="Examinar" (onUpload)="uploadingOk($event)"
-						              (onBeforeSend)="onBeforeSend($event)">
+						              chooseLabel="Examinar" (onUpload)="uploadingOk($event)" accept="image/*,application/pdf"
+						              (onBeforeUpload)="onBeforeUpload($event)">
 						</p-fileUpload>
 					</div>
 				</div>
@@ -38,12 +38,14 @@
 				          [sortable]="true"></p-column>
 				<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 					<template let-doc="rowData" pTemplate="body">
-						<button type="button" icon="fa-trash" class="ui-button-success" data-toggle="tooltip"
-						        title="{{'BTN_ELIMINAR' | translate}}"
-						        pButton (click)="delete(doc)"></button>
-						<a icon="fa-download" class="ui-button-warning" data-toggle="tooltip" title="{{'BTN_DESCARGAR' | translate}}"
-						   *ngIf="doc.documentoInterno !== null"
-						   pButton alt="Documento" href="{{svcSpUrl}}/file/{{doc.documentoInterno}}"></a>
+						<button type="button" icon="fa-eye" *ngIf="doc.idAdjunto"
+						        class="ui-button btn" data-toggle="tooltip"
+						        title="{{'BTN_VISUALIZAR' | translate}}"
+						        pButton (click)="previewFile(data)"></button>
+						<button type="button" icon="fa-cloud-download" *ngIf="doc.idAdjunto"
+						        class="ui-button-success"  data-toggle="tooltip"
+						        title="{{'BTN_DOWNLOAD' | translate}}"
+						        pButton (click)="downloadFile(data)" ></button>
 					</template>
 				</p-column>
 			</p-dataTable>

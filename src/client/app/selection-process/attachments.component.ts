@@ -24,11 +24,10 @@ export class AttachmentsComponent implements OnInit {
    adjuntos: Attachments[] = [];
    private stepStates: ListaItem[] = [];
    msgs: Message[] = [];
-   busqueda: string;
    fileupload: boolean = false;
-   // svcSpUrl = '<%= SVC_TH_URL %>/api/fileUpload';
-   svcSpUrl = '';
-   readonly : boolean = false;
+   svcSpUrl = '<%= SVC_TH_URL %>/api/procesoSeleccionAdjuntos';
+   readonly: boolean = false;
+   validfile: boolean = false;
 
    constructor( private risksService: RisksService,
       private router: Router,
@@ -36,7 +35,6 @@ export class AttachmentsComponent implements OnInit {
       private listaService: ListaService,
       private adjuntosService: AttachmentsService,
       private confirmationService: ConfirmationService ) {
-      this.busqueda = this.navService.getSearch( 'adjuntos.component' );
 
       this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
          this.stepStates = res;
@@ -44,38 +42,14 @@ export class AttachmentsComponent implements OnInit {
    }
 
    ngOnInit() {
-      if ( this.candidateProcess.idEstadoDiligenciado=== this.getIdStateByCode('RECH') ||
-           this.candidateProcess.idEstadoDiligenciado=== this.getIdStateByCode('APROB')) {
-         this.readonly=true;
-      }else{
-         this.readonly=false;
-      }
-      this.candidateProcess;
-   }
-
-   uploadingOk( event: any ) {
-      this.adjuntos = [];
-      this.adjuntosService.listAdjuntos().subscribe( rest => {
-         this.adjuntos = rest;
-      } );
-      this.navService.setMesage( 1, this.msgs );
-      this.fileupload = true;
-   }
-
-   onBeforeSend( event: any ) {
-      if ( this.adjunto.nombre !== null && this.adjunto.nombre !== undefined && this.adjunto.nombre !== '' ) {
-         this.adjuntosService.addAdjunto( this.adjunto ).subscribe( data => {
-            event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-            console.info( event );
-            event.formData.append( 'idAdjunto', data.idAdjunto );
-         } );
+      if ( this.candidateProcess.idEstadoDiligenciado === this.getIdStateByCode( 'RECH' ) ||
+           this.candidateProcess.idEstadoDiligenciado === this.getIdStateByCode( 'APROB' ) ) {
+         this.readonly = true;
       } else {
-         this.navService.setMesage( 0, { severity: 'error', summary: 'Error', detail: 'Nombre de archivo requerido' } );
+         this.readonly = false;
       }
-   }
-
-   onSubmit() {
-
+      this.adjunto.idTerceroPublicacion = this.candidateProcess.idTerceroPublicacion;
+      this.adjunto.idProcesoPaso = this.candidateProcess.idProcesoPaso;
    }
 
    getIdStateByCode( code: string ): number {
@@ -87,20 +61,46 @@ export class AttachmentsComponent implements OnInit {
       }
    }
 
-   update( r: Risks ) {
-
-   }
-
-   setSearch() {
-      this.navService.setSearch( 'adjuntos.component', this.busqueda );
-   }
-
    nombreArchivo() {
       if ( this.adjunto.nombre !== null && this.adjunto.nombre !== undefined && this.adjunto.nombre == '' ) {
          this.fileupload = false;
+         this.validfile = true;
       } else {
          this.fileupload = true;
+         this.validfile = false;
       }
+   }
+
+   onBeforeUpload( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      event.formData.append( 'obj', JSON.stringify( this.adjunto ) );
+   }
+
+   uploadingOk( event: any ) {
+      // let respuesta = JSON.parse(event.xhr.response);
+      // data.idTerceroCentralRiesgo = respuesta.idTerceroCentralRiesgo;
+      // data.idAdjunto = respuesta.idAdjunto;
+      // this.adjuntos = [];
+      // this.adjuntosService.listAdjuntos().subscribe( rest => {
+      //    this.adjuntos = rest;
+      // } );
+      // this.navService.setMesage( 1, this.msgs );
+      // this.fileupload = true;
+   }
+
+   previewFile( f: Attachments ) {
+      // let link = 'https://www.subes.sep.gob.mx/archivos/tutor/manual_general.pdf';
+      // this.url = this.previewUrl+'/'+ f.idAdjunto;
+      // this.title = f.nombre;
+      // this.displayDialog = true;
+
+   }
+
+   downloadFile( f: Attachments ) {
+
+      // this.selectionStepService.downloadFile( f.idAdjunto ).subscribe(res => {
+      //    window.location.assign(res);
+      // });
    }
 
 }
