@@ -30,6 +30,7 @@ export class CentralRiskComponent implements OnInit {
    public url = '';
    public title = '';
    displayDialog: boolean = false;
+   disabled: boolean = false;
    respuesta:any;
    cargando = 0;
    public  indApproval: number;
@@ -56,7 +57,8 @@ export class CentralRiskComponent implements OnInit {
 
 
       this.route.params.subscribe( ( params: Params ) => {
-         let idTercerosPublicaciones = +params[ 'id' ];
+         let idTercerosPublicaciones = +params[ 'idTerceroPublication' ];
+         let idStep = +params[ 'idStep' ];
          this.selectionStepService.getTerceroPublicacio( idTercerosPublicaciones).subscribe(tp =>{
 
             this.idCandidate = tp.idTercero;
@@ -119,6 +121,7 @@ export class CentralRiskComponent implements OnInit {
 
    onUpload( event: any, data: CentralRisk ) {
       this.cargando = 0;
+      this.disabled = true;
       let respuesta = JSON.parse(event.xhr.response);
       data.idTerceroCentralRiesgo = respuesta.idTerceroCentralRiesgo;
       data.idAdjunto = respuesta.idAdjunto;
@@ -200,6 +203,9 @@ export class CentralRiskComponent implements OnInit {
 
                                            accept: () => {
                                               f.idAdjunto = null;
+                                              f.indicadorAprobado = false;
+                                              f.indicadorReportado = false;
+                                              this.disabled = true;
                                               this.selectionStepService.updateEmployeesCentralRisk( f ).subscribe( res => {
                                                  this._nav.setMesage( 2, null );
                                               });
@@ -210,4 +216,5 @@ export class CentralRiskComponent implements OnInit {
    curriculum() {
       this.router.navigate( [ 'employees/curriculum/' + this.candidate.idTercero ] );
    }
+
 }
