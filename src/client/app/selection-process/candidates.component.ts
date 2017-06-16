@@ -56,7 +56,8 @@ export class CandidatesComponent implements OnInit {
                this.publicationsService.getById( params[ 'idPublication' ] ).subscribe( publication => {
                   this.publication = publication;
 
-                  this.selectionStepService.getAllByProcess( this.publication.idProceso ).subscribe( steps => {
+                  this.selectionStepService.getAllByProcessAndType( this.publication.idProceso, this.publication.formaReclutamiento )
+                  .subscribe( steps => {
                      this.steps = steps;
                      this.candidateProcessService.getCandidatesByPublication( params[ 'idPublication' ] )
                      .subscribe( candidates => {
@@ -78,12 +79,22 @@ export class CandidatesComponent implements OnInit {
    //Redirecciona a la pantalla dependiendo del paso y del rol del usuario
    redirecStep( step: CandidateProgress, idStep: number, btn: string ) {
       let myStep = step.pasos.find( s => s.idProcesoPaso === idStep );
-      if ( this.userRoles.find( r => r.rol === 'ROLE_PROCESOSELECCION' ) ) {
-         this.router.navigate(
-            [ 'process-step/' + idStep + '/terceroPublication/' + step.idTerceroPublicacion + '/process/' + myStep.idProcesoSeleccion ] );
-      } else if ( myStep !== undefined && myStep.idResponsable === this.usuarioLogueado.usuario.idUsuario ) {
-         this.router.navigate(
-            [ 'process-step/' + idStep + '/terceroPublication/' + step.idTerceroPublicacion + '/process/' + myStep.idProcesoSeleccion ] );
+      if ( this.userRoles.find( r => r.rol === 'ROLE_PROCESOSELECCION' )
+           || (myStep !== undefined && myStep.idResponsable === this.usuarioLogueado.usuario.idUsuario)) {
+         if ( myStep.interfazInterna ) {
+            //candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
+            //process-step/centralRisk/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
+
+            this.router.navigate(
+               [ myStep.interfazInterna.replace( ':idStep', myStep.idProcesoPaso.toString() )
+                                       .replace( ':idTerceroPublication', step.idTerceroPublicacion.toString() )
+                                       .replace( ':id', step.idTerceroPublicacion.toString() )
+                                       .replace( ':idProceso', myStep.idProcesoSeleccion.toString() )
+               ] );
+         } else {
+            this.router.navigate(
+               [ 'process-step/' + idStep + '/terceroPublication/' + step.idTerceroPublicacion + '/process/' + myStep.idProcesoSeleccion ] );
+         }
       }
    }
 
