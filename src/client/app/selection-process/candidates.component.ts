@@ -91,8 +91,12 @@ export class CandidatesComponent implements OnInit {
                .replace( ':idProceso', myStep.idProcesoSeleccion ? myStep.idProcesoSeleccion.toString() : '0' )
                ] );
          } else {
-            let stepProcessUrl = 'process-step/' + idStep.toString() + '/terceroPublication/' + step.idTerceroPublicacion.toString() + '/process/' + myStep.idProcesoSeleccion ?
-               myStep.idProcesoSeleccion.toString() : '0';
+            let stepProcessUrl = 'process-step/' + idStep.toString() + '/terceroPublication/' + step.idTerceroPublicacion.toString();
+            if(myStep.idProcesoSeleccion) {
+               stepProcessUrl += '/process/' + myStep.idProcesoSeleccion.toString();
+            } else {
+               stepProcessUrl += '/process/0';
+            }
             this.router.navigate(
                [ stepProcessUrl ] );
          }
