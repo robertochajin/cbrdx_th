@@ -77,7 +77,9 @@
   "BTN_ARRIBA": "Subir",
   "BTN_ABAJO": "Bajar",
   "BTN_BORRAR":"Borrar",
-   "FIN_COMUNES":"====================================================================",
+  "BTN_DOWNLOAD": "Descargar",
+  "BTN_UPLOAD": "Subir archivo",
+  "FIN_COMUNES":"====================================================================",
 
   "UBICACION":{
       "LBL_UBICACION":"Ubicación",
@@ -933,6 +935,14 @@
       "LBL_PROGRAMADO" : "Programado",
       "LBL_APROBO" : "Aprobó",
       "LBL_NOAPROBO" : "No aprobó",
+      "LBL_CENTRALRIESGO":"Central de riesgo",
+      "LBL_CENTRALESRIESGOS":"Centrales de riesgos",
+      "LBL_CONTINUARPROCESO":"Continuar con el proceso",
+      "LBL_CONSULTAR":"Consultar",
+      "LBL_ADJUNTAR":"Ajuntar",
+      "LBL_APROBAR":"Aprobar",
+      "LBL_REPORTAR":"Reportar",
+      "LBL_NOADJUNTO":"No hay Adjunto",
       "LBL_URL":"URL",
       "":""
    },

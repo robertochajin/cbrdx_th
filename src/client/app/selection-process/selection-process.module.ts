@@ -19,6 +19,8 @@ import { EmployeesService } from '../_services/employees.service';
 import { CandidateProcessService } from '../_services/candidate-process.service';
 import { CandidatesComponent } from './candidates.component';
 import { UsuariosService } from '../_services/usuarios.service';
+import { CentralRiskComponent } from '../selection-process-risks/central-risk.component';
+import { SafePipe } from '../_helpers/safePipe';
 
 @NgModule( {
               imports: [
@@ -34,7 +36,10 @@ import { UsuariosService } from '../_services/usuarios.service';
                  StepDetailComponent,
                  StepProcessComponent,
                  SelectionProcessVacanciesComponent,
-                 CandidatesComponent
+                 CandidatesComponent,
+                 SelectionProcessVacanciesComponent,
+                 CentralRiskComponent,
+                 SafePipe
               ],
               bootstrap: [ SelectionProcessComponent ],
               providers: [
