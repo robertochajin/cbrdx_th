@@ -88,9 +88,10 @@ export class AttachmentsComponent implements OnInit {
    uploadingOk( event: any ) {
       let respuesta = JSON.parse( event.xhr.response );
       if ( respuesta.idAdjunto ) {
+         this.adjunto.nombre=null;
          this.navService.setMesage( 0, { severity: 'success', summary: 'Exito', detail: 'Archivo subido con exito' } );
       } else {
-         this.navService.setMesage( 0, { severity: 'error', summary: 'Error', detail: 'Error al subir archivo' } )
+         this.navService.setMesage( 0, { severity: 'error', summary: 'Error', detail: 'Error al subir archivo' } );
       }
       this.listAttachments = [];
       this.attachmentsService.listAttachments( this.adjunto.idProcesoPaso, this.adjunto.idTerceroPublicacion ).subscribe( rest => {

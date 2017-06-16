@@ -19,6 +19,7 @@ import { EmployeesService } from '../_services/employees.service';
 import { CandidateProcessService } from '../_services/candidate-process.service';
 import { AttachmentsService } from '../_services/attachments-step.service';
 import { AttachmentsComponent } from './attachments.component';
+import { SafePipe } from '../_helpers/safePipe';
 
 @NgModule( {
               imports: [
@@ -34,6 +35,7 @@ import { AttachmentsComponent } from './attachments.component';
                  StepDetailComponent,
                  StepProcessComponent,
                  AttachmentsComponent,
+                 SafePipe,
                  SelectionProcessVacanciesComponent
               ],
               bootstrap: [ SelectionProcessComponent ],
