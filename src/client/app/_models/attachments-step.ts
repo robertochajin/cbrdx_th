@@ -7,6 +7,7 @@ export class Attachments {
    idProcesoPaso: number;
    idAdjunto: number;
    nombre: string;
+   nombreArchivo: string;
    indicadorHabilitado: boolean = true;
    auditoriaUsuario: number;
    auditoriaFecha: Date;

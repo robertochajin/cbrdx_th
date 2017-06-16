@@ -20,9 +20,9 @@ export class AttachmentsService {
          this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
       }
    }
-
-   listAdjuntos() {
-      return this.authHttp.get( this.serviceURL + 'constantes/' ).map( ( res: Response ) => res.json() as Attachments[] );
+   listAttachments(idProcesoPaso: number, idTerceroPublicacion: number) {
+      return this.authHttp.get( this.serviceURL + 'procesoSeleccionAdjuntos/terPublicPaso/'+idTerceroPublicacion+'/'+idProcesoPaso )
+      .map( ( res: Response ) => res.json() as Attachments[] );
    }
 
 
@@ -31,18 +31,10 @@ export class AttachmentsService {
       return this.authHttp.post( this.serviceURL + 'riesgos', r ).map( ( res: Response ) => res.json() );
    };
 
-   // updateConstant( c: Adjunto ): Promise<any> {
-   //    c.auditoriaUsuario = this.idUsuario;
-   //    return this.authHttp.put( this.serviceURL + 'constantes/', JSON.stringify( c ) ).toPromise().catch( this.handleError );
-   // }
-   //
-   // viewConstant( id: number ) {
-   //    return this.authHttp.get( this.serviceURL + 'constantes/' + id ).map( res => res.json() as Adjunto );
-   // }
-   //
-   // getByCode( code: string ) {
-   //    return this.authHttp.get( this.serviceURL + 'constantes/codigo/' + code ).map( res => res.json() as Adjunto );
-   // }
+   downloadFile(id:number){
+      return this.authHttp.get( this.serviceURL + 'adjuntos/file/'+id ).map( ( res: Response ) => res.text() );
+   }
+
 
    handleError( error: any ): Promise<any> {
       console.error( 'Error:', error );

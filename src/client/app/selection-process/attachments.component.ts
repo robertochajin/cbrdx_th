@@ -21,11 +21,16 @@ export class AttachmentsComponent implements OnInit {
 
    @Input() candidateProcess: CandidateProcess;
    adjunto: Attachments = new Attachments();
-   adjuntos: Attachments[] = [];
+   listAttachments: Attachments[] = [];
    private stepStates: ListaItem[] = [];
    msgs: Message[] = [];
    fileupload: boolean = false;
    svcSpUrl = '<%= SVC_TH_URL %>/api/procesoSeleccionAdjuntos';
+   fileThUrl = '<%= SVC_TH_URL %>/api/adjuntos/file';
+   previewUrl = '<%= SVC_TH_URL %>/api/adjuntos/preview';
+   url = '';
+   title = '';
+   displayDialog: boolean = false;
    readonly: boolean = false;
    validfile: boolean = false;
 
@@ -33,7 +38,7 @@ export class AttachmentsComponent implements OnInit {
       private router: Router,
       private navService: NavService,
       private listaService: ListaService,
-      private adjuntosService: AttachmentsService,
+      private attachmentsService: AttachmentsService,
       private confirmationService: ConfirmationService ) {
 
       this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
@@ -42,14 +47,18 @@ export class AttachmentsComponent implements OnInit {
    }
 
    ngOnInit() {
+      this.adjunto.idTerceroPublicacion = this.candidateProcess.idTerceroPublicacion;
+      this.adjunto.idProcesoPaso = this.candidateProcess.idProcesoPaso;
+      this.attachmentsService.listAttachments( this.adjunto.idProcesoPaso, this.adjunto.idTerceroPublicacion ).subscribe( rest => {
+         this.listAttachments = rest;
+      } );
       if ( this.candidateProcess.idEstadoDiligenciado === this.getIdStateByCode( 'RECH' ) ||
            this.candidateProcess.idEstadoDiligenciado === this.getIdStateByCode( 'APROB' ) ) {
          this.readonly = true;
       } else {
          this.readonly = false;
       }
-      this.adjunto.idTerceroPublicacion = this.candidateProcess.idTerceroPublicacion;
-      this.adjunto.idProcesoPaso = this.candidateProcess.idProcesoPaso;
+
    }
 
    getIdStateByCode( code: string ): number {
@@ -77,30 +86,31 @@ export class AttachmentsComponent implements OnInit {
    }
 
    uploadingOk( event: any ) {
-      // let respuesta = JSON.parse(event.xhr.response);
-      // data.idTerceroCentralRiesgo = respuesta.idTerceroCentralRiesgo;
-      // data.idAdjunto = respuesta.idAdjunto;
-      // this.adjuntos = [];
-      // this.adjuntosService.listAdjuntos().subscribe( rest => {
-      //    this.adjuntos = rest;
-      // } );
-      // this.navService.setMesage( 1, this.msgs );
-      // this.fileupload = true;
+      let respuesta = JSON.parse( event.xhr.response );
+      if ( respuesta.idAdjunto ) {
+         this.navService.setMesage( 0, { severity: 'success', summary: 'Exito', detail: 'Archivo subido con exito' } );
+      } else {
+         this.navService.setMesage( 0, { severity: 'error', summary: 'Error', detail: 'Error al subir archivo' } )
+      }
+      this.listAttachments = [];
+      this.attachmentsService.listAttachments( this.adjunto.idProcesoPaso, this.adjunto.idTerceroPublicacion ).subscribe( rest => {
+         this.listAttachments = rest;
+      } );
+
    }
 
    previewFile( f: Attachments ) {
       // let link = 'https://www.subes.sep.gob.mx/archivos/tutor/manual_general.pdf';
-      // this.url = this.previewUrl+'/'+ f.idAdjunto;
-      // this.title = f.nombre;
-      // this.displayDialog = true;
+      this.url = this.previewUrl + '/' + f.idAdjunto;
+      this.title = f.nombreArchivo;
+      this.displayDialog = true;
 
    }
 
    downloadFile( f: Attachments ) {
-
-      // this.selectionStepService.downloadFile( f.idAdjunto ).subscribe(res => {
-      //    window.location.assign(res);
-      // });
+      this.attachmentsService.downloadFile( f.idAdjunto ).subscribe( res => {
+         window.location.assign( res );
+      } );
    }
 
 }
