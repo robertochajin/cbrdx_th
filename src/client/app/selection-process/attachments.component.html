@@ -1,6 +1,6 @@
 <h3 class="first">Adjuntos</h3>
 <div class="row">
-	<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+	<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario" *ngIf="!readonly">
 		<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 			<div class="col-md-10 col-md-offset-1">
 				<div class="row">
@@ -9,7 +9,7 @@
 						<input id="nombrearchivo" name="nombrearchivo" #nombrearchivo="ngModel" pInputText
 						       type="text" maxlength="64" required [(ngModel)]="adjunto.nombre" (keyup)="nombreArchivo()"/>
 						<div class="ui-message ui-messages-error ui-corner-all"
-						     *ngIf="f.submitted && !nombrearchivo.valid">
+						     *ngIf="validfile">
 							<i class="fa fa-close"></i>
 							{{'PROCESOSELECCION.LBL_NOMBRE' | translate }} {{'LBL_REQUERIDO' | translate }}
 						</div>
@@ -19,7 +19,7 @@
 					<div class="form-group col-lg-12">
 						<label>{{'PROCESOSELECCION.LBL_ARCHIVO' | translate }}</label>
 						<p-fileUpload name="file" url="{{svcSpUrl}}" uploadLabel="Subir" cancelLabel="Cancelar"
-						              chooseLabel="Examinar" (onUpload)="uploadingOk($event)"
+						              chooseLabel="Examinar" (onUpload)="uploadingOk($event)" accept="image/*,application/pdf"
 						              (onBeforeSend)="onBeforeSend($event)">
 						</p-fileUpload>
 					</div>
@@ -30,20 +30,17 @@
 	</form>
 </div>
 <div class="row">
-	<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+	<div class="col-md-12">
 		<div class="col-md-10 col-md-offset-1">
-			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="adjuntos"
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listAttachments"
 			             [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
-				<p-column field="documento" header="{{'PROCESOSELECCION.LBL_NOMBREARCHIVO' | translate }}"
-				          [sortable]="true"></p-column>
+				<p-column field="nombreArchivo" header="{{'PROCESOSELECCION.LBL_NOMBRE' | translate }}"[sortable]="true"></p-column>
 				<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 					<template let-doc="rowData" pTemplate="body">
-						<button type="button" icon="fa-trash" class="ui-button-success" data-toggle="tooltip"
-						        title="{{'BTN_ELIMINAR' | translate}}"
-						        pButton (click)="delete(doc)"></button>
-						<a icon="fa-download" class="ui-button-warning" data-toggle="tooltip" title="{{'BTN_DESCARGAR' | translate}}"
-						   *ngIf="doc.documentoInterno !== null"
-						   pButton alt="Documento" href="{{svcSpUrl}}/file/{{doc.documentoInterno}}"></a>
+						<button type="button" icon="fa-eye" *ngIf="doc.idAdjunto"  class="ui-button btn" data-toggle="tooltip"
+						        title="{{'BTN_VISUALIZAR' | translate}}" pButton (click)="previewFile(doc)"></button>
+						<button type="button" icon="fa-cloud-download" *ngIf="doc.idAdjunto"class="ui-button-success"  data-toggle="tooltip"
+						        title="{{'BTN_DOWNLOAD' | translate}}" pButton (click)="downloadFile(doc)" ></button>
 					</template>
 				</p-column>
 			</p-dataTable>
@@ -57,3 +54,6 @@
 		<button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate}}" (click)="cd.accept()"></button>
 	</p-footer>
 </p-confirmDialog>
+<p-dialog header="{{title}}" [(visible)]="displayDialog" [width]="800">
+	<iframe width="100%" height="300" [src]="url | safe"></iframe>
+</p-dialog>
