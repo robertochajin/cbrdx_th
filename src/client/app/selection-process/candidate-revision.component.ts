@@ -9,7 +9,7 @@ import { Employee } from '../_models/employees';
 import * as moment from 'moment/moment';
 import { VacanciesService } from '../_services/vacancies.service';
 import { PersonnelRequirement } from '../_models/personnelRequirement';
-import { SelectItem } from 'primeng/components/common/api';
+import { SelectItem, ConfirmationService } from 'primeng/components/common/api';
 import { CandidateProcess } from '../_models/candidateProcess';
 import { CandidateProcessService } from '../_services/candidate-process.service';
 import { ListaService } from '../_services/lista.service';
@@ -21,7 +21,8 @@ import { RolesService } from '../_services/roles.service';
 @Component( {
                moduleId: module.id,
                selector: 'candidate-revision',
-               templateUrl: 'candidate-revision.component.html'
+               templateUrl: 'candidate-revision.component.html',
+               providers: [ ConfirmationService ]
             } )
 export class CandidateRevisionComponent implements OnInit {
    private publication: PersonnelRequirement = new PersonnelRequirement();
@@ -36,6 +37,7 @@ export class CandidateRevisionComponent implements OnInit {
    private desitionList: ListaItem[] = [];
    public responsables: SelectItem[] = [];
    private showCalendar = false;
+   private readonly = false;
 
    usuarioLogueado: any;
    idRol: number;
@@ -46,6 +48,7 @@ export class CandidateRevisionComponent implements OnInit {
       private _nav: NavService,
       private router: Router,
       private listaService: ListaService,
+      private confirmationService: ConfirmationService,
       private rolesService: RolesService,
       private employeesService: EmployeesService,
       private vacanciesService: VacanciesService,
@@ -96,11 +99,12 @@ export class CandidateRevisionComponent implements OnInit {
                      this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
                      this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
                         this.candidateProcess = cp;
-                        this.prepareForm();
+                        if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ) {
+                           this.readonly = true;
+                        }
                      } );
                   } else {
                      this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
-                     this.prepareForm();
                   }
                } );
 
@@ -118,18 +122,6 @@ export class CandidateRevisionComponent implements OnInit {
    ngOnInit() {
    }
 
-   prepareForm() {
-      //Se verifica el estado del paso y la la necesidad de mostrar o nó la asignación de fecha
-      if ( this.getIdStateByCode( 'VAC' ) === this.candidateProcess.idEstadoDiligenciado ) {
-         this.showCalendar = this.step.indicadorCalendario;
-
-      } else if ( this.getIdStateByCode( 'PROG' ) === this.candidateProcess.idEstadoDiligenciado ) {
-
-      } else if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ) {
-
-      }
-   }
-
    onSubmit() {
       if ( this.indApproval === 'APRB') {
          this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'APROB' );
@@ -143,27 +135,27 @@ export class CandidateRevisionComponent implements OnInit {
          this.candidateProcessService.update( this.candidateProcess ).subscribe( res => {
             if ( res.ok ) {
                this._nav.setMesage( 2 );
-               this.router.navigate( [ 'candidates-list'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
             } else {
                this._nav.setMesage( 3 );
-               this.router.navigate( [ 'candidates-list'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
             }
          }, () => {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'candidates-list'+ this.publication.idPublicacion ] );
+            this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
          } );
       } else {
          this.candidateProcessService.add( this.candidateProcess ).subscribe( res => {
             if ( res.idProcesoSeleccion ) {
                this._nav.setMesage( 1 );
-               this.router.navigate( [ 'candidates-list'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
             } else {
                this._nav.setMesage( 3 );
-               this.router.navigate( [ 'candidates-list'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
             }
          }, () => {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'candidates-list'+ this.publication.idPublicacion ] );
+            this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
          } );
       }
    }
@@ -190,7 +182,19 @@ export class CandidateRevisionComponent implements OnInit {
       this.router.navigate( [ 'employees/curriculum/' + this.candidate.idTercero ] );
    }
 
-   goBack() {
+   goBack(fDirty : boolean) {
+      if ( fDirty ){
+         this.confirmationService.confirm( {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+                                              }
+                                           } );
+      }else {
+         this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+      }
 
    }
 }
