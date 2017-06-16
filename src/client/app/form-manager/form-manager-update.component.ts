@@ -332,8 +332,8 @@ export class FormManagerUpdateComponent implements OnInit {
    goBackField(fcDirty : boolean) {
       if ( fcDirty ){
          this.confirmationService.confirm( {
-            message: ` ¿Esta seguro que desea salir sin guardar?`,
-            header: 'Corfirmación',
+            message: ` ¿Está seguro que desea salir sin guardar?`,
+            header: 'Confirmación',
             icon: 'fa fa-question-circle',
             accept: () => {
                this.editingField = false;
@@ -352,8 +352,8 @@ export class FormManagerUpdateComponent implements OnInit {
    goBack(fDirty : boolean) {
    if ( fDirty ){
       this.confirmationService.confirm( {
-         message: ` ¿Esta seguro que desea salir sin guardar?`,
-         header: 'Corfirmación',
+         message: ` ¿Está seguro que desea salir sin guardar?`,
+         header: 'Confirmación',
          icon: 'fa fa-question-circle',
          accept: () => {
             this.location.back();
@@ -391,8 +391,8 @@ export class FormManagerUpdateComponent implements OnInit {
    goBackSectionEdi(fsDirty : boolean) {
       if ( fsDirty ){
          this.confirmationService.confirm( {
-            message: ` ¿Esta seguro que desea salir sin guardar?`,
-            header: 'Corfirmación',
+            message: ` ¿Está seguro que desea salir sin guardar?`,
+            header: 'Confirmación',
             icon: 'fa fa-question-circle',
             accept: () => {
                this.editingSection = false;

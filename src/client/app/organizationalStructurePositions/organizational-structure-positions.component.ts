@@ -157,7 +157,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
 
    delete( osPosition: OrganizationalStructurePositions ) {
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea eliminar?`,
+                                           message: ` ¿Está seguro que desea inactivar el registro?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
@@ -172,7 +172,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
 
    removePerson( personPosition: PersonPositions ) {
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea retirar este trabajador del cargo?`,
+                                           message: ` ¿Está seguro que desea retirar este trabajador del cargo?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
@@ -298,7 +298,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    cancelEditingPosition(fpDirty : boolean) {
        if (fpDirty){
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que cancelar la edición?`,
+                                           message: ` ¿Está seguro que cancelar la edición?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
@@ -317,7 +317,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    cancelEditingPerson(ppDirty : boolean) {
       if (ppDirty){
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que cancelar la edición?`,
+                                           message: ` ¿Está seguro que cancelar la edición?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
@@ -433,7 +433,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    confirmStructure() {
       // actualizar la estructura
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que confirmar esta planta? Después de confirmar no 
+                                           message: ` ¿Está seguro que confirmar esta planta? Después de confirmar no 
                                            podrá hacer modificaciones sobre los cargos`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
