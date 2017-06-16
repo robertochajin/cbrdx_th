@@ -38,7 +38,7 @@
             <p-column field="ocupacion" header="{{ 'POSITION.LBL_OCUPACION' | translate }}" [sortable]="true"></p-column>
             <p-column header="{{ 'LBL_ACCION' | translate }}" styleClass="datatable-col-action">
                <template let-PA="rowData" pTemplate="body">
-                  <button type="button" icon="fa-trash" class="ui-button-danger" data-toggle="tooltip" title="{{'BTN_ELIMINAR' | translate}}"
+                  <button type="button" icon="fa-trash" class="ui-button-danger" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
 
                           pButton (click)="del(PA)"></button>
                </template>

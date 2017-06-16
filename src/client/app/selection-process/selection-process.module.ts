@@ -23,6 +23,8 @@ import { AdjuntosModule } from '../adjuntos/adjuntos.module';
 import { CandidatesComponent } from './candidates.component';
 import { UsuariosService } from '../_services/usuarios.service';
 import { CandidateRevisionComponent } from './candidate-revision.component';
+import { CentralRiskComponent } from '../selection-process-risks/central-risk.component';
+import { SafePipe } from '../_helpers/safePipe';
 
 @NgModule( {
               imports: [
@@ -40,7 +42,9 @@ import { CandidateRevisionComponent } from './candidate-revision.component';
                  StepProcessComponent,
                  SelectionProcessVacanciesComponent,
                  CandidatesComponent,
-                 CandidateRevisionComponent
+                 CandidateRevisionComponent,
+                 CentralRiskComponent,
+                 SafePipe
               ],
               bootstrap: [ SelectionProcessComponent ],
               providers: [
