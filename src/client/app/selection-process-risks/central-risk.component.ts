@@ -200,6 +200,23 @@ export class CentralRiskComponent implements OnInit {
       }
 
    }
+   reportar(f: CentralRisk){
+
+      this.confirmationService.confirm( {
+                                           message: `¿Está seguro que desea Reportar el aspirante?`,
+                                           header: 'Confirmación',
+                                           icon: 'fa fa-question-circle',
+
+                                           accept: () => {
+                                              this.selectionStepService.updateEmployeesCentralRisk( f ).subscribe( res => {
+                                                 this._nav.setMesage( 2, null );
+                                              });
+                                           }
+                                        } );
+
+
+
+   }
    previewFile(f: CentralRisk){
       // let link = 'https://www.subes.sep.gob.mx/archivos/tutor/manual_general.pdf';
       this.url = this.previewUrl+'/'+ f.idAdjunto;

@@ -81,7 +81,7 @@
 					<template let-data="rowData" pTemplate="body">
 						<p-checkbox *ngIf="data.indicadorReporta" [(ngModel)]="data.indicadorReportado" binary="true"
 						            [disabled]="data.idAdjunto === null || data.indicadorAprobado === true"
-						            (onChange)="aprobar(data)"></p-checkbox>
+						            (onChange)="reportar(data)"></p-checkbox>
 					</template>
 				</p-column>
 				<p-column field="" header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
