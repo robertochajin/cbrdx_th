@@ -81,19 +81,19 @@ export class RisksUpdateComponent implements OnInit {
 
    goBack( fDirty: boolean ): void {
 
-      if ( fDirty ) {
-         this.confirmationService.confirm( {
-                                              message: ` ¿Esta seguro que desea salir sin guardar?`,
-                                              header: 'Corfirmación',
-                                              icon: 'fa fa-question-circle',
-                                              accept: () => {
-                                                 this.location.back();
-                                              }
-                                           } );
-      } else {
-         this.location.back();
-      }
-   }
+        if ( fDirty ){
+            this.confirmationService.confirm( {
+                message: ` ¿Está seguro que desea salir sin guardar?`,
+                header: 'Confirmación',
+                icon: 'fa fa-question-circle',
+                accept: () => {
+                    this.location.back();
+                }
+            } );
+        }else {
+            this.location.back();
+        }
+    }
 
    changeType() {
       this.listSubTypeRisks = [];

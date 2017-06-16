@@ -655,7 +655,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
    cancelReferred(rfDirty : boolean) {
       if (rfDirty){
       this.confirmationService.confirm( {
-                                           message: `¿Esta seguro que desea Cancelar?`,
+                                           message: `¿Está seguro que desea Cancelar?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
 
@@ -933,7 +933,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
    goBack(fDirty : boolean): void {
       if (fDirty){
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea salir sin guardar?`,
+                                           message: ` ¿Está seguro que desea salir sin guardar?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {

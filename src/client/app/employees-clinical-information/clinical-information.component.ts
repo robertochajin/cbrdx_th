@@ -176,8 +176,8 @@ export class ClinicalInformationComponent implements OnInit {
 
       if ( dDirty ) {
          this.confirmationService.confirm( {
-            message: ` ¿Esta seguro que desea Cancelar?`,
-            header: 'Corfirmación',
+            message: ` ¿Está seguro que desea Cancelar?`,
+            header: 'Confirmación',
             icon: 'fa fa-question-circle',
             accept: () => {
                this.ecd = null;

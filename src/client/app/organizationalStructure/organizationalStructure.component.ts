@@ -390,7 +390,7 @@ export class OrganizationalStructureComponent {
 
    cancelEditingZone() {
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que cancelar la edición?`,
+                                           message: ` ¿Está seguro que cancelar la edición?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
