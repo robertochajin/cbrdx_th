@@ -37,7 +37,7 @@ export class FaultsAndSanctionsComponent implements OnInit {
    del( FaS: FaultsAndSanctions ) {
       this.dialogObjet = FaS;
       this.confirmationService.confirm( {
-                                           message: ` ¿Está seguro que desea inhabilitar este registro?`,
+                                           message: ` ¿Está seguro que desea inactivar este registro?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {

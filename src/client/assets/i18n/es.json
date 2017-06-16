@@ -69,6 +69,7 @@
   "LBL_ENVIAR":"Enviar",
   "BTN_VISUALIZAR": "Ver detalle",
   "BTN_ELIMINAR": "Eliminar",
+   "BTN_INACTIVAR": "Inactivar",
   "BTN_CONFIGURAR": "Configuración",
   "BTN_APROBARPROYECCION": "Aprobar Proyección",
   "BTN_CONFIRMARPROY": "Confirmar Proyección",
