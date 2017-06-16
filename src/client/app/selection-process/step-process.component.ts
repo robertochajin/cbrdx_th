@@ -12,6 +12,8 @@ import { PersonnelRequirement } from '../_models/personnelRequirement';
 import { SelectItem } from 'primeng/components/common/api';
 import { CandidateProcess } from '../_models/candidateProcess';
 import { CandidateProcessService } from '../_services/candidate-process.service';
+import { ListaService } from '../_services/lista.service';
+import { ListaItem } from '../_models/listaItem';
 
 @Component( {
                moduleId: module.id,
@@ -25,15 +27,34 @@ export class StepProcessComponent implements OnInit {
    public  indApproval: number;
    public approvalOptions: SelectItem[] = [];
    public candidateProcess: CandidateProcess = new CandidateProcess();
+   private es: any;
+   private minDate: Date = new Date();
+   private stepStates: ListaItem[] = [];
+   public responsables: SelectItem[] = [];
+   private showCalendar = false;
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
       private _nav: NavService,
       private router: Router,
+      private listaService: ListaService,
       private employeesService: EmployeesService,
       private vacanciesService: VacanciesService,
       private candidateProcessService: CandidateProcessService,
       private selectionStepService: SelectionStepService ) {
+
+      this.es = {
+         firstDayOfWeek: 1,
+         dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
+         dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
+         dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
+         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre',
+            'diciembre'
+         ],
+         monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
+      };
+
+      this.minDate = new Date( Date.now() );
 
       this.approvalOptions.push({label: 'Seleccione', value:null});
       this.approvalOptions.push({label: 'No aplica este paso', value:2});
@@ -46,15 +67,30 @@ export class StepProcessComponent implements OnInit {
             this.candidateProcess.idTercero = params[ 'idCandidate' ];
             this.candidateProcess.idPublicacion = params[ 'idPublication' ];
 
-            if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
-               this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
-            }
 
-            vacanciesService.getPublication( params[ 'idPublication' ] ).subscribe( pb => {
-               this.publication = pb;
-               selectionStepService.get( params[ 'idStep' ] ).subscribe( step => {
-                  this.step = step;
+
+            selectionStepService.get( params[ 'idStep' ] ).subscribe( step => {
+               this.step = step;
+
+               vacanciesService.getPublication( params[ 'idPublication' ] ).subscribe( pb => {
+                  this.publication = pb;
                } );
+
+               this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
+                  this.stepStates = res;
+                  if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
+                     this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
+                     this.candidateProcessService.get(this.candidateProcess.idProcesoSeleccion).subscribe(cp => {
+                        this.candidateProcess = cp;
+                        this.prepareForm();
+                     });
+                  } else {
+                     this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode('VAC');
+                     this.prepareForm();
+                  }
+               });
+
+
             } );
 
             employeesService.get( params[ 'idCandidate' ] ).subscribe( cndt => {
@@ -73,7 +109,21 @@ export class StepProcessComponent implements OnInit {
       } );
    }
 
+
    ngOnInit() {
+   }
+
+   prepareForm(){
+      //Se verifica el estado del paso y la la necesidad de mostrar o nó la asignación de fecha
+      if(this.getIdStateByCode('VAC') === this.candidateProcess.idEstadoDiligenciado){
+         this.showCalendar = this.step.indicadorCalendario;
+
+
+      } else if(this.getIdStateByCode('PROG') === this.candidateProcess.idEstadoDiligenciado){
+
+      } else if(this.getIdStateByCode('APROB') === this.candidateProcess.idEstadoDiligenciado){
+
+      }
    }
 
    onSubmit() {
@@ -113,6 +163,16 @@ export class StepProcessComponent implements OnInit {
          });
       }
    }
+
+   getIdStateByCode(code: string) : number {
+      let state:ListaItem = this.stepStates.find(s => s.codigo === code);
+      if(state !== undefined){
+         return state.idLista;
+      } else {
+         return 0;
+      }
+   }
+
 
    goBack(){
 

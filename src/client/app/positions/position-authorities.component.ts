@@ -99,7 +99,7 @@ export class PositionAuthoritiesComponent implements OnInit {
    del( a: Absence ) {
       this.dialogObjet = a;
       this.confirmationService.confirm( {
-                                           message: `¿Esta seguro que lo desea eliminar?`,
+                                           message: `¿Está seguro que desea inactivar este registro?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {

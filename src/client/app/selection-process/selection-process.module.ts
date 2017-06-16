@@ -17,6 +17,8 @@ import { StepDetailComponent } from './step-detail.component';
 import { StepProcessComponent } from './step-process.component';
 import { EmployeesService } from '../_services/employees.service';
 import { CandidateProcessService } from '../_services/candidate-process.service';
+import { CandidatesComponent } from './candidates.component';
+import { UsuariosService } from '../_services/usuarios.service';
 import { CentralRiskComponent } from '../selection-process-risks/central-risk.component';
 import { SafePipe } from '../_helpers/safePipe';
 
@@ -34,6 +36,8 @@ import { SafePipe } from '../_helpers/safePipe';
                  StepDetailComponent,
                  StepProcessComponent,
                  SelectionProcessVacanciesComponent,
+                 CandidatesComponent,
+                 SelectionProcessVacanciesComponent,
                  CentralRiskComponent,
                  SafePipe
               ],
@@ -46,7 +50,8 @@ import { SafePipe } from '../_helpers/safePipe';
                  EmployeesService,
                  CandidateProcessService,
                  SelectionStepService,
-                 PublicationQuestionnairesService
+                 PublicationQuestionnairesService,
+                 UsuariosService
               ],
               exports: [ SelectionProcessComponent ]
            } )
