@@ -55,9 +55,9 @@ export class SelectionStepService {
    getAllByProcessAndType(idProcess: number, tipo? : string) {
       let endPoint = this.masterService + 'procesoOrden/' + idProcess;
       if(tipo === 'INTERNA') {
-         let endPoint = this.masterService + 'procesoOrden/internoMixto/' + idProcess;
+         endPoint = this.masterService + 'procesoOrden/internoMixto/' + idProcess;
       } else if(tipo === 'EXTERNA'){
-         let endPoint = this.masterService + 'procesoOrden/externoMixto/' + idProcess;
+         endPoint = this.masterService + 'procesoOrden/externoMixto/' + idProcess;
       }
 
       return this.authHttp.get( endPoint )

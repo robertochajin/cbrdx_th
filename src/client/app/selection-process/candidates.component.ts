@@ -88,8 +88,7 @@ export class CandidatesComponent implements OnInit {
             this.router.navigate(
                [ myStep.interfazInterna.replace( ':idStep', myStep.idProcesoPaso.toString() )
                                        .replace( ':idTerceroPublication', step.idTerceroPublicacion.toString() )
-                                       .replace( ':id', step.idTerceroPublicacion.toString() )
-                                       .replace( ':idProceso', myStep.idProcesoSeleccion.toString() )
+                                       .replace( ':idProceso', myStep.idProcesoSeleccion ? myStep.idProcesoSeleccion.toString() : '0' )
                ] );
          } else {
             this.router.navigate(
