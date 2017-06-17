@@ -4,7 +4,7 @@
 			<p-panel header="{{ 'PROCESOSELECCION.LBL_DETALLEPASO' | translate }}">
 				<form class="form-horizontal">
 					<fieldset>
-						<div class="form-group">
+						<div>
 							<div class="row">
 								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_CODIGOPASO' | translate }}:</label>
 								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{step.codigo}}</strong></label>
@@ -28,7 +28,7 @@
 								<label class="col-md-3 col-sm-6 col-xs-12">{{step.indicadorInterfazInterna ? 'Si' : 'No'}}</label>
 								
 								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_URL' | translate }}:</label>
-								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{step.interfazInterna}}</strong></label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong style="word-break: break-all;">{{step.interfazInterna}}</strong></label>
 							</div>
 							<div class="row">
 								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_BLOQUEANTE' | translate }}:</label>
