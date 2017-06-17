@@ -59,6 +59,18 @@ export class SelectionStepService {
       .map( ( res: Response ) => res.json() as SelectionStep[] );
    }
 
+   getAllByProcessAndType(idProcess: number, tipo? : string) {
+      let endPoint = this.masterService + 'procesoOrden/' + idProcess;
+      if(tipo === 'INTERNA') {
+         endPoint = this.masterService + 'procesoOrden/internoMixto/' + idProcess;
+      } else if(tipo === 'EXTERNA'){
+         endPoint = this.masterService + 'procesoOrden/externoMixto/' + idProcess;
+      }
+
+      return this.authHttp.get( endPoint )
+      .map( ( res: Response ) => res.json() as SelectionStep[] );
+   }
+
    get(idSelectionStep: number) {
       return this.authHttp.get( this.masterService + idSelectionStep )
       .map( ( res: Response ) => res.json() as SelectionStep );

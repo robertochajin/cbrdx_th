@@ -19,8 +19,11 @@ import { EmployeesService } from '../_services/employees.service';
 import { CandidateProcessService } from '../_services/candidate-process.service';
 import { CandidatesComponent } from './candidates.component';
 import { UsuariosService } from '../_services/usuarios.service';
+import { CandidateRevisionComponent } from './candidate-revision.component';
 import { CentralRiskComponent } from '../selection-process-risks/central-risk.component';
 import { SafePipe } from '../_helpers/safePipe';
+import { AttachmentsService } from '../_services/attachments-step.service';
+import { AttachmentsComponent } from './attachments.component';
 
 @NgModule( {
               imports: [
@@ -35,9 +38,10 @@ import { SafePipe } from '../_helpers/safePipe';
                  StepEditComponent,
                  StepDetailComponent,
                  StepProcessComponent,
+                 AttachmentsComponent,
                  SelectionProcessVacanciesComponent,
                  CandidatesComponent,
-                 SelectionProcessVacanciesComponent,
+                 CandidateRevisionComponent,
                  CentralRiskComponent,
                  SafePipe
               ],
@@ -50,6 +54,7 @@ import { SafePipe } from '../_helpers/safePipe';
                  EmployeesService,
                  CandidateProcessService,
                  SelectionStepService,
+                 AttachmentsService,
                  PublicationQuestionnairesService,
                  UsuariosService
               ],

@@ -132,6 +132,7 @@
     "typescript": "~2.0.9",
     "walk": "^2.3.9",
     "yargs": "^6.0.0"
+
   },
   "dependencies": {
     "@angular/common": "~2.4.0",
