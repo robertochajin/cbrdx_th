@@ -557,6 +557,9 @@ body .ui-datatable thead th.ui-state-active{
    background-color: #ccc;
    border: 1px solid #ccc;
 }
+body .ui-datatable .ui-cell-data{
+   word-break: break-all;
+}
 /* --- Buscador general unico --- */
 .uniSearch{
    width: 80%!important;

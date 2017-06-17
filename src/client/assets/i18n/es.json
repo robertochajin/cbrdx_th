@@ -506,7 +506,7 @@
       "MSG_ROLMODIFICAREQUERIDO":"Rol que modifica es requerido",
       "LBL_ELEMENTLISTA":"Elementos de la Lista",
       "LBL_ITEMLISTA":"Item",
-      "LISTAS.LBL_CODIGOREGISTRADO":"Este código ya se encuentra regstrado ",
+      "LBL_CODIGOREGISTRADO":"Este código ya se encuentra regstrado ",
       "MSG_NOMBRELISTA":"Debe ingresar el nombre de la Lista.",
       "MSG_LISTAMAYUSCULA":"El nombre debe comenzar por una letra mayúscula.",
       "MSG_LISTA40CARACTERES":"La lista no debe tener mas de 40 caracteres.",
