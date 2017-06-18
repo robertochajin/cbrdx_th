@@ -212,8 +212,14 @@ export class CentralRiskComponent implements OnInit {
    }
    reportar(f: CentralRisk){
 
+      let msg = '';
+      if(f.indicadorReportado){
+         msg = `¿Está seguro que desea retirar el reporte?`;
+      } else {
+         msg = `¿Está seguro que desea Reportar el aspirante?`;
+      }
       this.confirmationService.confirm( {
-                                           message: `¿Está seguro que desea Reportar el aspirante?`,
+                                           message: msg,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
 
