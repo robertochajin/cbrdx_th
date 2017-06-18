@@ -1019,3 +1019,8 @@ body .ui-tabview{
    right:0;
    border-width:0 0 10px 10px;
 }
+
+/* -- Perfil -- */
+.perfil-footer-button{
+   margin-top: 8px;
+}
