@@ -83,7 +83,7 @@ export class CandidatesComponent implements OnInit {
            || (myStep !== undefined && myStep.idResponsable === this.usuarioLogueado.usuario.idUsuario) ) {
          if ( myStep.interfazInterna ) {
             //candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
-            //process-step/centralRisk/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
+            //process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso
 
             this.router.navigate(
                [ myStep.interfazInterna.replace( ':idStep', myStep.idProcesoPaso.toString() )
