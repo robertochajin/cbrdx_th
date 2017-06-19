@@ -28,6 +28,8 @@
 				<button *ngIf="draw(cs, step.idProcesoPaso, 'RECH')" type="button" icon="fa-times-circle" data-toggle="tooltip"
 				        title="{{'PROCESOSELECCION.LBL_NOAPROBO' | translate }}" [disabled]="isStepDisabled(cs, step.idProcesoPaso, 'RECH')"
 				        class="ui-button-danger" pButton (click)="redirecStep(cs, step.idProcesoPaso)"></button>
+				<div *ngIf="draw(cs, step.idProcesoPaso, 'NA')" data-toggle="tooltip"
+				     title="{{'PROCESOSELECCION.LBL_NOAPLICA' | translate }}" >NA</div>
 			</template>
 		</p-column>
 	</p-dataTable>
