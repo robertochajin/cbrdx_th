@@ -58,6 +58,7 @@ export class CandidateRevisionComponent implements OnInit {
       let token = localStorage.getItem( 'token' );
       if ( token !== null ) {
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.candidateProcess.idResponsable = this.usuarioLogueado.usuario.idUsuario;
       }
 
       this.listaService.getMasterDetails( 'ListasDecisionesProcesoSeleccion' ).subscribe( res => {

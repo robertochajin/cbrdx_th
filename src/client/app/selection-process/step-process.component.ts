@@ -18,6 +18,7 @@ import { Location } from '@angular/common';
 
 import { JwtHelper } from 'angular2-jwt';
 import { RolesService } from '../_services/roles.service';
+import { window } from 'rxjs/operator/window';
 
 @Component( {
                moduleId: module.id,
@@ -37,6 +38,7 @@ export class StepProcessComponent implements OnInit {
    public responsables: SelectItem[] = [];
    private showCalendar = false;
    private showAttachments = false;
+   private showInterface = false;
    private readonly = false;
    private readonlyEstado = false;
    private desitionList: ListaItem[] = [];
@@ -150,6 +152,7 @@ export class StepProcessComponent implements OnInit {
          this.showCalendar = this.step.indicadorCalendario;
          this.showAttachments=false;
 
+
       } else if ( this.getIdStateByCode( 'PROG' ) === this.candidateProcess.idEstadoDiligenciado ) {
          this.showAttachments = this.step.indicadorAdjunto;
          this.showCalendar = this.step.indicadorCalendario;
@@ -171,7 +174,7 @@ export class StepProcessComponent implements OnInit {
          this.showCalendar = this.step.indicadorCalendario;
          this.showAttachments = this.step.indicadorAdjunto;
       }
-
+      this.showInterface=this.step.indicadorInterfaz;
    }
 
    onSubmit() {

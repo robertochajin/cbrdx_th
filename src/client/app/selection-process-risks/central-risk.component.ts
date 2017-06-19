@@ -15,6 +15,7 @@ import { CentralRisk } from '../_models/centralRisk';
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
+import { JwtHelper } from 'angular2-jwt';
 
 @Component( {
                moduleId: module.id,
@@ -37,12 +38,15 @@ export class CentralRiskComponent implements OnInit {
    private desitionList: ListaItem[] = [];
    respuesta:any;
    cargando = 0;
-   public  indApproval: number;
+   public indApproval: string;
    public approvalOptions: SelectItem[] = [];
    svcThUrl = '<%= SVC_TH_URL %>/api/tercerosCentralesRiesgos/file';
    fileThUrl = '<%= SVC_TH_URL %>/api/adjuntos/file';
    previewUrl = '<%= SVC_TH_URL %>/api/adjuntos/preview';
    public idCandidate : number;
+   usuarioLogueado: any;
+   idRol: number;
+   jwtHelper: JwtHelper = new JwtHelper();
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
@@ -55,10 +59,18 @@ export class CentralRiskComponent implements OnInit {
       private confirmationService: ConfirmationService,
       private selectionStepService: SelectionStepService ) {
 
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.candidateProcess.idResponsable = this.usuarioLogueado.usuario.idUsuario;
+      }
+
       this.listaService.getMasterDetails( 'ListasDecisionesProcesoSeleccion' ).subscribe( res => {
-         this.desitionList=res;
+         this.desitionList = res;
          this.approvalOptions.push( { label: 'Seleccione', value: null } );
-         res.map( ( s: ListaItem ) => this.approvalOptions.push( { label: s.nombre, value: s.idLista } ) );
+         res.map( ( s: ListaItem ) => {
+            this.approvalOptions.push( { label: s.nombre, value: s.codigo } );
+         } );
       } );
 
 
@@ -145,17 +157,15 @@ export class CentralRiskComponent implements OnInit {
 
 
    onSubmit() {
-      if ( this.candidateProcess.idDesicionProcesoSeleccion===this.getIdDesitionByCode('NOAPL') ) {
-         this.candidateProcess.indicadorNoAplica = true;
-         this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'NA' );
-      } else if ( this.candidateProcess.idDesicionProcesoSeleccion===this.getIdDesitionByCode('APRB') ) {
-         this.candidateProcess.indicadorContProceso = true;
+      if ( this.indApproval === 'APRB') {
          this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'APROB' );
-      } else if ( this.candidateProcess.idDesicionProcesoSeleccion===this.getIdDesitionByCode('NOAPRB') ) {
-         this.candidateProcess.indicadorContProceso = false;
+         this.candidateProcess.idDesicionProcesoSeleccion = this.getIdDesitionByCode( 'APRB' );
+      } else if ( this.indApproval === 'NOAPRB' ) {
          this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'RECH' );
-      } else {
-         this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'PROG' );
+         this.candidateProcess.idDesicionProcesoSeleccion = this.getIdDesitionByCode( 'NOAPRB' );
+      } else if ( this.indApproval === 'NA' ) {
+         this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'NA' );
+         this.candidateProcess.idDesicionProcesoSeleccion = this.getIdDesitionByCode( 'NOAPL' );
       }
       if ( this.candidateProcess.idProcesoSeleccion !== undefined ) {
          this.candidateProcessService.update( this.candidateProcess ).subscribe( res => {
@@ -202,8 +212,14 @@ export class CentralRiskComponent implements OnInit {
    }
    reportar(f: CentralRisk){
 
+      let msg = '';
+      if(f.indicadorReportado){
+         msg = `¿Está seguro que desea retirar el reporte?`;
+      } else {
+         msg = `¿Está seguro que desea Reportar el aspirante?`;
+      }
       this.confirmationService.confirm( {
-                                           message: `¿Está seguro que desea Reportar el aspirante?`,
+                                           message: msg,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
 
