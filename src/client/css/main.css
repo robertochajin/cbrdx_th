@@ -101,6 +101,11 @@ body .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active{
 body .ui-panel{
    margin-bottom : 10px;
 }
+body .ui-panel-content label{
+   -ms-word-break: break-all;
+       word-break: break-all;
+       word-break: break-word;
+}
 /*
 ----------------- Cambios Theme AdminLTE ---------------------------------
  */
@@ -598,10 +603,8 @@ p-tree{
 
 label{
   font-weight: 300;
-   -ms-word-break: break-all;
-       word-break: break-all;
-       word-break: break-word;
 }
+
 form [class*="col-"] {
     padding: 6px;
 }
