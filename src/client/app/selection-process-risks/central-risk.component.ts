@@ -252,7 +252,7 @@ export class CentralRiskComponent implements OnInit {
    }
    deleteFile(f: CentralRisk){
       this.confirmationService.confirm( {
-                                           message: `¿Está seguro que desea Eliminar el adjunto?`,
+                                           message: `¿Está seguro que desea Inactivar el adjunto?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
 

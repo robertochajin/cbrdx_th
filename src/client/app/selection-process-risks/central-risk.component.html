@@ -108,7 +108,7 @@
 						</a>
 						-->
 						<button type="button" icon="fa-trash" *ngIf="data.idAdjunto"
-						        class="ui-button btn" data-toggle="tooltip" title="{{'BTN_ELIMINAR' | translate}}"
+						        class="ui-button btn" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
 						        pButton (click)="deleteFile(data)"></button>
 						<span *ngIf="!data.idAdjunto">{{'PROCESOSELECCION.LBL_NOADJUNTO' | translate}}</span>
 					</template>
