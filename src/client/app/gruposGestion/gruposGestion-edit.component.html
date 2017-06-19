@@ -3,25 +3,26 @@
     <h2 class="text-center">{{ 'GRUPOSDEGESTION.LBL_EDITARGRUPO' | translate }}</h2>
     <form class="form-horizontal" #f="ngForm" (ngSubmit)="isGreater&&!codeExists&&f.form.valid&&createGruposGestion()"
           (keydown.enter)="$event.preventDefault()" novalidate>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !codigoGrupoGestion.valid }">
+        <div class="form-group" >
             <label for="codigoGrupoGestion" class="control-label col-sm-3">{{ 'LBL_CODIGO' | translate }} </label>
-            <div class=" col-sm-9">
-                <input type="text" pInputText class="form-control" id="codigoGrupoGestion" name="codigoGrupoGestion"
-                       #codigoGrupoGestion="ngModel"
-                       [(ngModel)]="grupoGestion.codigoGrupoGestion" required maxlength="10" pattern="[A-Z0-9]{0,10}"
-                       (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
-                       (paste)="inputCleanUp($event.target.value)">
-                <div *ngIf="codeExists" class="alert alert-danger">
-                   {{ 'GRUPOSDEGESTION.MSG_CODIGOREPETIDO' | translate }}
-                </div>
-                <div *ngIf="f.submitted&&!codigoGrupoGestion.valid" class="alert alert-danger">
-                    <div [hidden]="!codigoGrupoGestion.errors.required">{{ 'GRUPOSDEGESTION.MSG_INGRESOCODGRUPOGES' | translate }}
-                    </div>
-                    <div [hidden]="!codigoGrupoGestion.errors.maxlength">{{ 'GRUPOSDEGESTION.MSG_COD10CARACTERES' | translate }}
-                    </div>
-                    <div [hidden]="!codigoGrupoGestion.errors.pattern">{{ 'GRUPOSDEGESTION.MSG_CODMAYUSCULA' | translate }}</div>
-                </div>
-            </div>
+	        <p id="codigoGrupoGestion"> <strong>{{grupoGestion.codigoGrupoGestion}}</strong></p>
+            <!--<div class=" col-sm-9">-->
+                <!--<input type="text" pInputText class="form-control" id="codigoGrupoGestion" name="codigoGrupoGestion"-->
+                       <!--#codigoGrupoGestion="ngModel"-->
+                       <!--[(ngModel)]="grupoGestion.codigoGrupoGestion" required maxlength="10" pattern="[A-Z0-9]{0,10}"-->
+                       <!--(change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"-->
+                       <!--(paste)="inputCleanUp($event.target.value)">-->
+                <!--<div *ngIf="codeExists" class="alert alert-danger">-->
+                   <!--{{ 'GRUPOSDEGESTION.MSG_CODIGOREPETIDO' | translate }}-->
+                <!--</div>-->
+                <!--<div *ngIf="f.submitted&&!codigoGrupoGestion.valid" class="alert alert-danger">-->
+                    <!--<div [hidden]="!codigoGrupoGestion.errors.required">{{ 'GRUPOSDEGESTION.MSG_INGRESOCODGRUPOGES' | translate }}-->
+                    <!--</div>-->
+                    <!--<div [hidden]="!codigoGrupoGestion.errors.maxlength">{{ 'GRUPOSDEGESTION.MSG_COD10CARACTERES' | translate }}-->
+                    <!--</div>-->
+                    <!--<div [hidden]="!codigoGrupoGestion.errors.pattern">{{ 'GRUPOSDEGESTION.MSG_CODMAYUSCULA' | translate }}</div>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !gGestion.valid }">
             <label for="gGestion" class="control-label col-sm-3">Nombre </label>

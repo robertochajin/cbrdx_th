@@ -23,27 +23,29 @@ export class VacanciesService {
    getAll() {
       return this.authHttp.get( this.serviceURL + 'requerimientos' ).map( ( res: Response ) => res.json() as PersonnelRequirement[] );
    }
-   getByRespSelecAndIdEstad(idR: number, idE: number) {
-      return this.authHttp.get( this.serviceURL + 'requerimientos/filtroReq/'+idE+'/'+idR ).map( ( res: Response ) =>
-      res.json() as PersonnelRequirement[] );
+
+   getByRespSelecAndIdEstad( idR: number, idE: number ) {
+      return this.authHttp.get( this.serviceURL + 'requerimientos/filtroReq/' + idE + '/' + idR ).map( ( res: Response ) =>
+                                                                                                          res.json() as PersonnelRequirement[] );
    }
 
-   getNuevoCargo(idEstado:number, idTipo:number) {
+   getNuevoCargo( idEstado: number, idTipo: number ) {
       let idUsuario = this.idUsuario;
-      return this.authHttp.get( this.serviceURL + 'requerimientos/filtroReq2/'+idEstado+'/'+ idTipo).map( ( res: Response ) => res.json() as PersonnelRequirement[] );
+      return this.authHttp.get( this.serviceURL + 'requerimientos/filtroReq2/' + idEstado + '/' + idTipo )
+      .map( ( res: Response ) => res.json() as PersonnelRequirement[] );
    }
 
    getByDate( fInicio: string, fFin: string ) {
-      return this.authHttp.get( this.serviceURL + 'requerimientos/fecha/' + fInicio + '/'  + fFin)
+      return this.authHttp.get( this.serviceURL + 'requerimientos/fecha/' + fInicio + '/' + fFin )
       .map( ( res: Response ) => res.json() as PersonnelRequirement[] );
    }
 
    getNActive( quantity: number ) {
-      return this.authHttp.get( this.serviceURL + 'requerimientos/publicacionFechas/cantidadN/' + quantity)
+      return this.authHttp.get( this.serviceURL + 'requerimientos/publicacionFechas/cantidadN/' + quantity )
       .map( ( res: Response ) => res.json() as PersonnelRequirement[] );
    }
 
-   getAllActive( ) {
+   getAllActive() {
       return this.authHttp.get( this.serviceURL + 'requerimientos/publicacionFechas/todasActivas/' )
       .map( ( res: Response ) => res.json() as PersonnelRequirement[] );
    }
@@ -68,7 +70,13 @@ export class VacanciesService {
    }
 
    getActions( id: number ) {
-      return this.authHttp.get( this.serviceURL + 'requerimientosAcciones/requerimiento/' + id ).map( ( res: Response ) => res.json() as RequirementsAction[] );
+      return this.authHttp.get( this.serviceURL + 'requerimientosAcciones/requerimiento/' + id )
+      .map( ( res: Response ) => res.json() as RequirementsAction[] );
+   }
+
+   asignarProceso( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'publicaciones/agregarIdProceso/' + id )
+      .map( ( res: Response ) => res.json() as RequirementsAction[] );
    }
 
    handleError( error: any ): Promise<any> {

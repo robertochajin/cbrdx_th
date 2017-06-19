@@ -1,6 +1,8 @@
-<h3 class="first">{{'PROCESOSELECCION.LBL_PROCESOSELECCION' | translate }}</h3>
+<h3 class="first">{{'PROCESOSELECCION.LBL_CANDIDATOS' | translate }}</h3>
 <div>
 	<div class="row datable-header">
+		<div class="col-md-6 col-xs-12">
+		</div>
 		<div class="col-md-6 col-xs-12 datatable-header-search">
 			<div class="input-group">
 				<div class="input-group-addon"><i class="fa fa-search"></i></div>
@@ -26,6 +28,8 @@
 				<button *ngIf="draw(cs, step.idProcesoPaso, 'RECH')" type="button" icon="fa-times-circle" data-toggle="tooltip"
 				        title="{{'PROCESOSELECCION.LBL_NOAPROBO' | translate }}" [disabled]="isStepDisabled(cs, step.idProcesoPaso, 'RECH')"
 				        class="ui-button-danger" pButton (click)="redirecStep(cs, step.idProcesoPaso)"></button>
+				<div *ngIf="draw(cs, step.idProcesoPaso, 'NA')" data-toggle="tooltip"
+				     title="{{'PROCESOSELECCION.LBL_NOAPLICA' | translate }}" >NA</div>
 			</template>
 		</p-column>
 	</p-dataTable>

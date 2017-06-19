@@ -1,0 +1,164 @@
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+		<p-panel header="{{ 'PROCESOSELECCION.LBL_INFOPOSTULANTE' | translate }}" class="perfil">
+			<form class="form-horizontal">
+				<fieldset>
+					<div class="form-group row">
+						<div class="col-md-2">
+							<div class="thumbnail">
+								<img src="/assets/images/perfil/avatar.jpg" alt="...">
+							</div>
+						</div>
+						<div class="col-md-10">
+							<h2>{{candidate.nombreCompleto}}</h2>
+							<h4>{{candidate.tipoDocumento}} - {{candidate.numeroDocumento}}</h4>
+							<span>{{candidate.fechaNacimiento}} ({{candidate.edad}})</span>
+							<div  class="perfil-footer-button">
+								<button icon="fa-address-book-o" label="{{'PROCESOSELECCION.LBL_VERHOJADEVIDA' | translate }}"
+										  type="button" (click)="curriculum()" pButton></button>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</p-panel>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+		<p-panel header="{{'PROCESOSELECCION.LBL_CENTRALESRIESGOS' | translate }}">
+			<div class="row">
+				<div class="col-md-12">
+					<p>{{step.descripcion}}</p>
+				</div>
+			</div>
+			<form class="form-horizontal">
+				<fieldset>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-12">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'PROCESOSELECCION.LBL_POSTULANTEA' | translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12">{{publication.cargo}}</label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_OFICINA' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12">{{publication.estructuraFisica}}</label>
+							</div>
+						</div>
+						<div class="row">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_AREA' | translate }}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12">{{publication.area}}</label>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+			<p-dataTable [value]="centrales">
+				<p-column field="nombre" header="{{'PROCESOSELECCION.LBL_CENTRALRIESGO' | translate }}"></p-column>
+				<p-column field="" header="{{'PROCESOSELECCION.LBL_CONSULTAR' | translate }}" styleClass="datatable-col-action">
+					<template let-data="rowData" pTemplate="body">
+						<button type="button" pButton (click)="showDialogo(data)" icon="fa-external-link"></button>
+					</template>
+				</p-column>
+				<p-column field="" header="{{'PROCESOSELECCION.LBL_ADJUNTAR' | translate }}" styleClass="datatable-col-action">
+					<template let-datos="rowData" pTemplate="body">
+						<i class="fa fa-spinner fa-pulse fa-fw" *ngIf="cargando === datos.idCentralRiesgo" ></i>
+						<p-fileUpload name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
+						              chooseLabel="{{'PROCESOSELECCION.LBL_ADJUNTAR' | translate}}"
+						              (onBeforeSend)="onBeforeSend($event,datos)"
+						              (onUpload)="onUpload($event,datos)" accept="image/*,application/pdf"
+						              [hidden]="cargando === datos.idCentralRiesgo || datos.idAdjunto"
+						></p-fileUpload>
+						<button *ngIf="datos.idAdjunto" class="btn btn-link" (click)="downloadFile(datos)" type="button">
+							<i class="fa fa-paperclip" aria-hidden="true"></i>
+							Archivo Adjunto
+						</button>
+					</template>
+				</p-column>
+				<p-column field="" header="{{'PROCESOSELECCION.LBL_APROBAR' | translate }}" styleClass="datatable-col-action">
+					<template let-data="rowData" pTemplate="body">
+						<p-checkbox  [(ngModel)]="data.indicadorAprobado" binary="true" (onChange)="aprobar(data)"
+						             [disabled]="data.idAdjunto === null || data.indicadorReportado === true"></p-checkbox>
+					</template>
+				</p-column>
+				<p-column field="" header="{{'PROCESOSELECCION.LBL_REPORTAR' | translate }}" styleClass="datatable-col-action">
+					<template let-data="rowData" pTemplate="body">
+						<p-checkbox *ngIf="data.indicadorReporta" [(ngModel)]="data.indicadorReportado" binary="true"
+						            [disabled]="data.idAdjunto === null || data.indicadorAprobado === true"
+						            (onChange)="reportar(data)"></p-checkbox>
+					</template>
+				</p-column>
+				<p-column field="" header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+					<template let-data="rowData" pTemplate="body" >
+						
+						<button type="button" icon="fa-eye" *ngIf="data.idAdjunto"
+						        class="ui-button btn" data-toggle="tooltip"
+						        title="{{'BTN_VISUALIZAR' | translate}}"
+						        pButton (click)="previewFile(data)"></button>
+						
+						<button type="button" icon="fa-cloud-download" *ngIf="data.idAdjunto"
+						        class="ui-button-success"  data-toggle="tooltip"
+						        title="{{'BTN_DOWNLOAD' | translate}}"
+						        pButton (click)="downloadFile(data)" ></button>
+						
+						<!--<a download href = "{{fileThUrl}}/{{data.idAdjunto}}" *ngIf="data.idAdjunto">
+							<button type="button" icon="fa-cloud-download"
+							        class="ui-button-success"  data-toggle="tooltip"
+							        title="{{'BTN_DOWNLOAD' | translate}}"
+							        pButton ></button>
+						</a>
+						-->
+						<button type="button" icon="fa-trash" *ngIf="data.idAdjunto"
+						        class="ui-button btn" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
+						        pButton (click)="deleteFile(data)"></button>
+						<span *ngIf="!data.idAdjunto">{{'PROCESOSELECCION.LBL_NOADJUNTO' | translate}}</span>
+					</template>
+				</p-column>
+			</p-dataTable>
+			
+		</p-panel>
+		<p-panel header="{{'PROCESOSELECCION.LBL_CONTINUARPROCESO' | translate }}">
+			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="process">
+				<fieldset>
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="validStep">* {{'PROCESOSELECCION.LBL_APRUEBAPASO' | translate }}</label>
+							<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
+							            [autoWidth]="false" [(ngModel)]="indApproval"></p-dropdown>
+						</div>
+						<div class="form-group col-md-6">
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-12" >
+							<label for="observacion">* {{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}</label>
+							<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #observa="ngModel"
+							          [(ngModel)]="candidateProcess.observacion" required="true" class="form-control"
+							          maxlength="500"></textarea>
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !observa.valid">
+								<i class="fa fa-close"></i>
+								{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }} {{'LBL_REQUERIDO' | translate }}
+							</div>
+						</div>
+					</div>
+					<div class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+							<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+							        pButton></button>
+						
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</p-panel>
+	</div>
+</div>
+<p-dialog header="{{title}}" [(visible)]="displayDialog" [width]="800">
+	<iframe width="100%" height="300" [src]="url | safe"></iframe>
+</p-dialog>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
