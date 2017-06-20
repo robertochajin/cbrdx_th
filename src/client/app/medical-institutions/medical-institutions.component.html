@@ -30,8 +30,8 @@
 			<template let-mi="rowData" pTemplate="body">
 				<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
 				        pButton (click)="update(mi)"></button>
-				<button type="button" icon="fa-trash" class="ui-button-danger" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
-				        pButton (click)="del(mi)" ></button>
+				<button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip" title="Ver"
+				        pButton (click)="detail(mi)" ></button>
 			
 			</template>
 		</p-column>
