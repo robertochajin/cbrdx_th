@@ -57,6 +57,11 @@ export class RiskService {
       return this.authHttp.post( this.serviceURL + 'cargosRiesgos', c ).map( ( res: Response ) => res.json() );
    };
 
+   updateRisk( c: Risk ) {
+      c.auditoriaUsuario = this.idUsuario;
+      return this.authHttp.put( this.serviceURL + 'cargosRiesgos', c ).map( ( res: Response ) => res );
+   }
+
    addPositionExam( c: Exam ) {
       c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'cargosExamenes', c ).map( ( res: Response ) => res.json() );

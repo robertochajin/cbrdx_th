@@ -72,9 +72,14 @@ export class FaultsAndSanctionsAddComponent {
         }
     }
 
-   capitalize( event: any ) {
+   capitalize( event: any , specialChars: boolean) {
       let input = event.target.value;
-      event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+      if(specialChars){
+         event.target.value = (input.substring( 0, 1 ).toUpperCase()
+                               + input.substring( 1 ).toLowerCase()).replace( /[^A-Z0-9]/gi, '' ).trim();
+      } else {
+         event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+      }
    }
 
 }
