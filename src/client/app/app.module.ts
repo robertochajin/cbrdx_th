@@ -75,6 +75,9 @@ import { VacanciesModule } from './vacancies/vacancies.module';
 import { SelectionProcessModule } from './selection-process/selection-process.module';
 import { AdjuntosModule } from './adjuntos/adjuntos.module';
 
+// Instituciones medicas
+import { MedicalInstitutionModule } from './medical-institutions/medical-institutions.module';
+
 // CarsModule,
 @NgModule( {
               imports: [ BrowserModule, HttpModule, AppRoutingModule,
@@ -133,6 +136,7 @@ import { AdjuntosModule } from './adjuntos/adjuntos.module';
                  VacanciesModule,
                  AdjuntosModule,
                  SelectionProcessModule,
+                 MedicalInstitutionModule,
                  //AssignmentProfessionalModule
               ],
 
