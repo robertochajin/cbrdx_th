@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="form-group col-md-9">
                             <label for="falta">* {{'FAULTSANDSANCTIONS.LBL_FALTA' | translate }}</label>
-                            <input pInputText type="text" id="falta" name="falta" #falta="ngModel" 
+                            <input pInputText type="text" id="falta" name="falta" #falta="ngModel" maxlength="100"
                                  [(ngModel)]="fault.falta" (keyup)="capitalize($event, true)" required/>
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !falta.valid">
@@ -57,7 +57,7 @@
                             <label for="accion">* {{'FAULTSANDSANCTIONS.LBL_ACCIONSUGERIDA' | translate }}</label>
                             <textarea id="accion" name="accion" pInputTextarea  rows="5"
                                       #accion="ngModel" required (keyup)="capitalize($event, false)"
-                                      [(ngModel)]="fault.accion"
+                                      [(ngModel)]="fault.accion" maxlength="1000"
                             ></textarea>
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !accion.valid">
