@@ -300,7 +300,8 @@ export class RiskComponent implements OnInit {
          this.nextStep.emit( 14 );
          this.msgsAlert = [];
       } else {
-         this.msgsAlert[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un Riesgo' };
+         this._nav.setMesage( 0 , { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un Riesgo' } );
+         // this.msgsAlert[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un Riesgo' };
       }
 
    }
