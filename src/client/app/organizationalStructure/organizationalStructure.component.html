@@ -192,7 +192,7 @@
 									      <div class="form-group" >
 										      <label for="strctureTypes" class="control-label col-sm-3">* {{ 'ESTRUCTURAORGANIZACIONAL.LBL_TIPOESTRUCTURA' | translate}} </label>
 										      <div class=" col-sm-9">
-											      <p-dropdown id="strctureTypes" name="strctureTypes"
+											      <p-dropdown id="strctureTypes" name="strctureTypes" filter="filter"
 											                  [options]="structureTypes" [autoWidth]="false" required="true"
 											                  [(ngModel)]="organizationalStructure.idTipoEstructura"
 											                  #strctureTypes="ngModel"></p-dropdown>
@@ -222,7 +222,7 @@
 									      <div class="form-group" >
 										      <label for="tiposArea" class="control-label col-sm-3">* {{ 'ESTRUCTURAORGANIZACIONAL.LBL_TIPOAREA' | translate}}</label>
 										      <div class=" col-sm-9">
-											      <p-dropdown id="tiposArea" name="tiposArea"
+											      <p-dropdown id="tiposArea" name="tiposArea" filter="filter"
 											                  [options]="areaTypes" [autoWidth]="false" required="true"
 											                  [(ngModel)]="organizationalStructure.idTipoArea"
 											                  #tiposArea="ngModel"></p-dropdown>
@@ -238,7 +238,7 @@
 									      <div class="form-group" >
 										      <label for="estructuraFisica" class="control-label col-sm-3">* {{ 'ESTRUCTURAORGANIZACIONAL.LBL_ESTRUCTFISICA' | translate}}</label>
 										      <div class=" col-sm-9">
-											      <p-dropdown id="estructuraFisica" name="estructuraFisica"
+											      <p-dropdown id="estructuraFisica" name="estructuraFisica" filter="filter"
 											                  [options]="physicalTypes" [autoWidth]="false" required="true"
 											                  [(ngModel)]="organizationalStructure.idEstructuraFisica"
 											                  #estructuraFisica="ngModel"></p-dropdown>
