@@ -66,6 +66,7 @@ export class OrganizationalStructureComponent {
                };
                this.treedCompany.push( companyNode );
                this.selectedNode = companyNode;
+               this.nodeExpand( companyNode );
             }
             this.btnEmpresa = false;
             this.newBranch();
