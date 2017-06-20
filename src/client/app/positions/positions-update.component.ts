@@ -290,6 +290,7 @@ export class PositionsUpdateComponent implements OnInit {
 
    updateEstado( value: number ) {
       this.msgs = [];
+      let bckState = this.position.idEstado;
       this.position.idEstado = value;
       if ( this.position.idEstado === this.aprobado ) {
          this.position.indicadorHabilitado = true;
@@ -301,6 +302,7 @@ export class PositionsUpdateComponent implements OnInit {
       .subscribe( data => {
          this._nav.setMesage( 1, this.msgs );
       }, error => {
+         this.position.idEstado = bckState;
          this._nav.setMesage( 3, this.msgs );
       } );
    }
