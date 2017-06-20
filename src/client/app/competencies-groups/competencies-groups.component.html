@@ -10,18 +10,13 @@
 						<div class="row">
 							<div class="form-group col-md-8">
 								<label for="nombre">* {{'LBL_NOMBRE' | translate }}</label>
-								<div  *ngIf="group.idGrupoCompetencia">
-									<h3>{{group.grupoCompetencia}}</h3>
-								</div>
-								<div *ngIf="!group.idGrupoCompetencia">
-									<input type="text" pInputText id="nombre" name="nombre"
-									       [(ngModel)]="group.grupoCompetencia" #nombre="ngModel" (keyup)="capitalize()"
-									       required maxlength="64"/>
-									<div class="ui-message ui-messages-error ui-corner-all"
-									     *ngIf="fg.submitted && !nombre.valid">
-										<i class="fa fa-close"></i>
-										{{'LBL_NOMBRE' | translate }} {{'LBL_REQUERIDO' | translate }}
-									</div>
+								<input type="text" pInputText id="nombre" name="nombre"
+								       [(ngModel)]="group.grupoCompetencia" #nombre="ngModel" (keyup)="capitalize()"
+								       required maxlength="64"/>
+								<div class="ui-message ui-messages-error ui-corner-all"
+								     *ngIf="fg.submitted && !nombre.valid">
+									<i class="fa fa-close"></i>
+									{{'LBL_NOMBRE' | translate }} {{'LBL_REQUERIDO' | translate }}
 								</div>
 							</div>
 							<div class="form-group col-md-4">
@@ -78,7 +73,7 @@
 		</div>
 	</div>
 	<p-tabView orientation="left" id="tbvCompetenciasHabilidades">
-		<p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}" [selected]="i == 0"
+		<p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}" [selected]="i == selectedGroup"
 		            headerStyleClass="{{ group.indicadorHabilitado ? '':'inhabilitado' }}"
 		            [disabled]="editingCompetencie">
 			<div class="row" *ngIf="editingCompetencie">
