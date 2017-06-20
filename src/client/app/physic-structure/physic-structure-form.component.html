@@ -83,7 +83,7 @@
             <div class="ui-grid-row">
                <div class="ui-grid-col-12">
                   <label for="correo">{{ 'LBL_CORREOELECTRONICO' | translate}}</label>
-                  <input id="correo" name="correo" #correo="ngModel" pInputText type="text"
+                  <input id="correo" name="correo" #correo="ngModel" pInputText type="text" lowerCaseText
                          [(ngModel)]="physicStructure.correoElectronico" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"/>
                   <div class="ui-message ui-messages-error ui-corner-all"
                        *ngIf="f.submitted &&!correo.valid">
