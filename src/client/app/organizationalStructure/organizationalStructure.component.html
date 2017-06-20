@@ -105,7 +105,7 @@
 										      <label for="correo" class="control-label col-sm-3">{{ 'LBL_CORREOELECTRONICO' | translate}}</label>
 										      <div class=" col-sm-9">
 											      <input  type="email" pInputText class="form-control" id="correo" name="correo"
-											              [(ngModel)]="organizationalStructure.correoElectronico"
+											              [(ngModel)]="organizationalStructure.correoElectronico" lowerCaseText
 											              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"
 											              #email="ngModel"
 											      />
