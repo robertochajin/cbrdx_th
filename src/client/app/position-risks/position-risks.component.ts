@@ -124,6 +124,7 @@ export class RiskComponent implements OnInit {
                r.idRiesgo = rk.idRiesgo;
                r.auditoriaFecha = rk.auditoriaFecha;
                r.auditoriaFecha = rk.auditoriaFecha;
+               r.indicadorHabilitado = rk.indicadorHabilitado;
 
                this.riskService.getRiskById( rk.idRiesgo ).subscribe( rest => {
                   r.riesgo = rest.riesgo;
@@ -304,6 +305,30 @@ export class RiskComponent implements OnInit {
       }
 
    }
+
+   updateRisk(f: Risk) {
+      this.confirmationService.confirm( {
+                                           message: ` ¿Está seguro que desea actualizar el estado?`,
+                                           header: 'Confirmación',
+                                           icon: 'fa fa-question-circle',
+                                           accept: () => {
+                                              this.riskService.updateRisk( f )
+                                              .subscribe( data => {
+                                                 this.msgsAlert = [];
+                                                 this._nav.setMesage( 2, this.msgs );
+                                              }, error => {
+                                                 this._nav.setMesage( 3, this.msgs );
+                                              } );
+
+                                           },
+                                           reject: () => {
+                                              f.indicadorHabilitado = !f.indicadorHabilitado
+                                           }
+                                        });
+
+   }
+
+
 
 }
 
