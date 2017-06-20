@@ -9,6 +9,7 @@ import { TranslateService, TranslateModule } from 'ng2-translate';
 import { WindowRefService } from '../_services/window-ref.service';
 import { AuthenticationService } from '../_services/authentication.service';
 import { NavService } from '../_services/_nav.service';
+import { LowerCaseText } from '../_helpers/LowerCaseText';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -16,9 +17,9 @@ import { NavService } from '../_services/_nav.service';
 
 @NgModule( {
               imports: [ CommonModule, RouterModule, TranslateModule ],
-              declarations: [ ToolbarComponent, NavbarComponent ],
+              declarations: [ ToolbarComponent, NavbarComponent, LowerCaseText ],
               exports: [ ToolbarComponent, NavbarComponent,
-                 CommonModule, FormsModule, RouterModule, TranslateModule
+                 CommonModule, FormsModule, RouterModule, TranslateModule, LowerCaseText
               ],
               providers: [ AuthenticationService ]
            } )

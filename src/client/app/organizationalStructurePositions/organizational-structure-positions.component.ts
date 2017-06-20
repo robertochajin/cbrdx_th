@@ -359,6 +359,14 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
                this.assingPerson( pp, null );
             } );
          } );
+      } else if (index === 0) {
+         //refresh list
+         this.editingPerson = false;
+         this.editingPosition = false;
+         this.ospService.getAllByOrganizacionalStructure( this.area.idEstructuraOrganizacional ).subscribe( list => {
+            this.osPositions = list;
+            this.sumPositions();
+         } );
       }
    }
 
