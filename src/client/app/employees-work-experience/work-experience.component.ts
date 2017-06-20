@@ -31,8 +31,8 @@ export class WorkExperienceComponent implements OnInit {
    delete( f: Workexperience ) {
       this.dialogObjet = f;
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que lo desea eliminar?`,
-                                           header: 'Corfirmación',
+                                           message: ` ¿Está seguro que desea inactivar este registro?`,
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.dialogObjet.indicadorHabilitado = false;

@@ -390,8 +390,8 @@ export class OrganizationalStructureComponent {
 
    cancelEditingZone() {
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que cancelar la edición?`,
-                                           header: 'Corfirmación',
+                                           message: ` ¿Está seguro que cancelar la edición?`,
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.zone = new Zones();
@@ -432,5 +432,10 @@ export class OrganizationalStructureComponent {
          this.zone.zona = value.substring( 0, 1 ).toUpperCase() + value.substring( 1 ).toLowerCase();
       }
    }
-
+   inputValid(){
+      let input = this.organizationalStructure.numeroDocumento;
+      if ( input !== '' && input !== null && input !== undefined ) {
+         this.organizationalStructure.numeroDocumento = input.toUpperCase().replace( /[^0-9]/gi, '' ).trim();
+      }
+   }
 }

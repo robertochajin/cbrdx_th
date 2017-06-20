@@ -91,8 +91,8 @@ export class PositionsComponent implements OnInit {
    del( positions: Positions ) {
       this.dialogObjet = positions;
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que lo desea eliminar?`,
-                                           header: 'Corfirmación',
+                                           message: ` ¿Está seguro que desea inactivar este registro?`,
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.dialogObjet.indicadorHabilitado = false;
@@ -178,8 +178,8 @@ export class PositionsComponent implements OnInit {
          }else{
             this.displayPerson = false;
             this.confirmationService.confirm( {
-                                                 message: ` ¿Esta seguro que lo desea eliminar el cargo?,recuerde que se deshabilitará para todos las las Areas`,
-                                                 header: 'Corfirmación',
+                                                 message: ` ¿Está seguro que desea inhabilitar el cargo?,recuerde que se deshabilitará para todos las las Areas`,
+                                                 header: 'Confirmación',
                                                  icon: 'fa fa-question-circle',
                                                  accept: () => {
                                                     this.requirementAction.idAccion = this.aCerrar;

@@ -19,12 +19,17 @@
         <p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
             <template let-reference="rowData" pTemplate="body">
                 <div class="btn-group" role="group" aria-label="...">
-                    <button type="button" pButton class="ui-button btn" (click)="detail(reference)" icon="fa-eye"></button>
-                    <button type="button" pButton class="ui-button ui-button-success btn" (click)="update(reference)" icon="fa-pencil"></button>
-                    <button type="button" pButton class="ui-button ui-button-danger btn" (click)="del(reference)" icon="fa-trash"></button>
+                    <button type="button" pButton class="ui-button btn" (click)="detail(reference)" icon="fa-eye" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"></button>
+                    <button type="button" pButton class="ui-button ui-button-success btn" (click)="update(reference)" icon="fa-pencil" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"></button>
+                    <button type="button" pButton class="ui-button ui-button-danger btn" (click)="del(reference)" icon="fa-trash" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"></button>
                 </div>
             </template>
         </p-column>
     </p-dataTable>
 </div>
-<p-confirmDialog width="400"></p-confirmDialog>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>

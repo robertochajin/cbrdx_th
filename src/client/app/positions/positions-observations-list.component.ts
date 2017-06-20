@@ -91,8 +91,8 @@ export class PositionsObservationsListComponent implements OnInit {
    delete( f: PositionsObservations ) {
       this.dialogObjet = f;
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea eliminar el contacto?`,
-                                           header: 'Corfirmación',
+                                           message: ` ¿Está seguro que desea inactivar el contacto?`,
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.dialogObjet.indicadorHabilitado = false;

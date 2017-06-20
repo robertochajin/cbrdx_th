@@ -3,22 +3,23 @@
     <h2 class="text-center">{{ 'CONSTANTES.LBL_EDITACONSTANTE' | translate }}</h2>
     <form class="form-horizontal" #f="ngForm" (ngSubmit)="!codeExists&&f.form.valid&&createConstant()" novalidate
           (keydown.enter)="$event.preventDefault()">
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !constante.valid }">
+        <div class="form-group" >
             <label for="constante" class="control-label col-sm-3">{{ 'CONSTANTES.LBL_CONSTANTE' | translate }}</label>
-            <div class=" col-sm-9">
-                <input type="text" pInputText class="form-control" id="constante" name="constante" #constante="ngModel"
-                       [(ngModel)]="constant.constante" required maxlength="6" pattern="[A-Z0-9]{0,6}"
-                       (change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"
-                       (paste)="inputCleanUp($event.target.value)">
-                <div *ngIf="codeExists" class="alert alert-danger">
-                   {{ 'CONSTANTES.LBL_CODREGISTRADO' | translate }}
-                </div>
-                <div *ngIf="f.submitted&&!constante.valid" class="alert alert-danger">
-                    <div [hidden]="!constante.errors.required">{{ 'CONSTANTES.MSG_ADDNOMBRECONSTANTE' | translate }}</div>
-                    <div [hidden]="!constante.errors.maxlength">{{ 'CONSTANTES.MSG_COD6CARACTERES' | translate }}</div>
-                    <div [hidden]="!constante.errors.pattern">{{ 'CONSTANTES.MSG_CODMAYUSCULA' | translate }}</div>
-                </div>
-            </div>
+	        <p id="constante"> <strong>{{constant.constante}}</strong></p>
+            <!--<div class=" col-sm-9">-->
+                <!--<input type="text" pInputText class="form-control" id="constante" name="constante" #constante="ngModel"-->
+                       <!--[(ngModel)]="constant.constante" required maxlength="6" pattern="[A-Z0-9]{0,6}"-->
+                       <!--(change)="validateCode()" (keyup)="inputCleanUp($event.target.value)"-->
+                       <!--(paste)="inputCleanUp($event.target.value)">-->
+                <!--<div *ngIf="codeExists" class="alert alert-danger">-->
+                   <!--{{ 'CONSTANTES.LBL_CODREGISTRADO' | translate }}-->
+                <!--</div>-->
+                <!--<div *ngIf="f.submitted&&!constante.valid" class="alert alert-danger">-->
+                    <!--<div [hidden]="!constante.errors.required">{{ 'CONSTANTES.MSG_ADDNOMBRECONSTANTE' | translate }}</div>-->
+                    <!--<div [hidden]="!constante.errors.maxlength">{{ 'CONSTANTES.MSG_COD6CARACTERES' | translate }}</div>-->
+                    <!--<div [hidden]="!constante.errors.pattern">{{ 'CONSTANTES.MSG_CODMAYUSCULA' | translate }}</div>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
         <div class="form-group">
             <label for="idTipoDato" class="control-label col-sm-3">{{ 'CONSTANTES.LBL_TIPODATO' | translate }}</label>
@@ -74,7 +75,8 @@
         </div>
         <div class="row form-footer-buttons">
             <div class="form-group col-md-12">
-            <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+            <a (click)="(f.dirty === true) ? displayDialog=true : goBack()" class="cancelar">{{ 'BTN_CANCELAR' |
+	            translate }}</a>
             <button type="submit" pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate }}" (keydown.enter)="submit.click()"
                     #submit></button>
         </div>

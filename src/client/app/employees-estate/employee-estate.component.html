@@ -28,13 +28,18 @@
 
         <!--<button type="button" icon="fa-eye" class="ui-button-info"-->
                 <!--pButton (click)="detail(employeeEstate)"></button>-->
-        <button type="button" icon="fa-pencil" class="ui-button-success"
+        <button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
                 pButton (click)="update(employeeEstate)"></button>
-        <button type="button" icon="fa-trash" class="ui-button-danger"
+        <button type="button" icon="fa-trash" class="ui-button-danger" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
                 pButton (click)="del(employeeEstate)" ></button>
 
       </template>
     </p-column>
   </p-dataTable>
 </div>
-<p-confirmDialog width="400"></p-confirmDialog>
+<p-confirmDialog icon="fa fa-question-circle" #cd width="400">
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>

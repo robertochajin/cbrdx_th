@@ -43,8 +43,8 @@ export class EmployeesComponent implements OnInit {
    del( employee: Employee ) {
       this.dialogObjet = employee;
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que lo desea eliminar?`,
-                                           header: 'Corfirmación',
+                                           message: ` ¿Está seguro que desea inactivar este registro?`,
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.employeesService.delete( this.dialogObjet );
@@ -58,7 +58,7 @@ export class EmployeesComponent implements OnInit {
    }
 
    detail( f: Employee ) {
-      this.router.navigate( [ 'employees/detail/' + f.idTercero ] );
+      this.router.navigate( [ 'employees/view/detail/' + f.idTercero ] );
    }
 
    add() {
@@ -66,7 +66,7 @@ export class EmployeesComponent implements OnInit {
    }
 
    update( c: Employee ) {
-      this.router.navigate( [ 'employees/update/' + c.idTercero ] );
+      this.router.navigate( [ 'employees/detail/' + c.idTercero ] );
    }
 
    setSearch() {

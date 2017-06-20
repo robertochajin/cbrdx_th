@@ -10,6 +10,20 @@ import { QuestionnairesService } from '../_services/questionnaires.service';
 import { VacancyDetailComponent } from './vacancy-detail.component';
 import { SelectionProcessVacanciesComponent } from './selection-process-vacancies.component';
 import { ConstanteService } from '../_services/constante.service';
+import { SelectionStepService } from '../_services/selection-step.service';
+import { StepListComponent } from './step-list.component';
+import { StepEditComponent } from './step-edit.component';
+import { StepDetailComponent } from './step-detail.component';
+import { StepProcessComponent } from './step-process.component';
+import { EmployeesService } from '../_services/employees.service';
+import { CandidateProcessService } from '../_services/candidate-process.service';
+import { CandidatesComponent } from './candidates.component';
+import { UsuariosService } from '../_services/usuarios.service';
+import { CandidateRevisionComponent } from './candidate-revision.component';
+import { CentralRiskComponent } from '../selection-process-risks/central-risk.component';
+import { SafePipe } from '../_helpers/safePipe';
+import { AttachmentsService } from '../_services/attachments-step.service';
+import { AttachmentsComponent } from './attachments.component';
 
 @NgModule( {
               imports: [
@@ -20,7 +34,16 @@ import { ConstanteService } from '../_services/constante.service';
                  SelectionProcessComponent,
                  SelectionProcessAddComponent,
                  VacancyDetailComponent,
-                 SelectionProcessVacanciesComponent
+                 StepListComponent,
+                 StepEditComponent,
+                 StepDetailComponent,
+                 StepProcessComponent,
+                 AttachmentsComponent,
+                 SelectionProcessVacanciesComponent,
+                 CandidatesComponent,
+                 CandidateRevisionComponent,
+                 CentralRiskComponent,
+                 SafePipe
               ],
               bootstrap: [ SelectionProcessComponent ],
               providers: [
@@ -28,7 +51,12 @@ import { ConstanteService } from '../_services/constante.service';
                  VacanciesService,
                  ConstanteService,
                  QuestionnairesService,
-                 PublicationQuestionnairesService
+                 EmployeesService,
+                 CandidateProcessService,
+                 SelectionStepService,
+                 AttachmentsService,
+                 PublicationQuestionnairesService,
+                 UsuariosService
               ],
               exports: [ SelectionProcessComponent ]
            } )

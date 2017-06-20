@@ -31,14 +31,13 @@ export class EmployeesContactComponent {
 
    }
 
-
    onSubmit() {
       this.msgs = [];
       this.employeesService.update( this.employee )
       .subscribe( data => {
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         this._nav.setMesage( 1, this.msgs );
       }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         this._nav.setMesage( 3, this.msgs );
       } );
 
    }

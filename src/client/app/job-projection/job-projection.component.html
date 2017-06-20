@@ -4,7 +4,7 @@
       <div *ngIf="detailprojection">
          <div *ngIf="addinglocation">
             <p-messages [value]="msgs"></p-messages>
-            <h3 class="first">{{ 'PROYECCIONLABORAL.LBL_PROYLAB' | translate }}</h3>
+				<p-panel header="{{ 'PROYECCIONLABORAL.LBL_PROYLAB' | translate }}">
             <form (ngSubmit)="f.valid " #f="ngForm" novalidate id="formulario">
                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                   <div class="ui-grid-row">
@@ -59,21 +59,21 @@
                   <p-column field="estadoProyeccion" header="{{ 'PROYECCIONLABORAL.LBL_ESTADOS' | translate }}" [sortable]="true"></p-column>
                   <p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
                      <template let-projection="rowData" pTemplate="body">
-                        <button *ngIf="projection.idProyecccionLaboral!==null" type="button" icon="fa-eye"
+                        <button *ngIf="projection.idProyecccionLaboral!==null" type="button" icon="fa-eye" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
                                 class="ui-button-info"
                                 pButton (click)="detail(projection)"></button>
                         <button
                            *ngIf="(projection.idEstadoProyeccion===1 ||projection.idEstadoProyeccion===3 ||projection.idEstadoProyeccion===4) &&projection.idProyecccionLaboral!==null"
-                           type="button" icon="fa-pencil" class="ui-button-success"
+                           type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
                            pButton (click)="update(projection)"></button>
                         <button *ngIf="projection.idEstadoProyeccion!==2 &&projection.idProyecccionLaboral!==null"
-                                type="button" icon="fa-check" class="ui-button-danger"
+                                type="button" icon="fa-check" class="ui-button-danger" data-toggle="tooltip" title="{{'BTN_APROBARPROYECCION' | translate}}"
                                 pButton (click)="approve(projection)"></button>
                         <button *ngIf="projection.idProyecccionLaboral===null" type="button" label="{{ 'PROYECCIONLABORAL.BTN_CONFIRMAR' | translate }}"
-                                class="ui-button-danger"
+                                class="ui-button-danger" data-toggle="tooltip" title="{{'BTN_CONFIRMARPROY' | translate}}"
                                 pButton (click)="confirmar(projection)"></button>
                         <button *ngIf="projection.idProyecccionLaboral===null" type="button" label="{{ 'PROYECCIONLABORAL.BTN_ELIMINAR' | translate }}"
-                                class="ui-button-danger"
+                                class="ui-button-danger" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
                                 pButton (click)="delete(projection)"></button>
                      </template>
                   </p-column>
@@ -136,7 +136,9 @@
 				              (click)="confirmProjection()"></button>
 		         </div>
 	         </div>
-            <p-confirmDialog width="400" #cd>
+				</p-panel>
+
+				<p-confirmDialog width="400" #cd>
                <p-footer>
                   <button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate }}" (click)="cd.reject()"></button>
                   <button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate }}" (click)="cd.accept()"></button>

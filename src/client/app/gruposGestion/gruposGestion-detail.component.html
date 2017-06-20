@@ -1,14 +1,10 @@
 <div *ngIf="grupoGestion">
-  <div class="row">
-    <div class="col-md-12">
-      <h3 class="first">{{ 'GRUPOSDEGESTION.LBL_GESTION' | translate }}</h3>
-    </div>
-  </div>
 
   <div class="row">
-    <div class="col-md-offset-2 col-md-8 col-sm-12">
+    <div class="col-md-offset-1 col-md-10 col-sm-12">
     <form class="form-horizontal">
-      <fieldset>
+		 <p-panel header="{{ 'GRUPOSDEGESTION.LBL_GESTION' | translate }}">
+		 <fieldset>
           <div class="row">
             <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_CODIGO' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-8 "><strong>{{grupoGestion.codigoGrupoGestion}}</strong></label>
@@ -34,16 +30,16 @@
             <label class="col-md-3 col-sm-6 col-xs-4 control-label">{{ 'LBL_HABILITADO' | translate }}:</label>
             <label class="col-md-3 col-sm-6 col-xs-8"><strong>{{habilitado}}</strong></label>
           </div>
-      </fieldset> 
-    </form>
-    </div>
-  </div>
-
-</div>
 
 <div class="row form-footer-buttons">
   <div class="form-group col-md-12">
     <button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate }}" type="button"
             pButton (click)="goBack()"></button>
   </div>
+</div>
+
+</fieldset>
+</p-panel>
+</form>
+</div>
 </div>

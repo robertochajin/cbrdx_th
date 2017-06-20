@@ -50,8 +50,8 @@ export class RisksComponent implements OnInit {
    del( risks: Risks ) {
       this.dialogObjet = risks;
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que lo desea eliminar?`,
-                                           header: 'Corfirmación',
+                                           message: ` ¿Está seguro que desea inactivar este registro?`,
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.dialogObjet.indicadorHabilitado = false;

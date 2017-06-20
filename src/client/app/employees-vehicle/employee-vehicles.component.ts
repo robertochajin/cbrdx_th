@@ -37,8 +37,8 @@ export class EmployeesVehicleComponent implements OnInit {
    del( employeeVehicle: EmployeeVehicle ) {
       this.dialogObjet = employeeVehicle;
       this.confirmationService.confirm( {
-                                           message: `¿Esta seguro que lo desea eliminar?`,
-                                           header: 'Corfirmación',
+                                           message: `¿Está seguro que desea inactivar este registro?`,
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.dialogObjet.indicadorHabilitado = false;

@@ -66,15 +66,21 @@ export class FaultsAndSanctionsUpdateComponent implements OnInit {
       } );
    }
 
-   goBack(): void {
-      this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea salir sin guardar?`,
-                                           header: 'Corfirmación',
-                                           icon: 'fa fa-question-circle',
-                                           accept: () => {
-                                              this.location.back();
-                                           }
-                                        } );
+   goBack(fDirty : boolean): void {
+
+       if ( fDirty ){
+           this.confirmationService.confirm( {
+               message: ` ¿Está seguro que desea salir sin guardar?`,
+               header: 'Confirmación',
+               icon: 'fa fa-question-circle',
+               accept: () => {
+                   this.location.back();
+               }
+           } );
+       }else {
+           this.location.back();
+       }
+
    }
 
    capitalize( event: any ) {

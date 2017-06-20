@@ -263,18 +263,22 @@ export class LocationAddComponent implements OnInit {
       this.composeAddress();
    }
 
-   goBack(): void {
-      debugger;
-      this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea Cancelar?`,
-                                           header: 'Corfirmación',
-                                           icon: 'fa fa-question-circle',
-                                           accept: () => {
-                                              // this.router.navigate(['/employees-family-information']);
-                                              this._nav.setTab( 4 );
-                                              this.location.back();
-                                           }
-                                        } );
+   goBack(lDirty : boolean): void {
+
+      if ( lDirty ){
+         this.confirmationService.confirm( {
+            message: ` ¿Está seguro que desea salir sin guardar?`,
+            header: 'Confirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this._nav.setTab( 4 );
+               this.location.back();
+            }
+         } );
+      }else {
+         this._nav.setTab( 4 );
+         this.location.back();
+      }
    }
 
    focusUP() {

@@ -1,0 +1,188 @@
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
+<div class="col-md-10 col-md-offset-1">
+	
+	<div *ngIf="step">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="header">
+					<h3 class="title">{{'PROCESOSELECCION.LBL_EDITARPASO' | translate}}</h3>
+				</div>
+			</div>
+		</div>
+		<form (ngSubmit)="f.valid && saveStep()" #f="ngForm" novalidate id="formulario">
+			<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="codigo">*{{ 'PROCESOSELECCION.LBL_CODIGOPASO' | translate }}:</label>
+						<input id="codigo" type="text" pInputText name="codigo" [disabled]="!editing"
+						       [(ngModel)]="step.codigo" #ngCodigo="ngModel" [required]="editing"
+						       (keyup)="inputCleanUp($event.target.value)"
+						/>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !ngCodigo.valid && editing">
+							<i class="fa fa-close"></i>
+							{{ 'PROCESOSELECCION.LBL_CODIGOPASO' | translate }} {{'LBL_REQUERIDO' | translate}}
+						</div>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && repeatedCode && editing">
+							<i class="fa fa-close"></i>
+							{{ 'PROCESOSELECCION.MSG_CODIGOREPETIDO' | translate }}
+						</div>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="indicador" class="control-label col-sm-6">{{ 'LBL_HABILITADO' | translate }}</label>
+						<p-checkbox [(ngModel)]="step.indicadorHabilitado" binary="true" id="indicador" name="indicador"
+							            #indicador="ngModel"></p-checkbox>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="nombre">*{{ 'PROCESOSELECCION.LBL_NOMBREPASO' | translate }}:</label>
+						<input id="nombre" type="text" pInputText name="nombre"
+						       [(ngModel)]="step.nombre" (keyup)="capitalize($event)"
+						       #ngNombre="ngModel" required />
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !ngNombre.valid">
+							<i class="fa fa-close"></i>
+							{{ 'PROCESOSELECCION.LBL_NOMBREPASO' | translate }} {{'LBL_REQUERIDO' | translate}}
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="roles">* {{'PROCESOSELECCION.LBL_ROLPASO' | translate }}:</label>
+						<p-dropdown id="roles" name="roles" #ngRol="ngModel" [options]="roles" [autoWidth]="false"
+						             [(ngModel)]="step.idRol" required></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngRol.valid">
+							<i class="fa fa-close"></i>
+							{{'PROCESOSELECCION.LBL_ROLPASO' | translate }} {{'LBL_REQUERIDO' | translate }}
+						</div>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="tipo">* {{'PROCESOSELECCION.LBL_TIPOCONVOCATORIA' | translate }}:</label>
+						<p-dropdown id="tipo" name="tipo" #ngTipo="ngModel" [options]="convocatoryTypes" [autoWidth]="false"
+						            [(ngModel)]="step.idTipoConvocatoria" required></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngTipo.valid">
+							<i class="fa fa-close"></i>
+							{{'PROCESOSELECCION.LBL_TIPOCONVOCATORIA' | translate }} {{'LBL_REQUERIDO' | translate }}
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="urlinterna" class="control-label col-sm-6">{{ 'PROCESOSELECCION.LBL_INTERFAZINTERNA' | translate }}</label>
+						<p-checkbox [(ngModel)]="step.indicadorInterfazInterna" binary="true" id="urlinterna" name="urlinterna"
+						            #indicador="ngModel" (onChange)="cleanHiddenControls()" ></p-checkbox>
+					</div>
+					<div *ngIf="step.indicadorInterfazInterna" class="form-group col-md-6">
+						<label for="urli">{{ 'PROCESOSELECCION.LBL_URL' | translate }}:</label>
+						<input id="urli" type="text" pInputText name="urli"  maxlength="100"
+						       [(ngModel)]="step.interfazInterna" #ngUrli="ngModel" required />
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !ngUrli.valid">
+							<i class="fa fa-close"></i>
+							{{ 'PROCESOSELECCION.LBL_URL' | translate }} {{'LBL_REQUERIDO' | translate}}
+						</div>
+					</div>
+				</div>
+				<div *ngIf="!step.indicadorInterfazInterna" class="row">
+					<div class="form-group col-md-6">
+						<label for="bloqueante" class="control-label col-sm-6">{{ 'PROCESOSELECCION.LBL_BLOQUEANTE' | translate }}</label>
+						<p-checkbox [(ngModel)]="step.indicadorBloqueante" binary="true" id="bloqueante" name="bloqueante"
+						            #ngBloqueante="ngModel"></p-checkbox>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="indobservacion" class="control-label col-sm-6">{{ 'PROCESOSELECCION.LBL_CAMPOOBSERVACION' | translate
+							}}</label>
+						<p-checkbox [(ngModel)]="step.indicadorObservacion" binary="true" id="indobservacion" name="indobservacion"
+						            #ngIndObs="ngModel"></p-checkbox>
+					</div>
+				</div>
+				<div *ngIf="!step.indicadorInterfazInterna" class="row">
+					<div class="form-group col-md-6">
+						<label for="indCorreo" class="control-label col-sm-6">{{ 'PROCESOSELECCION.LBL_ENVIOCORREO' | translate }}</label>
+						<p-checkbox [(ngModel)]="step.indicadorCorreo" binary="true" id="indCorreo" name="indCorreo"
+						            #ngIndMail="ngModel"></p-checkbox>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="indAdj" class="control-label col-sm-6">{{ 'PROCESOSELECCION.LBL_MANEJOADJUNTO' | translate }}</label>
+						<p-checkbox [(ngModel)]="step.indicadorAdjunto" binary="true" id="indAdj" name="indAdj"
+						            #ngIndAdj="ngModel"></p-checkbox>
+					</div>
+				</div>
+				<div *ngIf="!step.indicadorInterfazInterna" class="row">
+					<div class="form-group col-md-6">
+						<label for="indCal" class="control-label col-sm-6">{{ 'PROCESOSELECCION.LBL_REQCALENDARIO' | translate }}</label>
+						<p-checkbox [(ngModel)]="step.indicadorCalendario" binary="true" id="indCal" name="indCal"
+						            #ngIndCal="ngModel"></p-checkbox>
+					</div>
+					<div class="form-group col-md-6">
+						
+					</div>
+				</div>
+				<div *ngIf="!step.indicadorInterfazInterna" class="row">
+					<div class="form-group col-md-6">
+						<label for="indCuest" class="control-label col-sm-6">{{ 'PROCESOSELECCION.LBL_MANEJOCUESTIONARIOS' | translate }}</label>
+						<p-checkbox [(ngModel)]="step.indicadorCuestionarios" binary="true" id="indCuest" name="indCuest"
+						            #ngIndCuest="ngModel"></p-checkbox>
+					</div>
+					<div *ngIf="step.indicadorCuestionarios" class="form-group col-md-6">
+						<label for="cuest">* {{'PROCESOSELECCION.LBL_CUESTIONARIO' | translate }}</label>
+						<p-dropdown id="cuest" name="cuest" #ngCuest="ngModel" [options]="questionnaires" [autoWidth]="false"
+								      [(ngModel)]="step.idCuestionario" required></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngCuest.valid">
+							<i class="fa fa-close"></i>
+							{{'PROCESOSELECCION.LBL_CUESTIONARIO' | translate }} {{'LBL_REQUERIDO' | translate }}
+						</div>
+					</div>
+				</div>
+				<div *ngIf="!step.indicadorInterfazInterna" class="row">
+					<div class="form-group col-md-6">
+						<label for="indInterfaz" class="control-label col-sm-6">{{ 'PROCESOSELECCION.LBL_MANEJOINTERFAZ' | translate }}</label>
+						<p-checkbox [(ngModel)]="step.indicadorInterfaz" binary="true" id="indInterfaz" name="indInterfaz"
+						            #ngInterfaz="ngModel"></p-checkbox>
+					</div>
+					<div *ngIf="step.indicadorInterfaz" class="form-group col-md-6">
+						<label for="interfaz">{{ 'PROCESOSELECCION.LBL_URL' | translate }}:</label>
+						<input id="interfaz" type="text" pInputText name="interfaz"
+						       [(ngModel)]="step.interfaz" maxlength="100"
+						       #ngInterfaz="ngModel" required />
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !ngInterfaz.valid">
+							<i class="fa fa-close"></i>
+							{{ 'PROCESOSELECCION.LBL_URL' | translate }} {{'LBL_REQUERIDO' | translate}}
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="descripcion">*{{ 'PROCESOSELECCION.LBL_DESCRIPCIONPASO' | translate }}:</label>
+						<textarea id="descripcion" name="descripcion" pInputTextarea
+						          [(ngModel)]="step.descripcion"
+						          #ngDescripcion="ngModel" maxlength="200" required></textarea>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !ngDescripcion.valid">
+							<i class="fa fa-close"></i>
+							{{ 'PROCESOSELECCION.LBL_DESCRIPCIONPASO' | translate }} {{'LBL_REQUERIDO' | translate}}
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="row form-footer-buttons">
+				<div class="form-group col-md-12">
+					<a (click)="goBack(f.dirty == true)" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+					<button pButton type="submit" label="{{'BTN_GUARDAR' | translate }}"></button>
+				</div>
+			</div>
+			
+		</form>
+	</div>
+
+</div>

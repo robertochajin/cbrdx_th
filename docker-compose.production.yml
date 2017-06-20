@@ -28,6 +28,7 @@ services:
     volumes:
       - ./.docker/nginx.conf:/etc/nginx/conf.d/angular-seed.template
       - ./dist/prod:/var/www/dist/prod
+    restart: always
 
 networks:
   prod-network:

@@ -1,35 +1,58 @@
 <div class="row">
 	<div class="col-md-7">
 		<p-panel header="Gestión de Vacante">
-			
-			<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
-				
-				<div style="margin-bottom: 20px;">
-					<span class="pull-right">{{ vacancy.tipoSolicitud }}</span>
+
+					<span class="ribbon">{{ vacancy.tipoSolicitud }}</span>
+			<div style="margin-bottom: 20px;">
 					<h2>{{ vacancy.cargo }}</h2>
 					<h3>{{ vacancy.area }} / {{vacancy.estructuraFisica}}</h3>
 					<h4>{{vacancy.fechaSolicitud}}</h4>
-					<span>{{ 'VACANCIES.LBL_SALARY' | translate}}: {{vacancy.salario}}</span><br/>
-					<span>{{ 'PLANTACOLABORADORES.LBL_NUMEROPLAZAS' | translate}}: {{ vacancy.cantidadVacantes }}</span><br/>
-					<span>{{ 'ESTRUCTURAFISICA.LBL_CATEGORIA' | translate}}: {{ vacancy.categoria }}</span><br/>
-					<span>{{ 'VACANCIES.LBL_NOMBREJEFEINMEDIATO' | translate}}: {{ vacancy.nombrejefe }}</span><br/>
-					<p>{{ vacancy.justificacion }}</p>
-				</div>
-				
-				<div *ngIf="permitido" style="width: 80%; margin: 0 auto;">
+			</div>
+		</p-panel>
+
+		<p-panel header="Datos del Requerimiento">
+			<fieldset>
+			<form class="form-horizontal" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+			<div *ngIf="permitido">
 					<div class="row">
-						<label for="acciones">* {{ 'LBL_ACCIONES' | translate}}</label>
-						<p-dropdown id="acciones" name="acciones" required="true"
-						            [options]="listAcciones" [autoWidth]="false"
-						            [(ngModel)]="requirementsAction.idAccion"
-						            #action="ngModel"
-						></p-dropdown>
-						<div class="ui-message ui-messages-error ui-corner-all"
-						     *ngIf="f.submitted && !action.valid">
-							<i class="fa fa-close"></i>{{ 'LBL_ACCIONES' | translate}} {{ 'LBL_REQUERIDO' | translate}}
-						</div>
+						<label class="col-md-3 col-sm-6 col-xs-4 control-label"><strong>{{ 'VACANCIES.LBL_SALARY' | translate}}:</strong></label>
+						<label class="col-md-3 col-sm-6 col-xs-8 ">{{vacancy.salario}}</label>
+
+						<label class="col-md-3 col-sm-6 col-xs-4 control-label"><strong>{{ 'PLANTACOLABORADORES.LBL_NUMEROPLAZAS' | translate}}:</strong></label>
+						<label class="col-md-3 col-sm-6 col-xs-8 ">{{ vacancy.cantidadVacantes }}</label>
 					</div>
+
+					<div class="row">
+						<label class="col-md-3 col-sm-6 col-xs-4 control-label"><strong>{{ 'ESTRUCTURAFISICA.LBL_CATEGORIA' | translate}}:</strong></label>
+						<label class="col-md-3 col-sm-6 col-xs-8 ">{{ vacancy.categoria }}</label>
+
+						<label class="col-md-3 col-sm-6 col-xs-4 control-label"><strong>{{ 'VACANCIES.LBL_NOMBREJEFEINMEDIATO' | translate}}:</strong></label>
+						<label class="col-md-3 col-sm-6 col-xs-8 ">{{ vacancy.nombrejefe }}</label>
+					</div>
+
+					<div class="row">
+						<label class="col-md-3 col-sm-6 col-xs-4 control-label"><strong>Justificación:</strong></label>
+						<label class="col-md-8 col-sm-6 col-xs-8"><p>{{ vacancy.justificacion }}</p></label>
+					</div>
+
+
+				<div class="row">
+						<div class="col-md-10 col-md-offset-1">
+							<label for="acciones">* {{ 'LBL_ACCIONES' | translate}}</label>
+							<p-dropdown id="acciones" name="acciones" required="true"
+											[options]="listAcciones" [autoWidth]="false"
+											[(ngModel)]="requirementsAction.idAccion"
+											#action="ngModel"
+							></p-dropdown>
+						</div>
+							<div class="ui-message ui-messages-error ui-corner-all"
+								  *ngIf="f.submitted && !action.valid">
+								<i class="fa fa-close"></i>{{ 'LBL_ACCIONES' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+				</div>
+
 					<div class="row" *ngIf="requirementsAction.idAccion === aAsignar">
+						<div class="col-md-10 col-md-offset-1">
 						<label for="profesional">* {{ 'VACANCIES.LBL_PROFESSIONAL' | translate}}</label>
 						<p-dropdown id="profesional" name="profesional" required="true"
 						            [options]="listUsuarios" [autoWidth]="false"
@@ -40,8 +63,11 @@
 						     *ngIf="f.submitted && !professional.valid">
 							<i class="fa fa-close"></i>{{ 'VACANCIES.LBL_PROFESSIONAL' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 						</div>
+						</div>
 					</div>
+
 					<div class="row" *ngIf="requirementsAction.idAccion === aAsignar">
+						<div class="col-md-10 col-md-offset-1">
 						<label for="reclutamiento">* {{ 'VACANCIES.LBL_RECRUITMENT' | translate}}</label>
 						<p-dropdown id="reclutamiento" name="reclutamiento" required="true"
 						            [options]="listReclutamiento" [autoWidth]="false"
@@ -52,10 +78,12 @@
 						     *ngIf="f.submitted && !recruitments.valid">
 							<i class="fa fa-close"></i>{{ 'VACANCIES.LBL_RECRUITMENT' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 						</div>
+						</div>
 					</div>
+
 					<div class="row">
+						<div class="col-md-10 col-md-offset-1">
 						<label for="acciones">* {{ 'VACANCIES.LBL_OBSERVACION' | translate}}</label>
-						<div class=" col-sm-12">
 							<textarea pInputTextarea id="obs" name="obs" class="form-control"
 							          [(ngModel)]="requirementsAction.observacion" #obs="ngModel"
 							          [required]="true" maxlength="500" autoResize="autoResize"
@@ -66,13 +94,15 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
+
+				<div class="row">
 						<div class="form-footer-buttons">
 							<button pButton label="{{ 'LBL_ENVIAR' | translate}}" type="submit"></button>
 						</div>
 					</div>
-				</div>
+			</div>
 			</form>
+			</fieldset>
 		</p-panel>
 	</div>
 	<div class="col-md-5">
@@ -91,10 +121,10 @@
 							</span>
 							<h3 class="timeline-header">{{act.accion}}</h3>
 							<div class="timeline-body">
-								<h4>{{act.nombreTercero}}</h4>
+								<h4><strong>{{act.nombreTercero}}</strong></h4>
 								<span>{{act.cargo}}</span>
 							</div>
-							<div class="timeline-footer">
+							<div class="timeline-footer" align="center">
 								<button type="button" icon="fa-eye" pButton class="btn-sm"
 								        (click)="showRequerimiento(act.idRequerimientoHistorico)"></button>
 							</div>

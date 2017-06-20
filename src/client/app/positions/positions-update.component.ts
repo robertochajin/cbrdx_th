@@ -307,8 +307,8 @@ export class PositionsUpdateComponent implements OnInit {
 
    goBack(): void {
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea salir sin guardar?`,
-                                           header: 'Corfirmación',
+                                           message: ` ¿Está seguro que desea salir sin guardar?`,
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.location.back();
@@ -319,6 +319,14 @@ export class PositionsUpdateComponent implements OnInit {
    onTabShow( e: any ) {
       this._nav.setTab( e.index );
       this.acordion = this._nav.getTab();
+
+      // Focus  en accordionTab Activo
+      setTimeout( () => {
+         jQuery( 'body' ).animate({
+            scrollTop : jQuery( 'p-accordiontab > .ui-state-active' ).position().top + 90
+         }, 'fast');
+      }, 1000 );
+
    }
 
    buildParent() {
@@ -396,7 +404,7 @@ export class PositionsUpdateComponent implements OnInit {
                this.alertOcu = true;
                this.msgOcupaciones[ 0 ] = {
                   severity: 'error', summary: 'Error', detail: 'Debe agregar al menos una' +
-                                                               ' ocuapación'
+                                                               ' ocupación'
                };
                return false;
             }

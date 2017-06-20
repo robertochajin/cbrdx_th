@@ -329,8 +329,19 @@ export class FormManagerUpdateComponent implements OnInit {
       this.functionalityControlField = c;
    }
 
-   goBackField() {
-      this.editingField = false;
+   goBackField(fcDirty : boolean) {
+      if ( fcDirty ){
+         this.confirmationService.confirm( {
+            message: ` ¿Está seguro que desea salir sin guardar?`,
+            header: 'Confirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this.editingField = false;
+            }
+         } );
+      }else {
+         this.editingField = false;
+      }
    }
 
    validateCode() {
@@ -338,8 +349,19 @@ export class FormManagerUpdateComponent implements OnInit {
       this.codExists = this.listAllfunctionalityControl.filter( t => t.codigo === this.functionalityControl.codigo ).length > 0;
    }
 
-   goBack() {
-      this.location.back();
+   goBack(fDirty : boolean) {
+   if ( fDirty ){
+      this.confirmationService.confirm( {
+         message: ` ¿Está seguro que desea salir sin guardar?`,
+         header: 'Confirmación',
+         icon: 'fa fa-question-circle',
+         accept: () => {
+            this.location.back();
+         }
+      } );
+   }else {
+   this.location.back();
+   }
    }
 
    detailSectionF( f: FunctionalityControl ) {
@@ -366,8 +388,19 @@ export class FormManagerUpdateComponent implements OnInit {
       this.detailField = false;
    }
 
-   goBackSectionEdi() {
-      this.editingSection = false;
+   goBackSectionEdi(fsDirty : boolean) {
+      if ( fsDirty ){
+         this.confirmationService.confirm( {
+            message: ` ¿Está seguro que desea salir sin guardar?`,
+            header: 'Confirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this.editingSection = false;
+            }
+         } );
+      }else {
+         this.editingSection = false;
+      }
    }
 
    capitalize( event: any ) {

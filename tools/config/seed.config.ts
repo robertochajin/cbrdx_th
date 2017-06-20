@@ -48,7 +48,7 @@ export class SeedConfig {
     * The default port is `5555`, which can be overriden by the  `--port` flag when running `npm start`.
     * @type {number}
     */
-   PORT = argv['port'] || 5557;
+   PORT = argv['port'] || 5556;
 
    /**
     * The root folder of the project (up two levels from the current directory).
@@ -310,7 +310,7 @@ export class SeedConfig {
     * Se definen la IP y el PUERTO con la cual la vista se conecta a los servicios
     * @type {string}
     */
-   IP_PROD = '192.168.253.37'; //_CREZCAMOS
+   IP_PROD = '192.168.253.38'; //_CREZCAMOS
    // IP_DEV = '40.71.92.147'; // _CIBERDIX_AZURE
 
    // IP_DEV = '190.147.208.155'; // _CIBERDIX

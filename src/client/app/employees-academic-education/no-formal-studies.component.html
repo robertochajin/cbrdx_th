@@ -20,11 +20,11 @@
         <p-column header="Acciones" styleClass="datatable-col-action">
             <template let-study="rowData" pTemplate="body">
                 <div class="btn-group" role="group">
-                    <button type="button"  class="ui-button btn" icon="fa-eye"
+                    <button type="button"  class="ui-button btn" icon="fa-eye" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
                             pButton (click)="detail(study)"></button>
-                    <button type="button"  class="ui-button ui-button-success btn" icon="fa-pencil"
+                    <button type="button"  class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
                             pButton (click)="update(study)"></button>
-                    <button type="button"  class="ui-button ui-button-danger btn" icon="fa-trash"
+                    <button type="button"  class="ui-button ui-button-danger btn" icon="fa-trash" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
                             pButton (click)="delete(study)" ></button>
                 </div>
             </template>

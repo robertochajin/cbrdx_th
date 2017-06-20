@@ -111,6 +111,9 @@ export class EmployeesEstateAddComponent implements OnInit {
    inputNumberSotanos() {
       let sotano = this.employeeEstate.numeroSotanos + '';
       if ( this.employeeEstate.numeroSotanos !== null ) {
+         if(sotano.length>3){
+            sotano= sotano.substring(0,3);
+         }
          this.employeeEstate.numeroSotanos = Number( sotano.replace( /[^0-9]/g, '' ) );
       }
    }
@@ -124,16 +127,22 @@ export class EmployeesEstateAddComponent implements OnInit {
       }
    }
 
-   goBack(): void {
-      this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea salir sin guardar?`,
-                                           header: 'Corfirmación',
-                                           icon: 'fa fa-question-circle',
-                                           accept: () => {
-                                              this._nav.setTab( 5 );
-                                              this.location.back();
-                                           }
-                                        } );
+   goBack(fDirty : boolean): void {
+
+      if ( fDirty ){
+         this.confirmationService.confirm( {
+            message: ` ¿Está seguro que desea salir sin guardar?`,
+            header: 'Confirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this._nav.setTab( 5 );
+               this.location.back();
+            }
+         } );
+      }else {
+         this._nav.setTab( 5 );
+         this.location.back();
+      }
    }
 
 }

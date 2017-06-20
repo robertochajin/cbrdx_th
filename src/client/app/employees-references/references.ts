@@ -19,7 +19,7 @@ export class References {
    public auditoriaFecha: string;
    public indicadorVerificado: boolean;
    public fechaVerificado: string;
-
+   public tipoReferencia:string;
    public nombreCompleto?: string;
    public ciudad?: string;
    public direccion?: string;

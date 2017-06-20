@@ -9,6 +9,8 @@ import { LocateService } from '../_services/locate.service';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
 import { NavService } from '../_services/_nav.service';
+import { FormSharedModule } from '../shared/form-shared.module';
+
 @Component( {
                moduleId: module.id,
                templateUrl: 'physic-structure-form.component.html',
@@ -116,16 +118,21 @@ export class PhysicStructureUpdateComponent implements OnInit {
       }
    }
 
-   goBack() {
-      this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea salir sin guardar?`,
-                                           header: 'Corfirmación',
-                                           icon: 'fa fa-question-circle',
-                                           accept: () => {
-                                              this.location.back();
-                                           }
-                                        } );
-   }
+    goBack(fDirty : boolean): void {
+
+        if ( fDirty ){
+            this.confirmationService.confirm( {
+                message: ` ¿Está seguro que desea salir sin guardar?`,
+                header: 'Confirmación',
+                icon: 'fa fa-question-circle',
+                accept: () => {
+                    this.location.back();
+                }
+            } );
+        }else {
+            this.location.back();
+        }
+    }
 
    capitalize( event: any ) {
       let input = event.target.value;

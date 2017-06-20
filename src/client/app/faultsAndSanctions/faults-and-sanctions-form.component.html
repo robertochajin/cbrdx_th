@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="form-group col-md-9">
                             <label for="falta">* {{'FAULTSANDSANCTIONS.LBL_FALTA' | translate }}</label>
-                            <input pInputText type="text" id="falta" name="falta" #falta="ngModel" [readonly]="fault.idFalta != null"
+                            <input pInputText type="text" id="falta" name="falta" #falta="ngModel" 
                                  [(ngModel)]="fault.falta" required/>
                             <div class="ui-message ui-messages-error ui-corner-all"
                                  *ngIf="f.submitted && !falta.valid">
@@ -81,7 +81,7 @@
                 </div>
                 <div class="row form-footer-buttons">
                     <div class="form-group col-md-12">
-                        <a (click)="goBack()" class="cancelar">Cancelar</a>
+                        <a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
                         <button icon="fa-plus" label="Guardar" type="submit"
                                 pButton></button>
 

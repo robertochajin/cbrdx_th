@@ -4,6 +4,7 @@ export class DivisionPolitica {
    codigoDivisionPolitica: string;
    descripcionDivisonPolitica: string;
    indicativoDivisonPolitica: string = '';
+   gentilicio: string = '';
    codigoPostalDivisionPolitica: string;
    idDivisionPoliticaTipo: number;
    idDivisionPoliticaArea: number;

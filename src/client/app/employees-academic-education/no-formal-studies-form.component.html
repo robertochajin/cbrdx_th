@@ -22,7 +22,7 @@
                   <label for="tipoEstudio">{{'EMPLOYEES.LBL_TIPOESTUDIO' | translate}}</label>
                   <p-dropdown name="tipoEstudio" id="tipoEstudio" #tipoEstudio="ngModel" [required]="otroTipoEstudio.value === '' || otroTipoEstudio.value === null"
                               [autoWidth]="false" [(ngModel)]="nfstudy.idTipoEstudio" [options]="studyTypeList" (onChange)="changeTipoestudio($event)"
-                  ></p-dropdown>
+                 ></p-dropdown>
                   <div class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !tipoEstudio.valid">
                     {{'EMPLOYEES.LBL_TIPOESTUDIO' | translate}} {{'LBL_REQUERIDO' | translate}}
                   </div>
@@ -50,7 +50,7 @@
               <div class="ui-grid-col-6">
                 <label for="titulo">{{'EMPLOYEES.LBL_TITULO' | translate}}</label>
                 <input type="text" pInputText name="titulo" id="titulo"  #titulo="ngModel" required="true"
-                       [(ngModel)]="nfstudy.tituloEstudio"  />
+                       [(ngModel)]="nfstudy.tituloEstudio"   maxlength="100" />
                 <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !titulo.valid">
                   {{'EMPLOYEES.LBL_TITULO' | translate}} {{'LBL_REQUERIDO' | translate}}
                 </div>
@@ -60,7 +60,7 @@
           <div class="ui-grid-row">
             <div class="ui-grid-col-6">
               <label for="areaEstudio">{{'EMPLOYEES.LBL_AREAESTUDIOS' | translate}}</label>
-              <p-dropdown name="areaEstudio" id="areaEstudio" #areaEstudio="ngModel" required="true"
+              <p-dropdown name="areaEstudio" id="areaEstudio" #areaEstudio="ngModel" required="true" filter="filter"
                           [autoWidth]="false" [(ngModel)]="nfstudy.idAreaEstudio" [options]="studyAreaList"></p-dropdown>
               <div class="ui-message ui-messages-error ui-corner-all"  *ngIf="f.submitted && !areaEstudio.valid">
                 {{'EMPLOYEES.LBL_AREAESTUDIOS' | translate}} {{'LBL_REQUERIDO' | translate}}
@@ -129,7 +129,7 @@
           <div class="ui-grid-row form-footer-buttons">
             <div class="ui-grid-col-4"></div>
             <div class="ui-grid-col-1">
-              <a (click)="goBack()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+                <a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
             </div>
             <div class="ui-grid-col-2">
               <button icon="fa-plus" label="{{'BTN_GUARDAR' | translate}}" type="submit" pButton></button>

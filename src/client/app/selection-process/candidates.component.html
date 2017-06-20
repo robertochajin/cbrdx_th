@@ -1,0 +1,36 @@
+<h3 class="first">{{'PROCESOSELECCION.LBL_CANDIDATOS' | translate }}</h3>
+<div>
+	<div class="row datable-header">
+		<div class="col-md-6 col-xs-12">
+		</div>
+		<div class="col-md-6 col-xs-12 datatable-header-search">
+			<div class="input-group">
+				<div class="input-group-addon"><i class="fa fa-search"></i></div>
+				<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate }}" class="form-control"
+				       [(ngModel)]="busqueda" (change)="setSearch()">
+			</div>
+		</div>
+	</div>
+	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="candidates" [paginator]="true" [rows]="10"
+	             [responsive]="true" [globalFilter]="gb">
+		<p-column field="nombreCompleto" header="{{'PROCESOSELECCION.LBL_CANDIDATO' | translate }}" [sortable]="true"></p-column>
+		<p-column *ngFor="let step of steps" header="{{step.codigo}}" styleClass="datatable-col-action">
+			<template let-cs="rowData" pTemplate="body">
+				<button *ngIf="draw(cs, step.idProcesoPaso, 'VAC')" type="button" icon="fa-square-o" data-toggle="tooltip"
+				        title="{{'PROCESOSELECCION.LBL_NOASIGNADO' | translate }}" [disabled]="isStepDisabled(cs, step.idProcesoPaso, 'VAC')"
+				        class="ui-button-info" pButton (click)="redirecStep(cs, step.idProcesoPaso)"></button>
+				<button *ngIf="draw(cs, step.idProcesoPaso, 'PROG')" type="button" icon="fa-calendar" data-toggle="tooltip"
+				        title="{{'PROCESOSELECCION.LBL_PROGRAMADO' | translate }}" [disabled]="isStepDisabled(cs, step.idProcesoPaso, 'PROG')"
+				        class="ui-button-info" pButton (click)="redirecStep(cs, step.idProcesoPaso)"></button>
+				<button *ngIf="draw(cs, step.idProcesoPaso, 'APROB')" type="button" icon="fa-check" data-toggle="tooltip"
+				        title="{{'PROCESOSELECCION.LBL_APROBO' | translate }}" [disabled]="isStepDisabled(cs, step.idProcesoPaso, 'APROB')"
+				        class="ui-button-success" pButton (click)="redirecStep(cs, step.idProcesoPaso)"></button>
+				<button *ngIf="draw(cs, step.idProcesoPaso, 'RECH')" type="button" icon="fa-times-circle" data-toggle="tooltip"
+				        title="{{'PROCESOSELECCION.LBL_NOAPROBO' | translate }}" [disabled]="isStepDisabled(cs, step.idProcesoPaso, 'RECH')"
+				        class="ui-button-danger" pButton (click)="redirecStep(cs, step.idProcesoPaso)"></button>
+				<div *ngIf="draw(cs, step.idProcesoPaso, 'NA')" data-toggle="tooltip"
+				     title="{{'PROCESOSELECCION.LBL_NOAPLICA' | translate }}" >NA</div>
+			</template>
+		</p-column>
+	</p-dataTable>
+</div>

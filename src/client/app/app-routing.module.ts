@@ -150,16 +150,29 @@ import { SelectionProcessComponent } from './selection-process/selection-process
 import { SelectionProcessAddComponent } from './selection-process/selection-process-add.component';
 import { SelectionProcessVacanciesComponent } from './selection-process/selection-process-vacancies.component';
 import { VacancyDetailComponent } from './selection-process/vacancy-detail.component';
+import { StepListComponent } from './selection-process/step-list.component';
+import { StepEditComponent } from './selection-process/step-edit.component';
+import { StepDetailComponent } from './selection-process/step-detail.component';
+import { EmployeesViewDetailComponent } from './employees/employees-view-detail.component';
+import { StepProcessComponent } from './selection-process/step-process.component';
+import { CandidatesComponent } from './selection-process/candidates.component';
+import { CandidateRevisionComponent } from './selection-process/candidate-revision.component';
+import { CentralRiskComponent } from './selection-process-risks/central-risk.component';
 
 
+// hoja de vida
+import { EmployeesCurriculumVitaeComponent } from './employees/employees-curriculum-vitae.component';
+import { AdjuntosComponent } from './adjuntos/adjuntos.component';
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
    // historia de employees
    { path: 'employees', component: EmployeesComponent, canActivate: [ AuthGuard ] },
    { path: 'employees/add', component: EmployeesAddComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:id', component: EmployeesDetailComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/update/:id', component: EmployeesUpdateComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/view/detail/:id', component: EmployeesViewDetailComponent, canActivate: [ AuthGuard ] }, // solo ver
+   { path: 'employees/detail/:id', component: EmployeesDetailComponent, canActivate: [ AuthGuard ] }, // ver editar
+   { path: 'employees/update/:id', component: EmployeesUpdateComponent, canActivate: [ AuthGuard ] }, // ver editar
+   { path: 'employees/curriculum/:id', component: EmployeesCurriculumVitaeComponent, canActivate: [ AuthGuard ] }, // hoja de vida
 
    // Información de referencia de employees
    { path: 'employees/detail/:tercero/references', component: ReferencesComponent, canActivate: [ AuthGuard ] },
@@ -361,6 +374,15 @@ const routes = [
    { path: 'selection-process/add-publication/:idReq', component: SelectionProcessAddComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/active-publications', component: SelectionProcessVacanciesComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/publications-detail/:idPublication', component: VacancyDetailComponent, canActivate: [ AuthGuard ] },
+   { path: 'step-list', component: StepListComponent, canActivate: [ AuthGuard ] },
+   { path: 'add-step', component: StepEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'update-step/:idStep', component: StepEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
+   { path: 'process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
+   { path: 'candidates-list/:idPublication', component: CandidatesComponent, canActivate: [ AuthGuard ] },
+   { path: 'process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso', component: CentralRiskComponent, canActivate: [ AuthGuard ] },
+   { path: 'candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CandidateRevisionComponent, canActivate: [ AuthGuard ] },
+   { path: 'process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
 ];
 
 @NgModule( {

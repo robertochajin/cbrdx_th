@@ -7,7 +7,8 @@
 		 <div class="col-md-6 col-xs-12 datatable-header-search">
 			 <div class="input-group">
 				 <div class="input-group-addon"><i class="fa fa-search"></i></div>
-				 <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control">
+				 <input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control"
+				        [(ngModel)]="busqueda" (change)="setSearch()">
 			 </div>
 		 </div>
     </div>
@@ -18,9 +19,9 @@
         <p-column header="Acciones" styleClass="datatable-col-action" >
             <template let-elocation="rowData" pTemplate="body">
                 <div class="btn-group" role="group">
-                    <button type="button" pButton class="ui-button ui-button-success btn" icon="fa-pencil"
+                    <button type="button" pButton class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
                             pButton (click)="update(elocation)" ></button>
-                    <button type="button" pButton class="ui-button ui-button-danger btn" icon="fa-trash"
+                    <button type="button" pButton class="ui-button ui-button-danger btn" icon="fa-trash" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
                             pButton (click)="del(elocation)" ></button>
                 </div>
             </template>

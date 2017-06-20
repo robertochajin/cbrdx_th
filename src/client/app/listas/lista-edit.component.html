@@ -49,7 +49,7 @@
 						</div>
 						
 						<div class="form-footer-buttons" style="margin-bottom: 15px">
-							<a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+							<a (click)="(f.dirty === true) ? displayDialog=true : goBack()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
 							<button type="submit" pButton icon="fa-check" label="{{ 'BTN_ACTUALIZAR' | translate }}"
 							        (keydown.enter)="submit.click()"
 							        #submit></button>
@@ -110,7 +110,8 @@
 					<div class="col-md-6 col-md-offset-3">
 						<div class="row form-footer-buttons">
 							<div class="col-md-12 ">
-								<a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+								<a (click)="(fd.dirty === true) ? displayDialog=true : goBack()" class="cancelar">{{ 'BTN_CANCELAR' | translate
+									}}</a>
 								<button type="submit" pButton icon="fa-check" label="{{ 'BTN_AGREGAR' | translate }}"
 								        (keydown.enter)="submitDetail.click()"
 								        #submitDetail></button>
@@ -187,7 +188,7 @@
 				<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-center" *ngIf="masterList.indicadorEditable">
 					<template let-const="rowData" pTemplate="body">
 						<div class="btn-group" role="group">
-							<button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" pButton
+							<button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}" pButton
 							        (click)="detailEdit(const);"></button>
 						</div>
 					</template>

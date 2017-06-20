@@ -71,8 +71,8 @@ export class PositionResponsabilitiesComponent implements OnInit {
 
    del( r: PositionResponsabilities ) {
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea eliminar?`,
-                                           header: 'Corfirmación',
+                                           message: ` ¿Está seguro que desea inactivar el registro?`,
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.guardando = true;

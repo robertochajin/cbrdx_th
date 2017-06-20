@@ -13,9 +13,11 @@ import 'rxjs/add/operator/switchMap';
 import { SharedModule } from '../shared/shared.module';
 import { ActividadEconomicaService } from '../_services/actividadEconomica.service';
 import { ActividadEconomicaComponent } from './actividadEconomica.component';
+import { FormSharedModule } from '../shared/form-shared.module';
+
 
 @NgModule( {
-              imports: [ CommonModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule,
+              imports: [ CommonModule, FormSharedModule, FormsModule, InputTextModule, DataTableModule, ButtonModule, CheckboxModule, DialogModule,
                  CalendarModule, TreeModule, TabViewModule, DropdownModule, SharedModule,
 
                  FieldsetModule,

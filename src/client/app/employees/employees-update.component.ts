@@ -16,6 +16,7 @@ import { ActividadEconomicaService } from '../_services/actividadEconomica.servi
 import * as moment from 'moment/moment';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
+import { ConstanteService } from '../_services/constante.service';
 
 @Component( {
                moduleId: module.id,
@@ -61,12 +62,15 @@ export class EmployeesUpdateComponent implements OnInit {
    birthDate: string;
    deathDate: string;
    idTipoTercero: number;
+   documentoNoSelec: string[];
+   idDocumentoNoSelec: number[] = [];
 
    constructor( private employeesService: EmployeesService,
       private route: ActivatedRoute,
       private router: Router,
       private location: Location,
       private listaService: ListaService,
+      private constanteService: ConstanteService,
       private listEmployeesService: ListEmployeesService,
       private politicalDivisionService: PoliticalDivisionService,
       private actividadEconomicaService: ActividadEconomicaService,
@@ -161,12 +165,12 @@ export class EmployeesUpdateComponent implements OnInit {
    }
 
    ngOnInit() {
-      this.listaService.getMasterDetails( 'ListasTiposDocumentos' ).subscribe( res => {
-         this.documentTypes.push( { label: 'Seleccione', value: null } );
-         res.map( ( s: ListaItem ) => {
-            this.documentTypes.push( { label: s.nombre, value: s.idLista } );
-         } );
-      } );
+      // this.listaService.getMasterDetails( 'ListasTiposDocumentos' ).subscribe( res => {
+      //    this.documentTypes.push( { label: 'Seleccione', value: null } );
+      //    res.map( ( s: ListaItem ) => {
+      //       this.documentTypes.push( { label: s.nombre, value: s.idLista } );
+      //    } );
+      // } );
 
       this.route.params
       .switchMap( ( params: Params ) => this.employeesService.get( +params[ 'id' ] ) )
@@ -208,6 +212,32 @@ export class EmployeesUpdateComponent implements OnInit {
       this.employee.idTipoOcupacion = 1;
       this.range = `${lasYear}:${year}`;
       this.focusUP();
+
+      this.constanteService.listConstants().subscribe( rest => {
+         if ( rest.find( c => c.constante === 'DOCNSE' ) ) {
+            this.documentoNoSelec = rest.find( c => c.constante === 'DOCNSE' ).valor.split( ',' );
+         }
+         this.listaService.getMasterDetails( 'ListasTiposDocumentos' ).subscribe( res => {
+            this.documentTypes.push( { label: 'Seleccione', value: null } );
+            let temp: any;
+            for ( let c of this.documentoNoSelec ) {
+               temp = res.find( x => x.codigo === c );
+               if ( temp ) {
+                  this.idDocumentoNoSelec.push( temp.idLista );
+               }
+            }
+            for ( let x of res ) {
+               if ( this.idDocumentoNoSelec.length > 0 ) {
+                  if ( this.idDocumentoNoSelec.find( s => s !== x.idLista ) ) {
+                     this.documentTypes.push( { label: x.nombre, value: x.idLista } );
+                  }
+               } else {
+                  this.documentTypes.push( { label: x.nombre, value: x.idLista } );
+               }
+            }
+            this.employee.idTipoDocumento = null;
+         } );
+      } );
    }
 
    onSubmit() {
@@ -239,17 +269,23 @@ export class EmployeesUpdateComponent implements OnInit {
       }
    }
 
-   goBack(): void {
-      this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea salir sin guardar?`,
-                                           header: 'Corfirmación',
-                                           icon: 'fa fa-question-circle',
-                                           accept: () => {
-                                              this._nav.setTab( 0 );
-                                              this.location.back();
-                                           }
-                                        } );
-   }
+   goBack(fDirty : boolean): void {
+
+      if ( fDirty ){
+         this.confirmationService.confirm( {
+            message: ` ¿Está seguro que desea salir sin guardar?`,
+            header: 'Confirmación',
+            icon: 'fa fa-question-circle',
+            accept: () => {
+               this._nav.setTab( 0 );
+               this.location.back();
+            }
+         } );
+      }else {
+         this.location.back();
+      }
+      }
+
 
    searchExpeditionCity( event: any ) {
       this.politicalDivisionService.getAllCities( event.query ).subscribe(
@@ -298,7 +334,13 @@ export class EmployeesUpdateComponent implements OnInit {
       this.maxDate.setMonth( month );
 
       if ( tipo === 1 ) {
-         this.maxDate.setFullYear( prev18Year );
+         if ( this.employee.fechaDocumento !== null ) {
+            let fecha = new Date(this.employee.fechaDocumento);
+            let anio= fecha.getFullYear()-18;
+            this.maxDate.setFullYear( anio );
+         }else{
+            this.maxDate.setFullYear( prev18Year );
+         }
       } else if ( tipo === 2 ) {
          this.maxDate.setFullYear( year );
       } else {
@@ -332,6 +374,7 @@ export class EmployeesUpdateComponent implements OnInit {
    onExpeditionDate( event: any ) {
       let d = new Date( Date.parse( event ) );
       this.expeditionDate = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      this.employee.fechaNacimiento=null;
       this.updateDate();
    }
 
@@ -366,7 +409,7 @@ export class EmployeesUpdateComponent implements OnInit {
             if ( res.idTercero > 0 && this.employee.idTercero !== res.idTercero ) {
                this.confirmationService.confirm( {
                                                     message: ` ¿La cedula que ha ingresado ya existe, desea ver el colaborador existente?`,
-                                                    header: 'Corfirmación',
+                                                    header: 'Confirmación',
                                                     icon: 'fa fa-question-circle',
                                                     accept: () => {
                                                        this.router.navigate( [ '/employees/update/' + res.idTercero ] );

@@ -30,7 +30,8 @@
    </div>
 
    <div class="col-md-8">
-      <p-fieldset legend="{{header}}">
+      <p-panel header="{{header}}">
+			<fieldset>
          <div class="row-fluid">
             <div class="col-md-12" *ngIf="!guardado">
 
@@ -106,14 +107,15 @@
                   </div>
                   <div class="row form-footer-buttons">
                      <div class="form-group col-md-12">
-                        <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }} </a>
+                        <a (click)="(f.dirty === true) ? displayDialog=true : doCancel()" class="cancelar">{{ 'BTN_CANCELAR' | translate }} </a>
                         <button pButton type="submit" formaction="" label="{{ 'BTN_GUARDAR' | translate }}"></button>
                      </div>
                   </div>
                </form>
             </div>
          </div>
-      </p-fieldset>
+			</fieldset>
+      </p-panel>
       <p-dialog header="{{ 'LBL_CONFIRMACION' | translate }}" [(visible)]="displayDialog"
                 responsive="true" modal="true">
          <p>{{ 'MSG_CONFIRMACION' | translate }}</p>

@@ -33,7 +33,7 @@
           <div class="form-group col-md-12">
             <label for="titulo">{{'EMPLOYEES.LBL_TITULO' | translate}}</label>
             <input type="text" pInputText name="titulo" id="titulo"  #titulo="ngModel" required="true"
-                   [(ngModel)]="fstudy.tituloEstudio"  />
+                   [(ngModel)]="fstudy.tituloEstudio" maxlength="100" />
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !titulo.valid">
               {{'EMPLOYEES.LBL_TITULO' | translate}} {{'LBL_REQUERIDO' | translate}}
             </div>
@@ -56,7 +56,7 @@
           <div class="ui-grid-col-6">
             <label for="otraInst">{{'EMPLOYEES.LBL_OTRAINSTITUCION' | translate}}</label>
             <input type="text" pInputText name="otraInst" id="otraInst"  #otraInstitucion="ngModel" (change)="removeInstitute()"
-                   [(ngModel)]="fstudy.otraInstitucion"
+                   [(ngModel)]="fstudy.otraInstitucion" maxlength="100"
                    [required]="institucion.value === undefined || institucion.value === null  || institucion.value === ''" />
             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !otraInstitucion.valid">
               {{'EMPLOYEES.LBL_OTRAINSTITUCION' | translate}} {{'LBL_REQUERIDO' | translate}}
@@ -119,7 +119,7 @@
         <div class="ui-grid-row form-footer-buttons">
           <div class="ui-grid-col-4"></div>
           <div class="ui-grid-col-1">
-            <a (click)="goBack()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+            <a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
           </div>
           <div class="ui-grid-col-2">
             <button icon="fa-plus" label="{{'BTN_GUARDAR' | translate}}" type="submit" pButton></button>

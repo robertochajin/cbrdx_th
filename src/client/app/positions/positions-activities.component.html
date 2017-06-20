@@ -33,11 +33,13 @@
    </form>
    <div class="row">
       <div class="col-md-12">
-         <p-dataTable [value]="listPositionsActivities" [paginator]="true" [rows]="10" [responsive]="true">
+         <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listPositionsActivities" [paginator]="true"
+                      [rows]="10" [responsive]="true">
             <p-column field="ocupacion" header="{{ 'POSITION.LBL_OCUPACION' | translate }}" [sortable]="true"></p-column>
             <p-column header="{{ 'LBL_ACCION' | translate }}" styleClass="datatable-col-action">
                <template let-PA="rowData" pTemplate="body">
-                  <button type="button" icon="fa-trash" class="ui-button-danger"
+                  <button type="button" icon="fa-trash" class="ui-button-danger" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
+
                           pButton (click)="del(PA)"></button>
                </template>
             </p-column>

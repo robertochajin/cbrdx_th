@@ -87,15 +87,19 @@ export class RolesAddComponent implements OnInit {
       }
    }
 
-   goBack(): void {
+   goBack(fDirty : boolean): void {
+      if (fDirty){
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea salir sin guardar?`,
-                                           header: 'Corfirmación',
+                                           message: ` ¿Está seguro que desea salir sin guardar?`,
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.location.back();
                                            }
                                         } );
+      }else{
+         this.location.back();
+      }
    }
 
    capitalizeName() {

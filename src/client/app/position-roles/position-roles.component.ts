@@ -63,7 +63,7 @@ export class PositionRolesComponent implements OnInit {
             }
          }
          if ( num === 0 && objUpdate.indicadorHabilitado === false ) {
-            this.msgsAlert[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Debe seleccional al menos un rol' };
+            this.msgsAlert[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Debe seleccionar al menos un rol' };
             objUpdate.indicadorHabilitado = true;
          } else {
             this.positionRolesServices.update( objUpdate ).subscribe( data => {
@@ -97,8 +97,8 @@ export class PositionRolesComponent implements OnInit {
 
    del( r: PositionRoles ) {
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea eliminar?`,
-                                           header: 'Corfirmación',
+                                           message: ` ¿Está seguro que desea inactivar el registro?`,
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               r.indicadorHabilitado = false;

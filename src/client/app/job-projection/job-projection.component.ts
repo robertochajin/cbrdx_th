@@ -160,8 +160,8 @@ export class JobProjectionComponent implements OnInit {
 
    genProyec() {
       this.confirmationService.confirm( {
-                                           message: ` ¿Esta seguro que desea generar la proyección?`,
-                                           header: 'Corfirmación',
+                                           message: ` ¿Está seguro que desea generar la proyección?`,
+                                           header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.jobProjectionService.genPro()
