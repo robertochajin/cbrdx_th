@@ -214,9 +214,9 @@ export class CentralRiskComponent implements OnInit {
 
       let msg = '';
       if(f.indicadorReportado){
-         msg = `¿Está seguro que desea retirar el reporte?`;
-      } else {
          msg = `¿Está seguro que desea Reportar el aspirante?`;
+      } else {
+         msg = `¿Está seguro que desea retirar el reporte?`;
       }
       this.confirmationService.confirm( {
                                            message: msg,
@@ -227,6 +227,9 @@ export class CentralRiskComponent implements OnInit {
                                               this.selectionStepService.updateEmployeesCentralRisk( f ).subscribe( res => {
                                                  this._nav.setMesage( 2, null );
                                               });
+                                           },
+                                           reject: () => {
+                                              f.indicadorReportado = !f.indicadorReportado
                                            }
                                         } );
 
@@ -249,7 +252,7 @@ export class CentralRiskComponent implements OnInit {
    }
    deleteFile(f: CentralRisk){
       this.confirmationService.confirm( {
-                                           message: `¿Está seguro que desea Eliminar el adjunto?`,
+                                           message: `¿Está seguro que desea Inactivar el adjunto?`,
                                            header: 'Confirmación',
                                            icon: 'fa fa-question-circle',
 
