@@ -207,7 +207,7 @@
 									      <div class="form-group" >
 										      <label for="costCenter" class="control-label col-sm-3">* {{ 'ESTRUCTURAORGANIZACIONAL.LBL_CENTROCOSTO' | translate}}</label>
 										      <div class=" col-sm-9">
-											      <p-dropdown id="costCenter" name="costCenter"
+											      <p-dropdown id="costCenter" name="costCenter" filter="filter"
 											                  [options]="costTypes" [autoWidth]="false" required="true"
 											                  [(ngModel)]="organizationalStructure.idCentroCostos"
 											                  #costCenter="ngModel"></p-dropdown>
