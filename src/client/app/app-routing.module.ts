@@ -380,7 +380,7 @@ const routes = [
    { path: 'detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
    { path: 'candidates-list/:idPublication', component: CandidatesComponent, canActivate: [ AuthGuard ] },
-   { path: 'process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication', component: CentralRiskComponent, canActivate: [ AuthGuard ] },
+   { path: 'process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso', component: CentralRiskComponent, canActivate: [ AuthGuard ] },
    { path: 'candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CandidateRevisionComponent, canActivate: [ AuthGuard ] },
    { path: 'process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
 ];
