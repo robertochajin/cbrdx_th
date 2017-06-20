@@ -21,10 +21,15 @@ import { References } from '../employees-references/references';
 import { ReferencesService } from '../employees-references/references.service';
 import { DivisionPoliticaService } from '../_services/divisionPolitica.service';
 
+
+
+
 @Component( {
                moduleId: module.id,
                selector: 'employees-curriculum-vitae',
-               templateUrl: 'employees-curriculum-vitae.component.html'
+               templateUrl: 'employees-curriculum-vitae.component.html',
+               styleUrls: [ 'employees-curriculum-vitae.component.css' ],
+
             } )
 
 export class EmployeesCurriculumVitaeComponent implements OnInit {
@@ -196,6 +201,7 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
    goBack(): void {
       this.location.back();
    }
+
 
 }
 

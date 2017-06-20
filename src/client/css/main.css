@@ -101,6 +101,11 @@ body .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active{
 body .ui-panel{
    margin-bottom : 10px;
 }
+body .ui-panel-content label{
+   -ms-word-break: break-all;
+       word-break: break-all;
+       word-break: break-word;
+}
 /*
 ----------------- Cambios Theme AdminLTE ---------------------------------
  */
@@ -557,6 +562,9 @@ body .ui-datatable thead th.ui-state-active{
    background-color: #ccc;
    border: 1px solid #ccc;
 }
+body .ui-datatable .ui-cell-data{
+   word-break: break-all;
+}
 /* --- Buscador general unico --- */
 .uniSearch{
    width: 80%!important;
@@ -596,6 +604,7 @@ p-tree{
 label{
   font-weight: 300;
 }
+
 form [class*="col-"] {
     padding: 6px;
 }
@@ -706,6 +715,33 @@ body.skin-blue .ribbon{
 body.skin-blue .ribbon:after{
    border-color:transparent #2c6689;
 }
+/* -- Curriculum Blue -- */
+body.skin-blue .perfil{
+   border-color: #3C8DBC;
+}
+body.skin-blue .titulo {
+   border-bottom: 4px solid #3C8DBC;
+}
+body.skin-blue .curriculum-content{
+   border: 2px solid #3C8DBC;
+}
+body.skin-blue .hv-ribon {
+   background:#3c8dbc;
+}
+body.skin-blue .hv-ribon-left:before,
+body.skin-blue .hv-ribon-rigth:after{
+   border-color:transparent #2c6689;
+}
+body.skin-blue .curriculum-content{
+   border: 2px solid #3C8DBC;
+}
+body.skin-blue .hv-ribon {
+   background:#3c8dbc;
+}
+body.skin-blue .hv-ribon-left:before,
+body.skin-blue .hv-ribon-rigth:after{
+   border-color:transparent #2c6689;
+}
 
 
 /* -- Link Green -- */
@@ -768,6 +804,34 @@ body.skin-green .ribbon{
 body.skin-green .ribbon:after{
    border-color:transparent #006235;
 }
+/* -- Curriculum Green -- */
+body.skin-green .perfil{
+   border-color: #00A65A;
+}
+body.skin-green .titulo {
+   border-bottom: 4px solid #00A65A;
+}
+body.skin-green .curriculum-content{
+   border: 2px solid #00A65A;
+}
+body.skin-green .hv-ribon {
+   background:#00A65A;
+}
+body.skin-green .hv-ribon-left:before,
+body.skin-green .hv-ribon-rigth:after{
+   border-color:transparent #006235;
+}
+body.skin-green .curriculum-content{
+   border: 2px solid #00A65A;
+}
+body.skin-green .hv-ribon {
+   background:#00A65A;
+}
+body.skin-green .hv-ribon-left:before,
+body.skin-green .hv-ribon-rigth:after{
+   border-color:transparent #006235;
+}
+
 
 /* -- Link Purple -- */
 body.sky-blue a{
@@ -829,7 +893,33 @@ body.skin-purple .ribbon{
 body.skin-purple .ribbon:after{
    border-color:transparent #46437d;
 }
-
+/* -- Curriculum Blue -- */
+body.skin-purple .perfil{
+   border-color: #605ca8;
+}
+body.skin-purple .titulo {
+   border-bottom: 4px solid #605ca8;
+}
+body.skin-purple .curriculum-content{
+   border: 2px solid #605ca8;
+}
+body.skin-purple .hv-ribon {
+   background:#605ca8;
+}
+body.skin-purple .hv-ribon-left:before,
+body.skin-purple .hv-ribon-rigth:after{
+   border-color:transparent #46437d;
+}
+body.skin-purple .curriculum-content{
+   border: 2px solid #605ca8;
+}
+body.skin-purple .hv-ribon {
+   background:#605ca8;
+}
+body.skin-purple .hv-ribon-left:before,
+body.skin-purple .hv-ribon-rigth:after{
+   border-color:transparent #46437d;
+}
 
 
 
@@ -934,4 +1024,15 @@ body .ui-tabview{
    left:auto;
    right:0;
    border-width:0 0 10px 10px;
+}
+
+/* -- Perfil -- */
+.perfil{
+
+}
+.perfil h2{
+   margin-top:10px;
+}
+.perfil-footer-button{
+   margin-top: 8px;
 }

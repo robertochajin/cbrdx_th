@@ -1,21 +1,24 @@
 <div class="row">
 	<div class="col-md-10 col-md-offset-1">
-		<p-panel header="{{ 'PROCESOSELECCION.LBL_INFOPOSTULANTE' | translate }}">
+		<p-panel header="{{ 'PROCESOSELECCION.LBL_INFOPOSTULANTE' | translate }}" class="perfil">
 			<form class="form-horizontal">
 				<fieldset>
 					<div class="form-group row">
 						<div class="col-md-2">
 							<div class="thumbnail">
-								<img src="/assets/images/perfil/3.jpg" alt="...">
+								<img src="/assets/images/perfil/avatar.jpg" alt="...">
 							</div>
 						</div>
 						<div class="col-md-10">
-							<h2>{{candidate.nombreCompleto}} - {{candidate.fechaNacimiento}} ({{candidate.edad}})</h2>
-							<h3>{{candidate.tipoDocumento}} - {{candidate.numeroDocumento}}</h3>
+							<h2>{{candidate.nombreCompleto}}</h2>
+							<h4>{{candidate.tipoDocumento}} - {{candidate.numeroDocumento}}</h4>
+							<span>{{candidate.fechaNacimiento}} ({{candidate.edad}})</span>
+							<div  class="perfil-footer-button">
+								<button icon="fa-address-book-o" label="{{'PROCESOSELECCION.LBL_VERHOJADEVIDA' | translate }}"
+										  type="button" (click)="curriculum()" pButton></button>
+							</div>
 						</div>
 					</div>
-					<button icon="fa-plus" label="{{'PROCESOSELECCION.LBL_VERHOJADEVIDA' | translate }}" type="button" (click)="curriculum()"
-					        pButton></button>
 				</fieldset>
 			</form>
 		</p-panel>
@@ -81,7 +84,7 @@
 					<template let-data="rowData" pTemplate="body">
 						<p-checkbox *ngIf="data.indicadorReporta" [(ngModel)]="data.indicadorReportado" binary="true"
 						            [disabled]="data.idAdjunto === null || data.indicadorAprobado === true"
-						            (onChange)="aprobar(data)"></p-checkbox>
+						            (onChange)="reportar(data)"></p-checkbox>
 					</template>
 				</p-column>
 				<p-column field="" header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
@@ -105,7 +108,7 @@
 						</a>
 						-->
 						<button type="button" icon="fa-trash" *ngIf="data.idAdjunto"
-						        class="ui-button btn" data-toggle="tooltip" title="{{'BTN_ELIMINAR' | translate}}"
+						        class="ui-button btn" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
 						        pButton (click)="deleteFile(data)"></button>
 						<span *ngIf="!data.idAdjunto">{{'PROCESOSELECCION.LBL_NOADJUNTO' | translate}}</span>
 					</template>
@@ -139,7 +142,7 @@
 					</div>
 					<div class="row form-footer-buttons">
 						<div class="form-group col-md-12">
-							<a (click)="goBack()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+							<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
 							<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
 							        pButton></button>
 						
