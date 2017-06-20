@@ -41,7 +41,7 @@
 							<div class="form-group col-md-12">
 								<label for="description">* {{'LBL_DESCRIPCION' | translate }}</label>
 								<textarea id="description" name="description" #description="ngModel" pInputTextarea rows="5"
-								          [(ngModel)]="group.descripcion" required></textarea>
+								          [(ngModel)]="group.descripcion"  maxlength="495" required></textarea>
 								<div class="ui-message ui-messages-error ui-corner-all"
 								     *ngIf="fg.submitted && !description.valid">
 									<i class="fa fa-close"></i>
