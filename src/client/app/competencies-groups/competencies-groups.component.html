@@ -117,7 +117,7 @@
 									<div class="form-group col-md-10">
 										<label for="cDescription">* {{'LBL_DESCRIPCION' | translate }}</label>
 										<textarea id="cDescription" name="cDescription" #cDescription="ngModel" pInputTextarea
-										          rows="5"
+										          rows="5" maxlength="490"
 										          [(ngModel)]="competencie.descripcion" required></textarea>
 										<div class="ui-message ui-messages-error ui-corner-all"
 										     *ngIf="fc.submitted && !cDescription.valid">
