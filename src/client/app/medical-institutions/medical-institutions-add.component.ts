@@ -137,6 +137,10 @@ export class MedicalInstitutionAddComponent implements OnInit {
    capitalize( event: any ) {
       let input = event.target.value;
       event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+      let temp =this.medicalInstitution.representanteLegal;
+      if(this.medicalInstitution.representanteLegal!=null){
+         this.medicalInstitution.representanteLegal= temp.replace(/[^a-zA-ZÑñÁáÉéóÓúÚíÍ \/ /]/g,'');
+      }
    }
 
    goBack( fDirty: boolean ): void {
