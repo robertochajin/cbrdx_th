@@ -51,6 +51,7 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
       this.route.params.switchMap( ( params: Params ) => this.medicalInstitutionService.getById( +params[ 'id' ] ) )
       .subscribe( data => {
          this.medicalInstitution = data;
+         this.totalExamenes=data.valorExamenVisiometria+data.valorExamenOsteosmuscular+data.valorExamenOptometria;
          this.medicalInstitutionService.getStructureByIdMedicalInstitution( this.medicalInstitution.idInstitucionMedica )
          .subscribe( rest => {
             this.listMedicalInstitutionStructure = rest;
