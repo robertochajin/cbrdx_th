@@ -43,7 +43,7 @@
             <p-column field="cargo" header="{{'POSITION.LBL_CARGO' | translate}}" [sortable]="true"></p-column>
             <p-column header="Acciones" styleClass="datatable-col-action">
                <template let-absence="rowData" pTemplate="body">
-                  <button type="button" icon="fa-trash" class="ui-button-danger"
+                  <button type="button" icon="fa-trash" class="ui-button-danger" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
                           pButton (click)="delREE(absence)"></button>
                </template>
             </p-column>
@@ -79,7 +79,7 @@
             <p-column field="cargo" header="{{'POSITION.LBL_CARGO' | translate}}" [sortable]="true"></p-column>
             <p-column header="Acciones" styleClass="datatable-col-action">
                <template let-absence="rowData" pTemplate="body">
-                  <button type="button" icon="fa-trash" class="ui-button-danger"
+                  <button type="button" icon="fa-trash" class="ui-button-danger" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
                           pButton (click)="delREP(absence)"></button>
                </template>
             </p-column>
