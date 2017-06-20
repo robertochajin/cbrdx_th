@@ -98,7 +98,7 @@
                   <p-dropdown id="categoria" name="categoria" required="true"
                               [options]="ListCategory" [autoWidth]="false"
                               [(ngModel)]="physicStructure.idClasificacionSede"
-                              #categoria="ngModel"
+                              #categoria="ngModel" filter="filter"
                   ></p-dropdown>
                   <div class="ui-message ui-messages-error ui-corner-all"
                        *ngIf="f.submitted && !categoria.valid">
