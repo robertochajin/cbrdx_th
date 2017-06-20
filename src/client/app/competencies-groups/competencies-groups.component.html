@@ -78,7 +78,7 @@
 		</div>
 	</div>
 	<p-tabView orientation="left" id="tbvCompetenciasHabilidades">
-		<p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}" [selected]="i == 0"
+		<p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}" [selected]="i == selectedGroup"
 		            headerStyleClass="{{ group.indicadorHabilitado ? '':'inhabilitado' }}"
 		            [disabled]="editingCompetencie">
 			<div class="row" *ngIf="editingCompetencie">
