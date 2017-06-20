@@ -970,6 +970,26 @@
       "LBL_VER":"Ver",
       "":""
    },
+"MEDICALINSTITUTION":{
+   "LBL_INSTITUCIONESMEDICAS":"Instituciones Medicas",
+   "LBL_NUEVA":"Nueva Institución",
+   "LBL_DATOSGENERALES":"Datos Generales",
+   "LBL_CODIGO":"Código",
+   "LBL_NOMBRE":"Nombre",
+   "LBL_REPRESENTANTELEGAL":"Representante Legal",
+   "LBL_DIRECCION":"Dirección",
+   "LBL_CIUDAD":"Ciudad",
+   "LBL_TELEFONO":"Telefono",
+   "LBL_CORREO":"Correo",
+   "LBL_EXAMENOSTEOMUSCULAR":"Valor Examen Osteomucular",
+   "LBL_EXAMENVISION":"Valor Examen Visiometría",
+   "LBL_EXAMENOPTPMETRIA":"Valor Examen Optpmetría",
+   "LBL_EXAMENVALOR":"Valor Total Examenes",
+   "LBL_VIAJA":"Viaja",
+   "LBL_VALORVIAJA":"Valor Viaje",
+   "LBL_ESTRUCTURAFISICA":"Estructura Física",
+   "":""
+},
 
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
