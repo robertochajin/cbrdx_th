@@ -102,8 +102,10 @@
 													osPosition.ocupados}}</label>
 											</div>
 											<div class="form-group col-md-3">
-												<label for="cEnabled">{{ 'LBL_HABILITADO' | translate }}</label>
-												<p-checkbox id="cEnabled" name="cEnabled" binary="true"
+												<label>{{ 'LBL_HABILITADO' | translate }}:</label>
+												<i *ngIf="osPosition.indicadorHabilitado && (osPosition.ocupados > 0)" class="fa fa-check"> {{
+													'PLANTACOLABORADORES.MSG_DESHABILITARCARGO' | translate }}</i>
+												<p-checkbox id="cEnabled" name="cEnabled" binary="true" *ngIf="(osPosition.ocupados == 0)"
 												            [(ngModel)]="osPosition.indicadorHabilitado"></p-checkbox>
 											</div>
 											<div class="form-group col-md-4">
