@@ -7,6 +7,7 @@ import { OrganizationalStructureService } from '../_services/organizationalStruc
 import { OrganizationalStructureComponent } from './organizationalStructure.component';
 import { LocationsModule } from '../locations/locations.module';
 import { ZonesServices } from '../_services/zones.service';
+import { LowerCaseText } from '../_helpers/LowerCaseText';
 
 
 @NgModule( {

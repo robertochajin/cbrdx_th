@@ -771,6 +771,7 @@
       "MSG_NUMEROPLAZASMENOR":"El número de plazas no puede ser menor a",
       "MSG_COLABREQUERIDO":"Colaborador es requerido",
       "MSG_CARGOASIGNADO":"El cargo que intentó seleccionar ya fue asignado a esta área",
+      "MSG_DESHABILITARCARGO":"(Para deshabilitar este cargo para el área, debes des-asignar todos los colaboradores)",
       "MSG_CARGOREQ":"Cargo es requerido",
       "MSG_PLAZASREQ":"Número de plazas es requerido",
       "MSG_PLAZASMAX":"Número de plazas máximo es 9999",

@@ -63,9 +63,11 @@ export class OrganizationalStructureComponent {
                   'label': c.nombre,
                   'data': c,
                   'leaf': false,
+                   'expanded': true
                };
                this.treedCompany.push( companyNode );
-               this.selectedNode = companyNode;
+               // this.selectedNode = companyNode;
+               this.nodeExpand( companyNode );
             }
             this.btnEmpresa = false;
             this.newBranch();
