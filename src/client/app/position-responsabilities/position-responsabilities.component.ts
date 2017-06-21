@@ -7,6 +7,7 @@ import { Responsabilities } from '../_models/responsabilities';
 import { PositionResponsabilities } from '../_models/positionResponsabilities';
 import { Positions } from '../_models/positions';
 import { Message } from 'primeng/components/common/api';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -28,6 +29,7 @@ export class PositionResponsabilitiesComponent implements OnInit {
    nextStep: EventEmitter<number> = new EventEmitter<number>();
 
    constructor( private router: Router,
+      private _nav: NavService,
       private positionResponsabilitiesService: PositionResponsabilitiesService,
       private responsabilitiesServices: ResponsabilitiesServices,
       private confirmationService: ConfirmationService ) {
@@ -102,7 +104,8 @@ export class PositionResponsabilitiesComponent implements OnInit {
          this.nextStep.emit( 5 );
          this.msgsAlert = [];
       } else {
-         this.msgsAlert[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos una responsabilidad' };
+         this._nav.setMesage( 0 , { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos una responsabilidad' } );
+         // this.msgsAlert[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos una responsabilidad' };
       }
    }
 
