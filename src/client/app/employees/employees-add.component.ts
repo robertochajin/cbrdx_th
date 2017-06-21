@@ -50,6 +50,8 @@ export class EmployeesAddComponent implements OnInit {
    msgs: Message[] = [];
    juridicos: SelectItem[] = [];
    maxDate: Date = null;
+   maxDateBirth: Date = null;
+   minDateDocumento: Date = null;
    today: Date = null;
    maxDateDocumento: Date = null;
    range: string;
@@ -194,6 +196,7 @@ export class EmployeesAddComponent implements OnInit {
       this.maxDate = new Date();
       this.maxDate.setMonth( month );
       this.maxDate.setFullYear( year );
+      this.maxDateBirth = this.maxDate;
       this.today = new Date();
       this.today.setMonth( month );
       this.today.setFullYear( year );
@@ -329,24 +332,24 @@ export class EmployeesAddComponent implements OnInit {
       let prev18Year = year - 18;
       let prev20Year = year - 20;
       let lastYear = prev18Year - 80;
-      this.maxDate = new Date();
-      this.maxDate.setMonth( month );
+      this.maxDateBirth = new Date();
+      this.maxDateBirth.setMonth( month );
 
       if ( tipo === 1 ) {
          if ( this.employee.fechaDocumento !== null ) {
             let fecha = new Date(this.employee.fechaDocumento);
             let anio= fecha.getFullYear()-18;
-            this.maxDate.setFullYear( anio );
+            this.maxDateBirth.setFullYear( anio );
          }else{
-            this.maxDate.setFullYear( prev18Year );
+            this.maxDateBirth.setFullYear( prev18Year );
          }
       } else if ( tipo === 2 ) {
-         this.maxDate.setFullYear( year );
+         this.maxDateBirth.setFullYear( year );
       } else {
-         this.maxDate.setFullYear( year );
+         this.maxDateBirth = new Date(this.employee.fechaDocumento);
       }
-      if ( this.maxDate > dateExpo ) {
-         this.maxDate = dateExpo;
+      if ( this.maxDateBirth > dateExpo ) {
+         this.maxDateBirth = dateExpo;
       }
 
       if ( (this.employee.fechaNacimiento) !== null && (this.employee.fechaNacimiento) !== null ) {
@@ -358,7 +361,6 @@ export class EmployeesAddComponent implements OnInit {
          }
       }
       this.validateDocument();
-
    }
 
    capitalize( event: any ) {
@@ -371,13 +373,11 @@ export class EmployeesAddComponent implements OnInit {
    }
 
    onExpeditionDate( event: any ) {
-      this.employee.fechaNacimiento = null;
       this.updateDate();
    }
 
    onBirthDate( event: any ) {
-      let d = new Date( Date.parse( event ) );
-      this.birthDate = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      this.minDateDocumento = new Date( Date.parse( event ) );
    }
 
    onDeathDate( event: any ) {
