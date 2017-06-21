@@ -45,15 +45,15 @@ export class StepListComponent implements OnInit {
 
 
    add() {
-      this.router.navigate( [ 'add-step' ] );
+      this.router.navigate( [ 'selection-process/add-step' ] );
    }
 
    detail( r: SelectionStep ) {
-      this.router.navigate( [ 'detail-step/' + r.idProcesoPaso ] );
+      this.router.navigate( [ 'selection-process/detail-step/' + r.idProcesoPaso ] );
    }
 
    update( r: SelectionStep ) {
-      this.router.navigate( [ 'update-step/' + r.idProcesoPaso ] );
+      this.router.navigate( [ 'selection-process/update-step/' + r.idProcesoPaso ] );
    }
 
    newVersion() {

@@ -82,7 +82,7 @@ export class CandidatesComponent implements OnInit {
       if ( this.userRoles.find( r => r.rol === 'ROLE_PROCESOSELECCION' )
            || (myStep !== undefined && myStep.idResponsable === this.usuarioLogueado.usuario.idUsuario) ) {
          if ( myStep.interfazInterna ) {
-            //candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
+            //process-step/candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
             //process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso
 
             this.router.navigate(

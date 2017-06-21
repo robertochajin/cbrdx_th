@@ -384,13 +384,13 @@ const routes = [
    { path: 'selection-process/active-publications', component: SelectionProcessVacanciesComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/publications-detail/:idPublication', component: VacancyDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'step-list', component: StepListComponent, canActivate: [ AuthGuard ] },
-   { path: 'add-step', component: StepEditComponent, canActivate: [ AuthGuard ] },
-   { path: 'update-step/:idStep', component: StepEditComponent, canActivate: [ AuthGuard ] },
-   { path: 'detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/add-step', component: StepEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/update-step/:idStep', component: StepEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
-   { path: 'candidates-list/:idPublication', component: CandidatesComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/candidates-list/:idPublication', component: CandidatesComponent, canActivate: [ AuthGuard ] },
    { path: 'process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso', component: CentralRiskComponent, canActivate: [ AuthGuard ] },
-   { path: 'candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CandidateRevisionComponent, canActivate: [ AuthGuard ] },
+   { path: 'process-step/candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CandidateRevisionComponent, canActivate: [ AuthGuard ] },
    { path: 'process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
 ];
 

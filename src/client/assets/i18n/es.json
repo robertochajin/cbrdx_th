@@ -581,7 +581,7 @@
          },
 
          "POSITION":{
-           "LBL_AREA" : "Área",
+           "LBL_AREA" : "Tipos de área",
            "LBL_ACTIVIDADES" : "Actividades que Supervisa",
            "LBL_ACTIVOS" : "Responsabilidades sobre activos de la compañia",
            "LBL_AUTORIDADES" : "Autoridades",
