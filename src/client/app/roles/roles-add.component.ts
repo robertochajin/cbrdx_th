@@ -126,7 +126,7 @@ export class RolesAddComponent implements OnInit {
    }
 
    clearSelectionRol() {
-      this.fechaInicio = null;
-      this.fechaFin = null;
+      this.rol.fechaInicio = null;
+      this.rol.fechaFin = null;
    }
 }
