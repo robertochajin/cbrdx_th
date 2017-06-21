@@ -6,7 +6,7 @@
    </p-footer>
 </p-confirmDialog>
 <div *ngIf="positionsActivities">
-   <form (ngSubmit)="fr.valid && onSubmit()" #fr="ngForm" novalidate id="formulario">
+   <form *ngIf="successEdit" (ngSubmit)="fr.valid && onSubmit()" #fr="ngForm" novalidate id="formulario">
       <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
          <div class="ui-grid-row">
             <div class="ui-grid-col-12">

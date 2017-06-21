@@ -3,9 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
-import { ListEmployeesService } from '../_services/lists-employees.service';
 import { NavService } from '../_services/_nav.service';
-import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
 import { MedicalInstitutionService } from '../_services/medical-institutions.service';
 import { MedicalInstitution } from '../_models/medical-institutions';
@@ -53,6 +51,7 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
       this.route.params.switchMap( ( params: Params ) => this.medicalInstitutionService.getById( +params[ 'id' ] ) )
       .subscribe( data => {
          this.medicalInstitution = data;
+         this.totalExamenes=data.valorExamenVisiometria+data.valorExamenOsteosmuscular+data.valorExamenOptometria;
          this.medicalInstitutionService.getStructureByIdMedicalInstitution( this.medicalInstitution.idInstitucionMedica )
          .subscribe( rest => {
             this.listMedicalInstitutionStructure = rest;
