@@ -4,15 +4,11 @@
   <div class="row">
 
     <div class="col-md-12">
-
-      <div class="header">
-        <h4 class="title">{{'EMPLOYEES.LBL_COLABORADORES' | translate}}</h4>
-      </div>
-
+<p-panel header="{{'EMPLOYEES.LBL_COLABORADORES' | translate}}">
       <div class="clearfix card-header">
         <div class="col-md-2">
           <img class="img-circle img-responsive user-avatar"
-               src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg">
+               src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-128.png">
         </div>
         <div class="col-md-8">
           <h2>{{employee.nombreCompleto}}</h2>
@@ -25,6 +21,7 @@
           <!--<a href="#" class="btn btn-primary">{{'EMPLOYEES.LBL_HISTORIALABORAL' | translate}}</a>-->
         </div>
       </div>
+</p-panel>
 		<div id="infoEmploye" class="clearfix">
 
 
@@ -35,7 +32,7 @@
                   <p-accordionTab header="Datos Generales" [selected]="acordion == 0 || acordion == null ">
                     <form class="form-horizontal">
                       <fieldset>
-                        <div class="form-group">
+                        <div>
                           <div class="row">
                             <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_FECHAEXPEDICION' | translate}}:</label>
                             <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.fechaDocumento}}</strong></label>
