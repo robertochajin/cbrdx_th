@@ -92,19 +92,6 @@
 				</div>
 				<div *ngIf="!step.indicadorInterfazInterna" class="row">
 					<div class="form-group col-md-6">
-						<label for="bloqueante" class="control-label col-sm-6">{{ 'PROCESOSELECCION.LBL_BLOQUEANTE' | translate }}</label>
-						<p-checkbox [(ngModel)]="step.indicadorBloqueante" binary="true" id="bloqueante" name="bloqueante"
-						            #ngBloqueante="ngModel"></p-checkbox>
-					</div>
-					<div class="form-group col-md-6">
-						<label for="indobservacion" class="control-label col-sm-6">{{ 'PROCESOSELECCION.LBL_CAMPOOBSERVACION' | translate
-							}}</label>
-						<p-checkbox [(ngModel)]="step.indicadorObservacion" binary="true" id="indobservacion" name="indobservacion"
-						            #ngIndObs="ngModel"></p-checkbox>
-					</div>
-				</div>
-				<div *ngIf="!step.indicadorInterfazInterna" class="row">
-					<div class="form-group col-md-6">
 						<label for="indCorreo" class="control-label col-sm-6">{{ 'PROCESOSELECCION.LBL_ENVIOCORREO' | translate }}</label>
 						<p-checkbox [(ngModel)]="step.indicadorCorreo" binary="true" id="indCorreo" name="indCorreo"
 						            #ngIndMail="ngModel"></p-checkbox>
@@ -122,7 +109,10 @@
 						            #ngIndCal="ngModel"></p-checkbox>
 					</div>
 					<div class="form-group col-md-6">
-						
+						<label for="indobservacion" class="control-label col-sm-6">{{ 'PROCESOSELECCION.LBL_CAMPOOBSERVACION' | translate
+							}}</label>
+						<p-checkbox [(ngModel)]="step.indicadorObservacion" binary="true" id="indobservacion" name="indobservacion"
+						            #ngIndObs="ngModel"></p-checkbox>
 					</div>
 				</div>
 				<div *ngIf="!step.indicadorInterfazInterna" class="row">
