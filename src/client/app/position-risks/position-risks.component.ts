@@ -153,7 +153,10 @@ export class RiskComponent implements OnInit {
                                             rk;
                                               if ( this.listRisks.filter( r => r.idRiesgo === this.risk.idRiesgo &&
                                                                                r.idCargo === this.risk.idCargo ).length > 0 ) {
-                                                 this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'El riesgo ya existe!' };
+                                                 // this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'El riesgo ya
+                                                 // existe!' };
+                                                 this._nav.setMesage(0, { severity: 'error', summary: 'Error', detail: 'El riesgo' +
+                                                                                                                       ' ya existe!' });
                                                  this.guardando = false;
                                               } else {
                                                  this.riskService.add( this.risk )

@@ -8,6 +8,7 @@ import {
    ToggleButtonModule, InputMaskModule, InputTextareaModule, InputSwitchModule, PanelModule
 } from 'primeng/primeng';
 
+import { CurrencyMaskModule } from "ng2-currency-mask/index";
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -38,7 +39,8 @@ import {
                  InputMaskModule,
                  InputTextareaModule,
                  InputSwitchModule,
-                 PanelModule
+                 PanelModule,
+                 CurrencyMaskModule
               ],
               declarations: [],
               exports: [
@@ -64,7 +66,8 @@ import {
                  InputMaskModule,
                  InputTextareaModule,
                  InputSwitchModule,
-                 PanelModule
+                 PanelModule,
+                 CurrencyMaskModule
 
               ]
            } )

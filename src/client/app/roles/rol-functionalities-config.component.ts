@@ -7,6 +7,7 @@ import { RolFunctionalityControl } from '../_models/rolFunctionalityControl';
 import { FunctionalityControl } from '../_models/functionalityContorl';
 import { FormManagerService } from '../_services/form-manager.service';
 import { Message, ConfirmationService } from 'primeng/primeng';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -32,7 +33,9 @@ export class RolFuncionalitiesConfigComponent implements OnInit {
       private route: ActivatedRoute,
       private location: Location,
       private confirmationService: ConfirmationService,
-      private formManagerService: FormManagerService, ) {
+      private formManagerService: FormManagerService,
+      private _nav: NavService
+   ) {
       this.route.params.subscribe( ( params: Params ) => {
          this.rolFuncionalitiesService.get( +params[ 'id' ] ).subscribe( rolFuncionality => {
             this.rolFuncionality = rolFuncionality;
@@ -59,18 +62,22 @@ export class RolFuncionalitiesConfigComponent implements OnInit {
       this.msgs = [];
       if ( fc.idRolFuncionalidadControl === null ) {
          this.rolFuncionalitiesService.addControl( fc ).subscribe( data => {
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            // this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            this._nav.setMesage(0,{severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
             fc.idRolFuncionalidadControl = data.idRolFuncionalidadControl;
          }, error => {
             this.showForm = true;
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            // this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            this._nav.setMesage(0, {severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
          } );
       } else {
          this.rolFuncionalitiesService.updateControl( fc ).subscribe( data => {
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            // this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            this._nav.setMesage(0, {severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
          }, error => {
             this.showForm = true;
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            // this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            this._nav.setMesage(0,{ severity: 'error', summary: 'Error', detail: 'Error al guardar.' });
          } );
       }
    }
