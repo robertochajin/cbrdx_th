@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import { SharedModule } from '../shared/shared.module';
+import { FormSharedModule } from '../shared/form-shared.module';
 import { ButtonModule } from 'primeng/primeng';
 import { ConfirmDialogModule, ConfirmationService } from 'primeng/primeng';
 import { ListaService } from '../_services/lista.service';
@@ -17,6 +18,7 @@ import { MedicalInstitutionDetailComponent } from './medical-institutions-detail
 @NgModule( {
               imports: [
                  SharedModule,
+                 FormSharedModule,
                  ButtonModule,
                  ConfirmDialogModule,
                  DataTableModule,

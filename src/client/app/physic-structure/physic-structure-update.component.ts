@@ -103,11 +103,13 @@ export class PhysicStructureUpdateComponent implements OnInit {
             } );
       } else {
          this.focusUP();
-         this.msgs.push( {
+         /* this.msgs.push( {
                             severity: 'error',
                             summary: 'Dirección invalida',
                             detail: 'Es necesario agregar una dirección válida'
                          } );
+                         */
+         this.navService.setMesage(0, {severity: 'error', summary: 'Dirección invalida',detail: 'Es necesario agregar una dirección válida'});
       }
    }
 

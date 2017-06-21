@@ -7,6 +7,7 @@ import { CompanyAssetsTypesServices } from '../_services/list-company-assets.ser
 import { Positions } from '../_models/positions';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -35,11 +36,14 @@ export class CompanyAssetsComponent implements OnInit {
       private companyAssetsService: CompanyAssetsServices,
       private listaService: ListaService,
       private listCompanyAssetsService: CompanyAssetsTypesServices,
-      private confirmationService: ConfirmationService ) {
+      private confirmationService: ConfirmationService,
+      private _nav: NavService
+   ) {
    }
 
    ngOnInit() {
-      this.msgsAlert.push( { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un registro' } );
+      //this.msgsAlert.push( { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un registro' } );
+      this._nav.setMesage(0, { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un registro' });
       this.listaService.getMasterDetails( 'ListasTiposElementos' ).subscribe( listCompanyAssets => {
          this.listCompanyAssets = listCompanyAssets;
          this.companyAssetsService.getAllByPosition( this.position.idCargo ).subscribe( res => {
