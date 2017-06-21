@@ -51,6 +51,7 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
       this.route.params.switchMap( ( params: Params ) => this.medicalInstitutionService.getById( +params[ 'id' ] ) )
       .subscribe( data => {
          this.medicalInstitution = data;
+         this.totalExamenes=data.valorExamenVisiometria+data.valorExamenOsteosmuscular+data.valorExamenOptometria;
          this.medicalInstitutionService.getStructureByIdMedicalInstitution( this.medicalInstitution.idInstitucionMedica )
          .subscribe( rest => {
             this.listMedicalInstitutionStructure = rest;
@@ -97,6 +98,7 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
          this.medicalInstitutionService.updateStructure( this.medicalInstitutionStructure ).subscribe( data => {
             this._nav.setMesage( 1, this.msgs );
             this.medicalInstitutionStructure.valorViaje=null;
+            this.medicalInstitutionStructure.idEstructuraFisica=null;
             this.medicalInstitutionStructure.indicadorViaja=false;
             this.editing = false;
             this.listMedicalInstitutionStructure = [];
@@ -122,6 +124,7 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
          this.medicalInstitutionService.addStructure( this.medicalInstitutionStructure ).subscribe( data => {
             this._nav.setMesage( 1, this.msgs );
             this.medicalInstitutionStructure.valorViaje=null;
+            this.medicalInstitutionStructure.idEstructuraFisica=null;
             this.medicalInstitutionStructure.indicadorViaja=false;
             this.listMedicalInstitutionStructure = [];
             this.physicStructure = [];

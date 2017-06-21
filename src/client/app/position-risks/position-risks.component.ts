@@ -153,7 +153,10 @@ export class RiskComponent implements OnInit {
                                             rk;
                                               if ( this.listRisks.filter( r => r.idRiesgo === this.risk.idRiesgo &&
                                                                                r.idCargo === this.risk.idCargo ).length > 0 ) {
-                                                 this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'El riesgo ya existe!' };
+                                                 // this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'El riesgo ya
+                                                 // existe!' };
+                                                 this._nav.setMesage(0, { severity: 'error', summary: 'Error', detail: 'El riesgo' +
+                                                                                                                       ' ya existe!' });
                                                  this.guardando = false;
                                               } else {
                                                  this.riskService.add( this.risk )
@@ -301,7 +304,8 @@ export class RiskComponent implements OnInit {
          this.nextStep.emit( 14 );
          this.msgsAlert = [];
       } else {
-         this.msgsAlert[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un Riesgo' };
+         this._nav.setMesage( 0 , { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un Riesgo' } );
+         // this.msgsAlert[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un Riesgo' };
       }
 
    }

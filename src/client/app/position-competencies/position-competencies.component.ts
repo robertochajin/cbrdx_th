@@ -10,6 +10,7 @@ import { PonderanciesServices } from '../_services/ponderancies.service';
 import { GroupCompetenciesServices } from '../_services/groupCompetencies.service';
 import { GroupCompetencies } from '../_models/groupCompetencies';
 import { Ponderancies } from '../_models/ponderancies';
+import {NavService} from "../_services/_nav.service";
 
 @Component( {
                moduleId: module.id,
@@ -38,6 +39,7 @@ export class PositionCompetenciesComponent implements OnInit {
       private positionCompetenciesService: PositionCompetenciesServices,
       private competenciesServices: CompetenciesServices,
       private ponderanciesServices: PonderanciesServices,
+      private _nav: NavService,
       private groupCompetenciesServices: GroupCompetenciesServices,
       private confirmationService: ConfirmationService ) {
    }
@@ -131,10 +133,11 @@ export class PositionCompetenciesComponent implements OnInit {
          this.nextStep.emit( 10 );
       } else {
          // lanzar mensaje advirtiendo que un grupo no tiene asignado ningun factor
-         this.msgs.push( {
-                            severity: 'warn', summary: 'Formulario incompleto',
-                            detail: 'Es necesario asignar ponderación a todas las competencias.'
-                         } );
+         this._nav.setMesage(4, {
+            severity: 'warn', summary: 'Formulario incompleto',
+            detail: 'Es necesario asignar ponderación a todas las competencias.'
+         })
+
       }
    }
 

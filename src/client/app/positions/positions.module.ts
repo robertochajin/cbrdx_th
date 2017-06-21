@@ -22,6 +22,8 @@ import { PositionCompetenciesModule } from '../position-competencies/position-co
 import { CompanyAssetsModule } from '../position-company-assets/company-assets.module';
 import { PersonalityModule } from '../position-personality/personality.module';
 
+
+
 @NgModule( {
               imports: [
                  SharedModule,
@@ -35,6 +37,7 @@ import { PersonalityModule } from '../position-personality/personality.module';
                  PositionCompetenciesModule,
                  CompanyAssetsModule,
                  PersonalityModule
+
               ],
 
               declarations: [
