@@ -35,6 +35,9 @@ ul{
 }
 .item li{
    margin-bottom: 10px;
+   -ms-word-break: break-all;
+       word-break: break-all;
+       word-break: break-word;
 }
 
 /**
