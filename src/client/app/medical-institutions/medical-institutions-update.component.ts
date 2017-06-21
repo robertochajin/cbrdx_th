@@ -98,6 +98,7 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
          this.medicalInstitutionService.updateStructure( this.medicalInstitutionStructure ).subscribe( data => {
             this._nav.setMesage( 1, this.msgs );
             this.medicalInstitutionStructure.valorViaje=null;
+            this.medicalInstitutionStructure.idEstructuraFisica=null;
             this.medicalInstitutionStructure.indicadorViaja=false;
             this.editing = false;
             this.listMedicalInstitutionStructure = [];
@@ -123,6 +124,7 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
          this.medicalInstitutionService.addStructure( this.medicalInstitutionStructure ).subscribe( data => {
             this._nav.setMesage( 1, this.msgs );
             this.medicalInstitutionStructure.valorViaje=null;
+            this.medicalInstitutionStructure.idEstructuraFisica=null;
             this.medicalInstitutionStructure.indicadorViaja=false;
             this.listMedicalInstitutionStructure = [];
             this.physicStructure = [];

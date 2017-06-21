@@ -90,7 +90,6 @@ export class EmployeesUpdateComponent implements OnInit {
          res.map( ( s: ListaItem ) => {
             this.juridicos.push( { label: s.nombre, value: s.idLista } );
          } );
-         this.employee.idTipoDocumento = null;
       } );
 
       this.listaService.getMasterDetails( 'ListasGeneros' ).subscribe( res => {
@@ -235,7 +234,6 @@ export class EmployeesUpdateComponent implements OnInit {
                   this.documentTypes.push( { label: x.nombre, value: x.idLista } );
                }
             }
-            this.employee.idTipoDocumento = null;
          } );
       } );
    }
