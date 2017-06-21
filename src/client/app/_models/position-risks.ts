@@ -9,6 +9,7 @@ export class Risk {
    tipo: string;
    subtipo: string;
    riesgo: string;
+   indicadorHabilitado: boolean = true;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
 

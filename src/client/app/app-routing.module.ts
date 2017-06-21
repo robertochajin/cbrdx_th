@@ -163,6 +163,10 @@ import { CentralRiskComponent } from './selection-process-risks/central-risk.com
 // hoja de vida
 import { EmployeesCurriculumVitaeComponent } from './employees/employees-curriculum-vitae.component';
 import { AdjuntosComponent } from './adjuntos/adjuntos.component';
+import { MedicalInstitutionsComponent } from './medical-institutions/medical-institutions.component';
+import { MedicalInstitutionAddComponent } from './medical-institutions/medical-institutions-add.component';
+import { MedicalInstitutionUpdateComponent } from './medical-institutions/medical-institutions-update.component';
+import { MedicalInstitutionDetailComponent } from './medical-institutions/medical-institutions-detail.component';
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
@@ -362,6 +366,11 @@ const routes = [
 
    // Administracion
    { path: 'menus', component: MenuManagerComponent, canActivate: [ AuthGuard ] },
+ // Intituciones medicas
+   { path: 'medical-institutions', component: MedicalInstitutionsComponent, canActivate: [ AuthGuard ] },
+   { path: 'medical-institutions/add', component: MedicalInstitutionAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'medical-institutions/update/:id', component: MedicalInstitutionUpdateComponent, canActivate: [ AuthGuard ] },
+   { path: 'medical-institutions/detail/:id', component: MedicalInstitutionDetailComponent, canActivate: [ AuthGuard ] },
 
    // Vacantes
    { path: 'vacancies', component: VacanciesComponent, canActivate: [ AuthGuard ] },

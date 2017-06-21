@@ -22,6 +22,9 @@ export class PhysicStructureService {
    getAll() {
       return this.authHttp.get( this.serviceURL + 'estructuraFisica' ).map( ( res: Response ) => res.json() as PhysicStructure[] );
    }
+   getAllEnabled() {
+      return this.authHttp.get( this.serviceURL + 'estructuraFisica/enabled' ).map( ( res: Response ) => res.json() as PhysicStructure[] );
+   }
 
    getById( id: number ) {
       return this.authHttp.get( this.serviceURL + 'estructuraFisica/' + id ).map( ( res: Response ) => res.json() as PhysicStructure );

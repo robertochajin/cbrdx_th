@@ -124,6 +124,7 @@ export class RiskComponent implements OnInit {
                r.idRiesgo = rk.idRiesgo;
                r.auditoriaFecha = rk.auditoriaFecha;
                r.auditoriaFecha = rk.auditoriaFecha;
+               r.indicadorHabilitado = rk.indicadorHabilitado;
 
                this.riskService.getRiskById( rk.idRiesgo ).subscribe( rest => {
                   r.riesgo = rest.riesgo;
@@ -300,10 +301,35 @@ export class RiskComponent implements OnInit {
          this.nextStep.emit( 14 );
          this.msgsAlert = [];
       } else {
-         this.msgsAlert[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un Riesgo' };
+         this._nav.setMesage( 0 , { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un Riesgo' } );
+         // this.msgsAlert[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un Riesgo' };
       }
 
    }
+
+   updateRisk(f: Risk) {
+      this.confirmationService.confirm( {
+                                           message: ` ¿Está seguro que desea actualizar el estado?`,
+                                           header: 'Confirmación',
+                                           icon: 'fa fa-question-circle',
+                                           accept: () => {
+                                              this.riskService.updateRisk( f )
+                                              .subscribe( data => {
+                                                 this.msgsAlert = [];
+                                                 this._nav.setMesage( 2, this.msgs );
+                                              }, error => {
+                                                 this._nav.setMesage( 3, this.msgs );
+                                              } );
+
+                                           },
+                                           reject: () => {
+                                              f.indicadorHabilitado = !f.indicadorHabilitado
+                                           }
+                                        });
+
+   }
+
+
 
 }
 
