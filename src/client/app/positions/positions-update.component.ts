@@ -404,10 +404,8 @@ export class PositionsUpdateComponent implements OnInit {
                return true;
             } else {
                this.alertOcu = true;
-               this.msgOcupaciones[ 0 ] = {
-                  severity: 'error', summary: 'Error', detail: 'Debe agregar al menos una' +
-                                                               ' ocupación'
-               };
+               // this.msgOcupaciones[ 0 ] = {severity: 'error', summary: 'Error', detail: 'Debe agregar al menos una ocupación'};
+               this._nav.setMesage( 0, {severity: 'error', summary: 'Error', detail: 'Debe agregar al menos una ocupación'} );
                return false;
             }
          } );

@@ -526,6 +526,7 @@
                                     <label for="salario">{{'POSITION.LBL_SALARIO' | translate }}</label>
                                     <input type="text" pInputText id="salario" name="salario" required
                                            [(ngModel)]="position.salario" #salario="ngModel" (keyup)="salario"
+														 currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
                                     />
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f14.submitted && !salario.valid">
