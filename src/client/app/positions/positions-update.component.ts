@@ -45,6 +45,7 @@ export class PositionsUpdateComponent implements OnInit {
    step = 1;
    nivel: number;
    alertOcu = false;
+   rangoEdad:number[];
 
    constructor( private positionsService: PositionsService,
       private router: Router,
@@ -132,6 +133,11 @@ export class PositionsUpdateComponent implements OnInit {
       this.route.params.subscribe( ( params: Params ) => {
          this.positionsService.get( +params[ 'id' ] ).subscribe( position => {
             this.position = position;
+
+            // Get Rango Edad
+            this.rangoEdad[0] = this.position.edad;
+            this.rangoEdad[1] = this.position.edadMax;
+
             this.step = this.position.paso;
             if ( this.step > 0 && this.step < 16 ) {
                if ( this._nav.getTab() > 0 && this._nav.getTab() !== null ) {
@@ -262,6 +268,11 @@ export class PositionsUpdateComponent implements OnInit {
          this.position.paso = 10;
          this.step = 10;
       }
+
+      this.position.edad = this.rangoEdad[0];
+      this.position.edadMax = this.rangoEdad[1];
+
+
       this.positionsService.update5( this.position )
       .subscribe( data => {
          this._nav.setTab( 9 );

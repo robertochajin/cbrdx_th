@@ -373,14 +373,16 @@
                               <div class="row">
                                  <div class="col-md-3">
                                     <label for="edad">* {{ 'POSITION.LBL_EDAD' | translate }}</label>
-                                    <input type="text" pInputText id="edad" name="edad" type="number" min="1" max="99" pattern="(?:\b|-)([0-9]{1,2}?|99)\b"
+                                    <!--
+	                                 <input type="text" pInputText id="edad" name="edad" type="number" min="1" max="99" pattern="(?:\b|-)([0-9]{1,2}?|99)\b"
                                            [(ngModel)]="position.edad" #edad="ngModel" required
                                     />
-                                    <div class="ui-message ui-messages-error ui-corner-all"
-                                         *ngIf="f8.submitted && !edad.valid">
-                                       <i class="fa fa-close"></i>
-                                       {{ 'POSITION.LBL_EDAD' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-                                    </div>
+	                                 -->
+	                                 <div style="text-align: center">
+		                                 {{position.rangoEdad}}
+	                                 <p-slider id="edad" name="edad" [(ngModel)]="rangoEdad"
+	                                           [range]="true"></p-slider>
+	                                 </div>
                                  </div>
                                  <div class="form-group col-md-3">
                                     <label for="idGenero">* {{ 'LBL_GENERO' | translate }}</label>
