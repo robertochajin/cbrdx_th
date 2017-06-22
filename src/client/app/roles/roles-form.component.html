@@ -57,12 +57,12 @@
                <label for="fFin">* {{ 'LBL_FECHAFIN' | translate}}</label>
                <p-calendar id="fFin" name="fFin" [showIcon]="true" dataType="date"
                            [minDate]="minDate" [locale]="es" readonlyInput="true" [disabled]="rol.fechaInicio == null"
-                           [(ngModel)]="rol.fechaFin" #fFin="ngModel" [required]="rol.fechaInicio != null"
+                           [(ngModel)]="rol.fechaFin" #fFin="ngModel" [required]="fInicio !== null"
                            (onSelect)="onFechaFin($event)" dateFormat="yy'-'mm'-'dd"
                            [yearRange]="range" [monthNavigator]="true" [yearNavigator]="true"
                >
                </p-calendar>
-               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fFin.valid && fechaInicio != null">
+               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fFin.valid && fInicio !== null">
                   <i class="fa fa-close"></i>
                   {{ 'ROLES.MSG_FECHAFINREQ' | translate}}
                </div>
