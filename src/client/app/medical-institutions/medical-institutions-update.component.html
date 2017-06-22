@@ -81,7 +81,9 @@
 										<label for="osteo">* {{'MEDICALINSTITUTION.LBL_EXAMENOSTEOMUSCULAR' | translate }}</label>
 										<input id="osteo" name="osteo" #examosteo="ngModel" pInputText
 										       type="text" required [(ngModel)]="medicalInstitution.valorExamenOsteosmuscular"
-										       (change)="calcularVaor()" (keyup)="inputNumberOsteo()"/>
+										       (keyup)="calcularVaor()"
+										       currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
+										/>
 										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !examosteo.valid ">
 											<i class="fa fa-close"></i>
 											{{'MEDICALINSTITUTION.LBL_EXAMENOSTEOMUSCULAR' | translate }} {{'LBL_REQUERIDO' | translate }}
@@ -91,7 +93,9 @@
 										<label for="visio">* {{'MEDICALINSTITUTION.LBL_EXAMENVISION' | translate }}</label>
 										<input id="visio" name="visio" #examvisio="ngModel" pInputText
 										       type="text" required [(ngModel)]="medicalInstitution.valorExamenVisiometria"
-										       (change)="calcularVaor()" (keyup)="inputNumberVision()"/>
+										       (keyup)="calcularVaor()"
+										       currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
+										/>
 										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !examvisio.valid ">
 											<i class="fa fa-close"></i>
 											{{'MEDICALINSTITUTION.LBL_EXAMENVISION' | translate }} {{'LBL_REQUERIDO' | translate }}
@@ -103,7 +107,9 @@
 										<label for="opto">* {{'MEDICALINSTITUTION.LBL_EXAMENOPTPMETRIA' | translate }}</label>
 										<input id="opto" name="opto" #examopto="ngModel" pInputText
 										       type="text" required [(ngModel)]="medicalInstitution.valorExamenOptometria"
-										       (change)="calcularVaor()" (keyup)="inputNumberOpto()"/>
+										       (keyup)="calcularVaor()"
+										       currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
+										/>
 										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !examopto.valid ">
 											<i class="fa fa-close"></i>
 											{{'MEDICALINSTITUTION.LBL_EXAMENOPTPMETRIA' | translate }} {{'LBL_REQUERIDO' | translate }}
