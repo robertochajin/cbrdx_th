@@ -318,7 +318,7 @@
     "MSG_DOCUMENTO":"El documento que intenta ingresar ya está asignado a otra persona y no puede ser duplicado",
      "LBL_HOJADEVIDA": "Hoja de vida",
      "LBL_PERFIL": "Perfil",
-     "LBL_EXPERIENCIA": "Expereiencia",
+     "LBL_EXPERIENCIA": "Experiencia",
      "LBL_EDUCACION": "Educación",
      "LBL_DIRECCION": "Dirección",
      "LBL_CONTACTO": "Contacto",
@@ -581,7 +581,7 @@
          },
 
          "POSITION":{
-           "LBL_AREA" : "Área",
+           "LBL_AREA" : "Tipos de área",
            "LBL_ACTIVIDADES" : "Actividades que Supervisa",
            "LBL_ACTIVOS" : "Responsabilidades sobre activos de la compañia",
            "LBL_AUTORIDADES" : "Autoridades",
