@@ -268,6 +268,7 @@ export class OrganizationalStructureComponent {
                   } );
             }
          } else {
+            this.navService.setMesage(0, {severity: 'error', summary: 'Error', detail: 'Antes de Guardar debe agregar una dirección.'});
             this.guardando = false;
          }
       } else {
