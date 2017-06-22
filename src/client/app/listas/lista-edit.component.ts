@@ -47,6 +47,7 @@ export class ListaEditComponent implements OnInit {
          this.masterList = data;
          this.listaService.getMasterAllDetails( this.masterList.nombreTabla ).subscribe( res => {
             this.detailsList = res;
+            this.sortItems();
          } );
       } );
       this.constanteService.listConstants().subscribe( data => {
@@ -152,5 +153,51 @@ export class ListaEditComponent implements OnInit {
    capitalize( event: any ) {
       let input = event.target.value;
       event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+   }
+
+   sendBefore( item: ListaItem ) {
+      let myIndex = this.detailsList.indexOf( item );
+      if ( myIndex < this.detailsList.length - 1 ) {
+         let newOrder = this.detailsList[ myIndex ].orden;
+         this.detailsList[ myIndex ].orden = this.detailsList[ myIndex + 1 ].orden;
+         this.listaService.updateDetail( this.detailsList[ myIndex ], this.masterList.nombreTabla).then( res => {
+            if ( res.ok ) {
+               this.detailsList[ myIndex + 1 ].orden = newOrder;
+               this.listaService.updateDetail( this.detailsList[ myIndex + 1 ], this.masterList.nombreTabla).then( res => {
+                  if ( res.ok ) {
+                     this.sortItems();
+                  }
+               } );
+            }
+         } );
+      }
+   }
+
+   sendAfter( item: ListaItem ) {
+      let myIndex = this.detailsList.indexOf( item );
+      if ( myIndex > 0 ) {
+         let newOrder = this.detailsList[ myIndex ].orden;
+         this.detailsList[ myIndex ].orden = this.detailsList[ myIndex - 1 ].orden;
+         this.listaService.updateDetail( this.detailsList[ myIndex ], this.masterList.nombreTabla).then( res => {
+            if ( res.ok ) {
+               this.detailsList[ myIndex - 1 ].orden = newOrder;
+               this.listaService.updateDetail( this.detailsList[ myIndex - 1 ], this.masterList.nombreTabla).then( res => {
+                  if ( res.ok ) {
+                     this.sortItems();
+                  }
+               } );
+            }
+         } );
+      }
+   }
+
+   private sortItems() {
+      this.detailsList.sort( function ( a, b ) {
+         if ( a.orden < b.orden ){
+            return -1;
+         } else {
+            return 1;
+         }
+      });
    }
 }

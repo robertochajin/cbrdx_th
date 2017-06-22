@@ -5,6 +5,8 @@ import { Productivity } from '../_models/productivity';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Positions } from '../_models/positions';
+import { NavService } from '../_services/_nav.service';
+
 @Component( {
                moduleId: module.id,
                templateUrl: 'productivity.component.html',
@@ -26,7 +28,9 @@ export class ProductivityComponent implements OnInit {
 
    constructor( private productivityService: ProductivityService,
       private location: Location,
-      private route: ActivatedRoute, ) {
+      private route: ActivatedRoute,
+      private _nav: NavService
+   ) {
    }
 
    ngOnInit() {
@@ -66,7 +70,8 @@ export class ProductivityComponent implements OnInit {
             // this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
             this.next();
          }, error => {
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            // this.msgs.push( {
+            this._nav.setMesage( 0, {severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       } else {
          this.productivityService.update( this.productivity )
@@ -74,7 +79,8 @@ export class ProductivityComponent implements OnInit {
             // this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
             this.next();
          }, error => {
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            // this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            this._nav.setMesage( 0, { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       }
    }
