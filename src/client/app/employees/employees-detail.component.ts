@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { EmployeesService } from '../_services/employees.service';
 import { Employee } from '../_models/employees';
 import { NavService } from '../_services/_nav.service';
+import * as moment from 'moment/moment';
 
 @Component( {
                moduleId: module.id,
@@ -32,6 +33,8 @@ export class EmployeesDetailComponent implements OnInit {
                                            this.employee.segundoNombre + ' ' +
                                            this.employee.primerApellido + ' ' +
                                            this.employee.segundoApellido;
+
+            this.employee.edad = moment( this.employee.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
 
             // this.acordion=0;
             //

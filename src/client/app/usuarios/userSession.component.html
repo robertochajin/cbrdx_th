@@ -14,7 +14,9 @@
          </div>
          <div class="clearfix card-header">
             <div class="col-md-5">
-               <img class="img-circle img-responsive user-avatar" src="{{svcThUrl}}/file/{{image}}" />
+					<div class="thumbnail img-responsive">
+							<img src="{{svcThUrl}}/file/{{image}}" alt="...">
+					</div>
 					<p-fileUpload name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
 									  chooseLabel="{{'USER_SESSION.LBL_NUEVOAVATAR' | translate}}"
 									  (onBeforeSend)="onBeforeSend($event)"
@@ -23,8 +25,8 @@
 				</div>
             <div class="col-md-7">
                <h2>{{employee.nombreCompleto}}</h2>
-					<h4>{{employee.fechaNacimiento}}  ({{employee.edad}})</h4>
-               <span>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</span><br/>
+					<h4>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</h4>
+               <span>{{employee.fechaNacimiento}}  ({{employee.edad}})</span><br/>
 					<div *ngIf="!ldap">
 	               <div *ngIf="user">
 	                  <div class="header" style=" margin-top: 40px;">
