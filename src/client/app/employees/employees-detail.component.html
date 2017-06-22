@@ -7,13 +7,14 @@
 <p-panel header="{{'EMPLOYEES.LBL_COLABORADORES' | translate}}">
       <div class="clearfix card-header">
         <div class="col-md-2">
-          <img class="img-circle img-responsive user-avatar"
-               src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-128.png">
+			  <div class="thumbnail img-responsive">
+				  <img src="/assets/images/perfil/avatar.jpg" alt="...">
+			  </div>
         </div>
         <div class="col-md-8">
           <h2>{{employee.nombreCompleto}}</h2>
-			  <h4>{{employee.fechaNacimiento}} ({{employee.edad}})</h4>
-          <span>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</span><br />
+			  <h4>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</h4>
+          <span>{{employee.fechaNacimiento}} ({{employee.edad}})</span><br />
           <span>Cargo actual : {{employee.cargoActual}}</span><br />
 			  <span>Usuario desde : {{employee.fechaCreacion}}</span><br />
         </div>
