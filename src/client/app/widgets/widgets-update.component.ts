@@ -43,7 +43,7 @@ export class WidgetsUpdateComponent implements OnInit {
       this.msgs = [];
       this.widgetServices.update( this.widgets ).subscribe( data => {
          // this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
-         this._nav.setMesage(0, {severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
+         this._nav.setMesage(0, {severity: 'success', summary: 'Exito', detail: 'Registro guardado correctamente.'});
          this.location.back();
       }, error => {
          // this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
