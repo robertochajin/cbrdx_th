@@ -1,10 +1,8 @@
 ﻿import { Injectable } from '@angular/core';
-import {
-   Router, CanActivate, NavigationEnd, NavigationStart, Event as NavigationEvent, RouterStateSnapshot, ActivatedRouteSnapshot, UrlSegment,
-   ActivatedRoute
-} from '@angular/router';
+import { Router, CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { AuthenticationService } from '../_services/authentication.service';
 import { MenuManagerService } from '../_services/menuManager.service';
+import { JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -14,90 +12,63 @@ export class AuthGuard implements CanActivate {
    public _url: string;
    public _routerSubscription: any;
    currentUrl: string = '/dashboard';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
 
    constructor( private router: Router,
       private authenticationService: AuthenticationService,
       private menuManagerService: MenuManagerService ) {
+
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.listmenu = this.usuarioLogueado.pantallasAprobadas;
+      }
    }
 
-   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+   canActivate( route: ActivatedRouteSnapshot, state: RouterStateSnapshot ): boolean {
       if ( this.authenticationService.loggedIn() ) {
-         let url: string = route.url[0].path;
+         let url: string = route.url[ 0 ].path;
          if ( url !== 'login' && url !== 'dashboard' ) {
             this.checkFuncionality( url );
          }
-         //this.checkUrl( url );
          return true;
       } else {
          this.router.navigate( [ '/login' ] );
          return false;
       }
    }
-   checkFuncionality( url: any ){
-      this.listmenu = this.authenticationService.getFuncionalities();
-      console.info(this.listmenu);
+
+   checkFuncionality( url: any ) {
+      // console.info( this.listmenu );
       this.flat = false;
       this.listmenu.forEach( ( value: any ) => {
-         if (value === '/'+url){
+         if ( value === '/' + url ) {
             this.flat = true;
          }
-      });
+      } );
 
-      if(!this.flat){
+      if ( !this.flat ) {
          this.router.navigate( [ '/dashboard' ] );
       }
       return this.flat;
    }
 
-   checkUrl(url: any) {
-      this.currentUrl = url;
-      if ( this.currentUrl !== 'login' && this.currentUrl !== 'dashboard' ) {
-         this.listmenu = [];
-         this.menuManagerService.getMenusSession().flatMap(result => {
-            // debugger;
-            result.map( r => {
-               this.listmenu.push( r.ruta );
-            } );
-            return result;//this.menuManagerService.getMenusSession();
-         }).subscribe(men => {
-            // debugger;
-            // men.map( r => {
-            //    this.listmenu.push( r.ruta );
-            // } );
-            this.flat = false;
-            this.listmenu.forEach( ( value: any ) => {
-               //debugger;
-               /*if ( new RegExp( value ).exec( this.currentUrl ) ) {
-                  this.flat = true;
-               }*/
-               if (value === '/'+this.currentUrl){
-                  this.flat = true;
-               }
+   checkUrl( url: any ) {
+      /*this.menuManagerService.getMenusSession().subscribe( men => {
+       men.map( r => {
+       this.listmenu.push( r.ruta );
+       } );
+       this.flat = false;
+       this.listmenu.forEach( ( value: any ) => {
+       if ( new RegExp( value ).exec( this.currentUrl ) ) {
+       this.flat = true;
+       }
+       } );
+       if(this.flat === false){
+       this.router.navigate( [ '/dashboard' ] );
 
-            });
-
-            if(!this.flat){
-               this.router.navigate( [ '/dashboard' ] );
-            }
-
-            return this.flat;
-         });
-         /*this.menuManagerService.getMenusSession().subscribe( men => {
-            men.map( r => {
-               this.listmenu.push( r.ruta );
-            } );
-            this.flat = false;
-            this.listmenu.forEach( ( value: any ) => {
-               if ( new RegExp( value ).exec( this.currentUrl ) ) {
-                  this.flat = true;
-               }
-            } );
-            if(this.flat === false){
-               this.router.navigate( [ '/dashboard' ] );
-
-            }
-         } );*/
-      }
-
+       }
+       } );*/
    }
 }
