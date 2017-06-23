@@ -338,9 +338,12 @@ export class EmployeesUpdateComponent implements OnInit {
 
    updateDate() {
 
-      let tipodocemploye = this.listTypeDoc.find( x => x.idLista === this.employee.idTipoDocumento ).codigo;
-
-      let tipo = this.tiposdoc.find( t => t === tipodocemploye ); // buscar tipo documento elegi
+      let tipodocemploye = this.listTypeDoc.find( x => x.idLista === this.employee.idTipoDocumento );
+      let codigo: string = '';
+      if ( tipodocemploye ) {
+         codigo = tipodocemploye.codigo;
+      }
+      let tipo = this.tiposdoc.find( t => t === codigo ); // buscar tipo documento elegido
       let exp = this.expeditionDate;
       let dateExpo = new Date( exp );
 
