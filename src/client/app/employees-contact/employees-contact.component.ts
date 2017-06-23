@@ -83,4 +83,10 @@ export class EmployeesContactComponent {
          this.cel = false;
       }
    }
+   correoMinusculas() {
+      if ( this.employee.correoElectronico !== null &&
+           this.employee.correoElectronico !== undefined && this.employee.correoElectronico !== '' ) {
+         this.employee.correoElectronico = this.employee.correoElectronico.toLowerCase();
+      }
+   }
 }
