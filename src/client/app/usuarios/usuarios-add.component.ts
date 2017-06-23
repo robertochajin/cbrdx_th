@@ -64,6 +64,7 @@ export class UsuariosAddComponent {
    historico: VHistoricoUsuario[] = [];
 
    msgs: Message[] = [];
+   svcThUrl = '<%= SVC_TH_URL %>/api/upload';
 
    constructor( private usuariosService: UsuariosService,
       private rolesService: RolesService,

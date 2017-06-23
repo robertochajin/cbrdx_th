@@ -91,6 +91,7 @@ export class MedicalInstitutionAddComponent implements OnInit {
    }
 
    calcularVaor() {
+      console.log('calcularVaor');
       let tempExamOpto: number = 0;
       let tempExamVision: number = 0;
       let tempExamOsteo: number = 0;

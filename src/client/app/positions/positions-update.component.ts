@@ -333,9 +333,9 @@ export class PositionsUpdateComponent implements OnInit {
 
       // Focus  en accordionTab Activo
       setTimeout( () => {
-         jQuery( 'body' ).animate( {
-                                      scrollTop: jQuery( 'p-accordiontab > .ui-state-active' ).position().top + 90
-                                   }, 'fast' );
+         jQuery( 'body' ).animate({
+            scrollTop : jQuery( 'p-accordiontab > .ui-state-active' ).position().top + 90
+         }, 'fast');
       }, 1000 );
 
    }
@@ -414,7 +414,7 @@ export class PositionsUpdateComponent implements OnInit {
             } else {
                this.alertOcu = true;
                // this.msgOcupaciones[ 0 ] = {severity: 'error', summary: 'Error', detail: 'Debe agregar al menos una ocupación'};
-               this._nav.setMesage( 0, { severity: 'error', summary: 'Error', detail: 'Debe agregar al menos una ocupación' } );
+               this._nav.setMesage( 0, {severity: 'error', summary: 'Error', detail: 'Debe agregar al menos una ocupación'} );
                return false;
             }
          } );
