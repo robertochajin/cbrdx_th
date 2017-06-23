@@ -80,7 +80,7 @@ export class PositionActivitiesComponent implements OnInit {
             } );
             this.listPositionsActivities.push( data );
             this.listActivities = [];
-            this.positionsService.getListActivities().subscribe( rest => {
+            this.positionsService.getListActivitiesByLevel(4).subscribe( rest => {
                this.listActivities.push( { label: 'Seleccione...', value: null } );
                for ( let dp of rest ) {
                   let bandera = false;
@@ -116,7 +116,7 @@ export class PositionActivitiesComponent implements OnInit {
                                                     this.listPositionsActivities.indexOf( this.dialogObjet ), 1 );
                                                  this.dialogObjet = null;
                                                  this.listActivities = [];
-                                                 this.positionsService.getListActivities().subscribe( rest => {
+                                                 this.positionsService.getListActivitiesByLevel(4).subscribe( rest => {
                                                     this.listActivities.push( { label: 'Seleccione...', value: null } );
                                                     for ( let dp of rest ) {
                                                        let bandera = false;
