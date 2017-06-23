@@ -42,6 +42,7 @@ export class Positions {
    public estado: string;
    public paso: number;
    public indicadorZona:boolean;
+   public edadMax : number
 
    constructor() {
       this.idCargo = null;
@@ -78,5 +79,6 @@ export class Positions {
       this.estructuraArea = '';
       this.idEstado = null;
       this.paso = 1;
+      this.edadMax = null;
    }
 }
