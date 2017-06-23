@@ -368,69 +368,73 @@
                                     <textarea pInputTextarea id="otrosRequisitos" name="otrosRequisitos"
                                               [(ngModel)]="position.otrosRequisitos" #otrosRequisitos="ngModel" maxlength="200">
                                     </textarea>
-                                 </div>
-                              </div>
-                              <div class="row">
-                                 <div class="col-md-3">
-                                    <label for="edad">* {{ 'POSITION.LBL_EDAD' | translate }}</label>
-                                    <!--
-	                                 <input type="text" pInputText id="edad" name="edad" type="number" min="1" max="99" pattern="(?:\b|-)([0-9]{1,2}?|99)\b"
-                                           [(ngModel)]="position.edad" #edad="ngModel" required
-                                    />
-	                                 -->
-	                                 <div style="text-align: center">
-		                                 {{position.rangoEdad}}
-	                                 <p-slider id="edad" name="edad" [(ngModel)]="rangoEdad"
-	                                           [range]="true"></p-slider>
-	                                 </div>
-                                 </div>
-                                 <div class="form-group col-md-3">
-                                    <label for="idGenero">* {{ 'LBL_GENERO' | translate }}</label>
-                                    <p-dropdown id="idGenero" name="idGenero" required="true"
-                                                [options]="genderTypes" [autoWidth]="false"
-                                                [(ngModel)]="position.idGenero"
-                                                #idGenero="ngModel"
-                                    ></p-dropdown>
-                                    <div class="ui-message ui-messages-error ui-corner-all"
-                                         *ngIf="f8.submitted && !idGenero.valid">
-                                       <i class="fa fa-close"></i>
-                                       {{ 'LBL_GENERO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-                                    </div>
-                                 </div>
-                                 <div class="form-group col-md-3">
-                                    <label for="idEstadoCivil">* {{ 'LBL_ESTADOCIVIL' | translate }}</label>
-                                    <p-dropdown id="idEstadoCivil" name="idEstadoCivil" required="true"
-                                                [options]="maritalStatusTypes" [autoWidth]="false"
-                                                [(ngModel)]="position.idEstadoCivil"
-                                                #idEstadoCivil="ngModel"
-                                    ></p-dropdown>
-                                    <div class="ui-message ui-messages-error ui-corner-all"
-                                         *ngIf="f8.submitted && !idEstadoCivil.valid">
-                                       <i class="fa fa-close"></i>
-                                       {{ 'LBL_ESTADOCIVIL' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-                                    </div>
-                                 </div>
-                                 <div class="form-group col-md-3">
-                                    <label for="idNivelEducacionn">* {{ 'POSITION.LBL_EDUCACION' | translate }}</label>
-                                    <p-dropdown id="idNivelEducacionn" name="idNivelEducacionn" required="true"
-                                                [options]="listStudies" [autoWidth]="false"
-                                                [(ngModel)]="position.idNivelEducacion"
-                                                #idNivelEducacion="ngModel"
-                                    ></p-dropdown>
-                                    <div class="ui-message ui-messages-error ui-corner-all"
-                                         *ngIf="f8.submitted && !idNivelEducacion.valid">
-                                       <i class="fa fa-close"></i>
-                                      {{ 'POSITION.LBL_EDUCACION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-                                    </div>
-                                 </div>
-                              </div>
-
-                           </div>
-                           <position-activities *ngIf="position.idCargo" [position]="position"></position-activities>
-                           <div class="ui-grid-row">
-                              <div class="ui-grid-col-10">
-                                 <p-messages *ngIf="alertOcu" [value]="msgOcupaciones"></p-messages>
-                              </div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-3">
+												<label for="edad">* {{ 'POSITION.LBL_EDAD' | translate }}</label>
+												<div style="text-align: center">
+													{{rangoEdad}}
+													<p-slider id="edad" name="edad" [(ngModel)]="rangoEdad"
+													          [range]="true"></p-slider>
+												</div>
+												<!--<input type="text" pInputText id="edad" name="edad" type="number" min="1" max="99"-->
+												       <!--pattern="(?:\b|-)([0-9]{1,2}?|99)\b"-->
+												       <!--[(ngModel)]="position.edad" #edad="ngModel" required-->
+												<!--/>-->
+												<!--<div class="ui-message ui-messages-error ui-corner-all"-->
+												     <!--*ngIf="f8.submitted && !edad.valid">-->
+													<!--<i class="fa fa-close"></i>-->
+													<!--{{ 'POSITION.LBL_EDAD' | translate }} {{ 'LBL_REQUERIDO' | translate }}-->
+												<!--</div>-->
+											</div>
+											<div class="form-group col-md-3">
+												<label for="idGenero">* {{ 'LBL_GENERO' | translate }}</label>
+												<p-dropdown id="idGenero" name="idGenero" required="true"
+												            [options]="genderTypes" [autoWidth]="false"
+												            [(ngModel)]="position.idGenero"
+												            #idGenero="ngModel"
+												></p-dropdown>
+												<div class="ui-message ui-messages-error ui-corner-all"
+												     *ngIf="f8.submitted && !idGenero.valid">
+													<i class="fa fa-close"></i>
+													{{ 'LBL_GENERO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+												</div>
+											</div>
+											<div class="form-group col-md-3">
+												<label for="idEstadoCivil">* {{ 'LBL_ESTADOCIVIL' | translate }}</label>
+												<p-dropdown id="idEstadoCivil" name="idEstadoCivil" required="true"
+												            [options]="maritalStatusTypes" [autoWidth]="false"
+												            [(ngModel)]="position.idEstadoCivil"
+												            #idEstadoCivil="ngModel"
+												></p-dropdown>
+												<div class="ui-message ui-messages-error ui-corner-all"
+												     *ngIf="f8.submitted && !idEstadoCivil.valid">
+													<i class="fa fa-close"></i>
+													{{ 'LBL_ESTADOCIVIL' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+												</div>
+											</div>
+											<div class="form-group col-md-3">
+												<label for="idNivelEducacionn">* {{ 'POSITION.LBL_EDUCACION' | translate }}</label>
+												<p-dropdown id="idNivelEducacionn" name="idNivelEducacionn" required="true"
+												            [options]="listStudies" [autoWidth]="false"
+												            [(ngModel)]="position.idNivelEducacion"
+												            #idNivelEducacion="ngModel"
+												></p-dropdown>
+												<div class="ui-message ui-messages-error ui-corner-all"
+												     *ngIf="f8.submitted && !idNivelEducacion.valid">
+													<i class="fa fa-close"></i>
+													{{ 'POSITION.LBL_EDUCACION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+												</div>
+											</div>
+										</div>
+									
+									</div>
+									<position-activities *ngIf="position.idCargo" [position]="position"></position-activities>
+									<div class="ui-grid-row">
+										<div class="ui-grid-col-10">
+											<p-messages *ngIf="alertOcu" [value]="msgOcupaciones"></p-messages>
+										</div>
 										<div class="row form-footer-buttons">
 											<div class="form-group col-md-12">
 												<button icon="fa-arrow-right" label="{{ 'BTN_SIGUIENTE' | translate }}" type="submit"

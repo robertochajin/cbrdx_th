@@ -91,6 +91,7 @@
                     <label for="correoElectronico">* {{'LBL_CORREOELECTRONICO' | translate }}</label>
                     <input id="correoElectronico" name="correoElectronico" #correoElectronico="ngModel" pInputText type="text"required
                            [(ngModel)]="familyInformation.correoElectronico" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"
+                           maxlength="125"
                     (keyup)="inputCorreo()"/>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !correoElectronico.valid ">
                         <i class="fa fa-close"></i>

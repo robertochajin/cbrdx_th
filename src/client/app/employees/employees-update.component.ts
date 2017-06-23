@@ -66,6 +66,9 @@ export class EmployeesUpdateComponent implements OnInit {
    idTipoTercero: number;
    documentoNoSelec: string[];
    idDocumentoNoSelec: number[] = [];
+   tiposdoc: string[] = [];
+   mayeda: number = 0;
+   listTypeDoc: ListaItem[] = [];
 
    constructor( private employeesService: EmployeesService,
       private route: ActivatedRoute,
@@ -163,6 +166,19 @@ export class EmployeesUpdateComponent implements OnInit {
             this.idTipoTercero = res.idLista;
          } );
 
+      this.constanteService.getByCode( 'DOCMYE' ).subscribe( data => {
+         if ( data.valor ) {
+            for ( let c of data.valor.split( ',' ) ) {
+               this.tiposdoc.push( c );
+            }
+         }
+      } );
+      this.constanteService.getByCode( 'MAYEDA' ).subscribe( data => {
+         if ( data.valor ) {
+            this.mayeda = Number( data.valor );
+         }
+      } );
+
    }
 
    ngOnInit() {
@@ -221,6 +237,7 @@ export class EmployeesUpdateComponent implements OnInit {
             this.documentoNoSelec = rest.find( c => c.constante === 'DOCNSE' ).valor.split( ',' );
          }
          this.listaService.getMasterDetails( 'ListasTiposDocumentos' ).subscribe( res => {
+            this.listTypeDoc = res;
             this.documentTypes.push( { label: 'Seleccione', value: null } );
             let temp: any;
             for ( let c of this.documentoNoSelec ) {
@@ -271,23 +288,22 @@ export class EmployeesUpdateComponent implements OnInit {
       }
    }
 
-   goBack(fDirty : boolean): void {
+   goBack( fDirty: boolean ): void {
 
-      if ( fDirty ){
+      if ( fDirty ) {
          this.confirmationService.confirm( {
-            message: ` ¿Está seguro que desea salir sin guardar?`,
-            header: 'Confirmación',
-            icon: 'fa fa-question-circle',
-            accept: () => {
-               this._nav.setTab( 0 );
-               this.location.back();
-            }
-         } );
-      }else {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this._nav.setTab( 0 );
+                                                 this.location.back();
+                                              }
+                                           } );
+      } else {
          this.location.back();
       }
-      }
-
+   }
 
    searchExpeditionCity( event: any ) {
       this.politicalDivisionService.getAllCities( event.query ).subscribe(
@@ -322,31 +338,34 @@ export class EmployeesUpdateComponent implements OnInit {
 
    updateDate() {
 
-      let tipo = this.employee.idTipoDocumento;
+      let tipodocemploye = this.listTypeDoc.find( x => x.idLista === this.employee.idTipoDocumento );
+      let codigo: string = '';
+      if ( tipodocemploye ) {
+         codigo = tipodocemploye.codigo;
+      }
+      let tipo = this.tiposdoc.find( t => t === codigo ); // buscar tipo documento elegido
       let exp = this.expeditionDate;
       let dateExpo = new Date( exp );
 
       let today = new Date();
       let month = today.getMonth();
       let year = today.getFullYear();
-      let prev18Year = year - 18;
+      let prev18Year = year - this.mayeda;
       let prev20Year = year - 20;
       let lastYear = prev18Year - 80;
       this.maxDateBirth = new Date();
       this.maxDateBirth.setMonth( month );
 
-      if ( tipo === 1 ) {
+      if ( tipo ) {
          if ( this.employee.fechaDocumento !== null ) {
-            let fecha = new Date(this.employee.fechaDocumento);
-            let anio= fecha.getFullYear()-18;
+            let fecha = new Date( this.employee.fechaDocumento );
+            let anio = fecha.getFullYear() - this.mayeda;
             this.maxDateBirth.setFullYear( anio );
-         }else{
+         } else {
             this.maxDateBirth.setFullYear( prev18Year );
          }
-      } else if ( tipo === 2 ) {
-         this.maxDateBirth.setFullYear( year );
       } else {
-         this.maxDateBirth = new Date(this.employee.fechaDocumento);
+         this.maxDateBirth.setFullYear( year );
       }
       if ( this.maxDateBirth > dateExpo ) {
          this.maxDateBirth = dateExpo;
