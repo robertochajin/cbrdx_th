@@ -87,7 +87,7 @@ export class FaultsAndSanctionsUpdateComponent implements OnInit {
       let input = event.target.value;
       if(specialChars){
          event.target.value = (input.substring( 0, 1 ).toUpperCase()
-                               + input.substring( 1 ).toLowerCase()).replace( /[^A-Z0-9]/gi, '' ).trim();
+                               + input.substring( 1 ).toLowerCase()).replace( /[^ÑA-Z0-9 ]/gi, '-' );
       } else {
          event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
