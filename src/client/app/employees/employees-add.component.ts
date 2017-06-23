@@ -62,6 +62,9 @@ export class EmployeesAddComponent implements OnInit {
    idTipoTercero: number;
    documentoNoSelec: string[];
    idDocumentoNoSelec: number[] = [];
+   tiposdoc: string[] = [];
+   mayeda: number = 0;
+   listTypeDoc: ListaItem[] = [];
 
    constructor( private employeesService: EmployeesService,
       private router: Router,
@@ -176,6 +179,19 @@ export class EmployeesAddComponent implements OnInit {
             this.idTipoTercero = res.idLista;
          } );
 
+      this.constanteService.getByCode( 'DOCMYE' ).subscribe( data => {
+         if ( data.valor ) {
+            for ( let c of data.valor.split( ',' ) ) {
+               this.tiposdoc.push( c );
+            }
+         }
+      } );
+      this.constanteService.getByCode( 'MAYEDA' ).subscribe( data => {
+         if ( data.valor ) {
+            this.mayeda = Number( data.valor );
+         }
+      } );
+
    }
 
    ngOnInit() {
@@ -213,6 +229,7 @@ export class EmployeesAddComponent implements OnInit {
             this.documentoNoSelec = rest.find( c => c.constante === 'DOCNSE' ).valor.split( ',' );
          }
          this.listaService.getMasterDetails( 'ListasTiposDocumentos' ).subscribe( res => {
+            this.listTypeDoc = res;
             this.documentTypes.push( { label: 'Seleccione', value: null } );
             let temp: any;
             for ( let c of this.documentoNoSelec ) {
@@ -321,46 +338,45 @@ export class EmployeesAddComponent implements OnInit {
    }
 
    updateDate() {
+      let tipodocemploye = this.listTypeDoc.find( x => x.idLista === this.employee.idTipoDocumento ).codigo;
 
-      let tipo = this.employee.idTipoDocumento;
-      let exp = this.expeditionDate;
-      let dateExpo = new Date( exp );
+         let tipo = this.tiposdoc.find( t => t === tipodocemploye ); // buscar tipo documento elegi
+         let exp = this.expeditionDate;
+         let dateExpo = new Date( exp );
+         let today = new Date();
+         let month = today.getMonth();
+         let year = today.getFullYear();
+         let prev18Year = year - this.mayeda;
+         let prev20Year = year - 20;
+         let lastYear = prev18Year - 80;
+         this.maxDateBirth = new Date();
+         this.maxDateBirth.setMonth( month );
 
-      let today = new Date();
-      let month = today.getMonth();
-      let year = today.getFullYear();
-      let prev18Year = year - 18;
-      let prev20Year = year - 20;
-      let lastYear = prev18Year - 80;
-      this.maxDateBirth = new Date();
-      this.maxDateBirth.setMonth( month );
-
-      if ( tipo === 1 ) {
-         if ( this.employee.fechaDocumento !== null ) {
-            let fecha = new Date(this.employee.fechaDocumento);
-            let anio= fecha.getFullYear()-18;
-            this.maxDateBirth.setFullYear( anio );
-         }else{
-            this.maxDateBirth.setFullYear( prev18Year );
+         if ( tipo ) {
+            if ( this.employee.fechaDocumento !== null ) {
+               let fecha = new Date( this.employee.fechaDocumento );
+               let anio = fecha.getFullYear() - this.mayeda;
+               this.maxDateBirth.setFullYear( anio );
+            } else {
+               this.maxDateBirth.setFullYear( prev18Year );
+            }
+         } else {
+            this.maxDateBirth.setFullYear( year );
          }
-      } else if ( tipo === 2 ) {
-         this.maxDateBirth.setFullYear( year );
-      } else {
-         this.maxDateBirth = new Date(this.employee.fechaDocumento);
-      }
-      if ( this.maxDateBirth > dateExpo ) {
-         this.maxDateBirth = dateExpo;
-      }
-
-      if ( (this.employee.fechaNacimiento) !== null && (this.employee.fechaNacimiento) !== null ) {
-         let timestamp2 = new Date( this.maxDate ).getTime();
-         let timestamp1 = new Date( this.employee.fechaNacimiento ).getTime();
-         let timeDiff = Math.round( timestamp2 - timestamp1 );
-         if ( timeDiff < 0 ) {
-            this.employee.fechaNacimiento = null;
+         if ( this.maxDateBirth > dateExpo ) {
+            this.maxDateBirth = dateExpo;
          }
-      }
-      this.validateDocument();
+
+         if ( (this.employee.fechaNacimiento) !== null && (this.employee.fechaNacimiento) !== null ) {
+            let timestamp2 = new Date( this.maxDate ).getTime();
+            let timestamp1 = new Date( this.employee.fechaNacimiento ).getTime();
+            let timeDiff = Math.round( timestamp2 - timestamp1 );
+            if ( timeDiff < 0 ) {
+               this.employee.fechaNacimiento = null;
+            }
+         }
+         this.validateDocument();
+
    }
 
    capitalize( event: any ) {
