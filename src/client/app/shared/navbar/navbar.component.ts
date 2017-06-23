@@ -38,7 +38,6 @@ export class NavbarComponent implements AfterViewInit {
 
    ngAfterViewInit() {
       this.reloadNav();
-
    }
 
    reloadNav() {

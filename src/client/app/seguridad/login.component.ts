@@ -6,6 +6,7 @@ import { AuthenticationService } from '../_services/authentication.service';
 import { Http, Headers } from '@angular/http';
 import { NavService } from '../_services/_nav.service';
 import { JwtHelper } from 'angular2-jwt';
+import { MenuManagerService } from '../_services/menuManager.service';
 
 @Component( {
                moduleId: module.id,
@@ -33,6 +34,8 @@ export class LoginComponent implements OnInit {
       private authenticationService: AuthenticationService,
       private navService: NavService,
       private route: ActivatedRoute,
+      private menuManagerService: MenuManagerService
+
    ) {
       if(location.search.length > 0){
          this.token =  location.search.split('token=')[1];
@@ -77,7 +80,6 @@ export class LoginComponent implements OnInit {
             switch (res){
                case 1:
                   this.user();
-                  this.loginService.setSession( true );
                   break;
                case 2:
                   this.intentos = 0;
@@ -94,10 +96,17 @@ export class LoginComponent implements OnInit {
    }
 
    user() {
+      let listmenu: string[] = [];
+      this.menuManagerService.getMenusSession().subscribe( men => {
+         men.map( r => {
+            listmenu.push( r.ruta );
+         } );
+         this.authenticationService.setFuncionalities( listmenu );
+      } );
       this.loginService.setSession( true );
       this.appmain.setSession( true );
-      this.router.navigate( [ this.Url ] );
       this.navService.resetSearch();
+      this.router.navigate( [ this.Url ] );
    }
 
    cambioContrasena() {

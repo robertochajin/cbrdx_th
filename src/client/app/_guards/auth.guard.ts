@@ -18,18 +18,35 @@ export class AuthGuard implements CanActivate {
    constructor( private router: Router,
       private authenticationService: AuthenticationService,
       private menuManagerService: MenuManagerService ) {
-
    }
 
    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
       if ( this.authenticationService.loggedIn() ) {
          let url: string = route.url[0].path;
+         if ( url !== 'login' && url !== 'dashboard' ) {
+            this.checkFuncionality( url );
+         }
          //this.checkUrl( url );
          return true;
       } else {
          this.router.navigate( [ '/login' ] );
          return false;
       }
+   }
+   checkFuncionality( url: any ){
+      this.listmenu = this.authenticationService.getFuncionalities();
+      console.info(this.listmenu);
+      this.flat = false;
+      this.listmenu.forEach( ( value: any ) => {
+         if (value === '/'+url){
+            this.flat = true;
+         }
+      });
+
+      if(!this.flat){
+         this.router.navigate( [ '/dashboard' ] );
+      }
+      return this.flat;
    }
 
    checkUrl(url: any) {
@@ -56,6 +73,7 @@ export class AuthGuard implements CanActivate {
                if (value === '/'+this.currentUrl){
                   this.flat = true;
                }
+
             });
 
             if(!this.flat){

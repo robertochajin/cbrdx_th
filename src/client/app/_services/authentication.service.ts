@@ -10,6 +10,7 @@ export class AuthenticationService {
    public token: string;
    public headers = new Headers( { 'Content-Type': 'application/json' } );
    masterService = '<%= SVC_TH_URL %>/auth';
+   listmenu: string[] = [];
 
    missionAnnouncedSource = new Subject<string>();
    logoutAnnoucedSource = new Subject<string>();
@@ -83,5 +84,14 @@ export class AuthenticationService {
       this.token = null;
       localStorage.removeItem( 'token' );
       this.announceLogout();
+   }
+
+   getFuncionalities() {
+      return this.listmenu;
+   }
+
+   setFuncionalities( s: string[] ) {
+      this.listmenu = s;
+      // localStorage.setItem( 'funtionality', this.listmenu );
    }
 }

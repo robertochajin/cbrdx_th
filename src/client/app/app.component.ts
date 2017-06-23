@@ -8,6 +8,8 @@ import { Message } from 'primeng/primeng';
 import { AuthenticationService } from './_services/authentication.service';
 import { NavService } from './_services/_nav.service';
 import { BreadcrumbService } from './shared/breadcrumb/breadcrumb.service';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
+import { MenuManagerService } from './_services/menuManager.service';
 
 /**
  * This class represents the main application component.
@@ -19,6 +21,7 @@ import { BreadcrumbService } from './shared/breadcrumb/breadcrumb.service';
                providers: [ FormBuilder, NavService ],
             } )
 export class AppComponent implements AfterViewInit {
+   listmenu: string[] = [];
    sessionStart: boolean;
    msgs: Message[] = [];
 
@@ -27,10 +30,29 @@ export class AppComponent implements AfterViewInit {
       private authenticationService: AuthenticationService,
       private formBuilder: FormBuilder,
       private navService: NavService,
-      private breadcrumbService: BreadcrumbService ) {
-
+      private breadcrumbService: BreadcrumbService,
+      private router: Router,
+      private menuManagerService: MenuManagerService
+   ) {
+      /*this.router.events.subscribe( ( val ) => {
+         if ( val instanceof NavigationStart ) {
+            if(val.url) {
+               this.listmenu = [];
+               menuManagerService.getMenusSession().subscribe( men => {
+                  men.map( r => {
+                     this.listmenu.push( r.ruta );
+                  } );
+                  this.checkUrl( val.url );
+               } );
+            }
+         }
+         if ( val instanceof NavigationEnd ) {
+            if(val.url) {
+               this.checkUrl(val.url);
+            }
+         }
+      });*/
       this.sessionStart = authenticationService.loggedIn();
-
       translate.setDefaultLang( 'es' );
       translate.use( 'es' );
       navService.getMessage$.subscribe(
@@ -40,7 +62,6 @@ export class AppComponent implements AfterViewInit {
    }
 
    ngAfterViewInit() {
-
       // Add script theme
       jQuery.getScript( 'assets/js/app.js');
 
@@ -59,4 +80,16 @@ export class AppComponent implements AfterViewInit {
       this.translate.use( lang );
    }
 
+   /*checkUrl( Url:string ) {
+       console.info(this.listmenu);
+       let flat = false;
+       this.listmenu.forEach( ( value: any ) => {
+          if ( new RegExp( value ).exec( Url ) ) {
+             flat = true;
+          }
+       } );
+       if ( flat === false ) {
+          this.router.navigate( [ '/dashboard' ] );
+       }
+   }*/
 }
