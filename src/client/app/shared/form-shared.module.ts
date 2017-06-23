@@ -5,9 +5,10 @@ import { RouterModule } from '@angular/router';
 import {
    InputTextModule, DataTableModule, ButtonModule, DialogModule, ConfirmDialogModule, TabViewModule, AccordionModule, MessagesModule,
    AutoCompleteModule, FileUploadModule, DropdownModule, CalendarModule, GrowlModule, TreeModule, FieldsetModule, CheckboxModule,
-   ToggleButtonModule, InputMaskModule, InputTextareaModule, InputSwitchModule, PanelModule
+   ToggleButtonModule, InputMaskModule, InputTextareaModule, InputSwitchModule, PanelModule, SliderModule
 } from 'primeng/primeng';
 
+import { CurrencyMaskModule } from "ng2-currency-mask/index";
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -38,7 +39,9 @@ import {
                  InputMaskModule,
                  InputTextareaModule,
                  InputSwitchModule,
-                 PanelModule
+                 PanelModule,
+                 CurrencyMaskModule,
+                 SliderModule
               ],
               declarations: [],
               exports: [
@@ -64,7 +67,9 @@ import {
                  InputMaskModule,
                  InputTextareaModule,
                  InputSwitchModule,
-                 PanelModule
+                 PanelModule,
+                 CurrencyMaskModule,
+                 SliderModule
 
               ]
            } )

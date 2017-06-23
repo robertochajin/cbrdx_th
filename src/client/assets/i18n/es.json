@@ -318,7 +318,7 @@
     "MSG_DOCUMENTO":"El documento que intenta ingresar ya está asignado a otra persona y no puede ser duplicado",
      "LBL_HOJADEVIDA": "Hoja de vida",
      "LBL_PERFIL": "Perfil",
-     "LBL_EXPERIENCIA": "Expereiencia",
+     "LBL_EXPERIENCIA": "Experiencia",
      "LBL_EDUCACION": "Educación",
      "LBL_DIRECCION": "Dirección",
      "LBL_CONTACTO": "Contacto",
@@ -581,7 +581,7 @@
          },
 
          "POSITION":{
-           "LBL_AREA" : "Área",
+           "LBL_AREA" : "Tipos de área",
            "LBL_ACTIVIDADES" : "Actividades que Supervisa",
            "LBL_ACTIVOS" : "Responsabilidades sobre activos de la compañia",
            "LBL_AUTORIDADES" : "Autoridades",
@@ -610,6 +610,7 @@
            "LBL_PONDERACION" : "Ponderación",
            "LBL_CARGO" : "Cargo",
            "LBL_NUEVOCARGO" : "Nuevo Cargo",
+            "LBL_SOLICITUDES" : "Solicitudes",
            "LBL_ELIMINARCARGO" : "Eliminación de Cargo",
            "LBL_CARGOS" : "Cargos",
            "LBL_CATEGORIA" : "Categoria de acuerdo al mapa de cargos",
@@ -771,6 +772,7 @@
       "MSG_NUMEROPLAZASMENOR":"El número de plazas no puede ser menor a",
       "MSG_COLABREQUERIDO":"Colaborador es requerido",
       "MSG_CARGOASIGNADO":"El cargo que intentó seleccionar ya fue asignado a esta área",
+      "MSG_DESHABILITARCARGO":"(Para deshabilitar este cargo para el área, debes des-asignar todos los colaboradores)",
       "MSG_CARGOREQ":"Cargo es requerido",
       "MSG_PLAZASREQ":"Número de plazas es requerido",
       "MSG_PLAZASMAX":"Número de plazas máximo es 9999",
@@ -969,6 +971,27 @@
       "LBL_VER":"Ver",
       "":""
    },
+"MEDICALINSTITUTION":{
+   "LBL_INSTITUCIONESMEDICAS":"Instituciones Medicas",
+   "LBL_INSTITUCIONMEDICA":"Institución Medicas",
+   "LBL_NUEVA":"Nueva Institución",
+   "LBL_DATOSGENERALES":"Datos Generales",
+   "LBL_CODIGO":"Código",
+   "LBL_NOMBRE":"Nombre",
+   "LBL_REPRESENTANTELEGAL":"Representante Legal",
+   "LBL_DIRECCION":"Dirección",
+   "LBL_CIUDAD":"Ciudad",
+   "LBL_TELEFONO":"Telefono",
+   "LBL_CORREO":"Correo Electronico",
+   "LBL_EXAMENOSTEOMUSCULAR":"Valor Examen Osteomuscular",
+   "LBL_EXAMENVISION":"Valor Examen Visiometría",
+   "LBL_EXAMENOPTPMETRIA":"Valor Examen Optometría",
+   "LBL_EXAMENVALOR":"Valor Total Examenes",
+   "LBL_VIAJA":"Viaja",
+   "LBL_VALORVIAJA":"Valor Viaje",
+   "LBL_ESTRUCTURAFISICA":"Estructura Física",
+   "":""
+},
 
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="

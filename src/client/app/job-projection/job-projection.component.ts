@@ -4,6 +4,7 @@ import { JobProjectionService } from '../_services/jobProjection.service';
 import { Router } from '@angular/router';
 import { ConfirmationService, Message, SelectItem } from 'primeng/primeng';
 import { ListaService } from '../_services/lista.service';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -48,7 +49,9 @@ export class JobProjectionComponent implements OnInit {
    constructor( private jobProjectionService: JobProjectionService,
       private listaService: ListaService,
       private router: Router,
-      private confirmationService: ConfirmationService ) {
+      private confirmationService: ConfirmationService,
+      private _nav: NavService
+   ) {
    }
 
    ngOnInit() {
@@ -168,21 +171,28 @@ export class JobProjectionComponent implements OnInit {
                                               .subscribe( data => {
                                                  this.msgs = [];
                                                  if ( data === 0 ) {
-                                                    this.msgs.push( {
+
+                                                    /* this.msgs.push( {
                                                                        severity: 'info',
                                                                        summary: '',
                                                                        detail: 'La proyección laboral ya ha sido generada.'
-                                                                    } );
+                                                                    } ); */
+                                                    this._nav.setMesage(0,{severity: 'info',summary: '',detail: 'La proyección laboral ya ha ' +
+                                                                                                                'sido generada.' });
                                                  }
                                                  if ( data === 1 ) {
-                                                    this.msgs.push( {
+                                                    /* this.msgs.push( {
                                                                        severity: 'info',
                                                                        summary: 'Exito',
                                                                        detail: 'Proyección laboral generada con exito'
-                                                                    } );
+                                                                    } ); */
+                                                    this._nav.setMesage(0, {severity: 'info', summary: 'Exito',detail: 'Proyección laboral ' +
+                                                                                                                       'generada con exito'});
                                                  }
                                               }, error => {
-                                                 this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+                                                 // this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+                                                 this._nav.setMesage(0, { severity: 'error', summary: 'Error', detail: 'Error al' +
+                                                                                                                       ' guardar.' });
                                               } );
                                            }
                                         } );
@@ -370,20 +380,22 @@ export class JobProjectionComponent implements OnInit {
          let str = 'Existen las siguientes areas con algun inconveniente';
          for ( let r of rest ) {
             str = 'Area:' + r.area + '|--Estado:' + r.estado + '|--Cantidad:' + r.cantidad;
-            this.msgs.push( {
+            /* this.msgs.push( {
                                severity: 'info',
                                summary: '#',
                                detail: str
-                            } );
+                            } ); */
+            this._nav.setMesage(0, {severity: 'info', summary: '#',detail: str});
          }
          if ( rest.length === 0 ) {
             this.jobProjectionService.getConfirmProjection().subscribe( res => {
                this.msgs = [];
-               this.msgs.push( {
+               /* this.msgs.push( {
                                   severity: 'info',
                                   summary: 'Exito',
                                   detail: 'Proyección confirmada con exito'
-                               } );
+                               } ); */
+               this._nav.setMesage(0, {severity: 'info', summary: 'Exito',detail: 'Proyección confirmada con exito'});
             } );
          }
       } );

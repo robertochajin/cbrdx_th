@@ -9,7 +9,7 @@
     "build.dev": "gulp build.dev --color --env-config dev",
     "build.dev.watch": "gulp build.dev.watch --color",
     "build.e2e": "gulp build.e2e --color",
-    "build.prod": "gulp build.prod --color --env-config prod --build-type prod",
+    "build.prod": "gulp build.prod --env-config prod --build-type prod",
     "build.prod.exp": "gulp build.prod.aot --color --env-config prod --build-type prod",
     "build.prod.rollup.aot": "gulp build.prod.rollup.aot --color --env-config prod --build-type prod",
     "build.prod.aot": "gulp build.prod.aot --color --env-config prod --build-type prod",
@@ -26,7 +26,6 @@
     "postinstall": "gulp check.versions && gulp build.bundle.rxjs && npm prune && gulp webdriver && gulp print.banner",
     "reinstall": "npm cache clean && npm install",
     "serve.coverage": "gulp serve.coverage --color",
-    "serve.dev": "gulp serve.dev --color --env-config dev",
     "serve.dev": "gulp serve.dev --env-config dev",
     "serve.e2e": "gulp serve.e2e --color",
     "serve.prod": "gulp serve.prod --env-config prod --build-type prod",
@@ -132,7 +131,6 @@
     "typescript": "~2.0.9",
     "walk": "^2.3.9",
     "yargs": "^6.0.0"
-
   },
   "dependencies": {
     "@angular/common": "~2.4.0",
@@ -152,6 +150,7 @@
     "jquery": "^3.1.1",
     "moment": "^2.17.1",
     "ng-recaptcha": "^2.0.0",
+    "ng2-currency-mask": "^2.0.2",
     "ng2-translate": "^5.0.0",
     "primeng": "^2.0.6",
     "rxjs": "~5.0.3",

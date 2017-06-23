@@ -16,7 +16,7 @@
          <div class="row">
             <div class="col-md-9">
                <p-dropdown id="idCargo" name="idCargo" required="true"
-                           [options]="listPosition" [autoWidth]="false"
+                           [options]="listPosition" [autoWidth]="false" filter="filter"
                            [(ngModel)]="absence.idCargoRelacion" #idCargo="ngModel"
                ></p-dropdown>
                <div class="ui-message ui-messages-error ui-corner-all"

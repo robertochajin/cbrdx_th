@@ -4,20 +4,17 @@
   <div class="row">
 
     <div class="col-md-12">
-
-      <div class="header">
-        <h4 class="title">{{'EMPLOYEES.LBL_COLABORADORES' | translate}}</h4>
-      </div>
-
+<p-panel header="{{'EMPLOYEES.LBL_COLABORADORES' | translate}}">
       <div class="clearfix card-header">
         <div class="col-md-2">
-          <img class="img-circle img-responsive user-avatar"
-               src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg">
+			  <div class="thumbnail img-responsive">
+				  <img src="/assets/images/perfil/avatar.jpg" alt="...">
+			  </div>
         </div>
         <div class="col-md-8">
           <h2>{{employee.nombreCompleto}}</h2>
-			  <h4>{{employee.fechaNacimiento}} ({{employee.edad}})</h4>
-          <span>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</span><br />
+			  <h4>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</h4>
+          <span>{{employee.fechaNacimiento}} ({{employee.edad}})</span><br />
           <span>Cargo actual : {{employee.cargoActual}}</span><br />
 			  <span>Usuario desde : {{employee.fechaCreacion}}</span><br />
         </div>
@@ -25,6 +22,7 @@
           <!--<a href="#" class="btn btn-primary">{{'EMPLOYEES.LBL_HISTORIALABORAL' | translate}}</a>-->
         </div>
       </div>
+</p-panel>
 		<div id="infoEmploye" class="clearfix">
 
 
@@ -35,7 +33,7 @@
                   <p-accordionTab header="Datos Generales" [selected]="acordion == 0 || acordion == null ">
                     <form class="form-horizontal">
                       <fieldset>
-                        <div class="form-group">
+                        <div>
                           <div class="row">
                             <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_FECHAEXPEDICION' | translate}}:</label>
                             <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.fechaDocumento}}</strong></label>

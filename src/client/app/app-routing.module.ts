@@ -163,6 +163,10 @@ import { CentralRiskComponent } from './selection-process-risks/central-risk.com
 // hoja de vida
 import { EmployeesCurriculumVitaeComponent } from './employees/employees-curriculum-vitae.component';
 import { AdjuntosComponent } from './adjuntos/adjuntos.component';
+import { MedicalInstitutionsComponent } from './medical-institutions/medical-institutions.component';
+import { MedicalInstitutionAddComponent } from './medical-institutions/medical-institutions-add.component';
+import { MedicalInstitutionUpdateComponent } from './medical-institutions/medical-institutions-update.component';
+import { MedicalInstitutionDetailComponent } from './medical-institutions/medical-institutions-detail.component';
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
@@ -362,6 +366,11 @@ const routes = [
 
    // Administracion
    { path: 'menus', component: MenuManagerComponent, canActivate: [ AuthGuard ] },
+ // Intituciones medicas
+   { path: 'medical-institutions', component: MedicalInstitutionsComponent, canActivate: [ AuthGuard ] },
+   { path: 'medical-institutions/add', component: MedicalInstitutionAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'medical-institutions/update/:id', component: MedicalInstitutionUpdateComponent, canActivate: [ AuthGuard ] },
+   { path: 'medical-institutions/detail/:id', component: MedicalInstitutionDetailComponent, canActivate: [ AuthGuard ] },
 
    // Vacantes
    { path: 'vacancies', component: VacanciesComponent, canActivate: [ AuthGuard ] },
@@ -375,14 +384,14 @@ const routes = [
    { path: 'selection-process/active-publications', component: SelectionProcessVacanciesComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/publications-detail/:idPublication', component: VacancyDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'step-list', component: StepListComponent, canActivate: [ AuthGuard ] },
-   { path: 'add-step', component: StepEditComponent, canActivate: [ AuthGuard ] },
-   { path: 'update-step/:idStep', component: StepEditComponent, canActivate: [ AuthGuard ] },
-   { path: 'detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
-   { path: 'process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
-   { path: 'candidates-list/:idPublication', component: CandidatesComponent, canActivate: [ AuthGuard ] },
-   { path: 'process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso', component: CentralRiskComponent, canActivate: [ AuthGuard ] },
-   { path: 'candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CandidateRevisionComponent, canActivate: [ AuthGuard ] },
-   { path: 'process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/add-step', component: StepEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/update-step/:idStep', component: StepEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/candidates-list/:idPublication', component: CandidatesComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso', component: CentralRiskComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/process-step/candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CandidateRevisionComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
 ];
 
 @NgModule( {
