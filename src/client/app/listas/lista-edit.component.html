@@ -12,7 +12,7 @@
 								<p id="idLista">{{masterList.idLista}}</p>
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label class="control-label col-md-3" for="lista">{{ 'LISTAS.LBL_LISTA' | translate }}</label>
 							<div class="col-md-9">
@@ -87,7 +87,7 @@
 							</div>
 						</div>
 						<div class="form-group" [ngClass]="{ 'has-error':fd.submitted&&!item.valid}">
-							<label class="control-label col-md-3" for="item">{{ 'LISTAS.LBL_ITEMLISTA' | translate }}</label>
+							<label class="control-label col-md-3" for="item">{{ 'LBL_NOMBRE' | translate }}</label>
 							<div class="col-md-9">
 								<input class="form-control" id="item" name="item" type="text" pInputText
 								       [(ngModel)]="editableDetail.nombre" #item="ngModel" maxlength="100" required (keyup)="capitalize($event)"/>
@@ -179,7 +179,7 @@
 				<header>Listas</header>
 				<p-column field="idLista" header="{{ 'LBL_ID' | translate }}"></p-column>
 				<p-column field="codigo" header="{{ 'LBL_CODIGO' | translate }}"></p-column>
-				<p-column field="nombre" header="{{ 'LISTAS.LBL_ITEMLISTA' | translate }}"></p-column>
+				<p-column field="nombre" header="{{ 'LBL_NOMBRE' | translate }}"></p-column>
 				<p-column header="{{ 'LBL_ORDEN' | translate }}" styleClass="datatable-col-action">
 					<template let-qstn="rowData" pTemplate="body">
 						<div class="btn-group" role="group">

@@ -7,14 +7,15 @@
 				<h4>{{ 'USUARIOS.LBL_DATOSTERCERO' | translate }}</h4>
 				<div class="row">
 					<div class="col-md-2">
-						<img class="img-circle img-responsive user-avatar"
-							  src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-128.png">
+						<img class="thumbnail img-responsive"
+							  src="/assets/images/perfil/avatar.jpg">
 					</div>
 					<div class="col-md-10">
 						<h2>{{tercero.nombreCompleto}}</h2>
 						<h4>{{tercero.fechaNacimiento}} ({{tercero.edad}})</h4>
 						<span>{{tercero.tipoDocumento}} : {{tercero.numeroDocumento}}</span><br/>
 					</div>
+				</div>
 					<div class="row">
 						<div class="col-md-2">
 							<label>{{ 'LBL_GENERO' | translate }} :</label>
@@ -48,18 +49,19 @@
 							<p>{{tercero.telefonoFijo}}</p>
 						</div>
 					</div>
-
-					<div class="form-footer-buttons">
-
-						<label>{{ 'USUARIOS.LBL_EDITAINFOTERCERO' | translate }}</label><br/>
-						<button pButton type="button" icon="fa-pencil" label="Editar"></button>
-
+					<div class="row">
+						<div class="form-footer-buttons">
+							
+							<label>{{ 'USUARIOS.LBL_EDITAINFOTERCERO' | translate }}</label><br/>
+							<button pButton type="button" icon="fa-pencil" label="Editar"></button>
+						
+						</div>
 					</div>
+					
+				
 
-				</div>
 
 
-				<div class="row">
 
 					<h4>{{ 'USUARIOS.LBL_INFOCONTACTO' | translate }}</h4>
 
@@ -91,11 +93,13 @@
 								<p-checkbox [(ngModel)]="usuario.indicadorHabilitado" binary="true" disabled></p-checkbox>
 							</div>
 						</div>
-						<div class="form-footer-buttons">
-							<a (click)="goBack()" class="cancelar">{{ 'BTN_REGRESAR' | translate }}</a>
-						</div>
+					</div>
+				<div class="row">
+					<div class="form-footer-buttons">
+						<a (click)="goBack()" class="cancelar">{{ 'BTN_REGRESAR' | translate }}</a>
 					</div>
 				</div>
+
 
 			</p-tabPanel>
 			<p-tabPanel header="{{ 'USUARIOS.LBL_ROLESGRUPOS' | translate }}" leftIcon="fa-tags">

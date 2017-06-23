@@ -190,7 +190,7 @@
                   </div>
                   <div class="form-group col-md-6">
                      <label for="NGrhRactorTypes">{{'EMPLOYEES.LBL_FACTORRH' | translate}} </label>
-                     <p-dropdown id="NGrhRactorTypes" name="NGgenderTypes" required="true"
+                     <p-dropdown id="NGrhRactorTypes" name="NGrhRactorTypes" required="true"
                                  [options]="rhRactorTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idFactorRh"
                                  #NGrhRactorTypes="ngModel"
@@ -244,7 +244,7 @@
                   </div>
                </div>
                <div class="row">
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-12">
                      <label for="NGoccupationsTypes">{{'EMPLOYEES.LBL_TIPOOCUPACION' | translate}}</label>
                      <p-dropdown id="NGoccupationsTypes" name="NGoccupationsTypes" required="true"
                                  [options]="occupationsTypes" [autoWidth]="false"
@@ -257,7 +257,7 @@
                         {{'EMPLOYEES.LBL_TIPOOCUPACION' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
-                  <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 2">
+                  <div class="form-group col-md-12" *ngIf="employee.idTipoOcupacion == 2">
                      <label for="NGoccupations">{{'EMPLOYEES.LBL_OCUPACION' | translate}}</label>
                      <p-dropdown id="NGoccupations" name="NGoccupations" required="true" filter="filter"
                                  [options]="occupations" [autoWidth]="false"
@@ -317,17 +317,26 @@
                </div>
                <div class="row">
                   <div class="form-group col-md-3">
+                     <label for="indicador" class="control-label col-sm-3">{{'LBL_HABILITADO' | translate
+                        }}</label>
+                     <div class=" col-sm-9">
+                        <p-checkbox binary="true" id="indicador" name="indicador"
+                                    [(ngModel)]="employee.indicadorHabilitado"
+                                    #indicador="ngModel"></p-checkbox>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-group col-md-3">
                      <label for="Ngalive">{{'EMPLOYEES.LBL_VIVO' | translate}}</label>
                      <p-checkbox id="Ngalive" name="Ngalive" binary="true"
                                  [(ngModel)]="employee.indicadorVivo"
-                                 #Ngalive="ngModel"
-                     >
-                     </p-checkbox>
+                                 #Ngalive="ngModel"></p-checkbox>
                   </div>
                   <div class="form-group col-md-3" *ngIf="employee.indicadorVivo == false">
                      <label for="NGdeathDate">{{'EMPLOYEES.LBL_FECHADEFUNCION' | translate}}</label>
                      <p-calendar id="NGdeathDate" name="NGdeathDate" [locale]="es" [showIcon]="true"
-                                 [maxDate]="today" dateFormat="yy'-'mm'-'dd" readonlyInput="readonlyInput"
+                                 [maxDate]="today"  dateFormat="yy'-'mm'-'dd" readonlyInput="readonlyInput"
                                  dataType="date" #NGdeathDate="ngModel" [required]="!employee.indicadorVivo"
                                  [(ngModel)]="employee.fechaDefuncion" (onSelect)="onDeathDate($event)"
                      ></p-calendar>
@@ -336,16 +345,8 @@
                         {{'EMPLOYEES.LBL_FECHADEFUNCIONREQUERIDA' | translate}}
                      </div>
                   </div>
-	               <div class="form-group col-md-4">
-		               <label for="indicador" class="control-label col-sm-3">{{'LBL_HABILITADO' | translate
-			               }}</label>
-		               <div class=" col-sm-9">
-			               <p-checkbox binary="true" id="indicador" name="indicador"
-			                           [(ngModel)]="employee.indicadorHabilitado"
-			                           #indicador="ngModel"></p-checkbox>
-		               </div>
-	               </div>
                </div>
+
             </div>
             <div class="row form-footer-buttons">
                <div class="form-group col-md-12">

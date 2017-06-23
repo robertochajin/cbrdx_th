@@ -150,7 +150,6 @@ export class RiskComponent implements OnInit {
                                            accept: () => {
                                               this.guardando = true;
                                             let rk = this.listRisks.find(r=>r.idRiesgo===this.risk.idRiesgo && r.idCargo === this.risk.idCargo);
-                                            rk;
                                               if ( this.listRisks.filter( r => r.idRiesgo === this.risk.idRiesgo &&
                                                                                r.idCargo === this.risk.idCargo ).length > 0 ) {
                                                  // this.msgs[ 0 ] = { severity: 'error', summary: 'Error', detail: 'El riesgo ya
@@ -159,6 +158,7 @@ export class RiskComponent implements OnInit {
                                                                                                                        ' ya existe!' });
                                                  this.guardando = false;
                                               } else {
+                                                 this.risk.indicadorHabilitado = true;
                                                  this.riskService.add( this.risk )
                                                  .subscribe( data => {
                                                     this.msgsAlert = [];

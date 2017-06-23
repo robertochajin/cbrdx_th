@@ -1,380 +1,372 @@
 <p-messages [value]="msgs"></p-messages>
 <div class="row">
-	<div class="col-md-10 col-md-offset-1">
-		<p-accordion (onOpen)="onTabShow($event)" id="accordion">
-			<p-accordionTab header="{{ 'POSITION.LBL_IDENTIFICACION' | translate }}" [selected]="acordion == 0 || acordion == null "
-			                [disabled]="step ==1">
-				<fieldset>
-					<div *ngIf="position">
-						<div class="row-fluid">
-							<div class="col-md-12">
-								<form name="formulario" (ngSubmit)="f0.valid && onSubmit0()" #f0="ngForm" novalidate>
-									<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-										<div class="row">
-											<div class="form-group col-md-3">
-												<label for="codigo">* {{ 'POSITION.LBL_CODIGO' | translate }}</label>
-												<input type="text" pInputText id="codigo" name="codigo" maxlength="50"
-												       [(ngModel)]="position.codigoCargo" #codigo="ngModel" (keyup)="inputCleanUp($event.target.value)"
-												       (paste)="inputCleanUp($event.target.value)"
-												       required/>
-												<div class="ui-message ui-messages-error ui-corner-all"
-												     *ngIf="f0.submitted && !codigo.valid">
-													<i class="fa fa-close"></i>
-													{{ 'POSITION.LBL_CODIGO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-												</div>
-											</div>
-											<div class="form-group col-md-9">
-												<label for="nombre">* {{ 'POSITION.LBL_NOMBRE' | translate }}</label>
-												<input type="text" pInputText id="nombre" name="nombre"
-												       [(ngModel)]="position.cargo" #nombre="ngModel"
-												       (keyup)="capitalizeNombre()" maxlength="100"
-												       required/>
-												<div class="ui-message ui-messages-error ui-corner-all"
-												     *ngIf="f0.submitted && !nombre.valid">
-													<i class="fa fa-close"></i>
-													{{ 'POSITION.LBL_NOMBRE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="form-group col-md-6">
-												<label for="idEstructuraArea">* {{ 'POSITION.LBL_AREA' | translate }}</label>
-												<p-dropdown id="idEstructuraArea" name="idEstructuraArea" required="true"
-												            [options]="areaTypes" [autoWidth]="false" filter="filter"
-												            [(ngModel)]="position.idEstructuraArea"
-												            #idEstructuraArea="ngModel"
-												></p-dropdown>
-												<div class="ui-message ui-messages-error ui-corner-all"
-												     *ngIf="f0.submitted && !idEstructuraArea.valid">
-													<i class="fa fa-close"></i>
-													{{ 'POSITION.LBL_AREA' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-												
-												</div>
-											</div>
-											<div class="form-group col-md-6">
-												<label for="personaACargoDir">* {{ 'POSITION.LBL_PERSONASDIRECTAS' | translate }}</label>
-												<input type="text" pInputText id="personaACargoDir" name="personaACargoDir" type="text"
-												       [(ngModel)]="position.personaACargoDir" #personaACargoDir="ngModel" required
-												       (keyup)="inputNumber()"
-												       (paste)="inputNumber()" maxlength="4"
-												/>
-												<div class="ui-message ui-messages-error ui-corner-all"
-												     *ngIf="f0.submitted && !personaACargoDir.valid">
-													<i class="fa fa-close"></i>
-													{{ 'POSITION.LBL_PERSONASDIRECTAS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="form-group col-md-6">
-												<label for="idCargoJefe">{{ 'POSITION.LBL_CARGODEPENDE' | translate }}</label>
-												<p-dropdown id="idCargoJefe" name="idCargoJefe" filter="filter"
-												            [options]="bossPositionTypes" [autoWidth]="false"
-												            [(ngModel)]="position.idCargoJefe"
-												            #idCargoJefe="ngModel"
-												></p-dropdown>
-												<!--<div class="ui-message ui-messages-error ui-corner-all"
-													  *ngIf="f0.submitted && !idCargoJefe.valid">
-													<i class="fa fa-close"></i>
-													Cargo que depende es requerida
-												</div>-->
-											</div>
-											<div class="form-group col-md-6">
-												<label for="personaACargoInd">* {{ 'POSITION.LBL_PERSONASINDIRECTAS' | translate }}</label>
-												<input type="text" pInputText id="personaACargoInd" name="personaACargoInd" required
-												       [(ngModel)]="position.personaACargoInd" #personaACargoInd="ngModel" type="text"
-												       (keyup)="inputNumber()" (paste)="inputNumber()" maxlength="4"/>
-												<div class="ui-message ui-messages-error ui-corner-all"
-												     *ngIf="f0.submitted && !personaACargoInd.valid">
-													<i class="fa fa-close"></i>
-													{{ 'POSITION.LBL_PERSONASINDIRECTAS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class=" col-sm-12">
-												<label for="mision">* {{ 'POSITION.LBL_MISION' | translate }}</label>
-												<textarea pInputTextarea id="mision" name="mision"
-												          [(ngModel)]="position.mision" #mision="ngModel" maxlength="500"
-												          [required]="true"></textarea>
-												<div *ngIf="f0.submitted && !mision.valid"
-												     class="ui-message ui-messages-error ui-corner-all">
-													{{ 'POSITION.LBL_MISION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-												</div>
-											</div>
-										</div>
-										<div class="row" *ngIf="position.paso == 16">
-											<div class="form-group col-md-6">
-												<label for="idEstado">{{ 'LBL_ESTADO' | translate }}</label>
-												<p-dropdown id="idEstado" name="idEstado"
-												            [options]="stateTypes" [autoWidth]="false"
-												            [(ngModel)]="position.idEstado" disabled="true"
-												            #idEstado="ngModel"
-												></p-dropdown>
-												<!--disabled="true"<div class="ui-message ui-messages-error ui-corner-all"
-													  *ngIf="f0.submitted && !idEstado.valid">
-													<i class="fa fa-close"></i>
-													Estado es requerida
-												</div>-->
-											</div>
-											<div class="form-group col-md-3 col-sm-3">
-												<label for="indicador" class="control-label col-md-6 col-sm-6">{{ 'LBL_HABILITADO' | translate
-													}}</label>
-												<div class=" col-md-6">
-													<p-checkbox binary="true" id="indicador" name="indicador"
-													            [(ngModel)]="position.indicadorHabilitado" disabled="true"
-													            #indicador="ngModel"></p-checkbox>
-												</div>
-											</div>
-											<div class="form-group col-md-3">
-												<label for="indicadorzona" class="control-label col-md-6">{{ 'POSITION.LBL_ZONA' | translate }}</label>
-												<div class=" col-md-6">
-													<p-checkbox binary="true" id="indicadorzona" name="indicadorzona"
-													            [(ngModel)]="position.indicadorZona"
-													            #indicador="ngModel"></p-checkbox>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row form-footer-buttons">
-										<div class="form-group col-md-12">
-											<button icon="fa-arrow-right" label="{{ 'BTN_SIGUIENTE' | translate }}" type="submit"
-											        pButton></button>
-										</div>
-									</div>
-									<div class="row form-footer-buttons" *ngIf="position.paso === 16 && position.idEstado !== aprobado">
-										<div class="form-group col-md-12">
-											<button icon="fa-plus" label="{{ 'LBL_APROBAR' | translate }}" type="button"
-											        pButton (click)="updateEstado(aprobado)"></button>
-											<button icon="fa-plus" label="{{ 'LBL_NOAPROBAR' | translate }}" type="button"
-											        *ngIf="position.paso === 16 && position.idEstado !== noAprobado"
-											        pButton (click)="updateEstado(noAprobado)"></button>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-					<positions-observations-list
-						*ngIf="(position.idEstado == aprobado || position.idEstado == noAprobado) && position.idCargo > 0"
-						[position]="position"></positions-observations-list>
-				
-				
-				</fieldset>
-			</p-accordionTab>
-			
-			<p-accordionTab header="{{ 'POSITION.LBL_PRODUCTO' | translate }}" [selected]="acordion == 1"
-			                [disabled]="step == 1">
-				<evaluation-criterias (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></evaluation-criterias>
-			</p-accordionTab>
-			
-			<p-accordionTab header="Interrelaciones" [selected]="acordion == 2"
-			                [disabled]="step >0 && step <3">
-				<fieldset>
-					<div *ngIf="position">
-						<div class="row-fluid">
-							<div class="col-md-12">
-								<form name="formulario" (ngSubmit)="f2.valid && onSubmit2()" #f2="ngForm" novalidate>
-									<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-										<div class="row">
-											<div class=" col-sm-12">
-												<label for="interrelacionesInternas">{{ 'POSITION.LBL_INTERNAS' | translate }}</label>
-												<textarea pInputTextarea id="interrelacionesInternas" name="interrelacionesInternas"
-												          [(ngModel)]="position.interrelacionesInternas"
-												          #interrelacionesInternas="ngModel" maxlength="500"
-												          [required]="true"></textarea>
-												<div *ngIf="f2.submitted && !interrelacionesInternas.valid"
-												     class="ui-message ui-messages-error ui-corner-all">
-													{{ 'POSITION.LBL_INTERRELACIONES' | translate }} {{ 'POSITION.LBL_INTERNAS' | translate }} {{
-													'LBL_REQUERIDO' | translate }}
-												</div>
-											</div>
-											<div class=" col-sm-12">
-												<label for="interrelacionesInternas">{{ 'POSITION.LBL_EXTERNAS' | translate }}</label>
-												<textarea pInputTextarea id="interrelacionesExternas" name="interrelacionesExternas"
-												          [(ngModel)]="position.interrelacionesExternas"
-												          #interrelacionesExternas="ngModel" maxlength="500"
-												          [required]="true"></textarea>
-												<div *ngIf="f2.submitted && !interrelacionesExternas.valid"
-												     class="ui-message ui-messages-error ui-corner-all">
-													{{ 'POSITION.LBL_INTERRELACIONES' | translate }} {{ 'POSITION.LBL_EXTERNAS' | translate }} {{
-													'LBL_REQUERIDO' | translate }}
-												</div>
-											</div>
-										</div>
-									</div>
+   <div class="col-md-10 col-md-offset-1">
+      <p-accordion (onOpen)="onTabShow($event)" id="accordion">
+         <p-accordionTab header="{{ 'POSITION.LBL_IDENTIFICACION' | translate }}" [selected]="acordion == 0 || acordion == null " [disabled]="step ==1">
+            <fieldset>
+               <div *ngIf="position">
+                  <div class="row-fluid">
+                     <div class="col-md-12">
+                        <form name="formulario" (ngSubmit)="f0.valid && onSubmit0()" #f0="ngForm" novalidate>
+                           <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                              <div class="row">
+                                 <div class="form-group col-md-3">
+                                    <label for="codigo">* {{ 'POSITION.LBL_CODIGO' | translate }}</label>
+                                    <input type="text" pInputText id="codigo" name="codigo" maxlength="50"
+                                           [(ngModel)]="position.codigoCargo" #codigo="ngModel" (keyup)="inputCleanUp($event.target.value)"
+                                           (paste)="inputCleanUp($event.target.value)"
+                                           required/>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f0.submitted && !codigo.valid">
+                                       <i class="fa fa-close"></i>
+                                       {{ 'POSITION.LBL_CODIGO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+                                    </div>
+                                 </div>
+                                 <div class="form-group col-md-9">
+                                    <label for="nombre">* {{ 'POSITION.LBL_NOMBRE' | translate }}</label>
+                                    <input type="text" pInputText id="nombre" name="nombre"
+                                           [(ngModel)]="position.cargo" #nombre="ngModel"
+                                           (keyup) = "capitalizeNombre()" maxlength="100"
+                                           required/>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f0.submitted && !nombre.valid">
+                                       <i class="fa fa-close"></i>
+                                       {{ 'POSITION.LBL_NOMBRE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="form-group col-md-6">
+                                    <label for="idEstructuraArea">* {{ 'POSITION.LBL_AREA' | translate }}</label>
+                                    <p-dropdown id="idEstructuraArea" name="idEstructuraArea" required="true"
+                                                [options]="areaTypes" [autoWidth]="false" filter="filter"
+                                                [(ngModel)]="position.idEstructuraArea"
+                                                #idEstructuraArea="ngModel"
+                                    ></p-dropdown>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f0.submitted && !idEstructuraArea.valid">
+                                       <i class="fa fa-close"></i>
+                                          {{ 'POSITION.LBL_AREA' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+
+                                    </div>
+                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="personaACargoDir">* {{ 'POSITION.LBL_PERSONASDIRECTAS' | translate }}</label>
+                                    <input type="text" pInputText id="personaACargoDir" name="personaACargoDir" type="text"
+                                           [(ngModel)]="position.personaACargoDir" #personaACargoDir="ngModel" required (keyup)="inputNumber()"
+                                           (paste)="inputNumber()" maxlength="4"
+                                    />
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f0.submitted && !personaACargoDir.valid">
+                                       <i class="fa fa-close"></i>
+                                       {{ 'POSITION.LBL_PERSONASDIRECTAS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="form-group col-md-6">
+                                    <label for="idCargoJefe">{{ 'POSITION.LBL_CARGODEPENDE' | translate }}</label>
+                                    <p-dropdown id="idCargoJefe" name="idCargoJefe" filter="filter"
+                                                [options]="bossPositionTypes" [autoWidth]="false"
+                                                [(ngModel)]="position.idCargoJefe"
+                                                #idCargoJefe="ngModel"
+                                    ></p-dropdown>
+                                    <!--<div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f0.submitted && !idCargoJefe.valid">
+                                       <i class="fa fa-close"></i>
+                                       Cargo que depende es requerida
+                                    </div>-->
+                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="personaACargoInd">* {{ 'POSITION.LBL_PERSONASINDIRECTAS' | translate }}</label>
+                                    <input type="text" pInputText id="personaACargoInd" name="personaACargoInd" required
+                                           [(ngModel)]="position.personaACargoInd" #personaACargoInd="ngModel" type="text"
+                                           (keyup)="inputNumber()" (paste)="inputNumber()" maxlength="4"  />
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f0.submitted && !personaACargoInd.valid">
+                                       <i class="fa fa-close"></i>
+                                       {{ 'POSITION.LBL_PERSONASINDIRECTAS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class=" col-sm-12">
+                                    <label for="mision">* {{ 'POSITION.LBL_MISION' | translate }}</label>
+                                    <textarea pInputTextarea id="mision" name="mision"
+                                              [(ngModel)]="position.mision" #mision="ngModel" maxlength="500"
+                                              [required]="true"></textarea>
+                                    <div *ngIf="f0.submitted && !mision.valid"
+                                         class="ui-message ui-messages-error ui-corner-all">
+                                       {{ 'POSITION.LBL_MISION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row" *ngIf="position.paso == 16">
+                                 <div class="form-group col-md-6">
+                                    <label for="idEstado">{{ 'LBL_ESTADO' | translate }}</label>
+                                    <p-dropdown id="idEstado" name="idEstado"
+                                                [options]="stateTypes" [autoWidth]="false"
+                                                [(ngModel)]="position.idEstado" disabled="true"
+                                                #idEstado="ngModel"
+                                    ></p-dropdown>
+                                    <!--disabled="true"<div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f0.submitted && !idEstado.valid">
+                                       <i class="fa fa-close"></i>
+                                       Estado es requerida
+                                    </div>-->
+                                 </div>
+                                 <div class="form-group col-md-3 col-sm-3">
+                                    <label for="indicador" class="control-label col-md-6 col-sm-6">{{ 'LBL_HABILITADO' | translate }}</label>
+                                    <div class=" col-md-6">
+                                       <p-checkbox binary="true" id="indicador" name="indicador"
+                                                   [(ngModel)]="position.indicadorHabilitado" disabled="true"
+                                                   #indicador="ngModel"></p-checkbox>
+                                    </div>
+                                 </div>
+	                              <div class="form-group col-md-3">
+		                              <label for="indicadorzona" class="control-label col-md-6">{{ 'POSITION.LBL_ZONA' | translate }}</label>
+		                              <div class=" col-md-6">
+			                              <p-checkbox binary="true" id="indicadorzona" name="indicadorzona"
+			                                          [(ngModel)]="position.indicadorZona"
+			                                          #indicador="ngModel"></p-checkbox>
+		                              </div>
+	                              </div>
+                              </div>
+                           </div>
+                           <div class="row form-footer-buttons">
+                              <div class="form-group col-md-12">
+                                 <button icon="fa-arrow-right" label="{{ 'BTN_SIGUIENTE' | translate }}" type="submit"
+                                         pButton></button>
+                              </div>
+                           </div>
+                           <div class="row form-footer-buttons" *ngIf="position.paso === 16 && position.idEstado !== aprobado">
+                              <div class="form-group col-md-12">
+                                 <button icon="fa-plus" label="{{ 'LBL_APROBAR' | translate }}" type="button"
+                                         pButton (click)="updateEstado(aprobado)"></button>
+                                 <button icon="fa-plus" label="{{ 'LBL_NOAPROBAR' | translate }}" type="button"
+                                         *ngIf="position.paso === 16 && position.idEstado !== noAprobado"
+                                         pButton (click)="updateEstado(noAprobado)"></button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+               <positions-observations-list *ngIf="(position.idEstado == aprobado || position.idEstado == noAprobado) && position.idCargo > 0" [position]="position"></positions-observations-list>
+
+
+            </fieldset>
+         </p-accordionTab>
+
+         <p-accordionTab header="{{ 'POSITION.LBL_PRODUCTO' | translate }}" [selected]="acordion == 1"
+                         [disabled]="step == 1">
+               <evaluation-criterias (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></evaluation-criterias>
+         </p-accordionTab>
+
+         <p-accordionTab header="Interrelaciones" [selected]="acordion == 2"
+                         [disabled]="step >0 && step <3">
+            <fieldset>
+               <div *ngIf="position">
+                  <div class="row-fluid">
+                     <div class="col-md-12">
+                        <form name="formulario" (ngSubmit)="f2.valid && onSubmit2()" #f2="ngForm" novalidate>
+                           <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                              <div class="row">
+                                 <div class=" col-sm-12">
+                                    <label for="interrelacionesInternas">{{ 'POSITION.LBL_INTERNAS' | translate }}</label>
+                                    <textarea pInputTextarea id="interrelacionesInternas" name="interrelacionesInternas"
+                                              [(ngModel)]="position.interrelacionesInternas"
+                                              #interrelacionesInternas="ngModel" maxlength="500"
+                                              [required]="true"></textarea>
+                                    <div *ngIf="f2.submitted && !interrelacionesInternas.valid"
+                                         class="ui-message ui-messages-error ui-corner-all">
+                                       {{ 'POSITION.LBL_INTERRELACIONES' | translate }} {{ 'POSITION.LBL_INTERNAS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+                                    </div>
+                                 </div>
+                                 <div class=" col-sm-12">
+                                    <label for="interrelacionesInternas">{{ 'POSITION.LBL_EXTERNAS' | translate }}</label>
+                                    <textarea pInputTextarea id="interrelacionesExternas" name="interrelacionesExternas"
+                                              [(ngModel)]="position.interrelacionesExternas"
+                                              #interrelacionesExternas="ngModel" maxlength="500"
+                                              [required]="true"></textarea>
+                                    <div *ngIf="f2.submitted && !interrelacionesExternas.valid"
+                                         class="ui-message ui-messages-error ui-corner-all">
+                                       {{ 'POSITION.LBL_INTERRELACIONES' | translate }} {{ 'POSITION.LBL_EXTERNAS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
 									<div class="row form-footer-buttons">
 										<div class="form-group col-md-12">
 											<button icon="fa-arrow-right" label=" {{ 'BTN_SIGUIENTE' | translate }}" type="submit"
-											        pButton></button>
+													  pButton></button>
 										</div>
 									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				
-				</fieldset>
-			</p-accordionTab>
-			
-			<p-accordionTab header="{{ 'POSITION.LBL_ROLDENTRO' | translate }}" [selected]="acordion == 3"
-			                [disabled]="step >0 && step < 4">
-				<position-roles (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-roles>
-			</p-accordionTab>
-			
-			<p-accordionTab header="{{ 'POSITION.LBL_RESPONSABILIDADESPRINCIPALES' | translate }}" [selected]="acordion == 4"
-			                [disabled]="step >0 && step <5">
-				<position-responsabilities (nextStep)="nextStep($event)" *ngIf="position.idCargo"
-				                           [position]="position"></position-responsabilities>
-			</p-accordionTab>
-			
-			<p-accordionTab header="{{ 'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' | translate }}" [selected]="acordion == 5"
-			                [disabled]="step >0 && step <6">
-				<fieldset>
-					<div *ngIf="position">
-						<div class="row-fluid">
-							<div class="col-md-12">
-								<form name="formulario" (ngSubmit)="f5.valid && onSubmit5()" #f5="ngForm" novalidate>
-									<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-										
-										<div class="row">
-											<div class=" col-sm-12">
-												<label for="responsabilidadesAd">* {{ 'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' | translate
-													}}</label>
-												<textarea pInputTextarea id="responsabilidadesAd"
-												          name="responsabilidadesAd" maxlength="500"
-												          [(ngModel)]="position.responsabilidadesAd"
-												          #responsabilidadesAd="ngModel"
-												          [required]="true"></textarea>
-												<div *ngIf="f5.submitted && !responsabilidadesAd.valid"
-												     class="ui-message ui-messages-error ui-corner-all">
-													{{ 'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row form-footer-buttons">
-										<div class="form-group col-md-12">
-											<button icon="fa-arrow-right" label=" {{ 'BTN_SIGUIENTE' | translate }}" type="submit"
-											        pButton></button>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				
-				</fieldset>
-			</p-accordionTab>
-			
-			<p-accordionTab header="{{ 'POSITION.LBL_POSICION' | translate }}" [selected]="acordion == 6"
-			                [disabled]="step >0 && step <7">
-				<position-absence (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-absence>
-			</p-accordionTab>
-			
-			<p-accordionTab header="{{ 'POSITION.LBL_AUTORIDADES' | translate }}" [selected]="acordion == 7"
-			                [disabled]="step >0 && step <8">
-				<fieldset>
-					<div *ngIf="position">
-						<div class="row-fluid">
-							<div class="col-md-12">
-								<form name="formulario" (ngSubmit)="f7.valid && onSubmit7()" #f7="ngForm" novalidate>
-									<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-										<div class="row">
-											<div class="form-group col-md-12">
-												<label for="tomaDecisiones">* ¿{{ 'POSITION.LBL_DECISIONES' | translate }}? </label>
-												<textarea pInputTextarea id="tomaDecisiones" name="tomaDecisiones" maxlength="500"
-												          [(ngModel)]="position.tomaDecisiones"
-												          #tomaDecisiones="ngModel"
-												          [required]="true"></textarea>
-												
-												
-												<!--<input type="text" pInputText id="tomaDecisiones" name="tomaDecisiones"-->
-												<!--[(ngModel)]="position.tomaDecisiones" #tomaDecisiones="ngModel"-->
-												<!--required/>-->
-												<div class="ui-message ui-messages-error ui-corner-all"
-												     *ngIf="f7.submitted && !tomaDecisiones.valid">
-													<i class="fa fa-close"></i>
-													{{ 'POSITION.LBL_DESICIONES' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class=" col-sm-12">
-												<label for="actividadesSupervisa">* {{ 'POSITION.LBL_ACTIVIDADES' | translate }}</label>
-												<textarea pInputTextarea id="actividadesSupervisa"
-												          name="responsabilidadesAd" maxlength="500"
-												          [(ngModel)]="position.actividadesSupervisa"
-												          #actividadesSupervisa="ngModel"
-												          [required]="true"></textarea>
-												<div class="ui-message ui-messages-error ui-corner-all"
-												     *ngIf="f7.submitted && !actividadesSupervisa.valid">
-													<i class="fa fa-close"></i>
-													{{ 'POSITION.LBL_ACTIVIDADES' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-												</div>
-											</div>
-										</div>
-									</div>
-									<position-authorities *ngIf="position.idCargo" [position]="position"></position-authorities>
-									<div class="row">
-										<div class="form-group">
-											<div class="col-md-10">
-											</div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+
+            </fieldset>
+         </p-accordionTab>
+
+         <p-accordionTab header="{{ 'POSITION.LBL_ROLDENTRO' | translate }}" [selected]="acordion == 3"
+                         [disabled]="step >0 && step < 4">
+            <position-roles (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-roles>
+         </p-accordionTab>
+
+         <p-accordionTab header="{{ 'POSITION.LBL_RESPONSABILIDADESPRINCIPALES' | translate }}" [selected]="acordion == 4"
+                         [disabled]="step >0 && step <5">
+            <position-responsabilities (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-responsabilities>
+         </p-accordionTab>
+
+         <p-accordionTab header="{{ 'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' | translate }}" [selected]="acordion == 5"
+                         [disabled]="step >0 && step <6">
+            <fieldset>
+               <div *ngIf="position">
+                  <div class="row-fluid">
+                     <div class="col-md-12">
+                        <form name="formulario" (ngSubmit)="f5.valid && onSubmit5()" #f5="ngForm" novalidate>
+                           <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+
+                              <div class="row">
+                                 <div class=" col-sm-12">
+                                    <label for="responsabilidadesAd">* {{ 'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' | translate
+	                                    }}</label>
+                                    <textarea pInputTextarea id="responsabilidadesAd"
+                                              name="responsabilidadesAd" maxlength="500"
+                                              [(ngModel)]="position.responsabilidadesAd"
+                                              #responsabilidadesAd="ngModel"
+                                              [required]="true"></textarea>
+                                    <div *ngIf="f5.submitted && !responsabilidadesAd.valid"
+                                          class="ui-message ui-messages-error ui-corner-all">
+                                       {{ 'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row form-footer-buttons">
+                              <div class="form-group col-md-12">
+                                 <button icon="fa-arrow-right" label=" {{ 'BTN_SIGUIENTE' | translate }}" type="submit"
+                                         pButton></button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+
+            </fieldset>
+         </p-accordionTab>
+
+         <p-accordionTab header="{{ 'POSITION.LBL_POSICION' | translate }}" [selected]="acordion == 6"
+                         [disabled]="step >0 && step <7">
+            <position-absence (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-absence>
+         </p-accordionTab>
+
+         <p-accordionTab header="{{ 'POSITION.LBL_AUTORIDADES' | translate }}" [selected]="acordion == 7"
+                         [disabled]="step >0 && step <8">
+            <fieldset>
+               <div *ngIf="position">
+                  <div class="row-fluid">
+                     <div class="col-md-12">
+                        <form name="formulario" (ngSubmit)="f7.valid && onSubmit7()" #f7="ngForm" novalidate>
+                           <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                              <div class="row">
+                                 <div class="form-group col-md-12">
+                                    <label for="tomaDecisiones">* ¿{{ 'POSITION.LBL_DECISIONES' | translate }}? </label>
+                                    <textarea pInputTextarea id="tomaDecisiones" name="tomaDecisiones" maxlength="500"
+                                              [(ngModel)]="position.tomaDecisiones"
+                                              #tomaDecisiones="ngModel"
+                                              [required]="true"></textarea>
+
+
+                                    <!--<input type="text" pInputText id="tomaDecisiones" name="tomaDecisiones"-->
+                                           <!--[(ngModel)]="position.tomaDecisiones" #tomaDecisiones="ngModel"-->
+                                           <!--required/>-->
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f7.submitted && !tomaDecisiones.valid">
+                                       <i class="fa fa-close"></i>
+                                       {{ 'POSITION.LBL_DESICIONES' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class=" col-sm-12">
+                                    <label for="actividadesSupervisa">* {{ 'POSITION.LBL_ACTIVIDADES' | translate }}</label>
+                                    <textarea pInputTextarea id="actividadesSupervisa"
+                                              name="responsabilidadesAd" maxlength="500"
+                                              [(ngModel)]="position.actividadesSupervisa"
+                                              #actividadesSupervisa="ngModel"
+                                              [required]="true"></textarea>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f7.submitted && !actividadesSupervisa.valid">
+                                       <i class="fa fa-close"></i>
+                                       {{ 'POSITION.LBL_ACTIVIDADES' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <position-authorities *ngIf="position.idCargo" [position]="position"></position-authorities>
+                           <div class="row">
+                              <div class="form-group">
+                                 <div class="col-md-10">
+                                 </div>
 											<div class="row form-footer-buttons">
 												<div class="form-group col-md-12">
 													<button icon="fa-arrow-right" label="{{ 'BTN_SIGUIENTE' | translate }}" type="submit"
-													        pButton></button>
+															  pButton></button>
 												</div>
 											</div>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</fieldset>
-			
-			</p-accordionTab>
-			
-			<p-accordionTab header="{{ 'POSITION.LBL_REQUISITOS' | translate }}" [selected]="acordion == 8"
-			                [disabled]="step >0 && step <9">
-				<fieldset>
-					<div *ngIf="position">
-						<div class="row-fluid">
-							<div class="col-md-12">
-								<form name="formulario" (ngSubmit)="f8.valid &&validarOcupaciones()" #f8="ngForm" novalidate>
-									<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-										
-										<div class="row">
-											<div class=" col-sm-12">
-												<label for="interrelacionesInternas">* ¿{{ 'POSITION.LBL_CONOCIMIENTO' | translate }}?</label>
-												<textarea pInputTextarea id="conocimientosBasicos" name="conocimientosBasicos"
-												          [(ngModel)]="position.conocimientosBasicos"
-												          #conocimientosBasicos="ngModel" maxlength="200"
-												          [required]="true"></textarea>
-												<div *ngIf="f8.submitted && !conocimientosBasicos.valid"
-												     class="ui-message ui-messages-error ui-corner-all">
-													{{ 'POSITION.LBL_CONOCIMIENTO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-12">
-												<label for="tiempoExperiencia">* {{ 'POSITION.LBL_EXPERIENCIA' | translate }}</label>
-												<input type="text" pInputText id="tiempoExperiencia" name="tiempoExperiencia" maxlength="200"
-												       [(ngModel)]="position.tiempoExperiencia" #tiempoExperiencia="ngModel" required
-												/>
-												<div *ngIf="f8.submitted && !tiempoExperiencia.valid"
-												     class="ui-message ui-messages-error ui-corner-all">
-													{{ 'POSITION.LBL_EXPERIENCIA' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class=" col-sm-12">
-												<label for="otrosRequisitos">{{ 'POSITION.LBL_OTROSREQUISITOS' | translate }}</label>
-												<textarea pInputTextarea id="otrosRequisitos" name="otrosRequisitos"
-												          [(ngModel)]="position.otrosRequisitos" #otrosRequisitos="ngModel" maxlength="200">
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </fieldset>
+
+         </p-accordionTab>
+
+         <p-accordionTab header="{{ 'POSITION.LBL_REQUISITOS' | translate }}" [selected]="acordion == 8"
+                         [disabled]="step >0 && step <9">
+            <fieldset>
+               <div *ngIf="position">
+                  <div class="row-fluid">
+                     <div class="col-md-12">
+                        <form name="formulario" (ngSubmit)="f8.valid &&validarOcupaciones()" #f8="ngForm" novalidate>
+                           <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+
+                              <div class="row">
+                                 <div class=" col-sm-12">
+                                    <label for="interrelacionesInternas">* ¿{{ 'POSITION.LBL_CONOCIMIENTO' | translate }}?</label>
+                                    <textarea pInputTextarea id="conocimientosBasicos" name="conocimientosBasicos"
+                                              [(ngModel)]="position.conocimientosBasicos"
+                                              #conocimientosBasicos="ngModel" maxlength="200"
+                                              [required]="true"></textarea>
+                                    <div *ngIf="f8.submitted && !conocimientosBasicos.valid"
+                                         class="ui-message ui-messages-error ui-corner-all">
+                                       {{ 'POSITION.LBL_CONOCIMIENTO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-md-12">
+                                    <label for="tiempoExperiencia">* {{ 'POSITION.LBL_EXPERIENCIA' | translate }}</label>
+                                    <input type="text" pInputText id="tiempoExperiencia" name="tiempoExperiencia" maxlength="200"
+                                           [(ngModel)]="position.tiempoExperiencia" #tiempoExperiencia="ngModel" required
+                                    />
+                                    <div *ngIf="f8.submitted && !tiempoExperiencia.valid"
+                                         class="ui-message ui-messages-error ui-corner-all">
+                                       {{ 'POSITION.LBL_EXPERIENCIA' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class=" col-sm-12">
+                                    <label for="otrosRequisitos">{{ 'POSITION.LBL_OTROSREQUISITOS' | translate }}</label>
+                                    <textarea pInputTextarea id="otrosRequisitos" name="otrosRequisitos"
+                                              [(ngModel)]="position.otrosRequisitos" #otrosRequisitos="ngModel" maxlength="200">
                                     </textarea>
 											</div>
 										</div>
@@ -446,142 +438,140 @@
 										<div class="row form-footer-buttons">
 											<div class="form-group col-md-12">
 												<button icon="fa-arrow-right" label="{{ 'BTN_SIGUIENTE' | translate }}" type="submit"
-												        pButton></button>
+														  pButton></button>
 											</div>
 										</div>
-									</div>
-									<!--<div class="row form-footer-buttons">
-										<div class="form-group col-md-12">
-											<button icon="fa-arrow-right" label="Siguiente" type="submit"
-													  pButton></button>
-										</div>
-									</div>-->
-								</form>
-							</div>
-						</div>
-					</div>
-				
-				</fieldset>
-			</p-accordionTab>
-			
-			<p-accordionTab header="{{ 'POSITION.LBL_COMPETENCIAS' | translate }}" [selected]="acordion == 9"
-			                [disabled]="step >0 && step <10">
-				<position-competencies (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-competencies>
-			</p-accordionTab>
-			
-			<p-accordionTab header="{{ 'POSITION.LBL_ACTIVOS' | translate }}" [selected]="acordion == 10"
-			                [disabled]="step >0 && step <11">
-				<company-assets (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></company-assets>
-			</p-accordionTab>
-			
-			<p-accordionTab header="{{ 'POSITION.LBL_PRODUCTIVIDAD' | translate }}" [selected]="acordion == 11"
-			                [disabled]="step >0 && step <12">
-				<productivity-component (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></productivity-component>
-			</p-accordionTab>
-			
-			<p-accordionTab header="{{ 'POSITION.LBL_PERSONALIDAD' | translate }}" [selected]="acordion == 12"
-			                [disabled]="step >0 && step <13">
-				<personality-component (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></personality-component>
-			</p-accordionTab>
-			
-			<p-accordionTab header="{{ 'POSITION.LBL_FACTORES' | translate }}" [selected]="acordion == 13"
-			                [disabled]="step >0 && step <14">
-				<position-risks (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-risks>
-			</p-accordionTab>
-			
-			<p-accordionTab header="{{ 'POSITION.LBL_VALORACION' | translate }}" [selected]="acordion == 14"
-			                [disabled]="step >0 && step <15">
-				<fieldset>
-					<div *ngIf="position">
-						<div class="row-fluid">
-							<div class="col-md-12">
-								<form name="formulario" (ngSubmit)="f14.valid && onSubmit14()" #f14="ngForm" novalidate>
-									<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-										<div class="row">
-											<div class="form-group col-md-3">
-												<label for="puntos">* {{ 'POSITION.LBL_PUNTOS' | translate }}</label>
-												<input pInputText id="puntos" name="puntos" type="number" min="0"
-												       [(ngModel)]="position.puntos" #puntos="ngModel"
-												       (change)="getCategory()"
-												       required/>
-												<div class="ui-message ui-messages-error ui-corner-all"
-												     *ngIf="f14.submitted && !puntos.valid">
-													<i class="fa fa-close"></i>
-													{{'POSITION.LBL_PUNTOS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-												</div>
-											</div>
-										
-										</div>
-										<div class="row">
-											<div class="form-group col-md-9">
-												<label for="idCategory">{{'POSITION.LBL_CATEGORIA' | translate }}</label>
-												<p-dropdown id="idCategory" name="idCategory"
-												            [options]="categoryTypes" [autoWidth]="false"
-												            [(ngModel)]="position.idCategoria"
-												            disabled="true"
-												            #idCategory="ngModel"
-												></p-dropdown>
-												<!--<div class="ui-message ui-messages-error ui-corner-all"
-													  *ngIf="f14.submitted && !idCategory.valid">
-													<i class="fa fa-close"></i>
-													Categoria requerida
-												</div>-->
-											</div>
-											<div class="form-group col-md-3">
-												<label for="idNivelEducacion">{{'POSITION.LBL_NIVELCARGO' | translate }}</label>
-												<input type="text" pInputText id="idNivelEducacion" name="idNivelEducacion"
-												       [(ngModel)]="nivel" #idNivelEducacion="ngModel"
-												       disabled="true"
-												/>
-											</div>
-										</div>
-										<div class="row">
-											<div class="form-group col-md-8">
-												<label for="salario">{{'POSITION.LBL_SALARIO' | translate }}</label>
-												<input type="text" pInputText id="salario" name="salario" required
-												       [(ngModel)]="position.salario" #salario="ngModel" (keyup)="salario"
-												       currencyMask
-												       [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
-												/>
-												<div class="ui-message ui-messages-error ui-corner-all"
-												     *ngIf="f14.submitted && !salario.valid">
-													<i class="fa fa-close"></i>
-													{{'POSITION.LBL_SALARIO' | translate }} {{'LBL_REQUERIDO' | translate }}
-												</div>
-											</div>
-											<div class="ui-grid-col-4"><br>
-												<label for="indicadorRequiereFormacion">{{'POSITION.LBL_REQUIERE' | translate }}</label>
-												<p-checkbox id="indicadorRequiereFormacion" name="indicadorRequiereFormacion"
-												            [(ngModel)]="position.indicadorRequiereFormacion" binary="true"></p-checkbox>
-											</div>
-										</div>
-									</div>
-									<div class="row form-footer-buttons">
-										<div class="form-group col-md-12">
-											<button icon="fa-arrow-right" label="{{'BTN_SIGUIENTE' | translate }}" type="submit"
-											        pButton></button>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				
-				</fieldset>
-			</p-accordionTab>
-			
-			<p-accordionTab header="{{'POSITION.LBL_RElACION' | translate }}" [selected]="acordion == 15"
-			                [disabled]="step >0 && step <16">
-				<p-tree [value]="treeArrray" layout="horizontal" selectionMode="single" [(selection)]="selectedNode"></p-tree>
-				<div class="row form-footer-buttons">
-					<div class="form-group col-md-12">
-						<button icon="fa-arrow-up" label="Volver Arriba" type="button" (click)="firstStep()"
-						        pButton></button>
-					</div>
-				</div>
-			</p-accordionTab>
-		
-		</p-accordion>
-	
-	</div>
+                           </div>
+                           <!--<div class="row form-footer-buttons">
+                              <div class="form-group col-md-12">
+                                 <button icon="fa-arrow-right" label="Siguiente" type="submit"
+                                         pButton></button>
+                              </div>
+                           </div>-->
+                        </form>
+                     </div>
+                  </div>
+               </div>
+
+            </fieldset>
+         </p-accordionTab>
+
+         <p-accordionTab header="{{ 'POSITION.LBL_COMPETENCIAS' | translate }}" [selected]="acordion == 9"
+                         [disabled]="step >0 && step <10">
+            <position-competencies (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-competencies>
+         </p-accordionTab>
+
+         <p-accordionTab header="{{ 'POSITION.LBL_ACTIVOS' | translate }}" [selected]="acordion == 10"
+                         [disabled]="step >0 && step <11">
+            <company-assets (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></company-assets>
+         </p-accordionTab>
+
+         <p-accordionTab header="{{ 'POSITION.LBL_PRODUCTIVIDAD' | translate }}" [selected]="acordion == 11"
+                         [disabled]="step >0 && step <12">
+            <productivity-component (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></productivity-component>
+         </p-accordionTab>
+
+         <p-accordionTab header="{{ 'POSITION.LBL_PERSONALIDAD' | translate }}" [selected]="acordion == 12"
+                         [disabled]="step >0 && step <13">
+            <personality-component  (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></personality-component>
+         </p-accordionTab>
+
+         <p-accordionTab header="{{ 'POSITION.LBL_FACTORES' | translate }}" [selected]="acordion == 13"
+                         [disabled]="step >0 && step <14">
+            <position-risks (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-risks>
+         </p-accordionTab>
+
+         <p-accordionTab header="{{ 'POSITION.LBL_VALORACION' | translate }}" [selected]="acordion == 14"
+                         [disabled]="step >0 && step <15">
+            <fieldset>
+               <div *ngIf="position">
+                  <div class="row-fluid">
+                     <div class="col-md-12">
+                        <form name="formulario" (ngSubmit)="f14.valid && onSubmit14()" #f14="ngForm" novalidate>
+                           <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                              <div class="row">
+                                 <div class="form-group col-md-3">
+                                    <label for="puntos">* {{ 'POSITION.LBL_PUNTOS' | translate }}</label>
+                                    <input pInputText id="puntos" name="puntos" type="number" min="0"
+                                           [(ngModel)]="position.puntos" #puntos="ngModel"
+                                           (change)="getCategory()"
+                                           required/>
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f14.submitted && !puntos.valid">
+                                       <i class="fa fa-close"></i>
+                                       {{'POSITION.LBL_PUNTOS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+                                    </div>
+                                 </div>
+
+                              </div>
+                              <div class="row">
+                                 <div class="form-group col-md-9">
+                                    <label for="idCategory">{{'POSITION.LBL_CATEGORIA' | translate }}</label>
+                                    <p-dropdown id="idCategory" name="idCategory"
+                                                [options]="categoryTypes" [autoWidth]="false"
+                                                [(ngModel)]="position.idCategoria"
+                                                disabled="true"
+                                                #idCategory="ngModel"
+                                    ></p-dropdown>
+                                    <!--<div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f14.submitted && !idCategory.valid">
+                                       <i class="fa fa-close"></i>
+                                       Categoria requerida
+                                    </div>-->
+                                 </div>
+                                 <div class="form-group col-md-3">
+                                    <label for="idNivelEducacion">{{'POSITION.LBL_NIVELCARGO' | translate }}</label>
+                                    <input type="text" pInputText id="idNivelEducacion" name="idNivelEducacion"
+                                           [(ngModel)]="nivel" #idNivelEducacion="ngModel"
+                                           disabled="true"
+                                    />
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="form-group col-md-8">
+                                    <label for="salario">{{'POSITION.LBL_SALARIO' | translate }}</label>
+                                    <input type="text" pInputText id="salario" name="salario" required
+                                           [(ngModel)]="position.salario" #salario="ngModel" (keyup)="salario"
+														 currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
+                                    />
+                                    <div class="ui-message ui-messages-error ui-corner-all"
+                                         *ngIf="f14.submitted && !salario.valid">
+                                       <i class="fa fa-close"></i>
+                                      {{'POSITION.LBL_SALARIO' | translate }} {{'LBL_REQUERIDO' | translate }}
+                                    </div>
+                                 </div>
+                                 <div class="ui-grid-col-4" ><br>
+                                    <label for="indicadorRequiereFormacion">{{'POSITION.LBL_REQUIERE' | translate }}</label>
+                                    <p-checkbox id="indicadorRequiereFormacion" name="indicadorRequiereFormacion" [(ngModel)]="position.indicadorRequiereFormacion" binary="true"  ></p-checkbox>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row form-footer-buttons">
+                              <div class="form-group col-md-12">
+                                 <button icon="fa-arrow-right" label="{{'BTN_SIGUIENTE' | translate }}" type="submit"
+                                         pButton></button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+
+            </fieldset>
+         </p-accordionTab>
+
+         <p-accordionTab header="{{'POSITION.LBL_RElACION' | translate }}" [selected]="acordion == 15"
+                         [disabled]="step >0 && step <16">
+            <p-tree [value]="treeArrray" layout="horizontal" selectionMode="single" [(selection)]="selectedNode" ></p-tree>
+            <div class="row form-footer-buttons">
+               <div class="form-group col-md-12">
+                  <button icon="fa-arrow-up" label="Volver Arriba" type="button" (click)="firstStep()"
+                          pButton></button>
+               </div>
+            </div>
+         </p-accordionTab>
+
+      </p-accordion>
+
+   </div>
 </div>

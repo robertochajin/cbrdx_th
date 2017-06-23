@@ -50,7 +50,7 @@
                             <label for="sectorEmpresa">* {{'EMPLOYEES.LBL_SECTOR' | translate }} {{'EMPLOYEES.LBL_EMPRESA' | translate
 	                            }}</label>
                             <p-dropdown name="sectorEmpresa" id="sectorEmpresa"  required="true" [autoWidth]="false"
-                                        [(ngModel)]="experience.idSectorEmpresa"
+                                        [(ngModel)]="experience.idSectorEmpresa" filter="filter"
                                         [options]="sector" #sectorEmpresa="ngModel"
                                         (onChange)="updateActivities($event.value)"
                             ></p-dropdown>

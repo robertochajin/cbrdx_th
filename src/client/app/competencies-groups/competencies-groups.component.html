@@ -89,7 +89,7 @@
 									<div class="form-group col-md-10">
 										<label for="cNombre">* {{'COMPETENCIES.LBL_COMPETENCIA' | translate }}/ {{'COMPETENCIES.LBL_HABILIDAD' |
 											translate }}</label>
-										<div *ngIf="!competencie.idCompetencia">
+										<div>
 											<input type="text" pInputText id="cNombre" name="cNombre"
 											       [(ngModel)]="competencie.competencia" #cNombre="ngModel"
 											       required (keyup)="capitalizec()" maxlength="64"/>
@@ -100,9 +100,9 @@
 												{{'LBL_REQUERIDO' | translate }}
 											</div>
 										</div>
-										<div *ngIf="competencie.idCompetencia">
-											<p> <strong>{{competencie.competencia}}</strong></p>
-										</div>
+										<!--<div *ngIf="competencie.idCompetencia">-->
+											<!--<p> <strong>{{competencie.competencia}}</strong></p>-->
+										<!--</div>-->
 										
 									</div>
 									<div class="form-group col-md-1"></div>
