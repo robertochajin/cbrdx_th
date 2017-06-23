@@ -16,6 +16,7 @@ import { EmployeesService } from '../_services/employees.service';
 import { PoliticalDivisionService } from '../_services/political-division.service';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
+import { ConstanteService } from '../_services/constante.service';
 
 @Component( {
                moduleId: module.id,
@@ -49,12 +50,16 @@ export class FamilyInformationUpdateComponent implements OnInit {
    cel: boolean = false;
    tel: boolean = false;
    // Es necesario crear la constante y consultarla
+   tiposdoc: string[] = [];
+   mayeda: number = 0;
+   listTypeDoc: ListaItem[] = [];
 
    constructor( private familyInformationService: FamilyInformationService,
       private listaService: ListaService,
       private route: ActivatedRoute,
       private fb: FormBuilder,
       private locateService: LocateService,
+      private constanteService: ConstanteService,
       private employeesService: EmployeesService,
       private listEmployeesService: ListEmployeesService,
       private confirmationService: ConfirmationService,
@@ -85,6 +90,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
       this.range = `${lastYear}:${year}`;
 
       this.listaService.getMasterDetails( 'ListasTiposDocumentos' ).subscribe( res => {
+         this.listTypeDoc = res;
          this.documentTypes.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => this.documentTypes.push( { label: s.nombre, value: s.idLista } ) );
       } );
@@ -155,6 +161,19 @@ export class FamilyInformationUpdateComponent implements OnInit {
 
       this.focusUP();
 
+      this.constanteService.getByCode( 'DOCMYE' ).subscribe( data => {
+         if ( data.valor ) {
+            for ( let c of data.valor.split( ',' ) ) {
+               this.tiposdoc.push( c );
+            }
+         }
+      } );
+      this.constanteService.getByCode( 'MAYEDA' ).subscribe( data => {
+         if ( data.valor ) {
+            this.mayeda = Number( data.valor );
+         }
+      } );
+
    }
 
    onSubmit( value: string ) {
@@ -174,7 +193,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
                this.terceroFamiliar.segundoNombre = this.capitalizeSave( this.familyInformation.segundoNombre );
                this.terceroFamiliar.primerApellido = this.capitalizeSave( this.familyInformation.primerApellido );
                this.terceroFamiliar.segundoApellido = this.capitalizeSave( this.familyInformation.segundoApellido );
-               this.terceroFamiliar.fechaNacimiento =this.familyInformation.fechaNacimiento;
+               this.terceroFamiliar.fechaNacimiento = this.familyInformation.fechaNacimiento;
                this.terceroFamiliar.indicadorHabilitado = true;
                this.terceroFamiliar.idTipoTercero = this.idTipoTercero;
 
@@ -202,52 +221,57 @@ export class FamilyInformationUpdateComponent implements OnInit {
       } else {
          this.focusUP();
          /* this.msgs.push( {
-                            severity: 'error',
-                            summary: 'Dirección invalida',
-                            detail: 'Es necesario agregar una dirección válida'
-                         } ); */
-         this._nav.setMesage(0, {severity: 'error', summary: 'Dirección invalida',detail: 'Es necesario agregar una dirección válida'});
+          severity: 'error',
+          summary: 'Dirección invalida',
+          detail: 'Es necesario agregar una dirección válida'
+          } ); */
+         this._nav.setMesage( 0,
+                              { severity: 'error', summary: 'Dirección invalida', detail: 'Es necesario agregar una dirección válida' } );
       }
    }
 
-    goBack(fDirty : boolean): void {
+   goBack( fDirty: boolean ): void {
 
-        if ( fDirty ){
-            this.confirmationService.confirm( {
-                message: ` ¿Está seguro que desea salir sin guardar?`,
-                header: 'Confirmación',
-                icon: 'fa fa-question-circle',
-                accept: () => {
-                    this._nav.setTab( 3 );
-                    this.location.back();
-                }
-            } );
-        }else {
-            this._nav.setTab( 3 );
-            this.location.back();
-        }
-    }
+      if ( fDirty ) {
+         this.confirmationService.confirm( {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this._nav.setTab( 3 );
+                                                 this.location.back();
+                                              }
+                                           } );
+      } else {
+         this._nav.setTab( 3 );
+         this.location.back();
+      }
+   }
 
    onChangeMethod( event: any ) {
+
+      let tipodocfamili = this.listTypeDoc.find( x => x.idLista === this.selectedDocument );
+      let codigo: string = '';
+      if ( tipodocfamili ) {
+         codigo = tipodocfamili.codigo;
+      }
+      let tipo = this.tiposdoc.find( t => t === codigo ); // buscar tipo documento elegido
 
       let today = new Date();
       let month = today.getMonth();
       let year = today.getFullYear();
-      let prev18Year = year - 18;
+      let prev18Year = year - this.mayeda;
       let prev20Year = year - 20;
       let lastYear = prev18Year - 80;
       this.maxDate = new Date();
       this.maxDate.setMonth( month );
 
-      if ( event.value === 1 ) {
+      if ( tipo ) {
          this.maxDate.setFullYear( prev18Year );
          this.range = `${lastYear}:${prev18Year}`;
-      } else if ( event.value === 2 ) {
+      } else {
          this.range = `${prev18Year}:${year}`;
          this.maxDate.setFullYear( year );
-      } else {
-         this.maxDate.setFullYear( year );
-         this.range = `${prev20Year}:${year}`;
       }
 
       if ( (this.familyInformation.fechaNacimiento) !== null && (this.familyInformation.fechaNacimiento) !== undefined ) {
@@ -337,9 +361,10 @@ export class FamilyInformationUpdateComponent implements OnInit {
    childInputCleanUp1( value: string ) {
       this.familyInformation.telefonoCelular = value.toUpperCase().replace( /[^0-9]/g, '' ).replace( ' ', '' ).trim();
    }
+
    inputCorreo() {
-      if ( this.familyInformation.correoElectronico!==null && this.familyInformation.correoElectronico!== undefined) {
-         this.familyInformation.correoElectronico= this.familyInformation.correoElectronico.toLowerCase();
+      if ( this.familyInformation.correoElectronico !== null && this.familyInformation.correoElectronico !== undefined ) {
+         this.familyInformation.correoElectronico = this.familyInformation.correoElectronico.toLowerCase();
       }
    }
 }

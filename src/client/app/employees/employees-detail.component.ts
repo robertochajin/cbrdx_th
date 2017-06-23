@@ -17,6 +17,7 @@ export class EmployeesDetailComponent implements OnInit {
    @Input()
    employee: Employee = new Employee();
    acordion: number;
+   svcThUrl = '<%= SVC_TH_URL %>/api/upload';
 
    constructor( private employeeService: EmployeesService,
       private route: ActivatedRoute,
