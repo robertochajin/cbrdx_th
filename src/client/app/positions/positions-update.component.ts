@@ -45,6 +45,7 @@ export class PositionsUpdateComponent implements OnInit {
    step = 1;
    nivel: number;
    alertOcu = false;
+   rangoEdad: number[] = [ 16, 60 ];
 
    constructor( private positionsService: PositionsService,
       private router: Router,
@@ -132,6 +133,12 @@ export class PositionsUpdateComponent implements OnInit {
       this.route.params.subscribe( ( params: Params ) => {
          this.positionsService.get( +params[ 'id' ] ).subscribe( position => {
             this.position = position;
+            if ( this.position.edad !== null ) {
+               this.rangoEdad[ 0 ] = this.position.edad;
+            }
+            if ( this.position.edadMax !== null ) {
+               this.rangoEdad[ 1 ] = this.position.edadMax;
+            }
             this.step = this.position.paso;
             if ( this.step > 0 && this.step < 16 ) {
                if ( this._nav.getTab() > 0 && this._nav.getTab() !== null ) {
@@ -262,6 +269,8 @@ export class PositionsUpdateComponent implements OnInit {
          this.position.paso = 10;
          this.step = 10;
       }
+      this.position.edad = this.rangoEdad[ 0 ];
+      this.position.edadMax = this.rangoEdad[ 1 ];
       this.positionsService.update5( this.position )
       .subscribe( data => {
          this._nav.setTab( 9 );
@@ -324,9 +333,9 @@ export class PositionsUpdateComponent implements OnInit {
 
       // Focus  en accordionTab Activo
       setTimeout( () => {
-         jQuery( 'body' ).animate({
-            scrollTop : jQuery( 'p-accordiontab > .ui-state-active' ).position().top + 90
-         }, 'fast');
+         jQuery( 'body' ).animate( {
+                                      scrollTop: jQuery( 'p-accordiontab > .ui-state-active' ).position().top + 90
+                                   }, 'fast' );
       }, 1000 );
 
    }
@@ -405,7 +414,7 @@ export class PositionsUpdateComponent implements OnInit {
             } else {
                this.alertOcu = true;
                // this.msgOcupaciones[ 0 ] = {severity: 'error', summary: 'Error', detail: 'Debe agregar al menos una ocupación'};
-               this._nav.setMesage( 0, {severity: 'error', summary: 'Error', detail: 'Debe agregar al menos una ocupación'} );
+               this._nav.setMesage( 0, { severity: 'error', summary: 'Error', detail: 'Debe agregar al menos una ocupación' } );
                return false;
             }
          } );

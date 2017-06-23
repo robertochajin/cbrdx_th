@@ -581,7 +581,7 @@
          },
 
          "POSITION":{
-           "LBL_AREA" : "Área",
+           "LBL_AREA" : "Tipos de área",
            "LBL_ACTIVIDADES" : "Actividades que Supervisa",
            "LBL_ACTIVOS" : "Responsabilidades sobre activos de la compañia",
            "LBL_AUTORIDADES" : "Autoridades",
@@ -610,6 +610,7 @@
            "LBL_PONDERACION" : "Ponderación",
            "LBL_CARGO" : "Cargo",
            "LBL_NUEVOCARGO" : "Nuevo Cargo",
+            "LBL_SOLICITUDES" : "Solicitudes",
            "LBL_ELIMINARCARGO" : "Eliminación de Cargo",
            "LBL_CARGOS" : "Cargos",
            "LBL_CATEGORIA" : "Categoria de acuerdo al mapa de cargos",

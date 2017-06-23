@@ -136,27 +136,27 @@ export class CandidateRevisionComponent implements OnInit {
          this.candidateProcessService.update( this.candidateProcess ).subscribe( res => {
             if ( res.ok ) {
                this._nav.setMesage( 2 );
-               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
             } else {
                this._nav.setMesage( 3 );
-               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
             }
          }, () => {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+            this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
          } );
       } else {
          this.candidateProcessService.add( this.candidateProcess ).subscribe( res => {
             if ( res.idProcesoSeleccion ) {
                this._nav.setMesage( 1 );
-               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
             } else {
                this._nav.setMesage( 3 );
-               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
             }
          }, () => {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+            this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
          } );
       }
    }
@@ -190,11 +190,11 @@ export class CandidateRevisionComponent implements OnInit {
                                               header: 'Confirmación',
                                               icon: 'fa fa-question-circle',
                                               accept: () => {
-                                                 this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+                                                 this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
                                               }
                                            } );
       }else {
-         this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+         this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
       }
 
    }
