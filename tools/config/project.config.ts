@@ -50,21 +50,24 @@ export class ProjectConfig extends SeedConfig {
     // this.TYPED_COMPILE_INTERVAL = 5;
 
     // Add `NPM` third-party libraries to be injected/bundled.
-    this.NPM_DEPENDENCIES = [
-      ...this.NPM_DEPENDENCIES,
-      {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
-      {src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs'},
-      {src: 'bootstrap/dist/css/bootstrap.min.css', inject: true},
-      {src: 'font-awesome/css/font-awesome.min.css', inject: true},
+     this.NPM_DEPENDENCIES = [
+        ...this.NPM_DEPENDENCIES,
+        {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
+        {src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs'},
+        {src: 'bootstrap/dist/css/bootstrap.min.css', inject: true},
+        {src: 'font-awesome/css/font-awesome.min.css', inject: true},
 
-      { src: 'primeng/resources/primeng.min.css', inject: true },
-      { src: 'primeng/resources/themes/bootstrap/theme.css', inject: true },
+        {src: 'primeng/resources/primeng.min.css', inject: true},
+        {src: 'primeng/resources/themes/bootstrap/theme.css', inject: true},
 
-      { src: 'moment/min/moment.min.js', inject: true},
-      { src: 'moment/locale/es.js', inject: true},
-       { src: 'chart.js/dist/Chart.js', inject: true},
+        {src: 'moment/min/moment.min.js', inject: true},
+        {src: 'moment/locale/es.js', inject: true},
+        {src: 'chart.js/dist/Chart.js', inject: true},
 
-    ];
+        {src: 'jspdf/dist/jspdf.min.js', inject: true},
+
+
+     ];
 
     // Add `local` third-party libraries to be injected/bundled.
     this.APP_ASSETS = [
