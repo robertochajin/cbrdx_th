@@ -21,7 +21,7 @@ import { References } from '../employees-references/references';
 import { ReferencesService } from '../employees-references/references.service';
 import { DivisionPoliticaService } from '../_services/divisionPolitica.service';
 
-
+let jsPDF = require('jspdf/dist/jspdf.min.js');
 
 
 @Component( {
@@ -202,6 +202,11 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
       this.location.back();
    }
 
+   getPDF(): void {
+         let doc = new jsPDF();
+         doc.text("Hello", 20, 20);
+         doc.save('table.pdf');
+   }
 
 }
 
