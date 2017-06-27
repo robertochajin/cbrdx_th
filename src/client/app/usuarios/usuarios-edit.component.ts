@@ -21,6 +21,9 @@ import { LocationService } from '../_services/employee-location.service';
 import { Localizaciones } from '../_models/localizaciones';
 import { Message } from 'primeng/primeng';
 import { NavService } from '../_services/_nav.service';
+import { ConstanteService } from '../_services/constante.service';
+import * as moment from 'moment/moment';
+
 
 @Component( {
                moduleId: module.id,
@@ -89,6 +92,11 @@ export class UsuariosEditComponent {
          } );
          tercerosService.get( this.usuario.idTercero ).subscribe( res => {
             this.tercero = res;
+            this.tercero.nombreCompleto = this.tercero.primerNombre + ' ' +
+               this.tercero.segundoNombre + ' ' +
+               this.tercero.primerApellido + ' ' +
+               this.tercero.segundoApellido;
+            this.tercero.edad = moment( this.tercero.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
             this.locationService.getAllResiden( this.usuario.idTercero ).subscribe( locations => this.locations = locations );
          } );
       } );
