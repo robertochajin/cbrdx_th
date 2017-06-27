@@ -21,7 +21,6 @@ import { LocationService } from '../_services/employee-location.service';
 import { Localizaciones } from '../_models/localizaciones';
 import { Message } from 'primeng/primeng';
 import { NavService } from '../_services/_nav.service';
-import { ConstanteService } from '../_services/constante.service';
 import * as moment from 'moment/moment';
 
 
