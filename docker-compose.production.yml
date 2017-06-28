@@ -2,7 +2,7 @@ version: '2'
 
 services:
 
-  angular-seed:
+  angular-seed-prod:
     build:
       context: .
       dockerfile: ./.docker/angular-seed.production.dockerfile
@@ -24,7 +24,7 @@ services:
     networks:
       - prod-network
     ports:
-      - '5556:80'
+      - '5557:80'
     volumes:
       - ./.docker/nginx.conf:/etc/nginx/conf.d/angular-seed.template
       - ./dist/prod:/var/www/dist/prod
