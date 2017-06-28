@@ -75,7 +75,7 @@
 										<label for="osteo">* {{'MEDICALINSTITUTION.LBL_EXAMENOSTEOMUSCULAR' | translate }}</label>
 										<input id="osteo" name="osteo" #examosteo="ngModel" pInputText
 										       type="text" required [(ngModel)]="medicalInstitution.valorExamenOsteosmuscular"
-										       (change)="calcularVaor()"
+										       (keyup)="calcularVaor()"
 												 currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"/>
 										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !examosteo.valid ">
 											<i class="fa fa-close"></i>
@@ -86,7 +86,7 @@
 										<label for="visio">* {{'MEDICALINSTITUTION.LBL_EXAMENVISION' | translate }}</label>
 										<input id="visio" name="visio" #examvisio="ngModel" pInputText
 										       type="text" required [(ngModel)]="medicalInstitution.valorExamenVisiometria"
-										       (change)="calcularVaor()"
+										       (keyup)="calcularVaor()"
 												 currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"/>
 										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !examvisio.valid ">
 											<i class="fa fa-close"></i>
@@ -100,7 +100,7 @@
 										<label for="opto">* {{'MEDICALINSTITUTION.LBL_EXAMENOPTPMETRIA' | translate }}</label>
 										<input id="opto" name="opto" #examopto="ngModel" pInputText
 										       type="text" required [(ngModel)]="medicalInstitution.valorExamenOptometria"
-										       (change)="calcularVaor()"
+										       (keyup)="calcularVaor()"
 												 currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"/>
 										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !examopto.valid ">
 											<i class="fa fa-close"></i>
@@ -109,6 +109,7 @@
 									</div>
 									<div class="ui-grid-col-6">
 										<label>{{'MEDICALINSTITUTION.LBL_EXAMENVALOR' | translate }}</label>
+										<input id="totalexamenes" type="text" disabled value="{{totalExamenes}}" />
 										<h3>{{totalExamenes}}</h3>
 									</div>
 								</div>

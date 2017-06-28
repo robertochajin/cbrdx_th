@@ -8,7 +8,7 @@
       <div class="clearfix card-header">
         <div class="col-md-2">
 			  <div class="thumbnail img-responsive">
-				  <img src="/assets/images/perfil/avatar.jpg" alt="...">
+				  <img src="{{svcThUrl}}/file/{{employee.imagen}}" alt="...">
 			  </div>
         </div>
         <div class="col-md-8">
@@ -140,35 +140,34 @@
               </p-accordion>
 
           </p-tabPanel>
-        <p-tabPanel header="Reclutamiento" styleClass="clearfix">
+        <p-tabPanel header="Reclutamiento" styleClass="clearfix" disabled="true">
           <h3>{{'EMPLOYEES.LBL_RECLUTAMIENTO' | translate}}</h3>
         </p-tabPanel>
-        <p-tabPanel header="Novedades">
+        <p-tabPanel header="Novedades" disabled="true">
           <h3>{{'EMPLOYEES.LBL_NOVEDADES' | translate}}</h3>
         </p-tabPanel>
-        <p-tabPanel header="Formación y Capacitación">
+        <p-tabPanel header="Formación y Capacitación" disabled="true">
           <h3>{{'EMPLOYEES.LBL_FORMACIONCAPACITACION' | translate}}</h3>
         </p-tabPanel>
-        <p-tabPanel header="Evaluación de Competencias">
+        <p-tabPanel header="Evaluación de Competencias" disabled="true">
           <h3>{{'EMPLOYEES.LBL_EVALUACIONCOPETENCIAS' | translate}}</h3>
         </p-tabPanel>
-        <p-tabPanel header="Rituales Gerenciales">
+        <p-tabPanel header="Rituales Gerenciales" disabled="true">
           <h3>{{'EMPLOYEES.LBL_RITUALESGERENCIALES' | translate}}</h3>
         </p-tabPanel>
-        <p-tabPanel header="Procesos Disciplinarios">
+        <p-tabPanel header="Procesos Disciplinarios" disabled="true">
           <h3>{{'EMPLOYEES.LBL_PROCESOSDISCIPLINARIOS' | translate}}</h3>
         </p-tabPanel>
-        <p-tabPanel header="Plan de Beneficio">
+        <p-tabPanel header="Plan de Beneficio" disabled="true">
           <h3>{{'EMPLOYEES.LBL_PLANBENEFICIO' | translate}}</h3>
         </p-tabPanel>
-        <p-tabPanel header="Examenes Ocupacionales">
+        <p-tabPanel header="Examenes Ocupacionales" disabled="true">
           <h3>{{'EMPLOYEES.LBL_EXAMENESOCUPACIONALES' | translate}}</h3>
         </p-tabPanel>
-        <p-tabPanel header="Dotaciones">
+        <p-tabPanel header="Dotaciones" disabled="true">
           <h3>{{'EMPLOYEES.LBL_DOTACIONES' | translate}}</h3>
         </p-tabPanel>
       </p-tabView>
-
 
 		</div>
 

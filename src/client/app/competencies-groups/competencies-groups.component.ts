@@ -133,6 +133,7 @@ export class CompetenciesGroupsComponent implements OnInit {
                this.groups[ this.groups.indexOf( this.groups.find( z => this.competencie.idGrupoCompetencia === z.idGrupoCompetencia ) ) ]
                .competencies.map( c => {
                   if ( c.idCompetencia === this.competencie.idCompetencia ) {
+                     c.competencia = this.competencie.competencia;
                      c.descripcion = this.competencie.descripcion;
                      c.indicadorHabilitado = this.competencie.indicadorHabilitado;
                   }
