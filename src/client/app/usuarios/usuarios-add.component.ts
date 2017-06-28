@@ -19,6 +19,8 @@ import { Employee } from '../_models/employees';
 import { EmployeesService } from '../_services/employees.service';
 import { Message } from 'primeng/primeng';
 import { NavService } from '../_services/_nav.service';
+import * as moment from 'moment/moment';
+
 
 @Component( {
                moduleId: module.id,
@@ -134,6 +136,11 @@ export class UsuariosAddComponent {
             if ( res !== undefined && res.idTercero > 0 ) {
                this.tercerosService.get( res.idTercero ).subscribe( rest => {
                   this.tercero = rest;
+                  this.tercero.nombreCompleto = this.tercero.primerNombre + ' ' +
+                     this.tercero.segundoNombre + ' ' +
+                     this.tercero.primerApellido + ' ' +
+                     this.tercero.segundoApellido;
+                  this.tercero.edad = moment( this.tercero.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
                   this.isTerceroSet = true;
                   this.usuario.idTercero = this.tercero.idTercero;
                } );

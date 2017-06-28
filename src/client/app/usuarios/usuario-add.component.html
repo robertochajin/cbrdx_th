@@ -11,7 +11,8 @@
              </div>
           </p-footer>
        </p-dialog>
-        <p-fieldset legend="{{ 'USUARIOS.LBL_BUSCARTERCERO' | translate }}" *ngIf="!isTerceroSet">
+        <p-panel header="{{ 'USUARIOS.LBL_BUSCARTERCERO' | translate }}" *ngIf="!isTerceroSet">
+			  <fieldset>
             <form #fc="ngForm">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-3" style="text-align: center"><label>{{ 'LBL_TIPODOCUMENTO' | translate }}:</label>
@@ -47,22 +48,20 @@
                     </div>
                 </div>
             </form>
-        </p-fieldset>
+			  </fieldset>
+        </p-panel>
 
-        <p-fieldset legend="{{ 'USUARIOS.LBL_DATOSTERCERO' | translate }}" *ngIf="isTerceroSet">
-
-            <div class="col-md-3">
-                <div class="ui-grid-col-10">
-                    <img class="thumbnail img-responsive"
-                         src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg ">
-                </div>
-            </div>
-
+        <p-panel header="{{ 'USUARIOS.LBL_DATOSTERCERO' | translate }}" *ngIf="isTerceroSet">
+				<fieldset>
+					<div class="col-md-3">
+						<img class="thumbnail img-responsive"
+							  src="/assets/images/perfil/avatar.jpg">
+					</div>
             <div class="col-md-9">
                 <div class="ui-grid-col-6">
-                    <p>{{tercero.primerNombre}} {{tercero.segundoNombre}} {{tercero.primerApellido}}
-                        {{tercero.segundoApellido}}</p>
-                    <p>{{tercero.numeroDocumento}}</p>
+						 <h2>{{tercero.primerNombre}} {{tercero.segundoNombre}} {{tercero.primerApellido}} {{tercero.segundoApellido}}</h2>
+						 <h4>{{tercero.fechaNacimiento}} ({{tercero.edad}})</h4>
+						 <span>{{tercero.tipoDocumento}} : {{tercero.numeroDocumento}}</span><br/>
                 </div>
                 <div class="ui-grid-col-6">
                     <p></p>
@@ -87,9 +86,11 @@
                     <button   pButton type="button" icon="glyphicon-pencil" iconPos="right" label="{{ 'BTN_EDITAR' | translate }}"></button>
                 </div>
             </div>
-        </p-fieldset>
+				</fieldset>
+        </p-panel>
 
-        <p-fieldset legend="{{ 'USUARIOS.LBL_INFOCONTACTO' | translate }}" *ngIf="isTerceroSet">
+        <p-panel header="{{ 'USUARIOS.LBL_INFOCONTACTO' | translate }}" *ngIf="isTerceroSet">
+			  <fieldset>
             <form class="form-horizontal" #fu="ngForm" (ngSubmit)="!sameUser&&fu.form.valid && createUser()" novalidate
                   *ngIf="!isUserCreated&&isTerceroSet" autocomplete="off">
                 <div class="col-sm-6">
@@ -149,11 +150,13 @@
                                         [(ngModel)]="usuario.indicadorHabilitado" binary="true"></p-checkbox>
                         </div>
                     </div>
-                    <div class="form-group" [hidden]="isUserCreated">
-                        <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+					 </div>
+					<div class="col-md-12">
+						 <div class="row form-footer-buttons" [hidden]="isUserCreated">
+                        <a (click)="(f.dirty === true) ? displayDialog=true : goBack()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
                         <button pButton type="submit" label="Guardar"></button>
                     </div>
-                </div>
+						 </div>
             </form>
             <div class="col-sm-6" *ngIf="isUserCreated&&isTerceroSet">
                 <div class="form-group">
@@ -186,7 +189,8 @@
                     <a (click)="displayDialog=true" class="cancelar">{{ 'BTN_REGRESAR' | translate }}</a>
                 </div>
             </div>
-        </p-fieldset>
+			  </fieldset>
+        </p-panel>
 
     </p-tabPanel>
     <p-tabPanel header="{{ 'USUARIOS.LBL_ROLESGRUPOS' | translate }}" *ngIf="isUserCreated">
