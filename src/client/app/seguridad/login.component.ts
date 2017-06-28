@@ -51,6 +51,8 @@ export class LoginComponent implements OnInit {
          this.loginService.setSession( false );
          this.appmain.setSession( false );
       }else{
+         this.loginService.setSession( true );
+         this.appmain.setSession( true );
          this.router.navigate( [ this.Url ] );
       }
 
