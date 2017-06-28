@@ -46,6 +46,8 @@ export class PositionsUpdateComponent implements OnInit {
    nivel: number;
    alertOcu = false;
    rangoEdad: number[] = [ 16, 60 ];
+   permisos: any;
+   permisos2: any;
 
    constructor( private positionsService: PositionsService,
       private router: Router,
@@ -126,8 +128,9 @@ export class PositionsUpdateComponent implements OnInit {
       } );
 
       this.acordion = 0;
+      this.permisos = { 'visible': true, 'editable': true };
+      this.permisos2= { 'visible': true, 'editable': false };
    }
-
    ngOnInit() {
       this.acordion = 0;
       this.route.params.subscribe( ( params: Params ) => {
