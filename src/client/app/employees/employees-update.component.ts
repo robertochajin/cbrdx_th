@@ -193,6 +193,51 @@ export class EmployeesUpdateComponent implements OnInit {
       .switchMap( ( params: Params ) => this.employeesService.get( +params[ 'id' ] ) )
       .subscribe( employee => {
          this.employee = employee;
+         this.constanteService.getByCode( 'DOCMYE' ).subscribe( data => {
+            if ( data.valor ) {
+               for ( let c of data.valor.split( ',' ) ) {
+                  this.tiposdoc.push( c );
+               }
+            }
+            this.constanteService.getByCode( 'MAYEDA' ).subscribe( data => {
+               if ( data.valor ) {
+                  this.mayeda = Number( data.valor );
+               }
+               let tipodocemploye = this.listTypeDoc.find( x => x.idLista === this.employee.idTipoDocumento );
+               let codigo: string = '';
+               if ( tipodocemploye ) {
+                  codigo = tipodocemploye.codigo;
+               }
+               let tipo = this.tiposdoc.find( t => t === codigo ); // buscar tipo documento elegido
+               let exp = this.expeditionDate;
+               let dateExpo = new Date( exp );
+
+               let today = new Date();
+               let month = today.getMonth();
+               let year = today.getFullYear();
+               let prev18Year = year - this.mayeda;
+               let prev20Year = year - 20;
+               let lastYear = prev18Year - 80;
+               this.maxDateBirth = new Date();
+               this.maxDateBirth.setMonth( month );
+
+               if ( tipo ) {
+                  if ( this.employee.fechaDocumento !== null ) {
+                     let fecha = new Date( this.employee.fechaDocumento );
+                     let anio = fecha.getFullYear() - this.mayeda;
+                     this.maxDateBirth.setFullYear( anio );
+                  } else {
+                     this.maxDateBirth.setFullYear( prev18Year );
+                  }
+               } else {
+                  this.maxDateBirth.setFullYear( year );
+               }
+               if ( this.maxDateBirth > dateExpo ) {
+                  this.maxDateBirth = dateExpo;
+               }
+            } );
+         } );
+
          this.updateActivities( this.employee.idSectorEconomico );
          this.updateDate();
          this.minDateDocumento = new Date( this.employee.fechaNacimiento );
