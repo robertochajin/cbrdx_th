@@ -38,7 +38,7 @@
                                  <div class="form-group col-md-6">
                                     <label for="idEstructuraArea">* {{ 'POSITION.LBL_AREA' | translate }}</label>
                                     <p-dropdown id="idEstructuraArea" name="idEstructuraArea" required="true"
-                                                [options]="areaTypes" [autoWidth]="false"
+                                                [options]="areaTypes" [autoWidth]="false" filter="filter"
                                                 [(ngModel)]="position.idEstructuraArea"
                                                 #idEstructuraArea="ngModel"
                                     ></p-dropdown>
@@ -66,7 +66,7 @@
                                  <div class="form-group col-md-6">
                                     <label for="idCargoJefe">{{ 'POSITION.LBL_CARGODEPENDE' | translate }}</label>
                                     <p-dropdown id="idCargoJefe" name="idCargoJefe"
-                                                [options]="bossPositionTypes" [autoWidth]="false"
+                                                [options]="bossPositionTypes" [autoWidth]="false" filter="filter"
                                                 [(ngModel)]="position.idCargoJefe"
                                                 #idCargoJefe="ngModel"
                                     ></p-dropdown>
