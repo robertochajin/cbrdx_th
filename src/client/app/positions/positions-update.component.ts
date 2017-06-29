@@ -12,6 +12,7 @@ import { ListEmployeesService } from '../_services/lists-employees.service';
 import { TreeNode } from 'primeng/components/common/api';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
+import { Permissions } from '../_models/permissions';
 
 @Component( {
                moduleId: module.id,
@@ -46,8 +47,9 @@ export class PositionsUpdateComponent implements OnInit {
    nivel: number;
    alertOcu = false;
    rangoEdad: number[] = [ 16, 60 ];
-   permisos: any;
-   permisos2: any;
+   permisos: Permissions[] = [];
+   seccionId: Permissions = new Permissions;
+   defaultCampo = {visible:true, editable:true};
 
    constructor( private positionsService: PositionsService,
       private router: Router,
@@ -59,6 +61,12 @@ export class PositionsUpdateComponent implements OnInit {
       private listEmployeesService: ListEmployeesService,
       private listaService: ListaService,
       private _nav: NavService ) {
+
+      this.positionsService.getReglasFormulariosCargos( ).subscribe( permisos => {
+         this.permisos =  permisos;
+         this.seccionId = this.permisos.find( c => c.codigo === 'IDCARGO');
+         console.info(this.seccionId);
+      });
 
       this.listPositionsService.getCategoryTypes().subscribe( res => {
          this.listcategoryTypes = res;
@@ -128,8 +136,6 @@ export class PositionsUpdateComponent implements OnInit {
       } );
 
       this.acordion = 0;
-      this.permisos = { 'visible': true, 'editable': true };
-      this.permisos2= { 'visible': true, 'editable': false };
    }
    ngOnInit() {
       this.acordion = 0;
