@@ -162,7 +162,7 @@
 					</p-panel>
 					<p-panel header="{{ 'EMPLOYEES.LBL_FORMACIONACADEMICA' | translate }}">
 					<fieldset>
-						<h3 class="first">{{'EMPLOYEES.LBL_EDUCACION' | translate}}</h3>
+						<h3 class="first">{{'EMPLOYEES.LBL_EDUCACIONFORMAL' | translate}}</h3>
 						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="fstudies" selectionMode="single" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
 							<p-column field="tituloEstudio" header="{{'EMPLOYEES.LBL_TITULOOBTENIDO' | translate}}" [sortable]="true"></p-column>
 							<p-column field="fechaIngresa" header="{{'EMPLOYEES.LBL_INGRESO' | translate}} " [sortable]="true"></p-column>
