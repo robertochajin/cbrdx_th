@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class Permissions {
    codigo: string;
-   visible: boolean;
+   visible: boolean = true;
+   editable: boolean = true;
+   seccion: boolean = false;
    CODIGOCARGO?: {editable:boolean, visible: boolean} = {editable:true, visible: true};
    CARGO?: {editable:boolean, visible: boolean} = {editable:true, visible: true};
    INDICADORREQUIEREFORMACION?: {editable:boolean, visible: boolean} = {editable:true, visible: true};

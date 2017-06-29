@@ -95,8 +95,8 @@ export class FormManagerService {
       .map( ( res: Response ) => res.json() as FunctionalityControl[] );
    }
 
-   getFuncionalidadesControlesEnabledByControl(idControl: number) {
-      return this.authHttp.get( this.serviceURL + 'funcionalidadesControles/enabled/' + idControl )
+   getFuncionalidadesControlesEnabledByControl(idFuncionalidad: number) {
+      return this.authHttp.get( this.serviceURL + 'funcionalidadesControles/enabled/' + idFuncionalidad )
       .map( ( res: Response ) => res.json() as FunctionalityControl[] );
    }
 

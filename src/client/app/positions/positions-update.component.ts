@@ -47,8 +47,22 @@ export class PositionsUpdateComponent implements OnInit {
    nivel: number;
    alertOcu = false;
    rangoEdad: number[] = [ 16, 60 ];
-   permisos: Permissions[] = [];
-   seccionId: Permissions = new Permissions;
+   seccion1: Permissions = new Permissions;
+   seccion2: Permissions = new Permissions;
+   seccion3: Permissions = new Permissions;
+   seccion4: Permissions = new Permissions;
+   seccion5: Permissions = new Permissions;
+   seccion6: Permissions = new Permissions;
+   seccion7: Permissions = new Permissions;
+   seccion8: Permissions = new Permissions;
+   seccion9: Permissions = new Permissions;
+   seccion10: Permissions = new Permissions;
+   seccion11: Permissions = new Permissions;
+   seccion12: Permissions = new Permissions;
+   seccion13: Permissions = new Permissions;
+   seccion14: Permissions = new Permissions;
+   seccion15: Permissions = new Permissions;
+   seccion16: Permissions = new Permissions;
    defaultCampo = {visible:true, editable:true};
 
    constructor( private positionsService: PositionsService,
@@ -62,10 +76,24 @@ export class PositionsUpdateComponent implements OnInit {
       private listaService: ListaService,
       private _nav: NavService ) {
 
-      this.positionsService.getReglasFormulariosCargos( ).subscribe( permisos => {
-         this.permisos =  permisos;
-         this.seccionId = this.permisos.find( c => c.codigo === 'IDCARGO');
-         console.info(this.seccionId);
+      this.positionsService.getReglasFormulariosCargos().subscribe( p => {
+         let permisos = JSON.parse(p);
+         this.seccion1 = permisos.IDENTIFICACION;
+         this.seccion2 = permisos.PRODUCTO;
+         this.seccion3 = permisos.INTERRELACIONES;
+         this.seccion4 = permisos.ROLDENTRO;
+         this.seccion5 = permisos.RESPONSABILIDADESPRINCIPALES;
+         this.seccion6 = permisos.RESPONSABILIDADESCOMPLEMENTARIAS;
+         this.seccion7 = permisos.POSICION;
+         this.seccion8 = permisos.AUTORIDADES;
+         this.seccion9 = permisos.REQUISITOS;
+         this.seccion10 = permisos.COMPETENCIAS;
+         this.seccion11 = permisos.ACTIVOS;
+         this.seccion12 = permisos.PRODUCTIVIDAD;
+         this.seccion13 = permisos.PERSONALIDAD;
+         this.seccion14 = permisos.FACTORES;
+         this.seccion15 = permisos.VALORACION;
+         this.seccion16 = permisos.RElACION;
       });
 
       this.listPositionsService.getCategoryTypes().subscribe( res => {

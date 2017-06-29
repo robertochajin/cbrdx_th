@@ -42,7 +42,7 @@ export class RolFuncionalitiesConfigComponent implements OnInit {
             this.rolFuncionalitiesService.getControlByFuncionality( this.rolFuncionality.idRol, this.rolFuncionality.idFuncionalidad )
             .subscribe( listaFuncionalityControl => {
                this.listaFuncionalityControl = listaFuncionalityControl;
-               this.formManagerService.getFuncionalidadesControlesEnabled().subscribe(
+               this.formManagerService.getFuncionalidadesControlesEnabledByControl(this.rolFuncionality.idFuncionalidad).subscribe(
                   lfControles => {
                      this.lfControles = lfControles;
                      this.cosntrucObj();

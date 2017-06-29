@@ -31,7 +31,9 @@ export class PermissionDirective  {
       } else {
          // Else remove template from DOM
          this._viewContainer.clear();
-         this.inputElement.nativeElement.parentNode.parentNode.removeChild(this.inputElement.nativeElement.parentNode);
+         if(!hasPermission.seccion){
+            this.inputElement.nativeElement.parentNode.parentNode.removeChild(this.inputElement.nativeElement.parentNode);
+         }
       }
 
    }
