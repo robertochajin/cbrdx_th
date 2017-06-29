@@ -269,11 +269,11 @@ const routes = [
    { path: 'gruposGestion/edit/:id', component: GruposGestionEditComponent, canActivate: [ AuthGuard ] },
 
    //  Roles
-   { path: 'roles', component: RolesComponent},
-   { path: 'roles/add', component: RolesAddComponent},
-   { path: 'roles/update/:id', component: RolesUpdateComponent},
-   { path: 'roles/update/:id/:msj', component: RolesUpdateComponent},
-   { path: 'roles/update/:role/funcionalities-config/:id', component: RolFuncionalitiesConfigComponent },
+   { path: 'roles', component: RolesComponent, canActivate: [ AuthGuard ] },
+   { path: 'roles/add', component: RolesAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'roles/update/:id', component: RolesUpdateComponent, canActivate: [ AuthGuard ] },
+   { path: 'roles/update/:id/:msj', component: RolesUpdateComponent, canActivate: [ AuthGuard ] },
+   { path: 'roles/update/:role/funcionalities-config/:id', component: RolFuncionalitiesConfigComponent, canActivate: [ AuthGuard ] },
    //  Usuarios
    { path: 'usuarios', component: UsuariosComponent },
    { path: 'usuarios/add', component: UsuariosAddComponent },
@@ -344,9 +344,9 @@ const routes = [
    { path: 'widgets/add', component: WidgetsAddComponent, canActivate: [ AuthGuard ] },
    { path: 'widgets/update/:id', component: WidgetsUpdateComponent, canActivate: [ AuthGuard ] },
    //  adminstrador de formularios
-   { path: 'form-manager', component: FormManagerComponent },
-   { path: 'form-manager/add', component: FormManagerAddComponent },
-   { path: 'form-manager/update/:id', component: FormManagerUpdateComponent },
+   { path: 'form-manager', component: FormManagerComponent, canActivate: [ AuthGuard ] },
+   { path: 'form-manager/add', component: FormManagerAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'form-manager/update/:id', component: FormManagerUpdateComponent, canActivate: [ AuthGuard ] },
 
    // Requerimiento de personal
    { path: 'personnel-requirement', component: PersonnelRequirementComponent, canActivate: [ AuthGuard ] },
