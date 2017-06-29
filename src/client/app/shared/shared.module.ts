@@ -10,6 +10,7 @@ import { WindowRefService } from '../_services/window-ref.service';
 import { AuthenticationService } from '../_services/authentication.service';
 import { NavService } from '../_services/_nav.service';
 import { LowerCaseText } from '../_helpers/LowerCaseText';
+import { PermissionDirective } from '../_helpers/permission.directive';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -17,9 +18,9 @@ import { LowerCaseText } from '../_helpers/LowerCaseText';
 
 @NgModule( {
               imports: [ CommonModule, RouterModule, TranslateModule ],
-              declarations: [ ToolbarComponent, NavbarComponent, LowerCaseText ],
+              declarations: [ ToolbarComponent, NavbarComponent, LowerCaseText, PermissionDirective ],
               exports: [ ToolbarComponent, NavbarComponent,
-                 CommonModule, FormsModule, RouterModule, TranslateModule, LowerCaseText
+                 CommonModule, FormsModule, RouterModule, TranslateModule, LowerCaseText, PermissionDirective
               ],
               providers: [ AuthenticationService ]
            } )
@@ -41,16 +42,16 @@ export class SharedModule {
 
       router.events.subscribe( ( val ) => {
 
-         console.log(val);
+         // console.log(val);
          if(val.url) {
-            console.log(val.url);
+            // console.log(val.url);
          }
 
 
 
          if ( val instanceof NavigationEnd ) {
 
-            console.log(' -- NavigationEnd Rulez --');
+           //  console.log(' -- NavigationEnd Rulez --');
 
             // Fix Footer -
             setTimeout( () => {
@@ -73,7 +74,7 @@ export class SharedModule {
 
                         if( jQuery( 'input.ng-invalid:first' ).parents('p-accordion').length == 0 ){
                            jQuery( 'body' ).scrollTop( jQuery( 'input.ng-invalid:first' ).position().top );
-                           console.log( 'Focus in input Error!' );
+                           // console.log( 'Focus in input Error!' );
                            setTimeout( () => {
                               jQuery( 'input.ng-invalid:first' ).select().focus();
                            }, 500 );
