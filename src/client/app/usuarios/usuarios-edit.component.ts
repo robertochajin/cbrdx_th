@@ -46,6 +46,8 @@ export class UsuariosEditComponent {
    displayDialog = false;
    displayUpdateDialog = false;
 
+   svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
+
    datatypeMaster: Lista;
    datatypeDetails: ListaItem[];
    selectedTipo: number;

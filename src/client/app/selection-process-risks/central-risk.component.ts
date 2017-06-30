@@ -47,6 +47,7 @@ export class CentralRiskComponent implements OnInit {
    usuarioLogueado: any;
    idRol: number;
    jwtHelper: JwtHelper = new JwtHelper();
+   svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,

@@ -26,6 +26,7 @@ export class UsuarioDetailComponent {
    curGrupos: VUsuarioGrupoGestion[] = [];
    historico: VHistoricoUsuario[] = [];
    private locations: Localizaciones[] = [];
+   svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
 
    constructor( private usuariosService: UsuariosService,
       private tercerosService: EmployeesService,
