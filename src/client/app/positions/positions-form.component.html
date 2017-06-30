@@ -43,6 +43,7 @@
                                  <div class="form-group col-md-6" *hasPermission ="seccion1.IDESTRUCTURAAREA ? seccion1.IDESTRUCTURAAREA : defaultCampo">
                                     <label for="idEstructuraArea">* {{ 'POSITION.LBL_AREA' | translate }}</label>
                                     <p-dropdown id="idEstructuraArea" name="idEstructuraArea" required="true"
+                                                [disabled]="seccion1.IDESTRUCTURAAREA.editable"
                                                 [options]="areaTypes" [autoWidth]="false" filter="filter"
                                                 [(ngModel)]="position.idEstructuraArea"
                                                 #idEstructuraArea="ngModel"
@@ -71,6 +72,7 @@
                                  <div class="form-group col-md-6" *hasPermission ="seccion1.IDCARGOJEFE ? seccion1.IDCARGOJEFE : defaultCampo">
                                     <label for="idCargoJefe">{{ 'POSITION.LBL_CARGODEPENDE' | translate }}</label>
                                     <p-dropdown id="idCargoJefe" name="idCargoJefe" filter="filter"
+                                                [disabled]="seccion1.IDCARGOJEFE.editable"
                                                 [options]="bossPositionTypes" [autoWidth]="false"
                                                 [(ngModel)]="position.idCargoJefe"
                                                 #idCargoJefe="ngModel"
@@ -110,6 +112,7 @@
                                  <div class="form-group col-md-6" *hasPermission ="seccion1.IDESTADO ? seccion1.IDESTADO : defaultCampo">
                                     <label for="idEstado">{{ 'LBL_ESTADO' | translate }}</label>
                                     <p-dropdown id="idEstado" name="idEstado"
+                                                [disabled]="seccion1.IDCARGOJEFE.IDESTADO"
                                                 [options]="stateTypes" [autoWidth]="false"
                                                 [(ngModel)]="position.idEstado" disabled="true"
                                                 #idEstado="ngModel"
@@ -400,6 +403,7 @@
 											<div class="form-group col-md-3" *hasPermission ="seccion9.IDGENERO ? seccion9.IDGENERO : defaultCampo">
 												<label for="idGenero">* {{ 'LBL_GENERO' | translate }}</label>
 												<p-dropdown id="idGenero" name="idGenero" required="true"
+												            [disabled]="seccion9.IDGENERO.editable"
 												            [options]="genderTypes" [autoWidth]="false"
 												            [(ngModel)]="position.idGenero"
 												            #idGenero="ngModel"
@@ -413,6 +417,7 @@
 											<div class="form-group col-md-3" *hasPermission ="seccion9.IDESTADOCIVIL ? seccion9.IDESTADOCIVIL : defaultCampo">
 												<label for="idEstadoCivil">* {{ 'LBL_ESTADOCIVIL' | translate }}</label>
 												<p-dropdown id="idEstadoCivil" name="idEstadoCivil" required="true"
+												            [disabled]="seccion9.IDESTADOCIVIL.editable"
 												            [options]="maritalStatusTypes" [autoWidth]="false"
 												            [(ngModel)]="position.idEstadoCivil"
 												            #idEstadoCivil="ngModel"
@@ -426,6 +431,7 @@
 											<div class="form-group col-md-3" *hasPermission ="seccion9.IDNIVELEDUCACION ? seccion9.IDNIVELEDUCACION : defaultCampo">
 												<label for="idNivelEducacionn">* {{ 'POSITION.LBL_EDUCACION' | translate }}</label>
 												<p-dropdown id="idNivelEducacionn" name="idNivelEducacionn" required="true"
+												            [disabled]="seccion9.IDNIVELEDUCACION.editable"
 												            [options]="listStudies" [autoWidth]="false"
 												            [(ngModel)]="position.idNivelEducacion"
 												            #idNivelEducacion="ngModel"
@@ -555,9 +561,10 @@
                                       {{'POSITION.LBL_SALARIO' | translate }} {{'LBL_REQUERIDO' | translate }}
                                     </div>
                                  </div>
-                                 <div class="ui-grid-col-4"><br>
+                                 <div class="ui-grid-col-4" *ngIf="seccion15.INDICADORREQUIEREFORMACION.visible"><br>
 	                                 <label for="indicadorRequiereFormacion">{{'POSITION.LBL_REQUIERE' | translate }}</label>
 	                                 <p-checkbox id="indicadorRequiereFormacion" name="indicadorRequiereFormacion"
+	                                             disabled="seccion15.INDICADORREQUIEREFORMACION.editable"
 	                                             [(ngModel)]="position.indicadorRequiereFormacion" binary="true"></p-checkbox>
                                  </div>
                               </div>
