@@ -4,7 +4,7 @@ import { Directive, ElementRef, Input, TemplateRef, ViewContainerRef, Renderer, 
               selector: '[hasPermission]'
            })
 
-export class PermissionDirective  {
+export class PermissionDirective implements OnInit{
 
    inputElement: ElementRef;
    _viewContainer: ViewContainerRef;
@@ -17,25 +17,25 @@ export class PermissionDirective  {
       this.inputElement = el;
       this._viewContainer = viewContainer;
    }
+   ngOnInit() {
+      this._viewContainer.createEmbeddedView( this.templateRef );
+   }
 
    @Input() set hasPermission(hasPermission: any) {
       if (hasPermission.visible) {
-         this._viewContainer.clear();
+         //this._viewContainer.clear();
          // If hasPermission is true add template to DOM
-         this._viewContainer.createEmbeddedView( this.templateRef );
-
-         if (!hasPermission.editable) {
-            this._renderer.setElementAttribute(this.inputElement.nativeElement.nextSibling, 'disabled', 'true');
-            this._renderer.setElementAttribute(this.inputElement.nativeElement.nextSibling, 'readonly', 'true');
+         if (!hasPermission.editable && !hasPermission.seccion) {
+            this._renderer.setElementAttribute(this.inputElement.nativeElement.nextSibling.children[1], 'disabled', 'true');
+            this._renderer.setElementAttribute(this.inputElement.nativeElement.nextSibling.children[1], 'readonly', 'true');
          }
       } else {
          // Else remove template from DOM
          this._viewContainer.clear();
-         if(!hasPermission.seccion){
+         /*if(!hasPermission.seccion){
             this.inputElement.nativeElement.parentNode.parentNode.removeChild(this.inputElement.nativeElement.parentNode);
-         }
+         }*/
       }
-
    }
 
    /*@Input() hasPermission: any;
