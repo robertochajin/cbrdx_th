@@ -4,7 +4,7 @@
       <p-accordion (onOpen)="onTabShow($event)" id="accordion">
          <p-accordionTab header="{{ 'POSITION.LBL_IDENTIFICACION' | translate }}"
                          *hasPermission ="seccion1 ? seccion1 : defaultCampo"
-                         [selected]="acordion == 0 || acordion == null " [disabled]="step ==1">
+                         [selected]="acordion === 0 || acordion == null " [disabled]="step === 1">
             <fieldset>
                <div *ngIf="position">
                   <div class="row-fluid">
@@ -16,11 +16,12 @@
                                     <label for="codigo">* {{ 'POSITION.LBL_CODIGO' | translate }}</label>
                                     <input type="text" pInputText id="codigo" name="codigo" maxlength="50"
                                            *hasPermission ="seccion1.CODIGOCARGO ? seccion1.CODIGOCARGO : defaultCampo"
-                                           [(ngModel)]="position.codigoCargo" #codigo="ngModel" (keyup)="inputCleanUp($event.target.value)"
+                                           [(ngModel)]="position.codigoCargo" #Ngcodigo="ngModel"
+                                           (keyup)="inputCleanUp($event.target.value)"
                                            (paste)="inputCleanUp($event.target.value)"
                                            required/>
                                     <div class="ui-message ui-messages-error ui-corner-all"
-                                         *ngIf="f0.submitted && !codigo.valid">
+                                         *ngIf="f0.submitted && !Ngcodigo.valid">
                                        <i class="fa fa-close"></i>
                                        {{ 'POSITION.LBL_CODIGO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
                                     </div>
@@ -29,11 +30,11 @@
                                     <label for="nombre">* {{ 'POSITION.LBL_NOMBRE' | translate }}</label>
                                     <input type="text" pInputText id="nombre" name="nombre"
                                            *hasPermission ="seccion1.CARGO ? seccion1.CARGO : defaultCampo"
-                                           [(ngModel)]="position.cargo" #nombre="ngModel"
+                                           [(ngModel)]="position.cargo" #NGnombre="ngModel"
                                            (keyup) = "capitalizeNombre()" maxlength="100"
                                            required/>
                                     <div class="ui-message ui-messages-error ui-corner-all"
-                                         *ngIf="f0.submitted && !nombre.valid">
+                                         *ngIf="f0.submitted && !NGnombre.valid">
                                        <i class="fa fa-close"></i>
                                        {{ 'POSITION.LBL_NOMBRE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
                                     </div>
@@ -111,7 +112,7 @@
                                     </div>
                                  </div>
                               </div>
-                              <div class="row" *ngIf="position.paso == 16">
+                              <div class="row" *ngIf="position.paso === 16">
                                  <div class="form-group col-md-6">
                                     <label for="idEstado">{{ 'LBL_ESTADO' | translate }}</label>
                                     <p-dropdown id="idEstado" name="idEstado"
@@ -173,13 +174,13 @@
             </fieldset>
          </p-accordionTab>
 
-         <p-accordionTab header="{{ 'POSITION.LBL_PRODUCTO' | translate }}" [selected]="acordion == 1"
+         <p-accordionTab header="{{ 'POSITION.LBL_PRODUCTO' | translate }}" [selected]="acordion === 1"
                          *hasPermission ="seccion2 ? seccion2 : defaultCampo"
                          [disabled]="step == 1">
                <evaluation-criterias (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></evaluation-criterias>
          </p-accordionTab>
 
-         <p-accordionTab header="{{ 'POSITION.LBL_INTERRELACIONES' | translate }}" [selected]="acordion == 2"
+         <p-accordionTab header="{{ 'POSITION.LBL_INTERRELACIONES' | translate }}" [selected]="acordion === 2"
                          *hasPermission ="seccion3 ? seccion3 : defaultCampo"
                          [disabled]="step >0 && step <3">
             <fieldset>
@@ -194,21 +195,21 @@
                                     <textarea pInputTextarea id="interrelacionesInternas" name="interrelacionesInternas"
                                               *hasPermission ="seccion3.INTERRELACIONESINTERNAS ? seccion3.INTERRELACIONESINTERNAS : defaultCampo"
                                               [(ngModel)]="position.interrelacionesInternas"
-                                              #interrelacionesInternas="ngModel" maxlength="500"
+                                              #NGinterrelacionesInternas="ngModel" maxlength="500"
                                               [required]="true"></textarea>
-                                    <div *ngIf="f2.submitted && !interrelacionesInternas.valid"
+                                    <div *ngIf="f2.submitted && !NGinterrelacionesInternas.valid"
                                          class="ui-message ui-messages-error ui-corner-all">
                                        {{ 'POSITION.LBL_INTERRELACIONES' | translate }} {{ 'POSITION.LBL_INTERNAS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
                                     </div>
                                  </div>
                                  <div class=" col-sm-12">
-                                    <label for="interrelacionesInternas">{{ 'POSITION.LBL_EXTERNAS' | translate }}</label>
+                                    <label for="interrelacionesExternas">{{ 'POSITION.LBL_EXTERNAS' | translate }}</label>
                                     <textarea pInputTextarea id="interrelacionesExternas" name="interrelacionesExternas"
                                               *hasPermission ="seccion3.INTERRELACIONESEXTERNAS ? seccion3.INTERRELACIONESEXTERNAS : defaultCampo"
                                               [(ngModel)]="position.interrelacionesExternas"
-                                              #interrelacionesExternas="ngModel" maxlength="500"
+                                              #NGinterrelacionesExternas="ngModel" maxlength="500"
                                               [required]="true"></textarea>
-                                    <div *ngIf="f2.submitted && !interrelacionesExternas.valid"
+                                    <div *ngIf="f2.submitted && !NGinterrelacionesExternas.valid"
                                          class="ui-message ui-messages-error ui-corner-all">
                                        {{ 'POSITION.LBL_INTERRELACIONES' | translate }} {{ 'POSITION.LBL_EXTERNAS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
                                     </div>
@@ -229,19 +230,19 @@
             </fieldset>
          </p-accordionTab>
 
-         <p-accordionTab header="{{ 'POSITION.LBL_ROLDENTRO' | translate }}" [selected]="acordion == 3"
+         <p-accordionTab header="{{ 'POSITION.LBL_ROLDENTRO' | translate }}" [selected]="acordion === 3"
                          *hasPermission ="seccion4 ? seccion4 : defaultCampo"
                          [disabled]="step >0 && step < 4">
             <position-roles (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-roles>
          </p-accordionTab>
 
-         <p-accordionTab header="{{ 'POSITION.LBL_RESPONSABILIDADESPRINCIPALES' | translate }}" [selected]="acordion == 4"
+         <p-accordionTab header="{{ 'POSITION.LBL_RESPONSABILIDADESPRINCIPALES' | translate }}" [selected]="acordion === 4"
                          *hasPermission ="seccion5 ? seccion5 : defaultCampo"
                          [disabled]="step >0 && step <5">
             <position-responsabilities (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-responsabilities>
          </p-accordionTab>
 
-         <p-accordionTab header="{{ 'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' | translate }}" [selected]="acordion == 5"
+         <p-accordionTab header="{{ 'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' | translate }}" [selected]="acordion === 5"
                          *hasPermission ="seccion6 ? seccion6 : defaultCampo"
                          [disabled]="step >0 && step <6">
             <fieldset>
@@ -282,13 +283,13 @@
             </fieldset>
          </p-accordionTab>
 
-         <p-accordionTab header="{{ 'POSITION.LBL_POSICION' | translate }}" [selected]="acordion == 6"
+         <p-accordionTab header="{{ 'POSITION.LBL_POSICION' | translate }}" [selected]="acordion === 6"
                          *hasPermission ="seccion7 ? seccion7 : defaultCampo"
                          [disabled]="step >0 && step <7">
             <position-absence (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-absence>
          </p-accordionTab>
 
-         <p-accordionTab header="{{ 'POSITION.LBL_AUTORIDADES' | translate }}" [selected]="acordion == 7"
+         <p-accordionTab header="{{ 'POSITION.LBL_AUTORIDADES' | translate }}" [selected]="acordion === 7"
                          *hasPermission ="seccion8 ? seccion8 : defaultCampo"
                          [disabled]="step >0 && step <8">
             <fieldset>
@@ -350,7 +351,7 @@
 
          </p-accordionTab>
 
-         <p-accordionTab header="{{ 'POSITION.LBL_REQUISITOS' | translate }}" [selected]="acordion == 8"
+         <p-accordionTab header="{{ 'POSITION.LBL_REQUISITOS' | translate }}" [selected]="acordion === 8"
                          *hasPermission ="seccion9 ? seccion9 : defaultCampo"
                          [disabled]="step >0 && step <9">
             <fieldset>
@@ -486,19 +487,19 @@
             </fieldset>
          </p-accordionTab>
 
-         <p-accordionTab header="{{ 'POSITION.LBL_COMPETENCIAS' | translate }}" [selected]="acordion == 9"
+         <p-accordionTab header="{{ 'POSITION.LBL_COMPETENCIAS' | translate }}" [selected]="acordion === 9"
                          *hasPermission ="seccion10 ? seccion10 : defaultCampo"
                          [disabled]="step >0 && step <10">
             <position-competencies (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-competencies>
          </p-accordionTab>
 
-         <p-accordionTab header="{{ 'POSITION.LBL_ACTIVOS' | translate }}" [selected]="acordion == 10"
+         <p-accordionTab header="{{ 'POSITION.LBL_ACTIVOS' | translate }}" [selected]="acordion === 10"
                          *hasPermission ="seccion11 ? seccion11 : defaultCampo"
                          [disabled]="step >0 && step <11">
             <company-assets (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></company-assets>
          </p-accordionTab>
 
-         <p-accordionTab header="{{ 'POSITION.LBL_PRODUCTIVIDAD' | translate }}" [selected]="acordion == 11"
+         <p-accordionTab header="{{ 'POSITION.LBL_PRODUCTIVIDAD' | translate }}" [selected]="acordion === 11"
                          *hasPermission ="seccion12 ? seccion12 : defaultCampo"
                          [disabled]="step >0 && step <12">
             <productivity-component (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></productivity-component>
@@ -510,13 +511,13 @@
             <personality-component  (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></personality-component>
          </p-accordionTab>
 
-         <p-accordionTab header="{{ 'POSITION.LBL_FACTORES' | translate }}" [selected]="acordion == 13"
+         <p-accordionTab header="{{ 'POSITION.LBL_FACTORES' | translate }}" [selected]="acordion === 13"
                          *hasPermission ="seccion14 ? seccion14 : defaultCampo"
                          [disabled]="step >0 && step <14">
             <position-risks (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-risks>
          </p-accordionTab>
 
-         <p-accordionTab header="{{ 'POSITION.LBL_VALORACION' | translate }}" [selected]="acordion == 14"
+         <p-accordionTab header="{{ 'POSITION.LBL_VALORACION' | translate }}" [selected]="acordion === 14"
                          *hasPermission ="seccion15 ? seccion15 : defaultCampo"
                          [disabled]="step >0 && step <15">
             <fieldset>
@@ -602,7 +603,7 @@
             </fieldset>
          </p-accordionTab>
 
-         <p-accordionTab header="{{'POSITION.LBL_RElACION' | translate }}" [selected]="acordion == 15"
+         <p-accordionTab header="{{'POSITION.LBL_RElACION' | translate }}" [selected]="acordion === 15"
                          *hasPermission ="seccion16 ? seccion16 : defaultCampo"
                          [disabled]="step >0 && step <16">
             <p-tree [value]="treeArrray" layout="horizontal" selectionMode="single" [(selection)]="selectedNode" ></p-tree>

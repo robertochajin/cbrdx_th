@@ -31,6 +31,7 @@ export class RisksComponent implements OnInit {
    ngOnInit() {
       this.risksService.getAll().subscribe(
          risks => {
+            console.info(risks);
             for ( let r of risks ) {
                this.risksService.getTypeRiskById( r.idTipoRiesgo ).subscribe(
                   res => {
