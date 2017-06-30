@@ -41,6 +41,8 @@ export class FormalStudiesAddComponent implements OnInit {
    idTercero: number;
    wrongCity: boolean = true;
    wrongInstitute: boolean = false;
+   svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
+   dataUpload : any[] = [];
 
    constructor( private academicEducationService: AcademicEducationService,
       private politicalDivisionService: PoliticalDivisionService,
@@ -201,6 +203,37 @@ export class FormalStudiesAddComponent implements OnInit {
          this.location.back();
       }
    }
+
+
+   uploadingOk( event: any ) {
+   console.log(event);
+   /*
+    this.adjuntos = [];
+    this.adjuntosService.listAdjuntos( ).subscribe( rest => {
+    this.adjuntos = rest;
+    } );
+    this.navService.setMesage( 1, this.msgs );
+    this.fileupload = true;
+    */
+}
+
+   onBeforeSend( event: any ) {
+      console.info( event );
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+
+      /*
+      this.dataUpload[0].auditoriaUsuario = 1;
+      this.dataUpload[1].nombreArchivo = 'nombrepdf.pdf';
+      */
+
+      this.dataUpload.push({
+         auditoriaUsuario : 1,
+         nombreArchivo : 'nombre.pdf'
+      });
+
+      event.formData.append('obj', JSON.stringify(this.dataUpload));
+   }
+
 }
 
 
