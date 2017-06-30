@@ -338,7 +338,7 @@ export class EmployeesAddComponent implements OnInit {
    }
 
    updateDate() {
-
+      this.employee.fechaNacimiento = null;
       let tipodocemploye = this.listTypeDoc.find( x => x.idLista === this.employee.idTipoDocumento );
       let codigo: string = '';
       if ( tipodocemploye ) {
