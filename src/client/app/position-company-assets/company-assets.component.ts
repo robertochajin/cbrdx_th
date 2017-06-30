@@ -42,8 +42,8 @@ export class CompanyAssetsComponent implements OnInit {
    }
 
    ngOnInit() {
-      //this.msgsAlert.push( { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un registro' } );
-      this._nav.setMesage(0, { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un registro' });
+      // this.msgsAlert.push( { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un registro' } );
+      // this._nav.setMesage(0, { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un registro' });
       this.listaService.getMasterDetails( 'ListasTiposElementos' ).subscribe( listCompanyAssets => {
          this.listCompanyAssets = listCompanyAssets;
          this.companyAssetsService.getAllByPosition( this.position.idCargo ).subscribe( res => {
@@ -72,7 +72,8 @@ export class CompanyAssetsComponent implements OnInit {
          }
       }
       if ( this.elementos.length === num ) {
-         this.alert = true;
+         // this.alert = true;
+         this._nav.setMesage(0, { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un registro' });
       } else {
          this.alert = false;
          let it = 1;

@@ -217,15 +217,19 @@ export class PositionsUpdateComponent implements OnInit {
       if ( this.position.paso !== 0 && this.position.paso <= step ) {
          this.position.paso = step + 1;
          this.step = this.position.paso;
-      }
-      this.positionsService.updateEstado( this.position )
-      .subscribe( data => {
+
+         this.positionsService.updateEstado( this.position )
+         .subscribe( data => {
+            this._nav.setTab( step );
+            this.acordion = step;
+            this._nav.setMesage( 1, this.msgs );
+         }, error => {
+            this._nav.setMesage( 3, this.msgs );
+         } );
+      }else{
          this._nav.setTab( step );
          this.acordion = step;
-         this._nav.setMesage( 1, this.msgs );
-      }, error => {
-         this._nav.setMesage( 3, this.msgs );
-      } );
+      }
    }
 
    onSubmit0() {
