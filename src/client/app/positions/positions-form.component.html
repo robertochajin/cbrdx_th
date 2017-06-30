@@ -12,10 +12,9 @@
                         <form name="formulario" (ngSubmit)="f0.valid && onSubmit0()" #f0="ngForm" novalidate>
                            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                               <div class="row">
-                                 <div class="form-group col-md-3"  >
+                                 <div class="form-group col-md-3"  *hasPermission ="seccion1.CODIGOCARGO ? seccion1.CODIGOCARGO : defaultCampo">
                                     <label for="codigo">* {{ 'POSITION.LBL_CODIGO' | translate }}</label>
                                     <input type="text" pInputText id="codigo" name="codigo" maxlength="50"
-                                           *hasPermission ="seccion1.CODIGOCARGO ? seccion1.CODIGOCARGO : defaultCampo"
                                            [(ngModel)]="position.codigoCargo" #Ngcodigo="ngModel"
                                            (keyup)="inputCleanUp($event.target.value)"
                                            (paste)="inputCleanUp($event.target.value)"
@@ -26,10 +25,10 @@
                                        {{ 'POSITION.LBL_CODIGO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
                                     </div>
                                  </div>
-                                 <div class="form-group col-md-9">
+                                 <div class="form-group col-md-9" *hasPermission ="seccion1.CARGO ? seccion1.CARGO : defaultCampo">
                                     <label for="nombre">* {{ 'POSITION.LBL_NOMBRE' | translate }}</label>
                                     <input type="text" pInputText id="nombre" name="nombre"
-                                           *hasPermission ="seccion1.CARGO ? seccion1.CARGO : defaultCampo"
+                                           
                                            [(ngModel)]="position.cargo" #NGnombre="ngModel"
                                            (keyup) = "capitalizeNombre()" maxlength="100"
                                            required/>
@@ -41,10 +40,9 @@
                                  </div>
                               </div>
                               <div class="row">
-                                 <div class="form-group col-md-6">
+                                 <div class="form-group col-md-6" *hasPermission ="seccion1.IDESTRUCTURAAREA ? seccion1.IDESTRUCTURAAREA : defaultCampo">
                                     <label for="idEstructuraArea">* {{ 'POSITION.LBL_AREA' | translate }}</label>
                                     <p-dropdown id="idEstructuraArea" name="idEstructuraArea" required="true"
-                                                *hasPermission ="seccion1.IDESTRUCTURAAREA ? seccion1.IDESTRUCTURAAREA : defaultCampo"
                                                 [options]="areaTypes" [autoWidth]="false" filter="filter"
                                                 [(ngModel)]="position.idEstructuraArea"
                                                 #idEstructuraArea="ngModel"
@@ -56,10 +54,9 @@
 
                                     </div>
                                  </div>
-                                 <div class="form-group col-md-6">
+                                 <div class="form-group col-md-6" *hasPermission ="seccion1.PERSONAACARGODIR ? seccion1.PERSONAACARGODIR : defaultCampo">
                                     <label for="personaACargoDir">* {{ 'POSITION.LBL_PERSONASDIRECTAS' | translate }}</label>
                                     <input type="text" pInputText id="personaACargoDir" name="personaACargoDir" type="text"
-                                           *hasPermission ="seccion1.PERSONAACARGODIR ? seccion1.PERSONAACARGODIR : defaultCampo"
                                            [(ngModel)]="position.personaACargoDir" #personaACargoDir="ngModel" required (keyup)="inputNumber()"
                                            (paste)="inputNumber()" maxlength="4"
                                     />
@@ -71,13 +68,12 @@
                                  </div>
                               </div>
                               <div class="row">
-                                 <div class="form-group col-md-6">
+                                 <div class="form-group col-md-6" *hasPermission ="seccion1.IDCARGOJEFE ? seccion1.IDCARGOJEFE : defaultCampo">
                                     <label for="idCargoJefe">{{ 'POSITION.LBL_CARGODEPENDE' | translate }}</label>
                                     <p-dropdown id="idCargoJefe" name="idCargoJefe" filter="filter"
                                                 [options]="bossPositionTypes" [autoWidth]="false"
                                                 [(ngModel)]="position.idCargoJefe"
                                                 #idCargoJefe="ngModel"
-                                                *hasPermission ="seccion1.IDCARGOJEFE ? seccion1.IDCARGOJEFE : defaultCampo"
                                     ></p-dropdown>
                                     <!--<div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !idCargoJefe.valid">
@@ -85,12 +81,11 @@
                                        Cargo que depende es requerida
                                     </div>-->
                                  </div>
-                                 <div class="form-group col-md-6">
+                                 <div class="form-group col-md-6" *hasPermission ="seccion1.PERSONAACARGOIND ? seccion1.PERSONAACARGOIND : defaultCampo">
                                     <label for="personaACargoInd">* {{ 'POSITION.LBL_PERSONASINDIRECTAS' | translate }}</label>
                                     <input type="text" pInputText id="personaACargoInd" name="personaACargoInd" required
                                            [(ngModel)]="position.personaACargoInd" #personaACargoInd="ngModel" type="text"
                                            (keyup)="inputNumber()" (paste)="inputNumber()" maxlength="4"
-                                           *hasPermission ="seccion1.PERSONAACARGOIND ? seccion1.PERSONAACARGOIND : defaultCampo"
                                     />
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !personaACargoInd.valid">
@@ -100,10 +95,9 @@
                                  </div>
                               </div>
                               <div class="row">
-                                 <div class=" col-sm-12">
+                                 <div class=" col-sm-12" *hasPermission ="seccion1.MISION ? seccion1.MISION : defaultCampo">
                                     <label for="mision">* {{ 'POSITION.LBL_MISION' | translate }}</label>
                                     <textarea pInputTextarea id="mision" name="mision"
-                                              *hasPermission ="seccion1.MISION ? seccion1.MISION : defaultCampo"
                                               [(ngModel)]="position.mision" #mision="ngModel" maxlength="500"
                                               [required]="true"></textarea>
                                     <div *ngIf="f0.submitted && !mision.valid"
@@ -113,10 +107,9 @@
                                  </div>
                               </div>
                               <div class="row" *ngIf="position.paso === 16">
-                                 <div class="form-group col-md-6">
+                                 <div class="form-group col-md-6" *hasPermission ="seccion1.IDESTADO ? seccion1.IDESTADO : defaultCampo">
                                     <label for="idEstado">{{ 'LBL_ESTADO' | translate }}</label>
                                     <p-dropdown id="idEstado" name="idEstado"
-                                                *hasPermission ="seccion1.IDESTADO ? seccion1.IDESTADO : defaultCampo"
                                                 [options]="stateTypes" [autoWidth]="false"
                                                 [(ngModel)]="position.idEstado" disabled="true"
                                                 #idEstado="ngModel"
@@ -131,7 +124,6 @@
                                     <label for="indicador" class="control-label col-md-6 col-sm-6">{{ 'LBL_HABILITADO' | translate }}</label>
                                     <div class=" col-md-6">
                                        <p-checkbox binary="true" id="indicador" name="indicador"
-                                                   *hasPermission ="seccion1.INDICADORHABILITADO ? seccion1.INDICADORHABILITADO : defaultCampo"
                                                    [(ngModel)]="position.indicadorHabilitado" disabled="true"
                                                    #indicador="ngModel"></p-checkbox>
                                     </div>
@@ -140,7 +132,6 @@
 		                              <label for="indicadorzona" class="control-label col-md-6">{{ 'POSITION.LBL_ZONA' | translate }}</label>
 		                              <div class=" col-md-6">
 			                              <p-checkbox binary="true" id="indicadorzona" name="indicadorzona"
-			                                          *hasPermission ="seccion1.INDICADORZONA ? seccion1.INDICADORZONA : defaultCampo"
 			                                          [(ngModel)]="position.indicadorZona"
 			                                          #indicador="ngModel"></p-checkbox>
 		                              </div>
@@ -156,7 +147,6 @@
                            <div class="row form-footer-buttons" *ngIf="position.paso === 16 && position.idEstado !== aprobado">
                               <div class="form-group col-md-12">
                                  <button icon="fa-plus" label="{{ 'LBL_APROBAR' | translate }}" type="button"
-                                         *hasPermission ="seccion1.APROBAR ? seccion1.APROBAR : defaultCampo"
                                          pButton (click)="updateEstado(aprobado)"></button>
                                  <button icon="fa-plus" label="{{ 'LBL_NOAPROBAR' | translate }}" type="button"
                                          *ngIf="position.paso === 16 && position.idEstado !== noAprobado"
@@ -190,10 +180,9 @@
                         <form name="formulario" (ngSubmit)="f2.valid && onSubmit2()" #f2="ngForm" novalidate>
                            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                               <div class="row">
-                                 <div class=" col-sm-12">
+                                 <div class=" col-sm-12" *hasPermission ="seccion3.INTERRELACIONESINTERNAS ? seccion3.INTERRELACIONESINTERNAS : defaultCampo">
                                     <label for="interrelacionesInternas">{{ 'POSITION.LBL_INTERNAS' | translate }}</label>
                                     <textarea pInputTextarea id="interrelacionesInternas" name="interrelacionesInternas"
-                                              *hasPermission ="seccion3.INTERRELACIONESINTERNAS ? seccion3.INTERRELACIONESINTERNAS : defaultCampo"
                                               [(ngModel)]="position.interrelacionesInternas"
                                               #NGinterrelacionesInternas="ngModel" maxlength="500"
                                               [required]="true"></textarea>
@@ -202,10 +191,9 @@
                                        {{ 'POSITION.LBL_INTERRELACIONES' | translate }} {{ 'POSITION.LBL_INTERNAS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
                                     </div>
                                  </div>
-                                 <div class=" col-sm-12">
+                                 <div class=" col-sm-12" *hasPermission ="seccion3.INTERRELACIONESEXTERNAS ? seccion3.INTERRELACIONESEXTERNAS : defaultCampo">
                                     <label for="interrelacionesExternas">{{ 'POSITION.LBL_EXTERNAS' | translate }}</label>
                                     <textarea pInputTextarea id="interrelacionesExternas" name="interrelacionesExternas"
-                                              *hasPermission ="seccion3.INTERRELACIONESEXTERNAS ? seccion3.INTERRELACIONESEXTERNAS : defaultCampo"
                                               [(ngModel)]="position.interrelacionesExternas"
                                               #NGinterrelacionesExternas="ngModel" maxlength="500"
                                               [required]="true"></textarea>
@@ -253,11 +241,10 @@
                            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 
                               <div class="row">
-                                 <div class=" col-sm-12">
+                                 <div class=" col-sm-12" *hasPermission ="seccion6.RESPONSABILIDADESAD ? seccion6.RESPONSABILIDADESAD : defaultCampo">
                                     <label for="responsabilidadesAd">* {{ 'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' | translate
 	                                    }}</label>
                                     <textarea pInputTextarea id="responsabilidadesAd"
-                                              *hasPermission ="seccion6.RESPONSABILIDADESAD ? seccion6.RESPONSABILIDADESAD : defaultCampo"
                                               name="responsabilidadesAd" maxlength="500"
                                               [(ngModel)]="position.responsabilidadesAd"
                                               #responsabilidadesAd="ngModel"
@@ -299,10 +286,9 @@
                         <form name="formulario" (ngSubmit)="f7.valid && onSubmit7()" #f7="ngForm" novalidate>
                            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                               <div class="row">
-                                 <div class="form-group col-md-12">
+                                 <div class="form-group col-md-12" *hasPermission ="seccion8.TOMADECISIONES ? seccion8.TOMADECISIONES : defaultCampo">
                                     <label for="tomaDecisiones">* ¿{{ 'POSITION.LBL_DECISIONES' | translate }}? </label>
                                     <textarea pInputTextarea id="tomaDecisiones" name="tomaDecisiones" maxlength="500"
-                                              *hasPermission ="seccion8.TOMADECISIONES ? seccion8.TOMADECISIONES : defaultCampo"
                                               [(ngModel)]="position.tomaDecisiones"
                                               #tomaDecisiones="ngModel"
                                               [required]="true"></textarea>
@@ -314,10 +300,9 @@
                                  </div>
                               </div>
                               <div class="row">
-                                 <div class=" col-sm-12">
+                                 <div class=" col-sm-12" *hasPermission ="seccion8.ACTIVIDADESSUPERVISA ? seccion8.ACTIVIDADESSUPERVISA : defaultCampo">
                                     <label for="actividadesSupervisa">* {{ 'POSITION.LBL_ACTIVIDADES' | translate }}</label>
                                     <textarea pInputTextarea id="actividadesSupervisa"
-                                              *hasPermission ="seccion8.ACTIVIDADESSUPERVISA ? seccion8.ACTIVIDADESSUPERVISA : defaultCampo"
                                               name="responsabilidadesAd" maxlength="500"
                                               [(ngModel)]="position.actividadesSupervisa"
                                               #actividadesSupervisa="ngModel"
@@ -362,10 +347,9 @@
                            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 
                               <div class="row">
-                                 <div class=" col-sm-12">
+                                 <div class=" col-sm-12" *hasPermission ="seccion9.CONOCIMIENTOSBASICOS ? seccion9.CONOCIMIENTOSBASICOS : defaultCampo">
                                     <label for="interrelacionesInternas">* ¿{{ 'POSITION.LBL_CONOCIMIENTO' | translate }}?</label>
                                     <textarea pInputTextarea id="conocimientosBasicos" name="conocimientosBasicos"
-                                              *hasPermission ="seccion9.CONOCIMIENTOSBASICOS ? seccion9.CONOCIMIENTOSBASICOS : defaultCampo"
                                               [(ngModel)]="position.conocimientosBasicos"
                                               #conocimientosBasicos="ngModel" maxlength="200"
                                               [required]="true"></textarea>
@@ -376,10 +360,9 @@
                                  </div>
                               </div>
                               <div class="row">
-                                 <div class="col-md-12">
+                                 <div class="col-md-12" *hasPermission ="seccion9.TIEMPOEXPERIENCIA ? seccion9.TIEMPOEXPERIENCIA : defaultCampo">
                                     <label for="tiempoExperiencia">* {{ 'POSITION.LBL_EXPERIENCIA' | translate }}</label>
                                     <input type="text" pInputText id="tiempoExperiencia" name="tiempoExperiencia" maxlength="200"
-                                           *hasPermission ="seccion9.TIEMPOEXPERIENCIA ? seccion9.TIEMPOEXPERIENCIA : defaultCampo"
                                            [(ngModel)]="position.tiempoExperiencia" #tiempoExperiencia="ngModel" required
                                     />
                                     <div *ngIf="f8.submitted && !tiempoExperiencia.valid"
@@ -389,10 +372,9 @@
                                  </div>
                               </div>
                               <div class="row">
-                                 <div class=" col-sm-12">
+                                 <div class=" col-sm-12" *hasPermission ="seccion9.OTROSREQUISITOS ? seccion9.OTROSREQUISITOS : defaultCampo">
                                     <label for="otrosRequisitos">{{ 'POSITION.LBL_OTROSREQUISITOS' | translate }}</label>
                                     <textarea pInputTextarea id="otrosRequisitos" name="otrosRequisitos"
-                                              *hasPermission ="seccion9.OTROSREQUISITOS ? seccion9.OTROSREQUISITOS : defaultCampo"
                                               [(ngModel)]="position.otrosRequisitos" #otrosRequisitos="ngModel" maxlength="200">
                                     </textarea>
 											</div>
@@ -403,7 +385,6 @@
 												<div style="text-align: center">
 													{{rangoEdad}}
 													<p-slider id="edad" name="edad" [(ngModel)]="rangoEdad"
-													          *hasPermission ="seccion9.EDAD ? seccion9.EDAD : defaultCampo"
 													          [range]="true"></p-slider>
 												</div>
 												<!--<input type="text" pInputText id="edad" name="edad" type="number" min="1" max="99"-->
@@ -416,10 +397,9 @@
 													<!--{{ 'POSITION.LBL_EDAD' | translate }} {{ 'LBL_REQUERIDO' | translate }}-->
 												<!--</div>-->
 											</div>
-											<div class="form-group col-md-3">
+											<div class="form-group col-md-3" *hasPermission ="seccion9.IDGENERO ? seccion9.IDGENERO : defaultCampo">
 												<label for="idGenero">* {{ 'LBL_GENERO' | translate }}</label>
 												<p-dropdown id="idGenero" name="idGenero" required="true"
-												            *hasPermission ="seccion9.IDGENERO ? seccion9.IDGENERO : defaultCampo"
 												            [options]="genderTypes" [autoWidth]="false"
 												            [(ngModel)]="position.idGenero"
 												            #idGenero="ngModel"
@@ -430,10 +410,9 @@
 													{{ 'LBL_GENERO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 												</div>
 											</div>
-											<div class="form-group col-md-3">
+											<div class="form-group col-md-3" *hasPermission ="seccion9.IDESTADOCIVIL ? seccion9.IDESTADOCIVIL : defaultCampo">
 												<label for="idEstadoCivil">* {{ 'LBL_ESTADOCIVIL' | translate }}</label>
 												<p-dropdown id="idEstadoCivil" name="idEstadoCivil" required="true"
-												            *hasPermission ="seccion9.IDESTADOCIVIL ? seccion9.IDESTADOCIVIL : defaultCampo"
 												            [options]="maritalStatusTypes" [autoWidth]="false"
 												            [(ngModel)]="position.idEstadoCivil"
 												            #idEstadoCivil="ngModel"
@@ -444,10 +423,9 @@
 													{{ 'LBL_ESTADOCIVIL' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 												</div>
 											</div>
-											<div class="form-group col-md-3">
+											<div class="form-group col-md-3" *hasPermission ="seccion9.IDNIVELEDUCACION ? seccion9.IDNIVELEDUCACION : defaultCampo">
 												<label for="idNivelEducacionn">* {{ 'POSITION.LBL_EDUCACION' | translate }}</label>
 												<p-dropdown id="idNivelEducacionn" name="idNivelEducacionn" required="true"
-												            *hasPermission ="seccion9.IDNIVELEDUCACION ? seccion9.IDNIVELEDUCACION : defaultCampo"
 												            [options]="listStudies" [autoWidth]="false"
 												            [(ngModel)]="position.idNivelEducacion"
 												            #idNivelEducacion="ngModel"
@@ -527,10 +505,9 @@
                         <form name="formulario" (ngSubmit)="f14.valid && onSubmit14()" #f14="ngForm" novalidate>
                            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                               <div class="row">
-                                 <div class="form-group col-md-3">
+                                 <div class="form-group col-md-3" *hasPermission ="seccion15.PUNTOS ? seccion15.PUNTOS : defaultCampo">
                                     <label for="puntos">* {{ 'POSITION.LBL_PUNTOS' | translate }}</label>
                                     <input pInputText id="puntos" name="puntos" type="number" min="0"
-                                           *hasPermission ="seccion15.PUNTOS ? seccion15.PUNTOS : defaultCampo"
                                            [(ngModel)]="position.puntos" #puntos="ngModel"
                                            (change)="getCategory()"
                                            required/>
@@ -543,10 +520,9 @@
 
                               </div>
                               <div class="row">
-                                 <div class="form-group col-md-9">
+                                 <div class="form-group col-md-9" *hasPermission ="seccion15.IDCATEGORIA ? seccion15.IDCATEGORIA : defaultCampo">
                                     <label for="idCategory">{{'POSITION.LBL_CATEGORIA' | translate }}</label>
                                     <p-dropdown id="idCategory" name="idCategory"
-                                                *hasPermission ="seccion15.IDCATEGORIA ? seccion15.IDCATEGORIA : defaultCampo"
                                                 [options]="categoryTypes" [autoWidth]="false"
                                                 [(ngModel)]="position.idCategoria"
                                                 disabled="true"
@@ -558,20 +534,18 @@
                                        Categoria requerida
                                     </div>-->
                                  </div>
-                                 <div class="form-group col-md-3">
+                                 <div class="form-group col-md-3" *hasPermission ="seccion15.IDNIVELEDUCARGO ? seccion15.IDNIVELEDUCARGO : defaultCampo">
                                     <label for="idNivelCargo">{{'POSITION.LBL_NIVELCARGO' | translate }}</label>
                                     <input type="text" pInputText id="idNivelCargo" name="idNivelCargo"
-                                           *hasPermission ="seccion15.IDNIVELEDUCARGO ? seccion15.IDNIVELEDUCARGO : defaultCampo"
                                            [(ngModel)]="nivel" #idNivelCargo="ngModel"
                                            disabled="true"
                                     />
                                  </div>
                               </div>
                               <div class="row">
-                                 <div class="form-group col-md-8">
+                                 <div class="form-group col-md-8" *hasPermission ="seccion15.SALARIO ? seccion15.SALARIO : defaultCampo">
                                     <label for="salario">{{'POSITION.LBL_SALARIO' | translate }}</label>
                                     <input type="text" pInputText id="salario" name="salario" required
-                                           *hasPermission ="seccion15.SALARIO ? seccion15.SALARIO : defaultCampo"
                                            [(ngModel)]="position.salario" #salario="ngModel" (keyup)="salario"
 														 currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
                                     />
@@ -584,7 +558,6 @@
                                  <div class="ui-grid-col-4"><br>
 	                                 <label for="indicadorRequiereFormacion">{{'POSITION.LBL_REQUIERE' | translate }}</label>
 	                                 <p-checkbox id="indicadorRequiereFormacion" name="indicadorRequiereFormacion"
-	                                             *hasPermission="seccion15.INDICADORREQUIEREFORMACION ? seccion15.INDICADORREQUIEREFORMACION : defaultCampo"
 	                                             [(ngModel)]="position.indicadorRequiereFormacion" binary="true"></p-checkbox>
                                  </div>
                               </div>
