@@ -11,6 +11,7 @@ import { DivisionPolitica } from '../_models/divisionPolitica';
 import { NavService } from '../_services/_nav.service';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
+import { JwtHelper } from 'angular2-jwt';
 
 @Component( {
                moduleId: module.id,
@@ -42,8 +43,14 @@ export class FormalStudiesUpdateComponent implements OnInit {
    idTercero: number;
    wrongCity: boolean = true;
    wrongInstitute: boolean = true;
+
+
    svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
-   dataUpload : any[] = [];
+   dataUploadArchivo : any = '';
+   dataUploadUsuario : any = '';
+   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
+   jwtHelper: JwtHelper = new JwtHelper();
+
 
    constructor( private academicEducationService: AcademicEducationService,
       private politicalDivisionService: PoliticalDivisionService,
@@ -51,7 +58,11 @@ export class FormalStudiesUpdateComponent implements OnInit {
       private route: ActivatedRoute,
       private location: Location,
       private confirmationService: ConfirmationService,
-      private _nav: NavService ) {
+      private _nav: NavService
+   ) {
+
+      let token = localStorage.getItem( 'token' );
+      this.usuarioLogueado = this.jwtHelper.decodeToken( token );
    }
 
    ngOnInit(): void {
@@ -102,6 +113,8 @@ export class FormalStudiesUpdateComponent implements OnInit {
          } );
       } );
 
+
+
    }
 
    setInitRanges() {
@@ -131,6 +144,7 @@ export class FormalStudiesUpdateComponent implements OnInit {
    }
 
    onSubmit( value: string ) {
+
       this.submitted = true;
       if ( this.selectedCity !== undefined && this.selectedCity.idDivisionPolitica !== undefined ) {
          if ( (this.fstudy.otraInstitucion !== '' && this.fstudy.otraInstitucion !== null) ||
@@ -233,35 +247,22 @@ export class FormalStudiesUpdateComponent implements OnInit {
    }
 
    uploadingOk( event: any ) {
-      console.log(event);
       let respuesta = JSON.parse(event.xhr.response);
       console.log(respuesta);
+      if(respuesta.idAdjunto != null || respuesta.idAdjunto != undefined){
+         this.fstudy.idAdjunto = respuesta.idAdjunto;
+      }
    }
 
    onBeforeSend( event: any ) {
-
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      this.dataUpload.push({ auditoriaUsuario : 1,nombreArchivo : 'nombre.pdf'});
-      event.formData.append('obj', JSON.stringify(this.dataUpload));
-
-      console.info( event );
-      /*
-      this.academicEducationService.updateFormal( this.fstudy ).subscribe(
-         data => {
-
-         } );
-         */
-
-/*
-      this.academicEducationService.updateFormal( this.fstudy ).subscribe( data=>{
-            event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-            console.info( event );
-            event.formData.append( 'idAdjunto', data.idAdjunto );
-         });
-*/
-
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      event.formData.append( 'obj', obj.toString() );
    }
 
-
+   onSelect(event:any, file:any){
+      this.dataUploadArchivo = file[0].name;
+      this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   }
 
 }

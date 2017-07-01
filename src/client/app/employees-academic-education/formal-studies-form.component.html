@@ -109,11 +109,19 @@
 
            <div class="ui-grid-col-6">
               <label >{{'LBL_ADJUNTAR' | translate}} </label>
-              <p-fileUpload  name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
-									  chooseLabel="{{'LBL_ADJUNTAR' | translate}}"
-									  (onBeforeSend)="onBeforeSend($event)"
-									  (onUpload)="uploadingOk($event)">
-              </p-fileUpload>
+					  <div *ngIf="((fstudy.idAdjunto != null))">
+						  <a class="btn btn-default" >
+							  <i class="fa fa-file-o" aria-hidden="true"></i>
+							  {{dataUploadArchivo}}
+						  </a>
+					  </div>
+
+					  <p-fileUpload  name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
+										  chooseLabel="{{'LBL_ADJUNTAR' | translate}}"
+										  (onBeforeSend)="onBeforeSend($event)"
+										  (onSelect) = "onSelect($event, $event.files)"
+										  (onUpload)="uploadingOk($event)">
+					  </p-fileUpload>
            </div>
 
         </div>

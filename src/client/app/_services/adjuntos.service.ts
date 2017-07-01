@@ -31,6 +31,11 @@ export class AdjuntosService {
       return this.authHttp.post( this.serviceURL + 'riesgos', r ).map( ( res: Response ) => res.json() );
    };
 
+   getById( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'adjuntos/' + id ).map( ( res: Response ) => res.json() as Adjunto );
+   }
+
+
    // updateConstant( c: Adjunto ): Promise<any> {
    //    c.auditoriaUsuario = this.idUsuario;
    //    return this.authHttp.put( this.serviceURL + 'constantes/', JSON.stringify( c ) ).toPromise().catch( this.handleError );

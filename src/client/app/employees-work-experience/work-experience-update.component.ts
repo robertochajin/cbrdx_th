@@ -16,6 +16,8 @@ import * as moment from 'moment/moment';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
 
+import { JwtHelper } from 'angular2-jwt';
+
 @Component( {
                moduleId: module.id,
                selector: 'work-experience-formal',
@@ -44,6 +46,14 @@ export class WorkExperienceUpdateComponent implements OnInit {
    fechaIngresa: string;
    fechaTermina: string;
 
+
+   svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
+   dataUploadArchivo : any = '';
+   dataUploadUsuario : any = '';
+   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
+   jwtHelper: JwtHelper = new JwtHelper();
+
+
    constructor( private workExperienceService: WorkExperienceService,
       private router: Router,
       private confirmationService: ConfirmationService,
@@ -54,6 +64,9 @@ export class WorkExperienceUpdateComponent implements OnInit {
       private listEmployeesService: ListEmployeesService,
       private route: ActivatedRoute,
       private _nav: NavService ) {
+
+      let token = localStorage.getItem( 'token' );
+      this.usuarioLogueado = this.jwtHelper.decodeToken( token );
 
       this.actividadEconomicaService.listByPadre( 0 ).subscribe( res => {
          this.sector.push( { label: 'Seleccione', value: null } );
@@ -206,6 +219,25 @@ export class WorkExperienceUpdateComponent implements OnInit {
                                   } );
          }
       } );
+   }
+
+   uploadingOk( event: any ) {
+      let respuesta = JSON.parse(event.xhr.response);
+      console.log(respuesta);
+      if(respuesta.idAdjunto != null || respuesta.idAdjunto != undefined){
+         this.experience.idAdjunto = respuesta.idAdjunto;
+      }
+   }
+
+   onBeforeSend( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      event.formData.append( 'obj', obj.toString() );
+   }
+
+   onSelect(event:any, file:any){
+      this.dataUploadArchivo = file[0].name;
+      this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
    }
 
 }

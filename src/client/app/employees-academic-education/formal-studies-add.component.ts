@@ -11,6 +11,7 @@ import { DivisionPolitica } from '../_models/divisionPolitica';
 import { NavService } from '../_services/_nav.service';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
+import { JwtHelper } from 'angular2-jwt';
 
 @Component( {
                moduleId: module.id,
@@ -41,8 +42,13 @@ export class FormalStudiesAddComponent implements OnInit {
    idTercero: number;
    wrongCity: boolean = true;
    wrongInstitute: boolean = false;
+
+
    svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
-   dataUpload : any[] = [];
+   dataUploadArchivo : any = '';
+   dataUploadUsuario : any = '';
+   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
+   jwtHelper: JwtHelper = new JwtHelper();
 
    constructor( private academicEducationService: AcademicEducationService,
       private politicalDivisionService: PoliticalDivisionService,
@@ -51,6 +57,8 @@ export class FormalStudiesAddComponent implements OnInit {
       private location: Location,
       private confirmationService: ConfirmationService,
       private _nav: NavService ) {
+      let token = localStorage.getItem( 'token' );
+      this.usuarioLogueado = this.jwtHelper.decodeToken( token );
    }
 
    ngOnInit() {
@@ -206,32 +214,22 @@ export class FormalStudiesAddComponent implements OnInit {
 
 
    uploadingOk( event: any ) {
-   console.log(event);
-   /*
-    this.adjuntos = [];
-    this.adjuntosService.listAdjuntos( ).subscribe( rest => {
-    this.adjuntos = rest;
-    } );
-    this.navService.setMesage( 1, this.msgs );
-    this.fileupload = true;
-    */
-}
+      let respuesta = JSON.parse(event.xhr.response);
+      console.log(respuesta);
+      if(respuesta.idAdjunto != null || respuesta.idAdjunto != undefined){
+         this.fstudy.idAdjunto = respuesta.idAdjunto;
+      }
+   }
 
    onBeforeSend( event: any ) {
-      console.info( event );
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      event.formData.append( 'obj', obj.toString() );
+   }
 
-      /*
-      this.dataUpload[0].auditoriaUsuario = 1;
-      this.dataUpload[1].nombreArchivo = 'nombrepdf.pdf';
-      */
-
-      this.dataUpload.push({
-         auditoriaUsuario : 1,
-         nombreArchivo : 'nombre.pdf'
-      });
-
-      event.formData.append('obj', JSON.stringify(this.dataUpload));
+   onSelect(event:any, file:any){
+      this.dataUploadArchivo = file[0].name;
+      this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
    }
 
 }
