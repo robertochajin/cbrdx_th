@@ -1,29 +1,9 @@
+<div class="col-md-10 col-md-offset-1">
 <p-messages [value]="msgs"></p-messages>
 <div *ngIf="rolFuncionality">
-   <div class="row-fluid">
-      <div class="col-md-12">
-         <form novalidate>
-            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-               <div class="row">
-                  <div class="form-group col-md-1">
-                  </div>
-                  <div class="ui-grid-col-10">
-                     <h3><label >{{ 'ROLES.LBL_FUNCIONALIDAD' | translate}}: </label>{{rolFuncionality.menu}}</h3>
-                  </div>
-               </div>
-            </div>
-            <div class="row form-footer-buttons">
-               <div class="form-group col-md-12">
-                  <button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate}}" type="button"
-                          pButton (click)="goBack()"></button>
-               </div>
-            </div>
-         </form>
-      </div>
-   </div>
-</div>
-<div>
-   <p-tabView>
+			<p-panel header="{{ 'ROLES.LBL_FUNCIONALIDAD' | translate}}: {{rolFuncionality.menu}}">
+
+	<p-tabView>
       <p-tabPanel header="{{ 'ROLES.LBL_SECCIONES' | translate }}" >
          <div class="row datable-header">
             <div class="col-md-6 col-xs-12 datatable-header-add">
@@ -79,8 +59,16 @@
          </p-dataTable>
       </p-tabPanel>
    </p-tabView>
-   
+	<div class="row form-footer-buttons">
+		<div class="form-group col-md-12">
+			<button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate}}" type="button"
+					  pButton (click)="goBack()"></button>
+		</div>
+	</div>
+	</p-panel>
 </div>
+</div>
+
 <p-confirmDialog width="400" #cd>
 	<p-footer>
 		<button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>

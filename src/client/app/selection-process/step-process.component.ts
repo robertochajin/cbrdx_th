@@ -46,6 +46,9 @@ export class StepProcessComponent implements OnInit {
    usuarioLogueado: any;
    idRol: number;
    jwtHelper: JwtHelper = new JwtHelper();
+   svcThUrl = '<%= SVC_TH_URL %>/api/upload';
+
+
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
