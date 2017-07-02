@@ -11,6 +11,7 @@ import { DivisionPolitica } from '../_models/divisionPolitica';
 import { NavService } from '../_services/_nav.service';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
+import { JwtHelper } from 'angular2-jwt';
 
 @Component( {
                moduleId: module.id,
@@ -42,6 +43,14 @@ export class FormalStudiesAddComponent implements OnInit {
    wrongCity: boolean = true;
    wrongInstitute: boolean = false;
 
+
+   svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
+   dataUploadArchivo : any = '';
+   dataUploadUsuario : any = '';
+   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
+   jwtHelper: JwtHelper = new JwtHelper();
+
+
    constructor( private academicEducationService: AcademicEducationService,
       private politicalDivisionService: PoliticalDivisionService,
       private listaService: ListaService,
@@ -49,6 +58,8 @@ export class FormalStudiesAddComponent implements OnInit {
       private location: Location,
       private confirmationService: ConfirmationService,
       private _nav: NavService ) {
+      let token = localStorage.getItem( 'token' );
+      this.usuarioLogueado = this.jwtHelper.decodeToken( token );
    }
 
    ngOnInit() {
@@ -75,6 +86,7 @@ export class FormalStudiesAddComponent implements OnInit {
       this.maxDateFinal.setMonth( month );
       this.maxDateFinal.setFullYear( year );
       this.range = `${lastYear}:${year}`;
+
 
       this.listaService.getMasterDetails( 'ListasNivelesEstudios' ).subscribe( res => {
          this.studyLevelList.push( { label: 'Seleccione', value: null } );
@@ -201,6 +213,31 @@ export class FormalStudiesAddComponent implements OnInit {
          this.location.back();
       }
    }
+
+
+   uploadingOk( event: any ) {
+      let respuesta = JSON.parse(event.xhr.response);
+      console.log(respuesta);
+      if(respuesta.idAdjunto != null || respuesta.idAdjunto != undefined){
+         this.fstudy.idAdjunto = respuesta.idAdjunto;
+      }
+   }
+
+   onBeforeSend( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      event.formData.append( 'obj', obj.toString() );
+   }
+
+   onSelect(event:any, file:any){
+      this.dataUploadArchivo = file[0].name;
+      this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   }
+
+   uploadAgain(rta:boolean){
+      this.fstudy.idAdjunto = null;
+   }
+
 }
 
 

@@ -11,6 +11,8 @@ import { DivisionPolitica } from '../_models/divisionPolitica';
 import { NavService } from '../_services/_nav.service';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
+import { JwtHelper } from 'angular2-jwt';
+
 
 @Component( {
                moduleId: module.id,
@@ -43,13 +45,28 @@ export class FormalStudiesUpdateComponent implements OnInit {
    wrongCity: boolean = true;
    wrongInstitute: boolean = true;
 
+
+   svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
+   dataUploadArchivo : any = 'Archivo Adjunto';
+   dataUploadUsuario : any = '';
+   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
+   jwtHelper: JwtHelper = new JwtHelper();
+
+
+
+
    constructor( private academicEducationService: AcademicEducationService,
       private politicalDivisionService: PoliticalDivisionService,
       private listaService: ListaService,
       private route: ActivatedRoute,
       private location: Location,
       private confirmationService: ConfirmationService,
-      private _nav: NavService ) {
+      private _nav: NavService,
+
+   ) {
+
+      let token = localStorage.getItem( 'token' );
+      this.usuarioLogueado = this.jwtHelper.decodeToken( token );
    }
 
    ngOnInit(): void {
@@ -98,7 +115,14 @@ export class FormalStudiesUpdateComponent implements OnInit {
             // let ff: moment.Moment = moment( this.fstudy.fechaTermina, 'YYYY-MM-DD' );
             // this.fstudy.fechaTermina = ff.format( 'MM/DD/YYYY' );
          } );
+
+/*
+         this.adjuntosService.getById(this.fstudy.idAdjunto).subscribe(data => {
+            console.info(data);
+         });
+*/
       } );
+
 
    }
 
@@ -129,6 +153,7 @@ export class FormalStudiesUpdateComponent implements OnInit {
    }
 
    onSubmit( value: string ) {
+
       this.submitted = true;
       if ( this.selectedCity !== undefined && this.selectedCity.idDivisionPolitica !== undefined ) {
          if ( (this.fstudy.otraInstitucion !== '' && this.fstudy.otraInstitucion !== null) ||
@@ -228,6 +253,29 @@ export class FormalStudiesUpdateComponent implements OnInit {
          this._nav.setTab( 6 );
          this.location.back();
       }
+   }
+
+   uploadingOk( event: any ) {
+      let respuesta = JSON.parse(event.xhr.response);
+      console.log(respuesta);
+      if(respuesta.idAdjunto != null || respuesta.idAdjunto != undefined){
+         this.fstudy.idAdjunto = respuesta.idAdjunto;
+      }
+   }
+
+   onBeforeSend( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      event.formData.append( 'obj', obj.toString() );
+   }
+
+   onSelect(event:any, file:any){
+      this.dataUploadArchivo = file[0].name;
+      this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   }
+
+   uploadAgain(rta:boolean){
+      this.fstudy.idAdjunto = null;
    }
 
 }
