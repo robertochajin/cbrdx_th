@@ -48,7 +48,7 @@ export class WorkExperienceUpdateComponent implements OnInit {
 
 
    svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
-   dataUploadArchivo : any = '';
+   dataUploadArchivo : any = 'Archivo Adjunto';
    dataUploadUsuario : any = '';
    usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
    jwtHelper: JwtHelper = new JwtHelper();
@@ -239,6 +239,11 @@ export class WorkExperienceUpdateComponent implements OnInit {
       this.dataUploadArchivo = file[0].name;
       this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
    }
+
+   uploadAgain(rta:boolean){
+      this.experience.idAdjunto = null;
+   }
+
 
 }
 
