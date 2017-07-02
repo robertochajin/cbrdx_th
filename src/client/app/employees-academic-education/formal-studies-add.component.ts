@@ -50,6 +50,7 @@ export class FormalStudiesAddComponent implements OnInit {
    usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
    jwtHelper: JwtHelper = new JwtHelper();
 
+
    constructor( private academicEducationService: AcademicEducationService,
       private politicalDivisionService: PoliticalDivisionService,
       private listaService: ListaService,
@@ -85,6 +86,7 @@ export class FormalStudiesAddComponent implements OnInit {
       this.maxDateFinal.setMonth( month );
       this.maxDateFinal.setFullYear( year );
       this.range = `${lastYear}:${year}`;
+
 
       this.listaService.getMasterDetails( 'ListasNivelesEstudios' ).subscribe( res => {
          this.studyLevelList.push( { label: 'Seleccione', value: null } );
@@ -230,6 +232,10 @@ export class FormalStudiesAddComponent implements OnInit {
    onSelect(event:any, file:any){
       this.dataUploadArchivo = file[0].name;
       this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   }
+
+   uploadAgain(rta:boolean){
+      this.fstudy.idAdjunto = null;
    }
 
 }

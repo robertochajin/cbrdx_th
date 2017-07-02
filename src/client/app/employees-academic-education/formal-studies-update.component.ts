@@ -13,6 +13,7 @@ import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
 import { JwtHelper } from 'angular2-jwt';
 
+
 @Component( {
                moduleId: module.id,
                selector: 'academic-education-formal-update',
@@ -46,10 +47,12 @@ export class FormalStudiesUpdateComponent implements OnInit {
 
 
    svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
-   dataUploadArchivo : any = '';
+   dataUploadArchivo : any = 'Archivo Adjunto';
    dataUploadUsuario : any = '';
    usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
    jwtHelper: JwtHelper = new JwtHelper();
+
+
 
 
    constructor( private academicEducationService: AcademicEducationService,
@@ -58,7 +61,8 @@ export class FormalStudiesUpdateComponent implements OnInit {
       private route: ActivatedRoute,
       private location: Location,
       private confirmationService: ConfirmationService,
-      private _nav: NavService
+      private _nav: NavService,
+
    ) {
 
       let token = localStorage.getItem( 'token' );
@@ -111,8 +115,13 @@ export class FormalStudiesUpdateComponent implements OnInit {
             // let ff: moment.Moment = moment( this.fstudy.fechaTermina, 'YYYY-MM-DD' );
             // this.fstudy.fechaTermina = ff.format( 'MM/DD/YYYY' );
          } );
-      } );
 
+/*
+         this.adjuntosService.getById(this.fstudy.idAdjunto).subscribe(data => {
+            console.info(data);
+         });
+*/
+      } );
 
 
    }
@@ -263,6 +272,10 @@ export class FormalStudiesUpdateComponent implements OnInit {
    onSelect(event:any, file:any){
       this.dataUploadArchivo = file[0].name;
       this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   }
+
+   uploadAgain(rta:boolean){
+      this.fstudy.idAdjunto = null;
    }
 
 }
