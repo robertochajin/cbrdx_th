@@ -257,10 +257,5 @@ export class NoFormalStudiesAddComponent implements OnInit {
       });
    }
 
-   getFileName() {
-      this.adjuntosService.getFileName( this.nfstudy.idAdjunto ).subscribe( res => {
-         this.dataUploadArchivo = res.nombreArchivo;
-      } );
-   }
 
 }
