@@ -17,7 +17,7 @@ export class EmployeesDetailComponent implements OnInit {
    @Input()
    employee: Employee = new Employee();
    acordion: number;
-   svcThUrl = '<%= SVC_TH_URL %>/api/upload';
+   svcThUrl = '<%= SVC_TH_URL %>/api/upload/';
 
    constructor( private employeeService: EmployeesService,
       private route: ActivatedRoute,
@@ -87,6 +87,14 @@ export class EmployeesDetailComponent implements OnInit {
                                       scrollTop: jQuery( 'p-accordiontab > .ui-state-active' ).position().top + 90
                                    }, 'fast' );
       }, 1000 );
+   }
+
+   onBeforeSend( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+   }
+
+   onUpload( event: any ) {
+      this.employee.imagen = event.xhr.responseText;
    }
 
 }

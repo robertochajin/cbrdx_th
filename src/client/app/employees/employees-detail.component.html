@@ -10,6 +10,11 @@
 			  <div class="thumbnail img-responsive">
 				  <img src="{{svcThUrl}}/file/{{employee.imagen}}" alt="...">
 			  </div>
+	        <p-fileUpload name="file" url="{{svcThUrl}}{{employee.idTercero}}" auto="true" class="upload-avatar"
+	                      chooseLabel="{{'USER_SESSION.LBL_NUEVOAVATAR' | translate}}"
+	                      (onBeforeSend)="onBeforeSend($event)"
+	                      (onUpload)="onUpload($event)" accept="image/*"
+	        ></p-fileUpload>
         </div>
         <div class="col-md-8">
           <h2>{{employee.nombreCompleto}}</h2>

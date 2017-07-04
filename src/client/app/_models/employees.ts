@@ -62,6 +62,7 @@ export class Employee {
    public idSectorEconomico: number;
    public idActividadEconomica: number;
    public idTipoTercero: number;
+   public idAdjunto: number;
 
    public idTallaCamisa: number;
    public idTallaPantalon: number;

@@ -15,6 +15,7 @@ import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
 import { NavService } from '../_services/_nav.service';
 import { ConstanteService } from '../_services/constante.service';
+import { JwtHelper } from 'angular2-jwt';
 
 @Component( {
                moduleId: module.id,
@@ -65,6 +66,14 @@ export class EmployeesAddComponent implements OnInit {
    tiposdoc: string[] = [];
    mayeda: number = 0;
    listTypeDoc: ListaItem[] = [];
+
+   svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
+   dataUploadArchivo : any = 'Archivo Adjunto';
+   dataUploadUsuario : any = '';
+   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
+   jwtHelper: JwtHelper = new JwtHelper();
+   fsize: number = 50000000;
+   ftype: string = '';
 
    constructor( private employeesService: EmployeesService,
       private router: Router,
@@ -441,5 +450,38 @@ export class EmployeesAddComponent implements OnInit {
    inputCleanUp( value: string ) {
       this.employee.numeroDocumento = value.toUpperCase().replace( /[^0-9]/g, '' ).trim();
    }
+// Archivo Adjunto
+   uploadingOk( event: any ) {
+      let respuesta = JSON.parse(event.xhr.response);
+      if(respuesta.idAdjunto != null || respuesta.idAdjunto != undefined){
+         this.employee.idAdjunto = respuesta.idAdjunto;
+      }
+   }
 
+   onBeforeSend( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      event.formData.append( 'obj', obj.toString() );
+   }
+
+   onSelect(event:any, file:any){
+      this.dataUploadArchivo = file[0].name;
+      this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   }
+
+   uploadAgain(rta:boolean){
+      this.employee.idAdjunto = null;
+   }
+
+   downloadFile(id: number){
+
+      this.adjuntosService.downloadFile( id ).subscribe(res => {
+         window.location.assign(res);
+      });
+   }
+   getFileName() {
+      this.adjuntosService.getFileName( this.employee.idAdjunto ).subscribe( res => {
+         this.dataUploadArchivo = res.nombreArchivo;
+      } );
+   }
 }
