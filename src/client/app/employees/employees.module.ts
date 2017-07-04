@@ -23,6 +23,8 @@ import { EmployeesVehicleModule } from '../employees-vehicle/employee-vehicles.m
 import { ListaService } from '../_services/lista.service';
 import { EmployeesViewDetailComponent } from './employees-view-detail.component';
 import { EmployeesCurriculumVitaeComponent } from './employees-curriculum-vitae.component';
+import { AdjuntosService } from '../_services/adjuntos.service';
+import { ConstanteService } from '../_services/constante.service';
 
 @NgModule( {
               imports: [
@@ -43,7 +45,7 @@ import { EmployeesCurriculumVitaeComponent } from './employees-curriculum-vitae.
                  EmployeesAdditionalDataComponent,EmployeesViewDetailComponent, EmployeesCurriculumVitaeComponent
               ],
               bootstrap: [ EmployeesComponent ],
-              providers: [ EmployeesService, ListEmployeesService, PoliticalDivisionService, NavService, ListaService ],
+              providers: [ EmployeesService, ListEmployeesService, PoliticalDivisionService, NavService, ListaService, AdjuntosService, ConstanteService ],
               exports: [ EmployeesComponent ]
            } )
 export class EmployeesModule {

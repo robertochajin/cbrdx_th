@@ -42,6 +42,7 @@ export class UsuariosAddComponent {
    curGrupos: VUsuarioGrupoGestion[] = [];
    currentDate: Date = new Date( Date.now() );
    displayDialog = false;
+   svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
 
    datatypeMaster: Lista;
    datatypeDetails: ListaItem[];

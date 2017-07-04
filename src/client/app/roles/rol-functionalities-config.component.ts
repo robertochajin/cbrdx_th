@@ -42,7 +42,7 @@ export class RolFuncionalitiesConfigComponent implements OnInit {
             this.rolFuncionalitiesService.getControlByFuncionality( this.rolFuncionality.idRol, this.rolFuncionality.idFuncionalidad )
             .subscribe( listaFuncionalityControl => {
                this.listaFuncionalityControl = listaFuncionalityControl;
-               this.formManagerService.getFuncionalidadesControlesEnabled().subscribe(
+               this.formManagerService.getFuncionalidadesControlesEnabledByControl(this.rolFuncionality.idFuncionalidad).subscribe(
                   lfControles => {
                      this.lfControles = lfControles;
                      this.cosntrucObj();
@@ -85,8 +85,8 @@ export class RolFuncionalitiesConfigComponent implements OnInit {
    cosntrucObj() {
       this.lfControles.map( ( s: any ) => {
          this.fControles = new RolFunctionalityControl();
-         if ( this.listaFuncionalityControl.find( d => d.idFuncionalidadControl === s.idFuncionalidadControl ) ) {
-            this.fControles = this.listaFuncionalityControl.find( d => d.idFuncionalidadControl = s.idFuncionalidadControl );
+         if ( this.listaFuncionalityControl.filter( d => d.idFuncionalidadControl === s.idFuncionalidadControl ).length > 0 ) {
+            this.fControles = this.listaFuncionalityControl.filter( d => d.idFuncionalidadControl === s.idFuncionalidadControl )[0];
             this.fControles.codigo = s.codigo;
          } else {
             this.fControles.idRolFuncionalidadControl = null;
@@ -95,9 +95,9 @@ export class RolFuncionalitiesConfigComponent implements OnInit {
             this.fControles.rol = this.rolFuncionality.rol;
             this.fControles.control = s.control;
             this.fControles.codigo = s.codigo;
-            this.fControles.indicadorHabilitado = false;
-            this.fControles.indicadorEditar = false;
-            this.fControles.indicadorSeccion = false;
+            this.fControles.indicadorHabilitado = true;
+            this.fControles.indicadorEditar = true;
+            this.fControles.indicadorSeccion = s.indicadorSeccion;
          }
          if ( s.indicadorSeccion === true ) {
             this.secciones.push( this.fControles );
