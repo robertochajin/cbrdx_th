@@ -783,8 +783,8 @@
 
    "REQUERIMIENTOPERSONAL": {
       "LBL_REQUERIMIENTOPERSONAL":"Requerimiento de personal",
-      "BTN_AGREGARNUEVO":"Agregar nuevo requerimiento de personal",
-      "LBL_DATOSSOLICITUD":"Datos básico solicitud",
+      "BTN_AGREGARNUEVO":"Agregar nuevo referido",
+      "LBL_DATOSSOLICITUD":"Datos básicos de la solicitud",
       "LBL_DATOSSOLICITANTE":"Datos Solicitante",
       "LBL_NOMBRESOLICITANTE":"Nombre del Solicitante",
       "LBL_CARGOSOLICITANTE":"Cargo del solicitante",
@@ -794,7 +794,7 @@
       "LBL_DATOSVACANTE":"Datos de la vacante",
       "LBL_MOTIVOREQUERIMIENTO":"Por qué se genera requerimiento",
       "LBL_JUSTIFICACION":"Justificación",
-      "LBL_CARGO":"Cargo",
+      "LBL_CARGO":"Cargo solicitado",
       "LBL_NOMBRECARGO":"Nombre cargo",
       "LBL_FUNCIONCARGO":"Función cargo",
       "LBL_ZONA":"Zona",
@@ -822,10 +822,10 @@
       "LBL_FECHA": "Fecha",
       "LBL_ESTADO": "Estado",
       "BTN_SENDREQUEST": "Enviar solicitud",
+      "MSG_RECURSOREQ": "Recurso requerido",
       "LBL_RECURSO": "Recurso",
       "LBL_RECURSOTICS": "Recurso Tic's",
       "LBL_OBSERVACIONES": "Observaciones",
-      "LBL_JUSTIFICACION": "Justificación",
       "LBL_CUESTIONARIOS": "Datos pruebas técnicas",
       "LBL_CUESTIONARIO": "Pruebas técnicas",
       "":""
