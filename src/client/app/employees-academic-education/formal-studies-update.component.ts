@@ -12,6 +12,8 @@ import { NavService } from '../_services/_nav.service';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
 import { JwtHelper } from 'angular2-jwt';
+import { AdjuntosService } from '../_services/adjuntos.service';
+import { ConstanteService } from '../_services/constante.service';
 
 
 @Component( {
@@ -45,21 +47,21 @@ export class FormalStudiesUpdateComponent implements OnInit {
    wrongCity: boolean = true;
    wrongInstitute: boolean = true;
 
-
    svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
    dataUploadArchivo : any = 'Archivo Adjunto';
    dataUploadUsuario : any = '';
    usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
    jwtHelper: JwtHelper = new JwtHelper();
-
-
-
+   fsize: number = 50000000;
+   ftype: string = '';
 
    constructor( private academicEducationService: AcademicEducationService,
       private politicalDivisionService: PoliticalDivisionService,
       private listaService: ListaService,
       private route: ActivatedRoute,
       private location: Location,
+      private adjuntosService: AdjuntosService,
+      private constanteService: ConstanteService,
       private confirmationService: ConfirmationService,
       private _nav: NavService,
 
@@ -67,6 +69,16 @@ export class FormalStudiesUpdateComponent implements OnInit {
 
       let token = localStorage.getItem( 'token' );
       this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+      this.constanteService.getByCode( 'FTYPE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.ftype = data.valor;
+         }
+      } );
+      this.constanteService.getByCode( 'FSIZE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.fsize = Number( data.valor );
+         }
+      } );
    }
 
    ngOnInit(): void {
@@ -93,6 +105,7 @@ export class FormalStudiesUpdateComponent implements OnInit {
          this.idTercero = params[ 'tercero' ];
          this.academicEducationService.getFormal( +params[ 'id' ] ).subscribe( fstudy => {
             this.fstudy = fstudy;
+            this.getFileName();
             this.selectedCity = new DivisionPolitica();
             this.selectedCity.camino = this.fstudy.ciudad;
             this.selectedCity.idDivisionPolitica = this.fstudy.idCiudad;
@@ -257,7 +270,6 @@ export class FormalStudiesUpdateComponent implements OnInit {
 
    uploadingOk( event: any ) {
       let respuesta = JSON.parse(event.xhr.response);
-      console.log(respuesta);
       if(respuesta.idAdjunto != null || respuesta.idAdjunto != undefined){
          this.fstudy.idAdjunto = respuesta.idAdjunto;
       }
@@ -277,5 +289,15 @@ export class FormalStudiesUpdateComponent implements OnInit {
    uploadAgain(rta:boolean){
       this.fstudy.idAdjunto = null;
    }
+   downloadFile(id: number){
+      this.adjuntosService.downloadFile( id ).subscribe(res => {
+         window.location.assign(res);
+      });
+   }
 
+   getFileName() {
+      this.adjuntosService.getFileName( this.fstudy.idAdjunto ).subscribe( res => {
+         this.dataUploadArchivo = res.nombreArchivo;
+      } );
+   }
 }
