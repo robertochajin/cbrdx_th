@@ -264,9 +264,11 @@ export class WorkExperienceUpdateComponent implements OnInit {
       });
    }
    getFileName() {
-      this.adjuntosService.getFileName( this.experience.idAdjunto ).subscribe( res => {
-         this.dataUploadArchivo = res.nombreArchivo;
-      } );
+      if(this.experience.idAdjunto){
+         this.adjuntosService.getFileName( this.experience.idAdjunto ).subscribe( res => {
+            this.dataUploadArchivo = res.nombreArchivo;
+         } );
+      }
    }
 }
 

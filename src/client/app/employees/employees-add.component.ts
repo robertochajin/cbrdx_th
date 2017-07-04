@@ -16,6 +16,7 @@ import { ListaItem } from '../_models/listaItem';
 import { NavService } from '../_services/_nav.service';
 import { ConstanteService } from '../_services/constante.service';
 import { JwtHelper } from 'angular2-jwt';
+import { AdjuntosService } from '../_services/adjuntos.service';
 
 @Component( {
                moduleId: module.id,
@@ -80,6 +81,7 @@ export class EmployeesAddComponent implements OnInit {
       private location: Location,
       private listaService: ListaService,
       private constanteService: ConstanteService,
+      private adjuntosService: AdjuntosService,
       private listEmployeesService: ListEmployeesService,
       private politicalDivisionService: PoliticalDivisionService,
       private actividadEconomicaService: ActividadEconomicaService,
@@ -474,14 +476,8 @@ export class EmployeesAddComponent implements OnInit {
    }
 
    downloadFile(id: number){
-
       this.adjuntosService.downloadFile( id ).subscribe(res => {
          window.location.assign(res);
       });
-   }
-   getFileName() {
-      this.adjuntosService.getFileName( this.employee.idAdjunto ).subscribe( res => {
-         this.dataUploadArchivo = res.nombreArchivo;
-      } );
    }
 }

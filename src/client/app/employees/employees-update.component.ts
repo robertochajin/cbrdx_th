@@ -217,7 +217,7 @@ export class EmployeesUpdateComponent implements OnInit {
       .switchMap( ( params: Params ) => this.employeesService.get( +params[ 'id' ] ) )
       .subscribe( employee => {
          this.employee = employee;
-         this.getFileName()
+         this.getFileName();
          this.constanteService.getByCode( 'DOCMYE' ).subscribe( data => {
             if ( data.valor ) {
                for ( let c of data.valor.split( ',' ) ) {
@@ -589,9 +589,11 @@ export class EmployeesUpdateComponent implements OnInit {
       });
    }
    getFileName() {
-      this.adjuntosService.getFileName( this.employee.idAdjunto ).subscribe( res => {
-         this.dataUploadArchivo = res.nombreArchivo;
-      } );
+      if(this.employee.idAdjunto) {
+         this.adjuntosService.getFileName( this.employee.idAdjunto ).subscribe( res => {
+            this.dataUploadArchivo = res.nombreArchivo;
+         } );
+      }
    }
 
 }

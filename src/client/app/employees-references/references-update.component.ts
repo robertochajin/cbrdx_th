@@ -52,6 +52,19 @@ export class ReferencesUpdateComponent implements OnInit {
       private adjuntosService: AdjuntosService,
       private constanteService: ConstanteService,
       private _nav: NavService ) {
+
+      let token = localStorage.getItem( 'token' );
+      this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+      this.constanteService.getByCode( 'FTYPE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.ftype = data.valor;
+         }
+      } );
+      this.constanteService.getByCode( 'FSIZE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.fsize = Number( data.valor );
+         }
+      } );
    }
 
    ngOnInit() {
@@ -66,7 +79,7 @@ export class ReferencesUpdateComponent implements OnInit {
          this.idTercero = params[ 'tercero' ];
          this.referencesService.get( +params[ 'id' ] ).subscribe( reference => {
             this.reference = reference;
-            getFileName();
+            this.getFileName();
             this.locateService.getById( this.reference.idLocalizacion ).subscribe( localizacion => {
                this.localizacion = localizacion;
                this.reference.direccion = localizacion.direccion;
@@ -195,9 +208,11 @@ export class ReferencesUpdateComponent implements OnInit {
       });
    }
    getFileName() {
-      this.adjuntosService.getFileName( this.reference.idAdjunto ).subscribe( res => {
-         this.dataUploadArchivo = res.nombreArchivo;
-      } );
+      if(this.reference.idAdjunto){
+         this.adjuntosService.getFileName( this.reference.idAdjunto ).subscribe( res => {
+            this.dataUploadArchivo = res.nombreArchivo;
+         } );
+      }
    }
 }
 

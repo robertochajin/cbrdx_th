@@ -17,7 +17,7 @@ export class EmployeesDetailComponent implements OnInit {
    @Input()
    employee: Employee = new Employee();
    acordion: number;
-   svcThUrl = '<%= SVC_TH_URL %>/api/upload/';
+   svcThUrl = '<%= SVC_TH_URL %>/api/upload';
 
    constructor( private employeeService: EmployeesService,
       private route: ActivatedRoute,
@@ -36,7 +36,7 @@ export class EmployeesDetailComponent implements OnInit {
                                            this.employee.segundoApellido;
 
             this.employee.edad = moment( this.employee.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
-
+            console.info(this.svcThUrl+'/file/'+this.employee.imagen);
             // this.acordion=0;
             //
             //   if( this.employee.ciudadExpDocumento === null ) this.employee.ciudadExpDocumento='';

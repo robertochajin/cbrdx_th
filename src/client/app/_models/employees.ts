@@ -104,7 +104,7 @@ export class Employee {
       this.idTipoOcupacion = null;
       this.idTipoPersona = null;
       this.idTipoTercero = null;
-      this.imagen = '';
+      this.imagen = null;
       this.imc = 0;
       this.indicadorVivo = true;
       this.indicadorHabilitado = true;

@@ -296,8 +296,10 @@ export class FormalStudiesUpdateComponent implements OnInit {
    }
 
    getFileName() {
-      this.adjuntosService.getFileName( this.fstudy.idAdjunto ).subscribe( res => {
-         this.dataUploadArchivo = res.nombreArchivo;
-      } );
+      if(this.fstudy.idAdjunto ){
+         this.adjuntosService.getFileName( this.fstudy.idAdjunto ).subscribe( res => {
+            this.dataUploadArchivo = res.nombreArchivo;
+         } );
+      }
    }
 }

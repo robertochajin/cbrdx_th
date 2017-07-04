@@ -270,9 +270,11 @@ export class NoFormalStudiesUpdateComponent implements OnInit {
    }
 
    getFileName() {
-      this.adjuntosService.getFileName( this.nfstudy.idAdjunto ).subscribe( res => {
-         this.dataUploadArchivo = res.nombreArchivo;
-      } );
+      if(this.nfstudy.idAdjunto){
+         this.adjuntosService.getFileName( this.nfstudy.idAdjunto ).subscribe( res => {
+            this.dataUploadArchivo = res.nombreArchivo;
+         } );
+      }
    }
 
 }

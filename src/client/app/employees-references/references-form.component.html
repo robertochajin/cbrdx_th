@@ -131,7 +131,7 @@
 				               <i class="fa fa-times" aria-hidden="true"></i>
 			               </a>
 		               </div>
-		               <p-fileUpload  *ngIf="((employee.idAdjunto == null))" name="file" url="{{svcThUrl}}" auto="true"
+		               <p-fileUpload  *ngIf="reference.idAdjunto == null" name="file" url="{{svcThUrl}}" auto="true"
 		                              class="upload-avatar"
 		                              chooseLabel="{{'LBL_ADJUNTAR' | translate}}"
 		                              (onBeforeSend) = "onBeforeSend($event)"
