@@ -231,7 +231,6 @@ export class FormalStudiesAddComponent implements OnInit {
 
    uploadingOk( event: any ) {
       let respuesta = JSON.parse(event.xhr.response);
-      console.log(respuesta);
       if(respuesta.idAdjunto != null || respuesta.idAdjunto != undefined){
          this.fstudy.idAdjunto = respuesta.idAdjunto;
       }
