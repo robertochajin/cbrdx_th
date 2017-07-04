@@ -17,6 +17,8 @@ import * as moment from 'moment/moment';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
 import { ConstanteService } from '../_services/constante.service';
+import { JwtHelper } from 'angular2-jwt';
+import { AdjuntosService } from '../_services/adjuntos.service';
 
 @Component( {
                moduleId: module.id,
@@ -70,6 +72,14 @@ export class EmployeesUpdateComponent implements OnInit {
    mayeda: number = 0;
    listTypeDoc: ListaItem[] = [];
 
+   svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
+   dataUploadArchivo : any = 'Archivo Adjunto';
+   dataUploadUsuario : any = '';
+   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
+   jwtHelper: JwtHelper = new JwtHelper();
+   fsize: number = 50000000;
+   ftype: string = '';
+
    constructor( private employeesService: EmployeesService,
       private route: ActivatedRoute,
       private router: Router,
@@ -81,7 +91,21 @@ export class EmployeesUpdateComponent implements OnInit {
       private actividadEconomicaService: ActividadEconomicaService,
       private ocupacionesService: OcupacionesService,
       private confirmationService: ConfirmationService,
+      private adjuntosService: AdjuntosService,
       private _nav: NavService ) {
+
+      let token = localStorage.getItem( 'token' );
+      this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+      this.constanteService.getByCode( 'FTYPE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.ftype = data.valor;
+         }
+      } );
+      this.constanteService.getByCode( 'FSIZE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.fsize = Number( data.valor );
+         }
+      } );
 
       listaService.getMasterDetails( 'ListasTiposPersonas' ).subscribe( res => {
          this.personTypes.push( { label: 'Seleccione', value: null } );
@@ -193,6 +217,7 @@ export class EmployeesUpdateComponent implements OnInit {
       .switchMap( ( params: Params ) => this.employeesService.get( +params[ 'id' ] ) )
       .subscribe( employee => {
          this.employee = employee;
+         this.getFileName();
          this.constanteService.getByCode( 'DOCMYE' ).subscribe( data => {
             if ( data.valor ) {
                for ( let c of data.valor.split( ',' ) ) {
@@ -533,6 +558,42 @@ export class EmployeesUpdateComponent implements OnInit {
 
    inputCleanUp( value: string ) {
       this.employee.numeroDocumento = value.toUpperCase().replace( ' ', '' ).trim();
+   }
+   // Archivo Adjunto
+   uploadingOk( event: any ) {
+      let respuesta = JSON.parse(event.xhr.response);
+      if(respuesta.idAdjunto != null || respuesta.idAdjunto != undefined){
+         this.employee.idAdjunto = respuesta.idAdjunto;
+      }
+   }
+
+   onBeforeSend( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      event.formData.append( 'obj', obj.toString() );
+   }
+
+   onSelect(event:any, file:any){
+      this.dataUploadArchivo = file[0].name;
+      this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   }
+
+   uploadAgain(rta:boolean){
+      this.employee.idAdjunto = null;
+   }
+
+   downloadFile(id: number){
+
+      this.adjuntosService.downloadFile( id ).subscribe(res => {
+         window.location.assign(res);
+      });
+   }
+   getFileName() {
+      if(this.employee.idAdjunto) {
+         this.adjuntosService.getFileName( this.employee.idAdjunto ).subscribe( res => {
+            this.dataUploadArchivo = res.nombreArchivo;
+         } );
+      }
    }
 
 }

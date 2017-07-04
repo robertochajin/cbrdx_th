@@ -20,7 +20,7 @@
 					<p-fileUpload name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
 									  chooseLabel="{{'USER_SESSION.LBL_NUEVOAVATAR' | translate}}"
 									  (onBeforeSend)="onBeforeSend($event)"
-									  (onUpload)="onUpload($event)"
+									  (onUpload)="onUpload($event)" accept="image/*"
 					></p-fileUpload>
 				</div>
             <div class="col-md-7">

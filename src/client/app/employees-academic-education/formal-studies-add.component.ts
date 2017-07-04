@@ -12,6 +12,8 @@ import { NavService } from '../_services/_nav.service';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
 import { JwtHelper } from 'angular2-jwt';
+import { AdjuntosService } from '../_services/adjuntos.service';
+import { ConstanteService } from '../_services/constante.service';
 
 @Component( {
                moduleId: module.id,
@@ -43,13 +45,13 @@ export class FormalStudiesAddComponent implements OnInit {
    wrongCity: boolean = true;
    wrongInstitute: boolean = false;
 
-
    svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
    dataUploadArchivo : any = '';
    dataUploadUsuario : any = '';
    usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
    jwtHelper: JwtHelper = new JwtHelper();
-
+   fsize: number = 50000000;
+   ftype: string = '';
 
    constructor( private academicEducationService: AcademicEducationService,
       private politicalDivisionService: PoliticalDivisionService,
@@ -57,9 +59,21 @@ export class FormalStudiesAddComponent implements OnInit {
       private route: ActivatedRoute,
       private location: Location,
       private confirmationService: ConfirmationService,
+      private adjuntosService: AdjuntosService,
+      private constanteService: ConstanteService,
       private _nav: NavService ) {
       let token = localStorage.getItem( 'token' );
       this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+      this.constanteService.getByCode( 'FTYPE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.ftype = data.valor;
+         }
+      } );
+      this.constanteService.getByCode( 'FSIZE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.fsize = Number( data.valor );
+         }
+      } );
    }
 
    ngOnInit() {
@@ -236,6 +250,11 @@ export class FormalStudiesAddComponent implements OnInit {
 
    uploadAgain(rta:boolean){
       this.fstudy.idAdjunto = null;
+   }
+   downloadFile(id: number){
+      this.adjuntosService.downloadFile( id ).subscribe(res => {
+         window.location.assign(res);
+      });
    }
 
 }

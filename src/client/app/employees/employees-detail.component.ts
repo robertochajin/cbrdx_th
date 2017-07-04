@@ -36,7 +36,7 @@ export class EmployeesDetailComponent implements OnInit {
                                            this.employee.segundoApellido;
 
             this.employee.edad = moment( this.employee.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
-
+            console.info(this.svcThUrl+'/file/'+this.employee.imagen);
             // this.acordion=0;
             //
             //   if( this.employee.ciudadExpDocumento === null ) this.employee.ciudadExpDocumento='';
@@ -87,6 +87,14 @@ export class EmployeesDetailComponent implements OnInit {
                                       scrollTop: jQuery( 'p-accordiontab > .ui-state-active' ).position().top + 90
                                    }, 'fast' );
       }, 1000 );
+   }
+
+   onBeforeSend( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+   }
+
+   onUpload( event: any ) {
+      this.employee.imagen = event.xhr.responseText;
    }
 
 }
