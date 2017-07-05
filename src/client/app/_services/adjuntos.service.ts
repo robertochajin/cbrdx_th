@@ -26,7 +26,7 @@ export class AdjuntosService {
    }
 
    getFileName(id:number){
-      return this.authHttp.get( this.serviceURL + 'adjuntos/'+id ).map( ( res: Response ) => res.json() as Adjunto);
+      return this.authHttp.get( this.serviceURL + 'adjuntos/'+id ).map( ( res: Response ) => res.json() as Adjunto );
    }
 
    handleError( error: any ): Promise<any> {
