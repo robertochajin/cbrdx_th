@@ -314,6 +314,27 @@
                         {{'EMPLOYEES.LBL_JURIDICO' | translate }} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
+						<div class="form-group col-md-6">
+							<label >{{'LBL_ADJUNTAR' | translate}} </label>
+							<div *ngIf="((employee.idAdjunto != null))" class="btn-group" role="group" style="display: block;">
+								<a class="btn btn-default" style="max-width: 87%; overflow: hidden;" (click)="downloadFile(employee.idAdjunto)">
+									<i class="fa fa-file-o" aria-hidden="true"></i>
+									{{dataUploadArchivo}}
+								</a>
+								<a class="btn btn-danger" (click)="uploadAgain(false)">
+									<i class="fa fa-times" aria-hidden="true"></i>
+								</a>
+							</div>
+							<p-fileUpload  *ngIf="((employee.idAdjunto == null))" name="file" url="{{svcThUrl}}" auto="true"
+												class="upload-avatar"
+												chooseLabel="{{'LBL_ADJUNTAR' | translate}}"
+												(onBeforeSend) = "onBeforeSend($event)"
+												(onSelect) = "onSelect($event, $event.files)"
+												(onUpload) = "uploadingOk($event)"
+												maxFileSize="{{fsize}}" accept="{{ftype}}"
+							>
+							</p-fileUpload>
+						</div>
                </div>
                <div class="row">
                   <div class="form-group col-md-3">
@@ -345,28 +366,7 @@
                         {{'EMPLOYEES.LBL_FECHADEFUNCIONREQUERIDA' | translate}}
                      </div>
                   </div>
-		
-	               <div class="form-group col-md-6">
-		               <label >{{'LBL_ADJUNTAR' | translate}} </label>
-		               <div *ngIf="((employee.idAdjunto != null))" class="btn-group" role="group" style="display: block;">
-			               <a class="btn btn-default" style="max-width: 87%; overflow: hidden;" (click)="downloadFile(employee.idAdjunto)">
-				               <i class="fa fa-file-o" aria-hidden="true"></i>
-				               {{dataUploadArchivo}}
-			               </a>
-			               <a class="btn btn-danger" (click)="uploadAgain(false)">
-				               <i class="fa fa-times" aria-hidden="true"></i>
-			               </a>
-		               </div>
-		               <p-fileUpload  *ngIf="((employee.idAdjunto == null))" name="file" url="{{svcThUrl}}" auto="true"
-		                              class="upload-avatar"
-		                              chooseLabel="{{'LBL_ADJUNTAR' | translate}}"
-		                              (onBeforeSend) = "onBeforeSend($event)"
-		                              (onSelect) = "onSelect($event, $event.files)"
-		                              (onUpload) = "uploadingOk($event)"
-		                              maxFileSize="{{fsize}}" accept="{{ftype}}"
-		               >
-		               </p-fileUpload>
-	               </div>
+
                </div>
 
             </div>
