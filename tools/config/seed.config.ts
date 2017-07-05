@@ -313,7 +313,7 @@ export class SeedConfig {
    IP_PROD = '192.168.101.50'; //_CREZCAMOS
    // IP_DEV = '40.71.92.147'; // _CIBERDIX_AZURE
 
-   IP_DEV = '190.147.208.155'; // _CIBERDIX
+   IP_DEV = '10.128.0.5'; // _CIBERDIX
    // IP_DEV = '190.184.187.27'; // _CIBERDIX
    // IP_DEV = '192.168.1.53'; // _CIBERDIX Interna
    SVC_SP_PORT = '8447';
