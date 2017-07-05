@@ -992,6 +992,13 @@
    "LBL_ESTRUCTURAFISICA":"Estructura Física",
    "":""
 },
+"QUESTIONNAIRES":{
+   "LBL_QUESTIONNAIRES":"Cuestionarios",
+   "LBL_NEWQUESTIONNAIRE":"Nuevo Cuestionario",
+   "LBL_REQUIRESAVERAGE":"Requiere Ponderacion",
+
+   "":""
+},
 
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="

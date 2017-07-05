@@ -77,6 +77,9 @@ import { SelectionProcessModule } from './selection-process/selection-process.mo
 // Instituciones medicas
 import { MedicalInstitutionModule } from './medical-institutions/medical-institutions.module';
 
+// Cuestionarios
+import { QuestionnairesModule } from './questionnaires/questionnaires.module';
+
 // CarsModule,
 @NgModule( {
               imports: [ BrowserModule, HttpModule, AppRoutingModule,
@@ -136,6 +139,7 @@ import { MedicalInstitutionModule } from './medical-institutions/medical-institu
                  SelectionProcessModule,
                  MedicalInstitutionModule,
                  //AssignmentProfessionalModule
+                 QuestionnairesModule
               ],
 
               declarations: [ AppComponent ],
