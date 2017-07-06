@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
    jwtHelper: JwtHelper = new JwtHelper();
    redirect: any;
    Url = '/dashboard';
+   loading : boolean = false;
 
    constructor( private loginService: LoginService,
       private http: Http,
@@ -72,6 +73,7 @@ export class LoginComponent implements OnInit {
 
    login() {
       this.error = '';
+      this.loading = true;
       if ( this.intentos >= 3 && !this.captcha ) {
          this.error = 'Error en la Validacion Captcha';
       } else {
@@ -90,6 +92,7 @@ export class LoginComponent implements OnInit {
                   this.error = 'Usuario o Contraseña incorrecta';
                     break;
             }
+            this.loading = false;
          } );
       }
 
