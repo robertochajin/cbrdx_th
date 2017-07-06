@@ -76,6 +76,7 @@ import { SelectionProcessModule } from './selection-process/selection-process.mo
 
 // Instituciones medicas
 import { MedicalInstitutionModule } from './medical-institutions/medical-institutions.module';
+import { PermissionService } from './_services/permission.service';
 
 // CarsModule,
 @NgModule( {
@@ -149,6 +150,7 @@ import { MedicalInstitutionModule } from './medical-institutions/medical-institu
                  AuthenticationService,
                  LoginService,
                  BreadcrumbService,
+                 PermissionService,
                  {
                     provide: APP_BASE_HREF,
                     useValue: '<%= APP_BASE %>',

@@ -19,6 +19,8 @@ import { ListaService } from '../_services/lista.service';
 import { ConstanteService } from '../_services/constante.service';
 import { JwtHelper } from 'angular2-jwt';
 import { AdjuntosService } from '../_services/adjuntos.service';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
+import { PermissionService } from '../_services/permission.service';
 
 @Component( {
                moduleId: module.id,
@@ -79,6 +81,7 @@ export class EmployeesUpdateComponent implements OnInit {
    jwtHelper: JwtHelper = new JwtHelper();
    fsize: number = 50000000;
    ftype: string = '';
+   seccion1: PermissionsEmployees = new PermissionsEmployees();
 
    constructor( private employeesService: EmployeesService,
       private route: ActivatedRoute,
@@ -92,7 +95,13 @@ export class EmployeesUpdateComponent implements OnInit {
       private ocupacionesService: OcupacionesService,
       private confirmationService: ConfirmationService,
       private adjuntosService: AdjuntosService,
+      private permissionService: PermissionService,
       private _nav: NavService ) {
+
+      this.permissionService.getReglasFormularios( 'TERCEROS' ).subscribe( p => {
+         let permisos = JSON.parse( p );
+         this.seccion1 = permisos.DATOSGENERALES ? permisos.DATOSGENERALES : new PermissionsEmployees();
+      } );
 
       let token = localStorage.getItem( 'token' );
       this.usuarioLogueado = this.jwtHelper.decodeToken( token );

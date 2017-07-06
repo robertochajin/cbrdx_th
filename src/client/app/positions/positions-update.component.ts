@@ -12,7 +12,8 @@ import { ListEmployeesService } from '../_services/lists-employees.service';
 import { TreeNode } from 'primeng/components/common/api';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
-import { Permissions } from '../_models/permissions';
+import { PermissionsCargos } from '../_models/permissionsCargos';
+import { PermissionService } from '../_services/permission.service';
 
 @Component( {
                moduleId: module.id,
@@ -47,22 +48,22 @@ export class PositionsUpdateComponent implements OnInit {
    nivel: number;
    alertOcu = false;
    rangoEdad: number[] = [ 16, 60 ];
-   seccion1: Permissions = new Permissions;
-   seccion2: Permissions = new Permissions;
-   seccion3: Permissions = new Permissions;
-   seccion4: Permissions = new Permissions;
-   seccion5: Permissions = new Permissions;
-   seccion6: Permissions = new Permissions;
-   seccion7: Permissions = new Permissions;
-   seccion8: Permissions = new Permissions;
-   seccion9: Permissions = new Permissions;
-   seccion10: Permissions = new Permissions;
-   seccion11: Permissions = new Permissions;
-   seccion12: Permissions = new Permissions;
-   seccion13: Permissions = new Permissions;
-   seccion14: Permissions = new Permissions;
-   seccion15: Permissions = new Permissions;
-   seccion16: Permissions = new Permissions;
+   seccion1: PermissionsCargos = new PermissionsCargos();
+   seccion2: PermissionsCargos = new PermissionsCargos();
+   seccion3: PermissionsCargos = new PermissionsCargos();
+   seccion4: PermissionsCargos = new PermissionsCargos();
+   seccion5: PermissionsCargos = new PermissionsCargos();
+   seccion6: PermissionsCargos = new PermissionsCargos();
+   seccion7: PermissionsCargos = new PermissionsCargos();
+   seccion8: PermissionsCargos = new PermissionsCargos();
+   seccion9: PermissionsCargos = new PermissionsCargos();
+   seccion10: PermissionsCargos = new PermissionsCargos();
+   seccion11: PermissionsCargos = new PermissionsCargos();
+   seccion12: PermissionsCargos = new PermissionsCargos();
+   seccion13: PermissionsCargos = new PermissionsCargos();
+   seccion14: PermissionsCargos = new PermissionsCargos();
+   seccion15: PermissionsCargos = new PermissionsCargos();
+   seccion16: PermissionsCargos = new PermissionsCargos();
    defaultCampo = {visible:true, editable:true};
 
    constructor( private positionsService: PositionsService,
@@ -74,26 +75,27 @@ export class PositionsUpdateComponent implements OnInit {
       private confirmationService: ConfirmationService,
       private listEmployeesService: ListEmployeesService,
       private listaService: ListaService,
+      private permissionService: PermissionService,
       private _nav: NavService ) {
 
-      this.positionsService.getReglasFormulariosCargos().subscribe( p => {
+      this.permissionService.getReglasFormularios( 'CARGOS' ).subscribe( p => {
          let permisos = JSON.parse(p);
-         this.seccion1 = permisos.IDENTIFICACION;
-         this.seccion2 = permisos.PRODUCTO;
-         this.seccion3 = permisos.INTERRELACIONES;
-         this.seccion4 = permisos.ROLDENTRO;
-         this.seccion5 = permisos.RESPONSABILIDADESPRINCIPALES;
-         this.seccion6 = permisos.RESPONSABILIDADESCOMPLEMENTARIAS;
-         this.seccion7 = permisos.POSICION;
-         this.seccion8 = permisos.AUTORIDADES;
-         this.seccion9 = permisos.REQUISITOS;
-         this.seccion10 = permisos.COMPETENCIAS;
-         this.seccion11 = permisos.ACTIVOS;
-         this.seccion12 = permisos.PRODUCTIVIDAD;
-         this.seccion13 = permisos.PERSONALIDAD;
-         this.seccion14 = permisos.FACTORES;
-         this.seccion15 = permisos.VALORACION;
-         this.seccion16 = permisos.RElACION;
+         this.seccion1 = permisos.IDENTIFICACION ? permisos.IDENTIFICACION : new PermissionsCargos();
+         this.seccion2 = permisos.PRODUCTO ? permisos.PRODUCTO : new PermissionsCargos();
+         this.seccion3 = permisos.INTERRELACIONES ? permisos.INTERRELACIONES : new PermissionsCargos();
+         this.seccion4 = permisos.ROLDENTRO ? permisos.ROLDENTRO : new PermissionsCargos();
+         this.seccion5 = permisos.RESPONSABILIDADESPRINCIPALES ? permisos.RESPONSABILIDADESPRINCIPALES : new PermissionsCargos();
+         this.seccion6 = permisos.RESPONSABILIDADESCOMPLEMENTARIAS ? permisos.RESPONSABILIDADESCOMPLEMENTARIAS : new PermissionsCargos();
+         this.seccion7 = permisos.POSICION ? permisos.POSICION : new PermissionsCargos();
+         this.seccion8 = permisos.AUTORIDADES ? permisos.AUTORIDADES : new PermissionsCargos();
+         this.seccion9 = permisos.REQUISITOS ? permisos.REQUISITOS : new PermissionsCargos();
+         this.seccion10 = permisos.COMPETENCIAS ? permisos.COMPETENCIAS : new PermissionsCargos();
+         this.seccion11 = permisos.ACTIVOS ? permisos.ACTIVOS : new PermissionsCargos();
+         this.seccion12 = permisos.PRODUCTIVIDAD ? permisos.PRODUCTIVIDAD : new PermissionsCargos();
+         this.seccion13 = permisos.PERSONALIDAD ? permisos.PERSONALIDAD : new PermissionsCargos();
+         this.seccion14 = permisos.FACTORES ? permisos.FACTORES : new PermissionsCargos();
+         this.seccion15 = permisos.VALORACION ? permisos.VALORACION : new PermissionsCargos();
+         this.seccion16 = permisos.RElACION ? permisos.RElACION : new PermissionsCargos();
       });
 
       this.listPositionsService.getCategoryTypes().subscribe( res => {
