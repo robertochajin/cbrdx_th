@@ -6,6 +6,8 @@ import { FormSharedModule } from '../shared/form-shared.module';
 import { ListaService } from '../_services/lista.service';
 import { QuestionnairesComponent } from './questionnaires.component';
 import { QuestionnairesService } from '../_services/questionnaires.service';
+import { QuestionnairesAddComponent } from './questionnaires-add.component';
+import { QuestionnairesUpdateComponent } from './questionnaires-update.component';
 
 @NgModule( {
               imports: [
@@ -13,7 +15,7 @@ import { QuestionnairesService } from '../_services/questionnaires.service';
                  FormSharedModule,
               ],
 
-              declarations: [ QuestionnairesComponent ],
+              declarations: [ QuestionnairesComponent, QuestionnairesAddComponent, QuestionnairesUpdateComponent ],
               bootstrap: [ QuestionnairesComponent ],
               providers: [ QuestionnairesService, NavService, ListaService ],
               exports: [ QuestionnairesComponent ]

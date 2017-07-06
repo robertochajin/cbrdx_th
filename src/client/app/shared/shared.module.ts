@@ -12,15 +12,21 @@ import { NavService } from '../_services/_nav.service';
 import { LowerCaseText } from '../_helpers/LowerCaseText';
 import { PermissionDirective } from '../_helpers/permission.directive';
 
+import { UperCaseTextDirective } from '../_helpers/UperCaseText';
+import { TitleCaseTextDirective } from '../_helpers/TitleCaseText';
+
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule( {
               imports: [ CommonModule, RouterModule, TranslateModule ],
-              declarations: [ ToolbarComponent, NavbarComponent, LowerCaseText, PermissionDirective ],
+              declarations: [ ToolbarComponent, NavbarComponent, LowerCaseText, PermissionDirective, UperCaseTextDirective,
+                 TitleCaseTextDirective
+              ],
               exports: [ ToolbarComponent, NavbarComponent,
-                 CommonModule, FormsModule, RouterModule, TranslateModule, LowerCaseText, PermissionDirective
+                 CommonModule, FormsModule, RouterModule, TranslateModule, LowerCaseText,
+                 PermissionDirective
               ],
               providers: [ AuthenticationService ]
            } )

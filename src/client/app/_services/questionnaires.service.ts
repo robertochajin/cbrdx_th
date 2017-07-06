@@ -21,6 +21,11 @@ export class QuestionnairesService {
       return this.authHttp.put( this.masterService, JSON.stringify( f ) ).catch( this.handleError );
    }
 
+   get( id: number ) {
+      return this.authHttp.get( this.masterService + '/' + id )
+      .map( ( res: Response ) => res.json() as Questionnaries );
+   }
+
    getAll() {
       return this.authHttp.get( this.masterService )
       .map( ( res: Response ) => res.json() as Questionnaries[] );

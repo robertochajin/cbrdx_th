@@ -169,6 +169,8 @@ import { MedicalInstitutionDetailComponent } from './medical-institutions/medica
 
 // Cuestionarios
 import { QuestionnairesComponent } from './questionnaires/questionnaires.component';
+import { QuestionnairesAddComponent } from './questionnaires/questionnaires-add.component';
+import { QuestionnairesUpdateComponent } from './questionnaires/questionnaires-update.component';
 
 const routes = [
       { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -397,9 +399,9 @@ const routes = [
       { path: 'selection-process/process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
 
       //  Cuestionarios
-      { path: 'questionnaries', component: QuestionnairesComponent, canActivate: [ AuthGuard ] },
-      { path: 'questionnaries/update/:id', component: QuestionnairesComponent, canActivate: [ AuthGuard ] },
-      { path: 'questionnaries/add/:id', component: QuestionnairesComponent, canActivate: [ AuthGuard ] },
+   { path: 'questionnaries', component: QuestionnairesComponent },
+   { path: 'questionnaries/add', component: QuestionnairesAddComponent },
+   { path: 'questionnaries/update/:id', component: QuestionnairesUpdateComponent },
    ];
 
 @NgModule( {

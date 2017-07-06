@@ -996,6 +996,8 @@
    "LBL_QUESTIONNAIRES":"Cuestionarios",
    "LBL_NEWQUESTIONNAIRE":"Nuevo Cuestionario",
    "LBL_REQUIRESAVERAGE":"Requiere Ponderacion",
+   "LBL_QUESTIONS": "Preguntas",
+   "LBL_VALUE": "Valor",
 
    "":""
 },
