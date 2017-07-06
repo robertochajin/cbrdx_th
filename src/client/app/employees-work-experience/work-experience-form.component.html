@@ -184,7 +184,7 @@
 
 
 								 <div *ngIf="((experience.idAdjunto != null))" class="btn-group" role="group" style="display: block;">
-									 <a class="btn btn-default" style="max-width: 87%; overflow: hidden;">
+									 <a class="btn btn-default" style="max-width: 87%; overflow: hidden;" (click)="downloadFile(experience.idAdjunto)">
 										 <i class="fa fa-file-o" aria-hidden="true"></i>
 										 {{dataUploadArchivo}}
 									 </a>
@@ -193,11 +193,14 @@
 									 </a>
 								 </div>
 
-								 <p-fileUpload  *ngIf="((experience.idAdjunto == null))" name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
+								 <p-fileUpload  *ngIf="((experience.idAdjunto == null))" name="file" url="{{svcThUrl}}" auto="true"
+								                class="upload-avatar"
 													 chooseLabel="{{'LBL_ADJUNTAR' | translate}}"
 													 (onBeforeSend) = "onBeforeSend($event)"
 													 (onSelect) = "onSelect($event, $event.files)"
-													 (onUpload) = "uploadingOk($event)">
+													 (onUpload) = "uploadingOk($event)"
+								                maxFileSize="{{fsize}}" accept="{{ftype}}"
+								 >
 								 </p-fileUpload>
 							 </div>
 
