@@ -161,6 +161,6 @@ export class PositionsService {
    }
 
    getReglasFormulariosCargos( ) {
-      return this.authHttp.get( this.serviceURL + 'reglasFormulariosCargos/CARGOS' ).map( ( res: Response ) => res.text() );
+      return this.authHttp.get( this.serviceURL + 'reglasFormularios/CARGOS' ).map( ( res: Response ) => res.text() );
    }
 }

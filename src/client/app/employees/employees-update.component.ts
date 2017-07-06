@@ -17,6 +17,8 @@ import * as moment from 'moment/moment';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
 import { ConstanteService } from '../_services/constante.service';
+import { JwtHelper } from 'angular2-jwt';
+import { AdjuntosService } from '../_services/adjuntos.service';
 
 @Component( {
                moduleId: module.id,
@@ -70,6 +72,14 @@ export class EmployeesUpdateComponent implements OnInit {
    mayeda: number = 0;
    listTypeDoc: ListaItem[] = [];
 
+   svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
+   dataUploadArchivo : any = 'Archivo Adjunto';
+   dataUploadUsuario : any = '';
+   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
+   jwtHelper: JwtHelper = new JwtHelper();
+   fsize: number = 50000000;
+   ftype: string = '';
+
    constructor( private employeesService: EmployeesService,
       private route: ActivatedRoute,
       private router: Router,
@@ -81,7 +91,21 @@ export class EmployeesUpdateComponent implements OnInit {
       private actividadEconomicaService: ActividadEconomicaService,
       private ocupacionesService: OcupacionesService,
       private confirmationService: ConfirmationService,
+      private adjuntosService: AdjuntosService,
       private _nav: NavService ) {
+
+      let token = localStorage.getItem( 'token' );
+      this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+      this.constanteService.getByCode( 'FTYPE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.ftype = data.valor;
+         }
+      } );
+      this.constanteService.getByCode( 'FSIZE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.fsize = Number( data.valor );
+         }
+      } );
 
       listaService.getMasterDetails( 'ListasTiposPersonas' ).subscribe( res => {
          this.personTypes.push( { label: 'Seleccione', value: null } );
@@ -193,6 +217,7 @@ export class EmployeesUpdateComponent implements OnInit {
       .switchMap( ( params: Params ) => this.employeesService.get( +params[ 'id' ] ) )
       .subscribe( employee => {
          this.employee = employee;
+         this.getFileName();
          this.constanteService.getByCode( 'DOCMYE' ).subscribe( data => {
             if ( data.valor ) {
                for ( let c of data.valor.split( ',' ) ) {
@@ -239,7 +264,7 @@ export class EmployeesUpdateComponent implements OnInit {
          } );
 
          this.updateActivities( this.employee.idSectorEconomico );
-         this.updateDate();
+         this.updateDateInit();
          this.minDateDocumento = new Date( this.employee.fechaNacimiento );
          this.ciudadExpDocumento = this.employee.ciudadExpDocumento;
          this.backupCiudadExpDocumento = this.employee.ciudadExpDocumento;
@@ -382,6 +407,52 @@ export class EmployeesUpdateComponent implements OnInit {
    }
 
    updateDate() {
+      this.employee.fechaNacimiento = null;
+      let tipodocemploye = this.listTypeDoc.find( x => x.idLista === this.employee.idTipoDocumento );
+      let codigo: string = '';
+      if ( tipodocemploye ) {
+         codigo = tipodocemploye.codigo;
+      }
+      let tipo = this.tiposdoc.find( t => t === codigo ); // buscar tipo documento elegido
+      let exp = this.expeditionDate;
+      let dateExpo = new Date( exp );
+
+      let today = new Date();
+      let month = today.getMonth();
+      let year = today.getFullYear();
+      let prev18Year = year - this.mayeda;
+      let prev20Year = year - 20;
+      let lastYear = prev18Year - 80;
+      this.maxDateBirth = new Date();
+      this.maxDateBirth.setMonth( month );
+
+      if ( tipo ) {
+         if ( this.employee.fechaDocumento !== null ) {
+            let fecha = new Date( this.employee.fechaDocumento );
+            let anio = fecha.getFullYear() - this.mayeda;
+            this.maxDateBirth.setFullYear( anio );
+         } else {
+            this.maxDateBirth.setFullYear( prev18Year );
+         }
+      } else {
+         this.maxDateBirth.setFullYear( year );
+      }
+      if ( this.maxDateBirth > dateExpo ) {
+         this.maxDateBirth = dateExpo;
+      }
+
+      if ( (this.employee.fechaNacimiento) !== null && (this.employee.fechaNacimiento) !== null ) {
+         let timestamp2 = new Date( this.maxDate ).getTime();
+         let timestamp1 = new Date( this.employee.fechaNacimiento ).getTime();
+         let timeDiff = Math.round( timestamp2 - timestamp1 );
+         if ( timeDiff < 0 ) {
+            this.employee.fechaNacimiento = null;
+         }
+      }
+      this.validateDocument();
+
+   }
+   updateDateInit() {
 
       let tipodocemploye = this.listTypeDoc.find( x => x.idLista === this.employee.idTipoDocumento );
       let codigo: string = '';
@@ -487,6 +558,42 @@ export class EmployeesUpdateComponent implements OnInit {
 
    inputCleanUp( value: string ) {
       this.employee.numeroDocumento = value.toUpperCase().replace( ' ', '' ).trim();
+   }
+   // Archivo Adjunto
+   uploadingOk( event: any ) {
+      let respuesta = JSON.parse(event.xhr.response);
+      if(respuesta.idAdjunto != null || respuesta.idAdjunto != undefined){
+         this.employee.idAdjunto = respuesta.idAdjunto;
+      }
+   }
+
+   onBeforeSend( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      event.formData.append( 'obj', obj.toString() );
+   }
+
+   onSelect(event:any, file:any){
+      this.dataUploadArchivo = file[0].name;
+      this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   }
+
+   uploadAgain(rta:boolean){
+      this.employee.idAdjunto = null;
+   }
+
+   downloadFile(id: number){
+
+      this.adjuntosService.downloadFile( id ).subscribe(res => {
+         window.location.assign(res);
+      });
+   }
+   getFileName() {
+      if(this.employee.idAdjunto) {
+         this.adjuntosService.getFileName( this.employee.idAdjunto ).subscribe( res => {
+            this.dataUploadArchivo = res.nombreArchivo;
+         } );
+      }
    }
 
 }

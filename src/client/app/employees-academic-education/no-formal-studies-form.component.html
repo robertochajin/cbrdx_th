@@ -31,7 +31,7 @@
 					<div class="ui-grid-col-6">
 						<label for="otroTipoEstudio">{{'EMPLOYEES.LBL_OTROTIPOESTUDIO' | translate}}</label>
 						<input id="otroTipoEstudio" pInputText type="text" name="otroTipoEstudio" #otroTipoEstudio="ngModel"
-						       (change)="removeEstudio()"
+						       (change)="removeEstudio()" maxlength="100"
 						       [(ngModel)]="nfstudy.otroEstudio" #otroTipoEstudio="ngModel"
 						       [required]="nfstudy.idTipoEstudio === null"/>
 						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !otroTipoEstudio.valid">
@@ -106,7 +106,7 @@
 					<div class="ui-grid-col-6">
 						<label for="institucion">{{'EMPLOYEES.LBL_INSTITUCION' | translate}}</label>
 						<input id="institucion" pInputText type="text" name="institucion" #institucion="ngModel"
-						       [(ngModel)]="nfstudy.institucion" #institucion="ngModel" required="true"/>
+						       [(ngModel)]="nfstudy.institucion" #institucion="ngModel" required="true" maxlength="100"/>
 						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !institucion.valid">
 							{{'EMPLOYEES.LBL_INSTITUCION' | translate}} {{'LBL_REQUERIDO' | translate}}
 						</div>
@@ -124,11 +124,33 @@
 					<div class="ui-grid-col-12">
 						<label for="descripcion">{{ 'LBL_DESCRIPCION' | translate }}</label>
 						<textarea pInputTextarea id="descripcion" name="descripcion" [(ngModel)]="nfstudy.descripcion"
-						          #descripcion="ngModel">
+						          #descripcion="ngModel" maxlength="200">
                   </textarea>
 					</div>
 				</div>
-				
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-6">
+						<label >{{'LBL_ADJUNTAR' | translate}} </label>
+						<div *ngIf="((nfstudy.idAdjunto != null))" class="btn-group" role="group" style="display: block;">
+							<a class="btn btn-default" style="max-width: 87%; overflow: hidden;" (click)="downloadFile(nfstudy.idAdjunto)">
+								<i class="fa fa-file-o" aria-hidden="true"></i>
+								{{dataUploadArchivo}}
+							</a>
+							<a class="btn btn-danger" (click)="uploadAgain(false)">
+								<i class="fa fa-times" aria-hidden="true"></i>
+							</a>
+						</div>
+						<p-fileUpload  *ngIf="((nfstudy.idAdjunto == null))" name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
+						               chooseLabel="{{'LBL_ADJUNTAR' | translate}}"
+						               (onBeforeSend)="onBeforeSend($event)"
+						               (onSelect) = "onSelect($event, $event.files)"
+						               (onUpload)="uploadingOk($event)"
+						               maxFileSize="{{fsize}}" accept="{{ftype}}">
+						</p-fileUpload>
+					
+					
+					</div>
+				</div>
 				<div class="ui-grid-row form-footer-buttons">
 					<div class="ui-grid-col-4"></div>
 					<div class="ui-grid-col-1">

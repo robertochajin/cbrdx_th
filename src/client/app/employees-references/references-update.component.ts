@@ -11,6 +11,9 @@ import { Localizaciones } from '../_models/localizaciones';
 import { PoliticalDivisionService } from '../_services/political-division.service';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
+import { JwtHelper } from 'angular2-jwt';
+import { AdjuntosService } from '../_services/adjuntos.service';
+import { ConstanteService } from '../_services/constante.service';
 
 @Component( {
                moduleId: module.id,
@@ -31,6 +34,14 @@ export class ReferencesUpdateComponent implements OnInit {
    addinglocation: boolean = true;
    idTercero: number;
 
+   svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
+   dataUploadArchivo : any = 'Archivo Adjunto';
+   dataUploadUsuario : any = '';
+   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
+   jwtHelper: JwtHelper = new JwtHelper();
+   fsize: number = 50000000;
+   ftype: string = '';
+
    constructor( private referencesService: ReferencesService,
       private route: ActivatedRoute,
       private location: Location,
@@ -38,7 +49,22 @@ export class ReferencesUpdateComponent implements OnInit {
       private politicalDivisionService: PoliticalDivisionService,
       private confirmationService: ConfirmationService,
       private listaService: ListaService,
+      private adjuntosService: AdjuntosService,
+      private constanteService: ConstanteService,
       private _nav: NavService ) {
+
+      let token = localStorage.getItem( 'token' );
+      this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+      this.constanteService.getByCode( 'FTYPE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.ftype = data.valor;
+         }
+      } );
+      this.constanteService.getByCode( 'FSIZE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.fsize = Number( data.valor );
+         }
+      } );
    }
 
    ngOnInit() {
@@ -53,6 +79,7 @@ export class ReferencesUpdateComponent implements OnInit {
          this.idTercero = params[ 'tercero' ];
          this.referencesService.get( +params[ 'id' ] ).subscribe( reference => {
             this.reference = reference;
+            this.getFileName();
             this.locateService.getById( this.reference.idLocalizacion ).subscribe( localizacion => {
                this.localizacion = localizacion;
                this.reference.direccion = localizacion.direccion;
@@ -150,6 +177,42 @@ export class ReferencesUpdateComponent implements OnInit {
 
    toggleform() {
       this.addinglocation = !this.addinglocation;
+   }
+   // Archivo Adjunto
+   uploadingOk( event: any ) {
+      let respuesta = JSON.parse(event.xhr.response);
+      if(respuesta.idAdjunto != null || respuesta.idAdjunto != undefined){
+         this.reference.idAdjunto = respuesta.idAdjunto;
+      }
+   }
+
+   onBeforeSend( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      event.formData.append( 'obj', obj.toString() );
+   }
+
+   onSelect(event:any, file:any){
+      this.dataUploadArchivo = file[0].name;
+      this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   }
+
+   uploadAgain(rta:boolean){
+      this.reference.idAdjunto = null;
+   }
+
+   downloadFile(id: number){
+
+      this.adjuntosService.downloadFile( id ).subscribe(res => {
+         window.location.assign(res);
+      });
+   }
+   getFileName() {
+      if(this.reference.idAdjunto){
+         this.adjuntosService.getFileName( this.reference.idAdjunto ).subscribe( res => {
+            this.dataUploadArchivo = res.nombreArchivo;
+         } );
+      }
    }
 }
 
