@@ -33,9 +33,9 @@
           </div>
           <re-captcha *ngIf="intentos>=3" siteKey="6LckLxkUAAAAAFgI2q1qZaYlXAukMs-L41Gv5k72"
                       (resolved)="resolved($event)"></re-captcha>
-          <div class="form-group"> {{loading}}
+          <div class="form-group">
             <button  *ngIf="(!loading)" id="btnIniciarSesion" pButton label="{{ 'LBL_INICIARSESION' | translate }}"></button>
-				<a  *ngIf="((loading === true))" class="btn btn-primary btn-block">
+				<a  *ngIf="(loading === true)" class="btn btn-primary btn-block">
 					<i class="fa fa-refresh fa-spin fa-fw"></i>
 				</a>
           </div>
