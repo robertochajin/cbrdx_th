@@ -310,7 +310,7 @@ export class SeedConfig {
     * Se definen la IP y el PUERTO con la cual la vista se conecta a los servicios
     * @type {string}
     */
-   IP_PROD = '192.168.101.50'; //_CREZCAMOS
+   IP_PROD = '35.188.192.89'; //_CREZCAMOS
    // IP_DEV = '40.71.92.147'; // _CIBERDIX_AZURE
 
    IP_DEV = '35.188.219.33'; // _CIBERDIX
