@@ -13,7 +13,6 @@ export class PermissionsEmployees {
    SEGUNDONOMBRE?: { editable: boolean, visible: boolean, seccion: boolean } = { editable: true, visible: true, seccion: false };
    PRIMERAPELLIDO?: { editable: boolean, visible: boolean, seccion: boolean } = { editable: true, visible: true, seccion: false };
    SEGUNDOAPELLIDO?: { editable: boolean, visible: boolean, seccion: boolean } = { editable: true, visible: true, seccion: false };
-   NOMBRECOMPLETO?: { editable: boolean, visible: boolean, seccion: boolean } = { editable: true, visible: true, seccion: false };
    IDTIPODOCUMENTO?: { editable: boolean, visible: boolean, seccion: boolean } = { editable: true, visible: true, seccion: false };
    NUMERODOCUMENTO?: { editable: boolean, visible: boolean, seccion: boolean } = { editable: true, visible: true, seccion: false };
    FECHADOCUMENTO: { editable: boolean, visible: boolean, seccion: boolean } = { editable: true, visible: true, seccion: false };
@@ -50,6 +49,9 @@ export class PermissionsEmployees {
    IDTALLACAMISA?: { editable: boolean, visible: boolean, seccion: boolean } = { editable: true, visible: true, seccion: false };
    IDTALLAPANTALON?: { editable: boolean, visible: boolean, seccion: boolean } = { editable: true, visible: true, seccion: false };
    IDTALLACALZADO?: { editable: boolean, visible: boolean, seccion: boolean } = { editable: true, visible: true, seccion: false };
+   PESO: { editable: boolean, visible: boolean, seccion: boolean } = { editable: true, visible: true, seccion: false };
+   TALLA: { editable: boolean, visible: boolean, seccion: boolean } = { editable: true, visible: true, seccion: false };
+   IMC: { editable: boolean, visible: boolean, seccion: boolean } = { editable: true, visible: true, seccion: false };
 
    constructor() {
    }
