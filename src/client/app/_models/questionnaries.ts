@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class Questionnaries {
 
-   public idCuestionario: number;
+   public idCuestionario: number = null;
+   public codigo: string;
    public cuestionario: string;
    public descripcion: string;
    public indicadorHabilitado: boolean;
@@ -11,7 +12,6 @@ export class Questionnaries {
    public auditoriaUsuario: number;
    public valor: number;
    public auditoriaFecha: Date;
-   public codigo: string;
 
    constructor() {
 

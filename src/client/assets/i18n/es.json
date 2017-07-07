@@ -994,10 +994,20 @@
 },
 "QUESTIONNAIRES":{
    "LBL_QUESTIONNAIRES":"Cuestionarios",
-   "LBL_NEWQUESTIONNAIRE":"Nuevo Cuestionario",
+   "LBL_NEW": "Nuevo",
+   "LBL_NEW2": "Nueva",
+   "LBL_QUESTIONNAIRE": "Cuestionario",
    "LBL_REQUIRESAVERAGE":"Requiere Ponderacion",
    "LBL_QUESTIONS": "Preguntas",
+   "LBL_QUESTION": "Pregunta",
+   "LBL_ANSWERS": "Respuestas",
+   "LBL_ANSWER": "Respuesta",
    "LBL_VALUE": "Valor",
+   "LBL_VALIDATECODE": "Código Existe",
+   "LBL_FILTERING": "Filtrante",
+   "LBL_REQUIRED": "Obligatorio",
+   "LBL_TYPE": "Tipo",
+   "LBL_DEPEND": "Depende",
 
    "":""
 },

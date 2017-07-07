@@ -1,87 +1,248 @@
-<div class="col-md-10 col-md-offset-1">
-	<div *ngIf="quest">
-		<div class="row">
-			<p-panel header="{{'QUESTIONNAIRES.LBL_QUESTIONNAIRES' | translate}}">
-				<fieldset>
-					<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate>
-						<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-							<div class="ui-grid-row">
-								<div class="ui-grid-col-4">
-									<label for="codigo">* {{ 'LBL_CODIGO' | translate}}</label>
-									<input type="text" pInputText id="codigo" name="codigo" [readonly]="quest.idCuestionario !== null"
-									       [(ngModel)]="quest.codigoRol" maxlength="6"
-									       (change)="validateCode()" uperCaseText
-									       #NGcodigo="ngModel" required/>
-									<div class="ui-message ui-messages-error ui-corner-all"
-									     *ngIf="f.submitted && !NGcodigo.valid">
-										<i class="fa fa-close"></i>{{ 'LBL_CODIGO' | translate}} {{ 'LBL_REQUERIDO' | translate}}
-									</div>
-								</div>
-								<div class="ui-grid-col-8">
-									<label for="nombre">* {{ 'LBL_NOMBRE' | translate}}</label>
-									<input type="text" pInputText id="nombre" name="codigo"
-									       [(ngModel)]="quest.cuestionario" maxlength="6" titleCaseText
-									       (change)="validateCode()"
-									       #NGnombre="ngModel" required/>
-									<div class="ui-message ui-messages-error ui-corner-all"
-									     *ngIf="f.submitted && !NGnombre.valid">
-										<i class="fa fa-close"></i>{{ 'LBL_NOMBRE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
-									</div>
-								</div>
+<div class="col-md-10 col-md-offset-1" *ngIf="cuestionario">
+	<p-panel header="{{'QUESTIONNAIRES.LBL_QUESTIONNAIRE' | translate}}">
+		<fieldset>
+			<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate>
+				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-4">
+							<label for="codigoCuestionario">* {{ 'LBL_CODIGO' | translate}}</label>
+							<input type="text" pInputText id="codigoCuestionario" name="codigoCuestionario"
+							       uperCaseText
+							       [readonly]="(cuestionario.idCuestionario !== undefined && cuestionario.idCuestionario !== null)"
+							       [disabled]="(cuestionario.idCuestionario !== undefined && cuestionario.idCuestionario !== null)"
+							       [(ngModel)]="cuestionario.codigo" maxlength="6"
+							       (change)="validateCode()"
+							       #NGcodigo="ngModel" required/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !NGcodigo.valid ">
+								<i class="fa fa-close"></i>{{ 'LBL_CODIGO' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 							</div>
-							<div class="ui-grid-row">
-								<div class="form-group col-sm-12">
-									<label for="descripcion">{{ 'LBL_DESCRIPCION' | translate}}</label>
-									<textarea pInputTextarea id="descripcion" name="descripcion" required
-									          [(ngModel)]="quest.descripcion" maxlength="475" #NGdescripcion="ngModel"
-									></textarea>
-									<div class="ui-message ui-messages-error ui-corner-all"
-									     *ngIf="f.submitted && !NGdescripcion.valid">
-										<i class="fa fa-close"></i>{{ 'LBL_DESCRIPCION' | translate}} {{ 'LBL_REQUERIDO' | translate}}
-									</div>
-								</div>
-							</div>
-							<div class="ui-grid-row">
-								<div class="form-group col-md-4" style="margin-top: 24px">
-									<p-checkbox binary="true" id="indicador" name="indicador"
-									            [(ngModel)]="quest.indicadorHabilitado" label="{{ 'LBL_HABILITADO' | translate}}"
-									></p-checkbox>
-								</div>
-								<div class="form-group col-md-4" style="margin-top: 24px">
-									<p-checkbox binary="true" id="ponderacion" name="ponderacion"
-									            [(ngModel)]="quest.indicadorPonderacion" label="{{ 'QUESTIONNAIRES.LBL_REQUIRESAVERAGE' |
-								      translate}}"
-									></p-checkbox>
-								</div>
-								<div class="ui-grid-col-4" *ngIf="quest.indicadorPonderacion === true">
-									<label for="valor">* {{ 'QUESTIONNAIRES.LBL_VALUE' | translate}}</label>
-									<input type="number" pInputText id="valor" name="valor"
-									       [(ngModel)]="quest.valor"
-									       #NGvalor="ngModel" required/>
-									<div class="ui-message ui-messages-error ui-corner-all"
-									     *ngIf="f.submitted && !NGvalor.valid">
-										<i class="fa fa-close"></i>{{ 'QUESTIONNAIRES.LBL_VALUE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
-									</div>
-								</div>
-							</div>
-							<div class="ui-grid-row form-footer-buttons">
-								<div class="ui-grid-col-4"></div>
-								<div class="ui-grid-col-1">
-									<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
-								</div>
-								<div class="ui-grid-col-2">
-									<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
-								</div>
-								<div class="ui-grid-col-5"></div>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && codeExists ">
+								<i class="fa fa-close"></i>{{ 'LBL_VALIDATECODE' | translate}}
 							</div>
 						</div>
-					</form>
-				</fieldset>
-			</p-panel>
+						<div class="ui-grid-col-8">
+							<label for="nombre">* {{ 'LBL_NOMBRE' | translate}}</label>
+							<input type="text" pInputText id="nombre" name="codigo"
+							       [(ngModel)]="cuestionario.cuestionario" maxlength="6" titleCaseText
+							       #NGnombre="ngModel" required/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !NGnombre.valid">
+								<i class="fa fa-close"></i>{{ 'LBL_NOMBRE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid-row">
+						<div class="form-group col-sm-12">
+							<label for="descripcion">{{ 'LBL_DESCRIPCION' | translate}}</label>
+							<textarea pInputTextarea id="descripcion" name="descripcion" required
+							          [(ngModel)]="cuestionario.descripcion" maxlength="475" #NGdescripcion="ngModel"
+							></textarea>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !NGdescripcion.valid">
+								<i class="fa fa-close"></i>{{ 'LBL_DESCRIPCION' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid-row">
+						<div class="form-group col-md-4" style="margin-top: 24px">
+							<p-checkbox binary="true" id="indicador" name="indicador"
+							            [(ngModel)]="cuestionario.indicadorHabilitado" label="{{ 'LBL_HABILITADO' | translate}}"
+							></p-checkbox>
+						</div>
+						<div class="form-group col-md-4" style="margin-top: 24px">
+							<p-checkbox binary="true" id="ponderacion" name="ponderacion"
+							            [(ngModel)]="cuestionario.indicadorPonderacion" label="{{ 'QUESTIONNAIRES.LBL_REQUIRESAVERAGE' |
+						      translate}}"
+							></p-checkbox>
+						</div>
+						<div class="ui-grid-col-4" *ngIf="cuestionario.indicadorPonderacion === true">
+							<label for="valor">* {{ 'QUESTIONNAIRES.LBL_VALUE' | translate}}</label>
+							<input type="number" pInputText id="valor" name="valor"
+							       [(ngModel)]="cuestionario.valor"
+							       #NGvalor="ngModel" required/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !NGvalor.valid">
+								<i class="fa fa-close"></i>{{ 'QUESTIONNAIRES.LBL_VALUE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid-row form-footer-buttons">
+						<div class="ui-grid-col-4"></div>
+						<div class="ui-grid-col-1">
+							<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+						</div>
+						<div class="ui-grid-col-2">
+							<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+						</div>
+						<div class="ui-grid-col-5"></div>
+					</div>
+				</div>
+			</form>
+		</fieldset>
+	</p-panel>
+	<p-panel header="{{ 'QUESTIONNAIRES.LBL_QUESTIONS' | translate}}" *ngIf="cuestionario.idCuestionario">
+		<div *ngIf="cuestionario.idCuestionario && formQuestion">
+			<form (ngSubmit)="p.valid && onSubmitQuestion()" #p="ngForm" novalidate>
+				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-6">
+							<label for="codigoPregunta">* {{ 'LBL_CODIGO' | translate}}</label>
+							<input type="text" pInputText id="codigoPregunta" name="codigo"
+							       uperCaseText
+							       [readonly]="(pregunta.idPregunta !== undefined && pregunta.idPregunta !== null)"
+							       [disabled]="(pregunta.idPregunta !== undefined && pregunta.idPregunta !== null)"
+							       [(ngModel)]="pregunta.codigo" maxlength="6"
+							       (change)="validateCodeP()"
+							       #NGcodigoP="ngModel" required/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="p.submitted && !NGcodigoP.valid ">
+								<i class="fa fa-close"></i>{{ 'LBL_CODIGO' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="p.submitted && codeExistsP ">
+								<i class="fa fa-close"></i>{{ 'LBL_VALIDATECODE' | translate}}
+							</div>
+						</div>
+						<div class="form-group col-sm-6">
+							<label for="tipo">{{ 'QUESTIONNAIRES.LBL_TYPE' | translate}}</label>
+							<p-dropdown id="tipo" name="tipo" required="true"
+							            [options]="questionsTypes" [autoWidth]="false"
+							            [(ngModel)]="pregunta.tipo"
+							            #NGtipo="ngModel"
+							></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="p.submitted && !NGtipo.valid">
+								<i class="fa fa-close"></i>{{ 'QUESTIONNAIRES.LBL_TYPE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-12">
+							<label for="pregunta">* {{ 'QUESTIONNAIRES.LBL_QUESTION' | translate}}</label>
+							<textarea pInputTextarea id="pregunta" name="pregunta"
+							          [(ngModel)]="pregunta.pregunta" #NGpregunta="ngModel" maxlength="500"
+							          [required]="true"></textarea>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="p.submitted && !NGpregunta.valid">
+								<i class="fa fa-close"></i>{{ 'QUESTIONNAIRES.LBL_QUESTION' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+					
+					</div>
+					<div class="ui-grid-row">
+						<div class="form-group col-md-3" style="margin-top: 24px">
+							<p-checkbox binary="true" id="indicadorP" name="indicadorP"
+							            [(ngModel)]="pregunta.indicadorHabilitado" label="{{ 'LBL_HABILITADO' | translate}}"
+							></p-checkbox>
+						</div>
+						<div class="form-group col-md-3" style="margin-top: 24px">
+							<p-checkbox binary="true" id="obligatorio" name="obligatorio"
+							            [(ngModel)]="pregunta.indicadorObligatorio" label="{{ 'QUESTIONNAIRES.LBL_REQUIRED' |
+								      translate}}"
+							></p-checkbox>
+						</div>
+						<div class="form-group col-md-3" style="margin-top: 24px">
+							<p-checkbox binary="true" id="pregunta" name="filtrante"
+							            [(ngModel)]="pregunta.indicadorFiltrante" label="{{ 'QUESTIONNAIRES.LBL_FILTERING' |
+								      translate}}"
+							></p-checkbox>
+						</div>
+						<div class="form-group col-md-3" style="margin-top: 24px">
+							<p-checkbox binary="true" id="dependeDe" name="dependeDe"
+							            [(ngModel)]="pregunta.indicadorDepende" label="{{ 'QUESTIONNAIRES.LBL_DEPEND' | translate}}"
+							></p-checkbox>
+						</div>
+					
+					</div>
+					<div class="ui-grid-row" *ngIf="pregunta.indicadorDepende === true">
+						<div class="form-group col-sm-12">
+							<label for="dependePregunta">{{ 'QUESTIONNAIRES.LBL_QUESTION' | translate}} {{ 'QUESTIONNAIRES.LBL_DEPEND' |
+								translate}}</label>
+							<p-dropdown id="dependePregunta" name="dependePregunta" required="true"
+							            [options]="previousQuestions" [autoWidth]="false"
+							            [(ngModel)]="pregunta.dependePregunta"
+							            #NGdependePregunta="ngModel"
+							></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="p.submitted && !NGdependePregunta.valid">
+								<i class="fa fa-close"></i>{{ 'QUESTIONNAIRES.LBL_QUESTION' | translate}} {{ 'QUESTIONNAIRES.LBL_DEPEND' |
+								translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid-row" *ngIf="pregunta.dependePregunta > 0">
+						<div class="form-group col-sm-12">
+							<label for="dependeRespuesta">{{ 'QUESTIONNAIRES.LBL_ANSWER' | translate}} {{ 'QUESTIONNAIRES.LBL_DEPEND' |
+								translate}}</label>
+							<p-dropdown id="dependeRespuesta" name="dependeRespuesta" required="true"
+							            [options]="previousAnswers" [autoWidth]="false"
+							            [(ngModel)]="pregunta.dependeRespuesta"
+							            #NGdependePregunta="ngModel"
+							></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="p.submitted && !NGdependePregunta.valid">
+								<i class="fa fa-close"></i>{{ 'QUESTIONNAIRES.LBL_ANSWER' | translate}} {{ 'QUESTIONNAIRES.LBL_DEPEND' |
+								translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid-row form-footer-buttons">
+						<div class="ui-grid-col-4"></div>
+						<div class="ui-grid-col-1">
+							<a (click)="goBackQuestion((p.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+						</div>
+						<div class="ui-grid-col-2">
+							<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+						</div>
+						<div class="ui-grid-col-5"></div>
+					</div>
+				</div>
+			</form>
 		</div>
-	</div>
-	<p-panel header="{{ 'QUESTIONNAIRES.LBL_QUESTIONS' | translate}}" *ngIf="quest.idCuestionario">
-		<!--<rol-fucionalities *ngIf="rol.idRol" [rol]="rol"></rol-fucionalities>-->
+		<div *ngIf="cuestionario.idCuestionario && !formQuestion">
+			<div class="row datable-header">
+				<div class="col-md-6 col-xs-12 datatable-header-add">
+					<button type="button" icon="fa-plus"
+					        label="{{'QUESTIONNAIRES.LBL_NEW2' | translate}} {{'QUESTIONNAIRES.LBL_QUESTION' | translate}}"
+					        pButton (click)="addQuestion()"></button>
+				</div>
+				<div class="col-md-6 col-xs-12 datatable-header-search">
+					
+					<div class="input-group">
+						<div class="input-group-addon"><i class="fa fa-search"></i></div>
+						<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate}}" class="form-control"
+						       [(ngModel)]="busqueda" (change)="setSearch()">
+					</div>
+				
+				</div>
+			</div>
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="preguntas" [paginator]="true" [rows]="10"
+			             [responsive]="true" [globalFilter]="gb">
+				<p-column field="pregunta" header="{{'QUESTIONNAIRES.LBL_QUESTION' | translate}}" [sortable]="true"></p-column>
+				<p-column field="tipo" header="{{'QUESTIONNAIRES.LBL_TYPE' | translate}}" [sortable]="true"></p-column>
+				<p-column field="indicadorfiltrante" header="{{ 'QUESTIONNAIRES.LBL_FILTERING' | translate }}" [sortable]="true"
+				          styleClass="datatable-col-center">
+					<template let-quest="rowData" pTemplate="body">
+						<p-checkbox [(ngModel)]="cuestionario.indicadorfiltrante" binary="true" disabled="true"></p-checkbox>
+					</template>
+				</p-column>
+				<p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true"
+				          styleClass="datatable-col-center">
+					<template let-quest="rowData" pTemplate="body">
+						<p-checkbox [(ngModel)]="cuestionario.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
+					</template>
+				</p-column>
+				<p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
+					<template let-data="rowData" pTemplate="body">
+						<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip"
+						        title="{{'BTN_EDITAR' | translate}}"
+						        pButton (click)="updateQuestion(data)"></button>
+					</template>
+				</p-column>
+			</p-dataTable>
+		</div>
 	</p-panel>
 </div>
 <p-confirmDialog width="400" #cd>

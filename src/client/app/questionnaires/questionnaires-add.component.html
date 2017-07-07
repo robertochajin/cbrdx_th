@@ -1,0 +1,95 @@
+<div class="col-md-10 col-md-offset-1">
+	<div *ngIf="cuestionario">
+		<div class="row">
+			<p-panel header="{{'QUESTIONNAIRES.LBL_QUESTIONNAIRES' | translate}}">
+				<fieldset>
+					<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate>
+						<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-4">
+									<label for="codigoCuestionario">* {{ 'LBL_CODIGO' | translate}}</label>
+									<input type="text" pInputText id="codigoCuestionario" name="codigoCuestionario"
+									       uperCaseText
+									       [readonly]="(cuestionario.idCuestionario !== undefined && cuestionario.idCuestionario !== null)"
+									       [disabled]="(cuestionario.idCuestionario !== undefined && cuestionario.idCuestionario !== null)"
+									       [(ngModel)]="cuestionario.codigo" maxlength="6"
+									       (change)="validateCode()"
+									       #NGcodigo="ngModel" required/>
+									<div class="ui-message ui-messages-error ui-corner-all"
+									     *ngIf="f.submitted && !NGcodigo.valid ">
+										<i class="fa fa-close"></i>{{ 'LBL_CODIGO' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+									</div>
+									<div class="ui-message ui-messages-error ui-corner-all"
+									     *ngIf="f.submitted && codeExists ">
+										<i class="fa fa-close"></i>{{ 'LBL_VALIDATECODE' | translate}}
+									</div>
+								</div>
+								<div class="ui-grid-col-8">
+									<label for="nombre">* {{ 'LBL_NOMBRE' | translate}}</label>
+									<input type="text" pInputText id="nombre" name="codigo"
+									       [(ngModel)]="cuestionario.cuestionario" maxlength="6" titleCaseText
+									       #NGnombre="ngModel" required/>
+									<div class="ui-message ui-messages-error ui-corner-all"
+									     *ngIf="f.submitted && !NGnombre.valid">
+										<i class="fa fa-close"></i>{{ 'LBL_NOMBRE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+									</div>
+								</div>
+							</div>
+							<div class="ui-grid-row">
+								<div class="form-group col-sm-12">
+									<label for="descripcion">{{ 'LBL_DESCRIPCION' | translate}}</label>
+									<textarea pInputTextarea id="descripcion" name="descripcion" required
+									          [(ngModel)]="cuestionario.descripcion" maxlength="475" #NGdescripcion="ngModel"
+									></textarea>
+									<div class="ui-message ui-messages-error ui-corner-all"
+									     *ngIf="f.submitted && !NGdescripcion.valid">
+										<i class="fa fa-close"></i>{{ 'LBL_DESCRIPCION' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+									</div>
+								</div>
+							</div>
+							<div class="ui-grid-row">
+								<div class="form-group col-md-4" style="margin-top: 24px">
+									<p-checkbox binary="true" id="indicador" name="indicador"
+									            [(ngModel)]="cuestionario.indicadorHabilitado" label="{{ 'LBL_HABILITADO' | translate}}"
+									></p-checkbox>
+								</div>
+								<div class="form-group col-md-4" style="margin-top: 24px">
+									<p-checkbox binary="true" id="ponderacion" name="ponderacion"
+									            [(ngModel)]="cuestionario.indicadorPonderacion" label="{{ 'QUESTIONNAIRES.LBL_REQUIRESAVERAGE' |
+								      translate}}"
+									></p-checkbox>
+								</div>
+								<div class="ui-grid-col-4" *ngIf="cuestionario.indicadorPonderacion === true">
+									<label for="valor">* {{ 'QUESTIONNAIRES.LBL_VALUE' | translate}}</label>
+									<input type="number" pInputText id="valor" name="valor"
+									       [(ngModel)]="cuestionario.valor"
+									       #NGvalor="ngModel" required/>
+									<div class="ui-message ui-messages-error ui-corner-all"
+									     *ngIf="f.submitted && !NGvalor.valid">
+										<i class="fa fa-close"></i>{{ 'QUESTIONNAIRES.LBL_VALUE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+									</div>
+								</div>
+							</div>
+							<div class="ui-grid-row form-footer-buttons">
+								<div class="ui-grid-col-4"></div>
+								<div class="ui-grid-col-1">
+									<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+								</div>
+								<div class="ui-grid-col-2">
+									<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+								</div>
+								<div class="ui-grid-col-5"></div>
+							</div>
+						</div>
+					</form>
+				</fieldset>
+			</p-panel>
+		</div>
+	</div>
+</div>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate}}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate}}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
