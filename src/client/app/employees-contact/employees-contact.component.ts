@@ -23,6 +23,7 @@ export class EmployeesContactComponent {
    msgs: Message[] = [];
    tel: boolean = false;
    cel: boolean = true;
+   defaultCampo = { visible: true, editable: true };
 
    constructor( private employeesService: EmployeesService,
       private route: ActivatedRoute,

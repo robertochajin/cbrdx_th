@@ -82,6 +82,7 @@ export class EmployeesUpdateComponent implements OnInit {
    fsize: number = 50000000;
    ftype: string = '';
    seccion1: PermissionsEmployees = new PermissionsEmployees();
+   defaultCampo = { visible: true, editable: true };
 
    constructor( private employeesService: EmployeesService,
       private route: ActivatedRoute,
