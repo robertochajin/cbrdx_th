@@ -10,6 +10,7 @@ import { DivisionPolitica } from '../_models/divisionPolitica';
 import { NavService } from '../_services/_nav.service';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 
 @Component( {
                moduleId: module.id,
@@ -20,6 +21,7 @@ import { ListaService } from '../_services/lista.service';
 
 export class EmployeesAdditionalDataComponent implements OnInit {
    @Input() employee: Employee;
+   @Input() seccion: PermissionsEmployees;
    header: string = 'Datos Adicionales ';
 
    personTypes: SelectItem[] = [];
