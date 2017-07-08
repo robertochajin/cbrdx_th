@@ -7,15 +7,14 @@ import { OrganizationalStructureService } from '../_services/organizationalStruc
 import { OrganizationalStructureComponent } from './organizationalStructure.component';
 import { LocationsModule } from '../locations/locations.module';
 import { ZonesServices } from '../_services/zones.service';
-import { LowerCaseTextDirective } from '../_helpers/LowerCaseText';
+import { LowerCaseText } from '../_helpers/LowerCaseText';
 
 
 @NgModule( {
               imports: [
                  SharedModule,
                  FormSharedModule,
-                 LocationsModule,
-                  LowerCaseTextDirective
+                 LocationsModule
               ],
               declarations: [ OrganizationalStructureComponent ],
               bootstrap: [ OrganizationalStructureComponent ],
