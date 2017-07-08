@@ -9,7 +9,9 @@ import { TranslateService, TranslateModule } from 'ng2-translate';
 import { WindowRefService } from '../_services/window-ref.service';
 import { AuthenticationService } from '../_services/authentication.service';
 import { NavService } from '../_services/_nav.service';
-import { LowerCaseText } from '../_helpers/LowerCaseText';
+import { LowerCaseTextDirective } from '../_helpers/LowerCaseText';
+import { UperCaseTextDirective } from '../_helpers/UperCaseText';
+import { TitleCaseTextDirective } from '../_helpers/TitleCaseText';
 import { PermissionDirective } from '../_helpers/permission.directive';
 
 /**
@@ -18,9 +20,12 @@ import { PermissionDirective } from '../_helpers/permission.directive';
 
 @NgModule( {
               imports: [ CommonModule, RouterModule, TranslateModule ],
-              declarations: [ ToolbarComponent, NavbarComponent, LowerCaseText, PermissionDirective ],
+              declarations: [ ToolbarComponent, NavbarComponent, LowerCaseTextDirective, UperCaseTextDirective, TitleCaseTextDirective,
+                 PermissionDirective
+              ],
               exports: [ ToolbarComponent, NavbarComponent,
-                 CommonModule, FormsModule, RouterModule, TranslateModule, LowerCaseText, PermissionDirective
+                 CommonModule, FormsModule, RouterModule, TranslateModule, LowerCaseTextDirective, UperCaseTextDirective,
+                 TitleCaseTextDirective, PermissionDirective
               ],
               providers: [ AuthenticationService ]
            } )
