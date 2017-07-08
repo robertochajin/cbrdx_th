@@ -133,7 +133,7 @@
                             <!--<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.profesion}}</strong></label>-->
 
                           </div>
-                          <div class="row form-footer-buttons">
+	                        <div class="row form-footer-buttons" *ngIf="seccion1.EDITAR ? seccion1.EDITAR.visible : true">
                             <div class="form-group col-md-12">
                               <button type="button" icon="fa-pencil" label="{{'BTN_EDITAR' | translate}}" class="ui-button-success"
                                       pButton (click)="update(employee.idTercero)">

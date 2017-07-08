@@ -28,7 +28,6 @@ export class EmployeesAdditionalDataComponent implements OnInit {
    documentTypes: SelectItem[] = [];
    resultExpeditionCity: DivisionPolitica[];
    resultBirthPlace: DivisionPolitica[] = [];
-
    lateralityTypes: SelectItem[] = [];
    listSizeShirt: SelectItem[] = [];
    listSizePants: SelectItem[] = [];
@@ -37,6 +36,7 @@ export class EmployeesAdditionalDataComponent implements OnInit {
    peso: boolean = true;
    submitted: boolean = false;
    msgs: Message[] = [];
+   defaultCampo = { visible: true, editable: true };
 
    constructor( private employeesService: EmployeesService,
       private listaService: ListaService,
