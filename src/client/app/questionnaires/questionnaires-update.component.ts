@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ConfirmationService, Message } from 'primeng/primeng';
+import { ConfirmationService, Message, SelectItem } from 'primeng/primeng';
 import { NavService } from '../_services/_nav.service';
 import { Questionnaries } from '../_models/questionnaries';
 import { QuestionnairesService } from '../_services/questionnaires.service';
 import { QuestionnariesQuestions } from '../_models/questionnariesQuestions';
 import { QuestionnariesAnswers } from '../_models/questionnariesAnswers';
-import { SelectItem } from 'primeng/primeng';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
 
@@ -19,20 +18,20 @@ import { ListaItem } from '../_models/listaItem';
             } )
 export class QuestionnairesUpdateComponent implements OnInit {
 
+   cuestionarios: Questionnaries[] = [];
    cuestionario: Questionnaries = new Questionnaries();
-   quest: Questionnaries = new Questionnaries();
    preguntas: QuestionnariesQuestions[] = [];
    pregunta: QuestionnariesQuestions = new QuestionnariesQuestions();
-   preg: QuestionnariesQuestions = new QuestionnariesQuestions();
    respuestas: QuestionnariesAnswers[] = [];
    respuesta: QuestionnariesAnswers = new QuestionnariesAnswers();
-
-   allQuest: Questionnaries[] = [];
    idCuestionario: number;
    msgs: Message[] = [];
    codeExists: boolean = false;
    codeExistsP: boolean = false;
+   codeExistsR: boolean = false;
    formQuestion: boolean = false;
+   showAnswers: boolean = false;
+   formAnswer: boolean = false;
    questionsTypes: SelectItem[] = [];
    previousQuestions: SelectItem[] = [];
    previousAnswers: SelectItem[] = [];
@@ -45,52 +44,22 @@ export class QuestionnairesUpdateComponent implements OnInit {
       private confirmationService: ConfirmationService,
       private navService: NavService ) {
 
-      this.quest.idCuestionario = 1;
-      this.quest.cuestionario = "NOMBRE";
-      this.quest.descripcion = "DESCRIP";
-      this.quest.indicadorHabilitado = true;
-      this.quest.indicadorPonderacion = true;
-      this.quest.auditoriaUsuario = 1;
-      this.quest.valor = 100;
-      this.quest.auditoriaFecha = null;
-      this.quest.codigo = "as2";
+      this.route.params.subscribe( params => {
+         this.idCuestionario = +params[ 'id' ];
+         if ( Number( this.idCuestionario ) > 0 ) {
+            this.questionnairesService.get( this.idCuestionario ).subscribe(
+               res => {
+                  this.cuestionario = res;
+                  this.getQuestions();
+               } );
+         }
+      } );
+      this.questionnairesService.getAll().subscribe(
+         res => {
+            this.cuestionarios = res;
+         } );
 
-      this.preg.idPregunta = 1;
-      this.preg.idCuestionario = 1;
-      this.preg.pregunta = "NOMBRE";
-      this.preg.codigo = "COD";
-      this.preg.idTipo = 1;
-      this.preg.tipo = "Abierto";
-      this.preg.indicadorHabilitado = true;
-      this.preg.indicadorObligatorio = false;
-      this.preg.indicadorFiltrante = false;
-      this.preg.indicadorDepende = false;
-      this.preg.dependePregunta = null;
-      this.preg.dependeRespuesta = null;
-      this.preg.auditoriaUsuario = 1;
-      this.preg.secuencia = 1;
-      this.preg.auditoriaFecha = null;
-
-      /*this.route.params.subscribe( params => {
-       this.idCuestionario = +params[ 'id' ];
-       if ( Number( this.idCuestionario ) > 0 ) {
-       this.questionnairesService.get( this.idCuestionario ).subscribe(
-       res => {
-       this.cuestionario = res;
-       this.getPreguntas();
-       } );
-       }
-       } );*/
-      this.allQuest.push( this.quest );
-      this.cuestionario = this.quest;
-      this.preguntas.push( this.preg );
-      this.pregunta = this.preg;
-      /*this.questionnairesService.getAll( ).subscribe(
-       res => {
-       this.allQuest = res;
-       } );*/
-
-      listaService.getMasterDetails( 'ListasTiposPersonas' ).subscribe( res => {
+      listaService.getMasterDetails( 'ListasTiposPreguntas' ).subscribe( res => {
          this.questionsTypes.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
             this.questionsTypes.push( { label: s.nombre, value: s.idLista } );
@@ -101,18 +70,9 @@ export class QuestionnairesUpdateComponent implements OnInit {
    ngOnInit() {
    }
 
-   getPreguntas() {
+   getQuestions() {
       if ( Number( this.idCuestionario ) > 0 ) {
          this.questionnairesService.getQuestions( this.idCuestionario ).subscribe(
-            res => {
-               this.preguntas = res;
-            } );
-      }
-   }
-
-   getRespuestas( idPregunta: number ) {
-      if ( Number( idPregunta ) > 0 ) {
-         this.questionnairesService.getAnswers( idPregunta ).subscribe(
             res => {
                this.preguntas = res;
             } );
@@ -144,13 +104,24 @@ export class QuestionnairesUpdateComponent implements OnInit {
       }
    }
 
+   validateCode() {
+      if ( this.cuestionario.codigoCuestionario !== '' && this.cuestionario.codigoCuestionario !== null ) {
+         this.codeExists = this.cuestionarios.filter(
+               t => (t.codigoCuestionario === this.cuestionario.codigoCuestionario && t.idCuestionario !== this.cuestionario.idCuestionario ) ).length > 0;
+      } else {
+         this.codeExists = false;
+      }
+   }
+
    addQuestion() {
       this.formQuestion = true;
+      this.showAnswers = false;
       this.pregunta = new QuestionnariesQuestions();
    }
 
    updateQuestion( pregunta: QuestionnariesQuestions ) {
       this.formQuestion = true;
+      this.showAnswers = false;
       this.pregunta = pregunta;
    }
 
@@ -173,20 +144,92 @@ export class QuestionnairesUpdateComponent implements OnInit {
 
    onSubmitQuestion() {
       if ( !this.codeExistsP ) {
-         this.questionnairesService.update( this.cuestionario ).subscribe( res => {
-            this.navService.setMesage( 1, this.msgs );
-         }, error => {
-            this.navService.setMesage( 3, this.msgs );
-         } );
+         if ( this.pregunta.idPregunta === null || this.pregunta.idPregunta === undefined || this.pregunta.idPregunta === 0 ) {
+            this.questionnairesService.addQuestion( this.pregunta ).subscribe( res => {
+               this.preguntas.push( res );
+               this.navService.setMesage( 1, this.msgs );
+            }, error => {
+               this.navService.setMesage( 3, this.msgs );
+            } );
+         } else {
+            this.questionnairesService.updateQuestion( this.pregunta ).subscribe( res => {
+               this.navService.setMesage( 1, this.msgs );
+               this.getQuestions();
+            }, error => {
+               this.navService.setMesage( 3, this.msgs );
+            } );
+         }
       }
    }
 
-   validateCode() {
-      if ( this.cuestionario.codigo !== '' && this.cuestionario.codigo !== null ) {
-         this.codeExists = this.allQuest.filter(
-               t => (t.codigo === this.cuestionario.codigo && t.idCuestionario !== this.cuestionario.idCuestionario ) ).length > 0;
+   validateCodeP() {
+      if ( this.pregunta.codigoPregunta !== '' && this.pregunta.codigoPregunta !== null ) {
+         this.codeExistsP = this.preguntas.filter(
+               t => (t.codigoPregunta === this.pregunta.codigoPregunta && t.idPregunta !== this.pregunta.idPregunta ) ).length > 0;
       } else {
          this.codeExists = false;
       }
+   }
+
+   showPanelAnswers( pregunta: QuestionnariesQuestions ) {
+      this.showAnswers = true;
+      this.formAnswer = false;
+      this.pregunta = pregunta;
+      this.getAnswers();
+   }
+
+   addAnswer() {
+      this.formAnswer = true;
+      this.respuesta = new QuestionnariesAnswers();
+   }
+
+   updateAnswer( respuesta: QuestionnariesAnswers ) {
+      this.formAnswer = true;
+      this.respuesta = respuesta;
+   }
+
+   goBackAnswer( fDirty: boolean ): void {
+      if ( fDirty ) {
+         this.confirmationService.confirm( {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this.formAnswer = false;
+                                                 this.respuesta = new QuestionnariesAnswers();
+                                              }
+                                           } );
+      } else {
+         this.formAnswer = false;
+         this.respuesta = new QuestionnariesAnswers();
+      }
+   }
+
+   onSubmitAnswer() {
+      if ( !this.codeExistsR ) {
+         if ( this.respuesta.idRespuesta === null || this.respuesta.idRespuesta === undefined || this.respuesta.idRespuesta === 0 ) {
+            this.questionnairesService.addAnswer( this.respuesta ).subscribe( res => {
+               this.respuestas.push( res );
+               this.navService.setMesage( 1, this.msgs );
+            }, error => {
+               this.navService.setMesage( 3, this.msgs );
+            } );
+         } else {
+            this.questionnairesService.updateAnswer( this.respuesta ).subscribe( res => {
+               this.navService.setMesage( 1, this.msgs );
+               this.getAnswers();
+            }, error => {
+               this.navService.setMesage( 3, this.msgs );
+            } );
+         }
+      }
+   }
+
+   getAnswers() {
+      this.questionnairesService.getAnswers( this.pregunta.idPregunta ).subscribe(
+         res => {
+            this.respuestas = res;
+            this.formAnswer = false;
+         } );
    }
 }

@@ -5,15 +5,15 @@ export class QuestionnariesQuestions {
 
    public idPregunta: number = null;
    public idCuestionario: number = null;
-   public codigo: string;
+   public codigoPregunta: string;
    public pregunta: string;
-   public idTipo: number;
-   public tipo: string;
+   public idTipoPregunta: number;
+   public tipoPregunta: string;
    public indicadorDepende: boolean;
    public dependePregunta: number;
    public dependeRespuesta: number;
    public secuencia: number;
-   public indicadorHabilitado: boolean;
+   public indicadorHabilitado: boolean = true;
    public indicadorObligatorio: boolean;
    public indicadorFiltrante: boolean;
    public auditoriaUsuario: number;

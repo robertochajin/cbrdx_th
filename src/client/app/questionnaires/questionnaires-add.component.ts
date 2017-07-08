@@ -74,9 +74,9 @@ export class QuestionnairesAddComponent implements OnInit {
    }
 
    validateCode() {
-      if ( this.cuestionario.codigo !== '' && this.cuestionario.codigo !== null ) {
+      if ( this.cuestionario.codigoCuestionario !== '' && this.cuestionario.codigoCuestionario !== null ) {
          this.codeExists = this.allQuest.filter(
-               t => (t.codigo === this.cuestionario.codigo && t.idCuestionario !== this.cuestionario.idCuestionario ) ).length > 0;
+               t => (t.codigoCuestionario === this.cuestionario.codigoCuestionario && t.idCuestionario !== this.cuestionario.idCuestionario ) ).length > 0;
       } else {
          this.codeExists = false;
       }

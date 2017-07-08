@@ -1006,6 +1006,7 @@
    "LBL_VALIDATECODE": "Código Existe",
    "LBL_FILTERING": "Filtrante",
    "LBL_REQUIRED": "Obligatorio",
+   "LBL_RIGHT": "Correcto",
    "LBL_TYPE": "Tipo",
    "LBL_DEPEND": "Depende",
 

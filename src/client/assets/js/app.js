@@ -142,8 +142,6 @@ $.AdminLTE.options = {
 $(function () {
   "use strict";
 
-  console.log('ini');
-
   //Fix for IE page transitions
   $("body").removeClass("hold-transition");
 

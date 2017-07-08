@@ -10,7 +10,7 @@
 							       uperCaseText
 							       [readonly]="(cuestionario.idCuestionario !== undefined && cuestionario.idCuestionario !== null)"
 							       [disabled]="(cuestionario.idCuestionario !== undefined && cuestionario.idCuestionario !== null)"
-							       [(ngModel)]="cuestionario.codigo" maxlength="6"
+							       [(ngModel)]="cuestionario.codigoCuestionario" maxlength="6"
 							       (change)="validateCode()"
 							       #NGcodigo="ngModel" required/>
 							<div class="ui-message ui-messages-error ui-corner-all"
@@ -24,7 +24,7 @@
 						</div>
 						<div class="ui-grid-col-8">
 							<label for="nombre">* {{ 'LBL_NOMBRE' | translate}}</label>
-							<input type="text" pInputText id="nombre" name="codigo"
+							<input type="text" pInputText id="nombre" name="nombre"
 							       [(ngModel)]="cuestionario.cuestionario" maxlength="6" titleCaseText
 							       #NGnombre="ngModel" required/>
 							<div class="ui-message ui-messages-error ui-corner-all"
@@ -93,7 +93,7 @@
 							       uperCaseText
 							       [readonly]="(pregunta.idPregunta !== undefined && pregunta.idPregunta !== null)"
 							       [disabled]="(pregunta.idPregunta !== undefined && pregunta.idPregunta !== null)"
-							       [(ngModel)]="pregunta.codigo" maxlength="6"
+							       [(ngModel)]="pregunta.codigoPregunta" maxlength="6"
 							       (change)="validateCodeP()"
 							       #NGcodigoP="ngModel" required/>
 							<div class="ui-message ui-messages-error ui-corner-all"
@@ -109,7 +109,7 @@
 							<label for="tipo">{{ 'QUESTIONNAIRES.LBL_TYPE' | translate}}</label>
 							<p-dropdown id="tipo" name="tipo" required="true"
 							            [options]="questionsTypes" [autoWidth]="false"
-							            [(ngModel)]="pregunta.tipo"
+							            [(ngModel)]="pregunta.idTipoPregunta"
 							            #NGtipo="ngModel"
 							></p-dropdown>
 							<div class="ui-message ui-messages-error ui-corner-all"
@@ -212,8 +212,7 @@
 					
 					<div class="input-group">
 						<div class="input-group-addon"><i class="fa fa-search"></i></div>
-						<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate}}" class="form-control"
-						       [(ngModel)]="busqueda" (change)="setSearch()">
+						<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate}}" class="form-control">
 					</div>
 				
 				</div>
@@ -221,24 +220,133 @@
 			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="preguntas" [paginator]="true" [rows]="10"
 			             [responsive]="true" [globalFilter]="gb">
 				<p-column field="pregunta" header="{{'QUESTIONNAIRES.LBL_QUESTION' | translate}}" [sortable]="true"></p-column>
-				<p-column field="tipo" header="{{'QUESTIONNAIRES.LBL_TYPE' | translate}}" [sortable]="true"></p-column>
+				<p-column field="tipoPregunta" header="{{'QUESTIONNAIRES.LBL_TYPE' | translate}}" [sortable]="true"></p-column>
 				<p-column field="indicadorfiltrante" header="{{ 'QUESTIONNAIRES.LBL_FILTERING' | translate }}" [sortable]="true"
 				          styleClass="datatable-col-center">
-					<template let-quest="rowData" pTemplate="body">
-						<p-checkbox [(ngModel)]="cuestionario.indicadorfiltrante" binary="true" disabled="true"></p-checkbox>
+					<template let-datos="rowData" pTemplate="body">
+						<p-checkbox [(ngModel)]="datos.indicadorFiltrante" binary="true" disabled="true"></p-checkbox>
 					</template>
 				</p-column>
 				<p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true"
 				          styleClass="datatable-col-center">
-					<template let-quest="rowData" pTemplate="body">
-						<p-checkbox [(ngModel)]="cuestionario.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
+					<template let-datos="rowData" pTemplate="body">
+						<p-checkbox [(ngModel)]="datos.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
 					</template>
 				</p-column>
 				<p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
-					<template let-data="rowData" pTemplate="body">
+					<template let-datos="rowData" pTemplate="body">
+						<button type="button" icon="fa-plus" class="ui-button-info" data-toggle="tooltip"
+						        title="{{'QUESTIONNAIRES.LBL_ANSWERS' | translate}}"
+						        pButton (click)="showPanelAnswers(datos)"></button>
 						<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip"
 						        title="{{'BTN_EDITAR' | translate}}"
-						        pButton (click)="updateQuestion(data)"></button>
+						        pButton (click)="updateQuestion(datos)"></button>
+					</template>
+				</p-column>
+			</p-dataTable>
+		</div>
+	</p-panel>
+	<p-panel header="{{ 'QUESTIONNAIRES.LBL_ANSWERS' | translate}} de {{pregunta.pregunta}}" *ngIf="showAnswers">
+		<div *ngIf="pregunta.idPregunta && showAnswers && formAnswer">
+			<form (ngSubmit)="r.valid && onSubmitAnswer()" #r="ngForm" novalidate>
+				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-6">
+							<label for="codigoRespuesta">* {{ 'LBL_CODIGO' | translate}}</label>
+							<input type="text" pInputText id="codigoRespuesta" name="codigo"
+							       uperCaseText
+							       [readonly]="(respuesta.idRespuesta !== undefined && respuesta.idRespuesta !== null)"
+							       [disabled]="(respuesta.idRespuesta !== undefined && respuesta.idRespuesta !== null)"
+							       [(ngModel)]="respuesta.codigoRespuesta" maxlength="6"
+							       (change)="validateCodeP()"
+							       #NGcodigoR="ngModel" required/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="r.submitted && !NGcodigoR.valid ">
+								<i class="fa fa-close"></i>{{ 'LBL_CODIGO' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="r.submitted && codeExistsR ">
+								<i class="fa fa-close"></i>{{ 'LBL_VALIDATECODE' | translate}}
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-12">
+							<label for="respuesta">* {{ 'QUESTIONNAIRES.LBL_ANSWER' | translate}}</label>
+							<textarea pInputTextarea id="respuesta" name="respuesta"
+							          [(ngModel)]="respuesta.respuesta" #NGrespuesta="ngModel" maxlength="500"
+							          [required]="true"></textarea>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="r.submitted && !NGrespuesta.valid">
+								<i class="fa fa-close"></i>{{ 'QUESTIONNAIRES.LBL_ANSWER' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+					
+					</div>
+					<div class="ui-grid-row">
+						<div class="form-group col-md-3" style="margin-top: 24px">
+							<p-checkbox binary="true" id="indicadorR" name="indicadorR"
+							            [(ngModel)]="respuesta.indicadorHabilitado" label="{{ 'LBL_HABILITADO' | translate}}"
+							></p-checkbox>
+						</div>
+						<div class="form-group col-md-3" style="margin-top: 24px">
+							<p-checkbox binary="true" id="correcto" name="correcto"
+							            [(ngModel)]="respuesta.indicadorCorrecto" label="{{ 'QUESTIONNAIRES.LBL_REQUIRED' |
+								      translate}}"
+							></p-checkbox>
+						</div>
+					
+					</div>
+					<div class="ui-grid-row form-footer-buttons">
+						<div class="ui-grid-col-4"></div>
+						<div class="ui-grid-col-1">
+							<a (click)="goBackAnswer((r.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+						</div>
+						<div class="ui-grid-col-2">
+							<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+						</div>
+						<div class="ui-grid-col-5"></div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div *ngIf="pregunta.idPregunta && showAnswers && !formAnswer">
+			<div class="row datable-header">
+				<div class="col-md-6 col-xs-12 datatable-header-add">
+					<button type="button" icon="fa-plus"
+					        label="{{'QUESTIONNAIRES.LBL_NEW2' | translate}} {{'QUESTIONNAIRES.LBL_ANSWER' | translate}}"
+					        pButton (click)="addAnswer()"></button>
+				</div>
+				<div class="col-md-6 col-xs-12 datatable-header-search">
+					
+					<div class="input-group">
+						<div class="input-group-addon"><i class="fa fa-search"></i></div>
+						<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate}}" class="form-control">
+					</div>
+				
+				</div>
+			</div>
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="respuestas" [paginator]="true" [rows]="10"
+			             [responsive]="true" [globalFilter]="gb">
+				<p-column field="pregunta" header="{{'QUESTIONNAIRES.LBL_QUESTION' | translate}}" [sortable]="true"></p-column>
+				<p-column field="tipoPregunta" header="{{'QUESTIONNAIRES.LBL_TYPE' | translate}}" [sortable]="true"></p-column>
+				<p-column field="indicadorfiltrante" header="{{ 'QUESTIONNAIRES.LBL_FILTERING' | translate }}" [sortable]="true"
+				          styleClass="datatable-col-center">
+					<template let-datos="rowData" pTemplate="body">
+						<p-checkbox [(ngModel)]="datos.indicadorFiltrante" binary="true" disabled="true"></p-checkbox>
+					</template>
+				</p-column>
+				<p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true"
+				          styleClass="datatable-col-center">
+					<template let-datos="rowData" pTemplate="body">
+						<p-checkbox [(ngModel)]="datos.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
+					</template>
+				</p-column>
+				<p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
+					<template let-datos="rowData" pTemplate="body">
+						<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip"
+						        title="{{'BTN_EDITAR' | translate}}"
+						        pButton (click)="updateAnswer(datos)"></button>
 					</template>
 				</p-column>
 			</p-dataTable>

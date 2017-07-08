@@ -34,7 +34,7 @@ export class QuestionnairesComponent implements OnInit {
       this.quest.auditoriaUsuario = 1;
       this.quest.valor = 100;
       this.quest.auditoriaFecha = null;
-      this.quest.codigo = "as2";
+      this.quest.codigoCuestionario = "as2";
       /*
       this.questionnairesService.getAll( ).subscribe(
          questionnaires => {
