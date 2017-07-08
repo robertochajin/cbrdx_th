@@ -10,11 +10,14 @@
 			  <div class="thumbnail img-responsive" *ngIf="employee.imagen">
 				  <img src="{{svcThUrl}}/file/{{employee.imagen }}" alt="...">
 			  </div>
-	        <p-fileUpload name="file" url="{{svcThUrl}}/{{employee.idTercero}}" auto="true" class="upload-avatar"
+	        <p-fileUpload *ngIf="(!loadingAvatar)" name="file" url="{{svcThUrl}}/{{employee.idTercero}}" auto="true" class="upload-avatar"
 	                      chooseLabel="{{'USER_SESSION.LBL_NUEVOAVATAR' | translate}}"
 	                      (onBeforeSend)="onBeforeSend($event)"
-	                      (onUpload)="onUpload($event)" accept="image/*"
-	        ></p-fileUpload>
+								 (onBeforeUpload)="onBeforeUpload()"
+	                      (onUpload)="onUpload($event)" accept="image/*"></p-fileUpload>
+			  <a  *ngIf="(loadingAvatar === true)" class="btn btn-primary btn-block">
+				  <i class="fa fa-refresh fa-spin fa-fw"></i>
+			  </a>
         </div>
         <div class="col-md-8">
           <h2>{{employee.nombreCompleto}}</h2>

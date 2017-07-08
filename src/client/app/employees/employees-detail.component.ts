@@ -8,6 +8,7 @@ import { NavService } from '../_services/_nav.service';
 import * as moment from 'moment/moment';
 import { PermissionService } from '../_services/permission.service';
 import { PermissionsEmployees } from '../_models/permissionsEmployees';
+import { UsuariosService } from '../_services/usuarios.service';
 
 @Component( {
                moduleId: module.id,
@@ -32,13 +33,16 @@ export class EmployeesDetailComponent implements OnInit {
    seccion10: PermissionsEmployees = new PermissionsEmployees();
 
    defaultCampo = { visible: true, editable: true };
+   loadingAvatar : boolean = false;
 
-   constructor( private employeeService: EmployeesService,
-      private route: ActivatedRoute,
-      private location: Location,
-      private _nav: NavService,
-      private permissionService: PermissionService,
-      private router: Router ) {
+
+   constructor(private employeeService: EmployeesService,
+               private route: ActivatedRoute,
+               private location: Location,
+               private _nav: NavService,
+               private permissionService: PermissionService,
+               private router: Router,
+               private usuariosService: UsuariosService) {
 
       this.permissionService.getReglasFormularios( 'TERCEROS' ).subscribe( p => {
          let permisos = JSON.parse( p );
@@ -122,8 +126,19 @@ export class EmployeesDetailComponent implements OnInit {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
    }
 
+   onBeforeUpload(){
+      // this.loadingAvatar = true;
+   }
+
    onUpload( event: any ) {
       this.employee.imagen = event.xhr.responseText;
+      console.info(this.employee.idTercero);
+      console.info(this._nav.getUsuarioLogeado().usuario.idTercero);
+      if( this.employee.idTercero === this._nav.getUsuarioLogeado().usuario.idTercero ){
+         this.usuariosService.refreshToken();
+         this._nav.setAvatar( this.employee.imagen );
+      }
+      this.loadingAvatar = false;
    }
 
 }
