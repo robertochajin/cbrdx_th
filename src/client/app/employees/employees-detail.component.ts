@@ -132,7 +132,8 @@ export class EmployeesDetailComponent implements OnInit {
 
    onUpload( event: any ) {
       this.employee.imagen = event.xhr.responseText;
-
+      console.info(this.employee.idTercero);
+      console.info(this._nav.getUsuarioLogeado().usuario.idTercero);
       if( this.employee.idTercero === this._nav.getUsuarioLogeado().usuario.idTercero ){
          this.usuariosService.refreshToken();
          this._nav.setAvatar( this.employee.imagen );
