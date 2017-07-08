@@ -79,7 +79,7 @@ export class QuestionnairesUpdateComponent implements OnInit {
       }
    }
 
-   goBack(fDirty : boolean): void {
+   goBack( fDirty: boolean ): void {
       if ( fDirty ) {
          this.confirmationService.confirm( {
                                               message: ` ¿Está seguro que desea salir sin guardar?`,

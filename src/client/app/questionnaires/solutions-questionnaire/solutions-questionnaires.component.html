@@ -1,0 +1,92 @@
+<div class="col-md-10 col-md-offset-1" *ngIf="cuestionario">
+	<p-panel header="{{cuestionario.cuestionario}}">
+		<fieldset>
+			<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario" name="formulario">
+				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+					<div class="row" [ngSwitch]="pregunta.idTipoPregunta">
+						<div class="form-group col-md-12" *ngSwitchCase="1">
+							<label [for]="pregunta.idPregunta">{{pregunta.pregunta}}</label>
+							<p-dropdown [id]="pregunta.idPregunta"
+							            [name]="pregunta.idPregunta"
+							            [options]="listadoOpciones"
+							            [(ngModel)]="idRespuesta"
+							            [required]="pregunta.indicadorObligatorio"
+							            autoWidth="false"
+							            tabindex="1"
+							            #pDropdown="ngModel"
+							></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !pDropdown.valid">
+								<i class="fa fa-close"></i>
+								{{'QUESTIONNAIRES.LBL_dropdown' | translate }}
+							</div>
+						</div>
+					</div>
+					<!--
+               <p-checkbox *ngSwitchCase="4" #pCheckbox
+                        binary="true"
+                        [dynamicId]="bindId && model.id"
+                        [formControlName]="model.id"
+                        [label]="model.label"
+                        [name]="model.name"
+                        [ngClass]="model.cls.element.control"
+                        [tabindex]="model.tabIndex"
+                        [value]="model.value"></p-checkbox>
+            
+            
+            
+            <p-editor *ngSwitchCase="7" #pEditor
+                      [dynamicId]="bindId && model.id"
+                      [formControlName]="model.id"
+                      (onTextChange)="onValueChange($event)"></p-editor>
+            
+            <textarea *ngSwitchCase="14" pInputTextarea #pInputTextarea
+                      [attr.tabindex]="model.tabIndex"
+                      [cols]="model.cols"
+                      [dynamicId]="bindId && model.id"
+                      [formControlName]="model.id"
+                      [maxlength]="model.maxLength"
+                      [minlength]="model.minLength"
+                      [name]="model.name"
+                      [ngClass]="model.cls.element.control"
+                      [placeholder]="model.placeholder"
+                      [readonly]="model.readOnly"
+                      [required]="model.required"
+                      [rows]="model.rows"
+                      [spellcheck]="model.spellCheck"
+                      [wrap]="model.wrap"
+                      (blur)="onFocusChange($event)"
+                      (change)="onValueChange($event)"
+                      (focus)="onFocusChange($event)"></textarea>
+            
+            <ng-container *ngSwitchCase="9">
+               
+               <input pInputText #pInputText
+                      [attr.accept]="model.accept"
+                      [attr.autoComplete]="model.autoComplete"
+                      [attr.list]="model.listId"
+                      [attr.max]="model.max"
+                      [attr.min]="model.min"
+                      [attr.multiple]="model.multiple"
+                      [attr.step]="model.step"
+                      [attr.tabindex]="model.tabIndex"
+                      [autofocus]="model.autoFocus"
+                      [dynamicId]="bindId && model.id"
+                      [formControlName]="model.id"
+                      [maxlength]="model.maxLength"
+                      [minlength]="model.minLength"
+                      [name]="model.name"
+                      [ngClass]="model.cls.element.control"
+                      [pattern]="model.pattern"
+                      [placeholder]="model.placeholder"
+                      [readonly]="model.readOnly"
+                      [required]="model.required"
+                      [spellcheck]="model.spellCheck"
+                      [type]="model.inputType"
+                      (blur)="onFocusChange($event)"
+                      (change)="onValueChange($event)"
+                      (focus)="onFocusChange($event)"/>
+               -->
+		</fieldset>
+	</p-panel>
+</div>
