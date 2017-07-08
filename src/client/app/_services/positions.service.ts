@@ -160,7 +160,4 @@ export class PositionsService {
       return this.authHttp.put( this.serviceURL + 'cargos/disabled/' + idCargo, idCargo ).map( ( res: Response ) => res );
    }
 
-   getReglasFormulariosCargos( ) {
-      return this.authHttp.get( this.serviceURL + 'reglasFormulariosCargos/CARGOS' ).map( ( res: Response ) => res.text() );
-   }
 }

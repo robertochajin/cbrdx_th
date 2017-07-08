@@ -62,6 +62,7 @@ export class Employee {
    public idSectorEconomico: number;
    public idActividadEconomica: number;
    public idTipoTercero: number;
+   public idAdjunto: number;
 
    public idTallaCamisa: number;
    public idTallaPantalon: number;
@@ -103,7 +104,7 @@ export class Employee {
       this.idTipoOcupacion = null;
       this.idTipoPersona = null;
       this.idTipoTercero = null;
-      this.imagen = '';
+      this.imagen = null;
       this.imc = 0;
       this.indicadorVivo = true;
       this.indicadorHabilitado = true;

@@ -34,7 +34,7 @@ export class Noformalstudies {
       this.fechaTermina = null;
       this.idTipoEstudio = null;
       this.fechaVerificado = '';
-      this.idAdjunto = 0;
+      this.idAdjunto = null;
       this.idAreaEstudio = null;
       this.idCiudad = 0;
       this.idIntensidadHoraria = null;

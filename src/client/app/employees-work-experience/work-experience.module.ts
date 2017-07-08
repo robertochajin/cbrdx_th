@@ -8,6 +8,8 @@ import { WorkExperienceUpdateComponent } from './work-experience-update.componen
 import { SharedModule } from '../shared/shared.module';
 import { FormSharedModule } from '../shared/form-shared.module';
 import { WorkExperienceService } from '../_services/work-experience.service';
+import { AdjuntosService } from '../_services/adjuntos.service';
+import { ConstanteService } from '../_services/constante.service';
 
 @NgModule( {
               imports: [
@@ -22,7 +24,7 @@ import { WorkExperienceService } from '../_services/work-experience.service';
                  WorkExperienceDetailComponent,
               ],
               bootstrap: [ WorkExperienceComponent ],
-              providers: [ WorkExperienceService ],
+              providers: [ WorkExperienceService, AdjuntosService, ConstanteService ],
               exports: [ WorkExperienceComponent ]
            } )
 export class WorkExperienceModule {

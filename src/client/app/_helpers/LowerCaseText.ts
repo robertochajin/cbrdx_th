@@ -6,7 +6,7 @@ import { Directive, ElementRef } from '@angular/core';
               }
 
            })
-export class LowerCaseText {
+export class LowerCaseTextDirective {
    constructor(private ref: ElementRef) {
    }
 }

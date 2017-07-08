@@ -7,6 +7,7 @@ import { Message } from 'primeng/primeng';
 import { EmployeesService } from '../_services/employees.service';
 import { ListEmployeesService } from '../_services/lists-employees.service';
 import { NavService } from '../_services/_nav.service';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 
 @Component( {
                moduleId: module.id,
@@ -17,10 +18,12 @@ import { NavService } from '../_services/_nav.service';
 
 export class EmployeesContactComponent {
    @Input() employee: Employee;
+   @Input() seccion: PermissionsEmployees;
 
    msgs: Message[] = [];
    tel: boolean = false;
    cel: boolean = true;
+   defaultCampo = { visible: true, editable: true };
 
    constructor( private employeesService: EmployeesService,
       private route: ActivatedRoute,

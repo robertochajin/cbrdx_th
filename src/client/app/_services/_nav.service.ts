@@ -63,11 +63,6 @@ export class NavService {
    setTab( numero: number ) {
       this._navTab = numero;
    }
-
-   getTab() {
-      return this._navTab;
-   }
-
    setSearch( id: string, strSearch: string ) {
       if ( this.arraySearch.find( c => c.id === id ) ) {
          this.arraySearch.find( c => c.id === id ).strSearch = strSearch;
@@ -76,6 +71,14 @@ export class NavService {
       }
    }
 
+
+   getTab() {
+      return this._navTab;
+   }
+
+   getUsuarioLogeado() {
+      return this.usuarioLogueado;
+   }
    getSearch( id: string ) {
       if ( this.arraySearch.find( c => c.id === id ) ) {
          return this.arraySearch.find( c => c.id === id ).strSearch;

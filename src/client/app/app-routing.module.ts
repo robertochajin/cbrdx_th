@@ -162,7 +162,6 @@ import { CentralRiskComponent } from './selection-process-risks/central-risk.com
 
 // hoja de vida
 import { EmployeesCurriculumVitaeComponent } from './employees/employees-curriculum-vitae.component';
-import { AdjuntosComponent } from './adjuntos/adjuntos.component';
 import { MedicalInstitutionsComponent } from './medical-institutions/medical-institutions.component';
 import { MedicalInstitutionAddComponent } from './medical-institutions/medical-institutions-add.component';
 import { MedicalInstitutionUpdateComponent } from './medical-institutions/medical-institutions-update.component';
