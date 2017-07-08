@@ -77,6 +77,8 @@ export class NavService {
    }
 
    getUsuarioLogeado() {
+      let token = localStorage.getItem( 'token' );
+      this.usuarioLogueado = this.jwtHelper.decodeToken( token );
       return this.usuarioLogueado;
    }
    getSearch( id: string ) {
