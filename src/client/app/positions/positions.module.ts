@@ -21,6 +21,7 @@ import { AbsenceModule } from '../position-absence/position-absence.module';
 import { PositionCompetenciesModule } from '../position-competencies/position-competencies.module';
 import { CompanyAssetsModule } from '../position-company-assets/company-assets.module';
 import { PersonalityModule } from '../position-personality/personality.module';
+import { PositionsDetailComponent } from './positions-detail.component';
 
 
 
