@@ -377,10 +377,10 @@ const routes = [
    { path: 'medical-institutions/detail/:id', component: MedicalInstitutionDetailComponent, canActivate: [ AuthGuard ] },
 
    // Vacantes
-   { path: 'document-management', component: DocumentManagementComponent },
-   { path: 'document-management/add', component: DocumentManagementAddComponent },
-   { path: 'document-management/update/:idEmpDoc', component: DocumentManagementAddComponent },
-   { path: 'document-management/detail/:idEmpDoc', component: DocumentManagementDetailComponent },
+   { path: 'document-management', component: DocumentManagementComponent, canActivate: [ AuthGuard ] },
+   { path: 'document-management/add', component: DocumentManagementAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'document-management/update/:idEmpDoc', component: DocumentManagementAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'document-management/detail/:idEmpDoc', component: DocumentManagementDetailComponent, canActivate: [ AuthGuard ] },
 
    // Vacantes
    { path: 'vacancies', component: VacanciesComponent, canActivate: [ AuthGuard ] },
