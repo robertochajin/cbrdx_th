@@ -167,6 +167,7 @@ import { MedicalInstitutionAddComponent } from './medical-institutions/medical-i
 import { MedicalInstitutionUpdateComponent } from './medical-institutions/medical-institutions-update.component';
 import { MedicalInstitutionDetailComponent } from './medical-institutions/medical-institutions-detail.component';
 import { PositionsDetailComponent } from './positions/positions-detail.component';
+import { DocumentManagementComponent } from './document-management/document-management.component';
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
@@ -372,6 +373,9 @@ const routes = [
    { path: 'medical-institutions/add', component: MedicalInstitutionAddComponent, canActivate: [ AuthGuard ] },
    { path: 'medical-institutions/update/:id', component: MedicalInstitutionUpdateComponent, canActivate: [ AuthGuard ] },
    { path: 'medical-institutions/detail/:id', component: MedicalInstitutionDetailComponent, canActivate: [ AuthGuard ] },
+
+   // Vacantes
+   { path: 'document-management', component: DocumentManagementComponent },
 
    // Vacantes
    { path: 'vacancies', component: VacanciesComponent, canActivate: [ AuthGuard ] },
