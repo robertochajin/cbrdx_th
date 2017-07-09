@@ -786,7 +786,7 @@
 
    "REQUERIMIENTOPERSONAL": {
       "LBL_REQUERIMIENTOPERSONAL":"Requerimiento de personal",
-      "BTN_AGREGARNUEVO":"Agregar nuevo referido",
+      "BTN_AGREGARNUEVO":"Agregar nuevo requerimiento de personal",
       "LBL_DATOSSOLICITUD":"Datos básicos de la solicitud",
       "LBL_DATOSSOLICITANTE":"Datos Solicitante",
       "LBL_NOMBRESOLICITANTE":"Nombre del Solicitante",
@@ -831,7 +831,7 @@
       "LBL_OBSERVACIONES": "Observaciones",
       "LBL_CUESTIONARIOS": "Datos pruebas técnicas",
       "LBL_CUESTIONARIO": "Pruebas técnicas",
-      "":""
+      "MSG_CARGONOCONFIGURADO":"El cargo no está configurado"
    },
 
    "PROYECCIONLABORAL": {

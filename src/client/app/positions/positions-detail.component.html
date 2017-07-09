@@ -225,9 +225,9 @@
 				</p-panel>
 				<p-panel header="{{ 'POSITION.LBL_PRODUCTIVIDAD' | translate }}">
 					<fieldset>
-						<div class="container">
-							<div class="row col-md-12">
-								<div class="ui-grid-col-5">
+						<div>
+							<div class="row">
+								<div class="col-md-6">
 									<label for="idProductividad">{{ 'POSITION.LBL_PRODUCTIVIDAD' | translate }}</label>
 									<p-dropdown id="idProductividad" name="idProductividad" required="true"
 									            [options]="ListProductivity" [autoWidth]="false"
@@ -235,7 +235,7 @@
 									            #idProductividad="ngModel" disabled="true">
 									</p-dropdown>
 								</div>
-								<div class="ui-grid-col-5">
+								<div class="col-md-6">
 									<label for="idNivelIQ">{{ 'POSITION.LBL_NIVEL' | translate }}</label>
 									<p-dropdown id="idNivelIQ" name="idNivelIQ" required="true"
 									            [options]="ListIQLevel" [autoWidth]="false"
@@ -244,8 +244,8 @@
 									></p-dropdown>
 								</div>
 							</div>
-							<div class="row col-md-12">
-								<div class="ui-grid-col-10">
+							<div class="row">
+								<div class="col-md-12">
 									<label for="idNivelAptitude">{{ 'POSITION.LBL_NIVELAPTITUD' | translate }}</label>
 									<p-dropdown id="idNivelAptitude" name="idNivelAptitude" required="true"
 									            [options]="ListAptitudeLevel" [autoWidth]="false"
