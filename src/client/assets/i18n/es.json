@@ -995,6 +995,28 @@
    "LBL_ESTRUCTURAFISICA":"Estructura Física",
    "":""
 },
+   "DOCMANAGMENT":{
+    "LBL_ADMINDOCS":"Administrador de documentos",
+    "LBL_AGREGAR":"Agregar registro",
+    "LBL_CODIGO":"Código",
+    "LBL_CODIGOINST":"Código institucional",
+    "LBL_NOMBRE":"Nombre documento",
+    "LBL_ADJUNTAR":"Adjuntar",
+    "LBL_DESCARGAR":"Descargar",
+    "LBL_TIPO":"Tipo",
+    "LBL_ADJUNTARSISTEMA":"Adjuntar al sistema",
+    "LBL_DESCARGARSISTEMA":"Descargar del sistema",
+    "LBL_REQUERIDOCONTRATA":"Requerido para contratación",
+    "LBL_VIGENCIA":"Vigencia",
+    "LBL_NOAPLCA":"No aplica",
+    "LBL_APLCA":"Aplica",
+    "LBL_ACCION":"Acción",
+    "LBL_ADJUNTO":"Adjunto",
+    "LBL_DESCRIPCION":"Descripcion",
+    "LBL_DATOSGENERALES":"Datos generales",
+    "":""
+
+   },
 
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="

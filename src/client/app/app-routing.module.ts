@@ -167,6 +167,9 @@ import { MedicalInstitutionAddComponent } from './medical-institutions/medical-i
 import { MedicalInstitutionUpdateComponent } from './medical-institutions/medical-institutions-update.component';
 import { MedicalInstitutionDetailComponent } from './medical-institutions/medical-institutions-detail.component';
 import { PositionsDetailComponent } from './positions/positions-detail.component';
+import { DocumentManagementComponent } from './document-management/document-management.component';
+import { DocumentManagementAddComponent } from './document-management/document-management-edit.component';
+import { DocumentManagementDetailComponent } from './document-management/document-management-detail.component';
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
@@ -372,6 +375,12 @@ const routes = [
    { path: 'medical-institutions/add', component: MedicalInstitutionAddComponent, canActivate: [ AuthGuard ] },
    { path: 'medical-institutions/update/:id', component: MedicalInstitutionUpdateComponent, canActivate: [ AuthGuard ] },
    { path: 'medical-institutions/detail/:id', component: MedicalInstitutionDetailComponent, canActivate: [ AuthGuard ] },
+
+   // Vacantes
+   { path: 'document-management', component: DocumentManagementComponent, canActivate: [ AuthGuard ] },
+   { path: 'document-management/add', component: DocumentManagementAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'document-management/update/:idEmpDoc', component: DocumentManagementAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'document-management/detail/:idEmpDoc', component: DocumentManagementDetailComponent, canActivate: [ AuthGuard ] },
 
    // Vacantes
    { path: 'vacancies', component: VacanciesComponent, canActivate: [ AuthGuard ] },
