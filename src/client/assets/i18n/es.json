@@ -1009,7 +1009,11 @@
     "LBL_REQUERIDOCONTRATA":"Requerido para contratación",
     "LBL_VIGENCIA":"Vigencia",
     "LBL_NOAPLCA":"No aplica",
+    "LBL_APLCA":"Aplica",
+    "LBL_ACCION":"Acción",
+    "LBL_ADJUNTO":"Adjunto",
     "LBL_DESCRIPCION":"Descripcion",
+    "LBL_DATOSGENERALES":"Datos generales",
     "":""
 
    },

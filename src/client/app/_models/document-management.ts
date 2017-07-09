@@ -4,8 +4,9 @@ import { Injectable } from '@angular/core';
 export class DocumentManagement {
    idDocumentoTercero: number;
    idClasificacionDocumento: number;
+   idAdjunto: number;
    nombre: string;
-   codigoInstitucional: number;
+   codigoInstitucional: string;
    descripcion: string;
    indicadorAdjunto: boolean;
    indicadorDescarga: boolean;

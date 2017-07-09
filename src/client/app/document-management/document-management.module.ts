@@ -6,7 +6,8 @@ import { FormSharedModule } from '../shared/form-shared.module';
 import { DocumentManagementService } from '../_services/document-managgement.service';
 import { DocumentManagementComponent } from './document-management.component';
 import { LocationsModule } from '../locations/locations.module';
-import { ZonesServices } from '../_services/zones.service';
+import { DocumentManagementAddComponent } from './document-management-edit.component';
+import { DocumentManagementDetailComponent } from './document-management-detail.component';
 
 
 @NgModule( {
@@ -15,7 +16,7 @@ import { ZonesServices } from '../_services/zones.service';
                  FormSharedModule,
                  LocationsModule
               ],
-              declarations: [ DocumentManagementComponent ],
+              declarations: [ DocumentManagementComponent,DocumentManagementAddComponent,DocumentManagementDetailComponent ],
               bootstrap: [ DocumentManagementComponent ],
               providers: [ DocumentManagementService ],
               exports: [ DocumentManagementComponent ]
