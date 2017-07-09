@@ -25,22 +25,12 @@ export class QuestionnairesAddComponent implements OnInit {
       private route: ActivatedRoute,
       private confirmationService: ConfirmationService,
       private navService: NavService ) {
-      /*this.questionnairesService.getAll( ).subscribe(
+      this.questionnairesService.getAll().subscribe(
        res => {
-       this.allQuest = res;
-       } );*/
-      /*
-       this.route.params.subscribe( params => {
-       this.idCuestionario = +params[ 'id' ];
-       if ( Number( this.idCuestionario ) > 0 ) {
-       this.questionnairesService.get( this.idCuestionario ).subscribe(
-       res => {
-       this.cuestionario = res;
-       } );
+          this.allQuest = res;
        }
-       }
-       );
-       */
+      );
+
    }
 
    ngOnInit() {
@@ -66,7 +56,7 @@ export class QuestionnairesAddComponent implements OnInit {
       if ( !this.codeExists ) {
          this.questionnairesService.add( this.cuestionario ).subscribe( res => {
             this.navService.setMesage( 1, this.msgs );
-            this.location.back();
+            this.router.navigate( [ 'questionnaries/update/' + res.idCuestionario ] );
          }, error => {
             this.navService.setMesage( 3, this.msgs );
          } );

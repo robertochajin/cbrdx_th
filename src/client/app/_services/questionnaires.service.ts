@@ -39,42 +39,47 @@ export class QuestionnairesService {
    }
 
    getQuestions( id: number ) {
-      return this.authHttp.get( this.masterService + 'preguntas/buscarCuestionario/' + id )
+      return this.authHttp.get( this.masterService + 'cuestionariosPreguntas/buscarCuestionario/' + id )
       .map( ( res: Response ) => res.json() as QuestionnariesQuestions[] );
    }
 
    getQuestion( id: number ) {
-      return this.authHttp.get( this.masterService + 'preguntas/' + id )
+      return this.authHttp.get( this.masterService + 'cuestionariosPreguntas/' + id )
       .map( ( res: Response ) => res.json() as QuestionnariesQuestions );
    }
 
    addQuestion( f: QuestionnariesQuestions ) {
-      return this.authHttp.post( this.masterService + 'preguntas', f )
+      return this.authHttp.post( this.masterService + 'cuestionariosPreguntas', f )
       .map( ( res: Response ) => res.json() );
    };
 
    updateQuestion( f: QuestionnariesQuestions ) {
-      return this.authHttp.put( this.masterService + 'preguntas', JSON.stringify( f ) ).catch( this.handleError );
+      return this.authHttp.put( this.masterService + 'cuestionariosPreguntas', JSON.stringify( f ) ).catch( this.handleError );
    }
 
    getAnswers( id: number ) {
-      return this.authHttp.get( this.masterService + 'respuestas/buscarPreguntas/' + id )
+      return this.authHttp.get( this.masterService + 'preguntasOpciones/buscarPregunta/' + id )
       .map( ( res: Response ) => res.json() as QuestionnariesAnswers[] );
    }
 
    getAnswer( id: number ) {
-      return this.authHttp.get( this.masterService + 'respuestas/' + id )
+      return this.authHttp.get( this.masterService + 'preguntasOpciones/' + id )
       .map( ( res: Response ) => res.json() as QuestionnariesAnswers[] );
    }
 
    addAnswer( f: QuestionnariesAnswers ) {
-      return this.authHttp.post( this.masterService + 'respuestas', f )
+      return this.authHttp.post( this.masterService + 'preguntasOpciones', f )
       .map( ( res: Response ) => res.json() );
    };
 
    updateAnswer( f: QuestionnariesAnswers ) {
-      return this.authHttp.put( this.masterService + 'respuestas', JSON.stringify( f ) ).catch( this.handleError );
+      return this.authHttp.put( this.masterService + 'preguntasOpciones', JSON.stringify( f ) ).catch( this.handleError );
    }
+
+   addSolution( f: QuestionnariesAnswers ) {
+      return this.authHttp.post( this.masterService + 'respuestas', f )
+      .map( ( res: Response ) => res.json() );
+   };
 
    handleError( error: any ): Promise<any> {
       console.error( 'Error:', error );

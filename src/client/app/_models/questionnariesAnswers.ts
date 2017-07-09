@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class QuestionnariesAnswers {
 
-   public idRespuesta: number = null;
-   public idPregunta: number = null;
-   public codigoRespuesta: string = null;
-   public respuesta: string;
+   public idPreguntaOpcion: number = null;
+   public idCuestionarioPregunta: number = null;
+   public codigoOpcion: string = null;
+   public opcion: string;
+   public pregunta: string;
    public orden: number;
    public indicadorCorrecto: boolean;
    public indicadorHabilitado: boolean = true;

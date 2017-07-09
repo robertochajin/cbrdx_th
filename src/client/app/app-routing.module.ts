@@ -171,6 +171,7 @@ import { MedicalInstitutionDetailComponent } from './medical-institutions/medica
 import { QuestionnairesComponent } from './questionnaires/questionnaires.component';
 import { QuestionnairesAddComponent } from './questionnaires/questionnaires-add.component';
 import { QuestionnairesUpdateComponent } from './questionnaires/questionnaires-update.component';
+import { SolutionsQuestionnairesComponent } from './questionnaires/solutions-questionnaire/solutions-questionnaires.component';
 
 const routes = [
       { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -399,6 +400,7 @@ const routes = [
       { path: 'selection-process/process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
 
       //  Cuestionarios
+   { path: 'solutions', component: SolutionsQuestionnairesComponent },
    { path: 'questionnaries', component: QuestionnairesComponent },
    { path: 'questionnaries/add', component: QuestionnairesAddComponent },
    { path: 'questionnaries/update/:id', component: QuestionnairesUpdateComponent },

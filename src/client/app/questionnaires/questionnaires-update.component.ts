@@ -144,10 +144,14 @@ export class QuestionnairesUpdateComponent implements OnInit {
 
    onSubmitQuestion() {
       if ( !this.codeExistsP ) {
-         if ( this.pregunta.idPregunta === null || this.pregunta.idPregunta === undefined || this.pregunta.idPregunta === 0 ) {
+         if ( this.pregunta.idCuestionarioPregunta === null || this.pregunta.idCuestionarioPregunta === undefined || this.pregunta.idCuestionarioPregunta === 0 ) {
+            this.pregunta.idCuestionario = this.idCuestionario;
             this.questionnairesService.addQuestion( this.pregunta ).subscribe( res => {
-               this.preguntas.push( res );
+               this.getQuestions();
                this.navService.setMesage( 1, this.msgs );
+               this.formQuestion = false;
+               this.showAnswers = false;
+               this.pregunta = new QuestionnariesQuestions();
             }, error => {
                this.navService.setMesage( 3, this.msgs );
             } );
@@ -165,9 +169,9 @@ export class QuestionnairesUpdateComponent implements OnInit {
    validateCodeP() {
       if ( this.pregunta.codigoPregunta !== '' && this.pregunta.codigoPregunta !== null ) {
          this.codeExistsP = this.preguntas.filter(
-               t => (t.codigoPregunta === this.pregunta.codigoPregunta && t.idPregunta !== this.pregunta.idPregunta ) ).length > 0;
+               t => (t.codigoPregunta === this.pregunta.codigoPregunta && t.idCuestionarioPregunta !== this.pregunta.idCuestionarioPregunta ) ).length > 0;
       } else {
-         this.codeExists = false;
+         this.codeExistsP = false;
       }
    }
 
@@ -207,10 +211,13 @@ export class QuestionnairesUpdateComponent implements OnInit {
 
    onSubmitAnswer() {
       if ( !this.codeExistsR ) {
-         if ( this.respuesta.idRespuesta === null || this.respuesta.idRespuesta === undefined || this.respuesta.idRespuesta === 0 ) {
+         if ( this.respuesta.idPreguntaOpcion === null || this.respuesta.idPreguntaOpcion === undefined || this.respuesta.idPreguntaOpcion === 0 ) {
+            this.respuesta.idCuestionarioPregunta = this.pregunta.idCuestionarioPregunta;
             this.questionnairesService.addAnswer( this.respuesta ).subscribe( res => {
-               this.respuestas.push( res );
+               this.getAnswers();
                this.navService.setMesage( 1, this.msgs );
+               this.formAnswer = false;
+               this.respuesta = new QuestionnariesAnswers();
             }, error => {
                this.navService.setMesage( 3, this.msgs );
             } );
@@ -226,10 +233,20 @@ export class QuestionnairesUpdateComponent implements OnInit {
    }
 
    getAnswers() {
-      this.questionnairesService.getAnswers( this.pregunta.idPregunta ).subscribe(
+      this.questionnairesService.getAnswers( this.pregunta.idCuestionarioPregunta ).subscribe(
          res => {
             this.respuestas = res;
             this.formAnswer = false;
          } );
    }
+
+   validateCodeR() {
+      if ( this.respuesta.codigoOpcion !== '' && this.respuesta.codigoOpcion !== null ) {
+         this.codeExistsR = this.respuestas.filter(
+               t => (t.codigoOpcion === this.respuesta.codigoOpcion  ) ).length > 0;
+      } else {
+         this.codeExistsR = false;
+      }
+   }
+
 }

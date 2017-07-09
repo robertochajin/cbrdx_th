@@ -5,9 +5,9 @@
 				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 					<div class="row" [ngSwitch]="pregunta.idTipoPregunta">
 						<div class="form-group col-md-12" *ngSwitchCase="1">
-							<label [for]="pregunta.idPregunta">{{pregunta.pregunta}}</label>
-							<p-dropdown [id]="pregunta.idPregunta"
-							            [name]="pregunta.idPregunta"
+							<label [for]="pregunta.idCuestionarioPregunta">{{pregunta.pregunta}}</label>
+							<p-dropdown [id]="pregunta.idCuestionarioPregunta"
+							            [name]="pregunta.idCuestionarioPregunta"
 							            [options]="listadoOpciones"
 							            [(ngModel)]="idRespuesta"
 							            [required]="pregunta.indicadorObligatorio"
@@ -25,21 +25,21 @@
 							<label>{{pregunta.pregunta}}</label>
 							<p-checkbox *ngFor="let respuesta of respuestas" #pCheckbox
 							            binary="true"
-							            [id]="respuesta.idRespuesta"
+							            [id]="respuesta.idPreguntaOpcion"
 							            [label]="respuesta.respuesta"
-							            [name]="respuesta.idRespuesta"
-							            [value]="respuesta.idRespuesta"
+							            [name]="respuesta.idPreguntaOpcion"
+							            [value]="respuesta.idPreguntaOpcion"
 							            tabindex="1"></p-checkbox>
 						</div>
 						<div class="form-group col-md-12" *ngSwitchCase="3">
-							<label [for]="pregunta.idPregunta">{{pregunta.pregunta}}</label>
+							<label [for]="pregunta.idCuestionarioPregunta">{{pregunta.pregunta}}</label>
 							<input pInputText #pInputText
-							       [id]="pregunta.idPregunta"
-							       [name]="pregunta.idPregunta"
+							       [id]="pregunta.idCuestionarioPregunta"
+							       [name]="pregunta.idCuestionarioPregunta"
 							       [required]="pregunta.indicadorObligatorio"
 							       type="text"
 							       tabindex="1"
-							></input>
+							/>
 							<div class="ui-message ui-messages-error ui-corner-all"
 							     *ngIf="f.submitted && !pInputText.valid">
 								<i class="fa fa-close"></i>
@@ -47,10 +47,10 @@
 							</div>
 						</div>
 						<div class="form-group col-md-12" *ngSwitchCase="4">
-							<label [for]="pregunta.idPregunta">{{pregunta.pregunta}}</label>
+							<label [for]="pregunta.idCuestionarioPregunta">{{pregunta.pregunta}}</label>
 							<textarea *ngSwitchCase="14" pInputTextarea #pInputTextarea
-							          [id]="pregunta.idPregunta"
-							          [name]="pregunta.idPregunta"
+							          [id]="pregunta.idCuestionarioPregunta"
+							          [name]="pregunta.idCuestionarioPregunta"
 							          [required]="pregunta.indicadorObligatorio"
 							          tabindex="1"
 							></textarea>
@@ -61,6 +61,8 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</form>
 		</fieldset>
 	</p-panel>
 </div>

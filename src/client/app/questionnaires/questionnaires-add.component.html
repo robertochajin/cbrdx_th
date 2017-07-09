@@ -27,7 +27,7 @@
 								<div class="ui-grid-col-8">
 									<label for="nombre">* {{ 'LBL_NOMBRE' | translate}}</label>
 									<input type="text" pInputText id="nombre" name="nombre"
-									       [(ngModel)]="cuestionario.cuestionario" maxlength="6" titleCaseText
+									       [(ngModel)]="cuestionario.cuestionario" maxlength="455" titleCaseText
 									       #NGnombre="ngModel" required/>
 									<div class="ui-message ui-messages-error ui-corner-all"
 									     *ngIf="f.submitted && !NGnombre.valid">

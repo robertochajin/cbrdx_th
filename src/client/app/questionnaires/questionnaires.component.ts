@@ -26,23 +26,12 @@ export class QuestionnairesComponent implements OnInit {
    }
 
    ngOnInit() {
-      this.quest.idCuestionario = 1;
-      this.quest.cuestionario = "NOMBRE";
-      this.quest.descripcion = "DESCRIP";
-      this.quest.indicadorHabilitado = true;
-      this.quest.indicadorPonderacion = true;
-      this.quest.auditoriaUsuario = 1;
-      this.quest.valor = 100;
-      this.quest.auditoriaFecha = null;
-      this.quest.codigoCuestionario = "as2";
-      /*
       this.questionnairesService.getAll( ).subscribe(
          questionnaires => {
             this.questionnaries = questionnaires;
        }
-       );*/
+      );
 
-      this.questionnaries.push( this.quest );
 
    }
 
