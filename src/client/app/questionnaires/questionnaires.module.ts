@@ -8,6 +8,8 @@ import { QuestionnairesComponent } from './questionnaires.component';
 import { QuestionnairesService } from '../_services/questionnaires.service';
 import { QuestionnairesAddComponent } from './questionnaires-add.component';
 import { QuestionnairesUpdateComponent } from './questionnaires-update.component';
+import { SolutionsQuestionnairesComponent } from './solutions-questionnaire/solutions-questionnaires.component';
+
 
 @NgModule( {
               imports: [
@@ -15,7 +17,9 @@ import { QuestionnairesUpdateComponent } from './questionnaires-update.component
                  FormSharedModule,
               ],
 
-              declarations: [ QuestionnairesComponent, QuestionnairesAddComponent, QuestionnairesUpdateComponent ],
+              declarations: [ QuestionnairesComponent, QuestionnairesAddComponent, QuestionnairesUpdateComponent,
+                 SolutionsQuestionnairesComponent
+              ],
               bootstrap: [ QuestionnairesComponent ],
               providers: [ QuestionnairesService, NavService, ListaService ],
               exports: [ QuestionnairesComponent ]
