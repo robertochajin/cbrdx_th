@@ -4,6 +4,7 @@ import { Employee } from '../_models/employees';
 import { Workexperience } from '../_models/work-experience';
 import { WorkExperienceService } from '../_services/work-experience.service';
 import { ConfirmationService } from 'primeng/primeng';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 
 @Component( {
                moduleId: module.id,
@@ -13,6 +14,7 @@ import { ConfirmationService } from 'primeng/primeng';
             } )
 export class WorkExperienceComponent implements OnInit {
    @Input() employee: Employee;
+   @Input() seccion: PermissionsEmployees;
    experience: Workexperience = new Workexperience();
    dialogObjet: Workexperience = new Workexperience();
    experiences: Workexperience[];

@@ -14,6 +14,7 @@ import { ListaItem } from '../_models/listaItem';
 import { JwtHelper } from 'angular2-jwt';
 import { AdjuntosService } from '../_services/adjuntos.service';
 import { ConstanteService } from '../_services/constante.service';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 
 @Component( {
                moduleId: module.id,
@@ -23,8 +24,8 @@ import { ConstanteService } from '../_services/constante.service';
             } )
 
 export class FormalStudiesAddComponent implements OnInit {
-   @Input()
-   cityList: DivisionPolitica[] = [];
+   @Input() cityList: DivisionPolitica[] = [];
+   @Input() seccion: PermissionsEmployees;
    selectedCity: DivisionPolitica;
    fstudy: FormalStudies = new FormalStudies();
    header: string = 'Agregando Estudio Formal';

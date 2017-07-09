@@ -19,6 +19,7 @@ import { RequirementReferralsServices } from '../_services/requirement-referrals
 import { ConstanteService } from '../_services/constante.service';
 import { VacanciesService } from '../_services/vacancies.service';
 import { OrganizationalStructurePositionsServices } from '../_services/organizationalStructurePositions.service';
+import { PositionsDetailComponent } from '../positions/positions-detail.component';
 
 @NgModule( {
               imports: [
@@ -27,7 +28,7 @@ import { OrganizationalStructurePositionsServices } from '../_services/organizat
               ],
 
               declarations: [ PersonnelRequirementComponent,PersonnelRequirementDetailComponent,
-              PersonnelRequirementEditComponent,PersonnelRequirementHistoricalComponent
+              PersonnelRequirementEditComponent,PersonnelRequirementHistoricalComponent,PositionsDetailComponent
               ],
               bootstrap: [ PersonnelRequirementComponent ],
               providers: [ PersonnelRequirementServices,

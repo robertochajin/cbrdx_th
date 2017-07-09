@@ -3,6 +3,7 @@
   <div class="row datable-header">
     <div class="col-md-6 col-xs-12 datatable-header-add">
       <button type="button" icon="fa-plus" label="{{'EMPLOYEES.LBL_NUEVOVEHICULO' | translate }}"
+              *ngIf="seccion.NUEVO ? seccion.NUEVO.visible : true"
               pButton (click)="add()"></button>
     </div>
     <div class="col-md-6 col-xs-12 datatable-header-search" >
@@ -27,9 +28,12 @@
         <!--<button type="button" icon="fa-eye" class="ui-button-info"-->
         <!--pButton (click)="detail(employeeEstate)"></button>-->
         <button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
-                pButton (click)="update(employeeVehicle)"></button>
+                pButton (click)="update(employeeVehicle)"
+                *ngIf="seccion.EDITAR ? seccion.EDITAR.visible : true"
+        ></button>
         <button type="button" icon="fa-trash" class="ui-button-danger" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
-        pButton (click)="del(employeeVehicle)" ></button>
+                pButton (click)="del(employeeVehicle)"
+                *ngIf="seccion.ELIMINAR ? seccion.ELIMINAR.visible : true"></button>
 
       </template>
     </p-column>

@@ -11,6 +11,7 @@ import { DivisionPolitica } from '../_models/divisionPolitica';
 import { NavService } from '../_services/_nav.service';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 @Component( {
                moduleId: module.id,
                selector: 'employees-vehicle',
@@ -19,8 +20,7 @@ import { ListaItem } from '../_models/listaItem';
             } )
 
 export class EmployeesVehicleAddComponent implements OnInit {
-   @Input()
-   employeeVehicle: EmployeeVehicle = new EmployeeVehicle();
+   @Input() employeeVehicle: EmployeeVehicle = new EmployeeVehicle();
    header: string = 'Agregando Vehiculo';
 
    listTypeVehicle: SelectItem[] = [];

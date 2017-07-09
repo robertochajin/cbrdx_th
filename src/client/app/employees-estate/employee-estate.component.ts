@@ -4,6 +4,7 @@ import { EmployeeEstateService } from '../_services/employee-estate.service';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/primeng';
 import { Employee } from '../_models/employees';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 
 @Component( {
                moduleId: module.id,
@@ -13,6 +14,7 @@ import { Employee } from '../_models/employees';
             } )
 export class EmployeesEstateComponent implements OnInit {
    @Input() employee: Employee;
+   @Input() seccion: PermissionsEmployees;
    employeeEstate: EmployeeEstate = new EmployeeEstate();
    dialogObjet: EmployeeEstate = new EmployeeEstate();
 
