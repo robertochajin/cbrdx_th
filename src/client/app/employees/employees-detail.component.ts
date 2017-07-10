@@ -33,16 +33,15 @@ export class EmployeesDetailComponent implements OnInit {
    seccion10: PermissionsEmployees = new PermissionsEmployees();
 
    defaultCampo = { visible: true, editable: true };
-   loadingAvatar : boolean = false;
+   loadingAvatar: boolean = false;
 
-
-   constructor(private employeeService: EmployeesService,
-               private route: ActivatedRoute,
-               private location: Location,
-               private _nav: NavService,
-               private permissionService: PermissionService,
-               private router: Router,
-               private usuariosService: UsuariosService) {
+   constructor( private employeeService: EmployeesService,
+      private route: ActivatedRoute,
+      private location: Location,
+      private _nav: NavService,
+      private permissionService: PermissionService,
+      private router: Router,
+      private usuariosService: UsuariosService ) {
 
       this.permissionService.getReglasFormularios( 'TERCEROS' ).subscribe( p => {
          let permisos = JSON.parse( p );
@@ -126,15 +125,15 @@ export class EmployeesDetailComponent implements OnInit {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
    }
 
-   onBeforeUpload(){
+   onBeforeUpload() {
       // this.loadingAvatar = true;
    }
 
    onUpload( event: any ) {
       this.employee.imagen = event.xhr.responseText;
-      console.info(this.employee.idTercero);
-      console.info(this._nav.getUsuarioLogeado().usuario.idTercero);
-      if( this.employee.idTercero === this._nav.getUsuarioLogeado().usuario.idTercero ){
+      console.info( this.employee.idTercero );
+      console.info( this._nav.getUsuarioLogeado().usuario.idTercero );
+      if ( this.employee.idTercero === this._nav.getUsuarioLogeado().usuario.idTercero ) {
          this.usuariosService.refreshToken();
          this._nav.setAvatar( this.employee.imagen );
       }

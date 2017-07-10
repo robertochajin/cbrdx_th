@@ -29,7 +29,8 @@
 								<label class="col-md-3 col-sm-6 col-xs-12">{{'DOCMANAGMENT.LBL_DESCARGARSISTEMA' | translate}}</label>
 								<label class="col-md-3 col-sm-6 col-xs-12"><strong>Si</strong></label>
 								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_ADJUNTO' | translate}}:</label>
-								<a class="btn btn-default" style="max-width: 87%; overflow: hidden;" (click)="downloadFile(documentManagement.idAdjunto)">
+								<a class="btn btn-default" style="max-width: 87%; overflow: hidden;"
+								   (click)="downloadFile(documentManagement.idAdjunto)">
 									<i class="fa fa-file-o" aria-hidden="true"></i>
 									{{dataUploadArchivo}}
 								</a>
@@ -46,7 +47,8 @@
 							<label
 								class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.indicadorContratacion?'Si':'No'}}</strong></label>
 							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'LBL_HABILITADO' | translate}}:</label>
-							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.indicadorHabilitado?'Si':'No'}}</strong></label>
+							<label
+								class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.indicadorHabilitado?'Si':'No'}}</strong></label>
 						</div>
 					</fieldset>
 				</p-panel>

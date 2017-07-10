@@ -86,7 +86,7 @@ export class DocumentManagementAddComponent implements OnInit {
       } );
       this.listValidity.push( { label: 'Seleccione', value: null } );
       for ( let c = 1; c < 13; c++ ) {
-         if ( c===1 ) {
+         if ( c === 1 ) {
             this.listValidity.push( { label: c + ' Mes', value: c } );
          } else {
             this.listValidity.push( { label: c + ' Meses', value: c } );

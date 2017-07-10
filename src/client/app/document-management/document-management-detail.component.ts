@@ -74,18 +74,20 @@ export class DocumentManagementDetailComponent implements OnInit {
                   this.accion = 2;
                }
                this.listaService.getMasterDetails( 'ListasClasificacionesDocumentos' ).subscribe( res => {
-                 this.clasificacion = res.find(r=>r.idLista === this.documentManagement.idClasificacionDocumento).nombre;
+                  this.clasificacion = res.find( r => r.idLista === this.documentManagement.idClasificacionDocumento ).nombre;
                } );
             } );
          }
       } );
 
    }
+
    downloadFile( id: number ) {
       this.adjuntosService.downloadFile( id ).subscribe( res => {
          window.location.assign( res );
       } );
    }
+
    getFileName() {
       if ( this.documentManagement.idAdjunto ) {
          this.adjuntosService.getFileName( this.documentManagement.idAdjunto ).subscribe( res => {
