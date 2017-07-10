@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
-import { DocumentDownload } from '../_models/documentDownload';
+import { DocumentoTercero } from '../_models/documentDownload';
+import { DocumentoRelacionTercero } from '../_models/DocumentoRelacionTercero';
 
 @Injectable()
 export class DocumentsDownloadService {
    private serviceURL = '<%= SVC_TH_URL %>/api/documentosTerceros/';
    private downloadFileServiceURL = '<%= SVC_TH_URL %>/api/adjuntos/file/';
+   private relacionServiceURL = '<%= SVC_TH_URL %>/api/tercerosDocumentosTercero/';
 
    private jwtHelper: JwtHelper = new JwtHelper();
    private usuarioLogueado: any;
@@ -21,14 +23,19 @@ export class DocumentsDownloadService {
    }
 
    getAllDescargaByTercero( id: number ) {
-      return this.authHttp.get( this.serviceURL + 'documentosDescarga/' + id ).map( ( res: Response ) => res.json() as DocumentDownload[] );
+      return this.authHttp.get( this.relacionServiceURL + 'tercero/' + id )
+      .map( ( res: Response ) => res.json() as DocumentoRelacionTercero[] );
    }
 
-   getAllCargaByTercero( id: number ) {
-      return this.authHttp.get( this.serviceURL + 'documentosAdjunto/' + id ).map( ( res: Response ) => res.json() as DocumentDownload[] );
+   getAll() {
+      return this.authHttp.get( this.serviceURL ).map( ( res: Response ) => res.json() as DocumentoTercero[] );
    }
 
    getFile( id: number ) {
       return this.authHttp.get( this.downloadFileServiceURL + id ).map( ( res: Response ) => res.text() );
+   }
+
+   add( d: DocumentoRelacionTercero ) {
+      return this.authHttp.post( this.relacionServiceURL, d ).map( ( res: Response ) => res.json() );
    }
 }

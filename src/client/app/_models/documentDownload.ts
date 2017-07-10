@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class DocumentDownload {
+export class DocumentoTercero {
    public idDocumentoTercero: number;
    public idClasificacionDocumento: number;
    public nombre: string;
