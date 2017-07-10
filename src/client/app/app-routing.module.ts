@@ -167,6 +167,17 @@ import { MedicalInstitutionAddComponent } from './medical-institutions/medical-i
 import { MedicalInstitutionUpdateComponent } from './medical-institutions/medical-institutions-update.component';
 import { MedicalInstitutionDetailComponent } from './medical-institutions/medical-institutions-detail.component';
 import { PositionsDetailComponent } from './positions/positions-detail.component';
+import { DocumentManagementComponent } from './document-management/document-management.component';
+import { DocumentManagementAddComponent } from './document-management/document-management-edit.component';
+import { DocumentManagementDetailComponent } from './document-management/document-management-detail.component';
+import { CallReferenceComponent } from './selection-process/call-reference.component';
+
+// Cuestionarios
+import { QuestionnairesComponent } from './questionnaires/questionnaires.component';
+import { QuestionnairesAddComponent } from './questionnaires/questionnaires-add.component';
+import { QuestionnairesUpdateComponent } from './questionnaires/questionnaires-update.component';
+import { SolutionsQuestionnairesComponent } from './questionnaires/solutions-questionnaire/solutions-questionnaires.component';
+
 import { DocumentsDownloadComponent } from './download-documents/download-documents.component';
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -357,8 +368,6 @@ const routes = [
    { path: 'personnel-requirement/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'personnel-requirement/historical/:id', component: PersonnelRequirementHistoricalComponent, canActivate: [ AuthGuard ] },
 
-
-
    //  cargos
    //  cargos factores de riesgo
    { path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [ AuthGuard ] },
@@ -368,11 +377,17 @@ const routes = [
 
    // Administracion
    { path: 'menus', component: MenuManagerComponent, canActivate: [ AuthGuard ] },
- // Intituciones medicas
+   // Intituciones medicas
    { path: 'medical-institutions', component: MedicalInstitutionsComponent, canActivate: [ AuthGuard ] },
    { path: 'medical-institutions/add', component: MedicalInstitutionAddComponent, canActivate: [ AuthGuard ] },
    { path: 'medical-institutions/update/:id', component: MedicalInstitutionUpdateComponent, canActivate: [ AuthGuard ] },
    { path: 'medical-institutions/detail/:id', component: MedicalInstitutionDetailComponent, canActivate: [ AuthGuard ] },
+
+   // Vacantes
+   { path: 'document-management', component: DocumentManagementComponent, canActivate: [ AuthGuard ] },
+   { path: 'document-management/add', component: DocumentManagementAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'document-management/update/:idEmpDoc', component: DocumentManagementAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'document-management/detail/:idEmpDoc', component: DocumentManagementDetailComponent, canActivate: [ AuthGuard ] },
 
    // Vacantes
    { path: 'vacancies', component: VacanciesComponent, canActivate: [ AuthGuard ] },
@@ -393,7 +408,13 @@ const routes = [
    { path: 'selection-process/candidates-list/:idPublication', component: CandidatesComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso', component: CentralRiskComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/process-step/candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CandidateRevisionComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/process-step/call-reference/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CallReferenceComponent },
    { path: 'selection-process/process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
+   //  Cuestionarios
+   { path: 'solutions/:id', component: SolutionsQuestionnairesComponent },
+   { path: 'questionnaries', component: QuestionnairesComponent },
+   { path: 'questionnaries/add', component: QuestionnairesAddComponent },
+   { path: 'questionnaries/update/:id', component: QuestionnairesUpdateComponent },
 
    // Descarga de documentos de Terceros
    { path: 'download-documents', component: DocumentsDownloadComponent },

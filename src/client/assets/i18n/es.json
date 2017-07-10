@@ -43,6 +43,7 @@
   "LBL_USUARIO":"Usuario",
   "LBL_TIPO":"Tipo",
   "LBL_FECHA":"Fecha",
+  "LBL_RESULTADO":"Resultado",
   "LBL_FECHAFIN":"Fecha Fin",
   "LBL_FECHAINICIO":"Fecha Inicio",
   "LBL_GRUPO":"Grupo",
@@ -79,6 +80,7 @@
   "BTN_BORRAR":"Borrar",
   "BTN_DOWNLOAD": "Descargar",
   "BTN_UPLOAD": "Subir archivo",
+  "BTN_LLAMAR": "Llamar",
   "FIN_COMUNES":"====================================================================",
 
   "UBICACION":{
@@ -618,7 +620,7 @@
            "LBL_CODIGO" : "Código",
            "LBL_CARGOSUPERVISA" : "¿Que cargo supervisa?",
            "LBL_CONOCIMIENTO" : "Que conocimientos basicos requiere para el desempeño de las funciones del cargo",
-           "LBL_CONOCIMIENTOS" : "Que conocimientos basicos requiere",
+            "LBL_CONOCIMIENTOS": "Que conocimientos basicos requiere",
            "LBL_FACTOR" : "Factor",
            "LBL_FACTORES" : "Factores de riesgo ocupacional",
            "LBL_META" : "Meta",
@@ -644,9 +646,9 @@
            "LBL_ROL" : "Rol",
            "LBL_ROLDENTRO" : "Rol dentro del proceso",
            "LBL_RIESGO" : "Riesgo",
-           "LBL_RIESGOS" : "Riesgos laborales",
+            "LBL_RIESGOS": "Riesgos laborales",
            "LBL_TIPO" : "Tipo",
-           "LBL_EXAMENES" : "Examenes",
+            "LBL_EXAMENES": "Examenes",
            "LBL_PUNTOS" : "Puntos de valoración",
            "LBL_SALARIO" : "Salario al 100%",
            "LBL_SUBTIPO" : "Subtipo",
@@ -786,7 +788,7 @@
 
    "REQUERIMIENTOPERSONAL": {
       "LBL_REQUERIMIENTOPERSONAL":"Requerimiento de personal",
-      "BTN_AGREGARNUEVO":"Agregar nuevo requerimiento de personal",
+      "BTN_AGREGARNUEVO": "Agregar nuevo requerimiento de personal",
       "LBL_DATOSSOLICITUD":"Datos básicos de la solicitud",
       "LBL_DATOSSOLICITANTE":"Datos Solicitante",
       "LBL_NOMBRESOLICITANTE":"Nombre del Solicitante",
@@ -831,7 +833,7 @@
       "LBL_OBSERVACIONES": "Observaciones",
       "LBL_CUESTIONARIOS": "Datos pruebas técnicas",
       "LBL_CUESTIONARIO": "Pruebas técnicas",
-      "MSG_CARGONOCONFIGURADO":"El cargo no está configurado"
+      "MSG_CARGONOCONFIGURADO": "El cargo no está configurado"
    },
 
    "PROYECCIONLABORAL": {
@@ -972,6 +974,7 @@
       "LBL_NOMBRE":"Nombre Archivo",
       "LBL_ARCHIVO":"Archivo",
       "LBL_VER":"Ver",
+      "LBL_LLAMARREFERENCIA":"Llamar referencias",
       "":""
    },
 "MEDICALINSTITUTION":{
@@ -993,6 +996,50 @@
    "LBL_VIAJA":"Viaja",
    "LBL_VALORVIAJA":"Valor Viaje",
    "LBL_ESTRUCTURAFISICA":"Estructura Física",
+   "":""
+},
+   "DOCMANAGMENT": {
+      "LBL_ADMINDOCS": "Administrador de documentos",
+      "LBL_AGREGAR": "Agregar registro",
+      "LBL_CODIGO": "Código",
+      "LBL_CODIGOINST": "Código institucional",
+      "LBL_NOMBRE": "Nombre documento",
+      "LBL_ADJUNTAR": "Adjuntar",
+      "LBL_DESCARGAR": "Descargar",
+      "LBL_TIPO": "Tipo",
+      "LBL_ADJUNTARSISTEMA": "Adjuntar al sistema",
+      "LBL_DESCARGARSISTEMA": "Descargar del sistema",
+      "LBL_REQUERIDOCONTRATA": "Requerido para contratación",
+      "LBL_VIGENCIA": "Vigencia",
+      "LBL_NOAPLCA": "No aplica",
+      "LBL_APLCA": "Aplica",
+      "LBL_ACCION": "Acción",
+      "LBL_ADJUNTO": "Adjunto",
+      "LBL_DESCRIPCION": "Descripcion",
+      "LBL_DATOSGENERALES": "Datos generales",
+      "": ""
+   },
+"QUESTIONNAIRES":{
+   "LBL_QUESTIONNAIRES":"Cuestionarios",
+   "LBL_NEW": "Nuevo",
+   "LBL_NEW2": "Nueva",
+   "LBL_QUESTIONNAIRE": "Cuestionario",
+   "LBL_REQUIRESAVERAGE": "Requiere Ponderación",
+   "LBL_QUESTIONS": "Preguntas",
+   "LBL_QUESTION": "Pregunta",
+   "LBL_ANSWERS": "Respuestas",
+   "LBL_ANSWER": "Respuesta",
+   "LBL_VALUE": "Valor",
+   "LBL_VALIDATECODE": "Código Existe",
+   "LBL_FILTERING": "Filtrante",
+   "LBL_REQUIRED": "Obligatorio",
+   "LBL_RIGHT": "Correcto",
+   "LBL_TYPE": "Tipo",
+   "LBL_DEPEND": "Depende",
+   "LBL_DROPDOWN": "Depende",
+   "LBL_INPUT": "Esta pregunta es requerida",
+   "LBL_CHECKBOX": "Debe seleccionar al menos una opción",
+   "LBL_DROPDOWN": "Debe seleccionar una opción",
    "":""
 },
    "TERCEROS": {

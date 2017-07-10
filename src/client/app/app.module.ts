@@ -77,6 +77,10 @@ import { SelectionProcessModule } from './selection-process/selection-process.mo
 // Instituciones medicas
 import { MedicalInstitutionModule } from './medical-institutions/medical-institutions.module';
 import { PermissionService } from './_services/permission.service';
+import { DocumentManagementModule } from './document-management/document-management.module';
+
+// Cuestionarios
+import { QuestionnairesModule } from './questionnaires/questionnaires.module';
 import { DocumentsDownloadModule } from './download-documents/download-documents.module';
 
 // CarsModule,
@@ -136,9 +140,11 @@ import { DocumentsDownloadModule } from './download-documents/download-documents
                  CompanyAssetsModule,
                  VacanciesModule,
                  SelectionProcessModule,
+                 DocumentManagementModule,
                  MedicalInstitutionModule,
                  DocumentsDownloadModule,
                  //AssignmentProfessionalModule
+                 QuestionnairesModule
               ],
 
               declarations: [ AppComponent ],

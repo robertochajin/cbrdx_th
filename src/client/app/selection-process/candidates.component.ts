@@ -84,6 +84,7 @@ export class CandidatesComponent implements OnInit {
          if ( myStep.interfazInterna ) {
             //selection-process/process-step/candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
             //selection-process/process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso
+            //selection-process/process-step/call-reference/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
 
             this.router.navigate(
                [ myStep.interfazInterna.replace( ':idStep', myStep.idProcesoPaso.toString() )
