@@ -79,6 +79,9 @@ import { MedicalInstitutionModule } from './medical-institutions/medical-institu
 import { PermissionService } from './_services/permission.service';
 import { DocumentManagementModule } from './document-management/document-management.module';
 
+// Cuestionarios
+import { QuestionnairesModule } from './questionnaires/questionnaires.module';
+
 // CarsModule,
 @NgModule( {
               imports: [ BrowserModule, HttpModule, AppRoutingModule,
@@ -139,6 +142,7 @@ import { DocumentManagementModule } from './document-management/document-managem
                  DocumentManagementModule,
                  MedicalInstitutionModule,
                  //AssignmentProfessionalModule
+                 QuestionnairesModule
               ],
 
               declarations: [ AppComponent ],

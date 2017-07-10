@@ -3,9 +3,9 @@
 	<div class="row datable-header">
 		<div class="col-md-6 col-xs-12 datatable-header-add">
 			<button type="button" icon="fa-plus" label="{{'DOCMANAGMENT.LBL_AGREGAR' | translate }}"
-			               pButton (click)="add()"></button>
+			        pButton (click)="add()"></button>
 		</div>
-		<div class="col-md-6 col-xs-12 datatable-header-search" >
+		<div class="col-md-6 col-xs-12 datatable-header-search">
 			<div class="input-group">
 				<div class="input-group-addon"><i class="fa fa-search"></i></div>
 				<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate }}" class="form-control"
@@ -13,20 +13,21 @@
 			</div>
 		</div>
 	</div>
-	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="listDocumentManagement" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">
+	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listDocumentManagement" [paginator]="true" [rows]="10"
+	             [responsive]="true" [globalFilter]="gb">
 		<p-column field="idDocumentoTercero" header="{{'DOCMANAGMENT.LBL_CODIGO' | translate }}" [sortable]="true"></p-column>
 		<p-column field="nombre" header="{{'DOCMANAGMENT.LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
-		<p-column  header="{{'DOCMANAGMENT.LBL_ADJUNTAR' | translate }}" styleClass="datatable-col-action">
+		<p-column header="{{'DOCMANAGMENT.LBL_ADJUNTAR' | translate }}" styleClass="datatable-col-action">
 			<template let-dc="rowData" pTemplate="body">
 				<label>{{dc.indicadorAdjunto?'Si':'No'}}</label>
 			</template>
 		</p-column>
-		<p-column  header="{{'DOCMANAGMENT.LBL_DESCARGAR' | translate }}" styleClass="datatable-col-action">
+		<p-column header="{{'DOCMANAGMENT.LBL_DESCARGAR' | translate }}" styleClass="datatable-col-action">
 			<template let-dc="rowData" pTemplate="body">
 				<label>{{dc.indicadorDescarga?'Si':'No'}}</label>
 			</template>
 		</p-column>
-		<p-column  header="{{'LBL_HABILITADO' | translate }}" styleClass="datatable-col-action">
+		<p-column header="{{'LBL_HABILITADO' | translate }}" styleClass="datatable-col-action">
 			<template let-dc="rowData" pTemplate="body">
 				<label>{{dc.indicadorHabilitado?'Si':'No'}}</label>
 			</template>
