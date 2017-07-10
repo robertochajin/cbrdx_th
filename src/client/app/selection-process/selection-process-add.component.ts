@@ -345,7 +345,7 @@ export class SelectionProcessAddComponent implements OnInit {
 
    private pushQuestionnaireOption( idCuestionario: number ) {
       let qst = this.questionnaries.find( q => q.idCuestionario === idCuestionario );
-      this.questionnariesList.push( { label: qst.codigo + ':' + qst.cuestionario, value: qst.idCuestionario } );
+      this.questionnariesList.push( { label: qst.codigoCuestionario + ':' + qst.cuestionario, value: qst.idCuestionario } );
    }
 
    // fin funciones cuestionarios
