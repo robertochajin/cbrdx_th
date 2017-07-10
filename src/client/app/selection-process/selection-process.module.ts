@@ -25,6 +25,7 @@ import { SafePipe } from '../_helpers/safePipe';
 import { AttachmentsService } from '../_services/attachments-step.service';
 import { AttachmentsComponent } from './attachments.component';
 import { CandidateTestComponent } from './candidate-test.component';
+import { CallReferenceComponent } from './call-reference.component';
 
 @NgModule( {
               imports: [
@@ -45,6 +46,7 @@ import { CandidateTestComponent } from './candidate-test.component';
                  CandidateRevisionComponent,
                  CandidateTestComponent,
                  CentralRiskComponent,
+                 CallReferenceComponent,
                  SafePipe
               ],
               bootstrap: [ SelectionProcessComponent ],

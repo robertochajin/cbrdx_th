@@ -91,6 +91,10 @@
 							<p-column field="responsabilidad" header="{{ 'POSITION.LBL_RESPONSABILIDAD' | translate }}"
 							          [sortable]="true"></p-column>
 						</p-dataTable>
+					</fieldset>
+				</p-panel>
+				<p-panel header="{{ 'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' | translate }}">
+					<fieldset>
 						<div class="row">
 							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' |
 								translate }}:</label>
@@ -209,7 +213,7 @@
 				<p-panel header="{{ 'POSITION.LBL_ACTIVOS' | translate }}">
 					<fieldset>
 						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="elementos"
-						             [paginator]="false" [responsive]="true" >
+						             [paginator]="false" [responsive]="true">
 							<p-column header="{{ 'POSITION.LBL_ELEMENTOS' | translate }}">
 								<template let-asset="rowData" pTemplate="body">
 									{{asset.codigoLista}} - {{asset.nombreLista}}
@@ -225,9 +229,9 @@
 				</p-panel>
 				<p-panel header="{{ 'POSITION.LBL_PRODUCTIVIDAD' | translate }}">
 					<fieldset>
-						<div class="container">
-							<div class="row col-md-12">
-								<div class="ui-grid-col-5">
+						<div>
+							<div class="row">
+								<div class="col-md-6">
 									<label for="idProductividad">{{ 'POSITION.LBL_PRODUCTIVIDAD' | translate }}</label>
 									<p-dropdown id="idProductividad" name="idProductividad" required="true"
 									            [options]="ListProductivity" [autoWidth]="false"
@@ -235,7 +239,7 @@
 									            #idProductividad="ngModel" disabled="true">
 									</p-dropdown>
 								</div>
-								<div class="ui-grid-col-5">
+								<div class="col-md-6">
 									<label for="idNivelIQ">{{ 'POSITION.LBL_NIVEL' | translate }}</label>
 									<p-dropdown id="idNivelIQ" name="idNivelIQ" required="true"
 									            [options]="ListIQLevel" [autoWidth]="false"
@@ -244,8 +248,8 @@
 									></p-dropdown>
 								</div>
 							</div>
-							<div class="row col-md-12">
-								<div class="ui-grid-col-10">
+							<div class="row">
+								<div class="col-md-12">
 									<label for="idNivelAptitude">{{ 'POSITION.LBL_NIVELAPTITUD' | translate }}</label>
 									<p-dropdown id="idNivelAptitude" name="idNivelAptitude" required="true"
 									            [options]="ListAptitudeLevel" [autoWidth]="false"
@@ -260,7 +264,7 @@
 				<p-panel header="{{ 'POSITION.LBL_PERSONALIDAD' | translate }}">
 					<fieldset>
 						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="atributos"
-						             [paginator]="false" [responsive]="true" >
+						             [paginator]="false" [responsive]="true">
 							<p-column header="{{ 'POSITION.LBL_ATRIBUTOS' | translate }}">
 								<template let-personality="rowData" pTemplate="body">
 									{{personality.codigoLista}} - {{personality.nombreLista}}
@@ -305,13 +309,14 @@
 							</div>
 						</div>
 						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listRisks" [paginator]="true" [rows]="10"
-						             [responsive]="true" >
+						             [responsive]="true">
 							<p-column field="tipo" header="{{ 'POSITION.LBL_TIPO' | translate }}" [sortable]="true"></p-column>
 							<p-column field="subtipo" header="{{ 'POSITION.LBL_SUBTIPO' | translate }}" [sortable]="true"></p-column>
 							<p-column field="riesgo" header="{{ 'POSITION.LBL_RIESGO' | translate }}" [sortable]="true"></p-column>
-							<p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true" styleClass="datatable-col-center">
+							<p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true"
+							          styleClass="datatable-col-center">
 								<template let-riesgo="rowData" pTemplate="body">
-									<label>{{riesgo.indicadorHabilitador?'Si':'No'}}</label>
+									<label>{{riesgo.indicadorHabilitado?'Si':'No'}}</label>
 								</template>
 							</p-column>
 						</p-dataTable>
@@ -339,7 +344,7 @@
 				</p-panel>
 				<p-panel header="{{ 'POSITION.LBL_RElACION' | translate }}">
 					<fieldset>
-						<p-tree [value]="treeArrray" layout="horizontal" selectionMode="single" [(selection)]="selectedNode" ></p-tree>
+						<p-tree [value]="treeArrray" layout="horizontal" selectionMode="single" [(selection)]="selectedNode"></p-tree>
 					</fieldset>
 				</p-panel>
 			</div>
