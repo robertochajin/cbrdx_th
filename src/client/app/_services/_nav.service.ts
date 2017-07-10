@@ -71,7 +71,6 @@ export class NavService {
       }
    }
 
-
    getTab() {
       return this._navTab;
    }

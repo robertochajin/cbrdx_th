@@ -1,0 +1,88 @@
+<div class="col-md-10 col-md-offset-1" *ngIf="cuestionario">
+	<p-panel header="{{cuestionario.cuestionario}}">
+		<fieldset>
+			<form *ngIf="!showThx" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario" name="formulario">
+				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+					<div class="row" [ngSwitch]="pregunta.idTipoPregunta">
+						<div class="form-group col-md-12" *ngSwitchCase="2">
+							<label [for]="pregunta.idCuestionarioPregunta">{{pregunta.pregunta}}</label>
+							<p-dropdown [id]="pregunta.idCuestionarioPregunta"
+							            [name]="pregunta.idCuestionarioPregunta"
+							            [options]="listadoOpciones"
+							            [(ngModel)]="respuesta.idPreguntaOpcion"
+							            [required]="pregunta.indicadorObligatorio"
+							            autoWidth="false"
+							            tabindex="0"
+							            #pDropdown="ngModel"
+							></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !pDropdown.valid">
+								<i class="fa fa-close"></i>
+								{{'QUESTIONNAIRES.LBL_DROPDOWN' | translate }}
+							</div>
+						</div>
+						<div class="form-group col-md-12" *ngSwitchCase="3">
+							<label>{{pregunta.pregunta}}</label>
+							<p-checkbox *ngFor="let opcion of listadoOpciones" #pCheckbox
+							            binary="true"
+							            [id]="opcion.idPreguntaOpcion"
+							            [label]="opcion.label"
+							            [name]="opcion.idPreguntaOpcion"
+							            [value]="opcion.idPreguntaOpcion"
+							            [(ngModel)]="respuesta.idPreguntaOpcion"
+							            [required]="pregunta.indicadorObligatorio"
+							            tabindex="0"
+							            #pCheckbox="ngModel"
+							></p-checkbox>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !pCheckbox.valid">
+								<i class="fa fa-close"></i>
+								{{'QUESTIONNAIRES.LBL_CHECKBOX' | translate }}
+							</div>
+						</div>
+						<div class="form-group col-md-12" *ngSwitchCase="1">
+							<label [for]="pregunta.idCuestionarioPregunta">{{pregunta.pregunta}}</label>
+							<input pInputText #pInputText
+							       [id]="pregunta.idCuestionarioPregunta"
+							       [name]="pregunta.idCuestionarioPregunta"
+							       [required]="pregunta.indicadorObligatorio"
+							       [(ngModel)]="respuesta.respuesta"
+							       type="text"
+							       tabindex="0"
+							/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !pInputText.valid">
+								<i class="fa fa-close"></i>
+								{{'QUESTIONNAIRES.LBL_INPUT' | translate }}
+							</div>
+						</div>
+						<div class="form-group col-md-12" *ngSwitchCase="4">
+							<label [for]="pregunta.idCuestionarioPregunta">{{pregunta.pregunta}}</label>
+							<textarea *ngSwitchCase="14" pInputTextarea #pInputTextarea
+							          [id]="pregunta.idCuestionarioPregunta"
+							          [name]="pregunta.idCuestionarioPregunta"
+							          [required]="pregunta.indicadorObligatorio"
+							          [(ngModel)]="respuesta.respuesta"
+							          tabindex="0"
+							></textarea>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !pInputTextarea.valid">
+								<i class="fa fa-close"></i>
+								{{'QUESTIONNAIRES.LBL_INPUT' | translate }}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<button icon="fa-plus" label="Guardar" type="submit"
+						        pButton></button>
+					</div>
+				</div>
+			</form>
+			<div *ngIf="showThx">
+				Se completo el formulario Suerte!!!
+			</div>
+		</fieldset>
+	</p-panel>
+</div>

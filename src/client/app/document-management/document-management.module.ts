@@ -9,14 +9,13 @@ import { LocationsModule } from '../locations/locations.module';
 import { DocumentManagementAddComponent } from './document-management-edit.component';
 import { DocumentManagementDetailComponent } from './document-management-detail.component';
 
-
 @NgModule( {
               imports: [
                  SharedModule,
                  FormSharedModule,
                  LocationsModule
               ],
-              declarations: [ DocumentManagementComponent,DocumentManagementAddComponent,DocumentManagementDetailComponent ],
+              declarations: [ DocumentManagementComponent, DocumentManagementAddComponent, DocumentManagementDetailComponent ],
               bootstrap: [ DocumentManagementComponent ],
               providers: [ DocumentManagementService ],
               exports: [ DocumentManagementComponent ]
