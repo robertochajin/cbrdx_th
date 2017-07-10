@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { FormSharedModule } from '../shared/form-shared.module';
-import { DocumentsDownloadComponent } from './download-documents.component';
+import { EmployeesAttatchmentsComponent } from './employees-attatchments.component';
 import { NavService } from '../_services/_nav.service';
 import { DocumentsDownloadService } from '../_services/documentsDownload.service';
 
@@ -11,12 +11,12 @@ import { DocumentsDownloadService } from '../_services/documentsDownload.service
                  FormSharedModule,
               ],
               declarations: [
-                 DocumentsDownloadComponent
+                 EmployeesAttatchmentsComponent
               ],
-              bootstrap: [ DocumentsDownloadComponent ],
+              bootstrap: [ EmployeesAttatchmentsComponent ],
               providers: [ NavService, DocumentsDownloadService ],
-              exports: [ DocumentsDownloadComponent ]
+              exports: [ EmployeesAttatchmentsComponent ]
            } )
-export class DocumentsDownloadModule {
+export class EmployeesAttatchmentsModule {
 
 }

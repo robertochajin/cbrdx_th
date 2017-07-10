@@ -11,11 +11,11 @@ import { DocumentoRelacionTercero } from '../_models/DocumentoRelacionTercero';
 
 @Component( {
                moduleId: module.id,
-               templateUrl: 'download-documents.component.html',
-               selector: 'download-documents',
+               templateUrl: 'employees-attatchments.component.html',
+               selector: 'employees-attatchments',
                providers: [ ConfirmationService ]
             } )
-export class DocumentsDownloadComponent implements OnInit {
+export class EmployeesAttatchmentsComponent implements OnInit {
 
    // @Input()
    // tercero: Employee;
@@ -31,7 +31,7 @@ export class DocumentsDownloadComponent implements OnInit {
    dataUploadUsuario: any = '';
    dataUploadArchivo: any = '';
    usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
-   fsize: number = 500000000;
+   fsize: number = 50000000;
    ftype: string = '';
    documentoRelacionTercero: DocumentoRelacionTercero = new DocumentoRelacionTercero();
 
