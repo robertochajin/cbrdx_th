@@ -8,6 +8,7 @@ import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
 import { NavService } from '../_services/_nav.service';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 
 @Component( {
                moduleId: module.id,
@@ -18,6 +19,7 @@ import { NavService } from '../_services/_nav.service';
 export class EmployeesContactListComponent implements OnInit {
 
    @Input() employee: Employee;
+   @Input() seccion: PermissionsEmployees;
 
    contact: EmployeesContact = new EmployeesContact();
    lcontact: EmployeesContact = new EmployeesContact();

@@ -211,7 +211,7 @@ export class SelectionProcessAddComponent implements OnInit {
       this.publication.indicadorPublicacion = true;
       this.publicationsService.update( this.publication ).subscribe( rest => {
          this.vacanciesService.asignarProceso(this.publication.idPublicacion).subscribe();
-         this._nav.setMesage( 0, { severity: 'info', summary: 'Info', detail: 'Se ha publicado con exito' } );
+         this._nav.setMesage( 0, { severity: 'success', summary: 'Excelente!', detail: 'Se ha publicado con exito' } );
       } );
    }
 

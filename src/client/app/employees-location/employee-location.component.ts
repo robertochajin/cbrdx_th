@@ -6,6 +6,7 @@ import { ConfirmationService } from 'primeng/primeng';
 import { LocationService } from '../_services/employee-location.service';
 import { LocateService } from '../_services/locate.service';
 import { NavService } from '../_services/_nav.service';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 
 @Component( {
                moduleId: module.id,
@@ -16,7 +17,7 @@ import { NavService } from '../_services/_nav.service';
 export class LocationComponent implements OnInit {
 
    @Input() colaborador: any;
-
+   @Input() seccion: PermissionsEmployees;
    employeesLocations: Localizaciones[];
    terceroLocalizacion: EmployeesLocation = new EmployeesLocation();
    dialogObjet: EmployeesLocation = new EmployeesLocation();

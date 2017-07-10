@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class Permissions {
+export class PermissionsCargos {
    codigo: string;
    visible: boolean = true;
    editable: boolean = true;
