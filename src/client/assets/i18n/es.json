@@ -995,6 +995,11 @@
    "LBL_ESTRUCTURAFISICA":"Estructura Física",
    "":""
 },
+   "TERCEROS": {
+      "LBL_DOCUMENTO": "Documento",
+      "LBL_DOCUMENTOS_DESCARGAR": "Documentos a descargar",
+      "LBL_DOCUMENTOS_ADJUNTAR": "Documentos a adjuntar"
+   },
 
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="

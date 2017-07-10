@@ -77,6 +77,7 @@ import { SelectionProcessModule } from './selection-process/selection-process.mo
 // Instituciones medicas
 import { MedicalInstitutionModule } from './medical-institutions/medical-institutions.module';
 import { PermissionService } from './_services/permission.service';
+import { DocumentsDownloadModule } from './download-documents/download-documents.module';
 
 // CarsModule,
 @NgModule( {
@@ -136,6 +137,7 @@ import { PermissionService } from './_services/permission.service';
                  VacanciesModule,
                  SelectionProcessModule,
                  MedicalInstitutionModule,
+                 DocumentsDownloadModule,
                  //AssignmentProfessionalModule
               ],
 
