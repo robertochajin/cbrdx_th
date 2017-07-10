@@ -10,6 +10,9 @@ import { Message, SelectItem } from 'primeng/primeng';
 import { JwtHelper } from 'angular2-jwt';
 import moment = require('moment');
 import { underline } from 'chalk';
+import { UsuariosService } from '../_services/usuarios.service';
+import { ConstanteService } from '../_services/constante.service';
+import { VUsuario } from '../_models/vUsuario';
 
 @Component( {
                moduleId: module.id,
@@ -28,19 +31,31 @@ export class SelectionProcessComponent implements OnInit {
    listStatus: SelectItem[] = [];
    filtro: number = 1;
    today: Date;
+   private showFilters: boolean;
+   private recruiters: SelectItem[] = [];
+   selectedRecruiter: number;
 
    constructor( private rolesService: RolesService,
       private router: Router,
       private navService: NavService,
+      private constanteService: ConstanteService,
+      private usuariosService: UsuariosService,
       private listaService: ListaService,
       private vacanciesService: VacanciesService, ) {
       this.busqueda = this.navService.getSearch( 'selection-process.component' );
-      rolesService.listRoles().subscribe( res => {
-         this.roles = res;
-      } );
       let token = localStorage.getItem( 'token' );
       if ( token !== null ) {
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         rolesService.listRolesByUser(this.usuarioLogueado.usuario.idUsuario).subscribe( res => {
+            this.roles = res;
+            constanteService.getByCode('ROLPRO').subscribe(c => {
+               if(this.roles.find(r => r.codigoRol === c.valor)){
+                  this.showFilters = true;
+               } else {
+                  this.showFilters = false;
+               }
+            });
+         } );
       }
       // ---------------Estados para filtrar los requerimientos-------------------
       this.listStatus.push( { label: 'Todos', value: 1 } );
@@ -55,6 +70,16 @@ export class SelectionProcessComponent implements OnInit {
       this.today.setHours( 0 );
       this.today.setMinutes( 0 );
       this.today.setSeconds( 0 );
+      if(this.showFilters){
+         this.usuariosService.getByRol('PROSEL').subscribe( recruiters => {
+            this.recruiters.push({label: 'Seleccione el profesional de selección', value: null});
+            this.recruiters.push({label: 'Mis procesos', value: this.usuarioLogueado.usuario.idUsuario});
+            recruiters.map((r:VUsuario) => {
+               this.recruiters.push({label: r.nombre, value: r.idUsuario});
+            });
+            this.selectedRecruiter = this.usuarioLogueado.usuario.idUsuario;
+         } );
+      }
       this.listaService.getMasterAllDetails( 'ListasEstadosRequerimientos' ).subscribe( data => {
          let temp = data.find( r => r.codigo === 'PRCSEL' );
          if ( temp ) {
@@ -71,20 +96,25 @@ export class SelectionProcessComponent implements OnInit {
 
    filter() {
       this.vacancies = [];
-      if ( this.filtro === 1 ) {
+      if ( this.filtro === 1 && this.selectedRecruiter === null) {
          this.vacancies = this.vacanciesTemp;
       } else {
          for ( let r of this.vacanciesTemp ) {
+            let responsible = false;
+            if(this.selectedRecruiter === null || this.selectedRecruiter === r.idResponsableSeleccion) {
+               responsible = true;
+            }
+
             if ( this.filtro === 2 ) {
                let fin = new Date( r.fechaFinPublicacion );
                fin.setHours( 24 );
                fin.setSeconds( 1 );
-               if ( fin >= this.today ) {
+               if ( fin >= this.today && responsible) {
                   this.vacancies.push( r );
                }
             }
             if ( this.filtro === 3 ) {
-               if ( r.fechaFinPublicacion === null || r.fechaFinPublicacion === undefined ) {
+               if ( (r.fechaFinPublicacion === null || r.fechaFinPublicacion === undefined) && responsible ) {
                   this.vacancies.push( r );
                }
             }
@@ -92,7 +122,7 @@ export class SelectionProcessComponent implements OnInit {
                let fin = new Date( r.fechaFinPublicacion );
                fin.setHours( 24 );
                fin.setSeconds( 1 );
-               if ( fin < this.today && r.idPublicacion ) {
+               if ( fin < this.today && r.idPublicacion && responsible ) {
                   this.vacancies.push( r );
                }
             }

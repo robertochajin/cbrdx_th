@@ -24,6 +24,7 @@ import { CentralRiskComponent } from '../selection-process-risks/central-risk.co
 import { SafePipe } from '../_helpers/safePipe';
 import { AttachmentsService } from '../_services/attachments-step.service';
 import { AttachmentsComponent } from './attachments.component';
+import { CandidateTestComponent } from './candidate-test.component';
 import { CallReferenceComponent } from './call-reference.component';
 import { PostulationHistoryComponent } from './postulation-history.component';
 
@@ -44,6 +45,7 @@ import { PostulationHistoryComponent } from './postulation-history.component';
                  SelectionProcessVacanciesComponent,
                  CandidatesComponent,
                  CandidateRevisionComponent,
+                 CandidateTestComponent,
                  CentralRiskComponent,
                  CallReferenceComponent,
                  PostulationHistoryComponent,
