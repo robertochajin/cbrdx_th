@@ -6,12 +6,13 @@
         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
           <div class="row">
 	          <div class="form-group col-md-4"
-	               *hasPermission="seccion.PESO ? seccion.PESO : defaultCampo">
+	               *ngIf="seccion.PESO ? seccion.PESO.visible : true">
               <label for="peso">{{'EMPLOYEES.LBL_PESO' | translate}}</label>
               <input type="number" pInputText id="peso" name="peso" min="1"
                      [(ngModel)]="employee.peso" #weight="ngModel" (change)="getimc()"
                      (keyup)="inputNumberPeso()"
                      (paste)="inputNumberPeso()"
+                     [disabled]="seccion.PESO ? seccion.PESO.editable : false"
                      required/>
               <div class="ui-message ui-messages-error ui-corner-all"
                    *ngIf="f.submitted && !peso">
@@ -20,12 +21,13 @@
               </div>
             </div>
 	          <div class="form-group col-md-4"
-	               *hasPermission="seccion.TALLA ? seccion.TALLA : defaultCampo">
+	               *ngIf="seccion.TALLA ? seccion.TALLA.visible : true">
               <label for="talla">{{'EMPLOYEES.LBL_ESTATURA' | translate}}</label>
               <input type="number" pInputText id="talla" name="talla" min="1"
                      [(ngModel)]="employee.talla" #tal="ngModel" (change)="getimc()"
                      (keyup)="inputNumber()"
                      (paste)="inputNumber()"
+                     [disabled]="seccion.PESO ? seccion.PESO.editable : false"
                      required/>
               <div class="ui-message ui-messages-error ui-corner-all"
                    *ngIf="f.submitted && !size">
@@ -34,7 +36,7 @@
               </div>
             </div>
 	          <div class="form-group col-md-4"
-	               *hasPermission="seccion.IMC ? seccion.IMC : defaultCampo">
+	               *ngIf="seccion.IMC ? seccion.IMC.visible : true">
               <label for="imc">{{'EMPLOYEES.LBL_IMC' | translate}}</label>
               <input type="text" pInputText id="imc" name="imc"
                      [(ngModel)]="employee.imc" #imc="ngModel"
@@ -43,7 +45,7 @@
           </div>
           <div class="row">
 	          <div class="form-group col-md-6"
-	               *hasPermission="seccion.IDLATERALIDAD ? seccion.IDLATERALIDAD : defaultCampo">
+	               *ngIf="seccion.IDLATERALIDAD ? seccion.IDLATERALIDAD.visible : true">
               <label for="idLateralidad">{{'EMPLOYEES.LBL_LATERALIDAD' | translate}}</label>
               <p-dropdown id="idLateralidad" name="idLateralidad" required="true"
                           [options]="lateralityTypes" [autoWidth]="false"
@@ -58,7 +60,7 @@
               </div>
             </div>
 	          <div class="form-group col-md-6"
-	               *hasPermission="seccion.IDTALLACAMISA ? seccion.IDTALLACAMISA : defaultCampo">
+	               *ngIf="seccion.IDTALLACAMISA ? seccion.IDTALLACAMISA.visible : true">
               <label for="tallaCamisa">{{'EMPLOYEES.LBL_TALLACAMISA' | translate}}</label>
               <p-dropdown id="tallaCamisa" name="tallaCamisa" required="true"
                           [options]="listSizeShirt" [autoWidth]="false"
@@ -75,7 +77,7 @@
           </div>
           <div class="row">
 	          <div class="form-group col-md-6"
-	               *hasPermission="seccion.IDTALLAPANTALON ? seccion.IDTALLAPANTALON : defaultCampo">
+	               *ngIf="seccion.IDTALLAPANTALON ? seccion.IDTALLAPANTALON.visible : true">
               <label for="tallaPantalon">{{'EMPLOYEES.LBL_TALLAPANTALON' | translate}}</label>
               <p-dropdown id="tallaPantalon" name="tallaPantalon" required="true"
                           [options]="listSizePants" [autoWidth]="false"
@@ -90,7 +92,7 @@
               </div>
             </div>
 	          <div class="form-group col-md-6"
-	               *hasPermission="seccion.IDTALLACALZADO ? seccion.IDTALLACALZADO : defaultCampo">
+	               *ngIf="seccion.IDTALLACALZADO ? seccion.IDTALLACALZADO.visible : true">
               <label for="tallaCalzado">{{'EMPLOYEES.LBL_TALLACALZADO' | translate}}</label>
               <p-dropdown id="tallaCalzado" name="tallaCalzado" required="true"
                           [options]="listSizeFootwear" [autoWidth]="false"

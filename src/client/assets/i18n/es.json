@@ -618,6 +618,7 @@
            "LBL_CODIGO" : "Código",
            "LBL_CARGOSUPERVISA" : "¿Que cargo supervisa?",
            "LBL_CONOCIMIENTO" : "Que conocimientos basicos requiere para el desempeño de las funciones del cargo",
+           "LBL_CONOCIMIENTOS" : "Que conocimientos basicos requiere",
            "LBL_FACTOR" : "Factor",
            "LBL_FACTORES" : "Factores de riesgo ocupacional",
            "LBL_META" : "Meta",
@@ -643,7 +644,9 @@
            "LBL_ROL" : "Rol",
            "LBL_ROLDENTRO" : "Rol dentro del proceso",
            "LBL_RIESGO" : "Riesgo",
+           "LBL_RIESGOS" : "Riesgos laborales",
            "LBL_TIPO" : "Tipo",
+           "LBL_EXAMENES" : "Examenes",
            "LBL_PUNTOS" : "Puntos de valoración",
            "LBL_SALARIO" : "Salario al 100%",
            "LBL_SUBTIPO" : "Subtipo",
@@ -783,7 +786,7 @@
 
    "REQUERIMIENTOPERSONAL": {
       "LBL_REQUERIMIENTOPERSONAL":"Requerimiento de personal",
-      "BTN_AGREGARNUEVO":"Agregar nuevo referido",
+      "BTN_AGREGARNUEVO":"Agregar nuevo requerimiento de personal",
       "LBL_DATOSSOLICITUD":"Datos básicos de la solicitud",
       "LBL_DATOSSOLICITANTE":"Datos Solicitante",
       "LBL_NOMBRESOLICITANTE":"Nombre del Solicitante",
@@ -828,7 +831,7 @@
       "LBL_OBSERVACIONES": "Observaciones",
       "LBL_CUESTIONARIOS": "Datos pruebas técnicas",
       "LBL_CUESTIONARIO": "Pruebas técnicas",
-      "":""
+      "MSG_CARGONOCONFIGURADO":"El cargo no está configurado"
    },
 
    "PROYECCIONLABORAL": {
@@ -992,6 +995,28 @@
    "LBL_ESTRUCTURAFISICA":"Estructura Física",
    "":""
 },
+   "DOCMANAGMENT":{
+    "LBL_ADMINDOCS":"Administrador de documentos",
+    "LBL_AGREGAR":"Agregar registro",
+    "LBL_CODIGO":"Código",
+    "LBL_CODIGOINST":"Código institucional",
+    "LBL_NOMBRE":"Nombre documento",
+    "LBL_ADJUNTAR":"Adjuntar",
+    "LBL_DESCARGAR":"Descargar",
+    "LBL_TIPO":"Tipo",
+    "LBL_ADJUNTARSISTEMA":"Adjuntar al sistema",
+    "LBL_DESCARGARSISTEMA":"Descargar del sistema",
+    "LBL_REQUERIDOCONTRATA":"Requerido para contratación",
+    "LBL_VIGENCIA":"Vigencia",
+    "LBL_NOAPLCA":"No aplica",
+    "LBL_APLCA":"Aplica",
+    "LBL_ACCION":"Acción",
+    "LBL_ADJUNTO":"Adjunto",
+    "LBL_DESCRIPCION":"Descripcion",
+    "LBL_DATOSGENERALES":"Datos generales",
+    "":""
+
+   },
 
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="

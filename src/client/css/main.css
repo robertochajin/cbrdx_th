@@ -195,6 +195,10 @@ body .ui-panel-content label{
    background-color: #f5f5f5;
    border: 1px solid #e6e6e6;
 }
+.fa-spin {
+   -webkit-animation: fa-spin 1s infinite linear;
+   animation: fa-spin 1s infinite linear;
+}
 
 /**
 ------------------------ Main CSS ------------------------------------

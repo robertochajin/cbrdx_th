@@ -346,7 +346,8 @@ export class FormManagerUpdateComponent implements OnInit {
 
    validateCode() {
       this.functionalityControl.codigo = this.functionalityControl.codigo.toUpperCase();
-      this.codExists = this.listAllfunctionalityControl.filter( t => t.codigo === this.functionalityControl.codigo ).length > 0;
+      this.codExists = this.listAllfunctionalityControl.filter(
+            t => t.codigo === this.functionalityControl.codigo && t.idPadre === this.functionalityControl.idPadre ).length > 0;
    }
 
    goBack(fDirty : boolean) {

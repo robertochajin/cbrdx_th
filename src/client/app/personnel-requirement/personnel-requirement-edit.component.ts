@@ -91,7 +91,8 @@ export class PersonnelRequirementEditComponent implements OnInit {
    employeeBasics: employeeBasicInfo = new employeeBasicInfo();
    selectedBoss: employeeBasicInfo;
    bossList: employeeBasicInfo[] = [];
-
+   showDetailPosition: boolean = false;
+   idCargo: number = 0;
    purchasesList: ListaItem[] = [];
    ticsList: ListaItem[] = [];
    listQuest: SelectItem[] = [];
@@ -247,7 +248,9 @@ export class PersonnelRequirementEditComponent implements OnInit {
       } );
       this.listaService.getMasterDetails( 'ListasCuestionarios' ).subscribe( rest => {
          this.listQuest.push( { label: 'Seleccione', value: null } );
-         rest.map( ( s: ListaItem ) => { this.listQuest.push( { label: s.nombre, value: s.idLista } ) } );
+         rest.map( ( s: ListaItem ) => {
+            this.listQuest.push( { label: s.nombre, value: s.idLista } )
+         } );
       } );
    }
 
@@ -321,8 +324,10 @@ export class PersonnelRequirementEditComponent implements OnInit {
             } );
             this.questionnairesService.getResoursesByIdRequirement( idRequeriment ).subscribe( rest => {
                this.listResoursesQues = rest;
-               this.listResoursesQues.map(rq =>
-                  this.listQuest.splice(this.listQuest.indexOf(this.listQuest.find(lq => lq.value == rq.idCuestionario)),1));
+               this.listResoursesQues.map( rq =>
+                                              this.listQuest.splice(
+                                                 this.listQuest.indexOf( this.listQuest.find( lq => lq.value == rq.idCuestionario ) ),
+                                                 1 ) );
             } );
 
             this.referralsServices.getAllRequirement( idRequeriment ).subscribe( ref => {
@@ -346,7 +351,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
                      this.personnelRequirement.indicadorAutorizacion = this.isAuthNeeded( this.personnelRequirement.idTipoSolicitud,
                                                                                           this.selectedPosition.idCargo );
                   } else {
-                     if ( item.codigo === 'CRGNVO') {
+                     if ( item.codigo === 'CRGNVO' ) {
                         this.personnelRequirement.indicadorAutorizacion = this.isAuthNeeded( this.personnelRequirement.idTipoSolicitud,
                                                                                              0 );
                      } else {
@@ -447,6 +452,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
 
    positionCaptureId( event: any ) {
       this.selectedPosition.idCargo = event.idCargo;
+      this.idCargo = event.idCargo;
       this.selectedPosition.cargo = event.cargo;
       if ( event.idCargoJefe === null || event.idCargoJefe === undefined ) {
          let noBoss: Message = { severity: 'info', summary: 'Ups!', detail: 'El cargo seleccionado no tiene un cargo jefe' };
@@ -652,19 +658,19 @@ export class PersonnelRequirementEditComponent implements OnInit {
 
    }
 
-   cancelReferred(rfDirty : boolean) {
-      if (rfDirty){
-      this.confirmationService.confirm( {
-                                           message: `¿Está seguro que desea Cancelar?`,
-                                           header: 'Confirmación',
-                                           icon: 'fa fa-question-circle',
+   cancelReferred( rfDirty: boolean ) {
+      if ( rfDirty ) {
+         this.confirmationService.confirm( {
+                                              message: `¿Está seguro que desea Cancelar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
 
-                                           accept: () => {
-                                              this.requirementReferral = new RequirementReferral();
-                                              this.editingReferred = false;
-                                           }
-                                        } );
-      }else {
+                                              accept: () => {
+                                                 this.requirementReferral = new RequirementReferral();
+                                                 this.editingReferred = false;
+                                              }
+                                           } );
+      } else {
          this.requirementReferral = new RequirementReferral();
          this.editingReferred = false;
       }
@@ -869,7 +875,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
          if ( !temp.indicadorHabilitado ) {
             temp.indicadorHabilitado = true;
             this.questionnairesService.update( temp ).subscribe( () => {
-               this.listQuest.splice(this.listQuest.indexOf(this.listQuest.find(e => e.value === this.questId)),1);
+               this.listQuest.splice( this.listQuest.indexOf( this.listQuest.find( e => e.value === this.questId ) ), 1 );
                this.questId = null;
                this.listResoursesQues = [];
                this.listResoursesQuesAll = [];
@@ -894,7 +900,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
          this.questionnaires.idRequerimiento = this.personnelRequirement.idRequerimiento;
          this.questionnairesService.add( this.questionnaires ).subscribe( () => {
             this.guardandoResoursesQues = false;
-            this.listQuest.splice(this.listQuest.indexOf(this.listQuest.find(e => e.value === this.questId)),1);
+            this.listQuest.splice( this.listQuest.indexOf( this.listQuest.find( e => e.value === this.questId ) ), 1 );
             this.questId = null;
             this.listResoursesQues = [];
             this.listResoursesQuesAll = [];
@@ -911,7 +917,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
    delResoursesQues( r: RequirementQuestionnaires ) {
       r.indicadorHabilitado = false;
       this.questionnairesService.update( r ).subscribe( () => {
-         this.listQuest.push({value: r.idCuestionario, label: r.cuestionario});
+         this.listQuest.push( { value: r.idCuestionario, label: r.cuestionario } );
          this.listResoursesQues = [];
          this.listResoursesQuesAll = [];
          this.questionnairesService.getResoursesByIdRequirement( this.personnelRequirement.idRequerimiento ).subscribe( rest => {
@@ -930,17 +936,17 @@ export class PersonnelRequirementEditComponent implements OnInit {
       }
    }
 
-   goBack(fDirty : boolean): void {
-      if (fDirty){
-      this.confirmationService.confirm( {
-                                           message: ` ¿Está seguro que desea salir sin guardar?`,
-                                           header: 'Confirmación',
-                                           icon: 'fa fa-question-circle',
-                                           accept: () => {
-                                              this.location.back();
-                                           }
-                                        } );
-      }else {
+   goBack( fDirty: boolean ): void {
+      if ( fDirty ) {
+         this.confirmationService.confirm( {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this.location.back();
+                                              }
+                                           } );
+      } else {
          this.location.back();
       }
    }
@@ -976,5 +982,10 @@ export class PersonnelRequirementEditComponent implements OnInit {
          this.wrongVacancies = false;
       }
       return isValid;
+   }
+
+   viewDetail( id: number ) {
+      // this.router.navigate( [ 'positions/detail/' +id ] );
+      this.showDetailPosition = !this.showDetailPosition;
    }
 }
