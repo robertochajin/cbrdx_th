@@ -170,6 +170,7 @@ import { PositionsDetailComponent } from './positions/positions-detail.component
 import { DocumentManagementComponent } from './document-management/document-management.component';
 import { DocumentManagementAddComponent } from './document-management/document-management-edit.component';
 import { DocumentManagementDetailComponent } from './document-management/document-management-detail.component';
+import { CallReferenceComponent } from './selection-process/call-reference.component';
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
@@ -401,6 +402,7 @@ const routes = [
    { path: 'selection-process/candidates-list/:idPublication', component: CandidatesComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso', component: CentralRiskComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/process-step/candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CandidateRevisionComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/process-step/call-reference/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CallReferenceComponent },
    { path: 'selection-process/process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
 ];
 

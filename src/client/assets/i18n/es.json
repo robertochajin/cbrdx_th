@@ -43,6 +43,7 @@
   "LBL_USUARIO":"Usuario",
   "LBL_TIPO":"Tipo",
   "LBL_FECHA":"Fecha",
+  "LBL_RESULTADO":"Resultado",
   "LBL_FECHAFIN":"Fecha Fin",
   "LBL_FECHAINICIO":"Fecha Inicio",
   "LBL_GRUPO":"Grupo",
@@ -79,6 +80,7 @@
   "BTN_BORRAR":"Borrar",
   "BTN_DOWNLOAD": "Descargar",
   "BTN_UPLOAD": "Subir archivo",
+  "BTN_LLAMAR": "Llamar",
   "FIN_COMUNES":"====================================================================",
 
   "UBICACION":{
@@ -972,6 +974,7 @@
       "LBL_NOMBRE":"Nombre Archivo",
       "LBL_ARCHIVO":"Archivo",
       "LBL_VER":"Ver",
+      "LBL_LLAMARREFERENCIA":"Llamar referencias",
       "":""
    },
 "MEDICALINSTITUTION":{
