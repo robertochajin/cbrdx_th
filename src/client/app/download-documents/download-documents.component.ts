@@ -23,7 +23,7 @@ export class DocumentsDownloadComponent implements OnInit {
    tercero: Employee = new Employee();
    msgs: Message[];
    acordion: number = 0;
-   listDownloadDocuments: DocumentoRelacionTercero[] = [];
+   listDownloadDocuments: DocumentoTercero[] = [];
    listAttachmentDocuments: DocumentoTercero[] = [];
    cargando: number = 0;
    svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
@@ -60,11 +60,11 @@ export class DocumentsDownloadComponent implements OnInit {
    }
 
    ngOnInit(): void {
-      this.documentsDownloadService.getAll().subscribe( res => {
+      this.documentsDownloadService.getAllAdjuntos().subscribe( res => {
          this.listAttachmentDocuments = res;
       } );
 
-      this.documentsDownloadService.getAllDescargaByTercero( this.tercero.idTercero ).subscribe( res => {
+      this.documentsDownloadService.getAllDescarga().subscribe( res => {
          this.listDownloadDocuments = res;
       } );
    }
@@ -86,9 +86,7 @@ export class DocumentsDownloadComponent implements OnInit {
       if ( respuesta.idAdjunto != null || respuesta.idAdjunto != undefined ) {
          this.documentoRelacionTercero.idAdjunto = respuesta.idAdjunto;
          this.documentsDownloadService.add( this.documentoRelacionTercero ).subscribe( res => {
-            // this.cargando = res.idAdjunto;
-
-            this.documentsDownloadService.getAllDescargaByTercero( this.tercero.idTercero ).subscribe( res => {
+            this.documentsDownloadService.getAllDescarga().subscribe( res => {
                this.listDownloadDocuments = res;
             } );
 

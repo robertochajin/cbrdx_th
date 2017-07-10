@@ -22,13 +22,14 @@ export class DocumentsDownloadService {
       }
    }
 
-   getAllDescargaByTercero( id: number ) {
-      return this.authHttp.get( this.relacionServiceURL + 'tercero/' + id )
-      .map( ( res: Response ) => res.json() as DocumentoRelacionTercero[] );
+   getAllDescarga() {
+      return this.authHttp.get( this.serviceURL + 'documentosDescarga' )
+      .map( ( res: Response ) => res.json() as DocumentoTercero[] );
    }
 
-   getAll() {
-      return this.authHttp.get( this.serviceURL ).map( ( res: Response ) => res.json() as DocumentoTercero[] );
+   getAllAdjuntos() {
+      return this.authHttp.get( this.serviceURL + 'documentosAdjunto' )
+      .map( ( res: Response ) => res.json() as DocumentoTercero[] );
    }
 
    getFile( id: number ) {
