@@ -1,0 +1,34 @@
+<div>
+	<div class="row">
+		<div class="col-md-3 col-xs-12"></div>
+		<div class="col-md-6 col-xs-12">
+			<h4>{{ 'PROCESOSELECCION.LBL_HISTORIALPOSTULANTE' | translate}} </h4>
+			<strong><h4>{{employee.primerNombre}} {{employee.primerApellido}}</h4></strong>
+			<h4>{{employee.tipoDocumento}}: {{employee.numeroDocumento}}</h4>
+		</div>
+	</div>
+	<div class="row datable-header">
+		<div class="col-md-6 col-xs-12 datatable-header-add">
+		</div>
+		<div class="col-md-6 col-xs-12 datatable-header-search">
+			<div class="input-group">
+				<div class="input-group-addon"><i class="fa fa-search"></i></div>
+				<input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate}}" class="form-control"
+				       [(ngModel)]="busqueda" (change)="setSearch()">
+			</div>
+		</div>
+	</div>
+	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listHistory" [paginator]="true" [rows]="10"
+	             [responsive]="true" [globalFilter]="gb">
+		<p-column field="codigo" header="{{ 'LBL_CODIGO' | translate}}" [sortable]="true"></p-column>
+		<p-column field="estructuraFisica" header="{{ 'LBL_NOMBRE' | translate}}" [sortable]="true"></p-column>
+		<p-column field="clasificacionSede" header="{{ 'ESTRUCTURAFISICA.LBL_CATEGORIA' | translate}}" [sortable]="true"></p-column>
+		<p-column field="direccion" header="{{ 'LBL_DIRECCION' | translate}}" [sortable]="true"></p-column>
+	</p-dataTable>
+	<div class="row form-footer-buttons">
+		<div class="form-group col-md-12">
+			<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+			        pButton (click)="goBack()"></button>
+		</div>
+	</div>
+</div>
