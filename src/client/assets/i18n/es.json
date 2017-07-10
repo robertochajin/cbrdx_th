@@ -975,6 +975,8 @@
       "LBL_ARCHIVO":"Archivo",
       "LBL_VER":"Ver",
       "LBL_LLAMARREFERENCIA":"Llamar referencias",
+      "LBL_HISTORIALPOSTULANTE":"Historial de psotulaciones de:",
+      "LBL_CANTIDADVACANTES":"Numero de vacantes solicitadas",
       "":""
    },
 "MEDICALINSTITUTION":{

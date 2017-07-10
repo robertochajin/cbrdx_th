@@ -179,7 +179,7 @@ import { QuestionnairesAddComponent } from './questionnaires/questionnaires-add.
 import { QuestionnairesUpdateComponent } from './questionnaires/questionnaires-update.component';
 import { SolutionsQuestionnairesComponent } from './questionnaires/solutions-questionnaire/solutions-questionnaires.component';
 
-import { DocumentsDownloadComponent } from './download-documents/download-documents.component';
+import { EmployeesAttatchmentsComponent } from './employees-attatchments/employees-attatchments.component';
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
@@ -419,7 +419,7 @@ const routes = [
    { path: 'questionnaries/update/:id', component: QuestionnairesUpdateComponent },
 
    // Descarga de documentos de Terceros
-   { path: 'download-documents', component: DocumentsDownloadComponent },
+   { path: 'employees-attatchments', component: EmployeesAttatchmentsComponent },
 ];
 
 @NgModule( {
