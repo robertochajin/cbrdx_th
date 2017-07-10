@@ -267,6 +267,14 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
       this.breadcrumbService.hideRouteRegex( '^/selection-process/process-step/[0-9]*' );
       this.breadcrumbService.addFriendlyNameForRouteRegex( '^/process-step', 'Postulado' );
 
+      this.breadcrumbService.addFriendlyNameForRoute( '/document-management', 'Administrador de documentos' );
+      this.breadcrumbService.hideRouteRegex( '^/document-management/add/[0-9]*' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/document-management/add', 'Agregar regiistro' );
+      this.breadcrumbService.hideRouteRegex( '^/document-management/update/[0-9]*' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/document-management/update', 'Actualizar regiistro' );
+      this.breadcrumbService.hideRouteRegex( '^/document-management/detail/[0-9]*' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/document-management/detail', 'Detalle regiistro' );
+
    }
 
 }
