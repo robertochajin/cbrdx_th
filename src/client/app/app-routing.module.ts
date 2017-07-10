@@ -400,7 +400,7 @@ const routes = [
       { path: 'selection-process/process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
 
       //  Cuestionarios
-   { path: 'solutions', component: SolutionsQuestionnairesComponent },
+   { path: 'solutions/:id', component: SolutionsQuestionnairesComponent },
    { path: 'questionnaries', component: QuestionnairesComponent },
    { path: 'questionnaries/add', component: QuestionnairesAddComponent },
    { path: 'questionnaries/update/:id', component: QuestionnairesUpdateComponent },

@@ -1009,7 +1009,10 @@
    "LBL_RIGHT": "Correcto",
    "LBL_TYPE": "Tipo",
    "LBL_DEPEND": "Depende",
-
+   "LBL_DROPDOWN": "Depende",
+   "LBL_INPUT": "Esta pregunta es requerida",
+   "LBL_CHECKBOX": "Debe seleccionar al menos una opción",
+   "LBL_DROPDOWN": "Debe seleccionar una opción",
    "":""
 },
 

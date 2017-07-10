@@ -32,6 +32,7 @@ export class QuestionnairesUpdateComponent implements OnInit {
    formQuestion: boolean = false;
    showAnswers: boolean = false;
    formAnswer: boolean = false;
+   formQuestionnarie: boolean = true;
    questionsTypes: SelectItem[] = [];
    previousQuestions: SelectItem[] = [];
    previousAnswers: SelectItem[] = [];
@@ -75,6 +76,7 @@ export class QuestionnairesUpdateComponent implements OnInit {
          this.questionnairesService.getQuestions( this.idCuestionario ).subscribe(
             res => {
                this.preguntas = res;
+               this.sortQuestions();
             } );
       }
    }
@@ -96,8 +98,10 @@ export class QuestionnairesUpdateComponent implements OnInit {
 
    onSubmit() {
       if ( !this.codeExists ) {
+         this.formQuestionnarie = false;
          this.questionnairesService.update( this.cuestionario ).subscribe( res => {
             this.navService.setMesage( 1, this.msgs );
+            this.formQuestionnarie = true;
          }, error => {
             this.navService.setMesage( 3, this.msgs );
          } );
@@ -146,18 +150,22 @@ export class QuestionnairesUpdateComponent implements OnInit {
       if ( !this.codeExistsP ) {
          if ( this.pregunta.idCuestionarioPregunta === null || this.pregunta.idCuestionarioPregunta === undefined || this.pregunta.idCuestionarioPregunta === 0 ) {
             this.pregunta.idCuestionario = this.idCuestionario;
+            this.pregunta.secuencia = this.preguntas.length + 1;
             this.questionnairesService.addQuestion( this.pregunta ).subscribe( res => {
-               this.getQuestions();
-               this.navService.setMesage( 1, this.msgs );
                this.formQuestion = false;
                this.showAnswers = false;
                this.pregunta = new QuestionnariesQuestions();
+               this.getQuestions();
+               this.navService.setMesage( 1, this.msgs );
             }, error => {
                this.navService.setMesage( 3, this.msgs );
             } );
          } else {
             this.questionnairesService.updateQuestion( this.pregunta ).subscribe( res => {
                this.navService.setMesage( 1, this.msgs );
+               this.formQuestion = false;
+               this.showAnswers = false;
+               this.pregunta = new QuestionnariesQuestions();
                this.getQuestions();
             }, error => {
                this.navService.setMesage( 3, this.msgs );
@@ -174,6 +182,43 @@ export class QuestionnairesUpdateComponent implements OnInit {
          this.codeExistsP = false;
       }
    }
+
+   downQuestion( f: QuestionnariesQuestions ) {
+      let myIndex = this.preguntas.indexOf( f );
+      if ( myIndex < this.preguntas.length - 1 ) {
+         let newOrder = this.preguntas[ myIndex ].secuencia;
+         this.preguntas[ myIndex ].secuencia = this.preguntas[ myIndex + 1 ].secuencia;
+         this.questionnairesService.updateQuestion( this.preguntas[ myIndex ] ).subscribe( res => {
+            if ( res.ok ) {
+               this.preguntas[ myIndex + 1 ].secuencia = newOrder;
+               this.questionnairesService.updateQuestion( this.preguntas[ myIndex + 1 ] ).subscribe( res => {
+                  if ( res.ok ) {
+                     this.sortQuestions();
+                  }
+               } );
+            }
+         } );
+      }
+   }
+
+   upQuestion( f: QuestionnariesQuestions ) {
+      let myIndex = this.preguntas.indexOf( f );
+      if ( myIndex > 0 ) {
+         let newOrder = this.preguntas[ myIndex ].secuencia;
+         this.preguntas[ myIndex ].secuencia = this.preguntas[ myIndex - 1 ].secuencia;
+         this.questionnairesService.updateQuestion( this.preguntas[ myIndex ] ).subscribe( res => {
+            if ( res.ok ) {
+               this.preguntas[ myIndex - 1 ].secuencia = newOrder;
+               this.questionnairesService.updateQuestion( this.preguntas[ myIndex - 1 ] ).subscribe( res => {
+                  if ( res.ok ) {
+                     this.sortQuestions();
+                  }
+               } );
+            }
+         } );
+      }
+   }
+
 
    showPanelAnswers( pregunta: QuestionnariesQuestions ) {
       this.showAnswers = true;
@@ -213,17 +258,20 @@ export class QuestionnairesUpdateComponent implements OnInit {
       if ( !this.codeExistsR ) {
          if ( this.respuesta.idPreguntaOpcion === null || this.respuesta.idPreguntaOpcion === undefined || this.respuesta.idPreguntaOpcion === 0 ) {
             this.respuesta.idCuestionarioPregunta = this.pregunta.idCuestionarioPregunta;
+            this.respuesta.orden = this.respuestas.length + 1;
             this.questionnairesService.addAnswer( this.respuesta ).subscribe( res => {
-               this.getAnswers();
                this.navService.setMesage( 1, this.msgs );
                this.formAnswer = false;
                this.respuesta = new QuestionnariesAnswers();
+               this.getAnswers();
             }, error => {
                this.navService.setMesage( 3, this.msgs );
             } );
          } else {
             this.questionnairesService.updateAnswer( this.respuesta ).subscribe( res => {
                this.navService.setMesage( 1, this.msgs );
+               this.formAnswer = false;
+               this.respuesta = new QuestionnariesAnswers();
                this.getAnswers();
             }, error => {
                this.navService.setMesage( 3, this.msgs );
@@ -237,6 +285,7 @@ export class QuestionnairesUpdateComponent implements OnInit {
          res => {
             this.respuestas = res;
             this.formAnswer = false;
+            this.sortAnswers();
          } );
    }
 
@@ -247,6 +296,60 @@ export class QuestionnairesUpdateComponent implements OnInit {
       } else {
          this.codeExistsR = false;
       }
+   }
+
+   downAnswer( f: QuestionnariesAnswers ) {
+      let myIndex = this.respuestas.indexOf( f );
+      if ( myIndex < this.respuestas.length - 1 ) {
+         let newOrder = this.respuestas[ myIndex ].orden;
+         this.respuestas[ myIndex ].orden = this.respuestas[ myIndex + 1 ].orden;
+         this.questionnairesService.updateAnswer( this.respuestas[ myIndex ] ).subscribe( res => {
+            if ( res.ok ) {
+               this.respuestas[ myIndex + 1 ].orden = newOrder;
+               this.questionnairesService.updateAnswer( this.respuestas[ myIndex + 1 ] ).subscribe( res => {
+                  if ( res.ok ) {
+                     this.sortAnswers();
+                  }
+               } );
+            }
+         } );
+      }
+   }
+
+   upAnswer( f: QuestionnariesAnswers ) {
+      let myIndex = this.respuestas.indexOf( f );
+      if ( myIndex > 0 ) {
+         let newOrder = this.respuestas[ myIndex ].orden;
+         this.respuestas[ myIndex ].orden = this.respuestas[ myIndex - 1 ].orden;
+         this.questionnairesService.updateAnswer( this.respuestas[ myIndex ] ).subscribe( res => {
+            if ( res.ok ) {
+               this.respuestas[ myIndex - 1 ].orden = newOrder;
+               this.questionnairesService.updateAnswer( this.respuestas[ myIndex - 1 ] ).subscribe( res => {
+                  if ( res.ok ) {
+                     this.sortAnswers();
+                  }
+               } );
+            }
+         } );
+      }
+   }
+
+   private sortQuestions() {
+      this.preguntas.sort( function ( a, b ) {
+         if ( a.secuencia < b.secuencia )
+            return -1;
+         else
+            return 1;
+      } )
+   }
+
+   private sortAnswers() {
+      this.respuestas.sort( function ( a, b ) {
+         if ( a.orden < b.orden )
+            return -1;
+         else
+            return 1;
+      } )
    }
 
 }

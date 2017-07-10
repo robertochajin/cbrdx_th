@@ -1,17 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { Questionnaries } from '../_models/questionnaries';
 import { QuestionnariesQuestions } from '../_models/questionnariesQuestions';
 import { QuestionnariesAnswers } from '../_models/questionnariesAnswers';
+import { Answers } from '../_models/answers';
 
 @Injectable()
 export class QuestionnairesService {
 
    private masterService = '<%= SVC_TH_URL %>/api/';
+   private jwtHelper: JwtHelper = new JwtHelper();
+   private usuarioLogueado: any;
+   private idUsuario: number;
 
    constructor( private authHttp: AuthHttp ) {
-
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
+      }
    }
 
    getAll() {
@@ -25,11 +33,13 @@ export class QuestionnairesService {
    }
 
    add( f: Questionnaries ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.masterService + 'cuestionarios', f )
       .map( ( res: Response ) => res.json() );
    };
 
    update( f: Questionnaries ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.masterService + 'cuestionarios', JSON.stringify( f ) ).catch( this.handleError );
    }
 
@@ -49,11 +59,13 @@ export class QuestionnairesService {
    }
 
    addQuestion( f: QuestionnariesQuestions ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.masterService + 'cuestionariosPreguntas', f )
       .map( ( res: Response ) => res.json() );
    };
 
    updateQuestion( f: QuestionnariesQuestions ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.masterService + 'cuestionariosPreguntas', JSON.stringify( f ) ).catch( this.handleError );
    }
 
@@ -68,17 +80,20 @@ export class QuestionnairesService {
    }
 
    addAnswer( f: QuestionnariesAnswers ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.masterService + 'preguntasOpciones', f )
       .map( ( res: Response ) => res.json() );
    };
 
    updateAnswer( f: QuestionnariesAnswers ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.masterService + 'preguntasOpciones', JSON.stringify( f ) ).catch( this.handleError );
    }
 
-   addSolution( f: QuestionnariesAnswers ) {
+   addSolution( f: Answers ) {
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.masterService + 'respuestas', f )
-      .map( ( res: Response ) => res.json() );
+      .map( ( res: Response ) => res.json() ).catch( this.handleError );
    };
 
    handleError( error: any ): Promise<any> {

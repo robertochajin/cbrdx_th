@@ -1,7 +1,7 @@
 <div class="col-md-10 col-md-offset-1" *ngIf="cuestionario">
 	<p-panel header="{{'QUESTIONNAIRES.LBL_QUESTIONNAIRE' | translate}}">
 		<fieldset>
-			<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate>
+			<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate *ngIf="formQuestionnarie">
 				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 					<div class="ui-grid-row">
 						<div class="ui-grid-col-4">
@@ -9,7 +9,6 @@
 							<input type="text" pInputText id="codigoCuestionario" name="codigoCuestionario"
 							       uperCaseText
 							       [readonly]="(cuestionario.idCuestionario !== undefined && cuestionario.idCuestionario !== null)"
-							       [disabled]="(cuestionario.idCuestionario !== undefined && cuestionario.idCuestionario !== null)"
 							       [(ngModel)]="cuestionario.codigoCuestionario" maxlength="6"
 							       (change)="validateCode()"
 							       #NGcodigo="ngModel" required/>
@@ -25,10 +24,10 @@
 						<div class="ui-grid-col-8">
 							<label for="nombre">* {{ 'LBL_NOMBRE' | translate}}</label>
 							<input type="text" pInputText id="nombre" name="nombre"
-							       [(ngModel)]="cuestionario.cuestionario" maxlength="6" titleCaseText
-							       #NGnombre="ngModel" required/>
+							       [(ngModel)]="cuestionario.cuestionario" titleCaseText
+							       #NGnombreCuestionario="ngModel" required/>
 							<div class="ui-message ui-messages-error ui-corner-all"
-							     *ngIf="f.submitted && !NGnombre.valid">
+							     *ngIf="f.submitted && !NGnombreCuestionario.valid">
 								<i class="fa fa-close"></i>{{ 'LBL_NOMBRE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 							</div>
 						</div>
@@ -92,7 +91,6 @@
 							<input type="text" pInputText id="codigoPregunta" name="codigo"
 							       uperCaseText
 							       [readonly]="(pregunta.idCuestionarioPregunta !== undefined && pregunta.idCuestionarioPregunta !== null)"
-							       [disabled]="(pregunta.idCuestionarioPregunta !== undefined && pregunta.idCuestionarioPregunta !== null)"
 							       [(ngModel)]="pregunta.codigoPregunta" maxlength="6"
 							       (change)="validateCodeP()"
 							       #NGcodigoP="ngModel" required/>
@@ -219,6 +217,18 @@
 			</div>
 			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="preguntas" [paginator]="true" [rows]="10"
 			             [responsive]="true" [globalFilter]="gb">
+				<p-column header="{{ 'LBL_ORDEN' | translate }}" styleClass="datatable-col-action">
+					<template let-datos="rowData" pTemplate="body">
+						<div class="btn-group" role="group">
+							<button type="button" class="ui-button ui-button-info btn" icon="fa-arrow-up" data-toggle="tooltip"
+							        title="{{'BTN_ARRIBA' | translate}}"
+							        pButton (click)="upQuestion(datos)"></button>
+							<button type="button" class="ui-button ui-button-info btn" icon="fa-arrow-down" data-toggle="tooltip"
+							        title="{{'BTN_ABAJO' | translate}}"
+							        pButton (click)="downQuestion(datos)"></button>
+						</div>
+					</template>
+				</p-column>
 				<p-column field="pregunta" header="{{'QUESTIONNAIRES.LBL_QUESTION' | translate}}" [sortable]="true"></p-column>
 				<p-column field="tipoPregunta" header="{{'QUESTIONNAIRES.LBL_TYPE' | translate}}" [sortable]="true"></p-column>
 				<p-column field="indicadorfiltrante" header="{{ 'QUESTIONNAIRES.LBL_FILTERING' | translate }}" [sortable]="true"
@@ -237,7 +247,9 @@
 					<template let-datos="rowData" pTemplate="body">
 						<button type="button" icon="fa-plus" class="ui-button-info" data-toggle="tooltip"
 						        title="{{'QUESTIONNAIRES.LBL_ANSWERS' | translate}}"
-						        pButton (click)="showPanelAnswers(datos)"></button>
+						        pButton (click)="showPanelAnswers(datos)"
+						        *ngIf="datos.codigoTipoPregunta === 'SELECT' || datos.codigoTipoPregunta === 'CHECK'"
+						></button>
 						<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip"
 						        title="{{'BTN_EDITAR' | translate}}"
 						        pButton (click)="updateQuestion(datos)"></button>
@@ -256,7 +268,6 @@
 							<input type="text" pInputText id="codigoRespuesta" name="codigo"
 							       uperCaseText
 							       [readonly]="(respuesta.idPreguntaOpcion !== undefined && respuesta.idPreguntaOpcion !== null)"
-							       [disabled]="(respuesta.idPreguntaOpcion !== undefined && respuesta.idPreguntaOpcion !== null)"
 							       [(ngModel)]="respuesta.codigoOpcion" maxlength="6"
 							       (change)="validateCodeR()"
 							       #NGcodigoR="ngModel" required/>
@@ -328,6 +339,18 @@
 			</div>
 			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="respuestas" [paginator]="true" [rows]="10"
 			             [responsive]="true" [globalFilter]="gb">
+				<p-column header="{{ 'LBL_ORDEN' | translate }}" styleClass="datatable-col-action">
+					<template let-datos="rowData" pTemplate="body">
+						<div class="btn-group" role="group">
+							<button type="button" class="ui-button ui-button-info btn" icon="fa-arrow-up" data-toggle="tooltip"
+							        title="{{'BTN_ARRIBA' | translate}}"
+							        pButton (click)="upAnswer(datos)"></button>
+							<button type="button" class="ui-button ui-button-info btn" icon="fa-arrow-down" data-toggle="tooltip"
+							        title="{{'BTN_ABAJO' | translate}}"
+							        pButton (click)="downAnswer(datos)"></button>
+						</div>
+					</template>
+				</p-column>
 				<p-column field="codigoOpcion" header="{{'LBL_CODIGO' | translate}}" [sortable]="true"></p-column>
 				<p-column field="opcion" header="{{'QUESTIONNAIRES.LBL_ANSWER' | translate}}" [sortable]="true"></p-column>
 				<p-column field="indicadorCorrecto" header="{{ 'QUESTIONNAIRES.LBL_RIGHT' | translate }}" [sortable]="true"

@@ -9,6 +9,7 @@ export class QuestionnariesQuestions {
    public pregunta: string;
    public idTipoPregunta: number;
    public tipoPregunta: string;
+   public codigoTipoPregunta: string;
    public indicadorDepende: boolean = false;
    public idDependePregunta: number = null;
    public dependePregunta: string;
