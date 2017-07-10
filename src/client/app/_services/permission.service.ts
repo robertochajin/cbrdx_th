@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-
-import 'rxjs/add/operator/toPromise';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
-import { Adjunto } from '../_models/adjuntos';
 
 @Injectable()
-export class AdjuntosService {
+export class PermissionService {
 
    private serviceURL = '<%= SVC_TH_URL %>/api/';
    private jwtHelper: JwtHelper = new JwtHelper();
@@ -21,16 +18,8 @@ export class AdjuntosService {
       }
    }
 
-   downloadFile(id:number){
-      return this.authHttp.get( this.serviceURL + 'adjuntos/file/'+id ).map( ( res: Response ) => res.text() );
+   getReglasFormularios( codigo: string ) {
+      return this.authHttp.get( this.serviceURL + 'reglasFormularios/' + codigo ).map( ( res: Response ) => res.text() );
    }
 
-   getFileName(id:number){
-      return this.authHttp.get( this.serviceURL + 'adjuntos/'+id ).map( ( res: Response ) => res.json() as Adjunto );
-   }
-
-   handleError( error: any ): Promise<any> {
-      console.error( 'Error:', error );
-      return Promise.reject( error.message || error );
-   }
 }

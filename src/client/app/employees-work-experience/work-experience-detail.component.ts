@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { WorkExperienceService } from '../_services/work-experience.service';
 import * as moment from 'moment/moment';
 import 'rxjs/add/operator/switchMap';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 
 @Component( {
                moduleId: module.id,
@@ -13,9 +14,7 @@ import 'rxjs/add/operator/switchMap';
             } )
 
 export class WorkExperienceDetailComponent implements OnInit {
-   @Input()
-
-   experience: Workexperience = new Workexperience();
+   @Input() experience: Workexperience = new Workexperience();
    private companySectorList: any;
    private companySubSectorList: any;
    private cityList: any;

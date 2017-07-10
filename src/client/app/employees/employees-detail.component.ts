@@ -6,6 +6,8 @@ import { EmployeesService } from '../_services/employees.service';
 import { Employee } from '../_models/employees';
 import { NavService } from '../_services/_nav.service';
 import * as moment from 'moment/moment';
+import { PermissionService } from '../_services/permission.service';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 
 @Component( {
                moduleId: module.id,
@@ -18,12 +20,39 @@ export class EmployeesDetailComponent implements OnInit {
    employee: Employee = new Employee();
    acordion: number;
    svcThUrl = '<%= SVC_TH_URL %>/api/upload';
+   seccion1: PermissionsEmployees = new PermissionsEmployees();
+   seccion2: PermissionsEmployees = new PermissionsEmployees();
+   seccion3: PermissionsEmployees = new PermissionsEmployees();
+   seccion4: PermissionsEmployees = new PermissionsEmployees();
+   seccion5: PermissionsEmployees = new PermissionsEmployees();
+   seccion6: PermissionsEmployees = new PermissionsEmployees();
+   seccion7: PermissionsEmployees = new PermissionsEmployees();
+   seccion8: PermissionsEmployees = new PermissionsEmployees();
+   seccion9: PermissionsEmployees = new PermissionsEmployees();
+   seccion10: PermissionsEmployees = new PermissionsEmployees();
+
+   defaultCampo = { visible: true, editable: true };
 
    constructor( private employeeService: EmployeesService,
       private route: ActivatedRoute,
       private location: Location,
       private _nav: NavService,
+      private permissionService: PermissionService,
       private router: Router ) {
+
+      this.permissionService.getReglasFormularios( 'TERCEROS' ).subscribe( p => {
+         let permisos = JSON.parse( p );
+         this.seccion1 = permisos.DATOSGENERALES ? permisos.DATOSGENERALES : new PermissionsEmployees();
+         this.seccion2 = permisos.DATOSADICIONALES ? permisos.DATOSADICIONALES : new PermissionsEmployees();
+         this.seccion3 = permisos.DATOSCONTACTO ? permisos.DATOSCONTACTO : new PermissionsEmployees;
+         this.seccion4 = permisos.INFORMACIONFAMILIAR ? permisos.INFORMACIONFAMILIAR : new PermissionsEmployees;
+         this.seccion5 = permisos.UBICACION ? permisos.UBICACION : new PermissionsEmployees;
+         this.seccion6 = permisos.ACTIVOS ? permisos.ACTIVOS : new PermissionsEmployees;
+         this.seccion7 = permisos.FORMACIONACADEMICA ? permisos.FORMACIONACADEMICA : new PermissionsEmployees;
+         this.seccion8 = permisos.EXPERIENCIALABORAL ? permisos.EXPERIENCIALABORAL : new PermissionsEmployees;
+         this.seccion9 = permisos.REFERENCIAS ? permisos.REFERENCIAS : new PermissionsEmployees;
+         this.seccion10 = permisos.DATOSCLINICOS ? permisos.DATOSCLINICOS : new PermissionsEmployees;
+      } );
    }
 
    ngOnInit(): void {
@@ -36,7 +65,7 @@ export class EmployeesDetailComponent implements OnInit {
                                            this.employee.segundoApellido;
 
             this.employee.edad = moment( this.employee.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
-
+            // console.info(this.svcThUrl+'/file/'+this.employee.imagen);
             // this.acordion=0;
             //
             //   if( this.employee.ciudadExpDocumento === null ) this.employee.ciudadExpDocumento='';
@@ -87,6 +116,14 @@ export class EmployeesDetailComponent implements OnInit {
                                       scrollTop: jQuery( 'p-accordiontab > .ui-state-active' ).position().top + 90
                                    }, 'fast' );
       }, 1000 );
+   }
+
+   onBeforeSend( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+   }
+
+   onUpload( event: any ) {
+      this.employee.imagen = event.xhr.responseText;
    }
 
 }

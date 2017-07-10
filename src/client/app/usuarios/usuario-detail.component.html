@@ -4,102 +4,99 @@
 		<h3>{{ 'USUARIOS.LBL_USUARIOS' | translate }}</h3>
 		<p-tabView>
 			<p-tabPanel header="{{ 'USUARIOS.LBL_DATOSUSER' | translate }}" leftIcon="fa-address-book">
-				<h4>{{ 'USUARIOS.LBL_DATOSTERCERO' | translate }}</h4>
-				<div class="row">
-					<div class="col-md-2">
+				<p-panel header="{{ 'USUARIOS.LBL_DATOSTERCERO' | translate }}">
+					<fieldset>
+				<div class="col-md-10 col-md-offset-1">
+					<div class="row form-group">
+					<div class="col-md-4">
 						<img class="thumbnail img-responsive"
-							  src="/assets/images/perfil/avatar.jpg">
+							  src="{{svcThUrlAvatar}}/file/{{tercero.imagen}}">
 					</div>
-					<div class="col-md-10">
+						<div class="col-md-8" style="text-align: match-parent">
 						<h2>{{tercero.nombreCompleto}}</h2>
 						<h4>{{tercero.fechaNacimiento}} ({{tercero.edad}})</h4>
 						<span>{{tercero.tipoDocumento}} : {{tercero.numeroDocumento}}</span><br/>
 					</div>
 				</div>
-					<div class="row">
-						<div class="col-md-2">
-							<label>{{ 'LBL_GENERO' | translate }} :</label>
+					</div>
+							<p></p>
+				<div class="col-md-10 col-md-offset-1">
+						<div class="row form-group">
+						<div class="col-md-6">
+							<label class="control-label">{{ 'LBL_GENERO' | translate }} :</label>
+							<p>{{tercero.genero}}</p>
 						</div>
-						<div class="col-md-3">
-							{{tercero.genero}}
-						</div>
-
-						<div class="col-md-4">
-							<label>{{ 'LBL_ESTADOCIVIL' | translate }}:</label>
+						<div class="col-md-6">
+							<label class="control-label">{{ 'LBL_ESTADOCIVIL' | translate }}:</label>
 							<p>{{tercero.estadoCivil}}</p>
 						</div>
-						<div class="col-md-4">
-							<label>{{ 'LBL_EPS' | translate }} :</label>
+						<div class="col-md-6">
+							<label class="control-label">{{ 'LBL_EPS' | translate }} :</label>
 							<p><i>pendiente diligenciar</i></p>
 						</div>
-						<div class="col-md-4">
-							<label>{{ 'LBL_CIUDAD' | translate }} :</label>
+						<div class="col-md-6">
+							<label class="control-label">{{ 'LBL_CIUDAD' | translate }} :</label>
 							<p>{{tercero.ciudadNacimiento}}</p>
 						</div>
-						<div class="col-md-4">
-							<label>{{ 'EMPLOYEES.LBL_DIRECCIONRESIDENCIA' | translate }}:</label>
+						<div class="col-md-6">
+							<label class="control-label">{{ 'EMPLOYEES.LBL_DIRECCIONRESIDENCIA' | translate }}:</label>
 							<div>
 								<ul>
 									<li *ngFor="let l of locations">{{l.direccion}}</li>
 								</ul>
 							</div>
 						</div>
-						<div class="col-md-4">
-							<label>{{ 'LBL_TELEFONO' | translate }} :</label>
+						<div class="col-md-6">
+							<label class="control-label">{{ 'LBL_TELEFONO' | translate }} :</label>
 							<p>{{tercero.telefonoFijo}}</p>
 						</div>
 					</div>
-					<div class="row">
-						<div class="form-footer-buttons">
-							
-							<label>{{ 'USUARIOS.LBL_EDITAINFOTERCERO' | translate }}</label><br/>
-							<button pButton type="button" icon="fa-pencil" label="Editar"></button>
-						
-						</div>
-					</div>
-					
-				
+				</div>
+					</fieldset>
+				</p-panel>
 
-
-
-
-					<h4>{{ 'USUARIOS.LBL_INFOCONTACTO' | translate }}</h4>
-
-					<div class="row">
-						<div class="form-group">
+					<p-panel header="{{ 'USUARIOS.LBL_INFOCONTACTO' | translate }}">
+					<fieldset>
+						<div class="row">
+							<div class="col-md-6">
+							<div class="form-group">
 							<label for="uSistema" class="control-label col-sm-4">{{ 'USUARIOS.LBL_USUARIOSISTEMA' | translate
 								}}</label>
-							<div class="col-sm-8">
-								<input id="uSistema" type="text" pInputText disabled [(ngModel)]="usuario.usuarioSistema"/>
+							<input id="uSistema" type="text" pInputText disabled [(ngModel)]="usuario.usuarioSistema"/>
 							</div>
 						</div>
+							<div class="col-md-6">
+							<div class="form-group">
+									<label class="control-label col-sm-4">{{ 'USUARIOS.LBL_CORREOELECTRONICO' | translate }}</label>
+									<input pInputText [(ngModel)]="usuario.correoElectronico" disabled type="email"/>
+								</div>
+							</div>
+					</div>
+						<p></p>
+						<div class="row">
+						<div class="col-md-6">
 						<div class="form-group">
-							<label class="control-label col-sm-4">{{ 'USUARIOS.LBL_LDAP' | translate }}</label>
-							<div class="ui-grid-col-6">
+								<label class="control-label col-sm-4">{{ 'USUARIOS.LBL_LDAP' | translate }}</label>
 								<p-checkbox [(ngModel)]="usuario.usuarioLdap" binary="true" disabled></p-checkbox>
 							</div>
 						</div>
-					</div>
-					<div class="row">
+						<div class="col-sm-6">
 						<div class="form-group">
-							<label class="control-label col-sm-4">{{ 'USUARIOS.LBL_CORREOELECTRONICO' | translate }}</label>
-							<div class="col-sm-8">
-								<input pInputText [(ngModel)]="usuario.correoElectronico" disabled type="email"/>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-4">{{ 'LBL_HABILITADO' | translate }}</label>
-							<div class="col-sm-8">
+								<label class="control-label col-sm-4">{{ 'LBL_HABILITADO' | translate }}</label>
 								<p-checkbox [(ngModel)]="usuario.indicadorHabilitado" binary="true" disabled></p-checkbox>
 							</div>
 						</div>
 					</div>
-				<div class="row">
-					<div class="form-footer-buttons">
-						<a (click)="goBack()" class="cancelar">{{ 'BTN_REGRESAR' | translate }}</a>
-					</div>
-				</div>
 
+						<div class="row form-footer-buttons">
+							<div class="form-group col-md-12">
+								<button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate }}" type="button"
+										  pButton (click)="goBack()"></button>
+							</div>
+						</div>
+
+					</fieldset>
+					</p-panel>
 
 			</p-tabPanel>
 			<p-tabPanel header="{{ 'USUARIOS.LBL_ROLESGRUPOS' | translate }}" leftIcon="fa-tags">
@@ -132,9 +129,14 @@
 					</div>
 				</div>
 
-				<div class="form-footer-buttons">
-					<a (click)="goBack()" class="cancelar">{{ 'BTN_REGRESAR' | translate }}</a>
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate }}" type="button"
+								  pButton (click)="goBack()"></button>
+					</div>
 				</div>
+
+
 			</p-tabPanel>
 			<p-tabPanel header="{{ 'USUARIOS.LBL_HISTORIAL' | translate }}" leftIcon="fa-calendar">
 				<div class="row datable-header">

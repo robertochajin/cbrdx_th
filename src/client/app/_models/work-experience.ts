@@ -23,7 +23,7 @@ export class Workexperience {
    public indicadorHabilitado: boolean;
    public fechaIngresa: Date;
    public fechaTermina: Date;
-   public idAdjunto?: string;
+   public idAdjunto: number;
    public auditoriaUsuario: number;
    public auditoriaFecha: Date;
 

@@ -38,6 +38,7 @@ export class CandidateRevisionComponent implements OnInit {
    public responsables: SelectItem[] = [];
    private showCalendar = false;
    private readonly = false;
+   svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
 
    usuarioLogueado: any;
    idRol: number;

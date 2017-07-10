@@ -2,7 +2,9 @@
 <div>
     <div class="row datable-header">
         <div class="col-md-6 col-xs-12 datatable-header-add">
-            <button type="button" pButton icon="fa-plus" (click)="add()" label="Nueva Ubicación"></button>
+	        <button type="button" pButton icon="fa-plus" (click)="add()" label="Nueva Ubicación"
+	                *ngIf="seccion.NUEVO ? seccion.NUEVO.visible : true"
+	        ></button>
         </div>
 		 <div class="col-md-6 col-xs-12 datatable-header-search">
 			 <div class="input-group">
@@ -20,9 +22,13 @@
             <template let-elocation="rowData" pTemplate="body">
                 <div class="btn-group" role="group">
                     <button type="button" pButton class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
-                            pButton (click)="update(elocation)" ></button>
+                            pButton (click)="update(elocation)"
+                            *ngIf="seccion.EDITAR ? seccion.EDITAR.visible : true"
+                    ></button>
                     <button type="button" pButton class="ui-button ui-button-danger btn" icon="fa-trash" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
-                            pButton (click)="del(elocation)" ></button>
+                            pButton (click)="del(elocation)"
+                            *ngIf="seccion.ELIMINAR ? seccion.ELIMINAR.visible : true"
+                    ></button>
                 </div>
             </template>
         </p-column>

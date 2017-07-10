@@ -31,6 +31,7 @@ export class References {
       this.segundoNombre = '';
       this.segundoApellido = '';
       this.direccion = '';
+      this.idAdjunto = null;
       this.tipodeReferencia = { value: null, label: '' };
    }
 }

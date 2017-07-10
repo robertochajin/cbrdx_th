@@ -50,6 +50,7 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
    meses: any[] = [];
    direcccionResidencia:string='';
    fechaNacimicento:string='';
+   svcThUrl = '<%= SVC_TH_URL %>/api/upload';
 
    constructor( private employeeService: EmployeesService,
       private route: ActivatedRoute,

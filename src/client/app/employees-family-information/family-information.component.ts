@@ -6,6 +6,7 @@ import { ConfirmationService } from 'primeng/primeng';
 import { Employee } from '../_models/employees';
 import * as moment from 'moment/moment';
 import { NavService } from '../_services/_nav.service';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 
 @Component( {
                moduleId: module.id,
@@ -15,6 +16,7 @@ import { NavService } from '../_services/_nav.service';
             } )
 export class FamilyInformationComponent implements OnInit {
    @Input() employee: Employee;
+   @Input() seccion: PermissionsEmployees;
    familyInformation: ConstructorFamilyInformation = new ConstructorFamilyInformation();
    dialogObjet: ConstructorFamilyInformation = new ConstructorFamilyInformation();
    familyInformations: ConstructorFamilyInformation[];

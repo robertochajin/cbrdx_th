@@ -73,10 +73,10 @@ import { PersonnelRequirementModule } from './personnel-requirement/personnel-re
 import { VacanciesModule } from './vacancies/vacancies.module';
 // Proceso de seleción
 import { SelectionProcessModule } from './selection-process/selection-process.module';
-import { AdjuntosModule } from './adjuntos/adjuntos.module';
 
 // Instituciones medicas
 import { MedicalInstitutionModule } from './medical-institutions/medical-institutions.module';
+import { PermissionService } from './_services/permission.service';
 
 // CarsModule,
 @NgModule( {
@@ -134,7 +134,6 @@ import { MedicalInstitutionModule } from './medical-institutions/medical-institu
                  MenuManagerModule,
                  CompanyAssetsModule,
                  VacanciesModule,
-                 AdjuntosModule,
                  SelectionProcessModule,
                  MedicalInstitutionModule,
                  //AssignmentProfessionalModule
@@ -151,6 +150,7 @@ import { MedicalInstitutionModule } from './medical-institutions/medical-institu
                  AuthenticationService,
                  LoginService,
                  BreadcrumbService,
+                 PermissionService,
                  {
                     provide: APP_BASE_HREF,
                     useValue: '<%= APP_BASE %>',
