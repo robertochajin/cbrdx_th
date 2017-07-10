@@ -204,9 +204,19 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
    }
 
    getPDF(): void {
-         let doc = new jsPDF();
-         doc.text("Hello", 20, 20);
-         doc.save('table.pdf');
+
+      let nombrePdf = this.employee.nombreCompleto.trim();
+      nombrePdf = nombrePdf.replace(/ /g, '-');
+
+      let doc = new jsPDF();
+
+      let element = jQuery("#curriculum");
+      html2canvas(element)
+         .then((canvas: any) => {
+            console.info(canvas);
+            doc.addImage(canvas.toDataURL("image/jpeg"), "JPEG", 0, 0, canvas.width, canvas.height);
+            doc.save('CV-' + nombrePdf + '.pdf');
+         })
    }
 
 }
