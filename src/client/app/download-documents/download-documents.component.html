@@ -1,0 +1,57 @@
+<p-messages [value]="msgs"></p-messages>
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+		<p-accordion (onOpen)="onTabShow($event)" id="accordion">
+			<!-- Documentos a adjuntar -->
+			<p-accordionTab header="{{ 'TERCEROS.LBL_DOCUMENTOS_ADJUNTAR' | translate }}"
+			                [selected]="acordion == 0 || acordion == null ">
+				<p-dataTable [value]="listAttachmentDocuments" emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}">
+					<p-column field="nombre" header="{{'TERCEROS.LBL_DOCUMENTO' | translate }}"></p-column>
+					<p-column field="" header="{{'PROCESOSELECCION.LBL_ADJUNTAR' | translate }}" styleClass="datatable-col-action">
+						<template let-dato="rowData" pTemplate="body" let-rowIndex="rowIndex">
+							<i class="fa fa-spinner fa-pulse fa-fw" *ngIf="cargando === dato.idDocumentoTercero" ></i>
+							<p-fileUpload name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
+							              chooseLabel="{{'PROCESOSELECCION.LBL_ADJUNTAR' | translate}}"
+							              (onBeforeSend)="onBeforeSend($event, dato)"
+							              (onError)="onError($event)"
+							              (onSelect)="onSelect($event, $event.files, dato)"
+							              (onUpload)="uploadingOk($event)"
+							              maxFileSize="{{fsize}}" accept="{{ftype}}"
+							              [hidden]="cargando === dato.idDocumentoTercero">
+							</p-fileUpload>
+						</template>
+					</p-column>
+					<p-column field="" header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+						<template let-data="rowData" pTemplate="body" >
+							
+							<button type="button" icon="fa-eye"
+							        class="ui-button btn" data-toggle="tooltip"
+							        title="{{'BTN_VISUALIZAR' | translate}}"
+							        pButton (click)="previewFile(data)"></button>
+							
+							<button type="button" icon="fa-trash"
+							        class="ui-button btn" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
+							        pButton (click)="deleteFile(data)"></button>
+						</template>
+					</p-column>
+				</p-dataTable>
+			</p-accordionTab>
+			<!-- Documentos a descargar -->
+			<p-accordionTab header="{{ 'TERCEROS.LBL_DOCUMENTOS_DESCARGAR' | translate }}"
+			                [selected]="acordion == 1">
+				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listDownloadDocuments" [paginator]="true" [rows]="10" [responsive]="true"
+				             [globalFilter]="gb">
+					<p-column field="nombreDocumentoTercero" header="{{'TERCEROS.LBL_DOCUMENTO' | translate}}" [sortable]="true"></p-column>
+					<p-column field="descripcion" header="{{'LBL_DESCRIPCION' | translate}}" [sortable]="true"></p-column>
+					<p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
+						<template let-document="rowData" pTemplate="body">
+							
+							<button type="button" icon="fa-download" class="ui-button-info" data-toggle="tooltip" title="{{'BTN_DOWNLOAD' | translate}}"
+							        pButton (click)="download(document)"></button>
+						</template>
+					</p-column>
+				</p-dataTable>
+			</p-accordionTab>
+		</p-accordion>
+	</div>
+</div>
