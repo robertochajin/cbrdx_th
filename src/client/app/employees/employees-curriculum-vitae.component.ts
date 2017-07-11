@@ -52,6 +52,7 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
    fechaNacimicento:string='';
    svcThUrl = '<%= SVC_TH_URL %>/api/upload';
 
+
    constructor( private employeeService: EmployeesService,
       private route: ActivatedRoute,
       private location: Location,
@@ -209,12 +210,13 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
       nombrePdf = nombrePdf.replace(/ /g, '-');
 
       let doc = new jsPDF();
-
-      let element = jQuery("#curriculum");
-      html2canvas(element)
-         .then((canvas: any) => {
+      let element = jQuery("#CV");
+      let optionsCanvas: any[] = [
+         'background' : '#FFF',
+      ]
+      html2canvas(element, optionsCanvas).then((canvas: any) => {
             console.info(canvas);
-            doc.addImage(canvas.toDataURL("image/jpeg"), "JPEG", 0, 0, canvas.width, canvas.height);
+            doc.addImage(canvas.toDataURL("image/jpeg"), "JPEG", 0, 0, 100, 100);
             doc.save('CV-' + nombrePdf + '.pdf');
          })
    }
