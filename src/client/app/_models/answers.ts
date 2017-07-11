@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 export class Answers {
 
    public idRespuesta: number = null;
+   public idMaestroRespuesta: number = null;
    public idCuestionarioPregunta: number = null;
    public idPreguntaOpcion: number = null;
    public respuesta: string;

@@ -4,7 +4,6 @@ import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { Questionnaries } from '../_models/questionnaries';
 import { QuestionnariesQuestions } from '../_models/questionnariesQuestions';
 import { QuestionnariesAnswers } from '../_models/questionnariesAnswers';
-import { Answers } from '../_models/answers';
 
 @Injectable()
 export class QuestionnairesService {
@@ -89,12 +88,6 @@ export class QuestionnairesService {
       f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.masterService + 'preguntasOpciones', JSON.stringify( f ) ).catch( this.handleError );
    }
-
-   addSolution( f: Answers ) {
-      f.auditoriaUsuario = this.idUsuario;
-      return this.authHttp.post( this.masterService + 'respuestas', f )
-      .map( ( res: Response ) => res.json() ).catch( this.handleError );
-   };
 
    handleError( error: any ): Promise<any> {
       console.error( 'Error:', error );

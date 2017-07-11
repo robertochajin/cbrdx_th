@@ -33,19 +33,22 @@ export class ToolbarComponent {
       }
 
       this.startTimer();
-      renderer.listenGlobal( 'document', 'mousemove', ( event: any ) => {
+      renderer.listenGlobal( 'body', 'mousemove', ( event: any ) => {
          this.resetTimer();
       } );
-      renderer.listenGlobal( 'document', 'keypress', ( event: any ) => {
+      renderer.listenGlobal( 'body', 'keypress', ( event: any ) => {
          this.resetTimer();
       } );
-      renderer.listenGlobal( 'document', 'DOMMouseScroll', ( event: any ) => {
+      renderer.listenGlobal( 'body', 'DOMMouseScroll', ( event: any ) => {
          this.resetTimer();
       } );
-      renderer.listenGlobal( 'document', 'mousewheel', ( event: any ) => {
+      renderer.listenGlobal( 'body', 'mousewheel', ( event: any ) => {
          this.resetTimer();
       } );
-      renderer.listenGlobal( 'document', 'touchmove', ( event: any ) => {
+      renderer.listenGlobal( 'body', 'touchmove', ( event: any ) => {
+         this.resetTimer();
+      } );
+      renderer.listenGlobal( 'body', 'click', ( event: any ) => {
          this.resetTimer();
       } );
 
@@ -68,7 +71,7 @@ export class ToolbarComponent {
    }
 
    startTimer() {
-      this.timeoutID = window.setTimeout( this.goInactive, 1500000 );
+      // this.timeoutID = window.setTimeout( this.goInactive, 1500000 );
    }
 
    resetTimer() {

@@ -9,6 +9,7 @@ import { QuestionnairesService } from '../_services/questionnaires.service';
 import { QuestionnairesAddComponent } from './questionnaires-add.component';
 import { QuestionnairesUpdateComponent } from './questionnaires-update.component';
 import { SolutionsQuestionnairesComponent } from './solutions-questionnaire/solutions-questionnaires.component';
+import { MasterAnswersService } from '../_services/masterAnswers.service';
 
 
 @NgModule( {
@@ -21,7 +22,7 @@ import { SolutionsQuestionnairesComponent } from './solutions-questionnaire/solu
                  SolutionsQuestionnairesComponent
               ],
               bootstrap: [ QuestionnairesComponent ],
-              providers: [ QuestionnairesService, NavService, ListaService ],
+              providers: [ QuestionnairesService, NavService, ListaService, MasterAnswersService ],
               exports: [ QuestionnairesComponent ]
            } )
 export class QuestionnairesModule {
