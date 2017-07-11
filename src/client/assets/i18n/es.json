@@ -975,6 +975,8 @@
       "LBL_ARCHIVO":"Archivo",
       "LBL_VER":"Ver",
       "LBL_LLAMARREFERENCIA":"Llamar referencias",
+      "LBL_HISTORIALPOSTULANTE":"Historial de psotulaciones de:",
+      "LBL_CANTIDADVACANTES":"Numero de vacantes solicitadas",
       "":""
    },
 "MEDICALINSTITUTION":{
@@ -1042,6 +1044,11 @@
    "LBL_DROPDOWN": "Debe seleccionar una opción",
    "":""
 },
+   "TERCEROS": {
+      "LBL_DOCUMENTO": "Documento",
+      "LBL_DOCUMENTOS_DESCARGAR": "Documentos a descargar",
+      "LBL_DOCUMENTOS_ADJUNTAR": "Documentos a adjuntar"
+   },
 
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="

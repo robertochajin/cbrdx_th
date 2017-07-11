@@ -101,6 +101,9 @@ export class DocumentManagementAddComponent implements OnInit {
 
    onSubmit() {
       if ( this.documentManagement.idDocumentoTercero ) {
+         if ( this.documentManagement.indicadorAdjunto ) {
+            this.documentManagement.idAdjunto = null;
+         }
          this.documentManagementService.update( this.documentManagement ).subscribe( data => {
             this._nav.setMesage( 2, this.msgs );
             this.location.back();
@@ -191,7 +194,18 @@ export class DocumentManagementAddComponent implements OnInit {
                                               }
                                            } );
       } else {
-         this.location.back();
+         if ( this.documentManagement.idAdjunto === null && this.documentManagement.indicadorDescarga ) {
+            this.confirmationService.confirm( {
+                                                 message: ` ¿Está seguro que desea salir sin guardar?`,
+                                                 header: 'Confirmación',
+                                                 icon: 'fa fa-question-circle',
+                                                 accept: () => {
+                                                    this.location.back();
+                                                 }
+                                              } );
+         } else {
+            this.location.back();
+         }
       }
    }
 
