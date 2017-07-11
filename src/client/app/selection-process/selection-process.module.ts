@@ -26,6 +26,7 @@ import { AttachmentsService } from '../_services/attachments-step.service';
 import { AttachmentsComponent } from './attachments.component';
 import { CandidateTestComponent } from './candidate-test.component';
 import { CallReferenceComponent } from './call-reference.component';
+import { VacancyTestServices } from '../_services/vacancyTest.service';
 
 @NgModule( {
               imports: [
@@ -59,6 +60,7 @@ import { CallReferenceComponent } from './call-reference.component';
                  CandidateProcessService,
                  SelectionStepService,
                  AttachmentsService,
+                 VacancyTestServices,
                  PublicationQuestionnairesService,
                  UsuariosService
               ],
