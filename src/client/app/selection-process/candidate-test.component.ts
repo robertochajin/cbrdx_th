@@ -20,6 +20,8 @@ import { JwtHelper } from 'angular2-jwt';
 import { RolesService } from '../_services/roles.service';
 import { VacancyTest } from '../_models/vacancyTest';
 import { VacancyTestServices } from '../_services/vacancyTest.service';
+import { AdjuntosService } from '../_services/adjuntos.service';
+import { ConstanteService } from '../_services/constante.service';
 
 @Component( {
                moduleId: module.id,
@@ -33,10 +35,12 @@ export class CandidateTestComponent implements OnInit {
    private candidate: Employee = new Employee();
    public indApproval: string;
    public listQuest: SelectItem[] = [];
+   public testStates: SelectItem[] = [];
    guardandoResoursesQues = false;
    questId: number;
    private vacancyTest: VacancyTest;
    private vacancyTests: VacancyTest[] = [];
+   public definingTest = false;
    public approvalOptions: SelectItem[] = [];
    public candidateProcess: CandidateProcess = new CandidateProcess();
    private es: any;
@@ -48,19 +52,29 @@ export class CandidateTestComponent implements OnInit {
    private readonly = false;
    svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
 
-   usuarioLogueado: any;
-   idRol: number;
+   svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
+   dataUploadArchivo: any = '';
+   dataUploadUsuario: any = '';
+   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
    jwtHelper: JwtHelper = new JwtHelper();
+   fsize: number = 50000000;
+   ftype: string = '';
+   idRol: number;
+   private testToDefine: VacancyTest;
+   private allTestDefined = false;
+
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
       private _nav: NavService,
       private router: Router,
       private location: Location,
+      private adjuntosService: AdjuntosService,
       private vacancyTestServices: VacancyTestServices,
       private listaService: ListaService,
       private confirmationService: ConfirmationService,
       private rolesService: RolesService,
+      private constanteService: ConstanteService,
       private employeesService: EmployeesService,
       private vacanciesService: VacanciesService,
       private candidateProcessService: CandidateProcessService,
@@ -71,6 +85,17 @@ export class CandidateTestComponent implements OnInit {
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
          this.candidateProcess.idResponsable = this.usuarioLogueado.usuario.idUsuario;
       }
+
+      this.constanteService.getByCode( 'FTYPE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.ftype = data.valor;
+         }
+      } );
+      this.constanteService.getByCode( 'FSIZE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.fsize = Number( data.valor );
+         }
+      } );
 
       this.listaService.getMasterDetails( 'ListasDecisionesProcesoSeleccion' ).subscribe( res => {
          this.desitionList = res;
@@ -131,6 +156,9 @@ export class CandidateTestComponent implements OnInit {
                         } );
                      } );
                   }
+                  this.testStates.push( { label: 'Seleccione', value: null } );
+                  this.testStates.push( { label: 'Realiza prueba completa', value: true } );
+                  this.testStates.push( { label: 'No realiza prueba', value: false } );
                } );
 
             } );
@@ -147,40 +175,45 @@ export class CandidateTestComponent implements OnInit {
    }
 
    onSubmit() {
-      if ( this.indApproval === 'APRB' ) {
-         this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'APROB' );
-         this.candidateProcess.idDesicionProcesoSeleccion = this.getIdDesitionByCode( 'APRB' );
-      } else if ( this.indApproval === 'NOAPRB' ) {
-         this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'RECH' );
-         this.candidateProcess.idDesicionProcesoSeleccion = this.getIdDesitionByCode( 'NOAPRB' );
-      }
+      if (this.areAllTestDefined()) {
+         this.allTestDefined = true;
+         if ( this.indApproval === 'APRB' ) {
+            this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'APROB' );
+            this.candidateProcess.idDesicionProcesoSeleccion = this.getIdDesitionByCode( 'APRB' );
+         } else if ( this.indApproval === 'NOAPRB' ) {
+            this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'RECH' );
+            this.candidateProcess.idDesicionProcesoSeleccion = this.getIdDesitionByCode( 'NOAPRB' );
+         }
 
-      if ( this.candidateProcess.idProcesoSeleccion !== undefined ) {
-         this.candidateProcessService.update( this.candidateProcess ).subscribe( res => {
-            if ( res.ok ) {
-               this._nav.setMesage( 2 );
-               this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-            } else {
+         if ( this.candidateProcess.idProcesoSeleccion !== undefined ) {
+            this.candidateProcessService.update( this.candidateProcess ).subscribe( res => {
+               if ( res.ok ) {
+                  this._nav.setMesage( 2 );
+                  this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
+               } else {
+                  this._nav.setMesage( 3 );
+                  this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
+               }
+            }, () => {
                this._nav.setMesage( 3 );
                this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-            }
-         }, () => {
-            this._nav.setMesage( 3 );
-            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-         } );
+            } );
+         } else {
+            this.candidateProcessService.add( this.candidateProcess ).subscribe( res => {
+               if ( res.idProcesoSeleccion ) {
+                  this._nav.setMesage( 1 );
+                  this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
+               } else {
+                  this._nav.setMesage( 3 );
+                  this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
+               }
+            }, () => {
+               this._nav.setMesage( 3 );
+               this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
+            } );
+         }
       } else {
-         this.candidateProcessService.add( this.candidateProcess ).subscribe( res => {
-            if ( res.idProcesoSeleccion ) {
-               this._nav.setMesage( 1 );
-               this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-            } else {
-               this._nav.setMesage( 3 );
-               this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-            }
-         }, () => {
-            this._nav.setMesage( 3 );
-            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-         } );
+         this.allTestDefined = false;
       }
    }
 
@@ -237,17 +270,105 @@ export class CandidateTestComponent implements OnInit {
    addTest() {
 
       this.guardandoResoursesQues = true;
+      this.vacancyTest = new VacancyTest();
       this.vacancyTest.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
       this.vacancyTest.idPruebaTecnica = this.questId;
+      this.vacancyTest.indicadorHabilitado = true;
 
       this.vacancyTestServices.add( this.vacancyTest ).subscribe( res => {
          if(res){
+            let tecniqueTest = this.listQuest.find(pt => pt.value === res.idPruebaTecnica);
+            res.pruebaTecnica = tecniqueTest.label;
+            this.listQuest.splice(this.listQuest.indexOf(tecniqueTest), 1);
             this.vacancyTests.push(res);
+            this.questId = null;
             this.guardandoResoursesQues = false;
          }
       }, error => {
          this._nav.setMesage(3);
       });
 
+   }
+
+   definegTest(test: VacancyTest) {
+      if(test) {
+         this.definingTest = true;
+         this.testToDefine = new VacancyTest();
+         this.testToDefine = Object.assign( {}, test );
+         this.getFileName();
+      }
+   }
+
+   updateTest() {
+      this.vacancyTestServices.update(this.testToDefine).subscribe(res => {
+         this._nav.setMesage(2);
+         let oldItem = this.vacancyTests.find(t => t.idProcesoSeleccionPruebaTecnica === this.testToDefine.idProcesoSeleccionPruebaTecnica);
+         this.vacancyTests[this.vacancyTests.indexOf(oldItem)] = this.testToDefine;
+         this.definingTest = false;
+      }, error => {
+         this._nav.setMesage(3);
+      });
+   }
+
+   cancelDefiningTest(dirty: boolean) {
+      if(dirty) {
+         this.confirmationService.confirm( {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this.definingTest = false;
+                                              }
+                                           } );
+      } else {
+         this.definingTest = false;
+      }
+   }
+
+
+   uploadingOk( event: any ) {
+      let respuesta = JSON.parse( event.xhr.response );
+      if ( respuesta.idAdjunto != null || respuesta.idAdjunto != undefined ) {
+         this.testToDefine.idAdjunto = respuesta.idAdjunto;
+      }
+   }
+
+   onBeforeSend( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "'}";
+      event.formData.append( 'obj', obj.toString() );
+   }
+
+   onSelect( event: any, file: any ) {
+      this.dataUploadArchivo = file[ 0 ].name;
+      this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   }
+
+   uploadAgain( rta: boolean ) {
+      this.testToDefine.idAdjunto = null;
+   }
+
+   downloadFile( id: number ) {
+      this.adjuntosService.downloadFile( id ).subscribe( (res: any) => {
+         window.location.assign( res );
+      } );
+   }
+
+   getFileName() {
+      if ( this.testToDefine.idAdjunto ) {
+         this.adjuntosService.getFileName( this.testToDefine.idAdjunto ).subscribe( (res: any) => {
+            this.dataUploadArchivo = res.nombreArchivo;
+         } );
+      }
+   }
+
+   private areAllTestDefined() : boolean{
+      let allDefined = true;
+      this.vacancyTests.map(t => {
+         if(t.indicadorRealiza === null) {
+            allDefined = false;
+         }
+      });
+      return allDefined;
    }
 }
