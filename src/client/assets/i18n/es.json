@@ -330,8 +330,11 @@
      "LBL_LIDERAZGO": "Liderazgo",
      "LBL_HOBBIES": "Hobbies",
      "LBL_CONTACTOEMERG": "Contacto en caso de emergencia",
-     "LBL_COMPETHABILI": "Competencias y habilidades"
-
+     "LBL_COMPETHABILI": "Competencias y habilidades",
+     "LBL_DOCUMENTO": "Documento",
+     "LBL_DOCUMENTOS_DESCARGAR": "Documentos a descargar",
+     "LBL_DOCUMENTOS_ADJUNTAR": "Documentos a adjuntar",
+     "LBL_EMPLOYEESADJUNTOS": "Adjuntos"
   },
 
   "INICIO_FAMILYINFORMATION":"==============================================================",
@@ -1042,12 +1045,6 @@
    "LBL_DROPDOWN": "Debe seleccionar una opción",
    "":""
 },
-   "TERCEROS": {
-      "LBL_DOCUMENTO": "Documento",
-      "LBL_DOCUMENTOS_DESCARGAR": "Documentos a descargar",
-      "LBL_DOCUMENTOS_ADJUNTAR": "Documentos a adjuntar"
-   },
-
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 

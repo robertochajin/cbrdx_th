@@ -5,7 +5,7 @@ import { DocumentoTercero } from '../_models/documentDownload';
 import { DocumentoRelacionTercero } from '../_models/DocumentoRelacionTercero';
 
 @Injectable()
-export class DocumentsDownloadService {
+export class EmployeesAttachmentService {
    private serviceURL = '<%= SVC_TH_URL %>/api/documentosTerceros/';
    private downloadFileServiceURL = '<%= SVC_TH_URL %>/api/adjuntos/file/';
    private relacionServiceURL = '<%= SVC_TH_URL %>/api/tercerosDocumentosTercero/';
@@ -32,11 +32,35 @@ export class DocumentsDownloadService {
       .map( ( res: Response ) => res.json() as DocumentoTercero[] );
    }
 
+   getAllDocumentosRelacionTercero() {
+      return this.authHttp.get( this.relacionServiceURL ).map( ( res: Response ) => res.json() as DocumentoRelacionTercero[] );
+   }
+
    getFile( id: number ) {
       return this.authHttp.get( this.downloadFileServiceURL + id ).map( ( res: Response ) => res.text() );
    }
 
-   add( d: DocumentoRelacionTercero ) {
+   getDocumentoRelacionTercero( id: number ) {
+      return this.authHttp.get( this.relacionServiceURL + 'adjunto/' + id )
+      .map( ( res: Response ) => res.json() as DocumentoRelacionTercero );
+   }
+
+   addDocumentoRelacionTercero( d: DocumentoRelacionTercero ) {
+      d.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.relacionServiceURL, d ).map( ( res: Response ) => res.json() );
+   }
+
+   update( d: DocumentoTercero ) {
+      d.auditoriaUsuario = this.idUsuario;
+      return this.authHttp.put( this.serviceURL, d ).map( ( res: Response ) => res );
+   }
+
+   updateDocumentoRelacionTercero( d: DocumentoRelacionTercero ) {
+      d.auditoriaUsuario = this.idUsuario;
+      return this.authHttp.put( this.relacionServiceURL, d ).map( ( res: Response ) => res );
+   }
+
+   handleError( error: any ): Promise<any> {
+      return Promise.reject( error.message || error );
    }
 }
