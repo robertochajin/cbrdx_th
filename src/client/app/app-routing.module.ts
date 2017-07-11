@@ -176,6 +176,7 @@ import { QuestionnairesComponent } from './questionnaires/questionnaires.compone
 import { QuestionnairesAddComponent } from './questionnaires/questionnaires-add.component';
 import { QuestionnairesUpdateComponent } from './questionnaires/questionnaires-update.component';
 import { SolutionsQuestionnairesComponent } from './questionnaires/solutions-questionnaire/solutions-questionnaires.component';
+import { SolutionsQuestionnairesDetailComponent } from './questionnaires/solutions-questionnaire/solutions-questionnaires-detail.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -410,6 +411,7 @@ const routes = [
 
       //  Cuestionarios
    { path: 'solutions/:id', component: SolutionsQuestionnairesComponent },
+   { path: 'solutions/detail/:id', component: SolutionsQuestionnairesDetailComponent },
    { path: 'questionnaries', component: QuestionnairesComponent },
    { path: 'questionnaries/add', component: QuestionnairesAddComponent },
    { path: 'questionnaries/update/:id', component: QuestionnairesUpdateComponent },

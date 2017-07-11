@@ -42,6 +42,11 @@ export class MasterAnswersService {
       return this.authHttp.put( this.masterService + 'maestrosRespuestas', JSON.stringify( f ) ).catch( this.handleError );
    }
 
+   getSolutions( id: number ) {
+      return this.authHttp.get( this.masterService + 'respuestas' )
+      .map( ( res: Response ) => res.json() as Answers[] );
+   }
+
    getSolution( id: number ) {
       return this.authHttp.get( this.masterService + 'respuestas/' + id )
       .map( ( res: Response ) => res.json() as Answers );

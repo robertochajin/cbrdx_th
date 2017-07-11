@@ -10,6 +10,7 @@ import { QuestionnairesAddComponent } from './questionnaires-add.component';
 import { QuestionnairesUpdateComponent } from './questionnaires-update.component';
 import { SolutionsQuestionnairesComponent } from './solutions-questionnaire/solutions-questionnaires.component';
 import { MasterAnswersService } from '../_services/masterAnswers.service';
+import { SolutionsQuestionnairesDetailComponent } from './solutions-questionnaire/solutions-questionnaires-detail.component';
 
 
 @NgModule( {
@@ -19,7 +20,7 @@ import { MasterAnswersService } from '../_services/masterAnswers.service';
               ],
 
               declarations: [ QuestionnairesComponent, QuestionnairesAddComponent, QuestionnairesUpdateComponent,
-                 SolutionsQuestionnairesComponent
+                 SolutionsQuestionnairesComponent, SolutionsQuestionnairesDetailComponent
               ],
               bootstrap: [ QuestionnairesComponent ],
               providers: [ QuestionnairesService, NavService, ListaService, MasterAnswersService ],

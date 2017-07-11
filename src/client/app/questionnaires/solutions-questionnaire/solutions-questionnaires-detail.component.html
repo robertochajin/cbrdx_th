@@ -1,0 +1,10 @@
+<div class="col-md-10 col-md-offset-1" *ngIf="cuestionario">
+	<p-panel header="{{cuestionario.cuestionario}}">
+		<p-dataTable [value]="respuestas" sortField="idCuestionarioPregunta" rowGroupMode="rowspan">
+			<p-header>{{ 'QUESTIONNAIRES.LBL_ANSWERS' | translate}}</p-header>
+			<p-column field="idCuestionarioPregunta" header="{{ 'QUESTIONNAIRES.LBL_QUESTION' | translate}}"></p-column>
+			<p-column field="idPreguntaOpcion" header="{{ 'QUESTIONNAIRES.LBL_ANSWERS' | translate}}"></p-column>
+			<p-column field="respuesta" header="{{ 'QUESTIONNAIRES.LBL_ANSWER' | translate}}"></p-column>
+		</p-dataTable>
+	</p-panel>
+</div>
