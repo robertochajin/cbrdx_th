@@ -209,15 +209,38 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
       let nombrePdf = this.employee.nombreCompleto.trim();
       nombrePdf = nombrePdf.replace(/ /g, '-');
 
-      let doc = new jsPDF();
+      let doc = new jsPDF('p', 'mm', 'a4');
       let element = jQuery("#CV");
-      let optionsCanvas: any[] = [
-         'background' : '#FFF',
-      ]
-      html2canvas(element, optionsCanvas).then((canvas: any) => {
+
+      html2canvas(element,  {background: 'white'}).then((canvas: any) => {
             console.info(canvas);
-            doc.addImage(canvas.toDataURL("image/jpeg"), "JPEG", 0, 0, 100, 100);
-            doc.save('CV-' + nombrePdf + '.pdf');
+
+            //jQuery('#canvas').
+/*
+            let width = doc.internal.pageSize.width;
+            let height = doc.internal.pageSize.height;
+
+            let imgData = canvas.toDataURL('image/jpeg', 1.0);
+             doc.addImage(imgData, 'JPEG', 0, 0, width, height);
+             doc.save('CV-' + nombrePdf + '.pdf');
+            */
+
+         let width = canvas.width;
+         let height = canvas.height;
+
+         let mwidth = Math.floor(width * 0.264583);
+         let mheight = Math.floor(height * 0.264583);
+
+         let imgData = canvas.toDataURL('image/png');
+
+         console.log(imgData);
+         console.info(imgData);
+
+         doc.deletePage(1);
+         doc.addPage(mwidth, mheight);
+         doc.addImage(imgData, 'PNG', 0, 0);
+         doc.save('CV-' + nombrePdf + '.pdf');
+
          })
    }
 
