@@ -25,6 +25,8 @@ import { EmployeesViewDetailComponent } from './employees-view-detail.component'
 import { EmployeesCurriculumVitaeComponent } from './employees-curriculum-vitae.component';
 import { AdjuntosService } from '../_services/adjuntos.service';
 import { ConstanteService } from '../_services/constante.service';
+import { EmployeesAttachmentsModule } from '../employees-attatchments/employees-attachments.module';
+import { EmployeesAttachmentsComponent } from '../employees-attatchments/employees-attachments.component';
 
 @NgModule( {
               imports: [
@@ -38,7 +40,8 @@ import { ConstanteService } from '../_services/constante.service';
                  FormSharedModule,
                  EmployeesContactModule,
                  EmployeesEstateModule,
-                 EmployeesVehicleModule
+                 EmployeesVehicleModule,
+                 EmployeesAttachmentsModule
               ],
 
               declarations: [ EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent,

@@ -330,8 +330,11 @@
      "LBL_LIDERAZGO": "Liderazgo",
      "LBL_HOBBIES": "Hobbies",
      "LBL_CONTACTOEMERG": "Contacto en caso de emergencia",
-     "LBL_COMPETHABILI": "Competencias y habilidades"
-
+     "LBL_COMPETHABILI": "Competencias y habilidades",
+     "LBL_DOCUMENTO": "Documento",
+     "LBL_DOCUMENTOS_DESCARGAR": "Documentos a descargar",
+     "LBL_DOCUMENTOS_ADJUNTAR": "Documentos a adjuntar",
+     "LBL_EMPLOYEESADJUNTOS": "Adjuntos"
   },
 
   "INICIO_FAMILYINFORMATION":"==============================================================",
@@ -975,6 +978,8 @@
       "LBL_ARCHIVO":"Archivo",
       "LBL_VER":"Ver",
       "LBL_LLAMARREFERENCIA":"Llamar referencias",
+      "LBL_HISTORIALPOSTULANTE":"Historial de psotulaciones de:",
+      "LBL_CANTIDADVACANTES":"Numero de vacantes solicitadas",
       "LBL_PRUEBASTECNICA":"Pruebas técnica",
       "LBL_PRUEBAREALIZADA":"Realizada",
       "LBL_PRUEBASTECNICAS":"Pruebas técnicas",
