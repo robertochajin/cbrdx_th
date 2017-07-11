@@ -44,7 +44,7 @@
 				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listDownloadDocuments" [paginator]="true"
 				             [rows]="10" [responsive]="true"
 				             [globalFilter]="gb">
-					<p-column field="nombre" header="{{'TERCEROS.LBL_DOCUMENTO' | translate}}" [sortable]="true"></p-column>
+					<p-column field="nombre" header="{{'EMPLOYEES.LBL_DOCUMENTO' | translate}}" [sortable]="true"></p-column>
 					<p-column field="descripcion" header="{{'LBL_DESCRIPCION' | translate}}" [sortable]="true"></p-column>
 					<p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
 						<template let-document="rowData" pTemplate="body">
