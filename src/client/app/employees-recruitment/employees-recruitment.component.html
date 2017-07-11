@@ -1,0 +1,33 @@
+<p-messages [value]="msgs"></p-messages>
+<div *ngIf="employee">
+	<div class="row">
+		<div class="col-md-4">
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listEmployeesRecruitment"
+			             [rows]="10" [responsive]="true">
+				<p-column field="cargo" header="{{ 'EMPLOYEES.LBL_CARGO' | translate }}" [sortable]="true"></p-column>
+				<p-column field="fechaInicio" header="{{ 'LBL_FECHAINICIO' | translate }}" [sortable]="true"></p-column>
+				<p-column styleClass="datatable-col-action">
+					<template let-PA="rowData" pTemplate="body">
+						<button type="button" icon="fa-eye" class="ui-button-info" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
+						        pButton (click)="getEmployeesStepDetail(PA.idPublicacion)"></button>
+					</template>
+				</p-column>
+			</p-dataTable>
+		</div>
+		<div class="col-md-8">
+			<!--<h4>{{ employeesRecruitment.cargo }}</h4>-->
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="employeesRecruitmentSteps" [paginator]="true"
+			             [rows]="10" [responsive]="true">
+				<p-column field="procesoPaso" header="{{ 'RECLUTAMIENTO.LBL_FASE_PROCESO' | translate }}" [sortable]="true"></p-column>
+				<p-column field="nombreResponsable" header="{{ 'RECLUTAMIENTO.LBL_PERSONAL_ENCARGADO' | translate }}" [sortable]="true"></p-column>
+				<p-column field="estadoDiligenciado" header="{{ 'RECLUTAMIENTO.LBL_ESTADO' | translate }}" [sortable]="true"></p-column>
+				<p-column header="{{ 'LBL_ACCION' | translate }}" styleClass="datatable-col-action">
+					<template let-PA="rowData" pTemplate="body">
+						<button type="button" icon="fa-eye" class="ui-button-info" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
+						        pButton (click)="redirecStep(PA)"></button>
+					</template>
+				</p-column>
+			</p-dataTable>
+		</div>
+	</div>
+</div>
