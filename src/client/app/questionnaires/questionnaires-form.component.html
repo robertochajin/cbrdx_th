@@ -160,7 +160,8 @@
 								translate}}</label>
 							<p-dropdown id="dependePregunta" name="dependePregunta" required="true"
 							            [options]="previousQuestions" [autoWidth]="false"
-							            [(ngModel)]="pregunta.isDependePregunta"
+							            [(ngModel)]="pregunta.idDependePregunta"
+							            (onChange)="getPreviousAnswers()"
 							            #NGdependePregunta="ngModel"
 							></p-dropdown>
 							<div class="ui-message ui-messages-error ui-corner-all"
@@ -170,7 +171,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="ui-grid-row" *ngIf="pregunta.dependePregunta > 0">
+					<div class="ui-grid-row" *ngIf="pregunta.idDependePregunta > 0">
 						<div class="form-group col-sm-12">
 							<label for="dependeRespuesta">{{ 'QUESTIONNAIRES.LBL_ANSWER' | translate}} {{ 'QUESTIONNAIRES.LBL_DEPEND' |
 								translate}}</label>

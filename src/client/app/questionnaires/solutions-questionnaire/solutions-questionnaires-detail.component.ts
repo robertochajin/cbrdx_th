@@ -52,6 +52,11 @@ export class SolutionsQuestionnairesDetailComponent implements OnInit {
       this.masterAnswersService.getSolutions( this.idMaestroRespuestas ).subscribe(
          res => {
             this.respuestas = res;
+            this.respuestas.map( s => {
+               if ( s.opcion ) {
+                  s.respuesta = s.opcion
+               }
+            } );
          } );
    }
 
