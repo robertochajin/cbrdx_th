@@ -26,6 +26,7 @@ import { AttachmentsService } from '../_services/attachments-step.service';
 import { AttachmentsComponent } from './attachments.component';
 import { CandidateTestComponent } from './candidate-test.component';
 import { CallReferenceComponent } from './call-reference.component';
+import { VacancyTestServices } from '../_services/vacancyTest.service';
 import { PostulationHistoryComponent } from './postulation-history.component';
 
 @NgModule( {
@@ -61,6 +62,7 @@ import { PostulationHistoryComponent } from './postulation-history.component';
                  CandidateProcessService,
                  SelectionStepService,
                  AttachmentsService,
+                 VacancyTestServices,
                  PublicationQuestionnairesService,
                  UsuariosService
               ],
