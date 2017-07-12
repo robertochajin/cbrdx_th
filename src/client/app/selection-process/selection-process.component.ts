@@ -49,7 +49,7 @@ export class SelectionProcessComponent implements OnInit {
          rolesService.listRolesByUser(this.usuarioLogueado.usuario.idUsuario).subscribe( res => {
             this.roles = res;
             constanteService.getByCode('ROLPRO').subscribe(c => {
-               if(this.roles.find(r => r.codigoRol === c.valor)){
+               if(c.valor !== '' && this.checkRol(this.roles, c.valor)){
                   this.showFilters = true;
                } else {
                   this.showFilters = false;
@@ -148,5 +148,20 @@ export class SelectionProcessComponent implements OnInit {
 
    setSearch() {
       this.navService.setSearch( 'selection-process.component', this.busqueda );
+   }
+
+   private checkRol( roles: Rol[], rolesBase: string ) : boolean {
+      let found = false;
+      let set = rolesBase.split(',');
+      roles.map(r => {
+         set.find(l => {
+            console.info(l);
+            return false;
+         })
+         if(set.find(i => i === r.codigoRol)){
+            found = true;
+         }
+      });
+      return found;
    }
 }
