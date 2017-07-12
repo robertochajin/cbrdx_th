@@ -19,7 +19,8 @@
 			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="employeesRecruitmentSteps" [paginator]="true"
 			             [rows]="10" [responsive]="true">
 				<p-column field="procesoPaso" header="{{ 'RECLUTAMIENTO.LBL_FASE_PROCESO' | translate }}" [sortable]="true"></p-column>
-				<p-column field="nombreResponsable" header="{{ 'RECLUTAMIENTO.LBL_PERSONAL_ENCARGADO' | translate }}" [sortable]="true"></p-column>
+				<p-column field="nombreResponsable" header="{{ 'RECLUTAMIENTO.LBL_PERSONAL_ENCARGADO' | translate }}"
+				          [sortable]="true"></p-column>
 				<p-column field="estadoDiligenciado" header="{{ 'RECLUTAMIENTO.LBL_ESTADO' | translate }}" [sortable]="true"></p-column>
 				<p-column header="{{ 'LBL_ACCION' | translate }}" styleClass="datatable-col-action">
 					<template let-PA="rowData" pTemplate="body">

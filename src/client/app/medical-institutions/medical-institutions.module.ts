@@ -35,7 +35,7 @@ import { AnswerExamsComponent } from './answer-exams.component';
                  InputTextareaModule, PanelModule
               ],
               declarations: [ MedicalInstitutionsComponent, MedicalInstitutionAddComponent, MedicalInstitutionUpdateComponent,
-                 MedicalInstitutionDetailComponent,AnswerExamsComponent
+                 MedicalInstitutionDetailComponent, AnswerExamsComponent
               ],
               bootstrap: [ MedicalInstitutionsComponent, MedicalInstitutionAddComponent ],
               providers: [ MedicalInstitutionService, ListaService, ConfirmationService ],

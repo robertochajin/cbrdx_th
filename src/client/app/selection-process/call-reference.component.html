@@ -13,7 +13,7 @@
 							<h2>{{candidate.nombreCompleto}}</h2>
 							<h4>{{candidate.tipoDocumento}} - {{candidate.numeroDocumento}}</h4>
 							<span>{{candidate.fechaNacimiento}} ({{candidate.edad}})</span>
-							<div  class="perfil-footer-button">
+							<div class="perfil-footer-button">
 								<button icon="fa-address-book-o" label="{{'PROCESOSELECCION.LBL_VERHOJADEVIDA' | translate }}" type="button"
 								        (click)="curriculum()"
 								        pButton></button>
@@ -55,7 +55,7 @@
 					</div>
 				</fieldset>
 			</form>
-			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="references"  [responsive]="true" >
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="references" [responsive]="true">
 				<p-column field="tipoReferencia" header="{{'EMPLOYEES.LBL_TIPOREFERENCIA' | translate }}" [sortable]="true"></p-column>
 				<p-column field="nombreCompleto" header="{{'LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
 				<p-column field="numeroContacto" header="{{'EMPLOYEES.LBL_NUMEROCONTACTO' | translate }}" [sortable]="true"></p-column>
@@ -73,7 +73,7 @@
 			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="process">
 				<fieldset *ngIf="!readonly">
 					<div class="row">
-						<div class="form-group col-md-6" >
+						<div class="form-group col-md-6">
 							<label for="validStep">* {{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}</label>
 							<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
 							            [autoWidth]="false" [(ngModel)]="indApproval" required></p-dropdown>
@@ -82,7 +82,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group col-md-12" >
+						<div class="form-group col-md-12">
 							<label for="observacion">* {{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}</label>
 							<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #observa="ngModel"
 							          [(ngModel)]="candidateProcess.observacion" required="true" class="form-control"
@@ -116,7 +116,7 @@
 						</div>
 					</div>
 					<div class="row form-footer-buttons">
-						<div class="form-group col-md-12" >
+						<div class="form-group col-md-12">
 							<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
 							        pButton (click)="goBack(false)"></button>
 						</div>

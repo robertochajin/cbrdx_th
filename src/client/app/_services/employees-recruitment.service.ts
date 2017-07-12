@@ -20,14 +20,14 @@ export class EmployeesRecruitmentService {
       }
    }
 
-   getEmployeesStep(id:number){
+   getEmployeesStep( id: number ) {
       return this.authHttp.get( this.masterService + id )
       .map( ( res: Response ) => res.json() as EmployeesRecruitment[] );
    }
 
-   getEmployeesStepDetail(id:number){
+   getEmployeesStepDetail( id: number ) {
       return this.authHttp.get( this.serviceURL + 'procesoSeleccion/publicacion/' + id )
-      .map( ( res: Response ) => res.json()  );
+      .map( ( res: Response ) => res.json() );
    }
 
 }

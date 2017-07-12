@@ -39,44 +39,44 @@ export class EmployeesRecruitmentComponent implements OnInit {
 
    ngOnInit() {
       // Lista Tipo de cargos para el tercero actual. Llena el DT
-      this.employeesRecruitmentService.getEmployeesStep( this.employee.idTercero ).subscribe(data=>{
+      this.employeesRecruitmentService.getEmployeesStep( this.employee.idTercero ).subscribe( data => {
          this.listEmployeesRecruitment = data;
-      });
+      } );
    }
 
-   getEmployeesStepDetail(id: number) {
-         this.employeesRecruitmentService.getEmployeesStepDetail( id ).subscribe(data=>{
-            this.employeesRecruitmentSteps = data;
-         });
+   getEmployeesStepDetail( id: number ) {
+      this.employeesRecruitmentService.getEmployeesStepDetail( id ).subscribe( data => {
+         this.employeesRecruitmentSteps = data;
+      } );
    }
 
    // Redirecciona a la pantalla dependiendo del paso y del rol del usuario
    redirecStep( recruitmentSteps: EmployeeRecruitmentSteps, ) {
-      this.selectionStepService.get( recruitmentSteps.idProcesoPaso ).subscribe(data=>{
+      this.selectionStepService.get( recruitmentSteps.idProcesoPaso ).subscribe( data => {
          this.myStep = data;
-      });
+      } );
       // if ( this.userRoles.find( r => r.rol === 'ROLE_PROCESOSELECCION' )
-           // || (myStep !== undefined && myStep.idResponsable === this.usuarioLogueado.usuario.idUsuario) ) {
-         if ( this.myStep !== undefined && this.myStep.interfazInterna ) {
+      // || (myStep !== undefined && myStep.idResponsable === this.usuarioLogueado.usuario.idUsuario) ) {
+      if ( this.myStep !== undefined && this.myStep.interfazInterna ) {
          //    //selection-process/process-step/candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
          //    //selection-process/process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso
          //    //selection-process/process-step/call-reference/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
          //
-            this.router.navigate(
-               [ this.myStep.interfazInterna.replace( ':idStep', recruitmentSteps.idProcesoPaso.toString() )
-               .replace( ':idTerceroPublication', recruitmentSteps.idTerceroPublicacion.toString() )
-               .replace( ':idProceso', this.myStep.idProceso ? this.myStep.idProceso.toString() : '0' )
-               ] );
+         this.router.navigate(
+            [ this.myStep.interfazInterna.replace( ':idStep', recruitmentSteps.idProcesoPaso.toString() )
+            .replace( ':idTerceroPublication', recruitmentSteps.idTerceroPublicacion.toString() )
+            .replace( ':idProceso', this.myStep.idProceso ? this.myStep.idProceso.toString() : '0' )
+            ] );
+      } else {
+         let stepProcessUrl = 'selection-process/process-step/' + recruitmentSteps.idProcesoPaso.toString() + '/terceroPublication/' + recruitmentSteps.idTerceroPublicacion.toString();
+         if ( recruitmentSteps.idProcesoSeleccion ) {
+            stepProcessUrl += '/process/' + recruitmentSteps.idProcesoSeleccion.toString();
          } else {
-            let stepProcessUrl = 'selection-process/process-step/' + recruitmentSteps.idProcesoPaso.toString() + '/terceroPublication/' + recruitmentSteps.idTerceroPublicacion.toString();
-            if ( recruitmentSteps.idProcesoSeleccion ) {
-               stepProcessUrl += '/process/' + recruitmentSteps.idProcesoSeleccion.toString();
-            } else {
-               stepProcessUrl += '/process/0';
-            }
-            this.router.navigate(
-               [ stepProcessUrl ] );
-          }
+            stepProcessUrl += '/process/0';
+         }
+         this.router.navigate(
+            [ stepProcessUrl ] );
+      }
       // }
    }
 

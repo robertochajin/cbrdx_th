@@ -37,7 +37,7 @@ export class VacancyTestServices {
       .map( ( res: Response ) => res.json() as VacancyTest[] );
    }
 
-    add( f: VacancyTest ) {
+   add( f: VacancyTest ) {
       f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.masterService, f )
       .map( ( res: Response ) => res.json() );

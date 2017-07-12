@@ -2,60 +2,64 @@
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<form class="form-horizontal ">
-			<div class="form-group">
-				<p-panel header="{{ 'DOCMANAGMENT.LBL_DATOSGENERALES' | translate }}">
-					<fieldset>
-						<div class="row">
-							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_CODIGO' | translate }}:</label>
-							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.idDocumentoTercero}}</strong></label>
-							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_NOMBRE' | translate}}:</label>
-							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.nombre}}</strong></label>
-						</div>
-						<div class="row">
-							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_TIPO' | translate}}:</label>
-							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{clasificacion}}</strong></label>
-							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_CODIGOINST' | translate}}:</label>
-							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.codigoInstitucional}}</strong></label>
-						</div>
-						<div class="row">
-							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_DESCRIPCION' | translate}}:</label>
-							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.descripcion}}</strong></label>
-							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_VIGENCIA' | translate}}:</label>
-							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.vigencia}} Meses</strong></label>
-						</div>
-						<div class="row">
-							<div *ngIf="documentManagement.indicadorAdjunto">
-								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_ADJUNTARSISTEMA' | translate}}</label>
-								<label class="col-md-3 col-sm-6 col-xs-12"><strong>Si</strong></label>
+				<div class="form-group">
+					<p-panel header="{{ 'DOCMANAGMENT.LBL_DATOSGENERALES' | translate }}">
+						<fieldset>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_CODIGO' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.idDocumentoTercero}}</strong></label>
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_NOMBRE' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.nombre}}</strong></label>
 							</div>
-
-						</div>
-						<div class="row">
-							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_APLCA' | translate}}:</label>
-							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.indicadorAplica?'Si':'No'}}</strong></label>
-							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_REQUERIDOCONTRATA' | translate}}:</label>
-							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.indicadorContratacion?'Si':'No'}}</strong></label>
-						</div>
-						<div class="row">
-
-							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'LBL_HABILITADO' | translate}}:</label>
-							<label
-								class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.indicadorHabilitado?'Si':'No'}}</strong></label>
-							<div *ngIf="documentManagement.indicadorDescarga">
-								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_DESCARGARSISTEMA' | translate}}</label>
-								<label class="col-md-3 col-sm-6 col-xs-12"><strong>Si</strong></label>
-								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_ADJUNTO' | translate}}:</label>
-								<a class="btn btn-default" style="max-width: 87%; overflow: hidden;"
-									(click)="downloadFile(documentManagement.idAdjunto)">
-									<i class="fa fa-file-o" aria-hidden="true"></i>
-									{{dataUploadArchivo}}
-								</a>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_TIPO' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{clasificacion}}</strong></label>
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_CODIGOINST' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.codigoInstitucional}}</strong></label>
 							</div>
-						</div>
-					</fieldset>
-				</p-panel>
-			</div>
-		   </form>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_DESCRIPCION' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.descripcion}}</strong></label>
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_VIGENCIA' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.vigencia}} Meses</strong></label>
+							</div>
+							<div class="row">
+								<div *ngIf="documentManagement.indicadorAdjunto">
+									<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_ADJUNTARSISTEMA' |
+										translate}}</label>
+									<label class="col-md-3 col-sm-6 col-xs-12"><strong>Si</strong></label>
+								</div>
+							
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_APLCA' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.indicadorAplica?'Si':'No'}}</strong></label>
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_REQUERIDOCONTRATA' |
+									translate}}:</label>
+								<label
+									class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.indicadorContratacion?'Si':'No'}}</strong></label>
+							</div>
+							<div class="row">
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'LBL_HABILITADO' | translate}}:</label>
+								<label
+									class="col-md-3 col-sm-6 col-xs-12"><strong>{{documentManagement.indicadorHabilitado?'Si':'No'}}</strong></label>
+								<div *ngIf="documentManagement.indicadorDescarga">
+									<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_DESCARGARSISTEMA' |
+										translate}}</label>
+									<label class="col-md-3 col-sm-6 col-xs-12"><strong>Si</strong></label>
+									<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'DOCMANAGMENT.LBL_ADJUNTO' | translate}}:</label>
+									<a class="btn btn-default" style="max-width: 87%; overflow: hidden;"
+									   (click)="downloadFile(documentManagement.idAdjunto)">
+										<i class="fa fa-file-o" aria-hidden="true"></i>
+										{{dataUploadArchivo}}
+									</a>
+								</div>
+							</div>
+						</fieldset>
+					</p-panel>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

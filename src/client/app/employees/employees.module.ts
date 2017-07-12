@@ -29,6 +29,7 @@ import { EmployeesAttachmentsModule } from '../employees-attatchments/employees-
 import { EmployeesAttachmentsComponent } from '../employees-attatchments/employees-attachments.component';
 import { EmployeesRecruitmentComponent } from '../employees-recruitment/employees-recruitment.component';
 import { EmployeesRecruitmentService } from '../_services/employees-recruitment.service';
+import { EmployeesDetailPerfilComponent } from '../selecttion-process-apply/employees-detail-perfil.component';
 
 @NgModule( {
               imports: [
@@ -47,11 +48,12 @@ import { EmployeesRecruitmentService } from '../_services/employees-recruitment.
               ],
 
               declarations: [ EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent,
-                 EmployeesAdditionalDataComponent,EmployeesViewDetailComponent, EmployeesCurriculumVitaeComponent, EmployeesRecruitmentComponent
+                 EmployeesAdditionalDataComponent, EmployeesViewDetailComponent, EmployeesCurriculumVitaeComponent,
+                 EmployeesRecruitmentComponent,
+                 EmployeesDetailPerfilComponent
               ],
               bootstrap: [ EmployeesComponent ],
-              providers: [ EmployeesService, ListEmployeesService, PoliticalDivisionService, NavService, ListaService,
-                 AdjuntosService, ConstanteService, EmployeesRecruitmentService ],
+              providers: [ EmployeesService, ListEmployeesService, PoliticalDivisionService, NavService, ListaService, AdjuntosService, ConstanteService ],
               exports: [ EmployeesComponent ]
            } )
 export class EmployeesModule {

@@ -18,7 +18,7 @@
 								        (click)="curriculum()"
 								        pButton></button>
 								<!--<button icon="fa-dot-circle-o" label="{{'PROCESOSELECCION.LBL_CUESTIONARIOS' | translate }}" type="button"-->
-								        <!--disabled pButton></button>-->
+								<!--disabled pButton></button>-->
 							</div>
 						</div>
 					</div>
@@ -67,7 +67,7 @@
 									            [minDate]="minDateEx" [monthNavigator]="true" [yearNavigator]="true"
 									            [locale]="es" readonlyInput="readonlyInput"
 									            dataType="date" [(ngModel)]="medicalExam.fechaProgramada" [showTime]="true"
-									            dateFormat="yy'-'mm'-'dd" ></p-calendar>
+									            dateFormat="yy'-'mm'-'dd"></p-calendar>
 									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="fex.submitted && !fechaFin.valid">
 										<i class="fa fa-close"></i>
 										{{'PROCESOSELECCION.LBL_FECHA' | translate }} {{'LBL_REQUERIDO' | translate }}

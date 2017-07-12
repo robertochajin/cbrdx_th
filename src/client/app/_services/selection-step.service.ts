@@ -123,8 +123,9 @@ export class SelectionStepService {
       return this.authHttp.get( this.serviceURL + 'tercerosCentralesRiesgos/tercero/'+id )
       .map( ( res: Response ) => res.json() as CentralRisk[] );
    }
-   getHistoryByIdEmployee(id:number ) {
-      return this.authHttp.get( this.serviceURL + 'tercerosPublicaciones/historic/'+id )
+
+   getHistoryByIdEmployee( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'tercerosPublicaciones/historic/' + id )
       .map( ( res: Response ) => res.json() as PostulationHistory[] );
    }
 
