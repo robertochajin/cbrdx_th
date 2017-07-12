@@ -6,7 +6,7 @@ export class MedicalExam {
    codigoVerificacion: string;
    indicadorVerificado: boolean;
    indicadorOtraInstitucion: boolean;
-   idMaestroCuestionarios: number;
+   idMaestroRespuesta: number;
    idMedicoResponsable: number;
    idInstitucionMedica: number;
    fechaProgramada: Date;

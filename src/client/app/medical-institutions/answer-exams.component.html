@@ -73,8 +73,12 @@
 						<hr>
 						<div class="row">
 							<div class="col-md-1"></div>
-							<div class="col-md-10">
-								acá cuestionario
+							<div class="col-md-10" *ngIf="maestroRespuestas.idMaestroRespuesta">
+								<solutions-questionnaires (finish)="finishQuestionnaire($event)"
+								                          [maestroRespuestas]="maestroRespuestas"
+								                          *ngIf="!showFinish"
+								></solutions-questionnaires>
+								div
 							</div>
 						</div>
 						<hr>
