@@ -180,10 +180,10 @@ import { QuestionnairesUpdateComponent } from './questionnaires/questionnaires-u
 import { SolutionsQuestionnairesComponent } from './questionnaires/solutions-questionnaire/solutions-questionnaires.component';
 
 
-import { EmployeesAttatchmentsComponent } from './employees-attatchments/employees-attatchments.component';
 import { MedicalExamComponent } from './selection-process/medical-exam.component';
 import { MedicalExamInformedConsentComponent } from './employees-clinical-information/informed-consent.component';
 import { AnswerExamsComponent } from './medical-institutions/answer-exams.component';
+import { EmployeesAttachmentsComponent } from './employees-attatchments/employees-attachments.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
