@@ -21,7 +21,9 @@ import { References } from '../employees-references/references';
 import { ReferencesService } from '../employees-references/references.service';
 import { DivisionPoliticaService } from '../_services/divisionPolitica.service';
 
-
+//import * as html2canvas from 'html2canvas';
+let jsPDF = require('jspdf/dist/jspdf.min.js');
+let html2canvas = require('html2canvas/dist/html2canvas.js');
 
 
 @Component( {
@@ -51,6 +53,7 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
    direcccionResidencia:string='';
    fechaNacimicento:string='';
    svcThUrl = '<%= SVC_TH_URL %>/api/upload';
+
 
    constructor( private employeeService: EmployeesService,
       private route: ActivatedRoute,
@@ -203,6 +206,39 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
       this.location.back();
    }
 
+   getPDF(): void {
+
+      let nombrePdf = this.employee.nombreCompleto.trim();
+      nombrePdf = nombrePdf.replace(/ /g, '-');
+
+      let doc = new jsPDF('p', 'mm', 'a4');
+      let element: any = jQuery("#CV");
+
+      html2canvas(element,  {background: 'white'}).then((canvas: any) => {
+
+         let width = canvas.width;
+         let height = canvas.height;
+
+         let mwidth = Math.floor(width * 0.264583)+30;
+         let mheight = Math.floor(height * 0.264583)+40;
+
+         let imgData = canvas.toDataURL('image/png');
+
+         doc.deletePage(1);
+         doc.addPage(mwidth, mheight);
+         doc.addImage(imgData, 'PNG', 10, 20);
+
+         /*
+         doc.setFontSize(8);
+         doc.setFontType("italic");
+         height = height + 5;
+         doc.text(20, height, 'Crezcamos S.A. © Todos los derechos Reservados - PDF Generado por Gestionamos - Powered Ciberdix');
+         */
+
+         doc.save('CV-' + nombrePdf + '.pdf');
+
+      })
+   }
 
 }
 

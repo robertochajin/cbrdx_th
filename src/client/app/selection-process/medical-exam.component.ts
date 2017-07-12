@@ -23,6 +23,8 @@ import { MedicalExam } from '../_models/medicalExam';
 import { MedicalInstitutionService } from '../_services/medical-institutions.service';
 import { MedicalInstitution } from '../_models/medical-institutions';
 import { MedicalExamService } from '../_services/medical-exam.service';
+import { MasterAnswersService } from '../_services/masterAnswers.service';
+import { MasterAnswers } from '../_models/masterAnswers';
 
 @Component( {
                moduleId: module.id,
@@ -39,6 +41,8 @@ export class MedicalExamComponent implements OnInit {
    public approvalOptions: SelectItem[] = [];
    public candidateProcess: CandidateProcess = new CandidateProcess();
    private es: any;
+   masterAnswer: MasterAnswers = new MasterAnswers();
+   showQuestionnaire = false;
    private minDate: Date = new Date();
    private stepStates: ListaItem[] = [];
    private desitionList: ListaItem[] = [];
@@ -69,6 +73,7 @@ export class MedicalExamComponent implements OnInit {
       private listaService: ListaService,
       private confirmationService: ConfirmationService,
       private rolesService: RolesService,
+      private masterAnswersService: MasterAnswersService,
       private employeesService: EmployeesService,
       private vacanciesService: VacanciesService,
       private candidateProcessService: CandidateProcessService,
@@ -141,8 +146,16 @@ export class MedicalExamComponent implements OnInit {
                         // obtener examen medico
                         this.medicalExamService.getByIdProceso( this.candidateProcess.idProcesoSeleccion ).subscribe( rs => {
                            this.medicalExam = rs;
+                           this.medicalExam.fechaProgramada = new Date(this.medicalExam.fechaProgramada);
                            if ( this.listEstExaMed.find( x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'RESPOND' ) {
                               this.respondido = true;
+                           }
+
+                           if(this.medicalExam.idMaestroRespuesta){
+                              this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe( res => {
+                                 this.masterAnswer = res;
+                                 this.showQuestionnaire = true;
+                              } );
                            }
                         } );
                      } );
