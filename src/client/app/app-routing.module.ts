@@ -179,10 +179,12 @@ import { QuestionnairesAddComponent } from './questionnaires/questionnaires-add.
 import { QuestionnairesUpdateComponent } from './questionnaires/questionnaires-update.component';
 import { SolutionsQuestionnairesComponent } from './questionnaires/solutions-questionnaire/solutions-questionnaires.component';
 
+
 import { EmployeesAttatchmentsComponent } from './employees-attatchments/employees-attatchments.component';
 import { MedicalExamComponent } from './selection-process/medical-exam.component';
 import { MedicalExamInformedConsentComponent } from './employees-clinical-information/informed-consent.component';
 import { AnswerExamsComponent } from './medical-institutions/answer-exams.component';
+
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
@@ -243,6 +245,9 @@ const routes = [
    {
       path: 'employees/detail/:tercero/no-formal-studies/update/:id', component: NoFormalStudiesUpdateComponent, canActivate: [ AuthGuard ]
    },
+
+   // Adjuntos de tercero
+   { path: 'employees/detail/:tercero/employees-attachments', component: EmployeesAttachmentsComponent, canActivate: [ AuthGuard ] },
 
    // Experiencia laboral
 
@@ -428,8 +433,6 @@ const routes = [
    { path: 'questionnaries/add', component: QuestionnairesAddComponent },
    { path: 'questionnaries/update/:id', component: QuestionnairesUpdateComponent },
 
-   // Descarga de documentos de Terceros
-   { path: 'employees-attatchments', component: EmployeesAttatchmentsComponent },
 ];
 
 @NgModule( {

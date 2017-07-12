@@ -26,6 +26,7 @@ import { AttachmentsService } from '../_services/attachments-step.service';
 import { AttachmentsComponent } from './attachments.component';
 import { CandidateTestComponent } from './candidate-test.component';
 import { CallReferenceComponent } from './call-reference.component';
+import { VacancyTestServices } from '../_services/vacancyTest.service';
 import { PostulationHistoryComponent } from './postulation-history.component';
 import { MedicalExamComponent } from './medical-exam.component';
 import { MedicalExamService } from '../_services/medical-exam.service';
@@ -65,6 +66,7 @@ import { MedicalExamService } from '../_services/medical-exam.service';
                  SelectionStepService,
                  AttachmentsService,
                  MedicalExamService,
+                 VacancyTestServices,
                  PublicationQuestionnairesService,
                  UsuariosService
               ],
