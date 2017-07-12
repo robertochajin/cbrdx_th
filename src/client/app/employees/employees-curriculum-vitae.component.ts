@@ -21,6 +21,7 @@ import { References } from '../employees-references/references';
 import { ReferencesService } from '../employees-references/references.service';
 import { DivisionPoliticaService } from '../_services/divisionPolitica.service';
 
+import * as html2canvas from 'html2canvas';
 let jsPDF = require('jspdf/dist/jspdf.min.js');
 
 
