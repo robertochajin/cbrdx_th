@@ -21,7 +21,7 @@ export class DocumentManagementService {
    }
 
    getAll() {
-      return this.authHttp.get( this.serviceURL ).map( ( res: Response ) => res.json() );
+      return this.authHttp.get( this.serviceURL ).map( ( res: Response ) => res.json() as DocumentManagement[]);
    }
 
    getById( id: number ) {

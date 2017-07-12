@@ -179,7 +179,12 @@ import { QuestionnairesAddComponent } from './questionnaires/questionnaires-add.
 import { QuestionnairesUpdateComponent } from './questionnaires/questionnaires-update.component';
 import { SolutionsQuestionnairesComponent } from './questionnaires/solutions-questionnaire/solutions-questionnaires.component';
 
-import { EmployeesAttachmentsComponent } from './employees-attatchments/employees-attachments.component';
+
+import { EmployeesAttatchmentsComponent } from './employees-attatchments/employees-attatchments.component';
+import { MedicalExamComponent } from './selection-process/medical-exam.component';
+import { MedicalExamInformedConsentComponent } from './employees-clinical-information/informed-consent.component';
+import { AnswerExamsComponent } from './medical-institutions/answer-exams.component';
+
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
@@ -415,6 +420,13 @@ const routes = [
    { path: 'selection-process/process-step/candidate-test/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CandidateTestComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/process-step/call-reference/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CallReferenceComponent },
    { path: 'selection-process/process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
+   { path: 'selection-process/process-step/medical-exam/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: MedicalExamComponent },
+
+   // consentimiento informado
+   { path: 'informed-consent/exam/:idExamen/terceroPublicacion/:idTerceroPublication', component: MedicalExamInformedConsentComponent },
+   { path: 'answer-exams/exam/:idExamen/terceroPublicacion/:idTerceroPublication', component: AnswerExamsComponent },
+
+
    //  Cuestionarios
    { path: 'solutions/:id', component: SolutionsQuestionnairesComponent },
    { path: 'questionnaries', component: QuestionnairesComponent },

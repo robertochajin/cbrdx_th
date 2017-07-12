@@ -28,6 +28,8 @@ import { CandidateTestComponent } from './candidate-test.component';
 import { CallReferenceComponent } from './call-reference.component';
 import { VacancyTestServices } from '../_services/vacancyTest.service';
 import { PostulationHistoryComponent } from './postulation-history.component';
+import { MedicalExamComponent } from './medical-exam.component';
+import { MedicalExamService } from '../_services/medical-exam.service';
 
 @NgModule( {
               imports: [
@@ -49,6 +51,7 @@ import { PostulationHistoryComponent } from './postulation-history.component';
                  CandidateTestComponent,
                  CentralRiskComponent,
                  CallReferenceComponent,
+                 MedicalExamComponent,
                  PostulationHistoryComponent,
                  SafePipe
               ],
@@ -62,6 +65,7 @@ import { PostulationHistoryComponent } from './postulation-history.component';
                  CandidateProcessService,
                  SelectionStepService,
                  AttachmentsService,
+                 MedicalExamService,
                  VacancyTestServices,
                  PublicationQuestionnairesService,
                  UsuariosService
