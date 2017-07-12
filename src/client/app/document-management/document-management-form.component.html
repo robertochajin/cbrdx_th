@@ -17,9 +17,9 @@
 				<div class="ui-grid-col-12">
 					<label for="nombre">{{ 'DOCMANAGMENT.LBL_NOMBRE' | translate }}</label>
 					<input id="nombre" name="nombre" #nombreDoc="ngModel" pInputText type="text" maxlength="200"
-							 (keyup)="capitalize($event)" [(ngModel)]="documentManagement.nombre" required/>
+					       (keyup)="capitalize($event)" [(ngModel)]="documentManagement.nombre" required/>
 					<div class="ui-message ui-messages-error ui-corner-all"
-						  *ngIf="f.submitted && !nombreDoc.valid">
+					     *ngIf="f.submitted && !nombreDoc.valid">
 						<i class="fa fa-close"></i>
 						{{ 'DOCMANAGMENT.LBL_NOMBRE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 					</div>
@@ -29,12 +29,12 @@
 				<div class="ui-grid-col-8">
 					<label for="idTipoDocumento">{{ 'DOCMANAGMENT.LBL_TIPO' | translate }}</label>
 					<p-dropdown id="idTipoDocumento" name="idTipoDocumento" required="true"
-									[options]="listTypeDoc" [autoWidth]="false"
-									[(ngModel)]="documentManagement.idClasificacionDocumento"
-									#idTipoDoc="ngModel"
+					            [options]="listTypeDoc" [autoWidth]="false"
+					            [(ngModel)]="documentManagement.idClasificacionDocumento"
+					            #idTipoDoc="ngModel"
 					></p-dropdown>
 					<div class="ui-message ui-messages-error ui-corner-all"
-						  *ngIf="f.submitted && !idTipoDoc.valid">
+					     *ngIf="f.submitted && !idTipoDoc.valid">
 						<i class="fa fa-close"></i>
 						{{ 'DOCMANAGMENT.LBL_TIPO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 					</div>
@@ -69,12 +69,12 @@
 				<div class="ui-grid-col-2">
 					<label for="vigencia">{{ 'DOCMANAGMENT.LBL_VIGENCIA' | translate }}</label>
 					<p-dropdown id="vigencia" name="vigencia" required="true"
-									[options]="listValidity" [autoWidth]="false"
-									[(ngModel)]="documentManagement.vigencia"
-									#vigenc="ngModel"
+					            [options]="listValidity" [autoWidth]="false"
+					            [(ngModel)]="documentManagement.vigencia"
+					            #vigenc="ngModel"
 					></p-dropdown>
 					<div class="ui-message ui-messages-error ui-corner-all"
-						  *ngIf="f.submitted && !vigenc.valid">
+					     *ngIf="f.submitted && !vigenc.valid">
 						<i class="fa fa-close"></i>
 						{{ 'DOCMANAGMENT.LBL_VIGENCIA' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 					</div>
@@ -127,7 +127,7 @@
 					            label="{{ 'DOCMANAGMENT.LBL_REQUERIDOCONTRATA' | translate }}"
 					            #indicador="ngModel"></p-checkbox>
 				</div>
-
+				
 				<div class="ui-grid-col-4">
 					<p-checkbox binary="true" id="indicadoraplica" name="indicadoraplica"
 					            [(ngModel)]="documentManagement.indicadorAplica"
@@ -136,12 +136,12 @@
 				</div>
 				<div class="ui-grid-col-4">
 					<p-checkbox binary="true" id="indicadorhabilitado" name="indicadorhabilitado"
-									[(ngModel)]="documentManagement.indicadorHabilitado"
-									label="{{ 'LBL_HABILITADO' | translate }}"
-									#indicador="ngModel"></p-checkbox>
+					            [(ngModel)]="documentManagement.indicadorHabilitado"
+					            label="{{ 'LBL_HABILITADO' | translate }}"
+					            #indicador="ngModel"></p-checkbox>
 				</div>
 			</div>
-
+			
 			<div class="ui-grid-row form-footer-buttons">
 				<div class="ui-grid-col-4"></div>
 				<div class="ui-grid-col-1">

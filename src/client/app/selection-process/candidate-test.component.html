@@ -13,14 +13,14 @@
 							<h2>{{candidate.nombreCompleto}}</h2>
 							<h4>{{candidate.tipoDocumento}} - {{candidate.numeroDocumento}}</h4>
 							<span>{{candidate.fechaNacimiento}} ({{candidate.edad}})</span>
-							<div  class="perfil-footer-button">
+							<div class="perfil-footer-button">
 								<button icon="fa-address-book-o" label="{{'PROCESOSELECCION.LBL_VERHOJADEVIDA' | translate }}" type="button"
-										  (click)="curriculum()"
-										  pButton></button>
+								        (click)="curriculum()"
+								        pButton></button>
 								<button icon="fa-dot-circle-o" label="{{'PROCESOSELECCION.LBL_CUESTIONARIOS' | translate }}" type="button"
-										  disabled pButton></button>
+								        disabled pButton></button>
 							</div>
-
+						
 						</div>
 					</div>
 				</fieldset>
@@ -30,92 +30,218 @@
 </div>
 <div class="row">
 	<div class="col-md-10 col-md-offset-1">
-		<p-panel header="{{'PROCESOSELECCION.LBL_REVISION' | translate}}">
-					<div class="row">
-						<div class="col-md-12">
-							<p>{{step.descripcion}}</p>
+		<p-panel header="{{'PROCESOSELECCION.LBL_PRUEBASTECNICAS' | translate}}">
+			<div class="row">
+				<div class="col-md-12">
+					<p>{{step.descripcion}}</p>
+				</div>
+			</div>
+			<form class="form-horizontal">
+				<fieldset>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-12">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'PROCESOSELECCION.LBL_POSTULANTEA' | translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12">{{publication.cargo}}</label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_OFICINA' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12">{{publication.estructuraFisica}}</label>
+							</div>
+						</div>
+						<div class="row">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_AREA' | translate }}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12">{{publication.area}}</label>
 						</div>
 					</div>
-					<form class="form-horizontal">
-						<fieldset>
-							<div class="form-group">
-								<div class="row">
-									<div class="col-md-12">
-										<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'PROCESOSELECCION.LBL_POSTULANTEA' | translate
-											}}:</label>
-										<label class="col-md-3 col-sm-6 col-xs-12">{{publication.cargo}}</label>
-										
-										<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_OFICINA' | translate }}:</label>
-										<label class="col-md-3 col-sm-6 col-xs-12">{{publication.estructuraFisica}}</label>
-									</div>
-								</div>
-								<div class="row">
-									<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_AREA' | translate }}:</label>
-									<label class="col-md-3 col-sm-6 col-xs-12">{{publication.area}}</label>
-								</div>
-							</div>
-						</fieldset>
-					</form>
-					<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="process">
-						<fieldset *ngIf="!readonly">
-							<div class="row">
-								<div class="form-group col-md-12">
-									<label > {{'PROCESOSELECCION.LBL_COMPROMISOREVISION' | translate }}:</label>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-md-6" >
-									<label for="validStep">* {{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}</label>
-									<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
-									            [autoWidth]="false" [(ngModel)]="indApproval" required></p-dropdown>
-								</div>
-								<div class="form-group col-md-6">
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-md-12" >
-									<label for="observacion">* {{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}</label>
-									<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #observa="ngModel"
-									          [(ngModel)]="candidateProcess.observacion" required="true" class="form-control"
-									          maxlength="500"></textarea>
-									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !observa.valid">
-										<i class="fa fa-close"></i>
-										{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }} {{'LBL_REQUERIDO' | translate }}
-									</div>
-								</div>
-							</div>
-							
-							<div class="row form-footer-buttons">
-								<div class="form-group col-md-12">
-									<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
-									<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
-									        pButton></button>
-								
-								</div>
-							</div>
-						</fieldset>
-						<fieldset *ngIf="readonly">
-							<div class="row">
-								<div class="form-group col-md-12">
-									<label for="validStep">{{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
-									<p>{{candidateProcess.estadoDiligenciado}}</p>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-md-12">
-									<label for="observacion">{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}:</label>
-									<p>{{candidateProcess.observacion}}</p>
-								</div>
-							</div>
-							<div class="row form-footer-buttons">
-								<div class="form-group col-md-12" >
-									<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
-									        pButton (click)="goBack(false)"></button>
-								</div>
-							</div>
-						</fieldset>
-					</form>
+				</fieldset>
+			</form>
+			
+			<form (ngSubmit)="frq.valid && addTest()" #frq="ngForm" novalidate id="formulario2"
+			      *ngIf="!guardandoResoursesQues && !definingTest">
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-12">
+						<label><h3>{{'REQUERIMIENTOPERSONAL.LBL_CUESTIONARIOS' | translate}} </h3></label>
+					</div>
+				</div>
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-9">
+						<label for="questionary">* {{'REQUERIMIENTOPERSONAL.LBL_CUESTIONARIO' | translate }}</label>
+						<p-dropdown id="questionary" name="questionary" #ngQuestionary="ngModel" [options]="listQuest" [autoWidth]="false"
+						            [(ngModel)]="questId" required></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="frq.submitted && !ngQuestionary.valid">
+							<i class="fa fa-close"></i>
+							{{'REQUERIMIENTOPERSONAL.LBL_CUESTIONARIO' | translate }} {{'LBL_REQUERIDO' | translate }}
+						</div>
+					</div>
+					<div class="ui-grid-col-3">
+						<button class="btn-block" pButton icon="fa-plus" label="{{'BTN_AGREGAR' | translate}}" type="submit"></button>
+					</div>
+				</div>
+			</form>
+			
+			<div class="row" *ngIf="!definingTest">
+				<div class="col-md-12">
+					<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="vacancyTests" [paginator]="true"
+					             [rows]="10" [responsive]="true">
+						<p-column field="pruebaTecnica" header="{{'PROCESOSELECCION.LBL_PRUEBASTECNICA' | translate}}"
+						          [sortable]="true"></p-column>
+						<p-column field="indicadorRealiza" header="{{'PROCESOSELECCION.LBL_PRUEBAREALIZADA' | translate}}"
+						          [sortable]="true">
+							<template let-recurso="rowData" pTemplate="body">
+								{{recurso.indicadorRealiza !== null ? (recurso.indicadorRealiza ? 'Realizada' : 'Sin realizar') : 'Sin
+								definir'}}
+							</template>
+						</p-column>
+						<p-column header="Acciones" styleClass="datatable-col-action">
+							<template let-recurso="rowData" pTemplate="body">
+								<button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip"
+								        title="{{'BTN_EDITAR' | translate}}"
+								        pButton (click)="definegTest(recurso)"
+								></button>
+								<button *ngIf="recurso.idAdjunto" type="button" class="ui-button ui-button-success btn" icon="fa-download"
+								        data-toggle="tooltip"
+								        title="{{'BTN_DESCARGAR' | translate}}"
+								        pButton (click)="downloadFile(recurso.idAdjunto)"
+								></button>
+							</template>
+						</p-column>
+					</p-dataTable>
+				</div>
+			</div>
+			
+			<form *ngIf="definingTest" name="tecniqueTest" (ngSubmit)="tf.valid && updateTest()" #tf="ngForm" novalidate id="tecniqueTest">
 				
+				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label>{{ 'PROCESOSELECCION.LBL_NOTAPRUEBATECNICA' | translate }}:</label>
+							<label>{{testToDefine.pruebaTecnica}}</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="state">* {{'PROCESOSELECCION.LBL_ESTADOPRUEBATECNICA' | translate }}</label>
+							<p-dropdown id="state" name="state" #ngState="ngModel" [options]="testStates" [autoWidth]="false"
+							            [(ngModel)]="testToDefine.indicadorRealiza" required></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="tf.submitted && !ngState.valid">
+								<i class="fa fa-close"></i>
+								{{'PROCESOSELECCION.LBL_ESTADOPRUEBATECNICA' | translate }} {{'LBL_REQUERIDO' | translate }}
+							</div>
+						</div>
+						<div class="form-group col-md-6" *ngIf="testToDefine.indicadorRealiza === true">
+							<label for="nota">{{ 'PROCESOSELECCION.LBL_NOTAPRUEBATECNICA' | translate }}:</label>
+							<input id="nota" type="text" pInputText name="nota" class="form-control"
+							       [(ngModel)]="testToDefine.nota" maxLength="200"
+							       #ngNota="ngModel" required
+							/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="tf.submitted && !ngNota.valid">
+								<i class="fa fa-close"></i>
+								{{ 'PROCESOSELECCION.LBL_NOTAPRUEBATECNICA' | translate }} {{'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="obs">{{ 'PROCESOSELECCION.LBL_OBSERVACIONPRUEBATECNICA' | translate }}:</label>
+							<textarea id="obs" name="obs" pInputTextarea
+							          [(ngModel)]="testToDefine.observacion" maxLength="500"
+							          #ngObs="ngModel" maxlength="" required></textarea>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="tf.submitted && !ngObs.valid">
+								<i class="fa fa-close"></i>
+								{{ 'PROCESOSELECCION.LBL_OBSERVACIONPRUEBATECNICA' | translate }} {{'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-6">
+							<div class="ui-grid-col-3">
+								<label>{{'LBL_ADJUNTAR' | translate}} </label>
+								<div *ngIf="testToDefine.idAdjunto != null" class="btn-group" role="group" style="display: block;">
+									<a class="btn btn-default" style="max-width: 87%; overflow: hidden;"
+									   (click)="downloadFile(testToDefine.idAdjunto)">
+										<i class="fa fa-file-o" aria-hidden="true"></i>
+										{{dataUploadArchivo}}
+									</a>
+									<a class="btn btn-danger" (click)="uploadAgain(false)">
+										<i class="fa fa-times" aria-hidden="true"></i>
+									</a>
+								</div>
+								<p-fileUpload *ngIf="testToDefine.idAdjunto == null" name="file" url="{{svcThUrl}}" auto="true"
+								              class="upload-avatar"
+								              chooseLabel="{{'LBL_ADJUNTAR' | translate}}"
+								              (onBeforeSend)="onBeforeSend($event)"
+								              (onSelect)="onSelect($event, $event.files)"
+								              (onUpload)="uploadingOk($event)"
+								              maxFileSize="{{fsize}}" accept="{{ftype}}">
+								</p-fileUpload>
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+						</div>
+					</div>
+				</div>
+				
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<a (click)="cancelDefiningTest((tf.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+						<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+						        pButton></button>
+					
+					</div>
+				</div>
+			
+			</form>
+			
+			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="process" *ngIf="!definingTest">
+				<fieldset *ngIf="!readonly">
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="validStep">* {{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}</label>
+							<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
+							            [autoWidth]="false" [(ngModel)]="indApproval" required></p-dropdown>
+						</div>
+						<div class="form-group col-md-6">
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-12">
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !allTestDefined">
+								<i class="fa fa-close"></i>
+								{{ 'PROCESOSELECCION.MSG_DEFINIRTODASLASPRUEBAS' | translate }}
+							</div>
+						</div>
+					</div>
+					
+					<div class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+							<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+							        pButton></button>
+						
+						</div>
+					</div>
+				</fieldset>
+				<fieldset *ngIf="readonly">
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="validStep">{{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
+							<p>{{candidateProcess.estadoDiligenciado}}</p>
+						</div>
+					</div>
+					<div class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+							        pButton (click)="goBack(false)"></button>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		
 		
 		</p-panel>
 	</div>

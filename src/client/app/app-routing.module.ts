@@ -6,6 +6,8 @@ import { EmployeesAddComponent } from './employees/employees-add.component';
 import { EmployeesUpdateComponent } from './employees/employees-update.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { EmployeesAdditionalDataComponent } from './employees/employees-additional-data.component';
+import { EmployeesDetailPerfilComponent } from './selecttion-process-apply/employees-detail-perfil.component';
+
 // historia employees estates
 import { EmployeesEstateComponent } from './employees-estate/employee-estate.component';
 import { EmployeesEstateAddComponent } from './employees-estate/employee-estate-add.component';
@@ -158,7 +160,8 @@ import { StepProcessComponent } from './selection-process/step-process.component
 import { CandidatesComponent } from './selection-process/candidates.component';
 import { CandidateRevisionComponent } from './selection-process/candidate-revision.component';
 import { CentralRiskComponent } from './selection-process-risks/central-risk.component';
-
+import { VacancyApplyComponent } from './selecttion-process-apply/apply-detail.component';
+import { ApplyQuestionnairesComponent } from './selecttion-process-apply/questionnaires.component';
 
 // hoja de vida
 import { EmployeesCurriculumVitaeComponent } from './employees/employees-curriculum-vitae.component';
@@ -178,7 +181,11 @@ import { QuestionnairesComponent } from './questionnaires/questionnaires.compone
 import { QuestionnairesAddComponent } from './questionnaires/questionnaires-add.component';
 import { QuestionnairesUpdateComponent } from './questionnaires/questionnaires-update.component';
 import { SolutionsQuestionnairesComponent } from './questionnaires/solutions-questionnaire/solutions-questionnaires.component';
+import { SolutionsQuestionnairesDetailComponent } from './questionnaires/solutions-questionnaire/solutions-questionnaires-detail.component';
 
+import { MedicalExamComponent } from './selection-process/medical-exam.component';
+import { MedicalExamInformedConsentComponent } from './employees-clinical-information/informed-consent.component';
+import { AnswerExamsComponent } from './medical-institutions/answer-exams.component';
 import { EmployeesAttachmentsComponent } from './employees-attatchments/employees-attachments.component';
 
 const routes = [
@@ -409,20 +416,52 @@ const routes = [
    { path: 'selection-process/add-step', component: StepEditComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/update-step/:idStep', component: StepEditComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
+   {
+      path: 'selection-process/process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso',
+      component: StepProcessComponent, canActivate: [ AuthGuard ]
+   },
    { path: 'selection-process/candidates-list/:idPublication', component: CandidatesComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso', component: CentralRiskComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/process-step/candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CandidateRevisionComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/process-step/candidate-test/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CandidateTestComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/process-step/call-reference/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CallReferenceComponent },
-   { path: 'selection-process/process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
+   {
+      path: 'selection-process/process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: CentralRiskComponent, canActivate: [ AuthGuard ]
+   },
+   {
+      path: 'selection-process/process-step/candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: CandidateRevisionComponent, canActivate: [ AuthGuard ]
+   },
+   {
+      path: 'selection-process/process-step/candidate-test/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: CandidateTestComponent, canActivate: [ AuthGuard ]
+   },
+   {
+      path: 'selection-process/process-step/call-reference/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: CallReferenceComponent
+   },
+   {
+      path: 'selection-process/process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: StepProcessComponent, canActivate: [ AuthGuard ]
+   },
+   {
+      path: 'selection-process/process-step/medical-exam/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: MedicalExamComponent
+   },
+
+   // consentimiento informado
+   { path: 'informed-consent/exam/:idExamen/terceroPublicacion/:idTerceroPublication', component: MedicalExamInformedConsentComponent },
+   { path: 'answer-exams/exam/:idExamen/terceroPublicacion/:idTerceroPublication', component: AnswerExamsComponent },
+
+   // Aplicar a vacantes
+   { path: 'apply-vacancy/publications-detail/:idPublication', component: VacancyApplyComponent },
+   { path: 'apply-vacancy/employee-profile/:idTercerosPublicaciones', component: EmployeesDetailPerfilComponent },
+   { path: 'apply-vacancy/questionnaires/:idTercerosPublicaciones', component: ApplyQuestionnairesComponent },
+
    //  Cuestionarios
    { path: 'solutions/:id', component: SolutionsQuestionnairesComponent },
+   { path: 'solutions/detail/:id', component: SolutionsQuestionnairesDetailComponent },
    { path: 'questionnaries', component: QuestionnairesComponent },
    { path: 'questionnaries/add', component: QuestionnairesAddComponent },
    { path: 'questionnaries/update/:id', component: QuestionnairesUpdateComponent },
-
-];
+   ];
 
 @NgModule( {
               imports: [

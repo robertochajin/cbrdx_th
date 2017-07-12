@@ -3,7 +3,7 @@
 <div *ngIf="!viewpostulations">
 	<div class="row datable-header">
 		<div class="col-md-6 col-xs-12">
-			<h4>{{'PROCESOSELECCION.LBL_CANTIDADVACANTES' | translate }}:  <strong>{{numeroVacantes}}</strong></h4>
+			<h4>{{'PROCESOSELECCION.LBL_CANTIDADVACANTES' | translate }}: <strong>{{numeroVacantes}}</strong></h4>
 		</div>
 		<div class="col-md-6 col-xs-12 datatable-header-search">
 			<div class="input-group">
@@ -17,7 +17,7 @@
 	             [responsive]="true" [globalFilter]="gb">
 		<p-column header="#" styleClass="datatable-col-action">
 			<template let-cs="rowData" pTemplate="body">
-				<button  label="{{cs.cantProcesoSeleccion}}" type="button"
+				<button label="{{cs.cantProcesoSeleccion}}" type="button"
 				        pButton (click)="viewHistory( cs.idTercero )"></button>
 			</template>
 		</p-column>

@@ -8,6 +8,8 @@ import { EmployeeEstate } from '../_models/employee-estate';
 import { EmployeeEstateService } from '../_services/employee-estate.service';
 import { EmployeesService } from '../_services/employees.service';
 import { Employee } from '../_models/employees';
+import { SelectionStepService } from '../_services/selection-step.service';
+import { PostulationHistory } from '../_models/postulationHistory';
 
 @Component( {
                moduleId: module.id,
@@ -23,13 +25,13 @@ export class PostulationHistoryComponent implements OnInit {
 
    employeeEstate: EmployeeEstate = new EmployeeEstate();
    employee: Employee = new Employee();
-   listHistory: EmployeeEstate[];
+   listHistory: PostulationHistory[];
    busqueda: string;
 
    @Output()
    dismiss: EventEmitter<number> = new EventEmitter<number>();
 
-   constructor( private employeesEstateService: EmployeeEstateService,
+   constructor( private selectionStepService: SelectionStepService,
       private employeesService: EmployeesService,
       private router: Router,
       private navService: NavService,
@@ -40,12 +42,12 @@ export class PostulationHistoryComponent implements OnInit {
    ngOnInit() {
 
       if ( this.idTercero ) {
-         this.employeesService.get( this.idTercero ).subscribe(rs=>{
+         this.employeesService.get( this.idTercero ).subscribe( rs => {
             this.employee = rs;
-         });
-         this.employeesEstateService.getByEmployee( this.idTercero ).subscribe(data=>{
+         } );
+         this.selectionStepService.getHistoryByIdEmployee( this.idTercero ).subscribe( data => {
             this.listHistory = data;
-         });
+         } );
       }
    }
 

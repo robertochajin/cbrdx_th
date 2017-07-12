@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class CandidateProcess {
 
+   // ProcesoSeleccion
    public idProcesoSeleccion :number;
    public idProcesoPaso :number;
    public idEstadoDiligenciado :number;
