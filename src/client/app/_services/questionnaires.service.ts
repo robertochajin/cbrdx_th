@@ -52,6 +52,11 @@ export class QuestionnairesService {
       .map( ( res: Response ) => res.json() as QuestionnariesQuestions[] );
    }
 
+   getQuestionsEnable( id: number ) {
+      return this.authHttp.get( this.masterService + 'cuestionariosPreguntas/enabled/buscarCuestionario/' + id )
+      .map( ( res: Response ) => res.json() as QuestionnariesQuestions[] );
+   }
+
    getQuestion( id: number ) {
       return this.authHttp.get( this.masterService + 'cuestionariosPreguntas/' + id )
       .map( ( res: Response ) => res.json() as QuestionnariesQuestions );
@@ -70,6 +75,11 @@ export class QuestionnairesService {
 
    getAnswers( id: number ) {
       return this.authHttp.get( this.masterService + 'preguntasOpciones/buscarPregunta/' + id )
+      .map( ( res: Response ) => res.json() as QuestionnariesAnswers[] );
+   }
+
+   getAnswersEnabled( id: number ) {
+      return this.authHttp.get( this.masterService + 'preguntasOpciones/enabled/buscarPregunta/' + id )
       .map( ( res: Response ) => res.json() as QuestionnariesAnswers[] );
    }
 

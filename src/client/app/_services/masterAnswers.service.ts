@@ -39,7 +39,7 @@ export class MasterAnswersService {
       f.idUsuario = this.idUsuario;
       f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.masterService + 'maestrosRespuestas', f )
-      .map( ( res: Response ) => res.json() );
+      .map( ( res: Response ) => res.json() as MasterAnswers );
    };
 
    update( f: MasterAnswers ) {

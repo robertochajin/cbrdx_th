@@ -60,7 +60,7 @@ export class SolutionsQuestionnairesComponent implements OnInit {
 
    getQuestions() {
       if ( Number( this.idCuestionario ) > 0 ) {
-         this.questionnairesService.getQuestions( this.idCuestionario ).subscribe(
+         this.questionnairesService.getQuestionsEnable( this.idCuestionario ).subscribe(
             res => {
                this.preguntas = res;
                this.sortQuestions();
@@ -92,7 +92,7 @@ export class SolutionsQuestionnairesComponent implements OnInit {
 
    getAnswers() {
       if ( this.pregunta.codigoTipoPregunta === 'CHECK' || this.pregunta.codigoTipoPregunta === 'SELECT' ) {
-         this.questionnairesService.getAnswers( this.pregunta.idCuestionarioPregunta ).subscribe(
+         this.questionnairesService.getAnswersEnabled( this.pregunta.idCuestionarioPregunta ).subscribe(
             res => {
                this.opciones = res;
                this.sortOptions();
@@ -116,16 +116,16 @@ export class SolutionsQuestionnairesComponent implements OnInit {
 
    onSubmit() {
       this.saving = true;
-      this.respuesta.idCuestionarioPregunta = this.pregunta.idCuestionarioPregunta;
-      this.respuesta.idMaestroRespuesta = this.idMaestroRespuestas;
       if ( this.pregunta.codigoTipoPregunta === 'CHECK' ) {
          for ( let x of this.respuestasCheckbox ) {
+            this.respuesta.idCuestionarioPregunta = this.pregunta.idCuestionarioPregunta;
+            this.respuesta.idMaestroRespuesta = this.idMaestroRespuestas;
             this.respuesta.idPreguntaOpcion = x;
-            console.info( this.respuesta.idPreguntaOpcion );
             this.masterAnswersService.addSolution( this.respuesta ).subscribe( res => {
                this.navService.setMesage( 1, this.msgs );
                this.updateMaster( res, this.pregunta );
                this.saving = false;
+
             }, error => {
                this.navService.setMesage( 3, this.msgs );
                this.saving = false;
@@ -133,11 +133,14 @@ export class SolutionsQuestionnairesComponent implements OnInit {
          }
          this.nextQuestion();
       } else {
+         this.respuesta.idCuestionarioPregunta = this.pregunta.idCuestionarioPregunta;
+         this.respuesta.idMaestroRespuesta = this.idMaestroRespuestas;
          this.masterAnswersService.addSolution( this.respuesta ).subscribe( res => {
             this.navService.setMesage( 1, this.msgs );
             this.updateMaster( res, this.pregunta );
             this.nextQuestion();
             this.saving = false;
+            this.respuesta = new Answers();
          }, error => {
             this.navService.setMesage( 3, this.msgs );
             this.saving = false;

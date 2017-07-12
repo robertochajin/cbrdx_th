@@ -59,7 +59,7 @@
 						<div class="ui-grid-col-4" *ngIf="cuestionario.indicadorPonderacion === true">
 							<label for="valor">* {{ 'QUESTIONNAIRES.LBL_VALUE' | translate}}</label>
 							<input type="number" pInputText id="valor" name="valor"
-							       [(ngModel)]="cuestionario.valor"
+							       [(ngModel)]="cuestionario.valor" min="0"
 							       #NGvalor="ngModel" required/>
 							<div class="ui-message ui-messages-error ui-corner-all"
 							     *ngIf="f.submitted && !NGvalor.valid">
