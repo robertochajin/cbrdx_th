@@ -57,10 +57,10 @@ export class MedicalExamComponent implements OnInit {
    medicalInstitutions: SelectItem[] = [];
    listEstExaMed: ListaItem[];
    enesperarespuesta: boolean = true;
-   sinprogramar: boolean = true;
    respondido: boolean = false;
    institucionMedica: boolean = true;
    consentimiennto: boolean = false;
+   noaplicaexamen: boolean = true;
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
@@ -99,7 +99,9 @@ export class MedicalExamComponent implements OnInit {
          if ( params[ 'idStep' ] !== undefined && params[ 'idTerceroPublication' ] !== undefined ) {
             this.candidateProcess.idProcesoPaso = params[ 'idStep' ];
             this.candidateProcess.idTerceroPublicacion = params[ 'idTerceroPublication' ];
-
+            this.medicalExamService.commpareRisk( this.candidateProcess.idTerceroPublicacion ).subscribe( data => {
+               this.noaplicaexamen = data;
+            } );
             selectionStepService.get( params[ 'idStep' ] ).subscribe( step => {
                this.step = step;
 
@@ -144,6 +146,10 @@ export class MedicalExamComponent implements OnInit {
                            if ( this.listEstExaMed.find( x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'RESPOND' ) {
                               this.respondido = true;
                            }
+                           if ( this.listEstExaMed.find( x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'ENESPR' ) {
+                              this.enesperarespuesta = true;
+                           }
+                           this.medicalExam.fechaProgramada = new Date( this.medicalExam.fechaProgramada );
                         } );
                      } );
                   } else {
@@ -239,7 +245,11 @@ export class MedicalExamComponent implements OnInit {
             this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
          } );
       } else {
-         this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
+         if ( this.respondido ) {
+            this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'RESPOND' );
+         } else {
+            this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
+         }
          this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
          this.medicalExamService.add( this.medicalExam ).subscribe( data => {
             this.medicalExam = data;
