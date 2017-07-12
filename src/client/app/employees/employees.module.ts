@@ -25,6 +25,10 @@ import { EmployeesViewDetailComponent } from './employees-view-detail.component'
 import { EmployeesCurriculumVitaeComponent } from './employees-curriculum-vitae.component';
 import { AdjuntosService } from '../_services/adjuntos.service';
 import { ConstanteService } from '../_services/constante.service';
+import { EmployeesAttachmentsModule } from '../employees-attatchments/employees-attachments.module';
+import { EmployeesAttachmentsComponent } from '../employees-attatchments/employees-attachments.component';
+import { EmployeesRecruitmentComponent } from '../employees-recruitment/employees-recruitment.component';
+import { EmployeesRecruitmentService } from '../_services/employees-recruitment.service';
 import { EmployeesDetailPerfilComponent } from '../selecttion-process-apply/employees-detail-perfil.component';
 
 @NgModule( {
@@ -39,11 +43,13 @@ import { EmployeesDetailPerfilComponent } from '../selecttion-process-apply/empl
                  FormSharedModule,
                  EmployeesContactModule,
                  EmployeesEstateModule,
-                 EmployeesVehicleModule
+                 EmployeesVehicleModule,
+                 EmployeesAttachmentsModule
               ],
 
               declarations: [ EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent,
-                 EmployeesAdditionalDataComponent, EmployeesViewDetailComponent, EmployeesCurriculumVitaeComponent,
+                 EmployeesAdditionalDataComponent,EmployeesViewDetailComponent, EmployeesCurriculumVitaeComponent,
+                 EmployeesRecruitmentComponent,
                  EmployeesDetailPerfilComponent
               ],
               bootstrap: [ EmployeesComponent ],

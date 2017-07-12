@@ -44,6 +44,7 @@
   "LBL_USUARIO":"Usuario",
   "LBL_TIPO":"Tipo",
   "LBL_FECHA":"Fecha",
+  "LBL_RESULTADO":"Resultado",
   "LBL_FECHAFIN":"Fecha Fin",
   "LBL_FECHAINICIO":"Fecha Inicio",
   "LBL_GRUPO":"Grupo",
@@ -80,6 +81,7 @@
   "BTN_BORRAR":"Borrar",
   "BTN_DOWNLOAD": "Descargar",
   "BTN_UPLOAD": "Subir archivo",
+  "BTN_LLAMAR": "Llamar",
   "FIN_COMUNES":"====================================================================",
 
   "UBICACION":{
@@ -329,8 +331,11 @@
      "LBL_LIDERAZGO": "Liderazgo",
      "LBL_HOBBIES": "Hobbies",
      "LBL_CONTACTOEMERG": "Contacto en caso de emergencia",
-     "LBL_COMPETHABILI": "Competencias y habilidades"
-
+     "LBL_COMPETHABILI": "Competencias y habilidades",
+     "LBL_DOCUMENTO": "Documento",
+     "LBL_DOCUMENTOS_DESCARGAR": "Documentos a descargar",
+     "LBL_DOCUMENTOS_ADJUNTAR": "Documentos a adjuntar",
+     "LBL_EMPLOYEESADJUNTOS": "Adjuntos"
   },
 
   "INICIO_FAMILYINFORMATION":"==============================================================",
@@ -973,6 +978,23 @@
       "LBL_NOMBRE":"Nombre Archivo",
       "LBL_ARCHIVO":"Archivo",
       "LBL_VER":"Ver",
+      "LBL_LLAMARREFERENCIA":"Llamar referencias",
+      "LBL_HISTORIALPOSTULANTE":"Historial de psotulaciones de:",
+      "LBL_CANTIDADVACANTES":"Numero de vacantes solicitadas",
+      "LBL_FECHA":"Fecha",
+      "LBL_PROGRAMAREXAMEN":"Programar examen",
+      "LBL_INSTITUCION":"Institución",
+      "LBL_GENERCOD":"Generar código",
+      "LBL_CONSENTINFORMADO":"Consentimiento informado",
+      "LBL_EXAMENMEDICO":"Examen médico",
+      "LBL_PRUEBASTECNICA":"Pruebas técnica",
+      "LBL_PRUEBAREALIZADA":"Realizada",
+      "LBL_PRUEBASTECNICAS":"Pruebas técnicas",
+      "LBL_NOTAPRUEBATECNICA":"Nota",
+      "LBL_ESTADOPRUEBATECNICA":"Estado de la prueba",
+      "LBL_OBSERVACIONPRUEBATECNICA":"Observación",
+      "MSG_DEFINIRTODASLASPRUEBAS":"Es necesario que se definan todas las pruebas antes de poder definir si continua o no con el proceso",
+      "LBL_ADJUNTOPRUEBATECNICA":"Archivo adjunto",
       "":""
    },
 "MEDICALINSTITUTION":{
@@ -1042,7 +1064,16 @@
    "LBL_START": "Volver al Comienzo",
    "":""
 },
-
+   "TERCEROS": {
+      "LBL_DOCUMENTO": "Documento",
+      "LBL_DOCUMENTOS_DESCARGAR": "Documentos a descargar",
+      "LBL_DOCUMENTOS_ADJUNTAR": "Documentos a adjuntar"
+   },
+   "RECLUTAMIENTO": {
+      "LBL_FASE_PROCESO": "Fase del proceso",
+      "LBL_PERSONAL_ENCARGADO": "Personal encargado",
+      "LBL_ESTADO": "Estado"
+   },
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 

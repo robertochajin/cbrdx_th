@@ -14,30 +14,31 @@
 					<label>{{ 'DOCMANAGMENT.LBL_CODIGO' | translate }}</label><br>
 					<label><strong>{{documentManagement.idDocumentoTercero}}</strong></label>
 				</div>
-				<div class="ui-grid-col-6">
-					<label for="idTipoDocumento">{{ 'DOCMANAGMENT.LBL_TIPO' | translate }}</label>
-					<p-dropdown id="idTipoDocumento" name="idTipoDocumento" required="true"
-					            [options]="listTypeDoc" [autoWidth]="false"
-					            [(ngModel)]="documentManagement.idClasificacionDocumento"
-					            #idTipoDoc="ngModel"
-					></p-dropdown>
+				<div class="ui-grid-col-12">
+					<label for="nombre">{{ 'DOCMANAGMENT.LBL_NOMBRE' | translate }}</label>
+					<input id="nombre" name="nombre" #nombreDoc="ngModel" pInputText type="text" maxlength="200"
+							 (keyup)="capitalize($event)" [(ngModel)]="documentManagement.nombre" required/>
 					<div class="ui-message ui-messages-error ui-corner-all"
-					     *ngIf="f.submitted && !idTipoDoc.valid">
+						  *ngIf="f.submitted && !nombreDoc.valid">
 						<i class="fa fa-close"></i>
-						{{ 'DOCMANAGMENT.LBL_TIPO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+						{{ 'DOCMANAGMENT.LBL_NOMBRE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 					</div>
 				</div>
 			</div>
 			<div class="ui-grid-row">
 				<div class="ui-grid-col-8">
-					<label for="nombre">{{ 'DOCMANAGMENT.LBL_NOMBRE' | translate }}</label>
-					<input id="nombre" name="nombre" #nombreDoc="ngModel" pInputText type="text" maxlength="200"
-					       (keyup)="capitalize($event)" [(ngModel)]="documentManagement.nombre" required/>
+					<label for="idTipoDocumento">{{ 'DOCMANAGMENT.LBL_TIPO' | translate }}</label>
+					<p-dropdown id="idTipoDocumento" name="idTipoDocumento" required="true"
+									[options]="listTypeDoc" [autoWidth]="false"
+									[(ngModel)]="documentManagement.idClasificacionDocumento"
+									#idTipoDoc="ngModel"
+					></p-dropdown>
 					<div class="ui-message ui-messages-error ui-corner-all"
-					     *ngIf="f.submitted && !nombreDoc.valid">
+						  *ngIf="f.submitted && !idTipoDoc.valid">
 						<i class="fa fa-close"></i>
-						{{ 'DOCMANAGMENT.LBL_NOMBRE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+						{{ 'DOCMANAGMENT.LBL_TIPO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 					</div>
+
 				</div>
 				<div class="ui-grid-col-4">
 					<label for="codigoinst">{{ 'DOCMANAGMENT.LBL_CODIGOINST' | translate }}</label>
@@ -65,6 +66,19 @@
 				</div>
 			</div>
 			<div class="ui-grid-row">
+				<div class="ui-grid-col-2">
+					<label for="vigencia">{{ 'DOCMANAGMENT.LBL_VIGENCIA' | translate }}</label>
+					<p-dropdown id="vigencia" name="vigencia" required="true"
+									[options]="listValidity" [autoWidth]="false"
+									[(ngModel)]="documentManagement.vigencia"
+									#vigenc="ngModel"
+					></p-dropdown>
+					<div class="ui-message ui-messages-error ui-corner-all"
+						  *ngIf="f.submitted && !vigenc.valid">
+						<i class="fa fa-close"></i>
+						{{ 'DOCMANAGMENT.LBL_VIGENCIA' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
 				<div class="ui-grid-col-3">
 					<label for="accion">{{ 'DOCMANAGMENT.LBL_ACCION' | translate }}</label>
 					<p-dropdown id="accion" name="accion" required="true"
@@ -77,7 +91,7 @@
 						{{ 'DOCMANAGMENT.LBL_ACCION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 					</div>
 				</div>
-				<div class="ui-grid-col-3" *ngIf="documentManagement.indicadorDescarga">
+				<div class="ui-grid-col-7" *ngIf="documentManagement.indicadorDescarga">
 					<label>{{'LBL_ADJUNTAR' | translate}} </label>
 					<div *ngIf="documentManagement.idAdjunto != null" class="btn-group" role="group" style="display: block;">
 						<a class="btn btn-default" style="max-width: 87%; overflow: hidden;" (click)="downloadFile(documentManagement.idAdjunto)">
@@ -100,45 +114,34 @@
 						<i class="fa fa-close"></i>
 						{{ 'DOCMANAGMENT.LBL_ADJUNTO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 					</div>
+
 				</div>
 			</div>
 			<div class="ui-grid-row">
-				<div class="ui-grid-col-3"></div>
-				<div class="ui-grid-col-3">
+				<div class="col-md-12"></div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-4">
 					<p-checkbox binary="true" id="indicadorRC" name="indicadorRC"
 					            [(ngModel)]="documentManagement.indicadorContratacion"
 					            label="{{ 'DOCMANAGMENT.LBL_REQUERIDOCONTRATA' | translate }}"
 					            #indicador="ngModel"></p-checkbox>
 				</div>
-				<div class="ui-grid-col-2">
-					<label for="vigencia">{{ 'DOCMANAGMENT.LBL_VIGENCIA' | translate }}</label>
-					<p-dropdown id="vigencia" name="vigencia" required="true"
-					            [options]="listValidity" [autoWidth]="false"
-					            [(ngModel)]="documentManagement.vigencia"
-					            #vigenc="ngModel"
-					></p-dropdown>
-					<div class="ui-message ui-messages-error ui-corner-all"
-					     *ngIf="f.submitted && !vigenc.valid">
-						<i class="fa fa-close"></i>
-						{{ 'DOCMANAGMENT.LBL_VIGENCIA' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-					</div>
-				</div>
-				<div class="ui-grid-col-2">
+
+				<div class="ui-grid-col-4">
 					<p-checkbox binary="true" id="indicadoraplica" name="indicadoraplica"
 					            [(ngModel)]="documentManagement.indicadorAplica"
 					            label="{{ 'DOCMANAGMENT.LBL_NOAPLCA' | translate }}"
 					            #indicador="ngModel"></p-checkbox>
 				</div>
-			</div>
-			<div class="ui-grid-row">
-				<div class="ui-grid-col-4"></div>
 				<div class="ui-grid-col-4">
 					<p-checkbox binary="true" id="indicadorhabilitado" name="indicadorhabilitado"
-					            [(ngModel)]="documentManagement.indicadorHabilitado"
-					            label="{{ 'LBL_HABILITADO' | translate }}"
-					            #indicador="ngModel"></p-checkbox>
+									[(ngModel)]="documentManagement.indicadorHabilitado"
+									label="{{ 'LBL_HABILITADO' | translate }}"
+									#indicador="ngModel"></p-checkbox>
 				</div>
 			</div>
+
 			<div class="ui-grid-row form-footer-buttons">
 				<div class="ui-grid-col-4"></div>
 				<div class="ui-grid-col-1">

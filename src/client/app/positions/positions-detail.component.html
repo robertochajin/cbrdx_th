@@ -5,31 +5,29 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-10 col-md-offset-1">
+		<div class="col-md-12">
+			<form class="form-horizontal">
 			<div class="form-group">
 				<p-panel header="{{ 'POSITION.LBL_IDENTIFICACION' | translate }}">
 					<fieldset>
 						<div class="row">
 							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'POSITION.LBL_NOMBRE' | translate }}:</label>
 							<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{position.cargo}}</strong></label>
-						
-						</div>
-						<div class="row">
 							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'POSITION.LBL_AREA' | translate }}:</label>
 							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{position.estructuraArea}}</strong></label>
+						
+						</div>
+						<div class="row">
+
 							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'POSITION.LBL_CARGODEPENDE' | translate}}:</label>
 							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{position.cargoJefe}}</strong></label>
-						
-						</div>
-						<div class="row">
 							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'POSITION.LBL_PERSONASDIRECTAS' | translate}}:</label>
 							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{position.personaACargoDir}}</strong></label>
-							
-							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'POSITION.LBL_PERSONASINDIRECTAS' | translate}}:</label>
-							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{position.personaACargoInd}}</strong></label>
 						
 						</div>
 						<div class="row">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'POSITION.LBL_PERSONASINDIRECTAS' | translate}}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{position.personaACargoInd}}</strong></label>
 							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'POSITION.LBL_MISION' | translate}}:</label>
 							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{position.mision}}</strong></label>
 						
@@ -38,7 +36,7 @@
 							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'POSITION.LBL_ZONA' | translate}}:</label>
 							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{position.indicadorZona ? 'Si':'No'}}</strong></label>
 						</div>
-						<h3 class="first">{{ 'POSITION.LBL_OBSERVACIONCARGO' | translate }}</h3>
+						<h4 class="first">{{ 'POSITION.LBL_OBSERVACIONCARGO' | translate }}</h4>
 						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="observations" [paginator]="true"
 						             [rows]="10" [responsive]="true">
 							<p-column field="idCargoEstadoObservacion" header="{{ 'LBL_ID' | translate }}" [sortable]="true"></p-column>
@@ -348,7 +346,7 @@
 					</fieldset>
 				</p-panel>
 			</div>
-		
+			</form>
 		</div>
 	</div>
 </div>

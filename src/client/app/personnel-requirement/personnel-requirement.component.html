@@ -25,6 +25,10 @@
 		<p-column field="estado" header="{{ 'LBL_ESTADO' | translate}}" [sortable]="true"></p-column>
 		<p-column header="{{ 'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
 			<template let-prequest="rowData" pTemplate="body">
+				<button *ngIf="prequest.idPublicacion!==null && prequest.idPublicacion!==undefined && prequest.idEstado == inProcess.idLista"
+				        type="button" icon="fa-users" data-toggle="tooltip"
+				        title="{{'PROCESOSELECCION.LBL_CANDIDATOS' | translate}}"
+				        class="ui-button-success" pButton (click)="candidates(prequest)"></button>
 				<button type="button" icon="fa-eye" class="ui-button-info"  title="{{'LBL_DETALLE' | translate}}"
 				        pButton (click)="detail(prequest)"></button>
 				<button *ngIf="(prequest.idEstado === creationProccesState.idLista || prequest.idEstado === revertedState.idLista)"
