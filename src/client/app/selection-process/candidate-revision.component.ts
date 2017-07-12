@@ -17,6 +17,8 @@ import { ListaItem } from '../_models/listaItem';
 
 import { JwtHelper } from 'angular2-jwt';
 import { RolesService } from '../_services/roles.service';
+import { MasterAnswersService } from '../_services/masterAnswers.service';
+import { MasterAnswers } from '../_models/masterAnswers';
 
 @Component( {
                moduleId: module.id,
@@ -32,6 +34,7 @@ export class CandidateRevisionComponent implements OnInit {
    public approvalOptions: SelectItem[] = [];
    public candidateProcess: CandidateProcess = new CandidateProcess();
    private es: any;
+   maestrosRespuestas: MasterAnswers[] = [];
    private minDate: Date = new Date();
    private stepStates: ListaItem[] = [];
    private desitionList: ListaItem[] = [];
@@ -51,6 +54,7 @@ export class CandidateRevisionComponent implements OnInit {
       private listaService: ListaService,
       private confirmationService: ConfirmationService,
       private rolesService: RolesService,
+      private masterAnswersService: MasterAnswersService,
       private employeesService: EmployeesService,
       private vacanciesService: VacanciesService,
       private candidateProcessService: CandidateProcessService,
@@ -110,6 +114,11 @@ export class CandidateRevisionComponent implements OnInit {
                   }
                } );
 
+            } );
+
+
+            this.masterAnswersService.getByTerceroPublicacion( this.candidateProcess.idTerceroPublicacion ).subscribe( res => {
+               this.maestrosRespuestas = res;
             } );
 
          } else {

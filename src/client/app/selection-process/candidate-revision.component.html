@@ -30,6 +30,10 @@
 </div>
 <div class="row">
 	<div class="col-md-10 col-md-offset-1">
+		<p-panel *ngFor="let maestro of maestrosRespuestas">
+			<solutions-questionnaires-detail [maestroRespuestas]="maestro">
+			</solutions-questionnaires-detail>
+		</p-panel>
 		<p-panel header="{{'PROCESOSELECCION.LBL_REVISION' | translate}}">
 					<div class="row">
 						<div class="col-md-12">

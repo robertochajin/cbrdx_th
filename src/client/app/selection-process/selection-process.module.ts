@@ -34,6 +34,8 @@ import { MedicalExamService } from '../_services/medical-exam.service';
 import { VacancyApplyComponent } from '../selecttion-process-apply/apply-detail.component';
 import { ApplyQuestionnairesComponent } from '../selecttion-process-apply/questionnaires.component';
 import { QuestionnairesModule } from '../questionnaires/questionnaires.module';
+import { SolutionsQuestionnairesDetailComponent } from '../questionnaires/solutions-questionnaire/solutions-questionnaires-detail.component';
+import { MasterAnswersService } from '../_services/masterAnswers.service';
 @NgModule( {
               imports: [
                  SharedModule,
@@ -59,6 +61,7 @@ import { QuestionnairesModule } from '../questionnaires/questionnaires.module';
                  PostulationHistoryComponent,
                  SafePipe,
                  VacancyApplyComponent,
+                 SolutionsQuestionnairesDetailComponent,
                  ApplyQuestionnairesComponent
               ],
               bootstrap: [ SelectionProcessComponent ],
@@ -73,6 +76,7 @@ import { QuestionnairesModule } from '../questionnaires/questionnaires.module';
                  AttachmentsService,
                  MedicalExamService,
                  VacancyTestServices,
+                 MasterAnswersService,
                  PublicationQuestionnairesService,
                  UsuariosService
               ],
