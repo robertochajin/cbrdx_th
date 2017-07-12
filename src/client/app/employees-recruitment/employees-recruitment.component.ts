@@ -8,7 +8,7 @@ import { SelectionStepService } from '../_services/selection-step.service';
 import { Employee } from '../_models/employees';
 import { EmployeesRecruitment } from '../_models/employeesRecruitment';
 import { SelectionStep } from '../_models/selectionStep';
-import { EmployeeRecruitmentSteps } from '../_models/employee-recruitment-steps';
+import { EmployeeRecruitmentSteps } from '../_models/Employee-recruitment-steps';
 
 @Component( {
                moduleId: module.id,
