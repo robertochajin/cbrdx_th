@@ -61,7 +61,6 @@ import { MasterAnswersService } from '../_services/masterAnswers.service';
                  PostulationHistoryComponent,
                  SafePipe,
                  VacancyApplyComponent,
-                 SolutionsQuestionnairesDetailComponent,
                  ApplyQuestionnairesComponent
               ],
               bootstrap: [ SelectionProcessComponent ],

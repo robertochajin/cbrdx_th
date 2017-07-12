@@ -35,6 +35,7 @@ export class CandidateRevisionComponent implements OnInit {
    public candidateProcess: CandidateProcess = new CandidateProcess();
    private es: any;
    maestrosRespuestas: MasterAnswers[] = [];
+   showQuestionnaire = false;
    private minDate: Date = new Date();
    private stepStates: ListaItem[] = [];
    private desitionList: ListaItem[] = [];
@@ -208,4 +209,9 @@ export class CandidateRevisionComponent implements OnInit {
       }
 
    }
+
+   toggleQuestionnaire(){
+      this.showQuestionnaire = !this.showQuestionnaire;
+   }
+
 }
