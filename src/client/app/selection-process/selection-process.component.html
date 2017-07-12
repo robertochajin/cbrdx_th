@@ -13,11 +13,11 @@
 			</div>
 		</div>
 		<div class="col-md-3 col-xs-12">
-			<div  *ngIf="showFilters">
-					<p-dropdown id="recruiter" name="recruiter" required="true"
-					            [options]="recruiters" [autoWidth]="false" (onChange)="filter()"
-					            [(ngModel)]="selectedRecruiter"
-					></p-dropdown>
+			<div *ngIf="showFilters">
+				<p-dropdown id="recruiter" name="recruiter" required="true"
+				            [options]="recruiters" [autoWidth]="false" (onChange)="filter()"
+				            [(ngModel)]="selectedRecruiter"
+				></p-dropdown>
 			</div>
 		</div>
 		<div class="col-md-6 col-xs-12 datatable-header-search">
@@ -31,7 +31,7 @@
 	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="vacancies" [paginator]="true" [rows]="10"
 	             [responsive]="true" [globalFilter]="gb">
 		<p-column *ngIf="showFilters" field="nombreResponsableSeleccion" header="{{'PROCESOSELECCION.LBL_PROFESSIONAL' | translate }}"
-		           [sortable]="true"></p-column>
+		          [sortable]="true"></p-column>
 		<p-column field="cargo" header="{{'PROCESOSELECCION.LBL_VACANTE' | translate }}" [sortable]="true"></p-column>
 		<p-column field="formaReclutamiento" header="{{'PROCESOSELECCION.LBL_FORMA' | translate }}" [sortable]="true"></p-column>
 		<p-column field="area" header="{{'PROCESOSELECCION.LBL_AREA' | translate }}" [sortable]="true"></p-column>

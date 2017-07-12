@@ -183,7 +183,6 @@ import { QuestionnairesUpdateComponent } from './questionnaires/questionnaires-u
 import { SolutionsQuestionnairesComponent } from './questionnaires/solutions-questionnaire/solutions-questionnaires.component';
 import { SolutionsQuestionnairesDetailComponent } from './questionnaires/solutions-questionnaire/solutions-questionnaires-detail.component';
 
-
 import { MedicalExamComponent } from './selection-process/medical-exam.component';
 import { MedicalExamInformedConsentComponent } from './employees-clinical-information/informed-consent.component';
 import { AnswerExamsComponent } from './medical-institutions/answer-exams.component';
@@ -417,14 +416,35 @@ const routes = [
    { path: 'selection-process/add-step', component: StepEditComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/update-step/:idStep', component: StepEditComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
+   {
+      path: 'selection-process/process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso',
+      component: StepProcessComponent, canActivate: [ AuthGuard ]
+   },
    { path: 'selection-process/candidates-list/:idPublication', component: CandidatesComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso', component: CentralRiskComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/process-step/candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CandidateRevisionComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/process-step/candidate-test/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CandidateTestComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/process-step/call-reference/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CallReferenceComponent },
-   { path: 'selection-process/process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/process-step/medical-exam/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: MedicalExamComponent },
+   {
+      path: 'selection-process/process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: CentralRiskComponent, canActivate: [ AuthGuard ]
+   },
+   {
+      path: 'selection-process/process-step/candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: CandidateRevisionComponent, canActivate: [ AuthGuard ]
+   },
+   {
+      path: 'selection-process/process-step/candidate-test/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: CandidateTestComponent, canActivate: [ AuthGuard ]
+   },
+   {
+      path: 'selection-process/process-step/call-reference/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: CallReferenceComponent
+   },
+   {
+      path: 'selection-process/process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: StepProcessComponent, canActivate: [ AuthGuard ]
+   },
+   {
+      path: 'selection-process/process-step/medical-exam/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: MedicalExamComponent
+   },
 
    // consentimiento informado
    { path: 'informed-consent/exam/:idExamen/terceroPublicacion/:idTerceroPublication', component: MedicalExamInformedConsentComponent },

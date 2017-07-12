@@ -116,6 +116,7 @@ export class MedicalExamInformedConsentComponent implements OnInit {
 
    ngOnInit() {
    }
+
    onSubmitExam() {
       if ( this.medicalExam.idExamenMedico ) {
          let temp = this.listEstExaMed.find( c => c.idLista === this.medicalExam.idEstadoExamenMedico ).codigo;
@@ -159,7 +160,6 @@ export class MedicalExamInformedConsentComponent implements OnInit {
          return 0;
       }
    }
-
 
    goBack( fDirty: boolean ) {
       if ( fDirty ) {

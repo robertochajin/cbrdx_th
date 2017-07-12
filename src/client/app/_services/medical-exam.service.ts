@@ -28,9 +28,11 @@ export class MedicalExamService {
    getById( id: number ) {
       return this.authHttp.get( this.serviceURL + '/' + id ).map( ( res: Response ) => res.json() as MedicalExam );
    }
+
    commpareRisk( id: number ) {
-      return this.authHttp.get( this.serviceURLRisk+ id ).map( ( res: Response ) => res.json() );
+      return this.authHttp.get( this.serviceURLRisk + id ).map( ( res: Response ) => res.json() );
    }
+
    getByIdProceso( id: number ) {
       return this.authHttp.get( this.serviceURL + '/procesoSeleccion/' + id ).map( ( res: Response ) => res.json() as MedicalExam );
    }

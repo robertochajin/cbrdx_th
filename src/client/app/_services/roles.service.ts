@@ -25,7 +25,7 @@ export class RolesService {
       return this.authHttp.get( this.masterService ).map( ( res: Response ) => res.json() as Rol[] );
    }
 
-   listRolesByUser(userId: number) {
+   listRolesByUser( userId: number ) {
       return this.authHttp.get( this.masterService + 'usuario/' + userId ).map( ( res: Response ) => res.json() as Rol[] );
    }
 

@@ -48,7 +48,7 @@ import { EmployeesDetailPerfilComponent } from '../selecttion-process-apply/empl
               ],
 
               declarations: [ EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent,
-                 EmployeesAdditionalDataComponent,EmployeesViewDetailComponent, EmployeesCurriculumVitaeComponent,
+                 EmployeesAdditionalDataComponent, EmployeesViewDetailComponent, EmployeesCurriculumVitaeComponent,
                  EmployeesRecruitmentComponent,
                  EmployeesDetailPerfilComponent
               ],
