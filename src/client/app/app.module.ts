@@ -81,7 +81,7 @@ import { DocumentManagementModule } from './document-management/document-managem
 
 // Cuestionarios
 import { QuestionnairesModule } from './questionnaires/questionnaires.module';
-import { EmployeesAttatchmentsModule } from './employees-attatchments/employees-attatchments.module';
+import { EmployeesAttachmentsModule } from './employees-attatchments/employees-attachments.module';
 
 // CarsModule,
 @NgModule( {
@@ -142,7 +142,7 @@ import { EmployeesAttatchmentsModule } from './employees-attatchments/employees-
                  SelectionProcessModule,
                  DocumentManagementModule,
                  MedicalInstitutionModule,
-                 EmployeesAttatchmentsModule,
+                 // EmployeesAttachmentsModule,
                  //AssignmentProfessionalModule
                  QuestionnairesModule
               ],

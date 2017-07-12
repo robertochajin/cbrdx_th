@@ -330,8 +330,11 @@
      "LBL_LIDERAZGO": "Liderazgo",
      "LBL_HOBBIES": "Hobbies",
      "LBL_CONTACTOEMERG": "Contacto en caso de emergencia",
-     "LBL_COMPETHABILI": "Competencias y habilidades"
-
+     "LBL_COMPETHABILI": "Competencias y habilidades",
+     "LBL_DOCUMENTO": "Documento",
+     "LBL_DOCUMENTOS_DESCARGAR": "Documentos a descargar",
+     "LBL_DOCUMENTOS_ADJUNTAR": "Documentos a adjuntar",
+     "LBL_EMPLOYEESADJUNTOS": "Adjuntos"
   },
 
   "INICIO_FAMILYINFORMATION":"==============================================================",
@@ -977,6 +980,14 @@
       "LBL_LLAMARREFERENCIA":"Llamar referencias",
       "LBL_HISTORIALPOSTULANTE":"Historial de psotulaciones de:",
       "LBL_CANTIDADVACANTES":"Numero de vacantes solicitadas",
+      "LBL_PRUEBASTECNICA":"Pruebas técnica",
+      "LBL_PRUEBAREALIZADA":"Realizada",
+      "LBL_PRUEBASTECNICAS":"Pruebas técnicas",
+      "LBL_NOTAPRUEBATECNICA":"Nota",
+      "LBL_ESTADOPRUEBATECNICA":"Estado de la prueba",
+      "LBL_OBSERVACIONPRUEBATECNICA":"Observación",
+      "MSG_DEFINIRTODASLASPRUEBAS":"Es necesario que se definan todas las pruebas antes de poder definir si continua o no con el proceso",
+      "LBL_ADJUNTOPRUEBATECNICA":"Archivo adjunto",
       "":""
    },
 "MEDICALINSTITUTION":{
