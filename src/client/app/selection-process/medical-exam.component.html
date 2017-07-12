@@ -114,6 +114,14 @@
 			<div *ngIf="noaplicaexamen">
 				Acá si el cargo al cual aplica tiene los mismos riesgos que el cargo que actualmente tiene
 			</div>
+			<!-- Se dispone el cuestionario-->
+			<fieldset>
+				<div *ngIf="masterAnswer.idCuestionario">
+					<solutions-questionnaires-detail [maestroRespuestas]="masterAnswer">
+					</solutions-questionnaires-detail>
+				</div>
+			</fieldset>
+			<!-- fin del cuestionario-->
 			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="process" *ngIf="respondido">
 				<fieldset *ngIf="!readonly">
 					<div class="row">
