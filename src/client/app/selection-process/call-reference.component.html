@@ -28,7 +28,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-10 col-md-offset-1">
+	<div class="col-md-10 col-md-offset-1" *ngIf="!llamar">
 		<p-panel header="{{'PROCESOSELECCION.LBL_LLAMARREFERENCIA' | translate}}">
 			<div class="row">
 				<div class="col-md-12">
@@ -125,6 +125,31 @@
 			</form>
 		
 		
+		</p-panel>
+	</div>
+	
+	<!-- Llamar referencia -->
+	<div class="col-md-10 col-md-offset-1" *ngIf="llamar">
+		<p-panel header="{{'PROCESOSELECCION.LBL_LLAMARREFERENCIA' | translate}}">
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="form-group col-md-5">
+					<label for="tipoRef">{{'EMPLOYEES.LBL_TIPOREFERENCIA' | translate }}:</label>
+					<label id="tipoRef" name="tipoRef"><strong>{{referenciaLlamada.tipoReferencia}}</strong></label>
+				</div>
+				<div class="form-group col-md-5">
+					<label for="nombreRef">{{'LBL_NOMBRE' | translate }}:</label>
+					<label id="nombreRef" name="nombreRef"><strong>{{referenciaLlamada.nombreCompleto}}</strong></label>
+				</div>
+			</div>
+			
+			<div class="row form-footer-buttons">
+				<div class="form-group col-md-12">
+					<a (click)="hideForm()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+					<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+					        pButton></button>
+				</div>
+			</div>
 		</p-panel>
 	</div>
 </div>

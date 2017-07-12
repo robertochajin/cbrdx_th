@@ -34,12 +34,11 @@ export class SolutionsQuestionnairesDetailComponent implements OnInit {
    }
 
    ngOnInit() {
-      this.idMaestroRespuestas = 1;
-      this.idCuestionario = 1;
-      this.masterAnswersService.get( this.idMaestroRespuestas ).subscribe(
+
+      this.masterAnswersService.get( this.maestroRespuestas.idMaestroRespuesta).subscribe(
          res => {
             this.maestroRespuestas = res;
-            this.questionnairesService.get( this.idCuestionario ).subscribe(
+            this.questionnairesService.get( this.maestroRespuestas.idCuestionario ).subscribe(
                res => {
                   this.cuestionario = res;
                   this.getAnswers();
