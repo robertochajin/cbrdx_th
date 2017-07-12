@@ -42,21 +42,7 @@ export class SelectionProcessComponent implements OnInit {
       private usuariosService: UsuariosService,
       private listaService: ListaService,
       private vacanciesService: VacanciesService, ) {
-      this.busqueda = this.navService.getSearch( 'selection-process.component' );
-      let token = localStorage.getItem( 'token' );
-      if ( token !== null ) {
-         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
-         usuariosService.readUserRoles(this.usuarioLogueado.usuario.idUsuario).subscribe( res => {
-            this.roles = res;
-            constanteService.getByCode('ROLPRO').subscribe(c => {
-               if(this.checkRol(this.roles, c.valor)){
-                  this.showFilters = true;
-               } else {
-                  this.showFilters = false;
-               }
-            });
-         } );
-      }
+
       // ---------------Estados para filtrar los requerimientos-------------------
       this.listStatus.push( { label: 'Todos', value: 1 } );
       this.listStatus.push( { label: 'Activos', value: 2 } );
@@ -70,16 +56,33 @@ export class SelectionProcessComponent implements OnInit {
       this.today.setHours( 0 );
       this.today.setMinutes( 0 );
       this.today.setSeconds( 0 );
-      if(this.showFilters){
-         this.usuariosService.getByRol('PROSEL').subscribe( recruiters => {
-            this.recruiters.push({label: 'Seleccione el profesional de selección', value: null});
-            this.recruiters.push({label: 'Mis procesos', value: this.usuarioLogueado.usuario.idUsuario});
-            recruiters.map((r:VUsuario) => {
-               this.recruiters.push({label: r.nombre, value: r.idUsuario});
-            });
-            this.selectedRecruiter = this.usuarioLogueado.usuario.idUsuario;
+
+      this.busqueda = this.navService.getSearch( 'selection-process.component' );
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.usuariosService.readUserRoles( this.usuarioLogueado.usuario.idUsuario ).subscribe( res => {
+            this.roles = res;
+            this.constanteService.getByCode( 'ROLPRO' ).subscribe( c => {
+               if ( this.checkRol( this.roles, c.valor ) ) {
+                  this.showFilters = true;
+               } else {
+                  this.showFilters = false;
+               }
+               if ( this.showFilters ) {
+                  this.usuariosService.getByRol( 'PROSEL' ).subscribe( recruiters => {
+                     this.recruiters.push( { label: 'Seleccione el profesional de selección', value: null } );
+                     this.recruiters.push( { label: 'Mis procesos', value: this.usuarioLogueado.usuario.idUsuario } );
+                     recruiters.map( ( r: VUsuario ) => {
+                        this.recruiters.push( { label: r.nombre, value: r.idUsuario } );
+                     } );
+                     this.selectedRecruiter = this.usuarioLogueado.usuario.idUsuario;
+                  } );
+               }
+            } );
          } );
       }
+
       this.listaService.getMasterAllDetails( 'ListasEstadosRequerimientos' ).subscribe( data => {
          let temp = data.find( r => r.codigo === 'PRCSEL' );
          if ( temp ) {
@@ -96,29 +99,31 @@ export class SelectionProcessComponent implements OnInit {
 
    filter() {
       this.vacancies = [];
-      if ( this.filtro === 1 && this.selectedRecruiter === null) {
+      if ( this.filtro === 1 && (this.selectedRecruiter === null || this.selectedRecruiter === undefined) ) {
          this.vacancies = this.vacanciesTemp;
       } else {
          for ( let r of this.vacanciesTemp ) {
             let responsible = false;
-            if(this.selectedRecruiter === null || this.selectedRecruiter === r.idResponsableSeleccion) {
+            if ( this.selectedRecruiter === null ||
+                 this.selectedRecruiter === undefined ||
+                 this.selectedRecruiter === r.idResponsableSeleccion ) {
                responsible = true;
             }
 
-            if ( this.filtro === 2 ) {
+            if ( this.filtro === 1 && responsible ) {
+               this.vacancies.push( r );
+            } else if ( this.filtro === 2 ) {
                let fin = new Date( r.fechaFinPublicacion );
                fin.setHours( 24 );
                fin.setSeconds( 1 );
-               if ( fin >= this.today && responsible) {
+               if ( fin >= this.today && responsible ) {
                   this.vacancies.push( r );
                }
-            }
-            if ( this.filtro === 3 ) {
+            } else if ( this.filtro === 3 ) {
                if ( (r.fechaFinPublicacion === null || r.fechaFinPublicacion === undefined) && responsible ) {
                   this.vacancies.push( r );
                }
-            }
-            if ( this.filtro === 4 ) {
+            } else if ( this.filtro === 4 ) {
                let fin = new Date( r.fechaFinPublicacion );
                fin.setHours( 24 );
                fin.setSeconds( 1 );
@@ -150,14 +155,14 @@ export class SelectionProcessComponent implements OnInit {
       this.navService.setSearch( 'selection-process.component', this.busqueda );
    }
 
-   private checkRol( roles: VUsuarioRol[], rolesConstante: string ) : boolean {
-      let confRoles = rolesConstante.split(',');
+   private checkRol( roles: VUsuarioRol[], rolesConstante: string ): boolean {
+      let confRoles = rolesConstante.split( ',' );
       let foundRol = false;
-      roles.map(r => {
-         if(confRoles.find(c => c === r.codigoRol)){
+      roles.map( r => {
+         if ( confRoles.find( c => c === r.codigoRol ) ) {
             foundRol = true;
          }
-      })
+      } )
       return foundRol;
    }
 }
