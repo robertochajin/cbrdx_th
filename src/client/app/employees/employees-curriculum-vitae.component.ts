@@ -211,7 +211,7 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
       nombrePdf = nombrePdf.replace(/ /g, '-');
 
       let doc = new jsPDF('p', 'mm', 'a4');
-      let element = jQuery("#CV");
+      let element: any = jQuery("#CV");
 
       html2canvas(element,  {background: 'white'}).then((canvas: any) => {
             console.info(canvas);
