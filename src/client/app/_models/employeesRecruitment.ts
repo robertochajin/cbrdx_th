@@ -11,7 +11,7 @@ export class EmployeesRecruitment {
    public responsableSeleccion: string;
 
    constructor() {
-      cargo = null;
+      this.cargo = null;
    }
 
 }

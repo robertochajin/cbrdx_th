@@ -51,7 +51,7 @@ export class EmployeesRecruitmentComponent implements OnInit {
    }
 
    // Redirecciona a la pantalla dependiendo del paso y del rol del usuario
-   redirecStep( recruitmentSteps: employeesRecruitmentSteps, ) {
+   redirecStep( recruitmentSteps: EmployeeRecruitmentSteps, ) {
       this.selectionStepService.get( recruitmentSteps.idProcesoPaso ).subscribe(data=>{
          this.myStep = data;
       });
@@ -63,7 +63,7 @@ export class EmployeesRecruitmentComponent implements OnInit {
          //    //selection-process/process-step/call-reference/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
          //
             this.router.navigate(
-               [ myStep.interfazInterna.replace( ':idStep', recruitmentSteps.idProcesoPaso.toString() )
+               [ this.myStep.interfazInterna.replace( ':idStep', recruitmentSteps.idProcesoPaso.toString() )
                .replace( ':idTerceroPublication', recruitmentSteps.idTerceroPublicacion.toString() )
                .replace( ':idProceso', this.myStep.idProceso ? this.myStep.idProceso.toString() : '0' )
                ] );
