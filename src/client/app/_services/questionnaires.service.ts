@@ -32,7 +32,7 @@ export class QuestionnairesService {
    }
 
    getByCode( code: string ) {
-      return this.authHttp.get( this.masterService + 'cuestionarios/' + code )
+      return this.authHttp.get( this.masterService + 'cuestionarios/code/' + code )
       .map( ( res: Response ) => res.json() as Questionnaries );
    }
 

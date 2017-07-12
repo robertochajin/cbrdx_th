@@ -129,7 +129,7 @@ export class AnswerExamsComponent implements OnInit {
                } );
             } );
             // obtener examen medico
-            this.medicalExamService.getByIdProceso( params[ 'idExamen' ] ).subscribe( rs => {
+            this.medicalExamService.getById( params[ 'idExamen' ] ).subscribe( rs => {
                this.medicalExam = rs;
                if ( this.medicalExam.idMaestroRespuesta ) {
                   this.getMaestroCuestionariosById();
@@ -255,6 +255,7 @@ export class AnswerExamsComponent implements OnInit {
    getMaestroCuestionariosById() {
       this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe( res => {
          this.maestroRespuestas = res;
+         this.showFinish = false;
       } );
    }
 
@@ -263,6 +264,7 @@ export class AnswerExamsComponent implements OnInit {
          this.maestroRespuestas.idCuestionario = quest.idCuestionario;
          this.masterAnswersService.add( this.maestroRespuestas ).subscribe( res => {
             this.maestroRespuestas = res;
+            this.showFinish = false;
             this.medicalExam.idMaestroRespuesta = this.maestroRespuestas.idMaestroRespuesta;
             this.medicalExamService.update( this.medicalExam ).subscribe();
          } );
