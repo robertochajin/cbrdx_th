@@ -31,6 +31,11 @@ export class QuestionnairesService {
       .map( ( res: Response ) => res.json() as Questionnaries );
    }
 
+   getByCode( code: string ) {
+      return this.authHttp.get( this.masterService + 'cuestionarios/' + code )
+      .map( ( res: Response ) => res.json() as Questionnaries );
+   }
+
    add( f: Questionnaries ) {
       f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.masterService + 'cuestionarios', f )
