@@ -977,6 +977,12 @@
       "LBL_LLAMARREFERENCIA":"Llamar referencias",
       "LBL_HISTORIALPOSTULANTE":"Historial de psotulaciones de:",
       "LBL_CANTIDADVACANTES":"Numero de vacantes solicitadas",
+      "LBL_FECHA":"Fecha",
+      "LBL_PROGRAMAREXAMEN":"Programar examen",
+      "LBL_INSTITUCION":"Institución",
+      "LBL_GENERCOD":"Generar código",
+      "LBL_CONSENTINFORMADO":"Consentimiento informado",
+      "LBL_EXAMENMEDICO":"Examen médico",
       "":""
    },
 "MEDICALINSTITUTION":{

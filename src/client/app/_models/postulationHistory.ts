@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class PostulationManagement {
-   vacante: string;
-   fecha: Date;
+export class PostulationHistory {
+   idTercero: number;
+   cargo: string;
+   fechaInicio: Date;
    estado: string;
-   profesional: string;
-   pasoFinal: string;
+   responsableSeleccion: string;
+   codigo: string;
 
    constructor() {
 
    }
-
 }

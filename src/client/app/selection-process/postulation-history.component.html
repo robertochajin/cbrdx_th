@@ -3,7 +3,7 @@
 		<div class="col-md-3 col-xs-12"></div>
 		<div class="col-md-6 col-xs-12">
 			<h4>{{ 'PROCESOSELECCION.LBL_HISTORIALPOSTULANTE' | translate}} </h4>
-			<strong><h4>{{employee.primerNombre}} {{employee.primerApellido}}</h4></strong>
+			<h4><strong>{{employee.primerNombre}} {{employee.primerApellido}}</strong></h4>
 			<h4>{{employee.tipoDocumento}}: {{employee.numeroDocumento}}</h4>
 		</div>
 	</div>
@@ -20,10 +20,11 @@
 	</div>
 	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listHistory" [paginator]="true" [rows]="10"
 	             [responsive]="true" [globalFilter]="gb">
-		<p-column field="codigo" header="{{ 'LBL_CODIGO' | translate}}" [sortable]="true"></p-column>
-		<p-column field="estructuraFisica" header="{{ 'LBL_NOMBRE' | translate}}" [sortable]="true"></p-column>
-		<p-column field="clasificacionSede" header="{{ 'ESTRUCTURAFISICA.LBL_CATEGORIA' | translate}}" [sortable]="true"></p-column>
-		<p-column field="direccion" header="{{ 'LBL_DIRECCION' | translate}}" [sortable]="true"></p-column>
+		<p-column field="cargo" header="{{ 'PROCESOSELECCION.LBL_VACANTE' | translate}}" [sortable]="true"></p-column>
+		<p-column field="fechaInicio" header="{{ 'LBL_FECHAINICIO' | translate}}" [sortable]="true"></p-column>
+		<p-column field="estado" header="{{ 'PROCESOSELECCION.LBL_ESTADO' | translate}}" [sortable]="true"></p-column>
+		<p-column field="responsableSeleccion" header="{{ 'VACANCIES.LBL_PROFESSIONAL' | translate}}" [sortable]="true"></p-column>
+		<p-column field="codigo" header="{{ 'PROCESOSELECCION.LBL_CODIGOPASO' | translate}}" [sortable]="true"></p-column>
 	</p-dataTable>
 	<div class="row form-footer-buttons">
 		<div class="form-group col-md-12">
