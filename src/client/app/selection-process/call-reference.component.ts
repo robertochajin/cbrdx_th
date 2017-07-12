@@ -41,6 +41,8 @@ export class CallReferenceComponent implements OnInit {
    private showCalendar = false;
    private readonly = false;
    svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
+   llamar: boolean = false;
+   referenciaLlamada: References = new References();
 
    usuarioLogueado: any;
    idRol: number;
@@ -205,7 +207,9 @@ export class CallReferenceComponent implements OnInit {
    }
 
    call( tr: References ) {
-      let referencia = tr.idTerceroReferencia;
+      this.llamar = true;
+      this.referenciaLlamada = tr;
+      console.log( tr );
    }
 
    goBack( fDirty: boolean ) {
@@ -223,5 +227,9 @@ export class CallReferenceComponent implements OnInit {
          this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
       }
 
+   }
+
+   hideForm(){
+      this.llamar = false;
    }
 }
