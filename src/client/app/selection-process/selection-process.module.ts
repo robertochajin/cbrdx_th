@@ -24,11 +24,14 @@ import { CentralRiskComponent } from '../selection-process-risks/central-risk.co
 import { SafePipe } from '../_helpers/safePipe';
 import { AttachmentsService } from '../_services/attachments-step.service';
 import { AttachmentsComponent } from './attachments.component';
-
+import { VacancyApplyComponent } from '../selecttion-process-apply/apply-detail.component';
+import { ApplyQuestionnairesComponent } from '../selecttion-process-apply/questionnaires.component';
+import { QuestionnairesModule } from '../questionnaires/questionnaires.module';
 @NgModule( {
               imports: [
                  SharedModule,
-                 FormSharedModule
+                 FormSharedModule,
+                 QuestionnairesModule
               ],
               declarations: [
                  SelectionProcessComponent,
@@ -43,7 +46,9 @@ import { AttachmentsComponent } from './attachments.component';
                  CandidatesComponent,
                  CandidateRevisionComponent,
                  CentralRiskComponent,
-                 SafePipe
+                 SafePipe,
+                 VacancyApplyComponent,
+                 ApplyQuestionnairesComponent
               ],
               bootstrap: [ SelectionProcessComponent ],
               providers: [

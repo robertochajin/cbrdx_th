@@ -24,7 +24,7 @@ import { SolutionsQuestionnairesDetailComponent } from './solutions-questionnair
               ],
               bootstrap: [ QuestionnairesComponent ],
               providers: [ QuestionnairesService, NavService, ListaService, MasterAnswersService ],
-              exports: [ QuestionnairesComponent ]
+              exports: [ QuestionnairesComponent, SolutionsQuestionnairesComponent, SolutionsQuestionnairesDetailComponent ]
            } )
 export class QuestionnairesModule {
 }

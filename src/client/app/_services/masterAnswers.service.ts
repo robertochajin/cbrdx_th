@@ -30,6 +30,11 @@ export class MasterAnswersService {
       .map( ( res: Response ) => res.json() as MasterAnswers );
    }
 
+   getByTerceroPublicacion( id: number ) {
+      return this.authHttp.get( this.masterService + 'maestrosRespuestas/terceroPublicacion/' + id )
+      .map( ( res: Response ) => res.json() as MasterAnswers[] );
+   }
+
    add( f: MasterAnswers ) {
       f.idUsuario = this.idUsuario;
       f.auditoriaUsuario = this.idUsuario;

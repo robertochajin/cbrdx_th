@@ -38,7 +38,7 @@
           <p-tabPanel header="Info Personal" [selected]="true">
 
               <p-accordion (onOpen)="onTabShow($event)" id="accordion">
-	              <p-accordionTab header="Datos Generales" [selected]="acordion == 0 || acordion == null "
+	              <p-accordionTab header="{{'EMPLOYEES.LBL_DATOSGENERALES' | translate}}" [selected]="acordion == 0 || acordion == null "
 	                              *hasPermission="seccion1 ? seccion1 : defaultCampo">
                     <form class="form-horizontal">
                       <fieldset>

@@ -25,6 +25,7 @@ import { EmployeesViewDetailComponent } from './employees-view-detail.component'
 import { EmployeesCurriculumVitaeComponent } from './employees-curriculum-vitae.component';
 import { AdjuntosService } from '../_services/adjuntos.service';
 import { ConstanteService } from '../_services/constante.service';
+import { EmployeesDetailPerfilComponent } from '../selecttion-process-apply/employees-detail-perfil.component';
 
 @NgModule( {
               imports: [
@@ -42,7 +43,8 @@ import { ConstanteService } from '../_services/constante.service';
               ],
 
               declarations: [ EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent,
-                 EmployeesAdditionalDataComponent,EmployeesViewDetailComponent, EmployeesCurriculumVitaeComponent
+                 EmployeesAdditionalDataComponent, EmployeesViewDetailComponent, EmployeesCurriculumVitaeComponent,
+                 EmployeesDetailPerfilComponent
               ],
               bootstrap: [ EmployeesComponent ],
               providers: [ EmployeesService, ListEmployeesService, PoliticalDivisionService, NavService, ListaService, AdjuntosService, ConstanteService ],

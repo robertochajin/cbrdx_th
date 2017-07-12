@@ -1,0 +1,36 @@
+<div *ngIf="maestroRespuestas.idMaestroRespuesta">
+	<div class="row">
+		<div class="col-md-12">
+			<h3>{{'QUESTIONNAIRES.LBL_QUESTIONNAIRE' | translate}} {{'QUESTIONNAIRES.LBL_OFAPPLICANTS' | translate }}</h3>
+			<solutions-questionnaires (finish)="finishQuestionnaire($event)"
+			                          [maestroRespuestas]="maestroRespuestas"
+			                          *ngIf="!showNext"
+			></solutions-questionnaires>
+			<fieldset>
+				<div *ngIf="showNext && !showFinish" class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<p>Acaba de terminar el cuestionario</p>
+						<p>oprima el botón <b>continuar</b> para seguier con el proceso de Aplicación a la vacante</p>
+					</div>
+					<div class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<button icon="fa-arrow-right" label="{{'BTN_CONTINUAR' | translate}}" (click)="nextQuestionnaire()"
+							        pButton></button>
+						</div>
+					</div>
+				</div>
+				<div *ngIf="showNext && showFinish" class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<p>Tu postulación a terminado con Exito!</p>
+					</div>
+					<div class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<button icon="fa-arrow-right" label="{{'QUESTIONNAIRES.LBL_START' | translate}}" (click)="goHome()"
+							        pButton></button>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+</div>

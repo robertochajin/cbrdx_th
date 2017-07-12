@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ConfirmationService, Message, SelectItem } from 'primeng/primeng';
@@ -20,6 +20,7 @@ import { MasterAnswersService } from '../../_services/masterAnswers.service';
             } )
 export class SolutionsQuestionnairesComponent implements OnInit {
    @Input() maestroRespuestas: MasterAnswers;
+   @Output() finish: EventEmitter<MasterAnswers> = new EventEmitter<MasterAnswers>();
    cuestionario: Questionnaries = new Questionnaries()
    preguntas: QuestionnariesQuestions[] = [];
    pregunta: QuestionnariesQuestions = new QuestionnariesQuestions();
@@ -46,16 +47,12 @@ export class SolutionsQuestionnairesComponent implements OnInit {
    }
 
    ngOnInit() {
-      this.idMaestroRespuestas = 1;
-      this.idCuestionario = 1;
-      this.masterAnswersService.get( this.idMaestroRespuestas ).subscribe(
+      this.idMaestroRespuestas = this.maestroRespuestas.idMaestroRespuesta;
+      this.idCuestionario = this.maestroRespuestas.idCuestionario;
+      this.questionnairesService.get( this.idCuestionario ).subscribe(
          res => {
-            this.maestroRespuestas = res;
-            this.questionnairesService.get( this.idCuestionario ).subscribe(
-               res => {
-                  this.cuestionario = res;
-                  this.getQuestions();
-               } );
+            this.cuestionario = res;
+            this.getQuestions();
          } );
 
 
@@ -84,6 +81,7 @@ export class SolutionsQuestionnairesComponent implements OnInit {
    nextQuestion() {
       if ( this.preguntas.length === this.indice ) {
          this.showThx = true;
+         this.finish.emit( this.maestroRespuestas );
       } else {
          this.pregunta = this.preguntas[ this.indice ];
          this.getAnswers();

@@ -12,7 +12,7 @@ import { MasterAnswersService } from '../../_services/masterAnswers.service';
 
 @Component( {
                moduleId: module.id,
-               selector: 'solutions-questionnaires',
+               selector: 'solutions-questionnaires-detail',
                templateUrl: 'solutions-questionnaires-detail.component.html',
                providers: [ ConfirmationService ]
             } )
