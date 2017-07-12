@@ -9,10 +9,10 @@ import { ListaService } from '../_services/lista.service';
 import { Message, SelectItem } from 'primeng/primeng';
 import { JwtHelper } from 'angular2-jwt';
 import moment = require('moment');
-import { underline } from 'chalk';
 import { UsuariosService } from '../_services/usuarios.service';
 import { ConstanteService } from '../_services/constante.service';
 import { VUsuario } from '../_models/vUsuario';
+import { VUsuarioRol } from '../_models/vUsuarioRol';
 
 @Component( {
                moduleId: module.id,
@@ -20,7 +20,7 @@ import { VUsuario } from '../_models/vUsuario';
             } )
 export class SelectionProcessComponent implements OnInit {
 
-   roles: Rol[];
+   roles: VUsuarioRol[];
    busqueda: string;
    idEstado: number;
    vacancies: PersonnelRequirement[] = [];
@@ -46,10 +46,10 @@ export class SelectionProcessComponent implements OnInit {
       let token = localStorage.getItem( 'token' );
       if ( token !== null ) {
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
-         rolesService.listRolesByUser(this.usuarioLogueado.usuario.idUsuario).subscribe( res => {
+         usuariosService.readUserRoles(this.usuarioLogueado.usuario.idUsuario).subscribe( res => {
             this.roles = res;
             constanteService.getByCode('ROLPRO').subscribe(c => {
-               if(this.roles.find(r => r.codigoRol === c.valor)){
+               if(this.checkRol(this.roles, c.valor)){
                   this.showFilters = true;
                } else {
                   this.showFilters = false;
@@ -148,5 +148,16 @@ export class SelectionProcessComponent implements OnInit {
 
    setSearch() {
       this.navService.setSearch( 'selection-process.component', this.busqueda );
+   }
+
+   private checkRol( roles: VUsuarioRol[], rolesConstante: string ) : boolean {
+      let confRoles = rolesConstante.split(',');
+      let foundRol = false;
+      roles.map(r => {
+         if(confRoles.find(c => c === r.codigoRol)){
+            foundRol = true;
+         }
+      })
+      return foundRol;
    }
 }
