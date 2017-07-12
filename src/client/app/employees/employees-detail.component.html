@@ -206,10 +206,11 @@
                   </p-accordionTab>
 
               </p-accordion>
-
+	          
           </p-tabPanel>
-        <p-tabPanel header="Reclutamiento" styleClass="clearfix" disabled="true">
-          <h3>{{'EMPLOYEES.LBL_RECLUTAMIENTO' | translate}}</h3>
+        <p-tabPanel header="Reclutamiento" styleClass="clearfix">
+           <h3>{{'EMPLOYEES.LBL_RECLUTAMIENTO' | translate}}</h3>
+	        <employees-recruitment *ngIf="employee.idTercero" [employee]="employee"></employees-recruitment>
         </p-tabPanel>
         <p-tabPanel header="Novedades" disabled="true">
           <h3>{{'EMPLOYEES.LBL_NOVEDADES' | translate}}</h3>

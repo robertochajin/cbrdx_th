@@ -1055,7 +1055,16 @@
    "LBL_DROPDOWN": "Debe seleccionar una opción",
    "":""
 },
-
+   "TERCEROS": {
+      "LBL_DOCUMENTO": "Documento",
+      "LBL_DOCUMENTOS_DESCARGAR": "Documentos a descargar",
+      "LBL_DOCUMENTOS_ADJUNTAR": "Documentos a adjuntar"
+   },
+   "RECLUTAMIENTO": {
+      "LBL_FASE_PROCESO": "Fase del proceso",
+      "LBL_PERSONAL_ENCARGADO": "Personal encargado",
+      "LBL_ESTADO": "Estado"
+   },
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 
