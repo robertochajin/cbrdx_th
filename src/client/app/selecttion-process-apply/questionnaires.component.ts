@@ -104,13 +104,18 @@ export class ApplyQuestionnairesComponent {
    }
 
    goNext(): void {
+      this.showFinish = true;
+      this.showNext = true;
       // envia correo que no joda que ya se inscribio
-      this.employeesPublication.paso = 6;
-      this.employeesPublication.indicadorFinalizado = true;
-      this.employeeService.updatetPublication( this.employeesPublication ).subscribe( data => {
-         this.showFinish = true;
-      }, error => {
-      } );
+      if ( !(this.employeesPublication.indicadorFinalizado === true) ) {
+         this.employeesPublication.paso = 6;
+         this.employeesPublication.indicadorFinalizado = true;
+         this.employeesPublication.indicadorFinalizadoCuestionarios = true;
+         this.employeeService.updatetPublication( this.employeesPublication ).subscribe( data => {
+            // actualizo el final
+         }, error => {
+         } );
+      }
    }
 
    finishQuestionnaire() {
