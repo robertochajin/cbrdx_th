@@ -6,8 +6,8 @@ import { NavService } from '../_services/_nav.service';
 import { EmployeesRecruitmentService } from '../_services/employees-recruitment.service';
 import { SelectionStepService } from '../_services/selection-step.service';
 import { Employee } from '../_models/employees';
-import { EmployeesRecruitment } from '../_models/EmployeesRecruitment';
-import { SelectionStep } from '../_models/SelectionStep';
+import { EmployeesRecruitment } from '../_models/employeesRecruitment';
+import { SelectionStep } from '../_models/selectionStep';
 import { EmployeeRecruitmentSteps } from '../_models/employee-recruitment-steps';
 
 @Component( {
