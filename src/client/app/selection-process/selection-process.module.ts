@@ -28,11 +28,19 @@ import { CandidateTestComponent } from './candidate-test.component';
 import { CallReferenceComponent } from './call-reference.component';
 import { VacancyTestServices } from '../_services/vacancyTest.service';
 import { PostulationHistoryComponent } from './postulation-history.component';
+import { MedicalExamComponent } from './medical-exam.component';
+import { MedicalExamService } from '../_services/medical-exam.service';
 
+import { VacancyApplyComponent } from '../selecttion-process-apply/apply-detail.component';
+import { ApplyQuestionnairesComponent } from '../selecttion-process-apply/questionnaires.component';
+import { QuestionnairesModule } from '../questionnaires/questionnaires.module';
+import { SolutionsQuestionnairesDetailComponent } from '../questionnaires/solutions-questionnaire/solutions-questionnaires-detail.component';
+import { MasterAnswersService } from '../_services/masterAnswers.service';
 @NgModule( {
               imports: [
                  SharedModule,
-                 FormSharedModule
+                 FormSharedModule,
+                 QuestionnairesModule
               ],
               declarations: [
                  SelectionProcessComponent,
@@ -49,8 +57,11 @@ import { PostulationHistoryComponent } from './postulation-history.component';
                  CandidateTestComponent,
                  CentralRiskComponent,
                  CallReferenceComponent,
+                 MedicalExamComponent,
                  PostulationHistoryComponent,
-                 SafePipe
+                 SafePipe,
+                 VacancyApplyComponent,
+                 ApplyQuestionnairesComponent
               ],
               bootstrap: [ SelectionProcessComponent ],
               providers: [
@@ -62,7 +73,9 @@ import { PostulationHistoryComponent } from './postulation-history.component';
                  CandidateProcessService,
                  SelectionStepService,
                  AttachmentsService,
+                 MedicalExamService,
                  VacancyTestServices,
+                 MasterAnswersService,
                  PublicationQuestionnairesService,
                  UsuariosService
               ],

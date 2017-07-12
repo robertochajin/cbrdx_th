@@ -80,7 +80,7 @@
 				</div>
 			</form>
 			
-			<div class="row" *ngIf="!definingTest" >
+			<div class="row" *ngIf="!definingTest">
 				<div class="col-md-12">
 					<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="vacancyTests" [paginator]="true"
 					             [rows]="10" [responsive]="true">
@@ -99,7 +99,8 @@
 								        title="{{'BTN_EDITAR' | translate}}"
 								        pButton (click)="definegTest(recurso)"
 								></button>
-								<button *ngIf="recurso.idAdjunto" type="button" class="ui-button ui-button-success btn" icon="fa-download" data-toggle="tooltip"
+								<button *ngIf="recurso.idAdjunto" type="button" class="ui-button ui-button-success btn" icon="fa-download"
+								        data-toggle="tooltip"
 								        title="{{'BTN_DESCARGAR' | translate}}"
 								        pButton (click)="downloadFile(recurso.idAdjunto)"
 								></button>
@@ -110,11 +111,11 @@
 			</div>
 			
 			<form *ngIf="definingTest" name="tecniqueTest" (ngSubmit)="tf.valid && updateTest()" #tf="ngForm" novalidate id="tecniqueTest">
-								
+				
 				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label >{{ 'PROCESOSELECCION.LBL_NOTAPRUEBATECNICA' | translate }}:</label>
+							<label>{{ 'PROCESOSELECCION.LBL_NOTAPRUEBATECNICA' | translate }}:</label>
 							<label>{{testToDefine.pruebaTecnica}}</label>
 						</div>
 					</div>
@@ -159,7 +160,8 @@
 							<div class="ui-grid-col-3">
 								<label>{{'LBL_ADJUNTAR' | translate}} </label>
 								<div *ngIf="testToDefine.idAdjunto != null" class="btn-group" role="group" style="display: block;">
-									<a class="btn btn-default" style="max-width: 87%; overflow: hidden;" (click)="downloadFile(testToDefine.idAdjunto)">
+									<a class="btn btn-default" style="max-width: 87%; overflow: hidden;"
+									   (click)="downloadFile(testToDefine.idAdjunto)">
 										<i class="fa fa-file-o" aria-hidden="true"></i>
 										{{dataUploadArchivo}}
 									</a>
@@ -167,7 +169,8 @@
 										<i class="fa fa-times" aria-hidden="true"></i>
 									</a>
 								</div>
-								<p-fileUpload *ngIf="testToDefine.idAdjunto == null" name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
+								<p-fileUpload *ngIf="testToDefine.idAdjunto == null" name="file" url="{{svcThUrl}}" auto="true"
+								              class="upload-avatar"
 								              chooseLabel="{{'LBL_ADJUNTAR' | translate}}"
 								              (onBeforeSend)="onBeforeSend($event)"
 								              (onSelect)="onSelect($event, $event.files)"

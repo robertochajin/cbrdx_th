@@ -67,7 +67,6 @@ export class QuestionnairesUpdateComponent implements OnInit {
          } );
       } );
    }
-
    ngOnInit() {
    }
 
@@ -121,12 +120,37 @@ export class QuestionnairesUpdateComponent implements OnInit {
       this.formQuestion = true;
       this.showAnswers = false;
       this.pregunta = new QuestionnariesQuestions();
+      this.getPreviousQuestions( this.preguntas.length );
+   }
+
+   getPreviousQuestions( secuencia: number ) {
+      this.previousQuestions = [];
+      this.previousQuestions.push( { label: 'Seleccione', value: null } );
+      this.preguntas.filter( p => p.secuencia < secuencia && p.indicadorHabilitado === true &&
+                                  ( p.codigoTipoPregunta === 'CHECK' || p.codigoTipoPregunta === 'SELECT' ) ).map( s => {
+         this.previousQuestions.push( { label: s.pregunta, value: s.idCuestionarioPregunta } );
+      } );
+   }
+
+   getPreviousAnswers() {
+      this.previousAnswers = [];
+      this.previousAnswers.push( { label: 'Seleccione', value: null } );
+      if ( this.pregunta.idDependePregunta ) {
+         this.questionnairesService.getAnswers( this.pregunta.idDependePregunta ).subscribe(
+            res => {
+               res.map( s => {
+                  this.previousAnswers.push( { label: s.opcion, value: s.idPreguntaOpcion } );
+               } );
+            } );
+      }
+
    }
 
    updateQuestion( pregunta: QuestionnariesQuestions ) {
       this.formQuestion = true;
       this.showAnswers = false;
       this.pregunta = pregunta;
+      this.getPreviousQuestions( this.pregunta.secuencia );
    }
 
    goBackQuestion( fDirty: boolean ): void {

@@ -46,10 +46,6 @@ export class AppComponent implements AfterViewInit {
 
    }
 
-   onSubmit() {
-      console.log( 'SUBMIT FORM!! JUAJAJA' );
-   }
-
    setSession( s: boolean ): void {
       this.sessionStart = s;
       this.loginService.setSession( s );

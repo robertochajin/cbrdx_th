@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ConfirmationService, Message, SelectItem } from 'primeng/primeng';
@@ -9,6 +9,8 @@ import { QuestionnariesQuestions } from '../../_models/questionnariesQuestions';
 import { QuestionnariesAnswers } from '../../_models/questionnariesAnswers';
 import { ListaService } from '../../_services/lista.service';
 import { Answers } from '../../_models/answers';
+import { MasterAnswers } from '../../_models/masterAnswers';
+import { MasterAnswersService } from '../../_services/masterAnswers.service';
 
 @Component( {
                moduleId: module.id,
@@ -17,16 +19,21 @@ import { Answers } from '../../_models/answers';
                providers: [ ConfirmationService ]
             } )
 export class SolutionsQuestionnairesComponent implements OnInit {
-   @Input() cuestionario: Questionnaries;
+   @Input() maestroRespuestas: MasterAnswers;
+   @Output() finish: EventEmitter<MasterAnswers> = new EventEmitter<MasterAnswers>();
+   cuestionario: Questionnaries = new Questionnaries()
    preguntas: QuestionnariesQuestions[] = [];
    pregunta: QuestionnariesQuestions = new QuestionnariesQuestions();
    opciones: QuestionnariesAnswers[] = [];
-   opcion: QuestionnariesAnswers = new QuestionnariesAnswers();
+   opcionesCorrectas: QuestionnariesAnswers[] = [];
    respuesta: Answers = new Answers();
+   idMaestroRespuestas: number;
    idCuestionario: number;
    listadoOpciones: SelectItem[] = [];
    indice: number = 0;
    showThx: boolean = false;
+   saving: boolean = false;
+   respuestasCheckbox: number[] = [];
    msgs: Message[] = [];
 
    constructor( private questionnairesService: QuestionnairesService,
@@ -35,28 +42,34 @@ export class SolutionsQuestionnairesComponent implements OnInit {
       private listaService: ListaService,
       private route: ActivatedRoute,
       private confirmationService: ConfirmationService,
+      private masterAnswersService: MasterAnswersService,
       private navService: NavService ) {
    }
 
    ngOnInit() {
-      this.route.params.subscribe( params => {
-         this.idCuestionario = +params[ 'id' ];
-         if ( Number( this.idCuestionario ) > 0 ) {
-            this.questionnairesService.get( this.idCuestionario ).subscribe(
-               res => {
-                  this.cuestionario = res;
-                  this.getQuestions();
-               } );
-         }
-      } );
+      this.idMaestroRespuestas = this.maestroRespuestas.idMaestroRespuesta;
+      this.idCuestionario = this.maestroRespuestas.idCuestionario;
+      this.questionnairesService.get( this.idCuestionario ).subscribe(
+         res => {
+            this.cuestionario = res;
+            this.getQuestions();
+         } );
+
+
    }
 
    getQuestions() {
       if ( Number( this.idCuestionario ) > 0 ) {
-         this.questionnairesService.getQuestions( this.idCuestionario ).subscribe(
+         this.questionnairesService.getQuestionsEnable( this.idCuestionario ).subscribe(
             res => {
                this.preguntas = res;
-               this.indice = 0;
+               this.sortQuestions();
+               if ( this.maestroRespuestas.idPreguntaEnCurso ) {
+                  this.indice = this.preguntas.indexOf(
+                        this.preguntas.find( s => s.idCuestionarioPregunta === this.maestroRespuestas.idPreguntaEnCurso ) ) + 1;
+               } else {
+                  this.indice = 0;
+               }
                this.nextQuestion();
             } );
       } else {
@@ -68,6 +81,7 @@ export class SolutionsQuestionnairesComponent implements OnInit {
    nextQuestion() {
       if ( this.preguntas.length === this.indice ) {
          this.showThx = true;
+         this.finish.emit( this.maestroRespuestas );
       } else {
          this.pregunta = this.preguntas[ this.indice ];
          this.getAnswers();
@@ -77,27 +91,104 @@ export class SolutionsQuestionnairesComponent implements OnInit {
    }
 
    getAnswers() {
-      this.questionnairesService.getAnswers( this.pregunta.idCuestionarioPregunta ).subscribe(
-         res => {
-            this.opciones = res;
-            this.listadoOpciones = [];
-            if ( this.pregunta.idTipoPregunta !== 1 ) {
-               this.listadoOpciones.push( { label: 'Seleccione', value: null } );
-            }
-            res.map( s => {
-               this.listadoOpciones.push( { label: s.opcion, value: s.idPreguntaOpcion } );
+      if ( this.pregunta.codigoTipoPregunta === 'CHECK' || this.pregunta.codigoTipoPregunta === 'SELECT' ) {
+         this.questionnairesService.getAnswersEnabled( this.pregunta.idCuestionarioPregunta ).subscribe(
+            res => {
+               this.opciones = res;
+               this.sortOptions();
+               this.listadoOpciones = [];
+               if ( this.pregunta.codigoTipoPregunta === 'SELECT' ) {
+                  this.listadoOpciones.push( { label: 'Seleccione', value: null } );
+               }
+               this.opcionesCorrectas = [];
+               res.map( s => {
+                  this.listadoOpciones.push( { label: s.opcion, value: s.idPreguntaOpcion } );
+                  if ( s.indicadorCorrecto === true ) {
+                     this.opcionesCorrectas.push( s );
+                  }
+               } );
             } );
-         } );
+      } else {
+         this.opciones = [];
+         this.listadoOpciones = [];
+      }
    }
 
    onSubmit() {
-      this.respuesta.idCuestionarioPregunta = this.pregunta.idCuestionarioPregunta;
-      this.questionnairesService.addSolution( this.respuesta ).subscribe( res => {
-         this.navService.setMesage( 1, this.msgs );
+      this.saving = true;
+      if ( this.pregunta.codigoTipoPregunta === 'CHECK' ) {
+         for ( let x of this.respuestasCheckbox ) {
+            this.respuesta.idCuestionarioPregunta = this.pregunta.idCuestionarioPregunta;
+            this.respuesta.idMaestroRespuesta = this.idMaestroRespuestas;
+            this.respuesta.idPreguntaOpcion = x;
+            this.masterAnswersService.addSolution( this.respuesta ).subscribe( res => {
+               this.navService.setMesage( 1, this.msgs );
+               this.updateMaster( res, this.pregunta );
+               this.saving = false;
+
+            }, error => {
+               this.navService.setMesage( 3, this.msgs );
+               this.saving = false;
+            } );
+         }
          this.nextQuestion();
+      } else {
+         this.respuesta.idCuestionarioPregunta = this.pregunta.idCuestionarioPregunta;
+         this.respuesta.idMaestroRespuesta = this.idMaestroRespuestas;
+         this.masterAnswersService.addSolution( this.respuesta ).subscribe( res => {
+            this.navService.setMesage( 1, this.msgs );
+            this.updateMaster( res, this.pregunta );
+            this.nextQuestion();
+            this.saving = false;
+            this.respuesta = new Answers();
+         }, error => {
+            this.navService.setMesage( 3, this.msgs );
+            this.saving = false;
+         } );
+      }
+   }
+
+   updateMaster( r: Answers, p: QuestionnariesQuestions ) {
+      if ( p.indicadorFiltrante ) {
+         if ( p.codigoTipoPregunta === 'SELECT' && this.opcionesCorrectas.length > 0 ) {
+            if ( r.idPreguntaOpcion !== this.opcionesCorrectas[ 0 ].idPreguntaOpcion ) {
+               this.maestroRespuestas.indicadorAprobado = false;
+            }
+         } else if ( p.codigoTipoPregunta === 'CHECK' && this.opcionesCorrectas.length > 0 ) {
+            if ( this.opcionesCorrectas.filter( s => s.idPreguntaOpcion === r.idPreguntaOpcion ).length === 0 ) {
+               this.maestroRespuestas.indicadorAprobado = false;
+            }
+         }
+      }
+      this.maestroRespuestas.idPreguntaEnCurso = r.idCuestionarioPregunta;
+      if ( p.idCuestionarioPregunta === this.preguntas[ this.preguntas.length - 1 ].idCuestionarioPregunta ) {
+         this.maestroRespuestas.indicadorFinalizado = true;
+      }
+
+      this.masterAnswersService.update( this.maestroRespuestas ).subscribe( res => {
+         // this.navService.setMesage( 1, this.msgs );
       }, error => {
          this.navService.setMesage( 3, this.msgs );
       } );
+
+   }
+
+   private sortQuestions() {
+      this.preguntas.sort( function ( a, b ) {
+         if ( a.secuencia < b.secuencia )
+            return -1;
+         else
+            return 1;
+      } )
+   }
+
+   private sortOptions() {
+      this.opciones.sort( function ( a, b ) {
+         if ( a.orden < b.orden )
+            return -1;
+         else
+            return 1;
+      } )
    }
 
 }
