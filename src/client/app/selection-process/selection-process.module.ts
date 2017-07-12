@@ -37,7 +37,8 @@ import { QuestionnairesModule } from '../questionnaires/questionnaires.module';
 @NgModule( {
               imports: [
                  SharedModule,
-                 FormSharedModule
+                 FormSharedModule,
+                 QuestionnairesModule
               ],
               declarations: [
                  SelectionProcessComponent,
