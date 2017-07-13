@@ -123,6 +123,9 @@
 		</p-panel>
 	</div>
 </div>
+<div *ngIf="respuestaOk">
+	<p>Gracias por su diagnostico</p>
+</div>
 <p-confirmDialog width="400" #cd>
 	<p-footer>
 		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
