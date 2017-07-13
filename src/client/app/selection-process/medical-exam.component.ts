@@ -153,6 +153,10 @@ export class MedicalExamComponent implements OnInit {
                               if ( this.listEstExaMed.find(
                                     x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'RESPOND' ) {
                                  this.respondido = true;
+                                 this.enesperarespuesta = false;
+                                 this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe(data=>{
+
+                                 });
                               }
                               if ( this.medicalExam.idMaestroRespuesta ) {
                                  this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe( res => {

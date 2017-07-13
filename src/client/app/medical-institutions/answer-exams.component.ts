@@ -163,17 +163,17 @@ export class AnswerExamsComponent implements OnInit {
    onSubmitAnsw() {
       if ( this.medicalExam.idExamenMedico ) {
          let temp = this.listEstExaMed.find( c => c.idLista === this.medicalExam.idEstadoExamenMedico ).codigo;
+         if ( temp === 'RESPOND' ) {
+            this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'CERRADO' );
+         }
          if ( temp === 'ENESPR' ) {
-            if ( this.medicalExam.idAdjunto && this.medicalExam.idMaestroRespuesta && this.medicalExam.indicadorVerificado ) {
+            if ( this.medicalExam.idAdjunto && this.medicalExam.idMaestroRespuesta ) {
                this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'RESPOND' );
             } else {
                this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
             }
          }
-         if ( temp === 'RESPOND' ) {
-            this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'CERRADO' );
-         }
-         this.medicalExam.idMedicoResponsable = this.usuarioLogueado.usuario.idTercero;
+         this.medicalExam.idMedicoResponsable = this.usuarioLogueado.usuario.idUsuario;
          this.medicalExamService.update( this.medicalExam ).subscribe( data => {
             this._nav.setMesage( 2 );
             this.respuestaOk = true;
