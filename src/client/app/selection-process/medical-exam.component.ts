@@ -177,6 +177,10 @@ export class MedicalExamComponent implements OnInit {
                      } );
                   } else {
                      this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
+                     this.candidateProcessService.add( this.candidateProcess ).subscribe( process => {
+                        this.candidateProcess = process;
+                        this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
+                     } );
                   }
                } );
             } );
@@ -272,7 +276,6 @@ export class MedicalExamComponent implements OnInit {
          } else {
             this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
          }
-         this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
          this.medicalExamService.add( this.medicalExam ).subscribe( data => {
             this.medicalExam = data;
             this._nav.setMesage( 1 );
