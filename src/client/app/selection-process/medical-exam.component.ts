@@ -62,6 +62,7 @@ export class MedicalExamComponent implements OnInit {
    listEstExaMed: ListaItem[];
    enesperarespuesta: boolean = true;
    respondido: boolean = false;
+   cerrado: boolean = false;
    institucionMedica: boolean = true;
    consentimiennto: boolean = false;
    noaplicaexamen: boolean = true;
@@ -154,9 +155,9 @@ export class MedicalExamComponent implements OnInit {
                                     x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'RESPOND' ) {
                                  this.respondido = true;
                                  this.enesperarespuesta = false;
-                                 this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe(data=>{
+                                 this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe( data => {
 
-                                 });
+                                 } );
                               }
                               if ( this.medicalExam.idMaestroRespuesta ) {
                                  this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe( res => {
@@ -168,15 +169,21 @@ export class MedicalExamComponent implements OnInit {
                                     x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'ENESPR' ) {
                                  this.enesperarespuesta = true;
                               }
+                              if ( this.listEstExaMed.find(
+                                    x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'CERRADO' ) {
+                                 this.cerrado = true;
+                                 this.enesperarespuesta = false;
+                                 this.respondido = false;
+                              }
                               this.medicalExam.fechaProgramada = new Date( this.medicalExam.fechaProgramada );
-                           }else{
+                           } else {
                               this.medicalExam = new MedicalExam();
                            }
 
                         } );
                      } );
                   } else {
-                     this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
+                     this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'PROG' );
                      this.candidateProcessService.add( this.candidateProcess ).subscribe( process => {
                         this.candidateProcess = process;
                         this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
@@ -222,6 +229,10 @@ export class MedicalExamComponent implements OnInit {
       }
 
       if ( this.candidateProcess.idProcesoSeleccion !== undefined ) {
+         this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'CERRADO' );
+         this.medicalExamService.update( this.medicalExam ).subscribe( data => {
+            this.medicalExam = this.medicalExam;
+         } );
          this.candidateProcessService.update( this.candidateProcess ).subscribe( res => {
             if ( res.ok ) {
                this._nav.setMesage( 2 );

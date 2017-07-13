@@ -122,11 +122,8 @@ export class MedicalExamInformedConsentComponent implements OnInit {
       if ( this.medicalExam.codigoVerificacion === this.codigoVerificacion ) {
          if ( this.medicalExam.idExamenMedico ) {
             let temp = this.listEstExaMed.find( c => c.idLista === this.medicalExam.idEstadoExamenMedico ).codigo;
-            if ( temp === 'RESPOND' && this.medicalExam.indicadorVerificado ) {
-               this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'CERRADO' );
-            }
             if ( temp === 'ENESPR' ) {
-               if ( (this.medicalExam.idAdjunto && this.medicalExam.idMaestroRespuesta) || this.medicalExam.indicadorVerificado ) {
+               if ( (this.medicalExam.idAdjunto && this.medicalExam.idMedicoResponsable) || this.medicalExam.indicadorVerificado ) {
                   this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'RESPOND' );
                } else {
                   this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
@@ -198,6 +195,7 @@ export class MedicalExamInformedConsentComponent implements OnInit {
    }
 
    generarCodigo() {
+      // this.candidate.telefonoCelular
       this.medicalExam.codigoVerificacion = (Math.floor( Math.random() * (9999 - 1000 + 1) ) + 1000).toString();
 
       this.medicalExamService.update( this.medicalExam ).subscribe( data => {
@@ -206,7 +204,13 @@ export class MedicalExamInformedConsentComponent implements OnInit {
             codigo: this.medicalExam.codigoVerificacion
          }
 
-         this.candidateProcessService.generateVerificationCode( obj );
+         this.candidateProcessService.generateVerificationCode( obj ).subscribe( res => {
+            console.log( res );
+         }, error => {
+            this._nav.setMesage( 4, {
+               severity: 'success', summary: 'Exito', detail: 'El codigo se ha enviado con éxito.'
+            } );
+         } );
       } );
    }
 }

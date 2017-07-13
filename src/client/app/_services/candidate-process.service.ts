@@ -12,7 +12,7 @@ export class CandidateProcessService {
    private usuarioLogueado: any;
    private idUsuario: number;
 
-   constructor( private authHttp: AuthHttp, private http: Http ) {
+   constructor( private authHttp: AuthHttp, private http: Http, private jsonp: Jsonp ) {
       let token = localStorage.getItem( 'token' );
       if ( token !== null ) {
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
@@ -57,7 +57,7 @@ export class CandidateProcessService {
       data.append( 'destination', obj.destination );
       data.append( 'message', 'Su código de verificación es: ' + obj.codigo );
 
-      return this.http.post( 'https://contactalos.com/services/rs/sendsms.php', data )
+      return this.jsonp.get( 'https://contactalos.com/services/rs/sendsms.php', { search: data } )
       .map( response => <string[]> response.json()[ 1 ] );
    }
 

@@ -37,6 +37,7 @@ export class CallReferenceComponent implements OnInit {
    private candidate: Employee = new Employee();
    public indApproval: string;
    public approvalOptions: SelectItem[] = [];
+   public callResults: SelectItem[] = [];
    public candidateProcess: CandidateProcess = new CandidateProcess();
    private es: any;
    private minDate: Date = new Date();
@@ -110,6 +111,13 @@ export class CallReferenceComponent implements OnInit {
             if ( s.codigo !== 'NOAPL' ) {
                this.approvalOptions.push( { label: s.nombre, value: s.codigo } );
             }
+         } );
+      } );
+
+      this.listaService.getMasterDetails( 'ListasResultadosLllamadas' ).subscribe( res => {
+         this.callResults.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => {
+            this.callResults.push( { label: s.nombre, value: s.codigo } );
          } );
       } );
 
@@ -271,7 +279,7 @@ export class CallReferenceComponent implements OnInit {
 
    }
 
-   hideForm(){
+   hideForm() {
       this.llamar = false;
    }
 
@@ -315,5 +323,9 @@ export class CallReferenceComponent implements OnInit {
 
    finishQuestionnaire() {
       this.showFinish = true;
+   }
+
+   llamarReferencia() {
+      window.open("sip:robertochajin@sipjs.onsip.com", "_blank");
    }
 }

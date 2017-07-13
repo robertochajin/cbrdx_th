@@ -233,6 +233,28 @@
 					</div>
 				</fieldset>
 			</form>
+			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="processC" *ngIf="cerrado && readonly">
+				<fieldset >
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="validStep">{{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
+							<p>{{candidateProcess.estadoDiligenciado}}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="observacion">{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}:</label>
+							<p>{{candidateProcess.observacion}}</p>
+						</div>
+					</div>
+					<div class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+							        pButton (click)="goBack(false)"></button>
+						</div>
+					</div>
+				</fieldset>
+			</form>
 		</p-panel>
 	</div>
 </div>
