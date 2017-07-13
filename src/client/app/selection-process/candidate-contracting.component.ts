@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { PublicationsService } from '../_services/publications.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SelectionStepService } from '../_services/selection-step.service';
@@ -17,68 +18,61 @@ import { ListaItem } from '../_models/listaItem';
 
 import { JwtHelper } from 'angular2-jwt';
 import { RolesService } from '../_services/roles.service';
-import { References } from '../_models/references';
-import { ReferencesService } from '../_services/references.service';
-import { MedicalExam } from '../_models/medicalExam';
-import { MedicalInstitutionService } from '../_services/medical-institutions.service';
-import { MedicalInstitution } from '../_models/medical-institutions';
-import { MedicalExamService } from '../_services/medical-exam.service';
-import { MasterAnswersService } from '../_services/masterAnswers.service';
-import { MasterAnswers } from '../_models/masterAnswers';
+import { VacancyTest } from '../_models/vacancyTest';
+import { VacancyTestServices } from '../_services/vacancyTest.service';
+import { AdjuntosService } from '../_services/adjuntos.service';
+import { ConstanteService } from '../_services/constante.service';
+import { TerceroPublicaciones } from '../_models/terceroPublicaciones';
 
 @Component( {
                moduleId: module.id,
-               selector: 'medical-exam',
-               templateUrl: 'medical-exam.component.html',
+               selector: 'candidate-contracting',
+               templateUrl: 'candidate-contracting.component.html',
                providers: [ ConfirmationService ]
             } )
-export class MedicalExamComponent implements OnInit {
-
+export class CandidateContractingComponent implements OnInit {
    private publication: PersonnelRequirement = new PersonnelRequirement();
    private step: SelectionStep = new SelectionStep();
    private candidate: Employee = new Employee();
    public indApproval: string;
+   public listQuest: SelectItem[] = [];
+   guardandoResoursesQues = false;
+   questId: number;
+   public definingTest = false;
    public approvalOptions: SelectItem[] = [];
    public candidateProcess: CandidateProcess = new CandidateProcess();
    private es: any;
-   masterAnswer: MasterAnswers = new MasterAnswers();
-   showQuestionnaire = false;
    private minDate: Date = new Date();
    private stepStates: ListaItem[] = [];
    private desitionList: ListaItem[] = [];
-   public responsables: SelectItem[] = [];
-   private showCalendar = false;
    private readonly = false;
    svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
 
-   usuarioLogueado: any;
-   idRol: number;
+   svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
+   dataUploadArchivo: any = '';
+   dataUploadUsuario: any = '';
+   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
    jwtHelper: JwtHelper = new JwtHelper();
-   medicalExam: MedicalExam = new MedicalExam();
-   references: References[];
-   minDateEx: Date = new Date();
-   rangeFin: string;
-   medicalInstitutions: SelectItem[] = [];
-   listEstExaMed: ListaItem[];
-   enesperarespuesta: boolean = true;
-   respondido: boolean = false;
-   institucionMedica: boolean = true;
-   consentimiennto: boolean = false;
-   noaplicaexamen: boolean = true;
+   fsize: number = 50000000;
+   ftype: string = '';
+   idRol: number;
+   immediately: boolean;
+   private thirdPublication: TerceroPublicaciones = new TerceroPublicaciones();
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
       private _nav: NavService,
       private router: Router,
+      private location: Location,
+      private adjuntosService: AdjuntosService,
+      private vacancyTestServices: VacancyTestServices,
       private listaService: ListaService,
       private confirmationService: ConfirmationService,
       private rolesService: RolesService,
-      private masterAnswersService: MasterAnswersService,
+      private constanteService: ConstanteService,
       private employeesService: EmployeesService,
       private vacanciesService: VacanciesService,
       private candidateProcessService: CandidateProcessService,
-      private medicalExamService: MedicalExamService,
-      private medicalInstitutionService: MedicalInstitutionService,
       private selectionStepService: SelectionStepService ) {
 
       let token = localStorage.getItem( 'token' );
@@ -86,6 +80,17 @@ export class MedicalExamComponent implements OnInit {
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
          this.candidateProcess.idResponsable = this.usuarioLogueado.usuario.idUsuario;
       }
+
+      this.constanteService.getByCode( 'FTYPE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.ftype = data.valor;
+         }
+      } );
+      this.constanteService.getByCode( 'FSIZE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.fsize = Number( data.valor );
+         }
+      } );
 
       this.listaService.getMasterDetails( 'ListasDecisionesProcesoSeleccion' ).subscribe( res => {
          this.desitionList = res;
@@ -96,21 +101,17 @@ export class MedicalExamComponent implements OnInit {
             }
          } );
       } );
-      this.listaService.getMasterDetails( 'ListasEstadosExamenesMedicos' ).subscribe( res => {
-         this.listEstExaMed = res;
-      } );
 
       this.route.params.subscribe( ( params: Params ) => {
          if ( params[ 'idStep' ] !== undefined && params[ 'idTerceroPublication' ] !== undefined ) {
             this.candidateProcess.idProcesoPaso = params[ 'idStep' ];
             this.candidateProcess.idTerceroPublicacion = params[ 'idTerceroPublication' ];
-            this.medicalExamService.commpareRisk( this.candidateProcess.idTerceroPublicacion ).subscribe( data => {
-               this.noaplicaexamen = data;
-            } );
+
             selectionStepService.get( params[ 'idStep' ] ).subscribe( step => {
                this.step = step;
 
                selectionStepService.getTerceroPublicacio( params[ 'idTerceroPublication' ] ).subscribe( res => {
+                  this.thirdPublication = res;
                   employeesService.get( res.idTercero ).subscribe( cndt => {
                      this.candidate = cndt;
                      this.candidate.nombreCompleto = this.candidate.primerNombre + ' ' +
@@ -121,18 +122,6 @@ export class MedicalExamComponent implements OnInit {
                   } );
                   vacanciesService.getPublication( res.idPublicacion ).subscribe( pb => {
                      this.publication = pb;
-                     // obtener las instituciones medicas
-                     this.medicalInstitutionService.getByIdPublic( this.publication.idPublicacion ).subscribe( data => {
-                        if ( data.length > 0 ) {
-                           this.institucionMedica = true;
-                           this.medicalInstitutions.push( { label: 'Seleccione', value: null } );
-                           for ( let c of data ) {
-                              this.medicalInstitutions.push( { label: c.institucionMedica, value: c.idInstitucionMedica } );
-                           }
-                        } else {
-                           this.institucionMedica = false;
-                        }
-                     } );
                   } );
                } );
 
@@ -145,48 +134,18 @@ export class MedicalExamComponent implements OnInit {
                         if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ) {
                            this.readonly = true;
                         }
-                        // obtener examen medico
-                        this.medicalExamService.getByIdProceso( this.candidateProcess.idProcesoSeleccion ).subscribe( rs => {
-                           if ( rs ) {
-                              this.medicalExam = rs;
-                              this.medicalExam.fechaProgramada = new Date( this.medicalExam.fechaProgramada );
-                              if ( this.listEstExaMed.find(
-                                    x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'RESPOND' ) {
-                                 this.respondido = true;
-                                 this.enesperarespuesta = false;
-                                 this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe(data=>{
-
-                                 });
-                              }
-                              if ( this.medicalExam.idMaestroRespuesta ) {
-                                 this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe( res => {
-                                    this.masterAnswer = res;
-                                    this.showQuestionnaire = true;
-                                 } );
-                              }
-                              if ( this.listEstExaMed.find(
-                                    x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'ENESPR' ) {
-                                 this.enesperarespuesta = true;
-                              }
-                              this.medicalExam.fechaProgramada = new Date( this.medicalExam.fechaProgramada );
-                           }else{
-                              this.medicalExam = new MedicalExam();
-                           }
-
-                        } );
                      } );
+
                   } else {
                      this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
-                     this.candidateProcessService.add( this.candidateProcess ).subscribe( process => {
-                        this.candidateProcess = process;
-                        this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
-                     } );
                   }
                } );
+
             } );
+
          } else {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'selection-process' ] );
+            this.location.back();
          }
       } );
 
@@ -203,13 +162,6 @@ export class MedicalExamComponent implements OnInit {
          ],
          monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
-      let today = new Date();
-      let year = today.getFullYear();
-      let last40Year = year - 40;
-      let next40Year = year + 40;
-      this.minDateEx = today;
-      this.rangeFin = `${last40Year}:${next40Year}`;
-
    }
 
    onSubmit() {
@@ -250,43 +202,6 @@ export class MedicalExamComponent implements OnInit {
       }
    }
 
-   onSubmitExam() {
-      if ( this.medicalExam.idExamenMedico ) {
-         let temp = this.listEstExaMed.find( c => c.idLista === this.medicalExam.idEstadoExamenMedico ).codigo;
-         if ( temp === 'RESPOND' ) {
-            this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'CERRADO' );
-         }
-         if ( temp === 'ENESPR' ) {
-            if ( this.medicalExam.idAdjunto && this.medicalExam.idMaestroRespuesta && this.medicalExam.indicadorVerificado ) {
-               this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'RESPOND' );
-            } else {
-               this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
-            }
-         }
-         this.medicalExamService.update( this.medicalExam ).subscribe( data => {
-            this._nav.setMesage( 2 );
-            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-         }, error => {
-            this._nav.setMesage( 3 );
-            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-         } );
-      } else {
-         if ( !this.institucionMedica ) {
-            this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'RESPOND' );
-         } else {
-            this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
-         }
-         this.medicalExamService.add( this.medicalExam ).subscribe( data => {
-            this.medicalExam = data;
-            this._nav.setMesage( 1 );
-            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-         }, error => {
-            this._nav.setMesage( 3 );
-            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-         } );
-      }
-   }
-
    getIdStateByCode( code: string ): number {
       let state: ListaItem = this.stepStates.find( s => s.codigo === code );
       if ( state !== undefined ) {
@@ -298,15 +213,6 @@ export class MedicalExamComponent implements OnInit {
 
    getIdDesitionByCode( code: string ): number {
       let state: ListaItem = this.desitionList.find( s => s.codigo === code );
-      if ( state !== undefined ) {
-         return state.idLista;
-      } else {
-         return 0;
-      }
-   }
-
-   getIdStateExamByCode( code: string ): number {
-      let state: ListaItem = this.listEstExaMed.find( s => s.codigo === code );
       if ( state !== undefined ) {
          return state.idLista;
       } else {
@@ -334,4 +240,13 @@ export class MedicalExamComponent implements OnInit {
       }
 
    }
+
+   setImmediateDate() {
+      if(this.immediately){
+         this.thirdPublication.fechaContratacion = new Date();
+      } else {
+         this.thirdPublication.fechaContratacion = null;
+      }
+   }
+
 }

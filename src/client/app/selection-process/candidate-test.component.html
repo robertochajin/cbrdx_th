@@ -101,7 +101,7 @@
 								></button>
 								<button *ngIf="recurso.idAdjunto" type="button" class="ui-button ui-button-success btn" icon="fa-download"
 								        data-toggle="tooltip"
-								        title="{{'BTN_DESCARGAR' | translate}}"
+								        title="{{'BTN_DOWNLOAD' | translate}}"
 								        pButton (click)="downloadFile(recurso.idAdjunto)"
 								></button>
 							</template>
@@ -158,7 +158,7 @@
 					<div class="row">
 						<div class="form-group col-md-6">
 							<div class="ui-grid-col-3">
-								<label>{{'LBL_ADJUNTAR' | translate}} </label>
+								<label>{{'PROCESOSELECCION.LBL_ADJUNTOPRUEBATECNICA' | translate}} </label>
 								<div *ngIf="testToDefine.idAdjunto != null" class="btn-group" role="group" style="display: block;">
 									<a class="btn btn-default" style="max-width: 87%; overflow: hidden;"
 									   (click)="downloadFile(testToDefine.idAdjunto)">
@@ -171,7 +171,7 @@
 								</div>
 								<p-fileUpload *ngIf="testToDefine.idAdjunto == null" name="file" url="{{svcThUrl}}" auto="true"
 								              class="upload-avatar"
-								              chooseLabel="{{'LBL_ADJUNTAR' | translate}}"
+								              chooseLabel="{{'PROCESOSELECCION.LBL_ADJUNTOPRUEBATECNICA' | translate}}"
 								              (onBeforeSend)="onBeforeSend($event)"
 								              (onSelect)="onSelect($event, $event.files)"
 								              (onUpload)="uploadingOk($event)"
