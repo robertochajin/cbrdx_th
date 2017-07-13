@@ -147,22 +147,28 @@ export class MedicalExamComponent implements OnInit {
                         }
                         // obtener examen medico
                         this.medicalExamService.getByIdProceso( this.candidateProcess.idProcesoSeleccion ).subscribe( rs => {
-                           this.medicalExam = rs;
-                           this.medicalExam.fechaProgramada = new Date(this.medicalExam.fechaProgramada);
-                           if ( this.listEstExaMed.find( x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'RESPOND' ) {
-                              this.respondido = true;
+                           if ( rs ) {
+                              this.medicalExam = rs;
+                              this.medicalExam.fechaProgramada = new Date( this.medicalExam.fechaProgramada );
+                              if ( this.listEstExaMed.find(
+                                    x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'RESPOND' ) {
+                                 this.respondido = true;
+                              }
+                              if ( this.medicalExam.idMaestroRespuesta ) {
+                                 this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe( res => {
+                                    this.masterAnswer = res;
+                                    this.showQuestionnaire = true;
+                                 } );
+                              }
+                              if ( this.listEstExaMed.find(
+                                    x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'ENESPR' ) {
+                                 this.enesperarespuesta = true;
+                              }
+                              this.medicalExam.fechaProgramada = new Date( this.medicalExam.fechaProgramada );
+                           }else{
+                              this.medicalExam = new MedicalExam();
                            }
 
-                           if(this.medicalExam.idMaestroRespuesta){
-                              this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe( res => {
-                                 this.masterAnswer = res;
-                                 this.showQuestionnaire = true;
-                              } );
-                           }
-                           if ( this.listEstExaMed.find( x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'ENESPR' ) {
-                              this.enesperarespuesta = true;
-                           }
-                           this.medicalExam.fechaProgramada = new Date( this.medicalExam.fechaProgramada );
                         } );
                      } );
                   } else {
@@ -239,16 +245,15 @@ export class MedicalExamComponent implements OnInit {
    onSubmitExam() {
       if ( this.medicalExam.idExamenMedico ) {
          let temp = this.listEstExaMed.find( c => c.idLista === this.medicalExam.idEstadoExamenMedico ).codigo;
-         let tempCod = this.getIdStateExamByCode( temp );
+         if ( temp === 'RESPOND' ) {
+            this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'CERRADO' );
+         }
          if ( temp === 'ENESPR' ) {
-            if ( this.medicalExam.idAdjunto && this.medicalExam.idCuestionarioOpciones && this.medicalExam.indicadorVerificado ) {
+            if ( this.medicalExam.idAdjunto && this.medicalExam.idMaestroRespuesta && this.medicalExam.indicadorVerificado ) {
                this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'RESPOND' );
             } else {
                this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
             }
-         }
-         if ( temp === 'RESPOND' ) {
-            this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'CERRADO' );
          }
          this.medicalExamService.update( this.medicalExam ).subscribe( data => {
             this._nav.setMesage( 2 );
@@ -258,7 +263,7 @@ export class MedicalExamComponent implements OnInit {
             this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
          } );
       } else {
-         if ( this.respondido ) {
+         if ( !this.institucionMedica ) {
             this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'RESPOND' );
          } else {
             this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
