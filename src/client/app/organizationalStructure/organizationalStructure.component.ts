@@ -63,9 +63,11 @@ export class OrganizationalStructureComponent {
                   'label': c.nombre,
                   'data': c,
                   'leaf': false,
+                   'expanded': true
                };
                this.treedCompany.push( companyNode );
-               this.selectedNode = companyNode;
+               // this.selectedNode = companyNode;
+               this.nodeExpand( companyNode );
             }
             this.btnEmpresa = false;
             this.newBranch();
@@ -266,6 +268,7 @@ export class OrganizationalStructureComponent {
                   } );
             }
          } else {
+            this.navService.setMesage(0, {severity: 'error', summary: 'Error', detail: 'Antes de Guardar debe agregar una dirección.'});
             this.guardando = false;
          }
       } else {

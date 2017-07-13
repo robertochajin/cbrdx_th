@@ -236,10 +236,8 @@ export class AbsenceComponent implements OnInit {
          this.nextStep.emit( 7 );
          this.msgsAlert = [];
       } else {
-         this.msgsAlert[ 0 ] = {
-            severity: 'error', summary: 'Error', detail: 'Debe llenar al menos una opción en cada' +
-                                                         ' posición'
-         };
+         this._nav.setMesage( 0 , { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos una opción en cada posición' } );
+         // this.msgsAlert[ 0 ] = { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos una opción en cada posición' };
       }
    }
 }

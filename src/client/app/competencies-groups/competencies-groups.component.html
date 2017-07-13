@@ -10,18 +10,13 @@
 						<div class="row">
 							<div class="form-group col-md-8">
 								<label for="nombre">* {{'LBL_NOMBRE' | translate }}</label>
-								<div  *ngIf="group.idGrupoCompetencia">
-									<h3>{{group.grupoCompetencia}}</h3>
-								</div>
-								<div *ngIf="!group.idGrupoCompetencia">
-									<input type="text" pInputText id="nombre" name="nombre"
-									       [(ngModel)]="group.grupoCompetencia" #nombre="ngModel" (keyup)="capitalize()"
-									       required maxlength="64"/>
-									<div class="ui-message ui-messages-error ui-corner-all"
-									     *ngIf="fg.submitted && !nombre.valid">
-										<i class="fa fa-close"></i>
-										{{'LBL_NOMBRE' | translate }} {{'LBL_REQUERIDO' | translate }}
-									</div>
+								<input type="text" pInputText id="nombre" name="nombre"
+								       [(ngModel)]="group.grupoCompetencia" #nombre="ngModel" (keyup)="capitalize()"
+								       required maxlength="64"/>
+								<div class="ui-message ui-messages-error ui-corner-all"
+								     *ngIf="fg.submitted && !nombre.valid">
+									<i class="fa fa-close"></i>
+									{{'LBL_NOMBRE' | translate }} {{'LBL_REQUERIDO' | translate }}
 								</div>
 							</div>
 							<div class="form-group col-md-4">
@@ -41,7 +36,7 @@
 							<div class="form-group col-md-12">
 								<label for="description">* {{'LBL_DESCRIPCION' | translate }}</label>
 								<textarea id="description" name="description" #description="ngModel" pInputTextarea rows="5"
-								          [(ngModel)]="group.descripcion" required></textarea>
+								          [(ngModel)]="group.descripcion"  maxlength="495" required></textarea>
 								<div class="ui-message ui-messages-error ui-corner-all"
 								     *ngIf="fg.submitted && !description.valid">
 									<i class="fa fa-close"></i>
@@ -78,7 +73,7 @@
 		</div>
 	</div>
 	<p-tabView orientation="left" id="tbvCompetenciasHabilidades">
-		<p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}" [selected]="i == 0"
+		<p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}" [selected]="i == selectedGroup"
 		            headerStyleClass="{{ group.indicadorHabilitado ? '':'inhabilitado' }}"
 		            [disabled]="editingCompetencie">
 			<div class="row" *ngIf="editingCompetencie">
@@ -94,7 +89,7 @@
 									<div class="form-group col-md-10">
 										<label for="cNombre">* {{'COMPETENCIES.LBL_COMPETENCIA' | translate }}/ {{'COMPETENCIES.LBL_HABILIDAD' |
 											translate }}</label>
-										<div *ngIf="!competencie.idCompetencia">
+										<div>
 											<input type="text" pInputText id="cNombre" name="cNombre"
 											       [(ngModel)]="competencie.competencia" #cNombre="ngModel"
 											       required (keyup)="capitalizec()" maxlength="64"/>
@@ -105,9 +100,9 @@
 												{{'LBL_REQUERIDO' | translate }}
 											</div>
 										</div>
-										<div *ngIf="competencie.idCompetencia">
-											<p> <strong>{{competencie.competencia}}</strong></p>
-										</div>
+										<!--<div *ngIf="competencie.idCompetencia">-->
+											<!--<p> <strong>{{competencie.competencia}}</strong></p>-->
+										<!--</div>-->
 										
 									</div>
 									<div class="form-group col-md-1"></div>
@@ -117,7 +112,7 @@
 									<div class="form-group col-md-10">
 										<label for="cDescription">* {{'LBL_DESCRIPCION' | translate }}</label>
 										<textarea id="cDescription" name="cDescription" #cDescription="ngModel" pInputTextarea
-										          rows="5"
+										          rows="5" maxlength="490"
 										          [(ngModel)]="competencie.descripcion" required></textarea>
 										<div class="ui-message ui-messages-error ui-corner-all"
 										     *ngIf="fc.submitted && !cDescription.valid">

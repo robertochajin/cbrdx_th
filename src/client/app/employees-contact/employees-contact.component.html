@@ -5,10 +5,11 @@
       <form name="formulario" (ngSubmit)="fcont.valid && onSubmit()" #fcont="ngForm" novalidate id="formulario">
         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
           <div class="row">
-            <div class="form-group col-md-12">
+	          <div class="form-group col-md-12" *hasPermission="seccion.CORREOELECTRONICO ? seccion.CORREOELECTRONICO : defaultCampo">
                 <label for="correoElectronico">*{{'LBL_CORREOELECTRONICO' | translate}}</label>
                 <input id="correoElectronico" name="correoElectronico" #correoElectronico="ngModel" pInputText type="text" required
-                       [(ngModel)]="employee.correoElectronico" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"/>
+                       [(ngModel)]="employee.correoElectronico" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"
+                (keyup)="correoMinusculas()"/>
                 <div class="ui-message ui-messages-error ui-corner-all" *ngIf="fcont.submitted && !correoElectronico.valid ">
                   <i class="fa fa-close"></i>
                   {{'LBL_CORREOELECTRONICO' | translate}} {{'LBL_REQUERIDO' | translate}}
@@ -16,7 +17,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="form-group col-md-12">
+	          <div class="form-group col-md-12" *hasPermission="seccion.SITIOWEB ? seccion.SITIOWEB : defaultCampo">
               <label for="sitio">{{'EMPLOYEES.LBL_SITIOWEB' | translate}}</label>
               <input type="text" pInputText id="sitio" name="sitio"
                      [(ngModel)]="employee.sitioWeb" #web="ngModel"
@@ -24,22 +25,24 @@
             </div>
           </div>
           <div class="row">
-            <div class="form-group col-md-6">
+	          <div class="form-group col-md-6" *hasPermission="seccion.TELEFONOFIJO ? seccion.TELEFONOFIJO : defaultCampo">
               <label for="fijo">{{ 'LBL_TELEFONO' | translate }}</label>
               <p-inputMask id="fijo" name="fijo"
                            mask="?(999) 999-9999 Ext 9999" placeholder="(999) 999-9999 Ext 99999"
                            [(ngModel)]="employee.telefonoFijo" #telefonoFijo="ngModel" [required]="cel" (keyup)="validarTelefono()"
+                           [disabled]="seccion.TELEFONOFIJO.editable === false"
               ></p-inputMask>
                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="fcont.submitted && !telefonoFijo.valid">
                   <i class="fa fa-close"></i>
                   {{'LBL_TELEFONO' | translate}} {{'LBL_REQUERIDO' | translate}}
                </div>
             </div>
-            <div class="form-group col-md-6">
+	          <div class="form-group col-md-6" *hasPermission="seccion.TELEFONOCELULAR ? seccion.TELEFONOCELULAR : defaultCampo">
               <label for="cel">{{ 'LBL_CELULAR' | translate }}</label>
               <p-inputMask id="cel" name="cel" [required]="tel" (keyup)="validarCelular()"
                            mask="?(999) 999-9999" placeholder="(999) 999-9999"
                            [(ngModel)]="employee.telefonoCelular" #celular="ngModel"
+                           [disabled]="seccion.TELEFONOCELULAR.editable === false"
               ></p-inputMask>
                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="fcont.submitted && !celular.valid">
                   <i class="fa fa-close"></i>

@@ -34,6 +34,7 @@ export class PositionsAddComponent implements OnInit  {
    acordion = 0;
    idRequirement = 0;
    requirement: PersonnelRequirement = new PersonnelRequirement();
+   rangoEdad:number[];
 
    constructor( private positionsService: PositionsService,
       private router: Router,

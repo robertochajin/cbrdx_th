@@ -17,6 +17,8 @@ import { ListaItem } from '../_models/listaItem';
 
 import { JwtHelper } from 'angular2-jwt';
 import { RolesService } from '../_services/roles.service';
+import { MasterAnswersService } from '../_services/masterAnswers.service';
+import { MasterAnswers } from '../_models/masterAnswers';
 
 @Component( {
                moduleId: module.id,
@@ -32,16 +34,20 @@ export class CandidateRevisionComponent implements OnInit {
    public approvalOptions: SelectItem[] = [];
    public candidateProcess: CandidateProcess = new CandidateProcess();
    private es: any;
+   maestrosRespuestas: MasterAnswers[] = [];
+   showQuestionnaire = false;
    private minDate: Date = new Date();
    private stepStates: ListaItem[] = [];
    private desitionList: ListaItem[] = [];
    public responsables: SelectItem[] = [];
    private showCalendar = false;
    private readonly = false;
+   svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
 
    usuarioLogueado: any;
    idRol: number;
    jwtHelper: JwtHelper = new JwtHelper();
+   private allTestApproved = true;
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
@@ -50,6 +56,7 @@ export class CandidateRevisionComponent implements OnInit {
       private listaService: ListaService,
       private confirmationService: ConfirmationService,
       private rolesService: RolesService,
+      private masterAnswersService: MasterAnswersService,
       private employeesService: EmployeesService,
       private vacanciesService: VacanciesService,
       private candidateProcessService: CandidateProcessService,
@@ -111,6 +118,21 @@ export class CandidateRevisionComponent implements OnInit {
 
             } );
 
+
+            this.masterAnswersService.getByTerceroPublicacion( this.candidateProcess.idTerceroPublicacion ).subscribe( res => {
+               this.maestrosRespuestas = res;
+               this.maestrosRespuestas.map(m => {
+                  if(m.indicadorFinalizado && !m.indicadorAprobado){
+                     this.allTestApproved = m.indicadorAprobado;
+                  }
+               });
+               if(this.allTestApproved) {
+                  this.indApproval = 'APRB'
+               } else {
+                  this.indApproval = 'NOAPRB'
+               }
+            } );
+
          } else {
             this._nav.setMesage( 3 );
             this.router.navigate( [ 'selection-process' ] );
@@ -136,27 +158,27 @@ export class CandidateRevisionComponent implements OnInit {
          this.candidateProcessService.update( this.candidateProcess ).subscribe( res => {
             if ( res.ok ) {
                this._nav.setMesage( 2 );
-               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
             } else {
                this._nav.setMesage( 3 );
-               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
             }
          }, () => {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+            this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
          } );
       } else {
          this.candidateProcessService.add( this.candidateProcess ).subscribe( res => {
             if ( res.idProcesoSeleccion ) {
                this._nav.setMesage( 1 );
-               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
             } else {
                this._nav.setMesage( 3 );
-               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
             }
          }, () => {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+            this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
          } );
       }
    }
@@ -190,12 +212,17 @@ export class CandidateRevisionComponent implements OnInit {
                                               header: 'Confirmación',
                                               icon: 'fa fa-question-circle',
                                               accept: () => {
-                                                 this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+                                                 this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
                                               }
                                            } );
       }else {
-         this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+         this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
       }
 
    }
+
+   toggleQuestionnaire(){
+      this.showQuestionnaire = !this.showQuestionnaire;
+   }
+
 }

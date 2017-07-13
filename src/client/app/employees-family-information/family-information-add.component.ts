@@ -15,6 +15,7 @@ import { Employee } from '../_models/employees';
 import { EmployeesService } from '../_services/employees.service';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
+import { ConstanteService } from '../_services/constante.service';
 
 @Component( {
                moduleId: module.id,
@@ -46,12 +47,16 @@ export class FamilyInformationAddComponent implements OnInit {
    idTipoTercero: number;
    cel: boolean = false;
    tel: boolean = false;
+   tiposdoc: string[] = [];
+   mayeda: number = 0;
+   listTypeDoc: ListaItem[] = [];
 
    constructor( private familyInformationService: FamilyInformationService,
       private route: ActivatedRoute,
       private fb: FormBuilder,
       private locateService: LocateService,
       private employeesService: EmployeesService,
+      private constanteService: ConstanteService,
       private listEmployeesService: ListEmployeesService,
       private confirmationService: ConfirmationService,
       private listaService: ListaService,
@@ -73,6 +78,7 @@ export class FamilyInformationAddComponent implements OnInit {
       };
 
       this.listaService.getMasterDetails( 'ListasTiposDocumentos' ).subscribe( res => {
+         this.listTypeDoc = res;
          this.documentTypes.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => this.documentTypes.push( { label: s.nombre, value: s.idLista } ) );
       } );
@@ -102,6 +108,18 @@ export class FamilyInformationAddComponent implements OnInit {
       this.maxDate.setFullYear( year );
       this.range = `${lasYear}:${year}`;
       this.focusUP();
+      this.constanteService.getByCode( 'DOCMYE' ).subscribe( data => {
+         if ( data.valor ) {
+            for ( let c of data.valor.split( ',' ) ) {
+               this.tiposdoc.push( c );
+            }
+         }
+      } );
+      this.constanteService.getByCode( 'MAYEDA' ).subscribe( data => {
+         if ( data.valor ) {
+            this.mayeda = Number( data.valor );
+         }
+      } );
 
    }
 
@@ -164,11 +182,12 @@ export class FamilyInformationAddComponent implements OnInit {
 
       } else {
          this.focusUP();
-         this.msgs.push( {
+         /* this.msgs.push( {
                             severity: 'error',
                             summary: 'Dirección invalida',
                             detail: 'Es necesario agregar una dirección válida'
-                         } );
+                         } ); */
+         this._nav.setMesage(0,{severity: 'error',summary: 'Dirección invalida',detail: 'Es necesario agregar una dirección válida'});
       }
    }
 
@@ -193,23 +212,27 @@ export class FamilyInformationAddComponent implements OnInit {
 
    onChangeMethod( event: any ) {
 
+      this.familyInformation.fechaNacimiento = null;
+      let tipodocfamili = this.listTypeDoc.find( x => x.idLista === this.selectedDocument );
+      let codigo: string = '';
+      if ( tipodocfamili ) {
+         codigo = tipodocfamili.codigo;
+      }
+      let tipo = this.tiposdoc.find( t => t === codigo ); // buscar tipo documento elegido
       let today = new Date();
       let month = today.getMonth();
       let year = today.getFullYear();
-      let prev18Year = year - 18;
+      let prev18Year = year - this.mayeda;
       let prev20Year = year - 20;
       let lastYear = prev18Year - 80;
       this.maxDate = new Date();
 
-      if ( this.selectedDocument === 1 ) {
+      if ( tipo ) {
          this.maxDate.setFullYear( prev18Year );
          this.range = `${lastYear}:${prev18Year}`;
-      } else if ( this.selectedDocument === 2 ) {
+      } else  {
          this.range = `${prev18Year}:${year}`;
          this.maxDate.setFullYear( year );
-      } else {
-         this.maxDate.setFullYear( year );
-         this.range = `${prev18Year}:${year}`;
       }
 
    }

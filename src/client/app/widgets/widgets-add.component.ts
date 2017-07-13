@@ -4,6 +4,7 @@ import { ConfirmationService, Message } from 'primeng/primeng';
 import { Widgets } from '../_models/widgets';
 import { WidgetServices } from '../_services/widget.service';
 import { Location } from '@angular/common';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -21,7 +22,9 @@ export class WidgetsAddComponent implements OnInit {
    constructor( private router: Router,
       private location: Location,
       private widgetServices: WidgetServices,
-      private confirmationService: ConfirmationService ) {
+      private confirmationService: ConfirmationService,
+      private _nav: NavService
+   ) {
    }
 
    ngOnInit() {
@@ -33,10 +36,12 @@ export class WidgetsAddComponent implements OnInit {
    onSubmit() {
       this.msgs = [];
       this.widgetServices.add( this.widgets ).subscribe( data => {
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         // this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         this._nav.setMesage(0,{severity: 'success', summary: 'Exito', detail: 'Registro guardado correctamente.'});
          this.location.back();
       }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         // this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         this._nav.setMesage(0,{severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
       } );
    }
 

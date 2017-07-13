@@ -31,6 +31,7 @@ export class RisksComponent implements OnInit {
    ngOnInit() {
       this.risksService.getAll().subscribe(
          risks => {
+            console.info(risks);
             for ( let r of risks ) {
                this.risksService.getTypeRiskById( r.idTipoRiesgo ).subscribe(
                   res => {
@@ -69,9 +70,11 @@ export class RisksComponent implements OnInit {
    change( r: Risks ) {
       this.risksService.update( r )
       .subscribe( data => {
-         this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         // this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         this.navService.setMesage(0,{severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' });
       }, error => {
-         this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         // this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         this.navService.setMesage(0, {severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
       } );
    }
 

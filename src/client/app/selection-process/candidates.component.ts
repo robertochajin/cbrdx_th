@@ -15,6 +15,7 @@ import { Publications } from '../_models/publications';
 import { SelectionStepService } from '../_services/selection-step.service';
 import { UsuariosService } from '../_services/usuarios.service';
 import { VUsuarioRol } from '../_models/vUsuarioRol';
+import { PersonnelRequirementServices } from '../_services/personnelRequirement.service';
 
 @Component( {
                moduleId: module.id,
@@ -30,6 +31,9 @@ export class CandidatesComponent implements OnInit {
    public steps: SelectionStep[] = [];
    publication: Publications = new Publications();
    private userRoles: VUsuarioRol[] = [];
+   viewpostulations: boolean = false;
+   idTercero: number = 0;
+   numeroVacantes: number;
 
    constructor( private rolesService: RolesService,
       private userService: UsuariosService,
@@ -38,6 +42,7 @@ export class CandidatesComponent implements OnInit {
       private navService: NavService,
       private publicationsService: PublicationsService,
       private candidateProcessService: CandidateProcessService,
+      private personnelRequirementServices: PersonnelRequirementServices,
       private selectionStepService: SelectionStepService ) {
 
       this.busqueda = this.navService.getSearch( 'candidates.component' );
@@ -55,6 +60,9 @@ export class CandidatesComponent implements OnInit {
 
                this.publicationsService.getById( params[ 'idPublication' ] ).subscribe( publication => {
                   this.publication = publication;
+                  this.personnelRequirementServices.getByIdRequirement( this.publication.idRequerimiento ).subscribe( data => {
+                     this.numeroVacantes = data.cantidadVacantes;
+                  } );
 
                   this.selectionStepService.getAllByProcessAndType( this.publication.idProceso, this.publication.formaReclutamiento )
                   .subscribe( steps => {
@@ -82,8 +90,12 @@ export class CandidatesComponent implements OnInit {
       if ( this.userRoles.find( r => r.rol === 'ROLE_PROCESOSELECCION' )
            || (myStep !== undefined && myStep.idResponsable === this.usuarioLogueado.usuario.idUsuario) ) {
          if ( myStep.interfazInterna ) {
-            //candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
-            //process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso
+            // *Revision* selection-process/process-step/candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
+            // *Central de riesgos* selection-process/process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso
+            // *CallReferences* selection-process/process-step/call-reference/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
+            // *PruebasTecnicas* selection-process/process-step/candidate-test/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
+            // *Examen medico* selection-process/process-step/medical-exam/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
+            // *Contratacion* selection-process/process-step/contracting/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
 
             this.router.navigate(
                [ myStep.interfazInterna.replace( ':idStep', myStep.idProcesoPaso.toString() )
@@ -91,8 +103,8 @@ export class CandidatesComponent implements OnInit {
                .replace( ':idProceso', myStep.idProcesoSeleccion ? myStep.idProcesoSeleccion.toString() : '0' )
                ] );
          } else {
-            let stepProcessUrl = 'process-step/' + idStep.toString() + '/terceroPublication/' + step.idTerceroPublicacion.toString();
-            if(myStep.idProcesoSeleccion) {
+            let stepProcessUrl = 'selection-process/process-step/' + idStep.toString() + '/terceroPublication/' + step.idTerceroPublicacion.toString();
+            if ( myStep.idProcesoSeleccion ) {
                stepProcessUrl += '/process/' + myStep.idProcesoSeleccion.toString();
             } else {
                stepProcessUrl += '/process/0';
@@ -127,6 +139,15 @@ export class CandidatesComponent implements OnInit {
       } else {
          return false;
       }
+   }
+
+   viewHistory( id: number ) {
+      this.idTercero = id;
+      this.viewpostulations = !this.viewpostulations;
+   }
+
+   toogleHistory() {
+      this.viewpostulations = !this.viewpostulations;
    }
 
    setSearch() {

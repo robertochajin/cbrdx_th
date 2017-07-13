@@ -1,0 +1,185 @@
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+		<p-panel header="{{ 'PROCESOSELECCION.LBL_INFOPOSTULANTE' | translate }}" class="perfil">
+			<form class="form-horizontal">
+				<fieldset>
+					<div class="form-group row">
+						<div class="col-md-2">
+							<div class="thumbnail">
+								<img src="{{svcThUrlAvatar}}/file/{{candidate.imagen}}" alt="...">
+							</div>
+						</div>
+						<div class="col-md-10">
+							<h2>{{candidate.nombreCompleto}}</h2>
+							<h4>{{candidate.tipoDocumento}} - {{candidate.numeroDocumento}}</h4>
+							<span>{{candidate.fechaNacimiento}} ({{candidate.edad}})</span>
+							<div class="perfil-footer-button">
+								<button icon="fa-address-book-o" label="{{'PROCESOSELECCION.LBL_VERHOJADEVIDA' | translate }}" type="button"
+								        (click)="curriculum()"
+								        pButton></button>
+								<button icon="fa-dot-circle-o" label="{{'PROCESOSELECCION.LBL_CUESTIONARIOS' | translate }}" type="button"
+								        disabled pButton></button>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</p-panel>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-10 col-md-offset-1" *ngIf="!llamar">
+		<p-panel header="{{'PROCESOSELECCION.LBL_LLAMARREFERENCIA' | translate}}">
+			<div class="row">
+				<div class="col-md-12">
+					<p>{{step.descripcion}}</p>
+				</div>
+			</div>
+			<form class="form-horizontal">
+				<fieldset>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-12">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'PROCESOSELECCION.LBL_POSTULANTEA' | translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12">{{publication.cargo}}</label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_OFICINA' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12">{{publication.estructuraFisica}}</label>
+							</div>
+						</div>
+						<div class="row">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_AREA' | translate }}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12">{{publication.area}}</label>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="references" [responsive]="true">
+				<p-column field="tipoReferencia" header="{{'EMPLOYEES.LBL_TIPOREFERENCIA' | translate }}" [sortable]="true"></p-column>
+				<p-column field="nombreCompleto" header="{{'LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
+				<p-column field="numeroContacto" header="{{'EMPLOYEES.LBL_NUMEROCONTACTO' | translate }}" [sortable]="true"></p-column>
+				<p-column field="resultado" header="{{'LBL_RESULTADO' | translate }}" [sortable]="true"></p-column>
+				<p-column field="descripcionDivisonPolitica" header="{{'LBL_CIUDAD' | translate }}" [sortable]="true"></p-column>
+				<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+					<template let-reference="rowData" pTemplate="body">
+						<div class="btn-group" role="group" aria-label="...">
+							<button type="button" pButton class="ui-button btn" (click)="call(reference)" icon="fa-phone" data-toggle="tooltip"
+							        title="{{'BTN_LLAMAR' | translate}}"></button>
+						</div>
+					</template>
+				</p-column>
+			</p-dataTable>
+			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="process">
+				<fieldset *ngIf="!readonly">
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="validStep">* {{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}</label>
+							<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
+							            [autoWidth]="false" [(ngModel)]="indApproval" required></p-dropdown>
+						</div>
+						<div class="form-group col-md-6">
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="observacion">* {{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}</label>
+							<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #observa="ngModel"
+							          [(ngModel)]="candidateProcess.observacion" required="true" class="form-control"
+							          maxlength="500"></textarea>
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !observa.valid">
+								<i class="fa fa-close"></i>
+								{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }} {{'LBL_REQUERIDO' | translate }}
+							</div>
+						</div>
+					</div>
+					
+					<div class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+							<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+							        pButton></button>
+						</div>
+					</div>
+				</fieldset>
+				<fieldset *ngIf="readonly">
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="validStep">{{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
+							<p>{{candidateProcess.estadoDiligenciado}}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="observacion">{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}:</label>
+							<p>{{candidateProcess.observacion}}</p>
+						</div>
+					</div>
+					<div class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+							        pButton (click)="goBack(false)"></button>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		
+		
+		</p-panel>
+	</div>
+	
+	<!-- Llamar referencia -->
+	<div class="col-md-10 col-md-offset-1" *ngIf="llamar">
+		<p-panel header="{{'PROCESOSELECCION.LBL_LLAMARREFERENCIA' | translate}}">
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="form-group col-md-5">
+					<label for="tipoRef">{{'EMPLOYEES.LBL_TIPOREFERENCIA' | translate }}:</label>
+					<label id="tipoRef" name="tipoRef"><strong>{{reference.tipoReferencia}}</strong></label>
+				</div>
+				<div class="form-group col-md-5">
+					<label for="nombreRef">{{'LBL_NOMBRE' | translate }}:</label>
+					<label id="nombreRef" name="nombreRef"><strong>{{reference.nombreCompleto}}</strong></label>
+				</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-5">
+					<a href="sip:3174167448" class="btn btn-success"><i class="fa fa-phone"></i> {{ reference.telefonoMovil }}</a>
+				</div>
+				<div class="col-md-5">
+					<label for="validStep">* Resultado</label>
+					<p-dropdown id="validStep" name="validStep" #ngCallResult="ngModel" [options]="callResults"
+					            [autoWidth]="true" [(ngModel)]="indApproval" required></p-dropdown>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-10" *ngIf="maestroRespuestas.idMaestroRespuesta > 0">
+					<solutions-questionnaires (finish)="finishQuestionnaire($event)"
+					                          [maestroRespuestas]="maestroRespuestas"
+					                          *ngIf="!showFinish"
+					></solutions-questionnaires>
+					<div *ngIf="showFinish" class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<p>El Cuestionario ha terminado con Exito!</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row form-footer-buttons">
+				<div class="form-group col-md-12">
+					<a (click)="hideForm()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+					<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+					        pButton></button>
+				</div>
+			</div>
+		</p-panel>
+	</div>
+</div>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>

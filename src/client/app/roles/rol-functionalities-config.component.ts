@@ -7,6 +7,7 @@ import { RolFunctionalityControl } from '../_models/rolFunctionalityControl';
 import { FunctionalityControl } from '../_models/functionalityContorl';
 import { FormManagerService } from '../_services/form-manager.service';
 import { Message, ConfirmationService } from 'primeng/primeng';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -32,14 +33,16 @@ export class RolFuncionalitiesConfigComponent implements OnInit {
       private route: ActivatedRoute,
       private location: Location,
       private confirmationService: ConfirmationService,
-      private formManagerService: FormManagerService, ) {
+      private formManagerService: FormManagerService,
+      private _nav: NavService
+   ) {
       this.route.params.subscribe( ( params: Params ) => {
          this.rolFuncionalitiesService.get( +params[ 'id' ] ).subscribe( rolFuncionality => {
             this.rolFuncionality = rolFuncionality;
             this.rolFuncionalitiesService.getControlByFuncionality( this.rolFuncionality.idRol, this.rolFuncionality.idFuncionalidad )
             .subscribe( listaFuncionalityControl => {
                this.listaFuncionalityControl = listaFuncionalityControl;
-               this.formManagerService.getFuncionalidadesControlesEnabled().subscribe(
+               this.formManagerService.getFuncionalidadesControlesEnabledByControl(this.rolFuncionality.idFuncionalidad).subscribe(
                   lfControles => {
                      this.lfControles = lfControles;
                      this.cosntrucObj();
@@ -59,18 +62,22 @@ export class RolFuncionalitiesConfigComponent implements OnInit {
       this.msgs = [];
       if ( fc.idRolFuncionalidadControl === null ) {
          this.rolFuncionalitiesService.addControl( fc ).subscribe( data => {
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            // this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            this._nav.setMesage(0,{severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
             fc.idRolFuncionalidadControl = data.idRolFuncionalidadControl;
          }, error => {
             this.showForm = true;
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            // this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            this._nav.setMesage(0, {severity: 'error', summary: 'Error', detail: 'Error al guardar.'});
          } );
       } else {
          this.rolFuncionalitiesService.updateControl( fc ).subscribe( data => {
-            this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            // this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            this._nav.setMesage(0, {severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.'});
          }, error => {
             this.showForm = true;
-            this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            // this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+            this._nav.setMesage(0,{ severity: 'error', summary: 'Error', detail: 'Error al guardar.' });
          } );
       }
    }
@@ -78,8 +85,8 @@ export class RolFuncionalitiesConfigComponent implements OnInit {
    cosntrucObj() {
       this.lfControles.map( ( s: any ) => {
          this.fControles = new RolFunctionalityControl();
-         if ( this.listaFuncionalityControl.find( d => d.idFuncionalidadControl === s.idFuncionalidadControl ) ) {
-            this.fControles = this.listaFuncionalityControl.find( d => d.idFuncionalidadControl = s.idFuncionalidadControl );
+         if ( this.listaFuncionalityControl.filter( d => d.idFuncionalidadControl === s.idFuncionalidadControl ).length > 0 ) {
+            this.fControles = this.listaFuncionalityControl.filter( d => d.idFuncionalidadControl === s.idFuncionalidadControl )[0];
             this.fControles.codigo = s.codigo;
          } else {
             this.fControles.idRolFuncionalidadControl = null;
@@ -88,9 +95,9 @@ export class RolFuncionalitiesConfigComponent implements OnInit {
             this.fControles.rol = this.rolFuncionality.rol;
             this.fControles.control = s.control;
             this.fControles.codigo = s.codigo;
-            this.fControles.indicadorHabilitado = false;
-            this.fControles.indicadorEditar = false;
-            this.fControles.indicadorSeccion = false;
+            this.fControles.indicadorHabilitado = true;
+            this.fControles.indicadorEditar = true;
+            this.fControles.indicadorSeccion = s.indicadorSeccion;
          }
          if ( s.indicadorSeccion === true ) {
             this.secciones.push( this.fControles );

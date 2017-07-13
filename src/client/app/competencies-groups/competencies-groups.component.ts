@@ -18,6 +18,7 @@ export class CompetenciesGroupsComponent implements OnInit {
    groups: GroupCompetencies[];
    group: GroupCompetencies = new GroupCompetencies();
    editingGroup: boolean = false;
+   selectedGroup: number = 0;
    editingCompetencie: boolean = false;
    msg: Message;
    msgs: Message[];
@@ -44,6 +45,7 @@ export class CompetenciesGroupsComponent implements OnInit {
    editGroup( group: GroupCompetencies ) {
       this.editingGroup = true;
       if ( group !== null ) {
+         this.selectedGroup = this.groups.indexOf(group);
          this.group = null;
          this.group = Object.assign( {}, group );
       }
@@ -131,6 +133,7 @@ export class CompetenciesGroupsComponent implements OnInit {
                this.groups[ this.groups.indexOf( this.groups.find( z => this.competencie.idGrupoCompetencia === z.idGrupoCompetencia ) ) ]
                .competencies.map( c => {
                   if ( c.idCompetencia === this.competencie.idCompetencia ) {
+                     c.competencia = this.competencie.competencia;
                      c.descripcion = this.competencie.descripcion;
                      c.indicadorHabilitado = this.competencie.indicadorHabilitado;
                   }

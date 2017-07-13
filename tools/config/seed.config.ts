@@ -310,12 +310,12 @@ export class SeedConfig {
     * Se definen la IP y el PUERTO con la cual la vista se conecta a los servicios
     * @type {string}
     */
-   IP_PROD = '192.168.253.38'; //_CREZCAMOS
+   IP_PROD = '179.50.40.137'; //_CREZCAMOS
    // IP_DEV = '40.71.92.147'; // _CIBERDIX_AZURE
 
-   // IP_DEV = '190.147.208.155'; // _CIBERDIX
-   IP_DEV = '190.184.187.27'; // _CIBERDIX
-   // IP_DEV = '192.168.0.53'; // _CIBERDIX Interna
+   IP_DEV = '190.147.208.155'; // _CIBERDIX
+   // IP_DEV = '190.184.187.27'; // _CIBERDIX
+   // IP_DEV = '192.168.1.53'; // _CIBERDIX Interna
    SVC_SP_PORT = '8447';
    SVC_TH_PORT = '8449';
    SVC_TH_URL = this.BUILD_TYPE === BUILD_TYPES.DEVELOPMENT ? 'http://' + this.IP_DEV + ':' + this.SVC_TH_PORT : 'http://' + this.IP_PROD + ':' + this.SVC_TH_PORT;

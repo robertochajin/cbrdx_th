@@ -13,7 +13,7 @@
                                     <label for="codigo">* {{ 'POSITION.LBL_CODIGO' | translate }} </label>
                                     <input type="text" pInputText id="codigo" name="codigo"
                                            [(ngModel)]="position.codigoCargo" #codigo="ngModel" (keyup)="inputCleanUp($event.target.value)"
-                                           (paste)="inputCleanUp($event.target.value)"
+                                           (paste)="inputCleanUp($event.target.value)" maxlength="50"
                                            required/>
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !codigo.valid">
@@ -25,7 +25,7 @@
                                     <label for="nombre">* {{ 'POSITION.LBL_NOMBRE' | translate }}</label>
                                     <input type="text" pInputText id="nombre" name="nombre"
                                            [(ngModel)]="position.cargo" #nombre="ngModel"
-                                           (keyup) = "capitalizeNombre()"
+                                           (keyup) = "capitalizeNombre()" maxlength="100"
                                            required/>
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !nombre.valid">
@@ -38,7 +38,7 @@
                                  <div class="form-group col-md-6">
                                     <label for="idEstructuraArea">* {{ 'POSITION.LBL_AREA' | translate }}</label>
                                     <p-dropdown id="idEstructuraArea" name="idEstructuraArea" required="true"
-                                                [options]="areaTypes" [autoWidth]="false"
+                                                [options]="areaTypes" [autoWidth]="false" filter="filter"
                                                 [(ngModel)]="position.idEstructuraArea"
                                                 #idEstructuraArea="ngModel"
                                     ></p-dropdown>
@@ -53,7 +53,7 @@
                                     <label for="personaACargoDir">* {{ 'POSITION.LBL_PERSONASDIRECTAS' | translate }}</label>
                                     <input type="text" pInputText id="personaACargoDir" name="personaACargoDir" type="text"
                                            [(ngModel)]="position.personaACargoDir" #personaACargoDir="ngModel" required (keyup)="inputNumber()"
-                                           (paste)="inputNumber()"
+                                           (paste)="inputNumber()" maxlength="4"
                                     />
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !personaACargoDir.valid">
@@ -66,7 +66,7 @@
                                  <div class="form-group col-md-6">
                                     <label for="idCargoJefe">{{ 'POSITION.LBL_CARGODEPENDE' | translate }}</label>
                                     <p-dropdown id="idCargoJefe" name="idCargoJefe"
-                                                [options]="bossPositionTypes" [autoWidth]="false"
+                                                [options]="bossPositionTypes" [autoWidth]="false" filter="filter"
                                                 [(ngModel)]="position.idCargoJefe"
                                                 #idCargoJefe="ngModel"
                                     ></p-dropdown>
@@ -80,7 +80,7 @@
                                     <label for="personaACargoInd">*{{ 'POSITION.LBL_PERSONASINDIRECTAS' | translate }}</label>
                                     <input type="text" pInputText id="personaACargoInd" name="personaACargoInd" required
                                            [(ngModel)]="position.personaACargoInd" #personaACargoInd="ngModel" type="text"
-                                           (keyup)="inputNumber()" (paste)="inputNumber()"   />
+                                           (keyup)="inputNumber()" (paste)="inputNumber()" maxlength="4"  />
                                     <div class="ui-message ui-messages-error ui-corner-all"
                                          *ngIf="f0.submitted && !personaACargoInd.valid">
                                        <i class="fa fa-close"></i>

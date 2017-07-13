@@ -6,6 +6,7 @@ import { PositionPersonalityServices } from '../_services/position-personality.s
 import { Positions } from '../_models/positions';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
+import { NavService } from '../_services/_nav.service';
 
 @Component( {
                moduleId: module.id,
@@ -33,11 +34,14 @@ export class PersonalityComponent implements OnInit {
    constructor( private router: Router,
       private personalityService: PositionPersonalityServices,
       private listaService: ListaService,
-      private confirmationService: ConfirmationService ) {
+      private confirmationService: ConfirmationService,
+      private _nav: NavService
+   ) {
    }
 
    ngOnInit() {
-      this.msgsAlert.push( { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un registro' } );
+       // this.msgsAlert.push( { severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un registro' } );
+      // this._nav.setMesage(0, {severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un registro'});
       this.listaService.getMasterDetails( 'ListasAtributosCargos' ).subscribe( res => {
          this.listPersonality = res;
          this.personalityService.getAllByPosition( this.position.idCargo ).subscribe( res => {
@@ -66,7 +70,8 @@ export class PersonalityComponent implements OnInit {
          }
       }
       if ( this.atributos.length === num ) {
-         this.alert = true;
+         // this.alert = true;
+         this._nav.setMesage(0, {severity: 'error', summary: 'Error', detail: 'Debe llenar al menos un registro'});
       } else {
          this.alert = false;
          let it = 1;

@@ -1,7 +1,9 @@
 <div>
     <div class="row datable-header">
         <div class="col-md-6 col-xs-12 datatable-header-add">
-            <button type="button" pButton icon="fa-plus" (click)="add()" label="Nueva Experiencia"></button>
+	        <button type="button" pButton icon="fa-plus" (click)="add()" label="Nueva Experiencia"
+	                *ngIf="seccion.NUEVO ? seccion.NUEVO.visible : true"
+	        ></button>
         </div>
         <div class="col-md-6 col-xs-12 datatable-header-search" >
           <div class="input-group">
@@ -18,12 +20,20 @@
         <p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
             <template let-experience="rowData" pTemplate="body">
                 <div class="btn-group" role="group">
-                    <button type="button"  class="ui-button btn" icon="fa-eye" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
-                            pButton (click)="detail(experience)"></button>
-                    <button type="button"  class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
-                            pButton (click)="update(experience)"></button>
-                    <button type="button"  class="ui-button ui-button-danger btn" icon="fa-trash" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
-                            pButton (click)="delete(experience)" ></button>
+	                <button type="button" class="ui-button btn" icon="fa-eye" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
+	                        pButton (click)="detail(experience)"
+	                        *ngIf="seccion.visible ? seccion.visible : true"
+	                ></button>
+	                <button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip"
+	                        title="{{'BTN_EDITAR' | translate}}"
+	                        pButton (click)="update(experience)"
+	                        *ngIf="seccion.EDITAR ? seccion.EDITAR.visible : true"
+	                ></button>
+	                <button type="button" class="ui-button ui-button-danger btn" icon="fa-trash" data-toggle="tooltip"
+	                        title="{{'BTN_INACTIVAR' | translate}}"
+	                        pButton (click)="delete(experience)"
+	                        *ngIf="seccion.ELIMINAR ? seccion.ELIMINAR.visible : true"
+	                ></button>
                 </div>
             </template>
         </p-column>

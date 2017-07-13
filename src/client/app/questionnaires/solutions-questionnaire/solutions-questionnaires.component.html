@@ -1,0 +1,86 @@
+<div class="col-md-10 col-md-offset-1" *ngIf="cuestionario">
+	<p-panel header="{{cuestionario.cuestionario}}">
+		<fieldset>
+			<form class="col-md-10 col-md-offset-1" *ngIf="!showThx && !saving" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate
+			      id="formulario" name="formulario">
+				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-12" *ngIf="pregunta.codigoTipoPregunta === 'SELECT'">
+							<label [for]="pregunta.idCuestionarioPregunta"><span *ngIf="pregunta.indicadorObligatorio">*</span>
+								{{pregunta.pregunta}}</label>
+							<p-dropdown [id]="pregunta.idCuestionarioPregunta"
+							            [name]="pregunta.idCuestionarioPregunta"
+							            [options]="listadoOpciones"
+							            [(ngModel)]="respuesta.idPreguntaOpcion"
+							            [required]="pregunta.indicadorObligatorio"
+							            [autoWidth]="false"
+							            tabindex="0"
+							            #pDropdown="ngModel"
+							></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !pDropdown.valid && pregunta.indicadorObligatorio">
+								<i class="fa fa-close"></i>
+								{{'QUESTIONNAIRES.LBL_DROPDOWN' | translate }}
+							</div>
+						</div>
+						<div class="ui-grid-col-12" *ngIf="pregunta.codigoTipoPregunta === 'CHECK'">
+							<label><span *ngIf="pregunta.indicadorObligatorio">*</span> {{pregunta.pregunta}}</label>
+							<div *ngFor="let opcion of listadoOpciones">
+								<p-checkbox
+									[name]="opcion.value"
+									[value]="opcion.value"
+									[label]="opcion.label"
+									[(ngModel)]="respuestasCheckbox"
+								></p-checkbox>
+							</div>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && pregunta.indicadorObligatorio && respuestasCheckbox.length > 0">
+								<i class="fa fa-close"></i>
+								{{'QUESTIONNAIRES.LBL_CHECKBOX' | translate }}
+							</div>
+						</div>
+						<div class="ui-grid-col-12" *ngIf="pregunta.codigoTipoPregunta === 'INPUT'">
+							<label [for]="pregunta.idCuestionarioPregunta"><span *ngIf="pregunta.indicadorObligatorio">*</span>
+								{{pregunta.pregunta}}</label>
+							<input pInputText #pInputText
+							       [id]="pregunta.idCuestionarioPregunta"
+							       [name]="pregunta.idCuestionarioPregunta"
+							       [required]="pregunta.indicadorObligatorio"
+							       [(ngModel)]="respuesta.respuesta"
+							       type="text"
+							       tabindex="0"
+							/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !pInputText.valid && pregunta.indicadorObligatorio">
+								<i class="fa fa-close"></i>
+								{{'QUESTIONNAIRES.LBL_INPUT' | translate }}
+							</div>
+						</div>
+						<div class="ui-grid-col-12" *ngIf="pregunta.codigoTipoPregunta === 'TEXTO'">
+							<label [for]="pregunta.idCuestionarioPregunta"><span *ngIf="pregunta.indicadorObligatorio">*</span>
+								{{pregunta.pregunta}}</label>
+							<textarea pInputTextarea #pInputTextarea
+							          [id]="pregunta.idCuestionarioPregunta"
+							          [name]="pregunta.idCuestionarioPregunta"
+							          [required]="pregunta.indicadorObligatorio"
+							          [(ngModel)]="respuesta.respuesta"
+							          tabindex="0"
+							></textarea>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !pInputTextarea.valid && pregunta.indicadorObligatorio">
+								<i class="fa fa-close"></i>
+								{{'QUESTIONNAIRES.LBL_INPUT' | translate }}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<button icon="fa-arrow-right" label="Guardar y Continuar" type="submit"
+						        pButton></button>
+					</div>
+				</div>
+			</form>
+		</fieldset>
+	</p-panel>
+</div>

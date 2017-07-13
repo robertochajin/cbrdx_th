@@ -36,17 +36,18 @@ export class CentralRiskComponent implements OnInit {
    disabled: boolean = false;
    private stepStates: ListaItem[] = [];
    private desitionList: ListaItem[] = [];
-   respuesta:any;
+   respuesta: any;
    cargando = 0;
    public indApproval: string;
    public approvalOptions: SelectItem[] = [];
    svcThUrl = '<%= SVC_TH_URL %>/api/tercerosCentralesRiesgos/file';
    fileThUrl = '<%= SVC_TH_URL %>/api/adjuntos/file';
    previewUrl = '<%= SVC_TH_URL %>/api/adjuntos/preview';
-   public idCandidate : number;
+   public idCandidate: number;
    usuarioLogueado: any;
    idRol: number;
    jwtHelper: JwtHelper = new JwtHelper();
+   svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
@@ -73,13 +74,12 @@ export class CentralRiskComponent implements OnInit {
          } );
       } );
 
-
       this.route.params.subscribe( ( params: Params ) => {
          let idTercerosPublicaciones = +params[ 'idTerceroPublication' ];
          let idStep = +params[ 'idStep' ];
          this.candidateProcess.idProcesoPaso = idStep;
          this.candidateProcess.idTerceroPublicacion = idTercerosPublicaciones;
-         this.selectionStepService.getTerceroPublicacio( idTercerosPublicaciones).subscribe(tp =>{
+         this.selectionStepService.getTerceroPublicacio( idTercerosPublicaciones ).subscribe( tp => {
 
             this.idCandidate = tp.idTercero;
             let idPublicacion = tp.idPublicacion;
@@ -108,7 +108,7 @@ export class CentralRiskComponent implements OnInit {
 
             vacanciesService.getPublication( idPublicacion ).subscribe( pb => {
                this.publication = pb;
-            });
+            } );
 
             this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
                this.stepStates = res;
@@ -120,7 +120,7 @@ export class CentralRiskComponent implements OnInit {
                   this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
                }
             } );
-         });
+         } );
       } );
    }
 
@@ -133,31 +133,29 @@ export class CentralRiskComponent implements OnInit {
       this.title = obj.nombre;
    }
 
-   onBeforeSend( event: any , data: CentralRisk  ) {
+   onBeforeSend( event: any, data: CentralRisk ) {
       this.cargando = data.idCentralRiesgo;
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      if(data.idTercero === null || data.idTercero === undefined){
+      if ( data.idTercero === null || data.idTercero === undefined ) {
          data.idTercero = this.idCandidate;
          data.indicadorReportado = false;
          data.indicadorAprobado = false;
       }
-      event.formData.append('obj', JSON.stringify(data));
-
+      event.formData.append( 'obj', JSON.stringify( data ) );
 
    }
 
    onUpload( event: any, data: CentralRisk ) {
       this.cargando = 0;
       this.disabled = true;
-      let respuesta = JSON.parse(event.xhr.response);
+      let respuesta = JSON.parse( event.xhr.response );
       data.idTerceroCentralRiesgo = respuesta.idTerceroCentralRiesgo;
       data.idAdjunto = respuesta.idAdjunto;
 
    }
 
-
    onSubmit() {
-      if ( this.indApproval === 'APRB') {
+      if ( this.indApproval === 'APRB' ) {
          this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'APROB' );
          this.candidateProcess.idDesicionProcesoSeleccion = this.getIdDesitionByCode( 'APRB' );
       } else if ( this.indApproval === 'NOAPRB' ) {
@@ -171,49 +169,50 @@ export class CentralRiskComponent implements OnInit {
          this.candidateProcessService.update( this.candidateProcess ).subscribe( res => {
             if ( res.ok ) {
                this._nav.setMesage( 2 );
-               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
             } else {
                this._nav.setMesage( 3 );
-               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
             }
          }, () => {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
          } );
       } else {
          this.candidateProcessService.add( this.candidateProcess ).subscribe( res => {
             if ( res.idProcesoSeleccion ) {
                this._nav.setMesage( 1 );
-               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
             } else {
                this._nav.setMesage( 3 );
-               this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
             }
          }, () => {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
          } );
       }
    }
 
-   aprobar(f: CentralRisk){
+   aprobar( f: CentralRisk ) {
 
-      if(f.idTerceroCentralRiesgo === null || f.idTerceroCentralRiesgo === undefined || f.idTerceroCentralRiesgo === 0){
+      if ( f.idTerceroCentralRiesgo === null || f.idTerceroCentralRiesgo === undefined || f.idTerceroCentralRiesgo === 0 ) {
          this.selectionStepService.addEmployeesCentralRisk( f ).subscribe( res => {
             f.idTerceroCentralRiesgo = res.idTerceroCentralRiesgo;
             this._nav.setMesage( 1, null );
-         });
-      }else{
+         } );
+      } else {
          this.selectionStepService.updateEmployeesCentralRisk( f ).subscribe( res => {
             this._nav.setMesage( 2, null );
-         });
+         } );
       }
 
    }
-   reportar(f: CentralRisk){
+
+   reportar( f: CentralRisk ) {
 
       let msg = '';
-      if(f.indicadorReportado){
+      if ( f.indicadorReportado ) {
          msg = `¿Está seguro que desea Reportar el aspirante?`;
       } else {
          msg = `¿Está seguro que desea retirar el reporte?`;
@@ -226,31 +225,31 @@ export class CentralRiskComponent implements OnInit {
                                            accept: () => {
                                               this.selectionStepService.updateEmployeesCentralRisk( f ).subscribe( res => {
                                                  this._nav.setMesage( 2, null );
-                                              });
+                                              } );
                                            },
                                            reject: () => {
                                               f.indicadorReportado = !f.indicadorReportado
                                            }
                                         } );
 
-
-
    }
-   previewFile(f: CentralRisk){
+
+   previewFile( f: CentralRisk ) {
       // let link = 'https://www.subes.sep.gob.mx/archivos/tutor/manual_general.pdf';
-      this.url = this.previewUrl+'/'+ f.idAdjunto;
+      this.url = this.previewUrl + '/' + f.idAdjunto;
       this.title = f.nombre;
       this.displayDialog = true;
 
-
    }
-   downloadFile(f: CentralRisk){
 
-      this.selectionStepService.downloadFile( f.idAdjunto ).subscribe(res => {
-         window.location.assign(res);
-      });
+   downloadFile( f: CentralRisk ) {
+
+      this.selectionStepService.downloadFile( f.idAdjunto ).subscribe( res => {
+         window.location.assign( res );
+      } );
    }
-   deleteFile(f: CentralRisk){
+
+   deleteFile( f: CentralRisk ) {
       this.confirmationService.confirm( {
                                            message: `¿Está seguro que desea Inactivar el adjunto?`,
                                            header: 'Confirmación',
@@ -263,11 +262,12 @@ export class CentralRiskComponent implements OnInit {
                                               this.disabled = true;
                                               this.selectionStepService.updateEmployeesCentralRisk( f ).subscribe( res => {
                                                  this._nav.setMesage( 2, null );
-                                              });
+                                              } );
                                            }
                                         } );
 
    }
+
    curriculum() {
       this.router.navigate( [ 'employees/curriculum/' + this.candidate.idTercero ] );
    }
@@ -281,7 +281,6 @@ export class CentralRiskComponent implements OnInit {
       }
    }
 
-
    getIdDesitionByCode( code: string ): number {
       let state: ListaItem = this.desitionList.find( s => s.codigo === code );
       if ( state !== undefined ) {
@@ -291,19 +290,19 @@ export class CentralRiskComponent implements OnInit {
       }
    }
 
-
-   goBack(fDirty : boolean) {
-      if ( fDirty ){
+   goBack( fDirty: boolean ) {
+      if ( fDirty ) {
          this.confirmationService.confirm( {
                                               message: ` ¿Está seguro que desea salir sin guardar?`,
                                               header: 'Confirmación',
                                               icon: 'fa fa-question-circle',
                                               accept: () => {
-                                                 this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+                                                 this.router.navigate(
+                                                    [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
                                               }
                                            } );
-      }else {
-         this.router.navigate( [ 'candidates-list/'+ this.publication.idPublicacion ] );
+      } else {
+         this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
       }
 
    }

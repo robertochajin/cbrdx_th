@@ -17,6 +17,10 @@ import * as moment from 'moment/moment';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
 import { ConstanteService } from '../_services/constante.service';
+import { JwtHelper } from 'angular2-jwt';
+import { AdjuntosService } from '../_services/adjuntos.service';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
+import { PermissionService } from '../_services/permission.service';
 
 @Component( {
                moduleId: module.id,
@@ -55,6 +59,8 @@ export class EmployeesUpdateComponent implements OnInit {
    msgs: Message[] = [];
    today: Date = null;
    maxDate: Date = null;
+   maxDateBirth: Date = null;
+   minDateDocumento: Date = null;
    maxDateDocumento: Date = null;
    range: string;
    es: any;
@@ -64,6 +70,19 @@ export class EmployeesUpdateComponent implements OnInit {
    idTipoTercero: number;
    documentoNoSelec: string[];
    idDocumentoNoSelec: number[] = [];
+   tiposdoc: string[] = [];
+   mayeda: number = 0;
+   listTypeDoc: ListaItem[] = [];
+
+   svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
+   dataUploadArchivo : any = 'Archivo Adjunto';
+   dataUploadUsuario : any = '';
+   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
+   jwtHelper: JwtHelper = new JwtHelper();
+   fsize: number = 50000000;
+   ftype: string = '';
+   seccion1: PermissionsEmployees = new PermissionsEmployees();
+   defaultCampo = { visible: true, editable: true };
 
    constructor( private employeesService: EmployeesService,
       private route: ActivatedRoute,
@@ -76,7 +95,27 @@ export class EmployeesUpdateComponent implements OnInit {
       private actividadEconomicaService: ActividadEconomicaService,
       private ocupacionesService: OcupacionesService,
       private confirmationService: ConfirmationService,
+      private adjuntosService: AdjuntosService,
+      private permissionService: PermissionService,
       private _nav: NavService ) {
+
+      this.permissionService.getReglasFormularios( 'TERCEROS' ).subscribe( p => {
+         let permisos = JSON.parse( p );
+         this.seccion1 = permisos.DATOSGENERALES ? permisos.DATOSGENERALES : new PermissionsEmployees();
+      } );
+
+      let token = localStorage.getItem( 'token' );
+      this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+      this.constanteService.getByCode( 'FTYPE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.ftype = data.valor;
+         }
+      } );
+      this.constanteService.getByCode( 'FSIZE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.fsize = Number( data.valor );
+         }
+      } );
 
       listaService.getMasterDetails( 'ListasTiposPersonas' ).subscribe( res => {
          this.personTypes.push( { label: 'Seleccione', value: null } );
@@ -90,7 +129,6 @@ export class EmployeesUpdateComponent implements OnInit {
          res.map( ( s: ListaItem ) => {
             this.juridicos.push( { label: s.nombre, value: s.idLista } );
          } );
-         this.employee.idTipoDocumento = null;
       } );
 
       this.listaService.getMasterDetails( 'ListasGeneros' ).subscribe( res => {
@@ -162,6 +200,19 @@ export class EmployeesUpdateComponent implements OnInit {
             this.idTipoTercero = res.idLista;
          } );
 
+      this.constanteService.getByCode( 'DOCMYE' ).subscribe( data => {
+         if ( data.valor ) {
+            for ( let c of data.valor.split( ',' ) ) {
+               this.tiposdoc.push( c );
+            }
+         }
+      } );
+      this.constanteService.getByCode( 'MAYEDA' ).subscribe( data => {
+         if ( data.valor ) {
+            this.mayeda = Number( data.valor );
+         }
+      } );
+
    }
 
    ngOnInit() {
@@ -176,8 +227,55 @@ export class EmployeesUpdateComponent implements OnInit {
       .switchMap( ( params: Params ) => this.employeesService.get( +params[ 'id' ] ) )
       .subscribe( employee => {
          this.employee = employee;
-         this.updateActivities( this.employee.idSectorEconomico );
+         this.getFileName();
+         this.constanteService.getByCode( 'DOCMYE' ).subscribe( data => {
+            if ( data.valor ) {
+               for ( let c of data.valor.split( ',' ) ) {
+                  this.tiposdoc.push( c );
+               }
+            }
+            this.constanteService.getByCode( 'MAYEDA' ).subscribe( data => {
+               if ( data.valor ) {
+                  this.mayeda = Number( data.valor );
+               }
+               let tipodocemploye = this.listTypeDoc.find( x => x.idLista === this.employee.idTipoDocumento );
+               let codigo: string = '';
+               if ( tipodocemploye ) {
+                  codigo = tipodocemploye.codigo;
+               }
+               let tipo = this.tiposdoc.find( t => t === codigo ); // buscar tipo documento elegido
+               let exp = this.expeditionDate;
+               let dateExpo = new Date( exp );
 
+               let today = new Date();
+               let month = today.getMonth();
+               let year = today.getFullYear();
+               let prev18Year = year - this.mayeda;
+               let prev20Year = year - 20;
+               let lastYear = prev18Year - 80;
+               this.maxDateBirth = new Date();
+               this.maxDateBirth.setMonth( month );
+
+               if ( tipo ) {
+                  if ( this.employee.fechaDocumento !== null ) {
+                     let fecha = new Date( this.employee.fechaDocumento );
+                     let anio = fecha.getFullYear() - this.mayeda;
+                     this.maxDateBirth.setFullYear( anio );
+                  } else {
+                     this.maxDateBirth.setFullYear( prev18Year );
+                  }
+               } else {
+                  this.maxDateBirth.setFullYear( year );
+               }
+               if ( this.maxDateBirth > dateExpo ) {
+                  this.maxDateBirth = dateExpo;
+               }
+            } );
+         } );
+
+         this.updateActivities( this.employee.idSectorEconomico );
+         this.updateDateInit();
+         this.minDateDocumento = new Date( this.employee.fechaNacimiento );
          this.ciudadExpDocumento = this.employee.ciudadExpDocumento;
          this.backupCiudadExpDocumento = this.employee.ciudadExpDocumento;
          this.ciudadNacimiento = this.employee.ciudadNacimiento;
@@ -201,6 +299,7 @@ export class EmployeesUpdateComponent implements OnInit {
       this.maxDate = new Date();
       this.maxDate.setMonth( month );
       this.maxDate.setFullYear( year );
+      this.maxDateBirth = this.maxDate;
       this.today = new Date();
       this.today.setMonth( month );
       this.today.setFullYear( year );
@@ -218,6 +317,7 @@ export class EmployeesUpdateComponent implements OnInit {
             this.documentoNoSelec = rest.find( c => c.constante === 'DOCNSE' ).valor.split( ',' );
          }
          this.listaService.getMasterDetails( 'ListasTiposDocumentos' ).subscribe( res => {
+            this.listTypeDoc = res;
             this.documentTypes.push( { label: 'Seleccione', value: null } );
             let temp: any;
             for ( let c of this.documentoNoSelec ) {
@@ -235,7 +335,6 @@ export class EmployeesUpdateComponent implements OnInit {
                   this.documentTypes.push( { label: x.nombre, value: x.idLista } );
                }
             }
-            this.employee.idTipoDocumento = null;
          } );
       } );
    }
@@ -269,23 +368,22 @@ export class EmployeesUpdateComponent implements OnInit {
       }
    }
 
-   goBack(fDirty : boolean): void {
+   goBack( fDirty: boolean ): void {
 
-      if ( fDirty ){
+      if ( fDirty ) {
          this.confirmationService.confirm( {
-            message: ` ¿Está seguro que desea salir sin guardar?`,
-            header: 'Confirmación',
-            icon: 'fa fa-question-circle',
-            accept: () => {
-               this._nav.setTab( 0 );
-               this.location.back();
-            }
-         } );
-      }else {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this._nav.setTab( 0 );
+                                                 this.location.back();
+                                              }
+                                           } );
+      } else {
          this.location.back();
       }
-      }
-
+   }
 
    searchExpeditionCity( event: any ) {
       this.politicalDivisionService.getAllCities( event.query ).subscribe(
@@ -319,35 +417,84 @@ export class EmployeesUpdateComponent implements OnInit {
    }
 
    updateDate() {
-
-      let tipo = this.employee.idTipoDocumento;
+      this.employee.fechaNacimiento = null;
+      let tipodocemploye = this.listTypeDoc.find( x => x.idLista === this.employee.idTipoDocumento );
+      let codigo: string = '';
+      if ( tipodocemploye ) {
+         codigo = tipodocemploye.codigo;
+      }
+      let tipo = this.tiposdoc.find( t => t === codigo ); // buscar tipo documento elegido
       let exp = this.expeditionDate;
       let dateExpo = new Date( exp );
 
       let today = new Date();
       let month = today.getMonth();
       let year = today.getFullYear();
-      let prev18Year = year - 18;
+      let prev18Year = year - this.mayeda;
       let prev20Year = year - 20;
       let lastYear = prev18Year - 80;
-      this.maxDate = new Date();
-      this.maxDate.setMonth( month );
+      this.maxDateBirth = new Date();
+      this.maxDateBirth.setMonth( month );
 
-      if ( tipo === 1 ) {
+      if ( tipo ) {
          if ( this.employee.fechaDocumento !== null ) {
-            let fecha = new Date(this.employee.fechaDocumento);
-            let anio= fecha.getFullYear()-18;
-            this.maxDate.setFullYear( anio );
-         }else{
-            this.maxDate.setFullYear( prev18Year );
+            let fecha = new Date( this.employee.fechaDocumento );
+            let anio = fecha.getFullYear() - this.mayeda;
+            this.maxDateBirth.setFullYear( anio );
+         } else {
+            this.maxDateBirth.setFullYear( prev18Year );
          }
-      } else if ( tipo === 2 ) {
-         this.maxDate.setFullYear( year );
       } else {
-         this.maxDate.setFullYear( year );
+         this.maxDateBirth.setFullYear( year );
       }
-      if ( this.maxDate > dateExpo ) {
-         this.maxDate = dateExpo;
+      if ( this.maxDateBirth > dateExpo ) {
+         this.maxDateBirth = dateExpo;
+      }
+
+      if ( (this.employee.fechaNacimiento) !== null && (this.employee.fechaNacimiento) !== null ) {
+         let timestamp2 = new Date( this.maxDate ).getTime();
+         let timestamp1 = new Date( this.employee.fechaNacimiento ).getTime();
+         let timeDiff = Math.round( timestamp2 - timestamp1 );
+         if ( timeDiff < 0 ) {
+            this.employee.fechaNacimiento = null;
+         }
+      }
+      this.validateDocument();
+
+   }
+   updateDateInit() {
+
+      let tipodocemploye = this.listTypeDoc.find( x => x.idLista === this.employee.idTipoDocumento );
+      let codigo: string = '';
+      if ( tipodocemploye ) {
+         codigo = tipodocemploye.codigo;
+      }
+      let tipo = this.tiposdoc.find( t => t === codigo ); // buscar tipo documento elegido
+      let exp = this.expeditionDate;
+      let dateExpo = new Date( exp );
+
+      let today = new Date();
+      let month = today.getMonth();
+      let year = today.getFullYear();
+      let prev18Year = year - this.mayeda;
+      let prev20Year = year - 20;
+      let lastYear = prev18Year - 80;
+      this.maxDateBirth = new Date();
+      this.maxDateBirth.setMonth( month );
+
+      if ( tipo ) {
+         if ( this.employee.fechaDocumento !== null ) {
+            let fecha = new Date( this.employee.fechaDocumento );
+            let anio = fecha.getFullYear() - this.mayeda;
+            this.maxDateBirth.setFullYear( anio );
+         } else {
+            this.maxDateBirth.setFullYear( prev18Year );
+         }
+      } else {
+         this.maxDateBirth.setFullYear( year );
+      }
+      if ( this.maxDateBirth > dateExpo ) {
+         this.maxDateBirth = dateExpo;
       }
 
       if ( (this.employee.fechaNacimiento) !== null && (this.employee.fechaNacimiento) !== null ) {
@@ -372,15 +519,11 @@ export class EmployeesUpdateComponent implements OnInit {
    }
 
    onExpeditionDate( event: any ) {
-      let d = new Date( Date.parse( event ) );
-      this.expeditionDate = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-      this.employee.fechaNacimiento=null;
       this.updateDate();
    }
 
    onBirthDate( event: any ) {
-      let d = new Date( Date.parse( event ) );
-      this.birthDate = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      this.minDateDocumento = new Date( Date.parse( event ) );
    }
 
    onDeathDate( event: any ) {
@@ -425,6 +568,42 @@ export class EmployeesUpdateComponent implements OnInit {
 
    inputCleanUp( value: string ) {
       this.employee.numeroDocumento = value.toUpperCase().replace( ' ', '' ).trim();
+   }
+   // Archivo Adjunto
+   uploadingOk( event: any ) {
+      let respuesta = JSON.parse(event.xhr.response);
+      if(respuesta.idAdjunto != null || respuesta.idAdjunto != undefined){
+         this.employee.idAdjunto = respuesta.idAdjunto;
+      }
+   }
+
+   onBeforeSend( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      event.formData.append( 'obj', obj.toString() );
+   }
+
+   onSelect(event:any, file:any){
+      this.dataUploadArchivo = file[0].name;
+      this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   }
+
+   uploadAgain(rta:boolean){
+      this.employee.idAdjunto = null;
+   }
+
+   downloadFile(id: number){
+
+      this.adjuntosService.downloadFile( id ).subscribe(res => {
+         window.location.assign(res);
+      });
+   }
+   getFileName() {
+      if(this.employee.idAdjunto) {
+         this.adjuntosService.getFileName( this.employee.idAdjunto ).subscribe( res => {
+            this.dataUploadArchivo = res.nombreArchivo;
+         } );
+      }
    }
 
 }

@@ -19,7 +19,8 @@ export class References {
    public auditoriaFecha: string;
    public indicadorVerificado: boolean;
    public fechaVerificado: string;
-   public tipoReferencia:string;
+   public codigoTipoReferencia: string;
+   public tipoReferencia: string;
    public nombreCompleto?: string;
    public ciudad?: string;
    public direccion?: string;
@@ -31,6 +32,7 @@ export class References {
       this.segundoNombre = '';
       this.segundoApellido = '';
       this.direccion = '';
+      this.idAdjunto = null;
       this.tipodeReferencia = { value: null, label: '' };
    }
 }

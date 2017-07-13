@@ -1,0 +1,93 @@
+<div *ngIf="medicalInstitution">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="first">{{ 'MEDICALINSTITUTION.LBL_INSTITUCIONMEDICA' | translate }}</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<p-panel header="{{ 'MEDICALINSTITUTION.LBL_DATOSGENERALES' | translate }}">
+						<fieldset>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'MEDICALINSTITUTION.LBL_CODIGO' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{medicalInstitution.idInstitucionMedica}}</strong></label>
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'MEDICALINSTITUTION.LBL_NOMBRE' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{medicalInstitution.institucionMedica}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'MEDICALINSTITUTION.LBL_REPRESENTANTELEGAL' |
+									translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{medicalInstitution.representanteLegal}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'MEDICALINSTITUTION.LBL_DIRECCION' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{medicalInstitution.direccion}}</strong></label>
+							
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'MEDICALINSTITUTION.LBL_CORREO' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{medicalInstitution.correoElectronico}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'MEDICALINSTITUTION.LBL_TELEFONO' | translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{medicalInstitution.telefonoContacto}}</strong></label>
+							
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'MEDICALINSTITUTION.LBL_EXAMENOSTEOMUSCULAR' |
+									translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{medicalInstitution.valorExamenOsteosmuscular}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'MEDICALINSTITUTION.LBL_EXAMENVISION' |
+									translate}}</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{medicalInstitution.valorExamenVisiometria}}</strong></label>
+							
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'MEDICALINSTITUTION.LBL_EXAMENOPTPMETRIA' |
+									translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{medicalInstitution.valorExamenOptometria}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'MEDICALINSTITUTION.LBL_EXAMENVALOR' |
+									translate}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{totalExamenes}}</strong></label>
+							
+							</div>
+						</fieldset>
+					</p-panel>
+					<p-panel header="{{ 'MEDICALINSTITUTION.LBL_ESTRUCTURAFISICA' | translate }}">
+						<fieldset>
+							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listMedicalInstitutionStructure"
+							             [paginator]="true"
+							             [rows]="10" [responsive]="true" [globalFilter]="gb">
+								<p-column field="estructuraFisica" header="{{ 'MEDICALINSTITUTION.LBL_ESTRUCTURAFISICA' | translate }}"
+								          [sortable]="true"></p-column>
+								<p-column header="{{ 'MEDICALINSTITUTION.LBL_VIAJA' | translate}}" styleClass="datatable-col-action">
+									<template let-mi="rowData" pTemplate="body">
+										<label>{{mi.indicadorViaja?'Si':'No'}}</label>
+									</template>
+								</p-column>
+								<p-column field="valorViaje" header="{{ 'MEDICALINSTITUTION.LBL_CIUDAD' | translate }}"
+								          [sortable]="true"></p-column>
+								<p-column header="{{ 'LBL_HABILITADO' | translate}}" styleClass="datatable-col-action">
+									<template let-mi="rowData" pTemplate="body">
+										<p-checkbox name="indicadorHabilitado" [(ngModel)]="mi.indicadorHabilitado" binary="true"
+										            disabled="true"></p-checkbox>
+									</template>
+								</p-column>
+							</p-dataTable>
+						
+						</fieldset>
+					</p-panel>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</div>
+<div class="row form-footer-buttons">
+	<div class="form-group col-md-12">
+		<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+		        pButton (click)="goBack()"></button>
+	</div>
+</div>

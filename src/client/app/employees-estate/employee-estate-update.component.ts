@@ -9,6 +9,7 @@ import { ListEmployeesService } from '../_services/lists-employees.service';
 import { NavService } from '../_services/_nav.service';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 
 @Component( {
                moduleId: module.id,
@@ -18,8 +19,7 @@ import { ListaItem } from '../_models/listaItem';
             } )
 
 export class EmployeesEstateUpdateComponent implements OnInit {
-   @Input()
-   employeeEstate: EmployeeEstate = new EmployeeEstate();
+   @Input() employeeEstate: EmployeeEstate = new EmployeeEstate();
    header: string = 'Agregando Inmueble';
 
    listTypeEstate: SelectItem[] = [];

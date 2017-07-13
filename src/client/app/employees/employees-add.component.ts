@@ -15,6 +15,9 @@ import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
 import { NavService } from '../_services/_nav.service';
 import { ConstanteService } from '../_services/constante.service';
+import { JwtHelper } from 'angular2-jwt';
+import { AdjuntosService } from '../_services/adjuntos.service';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 
 @Component( {
                moduleId: module.id,
@@ -50,6 +53,8 @@ export class EmployeesAddComponent implements OnInit {
    msgs: Message[] = [];
    juridicos: SelectItem[] = [];
    maxDate: Date = null;
+   maxDateBirth: Date = null;
+   minDateDocumento: Date = null;
    today: Date = null;
    maxDateDocumento: Date = null;
    range: string;
@@ -60,18 +65,45 @@ export class EmployeesAddComponent implements OnInit {
    idTipoTercero: number;
    documentoNoSelec: string[];
    idDocumentoNoSelec: number[] = [];
+   tiposdoc: string[] = [];
+   mayeda: number = 0;
+   listTypeDoc: ListaItem[] = [];
+
+   svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
+   dataUploadArchivo : any = 'Archivo Adjunto';
+   dataUploadUsuario : any = '';
+   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
+   jwtHelper: JwtHelper = new JwtHelper();
+   fsize: number = 50000000;
+   ftype: string = '';
+   seccion1: PermissionsEmployees = new PermissionsEmployees();
 
    constructor( private employeesService: EmployeesService,
       private router: Router,
       private location: Location,
       private listaService: ListaService,
       private constanteService: ConstanteService,
+      private adjuntosService: AdjuntosService,
       private listEmployeesService: ListEmployeesService,
       private politicalDivisionService: PoliticalDivisionService,
       private actividadEconomicaService: ActividadEconomicaService,
       private ocupacionesService: OcupacionesService,
       private _nav: NavService,
       private confirmationService: ConfirmationService ) {
+
+      let token = localStorage.getItem( 'token' );
+      this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+      this.constanteService.getByCode( 'FTYPE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.ftype = data.valor;
+         }
+      } );
+      this.constanteService.getByCode( 'FSIZE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.fsize = Number( data.valor );
+         }
+      } );
+
       listaService.getMasterDetails( 'ListasTiposPersonas' ).subscribe( res => {
          this.personTypes.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
@@ -174,6 +206,19 @@ export class EmployeesAddComponent implements OnInit {
             this.idTipoTercero = res.idLista;
          } );
 
+      this.constanteService.getByCode( 'DOCMYE' ).subscribe( data => {
+         if ( data.valor ) {
+            for ( let c of data.valor.split( ',' ) ) {
+               this.tiposdoc.push( c );
+            }
+         }
+      } );
+      this.constanteService.getByCode( 'MAYEDA' ).subscribe( data => {
+         if ( data.valor ) {
+            this.mayeda = Number( data.valor );
+         }
+      } );
+
    }
 
    ngOnInit() {
@@ -194,6 +239,7 @@ export class EmployeesAddComponent implements OnInit {
       this.maxDate = new Date();
       this.maxDate.setMonth( month );
       this.maxDate.setFullYear( year );
+      this.maxDateBirth = this.maxDate;
       this.today = new Date();
       this.today.setMonth( month );
       this.today.setFullYear( year );
@@ -210,6 +256,7 @@ export class EmployeesAddComponent implements OnInit {
             this.documentoNoSelec = rest.find( c => c.constante === 'DOCNSE' ).valor.split( ',' );
          }
          this.listaService.getMasterDetails( 'ListasTiposDocumentos' ).subscribe( res => {
+            this.listTypeDoc = res;
             this.documentTypes.push( { label: 'Seleccione', value: null } );
             let temp: any;
             for ( let c of this.documentoNoSelec ) {
@@ -318,35 +365,37 @@ export class EmployeesAddComponent implements OnInit {
    }
 
    updateDate() {
-
-      let tipo = this.employee.idTipoDocumento;
+      this.employee.fechaNacimiento = null;
+      let tipodocemploye = this.listTypeDoc.find( x => x.idLista === this.employee.idTipoDocumento );
+      let codigo: string = '';
+      if ( tipodocemploye ) {
+         codigo = tipodocemploye.codigo;
+      }
+      let tipo = this.tiposdoc.find( t => t === codigo ); // buscar tipo documento elegido
       let exp = this.expeditionDate;
       let dateExpo = new Date( exp );
-
       let today = new Date();
       let month = today.getMonth();
       let year = today.getFullYear();
-      let prev18Year = year - 18;
+      let prev18Year = year - this.mayeda;
       let prev20Year = year - 20;
       let lastYear = prev18Year - 80;
-      this.maxDate = new Date();
-      this.maxDate.setMonth( month );
+      this.maxDateBirth = new Date();
+      this.maxDateBirth.setMonth( month );
 
-      if ( tipo === 1 ) {
+      if ( tipo ) {
          if ( this.employee.fechaDocumento !== null ) {
-            let fecha = new Date(this.employee.fechaDocumento);
-            let anio= fecha.getFullYear()-18;
-            this.maxDate.setFullYear( anio );
-         }else{
-            this.maxDate.setFullYear( prev18Year );
+            let fecha = new Date( this.employee.fechaDocumento );
+            let anio = fecha.getFullYear() - this.mayeda;
+            this.maxDateBirth.setFullYear( anio );
+         } else {
+            this.maxDateBirth.setFullYear( prev18Year );
          }
-      } else if ( tipo === 2 ) {
-         this.maxDate.setFullYear( year );
       } else {
-         this.maxDate.setFullYear( year );
+         this.maxDateBirth.setFullYear( year );
       }
-      if ( this.maxDate > dateExpo ) {
-         this.maxDate = dateExpo;
+      if ( this.maxDateBirth > dateExpo ) {
+         this.maxDateBirth = dateExpo;
       }
 
       if ( (this.employee.fechaNacimiento) !== null && (this.employee.fechaNacimiento) !== null ) {
@@ -371,13 +420,11 @@ export class EmployeesAddComponent implements OnInit {
    }
 
    onExpeditionDate( event: any ) {
-      this.employee.fechaNacimiento = null;
       this.updateDate();
    }
 
    onBirthDate( event: any ) {
-      let d = new Date( Date.parse( event ) );
-      this.birthDate = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+      this.minDateDocumento = new Date( Date.parse( event ) );
    }
 
    onDeathDate( event: any ) {
@@ -421,5 +468,32 @@ export class EmployeesAddComponent implements OnInit {
    inputCleanUp( value: string ) {
       this.employee.numeroDocumento = value.toUpperCase().replace( /[^0-9]/g, '' ).trim();
    }
+// Archivo Adjunto
+   uploadingOk( event: any ) {
+      let respuesta = JSON.parse(event.xhr.response);
+      if(respuesta.idAdjunto != null || respuesta.idAdjunto != undefined){
+         this.employee.idAdjunto = respuesta.idAdjunto;
+      }
+   }
 
+   onBeforeSend( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      event.formData.append( 'obj', obj.toString() );
+   }
+
+   onSelect(event:any, file:any){
+      this.dataUploadArchivo = file[0].name;
+      this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   }
+
+   uploadAgain(rta:boolean){
+      this.employee.idAdjunto = null;
+   }
+
+   downloadFile(id: number){
+      this.adjuntosService.downloadFile( id ).subscribe(res => {
+         window.location.assign(res);
+      });
+   }
 }

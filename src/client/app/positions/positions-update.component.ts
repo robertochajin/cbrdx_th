@@ -12,6 +12,8 @@ import { ListEmployeesService } from '../_services/lists-employees.service';
 import { TreeNode } from 'primeng/components/common/api';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
+import { PermissionsCargos } from '../_models/permissionsCargos';
+import { PermissionService } from '../_services/permission.service';
 
 @Component( {
                moduleId: module.id,
@@ -45,6 +47,24 @@ export class PositionsUpdateComponent implements OnInit {
    step = 1;
    nivel: number;
    alertOcu = false;
+   rangoEdad: number[] = [ 16, 60 ];
+   seccion1: PermissionsCargos = new PermissionsCargos();
+   seccion2: PermissionsCargos = new PermissionsCargos();
+   seccion3: PermissionsCargos = new PermissionsCargos();
+   seccion4: PermissionsCargos = new PermissionsCargos();
+   seccion5: PermissionsCargos = new PermissionsCargos();
+   seccion6: PermissionsCargos = new PermissionsCargos();
+   seccion7: PermissionsCargos = new PermissionsCargos();
+   seccion8: PermissionsCargos = new PermissionsCargos();
+   seccion9: PermissionsCargos = new PermissionsCargos();
+   seccion10: PermissionsCargos = new PermissionsCargos();
+   seccion11: PermissionsCargos = new PermissionsCargos();
+   seccion12: PermissionsCargos = new PermissionsCargos();
+   seccion13: PermissionsCargos = new PermissionsCargos();
+   seccion14: PermissionsCargos = new PermissionsCargos();
+   seccion15: PermissionsCargos = new PermissionsCargos();
+   seccion16: PermissionsCargos = new PermissionsCargos();
+   defaultCampo = {visible:true, editable:true};
 
    constructor( private positionsService: PositionsService,
       private router: Router,
@@ -55,7 +75,28 @@ export class PositionsUpdateComponent implements OnInit {
       private confirmationService: ConfirmationService,
       private listEmployeesService: ListEmployeesService,
       private listaService: ListaService,
+      private permissionService: PermissionService,
       private _nav: NavService ) {
+
+      this.permissionService.getReglasFormularios( 'CARGOS' ).subscribe( p => {
+         let permisos = JSON.parse(p);
+         this.seccion1 = permisos.IDENTIFICACION ? permisos.IDENTIFICACION : new PermissionsCargos();
+         this.seccion2 = permisos.PRODUCTO ? permisos.PRODUCTO : new PermissionsCargos();
+         this.seccion3 = permisos.INTERRELACIONES ? permisos.INTERRELACIONES : new PermissionsCargos();
+         this.seccion4 = permisos.ROLDENTRO ? permisos.ROLDENTRO : new PermissionsCargos();
+         this.seccion5 = permisos.RESPONSABILIDADESPRINCIPALES ? permisos.RESPONSABILIDADESPRINCIPALES : new PermissionsCargos();
+         this.seccion6 = permisos.RESPONSABILIDADESCOMPLEMENTARIAS ? permisos.RESPONSABILIDADESCOMPLEMENTARIAS : new PermissionsCargos();
+         this.seccion7 = permisos.POSICION ? permisos.POSICION : new PermissionsCargos();
+         this.seccion8 = permisos.AUTORIDADES ? permisos.AUTORIDADES : new PermissionsCargos();
+         this.seccion9 = permisos.REQUISITOS ? permisos.REQUISITOS : new PermissionsCargos();
+         this.seccion10 = permisos.COMPETENCIAS ? permisos.COMPETENCIAS : new PermissionsCargos();
+         this.seccion11 = permisos.ACTIVOS ? permisos.ACTIVOS : new PermissionsCargos();
+         this.seccion12 = permisos.PRODUCTIVIDAD ? permisos.PRODUCTIVIDAD : new PermissionsCargos();
+         this.seccion13 = permisos.PERSONALIDAD ? permisos.PERSONALIDAD : new PermissionsCargos();
+         this.seccion14 = permisos.FACTORES ? permisos.FACTORES : new PermissionsCargos();
+         this.seccion15 = permisos.VALORACION ? permisos.VALORACION : new PermissionsCargos();
+         this.seccion16 = permisos.RElACION ? permisos.RElACION : new PermissionsCargos();
+      });
 
       this.listPositionsService.getCategoryTypes().subscribe( res => {
          this.listcategoryTypes = res;
@@ -126,12 +167,17 @@ export class PositionsUpdateComponent implements OnInit {
 
       this.acordion = 0;
    }
-
    ngOnInit() {
       this.acordion = 0;
       this.route.params.subscribe( ( params: Params ) => {
          this.positionsService.get( +params[ 'id' ] ).subscribe( position => {
             this.position = position;
+            if ( this.position.edad !== null ) {
+               this.rangoEdad[ 0 ] = this.position.edad;
+            }
+            if ( this.position.edadMax !== null ) {
+               this.rangoEdad[ 1 ] = this.position.edadMax;
+            }
             this.step = this.position.paso;
             if ( this.step > 0 && this.step < 16 ) {
                if ( this._nav.getTab() > 0 && this._nav.getTab() !== null ) {
@@ -173,15 +219,19 @@ export class PositionsUpdateComponent implements OnInit {
       if ( this.position.paso !== 0 && this.position.paso <= step ) {
          this.position.paso = step + 1;
          this.step = this.position.paso;
-      }
-      this.positionsService.updateEstado( this.position )
-      .subscribe( data => {
+
+         this.positionsService.updateEstado( this.position )
+         .subscribe( data => {
+            this._nav.setTab( step );
+            this.acordion = step;
+            this._nav.setMesage( 1, this.msgs );
+         }, error => {
+            this._nav.setMesage( 3, this.msgs );
+         } );
+      }else{
          this._nav.setTab( step );
          this.acordion = step;
-         this._nav.setMesage( 1, this.msgs );
-      }, error => {
-         this._nav.setMesage( 3, this.msgs );
-      } );
+      }
    }
 
    onSubmit0() {
@@ -262,6 +312,8 @@ export class PositionsUpdateComponent implements OnInit {
          this.position.paso = 10;
          this.step = 10;
       }
+      this.position.edad = this.rangoEdad[ 0 ];
+      this.position.edadMax = this.rangoEdad[ 1 ];
       this.positionsService.update5( this.position )
       .subscribe( data => {
          this._nav.setTab( 9 );
@@ -290,6 +342,7 @@ export class PositionsUpdateComponent implements OnInit {
 
    updateEstado( value: number ) {
       this.msgs = [];
+      let bckState = this.position.idEstado;
       this.position.idEstado = value;
       if ( this.position.idEstado === this.aprobado ) {
          this.position.indicadorHabilitado = true;
@@ -301,6 +354,7 @@ export class PositionsUpdateComponent implements OnInit {
       .subscribe( data => {
          this._nav.setMesage( 1, this.msgs );
       }, error => {
+         this.position.idEstado = bckState;
          this._nav.setMesage( 3, this.msgs );
       } );
    }
@@ -402,10 +456,8 @@ export class PositionsUpdateComponent implements OnInit {
                return true;
             } else {
                this.alertOcu = true;
-               this.msgOcupaciones[ 0 ] = {
-                  severity: 'error', summary: 'Error', detail: 'Debe agregar al menos una' +
-                                                               ' ocupación'
-               };
+               // this.msgOcupaciones[ 0 ] = {severity: 'error', summary: 'Error', detail: 'Debe agregar al menos una ocupación'};
+               this._nav.setMesage( 0, {severity: 'error', summary: 'Error', detail: 'Debe agregar al menos una ocupación'} );
                return false;
             }
          } );

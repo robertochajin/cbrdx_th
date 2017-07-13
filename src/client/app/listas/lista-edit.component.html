@@ -12,7 +12,7 @@
 								<p id="idLista">{{masterList.idLista}}</p>
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label class="control-label col-md-3" for="lista">{{ 'LISTAS.LBL_LISTA' | translate }}</label>
 							<div class="col-md-9">
@@ -87,7 +87,7 @@
 							</div>
 						</div>
 						<div class="form-group" [ngClass]="{ 'has-error':fd.submitted&&!item.valid}">
-							<label class="control-label col-md-3" for="item">{{ 'LISTAS.LBL_ITEMLISTA' | translate }}</label>
+							<label class="control-label col-md-3" for="item">{{ 'LBL_NOMBRE' | translate }}</label>
 							<div class="col-md-9">
 								<input class="form-control" id="item" name="item" type="text" pInputText
 								       [(ngModel)]="editableDetail.nombre" #item="ngModel" maxlength="100" required (keyup)="capitalize($event)"/>
@@ -177,9 +177,19 @@
 			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="detailsList" [paginator]="true" [rows]="10"
 			             [responsive]="true">
 				<header>Listas</header>
-				<p-column field="idLista" header="{{ 'LBL_CODIGO' | translate }}"></p-column>
+				<p-column field="idLista" header="{{ 'LBL_ID' | translate }}"></p-column>
 				<p-column field="codigo" header="{{ 'LBL_CODIGO' | translate }}"></p-column>
-				<p-column field="nombre" header="{{ 'LISTAS.LBL_ITEMLISTA' | translate }}"></p-column>
+				<p-column field="nombre" header="{{ 'LBL_NOMBRE' | translate }}"></p-column>
+				<p-column header="{{ 'LBL_ORDEN' | translate }}" styleClass="datatable-col-action">
+					<template let-qstn="rowData" pTemplate="body">
+						<div class="btn-group" role="group">
+							<button type="button" class="ui-button ui-button-info btn" icon="fa-arrow-down" data-toggle="tooltip" title="{{'BTN_ABAJO' | translate}}"
+							        pButton (click)="sendBefore(qstn)"></button>
+							<button type="button" class="ui-button ui-button-info btn" icon="fa-arrow-up" data-toggle="tooltip" title="{{'BTN_ARRIBA' | translate}}"
+							        pButton (click)="sendAfter(qstn)"></button>
+						</div>
+					</template>
+				</p-column>
 				<p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}" styleClass="datatable-col-center">
 					<template let-const="rowData" pTemplate="body">
 						<p-checkbox [(ngModel)]="const.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>

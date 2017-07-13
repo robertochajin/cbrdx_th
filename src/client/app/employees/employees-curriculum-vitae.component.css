@@ -35,6 +35,9 @@ ul{
 }
 .item li{
    margin-bottom: 10px;
+   -ms-word-break: break-all;
+       word-break: break-all;
+       word-break: break-word;
 }
 
 /**
@@ -62,8 +65,8 @@ ribbon
    text-align: left;
 }
 .hv-ribon-rigth{
-   margin: 12px 1px 20px;
-   width: 110%;
+   margin: 12px 27px 20px;
+   width: 100%;
    text-align: left;
 }
 
@@ -103,4 +106,9 @@ body.skin-blue .hv-ribon {
 body.skin-blue .hv-ribon-left:before,
 body.skin-blue .hv-ribon-rigth:after{
    border-color:transparent #2c6689;
+}
+
+#CV{
+   margin-left: 20px;
+   margin-right: 20px;
 }

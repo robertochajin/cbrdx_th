@@ -1,7 +1,9 @@
 <h3 class="first">{{'PROCESOSELECCION.LBL_CANDIDATOS' | translate }}</h3>
-<div>
+<postulation-history *ngIf="viewpostulations" [idTercero]="idTercero" (dismiss)="toogleHistory()"></postulation-history>
+<div *ngIf="!viewpostulations">
 	<div class="row datable-header">
 		<div class="col-md-6 col-xs-12">
+			<h4>{{'PROCESOSELECCION.LBL_CANTIDADVACANTES' | translate }}: <strong>{{numeroVacantes}}</strong></h4>
 		</div>
 		<div class="col-md-6 col-xs-12 datatable-header-search">
 			<div class="input-group">
@@ -13,6 +15,12 @@
 	</div>
 	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="candidates" [paginator]="true" [rows]="10"
 	             [responsive]="true" [globalFilter]="gb">
+		<p-column header="#" styleClass="datatable-col-action">
+			<template let-cs="rowData" pTemplate="body">
+				<button label="{{cs.cantProcesoSeleccion}}" type="button"
+				        pButton (click)="viewHistory( cs.idTercero )"></button>
+			</template>
+		</p-column>
 		<p-column field="nombreCompleto" header="{{'PROCESOSELECCION.LBL_CANDIDATO' | translate }}" [sortable]="true"></p-column>
 		<p-column *ngFor="let step of steps" header="{{step.codigo}}" styleClass="datatable-col-action">
 			<template let-cs="rowData" pTemplate="body">
@@ -29,7 +37,8 @@
 				        title="{{'PROCESOSELECCION.LBL_NOAPROBO' | translate }}" [disabled]="isStepDisabled(cs, step.idProcesoPaso, 'RECH')"
 				        class="ui-button-danger" pButton (click)="redirecStep(cs, step.idProcesoPaso)"></button>
 				<div *ngIf="draw(cs, step.idProcesoPaso, 'NA')" data-toggle="tooltip"
-				     title="{{'PROCESOSELECCION.LBL_NOAPLICA' | translate }}" >NA</div>
+				     title="{{'PROCESOSELECCION.LBL_NOAPLICA' | translate }}">NA
+				</div>
 			</template>
 		</p-column>
 	</p-dataTable>

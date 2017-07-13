@@ -22,6 +22,7 @@ export class PositionActivitiesComponent implements OnInit {
    msg: Message;
    msgs: Message[] = [];
    listActivities: SelectItem[] = [];
+   successEdit= true;
    listPositionsActivities: PositionsActivities[] = [];
 
    constructor( private positionsService: PositionsService,
@@ -67,6 +68,7 @@ export class PositionActivitiesComponent implements OnInit {
 
    onSubmit() {
       if ( this.positionsActivities.idOcupacion ) {
+         this.successEdit = false;
          this.positionsService.addPositionsActivities( this.positionsActivities )
          .subscribe( data => {
 
@@ -78,7 +80,7 @@ export class PositionActivitiesComponent implements OnInit {
             } );
             this.listPositionsActivities.push( data );
             this.listActivities = [];
-            this.positionsService.getListActivities().subscribe( rest => {
+            this.positionsService.getListActivitiesByLevel(4).subscribe( rest => {
                this.listActivities.push( { label: 'Seleccione...', value: null } );
                for ( let dp of rest ) {
                   let bandera = false;
@@ -92,6 +94,7 @@ export class PositionActivitiesComponent implements OnInit {
                      this.listActivities.push( { label: dp.ocupacion, value: dp.idOcupacion } );
                   }
                }
+               this.successEdit = true;
             } );
          }, error => {
             let typeMessage = 3; // 1 = Add, 2 = Update, 3 Error, 4 Custom
@@ -113,7 +116,7 @@ export class PositionActivitiesComponent implements OnInit {
                                                     this.listPositionsActivities.indexOf( this.dialogObjet ), 1 );
                                                  this.dialogObjet = null;
                                                  this.listActivities = [];
-                                                 this.positionsService.getListActivities().subscribe( rest => {
+                                                 this.positionsService.getListActivitiesByLevel(4).subscribe( rest => {
                                                     this.listActivities.push( { label: 'Seleccione...', value: null } );
                                                     for ( let dp of rest ) {
                                                        let bandera = false;

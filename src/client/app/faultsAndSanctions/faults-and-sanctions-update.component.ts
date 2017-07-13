@@ -83,9 +83,14 @@ export class FaultsAndSanctionsUpdateComponent implements OnInit {
 
    }
 
-   capitalize( event: any ) {
+   capitalize( event: any , specialChars: boolean ) {
       let input = event.target.value;
-      event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+      if(specialChars){
+         event.target.value = (input.substring( 0, 1 ).toUpperCase()
+                               + input.substring( 1 ).toLowerCase()).replace( /[^ÑA-Z0-9 /]/gi, '' );
+      } else {
+         event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+      }
    }
 
 }

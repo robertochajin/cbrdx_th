@@ -32,13 +32,13 @@ export class Noformalstudies {
       this.descripcion = '';
       this.fechaIngresa = null;
       this.fechaTermina = null;
+      this.idTipoEstudio = null;
       this.fechaVerificado = '';
-      this.idAdjunto = 0;
-      this.idAreaEstudio = 0;
+      this.idAdjunto = null;
+      this.idAreaEstudio = null;
       this.idCiudad = 0;
-      this.idIntensidadHoraria = 0;
+      this.idIntensidadHoraria = null;
       this.idTercero = 0;
-      this.idTipoEstudio = 0;
       this.indicadorHabilitado = true;
       this.indicadorTerminacion = true;
       this.indicadorVerificado = false;
