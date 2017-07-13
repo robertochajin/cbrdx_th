@@ -24,6 +24,11 @@ export class ReferencesService {
       .map( ( res: Response ) => res.json() );
    }
 
+   getById( idTerceroReferencia: number ) {
+      return this.http.get( this.serviceURL + 'buscarId/' + idTerceroReferencia, { headers: this.headers } )
+      .map( ( res: Response ) => res.json() );
+   }
+
    add( f: References ) {
       return this.http.post( this.serviceURL, f, { headers: this.headers } )
       .map( ( res: Response ) => res.json() );

@@ -63,7 +63,6 @@ export class CandidateTestComponent implements OnInit {
    private testToDefine: VacancyTest;
    private allTestDefined = false;
 
-
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
       private _nav: NavService,
@@ -138,7 +137,8 @@ export class CandidateTestComponent implements OnInit {
                         if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ) {
                            this.readonly = true;
                         }
-                        this.vacancyTestServices.getAllEnabledBySelectionProcess( this.candidateProcess.idProcesoSeleccion ).subscribe( testList => {
+                        this.vacancyTestServices.getAllEnabledBySelectionProcess( this.candidateProcess.idProcesoSeleccion )
+                        .subscribe( testList => {
                            this.vacancyTests = testList;
                            this.listTest();
                         } );
@@ -175,7 +175,7 @@ export class CandidateTestComponent implements OnInit {
    }
 
    onSubmit() {
-      if (this.areAllTestDefined()) {
+      if ( this.areAllTestDefined() ) {
          this.allTestDefined = true;
          if ( this.indApproval === 'APRB' ) {
             this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'APROB' );
@@ -260,7 +260,7 @@ export class CandidateTestComponent implements OnInit {
       this.listaService.getMasterDetails( 'ListasPruebasTecnicas' ).subscribe( rest => {
          this.listQuest.push( { label: 'Seleccione', value: null } );
          rest.map( ( s: ListaItem ) => {
-            if(this.vacancyTests.find(t => t.idPruebaTecnica === s.idLista) === undefined) {
+            if ( this.vacancyTests.find( t => t.idPruebaTecnica === s.idLista ) === undefined ) {
                this.listQuest.push( { label: s.nombre, value: s.idLista } );
             }
          } );
@@ -276,22 +276,22 @@ export class CandidateTestComponent implements OnInit {
       this.vacancyTest.indicadorHabilitado = true;
 
       this.vacancyTestServices.add( this.vacancyTest ).subscribe( res => {
-         if(res){
-            let tecniqueTest = this.listQuest.find(pt => pt.value === res.idPruebaTecnica);
+         if ( res ) {
+            let tecniqueTest = this.listQuest.find( pt => pt.value === res.idPruebaTecnica );
             res.pruebaTecnica = tecniqueTest.label;
-            this.listQuest.splice(this.listQuest.indexOf(tecniqueTest), 1);
-            this.vacancyTests.push(res);
+            this.listQuest.splice( this.listQuest.indexOf( tecniqueTest ), 1 );
+            this.vacancyTests.push( res );
             this.questId = null;
             this.guardandoResoursesQues = false;
          }
       }, error => {
-         this._nav.setMesage(3);
-      });
+         this._nav.setMesage( 3 );
+      } );
 
    }
 
-   definegTest(test: VacancyTest) {
-      if(test) {
+   definegTest( test: VacancyTest ) {
+      if ( test ) {
          this.definingTest = true;
          this.testToDefine = new VacancyTest();
          this.testToDefine = Object.assign( {}, test );
@@ -300,18 +300,19 @@ export class CandidateTestComponent implements OnInit {
    }
 
    updateTest() {
-      this.vacancyTestServices.update(this.testToDefine).subscribe(res => {
-         this._nav.setMesage(2);
-         let oldItem = this.vacancyTests.find(t => t.idProcesoSeleccionPruebaTecnica === this.testToDefine.idProcesoSeleccionPruebaTecnica);
-         this.vacancyTests[this.vacancyTests.indexOf(oldItem)] = this.testToDefine;
+      this.vacancyTestServices.update( this.testToDefine ).subscribe( res => {
+         this._nav.setMesage( 2 );
+         let oldItem = this.vacancyTests.find(
+            t => t.idProcesoSeleccionPruebaTecnica === this.testToDefine.idProcesoSeleccionPruebaTecnica );
+         this.vacancyTests[ this.vacancyTests.indexOf( oldItem ) ] = this.testToDefine;
          this.definingTest = false;
       }, error => {
-         this._nav.setMesage(3);
-      });
+         this._nav.setMesage( 3 );
+      } );
    }
 
-   cancelDefiningTest(dirty: boolean) {
-      if(dirty) {
+   cancelDefiningTest( dirty: boolean ) {
+      if ( dirty ) {
          this.confirmationService.confirm( {
                                               message: ` ¿Está seguro que desea salir sin guardar?`,
                                               header: 'Confirmación',
@@ -324,7 +325,6 @@ export class CandidateTestComponent implements OnInit {
          this.definingTest = false;
       }
    }
-
 
    uploadingOk( event: any ) {
       let respuesta = JSON.parse( event.xhr.response );
@@ -349,26 +349,26 @@ export class CandidateTestComponent implements OnInit {
    }
 
    downloadFile( id: number ) {
-      this.adjuntosService.downloadFile( id ).subscribe( (res: any) => {
+      this.adjuntosService.downloadFile( id ).subscribe( ( res: any ) => {
          window.location.assign( res );
       } );
    }
 
    getFileName() {
       if ( this.testToDefine.idAdjunto ) {
-         this.adjuntosService.getFileName( this.testToDefine.idAdjunto ).subscribe( (res: any) => {
+         this.adjuntosService.getFileName( this.testToDefine.idAdjunto ).subscribe( ( res: any ) => {
             this.dataUploadArchivo = res.nombreArchivo;
          } );
       }
    }
 
-   private areAllTestDefined() : boolean{
+   private areAllTestDefined(): boolean {
       let allDefined = true;
-      this.vacancyTests.map(t => {
-         if(t.indicadorRealiza === null) {
+      this.vacancyTests.map( t => {
+         if ( t.indicadorRealiza === null ) {
             allDefined = false;
          }
-      });
+      } );
       return allDefined;
    }
 }

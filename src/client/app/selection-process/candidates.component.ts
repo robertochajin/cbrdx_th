@@ -32,7 +32,7 @@ export class CandidatesComponent implements OnInit {
    publication: Publications = new Publications();
    private userRoles: VUsuarioRol[] = [];
    viewpostulations: boolean = false;
-   idTercero: number=0;
+   idTercero: number = 0;
    numeroVacantes: number;
 
    constructor( private rolesService: RolesService,
@@ -60,9 +60,9 @@ export class CandidatesComponent implements OnInit {
 
                this.publicationsService.getById( params[ 'idPublication' ] ).subscribe( publication => {
                   this.publication = publication;
-                  this.personnelRequirementServices.getByIdRequirement( this.publication.idRequerimiento ).subscribe(data=>{
+                  this.personnelRequirementServices.getByIdRequirement( this.publication.idRequerimiento ).subscribe( data => {
                      this.numeroVacantes = data.cantidadVacantes;
-                  });
+                  } );
 
                   this.selectionStepService.getAllByProcessAndType( this.publication.idProceso, this.publication.formaReclutamiento )
                   .subscribe( steps => {
@@ -139,11 +139,12 @@ export class CandidatesComponent implements OnInit {
       }
    }
 
-   viewHistory(id: number) {
+   viewHistory( id: number ) {
       this.idTercero = id;
       this.viewpostulations = !this.viewpostulations;
    }
-   toogleHistory(){
+
+   toogleHistory() {
       this.viewpostulations = !this.viewpostulations;
    }
 

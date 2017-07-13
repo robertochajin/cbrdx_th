@@ -1,0 +1,70 @@
+<div *ngIf="publication">
+	<div class="col-md-10 col-md-offset-1">
+		<div class="row">
+			<p-panel header="{{ 'PROCESOSELECCION.LBL_DETALLEVACANTE' | translate }}: {{requirement.cargo}}">
+				<form class="form-horizontal">
+					<fieldset>
+						<div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_FECHADESDE' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{publication.fechaInicio}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_FECHAHASTA' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{publication.fechaFin}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_FORMACIONEDUCATIVA' | translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{publication.nivelEducacion}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_TIPOTRABAJO' | translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{publication.tipoTrabajo}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_SALARIO' | translate
+									}}:</label>
+								<label
+									class="col-md-3 col-sm-6 col-xs-12"><strong>{{publication.indicadorSalario?txtSalary:requirement.salario}}
+									{{publication.indicadorBonificacion?' + ' +txtBono:''}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_LUGARTRABAJO' | translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{publication.lugarTrabajo}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-12 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_DESCRIPCION' | translate
+									}}:</label>
+								<label class="col-md-8 col-sm-12 col-xs-12"><strong><p align="justify">{{publication.descripcionGeneral}}</p>
+								</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-12 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_COMPETENCIAS' | translate
+									}}:</label>
+								<label class="col-md-8 col-sm-12 col-xs-12"><strong><p align="justify">{{publication.competenciasLaborales}}</p>
+								</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-12 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_OBSERVACION' | translate
+									}}:</label>
+								<label class="col-md-8 col-sm-12 col-xs-12"><strong><p align="justify">{{publication.observacion}}</p>
+								</strong></label>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+				
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+						        pButton (click)="goBack()"></button>
+						<button icon="fa-arrow-right" label="{{'BTN_CONTINUAR' | translate }}" type="button"
+						        pButton (click)="goNext()"></button>
+					</div>
+				</div>
+			</p-panel>
+		</div>
+	</div>
+
+</div>
+

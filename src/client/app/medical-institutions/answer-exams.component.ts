@@ -26,6 +26,9 @@ import { MedicalExamService } from '../_services/medical-exam.service';
 import { ConstanteService } from '../_services/constante.service';
 import { AdjuntosService } from '../_services/adjuntos.service';
 import { DocumentManagementService } from '../_services/document-managgement.service';
+import { QuestionnairesService } from '../_services/questionnaires.service';
+import { MasterAnswersService } from '../_services/masterAnswers.service';
+import { MasterAnswers } from '../_models/masterAnswers';
 
 @Component( {
                moduleId: module.id,
@@ -62,6 +65,9 @@ export class AnswerExamsComponent implements OnInit {
    ftype: string = '';
    idCertificado: number;
    certificado: any = '';
+   codigoCuestionario: string;
+   showFinish: boolean = false;
+   maestroRespuestas: MasterAnswers = new MasterAnswers();
    respuestaOk: boolean = false;
 
    constructor( public publicationsService: PublicationsService,
@@ -78,7 +84,9 @@ export class AnswerExamsComponent implements OnInit {
       private candidateProcessService: CandidateProcessService,
       private medicalExamService: MedicalExamService,
       private documentManagementService: DocumentManagementService,
-      private selectionStepService: SelectionStepService ) {
+      private selectionStepService: SelectionStepService,
+      private questionnairesService: QuestionnairesService,
+      private masterAnswersService: MasterAnswersService ) {
 
       let token = localStorage.getItem( 'token' );
       if ( token !== null ) {
@@ -93,6 +101,11 @@ export class AnswerExamsComponent implements OnInit {
       this.constanteService.getByCode( 'FSIZE' ).subscribe( data => {
          if ( data.valor ) {
             this.fsize = Number( data.valor );
+         }
+      } );
+      this.constanteService.getByCode( 'DIAGNO' ).subscribe( data => {
+         if ( data.valor ) {
+            this.codigoCuestionario = data.valor;
          }
       } );
 
@@ -119,6 +132,11 @@ export class AnswerExamsComponent implements OnInit {
             // obtener examen medico
             this.medicalExamService.getById( params[ 'idExamen' ] ).subscribe( rs => {
                this.medicalExam = rs;
+               if ( this.medicalExam.idMaestroRespuesta ) {
+                  this.getMaestroCuestionariosById();
+               } else {
+                  this.getMaestroCuestionariosByCode();
+               }
                if ( this.medicalExam.idAdjunto ) {
                   this.getFileName();
                }
@@ -238,5 +256,26 @@ export class AnswerExamsComponent implements OnInit {
          this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
       }
 
+   }
+
+   getMaestroCuestionariosById() {
+      this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe( res => {
+         this.maestroRespuestas = res;
+      } );
+   }
+
+   getMaestroCuestionariosByCode() {
+      this.questionnairesService.getByCode( this.codigoCuestionario ).subscribe( quest => {
+         this.maestroRespuestas.idCuestionario = quest.idCuestionario;
+         this.masterAnswersService.add( this.maestroRespuestas ).subscribe( res => {
+            this.maestroRespuestas = res;
+            this.medicalExam.idMaestroRespuesta = this.maestroRespuestas.idMaestroRespuesta;
+            this.medicalExamService.update( this.medicalExam ).subscribe();
+         } );
+      } );
+   }
+
+   finishQuestionnaire() {
+      this.showFinish = true;
    }
 }

@@ -31,10 +31,16 @@ import { PostulationHistoryComponent } from './postulation-history.component';
 import { MedicalExamComponent } from './medical-exam.component';
 import { MedicalExamService } from '../_services/medical-exam.service';
 
+import { VacancyApplyComponent } from '../selecttion-process-apply/apply-detail.component';
+import { ApplyQuestionnairesComponent } from '../selecttion-process-apply/questionnaires.component';
+import { QuestionnairesModule } from '../questionnaires/questionnaires.module';
+import { SolutionsQuestionnairesDetailComponent } from '../questionnaires/solutions-questionnaire/solutions-questionnaires-detail.component';
+import { MasterAnswersService } from '../_services/masterAnswers.service';
 @NgModule( {
               imports: [
                  SharedModule,
-                 FormSharedModule
+                 FormSharedModule,
+                 QuestionnairesModule
               ],
               declarations: [
                  SelectionProcessComponent,
@@ -53,7 +59,9 @@ import { MedicalExamService } from '../_services/medical-exam.service';
                  CallReferenceComponent,
                  MedicalExamComponent,
                  PostulationHistoryComponent,
-                 SafePipe
+                 SafePipe,
+                 VacancyApplyComponent,
+                 ApplyQuestionnairesComponent
               ],
               bootstrap: [ SelectionProcessComponent ],
               providers: [
@@ -67,6 +75,7 @@ import { MedicalExamService } from '../_services/medical-exam.service';
                  AttachmentsService,
                  MedicalExamService,
                  VacancyTestServices,
+                 MasterAnswersService,
                  PublicationQuestionnairesService,
                  UsuariosService
               ],

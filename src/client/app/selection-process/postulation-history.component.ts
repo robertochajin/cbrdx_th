@@ -42,12 +42,12 @@ export class PostulationHistoryComponent implements OnInit {
    ngOnInit() {
 
       if ( this.idTercero ) {
-         this.employeesService.get( this.idTercero ).subscribe(rs=>{
+         this.employeesService.get( this.idTercero ).subscribe( rs => {
             this.employee = rs;
-         });
-         this.selectionStepService.getHistoryByIdEmployee( this.idTercero ).subscribe(data=>{
+         } );
+         this.selectionStepService.getHistoryByIdEmployee( this.idTercero ).subscribe( data => {
             this.listHistory = data;
-         });
+         } );
       }
    }
 

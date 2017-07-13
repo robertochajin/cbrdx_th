@@ -17,6 +17,7 @@ import { LocationsModule } from '../locations/locations.module';
 import { MedicalInstitutionUpdateComponent } from './medical-institutions-update.component';
 import { MedicalInstitutionDetailComponent } from './medical-institutions-detail.component';
 import { AnswerExamsComponent } from './answer-exams.component';
+import { QuestionnairesModule } from '../questionnaires/questionnaires.module';
 
 @NgModule( {
               imports: [
@@ -32,10 +33,10 @@ import { AnswerExamsComponent } from './answer-exams.component';
                  InputMaskModule,
                  LocationsModule,
                  InputTextModule,
-                 InputTextareaModule, PanelModule
+                 InputTextareaModule, PanelModule, QuestionnairesModule
               ],
               declarations: [ MedicalInstitutionsComponent, MedicalInstitutionAddComponent, MedicalInstitutionUpdateComponent,
-                 MedicalInstitutionDetailComponent,AnswerExamsComponent
+                 MedicalInstitutionDetailComponent, AnswerExamsComponent
               ],
               bootstrap: [ MedicalInstitutionsComponent, MedicalInstitutionAddComponent ],
               providers: [ MedicalInstitutionService, ListaService, ConfirmationService ],

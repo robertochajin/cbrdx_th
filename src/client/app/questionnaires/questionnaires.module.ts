@@ -9,6 +9,8 @@ import { QuestionnairesService } from '../_services/questionnaires.service';
 import { QuestionnairesAddComponent } from './questionnaires-add.component';
 import { QuestionnairesUpdateComponent } from './questionnaires-update.component';
 import { SolutionsQuestionnairesComponent } from './solutions-questionnaire/solutions-questionnaires.component';
+import { MasterAnswersService } from '../_services/masterAnswers.service';
+import { SolutionsQuestionnairesDetailComponent } from './solutions-questionnaire/solutions-questionnaires-detail.component';
 
 
 @NgModule( {
@@ -18,11 +20,11 @@ import { SolutionsQuestionnairesComponent } from './solutions-questionnaire/solu
               ],
 
               declarations: [ QuestionnairesComponent, QuestionnairesAddComponent, QuestionnairesUpdateComponent,
-                 SolutionsQuestionnairesComponent
+                 SolutionsQuestionnairesComponent, SolutionsQuestionnairesDetailComponent
               ],
               bootstrap: [ QuestionnairesComponent ],
-              providers: [ QuestionnairesService, NavService, ListaService ],
-              exports: [ QuestionnairesComponent ]
+              providers: [ QuestionnairesService, NavService, ListaService, MasterAnswersService ],
+              exports: [ QuestionnairesComponent, SolutionsQuestionnairesComponent, SolutionsQuestionnairesDetailComponent ]
            } )
 export class QuestionnairesModule {
 }
