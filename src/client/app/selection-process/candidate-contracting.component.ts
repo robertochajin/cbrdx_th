@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { PublicationsService } from '../_services/publications.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SelectionStepService } from '../_services/selection-step.service';
@@ -17,90 +18,77 @@ import { ListaItem } from '../_models/listaItem';
 
 import { JwtHelper } from 'angular2-jwt';
 import { RolesService } from '../_services/roles.service';
-import { References } from '../_models/references';
-import { ReferencesService } from '../_services/references.service';
+import { VacancyTest } from '../_models/vacancyTest';
+import { VacancyTestServices } from '../_services/vacancyTest.service';
+import { AdjuntosService } from '../_services/adjuntos.service';
 import { ConstanteService } from '../_services/constante.service';
-import { ReferencesCall } from '../_models/referencesCall';
-import { MasterAnswersService } from '../_services/masterAnswers.service';
-import { MasterAnswers } from '../_models/masterAnswers';
-import { QuestionnairesService } from '../_services/questionnaires.service';
+import { TerceroPublicaciones } from '../_models/terceroPublicaciones';
 
 @Component( {
                moduleId: module.id,
-               selector: 'call-reference',
-               templateUrl: 'call-reference.component.html',
+               selector: 'candidate-contracting',
+               templateUrl: 'candidate-contracting.component.html',
                providers: [ ConfirmationService ]
             } )
-export class CallReferenceComponent implements OnInit {
+export class CandidateContractingComponent implements OnInit {
    private publication: PersonnelRequirement = new PersonnelRequirement();
    private step: SelectionStep = new SelectionStep();
    private candidate: Employee = new Employee();
    public indApproval: string;
+   public listQuest: SelectItem[] = [];
+   guardandoResoursesQues = false;
+   questId: number;
+   public definingTest = false;
    public approvalOptions: SelectItem[] = [];
-   public callResults: SelectItem[] = [];
    public candidateProcess: CandidateProcess = new CandidateProcess();
    private es: any;
    private minDate: Date = new Date();
    private stepStates: ListaItem[] = [];
    private desitionList: ListaItem[] = [];
-   public responsables: SelectItem[] = [];
-   private showCalendar = false;
    private readonly = false;
    svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
-   llamar: boolean = false;
-   reference: References = new References();
-   usuarioLogueado: any;
-   idRol: number;
+
+   svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
+   dataUploadArchivo: any = '';
+   dataUploadUsuario: any = '';
+   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
    jwtHelper: JwtHelper = new JwtHelper();
-   references: References[];
-   referencesCall: ReferencesCall = new ReferencesCall();
-   codigoTipoReferencia: string;
-   codigoCuestionarioFamiliar: string;
-   codigoCuestionarioComercial: string;
-   codigoCuestionarioPersonal: string;
-   codigoCuestionarioLaboral: string;
-   maestroRespuestas: MasterAnswers = new MasterAnswers();
-   showFinish = false;
+   fsize: number = 50000000;
+   ftype: string = '';
+   idRol: number;
+   immediately: boolean;
+   private thirdPublication: TerceroPublicaciones = new TerceroPublicaciones();
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
       private _nav: NavService,
       private router: Router,
+      private location: Location,
+      private adjuntosService: AdjuntosService,
+      private vacancyTestServices: VacancyTestServices,
       private listaService: ListaService,
       private confirmationService: ConfirmationService,
       private rolesService: RolesService,
+      private constanteService: ConstanteService,
       private employeesService: EmployeesService,
       private vacanciesService: VacanciesService,
       private candidateProcessService: CandidateProcessService,
-      private referencesService: ReferencesService,
-      private constanteService: ConstanteService,
-      private selectionStepService: SelectionStepService,
-      private masterAnswersService: MasterAnswersService,
-      private questionnairesService: QuestionnairesService ) {
+      private selectionStepService: SelectionStepService ) {
 
       let token = localStorage.getItem( 'token' );
       if ( token !== null ) {
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
          this.candidateProcess.idResponsable = this.usuarioLogueado.usuario.idUsuario;
       }
-      this.constanteService.getByCode( 'CUEFAM' ).subscribe( data => {
+
+      this.constanteService.getByCode( 'FTYPE' ).subscribe( data => {
          if ( data.valor ) {
-            this.codigoCuestionarioFamiliar = data.valor;
+            this.ftype = data.valor;
          }
       } );
-      this.constanteService.getByCode( 'CUEPER' ).subscribe( data => {
+      this.constanteService.getByCode( 'FSIZE' ).subscribe( data => {
          if ( data.valor ) {
-            this.codigoCuestionarioPersonal = data.valor;
-         }
-      } );
-      this.constanteService.getByCode( 'CUECOM' ).subscribe( data => {
-         if ( data.valor ) {
-            this.codigoCuestionarioComercial = data.valor;
-         }
-      } );
-      this.constanteService.getByCode( 'CUELAB' ).subscribe( data => {
-         if ( data.valor ) {
-            this.codigoCuestionarioLaboral = data.valor;
+            this.fsize = Number( data.valor );
          }
       } );
 
@@ -114,13 +102,6 @@ export class CallReferenceComponent implements OnInit {
          } );
       } );
 
-      this.listaService.getMasterDetails( 'ListasResultadosLllamadas' ).subscribe( res => {
-         this.callResults.push( { label: 'Seleccione', value: null } );
-         res.map( ( s: ListaItem ) => {
-            this.callResults.push( { label: s.nombre, value: s.codigo } );
-         } );
-      } );
-
       this.route.params.subscribe( ( params: Params ) => {
          if ( params[ 'idStep' ] !== undefined && params[ 'idTerceroPublication' ] !== undefined ) {
             this.candidateProcess.idProcesoPaso = params[ 'idStep' ];
@@ -130,6 +111,7 @@ export class CallReferenceComponent implements OnInit {
                this.step = step;
 
                selectionStepService.getTerceroPublicacio( params[ 'idTerceroPublication' ] ).subscribe( res => {
+                  this.thirdPublication = res;
                   employeesService.get( res.idTercero ).subscribe( cndt => {
                      this.candidate = cndt;
                      this.candidate.nombreCompleto = this.candidate.primerNombre + ' ' +
@@ -137,23 +119,6 @@ export class CallReferenceComponent implements OnInit {
                                                      this.candidate.primerApellido + ' ' +
                                                      this.candidate.segundoApellido;
                      this.candidate.edad = moment( this.candidate.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
-                     this.referencesService.getAllgetAllByEmployee( this.candidate.idTercero ).subscribe(
-                        references => {
-                           this.references = references;
-                           this.references.forEach( function ( obj, index ) {
-                              obj.nombreCompleto = obj.primerNombre + ' ' + obj.segundoNombre + ' ' + obj.primerApellido + ' ' + obj.segundoApellido;
-                              if ( obj.telefonoFijo === null ) {
-                                 obj.numeroContacto = obj.telefonoMovil;
-                              }
-                              if ( obj.telefonoMovil === null ) {
-                                 obj.numeroContacto = obj.telefonoFijo;
-                              }
-                              if ( obj.telefonoMovil !== null && obj.telefonoFijo !== null ) {
-                                 obj.numeroContacto = obj.telefonoFijo + ' /  ' + obj.telefonoMovil;
-                              }
-                           } );
-                        }
-                     );
                   } );
                   vacanciesService.getPublication( res.idPublicacion ).subscribe( pb => {
                      this.publication = pb;
@@ -170,6 +135,7 @@ export class CallReferenceComponent implements OnInit {
                            this.readonly = true;
                         }
                      } );
+
                   } else {
                      this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
                   }
@@ -179,13 +145,23 @@ export class CallReferenceComponent implements OnInit {
 
          } else {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'selection-process' ] );
+            this.location.back();
          }
       } );
 
    }
 
    ngOnInit() {
+      this.es = {
+         firstDayOfWeek: 1,
+         dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
+         dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
+         dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
+         monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre',
+            'diciembre'
+         ],
+         monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
+      };
    }
 
    onSubmit() {
@@ -248,20 +224,6 @@ export class CallReferenceComponent implements OnInit {
       this.router.navigate( [ 'employees/curriculum/' + this.candidate.idTercero ] );
    }
 
-   call( tr: References ) {
-      this.llamar = true;
-      this.reference = tr;
-      this.referencesService.getCallbyReference( this.reference.idTerceroReferencia ).subscribe(
-         references => {
-            if ( references.length > 0 ) {
-               this.referencesCall = references[ references.length - 1 ];
-               this.getMaster();
-            } else {
-               this.addMaster();
-            }
-         } );
-   }
-
    goBack( fDirty: boolean ) {
       if ( fDirty ) {
          this.confirmationService.confirm( {
@@ -279,53 +241,12 @@ export class CallReferenceComponent implements OnInit {
 
    }
 
-   hideForm() {
-      this.llamar = false;
-   }
-
-   addMaster() {
-
-      switch ( this.reference.codigoTipoReferencia ) {
-         case 'FAM':
-            this.codigoTipoReferencia = this.codigoCuestionarioFamiliar;
-            break;
-         case 'LAB':
-            this.codigoTipoReferencia = this.codigoCuestionarioLaboral;
-            break;
-         case 'COM':
-            this.codigoTipoReferencia = this.codigoCuestionarioComercial;
-            break;
-         case 'PR':
-            this.codigoTipoReferencia = this.codigoCuestionarioPersonal;
-            break;
+   setImmediateDate() {
+      if(this.immediately){
+         this.thirdPublication.fechaContratacion = new Date();
+      } else {
+         this.thirdPublication.fechaContratacion = null;
       }
-
-      this.questionnairesService.getByCode( this.codigoTipoReferencia ).subscribe( quest => {
-         this.maestroRespuestas.idCuestionario = quest.idCuestionario;
-         this.masterAnswersService.add( this.maestroRespuestas ).subscribe( res => {
-            this.maestroRespuestas = res;
-            this.referencesCall.idTerceroReferencia = this.reference.idTerceroReferencia;
-            this.referencesCall.idMaestroRespuesta = this.maestroRespuestas.idMaestroRespuesta;
-            this.referencesService.addCall( this.referencesCall ).subscribe(
-               referencesCall => {
-                  this.referencesCall = referencesCall;
-               }
-            );
-         } );
-      } );
    }
 
-   getMaster() {
-      this.masterAnswersService.get( this.referencesCall.idMaestroRespuesta ).subscribe( res => {
-         this.maestroRespuestas = res;
-      } );
-   }
-
-   finishQuestionnaire() {
-      this.showFinish = true;
-   }
-
-   llamarReferencia() {
-      window.open("sip:robertochajin@sipjs.onsip.com", "_blank");
-   }
 }

@@ -188,6 +188,7 @@ import { MedicalExamInformedConsentComponent } from './employees-clinical-inform
 import { AnswerExamsComponent } from './medical-institutions/answer-exams.component';
 import { EmployeesAttachmentsComponent } from './employees-attatchments/employees-attachments.component';
 import {PositionsDetailPdfComponent} from "./positions/positions-detail-pdf.component";
+import { CandidateContractingComponent } from './selection-process/candidate-contracting.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -434,6 +435,10 @@ const routes = [
    {
       path: 'selection-process/process-step/candidate-test/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',
       component: CandidateTestComponent, canActivate: [ AuthGuard ]
+   },
+   {
+      path: 'selection-process/process-step/contracting/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: CandidateContractingComponent, canActivate: [ AuthGuard ]
    },
    {
       path: 'selection-process/process-step/call-reference/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',

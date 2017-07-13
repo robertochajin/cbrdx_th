@@ -47,6 +47,7 @@ export class CandidateRevisionComponent implements OnInit {
    usuarioLogueado: any;
    idRol: number;
    jwtHelper: JwtHelper = new JwtHelper();
+   private allTestApproved = true;
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
@@ -120,6 +121,16 @@ export class CandidateRevisionComponent implements OnInit {
 
             this.masterAnswersService.getByTerceroPublicacion( this.candidateProcess.idTerceroPublicacion ).subscribe( res => {
                this.maestrosRespuestas = res;
+               this.maestrosRespuestas.map(m => {
+                  if(m.indicadorFinalizado && !m.indicadorAprobado){
+                     this.allTestApproved = m.indicadorAprobado;
+                  }
+               });
+               if(this.allTestApproved) {
+                  this.indApproval = 'APRB'
+               } else {
+                  this.indApproval = 'NOAPRB'
+               }
             } );
 
          } else {

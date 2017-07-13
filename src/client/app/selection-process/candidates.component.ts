@@ -90,10 +90,12 @@ export class CandidatesComponent implements OnInit {
       if ( this.userRoles.find( r => r.rol === 'ROLE_PROCESOSELECCION' )
            || (myStep !== undefined && myStep.idResponsable === this.usuarioLogueado.usuario.idUsuario) ) {
          if ( myStep.interfazInterna ) {
-            //selection-process/process-step/candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
-            //selection-process/process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso
-            //selection-process/process-step/call-reference/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
-            //selection-process/process-step/medical-exam/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
+            // *Revision* selection-process/process-step/candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
+            // *Central de riesgos* selection-process/process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso
+            // *CallReferences* selection-process/process-step/call-reference/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
+            // *PruebasTecnicas* selection-process/process-step/candidate-test/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
+            // *Examen medico* selection-process/process-step/medical-exam/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
+            // *Contratacion* selection-process/process-step/contracting/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
 
             this.router.navigate(
                [ myStep.interfazInterna.replace( ':idStep', myStep.idProcesoPaso.toString() )

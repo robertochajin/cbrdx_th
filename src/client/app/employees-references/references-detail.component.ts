@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { References } from './references';
-import { ReferencesService } from './references.service';
+import { References } from '../_models/references';
+import { ReferencesService } from '../_services/references.service';
 import 'rxjs/add/operator/switchMap';
 import { LocateService } from '../_services/locate.service';
 import { PoliticalDivisionService } from '../_services/political-division.service';

@@ -6,7 +6,7 @@ import { ReferencesComponent } from './references.component';
 import { ReferencesDetailComponent } from './references-detail.component';
 import { ReferencesAddComponent } from './references-add.component';
 import { ReferencesUpdateComponent } from './references-update.component';
-import { ReferencesService } from './references.service';
+import { ReferencesService } from '../_services/references.service';
 import { LocateService } from '../_services/locate.service';
 import { SharedModule } from '../shared/shared.module';
 import { FormSharedModule } from '../shared/form-shared.module';
