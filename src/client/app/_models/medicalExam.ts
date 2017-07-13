@@ -9,6 +9,7 @@ export class MedicalExam {
    idMaestroRespuesta: number;
    idMedicoResponsable: number;
    idInstitucionMedica: number;
+   institucionMedica: string;
    fechaProgramada: Date;
    idCuestionarioOpciones: number;
    idAdjunto: number;
