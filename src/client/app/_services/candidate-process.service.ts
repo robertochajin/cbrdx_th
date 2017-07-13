@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
+import { Response, URLSearchParams, Jsonp, Http } from '@angular/http';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { CandidateProcess } from '../_models/candidateProcess';
 import { CandidateProgress } from '../_models/candidateProgress';
@@ -12,7 +12,7 @@ export class CandidateProcessService {
    private usuarioLogueado: any;
    private idUsuario: number;
 
-   constructor( private authHttp: AuthHttp ) {
+   constructor( private authHttp: AuthHttp, private http: Http ) {
       let token = localStorage.getItem( 'token' );
       if ( token !== null ) {
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
@@ -36,18 +36,29 @@ export class CandidateProcessService {
       .map( ( res: Response ) => res.json() as CandidateProcess[] );
    }
 
-   getCandidatesByPublication(idPublication: number) {
-      return this.authHttp.get( this.masterService + 'terceroPublicacion/' + idPublication)
+   getCandidatesByPublication( idPublication: number ) {
+      return this.authHttp.get( this.masterService + 'terceroPublicacion/' + idPublication )
       .map( ( res: Response ) => res.json() as CandidateProgress[] );
    }
 
-   get(idCandidateProcess: number) {
+   get( idCandidateProcess: number ) {
       return this.authHttp.get( this.masterService + idCandidateProcess )
       .map( ( res: Response ) => res.json() as CandidateProcess );
    }
 
    handleError( error: any ): Promise<any> {
       return Promise.reject( error.message || error );
+   }
+
+   generateVerificationCode( obj: any ) {
+      let data = new URLSearchParams();
+      data.append( 'user', 'CrezcamosAPI' );
+      data.append( 'password', 'CrezcamosAPI' );
+      data.append( 'destination', obj.destination );
+      data.append( 'message', 'Su código de verificación es: ' + obj.codigo );
+
+      return this.http.post( 'https://contactalos.com/services/rs/sendsms.php', data )
+      .map( response => <string[]> response.json()[ 1 ] );
    }
 
 }
