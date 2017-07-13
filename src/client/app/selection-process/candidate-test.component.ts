@@ -134,7 +134,8 @@ export class CandidateTestComponent implements OnInit {
                      this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
                      this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
                         this.candidateProcess = cp;
-                        if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ) {
+                        if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado  ||
+                             this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado ) {
                            this.readonly = true;
                         }
                         this.vacancyTestServices.getAllEnabledBySelectionProcess( this.candidateProcess.idProcesoSeleccion )
