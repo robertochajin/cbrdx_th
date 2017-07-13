@@ -36,6 +36,7 @@ import { ApplyQuestionnairesComponent } from '../selecttion-process-apply/questi
 import { QuestionnairesModule } from '../questionnaires/questionnaires.module';
 import { SolutionsQuestionnairesDetailComponent } from '../questionnaires/solutions-questionnaire/solutions-questionnaires-detail.component';
 import { MasterAnswersService } from '../_services/masterAnswers.service';
+import { CandidateContractingComponent } from './candidate-contracting.component';
 @NgModule( {
               imports: [
                  SharedModule,
@@ -58,6 +59,7 @@ import { MasterAnswersService } from '../_services/masterAnswers.service';
                  CentralRiskComponent,
                  CallReferenceComponent,
                  MedicalExamComponent,
+                 CandidateContractingComponent,
                  PostulationHistoryComponent,
                  SafePipe,
                  VacancyApplyComponent,
