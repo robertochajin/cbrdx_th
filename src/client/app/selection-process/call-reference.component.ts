@@ -17,8 +17,13 @@ import { ListaItem } from '../_models/listaItem';
 
 import { JwtHelper } from 'angular2-jwt';
 import { RolesService } from '../_services/roles.service';
-import { References } from '../employees-references/references';
-import { ReferencesService } from '../employees-references/references.service';
+import { References } from '../_models/references';
+import { ReferencesService } from '../_services/references.service';
+import { ConstanteService } from '../_services/constante.service';
+import { ReferencesCall } from '../_models/referencesCall';
+import { MasterAnswersService } from '../_services/masterAnswers.service';
+import { MasterAnswers } from '../_models/masterAnswers';
+import { QuestionnairesService } from '../_services/questionnaires.service';
 
 @Component( {
                moduleId: module.id,
@@ -42,13 +47,19 @@ export class CallReferenceComponent implements OnInit {
    private readonly = false;
    svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
    llamar: boolean = false;
-   referenciaLlamada: References = new References();
-
+   reference: References = new References();
    usuarioLogueado: any;
    idRol: number;
    jwtHelper: JwtHelper = new JwtHelper();
-
    references: References[];
+   referencesCall: ReferencesCall = new ReferencesCall();
+   codigoTipoReferencia: string;
+   codigoCuestionarioFamiliar: string;
+   codigoCuestionarioComercial: string;
+   codigoCuestionarioPersonal: string;
+   codigoCuestionarioLaboral: string;
+   maestroRespuestas: MasterAnswers = new MasterAnswers();
+   showFinish = false;
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
@@ -61,13 +72,36 @@ export class CallReferenceComponent implements OnInit {
       private vacanciesService: VacanciesService,
       private candidateProcessService: CandidateProcessService,
       private referencesService: ReferencesService,
-      private selectionStepService: SelectionStepService ) {
+      private constanteService: ConstanteService,
+      private selectionStepService: SelectionStepService,
+      private masterAnswersService: MasterAnswersService,
+      private questionnairesService: QuestionnairesService ) {
 
       let token = localStorage.getItem( 'token' );
       if ( token !== null ) {
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
          this.candidateProcess.idResponsable = this.usuarioLogueado.usuario.idUsuario;
       }
+      this.constanteService.getByCode( 'CUEFAM' ).subscribe( data => {
+         if ( data.valor ) {
+            this.codigoCuestionarioFamiliar = data.valor;
+         }
+      } );
+      this.constanteService.getByCode( 'CUEPER' ).subscribe( data => {
+         if ( data.valor ) {
+            this.codigoCuestionarioPersonal = data.valor;
+         }
+      } );
+      this.constanteService.getByCode( 'CUECOM' ).subscribe( data => {
+         if ( data.valor ) {
+            this.codigoCuestionarioComercial = data.valor;
+         }
+      } );
+      this.constanteService.getByCode( 'CUELAB' ).subscribe( data => {
+         if ( data.valor ) {
+            this.codigoCuestionarioLaboral = data.valor;
+         }
+      } );
 
       this.listaService.getMasterDetails( 'ListasDecisionesProcesoSeleccion' ).subscribe( res => {
          this.desitionList = res;
@@ -208,8 +242,16 @@ export class CallReferenceComponent implements OnInit {
 
    call( tr: References ) {
       this.llamar = true;
-      this.referenciaLlamada = tr;
-      console.log( tr );
+      this.reference = tr;
+      this.referencesService.getCallbyReference( this.reference.idTerceroReferencia ).subscribe(
+         references => {
+            if ( references.length > 0 ) {
+               this.referencesCall = references[ references.length - 1 ];
+               this.getMaster();
+            } else {
+               this.addMaster();
+            }
+         } );
    }
 
    goBack( fDirty: boolean ) {
@@ -231,5 +273,47 @@ export class CallReferenceComponent implements OnInit {
 
    hideForm(){
       this.llamar = false;
+   }
+
+   addMaster() {
+
+      switch ( this.reference.codigoTipoReferencia ) {
+         case 'FAM':
+            this.codigoTipoReferencia = this.codigoCuestionarioFamiliar;
+            break;
+         case 'LAB':
+            this.codigoTipoReferencia = this.codigoCuestionarioLaboral;
+            break;
+         case 'COM':
+            this.codigoTipoReferencia = this.codigoCuestionarioComercial;
+            break;
+         case 'PR':
+            this.codigoTipoReferencia = this.codigoCuestionarioPersonal;
+            break;
+      }
+
+      this.questionnairesService.getByCode( this.codigoTipoReferencia ).subscribe( quest => {
+         this.maestroRespuestas.idCuestionario = quest.idCuestionario;
+         this.masterAnswersService.add( this.maestroRespuestas ).subscribe( res => {
+            this.maestroRespuestas = res;
+            this.referencesCall.idTerceroReferencia = this.reference.idTerceroReferencia;
+            this.referencesCall.idMaestroRespuesta = this.maestroRespuestas.idMaestroRespuesta;
+            this.referencesService.addCall( this.referencesCall ).subscribe(
+               referencesCall => {
+                  this.referencesCall = referencesCall;
+               }
+            );
+         } );
+      } );
+   }
+
+   getMaster() {
+      this.masterAnswersService.get( this.referencesCall.idMaestroRespuesta ).subscribe( res => {
+         this.maestroRespuestas = res;
+      } );
+   }
+
+   finishQuestionnaire() {
+      this.showFinish = true;
    }
 }
