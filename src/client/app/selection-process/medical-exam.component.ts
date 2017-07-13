@@ -17,8 +17,8 @@ import { ListaItem } from '../_models/listaItem';
 
 import { JwtHelper } from 'angular2-jwt';
 import { RolesService } from '../_services/roles.service';
-import { References } from '../employees-references/references';
-import { ReferencesService } from '../employees-references/references.service';
+import { References } from '../_models/references';
+import { ReferencesService } from '../_services/references.service';
 import { MedicalExam } from '../_models/medicalExam';
 import { MedicalInstitutionService } from '../_services/medical-institutions.service';
 import { MedicalInstitution } from '../_models/medical-institutions';
@@ -153,6 +153,10 @@ export class MedicalExamComponent implements OnInit {
                               if ( this.listEstExaMed.find(
                                     x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'RESPOND' ) {
                                  this.respondido = true;
+                                 this.enesperarespuesta = false;
+                                 this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe(data=>{
+
+                                 });
                               }
                               if ( this.medicalExam.idMaestroRespuesta ) {
                                  this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe( res => {
@@ -173,6 +177,10 @@ export class MedicalExamComponent implements OnInit {
                      } );
                   } else {
                      this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
+                     this.candidateProcessService.add( this.candidateProcess ).subscribe( process => {
+                        this.candidateProcess = process;
+                        this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
+                     } );
                   }
                } );
             } );
@@ -268,7 +276,6 @@ export class MedicalExamComponent implements OnInit {
          } else {
             this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
          }
-         this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
          this.medicalExamService.add( this.medicalExam ).subscribe( data => {
             this.medicalExam = data;
             this._nav.setMesage( 1 );

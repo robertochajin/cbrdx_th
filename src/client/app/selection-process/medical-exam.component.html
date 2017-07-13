@@ -17,6 +17,12 @@
 								<button icon="fa-address-book-o" label="{{'PROCESOSELECCION.LBL_VERHOJADEVIDA' | translate }}" type="button"
 								        (click)="curriculum()"
 								        pButton></button>
+								<!--<button  *ngIf="masterAnswer.idCuestionario"-->
+								         <!--label="Examen de aptitud laboral "-->
+								         <!--type="button"-->
+								        <!--(click)="curriculum()"-->
+								        <!--pButton></button>-->
+								
 								<!--<button icon="fa-dot-circle-o" label="{{'PROCESOSELECCION.LBL_CUESTIONARIOS' | translate }}" type="button"-->
 								<!--disabled pButton></button>-->
 							</div>
@@ -118,7 +124,8 @@
 						<div class="row">
 							<div class="form-group col-md-3"></div>
 							<div class="form-group col-md-6">
-								Acá si el cargo al cual aplica tiene los mismos riesgos que el cargo que actualmente tiene
+								<label><h4>El cargo al cual esta aplicando tiene los mismos riesgo que el cargo qu actualmente posee por lo
+									tanto no aplica para examenes médicos</h4></label>
 							</div>
 						</div>
 						<div class="row form-footer-buttons">
@@ -136,22 +143,38 @@
 					<div class="row">
 						<div class="form-group col-md-3"></div>
 						<div class="form-group col-md-6">
-							<label>{{'PROCESOSELECCION.LBL_PROGRAMAREXAMEN' | translate}}</label>
-							<label>{{medicalExam.fechaProgramada}}</label>
+							<label><strong><h3>{{'PROCESOSELECCION.LBL_PROGRAMAREXAMEN' | translate}}</h3></strong></label>
+							<p-calendar id="fechaFinr" name="fechaFinr" #fechaFin="ngModel" [showIcon]="true"
+							            [minDate]="minDateEx" [monthNavigator]="true" [yearNavigator]="true"
+							            [locale]="es" readonlyInput="readonlyInput" disabled="true"
+							            dataType="date" [(ngModel)]="medicalExam.fechaProgramada" [showTime]="true"
+							            dateFormat="yy'-'mm'-'dd"></p-calendar>
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-md-3"></div>
 						<div class="form-group col-md-4">
-							<label for="instMedica">* {{'PROCESOSELECCION.LBL_INSTITUCION' | translate }}</label>
-							<label>{{medicalExam.idInstitucionMedica}}</label>
+							<label><strong><h3>{{'PROCESOSELECCION.LBL_INSTITUCION' | translate }}</h3></strong></label>
+							<label><h4>{{medicalExam.institucionMedica}}</h4></label>
 						</div>
 					</div>
 				</div>
-				acá respuesta de questionarios
+				<div *ngIf="noaplicaexamen">
+					<form name="process" (ngSubmit)="fnex.valid && onSubmitNoExam()" #fnex="ngForm" novalidate id="processNoExamR">
+						<fieldset>
+							<div class="row">
+								<div class="form-group col-md-3"></div>
+								<div class="form-group col-md-6">
+									<label><h4>El cargo al cual esta aplicando tiene los mismos riesgo que el cargo qu actualmente posee por lo
+										tanto no aplica para examenes médicos</h4></label>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
 			</div>
 			<!-- Se dispone el cuestionario-->
-			<fieldset>
+			<fieldset *ngIf="respondido">
 				<div *ngIf="masterAnswer.idCuestionario">
 					<solutions-questionnaires-detail [maestroRespuestas]="masterAnswer">
 					</solutions-questionnaires-detail>

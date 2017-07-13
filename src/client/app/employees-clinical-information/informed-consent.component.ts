@@ -17,8 +17,8 @@ import { ListaItem } from '../_models/listaItem';
 
 import { JwtHelper } from 'angular2-jwt';
 import { RolesService } from '../_services/roles.service';
-import { References } from '../employees-references/references';
-import { ReferencesService } from '../employees-references/references.service';
+import { References } from '../_models/references';
+import { ReferencesService } from '../_services/references.service';
 import { MedicalExam } from '../_models/medicalExam';
 import { MedicalInstitutionService } from '../_services/medical-institutions.service';
 import { MedicalInstitution } from '../_models/medical-institutions';
@@ -61,6 +61,7 @@ export class MedicalExamInformedConsentComponent implements OnInit {
    respondido: boolean = false;
    institucionMedica: boolean = true;
    consentimiennto: boolean = false;
+   codigoVerificacion: string;
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
@@ -103,7 +104,7 @@ export class MedicalExamInformedConsentComponent implements OnInit {
                } );
             } );
             // obtener examen medico
-            this.medicalExamService.getByIdProceso( params[ 'idExamen' ] ).subscribe( rs => {
+            this.medicalExamService.getById( params[ 'idExamen' ] ).subscribe( rs => {
                this.medicalExam = rs;
             } );
          } else {
@@ -117,37 +118,55 @@ export class MedicalExamInformedConsentComponent implements OnInit {
    ngOnInit() {
    }
 
-   onSubmitExam() {
-      if ( this.medicalExam.idExamenMedico ) {
-         let temp = this.listEstExaMed.find( c => c.idLista === this.medicalExam.idEstadoExamenMedico ).codigo;
-         let tempCod = this.getIdStateExamByCode( temp );
-         if ( temp === 'ENESPR' ) {
-            if ( this.medicalExam.idAdjunto && this.medicalExam.idMaestroRespuesta && this.medicalExam.indicadorVerificado ) {
-               this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'RESPOND' );
-            } else {
-               this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
+   onSubmitCon() {
+      if ( this.medicalExam.codigoVerificacion === this.codigoVerificacion ) {
+         if ( this.medicalExam.idExamenMedico ) {
+            let temp = this.listEstExaMed.find( c => c.idLista === this.medicalExam.idEstadoExamenMedico ).codigo;
+            if ( temp === 'RESPOND' && this.medicalExam.indicadorVerificado ) {
+               this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'CERRADO' );
             }
+            if ( temp === 'ENESPR' ) {
+               if ( (this.medicalExam.idAdjunto && this.medicalExam.idMaestroRespuesta) || this.medicalExam.indicadorVerificado ) {
+                  this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'RESPOND' );
+               } else {
+                  this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
+               }
+            }
+            this.medicalExamService.update( this.medicalExam ).subscribe( data => {
+               this._nav.setMesage( 4, {
+                  severity: 'success', summary: 'Exito', detail: 'Su aplicación se realizó' +
+                                                                 ' exitosamente.'
+               } );
+
+               localStorage.removeItem( 'currentUser' );
+               localStorage.removeItem( 'token' );
+               this.router.navigate( [ '/login' ] );
+            }, error => {
+               this._nav.setMesage( 4, {
+                  severity: 'success', summary: 'Exito', detail: 'El proceso de aplicación falló' +
+                                                                 ' intente nuevamente.'
+               } );
+            } );
+         } else {
+            this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
+            this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
+            this.medicalExamService.add( this.medicalExam ).subscribe( data => {
+               this.medicalExam = data;
+               this._nav.setMesage( 1 );
+               localStorage.removeItem( 'currentUser' );
+               localStorage.removeItem( 'token' );
+               this.router.navigate( [ '/login' ] );
+            }, error => {
+               this._nav.setMesage( 3 );
+               localStorage.removeItem( 'currentUser' );
+               localStorage.removeItem( 'token' );
+               this.router.navigate( [ '/login' ] );
+            } );
          }
-         if ( temp === 'RESPOND' ) {
-            this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'CERRADO' );
-         }
-         this.medicalExamService.update( this.medicalExam ).subscribe( data => {
-            this._nav.setMesage( 2 );
-            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-         }, error => {
-            this._nav.setMesage( 3 );
-            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-         } );
       } else {
-         this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
-         this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
-         this.medicalExamService.add( this.medicalExam ).subscribe( data => {
-            this.medicalExam = data;
-            this._nav.setMesage( 1 );
-            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-         }, error => {
-            this._nav.setMesage( 3 );
-            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
+         this._nav.setMesage( 4, {
+            severity: 'error', summary: 'Error', detail: 'El codigo ingresado es incorrecto, intente' +
+                                                         ' nuevamente por favor.'
          } );
       }
    }
@@ -176,5 +195,18 @@ export class MedicalExamInformedConsentComponent implements OnInit {
          this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
       }
 
+   }
+
+   generarCodigo() {
+      this.medicalExam.codigoVerificacion = (Math.floor( Math.random() * (9999 - 1000 + 1) ) + 1000).toString();
+
+      this.medicalExamService.update( this.medicalExam ).subscribe( data => {
+         let obj = {
+            destination: this.candidate.telefonoCelular,
+            codigo: this.medicalExam.codigoVerificacion
+         }
+
+         this.candidateProcessService.generateVerificationCode( obj );
+      } );
    }
 }

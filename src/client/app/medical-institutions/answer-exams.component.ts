@@ -17,8 +17,8 @@ import { ListaItem } from '../_models/listaItem';
 
 import { JwtHelper } from 'angular2-jwt';
 import { RolesService } from '../_services/roles.service';
-import { References } from '../employees-references/references';
-import { ReferencesService } from '../employees-references/references.service';
+import { References } from '../_models/references';
+import { ReferencesService } from '../_services/references.service';
 import { MedicalExam } from '../_models/medicalExam';
 import { MedicalInstitutionService } from '../_services/medical-institutions.service';
 import { MedicalInstitution } from '../_models/medical-institutions';
@@ -163,36 +163,36 @@ export class AnswerExamsComponent implements OnInit {
    onSubmitAnsw() {
       if ( this.medicalExam.idExamenMedico ) {
          let temp = this.listEstExaMed.find( c => c.idLista === this.medicalExam.idEstadoExamenMedico ).codigo;
+         if ( temp === 'RESPOND' ) {
+            this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'CERRADO' );
+         }
          if ( temp === 'ENESPR' ) {
-            if ( this.medicalExam.idAdjunto && this.medicalExam.idMaestroRespuesta && this.medicalExam.indicadorVerificado ) {
+            if ( this.medicalExam.idAdjunto && this.medicalExam.idMaestroRespuesta ) {
                this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'RESPOND' );
             } else {
                this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
             }
          }
-         if ( temp === 'RESPOND' ) {
-            this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'CERRADO' );
-         }
-         this.medicalExam.idMedicoResponsable = this.usuarioLogueado.usuario.idTercero;
+         this.medicalExam.idMedicoResponsable = this.usuarioLogueado.usuario.idUsuario;
          this.medicalExamService.update( this.medicalExam ).subscribe( data => {
-            this._nav.setMesage( 2 );
-            this.respuestaOk = true;
-            // this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
+            this._nav.setMesage( 0, {severity: 'success', summary: 'Exito', detail: 'Gracias por su diagnsotico.' } );
+            localStorage.removeItem( 'currentUser' );
+            localStorage.removeItem( 'token' );
+            this.router.navigate( [ '/login' ] );
          }, error => {
             this._nav.setMesage( 3 );
-            // this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
          } );
       } else {
          this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
          this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
          this.medicalExamService.add( this.medicalExam ).subscribe( data => {
             this.medicalExam = data;
-            this._nav.setMesage( 1 );
-            this.respuestaOk = true;
-            // this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
+            this._nav.setMesage( 0, {severity: 'success', summary: 'Exito', detail: 'Gracias por su diagnsotico.' } );
+            localStorage.removeItem( 'currentUser' );
+            localStorage.removeItem( 'token' );
+            this.router.navigate( [ '/login' ] );
          }, error => {
             this._nav.setMesage( 3 );
-            // this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
          } );
       }
    }

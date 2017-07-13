@@ -37,6 +37,8 @@ export class MedicalExamService {
       return this.authHttp.get( this.serviceURL + '/procesoSeleccion/' + id ).map( ( res: Response ) => {
          if ( res.text()) {
             return  res.json() as MedicalExam
+         }else {
+            return null;
          }
       } );
    }

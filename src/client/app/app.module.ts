@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
-import { HttpModule, Http } from '@angular/http';
+import { HttpModule, Http, JsonpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { WindowRefService } from './_services/window-ref.service';
@@ -86,6 +86,7 @@ import { EmployeesAttachmentsModule } from './employees-attatchments/employees-a
 // CarsModule,
 @NgModule( {
               imports: [ BrowserModule, HttpModule, AppRoutingModule,
+                 JsonpModule,
                  MessagesModule,
                  EmployeesModule,
                  FamilyInformationModule,

@@ -88,10 +88,10 @@
 						<div class="row form-footer-buttons">
 							<div class="form-group col-md-1"></div>
 							<div class="form-group col-md-5" *ngIf="medicalExam.indicadorVerificado">
-								<button label="{{'PROCESOSELECCION.LBL_GENERCOD' | translate }}" type="button"
+								<button (click)="generarCodigo()" label="{{'PROCESOSELECCION.LBL_GENERCOD' | translate }}" type="button"
 								        pButton></button>
 								<input id="codigoinst" name="codigoinst" #codInst="ngModel" pInputText type="text"
-								       required maxlength="50" [(ngModel)]="medicalExam.codigoVerificacion"/>
+								       required maxlength="50" [(ngModel)]="codigoVerificacion"/>
 								<div class="ui-message ui-messages-error ui-corner-all"
 								     *ngIf="fco.submitted && !codInst.valid">
 									<i class="fa fa-close"></i>
