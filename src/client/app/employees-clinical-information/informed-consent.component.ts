@@ -17,13 +17,12 @@ import { ListaItem } from '../_models/listaItem';
 
 import { JwtHelper } from 'angular2-jwt';
 import { RolesService } from '../_services/roles.service';
-import { References } from '../employees-references/references';
-import { ReferencesService } from '../employees-references/references.service';
+import { References } from '../_models/references';
+import { ReferencesService } from '../_services/references.service';
 import { MedicalExam } from '../_models/medicalExam';
 import { MedicalInstitutionService } from '../_services/medical-institutions.service';
 import { MedicalInstitution } from '../_models/medical-institutions';
 import { MedicalExamService } from '../_services/medical-exam.service';
-import { AuthenticationService } from '../_services/authentication.service';
 
 @Component( {
                moduleId: module.id,
@@ -76,8 +75,7 @@ export class MedicalExamInformedConsentComponent implements OnInit {
       private candidateProcessService: CandidateProcessService,
       private medicalExamService: MedicalExamService,
       private medicalInstitutionService: MedicalInstitutionService,
-      private selectionStepService: SelectionStepService,
-      private authenticationService: AuthenticationService ) {
+      private selectionStepService: SelectionStepService ) {
 
       let token = localStorage.getItem( 'token' );
       if ( token !== null ) {
@@ -120,20 +118,19 @@ export class MedicalExamInformedConsentComponent implements OnInit {
    ngOnInit() {
    }
 
-   onSubmitExam() {
+   onSubmitCon() {
       if ( this.medicalExam.codigoVerificacion === this.codigoVerificacion ) {
          if ( this.medicalExam.idExamenMedico ) {
             let temp = this.listEstExaMed.find( c => c.idLista === this.medicalExam.idEstadoExamenMedico ).codigo;
-            let tempCod = this.getIdStateExamByCode( temp );
+            if ( temp === 'RESPOND' && this.medicalExam.indicadorVerificado ) {
+               this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'CERRADO' );
+            }
             if ( temp === 'ENESPR' ) {
-               if ( this.medicalExam.idAdjunto && this.medicalExam.idMaestroRespuesta && this.medicalExam.indicadorVerificado ) {
+               if ( this.medicalExam.idAdjunto && this.medicalExam.idMaestroRespuesta || this.medicalExam.indicadorVerificado ) {
                   this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'RESPOND' );
                } else {
                   this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
                }
-            }
-            if ( temp === 'RESPOND' ) {
-               this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'CERRADO' );
             }
             this.medicalExamService.update( this.medicalExam ).subscribe( data => {
                this._nav.setMesage( 4, {
