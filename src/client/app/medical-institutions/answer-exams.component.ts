@@ -164,7 +164,7 @@ export class AnswerExamsComponent implements OnInit {
       if ( this.medicalExam.idExamenMedico ) {
          let temp = this.listEstExaMed.find( c => c.idLista === this.medicalExam.idEstadoExamenMedico ).codigo;
          if ( temp === 'ENESPR' ) {
-            if ( this.medicalExam.idAdjunto && this.medicalExam.idCuestionarioOpciones && this.medicalExam.indicadorVerificado ) {
+            if ( this.medicalExam.idAdjunto && this.medicalExam.idMaestroRespuesta && this.medicalExam.indicadorVerificado ) {
                this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'RESPOND' );
             } else {
                this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
@@ -173,6 +173,7 @@ export class AnswerExamsComponent implements OnInit {
          if ( temp === 'RESPOND' ) {
             this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'CERRADO' );
          }
+         this.medicalExam.idMedicoResponsable = this.usuarioLogueado.usuario.idTercero;
          this.medicalExamService.update( this.medicalExam ).subscribe( data => {
             this._nav.setMesage( 2 );
             this.respuestaOk = true;
