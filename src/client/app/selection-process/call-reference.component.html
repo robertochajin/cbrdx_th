@@ -135,14 +135,26 @@
 				<div class="col-md-2"></div>
 				<div class="form-group col-md-5">
 					<label for="tipoRef">{{'EMPLOYEES.LBL_TIPOREFERENCIA' | translate }}:</label>
-					<label id="tipoRef" name="tipoRef"><strong>{{referenciaLlamada.tipoReferencia}}</strong></label>
+					<label id="tipoRef" name="tipoRef"><strong>{{reference.tipoReferencia}}</strong></label>
 				</div>
 				<div class="form-group col-md-5">
 					<label for="nombreRef">{{'LBL_NOMBRE' | translate }}:</label>
-					<label id="nombreRef" name="nombreRef"><strong>{{referenciaLlamada.nombreCompleto}}</strong></label>
+					<label id="nombreRef" name="nombreRef"><strong>{{reference.nombreCompleto}}</strong></label>
 				</div>
 			</div>
-			
+			<div class="row">
+				<div class="col-md-10" *ngIf="maestroRespuestas.idMaestroRespuesta > 0">
+					<solutions-questionnaires (finish)="finishQuestionnaire($event)"
+					                          [maestroRespuestas]="maestroRespuestas"
+					                          *ngIf="!showFinish"
+					></solutions-questionnaires>
+					<div *ngIf="showFinish" class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<p>El Cuestionario ha terminado con Exito!</p>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="row form-footer-buttons">
 				<div class="form-group col-md-12">
 					<a (click)="hideForm()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
