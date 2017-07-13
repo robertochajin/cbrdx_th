@@ -53,6 +53,7 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
    direcccionResidencia:string='';
    fechaNacimicento:string='';
    svcThUrl = '<%= SVC_TH_URL %>/api/upload';
+   loadingPdf = false;
 
 
    constructor( private employeeService: EmployeesService,
@@ -208,13 +209,19 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
 
    getPDF(): void {
 
+      this.loadingPdf = true;
+
       let nombrePdf = this.employee.nombreCompleto.trim();
       nombrePdf = nombrePdf.replace(/ /g, '-');
 
       let doc = new jsPDF('p', 'mm', 'a4');
       let element: any = jQuery("#CV");
 
-      html2canvas(element,  {background: 'white'}).then((canvas: any) => {
+      html2canvas(element,  {
+         background: 'white',
+         useCORS : true,
+         logging : true
+      }).then((canvas: any) => {
 
          let width = canvas.width;
          let height = canvas.height;
@@ -226,16 +233,11 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
 
          doc.deletePage(1);
          doc.addPage(mwidth, mheight);
+
          doc.addImage(imgData, 'PNG', 10, 20);
-
-         /*
-         doc.setFontSize(8);
-         doc.setFontType("italic");
-         height = height + 5;
-         doc.text(20, height, 'Crezcamos S.A. © Todos los derechos Reservados - PDF Generado por Gestionamos - Powered Ciberdix');
-         */
-
          doc.save('CV-' + nombrePdf + '.pdf');
+         this.loadingPdf = false;
+
 
       })
    }
