@@ -73,12 +73,16 @@
 						<hr>
 						<div class="row">
 							<div class="col-md-1"></div>
-							<div class="col-md-10" *ngIf="maestroRespuestas.idMaestroRespuesta">
+							<div class="col-md-10" *ngIf="maestroRespuestas.idMaestroRespuesta > 0">
 								<solutions-questionnaires (finish)="finishQuestionnaire($event)"
 								                          [maestroRespuestas]="maestroRespuestas"
 								                          *ngIf="!showFinish"
 								></solutions-questionnaires>
-								div
+								<div *ngIf="showFinish" class="row form-footer-buttons">
+									<div class="form-group col-md-12">
+										<p>El Cuestionario ha terminado con Exito!</p>
+									</div>
+								</div>
 							</div>
 						</div>
 						<hr>

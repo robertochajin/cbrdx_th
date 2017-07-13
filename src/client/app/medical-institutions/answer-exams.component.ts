@@ -261,6 +261,7 @@ export class AnswerExamsComponent implements OnInit {
    getMaestroCuestionariosById() {
       this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe( res => {
          this.maestroRespuestas = res;
+         this.showFinish = false;
       } );
    }
 
@@ -269,6 +270,7 @@ export class AnswerExamsComponent implements OnInit {
          this.maestroRespuestas.idCuestionario = quest.idCuestionario;
          this.masterAnswersService.add( this.maestroRespuestas ).subscribe( res => {
             this.maestroRespuestas = res;
+            this.showFinish = false;
             this.medicalExam.idMaestroRespuesta = this.maestroRespuestas.idMaestroRespuesta;
             this.medicalExamService.update( this.medicalExam ).subscribe();
          } );
