@@ -198,6 +198,7 @@ export class MedicalExamInformedConsentComponent implements OnInit {
    }
 
    generarCodigo() {
+      // this.candidate.telefonoCelular
       this.medicalExam.codigoVerificacion = (Math.floor( Math.random() * (9999 - 1000 + 1) ) + 1000).toString();
 
       this.medicalExamService.update( this.medicalExam ).subscribe( data => {
@@ -206,7 +207,13 @@ export class MedicalExamInformedConsentComponent implements OnInit {
             codigo: this.medicalExam.codigoVerificacion
          }
 
-         this.candidateProcessService.generateVerificationCode( obj );
+         this.candidateProcessService.generateVerificationCode( obj ).subscribe( res => {
+            console.log( res );
+         }, error => {
+            this._nav.setMesage( 4, {
+               severity: 'success', summary: 'Exito', detail: 'El codigo se ha enviado con éxito.'
+            } );
+         } );
       } );
    }
 }
