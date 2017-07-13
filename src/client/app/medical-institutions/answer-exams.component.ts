@@ -68,6 +68,7 @@ export class AnswerExamsComponent implements OnInit {
    codigoCuestionario: string;
    showFinish: boolean = false;
    maestroRespuestas: MasterAnswers = new MasterAnswers();
+   respuestaOk: boolean = false;
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
@@ -129,12 +130,15 @@ export class AnswerExamsComponent implements OnInit {
                } );
             } );
             // obtener examen medico
-            this.medicalExamService.getByIdProceso( params[ 'idExamen' ] ).subscribe( rs => {
+            this.medicalExamService.getById( params[ 'idExamen' ] ).subscribe( rs => {
                this.medicalExam = rs;
                if ( this.medicalExam.idMaestroRespuesta ) {
                   this.getMaestroCuestionariosById();
                } else {
                   this.getMaestroCuestionariosByCode();
+               }
+               if ( this.medicalExam.idAdjunto ) {
+                  this.getFileName();
                }
             } );
          } else {
@@ -156,7 +160,7 @@ export class AnswerExamsComponent implements OnInit {
       } );
    }
 
-   onSubmitExam() {
+   onSubmitAnsw() {
       if ( this.medicalExam.idExamenMedico ) {
          let temp = this.listEstExaMed.find( c => c.idLista === this.medicalExam.idEstadoExamenMedico ).codigo;
          if ( temp === 'ENESPR' ) {
@@ -171,10 +175,11 @@ export class AnswerExamsComponent implements OnInit {
          }
          this.medicalExamService.update( this.medicalExam ).subscribe( data => {
             this._nav.setMesage( 2 );
-            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
+            this.respuestaOk = true;
+            // this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
          }, error => {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
+            // this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
          } );
       } else {
          this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
@@ -182,10 +187,11 @@ export class AnswerExamsComponent implements OnInit {
          this.medicalExamService.add( this.medicalExam ).subscribe( data => {
             this.medicalExam = data;
             this._nav.setMesage( 1 );
-            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
+            this.respuestaOk = true;
+            // this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
          }, error => {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
+            // this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
          } );
       }
    }
@@ -255,6 +261,7 @@ export class AnswerExamsComponent implements OnInit {
    getMaestroCuestionariosById() {
       this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe( res => {
          this.maestroRespuestas = res;
+         this.showFinish = false;
       } );
    }
 
@@ -263,6 +270,7 @@ export class AnswerExamsComponent implements OnInit {
          this.maestroRespuestas.idCuestionario = quest.idCuestionario;
          this.masterAnswersService.add( this.maestroRespuestas ).subscribe( res => {
             this.maestroRespuestas = res;
+            this.showFinish = false;
             this.medicalExam.idMaestroRespuesta = this.maestroRespuestas.idMaestroRespuesta;
             this.medicalExamService.update( this.medicalExam ).subscribe();
          } );

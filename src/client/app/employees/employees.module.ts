@@ -53,7 +53,7 @@ import { EmployeesDetailPerfilComponent } from '../selecttion-process-apply/empl
                  EmployeesDetailPerfilComponent
               ],
               bootstrap: [ EmployeesComponent ],
-              providers: [ EmployeesService, ListEmployeesService, PoliticalDivisionService, NavService, ListaService, AdjuntosService, ConstanteService ],
+              providers: [ EmployeesService, ListEmployeesService, EmployeesRecruitmentService, PoliticalDivisionService, NavService, ListaService, AdjuntosService, ConstanteService ],
               exports: [ EmployeesComponent ]
            } )
 export class EmployeesModule {
