@@ -105,6 +105,11 @@ export class SelectionStepService {
       .map( ( res: Response ) => res.json() as TerceroPublicaciones );
    }
 
+   updateThirdPublication(tp: TerceroPublicaciones){
+      tp.auditoriaUsuario = this.idUsuario
+      return this.authHttp.put( '<%= SVC_TH_URL %>/api/tercerosPublicaciones/', JSON.stringify( tp ) ).catch( this.handleError );
+   }
+
    getUsuariosRol(codigo:string){
       return this.authHttp.get( '<%= SVC_TH_URL %>/api/usuarios/usuarioRol/'+codigo )
       .map( ( res: Response ) => res.json() as any );

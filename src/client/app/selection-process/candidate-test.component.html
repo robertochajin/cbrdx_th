@@ -58,7 +58,7 @@
 			</form>
 			
 			<form (ngSubmit)="frq.valid && addTest()" #frq="ngForm" novalidate id="formulario2"
-			      *ngIf="!guardandoResoursesQues && !definingTest">
+			      *ngIf="!guardandoResoursesQues && !definingTest && !readonly">
 				<div class="ui-grid-row">
 					<div class="ui-grid-col-12">
 						<label><h3>{{'REQUERIMIENTOPERSONAL.LBL_CUESTIONARIOS' | translate}} </h3></label>
@@ -95,7 +95,7 @@
 						</p-column>
 						<p-column header="Acciones" styleClass="datatable-col-action">
 							<template let-recurso="rowData" pTemplate="body">
-								<button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip"
+								<button *ngIf="!readonly" type="button" class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip"
 								        title="{{'BTN_EDITAR' | translate}}"
 								        pButton (click)="definegTest(recurso)"
 								></button>
@@ -110,7 +110,8 @@
 				</div>
 			</div>
 			
-			<form *ngIf="definingTest" name="tecniqueTest" (ngSubmit)="tf.valid && updateTest()" #tf="ngForm" novalidate id="tecniqueTest">
+			<form *ngIf="definingTest && !readonly" name="tecniqueTest" (ngSubmit)="tf.valid && updateTest()" #tf="ngForm" novalidate
+			      id="tecniqueTest">
 				
 				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 					<div class="row">

@@ -56,7 +56,7 @@ export class CandidateContractingComponent implements OnInit {
    fsize: number = 50000000;
    ftype: string = '';
    idRol: number;
-   immediately: boolean;
+   immediately = false;
    private thirdPublication: TerceroPublicaciones = new TerceroPublicaciones();
 
    constructor( public publicationsService: PublicationsService,
@@ -131,7 +131,8 @@ export class CandidateContractingComponent implements OnInit {
                      this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
                      this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
                         this.candidateProcess = cp;
-                        if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ) {
+                        if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ||
+                             this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado ) {
                            this.readonly = true;
                         }
                      } );
@@ -165,40 +166,46 @@ export class CandidateContractingComponent implements OnInit {
    }
 
    onSubmit() {
-      if ( this.indApproval === 'APRB' ) {
-         this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'APROB' );
-         this.candidateProcess.idDesicionProcesoSeleccion = this.getIdDesitionByCode( 'APRB' );
-      } else if ( this.indApproval === 'NOAPRB' ) {
-         this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'RECH' );
-         this.candidateProcess.idDesicionProcesoSeleccion = this.getIdDesitionByCode( 'NOAPRB' );
-      }
+      if ( this.thirdPublication.indicadorContratacion !== undefined && this.thirdPublication.indicadorContratacion !== null ) {
+         if ( this.thirdPublication.indicadorContratacion ) {
+            this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'APROB' );
+            this.candidateProcess.idDesicionProcesoSeleccion = this.getIdDesitionByCode( 'APRB' );
+         } else if ( !this.thirdPublication.indicadorContratacion ) {
+            this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'RECH' );
+            this.candidateProcess.idDesicionProcesoSeleccion = this.getIdDesitionByCode( 'NOAPRB' );
+         }
 
-      if ( this.candidateProcess.idProcesoSeleccion !== undefined ) {
-         this.candidateProcessService.update( this.candidateProcess ).subscribe( res => {
-            if ( res.ok ) {
-               this._nav.setMesage( 2 );
-               this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-            } else {
+         if ( this.candidateProcess.idProcesoSeleccion !== undefined ) {
+            this.candidateProcessService.update( this.candidateProcess ).subscribe( res => {
+               if ( res.ok ) {
+                  this.selectionStepService.updateThirdPublication( this.thirdPublication ).subscribe( tp => {
+                     this._nav.setMesage( 2 );
+                     this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
+                  } );
+               } else {
+                  this._nav.setMesage( 3 );
+                  this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
+               }
+            }, () => {
                this._nav.setMesage( 3 );
                this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-            }
-         }, () => {
-            this._nav.setMesage( 3 );
-            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-         } );
-      } else {
-         this.candidateProcessService.add( this.candidateProcess ).subscribe( res => {
-            if ( res.idProcesoSeleccion ) {
-               this._nav.setMesage( 1 );
-               this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-            } else {
+            } );
+         } else {
+            this.candidateProcessService.add( this.candidateProcess ).subscribe( res => {
+               if ( res.idProcesoSeleccion ) {
+                  this.selectionStepService.updateThirdPublication( this.thirdPublication ).subscribe( tp => {
+                     this._nav.setMesage( 1 );
+                     this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
+                  } );
+               } else {
+                  this._nav.setMesage( 3 );
+                  this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
+               }
+            }, () => {
                this._nav.setMesage( 3 );
                this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-            }
-         }, () => {
-            this._nav.setMesage( 3 );
-            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
-         } );
+            } );
+         }
       }
    }
 
@@ -242,7 +249,7 @@ export class CandidateContractingComponent implements OnInit {
    }
 
    setImmediateDate() {
-      if(this.immediately){
+      if ( this.immediately ) {
          this.thirdPublication.fechaContratacion = new Date();
       } else {
          this.thirdPublication.fechaContratacion = null;
