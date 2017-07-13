@@ -81,9 +81,11 @@
 					</div>
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label for="validStep">* {{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}</label>
-							<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
-							            [autoWidth]="false" [(ngModel)]="indApproval" required></p-dropdown>
+							<label >* {{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
+							<!--<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"-->
+							            <!--[autoWidth]="false" [(ngModel)]="indApproval" required></p-dropdown>-->
+							<label *ngIf="indApproval === 'APRB'">{{'PROCESOSELECCION.MSG_APRUEBACUESTIONARIOS' | translate }}</label>
+							<label *ngIf="indApproval === 'NOAPRB'">{{'PROCESOSELECCION.MSG_NOAPRUEBACUESTIONARIOS' | translate }}</label>
 						</div>
 						<div class="form-group col-md-6">
 						</div>

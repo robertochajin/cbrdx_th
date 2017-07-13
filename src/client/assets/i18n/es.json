@@ -950,6 +950,8 @@
       "LBL_DESCRIPCIONPASO":"Descripción",
       "LBL_DESCRIPCIONLIMITE" : "no puede exeder los 200 carácteres",
       "LBL_REVISION" : "Revisión del candidato",
+      "MSG_APRUEBACUESTIONARIOS" : "El candidato responde correctamente todos los cuestionarios, por ende aprueba este paso",
+      "MSG_NOAPRUEBACUESTIONARIOS" : "El candidato ha fallado en alguna de las preguntas del cuestionario, por ende no aprueba este paso",
       "LBL_COMPROMISOREVISION" : "He revisado los datos que el postulante ha registrado en su inscripción y en base a esa información defino qué",
       "LBL_POSTULANTEA" : "Postulante a",
       "LBL_INFOPOSTULANTE" : "Información del postulante",
