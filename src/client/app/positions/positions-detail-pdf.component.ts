@@ -419,7 +419,7 @@ export class PositionsDetailPdfComponent implements OnInit {
       nombrePdf = nombrePdf.replace(/ /g, '-');
 
       let doc = new jsPDF('p', 'pt', 'a4');
-      doc.internal.scaleFactor = 1.7;
+      doc.internal.scaleFactor = 1.6;
 
 
       const elementToPrint = document.getElementById('position');
