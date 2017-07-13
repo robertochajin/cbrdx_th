@@ -163,11 +163,8 @@ export class AnswerExamsComponent implements OnInit {
    onSubmitAnsw() {
       if ( this.medicalExam.idExamenMedico ) {
          let temp = this.listEstExaMed.find( c => c.idLista === this.medicalExam.idEstadoExamenMedico ).codigo;
-         if ( temp === 'RESPOND' ) {
-            this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'CERRADO' );
-         }
          if ( temp === 'ENESPR' ) {
-            if ( this.medicalExam.idAdjunto && this.medicalExam.idMaestroRespuesta ) {
+            if ( this.medicalExam.idAdjunto || this.medicalExam.idMaestroRespuesta ) {
                this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'RESPOND' );
             } else {
                this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
@@ -175,7 +172,7 @@ export class AnswerExamsComponent implements OnInit {
          }
          this.medicalExam.idMedicoResponsable = this.usuarioLogueado.usuario.idUsuario;
          this.medicalExamService.update( this.medicalExam ).subscribe( data => {
-            this._nav.setMesage( 0, {severity: 'success', summary: 'Exito', detail: 'Gracias por su diagnsotico.' } );
+            this._nav.setMesage( 0, { severity: 'success', summary: 'Exito', detail: 'Gracias por su diagnsotico.' } );
             localStorage.removeItem( 'currentUser' );
             localStorage.removeItem( 'token' );
             this.router.navigate( [ '/login' ] );
@@ -187,7 +184,7 @@ export class AnswerExamsComponent implements OnInit {
          this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
          this.medicalExamService.add( this.medicalExam ).subscribe( data => {
             this.medicalExam = data;
-            this._nav.setMesage( 0, {severity: 'success', summary: 'Exito', detail: 'Gracias por su diagnsotico.' } );
+            this._nav.setMesage( 0, { severity: 'success', summary: 'Exito', detail: 'Gracias por su diagnsotico.' } );
             localStorage.removeItem( 'currentUser' );
             localStorage.removeItem( 'token' );
             this.router.navigate( [ '/login' ] );

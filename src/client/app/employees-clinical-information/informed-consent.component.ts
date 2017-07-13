@@ -122,11 +122,8 @@ export class MedicalExamInformedConsentComponent implements OnInit {
       if ( this.medicalExam.codigoVerificacion === this.codigoVerificacion ) {
          if ( this.medicalExam.idExamenMedico ) {
             let temp = this.listEstExaMed.find( c => c.idLista === this.medicalExam.idEstadoExamenMedico ).codigo;
-            if ( temp === 'RESPOND' && this.medicalExam.indicadorVerificado ) {
-               this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'CERRADO' );
-            }
             if ( temp === 'ENESPR' ) {
-               if ( (this.medicalExam.idAdjunto && this.medicalExam.idMaestroRespuesta) || this.medicalExam.indicadorVerificado ) {
+               if ( (this.medicalExam.idAdjunto && this.medicalExam.idMedicoResponsable) || this.medicalExam.indicadorVerificado ) {
                   this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'RESPOND' );
                } else {
                   this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'ENESPR' );
