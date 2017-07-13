@@ -24,8 +24,8 @@ import { AcademicEducationService } from '../_services/academic-education.servic
 import { Noformalstudies } from '../employees-academic-education/no-formal-studies';
 import { Workexperience } from '../_models/work-experience';
 import { WorkExperienceService } from '../_services/work-experience.service';
-import { References } from '../employees-references/references';
-import { ReferencesService } from '../employees-references/references.service';
+import { References } from '../_models/references';
+import { ReferencesService } from '../_services/references.service';
 import { ClinicalInformationService } from '../_services/clinical-information.service';
 import { EmployeesClinicalData } from '../_models/employeesClinicalData';
 import { DivisionPoliticaService } from '../_services/divisionPolitica.service';
