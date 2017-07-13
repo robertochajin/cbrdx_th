@@ -187,6 +187,7 @@ import { MedicalExamComponent } from './selection-process/medical-exam.component
 import { MedicalExamInformedConsentComponent } from './employees-clinical-information/informed-consent.component';
 import { AnswerExamsComponent } from './medical-institutions/answer-exams.component';
 import { EmployeesAttachmentsComponent } from './employees-attatchments/employees-attachments.component';
+import {PositionsDetailPdfComponent} from "./positions/positions-detail-pdf.component";
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -340,6 +341,7 @@ const routes = [
    { path: 'positions/add/:id', component: PositionsAddComponent, canActivate: [ AuthGuard ] },
    { path: 'positions/update/:id', component: PositionsUpdateComponent, canActivate: [ AuthGuard ] },
    { path: 'positions/detail/:id', component: PositionsDetailComponent },
+   { path: 'positions/detail-pdf/:id', component: PositionsDetailPdfComponent },
 
    //  Estrctura Organizacional
    { path: 'organizational-structure', component: OrganizationalStructureComponent, canActivate: [ AuthGuard ] },

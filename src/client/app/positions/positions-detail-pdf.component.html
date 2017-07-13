@@ -1,13 +1,24 @@
-<div *ngIf="position">
+<div *ngIf="position" class="col-md-10 col-md-offset-1">
 	<div class="row">
 		<div class="col-md-12">
 			<h3 class="first">{{ 'POSITION.LBL_CARGO' | translate }}</h3>
+			<a class="btn btn-primary pull-right" (click)="getPDF()" style="margin-top: -40px"
+				*ngIf="!loadingPdf">
+				<i class="fa fa-file-pdf-o" aria-hidden="true"></i> Generar PDF
+			</a>
+			<a class="btn btn-default pull-right" style="margin-top: -40px"
+				*ngIf="loadingPdf">
+				<i class="fa fa-refresh fa-spin fa-fw"></i> Generando PDF ...
+			</a>
 		</div>
 	</div>
-	<div class="row">
+	<div id="position" class="row">
 		<div class="col-md-12">
 			<div class="form-group">
 				<form class="form-horizontal">
+
+					<h1>{{position.cargo}}</h1>
+
 					<p-panel header="{{ 'POSITION.LBL_IDENTIFICACION' | translate }}">
 						<fieldset>
 							<div class="row">
@@ -37,23 +48,23 @@
 								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{position.indicadorZona ? 'Si':'No'}}</strong></label>
 							</div>
 							<h4 class="first">{{ 'POSITION.LBL_OBSERVACIONCARGO' | translate }}</h4>
-							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="observations" [paginator]="true"
+							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="observations" [paginator]="false"
 							             [rows]="10" [responsive]="true">
-								<p-column field="idCargoEstadoObservacion" header="{{ 'LBL_ID' | translate }}" [sortable]="true"></p-column>
-								<p-column field="estadoCargo" header="{{ 'LBL_ESTADO' | translate }}" [sortable]="true"></p-column>
-								<p-column field="observacion" header="{{ 'POSITION.LBL_OBSERVACION' | translate }}" [sortable]="true"></p-column>
-								<p-column field="auditoriaFecha" header="{{ 'LBL_FECHA' | translate }}" [sortable]="true"></p-column>
+								<p-column field="idCargoEstadoObservacion" header="{{ 'LBL_ID' | translate }}" [sortable]="false"></p-column>
+								<p-column field="estadoCargo" header="{{ 'LBL_ESTADO' | translate }}" [sortable]="false"></p-column>
+								<p-column field="observacion" header="{{ 'POSITION.LBL_OBSERVACION' | translate }}" [sortable]="false"></p-column>
+								<p-column field="auditoriaFecha" header="{{ 'LBL_FECHA' | translate }}" [sortable]="false"></p-column>
 							</p-dataTable>
 						</fieldset>
 					</p-panel>
 					<p-panel header="{{ 'POSITION.LBL_PRODUCTO' | translate }}">
 						<fieldset>
-							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="positionCriterias" [paginator]="true"
-							             [rows]="10" [responsive]="true">
-								<p-column field="criterio" header="{{ 'POSITION.LBL_CRITERIOS' | translate }}" [sortable]="true"></p-column>
-								<p-column field="descripcion" header="{{ 'POSITION.LBL_DESCRIPCION' | translate }}" [sortable]="true"></p-column>
-								<p-column field="factor" header="{{ 'POSITION.LBL_FACTOR' | translate }}" [sortable]="true"></p-column>
-								<p-column field="meta" header="{{ 'POSITION.LBL_META' | translate }}" [sortable]="true"></p-column>
+							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="positionCriterias" [paginator]="false"
+							             [rows]="10" [responsive]="true" >
+								<p-column field="criterio" header="{{ 'POSITION.LBL_CRITERIOS' | translate }}" [sortable]="false"></p-column>
+								<p-column field="descripcion" header="{{ 'POSITION.LBL_DESCRIPCION' | translate }}" [sortable]="false"></p-column>
+								<p-column field="factor" header="{{ 'POSITION.LBL_FACTOR' | translate }}" [sortable]="false"></p-column>
+								<p-column field="meta" header="{{ 'POSITION.LBL_META' | translate }}" [sortable]="false"></p-column>
 							</p-dataTable>
 						</fieldset>
 					</p-panel>
@@ -84,10 +95,10 @@
 					<p-panel header="{{ 'POSITION.LBL_RESPONSABILIDADESPRINCIPALES' | translate }}">
 						<fieldset>
 							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="positionResponsabilities"
-							             [paginator]="true"
+							             [paginator]="false"
 							             [rows]="10" [responsive]="true">
 								<p-column field="responsabilidad" header="{{ 'POSITION.LBL_RESPONSABILIDAD' | translate }}"
-								          [sortable]="true"></p-column>
+								          [sortable]="false"></p-column>
 							</p-dataTable>
 						</fieldset>
 					</p-panel>
@@ -107,18 +118,18 @@
 									<label><h4>{{'POSITION.LBL_REEMPLAZA' | translate}}</h4></label>
 								</div>
 							</div>
-							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listAbsenceREE" [paginator]="true"
+							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listAbsenceREE" [paginator]="false"
 							             [rows]="10" [responsive]="true">
-								<p-column field="cargo" header="{{'POSITION.LBL_CARGO' | translate}}" [sortable]="true"></p-column>
+								<p-column field="cargo" header="{{'POSITION.LBL_CARGO' | translate}}" [sortable]="false"></p-column>
 							</p-dataTable>
 							<div class="ui-grid-row">
 								<div class="ui-grid-col-12">
 									<label><h4>{{'POSITION.LBL_REEMPLAZAPOR' | translate}}</h4></label>
 								</div>
 							</div>
-							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listAbsenceREP" [paginator]="true"
+							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listAbsenceREP" [paginator]="false"
 							             [rows]="10" [responsive]="true">
-								<p-column field="cargo" header="{{'POSITION.LBL_CARGO' | translate}}" [sortable]="true"></p-column>
+								<p-column field="cargo" header="{{'POSITION.LBL_CARGO' | translate}}" [sortable]="false"></p-column>
 							</p-dataTable>
 						</fieldset>
 					</p-panel>
@@ -139,10 +150,10 @@
 									<label><h4>{{ 'POSITION.LBL_CARGOSUPERVISA' | translate }}</h4></label>
 								</div>
 							</div>
-							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listAbsenceSUP" [paginator]="true"
+							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listAbsenceSUP" [paginator]="false"
 							             [rows]="10"
 							             [responsive]="true">
-								<p-column field="cargoRelacion" header="{{ 'POSITION.LBL_CARGO' | translate }}" [sortable]="true"></p-column>
+								<p-column field="cargoRelacion" header="{{ 'POSITION.LBL_CARGO' | translate }}" [sortable]="false"></p-column>
 							</p-dataTable>
 						</fieldset>
 					</p-panel>
@@ -182,22 +193,24 @@
 									<label><h4>{{ 'OCUPACIONES.LBL_OCUPACIONES' | translate }} </h4></label>
 								</div>
 							</div>
-							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listPositionsActivities" [paginator]="true"
+							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listPositionsActivities" [paginator]="false"
 							             [rows]="10" [responsive]="true">
-								<p-column field="ocupacion" header="{{ 'POSITION.LBL_OCUPACION' | translate }}" [sortable]="true"></p-column>
+								<p-column field="ocupacion" header="{{ 'POSITION.LBL_OCUPACION' | translate }}" [sortable]="false"></p-column>
 							</p-dataTable>
 						</fieldset>
 					</p-panel>
 				</form>
 				<p-panel header="{{ 'POSITION.LBL_COMPETENCIAS' | translate }}">
 					<fieldset>
-						<p-tabView orientation="left">
-							<p-tabPanel *ngFor="let group of groups; let i = index" header="{{group.grupoCompetencia}}"
-							            [selected]="i == 0">
+
+							<div *ngFor="let group of groups; let i = index">
+
+								<h4>{{group.grupoCompetencia}}</h4>
+
 								<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="group.competencies"
 								             [responsive]="true" id="positionCompetenciesDT" styleClass="table-overflow">
 									<p-column field="competencia" header="{{ 'POSITION.LBL_COMPETENCIA' | translate }}"
-									          [sortable]="true"></p-column>
+									          [sortable]="false"></p-column>
 									<p-column header="{{ 'POSITION.LBL_PONDERACION' | translate }}" field="cargoCompetencia">
 										<template let-competencie="rowData" pTemplate="body">
 											<p-dropdown [options]="ponderanciesList" [(ngModel)]="competencie.cargoCompetencia.idPonderacion"
@@ -205,9 +218,8 @@
 										</template>
 									</p-column>
 								</p-dataTable>
-							</p-tabPanel>
-							<p-tabPanel header="" *ngIf="1 != 1"></p-tabPanel>
-						</p-tabView>
+							</div>
+
 					</fieldset>
 				</p-panel>
 				<form class="form-horizontal">
@@ -286,8 +298,8 @@
 									<label><h4>{{ 'POSITION.LBL_EXAMENES' | translate }} </h4></label>
 								</div>
 							</div>
-							<p-dataTable [value]="PositionExam" [paginator]="true" [rows]="10" [responsive]="true" class="datatable-col-center">
-								<p-column field="examen" header="{{ 'POSITION.LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
+							<p-dataTable [value]="PositionExam" [paginator]="false" [rows]="10" [responsive]="true" class="datatable-col-center">
+								<p-column field="examen" header="{{ 'POSITION.LBL_NOMBRE' | translate }}" [sortable]="false"></p-column>
 								<p-column header="{{ 'POSITION.LBL_INGRESO' | translate }}">
 									<template let-exam="rowData" pTemplate="body">
 										<label>{{exam.indicadorIngreso ? 'Aplica':'No Aplica'}}</label>
@@ -309,12 +321,12 @@
 									<label><h4>{{ 'POSITION.LBL_RIESGOS' | translate }} </h4></label>
 								</div>
 							</div>
-							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listRisks" [paginator]="true" [rows]="10"
+							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listRisks" [paginator]="false" [rows]="10"
 							             [responsive]="true">
-								<p-column field="tipo" header="{{ 'POSITION.LBL_TIPO' | translate }}" [sortable]="true"></p-column>
-								<p-column field="subtipo" header="{{ 'POSITION.LBL_SUBTIPO' | translate }}" [sortable]="true"></p-column>
-								<p-column field="riesgo" header="{{ 'POSITION.LBL_RIESGO' | translate }}" [sortable]="true"></p-column>
-								<p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true"
+								<p-column field="tipo" header="{{ 'POSITION.LBL_TIPO' | translate }}" [sortable]="false"></p-column>
+								<p-column field="subtipo" header="{{ 'POSITION.LBL_SUBTIPO' | translate }}" [sortable]="false"></p-column>
+								<p-column field="riesgo" header="{{ 'POSITION.LBL_RIESGO' | translate }}" [sortable]="false"></p-column>
+								<p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="false"
 								          styleClass="datatable-col-center">
 									<template let-riesgo="rowData" pTemplate="body">
 										<label>{{riesgo.indicadorHabilitado?'Si':'No'}}</label>
@@ -323,6 +335,7 @@
 							</p-dataTable>
 						</fieldset>
 					</p-panel>
+					<!--
 					<p-panel header="{{ 'POSITION.LBL_PRODUCTO' | translate }}">
 						<fieldset>
 							<div class="row">
@@ -344,11 +357,15 @@
 							</div>
 						</fieldset>
 					</p-panel>
-					<p-panel header="{{ 'POSITION.LBL_RElACION' | translate }}">
+					-->
+
+					<!--
+					<p-panel header="{{ 'POSITION.LBL_RElACION' | translate }}" >
 						<fieldset>
 							<p-tree [value]="treeArrray" layout="horizontal" selectionMode="single" [(selection)]="selectedNode"></p-tree>
 						</fieldset>
 					</p-panel>
+					-->
 				</form>
 			</div>
 		</div>

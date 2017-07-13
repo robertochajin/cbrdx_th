@@ -36,13 +36,16 @@ import { Risk } from '../_models/position-risks';
 import { Exam } from '../_models/position-exam';
 import { RiskService } from '../_services/positios-risks.service';
 
+let jsPDF = require('jspdf/dist/jspdf.min.js');
+let html2canvas = require('html2canvas/dist/html2canvas.js');
+
 @Component( {
                moduleId: module.id,
                selector: 'positions-view-detail-pdf',
                templateUrl: 'positions-detail-pdf.component.html',
                providers: [ ConfirmationService ]
             } )
-export class PositionsDetailComponent implements OnInit {
+export class PositionsDetailPdfComponent implements OnInit {
    @Input()
    idCargo: number = 0;
    position: Positions = new Positions();
@@ -80,6 +83,7 @@ export class PositionsDetailComponent implements OnInit {
    ListPositionExam: Exam[];
    treeArrray: TreeNode[] = [];
    selectedNode: TreeNode;
+   loadingPdf = false;
 
    @Output()
    dismiss: EventEmitter<number> = new EventEmitter<number>();
@@ -405,4 +409,34 @@ export class PositionsDetailComponent implements OnInit {
    goBack() {
       this.dismiss.emit( 1 );
    }
+
+
+   getPDF(): void {
+
+      this.loadingPdf = true;
+
+      let nombrePdf = this.position.cargo;
+      nombrePdf = nombrePdf.replace(/ /g, '-');
+
+      let doc = new jsPDF('p', 'pt', 'a4');
+      doc.internal.scaleFactor = 1.7;
+
+
+      const elementToPrint = document.getElementById('position');
+      const options = {
+         pagesplit: true,
+         background: '#e9e9e9',
+         retina: true,
+         padding : 10
+      };
+      doc.addHTML(elementToPrint, options, () => {
+         doc.save('PS-' + nombrePdf + '.pdf');
+         this.loadingPdf = false;
+      });
+
+
+
+   }
+
+
 }
