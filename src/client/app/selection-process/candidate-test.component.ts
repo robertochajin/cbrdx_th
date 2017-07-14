@@ -125,7 +125,7 @@ export class CandidateTestComponent implements OnInit {
                   } );
                   vacanciesService.getPublication( res.idPublicacion ).subscribe( pb => {
                      this.publication = pb;
-                     this.listaService.getMasterDetailsByCode('ListasEstadosRequerimientos', 'CRRD').subscribe( reqState => {
+                     this.listaService.getMasterDetailsByCode( 'ListasEstadosRequerimientos', 'CRRD' ).subscribe( reqState => {
                         this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
                            this.stepStates = res;
                            if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
@@ -149,7 +149,7 @@ export class CandidateTestComponent implements OnInit {
                               // en el caso de no tener un idProcesoSeleccion es necesario crear una primera instancia del mismo para poder
                               // agregar las pruebas técnicas
 
-                              if(reqState.idLista === this.publication.idEstado) {
+                              if ( reqState.idLista === this.publication.idEstado ) {
                                  this.readonly = true;
                               } else {
                                  this.readonly = false;
@@ -169,10 +169,9 @@ export class CandidateTestComponent implements OnInit {
                            this.testStates.push( { label: 'Realiza prueba completa', value: true } );
                            this.testStates.push( { label: 'No realiza prueba', value: false } );
                         } );
-                     });
+                     } );
                   } );
                } );
-
 
             } );
 

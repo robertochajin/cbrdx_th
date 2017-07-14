@@ -118,7 +118,7 @@ export class StepProcessComponent implements OnInit {
                   vacanciesService.getPublication( res.idPublicacion ).subscribe( pb => {
                      this.publication = pb;
 
-                     this.listaService.getMasterDetailsByCode('ListasEstadosRequerimientos', 'CRRD').subscribe( reqState => {
+                     this.listaService.getMasterDetailsByCode( 'ListasEstadosRequerimientos', 'CRRD' ).subscribe( reqState => {
                         this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
                            this.stepStates = res;
                            if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== 'null' && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
@@ -131,15 +131,13 @@ export class StepProcessComponent implements OnInit {
                               } );
                            } else {
                               this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
-                              this.prepareForm((reqState.idLista === this.publication.idEstado));
+                              this.prepareForm( (reqState.idLista === this.publication.idEstado) );
                            }
                         } );
-                     });
+                     } );
 
                   } );
                } );
-
-
 
             } );
          } else {
@@ -153,11 +151,11 @@ export class StepProcessComponent implements OnInit {
    ngOnInit() {
    }
 
-   prepareForm(isRequirementClosed: boolean) {
+   prepareForm( isRequirementClosed: boolean ) {
 
-      if(isRequirementClosed){
-         this.readonly =true;
-         this.readonlyEstado =true;
+      if ( isRequirementClosed ) {
+         this.readonly = true;
+         this.readonlyEstado = true;
          this.showAttachments = false;
          this.showCalendar = false;
          this.showInterface = false;
@@ -165,8 +163,7 @@ export class StepProcessComponent implements OnInit {
          //Se verifica el estado del paso y la la necesidad de mostrar o nó la asignación de fecha
          if ( this.getIdStateByCode( 'VAC' ) === this.candidateProcess.idEstadoDiligenciado ) {
             this.showCalendar = this.step.indicadorCalendario;
-            this.showAttachments=false;
-
+            this.showAttachments = false;
 
          } else if ( this.getIdStateByCode( 'PROG' ) === this.candidateProcess.idEstadoDiligenciado ) {
             this.showAttachments = this.step.indicadorAdjunto;
@@ -185,17 +182,17 @@ export class StepProcessComponent implements OnInit {
             this.readonly = true;
             this.readonlyEstado = true;
             this.showAttachments = this.step.indicadorAdjunto;
-         } else if (  this.getIdStateByCode( 'NA' ) === this.candidateProcess.idEstadoDiligenciado) {
+         } else if ( this.getIdStateByCode( 'NA' ) === this.candidateProcess.idEstadoDiligenciado ) {
             this.showCalendar = this.step.indicadorCalendario;
             this.showAttachments = this.step.indicadorAdjunto;
          }
-         this.showInterface=this.step.indicadorInterfaz;
+         this.showInterface = this.step.indicadorInterfaz;
       }
 
    }
 
    onSubmit() {
-      this.candidateProcess.fechaCita = this.fechaCita.toISOString().replace('Z','-0500');
+      this.candidateProcess.fechaCita = this.fechaCita.toISOString().replace( 'Z', '-0500' );
       if ( this.candidateProcess.idDesicionProcesoSeleccion === this.getIdDesitionByCode( 'NOAPL' ) ) {
          this.candidateProcess.indicadorNoAplica = true;
          this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'NA' );

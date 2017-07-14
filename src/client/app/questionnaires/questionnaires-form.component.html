@@ -90,11 +90,10 @@
 						<div class="ui-grid-col-6">
 							<label for="codigoPregunta">* {{ 'LBL_CODIGO' | translate}}</label>
 							<input type="text" pInputText id="codigoPregunta" name="codigo"
-							       uperCaseText
 							       [readonly]="(pregunta.idCuestionarioPregunta !== undefined && pregunta.idCuestionarioPregunta !== null)"
 							       [(ngModel)]="pregunta.codigoPregunta" maxlength="10"
 							       (change)="validateCodeP()"
-							       (keyup)="inputCleanCode($event.target.value)"
+							       (keyup)="inputCleanCode($event)"
 							       #NGcodigoP="ngModel" required/>
 							<div class="ui-message ui-messages-error ui-corner-all"
 							     *ngIf="p.submitted && !NGcodigoP.valid ">
@@ -273,7 +272,7 @@
 							       [readonly]="(respuesta.idPreguntaOpcion !== undefined && respuesta.idPreguntaOpcion !== null)"
 							       [(ngModel)]="respuesta.codigoOpcion" maxlength="6"
 							       (change)="validateCodeR()"
-							       (keyup)="inputCleanCode($event.target.value)"
+							       (keyup)="inputCleanCode($event)"
 							       #NGcodigoR="ngModel" required/>
 							<div class="ui-message ui-messages-error ui-corner-all"
 							     *ngIf="r.submitted && !NGcodigoR.valid ">

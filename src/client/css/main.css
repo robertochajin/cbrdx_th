@@ -750,7 +750,7 @@ body.skin-blue .aplicavacantedash {
 }
 
 /* -- Badge Blue */
-body.sky-blue .badge{
+body.sky-blue .badge {
    background-color: #3c8dbc;
 }
 
@@ -845,8 +845,9 @@ body.skin-green .hv-ribon-rigth:after{
 body.skin-green .aplicavacantedash {
    background:#00A65A;
 }
+
 /* -- Badge green */
-body.sky-blue .badge{
+body.sky-blue .badge {
    background-color: #00A65A;
 }
 
@@ -910,6 +911,7 @@ body.skin-purple .ribbon{
 body.skin-purple .ribbon:after{
    border-color:transparent #46437d;
 }
+
 /* -- Curriculum Purple -- */
 body.skin-purple .perfil{
    border-color: #605ca8;
@@ -941,8 +943,9 @@ body.skin-purple .hv-ribon-rigth:after{
 body.skin-purple .aplicavacantedash {
    background:#605ca8;
 }
+
 /* -- Badge Purple */
-body.sky-blue .badge{
+body.sky-blue .badge {
    background-color: #605ca8;
 }
 
