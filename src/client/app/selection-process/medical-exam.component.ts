@@ -134,6 +134,77 @@ export class MedicalExamComponent implements OnInit {
                   } );
                   vacanciesService.getPublication( res.idPublicacion ).subscribe( pb => {
                      this.publication = pb;
+
+                     this.listaService.getMasterDetailsByCode('ListasEstadosRequerimientos', 'CRRD').subscribe( reqState => {
+                        this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
+                           this.stepStates = res;
+                           if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
+                              this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
+                              this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
+                                 this.candidateProcess = cp;
+                                 if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ||
+                                      this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado ||
+                                      reqState.idLista === this.publication.idEstado) {
+                                    this.readonly = true;
+                                 } else {
+                                    this.readonly = false;
+                                 }
+                                 // obtener examen medico
+                                 this.medicalExamService.getByIdProceso( this.candidateProcess.idProcesoSeleccion ).subscribe( rs => {
+                                    if ( rs ) {
+                                       this.medicalExam = rs;
+                                       this.medicalExam.fechaProgramada = new Date( this.medicalExam.fechaProgramada );
+                                       if ( this.listEstExaMed.find(
+                                             x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'RESPOND' ) {
+                                          this.respondido = true;
+                                          this.enesperarespuesta = false;
+                                       }
+                                       if ( !this.medicalExam.idMaestroRespuesta ) {
+                                          this.constanteService.getByCode( 'DIAGNO' ).subscribe( data => {
+                                             if ( data.valor ) {
+                                                this.codigoCuestionario = data.valor;
+                                                this.getCuestionariosByCode();
+                                             }
+                                          } );
+                                       }
+                                       if ( this.medicalExam.idMaestroRespuesta ) {
+                                          this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe( res => {
+                                             this.masterAnswer = res;
+                                             this.showQuestionnaire = true;
+                                          } );
+                                       }
+                                       if ( this.listEstExaMed.find(
+                                             x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'ENESPR' ) {
+                                          this.enesperarespuesta = true;
+                                       }
+                                       if ( this.listEstExaMed.find(
+                                             x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'CERRADO' ) {
+                                          this.cerrado = true;
+                                          this.enesperarespuesta = false;
+                                          this.respondido = false;
+                                       }
+                                       this.medicalExam.fechaProgramada = new Date( this.medicalExam.fechaProgramada );
+                                    } else {
+                                       this.medicalExam = new MedicalExam();
+                                    }
+
+                                 } );
+                              } );
+                           } else {
+                              if(reqState.idLista === this.publication.idEstado) {
+                                 this.readonly = true;
+                              } else {
+                                 this.readonly = false;
+                                 this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'PROG' );
+                                 this.candidateProcessService.add( this.candidateProcess ).subscribe( process => {
+                                    this.candidateProcess = process;
+                                    this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
+                                 } );
+                              }
+                           }
+                        } );
+                     });                                          
+
                      // obtener las instituciones medicas
                      this.medicalInstitutionService.getByIdPublic( this.publication.idPublicacion ).subscribe( data => {
                         if ( data.length > 0 ) {
@@ -149,64 +220,7 @@ export class MedicalExamComponent implements OnInit {
                   } );
                } );
 
-               this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
-                  this.stepStates = res;
-                  if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
-                     this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
-                     this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
-                        this.candidateProcess = cp;
-                        if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ) {
-                           this.readonly = true;
-                        }
-                        // obtener examen medico
-                        this.medicalExamService.getByIdProceso( this.candidateProcess.idProcesoSeleccion ).subscribe( rs => {
-                           if ( rs ) {
-                              this.medicalExam = rs;
-                              this.medicalExam.fechaProgramada = new Date( this.medicalExam.fechaProgramada );
-                              if ( this.listEstExaMed.find(
-                                    x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'RESPOND' ) {
-                                 this.respondido = true;
-                                 this.enesperarespuesta = false;
-                              }
-                              if ( !this.medicalExam.idMaestroRespuesta ) {
-                                 this.constanteService.getByCode( 'DIAGNO' ).subscribe( data => {
-                                    if ( data.valor ) {
-                                       this.codigoCuestionario = data.valor;
-                                       this.getCuestionariosByCode();
-                                    }
-                                 } );
-                              }
-                              if ( this.medicalExam.idMaestroRespuesta ) {
-                                 this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe( res => {
-                                    this.masterAnswer = res;
-                                    this.showQuestionnaire = true;
-                                 } );
-                              }
-                              if ( this.listEstExaMed.find(
-                                    x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'ENESPR' ) {
-                                 this.enesperarespuesta = true;
-                              }
-                              if ( this.listEstExaMed.find(
-                                    x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'CERRADO' ) {
-                                 this.cerrado = true;
-                                 this.enesperarespuesta = false;
-                                 this.respondido = false;
-                              }
-                              this.medicalExam.fechaProgramada = new Date( this.medicalExam.fechaProgramada );
-                           } else {
-                              this.medicalExam = new MedicalExam();
-                           }
 
-                        } );
-                     } );
-                  } else {
-                     this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'PROG' );
-                     this.candidateProcessService.add( this.candidateProcess ).subscribe( process => {
-                        this.candidateProcess = process;
-                        this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
-                     } );
-                  }
-               } );
             } );
          } else {
             this._nav.setMesage( 3 );
