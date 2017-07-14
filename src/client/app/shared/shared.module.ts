@@ -13,7 +13,7 @@ import { LowerCaseTextDirective } from '../_helpers/LowerCaseText';
 import { UperCaseTextDirective } from '../_helpers/UperCaseText';
 import { TitleCaseTextDirective } from '../_helpers/TitleCaseText';
 import { PermissionDirective } from '../_helpers/permission.directive';
-import { CodeSpecialCaseTextDirective } from '../_helpers/codeSpecialCaseText';
+import { CodeSpecialCaseTextDirective } from '../_helpers/CodeSpecialCaseText';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
