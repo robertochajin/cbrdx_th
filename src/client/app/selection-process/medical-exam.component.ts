@@ -25,6 +25,10 @@ import { MedicalInstitution } from '../_models/medical-institutions';
 import { MedicalExamService } from '../_services/medical-exam.service';
 import { MasterAnswersService } from '../_services/masterAnswers.service';
 import { MasterAnswers } from '../_models/masterAnswers';
+import { QuestionnairesService } from '../_services/questionnaires.service';
+import { ConstanteService } from '../_services/constante.service';
+import { QuestionnariesQuestions } from '../_models/questionnariesQuestions';
+import { QuestionnariesAnswers } from '../_models/questionnariesAnswers';
 
 @Component( {
                moduleId: module.id,
@@ -47,6 +51,7 @@ export class MedicalExamComponent implements OnInit {
    private stepStates: ListaItem[] = [];
    private desitionList: ListaItem[] = [];
    public responsables: SelectItem[] = [];
+   public opcionesPregunta: SelectItem[] = [];
    private showCalendar = false;
    private readonly = false;
    svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
@@ -66,6 +71,11 @@ export class MedicalExamComponent implements OnInit {
    institucionMedica: boolean = true;
    consentimiennto: boolean = false;
    noaplicaexamen: boolean = true;
+   codigoCuestionario: string;
+   idCuestionario: number;
+   options: QuestionnariesAnswers[] = [];
+   questions: QuestionnariesQuestions[] = [];
+   question: QuestionnariesQuestions = new QuestionnariesQuestions();
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
@@ -80,6 +90,8 @@ export class MedicalExamComponent implements OnInit {
       private candidateProcessService: CandidateProcessService,
       private medicalExamService: MedicalExamService,
       private medicalInstitutionService: MedicalInstitutionService,
+      private questionnairesService: QuestionnairesService,
+      private constanteService: ConstanteService,
       private selectionStepService: SelectionStepService ) {
 
       let token = localStorage.getItem( 'token' );
@@ -155,8 +167,13 @@ export class MedicalExamComponent implements OnInit {
                                     x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'RESPOND' ) {
                                  this.respondido = true;
                                  this.enesperarespuesta = false;
-                                 this.masterAnswersService.get( this.medicalExam.idMaestroRespuesta ).subscribe( data => {
-
+                              }
+                              if ( !this.medicalExam.idMaestroRespuesta ) {
+                                 this.constanteService.getByCode( 'DIAGNO' ).subscribe( data => {
+                                    if ( data.valor ) {
+                                       this.codigoCuestionario = data.valor;
+                                       this.getCuestionariosByCode();
+                                    }
                                  } );
                               }
                               if ( this.medicalExam.idMaestroRespuesta ) {
@@ -262,6 +279,7 @@ export class MedicalExamComponent implements OnInit {
    }
 
    onSubmitExam() {
+         this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
       if ( this.medicalExam.idExamenMedico ) {
          let temp = this.listEstExaMed.find( c => c.idLista === this.medicalExam.idEstadoExamenMedico ).codigo;
          if ( temp === 'RESPOND' ) {
@@ -344,5 +362,52 @@ export class MedicalExamComponent implements OnInit {
          this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
       }
 
+   }
+
+   getCuestionariosByCode() {
+      this.questionnairesService.getByCode( this.codigoCuestionario ).subscribe( quest => {
+         this.idCuestionario = quest.idCuestionario;
+         this.getQuestions();
+      } );
+   }
+
+   getQuestions() {
+      this.questionnairesService.getQuestions( this.idCuestionario ).subscribe(
+         res => {
+            this.questions = res;
+            this.sortQuestions();
+            this.question = this.questions[ 2 ];
+            this.getAnswers();
+         } );
+   }
+
+   getAnswers() {
+      this.questionnairesService.getAnswers( this.question.idCuestionarioPregunta ).subscribe(
+         res => {
+            this.options = res;
+            this.sortAnswers();
+            this.options.map( s => {
+               this.opcionesPregunta.push( { label: s.opcion, value: s.idPreguntaOpcion } )
+            } );
+
+         } );
+   }
+
+   private sortQuestions() {
+      this.questions.sort( function ( a, b ) {
+         if ( a.secuencia < b.secuencia )
+            return -1;
+         else
+            return 1;
+      } )
+   }
+
+   private sortAnswers() {
+      this.options.sort( function ( a, b ) {
+         if ( a.orden < b.orden )
+            return -1;
+         else
+            return 1;
+      } )
    }
 }

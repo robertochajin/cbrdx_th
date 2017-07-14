@@ -8,6 +8,7 @@ export class MedicalExam {
    indicadorOtraInstitucion: boolean;
    idMaestroRespuesta: number;
    idMedicoResponsable: number;
+   idPreguntaOpcion: number;
    idInstitucionMedica: number;
    institucionMedica: string;
    fechaProgramada: Date;
