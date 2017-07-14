@@ -48,7 +48,7 @@ export class CentralRiskComponent implements OnInit {
    idRol: number;
    jwtHelper: JwtHelper = new JwtHelper();
    svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
-
+   readonly = true;
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
       private _nav: NavService,
