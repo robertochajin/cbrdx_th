@@ -21,7 +21,7 @@ export class VacancyApplyComponent implements OnInit {
    employeesPublication: EmployeesPublications;
    txtSalary: string = '';
    txtBono: string = '';
-
+   showApply: boolean = false;
    constructor( private route: ActivatedRoute,
       private employeesService: EmployeesService,
       private location: Location,
@@ -70,7 +70,11 @@ export class VacancyApplyComponent implements OnInit {
       this.employeesService.getPublication( this.publication.idPublicacion ).subscribe( data => {
          if ( data.length > 0 ) {
             this.employeesPublication = data[ 0 ];
-            this.router.navigate( [ 'apply-vacancy/employee-profile/' + this.employeesPublication.idTercerosPublicaciones ] );
+            if ( this.employeesPublication.indicadorFinalizado === true ) {
+               this.showApply = true;
+            } else {
+               this.router.navigate( [ 'apply-vacancy/employee-profile/' + this.employeesPublication.idTercerosPublicaciones ] );
+            }
          } else {
             this.employeesPublication = new EmployeesPublications();
             this.employeesPublication.idPublicacion = this.publication.idPublicacion;

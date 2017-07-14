@@ -52,6 +52,11 @@ export class MasterAnswersService {
       .map( ( res: Response ) => res.json() as Answers[] );
    }
 
+   getSolutionsByMaster( id: number ) {
+      return this.authHttp.get( this.masterService + 'respuestas/maestroRespuesta/' + id )
+      .map( ( res: Response ) => res.json() as Answers[] );
+   }
+
    getSolution( id: number ) {
       return this.authHttp.get( this.masterService + 'respuestas/' + id )
       .map( ( res: Response ) => res.json() as Answers );
@@ -62,6 +67,11 @@ export class MasterAnswersService {
       return this.authHttp.post( this.masterService + 'respuestas', f )
       .map( ( res: Response ) => res.json() ).catch( this.handleError );
    };
+
+   getSolutionDepends( idMaestroRespuestas: number, idPregunta: number, idRespuesta: number ) {
+      return this.authHttp.get( this.masterService + 'respuestas/filtro/' + idMaestroRespuestas + '/' + idRespuesta + '/' + idPregunta )
+      .map( ( res: Response ) => res.json() as Answers[] );
+   }
 
    handleError( error: any ): Promise<any> {
       console.error( 'Error:', error );

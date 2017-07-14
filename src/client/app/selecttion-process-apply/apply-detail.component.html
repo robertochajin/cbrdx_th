@@ -50,6 +50,12 @@
 								<label class="col-md-8 col-sm-12 col-xs-12"><strong><p align="justify">{{publication.observacion}}</p>
 								</strong></label>
 							</div>
+							<div class="row form-footer-buttons" *ngIf="showApply">
+								<div class="form-group col-md-12">
+									<label class="col-md-8 col-sm-12 col-xs-12"><strong><p align="center">Usted ya aplico a esta Vacante</p>
+									</strong></label>
+								</div>
+							</div>
 						</div>
 					</fieldset>
 				</form>
@@ -58,7 +64,7 @@
 					<div class="form-group col-md-12">
 						<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
 						        pButton (click)="goBack()"></button>
-						<button icon="fa-arrow-right" label="{{'BTN_CONTINUAR' | translate }}" type="button"
+						<button icon="fa-arrow-right" label="{{'WIDGETS.BTN_APLICAR' | translate }}" type="button"
 						        pButton (click)="goNext()"></button>
 					</div>
 				</div>
