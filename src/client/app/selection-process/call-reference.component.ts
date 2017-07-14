@@ -201,7 +201,7 @@ export class CallReferenceComponent implements OnInit {
    ngOnInit() {
    }
 
-   onSubmit() {
+   onSubmitP() {
       if ( this.indApproval === 'APRB' ) {
          this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'APROB' );
          this.candidateProcess.idDesicionProcesoSeleccion = this.getIdDesitionByCode( 'APRB' );

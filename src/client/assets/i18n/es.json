@@ -83,6 +83,7 @@
   "BTN_DOWNLOAD": "Descargar",
   "BTN_UPLOAD": "Subir archivo",
    "BTN_LLAMAR": "Llamar",
+   "BTN_FINALIZARPROCESO": "Finalizar el proceso",
   "FIN_COMUNES":"====================================================================",
 
   "UBICACION":{
@@ -993,6 +994,7 @@
       "LBL_HISTORIALPOSTULANTE": "Historial de postulaciones de:",
       "LBL_CANTIDADVACANTES": "Numero de vacantes solicitadas",
       "LBL_FECHA": "Fecha",
+      "LBL_CONCEPTOMEDICO": "Concepto médico",
       "LBL_PROGRAMAREXAMEN": "Programar examen",
       "LBL_INSTITUCION": "Institución",
       "LBL_GENERCOD": "Generar código",
