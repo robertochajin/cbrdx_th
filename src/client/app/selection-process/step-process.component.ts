@@ -39,7 +39,7 @@ export class StepProcessComponent implements OnInit {
    private showCalendar = false;
    private showAttachments = false;
    private showInterface = false;
-   private readonly = false;
+   private readonly = true;
    private readonlyEstado = false;
    private desitionList: ListaItem[] = [];
    private fechaCita: Date = new Date();
@@ -118,23 +118,27 @@ export class StepProcessComponent implements OnInit {
                   } );
                   vacanciesService.getPublication( res.idPublicacion ).subscribe( pb => {
                      this.publication = pb;
+
+                     this.listaService.getMasterDetailsByCode('ListasEstadosRequerimientos', 'CRRD').subscribe( reqState => {
+                        this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
+                           this.stepStates = res;
+                           if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== 'null' && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
+                              this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
+                              this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
+                                 this.candidateProcess = cp;
+                                 this.prepareForm((reqState.idLista === this.publication.idEstado));
+                              } );
+                           } else {
+                              this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
+                              this.prepareForm((reqState.idLista === this.publication.idEstado));
+                           }
+                        } );
+                     });
+
                   } );
                } );
 
-               this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
-                  this.stepStates = res;
-                  if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== 'null' && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
-                     this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
-                     this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
-                        this.candidateProcess = cp;
-                        this.fechaCita = new Date( this.candidateProcess.fechaCita );
-                        this.prepareForm();
-                     } );
-                  } else {
-                     this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
-                     this.prepareForm();
-                  }
-               } );
+
 
             } );
          } else {
@@ -148,34 +152,45 @@ export class StepProcessComponent implements OnInit {
    ngOnInit() {
    }
 
-   prepareForm() {
-      //Se verifica el estado del paso y la la necesidad de mostrar o nó la asignación de fecha
-      if ( this.getIdStateByCode( 'VAC' ) === this.candidateProcess.idEstadoDiligenciado ) {
-         this.showCalendar = this.step.indicadorCalendario;
-         this.showAttachments = false;
+   prepareForm(isRequirementClosed: boolean) {
 
-      } else if ( this.getIdStateByCode( 'PROG' ) === this.candidateProcess.idEstadoDiligenciado ) {
-         this.showAttachments = this.step.indicadorAdjunto;
-         this.showCalendar = this.step.indicadorCalendario;
-         // verificar si el usuario en sesion es responsable para mostrar solo lectura de datos
-         if ( this.usuarioLogueado.usuario.idUsuario === this.candidateProcess.idResponsable ) {
+      if(isRequirementClosed){
+         this.readonly =true;
+         this.readonlyEstado =true;
+         this.showAttachments = false;
+         this.showCalendar = false;
+         this.showInterface = false;
+      } else {
+         //Se verifica el estado del paso y la la necesidad de mostrar o nó la asignación de fecha
+         if ( this.getIdStateByCode( 'VAC' ) === this.candidateProcess.idEstadoDiligenciado ) {
+            this.showCalendar = this.step.indicadorCalendario;
+            this.showAttachments=false;
+
+
+         } else if ( this.getIdStateByCode( 'PROG' ) === this.candidateProcess.idEstadoDiligenciado ) {
+            this.showAttachments = this.step.indicadorAdjunto;
+            this.showCalendar = this.step.indicadorCalendario;
+            // verificar si el usuario en sesion es responsable para mostrar solo lectura de datos
+            if ( this.usuarioLogueado.usuario.idUsuario === this.candidateProcess.idResponsable ) {
+               this.readonly = true;
+            } else {
+               this.readonly = false;
+            }
+         } else if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ) {
             this.readonly = true;
-         } else {
-            this.readonly = false;
+            this.readonlyEstado = true;
+            this.showAttachments = this.step.indicadorAdjunto;
+         } else if ( this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado ) {
+            this.readonly = true;
+            this.readonlyEstado = true;
+            this.showAttachments = this.step.indicadorAdjunto;
+         } else if (  this.getIdStateByCode( 'NA' ) === this.candidateProcess.idEstadoDiligenciado) {
+            this.showCalendar = this.step.indicadorCalendario;
+            this.showAttachments = this.step.indicadorAdjunto;
          }
-      } else if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ) {
-         this.readonly = true;
-         this.readonlyEstado = true;
-         this.showAttachments = this.step.indicadorAdjunto;
-      } else if ( this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado ) {
-         this.readonly = true;
-         this.readonlyEstado = true;
-         this.showAttachments = this.step.indicadorAdjunto;
-      } else if ( this.getIdStateByCode( 'NA' ) === this.candidateProcess.idEstadoDiligenciado ) {
-         this.showCalendar = this.step.indicadorCalendario;
-         this.showAttachments = this.step.indicadorAdjunto;
+         this.showInterface=this.step.indicadorInterfaz;
       }
-      this.showInterface = this.step.indicadorInterfaz;
+
    }
 
    onSubmit() {

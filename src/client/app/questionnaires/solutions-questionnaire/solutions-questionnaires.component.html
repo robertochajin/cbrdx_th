@@ -31,10 +31,11 @@
 									[value]="opcion.value"
 									[label]="opcion.label"
 									[(ngModel)]="respuestasCheckbox"
+									#pCheckbox="ngModel"
 								></p-checkbox>
 							</div>
 							<div class="ui-message ui-messages-error ui-corner-all"
-							     *ngIf="f.submitted && pregunta.indicadorObligatorio && respuestasCheckbox.length > 0">
+							     *ngIf="f.submitted && pregunta.indicadorObligatorio && respuestasCheckbox.length === 0">
 								<i class="fa fa-close"></i>
 								{{'QUESTIONNAIRES.LBL_CHECKBOX' | translate }}
 							</div>
