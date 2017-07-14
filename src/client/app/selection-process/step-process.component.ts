@@ -42,13 +42,12 @@ export class StepProcessComponent implements OnInit {
    private readonly = false;
    private readonlyEstado = false;
    private desitionList: ListaItem[] = [];
+   private fechaCita: Date = new Date();
 
    usuarioLogueado: any;
    idRol: number;
    jwtHelper: JwtHelper = new JwtHelper();
    svcThUrl = '<%= SVC_TH_URL %>/api/upload';
-
-
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
@@ -80,7 +79,7 @@ export class StepProcessComponent implements OnInit {
 
       this.minDate = new Date( Date.now() );
       this.listaService.getMasterDetails( 'ListasDecisionesProcesoSeleccion' ).subscribe( res => {
-         this.desitionList=res;
+         this.desitionList = res;
          this.approvalOptions.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => this.approvalOptions.push( { label: s.nombre, value: s.idLista } ) );
       } );
@@ -128,6 +127,7 @@ export class StepProcessComponent implements OnInit {
                      this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
                      this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
                         this.candidateProcess = cp;
+                        this.fechaCita = new Date( this.candidateProcess.fechaCita );
                         this.prepareForm();
                      } );
                   } else {
@@ -137,7 +137,6 @@ export class StepProcessComponent implements OnInit {
                } );
 
             } );
-
          } else {
             this._nav.setMesage( 3 );
             this.router.navigate( [ 'selection-process' ] );
@@ -153,8 +152,7 @@ export class StepProcessComponent implements OnInit {
       //Se verifica el estado del paso y la la necesidad de mostrar o nó la asignación de fecha
       if ( this.getIdStateByCode( 'VAC' ) === this.candidateProcess.idEstadoDiligenciado ) {
          this.showCalendar = this.step.indicadorCalendario;
-         this.showAttachments=false;
-
+         this.showAttachments = false;
 
       } else if ( this.getIdStateByCode( 'PROG' ) === this.candidateProcess.idEstadoDiligenciado ) {
          this.showAttachments = this.step.indicadorAdjunto;
@@ -173,21 +171,22 @@ export class StepProcessComponent implements OnInit {
          this.readonly = true;
          this.readonlyEstado = true;
          this.showAttachments = this.step.indicadorAdjunto;
-      } else if (  this.getIdStateByCode( 'NA' ) === this.candidateProcess.idEstadoDiligenciado) {
+      } else if ( this.getIdStateByCode( 'NA' ) === this.candidateProcess.idEstadoDiligenciado ) {
          this.showCalendar = this.step.indicadorCalendario;
          this.showAttachments = this.step.indicadorAdjunto;
       }
-      this.showInterface=this.step.indicadorInterfaz;
+      this.showInterface = this.step.indicadorInterfaz;
    }
 
    onSubmit() {
-      if ( this.candidateProcess.idDesicionProcesoSeleccion===this.getIdDesitionByCode('NOAPL') ) {
+      this.candidateProcess.fechaCita = this.fechaCita.toISOString().replace('Z','-0500');
+      if ( this.candidateProcess.idDesicionProcesoSeleccion === this.getIdDesitionByCode( 'NOAPL' ) ) {
          this.candidateProcess.indicadorNoAplica = true;
          this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'NA' );
-      } else if ( this.candidateProcess.idDesicionProcesoSeleccion===this.getIdDesitionByCode('APRB') ) {
+      } else if ( this.candidateProcess.idDesicionProcesoSeleccion === this.getIdDesitionByCode( 'APRB' ) ) {
          this.candidateProcess.indicadorContProceso = true;
          this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'APROB' );
-      } else if ( this.candidateProcess.idDesicionProcesoSeleccion===this.getIdDesitionByCode('NOAPRB') ) {
+      } else if ( this.candidateProcess.idDesicionProcesoSeleccion === this.getIdDesitionByCode( 'NOAPRB' ) ) {
          this.candidateProcess.indicadorContProceso = false;
          this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'RECH' );
       } else {
@@ -197,27 +196,27 @@ export class StepProcessComponent implements OnInit {
          this.candidateProcessService.update( this.candidateProcess ).subscribe( res => {
             if ( res.ok ) {
                this._nav.setMesage( 2 );
-               this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
             } else {
                this._nav.setMesage( 3 );
-               this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
             }
          }, () => {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
+            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
          } );
       } else {
          this.candidateProcessService.add( this.candidateProcess ).subscribe( res => {
             if ( res.idProcesoSeleccion ) {
                this._nav.setMesage( 1 );
-               this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
             } else {
                this._nav.setMesage( 3 );
-               this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
+               this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
             }
          }, () => {
             this._nav.setMesage( 3 );
-            this.router.navigate( [ 'selection-process/candidates-list/'+ this.publication.idPublicacion ] );
+            this.router.navigate( [ 'selection-process/candidates-list/' + this.publication.idPublicacion ] );
          } );
       }
    }
@@ -234,6 +233,7 @@ export class StepProcessComponent implements OnInit {
    curriculum() {
       this.router.navigate( [ 'employees/curriculum/' + this.candidate.idTercero ] );
    }
+
    getIdDesitionByCode( code: string ): number {
       let state: ListaItem = this.desitionList.find( s => s.codigo === code );
       if ( state !== undefined ) {
