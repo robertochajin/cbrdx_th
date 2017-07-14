@@ -199,6 +199,8 @@ export class MedicalExamInformedConsentComponent implements OnInit {
       this.medicalExam.codigoVerificacion = (Math.floor( Math.random() * (9999 - 1000 + 1) ) + 1000).toString();
 
       this.medicalExamService.update( this.medicalExam ).subscribe( data => {
+         this.candidate.telefonoCelular = this.candidate.telefonoCelular.replace(/\(|\)|\-/g,"");
+         this.candidate.telefonoCelular = this.candidate.telefonoCelular.split(' ').join('');
          let obj = {
             destination: this.candidate.telefonoCelular,
             codigo: this.medicalExam.codigoVerificacion
