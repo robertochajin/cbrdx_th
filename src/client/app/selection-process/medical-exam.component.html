@@ -173,22 +173,12 @@
 					</form>
 				</div>
 				<div *ngIf="!masterAnswer.idCuestionario">
-					<form name="process" (ngSubmit)="fnex.valid && onSubmitNoExam()" #fnex="ngForm" novalidate id="processNoExamRN">
+					<form name="process" (ngSubmit)="fnex.valid && onSubmitNoExam()" #fnex="ngForm" novalidate id="processNoExamRNv">
 						<fieldset>
 							<div class="form-group col-md-12" *ngIf="!cerrado">
 								<label for="concepto">* {{'PROCESOSELECCION.LBL_INSTITUCION' | translate }}</label>
 								<p-dropdown id="concepto" name="concepto" #conceptomedico="ngModel" [options]="opcionesPregunta"
 								            [autoWidth]="false" [(ngModel)]="medicalExam.idPreguntaOpcion"></p-dropdown>
-								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!conceptomedico.valid">
-									<i class="fa fa-close"></i>
-									{{'PROCESOSELECCION.LBL_INSTITUCION' | translate }} {{'LBL_REQUERIDO' | translate }}
-								</div>
-							</div>
-							
-							<div class="form-group col-md-12" *ngIf="cerrado">
-								<label for="concepto">* {{'PROCESOSELECCION.LBL_INSTITUCION' | translate }}</label>
-								<p-dropdown id="conceptoc" name="conceptoc" #conceptomedicoc="ngModel" [options]="opcionesPregunta"
-								            [autoWidth]="false" [(ngModel)]="medicalExam.idPreguntaOpcion" disabled="true"></p-dropdown>
 								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!conceptomedico.valid">
 									<i class="fa fa-close"></i>
 									{{'PROCESOSELECCION.LBL_INSTITUCION' | translate }} {{'LBL_REQUERIDO' | translate }}
@@ -206,6 +196,15 @@
 				</div>
 			</fieldset>
 			<!-- fin del cuestionario-->
+			<form name="process" (ngSubmit)="fnex.valid && onSubmitNoExam()" #fnex="ngForm" novalidate id="processNoExamRN">
+				<fieldset>
+					<div class="form-group col-md-12" *ngIf="cerrado">
+						<label for="concepto">* {{'PROCESOSELECCION.LBL_INSTITUCION' | translate }}</label>
+						<p-dropdown id="conceptoc" name="conceptoc" #conceptomedicoc="ngModel" [options]="opcionesPregunta"
+						            [autoWidth]="false" [(ngModel)]="medicalExam.idPreguntaOpcion" disabled="true"></p-dropdown>
+					</div>
+				</fieldset>
+			</form>
 			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="process" *ngIf="respondido">
 				<fieldset *ngIf="!readonly">
 					<div class="row">

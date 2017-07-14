@@ -296,8 +296,15 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
       this.breadcrumbService.hideRouteRegex( '^/selection-process/publications-detail/[0-9]*' )
       this.breadcrumbService.addFriendlyNameForRoute( '/selection-process/candidates-list', 'Candidatos' );
       this.breadcrumbService.hideRouteRegex( '^/selection-process/candidates-list/[0-9]*' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/selection-process/process-step', 'Paso' );
+      this.breadcrumbService.hideRouteRegex( '^/selection-process/process-step/[0-9]*' );
 
       this.breadcrumbService.addFriendlyNameForRoute( '/step-list', 'Configuración de los pasos' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/step-list/add-step', 'Agregar paso' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/step-list/update-step', 'Editar paso' );
+      this.breadcrumbService.hideRouteRegex( '^/selection-process/update-step/[0-9]*' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/step-list/detail-step', 'Detalle del paso' );
+      this.breadcrumbService.hideRouteRegex( '^/selection-process/detail-step/[0-9]*' );
       this.breadcrumbService.addFriendlyNameForRoute( '/selection-process/add-step', 'Nuevo Paso' );
       this.breadcrumbService.addFriendlyNameForRoute( '/selection-process/update-step', 'Actualizar Paso' );
       this.breadcrumbService.hideRouteRegex( '^/selection-process/update-step/[0-9]*' );
