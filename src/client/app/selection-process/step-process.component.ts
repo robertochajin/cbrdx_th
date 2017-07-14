@@ -191,7 +191,7 @@ export class StepProcessComponent implements OnInit {
    }
 
    onSubmit() {
-      this.candidateProcess.fechaCita = this.fechaCita.toISOString().replace('Z','-0500');
+      this.candidateProcess.fechaCita = this.fechaCita.toISOString().replace( 'Z', '-0500' );
       if ( this.candidateProcess.idDesicionProcesoSeleccion === this.getIdDesitionByCode( 'NOAPL' ) ) {
          this.candidateProcess.indicadorNoAplica = true;
          this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'NA' );
