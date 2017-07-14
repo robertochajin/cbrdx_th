@@ -58,6 +58,7 @@ export class CandidateContractingComponent implements OnInit {
    idRol: number;
    immediately = false;
    private thirdPublication: TerceroPublicaciones = new TerceroPublicaciones();
+   private areSlotsFull = false;
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
@@ -131,6 +132,7 @@ export class CandidateContractingComponent implements OnInit {
                               this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
                               this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
                                  this.candidateProcess = cp;
+
                                  if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ||
                                       this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado ||
                                       reqState.idLista === this.publication.idEstado ) {
@@ -138,15 +140,22 @@ export class CandidateContractingComponent implements OnInit {
                                  } else {
                                     this.readonly = false;
                                  }
+
                               } );
 
                            } else {
-                              if ( reqState.idLista === this.publication.idEstado ) {
-                                 this.readonly = true;
-                              } else {
-                                 this.readonly = false;
-                                 this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
-                              }
+                              this.publicationsService.areRequirementSlotsFull( this.publication.idPublicacion ).subscribe(
+                                 full => {
+
+                                    if ( reqState.idLista === this.publication.idEstado || full ) {
+                                       this.readonly = true;
+                                       this.areSlotsFull = true;
+                                    } else {
+                                       this.readonly = false;
+                                       this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
+                                    }
+
+                                 } );
                            }
                         } );
                      } );
