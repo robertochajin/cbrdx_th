@@ -59,6 +59,11 @@ export class PersonnelRequirementComponent implements OnInit {
                }
                this.personnelRequirementServices.getAllEnabledByUser( this.tokendecoded.usuario.idUsuario ).subscribe(
                   personnelRequirements => {
+                     personnelRequirements.map(pr => {
+                        if(pr.idCargo){
+                           pr.nombreCargo = pr.cargo;
+                        }
+                     });
                      this.personnelRequirements = personnelRequirements;
                   }
                );
