@@ -91,12 +91,12 @@
 				<p-column field="" header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 					<template let-data="rowData" pTemplate="body" >
 						
-						<button type="button" icon="fa-eye" *ngIf="data.idAdjunto || !readonly"
+						<button type="button" icon="fa-eye" *ngIf="data.idAdjunto"
 						        class="ui-button btn" data-toggle="tooltip"
 						        title="{{'BTN_VISUALIZAR' | translate}}"
 						        pButton (click)="previewFile(data)"></button>
 						
-						<button type="button" icon="fa-cloud-download" *ngIf="data.idAdjunto || !readonly"
+						<button type="button" icon="fa-cloud-download" *ngIf="data.idAdjunto"
 						        class="ui-button-success" data-toggle="tooltip"
 						        title="{{'BTN_DOWNLOAD' | translate}}"
 						        pButton (click)="downloadFile(data)" ></button>
