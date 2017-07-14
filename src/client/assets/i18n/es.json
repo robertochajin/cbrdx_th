@@ -1007,6 +1007,7 @@
       "LBL_ESTADOPRUEBATECNICA": "Estado de la prueba",
       "LBL_OBSERVACIONPRUEBATECNICA": "Observación",
       "MSG_DEFINIRTODASLASPRUEBAS": "Es necesario que se definan todas las pruebas antes de poder definir si continua o no con el proceso",
+      "MSG_PLAZASLLENAS": "Para esta publicación ya se ha completado la cantidad de contratados solicitados en el requerimiento",
       "LBL_ADJUNTOPRUEBATECNICA": "Archivo adjunto",
       "":""
    },

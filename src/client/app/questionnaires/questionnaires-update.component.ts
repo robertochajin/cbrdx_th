@@ -182,6 +182,7 @@ export class QuestionnairesUpdateComponent implements OnInit {
          if ( this.pregunta.idCuestionarioPregunta === null || this.pregunta.idCuestionarioPregunta === undefined || this.pregunta.idCuestionarioPregunta === 0 ) {
             this.pregunta.idCuestionario = this.idCuestionario;
             this.pregunta.secuencia = this.preguntas.length + 1;
+            this.pregunta.codigoPregunta = this.pregunta.codigoPregunta.toUpperCase().replace( /[^A-Z0-9]/g, '' ).trim();
             this.questionnairesService.addQuestion( this.pregunta ).subscribe( res => {
                this.formQuestion = false;
                this.showAnswers = false;
@@ -290,6 +291,7 @@ export class QuestionnairesUpdateComponent implements OnInit {
          if ( this.respuesta.idPreguntaOpcion === null || this.respuesta.idPreguntaOpcion === undefined || this.respuesta.idPreguntaOpcion === 0 ) {
             this.respuesta.idCuestionarioPregunta = this.pregunta.idCuestionarioPregunta;
             this.respuesta.orden = this.respuestas.length + 1;
+            this.respuesta.codigoOpcion = this.respuesta.codigoOpcion.toUpperCase().replace( /[^A-Z0-9]/g, '' ).trim();
             this.questionnairesService.addAnswer( this.respuesta ).subscribe( res => {
                this.navService.setMesage( 1, this.msgs );
                this.formAnswer = false;
