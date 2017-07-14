@@ -6,7 +6,6 @@ import { NavService } from '../_services/_nav.service';
 import { SelectionStep } from '../_models/selectionStep';
 import { EmployeesService } from '../_services/employees.service';
 import { Employee } from '../_models/employees';
-import * as moment from 'moment/moment';
 import { VacanciesService } from '../_services/vacancies.service';
 import { PersonnelRequirement } from '../_models/personnelRequirement';
 import { SelectItem } from 'primeng/components/common/api';
@@ -15,7 +14,7 @@ import { CandidateProcessService } from '../_services/candidate-process.service'
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
 import { Location } from '@angular/common';
-
+import * as moment from 'moment/moment';
 import { JwtHelper } from 'angular2-jwt';
 import { RolesService } from '../_services/roles.service';
 import { window } from 'rxjs/operator/window';
@@ -39,7 +38,7 @@ export class StepProcessComponent implements OnInit {
    private showCalendar = false;
    private showAttachments = false;
    private showInterface = false;
-   private readonly = true;
+   private readonly = false;
    private readonlyEstado = false;
    private desitionList: ListaItem[] = [];
    private fechaCita: Date = new Date();
@@ -126,6 +125,8 @@ export class StepProcessComponent implements OnInit {
                               this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
                               this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
                                  this.candidateProcess = cp;
+                                 let fecha = new Date(this.candidateProcess.fechaCita);
+                                 this.candidateProcess.fechaCita = moment( fecha, "YYYY-MM-DD" ).toLocaleString();
                                  this.prepareForm((reqState.idLista === this.publication.idEstado));
                               } );
                            } else {
