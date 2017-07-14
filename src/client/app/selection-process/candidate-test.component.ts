@@ -49,7 +49,7 @@ export class CandidateTestComponent implements OnInit {
    private desitionList: ListaItem[] = [];
    public responsables: SelectItem[] = [];
    private showCalendar = false;
-   private readonly = false;
+   private readonly = true;
    svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
 
    svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
@@ -125,42 +125,54 @@ export class CandidateTestComponent implements OnInit {
                   } );
                   vacanciesService.getPublication( res.idPublicacion ).subscribe( pb => {
                      this.publication = pb;
+                     this.listaService.getMasterDetailsByCode('ListasEstadosRequerimientos', 'CRRD').subscribe( reqState => {
+                        this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
+                           this.stepStates = res;
+                           if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
+                              this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
+                              this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
+                                 this.candidateProcess = cp;
+                                 if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ||
+                                      this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado ||
+                                      reqState.idLista === this.publication.idEstado ) {
+                                    this.readonly = true;
+                                 } else {
+                                    this.readonly = false;
+                                 }
+                                 this.vacancyTestServices.getAllEnabledBySelectionProcess( this.candidateProcess.idProcesoSeleccion )
+                                 .subscribe( testList => {
+                                    this.vacancyTests = testList;
+                                    this.listTest();
+                                 } );
+                              } );
+                           } else {
+                              // en el caso de no tener un idProcesoSeleccion es necesario crear una primera instancia del mismo para poder
+                              // agregar las pruebas técnicas
+
+                              if(reqState.idLista === this.publication.idEstado) {
+                                 this.readonly = true;
+                              } else {
+                                 this.readonly = false;
+                                 this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
+                                 this.candidateProcessService.add( this.candidateProcess ).subscribe( process => {
+                                    this.candidateProcess = process;
+                                    this.vacancyTestServices.initializeTestList( this.candidateProcess.idProcesoSeleccion,
+                                                                                 this.candidateProcess.idTerceroPublicacion )
+                                    .subscribe( testList => {
+                                       this.vacancyTests = testList;
+                                       this.listTest();
+                                    } );
+                                 } );
+                              }
+                           }
+                           this.testStates.push( { label: 'Seleccione', value: null } );
+                           this.testStates.push( { label: 'Realiza prueba completa', value: true } );
+                           this.testStates.push( { label: 'No realiza prueba', value: false } );
+                        } );
+                     });
                   } );
                } );
 
-               this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
-                  this.stepStates = res;
-                  if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
-                     this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
-                     this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
-                        this.candidateProcess = cp;
-                        if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ||
-                             this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado ) {
-                           this.readonly = true;
-                        }
-                        this.vacancyTestServices.getAllEnabledBySelectionProcess( this.candidateProcess.idProcesoSeleccion )
-                        .subscribe( testList => {
-                           this.vacancyTests = testList;
-                           this.listTest();
-                        } );
-                     } );
-                  } else {
-                     // en el caso de no tener un idProcesoSeleccion es necesario crear una primera instancia del mismo para poder
-                     // agregar las pruebas técnicas
-                     this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
-                     this.candidateProcessService.add( this.candidateProcess ).subscribe( process => {
-                        this.candidateProcess = process;
-                        this.vacancyTestServices.initializeTestList( this.candidateProcess.idProcesoSeleccion,
-                                                                     this.candidateProcess.idTerceroPublicacion ).subscribe( testList => {
-                           this.vacancyTests = testList;
-                           this.listTest();
-                        } );
-                     } );
-                  }
-                  this.testStates.push( { label: 'Seleccione', value: null } );
-                  this.testStates.push( { label: 'Realiza prueba completa', value: true } );
-                  this.testStates.push( { label: 'No realiza prueba', value: false } );
-               } );
 
             } );
 
