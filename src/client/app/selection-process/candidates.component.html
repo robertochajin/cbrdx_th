@@ -14,12 +14,12 @@
 		</div>
 	</div>
 	<p-dataTable id="dtbCandidates" emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="candidates" [paginator]="true"
-					 [rows]="10" [responsive]="true" [globalFilter]="gb">
+	             [rows]="10" [responsive]="true" [globalFilter]="gb">
 		<p-column header="#" styleClass="datatable-col-action">
 			<template let-cs="rowData" pTemplate="body">
 				<a (click)="viewHistory( cs.idTercero )" class="badge"
-					data-toggle="tooltip"
-					title="Postulado a {{cs.cantProcesoSeleccion}} vacantes">
+				   data-toggle="tooltip"
+				   title="Postulado a {{cs.cantProcesoSeleccion}} vacantes">
 					{{cs.cantProcesoSeleccion}}
 				</a>
 			</template>

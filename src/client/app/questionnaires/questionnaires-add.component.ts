@@ -54,6 +54,7 @@ export class QuestionnairesAddComponent implements OnInit {
 
    onSubmit() {
       if ( !this.codeExists ) {
+         this.cuestionario.codigoCuestionario = this.cuestionario.codigoCuestionario.toUpperCase().replace( /[^A-Z0-9]/g, '' ).trim();
          this.questionnairesService.add( this.cuestionario ).subscribe( res => {
             this.navService.setMesage( 1, this.msgs );
             this.router.navigate( [ 'questionnaries/update/' + res.idCuestionario ] );
