@@ -416,9 +416,9 @@ const routes = [
    { path: 'selection-process/active-publications', component: SelectionProcessVacanciesComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/publications-detail/:idPublication', component: VacancyDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'step-list', component: StepListComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/add-step', component: StepEditComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/update-step/:idStep', component: StepEditComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
+   { path: 'step-list/add-step', component: StepEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'step-list/update-step/:idStep', component: StepEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'step-list/detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
    {
       path: 'selection-process/process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso',
       component: StepProcessComponent, canActivate: [ AuthGuard ]
@@ -465,9 +465,9 @@ const routes = [
    //  Cuestionarios
    { path: 'solutions/:id', component: SolutionsQuestionnairesComponent },
    { path: 'solutions/detail/:id', component: SolutionsQuestionnairesDetailComponent },
-   { path: 'questionnaries', component: QuestionnairesComponent },
-   { path: 'questionnaries/add', component: QuestionnairesAddComponent },
-   { path: 'questionnaries/update/:id', component: QuestionnairesUpdateComponent },
+   { path: 'questionnaries', component: QuestionnairesComponent, canActivate: [ AuthGuard ] },
+   { path: 'questionnaries/add', component: QuestionnairesAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'questionnaries/update/:id', component: QuestionnairesUpdateComponent, canActivate: [ AuthGuard ] },
    ];
 
 @NgModule( {

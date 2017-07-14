@@ -83,6 +83,7 @@
   "BTN_DOWNLOAD": "Descargar",
   "BTN_UPLOAD": "Subir archivo",
    "BTN_LLAMAR": "Llamar",
+   "BTN_FINALIZARPROCESO": "Finalizar el proceso",
   "FIN_COMUNES":"====================================================================",
 
   "UBICACION":{
@@ -162,6 +163,7 @@
       "LBL_FECHALIMITE":"Fecha límite",
       "BTN_APLICAR":"Aplicar",
       "BTN_VERMAS":"Ver más",
+      "BTN_VERTODOS": "Ver Todos",
       "LBL_CONFIGURARWIDGETS":"Configurar Widgets"
    },
 
@@ -336,6 +338,7 @@
      "LBL_DOCUMENTO": "Documento",
      "LBL_DOCUMENTOS_DESCARGAR": "Documentos a descargar",
      "LBL_DOCUMENTOS_ADJUNTAR": "Documentos a adjuntar",
+     "LBL_FECHAAPLICACION": "Fecha aplicación",
      "LBL_EMPLOYEESADJUNTOS": "Adjuntos"
   },
 

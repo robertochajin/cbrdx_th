@@ -5,7 +5,7 @@
 			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listEmployeesRecruitment"
 			             [rows]="10" [responsive]="true">
 				<p-column field="cargo" header="{{ 'EMPLOYEES.LBL_CARGO' | translate }}" [sortable]="true"></p-column>
-				<p-column field="fechaInicio" header="{{ 'LBL_FECHAINICIO' | translate }}" [sortable]="true"></p-column>
+				<p-column field="fechaInicio" header="{{ 'EMPLOYEES.LBL_FECHAAPLICACION' | translate }}" [sortable]="true"></p-column>
 				<p-column styleClass="datatable-col-action">
 					<template let-PA="rowData" pTemplate="body">
 						<button type="button" icon="fa-eye" class="ui-button-info" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"

@@ -134,7 +134,7 @@ export class CandidateTestComponent implements OnInit {
                      this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
                      this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
                         this.candidateProcess = cp;
-                        if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado  ||
+                        if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ||
                              this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado ) {
                            this.readonly = true;
                         }
@@ -365,11 +365,13 @@ export class CandidateTestComponent implements OnInit {
 
    private areAllTestDefined(): boolean {
       let allDefined = true;
-      this.vacancyTests.map( t => {
-         if ( t.indicadorRealiza === null ) {
-            allDefined = false;
-         }
-      } );
+      if ( this.indApproval != null ) {
+         this.vacancyTests.map( t => {
+            if ( t.indicadorRealiza === null ) {
+               allDefined = false;
+            }
+         } );
+      }
       return allDefined;
    }
 }
