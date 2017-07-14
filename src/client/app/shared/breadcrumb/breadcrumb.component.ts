@@ -269,11 +269,46 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
 
       this.breadcrumbService.addFriendlyNameForRoute( '/document-management', 'Administrador de documentos' );
       this.breadcrumbService.hideRouteRegex( '^/document-management/add/[0-9]*' );
-      this.breadcrumbService.addFriendlyNameForRoute( '/document-management/add', 'Agregar regiistro' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/document-management/add', 'Agregar registro' );
       this.breadcrumbService.hideRouteRegex( '^/document-management/update/[0-9]*' );
-      this.breadcrumbService.addFriendlyNameForRoute( '/document-management/update', 'Actualizar regiistro' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/document-management/update', 'Actualizar registro' );
       this.breadcrumbService.hideRouteRegex( '^/document-management/detail/[0-9]*' );
       this.breadcrumbService.addFriendlyNameForRoute( '/document-management/detail', 'Detalle regiistro' );
+
+      this.breadcrumbService.addFriendlyNameForRoute( '/questionnaries', 'Cuestionarios' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/questionnaries/add', 'Nuevo' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/questionnaries/update', 'Actualizar' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/questionnaries/detail', 'Detalle' );
+      this.breadcrumbService.hideRouteRegex( '^/questionnaries/update/[0-9]*' );
+      this.breadcrumbService.hideRouteRegex( '^/questionnaries/detail/[0-9]*' );
+
+      this.breadcrumbService.addFriendlyNameForRoute( '/medical-institutions', 'Instituciones Medicas' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/medical-institutions/add', 'Nuevo' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/medical-institutions/update', 'Actualizar' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/medical-institutions/detail', 'Detalle' );
+      this.breadcrumbService.hideRouteRegex( '^/medical-institutions/update/[0-9]*' );
+      this.breadcrumbService.hideRouteRegex( '^/medical-institutions/detail/[0-9]*' );
+
+      this.breadcrumbService.addFriendlyNameForRoute( '/selection-process', 'Proceso de Selección' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/selection-process/add-publication', 'Publicación' );
+      this.breadcrumbService.hideRouteRegex( '^/selection-process/add-publication/[0-9]*' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/selection-process/publications-detail', 'Detalle' );
+      this.breadcrumbService.hideRouteRegex( '^/selection-process/publications-detail/[0-9]*' )
+      this.breadcrumbService.addFriendlyNameForRoute( '/selection-process/candidates-list', 'Candidatos' );
+      this.breadcrumbService.hideRouteRegex( '^/selection-process/candidates-list/[0-9]*' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/selection-process/process-step', 'Paso' );
+      this.breadcrumbService.hideRouteRegex( '^/selection-process/process-step/[0-9]*' );
+
+      this.breadcrumbService.addFriendlyNameForRoute( '/step-list', 'Configuración de los pasos' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/step-list/add-step', 'Agregar paso' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/step-list/update-step', 'Editar paso' );
+      this.breadcrumbService.hideRouteRegex( '^/selection-process/update-step/[0-9]*' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/step-list/detail-step', 'Detalle del paso' );
+      this.breadcrumbService.hideRouteRegex( '^/selection-process/detail-step/[0-9]*' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/selection-process/add-step', 'Nuevo Paso' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/selection-process/update-step', 'Actualizar Paso' );
+      this.breadcrumbService.hideRouteRegex( '^/selection-process/update-step/[0-9]*' );
+      this.breadcrumbService.hideRouteRegex( '^/selection-process/add-step/[0-9]*' );
 
    }
 

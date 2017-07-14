@@ -13,6 +13,7 @@ import { LowerCaseTextDirective } from '../_helpers/LowerCaseText';
 import { UperCaseTextDirective } from '../_helpers/UperCaseText';
 import { TitleCaseTextDirective } from '../_helpers/TitleCaseText';
 import { PermissionDirective } from '../_helpers/permission.directive';
+import { CodeSpecialCaseTextDirective } from '../_helpers/CodeSpecialCaseText';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -21,11 +22,11 @@ import { PermissionDirective } from '../_helpers/permission.directive';
 @NgModule( {
               imports: [ CommonModule, RouterModule, TranslateModule ],
               declarations: [ ToolbarComponent, NavbarComponent, LowerCaseTextDirective, UperCaseTextDirective, TitleCaseTextDirective,
-                 PermissionDirective
+                 PermissionDirective, CodeSpecialCaseTextDirective
               ],
               exports: [ ToolbarComponent, NavbarComponent,
                  CommonModule, FormsModule, RouterModule, TranslateModule, LowerCaseTextDirective, UperCaseTextDirective,
-                 TitleCaseTextDirective, PermissionDirective
+                 TitleCaseTextDirective, PermissionDirective, CodeSpecialCaseTextDirective
               ],
               providers: [ AuthenticationService ]
            } )
