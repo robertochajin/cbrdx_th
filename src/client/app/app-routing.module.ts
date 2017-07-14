@@ -413,7 +413,6 @@ const routes = [
    // Preceso de selección
    { path: 'selection-process', component: SelectionProcessComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/add-publication/:idReq', component: SelectionProcessAddComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/active-publications', component: SelectionProcessVacanciesComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/publications-detail/:idPublication', component: VacancyDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'step-list', component: StepListComponent, canActivate: [ AuthGuard ] },
    { path: 'step-list/add-step', component: StepEditComponent, canActivate: [ AuthGuard ] },
@@ -458,9 +457,12 @@ const routes = [
    { path: 'answer-exams/exam/:idExamen/terceroPublicacion/:idTerceroPublication', component: AnswerExamsComponent },
 
    // Aplicar a vacantes
-   { path: 'apply-vacancy/publications-detail/:idPublication', component: VacancyApplyComponent },
-   { path: 'apply-vacancy/employee-profile/:idTercerosPublicaciones', component: EmployeesDetailPerfilComponent },
-   { path: 'apply-vacancy/questionnaires/:idTercerosPublicaciones', component: ApplyQuestionnairesComponent },
+   { path: 'apply-vacancy/publications-detail/:idPublication', component: VacancyApplyComponent, canActivate: [ AuthGuard ] },
+   {
+      path: 'apply-vacancy/employee-profile/:idTercerosPublicaciones', component: EmployeesDetailPerfilComponent, canActivate: [ AuthGuard ]
+   },
+   { path: 'apply-vacancy/questionnaires/:idTercerosPublicaciones', component: ApplyQuestionnairesComponent, canActivate: [ AuthGuard ] },
+   { path: 'apply-vacancy/active-publications', component: SelectionProcessVacanciesComponent, canActivate: [ AuthGuard ] },
 
    //  Cuestionarios
    { path: 'solutions/:id', component: SolutionsQuestionnairesComponent },
@@ -468,7 +470,8 @@ const routes = [
    { path: 'questionnaries', component: QuestionnairesComponent, canActivate: [ AuthGuard ] },
    { path: 'questionnaries/add', component: QuestionnairesAddComponent, canActivate: [ AuthGuard ] },
    { path: 'questionnaries/update/:id', component: QuestionnairesUpdateComponent, canActivate: [ AuthGuard ] },
-   ];
+
+];
 
 @NgModule( {
               imports: [
