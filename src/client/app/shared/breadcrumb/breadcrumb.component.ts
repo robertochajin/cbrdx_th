@@ -303,6 +303,13 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
       this.breadcrumbService.hideRouteRegex( '^/selection-process/update-step/[0-9]*' );
       this.breadcrumbService.hideRouteRegex( '^/selection-process/add-step/[0-9]*' );
 
-   }
+      this.breadcrumbService.hideRoute( '/apply-vacancy' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/apply-vacancy/publications-detail', 'Detalles vacante' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/apply-vacancy/employee-profile', 'Actualizar Perfil' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/apply-vacancy/questionnaires', 'Cuestionario' );
+      this.breadcrumbService.hideRouteRegex( '^/apply-vacancy/publications-detail/[0-9]*' );
+      this.breadcrumbService.hideRouteRegex( '^/apply-vacancy/employee-profile/[0-9]*' );
+      this.breadcrumbService.hideRouteRegex( '^/apply-vacancy/questionnaires/[0-9]*' );
 
+   }
 }
