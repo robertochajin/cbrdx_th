@@ -22,6 +22,7 @@ import { PositionCompetenciesModule } from '../position-competencies/position-co
 import { CompanyAssetsModule } from '../position-company-assets/company-assets.module';
 import { PersonalityModule } from '../position-personality/personality.module';
 import { PositionsDetailComponent } from './positions-detail.component';
+import {PositionsDetailPdfComponent} from './positions-detail-pdf.component';
 
 
 
@@ -38,7 +39,6 @@ import { PositionsDetailComponent } from './positions-detail.component';
                  PositionCompetenciesModule,
                  CompanyAssetsModule,
                  PersonalityModule
-
               ],
 
               declarations: [
@@ -47,7 +47,8 @@ import { PositionsDetailComponent } from './positions-detail.component';
                  PositionsAddComponent,
                  PositionsObservationsListComponent,
                  PositionAuthoritiesComponent,
-                 PositionActivitiesComponent
+                 PositionActivitiesComponent,
+                 PositionsDetailPdfComponent
               ],
               bootstrap: [ PositionsComponent ],
               providers: [ PositionsService, ListPositionsService, PoliticalDivisionService, NavService ],

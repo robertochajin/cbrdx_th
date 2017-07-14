@@ -17,8 +17,6 @@
 								<button icon="fa-address-book-o" label="{{'PROCESOSELECCION.LBL_VERHOJADEVIDA' | translate }}" type="button"
 								        (click)="curriculum()"
 								        pButton></button>
-								<button icon="fa-dot-circle-o" label="{{'PROCESOSELECCION.LBL_CUESTIONARIOS' | translate }}" type="button"
-								        disabled pButton></button>
 							</div>
 						
 						</div>
@@ -30,7 +28,7 @@
 </div>
 <div class="row">
 	<div class="col-md-10 col-md-offset-1">
-		<p-panel header="{{'PROCESOSELECCION.LBL_PRUEBASTECNICAS' | translate}}">
+		<p-panel header="{{'PROCESOSELECCION.LBL_DEFINICIONCONTRATACION' | translate}}">
 			<div class="row">
 				<div class="col-md-12">
 					<p>{{step.descripcion}}</p>
@@ -56,56 +54,57 @@
 					</div>
 				</fieldset>
 			</form>
-						
-			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="process" *ngIf="!definingTest">
+			
+			<form name="process"
+			      (ngSubmit)="f.valid &&
+			      this.thirdPublication.indicadorContratacion !== undefined &&
+			      this.thirdPublication.indicadorContratacion !== null && onSubmit()" #f="ngForm"
+			      novalidate id="process" *ngIf="!definingTest">
 				<fieldset *ngIf="!readonly">
-					<div class="row">
-						<div class="form-group col-md-6">
-							<label for="validStep">* {{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}</label>
-							<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
-							            [autoWidth]="false" [(ngModel)]="indApproval" required></p-dropdown>
-						</div>
-						<div class="form-group col-md-6">
-						</div>
-					</div>
 					
-					
-					<div class="row">
-						<div class="form-group col-md-12">
-							<label for="contract" class="control-label col-sm-3">{{ 'PROCESOSELECCION.LBL_CONTRATAR' | translate }}</label>
-							<p-checkbox [(ngModel)]="thirdPublication.indicadorContratacion" binary="true" id="contract" name="contract"
-							            #ngContract="ngModel"></p-checkbox>
+					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+						<div class="form-group">
+							<div class="row">
+								<div class="form-group col-md-4">
+									<label class="control-label">{{ 'PROCESOSELECCION.LBL_CONTRATAR' | translate }}</label>
+									<p-radioButton name="groupname" [value]="true" label="Si"
+									               [(ngModel)]="thirdPublication.indicadorContratacion"></p-radioButton>
+									<p-radioButton name="groupname" [value]="false" label="No"
+									               [(ngModel)]="thirdPublication.indicadorContratacion"></p-radioButton>
+								</div>
+								<div class="form-group col-md-4" *ngIf="thirdPublication.indicadorContratacion">
+									<label for="chkImmediately" class="control-label">{{ 'PROCESOSELECCION.LBL_CONTRATARINMEDIATAMENTE' |
+										translate }}</label>
+									<p-checkbox [(ngModel)]="immediately" binary="true" id="chkImmediately" name="chkImmediately"
+									            #ngImmediately="ngModel" (onChange)="setImmediateDate()"></p-checkbox>
+								</div>
+								<div class="form-group col-md-4"
+								     *ngIf="thirdPublication.indicadorContratacion && !immediately">
+									<label for="contractDate">{{'PROCESOSELECCION.LBL_FECHACONTRATACION' | translate}}</label>
+									<p-calendar id="contractDate" name="contractDate" [showIcon]="true"
+									            [locale]="es" readonlyInput="true" [minDate]="minDate"
+									            dataType="date" #ngContract="ngModel" [required]="immediately === false"
+									            [(ngModel)]="thirdPublication.fechaContratacion" dateFormat="yy'-'mm'-'dd"></p-calendar>
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngContract.valid">
+										{{'PROCESOSELECCION.LBL_FECHACONTRATACION' | translate}} {{'LBL_REQUERIDO' | translate}}
+									</div>
+								</div>
+							</div>
 							
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="form-group col-md-6" *ngIf="ngContract.value">
-							<label for="chkImmediately" class="control-label col-sm-3">{{ 'PROCESOSELECCION.LBL_CONTRATARINMEDIATAMENTE' |
-								translate }}</label>
-							<p-checkbox [(ngModel)]="immediately" binary="true" id="chkImmediately" name="chkImmediately"
-							            #ngImmediately="ngModel" onchange="setImmediateDate()"></p-checkbox>
-						</div>
-						<div class="form-group col-md-6" *ngIf="!ngImmediately.value">
-							<label for="contractDate">{{'PROCESOSELECCION.LBL_FECHACONTRATACION' | translate}}</label>
-							<p-calendar id="contractDate" name="contractDate" [showIcon]="true"
-							            [locale]="es" readonlyInput="true" [minDate]="minDate"
-							            dataType="date" #ngContract="ngModel" [required]="!ngImmediately.value"
-							            [(ngModel)]="thirdPublication.fechaContratacion" dateFormat="yy'-'mm'-'dd"></p-calendar>
-							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngContract.valid">
-								{{'PROCESOSELECCION.LBL_FECHACONTRATACION' | translate}} {{'LBL_REQUERIDO' | translate}}
+							
+							<div class="row">
+								<div class="form-group col-md-12">
+									<label for="observacion">* {{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}</label>
+									<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #observa="ngModel"
+									          [(ngModel)]="candidateProcess.observacion" required="true" class="form-control"
+									          maxlength="500"></textarea>
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !observa.valid">
+										<i class="fa fa-close"></i>
+										{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }} {{'LBL_REQUERIDO' | translate }}
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
-					
-					
-					<div class="row">
-						<div class="form-group col-md-12">
-							<div class="ui-message ui-messages-error ui-corner-all"
-							     *ngIf="f.submitted && !allTestDefined">
-								<i class="fa fa-close"></i>
-								{{ 'PROCESOSELECCION.MSG_DEFINIRTODASLASPRUEBAS' | translate }}
-							</div>
+							
 						</div>
 					</div>
 					
@@ -121,8 +120,24 @@
 				<fieldset *ngIf="readonly">
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label for="validStep">{{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
+							<label>{{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
 							<p>{{candidateProcess.estadoDiligenciado}}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label class="control-label">{{ 'PROCESOSELECCION.LBL_CONTRATAR' | translate }}:</label>
+							<label >{{thirdPublication.indicadorContratacion ? 'Si' : 'No'}}</label>
+						</div>
+						<div class="form-group col-md-6">
+							<label class="control-label">{{ 'PROCESOSELECCION.LBL_FECHACONTRATACION' | translate }}:</label>
+							<label >{{thirdPublication.fechaContratacion}}</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="observacion">{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}:</label>
+							<p>{{candidateProcess.observacion}}</p>
 						</div>
 					</div>
 					<div class="row form-footer-buttons">
