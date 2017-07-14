@@ -376,7 +376,7 @@ export class MedicalExamComponent implements OnInit {
          res => {
             this.questions = res;
             this.sortQuestions();
-            this.question = this.questions[ 2 ];
+            this.question = this.questions[ 0 ];
             this.getAnswers();
          } );
    }
