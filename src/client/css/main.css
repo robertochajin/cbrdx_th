@@ -749,6 +749,10 @@ body.skin-blue .aplicavacantedash {
    background:#3c8dbc;
 }
 
+/* -- Badge Blue */
+body.sky-blue .badge{
+   background-color: #3c8dbc;
+}
 
 /* -- Link Green -- */
 body.sky-blue a{
@@ -841,6 +845,10 @@ body.skin-green .hv-ribon-rigth:after{
 body.skin-green .aplicavacantedash {
    background:#00A65A;
 }
+/* -- Badge green */
+body.sky-blue .badge{
+   background-color: #00A65A;
+}
 
 /* -- Link Purple -- */
 body.sky-blue a{
@@ -902,7 +910,7 @@ body.skin-purple .ribbon{
 body.skin-purple .ribbon:after{
    border-color:transparent #46437d;
 }
-/* -- Curriculum Blue -- */
+/* -- Curriculum Purple -- */
 body.skin-purple .perfil{
    border-color: #605ca8;
 }
@@ -932,6 +940,10 @@ body.skin-purple .hv-ribon-rigth:after{
 /* -- Aplicar Vacante Dashboard Purple -- */
 body.skin-purple .aplicavacantedash {
    background:#605ca8;
+}
+/* -- Badge Purple */
+body.sky-blue .badge{
+   background-color: #605ca8;
 }
 
 
