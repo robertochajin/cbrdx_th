@@ -94,7 +94,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row" *ngIf="!institucionMedica">
+						<div class="row" *ngIf="!institucionMedica && !readonly">
 							<div class="form-group col-md-3"></div>
 							<div class="form-group col-md-6">
 								<p-checkbox binary="true" id="indicadorInstitucion" name="indicadorInstitucion"
@@ -106,7 +106,6 @@
 									{{'LBL_REQUERIDO' | translate }}
 								</div>
 							</div>
-						</div>
 						
 						<div class="row form-footer-buttons">
 							<div class="form-group col-md-12">
@@ -114,6 +113,7 @@
 								<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
 								        pButton></button>
 							</div>
+						</div>
 						</div>
 					</fieldset>
 				</form>
@@ -303,6 +303,28 @@
 				</fieldset>
 			</form>
 			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="processC" *ngIf="cerrado && readonly">
+				<fieldset>
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="validStep">{{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
+							<p>{{candidateProcess.estadoDiligenciado}}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="observacion">{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}:</label>
+							<p>{{candidateProcess.observacion}}</p>
+						</div>
+					</div>
+					<div class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+							        pButton (click)="goBack(false)"></button>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="processRC" *ngIf="readonly">
 				<fieldset>
 					<div class="row">
 						<div class="form-group col-md-12">
