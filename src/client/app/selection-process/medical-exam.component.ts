@@ -195,11 +195,13 @@ export class MedicalExamComponent implements OnInit {
                                  this.readonly = true;
                               } else {
                                  this.readonly = false;
-                                 this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'PROG' );
-                                 this.candidateProcessService.add( this.candidateProcess ).subscribe( process => {
-                                    this.candidateProcess = process;
-                                    this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
-                                 } );
+                                 if ( !this.noaplicaexamen ) {
+                                    this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'PROG' );
+                                    this.candidateProcessService.add( this.candidateProcess ).subscribe( process => {
+                                       this.candidateProcess = process;
+                                       this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
+                                    } );
+                                 }
                               }
                            }
                         } );
@@ -425,5 +427,33 @@ export class MedicalExamComponent implements OnInit {
          else
             return 1;
       } )
+   }
+
+   prepareForm( isRequirementClosed: boolean ) {
+
+      if ( isRequirementClosed ) {
+         this.readonly = true;
+      } else {
+         //Se verifica el estado del paso y la la necesidad de mostrar o nó la asignación de fecha
+         if ( this.getIdStateByCode( 'VAC' ) === this.candidateProcess.idEstadoDiligenciado ) {
+            this.showCalendar = this.step.indicadorCalendario;
+
+         } else if ( this.getIdStateByCode( 'PROG' ) === this.candidateProcess.idEstadoDiligenciado ) {
+            this.showCalendar = this.step.indicadorCalendario;
+            // verificar si el usuario en sesion es responsable para mostrar solo lectura de datos
+            if ( this.usuarioLogueado.usuario.idUsuario === this.candidateProcess.idResponsable ) {
+               this.readonly = true;
+            } else {
+               this.readonly = false;
+            }
+         } else if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ) {
+            this.readonly = true;
+         } else if ( this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado ) {
+            this.readonly = true;
+         } else if ( this.getIdStateByCode( 'NA' ) === this.candidateProcess.idEstadoDiligenciado ) {
+            this.showCalendar = this.step.indicadorCalendario;
+         }
+      }
+
    }
 }

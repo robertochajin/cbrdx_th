@@ -13,7 +13,7 @@ export class CandidateProcess {
    public idTerceroPublicacion: number = 0;
    public indicadorContProceso: boolean;
    public observacion: string;
-   public fechaCita: Date;
+   public fechaCita: string;
    public auditoriaUsuario: number;
    public auditoriaFecha: Date;
    public indicadorNoAplica: boolean;
