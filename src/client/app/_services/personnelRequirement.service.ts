@@ -31,6 +31,10 @@ export class PersonnelRequirementServices {
       return this.authHttp.get( this.masterService + id )
       .map( ( res: Response ) => res.json() as PersonnelRequirement );
    }
+   closeRequirement( id: number ) {
+      return this.authHttp.get( this.masterService + 'cerrarRequerimiento/'+ id )
+      .map( ( res: Response ) => res.json() as PersonnelRequirement );
+   }
    getByIdRequirement( id: number ) {
       return this.authHttp.get( this.masterService + id )
       .map( ( res: Response ) => res.json() as VPersonnelRequirement );

@@ -83,6 +83,7 @@
   "BTN_DOWNLOAD": "Descargar",
   "BTN_UPLOAD": "Subir archivo",
    "BTN_LLAMAR": "Llamar",
+   "BTN_FINALIZARPROCESO": "Finalizar el proceso",
   "FIN_COMUNES":"====================================================================",
 
   "UBICACION":{
