@@ -52,6 +52,11 @@ export class MasterAnswersService {
       .map( ( res: Response ) => res.json() as Answers[] );
    }
 
+   getSolutionsByMaster( id: number ) {
+      return this.authHttp.get( this.masterService + 'respuestas/maestroRespuesta/' + id )
+      .map( ( res: Response ) => res.json() as Answers[] );
+   }
+
    getSolution( id: number ) {
       return this.authHttp.get( this.masterService + 'respuestas/' + id )
       .map( ( res: Response ) => res.json() as Answers );

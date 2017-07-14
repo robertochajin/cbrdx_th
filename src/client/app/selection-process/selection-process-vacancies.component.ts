@@ -25,7 +25,7 @@ export class SelectionProcessVacanciesComponent implements OnInit {
 
 
    aplicar(publication: PersonnelRequirement){
-      this.router.navigate( [ 'selection-process/publications-detail/' + publication.idPublicacion ] );
+      this.router.navigate( [ 'apply-vacancy/publications-detail/' + publication.idPublicacion ] );
    }
 
 

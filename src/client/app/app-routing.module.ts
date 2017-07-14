@@ -463,9 +463,9 @@ const routes = [
    //  Cuestionarios
    { path: 'solutions/:id', component: SolutionsQuestionnairesComponent },
    { path: 'solutions/detail/:id', component: SolutionsQuestionnairesDetailComponent },
-   { path: 'questionnaries', component: QuestionnairesComponent },
-   { path: 'questionnaries/add', component: QuestionnairesAddComponent },
-   { path: 'questionnaries/update/:id', component: QuestionnairesUpdateComponent },
+   { path: 'questionnaries', component: QuestionnairesComponent, canActivate: [ AuthGuard ] },
+   { path: 'questionnaries/add', component: QuestionnairesAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'questionnaries/update/:id', component: QuestionnairesUpdateComponent, canActivate: [ AuthGuard ] },
    ];
 
 @NgModule( {
