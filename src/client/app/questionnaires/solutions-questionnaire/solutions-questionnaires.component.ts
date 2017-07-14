@@ -84,8 +84,21 @@ export class SolutionsQuestionnairesComponent implements OnInit {
          this.finish.emit( this.maestroRespuestas );
       } else {
          this.pregunta = this.preguntas[ this.indice ];
-         this.getAnswers();
-         this.indice += 1;
+         if ( this.pregunta.indicadorDepende ) {
+            this.masterAnswersService.getSolutionDepends( this.maestroRespuestas.idMaestroRespuesta, this.pregunta.idDependePregunta,
+                                                          this.pregunta.idDependeRespuesta ).subscribe( res => {
+               if ( res.length > 0 ) {
+                  this.indice += 1;
+                  this.nextQuestion();
+               } else {
+                  this.getAnswers();
+               }
+            }, error => {
+            } );
+         } else {
+            this.getAnswers();
+            this.indice += 1;
+         }
       }
 
    }

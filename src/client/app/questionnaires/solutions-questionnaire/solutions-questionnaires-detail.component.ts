@@ -48,7 +48,7 @@ export class SolutionsQuestionnairesDetailComponent implements OnInit {
    }
 
    getAnswers() {
-      this.masterAnswersService.getSolutions( this.idMaestroRespuestas ).subscribe(
+      this.masterAnswersService.getSolutionsByMaster( this.idMaestroRespuestas ).subscribe(
          res => {
             this.respuestas = res;
             this.respuestas.map( s => {
