@@ -44,7 +44,7 @@ import { RiskService } from '../_services/positios-risks.service';
             } )
 export class PositionsDetailComponent implements OnInit {
    @Input()
-      idCargo:number = 0;
+   idCargo: number = 0;
    position: Positions = new Positions();
    observations: PositionsObservations[];
    allPosition: Positions[] = [];
@@ -108,9 +108,9 @@ export class PositionsDetailComponent implements OnInit {
    ngOnInit() {
       this.route.params.subscribe( ( params: Params ) => {
          let tempId = +params[ 'id' ];
-         if( tempId ){
+         if ( tempId ) {
             this.position.idCargo = tempId;
-         }else{
+         } else {
             this.position.idCargo = this.idCargo;
          }
          this.positionsService.get( this.position.idCargo ).subscribe( position => {
@@ -298,50 +298,50 @@ export class PositionsDetailComponent implements OnInit {
                } );
             } );
          } );
-         this.riskService.getExamByIdCargo( this.position.idCargo ).subscribe(exam => {
-               this.ListPositionExam = exam;
-               this.PositionExam = exam;
-               for ( let le of  this.listExam ) {
-                  let bandera = false;
-                  for ( let pe of this.ListPositionExam ) {
-                     if ( Number( le.label ) === pe.idExamen ) {
-                        bandera = true;
-                        break;
-                     }
-                  }
-                  if ( !bandera ) {
-                     let ex = new Exam();
-                     ex.idExamen = Number( le.value );
-                     ex.examen = le.label;
-                     ex.indicadorIngreso = false;
-                     ex.indicadorPeriodicidad = false;
-                     ex.indicadorRetiro = false;
-                     this.PositionExam.push( ex );
+         this.riskService.getExamByIdCargo( this.position.idCargo ).subscribe( exam => {
+            this.ListPositionExam = exam;
+            this.PositionExam = exam;
+            for ( let le of  this.listExam ) {
+               let bandera = false;
+               for ( let pe of this.ListPositionExam ) {
+                  if ( Number( le.label ) === pe.idExamen ) {
+                     bandera = true;
+                     break;
                   }
                }
-            });
+               if ( !bandera ) {
+                  let ex = new Exam();
+                  ex.idExamen = Number( le.value );
+                  ex.examen = le.label;
+                  ex.indicadorIngreso = false;
+                  ex.indicadorPeriodicidad = false;
+                  ex.indicadorRetiro = false;
+                  this.PositionExam.push( ex );
+               }
+            }
+         } );
          this.riskService.getRiskByIdCargo( this.position.idCargo ).subscribe( risk => {
-               for ( let rk of risk ) {
-                  let r = new Risk();
-                  r.idCargo = rk.idCargo;
-                  r.idCargoRiesgo = rk.idCargoRiesgo;
-                  r.idRiesgo = rk.idRiesgo;
-                  r.auditoriaFecha = rk.auditoriaFecha;
-                  r.auditoriaFecha = rk.auditoriaFecha;
-                  r.indicadorHabilitado = rk.indicadorHabilitado;
+            for ( let rk of risk ) {
+               let r = new Risk();
+               r.idCargo = rk.idCargo;
+               r.idCargoRiesgo = rk.idCargoRiesgo;
+               r.idRiesgo = rk.idRiesgo;
+               r.auditoriaFecha = rk.auditoriaFecha;
+               r.auditoriaFecha = rk.auditoriaFecha;
+               r.indicadorHabilitado = rk.indicadorHabilitado;
 
-                  this.riskService.getRiskById( rk.idRiesgo ).subscribe( rest => {
-                     r.riesgo = rest.riesgo;
-                     this.riskService.getTypeRiskById( rest.idTipoRiesgo ).subscribe( restT => {
-                        r.tipo = restT.riesgoTipo;
-                     } );
-                     this.riskService.getSubypeRiskById( rest.idSubTipoRiesgo ).subscribe( restS => {
-                        r.subtipo = restS.riesgoSubTipo;
-                     } );
+               this.riskService.getRiskById( rk.idRiesgo ).subscribe( rest => {
+                  r.riesgo = rest.riesgo;
+                  this.riskService.getTypeRiskById( rest.idTipoRiesgo ).subscribe( restT => {
+                     r.tipo = restT.riesgoTipo;
                   } );
-                  this.listRisks.push( r );
-               }
-            });
+                  this.riskService.getSubypeRiskById( rest.idSubTipoRiesgo ).subscribe( restS => {
+                     r.subtipo = restS.riesgoSubTipo;
+                  } );
+               } );
+               this.listRisks.push( r );
+            }
+         } );
          this.positionsService.getListPositions().subscribe( res => {
             this.allPosition = res;
 
@@ -363,11 +363,12 @@ export class PositionsDetailComponent implements OnInit {
                }
 
             }
-         });
+         } );
 
       } );
 
    }
+
    buildChild( dadInfo: Positions ) {
       let treeChild: TreeNode[] = [];
 
@@ -389,6 +390,7 @@ export class PositionsDetailComponent implements OnInit {
       }
       return treeChild;
    }
+
    nombresEstados() {
       for ( let i = 0; i < this.observations.length; i++ ) {
          if ( this.observations[ i ].idEstadoCargo !== null ) {
@@ -399,7 +401,8 @@ export class PositionsDetailComponent implements OnInit {
          }
       }
    }
-   goBack(){
+
+   goBack() {
       this.dismiss.emit( 1 );
    }
 }

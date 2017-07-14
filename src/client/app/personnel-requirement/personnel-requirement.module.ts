@@ -28,7 +28,7 @@ import { PositionsDetailComponent } from '../positions/positions-detail.componen
               ],
 
               declarations: [ PersonnelRequirementComponent,PersonnelRequirementDetailComponent,
-              PersonnelRequirementEditComponent,PersonnelRequirementHistoricalComponent,PositionsDetailComponent
+                 PersonnelRequirementEditComponent, PersonnelRequirementHistoricalComponent, PositionsDetailComponent
               ],
               bootstrap: [ PersonnelRequirementComponent ],
               providers: [ PersonnelRequirementServices,

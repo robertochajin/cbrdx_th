@@ -27,6 +27,10 @@ export class MedicalInstitutionService {
    getById(id: number) {
       return this.authHttp.get( this.serviceURL + 'institucionesMedicas/'+id ).map( ( res: Response ) => res.json() );
    }
+
+   getByIdPublic( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'institucionesMedicas/publicacion/' + id ).map( ( res: Response ) => res.json() );
+   }
    getStructureByIdMedicalInstitution(id: Number) {
       return this.authHttp.get( this.serviceURL + 'institucionesMedicasEstructurasFisicas/institucionMedica/'+id ).map( ( res: Response ) => res.json() as MedicalInstitutionStructure[] );
    }

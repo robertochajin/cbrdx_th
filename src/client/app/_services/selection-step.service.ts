@@ -6,6 +6,7 @@ import { SelectionProcess } from '../_models/selection-process';
 import { CentralRisk } from '../_models/centralRisk';
 import { EmployeeCentralRisk } from '../_models/employeeCentralRisk';
 import { TerceroPublicaciones } from '../_models/terceroPublicaciones';
+import { PostulationHistory } from '../_models/postulationHistory';
 
 @Injectable()
 export class SelectionStepService {
@@ -104,6 +105,11 @@ export class SelectionStepService {
       .map( ( res: Response ) => res.json() as TerceroPublicaciones );
    }
 
+   updateThirdPublication(tp: TerceroPublicaciones){
+      tp.auditoriaUsuario = this.idUsuario
+      return this.authHttp.put( '<%= SVC_TH_URL %>/api/tercerosPublicaciones/', JSON.stringify( tp ) ).catch( this.handleError );
+   }
+
    getUsuariosRol(codigo:string){
       return this.authHttp.get( '<%= SVC_TH_URL %>/api/usuarios/usuarioRol/'+codigo )
       .map( ( res: Response ) => res.json() as any );
@@ -121,6 +127,11 @@ export class SelectionStepService {
    getEmployeesCentralRisk(id:number ) {
       return this.authHttp.get( this.serviceURL + 'tercerosCentralesRiesgos/tercero/'+id )
       .map( ( res: Response ) => res.json() as CentralRisk[] );
+   }
+
+   getHistoryByIdEmployee( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'tercerosPublicaciones/historic/' + id )
+      .map( ( res: Response ) => res.json() as PostulationHistory[] );
    }
 
    addEmployeesCentralRisk( f: CentralRisk ) {

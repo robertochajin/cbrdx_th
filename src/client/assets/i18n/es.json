@@ -13,7 +13,9 @@
   "LBL_DIRECCION":"Dirección",
   "BTN_GUARDAR":"Guardar",
   "BTN_VOLVER":"Volver",
+   "BTN_LLAMAR": "Llamar",
   "BTN_REGRESAR":"Regresar",
+   "BTN_CONTINUAR": "Continuar",
   "BTN_ACTUALIZAR":"Actualizar",
   "BTN_SI":"Si",
   "BTN_NO":"No",
@@ -43,6 +45,7 @@
   "LBL_USUARIO":"Usuario",
   "LBL_TIPO":"Tipo",
   "LBL_FECHA":"Fecha",
+   "LBL_RESULTADO": "Resultado",
   "LBL_FECHAFIN":"Fecha Fin",
   "LBL_FECHAINICIO":"Fecha Inicio",
   "LBL_GRUPO":"Grupo",
@@ -79,6 +82,8 @@
   "BTN_BORRAR":"Borrar",
   "BTN_DOWNLOAD": "Descargar",
   "BTN_UPLOAD": "Subir archivo",
+   "BTN_LLAMAR": "Llamar",
+   "BTN_FINALIZARPROCESO": "Finalizar el proceso",
   "FIN_COMUNES":"====================================================================",
 
   "UBICACION":{
@@ -158,6 +163,7 @@
       "LBL_FECHALIMITE":"Fecha límite",
       "BTN_APLICAR":"Aplicar",
       "BTN_VERMAS":"Ver más",
+      "BTN_VERTODOS": "Ver Todos",
       "LBL_CONFIGURARWIDGETS":"Configurar Widgets"
    },
 
@@ -328,8 +334,12 @@
      "LBL_LIDERAZGO": "Liderazgo",
      "LBL_HOBBIES": "Hobbies",
      "LBL_CONTACTOEMERG": "Contacto en caso de emergencia",
-     "LBL_COMPETHABILI": "Competencias y habilidades"
-
+     "LBL_COMPETHABILI": "Competencias y habilidades",
+     "LBL_DOCUMENTO": "Documento",
+     "LBL_DOCUMENTOS_DESCARGAR": "Documentos a descargar",
+     "LBL_DOCUMENTOS_ADJUNTAR": "Documentos a adjuntar",
+     "LBL_FECHAAPLICACION": "Fecha aplicación",
+     "LBL_EMPLOYEESADJUNTOS": "Adjuntos"
   },
 
   "INICIO_FAMILYINFORMATION":"==============================================================",
@@ -618,7 +628,7 @@
            "LBL_CODIGO" : "Código",
            "LBL_CARGOSUPERVISA" : "¿Que cargo supervisa?",
            "LBL_CONOCIMIENTO" : "Que conocimientos basicos requiere para el desempeño de las funciones del cargo",
-           "LBL_CONOCIMIENTOS" : "Que conocimientos basicos requiere",
+            "LBL_CONOCIMIENTOS": "Que conocimientos basicos requiere",
            "LBL_FACTOR" : "Factor",
            "LBL_FACTORES" : "Factores de riesgo ocupacional",
            "LBL_META" : "Meta",
@@ -644,9 +654,9 @@
            "LBL_ROL" : "Rol",
            "LBL_ROLDENTRO" : "Rol dentro del proceso",
            "LBL_RIESGO" : "Riesgo",
-           "LBL_RIESGOS" : "Riesgos laborales",
+            "LBL_RIESGOS": "Riesgos laborales",
            "LBL_TIPO" : "Tipo",
-           "LBL_EXAMENES" : "Examenes",
+            "LBL_EXAMENES": "Examenes",
            "LBL_PUNTOS" : "Puntos de valoración",
            "LBL_SALARIO" : "Salario al 100%",
            "LBL_SUBTIPO" : "Subtipo",
@@ -786,7 +796,7 @@
 
    "REQUERIMIENTOPERSONAL": {
       "LBL_REQUERIMIENTOPERSONAL":"Requerimiento de personal",
-      "BTN_AGREGARNUEVO":"Agregar nuevo requerimiento de personal",
+      "BTN_AGREGARNUEVO": "Agregar nuevo requerimiento de personal",
       "LBL_DATOSSOLICITUD":"Datos básicos de la solicitud",
       "LBL_DATOSSOLICITANTE":"Datos Solicitante",
       "LBL_NOMBRESOLICITANTE":"Nombre del Solicitante",
@@ -831,7 +841,7 @@
       "LBL_OBSERVACIONES": "Observaciones",
       "LBL_CUESTIONARIOS": "Datos pruebas técnicas",
       "LBL_CUESTIONARIO": "Pruebas técnicas",
-      "MSG_CARGONOCONFIGURADO":"El cargo no está configurado"
+      "MSG_CARGONOCONFIGURADO": "El cargo no está configurado"
    },
 
    "PROYECCIONLABORAL": {
@@ -907,6 +917,7 @@
       "LBL_PUBLICARVACANTE" : "Publicar vacante",
       "LBL_CUESTIONARIOS" : "Cuestionarios",
       "LBL_CUESTIONARIO" : "Cuestionario",
+      "LBL_OCULTARCUESTIONARIO" : "Ocultar cuestionarios",
       "LBL_DESCRIPCION" : "Descripción",
       "LBL_ESTADO" : "Estado",
       "LBL_PROFESSIONAL" : "Profesional de Reclutamiento",
@@ -943,6 +954,8 @@
       "LBL_DESCRIPCIONPASO":"Descripción",
       "LBL_DESCRIPCIONLIMITE" : "no puede exeder los 200 carácteres",
       "LBL_REVISION" : "Revisión del candidato",
+      "MSG_APRUEBACUESTIONARIOS" : "El candidato responde correctamente todos los cuestionarios, por ende aprueba este paso",
+      "MSG_NOAPRUEBACUESTIONARIOS" : "El candidato ha fallado en alguna de las preguntas del cuestionario, por ende no aprueba este paso",
       "LBL_COMPROMISOREVISION" : "He revisado los datos que el postulante ha registrado en su inscripción y en base a esa información defino qué",
       "LBL_POSTULANTEA" : "Postulante a",
       "LBL_INFOPOSTULANTE" : "Información del postulante",
@@ -961,6 +974,11 @@
       "LBL_CENTRALRIESGO":"Central de riesgo",
       "LBL_CENTRALESRIESGOS":"Centrales de riesgos",
       "LBL_CONTINUARPROCESO":"Continuar con el proceso",
+      "LBL_CONTRATARINMEDIATAMENTE":"Ingreso inmediato",
+      "LBL_FECHACONTRATACION":"Fecha contratación",
+      "LBL_DEFINICIONCONTRATACION":"Definición de contratación",
+      "LBL_CONTRATAR":"Enviar a contratación",
+      "LBL_NOCONTRATAR":"No contratar",
       "LBL_CONSULTAR":"Consultar",
       "LBL_ADJUNTAR":"Adjuntar",
       "LBL_APROBAR":"Aprobar",
@@ -972,6 +990,25 @@
       "LBL_NOMBRE":"Nombre Archivo",
       "LBL_ARCHIVO":"Archivo",
       "LBL_VER":"Ver",
+      "LBL_LLAMARREFERENCIA": "Llamar referencias",
+      "LBL_HISTORIALPOSTULANTE": "Historial de postulaciones de:",
+      "LBL_CANTIDADVACANTES": "Numero de vacantes solicitadas",
+      "LBL_FECHA": "Fecha",
+      "LBL_CONCEPTOMEDICO": "Concepto médico",
+      "LBL_PROGRAMAREXAMEN": "Programar examen",
+      "LBL_INSTITUCION": "Institución",
+      "LBL_GENERCOD": "Generar código",
+      "LBL_CONSENTINFORMADO": "Consentimiento informado",
+      "LBL_EXAMENMEDICO": "Examen médico",
+      "LBL_PRUEBASTECNICA": "Pruebas técnica",
+      "LBL_PRUEBAREALIZADA": "Realizada",
+      "LBL_PRUEBASTECNICAS": "Pruebas técnicas",
+      "LBL_NOTAPRUEBATECNICA": "Nota",
+      "LBL_ESTADOPRUEBATECNICA": "Estado de la prueba",
+      "LBL_OBSERVACIONPRUEBATECNICA": "Observación",
+      "MSG_DEFINIRTODASLASPRUEBAS": "Es necesario que se definan todas las pruebas antes de poder definir si continua o no con el proceso",
+      "MSG_PLAZASLLENAS": "Para esta publicación ya se ha completado la cantidad de contratados solicitados en el requerimiento",
+      "LBL_ADJUNTOPRUEBATECNICA": "Archivo adjunto",
       "":""
    },
 "MEDICALINSTITUTION":{
@@ -995,7 +1032,62 @@
    "LBL_ESTRUCTURAFISICA":"Estructura Física",
    "":""
 },
-
+   "DOCMANAGMENT": {
+      "LBL_ADMINDOCS": "Administrador de documentos",
+      "LBL_AGREGAR": "Agregar registro",
+      "LBL_CODIGO": "Código",
+      "LBL_CODIGOINST": "Código institucional",
+      "LBL_NOMBRE": "Nombre documento",
+      "LBL_ADJUNTAR": "Adjuntar",
+      "LBL_DESCARGAR": "Descargar",
+      "LBL_TIPO": "Tipo",
+      "LBL_ADJUNTARSISTEMA": "Adjuntar al sistema",
+      "LBL_DESCARGARSISTEMA": "Descargar del sistema",
+      "LBL_REQUERIDOCONTRATA": "Requerido para contratación",
+      "LBL_VIGENCIA": "Vigencia",
+      "LBL_NOAPLCA": "No aplica",
+      "LBL_APLCA": "Aplica",
+      "LBL_ACCION": "Acción",
+      "LBL_ADJUNTO": "Adjunto",
+      "LBL_DESCRIPCION": "Descripcion",
+      "LBL_DATOSGENERALES": "Datos generales",
+      "": ""
+   },
+"QUESTIONNAIRES":{
+   "LBL_QUESTIONNAIRES":"Cuestionarios",
+   "LBL_NEW": "Nuevo",
+   "LBL_NEW2": "Nueva",
+   "LBL_QUESTIONNAIRE": "Cuestionario",
+   "LBL_OFAPPLICANTS": "de Aplicantes",
+   "LBL_REQUIRESAVERAGE": "Requiere Ponderación",
+   "LBL_QUESTIONS": "Preguntas",
+   "LBL_QUESTION": "Pregunta",
+   "LBL_ANSWERS": "Respuestas",
+   "LBL_ANSWER": "Respuesta",
+   "LBL_VALUE": "Valor",
+   "LBL_VALIDATECODE": "Código Existe",
+   "LBL_FILTERING": "Filtrante",
+   "LBL_REQUIRED": "Obligatorio",
+   "LBL_RIGHT": "Correcto",
+   "LBL_TYPE": "Tipo",
+   "LBL_DEPEND": "Depende",
+   "LBL_DROPDOWN": "Depende",
+   "LBL_INPUT": "Esta pregunta es requerida",
+   "LBL_CHECKBOX": "Debe seleccionar al menos una opción",
+   "LBL_DROPDOWN": "Debe seleccionar una opción",
+   "LBL_START": "Volver al Comienzo",
+   "":""
+},
+   "TERCEROS": {
+      "LBL_DOCUMENTO": "Documento",
+      "LBL_DOCUMENTOS_DESCARGAR": "Documentos a descargar",
+      "LBL_DOCUMENTOS_ADJUNTAR": "Documentos a adjuntar"
+   },
+   "RECLUTAMIENTO": {
+      "LBL_FASE_PROCESO": "Fase del proceso",
+      "LBL_PERSONAL_ENCARGADO": "Personal encargado",
+      "LBL_ESTADO": "Estado"
+   },
 
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 

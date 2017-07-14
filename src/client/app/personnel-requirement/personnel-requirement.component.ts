@@ -25,6 +25,7 @@ export class PersonnelRequirementComponent implements OnInit {
    personnelRequirements: PersonnelRequirement[];
    jwtHelper: JwtHelper = new JwtHelper();
    creationProccesState: ListaItem;
+   inProcess: ListaItem;
    revertedState: ListaItem;
    tokendecoded: any = { sub: '', usuario: '', nombre: '' };
    public requirementsAction: RequirementsAction[] = [];
@@ -44,21 +45,29 @@ export class PersonnelRequirementComponent implements OnInit {
 
    ngOnInit() {
       this.listaService.getMasterDetailsByCode( 'ListasEstadosRequerimientos', 'PRCREQ' ).subscribe( x => {
-         this.creationProccesState = x
+         this.creationProccesState = x;
          this.listaService.getMasterDetailsByCode( 'ListasEstadosRequerimientos', 'DVLT' ).subscribe( x => {
-            this.revertedState = x
-            let token = localStorage.getItem( 'token' );
+            this.revertedState = x;
+            this.listaService.getMasterDetailsByCode( 'ListasEstadosRequerimientos', 'PRCSEL' ).subscribe( x => {
+               this.inProcess = x;
+               let token = localStorage.getItem( 'token' );
 
-            if ( token !== null && token !== undefined ) {
-               this.tokendecoded = this.jwtHelper.decodeToken( token );
-            } else {
-               this.location.back();
-            }
-            this.personnelRequirementServices.getAllEnabledByUser(this.tokendecoded.usuario.idUsuario).subscribe(
-               personnelRequirements => {
-                  this.personnelRequirements = personnelRequirements;
+               if ( token !== null && token !== undefined ) {
+                  this.tokendecoded = this.jwtHelper.decodeToken( token );
+               } else {
+                  this.location.back();
                }
-            );
+               this.personnelRequirementServices.getAllEnabledByUser( this.tokendecoded.usuario.idUsuario ).subscribe(
+                  personnelRequirements => {
+                     personnelRequirements.map(pr => {
+                        if(pr.idCargo){
+                           pr.nombreCargo = pr.cargo;
+                        }
+                     });
+                     this.personnelRequirements = personnelRequirements;
+                  }
+               );
+            } );
          } );
       } );
    }
@@ -71,7 +80,8 @@ export class PersonnelRequirementComponent implements OnInit {
                                            icon: 'fa fa-question-circle',
                                            accept: () => {
                                               this.personnelRequirementServices.update( this.dialogObjet ).subscribe( r => {
-                                                 this.personnelRequirements.splice( this.personnelRequirements.indexOf( this.dialogObjet ), 1 );
+                                                 this.personnelRequirements.splice( this.personnelRequirements.indexOf( this.dialogObjet ),
+                                                                                    1 );
                                                  this.dialogObjet = null;
                                               } );
                                            },
@@ -93,9 +103,9 @@ export class PersonnelRequirementComponent implements OnInit {
       this.router.navigate( [ 'personnel-requirement/detail/' + FaS.idRequerimiento ] );
    }
 
-   observations(pR: PersonnelRequirement) {
+   observations( pR: PersonnelRequirement ) {
       this.requirementsAction = [];
-      this.vacanciesService.getActions(pR.idRequerimiento).subscribe(acc => {
+      this.vacanciesService.getActions( pR.idRequerimiento ).subscribe( acc => {
          this.requirementsAction = acc;
          this.displayActions = true;
       }, error => {
@@ -104,10 +114,14 @@ export class PersonnelRequirementComponent implements OnInit {
          msg.detail = 'Falla';
          msg.summary = 'Imposible cargar la información';
          this._nav.setMesage( 4, msg );
-      });
+      } );
    }
+
    setSearch() {
       this._nav.setSearch( 'personnel-requirement.component', this.busqueda );
    }
 
+   candidates( pR: PersonnelRequirement ) {
+      this.router.navigate( [ 'selection-process/candidates-list/' + pR.idPublicacion ] );
+   }
 }

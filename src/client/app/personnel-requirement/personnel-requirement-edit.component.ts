@@ -246,7 +246,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
       }, ( error ) => {
          this._nav.setMesage( 3, this.msg );
       } );
-      this.listaService.getMasterDetails( 'ListasCuestionarios' ).subscribe( rest => {
+      this.listaService.getMasterDetails( 'ListasPruebasTecnicas' ).subscribe( rest => {
          this.listQuest.push( { label: 'Seleccione', value: null } );
          rest.map( ( s: ListaItem ) => {
             this.listQuest.push( { label: s.nombre, value: s.idLista } )

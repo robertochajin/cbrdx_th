@@ -26,6 +26,11 @@ export class PublicationQuestionnairesService {
       return this.authHttp.get( this.serviceURL + '/publicacion/' + idPublication).map( ( res: Response ) => res.json() as PublicationsQuestionnaries[] );
    }
 
+   getAllByPublicationEnabled( idPublication: number ) {
+      return this.authHttp.get( this.serviceURL + '/publicacion/' + idPublication + '/enabled' )
+      .map( ( res: Response ) => res.json() as PublicationsQuestionnaries[] );
+   }
+
    getById( id: number ) {
       return this.authHttp.get( this.serviceURL + id ).map( ( res: Response ) => res.json() as PublicationsQuestionnaries );
    }

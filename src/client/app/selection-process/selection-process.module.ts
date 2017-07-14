@@ -24,11 +24,24 @@ import { CentralRiskComponent } from '../selection-process-risks/central-risk.co
 import { SafePipe } from '../_helpers/safePipe';
 import { AttachmentsService } from '../_services/attachments-step.service';
 import { AttachmentsComponent } from './attachments.component';
+import { CandidateTestComponent } from './candidate-test.component';
+import { CallReferenceComponent } from './call-reference.component';
+import { VacancyTestServices } from '../_services/vacancyTest.service';
+import { PostulationHistoryComponent } from './postulation-history.component';
+import { MedicalExamComponent } from './medical-exam.component';
+import { MedicalExamService } from '../_services/medical-exam.service';
 
+import { VacancyApplyComponent } from '../selecttion-process-apply/apply-detail.component';
+import { ApplyQuestionnairesComponent } from '../selecttion-process-apply/questionnaires.component';
+import { QuestionnairesModule } from '../questionnaires/questionnaires.module';
+import { SolutionsQuestionnairesDetailComponent } from '../questionnaires/solutions-questionnaire/solutions-questionnaires-detail.component';
+import { MasterAnswersService } from '../_services/masterAnswers.service';
+import { CandidateContractingComponent } from './candidate-contracting.component';
 @NgModule( {
               imports: [
                  SharedModule,
-                 FormSharedModule
+                 FormSharedModule,
+                 QuestionnairesModule
               ],
               declarations: [
                  SelectionProcessComponent,
@@ -42,8 +55,15 @@ import { AttachmentsComponent } from './attachments.component';
                  SelectionProcessVacanciesComponent,
                  CandidatesComponent,
                  CandidateRevisionComponent,
+                 CandidateTestComponent,
                  CentralRiskComponent,
-                 SafePipe
+                 CallReferenceComponent,
+                 MedicalExamComponent,
+                 CandidateContractingComponent,
+                 PostulationHistoryComponent,
+                 SafePipe,
+                 VacancyApplyComponent,
+                 ApplyQuestionnairesComponent
               ],
               bootstrap: [ SelectionProcessComponent ],
               providers: [
@@ -55,6 +75,9 @@ import { AttachmentsComponent } from './attachments.component';
                  CandidateProcessService,
                  SelectionStepService,
                  AttachmentsService,
+                 MedicalExamService,
+                 VacancyTestServices,
+                 MasterAnswersService,
                  PublicationQuestionnairesService,
                  UsuariosService
               ],

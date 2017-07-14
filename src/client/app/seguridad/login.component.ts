@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
    jwtHelper: JwtHelper = new JwtHelper();
    redirect: any;
    Url = '/dashboard';
-   loading : boolean = false;
+   loading: boolean = false;
 
    constructor( private loginService: LoginService,
       private http: Http,

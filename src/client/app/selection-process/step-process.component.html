@@ -13,13 +13,14 @@
 							<h2>{{candidate.nombreCompleto}}</h2>
 							<h4>{{candidate.tipoDocumento}} - {{candidate.numeroDocumento}}</h4>
 							<span>{{candidate.fechaNacimiento}} ({{candidate.edad}})</span>
-							<div  class="perfil-footer-button">
-								<button icon="fa-address-book-o" label="{{'PROCESOSELECCION.LBL_VERHOJADEVIDA' | translate }}" type="button" (click)="curriculum()"
-										  pButton></button>
+							<div class="perfil-footer-button">
+								<button icon="fa-address-book-o" label="{{'PROCESOSELECCION.LBL_VERHOJADEVIDA' | translate }}" type="button"
+								        (click)="curriculum()"
+								        pButton></button>
 							</div>
 						</div>
 					</div>
-
+				
 				</fieldset>
 			</form>
 		</p-panel>
@@ -42,16 +43,16 @@
 									<div class="col-md-12">
 										<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'PROCESOSELECCION.LBL_POSTULANTEA' | translate
 											}}:</label>
-										<label class="col-md-3 col-sm-6 col-xs-12">{{publication.cargo}}</label>
+										<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{publication.cargo}}</strong></label>
 										
 										<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_OFICINA' | translate
 											}}:</label>
-										<label class="col-md-3 col-sm-6 col-xs-12">{{publication.estructuraFisica}}</label>
+										<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{publication.estructuraFisica}}</strong></label>
 									</div>
 								</div>
 								<div class="row">
 									<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_AREA' | translate }}:</label>
-									<label class="col-md-3 col-sm-6 col-xs-12">{{publication.area}}</label>
+									<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{publication.area}}</strong></label>
 								</div>
 							</div>
 						</fieldset>
@@ -66,47 +67,49 @@
 									</div>
 									<div class="col-md-6">
 										<label><h3>{{'PROCESOSELECCION.LBL_RESPONSABLE' | translate }}</h3></label>
-										<p>{{candidateProcess.nombreResponsable}}</p>
+										<p><strong>{{candidateProcess.nombreResponsable}}</strong></p>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-12">
 										<label><h3>{{'PROCESOSELECCION.LBL_DETALLECORREO' | translate }}</h3></label>
-										<p>{{candidateProcess.detalleCorreo}}</p>
+										<p><strong>{{candidateProcess.detalleCorreo}}</strong></p>
 									</div>
 								</div>
 							</div>
 							<div *ngIf="!readonly">
-								<div class="row">
-									<div class="form-group col-md-6" *ngIf="showCalendar">
-										<label for="asignDate">{{'PROCESOSELECCION.LBL_ASIGNARFECHA' | translate}}</label>
-										<p-calendar id="asignDate" name="asignDate" [showIcon]="true"
-										            [locale]="es" readonlyInput="true" [minDate]="minDate"
-										            dataType="date" #ngMeetDate="ngModel" required
-										            [(ngModel)]="candidateProcess.fechaCita" dateFormat="yy'-'mm'-'dd"></p-calendar>
-										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngMeetDate.valid">
-											{{'PROCESOSELECCION.LBL_ASIGNARFECHA' | translate}} {{'LBL_REQUERIDO' | translate}}
+								<div *ngIf="showCalendar">
+									<div class="row">
+										<div class="form-group col-md-6">
+											<label for="asignDate">{{'PROCESOSELECCION.LBL_ASIGNARFECHA' | translate}}</label>
+											<p-calendar id="asignDate" name="asignDate" [showIcon]="true"
+											            [locale]="es" readonlyInput="true" [minDate]="minDate" [showTime]="true"
+											            dataType="date" #ngMeetDate="ngModel" required
+											            [(ngModel)]="fechaCita" dateFormat="yy'-'mm'-'dd"></p-calendar>
+											<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngMeetDate.valid">
+												{{'PROCESOSELECCION.LBL_ASIGNARFECHA' | translate}} {{'LBL_REQUERIDO' | translate}}
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label for="responsable">* {{'PROCESOSELECCION.LBL_RESPONSABLE' | translate }}</label>
+											<p-dropdown id="responsable" name="responsable" #ngResponsable="ngModel" [options]="responsables"
+											            [autoWidth]="false" [(ngModel)]="candidateProcess.idResponsable" required></p-dropdown>
+											<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngResponsable.valid">
+												<i class="fa fa-close"></i>
+												{{'PROCESOSELECCION.LBL_RESPONSABLE' | translate }} {{'LBL_REQUERIDO' | translate }}
+											</div>
 										</div>
 									</div>
-									<div class="form-group col-md-6">
-										<label for="responsable">* {{'PROCESOSELECCION.LBL_RESPONSABLE' | translate }}</label>
-										<p-dropdown id="responsable" name="responsable" #ngResponsable="ngModel" [options]="responsables"
-										            [autoWidth]="false" [(ngModel)]="candidateProcess.idResponsable" required></p-dropdown>
-										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngResponsable.valid">
-											<i class="fa fa-close"></i>
-											{{'PROCESOSELECCION.LBL_RESPONSABLE' | translate }} {{'LBL_REQUERIDO' | translate }}
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="form-group col-md-12" *ngIf="showCalendar">
-										<label for="descripcion">* {{'PROCESOSELECCION.LBL_DETALLECORREO' | translate }}</label>
-										<textarea id="descripcion" name="descripcion" pInputTextarea rows="4" cols="35" #descr="ngModel"
-										          [(ngModel)]="candidateProcess.detalleCorreo" required="true" class="form-control"
-										          maxlength="500"></textarea>
-										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !descr.valid">
-											<i class="fa fa-close"></i>
-											{{'PROCESOSELECCION.LBL_DETALLECORREO' | translate }} {{'LBL_REQUERIDO' | translate }}
+									<div class="row">
+										<div class="form-group col-md-12">
+											<label for="descripcion">* {{'PROCESOSELECCION.LBL_DETALLECORREO' | translate }}</label>
+											<textarea id="descripcion" name="descripcion" pInputTextarea rows="4" cols="35" #descr="ngModel"
+											          [(ngModel)]="candidateProcess.detalleCorreo" required="true" class="form-control"
+											          maxlength="500"></textarea>
+											<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !descr.valid">
+												<i class="fa fa-close"></i>
+												{{'PROCESOSELECCION.LBL_DETALLECORREO' | translate }} {{'LBL_REQUERIDO' | translate }}
+											</div>
 										</div>
 									</div>
 								</div>
@@ -130,20 +133,19 @@
 								</div>
 							</div>
 							<div class="row" *ngIf="showInterface">
-								<div class="col-md-4 col-md-offset-4"></div>
+								<div class="col-md-6 col-md-offset-4"></div>
 								<a href="{{step.interfaz}}" target="_blank">
 									<button icon="fa-eye" label="{{'PROCESOSELECCION.LBL_VER' | translate }}" type="button"
 									        pButton></button>
 								</a>
 							</div>
 							<div class="row" *ngIf="!readonlyEstado">
-								<div class="form-group col-md-6" *ngIf="true">
+								<div class="form-group col-md-10 col-md-offset-1" *ngIf="true">
 									<label for="validStep">* {{'PROCESOSELECCION.LBL_APRUEBAPASO' | translate }}</label>
 									<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
 									            [autoWidth]="false" [(ngModel)]="candidateProcess.idDesicionProcesoSeleccion"></p-dropdown>
 								</div>
-								<div class="form-group col-md-6">
-								</div>
+
 							</div>
 							<div class="row" *ngIf="readonlyEstado">
 								<div class="form-group col-md-6" *ngIf="true">
