@@ -11,10 +11,10 @@ export class ReferencesCall {
    public nombreArchivo: string;
    public descripcionDivisonPolitica: string;
    public idTerceroReferencia: number;
-   public idResultadoLlamada: number;
-   public idAdjunto: number;
+   public idResultadoLlamada: number = null;
+   public idAdjunto: number = 0;
    public idMaestroRespuesta: number;
-   public indicadorHabilitado: boolean;
+   public indicadorHabilitado: boolean = true;
    public auditoriaUsuario: number;
    public auditoriaFecha: string;
 

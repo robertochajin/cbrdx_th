@@ -231,7 +231,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    }
 
    positionSearch( event: any ) {
-      this.positionsService.getByWildCard( event.query ).subscribe( list => this.positionList = list );
+      this.positionsService.getByWildCardFiltered( event.query ).subscribe( list => this.positionList = list );
    }
 
    capturePosition( event: any ) {

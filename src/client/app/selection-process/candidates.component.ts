@@ -16,6 +16,9 @@ import { SelectionStepService } from '../_services/selection-step.service';
 import { UsuariosService } from '../_services/usuarios.service';
 import { VUsuarioRol } from '../_models/vUsuarioRol';
 import { PersonnelRequirementServices } from '../_services/personnelRequirement.service';
+import { PersonnelRequirement } from '../_models/personnelRequirement';
+import { VPersonnelRequirement } from '../_models/vPersonnelRequirement';
+import { Location } from '@angular/common';
 
 @Component( {
                moduleId: module.id,
@@ -32,19 +35,24 @@ export class CandidatesComponent implements OnInit {
    public candidates: CandidateProgress[] = [];
    public steps: SelectionStep[] = [];
    publication: Publications = new Publications();
+   vPersonnelRequirement: VPersonnelRequirement = new VPersonnelRequirement();
+   personnelRequirement: PersonnelRequirement = new PersonnelRequirement();
    private userRoles: VUsuarioRol[] = [];
    viewpostulations: boolean = false;
    idTercero: number = 0;
    numeroVacantes: number;
+   showCloseReq: boolean= true;
 
    constructor( private rolesService: RolesService,
       private userService: UsuariosService,
       private route: ActivatedRoute,
       private router: Router,
       private navService: NavService,
+      private location: Location,
       private publicationsService: PublicationsService,
       private candidateProcessService: CandidateProcessService,
       private personnelRequirementServices: PersonnelRequirementServices,
+      private listaService: ListaService,
       private selectionStepService: SelectionStepService ) {
 
       this.busqueda = this.navService.getSearch( 'candidates.component' );
@@ -64,6 +72,13 @@ export class CandidatesComponent implements OnInit {
                   this.publication = publication;
                   this.personnelRequirementServices.getByIdRequirement( this.publication.idRequerimiento ).subscribe( data => {
                      this.numeroVacantes = data.cantidadVacantes;
+                     this.vPersonnelRequirement = data;
+                     this.listaService.getMasterDetails( 'ListasEstadosRequerimientos' ).subscribe( x => {
+                        if ( x.find( c => c.idLista === this.vPersonnelRequirement.idEstado ).codigo ==='CRRD' ) {
+                           this.showCloseReq = false;
+                        }
+                     } );
+
                   } );
 
                   this.selectionStepService.getAllByProcessAndType( this.publication.idProceso, this.publication.formaReclutamiento )
@@ -84,6 +99,7 @@ export class CandidatesComponent implements OnInit {
    }
 
    ngOnInit() {
+
    }
 
    //Redirecciona a la pantalla dependiendo del paso y del rol del usuario
@@ -92,12 +108,17 @@ export class CandidatesComponent implements OnInit {
       if ( this.userRoles.find( r => r.rol === 'ROLE_PROCESOSELECCION' )
            || (myStep !== undefined && myStep.idResponsable === this.usuarioLogueado.usuario.idUsuario) ) {
          if ( myStep.interfazInterna ) {
-            // *Revision* selection-process/process-step/candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
-            // *Central de riesgos* selection-process/process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso
-            // *CallReferences* selection-process/process-step/call-reference/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
-            // *PruebasTecnicas* selection-process/process-step/candidate-test/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
-            // *Examen medico* selection-process/process-step/medical-exam/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
-            // *Contratacion* selection-process/process-step/contracting/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
+            // *Revision*
+            // selection-process/process-step/candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
+            // *Central de riesgos*
+            // selection-process/process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso
+            // *CallReferences*
+            // selection-process/process-step/call-reference/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
+            // *PruebasTecnicas*
+            // selection-process/process-step/candidate-test/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso *Examen
+            // medico* selection-process/process-step/medical-exam/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
+            // *Contratacion*
+            // selection-process/process-step/contracting/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso
 
             this.router.navigate(
                [ myStep.interfazInterna.replace( ':idStep', myStep.idProcesoPaso.toString() )
@@ -150,6 +171,13 @@ export class CandidatesComponent implements OnInit {
 
    toogleHistory() {
       this.viewpostulations = !this.viewpostulations;
+   }
+
+   cerrarProceso() {
+      this.personnelRequirementServices.closeRequirement( this.publication.idRequerimiento ).subscribe( data => {
+         this.personnelRequirement = data;
+         this.location.back();
+      } );
    }
 
    setSearch() {

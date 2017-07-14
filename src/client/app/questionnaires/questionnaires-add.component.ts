@@ -71,4 +71,11 @@ export class QuestionnairesAddComponent implements OnInit {
          this.codeExists = false;
       }
    }
+
+   inputCleanCode( event: any ) {
+      let input = event.target.value;
+      if ( input.length > 0 ) {
+         event.target.value = input.toUpperCase().replace( /[^A-Z0-9]/g, '' ).trim();
+      }
+   }
 }

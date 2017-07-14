@@ -22,7 +22,7 @@ export class QuestionnairesComponent implements OnInit {
       private router: Router,
       private confirmationService: ConfirmationService,
       private navService: NavService ) {
-      this.busqueda = navService.getSearch( 'employees.component' );
+      this.busqueda = navService.getSearch( 'questionnaries.component' );
    }
 
    ngOnInit() {

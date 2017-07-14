@@ -45,4 +45,10 @@
 			</template>
 		</p-column>
 	</p-dataTable>
+	<div class="row form-footer-buttons" *ngIf="showCloseReq">
+		<div class="form-group col-md-12">
+			<button label="{{'BTN_FINALIZARPROCESO' | translate }}" type="button"
+			        pButton (click)="cerrarProceso()"></button>
+		</div>
+	</div>
 </div>

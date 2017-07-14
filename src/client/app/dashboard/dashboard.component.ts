@@ -249,7 +249,6 @@ export class DashboardComponent implements OnInit {
    }
 
    goVacancyList(){
-      this.router.navigate( [ 'selection-process/active-publications' ] );
+      this.router.navigate( [ 'apply-vacancy/active-publications' ] );
    }
-
 }

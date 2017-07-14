@@ -70,13 +70,13 @@
 					</template>
 				</p-column>
 			</p-dataTable>
-			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="process">
+			<form name="process" (ngSubmit)="f.valid && onSubmitP()" #f="ngForm" novalidate id="process">
 				<fieldset *ngIf="!readonly">
 					<div class="row">
 						<div class="form-group col-md-6">
 							<label for="validStep">* {{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}</label>
-							<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
-							            [autoWidth]="false" [(ngModel)]="indApproval" required></p-dropdown>
+							<p-dropdown id="validStepe" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
+							            [autoWidth]="false" [(ngModel)]="indApproval"></p-dropdown>
 						</div>
 						<div class="form-group col-md-6">
 						</div>
@@ -123,57 +123,62 @@
 					</div>
 				</fieldset>
 			</form>
-		
-		
 		</p-panel>
 	</div>
-	
 	<!-- Llamar referencia -->
 	<div class="col-md-10 col-md-offset-1" *ngIf="llamar">
 		<p-panel header="{{'PROCESOSELECCION.LBL_LLAMARREFERENCIA' | translate}}">
-			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="form-group col-md-5">
-					<label for="tipoRef">{{'EMPLOYEES.LBL_TIPOREFERENCIA' | translate }}:</label>
-					<label id="tipoRef" name="tipoRef"><strong>{{reference.tipoReferencia}}</strong></label>
+			<form name="callReference" (ngSubmit)="fr.valid && onSubmitReferenceCall()" #fr="ngForm" novalidate id="callReference">
+				<div class="row">
+					<div class="col-md-2"></div>
+					<div class="form-group col-md-4">
+						<label for="tipoRef">{{'EMPLOYEES.LBL_TIPOREFERENCIA' | translate }}:</label>
+						<label id="tipoRef" name="tipoRef"><strong>{{reference.tipoReferencia}}</strong></label>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="nombreRef">{{'LBL_NOMBRE' | translate }}:</label>
+						<label id="nombreRef" name="nombreRef"><strong>{{reference.nombreCompleto}}</strong></label>
+					</div>
 				</div>
-				<div class="form-group col-md-5">
-					<label for="nombreRef">{{'LBL_NOMBRE' | translate }}:</label>
-					<label id="nombreRef" name="nombreRef"><strong>{{reference.nombreCompleto}}</strong></label>
-				</div>
-			</div>
-			<br/>
-			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-5">
-					<a href="sip:3174167448" class="btn btn-success"><i class="fa fa-phone"></i> {{ reference.telefonoMovil }}</a>
-				</div>
-				<div class="col-md-5">
-					<label for="validStep">* Resultado</label>
-					<p-dropdown id="validStep" name="validStep" #ngCallResult="ngModel" [options]="callResults"
-					            [autoWidth]="true" [(ngModel)]="indApproval" required></p-dropdown>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-10" *ngIf="maestroRespuestas.idMaestroRespuesta > 0">
-					<solutions-questionnaires (finish)="finishQuestionnaire($event)"
-					                          [maestroRespuestas]="maestroRespuestas"
-					                          *ngIf="!showFinish"
-					></solutions-questionnaires>
-					<div *ngIf="showFinish" class="row form-footer-buttons">
-						<div class="form-group col-md-12">
-							<p>El Cuestionario ha terminado con Exito!</p>
+				<br/>
+				<div class="row">
+					<div class="col-md-2"></div>
+					<div class="col-md-4">
+						<a [href]="callNumber | safe" class="btn btn-success"><i class="fa fa-phone"></i> {{ reference.telefonoMovil
+							}}</a>
+					</div>
+					<div class="col-md-4">
+						<label for="validStep">* Resultado</label>
+						<p-dropdown id="validStep" name="validStep" #listaResultados="ngModel" [options]="callResults"
+						            [autoWidth]="false" [(ngModel)]="referencesCall.idResultadoLlamada" required="true"></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="fr.submitted && !listaResultados.valid">
+							<i class="fa fa-close"></i>
+							Resultado {{'LBL_REQUERIDO' | translate }}
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row form-footer-buttons">
-				<div class="form-group col-md-12">
-					<a (click)="hideForm()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
-					<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
-					        pButton></button>
+				<div class="row">
+					<div class="col-md-10" *ngIf="maestroRespuestas.idMaestroRespuesta > 0">
+						<solutions-questionnaires (finish)="finishQuestionnaire($event)"
+						                          [maestroRespuestas]="maestroRespuestas"
+						                          *ngIf="!showFinish"
+						></solutions-questionnaires>
+						<div *ngIf="showFinish" class="row form-footer-buttons">
+							<div class="form-group col-md-12">
+								<p>El Cuestionario ha terminado con Exito!</p>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<a (click)="hideForm()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+						<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+						        pButton></button>
+					</div>
+				</div>
+			</form>
 		</p-panel>
 	</div>
 </div>
