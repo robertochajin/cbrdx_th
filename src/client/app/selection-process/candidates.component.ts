@@ -19,7 +19,9 @@ import { PersonnelRequirementServices } from '../_services/personnelRequirement.
 
 @Component( {
                moduleId: module.id,
-               templateUrl: 'candidates.component.html'
+               templateUrl: 'candidates.component.html',
+               styleUrls: [ 'candidates.component.css' ],
+
             } )
 export class CandidatesComponent implements OnInit {
 
