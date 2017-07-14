@@ -117,7 +117,7 @@
 						</div>
 					</div>
 				</fieldset>
-				<fieldset *ngIf="readonly">
+				<fieldset *ngIf="readonly && !areSlotsFull">
 					<div class="row">
 						<div class="form-group col-md-12">
 							<label>{{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
@@ -146,6 +146,9 @@
 							        pButton (click)="goBack(false)"></button>
 						</div>
 					</div>
+				</fieldset>
+				<fieldset *ngIf="areSlotsFull">
+					<h2>{{'PROCESOSELECCION.MSG_PLAZASLLENAS' | translate }}</h2>
 				</fieldset>
 			</form>
 		
