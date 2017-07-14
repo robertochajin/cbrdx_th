@@ -9,8 +9,9 @@
 							<input type="text" pInputText id="codigoCuestionario" name="codigoCuestionario"
 							       uperCaseText
 							       [readonly]="(cuestionario.idCuestionario !== undefined && cuestionario.idCuestionario !== null)"
-							       [(ngModel)]="cuestionario.codigoCuestionario" maxlength="6"
+							       [(ngModel)]="cuestionario.codigoCuestionario" maxlength="10"
 							       (change)="validateCode()"
+							       (keyup)="inputCleanCode($event.target.value)"
 							       #NGcodigo="ngModel" required/>
 							<div class="ui-message ui-messages-error ui-corner-all"
 							     *ngIf="f.submitted && !NGcodigo.valid ">
@@ -91,8 +92,9 @@
 							<input type="text" pInputText id="codigoPregunta" name="codigo"
 							       uperCaseText
 							       [readonly]="(pregunta.idCuestionarioPregunta !== undefined && pregunta.idCuestionarioPregunta !== null)"
-							       [(ngModel)]="pregunta.codigoPregunta" maxlength="6"
+							       [(ngModel)]="pregunta.codigoPregunta" maxlength="10"
 							       (change)="validateCodeP()"
+							       (keyup)="inputCleanCode($event.target.value)"
 							       #NGcodigoP="ngModel" required/>
 							<div class="ui-message ui-messages-error ui-corner-all"
 							     *ngIf="p.submitted && !NGcodigoP.valid ">
@@ -209,14 +211,14 @@
 				</div>
 				<div class="col-md-6 col-xs-12 datatable-header-search">
 					
-					<div class="input-group">
+					<!--<div class="input-group">
 						<div class="input-group-addon"><i class="fa fa-search"></i></div>
 						<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate}}" class="form-control">
-					</div>
+					</div>-->
 				
 				</div>
 			</div>
-			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="preguntas" [paginator]="true" [rows]="10"
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="preguntas"
 			             [responsive]="true" [globalFilter]="gb">
 				<p-column header="{{ 'LBL_ORDEN' | translate }}" styleClass="datatable-col-action">
 					<template let-datos="rowData" pTemplate="body">
@@ -230,15 +232,15 @@
 						</div>
 					</template>
 				</p-column>
-				<p-column field="pregunta" header="{{'QUESTIONNAIRES.LBL_QUESTION' | translate}}" [sortable]="true"></p-column>
-				<p-column field="tipoPregunta" header="{{'QUESTIONNAIRES.LBL_TYPE' | translate}}" [sortable]="true"></p-column>
-				<p-column field="indicadorfiltrante" header="{{ 'QUESTIONNAIRES.LBL_FILTERING' | translate }}" [sortable]="true"
+				<p-column field="pregunta" header="{{'QUESTIONNAIRES.LBL_QUESTION' | translate}}"></p-column>
+				<p-column field="tipoPregunta" header="{{'QUESTIONNAIRES.LBL_TYPE' | translate}}"></p-column>
+				<p-column field="indicadorfiltrante" header="{{ 'QUESTIONNAIRES.LBL_FILTERING' | translate }}"
 				          styleClass="datatable-col-center">
 					<template let-datos="rowData" pTemplate="body">
 						<p-checkbox [(ngModel)]="datos.indicadorFiltrante" binary="true" disabled="true"></p-checkbox>
 					</template>
 				</p-column>
-				<p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true"
+				<p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}"
 				          styleClass="datatable-col-center">
 					<template let-datos="rowData" pTemplate="body">
 						<p-checkbox [(ngModel)]="datos.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
@@ -271,6 +273,7 @@
 							       [readonly]="(respuesta.idPreguntaOpcion !== undefined && respuesta.idPreguntaOpcion !== null)"
 							       [(ngModel)]="respuesta.codigoOpcion" maxlength="6"
 							       (change)="validateCodeR()"
+							       (keyup)="inputCleanCode($event.target.value)"
 							       #NGcodigoR="ngModel" required/>
 							<div class="ui-message ui-messages-error ui-corner-all"
 							     *ngIf="r.submitted && !NGcodigoR.valid ">
@@ -331,14 +334,14 @@
 				</div>
 				<div class="col-md-6 col-xs-12 datatable-header-search">
 					
-					<div class="input-group">
+					<!--<div class="input-group">
 						<div class="input-group-addon"><i class="fa fa-search"></i></div>
 						<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate}}" class="form-control">
-					</div>
+					</div>-->
 				
 				</div>
 			</div>
-			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="respuestas" [paginator]="true" [rows]="10"
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="respuestas"
 			             [responsive]="true" [globalFilter]="gb">
 				<p-column header="{{ 'LBL_ORDEN' | translate }}" styleClass="datatable-col-action">
 					<template let-datos="rowData" pTemplate="body">
@@ -352,15 +355,15 @@
 						</div>
 					</template>
 				</p-column>
-				<p-column field="codigoOpcion" header="{{'LBL_CODIGO' | translate}}" [sortable]="true"></p-column>
-				<p-column field="opcion" header="{{'QUESTIONNAIRES.LBL_ANSWER' | translate}}" [sortable]="true"></p-column>
-				<p-column field="indicadorCorrecto" header="{{ 'QUESTIONNAIRES.LBL_RIGHT' | translate }}" [sortable]="true"
+				<p-column field="codigoOpcion" header="{{'LBL_CODIGO' | translate}}"></p-column>
+				<p-column field="opcion" header="{{'QUESTIONNAIRES.LBL_ANSWER' | translate}}"></p-column>
+				<p-column field="indicadorCorrecto" header="{{ 'QUESTIONNAIRES.LBL_RIGHT' | translate }}"
 				          styleClass="datatable-col-center">
 					<template let-datos="rowData" pTemplate="body">
 						<p-checkbox [(ngModel)]="datos.indicadorCorrecto" binary="true" disabled="true"></p-checkbox>
 					</template>
 				</p-column>
-				<p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true"
+				<p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}"
 				          styleClass="datatable-col-center">
 					<template let-datos="rowData" pTemplate="body">
 						<p-checkbox [(ngModel)]="datos.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>

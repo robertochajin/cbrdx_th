@@ -41,7 +41,7 @@ export class CandidateRevisionComponent implements OnInit {
    private desitionList: ListaItem[] = [];
    public responsables: SelectItem[] = [];
    private showCalendar = false;
-   private readonly = false;
+   private readonly = true;
    svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
 
    usuarioLogueado: any;
@@ -98,23 +98,38 @@ export class CandidateRevisionComponent implements OnInit {
                   } );
                   vacanciesService.getPublication( res.idPublicacion ).subscribe( pb => {
                      this.publication = pb;
+
+                     this.listaService.getMasterDetailsByCode('ListasEstadosRequerimientos', 'CRRD').subscribe( reqState => {
+
+
+                        this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
+                           this.stepStates = res;
+                           if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
+                              this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
+                              this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
+                                 this.candidateProcess = cp;
+                                 if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ||
+                                      this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado ||
+                                      reqState.idLista === this.publication.idEstado) {
+                                    this.readonly = true;
+                                 } else {
+                                    this.readonly = false;
+                                 }
+                              } );
+                           } else {
+                              if(reqState.idLista === this.publication.idEstado) {
+                                 this.readonly = true;
+                              } else {
+                                 this.readonly = false;
+                                 this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
+                              }
+                           }
+                        } );
+
+                     });
                   } );
                } );
 
-               this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
-                  this.stepStates = res;
-                  if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
-                     this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
-                     this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
-                        this.candidateProcess = cp;
-                        if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ) {
-                           this.readonly = true;
-                        }
-                     } );
-                  } else {
-                     this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
-                  }
-               } );
 
             } );
 

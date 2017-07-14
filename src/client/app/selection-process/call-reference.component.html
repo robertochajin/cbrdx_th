@@ -70,13 +70,13 @@
 					</template>
 				</p-column>
 			</p-dataTable>
-			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="process">
+			<form name="process" (ngSubmit)="f.valid && onSubmitP()" #f="ngForm" novalidate id="process">
 				<fieldset *ngIf="!readonly">
 					<div class="row">
 						<div class="form-group col-md-6">
 							<label for="validStep">* {{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}</label>
-							<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
-							            [autoWidth]="false" [(ngModel)]="indApproval" required></p-dropdown>
+							<p-dropdown id="validStepe" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
+							            [autoWidth]="false" [(ngModel)]="indApproval"></p-dropdown>
 						</div>
 						<div class="form-group col-md-6">
 						</div>
@@ -123,11 +123,8 @@
 					</div>
 				</fieldset>
 			</form>
-		
-		
 		</p-panel>
 	</div>
-	
 	<!-- Llamar referencia -->
 	<div class="col-md-10 col-md-offset-1" *ngIf="llamar">
 		<p-panel header="{{'PROCESOSELECCION.LBL_LLAMARREFERENCIA' | translate}}">

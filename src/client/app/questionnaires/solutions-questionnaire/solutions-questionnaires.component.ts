@@ -33,6 +33,7 @@ export class SolutionsQuestionnairesComponent implements OnInit {
    indice: number = 0;
    showThx: boolean = false;
    saving: boolean = false;
+   validateCheck: boolean = true;
    respuestasCheckbox: number[] = [];
    msgs: Message[] = [];
 
@@ -84,8 +85,21 @@ export class SolutionsQuestionnairesComponent implements OnInit {
          this.finish.emit( this.maestroRespuestas );
       } else {
          this.pregunta = this.preguntas[ this.indice ];
-         this.getAnswers();
-         this.indice += 1;
+         if ( this.pregunta.indicadorDepende ) {
+            this.masterAnswersService.getSolutionDepends( this.maestroRespuestas.idMaestroRespuesta, this.pregunta.idDependePregunta,
+                                                          this.pregunta.idDependeRespuesta ).subscribe( res => {
+               if ( res.length > 0 ) {
+                  this.indice += 1;
+                  this.nextQuestion();
+               } else {
+                  this.getAnswers();
+               }
+            }, error => {
+            } );
+         } else {
+            this.getAnswers();
+            this.indice += 1;
+         }
       }
 
    }
@@ -117,21 +131,29 @@ export class SolutionsQuestionnairesComponent implements OnInit {
    onSubmit() {
       this.saving = true;
       if ( this.pregunta.codigoTipoPregunta === 'CHECK' ) {
-         for ( let x of this.respuestasCheckbox ) {
-            this.respuesta.idCuestionarioPregunta = this.pregunta.idCuestionarioPregunta;
-            this.respuesta.idMaestroRespuesta = this.idMaestroRespuestas;
-            this.respuesta.idPreguntaOpcion = x;
-            this.masterAnswersService.addSolution( this.respuesta ).subscribe( res => {
-               this.navService.setMesage( 1, this.msgs );
-               this.updateMaster( res, this.pregunta );
-               this.saving = false;
-
-            }, error => {
-               this.navService.setMesage( 3, this.msgs );
-               this.saving = false;
-            } );
+         this.validateCheck = true;
+         if ( this.respuestasCheckbox.length === 0 && this.pregunta.indicadorObligatorio === true ) {
+            this.validateCheck = false;
          }
-         this.nextQuestion();
+         if ( this.validateCheck ) {
+            for ( let x of this.respuestasCheckbox ) {
+               this.respuesta.idCuestionarioPregunta = this.pregunta.idCuestionarioPregunta;
+               this.respuesta.idMaestroRespuesta = this.idMaestroRespuestas;
+               this.respuesta.idPreguntaOpcion = x;
+               this.masterAnswersService.addSolution( this.respuesta ).subscribe( res => {
+                  this.navService.setMesage( 1, this.msgs );
+                  this.updateMaster( res, this.pregunta );
+                  this.saving = false;
+
+               }, error => {
+                  this.navService.setMesage( 3, this.msgs );
+                  this.saving = false;
+               } );
+            }
+            this.nextQuestion();
+         } else {
+            this.saving = false;
+         }
       } else {
          this.respuesta.idCuestionarioPregunta = this.pregunta.idCuestionarioPregunta;
          this.respuesta.idMaestroRespuesta = this.idMaestroRespuestas;

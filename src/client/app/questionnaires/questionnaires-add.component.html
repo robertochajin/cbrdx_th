@@ -9,11 +9,11 @@
 								<div class="ui-grid-col-4">
 									<label for="codigoCuestionario">* {{ 'LBL_CODIGO' | translate}}</label>
 									<input type="text" pInputText id="codigoCuestionario" name="codigoCuestionario"
-									       uperCaseText
 									       [readonly]="(cuestionario.idCuestionario !== undefined && cuestionario.idCuestionario !== null)"
 									       [disabled]="(cuestionario.idCuestionario !== undefined && cuestionario.idCuestionario !== null)"
-									       [(ngModel)]="cuestionario.codigoCuestionario" maxlength="6"
+									       [(ngModel)]="cuestionario.codigoCuestionario" maxlength="10"
 									       (change)="validateCode()"
+									       (keyup)="inputCleanCode($event)"
 									       #NGcodigo="ngModel" required/>
 									<div class="ui-message ui-messages-error ui-corner-all"
 									     *ngIf="f.submitted && !NGcodigo.valid ">
@@ -27,7 +27,7 @@
 								<div class="ui-grid-col-8">
 									<label for="nombre">* {{ 'LBL_NOMBRE' | translate}}</label>
 									<input type="text" pInputText id="nombre" name="nombre"
-									       [(ngModel)]="cuestionario.cuestionario" maxlength="455" titleCaseText
+									       [(ngModel)]="cuestionario.cuestionario" maxlength="200" titleCaseText
 									       #NGnombre="ngModel" required/>
 									<div class="ui-message ui-messages-error ui-corner-all"
 									     *ngIf="f.submitted && !NGnombre.valid">
