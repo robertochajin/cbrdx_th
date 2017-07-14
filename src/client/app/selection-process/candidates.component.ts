@@ -184,13 +184,12 @@ export class CandidatesComponent implements OnInit {
                                               this.personnelRequirementServices.closeRequirement( this.publication.idRequerimiento )
                                               .subscribe( data => {
                                                  this.personnelRequirement = data;
-                                                 this.location.back();
+                                                 this.router.navigate( [ 'selection-process' ] );
                                               } );
                                            },
                                            reject: () => {
                                            }
                                         } );
-
    }
 
    setSearch() {
