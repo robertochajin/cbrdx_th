@@ -199,7 +199,7 @@
 			<form name="process" (ngSubmit)="fnex.valid && onSubmitNoExam()" #fnex="ngForm" novalidate id="processNoExamRN">
 				<fieldset>
 					<div class="form-group col-md-12" *ngIf="cerrado">
-						<label for="concepto">* {{'PROCESOSELECCION.LBL_INSTITUCION' | translate }}</label>
+						<label for="concepto">* {{'PROCESOSELECCION.LBL_CONCEPTOMEDICO' | translate }}</label>
 						<p-dropdown id="conceptoc" name="conceptoc" #conceptomedicoc="ngModel" [options]="opcionesPregunta"
 						            [autoWidth]="false" [(ngModel)]="medicalExam.idPreguntaOpcion" disabled="true"></p-dropdown>
 					</div>
