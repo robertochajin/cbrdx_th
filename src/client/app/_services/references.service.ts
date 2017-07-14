@@ -55,9 +55,18 @@ export class ReferencesService {
       .map( ( res: Response ) => res.json() as ReferencesCall );
    };
 
+   updateReferenfesCall( f: ReferencesCall ) {
+      f.auditoriaUsuario = this.idUsuario;
+      return this.authHttp.put( this.serviceURL + 'tercerosReferenciasLlamada', f ).catch( this.handleError );
+   }
+
    getCallbyReference( id: number ) {
       return this.authHttp.get( this.serviceURL + 'tercerosReferenciasLlamada/terceroReferencia/' + id )
       .map( ( res: Response ) => res.json() as ReferencesCall[] );
+   }
+
+   getLastCallbyReference( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'tercerosReferenciasLlamada/lastCall/' + id ).map( ( res: Response ) => res.json() );
    }
 
    getCall( id: number ) {
