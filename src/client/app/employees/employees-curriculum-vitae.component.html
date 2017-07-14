@@ -7,10 +7,16 @@
 
 	<div id="curriculum" class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<a class="btn btn-primary pull-right" (click)="getPDF()" style="margin-top: -40px">
+			<a class="btn btn-primary pull-right" (click)="getPDF()" style="margin-top: -40px"
+				*ngIf="!loadingPdf">
 				<i class="fa fa-file-pdf-o" aria-hidden="true"></i> Generar PDF
 			</a>
-			<div id="CV" class="clearfix">
+			<a class="btn btn-default pull-right" style="margin-top: -40px"
+				*ngIf="loadingPdf">
+				<i class="fa fa-refresh fa-spin fa-fw"></i> Generando PDF ...
+			</a>
+			<div id="CV">
+			<div id="CVBody" class="clearfix">
 			<div class="clearfix card-header perfil">
 				<div class="col-md-2">
 					<div class="thumbnail img-responsive">
@@ -122,6 +128,7 @@
 				</div>
 			</div>
 		</div>
+			</div>
 		</div>
 	</div>
 
