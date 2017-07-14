@@ -247,6 +247,9 @@ export class MedicalExamComponent implements OnInit {
 
       if ( this.candidateProcess.idProcesoSeleccion !== undefined ) {
          this.medicalExam.idEstadoExamenMedico = this.getIdStateExamByCode( 'CERRADO' );
+         if ( !this.medicalExam.idMedicoResponsable ) {
+            this.medicalExam.idCuestionarioOpciones
+         }
          this.medicalExamService.update( this.medicalExam ).subscribe( data => {
             this.medicalExam = this.medicalExam;
          } );
@@ -279,7 +282,7 @@ export class MedicalExamComponent implements OnInit {
    }
 
    onSubmitExam() {
-         this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
+      this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
       if ( this.medicalExam.idExamenMedico ) {
          let temp = this.listEstExaMed.find( c => c.idLista === this.medicalExam.idEstadoExamenMedico ).codigo;
          if ( temp === 'RESPOND' ) {
@@ -376,7 +379,7 @@ export class MedicalExamComponent implements OnInit {
          res => {
             this.questions = res;
             this.sortQuestions();
-            this.question = this.questions[ 2 ];
+            this.question = this.questions[ 0 ];
             this.getAnswers();
          } );
    }
