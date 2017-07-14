@@ -26,6 +26,7 @@ export class References {
    public direccion?: string;
    public tipodeReferencia?: { value: number, label: string };
    public numeroContacto?: string;
+   public resultado?: string;
 
    constructor() {
       this.nombreCompleto = '';

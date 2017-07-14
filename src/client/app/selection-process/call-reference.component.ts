@@ -54,6 +54,7 @@ export class CallReferenceComponent implements OnInit {
    jwtHelper: JwtHelper = new JwtHelper();
    references: References[];
    referencesCall: ReferencesCall = new ReferencesCall();
+   referenceCall: ReferencesCall = new ReferencesCall();
    codigoTipoReferencia: string;
    codigoCuestionarioFamiliar: string;
    codigoCuestionarioComercial: string;
@@ -61,6 +62,7 @@ export class CallReferenceComponent implements OnInit {
    codigoCuestionarioLaboral: string;
    maestroRespuestas: MasterAnswers = new MasterAnswers();
    showFinish = false;
+   callNumber: string;
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
@@ -117,7 +119,7 @@ export class CallReferenceComponent implements OnInit {
       this.listaService.getMasterDetails( 'ListasResultadosLllamadas' ).subscribe( res => {
          this.callResults.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
-            this.callResults.push( { label: s.nombre, value: s.codigo } );
+            this.callResults.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
 
@@ -140,6 +142,13 @@ export class CallReferenceComponent implements OnInit {
                      this.referencesService.getAllgetAllByEmployee( this.candidate.idTercero ).subscribe(
                         references => {
                            this.references = references;
+
+                           this.references.map(r => {
+                              this.referencesService.getLastCallbyReference( r.idTerceroReferencia ).subscribe( res => {
+                                 r.resultado = res.value;
+                              } );
+                           });
+
                            this.references.forEach( function ( obj, index ) {
                               obj.nombreCompleto = obj.primerNombre + ' ' + obj.segundoNombre + ' ' + obj.primerApellido + ' ' + obj.segundoApellido;
                               if ( obj.telefonoFijo === null ) {
@@ -158,7 +167,7 @@ export class CallReferenceComponent implements OnInit {
                   vacanciesService.getPublication( res.idPublicacion ).subscribe( pb => {
                      this.publication = pb;
 
-                     this.listaService.getMasterDetailsByCode('ListasEstadosRequerimientos', 'CRRD').subscribe( reqState => {
+                     this.listaService.getMasterDetailsByCode( 'ListasEstadosRequerimientos', 'CRRD' ).subscribe( reqState => {
                         this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
                            this.stepStates = res;
                            if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
@@ -166,15 +175,15 @@ export class CallReferenceComponent implements OnInit {
                               this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
                                  this.candidateProcess = cp;
                                  if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ||
-                                      this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado   ||
-                                      reqState.idLista === this.publication.idEstado) {
+                                      this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado ||
+                                      reqState.idLista === this.publication.idEstado ) {
                                     this.readonly = true;
                                  } else {
                                     this.readonly = false;
                                  }
                               } );
                            } else {
-                              if(reqState.idLista === this.publication.idEstado) {
+                              if ( reqState.idLista === this.publication.idEstado ) {
                                  this.readonly = true;
                               } else {
                                  this.readonly = false;
@@ -183,7 +192,7 @@ export class CallReferenceComponent implements OnInit {
                            }
                         } );
 
-                     });
+                     } );
 
                   } );
                } );
@@ -264,6 +273,9 @@ export class CallReferenceComponent implements OnInit {
    call( tr: References ) {
       this.llamar = true;
       this.reference = tr;
+      this.callNumber = 'sip:9';
+      this.callNumber += this.reference.telefonoMovil.replace( /\(|\)|\-/g, "" );
+      this.callNumber = this.callNumber.split( ' ' ).join( '' );
       this.referencesService.getCallbyReference( this.reference.idTerceroReferencia ).subscribe(
          references => {
             if ( references.length > 0 ) {
@@ -294,6 +306,31 @@ export class CallReferenceComponent implements OnInit {
 
    hideForm() {
       this.llamar = false;
+      this.referencesService.getAllgetAllByEmployee( this.candidate.idTercero ).subscribe(
+         references => {
+            this.references = references;
+
+            this.references.map(r => {
+               this.referencesService.getLastCallbyReference( r.idTerceroReferencia ).subscribe( res => {
+                  r.resultado = res.value;
+               } );
+            });
+
+            this.references.forEach( function ( obj, index ) {
+               obj.nombreCompleto = obj.primerNombre + ' ' + obj.segundoNombre + ' ' + obj.primerApellido + ' ' + obj.segundoApellido;
+               if ( obj.telefonoFijo === null ) {
+                  obj.numeroContacto = obj.telefonoMovil;
+               }
+               if ( obj.telefonoMovil === null ) {
+                  obj.numeroContacto = obj.telefonoFijo;
+               }
+               if ( obj.telefonoMovil !== null && obj.telefonoFijo !== null ) {
+                  obj.numeroContacto = obj.telefonoFijo + ' /  ' + obj.telefonoMovil;
+               }
+            } );
+
+         }
+      );
    }
 
    addMaster() {
@@ -338,7 +375,12 @@ export class CallReferenceComponent implements OnInit {
       this.showFinish = true;
    }
 
-   llamarReferencia() {
-      window.open("sip:robertochajin@sipjs.onsip.com", "_blank");
+   onSubmitReferenceCall() {
+      if ( this.showFinish ) {
+         this.referencesService.updateReferenfesCall( this.referencesCall ).subscribe( refCall => {
+            this._nav.setMesage( 2 );
+            this.hideForm();
+         } );
+      }
    }
 }

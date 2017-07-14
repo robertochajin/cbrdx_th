@@ -62,7 +62,7 @@
 								<div class="row">
 									<div class="col-md-6">
 										<label><h3>{{'PROCESOSELECCION.LBL_ASIGNARFECHA' | translate}}</h3></label>
-										<p>{{candidateProcess.fechaCita}}</p>
+										<p>{{candidateProcess.fechaCita | date:"dd-mm-yyyy'a las' h:mma"}}</p>
 									</div>
 									<div class="col-md-6">
 										<label><h3>{{'PROCESOSELECCION.LBL_RESPONSABLE' | translate }}</h3></label>
@@ -81,9 +81,9 @@
 									<div class="form-group col-md-6" *ngIf="showCalendar">
 										<label for="asignDate">{{'PROCESOSELECCION.LBL_ASIGNARFECHA' | translate}}</label>
 										<p-calendar id="asignDate" name="asignDate" [showIcon]="true"
-										            [locale]="es" readonlyInput="true" [minDate]="minDate"
+										            [locale]="es" readonlyInput="true" [minDate]="minDate" [showTime]="true"
 										            dataType="date" #ngMeetDate="ngModel" required
-										            [(ngModel)]="candidateProcess.fechaCita" dateFormat="yy'-'mm'-'dd"></p-calendar>
+										            [(ngModel)]="fechaCita" dateFormat="yy'-'mm'-'dd"></p-calendar>
 										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngMeetDate.valid">
 											{{'PROCESOSELECCION.LBL_ASIGNARFECHA' | translate}} {{'LBL_REQUERIDO' | translate}}
 										</div>

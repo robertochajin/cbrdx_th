@@ -135,7 +135,7 @@ export class MedicalExamComponent implements OnInit {
                   vacanciesService.getPublication( res.idPublicacion ).subscribe( pb => {
                      this.publication = pb;
 
-                     this.listaService.getMasterDetailsByCode('ListasEstadosRequerimientos', 'CRRD').subscribe( reqState => {
+                     this.listaService.getMasterDetailsByCode( 'ListasEstadosRequerimientos', 'CRRD' ).subscribe( reqState => {
                         this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
                            this.stepStates = res;
                            if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
@@ -144,7 +144,7 @@ export class MedicalExamComponent implements OnInit {
                                  this.candidateProcess = cp;
                                  if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ||
                                       this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado ||
-                                      reqState.idLista === this.publication.idEstado) {
+                                      reqState.idLista === this.publication.idEstado ) {
                                     this.readonly = true;
                                  } else {
                                     this.readonly = false;
@@ -191,7 +191,7 @@ export class MedicalExamComponent implements OnInit {
                                  } );
                               } );
                            } else {
-                              if(reqState.idLista === this.publication.idEstado) {
+                              if ( reqState.idLista === this.publication.idEstado ) {
                                  this.readonly = true;
                               } else {
                                  this.readonly = false;
@@ -203,7 +203,7 @@ export class MedicalExamComponent implements OnInit {
                               }
                            }
                         } );
-                     });                                          
+                     } );
 
                      // obtener las instituciones medicas
                      this.medicalInstitutionService.getByIdPublic( this.publication.idPublicacion ).subscribe( data => {
@@ -219,7 +219,6 @@ export class MedicalExamComponent implements OnInit {
                      } );
                   } );
                } );
-
 
             } );
          } else {
