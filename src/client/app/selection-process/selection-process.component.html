@@ -37,6 +37,7 @@
 		<p-column field="area" header="{{'PROCESOSELECCION.LBL_AREA' | translate }}" [sortable]="true"></p-column>
 		<p-column field="estructuraFisica" header="{{'PROCESOSELECCION.LBL_OFICINA' | translate }}" [sortable]="true"></p-column>
 		<p-column field="modelo" header="{{'PROCESOSELECCION.LBL_POSTULADOS' | translate }}" [sortable]="true"></p-column>
+		<p-column field="estado" header="Estado" [sortable]="true"></p-column>
 		<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 			<template let-PR="rowData" pTemplate="body">
 				<button *ngIf="PR.idPublicacion===null ||PR.idPublicacion===undefined" type="button" icon="fa-upload" data-toggle="tooltip" title="{{'BTN_PUBLICAVACANTE' | translate}}" class="ui-button-success"
