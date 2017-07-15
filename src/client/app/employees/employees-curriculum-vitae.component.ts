@@ -21,9 +21,10 @@ import { References } from '../_models/references';
 import { ReferencesService } from '../_services/references.service';
 import { DivisionPoliticaService } from '../_services/divisionPolitica.service';
 
-//import * as html2canvas from 'html2canvas';
-let jsPDF = require('jspdf/dist/jspdf.min.js');
-let html2canvas = require('html2canvas/dist/html2canvas.js');
+//import * as jsPDF from 'jspdf';
+declare let jsPDF : any;
+declare let html2canvas : any;
+
 
 
 @Component( {
@@ -211,11 +212,11 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
 
       this.loadingPdf = true;
 
-      let nombrePdf = this.employee.nombreCompleto.trim();
+      let nombrePdf: string = this.employee.nombreCompleto.trim();
       nombrePdf = nombrePdf.replace(/ /g, '-');
 
-      let doc = new jsPDF('p', 'mm', 'a4');
-      let element: any = jQuery("#CV");
+      let doc : any = new jsPDF('p', 'mm', 'a4');
+      let element : any = jQuery("#CV");
 
       html2canvas(element,  {
          background: 'white',
@@ -223,13 +224,13 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
          logging : true
       }).then((canvas: any) => {
 
-         let width = canvas.width;
-         let height = canvas.height;
+         let width : number = canvas.width;
+         let height : number = canvas.height;
 
          let mwidth = Math.floor(width * 0.264583)+30;
          let mheight = Math.floor(height * 0.264583)+40;
 
-         let imgData = canvas.toDataURL('image/png');
+         let imgData : any = canvas.toDataURL('image/png');
 
          doc.deletePage(1);
          doc.addPage(mwidth, mheight);
@@ -240,6 +241,7 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
 
 
       })
+
    }
 
 }
