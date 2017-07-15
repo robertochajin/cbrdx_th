@@ -93,6 +93,13 @@
 									</div>
 								</div>
 							</div>
+							<div class="row form-footer-buttons">
+								<div class="form-group col-md-12">
+									<a (click)="goBack((fex.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+									<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+									        pButton></button>
+								</div>
+							</div>
 						</div>
 						<div class="row" *ngIf="!institucionMedica && !readonly">
 							<div class="form-group col-md-3"></div>
