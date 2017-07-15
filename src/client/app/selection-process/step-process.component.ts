@@ -125,12 +125,17 @@ export class StepProcessComponent implements OnInit {
                               this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
                               this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
                                  this.candidateProcess = cp;
-                                 let fecha = new Date(this.candidateProcess.fechaCita);
+                                 let fecha = new Date( this.candidateProcess.fechaCita );
                                  this.candidateProcess.fechaCita = moment( fecha, "YYYY-MM-DD" ).toLocaleString();
-                                 this.prepareForm((reqState.idLista === this.publication.idEstado));
+                                 this.prepareForm( (reqState.idLista === this.publication.idEstado) );
                               } );
                            } else {
                               this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
+                              // if ( this.step.indicadorCalendario ) {
+                              //    this.candidateProcessService.add( this.candidateProcess ).subscribe( res => {
+                              //       this.candidateProcess = res;
+                              //    });
+                              // }
                               this.prepareForm( (reqState.idLista === this.publication.idEstado) );
                            }
                         } );
