@@ -131,11 +131,11 @@ export class StepProcessComponent implements OnInit {
                               } );
                            } else {
                               this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
-                              if ( this.step.indicadorCalendario ) {
-                                 this.candidateProcessService.add( this.candidateProcess ).subscribe( res => {
-                                    this.candidateProcess = res;
-                                 });
-                              }
+                              // if ( this.step.indicadorCalendario ) {
+                              //    this.candidateProcessService.add( this.candidateProcess ).subscribe( res => {
+                              //       this.candidateProcess = res;
+                              //    });
+                              // }
                               this.prepareForm( (reqState.idLista === this.publication.idEstado) );
                            }
                         } );
