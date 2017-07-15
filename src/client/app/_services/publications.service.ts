@@ -22,6 +22,11 @@ export class PublicationsService {
       }
    }
 
+   areRequirementSlotsFull( idPublicacion: number ){
+      return this.authHttp.get( this.serviceURL + 'publicaciones/plazasLlenadas/' + idPublicacion ).map(
+         ( res: Response ) => res.json() as boolean );
+   }
+
    getlistPublications() {
       return this.authHttp.get( this.serviceURL + 'publicaciones' ).map( ( res: Response ) => res.json() );
    }

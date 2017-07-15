@@ -39,19 +39,22 @@
 							<div class="col-md-12">
 								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'PROCESOSELECCION.LBL_POSTULANTEA' | translate
 									}}:</label>
-								<label class="col-md-3 col-sm-6 col-xs-12">{{publication.cargo}}</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{publication.cargo}}</strong></label>
 								
 								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_OFICINA' | translate }}:</label>
-								<label class="col-md-3 col-sm-6 col-xs-12">{{publication.estructuraFisica}}</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{publication.estructuraFisica}}</strong></label>
 							</div>
 						</div>
 						<div class="row">
 							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_AREA' | translate }}:</label>
-							<label class="col-md-3 col-sm-6 col-xs-12">{{publication.area}}</label>
+							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{publication.area}}</strong></label>
 						</div>
 					</div>
 				</fieldset>
 			</form>
+			<div class="col-md-12">
+				<hr>
+			</div>
 			<p-dataTable [value]="centrales">
 				<p-column field="nombre" header="{{'PROCESOSELECCION.LBL_CENTRALRIESGO' | translate }}"></p-column>
 				<p-column field="" header="{{'PROCESOSELECCION.LBL_CONSULTAR' | translate }}" styleClass="datatable-col-action">
@@ -67,6 +70,7 @@
 						              (onBeforeSend)="onBeforeSend($event,datos)"
 						              (onUpload)="onUpload($event,datos)" accept="image/*,application/pdf"
 						              [hidden]="cargando === datos.idCentralRiesgo || datos.idAdjunto"
+						              [disabled]="readonly"
 						></p-fileUpload>
 						<button *ngIf="datos.idAdjunto" class="btn btn-link" (click)="downloadFile(datos)" type="button">
 							<i class="fa fa-paperclip" aria-hidden="true"></i>
@@ -76,14 +80,14 @@
 				</p-column>
 				<p-column field="" header="{{'PROCESOSELECCION.LBL_APROBAR' | translate }}" styleClass="datatable-col-action">
 					<template let-data="rowData" pTemplate="body">
-						<p-checkbox  [(ngModel)]="data.indicadorAprobado" binary="true" (onChange)="aprobar(data)"
-						             [disabled]="data.idAdjunto === null || data.indicadorReportado === true"></p-checkbox>
+						<p-checkbox [(ngModel)]="data.indicadorAprobado" binary="true" (onChange)="aprobar(data)"
+						            [disabled]="data.idAdjunto === null || data.indicadorReportado === true || readonly"></p-checkbox>
 					</template>
 				</p-column>
 				<p-column field="" header="{{'PROCESOSELECCION.LBL_REPORTAR' | translate }}" styleClass="datatable-col-action">
 					<template let-data="rowData" pTemplate="body">
 						<p-checkbox *ngIf="data.indicadorReporta" [(ngModel)]="data.indicadorReportado" binary="true"
-						            [disabled]="data.idAdjunto === null || data.indicadorAprobado === true"
+						            [disabled]="data.idAdjunto === null || data.indicadorAprobado === true || readonly"
 						            (onChange)="reportar(data)"></p-checkbox>
 					</template>
 				</p-column>
@@ -96,7 +100,7 @@
 						        pButton (click)="previewFile(data)"></button>
 						
 						<button type="button" icon="fa-cloud-download" *ngIf="data.idAdjunto"
-						        class="ui-button-success"  data-toggle="tooltip"
+						        class="ui-button-success" data-toggle="tooltip"
 						        title="{{'BTN_DOWNLOAD' | translate}}"
 						        pButton (click)="downloadFile(data)" ></button>
 						
@@ -107,7 +111,7 @@
 							        pButton ></button>
 						</a>
 						-->
-						<button type="button" icon="fa-trash" *ngIf="data.idAdjunto"
+						<button type="button" icon="fa-trash" *ngIf="data.idAdjunto || !readonly"
 						        class="ui-button btn" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
 						        pButton (click)="deleteFile(data)"></button>
 						<span *ngIf="!data.idAdjunto">{{'PROCESOSELECCION.LBL_NOADJUNTO' | translate}}</span>
@@ -118,18 +122,17 @@
 		</p-panel>
 		<p-panel header="{{'PROCESOSELECCION.LBL_CONTINUARPROCESO' | translate }}">
 			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="process">
-				<fieldset>
+				<fieldset *ngIf="!readonly">
 					<div class="row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-10 col-md-offset-1">
 							<label for="validStep">* {{'PROCESOSELECCION.LBL_APRUEBAPASO' | translate }}</label>
 							<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
 							            [autoWidth]="false" [(ngModel)]="indApproval"></p-dropdown>
 						</div>
-						<div class="form-group col-md-6">
-						</div>
+
 					</div>
 					<div class="row">
-						<div class="form-group col-md-12" >
+						<div class="form-group col-md-10 col-md-offset-1" >
 							<label for="observacion">* {{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}</label>
 							<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #observa="ngModel"
 							          [(ngModel)]="candidateProcess.observacion" required="true" class="form-control"
@@ -146,6 +149,26 @@
 							<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
 							        pButton></button>
 						
+						</div>
+					</div>
+				</fieldset>
+				<fieldset *ngIf="readonly">
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="validStep">{{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
+							<p>{{candidateProcess.estadoDiligenciado}}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="observacion">{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}:</label>
+							<p>{{candidateProcess.observacion}}</p>
+						</div>
+					</div>
+					<div class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+							        pButton (click)="goBack(false)"></button>
 						</div>
 					</div>
 				</fieldset>

@@ -117,7 +117,7 @@
 						</div>
 					</div>
 				</fieldset>
-				<fieldset *ngIf="readonly">
+				<fieldset *ngIf="readonly && !areSlotsFull">
 					<div class="row">
 						<div class="form-group col-md-12">
 							<label>{{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
@@ -140,6 +140,16 @@
 							<p>{{candidateProcess.observacion}}</p>
 						</div>
 					</div>
+					<div class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+							        pButton (click)="goBack(false)"></button>
+						</div>
+					</div>
+				</fieldset>
+				<fieldset *ngIf="areSlotsFull">
+					<h2>{{'PROCESOSELECCION.MSG_PLAZASLLENAS' | translate }}</h2>
+					
 					<div class="row form-footer-buttons">
 						<div class="form-group col-md-12">
 							<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"

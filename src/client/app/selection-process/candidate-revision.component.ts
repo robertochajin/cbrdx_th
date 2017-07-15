@@ -99,8 +99,7 @@ export class CandidateRevisionComponent implements OnInit {
                   vacanciesService.getPublication( res.idPublicacion ).subscribe( pb => {
                      this.publication = pb;
 
-                     this.listaService.getMasterDetailsByCode('ListasEstadosRequerimientos', 'CRRD').subscribe( reqState => {
-
+                     this.listaService.getMasterDetailsByCode( 'ListasEstadosRequerimientos', 'CRRD' ).subscribe( reqState => {
 
                         this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
                            this.stepStates = res;
@@ -110,14 +109,14 @@ export class CandidateRevisionComponent implements OnInit {
                                  this.candidateProcess = cp;
                                  if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ||
                                       this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado ||
-                                      reqState.idLista === this.publication.idEstado) {
+                                      reqState.idLista === this.publication.idEstado ) {
                                     this.readonly = true;
                                  } else {
                                     this.readonly = false;
                                  }
                               } );
                            } else {
-                              if(reqState.idLista === this.publication.idEstado) {
+                              if ( reqState.idLista === this.publication.idEstado ) {
                                  this.readonly = true;
                               } else {
                                  this.readonly = false;
@@ -126,10 +125,9 @@ export class CandidateRevisionComponent implements OnInit {
                            }
                         } );
 
-                     });
+                     } );
                   } );
                } );
-
 
             } );
 

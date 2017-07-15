@@ -36,8 +36,10 @@ import { Risk } from '../_models/position-risks';
 import { Exam } from '../_models/position-exam';
 import { RiskService } from '../_services/positios-risks.service';
 
-let jsPDF = require('jspdf/dist/jspdf.min.js');
-let html2canvas = require('html2canvas/dist/html2canvas.js');
+
+declare let jsPDF : any;
+// let jsPDF = require('jspdf/dist/jspdf.min.js');
+
 
 @Component( {
                moduleId: module.id,
@@ -422,8 +424,8 @@ export class PositionsDetailPdfComponent implements OnInit {
       doc.internal.scaleFactor = 1.6;
 
 
-      const elementToPrint = document.getElementById('position');
-      const options = {
+      let elementToPrint : any = document.getElementById('position');
+      let options : any = {
          pagesplit: true,
          background: '#e9e9e9',
          retina: true,

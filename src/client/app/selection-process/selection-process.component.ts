@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Rol } from '../_models/rol';
 import { RolesService } from '../_services/roles.service';
 import { Router } from '@angular/router';
 import { NavService } from '../_services/_nav.service';
@@ -8,11 +7,12 @@ import { PersonnelRequirement } from '../_models/personnelRequirement';
 import { ListaService } from '../_services/lista.service';
 import { Message, SelectItem } from 'primeng/primeng';
 import { JwtHelper } from 'angular2-jwt';
-import moment = require('moment');
 import { UsuariosService } from '../_services/usuarios.service';
 import { ConstanteService } from '../_services/constante.service';
 import { VUsuario } from '../_models/vUsuario';
 import { VUsuarioRol } from '../_models/vUsuarioRol';
+import moment = require('moment');
+import { ListaItem } from '../_models/listaItem';
 
 @Component( {
                moduleId: module.id,
@@ -34,6 +34,7 @@ export class SelectionProcessComponent implements OnInit {
    private showFilters: boolean;
    private recruiters: SelectItem[] = [];
    selectedRecruiter: number;
+   private requirementStates: ListaItem[] = [];
 
    constructor( private rolesService: RolesService,
       private router: Router,
@@ -84,12 +85,19 @@ export class SelectionProcessComponent implements OnInit {
       }
 
       this.listaService.getMasterAllDetails( 'ListasEstadosRequerimientos' ).subscribe( data => {
+         this.requirementStates = data;
          let temp = data.find( r => r.codigo === 'PRCSEL' );
+         let closedState = data.find( r => r.codigo === 'CRRD' );
          if ( temp ) {
             this.idEstado = temp.idLista;
             this.vacanciesService.getByRespSelecAndIdEstad( this.usuarioLogueado.usuario.idUsuario, this.idEstado ).subscribe( rest => {
                this.vacancies = rest;
-               this.vacanciesTemp = rest;
+               this.vacanciesService.getByRespSelecAndIdEstad( this.usuarioLogueado.usuario.idUsuario, closedState.idLista )
+               .subscribe( rests => {
+                  this.vacancies = this.vacancies.concat( rests );
+                  this.vacanciesTemp = this.vacancies;
+
+               } );
             } );
          } else {
             this.navService.setMesage( 0, { severity: 'error', summary: 'Error', detail: 'Estado Preceso de selección no existe' } );
@@ -124,10 +132,7 @@ export class SelectionProcessComponent implements OnInit {
                   this.vacancies.push( r );
                }
             } else if ( this.filtro === 4 ) {
-               let fin = new Date( r.fechaFinPublicacion );
-               fin.setHours( 24 );
-               fin.setSeconds( 1 );
-               if ( fin < this.today && r.idPublicacion && responsible ) {
+               if ( r.idEstado === this.requirementStates.find( rs => rs.codigo === 'CRRD' ).idLista && responsible ) {
                   this.vacancies.push( r );
                }
             }

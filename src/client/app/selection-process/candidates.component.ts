@@ -4,7 +4,7 @@ import { Router, Params, ActivatedRoute } from '@angular/router';
 import { NavService } from '../_services/_nav.service';
 import { VacanciesService } from '../_services/vacancies.service';
 import { ListaService } from '../_services/lista.service';
-import { Message, SelectItem } from 'primeng/primeng';
+import { Message, SelectItem, ConfirmationService } from 'primeng/primeng';
 import { JwtHelper } from 'angular2-jwt';
 import moment = require('moment');
 import { CandidateProgress } from '../_models/candidateProgress';
@@ -24,6 +24,7 @@ import { Location } from '@angular/common';
                moduleId: module.id,
                templateUrl: 'candidates.component.html',
                styleUrls: [ 'candidates.component.css' ],
+               providers: [ ConfirmationService ]
 
             } )
 export class CandidatesComponent implements OnInit {
@@ -50,6 +51,7 @@ export class CandidatesComponent implements OnInit {
       private navService: NavService,
       private location: Location,
       private publicationsService: PublicationsService,
+      private confirmationService: ConfirmationService,
       private candidateProcessService: CandidateProcessService,
       private personnelRequirementServices: PersonnelRequirementServices,
       private listaService: ListaService,
@@ -174,10 +176,20 @@ export class CandidatesComponent implements OnInit {
    }
 
    cerrarProceso() {
-      this.personnelRequirementServices.closeRequirement( this.publication.idRequerimiento ).subscribe( data => {
-         this.personnelRequirement = data;
-         this.location.back();
-      } );
+      this.confirmationService.confirm( {
+                                           message: ` ¿Esta seguro que desea Finalizar el proceso?`,
+                                           header: 'Confirmación',
+                                           icon: 'fa fa-question-circle',
+                                           accept: () => {
+                                              this.personnelRequirementServices.closeRequirement( this.publication.idRequerimiento )
+                                              .subscribe( data => {
+                                                 this.personnelRequirement = data;
+                                                 this.router.navigate( [ 'selection-process' ] );
+                                              } );
+                                           },
+                                           reject: () => {
+                                           }
+                                        } );
    }
 
    setSearch() {
