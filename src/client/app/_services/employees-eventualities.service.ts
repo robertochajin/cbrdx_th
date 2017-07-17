@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { Employee } from '../_models/employees';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
+import { EmployeeEventuality } from '../_models/employeeEventuality';
 
 @Injectable()
-export class EmployeeNoveltyService {
+export class EmployeeEventualitiesService {
 
    usuarioLogueado: any;
    idUsuario: number;
@@ -24,19 +24,22 @@ export class EmployeeNoveltyService {
    }
 
    getById( id: number ) {
-      return this.authHttp.get( this.serviceURL + 'vterceros/' + id ).map( ( res: Response ) => res.json() as Employee );
+      return this.authHttp.get( this.serviceURL + 'vterceros/' + id ).map( ( res: Response ) => res.json() as EmployeeEventuality );
+   }
+   getAllByIdEmployee( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'vterceros/' + id ).map( ( res: Response ) => res.json() as EmployeeEventuality[] );
    }
 
    getAll() {
-      return this.authHttp.get( this.serviceURL + 'vterceros' ).map( ( res: Response ) => res.json() as Employee[] );
+      return this.authHttp.get( this.serviceURL + 'vterceros' ).map( ( res: Response ) => res.json() as EmployeeEventuality[] );
    }
 
-   add( c: Employee ) {
+   add( c: EmployeeEventuality ) {
       c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'terceros', c ).map( ( res: Response ) => res.json() );
    };
 
-   update( c: Employee ) {
+   update( c: EmployeeEventuality ) {
       c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL + 'terceros', c ).map( ( res: Response ) => res );
    }

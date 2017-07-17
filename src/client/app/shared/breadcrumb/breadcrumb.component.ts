@@ -318,5 +318,9 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
       this.breadcrumbService.hideRouteRegex( '^/apply-vacancy/employee-profile/[0-9]*' );
       this.breadcrumbService.hideRouteRegex( '^/apply-vacancy/questionnaires/[0-9]*' );
 
+      this.breadcrumbService.addFriendlyNameForRoute( '/employee-eventualities', 'Novedades' );
+      this.breadcrumbService.hideRouteRegex( '^/employee-eventualities/add/[0-9]*/[0-9]*' );
+      // this.breadcrumbService.addFriendlyNameForRouteRegex( '^/employee-eventualities/add/[0-9]*/[0-9]*$', 'Nueva novedaa' );
+
    }
 }
