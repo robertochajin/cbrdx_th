@@ -10,11 +10,14 @@
 			  <div class="thumbnail img-responsive" *ngIf="employee.imagen">
 				  <img src="{{svcThUrl}}/file/{{employee.imagen }}" alt="...">
 			  </div>
-	        <p-fileUpload name="file" url="{{svcThUrl}}/{{employee.idTercero}}" auto="true" class="upload-avatar"
+	        <p-fileUpload *ngIf="(!loadingAvatar)" name="file" url="{{svcThUrl}}/{{employee.idTercero}}" auto="true" class="upload-avatar"
 	                      chooseLabel="{{'USER_SESSION.LBL_NUEVOAVATAR' | translate}}"
 	                      (onBeforeSend)="onBeforeSend($event)"
-	                      (onUpload)="onUpload($event)" accept="image/*"
-	        ></p-fileUpload>
+	                      (onBeforeUpload)="onBeforeUpload()"
+	                      (onUpload)="onUpload($event)" accept="image/*"></p-fileUpload>
+	        <a *ngIf="(loadingAvatar === true)" class="btn btn-primary btn-block">
+		        <i class="fa fa-refresh fa-spin fa-fw"></i>
+	        </a>
         </div>
         <div class="col-md-8">
           <h2>{{employee.nombreCompleto}}</h2>
@@ -35,48 +38,91 @@
           <p-tabPanel header="Info Personal" [selected]="true">
 
               <p-accordion (onOpen)="onTabShow($event)" id="accordion">
-                  <p-accordionTab header="Datos Generales" [selected]="acordion == 0 || acordion == null ">
+	              <p-accordionTab header="{{'EMPLOYEES.LBL_DATOSGENERALES' | translate}}" [selected]="acordion == 0 || acordion == null "
+	                              *hasPermission="seccion1 ? seccion1 : defaultCampo">
                     <form class="form-horizontal">
                       <fieldset>
                         <div>
                           <div class="row">
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_FECHAEXPEDICION' | translate}}:</label>
-                            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.fechaDocumento}}</strong></label>
-
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_CIUDADEXPEDICION' | translate}}:</label>
-                            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.ciudadExpDocumento}}</strong></label>
-
-                          </div>
-                          <div class="row">
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate}}:</label>
-                            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.fechaNacimiento}}</strong></label>
-
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_CIUDADNACIMIENTO' | translate}}:</label>
-                            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.ciudadNacimiento}}</strong></label>
-
-                          </div>
-                          <div class="row">
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_NACIONALIDAD' | translate}}:</label>
-                            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.gentilicio}}</strong></label>
-
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_GENERO' | translate}}</label>
-                            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.genero}}</strong></label>
+	                          <label class="col-md-3 col-sm-6 col-xs-12 control-label"
+	                                 *ngIf="seccion1.FECHADOCUMENTO ? seccion1.FECHADOCUMENTO.visible : true"
+	                          >
+		                          {{'EMPLOYEES.LBL_FECHAEXPEDICION' |
+		                          translate}}:</label>
+	                          <label class="col-md-3 col-sm-6 col-xs-12"
+	                                 *ngIf="seccion1.FECHADOCUMENTO ? seccion1.FECHADOCUMENTO.visible : true"
+	                          ><strong>{{employee.fechaDocumento}}</strong></label>
+	
+	                          <label class="col-md-3 col-sm-6 col-xs-12 control-label"
+	                                 *ngIf="seccion1.IDCIUDADEXPDOCUMENTO ? seccion1.IDCIUDADEXPDOCUMENTO.visible : true"
+	                          >{{'EMPLOYEES.LBL_CIUDADEXPEDICION' | translate}}:</label>
+	                          <label class="col-md-3 col-sm-6 col-xs-12"
+	                                 *ngIf="seccion1.IDCIUDADEXPDOCUMENTO ? seccion1.IDCIUDADEXPDOCUMENTO.visible : true"
+	                          ><strong>{{employee.ciudadExpDocumento}}</strong></label>
 
                           </div>
                           <div class="row">
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_ESTADOCIVIL' | translate}}:</label>
-                            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.estadoCivil}}</strong></label>
-
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_FACTORRH' | translate}}:</label>
-                            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.factorRh}}</strong></label>
+	                          <label class="col-md-3 col-sm-6 col-xs-12 control-label"
+	                                 *ngIf="seccion1.FECHANACIMIENTO ? seccion1.FECHANACIMIENTO.visible : true"
+	                          >{{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate}}:</label>
+	                          <label class="col-md-3 col-sm-6 col-xs-12"
+	                                 *ngIf="seccion1.FECHANACIMIENTO ? seccion1.FECHANACIMIENTO.visible : true"
+	                          ><strong>{{employee.fechaNacimiento}}</strong></label>
+	
+	                          <label class="col-md-3 col-sm-6 col-xs-12 control-label"
+	                                 *ngIf="seccion1.IDCIUDADNACIMIENTO ? seccion1.IDCIUDADNACIMIENTO.visible : true"
+	                          >{{'EMPLOYEES.LBL_CIUDADNACIMIENTO' | translate}}:</label>
+	                          <label class="col-md-3 col-sm-6 col-xs-12"
+	                                 *ngIf="seccion1.IDCIUDADNACIMIENTO ? seccion1.IDCIUDADNACIMIENTO.visible : true"
+	                          ><strong>{{employee.ciudadNacimiento}}</strong></label>
 
                           </div>
                           <div class="row">
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_NUMEROHIJOS' | translate}}:</label>
-                            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.nroHijos}}</strong></label>
+	                          <label class="col-md-3 col-sm-6 col-xs-12 control-label"
+	                                 *ngIf="seccion1.IDCIUDADNACIMIENTO ? seccion1.IDCIUDADNACIMIENTO.visible : true"
+	                          >{{'EMPLOYEES.LBL_NACIONALIDAD' | translate}}:</label>
+	                          <label class="col-md-3 col-sm-6 col-xs-12"
+	                                 *ngIf="seccion1.IDCIUDADNACIMIENTO ? seccion1.IDCIUDADNACIMIENTO.visible : true"
+	                          ><strong>{{employee.gentilicio}}</strong></label>
+	
+	                          <label class="col-md-3 col-sm-6 col-xs-12 control-label"
+	                                 *ngIf="seccion1.IDGENERO ? seccion1.IDGENERO.visible : true"
+	                          >{{'EMPLOYEES.LBL_GENERO' | translate}}</label>
+	                          <label class="col-md-3 col-sm-6 col-xs-12"
+	                                 *ngIf="seccion1.IDGENERO ? seccion1.IDGENERO.visible : true"
+	                          ><strong>{{employee.genero}}</strong></label>
 
-                            <label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEES.LBL_NIVELESTUDIOS' | translate}}:</label>
-                            <label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.nivelEstudio}}</strong></label>
+                          </div>
+                          <div class="row">
+	                          <label class="col-md-3 col-sm-6 col-xs-12 control-label"
+	                                 *ngIf="seccion1.IDESTADOCIVIL ? seccion1.IDESTADOCIVIL.visible : true"
+	                          >{{'EMPLOYEES.LBL_ESTADOCIVIL' | translate}}:</label>
+	                          <label class="col-md-3 col-sm-6 col-xs-12"
+	                                 *ngIf="seccion1.IDESTADOCIVIL ? seccion1.IDESTADOCIVIL.visible : true"
+	                          ><strong>{{employee.estadoCivil}}</strong></label>
+	
+	                          <label class="col-md-3 col-sm-6 col-xs-12 control-label"
+	                                 *ngIf="seccion1.IDFACTORRH ? seccion1.IDFACTORRH.visible : true"
+	                          >{{'EMPLOYEES.LBL_FACTORRH' | translate}}:</label>
+	                          <label class="col-md-3 col-sm-6 col-xs-12"
+	                                 *ngIf="seccion1.IDFACTORRH ? seccion1.IDFACTORRH.visible : true"
+	                          ><strong>{{employee.factorRh}}</strong></label>
+
+                          </div>
+                          <div class="row">
+	                          <label class="col-md-3 col-sm-6 col-xs-12 control-label"
+	                                 *ngIf="seccion1.NROHIJOS ? seccion1.NROHIJOS.visible : true"
+	                          >{{'EMPLOYEES.LBL_NUMEROHIJOS' | translate}}:</label>
+	                          <label class="col-md-3 col-sm-6 col-xs-12"
+	                                 *ngIf="seccion1.NROHIJOS ? seccion1.NROHIJOS.visible : true"
+	                          ><strong>{{employee.nroHijos}}</strong></label>
+	
+	                          <label class="col-md-3 col-sm-6 col-xs-12 control-label"
+	                                 *ngIf="seccion1.IDNIVELEDUCACION ? seccion1.IDNIVELEDUCACION.visible : true"
+	                          >{{'EMPLOYEES.LBL_NIVELESTUDIOS' | translate}}:</label>
+	                          <label class="col-md-3 col-sm-6 col-xs-12"
+	                                 *ngIf="seccion1.IDNIVELEDUCACION ? seccion1.IDNIVELEDUCACION.visible : true"
+	                          ><strong>{{employee.nivelEstudio}}</strong></label>
 
                           </div>
                           <div class="row">
@@ -87,7 +133,7 @@
                             <!--<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employee.profesion}}</strong></label>-->
 
                           </div>
-                          <div class="row form-footer-buttons">
+	                        <div class="row form-footer-buttons" *ngIf="seccion1.EDITAR ? seccion1.EDITAR.visible : true">
                             <div class="form-group col-md-12">
                               <button type="button" icon="fa-pencil" label="{{'BTN_EDITAR' | translate}}" class="ui-button-success"
                                       pButton (click)="update(employee.idTercero)">
@@ -98,57 +144,75 @@
                       </fieldset>
                     </form>
                   </p-accordionTab>
-
-                  <p-accordionTab header="{{'EMPLOYEES.LBL_DATOSADICIONALES' | translate}}" [selected]="acordion == 1">
+	
+	              <p-accordionTab header="{{'EMPLOYEES.LBL_DATOSADICIONALES' | translate}}" [selected]="acordion == 1"
+	                              *hasPermission="seccion2 ? seccion2 : defaultCampo">
                     <fieldset>
-                      <employees-additional-data *ngIf="employee.idTercero" [employee]="employee"></employees-additional-data>
+	                    <employees-additional-data *ngIf="employee.idTercero" [employee]="employee"
+	                                               [seccion]="seccion2"></employees-additional-data>
                     </fieldset>
                   </p-accordionTab>
-
-                  <p-accordionTab header="{{'EMPLOYEES.LBL_DATOSCONTACTO' | translate}}" [selected]="acordion == 2">
+	
+	              <p-accordionTab header="{{'EMPLOYEES.LBL_DATOSCONTACTO' | translate}}" [selected]="acordion == 2"
+	                              *hasPermission="seccion3 ? seccion3 : defaultCampo">
                     <fieldset *ngIf="employee.idTercero">
-                      <employees-contact  [employee]="employee"></employees-contact>
-                      <employees-contact-list [employee]="employee"></employees-contact-list>
+	                    <employees-contact [employee]="employee" [seccion]="seccion3"></employees-contact>
+	                    <employees-contact-list [employee]="employee" [seccion]="seccion3"></employees-contact-list>
                     </fieldset>
                   </p-accordionTab>
-
-                  <p-accordionTab header="{{'EMPLOYEES.LBL_INFORMACIONFAMILIAR' | translate}}" [selected]="acordion == 3">
-                    <family-information *ngIf="employee.idTercero" [employee]="employee"></family-information>
+	
+	              <p-accordionTab header="{{'EMPLOYEES.LBL_INFORMACIONFAMILIAR' | translate}}" [selected]="acordion == 3"
+	                              *hasPermission="seccion4 ? seccion4 : defaultCampo">
+		              <family-information *ngIf="employee.idTercero" [employee]="employee" [seccion]="seccion4"></family-information>
                   </p-accordionTab>
-
-                  <p-accordionTab header="{{'UBICACION.LBL_UBICACION' | translate}}" [selected]="acordion == 4">
-                    <employees-locations *ngIf="employee.idTercero" [colaborador]="employee"></employees-locations>
+	
+	              <p-accordionTab header="{{'UBICACION.LBL_UBICACION' | translate}}" [selected]="acordion == 4"
+	                              *hasPermission="seccion5 ? seccion5 : defaultCampo">
+		              <employees-locations *ngIf="employee.idTercero" [colaborador]="employee" [seccion]="seccion5"></employees-locations>
                   </p-accordionTab>
-
-                  <p-accordionTab header="{{'EMPLOYEES.LBL_ACTIVOS' | translate}}" [selected]="acordion == 5">
-                    <employees-estate *ngIf="employee.idTercero" [employee]="employee"></employees-estate>
-                    <employees-vehicle *ngIf="employee.idTercero" [employee]="employee"></employees-vehicle>
+	
+	              <p-accordionTab header="{{'EMPLOYEES.LBL_ACTIVOS' | translate}}" [selected]="acordion == 5"
+	                              *hasPermission="seccion6 ? seccion6 : defaultCampo">
+		              <employees-estate *ngIf="employee.idTercero" [employee]="employee" [seccion]="seccion6"></employees-estate>
+		              <employees-vehicle *ngIf="employee.idTercero" [employee]="employee" [seccion]="seccion6"></employees-vehicle>
                   </p-accordionTab>
-
-                  <p-accordionTab header="{{'EMPLOYEES.LBL_FORMACIONACADEMICA' | translate}}" [selected]="acordion == 6">
-                    <academic-education-formal *ngIf="employee.idTercero" [employee]="employee"></academic-education-formal>
-                    <academic-education-no-formal *ngIf="employee.idTercero" [employee]="employee"></academic-education-no-formal>
+	
+	              <p-accordionTab header="{{'EMPLOYEES.LBL_FORMACIONACADEMICA' | translate}}" [selected]="acordion == 6"
+	                              *hasPermission="seccion7 ? seccion7 : defaultCampo">
+		              <academic-education-formal *ngIf="employee.idTercero" [employee]="employee"
+		                                         [seccion]="seccion7"></academic-education-formal>
+		              <academic-education-no-formal *ngIf="employee.idTercero" [employee]="employee"
+		                                            [seccion]="seccion7"></academic-education-no-formal>
                   </p-accordionTab>
-
-                  <p-accordionTab header="{{'EMPLOYEES.LBL_EXPERIENCIALABORAL' | translate}}" [selected]="acordion == 7">
-                     <work-experience *ngIf="employee.idTercero" [employee]="employee"></work-experience>
+	
+	              <p-accordionTab header="{{'EMPLOYEES.LBL_EXPERIENCIALABORAL' | translate}}" [selected]="acordion == 7"
+	                              *hasPermission="seccion8 ? seccion8 : defaultCampo">
+		              <work-experience *ngIf="employee.idTercero" [employee]="employee" [seccion]="seccion8"></work-experience>
                   </p-accordionTab>
-
-                  <p-accordionTab header="{{'EMPLOYEES.LBL_REFERENCIAS' | translate}}" [selected]="acordion == 8">
-                    <references-component *ngIf="employee.idTercero" [employee]="employee"></references-component>
+	
+	              <p-accordionTab header="{{'EMPLOYEES.LBL_REFERENCIAS' | translate}}" [selected]="acordion == 8"
+	                              *hasPermission="seccion9 ? seccion9 : defaultCampo">
+		              <references-component *ngIf="employee.idTercero" [employee]="employee" [seccion]="seccion9"></references-component>
                   </p-accordionTab>
-
-                  <p-accordionTab header="{{'EMPLOYEES.LBL_DATOSCLINICOS' | translate}}" [selected]="acordion == 9">
-                    <clinical-information *ngIf="employee.idTercero" [employee]="employee"></clinical-information>
+	
+	              <p-accordionTab header="{{'EMPLOYEES.LBL_DATOSCLINICOS' | translate}}" [selected]="acordion == 9"
+	                              *hasPermission="seccion10 ? seccion10 : defaultCampo">
+		              <clinical-information *ngIf="employee.idTercero" [employee]="employee" [seccion]="seccion10"></clinical-information>
                   </p-accordionTab>
+	
+	              <p-accordionTab header="{{'EMPLOYEES.LBL_EMPLOYEESADJUNTOS' | translate}}" [selected]="acordion == 10"
+	                              *hasPermission="seccion11 ? seccion11 : defaultCampo">
+		              <employees-attachments *ngIf="employee.idTercero" [employee]="employee" [seccion]="seccion11"></employees-attachments>
+	              </p-accordionTab>
 
               </p-accordion>
 
           </p-tabPanel>
-        <p-tabPanel header="Reclutamiento" styleClass="clearfix" disabled="true">
-          <h3>{{'EMPLOYEES.LBL_RECLUTAMIENTO' | translate}}</h3>
+	      <p-tabPanel header="Reclutamiento" styleClass="clearfix">
+		      <h3>{{'EMPLOYEES.LBL_RECLUTAMIENTO' | translate}}</h3>
+		      <employees-recruitment *ngIf="employee.idTercero" [employee]="employee"></employees-recruitment>
         </p-tabPanel>
-        <p-tabPanel header="Novedades" disabled="true">
+        <p-tabPanel header="{{'EMPLOYEES.LBL_NOVEDADES' | translate}}">
           <h3>{{'EMPLOYEES.LBL_NOVEDADES' | translate}}</h3>
         </p-tabPanel>
         <p-tabPanel header="Formación y Capacitación" disabled="true">

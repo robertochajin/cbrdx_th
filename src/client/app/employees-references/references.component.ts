@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { References } from './references';
-import { ReferencesService } from './references.service';
+import { References } from '../_models/references';
+import { ReferencesService } from '../_services/references.service';
 import { ConfirmationService } from 'primeng/primeng';
 import { Employee } from '../_models/employees';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 
 @Component( {
                moduleId: module.id,
@@ -13,6 +14,7 @@ import { Employee } from '../_models/employees';
             } )
 export class ReferencesComponent implements OnInit {
    @Input() employee: Employee;
+   @Input() seccion: PermissionsEmployees;
    reference: References = new References();
    dialogObjet: References = new References();
 

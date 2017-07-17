@@ -4,6 +4,7 @@ import { FormalStudies } from './formal-studies';
 import { AcademicEducationService } from '../_services/academic-education.service';
 import { ConfirmationService } from 'primeng/primeng';
 import { Employee } from '../_models/employees';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 
 @Component( {
                moduleId: module.id,
@@ -14,7 +15,7 @@ import { Employee } from '../_models/employees';
 export class FormalStudiesComponent implements OnInit {
 
    @Input() employee: Employee;
-
+   @Input() seccion: PermissionsEmployees;
    fstudy: FormalStudies = new FormalStudies();
    dialogObjet: FormalStudies = new FormalStudies();
    fstudies: FormalStudies[];

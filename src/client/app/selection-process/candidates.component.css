@@ -1,0 +1,30 @@
+/* --  Datatable -- */
+#dtbCandidates .ui-cell-data {
+   word-break: break-word !important;
+}
+
+#dtbCandidates th,
+#dtbCandidates td {
+   padding: .2em !important;
+}
+
+/*-- Botones -- */
+.ui-button.ui-button-danger.ui-state-default {
+   background-color: #d9534f !important;
+}
+
+.ui-button.ui-button-success.ui-state-default {
+   background-color: #5cb85c !important;
+}
+
+.ui-button.ui-button-warning.ui-state-default {
+   background-color: #f0ad4e !important;
+}
+
+.ui-button.ui-button-secondary.ui-state-default {
+   background-color: #fff !important;
+}
+
+.ui-button-text {
+   padding: .1em !important;
+}
