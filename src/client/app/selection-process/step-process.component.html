@@ -114,14 +114,16 @@
 									</div>
 								</div>
 							</div>
+
 							<div class="row" *ngIf="readonly">
-								<div class="form-group col-md-12" *ngIf="step.indicadorObservacion">
+								<div class="form-group col-md-10 col-md-offset-1" *ngIf="step.indicadorObservacion">
 									<label><h3>{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}</h3></label>
-									<p>{{candidateProcess.observacion}}</p>
+									<p style="word-break: break-all">{{candidateProcess.observacion}}</p>
 								</div>
 							</div>
 							<div class="row" *ngIf="!readonly">
-								<div class="form-group col-md-12" *ngIf="step.indicadorObservacion">
+								<hr>
+								<div class="form-group col-md-10 col-md-offset-1" *ngIf="step.indicadorObservacion">
 									<label for="observacion">* {{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}</label>
 									<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #observa="ngModel"
 									          [(ngModel)]="candidateProcess.observacion" required="true" class="form-control"
@@ -140,19 +142,19 @@
 								</a>
 							</div>
 							<div class="row" *ngIf="!readonlyEstado">
+								<hr>
 								<div class="form-group col-md-10 col-md-offset-1" *ngIf="true">
 									<label for="validStep">* {{'PROCESOSELECCION.LBL_APRUEBAPASO' | translate }}</label>
 									<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
 									            [autoWidth]="false" [(ngModel)]="candidateProcess.idDesicionProcesoSeleccion"></p-dropdown>
 								</div>
-
 							</div>
+
 							<div class="row" *ngIf="readonlyEstado">
-								<div class="form-group col-md-6" *ngIf="true">
+								<hr>
+								<div class="form-group col-md-10 col-md-offset-1" *ngIf="true">
 									<label><h3>{{'PROCESOSELECCION.LBL_APRUEBAPASO' | translate }}</h3></label>
 									<p>{{candidateProcess.estadoDiligenciado}}</p>
-								</div>
-								<div class="form-group col-md-6">
 								</div>
 							</div>
 							
