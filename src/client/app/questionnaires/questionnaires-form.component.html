@@ -224,14 +224,14 @@
 				</div>
 			</div>
 			<p-dataTable id="dtbPreguntas" emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="preguntas"
-			             [responsive]="true" [globalFilter]="gb">
+			             [responsive]="true" [globalFilter]="gb" class="datatable-order">
 				<p-column header="{{ 'LBL_ORDEN' | translate }}" styleClass="datatable-col-action">
 					<template let-datos="rowData" pTemplate="body">
 						<div class="btn-group" role="group">
 							<button type="button" class="ui-button ui-button-info btn btnUp" icon="fa-arrow-up" data-toggle="tooltip"
 							        title="{{'BTN_ARRIBA' | translate}}"
 							        pButton (click)="upQuestion(datos)"></button>
-							<button type="button" class="ui-button ui-button-info btn btnUp" icon="fa-arrow-down" data-toggle="tooltip"
+							<button type="button" class="ui-button ui-button-info btn btnDown" icon="fa-arrow-down" data-toggle="tooltip"
 							        title="{{'BTN_ABAJO' | translate}}"
 							        pButton (click)="downQuestion(datos)"></button>
 						</div>
@@ -347,14 +347,14 @@
 				</div>
 			</div>
 			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="respuestas"
-			             [responsive]="true" [globalFilter]="gb">
+			             [responsive]="true" [globalFilter]="gb" class="datatable-order">
 				<p-column header="{{ 'LBL_ORDEN' | translate }}" styleClass="datatable-col-action">
 					<template let-datos="rowData" pTemplate="body">
 						<div class="btn-group" role="group">
-							<button type="button" class="ui-button ui-button-info btn" icon="fa-arrow-up" data-toggle="tooltip"
+							<button type="button" class="ui-button ui-button-info btn btnUp" icon="fa-arrow-up" data-toggle="tooltip"
 							        title="{{'BTN_ARRIBA' | translate}}"
 							        pButton (click)="upAnswer(datos)"></button>
-							<button type="button" class="ui-button ui-button-info btn" icon="fa-arrow-down" data-toggle="tooltip"
+							<button type="button" class="ui-button ui-button-info btn btnDown" icon="fa-arrow-down" data-toggle="tooltip"
 							        title="{{'BTN_ABAJO' | translate}}"
 							        pButton (click)="downAnswer(datos)"></button>
 						</div>
