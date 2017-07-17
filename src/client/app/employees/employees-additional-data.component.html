@@ -1,120 +1,120 @@
 <p-messages [value]="msgs"></p-messages>
 <div *ngIf="employee">
-  <div class="row-fluid">
-    <div class="col-md-12">
-      <form name="formulario" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
-        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-          <div class="row">
-	          <div class="form-group col-md-4"
-	               *ngIf="seccion.PESO ? seccion.PESO.visible : true">
-              <label for="peso">{{'EMPLOYEES.LBL_PESO' | translate}}</label>
-              <input type="number" pInputText id="peso" name="peso" min="1"
-                     [(ngModel)]="employee.peso" #weight="ngModel" (change)="getimc()"
-                     (keyup)="inputNumberPeso()"
-                     (paste)="inputNumberPeso()"
-                     [disabled]="seccion.PESO ? seccion.PESO.editable : false"
-                     required/>
-              <div class="ui-message ui-messages-error ui-corner-all"
-                   *ngIf="f.submitted && !peso">
-                <i class="fa fa-close"></i>
-                {{'EMPLOYEES.LBL_PESO' | translate}} {{'LBL_REQUERIDO' | translate}}
-              </div>
-            </div>
-	          <div class="form-group col-md-4"
-	               *ngIf="seccion.TALLA ? seccion.TALLA.visible : true">
-              <label for="talla">{{'EMPLOYEES.LBL_ESTATURA' | translate}}</label>
-              <input type="number" pInputText id="talla" name="talla" min="1"
-                     [(ngModel)]="employee.talla" #tal="ngModel" (change)="getimc()"
-                     (keyup)="inputNumber()"
-                     (paste)="inputNumber()"
-                     [disabled]="seccion.PESO ? seccion.PESO.editable : false"
-                     required/>
-              <div class="ui-message ui-messages-error ui-corner-all"
-                   *ngIf="f.submitted && !size">
-                <i class="fa fa-close"></i>
-                {{'EMPLOYEES.LBL_ESTATURA' | translate}} {{'LBL_REQUERIDO' | translate}}
-              </div>
-            </div>
-	          <div class="form-group col-md-4"
-	               *ngIf="seccion.IMC ? seccion.IMC.visible : true">
-              <label for="imc">{{'EMPLOYEES.LBL_IMC' | translate}}</label>
-              <input type="text" pInputText id="imc" name="imc"
-                     [(ngModel)]="employee.imc" #imc="ngModel"
-                     required readonly disabled/>
-            </div>
-          </div>
-          <div class="row">
-	          <div class="form-group col-md-6"
-	               *ngIf="seccion.IDLATERALIDAD ? seccion.IDLATERALIDAD.visible : true">
-              <label for="idLateralidad">{{'EMPLOYEES.LBL_LATERALIDAD' | translate}}</label>
-              <p-dropdown id="idLateralidad" name="idLateralidad" required="true"
-                          [options]="lateralityTypes" [autoWidth]="false"
-                          [(ngModel)]="employee.idLateralidad"
-                          #idlaterality="ngModel"
-                          [disabled]="seccion.IDLATERALIDAD.editable === false"
-              ></p-dropdown>
-              <div class="ui-message ui-messages-error ui-corner-all"
-                   *ngIf="f.submitted && !idlaterality.valid">
-                <i class="fa fa-close"></i>
-                {{'EMPLOYEES.LBL_LATERALIDAD' | translate}} {{'LBL_REQUERIDO' | translate}}
-              </div>
-            </div>
-	          <div class="form-group col-md-6"
-	               *ngIf="seccion.IDTALLACAMISA ? seccion.IDTALLACAMISA.visible : true">
-              <label for="tallaCamisa">{{'EMPLOYEES.LBL_TALLACAMISA' | translate}}</label>
-              <p-dropdown id="tallaCamisa" name="tallaCamisa" required="true"
-                          [options]="listSizeShirt" [autoWidth]="false"
-                          [(ngModel)]="employee.idTallaCamisa"
-                          #sizeShirt="ngModel"
-                          [disabled]="seccion.IDTALLACAMISA.editable === false"
-              ></p-dropdown>
-              <div class="ui-message ui-messages-error ui-corner-all"
-                   *ngIf="f.submitted && !sizeShirt.valid">
-                <i class="fa fa-close"></i>
-                {{'EMPLOYEES.LBL_TALLACAMISA' | translate}} {{'LBL_REQUERIDO' | translate}}
-              </div>
-            </div>
-          </div>
-          <div class="row">
-	          <div class="form-group col-md-6"
-	               *ngIf="seccion.IDTALLAPANTALON ? seccion.IDTALLAPANTALON.visible : true">
-              <label for="tallaPantalon">{{'EMPLOYEES.LBL_TALLAPANTALON' | translate}}</label>
-              <p-dropdown id="tallaPantalon" name="tallaPantalon" required="true"
-                          [options]="listSizePants" [autoWidth]="false"
-                          [(ngModel)]="employee.idTallaPantalon"
-                          #sizePants="ngModel"
-                          [disabled]="seccion.IDTALLAPANTALON.editable === false"
-              ></p-dropdown>
-              <div class="ui-message ui-messages-error ui-corner-all"
-                   *ngIf="f.submitted && !sizePants.valid">
-                <i class="fa fa-close"></i>
-                {{'EMPLOYEES.LBL_TALLAPANTALON' | translate}} {{'LBL_REQUERIDO' | translate}}
-              </div>
-            </div>
-	          <div class="form-group col-md-6"
-	               *ngIf="seccion.IDTALLACALZADO ? seccion.IDTALLACALZADO.visible : true">
-              <label for="tallaCalzado">{{'EMPLOYEES.LBL_TALLACALZADO' | translate}}</label>
-              <p-dropdown id="tallaCalzado" name="tallaCalzado" required="true"
-                          [options]="listSizeFootwear" [autoWidth]="false"
-                          [(ngModel)]="employee.idTallaCalzado"
-                          #sizeFootwear="ngModel"
-                          [disabled]="seccion.IDTALLACALZADO.editable === false"
-              ></p-dropdown>
-              <div class="ui-message ui-messages-error ui-corner-all"
-                   *ngIf="f.submitted && !sizeFootwear.valid">
-                <i class="fa fa-close"></i>
-                {{'EMPLOYEES.LBL_TALLACALZADO' | translate}} {{'LBL_REQUERIDO' | translate}}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row form-footer-buttons">
-          <div class="form-group col-md-12">
-            <button icon="fa-plus" label="Guardar" type="submit"
-                    pButton></button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
+	<div class="row-fluid">
+		<div class="col-md-12">
+			<form name="formulario" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+					<div class="row">
+						<div class="form-group col-md-4"
+						     *ngIf="seccion.PESO ? seccion.PESO.visible : true">
+							<label for="peso">{{'EMPLOYEES.LBL_PESO' | translate}}</label>
+							<input type="number" pInputText id="peso" name="peso" min="1"
+							       [(ngModel)]="employee.peso" #weight="ngModel" (change)="getimc()"
+							       (keyup)="inputNumberPeso()"
+							       (paste)="inputNumberPeso()"
+							       [disabled]="seccion.PESO ? !seccion.PESO.editable : false"
+							       required/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !peso">
+								<i class="fa fa-close"></i>
+								{{'EMPLOYEES.LBL_PESO' | translate}} {{'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+						<div class="form-group col-md-4"
+						     *ngIf="seccion.TALLA ? seccion.TALLA.visible : true">
+							<label for="talla">{{'EMPLOYEES.LBL_ESTATURA' | translate}}</label>
+							<input type="number" pInputText id="talla" name="talla" min="1"
+							       [(ngModel)]="employee.talla" #tal="ngModel" (change)="getimc()"
+							       (keyup)="inputNumber()"
+							       (paste)="inputNumber()"
+							       [disabled]="seccion.PESO ? !seccion.PESO.editable : false"
+							       required/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !size">
+								<i class="fa fa-close"></i>
+								{{'EMPLOYEES.LBL_ESTATURA' | translate}} {{'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+						<div class="form-group col-md-4"
+						     *ngIf="seccion.IMC ? seccion.IMC.visible : true">
+							<label for="imc">{{'EMPLOYEES.LBL_IMC' | translate}}</label>
+							<input type="text" pInputText id="imc" name="imc"
+							       [(ngModel)]="employee.imc" #imc="ngModel"
+							       required readonly disabled/>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-6"
+						     *ngIf="seccion.IDLATERALIDAD ? seccion.IDLATERALIDAD.visible : true">
+							<label for="idLateralidad">{{'EMPLOYEES.LBL_LATERALIDAD' | translate}}</label>
+							<p-dropdown id="idLateralidad" name="idLateralidad" required="true"
+							            [options]="lateralityTypes" [autoWidth]="false"
+							            [(ngModel)]="employee.idLateralidad"
+							            #idlaterality="ngModel"
+							            [disabled]="seccion.IDLATERALIDAD.editable === false"
+							></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !idlaterality.valid">
+								<i class="fa fa-close"></i>
+								{{'EMPLOYEES.LBL_LATERALIDAD' | translate}} {{'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+						<div class="form-group col-md-6"
+						     *ngIf="seccion.IDTALLACAMISA ? seccion.IDTALLACAMISA.visible : true">
+							<label for="tallaCamisa">{{'EMPLOYEES.LBL_TALLACAMISA' | translate}}</label>
+							<p-dropdown id="tallaCamisa" name="tallaCamisa" required="true"
+							            [options]="listSizeShirt" [autoWidth]="false"
+							            [(ngModel)]="employee.idTallaCamisa"
+							            #sizeShirt="ngModel"
+							            [disabled]="seccion.IDTALLACAMISA.editable === false"
+							></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !sizeShirt.valid">
+								<i class="fa fa-close"></i>
+								{{'EMPLOYEES.LBL_TALLACAMISA' | translate}} {{'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-6"
+						     *ngIf="seccion.IDTALLAPANTALON ? seccion.IDTALLAPANTALON.visible : true">
+							<label for="tallaPantalon">{{'EMPLOYEES.LBL_TALLAPANTALON' | translate}}</label>
+							<p-dropdown id="tallaPantalon" name="tallaPantalon" required="true"
+							            [options]="listSizePants" [autoWidth]="false"
+							            [(ngModel)]="employee.idTallaPantalon"
+							            #sizePants="ngModel"
+							            [disabled]="seccion.IDTALLAPANTALON.editable === false"
+							></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !sizePants.valid">
+								<i class="fa fa-close"></i>
+								{{'EMPLOYEES.LBL_TALLAPANTALON' | translate}} {{'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+						<div class="form-group col-md-6"
+						     *ngIf="seccion.IDTALLACALZADO ? seccion.IDTALLACALZADO.visible : true">
+							<label for="tallaCalzado">{{'EMPLOYEES.LBL_TALLACALZADO' | translate}}</label>
+							<p-dropdown id="tallaCalzado" name="tallaCalzado" required="true"
+							            [options]="listSizeFootwear" [autoWidth]="false"
+							            [(ngModel)]="employee.idTallaCalzado"
+							            #sizeFootwear="ngModel"
+							            [disabled]="seccion.IDTALLACALZADO.editable === false"
+							></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !sizeFootwear.valid">
+								<i class="fa fa-close"></i>
+								{{'EMPLOYEES.LBL_TALLACALZADO' | translate}} {{'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<button icon="fa-plus" label="Guardar" type="submit"
+						        pButton></button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
