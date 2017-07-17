@@ -27,7 +27,7 @@
 							       [(ngModel)]="employee.talla" #tal="ngModel" (change)="getimc()"
 							       (keyup)="inputNumber()"
 							       (paste)="inputNumber()"
-							       [disabled]="seccion.PESO ? !seccion.PESO.editable : false"
+							       [disabled]="seccion.TALLA ? !seccion.TALLA.editable : false"
 							       required/>
 							<div class="ui-message ui-messages-error ui-corner-all"
 							     *ngIf="f.submitted && !size">
