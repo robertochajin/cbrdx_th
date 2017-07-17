@@ -88,11 +88,12 @@ export class SolutionsQuestionnairesComponent implements OnInit {
          if ( this.pregunta.indicadorDepende ) {
             this.masterAnswersService.getSolutionDepends( this.maestroRespuestas.idMaestroRespuesta, this.pregunta.idDependePregunta,
                                                           this.pregunta.idDependeRespuesta ).subscribe( res => {
-               if ( res.length > 0 ) {
+               if ( res.length === 0 ) {
                   this.indice += 1;
                   this.nextQuestion();
                } else {
                   this.getAnswers();
+                  this.indice += 1;
                }
             }, error => {
             } );
