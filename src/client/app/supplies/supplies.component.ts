@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Supplies } from '../_models/supplies';
+import { SuppliesGroups } from '../_models/suppliesGroups';
 import { SuppliesService } from '../_services/supplies.service';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/primeng';
@@ -8,47 +8,41 @@ import { NavService } from '../_services/_nav.service';
 @Component( {
                moduleId: module.id,
                templateUrl: 'supplies.component.html',
-               selector: 'employees-component',
+               selector: 'supplies-component',
                providers: [ ConfirmationService ]
             } )
 
 export class SuppliesComponent implements OnInit {
 
-   quest: Supplies = new Supplies();
-   questionnaries: Supplies[] = [];
+   suppliesGroups: SuppliesGroups = new SuppliesGroups();
+   listSuppliesGroups: SuppliesGroups[] = [];
    busqueda: string;
 
    constructor( private suppliesService: SuppliesService,
       private router: Router,
       private confirmationService: ConfirmationService,
       private navService: NavService ) {
-      this.busqueda = navService.getSearch( 'questionnaries.component' );
+      this.busqueda = navService.getSearch( 'supplies.component' );
    }
 
    ngOnInit() {
       this.suppliesService.getAll().subscribe(
-         questionnaires => {
-            this.questionnaries = questionnaires;
+         listSuppliesGroups => {
+            this.listSuppliesGroups = listSuppliesGroups;
        }
       );
-
-
-   }
-
-   detail( f: Supplies ) {
-      this.router.navigate( [ 'questionnaries/view/detail/' + f.idCuestionario ] );
    }
 
    add() {
-      this.router.navigate( [ 'questionnaries/add' ] );
+      this.router.navigate( [ 'supplies/add' ] );
    }
 
-   update( c: Supplies ) {
-      this.router.navigate( [ 'questionnaries/update/' + c.idCuestionario ] );
+   update( c: SuppliesGroups ) {
+      this.router.navigate( [ 'supplies/update/' + c.idGrupoDotacion ] );
    }
 
    setSearch() {
-      this.navService.setSearch( 'questionnaries.component', this.busqueda );
+      this.navService.setSearch( 'supplies.component', this.busqueda );
    }
 
 }

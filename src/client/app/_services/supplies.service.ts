@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { Supplies } from '../_models/supplies';
-import { QuestionnariesQuestions } from '../_models/questionnariesQuestions';
-import { QuestionnariesAnswers } from '../_models/questionnariesAnswers';
+import { SuppliesGroups } from '../_models/suppliesGroups';
 
 @Injectable()
 export class SuppliesService {
@@ -22,63 +21,63 @@ export class SuppliesService {
    }
 
    getAll() {
-      return this.authHttp.get( this.masterService + 'cuestionarios' )
-      .map( ( res: Response ) => res.json() as Supplies[] );
+      return this.authHttp.get( this.masterService + 'gruposDotaciones' )
+      .map( ( res: Response ) => res.json() as SuppliesGroups[] );
    }
 
    get( id: number ) {
-      return this.authHttp.get( this.masterService + 'cuestionarios/' + id )
-      .map( ( res: Response ) => res.json() as Supplies );
+      return this.authHttp.get( this.masterService + 'gruposDotaciones/' + id )
+      .map( ( res: Response ) => res.json() as SuppliesGroups );
    }
 
    getByCode( code: string ) {
-      return this.authHttp.get( this.masterService + 'cuestionarios/code/' + code )
-      .map( ( res: Response ) => res.json() as Supplies );
+      return this.authHttp.get( this.masterService + 'gruposDotaciones/code/' + code )
+      .map( ( res: Response ) => res.json() as SuppliesGroups );
    }
 
-   add( f: Supplies ) {
+   add( f: SuppliesGroups ) {
       f.auditoriaUsuario = this.idUsuario;
-      return this.authHttp.post( this.masterService + 'cuestionarios', f )
+      return this.authHttp.post( this.masterService + 'gruposDotaciones', f )
       .map( ( res: Response ) => res.json() );
    };
 
-   update( f: Supplies ) {
+   update( f: SuppliesGroups ) {
       f.auditoriaUsuario = this.idUsuario;
-      return this.authHttp.put( this.masterService + 'cuestionarios', JSON.stringify( f ) ).catch( this.handleError );
+      return this.authHttp.put( this.masterService + 'gruposDotaciones', JSON.stringify( f ) ).catch( this.handleError );
    }
 
    getAllEnabled() {
-      return this.authHttp.get( this.masterService + 'cuestionarios/enabled/' )
+      return this.authHttp.get( this.masterService + 'gruposCuestionarios/enabled/' )
       .map( ( res: Response ) => res.json() as Supplies[] );
    }
 
-   getQuestions( id: number ) {
-      return this.authHttp.get( this.masterService + 'cuestionariosPreguntas/buscarCuestionario/' + id )
-      .map( ( res: Response ) => res.json() as QuestionnariesQuestions[] );
+   getSupplies( id: number ) {
+      return this.authHttp.get( this.masterService + 'dotaciones/grupoDotacion/' + id )
+      .map( ( res: Response ) => res.json() as Supplies[] );
    }
 
-   getQuestionsEnable( id: number ) {
-      return this.authHttp.get( this.masterService + 'cuestionariosPreguntas/enabled/buscarCuestionario/' + id )
-      .map( ( res: Response ) => res.json() as QuestionnariesQuestions[] );
+   getSuppliesEnable() {
+      return this.authHttp.get( this.masterService + 'dotaciones/enabled/' )
+      .map( ( res: Response ) => res.json() as Supplies[] );
    }
 
-   getQuestion( id: number ) {
-      return this.authHttp.get( this.masterService + 'cuestionariosPreguntas/' + id )
-      .map( ( res: Response ) => res.json() as QuestionnariesQuestions );
+   getSupply( id: number ) {
+      return this.authHttp.get( this.masterService + 'dotaciones/' + id )
+      .map( ( res: Response ) => res.json() as Supplies );
    }
 
-   addQuestion( f: QuestionnariesQuestions ) {
+   addSupply( f: Supplies ) {
       f.auditoriaUsuario = this.idUsuario;
-      return this.authHttp.post( this.masterService + 'cuestionariosPreguntas', f )
+      return this.authHttp.post( this.masterService + 'dotaciones', f )
       .map( ( res: Response ) => res.json() );
    };
 
-   updateQuestion( f: QuestionnariesQuestions ) {
+   updateSupply( f: Supplies ) {
       f.auditoriaUsuario = this.idUsuario;
-      return this.authHttp.put( this.masterService + 'cuestionariosPreguntas', JSON.stringify( f ) ).catch( this.handleError );
+      return this.authHttp.put( this.masterService + 'dotaciones', JSON.stringify( f ) ).catch( this.handleError );
    }
 
-   getAnswers( id: number ) {
+   /*getAnswers( id: number ) {
       return this.authHttp.get( this.masterService + 'preguntasOpciones/buscarPregunta/' + id )
       .map( ( res: Response ) => res.json() as QuestionnariesAnswers[] );
    }
@@ -102,7 +101,7 @@ export class SuppliesService {
    updateAnswer( f: QuestionnariesAnswers ) {
       f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.masterService + 'preguntasOpciones', JSON.stringify( f ) ).catch( this.handleError );
-   }
+    }*/
 
    handleError( error: any ): Promise<any> {
       console.error( 'Error:', error );

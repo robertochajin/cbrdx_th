@@ -3,20 +3,19 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ConfirmationService, Message } from 'primeng/primeng';
 import { NavService } from '../_services/_nav.service';
-import { Supplies } from '../_models/supplies';
+import { SuppliesGroups } from '../_models/suppliesGroups';
 import { SuppliesService } from '../_services/supplies.service';
 
 @Component( {
                moduleId: module.id,
                templateUrl: 'supplies-add.component.html',
-               selector: 'roles-form.component',
+               selector: 'supplies-add.component',
                providers: [ ConfirmationService ]
             } )
 export class SuppliesAddComponent implements OnInit {
 
-   cuestionario: Supplies = new Supplies();
-   allQuest: Supplies[] = [];
-   idCuestionario: number;
+   suppliesGroup: SuppliesGroups = new SuppliesGroups();
+   allGroups: SuppliesGroups[] = [];
    msgs: Message[] = [];
    codeExists: boolean = false;
 
@@ -28,14 +27,13 @@ export class SuppliesAddComponent implements OnInit {
       private navService: NavService ) {
       this.suppliesService.getAll().subscribe(
        res => {
-          this.allQuest = res;
+          this.allGroups = res;
        }
       );
 
    }
 
    ngOnInit() {
-      console.info( this.cuestionario.idCuestionario );
    }
 
    goBack(fDirty : boolean): void {
@@ -55,10 +53,10 @@ export class SuppliesAddComponent implements OnInit {
 
    onSubmit() {
       if ( !this.codeExists ) {
-         this.cuestionario.codigoCuestionario = this.cuestionario.codigoCuestionario.toUpperCase().replace( /[^A-Z0-9]/g, '' ).trim();
-         this.suppliesService.add( this.cuestionario ).subscribe( res => {
+         this.suppliesGroup.codigo = this.suppliesGroup.codigo.toUpperCase().replace( /[^A-Z0-9]/g, '' ).trim();
+         this.suppliesService.add( this.suppliesGroup ).subscribe( res => {
             this.navService.setMesage( 1, this.msgs );
-            this.router.navigate( [ 'questionnaries/update/' + res.idCuestionario ] );
+            this.router.navigate( [ 'supplies/update/' + res.idCuestionario ] );
          }, error => {
             this.navService.setMesage( 3, this.msgs );
          } );
@@ -66,9 +64,9 @@ export class SuppliesAddComponent implements OnInit {
    }
 
    validateCode() {
-      if ( this.cuestionario.codigoCuestionario !== '' && this.cuestionario.codigoCuestionario !== null ) {
-         this.codeExists = this.allQuest.filter(
-               t => (t.codigoCuestionario === this.cuestionario.codigoCuestionario && t.idCuestionario !== this.cuestionario.idCuestionario ) ).length > 0;
+      if ( this.suppliesGroup.codigo !== '' && this.suppliesGroup.codigo !== null ) {
+         this.codeExists = this.allGroups.filter(
+               t => (t.codigo === this.suppliesGroup.codigo && t.idGrupoDotacion !== this.suppliesGroup.idGrupoDotacion ) ).length > 0;
       } else {
          this.codeExists = false;
       }

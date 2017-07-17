@@ -70,6 +70,7 @@
   "PH_BUSCAR":"Buscar ",
   "LBL_INVALIDO" : "Invalido",
   "LBL_ENVIAR":"Enviar",
+   "LBL_ID": "Id",
   "BTN_VISUALIZAR": "Ver detalle",
   "BTN_ELIMINAR": "Eliminar",
    "BTN_INACTIVAR": "Inactivar",
@@ -1086,6 +1087,13 @@
    "RECLUTAMIENTO": {
       "LBL_FASE_PROCESO": "Fase del proceso",
       "LBL_PERSONAL_ENCARGADO": "Personal encargado",
+      "LBL_ESTADO": "Estado"
+   },
+   "SUPPLIES": {
+      "LBL_SUPPLY": "Dotación",
+      "LBL_SUPPLIES": "Dotaciones",
+      "LBL_SUPPLIESGROUPS": "Grupos Dotaciones",
+      "LBL_GROUP": "Grupo",
       "LBL_ESTADO": "Estado"
    },
 

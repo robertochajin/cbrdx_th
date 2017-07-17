@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ConfirmationService, Message, SelectItem } from 'primeng/primeng';
+import { ConfirmationService, Message } from 'primeng/primeng';
 import { NavService } from '../_services/_nav.service';
 import { Supplies } from '../_models/supplies';
 import { SuppliesService } from '../_services/supplies.service';
-import { QuestionnariesQuestions } from '../_models/questionnariesQuestions';
-import { QuestionnariesAnswers } from '../_models/questionnariesAnswers';
 import { ListaService } from '../_services/lista.service';
-import { ListaItem } from '../_models/listaItem';
+import { SuppliesGroups } from '../_models/suppliesGroups';
 
 @Component( {
                moduleId: module.id,
@@ -18,25 +16,16 @@ import { ListaItem } from '../_models/listaItem';
             } )
 export class SuppliesUpdateComponent implements OnInit {
 
-   cuestionarios: Supplies[] = [];
-   cuestionario: Supplies = new Supplies();
-   preguntas: QuestionnariesQuestions[] = [];
-   pregunta: QuestionnariesQuestions = new QuestionnariesQuestions();
-   respuestas: QuestionnariesAnswers[] = [];
-   respuesta: QuestionnariesAnswers = new QuestionnariesAnswers();
-   idCuestionario: number;
+   suppliesGroup: SuppliesGroups = new SuppliesGroups();
+   allGroups: SuppliesGroups[] = [];
+   supplies: Supplies[] = [];
+   supply: Supplies = new Supplies();
    msgs: Message[] = [];
    codeExists: boolean = false;
-   codeExistsP: boolean = false;
-   codeExistsR: boolean = false;
-   formQuestion: boolean = false;
-   showAnswers: boolean = false;
-   formAnswer: boolean = false;
-   formQuestionnarie: boolean = true;
-   questionsTypes: SelectItem[] = [];
-   previousQuestions: SelectItem[] = [];
-   previousAnswers: SelectItem[] = [];
-
+   codeExistsS: boolean = false;
+   formGroup: boolean = false;
+   formSupply: boolean = false;
+   idGrupoDotacion: number;
    constructor( private suppliesService: SuppliesService,
       private router: Router,
       private location: Location,
@@ -46,38 +35,30 @@ export class SuppliesUpdateComponent implements OnInit {
       private navService: NavService ) {
 
       this.route.params.subscribe( params => {
-         this.idCuestionario = +params[ 'id' ];
-         if ( Number( this.idCuestionario ) > 0 ) {
-            this.suppliesService.get( this.idCuestionario ).subscribe(
+         this.idGrupoDotacion = +params[ 'id' ];
+         if ( Number( this.idGrupoDotacion ) > 0 ) {
+            this.suppliesService.get( this.idGrupoDotacion ).subscribe(
                res => {
-                  this.cuestionario = res;
-                  this.getQuestions();
+                  this.suppliesGroup = res;
+                  this.getSupplies();
                } );
          }
       } );
+
       this.suppliesService.getAll().subscribe(
          res => {
-            this.cuestionarios = res;
-         } );
+            this.allGroups = res;
+         }
+      );
 
-      listaService.getMasterDetails( 'ListasTiposPreguntas' ).subscribe( res => {
+      /* listaService.getMasterDetails( 'ListasTiposPreguntas' ).subscribe( res => {
          this.questionsTypes.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
             this.questionsTypes.push( { label: s.nombre, value: s.idLista } );
          } );
-      } );
+       } );*/
    }
    ngOnInit() {
-   }
-
-   getQuestions() {
-      if ( Number( this.idCuestionario ) > 0 ) {
-         this.suppliesService.getQuestions( this.idCuestionario ).subscribe(
-            res => {
-               this.preguntas = res;
-               this.sortQuestions();
-            } );
-      }
    }
 
    goBack( fDirty: boolean ): void {
@@ -97,10 +78,10 @@ export class SuppliesUpdateComponent implements OnInit {
 
    onSubmit() {
       if ( !this.codeExists ) {
-         this.formQuestionnarie = false;
-         this.suppliesService.update( this.cuestionario ).subscribe( res => {
+         this.suppliesGroup.codigo = this.suppliesGroup.codigo.toUpperCase().replace( /[^A-Z0-9]/g, '' ).trim();
+         this.suppliesService.update( this.suppliesGroup ).subscribe( res => {
             this.navService.setMesage( 1, this.msgs );
-            this.formQuestionnarie = true;
+            this.formGroup = true;
          }, error => {
             this.navService.setMesage( 3, this.msgs );
          } );
@@ -108,9 +89,9 @@ export class SuppliesUpdateComponent implements OnInit {
    }
 
    validateCode() {
-      if ( this.cuestionario.codigoCuestionario !== '' && this.cuestionario.codigoCuestionario !== null ) {
-         this.codeExists = this.cuestionarios.filter(
-               t => (t.codigoCuestionario === this.cuestionario.codigoCuestionario && t.idCuestionario !== this.cuestionario.idCuestionario ) ).length > 0;
+      if ( this.suppliesGroup.codigo !== '' && this.suppliesGroup.codigo !== null ) {
+         this.codeExists = this.allGroups.filter(
+               t => (t.codigo === this.suppliesGroup.codigo && t.idGrupoDotacion !== this.suppliesGroup.idGrupoDotacion ) ).length > 0;
       } else {
          this.codeExists = false;
       }
@@ -123,81 +104,62 @@ export class SuppliesUpdateComponent implements OnInit {
       }
    }
 
-   addQuestion() {
-      this.formQuestion = true;
-      this.showAnswers = false;
-      this.pregunta = new QuestionnariesQuestions();
-      this.getPreviousQuestions( this.preguntas.length );
-   }
-
-   getPreviousQuestions( secuencia: number ) {
-      this.previousQuestions = [];
-      this.previousQuestions.push( { label: 'Seleccione', value: null } );
-      this.preguntas.filter( p => p.secuencia < secuencia && p.indicadorHabilitado === true &&
-                                  ( p.codigoTipoPregunta === 'CHECK' || p.codigoTipoPregunta === 'SELECT' ) ).map( s => {
-         this.previousQuestions.push( { label: s.pregunta, value: s.idCuestionarioPregunta } );
-      } );
-   }
-
-   getPreviousAnswers() {
-      this.previousAnswers = [];
-      this.previousAnswers.push( { label: 'Seleccione', value: null } );
-      if ( this.pregunta.idDependePregunta ) {
-         this.suppliesService.getAnswers( this.pregunta.idDependePregunta ).subscribe(
+   getSupplies() {
+      if ( Number( this.idGrupoDotacion ) > 0 ) {
+         this.suppliesService.getSupplies( this.idGrupoDotacion ).subscribe(
             res => {
-               res.map( s => {
-                  this.previousAnswers.push( { label: s.opcion, value: s.idPreguntaOpcion } );
-               } );
+               this.supplies = res;
             } );
       }
-
    }
 
-   updateQuestion( pregunta: QuestionnariesQuestions ) {
-      this.formQuestion = true;
-      this.showAnswers = false;
-      this.pregunta = pregunta;
-      this.getPreviousQuestions( this.pregunta.secuencia );
+   addSupplies() {
+      this.formSupply = true;
+      this.supply = new Supplies();
    }
 
-   goBackQuestion( fDirty: boolean ): void {
+   updateSupplies( supply: Supplies ) {
+      this.formSupply = true;
+      this.supply = supply;
+   }
+
+   goBackSupplies( fDirty: boolean ): void {
       if ( fDirty ) {
          this.confirmationService.confirm( {
                                               message: ` ¿Está seguro que desea salir sin guardar?`,
                                               header: 'Confirmación',
                                               icon: 'fa fa-question-circle',
                                               accept: () => {
-                                                 this.formQuestion = false;
-                                                 this.pregunta = new QuestionnariesQuestions();
+                                                 this.formSupply = false;
+                                                 this.supply = new Supplies();
                                               }
                                            } );
       } else {
-         this.formQuestion = false;
-         this.pregunta = new QuestionnariesQuestions();
+         this.formSupply = false;
+         this.supply = new Supplies();
       }
    }
 
-   onSubmitQuestion() {
-      if ( !this.codeExistsP ) {
-         if ( this.pregunta.idCuestionarioPregunta === null || this.pregunta.idCuestionarioPregunta === undefined || this.pregunta.idCuestionarioPregunta === 0 ) {
-            this.pregunta.idCuestionario = this.idCuestionario;
-            this.pregunta.secuencia = this.preguntas.length + 1;
-            this.pregunta.codigoPregunta = this.pregunta.codigoPregunta.toUpperCase().replace( /[^A-Z0-9]/g, '' ).trim();
-            this.suppliesService.addQuestion( this.pregunta ).subscribe( res => {
+   /* onSubmitSupplies() {
+    if ( !this.codeExistsS ) {
+    if ( this.supply.idDotacion === null || this.supply.idDotacion === undefined || this.supply.idDotacion === 0 ) {
+    this.supply.idGrupoDotacion = this.idGrupoDotacion;
+    this.supply.codigoPregunta = this.supply.codigoPregunta.toUpperCase().replace( /[^A-Z0-9]/g, '' ).trim();
+    this.suppliesService.addQuestion( this.supply ).subscribe( res => {
                this.formQuestion = false;
                this.showAnswers = false;
-               this.pregunta = new QuestionnariesQuestions();
+    this.supply = new Supplies();
                this.getQuestions();
                this.navService.setMesage( 1, this.msgs );
             }, error => {
                this.navService.setMesage( 3, this.msgs );
             } );
          } else {
-            this.suppliesService.updateQuestion( this.pregunta ).subscribe( res => {
+    this.suppliesService.updateQuestion( this.supply ).subscribe( res => {
                this.navService.setMesage( 1, this.msgs );
                this.formQuestion = false;
                this.showAnswers = false;
-               this.pregunta = new QuestionnariesQuestions();
+    this.supply = new Supplies();
                this.getQuestions();
             }, error => {
                this.navService.setMesage( 3, this.msgs );
@@ -206,183 +168,13 @@ export class SuppliesUpdateComponent implements OnInit {
       }
    }
 
-   validateCodeP() {
-      if ( this.pregunta.codigoPregunta !== '' && this.pregunta.codigoPregunta !== null ) {
-         this.codeExistsP = this.preguntas.filter(
-               t => (t.codigoPregunta === this.pregunta.codigoPregunta && t.idCuestionarioPregunta !== this.pregunta.idCuestionarioPregunta ) ).length > 0;
+    validateCodeS() {
+    if ( this.supply.codigoPregunta !== '' && this.supply.codigoPregunta !== null ) {
+    this.codeExistsP = this.supplys.filter(
+    t => (t.codigoPregunta === this.supply.codigoPregunta && t.idCuestionarioPregunta !== this.supply.idCuestionarioPregunta ) ).length > 0;
       } else {
          this.codeExistsP = false;
       }
-   }
-
-   downQuestion( f: QuestionnariesQuestions ) {
-      let myIndex = this.preguntas.indexOf( f );
-      if ( myIndex < this.preguntas.length - 1 ) {
-         let newOrder = this.preguntas[ myIndex ].secuencia;
-         this.preguntas[ myIndex ].secuencia = this.preguntas[ myIndex + 1 ].secuencia;
-         this.suppliesService.updateQuestion( this.preguntas[ myIndex ] ).subscribe( res => {
-            if ( res.ok ) {
-               this.preguntas[ myIndex + 1 ].secuencia = newOrder;
-               this.suppliesService.updateQuestion( this.preguntas[ myIndex + 1 ] ).subscribe( res => {
-                  if ( res.ok ) {
-                     this.sortQuestions();
-                  }
-               } );
-            }
-         } );
-      }
-   }
-
-   upQuestion( f: QuestionnariesQuestions ) {
-      let myIndex = this.preguntas.indexOf( f );
-      if ( myIndex > 0 ) {
-         let newOrder = this.preguntas[ myIndex ].secuencia;
-         this.preguntas[ myIndex ].secuencia = this.preguntas[ myIndex - 1 ].secuencia;
-         this.suppliesService.updateQuestion( this.preguntas[ myIndex ] ).subscribe( res => {
-            if ( res.ok ) {
-               this.preguntas[ myIndex - 1 ].secuencia = newOrder;
-               this.suppliesService.updateQuestion( this.preguntas[ myIndex - 1 ] ).subscribe( res => {
-                  if ( res.ok ) {
-                     this.sortQuestions();
-                  }
-               } );
-            }
-         } );
-      }
-   }
-
-
-   showPanelAnswers( pregunta: QuestionnariesQuestions ) {
-      this.showAnswers = true;
-      this.formAnswer = false;
-      this.pregunta = pregunta;
-      this.getAnswers();
-   }
-
-   addAnswer() {
-      this.formAnswer = true;
-      this.respuesta = new QuestionnariesAnswers();
-   }
-
-   updateAnswer( respuesta: QuestionnariesAnswers ) {
-      this.formAnswer = true;
-      this.respuesta = respuesta;
-   }
-
-   goBackAnswer( fDirty: boolean ): void {
-      if ( fDirty ) {
-         this.confirmationService.confirm( {
-                                              message: ` ¿Está seguro que desea salir sin guardar?`,
-                                              header: 'Confirmación',
-                                              icon: 'fa fa-question-circle',
-                                              accept: () => {
-                                                 this.formAnswer = false;
-                                                 this.respuesta = new QuestionnariesAnswers();
-                                              }
-                                           } );
-      } else {
-         this.formAnswer = false;
-         this.respuesta = new QuestionnariesAnswers();
-      }
-   }
-
-   onSubmitAnswer() {
-      if ( !this.codeExistsR ) {
-         if ( this.respuesta.idPreguntaOpcion === null || this.respuesta.idPreguntaOpcion === undefined || this.respuesta.idPreguntaOpcion === 0 ) {
-            this.respuesta.idCuestionarioPregunta = this.pregunta.idCuestionarioPregunta;
-            this.respuesta.orden = this.respuestas.length + 1;
-            this.respuesta.codigoOpcion = this.respuesta.codigoOpcion.toUpperCase().replace( /[^A-Z0-9]/g, '' ).trim();
-            this.suppliesService.addAnswer( this.respuesta ).subscribe( res => {
-               this.navService.setMesage( 1, this.msgs );
-               this.formAnswer = false;
-               this.respuesta = new QuestionnariesAnswers();
-               this.getAnswers();
-            }, error => {
-               this.navService.setMesage( 3, this.msgs );
-            } );
-         } else {
-            this.suppliesService.updateAnswer( this.respuesta ).subscribe( res => {
-               this.navService.setMesage( 1, this.msgs );
-               this.formAnswer = false;
-               this.respuesta = new QuestionnariesAnswers();
-               this.getAnswers();
-            }, error => {
-               this.navService.setMesage( 3, this.msgs );
-            } );
-         }
-      }
-   }
-
-   getAnswers() {
-      this.suppliesService.getAnswers( this.pregunta.idCuestionarioPregunta ).subscribe(
-         res => {
-            this.respuestas = res;
-            this.formAnswer = false;
-            this.sortAnswers();
-         } );
-   }
-
-   validateCodeR() {
-      if ( this.respuesta.codigoOpcion !== '' && this.respuesta.codigoOpcion !== null ) {
-         this.codeExistsR = this.respuestas.filter(
-               t => (t.codigoOpcion === this.respuesta.codigoOpcion  ) ).length > 0;
-      } else {
-         this.codeExistsR = false;
-      }
-   }
-
-   downAnswer( f: QuestionnariesAnswers ) {
-      let myIndex = this.respuestas.indexOf( f );
-      if ( myIndex < this.respuestas.length - 1 ) {
-         let newOrder = this.respuestas[ myIndex ].orden;
-         this.respuestas[ myIndex ].orden = this.respuestas[ myIndex + 1 ].orden;
-         this.suppliesService.updateAnswer( this.respuestas[ myIndex ] ).subscribe( res => {
-            if ( res.ok ) {
-               this.respuestas[ myIndex + 1 ].orden = newOrder;
-               this.suppliesService.updateAnswer( this.respuestas[ myIndex + 1 ] ).subscribe( res => {
-                  if ( res.ok ) {
-                     this.sortAnswers();
-                  }
-               } );
-            }
-         } );
-      }
-   }
-
-   upAnswer( f: QuestionnariesAnswers ) {
-      let myIndex = this.respuestas.indexOf( f );
-      if ( myIndex > 0 ) {
-         let newOrder = this.respuestas[ myIndex ].orden;
-         this.respuestas[ myIndex ].orden = this.respuestas[ myIndex - 1 ].orden;
-         this.suppliesService.updateAnswer( this.respuestas[ myIndex ] ).subscribe( res => {
-            if ( res.ok ) {
-               this.respuestas[ myIndex - 1 ].orden = newOrder;
-               this.suppliesService.updateAnswer( this.respuestas[ myIndex - 1 ] ).subscribe( res => {
-                  if ( res.ok ) {
-                     this.sortAnswers();
-                  }
-               } );
-            }
-         } );
-      }
-   }
-
-   private sortQuestions() {
-      this.preguntas.sort( function ( a, b ) {
-         if ( a.secuencia < b.secuencia )
-            return -1;
-         else
-            return 1;
-      } )
-   }
-
-   private sortAnswers() {
-      this.respuestas.sort( function ( a, b ) {
-         if ( a.orden < b.orden )
-            return -1;
-         else
-            return 1;
-      } )
-   }
+    }*/
 
 }
