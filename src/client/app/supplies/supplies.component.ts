@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Questionnaries } from '../_models/questionnaries';
-import { QuestionnairesService } from '../_services/questionnaires.service';
+import { Supplies } from '../_models/supplies';
+import { SuppliesService } from '../_services/supplies.service';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/primeng';
 import { NavService } from '../_services/_nav.service';
@@ -12,13 +12,13 @@ import { NavService } from '../_services/_nav.service';
                providers: [ ConfirmationService ]
             } )
 
-export class QuestionnairesComponent implements OnInit {
+export class SuppliesComponent implements OnInit {
 
-   quest: Questionnaries = new Questionnaries();
-   questionnaries: Questionnaries[] = [];
+   quest: Supplies = new Supplies();
+   questionnaries: Supplies[] = [];
    busqueda: string;
 
-   constructor( private questionnairesService: QuestionnairesService,
+   constructor( private suppliesService: SuppliesService,
       private router: Router,
       private confirmationService: ConfirmationService,
       private navService: NavService ) {
@@ -26,7 +26,7 @@ export class QuestionnairesComponent implements OnInit {
    }
 
    ngOnInit() {
-      this.questionnairesService.getAll( ).subscribe(
+      this.suppliesService.getAll().subscribe(
          questionnaires => {
             this.questionnaries = questionnaires;
        }
@@ -35,7 +35,7 @@ export class QuestionnairesComponent implements OnInit {
 
    }
 
-   detail( f: Questionnaries ) {
+   detail( f: Supplies ) {
       this.router.navigate( [ 'questionnaries/view/detail/' + f.idCuestionario ] );
    }
 
@@ -43,7 +43,7 @@ export class QuestionnairesComponent implements OnInit {
       this.router.navigate( [ 'questionnaries/add' ] );
    }
 
-   update( c: Questionnaries ) {
+   update( c: Supplies ) {
       this.router.navigate( [ 'questionnaries/update/' + c.idCuestionario ] );
    }
 

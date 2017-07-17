@@ -3,8 +3,8 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ConfirmationService, Message, SelectItem } from 'primeng/primeng';
 import { NavService } from '../_services/_nav.service';
-import { Questionnaries } from '../_models/questionnaries';
-import { QuestionnairesService } from '../_services/questionnaires.service';
+import { Supplies } from '../_models/supplies';
+import { SuppliesService } from '../_services/supplies.service';
 import { QuestionnariesQuestions } from '../_models/questionnariesQuestions';
 import { QuestionnariesAnswers } from '../_models/questionnariesAnswers';
 import { ListaService } from '../_services/lista.service';
@@ -16,10 +16,10 @@ import { ListaItem } from '../_models/listaItem';
                selector: 'roles-form.component',
                providers: [ ConfirmationService ]
             } )
-export class QuestionnairesUpdateComponent implements OnInit {
+export class SuppliesUpdateComponent implements OnInit {
 
-   cuestionarios: Questionnaries[] = [];
-   cuestionario: Questionnaries = new Questionnaries();
+   cuestionarios: Supplies[] = [];
+   cuestionario: Supplies = new Supplies();
    preguntas: QuestionnariesQuestions[] = [];
    pregunta: QuestionnariesQuestions = new QuestionnariesQuestions();
    respuestas: QuestionnariesAnswers[] = [];
@@ -37,7 +37,7 @@ export class QuestionnairesUpdateComponent implements OnInit {
    previousQuestions: SelectItem[] = [];
    previousAnswers: SelectItem[] = [];
 
-   constructor( private questionnairesService: QuestionnairesService,
+   constructor( private suppliesService: SuppliesService,
       private router: Router,
       private location: Location,
       private listaService: ListaService,
@@ -48,14 +48,14 @@ export class QuestionnairesUpdateComponent implements OnInit {
       this.route.params.subscribe( params => {
          this.idCuestionario = +params[ 'id' ];
          if ( Number( this.idCuestionario ) > 0 ) {
-            this.questionnairesService.get( this.idCuestionario ).subscribe(
+            this.suppliesService.get( this.idCuestionario ).subscribe(
                res => {
                   this.cuestionario = res;
                   this.getQuestions();
                } );
          }
       } );
-      this.questionnairesService.getAll().subscribe(
+      this.suppliesService.getAll().subscribe(
          res => {
             this.cuestionarios = res;
          } );
@@ -72,7 +72,7 @@ export class QuestionnairesUpdateComponent implements OnInit {
 
    getQuestions() {
       if ( Number( this.idCuestionario ) > 0 ) {
-         this.questionnairesService.getQuestions( this.idCuestionario ).subscribe(
+         this.suppliesService.getQuestions( this.idCuestionario ).subscribe(
             res => {
                this.preguntas = res;
                this.sortQuestions();
@@ -98,7 +98,7 @@ export class QuestionnairesUpdateComponent implements OnInit {
    onSubmit() {
       if ( !this.codeExists ) {
          this.formQuestionnarie = false;
-         this.questionnairesService.update( this.cuestionario ).subscribe( res => {
+         this.suppliesService.update( this.cuestionario ).subscribe( res => {
             this.navService.setMesage( 1, this.msgs );
             this.formQuestionnarie = true;
          }, error => {
@@ -143,7 +143,7 @@ export class QuestionnairesUpdateComponent implements OnInit {
       this.previousAnswers = [];
       this.previousAnswers.push( { label: 'Seleccione', value: null } );
       if ( this.pregunta.idDependePregunta ) {
-         this.questionnairesService.getAnswers( this.pregunta.idDependePregunta ).subscribe(
+         this.suppliesService.getAnswers( this.pregunta.idDependePregunta ).subscribe(
             res => {
                res.map( s => {
                   this.previousAnswers.push( { label: s.opcion, value: s.idPreguntaOpcion } );
@@ -183,7 +183,7 @@ export class QuestionnairesUpdateComponent implements OnInit {
             this.pregunta.idCuestionario = this.idCuestionario;
             this.pregunta.secuencia = this.preguntas.length + 1;
             this.pregunta.codigoPregunta = this.pregunta.codigoPregunta.toUpperCase().replace( /[^A-Z0-9]/g, '' ).trim();
-            this.questionnairesService.addQuestion( this.pregunta ).subscribe( res => {
+            this.suppliesService.addQuestion( this.pregunta ).subscribe( res => {
                this.formQuestion = false;
                this.showAnswers = false;
                this.pregunta = new QuestionnariesQuestions();
@@ -193,7 +193,7 @@ export class QuestionnairesUpdateComponent implements OnInit {
                this.navService.setMesage( 3, this.msgs );
             } );
          } else {
-            this.questionnairesService.updateQuestion( this.pregunta ).subscribe( res => {
+            this.suppliesService.updateQuestion( this.pregunta ).subscribe( res => {
                this.navService.setMesage( 1, this.msgs );
                this.formQuestion = false;
                this.showAnswers = false;
@@ -220,10 +220,10 @@ export class QuestionnairesUpdateComponent implements OnInit {
       if ( myIndex < this.preguntas.length - 1 ) {
          let newOrder = this.preguntas[ myIndex ].secuencia;
          this.preguntas[ myIndex ].secuencia = this.preguntas[ myIndex + 1 ].secuencia;
-         this.questionnairesService.updateQuestion( this.preguntas[ myIndex ] ).subscribe( res => {
+         this.suppliesService.updateQuestion( this.preguntas[ myIndex ] ).subscribe( res => {
             if ( res.ok ) {
                this.preguntas[ myIndex + 1 ].secuencia = newOrder;
-               this.questionnairesService.updateQuestion( this.preguntas[ myIndex + 1 ] ).subscribe( res => {
+               this.suppliesService.updateQuestion( this.preguntas[ myIndex + 1 ] ).subscribe( res => {
                   if ( res.ok ) {
                      this.sortQuestions();
                   }
@@ -238,10 +238,10 @@ export class QuestionnairesUpdateComponent implements OnInit {
       if ( myIndex > 0 ) {
          let newOrder = this.preguntas[ myIndex ].secuencia;
          this.preguntas[ myIndex ].secuencia = this.preguntas[ myIndex - 1 ].secuencia;
-         this.questionnairesService.updateQuestion( this.preguntas[ myIndex ] ).subscribe( res => {
+         this.suppliesService.updateQuestion( this.preguntas[ myIndex ] ).subscribe( res => {
             if ( res.ok ) {
                this.preguntas[ myIndex - 1 ].secuencia = newOrder;
-               this.questionnairesService.updateQuestion( this.preguntas[ myIndex - 1 ] ).subscribe( res => {
+               this.suppliesService.updateQuestion( this.preguntas[ myIndex - 1 ] ).subscribe( res => {
                   if ( res.ok ) {
                      this.sortQuestions();
                   }
@@ -292,7 +292,7 @@ export class QuestionnairesUpdateComponent implements OnInit {
             this.respuesta.idCuestionarioPregunta = this.pregunta.idCuestionarioPregunta;
             this.respuesta.orden = this.respuestas.length + 1;
             this.respuesta.codigoOpcion = this.respuesta.codigoOpcion.toUpperCase().replace( /[^A-Z0-9]/g, '' ).trim();
-            this.questionnairesService.addAnswer( this.respuesta ).subscribe( res => {
+            this.suppliesService.addAnswer( this.respuesta ).subscribe( res => {
                this.navService.setMesage( 1, this.msgs );
                this.formAnswer = false;
                this.respuesta = new QuestionnariesAnswers();
@@ -301,7 +301,7 @@ export class QuestionnairesUpdateComponent implements OnInit {
                this.navService.setMesage( 3, this.msgs );
             } );
          } else {
-            this.questionnairesService.updateAnswer( this.respuesta ).subscribe( res => {
+            this.suppliesService.updateAnswer( this.respuesta ).subscribe( res => {
                this.navService.setMesage( 1, this.msgs );
                this.formAnswer = false;
                this.respuesta = new QuestionnariesAnswers();
@@ -314,7 +314,7 @@ export class QuestionnairesUpdateComponent implements OnInit {
    }
 
    getAnswers() {
-      this.questionnairesService.getAnswers( this.pregunta.idCuestionarioPregunta ).subscribe(
+      this.suppliesService.getAnswers( this.pregunta.idCuestionarioPregunta ).subscribe(
          res => {
             this.respuestas = res;
             this.formAnswer = false;
@@ -336,10 +336,10 @@ export class QuestionnairesUpdateComponent implements OnInit {
       if ( myIndex < this.respuestas.length - 1 ) {
          let newOrder = this.respuestas[ myIndex ].orden;
          this.respuestas[ myIndex ].orden = this.respuestas[ myIndex + 1 ].orden;
-         this.questionnairesService.updateAnswer( this.respuestas[ myIndex ] ).subscribe( res => {
+         this.suppliesService.updateAnswer( this.respuestas[ myIndex ] ).subscribe( res => {
             if ( res.ok ) {
                this.respuestas[ myIndex + 1 ].orden = newOrder;
-               this.questionnairesService.updateAnswer( this.respuestas[ myIndex + 1 ] ).subscribe( res => {
+               this.suppliesService.updateAnswer( this.respuestas[ myIndex + 1 ] ).subscribe( res => {
                   if ( res.ok ) {
                      this.sortAnswers();
                   }
@@ -354,10 +354,10 @@ export class QuestionnairesUpdateComponent implements OnInit {
       if ( myIndex > 0 ) {
          let newOrder = this.respuestas[ myIndex ].orden;
          this.respuestas[ myIndex ].orden = this.respuestas[ myIndex - 1 ].orden;
-         this.questionnairesService.updateAnswer( this.respuestas[ myIndex ] ).subscribe( res => {
+         this.suppliesService.updateAnswer( this.respuestas[ myIndex ] ).subscribe( res => {
             if ( res.ok ) {
                this.respuestas[ myIndex - 1 ].orden = newOrder;
-               this.questionnairesService.updateAnswer( this.respuestas[ myIndex - 1 ] ).subscribe( res => {
+               this.suppliesService.updateAnswer( this.respuestas[ myIndex - 1 ] ).subscribe( res => {
                   if ( res.ok ) {
                      this.sortAnswers();
                   }

@@ -4,13 +4,10 @@ import { NavService } from '../_services/_nav.service';
 import { SharedModule } from '../shared/shared.module';
 import { FormSharedModule } from '../shared/form-shared.module';
 import { ListaService } from '../_services/lista.service';
-import { QuestionnairesComponent } from './supplies.component';
-import { QuestionnairesService } from '../_services/questionnaires.service';
-import { QuestionnairesAddComponent } from './supplies-add.component';
-import { QuestionnairesUpdateComponent } from './supplies-update.component';
-import { SolutionsQuestionnairesComponent } from './solutions-questionnaire/solutions-questionnaires.component';
-import { MasterAnswersService } from '../_services/masterAnswers.service';
-import { SolutionsQuestionnairesDetailComponent } from './solutions-questionnaire/solutions-questionnaires-detail.component';
+import { SuppliesComponent } from './supplies.component';
+import { SuppliesService } from '../_services/supplies.service';
+import { SuppliesAddComponent } from './supplies-add.component';
+import { SuppliesUpdateComponent } from './supplies-update.component';
 
 
 @NgModule( {
@@ -19,12 +16,11 @@ import { SolutionsQuestionnairesDetailComponent } from './solutions-questionnair
                  FormSharedModule,
               ],
 
-              declarations: [ QuestionnairesComponent, QuestionnairesAddComponent, QuestionnairesUpdateComponent,
-                 SolutionsQuestionnairesComponent, SolutionsQuestionnairesDetailComponent
+              declarations: [ SuppliesComponent, SuppliesAddComponent, SuppliesUpdateComponent
               ],
-              bootstrap: [ QuestionnairesComponent ],
-              providers: [ QuestionnairesService, NavService, ListaService, MasterAnswersService ],
-              exports: [ QuestionnairesComponent, SolutionsQuestionnairesComponent, SolutionsQuestionnairesDetailComponent ]
+              bootstrap: [ SuppliesComponent ],
+              providers: [ SuppliesService, NavService, ListaService ],
+              exports: [ SuppliesComponent ]
            } )
 export class QuestionnairesModule {
 }
