@@ -26,6 +26,7 @@ export class EmployeeEventuality {
    idFP: number;
    idCCF: number;
    idAdjunto: number;
+   codigoValidacion: string;
    indicadorHabilitado: boolean;
    auditoriaUsuario: Number;
    auditoriaFecha: Date;

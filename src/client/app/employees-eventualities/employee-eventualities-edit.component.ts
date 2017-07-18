@@ -13,6 +13,8 @@ import { EmployeeEventuality } from '../_models/employeeEventuality';
 import { EmployeeEventualitiesService } from '../_services/employees-eventualities.service';
 import { DiagnosticCIEServices } from '../_services/diagnosticCIE.service';
 import { SmsService } from '../_services/_sms.service';
+import { EmployeesService } from '../_services/employees.service';
+import { Employee } from '../_models/employees';
 
 @Component( {
                moduleId: module.id,
@@ -24,6 +26,7 @@ import { SmsService } from '../_services/_sms.service';
 export class EmployeeEventualitiesAddComponent implements OnInit {
 
    employeeEventuality: EmployeeEventuality = new EmployeeEventuality();
+   employee: Employee = new Employee();
    msgs: Message[];
    es: any;
    minDateInicio: Date = new Date();
@@ -46,6 +49,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    ftype: string = '';
    // -----    -----------
    constructor( private employeeNoveltyService: EmployeeEventualitiesService,
+      private employeesService: EmployeesService,
       private router: Router,
       private _sms: SmsService,
       private diagnosticCIEServices: DiagnosticCIEServices,
@@ -84,6 +88,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
          if ( tempIdEmployee ) {
             this.employeeEventuality.idTercero = tempIdEmployee;
 
+            this.employeesService.get( tempIdEmployee ).subscribe( res => this.employee = res );
          }
       } );
 
@@ -108,24 +113,32 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    }
 
    onSubmit() {
-      if ( this.employeeEventuality.idNovedad ) {
-         // if ( this.documentManagement.indicadorAdjunto ) {
-         //    this.documentManagement.idAdjunto = null;
-         // }
-         this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( data => {
-            this._nav.setMesage( 2, this.msgs );
-            this.location.back();
-         }, error => {
-            this._nav.setMesage( 3, this.msgs );
-         } );
-      } else {
-         this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
-            this._nav.setMesage( 1, this.msgs );
-            this.location.back();
-         }, error => {
-            this._nav.setMesage( 3, this.msgs );
-         } );
-      }
+      this.employeeNoveltyService.getById( this.employeeEventuality.idNovedad ).subscribe( res => {
+         if ( res.codigoValidacion === this.codigoVerificacion ) {
+            if ( this.employeeEventuality.idNovedad ) {
+               // if ( this.documentManagement.indicadorAdjunto ) {
+               //    this.documentManagement.idAdjunto = null;
+               // }
+               this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( data => {
+                  this._nav.setMesage( 2, this.msgs );
+                  this.location.back();
+               }, error => {
+                  this._nav.setMesage( 3, this.msgs );
+               } );
+            } else {
+               this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
+                  this._nav.setMesage( 1, this.msgs );
+                  this.location.back();
+               }, error => {
+                  this._nav.setMesage( 3, this.msgs );
+               } );
+            }
+         } else {
+            this._nav.setMesage( 4, {
+               severity: 'error', summary: 'Error', detail: 'El código ingresado no coincide con el asignado.'
+            } );
+         }
+      } );
    }
 
    capitalize( event: any ) {
@@ -206,19 +219,15 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    }
 
    generarCodigo() {
-      let codigoVerificacion = (Math.floor( Math.random() * (9999 - 1000 + 1) ) + 1000).toString();
-      //
+      this.employeeEventuality.codigoValidacion = (Math.floor( Math.random() * (9999 - 1000 + 1) ) + 1000).toString();
+
       this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( data => {
-         //    this.candidate.telefonoCelular = this.candidate.telefonoCelular.replace(/\(|\)|\-/g,"");
-         //    this.candidate.telefonoCelular = this.candidate.telefonoCelular.split(' ').join('');
-         //    let obj = {
-         //       destination: this.candidate.telefonoCelular,
-         //       codigo: this.medicalExam.codigoVerificacion
-         //    }
-         //
+         this.employee.telefonoCelular = this.employee.telefonoCelular.replace( /\(|\)|\-/g, "" );
+         this.employee.telefonoCelular = this.employee.telefonoCelular.split( ' ' ).join( '' );
+
          let obj = {
-            destination: '3174167448',
-            codigo: codigoVerificacion
+            destination: this.employee.telefonoCelular,
+            codigo: this.employeeEventuality.codigoValidacion
          }
 
          this._sms.generateVerificationCode( obj ).subscribe( res => {

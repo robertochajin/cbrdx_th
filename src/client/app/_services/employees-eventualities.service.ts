@@ -41,7 +41,7 @@ export class EmployeeEventualitiesService {
 
    update( c: EmployeeEventuality ) {
       c.auditoriaUsuario = this.idUsuario;
-      return this.authHttp.put( this.serviceURL + 'terceros', c ).map( ( res: Response ) => res );
+      return this.authHttp.put( this.serviceURL + 'tercerosNovedades', c ).map( ( res: Response ) => res );
    }
 
 }
