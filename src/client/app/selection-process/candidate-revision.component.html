@@ -127,13 +127,14 @@
 					</fieldset>
 					<fieldset *ngIf="readonly">
 						<div class="row">
-							<div class="form-group col-md-12">
+							<hr>
+							<div class="form-group col-md-10 col-md-offset-1">
 								<label for="validStep">{{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
 								<p>{{candidateProcess.estadoDiligenciado}}</p>
 							</div>
 						</div>
 						<div class="row">
-							<div class="form-group col-md-12">
+							<div class="form-group col-md-10 col-md-offset-1">
 								<label for="observacion">{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}:</label>
 								<p>{{candidateProcess.observacion}}</p>
 							</div>

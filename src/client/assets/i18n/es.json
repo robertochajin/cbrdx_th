@@ -795,6 +795,7 @@
    "REQUERIMIENTOPERSONAL": {
       "LBL_REQUERIMIENTOPERSONAL":"Requerimiento de personal",
       "BTN_AGREGARNUEVO": "Agregar nuevo requerimiento de personal",
+      "BTN_AGREGARNUEVOREF":"Agregar nuevo referido",
       "LBL_DATOSSOLICITUD":"Datos básicos de la solicitud",
       "LBL_DATOSSOLICITANTE":"Datos Solicitante",
       "LBL_NOMBRESOLICITANTE":"Nombre del Solicitante",
