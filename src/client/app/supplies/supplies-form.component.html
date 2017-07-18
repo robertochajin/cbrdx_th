@@ -66,114 +66,152 @@
 	</p-panel>
 	<p-panel header="{{ 'SUPPLIES.LBL_SUPPLIES' | translate}}" *ngIf="cuestionario.idCuestionario">
 		<div *ngIf="cuestionario.idCuestionario && formQuestion">
-			<form (ngSubmit)="p.valid && onSubmitQuestion()" #p="ngForm" novalidate>
+			<form (ngSubmit)="p.valid && onSubmitSupplies()" #s="ngForm" novalidate>
 				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 					<div class="ui-grid-row">
-						<div class="ui-grid-col-6">
-							<label for="codigoPregunta">* {{ 'LBL_CODIGO' | translate}}</label>
-							<input type="text" pInputText id="codigoPregunta" name="codigo"
-							       [readonly]="(pregunta.idCuestionarioPregunta !== undefined && pregunta.idCuestionarioPregunta !== null)"
-							       [(ngModel)]="pregunta.codigoPregunta" maxlength="10"
-							       (change)="validateCodeP()"
+						<div class="ui-grid-col-4">
+							<label for="codigoS">* {{ 'LBL_CODIGO' | translate}}</label>
+							<input type="text" pInputText id="codigoS" name="codigoS"
+							       [(ngModel)]="supply.codigo" maxlength="10"
+							       (change)="validateCodeS()"
 							       (keyup)="inputCleanCode($event)"
-							       #NGcodigoP="ngModel" required/>
+							       #NGcodigoS="ngModel" required/>
 							<div class="ui-message ui-messages-error ui-corner-all"
-							     *ngIf="p.submitted && !NGcodigoP.valid ">
+							     *ngIf="s.submitted && !NGcodigoS.valid ">
 								<i class="fa fa-close"></i>{{ 'LBL_CODIGO' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 							</div>
 							<div class="ui-message ui-messages-error ui-corner-all"
-							     *ngIf="p.submitted && codeExistsP ">
-								<i class="fa fa-close"></i>{{ 'QUESTIONNAIRES.LBL_VALIDATECODE' | translate}}
+							     *ngIf="s.submitted && codeExistsS ">
+								<i class="fa fa-close"></i>{{ 'MSG_CODIGOEXISTE' | translate}}
 							</div>
 						</div>
-						<div class="form-group col-sm-6">
-							<label for="tipo">{{ 'QUESTIONNAIRES.LBL_TYPE' | translate}}</label>
-							<p-dropdown id="tipo" name="tipo" required="true"
-							            [options]="questionsTypes" [autoWidth]="false"
-							            [(ngModel)]="pregunta.idTipoPregunta"
-							            #NGtipo="ngModel"
-							></p-dropdown>
+						<div class="ui-grid-col-8">
+							<label for="nombreS">* {{ 'LBL_NOMBRE' | translate}}</label>
+							<input type="text" pInputText id="nombreS" name="nombreS"
+							       [(ngModel)]="supply.dotacion" maxlength="255"
+							       titleCaseText
+							       #NGcodigoS="ngModel" required/>
 							<div class="ui-message ui-messages-error ui-corner-all"
-							     *ngIf="p.submitted && !NGtipo.valid">
-								<i class="fa fa-close"></i>{{ 'QUESTIONNAIRES.LBL_TYPE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							     *ngIf="s.submitted && !NGcodigoS.valid ">
+								<i class="fa fa-close"></i>{{ 'LBL_NOMBRE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 							</div>
 						</div>
 					</div>
 					<div class="ui-grid-row">
-						<div class="ui-grid-col-12">
-							<label for="pregunta">* {{ 'QUESTIONNAIRES.LBL_QUESTION' | translate}}</label>
-							<textarea pInputTextarea id="pregunta" name="pregunta"
-							          [(ngModel)]="pregunta.pregunta" #NGpregunta="ngModel" maxlength="500"
+						<div class="ui-grid-col-6">
+							<label for="descripcion">* {{ 'LBL_DESCRIPCION' | translate}}</label>
+							<textarea pInputTextarea id="descripcion" name="descripcion"
+							          [(ngModel)]="supply.descripcion" #NGdescripcion="ngModel" maxlength="500"
 							          [required]="true"></textarea>
 							<div class="ui-message ui-messages-error ui-corner-all"
-							     *ngIf="p.submitted && !NGpregunta.valid">
-								<i class="fa fa-close"></i>{{ 'QUESTIONNAIRES.LBL_QUESTION' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							     *ngIf="s.submitted && !NGdescripcion.valid">
+								<i class="fa fa-close"></i>{{ 'LBL_DESCRIPCION' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 							</div>
 						</div>
-					
+						<div class="ui-grid-col-6">
+							<label for="detalleProveedor">* {{ 'LBL_DETALLE' | translate}}</label>
+							<textarea pInputTextarea id="detalleProveedor" name="detalleProveedor"
+							          [(ngModel)]="supply.detalleProveedor" #NGdetalle="ngModel" maxlength="500"
+							          [required]="true"></textarea>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="s.submitted && !NGdetalle.valid">
+								<i class="fa fa-close"></i>{{ 'LBL_DETALLE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
 					</div>
 					<div class="ui-grid-row">
-						<div class="form-group col-md-3" style="margin-top: 24px">
-							<p-checkbox binary="true" id="indicadorP" name="indicadorP"
-							            [(ngModel)]="pregunta.indicadorHabilitado" label="{{ 'LBL_HABILITADO' | translate}}"
-							></p-checkbox>
+						<div class="ui-grid-col-4">
+							<label for="costo">* {{ 'LBL_COST' | translate}}</label>
+							<input type="text" pInputText id="costo" name="costo"
+							       [(ngModel)]="supply.dotacion" maxlength="255"
+							       (keyup)="inputCleanValue($event)"
+							       #NGcostoS="ngModel" required/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="s.submitted && !NGcostoS.valid ">
+								<i class="fa fa-close"></i>{{ 'LBL_COST' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
 						</div>
-						<div class="form-group col-md-3" style="margin-top: 24px">
-							<p-checkbox binary="true" id="obligatorio" name="obligatorio"
-							            [(ngModel)]="pregunta.indicadorObligatorio" label="{{ 'QUESTIONNAIRES.LBL_REQUIRED' |
-								      translate}}"
-							></p-checkbox>
+						<div class="ui-grid-col-4">
+							<label for="cantidad">* {{ 'SUPPLIES.LBL_QUANTITY' | translate}}</label>
+							<input type="number" pInputText id="cantidad" name="cantidad"
+							       [(ngModel)]="supply.cantidad" maxlength="255" min="0" max="9999"
+							       (keyup)="inputCleanValue($event)"
+							       #NGcantidad="ngModel" required/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="s.submitted && !NGcantidad.valid ">
+								<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_QUANTITY' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
 						</div>
-						<div class="form-group col-md-3" style="margin-top: 24px">
-							<p-checkbox binary="true" id="filtrante" name="filtrante"
-							            [(ngModel)]="pregunta.indicadorFiltrante" label="{{ 'QUESTIONNAIRES.LBL_FILTERING' |
-								      translate}}"
-							></p-checkbox>
-						</div>
-						<div class="form-group col-md-3" style="margin-top: 24px">
-							<p-checkbox binary="true" id="dependeDe" name="dependeDe"
-							            [(ngModel)]="pregunta.indicadorDepende" label="{{ 'QUESTIONNAIRES.LBL_DEPEND' | translate}}"
-							></p-checkbox>
-						</div>
-					
-					</div>
-					<div class="ui-grid-row" *ngIf="pregunta.indicadorDepende === true">
-						<div class="form-group col-sm-12">
-							<label for="dependePregunta">{{ 'QUESTIONNAIRES.LBL_QUESTION' | translate}} {{ 'QUESTIONNAIRES.LBL_DEPEND' |
-								translate}}</label>
-							<p-dropdown id="dependePregunta" name="dependePregunta" required="true"
-							            [options]="previousQuestions" [autoWidth]="false"
-							            [(ngModel)]="pregunta.idDependePregunta"
-							            (onChange)="getPreviousAnswers()"
-							            #NGdependePregunta="ngModel"
+						<div class="ui-grid-col-4">
+							<label for="ciclo">* {{ 'SUPPLIES.LBL_CYCLE' | translate}}</label>
+							<p-dropdown id="ciclo" name="ciclo" required="true"
+							            [options]="cycleTypes" [autoWidth]="false"
+							            [(ngModel)]="supply.idCicloEntrega"
+							            #NGciclo="ngModel"
 							></p-dropdown>
 							<div class="ui-message ui-messages-error ui-corner-all"
-							     *ngIf="p.submitted && !NGdependePregunta.valid">
-								<i class="fa fa-close"></i>{{ 'QUESTIONNAIRES.LBL_QUESTION' | translate}} {{ 'QUESTIONNAIRES.LBL_DEPEND' |
-								translate}} {{ 'LBL_REQUERIDO' | translate}}
+							     *ngIf="s.submitted && !NGciclo.valid ">
+								<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_CYCLE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 							</div>
 						</div>
 					</div>
-					<div class="ui-grid-row" *ngIf="pregunta.idDependePregunta > 0">
-						<div class="form-group col-sm-12">
-							<label for="dependeRespuesta">{{ 'QUESTIONNAIRES.LBL_ANSWER' | translate}} {{ 'QUESTIONNAIRES.LBL_DEPEND' |
-								translate}}</label>
-							<p-dropdown id="dependeRespuesta" name="dependeRespuesta" required="true"
-							            [options]="previousAnswers" [autoWidth]="false"
-							            [(ngModel)]="pregunta.idDependeRespuesta"
-							            #NGdependePregunta="ngModel"
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-4">
+							<p-checkbox binary="true" id="rTalla" name="rTalla"
+							            [(ngModel)]="supply.indicadorRequiereTalla" label="{{ 'LBL_REQUIRESIZE' | translate}}"
+							></p-checkbox>
+						</div>
+						<div class="ui-grid-col-6" *ngIf="supply.indicadorRequiereTalla === true">
+							<label for="talla">* {{ 'SUPPLIES.LBL_SIZE' | translate}}</label>
+							<p-dropdown id="talla" name="talla" required="true"
+							            [options]="sizeTypes" [autoWidth]="false"
+							            [(ngModel)]="supply.idTipoTalla"
+							            #NGtalla="ngModel"
 							></p-dropdown>
 							<div class="ui-message ui-messages-error ui-corner-all"
-							     *ngIf="p.submitted && !NGdependePregunta.valid">
-								<i class="fa fa-close"></i>{{ 'QUESTIONNAIRES.LBL_ANSWER' | translate}} {{ 'QUESTIONNAIRES.LBL_DEPEND' |
-								translate}} {{ 'LBL_REQUERIDO' | translate}}
+							     *ngIf="s.submitted && !NGtalla.valid ">
+								<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_SIZE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 							</div>
+						</div>
+					</div>
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-3">
+							<p-checkbox binary="true" id="indicadorHab" name="indicadorHab"
+							            [(ngModel)]="supply.indicadorHabilitado" label="{{ 'LBL_HABILITADO' | translate}}"
+							></p-checkbox>
+						</div>
+						<div class="ui-grid-col-3">
+							<p-checkbox binary="true" id="indicadorDotacion" name="indicadorDotacion"
+							            [(ngModel)]="supply.indicadorAdicional"
+							            label="{{ 'SUPPLIES.LBL_SUPPLY' | translate}} {{ 'SUPPLIES.LBL_ADDITIONAL' | translate}}"
+							></p-checkbox>
+						</div>
+						<div class="form-group col-md-6">
+							<label>{{'LBL_ADJUNTAR' | translate}} </label>
+							<div *ngIf="((supply.idAdjunto != null))" class="btn-group" role="group" style="display: block;">
+								<a class="btn btn-default" style="max-width: 87%; overflow: hidden;"
+								   (click)="downloadFile(supply.idAdjunto)">
+									<i class="fa fa-file-o" aria-hidden="true"></i>
+									{{dataUploadArchivo}}
+								</a>
+								<a class="btn btn-danger" (click)="uploadAgain(false)">
+									<i class="fa fa-times" aria-hidden="true"></i>
+								</a>
+							</div>
+							<p-fileUpload *ngIf="reference.idAdjunto == null" name="file" url="{{svcThUrl}}" auto="true"
+							              class="uplo ad-avatar"
+							              chooseLabel="{{'LBL_ADJUNTAR' | translate}}"
+							              (onBeforeSend)="onBeforeSend($event)"
+							              (onSelect)="onSelect($event, $event.files)"
+							              (onUpload)="uploadingOk($event)"
+							              maxFileSize="{{fsize}}" accept="{{ftype}}">
+							</p-fileUpload>
 						</div>
 					</div>
 					<div class="ui-grid-row form-footer-buttons">
 						<div class="ui-grid-col-4"></div>
 						<div class="ui-grid-col-1">
-							<a (click)="goBackQuestion((p.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+							<a (click)="goBackQuestion((s.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
 						</div>
 						<div class="ui-grid-col-2">
 							<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
@@ -183,44 +221,28 @@
 				</div>
 			</form>
 		</div>
-		<div *ngIf="cuestionario.idCuestionario && !formQuestion">
+		<div *ngIf="supplies.idDotacion && !formSupply">
 			<div class="row datable-header">
 				<div class="col-md-6 col-xs-12 datatable-header-add">
 					<button type="button" icon="fa-plus"
-					        label="{{'QUESTIONNAIRES.LBL_NEW2' | translate}} {{'QUESTIONNAIRES.LBL_QUESTION' | translate}}"
-					        pButton (click)="addQuestion()"></button>
+					        label="{{'BTN_NUEVA' | translate}}"
+					        pButton (click)="addSupplies()"></button>
 				</div>
 				<div class="col-md-6 col-xs-12 datatable-header-search">
 					
-					<!--<div class="input-group">
+					<div class="input-group">
 						<div class="input-group-addon"><i class="fa fa-search"></i></div>
-						<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate}}" class="form-control">
-					</div>-->
+						<input #gbSupply type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate}}" class="form-control">
+					</div>
 				
 				</div>
 			</div>
 			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="preguntas"
-			             [responsive]="true" [globalFilter]="gb">
-				<p-column header="{{ 'LBL_ORDEN' | translate }}" styleClass="datatable-col-action">
-					<template let-datos="rowData" pTemplate="body">
-						<div class="btn-group" role="group">
-							<button type="button" class="ui-button ui-button-info btn" icon="fa-arrow-up" data-toggle="tooltip"
-							        title="{{'BTN_ARRIBA' | translate}}"
-							        pButton (click)="upQuestion(datos)"></button>
-							<button type="button" class="ui-button ui-button-info btn" icon="fa-arrow-down" data-toggle="tooltip"
-							        title="{{'BTN_ABAJO' | translate}}"
-							        pButton (click)="downQuestion(datos)"></button>
-						</div>
-					</template>
-				</p-column>
-				<p-column field="pregunta" header="{{'QUESTIONNAIRES.LBL_QUESTION' | translate}}"></p-column>
-				<p-column field="tipoPregunta" header="{{'QUESTIONNAIRES.LBL_TYPE' | translate}}"></p-column>
-				<p-column field="indicadorfiltrante" header="{{ 'QUESTIONNAIRES.LBL_FILTERING' | translate }}"
-				          styleClass="datatable-col-center">
-					<template let-datos="rowData" pTemplate="body">
-						<p-checkbox [(ngModel)]="datos.indicadorFiltrante" binary="true" disabled="true"></p-checkbox>
-					</template>
-				</p-column>
+			             [responsive]="true" [globalFilter]="gbSupply">
+				<p-column field="codigo" header="{{'LBL_CODIGO' | translate}}"></p-column>
+				<p-column field="dotacion" header="{{'SUPPLIES.LBL_SUPPLY' | translate}}"></p-column>
+				<p-column field="cicloEntrega" header="{{'SUPPLIES.LBL_CYCLE' | translate}}"></p-column>
+				<p-column field="cantidad" header="{{'SUPPLIES.LBL_QUANTITY' | translate}}"></p-column>
 				<p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}"
 				          styleClass="datatable-col-center">
 					<template let-datos="rowData" pTemplate="body">
@@ -229,14 +251,9 @@
 				</p-column>
 				<p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
 					<template let-datos="rowData" pTemplate="body">
-						<button type="button" icon="fa-plus" class="ui-button-info" data-toggle="tooltip"
-						        title="{{'QUESTIONNAIRES.LBL_ANSWERS' | translate}}"
-						        pButton (click)="showPanelAnswers(datos)"
-						        *ngIf="datos.codigoTipoPregunta === 'SELECT' || datos.codigoTipoPregunta === 'CHECK'"
-						></button>
 						<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip"
 						        title="{{'BTN_EDITAR' | translate}}"
-						        pButton (click)="updateQuestion(datos)"></button>
+						        pButton (click)="updateSupplies(datos)"></button>
 					</template>
 				</p-column>
 			</p-dataTable>

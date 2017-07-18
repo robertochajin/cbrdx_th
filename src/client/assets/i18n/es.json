@@ -66,6 +66,7 @@
   "MSG_GUARDADO":"Guardado",
   "MSG_REGISTRO":"Registro",
   "MSG_NORECORDSFOUND":"Su búsqueda no obtuvo ningún resultado",
+   "MSG_CODIGOEXISTE": "Código Existe"
   "LBL_BUSCAR":"Buscar...",
   "PH_BUSCAR":"Buscar ",
   "LBL_INVALIDO" : "Invalido",
@@ -84,6 +85,8 @@
   "BTN_DOWNLOAD": "Descargar",
   "BTN_UPLOAD": "Subir archivo",
    "BTN_LLAMAR": "Llamar",
+   "BTN_NUEVO": "Nuevo",
+   "BTN_NUEVA": "Nueva",
    "BTN_FINALIZARPROCESO": "Finalizar el proceso",
   "FIN_COMUNES":"====================================================================",
 
@@ -1094,6 +1097,12 @@
       "LBL_SUPPLIES": "Dotaciones",
       "LBL_SUPPLIESGROUPS": "Grupos Dotaciones",
       "LBL_GROUP": "Grupo",
+      "LBL_CYCLE": "Ciclo Entrega",
+      "LBL_QUANTITY": "Cantidad",
+      "LBL_COST": "Costo",
+      "LBL_SIZE": "Tipo Talla",
+      "LBL_REQUIRESIZE": "Requiere Talla",
+      "LBL_ADDITIONAL": "Adicional",
       "LBL_ESTADO": "Estado"
    },
 

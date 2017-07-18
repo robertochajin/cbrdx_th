@@ -66,6 +66,11 @@ export class SuppliesService {
       .map( ( res: Response ) => res.json() as Supplies );
    }
 
+   getAllSupply() {
+      return this.authHttp.get( this.masterService + 'dotaciones' )
+      .map( ( res: Response ) => res.json() as Supplies[] );
+   }
+
    addSupply( f: Supplies ) {
       f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.masterService + 'dotaciones', f )

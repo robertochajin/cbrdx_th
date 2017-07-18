@@ -7,6 +7,11 @@ import { Supplies } from '../_models/supplies';
 import { SuppliesService } from '../_services/supplies.service';
 import { ListaService } from '../_services/lista.service';
 import { SuppliesGroups } from '../_models/suppliesGroups';
+import { SelectItem } from 'primeng/primeng';
+import { JwtHelper } from 'angular2-jwt';
+import { AdjuntosService } from '../_services/adjuntos.service';
+import { ConstanteService } from '../_services/constante.service';
+import { ListaItem } from '../_models/listaItem';
 
 @Component( {
                moduleId: module.id,
@@ -18,6 +23,7 @@ export class SuppliesUpdateComponent implements OnInit {
 
    suppliesGroup: SuppliesGroups = new SuppliesGroups();
    allGroups: SuppliesGroups[] = [];
+   allSupplies: Supplies[] = [];
    supplies: Supplies[] = [];
    supply: Supplies = new Supplies();
    msgs: Message[] = [];
@@ -26,12 +32,25 @@ export class SuppliesUpdateComponent implements OnInit {
    formGroup: boolean = false;
    formSupply: boolean = false;
    idGrupoDotacion: number;
+   cycleTypes: SelectItem[] = [];
+   sizeTypes: SelectItem[] = [];
+
+   svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
+   dataUploadArchivo: any = 'Archivo Adjunto';
+   dataUploadUsuario: any = '';
+   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
+   jwtHelper: JwtHelper = new JwtHelper();
+   fsize: number = 50000000;
+   ftype: string = '';
    constructor( private suppliesService: SuppliesService,
       private router: Router,
       private location: Location,
       private listaService: ListaService,
       private route: ActivatedRoute,
       private confirmationService: ConfirmationService,
+      private adjuntosService: AdjuntosService,
+      private constanteService: ConstanteService,
+
       private navService: NavService ) {
 
       this.route.params.subscribe( params => {
@@ -51,12 +70,37 @@ export class SuppliesUpdateComponent implements OnInit {
          }
       );
 
-      /* listaService.getMasterDetails( 'ListasTiposPreguntas' ).subscribe( res => {
-         this.questionsTypes.push( { label: 'Seleccione', value: null } );
+      this.suppliesService.getAllSupply().subscribe(
+         res => {
+            this.allSupplies = res;
+         }
+      );
+      let token = localStorage.getItem( 'token' );
+      this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+      this.constanteService.getByCode( 'FTYPE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.ftype = data.valor;
+         }
+      } );
+      this.constanteService.getByCode( 'FSIZE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.fsize = Number( data.valor );
+         }
+      } );
+
+      listaService.getMasterDetails( 'ListasTiposTallas' ).subscribe( res => {
+         this.sizeTypes.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
-            this.questionsTypes.push( { label: s.nombre, value: s.idLista } );
+            this.sizeTypes.push( { label: s.nombre, value: s.idLista } );
          } );
-       } );*/
+      } );
+
+      listaService.getMasterDetails( 'ListasCiclosEntregas' ).subscribe( res => {
+         this.sizeTypes.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => {
+            this.sizeTypes.push( { label: s.nombre, value: s.idLista } );
+         } );
+      } );
    }
    ngOnInit() {
    }
@@ -104,6 +148,13 @@ export class SuppliesUpdateComponent implements OnInit {
       }
    }
 
+   inputCleanValue( event: any ) {
+      let input = event.target.value;
+      if ( input.length > 0 ) {
+         event.target.value = input.replace( /[^0-9]/g, '' ).trim();
+      }
+   }
+
    getSupplies() {
       if ( Number( this.idGrupoDotacion ) > 0 ) {
          this.suppliesService.getSupplies( this.idGrupoDotacion ).subscribe(
@@ -140,27 +191,25 @@ export class SuppliesUpdateComponent implements OnInit {
       }
    }
 
-   /* onSubmitSupplies() {
+   onSubmitSupplies() {
     if ( !this.codeExistsS ) {
     if ( this.supply.idDotacion === null || this.supply.idDotacion === undefined || this.supply.idDotacion === 0 ) {
     this.supply.idGrupoDotacion = this.idGrupoDotacion;
-    this.supply.codigoPregunta = this.supply.codigoPregunta.toUpperCase().replace( /[^A-Z0-9]/g, '' ).trim();
-    this.suppliesService.addQuestion( this.supply ).subscribe( res => {
-               this.formQuestion = false;
-               this.showAnswers = false;
-    this.supply = new Supplies();
-               this.getQuestions();
+       this.supply.codigo = this.supply.codigo.toUpperCase().replace( /[^A-Z0-9]/g, '' ).trim();
+       this.suppliesService.addSupply( this.supply ).subscribe( res => {
+          this.formSupply = false;
+          this.supply = new Supplies();
+          this.getSupplies();
                this.navService.setMesage( 1, this.msgs );
             }, error => {
                this.navService.setMesage( 3, this.msgs );
             } );
          } else {
-    this.suppliesService.updateQuestion( this.supply ).subscribe( res => {
+       this.suppliesService.updateSupply( this.supply ).subscribe( res => {
                this.navService.setMesage( 1, this.msgs );
-               this.formQuestion = false;
-               this.showAnswers = false;
+          this.formSupply = false;
     this.supply = new Supplies();
-               this.getQuestions();
+          this.getSupplies();
             }, error => {
                this.navService.setMesage( 3, this.msgs );
             } );
@@ -168,13 +217,51 @@ export class SuppliesUpdateComponent implements OnInit {
       }
    }
 
-    validateCodeS() {
-    if ( this.supply.codigoPregunta !== '' && this.supply.codigoPregunta !== null ) {
-    this.codeExistsP = this.supplys.filter(
-    t => (t.codigoPregunta === this.supply.codigoPregunta && t.idCuestionarioPregunta !== this.supply.idCuestionarioPregunta ) ).length > 0;
+   validateCodeS() {
+      if ( this.supply.codigo !== '' && this.supply.codigo !== null ) {
+         this.codeExistsS = this.allSupplies.filter(
+               t => (t.codigo === this.supply.codigo && t.idDotacion !== this.supply.idDotacion ) ).length > 0;
       } else {
-         this.codeExistsP = false;
+         this.codeExistsS = false;
       }
-    }*/
+   }
+
+   // Archivo Adjunto
+   uploadingOk( event: any ) {
+      let respuesta = JSON.parse( event.xhr.response );
+      if ( respuesta.idAdjunto != null || respuesta.idAdjunto != undefined ) {
+         this.supply.idAdjunto = respuesta.idAdjunto;
+      }
+   }
+
+   onBeforeSend( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "'}";
+      event.formData.append( 'obj', obj.toString() );
+   }
+
+   onSelect( event: any, file: any ) {
+      this.dataUploadArchivo = file[ 0 ].name;
+      this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   }
+
+   uploadAgain( rta: boolean ) {
+      this.supply.idAdjunto = null;
+   }
+
+   downloadFile( id: number ) {
+
+      this.adjuntosService.downloadFile( id ).subscribe( res => {
+         window.location.assign( res );
+      } );
+   }
+
+   getFileName() {
+      if ( this.supply.idAdjunto ) {
+         this.adjuntosService.getFileName( this.supply.idAdjunto ).subscribe( res => {
+            this.dataUploadArchivo = res.nombreArchivo;
+         } );
+      }
+   }
 
 }

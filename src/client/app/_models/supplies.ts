@@ -8,7 +8,6 @@ export class Supplies {
    public idTipoTalla: number = null;
    public idCicloEntrega: number = null;
    public codigo: string;
-   public cuestionario: string;
    public descripcion: string;
    public grupoDotacion: string;
    public cicloEntrega: string;
