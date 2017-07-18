@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: ./.docker/angular-seed.production.dockerfile
     command: npm run build.prod
-    container_name: angular-seed-build-prod
+    container_name: angular-seed-build
     image: angular-seed
     networks:
       - prod-network
@@ -16,7 +16,7 @@ services:
 
   angular-seed-nginx:
     command: /bin/bash -c "envsubst '$$NGINX_HOST $$NGINX_PORT' < /etc/nginx/conf.d/angular-seed.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
-    container_name: angular-seed-nginx-prod
+    container_name: angular-seed-nginx
     environment:
       - NGINX_HOST=localhost
       - NGINX_PORT=80
