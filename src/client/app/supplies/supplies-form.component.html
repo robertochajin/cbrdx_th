@@ -64,6 +64,30 @@
 			</form>
 		</fieldset>
 	</p-panel>
+	<p-tabPanel header="{{ 'SUPPLIES.LBL_ADDPOSITION' | translate }}">
+		<div class="row datable-header">
+			<div class="col-md-6 col-xs-12 datatable-header-add">
+			</div>
+			<div class="col-md-6 col-xs-12 datatable-header-search">
+				<div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-search"></i></div>
+					<input #gb1 type="text" pInputText size="30" placeholder="{{ 'LBL_BUSCAR' | translate}}" class="form-control">
+				</div>
+			</div>
+		</div>
+		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="supplyPosition" [paginator]="true"
+		             [rows]="10" [responsive]="true" [globalFilter]="gb1">
+			<p-column field="idCargo" header="{{ 'LBL_ID' | translate}}" [sortable]="true"></p-column>
+			<p-column field="cargo" header="{{ 'LBL_CODIGO' | translate}}" [sortable]="true"></p-column>
+			<p-column field="indicadorHabilitado" header="{{ 'SUPPLIES.LBL_ACTIVE' | translate}}" [sortable]="true"
+			          styleClass="datatable-col-center">
+				<template let-datos="rowData" pTemplate="body">
+					<p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="datos.indicadorHabilitado"
+					               (onChange)="changeControl(datos)"></p-inputSwitch>
+				</template>
+			</p-column>
+		</p-dataTable>
+	</p-tabPanel>
 	<p-panel header="{{ 'SUPPLIES.LBL_SUPPLIES' | translate}}" *ngIf="cuestionario.idCuestionario">
 		<div *ngIf="cuestionario.idCuestionario && formQuestion">
 			<form (ngSubmit)="p.valid && onSubmitSupplies()" #s="ngForm" novalidate>

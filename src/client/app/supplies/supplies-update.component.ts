@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ConfirmationService, Message } from 'primeng/primeng';
 import { NavService } from '../_services/_nav.service';
 import { Supplies } from '../_models/supplies';
+import { SuppliesPosition } from '../_models/suppliesPosition';
 import { SuppliesService } from '../_services/supplies.service';
 import { ListaService } from '../_services/lista.service';
 import { SuppliesGroups } from '../_models/suppliesGroups';
@@ -12,6 +13,8 @@ import { JwtHelper } from 'angular2-jwt';
 import { AdjuntosService } from '../_services/adjuntos.service';
 import { ConstanteService } from '../_services/constante.service';
 import { ListaItem } from '../_models/listaItem';
+import { PositionsService } from '../_services/positions.service';
+import { Positions } from '../_models/positions';
 
 @Component( {
                moduleId: module.id,
@@ -24,8 +27,12 @@ export class SuppliesUpdateComponent implements OnInit {
    suppliesGroup: SuppliesGroups = new SuppliesGroups();
    allGroups: SuppliesGroups[] = [];
    allSupplies: Supplies[] = [];
+   supplyPosition: SuppliesPosition[] = [];
+   supplyPositions: SuppliesPosition[] = [];
+   sPosition: SuppliesPosition = new SuppliesPosition();
    supplies: Supplies[] = [];
    supply: Supplies = new Supplies();
+   positions: Positions[] = [];
    msgs: Message[] = [];
    codeExists: boolean = false;
    codeExistsS: boolean = false;
@@ -50,7 +57,7 @@ export class SuppliesUpdateComponent implements OnInit {
       private confirmationService: ConfirmationService,
       private adjuntosService: AdjuntosService,
       private constanteService: ConstanteService,
-
+      private positionsService: PositionsService,
       private navService: NavService ) {
 
       this.route.params.subscribe( params => {
@@ -61,6 +68,15 @@ export class SuppliesUpdateComponent implements OnInit {
                   this.suppliesGroup = res;
                   this.getSupplies();
                } );
+            this.positionsService.getListPositions().subscribe( res => {
+               this.positions = res;
+               this.suppliesService.getPosition( this.idGrupoDotacion ).subscribe(
+                  res => {
+                     this.supplyPosition = res;
+                     this.construcPosition();
+                  } );
+
+            } );
          }
       } );
 
@@ -260,6 +276,40 @@ export class SuppliesUpdateComponent implements OnInit {
       if ( this.supply.idAdjunto ) {
          this.adjuntosService.getFileName( this.supply.idAdjunto ).subscribe( res => {
             this.dataUploadArchivo = res.nombreArchivo;
+         } );
+      }
+   }
+
+   construcPosition() {
+      this.positions.map( ( s: any ) => {
+         this.sPosition = new SuppliesPosition();
+         if ( this.supplyPosition.filter( d => d.idCargo === s.idCargo ).length > 0 ) {
+            this.sPosition = this.supplyPosition.filter( d => d.idCargo === s.idCargo )[ 0 ];
+         } else {
+            this.sPosition.idCargoDotacion = null;
+            this.sPosition.idCargo = s.idCargo;
+            this.sPosition.cargo = s.cargo;
+            this.sPosition.idGrupoDotacion = this.idGrupoDotacion;
+            this.sPosition.indicadorHabilitado = true;
+         }
+         this.supplyPositions.push( this.sPosition );
+      } );
+   }
+
+   changePosition( sp: SuppliesPosition ) {
+      this.msgs = [];
+      if ( sp.idCargoDotacion === null ) {
+         this.suppliesService.addPosition( sp ).subscribe( data => {
+            this.navService.setMesage( 0, { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            sp.idCargoDotacion = data.idCargoDotacion;
+         }, error => {
+            this.navService.setMesage( 0, { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         } );
+      } else {
+         this.suppliesService.updatePosition( sp ).subscribe( data => {
+            this.navService.setMesage( 0, { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+         }, error => {
+            this.navService.setMesage( 0, { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       }
    }

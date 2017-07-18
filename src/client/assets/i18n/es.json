@@ -1103,9 +1103,9 @@
       "LBL_SIZE": "Tipo Talla",
       "LBL_REQUIRESIZE": "Requiere Talla",
       "LBL_ADDITIONAL": "Adicional",
-      "LBL_ESTADO": "Estado"
+      "LBL_ADDPOSITION": "Agregar Cargo",
+      "LBL_ACTIVE": "Activo"
    },
-
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
 
 

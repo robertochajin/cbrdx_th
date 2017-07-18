@@ -22,5 +22,5 @@ import { SuppliesUpdateComponent } from './supplies-update.component';
               providers: [ SuppliesService, NavService, ListaService ],
               exports: [ SuppliesComponent ]
            } )
-export class QuestionnairesModule {
+export class SuppliesModule {
 }

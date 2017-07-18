@@ -3,6 +3,7 @@ import { Response } from '@angular/http';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { Supplies } from '../_models/supplies';
 import { SuppliesGroups } from '../_models/suppliesGroups';
+import { SuppliesPosition } from '../_models/suppliesPosition';
 
 @Injectable()
 export class SuppliesService {
@@ -95,18 +96,23 @@ export class SuppliesService {
    getAnswer( id: number ) {
       return this.authHttp.get( this.masterService + 'preguntasOpciones/' + id )
       .map( ( res: Response ) => res.json() as QuestionnariesAnswers[] );
+    }*/
+
+   getPosition( id: number ) {
+      return this.authHttp.get( this.masterService + 'cargosDotaciones/grupoDotacion/' + id )
+      .map( ( res: Response ) => res.json() as SuppliesPosition[] );
    }
 
-   addAnswer( f: QuestionnariesAnswers ) {
+   addPosition( f: SuppliesPosition ) {
       f.auditoriaUsuario = this.idUsuario;
-      return this.authHttp.post( this.masterService + 'preguntasOpciones', f )
+      return this.authHttp.post( this.masterService + 'cargosDotaciones', f )
       .map( ( res: Response ) => res.json() );
    };
 
-   updateAnswer( f: QuestionnariesAnswers ) {
+   updatePosition( f: SuppliesPosition ) {
       f.auditoriaUsuario = this.idUsuario;
-      return this.authHttp.put( this.masterService + 'preguntasOpciones', JSON.stringify( f ) ).catch( this.handleError );
-    }*/
+      return this.authHttp.put( this.masterService + 'cargosDotaciones', JSON.stringify( f ) ).catch( this.handleError );
+   }
 
    handleError( error: any ): Promise<any> {
       console.error( 'Error:', error );

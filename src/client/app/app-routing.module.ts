@@ -190,6 +190,11 @@ import { EmployeesAttachmentsComponent } from './employees-attatchments/employee
 import {PositionsDetailPdfComponent} from "./positions/positions-detail-pdf.component";
 import { CandidateContractingComponent } from './selection-process/candidate-contracting.component';
 
+// Dotaciones
+import { SuppliesComponent } from './supplies/supplies.component';
+import { SuppliesAddComponent } from './supplies/supplies-add.component';
+import { SuppliesUpdateComponent } from './supplies/supplies-update.component';
+
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
@@ -470,6 +475,11 @@ const routes = [
    { path: 'questionnaries', component: QuestionnairesComponent, canActivate: [ AuthGuard ] },
    { path: 'questionnaries/add', component: QuestionnairesAddComponent, canActivate: [ AuthGuard ] },
    { path: 'questionnaries/update/:id', component: QuestionnairesUpdateComponent, canActivate: [ AuthGuard ] },
+
+   //  Dotaciones
+   { path: 'supplies', component: SuppliesComponent, canActivate: [ AuthGuard ] },
+   { path: 'supplies/add', component: SuppliesAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'supplies/update/:id', component: SuppliesUpdateComponent, canActivate: [ AuthGuard ] },
 
 ];
 
