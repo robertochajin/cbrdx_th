@@ -189,6 +189,9 @@ import { AnswerExamsComponent } from './medical-institutions/answer-exams.compon
 import { EmployeesAttachmentsComponent } from './employees-attatchments/employees-attachments.component';
 import {PositionsDetailPdfComponent} from "./positions/positions-detail-pdf.component";
 import { CandidateContractingComponent } from './selection-process/candidate-contracting.component';
+import { EventualitiesComponent } from './eventualities/eventualities.component';
+import { EventualitiesEditComponent } from './eventualities/eventualities-edit.component';
+import { EventualitiesDetailComponent } from './eventualities/eventualities-detail.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -463,6 +466,11 @@ const routes = [
    },
    { path: 'apply-vacancy/questionnaires/:idTercerosPublicaciones', component: ApplyQuestionnairesComponent, canActivate: [ AuthGuard ] },
    { path: 'apply-vacancy/active-publications', component: SelectionProcessVacanciesComponent, canActivate: [ AuthGuard ] },
+
+   { path: 'eventualities', component: EventualitiesComponent },
+   { path: 'eventualities/add/', component: EventualitiesEditComponent },
+   { path: 'eventualities/update/:idEventuality', component: EventualitiesEditComponent },
+   { path: 'eventualities/detail/:idEventuality', component: EventualitiesDetailComponent },
 
    //  Cuestionarios
    { path: 'solutions/:id', component: SolutionsQuestionnairesComponent },
