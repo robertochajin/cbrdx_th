@@ -12,6 +12,7 @@ import { AdjuntosService } from '../_services/adjuntos.service';
 import { EmployeeEventuality } from '../_models/employeeEventuality';
 import { EmployeeEventualitiesService } from '../_services/employees-eventualities.service';
 import { DiagnosticCIEServices } from '../_services/diagnosticCIE.service';
+import { SmsService } from '../_services/_sms.service';
 
 @Component( {
                moduleId: module.id,
@@ -33,6 +34,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    listTypeDoc: SelectItem[] = [];
    listValidity: SelectItem[] = [];
    listAdjDes: SelectItem[] = [];
+   codigoVerificacion: string;
 
    // -----para adjuntar archivos-----
    svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
@@ -45,6 +47,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    // -----    -----------
    constructor( private employeeNoveltyService: EmployeeEventualitiesService,
       private router: Router,
+      private _sms: SmsService,
       private diagnosticCIEServices: DiagnosticCIEServices,
       private route: ActivatedRoute,
       private listaService: ListaService,
@@ -80,6 +83,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
          }
          if ( tempIdEmployee ) {
             this.employeeEventuality.idTercero = tempIdEmployee;
+
          }
       } );
 
@@ -199,6 +203,32 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       } else {
          this.location.back();
       }
+   }
+
+   generarCodigo() {
+      let codigoVerificacion = (Math.floor( Math.random() * (9999 - 1000 + 1) ) + 1000).toString();
+      //
+      this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( data => {
+         //    this.candidate.telefonoCelular = this.candidate.telefonoCelular.replace(/\(|\)|\-/g,"");
+         //    this.candidate.telefonoCelular = this.candidate.telefonoCelular.split(' ').join('');
+         //    let obj = {
+         //       destination: this.candidate.telefonoCelular,
+         //       codigo: this.medicalExam.codigoVerificacion
+         //    }
+         //
+         let obj = {
+            destination: '3174167448',
+            codigo: codigoVerificacion
+         }
+
+         this._sms.generateVerificationCode( obj ).subscribe( res => {
+            console.log( res );
+         }, error => {
+            this._nav.setMesage( 4, {
+               severity: 'success', summary: 'Exito', detail: 'El codigo se ha enviado con éxito.'
+            } );
+         } );
+      } );
    }
 
 }
