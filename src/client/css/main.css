@@ -611,11 +611,14 @@ form [class*="col-"] {
     padding: 6px;
 }
 
-.form-footer-buttons {
+.form-footer-buttons,
+.form-footer-buttons-noline {
     text-align: center;
-    border-top: 1px #e9e9e9 solid;
     margin-top: 10px;
     padding-top: 8px;
+}
+.form-footer-buttons {
+   border-top: 1px #e9e9e9 solid;
 }
 p-dropdown.form-control,
 p-autocomplete.form-control{
