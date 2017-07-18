@@ -27,6 +27,8 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    es: any;
    minDateInicio: Date = new Date();
    minDateFin: Date = new Date();
+   minDateFinPer: Date = new Date();
+   minDateReint: Date = new Date();
    rangeFin: string;
    idTipoNovedad: number;
    wrongDiagnostic: boolean = true;
@@ -36,29 +38,31 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    listFP: SelectItem[] = [];
    listCCF: SelectItem[] = [];
    listEntidad: SelectItem[] = [];
+   listEventualities: SelectItem[] = [];
    listTypeDoc: SelectItem[] = [];
+   listField: any[] = [];
 
    // indicadores para mostrar campos en formulario
-   showhorainicio: boolean = true;
-   showfechainicio: boolean = true;
-   showhorafinal: boolean = true;
-   showfechafinal: boolean = true;
-   showdescripcion: boolean = true;
-   showdiagnostico: boolean = true;
-   showreemplazado: boolean = true;
-   showhorareintegro: boolean = true;
-   showfechareintegro: boolean = true;
-   showdias: boolean = true;
-   showvalor: boolean = true;
-   showcuotas: boolean = true;
-   showreferencia: boolean = true;
-   showentidad: boolean = true;
-   showperiodoinicial: boolean = true;
-   showperiodofinal: boolean = true;
-   showretiro: boolean = true;
-   showeps: boolean = true;
-   showfp: boolean = true;
-   showccf: boolean = true;
+   showhorainicio: boolean = false;
+   showfechainicio: boolean = false;
+   showhorafinal: boolean = false;
+   showfechafinal: boolean = false;
+   showdescripcion: boolean = false;
+   showdiagnostico: boolean = false;
+   showreemplazado: boolean = false;
+   showhorareintegro: boolean = false;
+   showfechareintegro: boolean = false;
+   showdias: boolean = false;
+   showvalor: boolean = false;
+   showcuotas: boolean = false;
+   showreferencia: boolean = false;
+   showentidad: boolean = false;
+   showperiodoinicial: boolean = false;
+   showperiodofinal: boolean = false;
+   showretiro: boolean = false;
+   showeps: boolean = false;
+   showfp: boolean = false;
+   showccf: boolean = false;
 
    // indicador de campo requerido
    requiredhorainicio: boolean = false;
@@ -79,7 +83,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    requiredperiodofinal: boolean = false;
    requiredretiro: boolean = false;
    requiredeps: boolean = false;
-   requiredwfp: boolean = false;
+   requiredfp: boolean = false;
    requiredccf: boolean = false;
 
    // -----para adjuntar archivos-----
@@ -144,6 +148,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
             this.listEntidad.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
+      this.employeeEventuality.horaFinal = new Date();
    }
 
    ngOnInit() {
@@ -214,6 +219,16 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       event.target.value = input.toUpperCase().replace( /[^A-Z0-9]/g, '' );
    }
 
+   inputNumber( event: any ) {
+      let input = event.target.value;
+      event.target.value = input.toUpperCase().replace( /[^0-9]/g, '' );
+   }
+
+   inputRef( event: any ) {
+      let input = event.target.value;
+      event.target.value = input.toUpperCase().replace( /[^A-Z0-9-_]/g, '' );
+   }
+
    uploadingOk( event: any ) {
       let respuesta = JSON.parse( event.xhr.response );
       if ( respuesta.idAdjunto != null || respuesta.idAdjunto != undefined ) {
@@ -262,16 +277,151 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    }
 
    changeTypeEvent() {
-      this.idTipoNovedad;
+      this.listEventualities = [];
+      this.employeeEventuality.idNovedad = null;
+      this.employeeNoveltyService.getAllByIdType( this.idTipoNovedad ).subscribe( data => {
+         this.listEventualities.push( { label: 'Seleccione', value: null } );
+         data.map( ( s: any ) => {
+            this.listEventualities.push( { label: s.novedad, value: s.idNovedad } );
+         } );
+      } );
+      this.resetForm();
    }
 
    changeEventuality() {
-      this.listaService.getMasterDetails( 'ListasCamposNovedades' ).subscribe( res => {
-         this.listEntidad.push( { label: 'Seleccione', value: null } );
-         res.map( ( s: ListaItem ) => {
-            this.listEntidad.push( { label: s.nombre, value: s.idLista } );
-         } );
+      this.employeeNoveltyService.getFieldByIdEventuality( this.employeeEventuality.idNovedad ).subscribe( data => {
+         this.listField = data;
+         this.resetForm();
+         this.propareForm();
       } );
+   }
+
+   selectInicio() {
+      this.employeeEventuality.fechaFinal = null;
+      let temp = new Date( this.employeeEventuality.fechaInicio );
+      this.minDateFin = new Date( temp.setHours( 24 ) );
+   }
+
+   selectFinal() {
+      this.employeeEventuality.fechaReintegro = null;
+      let temp = new Date( this.employeeEventuality.fechaFinal );
+      this.minDateReint = new Date( temp.setHours( 24 ) );
+   }
+
+   selectPeriodoInicio() {
+      this.employeeEventuality.periodoFinal = null;
+      let temp = new Date( this.employeeEventuality.periodoInicio );
+      this.minDateFinPer = new Date( temp.setHours( 24 ) );
+   }
+   resetForm(){
+      // indicadores para mostrar campos en formulario
+      this.showhorainicio = false;
+      this.showfechainicio = false;
+      this.showhorafinal= false;
+      this.showfechafinal = false;
+      this. showdescripcion= false;
+      this. showdiagnostico = false;
+      this.showreemplazado = false;
+      this.showhorareintegro = false;
+      this.showfechareintegro = false;
+      this.showdias = false;
+      this.showvalor = false;
+      this.showcuotas = false;
+      this.showreferencia = false;
+      this.showentidad = false;
+      this.showperiodoinicial = false;
+      this.showperiodofinal = false;
+      this.showretiro = false;
+      this.showeps = false;
+      this.showfp = false;
+      this.showccf = false;
+      // indicador de campo requerido
+      this.requiredhorainicio = false;
+      this.requiredfechainicio = false;
+      this.requiredhorafinal = false;
+      this. requiredfechafinal = false;
+      this.requireddescripcion = false;
+      this.requireddiagnostico = false;
+      this.requiredreemplazado = false;
+      this.requiredhorareintegro = false;
+      this.requiredfechareintegro = false;
+      this.requireddias = false;
+      this.requiredvalor = false;
+      this.requiredcuotas = false;
+      this.requiredreferencia = false;
+      this.requiredentidad = false;
+      this.requiredperiodoinicial = false;
+      this.requiredperiodofinal = false;
+      this.requiredretiro = false;
+      this.requiredeps = false;
+      this.requiredfp = false;
+      this.requiredccf = false;
+   }
+   propareForm() {
+      for ( let field of this.listField ) {
+         if ( field.codigoCampoNovedad === 'FECHINI' ) {
+            this.showfechainicio = field.indicadorHabilitado;
+            this.requiredfechainicio = field.indicadorObligatorio;
+         } else if ( field.codigoCampoNovedad === 'FECFIN' ) {
+            this.showfechafinal = field.indicadorHabilitado;
+            this.requiredfechafinal = field.indicadorObligatorio;
+         } else if ( field.codigoCampoNovedad === 'HORINI' ) {
+            this.showhorainicio = field.indicadorHabilitado;
+            this.requiredhorainicio = field.indicadorObligatorio;
+         } else if ( field.codigoCampoNovedad === 'HORFIN' ) {
+            this.showhorafinal = field.indicadorHabilitado;
+            this.requiredhorafinal = field.indicadorObligatorio;
+         } else if ( field.codigoCampoNovedad === 'FECREI' ) {
+            this.showfechareintegro = field.indicadorHabilitado;
+            this.requiredfechareintegro = field.indicadorObligatorio;
+         } else if ( field.codigoCampoNovedad === 'HORREI' ) {
+            this.showhorareintegro = field.indicadorHabilitado;
+            this.requiredhorareintegro = field.indicadorObligatorio;
+         }else if ( field.codigoCampoNovedad === 'DIAS' ) {
+            this.showdias = field.indicadorHabilitado;
+            this.requireddias = field.indicadorObligatorio;
+         }else if ( field.codigoCampoNovedad === 'DIAGN' ) {
+            this.showdiagnostico = field.indicadorHabilitado;
+            this.requireddiagnostico = field.indicadorObligatorio;
+         }else if ( field.codigoCampoNovedad === 'REMPL' ) {
+            this.showreemplazado = field.indicadorHabilitado;
+            this.requiredreemplazado = field.indicadorObligatorio;
+         }else if ( field.codigoCampoNovedad === 'VALOR' ) {
+            this.showvalor = field.indicadorHabilitado;
+            this.requiredvalor = field.indicadorObligatorio;
+         }else if ( field.codigoCampoNovedad === 'CUOTAS' ) {
+            this.showcuotas = field.indicadorHabilitado;
+            this.requiredcuotas = field.indicadorObligatorio;
+         }else if ( field.codigoCampoNovedad === 'REFERE' ) {
+            this.showreferencia = field.indicadorHabilitado;
+            this.requiredreferencia = field.indicadorObligatorio;
+         }else if ( field.codigoCampoNovedad === 'ENTID' ) {
+            this.showentidad = field.indicadorHabilitado;
+            this.requiredentidad = field.indicadorObligatorio;
+         }else if ( field.codigoCampoNovedad === 'DESCRI' ) {
+            this.showdescripcion = field.indicadorHabilitado;
+            this.requireddescripcion = field.indicadorObligatorio;
+         }else if ( field.codigoCampoNovedad === 'PERIN' ) {
+            this.showperiodoinicial = field.indicadorHabilitado;
+            this.requiredperiodoinicial = field.indicadorObligatorio;
+         }else if ( field.codigoCampoNovedad === 'PERFI' ) {
+            this.showperiodofinal = field.indicadorHabilitado;
+            this.requiredperiodoinicial = field.indicadorObligatorio;
+         }else if ( field.codigoCampoNovedad === 'RET' ) {
+            this.showretiro = field.indicadorHabilitado;
+            this.requiredretiro = field.indicadorObligatorio;
+         }else if ( field.codigoCampoNovedad === 'EPS' ) {
+            this.showeps = field.indicadorHabilitado;
+            this.requiredeps = field.indicadorObligatorio;
+         }else if ( field.codigoCampoNovedad === 'FP' ) {
+            this.showfp = field.indicadorHabilitado;
+            this.requiredfp = field.indicadorObligatorio;
+         }else if ( field.codigoCampoNovedad === 'CCF' ) {
+            this.showccf = field.indicadorHabilitado;
+            this.requiredccf = field.indicadorObligatorio;
+         }
+      }
+
    }
 
    showField() {

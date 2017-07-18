@@ -30,10 +30,7 @@ export class EmployeeEventualitiesComponent {
       private _nav: NavService,
       private confirmationService: ConfirmationService ) {
       this.employee.idTercero = 129; // id tercero quemado..
-      // this.employeeEventualitiesService.getAllByIdEmployee( this.employee.idTercero ).subscribe( data => {
-      //    this.listEventualities = data;
-      // } );
-      this.employeeEventualitiesService.getAll(  ).subscribe( data => {
+      this.employeeEventualitiesService.getAllByIdEmployee( this.employee.idTercero ).subscribe( data => {
          this.listEventualities = data;
       } );
       this.busqueda = _nav.getSearch( 'employee-eventualities' );
@@ -43,12 +40,12 @@ export class EmployeeEventualitiesComponent {
       this.router.navigate( [ 'employee-eventualities/add/' + this.employee.idTercero + '/' + 0 ] );
    }
 
-   update( d: DocumentManagement ) {
-      this.router.navigate( [ 'employee-novelty/update/' + this.employee.idTercero + '/' + 0 ] );
+   update( e: EmployeeEventuality ) {
+      this.router.navigate( [ 'employee-novelty/update/' + this.employee.idTercero + '/' + e.idNovedadTercero ] );
    }
 
-   detail( d: DocumentManagement ) {
-      this.router.navigate( [ 'document-management/detail/', d.idDocumentoTercero ] );
+   detail( e: EmployeeEventuality ) {
+      this.router.navigate( [ 'document-management/detail/', e.idNovedadTercero ] );
    }
 
    setSearch() {
