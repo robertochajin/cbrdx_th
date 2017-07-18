@@ -468,7 +468,7 @@ const routes = [
    { path: 'apply-vacancy/active-publications', component: SelectionProcessVacanciesComponent, canActivate: [ AuthGuard ] },
 
    { path: 'eventualities', component: EventualitiesComponent },
-   { path: 'eventualities/add/', component: EventualitiesEditComponent },
+   { path: 'eventualities/add', component: EventualitiesEditComponent },
    { path: 'eventualities/update/:idEventuality', component: EventualitiesEditComponent },
    { path: 'eventualities/detail/:idEventuality', component: EventualitiesDetailComponent },
 

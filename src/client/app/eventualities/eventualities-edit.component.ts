@@ -72,6 +72,25 @@ export class EventualitiesEditComponent implements OnInit {
       } );
    }
 
+   onSubmit() {
+      if(this.eventuality.idNovedad !== undefined && this.eventuality.idNovedad !== null) {
+         this.eventualityServices.update(this.eventuality).subscribe(res => {
+            if ( res ) {
+               this._nav.setMesage( 2 );
+            }
+         }, ( error ) => {
+            this._nav.setMesage( 3 );
+         });
+      } else {
+         this.eventualityServices.add(this.eventuality).subscribe(res => {
+            this.eventuality = res;
+            this._nav.setMesage( 1 );
+         }, ( error ) => {
+            this._nav.setMesage( 3 );
+         });
+      }
+   }
+
    goBack( fDirty: boolean ): void {
       if ( fDirty ) {
          this.confirmationService.confirm( {

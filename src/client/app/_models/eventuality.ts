@@ -37,6 +37,7 @@ export class Eventuality {
    constructor() {
       this.auditoriaUsuario = null;
       this.auditoriaFecha = null;
+      this.indicadorHabilitado = true;
    }
 
 }

@@ -555,7 +555,8 @@ body .ui-paginator{
    background-color: #ededed;
    white-space: nowrap;
 }
-.table-overflow .ui-datatable-data>tr>td{
+.table-overflow .ui-datatable-thead > tr > th,
+.table-overflow .ui-datatable-data > tr > td{
    overflow: visible!important;
 }
 body .ui-datatable thead th.ui-state-active{

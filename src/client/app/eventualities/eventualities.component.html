@@ -1,18 +1,21 @@
 <h3 class="first">{{'NOVEDADES.LBL_NOVEDADES' | translate }}</h3>
 <div>
 	<div class="row datable-header">
-		<div class="col-md-3 col-xs-12">
-			<div class="input-group">
-				<label for="estado" class="col-md-3">{{'NOVEDADES.LBL_TIPONOVEDAD' | translate }}</label>
-				<div class="col-md-9">
-					<p-dropdown id="estado" name="estado" required="true"
-					            [options]="listStatus" [autoWidth]="false" (onChange)="filter()"
-					            [(ngModel)]="filtro"
-					></p-dropdown>
-				</div>
-			</div>
+		<div class="col-md-3 col-xs-12 datatable-header-add">
+			<button type="button" icon="fa-plus" label="{{ 'NOVEDADES.BTN_AGREGARNUEVO' | translate}}"
+			        pButton (click)="add()"></button>
 		</div>
-		<div class="col-md-6 col-xs-12 datatable-header-search">
+		<div class="col-md-5 col-xs-12">
+			<!--<div class="input-group">-->
+				<!--<label for="tipoEvent" class="col-md-6">{{'NOVEDADES.LBL_TIPONOVEDAD' | translate }}</label>-->
+				<!--<div class="col-md-6">-->
+					<!--<p-dropdown id="tipoEvent" name="tipoEvent" [(ngModel)]="typeFilter"-->
+					            <!--[options]="eventualityTypes" [autoWidth]="false"-->
+					<!--&gt;</p-dropdown>-->
+				<!--</div>-->
+			<!--</div>-->
+		</div>
+		<div class="col-md-4 col-xs-12 datatable-header-search">
 			<div class="input-group">
 				<div class="input-group-addon"><i class="fa fa-search"></i></div>
 				<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate }}" class="form-control"
@@ -21,22 +24,33 @@
 		</div>
 	</div>
 	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="eventualities" [paginator]="true" [rows]="10"
-	             [responsive]="true" [globalFilter]="gb">
+	             styleClass="table-overflow" [responsive]="true" [globalFilter]="gb"  #dt>
 		<p-column field="codigoNovedad" header="{{'NOVEDADES.LBL_CODIGO' | translate }}" [sortable]="true"></p-column>
-		<p-column field="tipoNovedad" header="{{'NOVEDADES.LBL_TIPONOVEDAD' | translate }}" [sortable]="true"></p-column>
+		<p-column field="tipoNovedad" header="{{'NOVEDADES.LBL_TIPONOVEDAD' | translate }}" [sortable]="true">
+			<template pTemplate="filter" let-col>
+				<p-dropdown [options]="eventualityTypes" [(ngModel)]="typeFilter" [style]="{'width':'100%'}"
+				            (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+			</template>
+		</p-column>
 		<p-column field="novedad" header="{{'NOVEDADES.LBL_NOMBRENOVEDAD' | translate }}" [sortable]="true"></p-column>
 		<p-column field="rolResponsable" header="{{'NOVEDADES.LBL_RESPONSABLE' | translate }}" [sortable]="true"></p-column>
 		<p-column field="fechaCreacion" header="{{'NOVEDADES.LBL_FECHA' | translate }}" [sortable]="true"></p-column>
-		<p-column field="indicadorAusentismo" header="{{'NOVEDADES.LBL_INDICADORAUSENTISMO' | translate }}" [sortable]="true"></p-column>
-		<p-column field="indicadorHabilitado" header="{{'LBL_HABILITADO' | translate }}" [sortable]="true">
-			
+		<p-column header="{{'NOVEDADES.LBL_INDICADORAUSENTISMO' | translate }}" [sortable]="true">
+			<template let-PR="rowData" pTemplate="body">
+				<p-checkbox [(ngModel)]="PR.indicadorAusentismo" binary="true" id="indAus" name="indAus" disabled ></p-checkbox>
+			</template>
+		</p-column>
+		<p-column header="{{'LBL_HABILITADO' | translate }}" [sortable]="true">
+			<template let-PR="rowData" pTemplate="body">
+				<p-checkbox [(ngModel)]="PR.indicadorHabilitado" binary="true" id="indHab" name="indHab" disabled ></p-checkbox>
+			</template>
 		</p-column>
 		<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 			<template let-PR="rowData" pTemplate="body">
 				<button type="button" icon="fa-pencil" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}" class="ui-button-success"
 				        pButton (click)="update(PR)"></button>
-				<button type="button" icon="fa-navicon" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
-				        class="ui-button-success" pButton (click)="detail(PR)"></button>
+				<button type="button" icon="fa-eye" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
+				        class="ui-button btn" pButton (click)="detail(PR)"></button>
 			</template>
 		</p-column>
 	</p-dataTable>
