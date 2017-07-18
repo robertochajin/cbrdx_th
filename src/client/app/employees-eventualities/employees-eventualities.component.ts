@@ -30,10 +30,13 @@ export class EmployeeEventualitiesComponent {
       private _nav: NavService,
       private confirmationService: ConfirmationService ) {
       this.employee.idTercero = 129; // id tercero quemado..
-      this.employeeEventualitiesService.getAllByIdEmployee( this.employee.idTercero ).subscribe( data => {
+      // this.employeeEventualitiesService.getAllByIdEmployee( this.employee.idTercero ).subscribe( data => {
+      //    this.listEventualities = data;
+      // } );
+      this.employeeEventualitiesService.getAll(  ).subscribe( data => {
          this.listEventualities = data;
       } );
-      this.busqueda = _nav.getSearch( 'employee-novelty' );
+      this.busqueda = _nav.getSearch( 'employee-eventualities' );
    }
 
    add() {
@@ -49,6 +52,6 @@ export class EmployeeEventualitiesComponent {
    }
 
    setSearch() {
-      this._nav.setSearch( 'employee-novelty', this.busqueda );
+      this._nav.setSearch( 'employee-eventualities', this.busqueda );
    }
 }

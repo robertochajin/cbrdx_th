@@ -28,11 +28,59 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    minDateInicio: Date = new Date();
    minDateFin: Date = new Date();
    rangeFin: string;
+   idTipoNovedad: number;
    wrongDiagnostic: boolean = true;
    diagnosticList: any[] = [];
+   listTypeEvent: SelectItem[] = [];
+   listEPS: SelectItem[] = [];
+   listFP: SelectItem[] = [];
+   listCCF: SelectItem[] = [];
+   listEntidad: SelectItem[] = [];
    listTypeDoc: SelectItem[] = [];
-   listValidity: SelectItem[] = [];
-   listAdjDes: SelectItem[] = [];
+
+   // indicadores para mostrar campos en formulario
+   showhorainicio: boolean = true;
+   showfechainicio: boolean = true;
+   showhorafinal: boolean = true;
+   showfechafinal: boolean = true;
+   showdescripcion: boolean = true;
+   showdiagnostico: boolean = true;
+   showreemplazado: boolean = true;
+   showhorareintegro: boolean = true;
+   showfechareintegro: boolean = true;
+   showdias: boolean = true;
+   showvalor: boolean = true;
+   showcuotas: boolean = true;
+   showreferencia: boolean = true;
+   showentidad: boolean = true;
+   showperiodoinicial: boolean = true;
+   showperiodofinal: boolean = true;
+   showretiro: boolean = true;
+   showeps: boolean = true;
+   showfp: boolean = true;
+   showccf: boolean = true;
+
+   // indicador de campo requerido
+   requiredhorainicio: boolean = false;
+   requiredfechainicio: boolean = false;
+   requiredhorafinal: boolean = false;
+   requiredfechafinal: boolean = false;
+   requireddescripcion: boolean = false;
+   requireddiagnostico: boolean = false;
+   requiredreemplazado: boolean = false;
+   requiredhorareintegro: boolean = false;
+   requiredfechareintegro: boolean = false;
+   requireddias: boolean = false;
+   requiredvalor: boolean = false;
+   requiredcuotas: boolean = false;
+   requiredreferencia: boolean = false;
+   requiredentidad: boolean = false;
+   requiredperiodoinicial: boolean = false;
+   requiredperiodofinal: boolean = false;
+   requiredretiro: boolean = false;
+   requiredeps: boolean = false;
+   requiredwfp: boolean = false;
+   requiredccf: boolean = false;
 
    // -----para adjuntar archivos-----
    svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
@@ -64,6 +112,37 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
          if ( data.valor ) {
             this.fsize = Number( data.valor );
          }
+      } );
+
+      this.listaService.getMasterDetails( 'ListasTiposNovedades' ).subscribe( res => {
+         this.listTypeEvent.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => {
+            this.listTypeEvent.push( { label: s.nombre, value: s.idLista } );
+         } );
+      } );
+      this.listaService.getMasterDetails( 'ListasEps' ).subscribe( res => {
+         this.listEPS.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => {
+            this.listEPS.push( { label: s.nombre, value: s.idLista } );
+         } );
+      } );
+      this.listaService.getMasterDetails( 'ListasFP' ).subscribe( res => {
+         this.listFP.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => {
+            this.listFP.push( { label: s.nombre, value: s.idLista } );
+         } );
+      } );
+      this.listaService.getMasterDetails( 'ListasCCF' ).subscribe( res => {
+         this.listCCF.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => {
+            this.listCCF.push( { label: s.nombre, value: s.idLista } );
+         } );
+      } );
+      this.listaService.getMasterDetails( 'ListasEntidades' ).subscribe( res => {
+         this.listEntidad.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => {
+            this.listEntidad.push( { label: s.nombre, value: s.idLista } );
+         } );
       } );
    }
 
@@ -108,19 +187,20 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
          // if ( this.documentManagement.indicadorAdjunto ) {
          //    this.documentManagement.idAdjunto = null;
          // }
-         this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( data => {
-            this._nav.setMesage( 2, this.msgs );
-            this.location.back();
-         }, error => {
-            this._nav.setMesage( 3, this.msgs );
-         } );
+         // this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( data => {
+         //    this._nav.setMesage( 2, this.msgs );
+         //    this.location.back();
+         // }, error => {
+         //    this._nav.setMesage( 3, this.msgs );
+         // } );
+         this.employeeEventuality;
       } else {
-         this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
-            this._nav.setMesage( 1, this.msgs );
-            this.location.back();
-         }, error => {
-            this._nav.setMesage( 3, this.msgs );
-         } );
+         // this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
+         //    this._nav.setMesage( 1, this.msgs );
+         //    this.location.back();
+         // }, error => {
+         //    this._nav.setMesage( 3, this.msgs );
+         // } );
       }
    }
 
@@ -178,6 +258,19 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       this.diagnosticCIEServices.getByWildCard( event.query ).subscribe( diagnostics => {
          this.diagnosticList = diagnostics;
          this.diagnosticList.map( d => d.label = d.codigo + ' : ' + d.descripcion );
+      } );
+   }
+
+   changeTypeEvent() {
+      this.idTipoNovedad;
+   }
+
+   changeEventuality() {
+      this.listaService.getMasterDetails( 'ListasCamposNovedades' ).subscribe( res => {
+         this.listEntidad.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => {
+            this.listEntidad.push( { label: s.nombre, value: s.idLista } );
+         } );
       } );
    }
 

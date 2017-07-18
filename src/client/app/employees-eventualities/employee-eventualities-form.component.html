@@ -11,10 +11,10 @@
 			<div class="ui-grid-row">
 				<div class="ui-grid-col-6">
 					<label for="idTipoNovedad">{{ 'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}</label>
-					<p-dropdown id="idTipoNovedad" name="idTipoNovedad" required="true"
-					            [options]="listTypeDoc" [autoWidth]="false"
-					            [(ngModel)]="employeeEventuality.idTipoNovedad"
-					            #idTipoNov="ngModel"
+					<p-dropdown id="idTipoNovedad" name="idTipoNovedad"
+					            [options]="listTypeEvent" [autoWidth]="false"
+					            [(ngModel)]="idTipoNovedad"
+					            #idTipoNov="ngModel" (onChange)="changeTypeEvent()"
 					></p-dropdown>
 					<div class="ui-message ui-messages-error ui-corner-all"
 					     *ngIf="f.submitted && !idTipoNov.valid">
@@ -24,10 +24,10 @@
 				</div>
 				<div class="ui-grid-col-6">
 					<label for="idNovedad">{{ 'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }}</label>
-					<p-dropdown id="idNovedad" name="idNovedad" required="true"
+					<p-dropdown id="idNovedad" name="idNovedad"
 					            [options]="listTypeDoc" [autoWidth]="false"
 					            [(ngModel)]="employeeEventuality.idNovedad"
-					            #idNov="ngModel"
+					            #idNov="ngModel" (onChange)="changeEventuality()"
 					></p-dropdown>
 					<div class="ui-message ui-messages-error ui-corner-all"
 					     *ngIf="f.submitted && !idNov.valid">
@@ -38,11 +38,11 @@
 			</div>
 			
 			<div class="ui-grid-row">
-				<div class="ui-grid-col-3">
+				<div class="ui-grid-col-3" *ngIf="showfechainicio">
 					<label for="fechaInicio">{{ 'EMPLOYEENOVELTY.LBL_FECHAINICIO' | translate }}</label>
 					<p-calendar id="fechaInicio" name="fechaInicio" #fechaIni="ngModel" [showIcon]="true"
 					            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
-					            [locale]="es" readonlyInput="readonlyInput"
+					            [locale]="es" readonlyInput="readonlyInput" [required]="requiredfechainicio"
 					            dataType="date" [(ngModel)]="employeeEventuality.fechaInicio"
 					            dateFormat="yy'-'mm'-'dd"></p-calendar>
 					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fechaIni.valid">
@@ -50,11 +50,11 @@
 						{{'EMPLOYEENOVELTY.LBL_FECHAINICIO' | translate }} {{'LBL_REQUERIDO' | translate }}
 					</div>
 				</div>
-				<div class="ui-grid-col-3">
+				<div class="ui-grid-col-3" *ngIf="showhorainicio">
 					<label for="horaInicio">{{ 'EMPLOYEENOVELTY.LBL_HORAINICIO' | translate }}</label>
 					<p-calendar id="horaInicio" name="horaInicio" #horaIni="ngModel" [showIcon]="true"
 					            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
-					            [locale]="es" readonlyInput="readonlyInput" [timeOnly]="true"
+					            [locale]="es" readonlyInput="readonlyInput" [timeOnly]="true" [required]="requiredhorainicio"
 					            dataType="date" [(ngModel)]="employeeEventuality.horaInicio"
 					            dateFormat="yy'-'mm'-'dd"></p-calendar>
 					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !horaIni.valid">
@@ -62,11 +62,11 @@
 						{{'EMPLOYEENOVELTY.LBL_HORAINICIO' | translate }} {{'LBL_REQUERIDO' | translate }}
 					</div>
 				</div>
-				<div class="ui-grid-col-3">
+				<div class="ui-grid-col-3" *ngIf="showfechafinal">
 					<label for="fechaFinal">{{ 'EMPLOYEENOVELTY.LBL_FECHAFINAL' | translate }}</label>
 					<p-calendar id="fechaFinal" name="fechaFinal" #fechaFin="ngModel" [showIcon]="true"
 					            [minDate]="minDateFin" [monthNavigator]="true" [yearNavigator]="true"
-					            [locale]="es" readonlyInput="readonlyInput"
+					            [locale]="es" readonlyInput="readonlyInput" [required]="requiredfechafinal"
 					            dataType="date" [(ngModel)]="employeeEventuality.fechaFinal"
 					            dateFormat="yy'-'mm'-'dd"></p-calendar>
 					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fechaFin.valid">
@@ -74,11 +74,11 @@
 						{{'EMPLOYEENOVELTY.LBL_FECHAFINAL' | translate }} {{'LBL_REQUERIDO' | translate }}
 					</div>
 				</div>
-				<div class="ui-grid-col-3">
+				<div class="ui-grid-col-3" *ngIf="showhorafinal">
 					<label for="horaFinal">{{ 'EMPLOYEENOVELTY.LBL_HORAFINAL' | translate }}</label>
 					<p-calendar id="horaFinal" name="horaFinal" #horaFin="ngModel" [showIcon]="true"
 					            [minDate]="minDateFin" [monthNavigator]="true" [yearNavigator]="true"
-					            [locale]="es" readonlyInput="readonlyInput" [timeOnly]="true"
+					            [locale]="es" readonlyInput="readonlyInput" [timeOnly]="true" [required]="requiredhorafinal"
 					            dataType="date" [(ngModel)]="employeeEventuality.horaFinal" [showTime]="true"
 					            dateFormat="yy'-'mm'-'dd"></p-calendar>
 					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !horaFin.valid">
@@ -88,22 +88,22 @@
 				</div>
 			</div>
 			<div class="ui-grid-row">
-				<div class="ui-grid-col-12">
+				<div class="ui-grid-col-12" *ngIf="showdescripcion">
 					<label for="observacion">* {{'EMPLOYEENOVELTY.LBL_DESCRIPCION' | translate }}</label>
 					<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #decrip="ngModel"
-					          [(ngModel)]="employeeEventuality.descripcion" required="true" class="form-control"
+					          [(ngModel)]="employeeEventuality.descripcion"  class="form-control" [required]="requireddescripcion"
 					          maxlength="500"></textarea>
 					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !decrip.valid">
 						<i class="fa fa-close"></i>
-						{{'EMPLOYEENOVELTY.LBL_OBSERVACIONES' | translate }} {{'LBL_REQUERIDO' | translate }}
+						{{'EMPLOYEENOVELTY.LBL_DESCRIPCION' | translate }} {{'LBL_REQUERIDO' | translate }}
 					</div>
 				</div>
 			</div>
 			<div class="ui-grid-row">
-				<div class="ui-grid-col-6">
+				<div class="ui-grid-col-6" *ngIf="showdiagnostico">
 					<label>{{'EMPLOYEENOVELTY.LBL_DIAGNOSTICO' | translate }}</label>
 					<p-autoComplete placeholder="Buscar diagnóstico" field="label" name="diagnostico" id="diagnostico"
-					                [(ngModel)]="employeeEventuality.idTipoNovedad"
+					                [(ngModel)]="employeeEventuality.idTipoNovedad" [required]="requireddiagnostico"
 					                #diagnostico="ngModel" [suggestions]="diagnosticList"
 					                (completeMethod)="diagnosticSearch($event)" (onSelect)="captureDiagnosticId($event)">
 					</p-autoComplete>
@@ -111,10 +111,11 @@
 						<i class="fa fa-close"></i>{{'EMPLOYEENOVELTY.LBL_DIAGNOSTICO' | translate}} {{'LBL_REQUERIDO' | translate}}
 					</div>
 				</div>
-				<div class="ui-grid-col-6">
+				<div class="ui-grid-col-6" *ngIf="showreemplazado">
 					<label for="reemplazado">{{ 'EMPLOYEENOVELTY.LBL_REEMPLAZADOPOR' | translate }}</label>
 					<input id="reemplazado" name="reemplazado" #reemplaz="ngModel" pInputText type="text"
-					       maxlength="100" [(ngModel)]="employeeEventuality.reemplazadoPor"/>
+					       maxlength="100" [(ngModel)]="employeeEventuality.reemplazadoPor"
+					[required]="requiredreemplazado"/>
 					<div class="ui-message ui-messages-error ui-corner-all"
 					     *ngIf="f.submitted && !reemplaz.valid ">
 						<i class="fa fa-close"></i>
@@ -123,11 +124,11 @@
 				</div>
 			</div>
 			<div class="ui-grid-row">
-				<div class="ui-grid-col-3">
+				<div class="ui-grid-col-3" *ngIf="showfechareintegro">
 					<label for="fechaReintegro">{{ 'EMPLOYEENOVELTY.LBL_FECHAREINTEGRO' | translate }}</label>
 					<p-calendar id="fechaReintegro" name="fechaReintegro" #fechaReint="ngModel" [showIcon]="true"
 					            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
-					            [locale]="es" readonlyInput="readonlyInput"
+					            [locale]="es" readonlyInput="readonlyInput" [required]="requiredfechareintegro"
 					            dataType="date" [(ngModel)]="employeeEventuality.fechaReintegro"
 					            dateFormat="yy'-'mm'-'dd"></p-calendar>
 					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fechaReint.valid">
@@ -135,11 +136,11 @@
 						{{'EMPLOYEENOVELTY.LBL_FECHAREINTEGRO' | translate }} {{'LBL_REQUERIDO' | translate }}
 					</div>
 				</div>
-				<div class="ui-grid-col-3">
+				<div class="ui-grid-col-3" *ngIf="showhorareintegro">
 					<label for="horaReintegro">{{ 'EMPLOYEENOVELTY.LBL_HORAREINTEGRO' | translate }}</label>
 					<p-calendar id="horaReintegro" name="horaReintegro" #horaReint="ngModel" [showIcon]="true"
 					            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
-					            [locale]="es" readonlyInput="readonlyInput" [timeOnly]="true"
+					            [locale]="es" readonlyInput="readonlyInput" [timeOnly]="true" [required]="requiredhorareintegro"
 					            dataType="date" [(ngModel)]="employeeEventuality.horaReintergo"
 					            dateFormat="yy'-'mm'-'dd"></p-calendar>
 					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !horaReint.valid">
@@ -147,10 +148,10 @@
 						{{'EMPLOYEENOVELTY.LBL_HORAREINTEGRO' | translate }} {{'LBL_REQUERIDO' | translate }}
 					</div>
 				</div>
-				<div class="ui-grid-col-3">
+				<div class="ui-grid-col-3" *ngIf="showdias">
 					<label for="dia">{{ 'EMPLOYEENOVELTY.LBL_DIAS' | translate }}</label>
 					<input id="dia" name="dia" #dias="ngModel" pInputText type="text"
-					       (keyup)="inputCod($event)" required maxlength="50"
+					       (keyup)="inputCod($event)"  maxlength="50" [required]="requireddias"
 					       [(ngModel)]="employeeEventuality.dias"/>
 					<div class="ui-message ui-messages-error ui-corner-all"
 					     *ngIf="f.submitted && !dias.valid ">
@@ -160,11 +161,11 @@
 				</div>
 			</div>
 			<div class="ui-grid-row">
-				<div class="ui-grid-col-3">
+				<div class="ui-grid-col-3" *ngIf="showperiodoinicial">
 					<label for="periodoinicial">{{ 'EMPLOYEENOVELTY.LBL_PERIODOINICIAL' | translate }}</label>
 					<p-calendar id="periodoinicial" name="periodoinicial" #periodoini="ngModel" [showIcon]="true"
 					            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
-					            [locale]="es" readonlyInput="readonlyInput"
+					            [locale]="es" readonlyInput="readonlyInput" [required]="requiredperiodoinicial"
 					            dataType="date" [(ngModel)]="employeeEventuality.periodoInicio"
 					            dateFormat="yy'-'mm'-'dd"></p-calendar>
 					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !periodoini.valid">
@@ -172,11 +173,11 @@
 						{{'EMPLOYEENOVELTY.LBL_PERIODOINICIAL' | translate }} {{'LBL_REQUERIDO' | translate }}
 					</div>
 				</div>
-				<div class="ui-grid-col-3">
+				<div class="ui-grid-col-3" *ngIf="showperiodofinal">
 					<label for="periodofinal">{{ 'EMPLOYEENOVELTY.LBL_PERIODOFINAL' | translate }}</label>
 					<p-calendar id="periodofinal" name="periodofinal" #periodofin="ngModel" [showIcon]="true"
 					            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
-					            [locale]="es" readonlyInput="readonlyInput"
+					            [locale]="es" readonlyInput="readonlyInput" [required]="requiredperiodofinal"
 					            dataType="date" [(ngModel)]="employeeEventuality.periodoFinal"
 					            dateFormat="yy'-'mm'-'dd"></p-calendar>
 					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !periodofin.valid">
@@ -184,7 +185,7 @@
 						{{'EMPLOYEENOVELTY.LBL_PERIODOFINAL' | translate }} {{'LBL_REQUERIDO' | translate }}
 					</div>
 				</div>
-				<div class="ui-grid-col-3">
+				<div class="ui-grid-col-3" *ngIf="showretiro">
 					<label></label><br>
 					<p-checkbox binary="true" id="retiro" name="retiro"
 					            [(ngModel)]="employeeEventuality.retiro"
@@ -193,12 +194,12 @@
 				</div>
 			</div>
 			<div class="ui-grid-row">
-				<div class="ui-grid-col-4">
+				<div class="ui-grid-col-4" *ngIf="showeps">
 					<label for="ideps">{{ 'EMPLOYEENOVELTY.LBL_EPS' | translate }}</label>
-					<p-dropdown id="ideps" name="ideps" required="true"
-					            [options]="listTypeDoc" [autoWidth]="false"
+					<p-dropdown id="ideps" name="ideps"
+					            [options]="listEPS" [autoWidth]="false"
 					            [(ngModel)]="employeeEventuality.idEPS"
-					            #eps="ngModel"
+					            #eps="ngModel" [required]="requiredeps"
 					></p-dropdown>
 					<div class="ui-message ui-messages-error ui-corner-all"
 					     *ngIf="f.submitted && !eps.valid">
@@ -206,12 +207,12 @@
 						{{ 'EMPLOYEENOVELTY.LBL_EPS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 					</div>
 				</div>
-				<div class="ui-grid-col-4">
+				<div class="ui-grid-col-4" *ngIf="showfp">
 					<label for="idfp">{{ 'EMPLOYEENOVELTY.LBL_FP' | translate }}</label>
-					<p-dropdown id="idfp" name="idfp" required="true"
-					            [options]="listTypeDoc" [autoWidth]="false"
+					<p-dropdown id="idfp" name="idfp"
+					            [options]="listFP" [autoWidth]="false"
 					            [(ngModel)]="employeeEventuality.idFP"
-					            #fp="ngModel"
+					            #fp="ngModel" [required]="requiredwfp"
 					></p-dropdown>
 					<div class="ui-message ui-messages-error ui-corner-all"
 					     *ngIf="f.submitted && !fp.valid">
@@ -219,12 +220,12 @@
 						{{ 'EMPLOYEENOVELTY.LBL_FP' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 					</div>
 				</div>
-				<div class="ui-grid-col-4">
+				<div class="ui-grid-col-4" *ngIf="showccf">
 					<label for="idccf">{{ 'EMPLOYEENOVELTY.LBL_CCF' | translate }}</label>
-					<p-dropdown id="idccf" name="idccf" required="true"
-					            [options]="listTypeDoc" [autoWidth]="false"
+					<p-dropdown id="idccf" name="idccf"
+					            [options]="listCCF" [autoWidth]="false"
 					            [(ngModel)]="employeeEventuality.idCCF"
-					            #ccf="ngModel"
+					            #ccf="ngModel" [required]="requiredccf"
 					></p-dropdown>
 					<div class="ui-message ui-messages-error ui-corner-all"
 					     *ngIf="f.submitted && !ccf.valid">
@@ -234,10 +235,10 @@
 				</div>
 			</div>
 			<div class="ui-grid-row">
-				<div class="ui-grid-col-3">
+				<div class="ui-grid-col-3" *ngIf="showvalor">
 					<label for="valor">{{ 'EMPLOYEENOVELTY.LBL_VALOR' | translate }}</label>
 					<input id="valor" name="valor" #valor="ngModel" pInputText type="text"
-					       (keyup)="inputCod($event)" required maxlength="50"
+					       (keyup)="inputCod($event)"  maxlength="50" [required]="requiredvalor"
 					       [(ngModel)]="employeeEventuality.valor"/>
 					<div class="ui-message ui-messages-error ui-corner-all"
 					     *ngIf="f.submitted && !valor.valid ">
@@ -245,21 +246,21 @@
 						{{ 'EMPLOYEENOVELTY.LBL_VALOR' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 					</div>
 				</div>
-				<div class="ui-grid-col-3">
-					<label for="nrocuotas">{{ 'EMPLOYEENOVELTY.LBL_CUENTA' | translate }}</label>
+				<div class="ui-grid-col-3" *ngIf="showcuotas">
+					<label for="nrocuotas">{{ 'EMPLOYEENOVELTY.LBL_CUOTAS' | translate }}</label>
 					<input id="nrocuotas" name="nrocuotas" #cuotas="ngModel" pInputText type="text"
-					       (keyup)="inputCod($event)" required maxlength="50"
+					       (keyup)="inputCod($event)"  maxlength="50" [required]="requiredcuotas"
 					       [(ngModel)]="employeeEventuality.numeroCuotas"/>
 					<div class="ui-message ui-messages-error ui-corner-all"
 					     *ngIf="f.submitted && !cuotas.valid ">
 						<i class="fa fa-close"></i>
-						{{ 'EMPLOYEENOVELTY.LBL_CUENTA' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+						{{ 'EMPLOYEENOVELTY.LBL_CUOTAS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 					</div>
 				</div>
-				<div class="ui-grid-col-3">
+				<div class="ui-grid-col-3" *ngIf="showreferencia">
 					<label for="nroreferencia">{{ 'EMPLOYEENOVELTY.LBL_REFERENCIA' | translate }}</label>
 					<input id="nroreferencia" name="nroreferencia" #referencia="ngModel" pInputText type="text"
-					       (keyup)="inputCod($event)" required maxlength="50"
+					       (keyup)="inputCod($event)"  maxlength="50" [required]="requiredreferencia"
 					       [(ngModel)]="employeeEventuality.numeroReferencia"/>
 					<div class="ui-message ui-messages-error ui-corner-all"
 					     *ngIf="f.submitted && !referencia.valid ">
@@ -267,12 +268,12 @@
 						{{ 'EMPLOYEENOVELTY.LBL_REFERENCIA' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 					</div>
 				</div>
-				<div class="ui-grid-col-3">
+				<div class="ui-grid-col-3" *ngIf="showentidad">
 					<label for="identidad">{{ 'EMPLOYEENOVELTY.LBL_ENTIDAD' | translate }}</label>
-					<p-dropdown id="identidad" name="identidad" required="true"
-					            [options]="listTypeDoc" [autoWidth]="false"
+					<p-dropdown id="identidad" name="identidad"
+					            [options]="listEntidad" [autoWidth]="false"
 					            [(ngModel)]="employeeEventuality.idEntidad"
-					            #entidad="ngModel"
+					            #entidad="ngModel" [required]="requiredentidad"
 					></p-dropdown>
 					<div class="ui-message ui-messages-error ui-corner-all"
 					     *ngIf="f.submitted && !entidad.valid">
