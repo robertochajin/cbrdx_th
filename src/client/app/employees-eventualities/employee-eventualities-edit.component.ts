@@ -28,7 +28,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    minDateInicio: Date = new Date();
    minDateFin: Date = new Date();
    rangeFin: string;
-   wrongDiagnostic : boolean = true;
+   wrongDiagnostic: boolean = true;
    diagnosticList: any[] = [];
    listTypeDoc: SelectItem[] = [];
    listValidity: SelectItem[] = [];
@@ -71,7 +71,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       this.route.params.subscribe( ( params: Params ) => {
          let tempIdEmployee = Number( +params[ 'idTercero' ] );
          let tempIdEmployeeNovelty = Number( +params[ 'idTerceroNovedad' ] );
-         if ( tempIdEmployeeNovelty ) {
+         if ( tempIdEmployeeNovelty !== 0 ) {
             this.employeeEventuality.idNovedad = tempIdEmployeeNovelty;
             this.employeeNoveltyService.getById( this.employeeEventuality.idNovedad ).subscribe( data => {
                this.employeeEventuality = data;
@@ -169,6 +169,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
          } );
       }
    }
+
    captureDiagnosticId( event: any ) {
       this.wrongDiagnostic = false;
    }
@@ -180,7 +181,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       } );
    }
 
-   showField(){
+   showField() {
       return true;
    }
 
