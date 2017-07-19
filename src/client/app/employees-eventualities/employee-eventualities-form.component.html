@@ -5,6 +5,15 @@
 		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
 	</p-footer>
 </p-confirmDialog>
+<style>
+	.ui-datepicker table {
+		display: none;
+	}
+	
+</style>
+<div class="col-md-10 col-md-offset-1">
+	<h3>{{ 'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }}</h3>
+</div>
 <div class="col-md-10 col-md-offset-1">
 	<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
 		<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
@@ -52,9 +61,9 @@
 				</div>
 				<div class="ui-grid-col-3" *ngIf="showhorainicio">
 					<label for="horaInicio">{{ 'EMPLOYEENOVELTY.LBL_HORAINICIO' | translate }}</label>
-					<p-calendar id="horaInicio" name="horaInicio" #horaIni="ngModel" [showIcon]="true"
-					            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
-					            [locale]="es" readonlyInput="readonlyInput" [timeOnly]="true" [required]="requiredhorainicio"
+					<p-calendar id="horaInicio" name="horaInicio" #horaIni="ngModel" [showIcon]="true" class="calendarTime"
+					            [monthNavigator]="true" [yearNavigator]="true"
+					            readonlyInput="readonlyInput" [timeOnly]="true" [required]="requiredhorainicio"
 					            dataType="date" [(ngModel)]="employeeEventuality.horaInicio"
 					            dateFormat="yy'-'mm'-'dd"></p-calendar>
 					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !horaIni.valid">
@@ -77,8 +86,8 @@
 				<div class="ui-grid-col-3" *ngIf="showhorafinal">
 					<label for="horaFinal">{{ 'EMPLOYEENOVELTY.LBL_HORAFINAL' | translate }}</label>
 					<p-calendar id="horaFinal" name="horaFinal" #horaFin="ngModel" [showIcon]="true"
-					            [minDate]="minDateFin" [monthNavigator]="true" [yearNavigator]="true"
-					            [locale]="es" readonlyInput="readonlyInput" [timeOnly]="true" [required]="requiredhorafinal"
+					            [monthNavigator]="true" [yearNavigator]="true"
+					            readonlyInput="readonlyInput" [timeOnly]="true" [required]="requiredhorafinal"
 					            dataType="date" [(ngModel)]="employeeEventuality.horaFinal" [showTime]="true"
 					            dateFormat="yy'-'mm'-'dd"></p-calendar>
 					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !horaFin.valid">
@@ -103,7 +112,7 @@
 				<div class="ui-grid-col-6" *ngIf="showdiagnostico">
 					<label>{{'EMPLOYEENOVELTY.LBL_DIAGNOSTICO' | translate }}</label>
 					<p-autoComplete placeholder="Buscar diagnóstico" field="label" name="diagnostico" id="diagnostico"
-					                [(ngModel)]="employeeEventuality.idTipoNovedad" [required]="requireddiagnostico"
+					                [(ngModel)]="employeeEventuality.idDiagnostico" [required]="requireddiagnostico"
 					                #diagnostico="ngModel" [suggestions]="diagnosticList"
 					                (completeMethod)="diagnosticSearch($event)" (onSelect)="captureDiagnosticId($event)">
 					</p-autoComplete>
@@ -175,8 +184,8 @@
 				</div>
 				<div class="ui-grid-col-3" *ngIf="showperiodofinal">
 					<label for="periodofinal">{{ 'EMPLOYEENOVELTY.LBL_PERIODOFINAL' | translate }}</label>
-					<p-calendar id="periodofinal" name="periodofinal" #periodofin="ngModel" [showIcon]="true"
-					            [minDate]="minDateFinPer" [monthNavigator]="true" [yearNavigator]="true"
+					<p-calendar id="periodofinal" name="periodofinal" #periodofin="ngModel" [showIcon]="true" class="mesanno"
+					            [minDate]="minDateFinPer" [monthNavigator]="true" [yearNavigator]="true" 
 					            [locale]="es" readonlyInput="readonlyInput" [required]="requiredperiodofinal"
 					            dataType="date" [(ngModel)]="employeeEventuality.periodoFinal" [yearRange]="rangeFin"
 					            dateFormat="yy'-'mm'-'dd"></p-calendar>
@@ -198,7 +207,7 @@
 					<label for="ideps">{{ 'EMPLOYEENOVELTY.LBL_EPS' | translate }}</label>
 					<p-dropdown id="ideps" name="ideps"
 					            [options]="listEPS" [autoWidth]="false"
-					            [(ngModel)]="employeeEventuality.idEPS"
+					            [(ngModel)]="employeeEventuality.idEps"
 					            #eps="ngModel" [required]="requiredeps"
 					></p-dropdown>
 					<div class="ui-message ui-messages-error ui-corner-all"
@@ -211,7 +220,7 @@
 					<label for="idfp">{{ 'EMPLOYEENOVELTY.LBL_FP' | translate }}</label>
 					<p-dropdown id="idfp" name="idfp"
 					            [options]="listFP" [autoWidth]="false"
-					            [(ngModel)]="employeeEventuality.idFP"
+					            [(ngModel)]="employeeEventuality.idFp"
 					            #fp="ngModel" [required]="requiredfp"
 					></p-dropdown>
 					<div class="ui-message ui-messages-error ui-corner-all"
@@ -224,7 +233,7 @@
 					<label for="idccf">{{ 'EMPLOYEENOVELTY.LBL_CCF' | translate }}</label>
 					<p-dropdown id="idccf" name="idccf"
 					            [options]="listCCF" [autoWidth]="false"
-					            [(ngModel)]="employeeEventuality.idCCF"
+					            [(ngModel)]="employeeEventuality.idCcf"
 					            #ccf="ngModel" [required]="requiredccf"
 					></p-dropdown>
 					<div class="ui-message ui-messages-error ui-corner-all"
@@ -251,7 +260,7 @@
 					<label for="nrocuotas">{{ 'EMPLOYEENOVELTY.LBL_CUOTAS' | translate }}</label>
 					<input id="nrocuotas" name="nrocuotas" #cuotas="ngModel" pInputText type="text"
 					       (keyup)="inputNumber($event)"  maxlength="12" [required]="requiredcuotas"
-					       [(ngModel)]="employeeEventuality.numeroCuotas"/>
+					       [(ngModel)]="employeeEventuality.nroCuotas"/>
 					<div class="ui-message ui-messages-error ui-corner-all"
 					     *ngIf="f.submitted && !cuotas.valid ">
 						<i class="fa fa-close"></i>
@@ -262,7 +271,7 @@
 					<label for="nroreferencia">{{ 'EMPLOYEENOVELTY.LBL_REFERENCIA' | translate }}</label>
 					<input id="nroreferencia" name="nroreferencia" #referencia="ngModel" pInputText type="text"
 					       (keyup)="inputRef($event)"  maxlength="12" [required]="requiredreferencia"
-					       [(ngModel)]="employeeEventuality.numeroReferencia"/>
+					       [(ngModel)]="employeeEventuality.nroReferencia"/>
 					<div class="ui-message ui-messages-error ui-corner-all"
 					     *ngIf="f.submitted && !referencia.valid ">
 						<i class="fa fa-close"></i>

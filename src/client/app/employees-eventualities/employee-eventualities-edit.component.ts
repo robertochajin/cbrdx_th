@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
@@ -15,13 +15,13 @@ import { DiagnosticCIEServices } from '../_services/diagnosticCIE.service';
 
 @Component( {
                moduleId: module.id,
-               selector: 'employee-novelty-add',
+               selector: 'employee-eventuality-add',
                templateUrl: 'employee-eventualities-form.component.html',
                providers: [ ConfirmationService ]
             } )
 
 export class EmployeeEventualitiesAddComponent implements OnInit {
-
+   @Input()
    employeeEventuality: EmployeeEventuality = new EmployeeEventuality();
    msgs: Message[];
    es: any;
@@ -39,8 +39,10 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    listCCF: SelectItem[] = [];
    listEntidad: SelectItem[] = [];
    listEventualities: SelectItem[] = [];
-   listTypeDoc: SelectItem[] = [];
+   listEstados: ListaItem[] = [];
    listField: any[] = [];
+   @Output()
+   dismiss: EventEmitter<number> = new EventEmitter<number>();
 
    // indicadores para mostrar campos en formulario
    showhorainicio: boolean = false;
@@ -90,7 +92,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
    dataUploadArchivo: any = '';
    dataUploadUsuario: any = '';
-   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
+   usuarioLogueado: any;
    jwtHelper: JwtHelper = new JwtHelper();
    fsize: number = 50000000;
    ftype: string = '';
@@ -130,17 +132,20 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
             this.listEPS.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
-      this.listaService.getMasterDetails( 'ListasFP' ).subscribe( res => {
+      this.listaService.getMasterDetails( 'ListasFp' ).subscribe( res => {
          this.listFP.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
             this.listFP.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
-      this.listaService.getMasterDetails( 'ListasCCF' ).subscribe( res => {
+      this.listaService.getMasterDetails( 'ListasCcf' ).subscribe( res => {
          this.listCCF.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
             this.listCCF.push( { label: s.nombre, value: s.idLista } );
          } );
+      } );
+      this.listaService.getMasterDetails( 'ListasEstadosNovedades' ).subscribe( res => {
+         this.listEstados = res;
       } );
       this.listaService.getMasterDetails( 'ListasEntidades' ).subscribe( res => {
          this.listEntidad.push( { label: 'Seleccione', value: null } );
@@ -148,24 +153,30 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
             this.listEntidad.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
-      this.employeeEventuality.horaFinal = new Date();
    }
 
    ngOnInit() {
-      this.route.params.subscribe( ( params: Params ) => {
-         let tempIdEmployee = Number( +params[ 'idTercero' ] );
-         let tempIdEmployeeNovelty = Number( +params[ 'idTerceroNovedad' ] );
-         if ( tempIdEmployeeNovelty !== 0 ) {
-            this.employeeEventuality.idNovedad = tempIdEmployeeNovelty;
-            this.employeeNoveltyService.getById( this.employeeEventuality.idNovedad ).subscribe( data => {
-               this.employeeEventuality = data;
-               this.getFileName();
-            } );
-         }
-         if ( tempIdEmployee ) {
-            this.employeeEventuality.idTercero = tempIdEmployee;
-         }
-      } );
+      if ( this.employeeEventuality.idTerceroNovedad !== 0 ) {
+         this.employeeNoveltyService.getById( this.employeeEventuality.idTerceroNovedad ).subscribe( data => {
+            this.employeeEventuality = data;
+            this.changeEventuality();
+         } );
+      }else{
+         this.employeeEventuality.horaInicio = new Date;
+      }
+      // this.route.params.subscribe( ( params: Params ) => {
+      //    let tempIdEmployee = Number( +params[ 'idTercero' ] );
+      //    let tempIdEmployeeNovelty = Number( +params[ 'idTerceroNovedad' ] );
+      //    if ( tempIdEmployeeNovelty !== 0 ) {
+      //       this.employeeEventuality.idNovedad = tempIdEmployeeNovelty;
+      //       this.employeeNoveltyService.getById( this.employeeEventuality.idNovedad ).subscribe( data => {
+      //          this.employeeEventuality = data;
+      //       } );
+      //    }
+      //    if ( tempIdEmployee ) {
+      //       this.employeeEventuality.idTercero = tempIdEmployee;
+      //    }
+      // } );
 
       this.es = {
          firstDayOfWeek: 1,
@@ -188,24 +199,24 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    }
 
    onSubmit() {
-      if ( this.employeeEventuality.idNovedad ) {
-         // if ( this.documentManagement.indicadorAdjunto ) {
-         //    this.documentManagement.idAdjunto = null;
-         // }
-         // this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( data => {
-         //    this._nav.setMesage( 2, this.msgs );
-         //    this.location.back();
-         // }, error => {
-         //    this._nav.setMesage( 3, this.msgs );
-         // } );
-         this.employeeEventuality;
-      } else {
-         // this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
-         //    this._nav.setMesage( 1, this.msgs );
-         //    this.location.back();
-         // }, error => {
-         //    this._nav.setMesage( 3, this.msgs );
-         // } );
+      if ( this.employeeEventuality.idTerceroNovedad !== 0 && this.employeeEventuality.idTerceroNovedad !== null &&
+           this.employeeEventuality.idTerceroNovedad !== undefined ) {
+         this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( data => {
+            this._nav.setMesage( 2, this.msgs );
+            this.dismiss.emit( 1 );
+         }, error => {
+            this._nav.setMesage( 3, this.msgs );
+         } );
+      }
+      else {
+         this.employeeEventuality.idEstadoNovedad = this.getStateByCode( 'SOLICI' );
+         this.employeeEventuality.idTerceroReporta = this.usuarioLogueado.usuario.idTercero;
+         this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
+            this._nav.setMesage( 1, this.msgs );
+            this.dismiss.emit( 1 );
+         }, error => {
+            this._nav.setMesage( 3, this.msgs );
+         } );
       }
    }
 
@@ -229,41 +240,41 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       event.target.value = input.toUpperCase().replace( /[^A-Z0-9-_]/g, '' );
    }
 
-   uploadingOk( event: any ) {
-      let respuesta = JSON.parse( event.xhr.response );
-      if ( respuesta.idAdjunto != null || respuesta.idAdjunto != undefined ) {
-         this.employeeEventuality.idAdjunto = respuesta.idAdjunto;
-      }
-   }
+   // uploadingOk( event: any ) {
+   //    let respuesta = JSON.parse( event.xhr.response );
+   //    if ( respuesta.idAdjunto != null || respuesta.idAdjunto != undefined ) {
+   //       this.employeeEventuality.idAdjunto = respuesta.idAdjunto;
+   //    }
+   // }
+   //
+   // onBeforeSend( event: any ) {
+   //    event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+   //    let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "'}";
+   //    event.formData.append( 'obj', obj.toString() );
+   // }
+   //
+   // onSelect( event: any, file: any ) {
+   //    this.dataUploadArchivo = file[ 0 ].name;
+   //    this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   // }
 
-   onBeforeSend( event: any ) {
-      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "'}";
-      event.formData.append( 'obj', obj.toString() );
-   }
-
-   onSelect( event: any, file: any ) {
-      this.dataUploadArchivo = file[ 0 ].name;
-      this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
-   }
-
-   uploadAgain( rta: boolean ) {
-      this.employeeEventuality.idAdjunto = null;
-   }
-
-   downloadFile( id: number ) {
-      this.adjuntosService.downloadFile( id ).subscribe( res => {
-         window.location.assign( res );
-      } );
-   }
-
-   getFileName() {
-      if ( this.employeeEventuality.idAdjunto ) {
-         this.adjuntosService.getFileName( this.employeeEventuality.idAdjunto ).subscribe( res => {
-            this.dataUploadArchivo = res.nombreArchivo;
-         } );
-      }
-   }
+   // uploadAgain( rta: boolean ) {
+   //    this.employeeEventuality.idAdjunto = null;
+   // }
+   //
+   // downloadFile( id: number ) {
+   //    this.adjuntosService.downloadFile( id ).subscribe( res => {
+   //       window.location.assign( res );
+   //    } );
+   // }
+   //
+   // getFileName() {
+   //    if ( this.employeeEventuality.idAdjunto ) {
+   //       this.adjuntosService.getFileName( this.employeeEventuality.idAdjunto ).subscribe( res => {
+   //          this.dataUploadArchivo = res.nombreArchivo;
+   //       } );
+   //    }
+   // }
 
    captureDiagnosticId( event: any ) {
       this.wrongDiagnostic = false;
@@ -313,14 +324,15 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       let temp = new Date( this.employeeEventuality.periodoInicio );
       this.minDateFinPer = new Date( temp.setHours( 24 ) );
    }
-   resetForm(){
+
+   resetForm() {
       // indicadores para mostrar campos en formulario
       this.showhorainicio = false;
       this.showfechainicio = false;
-      this.showhorafinal= false;
+      this.showhorafinal = false;
       this.showfechafinal = false;
-      this. showdescripcion= false;
-      this. showdiagnostico = false;
+      this.showdescripcion = false;
+      this.showdiagnostico = false;
       this.showreemplazado = false;
       this.showhorareintegro = false;
       this.showfechareintegro = false;
@@ -339,7 +351,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       this.requiredhorainicio = false;
       this.requiredfechainicio = false;
       this.requiredhorafinal = false;
-      this. requiredfechafinal = false;
+      this.requiredfechafinal = false;
       this.requireddescripcion = false;
       this.requireddiagnostico = false;
       this.requiredreemplazado = false;
@@ -357,6 +369,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       this.requiredfp = false;
       this.requiredccf = false;
    }
+
    propareForm() {
       for ( let field of this.listField ) {
          if ( field.codigoCampoNovedad === 'FECHINI' ) {
@@ -377,51 +390,60 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
          } else if ( field.codigoCampoNovedad === 'HORREI' ) {
             this.showhorareintegro = field.indicadorHabilitado;
             this.requiredhorareintegro = field.indicadorObligatorio;
-         }else if ( field.codigoCampoNovedad === 'DIAS' ) {
+         } else if ( field.codigoCampoNovedad === 'DIAS' ) {
             this.showdias = field.indicadorHabilitado;
             this.requireddias = field.indicadorObligatorio;
-         }else if ( field.codigoCampoNovedad === 'DIAGN' ) {
+         } else if ( field.codigoCampoNovedad === 'DIAGN' ) {
             this.showdiagnostico = field.indicadorHabilitado;
             this.requireddiagnostico = field.indicadorObligatorio;
-         }else if ( field.codigoCampoNovedad === 'REMPL' ) {
+         } else if ( field.codigoCampoNovedad === 'REMPL' ) {
             this.showreemplazado = field.indicadorHabilitado;
             this.requiredreemplazado = field.indicadorObligatorio;
-         }else if ( field.codigoCampoNovedad === 'VALOR' ) {
+         } else if ( field.codigoCampoNovedad === 'VALOR' ) {
             this.showvalor = field.indicadorHabilitado;
             this.requiredvalor = field.indicadorObligatorio;
-         }else if ( field.codigoCampoNovedad === 'CUOTAS' ) {
+         } else if ( field.codigoCampoNovedad === 'CUOTAS' ) {
             this.showcuotas = field.indicadorHabilitado;
             this.requiredcuotas = field.indicadorObligatorio;
-         }else if ( field.codigoCampoNovedad === 'REFERE' ) {
+         } else if ( field.codigoCampoNovedad === 'REFERE' ) {
             this.showreferencia = field.indicadorHabilitado;
             this.requiredreferencia = field.indicadorObligatorio;
-         }else if ( field.codigoCampoNovedad === 'ENTID' ) {
+         } else if ( field.codigoCampoNovedad === 'ENTID' ) {
             this.showentidad = field.indicadorHabilitado;
             this.requiredentidad = field.indicadorObligatorio;
-         }else if ( field.codigoCampoNovedad === 'DESCRI' ) {
+         } else if ( field.codigoCampoNovedad === 'DESCRI' ) {
             this.showdescripcion = field.indicadorHabilitado;
             this.requireddescripcion = field.indicadorObligatorio;
-         }else if ( field.codigoCampoNovedad === 'PERIN' ) {
+         } else if ( field.codigoCampoNovedad === 'PERIN' ) {
             this.showperiodoinicial = field.indicadorHabilitado;
             this.requiredperiodoinicial = field.indicadorObligatorio;
-         }else if ( field.codigoCampoNovedad === 'PERFI' ) {
+         } else if ( field.codigoCampoNovedad === 'PERFI' ) {
             this.showperiodofinal = field.indicadorHabilitado;
             this.requiredperiodoinicial = field.indicadorObligatorio;
-         }else if ( field.codigoCampoNovedad === 'RET' ) {
+         } else if ( field.codigoCampoNovedad === 'RET' ) {
             this.showretiro = field.indicadorHabilitado;
             this.requiredretiro = field.indicadorObligatorio;
-         }else if ( field.codigoCampoNovedad === 'EPS' ) {
+         } else if ( field.codigoCampoNovedad === 'EPS' ) {
             this.showeps = field.indicadorHabilitado;
             this.requiredeps = field.indicadorObligatorio;
-         }else if ( field.codigoCampoNovedad === 'FP' ) {
+         } else if ( field.codigoCampoNovedad === 'FP' ) {
             this.showfp = field.indicadorHabilitado;
             this.requiredfp = field.indicadorObligatorio;
-         }else if ( field.codigoCampoNovedad === 'CCF' ) {
+         } else if ( field.codigoCampoNovedad === 'CCF' ) {
             this.showccf = field.indicadorHabilitado;
             this.requiredccf = field.indicadorObligatorio;
          }
       }
 
+   }
+
+   getStateByCode( codigo: string ) {
+      let temp = this.listEstados.find( x => x.codigo === codigo );
+      if ( temp ) {
+         return temp.idLista;
+      } else {
+         return null;
+      }
    }
 
    showField() {
@@ -436,11 +458,11 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
                                               header: 'Confirmación',
                                               icon: 'fa fa-question-circle',
                                               accept: () => {
-                                                 this.location.back();
+                                                 this.dismiss.emit( 1 );
                                               }
                                            } );
       } else {
-         this.location.back();
+         this.dismiss.emit( 1 );
       }
    }
 

@@ -83,7 +83,7 @@ import { DocumentManagementModule } from './document-management/document-managem
 import { QuestionnairesModule } from './questionnaires/questionnaires.module';
 import { EmployeesAttachmentsModule } from './employees-attatchments/employees-attachments.module';
 import { EventualitiesModule } from './eventualities/eventualities.module';
-import { EmployeeEventualitiesModule } from './employees-eventualities/employees-eventualities.module';
+// import { EmployeeEventualitiesModule } from './employees-eventualities/employees-eventualities.module';
 
 // CarsModule,
 @NgModule( {
@@ -146,7 +146,7 @@ import { EmployeeEventualitiesModule } from './employees-eventualities/employees
                  SelectionProcessModule,
                  DocumentManagementModule,
                  MedicalInstitutionModule,
-                 EmployeeEventualitiesModule,
+                 // EmployeeEventualitiesModule,
                  // EmployeesAttachmentsModule,
                  //AssignmentProfessionalModule
                  QuestionnairesModule

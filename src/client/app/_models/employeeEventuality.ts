@@ -2,9 +2,13 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class EmployeeEventuality {
-   idNovedadTercero: number;
+   idTerceroNovedad: number;
    idTercero: number;
    idNovedad: number;
+   novedad: string;
+   idEstado: number;
+   estado: string;
+   tipoNovedad: string;
    fechaInicio: Date;
    horaInicio: Date;
    fechaFinal: Date;
@@ -15,20 +19,29 @@ export class EmployeeEventuality {
    idDiagnostico: number;
    reemplazadoPor: string;
    valor: number;
-   numeroCuotas:number;
-   numeroReferencia: number;
+   nroCuotas:number;
+   nroReferencia: number;
    idEntidad: number;
+   entidad: string;
    descripcion: string;
    periodoInicio: Date;
    periodoFinal: Date;
    retiro: boolean;
-   idEPS: number;
-   idFP: number;
-   idCCF: number;
-   idAdjunto: number;
+   idEps: number;
+   eps: string;
+   idFp: number;
+   fp: string;
+   idCcf: number;
+   ccf: string;
    indicadorHabilitado: boolean;
+   codigoValidacion: number;
    auditoriaUsuario: Number;
    auditoriaFecha: Date;
+   fechaReporte: Date;
+   nombreTerceroReporta: string;
+   idTerceroReporta: number;
+   idEstadoNovedad: number;
+   estadoNovedad: string;
 
    constructor() {
       this.indicadorHabilitado = true;
