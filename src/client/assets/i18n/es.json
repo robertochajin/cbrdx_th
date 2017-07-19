@@ -1164,7 +1164,8 @@
       "LBL_REQUIRESIZE": "Requiere Talla",
       "LBL_ADDITIONAL": "Adicional",
       "LBL_ADDPOSITION": "Agregar Cargo",
-      "LBL_ACTIVE": "Activo"
+      "LBL_ACTIVE": "Activo",
+      "LBL_ALLHAB": "Habilitar Todos"
    },
    "FIN_ARCHIVO": "============================FIN ARCHIVO============================="
 
