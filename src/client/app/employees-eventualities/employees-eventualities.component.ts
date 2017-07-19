@@ -43,7 +43,7 @@ export class EmployeeEventualitiesComponent {
    }
 
    add() {
-      this.employeeEventuality.idTerceroNovedad = 0;
+      this.employeeEventuality.idTerceroNovedad = null;
       this.saveEventuality = !this.saveEventuality;
       // this.router.navigate( [ 'employee-eventualities/add/' + this.employee.idTercero + '/' + 0 ] );
    }
