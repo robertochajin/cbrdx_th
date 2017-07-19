@@ -67,6 +67,9 @@
 	<p-panel header="{{ 'SUPPLIES.LBL_ADDPOSITION' | translate }}">
 		<div class="row datable-header">
 			<div class="col-md-6 col-xs-12 datatable-header-add">
+				<label>{{ 'SUPPLIES.LBL_ALLHAB' | translate}}</label>
+				<p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="allHabilitado"
+				               (onChange)="changeAll()"></p-inputSwitch>
 			</div>
 			<div class="col-md-6 col-xs-12 datatable-header-search">
 				<div class="input-group">
@@ -83,7 +86,7 @@
 			          styleClass="datatable-col-center">
 				<template let-datos="rowData" pTemplate="body">
 					<p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="datos.indicadorHabilitado"
-					               (onChange)="changeControl(datos)"></p-inputSwitch>
+					               (onChange)="changePosition(datos)"></p-inputSwitch>
 				</template>
 			</p-column>
 		</p-dataTable>
@@ -123,12 +126,12 @@
 					</div>
 					<div class="ui-grid-row">
 						<div class="ui-grid-col-6">
-							<label for="descripcion">* {{ 'LBL_DESCRIPCION' | translate}}</label>
-							<textarea pInputTextarea id="descripcion" name="descripcion"
-							          [(ngModel)]="supply.descripcion" #NGdescripcion="ngModel" maxlength="500"
+							<label for="descripcionS">* {{ 'LBL_DESCRIPCION' | translate}}</label>
+							<textarea pInputTextarea id="descripcionS" name="descripcionS"
+							          [(ngModel)]="supply.descripcion" #NGsdescripcion="ngModel" maxlength="500"
 							          [required]="true"></textarea>
 							<div class="ui-message ui-messages-error ui-corner-all"
-							     *ngIf="s.submitted && !NGdescripcion.valid">
+							     *ngIf="s.submitted && !NGsdescripcion.valid">
 								<i class="fa fa-close"></i>{{ 'LBL_DESCRIPCION' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 							</div>
 						</div>
