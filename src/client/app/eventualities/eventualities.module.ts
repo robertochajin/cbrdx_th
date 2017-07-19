@@ -20,9 +20,10 @@ import { EventualityRolesServices } from '../_services/eventualityRoles.service'
               ],
               bootstrap: [ EventualitiesComponent ],
               providers: [ ConfirmationService,
-                           EventualityServices,
-                           EventualityRolesServices],
-              exports: [  ]
+                 EventualityServices,
+                 EventualityRolesServices
+              ],
+              exports: []
            } )
 export class EventualitiesModule {
 }

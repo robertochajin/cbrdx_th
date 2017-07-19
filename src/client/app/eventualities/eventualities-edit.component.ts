@@ -78,14 +78,14 @@ export class EventualitiesEditComponent implements OnInit {
                   this.eventuality = obj;
                   this.eventualityRolesServices.getAllByEventuality( this.eventuality.idNovedad ).subscribe( rRoles => {
                      rRoles.map( rr => {
-                        if(rr.indicadorHabilitado){
-                           this.rolesToReport.splice(this.rolesToReport.findIndex(r => r.value === rr.idRol ), 1);
-                           this.listReportRoles.push(rr);
+                        if ( rr.indicadorHabilitado ) {
+                           this.rolesToReport.splice( this.rolesToReport.findIndex( r => r.value === rr.idRol ), 1 );
+                           this.listReportRoles.push( rr );
                         } else {
-                           this.disabledReportRoles.push(rr);
+                           this.disabledReportRoles.push( rr );
                         }
-                     });
-                  });
+                     } );
+                  } );
                } );
             } else {
                this.eventuality = new Eventuality();
@@ -115,32 +115,32 @@ export class EventualitiesEditComponent implements OnInit {
 
    onSubmitRoles() {
       this.savingReportRol = true;
-      let foundRol = this.disabledReportRoles.find(drr => drr.idRol === this.reportRol);
-      let selectedRol = this.rolesToReport.find(rtr => rtr.value === this.reportRol);
-      if( foundRol !== undefined ){
+      let foundRol = this.disabledReportRoles.find( drr => drr.idRol === this.reportRol );
+      let selectedRol = this.rolesToReport.find( rtr => rtr.value === this.reportRol );
+      if ( foundRol !== undefined ) {
          foundRol.indicadorHabilitado = true;
-         this.eventualityRolesServices.update(foundRol).subscribe(res => {
-            this.rolesToReport.splice(this.rolesToReport.indexOf(selectedRol), 1);
-            this.listReportRoles.push(foundRol);
+         this.eventualityRolesServices.update( foundRol ).subscribe( res => {
+            this.rolesToReport.splice( this.rolesToReport.indexOf( selectedRol ), 1 );
+            this.listReportRoles.push( foundRol );
             this.savingReportRol = false;
             this._nav.setMesage( 2 );
          }, ( error ) => {
             this._nav.setMesage( 3 );
          } );
       } else {
-         let newRol : EventualityRoles = new EventualityRoles();
+         let newRol: EventualityRoles = new EventualityRoles();
          newRol.idNovedad = this.eventuality.idNovedad;
          newRol.rol = selectedRol.label;
          newRol.idRol = selectedRol.value;
-         this.eventualityRolesServices.add(newRol).subscribe(res => {
-            this.rolesToReport.splice(this.rolesToReport.indexOf(selectedRol), 1);
+         this.eventualityRolesServices.add( newRol ).subscribe( res => {
+            this.rolesToReport.splice( this.rolesToReport.indexOf( selectedRol ), 1 );
             res.rol = selectedRol.label;
-            this.listReportRoles.push(res);
+            this.listReportRoles.push( res );
             this.savingReportRol = false;
             this._nav.setMesage( 1 );
          }, ( error ) => {
             this._nav.setMesage( 3 );
-         });
+         } );
       }
    }
 
@@ -154,7 +154,7 @@ export class EventualitiesEditComponent implements OnInit {
                                               this.eventualityRolesServices.update( rRol ).subscribe( res => {
                                                  this.listReportRoles.splice( this.listReportRoles.indexOf( rRol ), 1 );
                                                  this.rolesToReport.push( { label: rRol.rol, value: rRol.idRol } );
-                                                 this.disabledReportRoles.push(rRol);
+                                                 this.disabledReportRoles.push( rRol );
                                               } );
                                            }
                                         } );

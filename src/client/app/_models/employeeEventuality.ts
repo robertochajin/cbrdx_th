@@ -15,7 +15,7 @@ export class EmployeeEventuality {
    idDiagnostico: number;
    reemplazadoPor: string;
    valor: number;
-   numeroCuotas:number;
+   numeroCuotas: number;
    numeroReferencia: number;
    idEntidad: number;
    descripcion: string;

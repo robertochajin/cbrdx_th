@@ -56,7 +56,9 @@ import { SmsService } from '../_services/_sms.service';
                  EmployeesDetailPerfilComponent
               ],
               bootstrap: [ EmployeesComponent ],
-              providers: [ EmployeesService, ListEmployeesService, EmployeesRecruitmentService, PoliticalDivisionService, NavService, ListaService, AdjuntosService, ConstanteService, SmsService ],
+              providers: [ EmployeesService, ListEmployeesService, EmployeesRecruitmentService, PoliticalDivisionService, NavService,
+                 ListaService, AdjuntosService, ConstanteService, SmsService
+              ],
               exports: [ EmployeesComponent ]
            } )
 export class EmployeesModule {
