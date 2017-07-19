@@ -168,16 +168,16 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    }
 
    ngOnInit() {
-      if ( this.employeeEventuality.idTerceroNovedad !== 0 ) {
+      if ( this.employeeEventuality.idTerceroNovedad !== null ) {
          this.employeeNoveltyService.getById( this.employeeEventuality.idTerceroNovedad ).subscribe( data => {
             this.employeeEventuality = data;
-            this.eventualityServices.get( this.employeeEventuality.idNovedad ).subscribe( rest => {
+            this.eventualityServices.get( this.employeeEventuality.idTerceroNovedad ).subscribe( rest => {
                this.eventuality = rest;
             } );
             this.changeEventuality();
          } );
       } else {
-         this.employeeEventuality.horaInicio = new Date;
+         this.eventuality = new Eventuality();
       }
       this.employeesService.get( this.employeeEventuality.idTercero ).subscribe( res => this.employee = res );
       // this.route.params.subscribe( ( params: Params ) => {
@@ -215,33 +215,56 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    }
 
    onSubmit() {
-      this.employeeNoveltyService.getById( this.employeeEventuality.idNovedad ).subscribe( res => {
-         if ( res.codigoValidacion === this.codigoVerificacion ) {
-            if ( this.employeeEventuality.idTerceroNovedad !== 0 && this.employeeEventuality.idTerceroNovedad !== null &&
-                 this.employeeEventuality.idTerceroNovedad !== undefined ) {
-               this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( data => {
-                  this._nav.setMesage( 2, this.msgs );
-                  this.dismiss.emit( 1 );
-               }, error => {
-                  this._nav.setMesage( 3, this.msgs );
+      if ( this.eventuality.indicadorConfirmacion && this.employeeEventuality.idTerceroNovedad ) {
+         this.employeeNoveltyService.getById( this.employeeEventuality.idNovedad ).subscribe( res => {
+            if ( res.codigoValidacion === this.codigoVerificacion ) {
+               if ( this.employeeEventuality.idTerceroNovedad !== 0 && this.employeeEventuality.idTerceroNovedad !== null &&
+                    this.employeeEventuality.idTerceroNovedad !== undefined ) {
+                  this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( data => {
+                     this._nav.setMesage( 2, this.msgs );
+                     this.dismiss.emit( 1 );
+                  }, error => {
+                     this._nav.setMesage( 3, this.msgs );
+                  } );
+               }
+               else {
+                  this.employeeEventuality.idEstadoNovedad = this.getStateByCode( 'SOLICI' );
+                  this.employeeEventuality.idTerceroReporta = this.usuarioLogueado.usuario.idTercero;
+                  this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
+                     this._nav.setMesage( 1, this.msgs );
+                     this.dismiss.emit( 1 );
+                  }, error => {
+                     this._nav.setMesage( 3, this.msgs );
+                  } );
+               }
+            } else {
+               this._nav.setMesage( 4, {
+                  severity: 'error', summary: 'Error', detail: 'El código ingresado no coincide con el asignado.'
                } );
             }
-            else {
-               this.employeeEventuality.idEstadoNovedad = this.getStateByCode( 'SOLICI' );
-               this.employeeEventuality.idTerceroReporta = this.usuarioLogueado.usuario.idTercero;
-               this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
-                  this._nav.setMesage( 1, this.msgs );
-                  this.dismiss.emit( 1 );
-               }, error => {
-                  this._nav.setMesage( 3, this.msgs );
-               } );
-            }
-         } else {
-            this._nav.setMesage( 4, {
-               severity: 'error', summary: 'Error', detail: 'El código ingresado no coincide con el asignado.'
+         } );
+      } else {
+         if ( this.employeeEventuality.idTerceroNovedad !== 0 && this.employeeEventuality.idTerceroNovedad !== null &&
+              this.employeeEventuality.idTerceroNovedad !== undefined ) {
+            this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( data => {
+               this._nav.setMesage( 2, this.msgs );
+               this.dismiss.emit( 1 );
+            }, error => {
+               this._nav.setMesage( 3, this.msgs );
             } );
          }
-      } );
+         else {
+            this.employeeEventuality.idEstadoNovedad = this.getStateByCode( 'SOLICI' );
+            this.employeeEventuality.idTerceroReporta = this.usuarioLogueado.usuario.idTercero;
+            this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
+               this._nav.setMesage( 1, this.msgs );
+               this.dismiss.emit( 1 );
+            }, error => {
+               this._nav.setMesage( 3, this.msgs );
+            } );
+         }
+      }
+
    }
 
    capitalize( event: any ) {
@@ -332,14 +355,14 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    }
 
    selectInicio() {
-      this.employeeEventuality.fechaFinal = null;
+      this.employeeEventuality.fechaFin = null;
       let temp = new Date( this.employeeEventuality.fechaInicio );
       this.minDateFin = new Date( temp.setHours( 24 ) );
    }
 
    selectFinal() {
       this.employeeEventuality.fechaReintegro = null;
-      let temp = new Date( this.employeeEventuality.fechaFinal );
+      let temp = new Date( this.employeeEventuality.fechaFin );
       this.minDateReint = new Date( temp.setHours( 24 ) );
    }
 
