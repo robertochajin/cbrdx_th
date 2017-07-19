@@ -189,6 +189,11 @@ import { AnswerExamsComponent } from './medical-institutions/answer-exams.compon
 import { EmployeesAttachmentsComponent } from './employees-attatchments/employees-attachments.component';
 import {PositionsDetailPdfComponent} from "./positions/positions-detail-pdf.component";
 import { CandidateContractingComponent } from './selection-process/candidate-contracting.component';
+import { EmployeeEventualitiesComponent } from './employees-eventualities/employees-eventualities.component';
+import { EmployeeEventualitiesAddComponent } from './employees-eventualities/employee-eventualities-edit.component';
+import { EventualitiesComponent } from './eventualities/eventualities.component';
+import { EventualitiesEditComponent } from './eventualities/eventualities-edit.component';
+import { EventualitiesDetailComponent } from './eventualities/eventualities-detail.component';
 
 // Dotaciones
 import { SuppliesComponent } from './supplies/supplies.component';
@@ -415,6 +420,13 @@ const routes = [
    { path: 'vacancies/approve/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
    { path: 'vacancies/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
 
+   // Colaborador novedades
+   { path: 'employee-eventualities', component: EmployeeEventualitiesComponent },
+   { path: 'employee-eventualities/add/:idTercero/:idTerceroNovedad', component: EmployeeEventualitiesAddComponent },
+   // { path: 'vacancies/update/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
+   // { path: 'vacancies/approve/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
+   // { path: 'vacancies/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
+
    // Preceso de selección
    { path: 'selection-process', component: SelectionProcessComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/add-publication/:idReq', component: SelectionProcessAddComponent, canActivate: [ AuthGuard ] },
@@ -468,6 +480,11 @@ const routes = [
    },
    { path: 'apply-vacancy/questionnaires/:idTercerosPublicaciones', component: ApplyQuestionnairesComponent, canActivate: [ AuthGuard ] },
    { path: 'apply-vacancy/active-publications', component: SelectionProcessVacanciesComponent, canActivate: [ AuthGuard ] },
+
+   { path: 'eventualities', component: EventualitiesComponent },
+   { path: 'eventualities/add', component: EventualitiesEditComponent },
+   { path: 'eventualities/update/:idEventuality', component: EventualitiesEditComponent },
+   { path: 'eventualities/detail/:idEventuality', component: EventualitiesDetailComponent },
 
    //  Cuestionarios
    { path: 'solutions/:id', component: SolutionsQuestionnairesComponent },
