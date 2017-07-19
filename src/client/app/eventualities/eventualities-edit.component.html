@@ -156,7 +156,7 @@
 							</div>
 						
 						</form>
-						
+					
 					</div>
 				</div>
 			</fieldset>
@@ -199,7 +199,7 @@
 						</p-dataTable>
 					</div>
 				</div>
-				
+			
 			</fieldset>
 		
 		</p-accordionTab>
@@ -208,7 +208,64 @@
 		                [disabled]="(eventuality === undefined || eventuality.idNovedad === undefined)">
 			
 			<fieldset>
-			
+				<form name="nominaForm" (ngSubmit)="nf.valid && onSubmit()" #nf="ngForm" novalidate id="nominaForm">
+										
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="sxCode">{{ 'NOVEDADES.LBL_CODIGOSAFIX' | translate }}:</label>
+							<input id="sxCode" type="text" pInputText name="sxCode" class="form-control"
+							       [(ngModel)]="eventuality.codigoSafix" maxLength="2"
+							       #ngCodeSX="ngModel" required codeSpecialCaseText uperCaseText
+							/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="nf.submitted && !ngCodeSX.valid">
+								<i class="fa fa-close"></i>
+								{{ 'NOVEDADES.LBL_CODIGOSAFIX' | translate }} {{'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="dirNom" class="control-label col-sm-3">{{ 'NOVEDADES.LBL_DIRECTOANOMINA' | translate }}</label>
+							<p-checkbox [(ngModel)]="eventuality.indicadorNomina" binary="true" id="dirNom" name="dirNom"
+							            #ngDirNom="ngModel"></p-checkbox>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="afect" class="control-label col-sm-3">{{ 'NOVEDADES.LBL_AFECTANOMINA' | translate }}</label>
+							<p-checkbox [(ngModel)]="eventuality.indicadorAfecta" binary="true" id="afect" name="afect"
+							            #ngAfect="ngModel"></p-checkbox>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="afectType">* {{'NOVEDADES.LBL_TIPOAFECTACION' | translate }}</label>
+							<p-dropdown id="afectType" name="afectType" #ngAfectType="ngModel" [options]="affectationTypes" [autoWidth]="false"
+							            [(ngModel)]="eventuality.idTipoAfectacion" required></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="nf.submitted && !ngAfectType.valid">
+								<i class="fa fa-close"></i>
+								{{'NOVEDADES.LBL_TIPOAFECTACION' | translate }} {{'LBL_REQUERIDO' | translate }}
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="canclSx" class="control-label col-sm-3">{{ 'NOVEDADES.LBL_CANCELASAFIX' | translate }}</label>
+							<p-checkbox [(ngModel)]="eventuality.indicadorCancelacion" binary="true" id="canclSx" name="canclSx"
+							            #ngCanclSx="ngModel"></p-checkbox>
+						</div>
+						<div class="form-group col-md-6">
+						</div>
+					</div>
+					
+					<div class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<a (click)="goBack((nf.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+							<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+							        pButton></button>
+						</div>
+					</div>
+				
+				</form>
 			</fieldset>
 		
 		</p-accordionTab>
