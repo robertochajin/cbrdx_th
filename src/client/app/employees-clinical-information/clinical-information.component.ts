@@ -7,6 +7,7 @@ import { ClinicalInformationService } from '../_services/clinical-information.se
 import { DiagnosticosCIE } from '../_models/diagnosticosCIE';
 import { DiagnosticCIEServices } from '../_services/diagnosticCIE.service';
 import { NavService } from '../_services/_nav.service';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 
 @Component( {
                moduleId: module.id,
@@ -15,8 +16,8 @@ import { NavService } from '../_services/_nav.service';
                providers: [ ConfirmationService ]
             } )
 export class ClinicalInformationComponent implements OnInit {
-   @Input()
-   employee: Employee;
+   @Input() employee: Employee;
+   @Input() seccion: PermissionsEmployees;
    clinicalInformation: EmployeesClinicalData = new EmployeesClinicalData;
    ecd: EmployeesClinicalData;
    diagnosticList: DiagnosticosCIE[] = [];

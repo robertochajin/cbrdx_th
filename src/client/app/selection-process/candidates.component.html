@@ -1,7 +1,9 @@
 <h3 class="first">{{'PROCESOSELECCION.LBL_CANDIDATOS' | translate }}</h3>
-<div>
+<postulation-history *ngIf="viewpostulations" [idTercero]="idTercero" (dismiss)="toogleHistory()"></postulation-history>
+<div *ngIf="!viewpostulations">
 	<div class="row datable-header">
 		<div class="col-md-6 col-xs-12">
+			<h4>{{'PROCESOSELECCION.LBL_CANTIDADVACANTES' | translate }}: <span class="badge">{{numeroVacantes}}</span></h4>
 		</div>
 		<div class="col-md-6 col-xs-12 datatable-header-search">
 			<div class="input-group">
@@ -11,17 +13,26 @@
 			</div>
 		</div>
 	</div>
-	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="candidates" [paginator]="true" [rows]="10"
-	             [responsive]="true" [globalFilter]="gb">
+	<p-dataTable id="dtbCandidates" emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="candidates" [paginator]="true"
+	             [rows]="10" [responsive]="true" [globalFilter]="gb">
+		<p-column header="#" styleClass="datatable-col-action">
+			<template let-cs="rowData" pTemplate="body">
+				<a (click)="viewHistory( cs.idTercero )" class="badge"
+				   data-toggle="tooltip"
+				   title="Postulado a {{cs.cantProcesoSeleccion}} vacantes">
+					{{cs.cantProcesoSeleccion}}
+				</a>
+			</template>
+		</p-column>
 		<p-column field="nombreCompleto" header="{{'PROCESOSELECCION.LBL_CANDIDATO' | translate }}" [sortable]="true"></p-column>
 		<p-column *ngFor="let step of steps" header="{{step.codigo}}" styleClass="datatable-col-action">
 			<template let-cs="rowData" pTemplate="body">
 				<button *ngIf="draw(cs, step.idProcesoPaso, 'VAC')" type="button" icon="fa-square-o" data-toggle="tooltip"
 				        title="{{'PROCESOSELECCION.LBL_NOASIGNADO' | translate }}" [disabled]="isStepDisabled(cs, step.idProcesoPaso, 'VAC')"
-				        class="ui-button-info" pButton (click)="redirecStep(cs, step.idProcesoPaso)"></button>
+				        class="ui-button-secondary" pButton (click)="redirecStep(cs, step.idProcesoPaso)"></button>
 				<button *ngIf="draw(cs, step.idProcesoPaso, 'PROG')" type="button" icon="fa-calendar" data-toggle="tooltip"
 				        title="{{'PROCESOSELECCION.LBL_PROGRAMADO' | translate }}" [disabled]="isStepDisabled(cs, step.idProcesoPaso, 'PROG')"
-				        class="ui-button-info" pButton (click)="redirecStep(cs, step.idProcesoPaso)"></button>
+				        class="ui-button-warning" pButton (click)="redirecStep(cs, step.idProcesoPaso)"></button>
 				<button *ngIf="draw(cs, step.idProcesoPaso, 'APROB')" type="button" icon="fa-check" data-toggle="tooltip"
 				        title="{{'PROCESOSELECCION.LBL_APROBO' | translate }}" [disabled]="isStepDisabled(cs, step.idProcesoPaso, 'APROB')"
 				        class="ui-button-success" pButton (click)="redirecStep(cs, step.idProcesoPaso)"></button>
@@ -29,8 +40,21 @@
 				        title="{{'PROCESOSELECCION.LBL_NOAPROBO' | translate }}" [disabled]="isStepDisabled(cs, step.idProcesoPaso, 'RECH')"
 				        class="ui-button-danger" pButton (click)="redirecStep(cs, step.idProcesoPaso)"></button>
 				<div *ngIf="draw(cs, step.idProcesoPaso, 'NA')" data-toggle="tooltip"
-				     title="{{'PROCESOSELECCION.LBL_NOAPLICA' | translate }}" >NA</div>
+				     title="{{'PROCESOSELECCION.LBL_NOAPLICA' | translate }}">NA
+				</div>
 			</template>
 		</p-column>
 	</p-dataTable>
+	<div class="row form-footer-buttons" *ngIf="showCloseReq">
+		<div class="form-group col-md-12">
+			<button label="{{'BTN_FINALIZARPROCESO' | translate }}" type="button"
+			        pButton (click)="cerrarProceso()"></button>
+		</div>
+	</div>
 </div>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>

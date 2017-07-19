@@ -10,6 +10,7 @@ import { DivisionPolitica } from '../_models/divisionPolitica';
 import { NavService } from '../_services/_nav.service';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 
 @Component( {
                moduleId: module.id,
@@ -20,13 +21,13 @@ import { ListaService } from '../_services/lista.service';
 
 export class EmployeesAdditionalDataComponent implements OnInit {
    @Input() employee: Employee;
+   @Input() seccion: PermissionsEmployees;
    header: string = 'Datos Adicionales ';
 
    personTypes: SelectItem[] = [];
    documentTypes: SelectItem[] = [];
    resultExpeditionCity: DivisionPolitica[];
    resultBirthPlace: DivisionPolitica[] = [];
-
    lateralityTypes: SelectItem[] = [];
    listSizeShirt: SelectItem[] = [];
    listSizePants: SelectItem[] = [];
@@ -35,6 +36,7 @@ export class EmployeesAdditionalDataComponent implements OnInit {
    peso: boolean = true;
    submitted: boolean = false;
    msgs: Message[] = [];
+   defaultCampo = { visible: true, editable: true };
 
    constructor( private employeesService: EmployeesService,
       private listaService: ListaService,

@@ -211,7 +211,7 @@ export class SelectionProcessAddComponent implements OnInit {
       this.publication.indicadorPublicacion = true;
       this.publicationsService.update( this.publication ).subscribe( rest => {
          this.vacanciesService.asignarProceso(this.publication.idPublicacion).subscribe();
-         this._nav.setMesage( 0, { severity: 'info', summary: 'Info', detail: 'Se ha publicado con exito' } );
+         this._nav.setMesage( 0, { severity: 'success', summary: 'Excelente!', detail: 'Se ha publicado con exito' } );
       } );
    }
 
@@ -345,7 +345,7 @@ export class SelectionProcessAddComponent implements OnInit {
 
    private pushQuestionnaireOption( idCuestionario: number ) {
       let qst = this.questionnaries.find( q => q.idCuestionario === idCuestionario );
-      this.questionnariesList.push( { label: qst.codigo + ':' + qst.cuestionario, value: qst.idCuestionario } );
+      this.questionnariesList.push( { label: qst.codigoCuestionario + ':' + qst.cuestionario, value: qst.idCuestionario } );
    }
 
    // fin funciones cuestionarios

@@ -250,6 +250,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
 
    onChangeMethod( event: any ) {
 
+      this.familyInformation.fechaNacimiento = null;
       let tipodocfamili = this.listTypeDoc.find( x => x.idLista === this.selectedDocument );
       let codigo: string = '';
       if ( tipodocfamili ) {

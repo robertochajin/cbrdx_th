@@ -18,6 +18,8 @@ import {
 import { SharedModule } from '../shared/shared.module';
 import { ListaService } from '../_services/lista.service';
 import { FormSharedModule } from '../shared/form-shared.module';
+import { ConstanteService } from '../_services/constante.service';
+import { AdjuntosService } from '../_services/adjuntos.service';
 
 
 @NgModule( {
@@ -36,7 +38,7 @@ import { FormSharedModule } from '../shared/form-shared.module';
                  NoFormalStudiesDetailComponent
               ],
               bootstrap: [ FormalStudiesComponent ],
-              providers: [ AcademicEducationService, ListaService ],
+              providers: [ AcademicEducationService, ListaService, AdjuntosService, ConstanteService ],
               exports: [ FormalStudiesComponent, NoFormalStudiesComponent ]
            } )
 export class AcademicEducationModule {

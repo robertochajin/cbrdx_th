@@ -6,13 +6,14 @@ import { ClinicalInformationComponent } from './clinical-information.component';
 import { ClinicalInformationService } from '../_services/clinical-information.service';
 import { DiagnosticCIEServices } from '../_services/diagnosticCIE.service';
 import { FormSharedModule } from '../shared/form-shared.module';
+import { MedicalExamInformedConsentComponent } from './informed-consent.component';
 
 @NgModule( {
               imports: [ CommonModule,
                  SharedModule,
                  FormSharedModule
               ],
-              declarations: [ ClinicalInformationComponent ],
+              declarations: [ ClinicalInformationComponent, MedicalExamInformedConsentComponent ],
               bootstrap: [ ClinicalInformationComponent ],
               providers: [ ClinicalInformationService, DiagnosticCIEServices ],
               exports: [ ClinicalInformationComponent ]

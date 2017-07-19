@@ -6,6 +6,8 @@ import { EmployeesAddComponent } from './employees/employees-add.component';
 import { EmployeesUpdateComponent } from './employees/employees-update.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { EmployeesAdditionalDataComponent } from './employees/employees-additional-data.component';
+import { EmployeesDetailPerfilComponent } from './selecttion-process-apply/employees-detail-perfil.component';
+
 // historia employees estates
 import { EmployeesEstateComponent } from './employees-estate/employee-estate.component';
 import { EmployeesEstateAddComponent } from './employees-estate/employee-estate-add.component';
@@ -158,15 +160,41 @@ import { StepProcessComponent } from './selection-process/step-process.component
 import { CandidatesComponent } from './selection-process/candidates.component';
 import { CandidateRevisionComponent } from './selection-process/candidate-revision.component';
 import { CentralRiskComponent } from './selection-process-risks/central-risk.component';
-
+import { VacancyApplyComponent } from './selecttion-process-apply/apply-detail.component';
+import { ApplyQuestionnairesComponent } from './selecttion-process-apply/questionnaires.component';
 
 // hoja de vida
 import { EmployeesCurriculumVitaeComponent } from './employees/employees-curriculum-vitae.component';
-import { AdjuntosComponent } from './adjuntos/adjuntos.component';
 import { MedicalInstitutionsComponent } from './medical-institutions/medical-institutions.component';
 import { MedicalInstitutionAddComponent } from './medical-institutions/medical-institutions-add.component';
 import { MedicalInstitutionUpdateComponent } from './medical-institutions/medical-institutions-update.component';
 import { MedicalInstitutionDetailComponent } from './medical-institutions/medical-institutions-detail.component';
+import { PositionsDetailComponent } from './positions/positions-detail.component';
+import { CandidateTestComponent } from './selection-process/candidate-test.component';
+import { DocumentManagementComponent } from './document-management/document-management.component';
+import { DocumentManagementAddComponent } from './document-management/document-management-edit.component';
+import { DocumentManagementDetailComponent } from './document-management/document-management-detail.component';
+import { CallReferenceComponent } from './selection-process/call-reference.component';
+
+// Cuestionarios
+import { QuestionnairesComponent } from './questionnaires/questionnaires.component';
+import { QuestionnairesAddComponent } from './questionnaires/questionnaires-add.component';
+import { QuestionnairesUpdateComponent } from './questionnaires/questionnaires-update.component';
+import { SolutionsQuestionnairesComponent } from './questionnaires/solutions-questionnaire/solutions-questionnaires.component';
+import { SolutionsQuestionnairesDetailComponent } from './questionnaires/solutions-questionnaire/solutions-questionnaires-detail.component';
+
+import { MedicalExamComponent } from './selection-process/medical-exam.component';
+import { MedicalExamInformedConsentComponent } from './employees-clinical-information/informed-consent.component';
+import { AnswerExamsComponent } from './medical-institutions/answer-exams.component';
+import { EmployeesAttachmentsComponent } from './employees-attatchments/employees-attachments.component';
+import {PositionsDetailPdfComponent} from "./positions/positions-detail-pdf.component";
+import { CandidateContractingComponent } from './selection-process/candidate-contracting.component';
+import { EmployeeEventualitiesComponent } from './employees-eventualities/employees-eventualities.component';
+import { EmployeeEventualitiesAddComponent } from './employees-eventualities/employee-eventualities-edit.component';
+import { EventualitiesComponent } from './eventualities/eventualities.component';
+import { EventualitiesEditComponent } from './eventualities/eventualities-edit.component';
+import { EventualitiesDetailComponent } from './eventualities/eventualities-detail.component';
+
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
@@ -227,6 +255,9 @@ const routes = [
    {
       path: 'employees/detail/:tercero/no-formal-studies/update/:id', component: NoFormalStudiesUpdateComponent, canActivate: [ AuthGuard ]
    },
+
+   // Adjuntos de tercero
+   { path: 'employees/detail/:tercero/employees-attachments', component: EmployeesAttachmentsComponent, canActivate: [ AuthGuard ] },
 
    // Experiencia laboral
 
@@ -315,6 +346,8 @@ const routes = [
    { path: 'positions/add', component: PositionsAddComponent, canActivate: [ AuthGuard ] },
    { path: 'positions/add/:id', component: PositionsAddComponent, canActivate: [ AuthGuard ] },
    { path: 'positions/update/:id', component: PositionsUpdateComponent, canActivate: [ AuthGuard ] },
+   { path: 'positions/detail/:id', component: PositionsDetailComponent },
+   { path: 'positions/detail-pdf/:id', component: PositionsDetailPdfComponent },
 
    //  Estrctura Organizacional
    { path: 'organizational-structure', component: OrganizationalStructureComponent, canActivate: [ AuthGuard ] },
@@ -355,8 +388,6 @@ const routes = [
    { path: 'personnel-requirement/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'personnel-requirement/historical/:id', component: PersonnelRequirementHistoricalComponent, canActivate: [ AuthGuard ] },
 
-
-
    //  cargos
    //  cargos factores de riesgo
    { path: 'position-risk/:idCargo', component: RiskComponent, canActivate: [ AuthGuard ] },
@@ -366,11 +397,17 @@ const routes = [
 
    // Administracion
    { path: 'menus', component: MenuManagerComponent, canActivate: [ AuthGuard ] },
- // Intituciones medicas
+   // Intituciones medicas
    { path: 'medical-institutions', component: MedicalInstitutionsComponent, canActivate: [ AuthGuard ] },
    { path: 'medical-institutions/add', component: MedicalInstitutionAddComponent, canActivate: [ AuthGuard ] },
    { path: 'medical-institutions/update/:id', component: MedicalInstitutionUpdateComponent, canActivate: [ AuthGuard ] },
    { path: 'medical-institutions/detail/:id', component: MedicalInstitutionDetailComponent, canActivate: [ AuthGuard ] },
+
+   // Vacantes
+   { path: 'document-management', component: DocumentManagementComponent, canActivate: [ AuthGuard ] },
+   { path: 'document-management/add', component: DocumentManagementAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'document-management/update/:idEmpDoc', component: DocumentManagementAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'document-management/detail/:idEmpDoc', component: DocumentManagementDetailComponent, canActivate: [ AuthGuard ] },
 
    // Vacantes
    { path: 'vacancies', component: VacanciesComponent, canActivate: [ AuthGuard ] },
@@ -378,20 +415,79 @@ const routes = [
    { path: 'vacancies/approve/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
    { path: 'vacancies/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
 
+   // Colaborador novedades
+   { path: 'employee-eventualities', component: EmployeeEventualitiesComponent },
+   { path: 'employee-eventualities/add/:idTercero/:idTerceroNovedad', component: EmployeeEventualitiesAddComponent },
+   // { path: 'vacancies/update/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
+   // { path: 'vacancies/approve/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
+   // { path: 'vacancies/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
+
    // Preceso de selección
    { path: 'selection-process', component: SelectionProcessComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/add-publication/:idReq', component: SelectionProcessAddComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/active-publications', component: SelectionProcessVacanciesComponent, canActivate: [ AuthGuard ] },
    { path: 'selection-process/publications-detail/:idPublication', component: VacancyDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'step-list', component: StepListComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/add-step', component: StepEditComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/update-step/:idStep', component: StepEditComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
+   { path: 'step-list/add-step', component: StepEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'step-list/update-step/:idStep', component: StepEditComponent, canActivate: [ AuthGuard ] },
+   { path: 'step-list/detail-step/:idStep', component: StepDetailComponent, canActivate: [ AuthGuard ] },
+   {
+      path: 'selection-process/process-step/:idStep/publication/:idPublication/candidate/:idCandidate/process/:idProceso',
+      component: StepProcessComponent, canActivate: [ AuthGuard ]
+   },
    { path: 'selection-process/candidates-list/:idPublication', component: CandidatesComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso', component: CentralRiskComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/process-step/candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: CandidateRevisionComponent, canActivate: [ AuthGuard ] },
-   { path: 'selection-process/process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso', component: StepProcessComponent, canActivate: [ AuthGuard ] },
+   {
+      path: 'selection-process/process-step/:idStep/centralRisk/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: CentralRiskComponent, canActivate: [ AuthGuard ]
+   },
+   {
+      path: 'selection-process/process-step/candidate-revision/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: CandidateRevisionComponent, canActivate: [ AuthGuard ]
+   },
+   {
+      path: 'selection-process/process-step/candidate-test/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: CandidateTestComponent, canActivate: [ AuthGuard ]
+   },
+   {
+      path: 'selection-process/process-step/contracting/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: CandidateContractingComponent, canActivate: [ AuthGuard ]
+   },
+   {
+      path: 'selection-process/process-step/call-reference/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: CallReferenceComponent
+   },
+   {
+      path: 'selection-process/process-step/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: StepProcessComponent, canActivate: [ AuthGuard ]
+   },
+   {
+      path: 'selection-process/process-step/medical-exam/:idStep/terceroPublication/:idTerceroPublication/process/:idProceso',
+      component: MedicalExamComponent
+   },
+
+   // consentimiento informado
+   { path: 'informed-consent/exam/:idExamen/terceroPublicacion/:idTerceroPublication', component: MedicalExamInformedConsentComponent },
+   { path: 'answer-exams/exam/:idExamen/terceroPublicacion/:idTerceroPublication', component: AnswerExamsComponent },
+
+   // Aplicar a vacantes
+   { path: 'apply-vacancy/publications-detail/:idPublication', component: VacancyApplyComponent, canActivate: [ AuthGuard ] },
+   {
+      path: 'apply-vacancy/employee-profile/:idTercerosPublicaciones', component: EmployeesDetailPerfilComponent, canActivate: [ AuthGuard ]
+   },
+   { path: 'apply-vacancy/questionnaires/:idTercerosPublicaciones', component: ApplyQuestionnairesComponent, canActivate: [ AuthGuard ] },
+   { path: 'apply-vacancy/active-publications', component: SelectionProcessVacanciesComponent, canActivate: [ AuthGuard ] },
+
+   { path: 'eventualities', component: EventualitiesComponent },
+   { path: 'eventualities/add', component: EventualitiesEditComponent },
+   { path: 'eventualities/update/:idEventuality', component: EventualitiesEditComponent },
+   { path: 'eventualities/detail/:idEventuality', component: EventualitiesDetailComponent },
+
+   //  Cuestionarios
+   { path: 'solutions/:id', component: SolutionsQuestionnairesComponent },
+   { path: 'solutions/detail/:id', component: SolutionsQuestionnairesDetailComponent },
+   { path: 'questionnaries', component: QuestionnairesComponent, canActivate: [ AuthGuard ] },
+   { path: 'questionnaries/add', component: QuestionnairesAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'questionnaries/update/:id', component: QuestionnairesUpdateComponent, canActivate: [ AuthGuard ] },
+
 ];
 
 @NgModule( {

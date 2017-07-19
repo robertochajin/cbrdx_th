@@ -18,12 +18,13 @@
          <form name="formulario" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                <div class="row">
-                  <div class="form-group col-md-6">
+	               <div class="form-group col-md-6" *hasPermission="seccion1.IDTIPOPERSONA ? seccion1.IDTIPOPERSONA : defaultCampo">
                      <label for="NGpersonTypes">{{'EMPLOYEES.LBL_NATURALEZA' | translate}}</label>
                      <p-dropdown id="NGpersonTypes" name="NGpersonTypes" required="true"
                                  [options]="personTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idTipoPersona"
                                  #NGpersonTypes="ngModel"
+                                 [disabled]="seccion1.IDTIPOPERSONA.editable === false"
                      ></p-dropdown>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGpersonTypes.valid">
@@ -31,13 +32,14 @@
                         {{'EMPLOYEES.LBL_NATURALEZA' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
-                  <div class="form-group col-md-6">
+	               <div class="form-group col-md-6" *hasPermission="seccion1.IDTIPODOCUMENTO ? seccion1.IDTIPODOCUMENTO : defaultCampo">
                      <label for="NGdocumentTypes">{{ 'LBL_TIPODOCUMENTO' | translate }}</label>
                      <p-dropdown id="NGdocumentTypes" name="NGdocumentTypes" required="true"
                                  [options]="documentTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idTipoDocumento"
                                  #NGdocumentTypes="ngModel"
                                  (onChange)="updateDate()"
+                                 [disabled]="seccion1.IDTIPODOCUMENTO.editable === false"
                      ></p-dropdown>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGdocumentTypes.valid">
@@ -47,7 +49,7 @@
                   </div>
                </div>
                <div class="row">
-                  <div class="form-group col-md-8">
+	               <div class="form-group col-md-8" *hasPermission="seccion1.NUMERODOCUMENTO ? seccion1.NUMERODOCUMENTO : defaultCampo">
                      <label for="numeroDocumento">{{ 'LBL_NUMERODOCUMENTO' | translate }}</label>
                      <input id="numeroDocumento" type="text" pInputText name="numeroDocumento"
                             [(ngModel)]="employee.numeroDocumento"
@@ -61,13 +63,14 @@
                         {{ 'LBL_NUMERODOCUMENTO' | translate }} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
-                  <div class="form-group col-md-4">
+	               <div class="form-group col-md-4" *hasPermission="seccion1.FECHADOCUMENTO ? seccion1.FECHADOCUMENTO : defaultCampo">
                      <label for="NGexpeditionDate">{{'EMPLOYEES.LBL_FECHAEXPEDICION' | translate}}</label>
 	                  <p-calendar id="NGexpeditionDate" name="NGexpeditionDate" [showIcon]="true"
-	                              [maxDate]="maxDateDocumento"  [minDate]="minDateDocumento" [monthNavigator]="true" [yearNavigator]="true"
+	                              [maxDate]="maxDateDocumento" [minDate]="minDateDocumento" [monthNavigator]="true" [yearNavigator]="true"
 	                              [yearRange]="range" [locale]="es" readonlyInput="readonlyInput" dateFormat="yy'-'mm'-'dd"
 	                              dataType="date" #NGexpeditionDate="ngModel" required="true"
 	                              [(ngModel)]="employee.fechaDocumento" (onSelect)="onExpeditionDate($event)"
+	                              [disabled]="seccion1.FECHADOCUMENTO.editable === false"
 	                  ></p-calendar>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGexpeditionDate.valid">
@@ -77,14 +80,17 @@
                   </div>
                </div>
                <div class="row">
-                  <div class="form-group col-md-12">
+	               <div class="form-group col-md-12"
+	                    *hasPermission="seccion1.IDCIUDADEXPDOCUMENTO ? seccion1.IDCIUDADEXPDOCUMENTO : defaultCampo">
                      <label for="expCity">{{'EMPLOYEES.LBL_CIUDADEXPEDICION' | translate}}</label>
                      <p-autoComplete placeholder="Ciudad de expedición " field="camino" name="expCity" id="expCity"
                                      #expCity="ngModel" required="true"
                                      [(ngModel)]="ciudadExpDocumento"
                                      [suggestions]="resultExpeditionCity"
                                      (completeMethod)="searchExpeditionCity($event)"
-                                     (onSelect)="captureExpeditionCity($event)">
+                                     (onSelect)="captureExpeditionCity($event)"
+                                     [disabled]="seccion1.IDCIUDADEXPDOCUMENTO.editable === false"
+                     >
                      </p-autoComplete>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !expCity.valid">
@@ -94,7 +100,7 @@
                   </div>
                </div>
                <div class="row">
-                  <div class="form-group col-md-6">
+	               <div class="form-group col-md-6" *hasPermission="seccion1.PRIMERNOMBRE ? seccion1.PRIMERNOMBRE : defaultCampo">
                      <label for="primerNombre">{{'EMPLOYEES.LBL_PRIMER' | translate}}</label>
                      <input type="text" pInputText id="primerNombre" name="primerNombre" maxlength="64"
                             [(ngModel)]="employee.primerNombre" #primerNombre="ngModel" (keyup)="capitalize($event)"
@@ -105,7 +111,7 @@
                         {{'EMPLOYEES.LBL_PRIMER' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
-                  <div class="form-group col-md-6">
+	               <div class="form-group col-md-6" *hasPermission="seccion1.SEGUNDONOMBRE ? seccion1.SEGUNDONOMBRE : defaultCampo">
                      <label for="segundoNombre">{{'EMPLOYEES.LBL_SEGUNDO' | translate}}</label>
                      <input type="text" pInputText id="segundoNombre" name="segundoNombre" maxlength="64"
                             [(ngModel)]="employee.segundoNombre" #segundoNombre="ngModel" (keyup)="capitalize($event)"
@@ -113,7 +119,7 @@
                   </div>
                </div>
                <div class="row">
-                  <div class="form-group col-md-6">
+	               <div class="form-group col-md-6" *hasPermission="seccion1.PRIMERAPELLIDO ? seccion1.PRIMERAPELLIDO : defaultCampo">
                      <label for="primerApellido">{{'EMPLOYEES.LBL_PRIMERAPELLIDO' | translate}}</label>
                      <input type="text" pInputText id="primerApellido" name="primerApellido" maxlength="64"
                             [(ngModel)]="employee.primerApellido" #primerApellido="ngModel" (keyup)="capitalize($event)"
@@ -124,7 +130,7 @@
                         {{'EMPLOYEES.LBL_PRIMERAPELLIDO' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
-                  <div class="form-group col-md-6">
+	               <div class="form-group col-md-6" *hasPermission="seccion1.SEGUNDOAPELLIDO ? seccion1.SEGUNDOAPELLIDO : defaultCampo">
                      <label for="segundoApellido">{{'EMPLOYEES.LBL_SEGUNDOAPELLIDO' | translate}}</label>
                      <input type="text" pInputText id="segundoApellido" name="segundoApellido" maxlength="64"
                             [(ngModel)]="employee.segundoApellido" #segundoApellido="ngModel"
@@ -133,26 +139,30 @@
                   </div>
                </div>
                <div class="row">
-                  <div class="form-group col-md-4">
+	               <div class="form-group col-md-4" *hasPermission="seccion1.FECHANACIMIENTO ? seccion1.FECHANACIMIENTO : defaultCampo">
                      <label for="NGbirthDate">{{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate}}</label>
 	                  <p-calendar id="NGbirthDate" name="NGbirthDate" [showIcon]="true" dateFormat="yy'-'mm'-'dd"
 	                              [maxDate]="maxDateBirth" [monthNavigator]="true" [yearNavigator]="true"
 	                              [locale]="es" readonlyInput="readonlyInput" [yearRange]="range"
 	                              dataType="date" #NGbirthDate="ngModel" [required]="true"
 	                              [(ngModel)]="employee.fechaNacimiento" (onSelect)="onBirthDate($event)"
+	                              [disabled]="seccion1.FECHANACIMIENTO.editable === false"
 	                  ></p-calendar>
                      <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !NGbirthDate.valid">
                         {{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
-                  <div class="form-group col-md-8">
+	               <div class="form-group col-md-8"
+	                    *hasPermission="seccion1.IDCIUDADNACIMIENTO ? seccion1.IDCIUDADNACIMIENTO : defaultCampo">
                      <label for="birthPlace">{{'EMPLOYEES.LBL_CIUDADNACIMIENTO' | translate}}</label>
                      <p-autoComplete placeholder="Lugar de nacimieto" field="camino" name="birthPlace" id="birthPlace"
                                      #birthPlace="ngModel" required="true"
                                      [(ngModel)]="ciudadNacimiento"
                                      [suggestions]="resultBirthPlace"
                                      (completeMethod)="searchBirthPlace($event)"
-                                     (onSelect)="captureBirthPlace($event)">
+                                     (onSelect)="captureBirthPlace($event)"
+                                     [disabled]="seccion1.IDCIUDADNACIMIENTO.editable === false"
+                     >
                      </p-autoComplete>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !birthPlace.valid">
@@ -162,12 +172,13 @@
                   </div>
                </div>
                <div class="row">
-                  <div class="form-group col-md-6">
+	               <div class="form-group col-md-6" *hasPermission="seccion1.IDGENERO ? seccion1.IDGENERO : defaultCampo">
                      <label for="NGgenderTypes">{{'EMPLOYEES.LBL_GENERO' | translate}}</label>
                      <p-dropdown id="NGgenderTypes" name="NGgenderTypes" required="true"
                                  [options]="genderTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idGenero"
                                  #NGgenderTypes="ngModel"
+                                 [disabled]="seccion1.IDGENERO.editable === false"
                      ></p-dropdown>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGgenderTypes.valid">
@@ -175,12 +186,13 @@
                         {{'EMPLOYEES.LBL_GENERO' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
-                  <div class="form-group col-md-6">
+	               <div class="form-group col-md-6" *hasPermission="seccion1.IDESTADOCIVIL ? seccion1.IDESTADOCIVIL : defaultCampo">
                      <label for="NGmaritalStatusTypes">{{'EMPLOYEES.LBL_ESTADOCIVIL' | translate}}</label>
                      <p-dropdown id="NGmaritalStatusTypes" name="NGmaritalStatusTypes" required="true"
                                  [options]="maritalStatusTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idEstadoCivil"
                                  #NGmaritalStatusTypes="ngModel"
+                                 [disabled]="seccion1.IDESTADOCIVIL.editable === false"
                      ></p-dropdown>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGmaritalStatusTypes.valid">
@@ -188,12 +200,13 @@
                         {{'EMPLOYEES.LBL_ESTADOCIVIL' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
-                  <div class="form-group col-md-6">
+	               <div class="form-group col-md-6" *hasPermission="seccion1.IDFACTORRH ? seccion1.IDFACTORRH : defaultCampo">
                      <label for="NGrhRactorTypes">{{'EMPLOYEES.LBL_FACTORRH' | translate}} </label>
                      <p-dropdown id="NGrhRactorTypes" name="NGrhRactorTypes" required="true"
                                  [options]="rhRactorTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idFactorRh"
                                  #NGrhRactorTypes="ngModel"
+                                 [disabled]="seccion1.IDFACTORRH.editable === false"
                      ></p-dropdown>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGrhRactorTypes.valid">
@@ -201,12 +214,13 @@
                         {{'EMPLOYEES.LBL_FACTORRH' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
-                  <div class="form-group col-md-6">
+	               <div class="form-group col-md-6" *hasPermission="seccion1.IDCOBERTURASALUD ? seccion1.IDCOBERTURASALUD : defaultCampo">
                      <label for="NGhealthTypes">{{'EMPLOYEES.LBL_COBERTURASALUD' | translate}}</label>
                      <p-dropdown id="NGhealthTypes" name="NGhealthTypes" required="true"
                                  [options]="healthTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idCoberturaSalud"
                                  #NGhealthTypes="ngModel"
+                                 [disabled]="seccion1.IDCOBERTURASALUD.editable === false"
                      ></p-dropdown>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGhealthTypes.valid">
@@ -216,12 +230,13 @@
                   </div>
                </div>
                <div class="row">
-                  <div class="form-group col-md-6">
+	               <div class="form-group col-md-6" *hasPermission="seccion1.IDTIPOAFILIACION ? seccion1.IDTIPOAFILIACION : defaultCampo">
                      <label for="NGaffiliationType">{{'EMPLOYEES.LBL_AFILIACION' | translate}}</label>
                      <p-dropdown id="NGaffiliationType" name="NGaffiliationType" required="true"
                                  [options]="affiliationTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idTipoAfiliacion"
                                  #NGaffiliationType="ngModel"
+                                 [disabled]="seccion1.IDTIPOAFILIACION.editable === false"
                      ></p-dropdown>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGaffiliationType.valid">
@@ -229,12 +244,13 @@
                         {{'EMPLOYEES.LBL_AFILIACION' | translate}} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
-                  <div class="form-group col-md-6">
+	               <div class="form-group col-md-6" *hasPermission="seccion1.IDNIVELEDUCACION ? seccion1.IDNIVELEDUCACION : defaultCampo">
                      <label for="NGacademicLevelTypes">{{'EMPLOYEES.LBL_NIVELESTUDIOS' | translate}}</label>
                      <p-dropdown id="NGacademicLevelTypes" name="NGacademicLevelTypes" required="true"
                                  [options]="academicLevelTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idNivelEducacion"
                                  #NGacademicLevelTypes="ngModel"
+                                 [disabled]="seccion1.IDNIVELEDUCACION.editable === false"
                      ></p-dropdown>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGacademicLevelTypes.valid">
@@ -244,12 +260,13 @@
                   </div>
                </div>
                <div class="row">
-                  <div class="form-group col-md-12">
+	               <div class="form-group col-md-12" *hasPermission="seccion1.IDTIPOOCUPACION ? seccion1.IDTIPOOCUPACION : defaultCampo">
                      <label for="NGoccupationsTypes">{{'EMPLOYEES.LBL_TIPOOCUPACION' | translate}}</label>
                      <p-dropdown id="NGoccupationsTypes" name="NGoccupationsTypes" required="true"
                                  [options]="occupationsTypes" [autoWidth]="false"
                                  [(ngModel)]="employee.idTipoOcupacion"
                                  #NGoccupationsTypes="ngModel"
+                                 [disabled]="seccion1.IDTIPOOCUPACION.editable === false"
                      ></p-dropdown>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGoccupationsTypes.valid">
@@ -258,55 +275,65 @@
                      </div>
                   </div>
                   <div class="form-group col-md-12" *ngIf="employee.idTipoOcupacion == 2">
-                     <label for="NGoccupations">{{'EMPLOYEES.LBL_OCUPACION' | translate}}</label>
-                     <p-dropdown id="NGoccupations" name="NGoccupations" required="true" filter="filter"
-                                 [options]="occupations" [autoWidth]="false"
-                                 [(ngModel)]="employee.idOcupacion"
-                                 #NGoccupations="ngModel"
-                     ></p-dropdown>
-                     <div class="ui-message ui-messages-error ui-corner-all"
-                          *ngIf="f.submitted && !NGoccupations.valid">
-                        <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_OCUPACION' | translate}} {{'LBL_REQUERIDO' | translate}}
-                     </div>
+	                  <div *hasPermission="seccion1.IDOCUPACION ? seccion1.IDOCUPACION : defaultCampo">
+		                  <label for="NGoccupations">{{'EMPLOYEES.LBL_OCUPACION' | translate}}</label>
+		                  <p-dropdown id="NGoccupations" name="NGoccupations" required="true" filter="filter"
+		                              [options]="occupations" [autoWidth]="false"
+		                              [(ngModel)]="employee.idOcupacion"
+		                              #NGoccupations="ngModel"
+		                              [disabled]="seccion1.IDOCUPACION.editable === false"
+		                  ></p-dropdown>
+		                  <div class="ui-message ui-messages-error ui-corner-all"
+		                       *ngIf="f.submitted && !NGoccupations.valid">
+			                  <i class="fa fa-close"></i>
+			                  {{'EMPLOYEES.LBL_OCUPACION' | translate}} {{'LBL_REQUERIDO' | translate}}
+		                  </div>
+	                  </div>
                   </div>
                </div>
                <div class="row">
                   <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 1">
-                     <label for="NGsector">{{'EMPLOYEES.LBL_SECTOR' | translate}}</label>
-                     <p-dropdown id="NGsector" name="NGsector" required="true"
-                                 [options]="sector" [autoWidth]="false"
-                                 [(ngModel)]="employee.idSectorEconomico"
-                                 #NGsector="ngModel"
-                                 (onChange)="updateActivities($event.value)"
-                     ></p-dropdown>
-                     <div class="ui-message ui-messages-error ui-corner-all"
-                          *ngIf="f.submitted && !NGsector.valid">
-                        <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_SECTOR' | translate}} {{'LBL_REQUERIDO' | translate}}
-                     </div>
+	                  <div *hasPermission="seccion1.IDSECTORECONOMICO ? seccion1.IDSECTORECONOMICO : defaultCampo">
+		                  <label for="NGsector">{{'EMPLOYEES.LBL_SECTOR' | translate}}</label>
+		                  <p-dropdown id="NGsector" name="NGsector" required="true"
+		                              [options]="sector" [autoWidth]="false"
+		                              [(ngModel)]="employee.idSectorEconomico"
+		                              #NGsector="ngModel"
+		                              (onChange)="updateActivities($event.value)"
+		                              [disabled]="seccion1.IDSECTORECONOMICO.editable === false"
+		                  ></p-dropdown>
+		                  <div class="ui-message ui-messages-error ui-corner-all"
+		                       *ngIf="f.submitted && !NGsector.valid">
+			                  <i class="fa fa-close"></i>
+			                  {{'EMPLOYEES.LBL_SECTOR' | translate}} {{'LBL_REQUERIDO' | translate}}
+		                  </div>
+	                  </div>
                   </div>
                   <div class="form-group col-md-6" *ngIf="employee.idTipoOcupacion == 1">
-                     <label for="NGactivities">{{'EMPLOYEES.LBL_ACTIVIDAD' | translate}}</label>
-                     <p-dropdown id="NGactivities" name="NGactivities" required="true" filter="filter"
-                                 [options]="activities" [autoWidth]="false"
-                                 [(ngModel)]="employee.idActividadEconomica"
-                                 #NGactivities="ngModel"
-                     ></p-dropdown>
-                     <div class="ui-message ui-messages-error ui-corner-all"
-                          *ngIf="f.submitted && !NGactivities.valid">
-                        <i class="fa fa-close"></i>
-                        {{'EMPLOYEES.LBL_ACTIVIDAD' | translate}} {{'LBL_REQUERIDO' | translate}}
-                     </div>
+	                  <div *hasPermission="seccion1.IDACTIVIDADECONOMICA ? seccion1.IDACTIVIDADECONOMICA : defaultCampo">
+		                  <label for="NGactivities">{{'EMPLOYEES.LBL_ACTIVIDAD' | translate}}</label>
+		                  <p-dropdown id="NGactivities" name="NGactivities" required="true" filter="filter"
+		                              [options]="activities" [autoWidth]="false"
+		                              [(ngModel)]="employee.idActividadEconomica"
+		                              #NGactivities="ngModel"
+		                              [disabled]="seccion1.IDACTIVIDADECONOMICA.editable === false"
+		                  ></p-dropdown>
+		                  <div class="ui-message ui-messages-error ui-corner-all"
+		                       *ngIf="f.submitted && !NGactivities.valid">
+			                  <i class="fa fa-close"></i>
+			                  {{'EMPLOYEES.LBL_ACTIVIDAD' | translate}} {{'LBL_REQUERIDO' | translate}}
+		                  </div>
+	                  </div>
                   </div>
                </div>
                <div class="row">
-                  <div class="form-group col-md-6">
+	               <div class="form-group col-md-6" *hasPermission="seccion1.IDESTADOJURIDICO ? seccion1.IDESTADOJURIDICO : defaultCampo">
                      <label for="juridico">{{'EMPLOYEES.LBL_JURIDICO' | translate }}</label>
                      <p-dropdown id="juridico" name="juridico" required="true"
                                  [options]="juridicos" [autoWidth]="false"
                                  [(ngModel)]="employee.idEstadoJuridico"
                                  #juridico="ngModel"
+                                 [disabled]="seccion1.IDESTADOJURIDICO.editable === false"
                      ></p-dropdown>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !juridico.valid">
@@ -314,37 +341,67 @@
                         {{'EMPLOYEES.LBL_JURIDICO' | translate }} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
+	               <div class="form-group col-md-6">
+		               <label>{{'LBL_ADJUNTAR' | translate}} </label>
+		               <div *ngIf="((employee.idAdjunto != null))" class="btn-group" role="group" style="display: block;">
+			               <a class="btn btn-default" style="max-width: 87%; overflow: hidden;" (click)="downloadFile(employee.idAdjunto)">
+				               <i class="fa fa-file-o" aria-hidden="true"></i>
+				               {{dataUploadArchivo}}
+			               </a>
+			               <a class="btn btn-danger" (click)="uploadAgain(false)">
+				               <i class="fa fa-times" aria-hidden="true"></i>
+			               </a>
+		               </div>
+		               <p-fileUpload *ngIf="((employee.idAdjunto == null))" name="file" url="{{svcThUrl}}" auto="true"
+		                             class="upload-avatar"
+		                             chooseLabel="{{'LBL_ADJUNTAR' | translate}}"
+		                             (onBeforeSend)="onBeforeSend($event)"
+		                             (onSelect)="onSelect($event, $event.files)"
+		                             (onUpload)="uploadingOk($event)"
+		                             maxFileSize="{{fsize}}" accept="{{ftype}}"
+		               >
+		               </p-fileUpload>
+	               </div>
                </div>
                <div class="row">
-                  <div class="form-group col-md-3">
+	               <div class="form-group col-md-3"
+	                    *hasPermission="seccion1.INDICADORHABILITADO ? seccion1.INDICADORHABILITADO : defaultCampo">
                      <label for="indicador" class="control-label col-sm-3">{{'LBL_HABILITADO' | translate
                         }}</label>
                      <div class=" col-sm-9">
                         <p-checkbox binary="true" id="indicador" name="indicador"
                                     [(ngModel)]="employee.indicadorHabilitado"
-                                    #indicador="ngModel"></p-checkbox>
+                                    #indicador="ngModel"
+                                    [disabled]="seccion1.INDICADORHABILITADO.editable === false"
+                        ></p-checkbox>
                      </div>
                   </div>
                </div>
                <div class="row">
-                  <div class="form-group col-md-3">
+	               <div class="form-group col-md-3" *hasPermission="seccion1.INDICADORVIVO ? seccion1.INDICADORVIVO : defaultCampo">
                      <label for="Ngalive">{{'EMPLOYEES.LBL_VIVO' | translate}}</label>
                      <p-checkbox id="Ngalive" name="Ngalive" binary="true"
                                  [(ngModel)]="employee.indicadorVivo"
-                                 #Ngalive="ngModel"></p-checkbox>
+                                 #Ngalive="ngModel"
+                                 [disabled]="seccion1.INDICADORVIVO.editable === false"
+                     ></p-checkbox>
                   </div>
                   <div class="form-group col-md-3" *ngIf="employee.indicadorVivo == false">
-                     <label for="NGdeathDate">{{'EMPLOYEES.LBL_FECHADEFUNCION' | translate}}</label>
-                     <p-calendar id="NGdeathDate" name="NGdeathDate" [locale]="es" [showIcon]="true"
-                                 [maxDate]="today"  dateFormat="yy'-'mm'-'dd" readonlyInput="readonlyInput"
-                                 dataType="date" #NGdeathDate="ngModel" [required]="!employee.indicadorVivo"
-                                 [(ngModel)]="employee.fechaDefuncion" (onSelect)="onDeathDate($event)"
-                     ></p-calendar>
-                     <div class="ui-message ui-messages-error ui-corner-all"
-                          *ngIf="f.submitted && !employee.indicadorVivo && !NGdeathDate.valid">
-                        {{'EMPLOYEES.LBL_FECHADEFUNCIONREQUERIDA' | translate}}
-                     </div>
+	                  <div *hasPermission="seccion1.FECHADEFUNCION ? seccion1.FECHADEFUNCION : defaultCampo">
+		                  <label for="NGdeathDate">{{'EMPLOYEES.LBL_FECHADEFUNCION' | translate}}</label>
+		                  <p-calendar id="NGdeathDate" name="NGdeathDate" [locale]="es" [showIcon]="true"
+		                              [maxDate]="today" dateFormat="yy'-'mm'-'dd" readonlyInput="readonlyInput"
+		                              dataType="date" #NGdeathDate="ngModel" [required]="!employee.indicadorVivo"
+		                              [(ngModel)]="employee.fechaDefuncion" (onSelect)="onDeathDate($event)"
+		                              [disabled]="seccion1.FECHADEFUNCION.editable === false"
+		                  ></p-calendar>
+		                  <div class="ui-message ui-messages-error ui-corner-all"
+		                       *ngIf="f.submitted && !employee.indicadorVivo && !NGdeathDate.valid">
+			                  {{'EMPLOYEES.LBL_FECHADEFUNCIONREQUERIDA' | translate}}
+		                  </div>
+	                  </div>
                   </div>
+
                </div>
 
             </div>

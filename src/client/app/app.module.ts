@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
-import { HttpModule, Http } from '@angular/http';
+import { HttpModule, Http, JsonpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { WindowRefService } from './_services/window-ref.service';
@@ -73,14 +73,22 @@ import { PersonnelRequirementModule } from './personnel-requirement/personnel-re
 import { VacanciesModule } from './vacancies/vacancies.module';
 // Proceso de seleción
 import { SelectionProcessModule } from './selection-process/selection-process.module';
-import { AdjuntosModule } from './adjuntos/adjuntos.module';
 
 // Instituciones medicas
 import { MedicalInstitutionModule } from './medical-institutions/medical-institutions.module';
+import { PermissionService } from './_services/permission.service';
+import { DocumentManagementModule } from './document-management/document-management.module';
+
+// Cuestionarios
+import { QuestionnairesModule } from './questionnaires/questionnaires.module';
+import { EmployeesAttachmentsModule } from './employees-attatchments/employees-attachments.module';
+import { EventualitiesModule } from './eventualities/eventualities.module';
+import { EmployeeEventualitiesModule } from './employees-eventualities/employees-eventualities.module';
 
 // CarsModule,
 @NgModule( {
               imports: [ BrowserModule, HttpModule, AppRoutingModule,
+                 JsonpModule,
                  MessagesModule,
                  EmployeesModule,
                  FamilyInformationModule,
@@ -134,10 +142,14 @@ import { MedicalInstitutionModule } from './medical-institutions/medical-institu
                  MenuManagerModule,
                  CompanyAssetsModule,
                  VacanciesModule,
-                 AdjuntosModule,
+                 EventualitiesModule,
                  SelectionProcessModule,
+                 DocumentManagementModule,
                  MedicalInstitutionModule,
+                 EmployeeEventualitiesModule,
+                 // EmployeesAttachmentsModule,
                  //AssignmentProfessionalModule
+                 QuestionnairesModule
               ],
 
               declarations: [ AppComponent ],
@@ -151,6 +163,7 @@ import { MedicalInstitutionModule } from './medical-institutions/medical-institu
                  AuthenticationService,
                  LoginService,
                  BreadcrumbService,
+                 PermissionService,
                  {
                     provide: APP_BASE_HREF,
                     useValue: '<%= APP_BASE %>',

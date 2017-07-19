@@ -1,0 +1,157 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+
+</p-confirmDialog>
+<div class="col-md-10 col-md-offset-1">
+	<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+		<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-2" *ngIf="documentManagement.idDocumentoTercero">
+					<label>{{ 'DOCMANAGMENT.LBL_CODIGO' | translate }}</label><br>
+					<label><strong>{{documentManagement.idDocumentoTercero}}</strong></label>
+				</div>
+				<div class="ui-grid-col-12">
+					<label for="nombre">{{ 'DOCMANAGMENT.LBL_NOMBRE' | translate }}</label>
+					<input id="nombre" name="nombre" #nombreDoc="ngModel" pInputText type="text" maxlength="200"
+					       (keyup)="capitalize($event)" [(ngModel)]="documentManagement.nombre" required/>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !nombreDoc.valid">
+						<i class="fa fa-close"></i>
+						{{ 'DOCMANAGMENT.LBL_NOMBRE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-8">
+					<label for="idTipoDocumento">{{ 'DOCMANAGMENT.LBL_TIPO' | translate }}</label>
+					<p-dropdown id="idTipoDocumento" name="idTipoDocumento" required="true"
+					            [options]="listTypeDoc" [autoWidth]="false"
+					            [(ngModel)]="documentManagement.idClasificacionDocumento"
+					            #idTipoDoc="ngModel"
+					></p-dropdown>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !idTipoDoc.valid">
+						<i class="fa fa-close"></i>
+						{{ 'DOCMANAGMENT.LBL_TIPO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+
+				</div>
+				<div class="ui-grid-col-4">
+					<label for="codigoinst">{{ 'DOCMANAGMENT.LBL_CODIGOINST' | translate }}</label>
+					<input id="codigoinst" name="codigoinst" #codInst="ngModel" pInputText type="text"
+					       (keyup)="inputCod($event)" required maxlength="50"
+					       [(ngModel)]="documentManagement.codigoInstitucional"/>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="(f.submitted && !codInst.valid )&& !anioValid">
+						<i class="fa fa-close"></i>
+						{{ 'DOCMANAGMENT.LBL_CODIGOINST' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-12">
+					<label for="descripcion">{{ 'DOCMANAGMENT.LBL_DESCRIPCION' | translate }}</label>
+					<textarea pInputTextarea id="descripcion" name="descripcion"
+					          [(ngModel)]="documentManagement.descripcion" #descrip="ngModel" maxlength="500"
+					          [required]="true"></textarea>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !descrip.valid">
+						<i class="fa fa-close"></i>
+						{{ 'DOCMANAGMENT.LBL_DESCRIPCION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-2">
+					<label for="vigencia">{{ 'DOCMANAGMENT.LBL_VIGENCIA' | translate }}</label>
+					<p-dropdown id="vigencia" name="vigencia" required="true"
+					            [options]="listValidity" [autoWidth]="false"
+					            [(ngModel)]="documentManagement.vigencia"
+					            #vigenc="ngModel"
+					></p-dropdown>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !vigenc.valid">
+						<i class="fa fa-close"></i>
+						{{ 'DOCMANAGMENT.LBL_VIGENCIA' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-3">
+					<label for="accion">{{ 'DOCMANAGMENT.LBL_ACCION' | translate }}</label>
+					<p-dropdown id="accion" name="accion" required="true"
+					            [options]="listAdjDes" [autoWidth]="false"
+					            [(ngModel)]="accion" (onChange)="changeAction()"
+					            #accio="ngModel"></p-dropdown>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !accio.valid">
+						<i class="fa fa-close"></i>
+						{{ 'DOCMANAGMENT.LBL_ACCION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-7" *ngIf="documentManagement.indicadorDescarga">
+					<label>{{'LBL_ADJUNTAR' | translate}} </label>
+					<div *ngIf="documentManagement.idAdjunto != null" class="btn-group" role="group" style="display: block;">
+						<a class="btn btn-default" style="max-width: 87%; overflow: hidden;" (click)="downloadFile(documentManagement.idAdjunto)">
+							<i class="fa fa-file-o" aria-hidden="true"></i>
+							{{dataUploadArchivo}}
+						</a>
+						<a class="btn btn-danger" (click)="uploadAgain(false)">
+							<i class="fa fa-times" aria-hidden="true"></i>
+						</a>
+					</div>
+					<p-fileUpload *ngIf="documentManagement.idAdjunto == null" name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
+					              chooseLabel="{{'LBL_ADJUNTAR' | translate}}"
+					              (onBeforeSend)="onBeforeSend($event)"
+					              (onSelect)="onSelect($event, $event.files)"
+					              (onUpload)="uploadingOk($event)"
+					              maxFileSize="{{fsize}}" accept="{{ftype}}">
+					</p-fileUpload>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && documentManagement.idAdjunto == null && documentManagement.indicadorDescarga">
+						<i class="fa fa-close"></i>
+						{{ 'DOCMANAGMENT.LBL_ADJUNTO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="col-md-12"></div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-4">
+					<p-checkbox binary="true" id="indicadorRC" name="indicadorRC"
+					            [(ngModel)]="documentManagement.indicadorContratacion"
+					            label="{{ 'DOCMANAGMENT.LBL_REQUERIDOCONTRATA' | translate }}"
+					            #indicador="ngModel"></p-checkbox>
+				</div>
+				
+				<div class="ui-grid-col-4">
+					<p-checkbox binary="true" id="indicadoraplica" name="indicadoraplica"
+					            [(ngModel)]="documentManagement.indicadorAplica"
+					            label="{{ 'DOCMANAGMENT.LBL_NOAPLCA' | translate }}"
+					            #indicador="ngModel"></p-checkbox>
+				</div>
+				<div class="ui-grid-col-4">
+					<p-checkbox binary="true" id="indicadorhabilitado" name="indicadorhabilitado"
+					            [(ngModel)]="documentManagement.indicadorHabilitado"
+					            label="{{ 'LBL_HABILITADO' | translate }}"
+					            #indicador="ngModel"></p-checkbox>
+				</div>
+			</div>
+			
+			<div class="ui-grid-row form-footer-buttons">
+				<div class="ui-grid-col-4"></div>
+				<div class="ui-grid-col-1">
+					<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+				</div>
+				<div class="ui-grid-col-2">
+					<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+				</div>
+				<div class="ui-grid-col-5"></div>
+			</div>
+		</div>
+	</form>
+</div>

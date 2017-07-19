@@ -11,6 +11,10 @@ import { DivisionPolitica } from '../_models/divisionPolitica';
 import { NavService } from '../_services/_nav.service';
 import { ListaService } from '../_services/lista.service';
 import { ListaItem } from '../_models/listaItem';
+import { JwtHelper } from 'angular2-jwt';
+import { AdjuntosService } from '../_services/adjuntos.service';
+import { ConstanteService } from '../_services/constante.service';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 
 @Component( {
                moduleId: module.id,
@@ -20,8 +24,8 @@ import { ListaItem } from '../_models/listaItem';
             } )
 
 export class FormalStudiesAddComponent implements OnInit {
-   @Input()
-   cityList: DivisionPolitica[] = [];
+   @Input() cityList: DivisionPolitica[] = [];
+   @Input() seccion: PermissionsEmployees;
    selectedCity: DivisionPolitica;
    fstudy: FormalStudies = new FormalStudies();
    header: string = 'Agregando Estudio Formal';
@@ -42,13 +46,35 @@ export class FormalStudiesAddComponent implements OnInit {
    wrongCity: boolean = true;
    wrongInstitute: boolean = false;
 
+   svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
+   dataUploadArchivo : any = '';
+   dataUploadUsuario : any = '';
+   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
+   jwtHelper: JwtHelper = new JwtHelper();
+   fsize: number = 50000000;
+   ftype: string = '';
+
    constructor( private academicEducationService: AcademicEducationService,
       private politicalDivisionService: PoliticalDivisionService,
       private listaService: ListaService,
       private route: ActivatedRoute,
       private location: Location,
       private confirmationService: ConfirmationService,
+      private adjuntosService: AdjuntosService,
+      private constanteService: ConstanteService,
       private _nav: NavService ) {
+      let token = localStorage.getItem( 'token' );
+      this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+      this.constanteService.getByCode( 'FTYPE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.ftype = data.valor;
+         }
+      } );
+      this.constanteService.getByCode( 'FSIZE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.fsize = Number( data.valor );
+         }
+      } );
    }
 
    ngOnInit() {
@@ -75,6 +101,7 @@ export class FormalStudiesAddComponent implements OnInit {
       this.maxDateFinal.setMonth( month );
       this.maxDateFinal.setFullYear( year );
       this.range = `${lastYear}:${year}`;
+
 
       this.listaService.getMasterDetails( 'ListasNivelesEstudios' ).subscribe( res => {
          this.studyLevelList.push( { label: 'Seleccione', value: null } );
@@ -201,6 +228,35 @@ export class FormalStudiesAddComponent implements OnInit {
          this.location.back();
       }
    }
+
+
+   uploadingOk( event: any ) {
+      let respuesta = JSON.parse(event.xhr.response);
+      if(respuesta.idAdjunto != null || respuesta.idAdjunto != undefined){
+         this.fstudy.idAdjunto = respuesta.idAdjunto;
+      }
+   }
+
+   onBeforeSend( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      event.formData.append( 'obj', obj.toString() );
+   }
+
+   onSelect(event:any, file:any){
+      this.dataUploadArchivo = file[0].name;
+      this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   }
+
+   uploadAgain(rta:boolean){
+      this.fstudy.idAdjunto = null;
+   }
+   downloadFile(id: number){
+      this.adjuntosService.downloadFile( id ).subscribe(res => {
+         window.location.assign(res);
+      });
+   }
+
 }
 
 

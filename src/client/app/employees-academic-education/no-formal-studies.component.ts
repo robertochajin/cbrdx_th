@@ -4,6 +4,7 @@ import { Noformalstudies } from './no-formal-studies';
 import { AcademicEducationService } from '../_services/academic-education.service';
 import { ConfirmationService } from 'primeng/primeng';
 import { Employee } from '../_models/employees';
+import { PermissionsEmployees } from '../_models/permissionsEmployees';
 
 @Component( {
                moduleId: module.id,
@@ -13,8 +14,8 @@ import { Employee } from '../_models/employees';
             } )
 export class NoFormalStudiesComponent implements OnInit {
 
-   @Input()
-   employee: Employee;
+   @Input() employee: Employee;
+   @Input() seccion: PermissionsEmployees;
    study: Noformalstudies = new Noformalstudies();
    dialogObjet: Noformalstudies = new Noformalstudies();
    nfstudies: Noformalstudies[];

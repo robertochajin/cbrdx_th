@@ -4,12 +4,23 @@
 			<h3 class="first">{{ 'EMPLOYEES.LBL_HOJADEVIDA' | translate }}</h3>
 		</div>
 	</div>
+
 	<div id="curriculum" class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<div class="row clearfix card-header perfil">
+			<a class="btn btn-primary pull-right" (click)="getPDF()" style="margin-top: -40px"
+				*ngIf="!loadingPdf">
+				<i class="fa fa-file-pdf-o" aria-hidden="true"></i> Generar PDF
+			</a>
+			<a class="btn btn-default pull-right" style="margin-top: -40px"
+				*ngIf="loadingPdf">
+				<i class="fa fa-refresh fa-spin fa-fw"></i> Generando PDF ...
+			</a>
+			<div id="CV">
+			<div id="CVBody" class="clearfix">
+			<div class="clearfix card-header perfil">
 				<div class="col-md-2">
 					<div class="thumbnail img-responsive">
-						<img src="/assets/images/perfil/avatar.jpg" alt="...">
+						<img src="{{svcThUrl}}/file/{{employee.imagen}}" alt="...">
 					</div>
 					<span>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</span><br/>
 					<span>{{fechaNacimicento}}</span>
@@ -20,7 +31,7 @@
 					<p>Sección para descripción del perfil</p>
 				</div>
 			</div>
-			<div class="row curriculum-content">
+			<div class="curriculum-content clearfix">
 				<div class="col-md-8"><!--principal-->
 					<div class="row">
 						<div class="col-md-12">
@@ -117,6 +128,8 @@
 				</div>
 			</div>
 		</div>
+			</div>
+		</div>
 	</div>
 
 </div>
@@ -124,5 +137,7 @@
 	<div class="form-group col-md-12">
 		<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
 		        pButton (click)="goBack()"></button>
+
 	</div>
 </div>
+<div id="canvas"></div>

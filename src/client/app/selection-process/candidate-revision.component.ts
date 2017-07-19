@@ -17,6 +17,8 @@ import { ListaItem } from '../_models/listaItem';
 
 import { JwtHelper } from 'angular2-jwt';
 import { RolesService } from '../_services/roles.service';
+import { MasterAnswersService } from '../_services/masterAnswers.service';
+import { MasterAnswers } from '../_models/masterAnswers';
 
 @Component( {
                moduleId: module.id,
@@ -32,16 +34,20 @@ export class CandidateRevisionComponent implements OnInit {
    public approvalOptions: SelectItem[] = [];
    public candidateProcess: CandidateProcess = new CandidateProcess();
    private es: any;
+   maestrosRespuestas: MasterAnswers[] = [];
+   showQuestionnaire = false;
    private minDate: Date = new Date();
    private stepStates: ListaItem[] = [];
    private desitionList: ListaItem[] = [];
    public responsables: SelectItem[] = [];
    private showCalendar = false;
-   private readonly = false;
+   private readonly = true;
+   svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
 
    usuarioLogueado: any;
    idRol: number;
    jwtHelper: JwtHelper = new JwtHelper();
+   private allTestApproved = true;
 
    constructor( public publicationsService: PublicationsService,
       private route: ActivatedRoute,
@@ -50,6 +56,7 @@ export class CandidateRevisionComponent implements OnInit {
       private listaService: ListaService,
       private confirmationService: ConfirmationService,
       private rolesService: RolesService,
+      private masterAnswersService: MasterAnswersService,
       private employeesService: EmployeesService,
       private vacanciesService: VacanciesService,
       private candidateProcessService: CandidateProcessService,
@@ -91,24 +98,52 @@ export class CandidateRevisionComponent implements OnInit {
                   } );
                   vacanciesService.getPublication( res.idPublicacion ).subscribe( pb => {
                      this.publication = pb;
+
+                     this.listaService.getMasterDetailsByCode( 'ListasEstadosRequerimientos', 'CRRD' ).subscribe( reqState => {
+
+                        this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
+                           this.stepStates = res;
+                           if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
+                              this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
+                              this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
+                                 this.candidateProcess = cp;
+                                 if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ||
+                                      this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado ||
+                                      reqState.idLista === this.publication.idEstado ) {
+                                    this.readonly = true;
+                                 } else {
+                                    this.readonly = false;
+                                 }
+                              } );
+                           } else {
+                              if ( reqState.idLista === this.publication.idEstado ) {
+                                 this.readonly = true;
+                              } else {
+                                 this.readonly = false;
+                                 this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
+                              }
+                           }
+                        } );
+
+                     } );
                   } );
                } );
 
-               this.listaService.getMasterDetails( 'ListasEstadosDiligenciados' ).subscribe( res => {
-                  this.stepStates = res;
-                  if ( params[ 'idProceso' ] !== undefined && params[ 'idProceso' ] !== null && +params[ 'idProceso' ] !== 0 ) {
-                     this.candidateProcess.idProcesoSeleccion = params[ 'idProceso' ];
-                     this.candidateProcessService.get( this.candidateProcess.idProcesoSeleccion ).subscribe( cp => {
-                        this.candidateProcess = cp;
-                        if ( this.getIdStateByCode( 'APROB' ) === this.candidateProcess.idEstadoDiligenciado ) {
-                           this.readonly = true;
-                        }
-                     } );
-                  } else {
-                     this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
-                  }
-               } );
+            } );
 
+
+            this.masterAnswersService.getByTerceroPublicacion( this.candidateProcess.idTerceroPublicacion ).subscribe( res => {
+               this.maestrosRespuestas = res;
+               this.maestrosRespuestas.map(m => {
+                  if(m.indicadorFinalizado && !m.indicadorAprobado){
+                     this.allTestApproved = m.indicadorAprobado;
+                  }
+               });
+               if(this.allTestApproved) {
+                  this.indApproval = 'APRB'
+               } else {
+                  this.indApproval = 'NOAPRB'
+               }
             } );
 
          } else {
@@ -198,4 +233,9 @@ export class CandidateRevisionComponent implements OnInit {
       }
 
    }
+
+   toggleQuestionnaire(){
+      this.showQuestionnaire = !this.showQuestionnaire;
+   }
+
 }

@@ -1,0 +1,128 @@
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+		<p-panel header="{{ 'PROCESOSELECCION.LBL_INFOPOSTULANTE' | translate }}" class="perfil">
+			<form class="form-horizontal">
+				<fieldset>
+					<div class="form-group row">
+						<div class="col-md-2">
+							<div class="thumbnail">
+								<img src="{{svcThUrlAvatar}}/file/{{candidate.imagen}}" alt="...">
+							</div>
+						</div>
+						<div class="col-md-10">
+							<h2>{{candidate.nombreCompleto}}</h2>
+							<h4>{{candidate.tipoDocumento}} - {{candidate.numeroDocumento}}</h4>
+							<span>{{candidate.fechaNacimiento}} ({{candidate.edad}})</span>
+							<div class="perfil-footer-button">
+								<button icon="fa-address-book-o" label="{{'PROCESOSELECCION.LBL_VERHOJADEVIDA' | translate }}" type="button"
+								        (click)="curriculum()"
+								        pButton></button>
+								<button icon="fa-dot-circle-o" label="{{'PROCESOSELECCION.LBL_CUESTIONARIOS' | translate }}" type="button"
+								        disabled pButton></button>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</p-panel>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+		<p-panel header="{{'PROCESOSELECCION.LBL_EXAMENMEDICO' | translate}}">
+			<div class="row">
+				<div class="col-md-12">
+					<p>{{step.descripcion}}</p>
+				</div>
+			</div>
+			<form class="form-horizontal">
+				<fieldset>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-12">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'PROCESOSELECCION.LBL_POSTULANTEA' | translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{publication.cargo}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_OFICINA' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{publication.estructuraFisica}}</strong></label>
+							</div>
+						</div>
+						<div class="row">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_AREA' | translate }}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{publication.area}}</strong></label>
+							<div class="col-md-6">
+								<div class="btn-group" role="group" style="display: block;">
+									<a class="btn btn-default" style="max-width: 87%; overflow: hidden;"
+										(click)="downloadFile(idCertificado)">
+										<i class="fa fa-file-o" aria-hidden="true"></i>
+										{{certificado}}
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+			<div>
+				<form name="process" (ngSubmit)="fco.valid && onSubmitAnsw()" #fco="ngForm" novalidate id="processCon">
+					<fieldset>
+						<div class="row">
+							<div class="col-md-10 col-md-offset-1" *ngIf="maestroRespuestas.idMaestroRespuesta > 0">
+								<solutions-questionnaires (finish)="finishQuestionnaire($event)"
+								                          [maestroRespuestas]="maestroRespuestas"
+								                          *ngIf="!showFinish"
+								></solutions-questionnaires>
+								<div *ngIf="showFinish" class="row form-footer-buttons">
+									<div class="form-group col-md-10 col-md-offset-1 aplicavacantedash">
+										<p>El Cuestionario ha terminado con Exito!</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-md-12 form-footer-buttons-noline">
+								<div *ngIf="medicalExam.idAdjunto != null" class="btn-group" role="group" style="display: block;">
+									<a class="btn btn-default" style="max-width: 87%; overflow: hidden;"
+									   (click)="downloadFile(medicalExam.idAdjunto)">
+										<i class="fa fa-file-o" aria-hidden="true"></i>
+										{{dataUploadArchivo}}
+									</a>
+									<a class="btn btn-danger" (click)="uploadAgain(false)">
+										<i class="fa fa-times" aria-hidden="true"></i>
+									</a>
+								</div>
+								<p-fileUpload *ngIf="medicalExam.idAdjunto == null" name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
+								              chooseLabel="{{'LBL_ADJUNTAR' | translate}}"
+								              (onBeforeSend)="onBeforeSend($event)"
+								              (onSelect)="onSelect($event, $event.files)"
+								              (onUpload)="uploadingOk($event)"
+								              maxFileSize="{{fsize}}" accept="{{ftype}}">
+								</p-fileUpload>
+							</div>
+						</div>
+						<div class="row form-footer-buttons">
+							<div class="form-group col-md-4">
+							</div>
+							<div class="form-group col-md-4">
+								<a (click)="goBack((fco.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+								<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+								        pButton></button>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</p-panel>
+	</div>
+</div>
+<div *ngIf="respuestaOk">
+	<p>Gracias por su diagnostico</p>
+</div>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>

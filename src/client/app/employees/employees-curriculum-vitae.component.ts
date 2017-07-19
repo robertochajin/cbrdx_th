@@ -17,10 +17,13 @@ import { AcademicEducationService } from '../_services/academic-education.servic
 import { Noformalstudies } from '../employees-academic-education/no-formal-studies';
 import { Workexperience } from '../_models/work-experience';
 import { WorkExperienceService } from '../_services/work-experience.service';
-import { References } from '../employees-references/references';
-import { ReferencesService } from '../employees-references/references.service';
+import { References } from '../_models/references';
+import { ReferencesService } from '../_services/references.service';
 import { DivisionPoliticaService } from '../_services/divisionPolitica.service';
 
+//import * as jsPDF from 'jspdf';
+declare let jsPDF : any;
+declare let html2canvas : any;
 
 
 
@@ -50,6 +53,9 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
    meses: any[] = [];
    direcccionResidencia:string='';
    fechaNacimicento:string='';
+   svcThUrl = '<%= SVC_TH_URL %>/api/upload';
+   loadingPdf = false;
+
 
    constructor( private employeeService: EmployeesService,
       private route: ActivatedRoute,
@@ -202,6 +208,41 @@ export class EmployeesCurriculumVitaeComponent implements OnInit {
       this.location.back();
    }
 
+   getPDF(): void {
+
+      this.loadingPdf = true;
+
+      let nombrePdf: string = this.employee.nombreCompleto.trim();
+      nombrePdf = nombrePdf.replace(/ /g, '-');
+
+      let doc : any = new jsPDF('p', 'mm', 'a4');
+      let element : any = jQuery("#CV");
+
+      html2canvas(element,  {
+         background: 'white',
+         useCORS : true,
+         logging : true
+      }).then((canvas: any) => {
+
+         let width : number = canvas.width;
+         let height : number = canvas.height;
+
+         let mwidth = Math.floor(width * 0.264583)+30;
+         let mheight = Math.floor(height * 0.264583)+40;
+
+         let imgData : any = canvas.toDataURL('image/png');
+
+         doc.deletePage(1);
+         doc.addPage(mwidth, mheight);
+
+         doc.addImage(imgData, 'PNG', 10, 20);
+         doc.save('CV-' + nombrePdf + '.pdf');
+         this.loadingPdf = false;
+
+
+      })
+
+   }
 
 }
 

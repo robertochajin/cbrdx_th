@@ -11,10 +11,16 @@ import { PoliticalDivisionService } from '../_services/political-division.servic
 import { DivisionPolitica } from '../_models/divisionPolitica';
 import { ListEmployeesService } from '../_services/lists-employees.service';
 import { NavService } from '../_services/_nav.service';
+import { AdjuntosService } from '../_services/adjuntos.service';
+import { ConstanteService } from '../_services/constante.service';
 /* Library */
 import * as moment from 'moment/moment';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
+
+import { JwtHelper } from 'angular2-jwt';
+
+
 
 @Component( {
                moduleId: module.id,
@@ -45,6 +51,14 @@ export class WorkExperienceAddComponent implements OnInit {
    fechaTermina: string;
    idTercero: number;
 
+   svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
+   dataUploadArchivo : any = 'Archivo Adjunto';
+   dataUploadUsuario : any = '';
+   usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
+   jwtHelper: JwtHelper = new JwtHelper();
+   fsize: number = 50000000;
+   ftype: string = '';
+
    constructor( private workExperienceService: WorkExperienceService,
       private router: Router,
       private confirmationService: ConfirmationService,
@@ -53,8 +67,23 @@ export class WorkExperienceAddComponent implements OnInit {
       private politicalDivisionService: PoliticalDivisionService,
       private listaService: ListaService,
       private listEmployeesService: ListEmployeesService,
+      private adjuntosService: AdjuntosService,
+      private constanteService: ConstanteService,
       private route: ActivatedRoute,
       private _nav: NavService ) {
+
+      let token = localStorage.getItem( 'token' );
+      this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+      this.constanteService.getByCode( 'FTYPE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.ftype = data.valor;
+         }
+      } );
+      this.constanteService.getByCode( 'FSIZE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.fsize = Number( data.valor );
+         }
+      } );
 
       this.actividadEconomicaService.listByPadre( 0 ).subscribe( res => {
          this.sector.push( { label: 'Seleccione', value: null } );
@@ -191,6 +220,33 @@ export class WorkExperienceAddComponent implements OnInit {
       } );
    }
 
+   uploadingOk( event: any ) {
+      let respuesta = JSON.parse(event.xhr.response);
+      if(respuesta.idAdjunto != null || respuesta.idAdjunto != undefined){
+         this.experience.idAdjunto = respuesta.idAdjunto;
+      }
+   }
+
+   onBeforeSend( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      event.formData.append( 'obj', obj.toString() );
+   }
+
+   onSelect(event:any, file:any){
+      this.dataUploadArchivo = file[0].name;
+      this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   }
+
+   uploadAgain(rta:boolean){
+      this.experience.idAdjunto = null;
+   }
+
+   downloadFile(id: number){
+      this.adjuntosService.downloadFile( id ).subscribe(res => {
+         window.location.assign(res);
+      });
+   }
 }
 
 
