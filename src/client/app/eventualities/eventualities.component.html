@@ -7,12 +7,12 @@
 		</div>
 		<div class="col-md-5 col-xs-12">
 			<!--<div class="input-group">-->
-				<!--<label for="tipoEvent" class="col-md-6">{{'NOVEDADES.LBL_TIPONOVEDAD' | translate }}</label>-->
-				<!--<div class="col-md-6">-->
-					<!--<p-dropdown id="tipoEvent" name="tipoEvent" [(ngModel)]="typeFilter"-->
-					            <!--[options]="eventualityTypes" [autoWidth]="false"-->
-					<!--&gt;</p-dropdown>-->
-				<!--</div>-->
+			<!--<label for="tipoEvent" class="col-md-6">{{'NOVEDADES.LBL_TIPONOVEDAD' | translate }}</label>-->
+			<!--<div class="col-md-6">-->
+			<!--<p-dropdown id="tipoEvent" name="tipoEvent" [(ngModel)]="typeFilter"-->
+			<!--[options]="eventualityTypes" [autoWidth]="false"-->
+			<!--&gt;</p-dropdown>-->
+			<!--</div>-->
 			<!--</div>-->
 		</div>
 		<div class="col-md-4 col-xs-12 datatable-header-search">
@@ -24,7 +24,7 @@
 		</div>
 	</div>
 	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="eventualities" [paginator]="true" [rows]="10"
-	             styleClass="table-overflow" [responsive]="true" [globalFilter]="gb"  #dt>
+	             styleClass="table-overflow" [responsive]="true" [globalFilter]="gb" #dt>
 		<p-column field="codigoNovedad" header="{{'NOVEDADES.LBL_CODIGO' | translate }}" [sortable]="true"></p-column>
 		<p-column field="tipoNovedad" header="{{'NOVEDADES.LBL_TIPONOVEDAD' | translate }}" [sortable]="true">
 			<template pTemplate="filter" let-col>
@@ -37,12 +37,12 @@
 		<p-column field="fechaCreacion" header="{{'NOVEDADES.LBL_FECHA' | translate }}" [sortable]="true"></p-column>
 		<p-column header="{{'NOVEDADES.LBL_INDICADORAUSENTISMO' | translate }}" [sortable]="true">
 			<template let-PR="rowData" pTemplate="body">
-				<p-checkbox [(ngModel)]="PR.indicadorAusentismo" binary="true" id="indAus" name="indAus" disabled ></p-checkbox>
+				<p-checkbox [(ngModel)]="PR.indicadorAusentismo" binary="true" id="indAus" name="indAus" disabled></p-checkbox>
 			</template>
 		</p-column>
 		<p-column header="{{'LBL_HABILITADO' | translate }}" [sortable]="true">
 			<template let-PR="rowData" pTemplate="body">
-				<p-checkbox [(ngModel)]="PR.indicadorHabilitado" binary="true" id="indHab" name="indHab" disabled ></p-checkbox>
+				<p-checkbox [(ngModel)]="PR.indicadorHabilitado" binary="true" id="indHab" name="indHab" disabled></p-checkbox>
 			</template>
 		</p-column>
 		<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">

@@ -26,6 +26,7 @@ export class EmployeeEventualitiesService {
    getById( id: number ) {
       return this.authHttp.get( this.serviceURL + 'vterceros/' + id ).map( ( res: Response ) => res.json() as EmployeeEventuality );
    }
+
    getAllByIdEmployee( id: number ) {
       return this.authHttp.get( this.serviceURL + 'vterceros/' + id ).map( ( res: Response ) => res.json() as EmployeeEventuality[] );
    }
