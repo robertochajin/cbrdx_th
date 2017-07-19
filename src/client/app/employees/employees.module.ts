@@ -62,7 +62,7 @@ import { EmployeeEventualitiesService } from '../_services/employees-eventualiti
               ],
               bootstrap: [ EmployeesComponent ],
               providers: [ EmployeesService, ListEmployeesService, EmployeesRecruitmentService, PoliticalDivisionService, NavService,
-                 ListaService, AdjuntosService, ConstanteService, EmployeeEventualitiesService
+                 ListaService, AdjuntosService, ConstanteService, EmployeeEventualitiesService, SmsService
               ],
               exports: [ EmployeesComponent ]
            } )

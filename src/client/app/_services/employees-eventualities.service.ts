@@ -10,7 +10,7 @@ export class EmployeeEventualitiesService {
    idUsuario: number;
    idTercero: number;
    private serviceURL = '<%= SVC_TH_URL %>/api/tercerosNovedades';
-   private serviceURLEventuality = '<%= SVC_TH_URL %>/api/novedades/tipoNovedad/';
+   private serviceURLEventuality = '<%= SVC_TH_URL %>/api/novedades/';
    private serviceURLEventualityField = '<%= SVC_TH_URL %>/api/novedadesCampos/novedad/';
    private jwtHelper: JwtHelper = new JwtHelper();
 
@@ -34,6 +34,9 @@ export class EmployeeEventualitiesService {
    }
 
    getAllByIdType( id: number ) {
+      return this.authHttp.get( this.serviceURLEventuality +'tipoNovedad/'+ id ).map( ( res: Response ) => res.json() as any[] );
+   }
+   getEventualityById( id: number ) {
       return this.authHttp.get( this.serviceURLEventuality + id ).map( ( res: Response ) => res.json() as any[] );
    }
 
