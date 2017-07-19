@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
-import { Eventuality } from '../_models/eventuality';
+import { EventualityRoles } from '../_models/eventualityRoles';
 
 @Injectable()
-export class EventualityServices {
+export class EventualityRolesServices {
 
-   private masterService = '<%= SVC_TH_URL %>/api/novedades/';
+   private masterService = '<%= SVC_TH_URL %>/api/novedadesRoles/';
    private jwtHelper: JwtHelper = new JwtHelper();
    private usuarioLogueado: any;
    private idUsuario: number;
@@ -20,30 +20,35 @@ export class EventualityServices {
       }
    }
 
-   getAll( ): Observable<Eventuality[]> {
+   getAll( ): Observable<EventualityRoles[]> {
       return this.authHttp.get( this.masterService)
-      .map( ( res: Response ) => res.json() as Eventuality[] );
+      .map( ( res: Response ) => res.json() as EventualityRoles[] );
    }
 
-   getAllEnabled( ): Observable<Eventuality[]> {
+   getAllByEventuality( idEventuality: number ): Observable<EventualityRoles[]> {
+      return this.authHttp.get( this.masterService + 'novedad/' + idEventuality )
+      .map( ( res: Response ) => res.json() as EventualityRoles[] );
+   }
+
+   getAllEnabled( ): Observable<EventualityRoles[]> {
       return this.authHttp.get( this.masterService + 'enabled/'  )
-      .map( ( res: Response ) => res.json() as Eventuality[] );
+      .map( ( res: Response ) => res.json() as EventualityRoles[] );
    }
 
-   add( f: Eventuality ) {
+   add( f: EventualityRoles ) {
       f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.masterService, f )
       .map( ( res: Response ) => res.json() );
    };
 
-   update( f: Eventuality ) {
+   update( f: EventualityRoles ) {
       f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.masterService, JSON.stringify( f ) ).catch( this.handleError );
    }
 
    get( id: number ) {
       return this.authHttp.get( this.masterService + id )
-      .map( ( res: Response ) => res.json() as Eventuality );
+      .map( ( res: Response ) => res.json() as EventualityRoles );
    }
 
    handleError( error: any ): Promise<any> {
