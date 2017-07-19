@@ -135,7 +135,6 @@ export class MedicalExamInformedConsentComponent implements OnInit {
                                                                  ' exitosamente.'
                } );
 
-               localStorage.removeItem( 'currentUser' );
                localStorage.removeItem( 'token' );
                this.router.navigate( [ '/login' ] );
             }, error => {
@@ -150,12 +149,10 @@ export class MedicalExamInformedConsentComponent implements OnInit {
             this.medicalExamService.add( this.medicalExam ).subscribe( data => {
                this.medicalExam = data;
                this._nav.setMesage( 1 );
-               localStorage.removeItem( 'currentUser' );
                localStorage.removeItem( 'token' );
                this.router.navigate( [ '/login' ] );
             }, error => {
                this._nav.setMesage( 3 );
-               localStorage.removeItem( 'currentUser' );
                localStorage.removeItem( 'token' );
                this.router.navigate( [ '/login' ] );
             } );

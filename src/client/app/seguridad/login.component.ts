@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
 
       if(!this.authenticationService.loggedIn()){
          this.authenticationService.token = null;
-         localStorage.removeItem( 'currentUser' );
          localStorage.removeItem( 'token' );
          this.authenticationService.logout();
          this.loginService.setSession( false );
