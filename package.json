@@ -146,7 +146,6 @@
     "@types/html2canvas": "^0.5.34",
     "@types/jspdf": "^1.1.31",
     "angular2-jwt": "^0.2.2",
-    "angular2-moment": "^1.6.0",
     "bootstrap": "^3.3.7",
     "chart.js": "^2.5.0",
     "core-js": "^2.4.1",
