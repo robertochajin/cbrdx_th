@@ -109,8 +109,9 @@
 					</p-dataTable>
 				</div>
 			</div>
-			
-			<form *ngIf="definingTest && !readonly" name="tecniqueTest" (ngSubmit)="tf.valid && updateTest()" #tf="ngForm" novalidate
+		</p-panel>
+		<p-panel header="{{'PROCESOSELECCION.LBL_CONTINUARPROCESO' | translate }}">
+		<form *ngIf="definingTest && !readonly" name="tecniqueTest" (ngSubmit)="tf.valid && updateTest()" #tf="ngForm" novalidate
 			      id="tecniqueTest">
 				
 				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
@@ -199,17 +200,16 @@
 			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="process" *ngIf="!definingTest">
 				<fieldset *ngIf="!readonly">
 					<div class="row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-10 col-md-offset-1">
 							<label for="validStep">* {{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}</label>
 							<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
 							            [autoWidth]="false" [(ngModel)]="indApproval"></p-dropdown>
 						</div>
-						<div class="form-group col-md-6">
-						</div>
+
 					</div>
 					
 					<div class="row">
-						<div class="form-group col-md-12">
+						<div class="form-group col-md-10 col-md-offset-1">
 							<div class="ui-message ui-messages-error ui-corner-all"
 							     *ngIf="f.submitted && indApproval !== null && !allTestDefined">
 								<i class="fa fa-close"></i>
@@ -229,7 +229,7 @@
 				</fieldset>
 				<fieldset *ngIf="readonly">
 					<div class="row">
-						<div class="form-group col-md-12">
+						<div class="form-group col-md-10 col-md-offset-1">
 							<label for="validStep">{{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
 							<p>{{candidateProcess.estadoDiligenciado}}</p>
 						</div>

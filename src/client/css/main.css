@@ -555,7 +555,8 @@ body .ui-paginator{
    background-color: #ededed;
    white-space: nowrap;
 }
-.table-overflow .ui-datatable-data>tr>td{
+.table-overflow .ui-datatable-thead > tr > th,
+.table-overflow .ui-datatable-data > tr > td{
    overflow: visible!important;
 }
 body .ui-datatable thead th.ui-state-active{
@@ -619,11 +620,14 @@ form [class*="col-"] {
     padding: 6px;
 }
 
-.form-footer-buttons {
+.form-footer-buttons,
+.form-footer-buttons-noline {
     text-align: center;
-    border-top: 1px #e9e9e9 solid;
     margin-top: 10px;
     padding-top: 8px;
+}
+.form-footer-buttons {
+   border-top: 1px #e9e9e9 solid;
 }
 p-dropdown.form-control,
 p-autocomplete.form-control{

@@ -1,0 +1,309 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
+<div class="col-md-10 col-md-offset-1">
+	<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+		<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-6">
+					<label for="idTipoNovedad">{{ 'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}</label>
+					<p-dropdown id="idTipoNovedad" name="idTipoNovedad" required="true"
+					            [options]="listTypeDoc" [autoWidth]="false"
+					            [(ngModel)]="employeeEventuality.idTipoNovedad"
+					            #idTipoNov="ngModel"
+					></p-dropdown>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !idTipoNov.valid">
+						<i class="fa fa-close"></i>
+						{{ 'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-6">
+					<label for="idNovedad">{{ 'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }}</label>
+					<p-dropdown id="idNovedad" name="idNovedad" required="true"
+					            [options]="listTypeDoc" [autoWidth]="false"
+					            [(ngModel)]="employeeEventuality.idNovedad"
+					            #idNov="ngModel"
+					></p-dropdown>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !idNov.valid">
+						<i class="fa fa-close"></i>
+						{{ 'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+			
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-3">
+					<label for="fechaInicio">{{ 'EMPLOYEENOVELTY.LBL_FECHAINICIO' | translate }}</label>
+					<p-calendar id="fechaInicio" name="fechaInicio" #fechaIni="ngModel" [showIcon]="true"
+					            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
+					            [locale]="es" readonlyInput="readonlyInput"
+					            dataType="date" [(ngModel)]="employeeEventuality.fechaInicio"
+					            dateFormat="yy'-'mm'-'dd"></p-calendar>
+					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fechaIni.valid">
+						<i class="fa fa-close"></i>
+						{{'EMPLOYEENOVELTY.LBL_FECHAINICIO' | translate }} {{'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-3">
+					<label for="horaInicio">{{ 'EMPLOYEENOVELTY.LBL_HORAINICIO' | translate }}</label>
+					<p-calendar id="horaInicio" name="horaInicio" #horaIni="ngModel" [showIcon]="true"
+					            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
+					            [locale]="es" readonlyInput="readonlyInput" [timeOnly]="true"
+					            dataType="date" [(ngModel)]="employeeEventuality.horaInicio"
+					            dateFormat="yy'-'mm'-'dd"></p-calendar>
+					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !horaIni.valid">
+						<i class="fa fa-close"></i>
+						{{'EMPLOYEENOVELTY.LBL_HORAINICIO' | translate }} {{'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-3">
+					<label for="fechaFinal">{{ 'EMPLOYEENOVELTY.LBL_FECHAFINAL' | translate }}</label>
+					<p-calendar id="fechaFinal" name="fechaFinal" #fechaFin="ngModel" [showIcon]="true"
+					            [minDate]="minDateFin" [monthNavigator]="true" [yearNavigator]="true"
+					            [locale]="es" readonlyInput="readonlyInput"
+					            dataType="date" [(ngModel)]="employeeEventuality.fechaFinal"
+					            dateFormat="yy'-'mm'-'dd"></p-calendar>
+					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fechaFin.valid">
+						<i class="fa fa-close"></i>
+						{{'EMPLOYEENOVELTY.LBL_FECHAFINAL' | translate }} {{'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-3">
+					<label for="horaFinal">{{ 'EMPLOYEENOVELTY.LBL_HORAFINAL' | translate }}</label>
+					<p-calendar id="horaFinal" name="horaFinal" #horaFin="ngModel" [showIcon]="true"
+					            [minDate]="minDateFin" [monthNavigator]="true" [yearNavigator]="true"
+					            [locale]="es" readonlyInput="readonlyInput" [timeOnly]="true"
+					            dataType="date" [(ngModel)]="employeeEventuality.horaFinal" [showTime]="true"
+					            dateFormat="yy'-'mm'-'dd"></p-calendar>
+					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !horaFin.valid">
+						<i class="fa fa-close"></i>
+						{{'EMPLOYEENOVELTY.LBL_HORAFINAL' | translate }} {{'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-12">
+					<label for="observacion">* {{'EMPLOYEENOVELTY.LBL_DESCRIPCION' | translate }}</label>
+					<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #decrip="ngModel"
+					          [(ngModel)]="employeeEventuality.descripcion" required="true" class="form-control"
+					          maxlength="500"></textarea>
+					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !decrip.valid">
+						<i class="fa fa-close"></i>
+						{{'EMPLOYEENOVELTY.LBL_OBSERVACIONES' | translate }} {{'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-6">
+					<label>{{'EMPLOYEENOVELTY.LBL_DIAGNOSTICO' | translate }}</label>
+					<p-autoComplete placeholder="Buscar diagnóstico" field="label" name="diagnostico" id="diagnostico"
+					                [(ngModel)]="employeeEventuality.idTipoNovedad"
+					                #diagnostico="ngModel" [suggestions]="diagnosticList"
+					                (completeMethod)="diagnosticSearch($event)" (onSelect)="captureDiagnosticId($event)">
+					</p-autoComplete>
+					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && wrongDiagnostic">
+						<i class="fa fa-close"></i>{{'EMPLOYEENOVELTY.LBL_DIAGNOSTICO' | translate}} {{'LBL_REQUERIDO' | translate}}
+					</div>
+				</div>
+				<div class="ui-grid-col-6">
+					<label for="reemplazado">{{ 'EMPLOYEENOVELTY.LBL_REEMPLAZADOPOR' | translate }}</label>
+					<input id="reemplazado" name="reemplazado" #reemplaz="ngModel" pInputText type="text"
+					       maxlength="100" [(ngModel)]="employeeEventuality.reemplazadoPor"/>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !reemplaz.valid ">
+						<i class="fa fa-close"></i>
+						{{ 'EMPLOYEENOVELTY.LBL_REEMPLAZADOPOR' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-3">
+					<label for="fechaReintegro">{{ 'EMPLOYEENOVELTY.LBL_FECHAREINTEGRO' | translate }}</label>
+					<p-calendar id="fechaReintegro" name="fechaReintegro" #fechaReint="ngModel" [showIcon]="true"
+					            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
+					            [locale]="es" readonlyInput="readonlyInput"
+					            dataType="date" [(ngModel)]="employeeEventuality.fechaReintegro"
+					            dateFormat="yy'-'mm'-'dd"></p-calendar>
+					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fechaReint.valid">
+						<i class="fa fa-close"></i>
+						{{'EMPLOYEENOVELTY.LBL_FECHAREINTEGRO' | translate }} {{'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-3">
+					<label for="horaReintegro">{{ 'EMPLOYEENOVELTY.LBL_HORAREINTEGRO' | translate }}</label>
+					<p-calendar id="horaReintegro" name="horaReintegro" #horaReint="ngModel" [showIcon]="true"
+					            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
+					            [locale]="es" readonlyInput="readonlyInput" [timeOnly]="true"
+					            dataType="date" [(ngModel)]="employeeEventuality.horaReintergo"
+					            dateFormat="yy'-'mm'-'dd"></p-calendar>
+					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !horaReint.valid">
+						<i class="fa fa-close"></i>
+						{{'EMPLOYEENOVELTY.LBL_HORAREINTEGRO' | translate }} {{'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-3">
+					<label for="dia">{{ 'EMPLOYEENOVELTY.LBL_DIAS' | translate }}</label>
+					<input id="dia" name="dia" #dias="ngModel" pInputText type="text"
+					       (keyup)="inputCod($event)" required maxlength="50"
+					       [(ngModel)]="employeeEventuality.dias"/>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !dias.valid ">
+						<i class="fa fa-close"></i>
+						{{ 'EMPLOYEENOVELTY.LBL_DIAS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-3">
+					<label for="periodoinicial">{{ 'EMPLOYEENOVELTY.LBL_PERIODOINICIAL' | translate }}</label>
+					<p-calendar id="periodoinicial" name="periodoinicial" #periodoini="ngModel" [showIcon]="true"
+					            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
+					            [locale]="es" readonlyInput="readonlyInput"
+					            dataType="date" [(ngModel)]="employeeEventuality.periodoInicio"
+					            dateFormat="yy'-'mm'-'dd"></p-calendar>
+					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !periodoini.valid">
+						<i class="fa fa-close"></i>
+						{{'EMPLOYEENOVELTY.LBL_PERIODOINICIAL' | translate }} {{'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-3">
+					<label for="periodofinal">{{ 'EMPLOYEENOVELTY.LBL_PERIODOFINAL' | translate }}</label>
+					<p-calendar id="periodofinal" name="periodofinal" #periodofin="ngModel" [showIcon]="true"
+					            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
+					            [locale]="es" readonlyInput="readonlyInput"
+					            dataType="date" [(ngModel)]="employeeEventuality.periodoFinal"
+					            dateFormat="yy'-'mm'-'dd"></p-calendar>
+					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !periodofin.valid">
+						<i class="fa fa-close"></i>
+						{{'EMPLOYEENOVELTY.LBL_PERIODOFINAL' | translate }} {{'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-3">
+					<label></label><br>
+					<p-checkbox binary="true" id="retiro" name="retiro"
+					            [(ngModel)]="employeeEventuality.retiro"
+					            label="{{ 'EMPLOYEENOVELTY.LBL_RETIRO' | translate }}"
+					            #indicador="ngModel"></p-checkbox>
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-4">
+					<label for="ideps">{{ 'EMPLOYEENOVELTY.LBL_EPS' | translate }}</label>
+					<p-dropdown id="ideps" name="ideps" required="true"
+					            [options]="listTypeDoc" [autoWidth]="false"
+					            [(ngModel)]="employeeEventuality.idEPS"
+					            #eps="ngModel"
+					></p-dropdown>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !eps.valid">
+						<i class="fa fa-close"></i>
+						{{ 'EMPLOYEENOVELTY.LBL_EPS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-4">
+					<label for="idfp">{{ 'EMPLOYEENOVELTY.LBL_FP' | translate }}</label>
+					<p-dropdown id="idfp" name="idfp" required="true"
+					            [options]="listTypeDoc" [autoWidth]="false"
+					            [(ngModel)]="employeeEventuality.idFP"
+					            #fp="ngModel"
+					></p-dropdown>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !fp.valid">
+						<i class="fa fa-close"></i>
+						{{ 'EMPLOYEENOVELTY.LBL_FP' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-4">
+					<label for="idccf">{{ 'EMPLOYEENOVELTY.LBL_CCF' | translate }}</label>
+					<p-dropdown id="idccf" name="idccf" required="true"
+					            [options]="listTypeDoc" [autoWidth]="false"
+					            [(ngModel)]="employeeEventuality.idCCF"
+					            #ccf="ngModel"
+					></p-dropdown>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !ccf.valid">
+						<i class="fa fa-close"></i>
+						{{ 'EMPLOYEENOVELTY.LBL_CCF' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-3">
+					<label for="valor">{{ 'EMPLOYEENOVELTY.LBL_VALOR' | translate }}</label>
+					<input id="valor" name="valor" #valor="ngModel" pInputText type="text"
+					       (keyup)="inputCod($event)" required maxlength="50"
+					       [(ngModel)]="employeeEventuality.valor"/>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !valor.valid ">
+						<i class="fa fa-close"></i>
+						{{ 'EMPLOYEENOVELTY.LBL_VALOR' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-3">
+					<label for="nrocuotas">{{ 'EMPLOYEENOVELTY.LBL_CUENTA' | translate }}</label>
+					<input id="nrocuotas" name="nrocuotas" #cuotas="ngModel" pInputText type="text"
+					       (keyup)="inputCod($event)" required maxlength="50"
+					       [(ngModel)]="employeeEventuality.numeroCuotas"/>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !cuotas.valid ">
+						<i class="fa fa-close"></i>
+						{{ 'EMPLOYEENOVELTY.LBL_CUENTA' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-3">
+					<label for="nroreferencia">{{ 'EMPLOYEENOVELTY.LBL_REFERENCIA' | translate }}</label>
+					<input id="nroreferencia" name="nroreferencia" #referencia="ngModel" pInputText type="text"
+					       (keyup)="inputCod($event)" required maxlength="50"
+					       [(ngModel)]="employeeEventuality.numeroReferencia"/>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !referencia.valid ">
+						<i class="fa fa-close"></i>
+						{{ 'EMPLOYEENOVELTY.LBL_REFERENCIA' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-3">
+					<label for="identidad">{{ 'EMPLOYEENOVELTY.LBL_ENTIDAD' | translate }}</label>
+					<p-dropdown id="identidad" name="identidad" required="true"
+					            [options]="listTypeDoc" [autoWidth]="false"
+					            [(ngModel)]="employeeEventuality.idEntidad"
+					            #entidad="ngModel"
+					></p-dropdown>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !entidad.valid">
+						<i class="fa fa-close"></i>
+						{{ 'EMPLOYEENOVELTY.LBL_ENTIDAD' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="ui-grid-row form-footer-buttons">
+				<div class="ui-grid-col-1"></div>
+				<div class="ui-grid-col-4">
+					<button (click)="generarCodigo()" label="{{'PROCESOSELECCION.LBL_GENERCOD' | translate }}" type="button"
+					        pButton></button>
+					<input id="codigoinst" name="codigoinst" #codInst="ngModel" pInputText type="text"
+					       required maxlength="50" [(ngModel)]="codigoVerificacion"/>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !codInst.valid">
+						<i class="fa fa-close"></i>
+						{{ 'DOCMANAGMENT.LBL_CODIGO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-1">
+					<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+				</div>
+				<div class="ui-grid-col-2">
+					<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+				</div>
+				<!--<div class="ui-grid-col-5"></div>-->
+			</div>
+		</div>
+	</form>
+</div>
