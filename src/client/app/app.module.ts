@@ -157,7 +157,8 @@ import { SuppliesModule } from './supplies/supplies.module';
                  EmployeeEventualitiesModule,
                  // EmployeesAttachmentsModule,
                  //AssignmentProfessionalModule
-                 QuestionnairesModule
+                 QuestionnairesModule,
+                 SuppliesModule
               ],
 
               declarations: [ AppComponent ],
