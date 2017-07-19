@@ -111,14 +111,14 @@
 									{{'LBL_REQUERIDO' | translate }}
 								</div>
 							</div>
-						
-						<div class="row form-footer-buttons">
-							<div class="form-group col-md-12">
-								<a (click)="goBack((fex.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
-								<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
-								        pButton></button>
+							
+							<div class="row form-footer-buttons">
+								<div class="form-group col-md-12">
+									<a (click)="goBack((fex.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+									<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+									        pButton></button>
+								</div>
 							</div>
-						</div>
 						</div>
 					</fieldset>
 				</form>
@@ -251,102 +251,164 @@
 					</div>
 				</fieldset>
 			</form>
-			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="process" *ngIf="respondido">
-				<fieldset *ngIf="!readonly">
-					<div class="row">
-						<div class="form-group col-md-6">
-							<label for="validStep">* {{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}</label>
-							<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
-							            [autoWidth]="false" [(ngModel)]="indApproval"></p-dropdown>
-						</div>
-						<div class="form-group col-md-6">
+		</p-panel>
+		<p-panel header="Desición del paso">
+		<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="process" *ngIf="respondido">
+			<fieldset *ngIf="!readonly">
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="validStep">* {{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}</label>
+						<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
+						            [autoWidth]="false" [(ngModel)]="indApproval"></p-dropdown>
+					</div>
+					<div class="form-group col-md-6">
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="observacion">* {{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}</label>
+						<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #observa="ngModel"
+						          [(ngModel)]="candidateProcess.observacion" required="true" class="form-control"
+						          maxlength="500"></textarea>
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !observa.valid">
+							<i class="fa fa-close"></i>
+							{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }} {{'LBL_REQUERIDO' | translate }}
 						</div>
 					</div>
-					<div class="row">
-						<div class="form-group col-md-10 col-md-offset-1">
-							<label for="observacion">* {{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}</label>
-							<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #observa="ngModel"
-							          [(ngModel)]="candidateProcess.observacion" required="true" class="form-control"
-							          maxlength="500"></textarea>
-							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !observa.valid">
-								<i class="fa fa-close"></i>
-								{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }} {{'LBL_REQUERIDO' | translate }}
-							</div>
+				</div>
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+						<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+						        pButton></button>
+					</div>
+				</div>
+			</fieldset>
+			<fieldset *ngIf="readonly">
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="validStep">{{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
+						<p>{{candidateProcess.estadoDiligenciado}}</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="observacion">{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}:</label>
+						<p>{{candidateProcess.observacion}}</p>
+					</div>
+				</div>
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+						        pButton (click)="goBack(false)"></button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+		<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="processC" *ngIf="cerrado">
+			<fieldset *ngIf="!readonly">
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="validStep">* {{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}</label>
+						<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
+						            [autoWidth]="false" [(ngModel)]="indApproval"></p-dropdown>
+					</div>
+					<div class="form-group col-md-6">
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="observacion">* {{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}</label>
+						<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #observa="ngModel"
+						          [(ngModel)]="candidateProcess.observacion" required="true" class="form-control"
+						          maxlength="500"></textarea>
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !observa.valid">
+							<i class="fa fa-close"></i>
+							{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }} {{'LBL_REQUERIDO' | translate }}
 						</div>
 					</div>
-					<div class="row form-footer-buttons">
-						<div class="form-group col-md-12">
-							<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
-							<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
-							        pButton></button>
+				</div>
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+						<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+						        pButton></button>
+					</div>
+				</div>
+			</fieldset>
+			<fieldset *ngIf="readonly">
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="validStep">{{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
+						<p>{{candidateProcess.estadoDiligenciado}}</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="observacion">{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}:</label>
+						<p>{{candidateProcess.observacion}}</p>
+					</div>
+				</div>
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+						        pButton (click)="goBack(false)"></button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+		<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="processCp" *ngIf="readonly && !respondido && !cerrado">
+			<fieldset *ngIf="!readonly">
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="validStep">* {{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}</label>
+						<p-dropdown id="validStep" name="validStep" #ngAprueba="ngModel" [options]="approvalOptions"
+						            [autoWidth]="false" [(ngModel)]="indApproval"></p-dropdown>
+					</div>
+					<div class="form-group col-md-6">
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="observacion">* {{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}</label>
+						<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #observa="ngModel"
+						          [(ngModel)]="candidateProcess.observacion" required="true" class="form-control"
+						          maxlength="500"></textarea>
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !observa.valid">
+							<i class="fa fa-close"></i>
+							{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }} {{'LBL_REQUERIDO' | translate }}
 						</div>
 					</div>
-				</fieldset>
-				<fieldset *ngIf="readonly">
-					<div class="row">
-						<div class="form-group col-md-10 col-md-offset-1">
-							<label for="validStep">{{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
-							<p>{{candidateProcess.estadoDiligenciado}}</p>
-						</div>
+				</div>
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+						<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+						        pButton></button>
 					</div>
-					<div class="row">
-						<div class="form-group col-md-10 col-md-offset-1">
-							<label for="observacion">{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}:</label>
-							<p>{{candidateProcess.observacion}}</p>
-						</div>
+				</div>
+			</fieldset>
+			<fieldset *ngIf="readonly">
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="validStep">{{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
+						<p>{{candidateProcess.estadoDiligenciado}}</p>
 					</div>
-					<div class="row form-footer-buttons">
-						<div class="form-group col-md-12">
-							<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
-							        pButton (click)="goBack(false)"></button>
-						</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="observacion">{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}:</label>
+						<p>{{candidateProcess.observacion}}</p>
 					</div>
-				</fieldset>
-			</form>
-			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="processC" *ngIf="cerrado && readonly">
-				<fieldset>
-					<div class="row">
-						<div class="form-group col-md-10 col-md-offset-1">
-							<label for="validStep">{{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
-							<p>{{candidateProcess.estadoDiligenciado}}</p>
-						</div>
+				</div>
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+						        pButton (click)="goBack(false)"></button>
 					</div>
-					<div class="row">
-						<div class="form-group col-md-10 col-md-offset-1">
-							<label for="observacion">{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}:</label>
-							<p>{{candidateProcess.observacion}}</p>
-						</div>
-					</div>
-					<div class="row form-footer-buttons">
-						<div class="form-group col-md-12">
-							<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
-							        pButton (click)="goBack(false)"></button>
-						</div>
-					</div>
-				</fieldset>
-			</form>
-			<form name="process" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="processRC" *ngIf="readonly">
-				<fieldset>
-					<div class="row">
-						<div class="form-group col-md-10 col-md-offset-1">
-							<label for="validStep">{{'PROCESOSELECCION.LBL_CONTINUAELPROCESO' | translate }}:</label>
-							<p>{{candidateProcess.estadoDiligenciado}}</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-md-10 col-md-offset-1">
-							<label for="observacion">{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}:</label>
-							<p>{{candidateProcess.observacion}}</p>
-						</div>
-					</div>
-					<div class="row form-footer-buttons">
-						<div class="form-group col-md-12">
-							<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
-							        pButton (click)="goBack(false)"></button>
-						</div>
-					</div>
-				</fieldset>
-			</form>
+				</div>
+			</fieldset>
+		</form>
 		</p-panel>
 	</div>
 </div>

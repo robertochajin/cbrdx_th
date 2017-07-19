@@ -65,7 +65,6 @@ export class ToolbarComponent {
 
    logout(): void {
       // clear token remove user from local storage to log user out
-      localStorage.removeItem( 'currentUser' );
       localStorage.removeItem( 'token' );
       this.router.navigate( [ '/login' ] );
    }
@@ -80,7 +79,6 @@ export class ToolbarComponent {
    }
 
    goInactive() {
-      localStorage.removeItem('currentUser');
       localStorage.removeItem('token');
    }
 

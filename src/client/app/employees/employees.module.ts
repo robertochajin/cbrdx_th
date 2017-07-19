@@ -30,6 +30,8 @@ import { EmployeesAttachmentsComponent } from '../employees-attatchments/employe
 import { EmployeesRecruitmentComponent } from '../employees-recruitment/employees-recruitment.component';
 import { EmployeesRecruitmentService } from '../_services/employees-recruitment.service';
 import { EmployeesDetailPerfilComponent } from '../selecttion-process-apply/employees-detail-perfil.component';
+import { JsonpModule } from '@angular/http';
+import { SmsService } from '../_services/_sms.service';
 
 @NgModule( {
               imports: [
@@ -44,7 +46,8 @@ import { EmployeesDetailPerfilComponent } from '../selecttion-process-apply/empl
                  EmployeesContactModule,
                  EmployeesEstateModule,
                  EmployeesVehicleModule,
-                 EmployeesAttachmentsModule
+                 EmployeesAttachmentsModule,
+                 JsonpModule
               ],
 
               declarations: [ EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent,
@@ -53,7 +56,7 @@ import { EmployeesDetailPerfilComponent } from '../selecttion-process-apply/empl
                  EmployeesDetailPerfilComponent
               ],
               bootstrap: [ EmployeesComponent ],
-              providers: [ EmployeesService, ListEmployeesService, EmployeesRecruitmentService, PoliticalDivisionService, NavService, ListaService, AdjuntosService, ConstanteService ],
+              providers: [ EmployeesService, ListEmployeesService, EmployeesRecruitmentService, PoliticalDivisionService, NavService, ListaService, AdjuntosService, ConstanteService, SmsService ],
               exports: [ EmployeesComponent ]
            } )
 export class EmployeesModule {

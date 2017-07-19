@@ -173,7 +173,6 @@ export class AnswerExamsComponent implements OnInit {
          this.medicalExam.idMedicoResponsable = this.usuarioLogueado.usuario.idUsuario;
          this.medicalExamService.update( this.medicalExam ).subscribe( data => {
             this._nav.setMesage( 0, { severity: 'success', summary: 'Exito', detail: 'Gracias por su diagnsotico.' } );
-            localStorage.removeItem( 'currentUser' );
             localStorage.removeItem( 'token' );
             this.router.navigate( [ '/login' ] );
          }, error => {
@@ -185,7 +184,6 @@ export class AnswerExamsComponent implements OnInit {
          this.medicalExamService.add( this.medicalExam ).subscribe( data => {
             this.medicalExam = data;
             this._nav.setMesage( 0, { severity: 'success', summary: 'Exito', detail: 'Gracias por su diagnsotico.' } );
-            localStorage.removeItem( 'currentUser' );
             localStorage.removeItem( 'token' );
             this.router.navigate( [ '/login' ] );
          }, error => {
