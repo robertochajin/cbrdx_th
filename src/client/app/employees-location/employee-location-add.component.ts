@@ -60,6 +60,7 @@ export class LocationAddComponent implements OnInit {
    submitted: boolean;
    msgs: Message[] = [];
    wrongCity: boolean = true;
+   loadingAutocomplete : boolean = false;
 
    constructor( private location: Location,
       private politicalDivisionServices: PoliticalDivisionService,
@@ -164,8 +165,14 @@ export class LocationAddComponent implements OnInit {
    }
 
    hoodSearch( event: any ) {
+      this.loadingAutocomplete = true;
       this.politicalDivisionServices.getHoodsByWildCard( event.query ).subscribe(
-         hoods => this.hoodList = hoods
+         hoods => {
+            this.hoodList = hoods;
+            this.loadingAutocomplete = false;
+         },error => {
+            console.log('Error Loading');
+         }
       );
    }
 

@@ -20,8 +20,8 @@ export class EventualityRolesServices {
       }
    }
 
-   getAll( ): Observable<EventualityRoles[]> {
-      return this.authHttp.get( this.masterService)
+   getAll(): Observable<EventualityRoles[]> {
+      return this.authHttp.get( this.masterService )
       .map( ( res: Response ) => res.json() as EventualityRoles[] );
    }
 
@@ -30,8 +30,8 @@ export class EventualityRolesServices {
       .map( ( res: Response ) => res.json() as EventualityRoles[] );
    }
 
-   getAllEnabled( ): Observable<EventualityRoles[]> {
-      return this.authHttp.get( this.masterService + 'enabled/'  )
+   getAllEnabled(): Observable<EventualityRoles[]> {
+      return this.authHttp.get( this.masterService + 'enabled/' )
       .map( ( res: Response ) => res.json() as EventualityRoles[] );
    }
 

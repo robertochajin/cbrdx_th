@@ -195,6 +195,11 @@ import { EventualitiesComponent } from './eventualities/eventualities.component'
 import { EventualitiesEditComponent } from './eventualities/eventualities-edit.component';
 import { EventualitiesDetailComponent } from './eventualities/eventualities-detail.component';
 
+// Dotaciones
+import { SuppliesComponent } from './supplies/supplies.component';
+import { SuppliesAddComponent } from './supplies/supplies-add.component';
+import { SuppliesUpdateComponent } from './supplies/supplies-update.component';
+
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
@@ -487,6 +492,11 @@ const routes = [
    { path: 'questionnaries', component: QuestionnairesComponent, canActivate: [ AuthGuard ] },
    { path: 'questionnaries/add', component: QuestionnairesAddComponent, canActivate: [ AuthGuard ] },
    { path: 'questionnaries/update/:id', component: QuestionnairesUpdateComponent, canActivate: [ AuthGuard ] },
+
+   //  Dotaciones
+   { path: 'supplies', component: SuppliesComponent },
+   { path: 'supplies/add', component: SuppliesAddComponent },
+   { path: 'supplies/update/:id', component: SuppliesUpdateComponent },
 
 ];
 

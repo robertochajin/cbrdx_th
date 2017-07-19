@@ -28,12 +28,18 @@
           </div>
         </div>
         <div class="ui-grid-col-8">
-          <label for="barrio">Barrio / Vereda / Ciudad</label>
-          <p-autoComplete placeholder="Buscar barrio" field="camino" name="barrio" id="barrio"
-                          [(ngModel)]="localizacion.locacion"
-                          #barrio="ngModel" [suggestions]="hoodList" required="true"
-                          (completeMethod)="hoodSearch($event)" (onSelect)="captureHoodId($event)">
-          </p-autoComplete>
+          <label for="barrio">Barrio / Vereda / Ciudad </label>
+
+				  <p-autoComplete placeholder="Buscar barrio" field="camino" name="barrio" id="barrio"
+										[(ngModel)]="localizacion.locacion"
+										#barrio="ngModel" [suggestions]="hoodList" required="true"
+										(completeMethod)="hoodSearch($event)" (onSelect)="captureHoodId($event)"
+										emptyMessage="No se encontro info que mostrar">
+				  </p-autoComplete>
+			  <div style="margin-top: -26px;position: relative;margin-left: 4px;">
+				  <i class="fa fa-refresh fa-spin fa-fw" *ngIf="loadingAutocomplete"></i>
+			  </div>
+
           <div class="ui-message ui-messages-error ui-corner-all" *ngIf="l.submitted && !barrio.valid">
             <i class="fa fa-close"></i> {{'UBICACION.LBL_BARRIO' | translate }} {{'LBL_REQUERIDO' | translate }}
           </div>

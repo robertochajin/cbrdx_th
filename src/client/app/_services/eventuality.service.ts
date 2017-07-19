@@ -20,13 +20,13 @@ export class EventualityServices {
       }
    }
 
-   getAll( ): Observable<Eventuality[]> {
-      return this.authHttp.get( this.masterService)
+   getAll(): Observable<Eventuality[]> {
+      return this.authHttp.get( this.masterService )
       .map( ( res: Response ) => res.json() as Eventuality[] );
    }
 
-   getAllEnabled( ): Observable<Eventuality[]> {
-      return this.authHttp.get( this.masterService + 'enabled/'  )
+   getAllEnabled(): Observable<Eventuality[]> {
+      return this.authHttp.get( this.masterService + 'enabled/' )
       .map( ( res: Response ) => res.json() as Eventuality[] );
    }
 

@@ -49,7 +49,7 @@
                   </div>
                </div>
                <div class="row">
-	               <div class="form-group col-md-8" *hasPermission="seccion1.NUMERODOCUMENTO ? seccion1.NUMERODOCUMENTO : defaultCampo">
+	               <div class="form-group col-md-6" *hasPermission="seccion1.NUMERODOCUMENTO ? seccion1.NUMERODOCUMENTO : defaultCampo">
                      <label for="numeroDocumento">{{ 'LBL_NUMERODOCUMENTO' | translate }}</label>
                      <input id="numeroDocumento" type="text" pInputText name="numeroDocumento"
                             [(ngModel)]="employee.numeroDocumento"
@@ -63,14 +63,27 @@
                         {{ 'LBL_NUMERODOCUMENTO' | translate }} {{'LBL_REQUERIDO' | translate}}
                      </div>
                   </div>
-	               <div class="form-group col-md-4" *hasPermission="seccion1.FECHADOCUMENTO ? seccion1.FECHADOCUMENTO : defaultCampo">
+	               <div class="form-group col-md-3" *hasPermission="seccion1.FECHANACIMIENTO ? seccion1.FECHANACIMIENTO : defaultCampo">
+		               <label for="NGbirthDate">{{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate}}</label>
+		               <p-calendar id="NGbirthDate" name="NGbirthDate" [showIcon]="true" dateFormat="yy'-'mm'-'dd"
+		                           [maxDate]="maxDateBirth" [monthNavigator]="true" [yearNavigator]="true"
+		                           [locale]="es" readonlyInput="readonlyInput" [yearRange]="range"
+		                           dataType="date" #NGbirthDate="ngModel" [required]="true"
+		                           [(ngModel)]="employee.fechaNacimiento" (onSelect)="onBirthDate($event)"
+		                           [disabled]="seccion1.FECHANACIMIENTO.editable === false || !employee.idTipoDocumento"
+		               ></p-calendar>
+		               <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !NGbirthDate.valid">
+			               {{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate}} {{'LBL_REQUERIDO' | translate}}
+		               </div>
+	               </div>
+	               <div class="form-group col-md-3" *hasPermission="seccion1.FECHADOCUMENTO ? seccion1.FECHADOCUMENTO : defaultCampo">
                      <label for="NGexpeditionDate">{{'EMPLOYEES.LBL_FECHAEXPEDICION' | translate}}</label>
 	                  <p-calendar id="NGexpeditionDate" name="NGexpeditionDate" [showIcon]="true"
 	                              [maxDate]="maxDateDocumento" [minDate]="minDateDocumento" [monthNavigator]="true" [yearNavigator]="true"
 	                              [yearRange]="range" [locale]="es" readonlyInput="readonlyInput" dateFormat="yy'-'mm'-'dd"
 	                              dataType="date" #NGexpeditionDate="ngModel" required="true"
 	                              [(ngModel)]="employee.fechaDocumento" (onSelect)="onExpeditionDate($event)"
-	                              [disabled]="seccion1.FECHADOCUMENTO.editable === false"
+	                              [disabled]="seccion1.FECHADOCUMENTO.editable === false || !employee.idTipoDocumento || !employee.fechaNacimiento"
 	                  ></p-calendar>
                      <div class="ui-message ui-messages-error ui-corner-all"
                           *ngIf="f.submitted && !NGexpeditionDate.valid">
@@ -139,20 +152,7 @@
                   </div>
                </div>
                <div class="row">
-	               <div class="form-group col-md-4" *hasPermission="seccion1.FECHANACIMIENTO ? seccion1.FECHANACIMIENTO : defaultCampo">
-                     <label for="NGbirthDate">{{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate}}</label>
-	                  <p-calendar id="NGbirthDate" name="NGbirthDate" [showIcon]="true" dateFormat="yy'-'mm'-'dd"
-	                              [maxDate]="maxDateBirth" [monthNavigator]="true" [yearNavigator]="true"
-	                              [locale]="es" readonlyInput="readonlyInput" [yearRange]="range"
-	                              dataType="date" #NGbirthDate="ngModel" [required]="true"
-	                              [(ngModel)]="employee.fechaNacimiento" (onSelect)="onBirthDate($event)"
-	                              [disabled]="seccion1.FECHANACIMIENTO.editable === false"
-	                  ></p-calendar>
-                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !NGbirthDate.valid">
-                        {{'EMPLOYEES.LBL_FECHANACIMIENTO' | translate}} {{'LBL_REQUERIDO' | translate}}
-                     </div>
-                  </div>
-	               <div class="form-group col-md-8"
+	               <div class="form-group col-md-12"
 	                    *hasPermission="seccion1.IDCIUDADNACIMIENTO ? seccion1.IDCIUDADNACIMIENTO : defaultCampo">
                      <label for="birthPlace">{{'EMPLOYEES.LBL_CIUDADNACIMIENTO' | translate}}</label>
                      <p-autoComplete placeholder="Lugar de nacimieto" field="camino" name="birthPlace" id="birthPlace"
