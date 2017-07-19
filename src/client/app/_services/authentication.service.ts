@@ -28,8 +28,8 @@ export class AuthenticationService {
 
    constructor( private http: Http ) {
       // set token if saved in local storage
-      let currentUser = JSON.parse( localStorage.getItem( 'token' ) );
-      this.token = currentUser && currentUser.token;
+      // let currentUser = JSON.parse( localStorage.getItem( 'token' ) );
+      this.token = localStorage.getItem( 'token' ); //currentUser && currentUser.token;
    }
 
    forgetUser( mail: string ) {
