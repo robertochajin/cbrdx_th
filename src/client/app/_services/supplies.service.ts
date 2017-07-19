@@ -83,21 +83,6 @@ export class SuppliesService {
       return this.authHttp.put( this.masterService + 'dotaciones', JSON.stringify( f ) ).catch( this.handleError );
    }
 
-   /*getAnswers( id: number ) {
-      return this.authHttp.get( this.masterService + 'preguntasOpciones/buscarPregunta/' + id )
-      .map( ( res: Response ) => res.json() as QuestionnariesAnswers[] );
-   }
-
-   getAnswersEnabled( id: number ) {
-      return this.authHttp.get( this.masterService + 'preguntasOpciones/enabled/buscarPregunta/' + id )
-      .map( ( res: Response ) => res.json() as QuestionnariesAnswers[] );
-   }
-
-   getAnswer( id: number ) {
-      return this.authHttp.get( this.masterService + 'preguntasOpciones/' + id )
-      .map( ( res: Response ) => res.json() as QuestionnariesAnswers[] );
-    }*/
-
    getPosition( id: number ) {
       return this.authHttp.get( this.masterService + 'cargosDotaciones/grupoDotacion/' + id )
       .map( ( res: Response ) => res.json() as SuppliesPosition[] );

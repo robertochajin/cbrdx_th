@@ -477,9 +477,9 @@ const routes = [
    { path: 'questionnaries/update/:id', component: QuestionnairesUpdateComponent, canActivate: [ AuthGuard ] },
 
    //  Dotaciones
-   { path: 'supplies', component: SuppliesComponent, canActivate: [ AuthGuard ] },
-   { path: 'supplies/add', component: SuppliesAddComponent, canActivate: [ AuthGuard ] },
-   { path: 'supplies/update/:id', component: SuppliesUpdateComponent, canActivate: [ AuthGuard ] },
+   { path: 'supplies', component: SuppliesComponent },
+   { path: 'supplies/add', component: SuppliesAddComponent },
+   { path: 'supplies/update/:id', component: SuppliesUpdateComponent },
 
 ];
 

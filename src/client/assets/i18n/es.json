@@ -66,12 +66,11 @@
   "MSG_GUARDADO":"Guardado",
   "MSG_REGISTRO":"Registro",
   "MSG_NORECORDSFOUND":"Su búsqueda no obtuvo ningún resultado",
-   "MSG_CODIGOEXISTE": "Código Existe"
+   "MSG_CODIGOEXISTE": "Código Existe",
   "LBL_BUSCAR":"Buscar...",
   "PH_BUSCAR":"Buscar ",
   "LBL_INVALIDO" : "Invalido",
   "LBL_ENVIAR":"Enviar",
-   "LBL_ID": "Id",
   "BTN_VISUALIZAR": "Ver detalle",
   "BTN_ELIMINAR": "Eliminar",
    "BTN_INACTIVAR": "Inactivar",
@@ -84,7 +83,6 @@
   "BTN_BORRAR":"Borrar",
   "BTN_DOWNLOAD": "Descargar",
   "BTN_UPLOAD": "Subir archivo",
-   "BTN_LLAMAR": "Llamar",
    "BTN_NUEVO": "Nuevo",
    "BTN_NUEVA": "Nueva",
    "BTN_FINALIZARPROCESO": "Finalizar el proceso",
@@ -1107,7 +1105,5 @@
       "LBL_ACTIVE": "Activo"
    },
    "FIN_ARCHIVO":"============================FIN ARCHIVO============================="
-
-
 
 }

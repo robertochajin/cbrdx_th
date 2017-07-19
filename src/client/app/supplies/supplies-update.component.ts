@@ -112,9 +112,9 @@ export class SuppliesUpdateComponent implements OnInit {
       } );
 
       listaService.getMasterDetails( 'ListasCiclosEntregas' ).subscribe( res => {
-         this.sizeTypes.push( { label: 'Seleccione', value: null } );
+         this.cycleTypes.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
-            this.sizeTypes.push( { label: s.nombre, value: s.idLista } );
+            this.cycleTypes.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
    }
@@ -245,7 +245,7 @@ export class SuppliesUpdateComponent implements OnInit {
    // Archivo Adjunto
    uploadingOk( event: any ) {
       let respuesta = JSON.parse( event.xhr.response );
-      if ( respuesta.idAdjunto != null || respuesta.idAdjunto != undefined ) {
+      if ( respuesta.idAdjunto !== null || respuesta.idAdjunto !== undefined ) {
          this.supply.idAdjunto = respuesta.idAdjunto;
       }
    }
@@ -290,7 +290,7 @@ export class SuppliesUpdateComponent implements OnInit {
             this.sPosition.idCargo = s.idCargo;
             this.sPosition.cargo = s.cargo;
             this.sPosition.idGrupoDotacion = this.idGrupoDotacion;
-            this.sPosition.indicadorHabilitado = true;
+            this.sPosition.indicadorHabilitado = false;
          }
          this.supplyPositions.push( this.sPosition );
       } );

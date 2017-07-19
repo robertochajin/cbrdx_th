@@ -56,7 +56,7 @@ export class SuppliesAddComponent implements OnInit {
          this.suppliesGroup.codigo = this.suppliesGroup.codigo.toUpperCase().replace( /[^A-Z0-9]/g, '' ).trim();
          this.suppliesService.add( this.suppliesGroup ).subscribe( res => {
             this.navService.setMesage( 1, this.msgs );
-            this.router.navigate( [ 'supplies/update/' + res.idCuestionario ] );
+            this.router.navigate( [ 'supplies/update/' + res.idCargoDotacion ] );
          }, error => {
             this.navService.setMesage( 3, this.msgs );
          } );

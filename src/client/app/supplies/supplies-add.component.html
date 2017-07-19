@@ -1,7 +1,7 @@
 <div class="col-md-10 col-md-offset-1">
 	<div *ngIf="suppliesGroup">
 		<div class="row">
-			<p-panel header="{{'SUPPLIES.LBL_QUESTIONNAIRES' | translate}}">
+			<p-panel header="{{'SUPPLIES.LBL_GROUP' | translate}} {{'SUPPLIES.LBL_SUPPLIES' | translate}}">
 				<fieldset>
 					<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate>
 						<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
