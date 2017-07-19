@@ -15,6 +15,8 @@ import { DiagnosticCIEServices } from '../_services/diagnosticCIE.service';
 import { SmsService } from '../_services/_sms.service';
 import { EmployeesService } from '../_services/employees.service';
 import { Employee } from '../_models/employees';
+import { EventualityServices } from '../_services/eventuality.service';
+import { Eventuality } from '../_models/eventuality';
 
 @Component( {
                moduleId: module.id,
@@ -48,6 +50,8 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    @Output()
    dismiss: EventEmitter<number> = new EventEmitter<number>();
    codigoVerificacion: string;
+   eventuality: Eventuality;
+   acordion: number;
 
    // indicadores para mostrar campos en formulario
    showhorainicio: boolean = false;
@@ -106,6 +110,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       private employeesService: EmployeesService,
       private router: Router,
       private _sms: SmsService,
+      private eventualityServices: EventualityServices,
       private diagnosticCIEServices: DiagnosticCIEServices,
       private route: ActivatedRoute,
       private listaService: ListaService,
@@ -166,9 +171,12 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       if ( this.employeeEventuality.idTerceroNovedad !== 0 ) {
          this.employeeNoveltyService.getById( this.employeeEventuality.idTerceroNovedad ).subscribe( data => {
             this.employeeEventuality = data;
+            this.eventualityServices.get( this.employeeEventuality.idNovedad ).subscribe( rest => {
+               this.eventuality = rest;
+            } );
             this.changeEventuality();
          } );
-      }else{
+      } else {
          this.employeeEventuality.horaInicio = new Date;
       }
       this.employeesService.get( this.employeeEventuality.idTercero ).subscribe( res => this.employee = res );
