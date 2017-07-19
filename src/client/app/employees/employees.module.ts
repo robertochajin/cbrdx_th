@@ -30,6 +30,8 @@ import { EmployeesAttachmentsComponent } from '../employees-attatchments/employe
 import { EmployeesRecruitmentComponent } from '../employees-recruitment/employees-recruitment.component';
 import { EmployeesRecruitmentService } from '../_services/employees-recruitment.service';
 import { EmployeesDetailPerfilComponent } from '../selecttion-process-apply/employees-detail-perfil.component';
+import { JsonpModule } from '@angular/http';
+import { SmsService } from '../_services/_sms.service';
 import { EmployeeEventualitiesComponent } from '../employees-eventualities/employees-eventualities.component';
 import { EmployeeEventualitiesAddComponent } from '../employees-eventualities/employee-eventualities-edit.component';
 import { EmployeeEventualitiesService } from '../_services/employees-eventualities.service';
@@ -47,7 +49,8 @@ import { EmployeeEventualitiesService } from '../_services/employees-eventualiti
                  EmployeesContactModule,
                  EmployeesEstateModule,
                  EmployeesVehicleModule,
-                 EmployeesAttachmentsModule
+                 EmployeesAttachmentsModule,
+                 JsonpModule
               ],
 
               declarations: [ EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent,

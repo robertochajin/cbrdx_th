@@ -12,6 +12,9 @@ import { AdjuntosService } from '../_services/adjuntos.service';
 import { EmployeeEventuality } from '../_models/employeeEventuality';
 import { EmployeeEventualitiesService } from '../_services/employees-eventualities.service';
 import { DiagnosticCIEServices } from '../_services/diagnosticCIE.service';
+import { SmsService } from '../_services/_sms.service';
+import { EmployeesService } from '../_services/employees.service';
+import { Employee } from '../_models/employees';
 
 @Component( {
                moduleId: module.id,
@@ -23,6 +26,7 @@ import { DiagnosticCIEServices } from '../_services/diagnosticCIE.service';
 export class EmployeeEventualitiesAddComponent implements OnInit {
    @Input()
    employeeEventuality: EmployeeEventuality = new EmployeeEventuality();
+   employee: Employee = new Employee();
    msgs: Message[];
    es: any;
    minDateInicio: Date = new Date();
@@ -43,6 +47,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    listField: any[] = [];
    @Output()
    dismiss: EventEmitter<number> = new EventEmitter<number>();
+   codigoVerificacion: string;
 
    // indicadores para mostrar campos en formulario
    showhorainicio: boolean = false;
@@ -98,7 +103,9 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    ftype: string = '';
    // -----    -----------
    constructor( private employeeNoveltyService: EmployeeEventualitiesService,
+      private employeesService: EmployeesService,
       private router: Router,
+      private _sms: SmsService,
       private diagnosticCIEServices: DiagnosticCIEServices,
       private route: ActivatedRoute,
       private listaService: ListaService,
@@ -164,6 +171,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       }else{
          this.employeeEventuality.horaInicio = new Date;
       }
+      this.employeesService.get( this.employeeEventuality.idTercero ).subscribe( res => this.employee = res );
       // this.route.params.subscribe( ( params: Params ) => {
       //    let tempIdEmployee = Number( +params[ 'idTercero' ] );
       //    let tempIdEmployeeNovelty = Number( +params[ 'idTerceroNovedad' ] );
@@ -199,25 +207,33 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    }
 
    onSubmit() {
-      if ( this.employeeEventuality.idTerceroNovedad !== 0 && this.employeeEventuality.idTerceroNovedad !== null &&
-           this.employeeEventuality.idTerceroNovedad !== undefined ) {
-         this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( data => {
-            this._nav.setMesage( 2, this.msgs );
-            this.dismiss.emit( 1 );
-         }, error => {
-            this._nav.setMesage( 3, this.msgs );
-         } );
-      }
-      else {
-         this.employeeEventuality.idEstadoNovedad = this.getStateByCode( 'SOLICI' );
-         this.employeeEventuality.idTerceroReporta = this.usuarioLogueado.usuario.idTercero;
-         this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
-            this._nav.setMesage( 1, this.msgs );
-            this.dismiss.emit( 1 );
-         }, error => {
-            this._nav.setMesage( 3, this.msgs );
-         } );
-      }
+      this.employeeNoveltyService.getById( this.employeeEventuality.idNovedad ).subscribe( res => {
+         if ( res.codigoValidacion === this.codigoVerificacion ) {
+            if ( this.employeeEventuality.idTerceroNovedad !== 0 && this.employeeEventuality.idTerceroNovedad !== null &&
+                 this.employeeEventuality.idTerceroNovedad !== undefined ) {
+               this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( data => {
+                  this._nav.setMesage( 2, this.msgs );
+                  this.dismiss.emit( 1 );
+               }, error => {
+                  this._nav.setMesage( 3, this.msgs );
+               } );
+            }
+            else {
+               this.employeeEventuality.idEstadoNovedad = this.getStateByCode( 'SOLICI' );
+               this.employeeEventuality.idTerceroReporta = this.usuarioLogueado.usuario.idTercero;
+               this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
+                  this._nav.setMesage( 1, this.msgs );
+                  this.dismiss.emit( 1 );
+               }, error => {
+                  this._nav.setMesage( 3, this.msgs );
+               } );
+            }
+         } else {
+            this._nav.setMesage( 4, {
+               severity: 'error', summary: 'Error', detail: 'El código ingresado no coincide con el asignado.'
+            } );
+         }
+      } );
    }
 
    capitalize( event: any ) {
@@ -464,6 +480,28 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       } else {
          this.dismiss.emit( 1 );
       }
+   }
+
+   generarCodigo() {
+      this.employeeEventuality.codigoValidacion = (Math.floor( Math.random() * (9999 - 1000 + 1) ) + 1000).toString();
+
+      this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( data => {
+         this.employee.telefonoCelular = this.employee.telefonoCelular.replace( /\(|\)|\-/g, "" );
+         this.employee.telefonoCelular = this.employee.telefonoCelular.split( ' ' ).join( '' );
+
+         let obj = {
+            destination: this.employee.telefonoCelular,
+            codigo: this.employeeEventuality.codigoValidacion
+         }
+
+         this._sms.generateVerificationCode( obj ).subscribe( res => {
+            console.log( res );
+         }, error => {
+            this._nav.setMesage( 4, {
+               severity: 'success', summary: 'Exito', detail: 'El codigo se ha enviado con éxito.'
+            } );
+         } );
+      } );
    }
 
 }

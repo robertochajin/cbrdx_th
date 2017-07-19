@@ -34,7 +34,7 @@ export class EmployeeEventuality {
    idCcf: number;
    ccf: string;
    indicadorHabilitado: boolean;
-   codigoValidacion: number;
+   codigoValidacion: string;
    auditoriaUsuario: Number;
    auditoriaFecha: Date;
    fechaReporte: Date;
