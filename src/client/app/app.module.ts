@@ -87,6 +87,9 @@ import { EventualitiesModule } from './eventualities/eventualities.module';
 
 // import { MomentModule } from 'angular2-moment';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+// Dotaciones
+import { SuppliesModule } from './supplies/supplies.module';
+
 
 // CarsModule,
 @NgModule( {
@@ -154,7 +157,8 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
                  // EmployeeEventualitiesModule,
                  // EmployeesAttachmentsModule,
                  //AssignmentProfessionalModule
-                 QuestionnairesModule
+                 QuestionnairesModule,
+                 SuppliesModule
               ],
 
               declarations: [ AppComponent ],

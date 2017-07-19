@@ -250,7 +250,6 @@ export class EmployeesAddComponent implements OnInit {
       this.employee.indicadorVivo = true;
       this.employee.idTipoOcupacion = 1;
       this.range = `${lasYear}:${year}`;
-      this.focusUP();
       this.constanteService.listConstants().subscribe( rest => {
          if ( rest.find( c => c.constante === 'DOCNSE' ) ) {
             this.documentoNoSelec = rest.find( c => c.constante === 'DOCNSE' ).valor.split( ',' );
@@ -280,7 +279,6 @@ export class EmployeesAddComponent implements OnInit {
    }
 
    onSubmit() {
-      this.focusUP();
       if ( this.ciudadExpDocumento !== this.backupCiudadExpDocumento ) {
          this.ciudadExpDocumento = '';
          this.employee.ciudadExpDocumento = '';
@@ -357,15 +355,7 @@ export class EmployeesAddComponent implements OnInit {
       this.backupCiudadNacimiento = event.camino;
    }
 
-   focusUP() {
-      const element = document.querySelector( '#formulario' );
-      if ( element ) {
-         element.scrollIntoView( element );
-      }
-   }
-
    updateDate() {
-      this.employee.fechaNacimiento = null;
       let tipodocemploye = this.listTypeDoc.find( x => x.idLista === this.employee.idTipoDocumento );
       let codigo: string = '';
       if ( tipodocemploye ) {
@@ -424,7 +414,17 @@ export class EmployeesAddComponent implements OnInit {
    }
 
    onBirthDate( event: any ) {
-      this.minDateDocumento = new Date( Date.parse( event ) );
+      let year = new Date( Date.parse( event ) );
+      this.minDateDocumento = year;
+
+      let tipodocemploye = this.listTypeDoc.find( x => x.idLista === this.employee.idTipoDocumento );
+      let tipo = this.tiposdoc.find( t => t === tipodocemploye.codigo ); // buscar tipo documento elegido
+      if ( tipo ) {
+         this.minDateDocumento.setFullYear( year.getFullYear() + this.mayeda );
+      } else {
+         this.minDateDocumento.setFullYear( year.getFullYear() + 5 );
+      }
+
    }
 
    onDeathDate( event: any ) {

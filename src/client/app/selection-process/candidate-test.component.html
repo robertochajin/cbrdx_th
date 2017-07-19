@@ -111,7 +111,7 @@
 			</div>
 		</p-panel>
 		<p-panel header="{{'PROCESOSELECCION.LBL_CONTINUARPROCESO' | translate }}">
-		<form *ngIf="definingTest && !readonly" name="tecniqueTest" (ngSubmit)="tf.valid && updateTest()" #tf="ngForm" novalidate
+			<form *ngIf="definingTest && !readonly" name="tecniqueTest" (ngSubmit)="tf.valid && updateTest()" #tf="ngForm" novalidate
 			      id="tecniqueTest">
 				
 				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">

@@ -63,7 +63,7 @@ export class RolFuncionalitiesConfigComponent implements OnInit {
       if ( fc.idRolFuncionalidadControl === null ) {
          this.rolFuncionalitiesService.addControl( fc ).subscribe( data => {
             // this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
-            this._nav.setMesage(0,{severity: 'success', summary: 'Exito', detail: 'Registro guardado correctamente.'});
+            this._nav.setMesage( 0, { severity: 'success', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
             fc.idRolFuncionalidadControl = data.idRolFuncionalidadControl;
          }, error => {
             this.showForm = true;
@@ -73,7 +73,7 @@ export class RolFuncionalitiesConfigComponent implements OnInit {
       } else {
          this.rolFuncionalitiesService.updateControl( fc ).subscribe( data => {
             // this.msgs.push( { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
-            this._nav.setMesage(0, {severity: 'success', summary: 'Exito', detail: 'Registro guardado correctamente.'});
+            this._nav.setMesage( 0, { severity: 'success', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          }, error => {
             this.showForm = true;
             // this.msgs.push( { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );

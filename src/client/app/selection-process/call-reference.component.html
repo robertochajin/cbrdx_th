@@ -72,7 +72,7 @@
 			</p-dataTable>
 		</p-panel>
 		<p-panel header="{{'PROCESOSELECCION.LBL_CONTINUARPROCESO' | translate }}">
-		<form name="process" (ngSubmit)="f.valid && onSubmitP()" #f="ngForm" novalidate id="process">
+			<form name="process" (ngSubmit)="f.valid && onSubmitP()" #f="ngForm" novalidate id="process">
 				<fieldset *ngIf="!readonly">
 					<div class="row">
 						<div class="form-group col-md-10 col-md-offset-1">

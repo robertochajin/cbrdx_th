@@ -47,7 +47,7 @@ export class DivisionPoliticaComponent implements OnInit {
    };
    btnnuevobarrio: { show: boolean, label: string, idparent: number, parent: string } = { show: false, label: '', parent: '', idparent: 0 };
    displayDialog: boolean = false;
-   resultSearch: Search[];
+   resultSearch: DivisionPolitica[];
    selectedSearch: SelectItem;
    codeExists: boolean = false;
    guardado = false;
@@ -365,12 +365,11 @@ export class DivisionPoliticaComponent implements OnInit {
       );
    }
 
-   captureId( event: Search ) {
-
+   captureId( event: DivisionPolitica ) {
       //  ScrollTo 0;
        jQuery( '#trvDivisionPolitica' ).scrollTop( 0 );
 
-      this.divisionPoliticaService.viewDivisionPolitica( event.value ).subscribe( res => {
+      this.divisionPoliticaService.viewDivisionPolitica( event.idDivisionPolitica ).subscribe( res => {
          this.politicalDivision = res;
          this.header = res.descripcionDivisonPolitica;
          let nodeCode = this.getCodigoTypebyId( res.idDivisionPoliticaTipo );

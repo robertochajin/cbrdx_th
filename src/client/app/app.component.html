@@ -28,6 +28,8 @@
 
 </div>
 
-<p-dialog header="Advertencia" [(visible)]="display" modal="true" [width]="400">
-	La sesión se cerrará en {{idleState}} a partir de este momento si no se detecta actividad por parte del usuario.
+<p-dialog id="dlgSessionOff" header="Advertencia" class="fa fa-exclamation-triangle"
+[(visible)]="display" modal="true" [width]="400"
+			 [draggable]="false" [resizable]="false">
+	La sesión se cerrará en <strong>{{idleState}}</strong> a partir de este momento si no se detecta actividad por parte del usuario.
 </p-dialog>
