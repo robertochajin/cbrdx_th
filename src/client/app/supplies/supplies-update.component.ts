@@ -38,6 +38,7 @@ export class SuppliesUpdateComponent implements OnInit {
    codeExistsS: boolean = false;
    formGroup: boolean = false;
    formSupply: boolean = false;
+   allHabilitado: boolean = false;
    idGrupoDotacion: number;
    cycleTypes: SelectItem[] = [];
    sizeTypes: SelectItem[] = [];
@@ -233,6 +234,13 @@ export class SuppliesUpdateComponent implements OnInit {
       }
    }
 
+   changeAll() {
+      this.supplyPositions.map( s => {
+         s.indicadorHabilitado = this.allHabilitado;
+         this.saveAll( s );
+      } );
+   }
+
    validateCodeS() {
       if ( this.supply.codigo !== '' && this.supply.codigo !== null ) {
          this.codeExistsS = this.allSupplies.filter(
@@ -294,6 +302,9 @@ export class SuppliesUpdateComponent implements OnInit {
          }
          this.supplyPositions.push( this.sPosition );
       } );
+      if ( this.supplyPositions.filter( r => r.indicadorHabilitado === true ).length === this.supplyPositions.length ) {
+         this.allHabilitado = true;
+      }
    }
 
    changePosition( sp: SuppliesPosition ) {
@@ -310,6 +321,18 @@ export class SuppliesUpdateComponent implements OnInit {
             this.navService.setMesage( 0, { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          }, error => {
             this.navService.setMesage( 0, { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
+         } );
+      }
+   }
+
+   saveAll( sp: SuppliesPosition ) {
+      this.msgs = [];
+      if ( sp.idCargoDotacion === null ) {
+         this.suppliesService.addPosition( sp ).subscribe( data => {
+            sp.idCargoDotacion = data.idCargoDotacion;
+         } );
+      } else {
+         this.suppliesService.updatePosition( sp ).subscribe( data => {
          } );
       }
    }
