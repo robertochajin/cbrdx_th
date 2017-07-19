@@ -32,25 +32,25 @@ export class ToolbarComponent {
          this.usuarioLogueado = this.jwtHelper.decodeToken( token );
       }
 
-      this.startTimer();
-      renderer.listenGlobal( 'body', 'mousemove', ( event: any ) => {
-         this.resetTimer();
-      } );
-      renderer.listenGlobal( 'body', 'keypress', ( event: any ) => {
-         this.resetTimer();
-      } );
-      renderer.listenGlobal( 'body', 'DOMMouseScroll', ( event: any ) => {
-         this.resetTimer();
-      } );
-      renderer.listenGlobal( 'body', 'mousewheel', ( event: any ) => {
-         this.resetTimer();
-      } );
-      renderer.listenGlobal( 'body', 'touchmove', ( event: any ) => {
-         this.resetTimer();
-      } );
-      renderer.listenGlobal( 'body', 'click', ( event: any ) => {
-         this.resetTimer();
-      } );
+      // this.startTimer();
+      // renderer.listenGlobal( 'body', 'mousemove', ( event: any ) => {
+      //    this.resetTimer();
+      // } );
+      // renderer.listenGlobal( 'body', 'keypress', ( event: any ) => {
+      //    this.resetTimer();
+      // } );
+      // renderer.listenGlobal( 'body', 'DOMMouseScroll', ( event: any ) => {
+      //    this.resetTimer();
+      // } );
+      // renderer.listenGlobal( 'body', 'mousewheel', ( event: any ) => {
+      //    this.resetTimer();
+      // } );
+      // renderer.listenGlobal( 'body', 'touchmove', ( event: any ) => {
+      //    this.resetTimer();
+      // } );
+      // renderer.listenGlobal( 'body', 'click', ( event: any ) => {
+      //    this.resetTimer();
+      // } );
 
       if ( this.usuarioLogueado.usuario !== null ) {
          let mom: moment.Moment = moment( this.usuarioLogueado.usuario.auditoriaFecha );
@@ -69,22 +69,22 @@ export class ToolbarComponent {
       this.router.navigate( [ '/login' ] );
    }
 
-   startTimer() {
-      // this.timeoutID = window.setTimeout( this.goInactive, 1500000 );
-   }
+   // startTimer() {
+   //    // this.timeoutID = window.setTimeout( this.goInactive, 1500000 );
+   // }
 
-   resetTimer() {
-      window.clearTimeout( this.timeoutID );
-      this.goActive();
-   }
+   // resetTimer() {
+   //    window.clearTimeout( this.timeoutID );
+   //    this.goActive();
+   // }
 
-   goInactive() {
-      localStorage.removeItem('token');
-   }
-
-   goActive() {
-      this.startTimer();
-   }
+   // goInactive() {
+   //    localStorage.removeItem('token');
+   // }
+   //
+   // goActive() {
+   //    this.startTimer();
+   // }
 
 }
 

@@ -26,11 +26,12 @@ export class AuthGuard implements CanActivate {
    }
 
    canActivate( route: ActivatedRouteSnapshot, state: RouterStateSnapshot ): boolean {
-      if ( this.authenticationService.loggedIn() ) {
+      if ( this.authenticationService.loggedIn() && !this.jwtHelper.isTokenExpired( localStorage.getItem( 'token' ) ) ) {
          let url: string = route.url[ 0 ].path;
          this.checkFuncionality( url );
          return true;
       } else {
+         localStorage.removeItem( 'token' );
          this.router.navigate( [ '/login' ] );
          return false;
       }
