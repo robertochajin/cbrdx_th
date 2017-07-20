@@ -1023,7 +1023,7 @@
       "": ""
    },
    "NOVEDADES": {
-      "LBL_NOVEDAD": "Novedad",
+      "LBL_NOVEDAD": "Configuración de novedad",
       "BTN_AGREGARNUEVO": "Agregar nueva novedad",
       "LBL_NOVEDADES": "Configuración de novedades",
       "LBL_DATOSBASICOS": "Datos básicos",
@@ -1159,6 +1159,8 @@
       "LBL_CCF": "Caja compensación familiar",
       "LBL_PERIODOINICIAL": "Periodo inicial",
       "LBL_PERIODOFINAL": "Periodo final",
+      "LBL_OFICINA": "Oficina",
+      "LBL_AREA": "Área",
       "": ""
    },
    "RECLUTAMIENTO": {

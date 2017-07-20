@@ -67,7 +67,7 @@ export class EmployeesDetailComponent implements OnInit {
                                            this.employee.primerApellido + ' ' +
                                            this.employee.segundoApellido;
 
-            this.employee.edad = moment( this.employee.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
+            this.employee.edad = moment().diff( this.employee.fechaNacimiento, 'years', false ).toString();
             // console.info(this.svcThUrl+'/file/'+this.employee.imagen);
             // this.acordion=0;
             //
