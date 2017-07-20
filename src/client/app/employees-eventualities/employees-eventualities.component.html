@@ -32,13 +32,13 @@
 		</p-dataTable>
 	</div>
 	<div *ngIf="saveEventuality" class="clearfix">
-		<employee-eventuality-add *ngIf="employee.idTercero && !employeeEventuality.idTerceroNovedad"
+		<employee-eventuality-add *ngIf="employee.idTercero"
 		                          [employeeEventuality]="employeeEventuality" (dismiss)="toggleForm()"></employee-eventuality-add>
 	</div>
 </div>
 
 <div *ngIf="editEventuality" class="clearfix">
-	<employee-eventuality-add *ngIf="employee.idTercero && employeeEventuality.idTerceroNovedad"
+	<employee-eventuality-add *ngIf="employee.idTercero"
 	                          [employeeEventuality]="employeeEventuality" (dismiss)="toggleFormEdit()"></employee-eventuality-add>
 </div>
 <p-confirmDialog icon="fa fa-question-circle" #cd width="400">
