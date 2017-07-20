@@ -136,6 +136,7 @@ export class EventualitiesEditComponent implements OnInit {
             this.rolesToReport.splice( this.rolesToReport.indexOf( selectedRol ), 1 );
             this.listReportRoles.push( foundRol );
             this.savingReportRol = false;
+            this.reportRol = null;
             this._nav.setMesage( 2 );
          }, ( error ) => {
             this._nav.setMesage( 3 );
@@ -150,6 +151,7 @@ export class EventualitiesEditComponent implements OnInit {
             res.rol = selectedRol.label;
             this.listReportRoles.push( res );
             this.savingReportRol = false;
+            this.reportRol = null;
             this._nav.setMesage( 1 );
          }, ( error ) => {
             this._nav.setMesage( 3 );
