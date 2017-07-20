@@ -18,12 +18,11 @@ export class EventualitiesDetailComponent implements OnInit {
    public listReportRoles: EventualityRoles[] = [];
    public evFields: EventualityField[] = [];
 
-   constructor(
-      private router: Router,
+   constructor( private router: Router,
       private route: ActivatedRoute,
       private eventualityServices: EventualityServices,
       private eventualityRolesServices: EventualityRolesServices,
-      private eventualityFieldsServices: EventualityFieldsServices) {
+      private eventualityFieldsServices: EventualityFieldsServices ) {
    }
 
    ngOnInit() {
@@ -47,6 +46,5 @@ export class EventualitiesDetailComponent implements OnInit {
          }
       } );
    }
-
 
 }

@@ -200,6 +200,9 @@ import { SuppliesComponent } from './supplies/supplies.component';
 import { SuppliesAddComponent } from './supplies/supplies-add.component';
 import { SuppliesUpdateComponent } from './supplies/supplies-update.component';
 
+// Bandeja de Novedades
+import { TrayEventualitiesComponent } from './tray-eventualities/tray-eventualities.component';
+
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
@@ -497,6 +500,10 @@ const routes = [
    { path: 'supplies', component: SuppliesComponent },
    { path: 'supplies/add', component: SuppliesAddComponent },
    { path: 'supplies/update/:id', component: SuppliesUpdateComponent },
+
+   //  Dotaciones
+   { path: 'tray-eventualities', component: TrayEventualitiesComponent },
+
 
 ];
 

@@ -9,7 +9,7 @@
 	
 	<p-accordion id="accordion">
 		
-		<p-accordionTab header="{{ 'NOVEDADES.LBL_DATOSBASICOS' | translate }}" >
+		<p-accordionTab header="{{ 'NOVEDADES.LBL_DATOSBASICOS' | translate }}">
 			
 			<form class="form-horizontal">
 				<fieldset>
@@ -51,7 +51,8 @@
 							<label class="col-md-2 col-sm-8 col-xs-12 control-label">{{'NOVEDADES.LBL_REQUIERESEGUIMIENTO' | translate }}:</label>
 							<label class="col-md-2 col-sm-4 col-xs-12 "><strong>{{eventuality.indicadorSeguimiento ? 'Si' : 'No'}}</strong></label>
 							
-							<label class="col-md-2 col-sm-8 col-xs-12 control-label">{{'NOVEDADES.LBL_AUTORIZAJEFEINMEDIATO' | translate }}:</label>
+							<label class="col-md-2 col-sm-8 col-xs-12 control-label">{{'NOVEDADES.LBL_AUTORIZAJEFEINMEDIATO' | translate
+								}}:</label>
 							<label
 								class="col-md-2 col-sm-4 col-xs-12 "><strong>{{eventuality.indicadorAutorizaJefe ? 'Si' : 'No'}}</strong></label>
 							
@@ -74,10 +75,10 @@
 					</div>
 				</fieldset>
 			</form>
-			
+		
 		</p-accordionTab>
 		
-		<p-accordionTab header="{{ 'NOVEDADES.LBL_ROLESREPORTAN' | translate }}" >
+		<p-accordionTab header="{{ 'NOVEDADES.LBL_ROLESREPORTAN' | translate }}">
 			
 			<fieldset>
 				
@@ -91,13 +92,13 @@
 						</p-dataTable>
 					</div>
 				</div>
-				
+			
 			
 			</fieldset>
 		
 		</p-accordionTab>
 		
-		<p-accordionTab header="{{ 'NOVEDADES.LBL_NOMINA' | translate }}" >
+		<p-accordionTab header="{{ 'NOVEDADES.LBL_NOMINA' | translate }}">
 			
 			<form class="form-horizontal">
 				<fieldset>
@@ -121,16 +122,16 @@
 						<div class="row">
 							<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'NOVEDADES.LBL_CANCELASAFIX' | translate }}:</label>
 							<label class="col-md-4 col-sm-6 col-xs-12 "><strong>{{eventuality.indicadorCancelacion ? 'Si' : 'No'}}</strong></label>
-							
-						</div>
 						
+						</div>
+					
 					</div>
 				</fieldset>
 			</form>
-			
+		
 		</p-accordionTab>
 		
-		<p-accordionTab header="{{ 'NOVEDADES.LBL_CAMPOS' | translate }}" >
+		<p-accordionTab header="{{ 'NOVEDADES.LBL_CAMPOS' | translate }}">
 			
 			<fieldset>
 				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="evFields" [paginator]="true"

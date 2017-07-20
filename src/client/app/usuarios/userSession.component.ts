@@ -67,7 +67,7 @@ export class UserSessionComponent implements OnInit {
                                            this.employee.segundoNombre + ' ' +
                                            this.employee.primerApellido + ' ' +
                                            this.employee.segundoApellido;
-            this.employee.edad = moment( this.employee.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
+            this.employee.edad = moment().diff( this.employee.fechaNacimiento, 'years', false ).toString();
          } );
       } );
    }
@@ -77,9 +77,9 @@ export class UserSessionComponent implements OnInit {
          this.user.contrasenaAntigua = this.oldPass;
          this.user.contrasena = this.newPass;
          this.usuariosService.updatePass( this.user ).then( res => {
-            console.info( res );
             if ( res ) {
                this.navService.setMesage( 0, { severity: 'info', summary: 'Exito', detail: 'Contraseña actualizada correctamente.' } );
+               this.goBack();
             } else {
                this.navService.setMesage( 0, { severity: 'error', summary: 'Error al actualizar', detail: 'Contraseña actual no es correcta.' });
             }
