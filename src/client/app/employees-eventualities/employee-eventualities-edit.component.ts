@@ -349,7 +349,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       if ( fecha2 && fecha1 ) {
          let diasDif = fecha2.getTime() - fecha1.getTime();
          let dias = Math.round( diasDif / (1000 * 60 * 60 * 24) );
-         this.employeeEventuality.dias = dias;
+         this.employeeEventuality.dias = dias+1;
       }
    }
 
