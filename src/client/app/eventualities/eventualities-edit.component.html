@@ -281,13 +281,13 @@
 					<p-column header="{{'NOVEDADES.LBL_CAMPOVISIBLE' | translate}}" styleClass="datatable-col-action">
 						<template let-fld="rowData" let-ri="rowIndex" pTemplate="body">
 							<p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="fld.indicadorHabilitado"
-							               (onChange)="updateEventualityField(fld, ri, 'visible')"></p-inputSwitch>
+							               (onChange)="updateEventualityField(fld, ri)"></p-inputSwitch>
 						</template>
 					</p-column>
 					<p-column header="{{'NOVEDADES.LBL_CAMPOOBLIGATORIO' | translate}}" styleClass="datatable-col-action">
 						<template let-fld="rowData" let-ri="rowIndex" pTemplate="body">
 							<p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="fld.indicadorObligatorio"
-							               (onChange)="updateEventualityField(fld, ri, 'obligatory')"></p-inputSwitch>
+							               (onChange)="updateEventualityField(fld, ri)"></p-inputSwitch>
 						</template>
 					</p-column>
 				</p-dataTable>

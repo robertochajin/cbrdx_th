@@ -185,16 +185,21 @@ export class EventualitiesEditComponent implements OnInit {
       }
    }
 
-   updateEventualityField( evField: EventualityField, rowIndex: number, type: string ) {
+   updateEventualityField( evField: EventualityField, rowIndex: number) {
 
-      if(evField.idNovedadCampo !== undefined && evField.idNovedadCampo !== null) {
+      if(this.evFields[rowIndex].idNovedadCampo !== undefined && this.evFields[rowIndex].idNovedadCampo !== null) {
          this.eventualityFieldsServices.update(evField).subscribe(res => {
-
-         });
+            this._nav.setMesage( 2 );
+         }, ( error ) => {
+            this._nav.setMesage( 3 );
+         } );
       } else {
          this.eventualityFieldsServices.add(evField).subscribe(res => {
-            console.log(rowIndex);
-         });
+            evField.idNovedadCampo = res.idNovedadCampo;
+            this.evFields[rowIndex] = evField;
+         }, ( error ) => {
+            this._nav.setMesage( 3 );
+         } );
       }
    }
 
@@ -206,14 +211,15 @@ export class EventualitiesEditComponent implements OnInit {
             let evField: EventualityField = new EventualityField();
 
             // find created eventualityField if has at least one
-            if ( eventualityFields !== null ) {
+            if ( eventualityFields !== null && eventualityFields.length > 0) {
                evField = eventualityFields.find( ef => ef.idCampoNovedad === f.idLista );
             }
 
             // evalute if has found or needs to be created as default
-            if ( evField.idCampoNovedad !== undefined && evField.idCampoNovedad !== null ) {
+            if ( evField != undefined && evField.idCampoNovedad !== undefined && evField.idCampoNovedad !== null ) {
                this.evFields.push( evField );
             } else {
+               evField = new EventualityField();
                evField.idNovedad = this.eventuality.idNovedad;
                evField.campoNovedad = f.nombre;
                evField.idCampoNovedad = f.idLista;
