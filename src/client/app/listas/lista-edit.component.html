@@ -125,9 +125,10 @@
 			      (ngSubmit)="!detailCodeExists&&fe.form.valid && updateDetail(fe)" #fe="ngForm"
 			      novalidate (keydown.enter)="$event.preventDefault()">
 				<div class="row">
-					<div class="col-xs-6">
+					<div class="col-md-6 col-md-offset-3">
 						<div class="form-group" [ngClass]="{ 'has-error':fe.submitted&&!codigoEdit.valid}">
-							<label for="codigoEdit">{{ 'LBL_CODIGO' | translate }}</label>
+							<label class="control-label col-md-3" for="codigoEdit">{{ 'LBL_CODIGO' | translate }}</label>
+							<div class="col-md-9">
 							<input class="form-control" id="codigoEdit" name="codigoEdit" type="text" pInputText
 							       [(ngModel)]="editableDetail.codigo" maxlength="10" required #codigoEdit="ngModel"
 							       (keyup)="childInputCleanUp($event.target.value)" (change)="validateDetailCode()"
@@ -142,37 +143,40 @@
 								</div>
 							</div>
 						</div>
+						</div>
 						<div class="form-group" [ngClass]="{ 'has-error':fe.submitted&&!itemEdit.valid}">
-							<label for="itemEdit">Item</label>
+							<label class="control-label col-md-3" for="itemEdit">{{ 'LBL_NOMBRE' | translate }}</label>
+							<div class="col-md-9">
 							<input class="form-control" id="itemEdit" name="itemEdit" type="text" pInputText
 							       [(ngModel)]="editableDetail.nombre" #itemEdit="ngModel" maxlength="30" required/>
 							<div *ngIf="fe.submitted&&itemEdit.errors" class="alert alert-danger">
 								<div [hidden]="!itemEdit.errors.required">{{ 'LISTAS.MSG_NOMBRELEMENTO' | translate }}</div>
 								<div [hidden]="!itemEdit.errors.maxlength">{{ 'LISTAS.MSG_ELEMENT30CARACT' | translate }}</div>
 							</div>
+							</div>
 						</div>
-					</div>
-					<div class="col-xs-6">
+					<div class="form-group">
 						<div class="form-group">
-							<label for="habilitadoEdit">{{ 'LBL_HABILITADO' | translate }}</label>
-							<p-checkbox id="habilitadoEdit" [(ngModel)]="editableDetail.indicadorHabilitado"
+							<label class="control-label col-md-3" for="habilitadoEdit">{{ 'LBL_HABILITADO' | translate }}</label>
+							<div class="col-md-9">
+								<p-checkbox id="habilitadoEdit" [(ngModel)]="editableDetail.indicadorHabilitado"
 							            binary="true" name="habilitado"></p-checkbox>
+							</div>
 						</div>
-						<div class="form-group">
-						
-						</div>
-						<div class="col-md-11 col-md-offset-1">
+
+					</div>
+				</div>
+						<div class="col-md-6 col-md-offset-3">
 							<div class="row form-footer-buttons">
 								<div class="col-md-12 ">
-									<button type="submit" pButton icon="fa-check" label="{{ 'BTN_ACTUALIZAR' | translate }}" class="pull-right"
-									        (keydown.enter)="submitDetailEdit.click()"
-									        #submitDetailEdit></button>
-									<a (click)="goBackForm((fe.dirty === true))" class="cancelar pull-right">{{ 'BTN_CANCELAR' | translate }}</a>
+									<a (click)="(fd.dirty === true) ? displayDialog=true : goBack()" class="cancelar">{{ 'BTN_CANCELAR' | translate }}</a>
+									<button type="submit" pButton icon="fa-check" label="{{ 'BTN_ACTUALIZAR' | translate }}"
+											  (keydown.enter)="submitDetailEdit.click()"
+											  #submitDetailEdit></button>
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
+			</div>
 			</form>
 			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="detailsList"
 							 [paginator]="false" [rows]="10" [responsive]="true" class="datatable-order">
@@ -225,11 +229,5 @@
 			</div>
 		</p-footer>
 	</p-dialog>
-	<p-confirmDialog width="400" #cd>
-		<p-footer>
-			<button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate}}" (click)="cd.reject()"></button>
-			<button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate}}" (click)="cd.accept()"></button>
-		</p-footer>
-	</p-confirmDialog>
 
 </div>

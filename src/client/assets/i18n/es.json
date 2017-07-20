@@ -1023,9 +1023,9 @@
       "": ""
    },
    "NOVEDADES": {
-      "LBL_NOVEDAD": "Novedad",
+      "LBL_NOVEDAD": "Configuración de novedad",
       "BTN_AGREGARNUEVO": "Agregar nueva novedad",
-      "LBL_NOVEDADES": "Novedades",
+      "LBL_NOVEDADES": "Configuración de novedades",
       "LBL_DATOSBASICOS": "Datos básicos",
       "LBL_CODIGO": "Código",
       "LBL_TIPONOVEDAD": "Tipo de novedad",
@@ -1149,7 +1149,7 @@
       "LBL_HORAFINAL": "Hora final",
       "LBL_DIAS": "Días",
       "LBL_VALOR": "Valor",
-      "LBL_CUENTA": "Numero de cuenta",
+      "LBL_CUOTAS": "Numero de cuotas",
       "LBL_REFERENCIA": "Numero de referencia",
       "LBL_ENTIDAD": "Entidad",
       "LBL_ESTADO": "Estado",
