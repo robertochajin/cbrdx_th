@@ -34,6 +34,7 @@ export class EventualitiesEditComponent implements OnInit {
    public disabledReportRoles: EventualityRoles[] = [];
    public evFields: EventualityField[] = [];
    public fields: ListaItem[] = [];
+   public acordion = 1;
 
    constructor( private listaService: ListaService,
       private router: Router,
@@ -103,11 +104,12 @@ export class EventualitiesEditComponent implements OnInit {
       } );
    }
 
-   onSubmit() {
+   onSubmit(step: number) {
       if ( this.eventuality.idNovedad !== undefined && this.eventuality.idNovedad !== null ) {
          this.eventualityServices.update( this.eventuality ).subscribe( res => {
             if ( res ) {
                this._nav.setMesage( 2 );
+               this.nextStep(step);
             }
          }, ( error ) => {
             this._nav.setMesage( 3 );
@@ -116,6 +118,7 @@ export class EventualitiesEditComponent implements OnInit {
          this.eventualityServices.add( this.eventuality ).subscribe( res => {
             this.eventuality = res;
             this.buildFieldsArray( null );
+            this.nextStep(step);
             this._nav.setMesage( 1 );
          }, ( error ) => {
             this._nav.setMesage( 3 );
@@ -229,6 +232,10 @@ export class EventualitiesEditComponent implements OnInit {
          } );
 
       } );
+   }
+
+   nextStep(step: number) {
+      this.acordion = step;
    }
 
 }
