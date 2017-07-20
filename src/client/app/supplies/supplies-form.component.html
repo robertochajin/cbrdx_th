@@ -5,8 +5,9 @@
 				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 					<div class="ui-grid-row">
 						<div class="ui-grid-col-4">
-							<label for="codigo">* {{ 'LBL_CODIGO' | translate}}</label>
-							<input type="text" pInputText id="codigo" name="codigo"
+							<label>* {{ 'LBL_CODIGO' | translate}}</label><br/>
+							<b>{{suppliesGroup.codigo}}</b>
+							<!--<input type="text" pInputText id="codigo" name="codigo"
 							       [(ngModel)]="suppliesGroup.codigo" maxlength="10"
 							       (change)="validateCode()"
 							       (keyup)="inputCleanCode($event)"
@@ -18,7 +19,7 @@
 							<div class="ui-message ui-messages-error ui-corner-all"
 							     *ngIf="f.submitted && codeExists ">
 								<i class="fa fa-close"></i>{{ 'LBL_VALIDATECODE' | translate}}
-							</div>
+							</div>-->
 						</div>
 						<div class="ui-grid-col-8">
 							<label for="nombre">* {{ 'LBL_NOMBRE' | translate}}</label>
@@ -96,7 +97,7 @@
 			<form (ngSubmit)="s.valid && onSubmitSupplies()" #s="ngForm" novalidate>
 				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 					<div class="ui-grid-row">
-						<div class="ui-grid-col-4">
+						<div class="ui-grid-col-4" *ngIf="!supply.idDotacion">
 							<label for="codigoS">* {{ 'LBL_CODIGO' | translate}}</label>
 							<input type="text" pInputText id="codigoS" name="codigoS"
 							       [(ngModel)]="supply.codigo" maxlength="10"
@@ -111,6 +112,10 @@
 							     *ngIf="s.submitted && codeExistsS ">
 								<i class="fa fa-close"></i>{{ 'MSG_CODIGOEXISTE' | translate}}
 							</div>
+						</div>
+						<div class="ui-grid-col-4" *ngIf="supply.idDotacion">
+							<label>* {{ 'LBL_CODIGO' | translate}}</label><br/>
+							<b>{{supply.codigo}}</b>
 						</div>
 						<div class="ui-grid-col-8">
 							<label for="nombreS">* {{ 'LBL_NOMBRE' | translate}}</label>
