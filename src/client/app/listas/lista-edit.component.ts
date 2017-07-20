@@ -205,10 +205,12 @@ export class ListaEditComponent implements OnInit {
                                               icon: 'fa fa-question-circle',
                                               accept: () => {
                                                  this.isEdit = false;
+                                                 this.editableDetail = new ListaItem();
                                               }
                                            } );
       } else {
          this.isEdit = false;
+         this.editableDetail = new ListaItem();
       }
    }
 

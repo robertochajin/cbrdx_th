@@ -95,63 +95,63 @@
 							<div class="row">
 								<div class="form-group col-md-4">
 									<p-checkbox [(ngModel)]="eventuality.indicadorAusentismo" binary="true" id="ausent" name="ausent"
-													#ngAusentismo="ngModel"></p-checkbox>
+									            #ngAusentismo="ngModel"></p-checkbox>
 									<label for="ausent" class="control-label">{{ 'NOVEDADES.LBL_GENERAAUSENTISMO' | translate }}</label>
-
+								
 								</div>
 								<div class="form-group col-md-4">
 									<p-checkbox [(ngModel)]="eventuality.indicadorAdjuntos" binary="true" id="adju" name="adju"
-													#ngAdjun="ngModel"></p-checkbox>
+									            #ngAdjun="ngModel"></p-checkbox>
 									<label for="adju" class="control-label">{{ 'NOVEDADES.LBL_MANEJAADJUNTOS' | translate }}</label>
-
+								
 								</div>
 								<div class="form-group col-md-4">
 									<p-checkbox [(ngModel)]="eventuality.indicadorBandeja" binary="true" id="bndj" name="bndj"
-													#ngBndj="ngModel"></p-checkbox>
+									            #ngBndj="ngModel"></p-checkbox>
 									<label for="bndj" class="control-label">{{ 'NOVEDADES.LBL_VERENBANDEJA' | translate }}</label>
-
+								
 								</div>
 							</div>
 							
 							<div class="row">
 								<div class="form-group col-md-4">
 									<p-checkbox [(ngModel)]="eventuality.indicadorSeguimiento" binary="true" id="segu" name="segu"
-													#ngSegu="ngModel"></p-checkbox>
+									            #ngSegu="ngModel"></p-checkbox>
 									<label for="segu" class="control-label">{{ 'NOVEDADES.LBL_REQUIERESEGUIMIENTO' | translate }}</label>
-
+								
 								</div>
 								<div class="form-group col-md-4">
 									<p-checkbox [(ngModel)]="eventuality.indicadorAutorizaJefe" binary="true" id="autho" name="autho"
-													#ngAutho="ngModel"></p-checkbox>
+									            #ngAutho="ngModel"></p-checkbox>
 									<label for="autho" class="control-label">{{ 'NOVEDADES.LBL_AUTORIZAJEFEINMEDIATO' | translate }}</label>
-
+								
 								</div>
 								<div class="form-group col-md-4">
 									<p-checkbox [(ngModel)]="eventuality.indicadorAfecta" binary="true" id="plnt" name="plnt"
-													#ngAfect="ngModel"></p-checkbox>
+									            #ngAfect="ngModel"></p-checkbox>
 									<label for="plnt" class="control-label">{{ 'NOVEDADES.LBL_AFECTAPLANTA' | translate }}</label>
-
+								
 								</div>
 							</div>
 							
 							<div class="row">
 								<div class="form-group col-md-4">
 									<p-checkbox [(ngModel)]="eventuality.indicadorConfirmacion" binary="true" id="dblConf" name="dblConf"
-													#ngDblConf="ngModel"></p-checkbox>
+									            #ngDblConf="ngModel"></p-checkbox>
 									<label for="dblConf" class="control-label">{{ 'NOVEDADES.LBL_DOBLECONFIRMACION' | translate }}</label>
-
+								
 								</div>
 								<div class="form-group col-md-4">
 									<p-checkbox [(ngModel)]="eventuality.indicadorNotificaJefe" binary="true" id="ntJefe" name="ntJefe"
-													#ngNtJefe="ngModel"></p-checkbox>
+									            #ngNtJefe="ngModel"></p-checkbox>
 									<label for="ntJefe" class="control-label">{{ 'NOVEDADES.LBL_NOTIFICARJEFE' | translate }}</label>
-
+								
 								</div>
 								<div class="form-group col-md-4">
 									<p-checkbox [(ngModel)]="eventuality.indicadorAreasApoyo" binary="true" id="ntArea" name="ntArea"
-													#ngNtArea="ngModel"></p-checkbox>
+									            #ngNtArea="ngModel"></p-checkbox>
 									<label for="ntArea" class="control-label">{{ 'NOVEDADES.LBL_NOTIFICAAREAS' | translate }}</label>
-
+								
 								</div>
 							</div>
 							
@@ -208,14 +208,14 @@
 						</p-dataTable>
 					</div>
 				</div>
-
+				
 				<div class="row form-footer-buttons">
 					<div class="form-group col-md-12">
 						<button icon="fa-arrow-right" label=" {{ 'BTN_SIGUIENTE' | translate }}" (click)="nextStep(3)" type="button"
 						        pButton></button>
 					</div>
 				</div>
-
+			
 			</fieldset>
 		
 		</p-accordionTab>
@@ -242,7 +242,7 @@
 						<div class="form-group col-md-6">
 							<label for="afectType">* {{'NOVEDADES.LBL_TIPOAFECTACION' | translate }}</label>
 							<p-dropdown id="afectType" name="afectType" #ngAfectType="ngModel" [options]="affectationTypes" [autoWidth]="false"
-											[(ngModel)]="eventuality.idTipoAfectacion" required></p-dropdown>
+							            [(ngModel)]="eventuality.idTipoAfectacion" required></p-dropdown>
 							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="nf.submitted && !ngAfectType.valid">
 								<i class="fa fa-close"></i>
 								{{'NOVEDADES.LBL_TIPOAFECTACION' | translate }} {{'LBL_REQUERIDO' | translate }}
@@ -252,23 +252,23 @@
 					<div class="row">
 						<div class="form-group col-md-4">
 							<p-checkbox [(ngModel)]="eventuality.indicadorCancelacion" binary="true" id="canclSx" name="canclSx"
-											#ngCanclSx="ngModel"></p-checkbox>
+							            #ngCanclSx="ngModel"></p-checkbox>
 							<label for="canclSx" class="control-label">{{ 'NOVEDADES.LBL_CANCELASAFIX' | translate }}</label>
 						</div>
 						<div class="form-group col-md-4">
 							<p-checkbox [(ngModel)]="eventuality.indicadorAfecta" binary="true" id="afect" name="afect"
-											#ngAfect="ngModel"></p-checkbox>
+							            #ngAfect="ngModel"></p-checkbox>
 							<label for="afect" class="control-label">{{ 'NOVEDADES.LBL_AFECTANOMINA' | translate }}</label>
 						</div>
 						<div class="form-group col-md-4">
 							<p-checkbox [(ngModel)]="eventuality.indicadorNomina" binary="true" id="dirNom" name="dirNom"
-											#ngDirNom="ngModel"></p-checkbox>
+							            #ngDirNom="ngModel"></p-checkbox>
 							<label for="dirNom" class="control-label">{{ 'NOVEDADES.LBL_DIRECTOANOMINA' | translate }}</label>
 						</div>
 					</div>
-
+					
 					<div class="row">
-
+					
 					</div>
 					
 					<div class="row form-footer-buttons">
