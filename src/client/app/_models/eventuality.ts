@@ -23,7 +23,7 @@ export class Eventuality {
    public indicadorNomina: boolean;
    public indicadorAfecta: boolean;
    public idTipoAfectacion: number;
-   public indicadorCancelacion: number;
+   public indicadorCancelacion: boolean;
    public idEstadoTercero: number;
    public auditoriaUsuario: number;
    public auditoriaFecha: Date;

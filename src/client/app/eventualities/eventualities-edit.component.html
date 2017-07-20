@@ -15,12 +15,12 @@
 	
 	<p-accordion id="accordion">
 		
-		<p-accordionTab header="{{ 'NOVEDADES.LBL_DATOSBASICOS' | translate }}" [selected]="true" [disabled]="false">
+		<p-accordionTab header="{{ 'NOVEDADES.LBL_DATOSBASICOS' | translate }}" [selected]="acordion === 1" [disabled]="false">
 			<fieldset>
 				<div class="row-fluid">
 					<div class="col-md-12">
 						
-						<form name="eventualityForm" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="eventualityForm">
+						<form name="eventualityForm" (ngSubmit)="f.valid && onSubmit(2)" #f="ngForm" novalidate id="eventualityForm">
 							
 							<div class="row">
 								<div class="form-group col-md-6">
@@ -162,7 +162,7 @@
 			</fieldset>
 		</p-accordionTab>
 		
-		<p-accordionTab header="{{ 'NOVEDADES.LBL_ROLESREPORTAN' | translate }}" [selected]="false"
+		<p-accordionTab header="{{ 'NOVEDADES.LBL_ROLESREPORTAN' | translate }}" [selected]="acordion === 2"
 		                [disabled]="(eventuality === undefined || eventuality.idNovedad === undefined)">
 			
 			<fieldset>
@@ -199,16 +199,23 @@
 						</p-dataTable>
 					</div>
 				</div>
+				
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<button icon="fa-arrow-right" label=" {{ 'BTN_SIGUIENTE' | translate }}" (click)="nextStep(3)" type="button"
+						        pButton></button>
+					</div>
+				</div>
 			
 			</fieldset>
 		
 		</p-accordionTab>
 		
-		<p-accordionTab header="{{ 'NOVEDADES.LBL_NOMINA' | translate }}" [selected]="false"
+		<p-accordionTab header="{{ 'NOVEDADES.LBL_NOMINA' | translate }}" [selected]="acordion === 3"
 		                [disabled]="(eventuality === undefined || eventuality.idNovedad === undefined)">
 			
 			<fieldset>
-				<form name="nominaForm" (ngSubmit)="nf.valid && onSubmit()" #nf="ngForm" novalidate id="nominaForm">
+				<form name="nominaForm" (ngSubmit)="nf.valid && onSubmit(4)" #nf="ngForm" novalidate id="nominaForm">
 										
 					<div class="row">
 						<div class="form-group col-md-6">
@@ -270,7 +277,7 @@
 		
 		</p-accordionTab>
 		
-		<p-accordionTab header="{{ 'NOVEDADES.LBL_CAMPOS' | translate }}" [selected]="false"
+		<p-accordionTab header="{{ 'NOVEDADES.LBL_CAMPOS' | translate }}" [selected]="acordion === 4"
 		                [disabled]="(eventuality === undefined || eventuality.idNovedad === undefined)">
 			
 			<fieldset>
