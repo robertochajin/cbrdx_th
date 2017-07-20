@@ -293,7 +293,7 @@
 							<div class="col-md-1"></div>
 							<div class="col-md-4" *ngIf="!eventuality.indicadorConfirmacion"></div>
 							<div class="col-md-4" *ngIf="eventuality.indicadorConfirmacion && !employeeEventuality.idTerceroNovedad"></div>
-							<div  class="col-md-4" *ngIf="eventuality.indicadorConfirmacion">
+							<div  class="col-md-4" *ngIf="eventuality.indicadorConfirmacion && employeeEventuality.idTerceroNovedad">
 								<div class="col-md-8">
 									<button (click)="generarCodigo()" label="{{'PROCESOSELECCION.LBL_GENERCOD' | translate }}" type="button"
 									        pButton></button>
