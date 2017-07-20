@@ -430,7 +430,7 @@ a.cancelar:hover {
     }
 }
 .loading-logo {
-    background: transparent url("../assets/svg/logo-loading.svg");
+    background: transparent url("../assets/images/logo_loading_th.png");
     background-size: 95px 95px;
     height: 95px;
     width: 95px;

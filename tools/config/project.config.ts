@@ -75,6 +75,7 @@ export class ProjectConfig extends SeedConfig {
 
          // { src: `${this.ASSETS_SRC}/js/fastclick/fastclick.js`, inject: true, vendor: false },
          // { src: `${this.ASSETS_SRC}/js/slimScroll/jquery.slimscroll.min.js`, inject: true, vendor: false },
+         { src: `${this.ASSETS_SRC}/js/app.js`, inject: true, vendor: true },
          { src: `${this.ASSETS_SRC}/js/script.js`, inject: true, vendor: false },
 
       ];
