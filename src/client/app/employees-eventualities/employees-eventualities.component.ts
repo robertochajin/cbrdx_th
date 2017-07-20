@@ -26,6 +26,7 @@ export class EmployeeEventualitiesComponent {
    busqueda: string;
    saveEventuality: boolean = false;
    editEventuality: boolean = false;
+   detailEventuality: boolean = false;
 
    constructor( private employeeEventualitiesService: EmployeeEventualitiesService,
       private listaService: ListaService,
@@ -70,8 +71,13 @@ export class EmployeeEventualitiesComponent {
       } );
    }
 
+   toggleDetail() {
+      this.detailEventuality = !this.detailEventuality;
+   }
+
    detail( e: EmployeeEventuality ) {
-      this.router.navigate( [ 'document-management/detail/', e.idTerceroNovedad ] );
+      this.employeeEventuality = e;
+      this.detailEventuality = !this.detailEventuality;
    }
 
    setSearch() {
