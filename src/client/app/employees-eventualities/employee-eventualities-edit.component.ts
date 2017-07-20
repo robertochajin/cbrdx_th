@@ -154,13 +154,13 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
             this.listEPS.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
-      this.listaService.getMasterDetails( 'ListasFp' ).subscribe( res => {
+      this.listaService.getMasterDetails( 'ListasFP' ).subscribe( res => {
          this.listFP.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
             this.listFP.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
-      this.listaService.getMasterDetails( 'ListasCcf' ).subscribe( res => {
+      this.listaService.getMasterDetails( 'ListasCCF' ).subscribe( res => {
          this.listCCF.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
             this.listCCF.push( { label: s.nombre, value: s.idLista } );
@@ -349,7 +349,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       if ( fecha2 && fecha1 ) {
          let diasDif = fecha2.getTime() - fecha1.getTime();
          let dias = Math.round( diasDif / (1000 * 60 * 60 * 24) );
-         this.employeeEventuality.dias = dias;
+         this.employeeEventuality.dias = dias+1;
       }
    }
 
