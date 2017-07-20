@@ -143,10 +143,10 @@ export class LocationsComponent implements OnInit, AfterViewInit {
          let reversed: string[];
          if ( ((this.localizacion.locacion.camino.match( /,/g ) || []).length) === 3 ) {
             strToSearch = this.localizacion.locacion.camino.substr( this.localizacion.locacion.camino.indexOf( ',' ) );
-            reversed = strToSearch.split(',').reverse();
+            reversed = strToSearch.split( ',' ).reverse();
          } else {
             strToSearch = this.localizacion.locacion.camino;
-            reversed = strToSearch.split(',').reverse();
+            reversed = strToSearch.split( ',' ).reverse();
 
          }
          // let _este = this;
@@ -159,7 +159,7 @@ export class LocationsComponent implements OnInit, AfterViewInit {
             }
          };
 
-         geocoder.geocode( { 'address': this.finalAddress + ' ' + reversed.join(',') }, procesarRespuesta );
+         geocoder.geocode( { 'address': this.finalAddress + ' ' + reversed.join( ',' ) }, procesarRespuesta );
       }
 
       for ( let c of this.complementaries ) {

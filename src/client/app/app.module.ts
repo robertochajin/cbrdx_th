@@ -89,6 +89,7 @@ import { EventualitiesModule } from './eventualities/eventualities.module';
 import { NgIdleKeepaliveModule } from 'idle-keepalive-angular2';
 // Dotaciones
 import { SuppliesModule } from './supplies/supplies.module';
+import { TrayEventualitiesModule } from './tray-eventualities/tray-eventualities.module';
 
 
 // CarsModule,
@@ -158,7 +159,8 @@ import { SuppliesModule } from './supplies/supplies.module';
                  // EmployeesAttachmentsModule,
                  //AssignmentProfessionalModule
                  QuestionnairesModule,
-                 SuppliesModule
+                 SuppliesModule,
+                 TrayEventualitiesModule
               ],
 
               declarations: [ AppComponent ],

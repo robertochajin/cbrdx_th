@@ -18,7 +18,7 @@ export class Supplies {
    public costo: number;
    public cantidad: number;
    public idAdjunto: number = null;
-   public indicadorHabilitado: boolean = false;
+   public indicadorHabilitado: boolean = true;
    public indicadorAdicional: boolean;
    public indicadorRequiereTalla: boolean;
    public auditoriaUsuario: number;
