@@ -155,7 +155,7 @@
 						<div class="ui-grid-col-4">
 							<label for="costo">* {{ 'SUPPLIES.LBL_COST' | translate}}</label>
 							<input type="text" pInputText id="costo" name="costo"
-							       [(ngModel)]="supply.costo" maxlength="10"
+							       [(ngModel)]="supply.costo" maxlength="11"
 							       currencyMask
 							       [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
 							       #NGcostoS="ngModel" required/>
