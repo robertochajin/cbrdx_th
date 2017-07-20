@@ -17,6 +17,7 @@ import { EmployeesService } from '../_services/employees.service';
 import { Employee } from '../_models/employees';
 import { EventualityServices } from '../_services/eventuality.service';
 import { Eventuality } from '../_models/eventuality';
+import { EmployeesClinicalData } from '../_models/employeesClinicalData';
 
 @Component( {
                moduleId: module.id,
@@ -60,6 +61,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    codigoVerificacion: string;
    eventuality: Eventuality = new Eventuality();
    acordion: number;
+   ecd: EmployeesClinicalData = new EmployeesClinicalData();
 
    // indicadores para mostrar campos en formulario
    showhorainicio: boolean = false;
@@ -298,6 +300,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    }
 
    captureDiagnosticId( event: any ) {
+      this.employeeEventuality.idDiagnostico = this.ecd.diagnostico.idDiagnosticoCie;
       this.wrongDiagnostic = false;
    }
 
@@ -499,43 +502,42 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    }
 
    formatDate() {
-      if ( this.fechaInicio !== undefined ) {
+      if ( this.fechaInicio !== undefined && this.fechaInicio !== null ) {
          if ( this.fechaInicio.toString() !== 'Invalid Date' ) {
             this.employeeEventuality.fechaInicio = this.fechaInicio.toISOString().replace( 'Z', '-0500' );
          }
       }
-      if ( this.horaInicio !== undefined ) {
+      if ( this.horaInicio !== undefined && this.horaInicio !== null ) {
          if ( this.horaInicio.toString() !== 'Invalid Date' ) {
             this.employeeEventuality.horaInicio = this.horaInicio.toISOString().replace( 'Z', '-0500' );
          }
       }
-      if ( this.fechaFinal !== undefined ) {
+      if ( this.fechaFinal !== undefined && this.fechaFinal !== null ) {
          if ( this.fechaFinal.toString() !== 'Invalid Date' ) {
             this.employeeEventuality.fechaFin = this.fechaFinal.toISOString().replace( 'Z', '-0500' );
          }
       }
-      if ( this.horaFinal !== undefined ) {
+      if ( this.horaFinal !== undefined && this.horaFinal !== null ) {
          if ( this.horaFinal.toString() !== 'Invalid Date' ) {
             this.employeeEventuality.horaFin = this.horaFinal.toISOString().replace( 'Z', '-0500' );
          }
       }
-      if ( this.fechaReintegro !== undefined ) {
+      if ( this.fechaReintegro !== undefined && this.fechaReintegro !== null ) {
          if ( this.fechaReintegro.toString() !== 'Invalid Date' ) {
             this.employeeEventuality.fechaReintegro = this.fechaReintegro.toISOString().replace( 'Z', '-0500' );
          }
       }
-      if ( this.horaReintegro !== undefined ) {
+      if ( this.horaReintegro !== undefined && this.horaReintegro !== null ) {
          if ( this.horaReintegro.toString() !== 'Invalid Date' ) {
             this.employeeEventuality.horaReintergo = this.horaReintegro.toISOString().replace( 'Z', '-0500' );
          }
       }
-      if ( this.periodoInicio !== undefined ) {
+      if ( this.periodoInicio !== undefined && this.periodoInicio !== null ) {
          if ( this.periodoInicio.toString() !== 'Invalid Date' ) {
             this.employeeEventuality.periodoInicio = this.periodoInicio.toISOString().replace( 'Z', '-0500' );
          }
       }
-
-      if ( this.periodoFin !== undefined ) {
+      if ( this.periodoFin !== undefined && this.periodoFin !== null ) {
          if ( this.periodoFin.toString() !== 'Invalid Date' ) {
             this.employeeEventuality.periodoFinal = this.periodoFin.toISOString().replace( 'Z', '-0500' );
          }
