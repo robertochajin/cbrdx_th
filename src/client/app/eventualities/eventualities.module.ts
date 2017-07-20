@@ -7,6 +7,7 @@ import { ConfirmationService } from 'primeng/primeng';
 import { EventualitiesEditComponent } from './eventualities-edit.component';
 import { EventualitiesDetailComponent } from './eventualities-detail.component';
 import { EventualityRolesServices } from '../_services/eventualityRoles.service';
+import { EventualityFieldsServices } from '../_services/eventualityFields.service';
 
 @NgModule( {
               imports: [
@@ -21,6 +22,7 @@ import { EventualityRolesServices } from '../_services/eventualityRoles.service'
               bootstrap: [ EventualitiesComponent ],
               providers: [ ConfirmationService,
                  EventualityServices,
+                 EventualityFieldsServices,
                  EventualityRolesServices
               ],
               exports: []

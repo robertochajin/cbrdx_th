@@ -1045,6 +1045,9 @@
       "LBL_TIPOAFECTACION": "Tipo de afectación",
       "LBL_CANCELASAFIX": "Cancelación a SAFIX",
       "LBL_CAMPOS": "Administración de campos",
+      "LBL_CAMPO": "Campos",
+      "LBL_CAMPOVISIBLE": "Visible",
+      "LBL_CAMPOOBLIGATORIO": "Obligatorio",
       "": ""
    },
 "MEDICALINSTITUTION":{
