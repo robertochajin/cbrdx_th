@@ -26,6 +26,7 @@ export class EmployeeEventualitiesComponent {
    busqueda: string;
    saveEventuality: boolean = false;
    editEventuality: boolean = false;
+   detailEventuality: boolean = false;
 
    constructor( private employeeEventualitiesService: EmployeeEventualitiesService,
       private listaService: ListaService,
@@ -45,13 +46,11 @@ export class EmployeeEventualitiesComponent {
    add() {
       this.employeeEventuality.idTerceroNovedad = null;
       this.saveEventuality = !this.saveEventuality;
-      // this.router.navigate( [ 'employee-eventualities/add/' + this.employee.idTercero + '/' + 0 ] );
    }
 
    update( e: EmployeeEventuality ) {
       this.employeeEventuality.idTerceroNovedad = e.idTerceroNovedad;
       this.editEventuality = !this.editEventuality;
-      // this.router.navigate( [ 'employee-novelty/update/' + this.employee.idTercero + '/' + e.idTerceroNovedad ] );
    }
 
    toggleForm() {
@@ -70,8 +69,13 @@ export class EmployeeEventualitiesComponent {
       } );
    }
 
+   toggleDetail() {
+      this.detailEventuality = !this.detailEventuality;
+   }
+
    detail( e: EmployeeEventuality ) {
-      this.router.navigate( [ 'document-management/detail/', e.idTerceroNovedad ] );
+      this.employeeEventuality = e;
+      this.detailEventuality = !this.detailEventuality;
    }
 
    setSearch() {

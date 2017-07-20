@@ -477,8 +477,9 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       }
    }
 
-   showField() {
-      return true;
+   onTabShow( e: any ) {
+      this._nav.setTab( e.index );
+      this.acordion = this._nav.getTab();
    }
 
    goBack( fDirty: boolean ): void {
