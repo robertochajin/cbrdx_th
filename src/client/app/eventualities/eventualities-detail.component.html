@@ -1,17 +1,14 @@
 <div class="col-md-10 col-md-offset-1">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="header">
 				<h3 class="title">{{ 'NOVEDADES.LBL_NOVEDAD' | translate}}</h3>
-			</div>
 		</div>
 	</div>
 	
-	<p-accordion id="accordion">
-		
-		<p-accordionTab header="{{ 'NOVEDADES.LBL_DATOSBASICOS' | translate }}" >
-			
-			<form class="form-horizontal">
+	<div class="row">
+		<div class="col-md-12">
+			<p-panel header="{{ 'NOVEDADES.LBL_DATOSBASICOS' | translate }}">
+				<form class="form-horizontal">
 				<fieldset>
 					<div>
 						<div class="row">
@@ -74,85 +71,89 @@
 					</div>
 				</fieldset>
 			</form>
-			
-		</p-accordionTab>
+			</p-panel>
+		</div>
+	</div>
 		
-		<p-accordionTab header="{{ 'NOVEDADES.LBL_ROLESREPORTAN' | translate }}" >
-			
-			<fieldset>
-				
-				
-				<div class="row">
-					<div class="col-md-12">
-						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listReportRoles" [paginator]="true"
-						             [rows]="10" [responsive]="true">
-							<p-column field="rol" header="{{'NOVEDADES.LBL_ROLREPORTA' | translate}}"
-							          [sortable]="true"></p-column>
-						</p-dataTable>
-					</div>
-				</div>
-				
-			
-			</fieldset>
-		
-		</p-accordionTab>
-		
-		<p-accordionTab header="{{ 'NOVEDADES.LBL_NOMINA' | translate }}" >
-			
-			<form class="form-horizontal">
+	<div class="row">
+		<div class="col-md-12">
+			<p-panel header="{{ 'NOVEDADES.LBL_ROLESREPORTAN' | translate }}">
 				<fieldset>
-					<div>
-						<div class="row">
-							<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'NOVEDADES.LBL_CODIGOSAFIX' | translate }}:</label>
-							<label class="col-md-4 col-sm-6 col-xs-12 "><strong>{{eventuality.codigoSafix}}</strong></label>
-							
-							<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'NOVEDADES.LBL_DIRECTOANOMINA' | translate }}:</label>
-							<label class="col-md-4 col-sm-6 col-xs-12"><strong>{{eventuality.indicadorNomina ? 'Si' : 'No'}}</strong></label>
+					
+					
+					<div class="row">
+						<div class="col-md-12">
+							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listReportRoles" [paginator]="true"
+							             [rows]="10" [responsive]="true">
+								<p-column field="rol" header="{{'NOVEDADES.LBL_ROLREPORTA' | translate}}"
+								          [sortable]="true"></p-column>
+							</p-dataTable>
 						</div>
-						
-						<div class="row">
-							<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'NOVEDADES.LBL_AFECTANOMINA' | translate }}:</label>
-							<label class="col-md-4 col-sm-6 col-xs-12 "><strong>{{eventuality.indicadorAfecta ? 'Si' : 'No'}}</strong></label>
-							
-							<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'NOVEDADES.LBL_TIPOAFECTACION' | translate }}:</label>
-							<label class="col-md-4 col-sm-6 col-xs-12"><strong>{{eventuality.tipoAfectacion}}</strong></label>
-						</div>
-						
-						<div class="row">
-							<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'NOVEDADES.LBL_CANCELASAFIX' | translate }}:</label>
-							<label class="col-md-4 col-sm-6 col-xs-12 "><strong>{{eventuality.indicadorCancelacion ? 'Si' : 'No'}}</strong></label>
-							
-						</div>
-						
 					</div>
+				
+				
 				</fieldset>
-			</form>
-			
-		</p-accordionTab>
-		
-		<p-accordionTab header="{{ 'NOVEDADES.LBL_CAMPOS' | translate }}" >
-			
-			<fieldset>
-				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="evFields" [paginator]="true"
-				             [rows]="10" [responsive]="true">
-					<p-column field="campoNovedad" header="{{'NOVEDADES.LBL_CAMPO' | translate}}"
-					          [sortable]="true"></p-column>
-					<p-column header="{{'NOVEDADES.LBL_CAMPOVISIBLE' | translate}}" styleClass="datatable-col-action">
-						<template let-fld="rowData" let-ri="rowIndex" pTemplate="body">
-							{{fld.indicadorHabilitado ? 'Si' : 'No'}}
-						</template>
-					</p-column>
-					<p-column header="{{'NOVEDADES.LBL_CAMPOOBLIGATORIO' | translate}}" styleClass="datatable-col-action">
-						<template let-fld="rowData" let-ri="rowIndex" pTemplate="body">
-							{{fld.indicadorObligatorio ? 'Si' : 'No'}}
-						</template>
-					</p-column>
-				</p-dataTable>
-			</fieldset>
-		
-		</p-accordionTab>
+			</p-panel>
+		</div>
+	</div>
 	
+	<div class="row">
+		<div class="col-md-12">
+			<p-panel header="{{ 'NOVEDADES.LBL_NOMINA' | translate }}">
+				<form class="form-horizontal">
+					<fieldset>
+						<div>
+							<div class="row">
+								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'NOVEDADES.LBL_CODIGOSAFIX' | translate }}:</label>
+								<label class="col-md-4 col-sm-6 col-xs-12 "><strong>{{eventuality.codigoSafix}}</strong></label>
+								
+								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'NOVEDADES.LBL_DIRECTOANOMINA' | translate }}:</label>
+								<label class="col-md-4 col-sm-6 col-xs-12"><strong>{{eventuality.indicadorNomina ? 'Si' : 'No'}}</strong></label>
+							</div>
+							
+							<div class="row">
+								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'NOVEDADES.LBL_AFECTANOMINA' | translate }}:</label>
+								<label class="col-md-4 col-sm-6 col-xs-12 "><strong>{{eventuality.indicadorAfecta ? 'Si' : 'No'}}</strong></label>
+								
+								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'NOVEDADES.LBL_TIPOAFECTACION' | translate }}:</label>
+								<label class="col-md-4 col-sm-6 col-xs-12"><strong>{{eventuality.tipoAfectacion}}</strong></label>
+							</div>
+							
+							<div class="row">
+								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'NOVEDADES.LBL_CANCELASAFIX' | translate }}:</label>
+								<label class="col-md-4 col-sm-6 col-xs-12 "><strong>{{eventuality.indicadorCancelacion ? 'Si' : 'No'}}</strong></label>
+							
+							</div>
+						
+						</div>
+					</fieldset>
+				</form>
+			</p-panel>
+		</div>
+	</div>
 	
-	</p-accordion>
+	<div class="row">
+		<div class="col-md-12">
+			<p-panel header="{{ 'NOVEDADES.LBL_CAMPOS' | translate }}">
+				<fieldset>
+					<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="evFields" [paginator]="true"
+					             [rows]="10" [responsive]="true">
+						<p-column field="campoNovedad" header="{{'NOVEDADES.LBL_CAMPO' | translate}}"
+						          [sortable]="true"></p-column>
+						<p-column header="{{'NOVEDADES.LBL_CAMPOVISIBLE' | translate}}" styleClass="datatable-col-action">
+							<template let-fld="rowData" let-ri="rowIndex" pTemplate="body">
+								{{fld.indicadorHabilitado ? 'Si' : 'No'}}
+							</template>
+						</p-column>
+						<p-column header="{{'NOVEDADES.LBL_CAMPOOBLIGATORIO' | translate}}" styleClass="datatable-col-action">
+							<template let-fld="rowData" let-ri="rowIndex" pTemplate="body">
+								{{fld.indicadorObligatorio ? 'Si' : 'No'}}
+							</template>
+						</p-column>
+					</p-dataTable>
+				</fieldset>
+			</p-panel>
+		</div>
+	</div>
 
 </div>
