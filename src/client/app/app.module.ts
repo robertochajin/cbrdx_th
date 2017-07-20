@@ -91,6 +91,10 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { SuppliesModule } from './supplies/supplies.module';
 
 
+export function createTranslateLoader(http: Http) {
+   return new TranslateStaticLoader(http, './assets/i18n', '.json');
+}
+
 // CarsModule,
 @NgModule( {
               imports: [ BrowserModule, HttpModule, AppRoutingModule,
@@ -125,7 +129,7 @@ import { SuppliesModule } from './supplies/supplies.module';
                  BreadcrumbModule.forRoot(),
                  TranslateModule.forRoot( {
                                              provide: TranslateLoader,
-                                             useFactory: ( http: Http ) => new TranslateStaticLoader( http, '/assets/i18n', '.json' ),
+                                             useFactory: ( createTranslateLoader ),
                                              deps: [ Http ]
                                           } ),
                  ConstanteModule,
