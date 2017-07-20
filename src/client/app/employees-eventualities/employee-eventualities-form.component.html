@@ -109,7 +109,7 @@
 							<div class="ui-grid-col-6" *ngIf="showdiagnostico">
 								<label>{{'EMPLOYEENOVELTY.LBL_DIAGNOSTICO' | translate }}</label>
 								<p-autoComplete placeholder="Buscar diagnóstico" field="label" name="diagnostico" id="diagnostico"
-								                [(ngModel)]="employeeEventuality.idDiagnostico" [required]="requireddiagnostico"
+								                [(ngModel)]="ecd.diagnostico" [required]="requireddiagnostico"
 								                #diagnostico="ngModel" [suggestions]="diagnosticList"
 								                (completeMethod)="diagnosticSearch($event)" (onSelect)="captureDiagnosticId($event)">
 								</p-autoComplete>
