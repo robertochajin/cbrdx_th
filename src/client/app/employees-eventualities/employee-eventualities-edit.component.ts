@@ -179,6 +179,14 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       if ( this.employeeEventuality.idTerceroNovedad !== null ) {
          this.employeeNoveltyService.getById( this.employeeEventuality.idTerceroNovedad ).subscribe( data => {
             this.employeeEventuality = data;
+            this.fechaInicio = new Date( this.employeeEventuality.fechaInicio );
+            this.horaInicio = new Date( this.employeeEventuality.horaInicio );
+            this.fechaFinal = new Date( this.employeeEventuality.fechaFin );
+            this.horaFinal = new Date( this.employeeEventuality.horaFin );
+            this.fechaReintegro = new Date( this.employeeEventuality.fechaReintegro );
+            this.horaReintegro = new Date( this.employeeEventuality.horaReintergo );
+            this.periodoInicio = new Date( this.employeeEventuality.periodoInicio );
+            this.periodoFin = new Date( this.employeeEventuality.periodoFinal );
             this.eventualityServices.get( this.employeeEventuality.idNovedad ).subscribe( rest => {
                this.eventuality = rest;
             } );
@@ -212,7 +220,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    onSubmit() {
       this.formatDate();
       if ( this.eventuality.indicadorConfirmacion && this.employeeEventuality.idTerceroNovedad ) {
-         this.employeeNoveltyService.getById( this.employeeEventuality.idNovedad ).subscribe( res => {
+         this.employeeNoveltyService.getById( this.employeeEventuality.idTerceroNovedad ).subscribe( res => {
             if ( res.codigoValidacion === this.codigoVerificacion ) {
                if ( this.employeeEventuality.idTerceroNovedad !== 0 && this.employeeEventuality.idTerceroNovedad !== null &&
                     this.employeeEventuality.idTerceroNovedad !== undefined ) {
@@ -256,6 +264,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
             this.employeeEventuality.idEstadoNovedad = this.eventuality.idEstadoInicialNovedad;
             this.employeeEventuality.idTerceroReporta = this.usuarioLogueado.usuario.idTercero;
             this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
+               this.employeeEventuality.idTerceroNovedad = data.idTerceroNovedad;
                this._nav.setMesage( 1, this.msgs );
                if ( !this.eventuality.indicadorConfirmacion ) {
                   this.dismiss.emit( 1 );
@@ -489,29 +498,46 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    }
 
    formatDate() {
-      if ( this.fechaInicio ) {
-         this.employeeEventuality.fechaInicio = this.fechaInicio.toISOString().replace( 'Z', '-0500' );
+      if ( this.fechaInicio !== undefined ) {
+         if ( this.fechaInicio.toString() !== 'Invalid Date' ) {
+            this.employeeEventuality.fechaInicio = this.fechaInicio.toISOString().replace( 'Z', '-0500' );
+         }
       }
-      if ( this.horaInicio ) {
-         this.employeeEventuality.horaInicio = this.horaInicio.toISOString().replace( 'Z', '-0500' );
+      if ( this.horaInicio !== undefined ) {
+         if ( this.horaInicio.toString() !== 'Invalid Date' ) {
+            this.employeeEventuality.horaInicio = this.horaInicio.toISOString().replace( 'Z', '-0500' );
+         }
       }
-      if ( this.fechaFinal ) {
-         this.employeeEventuality.fechaFin = this.fechaFinal.toISOString().replace( 'Z', '-0500' );
+      if ( this.fechaFinal !== undefined ) {
+         if ( this.fechaFinal.toString() !== 'Invalid Date' ) {
+            this.employeeEventuality.fechaFin = this.fechaFinal.toISOString().replace( 'Z', '-0500' );
+         }
       }
-      if ( this.horaFinal ) {
-         this.employeeEventuality.horaFin = this.horaFinal.toISOString().replace( 'Z', '-0500' );
+      if ( this.horaFinal !== undefined ) {
+         if ( this.horaFinal.toString() !== 'Invalid Date' ) {
+            this.employeeEventuality.horaFin = this.horaFinal.toISOString().replace( 'Z', '-0500' );
+         }
       }
-      if ( this.fechaReintegro ) {
-         this.employeeEventuality.fechaReintegro = this.fechaReintegro.toISOString().replace( 'Z', '-0500' );
+      if ( this.fechaReintegro !== undefined ) {
+         if ( this.fechaReintegro.toString() !== 'Invalid Date' ) {
+            this.employeeEventuality.fechaReintegro = this.fechaReintegro.toISOString().replace( 'Z', '-0500' );
+         }
       }
-      if ( this.horaReintegro ) {
-         this.employeeEventuality.horaReintergo = this.horaReintegro.toISOString().replace( 'Z', '-0500' );
+      if ( this.horaReintegro !== undefined ) {
+         if ( this.horaReintegro.toString() !== 'Invalid Date' ) {
+            this.employeeEventuality.horaReintergo = this.horaReintegro.toISOString().replace( 'Z', '-0500' );
+         }
       }
-      if ( this.periodoInicio ) {
-         this.employeeEventuality.periodoInicio = this.periodoInicio.toISOString().replace( 'Z', '-0500' );
+      if ( this.periodoInicio !== undefined ) {
+         if ( this.periodoInicio.toString() !== 'Invalid Date' ) {
+            this.employeeEventuality.periodoInicio = this.periodoInicio.toISOString().replace( 'Z', '-0500' );
+         }
       }
-      if ( this.periodoFin ) {
-         this.employeeEventuality.periodoFinal = this.periodoFin.toISOString().replace( 'Z', '-0500' );
+
+      if ( this.periodoFin !== undefined ) {
+         if ( this.periodoFin.toString() !== 'Invalid Date' ) {
+            this.employeeEventuality.periodoFinal = this.periodoFin.toISOString().replace( 'Z', '-0500' );
+         }
       }
    }
 
