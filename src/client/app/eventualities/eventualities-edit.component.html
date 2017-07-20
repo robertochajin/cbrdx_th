@@ -221,7 +221,7 @@
 						<div class="form-group col-md-6">
 							<label for="sxCode">{{ 'NOVEDADES.LBL_CODIGOSAFIX' | translate }}:</label>
 							<input id="sxCode" type="text" pInputText name="sxCode" class="form-control"
-							       [(ngModel)]="eventuality.codigoSafix" maxLength="2"
+							       [(ngModel)]="eventuality.codigoSafix" maxLength="10"
 							       #ngCodeSX="ngModel" required codeSpecialCaseText uperCaseText
 							/>
 							<div class="ui-message ui-messages-error ui-corner-all"
