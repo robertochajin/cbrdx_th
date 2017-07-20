@@ -9,7 +9,7 @@
          </li>
          
          <li *ngFor="let modulo of treeMenu;" class="treeview" routerLinkActive="active">
-               <a href="#" *ngIf="modulo.children.length > 1">
+               <a *ngIf="modulo.children.length > 1">
                   <i class="{{modulo.data.clase}}" aria-hidden="true" style="font-size: 1.5em;"></i>
                   <span>{{modulo.label}}</span>
                </a>
