@@ -141,7 +141,7 @@ export class UsuariosAddComponent {
                      this.tercero.segundoNombre + ' ' +
                      this.tercero.primerApellido + ' ' +
                      this.tercero.segundoApellido;
-                  this.tercero.edad = moment( this.tercero.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
+                  this.tercero.edad = moment().diff( this.tercero.fechaNacimiento, 'years', false ).toString();
                   this.isTerceroSet = true;
                   this.usuario.idTercero = this.tercero.idTercero;
                } );

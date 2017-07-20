@@ -11,6 +11,8 @@ import { Eventuality } from '../_models/eventuality';
 import { Rol } from '../_models/rol';
 import { EventualityRoles } from '../_models/eventualityRoles';
 import { EventualityRolesServices } from '../_services/eventualityRoles.service';
+import { EventualityFieldsServices } from '../_services/eventualityFields.service';
+import { EventualityField } from '../_models/eventualityField';
 
 @Component( {
                moduleId: module.id,
@@ -30,6 +32,9 @@ export class EventualitiesEditComponent implements OnInit {
    public savingReportRol = false;
    public listReportRoles: EventualityRoles[] = [];
    public disabledReportRoles: EventualityRoles[] = [];
+   public evFields: EventualityField[] = [];
+   public fields: ListaItem[] = [];
+   public acordion = 1;
 
    constructor( private listaService: ListaService,
       private router: Router,
@@ -39,6 +44,7 @@ export class EventualitiesEditComponent implements OnInit {
       private confirmationService: ConfirmationService,
       private eventualityServices: EventualityServices,
       private eventualityRolesServices: EventualityRolesServices,
+      private eventualityFieldsServices: EventualityFieldsServices,
       private _nav: NavService ) {
    }
 
@@ -86,19 +92,24 @@ export class EventualitiesEditComponent implements OnInit {
                         }
                      } );
                   } );
+                  this.eventualityFieldsServices.getAllByEventuality( this.eventuality.idNovedad ).subscribe( evFields => {
+                     this.buildFieldsArray( evFields );
+                  } );
                } );
             } else {
                this.eventuality = new Eventuality();
             }
          } );
+
       } );
    }
 
-   onSubmit() {
+   onSubmit( step: number ) {
       if ( this.eventuality.idNovedad !== undefined && this.eventuality.idNovedad !== null ) {
          this.eventualityServices.update( this.eventuality ).subscribe( res => {
             if ( res ) {
                this._nav.setMesage( 2 );
+               this.nextStep( step );
             }
          }, ( error ) => {
             this._nav.setMesage( 3 );
@@ -106,6 +117,8 @@ export class EventualitiesEditComponent implements OnInit {
       } else {
          this.eventualityServices.add( this.eventuality ).subscribe( res => {
             this.eventuality = res;
+            this.buildFieldsArray( null );
+            this.nextStep( step );
             this._nav.setMesage( 1 );
          }, ( error ) => {
             this._nav.setMesage( 3 );
@@ -123,6 +136,7 @@ export class EventualitiesEditComponent implements OnInit {
             this.rolesToReport.splice( this.rolesToReport.indexOf( selectedRol ), 1 );
             this.listReportRoles.push( foundRol );
             this.savingReportRol = false;
+            this.reportRol = null;
             this._nav.setMesage( 2 );
          }, ( error ) => {
             this._nav.setMesage( 3 );
@@ -137,6 +151,7 @@ export class EventualitiesEditComponent implements OnInit {
             res.rol = selectedRol.label;
             this.listReportRoles.push( res );
             this.savingReportRol = false;
+            this.reportRol = null;
             this._nav.setMesage( 1 );
          }, ( error ) => {
             this._nav.setMesage( 3 );
@@ -174,4 +189,55 @@ export class EventualitiesEditComponent implements OnInit {
          this.router.navigate( [ 'eventualities' ] );
       }
    }
+
+   updateEventualityField( evField: EventualityField, rowIndex: number) {
+
+      if(this.evFields[rowIndex].idNovedadCampo !== undefined && this.evFields[rowIndex].idNovedadCampo !== null) {
+         this.eventualityFieldsServices.update(evField).subscribe(res => {
+            this._nav.setMesage( 2 );
+         }, ( error ) => {
+            this._nav.setMesage( 3 );
+         } );
+      } else {
+         this.eventualityFieldsServices.add(evField).subscribe(res => {
+            evField.idNovedadCampo = res.idNovedadCampo;
+            this.evFields[rowIndex] = evField;
+         }, ( error ) => {
+            this._nav.setMesage( 3 );
+         } );
+      }
+   }
+
+   buildFieldsArray( eventualityFields: EventualityField[] ) {
+      this.listaService.getMasterDetails( 'ListasCamposNovedades' ).subscribe( fields => {
+         this.fields = fields;
+
+         this.fields.map( f => {
+            let evField: EventualityField = new EventualityField();
+
+            // find created eventualityField if has at least one
+            if ( eventualityFields !== null && eventualityFields.length > 0) {
+               evField = eventualityFields.find( ef => ef.idCampoNovedad === f.idLista );
+            }
+
+            // evalute if has found or needs to be created as default
+            if ( evField != undefined && evField.idCampoNovedad !== undefined && evField.idCampoNovedad !== null ) {
+               this.evFields.push( evField );
+            } else {
+               evField = new EventualityField();
+               evField.idNovedad = this.eventuality.idNovedad;
+               evField.campoNovedad = f.nombre;
+               evField.idCampoNovedad = f.idLista;
+               this.evFields.push( evField );
+            }
+
+         } );
+
+      } );
+   }
+
+   nextStep( step: number ) {
+      this.acordion = step;
+   }
+
 }

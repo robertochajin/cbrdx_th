@@ -138,7 +138,7 @@ export class CallReferenceComponent implements OnInit {
                                                      this.candidate.segundoNombre + ' ' +
                                                      this.candidate.primerApellido + ' ' +
                                                      this.candidate.segundoApellido;
-                     this.candidate.edad = moment( this.candidate.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
+                     this.candidate.edad = moment().diff( this.candidate.fechaNacimiento, 'years', false ).toString();
                      this.referencesService.getAllgetAllByEmployee( this.candidate.idTercero ).subscribe(
                         references => {
                            this.references = references;

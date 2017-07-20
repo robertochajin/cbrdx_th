@@ -36,7 +36,8 @@ export class FamilyInformationComponent implements OnInit {
             this.familyInformations = familyInformations;
             this.familyInformations.forEach( e => {
                e.nombreCompleto = e.primerNombre + ' ' + e.segundoNombre + ' ' + e.primerApellido + ' ' + e.segundoApellido;
-               e.edad = moment( e.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
+               e.edad = moment().diff( e.fechaNacimiento, 'years', false ).toString();
+
             } );
          }
       );

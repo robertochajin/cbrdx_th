@@ -140,10 +140,14 @@ export class LocationsComponent implements OnInit, AfterViewInit {
          // Se hace el conteo de 3 comas par identificar si la selección fue de una división politica de nivel 4 (barrio/vereda)
          // para hacerle el tratamiento al string con el cual se hace la busqueda en el API de maps.google
          let strToSearch = '';
+         let reversed: string[];
          if ( ((this.localizacion.locacion.camino.match( /,/g ) || []).length) === 3 ) {
             strToSearch = this.localizacion.locacion.camino.substr( this.localizacion.locacion.camino.indexOf( ',' ) );
+            reversed = strToSearch.split( ',' ).reverse();
          } else {
             strToSearch = this.localizacion.locacion.camino;
+            reversed = strToSearch.split( ',' ).reverse();
+
          }
          // let _este = this;
 
@@ -155,7 +159,7 @@ export class LocationsComponent implements OnInit, AfterViewInit {
             }
          };
 
-         geocoder.geocode( { 'address': this.finalAddress + ' ' + strToSearch }, procesarRespuesta );
+         geocoder.geocode( { 'address': this.finalAddress + ' ' + reversed.join( ',' ) }, procesarRespuesta );
       }
 
       for ( let c of this.complementaries ) {

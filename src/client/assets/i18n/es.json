@@ -82,6 +82,16 @@
    "BTN_BORRAR": "Borrar",
    "BTN_DOWNLOAD": "Descargar",
    "BTN_UPLOAD": "Subir archivo",
+   "BTN_LLAMAR": "Llamar",
+  "BTN_CONFIGURAR": "Configuración",
+  "BTN_APROBARPROYECCION": "Aprobar Proyección",
+  "BTN_CONFIRMARPROY": "Confirmar Proyección",
+  "BTN_PUBLICAVACANTE": "Publicar Vacante",
+  "BTN_ARRIBA": "Subir",
+  "BTN_ABAJO": "Bajar",
+  "BTN_BORRAR":"Borrar",
+  "BTN_DOWNLOAD": "Descargar",
+  "BTN_UPLOAD": "Subir archivo",
    "BTN_NUEVO": "Nuevo",
    "BTN_NUEVA": "Nueva",
    "BTN_FINALIZARPROCESO": "Finalizar el proceso",
@@ -1013,9 +1023,9 @@
       "": ""
    },
    "NOVEDADES": {
-      "LBL_NOVEDAD": "Novedad",
+      "LBL_NOVEDAD": "Configuración de novedad",
       "BTN_AGREGARNUEVO": "Agregar nueva novedad",
-      "LBL_NOVEDADES": "Novedades",
+      "LBL_NOVEDADES": "Configuración de novedades",
       "LBL_DATOSBASICOS": "Datos básicos",
       "LBL_CODIGO": "Código",
       "LBL_TIPONOVEDAD": "Tipo de novedad",
@@ -1045,6 +1055,9 @@
       "LBL_TIPOAFECTACION": "Tipo de afectación",
       "LBL_CANCELASAFIX": "Cancelación a SAFIX",
       "LBL_CAMPOS": "Administración de campos",
+      "LBL_CAMPO": "Campos",
+      "LBL_CAMPOVISIBLE": "Visible",
+      "LBL_CAMPOOBLIGATORIO": "Obligatorio",
       "": ""
    },
 "MEDICALINSTITUTION":{
@@ -1136,15 +1149,18 @@
       "LBL_HORAFINAL": "Hora final",
       "LBL_DIAS": "Días",
       "LBL_VALOR": "Valor",
-      "LBL_CUENTA": "Numero de cuenta",
+      "LBL_CUOTAS": "Numero de cuotas",
       "LBL_REFERENCIA": "Numero de referencia",
       "LBL_ENTIDAD": "Entidad",
+      "LBL_ESTADO": "Estado",
       "LBL_RETIRO": "Retiro",
       "LBL_EPS": "EPS",
       "LBL_FP": "Fondo de pensiones",
       "LBL_CCF": "Caja compensación familiar",
       "LBL_PERIODOINICIAL": "Periodo inicial",
       "LBL_PERIODOFINAL": "Periodo final",
+      "LBL_OFICINA": "Oficina",
+      "LBL_AREA": "Área",
       "": ""
    },
    "RECLUTAMIENTO": {
@@ -1165,7 +1181,8 @@
       "LBL_ADDITIONAL": "Adicional",
       "LBL_ADDPOSITION": "Agregar Cargo",
       "LBL_ACTIVE": "Activo",
-      "LBL_ALLHAB": "Habilitar Todos"
+      "LBL_ALLHAB": "Habilitar Todos",
+      "LBL_DETAIL": "Detalle Proveedor"
    },
    "FIN_ARCHIVO": "============================FIN ARCHIVO============================="
 

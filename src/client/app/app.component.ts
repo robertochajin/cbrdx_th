@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
 // import { DialogModule } from 'primeng/primeng';
 
 // Handle Idle
-import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
-import { Keepalive } from '@ng-idle/keepalive';
+import { Idle, DEFAULT_INTERRUPTSOURCES } from 'idle-angular2';
+import { Keepalive } from 'idle-keepalive-angular2';
 
 /**
  * This class represents the main application component.
