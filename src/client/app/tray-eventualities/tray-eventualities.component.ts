@@ -17,8 +17,16 @@ export class TrayEventualitiesComponent {
 
    msg: Message;
    employeeEventuality: EmployeeEventuality = new EmployeeEventuality();
+   filter: EmployeeEventuality = new EmployeeEventuality();
    listEventualities: EmployeeEventuality [];
+   allEventualities: EmployeeEventuality [];
    busqueda: string;
+
+   ListaAreas: SelectItem[] = [];
+   ListaOficinas: SelectItem[] = [];
+   ListaEstados: SelectItem[] = [];
+   ListaTipos: SelectItem[] = [];
+   ListaNovedad: SelectItem[] = [];
 
    constructor( private employeeEventualitiesService: EmployeeEventualitiesService,
       private listaService: ListaService,
@@ -30,6 +38,7 @@ export class TrayEventualitiesComponent {
 
    ngOnInit() {
       this.employeeEventualitiesService.getAll().subscribe( data => {
+         this.allEventualities = data;
          this.listEventualities = data;
       } );
    }
@@ -44,5 +53,11 @@ export class TrayEventualitiesComponent {
 
    setSearch() {
       this._nav.setSearch( 'tray-eventualities', this.busqueda );
+   }
+
+   changeFilter() {
+      this.employeeEventualitiesService.getAll().subscribe( data => {
+         this.listEventualities = data;
+      } );
    }
 }

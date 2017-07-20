@@ -336,7 +336,7 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
       this.breadcrumbService.hideRouteRegex( '^/employee-eventualities/add/[0-9]*/[0-9]*' );
       // this.breadcrumbService.addFriendlyNameForRouteRegex( '^/employee-eventualities/add/[0-9]*/[0-9]*$', 'Nueva novedaa' );
 
-      this.breadcrumbService.addFriendlyNameForRoute( '/tray-eventualities', 'Dotaciones' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/tray-eventualities', 'Badeja de Novedades' );
       this.breadcrumbService.addFriendlyNameForRoute( '/tray-eventualities/add', 'Nuevo' );
       this.breadcrumbService.addFriendlyNameForRoute( '/tray-eventualities/update', 'Actualizar' );
       this.breadcrumbService.addFriendlyNameForRoute( '/tray-eventualities/detail', 'Detalle' );
