@@ -32,6 +32,9 @@ export class Eventuality {
    //Atributos auxiliares
    public tipoNovedad: string;
    public rolResponsable: string;
+   public estadoTercero: string;
+   public rol: string;
+   public estadoInicialNovedad: string;
 
    constructor() {
       this.auditoriaUsuario = null;
