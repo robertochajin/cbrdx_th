@@ -569,6 +569,14 @@ body .ui-datatable thead th.ui-state-active{
 body .ui-datatable .ui-cell-data{
    word-break: break-all;
 }
+
+.datatable-order tr:first-child .btnUp{
+   display: none;
+}
+.datatable-order tr:last-child .btnDown{
+   display: none;
+}
+
 /* --- Buscador general unico --- */
 .uniSearch{
    width: 80%!important;
@@ -1075,4 +1083,15 @@ body .ui-tabview{
    padding-top: 15px;
    color: white;
    text-transform: uppercase;
+}
+#dlgSessionOff .ui-dialog.ui-widget-content{
+   background-color: #3c8dbc;
+   color: #fff;
+}
+#dlgSessionOff .ui-dialog .ui-dialog-titlebar{
+   background-color: #4595c4;
+   color: #fff;
+}
+#dlgSessionOff .fa{
+   color:#fff;
 }

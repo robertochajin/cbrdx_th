@@ -9,7 +9,9 @@ export class EmployeeEventualitiesService {
    usuarioLogueado: any;
    idUsuario: number;
    idTercero: number;
-   private serviceURL = '<%= SVC_TH_URL %>/api/';
+   private serviceURL = '<%= SVC_TH_URL %>/api/tercerosNovedades';
+   private serviceURLEventuality = '<%= SVC_TH_URL %>/api/novedades/';
+   private serviceURLEventualityField = '<%= SVC_TH_URL %>/api/novedadesCampos/novedad/';
    private jwtHelper: JwtHelper = new JwtHelper();
 
    constructor( private authHttp: AuthHttp ) {
@@ -24,25 +26,36 @@ export class EmployeeEventualitiesService {
    }
 
    getById( id: number ) {
-      return this.authHttp.get( this.serviceURL + 'vterceros/' + id ).map( ( res: Response ) => res.json() as EmployeeEventuality );
+      return this.authHttp.get( this.serviceURL + '/' + id ).map( ( res: Response ) => res.json() as EmployeeEventuality );
    }
 
    getAllByIdEmployee( id: number ) {
-      return this.authHttp.get( this.serviceURL + 'vterceros/' + id ).map( ( res: Response ) => res.json() as EmployeeEventuality[] );
+      return this.authHttp.get( this.serviceURL + '/tercero/' + id ).map( ( res: Response ) => res.json() as EmployeeEventuality[] );
+   }
+
+   getAllByIdType( id: number ) {
+      return this.authHttp.get( this.serviceURLEventuality +'tipoNovedad/'+ id ).map( ( res: Response ) => res.json() as any[] );
+   }
+   getEventualityById( id: number ) {
+      return this.authHttp.get( this.serviceURLEventuality + id ).map( ( res: Response ) => res.json() as any[] );
+   }
+
+   getFieldByIdEventuality( id: number ) {
+      return this.authHttp.get( this.serviceURLEventualityField + id ).map( ( res: Response ) => res.json() as any[] );
    }
 
    getAll() {
-      return this.authHttp.get( this.serviceURL + 'vterceros' ).map( ( res: Response ) => res.json() as EmployeeEventuality[] );
+      return this.authHttp.get( this.serviceURL ).map( ( res: Response ) => res.json() as EmployeeEventuality[] );
    }
 
    add( c: EmployeeEventuality ) {
       c.auditoriaUsuario = this.idUsuario;
-      return this.authHttp.post( this.serviceURL + 'terceros', c ).map( ( res: Response ) => res.json() );
+      return this.authHttp.post( this.serviceURL, c ).map( ( res: Response ) => res.json() );
    };
 
    update( c: EmployeeEventuality ) {
       c.auditoriaUsuario = this.idUsuario;
-      return this.authHttp.put( this.serviceURL + 'tercerosNovedades', c ).map( ( res: Response ) => res );
+      return this.authHttp.put( this.serviceURL, c ).map( ( res: Response ) => res );
    }
 
 }
