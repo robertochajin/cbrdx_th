@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: ./.docker/angular-seed.production.dockerfile
-    command: npm run build.prod
+    command: npm run build.prod.aot
     container_name: angular-seed-build-prod
     image: angular-seed
     networks:
@@ -24,7 +24,7 @@ services:
     networks:
       - prod-network
     ports:
-      - '5556:80'
+      - '5559:80'
     volumes:
       - ./.docker/nginx.conf:/etc/nginx/conf.d/angular-seed.template
       - ./dist/prod:/var/www/dist/prod
