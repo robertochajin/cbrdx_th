@@ -82,6 +82,16 @@
    "BTN_BORRAR": "Borrar",
    "BTN_DOWNLOAD": "Descargar",
    "BTN_UPLOAD": "Subir archivo",
+   "BTN_LLAMAR": "Llamar",
+  "BTN_CONFIGURAR": "Configuración",
+  "BTN_APROBARPROYECCION": "Aprobar Proyección",
+  "BTN_CONFIRMARPROY": "Confirmar Proyección",
+  "BTN_PUBLICAVACANTE": "Publicar Vacante",
+  "BTN_ARRIBA": "Subir",
+  "BTN_ABAJO": "Bajar",
+  "BTN_BORRAR":"Borrar",
+  "BTN_DOWNLOAD": "Descargar",
+  "BTN_UPLOAD": "Subir archivo",
    "BTN_NUEVO": "Nuevo",
    "BTN_NUEVA": "Nueva",
    "BTN_FINALIZARPROCESO": "Finalizar el proceso",
@@ -1168,7 +1178,8 @@
       "LBL_ADDITIONAL": "Adicional",
       "LBL_ADDPOSITION": "Agregar Cargo",
       "LBL_ACTIVE": "Activo",
-      "LBL_ALLHAB": "Habilitar Todos"
+      "LBL_ALLHAB": "Habilitar Todos",
+      "LBL_DETAIL": "Detalle Proveedor"
    },
    "FIN_ARCHIVO": "============================FIN ARCHIVO============================="
 

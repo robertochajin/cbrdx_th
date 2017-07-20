@@ -40,6 +40,7 @@ export class SuppliesUpdateComponent implements OnInit {
    formSupply: boolean = false;
    allHabilitado: boolean = false;
    idGrupoDotacion: number;
+   codeCycleTypes: SelectItem[] = [];
    cycleTypes: SelectItem[] = [];
    sizeTypes: SelectItem[] = [];
 
@@ -116,6 +117,25 @@ export class SuppliesUpdateComponent implements OnInit {
          this.cycleTypes.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => {
             this.cycleTypes.push( { label: s.nombre, value: s.idLista } );
+            let val = 0;
+            switch ( s.codigo ) {
+               case 'ANUAL':
+                  val = 1;
+                  break;
+               case 'SEMES':
+                  val = 2;
+                  break;
+               case 'CUATRIMES':
+                  val = 3;
+                  break;
+               case 'TRIMES':
+                  val = 4;
+                  break;
+               case 'BIMES':
+                  val = 6;
+                  break;
+            }
+            this.codeCycleTypes.push( { label: val.toString(), value: s.idLista } );
          } );
       } );
    }
@@ -311,14 +331,14 @@ export class SuppliesUpdateComponent implements OnInit {
       this.msgs = [];
       if ( sp.idCargoDotacion === null ) {
          this.suppliesService.addPosition( sp ).subscribe( data => {
-            this.navService.setMesage( 0, { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            this.navService.setMesage( 0, { severity: 'success', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
             sp.idCargoDotacion = data.idCargoDotacion;
          }, error => {
             this.navService.setMesage( 0, { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
       } else {
          this.suppliesService.updatePosition( sp ).subscribe( data => {
-            this.navService.setMesage( 0, { severity: 'info', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
+            this.navService.setMesage( 0, { severity: 'success', summary: 'Exito', detail: 'Registro guardado correctamente.' } );
          }, error => {
             this.navService.setMesage( 0, { severity: 'error', summary: 'Error', detail: 'Error al guardar.' } );
          } );
@@ -334,6 +354,14 @@ export class SuppliesUpdateComponent implements OnInit {
       } else {
          this.suppliesService.updatePosition( sp ).subscribe( data => {
          } );
+      }
+   }
+
+   getCantidad() {
+      if ( this.supply.idCicloEntrega > 0 ) {
+         this.supply.cantidad = Number( this.codeCycleTypes.filter( s => s.value === this.supply.idCicloEntrega )[ 0 ].label );
+      } else {
+         this.supply.cantidad = 0;
       }
    }
 

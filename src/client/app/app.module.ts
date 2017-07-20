@@ -83,10 +83,10 @@ import { DocumentManagementModule } from './document-management/document-managem
 import { QuestionnairesModule } from './questionnaires/questionnaires.module';
 import { EmployeesAttachmentsModule } from './employees-attatchments/employees-attachments.module';
 import { EventualitiesModule } from './eventualities/eventualities.module';
-import { EmployeeEventualitiesModule } from './employees-eventualities/employees-eventualities.module';
+// import { EmployeeEventualitiesModule } from './employees-eventualities/employees-eventualities.module';
 
 // import { MomentModule } from 'angular2-moment';
-import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { NgIdleKeepaliveModule } from 'idle-keepalive-angular2';
 // Dotaciones
 import { SuppliesModule } from './supplies/supplies.module';
 
@@ -154,7 +154,7 @@ import { SuppliesModule } from './supplies/supplies.module';
                  SelectionProcessModule,
                  DocumentManagementModule,
                  MedicalInstitutionModule,
-                 EmployeeEventualitiesModule,
+                 // EmployeeEventualitiesModule,
                  // EmployeesAttachmentsModule,
                  //AssignmentProfessionalModule
                  QuestionnairesModule,
