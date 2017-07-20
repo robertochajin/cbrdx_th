@@ -4,7 +4,7 @@ import { Lista } from '../_models/lista';
 import { ListaService } from '../_services/lista.service';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { ListaItem } from '../_models/listaItem';
-import { Message } from 'primeng/primeng';
+import { Message, ConfirmationService } from 'primeng/primeng';
 import 'rxjs/add/operator/switchMap';
 import { NavService } from '../_services/_nav.service';
 import { FormSharedModule } from '../shared/form-shared.module';
@@ -14,7 +14,8 @@ import { RolesService } from '../_services/roles.service';
 
 @Component( {
                moduleId: module.id,
-               templateUrl: 'lista-edit.component.html'
+               templateUrl: 'lista-edit.component.html',
+               providers: [ ConfirmationService ]
             } )
 export class ListaEditComponent implements OnInit {
    masterList: Lista = new Lista();
@@ -38,6 +39,7 @@ export class ListaEditComponent implements OnInit {
       private route: ActivatedRoute,
       private rolesService: RolesService,
       private constanteService: ConstanteService,
+      private confirmationService: ConfirmationService,
       private _nav: NavService, ) {
    }
 
@@ -192,6 +194,21 @@ export class ListaEditComponent implements OnInit {
                } );
             }
          } );
+      }
+   }
+
+   goBackForm( fDirty: boolean ): void {
+      if ( fDirty ) {
+         this.confirmationService.confirm( {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this.isEdit = false;
+                                              }
+                                           } );
+      } else {
+         this.isEdit = false;
       }
    }
 

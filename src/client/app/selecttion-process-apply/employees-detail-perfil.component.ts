@@ -59,7 +59,7 @@ export class EmployeesDetailPerfilComponent implements OnInit {
                                               this.employee.primerApellido + ' ' +
                                               this.employee.segundoApellido;
 
-               this.employee.edad = moment().diff( this.candidate.fechaNacimiento, 'years', false ).toString();
+               this.employee.edad = moment().diff( this.employee.fechaNacimiento, 'years', false ).toString();
             } );
          } );
 

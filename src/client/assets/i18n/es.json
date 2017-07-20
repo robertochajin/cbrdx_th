@@ -1159,6 +1159,8 @@
       "LBL_CCF": "Caja compensación familiar",
       "LBL_PERIODOINICIAL": "Periodo inicial",
       "LBL_PERIODOFINAL": "Periodo final",
+      "LBL_OFICINA": "Oficina",
+      "LBL_AREA": "Área",
       "": ""
    },
    "RECLUTAMIENTO": {

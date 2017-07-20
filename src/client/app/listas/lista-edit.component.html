@@ -167,7 +167,7 @@
 									<button type="submit" pButton icon="fa-check" label="{{ 'BTN_ACTUALIZAR' | translate }}" class="pull-right"
 									        (keydown.enter)="submitDetailEdit.click()"
 									        #submitDetailEdit></button>
-									<a (click)="displayDetailDialog=true" class="cancelar pull-right">{{ 'BTN_CANCELAR' | translate }}</a>
+									<a (click)="goBackForm((fe.dirty === true))" class="cancelar pull-right">{{ 'BTN_CANCELAR' | translate }}</a>
 								</div>
 							</div>
 						</div>
@@ -225,5 +225,11 @@
 			</div>
 		</p-footer>
 	</p-dialog>
+	<p-confirmDialog width="400" #cd>
+		<p-footer>
+			<button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate}}" (click)="cd.reject()"></button>
+			<button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate}}" (click)="cd.accept()"></button>
+		</p-footer>
+	</p-confirmDialog>
 
 </div>
