@@ -1,0 +1,297 @@
+<div class="col-md-10 col-md-offset-1" *ngIf="suppliesGroup">
+	<p-panel header="{{'SUPPLIES.LBL_GROUP' | translate}} {{'SUPPLIES.LBL_SUPPLIES' | translate}}">
+		<fieldset>
+			<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate>
+				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-4">
+							<label for="codigo">* {{ 'LBL_CODIGO' | translate}}</label>
+							<input type="text" pInputText id="codigo" name="codigo"
+							       [(ngModel)]="suppliesGroup.codigo" maxlength="10"
+							       (change)="validateCode()"
+							       (keyup)="inputCleanCode($event)"
+							       #NGcodigo="ngModel" required/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !NGcodigo.valid ">
+								<i class="fa fa-close"></i>{{ 'LBL_CODIGO' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && codeExists ">
+								<i class="fa fa-close"></i>{{ 'LBL_VALIDATECODE' | translate}}
+							</div>
+						</div>
+						<div class="ui-grid-col-8">
+							<label for="nombre">* {{ 'LBL_NOMBRE' | translate}}</label>
+							<input type="text" pInputText id="nombre" name="nombre"
+							       [(ngModel)]="suppliesGroup.grupoDotacion" maxlength="200" titleCaseText
+							       #NGnombre="ngModel" required/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !NGnombre.valid">
+								<i class="fa fa-close"></i>{{ 'LBL_NOMBRE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid-row">
+						<div class="form-group col-sm-12">
+							<label for="descripcion">{{ 'LBL_DESCRIPCION' | translate}}</label>
+							<textarea pInputTextarea id="descripcion" name="descripcion" required
+							          [(ngModel)]="suppliesGroup.descripcion" maxlength="475" #NGdescripcion="ngModel"
+							></textarea>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !NGdescripcion.valid">
+								<i class="fa fa-close"></i>{{ 'LBL_DESCRIPCION' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid-row">
+						<div class="form-group col-md-4" style="margin-top: 24px">
+							<p-checkbox binary="true" id="indicador" name="indicador"
+							            [(ngModel)]="suppliesGroup.indicadorHabilitado" label="{{ 'LBL_HABILITADO' | translate}}"
+							></p-checkbox>
+						</div>
+					</div>
+					<div class="ui-grid-row form-footer-buttons">
+						<div class="ui-grid-col-4"></div>
+						<div class="ui-grid-col-1">
+							<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+						</div>
+						<div class="ui-grid-col-2">
+							<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+						</div>
+						<div class="ui-grid-col-5"></div>
+					</div>
+				</div>
+			</form>
+		</fieldset>
+	</p-panel>
+	<p-panel header="{{ 'SUPPLIES.LBL_ADDPOSITION' | translate }}">
+		<div class="row datable-header">
+			<div class="col-md-6 col-xs-12 datatable-header-add">
+				<label>{{ 'SUPPLIES.LBL_ALLHAB' | translate}}</label>
+				<p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="allHabilitado"
+				               (onChange)="changeAll()"></p-inputSwitch>
+			</div>
+			<div class="col-md-6 col-xs-12 datatable-header-search">
+				<div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-search"></i></div>
+					<input #gb1 type="text" pInputText size="30" placeholder="{{ 'LBL_BUSCAR' | translate}}" class="form-control">
+				</div>
+			</div>
+		</div>
+		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="supplyPositions" [paginator]="true"
+		             [rows]="10" [responsive]="true" [globalFilter]="gb1">
+			<p-column field="idCargo" header="{{ 'LBL_ID' | translate}}" [sortable]="true"></p-column>
+			<p-column field="cargo" header="{{ 'LBL_CODIGO' | translate}}" [sortable]="true"></p-column>
+			<p-column field="indicadorHabilitado" header="{{ 'SUPPLIES.LBL_ACTIVE' | translate}}" [sortable]="true"
+			          styleClass="datatable-col-center">
+				<template let-datos="rowData" pTemplate="body">
+					<p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="datos.indicadorHabilitado"
+					               (onChange)="changePosition(datos)"></p-inputSwitch>
+				</template>
+			</p-column>
+		</p-dataTable>
+	</p-panel>
+	<p-panel header="{{ 'SUPPLIES.LBL_SUPPLIES' | translate}}" *ngIf="suppliesGroup.idGrupoDotacion">
+		<div *ngIf="suppliesGroup.idGrupoDotacion && formSupply">
+			<form (ngSubmit)="s.valid && onSubmitSupplies()" #s="ngForm" novalidate>
+				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-4">
+							<label for="codigoS">* {{ 'LBL_CODIGO' | translate}}</label>
+							<input type="text" pInputText id="codigoS" name="codigoS"
+							       [(ngModel)]="supply.codigo" maxlength="10"
+							       (change)="validateCodeS()"
+							       (keyup)="inputCleanCode($event)"
+							       #NGcodigoS="ngModel" required/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="s.submitted && !NGcodigoS.valid ">
+								<i class="fa fa-close"></i>{{ 'LBL_CODIGO' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="s.submitted && codeExistsS ">
+								<i class="fa fa-close"></i>{{ 'MSG_CODIGOEXISTE' | translate}}
+							</div>
+						</div>
+						<div class="ui-grid-col-8">
+							<label for="nombreS">* {{ 'LBL_NOMBRE' | translate}}</label>
+							<input type="text" pInputText id="nombreS" name="nombreS"
+							       [(ngModel)]="supply.dotacion" maxlength="255"
+							       titleCaseText
+							       #NGcodigoS="ngModel" required/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="s.submitted && !NGcodigoS.valid ">
+								<i class="fa fa-close"></i>{{ 'LBL_NOMBRE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-6">
+							<label for="descripcionS">* {{ 'LBL_DESCRIPCION' | translate}}</label>
+							<textarea pInputTextarea id="descripcionS" name="descripcionS"
+							          [(ngModel)]="supply.descripcion" #NGsdescripcion="ngModel" maxlength="500"
+							          [required]="true"></textarea>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="s.submitted && !NGsdescripcion.valid">
+								<i class="fa fa-close"></i>{{ 'LBL_DESCRIPCION' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+						<div class="ui-grid-col-6">
+							<label for="detalleProveedor">* {{ 'LBL_DETALLE' | translate}}</label>
+							<textarea pInputTextarea id="detalleProveedor" name="detalleProveedor"
+							          [(ngModel)]="supply.detalleProveedor" #NGdetalle="ngModel" maxlength="500"
+							          [required]="true"></textarea>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="s.submitted && !NGdetalle.valid">
+								<i class="fa fa-close"></i>{{ 'LBL_DETALLE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-4">
+							<label for="costo">* {{ 'SUPPLIES.LBL_COST' | translate}}</label>
+							<input type="text" pInputText id="costo" name="costo"
+							       [(ngModel)]="supply.costo" maxlength="255"
+							       (keyup)="inputCleanValue($event)"
+							       #NGcostoS="ngModel" required/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="s.submitted && !NGcostoS.valid ">
+								<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_COST' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+						<div class="ui-grid-col-4">
+							<label for="cantidad">* {{ 'SUPPLIES.LBL_QUANTITY' | translate}}</label>
+							<input type="number" pInputText id="cantidad" name="cantidad"
+							       [(ngModel)]="supply.cantidad" maxlength="255" min="0" max="9999"
+							       (keyup)="inputCleanValue($event)"
+							       #NGcantidad="ngModel" required/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="s.submitted && !NGcantidad.valid ">
+								<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_QUANTITY' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+						<div class="ui-grid-col-4">
+							<label for="ciclo">* {{ 'SUPPLIES.LBL_CYCLE' | translate}}</label>
+							<p-dropdown id="ciclo" name="ciclo" required="true"
+							            [options]="cycleTypes" [autoWidth]="false"
+							            [(ngModel)]="supply.idCicloEntrega"
+							            #cicloTipo="ngModel"
+							></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="s.submitted && !cicloTipo.valid ">
+								<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_CYCLE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-4">
+							<p-checkbox binary="true" id="rTalla" name="rTalla"
+							            [(ngModel)]="supply.indicadorRequiereTalla" label="{{ 'SUPPLIES.LBL_REQUIRESIZE' | translate}}"
+							></p-checkbox>
+						</div>
+						<div class="ui-grid-col-6" *ngIf="supply.indicadorRequiereTalla === true">
+							<label for="talla">* {{ 'SUPPLIES.LBL_SIZE' | translate}}</label>
+							<p-dropdown id="talla" name="talla" required="true"
+							            [options]="sizeTypes" [autoWidth]="false"
+							            [(ngModel)]="supply.idTipoTalla"
+							            #NGtalla="ngModel"
+							></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="s.submitted && !NGtalla.valid ">
+								<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_SIZE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-3">
+							<p-checkbox binary="true" id="indicadorHab" name="indicadorHab"
+							            [(ngModel)]="supply.indicadorHabilitado" label="{{ 'LBL_HABILITADO' | translate}}"
+							></p-checkbox>
+						</div>
+						<div class="ui-grid-col-3">
+							<p-checkbox binary="true" id="indicadorDotacion" name="indicadorDotacion"
+							            [(ngModel)]="supply.indicadorAdicional"
+							            label="{{ 'SUPPLIES.LBL_SUPPLY' | translate}} {{ 'SUPPLIES.LBL_ADDITIONAL' | translate}}"
+							></p-checkbox>
+						</div>
+						<div class="form-group col-md-6">
+							<label>{{'LBL_ADJUNTAR' | translate}} </label>
+							<div *ngIf="supply.idAdjunto !== null && supply.idAdjunto !== undefined" class="btn-group" role="group"
+							     style="display: block;">
+								<a class="btn btn-default" style="max-width: 87%; overflow: hidden;"
+								   (click)="downloadFile(supply.idAdjunto)">
+									<i class="fa fa-file-o" aria-hidden="true"></i>
+									{{dataUploadArchivo}}
+								</a>
+								<a class="btn btn-danger" (click)="uploadAgain(false)">
+									<i class="fa fa-times" aria-hidden="true"></i>
+								</a>
+							</div>
+							<p-fileUpload *ngIf="supply.idAdjunto === null || supply.idAdjunto === undefined" name="file" url="{{svcThUrl}}"
+							              auto="true"
+							              class="upload-avatar"
+							              chooseLabel="{{'LBL_ADJUNTAR' | translate}}"
+							              (onBeforeSend)="onBeforeSend($event)"
+							              (onSelect)="onSelect($event, $event.files)"
+							              (onUpload)="uploadingOk($event)"
+							              maxFileSize="{{fsize}}" accept="{{ftype}}">
+							</p-fileUpload>
+						</div>
+					</div>
+					<div class="ui-grid-row form-footer-buttons">
+						<div class="ui-grid-col-4"></div>
+						<div class="ui-grid-col-1">
+							<a (click)="goBackQuestion((s.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+						</div>
+						<div class="ui-grid-col-2">
+							<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+						</div>
+						<div class="ui-grid-col-5"></div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div *ngIf="suppliesGroup.idGrupoDotacion && !formSupply">
+			<div class="row datable-header">
+				<div class="col-md-6 col-xs-12 datatable-header-add">
+					<button type="button" icon="fa-plus"
+					        label="{{'BTN_NUEVA' | translate}}"
+					        pButton (click)="addSupplies()"></button>
+				</div>
+				<div class="col-md-6 col-xs-12 datatable-header-search">
+					
+					<div class="input-group">
+						<div class="input-group-addon"><i class="fa fa-search"></i></div>
+						<input #gbSupply type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate}}" class="form-control">
+					</div>
+				
+				</div>
+			</div>
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="preguntas"
+			             [responsive]="true" [globalFilter]="gbSupply">
+				<p-column field="codigo" header="{{'LBL_CODIGO' | translate}}"></p-column>
+				<p-column field="dotacion" header="{{'SUPPLIES.LBL_SUPPLY' | translate}}"></p-column>
+				<p-column field="cicloEntrega" header="{{'SUPPLIES.LBL_CYCLE' | translate}}"></p-column>
+				<p-column field="cantidad" header="{{'SUPPLIES.LBL_QUANTITY' | translate}}"></p-column>
+				<p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}"
+				          styleClass="datatable-col-center">
+					<template let-datos="rowData" pTemplate="body">
+						<p-checkbox [(ngModel)]="datos.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
+					</template>
+				</p-column>
+				<p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
+					<template let-datos="rowData" pTemplate="body">
+						<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip"
+						        title="{{'BTN_EDITAR' | translate}}"
+						        pButton (click)="updateSupplies(datos)"></button>
+					</template>
+				</p-column>
+			</p-dataTable>
+		</div>
+	</p-panel>
+</div>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate}}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate}}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
