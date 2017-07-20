@@ -141,13 +141,13 @@
 							</div>
 						</div>
 						<div class="ui-grid-col-6">
-							<label for="detalleProveedor">* {{ 'LBL_DETALLE' | translate}}</label>
+							<label for="detalleProveedor">* {{ 'SUPPLIES.LBL_DETAIL' | translate}}</label>
 							<textarea pInputTextarea id="detalleProveedor" name="detalleProveedor"
 							          [(ngModel)]="supply.detalleProveedor" #NGdetalle="ngModel" maxlength="500"
 							          [required]="true"></textarea>
 							<div class="ui-message ui-messages-error ui-corner-all"
 							     *ngIf="s.submitted && !NGdetalle.valid">
-								<i class="fa fa-close"></i>{{ 'LBL_DETALLE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+								<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_DETAIL' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 							</div>
 						</div>
 					</div>
@@ -156,7 +156,8 @@
 							<label for="costo">* {{ 'SUPPLIES.LBL_COST' | translate}}</label>
 							<input type="text" pInputText id="costo" name="costo"
 							       [(ngModel)]="supply.costo" maxlength="255"
-							       (keyup)="inputCleanValue($event)"
+							       currencyMask
+							       [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
 							       #NGcostoS="ngModel" required/>
 							<div class="ui-message ui-messages-error ui-corner-all"
 							     *ngIf="s.submitted && !NGcostoS.valid ">
@@ -164,26 +165,27 @@
 							</div>
 						</div>
 						<div class="ui-grid-col-4">
-							<label for="cantidad">* {{ 'SUPPLIES.LBL_QUANTITY' | translate}}</label>
-							<input type="number" pInputText id="cantidad" name="cantidad"
-							       [(ngModel)]="supply.cantidad" maxlength="255" min="0" max="9999"
-							       (keyup)="inputCleanValue($event)"
-							       #NGcantidad="ngModel" required/>
-							<div class="ui-message ui-messages-error ui-corner-all"
-							     *ngIf="s.submitted && !NGcantidad.valid ">
-								<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_QUANTITY' | translate}} {{ 'LBL_REQUERIDO' | translate}}
-							</div>
-						</div>
-						<div class="ui-grid-col-4">
 							<label for="ciclo">* {{ 'SUPPLIES.LBL_CYCLE' | translate}}</label>
 							<p-dropdown id="ciclo" name="ciclo" required="true"
 							            [options]="cycleTypes" [autoWidth]="false"
 							            [(ngModel)]="supply.idCicloEntrega"
+							            (onChange)="getCantidad()"
 							            #cicloTipo="ngModel"
 							></p-dropdown>
 							<div class="ui-message ui-messages-error ui-corner-all"
 							     *ngIf="s.submitted && !cicloTipo.valid ">
 								<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_CYCLE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+						<div class="ui-grid-col-4">
+							<label for="cantidad">* {{ 'SUPPLIES.LBL_QUANTITY' | translate}}</label>
+							<input type="number" pInputText id="cantidad" name="cantidad"
+							       [(ngModel)]="supply.cantidad" maxlength="255" min="0" max="9999"
+							       disabled
+							       #NGcantidad="ngModel" required/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="s.submitted && !NGcantidad.valid ">
+								<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_QUANTITY' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 							</div>
 						</div>
 					</div>

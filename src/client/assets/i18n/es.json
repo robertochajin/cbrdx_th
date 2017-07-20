@@ -1175,7 +1175,8 @@
       "LBL_ADDITIONAL": "Adicional",
       "LBL_ADDPOSITION": "Agregar Cargo",
       "LBL_ACTIVE": "Activo",
-      "LBL_ALLHAB": "Habilitar Todos"
+      "LBL_ALLHAB": "Habilitar Todos",
+      "LBL_DETAIL": "Detalle Proveedor"
    },
    "FIN_ARCHIVO": "============================FIN ARCHIVO============================="
 
