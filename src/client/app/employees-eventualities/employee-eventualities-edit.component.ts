@@ -35,6 +35,14 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    minDateFin: Date = new Date();
    minDateFinPer: Date = new Date();
    minDateReint: Date = new Date();
+   fechaInicio: Date;
+   horaInicio: Date;
+   fechaFinal: Date;
+   horaFinal: Date;
+   fechaReintegro: Date;
+   horaReintegro: Date;
+   periodoInicio: Date;
+   periodoFin: Date;
    rangeFin: string;
    idTipoNovedad: number;
    wrongDiagnostic: boolean = true;
@@ -50,7 +58,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    @Output()
    dismiss: EventEmitter<number> = new EventEmitter<number>();
    codigoVerificacion: string;
-   eventuality: Eventuality;
+   eventuality: Eventuality = new Eventuality();
    acordion: number;
 
    // indicadores para mostrar campos en formulario
@@ -171,7 +179,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       if ( this.employeeEventuality.idTerceroNovedad !== null ) {
          this.employeeNoveltyService.getById( this.employeeEventuality.idTerceroNovedad ).subscribe( data => {
             this.employeeEventuality = data;
-            this.eventualityServices.get( this.employeeEventuality.idTerceroNovedad ).subscribe( rest => {
+            this.eventualityServices.get( this.employeeEventuality.idNovedad ).subscribe( rest => {
                this.eventuality = rest;
             } );
             this.changeEventuality();
@@ -180,19 +188,6 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
          this.eventuality = new Eventuality();
       }
       this.employeesService.get( this.employeeEventuality.idTercero ).subscribe( res => this.employee = res );
-      // this.route.params.subscribe( ( params: Params ) => {
-      //    let tempIdEmployee = Number( +params[ 'idTercero' ] );
-      //    let tempIdEmployeeNovelty = Number( +params[ 'idTerceroNovedad' ] );
-      //    if ( tempIdEmployeeNovelty !== 0 ) {
-      //       this.employeeEventuality.idNovedad = tempIdEmployeeNovelty;
-      //       this.employeeNoveltyService.getById( this.employeeEventuality.idNovedad ).subscribe( data => {
-      //          this.employeeEventuality = data;
-      //       } );
-      //    }
-      //    if ( tempIdEmployee ) {
-      //       this.employeeEventuality.idTercero = tempIdEmployee;
-      //    }
-      // } );
 
       this.es = {
          firstDayOfWeek: 1,
@@ -215,11 +210,15 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    }
 
    onSubmit() {
+      this.formatDate();
       if ( this.eventuality.indicadorConfirmacion && this.employeeEventuality.idTerceroNovedad ) {
          this.employeeNoveltyService.getById( this.employeeEventuality.idNovedad ).subscribe( res => {
             if ( res.codigoValidacion === this.codigoVerificacion ) {
                if ( this.employeeEventuality.idTerceroNovedad !== 0 && this.employeeEventuality.idTerceroNovedad !== null &&
                     this.employeeEventuality.idTerceroNovedad !== undefined ) {
+                  if ( this.eventuality.indicadorConfirmacion && this.employeeEventuality.codigoValidacion ) {
+                     this.employeeEventuality.indicadorHabilitado = true;
+                  }
                   this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( data => {
                      this._nav.setMesage( 2, this.msgs );
                      this.dismiss.emit( 1 );
@@ -228,7 +227,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
                   } );
                }
                else {
-                  this.employeeEventuality.idEstadoNovedad = this.getStateByCode( 'SOLICI' );
+                  this.employeeEventuality.idEstadoNovedad = this.eventuality.idEstadoInicialNovedad;
                   this.employeeEventuality.idTerceroReporta = this.usuarioLogueado.usuario.idTercero;
                   this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
                      this._nav.setMesage( 1, this.msgs );
@@ -254,11 +253,13 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
             } );
          }
          else {
-            this.employeeEventuality.idEstadoNovedad = this.getStateByCode( 'SOLICI' );
+            this.employeeEventuality.idEstadoNovedad = this.eventuality.idEstadoInicialNovedad;
             this.employeeEventuality.idTerceroReporta = this.usuarioLogueado.usuario.idTercero;
             this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
                this._nav.setMesage( 1, this.msgs );
-               this.dismiss.emit( 1 );
+               if ( !this.eventuality.indicadorConfirmacion ) {
+                  this.dismiss.emit( 1 );
+               }
             }, error => {
                this._nav.setMesage( 3, this.msgs );
             } );
@@ -287,42 +288,6 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       event.target.value = input.toUpperCase().replace( /[^A-Z0-9-_]/g, '' );
    }
 
-   // uploadingOk( event: any ) {
-   //    let respuesta = JSON.parse( event.xhr.response );
-   //    if ( respuesta.idAdjunto != null || respuesta.idAdjunto != undefined ) {
-   //       this.employeeEventuality.idAdjunto = respuesta.idAdjunto;
-   //    }
-   // }
-   //
-   // onBeforeSend( event: any ) {
-   //    event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-   //    let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "'}";
-   //    event.formData.append( 'obj', obj.toString() );
-   // }
-   //
-   // onSelect( event: any, file: any ) {
-   //    this.dataUploadArchivo = file[ 0 ].name;
-   //    this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
-   // }
-
-   // uploadAgain( rta: boolean ) {
-   //    this.employeeEventuality.idAdjunto = null;
-   // }
-   //
-   // downloadFile( id: number ) {
-   //    this.adjuntosService.downloadFile( id ).subscribe( res => {
-   //       window.location.assign( res );
-   //    } );
-   // }
-   //
-   // getFileName() {
-   //    if ( this.employeeEventuality.idAdjunto ) {
-   //       this.adjuntosService.getFileName( this.employeeEventuality.idAdjunto ).subscribe( res => {
-   //          this.dataUploadArchivo = res.nombreArchivo;
-   //       } );
-   //    }
-   // }
-
    captureDiagnosticId( event: any ) {
       this.wrongDiagnostic = false;
    }
@@ -349,26 +314,36 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    changeEventuality() {
       this.employeeNoveltyService.getFieldByIdEventuality( this.employeeEventuality.idNovedad ).subscribe( data => {
          this.listField = data;
+         this.eventualityServices.get( this.employeeEventuality.idNovedad ).subscribe( rest => {
+            this.eventuality = rest;
+         } );
          this.resetForm();
          this.propareForm();
       } );
    }
 
    selectInicio() {
-      this.employeeEventuality.fechaFin = null;
-      let temp = new Date( this.employeeEventuality.fechaInicio );
+      this.fechaFinal = null;
+      let temp = new Date( this.fechaInicio );
       this.minDateFin = new Date( temp.setHours( 24 ) );
    }
 
    selectFinal() {
-      this.employeeEventuality.fechaReintegro = null;
-      let temp = new Date( this.employeeEventuality.fechaFin );
+      this.fechaReintegro = null;
+      let temp = new Date( this.fechaFinal );
       this.minDateReint = new Date( temp.setHours( 24 ) );
+      let fecha2 = this.fechaFinal;
+      let fecha1 = this.fechaInicio;
+      if ( fecha2 && fecha1 ) {
+         let diasDif = fecha2.getTime() - fecha1.getTime();
+         let dias = Math.round( diasDif / (1000 * 60 * 60 * 24) );
+         this.employeeEventuality.dias = dias;
+      }
    }
 
    selectPeriodoInicio() {
-      this.employeeEventuality.periodoFinal = null;
-      let temp = new Date( this.employeeEventuality.periodoInicio );
+      this.periodoFin = null;
+      let temp = new Date( this.periodoInicio );
       this.minDateFinPer = new Date( temp.setHours( 24 ) );
    }
 
@@ -510,6 +485,33 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
                                            } );
       } else {
          this.dismiss.emit( 1 );
+      }
+   }
+
+   formatDate() {
+      if ( this.fechaInicio ) {
+         this.employeeEventuality.fechaInicio = this.fechaInicio.toISOString().replace( 'Z', '-0500' );
+      }
+      if ( this.horaInicio ) {
+         this.employeeEventuality.horaInicio = this.horaInicio.toISOString().replace( 'Z', '-0500' );
+      }
+      if ( this.fechaFinal ) {
+         this.employeeEventuality.fechaFin = this.fechaFinal.toISOString().replace( 'Z', '-0500' );
+      }
+      if ( this.horaFinal ) {
+         this.employeeEventuality.horaFin = this.horaFinal.toISOString().replace( 'Z', '-0500' );
+      }
+      if ( this.fechaReintegro ) {
+         this.employeeEventuality.fechaReintegro = this.fechaReintegro.toISOString().replace( 'Z', '-0500' );
+      }
+      if ( this.horaReintegro ) {
+         this.employeeEventuality.horaReintergo = this.horaReintegro.toISOString().replace( 'Z', '-0500' );
+      }
+      if ( this.periodoInicio ) {
+         this.employeeEventuality.periodoInicio = this.periodoInicio.toISOString().replace( 'Z', '-0500' );
+      }
+      if ( this.periodoFin ) {
+         this.employeeEventuality.periodoFinal = this.periodoFin.toISOString().replace( 'Z', '-0500' );
       }
    }
 
