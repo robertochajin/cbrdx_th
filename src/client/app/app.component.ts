@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
 // import { DialogModule } from 'primeng/primeng';
 
 // Handle Idle
-import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
-import { Keepalive } from '@ng-idle/keepalive';
+import { Idle, DEFAULT_INTERRUPTSOURCES } from 'idle-angular2';
+import { Keepalive } from 'idle-keepalive-angular2';
 
 /**
  * This class represents the main application component.
@@ -56,7 +56,7 @@ export class AppComponent implements AfterViewInit {
          } );
 
       // sets an idle timeout of 5 seconds, for testing purposes.
-      idle.setIdle( 900 );
+      idle.setIdle( 5 );
       // sets a timeout period of 5 seconds. after 10 seconds of inactivity, the user will be considered timed out.
       idle.setTimeout( 30 );
       // sets the default interrupts, in this case, things like clicks, scrolls, touches to the document

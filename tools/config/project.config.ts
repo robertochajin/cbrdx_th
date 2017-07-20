@@ -86,13 +86,11 @@ export class ProjectConfig extends SeedConfig {
          name: 'angular2-jwt',
          path: 'node_modules/angular2-jwt/angular2-jwt.js'
       }, {
-         name: '@ng-idle/core',
-         // Path to the package's bundle
-         path: 'node_modules/@ng-idle/core/bundles/core.umd.js'
+         name: 'idle-angular2',
+         path: 'node_modules/idle-angular2/bundles/core.umd.js'
       }, {
-         name: '@ng-idle/keepalive',
-         // Path to the package's bundle
-         path: 'node_modules/@ng-idle/keepalive/bundles/keepalive.umd.js'
+         name: 'idle-keepalive-angular2',
+         path: 'node_modules/idle-keepalive-angular2/bundles/keepalive.umd.js'
       }
       ];
       //
