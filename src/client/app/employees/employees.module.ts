@@ -32,6 +32,9 @@ import { EmployeesRecruitmentService } from '../_services/employees-recruitment.
 import { EmployeesDetailPerfilComponent } from '../selecttion-process-apply/employees-detail-perfil.component';
 import { JsonpModule } from '@angular/http';
 import { SmsService } from '../_services/_sms.service';
+import { EmployeeEventualitiesComponent } from '../employees-eventualities/employees-eventualities.component';
+import { EmployeeEventualitiesAddComponent } from '../employees-eventualities/employee-eventualities-edit.component';
+import { EmployeeEventualitiesService } from '../_services/employees-eventualities.service';
 
 @NgModule( {
               imports: [
@@ -53,11 +56,13 @@ import { SmsService } from '../_services/_sms.service';
               declarations: [ EmployeesComponent, EmployeesDetailComponent, EmployeesAddComponent, EmployeesUpdateComponent,
                  EmployeesAdditionalDataComponent, EmployeesViewDetailComponent, EmployeesCurriculumVitaeComponent,
                  EmployeesRecruitmentComponent,
-                 EmployeesDetailPerfilComponent
+                 EmployeesDetailPerfilComponent,
+                 EmployeeEventualitiesComponent,
+                 EmployeeEventualitiesAddComponent
               ],
               bootstrap: [ EmployeesComponent ],
               providers: [ EmployeesService, ListEmployeesService, EmployeesRecruitmentService, PoliticalDivisionService, NavService,
-                 ListaService, AdjuntosService, ConstanteService, SmsService
+                 ListaService, AdjuntosService, ConstanteService, EmployeeEventualitiesService, SmsService
               ],
               exports: [ EmployeesComponent ]
            } )
