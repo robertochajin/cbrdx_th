@@ -67,7 +67,7 @@ export class UserSessionComponent implements OnInit {
                                            this.employee.segundoNombre + ' ' +
                                            this.employee.primerApellido + ' ' +
                                            this.employee.segundoApellido;
-            this.employee.edad = moment( this.employee.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
+            this.employee.edad = moment().diff( this.employee.fechaNacimiento, 'years', false ).toString();
          } );
       } );
    }
