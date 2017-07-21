@@ -212,8 +212,8 @@
 		      <h3>{{'EMPLOYEES.LBL_RECLUTAMIENTO' | translate}}</h3>
 		      <employees-recruitment *ngIf="employee.idTercero" [employee]="employee"></employees-recruitment>
         </p-tabPanel>
-        <p-tabPanel header="Novedades" disabled="true">
-          <h3>{{'EMPLOYEES.LBL_NOVEDADES' | translate}}</h3>
+        <p-tabPanel header="{{'EMPLOYEES.LBL_NOVEDADES' | translate}}">
+	        <employee-eventuality *ngIf="employee.idTercero" [employee]="employee"></employee-eventuality>
         </p-tabPanel>
         <p-tabPanel header="Formación y Capacitación" disabled="true">
           <h3>{{'EMPLOYEES.LBL_FORMACIONCAPACITACION' | translate}}</h3>

@@ -417,7 +417,6 @@ export class EmployeesUpdateComponent implements OnInit {
    }
 
    updateDate() {
-      this.employee.fechaNacimiento = null;
       let tipodocemploye = this.listTypeDoc.find( x => x.idLista === this.employee.idTipoDocumento );
       let codigo: string = '';
       if ( tipodocemploye ) {
@@ -523,7 +522,17 @@ export class EmployeesUpdateComponent implements OnInit {
    }
 
    onBirthDate( event: any ) {
-      this.minDateDocumento = new Date( Date.parse( event ) );
+      let year = new Date( Date.parse( event ) );
+      this.minDateDocumento = year;
+
+      let tipodocemploye = this.listTypeDoc.find( x => x.idLista === this.employee.idTipoDocumento );
+      let tipo = this.tiposdoc.find( t => t === tipodocemploye.codigo ); // buscar tipo documento elegido
+      if ( tipo ) {
+         this.minDateDocumento.setFullYear( year.getFullYear() + this.mayeda );
+      } else {
+         this.minDateDocumento.setFullYear( year.getFullYear() + 5 );
+      }
+
    }
 
    onDeathDate( event: any ) {

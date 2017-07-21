@@ -97,7 +97,8 @@ export class MedicalExamInformedConsentComponent implements OnInit {
                                                   this.candidate.segundoNombre + ' ' +
                                                   this.candidate.primerApellido + ' ' +
                                                   this.candidate.segundoApellido;
-                  this.candidate.edad = moment( this.candidate.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
+                  this.candidate.edad = moment().diff( this.candidate.fechaNacimiento, 'years', false ).toString();
+
                } );
                vacanciesService.getPublication( res.idPublicacion ).subscribe( pb => {
                   this.publication = pb;
@@ -135,7 +136,6 @@ export class MedicalExamInformedConsentComponent implements OnInit {
                                                                  ' exitosamente.'
                } );
 
-               localStorage.removeItem( 'currentUser' );
                localStorage.removeItem( 'token' );
                this.router.navigate( [ '/login' ] );
             }, error => {
@@ -150,12 +150,10 @@ export class MedicalExamInformedConsentComponent implements OnInit {
             this.medicalExamService.add( this.medicalExam ).subscribe( data => {
                this.medicalExam = data;
                this._nav.setMesage( 1 );
-               localStorage.removeItem( 'currentUser' );
                localStorage.removeItem( 'token' );
                this.router.navigate( [ '/login' ] );
             }, error => {
                this._nav.setMesage( 3 );
-               localStorage.removeItem( 'currentUser' );
                localStorage.removeItem( 'token' );
                this.router.navigate( [ '/login' ] );
             } );

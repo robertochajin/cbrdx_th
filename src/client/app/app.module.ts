@@ -23,7 +23,7 @@ import { LoginService } from './_services/login.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { AuthenticationService } from './_services/authentication.service';
 //  Global Messages
-import { GrowlModule, MessagesModule } from 'primeng/primeng';
+import { DialogModule, GrowlModule, MessagesModule } from 'primeng/primeng';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
 import { ProductivityModule } from './position-productivity/productivity.module';
@@ -82,6 +82,19 @@ import { DocumentManagementModule } from './document-management/document-managem
 // Cuestionarios
 import { QuestionnairesModule } from './questionnaires/questionnaires.module';
 import { EmployeesAttachmentsModule } from './employees-attatchments/employees-attachments.module';
+import { EventualitiesModule } from './eventualities/eventualities.module';
+// import { EmployeeEventualitiesModule } from './employees-eventualities/employees-eventualities.module';
+
+// import { MomentModule } from 'angular2-moment';
+import { NgIdleKeepaliveModule } from 'idle-keepalive-angular2';
+// Dotaciones
+import { SuppliesModule } from './supplies/supplies.module';
+import { TrayEventualitiesModule } from './tray-eventualities/tray-eventualities.module';
+
+
+export function createTranslateLoader(http: Http) {
+   return new TranslateStaticLoader(http, './assets/i18n', '.json');
+}
 
 // CarsModule,
 @NgModule( {
@@ -89,6 +102,8 @@ import { EmployeesAttachmentsModule } from './employees-attatchments/employees-a
                  JsonpModule,
                  MessagesModule,
                  EmployeesModule,
+                 DialogModule,
+                 NgIdleKeepaliveModule.forRoot(),
                  FamilyInformationModule,
                  LocationModule,
                  EmployeesEstateModule,
@@ -115,7 +130,7 @@ import { EmployeesAttachmentsModule } from './employees-attatchments/employees-a
                  BreadcrumbModule.forRoot(),
                  TranslateModule.forRoot( {
                                              provide: TranslateLoader,
-                                             useFactory: ( http: Http ) => new TranslateStaticLoader( http, '/assets/i18n', '.json' ),
+                                             useFactory: ( createTranslateLoader ),
                                              deps: [ Http ]
                                           } ),
                  ConstanteModule,
@@ -140,12 +155,16 @@ import { EmployeesAttachmentsModule } from './employees-attatchments/employees-a
                  MenuManagerModule,
                  CompanyAssetsModule,
                  VacanciesModule,
+                 EventualitiesModule,
                  SelectionProcessModule,
                  DocumentManagementModule,
                  MedicalInstitutionModule,
+                 // EmployeeEventualitiesModule,
                  // EmployeesAttachmentsModule,
                  //AssignmentProfessionalModule
-                 QuestionnairesModule
+                 QuestionnairesModule,
+                 SuppliesModule,
+                 TrayEventualitiesModule
               ],
 
               declarations: [ AppComponent ],

@@ -65,7 +65,7 @@ export class DivisionPoliticaService {
 
 
    getSearch( val: string ) {
-      return this.authHttp.get( this.serviceURL + 'search/' + val + '/' ).map( res => res.json() as Search[] );
+      return this.authHttp.get( this.serviceURL + ' /' + val + '/' ).map( res => res.json() as DivisionPolitica[] );
    }
 
    handleError( error: any ): Promise<any> {

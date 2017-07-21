@@ -1,0 +1,327 @@
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate}}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate}}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
+<div class="col-md-10 col-md-offset-1">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="header">
+				<h3 class="title">{{ 'NOVEDADES.LBL_NOVEDAD' | translate}}</h3>
+			</div>
+		</div>
+	</div>
+	
+	<p-accordion id="accordion">
+		
+		<p-accordionTab header="{{ 'NOVEDADES.LBL_DATOSBASICOS' | translate }}" [selected]="acordion === 1" [disabled]="false">
+			<fieldset>
+				<div class="row-fluid">
+					<div class="col-md-12">
+						
+						<form name="eventualityForm" (ngSubmit)="f.valid && onSubmit(2)" #f="ngForm" novalidate id="eventualityForm">
+							
+							<div class="row">
+								<div class="form-group col-md-6">
+									<label for="novCode">*{{ 'NOVEDADES.LBL_CODIGO' | translate }}:</label>
+									<input id="novCode" type="text" pInputText name="novCode" class="form-control"
+									       [(ngModel)]="eventuality.codigoNovedad" maxLength="10"
+									       #ngCode="ngModel" required codeSpecialCaseText uperCaseText
+									/>
+									<div class="ui-message ui-messages-error ui-corner-all"
+									     *ngIf="f.submitted && !ngCode.valid">
+										<i class="fa fa-close"></i>
+										{{ 'NOVEDADES.LBL_CODIGO' | translate }} {{'LBL_REQUERIDO' | translate}}
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="evName">*{{ 'NOVEDADES.LBL_NOMBRENOVEDAD' | translate }}:</label>
+									<input id="evName" type="text" pInputText name="evName" class="form-control"
+									       [(ngModel)]="eventuality.novedad" maxLength="100"
+									       #ngEvname="ngModel" required titleCaseText
+									/>
+									<div class="ui-message ui-messages-error ui-corner-all"
+									     *ngIf="f.submitted && !ngEvname.valid">
+										<i class="fa fa-close"></i>
+										{{ 'NOVEDADES.LBL_NOMBRENOVEDAD' | translate }} {{'LBL_REQUERIDO' | translate}}
+									</div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col-md-6">
+									<label for="evType">* {{'NOVEDADES.LBL_TIPONOVEDAD' | translate }}</label>
+									<p-dropdown id="evType" name="evType" #ngEvType="ngModel" [options]="eventualityTypes" [autoWidth]="false"
+									            [(ngModel)]="eventuality.idTipoNovedad" required></p-dropdown>
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngEvType.valid">
+										<i class="fa fa-close"></i>
+										{{'NOVEDADES.LBL_TIPONOVEDAD' | translate }} {{'LBL_REQUERIDO' | translate }}
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="rolResp">* {{'NOVEDADES.LBL_RESPONSABLE' | translate }}</label>
+									<p-dropdown id="rolResp" name="rolResp" #ngRolResp="ngModel" [options]="roles" [autoWidth]="false"
+									            [(ngModel)]="eventuality.idRolResponsable" required></p-dropdown>
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngRolResp.valid">
+										<i class="fa fa-close"></i>
+										{{'NOVEDADES.LBL_RESPONSABLE' | translate }} {{'LBL_REQUERIDO' | translate }}
+									</div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col-md-6">
+									<label for="initState">* {{'NOVEDADES.LBL_ESTADONOVEDAD' | translate }}</label>
+									<p-dropdown id="initState" name="initState" #ngInitState="ngModel" [options]="eventualityStates"
+									            [autoWidth]="false" [(ngModel)]="eventuality.idEstadoInicialNovedad"
+									            required></p-dropdown>
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngInitState.valid">
+										<i class="fa fa-close"></i>
+										{{'NOVEDADES.LBL_ESTADONOVEDAD' | translate }} {{'LBL_REQUERIDO' | translate }}
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="thirdState">* {{'NOVEDADES.LBL_ESTADOCOLABORADOR' | translate }}</label>
+									<p-dropdown id="thirdState" name="thirdState" #ngThirdState="ngModel" [options]="thirdStates" [autoWidth]="false"
+									            [(ngModel)]="eventuality.idEstadoTercero" required></p-dropdown>
+									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngThirdState.valid">
+										<i class="fa fa-close"></i>
+										{{'NOVEDADES.LBL_ESTADOCOLABORADOR' | translate }} {{'LBL_REQUERIDO' | translate }}
+									</div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col-md-4">
+									<p-checkbox [(ngModel)]="eventuality.indicadorAusentismo" binary="true" id="ausent" name="ausent"
+									            #ngAusentismo="ngModel"></p-checkbox>
+									<label for="ausent" class="control-label">{{ 'NOVEDADES.LBL_GENERAAUSENTISMO' | translate }}</label>
+								
+								</div>
+								<div class="form-group col-md-4">
+									<p-checkbox [(ngModel)]="eventuality.indicadorAdjuntos" binary="true" id="adju" name="adju"
+									            #ngAdjun="ngModel"></p-checkbox>
+									<label for="adju" class="control-label">{{ 'NOVEDADES.LBL_MANEJAADJUNTOS' | translate }}</label>
+								
+								</div>
+								<div class="form-group col-md-4">
+									<p-checkbox [(ngModel)]="eventuality.indicadorBandeja" binary="true" id="bndj" name="bndj"
+									            #ngBndj="ngModel"></p-checkbox>
+									<label for="bndj" class="control-label">{{ 'NOVEDADES.LBL_VERENBANDEJA' | translate }}</label>
+								
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col-md-4">
+									<p-checkbox [(ngModel)]="eventuality.indicadorSeguimiento" binary="true" id="segu" name="segu"
+									            #ngSegu="ngModel"></p-checkbox>
+									<label for="segu" class="control-label">{{ 'NOVEDADES.LBL_REQUIERESEGUIMIENTO' | translate }}</label>
+								
+								</div>
+								<div class="form-group col-md-4">
+									<p-checkbox [(ngModel)]="eventuality.indicadorAutorizaJefe" binary="true" id="autho" name="autho"
+									            #ngAutho="ngModel"></p-checkbox>
+									<label for="autho" class="control-label">{{ 'NOVEDADES.LBL_AUTORIZAJEFEINMEDIATO' | translate }}</label>
+								
+								</div>
+								<div class="form-group col-md-4">
+									<p-checkbox [(ngModel)]="eventuality.indicadorAfecta" binary="true" id="plnt" name="plnt"
+									            #ngAfect="ngModel"></p-checkbox>
+									<label for="plnt" class="control-label">{{ 'NOVEDADES.LBL_AFECTAPLANTA' | translate }}</label>
+								
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col-md-4">
+									<p-checkbox [(ngModel)]="eventuality.indicadorConfirmacion" binary="true" id="dblConf" name="dblConf"
+									            #ngDblConf="ngModel"></p-checkbox>
+									<label for="dblConf" class="control-label">{{ 'NOVEDADES.LBL_DOBLECONFIRMACION' | translate }}</label>
+								
+								</div>
+								<div class="form-group col-md-4">
+									<p-checkbox [(ngModel)]="eventuality.indicadorNotificaJefe" binary="true" id="ntJefe" name="ntJefe"
+									            #ngNtJefe="ngModel"></p-checkbox>
+									<label for="ntJefe" class="control-label">{{ 'NOVEDADES.LBL_NOTIFICARJEFE' | translate }}</label>
+								
+								</div>
+								<div class="form-group col-md-4">
+									<p-checkbox [(ngModel)]="eventuality.indicadorAreasApoyo" binary="true" id="ntArea" name="ntArea"
+									            #ngNtArea="ngModel"></p-checkbox>
+									<label for="ntArea" class="control-label">{{ 'NOVEDADES.LBL_NOTIFICAAREAS' | translate }}</label>
+								
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col-md-4">
+									<p-checkbox [(ngModel)]="eventuality.indicadorHabilitado" binary="true" id="indHabil" name="indHabil"
+									            #ngNtJefe="ngModel"></p-checkbox>
+									<label for="indHabil" class="control-label">{{ 'LBL_HABILITADO' | translate }}</label>
+								</div>
+								<div class="form-group col-md-4">
+								</div>
+								<div class="form-group col-md-4">
+								</div>
+							</div>
+							
+							<div class="row form-footer-buttons">
+								<div class="form-group col-md-12">
+									<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+									<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+									        pButton></button>
+								
+								</div>
+							</div>
+						
+						</form>
+					
+					</div>
+				</div>
+			</fieldset>
+		</p-accordionTab>
+		
+		<p-accordionTab header="{{ 'NOVEDADES.LBL_ROLESREPORTAN' | translate }}" [selected]="acordion === 2"
+		                [disabled]="(eventuality === undefined || eventuality.idNovedad === undefined)">
+			
+			<fieldset>
+				
+				<form (ngSubmit)="fr.valid && onSubmitRoles()" #fr="ngForm" novalidate id="rolesForm"
+				      *ngIf="!savingReportRol">
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-8">
+							<label for="reportRol">* {{'NOVEDADES.LBL_ROLREPORTA' | translate }}</label>
+							<p-dropdown id="reportRol" name="reportRol" #ngReportRol="ngModel" [options]="rolesToReport" [autoWidth]="false"
+							            [(ngModel)]="reportRol" filter="filter" required></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="fr.submitted && !ngReportRol.valid">
+								<i class="fa fa-close"></i>
+								{{'NOVEDADES.LBL_ROLREPORTA' | translate }} {{'LBL_REQUERIDO' | translate }}
+							</div>
+						</div>
+						<div class="ui-grid-col-4" style="padding-top: 29px;">
+							<button class="btn-block" pButton icon="fa-plus" label="{{'BTN_AGREGAR' | translate}}" type="submit"></button>
+						</div>
+					</div>
+				</form>
+				<div class="row">
+					<div class="col-md-12">
+						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listReportRoles" [paginator]="true"
+						             [rows]="10" [responsive]="true">
+							<p-column field="rol" header="{{'NOVEDADES.LBL_ROLREPORTA' | translate}}"
+							          [sortable]="true"></p-column>
+							<p-column header="Acciones" styleClass="datatable-col-action">
+								<template let-recurso="rowData" pTemplate="body">
+									<button type="button" icon="fa-trash" class="ui-button-danger"
+									        pButton (click)="delReportRol(recurso)"></button>
+								</template>
+							</p-column>
+						</p-dataTable>
+					</div>
+				</div>
+				
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<button icon="fa-arrow-right" label=" {{ 'BTN_SIGUIENTE' | translate }}" (click)="nextStep(3)" type="button"
+						        pButton></button>
+					</div>
+				</div>
+			
+			</fieldset>
+		
+		</p-accordionTab>
+		
+		<p-accordionTab header="{{ 'NOVEDADES.LBL_NOMINA' | translate }}" [selected]="acordion === 3"
+		                [disabled]="(eventuality === undefined || eventuality.idNovedad === undefined)">
+			
+			<fieldset>
+				<form name="nominaForm" (ngSubmit)="nf.valid && onSubmit(4)" #nf="ngForm" novalidate id="nominaForm">
+										
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="sxCode">{{ 'NOVEDADES.LBL_CODIGOSAFIX' | translate }}:</label>
+							<input id="sxCode" type="text" pInputText name="sxCode" class="form-control"
+							       [(ngModel)]="eventuality.codigoSafix" maxLength="10"
+							       #ngCodeSX="ngModel" required codeSpecialCaseText uperCaseText
+							/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="nf.submitted && !ngCodeSX.valid">
+								<i class="fa fa-close"></i>
+								{{ 'NOVEDADES.LBL_CODIGOSAFIX' | translate }} {{'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="afectType">* {{'NOVEDADES.LBL_TIPOAFECTACION' | translate }}</label>
+							<p-dropdown id="afectType" name="afectType" #ngAfectType="ngModel" [options]="affectationTypes" [autoWidth]="false"
+							            [(ngModel)]="eventuality.idTipoAfectacion" required></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="nf.submitted && !ngAfectType.valid">
+								<i class="fa fa-close"></i>
+								{{'NOVEDADES.LBL_TIPOAFECTACION' | translate }} {{'LBL_REQUERIDO' | translate }}
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-4">
+							<p-checkbox [(ngModel)]="eventuality.indicadorCancelacion" binary="true" id="canclSx" name="canclSx"
+							            #ngCanclSx="ngModel"></p-checkbox>
+							<label for="canclSx" class="control-label">{{ 'NOVEDADES.LBL_CANCELASAFIX' | translate }}</label>
+						</div>
+						<div class="form-group col-md-4">
+							<p-checkbox [(ngModel)]="eventuality.indicadorAfecta" binary="true" id="afect" name="afect"
+							            #ngAfect="ngModel"></p-checkbox>
+							<label for="afect" class="control-label">{{ 'NOVEDADES.LBL_AFECTANOMINA' | translate }}</label>
+						</div>
+						<div class="form-group col-md-4">
+							<p-checkbox [(ngModel)]="eventuality.indicadorNomina" binary="true" id="dirNom" name="dirNom"
+							            #ngDirNom="ngModel"></p-checkbox>
+							<label for="dirNom" class="control-label">{{ 'NOVEDADES.LBL_DIRECTOANOMINA' | translate }}</label>
+						</div>
+					</div>
+					
+					<div class="row">
+					
+					</div>
+					
+					<div class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<a (click)="goBack((nf.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+							<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+							        pButton></button>
+						</div>
+					</div>
+				
+				</form>
+			</fieldset>
+		
+		</p-accordionTab>
+		
+		<p-accordionTab header="{{ 'NOVEDADES.LBL_CAMPOS' | translate }}" [selected]="acordion === 4"
+		                [disabled]="(eventuality === undefined || eventuality.idNovedad === undefined)">
+			
+			<fieldset>
+				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="evFields" [paginator]="true"
+				             [rows]="10" [responsive]="true">
+					<p-column field="campoNovedad" header="{{'NOVEDADES.LBL_CAMPO' | translate}}"
+					          [sortable]="true"></p-column>
+					<p-column header="{{'NOVEDADES.LBL_CAMPOVISIBLE' | translate}}" styleClass="datatable-col-action">
+						<template let-fld="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="fld.indicadorHabilitado"
+							               (onChange)="updateEventualityField(fld, ri)"></p-inputSwitch>
+						</template>
+					</p-column>
+					<p-column header="{{'NOVEDADES.LBL_CAMPOOBLIGATORIO' | translate}}" styleClass="datatable-col-action">
+						<template let-fld="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="fld.indicadorObligatorio"
+							               (onChange)="updateEventualityField(fld, ri)"></p-inputSwitch>
+						</template>
+					</p-column>
+				</p-dataTable>
+			</fieldset>
+		
+		</p-accordionTab>
+	
+	
+	</p-accordion>
+
+</div>

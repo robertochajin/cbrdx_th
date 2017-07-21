@@ -1,0 +1,34 @@
+<h3 class="first">{{'SUPPLIES.LBL_SUPPLIESGROUPS' | translate}}</h3>
+<div class="row datable-header">
+	<div class="col-md-6 col-xs-12 datatable-header-add">
+		<button type="button" icon="fa-plus"
+		        label="{{'LBL_NUEVO' | translate}} {{'LBL_GRUPO' | translate}}"
+		        pButton (click)="add()"></button>
+	</div>
+	<div class="col-md-6 col-xs-12 datatable-header-search">
+		
+		<div class="input-group">
+			<div class="input-group-addon"><i class="fa fa-search"></i></div>
+			<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate}}" class="form-control"
+			       [(ngModel)]="busqueda" (change)="setSearch()">
+		</div>
+	
+	</div>
+</div>
+<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listSuppliesGroups" [paginator]="true" [rows]="10"
+             [responsive]="true" [globalFilter]="gb">
+	<p-column field="idGrupoDotacion" header="{{'LBL_ID' | translate}}" [sortable]="true"></p-column>
+	<p-column field="grupoDotacion" header="{{'LBL_NOMBRE' | translate}}" [sortable]="true"></p-column>
+	<p-column field="descripcion" header="{{'LBL_DESCRIPCION' | translate}}" [sortable]="true"></p-column>
+	<p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true" styleClass="datatable-col-center">
+		<template let-datos="rowData" pTemplate="body">
+			<p-checkbox [(ngModel)]="datos.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
+		</template>
+	</p-column>
+	<p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
+		<template let-datos="rowData" pTemplate="body">
+			<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
+			        pButton (click)="update(datos)"></button>
+		</template>
+	</p-column>
+</p-dataTable>
