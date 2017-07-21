@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: ./.docker/angular-seed.production.dockerfile
-    command: npm run build.prod.aot
+    command: npm run build.prod
     container_name: angular-seed-build-prod
     image: angular-seed
     networks:
