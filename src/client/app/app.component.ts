@@ -48,7 +48,7 @@ export class AppComponent implements AfterViewInit {
 
       this.sessionStart = authenticationService.loggedIn();
 
-      translate.setDefaultLang( 'es' );
+      // translate.setDefaultLang( 'es' );
       translate.use( 'es' );
       navService.getMessage$.subscribe(
          msgs => {
