@@ -99,6 +99,7 @@ export class AppComponent implements AfterViewInit {
 
       // Add script theme
       // jQuery.getScript( 'assets/js/app.js');
+      console.log('V0.0.0.22');
 
    }
 
