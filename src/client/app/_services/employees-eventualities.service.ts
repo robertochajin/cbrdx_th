@@ -34,8 +34,9 @@ export class EmployeeEventualitiesService {
    }
 
    getAllByIdType( id: number ) {
-      return this.authHttp.get( this.serviceURLEventuality +'tipoNovedad/'+ id ).map( ( res: Response ) => res.json() as any[] );
+      return this.authHttp.get( this.serviceURLEventuality + 'tipoNovedad/' + id ).map( ( res: Response ) => res.json() as any[] );
    }
+
    getEventualityById( id: number ) {
       return this.authHttp.get( this.serviceURLEventuality + id ).map( ( res: Response ) => res.json() as any[] );
    }
@@ -46,6 +47,11 @@ export class EmployeeEventualitiesService {
 
    getAll() {
       return this.authHttp.get( this.serviceURL ).map( ( res: Response ) => res.json() as EmployeeEventuality[] );
+   }
+
+   getByDate( fInicio: string, fFin: string ) {
+      return this.authHttp.get( this.serviceURL + '/filtroFechas/' + fInicio + '/' + fFin + '/' )
+      .map( ( res: Response ) => res.json() as EmployeeEventuality[] );
    }
 
    add( c: EmployeeEventuality ) {

@@ -55,6 +55,7 @@ export class EmployeeEventuality {
    rol: string;
    numeroDocumento: string;
    periodoInicial: string;
+   codigoNovedad: string;
 
    constructor() {
       this.indicadorHabilitado = true;
