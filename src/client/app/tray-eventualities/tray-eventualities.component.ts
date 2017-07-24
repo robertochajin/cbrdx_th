@@ -86,7 +86,7 @@ export class TrayEventualitiesComponent {
    }
 
    refer( c: EmployeeEventuality ) {
-      this.router.navigate( [ 'trayEventualities/refer/' + c.idTerceroNovedad ] );
+      this.router.navigate( [ 'trayEventualities/transact-eventyality/' + c.idTerceroNovedad ] );
    }
 
    detail( c: EmployeeEventuality ) {
