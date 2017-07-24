@@ -24,7 +24,7 @@
 			</div>
 		</div>
 		<div class="ui-grid-row">
-			<div class="ui-grid-col-4">
+			<div class="ui-grid-col-3">
 				<label for="tipoNovedad">{{ 'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}</label>
 				<p-dropdown id="tipoNovedad" name="tipoNovedad"
 				            [options]="ListaTipos" [autoWidth]="false"
@@ -39,9 +39,16 @@
 				            (onChange)="dt.filter($event.value,'novedad','startsWith')"
 				></p-dropdown>
 			</div>
+			<div class="ui-grid-col-5">
+				<label for="nombreTerceroReporta">{{ 'EMPLOYEENOVELTY.LBL_REPORTADOPOR' | translate }}</label>
+				<p-dropdown id="nombreTerceroReporta" name="nombreTerceroReporta"
+				            [options]="ListaReporta" [autoWidth]="false" filter="filter"
+				            (onChange)="dt.filter($event.value,'nombreTerceroReporta','startsWith')"
+				></p-dropdown>
+			</div>
 		</div>
 		<div class="ui-grid-row">
-			<div class="ui-grid-col-4">
+			<div class="ui-grid-col-3">
 				<label for="fInicio">{{ 'EMPLOYEENOVELTY.LBL_FECHASOLICITUD' | translate }}</label>
 				<p-calendar [locale]="es" [showIcon]="true"
 				            id="fInicio" name="fInicio"
@@ -50,14 +57,13 @@
 				            [(ngModel)]="fechaInicio" (onSelect)="changeDate();"
 				></p-calendar>
 			</div>
-			<div class="pull-right ui-grid-col-1">
-				<div *ngIf="fechaInicio !== undefined && fechaInicio !== null && fechaInicio !== ''" class="col-sm-3 col-md-3">
+			<div class="pull-right ui-grid-col-1" *ngIf="fechaInicio !== undefined && fechaInicio !== null && fechaInicio !== ''">
+				<label>Limpiar Fecha</label>
 					<button pButton type="button" class="ui-button-danger "
 					        (click)="clearDate()"
 					        icon="fa-close"></button>
-				</div>
 			</div>
-			<div class="ui-grid-col-4">
+			<div class="ui-grid-col-3">
 				<label for="fFinal">{{ 'EMPLOYEENOVELTY.LBL_FECHASOLICITUD' | translate }}</label>
 				<p-calendar [locale]="es" [showIcon]="true"
 				            id="fFinal" name="fFinal"
@@ -66,23 +72,13 @@
 				            [(ngModel)]="fechaFin" (onSelect)="changeDate();"
 				></p-calendar>
 			</div>
-		</div>
-		<div class="ui-grid-row">
-			<div class="ui-grid-col-4">
-				<label for="nombreTerceroReporta">{{ 'EMPLOYEENOVELTY.LBL_REPORTADOPOR' | translate }}</label>
-				<p-dropdown id="nombreTerceroReporta" name="nombreTerceroReporta"
-				            [options]="ListaReporta" [autoWidth]="false" filter="filter"
-				            (onChange)="dt.filter($event.value,'nombreTerceroReporta','startsWith')"
-				></p-dropdown>
-			</div>
-			<div class="ui-grid-col-4">
+			<div class="ui-grid-col-5">
 				<label for="nombreTercero">{{ 'EMPLOYEES.LBL_COLABORADOR' | translate }}</label>
 				<p-dropdown id="nombreTercero" name="nombreTercero"
 				            [options]="ListaColaborador" [autoWidth]="false" filter="filter"
 				            (onChange)="dt.filter($event.value,'nombreTercero','startsWith')"
 				></p-dropdown>
 			</div>
-		
 		</div>
 	</div>
 </form>
@@ -119,6 +115,10 @@
 			        class="ui-button-success" data-toggle="tooltip"
 			        title="{{'BTN_EDITAR' | translate}}"
 			        pButton (click)="update(datos)"></button>
+			<button *ngIf="datos.idTerceroReporta === idTercero" type="button" icon="fa-external-link"
+			        class="ui-button-success" data-toggle="tooltip"
+			        title="{{'EMPLOYEENOVELTY.BTN_TRAMITAR' | translate}}"
+			        pButton (click)="refer(datos)"></button>
 		</template>
 	</p-column>
 </p-dataTable>

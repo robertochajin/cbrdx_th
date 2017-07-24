@@ -6,6 +6,7 @@ import { NavService } from '../_services/_nav.service';
 import { Router } from '@angular/router';
 import { EmployeeEventualitiesService } from '../_services/employees-eventualities.service';
 import { EmployeeEventuality } from '../_models/employeeEventuality';
+import { JwtHelper } from 'angular2-jwt';
 
 @Component( {
                moduleId: module.id,
@@ -34,6 +35,10 @@ export class TrayEventualitiesComponent {
    fechaFin: Date;
    today: Date;
 
+   usuarioLogueado: any;
+   idTercero: number;
+   private jwtHelper: JwtHelper = new JwtHelper();
+
    constructor( private employeeEventualitiesService: EmployeeEventualitiesService,
       private listaService: ListaService,
       private router: Router,
@@ -41,6 +46,11 @@ export class TrayEventualitiesComponent {
       private confirmationService: ConfirmationService ) {
       this.busqueda = _nav.getSearch( 'tray-eventualities' );
 
+      let token = localStorage.getItem( 'token' );
+      if ( token !== null ) {
+         this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+         this.idTercero = this.usuarioLogueado.usuario.idTercero;
+      }
       this.employeeEventualitiesService.getAll().subscribe( data => {
          this.allEventualities = data;
          this.listEventualities = data;
@@ -73,6 +83,10 @@ export class TrayEventualitiesComponent {
 
    update( c: EmployeeEventuality ) {
       this.router.navigate( [ 'trayEventualities/update/' + c.idTerceroNovedad ] );
+   }
+
+   refer( c: EmployeeEventuality ) {
+      this.router.navigate( [ 'trayEventualities/refer/' + c.idTerceroNovedad ] );
    }
 
    detail( c: EmployeeEventuality ) {

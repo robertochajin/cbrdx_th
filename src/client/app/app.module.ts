@@ -19,7 +19,6 @@ import { PositionsModule } from './positions/positions.module';
 import { PersonalityModule } from './position-personality/personality.module';
 import { CompanyAssetsModule } from './position-company-assets/company-assets.module';
 import { LoginModule } from './seguridad/login.module';
-import { LoginService } from './_services/login.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { AuthenticationService } from './_services/authentication.service';
 //  Global Messages
@@ -176,7 +175,6 @@ export function createTranslateLoader(http: Http) {
                  },
                  AuthGuard,
                  AuthenticationService,
-                 LoginService,
                  BreadcrumbService,
                  PermissionService,
                  {

@@ -1182,7 +1182,8 @@
       "LBL_ADDPOSITION": "Agregar Cargo",
       "LBL_ACTIVE": "Activo",
       "LBL_ALLHAB": "Habilitar Todos",
-      "LBL_DETAIL": "Detalle Proveedor"
+      "LBL_DETAIL": "Detalle Proveedor",
+      "BTN_TRAMITAR": "Detalle Proveedor"
    },
    "FIN_ARCHIVO": "============================FIN ARCHIVO============================="
 
