@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { EmployeeEstate } from '../_models/employee-estate';
-import { EmployeeEstateService } from '../_services/employee-estate.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { EmployeeEventuality } from '../_models/employeeEventuality';
 import { EventualityServices } from '../_services/eventuality.service';
@@ -8,13 +6,22 @@ import { EmployeeEventualitiesService } from '../_services/employees-eventualiti
 import { EmployeeEventualitiesAttachmentService } from '../_services/employees-eventualities-attachment.service';
 import { EmployeeEventualityAttachment } from '../_models/employeeEventualityAttachment';
 import { AdjuntosService } from '../_services/adjuntos.service';
+import { EmployeeEventualitiesActivitiesService } from '../_services/employee-eventualities-activities.service';
+import { EmployeeEventualityActivity } from '../_models/employeeEventualitiesActivities';
+import { NavService } from '../_services/_nav.service';
+import { ListaService } from '../_services/lista.service';
+import { ConfirmationService, Message, SelectItem } from 'primeng/primeng';
+import { Location } from '@angular/common';
+import { EmployeesService } from '../_services/employees.service';
+import { Employee } from '../_models/employees';
+import * as moment from 'moment/moment';
 
 @Component( {
                moduleId: module.id,
-               templateUrl: 'employees-eventualities-detail.component.html',
-               selector: 'employees-eventuality-detail'
+               templateUrl: 'transact-eventualities.component.html',
+               selector: 'transact-eventuality'
             } )
-export class EmployeeEventualityDetailComponent {
+export class EmployeeEventualityTransactComponent {
    @Input()
    employeeEventuality: EmployeeEventuality = new EmployeeEventuality();
    // indicadores para mostrar campos en formulario
@@ -65,25 +72,69 @@ export class EmployeeEventualityDetailComponent {
    @Output()
    dismiss: EventEmitter<number> = new EventEmitter<number>();
 
+   employeeEventualityActivity: EmployeeEventualityActivity = new EmployeeEventualityActivity();
    listAttachment: EmployeeEventualityAttachment[] = [];
+   listActivities: EmployeeEventualityActivity[] = [];
+   acordion: number = 0;
+   busqueda: string = '';
+   saveActivity: boolean = false;
+   listEstados: SelectItem[] = [];
+   msgs: Message[];
+   employee: Employee = new Employee();
 
    constructor( private eventualityServices: EventualityServices,
       private employeeNoveltyService: EmployeeEventualitiesService,
       private employeeEventualitiesAttachmentService: EmployeeEventualitiesAttachmentService,
+      private employeeEventualitiesActivitiesService: EmployeeEventualitiesActivitiesService,
       private router: Router,
+      private listaService: ListaService,
+      private employeeService: EmployeesService,
+      private _nav: NavService,
+      private location: Location,
       private adjuntosService: AdjuntosService,
+      private confirmationService: ConfirmationService,
       private route: ActivatedRoute ) {
+      this.busqueda = _nav.getSearch( 'transact-eventuality' );
    }
 
    ngOnInit() {
-      this.employeeEventualitiesAttachmentService.getAllByIdEventuality( this.employeeEventuality.idTerceroNovedad )
-      .subscribe( rest => {
-         this.listAttachment = rest;
+      this.listaService.getMasterDetails( 'ListasEstadosNovedades' ).subscribe( res => {
+         this.listEstados.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: any ) => {
+            this.listEstados.push( { label: s.nombre, value: s.idLista } );
+         } );
       } );
-      this.employeeNoveltyService.getFieldByIdEventuality( this.employeeEventuality.idNovedad ).subscribe( data => {
-         this.listField = data;
-         this.propareForm();
+      this.route.params.subscribe( ( params: Params ) => {
+         let tempIdTerceroNovedad = Number( +params[ 'idTerceroNovedad' ] );
+         if ( tempIdTerceroNovedad ) {
+            this.employeeNoveltyService.getById( tempIdTerceroNovedad ).subscribe( rs => {
+               this.employeeEventuality = rs;
+               this.employeeService.get( rs.idTercero ).subscribe( employee => {
+                  this.employee = employee;
+                  this.employee.nombreCompleto = this.employee.primerNombre + ' ' +
+                                                 this.employee.segundoNombre + ' ' +
+                                                 this.employee.primerApellido + ' ' +
+                                                 this.employee.segundoApellido;
+
+                  this.employee.edad = moment().diff( this.employee.fechaNacimiento, 'years', false ).toString();
+               } );
+               this.employeeEventualitiesAttachmentService.getAllByIdEventuality( rs.idTerceroNovedad )
+               .subscribe( rest => {
+                  this.listAttachment = rest;
+               } );
+               this.employeeNoveltyService.getFieldByIdEventuality( rs.idNovedad ).subscribe( data => {
+                  this.listField = data;
+                  this.propareForm();
+               } );
+            } );
+            this.employeeEventualitiesActivitiesService.getAllByEventuality( tempIdTerceroNovedad ).subscribe( data => {
+               this.listActivities = data;
+            } );
+         } else {
+
+         }
       } );
+
    }
 
    propareForm() {
@@ -153,13 +204,94 @@ export class EmployeeEventualityDetailComponent {
 
    }
 
+   onTabShow( e: any ) {
+      this._nav.setTab( e.index );
+      this.acordion = this._nav.getTab();
+   }
+
    downloadFile( id: number ) {
       this.adjuntosService.downloadFile( id ).subscribe( res => {
-         window.location.assign (res );
+         window.location.assign( res );
       } );
    }
 
+   capitalize( event: any ) {
+      let input = event.target.value;
+      event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+   }
+
+   add() {
+      this.employeeEventualityActivity.idTerceroNovedad = this.employeeEventuality.idTerceroNovedad;
+      this.employeeEventualityActivity.idEstadoNovedad = this.employeeEventuality.idEstadoNovedad;
+      this.saveActivity = !this.saveActivity;
+   }
+
+   cancelSave( fDirty: boolean ): void {
+
+      if ( fDirty ) {
+         this.confirmationService.confirm( {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this.saveActivity = !this.saveActivity;
+                                                 this.employeeEventualityActivity = new EmployeeEventualityActivity();
+                                              }
+                                           } );
+      } else {
+         this.saveActivity = !this.saveActivity;
+         this.employeeEventualityActivity = new EmployeeEventualityActivity();
+      }
+   }
+
+   update( nv: EmployeeEventualityActivity ) {
+      this.saveActivity = !this.saveActivity;
+      this.employeeEventualityActivity = nv;
+   }
+
+   detail() {
+
+   }
+
+   onSubmit() {
+      if ( this.employeeEventualityActivity.idTerceroNovedadActividad ) {
+         this.employeeEventualitiesActivitiesService.update( this.employeeEventualityActivity ).subscribe( rs => {
+            this._nav.setMesage( 2, this.msgs );
+            this.employeeEventuality.idEstadoNovedad = this.employeeEventualityActivity.idEstadoNovedad;
+            this.employeeNoveltyService.update( this.employeeEventuality ).subscribe();
+            this.saveActivity = !this.saveActivity;
+            this.listActivities = [];
+            this.employeeEventualitiesActivitiesService.getAllByEventuality( this.employeeEventuality.idTerceroNovedad )
+            .subscribe( data => {
+               this.listActivities = data;
+            } );
+            this.employeeEventualityActivity = new EmployeeEventualityActivity();
+         }, error => {
+            this._nav.setMesage( 3, this.msgs );
+         } );
+      } else {
+         this.employeeEventualitiesActivitiesService.add( this.employeeEventualityActivity ).subscribe( rs => {
+            this._nav.setMesage( 1, this.msgs );
+            this.employeeEventuality.idEstadoNovedad = this.employeeEventualityActivity.idEstadoNovedad;
+            this.employeeNoveltyService.update( this.employeeEventuality ).subscribe();
+            this.saveActivity = !this.saveActivity;
+            this.listActivities = [];
+            this.employeeEventualitiesActivitiesService.getAllByEventuality( this.employeeEventuality.idTerceroNovedad )
+            .subscribe( data => {
+               this.listActivities = data;
+            } );
+            this.employeeEventualityActivity = new EmployeeEventualityActivity();
+         }, error => {
+            this._nav.setMesage( 3, this.msgs );
+         } );
+      }
+   }
+
+   setSearch() {
+      this._nav.setSearch( 'transact-eventuality', this.busqueda );
+   }
+
    goBack(): void {
-      this.dismiss.emit( 1 );
+      this.location.back();
    }
 }

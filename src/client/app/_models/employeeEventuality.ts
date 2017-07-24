@@ -41,7 +41,6 @@ export class EmployeeEventuality {
    auditoriaFecha: Date;
    fechaReporte: Date;
    nombreTerceroReporta: string;
-
    idTerceroReporta: number;
    idEstadoNovedad: number;
    estadoNovedad: string;
