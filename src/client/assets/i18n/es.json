@@ -1058,6 +1058,8 @@
       "LBL_CAMPO": "Campos",
       "LBL_CAMPOVISIBLE": "Visible",
       "LBL_CAMPOOBLIGATORIO": "Obligatorio",
+      "LBL_ADJUNTOS": "Adjuntos",
+      "LBL_NOMBRE": "Nombre",
       "": ""
    },
 "MEDICALINSTITUTION":{
