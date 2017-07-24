@@ -1052,6 +1052,7 @@
       "LBL_ADJUNTOS": "Adjuntos",
       "LBL_NOMBRE": "Nombre",
       "LBL_NOVEDAD": "Novedad",
+      "LBL_ACTIVIDADES": "Actividades",
       "": ""
    },
 "MEDICALINSTITUTION":{
@@ -1155,6 +1156,11 @@
       "LBL_PERIODOFINAL": "Periodo final",
       "LBL_OFICINA": "Oficina",
       "LBL_AREA": "Área",
+      "LBL_FECHAHORA": "Fecha/Hora",
+      "LBL_AGREGARACTIVIDAD": "Agregar actividad",
+      "LBL_ESTADONOVEDAD": "Estado novedad",
+      "LBL_ACTIVIDAD": "Actividad",
+      "LBL_ACTIVIDADREALIZADA": "Actividad realizada",
       "": ""
    },
    "RECLUTAMIENTO": {

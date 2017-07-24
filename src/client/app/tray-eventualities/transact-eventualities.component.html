@@ -185,6 +185,100 @@
 			</div>
 		</div>
 	</p-accordionTab>
+	<p-accordionTab header="{{'NOVEDADES.LBL_ACTIVIDADES' | translate}}" [selected]="acordion == 1">
+		<div *ngIf="!saveActivity">
+			<div class="row datable-header">
+				<div class="col-md-6 col-xs-12 datatable-header-add">
+					<button type="button" icon="fa-plus" label="{{'EMPLOYEENOVELTY.LBL_AGREGAR' | translate }}"
+					        pButton (click)="add()"></button>
+				</div>
+				<div class="col-md-6 col-xs-12 datatable-header-search">
+					<div class="input-group">
+						<div class="input-group-addon"><i class="fa fa-search"></i></div>
+						<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate }}" class="form-control"
+						       [(ngModel)]="busqueda" (change)="setSearch()">
+					</div>
+				</div>
+			</div>
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listActivities" [paginator]="true" [rows]="10"
+			             [responsive]="true" [globalFilter]="gb">
+				<p-column header="{{'EMPLOYEENOVELTY.LBL_FECHAHORA' | translate }}" [sortable]="true">
+					<template let-nv="rowData" pTemplate="body">
+						<label>{{nv.fechaCreacion | date:"MM-dd-yyyy 'a las' h:mma"}}</label>
+					</template>
+				</p-column>
+				<p-column field="estadoNovedad" header="{{'EMPLOYEENOVELTY.LBL_ESTADONOVEDAD' | translate }}" [sortable]="true"></p-column>
+				<p-column field="actividadRealizada" header="{{'EMPLOYEENOVELTY.LBL_ACTIVIDADREALIZADA' | translate }}"
+				          [sortable]="true"></p-column>
+				<p-column header="{{'LBL_HABILITADO' | translate }}" styleClass="datatable-col-action">
+					<template let-nv="rowData" pTemplate="body">
+						<p-checkbox name="indicadorHabilitado" [(ngModel)]="nv.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
+					</template>
+				</p-column>
+				<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+					<template let-nv="rowData" pTemplate="body">
+						<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip"
+						        title="{{'BTN_VISUALIZAR' | translate}}"
+						        pButton (click)="update(nv)"></button>
+					</template>
+				</p-column>
+			</p-dataTable>
+		</div>
+		<div class="clearfix" *ngIf="saveActivity">
+			<div class="col-md-10 col-md-offset-1">
+				<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+						<div class="row">
+							<div class="col-md-6">
+								<label for="idTipoNovedad">{{ 'EMPLOYEENOVELTY.LBL_ESTADONOVEDAD' | translate }}</label>
+								<p-dropdown id="idTipoNovedad" name="idTipoNovedad"
+								            [options]="listEstados" [autoWidth]="false"
+								            [(ngModel)]="employeeEventualityActivity.idEstadoNovedad" required
+								            #idTipoNov="ngModel" ></p-dropdown>
+								<div class="ui-message ui-messages-error ui-corner-all"
+								     *ngIf="f.submitted && !idTipoNov.valid">
+									<i class="fa fa-close"></i>
+									{{ 'EMPLOYEENOVELTY.LBL_ESTADONOVEDAD' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<label for="observacion">* {{'EMPLOYEENOVELTY.LBL_ACTIVIDADREALIZADA' | translate }}</label>
+								<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #decrip="ngModel"
+								          [(ngModel)]="employeeEventualityActivity.actividadRealizada" class="form-control" required
+								          maxlength="500" (keyup)="capitalize($event)"></textarea>
+								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !decrip.valid">
+									<i class="fa fa-close"></i>
+									{{'EMPLOYEENOVELTY.LBL_ACTIVIDADREALIZADA' | translate }} {{'LBL_REQUERIDO' | translate }}
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6"></div>
+							<div class="col-md-6">
+								<label></label><br>
+								<p-checkbox binary="true" id="retiro" name="retiro"
+								            [(ngModel)]="employeeEventualityActivity.indicadorHabilitado"
+								            label="{{ 'LBL_HABILITADO' | translate }}"
+								            #indicador="ngModel"></p-checkbox>
+							</div>
+						</div>
+						<div class="ui-grid-row form-footer-buttons">
+							<div class="col-md-1"></div>
+							<div class="col-md-4"></div>
+							<div class="col-md-1">
+								<a (click)="cancelSave((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+							</div>
+							<div class="col-md-2">
+								<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</p-accordionTab>
 </p-accordion>
 <div class="row form-footer-buttons">
 	<div class="form-group col-md-12">

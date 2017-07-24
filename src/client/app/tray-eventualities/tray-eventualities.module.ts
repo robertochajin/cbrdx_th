@@ -7,6 +7,7 @@ import { ListaService } from '../_services/lista.service';
 import { TrayEventualitiesComponent } from './tray-eventualities.component';
 import { EmployeeEventualitiesService } from '../_services/employees-eventualities.service';
 import { EmployeeEventualityTransactComponent } from './transact-eventualities.component';
+import { EmployeeEventualitiesActivitiesService } from '../_services/employee-eventualities-activities.service';
 
 @NgModule( {
               imports: [
@@ -17,7 +18,7 @@ import { EmployeeEventualityTransactComponent } from './transact-eventualities.c
               declarations: [ TrayEventualitiesComponent, EmployeeEventualityTransactComponent
               ],
               bootstrap: [ TrayEventualitiesComponent ],
-              providers: [ NavService, ListaService, EmployeeEventualitiesService ],
+              providers: [ NavService, ListaService, EmployeeEventualitiesService, EmployeeEventualitiesActivitiesService ],
               exports: [ TrayEventualitiesComponent ]
            } )
 export class TrayEventualitiesModule {
