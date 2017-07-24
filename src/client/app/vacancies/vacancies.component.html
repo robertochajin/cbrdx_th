@@ -40,7 +40,7 @@
 							            [(ngModel)]="fechaInicio"  (onSelect)="changeDate();"
 							></p-calendar>
 						</div>
-						<div class="pull-right col-md-1">
+						<div class="pull-right ">
 							<div *ngIf="fechaInicio !== undefined && fechaInicio !== null && fechaInicio !== ''" class="col-sm-1 col-md-1">
 								<button pButton type="button" class="ui-button-danger "
 								        (click)="clearDate()"
