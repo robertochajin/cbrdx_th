@@ -92,6 +92,10 @@ import { SuppliesModule } from './supplies/supplies.module';
 import { TrayEventualitiesModule } from './tray-eventualities/tray-eventualities.module';
 
 
+export function createTranslateLoader(http: Http) {
+   return new TranslateStaticLoader(http, '/assets/i18n', '.json');
+}
+
 // CarsModule,
 @NgModule( {
               imports: [ BrowserModule, HttpModule, AppRoutingModule,
@@ -126,7 +130,7 @@ import { TrayEventualitiesModule } from './tray-eventualities/tray-eventualities
                  BreadcrumbModule.forRoot(),
                  TranslateModule.forRoot( {
                                              provide: TranslateLoader,
-                                             useFactory: ( http: Http ) => new TranslateStaticLoader( http, '/assets/i18n', '.json' ),
+                                             useFactory: ( createTranslateLoader ),
                                              deps: [ Http ]
                                           } ),
                  ConstanteModule,
