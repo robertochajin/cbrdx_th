@@ -1,7 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import './operators';
-import { LoginService } from './_services/login.service';
 import { TranslateService } from 'ng2-translate';
 import 'moment/locale/es';
 import { Message } from 'primeng/primeng';
@@ -10,7 +9,6 @@ import { NavService } from './_services/_nav.service';
 import { BreadcrumbService } from './shared/breadcrumb/breadcrumb.service';
 import { JwtHelper } from 'angular2-jwt';
 import { Router } from '@angular/router';
-// import { DialogModule } from 'primeng/primeng';
 
 // Handle Idle
 import { Idle, DEFAULT_INTERRUPTSOURCES } from 'idle-angular2';
@@ -35,7 +33,7 @@ export class AppComponent implements AfterViewInit {
    lastPing?: Date = null;
    display: boolean = false;
 
-   constructor( private loginService: LoginService,
+   constructor(
       private translate: TranslateService,
       private router: Router,
       private _nav: NavService,
@@ -99,13 +97,12 @@ export class AppComponent implements AfterViewInit {
 
       // Add script theme
       // jQuery.getScript( 'assets/js/app.js');
-      console.log('V0.0.0.22');
+      // console.log('V0.0.0.22');
 
    }
 
    setSession( s: boolean ): void {
       this.sessionStart = s;
-      this.loginService.setSession( s );
    }
 
    changeLang( lang: string ) {
