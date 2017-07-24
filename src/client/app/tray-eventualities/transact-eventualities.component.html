@@ -1,3 +1,22 @@
+<p-panel header="{{'EMPLOYEES.LBL_COLABORADORES' | translate}}">
+	<div class="clearfix card-header">
+		<div class="col-md-2">
+			<div class="thumbnail img-responsive" *ngIf="employee.imagen">
+				<img src="{{svcThUrl}}/file/{{employee.imagen }}" alt="...">
+			</div>
+		</div>
+		<div class="col-md-8">
+			<h2>{{employee.nombreCompleto}} ({{ employee.estadoTercero }})</h2>
+			<h4>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</h4>
+			<span>{{employee.fechaNacimiento}} ({{employee.edad}})</span><br />
+			<span>Cargo actual : {{employee.cargoActual}}</span><br />
+			<span>Usuario desde : {{employee.fechaCreacion}}</span><br />
+		</div>
+		<div class="col-md-2">
+			<!--<a href="#" class="btn btn-primary">{{'EMPLOYEES.LBL_HISTORIALABORAL' | translate}}</a>-->
+		</div>
+	</div>
+</p-panel>
 <p-accordion (onOpen)="onTabShow($event)" id="accordion">
 	<p-accordionTab header="{{'NOVEDADES.LBL_NOVEDAD' | translate}}" [selected]="acordion == 0 || acordion == null">
 		<div *ngIf="employeeEventuality">

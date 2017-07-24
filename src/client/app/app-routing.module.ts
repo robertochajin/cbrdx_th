@@ -427,7 +427,7 @@ const routes = [
    // Colaborador novedades
    { path: 'employee-eventualities', component: EmployeeEventualitiesComponent },
    { path: 'employee-eventualities/add/:idTercero/:idTerceroNovedad', component: EmployeeEventualitiesAddComponent },
-   { path: 'transact-eventyality/:idTerceroNovedad', component: EmployeeEventualityTransactComponent },
+
    // { path: 'vacancies/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
 
    // Preceso de selección
@@ -501,8 +501,9 @@ const routes = [
    { path: 'supplies/add', component: SuppliesAddComponent },
    { path: 'supplies/update/:id', component: SuppliesUpdateComponent },
 
-   //  Dotaciones
+   //  Bandeja de novedades
    { path: 'tray-eventualities', component: TrayEventualitiesComponent },
+   { path: 'trayEventualities/transact-eventyality/:idTerceroNovedad', component: EmployeeEventualityTransactComponent },
 
 
 ];

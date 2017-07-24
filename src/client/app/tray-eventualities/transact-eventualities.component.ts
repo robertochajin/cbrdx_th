@@ -12,6 +12,9 @@ import { NavService } from '../_services/_nav.service';
 import { ListaService } from '../_services/lista.service';
 import { ConfirmationService, Message, SelectItem } from 'primeng/primeng';
 import { Location } from '@angular/common';
+import { EmployeesService } from '../_services/employees.service';
+import { Employee } from '../_models/employees';
+import * as moment from 'moment/moment';
 
 @Component( {
                moduleId: module.id,
@@ -77,6 +80,7 @@ export class EmployeeEventualityTransactComponent {
    saveActivity: boolean = false;
    listEstados: SelectItem[] = [];
    msgs: Message[];
+   employee: Employee = new Employee();
 
    constructor( private eventualityServices: EventualityServices,
       private employeeNoveltyService: EmployeeEventualitiesService,
@@ -84,6 +88,7 @@ export class EmployeeEventualityTransactComponent {
       private employeeEventualitiesActivitiesService: EmployeeEventualitiesActivitiesService,
       private router: Router,
       private listaService: ListaService,
+      private employeeService: EmployeesService,
       private _nav: NavService,
       private location: Location,
       private adjuntosService: AdjuntosService,
@@ -104,6 +109,15 @@ export class EmployeeEventualityTransactComponent {
          if ( tempIdTerceroNovedad ) {
             this.employeeNoveltyService.getById( tempIdTerceroNovedad ).subscribe( rs => {
                this.employeeEventuality = rs;
+               this.employeeService.get( rs.idTercero ).subscribe( employee => {
+                  this.employee = employee;
+                  this.employee.nombreCompleto = this.employee.primerNombre + ' ' +
+                                                 this.employee.segundoNombre + ' ' +
+                                                 this.employee.primerApellido + ' ' +
+                                                 this.employee.segundoApellido;
+
+                  this.employee.edad = moment().diff( this.employee.fechaNacimiento, 'years', false ).toString();
+               } );
                this.employeeEventualitiesAttachmentService.getAllByIdEventuality( rs.idTerceroNovedad )
                .subscribe( rest => {
                   this.listAttachment = rest;
