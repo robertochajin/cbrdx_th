@@ -202,6 +202,7 @@ import { SuppliesUpdateComponent } from './supplies/supplies-update.component';
 
 // Bandeja de Novedades
 import { TrayEventualitiesComponent } from './tray-eventualities/tray-eventualities.component';
+import { EmployeeEventualityTransactComponent } from './tray-eventualities/transact-eventualities.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -426,8 +427,7 @@ const routes = [
    // Colaborador novedades
    { path: 'employee-eventualities', component: EmployeeEventualitiesComponent },
    { path: 'employee-eventualities/add/:idTercero/:idTerceroNovedad', component: EmployeeEventualitiesAddComponent },
-   // { path: 'vacancies/update/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
-   // { path: 'vacancies/approve/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
+   { path: 'transact-eventyality/:idTerceroNovedad', component: EmployeeEventualityTransactComponent },
    // { path: 'vacancies/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
 
    // Preceso de selección

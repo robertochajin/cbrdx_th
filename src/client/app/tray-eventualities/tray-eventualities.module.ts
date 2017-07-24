@@ -6,6 +6,7 @@ import { FormSharedModule } from '../shared/form-shared.module';
 import { ListaService } from '../_services/lista.service';
 import { TrayEventualitiesComponent } from './tray-eventualities.component';
 import { EmployeeEventualitiesService } from '../_services/employees-eventualities.service';
+import { EmployeeEventualityTransactComponent } from './transact-eventualities.component';
 
 @NgModule( {
               imports: [
@@ -13,7 +14,7 @@ import { EmployeeEventualitiesService } from '../_services/employees-eventualiti
                  FormSharedModule,
               ],
 
-              declarations: [ TrayEventualitiesComponent
+              declarations: [ TrayEventualitiesComponent, EmployeeEventualityTransactComponent
               ],
               bootstrap: [ TrayEventualitiesComponent ],
               providers: [ NavService, ListaService, EmployeeEventualitiesService ],
