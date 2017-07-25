@@ -34,6 +34,9 @@ export class TrayEventualitiesComponent {
    fechaInicio: Date;
    fechaFin: Date;
    today: Date;
+   saveEventuality: boolean = false;
+   editEventuality: boolean = false;
+   detailEventuality: boolean = false;
 
    usuarioLogueado: any;
    idTercero: number;
@@ -78,11 +81,37 @@ export class TrayEventualitiesComponent {
    }
 
    add() {
-      this.router.navigate( [ 'trayEventualities/add' ] );
+      this.employeeEventuality.idTerceroNovedad = null;
+      this.saveEventuality = !this.saveEventuality;
+   }
+
+   closeSave() {
+      this.saveEventuality = !this.saveEventuality;
+      this.allEventualities = [];
+      this.listEventualities = [];
+      this.employeeEventualitiesService.getAll().subscribe( data => {
+         this.allEventualities = data;
+         this.listEventualities = data;
+         this.getFilters();
+      } );
+   }
+   closeEdit() {
+      this.editEventuality = !this.editEventuality;
+      this.allEventualities = [];
+      this.listEventualities = [];
+      this.employeeEventualitiesService.getAll().subscribe( data => {
+         this.allEventualities = data;
+         this.listEventualities = data;
+         this.getFilters();
+      } );
+   }
+   closeDetail() {
+      this.detailEventuality = !this.detailEventuality;
    }
 
    update( c: EmployeeEventuality ) {
-      this.router.navigate( [ 'trayEventualities/update/' + c.idTerceroNovedad ] );
+      this.employeeEventuality = c;
+      this.editEventuality = !this.editEventuality;
    }
 
    refer( c: EmployeeEventuality ) {
@@ -90,7 +119,8 @@ export class TrayEventualitiesComponent {
    }
 
    detail( c: EmployeeEventuality ) {
-      this.router.navigate( [ 'trayEventualities/detail/' + c.idTerceroNovedad ] );
+      this.employeeEventuality = c;
+      this.detailEventuality = !this.detailEventuality;
    }
 
    setSearch() {
