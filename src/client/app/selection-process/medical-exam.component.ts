@@ -60,6 +60,7 @@ export class MedicalExamComponent implements OnInit {
    idRol: number;
    jwtHelper: JwtHelper = new JwtHelper();
    medicalExam: MedicalExam = new MedicalExam();
+   fechaProgramada: Date;
    references: References[];
    minDateEx: Date = new Date();
    rangeFin: string;
@@ -153,7 +154,7 @@ export class MedicalExamComponent implements OnInit {
                                  this.medicalExamService.getByIdProceso( this.candidateProcess.idProcesoSeleccion ).subscribe( rs => {
                                     if ( rs ) {
                                        this.medicalExam = rs;
-                                       this.medicalExam.fechaProgramada = new Date( this.medicalExam.fechaProgramada );
+                                       this.fechaProgramada = new Date( this.medicalExam.fechaProgramada );
                                        if ( this.listEstExaMed.find(
                                              x => x.idLista === this.medicalExam.idEstadoExamenMedico ).codigo === 'RESPOND' ) {
                                           this.respondido = true;
@@ -183,7 +184,7 @@ export class MedicalExamComponent implements OnInit {
                                           this.enesperarespuesta = false;
                                           this.respondido = false;
                                        }
-                                       this.medicalExam.fechaProgramada = new Date( this.medicalExam.fechaProgramada );
+                                       this.fechaProgramada = new Date( this.medicalExam.fechaProgramada );
                                     } else {
                                        this.medicalExam = new MedicalExam();
                                     }
@@ -297,6 +298,7 @@ export class MedicalExamComponent implements OnInit {
    }
 
    onSubmitExam() {
+      this.medicalExam.fechaProgramada = this.fechaProgramada.toISOString().replace('Z', '-0500');
       this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
       if ( this.medicalExam.idExamenMedico ) {
          let temp = this.listEstExaMed.find( c => c.idLista === this.medicalExam.idEstadoExamenMedico ).codigo;
