@@ -4,7 +4,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../_services/authentication.service';
-import { LoginService } from '../_services/login.service';
 import { AppComponent } from '../app.component';
 
 @Component( {
@@ -25,13 +24,11 @@ export class CambioContrasenaComponent implements OnInit {
    enviando = false;
 
    constructor( private authenticationService: AuthenticationService,
-      private loginService: LoginService,
       private router: Router,
       private appmain: AppComponent, ) {
    }
 
    ngOnInit(): void {
-      this.loginService.setSession( false );
       this.appmain.setSession( false );
 
       /* Generar random de la imagen de fondo */

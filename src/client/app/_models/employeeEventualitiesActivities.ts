@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class EmployeeEventualityAttachment {
-   idTerceroNovedadAdjunto: number;
+export class EmployeeEventualityActivity {
+   idTerceroNovedadActividad: number;
    idTerceroNovedad: number;
-   idAdjunto: number;
-   nombre: string;
+   fechaCreacion: Date;
+   actividadRealizada: string;
+   estadoNovedad: string;
+   idEstadoNovedad: number;
    auditoriaFecha: Date;
    auditoriaUsuario: number;
    indicadorHabilitado: boolean;
