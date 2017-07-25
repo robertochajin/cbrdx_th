@@ -1,65 +1,68 @@
-<div *ngIf="!detailEventuality">
-	<div *ngIf="!editEventuality">
-		<div *ngIf="!saveEventuality">
-			<div class="row datable-header">
-				<div class="col-md-6 col-xs-12 datatable-header-add">
-					<button type="button" icon="fa-plus" label="{{'EMPLOYEENOVELTY.LBL_AGREGAR' | translate }}"
-					        pButton (click)="add()"></button>
-				</div>
-				<div class="col-md-6 col-xs-12 datatable-header-search">
-					<div class="input-group">
-						<div class="input-group-addon"><i class="fa fa-search"></i></div>
-						<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate }}" class="form-control"
-						       [(ngModel)]="busqueda" (change)="setSearch()">
+<div *ngIf="!activitiesEventuality">
+	<div *ngIf="!detailEventuality">
+		<div *ngIf="!editEventuality">
+			<div *ngIf="!saveEventuality">
+				<div class="row datable-header">
+					<div class="col-md-6 col-xs-12 datatable-header-add">
+						<button type="button" icon="fa-plus" label="{{'EMPLOYEENOVELTY.LBL_AGREGAR' | translate }}"
+						        pButton (click)="add()"></button>
+					</div>
+					<div class="col-md-6 col-xs-12 datatable-header-search">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="fa fa-search"></i></div>
+							<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate }}" class="form-control"
+							       [(ngModel)]="busqueda" (change)="setSearch()">
+						</div>
 					</div>
 				</div>
+				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listEventualities" [paginator]="true" [rows]="10"
+				             [responsive]="true" [globalFilter]="gb">
+					<p-column field="tipoNovedad" header="{{'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}" [sortable]="true"></p-column>
+					<p-column field="novedad" header="{{'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }}" [sortable]="true"></p-column>
+					<p-column field="fechaReporte" header="{{'EMPLOYEENOVELTY.LBL_FECHASOLICITUD' | translate }}" [sortable]="true"></p-column>
+					<p-column field="estadoNovedad" header="{{'EMPLOYEENOVELTY.LBL_ESTADONOVEDAD' | translate }}" [sortable]="true"></p-column>
+					<p-column field="nombreTerceroReporta" header="{{'EMPLOYEENOVELTY.LBL_REPORTADOPOR' | translate }}"
+					          [sortable]="true"></p-column>
+					<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+						<template let-nv="rowData" pTemplate="body">
+							<button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip"
+							        title="{{'BTN_VISUALIZAR' | translate}}"
+							        pButton (click)="detail(nv)"></button>
+							<button *ngIf="nv.codigoNovedad==='SOLICI' || nv.codigoNovedad==='DEVUEL'" type="button"
+							        icon="fa-pencil" class="ui-button-success"
+							        data-toggle="tooltip"
+							        title="{{'BTN_EDITAR' | translate}}"
+							        pButton (click)="update(nv)"></button>
+							<button *ngIf="nv.codigoNovedad==='SOLICI' || nv.codigoNovedad==='DEVUEL' ||nv.codigoNovedad==='PROCES'" type="button"
+							        icon="fa-remove" class="ui-button-error" data-toggle="tooltip"
+							        title="{{'BTN_CANCELAR' | translate}}"
+							        pButton (click)="cancelar(nv)"></button>
+							<button type="button" icon="fa-list-ol" class="ui-button-error" data-toggle="tooltip"
+							        title="{{'EMPLOYEENOVELTY.BTN_ACTIVIDADES' | translate}}"
+							        pButton (click)="activities(nv)"></button>
+						</template>
+					</p-column>
+				</p-dataTable>
 			</div>
-			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listEventualities" [paginator]="true" [rows]="10"
-			             [responsive]="true" [globalFilter]="gb">
-				<p-column field="tipoNovedad" header="{{'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}" [sortable]="true"></p-column>
-				<p-column field="novedad" header="{{'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }}" [sortable]="true"></p-column>
-				<p-column field="fechaReporte" header="{{'EMPLOYEENOVELTY.LBL_FECHASOLICITUD' | translate }}" [sortable]="true"></p-column>
-				<p-column field="estadoNovedad" header="{{'EMPLOYEENOVELTY.LBL_ESTADONOVEDAD' | translate }}" [sortable]="true"></p-column>
-				<p-column field="nombreTerceroReporta" header="{{'EMPLOYEENOVELTY.LBL_REPORTADOPOR' | translate }}"
-				          [sortable]="true"></p-column>
-				<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
-					<template let-nv="rowData" pTemplate="body">
-						<button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip"
-						        title="{{'BTN_VISUALIZAR' | translate}}"
-						        pButton (click)="detail(nv)"></button>
-						<button *ngIf="nv.codigoNovedad==='SOLICI' || nv.codigoNovedad==='DEVUEL'" type="button"
-						        icon="fa-pencil" class="ui-button-success"
-						        data-toggle="tooltip"
-						        title="{{'BTN_EDITAR' | translate}}"
-						        pButton (click)="update(nv)"></button>
-						<button  *ngIf="nv.codigoNovedad==='SOLICI' || nv.codigoNovedad==='DEVUEL' ||nv.codigoNovedad==='PROCES'" type="button" icon="fa-remove" class="ui-button-error" data-toggle="tooltip"
-						        title="{{'BTN_CANCELAR' | translate}}"
-						        pButton (click)="cancelar(nv)"></button>
-						<button type="button" icon="fa-list-ol" class="ui-button-error" data-toggle="tooltip"
-						        title="{{'EMPLOYEENOVELTY.BTN_ACTIVIDADES' | translate}}"
-						        pButton (click)="activities(nv)"></button>
-					</template>
-				</p-column>
-			</p-dataTable>
+			<div *ngIf="saveEventuality" class="clearfix">
+				<employee-eventuality-add *ngIf="employee.idTercero"
+				                          [employeeEventuality]="employeeEventuality" (dismiss)="toggleForm()"></employee-eventuality-add>
+			</div>
 		</div>
-		<div *ngIf="saveEventuality" class="clearfix">
+		
+		<div *ngIf="editEventuality" class="clearfix">
 			<employee-eventuality-add *ngIf="employee.idTercero"
-			                          [employeeEventuality]="employeeEventuality" (dismiss)="toggleForm()"></employee-eventuality-add>
+			                          [employeeEventuality]="employeeEventuality" (dismiss)="toggleFormEdit()"></employee-eventuality-add>
 		</div>
 	</div>
-	
-	<div *ngIf="editEventuality" class="clearfix">
-		<employee-eventuality-add *ngIf="employee.idTercero"
-		                          [employeeEventuality]="employeeEventuality" (dismiss)="toggleFormEdit()"></employee-eventuality-add>
+	<div *ngIf="detailEventuality" class="clearfix">
+		<employees-eventuality-detail *ngIf="employee.idTercero" [employeeEventuality]="employeeEventuality"
+		                              (dismiss)="toggleDetail()"></employees-eventuality-detail>
 	</div>
-</div>
-<div *ngIf="detailEventuality" class="clearfix">
-	<employees-eventuality-detail *ngIf="employee.idTercero" [employeeEventuality]="employeeEventuality"
-	                              (dismiss)="toggleDetail()"></employees-eventuality-detail>
 </div>
 <div *ngIf="activitiesEventuality" class="clearfix">
 	<employee-transact-eventuality *ngIf="employee.idTercero" [employeeEventuality]="employeeEventuality"
-	                               (dismiss)="toggleDetail()"></employee-transact-eventuality>
+	                               (dismiss)="toggleActivities()"></employee-transact-eventuality>
 </div>
 <p-confirmDialog icon="fa fa-question-circle" #cd width="400">
 	<p-footer>

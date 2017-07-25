@@ -78,6 +78,9 @@ export class EmployeeEventualitiesComponent {
    toggleDetail() {
       this.detailEventuality = !this.detailEventuality;
    }
+   toggleActivities() {
+      this.activitiesEventuality = !this.activitiesEventuality;
+   }
 
    detail( e: EmployeeEventuality ) {
       this.employeeEventuality = e;
@@ -116,6 +119,7 @@ export class EmployeeEventualitiesComponent {
    }
 
    activities( e: EmployeeEventuality ) {
+      this.employeeEventuality = e;
       this.activitiesEventuality = !this.activitiesEventuality;
    }
 }
