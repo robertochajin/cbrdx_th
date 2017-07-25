@@ -35,6 +35,9 @@
 						<button  *ngIf="nv.codigoNovedad==='SOLICI' || nv.codigoNovedad==='DEVUEL' ||nv.codigoNovedad==='PROCES'" type="button" icon="fa-remove" class="ui-button-error" data-toggle="tooltip"
 						        title="{{'BTN_CANCELAR' | translate}}"
 						        pButton (click)="cancelar(nv)"></button>
+						<button type="button" icon="fa-list-ol" class="ui-button-error" data-toggle="tooltip"
+						        title="{{'EMPLOYEENOVELTY.BTN_ACTIVIDADES' | translate}}"
+						        pButton (click)="activities(nv)"></button>
 					</template>
 				</p-column>
 			</p-dataTable>
@@ -53,6 +56,10 @@
 <div *ngIf="detailEventuality" class="clearfix">
 	<employees-eventuality-detail *ngIf="employee.idTercero" [employeeEventuality]="employeeEventuality"
 	                              (dismiss)="toggleDetail()"></employees-eventuality-detail>
+</div>
+<div *ngIf="activitiesEventuality" class="clearfix">
+	<employee-transact-eventuality *ngIf="employee.idTercero" [employeeEventuality]="employeeEventuality"
+	                               (dismiss)="toggleDetail()"></employee-transact-eventuality>
 </div>
 <p-confirmDialog icon="fa fa-question-circle" #cd width="400">
 	<p-footer>

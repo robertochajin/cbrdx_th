@@ -1,11 +1,18 @@
 <h3>{{ 'PLANTACOLABORADORES.LBL_PLANTACOLAB' | translate }}</h3>
-<div class="row">
+
+<div class = "alert alert-info" *ngIf="treedCompany.length === 0"
+	  style="font-size: 1.2em;text-align: center;">
+	<i class="fa fa-info-circle" aria-hidden="true"></i>
+	No se muestra el árbol, ya que NO cuentas con las condiciones necesarias para mostrar funcionalidad. <br />
+	Por favor comuníquese con el administrador del sistema.
+</div>
+
+<div class="row" *ngIf="treedCompany.length !== 0">
 	<div class="col-md-4">
 		<p-tree id="treedCompany" [(value)]="treedCompany" selectionMode="single"
 		        [(selection)]="selectedNode"
 		        (onNodeSelect)="nodeSelect($event.node)"
-		        (onNodeExpand)="nodeExpand($event.node)"
-		></p-tree>
+		        (onNodeExpand)="nodeExpand($event.node)"></p-tree>
 		{{empty}}
 	</div>
 	<div class="col-md-8" *ngIf="area.idEstructuraOrganizacional == null">
