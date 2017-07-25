@@ -23,12 +23,12 @@ import { EmployeeEventualitiesAttachmentService } from '../_services/employees-e
 
 @Component( {
                moduleId: module.id,
-               selector: 'employee-eventuality-add',
-               templateUrl: 'employee-eventualities-form.component.html',
+               selector: 'tray-employee-eventuality-add',
+               templateUrl: 'tray-employee-eventualities-form.component.html',
                providers: [ ConfirmationService ]
             } )
 
-export class EmployeeEventualitiesAddComponent implements OnInit {
+export class EmployeeEventualitiesTrayAddComponent implements OnInit {
    @Input()
    employeeEventuality: EmployeeEventuality = new EmployeeEventuality();
    employee: Employee = new Employee();
@@ -55,6 +55,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    listFP: SelectItem[] = [];
    listCCF: SelectItem[] = [];
    listEntidad: SelectItem[] = [];
+   listEmployees: SelectItem[] = [];
    listEventualities: SelectItem[] = [];
    listEstados: ListaItem[] = [];
    listField: any[] = [];
@@ -183,9 +184,17 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
             this.listEntidad.push( { label: s.nombre, value: s.idLista } );
          } );
       } );
+
    }
 
    ngOnInit() {
+      this.employeesService.getAll().subscribe( res => {
+         this.listEmployees.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: Employee ) => {
+            this.listEmployees.push(
+               { label: s.primerNombre + ' ' + s.segundoNombre + ' ' + s.primerApellido + ' ' + s.segundoApellido, value: s.idTercero } );
+         } );
+      } );
       if ( this.employeeEventuality.idTerceroNovedad !== null ) {
          this.employeeNoveltyService.getById( this.employeeEventuality.idTerceroNovedad ).subscribe( data => {
             this.employeeEventuality = data;
@@ -209,7 +218,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       } else {
          this.eventuality = new Eventuality();
       }
-      this.employeesService.get( this.employeeEventuality.idTercero ).subscribe( res => this.employee = res );
+      // this.employeesService.get( this.employeeEventuality.idTercero ).subscribe( res => this.employee = res );
 
       this.es = {
          firstDayOfWeek: 1,
@@ -245,7 +254,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
                      this._nav.setMesage( 2, this.msgs );
                      if ( this.eventuality.indicadorAdjuntos ) {
                         this.acordion = 1;
-                     }else{
+                     } else {
                         this.dismiss.emit( 1 );
                      }
                   }, error => {
@@ -259,7 +268,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
                      this._nav.setMesage( 1, this.msgs );
                      if ( this.eventuality.indicadorAdjuntos ) {
                         this.acordion = 1;
-                     }else{
+                     } else {
                         this.dismiss.emit( 1 );
                      }
                   }, error => {
@@ -279,7 +288,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
                this._nav.setMesage( 2, this.msgs );
                if ( this.eventuality.indicadorAdjuntos ) {
                   this.acordion = 1;
-               }else{
+               } else {
                   this.dismiss.emit( 1 );
                }
             }, error => {
@@ -295,7 +304,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
                if ( !this.eventuality.indicadorConfirmacion ) {
                   if ( this.eventuality.indicadorAdjuntos ) {
                      this.acordion = 1;
-                  }else{
+                  } else {
                      this.dismiss.emit( 1 );
                   }
                }

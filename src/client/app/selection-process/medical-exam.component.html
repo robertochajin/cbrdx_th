@@ -71,7 +71,7 @@
 									<p-calendar id="fechaFin" name="fechaFin" #fechaFin="ngModel" [showIcon]="true"
 									            [minDate]="minDateEx" [monthNavigator]="true" [yearNavigator]="true"
 									            [locale]="es" readonlyInput="readonlyInput"
-									            dataType="date" [(ngModel)]="medicalExam.fechaProgramada" [showTime]="true"
+									            dataType="date" [(ngModel)]="fechaProgramada" [showTime]="true"
 									            dateFormat="yy'-'mm'-'dd"></p-calendar>
 									<div class="ui-message ui-messages-error ui-corner-all" *ngIf="fex.submitted && !fechaFin.valid">
 										<i class="fa fa-close"></i>
@@ -144,7 +144,7 @@
 							<p-calendar id="fechaFinr" name="fechaFinr" #fechaFin="ngModel" [showIcon]="true"
 							            [minDate]="minDateEx" [monthNavigator]="true" [yearNavigator]="true"
 							            [locale]="es" readonlyInput="readonlyInput" disabled="true"
-							            dataType="date" [(ngModel)]="medicalExam.fechaProgramada" [showTime]="true"
+							            dataType="date" [(ngModel)]="fechaProgramada" [showTime]="true"
 							            dateFormat="yy'-'mm'-'dd"></p-calendar>
 						</div>
 					</div>
