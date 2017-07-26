@@ -204,6 +204,9 @@ import { SuppliesUpdateComponent } from './supplies/supplies-update.component';
 import { TrayEventualitiesComponent } from './tray-eventualities/tray-eventualities.component';
 import { EmployeeEventualityTransactComponent } from './tray-eventualities/transact-eventualities.component';
 import { SuppliesProjectionComponent } from './supplies-projection/supplies-projection.component';
+import { AssignationListComponent } from './supplies/assign-supplies/assignation-list.component';
+import { EmployeeAssignationComponent } from './supplies/assign-supplies/employee-assignation.component';
+import { EmployeeAssignationDetailComponent } from './supplies/assign-supplies/employee-assignation-detail.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -501,6 +504,9 @@ const routes = [
    { path: 'supplies', component: SuppliesComponent },
    { path: 'supplies/add', component: SuppliesAddComponent },
    { path: 'supplies/update/:id', component: SuppliesUpdateComponent },
+   { path: 'supplies-projection/assignations/:idProjection', component: AssignationListComponent },
+   { path: 'supplies-projection/assignations/assign/:idEmployeeAssign', component: EmployeeAssignationComponent },
+   { path: 'supplies-projection/assignations/detail/:idEmployeeAssign', component: EmployeeAssignationDetailComponent },
 
    //  Bandeja de novedades
    { path: 'tray-eventualities', component: TrayEventualitiesComponent },

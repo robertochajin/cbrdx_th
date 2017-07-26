@@ -8,6 +8,9 @@ import { SuppliesComponent } from './supplies.component';
 import { SuppliesService } from '../_services/supplies.service';
 import { SuppliesAddComponent } from './supplies-add.component';
 import { SuppliesUpdateComponent } from './supplies-update.component';
+import { AssignationListComponent } from './assign-supplies/assignation-list.component';
+import { EmployeeAssignationComponent } from './assign-supplies/employee-assignation.component';
+import { EmployeeAssignationDetailComponent } from './assign-supplies/employee-assignation-detail.component';
 
 
 @NgModule( {
@@ -16,7 +19,10 @@ import { SuppliesUpdateComponent } from './supplies-update.component';
                  FormSharedModule,
               ],
 
-              declarations: [ SuppliesComponent, SuppliesAddComponent, SuppliesUpdateComponent
+              declarations: [ AssignationListComponent,
+                 EmployeeAssignationDetailComponent,
+                 EmployeeAssignationComponent,
+                 SuppliesComponent, SuppliesAddComponent, SuppliesUpdateComponent
               ],
               bootstrap: [ SuppliesComponent ],
               providers: [ SuppliesService, NavService, ListaService ],
