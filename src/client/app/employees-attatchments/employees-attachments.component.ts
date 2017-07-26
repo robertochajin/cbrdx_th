@@ -112,7 +112,8 @@ export class EmployeesAttachmentsComponent implements OnInit {
    onBeforeSend( event: any, dato: DocumentoTercero ) {
       this.cargando = dato.idDocumentoTercero;
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "'}";
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "', 'ruta':" +
+                " '/terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "' }";
       event.formData.append( 'obj', obj.toString() );
    }
 
