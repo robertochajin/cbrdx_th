@@ -8,9 +8,9 @@ import { EmployessSuppliesProjectionSupply } from '../_models/employessSuppliesP
 @Injectable()
 export class EmployessSuppliesServices {
 
-   private masterServiceAdditional = '<%= SVC_TH_URL %>/api/tercerosDotacionesAdicionales';
-   private masterServiceProjection = '<%= SVC_TH_URL %>/api/proyeccionesDotacionesTerceros';
-   private masterServiceProjectionSupply = '<%= SVC_TH_URL %>/api/proyeccionesDotacionesTercerosDotaciones';
+   private masterServiceAdditional = '<%= SVC_TH_URL %>/api/tercerosDotacionesAdicionales/';
+   private masterServiceProjection = '<%= SVC_TH_URL %>/api/proyeccionesDotacionesTerceros/';
+   private masterServiceProjectionSupply = '<%= SVC_TH_URL %>/api/proyeccionesDotacionesTercerosDotaciones/';
    private jwtHelper: JwtHelper = new JwtHelper();
    private usuarioLogueado: any;
    private idUsuario: number;
@@ -23,8 +23,8 @@ export class EmployessSuppliesServices {
       }
    }
 
-   getAllAdditional() {
-      return this.authHttp.get( this.masterServiceAdditional )
+   getAllAdditionalByIdEmployee(id: number) {
+      return this.authHttp.get( this.masterServiceAdditional + 'buscarTercero/' + id)
       .map( ( res: Response ) => res.json() as EmployessSuppliesAdditional[] );
    }
 
