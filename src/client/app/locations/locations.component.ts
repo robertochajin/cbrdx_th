@@ -8,6 +8,7 @@ import { PoliticalDivisionService } from '../_services/political-division.servic
 import { LocationService } from '../_services/employee-location.service';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
+import { LocationsNomenclatures } from '../_models/locationsNomenclatures';
 
 declare let google: any;
 
@@ -39,9 +40,6 @@ export class LocationsComponent implements OnInit, AfterViewInit {
    selectedPrincipalNomenclature: number;
    selectedAddressType: number;
    labelPrincipalNomenclature: string;
-   principalNomenclature: string;
-   numberOne: string;
-   numberTwo: string;
 
    complementaries: any;
    finalAddress: string;
@@ -73,7 +71,7 @@ export class LocationsComponent implements OnInit, AfterViewInit {
       } );
       this.listaService.getMasterDetails( 'ListasTiposNomenclaturasComplementarias' ).subscribe( res => {
          this.complementaryNomenclatureList.push( { label: 'Seleccione', value: null } );
-         res.map( ( s: ListaItem ) => this.complementaryNomenclatureList.push( { label: s.nombre, value: s.nombre } ) );
+         res.map( ( s: ListaItem ) => this.complementaryNomenclatureList.push( { label: s.nombre, value: s.idLista } ) );
       } );
 
       this.finalAddress = this.localizacion.direccion;
@@ -81,6 +79,10 @@ export class LocationsComponent implements OnInit, AfterViewInit {
       this.selectedPrincipalNomenclature = this.localizacion.nomenclaturaPrincipal;
       if ( this.localizacion.idDivisionPolitica !== null && this.localizacion.idDivisionPolitica !== undefined ) {
          this.badSelect = false;
+      }
+
+      if ( this.localizacion.listLN !== undefined && this.localizacion.listLN.length == 0 ) {
+         this.addComplementary();
       }
    }
 
@@ -128,9 +130,9 @@ export class LocationsComponent implements OnInit, AfterViewInit {
 
       this.finalAddress = '';
       this.finalAddress += this.labelPrincipalNomenclature === undefined ? '' : this.labelPrincipalNomenclature + ' ';
-      this.finalAddress += this.principalNomenclature === undefined ? '' : this.principalNomenclature + ' # ';
-      this.finalAddress += this.numberOne === undefined ? '' : this.numberOne + ' - ';
-      this.finalAddress += this.numberTwo === undefined ? '' : this.numberTwo + ' ';
+      this.finalAddress += this.localizacion.principal === undefined ? '' : this.localizacion.principal + ' # ';
+      this.finalAddress += this.localizacion.adicional === undefined ? '' : this.localizacion.adicional + ' - ';
+      this.finalAddress += this.localizacion.adicionalComplementaria === undefined ? '' : this.localizacion.adicionalComplementaria + ' ';
 
       if ( this.finalAddress !== '' && this.localizacion.locacion !== undefined && this.localizacion.locacion.camino !== '' &&
            this.localizacion.locacion.camino !== undefined ) {
@@ -162,9 +164,10 @@ export class LocationsComponent implements OnInit, AfterViewInit {
          geocoder.geocode( { 'address': this.finalAddress + ' ' + reversed.join( ',' ) }, procesarRespuesta );
       }
 
-      for ( let c of this.complementaries ) {
-         if ( c.detalle !== '' && c.tipo !== null ) {
-            this.finalAddress += c.tipo + ' ' + c.detalle + ' ';
+      for ( let c of this.localizacion.listLN ) {
+         if ( c.descripcion !== undefined && c.idTipoNomenclaturaComplementaria !== undefined ) {
+            this.finalAddress += this.complementaryNomenclatureList.find( cn => cn.value === c.idTipoNomenclaturaComplementaria ).label
+                                 + ' ' + c.descripcion + ' ';
          }
       }
 
@@ -194,12 +197,16 @@ export class LocationsComponent implements OnInit, AfterViewInit {
    }
 
    addComplementary(): void {
-      let complementary = { 'tipo': 0, 'detalle': '' };
-      this.complementaries.push( complementary );
+      // let complementary = { 'tipo': 0, 'detalle': '' };
+      let complementary = new LocationsNomenclatures();
+      complementary.indicadorHabilitado = true;
+      this.localizacion.listLN.push( complementary );
+      // this.complementaries.push( complementary );
    }
 
    removeComplementary( id: any ): void {
-      this.complementaries.splice( id, 1 );
+      // this.complementaries.splice( id, 1 );
+      this.localizacion.listLN.splice( id, 1 );
       this.composeAddress();
    }
 

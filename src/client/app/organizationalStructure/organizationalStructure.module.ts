@@ -7,6 +7,8 @@ import { OrganizationalStructureService } from '../_services/organizationalStruc
 import { OrganizationalStructureComponent } from './organizationalStructure.component';
 import { LocationsModule } from '../locations/locations.module';
 import { ZonesServices } from '../_services/zones.service';
+import { PoliticalDivisionService } from '../_services/political-division.service';
+import { LocationsNomenclaturesServices } from '../_services/locationsNomenclatures.service';
 
 
 @NgModule( {
@@ -17,7 +19,7 @@ import { ZonesServices } from '../_services/zones.service';
               ],
               declarations: [ OrganizationalStructureComponent ],
               bootstrap: [ OrganizationalStructureComponent ],
-              providers: [ OrganizationalStructureService, ZonesServices ],
+              providers: [ OrganizationalStructureService, ZonesServices, PoliticalDivisionService, LocationsNomenclaturesServices ],
               exports: [ OrganizationalStructureComponent ]
            } )
 export class OrganizationalStructureModule {

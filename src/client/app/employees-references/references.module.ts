@@ -15,6 +15,7 @@ import { LocationsModule } from '../locations/locations.module';
 import { ListaService } from '../_services/lista.service';
 import { AdjuntosService } from '../_services/adjuntos.service';
 import { ConstanteService } from '../_services/constante.service';
+import { LocationsNomenclaturesServices } from '../_services/locationsNomenclatures.service';
 
 @NgModule( {
               imports: [ CommonModule, FormsModule,
@@ -26,7 +27,9 @@ import { ConstanteService } from '../_services/constante.service';
                  ReferencesUpdateComponent
               ],
               bootstrap: [ ReferencesComponent ],
-              providers: [ ReferencesService, LocateService, PoliticalDivisionService, ListaService, AdjuntosService, ConstanteService ],
+              providers: [ ReferencesService, LocateService, PoliticalDivisionService, ListaService, AdjuntosService, ConstanteService,
+                 LocationsNomenclaturesServices
+              ],
               exports: [ ReferencesComponent ]
            } )
 export class ReferencesModule {
