@@ -77,6 +77,7 @@ export class SuppliesProjectionAddComponent implements OnInit {
       }
       this.suppliesProjectionServices.add( this.suppliesProjection ).subscribe( rs => {
          this._nav.setMesage( 1, this.msgs );
+         this.location.back();
       }, error => {
          this._nav.setMesage( 3, this.msgs );
       } );
