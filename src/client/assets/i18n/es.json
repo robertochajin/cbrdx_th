@@ -1185,6 +1185,7 @@
       "LBL_ACTIVE": "Activo",
       "LBL_ALLHAB": "Habilitar Todos",
       "LBL_DETAIL": "Detalle Proveedor",
+      "LBL_SUPPLIESADITTIONAL": "Dotaciones Adicionales",
       "BTN_TRAMITAR": "Detalle Proveedor"
    },
    "FIN_ARCHIVO": "============================FIN ARCHIVO============================="

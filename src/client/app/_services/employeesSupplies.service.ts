@@ -24,7 +24,10 @@ export class EmployessSuppliesServices {
    }
 
    getAllAdditionalByIdEmployee(id: number) {
-      return this.authHttp.get( this.masterServiceAdditional + 'buscarTercero/' + id)
+      /*return this.authHttp.get( this.masterServiceAdditional + 'buscarTercero/' + id)
+       .map( ( res: Response ) => res.json() as EmployessSuppliesAdditional[] );*/
+
+      return this.authHttp.get( this.masterServiceAdditional )
       .map( ( res: Response ) => res.json() as EmployessSuppliesAdditional[] );
    }
 

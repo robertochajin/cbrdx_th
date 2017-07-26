@@ -1,9 +1,9 @@
-<h3 class="first">{{'SUPPLIES.LBL_SUPPLIESGROUPS' | translate}}</h3>
-<div *ngIf="showForm">
+<h3 class="first">{{'SUPPLIES.LBL_SUPPLIESADITTIONAL' | translate}}</h3>
+<div *ngIf="!showForm">
 	<div class="row datable-header">
 		<div class="col-md-6 col-xs-12 datatable-header-add">
 			<button type="button" icon="fa-plus"
-			        label="{{'LBL_NUEVO' | translate}} {{'LBL_GRUPO' | translate}}"
+			        label="{{'LBL_NUEVA' | translate}} {{'SUPPLIES.LBL_SUPPLY' | translate}}"
 			        pButton (click)="add()"></button>
 		</div>
 		<div class="col-md-6 col-xs-12 datatable-header-search">
@@ -16,20 +16,23 @@
 		
 		</div>
 	</div>
-	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listSuppliesGroups" [paginator]="true" [rows]="10"
+	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listSuppliesAdditional" [paginator]="true" [rows]="10"
 	             [responsive]="true" [globalFilter]="gb">
-		<p-column field="idGrupoDotacion" header="{{'LBL_ID' | translate}}" [sortable]="true"></p-column>
-		<p-column field="grupoDotacion" header="{{'LBL_NOMBRE' | translate}}" [sortable]="true"></p-column>
-		<p-column field="descripcion" header="{{'LBL_DESCRIPCION' | translate}}" [sortable]="true"></p-column>
-		<p-column field="indicadorHabilitado" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true" styleClass="datatable-col-center">
-			<template let-datos="rowData" pTemplate="body">
-				<p-checkbox [(ngModel)]="datos.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
-			</template>
-		</p-column>
+		<p-column field="dotacion" header="{{ 'SUPPLIES.LBL_SUPPLY' | translate}}" [sortable]="true"></p-column>
+		<p-column field="cantidadDotacion" header="{{ 'SUPPLIES.LBL_QUANTITY' | translate}}" [sortable]="true"></p-column>
+		<p-column field="costo" header="{{ 'SUPPLIES.LBL_COST' | translate}}" [sortable]="true"></p-column>
 		<p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
 			<template let-datos="rowData" pTemplate="body">
-				<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
-				        pButton (click)="update(datos)"></button>
+				<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip"
+				        title="{{'BTN_EDITAR' | translate}}"
+				        pButton (click)="update(datos)"
+				        *ngIf="datos.idProyeccionDotacion === null || datos.idProyeccionDotacion === undefined"
+				></button>
+				<button type="button" class="ui-button ui-button-danger btn" icon="fa-trash" data-toggle="tooltip"
+				        title="{{'BTN_INACTIVAR' | translate}}"
+				        pButton (click)="del(datos)"
+				        *ngIf="datos.idProyeccionDotacion === null || datos.idProyeccionDotacion === undefined"
+				></button>
 			</template>
 		</p-column>
 	</p-dataTable>
@@ -44,53 +47,31 @@
 					            [options]="listSupplies" [autoWidth]="false"
 					            [(ngModel)]="suppliesAdditional.idDotacion"
 					            #NGdotacion="ngModel"
+					            (onChange)="changeSupply()"
 					></p-dropdown>
 					<div class="ui-message ui-messages-error ui-corner-all"
 					     *ngIf="f.submitted && !NGdotacion.valid ">
 						<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_SUPPLY' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 					</div>
 				</div>
-				<div class="ui-grid-col-6">
+				<div class="ui-grid-col-3">
 					<label for="cantidad">* {{ 'SUPPLIES.LBL_QUANTITY' | translate}}</label>
 					<input type="number" pInputText id="cantidad" name="cantidad"
-					       [(ngModel)]="suppliesAdditional.idDotacion" min="0" max="99999"
+					       [(ngModel)]="suppliesAdditional.cantidadDotacion" min="0" max="99999"
 					       #NGnombre="ngModel" required/>
 					<div class="ui-message ui-messages-error ui-corner-all"
 					     *ngIf="f.submitted && !NGnombre.valid">
 						<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_QUANTITY' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 					</div>
 				</div>
-			</div>
-			<div class="ui-grid-row">
-				<div class="ui-grid-col-4">
-					<label for="valor">* {{ 'SUPPLIES.LBL_SUPPLY' | translate}}</label>
-					<input type="valor" pInputText id="valor" name="cantidad"
-					       [(ngModel)]="suppliesAdditional.idDotacion" min="0" max="99999"
-					       #NGnombre="ngModel" required/>
-					<div class="ui-message ui-messages-error ui-corner-all"
-					     *ngIf="f.submitted && !NGdotacion.valid ">
-						<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_SUPPLY' | translate}} {{ 'LBL_REQUERIDO' | translate}}
-					</div>
-				</div>
-				<div class="ui-grid-col-4">
+				<div class="ui-grid-col-3">
 					<label for="costo">* {{ 'SUPPLIES.LBL_COST' | translate}}</label>
 					<input type="text" pInputText id="costo" name="costo"
-					       [(ngModel)]="supply.costo" maxlength="11"
+					       [(ngModel)]="suppliesAdditional.costo" maxlength="11"
 					       currencyMask
 					       [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
-					       #NGcostoS="ngModel" required/>
-					<div class="ui-message ui-messages-error ui-corner-all"
-					     *ngIf="s.submitted && !NGcostoS.valid ">
-						<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_COST' | translate}} {{ 'LBL_REQUERIDO' | translate}}
-					</div>
-				</div>
-			</div>
-			
-			<div class="ui-grid-row">
-				<div class="form-group col-md-4" style="margin-top: 24px">
-					<p-checkbox binary="true" id="indicador" name="indicador"
-					            [(ngModel)]="suppliesGroup.indicadorHabilitado" label="{{ 'LBL_HABILITADO' | translate}}"
-					></p-checkbox>
+					       disabled
+					/>
 				</div>
 			</div>
 			<div class="ui-grid-row form-footer-buttons">
@@ -106,3 +87,9 @@
 		</div>
 	</form>
 </fieldset>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
