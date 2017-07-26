@@ -48,7 +48,7 @@ export class SuppliesService {
    }
 
    getAllEnabled() {
-      return this.authHttp.get( this.masterService + 'gruposCuestionarios/enabled/' )
+      return this.authHttp.get( this.masterService + 'gruposDotaciones/enabled/' )
       .map( ( res: Response ) => res.json() as Supplies[] );
    }
 

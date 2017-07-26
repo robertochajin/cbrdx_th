@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 export class SuppliesProjection {
 
    public idProyeccionDotacion: number;
-   public NombreProyeccion: string;
-   public idProyeccionDotacionEstructuraOrganizacional: number;
+   public nombreProyeccion: string;
+   public idGrupoDotacion: number;
    public indicadorAdicional: boolean = true;
    public indicadorNoAreas: boolean = false;
    public cantidadProyeccion: number;
@@ -15,8 +15,9 @@ export class SuppliesProjection {
    public indicadorHabilitado: boolean = true;
    public auditoriaUsuario: number;
    public auditoriaFecha: Date;
+   public idEstructuraOrganizacional : number[]=[];
 
    constructor() {
-
+      this.auditoriaFecha = null;
    }
 }
