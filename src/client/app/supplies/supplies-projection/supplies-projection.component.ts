@@ -136,7 +136,7 @@ export class SuppliesProjectionComponent {
    }
 
    detail( s: SuppliesProjection ) {
-      
+
    }
 
    refer( s: SuppliesProjection ) {

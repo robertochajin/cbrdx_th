@@ -39,7 +39,6 @@ import { EmployeeEventualityDetailComponent } from '../employees-eventualities/e
 import { EmployeeEventualitiesAttachmentService } from '../_services/employees-eventualities-attachment.service';
 import { EventualityTransactEmployeeComponent } from '../employees-eventualities/employees-transact-eventualities.component';
 import { SuppliesEmployeesComponent } from './supplies-employees/supplies-employees.component';
-import { SuppliesEmployeesAddComponent } from './supplies-employees/supplies-employees-add.component';
 
 @NgModule( {
               imports: [

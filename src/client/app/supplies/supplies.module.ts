@@ -22,7 +22,7 @@ import { EmployessSuppliesServices } from '../_services/employeesSupplies.servic
               ],
 
               declarations: [ SuppliesComponent, SuppliesAddComponent, SuppliesUpdateComponent,
-                 SuppliesProjectionComponent,SuppliesProjectionAddComponent
+                 SuppliesProjectionComponent, SuppliesProjectionAddComponent
               ],
               bootstrap: [ SuppliesComponent ],
               providers: [ SuppliesService, NavService, ListaService, SuppliesProjectionServices, EmployessSuppliesServices ],
