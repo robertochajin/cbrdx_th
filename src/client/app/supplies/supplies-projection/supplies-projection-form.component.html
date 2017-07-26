@@ -102,7 +102,7 @@
 				<div class="ui-grid-col-12">
 					<p-pickList [source]="listAreas" [target]="list2" sourceHeader="{{ 'SUPPLIESPROJECTION.LBL_AREAS' | translate }} "
 					            targetHeader="{{ 'SUPPLIESPROJECTION.LBL_AREASSELECCIONADAS' | translate }} " [responsive]="true"
-					            dragdrop="true" showTargetControls="false" showSourceControls="false">
+					            [showTargetControls]="false" [showSourceControls]="false">
 						<template let-area pTemplate="item">
 							<div class="ui-helper-clearfix">
 								<div>{{area.nombre}}</div>
