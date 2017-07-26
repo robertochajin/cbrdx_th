@@ -10,6 +10,8 @@ import { FamilyInformationService } from './family-information.service';
 import { LocationsModule } from '../locations/locations.module';
 import { SharedModule } from '../shared/shared.module';
 import { FormSharedModule } from '../shared/form-shared.module';
+import { PoliticalDivisionService } from '../_services/political-division.service';
+import { LocationsNomenclaturesServices } from '../_services/locationsNomenclatures.service';
 
 @NgModule( {
               imports: [ CommonModule, FormsModule, ReactiveFormsModule,
@@ -22,7 +24,8 @@ import { FormSharedModule } from '../shared/form-shared.module';
                  FamilyInformationUpdateComponent,
               ],
               bootstrap: [ FamilyInformationComponent ],
-              providers: [ FamilyInformationService ],
+              providers: [ FamilyInformationService, PoliticalDivisionService,
+                 LocationsNomenclaturesServices ],
               exports: [ FamilyInformationComponent ]
            } )
 export class FamilyInformationModule {

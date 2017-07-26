@@ -14,6 +14,7 @@ import { ListaItem } from '../_models/listaItem';
 import { JwtHelper } from 'angular2-jwt';
 import { AdjuntosService } from '../_services/adjuntos.service';
 import { ConstanteService } from '../_services/constante.service';
+import { LocationsNomenclaturesServices } from '../_services/locationsNomenclatures.service';
 
 @Component( {
                moduleId: module.id,
@@ -50,6 +51,7 @@ export class ReferencesUpdateComponent implements OnInit {
       private confirmationService: ConfirmationService,
       private listaService: ListaService,
       private adjuntosService: AdjuntosService,
+      private locationsNomenclaturesServices: LocationsNomenclaturesServices,
       private constanteService: ConstanteService,
       private _nav: NavService ) {
 
@@ -88,6 +90,9 @@ export class ReferencesUpdateComponent implements OnInit {
                   this.localizacion.locacion.camino = ciudad.camino;
                   this.localizacion.locacion.idDivisionPolitica = ciudad.idDivisionPolitica;
                } );
+               this.locationsNomenclaturesServices.getAllByLocalizacion(this.localizacion.idLocalizacion).subscribe( lns => {
+                  this.localizacion.listLN = lns;
+               });
             } );
          } );
       } );
