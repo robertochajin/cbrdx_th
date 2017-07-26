@@ -8,18 +8,23 @@ import { SuppliesComponent } from './supplies.component';
 import { SuppliesService } from '../_services/supplies.service';
 import { SuppliesAddComponent } from './supplies-add.component';
 import { SuppliesUpdateComponent } from './supplies-update.component';
+import { SuppliesProjectionAddComponent } from './supplies-projection/supplies-projection-add.component';
+import { SuppliesProjectionComponent } from './supplies-projection/supplies-projection.component';
+import { SuppliesProjectionServices } from '../_services/suppliesProjection.service';
 
 
 @NgModule( {
               imports: [
                  SharedModule,
                  FormSharedModule,
+
               ],
 
-              declarations: [ SuppliesComponent, SuppliesAddComponent, SuppliesUpdateComponent
+              declarations: [ SuppliesComponent, SuppliesAddComponent, SuppliesUpdateComponent,
+                 SuppliesProjectionComponent,SuppliesProjectionAddComponent
               ],
               bootstrap: [ SuppliesComponent ],
-              providers: [ SuppliesService, NavService, ListaService ],
+              providers: [ SuppliesService, NavService, ListaService, SuppliesProjectionServices ],
               exports: [ SuppliesComponent ]
            } )
 export class SuppliesModule {
