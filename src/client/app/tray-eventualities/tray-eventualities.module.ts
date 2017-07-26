@@ -8,6 +8,8 @@ import { TrayEventualitiesComponent } from './tray-eventualities.component';
 import { EmployeeEventualitiesService } from '../_services/employees-eventualities.service';
 import { EmployeeEventualityTransactComponent } from './transact-eventualities.component';
 import { EmployeeEventualitiesActivitiesService } from '../_services/employee-eventualities-activities.service';
+import { EmployeeEventualitiesTrayAddComponent } from './tray-employee-eventualities-edit.component';
+import { EmployeeEventualityTrayDetailComponent } from './tray-employees-eventualities-detail.component';
 
 @NgModule( {
               imports: [
@@ -15,7 +17,8 @@ import { EmployeeEventualitiesActivitiesService } from '../_services/employee-ev
                  FormSharedModule,
               ],
 
-              declarations: [ TrayEventualitiesComponent, EmployeeEventualityTransactComponent
+              declarations: [ TrayEventualitiesComponent, EmployeeEventualityTransactComponent, EmployeeEventualitiesTrayAddComponent,
+                 EmployeeEventualityTrayDetailComponent
               ],
               bootstrap: [ TrayEventualitiesComponent ],
               providers: [ NavService, ListaService, EmployeeEventualitiesService, EmployeeEventualitiesActivitiesService ],

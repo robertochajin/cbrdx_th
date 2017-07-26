@@ -1,28 +1,19 @@
-<div *ngIf="!saveActivity">
-	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listActivities" [paginator]="false"
-	             [responsive]="true" [globalFilter]="gb">
-		<p-column header="{{'EMPLOYEENOVELTY.LBL_FECHAHORA' | translate }}" [sortable]="true">
-			<template let-nv="rowData" pTemplate="body">
-				<label>{{nv.fechaCreacion | date:"MM-dd-yyyy 'a las' h:mma"}}</label>
-			</template>
-		</p-column>
-		<p-column field="estadoNovedad" header="{{'EMPLOYEENOVELTY.LBL_ESTADONOVEDAD' | translate }}" [sortable]="true"></p-column>
-		<p-column field="actividadRealizada" header="{{'EMPLOYEENOVELTY.LBL_ACTIVIDADREALIZADA' | translate }}"
-		          [sortable]="true"></p-column>
-		<p-column header="{{'LBL_HABILITADO' | translate }}" styleClass="datatable-col-action">
-			<template let-nv="rowData" pTemplate="body">
-				<p-checkbox name="indicadorHabilitado" [(ngModel)]="nv.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
-			</template>
-		</p-column>
-		<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
-			<template let-nv="rowData" pTemplate="body">
-				<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip"
-				        title="{{'BTN_VISUALIZAR' | translate}}"
-				        pButton (click)="update(nv)"></button>
-			</template>
-		</p-column>
-	</p-dataTable>
-</div>
+<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listActivities" [paginator]="false"
+             [responsive]="true" [globalFilter]="gb">
+	<p-column header="{{'EMPLOYEENOVELTY.LBL_FECHAHORA' | translate }}" [sortable]="true">
+		<template let-nv="rowData" pTemplate="body">
+			<label>{{nv.fechaCreacion | date:"MM-dd-yyyy 'a las' h:mma"}}</label>
+		</template>
+	</p-column>
+	<p-column field="estadoNovedad" header="{{'EMPLOYEENOVELTY.LBL_ESTADONOVEDAD' | translate }}" [sortable]="true"></p-column>
+	<p-column field="actividadRealizada" header="{{'EMPLOYEENOVELTY.LBL_ACTIVIDADREALIZADA' | translate }}"
+	          [sortable]="true"></p-column>
+	<p-column header="{{'LBL_HABILITADO' | translate }}" styleClass="datatable-col-action">
+		<template let-nv="rowData" pTemplate="body">
+			<p-checkbox name="indicadorHabilitado" [(ngModel)]="nv.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
+		</template>
+	</p-column>
+</p-dataTable>
 <div class="row form-footer-buttons">
 	<div class="form-group col-md-12">
 		<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
