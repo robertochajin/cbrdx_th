@@ -15,33 +15,48 @@
 				<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
 					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 						<div class="ui-grid-row">
-							<div class="ui-grid-col-6">
-								<label for="idTipoNovedad">{{ 'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}</label>
-								<p-dropdown id="idTipoNovedad" name="idTipoNovedad"
-								            [options]="listTypeEvent" [autoWidth]="false"
-								            [(ngModel)]="idTipoNovedad"
-								            #idTipoNov="ngModel" (onChange)="changeTypeEvent()"
+							<div class="ui-grid-col-12">
+								<label for="colaborador">{{ 'EMPLOYEENOVELTY.LBL_COLABORADOR' | translate }}</label>
+								<p-dropdown id="colaborador" name="colaborador"
+								            [options]="listEmployees" [autoWidth]="false" filter="filter"
+								            [(ngModel)]="employeeEventuality.idTercero"
+								            #tercero="ngModel" required="true"
 								></p-dropdown>
 								<div class="ui-message ui-messages-error ui-corner-all"
-								     *ngIf="f.submitted && !idTipoNov.valid">
+								     *ngIf="f.submitted && !tercero.valid">
 									<i class="fa fa-close"></i>
-									{{ 'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-								</div>
-							</div>
-							<div class="ui-grid-col-6">
-								<label for="idNovedad">{{ 'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }}</label>
-								<p-dropdown id="idNovedad" name="idNovedad"
-								            [options]="listEventualities" [autoWidth]="false"
-								            [(ngModel)]="employeeEventuality.idNovedad"
-								            #idNov="ngModel" (onChange)="changeEventuality()"
-								></p-dropdown>
-								<div class="ui-message ui-messages-error ui-corner-all"
-								     *ngIf="f.submitted && !idNov.valid">
-									<i class="fa fa-close"></i>
-									{{ 'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+									{{ 'EMPLOYEENOVELTY.LBL_COLABORADOR' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 								</div>
 							</div>
 						</div>
+						<div class="ui-grid-row">
+						<div class="ui-grid-col-6">
+							<label for="idTipoNovedad">{{ 'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}</label>
+							<p-dropdown id="idTipoNovedad" name="idTipoNovedad"
+							            [options]="listTypeEvent" [autoWidth]="false"
+							            [(ngModel)]="idTipoNovedad"
+							            #idTipoNov="ngModel" (onChange)="changeTypeEvent()"
+							></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !idTipoNov.valid">
+								<i class="fa fa-close"></i>
+								{{ 'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+							</div>
+						</div>
+						<div class="ui-grid-col-6">
+							<label for="idNovedad">{{ 'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }}</label>
+							<p-dropdown id="idNovedad" name="idNovedad"
+							            [options]="listEventualities" [autoWidth]="false"
+							            [(ngModel)]="employeeEventuality.idNovedad"
+							            #idNov="ngModel" (onChange)="changeEventuality()"
+							></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !idNov.valid">
+								<i class="fa fa-close"></i>
+								{{ 'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+							</div>
+						</div>
+					</div>
 						
 						<div class="ui-grid-row">
 							<div class="ui-grid-col-3" *ngIf="showfechainicio">
@@ -172,7 +187,7 @@
 								<p-calendar id="periodoinicial" name="periodoinicial" #periodoini="ngModel" [showIcon]="true"
 								            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
 								            [locale]="es" readonlyInput="readonlyInput" [required]="requiredperiodoinicial"
-								            dataType="date" [(ngModel)]="periodoInicial" [yearRange]="rangeFin"
+								            dataType="date" [(ngModel)]="periodoInicio" [yearRange]="rangeFin"
 								            dateFormat="yy'-'mm'-'dd" (onSelect)="selectPeriodoInicio()"></p-calendar>
 								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !periodoini.valid">
 									<i class="fa fa-close"></i>

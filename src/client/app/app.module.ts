@@ -19,7 +19,6 @@ import { PositionsModule } from './positions/positions.module';
 import { PersonalityModule } from './position-personality/personality.module';
 import { CompanyAssetsModule } from './position-company-assets/company-assets.module';
 import { LoginModule } from './seguridad/login.module';
-import { LoginService } from './_services/login.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { AuthenticationService } from './_services/authentication.service';
 //  Global Messages
@@ -90,6 +89,7 @@ import { NgIdleKeepaliveModule } from 'idle-keepalive-angular2';
 // Dotaciones
 import { SuppliesModule } from './supplies/supplies.module';
 import { TrayEventualitiesModule } from './tray-eventualities/tray-eventualities.module';
+import { SuppliesProjectionModule } from './supplies-projection/supplies-projection.module';
 
 
 export function createTranslateLoader(http: Http) {
@@ -163,6 +163,7 @@ export function createTranslateLoader(http: Http) {
                  // EmployeesAttachmentsModule,
                  //AssignmentProfessionalModule
                  QuestionnairesModule,
+                 SuppliesProjectionModule,
                  SuppliesModule,
                  TrayEventualitiesModule
               ],
@@ -176,7 +177,6 @@ export function createTranslateLoader(http: Http) {
                  },
                  AuthGuard,
                  AuthenticationService,
-                 LoginService,
                  BreadcrumbService,
                  PermissionService,
                  {

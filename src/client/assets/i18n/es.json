@@ -49,6 +49,7 @@
    "LBL_FECHAINICIO": "Fecha Inicio",
    "LBL_GRUPO": "Grupo",
    "LBL_TIPODOCUMENTO": "Tipo Documento ",
+   "LBL_DOCUMENTO": "Documento",
    "LBL_NUMERODOCUMENTO": "Número de Documento",
    "LBL_CIUDAD": "Ciudad",
    "LBL_MUNICIPIO": "Municipio",
@@ -82,16 +83,6 @@
    "BTN_BORRAR": "Borrar",
    "BTN_DOWNLOAD": "Descargar",
    "BTN_UPLOAD": "Subir archivo",
-   "BTN_LLAMAR": "Llamar",
-  "BTN_CONFIGURAR": "Configuración",
-  "BTN_APROBARPROYECCION": "Aprobar Proyección",
-  "BTN_CONFIRMARPROY": "Confirmar Proyección",
-  "BTN_PUBLICAVACANTE": "Publicar Vacante",
-  "BTN_ARRIBA": "Subir",
-  "BTN_ABAJO": "Bajar",
-  "BTN_BORRAR":"Borrar",
-  "BTN_DOWNLOAD": "Descargar",
-  "BTN_UPLOAD": "Subir archivo",
    "BTN_NUEVO": "Nuevo",
    "BTN_NUEVA": "Nueva",
    "BTN_FINALIZARPROCESO": "Finalizar el proceso",
@@ -1058,6 +1049,10 @@
       "LBL_CAMPO": "Campos",
       "LBL_CAMPOVISIBLE": "Visible",
       "LBL_CAMPOOBLIGATORIO": "Obligatorio",
+      "LBL_ADJUNTOS": "Adjuntos",
+      "LBL_NOMBRE": "Nombre",
+      "LBL_NOVEDAD": "Novedad",
+      "LBL_ACTIVIDADES": "Actividades",
       "": ""
    },
 "MEDICALINSTITUTION":{
@@ -1161,6 +1156,13 @@
       "LBL_PERIODOFINAL": "Periodo final",
       "LBL_OFICINA": "Oficina",
       "LBL_AREA": "Área",
+      "LBL_FECHAHORA": "Fecha/Hora",
+      "LBL_AGREGARACTIVIDAD": "Agregar actividad",
+      "LBL_ESTADONOVEDAD": "Estado novedad",
+      "LBL_ACTIVIDAD": "Actividad",
+      "BTN_ACTIVIDADES": "Ver actividades",
+      "LBL_ACTIVIDADREALIZADA": "Actividad realizada",
+      "LBL_COLABORADOR": "Colaborador",
       "": ""
    },
    "RECLUTAMIENTO": {
@@ -1182,7 +1184,8 @@
       "LBL_ADDPOSITION": "Agregar Cargo",
       "LBL_ACTIVE": "Activo",
       "LBL_ALLHAB": "Habilitar Todos",
-      "LBL_DETAIL": "Detalle Proveedor"
+      "LBL_DETAIL": "Detalle Proveedor",
+      "BTN_TRAMITAR": "Detalle Proveedor"
    },
    "FIN_ARCHIVO": "============================FIN ARCHIVO============================="
 

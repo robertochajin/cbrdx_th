@@ -202,6 +202,8 @@ import { SuppliesUpdateComponent } from './supplies/supplies-update.component';
 
 // Bandeja de Novedades
 import { TrayEventualitiesComponent } from './tray-eventualities/tray-eventualities.component';
+import { EmployeeEventualityTransactComponent } from './tray-eventualities/transact-eventualities.component';
+import { SuppliesProjectionComponent } from './supplies-projection/supplies-projection.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -426,8 +428,7 @@ const routes = [
    // Colaborador novedades
    { path: 'employee-eventualities', component: EmployeeEventualitiesComponent },
    { path: 'employee-eventualities/add/:idTercero/:idTerceroNovedad', component: EmployeeEventualitiesAddComponent },
-   // { path: 'vacancies/update/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
-   // { path: 'vacancies/approve/:id', component: VacantesActionComponent, canActivate: [ AuthGuard ] },
+
    // { path: 'vacancies/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
 
    // Preceso de selección
@@ -501,8 +502,12 @@ const routes = [
    { path: 'supplies/add', component: SuppliesAddComponent },
    { path: 'supplies/update/:id', component: SuppliesUpdateComponent },
 
-   //  Dotaciones
+   //  Bandeja de novedades
    { path: 'tray-eventualities', component: TrayEventualitiesComponent },
+   { path: 'trayEventualities/transact-eventyality/:idTerceroNovedad', component: EmployeeEventualityTransactComponent },
+
+   // proyección de dotaciones
+   { path: 'supplies-projection', component: SuppliesProjectionComponent },
 
 
 ];

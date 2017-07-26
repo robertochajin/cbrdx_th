@@ -8,13 +8,15 @@ import { EmployeeEventualitiesService } from '../_services/employees-eventualiti
 import { EmployeeEventualitiesAttachmentService } from '../_services/employees-eventualities-attachment.service';
 import { EmployeeEventualityAttachment } from '../_models/employeeEventualityAttachment';
 import { AdjuntosService } from '../_services/adjuntos.service';
+import { EmployeesService } from '../_services/employees.service';
+import { Employee } from '../_models/employees';
 
 @Component( {
                moduleId: module.id,
-               templateUrl: 'employees-eventualities-detail.component.html',
-               selector: 'employees-eventuality-detail'
+               templateUrl: 'tray-employees-eventualities-detail.component.html',
+               selector: 'tray-employees-eventuality-detail'
             } )
-export class EmployeeEventualityDetailComponent {
+export class EmployeeEventualityTrayDetailComponent {
    @Input()
    employeeEventuality: EmployeeEventuality = new EmployeeEventuality();
    // indicadores para mostrar campos en formulario
@@ -66,11 +68,13 @@ export class EmployeeEventualityDetailComponent {
    dismiss: EventEmitter<number> = new EventEmitter<number>();
 
    listAttachment: EmployeeEventualityAttachment[] = [];
+   employee: Employee = new Employee();
 
    constructor( private eventualityServices: EventualityServices,
       private employeeNoveltyService: EmployeeEventualitiesService,
       private employeeEventualitiesAttachmentService: EmployeeEventualitiesAttachmentService,
       private router: Router,
+      private employeesService: EmployeesService,
       private adjuntosService: AdjuntosService,
       private route: ActivatedRoute ) {
    }
@@ -83,6 +87,10 @@ export class EmployeeEventualityDetailComponent {
       this.employeeNoveltyService.getFieldByIdEventuality( this.employeeEventuality.idNovedad ).subscribe( data => {
          this.listField = data;
          this.propareForm();
+      } );
+      this.employeesService.get( this.employeeEventuality.idTercero ).subscribe( res => {
+         this.employee = res;
+         this.employee.nombreCompleto = this.employee.primerNombre + ' ' + this.employee.segundoNombre + ' ' + this.employee.primerApellido + ' ' + this.employee.segundoApellido;
       } );
    }
 
@@ -155,7 +163,7 @@ export class EmployeeEventualityDetailComponent {
 
    downloadFile( id: number ) {
       this.adjuntosService.downloadFile( id ).subscribe( res => {
-         window.location.assign (res );
+         window.location.assign( res );
       } );
    }
 
