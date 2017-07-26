@@ -6,7 +6,7 @@ export class MedicalInstitution {
    public idInstitucionMedica: Number;
    public institucionMedica: string;
    public representanteLegal: string;
-   public idLocalizacion: Number;
+   public idLocalizacion: number;
    public valorExamenOsteosmuscular: Number;
    public valorExamenVisiometria: Number;
    public valorExamenOptometria: Number;

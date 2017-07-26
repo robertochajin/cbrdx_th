@@ -30,6 +30,16 @@ export class SuppliesProjectionServices {
       .map( ( res: Response ) => res.json() as SuppliesProjection );
    }
 
+   filterByDate( fechaInicio: string, fechaFin: string ) {
+      return this.authHttp.get( this.masterService + 'proyeccionDotacion/entreFechas/' + fechaInicio + '/' + fechaFin )
+      .map( ( res: Response ) => res.json() as SuppliesProjection[] );
+   }
+
+   filterByDateAndUser( fechaInicio: string, fechaFin: string, idUser: number ) {
+      return this.authHttp.get( this.masterService + 'proyeccionDotacion/entreFechas/' + fechaInicio + '/' + fechaFin + '/' + idUser )
+      .map( ( res: Response ) => res.json() as SuppliesProjection[] );
+   }
+
    add( f: SuppliesProjection ) {
       f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.masterService + 'proyeccionDotacion', f )

@@ -18,6 +18,8 @@ import { MedicalInstitutionUpdateComponent } from './medical-institutions-update
 import { MedicalInstitutionDetailComponent } from './medical-institutions-detail.component';
 import { AnswerExamsComponent } from './answer-exams.component';
 import { QuestionnairesModule } from '../questionnaires/questionnaires.module';
+import { PoliticalDivisionService } from '../_services/political-division.service';
+import { LocationsNomenclaturesServices } from '../_services/locationsNomenclatures.service';
 
 @NgModule( {
               imports: [
@@ -39,7 +41,8 @@ import { QuestionnairesModule } from '../questionnaires/questionnaires.module';
                  MedicalInstitutionDetailComponent, AnswerExamsComponent
               ],
               bootstrap: [ MedicalInstitutionsComponent, MedicalInstitutionAddComponent ],
-              providers: [ MedicalInstitutionService, ListaService, ConfirmationService ],
+              providers: [ MedicalInstitutionService, ListaService, ConfirmationService, PoliticalDivisionService,
+                 LocationsNomenclaturesServices ],
               exports: [ MedicalInstitutionsComponent, MedicalInstitutionAddComponent ]
            } )
 export class MedicalInstitutionModule {

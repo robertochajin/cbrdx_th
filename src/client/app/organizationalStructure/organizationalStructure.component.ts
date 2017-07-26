@@ -11,6 +11,7 @@ import { ListaService } from '../_services/lista.service';
 import { NavService } from '../_services/_nav.service';
 import { ZonesServices } from '../_services/zones.service';
 import { Zones } from '../_models/zones';
+import { LocationsNomenclaturesServices } from '../_services/locationsNomenclatures.service';
 
 @Component( {
                moduleId: module.id,
@@ -50,6 +51,7 @@ export class OrganizationalStructureComponent {
    constructor( private organizationalStructureService: OrganizationalStructureService,
       private listaService: ListaService,
       private politicalDivisionService: PoliticalDivisionService,
+      private locationsNomenclaturesServices: LocationsNomenclaturesServices,
       private locateService: LocateService,
       private zonesServices: ZonesServices,
       private navService: NavService,
@@ -214,6 +216,9 @@ export class OrganizationalStructureComponent {
                            this.localizacion.locacion.idDivisionPolitica = ciudad.idDivisionPolitica;
                         } );
                      }
+                     this.locationsNomenclaturesServices.getAllByLocalizacion(this.localizacion.idLocalizacion).subscribe( lns => {
+                        this.localizacion.listLN = lns;
+                     });
                   } );
                }
             } else {

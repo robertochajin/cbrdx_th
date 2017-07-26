@@ -1163,6 +1163,7 @@
       "BTN_ACTIVIDADES": "Ver actividades",
       "LBL_ACTIVIDADREALIZADA": "Actividad realizada",
       "LBL_COLABORADOR": "Colaborador",
+      "BTN_TRAMITAR": "Tramitar",
       "": ""
    },
    "RECLUTAMIENTO": {
@@ -1190,6 +1191,24 @@
       "LBL_SUPPLIESADITTIONAL": "Dotaciones Adicionales",
       "LBL_REQUESTDATE": "Fecha de Solicitud",
       "BTN_TRAMITAR": "Detalle Proveedor"
+   },
+   "SUPPLIESPROJECTION": {
+      "LBL_USUARIO": "Usuario",
+      "LBL_AGREGAR": "Nueva proyección/pedido",
+      "LBL_RANGOFECHA": "Rango de fecha",
+      "LBL_NOMBREPEDIDO": "Nombre de pedido",
+      "LBL_FECHASOLICITUD": "Fecha solicitud",
+      "LBL_PERIODO": "Periodo",
+      "LBL_PERIODOMESES": "Periodo para meses",
+      "LBL_GRUPODOTACION": "Grupo dotación",
+      "LBL_DOTACIONMESES": "Dotación para cuantos meses",
+      "LBL_DOTACIONADICIONAL": "Dotación adicional",
+      "LBL_SELECCIONARAREAS": "Seleccionar áreas",
+      "LBL_CAMPOVALOR": "Campo valor",
+      "LBL_AREAS": "Areas",
+      "LBL_AREASSELECCIONADAS": "Areas seleccionadas",
+      "LBL_SELECCIONARAREAS": "No seleccionar areas",
+      "": ""
    },
    "FIN_ARCHIVO": "============================FIN ARCHIVO============================="
 

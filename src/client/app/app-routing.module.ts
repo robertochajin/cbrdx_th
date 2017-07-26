@@ -203,6 +203,8 @@ import { SuppliesUpdateComponent } from './supplies/supplies-update.component';
 // Bandeja de Novedades
 import { TrayEventualitiesComponent } from './tray-eventualities/tray-eventualities.component';
 import { EmployeeEventualityTransactComponent } from './tray-eventualities/transact-eventualities.component';
+import { SuppliesProjectionComponent } from './supplies/supplies-projection/supplies-projection.component';
+import { SuppliesProjectionAddComponent } from './supplies/supplies-projection/supplies-projection-add.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -504,6 +506,10 @@ const routes = [
    //  Bandeja de novedades
    { path: 'tray-eventualities', component: TrayEventualitiesComponent },
    { path: 'trayEventualities/transact-eventyality/:idTerceroNovedad', component: EmployeeEventualityTransactComponent },
+
+   // proyección de dotaciones
+   { path: 'supplies-projection', component: SuppliesProjectionComponent },
+   { path: 'supplies-projection/add', component: SuppliesProjectionAddComponent },
 
 
 ];
