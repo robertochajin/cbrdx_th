@@ -11,6 +11,10 @@ import { SuppliesUpdateComponent } from './supplies-update.component';
 import { AssignationListComponent } from './assign-supplies/assignation-list.component';
 import { EmployeeAssignationComponent } from './assign-supplies/employee-assignation.component';
 import { EmployeeAssignationDetailComponent } from './assign-supplies/employee-assignation-detail.component';
+import { SuppliesProjectionAddComponent } from './supplies-projection/supplies-projection-add.component';
+import { SuppliesProjectionComponent } from './supplies-projection/supplies-projection.component';
+import { SuppliesProjectionServices } from '../_services/suppliesProjection.service';
+import { EmployessSuppliesServices } from '../_services/employeesSupplies.service';
 
 
 @NgModule( {
@@ -22,10 +26,11 @@ import { EmployeeAssignationDetailComponent } from './assign-supplies/employee-a
               declarations: [ AssignationListComponent,
                  EmployeeAssignationDetailComponent,
                  EmployeeAssignationComponent,
-                 SuppliesComponent, SuppliesAddComponent, SuppliesUpdateComponent
+                 SuppliesComponent, SuppliesAddComponent, SuppliesUpdateComponent,
+                 SuppliesProjectionComponent,SuppliesProjectionAddComponent
               ],
               bootstrap: [ SuppliesComponent ],
-              providers: [ SuppliesService, NavService, ListaService ],
+              providers: [ SuppliesService, NavService, ListaService, SuppliesProjectionServices, EmployessSuppliesServices ],
               exports: [ SuppliesComponent ]
            } )
 export class SuppliesModule {

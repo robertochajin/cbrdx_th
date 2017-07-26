@@ -203,6 +203,8 @@ import { SuppliesUpdateComponent } from './supplies/supplies-update.component';
 // Bandeja de Novedades
 import { TrayEventualitiesComponent } from './tray-eventualities/tray-eventualities.component';
 import { EmployeeEventualityTransactComponent } from './tray-eventualities/transact-eventualities.component';
+import { SuppliesProjectionComponent } from './supplies/supplies-projection/supplies-projection.component';
+import { SuppliesProjectionAddComponent } from './supplies/supplies-projection/supplies-projection-add.component';
 import { SuppliesProjectionComponent } from './supplies-projection/supplies-projection.component';
 import { AssignationListComponent } from './supplies/assign-supplies/assignation-list.component';
 import { EmployeeAssignationComponent } from './supplies/assign-supplies/employee-assignation.component';
@@ -514,6 +516,7 @@ const routes = [
 
    // proyección de dotaciones
    { path: 'supplies-projection', component: SuppliesProjectionComponent },
+   { path: 'supplies-projection/add', component: SuppliesProjectionAddComponent },
 
 
 ];

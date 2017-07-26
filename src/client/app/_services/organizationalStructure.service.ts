@@ -67,4 +67,9 @@ export class OrganizationalStructureService {
       return this.authHttp.get( this.serviceURL + 'estructuraFisica/enabled' ).map( ( res: Response ) => res.json() );
    }
 
+   getAreaBySuppliesGroup( id: number ) {
+      return this.authHttp.get( this.serviceURL + '/estructuraOrganizacional/grupoDotacion/' + id )
+      .map( res => res.json() as OrganizationalStructure[] );
+   }
+
 }
