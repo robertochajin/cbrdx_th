@@ -33,14 +33,6 @@ export class SuppliesEmployeesComponent implements OnInit {
       private confirmationService: ConfirmationService,
       private navService: NavService ) {
       this.busqueda = navService.getSearch( 'supplies-employees-component' );
-
-      /*listaService.getMasterDetails( 'ListasTiposPersonas' ).subscribe( res => {
-         this.personTypes.push( { label: 'Seleccione', value: null } );
-         res.map( ( s: ListaItem ) => {
-            this.personTypes.push( { label: s.nombre, value: s.idLista } );
-         } );
-         this.employee.idTipoPersona = null;
-      } );*/
    }
 
    ngOnInit() {
@@ -58,6 +50,7 @@ export class SuppliesEmployeesComponent implements OnInit {
    update( c: EmployessSuppliesAdditional ) {
       this.showForm = true;
       this.suppliesAdditional = c;
+      console.info( this.suppliesAdditional );
    }
 
    del( c: EmployessSuppliesAdditional ) {
@@ -95,7 +88,7 @@ export class SuppliesEmployeesComponent implements OnInit {
    }
 
    onSubmit() {
-      if ( this.suppliesAdditional.idProyeccionDotacion > 0 ) {
+      if ( this.suppliesAdditional.idTerceroDotacionAdicional > 0 ) {
          this.employessSuppliesServices.updateAdditional( this.suppliesAdditional ).subscribe( res => {
             this.navService.setMesage( 1, this.msgs );
             this.showForm = false;
@@ -108,6 +101,7 @@ export class SuppliesEmployeesComponent implements OnInit {
          this.suppliesAdditional.idTercero = this.employee.idTercero;
          this.employessSuppliesServices.addAdditional( this.suppliesAdditional ).subscribe( res => {
             this.navService.setMesage( 1, this.msgs );
+            this.showSuccess();
             this.showForm = false;
             this.suppliesAdditional = new EmployessSuppliesAdditional();
             this.getList();
@@ -145,6 +139,15 @@ export class SuppliesEmployeesComponent implements OnInit {
       } else {
          this.suppliesAdditional.costo = 0;
       }
+   }
+
+   showSuccess() {
+      this.msgs = [];
+      this.msgs.push( {
+                         severity: 'info', summary: 'Nota:',
+                         detail: 'Recuerde que debe crear la novedad de descuento para que sea efectiva la' +
+                                 ' solicitud'
+                      } );
    }
 
 }
