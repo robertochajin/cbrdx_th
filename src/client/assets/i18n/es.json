@@ -1178,7 +1178,9 @@
       "LBL_CYCLE": "Ciclo Entrega",
       "LBL_QUANTITY": "Cantidad",
       "LBL_COST": "Costo",
-      "LBL_SIZE": "Tipo Talla",
+      "LBL_TYPESIZE": "Tipo Talla",
+      "LBL_SIZE": "Talla",
+      "LBL_TOTAL": "Total",
       "LBL_REQUIRESIZE": "Requiere Talla",
       "LBL_ADDITIONAL": "Adicional",
       "LBL_ADDPOSITION": "Agregar Cargo",
@@ -1186,6 +1188,7 @@
       "LBL_ALLHAB": "Habilitar Todos",
       "LBL_DETAIL": "Detalle Proveedor",
       "LBL_SUPPLIESADITTIONAL": "Dotaciones Adicionales",
+      "LBL_REQUESTDATE": "Fecha de Solicitud",
       "BTN_TRAMITAR": "Detalle Proveedor"
    },
    "FIN_ARCHIVO": "============================FIN ARCHIVO============================="

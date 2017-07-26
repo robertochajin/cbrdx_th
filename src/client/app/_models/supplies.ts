@@ -24,8 +24,17 @@ export class Supplies {
    public auditoriaUsuario: number;
    public valor: number;
    public auditoriaFecha: Date;
+   public total: number;
+   public totales: TotalSupplies[] = [];
 
    constructor() {
 
    }
+}
+export class TotalSupplies {
+
+   public talla: string;
+   public Genero: string;
+   public Total: string;
+
 }

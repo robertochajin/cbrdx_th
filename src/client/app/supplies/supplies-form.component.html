@@ -192,7 +192,7 @@
 							></p-checkbox>
 						</div>
 						<div class="ui-grid-col-6" *ngIf="supply.indicadorRequiereTalla === true">
-							<label for="talla">* {{ 'SUPPLIES.LBL_SIZE' | translate}}</label>
+							<label for="talla">* {{ 'SUPPLIES.LBL_TYPESIZE' | translate}}</label>
 							<p-dropdown id="talla" name="talla" required="true"
 							            [options]="sizeTypes" [autoWidth]="false"
 							            [(ngModel)]="supply.idTipoTalla"
@@ -200,7 +200,7 @@
 							></p-dropdown>
 							<div class="ui-message ui-messages-error ui-corner-all"
 							     *ngIf="s.submitted && !NGtalla.valid ">
-								<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_SIZE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+								<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_TYPESIZE' | translate}} {{ 'LBL_REQUERIDO' | translate}}
 							</div>
 						</div>
 					</div>
