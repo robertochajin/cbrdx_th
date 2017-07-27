@@ -1,0 +1,108 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+
+</p-confirmDialog>
+<p-accordion (onOpen)="onTabShow($event)" id="accordion">
+	<p-accordionTab header="{{'EMPLOYEES.LBL_DATOSGENERALES' | translate}}" [selected]="acordion == 0 || acordion == null">
+		<div class="col-md-md-10 col-md-md-offset-1">
+			<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+				<div class="row">
+					<div class="col-md-12">
+						<label for="actividad">* {{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }}</label>
+						<textarea id="actividad" name="actividad" pInputTextarea rows="4" cols="35" #observa="ngModel"
+						          [(ngModel)]="candidateProcess.observacion" required="true" class="form-control"
+						          maxlength="500"></textarea>
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !observa.valid">
+							<i class="fa fa-close"></i>
+							{{'PROCESOSELECCION.LBL_OBSERVACIONES' | translate }} {{'LBL_REQUERIDO' | translate }}
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<label for="nombre">{{ 'SUPPLIESPROJECTION.LBL_NOMBREPEDIDO' | translate }}</label>
+						<input id="nombre" name="nombre" #nombrepedido="ngModel" pInputText type="text"
+						       (keyup)="capitalize($event)"
+						       [(ngModel)]="suppliesProjection.nombreProyeccion" required maxlength="50"/>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !nombrepedido.valid">
+							<i class="fa fa-close"></i>
+							{{ 'SUPPLIESPROJECTION.LBL_NOMBREPEDIDO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<label for="responsable">{{ 'SUPPLIESPROJECTION.LBL_GRUPODOTACION' | translate }}</label>
+						<p-dropdown id="responsable" name="responsable" required="true"
+						            [options]="listSupplies" [autoWidth]="false"
+						            [(ngModel)]="suppliesProjection.idGrupoDotacion"
+						            #idgrupodot="ngModel" (onChange)="changeSupplies()"
+						></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !idgrupodot.valid">
+							<i class="fa fa-close"></i>
+							{{ 'SUPPLIESPROJECTION.LBL_GRUPODOTACION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+						</div>
+					</div>
+					<div class="col-md-6">
+						<label for="fechalimite">{{ 'SUPPLIESPROJECTION.LBL_DOTACIONMESES' | translate }}</label>
+						<p-calendar id="fechalimite" name="fechalimite" #fechalim="ngModel" [showIcon]="true"
+						            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
+						            [locale]="es" readonlyInput="readonlyInput" required
+						            dataType="date" [(ngModel)]="suppliesProjection.fechaInicio" [yearRange]="rangeFin"
+						            dateFormat="yy'-'mm'-'dd" (onSelect)="selectInicio()"></p-calendar>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !fechalim.valid">
+							<i class="fa fa-close"></i>
+							{{ 'SUPPLIESPROJECTION.LBL_GRUPODOTACION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<label for="encargado">{{ 'SUPPLIESPROJECTION.LBL_GRUPODOTACION' | translate }}</label>
+						<p-dropdown id="encargado" name="encargado" required="true"
+						            [options]="listSupplies" [autoWidth]="false"
+						            [(ngModel)]="suppliesProjection.idGrupoDotacion"
+						            #encarg="ngModel" (onChange)="changeSupplies()"
+						></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !encarg.valid">
+							<i class="fa fa-close"></i>
+							{{ 'SUPPLIESPROJECTION.LBL_GRUPODOTACION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+						</div>
+					</div>
+					<div class="col-md-6">
+						<label for="fechaverificacion">{{ 'SUPPLIESPROJECTION.LBL_DOTACIONMESES' | translate }}</label>
+						<p-calendar id="fechaverificacion" name="fechaverificacion" #fechaverif="ngModel" [showIcon]="true"
+						            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
+						            [locale]="es" readonlyInput="readonlyInput" required
+						            dataType="date" [(ngModel)]="suppliesProjection.fechaInicio" [yearRange]="rangeFin"
+						            dateFormat="yy'-'mm'-'dd" (onSelect)="selectInicio()"></p-calendar>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !fechaverif.valid">
+							<i class="fa fa-close"></i>
+							{{ 'SUPPLIESPROJECTION.LBL_GRUPODOTACION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+						</div>
+					</div>
+				</div>
+				<div class="row form-footer-buttons">
+					<div class="col-md-4"></div>
+					<div class="col-md-1">
+						<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+					</div>
+					<div class="col-md-2">
+						<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+					</div>
+					<div class="col-md-5"></div>
+				</div>
+			</form>
+		</div>
+	</p-accordionTab>
+</p-accordion>
+

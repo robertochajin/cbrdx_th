@@ -19,34 +19,14 @@
 			></p-dropdown>
 		</div>
 	</div>
-	<div class="col-md-4">
-		<div class="col-md-5">
-			<label>{{ 'SUPPLIESPROJECTION.LBL_RANGOFECHA' | translate }}</label>
-		</div>
-		<div class="col-md-7">
-			<p-calendar id="fechaInicio" name="fechaInicio" #fechaIni="ngModel" [showIcon]="true"
-			            [monthNavigator]="true" [yearNavigator]="true"
-			            [locale]="es" readonlyInput="readonlyInput" [maxDate]="maxDateInicio"
-			            dataType="date" [(ngModel)]="fechaInicio" [yearRange]="rangeFin"
-			            dateFormat="yy'-'mm'-'dd" (onSelect)="selectInicio()"></p-calendar>
-		</div>
-	</div>
-	<div class="col-md-3">
-		<p-calendar id="fechaFinal" name="fechaFinal" #fechaFinal="ngModel" [showIcon]="true"
-		            [minDate]="minDateFin" [monthNavigator]="true" [yearNavigator]="true"
-		            [locale]="es" readonlyInput="readonlyInput"
-		            dataType="date" [(ngModel)]="fechaFin" [yearRange]="rangeFin"
-		            dateFormat="yy'-'mm'-'dd" (onSelect)="selectFinal()"></p-calendar>
-	</div>
 </div><br>
 <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listSuppliesProjection" [paginator]="true" [rows]="10"
              [responsive]="true" [globalFilter]="gb">
 	<p-column field="nombreProyeccion" header="{{'SUPPLIESPROJECTION.LBL_NOMBREPEDIDO' | translate }}" [sortable]="true"></p-column>
-	<p-column header="{{'SUPPLIESPROJECTION.LBL_FECHASOLICITUD' | translate }}" [sortable]="true">
-		<template let-sp="rowData" pTemplate="body">
-			{{sp.auditoriaFecha| date:'dd/MM/yyyy'}}
-		</template>
-	</p-column>
+	<p-column field="nombreProyeccion" header="{{'SUPPLIESPROJECTION.LBL_NOMBREPEDIDO' | translate }}" [sortable]="true"></p-column>
+	<p-column field="nombreProyeccion" header="{{'SUPPLIESPROJECTION.LBL_NOMBREPEDIDO' | translate }}" [sortable]="true"></p-column>
+	<p-column field="nombreProyeccion" header="{{'SUPPLIESPROJECTION.LBL_NOMBREPEDIDO' | translate }}" [sortable]="true"></p-column>
+	<p-column field="nombreProyeccion" header="{{'SUPPLIESPROJECTION.LBL_NOMBREPEDIDO' | translate }}" [sortable]="true"></p-column>
 	<p-column field="periodo" header="{{'SUPPLIESPROJECTION.LBL_PERIODO' | translate }}" [sortable]="true"></p-column>
 	<p-column field="cantidadMeses" header="{{'SUPPLIESPROJECTION.LBL_PERIODOMESES' | translate }}" [sortable]="true"></p-column>
 	<p-column field="nombreTercero" header="{{'SUPPLIESPROJECTION.LBL_USUARIO' | translate }}" [sortable]="true"></p-column>

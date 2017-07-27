@@ -188,7 +188,7 @@ export class EmployeeEventualitiesTrayAddComponent implements OnInit {
    }
 
    ngOnInit() {
-      this.employeesService.getAll().subscribe( res => {
+      this.employeesService.getEmployees().subscribe( res => {
          this.listEmployees.push( { label: 'Seleccione', value: null } );
          res.map( ( s: Employee ) => {
             this.listEmployees.push(
