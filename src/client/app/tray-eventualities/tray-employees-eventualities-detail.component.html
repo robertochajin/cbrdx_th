@@ -1,0 +1,179 @@
+<div *ngIf="employeeEventuality">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<form class="form-horizontal">
+				<p-panel header="{{ 'EMPLOYEES.LBL_DATOSGENERALES' | translate }}">
+					<fieldset>
+						<div class="form-group">
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_COLABORADOR' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employee.nombreCompleto}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeEventuality.tipoNovedad}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeEventuality.novedad}}</strong></label>
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showdescripcion">{{'EMPLOYEENOVELTY.LBL_DESCRIPCION'
+									|
+									translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"
+								       *ngIf="showdescripcion"><strong>{{employeeEventuality.descripcion}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showdiagnostico">{{'EMPLOYEENOVELTY.LBL_DIAGNOSTICO'
+									|
+									translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 "
+								       *ngIf="showdiagnostico"><strong>{{employeeEventuality.diagnostico}}</strong></label>
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showreemplazado">{{'EMPLOYEENOVELTY.LBL_REEMPLAZADOPOR'
+									| translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"
+								       *ngIf="showreemplazado"><strong>{{employeeEventuality.reemplazadoPor}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showfechainicio">{{'EMPLOYEENOVELTY.LBL_FECHAINICIO'
+									|
+									translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 "
+								       *ngIf="showfechainicio"><strong>{{employeeEventuality.fechaInicio}}</strong></label>
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf=" showhorainicio">{{'EMPLOYEENOVELTY.LBL_HORAINICIO'
+									|
+									translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"
+								       *ngIf="showhorainicio"><strong>{{employeeEventuality.horaInicio | date:"h:mma"}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showfechafinal">{{'EMPLOYEENOVELTY.LBL_FECHAFINAL' |
+									translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 "
+								       *ngIf="showfechafinal"><strong>{{employeeEventuality.fechaFin}}</strong></label>
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showhorafinal">{{'EMPLOYEENOVELTY.LBL_HORAFINAL' |
+									translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12" *ngIf="showhorafinal"><strong>{{employeeEventuality.horaFin |
+									date:"h:mma"}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showdias">{{'EMPLOYEENOVELTY.LBL_DIAS' | translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 " *ngIf="showdias"><strong>{{employeeEventuality.dias}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showfechareintegro">{{'EMPLOYEENOVELTY.LBL_FECHAREINTEGRO'
+									| translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 "
+								       *ngIf="showfechareintegro"><strong>{{employeeEventuality.fechaReintegro}}</strong></label>
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showhorareintegro">{{'EMPLOYEENOVELTY.LBL_HORAREINTEGRO'
+									| translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12" *ngIf="showhorareintegro"><strong>{{employeeEventuality.horaReintergo |
+									date:"h:mma"
+									}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showretiro">{{'EMPLOYEENOVELTY.LBL_RETIRO' |
+									translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 "
+								       *ngIf="showretiro"><strong>{{employeeEventuality.retiro?'Si':'No'}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showperiodoinicial">{{'EMPLOYEENOVELTY.LBL_PERIODOINICIAL'
+									| translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 "
+								       *ngIf="showperiodoinicial"><strong>{{employeeEventuality.periodoInicio}}</strong></label>
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showperiodofinal">{{'EMPLOYEENOVELTY.LBL_PERIODOFINAL'
+									| translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"
+								       *ngIf="showperiodofinal"><strong>{{employeeEventuality.periodoFinal}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showvalor">{{'EMPLOYEENOVELTY.LBL_VALOR' | translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 " *ngIf="showvalor"><strong>{{employeeEventuality.valor}}</strong></label>
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showcuotas">{{'EMPLOYEENOVELTY.LBL_CUOTAS' |
+									translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"
+								       *ngIf="showcuotas"><strong>{{employeeEventuality.nroCuotas}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showreferencia">{{'EMPLOYEENOVELTY.LBL_REFERENCIA' |
+									translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 "
+								       *ngIf="showreferencia"><strong>{{employeeEventuality.nroReferencia}}</strong></label>
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showentidad">{{'EMPLOYEENOVELTY.LBL_ENTIDAD' |
+									translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"
+								       *ngIf="showentidad"><strong>{{employeeEventuality.entidad}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showeps">{{'EMPLOYEENOVELTY.LBL_EPS' | translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 " *ngIf="showeps"><strong>{{employeeEventuality.eps}}</strong></label>
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showfp">{{'EMPLOYEENOVELTY.LBL_FP' | translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12" *ngIf="showfp"><strong>{{employeeEventuality.fp}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label" *ngIf="showccf">{{'EMPLOYEENOVELTY.LBL_CCF' | translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 " *ngIf="showccf"><strong>{{employeeEventuality.ccf}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_REPORTADOPOR' | translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeEventuality.nombreTerceroReporta}}</strong></label>
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_FECHASOLICITUD' | translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeEventuality.fechaReporte}}</strong></label>
+							</div>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_ESTADO' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeEventuality.estadoNovedad}}</strong></label>
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'LBL_HABILITADO' | translate }}:</label>
+								<label
+									class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeEventuality.indicadorHabilitado?'Si':'No'}}</strong></label>
+							</div>
+						</div>
+					</fieldset>
+				</p-panel>
+				<p-panel header="{{'NOVEDADES.LBL_ADJUNTOS' | translate}}">
+					<fieldset>
+						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listAttachment" [paginator]="true" [rows]="10"
+						             [responsive]="true">
+							<p-column field="nombreArchivo" header="{{'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}"
+							          [sortable]="true"></p-column>
+							<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+								<template let-atta="rowData" pTemplate="body">
+									<button type="button" icon="fa-download" class="ui-button-success" data-toggle="tooltip"
+									        title="{{'BTN_DOWNLOAD' | translate}}"
+									        pButton (click)="downloadFile(atta.idAdjunto)"></button>
+								</template>
+							</p-column>
+						</p-dataTable>
+					</fieldset>
+				</p-panel>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="row form-footer-buttons">
+	<div class="form-group col-md-12">
+		<button icon="fa-arrow-left" label="{{'BTN_REGRESAR' | translate }}" type="button"
+		        pButton (click)="goBack()"></button>
+	</div>
+</div>

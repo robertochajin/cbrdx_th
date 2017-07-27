@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { Employee } from '../_models/employees';
 import { EmployeeEventualitiesService } from '../_services/employees-eventualities.service';
 import { EmployeeEventuality } from '../_models/employeeEventuality';
+import { ListaItem } from '../_models/listaItem';
 
 @Component( {
                moduleId: module.id,
@@ -23,9 +24,12 @@ export class EmployeeEventualitiesComponent {
    msg: Message;
    employeeEventuality: EmployeeEventuality = new EmployeeEventuality();
    listEventualities: EmployeeEventuality [];
+   listEstados: ListaItem[] = [];
    busqueda: string;
    saveEventuality: boolean = false;
    editEventuality: boolean = false;
+   detailEventuality: boolean = false;
+   activitiesEventuality: boolean = false;
 
    constructor( private employeeEventualitiesService: EmployeeEventualitiesService,
       private listaService: ListaService,
@@ -33,6 +37,9 @@ export class EmployeeEventualitiesComponent {
       private _nav: NavService,
       private confirmationService: ConfirmationService ) {
       this.busqueda = _nav.getSearch( 'employee-eventualities' );
+      this.listaService.getMasterDetails( 'ListasEstadosNovedades' ).subscribe( res => {
+         this.listEstados = res;
+      } );
    }
 
    ngOnInit() {
@@ -45,13 +52,11 @@ export class EmployeeEventualitiesComponent {
    add() {
       this.employeeEventuality.idTerceroNovedad = null;
       this.saveEventuality = !this.saveEventuality;
-      // this.router.navigate( [ 'employee-eventualities/add/' + this.employee.idTercero + '/' + 0 ] );
    }
 
    update( e: EmployeeEventuality ) {
       this.employeeEventuality.idTerceroNovedad = e.idTerceroNovedad;
       this.editEventuality = !this.editEventuality;
-      // this.router.navigate( [ 'employee-novelty/update/' + this.employee.idTercero + '/' + e.idTerceroNovedad ] );
    }
 
    toggleForm() {
@@ -70,11 +75,51 @@ export class EmployeeEventualitiesComponent {
       } );
    }
 
+   toggleDetail() {
+      this.detailEventuality = !this.detailEventuality;
+   }
+   toggleActivities() {
+      this.activitiesEventuality = !this.activitiesEventuality;
+   }
+
    detail( e: EmployeeEventuality ) {
-      this.router.navigate( [ 'document-management/detail/', e.idTerceroNovedad ] );
+      this.employeeEventuality = e;
+      this.detailEventuality = !this.detailEventuality;
    }
 
    setSearch() {
       this._nav.setSearch( 'employee-eventualities', this.busqueda );
+   }
+
+   getStateByCode( codigo: string ) {
+      let temp = this.listEstados.find( x => x.codigo === codigo );
+      if ( temp ) {
+         return temp.idLista;
+      } else {
+         return null;
+      }
+   }
+
+   cancelar( e: EmployeeEventuality ) {
+      this.confirmationService.confirm( {
+                                           message: ` ¿Está seguro que desea cancelar esta novedad?`,
+                                           header: 'Confirmación',
+                                           icon: 'fa fa-question-circle',
+                                           accept: () => {
+                                              e.idEstadoNovedad = this.getStateByCode( 'CANCEL' );
+                                              this.employeeEventualitiesService.update( e ).subscribe( rs => {
+                                                 this.listEventualities = [];
+                                                 this.employeeEventualitiesService.getAllByIdEmployee( this.employee.idTercero )
+                                                 .subscribe( data => {
+                                                    this.listEventualities = data;
+                                                 } );
+                                              } );
+                                           }
+                                        } );
+   }
+
+   activities( e: EmployeeEventuality ) {
+      this.employeeEventuality = e;
+      this.activitiesEventuality = !this.activitiesEventuality;
    }
 }

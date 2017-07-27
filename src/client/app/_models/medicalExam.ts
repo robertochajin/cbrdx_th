@@ -11,7 +11,7 @@ export class MedicalExam {
    idPreguntaOpcion: number;
    idInstitucionMedica: number;
    institucionMedica: string;
-   fechaProgramada: Date;
+   fechaProgramada: string;
    idCuestionarioOpciones: number;
    idAdjunto: number;
    auditoriaFecha: Date;

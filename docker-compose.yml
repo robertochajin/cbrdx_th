@@ -13,6 +13,7 @@ services:
       - dev-network
     ports:
       - '5556:5556'
+      - '5569:3001'
     restart: always
 
 networks:

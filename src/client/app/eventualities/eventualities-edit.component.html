@@ -15,12 +15,12 @@
 	
 	<p-accordion id="accordion">
 		
-		<p-accordionTab header="{{ 'NOVEDADES.LBL_DATOSBASICOS' | translate }}" [selected]="true" [disabled]="false">
+		<p-accordionTab header="{{ 'NOVEDADES.LBL_DATOSBASICOS' | translate }}" [selected]="acordion === 1" [disabled]="false">
 			<fieldset>
 				<div class="row-fluid">
 					<div class="col-md-12">
 						
-						<form name="eventualityForm" (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="eventualityForm">
+						<form name="eventualityForm" (ngSubmit)="f.valid && onSubmit(2)" #f="ngForm" novalidate id="eventualityForm">
 							
 							<div class="row">
 								<div class="form-group col-md-6">
@@ -94,55 +94,76 @@
 							
 							<div class="row">
 								<div class="form-group col-md-4">
-									<label for="ausent" class="control-label">{{ 'NOVEDADES.LBL_GENERAAUSENTISMO' | translate }}</label>
 									<p-checkbox [(ngModel)]="eventuality.indicadorAusentismo" binary="true" id="ausent" name="ausent"
 									            #ngAusentismo="ngModel"></p-checkbox>
+									<label for="ausent" class="control-label">{{ 'NOVEDADES.LBL_GENERAAUSENTISMO' | translate }}</label>
+								
 								</div>
 								<div class="form-group col-md-4">
-									<label for="adju" class="control-label">{{ 'NOVEDADES.LBL_MANEJAADJUNTOS' | translate }}</label>
 									<p-checkbox [(ngModel)]="eventuality.indicadorAdjuntos" binary="true" id="adju" name="adju"
 									            #ngAdjun="ngModel"></p-checkbox>
+									<label for="adju" class="control-label">{{ 'NOVEDADES.LBL_MANEJAADJUNTOS' | translate }}</label>
+								
 								</div>
 								<div class="form-group col-md-4">
-									<label for="bndj" class="control-label">{{ 'NOVEDADES.LBL_VERENBANDEJA' | translate }}</label>
 									<p-checkbox [(ngModel)]="eventuality.indicadorBandeja" binary="true" id="bndj" name="bndj"
 									            #ngBndj="ngModel"></p-checkbox>
+									<label for="bndj" class="control-label">{{ 'NOVEDADES.LBL_VERENBANDEJA' | translate }}</label>
+								
 								</div>
 							</div>
 							
 							<div class="row">
 								<div class="form-group col-md-4">
-									<label for="segu" class="control-label">{{ 'NOVEDADES.LBL_REQUIERESEGUIMIENTO' | translate }}</label>
 									<p-checkbox [(ngModel)]="eventuality.indicadorSeguimiento" binary="true" id="segu" name="segu"
 									            #ngSegu="ngModel"></p-checkbox>
+									<label for="segu" class="control-label">{{ 'NOVEDADES.LBL_REQUIERESEGUIMIENTO' | translate }}</label>
+								
 								</div>
 								<div class="form-group col-md-4">
-									<label for="autho" class="control-label">{{ 'NOVEDADES.LBL_AUTORIZAJEFEINMEDIATO' | translate }}</label>
 									<p-checkbox [(ngModel)]="eventuality.indicadorAutorizaJefe" binary="true" id="autho" name="autho"
 									            #ngAutho="ngModel"></p-checkbox>
+									<label for="autho" class="control-label">{{ 'NOVEDADES.LBL_AUTORIZAJEFEINMEDIATO' | translate }}</label>
+								
 								</div>
 								<div class="form-group col-md-4">
-									<label for="plnt" class="control-label">{{ 'NOVEDADES.LBL_AFECTAPLANTA' | translate }}</label>
 									<p-checkbox [(ngModel)]="eventuality.indicadorAfecta" binary="true" id="plnt" name="plnt"
 									            #ngAfect="ngModel"></p-checkbox>
+									<label for="plnt" class="control-label">{{ 'NOVEDADES.LBL_AFECTAPLANTA' | translate }}</label>
+								
 								</div>
 							</div>
 							
 							<div class="row">
 								<div class="form-group col-md-4">
-									<label for="dblConf" class="control-label">{{ 'NOVEDADES.LBL_DOBLECONFIRMACION' | translate }}</label>
 									<p-checkbox [(ngModel)]="eventuality.indicadorConfirmacion" binary="true" id="dblConf" name="dblConf"
 									            #ngDblConf="ngModel"></p-checkbox>
+									<label for="dblConf" class="control-label">{{ 'NOVEDADES.LBL_DOBLECONFIRMACION' | translate }}</label>
+								
 								</div>
 								<div class="form-group col-md-4">
-									<label for="ntJefe" class="control-label">{{ 'NOVEDADES.LBL_NOTIFICARJEFE' | translate }}</label>
 									<p-checkbox [(ngModel)]="eventuality.indicadorNotificaJefe" binary="true" id="ntJefe" name="ntJefe"
 									            #ngNtJefe="ngModel"></p-checkbox>
+									<label for="ntJefe" class="control-label">{{ 'NOVEDADES.LBL_NOTIFICARJEFE' | translate }}</label>
+								
 								</div>
 								<div class="form-group col-md-4">
-									<label for="ntArea" class="control-label">{{ 'NOVEDADES.LBL_NOTIFICAAREAS' | translate }}</label>
 									<p-checkbox [(ngModel)]="eventuality.indicadorAreasApoyo" binary="true" id="ntArea" name="ntArea"
 									            #ngNtArea="ngModel"></p-checkbox>
+									<label for="ntArea" class="control-label">{{ 'NOVEDADES.LBL_NOTIFICAAREAS' | translate }}</label>
+								
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col-md-4">
+									<p-checkbox [(ngModel)]="eventuality.indicadorHabilitado" binary="true" id="indHabil" name="indHabil"
+									            #ngNtJefe="ngModel"></p-checkbox>
+									<label for="indHabil" class="control-label">{{ 'LBL_HABILITADO' | translate }}</label>
+								</div>
+								<div class="form-group col-md-4">
+								</div>
+								<div class="form-group col-md-4">
 								</div>
 							</div>
 							
@@ -162,7 +183,7 @@
 			</fieldset>
 		</p-accordionTab>
 		
-		<p-accordionTab header="{{ 'NOVEDADES.LBL_ROLESREPORTAN' | translate }}" [selected]="false"
+		<p-accordionTab header="{{ 'NOVEDADES.LBL_ROLESREPORTAN' | translate }}" [selected]="acordion === 2"
 		                [disabled]="(eventuality === undefined || eventuality.idNovedad === undefined)">
 			
 			<fieldset>
@@ -170,7 +191,7 @@
 				<form (ngSubmit)="fr.valid && onSubmitRoles()" #fr="ngForm" novalidate id="rolesForm"
 				      *ngIf="!savingReportRol">
 					<div class="ui-grid-row">
-						<div class="ui-grid-col-9">
+						<div class="ui-grid-col-8">
 							<label for="reportRol">* {{'NOVEDADES.LBL_ROLREPORTA' | translate }}</label>
 							<p-dropdown id="reportRol" name="reportRol" #ngReportRol="ngModel" [options]="rolesToReport" [autoWidth]="false"
 							            [(ngModel)]="reportRol" filter="filter" required></p-dropdown>
@@ -179,7 +200,7 @@
 								{{'NOVEDADES.LBL_ROLREPORTA' | translate }} {{'LBL_REQUERIDO' | translate }}
 							</div>
 						</div>
-						<div class="ui-grid-col-3">
+						<div class="ui-grid-col-4" style="padding-top: 29px;">
 							<button class="btn-block" pButton icon="fa-plus" label="{{'BTN_AGREGAR' | translate}}" type="submit"></button>
 						</div>
 					</div>
@@ -199,25 +220,103 @@
 						</p-dataTable>
 					</div>
 				</div>
+				
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<button icon="fa-arrow-right" label=" {{ 'BTN_SIGUIENTE' | translate }}" (click)="nextStep(3)" type="button"
+						        pButton></button>
+					</div>
+				</div>
 			
 			</fieldset>
 		
 		</p-accordionTab>
 		
-		<p-accordionTab header="{{ 'NOVEDADES.LBL_NOMINA' | translate }}" [selected]="false"
+		<p-accordionTab header="{{ 'NOVEDADES.LBL_NOMINA' | translate }}" [selected]="acordion === 3"
 		                [disabled]="(eventuality === undefined || eventuality.idNovedad === undefined)">
 			
 			<fieldset>
-			
+				<form name="nominaForm" (ngSubmit)="nf.valid && onSubmit(4)" #nf="ngForm" novalidate id="nominaForm">
+										
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="sxCode">{{ 'NOVEDADES.LBL_CODIGOSAFIX' | translate }}:</label>
+							<input id="sxCode" type="text" pInputText name="sxCode" class="form-control"
+							       [(ngModel)]="eventuality.codigoSafix" maxLength="10"
+							       #ngCodeSX="ngModel" required codeSpecialCaseText uperCaseText
+							/>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="nf.submitted && !ngCodeSX.valid">
+								<i class="fa fa-close"></i>
+								{{ 'NOVEDADES.LBL_CODIGOSAFIX' | translate }} {{'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="afectType">* {{'NOVEDADES.LBL_TIPOAFECTACION' | translate }}</label>
+							<p-dropdown id="afectType" name="afectType" #ngAfectType="ngModel" [options]="affectationTypes" [autoWidth]="false"
+							            [(ngModel)]="eventuality.idTipoAfectacion" required></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="nf.submitted && !ngAfectType.valid">
+								<i class="fa fa-close"></i>
+								{{'NOVEDADES.LBL_TIPOAFECTACION' | translate }} {{'LBL_REQUERIDO' | translate }}
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-4">
+							<p-checkbox [(ngModel)]="eventuality.indicadorCancelacion" binary="true" id="canclSx" name="canclSx"
+							            #ngCanclSx="ngModel"></p-checkbox>
+							<label for="canclSx" class="control-label">{{ 'NOVEDADES.LBL_CANCELASAFIX' | translate }}</label>
+						</div>
+						<div class="form-group col-md-4">
+							<p-checkbox [(ngModel)]="eventuality.indicadorAfecta" binary="true" id="afect" name="afect"
+							            #ngAfect="ngModel"></p-checkbox>
+							<label for="afect" class="control-label">{{ 'NOVEDADES.LBL_AFECTANOMINA' | translate }}</label>
+						</div>
+						<div class="form-group col-md-4">
+							<p-checkbox [(ngModel)]="eventuality.indicadorNomina" binary="true" id="dirNom" name="dirNom"
+							            #ngDirNom="ngModel"></p-checkbox>
+							<label for="dirNom" class="control-label">{{ 'NOVEDADES.LBL_DIRECTOANOMINA' | translate }}</label>
+						</div>
+					</div>
+					
+					<div class="row">
+					
+					</div>
+					
+					<div class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<a (click)="goBack((nf.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+							<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+							        pButton></button>
+						</div>
+					</div>
+				
+				</form>
 			</fieldset>
 		
 		</p-accordionTab>
 		
-		<p-accordionTab header="{{ 'NOVEDADES.LBL_CAMPOS' | translate }}" [selected]="false"
+		<p-accordionTab header="{{ 'NOVEDADES.LBL_CAMPOS' | translate }}" [selected]="acordion === 4"
 		                [disabled]="(eventuality === undefined || eventuality.idNovedad === undefined)">
 			
 			<fieldset>
-			
+				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="evFields" [paginator]="true"
+				             [rows]="10" [responsive]="true">
+					<p-column field="campoNovedad" header="{{'NOVEDADES.LBL_CAMPO' | translate}}"
+					          [sortable]="true"></p-column>
+					<p-column header="{{'NOVEDADES.LBL_CAMPOVISIBLE' | translate}}" styleClass="datatable-col-action">
+						<template let-fld="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="fld.indicadorHabilitado"
+							               (onChange)="updateEventualityField(fld, ri)"></p-inputSwitch>
+						</template>
+					</p-column>
+					<p-column header="{{'NOVEDADES.LBL_CAMPOOBLIGATORIO' | translate}}" styleClass="datatable-col-action">
+						<template let-fld="rowData" let-ri="rowIndex" pTemplate="body">
+							<p-inputSwitch onLabel="Si" offLabel="No" [(ngModel)]="fld.indicadorObligatorio"
+							               (onChange)="updateEventualityField(fld, ri)"></p-inputSwitch>
+						</template>
+					</p-column>
+				</p-dataTable>
 			</fieldset>
 		
 		</p-accordionTab>

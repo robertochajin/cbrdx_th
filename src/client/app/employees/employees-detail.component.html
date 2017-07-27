@@ -20,7 +20,7 @@
 	        </a>
         </div>
         <div class="col-md-8">
-          <h2>{{employee.nombreCompleto}}</h2>
+          <h2>{{employee.nombreCompleto}} ({{ employee.estadoTercero }})</h2>
 			  <h4>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</h4>
           <span>{{employee.fechaNacimiento}} ({{employee.edad}})</span><br />
           <span>Cargo actual : {{employee.cargoActual}}</span><br />
@@ -233,8 +233,8 @@
         <p-tabPanel header="Examenes Ocupacionales" disabled="true">
           <h3>{{'EMPLOYEES.LBL_EXAMENESOCUPACIONALES' | translate}}</h3>
         </p-tabPanel>
-        <p-tabPanel header="Dotaciones" disabled="true">
-          <h3>{{'EMPLOYEES.LBL_DOTACIONES' | translate}}</h3>
+        <p-tabPanel header="{{'EMPLOYEES.LBL_DOTACIONES' | translate}}">
+	        <supplies-employees-component *ngIf="employee.idTercero" [employee]="employee"></supplies-employees-component>
         </p-tabPanel>
       </p-tabView>
 

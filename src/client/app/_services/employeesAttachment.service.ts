@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
+import { Response, ResponseContentType } from '@angular/http';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { DocumentoTercero } from '../_models/documentDownload';
 import { DocumentoRelacionTercero } from '../_models/DocumentoRelacionTercero';
@@ -7,7 +7,7 @@ import { DocumentoRelacionTercero } from '../_models/DocumentoRelacionTercero';
 @Injectable()
 export class EmployeesAttachmentService {
    private serviceURL = '<%= SVC_TH_URL %>/api/documentosTerceros/';
-   private downloadFileServiceURL = '<%= SVC_TH_URL %>/api/adjuntos/file/';
+   private downloadFileServiceURL = '<%= SVC_TH_URL %>/api/adjuntos/';
    private relacionServiceURL = '<%= SVC_TH_URL %>/api/tercerosDocumentosTercero/';
 
    private jwtHelper: JwtHelper = new JwtHelper();
@@ -34,10 +34,6 @@ export class EmployeesAttachmentService {
 
    getAllDocumentosRelacionTercero() {
       return this.authHttp.get( this.relacionServiceURL ).map( ( res: Response ) => res.json() as DocumentoRelacionTercero[] );
-   }
-
-   getFile( id: number ) {
-      return this.authHttp.get( this.downloadFileServiceURL + id ).map( ( res: Response ) => res.text() );
    }
 
    getDocumentoRelacionTercero( id: number ) {

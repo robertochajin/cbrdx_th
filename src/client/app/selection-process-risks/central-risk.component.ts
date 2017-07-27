@@ -90,7 +90,7 @@ export class CentralRiskComponent implements OnInit {
                                                this.candidate.segundoNombre + ' ' +
                                                this.candidate.primerApellido + ' ' +
                                                this.candidate.segundoApellido;
-               this.candidate.edad = moment( this.candidate.fechaNacimiento, 'YYYY-MM-DD' ).toNow( true ).toString();
+               this.candidate.edad = moment().diff( this.candidate.fechaNacimiento, 'years', false ).toString();
             } );
 
             selectionStepService.getcentralRisk().subscribe( res => {

@@ -10,6 +10,8 @@ import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
 import { NavService } from '../_services/_nav.service';
 import { FormSharedModule } from '../shared/form-shared.module';
+import { PoliticalDivisionService } from '../_services/political-division.service';
+import { LocationsNomenclaturesServices } from '../_services/locationsNomenclatures.service';
 
 @Component( {
                moduleId: module.id,
@@ -37,6 +39,8 @@ export class PhysicStructureUpdateComponent implements OnInit {
       private router: Router,
       private route: ActivatedRoute,
       private location: Location,
+      private politicalDivisionService: PoliticalDivisionService,
+      private locationsNomenclaturesServices: LocationsNomenclaturesServices,
       private confirmationService: ConfirmationService,
       private navService: NavService ) {
    }
@@ -59,6 +63,14 @@ export class PhysicStructureUpdateComponent implements OnInit {
          this.locateService.getById( this.physicStructure.idLocalizacion ).subscribe(
             rest => {
                this.localizacion = rest;
+               this.localizacion.locacion = { camino: '', idDivisionPolitica: null };
+               this.politicalDivisionService.getLocation( rest.idDivisionPolitica ).subscribe( ciudad => {
+                  this.localizacion.locacion.camino = ciudad.camino;
+                  this.localizacion.locacion.idDivisionPolitica = ciudad.idDivisionPolitica;
+               } );
+               this.locationsNomenclaturesServices.getAllByLocalizacion(this.localizacion.idLocalizacion).subscribe( lns => {
+                  this.localizacion.listLN = lns;
+               });
             }
          );
       } );

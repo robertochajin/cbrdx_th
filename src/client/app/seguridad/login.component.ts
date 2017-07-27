@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { LoginService } from '../_services/login.service';
 import { AppComponent } from '../app.component';
 import { AuthenticationService } from '../_services/authentication.service';
 import { Http, Headers } from '@angular/http';
@@ -27,7 +26,7 @@ export class LoginComponent implements OnInit {
    Url = '/dashboard';
    loading: boolean = false;
 
-   constructor( private loginService: LoginService,
+   constructor(
       private http: Http,
       private router: Router,
       private appmain: AppComponent,
@@ -48,10 +47,8 @@ export class LoginComponent implements OnInit {
          this.authenticationService.token = null;
          localStorage.removeItem( 'token' );
          this.authenticationService.logout();
-         this.loginService.setSession( false );
          this.appmain.setSession( false );
       }else{
-         this.loginService.setSession( true );
          this.appmain.setSession( true );
          this.router.navigate( [ this.Url ] );
       }
@@ -80,7 +77,6 @@ export class LoginComponent implements OnInit {
             switch (res){
                case 1:
                   this.user();
-                  this.loginService.setSession( true );
                   break;
                case 2:
                   this.intentos = 0;
@@ -98,7 +94,6 @@ export class LoginComponent implements OnInit {
    }
 
    user() {
-      this.loginService.setSession( true );
       this.appmain.setSession( true );
       this.router.navigate( [ this.Url ] );
       this.navService.resetSearch();

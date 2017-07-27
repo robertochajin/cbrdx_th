@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 export class EmployeeEventuality {
    idTerceroNovedad: number;
    idTercero: number;
+   nombreTercero: string;
    idNovedad: number;
    novedad: string;
    idEstado: number;
@@ -17,6 +18,7 @@ export class EmployeeEventuality {
    horaReintergo: string;
    dias: number;
    idDiagnostico: number;
+   diagnostico: string;
    reemplazadoPor: string;
    valor: number;
    nroCuotas:number;
@@ -24,7 +26,6 @@ export class EmployeeEventuality {
    idEntidad: number;
    entidad: string;
    descripcion: string;
-   periodoInicio: string;
    periodoFinal: string;
    retiro: boolean;
    idEps: number;
@@ -42,6 +43,17 @@ export class EmployeeEventuality {
    idTerceroReporta: number;
    idEstadoNovedad: number;
    estadoNovedad: string;
+   estructuraArea: string;
+   idEstructuraArea: number;
+   estructuraFisica: string;
+   idEstructuraFisica: number;
+   idEstadoTercero: number;
+   idRolResponsable: number;
+   horaReintegro: string;
+   rol: string;
+   numeroDocumento: string;
+   periodoInicial: string;
+   codigoNovedad: string;
 
    constructor() {
       this.indicadorHabilitado = true;

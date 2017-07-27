@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
-import { LoginService } from '../_services/login.service';
 import { LoginComponent } from './login.component';
 import { CambioContrasenaComponent } from './cambioContrasena.component';
 import { AuthenticationService } from '../_services/authentication.service';
@@ -20,7 +19,7 @@ import { SharedModule } from '../shared/shared.module';
               ],
               declarations: [ LoginComponent, CambioContrasenaComponent ],
               bootstrap: [ LoginComponent ],
-              providers: [ LoginService, AuthenticationService ],
+              providers: [ AuthenticationService ],
               exports: [ LoginComponent ]
            } )
 export class LoginModule {

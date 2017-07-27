@@ -19,7 +19,6 @@ import { PositionsModule } from './positions/positions.module';
 import { PersonalityModule } from './position-personality/personality.module';
 import { CompanyAssetsModule } from './position-company-assets/company-assets.module';
 import { LoginModule } from './seguridad/login.module';
-import { LoginService } from './_services/login.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { AuthenticationService } from './_services/authentication.service';
 //  Global Messages
@@ -89,7 +88,12 @@ import { EventualitiesModule } from './eventualities/eventualities.module';
 import { NgIdleKeepaliveModule } from 'idle-keepalive-angular2';
 // Dotaciones
 import { SuppliesModule } from './supplies/supplies.module';
+import { TrayEventualitiesModule } from './tray-eventualities/tray-eventualities.module';
 
+
+export function createTranslateLoader(http: Http) {
+   return new TranslateStaticLoader(http, '/assets/i18n', '.json');
+}
 
 // CarsModule,
 @NgModule( {
@@ -125,7 +129,7 @@ import { SuppliesModule } from './supplies/supplies.module';
                  BreadcrumbModule.forRoot(),
                  TranslateModule.forRoot( {
                                              provide: TranslateLoader,
-                                             useFactory: ( http: Http ) => new TranslateStaticLoader( http, '/assets/i18n', '.json' ),
+                                             useFactory: ( createTranslateLoader ),
                                              deps: [ Http ]
                                           } ),
                  ConstanteModule,
@@ -158,7 +162,8 @@ import { SuppliesModule } from './supplies/supplies.module';
                  // EmployeesAttachmentsModule,
                  //AssignmentProfessionalModule
                  QuestionnairesModule,
-                 SuppliesModule
+                 SuppliesModule,
+                 TrayEventualitiesModule
               ],
 
               declarations: [ AppComponent ],
@@ -170,7 +175,6 @@ import { SuppliesModule } from './supplies/supplies.module';
                  },
                  AuthGuard,
                  AuthenticationService,
-                 LoginService,
                  BreadcrumbService,
                  PermissionService,
                  {

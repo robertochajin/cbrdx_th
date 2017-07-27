@@ -58,6 +58,7 @@ export class ProjectConfig extends SeedConfig {
 
          { src: 'jspdf/dist/jspdf.min.js', inject: true },
          { src: 'html2canvas/dist/html2canvas.js', inject: true },
+         { src: 'file-saver/FileSaver.js', inject: true },
 
       ];
 
@@ -67,12 +68,15 @@ export class ProjectConfig extends SeedConfig {
          // {src: `${this.APP_SRC}/your-path-to-lib/libs/jquery-ui.js`, inject: true, vendor: false}
          // {src: `${this.CSS_SRC}/path-to-lib/test-lib.css`, inject: true, vendor: false},
 
-         { src: `${this.ASSETS_SRC}/css/AdminLTE.css`, inject: true, vendor: false },
-         { src: `${this.ASSETS_SRC}/css/skins/_all-skins.min.css`, inject: true, vendor: false },
+         { src: `${this.ASSETS_SRC}/css/AdminLTE.css`, inject: true, vendor: true },
+         { src: `${this.ASSETS_SRC}/css/skins/skin-blue.css`, inject: true, vendor: true },
+         { src: `${this.ASSETS_SRC}/css/skins/skin-green.css`, inject: true, vendor: true },
+         { src: `${this.ASSETS_SRC}/css/skins/skin-purple.css`, inject: true, vendor: true },
          { src: `${this.ASSETS_SRC}/font/style-th.css`, inject: true, vendor: false },
 
-         { src: `${this.ASSETS_SRC}/js/fastclick/fastclick.js`, inject: true, vendor: false },
-         { src: `${this.ASSETS_SRC}/js/slimScroll/jquery.slimscroll.min.js`, inject: true, vendor: false },
+         // { src: `${this.ASSETS_SRC}/js/fastclick/fastclick.js`, inject: true, vendor: false },
+         // { src: `${this.ASSETS_SRC}/js/slimScroll/jquery.slimscroll.min.js`, inject: true, vendor: false },
+         { src: `${this.ASSETS_SRC}/js/app.js`, inject: true, vendor: true },
          { src: `${this.ASSETS_SRC}/js/script.js`, inject: true, vendor: false },
 
       ];
@@ -91,6 +95,9 @@ export class ProjectConfig extends SeedConfig {
       }, {
          name: 'idle-keepalive-angular2',
          path: 'node_modules/idle-keepalive-angular2/bundles/keepalive.umd.js'
+      }, {
+         name: 'file-saver',
+         path: 'node_modules/file-saver/FileSaver.js'
       }
       ];
       //

@@ -75,6 +75,8 @@ export class Employee {
    public sectorEconomico: string;
    public coberturaSalud: string;
    public edad: string;
+   public estadoTercero: string;
+   public idEstadoTercero: string;
 
    constructor() {
       this.nombreCompleto = '';

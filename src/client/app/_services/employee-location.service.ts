@@ -25,17 +25,17 @@ export class LocationService {
    }
 
    getPrincipalNomenclatureList() {
-      return this.authHttp.get( this.serviceURL + '/nomenclatures/principal' )
+      return this.authHttp.get( this.serviceURL + '/listLN/principal' )
       .map( ( res: Response ) => res.json() );
    }
 
    getComplementaryNomenclatureList() {
-      return this.authHttp.get( this.serviceURL + '/nomenclatures/complementary' )
+      return this.authHttp.get( this.serviceURL + '/listLN/complementary' )
       .map( ( res: Response ) => res.json() );
    }
 
    getAddressTypeList() {
-      return this.authHttp.get( this.serviceURL + '/nomenclatures/addressType' )
+      return this.authHttp.get( this.serviceURL + '/listLN/addressType' )
       .map( ( res: Response ) => res.json() );
    }
 
