@@ -20,6 +20,7 @@
 	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listSuppliesAdditional" [paginator]="true" [rows]="10"
 	             [responsive]="true" [globalFilter]="gb">
 		<p-column field="dotacion" header="{{ 'SUPPLIES.LBL_SUPPLY' | translate}}" [sortable]="true"></p-column>
+		<p-column field="talla" header="{{ 'SUPPLIES.LBL_QUANTITY' | translate}}" [sortable]="true"></p-column>
 		<p-column field="cantidadDotacion" header="{{ 'SUPPLIES.LBL_QUANTITY' | translate}}" [sortable]="true"></p-column>
 		<p-column field="costo" header="{{ 'SUPPLIES.LBL_COST' | translate}}" [sortable]="true"></p-column>
 		<p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
@@ -94,3 +95,58 @@
 		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
 	</p-footer>
 </p-confirmDialog>
+
+<br>
+<h3 class="first">{{'SUPPLIES.LBL_SUPPLIESGROUPS' | translate}}</h3>
+<div *ngIf="!showDetail">
+	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listSuppliesProjection" [paginator]="true" [rows]="10"
+	             [responsive]="true" [globalFilter]="gb">
+		<p-column field="nombreProyeccion" header="{{'SUPPLIESPROJECTION.LBL_NOMBREPEDIDO' | translate }}" [sortable]="true"></p-column>
+		<p-column header="{{'SUPPLIESPROJECTION.LBL_FECHASOLICITUD' | translate }}" [sortable]="true">
+			<template let-sp="rowData" pTemplate="body">
+				{{sp.auditoriaFecha| date:'dd/MM/yyyy'}}
+			</template>
+		</p-column>
+		<p-column field="periodo" header="{{'SUPPLIESPROJECTION.LBL_PERIODO' | translate }}" [sortable]="true"></p-column>
+		<p-column field="cantidadMeses" header="{{'SUPPLIESPROJECTION.LBL_PERIODOMESES' | translate }}" [sortable]="true"></p-column>
+		<p-column field="nombreTercero" header="{{'SUPPLIESPROJECTION.LBL_USUARIO' | translate }}" [sortable]="true"></p-column>
+		<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+			<template let-datos="rowData" pTemplate="body">
+				<button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip"
+				        title="{{'BTN_VISUALIZAR' | translate}}"
+				        pButton (click)="detailDisplay(datos)"></button>
+			</template>
+		</p-column>
+	</p-dataTable>
+</div>
+<div *ngIf="showDetail">
+	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listSuppliesProjectionSupply" [paginator]="true" [rows]="10"
+	             [responsive]="true" [globalFilter]="gb">
+		<p-column field="dotacion" header="{{ 'SUPPLIES.LBL_SUPPLY' | translate}}" [sortable]="true"></p-column>
+		<p-column field="talla" header="{{ 'SUPPLIES.LBL_QUANTITY' | translate}}" [sortable]="true"></p-column>
+		<p-column field="cantidadAsignada" header="{{ 'SUPPLIES.LBL_QUANTITY' | translate}}" [sortable]="true"></p-column>
+		<p-column field="cantidadEntregada" header="{{ 'SUPPLIES.LBL_QUANTITY' | translate}}" [sortable]="true"></p-column>
+		<p-column field="costo" header="{{ 'SUPPLIES.LBL_COST' | translate}}" [sortable]="true"></p-column>
+		<p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
+			<template let-datos="rowData" pTemplate="body">
+				<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip"
+				        title="{{'BTN_EDITAR' | translate}}"
+				        pButton (click)="update(datos)"
+				        *ngIf="datos.idProyeccionDotacion === null || datos.idProyeccionDotacion === undefined"
+				></button>
+				<button type="button" class="ui-button ui-button-danger btn" icon="fa-trash" data-toggle="tooltip"
+				        title="{{'BTN_INACTIVAR' | translate}}"
+				        pButton (click)="del(datos)"
+				        *ngIf="datos.idProyeccionDotacion === null || datos.idProyeccionDotacion === undefined"
+				></button>
+			</template>
+		</p-column>
+	</p-dataTable>
+	<div class="ui-grid-row form-footer-buttons">
+		<div class="ui-grid-col-5"></div>
+		<div class="ui-grid-col-1">
+			<a (click)="goBackDetail( )" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+		</div>
+		<div class="ui-grid-col-5"></div>
+	</div>
+</div>

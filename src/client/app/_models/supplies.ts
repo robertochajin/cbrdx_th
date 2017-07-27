@@ -24,11 +24,11 @@ export class Supplies {
    public auditoriaUsuario: number;
    public valor: number;
    public auditoriaFecha: Date;
-   public total: number;
+   public cantidadTotal: number;
    public totales: TotalSupplies[] = [];
+   public areas: any[] = [];
 
    constructor() {
-
    }
 }
 export class TotalSupplies {

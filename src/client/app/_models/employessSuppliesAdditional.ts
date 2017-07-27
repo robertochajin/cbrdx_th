@@ -10,6 +10,7 @@ export class EmployessSuppliesAdditional {
    public idProyeccionDotacion: number;
    public cantidadDotacion: number = 0;
    public idTalla: number;
+   public talla: number;
    public costo: number;
    public indicadorHabilitado: boolean = true
    public auditoriaUsuario: number;

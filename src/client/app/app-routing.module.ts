@@ -205,6 +205,7 @@ import { TrayEventualitiesComponent } from './tray-eventualities/tray-eventualit
 import { EmployeeEventualityTransactComponent } from './tray-eventualities/transact-eventualities.component';
 import { SuppliesProjectionComponent } from './supplies/supplies-projection/supplies-projection.component';
 import { SuppliesProjectionAddComponent } from './supplies/supplies-projection/supplies-projection-add.component';
+import { ConsolidatedProjectionComponent } from './supplies/supplies-projection/consolidated-projection.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -510,7 +511,7 @@ const routes = [
    // proyección de dotaciones
    { path: 'supplies-projection', component: SuppliesProjectionComponent },
    { path: 'supplies-projection/add', component: SuppliesProjectionAddComponent },
-
+   { path: 'supplies-projection/update/:id', component: ConsolidatedProjectionComponent }
 
 ];
 

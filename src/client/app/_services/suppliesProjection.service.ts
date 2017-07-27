@@ -25,6 +25,11 @@ export class SuppliesProjectionServices {
       .map( ( res: Response ) => res.json() as SuppliesProjection[] );
    }
 
+   getByEmployees( idTercero: number ) {
+      return this.authHttp.get( this.masterService + 'proyeccionDotacion/idTercero' + idTercero )
+      .map( ( res: Response ) => res.json() as SuppliesProjection[] );
+   }
+
    get( id: number ) {
       return this.authHttp.get( this.masterService + 'proyeccionDotacion/' + id )
       .map( ( res: Response ) => res.json() as SuppliesProjection );
@@ -57,7 +62,7 @@ export class SuppliesProjectionServices {
    }
 
    getByProjection( id: number ) {
-      return this.authHttp.get( this.masterService + 'dotaciones' )
+      return this.authHttp.get( this.masterService + 'dotaciones/ProyeccionDotacion/' + id )
       .map( ( res: Response ) => res.json() as Supplies[] );
    }
 

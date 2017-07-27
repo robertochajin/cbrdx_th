@@ -133,6 +133,7 @@ export class CentralRiskComponent implements OnInit {
                            this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
                         }
                      }
+                     console.info( this.readonly );
                   } );
                } );
             } );

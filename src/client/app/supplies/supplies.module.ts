@@ -12,6 +12,7 @@ import { SuppliesProjectionAddComponent } from './supplies-projection/supplies-p
 import { SuppliesProjectionComponent } from './supplies-projection/supplies-projection.component';
 import { SuppliesProjectionServices } from '../_services/suppliesProjection.service';
 import { EmployessSuppliesServices } from '../_services/employeesSupplies.service';
+import { ConsolidatedProjectionComponent } from './supplies-projection/consolidated-projection.component';
 
 
 @NgModule( {
@@ -22,7 +23,7 @@ import { EmployessSuppliesServices } from '../_services/employeesSupplies.servic
               ],
 
               declarations: [ SuppliesComponent, SuppliesAddComponent, SuppliesUpdateComponent,
-                 SuppliesProjectionComponent, SuppliesProjectionAddComponent
+                 SuppliesProjectionComponent, SuppliesProjectionAddComponent, ConsolidatedProjectionComponent
               ],
               bootstrap: [ SuppliesComponent ],
               providers: [ SuppliesService, NavService, ListaService, SuppliesProjectionServices, EmployessSuppliesServices ],

@@ -136,7 +136,7 @@ export class SuppliesProjectionComponent {
    }
 
    detail( s: SuppliesProjection ) {
-
+      this.router.navigate( [ 'supplies-projection/update/' + s.idProyeccionDotacion ] );
    }
 
    refer( s: SuppliesProjection ) {

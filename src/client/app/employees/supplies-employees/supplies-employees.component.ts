@@ -7,6 +7,9 @@ import { Employee } from '../../_models/employees';
 import { EmployessSuppliesAdditional } from '../../_models/employessSuppliesAdditional';
 import { SuppliesService } from '../../_services/supplies.service';
 import { Supplies } from '../../_models/supplies';
+import { SuppliesProjection } from '../../_models/suppliesProjection';
+import { SuppliesProjectionServices } from '../../_services/suppliesProjection.service';
+import { EmployessSuppliesProjectionSupply } from '../../_models/employessSuppliesProjectionSupply';
 
 @Component( {
                moduleId: module.id,
@@ -21,13 +24,17 @@ export class SuppliesEmployeesComponent implements OnInit {
    suppliesAdditional: EmployessSuppliesAdditional = new EmployessSuppliesAdditional();
    dialogObjet: EmployessSuppliesAdditional = new EmployessSuppliesAdditional();
    listSuppliesAdditional: EmployessSuppliesAdditional[] = [];
+   listSuppliesProjection: SuppliesProjection[];
+   listSuppliesProjectionSupply: EmployessSuppliesProjectionSupply[] = [];
    busqueda: string;
    showForm: boolean = false;
+   showDetail: boolean = false;
    msgs: Message[] = [];
    listSupplies: SelectItem[] = [];
    allSupplies: Supplies[] = [];
 
    constructor( private employessSuppliesServices: EmployessSuppliesServices,
+      private suppliesProjectionServices: SuppliesProjectionServices,
       private suppliesService: SuppliesService,
       private router: Router,
       private confirmationService: ConfirmationService,
@@ -39,6 +46,7 @@ export class SuppliesEmployeesComponent implements OnInit {
       this.suppliesAdditional.idTercero = this.employee.idTercero;
       this.getList();
       this.getSupplies();
+      this.getProjections();
    }
 
    add() {
@@ -50,7 +58,6 @@ export class SuppliesEmployeesComponent implements OnInit {
    update( c: EmployessSuppliesAdditional ) {
       this.showForm = true;
       this.suppliesAdditional = c;
-      console.info( this.suppliesAdditional );
    }
 
    del( c: EmployessSuppliesAdditional ) {
@@ -117,6 +124,18 @@ export class SuppliesEmployeesComponent implements OnInit {
       } );
    }
 
+   getProjections() {
+      this.suppliesProjectionServices.getByEmployees( this.employee.idTercero ).subscribe( data => {
+         this.listSuppliesProjection = data;
+      } );
+   }
+
+   getProjectionsSupplies( idProyeccionDotacion: number ) {
+      this.employessSuppliesServices.getByProjectionByEmployees( idProyeccionDotacion, this.employee.idTercero ).subscribe( data => {
+         this.listSuppliesProjectionSupply = data;
+      } );
+   }
+
    setSearch() {
       this.navService.setSearch( 'supplies-employees-component', this.busqueda );
    }
@@ -148,6 +167,16 @@ export class SuppliesEmployeesComponent implements OnInit {
                          detail: 'Recuerde que debe crear la novedad de descuento para que sea efectiva la' +
                                  ' solicitud'
                       } );
+   }
+
+   detailDisplay( datos: SuppliesProjection ) {
+
+      this.getProjectionsSupplies( datos.idProyeccionDotacion );
+      this.showDetail = true;
+   }
+
+   goBackDetail(): void {
+      this.showDetail = false;
    }
 
 }

@@ -70,6 +70,11 @@ export class EmployessSuppliesServices {
       .map( ( res: Response ) => res.json() as EmployessSuppliesProjectionSupply[] );
    }
 
+   getByProjectionByEmployees( idProyeccionDotacion: number, idTercero: number ) {
+      return this.authHttp.get( this.masterServiceProjectionSupply + 'proyeccionDotacionTercero/' + idProyeccionDotacion + '/' + idTercero )
+      .map( ( res: Response ) => res.json() as EmployessSuppliesProjectionSupply[] );
+   }
+
    getProjectionSupply( id: number ) {
       return this.authHttp.get( this.masterServiceProjectionSupply + id )
       .map( ( res: Response ) => res.json() as EmployessSuppliesProjectionSupply );
