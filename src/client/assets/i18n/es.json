@@ -1166,6 +1166,19 @@
       "BTN_TRAMITAR": "Tramitar",
       "": ""
    },
+   "ASIGNARDOTACION": {
+      "LBL_TITULO": "Asignar dotación",
+      "LBL_ID": "Número ID",
+      "LBL_NOMBRE": "Nombre",
+      "LBL_CARGO": "Cargo",
+      "LBL_AREA": "Area",
+      "LBL_TIPOAREA": "Tipo de area",
+      "LBL_DOTACION": "Dotación",
+      "LBL_DOTACIONADICIONAL": "Dotación adicional",
+      "LBL_DETALLECOLABORADOR": "Detalle del colaborador",
+      "LBL_": "",
+      "": ""
+   },
    "RECLUTAMIENTO": {
       "LBL_FASE_PROCESO": "Fase del proceso",
       "LBL_PERSONAL_ENCARGADO": "Personal encargado",

@@ -5,11 +5,19 @@ export class EmployessSuppliesProjection {
 
    public idProyeccionDotacionTerceros: number;
    public idProyeccionDotacion: number;
+   public documento: string;
+   public nombreCompleto: string;
+   public cargo: string;
+   public area: string;
+   public tipoArea: string;
    public idTercero: number;
    public idEstado: number;
    public fechaEntrega: Date;
+   public fechaPosibleEntrega: Date;
    public comentario: string;
+   public comentarioAdicional: string;
    public indicadorHabilitado: boolean = true;
+   public indicadorAdicional: boolean = false;
    public auditoriaUsuario: number;
    public auditoriaFecha: Date;
 

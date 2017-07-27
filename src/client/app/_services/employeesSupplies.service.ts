@@ -44,12 +44,13 @@ export class EmployessSuppliesServices {
       return this.authHttp.put( this.masterServiceAdditional, JSON.stringify( f ) ).catch( this.handleError );
    }
 
-   getAllProjection() {
+   getAllEmployeesSuppliesByProjection( idProjection: number ) {
+      // return this.authHttp.get( this.masterServiceProjection + 'proyeccion/' + idProjection)
       return this.authHttp.get( this.masterServiceProjection )
       .map( ( res: Response ) => res.json() as EmployessSuppliesProjection[] );
    }
 
-   getProjection( id: number ) {
+   getEmployeeProjection( id: number ) {
       return this.authHttp.get( this.masterServiceProjection + id )
       .map( ( res: Response ) => res.json() as EmployessSuppliesProjection );
    }
