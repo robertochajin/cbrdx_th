@@ -50,7 +50,7 @@ export class EmployessSuppliesServices {
       .map( ( res: Response ) => res.json() as EmployessSuppliesProjection[] );
    }
 
-   getProjection( id: number ) {
+   getEmployeeProjection( id: number ) {
       return this.authHttp.get( this.masterServiceProjection + id )
       .map( ( res: Response ) => res.json() as EmployessSuppliesProjection );
    }

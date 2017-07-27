@@ -1172,7 +1172,9 @@
       "LBL_CARGO": "Cargo",
       "LBL_AREA": "Area",
       "LBL_TIPOAREA": "Tipo de area",
+      "LBL_DOTACION": "Dotación",
       "LBL_DOTACIONADICIONAL": "Dotación adicional",
+      "LBL_DETALLECOLABORADOR": "Detalle del colaborador",
       "LBL_": "",
       "": ""
    },

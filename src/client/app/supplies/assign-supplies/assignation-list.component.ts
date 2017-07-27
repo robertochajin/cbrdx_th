@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployessSuppliesProjection } from '../../_models/employessSuppliesProjection';
 import { EmployessSuppliesServices } from '../../_services/employeesSupplies.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NavService } from '../../_services/_nav.service';
 
 @Component( {
@@ -16,14 +16,17 @@ export class AssignationListComponent implements OnInit {
 
    constructor( private employessSuppliesServices: EmployessSuppliesServices,
       private router: Router,
+      private route: ActivatedRoute,
       private _nav: NavService ) {
       this.busqueda = _nav.getSearch( 'assignation-list.component' );
    }
 
    ngOnInit() {
-      this.employessSuppliesServices.getAllEmployeesSuppliesByProjection( 2 ).subscribe( list => {
-         this.projectedEmployess = list;
-      } );
+      this.route.params.subscribe( ( params: Params ) => {
+         this.employessSuppliesServices.getAllEmployeesSuppliesByProjection( params['idProjection'] ).subscribe( list => {
+            this.projectedEmployess = list;
+         } );
+      });
    }
 
    add() {
