@@ -101,7 +101,9 @@ export class EmployeeEventualityTransactComponent {
       this.listaService.getMasterDetails( 'ListasEstadosNovedades' ).subscribe( res => {
          this.listEstados.push( { label: 'Seleccione', value: null } );
          res.map( ( s: any ) => {
-            this.listEstados.push( { label: s.nombre, value: s.idLista } );
+            if ( s.codigo !=='ENCONSTRUC' ) {
+               this.listEstados.push( { label: s.nombre, value: s.idLista } );
+            }
          } );
       } );
       this.route.params.subscribe( ( params: Params ) => {

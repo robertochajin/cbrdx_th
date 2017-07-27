@@ -1219,6 +1219,30 @@
       "LBL_SELECCIONARAREAS": "No seleccionar areas",
       "": ""
    },
+   "ACCIDENTINCIDENT": {
+      "LBL_ESTADO": "Estado",
+      "LBL_TIPOAREA": "Tipo area",
+      "LBL_TIPONOVEDAD": "Tipo novedad",
+      "LBL_COLABORADOR": "Colaborador",
+      "LBL_CARGO": "Cargo",
+      "LBL_AREA": "Area",
+      "LBL_FECHAACCIDENTE": "Fecha accidente",
+      "LBL_ACTIVIDADES": "Actividades",
+      "LBL_ACTIVIDAD": "Actividad",
+      "LBL_DIRIGIDO": "Dirigido",
+      "LBL_FECHA": "Fecha",
+      "LBL_COMPLETADO": "Completado",
+      "LBL_RESPONSABLE": "Responsable",
+      "LBL_FECHALIMITE": "Fecha límite",
+      "LBL_ENCARGADOVERIFICAR": "Encargado de verificar",
+      "LBL_FECHAVERIFICACION": "Fecha verificacion",
+      "LBL_ADJUNTAR": "Adjuntar",
+      "LBL_NOMBRE": "Nombre",
+      "LBL_VISUALIZAR": "Visualizar",
+      "LBL_AGREGARPLAN": "Agregar plan",
+      "LBL_PLANDEACCION": "Planes de acción",
+      "": ""
+   },
    "FIN_ARCHIVO": "============================FIN ARCHIVO============================="
 
 }
