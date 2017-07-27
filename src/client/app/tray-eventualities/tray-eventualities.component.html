@@ -113,13 +113,14 @@
 				<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 					<template let-datos="rowData" pTemplate="body">
 						<button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip"
-						        title="{{'BTN_INACTIVAR' | translate}}"
+						        title="{{'BTN_VISUALIZAR' | translate}}"
 						        pButton (click)="detail(datos)"></button>
-						<button *ngIf="datos.codigoNovedad==='SOLICI' || datos.codigoNovedad==='DEVUEL'" type="button" icon="fa-pencil"
+						<button *ngIf="datos.codigoNovedad!=='RECHZ' && datos.codigoNovedad!=='TRAMIT' &&  datos.codigoNovedad!=='CANCEL'"
+						        type="button" icon="fa-pencil"
 						        class="ui-button-success" data-toggle="tooltip"
 						        title="{{'BTN_EDITAR' | translate}}"
 						        pButton (click)="update(datos)"></button>
-						<button *ngIf="datos.idTerceroReporta === idTercero" type="button" icon="fa-external-link"
+						<button *ngIf="datos.codigoNovedad!=='RECHZ' && datos.codigoNovedad!=='TRAMIT' &&  datos.codigoNovedad!=='CANCEL'" type="button" icon="fa-external-link"
 						        class="ui-button-success" data-toggle="tooltip"
 						        title="{{'EMPLOYEENOVELTY.BTN_TRAMITAR' | translate}}"
 						        pButton (click)="refer(datos)"></button>
