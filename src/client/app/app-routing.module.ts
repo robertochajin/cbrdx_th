@@ -205,7 +205,6 @@ import { TrayEventualitiesComponent } from './tray-eventualities/tray-eventualit
 import { EmployeeEventualityTransactComponent } from './tray-eventualities/transact-eventualities.component';
 import { SuppliesProjectionComponent } from './supplies/supplies-projection/supplies-projection.component';
 import { SuppliesProjectionAddComponent } from './supplies/supplies-projection/supplies-projection-add.component';
-import { SuppliesProjectionComponent } from './supplies-projection/supplies-projection.component';
 import { AssignationListComponent } from './supplies/assign-supplies/assignation-list.component';
 import { EmployeeAssignationComponent } from './supplies/assign-supplies/employee-assignation.component';
 import { EmployeeAssignationDetailComponent } from './supplies/assign-supplies/employee-assignation-detail.component';
