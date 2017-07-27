@@ -1176,6 +1176,8 @@
       "LBL_DOTACION": "Dotación",
       "LBL_DOTACIONADICIONAL": "Dotación adicional",
       "LBL_DETALLECOLABORADOR": "Detalle del colaborador",
+      "LBL_COMENTARIO": "Comentario",
+      "LBL_COMENTARIOADICIONAL": "Comentario adicional",
       "LBL_": "",
       "": ""
    },

@@ -13,7 +13,7 @@
 							<div class="col-md-10">
 								<h2>{{employessAssign.nombreCompleto}}</h2>
 								<h4>{{employessAssign.documento}}</h4>
-								<span>{{employessAssign.tipoArea}} - {{employessAssign.area}}</span>
+								<span>({{employessAssign.cargo}}) {{employessAssign.tipoArea}} - {{employessAssign.area}}</span>
 							</div>
 						</div>
 					</fieldset>
@@ -25,20 +25,71 @@
 		<div class="col-md-12">
 			<form name="assignForm" (ngSubmit)="f.valid && assignProjection()" #f="ngForm" novalidate id="assignForm">
 				<p-panel header="{{ 'ASIGNARDOTACION.LBL_DOTACION' | translate }}">
-				
+					
+					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+						
+						<div class="row" *ngFor="let supp of employeeSupplies; let i = index">
+							<div class="form-group col-md-1"></div>
+							<div class="form-group col-md-4">
+								<strong>{{supp.dotacion}}</strong>
+							</div>
+							<div class="form-group col-md-2">
+								Talla: {{supp.talla}}
+							</div>
+							<div class="form-group col-md-2">
+								<p-inputSwitch name="asigna{{i}}" onLabel="Si" offLabel="No" [(ngModel)]="supp.indicadorHabilitado"
+								               (onChange)="toggleSupply(supp)"></p-inputSwitch>
+							</div>
+							<div class="form-group col-md-2">
+								<input *ngIf="supp.indicadorHabilitado" id="sdf{{i}}"
+								       type="number" maxlength="3" size="3" pattern="(?:\b|-)([1-9]{1,2}[0]?|100)\b" min="1"
+								       pInputText name="sdf{{i}}" class="form-control"
+								       [(ngModel)]="supp.cantidadAsignada"
+								/>
+							</div>
+							<div class="form-group col-md-1"></div>
+						</div>
+						
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label for="comment">{{ 'ASIGNARDOTACION.LBL_COMENTARIO' | translate }}:</label>
+								<textarea id="comment" name="comment" pInputTextarea
+								          [(ngModel)]="employessAssign.comentario" maxLength="200"></textarea>
+							</div>
+						</div>
+					</div>
 				</p-panel>
 				<p-panel header="{{ 'ASIGNARDOTACION.LBL_DOTACIONADICIONAL' | translate }}">
-					
-					<div class="row">
-						<div class="form-group col-md-12">
-							<label for="aditionalComment">{{ 'ASIGNARDOTACION.LBL_COMENTARIOADICIONAL' | translate }}:</label>
-							<textarea id="aditionalComment" name="aditionalComment" pInputTextarea
-							          [(ngModel)]="employessAssign.comentarioAdicional" maxLength="200"
-							          #ngAditionalComment="ngModel" ></textarea>
+					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+						
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label for="aditionalComment">{{ 'ASIGNARDOTACION.LBL_COMENTARIOADICIONAL' | translate }}:</label>
+								<textarea id="aditionalComment" name="aditionalComment" pInputTextarea
+								          [(ngModel)]="employessAssign.comentarioAdicional" maxLength="200"></textarea>
+							</div>
 						</div>
 					</div>
 				</p-panel>
 				
+				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+					<div class="row">
+						<div class="form-group col-md-4">
+						</div>
+						<div class="form-group col-md-4">
+							<label for="assignDate">{{'ASIGNARDOTACION.LBL_FECHAASIGNACION' | translate}}</label>
+							<p-calendar id="assignDate" name="assignDate" [showIcon]="true"
+							            [minDate]="minDate" [locale]="es" readonlyInput="true"
+							            dataType="date" #ngAssingDate="ngModel" required
+							            [(ngModel)]="employessAssign.fechaPosibleEntrega" dateFormat="yy'-'mm'-'dd"></p-calendar>
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngAssingDate.valid">
+								{{'ASIGNARDOTACION.LBL_FECHAASIGNACION' | translate}} {{'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+						<div class="form-group col-md-4">
+						</div>
+					</div>
+				</div>
 				
 				<div class="row form-footer-buttons">
 					<div class="form-group col-md-12">

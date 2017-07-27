@@ -5,6 +5,8 @@ export class EmployessSuppliesProjectionSupply {
 
    public idProyeccionDotacionTerceroDotacion: number;
    public idProyeccionDotacionTercero: number;
+   public dotacion: string;
+   public talla: string;
    public idDotacion: number;
    public cantidadAsignada: number;
    public cantidadEntregada: number;
