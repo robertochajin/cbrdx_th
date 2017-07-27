@@ -639,7 +639,9 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
 
    downloadFile( id: number ) {
       this.adjuntosService.downloadFile( id ).subscribe( res => {
-         window.location.assign( res );
+         this.adjuntosService.getFileName( id ).subscribe( adj => {
+            saveAs( res, adj.nombreArchivo );
+         } );
       } );
    }
 

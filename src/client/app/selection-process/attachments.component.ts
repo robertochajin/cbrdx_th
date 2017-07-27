@@ -10,6 +10,7 @@ import { CandidateProcess } from '../_models/candidateProcess';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
 import { JwtHelper } from 'angular2-jwt';
+import { AdjuntosService } from '../_services/adjuntos.service';
 
 @Component( {
                moduleId: module.id,
@@ -43,7 +44,8 @@ export class AttachmentsComponent implements OnInit {
       private navService: NavService,
       private listaService: ListaService,
       private attachmentsService: AttachmentsService,
-      private confirmationService: ConfirmationService ) {
+      private confirmationService: ConfirmationService,
+      private adjuntosService: AdjuntosService ) {
 
       let token = localStorage.getItem( 'token' );
       if ( token !== null ) {
@@ -67,7 +69,6 @@ export class AttachmentsComponent implements OnInit {
             this.readonly = false;
          }
       } );
-
 
    }
 
@@ -98,7 +99,7 @@ export class AttachmentsComponent implements OnInit {
    uploadingOk( event: any ) {
       let respuesta = JSON.parse( event.xhr.response );
       if ( respuesta.idAdjunto ) {
-         this.adjunto.nombre=null;
+         this.adjunto.nombre = null;
          this.navService.setMesage( 0, { severity: 'success', summary: 'Exito', detail: 'Archivo subido con exito' } );
       } else {
          this.navService.setMesage( 0, { severity: 'error', summary: 'Error', detail: 'Error al subir archivo' } );
@@ -111,11 +112,13 @@ export class AttachmentsComponent implements OnInit {
    }
 
    previewFile( f: Attachments ) {
-      // let link = 'https://www.subes.sep.gob.mx/archivos/tutor/manual_general.pdf';
-      this.url = this.previewUrl + '/' + f.idAdjunto;
-      this.title = f.nombreArchivo;
-      this.displayDialog = true;
+      this.adjuntosService.downloadFile( f.idAdjunto ).subscribe( res => {
+         let blob_url = URL.createObjectURL( res );
 
+         this.url = blob_url;
+         this.title = f.nombre;
+         this.displayDialog = true;
+      } );
    }
 
    downloadFile( f: Attachments ) {
@@ -123,12 +126,13 @@ export class AttachmentsComponent implements OnInit {
          window.location.assign( res );
       } );
    }
+
    prepareForm() {
       //Se verifica el estado del paso y la la necesidad de mostrar o nó la asignación de fecha
       if ( this.getIdStateByCode( 'VAC' ) === this.candidateProcess.idEstadoDiligenciado ) {
-         this.readonly=true;
+         this.readonly = true;
       } else if ( this.getIdStateByCode( 'PROG' ) === this.candidateProcess.idEstadoDiligenciado ) {
-         this.readonly=false;
+         this.readonly = false;
          // verificar si el usuario en sesion es responsable para mostrar solo lectura de datos
          if ( this.usuarioLogueado.usuario.idUsuario === this.candidateProcess.idResponsable ) {
             this.readonly = true;
@@ -139,11 +143,10 @@ export class AttachmentsComponent implements OnInit {
          this.readonly = true;
       } else if ( this.getIdStateByCode( 'RECH' ) === this.candidateProcess.idEstadoDiligenciado ) {
          this.readonly = true;
-      } else if (  this.getIdStateByCode( 'NA' ) === this.candidateProcess.idEstadoDiligenciado) {
+      } else if ( this.getIdStateByCode( 'NA' ) === this.candidateProcess.idEstadoDiligenciado ) {
 
       }
 
    }
-
 
 }
