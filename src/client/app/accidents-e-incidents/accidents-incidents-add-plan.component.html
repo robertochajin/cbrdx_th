@@ -104,5 +104,45 @@
 			</form>
 		</div>
 	</p-accordionTab>
+	<p-accordionTab header="{{'EMPLOYEES.LBL_DATOSGENERALES' | translate}}" [selected]="acordion == 0 || acordion == null">
+		<form (ngSubmit)="fa.valid && onSubmitAttachment()" #fa="ngForm" novalidate id="formularioAdjuntos" >
+			<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="nombreAd">{{ 'NOVEDADES.LBL_NOMBRE' | translate }}</label>
+						<input id="nombreAd" name="nombreAd" #nombre="ngModel" pInputText type="text"
+						       (keyup)="inputAttachment($event)" required maxlength="50"
+						       [(ngModel)]="dataUploadArchivo"/>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="fa.submitted && !nombre.valid">
+							<i class="fa fa-close"></i>
+							{{ 'NOVEDADES.LBL_NOMBRE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label>{{'LBL_ADJUNTAR' | translate}} </label>
+						<p-fileUpload name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
+						              chooseLabel="{{'LBL_ADJUNTAR' | translate}}"
+						              (onBeforeSend)="onBeforeSend($event)"
+						              (onSelect)="onSelect($event, $event.files)"
+						              (onUpload)="uploadingOk($event)" [disabled]="dataUploadArchivo===null || dataUploadArchivo===''"
+						              maxFileSize="{{fsize}}" accept="{{ftype}}">
+						</p-fileUpload>
+					</div>
+				</div>
+			</div>
+		</form>
+		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listAttachment" [paginator]="true" [rows]="10"
+		             [responsive]="true">
+			<p-column field="nombreArchivo" header="{{'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}" [sortable]="true"></p-column>
+			<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+				<template let-atta="rowData" pTemplate="body">
+					<button type="button" icon="fa-download" class="ui-button-success" data-toggle="tooltip"
+					        title="{{'BTN_DOWNLOAD' | translate}}"
+					        pButton (click)="downloadFile(atta.idAdjunto)"></button>
+				</template>
+			</p-column>
+		</p-dataTable>
+	</p-accordionTab>
 </p-accordion>
 

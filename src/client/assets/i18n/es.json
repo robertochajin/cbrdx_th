@@ -1179,7 +1179,7 @@
       "LBL_DETALLECOLABORADOR": "Detalle del colaborador",
       "LBL_": "",
       "LBL_FECHAASIGNACION": "Fecha asignación",
-      "LBL_FECHAENTREGA": "Fecha entrega proyectada",
+      "LBL_FECHAENTREGA": "Fecha entrega",
       "LBL_ESTADO": "Estado",
       "": ""
    },
@@ -1245,6 +1245,7 @@
       "LBL_VISUALIZAR": "Visualizar",
       "LBL_AGREGARPLAN": "Agregar plan",
       "LBL_PLANDEACCION": "Planes de acción",
+      "LBL_ADJUNTOS": "Adjuntos",
       "": ""
    },
    "FIN_ARCHIVO": "============================FIN ARCHIVO============================="
