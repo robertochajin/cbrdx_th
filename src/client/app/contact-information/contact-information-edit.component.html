@@ -1,0 +1,82 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+
+</p-confirmDialog>
+<div class="col-md-6 col-md-offset-3">
+	<form (ngSubmit)="f.valid && onSubmit() && !existCode" #f="ngForm" novalidate id="formulario">
+		<div class="row" *ngIf="contactInformation.idInformacionContcto">
+			<label for="codigo" class="control-label col-md-3">{{ 'ADMININFOCONTACTO.LBL_CODIGO' | translate}}</label>
+			<div class=" col-md-9">
+				<label class="control-label col-md-3">{{contactInformation.codigo}}</label>
+			</div>
+		</div>
+		<div class="row" *ngIf="!contactInformation.idInformacionContcto">
+			<label for="codigo" class="control-label col-md-3">{{ 'ADMININFOCONTACTO.LBL_CODIGO' | translate}}</label>
+			<div class=" col-md-4">
+				<input type="text" pInputText class="form-control" id="codigo" name="codigo"
+				       #cod="ngModel" [(ngModel)]="contactInformation.codigo" maxlength="10" (keyup)="inputCode($event)">
+				<div class="ui-message ui-messages-error ui-corner-all"
+				     *ngIf="f.submitted && !cod.valid">
+					<i class="fa fa-close"></i>
+					{{ 'ADMININFOCONTACTO.LBL_CODIGO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+				</div>
+				<div class="ui-message ui-messages-error ui-corner-all"
+				     *ngIf="existCode">
+					<i class="fa fa-close"></i>
+					{{ 'ADMININFOCONTACTO.LBL_CODIGOREPETIDO' | translate }}
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group">
+				<label for="nombre" class="control-label col-md-3">{{ 'ADMININFOCONTACTO.LBL_NOMBRE' | translate}}</label>
+				<div class=" col-md-9">
+					<input type="text" pInputText class="form-control" id="nombre" name="nombre"
+					       #nombrecampo="ngModel" [(ngModel)]="contactInformation.nombre" maxlength="100"
+					       (keyup)="capitalize($event)">
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !nombrecampo.valid">
+						<i class="fa fa-close"></i>
+						{{ 'ADMININFOCONTACTO.LBL_NOMBRE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<label></label><br>
+				<p-checkbox binary="true" id="confirmacion" name="confirmacion"
+				            [(ngModel)]="contactInformation.indicadorConfirmacion"
+				            label="{{ 'ADMININFOCONTACTO.LBL_CONFIRMACION' | translate }}"
+				            #indicador="ngModel"></p-checkbox>
+			</div>
+			<div class="col-md-4">
+				<label></label><br>
+				<p-checkbox binary="true" id="obligatirio" name="obligatirio"
+				            [(ngModel)]="contactInformation.indicadorObligatorio"
+				            label="{{ 'ADMININFOCONTACTO.LBL_OBLIGATORIO' | translate }}"
+				            #indicador="ngModel"></p-checkbox>
+			</div>
+			<div class="col-md-4">
+				<label></label><br>
+				<p-checkbox binary="true" id="habilitado" name="habilitado"
+				            [(ngModel)]="contactInformation.indicadorHabilitado"
+				            label="{{ 'ADMININFOCONTACTO.LBL_HABILITADO' | translate }}"
+				            #indicador="ngModel"></p-checkbox>
+			</div>
+		</div>
+		<div class="row form-footer-buttons">
+			<div class="col-md-4"></div>
+			<div class="col-md-2">
+				<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+			</div>
+			<div class="col-md-2">
+				<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+			</div>
+		</div>
+	</form>
+</div>

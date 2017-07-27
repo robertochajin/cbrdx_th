@@ -89,6 +89,7 @@ import { NgIdleKeepaliveModule } from 'idle-keepalive-angular2';
 // Dotaciones
 import { SuppliesModule } from './supplies/supplies.module';
 import { TrayEventualitiesModule } from './tray-eventualities/tray-eventualities.module';
+import { ContactInformationModule } from './contact-information/contact-information.module';
 
 
 export function createTranslateLoader(http: Http) {
@@ -163,6 +164,7 @@ export function createTranslateLoader(http: Http) {
                  //AssignmentProfessionalModule
                  QuestionnairesModule,
                  SuppliesModule,
+                 ContactInformationModule,
                  TrayEventualitiesModule
               ],
 

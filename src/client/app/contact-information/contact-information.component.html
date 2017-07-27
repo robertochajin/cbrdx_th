@@ -1,0 +1,54 @@
+<div *ngIf="!editContactInfo">
+	<div *ngIf="!saveContactInfo">
+		<div class="row datable-header">
+			<div class="col-md-6 col-xs-12 datatable-header-add">
+				<button type="button" pButton icon="fa-plus" (click)="add()" label="{{ 'ADMININFOCONTACTO.LBL_AGREGAR' | translate}}"></button>
+			</div>
+			<div class="col-md-6 col-xs-12 datatable-header-search">
+				<div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-search"></i></div>
+					<input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control"
+					       [(ngModel)]="busqueda" (change)="setSearch()">
+				</div>
+			</div>
+		</div>
+		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listContactinformation" [paginator]="true" [rows]="10"
+		             [responsive]="true"
+		             [globalFilter]="gb">
+			<p-column field="codigo" header="{{ 'ADMININFOCONTACTO.LBL_CODIGO' | translate }}" [sortable]="true"></p-column>
+			<p-column field="nombre" header="{{ 'ADMININFOCONTACTO.LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
+			<p-column header="{{ 'ADMININFOCONTACTO.LBL_CONFIRMACION' | translate }}" styleClass="datatable-col-center">
+				<template let-cont="rowData" pTemplate="body">
+					<p-checkbox [(ngModel)]="cont.indicadorConfirmacion" binary="true" disabled="true"></p-checkbox>
+				</template>
+			</p-column>
+			<p-column header="{{ 'ADMININFOCONTACTO.LBL_OBLIGATORIO' | translate }}" styleClass="datatable-col-center">
+				<template let-cont="rowData" pTemplate="body">
+					<p-checkbox [(ngModel)]="cont.indicadorObligatorio" binary="true" disabled="true"></p-checkbox>
+				</template>
+			</p-column>
+			<p-column header="{{ 'ADMININFOCONTACTO.LBL_HABILITADO' | translate }}" styleClass="datatable-col-center">
+				<template let-cont="rowData" pTemplate="body">
+					<p-checkbox [(ngModel)]="cont.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
+				</template>
+			</p-column>
+			<p-column header="{{ 'ADMININFOCONTACTO.LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+				<template let-cont="rowData" pTemplate="body">
+					<div class="btn-group" role="group">
+						<button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip"
+						        title="{{'BTN_EDITAR' | translate}}" pButton
+						        (click)="update(cont)"></button>
+					</div>
+				</template>
+			</p-column>
+		</p-dataTable>
+	</div>
+	<div *ngIf="saveContactInfo">
+		<contact-information-edit [contactInformation]="contactInformation" (dismiss)="cancelSave()"></contact-information-edit>
+	</div>
+</div>
+<div *ngIf="editContactInfo">
+	<contact-information-edit *ngIf="contactInformation.idInformacionContcto" [contactInformation]="contactInformation"
+	                          (dismiss)="cancelEdit()"
+	></contact-information-edit>
+</div>

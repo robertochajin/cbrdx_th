@@ -1206,6 +1206,18 @@
       "LBL_SELECCIONARAREAS": "No seleccionar areas",
       "": ""
    },
+   "ADMININFOCONTACTO": {
+      "LBL_CODIGO": "Código",
+      "LBL_CODIGOREPETIDO": "Código repetido",
+      "LBL_NOMBRE": "Nombre",
+      "LBL_AGREGAR": "Agregar registro",
+      "LBL_CONFIRMACION": "Requiere confirmación",
+      "LBL_OBLIGATORIO": "Obligatorio",
+      "LBL_HABILITADO": "Habilitado",
+      "LBL_EDITAR": "Editar",
+      "LBL_ACCIONES": "Acciones",
+      "": ""
+   },
    "FIN_ARCHIVO": "============================FIN ARCHIVO============================="
 
 }
