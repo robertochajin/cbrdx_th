@@ -1177,6 +1177,9 @@
       "LBL_DOTACIONADICIONAL": "Dotación adicional",
       "LBL_DETALLECOLABORADOR": "Detalle del colaborador",
       "LBL_": "",
+      "LBL_FECHAASIGNACION": "Fecha asignación",
+      "LBL_FECHAENTREGA": "Fecha entrega proyectada",
+      "LBL_ESTADO": "Estado",
       "": ""
    },
    "RECLUTAMIENTO": {
