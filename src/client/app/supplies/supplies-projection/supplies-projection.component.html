@@ -25,8 +25,8 @@
 		</div>
 		<div class="col-md-7">
 			<p-calendar id="fechaInicio" name="fechaInicio" #fechaIni="ngModel" [showIcon]="true"
-			            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
-			            [locale]="es" readonlyInput="readonlyInput" [required]="requiredfechainicio"
+			            [monthNavigator]="true" [yearNavigator]="true"
+			            [locale]="es" readonlyInput="readonlyInput" [maxDate]="maxDateInicio"
 			            dataType="date" [(ngModel)]="fechaInicio" [yearRange]="rangeFin"
 			            dateFormat="yy'-'mm'-'dd" (onSelect)="selectInicio()"></p-calendar>
 		</div>
@@ -47,18 +47,18 @@
 			{{sp.auditoriaFecha| date:'dd/MM/yyyy'}}
 		</template>
 	</p-column>
-	<p-column field="fechaReporte" header="{{'SUPPLIESPROJECTION.LBL_PERIODO' | translate }}" [sortable]="true">
-		<template let-sp="rowData" pTemplate="body">
-			{{sp.fechaInicio| date:'dd/MM/yyyy'}} {{sp.fechaFin| date:'dd/MM/yyyy'}}
-		</template>
-	</p-column>
-	<p-column field="estadoNovedad" header="{{'SUPPLIESPROJECTION.LBL_PERIODOMESES' | translate }}" [sortable]="true"></p-column>
-	<p-column field="nombreTerceroReporta" header="{{'SUPPLIESPROJECTION.LBL_USUARIO' | translate }}" [sortable]="true"></p-column>
+	<p-column field="periodo" header="{{'SUPPLIESPROJECTION.LBL_PERIODO' | translate }}" [sortable]="true"></p-column>
+	<p-column field="cantidadMeses" header="{{'SUPPLIESPROJECTION.LBL_PERIODOMESES' | translate }}" [sortable]="true"></p-column>
+	<p-column field="nombreTercero" header="{{'SUPPLIESPROJECTION.LBL_USUARIO' | translate }}" [sortable]="true"></p-column>
 	<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 		<template let-nv="rowData" pTemplate="body">
 			<button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip"
 			        title="{{'BTN_VISUALIZAR' | translate}}"
 			        pButton (click)="detail(nv)"></button>
+			<button type="button" icon="fa-external-link"
+			        class="ui-button-success" data-toggle="tooltip"
+			        title="{{'EMPLOYEENOVELTY.BTN_TRAMITAR' | translate}}"
+			        pButton (click)="refer(nv)"></button>
 		</template>
 	</p-column>
 </p-dataTable>

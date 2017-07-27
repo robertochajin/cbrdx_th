@@ -127,7 +127,7 @@ export class RolesUpdateComponent implements OnInit {
 
       this.rolesService.updateRole( this.rol ).then( () => {
          this.msgs = [];
-         this._nav.setMesage( 2, this.msgs );
+         this._nav.setMesage( 1, this.msgs );
       } );
 
    }
