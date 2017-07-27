@@ -208,6 +208,7 @@ import { SuppliesProjectionAddComponent } from './supplies/supplies-projection/s
 import { AssignationListComponent } from './supplies/assign-supplies/assignation-list.component';
 import { EmployeeAssignationComponent } from './supplies/assign-supplies/employee-assignation.component';
 import { EmployeeAssignationDetailComponent } from './supplies/assign-supplies/employee-assignation-detail.component';
+import { TracingSuppliesComponent } from './supplies/tracing-supplies/tracing-supplies.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -516,6 +517,10 @@ const routes = [
    // proyección de dotaciones
    { path: 'supplies-projection', component: SuppliesProjectionComponent },
    { path: 'supplies-projection/add', component: SuppliesProjectionAddComponent },
+
+   // seguimiento de dotaciones
+   { path: 'tracing-supplies', component: TracingSuppliesComponent },
+
 
 
 ];
