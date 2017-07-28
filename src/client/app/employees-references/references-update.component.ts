@@ -90,9 +90,9 @@ export class ReferencesUpdateComponent implements OnInit {
                   this.localizacion.locacion.camino = ciudad.camino;
                   this.localizacion.locacion.idDivisionPolitica = ciudad.idDivisionPolitica;
                } );
-               this.locationsNomenclaturesServices.getAllByLocalizacion(this.localizacion.idLocalizacion).subscribe( lns => {
+               this.locationsNomenclaturesServices.getAllByLocalizacion( this.localizacion.idLocalizacion ).subscribe( lns => {
                   this.localizacion.listLN = lns;
-               });
+               } );
             } );
          } );
       } );

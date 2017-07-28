@@ -23,8 +23,8 @@ export class EmployessSuppliesServices {
       }
    }
 
-   getAllAdditionalByIdEmployee( id: number ) {
-      return this.authHttp.get( this.masterServiceAdditional + 'buscarTercero/' + id )
+   getAllAdditionalByIdEmployee(id: number) {
+      return this.authHttp.get( this.masterServiceAdditional + 'tercero/' + id )
       .map( ( res: Response ) => res.json() as EmployessSuppliesAdditional[] );
    }
 
@@ -78,6 +78,11 @@ export class EmployessSuppliesServices {
 
    getAllProjectionSupply() {
       return this.authHttp.get( this.masterServiceProjectionSupply )
+      .map( ( res: Response ) => res.json() as EmployessSuppliesProjectionSupply[] );
+   }
+
+   getByProjectionByEmployees( idProyeccionDotacion: number, idTercero: number ) {
+      return this.authHttp.get( this.masterServiceProjectionSupply + 'proyeccionDotacionTercero/' + idProyeccionDotacion + '/' + idTercero )
       .map( ( res: Response ) => res.json() as EmployessSuppliesProjectionSupply[] );
    }
 

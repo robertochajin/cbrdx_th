@@ -135,6 +135,7 @@ export class CentralRiskComponent implements OnInit {
                            this.candidateProcess.idEstadoDiligenciado = this.getIdStateByCode( 'VAC' );
                         }
                      }
+                     console.info( this.readonly );
                   } );
                } );
             } );
@@ -147,7 +148,7 @@ export class CentralRiskComponent implements OnInit {
    }
 
    showDialogo( obj: CentralRisk ) {
-      console.log(obj);
+      console.log( obj );
       this.adjuntosService.downloadFile( obj.idAdjunto ).subscribe( res => {
          let blob_url = URL.createObjectURL( res );
 

@@ -15,6 +15,7 @@ import { SuppliesProjectionAddComponent } from './supplies-projection/supplies-p
 import { SuppliesProjectionComponent } from './supplies-projection/supplies-projection.component';
 import { SuppliesProjectionServices } from '../_services/suppliesProjection.service';
 import { EmployessSuppliesServices } from '../_services/employeesSupplies.service';
+import { ConsolidatedProjectionComponent } from './supplies-projection/consolidated-projection.component';
 import { TracingSuppliesComponent } from './tracing-supplies/tracing-supplies.component';
 
 
@@ -28,8 +29,8 @@ import { TracingSuppliesComponent } from './tracing-supplies/tracing-supplies.co
                  EmployeeAssignationDetailComponent,
                  EmployeeAssignationComponent,
                  SuppliesComponent, SuppliesAddComponent, SuppliesUpdateComponent,
-                 SuppliesProjectionComponent,SuppliesProjectionAddComponent,
-                 TracingSuppliesComponent
+                 SuppliesProjectionComponent, SuppliesProjectionAddComponent,
+                 TracingSuppliesComponent, ConsolidatedProjectionComponent
               ],
               bootstrap: [ SuppliesComponent ],
               providers: [ SuppliesService, NavService, ListaService, SuppliesProjectionServices, EmployessSuppliesServices ],
