@@ -140,7 +140,7 @@ export class SuppliesProjectionComponent {
    }
 
    refer( s: SuppliesProjection ) {
-
+      this.router.navigate( [ 'supplies-projection/assignations/' + s.idProyeccionDotacion ] );
    }
 
 }

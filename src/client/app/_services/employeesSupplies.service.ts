@@ -93,7 +93,7 @@ export class EmployessSuppliesServices {
          }
       }
 
-      return this.authHttp.put( this.masterServiceProjectionSupply + 'bulk', JSON.stringify( supplies ) ).catch( this.handleError );
+      return this.authHttp.put( this.masterServiceProjectionSupply, JSON.stringify( supplies ) ).catch( this.handleError );
    }
 
    updateEmployeeAdditionalSupplies(addSupplies: EmployessSuppliesAdditional[]) {

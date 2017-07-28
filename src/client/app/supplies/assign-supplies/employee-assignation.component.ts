@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { EmployessSuppliesProjection } from '../../_models/employessSuppliesProjection';
 import { ActivatedRoute, Params } from '@angular/router';
 import { NavService } from '../../_services/_nav.service';
+import { ConfirmationService, Message } from 'primeng/primeng';
 import { EmployessSuppliesServices } from '../../_services/employeesSupplies.service';
 import { EmployessSuppliesProjectionSupply } from '../../_models/employessSuppliesProjectionSupply';
 import { EmployessSuppliesAdditional } from '../../_models/employessSuppliesAdditional';
@@ -22,9 +24,13 @@ export class EmployeeAssignationComponent implements OnInit {
    public es: any;
    private assignState: ListaItem;
    private someSuppliesAreWrong = false;
+   private deliverState: ListaItem;
+   private empProyectionStates: ListaItem[] = [];
 
    constructor( private _emplSupplies: EmployessSuppliesServices,
       private route: ActivatedRoute,
+      private location: Location,
+      private confirmationService: ConfirmationService,
       private listaService: ListaService,
       private navService: NavService ) {
    }
@@ -44,29 +50,32 @@ export class EmployeeAssignationComponent implements OnInit {
 
       this.minDate = new Date();
 
-      this.route.params.subscribe( ( params: Params ) => {
-         this._emplSupplies.getEmployeeProjection( params[ 'idEmployeeAssign' ] ).subscribe( res => {
-            this.employessAssign = res;
+      this.listaService.getMasterDetails( 'ListasEstadosProyeccionesTerceros' ).subscribe( res => {
+         this.empProyectionStates = res;
 
-            // load all additional supplies of the employee
-            this._emplSupplies.getAllAdditionalUnasignedByIdEmployeeAndProjection( this.employessAssign.idProyeccionDotacion,
-                                                                                   this.employessAssign.idTercero )
-            .subscribe( additionals => {
-               this.employeeAditionalSupplies = additionals;
+         this.assignState = this.empProyectionStates.find( s => s.codigo === 'ASIG' );
+         this.deliverState = this.empProyectionStates.find( s => s.codigo === 'ENTRE' );
+         // Se consulta la proyeccion del trabajador
+         this.route.params.subscribe( ( params: Params ) => {
+            this._emplSupplies.getEmployeeProjection( params[ 'idEmployeeAssign' ] ).subscribe( res => {
+               this.employessAssign = res;
+
+               // load all additional supplies of the employee
+               this._emplSupplies.getAllAdditionalUnasignedByIdEmployeeAndProjection( this.employessAssign.idProyeccionDotacion,
+                                                                                      this.employessAssign.idTercero )
+               .subscribe( additionals => {
+                  this.employeeAditionalSupplies = additionals;
+               } );
+
+               // load all supplies of the employee
+               this._emplSupplies.getAllSuppliesByEmployeeProjection( this.employessAssign.idProyeccionDotacionTerceros ).subscribe(
+                  supplies => {
+                     this.employeeSupplies = supplies;
+                  }
+               );
+
             } );
-
-            // load all supplies of the employee
-            this._emplSupplies.getAllSuppliesByEmployeeProjection( this.employessAssign.idProyeccionDotacionTerceros ).subscribe(
-               supplies => {
-                  this.employeeSupplies = supplies;
-               }
-            );
-
          } );
-      } );
-
-      this.listaService.getMasterDetailsByCode( 'ListasEstadosProyeccionesTerceros', 'ASIG' ).subscribe( res => {
-         this.assignState = res;
       } );
    }
 
@@ -77,20 +86,42 @@ export class EmployeeAssignationComponent implements OnInit {
    }
 
    assignProjection() {
-      if ( this.checkEmptySupplies() ) {
+      this.confirmationService.confirm( {
+                                           message: ` ¿Está seguro de confirmar la asignación?`,
+                                           header: 'Confirmación',
+                                           icon: 'fa fa-question-circle',
+                                           accept: () => {
+                                              this.updatePrjection();
+                                           }
+                                        } );
+   }
+
+   updatePrjection() {
+      if ( !this.checkEmptySupplies() ) {
          this.someSuppliesAreWrong = false;
-         this._emplSupplies.updateEmployeeSupplies( this.employeeSupplies ).subscribe( resSupplies => {
+
+         if ( this.employessAssign.idEstado !== this.assignState.idLista ) {
+            //Si no tiene estado asignado se define asignado
+            this.employessAssign.idEstado = this.assignState.idLista;
+
+            for( let s of this.employeeSupplies){
+               s.cantidadEntregada = s.cantidadAsignada;
+            }
+         } else if ( this.employessAssign.idEstado === this.assignState.idLista ) {
+            //Si el estado es asignado lo pasa a entregado
+            this.employessAssign.idEstado = this.deliverState.idLista;
+         }
+
+         this._emplSupplies.updateEmployeeSupplies( this.employeeSupplies )
+         .subscribe( resSupplies => {
             if ( resSupplies ) {
-               if ( this.assignState ) {
-                  this.employessAssign.idEstado = this.assignState.idLista;
-                  this._emplSupplies.updateProjection( this.employessAssign ).subscribe( resProj => {
+               this._emplSupplies.updateProjection( this.employessAssign )
+                  .subscribe( resProj => {
                      if ( resProj ) {
                         this.navService.setMesage( 2 );
+                        this.location.back();
                      }
                   } );
-               } else {
-                  this.navService.setMesage( 3 );
-               }
             } else {
                this.navService.setMesage( 3 );
             }
@@ -102,13 +133,28 @@ export class EmployeeAssignationComponent implements OnInit {
       }
    }
 
-   private checkEmptySupplies() : boolean {
+   private checkEmptySupplies(): boolean {
       let wrong = false;
-      for(let supplie of this.employeeSupplies){
-         if(supplie.cantidadAsignada === undefined || supplie.cantidadAsignada === null || supplie.cantidadAsignada === 0 ){
+      for ( let supplie of this.employeeSupplies ) {
+         if ( supplie.cantidadAsignada === undefined || supplie.cantidadAsignada === null || supplie.cantidadAsignada === 0 ) {
             wrong = true;
          }
       }
       return wrong;
+   }
+
+   goBack( fDirty: boolean ): void {
+      if ( fDirty ) {
+         this.confirmationService.confirm( {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this.location.back();
+                                              }
+                                           } );
+      } else {
+         this.location.back();
+      }
    }
 }
