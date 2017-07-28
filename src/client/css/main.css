@@ -569,6 +569,8 @@ body .ui-datatable thead th.ui-state-active{
 body .ui-datatable .ui-cell-data{
    word-break: break-all;
 }
+body .ui-datatable .ui-cell-data{
+}
 
 .datatable-order tr:first-child .btnUp{
    display: none;
@@ -1098,4 +1100,7 @@ body .ui-tabview{
 textarea {
    resize: vertical;
    overflow: auto;
+}
+#menuUsuario{
+   width: 310px;
 }

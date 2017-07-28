@@ -85,7 +85,7 @@
 										<div class="form-group col-md-12">
 											<label for="justification">* {{ 'REQUERIMIENTOPERSONAL.LBL_JUSTIFICACION' | translate }}:</label>
 											<textarea id="justification" name="justification" pInputTextarea
-											          [(ngModel)]="personnelRequirement.justificacion" (keyup)="capitalize()"
+											          [(ngModel)]="personnelRequirement.justificacion" (keyup)="capitalize($event)"
 											          #ngJustification="ngModel" maxlength="500" required></textarea>
 											<div class="ui-message ui-messages-error ui-corner-all"
 											     *ngIf="f.submitted && !ngJustification.valid">
@@ -140,7 +140,7 @@
 											</div>
 										</div>
 										<div class="form-group col-md-2" *ngIf="selectedPosition && idCargo !==0">
-											<label>{{'BTN_VISUALIZAR' | translate }}</label>
+											<label>{{'REQUERIMIENTOPERSONAL.BTN_VISUALIZAR' | translate }}</label>
 											<button icon="fa-eye" (click)="viewDetail(selectedPosition.idCargo)"
 											        pButton></button>
 										</div>
@@ -316,7 +316,7 @@
 											<div class="form-group col-md-12">
 												<label for="referedName">{{ 'REQUERIMIENTOPERSONAL.LBL_NOMBREREFERIDO' | translate }}:</label>
 												<input id="referedName" type="text" pInputText name="referedName"
-												       [(ngModel)]="requirementReferral.nombre"
+												       [(ngModel)]="requirementReferral.nombre" (keyup)="capitalize($event)" maxlength="100"
 												       #ngReferedName="ngModel" required/>
 												<div class="ui-message ui-messages-error ui-corner-all"
 												     *ngIf="rf.submitted && !ngReferedName.valid">
@@ -342,7 +342,7 @@
 											<div class="form-group col-md-12">
 												<label for="mailReferred">{{ 'REQUERIMIENTOPERSONAL.LBL_CORREOREFERIDO' | translate }}:</label>
 												<input id="mailReferred" type="text" pInputText name="mailReferred"
-												       [(ngModel)]="requirementReferral.correoElectronico"
+												       [(ngModel)]="requirementReferral.correoElectronico" maxlength="50"
 												       #ngMailReferred="ngModel" required
 												       pattern="[a-z0-9]+([-._]?[a-z0-9]+)+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"
 												       (keyup)="emailCleanUp($event.target.value)"

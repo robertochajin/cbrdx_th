@@ -6,7 +6,7 @@ export class EmployessSuppliesAdditional {
    public idTerceroDotacionAdicional: number;
    public idTercero: number;
    public idDotacion: number;
-   public dotacion: number;
+   public dotacion: string;
    public idProyeccionDotacion: number;
    public cantidadDotacion: number = 0;
    public idTalla: number;

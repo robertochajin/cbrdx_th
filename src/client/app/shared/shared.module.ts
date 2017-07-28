@@ -47,17 +47,7 @@ export class SharedModule {
       this._window = windowRef.nativeWindow;
 
       router.events.subscribe( ( val ) => {
-
-         // console.log(val);
-         if(val.url) {
-            // console.log(val.url);
-         }
-
-
-
          if ( val instanceof NavigationEnd ) {
-
-           //  console.log(' -- NavigationEnd Rulez --');
 
             // Fix Footer -
             setTimeout( () => {
@@ -68,13 +58,12 @@ export class SharedModule {
             //jQuery( '#wrapper' ).animate( { scrollTop: 0 }, 'fast' );
 
             // Focus Primer campo
-            jQuery( 'input[type=text]:enabled:visible:first' ).select().focus();
+            jQuery( 'input[type=text]:enabled:visible, p-dropdown>input:first' ).first().select().focus();
 
             // Focus primer invalid campo
             setTimeout( () => {
                jQuery( 'button' ).click( function () {
                   setTimeout( () => {
-
 
                      if ( jQuery( 'input.ng-invalid' ).length > 0 ) {
 

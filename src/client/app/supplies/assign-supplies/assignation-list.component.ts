@@ -7,6 +7,8 @@ import { SelectItem } from 'primeng/primeng';
 import { PositionsService } from '../../_services/positions.service';
 import { TipoDeAreaService } from '../../_services/tipoDeArea.service';
 import { OrganizationalStructureService } from '../../_services/organizationalStructure.service';
+import { ListaItem } from '../../_models/listaItem';
+import { ListaService } from '../../_services/lista.service';
 
 @Component( {
                moduleId: module.id,
@@ -24,10 +26,15 @@ export class AssignationListComponent implements OnInit {
    positions: SelectItem[] = [];
    typeArea: SelectItem[] = [];
    area: SelectItem[] = [];
+   private notDefinedState: ListaItem;
+   private assignState: ListaItem;
+   private deliverState: ListaItem;
+   private empProyectionStates: ListaItem[] = [];
 
    constructor( private employessSuppliesServices: EmployessSuppliesServices,
       private router: Router,
       private route: ActivatedRoute,
+      private listaService: ListaService,
       private positionsService: PositionsService,
       private tipoDeAreaService: TipoDeAreaService,
       private organizationalStructureService: OrganizationalStructureService,
@@ -55,10 +62,19 @@ export class AssignationListComponent implements OnInit {
          } );
       } );
       this.route.params.subscribe( ( params: Params ) => {
-         this.employessSuppliesServices.getAllEmployeesSuppliesByProjection( params[ 'idProjection' ] ).subscribe( list => {
-            this.projectedEmployess = list;
-         } );
-      } );
+         this.listaService.getMasterDetails( 'ListasEstadosProyeccionesTerceros' ).subscribe( res => {
+            this.empProyectionStates = res;
+            this.notDefinedState = this.empProyectionStates.find( s => s.codigo === 'PORASIG' );
+            this.assignState = this.empProyectionStates.find( s => s.codigo === 'ASIG' );
+            this.deliverState = this.empProyectionStates.find( s => s.codigo === 'ENTRE' );
+
+            this.employessSuppliesServices.getAllEmployeesSuppliesByProjection( params['idProjection'] ).subscribe( list => {
+               this.projectedEmployess = list;
+            } );
+         });
+      });
+
+
    }
 
    add() {
