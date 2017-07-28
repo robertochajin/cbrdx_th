@@ -44,7 +44,7 @@
 					<button type="button" class="ui-button btn" icon="fa-eye" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
 					        pButton (click)="detail(item)"
 					></button>
-					<button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip"
+					<button  *ngIf="item.idEstado === assignState.idLista" type="button" class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip"
 					        title="{{'BTN_EDITAR' | translate}}"
 					        pButton (click)="update(item)"
 					></button>

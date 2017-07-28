@@ -70,6 +70,9 @@ export class EmployeeAssignationComponent implements OnInit {
                // load all supplies of the employee
                this._emplSupplies.getAllSuppliesByEmployeeProjection( this.employessAssign.idProyeccionDotacionTerceros ).subscribe(
                   supplies => {
+                     supplies.map(s => {
+                        s.indicadorEntregado = s.indicadorHabilitado;
+                     });
                      this.employeeSupplies = supplies;
                   }
                );
@@ -80,9 +83,17 @@ export class EmployeeAssignationComponent implements OnInit {
    }
 
    toggleSupply( supply: EmployessSuppliesProjectionSupply ) {
-      if ( !supply.indicadorHabilitado ) {
-         supply.cantidadAsignada = 1;
+
+      if(this.assignState.idLista === this.employessAssign.idEstado) {
+         if ( !supply.indicadorEntregado ) {
+            supply.cantidadEntregada = 0;
+         }
+      } else {
+         if ( !supply.indicadorHabilitado ) {
+            supply.cantidadAsignada = 1;
+         }
       }
+
    }
 
    assignProjection() {
@@ -110,6 +121,10 @@ export class EmployeeAssignationComponent implements OnInit {
          } else if ( this.employessAssign.idEstado === this.assignState.idLista ) {
             //Si el estado es asignado lo pasa a entregado
             this.employessAssign.idEstado = this.deliverState.idLista;
+
+            for( let s of this.employeeSupplies){
+               s.indicadorHabilitado = s.indicadorEntregado;
+            }
          }
 
          this._emplSupplies.updateEmployeeSupplies( this.employeeSupplies )
@@ -136,7 +151,8 @@ export class EmployeeAssignationComponent implements OnInit {
    private checkEmptySupplies(): boolean {
       let wrong = false;
       for ( let supplie of this.employeeSupplies ) {
-         if ( supplie.cantidadAsignada === undefined || supplie.cantidadAsignada === null || supplie.cantidadAsignada === 0 ) {
+         if (( supplie.cantidadAsignada === undefined || supplie.cantidadAsignada === null || supplie.cantidadAsignada === 0) &&
+               (supplie.indicadorHabilitado && supplie.indicadorEntregado)) {
             wrong = true;
          }
       }
