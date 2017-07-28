@@ -518,7 +518,7 @@ const routes = [
    // proyección de dotaciones
    { path: 'supplies-projection', component: SuppliesProjectionComponent },
    { path: 'supplies-projection/add', component: SuppliesProjectionAddComponent },
-   { path: 'supplies-projection/update/:id', component: ConsolidatedProjectionComponent }
+   { path: 'supplies-projection/update/:id', component: ConsolidatedProjectionComponent },
 
    // seguimiento de dotaciones
    { path: 'tracing-supplies', component: TracingSuppliesComponent },
