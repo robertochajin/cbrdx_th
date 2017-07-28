@@ -155,7 +155,8 @@ export class DocumentManagementAddComponent implements OnInit {
 
    onBeforeSend( event: any ) {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "'}";
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "', 'ruta':" +
+                " '/Gestionamos/Documentos Descarga' }";
       event.formData.append( 'obj', obj.toString() );
    }
 
@@ -170,7 +171,9 @@ export class DocumentManagementAddComponent implements OnInit {
 
    downloadFile( id: number ) {
       this.adjuntosService.downloadFile( id ).subscribe( res => {
-         window.location.assign( res );
+         this.adjuntosService.getFileName( id ).subscribe( adj => {
+            saveAs( res, adj.nombreArchivo );
+         } );
       } );
    }
 

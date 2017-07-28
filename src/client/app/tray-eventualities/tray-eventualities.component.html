@@ -1,6 +1,7 @@
 <div *ngIf="!detailEventuality">
 	<div *ngIf="!editEventuality">
 		<div *ngIf="!saveEventuality">
+			<p-panel header="{{ 'NOVEDADES.LBL_FILTROS' | translate }}">
 			<form (ngSubmit)="f.valid " #f="ngForm" novalidate id="formulario">
 				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 					<div class="ui-grid-row">
@@ -30,7 +31,7 @@
 						</div>
 					</div>
 					<div class="ui-grid-row">
-						<div class="ui-grid-col-3">
+						<div class="ui-grid-col-4">
 							<label for="tipoNovedad">{{ 'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}</label>
 							<p-dropdown id="tipoNovedad" name="tipoNovedad"
 							            [options]="ListaTipos" [autoWidth]="false"
@@ -46,7 +47,7 @@
 							            (onChange)="dt.filter($event.value,'novedad','startsWith')"
 							></p-dropdown>
 						</div>
-						<div class="ui-grid-col-5">
+						<div class="ui-grid-col-4">
 							<label for="nombreTerceroReporta">{{ 'EMPLOYEENOVELTY.LBL_REPORTADOPOR' | translate }}</label>
 							<p-dropdown id="nombreTerceroReporta" name="nombreTerceroReporta"
 							            [options]="ListaReporta" [autoWidth]="false" filter="filter"
@@ -56,7 +57,7 @@
 						</div>
 					</div>
 					<div class="ui-grid-row">
-						<div class="ui-grid-col-3">
+						<div class="ui-grid-col-4">
 							<label for="fInicio">{{ 'EMPLOYEENOVELTY.LBL_FECHASOLICITUD' | translate }}</label>
 							<p-calendar [locale]="es" [showIcon]="true"
 							            id="fInicio" name="fInicio"
@@ -71,7 +72,7 @@
 							        (click)="clearDate()"
 							        icon="fa-close"></button>
 						</div>
-						<div class="ui-grid-col-3">
+						<div class="ui-grid-col-4">
 							<label for="fFinal">{{ 'EMPLOYEENOVELTY.LBL_FECHASOLICITUD' | translate }}</label>
 							<p-calendar [locale]="es" [showIcon]="true"
 							            id="fFinal" name="fFinal"
@@ -80,7 +81,7 @@
 							            [(ngModel)]="fechaFin" (onSelect)="changeDate();"
 							></p-calendar>
 						</div>
-						<div class="ui-grid-col-5">
+						<div class="ui-grid-col-4">
 							<label for="nombreTercero">{{ 'EMPLOYEES.LBL_COLABORADOR' | translate }}</label>
 							<p-dropdown id="nombreTercero" name="nombreTercero"
 							            [options]="ListaColaborador" [autoWidth]="false" filter="filter"
@@ -91,6 +92,10 @@
 					</div>
 				</div>
 			</form>
+			</p-panel>
+			<div class="col-md-12">
+				<br>
+			</div>
 			<div class="row datable-header">
 				<div class="col-md-6 col-xs-12 datatable-header-add">
 					<button type="button" icon="fa-plus" label="{{'EMPLOYEENOVELTY.LBL_AGREGAR' | translate }}"
@@ -119,13 +124,14 @@
 				<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 					<template let-datos="rowData" pTemplate="body">
 						<button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip"
-						        title="{{'BTN_INACTIVAR' | translate}}"
+						        title="{{'BTN_VISUALIZAR' | translate}}"
 						        pButton (click)="detail(datos)"></button>
-						<button *ngIf="datos.codigoNovedad==='SOLICI' || datos.codigoNovedad==='DEVUEL'" type="button" icon="fa-pencil"
+						<button *ngIf="datos.codigoNovedad!=='RECHZ' && datos.codigoNovedad!=='TRAMIT' &&  datos.codigoNovedad!=='CANCEL'"
+						        type="button" icon="fa-pencil"
 						        class="ui-button-success" data-toggle="tooltip"
 						        title="{{'BTN_EDITAR' | translate}}"
 						        pButton (click)="update(datos)"></button>
-						<button *ngIf="datos.idTerceroReporta === idTercero" type="button" icon="fa-external-link"
+						<button *ngIf="datos.codigoNovedad!=='RECHZ' && datos.codigoNovedad!=='TRAMIT' &&  datos.codigoNovedad!=='CANCEL'" type="button" icon="fa-external-link"
 						        class="ui-button-success" data-toggle="tooltip"
 						        title="{{'EMPLOYEENOVELTY.BTN_TRAMITAR' | translate}}"
 						        pButton (click)="refer(datos)"></button>

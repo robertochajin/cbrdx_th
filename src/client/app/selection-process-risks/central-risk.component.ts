@@ -16,6 +16,7 @@ import { SelectItem, ConfirmationService } from 'primeng/primeng';
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
 import { JwtHelper } from 'angular2-jwt';
+import { AdjuntosService } from '../_services/adjuntos.service';
 
 @Component( {
                moduleId: module.id,
@@ -59,7 +60,8 @@ export class CentralRiskComponent implements OnInit {
       private vacanciesService: VacanciesService,
       private candidateProcessService: CandidateProcessService,
       private confirmationService: ConfirmationService,
-      private selectionStepService: SelectionStepService ) {
+      private selectionStepService: SelectionStepService,
+      private adjuntosService: AdjuntosService ) {
 
       let token = localStorage.getItem( 'token' );
       if ( token !== null ) {
@@ -145,10 +147,15 @@ export class CentralRiskComponent implements OnInit {
    ngOnInit() {
    }
 
-   showDialogo( obj: any ) {
-      this.displayDialog = true;
-      this.url = obj.url;
-      this.title = obj.nombre;
+   showDialogo( obj: CentralRisk ) {
+      console.log(obj);
+      this.adjuntosService.downloadFile( obj.idAdjunto ).subscribe( res => {
+         let blob_url = URL.createObjectURL( res );
+
+         this.url = blob_url;
+         this.title = obj.nombre;
+         this.displayDialog = true;
+      } );
    }
 
    onBeforeSend( event: any, data: CentralRisk ) {
@@ -253,11 +260,13 @@ export class CentralRiskComponent implements OnInit {
    }
 
    previewFile( f: CentralRisk ) {
-      // let link = 'https://www.subes.sep.gob.mx/archivos/tutor/manual_general.pdf';
-      this.url = this.previewUrl + '/' + f.idAdjunto;
-      this.title = f.nombre;
-      this.displayDialog = true;
+      this.adjuntosService.downloadFile( f.idAdjunto ).subscribe( res => {
+         let blob_url = URL.createObjectURL( res );
 
+         this.url = blob_url;
+         this.title = f.nombre;
+         this.displayDialog = true;
+      } );
    }
 
    downloadFile( f: CentralRisk ) {
