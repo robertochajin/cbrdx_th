@@ -209,6 +209,7 @@ import { AssignationListComponent } from './supplies/assign-supplies/assignation
 import { EmployeeAssignationComponent } from './supplies/assign-supplies/employee-assignation.component';
 import { EmployeeAssignationDetailComponent } from './supplies/assign-supplies/employee-assignation-detail.component';
 import { TracingSuppliesComponent } from './supplies/tracing-supplies/tracing-supplies.component';
+import { AccidentIncidentComponent } from './accidents-e-incidents/accidents-incidents.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -520,6 +521,9 @@ const routes = [
 
    // seguimiento de dotaciones
    { path: 'tracing-supplies', component: TracingSuppliesComponent },
+
+   // accidentes-incidentes
+   { path: 'accidents-incidents', component: AccidentIncidentComponent },
 
 
 

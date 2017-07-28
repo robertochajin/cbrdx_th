@@ -16,12 +16,13 @@ export class AccidentIncidentComponent {
    listUsers: SelectItem [] = [];
    busqueda: string;
    idUsuario: number;
+   listAccidentIncident: any[];
 
    constructor(
       private router: Router,
       private _nav: NavService,
       private confirmationService: ConfirmationService ) {
-      this.busqueda = _nav.getSearch( 'supplies-projection' );
+      this.busqueda = _nav.getSearch( 'accidents-incidents' );
    }
 
    ngOnInit() {
