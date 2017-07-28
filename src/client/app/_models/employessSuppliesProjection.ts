@@ -16,6 +16,7 @@ export class EmployessSuppliesProjection {
    public fechaPosibleEntrega: Date;
    public comentario: string;
    public comentarioAdicional: string;
+   public comentarioEntrega: string;
    public indicadorHabilitado: boolean = true;
    public indicadorAdicional: boolean = false;
    public auditoriaUsuario: number;
