@@ -50,9 +50,8 @@ export class EmployessSuppliesServices {
    }
 
    getAllEmployeesSuppliesByProjection( idProjection: number ) {
-      // return this.authHttp.get( this.masterServiceProjection + 'proyeccion/' + idProjection)
-      return this.authHttp.get( this.masterServiceProjection )
-      .map( ( res: Response ) => res.json() as EmployessSuppliesProjection[] );
+       return this.authHttp.get( this.masterServiceProjection + 'proyeccionDotacion/' + idProjection + '/enabled')
+         .map( ( res: Response ) => res.json() as EmployessSuppliesProjection[] );
    }
 
    getAllEmployeesSupplies() {

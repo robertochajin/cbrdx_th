@@ -10,6 +10,7 @@ import { Supplies } from '../../_models/supplies';
 import { OrganizationalStructureService } from '../../_services/organizationalStructure.service';
 import { OrganizationalStructure } from '../../_models/organizationalStructure';
 import { SuppliesProjectionServices } from '../../_services/suppliesProjection.service';
+import { ConstanteService } from '../../_services/constante.service';
 
 @Component( {
                moduleId: module.id,
@@ -37,6 +38,7 @@ export class SuppliesProjectionAddComponent implements OnInit {
       private suppliesService: SuppliesService,
       private organizationalStructureService: OrganizationalStructureService,
       private location: Location,
+      private constanteService: ConstanteService,
       private suppliesProjectionServices: SuppliesProjectionServices,
       private confirmationService: ConfirmationService,
       private _nav: NavService, ) {
@@ -67,6 +69,10 @@ export class SuppliesProjectionAddComponent implements OnInit {
       this.minDateInicio = today;
       this.minDateFin = today;
       this.rangeFin = `${last40Year}:${next40Year}`;
+
+      this.constanteService.getByCode( 'DOTMES' ).subscribe( c => {
+         this.suppliesProjection.cantidadMeses = Number(c.valor);
+      });
    }
 
    onSubmit() {
