@@ -468,7 +468,8 @@
       "LBL_MENUPRINCIPAL": "MENÚ PRINCIPAL",
       "LBL_USUARIODESDE":"Última Actualización",
       "LBL_TEMASDISPONIBLES": "Temas Disponible",
-      "LBL_EDITARCONTRASENA":"Actualizar Perfil",
+      "LBL_EDITARCONTRASENA":"Actualizar Contraseña",
+      "LBL_ACTUALIZAPERFIL": "Actualizar Perfil",
       "LBL_CERRARSESION": "Cerrar Sesión"
    },
 

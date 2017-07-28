@@ -1099,3 +1099,6 @@ textarea {
    resize: vertical;
    overflow: auto;
 }
+#menuUsuario{
+   width: 310px;
+}
