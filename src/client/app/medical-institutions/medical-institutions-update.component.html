@@ -58,7 +58,8 @@
 										<label for="telefonoFijo">* {{'MEDICALINSTITUTION.LBL_TELEFONO' | translate }}</label>
 										<p-inputMask id="telefonoFijo" name="telefonoFijo"
 										             mask="?(999) 999-9999 Ext 9999" placeholder="(999) 999-9999 Ext 99999" #telefonoFijo="ngModel"
-										             required [(ngModel)]="medicalInstitution.telefonoContacto" type="text" onKeyUp="this.value = this.value.toUpperCase();"
+										             required [(ngModel)]="medicalInstitution.telefonoContacto" type="text"
+										             onKeyUp="this.value = this.value.toUpperCase();"
 
 										></p-inputMask>
 										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !telefonoFijo.valid">
@@ -189,8 +190,8 @@
 								<input id="valorviaje" name="valorviaje" #valorv="ngModel" pInputText
 								       type="text" [required]="medicalInstitutionStructure.indicadorViaja"
 								       [(ngModel)]="medicalInstitutionStructure.valorViaje" maxlength="9"
-										 currencyMask
-										 [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
+								       currencyMask
+								       [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
 								       (keyup)="inputNumber()"/>
 								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="fs.submitted && !valorv.valid ">
 									<i class="fa fa-close"></i>

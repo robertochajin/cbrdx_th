@@ -227,7 +227,7 @@
             <position-roles (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-roles>
          </p-accordionTab>
 	      <p-accordionTab header="{{ 'POSITION.LBL_RESPONSABILIDADESPRINCIPALES' | translate }}" [selected]="acordion === 4"
-	                      *hasPermission ="seccion6 ? seccion6 : defaultCampo"
+	                      *hasPermission="seccion6 ? seccion6 : defaultCampo"
 	                      [disabled]="step >0 && step <5">
 		      <fieldset>
 			      <div *ngIf="position">
@@ -237,7 +237,8 @@
 							      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 								
 								      <div class="row">
-									      <div class=" col-sm-12" *hasPermission ="seccion6.RESPONSABILIDADESAD ? seccion6.RESPONSABILIDADESAD : defaultCampo">
+									      <div class=" col-sm-12"
+									           *hasPermission="seccion6.RESPONSABILIDADESAD ? seccion6.RESPONSABILIDADESAD : defaultCampo">
 										      <label for="responsabilidadesAd">* {{ 'POSITION.LBL_RESPONSABILIDADESPRINCIPALES' | translate
 											      }}</label>
 										      <textarea pInputTextarea id="responsabilidadesAd"
@@ -265,15 +266,15 @@
 		
 		      </fieldset>
 	      </p-accordionTab>
-         <p-accordionTab header="{{ 'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' | translate }}" [selected]="acordion === 5"
-                         *hasPermission ="seccion5 ? seccion5 : defaultCampo"
-                         [disabled]="step >0 && step <6">
-            <position-responsabilities (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-responsabilities>
+	      <p-accordionTab header="{{ 'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' | translate }}" [selected]="acordion === 5"
+	                      *hasPermission="seccion5 ? seccion5 : defaultCampo"
+	                      [disabled]="step >0 && step <6">
+		      <position-responsabilities (nextStep)="nextStep($event)" *ngIf="position.idCargo"
+		                                 [position]="position"></position-responsabilities>
          </p-accordionTab>
-
-        
-
-         <p-accordionTab header="{{ 'POSITION.LBL_POSICION' | translate }}" [selected]="acordion === 6"
+	
+	
+	      <p-accordionTab header="{{ 'POSITION.LBL_POSICION' | translate }}" [selected]="acordion === 6"
                          *hasPermission ="seccion7 ? seccion7 : defaultCampo"
                          [disabled]="step >0 && step <7">
             <position-absence (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-absence>

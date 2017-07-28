@@ -71,8 +71,8 @@ export class SuppliesProjectionAddComponent implements OnInit {
       this.rangeFin = `${last40Year}:${next40Year}`;
 
       this.constanteService.getByCode( 'DOTMES' ).subscribe( c => {
-         this.suppliesProjection.cantidadMeses = Number(c.valor);
-      });
+         this.suppliesProjection.cantidadMeses = Number( c.valor );
+      } );
    }
 
    onSubmit() {

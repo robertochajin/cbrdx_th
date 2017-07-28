@@ -28,7 +28,7 @@
 					
 					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 						
-						<div class="row" >
+						<div class="row">
 							<div class="form-group col-md-1"></div>
 							<div class="form-group col-md-4">
 								<strong>{{ 'ASIGNARDOTACION.LBL_DOTACION' | translate }}</strong>
@@ -64,7 +64,7 @@
 								<p-inputSwitch *ngIf="supp.indicadorHabilitado" name="asigna{{i}}" onLabel="Si" offLabel="No"
 								               [(ngModel)]="supp.indicadorEntregado"
 								               (onChange)="toggleSupply(supp)"></p-inputSwitch>
-								<label *ngIf="!supp.indicadorHabilitado" >{{ 'No asignado' }}</label>
+								<label *ngIf="!supp.indicadorHabilitado">{{ 'No asignado' }}</label>
 							</div>
 							<div *ngIf="assignState.idLista !== employessAssign.idEstado" class="form-group col-md-2">
 								<input *ngIf="supp.indicadorHabilitado" id="sdf{{i}}"
@@ -101,7 +101,7 @@
 				<p-panel header="{{ 'ASIGNARDOTACION.LBL_DOTACIONADICIONAL' | translate }}">
 					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 						
-						<div class="row" >
+						<div class="row">
 							<div class="form-group col-md-1"></div>
 							<div class="form-group col-md-4">
 								<strong>{{ 'ASIGNARDOTACION.LBL_DOTACION' | translate }}</strong>
@@ -131,7 +131,7 @@
 							<div class="form-group col-md-1"></div>
 						</div>
 						
-						<div *ngIf="assignState.idLista !== employessAssign.idEstado"  class="row">
+						<div *ngIf="assignState.idLista !== employessAssign.idEstado" class="row">
 							<div class="form-group col-md-12">
 								<label for="aditionalComment">{{ 'ASIGNARDOTACION.LBL_COMENTARIOADICIONAL' | translate }}:</label>
 								<textarea id="aditionalComment" name="aditionalComment" pInputTextarea
@@ -174,10 +174,10 @@
 							<label for="deliverComment">{{ 'ASIGNARDOTACION.LBL_COMENTARIOENTREGA' | translate }}:</label>
 							<textarea id="deliverComment" name="deliverComment" pInputTextarea
 							          [(ngModel)]="employessAssign.comentarioEntrega"
-							          #ngDeliverComment="ngModel" maxlength="200" ></textarea>
+							          #ngDeliverComment="ngModel" maxlength="200"></textarea>
 						</div>
 					</div>
-					
+				
 				</div>
 				
 				<div class="row form-footer-buttons">

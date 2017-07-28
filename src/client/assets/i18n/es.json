@@ -468,7 +468,7 @@
       "LBL_MENUPRINCIPAL": "MENÚ PRINCIPAL",
       "LBL_USUARIODESDE":"Última Actualización",
       "LBL_TEMASDISPONIBLES": "Temas Disponible",
-      "LBL_EDITARCONTRASENA":"Actualizar Contraseña",
+      "LBL_EDITARCONTRASENA": "Actualizar Contraseña",
       "LBL_ACTUALIZAPERFIL": "Actualizar Perfil",
       "LBL_CERRARSESION": "Cerrar Sesión"
    },
@@ -793,15 +793,15 @@
       "MSG_PLAZASREQ":"Número de plazas es requerido",
       "MSG_PLAZASMAX":"Número de plazas máximo es 9999",
       "MSG_ASIGNACOLABORADORCARGO":"Asignando colaborador al cargo",
-      "LBL_ESTRUCTFISICA":"Estructura Fisica",
-      "MSG_SINPERMISOSPARAVISUALIZAR":"No se muestra el árbol, ya que NO cuentas con las condiciones necesarias para mostrar funcionalidad./nPor favor comuníquese con el administrador del sistema."
+      "LBL_ESTRUCTFISICA": "Estructura Fisica",
+      "MSG_SINPERMISOSPARAVISUALIZAR": "No se muestra el árbol, ya que NO cuentas con las condiciones necesarias para mostrar funcionalidad./nPor favor comuníquese con el administrador del sistema."
 
    },
 
    "REQUERIMIENTOPERSONAL": {
       "LBL_REQUERIMIENTOPERSONAL":"Requerimiento de personal",
       "BTN_AGREGARNUEVO": "Agregar nuevo requerimiento de personal",
-      "BTN_AGREGARNUEVOREF":"Agregar nuevo referido",
+      "BTN_AGREGARNUEVOREF": "Agregar nuevo referido",
       "LBL_DATOSSOLICITUD":"Datos básicos de la solicitud",
       "LBL_DATOSSOLICITANTE":"Datos Solicitante",
       "LBL_NOMBRESOLICITANTE":"Nombre del Solicitante",
@@ -931,7 +931,7 @@
       "LBL_OBSERVACION" : "Observación",
       "LBL_NOMBREJEFEINMEDIATO":"jefe Directo",
       "LBL_TIPOTRABAJO":"Tipo de trabajo",
-      "LBL_LUGARTRABAJO":"Lugar de trabajo",
+      "LBL_LUGARTRABAJO": "Lugar de trabajo",
       "LBL_COMPETENCIAS":"Competencias laborales",
       "LBL_OBSERVACIONES":"Observaciones",
       "LBL_FORMACIONEDUCATIVA":"Formación educativa",
