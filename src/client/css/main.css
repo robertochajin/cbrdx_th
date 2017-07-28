@@ -1104,3 +1104,8 @@ textarea {
 #menuUsuario{
    width: 310px;
 }
+
+/* -- Row border -- */
+.row-border {
+   border-bottom: 1px solid #ccc;
+}

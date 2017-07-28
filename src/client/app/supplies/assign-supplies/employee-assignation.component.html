@@ -28,7 +28,7 @@
 					
 					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 						
-						<div class="row" >
+						<div class="row row-border" >
 							<div class="form-group col-md-1"></div>
 							<div class="form-group col-md-4">
 								<strong>{{ 'ASIGNARDOTACION.LBL_DOTACION' | translate }}</strong>
@@ -48,7 +48,7 @@
 							<div class="form-group col-md-1"></div>
 						</div>
 						
-						<div class="row" *ngFor="let supp of employeeSupplies; let i = index">
+						<div class="row row-border" *ngFor="let supp of employeeSupplies; let i = index">
 							<div class="form-group col-md-1"></div>
 							<div class="form-group col-md-4">
 								{{supp.dotacion}}
@@ -101,7 +101,7 @@
 				<p-panel header="{{ 'ASIGNARDOTACION.LBL_DOTACIONADICIONAL' | translate }}">
 					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 						
-						<div class="row" >
+						<div class="row row-border" >
 							<div class="form-group col-md-1"></div>
 							<div class="form-group col-md-4">
 								<strong>{{ 'ASIGNARDOTACION.LBL_DOTACION' | translate }}</strong>
@@ -116,7 +116,7 @@
 							<div class="form-group col-md-1"></div>
 						</div>
 						
-						<div class="row" *ngFor="let addSupp of employeeAditionalSupplies; let i = index">
+						<div class="row row-border" *ngFor="let addSupp of employeeAditionalSupplies; let i = index">
 							<div class="form-group col-md-1"></div>
 							<div class="form-group col-md-4">
 								{{addSupp.dotacion}}
