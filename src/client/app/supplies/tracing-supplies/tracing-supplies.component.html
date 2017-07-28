@@ -1,0 +1,55 @@
+<div>
+	<div class="row datable-header">
+		<div class="col-md-6 col-xs-12 col-md-offset-6 datatable-header-search">
+			<div class="input-group">
+				<div class="input-group-addon"><i class="fa fa-search"></i></div>
+				<input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control"
+				       [(ngModel)]="busqueda" (change)="setSearch()">
+			</div>
+		</div>
+	</div>
+	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="projectedEmployess" [paginator]="true" [rows]="10"
+	             styleClass="table-overflow" [responsive]="true" [globalFilter]="gb" #dt>
+		<p-column field="documento" header="{{ 'ASIGNARDOTACION.LBL_ID' | translate }}" [sortable]="true"></p-column>
+		<p-column field="nombreCompleto" header="{{ 'ASIGNARDOTACION.LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
+		<p-column field="cargo" header="{{ 'ASIGNARDOTACION.LBL_CARGO' | translate }}" [filter]="true" filterMatchMode="equals">
+			<template pTemplate="filter" let-col>
+				<p-dropdown [options]="positions" [(ngModel)]="positionFilter" [style]="{'width':'100%'}"
+				            (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+			</template>
+		</p-column>
+		<p-column field="area" header="{{ 'ASIGNARDOTACION.LBL_AREA' | translate }}" [filter]="true" filterMatchMode="equals">
+			<template pTemplate="filter" let-col>
+				<p-dropdown [options]="area" [(ngModel)]="areaFilter" [style]="{'width':'100%'}"
+				            (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+			</template>
+		</p-column>
+		<p-column field="tipoArea" header="{{ 'ASIGNARDOTACION.LBL_TIPOAREA' | translate }}" [filter]="true" filterMatchMode="equals">
+			<template pTemplate="filter" let-col>
+				<p-dropdown [options]="typeArea" [(ngModel)]="typeFilter" [style]="{'width':'100%'}"
+				            (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+			</template>
+		</p-column>
+		<p-column field="fechaEntrega" header="{{ 'ASIGNARDOTACION.LBL_FECHAASIGNACION' | translate }}" [sortable]="true"></p-column>
+		<p-column field="fechaPosibleEntrega" header="{{ 'ASIGNARDOTACION.LBL_FECHAENTREGA' | translate }}" [sortable]="true"></p-column>
+		<p-column field="estado" header="{{ 'ASIGNARDOTACION.LBL_ESTADO' | translate }}" [filter]="true" filterMatchMode="equals">
+			<template pTemplate="filter" let-col>
+				<p-dropdown [options]="states" [(ngModel)]="statesFilter" [style]="{'width':'100%'}"
+				            (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+			</template>
+		</p-column>
+		<p-column header="Acciones" styleClass="datatable-col-action">
+			<template let-item="rowData" pTemplate="body">
+				<div class="btn-group" role="group">
+					<button type="button" class="ui-button btn" icon="fa-eye" data-toggle="tooltip" title="{{'BTN_VISUALIZAR' | translate}}"
+					        pButton (click)="detail(item)"
+					></button>
+					<button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip"
+					        title="{{'BTN_EDITAR' | translate}}"
+					        pButton (click)="update(item)"
+					></button>
+				</div>
+			</template>
+		</p-column>
+	</p-dataTable>
+</div>

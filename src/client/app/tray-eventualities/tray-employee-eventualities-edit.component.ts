@@ -188,7 +188,7 @@ export class EmployeeEventualitiesTrayAddComponent implements OnInit {
    }
 
    ngOnInit() {
-      this.employeesService.getAll().subscribe( res => {
+      this.employeesService.getEmployees().subscribe( res => {
          this.listEmployees.push( { label: 'Seleccione', value: null } );
          res.map( ( s: Employee ) => {
             this.listEmployees.push(
@@ -648,7 +648,9 @@ export class EmployeeEventualitiesTrayAddComponent implements OnInit {
 
    downloadFile( id: number ) {
       this.adjuntosService.downloadFile( id ).subscribe( res => {
-         window.location.assign( res );
+         this.adjuntosService.getFileName( id ).subscribe( adj => {
+            saveAs( res, adj.nombreArchivo );
+         } );
       } );
    }
 

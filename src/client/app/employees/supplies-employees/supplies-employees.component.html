@@ -1,0 +1,152 @@
+<h3 class="first">{{'SUPPLIES.LBL_SUPPLIESADITTIONAL' | translate}}</h3>
+<p-messages [(value)]="msgs"></p-messages>
+<div *ngIf="!showForm">
+	<div class="row datable-header">
+		<div class="col-md-6 col-xs-12 datatable-header-add">
+			<button type="button" icon="fa-plus"
+			        label="{{'LBL_NUEVA' | translate}} {{'SUPPLIES.LBL_SUPPLY' | translate}}"
+			        pButton (click)="add()"></button>
+		</div>
+		<div class="col-md-6 col-xs-12 datatable-header-search">
+			
+			<div class="input-group">
+				<div class="input-group-addon"><i class="fa fa-search"></i></div>
+				<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate}}" class="form-control"
+				       [(ngModel)]="busqueda" (change)="setSearch()">
+			</div>
+		
+		</div>
+	</div>
+	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listSuppliesAdditional" [paginator]="true" [rows]="10"
+	             [responsive]="true" [globalFilter]="gb">
+		<p-column field="dotacion" header="{{ 'SUPPLIES.LBL_SUPPLY' | translate}}" [sortable]="true"></p-column>
+		<p-column field="talla" header="{{ 'SUPPLIES.LBL_QUANTITY' | translate}}" [sortable]="true"></p-column>
+		<p-column field="cantidadDotacion" header="{{ 'SUPPLIES.LBL_QUANTITY' | translate}}" [sortable]="true"></p-column>
+		<p-column field="costo" header="{{ 'SUPPLIES.LBL_COST' | translate}}" [sortable]="true"></p-column>
+		<p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
+			<template let-datos="rowData" pTemplate="body">
+				<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip"
+				        title="{{'BTN_EDITAR' | translate}}"
+				        pButton (click)="update(datos)"
+				        *ngIf="datos.idProyeccionDotacion === null || datos.idProyeccionDotacion === undefined"
+				></button>
+				<button type="button" class="ui-button ui-button-danger btn" icon="fa-trash" data-toggle="tooltip"
+				        title="{{'BTN_INACTIVAR' | translate}}"
+				        pButton (click)="del(datos)"
+				        *ngIf="datos.idProyeccionDotacion === null || datos.idProyeccionDotacion === undefined"
+				></button>
+			</template>
+		</p-column>
+	</p-dataTable>
+</div>
+<fieldset *ngIf="showForm">
+	<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate>
+		<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-6">
+					<label for="dotacion">* {{ 'SUPPLIES.LBL_SUPPLY' | translate}}</label>
+					<p-dropdown id="dotacion" name="dotacion" required="true"
+					            [options]="listSupplies" [autoWidth]="false"
+					            [(ngModel)]="suppliesAdditional.idDotacion"
+					            #NGdotacion="ngModel"
+					            (onChange)="changeSupply()"
+					></p-dropdown>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !NGdotacion.valid ">
+						<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_SUPPLY' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+					</div>
+				</div>
+				<div class="ui-grid-col-3">
+					<label for="cantidad">* {{ 'SUPPLIES.LBL_QUANTITY' | translate}}</label>
+					<input type="number" pInputText id="cantidad" name="cantidad"
+					       [(ngModel)]="suppliesAdditional.cantidadDotacion" min="0" max="99999"
+					       #NGnombre="ngModel" required/>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !NGnombre.valid">
+						<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_QUANTITY' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+					</div>
+				</div>
+				<div class="ui-grid-col-3">
+					<label for="costo">* {{ 'SUPPLIES.LBL_COST' | translate}}</label>
+					<input type="text" pInputText id="costo" name="costo"
+					       [(ngModel)]="suppliesAdditional.costo" maxlength="11"
+					       currencyMask
+					       [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
+					       disabled
+					/>
+				</div>
+			</div>
+			<div class="ui-grid-row form-footer-buttons">
+				<div class="ui-grid-col-4"></div>
+				<div class="ui-grid-col-1">
+					<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+				</div>
+				<div class="ui-grid-col-2">
+					<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+				</div>
+				<div class="ui-grid-col-5"></div>
+			</div>
+		</div>
+	</form>
+</fieldset>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
+
+<br>
+<h3 class="first">{{'SUPPLIES.LBL_SUPPLIESGROUPS' | translate}}</h3>
+<div *ngIf="!showDetail">
+	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listSuppliesProjection" [paginator]="true" [rows]="10"
+	             [responsive]="true" [globalFilter]="gb">
+		<p-column field="nombreProyeccion" header="{{'SUPPLIESPROJECTION.LBL_NOMBREPEDIDO' | translate }}" [sortable]="true"></p-column>
+		<p-column header="{{'SUPPLIESPROJECTION.LBL_FECHASOLICITUD' | translate }}" [sortable]="true">
+			<template let-sp="rowData" pTemplate="body">
+				{{sp.auditoriaFecha| date:'dd/MM/yyyy'}}
+			</template>
+		</p-column>
+		<p-column field="periodo" header="{{'SUPPLIESPROJECTION.LBL_PERIODO' | translate }}" [sortable]="true"></p-column>
+		<p-column field="cantidadMeses" header="{{'SUPPLIESPROJECTION.LBL_PERIODOMESES' | translate }}" [sortable]="true"></p-column>
+		<p-column field="nombreTercero" header="{{'SUPPLIESPROJECTION.LBL_USUARIO' | translate }}" [sortable]="true"></p-column>
+		<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+			<template let-datos="rowData" pTemplate="body">
+				<button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip"
+				        title="{{'BTN_VISUALIZAR' | translate}}"
+				        pButton (click)="detailDisplay(datos)"></button>
+			</template>
+		</p-column>
+	</p-dataTable>
+</div>
+<div *ngIf="showDetail">
+	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listSuppliesProjectionSupply" [paginator]="true" [rows]="10"
+	             [responsive]="true" [globalFilter]="gb">
+		<p-column field="dotacion" header="{{ 'SUPPLIES.LBL_SUPPLY' | translate}}" [sortable]="true"></p-column>
+		<p-column field="talla" header="{{ 'SUPPLIES.LBL_QUANTITY' | translate}}" [sortable]="true"></p-column>
+		<p-column field="cantidadAsignada" header="{{ 'SUPPLIES.LBL_QUANTITY' | translate}}" [sortable]="true"></p-column>
+		<p-column field="cantidadEntregada" header="{{ 'SUPPLIES.LBL_QUANTITY' | translate}}" [sortable]="true"></p-column>
+		<p-column field="costo" header="{{ 'SUPPLIES.LBL_COST' | translate}}" [sortable]="true"></p-column>
+		<p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
+			<template let-datos="rowData" pTemplate="body">
+				<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip"
+				        title="{{'BTN_EDITAR' | translate}}"
+				        pButton (click)="update(datos)"
+				        *ngIf="datos.idProyeccionDotacion === null || datos.idProyeccionDotacion === undefined"
+				></button>
+				<button type="button" class="ui-button ui-button-danger btn" icon="fa-trash" data-toggle="tooltip"
+				        title="{{'BTN_INACTIVAR' | translate}}"
+				        pButton (click)="del(datos)"
+				        *ngIf="datos.idProyeccionDotacion === null || datos.idProyeccionDotacion === undefined"
+				></button>
+			</template>
+		</p-column>
+	</p-dataTable>
+	<div class="ui-grid-row form-footer-buttons">
+		<div class="ui-grid-col-5"></div>
+		<div class="ui-grid-col-1">
+			<a (click)="goBackDetail( )" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+		</div>
+		<div class="ui-grid-col-5"></div>
+	</div>
+</div>

@@ -11,6 +11,8 @@ import { Localizaciones } from '../_models/localizaciones';
 import { MedicalInstitutionStructure } from '../_models/medical-institutions-structure';
 import { LocateService } from '../_services/locate.service';
 import { PhysicStructureService } from '../_services/physic-structure.service';
+import { PoliticalDivisionService } from '../_services/political-division.service';
+import { LocationsNomenclaturesServices } from '../_services/locationsNomenclatures.service';
 
 @Component( {
                moduleId: module.id,
@@ -40,6 +42,8 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
       private listaService: ListaService,
       private location: Location,
       private _nav: NavService,
+      private politicalDivisionService: PoliticalDivisionService,
+      private locationsNomenclaturesServices: LocationsNomenclaturesServices,
       private physicStructureService: PhysicStructureService,
       private locateService: LocateService,
       private confirmationService: ConfirmationService, ) {
@@ -63,6 +67,18 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
                      this.physicStructure.push( { label: s.estructuraFisica, value: s.idEstructuraFisica } );
                   }
                }
+            } );
+         } );
+         this.locateService.getById( this.medicalInstitution.idLocalizacion ).subscribe( localizacion => {
+            this.localizacion = localizacion;
+            this.medicalInstitution.direccion = this.localizacion.direccion;
+            this.localizacion.locacion = { camino: '', idDivisionPolitica: null };
+            this.politicalDivisionService.getLocation( localizacion.idDivisionPolitica ).subscribe( ciudad => {
+               this.localizacion.locacion.camino = ciudad.camino;
+               this.localizacion.locacion.idDivisionPolitica = ciudad.idDivisionPolitica;
+            } );
+            this.locationsNomenclaturesServices.getAllByLocalizacion( this.localizacion.idLocalizacion ).subscribe( lns => {
+               this.localizacion.listLN = lns;
             } );
          } );
       } );

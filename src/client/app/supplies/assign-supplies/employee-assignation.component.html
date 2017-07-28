@@ -1,0 +1,55 @@
+<div class="col-md-offset-1 col-md-10">
+	<div class="row">
+		<div class="col-md-12">
+			<p-panel header="{{ 'ASIGNARDOTACION.LBL_DETALLECOLABORADOR' | translate }}" class="perfil">
+				<form class="form-horizontal">
+					<fieldset>
+						<div class="form-group row">
+							<div class="col-md-2">
+								<div class="thumbnail">
+									<img src="{{svcThUrlAvatar}}/file/" alt="...">
+								</div>
+							</div>
+							<div class="col-md-10">
+								<h2>{{employessAssign.nombreCompleto}}</h2>
+								<h4>{{employessAssign.documento}}</h4>
+								<span>{{employessAssign.tipoArea}} - {{employessAssign.area}}</span>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</p-panel>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<form name="assignForm" (ngSubmit)="f.valid && assignProjection()" #f="ngForm" novalidate id="assignForm">
+				<p-panel header="{{ 'ASIGNARDOTACION.LBL_DOTACION' | translate }}">
+				
+				</p-panel>
+				<p-panel header="{{ 'ASIGNARDOTACION.LBL_DOTACIONADICIONAL' | translate }}">
+					
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label for="aditionalComment">{{ 'ASIGNARDOTACION.LBL_COMENTARIOADICIONAL' | translate }}:</label>
+							<textarea id="aditionalComment" name="aditionalComment" pInputTextarea
+							          [(ngModel)]="employessAssign.comentarioAdicional" maxLength="200"
+							          #ngAditionalComment="ngModel"></textarea>
+						</div>
+					</div>
+				</p-panel>
+				
+				
+				<div class="row form-footer-buttons">
+					<div class="form-group col-md-12">
+						<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+						<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+						        pButton></button>
+					
+					</div>
+				</div>
+			
+			</form>
+		</div>
+	</div>
+</div>

@@ -334,7 +334,6 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
 
       this.breadcrumbService.addFriendlyNameForRoute( '/employee-eventualities', 'Novedades' );
       this.breadcrumbService.hideRouteRegex( '^/employee-eventualities/add/[0-9]*/[0-9]*' );
-      // this.breadcrumbService.addFriendlyNameForRouteRegex( '^/employee-eventualities/add/[0-9]*/[0-9]*$', 'Nueva novedaa' );
 
       this.breadcrumbService.addFriendlyNameForRoute( '/tray-eventualities', 'Badeja de Novedades' );
       this.breadcrumbService.addFriendlyNameForRoute( '/tray-eventualities/add', 'Nuevo' );
@@ -342,5 +341,8 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
       this.breadcrumbService.addFriendlyNameForRoute( '/tray-eventualities/detail', 'Detalle' );
       this.breadcrumbService.hideRouteRegex( '^/tray-eventualities/update/[0-9]*' );
       this.breadcrumbService.hideRouteRegex( '^/tray-eventualities/detail/[0-9]*' );
+
+      this.breadcrumbService.addFriendlyNameForRoute( '/supplies-projection', 'Proyección de Dotaciones' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/tracing-supplies', 'Seguimiento a Dotaciones' );
    }
 }

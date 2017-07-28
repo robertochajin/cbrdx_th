@@ -252,9 +252,11 @@ export class FormalStudiesAddComponent implements OnInit {
       this.fstudy.idAdjunto = null;
    }
    downloadFile(id: number){
-      this.adjuntosService.downloadFile( id ).subscribe(res => {
-         window.location.assign(res);
-      });
+      this.adjuntosService.downloadFile( id ).subscribe( res => {
+         this.adjuntosService.getFileName( id ).subscribe( adj => {
+            saveAs( res, adj.nombreArchivo );
+         } );
+      } );
    }
 
 }
