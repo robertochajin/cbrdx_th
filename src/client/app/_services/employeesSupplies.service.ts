@@ -97,6 +97,10 @@ export class EmployessSuppliesServices {
       return this.authHttp.put( this.masterServiceProjectionSupply, JSON.stringify( f ) ).catch( this.handleError );
    }
 
+   updateProjectionSupplySatisfied( f: any[] ) {
+      return this.authHttp.put( this.masterServiceProjectionSupply + 'satisfecho', JSON.stringify( f ) ).catch( this.handleError );
+   }
+
    handleError( error: any ): Promise<any> {
       console.error( 'Error:', error );
       return Promise.reject( error.message || error );

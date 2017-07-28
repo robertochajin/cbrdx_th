@@ -9,7 +9,6 @@
 								<label for="idEstructuraFisica">{{ 'EMPLOYEENOVELTY.LBL_OFICINA' | translate }}</label>
 								<p-dropdown id="idEstructuraFisica" name="idEstructuraFisica"
 								            [options]="ListaOficinas" [autoWidth]="false"
-								            [(ngModel)]="filter.estructuraFisica"
 								            (onChange)="dt.filter($event.value,'estructuraFisica','startsWith')"
 								></p-dropdown>
 							</div>
@@ -17,7 +16,6 @@
 								<label for="idArea">{{ 'EMPLOYEENOVELTY.LBL_AREA' | translate }}</label>
 								<p-dropdown id="idArea" name="idArea"
 								            [options]="ListaAreas" [autoWidth]="false"
-								            [(ngModel)]="filter.estructuraArea"
 								            (onChange)="dt.filter($event.value,'estructuraArea','startsWith')"
 								></p-dropdown>
 							</div>
@@ -25,7 +23,6 @@
 								<label for="idEstadoNovedad">{{ 'EMPLOYEENOVELTY.LBL_ESTADONOVEDAD' | translate }}</label>
 								<p-dropdown id="idEstadoNovedad" name="idEstadoNovedad"
 								            [options]="ListaEstados" [autoWidth]="false"
-								            [(ngModel)]="filter.estadoNovedad"
 								            (onChange)="dt.filter($event.value,'estadoNovedad','startsWith')"
 								></p-dropdown>
 							</div>
@@ -35,7 +32,6 @@
 								<label for="tipoNovedad">{{ 'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}</label>
 								<p-dropdown id="tipoNovedad" name="tipoNovedad"
 								            [options]="ListaTipos" [autoWidth]="false"
-								            [(ngModel)]="filter.tipoNovedad"
 								            (onChange)="dt.filter($event.value,'tipoNovedad','startsWith')"
 								></p-dropdown>
 							</div>
@@ -43,7 +39,6 @@
 								<label for="novedad">{{ 'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }}</label>
 								<p-dropdown id="novedad" name="novedad"
 								            [options]="ListaNovedad" [autoWidth]="false"
-								            [(ngModel)]="filter.novedad"
 								            (onChange)="dt.filter($event.value,'novedad','startsWith')"
 								></p-dropdown>
 							</div>
@@ -51,7 +46,6 @@
 								<label for="nombreTerceroReporta">{{ 'EMPLOYEENOVELTY.LBL_REPORTADOPOR' | translate }}</label>
 								<p-dropdown id="nombreTerceroReporta" name="nombreTerceroReporta"
 								            [options]="ListaReporta" [autoWidth]="false" filter="filter"
-								            [(ngModel)]="filter.nombreTerceroReporta"
 								            (onChange)="dt.filter($event.value,'nombreTerceroReporta','startsWith')"
 								></p-dropdown>
 							</div>
@@ -85,7 +79,6 @@
 								<label for="nombreTercero">{{ 'EMPLOYEES.LBL_COLABORADOR' | translate }}</label>
 								<p-dropdown id="nombreTercero" name="nombreTercero"
 								            [options]="ListaColaborador" [autoWidth]="false" filter="filter"
-								            [(ngModel)]="filter.nombreTercero"
 								            (onChange)="dt.filter($event.value,'nombreTercero','startsWith')"
 								></p-dropdown>
 							</div>

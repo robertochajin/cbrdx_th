@@ -1195,6 +1195,8 @@
       "LBL_GROUP": "Grupo",
       "LBL_CYCLE": "Ciclo Entrega",
       "LBL_QUANTITY": "Cantidad",
+      "LBL_QUANTITYSIGNED": "Cantidad Asignada",
+      "LBL_QUANTITYDELIVERED": "Cantidad Entregada",
       "LBL_COST": "Costo",
       "LBL_TYPESIZE": "Tipo Talla",
       "LBL_SIZE": "Talla",
@@ -1207,7 +1209,11 @@
       "LBL_DETAIL": "Detalle Proveedor",
       "LBL_SUPPLIESADITTIONAL": "Dotaciones Adicionales",
       "LBL_REQUESTDATE": "Fecha de Solicitud",
-      "BTN_TRAMITAR": "Detalle Proveedor"
+      "BTN_TRAMITAR": "Detalle Proveedor",
+      "MSG_ENTREGA": "Se ha recibido una dotacion y a indicado que tiene algun comentario",
+      "MSG_ACCORDING": "Selecciones solo las dotaciones correctas",
+      "BTN_ACCORDING": "Si, Recibi conforme a la lista",
+      "BTN_NOTACCORDING": "No Recibi conforme"
    },
    "SUPPLIESPROJECTION": {
       "LBL_USUARIO": "Usuario",
@@ -1227,6 +1233,9 @@
       "LBL_VISUALIZARAREAS": "Vizualizar Areas",
       "LBL_AREASSELECCIONADAS": "Areas seleccionadas",
       "LBL_SELECCIONARAREAS": "No seleccionar areas",
+      "LBL_MOTIVO": "Motivo",
+      "LBL_OBSERVACION": "Observacion",
+      "LBL_ESTADO": "Estado",
       "": ""
    },
    "ACCIDENTINCIDENT": {
