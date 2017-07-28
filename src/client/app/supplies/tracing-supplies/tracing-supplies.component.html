@@ -1,10 +1,6 @@
 <div>
 	<div class="row datable-header">
-		<div class="col-md-6 col-xs-12 datatable-header-add">
-			<button type="button" pButton icon="fa-plus" (click)="add()" label="{{ 'ASIGNARDOTACION.LBL_TITULO' | translate }}"
-			></button>
-		</div>
-		<div class="col-md-6 col-xs-12 datatable-header-search">
+		<div class="col-md-6 col-xs-12 col-md-offset-6 datatable-header-search">
 			<div class="input-group">
 				<div class="input-group-addon"><i class="fa fa-search"></i></div>
 				<input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control"
@@ -34,9 +30,12 @@
 				            (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
 			</template>
 		</p-column>
-		<p-column field="indicadorAdicional" header="{{ 'ASIGNARDOTACION.LBL_DOTACIONADICIONAL' | translate }}" [sortable]="true">
-			<template let-item="rowData">
-				<p-checkbox [(ngModel)]="item.indicadorAdicional" binary="true" id="s" name="s" disabled></p-checkbox>
+		<p-column field="fechaEntrega" header="{{ 'ASIGNARDOTACION.LBL_FECHAASIGNACION' | translate }}" [sortable]="true"></p-column>
+		<p-column field="fechaPosibleEntrega" header="{{ 'ASIGNARDOTACION.LBL_FECHAENTREGA' | translate }}" [sortable]="true"></p-column>
+		<p-column field="estado" header="{{ 'ASIGNARDOTACION.LBL_ESTADO' | translate }}" [filter]="true" filterMatchMode="equals">
+			<template pTemplate="filter" let-col>
+				<p-dropdown [options]="states" [(ngModel)]="statesFilter" [style]="{'width':'100%'}"
+				            (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
 			</template>
 		</p-column>
 		<p-column header="Acciones" styleClass="datatable-col-action">

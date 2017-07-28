@@ -90,9 +90,9 @@ export class ReferencesUpdateComponent implements OnInit {
                   this.localizacion.locacion.camino = ciudad.camino;
                   this.localizacion.locacion.idDivisionPolitica = ciudad.idDivisionPolitica;
                } );
-               this.locationsNomenclaturesServices.getAllByLocalizacion(this.localizacion.idLocalizacion).subscribe( lns => {
+               this.locationsNomenclaturesServices.getAllByLocalizacion( this.localizacion.idLocalizacion ).subscribe( lns => {
                   this.localizacion.listLN = lns;
-               });
+               } );
             } );
          } );
       } );
@@ -207,10 +207,11 @@ export class ReferencesUpdateComponent implements OnInit {
    }
 
    downloadFile(id: number){
-
-      this.adjuntosService.downloadFile( id ).subscribe(res => {
-         window.location.assign(res);
-      });
+      this.adjuntosService.downloadFile( id ).subscribe( res => {
+         this.adjuntosService.getFileName( id ).subscribe( adj => {
+            saveAs( res, adj.nombreArchivo );
+         } );
+      } );
    }
    getFileName() {
       if(this.reference.idAdjunto){

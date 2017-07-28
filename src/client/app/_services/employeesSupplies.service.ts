@@ -24,7 +24,7 @@ export class EmployessSuppliesServices {
    }
 
    getAllAdditionalByIdEmployee(id: number) {
-      return this.authHttp.get( this.masterServiceAdditional + 'buscarTercero/' + id)
+      return this.authHttp.get( this.masterServiceAdditional + 'tercero/' + id )
       .map( ( res: Response ) => res.json() as EmployessSuppliesAdditional[] );
    }
 
@@ -50,6 +50,11 @@ export class EmployessSuppliesServices {
       .map( ( res: Response ) => res.json() as EmployessSuppliesProjection[] );
    }
 
+   getAllEmployeesSupplies() {
+      return this.authHttp.get( this.masterServiceProjection + '/enabledEstado' )
+      .map( ( res: Response ) => res.json() as EmployessSuppliesProjection[] );
+   }
+
    getEmployeeProjection( id: number ) {
       return this.authHttp.get( this.masterServiceProjection + id )
       .map( ( res: Response ) => res.json() as EmployessSuppliesProjection );
@@ -68,6 +73,11 @@ export class EmployessSuppliesServices {
 
    getAllProjectionSupply() {
       return this.authHttp.get( this.masterServiceProjectionSupply )
+      .map( ( res: Response ) => res.json() as EmployessSuppliesProjectionSupply[] );
+   }
+
+   getByProjectionByEmployees( idProyeccionDotacion: number, idTercero: number ) {
+      return this.authHttp.get( this.masterServiceProjectionSupply + 'proyeccionDotacionTercero/' + idProyeccionDotacion + '/' + idTercero )
       .map( ( res: Response ) => res.json() as EmployessSuppliesProjectionSupply[] );
    }
 

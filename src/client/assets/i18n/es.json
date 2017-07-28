@@ -1179,6 +1179,9 @@
       "LBL_DOTACIONADICIONAL": "Dotación adicional",
       "LBL_DETALLECOLABORADOR": "Detalle del colaborador",
       "LBL_": "",
+      "LBL_FECHAASIGNACION": "Fecha asignación",
+      "LBL_FECHAENTREGA": "Fecha entrega",
+      "LBL_ESTADO": "Estado",
       "": ""
    },
    "RECLUTAMIENTO": {
@@ -1194,18 +1197,23 @@
       "LBL_CYCLE": "Ciclo Entrega",
       "LBL_QUANTITY": "Cantidad",
       "LBL_COST": "Costo",
-      "LBL_SIZE": "Tipo Talla",
+      "LBL_TYPESIZE": "Tipo Talla",
+      "LBL_SIZE": "Talla",
+      "LBL_TOTAL": "Total",
       "LBL_REQUIRESIZE": "Requiere Talla",
       "LBL_ADDITIONAL": "Adicional",
       "LBL_ADDPOSITION": "Agregar Cargo",
       "LBL_ACTIVE": "Activo",
       "LBL_ALLHAB": "Habilitar Todos",
       "LBL_DETAIL": "Detalle Proveedor",
+      "LBL_SUPPLIESADITTIONAL": "Dotaciones Adicionales",
+      "LBL_REQUESTDATE": "Fecha de Solicitud",
       "BTN_TRAMITAR": "Detalle Proveedor"
    },
    "SUPPLIESPROJECTION": {
       "LBL_USUARIO": "Usuario",
       "LBL_AGREGAR": "Nueva proyección/pedido",
+      "LBL_PROJECTION": "Nueva proyección/pedido",
       "LBL_RANGOFECHA": "Rango de fecha",
       "LBL_NOMBREPEDIDO": "Nombre de pedido",
       "LBL_FECHASOLICITUD": "Fecha solicitud",
@@ -1214,9 +1222,10 @@
       "LBL_GRUPODOTACION": "Grupo dotación",
       "LBL_DOTACIONMESES": "Dotación para cuantos meses",
       "LBL_DOTACIONADICIONAL": "Dotación adicional",
-      "LBL_SELECCIONARAREAS": "Seleccionar áreas",
+      "LBL_NOSELECCIONARAREAS": "Seleccionar áreas",
       "LBL_CAMPOVALOR": "Campo valor",
       "LBL_AREAS": "Areas",
+      "LBL_VISUALIZARAREAS": "Vizualizar Areas",
       "LBL_AREASSELECCIONADAS": "Areas seleccionadas",
       "LBL_SELECCIONARAREAS": "No seleccionar areas",
       "": ""
@@ -1243,6 +1252,7 @@
       "LBL_VISUALIZAR": "Visualizar",
       "LBL_AGREGARPLAN": "Agregar plan",
       "LBL_PLANDEACCION": "Planes de acción",
+      "LBL_ADJUNTOS": "Adjuntos",
       "": ""
    },
    "FIN_ARCHIVO": "============================FIN ARCHIVO============================="

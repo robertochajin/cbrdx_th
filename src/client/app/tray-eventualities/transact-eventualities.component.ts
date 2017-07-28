@@ -101,7 +101,7 @@ export class EmployeeEventualityTransactComponent {
       this.listaService.getMasterDetails( 'ListasEstadosNovedades' ).subscribe( res => {
          this.listEstados.push( { label: 'Seleccione', value: null } );
          res.map( ( s: any ) => {
-            if ( s.codigo !=='ENCONSTRUC' ) {
+            if ( s.codigo !== 'ENCONSTRUC' ) {
                this.listEstados.push( { label: s.nombre, value: s.idLista } );
             }
          } );
@@ -213,7 +213,9 @@ export class EmployeeEventualityTransactComponent {
 
    downloadFile( id: number ) {
       this.adjuntosService.downloadFile( id ).subscribe( res => {
-         window.location.assign( res );
+         this.adjuntosService.getFileName( id ).subscribe( adj => {
+            saveAs( res, adj.nombreArchivo );
+         } );
       } );
    }
 

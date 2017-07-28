@@ -9,10 +9,10 @@ import { FormSharedModule } from '../shared/form-shared.module';
                  SharedModule,
                  FormSharedModule,
               ],
-              declarations: [  ],
-              bootstrap: [  ],
-              providers: [  ],
-              exports: [  ]
+              declarations: [],
+              bootstrap: [],
+              providers: [],
+              exports: []
            } )
 export class AccidentIncidentModule {
 

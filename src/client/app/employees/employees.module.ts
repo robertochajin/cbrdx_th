@@ -66,7 +66,6 @@ import { SuppliesEmployeesComponent } from './supplies-employees/supplies-employ
                  EmployeeEventualityDetailComponent,
                  EventualityTransactEmployeeComponent,
                  SuppliesEmployeesComponent
-
               ],
               bootstrap: [ EmployeesComponent ],
               providers: [ EmployeesService, ListEmployeesService, EmployeesRecruitmentService, PoliticalDivisionService, NavService,

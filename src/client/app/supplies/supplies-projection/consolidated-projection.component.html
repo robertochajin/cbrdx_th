@@ -1,0 +1,48 @@
+<h3 class="first">{{'SUPPLIES.LBL_SUPPLIESGROUPS' | translate}}</h3>
+<p-tabView orientation="left" id="tbvCompetenciasHabilidades">
+	<p-tabPanel *ngFor="let item of listSupplies; let i = index" header="{{item.dotacion}}" [selected]="i == selected">
+		<form class="form-horizontal">
+			<fieldset>
+				<div>
+					<div class="row">
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'SUPPLIES.LBL_SUPPLIESGROUPS' | translate}}:</label>
+						<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{item.grupoDotacion}}</strong></label>
+						
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'SUPPLIES.LBL_TOTAL' | translate}}:</label>
+						<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{item.cantidadTotal}}</strong></label>
+					</div>
+					<div class="row">
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'SUPPLIES.LBL_REQUESTDATE' | translate}}:</label>
+						<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{suppliesProjection.auditoriaFecha}}</strong></label>
+						
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'SUPPLIES.LBL_QUANTITY' | translate}}:</label>
+						<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{item.cantidad}}</strong></label>
+					</div>
+					<div class="row">
+						<label class="col-md-3 col-sm-3 col-xs-12 control-label">{{'SUPPLIESPROJECTION.LBL_NOMBREPEDIDO' | translate}}:</label>
+						<label class="col-md-6 col-sm-6 col-xs-12"><strong>{{suppliesProjection.nombreProyeccion}}</strong></label>
+						<div class="col-md-3 col-sm-3 col-xs-6" *ngIf="item.indicadorRequiereTalla">
+							<button pButton icon="fa-plus" label="{{'SUPPLIESPROJECTION.LBL_VISUALIZARAREAS' | translate }}"
+							        type="button" (click)="swichArea()"></button>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+		<div class="row" *ngIf="item.indicadorRequiereTalla === true">
+			<div class="col-md-12" *ngIf="!showArea">
+				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="item.totales">
+					<p-column field="talla" header="{{'SUPPLIES.LBL_SIZE' | translate}}" [sortable]="true"></p-column>
+					<p-column field="genero" header="{{'LBL_GENERO' | translate}}" [sortable]="true"></p-column>
+					<p-column field="Total" header="{{'SUPPLIES.LBL_TOTAL' | translate}}" [sortable]="true"></p-column>
+				</p-dataTable>
+				<div class="col-md-12" *ngIf="showArea">
+					<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="item.areas">
+						<p-column field="area" header="{{'SUPPLIESPROJECTION.LBL_AREAS' | translate}}" [sortable]="true"></p-column>
+					</p-dataTable>
+				</div>
+			</div>
+		</div>
+	</p-tabPanel>
+	<p-tabPanel header="" *ngIf="1!=1"></p-tabPanel>
+</p-tabView>

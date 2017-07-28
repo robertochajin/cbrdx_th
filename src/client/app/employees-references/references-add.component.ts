@@ -194,10 +194,11 @@ export class ReferencesAddComponent implements OnInit {
    }
 
    downloadFile(id: number){
-
-      this.adjuntosService.downloadFile( id ).subscribe(res => {
-         window.location.assign(res);
-      });
+      this.adjuntosService.downloadFile( id ).subscribe( res => {
+         this.adjuntosService.getFileName( id ).subscribe( adj => {
+            saveAs( res, adj.nombreArchivo );
+         } );
+      } );
    }
    getFileName() {
       this.adjuntosService.getFileName( this.reference.idAdjunto ).subscribe( res => {
