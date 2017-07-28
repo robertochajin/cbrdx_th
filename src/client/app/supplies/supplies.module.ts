@@ -29,7 +29,7 @@ import { TracingSuppliesComponent } from './tracing-supplies/tracing-supplies.co
                  EmployeeAssignationDetailComponent,
                  EmployeeAssignationComponent,
                  SuppliesComponent, SuppliesAddComponent, SuppliesUpdateComponent,
-                 SuppliesProjectionComponent,SuppliesProjectionAddComponent,
+                 SuppliesProjectionComponent, SuppliesProjectionAddComponent,
                  TracingSuppliesComponent, ConsolidatedProjectionComponent
               ],
               bootstrap: [ SuppliesComponent ],

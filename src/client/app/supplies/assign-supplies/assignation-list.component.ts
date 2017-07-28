@@ -42,23 +42,23 @@ export class AssignationListComponent implements OnInit {
             this.positions.push( { label: s.cargo, value: s.cargo } );
          } );
       } );
-      this.tipoDeAreaService.getlistAreas().subscribe(rs=>{
+      this.tipoDeAreaService.getlistAreas().subscribe( rs => {
          this.typeArea.push( { label: 'Todos', value: null } );
          rs.map( ( s: any ) => {
             this.typeArea.push( { label: s.estructuraArea, value: s.estructuraArea } );
          } );
-      });
-      this.organizationalStructureService.listOrganizationalStructure().subscribe(rs=>{
+      } );
+      this.organizationalStructureService.listOrganizationalStructure().subscribe( rs => {
          this.area.push( { label: 'Todas', value: null } );
          rs.map( ( s: any ) => {
             this.area.push( { label: s.nombre, value: s.nombre } );
          } );
-      });
+      } );
       this.route.params.subscribe( ( params: Params ) => {
-         this.employessSuppliesServices.getAllEmployeesSuppliesByProjection( params['idProjection'] ).subscribe( list => {
+         this.employessSuppliesServices.getAllEmployeesSuppliesByProjection( params[ 'idProjection' ] ).subscribe( list => {
             this.projectedEmployess = list;
          } );
-      });
+      } );
    }
 
    add() {

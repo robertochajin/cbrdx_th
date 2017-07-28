@@ -124,6 +124,7 @@ export class AccidentIncidentAddPlanComponent implements OnInit {
       //    } );
       // } );
    }
+
    goBack( fDirty: boolean ): void {
 
       if ( fDirty ) {
