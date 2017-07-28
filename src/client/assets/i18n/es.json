@@ -800,6 +800,7 @@
    "REQUERIMIENTOPERSONAL": {
       "LBL_REQUERIMIENTOPERSONAL":"Requerimiento de personal",
       "BTN_AGREGARNUEVO": "Agregar nuevo requerimiento de personal",
+      "BTN_AGREGARNUEVOREF":"Agregar nuevo referido",
       "LBL_DATOSSOLICITUD":"Datos básicos de la solicitud",
       "LBL_DATOSSOLICITANTE":"Datos Solicitante",
       "LBL_NOMBRESOLICITANTE":"Nombre del Solicitante",
@@ -844,6 +845,7 @@
       "LBL_OBSERVACIONES": "Observaciones",
       "LBL_CUESTIONARIOS": "Datos pruebas técnicas",
       "LBL_CUESTIONARIO": "Pruebas técnicas",
+      "BTN_VISUALIZAR": "Ver perfil de cargo",
       "MSG_CARGONOCONFIGURADO": "El cargo no está configurado"
    },
 
@@ -928,7 +930,7 @@
       "LBL_OBSERVACION" : "Observación",
       "LBL_NOMBREJEFEINMEDIATO":"jefe Directo",
       "LBL_TIPOTRABAJO":"Tipo de trabajo",
-      "LBL_LUGARTRABAJO":"Luagar de trabajo",
+      "LBL_LUGARTRABAJO":"Lugar de trabajo",
       "LBL_COMPETENCIAS":"Competencias laborales",
       "LBL_OBSERVACIONES":"Observaciones",
       "LBL_FORMACIONEDUCATIVA":"Formación educativa",
