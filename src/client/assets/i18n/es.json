@@ -793,7 +793,8 @@
       "MSG_PLAZASREQ":"Número de plazas es requerido",
       "MSG_PLAZASMAX":"Número de plazas máximo es 9999",
       "MSG_ASIGNACOLABORADORCARGO":"Asignando colaborador al cargo",
-      "LBL_ESTRUCTFISICA":"Estructura Fisica"
+      "LBL_ESTRUCTFISICA":"Estructura Fisica",
+      "MSG_SINPERMISOSPARAVISUALIZAR":"No se muestra el árbol, ya que NO cuentas con las condiciones necesarias para mostrar funcionalidad./nPor favor comuníquese con el administrador del sistema."
 
    },
 
