@@ -1178,6 +1178,7 @@
       "LBL_TALLA": "Talla",
       "LBL_CANTIDADASIGNAR": "Cantidad a asignar",
       "LBL_CANTIDADENTREGAR": "Cantidad a entregar",
+      "LBL_CANTIDADDOTACION": "Cantidad a entregar",
       "LBL_TIPOAREA": "Tipo de area",
       "LBL_DOTACION": "Dotación",
       "LBL_DOTACIONADICIONAL": "Dotación adicional",

@@ -54,7 +54,7 @@
 								{{supp.dotacion}}
 							</div>
 							<div class="form-group col-md-2">
-								Talla: {{supp.talla}}
+								{{supp.talla}}
 							</div>
 							<div *ngIf="assignState.idLista !== employessAssign.idEstado" class="form-group col-md-2">
 								<p-inputSwitch name="asigna{{i}}" onLabel="Si" offLabel="No" [(ngModel)]="supp.indicadorHabilitado"
@@ -100,6 +100,36 @@
 				</p-panel>
 				<p-panel header="{{ 'ASIGNARDOTACION.LBL_DOTACIONADICIONAL' | translate }}">
 					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+						
+						<div class="row" >
+							<div class="form-group col-md-1"></div>
+							<div class="form-group col-md-4">
+								<strong>{{ 'ASIGNARDOTACION.LBL_DOTACION' | translate }}</strong>
+							</div>
+							<div class="form-group col-md-2">
+								<strong>{{ 'ASIGNARDOTACION.LBL_TALLA' | translate }}</strong>
+							</div>
+							<div class="form-group col-md-2">
+								<strong>{{ 'ASIGNARDOTACION.LBL_CANTIDADDOTACION' | translate }}</strong>
+							</div>
+							<div class="form-group col-md-2"></div>
+							<div class="form-group col-md-1"></div>
+						</div>
+						
+						<div class="row" *ngFor="let addSupp of employeeAditionalSupplies; let i = index">
+							<div class="form-group col-md-1"></div>
+							<div class="form-group col-md-4">
+								{{addSupp.dotacion}}
+							</div>
+							<div class="form-group col-md-2">
+								{{addSupp.talla}}
+							</div>
+							<div class="form-group col-md-2">
+								{{addSupp.cantidadDotacion}}
+							</div>
+							<div class="form-group col-md-2"></div>
+							<div class="form-group col-md-1"></div>
+						</div>
 						
 						<div *ngIf="assignState.idLista !== employessAssign.idEstado"  class="row">
 							<div class="form-group col-md-12">
