@@ -129,6 +129,7 @@ export class Employee {
       this.fechaDocumento = null;
       this.fechaNacimiento = null;
       this.edad = '';
+      this.estadoTercero = null;
    }
 }
 
