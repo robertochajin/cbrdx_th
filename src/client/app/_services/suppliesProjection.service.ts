@@ -26,7 +26,7 @@ export class SuppliesProjectionServices {
    }
 
    getByEmployees( idTercero: number ) {
-      return this.authHttp.get( this.masterService + 'proyeccionDotacion/idTercero' + idTercero )
+      return this.authHttp.get( this.masterService + 'proyeccionDotacion/tercero/' + idTercero )
       .map( ( res: Response ) => res.json() as SuppliesProjection[] );
    }
 
