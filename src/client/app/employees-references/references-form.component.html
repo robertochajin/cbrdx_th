@@ -22,7 +22,8 @@
                 <div class="ui-grid-col-4">
                     <label for="tipodeReferencia">* {{'EMPLOYEES.LBL_TIPOREFERENCIA' | translate }}</label>
                     <p-dropdown  id="tipodeReferencia" name="tipodeReferencia" [options]="referencesTypes" [autoWidth]="false" required="true"
-                                 [(ngModel)]="reference.idTipoReferencia"  #tipodeReferencia="ngModel"  ></p-dropdown>
+                                 [(ngModel)]="reference.idTipoReferencia"  #tipodeReferencia="ngModel"
+                    (onChange)="changeReferencesType()"></p-dropdown>
                     <div class="ui-message ui-messages-error ui-corner-all"
                          *ngIf="f.submitted && !tipodeReferencia.valid">
                       <i class="fa fa-close"></i>
@@ -32,7 +33,7 @@
                 <div class="ui-grid-col-8">
                     <label for="empresa">* {{'EMPLOYEES.LBL_NOMBREEMPRESA' | translate }}</label>
                     <input pInputText type="text" id="empresa" name="empresa" #empresa="ngModel"
-                           [(ngModel)]="reference.empresa" #empresa="ngModel" required maxlength="100"/>
+                           [(ngModel)]="reference.empresa" #empresa="ngModel" [required]="companyRequired" maxlength="100"/>
                     <div class="ui-message ui-messages-error ui-corner-all"
                          *ngIf="f.submitted && !empresa.valid">
                       <i class="fa fa-close"></i>
