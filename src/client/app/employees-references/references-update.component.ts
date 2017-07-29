@@ -158,12 +158,13 @@ export class ReferencesUpdateComponent implements OnInit {
             this.location.back();
         }
     }
+
    changeReferencesType() {
       let temp = this.listReferencesTypes.find( r => r.idLista === this.reference.idTipoReferencia );
       let temp2 = this.listConstantCompany.find( c => c === temp.codigo );
       if ( temp2 ) {
          this.companyRequired = false;
-      }else{
+      } else {
          this.companyRequired = true;
       }
    }

@@ -57,7 +57,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    indicadorZonaPosition = false;
    backupPosition:string
    msg: Message;
-   readyTreeCompany : boolean = false;
+   readyTreeCompany: boolean = false;
 
    constructor( private positionsService: PositionsService,
       private ospService: OrganizationalStructurePositionsServices,
