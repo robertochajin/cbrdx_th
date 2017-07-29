@@ -111,7 +111,7 @@ export class EmployeesEstateAddComponent implements OnInit {
       let piso = this.employeeEstate.numeroPisos + '';
       if ( this.employeeEstate.numeroPisos !== null ) {
          this.employeeEstate.numeroPisos = Number( piso.replace( /[^0-9]/g, '' ) );
-         if(this.employeeEstate.numeroPisos==0){
+         if ( this.employeeEstate.numeroPisos == 0 ) {
             this.employeeEstate.numeroPisos = null;
          }
       }

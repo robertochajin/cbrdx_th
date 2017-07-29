@@ -6,7 +6,8 @@
 			</div>
 		</div>
 		<div class="col-md-8">
-			<h2>{{employee.nombreCompleto}} <span *ngIf=" employee.estadoTercero !== null " class="tag">{{ employee.estadoTercero }}</span></h2>
+			<h2>{{employee.nombreCompleto}} <span *ngIf=" employee.estadoTercero !== null " class="tag">{{ employee.estadoTercero }}</span>
+			</h2>
 			<h4>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</h4>
 			<span>{{employee.fechaNacimiento}} ({{employee.edad}})</span><br />
 			<span>Cargo actual : {{employee.cargoActual}}</span><br />
