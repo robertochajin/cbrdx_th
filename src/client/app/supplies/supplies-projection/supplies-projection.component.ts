@@ -86,6 +86,11 @@ export class SuppliesProjectionComponent {
                }
             }
          } );
+      }else {
+         this.listSuppliesProjection = [];
+         this.suppliesProjectionServices.getAll().subscribe( data => {
+            this.listSuppliesProjection = data;
+         } );
       }
    }
 
