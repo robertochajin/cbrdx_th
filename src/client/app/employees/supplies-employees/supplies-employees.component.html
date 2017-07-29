@@ -20,7 +20,7 @@
 	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listSuppliesAdditional" [paginator]="true" [rows]="10"
 	             [responsive]="true" [globalFilter]="gb">
 		<p-column field="dotacion" header="{{ 'SUPPLIES.LBL_SUPPLY' | translate}}" [sortable]="true"></p-column>
-		<p-column field="talla" header="{{ 'SUPPLIES.LBL_QUANTITY' | translate}}" [sortable]="true"></p-column>
+		<p-column field="talla" header="{{ 'SUPPLIES.LBL_SIZE' | translate}}" [sortable]="true"></p-column>
 		<p-column field="cantidadDotacion" header="{{ 'SUPPLIES.LBL_QUANTITY' | translate}}" [sortable]="true"></p-column>
 		<p-column field="costo" header="{{ 'SUPPLIES.LBL_COST' | translate}}" [sortable]="true"></p-column>
 		<p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
@@ -109,7 +109,7 @@
 		</p-column>
 		<p-column field="periodo" header="{{'SUPPLIESPROJECTION.LBL_PERIODO' | translate }}" [sortable]="true"></p-column>
 		<p-column field="cantidadMeses" header="{{'SUPPLIESPROJECTION.LBL_PERIODOMESES' | translate }}" [sortable]="true"></p-column>
-		<p-column field="nombreTercero" header="{{'SUPPLIESPROJECTION.LBL_USUARIO' | translate }}" [sortable]="true"></p-column>
+		<p-column field="estado" header="{{'SUPPLIESPROJECTION.LBL_ESTADO' | translate }}" [sortable]="true"></p-column>
 		<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 			<template let-datos="rowData" pTemplate="body">
 				<button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip"
@@ -123,10 +123,9 @@
 	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listSuppliesProjectionSupply" [paginator]="true" [rows]="10"
 	             [responsive]="true" [globalFilter]="gb">
 		<p-column field="dotacion" header="{{ 'SUPPLIES.LBL_SUPPLY' | translate}}" [sortable]="true"></p-column>
-		<p-column field="talla" header="{{ 'SUPPLIES.LBL_QUANTITY' | translate}}" [sortable]="true"></p-column>
-		<p-column field="cantidadAsignada" header="{{ 'SUPPLIES.LBL_QUANTITY' | translate}}" [sortable]="true"></p-column>
-		<p-column field="cantidadEntregada" header="{{ 'SUPPLIES.LBL_QUANTITY' | translate}}" [sortable]="true"></p-column>
-		<p-column field="costo" header="{{ 'SUPPLIES.LBL_COST' | translate}}" [sortable]="true"></p-column>
+		<p-column field="talla" header="{{ 'SUPPLIES.LBL_SIZE' | translate}}" [sortable]="true"></p-column>
+		<p-column field="cantidadAsignada" header="{{ 'SUPPLIES.LBL_QUANTITYSIGNED' | translate}}" [sortable]="true"></p-column>
+		<p-column field="cantidadEntregada" header="{{ 'SUPPLIES.LBL_QUANTITYDELIVERED' | translate}}" [sortable]="true"></p-column>
 		<p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
 			<template let-datos="rowData" pTemplate="body">
 				<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip"
