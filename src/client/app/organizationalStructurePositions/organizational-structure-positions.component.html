@@ -1,6 +1,6 @@
 <h3>{{ 'PLANTACOLABORADORES.LBL_PLANTACOLAB' | translate }}</h3>
 
-<div class = "alert alert-info" *ngIf="treedCompany.length === 0"
+<div class = "alert alert-info" *ngIf="treedCompany.length === 0 && readyTreeCompany === true"
 	  style="font-size: 1.2em;text-align: center;">
 	<i class="fa fa-info-circle" aria-hidden="true"></i>
 	{{'PLANTACOLABORADORES.MSG_SINPERMISOSPARAVISUALIZAR' | translate }}
