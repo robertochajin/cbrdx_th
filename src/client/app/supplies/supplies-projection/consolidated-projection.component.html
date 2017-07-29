@@ -33,14 +33,25 @@
 			<div class="col-md-12" *ngIf="!showArea">
 				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="item.totales">
 					<p-column field="talla" header="{{'SUPPLIES.LBL_SIZE' | translate}}" [sortable]="true"></p-column>
-					<p-column field="genero" header="{{'LBL_GENERO' | translate}}" [sortable]="true"></p-column>
-					<p-column field="Total" header="{{'SUPPLIES.LBL_TOTAL' | translate}}" [sortable]="true"></p-column>
+					<p-column field="indicadorHombre" header="{{ 'SUPPLIESPROJECTION.LBL_HOMBRE' | translate }}" [sortable]="true"
+					          styleClass="datatable-col-center">
+						<template let-datos="rowData" pTemplate="body">
+							<p-checkbox [(ngModel)]="datos.indicadorHombre" binary="true" disabled="true"></p-checkbox>
+						</template>
+					</p-column>
+					<p-column field="indicadorMujer" header="{{ 'SUPPLIESPROJECTION.LBL_MUJER' | translate }}" [sortable]="true"
+					          styleClass="datatable-col-center">
+						<template let-datos="rowData" pTemplate="body">
+							<p-checkbox [(ngModel)]="datos.indicadorMujer" binary="true" disabled="true"></p-checkbox>
+						</template>
+					</p-column>
+					<p-column field="total" header="{{'SUPPLIES.LBL_TOTAL' | translate}}" [sortable]="true"></p-column>
 				</p-dataTable>
-				<div class="col-md-12" *ngIf="showArea">
-					<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="item.areas">
-						<p-column field="area" header="{{'SUPPLIESPROJECTION.LBL_AREAS' | translate}}" [sortable]="true"></p-column>
-					</p-dataTable>
-				</div>
+			</div>
+			<div class="col-md-12" *ngIf="showArea">
+				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="item.areas">
+					<p-column field="nombreArea" header="{{'SUPPLIESPROJECTION.LBL_AREAS' | translate}}" [sortable]="true"></p-column>
+				</p-dataTable>
 			</div>
 		</div>
 	</p-tabPanel>

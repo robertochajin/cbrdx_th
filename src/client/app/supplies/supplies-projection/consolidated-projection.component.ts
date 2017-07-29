@@ -5,6 +5,7 @@ import { ConfirmationService } from 'primeng/primeng';
 import { NavService } from '../../_services/_nav.service';
 import { Supplies } from '../../_models/supplies';
 import { SuppliesProjection } from '../../_models/suppliesProjection';
+import { SuppliesProjectionOrganizationalStructureServices } from '../../_services/suppliesProjectionOrganizationalStructure.service';
 
 @Component( {
                moduleId: module.id,
@@ -22,7 +23,9 @@ export class ConsolidatedProjectionComponent implements OnInit {
    idProyeccionDotacion: number;
    showArea = false;
    selected = 0;
+
    constructor( private suppliesProjectionServices: SuppliesProjectionServices,
+      private suppliesProjectionOrganizationalStructureServices: SuppliesProjectionOrganizationalStructureServices,
       private router: Router,
       private route: ActivatedRoute,
       private confirmationService: ConfirmationService,
@@ -40,8 +43,12 @@ export class ConsolidatedProjectionComponent implements OnInit {
                } );
                this.listSupplies = listSupplies;
                this.listSupplies.map( g => {
-                  this.suppliesProjectionServices.getConsolidated( g.idDotacion, this.idProyeccionDotacion ).subscribe(
+                  this.suppliesProjectionServices.getConsolidatedSize( g.idDotacion, this.idProyeccionDotacion ).subscribe(
                      total => g.totales = total
+                  );
+                  this.suppliesProjectionOrganizationalStructureServices.getByProjection( g.idDotacion, this.idProyeccionDotacion )
+                  .subscribe(
+                     totalA => g.areas = totalA
                   );
                } );
             }
