@@ -28,7 +28,7 @@ export class EmployeesEstateAddComponent implements OnInit {
    listClassEstate: SelectItem[] = [];
    msgs: Message[] = [];
    year: Number;
-   anioValid: boolean = false;
+   anioNotValid: boolean = false;
    idTercero: number;
 
    constructor( private employeesEsatesService: EmployeeEstateService,
@@ -94,10 +94,16 @@ export class EmployeesEstateAddComponent implements OnInit {
       } );
    }
 
-   inputNumber() {
-      let anio = this.employeeEstate.anioConstruccion + '';
-      if ( this.employeeEstate.anioConstruccion !== null ) {
-         this.employeeEstate.anioConstruccion = Number( anio.replace( /[^0-9]/g, '' ) );
+   inputNumber( event: any ) {
+      let input = event.target.value;
+      event.target.value = input.toUpperCase().replace( /[^0-9]/g, '' );
+      let anio = Number( event.target.value );
+      if ( anio > 1000 ) {
+         if ( this.year >= anio ) {
+            this.anioNotValid = false;
+         } else {
+            this.anioNotValid = true;
+         }
       }
    }
 
@@ -105,41 +111,44 @@ export class EmployeesEstateAddComponent implements OnInit {
       let piso = this.employeeEstate.numeroPisos + '';
       if ( this.employeeEstate.numeroPisos !== null ) {
          this.employeeEstate.numeroPisos = Number( piso.replace( /[^0-9]/g, '' ) );
+         if(this.employeeEstate.numeroPisos==0){
+            this.employeeEstate.numeroPisos = null;
+         }
       }
    }
 
    inputNumberSotanos() {
       let sotano = this.employeeEstate.numeroSotanos + '';
       if ( this.employeeEstate.numeroSotanos !== null ) {
-         if(sotano.length>3){
-            sotano= sotano.substring(0,3);
+         if ( sotano.length > 3 ) {
+            sotano = sotano.substring( 0, 3 );
          }
          this.employeeEstate.numeroSotanos = Number( sotano.replace( /[^0-9]/g, '' ) );
       }
    }
 
    anioValidate() {
-      let anio = this.employeeEstate.anioConstruccion;
-      if ( anio > this.year ) {
-         this.anioValid = true;
-      } else {
-         this.anioValid = false;
-      }
+      // let anio = this.employeeEstate.anioConstruccion;
+      // if ( anio < this.year ) {
+      //    this.anioNotValid = true;
+      // } else {
+      //    this.anioNotValid = false;
+      // }
    }
 
-   goBack(fDirty : boolean): void {
+   goBack( fDirty: boolean ): void {
 
-      if ( fDirty ){
+      if ( fDirty ) {
          this.confirmationService.confirm( {
-            message: ` ¿Está seguro que desea salir sin guardar?`,
-            header: 'Confirmación',
-            icon: 'fa fa-question-circle',
-            accept: () => {
-               this._nav.setTab( 5 );
-               this.location.back();
-            }
-         } );
-      }else {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this._nav.setTab( 5 );
+                                                 this.location.back();
+                                              }
+                                           } );
+      } else {
          this._nav.setTab( 5 );
          this.location.back();
       }
