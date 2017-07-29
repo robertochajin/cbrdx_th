@@ -29,10 +29,13 @@ export class ReferencesUpdateComponent implements OnInit {
    localizacion: Localizaciones = new Localizaciones();
    header: string = 'Editanto Referencia';
    referencesTypes: SelectItem[] = [];
+   listReferencesTypes: any[];
+   listConstantCompany: string[] = [];
    submitted: boolean;
    msgs: Message[] = [];
    uploadedFiles: any[] = [];
    addinglocation: boolean = true;
+   companyRequired: boolean = true;
    idTercero: number;
 
    svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
@@ -76,6 +79,13 @@ export class ReferencesUpdateComponent implements OnInit {
          res.map( ( s: ListaItem ) => {
             this.referencesTypes.push( { label: s.nombre, value: s.idLista } );
          } );
+         this.listReferencesTypes = res;
+      } );
+      this.constanteService.getByCode( 'REFOBL' ).subscribe( rs => {
+         if ( rs ) {
+            let temp = rs.valor;
+            this.listConstantCompany = temp.split( ',' );
+         }
       } );
       this.route.params.subscribe( ( params: Params ) => {
          this.idTercero = params[ 'tercero' ];
@@ -148,7 +158,15 @@ export class ReferencesUpdateComponent implements OnInit {
             this.location.back();
         }
     }
-
+   changeReferencesType() {
+      let temp = this.listReferencesTypes.find( r => r.idLista === this.reference.idTipoReferencia );
+      let temp2 = this.listConstantCompany.find( c => c === temp.codigo );
+      if ( temp2 ) {
+         this.companyRequired = false;
+      }else{
+         this.companyRequired = true;
+      }
+   }
    focusUP() {
       const element = document.querySelector( '#formulario' );
       if ( element ) {
