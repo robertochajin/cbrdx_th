@@ -1247,6 +1247,7 @@
       "LBL_MOTIVO": "Motivo",
       "LBL_OBSERVACION": "Observacion",
       "LBL_ESTADO": "Estado",
+      "LBL_LIMPIARFECHAS": "Limpiar fechas",
       "": ""
    },
    "ACCIDENTINCIDENT": {

@@ -93,6 +93,25 @@ export class SuppliesProjectionComponent {
          } );
       }
    }
+   resetFilterDate(){
+      this.fechaFin = null;
+      this.fechaInicio = null;
+      if ( this.idUsuario ) {
+         this.listSuppliesProjection = [];
+         this.suppliesProjectionServices.getAll().subscribe( data => {
+            for ( let s of data ) {
+               if ( s.auditoriaUsuario === this.idUsuario ) {
+                  this.listSuppliesProjection.push( s );
+               }
+            }
+         } );
+      }else {
+         this.listSuppliesProjection = [];
+         this.suppliesProjectionServices.getAll().subscribe( data => {
+            this.listSuppliesProjection = data;
+         } );
+      }
+   }
 
    selectInicio() {
       let temp = new Date( this.fechaInicio );
