@@ -276,14 +276,14 @@ export class PositionsUpdateComponent implements OnInit {
 
    onSubmit5() {
       this.msgs = [];
-      if ( this.position.paso <= 6 ) {
-         this.position.paso = 7;
-         this.step = 7;
+      if ( this.position.paso <= 5 ) {
+         this.position.paso = 6;
+         this.step = 6;
       }
       this.positionsService.update3( this.position )
       .subscribe( data => {
-         this._nav.setTab( 6 );
-         this.acordion = 6;
+         this._nav.setTab( 5 );
+         this.acordion = 5;
          this._nav.setMesage( 1, this.msgs );
       }, error => {
          this._nav.setMesage( 3, this.msgs );

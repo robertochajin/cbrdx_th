@@ -26,7 +26,7 @@ export class SuppliesProjectionServices {
    }
 
    getByEmployees( idTercero: number ) {
-      return this.authHttp.get( this.masterService + 'proyeccionDotacion/idTercero' + idTercero )
+      return this.authHttp.get( this.masterService + 'proyeccionDotacion/tercero/' + idTercero )
       .map( ( res: Response ) => res.json() as SuppliesProjection[] );
    }
 
@@ -66,8 +66,13 @@ export class SuppliesProjectionServices {
       .map( ( res: Response ) => res.json() as Supplies[] );
    }
 
-   getConsolidated( idDotacion: number, idProyeccionDotacion: number ) {
-      return this.authHttp.get( this.masterService + 'dotaciones' )
+   getConsolidatedSize( idDotacion: number, idProyeccionDotacion: number ) {
+      return this.authHttp.get( this.masterService + 'dotaciones/tallasGenero/' + idProyeccionDotacion + '/' + idDotacion )
+      .map( ( res: Response ) => res.json() as TotalSupplies[] );
+   }
+
+   getConsolidatedArea( idDotacion: number, idProyeccionDotacion: number ) {
+      return this.authHttp.get( this.masterService + 'dotaciones/tallasGenero/' + idProyeccionDotacion + '/' + idDotacion )
       .map( ( res: Response ) => res.json() as TotalSupplies[] );
    }
 

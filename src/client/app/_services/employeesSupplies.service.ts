@@ -28,7 +28,7 @@ export class EmployessSuppliesServices {
       .map( ( res: Response ) => res.json() as EmployessSuppliesAdditional[] );
    }
 
-   getAllAdditionalUnasignedByIdEmployeeAndProjection(idProjection: number, idEmployee: number) {
+   getAllAdditionalUnasignedByIdEmployeeAndProjection( idProjection: number, idEmployee: number ) {
       return this.authHttp.get( this.masterServiceAdditional + 'terceroProyeccionDotacion/' + idEmployee + '/' + idProjection )
       .map( ( res: Response ) => res.json() as EmployessSuppliesAdditional[] );
    }
@@ -50,8 +50,13 @@ export class EmployessSuppliesServices {
    }
 
    getAllEmployeesSuppliesByProjection( idProjection: number ) {
-       return this.authHttp.get( this.masterServiceProjection + 'proyeccionDotacion/' + idProjection + '/enabled')
-         .map( ( res: Response ) => res.json() as EmployessSuppliesProjection[] );
+      return this.authHttp.get( this.masterServiceProjection + 'proyeccionDotacion/' + idProjection + '/enabled' )
+      .map( ( res: Response ) => res.json() as EmployessSuppliesProjection[] );
+   }
+
+   getAllEmployeesSuppliesByProjectionByEmployee( idProjection: number, idTercero: number ) {
+      return this.authHttp.get( this.masterServiceProjection + 'proyeccionDotacion/' + idProjection + '/enabled' )
+      .map( ( res: Response ) => res.json() as EmployessSuppliesProjection[] );
    }
 
    getAllEmployeesSupplies() {
@@ -85,14 +90,14 @@ export class EmployessSuppliesServices {
       .map( ( res: Response ) => res.json() as EmployessSuppliesProjectionSupply[] );
    }
 
-   getAllSuppliesByEmployeeProjection(idEmployeeProjection: number) {
+   getAllSuppliesByEmployeeProjection( idEmployeeProjection: number ) {
       return this.authHttp.get( this.masterServiceProjectionSupply + 'proyeccionDotacionTercero/' + idEmployeeProjection )
       .map( ( res: Response ) => res.json() as EmployessSuppliesProjectionSupply[] );
    }
 
-   updateEmployeeSupplies(supplies: EmployessSuppliesProjectionSupply[]) {
-      if(supplies !== undefined && supplies.length > 0){
-         for(let f of supplies){
+   updateEmployeeSupplies( supplies: EmployessSuppliesProjectionSupply[] ) {
+      if ( supplies !== undefined && supplies.length > 0 ) {
+         for ( let f of supplies ) {
             f.auditoriaUsuario = this.idUsuario;
          }
       }
@@ -100,9 +105,9 @@ export class EmployessSuppliesServices {
       return this.authHttp.put( this.masterServiceProjectionSupply, JSON.stringify( supplies ) ).catch( this.handleError );
    }
 
-   updateEmployeeAdditionalSupplies(addSupplies: EmployessSuppliesAdditional[]) {
-      if(addSupplies !== undefined && addSupplies.length > 0){
-         for(let f of addSupplies){
+   updateEmployeeAdditionalSupplies( addSupplies: EmployessSuppliesAdditional[] ) {
+      if ( addSupplies !== undefined && addSupplies.length > 0 ) {
+         for ( let f of addSupplies ) {
             f.auditoriaUsuario = this.idUsuario;
          }
       }
@@ -124,6 +129,10 @@ export class EmployessSuppliesServices {
    updateProjectionSupply( f: EmployessSuppliesProjectionSupply ) {
       f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.masterServiceProjectionSupply, JSON.stringify( f ) ).catch( this.handleError );
+   }
+
+   updateProjectionSupplySatisfied( f: any[] ) {
+      return this.authHttp.put( this.masterServiceProjectionSupply + 'satisfecho', JSON.stringify( f ) ).catch( this.handleError );
    }
 
    handleError( error: any ): Promise<any> {

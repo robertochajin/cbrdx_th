@@ -16,6 +16,8 @@ export class SuppliesProjection {
    public auditoriaUsuario: number;
    public auditoriaFecha: Date;
    public idEstructuraOrganizacional: number[] = [];
+   public periodo: string;
+   public estado: string;
 
    constructor() {
       this.auditoriaFecha = null;

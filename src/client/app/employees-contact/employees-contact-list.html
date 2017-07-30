@@ -42,7 +42,7 @@
             <div class="form-group col-md-6">
               <label for="cel">{{ 'LBL_CELULAR' | translate }}</label>
               <p-inputMask id="cel" name="cel" [required]="tel" (keyup)="validarCelular()"
-                           mask="?(999) 999-9999" placeholder="(999) 999-9999"
+                           mask="(999) 999-9999" placeholder="(999) 999-9999"
                            [(ngModel)]="contact.celular" #celular="ngModel"
               ></p-inputMask>
                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="fe.submitted && !celular.valid">

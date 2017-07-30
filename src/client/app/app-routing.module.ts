@@ -210,6 +210,7 @@ import { EmployeeAssignationComponent } from './supplies/assign-supplies/employe
 import { EmployeeAssignationDetailComponent } from './supplies/assign-supplies/employee-assignation-detail.component';
 import { TracingSuppliesComponent } from './supplies/tracing-supplies/tracing-supplies.component';
 import { ConsolidatedProjectionComponent } from './supplies/supplies-projection/consolidated-projection.component';
+import { SuppliesConfirmationComponent } from './employees/supplies-employees/supplies-confirmation.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -523,8 +524,8 @@ const routes = [
    // seguimiento de dotaciones
    { path: 'tracing-supplies', component: TracingSuppliesComponent },
 
-
-
+   //  employees additional data
+   { path: 'employees/supplies-confirmation/:id', component: SuppliesConfirmationComponent, canActivate: [ AuthGuard ] }
 
 ];
 

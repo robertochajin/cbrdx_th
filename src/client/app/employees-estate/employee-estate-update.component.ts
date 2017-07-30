@@ -29,7 +29,7 @@ export class EmployeesEstateUpdateComponent implements OnInit {
    listLocalizacion: SelectItem[] = [];
    msgs: Message[] = [];
    year: Number;
-   anioValid: boolean = false;
+   anioNotValid: boolean = false;
 
    constructor( private employeesEstatesService: EmployeeEstateService,
       private listaService: ListaService,
@@ -95,10 +95,16 @@ export class EmployeesEstateUpdateComponent implements OnInit {
       } );
    }
 
-   inputNumber() {
-      let anio = this.employeeEstate.anioConstruccion + '';
-      if ( this.employeeEstate.anioConstruccion !== null ) {
-         this.employeeEstate.anioConstruccion = Number( anio.replace( /[^0-9]/g, '' ) );
+   inputNumber( event: any ) {
+      let input = event.target.value;
+      event.target.value = input.toUpperCase().replace( /[^0-9]/g, '' );
+      let anio = Number( event.target.value );
+      if ( anio > 1000 ) {
+         if ( this.year >= anio ) {
+            this.anioNotValid = false;
+         } else {
+            this.anioNotValid = true;
+         }
       }
    }
 
@@ -106,6 +112,9 @@ export class EmployeesEstateUpdateComponent implements OnInit {
       let piso = this.employeeEstate.numeroPisos + '';
       if ( this.employeeEstate.numeroPisos !== null ) {
          this.employeeEstate.numeroPisos = Number( piso.replace( /[^0-9]/g, '' ) );
+         if ( this.employeeEstate.numeroPisos == 0 ) {
+            this.employeeEstate.numeroPisos = null;
+         }
       }
    }
 
@@ -120,12 +129,12 @@ export class EmployeesEstateUpdateComponent implements OnInit {
    }
 
    anioValidate() {
-      let anio = this.employeeEstate.anioConstruccion;
-      if ( anio > this.year ) {
-         this.anioValid = true;
-      } else {
-         this.anioValid = false;
-      }
+      // let anio = this.employeeEstate.anioConstruccion;
+      // if ( anio < this.year ) {
+      //    this.anioValid = true;
+      // } else {
+      //    this.anioValid = false;
+      // }
    }
 
    goBack(fDirty : boolean): void {

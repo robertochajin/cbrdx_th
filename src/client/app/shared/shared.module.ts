@@ -65,15 +65,17 @@ export class SharedModule {
                jQuery( 'button' ).click( function () {
                   setTimeout( () => {
 
-                     if ( jQuery( 'input.ng-invalid' ).length > 0 ) {
+                     if ( jQuery( 'form.ng-touched input.ng-invalid' ).length > 0 ) {
 
                         if( jQuery( 'input.ng-invalid:first' ).parents('p-accordion').length == 0 ){
-                           jQuery( 'body' ).scrollTop( jQuery( 'input.ng-invalid:first' ).position().top );
-                           // console.log( 'Focus in input Error!' );
                            setTimeout( () => {
-                              jQuery( 'input.ng-invalid:first' ).select().focus();
+                              let inputError = jQuery( 'input[type=text].ng-invalid:enabled:visible, p-dropdown.ng-invalid>input:first' )
+                              .first();
+                              inputError.select().focus();
+                              jQuery( 'body' ).scrollTop( inputError.position().top );
                            }, 500 );
                         }
+
                      } else {
                         // if ( jQuery( 'div.ui-messages' ).length ) {
                         //    jQuery( 'body' ).scrollTop( jQuery( 'div.ui-messages:first' ).position().top );

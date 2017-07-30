@@ -1,128 +1,125 @@
 <p-messages [value]="msgs"></p-messages>
 <p-confirmDialog width="400" #cd>
-  <p-footer>
-    <button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
-    <button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
-  </p-footer>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
 
 </p-confirmDialog>
 <div class="col-md-10 col-md-offset-1">
-<div *ngIf="employeeEstate">
-	<div class="row">
-      <div class="header">
-        <h4 class="title">{{header}}</h4>
-      </div>
-    </div>
-  </div>
-  <form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
-    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-6">
-          <label for="idTipoVivienda">{{ 'EMPLOYEES.LBL_TIPOINMUEBLE' | translate }}</label>
-          <p-dropdown id="idTipoVivienda" name="idTipoVivienda" required="true"
-                      [options]="listTypeEstate" [autoWidth]="false"
-                      [(ngModel)]="employeeEstate.idTipoVivienda"
-                      #idTipoVivienda="ngModel"
-          ></p-dropdown>
-          <div class="ui-message ui-messages-error ui-corner-all"
-               *ngIf="f.submitted && !idTipoVivienda.valid">
-            <i class="fa fa-close"></i>
-            {{ 'EMPLOYEES.LBL_TIPOINMUEBLE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-          </div>
-        </div>
-        <div class="ui-grid-col-6">
-          <label for="idClaseVivienda">{{ 'EMPLOYEES.LBL_VIVIENDA' | translate }}? </label>
-          <p-dropdown id="idClaseVivienda" name="idClaseVivienda" required="true"
-                      [options]="listClassEstate" [autoWidth]="false"
-                      [(ngModel)]="employeeEstate.idClaseVivienda"
-                      #idClaseVivienda="ngModel"
-          ></p-dropdown>
-          <div class="ui-message ui-messages-error ui-corner-all"
-               *ngIf="f.submitted && !idClaseVivienda.valid">
-            <i class="fa fa-close"></i>
-            {{ 'EMPLOYEES.LBL_VIVIENDA' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-          </div>
-        </div>
-      </div>
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-6">
-          <label for="idTipoConstruccionVivienda">{{ 'EMPLOYEES.LBL_TIPOCONSTRUCCION' | translate }}</label>
-          <p-dropdown id="idTipoConstruccionVivienda" name="idTipoConstruccionVivienda" required="true"
-                      [options]="listTypeConstruction" [autoWidth]="false"
-                      [(ngModel)]="employeeEstate.idTipoConstruccionVivienda"
-                      #idTipoConstruccionVivienda="ngModel"
-          ></p-dropdown>
-          <div class="ui-message ui-messages-error ui-corner-all"
-               *ngIf="f.submitted && !idTipoConstruccionVivienda.valid">
-            <i class="fa fa-close"></i>
-            {{ 'EMPLOYEES.LBL_TIPOCONSTRUCCION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-          </div>
-        </div>
-        <div class="ui-grid-col-6">
-          <label for="numeroPisos">{{ 'EMPLOYEES.LBL_NUMEROPISOS' | translate }}</label>
-          <input id="numeroPisos" name="numeroPisos" #numeroPisos="ngModel" pInputText type="text"
-                 (keyup)="inputNumberPisos()" maxlength="3" (paste)="inputNumberPisos()"
-                 [(ngModel)]="employeeEstate.numeroPisos" min="1" required/>
-          <div class="ui-message ui-messages-error ui-corner-all"
-               *ngIf="f.submitted && !numeroPisos.valid">
-            <i class="fa fa-close"></i>
-            {{ 'EMPLOYEES.LBL_NUMEROPISOS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-          </div>
-        </div>
-      </div>
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-6">
-          <label for="anioConstruccion">{{ 'EMPLOYEES.LBL_ANOCONSTRUCCION' | translate }}</label>
-          <input id="anioConstruccion" name="anioConstruccion" #anioConstruccion="ngModel" pInputText type="text"
-                 (keyup)="inputNumber()" (paste)="inputNumber()" (change)="anioValidate()"
-                 [(ngModel)]="employeeEstate.anioConstruccion" required maxlength="4"/>
-          <div class="ui-message ui-messages-error ui-corner-all"
-               *ngIf="(f.submitted && !anioConstruccion.valid )&& !anioValid">
-            <i class="fa fa-close"></i>
-            {{ 'EMPLOYEES.LBL_ANOCONSTRUCCION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-          </div>
-          <!--<div *ngIf="anioValid" class="alert alert-danger">-->
-            <!--Año no valido-->
-          <!--</div>-->
-        </div>
-        <div class="ui-grid-col-6">
-          <label for="numeroSotanos">{{ 'EMPLOYEES.LBL_NUMEROSOTANOS' | translate }}</label>
-          <input id="numeroSotanos" name="numeroSotanos" #numeroSotanos="ngModel" pInputText type="text"
-                 (keyup)="inputNumberSotanos()"
-                 (paste)="inputNumberSotanos()"
-                 [(ngModel)]="employeeEstate.numeroSotanos" min="1" required/>
-          <div class="ui-message ui-messages-error ui-corner-all"
-               *ngIf="f.submitted && !numeroSotanos.valid ">
-            <i class="fa fa-close"></i>
-           {{ 'EMPLOYEES.LBL_NUMEROSOTANOS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-          </div>
-        </div>
-      </div>
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-6">
-          <label for="idEstrato">{{ 'EMPLOYEES.LBL_ESTRATO' | translate }}</label>
-          <p-dropdown id="idEstrato" name="idEstrato" required="true"
-                      [options]="listStratum" [autoWidth]="false"
-                      [(ngModel)]="employeeEstate.idEstrato"
-                      #idEstrato="ngModel"
-          ></p-dropdown>
-          <div class="ui-message ui-messages-error ui-corner-all"
-               *ngIf="f.submitted && !idEstrato.valid">
-            <i class="fa fa-close"></i>
-            {{ 'EMPLOYEES.LBL_ESTRATO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-          </div>
-        </div>
-      </div>
-      <div class="ui-grid-row form-footer-buttons">
-        <div class="ui-grid-col-4"></div>
-        <div class="ui-grid-col-1">
-          <a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
-        </div>
-        <div class="ui-grid-col-2">
-          <button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
-        </div>
-        <div class="ui-grid-col-5"></div>
-      </div>
-    </div>
-  </form>
+	<div *ngIf="employeeEstate">
+		<div class="row">
+			<div class="header">
+				<h4 class="title">{{header}}</h4>
+			</div>
+		</div>
+	</div>
+	<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+		<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-6">
+					<label for="idTipoVivienda">{{ 'EMPLOYEES.LBL_TIPOINMUEBLE' | translate }}</label>
+					<p-dropdown id="idTipoVivienda" name="idTipoVivienda" required="true"
+					            [options]="listTypeEstate" [autoWidth]="false"
+					            [(ngModel)]="employeeEstate.idTipoVivienda"
+					            #idTipoVivienda="ngModel"
+					></p-dropdown>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !idTipoVivienda.valid">
+						<i class="fa fa-close"></i>
+						{{ 'EMPLOYEES.LBL_TIPOINMUEBLE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-6">
+					<label for="idClaseVivienda">{{ 'EMPLOYEES.LBL_VIVIENDA' | translate }}? </label>
+					<p-dropdown id="idClaseVivienda" name="idClaseVivienda" required="true"
+					            [options]="listClassEstate" [autoWidth]="false"
+					            [(ngModel)]="employeeEstate.idClaseVivienda"
+					            #idClaseVivienda="ngModel"
+					></p-dropdown>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !idClaseVivienda.valid">
+						<i class="fa fa-close"></i>
+						{{ 'EMPLOYEES.LBL_VIVIENDA' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-6">
+					<label for="idTipoConstruccionVivienda">{{ 'EMPLOYEES.LBL_TIPOCONSTRUCCION' | translate }}</label>
+					<p-dropdown id="idTipoConstruccionVivienda" name="idTipoConstruccionVivienda" required="true"
+					            [options]="listTypeConstruction" [autoWidth]="false"
+					            [(ngModel)]="employeeEstate.idTipoConstruccionVivienda"
+					            #idTipoConstruccionVivienda="ngModel"
+					></p-dropdown>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !idTipoConstruccionVivienda.valid">
+						<i class="fa fa-close"></i>
+						{{ 'EMPLOYEES.LBL_TIPOCONSTRUCCION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-6">
+					<label for="numeroPisos">{{ 'EMPLOYEES.LBL_NUMEROPISOS' | translate }}</label>
+					<input id="numeroPisos" name="numeroPisos" #numeroPisos="ngModel" pInputText type="text"
+					       (keyup)="inputNumberPisos()" maxlength="3" minlength="1"
+					       [(ngModel)]="employeeEstate.numeroPisos" required/>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !numeroPisos.valid">
+						<i class="fa fa-close"></i>
+						{{ 'EMPLOYEES.LBL_NUMEROPISOS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-6">
+					<label for="anioConstruccion">{{ 'EMPLOYEES.LBL_ANOCONSTRUCCION' | translate }}</label>
+					<input id="anioConstruccion" name="anioConstruccion" #Construccion="ngModel" pInputText type="text"
+					       (keyup)="inputNumber($event)" (change)="anioValidate()"
+					       [(ngModel)]="employeeEstate.anioConstruccion" required maxlength="4" minlength="4"/>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="(f.submitted && !Construccion.valid) || anioNotValid">
+						<i class="fa fa-close"></i>
+						{{ 'EMPLOYEES.LBL_ANOCONSTRUCCION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-6">
+					<label for="numeroSotanos">{{ 'EMPLOYEES.LBL_NUMEROSOTANOS' | translate }}</label>
+					<input id="numeroSotanos" name="numeroSotanos" #numeroSotanos="ngModel" pInputText type="text"
+					       (keyup)="inputNumberSotanos()"
+					       (paste)="inputNumberSotanos()"
+					       [(ngModel)]="employeeEstate.numeroSotanos" min="1" required/>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !numeroSotanos.valid ">
+						<i class="fa fa-close"></i>
+						{{ 'EMPLOYEES.LBL_NUMEROSOTANOS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-6">
+					<label for="idEstrato">{{ 'EMPLOYEES.LBL_ESTRATO' | translate }}</label>
+					<p-dropdown id="idEstrato" name="idEstrato" required="true"
+					            [options]="listStratum" [autoWidth]="false"
+					            [(ngModel)]="employeeEstate.idEstrato"
+					            #idEstrato="ngModel"
+					></p-dropdown>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !idEstrato.valid">
+						<i class="fa fa-close"></i>
+						{{ 'EMPLOYEES.LBL_ESTRATO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+			<div class="ui-grid-row form-footer-buttons">
+				<div class="ui-grid-col-4"></div>
+				<div class="ui-grid-col-1">
+					<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+				</div>
+				<div class="ui-grid-col-2">
+					<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+				</div>
+				<div class="ui-grid-col-5"></div>
+			</div>
+		</div>
+	</form>
 </div>

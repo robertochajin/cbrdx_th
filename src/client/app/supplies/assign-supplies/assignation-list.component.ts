@@ -68,11 +68,11 @@ export class AssignationListComponent implements OnInit {
             this.assignState = this.empProyectionStates.find( s => s.codigo === 'ASIG' );
             this.deliverState = this.empProyectionStates.find( s => s.codigo === 'ENTRE' );
 
-            this.employessSuppliesServices.getAllEmployeesSuppliesByProjection( params['idProjection'] ).subscribe( list => {
+            this.employessSuppliesServices.getAllEmployeesSuppliesByProjection( params[ 'idProjection' ] ).subscribe( list => {
                this.projectedEmployess = list;
             } );
-         });
-      });
+         } );
+      } );
 
 
    }

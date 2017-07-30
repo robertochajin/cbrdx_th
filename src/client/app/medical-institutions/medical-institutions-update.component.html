@@ -18,7 +18,7 @@
 									<div class="ui-grid-col-6">
 										<label for="entidad">{{ 'MEDICALINSTITUTION.LBL_NOMBRE' | translate }}</label>
 										<input id="entidad" name="entidad" #nombre="ngModel" pInputText type="text"
-										       [(ngModel)]="medicalInstitution.institucionMedica" required
+										       [(ngModel)]="medicalInstitution.institucionMedica" required maxlength="50"
 										       (keyup)="capitalize($event)"/>
 										<div class="ui-message ui-messages-error ui-corner-all"
 										     *ngIf="f.submitted && !nombre.valid">
@@ -29,7 +29,7 @@
 									<div class="ui-grid-col-6">
 										<label for="resplegal">{{ 'MEDICALINSTITUTION.LBL_REPRESENTANTELEGAL' | translate }}</label>
 										<input id="resplegal" name="resplegal" #legal="ngModel" pInputText type="text"
-										       [(ngModel)]="medicalInstitution.representanteLegal" required
+										       [(ngModel)]="medicalInstitution.representanteLegal" required maxlength="128"
 										       (keyup)="capitalize($event)"/>
 										<div class="ui-message ui-messages-error ui-corner-all"
 										     *ngIf="f.submitted && !legal.valid">
@@ -59,6 +59,8 @@
 										<p-inputMask id="telefonoFijo" name="telefonoFijo"
 										             mask="?(999) 999-9999 Ext 9999" placeholder="(999) 999-9999 Ext 99999" #telefonoFijo="ngModel"
 										             required [(ngModel)]="medicalInstitution.telefonoContacto" type="text"
+										             onKeyUp="this.value = this.value.toUpperCase();"
+
 										></p-inputMask>
 										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !telefonoFijo.valid">
 											<i class="fa fa-close"></i>
@@ -68,8 +70,8 @@
 									<div class="ui-grid-col-7">
 										<label for="correoElectronico">* {{'LBL_CORREOELECTRONICO' | translate }}</label>
 										<input id="correoElectronico" name="correoElectronico" #correoElectronico="ngModel" pInputText
-										       type="text" required [(ngModel)]="medicalInstitution.correoElectronico"
-										       pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"/>
+										       type="text" required [(ngModel)]="medicalInstitution.correoElectronico" maxlength="128"
+										       pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$" (keyup)="capitalize($event)"/>
 										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !correoElectronico.valid ">
 											<i class="fa fa-close"></i>
 											{{'LBL_CORREOELECTRONICO' | translate }} {{'LBL_REQUERIDO' | translate }}
@@ -80,7 +82,7 @@
 									<div class="ui-grid-col-6">
 										<label for="osteo">* {{'MEDICALINSTITUTION.LBL_EXAMENOSTEOMUSCULAR' | translate }}</label>
 										<input id="osteo" name="osteo" #examosteo="ngModel" pInputText
-										       type="text" required [(ngModel)]="medicalInstitution.valorExamenOsteosmuscular"
+										       type="text" required [(ngModel)]="medicalInstitution.valorExamenOsteosmuscular" maxlength="9"
 										       (keyup)="calcularVaor()"
 										       currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
 										/>
@@ -92,7 +94,7 @@
 									<div class="ui-grid-col-6">
 										<label for="visio">* {{'MEDICALINSTITUTION.LBL_EXAMENVISION' | translate }}</label>
 										<input id="visio" name="visio" #examvisio="ngModel" pInputText
-										       type="text" required [(ngModel)]="medicalInstitution.valorExamenVisiometria"
+										       type="text" required [(ngModel)]="medicalInstitution.valorExamenVisiometria" maxlength="9"
 										       (keyup)="calcularVaor()"
 										       currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
 										/>
@@ -106,7 +108,7 @@
 									<div class="ui-grid-col-6">
 										<label for="opto">* {{'MEDICALINSTITUTION.LBL_EXAMENOPTPMETRIA' | translate }}</label>
 										<input id="opto" name="opto" #examopto="ngModel" pInputText
-										       type="text" required [(ngModel)]="medicalInstitution.valorExamenOptometria"
+										       type="text" required [(ngModel)]="medicalInstitution.valorExamenOptometria" maxlength="9"
 										       (keyup)="calcularVaor()"
 										       currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
 										/>
@@ -117,7 +119,7 @@
 									</div>
 									<div class="ui-grid-col-6">
 										<label>{{'MEDICALINSTITUTION.LBL_EXAMENVALOR' | translate }}</label>
-										<h3>{{totalExamenes}}</h3>
+										<h3>${{totalExamenes}}</h3>
 									</div>
 								</div>
 								<div class="ui-grid-row">
@@ -187,7 +189,9 @@
 								<label for="valorviaje">* {{'MEDICALINSTITUTION.LBL_VALORVIAJA' | translate }}</label>
 								<input id="valorviaje" name="valorviaje" #valorv="ngModel" pInputText
 								       type="text" [required]="medicalInstitutionStructure.indicadorViaja"
-								       [(ngModel)]="medicalInstitutionStructure.valorViaje"
+								       [(ngModel)]="medicalInstitutionStructure.valorViaje" maxlength="9"
+								       currencyMask
+								       [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
 								       (keyup)="inputNumber()"/>
 								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="fs.submitted && !valorv.valid ">
 									<i class="fa fa-close"></i>

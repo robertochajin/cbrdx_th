@@ -40,7 +40,7 @@
 	          <div class="form-group col-md-6" *hasPermission="seccion.TELEFONOCELULAR ? seccion.TELEFONOCELULAR : defaultCampo">
               <label for="cel">{{ 'LBL_CELULAR' | translate }}</label>
               <p-inputMask id="cel" name="cel" [required]="tel" (keyup)="validarCelular()"
-                           mask="?(999) 999-9999" placeholder="(999) 999-9999"
+                           mask="(999) 999-9999" placeholder="(999) 999-9999"
                            [(ngModel)]="employee.telefonoCelular" #celular="ngModel"
                            [disabled]="seccion.TELEFONOCELULAR.editable === false"
               ></p-inputMask>
