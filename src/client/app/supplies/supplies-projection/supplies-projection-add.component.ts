@@ -32,6 +32,7 @@ export class SuppliesProjectionAddComponent implements OnInit {
    fechaInicio: Date;
    rangeFin: string;
    list2: any[] = [];
+   requiredArea: boolean = false;
 
    constructor( private router: Router,
       private route: ActivatedRoute,
@@ -77,16 +78,24 @@ export class SuppliesProjectionAddComponent implements OnInit {
 
    onSubmit() {
       if ( !this.suppliesProjection.indicadorNoAreas ) {
+         if ( this.list2.length === 0 ) {
+            this.requiredArea = true;
+         }else {
+            this.requiredArea = false;
+         }
          for ( let a of this.list2 ) {
             this.suppliesProjection.idEstructuraOrganizacional.push( a.idEstructuraOrganizacional );
          }
       }
-      this.suppliesProjectionServices.add( this.suppliesProjection ).subscribe( rs => {
-         this._nav.setMesage( 1, this.msgs );
-         this.location.back();
-      }, error => {
-         this._nav.setMesage( 3, this.msgs );
-      } );
+      if ( !this.requiredArea ) {
+         this.suppliesProjectionServices.add( this.suppliesProjection ).subscribe( rs => {
+            this._nav.setMesage( 1, this.msgs );
+            this.location.back();
+         }, error => {
+            this._nav.setMesage( 3, this.msgs );
+         } );
+
+      }
    }
 
    capitalize( event: any ) {
@@ -111,6 +120,15 @@ export class SuppliesProjectionAddComponent implements OnInit {
       let temp = new Date( this.suppliesProjection.fechaInicio );
       this.minDateFin = new Date( temp.setHours( 24 ) );
       if ( this.suppliesProjection.cantidadMeses ) {
+         this.suppliesProjection.fechaFin = new Date( temp.setHours( 24 * (this.suppliesProjection.cantidadMeses * 30) ) );
+      } else {
+         this.suppliesProjection.fechaFin = new Date( temp.setHours( 24 * (0 * 30) ) );
+      }
+   }
+
+   calculateRange() {
+      let temp = new Date( this.suppliesProjection.fechaInicio );
+      if ( temp ) {
          this.suppliesProjection.fechaFin = new Date( temp.setHours( 24 * (this.suppliesProjection.cantidadMeses * 30) ) );
       } else {
          this.suppliesProjection.fechaFin = new Date( temp.setHours( 24 * (0 * 30) ) );
