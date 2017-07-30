@@ -1191,12 +1191,14 @@
       "LBL_COMENTARIO": "Comentario",
       "LBL_COMENTARIOADICIONAL": "Comentario adicional",
       "LBL_COMENTARIOENTREGA": "Comentario entrega",
-      "MSG_ASIGNACIONESERRONEAS": "Ningún valor puede ser vacío o negativo",
+      "MSG_ASIGNACIONESERRONEAS": "Ningún valor puede ser vacío o negativo, tampoco puede ser mayor a la candidad configurada",
+      "MSG_NOMAYORASIGNADA": "Debe ser menor a ",
       "LBL_FECHAASIGNACION": "Fecha asignación",
       "LBL_FECHAENTREGA": "Fecha entrega",
       "LBL_FECHAPOSIBLEENTREGA": "Fecha posible entrega",
       "LBL_ESTADO": "Estado",
-      "": ""
+      "BTN_ASIGNAR": "Asignar",
+      "BTN_ENTREGAR": "Entregar"
    },
    "RECLUTAMIENTO": {
       "LBL_FASE_PROCESO": "Fase del proceso",
