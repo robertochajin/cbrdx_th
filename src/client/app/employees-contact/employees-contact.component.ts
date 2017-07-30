@@ -79,13 +79,15 @@ export class EmployeesContactComponent {
 
    validarCelular() {
       let temp = this.employee.telefonoCelular;
-      let telcel = temp.replace( /[^0-9]/g, '' ).length;
-      if ( telcel < 10 ) {
-         this.tel = true;
-         this.cel = true;
-      } else {
-         this.tel = false;
-         this.cel = false;
+      if(temp  !== undefined) {
+         let telcel = temp.replace( /[^0-9]/g, '' ).length;
+         if ( telcel < 10 ) {
+            this.tel = true;
+            this.cel = true;
+         } else {
+            this.tel = false;
+            this.cel = false;
+         }
       }
    }
    correoMinusculas() {
