@@ -1,7 +1,8 @@
-<div>
+<div *ngIf="!addingThird">
 	<div class="row datable-header">
 		<div class="col-md-6 col-xs-12 datatable-header-add">
-			<button type="button" pButton icon="fa-plus" (click)="add()" label="{{ 'ASIGNARDOTACION.LBL_TITULO' | translate }}"
+			<button *ngIf="projection.indicadorNoAreas" type="button" pButton icon="fa-plus" (click)="add()"
+			        label="{{ 'ASIGNARDOTACION.LBL_TITULO' | translate }}"
 			></button>
 		</div>
 		<div class="col-md-6 col-xs-12 datatable-header-search">
@@ -56,4 +57,57 @@
 			</template>
 		</p-column>
 	</p-dataTable>
+</div>
+<div *ngIf="addingThird">
+	<div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="header">
+					<h4 class="title">{{ 'ASIGNARDOTACION.LBL_ASIGNARTERCEROAPROYECCION' | translate }}</h4>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row-fluid">
+			<div class="col-md-12">
+				<form name="newThirForm" (ngSubmit)="f.valid && onSubmitThird()" #f="ngForm" novalidate id="newThirForm">
+					
+					
+					<div class="row">
+						<div class="form-group col-md-8 col-md-offset-2">
+							<label for="colaborador">* {{ 'EMPLOYEES.LBL_COLABORADOR' | translate }}</label>
+							<p-autoComplete placeholder="{{ 'ASIGNARDOTACION.MSG_ASIGNACOLABORADOR' | translate }}"
+							                field="nombreCompleto"  name="colaborador" id="colaborador"
+							                minLength="3" delay="300" [suggestions]="employeeList" required="true"
+							                (completeMethod)="employeeSearch($event)"
+							                (onSelect)="captureEmployee($event)" [(ngModel)]="selectedEmployee">
+							</p-autoComplete>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && wrongThird">
+								<i class="fa fa-close"></i>
+								{{ 'ASIGNARDOTACION.LBL_COLABORADORREQUERIDO' | translate }}
+							</div>
+						</div>
+					</div>
+					
+					<div class="row form-footer-buttons">
+						<div class="form-group col-md-12">
+							<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+							<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+							        pButton></button>
+						
+						</div>
+					</div>
+				
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<p-confirmDialog width="400" #cd>
+		<p-footer>
+			<button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate}}" (click)="cd.reject()"></button>
+			<button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate}}" (click)="cd.accept()"></button>
+		</p-footer>
+	</p-confirmDialog>
 </div>
