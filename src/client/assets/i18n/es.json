@@ -1248,6 +1248,7 @@
       "LBL_OBSERVACION": "Observacion",
       "LBL_ESTADO": "Estado",
       "LBL_LIMPIARFECHAS": "Limpiar fechas",
+      "LBL_AREASREQUERIDAS": "Debe seleccionar al menos un area",
       "": ""
    },
    "ACCIDENTINCIDENT": {
