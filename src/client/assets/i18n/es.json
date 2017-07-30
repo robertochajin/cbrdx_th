@@ -1251,6 +1251,7 @@
       "LBL_LIMPIARFECHAS": "Limpiar fechas",
       "LBL_HOMBRE": "Hombre",
       "LBL_MUJER": "Mujer",
+      "LBL_AREASREQUERIDAS": "Debe seleccionar al menos un area",
       "": ""
    },
    "ACCIDENTINCIDENT": {
