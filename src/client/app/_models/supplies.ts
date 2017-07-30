@@ -27,6 +27,7 @@ export class Supplies {
    public auditoriaFecha: Date;
    public cantidadTotal: number;
    public totales: TotalSupplies[] = [];
+   public suma: number = 0;
    public areas: SuppliesProjectionOrganizationalStructure[] = [];
 
    constructor() {
@@ -37,6 +38,6 @@ export class TotalSupplies {
    public talla: string;
    public indicadorHombre: string;
    public indicadorMujer: string;
-   public total: string;
+   public total: number;
 
 }
