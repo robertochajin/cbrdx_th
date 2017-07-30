@@ -1191,6 +1191,7 @@
       "MSG_ASIGNACIONESERRONEAS": "Ningún valor puede ser vacío o negativo",
       "LBL_FECHAASIGNACION": "Fecha asignación",
       "LBL_FECHAENTREGA": "Fecha entrega",
+      "LBL_FECHAPOSIBLEENTREGA": "Fecha posible entrega",
       "LBL_ESTADO": "Estado",
       "": ""
    },
@@ -1248,6 +1249,8 @@
       "LBL_OBSERVACION": "Observacion",
       "LBL_ESTADO": "Estado",
       "LBL_LIMPIARFECHAS": "Limpiar fechas",
+      "LBL_HOMBRE": "Hombre",
+      "LBL_MUJER": "Mujer",
       "LBL_AREASREQUERIDAS": "Debe seleccionar al menos un area",
       "": ""
    },

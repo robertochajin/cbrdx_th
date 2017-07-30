@@ -171,12 +171,13 @@ export class ReferencesAddComponent implements OnInit {
       this.msgs.push( { severity: 'info', summary: 'File Uploaded', detail: '' } );
       //this._nav.setMesage(0, {severity: 'info', summary: 'File Uploaded', detail: '' });
    }
+
    changeReferencesType() {
       let temp = this.listReferencesTypes.find( r => r.idLista === this.reference.idTipoReferencia );
       let temp2 = this.listConstantCompany.find( c => c === temp.codigo );
       if ( temp2 ) {
          this.companyRequired = false;
-      }else{
+      } else {
          this.companyRequired = true;
       }
    }

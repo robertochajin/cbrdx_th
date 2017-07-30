@@ -69,7 +69,8 @@ export class SharedModule {
 
                         if( jQuery( 'input.ng-invalid:first' ).parents('p-accordion').length == 0 ){
                            setTimeout( () => {
-                              let inputError = jQuery( 'input[type=text].ng-invalid:enabled:visible, p-dropdown.ng-invalid>input:first' ).first();
+                              let inputError = jQuery( 'input[type=text].ng-invalid:enabled:visible, p-dropdown.ng-invalid>input:first' )
+                              .first();
                               inputError.select().focus();
                               jQuery( 'body' ).scrollTop( inputError.position().top );
                            }, 500 );

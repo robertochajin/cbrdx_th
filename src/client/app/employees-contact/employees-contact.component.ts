@@ -78,9 +78,9 @@ export class EmployeesContactComponent {
    }
 
    validarCelular() {
-      let temp =this.employee.telefonoCelular;
+      let temp = this.employee.telefonoCelular;
       let telcel = temp.replace( /[^0-9]/g, '' ).length;
-      if ( telcel<10 ) {
+      if ( telcel < 10 ) {
          this.tel = true;
          this.cel = true;
       } else {

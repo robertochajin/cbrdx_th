@@ -10,6 +10,7 @@ import { Supplies } from '../../_models/supplies';
 import { SuppliesProjection } from '../../_models/suppliesProjection';
 import { SuppliesProjectionServices } from '../../_services/suppliesProjection.service';
 import { EmployessSuppliesProjectionSupply } from '../../_models/employessSuppliesProjectionSupply';
+import { EmployessSuppliesProjection } from '../../_models/employessSuppliesProjection';
 
 @Component( {
                moduleId: module.id,
@@ -26,6 +27,7 @@ export class SuppliesEmployeesComponent implements OnInit {
    listSuppliesAdditional: EmployessSuppliesAdditional[] = [];
    listSuppliesProjection: SuppliesProjection[];
    listSuppliesProjectionSupply: EmployessSuppliesProjectionSupply[] = [];
+   employesSuppliesProjection: EmployessSuppliesProjection = new EmployessSuppliesProjection();
    busqueda: string;
    showForm: boolean = false;
    showDetail: boolean = false;
@@ -131,6 +133,10 @@ export class SuppliesEmployeesComponent implements OnInit {
    }
 
    getProjectionsSupplies( idProyeccionDotacion: number ) {
+      this.employessSuppliesServices.getAllEmployeesSuppliesByProjectionByEmployee( idProyeccionDotacion, this.employee.idTercero )
+      .subscribe( data => {
+         this.employesSuppliesProjection = data.find( s => s.idTercero === this.employee.idTercero );
+      } );
       this.employessSuppliesServices.getByProjectionByEmployees( idProyeccionDotacion, this.employee.idTercero ).subscribe( data => {
          this.listSuppliesProjectionSupply = data;
       } );

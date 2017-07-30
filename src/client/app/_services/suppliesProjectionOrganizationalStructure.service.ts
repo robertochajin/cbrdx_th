@@ -29,6 +29,12 @@ export class SuppliesProjectionOrganizationalStructureServices {
       .map( ( res: Response ) => res.json() as SuppliesProjectionOrganizationalStructure );
    }
 
+   getByProjection( idDotacion: number, idProyeccionDotacion: number ) {
+      return this.authHttp.get(
+         this.masterService + 'proyeccionDotacionEstructuraOrganizacional/proyeccionDotacion/' + idProyeccionDotacion )
+      .map( ( res: Response ) => res.json() as SuppliesProjectionOrganizationalStructure[] );
+   }
+
    add( f: SuppliesProjectionOrganizationalStructure ) {
       f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.masterService + 'proyeccionDotacionEstructuraOrganizacional', f )
