@@ -66,7 +66,6 @@ export class ConsolidatedProjectionComponent implements OnInit {
             }
          );
       } );
-
    }
 
    ngOnInit() {
