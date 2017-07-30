@@ -1,5 +1,5 @@
 <h3 class="first">{{'SUPPLIES.LBL_SUPPLIESGROUPS' | translate}}</h3>
-<p-tabView orientation="left" id="tbvCompetenciasHabilidades">
+<p-tabView orientation="left" id="tbvCompetenciasHabilidades" (onChange)="handleChange($event)">
 	<p-tabPanel *ngFor="let item of listSupplies; let i = index" header="{{item.dotacion}}" [selected]="i == selected">
 		<form class="form-horizontal">
 			<fieldset>
@@ -15,7 +15,7 @@
 						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'SUPPLIES.LBL_REQUESTDATE' | translate}}:</label>
 						<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{suppliesProjection.auditoriaFecha}}</strong></label>
 						
-						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'SUPPLIES.LBL_QUANTITY' | translate}}:</label>
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'SUPPLIES.LBL_QUANTITYEMPLOYEE' | translate}}:</label>
 						<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{item.cantidad}}</strong></label>
 					</div>
 					<div class="row">
@@ -23,7 +23,11 @@
 						<label class="col-md-6 col-sm-6 col-xs-12"><strong>{{suppliesProjection.nombreProyeccion}}</strong></label>
 						<div class="col-md-3 col-sm-3 col-xs-6" *ngIf="item.indicadorRequiereTalla">
 							<button pButton icon="fa-plus" label="{{'SUPPLIESPROJECTION.LBL_VISUALIZARAREAS' | translate }}"
-							        type="button" (click)="swichArea()"></button>
+							        type="button" (click)="swichArea()" *ngIf="!showArea"
+							></button>
+							<button pButton icon="fa-plus" label="{{'SUPPLIESPROJECTION.LBL_VISUALIZARTALLAS' | translate }}"
+							        type="button" (click)="swichArea()" *ngIf="showArea"
+							></button>
 						</div>
 					</div>
 				</div>
@@ -47,6 +51,7 @@
 					</p-column>
 					<p-column field="total" header="{{'SUPPLIES.LBL_TOTAL' | translate}}" [sortable]="true"></p-column>
 				</p-dataTable>
+				<p-messages [(value)]="msgs" *ngIf="item.cantidadTotal !== item.suma"></p-messages>
 			</div>
 			<div class="col-md-12" *ngIf="showArea">
 				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="item.areas">
