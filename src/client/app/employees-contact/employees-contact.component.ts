@@ -68,7 +68,7 @@ export class EmployeesContactComponent {
     }
     }*/
    validarTelefono() {
-      if ( this.employee.telefonoFijo === '(___) ___-____ Ext ____' ) {
+      if ( this.employee.telefonoFijo === '' ) {
          this.tel = true;
          this.cel = true;
       } else {
