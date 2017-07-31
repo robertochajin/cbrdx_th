@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { SuppliesProjectionOrganizationalStructure } from './suppliesProjectionOrganizationalStructure';
 
 @Injectable()
 export class Supplies {
@@ -26,7 +27,8 @@ export class Supplies {
    public auditoriaFecha: Date;
    public cantidadTotal: number;
    public totales: TotalSupplies[] = [];
-   public areas: any[] = [];
+   public suma: number = 0;
+   public areas: SuppliesProjectionOrganizationalStructure[] = [];
 
    constructor() {
    }
@@ -34,7 +36,8 @@ export class Supplies {
 export class TotalSupplies {
 
    public talla: string;
-   public Genero: string;
-   public Total: string;
+   public indicadorHombre: string;
+   public indicadorMujer: string;
+   public total: number;
 
 }

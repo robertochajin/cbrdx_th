@@ -120,27 +120,53 @@
 	</p-dataTable>
 </div>
 <div *ngIf="showDetail">
+	<div class="row">
+		<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'ASIGNARDOTACION.LBL_FECHAPOSIBLEENTREGA' | translate }}: </label>
+		<label class="col-md-3 col-sm-6 col-xs-12">
+			<strong>{{employesSuppliesProjection.fechaPosibleEntrega}}</strong>
+		</label>
+		<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'ASIGNARDOTACION.LBL_FECHAENTREGA' | translate }}: </label>
+		<label class="col-md-3 col-sm-6 col-xs-12">
+			<strong>{{employesSuppliesProjection.fechaEntrega}}</strong>
+		</label>
+	</div>
 	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listSuppliesProjectionSupply" [paginator]="true" [rows]="10"
 	             [responsive]="true" [globalFilter]="gb">
 		<p-column field="dotacion" header="{{ 'SUPPLIES.LBL_SUPPLY' | translate}}" [sortable]="true"></p-column>
 		<p-column field="talla" header="{{ 'SUPPLIES.LBL_SIZE' | translate}}" [sortable]="true"></p-column>
 		<p-column field="cantidadAsignada" header="{{ 'SUPPLIES.LBL_QUANTITYSIGNED' | translate}}" [sortable]="true"></p-column>
 		<p-column field="cantidadEntregada" header="{{ 'SUPPLIES.LBL_QUANTITYDELIVERED' | translate}}" [sortable]="true"></p-column>
-		<p-column header="{{'LBL_ACCIONES' | translate}}" styleClass="datatable-col-action">
-			<template let-datos="rowData" pTemplate="body">
-				<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip"
-				        title="{{'BTN_EDITAR' | translate}}"
-				        pButton (click)="update(datos)"
-				        *ngIf="datos.idProyeccionDotacion === null || datos.idProyeccionDotacion === undefined"
-				></button>
-				<button type="button" class="ui-button ui-button-danger btn" icon="fa-trash" data-toggle="tooltip"
-				        title="{{'BTN_INACTIVAR' | translate}}"
-				        pButton (click)="del(datos)"
-				        *ngIf="datos.idProyeccionDotacion === null || datos.idProyeccionDotacion === undefined"
-				></button>
-			</template>
-		</p-column>
 	</p-dataTable>
+	<div class="row">
+		<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'ASIGNARDOTACION.LBL_COMENTARIO' | translate }}: </label>
+		<label class="col-md-6 col-sm-6 col-xs-12">
+			<strong>{{employesSuppliesProjection.comentario}}</strong>
+		</label>
+	</div>
+	<div class="row">
+		<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'ASIGNARDOTACION.LBL_COMENTARIOENTREGA' | translate }}: </label>
+		<label class="col-md-6 col-sm-6 col-xs-12">
+			<strong>{{employesSuppliesProjection.comentarioEntrega}}</strong>
+		</label>
+	</div>
+	<div class="row">
+		<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'SUPPLIESPROJECTION.LBL_ESTADO' | translate }}: </label>
+		<label class="col-md-6 col-sm-6 col-xs-12">
+			<strong>{{employesSuppliesProjection.estado }}</strong>
+		</label>
+	</div>
+	<div class="row" *ngIf="employesSuppliesProjection.indicadorSatisfecho === true">
+		<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'SUPPLIESPROJECTION.LBL_MOTIVO' | translate }}: </label>
+		<label class="col-md-3 col-sm-6 col-xs-12">
+			<strong>{{employesSuppliesProjection.motivo }}</strong>
+		</label>
+		<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'SUPPLIESPROJECTION.LBL_OBSERVACION' | translate }}:</label>
+		<label class="col-md-3 col-sm-6 col-xs-12">
+			<strong>{{employesSuppliesProjection.observacion }}</strong>
+		</label>
+	</div>
+	
+	
 	<div class="ui-grid-row form-footer-buttons">
 		<div class="ui-grid-col-5"></div>
 		<div class="ui-grid-col-1">

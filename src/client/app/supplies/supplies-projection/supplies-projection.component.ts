@@ -86,14 +86,15 @@ export class SuppliesProjectionComponent {
                }
             }
          } );
-      }else {
+      } else {
          this.listSuppliesProjection = [];
          this.suppliesProjectionServices.getAll().subscribe( data => {
             this.listSuppliesProjection = data;
          } );
       }
    }
-   resetFilterDate(){
+
+   resetFilterDate() {
       this.fechaFin = null;
       this.fechaInicio = null;
       if ( this.idUsuario ) {
@@ -105,7 +106,7 @@ export class SuppliesProjectionComponent {
                }
             }
          } );
-      }else {
+      } else {
          this.listSuppliesProjection = [];
          this.suppliesProjectionServices.getAll().subscribe( data => {
             this.listSuppliesProjection = data;

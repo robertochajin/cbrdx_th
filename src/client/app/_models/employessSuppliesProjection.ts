@@ -12,6 +12,7 @@ export class EmployessSuppliesProjection {
    public tipoArea: string;
    public idTercero: number;
    public idEstado: number;
+   public estado: number;
    public fechaEntrega: Date;
    public fechaPosibleEntrega: Date;
    public comentario: string;
@@ -22,6 +23,10 @@ export class EmployessSuppliesProjection {
    public indicadorAdicional: boolean = false;
    public auditoriaUsuario: number;
    public auditoriaFecha: Date;
+   public idMotivo: number;
+   public motivo: number;
+   public observacion: string;
+   public imagen: string;
 
    constructor() {
 

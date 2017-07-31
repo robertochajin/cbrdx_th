@@ -38,6 +38,10 @@ export class EmployeesService {
       return this.authHttp.get( this.serviceURL + 'vterceros/buscarTerceros/' + type + '/' ).map( ( res: Response ) => res.json() );
    }
 
+   getByTypeAndWildCard( type: string, wildcard: string ) {
+      return this.authHttp.get( this.serviceURL + 'vterceros/buscarTercerosTipo/' + wildcard + '/' + type ).map( ( res: Response ) => res.json() );
+   }
+
    getTerColWithoutPosition( query: string ) {
       return this.authHttp.get( this.serviceURL + 'vterceros/asignarColaborador/' + query.trim() + '/' )
       .map( ( res: Response ) => res.json() );
