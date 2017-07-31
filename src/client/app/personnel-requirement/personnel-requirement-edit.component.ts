@@ -77,6 +77,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
    creationProccesState: ListaItem;
    requestedState: ListaItem;
    minDate: Date = null;
+   minDateIni: Date = new Date();
    maxDate: Date = null;
    maxDateFinal: Date = null;
    bossPosition: Positions = new Positions();
@@ -174,6 +175,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
       this.maxDate = new Date();
       this.maxDate.setFullYear( year + 10, month );
       this.minDate = new Date();
+      this.minDateIni = new Date();
       this.minDate.setFullYear( lastYear, month );
       this.maxDateFinal = new Date();
       this.maxDateFinal.setMonth( month );

@@ -2,13 +2,6 @@
 <p-accordion (onOpen)="onTabShow($event)" id="accordion">
 	<p-accordionTab header="{{'EMPLOYEES.LBL_DATOSGENERALES' | translate}}" [selected]="acordion == 0 || acordion == null">
 		<div class="clearfix">
-			<p-messages [value]="msgs"></p-messages>
-			<p-confirmDialog width="400" #cd>
-				<p-footer>
-					<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
-					<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
-				</p-footer>
-			</p-confirmDialog>
 			<div class="col-md-10 col-md-offset-1">
 				<h3>{{ 'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }}</h3>
 				<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
@@ -359,7 +352,7 @@
 						              (onBeforeSend)="onBeforeSend($event)"
 						              (onSelect)="onSelect($event, $event.files)"
 						              (onUpload)="uploadingOk($event)" [disabled]="dataUploadArchivo===null || dataUploadArchivo===''"
-						              maxFileSize="{{fsize}}" accept="{{ftype}}" style="padding-right: 140px">
+						              maxFileSize="{{fsize}}" accept="{{ftype}}">
 						</p-fileUpload>
 					</div>
 				</div>
@@ -379,3 +372,10 @@
 	</p-accordionTab>
 </p-accordion>
 </div>
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
