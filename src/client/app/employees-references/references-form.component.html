@@ -80,7 +80,7 @@
                 <label for="celular">* {{'LBL_CELULAR' | translate }}</label>
 	              <p-inputMask id="celular" name="celular" #celular="ngModel"
 	                           [(ngModel)]="reference.telefonoMovil" required
-	                           mask="?(999) 999-9999" placeholder="(999) 999-9999"
+	                           mask="(999) 999-9999" placeholder="(999) 999-9999"
 	              ></p-inputMask>
                 <!--<input pInputText type="text" id="celular" name="celular" #celular="ngModel"-->
                        <!--[(ngModel)]="reference.telefonoMovil" required/>-->
@@ -93,7 +93,7 @@
                 <div class="ui-grid-col-6">
                     <label for="telefono">{{'LBL_TELEFONO' | translate }}</label>
 	                <p-inputMask id="telefono" name="telefono"
-	                             mask="?(999) 999-9999 Ext 9999" placeholder="(999) 999-9999 Ext 99999"
+	                             mask="999-9999? Ext ***********" placeholder="999-9999 Ext 99999-99999"
 	                             #telefono="ngModel" [(ngModel)]="reference.telefonoFijo" type="text"
 	                ></p-inputMask>
                     <!--<input pInputText type="text" id="telefono" name="telefono" #telefono="ngModel"-->

@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Employee } from '../_models/employees';
@@ -16,7 +16,7 @@ import { PermissionsEmployees } from '../_models/permissionsEmployees';
                providers: []
             } )
 
-export class EmployeesContactComponent {
+export class EmployeesContactComponent implements OnInit {
    @Input() employee: Employee;
    @Input() seccion: PermissionsEmployees;
 
@@ -34,6 +34,9 @@ export class EmployeesContactComponent {
 
    }
 
+   ngOnInit() {
+      this.validarTelefono();
+   }
    onSubmit() {
       this.msgs = [];
       this.employeesService.update( this.employee )
