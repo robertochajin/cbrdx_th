@@ -112,10 +112,10 @@
 		        <div class="ui-grid-col-5">
                     <label for="telefonoFijo">* {{'EMPLOYEES.LBL_TELEFONO1' | translate }}</label>
 	                <p-inputMask id="telefonoFijo" name="telefonoFijo"
-	                             mask="?(999) 999-9999 Ext 9999" placeholder="(999) 999-9999 Ext 99999"  #telefonoFijo="ngModel"
+	                             mask="999-9999? Ext ***********" placeholder="999-9999 Ext 99999-99999" #telefonoFijo="ngModel"
 	                             [required]="telefonoCelular.value === '' || telefonoCelular.value === undefined "
 	                             [(ngModel)]="familyInformation.telefonoFijo"
-	                              type="text"
+	                             type="text"
 	                ></p-inputMask>
                     <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !telefonoFijo.valid">
                         <i class="fa fa-close"></i>
@@ -127,7 +127,7 @@
 	                <p-inputMask id="telefonoCelular" name="telefonoCelular" #telefonoCelular="ngModel"
 	                             [required]="telefonoFijo.value === '' || telefonoFijo.value === undefined"
 	                             [(ngModel)]="familyInformation.telefonoCelular"
-	                             mask="?(999) 999-9999" placeholder="(999) 999-9999"
+	                             mask="(999) 999-9999" placeholder="(999) 999-9999"
 	                            
 	                ></p-inputMask>
                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !telefonoCelular.valid">
