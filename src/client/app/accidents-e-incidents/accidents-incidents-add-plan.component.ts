@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { SelectItem, Message, ConfirmationService } from 'primeng/primeng';
 import { NavService } from '../_services/_nav.service';
+import { JwtHelper } from 'angular2-jwt';
 
 @Component( {
                moduleId: module.id,
@@ -22,6 +23,15 @@ export class AccidentIncidentAddPlanComponent implements OnInit {
    fechaFin: Date;
    fechaInicio: Date;
    rangeFin: string;
+   // -----para adjuntar archivos-----
+   svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
+   dataUploadArchivo: any = '';
+   dataUploadUsuario: any = '';
+   usuarioLogueado: any;
+   jwtHelper: JwtHelper = new JwtHelper();
+   fsize: number = 50000000;
+   ftype: string = '';
+   // -----    -----------
 
    constructor( private router: Router,
       private route: ActivatedRoute,
@@ -64,6 +74,56 @@ export class AccidentIncidentAddPlanComponent implements OnInit {
       event.target.value = input.toUpperCase().replace( /[^0-9]/g, '' );
    }
 
+   inputAttachment( event: any ) {
+      // let input = event.target.value;
+      // if ( input !== ' ' ) {
+      //    event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+      // } else {
+      //    this.dataUploadArchivo = '';
+      // }
+   }
+
+   uploadingOk( event: any ) {
+      // let respuesta = JSON.parse( event.xhr.response );
+      // if ( respuesta.idAdjunto != null || respuesta.idAdjunto != undefined ) {
+      //    this.saveAttachmnet = false;
+      //    this.employeeEventualityAttachment.idTerceroNovedad = this.employeeEventuality.idTerceroNovedad;
+      //    this.employeeEventualityAttachment.idAdjunto = respuesta.idAdjunto;
+      //    this.employeeEventualitiesAttachmentService.add( this.employeeEventualityAttachment ).subscribe( data => {
+      //       this.dataUploadArchivo = '';
+      //       this.listAttachment = [];
+      //       this.employeeEventualitiesAttachmentService.getAllByIdEventuality( this.employeeEventuality.idTerceroNovedad )
+      //       .subscribe( rest => {
+      //          this.listAttachment = rest;
+      //       } );
+      //       this.saveAttachmnet = true;
+      //    }, error => {
+      //       this.saveAttachmnet = true;
+      //    } );
+      // }
+   }
+
+   onBeforeSend( event: any ) {
+      // event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      // let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "'}";
+      // event.formData.append( 'obj', obj.toString() );
+   }
+
+   onSelect( event: any, file: any ) {
+      // this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   }
+
+   uploadAgain( rta: boolean ) {
+      // this.employeeEventualityAttachment.idAdjunto = null;
+   }
+
+   downloadFile( id: number ) {
+      // this.adjuntosService.downloadFile( id ).subscribe( res => {
+      //    this.adjuntosService.getFileName( id ).subscribe( adj => {
+      //       saveAs( res, adj.nombreArchivo );
+      //    } );
+      // } );
+   }
 
    goBack( fDirty: boolean ): void {
 

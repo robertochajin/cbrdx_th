@@ -46,7 +46,8 @@ import { LocationsNomenclaturesServices } from '../_services/locationsNomenclatu
                  PhysicStructureDetailComponent, PhysicStructureUpdateComponent
               ],
               providers: [ PhysicStructureService, PoliticalDivisionService,
-                 LocationsNomenclaturesServices ],
+                 LocationsNomenclaturesServices
+              ],
               exports: [ PhysicStructureComponent, PhysicStructureAddComponent,
                  PhysicStructureDetailComponent, PhysicStructureUpdateComponent
               ]

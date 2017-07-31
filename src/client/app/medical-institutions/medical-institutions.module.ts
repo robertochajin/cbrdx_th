@@ -42,7 +42,8 @@ import { LocationsNomenclaturesServices } from '../_services/locationsNomenclatu
               ],
               bootstrap: [ MedicalInstitutionsComponent, MedicalInstitutionAddComponent ],
               providers: [ MedicalInstitutionService, ListaService, ConfirmationService, PoliticalDivisionService,
-                 LocationsNomenclaturesServices ],
+                 LocationsNomenclaturesServices
+              ],
               exports: [ MedicalInstitutionsComponent, MedicalInstitutionAddComponent ]
            } )
 export class MedicalInstitutionModule {

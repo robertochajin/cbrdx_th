@@ -77,6 +77,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
    creationProccesState: ListaItem;
    requestedState: ListaItem;
    minDate: Date = null;
+   minDateIni: Date = new Date();
    maxDate: Date = null;
    maxDateFinal: Date = null;
    bossPosition: Positions = new Positions();
@@ -174,6 +175,7 @@ export class PersonnelRequirementEditComponent implements OnInit {
       this.maxDate = new Date();
       this.maxDate.setFullYear( year + 10, month );
       this.minDate = new Date();
+      this.minDateIni = new Date();
       this.minDate.setFullYear( lastYear, month );
       this.maxDateFinal = new Date();
       this.maxDateFinal.setMonth( month );
@@ -929,11 +931,16 @@ export class PersonnelRequirementEditComponent implements OnInit {
       } );
    }
 
-   capitalize() {
+   /*capitalize() {
       let input = this.personnelRequirement.justificacion;
       if ( input ) {
          this.personnelRequirement.justificacion = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
+    }*/
+
+   capitalize( event: any ) {
+      let input = event.target.value;
+      event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
    }
 
    goBack( fDirty: boolean ): void {

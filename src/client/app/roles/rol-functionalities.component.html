@@ -10,9 +10,9 @@
 						<div class="ui-grid-col-10">
 							<label for="idFuncionalidad">Funcionalidades</label>
 							<p-dropdown id="idFuncionalidad" name="idFuncionalidad" #idFuncionalidad="ngModel"
-											[options]="menus"
-											[autoWidth]="false" [readonly]="isUpdating"
-											[(ngModel)]="rolFuncionality.idFuncionalidad" required></p-dropdown>
+							            [options]="menus" filter="filter"
+							            [autoWidth]="false" [readonly]="isUpdating"
+							            [(ngModel)]="rolFuncionality.idFuncionalidad" required></p-dropdown>
 							<div class="ui-message ui-messages-error ui-corner-all"
 								  *ngIf="rf.submitted && !idFuncionalidad.valid">
 								<i class="fa fa-close"></i>

@@ -39,7 +39,7 @@
 				<div class="ui-grid-col-6">
 					<label for="mesesdot">{{ 'SUPPLIESPROJECTION.LBL_DOTACIONMESES' | translate }}</label>
 					<input id="mesesdot" name="mesesdot" #dotmeses="ngModel" pInputText type="text"
-					       (keyup)="inputNumber($event)"
+					       (keyup)="inputNumber($event)" (change)="calculateRange()"
 					       [(ngModel)]="suppliesProjection.cantidadMeses" required maxlength="4"/>
 					<div class="ui-message ui-messages-error ui-corner-all"
 					     *ngIf="f.submitted && !dotmeses.valid">
@@ -66,6 +66,9 @@
 						            [locale]="es" readonlyInput="readonlyInput" required
 						            dataType="date" [(ngModel)]="suppliesProjection.fechaInicio" [yearRange]="rangeFin"
 						            dateFormat="yy'-'mm'-'dd" (onSelect)="selectInicio()"></p-calendar>
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fechaIni.valid">
+							{{'SUPPLIESPROJECTION.LBL_RANGOFECHA' | translate}} {{'LBL_REQUERIDO' | translate}}
+						</div>
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -109,6 +112,11 @@
 							</div>
 						</template>
 					</p-pickList>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="requiredArea">
+						<i class="fa fa-close"></i>
+						{{ 'SUPPLIESPROJECTION.LBL_AREASREQUERIDAS' | translate }}
+					</div>
 				</div>
 			</div>
 			<div class="ui-grid-row form-footer-buttons">

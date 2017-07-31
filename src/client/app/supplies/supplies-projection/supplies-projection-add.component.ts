@@ -10,6 +10,8 @@ import { Supplies } from '../../_models/supplies';
 import { OrganizationalStructureService } from '../../_services/organizationalStructure.service';
 import { OrganizationalStructure } from '../../_models/organizationalStructure';
 import { SuppliesProjectionServices } from '../../_services/suppliesProjection.service';
+import { ConstanteService } from '../../_services/constante.service';
+import * as moment from 'moment/moment';
 
 @Component( {
                moduleId: module.id,
@@ -31,12 +33,14 @@ export class SuppliesProjectionAddComponent implements OnInit {
    fechaInicio: Date;
    rangeFin: string;
    list2: any[] = [];
+   requiredArea: boolean = false;
 
    constructor( private router: Router,
       private route: ActivatedRoute,
       private suppliesService: SuppliesService,
       private organizationalStructureService: OrganizationalStructureService,
       private location: Location,
+      private constanteService: ConstanteService,
       private suppliesProjectionServices: SuppliesProjectionServices,
       private confirmationService: ConfirmationService,
       private _nav: NavService, ) {
@@ -67,20 +71,32 @@ export class SuppliesProjectionAddComponent implements OnInit {
       this.minDateInicio = today;
       this.minDateFin = today;
       this.rangeFin = `${last40Year}:${next40Year}`;
+
+      this.constanteService.getByCode( 'DOTMES' ).subscribe( c => {
+         this.suppliesProjection.cantidadMeses = Number( c.valor );
+      } );
    }
 
    onSubmit() {
       if ( !this.suppliesProjection.indicadorNoAreas ) {
+         if ( this.list2.length === 0 ) {
+            this.requiredArea = true;
+         } else {
+            this.requiredArea = false;
+         }
          for ( let a of this.list2 ) {
             this.suppliesProjection.idEstructuraOrganizacional.push( a.idEstructuraOrganizacional );
          }
       }
-      this.suppliesProjectionServices.add( this.suppliesProjection ).subscribe( rs => {
-         this._nav.setMesage( 1, this.msgs );
-         this.location.back();
-      }, error => {
-         this._nav.setMesage( 3, this.msgs );
-      } );
+      if ( !this.requiredArea ) {
+         this.suppliesProjectionServices.add( this.suppliesProjection ).subscribe( rs => {
+            this._nav.setMesage( 1, this.msgs );
+            this.location.back();
+         }, error => {
+            this._nav.setMesage( 3, this.msgs );
+         } );
+
+      }
    }
 
    capitalize( event: any ) {
@@ -105,9 +121,16 @@ export class SuppliesProjectionAddComponent implements OnInit {
       let temp = new Date( this.suppliesProjection.fechaInicio );
       this.minDateFin = new Date( temp.setHours( 24 ) );
       if ( this.suppliesProjection.cantidadMeses ) {
-         this.suppliesProjection.fechaFin = new Date( temp.setHours( 24 * (this.suppliesProjection.cantidadMeses * 30) ) );
-      } else {
-         this.suppliesProjection.fechaFin = new Date( temp.setHours( 24 * (0 * 30) ) );
+         let fechaCalcul = moment( this.suppliesProjection.fechaInicio ).add( this.suppliesProjection.cantidadMeses, 'M' );
+         this.suppliesProjection.fechaFin = new Date( fechaCalcul.toDate() );
+      }
+   }
+
+   calculateRange() {
+      let temp = new Date( this.suppliesProjection.fechaInicio );
+      if ( temp.toString() !=='Invalid Date' ) {
+         let fechaCalcul = moment( this.suppliesProjection.fechaInicio ).add( this.suppliesProjection.cantidadMeses, 'M' );
+         this.suppliesProjection.fechaFin = new Date( fechaCalcul.toDate() );
       }
    }
 

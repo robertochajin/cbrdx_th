@@ -39,6 +39,7 @@ import { EmployeeEventualityDetailComponent } from '../employees-eventualities/e
 import { EmployeeEventualitiesAttachmentService } from '../_services/employees-eventualities-attachment.service';
 import { EventualityTransactEmployeeComponent } from '../employees-eventualities/employees-transact-eventualities.component';
 import { SuppliesEmployeesComponent } from './supplies-employees/supplies-employees.component';
+import { SuppliesConfirmationComponent } from './supplies-employees/supplies-confirmation.component';
 
 @NgModule( {
               imports: [
@@ -65,8 +66,8 @@ import { SuppliesEmployeesComponent } from './supplies-employees/supplies-employ
                  EmployeeEventualitiesAddComponent,
                  EmployeeEventualityDetailComponent,
                  EventualityTransactEmployeeComponent,
-                 SuppliesEmployeesComponent
-
+                 SuppliesEmployeesComponent,
+                 SuppliesConfirmationComponent
               ],
               bootstrap: [ EmployeesComponent ],
               providers: [ EmployeesService, ListEmployeesService, EmployeesRecruitmentService, PoliticalDivisionService, NavService,

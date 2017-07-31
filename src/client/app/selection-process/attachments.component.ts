@@ -93,6 +93,7 @@ export class AttachmentsComponent implements OnInit {
 
    onBeforeSend( event: any ) {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      this.adjunto.ruta = '/Gestionamos//Proceso de selección';
       event.formData.append( 'obj', JSON.stringify( this.adjunto ) );
    }
 
@@ -122,8 +123,10 @@ export class AttachmentsComponent implements OnInit {
    }
 
    downloadFile( f: Attachments ) {
-      this.attachmentsService.downloadFile( f.idAdjunto ).subscribe( res => {
-         window.location.assign( res );
+      this.adjuntosService.downloadFile( f.idAdjunto ).subscribe( res => {
+         this.adjuntosService.getFileName( f.idAdjunto ).subscribe( adj => {
+            saveAs( res, adj.nombreArchivo );
+         } );
       } );
    }
 

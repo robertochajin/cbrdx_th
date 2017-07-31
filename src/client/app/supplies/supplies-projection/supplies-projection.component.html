@@ -7,7 +7,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-4 col-md-offset-1">
+	<div class="col-md-4">
 		<div class="col-md-2">
 			<label for="idTipoNovedad">{{ 'SUPPLIESPROJECTION.LBL_USUARIO' | translate }}</label>
 		</div>
@@ -31,12 +31,18 @@
 			            dateFormat="yy'-'mm'-'dd" (onSelect)="selectInicio()"></p-calendar>
 		</div>
 	</div>
-	<div class="col-md-3">
-		<p-calendar id="fechaFinal" name="fechaFinal" #fechaFinal="ngModel" [showIcon]="true"
-		            [minDate]="minDateFin" [monthNavigator]="true" [yearNavigator]="true"
-		            [locale]="es" readonlyInput="readonlyInput"
-		            dataType="date" [(ngModel)]="fechaFin" [yearRange]="rangeFin"
-		            dateFormat="yy'-'mm'-'dd" (onSelect)="selectFinal()"></p-calendar>
+	<div class="col-md-4">
+		<div class="col-md-7">
+			<p-calendar id="fechaFinal" name="fechaFinal" #fechaFinal="ngModel" [showIcon]="true"
+			            [minDate]="minDateFin" [monthNavigator]="true" [yearNavigator]="true"
+			            [locale]="es" readonlyInput="readonlyInput"
+			            dataType="date" [(ngModel)]="fechaFin" [yearRange]="rangeFin"
+			            dateFormat="yy'-'mm'-'dd" (onSelect)="selectFinal()"></p-calendar>
+		</div>
+		<div class="col-md-5">
+			<button type="button" label="{{'SUPPLIESPROJECTION.LBL_LIMPIARFECHAS' | translate }}"
+			        pButton (click)="resetFilterDate()"></button>
+		</div>
 	</div>
 </div><br>
 <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listSuppliesProjection" [paginator]="true" [rows]="10"

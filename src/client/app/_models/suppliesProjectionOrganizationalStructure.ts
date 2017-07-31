@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class SuppliesProjectionOrganizationalStructure {
 
    public idProyeccionDotacionEstructuraOrganizacional: number;
-   public idEstructuraOrganizacional : number;
+   public idEstructuraOrganizacional: number;
    public idProyeccionDotacion: number;
    public indicadorHabilitado: boolean = true;
    public auditoriaUsuario: number;
