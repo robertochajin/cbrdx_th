@@ -27,8 +27,7 @@
           <div class="row">
 	          <div class="form-group col-md-6" *hasPermission="seccion.TELEFONOFIJO ? seccion.TELEFONOFIJO : defaultCampo">
               <label for="fijo">{{ 'LBL_TELEFONO' | translate }}</label>
-              <p-inputMask id="fijo" name="fijo"
-                           mask="999-9999? Ext 99999" placeholder="999-9999 Ext 99999" autoClear="false"
+              <p-inputMask id="fijo" name="fijo" mask="9999999" placeholder="9999999" autoClear="false"
                            [(ngModel)]="employee.telefonoFijo" #telefonoFijo="ngModel" [required]="cel" (keyup)="validarTelefono()"
                            [disabled]="seccion.TELEFONOFIJO.editable === false"
               ></p-inputMask>

@@ -10,6 +10,7 @@ export class EmployessSuppliesProjectionSupply {
    public idDotacion: number;
    public idTalla: number;
    public cantidadAsignada: number;
+   public cantidadPorDefecto: number;
    public cantidadEntregada: number;
    public indicadorHabilitado: boolean = true;
    public indicadorEntregado: boolean = true;
