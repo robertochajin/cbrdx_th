@@ -186,16 +186,20 @@ export class EmployeesContactListComponent implements OnInit {
    }
 
    validarTelefono() {
-      if ( this.contact.telefono === '' ) {
-         this.tel = true;
-         this.cel = true;
+      let tel = this.contact.telefono;
+      if ( tel !== undefined ) {
+         let telcel = tel.replace( /[^0-9]/g, '' ).length;
+         if ( telcel >= 7 ) {
+            this.cel = false;
+         } else {
+            this.cel = true;
+         }
       } else {
-         this.tel = false;
-         this.cel = false;
+         this.cel = true;
       }
    }
 
-   validarCelular() {
+   /*validarCelular() {
       let temp = this.contact.celular;
       if(temp  !== undefined) {
 
@@ -209,6 +213,6 @@ export class EmployeesContactListComponent implements OnInit {
          }
 
       }
-   }
+    }*/
 
 }

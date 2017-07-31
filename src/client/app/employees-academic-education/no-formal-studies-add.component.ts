@@ -13,6 +13,8 @@ import { ListaItem } from '../_models/listaItem';
 import { ConstanteService } from '../_services/constante.service';
 import { AdjuntosService } from '../_services/adjuntos.service';
 import { JwtHelper } from 'angular2-jwt';
+import { Employee } from '../_models/employees';
+import { EmployeesService } from '../_services/employees.service';
 
 @Component( {
                moduleId: module.id,
@@ -47,12 +49,13 @@ export class NoFormalStudiesAddComponent implements OnInit {
    // hace falta definir acceso a constantes en servicio
 
    svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
-   dataUploadArchivo : any = '';
-   dataUploadUsuario : any = '';
+   dataUploadArchivo: any = '';
+   dataUploadUsuario: any = '';
    usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
    jwtHelper: JwtHelper = new JwtHelper();
    fsize: number = 50000000;
    ftype: string = '';
+   employee: Employee = new Employee();
 
    constructor( private academicEducationService: AcademicEducationService,
       private listaService: ListaService,
@@ -63,7 +66,8 @@ export class NoFormalStudiesAddComponent implements OnInit {
       private location: Location,
       private adjuntosService: AdjuntosService,
       private constanteService: ConstanteService,
-      private _nav: NavService ) {
+      private _nav: NavService,
+      private employeesService: EmployeesService ) {
       let token = localStorage.getItem( 'token' );
       this.usuarioLogueado = this.jwtHelper.decodeToken( token );
       this.constanteService.getByCode( 'FTYPE' ).subscribe( data => {
@@ -86,7 +90,7 @@ export class NoFormalStudiesAddComponent implements OnInit {
          res.map( ( s: ListaItem ) => this.studyLevelList.push( { label: s.nombre, value: s.idLista } ) );
       } );
       this.listaService.getMasterDetails( 'ListasAreasEstudios' ).subscribe( studyAreaList => {
-         this.studyAreaList .push( { label: 'Seleccione', value: null } );
+         this.studyAreaList.push( { label: 'Seleccione', value: null } );
          studyAreaList.map( ( s: ListaItem ) => {
             this.studyAreaList.push( { label: s.nombre, value: s.idLista } );
          } );
@@ -107,6 +111,7 @@ export class NoFormalStudiesAddComponent implements OnInit {
 
       this.route.params.subscribe( ( params: Params ) => {
          this.idTercero = params[ 'tercero' ];
+         this.employeesService.get( this.idTercero ).subscribe( res => this.employee = res );
       } );
 
    }
@@ -183,13 +188,13 @@ export class NoFormalStudiesAddComponent implements OnInit {
 
    onSelectBegin( event: any ) {
       let d = new Date( Date.parse( event ) );
-      this.minDate= new Date();
+      this.minDate = new Date();
       this.minDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() + 1 );
    }
 
    onSelectEnd( event: any ) {
       let d = new Date( Date.parse( event ) );
-      this.maxDate= new Date();
+      this.maxDate = new Date();
       this.maxDate.setFullYear( d.getFullYear(), d.getMonth(), d.getDate() - 1 );
    }
 
@@ -199,19 +204,19 @@ export class NoFormalStudiesAddComponent implements OnInit {
       }
    }
 
-   goBack(fDirty : boolean): void {
+   goBack( fDirty: boolean ): void {
 
-      if ( fDirty ){
+      if ( fDirty ) {
          this.confirmationService.confirm( {
-            message: ` ¿Está seguro que desea salir sin guardar?`,
-            header: 'Confirmación',
-            icon: 'fa fa-question-circle',
-            accept: () => {
-               this._nav.setTab( 6 );
-               this.location.back();
-            }
-         } );
-      }else {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this._nav.setTab( 6 );
+                                                 this.location.back();
+                                              }
+                                           } );
+      } else {
          this._nav.setTab( 6 );
          this.location.back();
       }
@@ -231,33 +236,34 @@ export class NoFormalStudiesAddComponent implements OnInit {
 
    // Upload Adjunto
    uploadingOk( event: any ) {
-      let respuesta = JSON.parse(event.xhr.response);
-      if(respuesta.idAdjunto != null || respuesta.idAdjunto != undefined){
+      let respuesta = JSON.parse( event.xhr.response );
+      if ( respuesta.idAdjunto != null || respuesta.idAdjunto != undefined ) {
          this.nfstudy.idAdjunto = respuesta.idAdjunto;
       }
    }
 
    onBeforeSend( event: any ) {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "', 'ruta':" +
+                " '/Gestionamos/Terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "/Estudios no Formales' }";
       event.formData.append( 'obj', obj.toString() );
    }
 
-   onSelect(event:any, file:any){
-      this.dataUploadArchivo = file[0].name;
+   onSelect( event: any, file: any ) {
+      this.dataUploadArchivo = file[ 0 ].name;
       this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
    }
 
-   uploadAgain(rta:boolean){
+   uploadAgain( rta: boolean ) {
       this.nfstudy.idAdjunto = null;
    }
-   downloadFile(id: number){
+
+   downloadFile( id: number ) {
       this.adjuntosService.downloadFile( id ).subscribe( res => {
          this.adjuntosService.getFileName( id ).subscribe( adj => {
             saveAs( res, adj.nombreArchivo );
          } );
       } );
    }
-
 
 }
