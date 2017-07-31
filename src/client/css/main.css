@@ -1107,6 +1107,11 @@ textarea {
    width: 310px;
 }
 
+/* -- Row border -- */
+.row-border {
+   border-bottom: 1px solid #ccc;
+}
+
 .tag {
    position: relative;
    font-size: 19px;

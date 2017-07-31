@@ -186,7 +186,7 @@ export class EmployeesContactListComponent implements OnInit {
    }
 
    validarTelefono() {
-      if ( this.contact.telefono === '(___) ___-____ Ext ____' ) {
+      if ( this.contact.telefono === '' ) {
          this.tel = true;
          this.cel = true;
       } else {
@@ -197,13 +197,17 @@ export class EmployeesContactListComponent implements OnInit {
 
    validarCelular() {
       let temp = this.contact.celular;
-      let telcel = temp.replace( /[^0-9]/g, '' ).length;
-      if ( telcel < 10 ) {
-         this.tel = true;
-         this.cel = true;
-      } else {
-         this.tel = false;
-         this.cel = false;
+      if(temp  !== undefined) {
+
+         let telcel = temp.replace( /[^0-9]/g, '' ).length;
+         if ( telcel < 10 ) {
+            this.tel = true;
+            this.cel = true;
+         } else {
+            this.tel = false;
+            this.cel = false;
+         }
+
       }
    }
 

@@ -30,8 +30,8 @@
           <div class="row">
             <div class="form-group col-md-6">
               <label for="fijo">{{ 'LBL_TELEFONO' | translate }}</label>
-              <p-inputMask id="fijo" name="fijo"
-                           mask="?(999) 999-9999 Ext 9999" placeholder="(999) 999-9999 Ext 99999" [required]="cel" (keyup)="validarTelefono()"
+              <p-inputMask id="fijo" name="fijo" mask="9999999" placeholder="9999999" [required]="cel"
+                           (keyup)="validarTelefono()"
                            [(ngModel)]="contact.telefono" #telefonoFijo="ngModel"
               ></p-inputMask>
                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="fe.submitted && !telefonoFijo.valid">
