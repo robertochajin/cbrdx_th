@@ -164,9 +164,11 @@ export class CentralRiskComponent implements OnInit {
          data.idTercero = this.idCandidate;
          data.indicadorReportado = false;
          data.indicadorAprobado = false;
+         data.ruta = '/Gestionamos/Terceros/' + this.candidate.tipoDocumento + '_' + this.candidate.numeroDocumento + '/Proceso de' +
+                     ' selección';
       }
-      event.formData.append( 'obj', JSON.stringify( data ) );
 
+      event.formData.append( 'obj', JSON.stringify( data ) );
    }
 
    onUpload( event: any, data: CentralRisk ) {
@@ -269,9 +271,10 @@ export class CentralRiskComponent implements OnInit {
    }
 
    downloadFile( f: CentralRisk ) {
-
-      this.selectionStepService.downloadFile( f.idAdjunto ).subscribe( res => {
-         window.location.assign( res );
+      this.adjuntosService.downloadFile( f.idAdjunto ).subscribe( res => {
+         this.adjuntosService.getFileName( f.idAdjunto ).subscribe( adj => {
+            saveAs( res, adj.nombreArchivo );
+         } );
       } );
    }
 

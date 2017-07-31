@@ -588,7 +588,8 @@ export class EmployeesUpdateComponent implements OnInit {
 
    onBeforeSend( event: any ) {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "', 'ruta':" +
+                " '/Gestionamos/Terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "' }";
       event.formData.append( 'obj', obj.toString() );
    }
 

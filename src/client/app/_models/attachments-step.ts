@@ -11,4 +11,7 @@ export class Attachments {
    indicadorHabilitado: boolean = true;
    auditoriaUsuario: number;
    auditoriaFecha: Date;
+
+   // Adicionales
+   ruta?: string;
 }

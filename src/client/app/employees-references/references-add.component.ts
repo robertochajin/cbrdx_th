@@ -13,6 +13,8 @@ import { ListaItem } from '../_models/listaItem';
 import { AdjuntosService } from '../_services/adjuntos.service';
 import { ConstanteService } from '../_services/constante.service';
 import { JwtHelper } from 'angular2-jwt';
+import { Employee } from '../_models/employees';
+import { EmployeesService } from '../_services/employees.service';
 
 @Component( {
                moduleId: module.id,
@@ -41,6 +43,7 @@ export class ReferencesAddComponent implements OnInit {
    jwtHelper: JwtHelper = new JwtHelper();
    fsize: number = 50000000;
    ftype: string = '';
+   employee: Employee = new Employee();
 
    constructor( private referencesService: ReferencesService,
       private route: ActivatedRoute,
@@ -51,7 +54,8 @@ export class ReferencesAddComponent implements OnInit {
       private listaService: ListaService,
       private adjuntosService: AdjuntosService,
       private constanteService: ConstanteService,
-      private _nav: NavService ) {
+      private _nav: NavService,
+      private employeesService: EmployeesService) {
 
       let token = localStorage.getItem( 'token' );
       this.usuarioLogueado = this.jwtHelper.decodeToken( token );
@@ -76,6 +80,7 @@ export class ReferencesAddComponent implements OnInit {
       } );
       this.route.params.subscribe( ( params: Params ) => {
          this.idTercero = params[ 'tercero' ];
+         this.employeesService.get( this.idTercero ).subscribe( res => this.employee = res );
       } );
       this.focusUP();
    }
@@ -180,7 +185,8 @@ export class ReferencesAddComponent implements OnInit {
 
    onBeforeSend( event: any ) {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "', 'ruta':" +
+                " '/Gestionamos/Terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "/Referencias' }";
       event.formData.append( 'obj', obj.toString() );
    }
 
