@@ -101,7 +101,7 @@
 						</div>
 					</div>
 				</p-panel>
-				<p-panel header="{{ 'ASIGNARDOTACION.LBL_DOTACIONADICIONAL' | translate }}">
+				<p-panel *ngIf="employeeAditionalSupplies.length > 0" header="{{ 'ASIGNARDOTACION.LBL_DOTACIONADICIONAL' | translate }}">
 					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 						
 						<div class="row row-border">
