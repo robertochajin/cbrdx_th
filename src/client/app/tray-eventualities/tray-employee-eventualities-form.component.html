@@ -323,15 +323,15 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-md-2">
-									<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
-								</div>
-								<div class="col-md-2">
-									<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
-								</div>
 							</div>
 						</div>
 					</div>
+						<div class="form-footer-buttons">
+							<div class="col-md-12">
+						<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+									<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+						</div>
+						</div>
 				</form>
 			</div>
 		</div>
