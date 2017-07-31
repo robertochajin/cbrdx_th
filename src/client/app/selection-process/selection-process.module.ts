@@ -37,6 +37,7 @@ import { QuestionnairesModule } from '../questionnaires/questionnaires.module';
 import { SolutionsQuestionnairesDetailComponent } from '../questionnaires/solutions-questionnaire/solutions-questionnaires-detail.component';
 import { MasterAnswersService } from '../_services/masterAnswers.service';
 import { CandidateContractingComponent } from './candidate-contracting.component';
+import { AdjuntosService } from '../_services/adjuntos.service';
 @NgModule( {
               imports: [
                  SharedModule,
@@ -79,7 +80,8 @@ import { CandidateContractingComponent } from './candidate-contracting.component
                  VacancyTestServices,
                  MasterAnswersService,
                  PublicationQuestionnairesService,
-                 UsuariosService
+                 UsuariosService,
+                 AdjuntosService
               ],
               exports: [ SelectionProcessComponent ]
            } )
