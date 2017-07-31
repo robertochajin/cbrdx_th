@@ -15,7 +15,9 @@ export class SuppliesProjection {
    public indicadorHabilitado: boolean = true;
    public auditoriaUsuario: number;
    public auditoriaFecha: Date;
-   public idEstructuraOrganizacional : number[]=[];
+   public idEstructuraOrganizacional: number[] = [];
+   public periodo: string;
+   public estado: string;
 
    constructor() {
       this.auditoriaFecha = null;

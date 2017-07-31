@@ -10,25 +10,27 @@ export class InterceptedHttp extends Http {
    }
 
    request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
+      console.log( 'request : ', url );
       return super.request(url, options);
    }
 
    get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-      console.log('Interviniendo peticiones: ', url);
+      console.log( 'GET : ', url );
       return super.get(url, this.getRequestOptionArgs(options));
    }
 
    post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
-      console.log('Interviniendo peticiones: ', url);
+      console.log( 'POST : ', url );
       return super.post(url, body, this.getRequestOptionArgs(options));
    }
 
    put(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
-      console.log('Interviniendo peticiones: ', url);
+      console.log( 'PUT : ', url );
       return super.put(url, body, this.getRequestOptionArgs(options));
    }
 
    delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
+      console.log( 'delete : ', url );
       return super.delete(url, this.getRequestOptionArgs(options));
    }
 

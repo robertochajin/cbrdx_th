@@ -17,8 +17,7 @@ export class AccidentIncidentComponent {
    busqueda: string;
    idUsuario: number;
 
-   constructor(
-      private router: Router,
+   constructor( private router: Router,
       private _nav: NavService,
       private confirmationService: ConfirmationService ) {
       this.busqueda = _nav.getSearch( 'supplies-projection' );

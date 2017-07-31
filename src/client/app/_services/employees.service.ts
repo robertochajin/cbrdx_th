@@ -29,12 +29,17 @@ export class EmployeesService {
    getAll() {
       return this.authHttp.get( this.serviceURL + 'vterceros' ).map( ( res: Response ) => res.json() as Employee[] );
    }
+
    getEmployees() {
       return this.authHttp.get( this.serviceURL + 'terceros/area' ).map( ( res: Response ) => res.json() as Employee[] );
    }
 
    getByTipo( type: string ) {
       return this.authHttp.get( this.serviceURL + 'vterceros/buscarTerceros/' + type + '/' ).map( ( res: Response ) => res.json() );
+   }
+
+   getByTypeAndWildCard( type: string, wildcard: string ) {
+      return this.authHttp.get( this.serviceURL + 'vterceros/buscarTercerosTipo/' + wildcard + '/' + type ).map( ( res: Response ) => res.json() );
    }
 
    getTerColWithoutPosition( query: string ) {

@@ -81,7 +81,17 @@
 							</p-dataTable>
 						</fieldset>
 					</p-panel>
+					
 					<p-panel header="{{ 'POSITION.LBL_RESPONSABILIDADESPRINCIPALES' | translate }}">
+						<fieldset>
+							<div class="row">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'POSITION.LBL_RESPONSABILIDADESPRINCIPALES' |
+									translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{position.responsabilidadesAd}}</strong></label>
+							</div>
+						</fieldset>
+					</p-panel>
+					<p-panel header="{{ 'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' | translate }}">
 						<fieldset>
 							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="positionResponsabilities"
 							             [paginator]="true"
@@ -89,15 +99,6 @@
 								<p-column field="responsabilidad" header="{{ 'POSITION.LBL_RESPONSABILIDAD' | translate }}"
 								          [sortable]="true"></p-column>
 							</p-dataTable>
-						</fieldset>
-					</p-panel>
-					<p-panel header="{{ 'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' | translate }}">
-						<fieldset>
-							<div class="row">
-								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' |
-									translate }}:</label>
-								<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{position.responsabilidadesAd}}</strong></label>
-							</div>
 						</fieldset>
 					</p-panel>
 					<p-panel header="{{ 'POSITION.LBL_POSICION' | translate }}">

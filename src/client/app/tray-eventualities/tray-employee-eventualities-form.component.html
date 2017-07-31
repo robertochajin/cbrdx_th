@@ -29,33 +29,33 @@
 							</div>
 						</div>
 						<div class="ui-grid-row">
-						<div class="ui-grid-col-6">
-							<label for="idTipoNovedad">{{ 'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}</label>
-							<p-dropdown id="idTipoNovedad" name="idTipoNovedad"
-							            [options]="listTypeEvent" [autoWidth]="false"
-							            [(ngModel)]="idTipoNovedad"
-							            #idTipoNov="ngModel" (onChange)="changeTypeEvent()"
-							></p-dropdown>
-							<div class="ui-message ui-messages-error ui-corner-all"
-							     *ngIf="f.submitted && !idTipoNov.valid">
-								<i class="fa fa-close"></i>
-								{{ 'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+							<div class="ui-grid-col-6">
+								<label for="idTipoNovedad">{{ 'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}</label>
+								<p-dropdown id="idTipoNovedad" name="idTipoNovedad"
+								            [options]="listTypeEvent" [autoWidth]="false"
+								            [(ngModel)]="idTipoNovedad"
+								            #idTipoNov="ngModel" (onChange)="changeTypeEvent()"
+								></p-dropdown>
+								<div class="ui-message ui-messages-error ui-corner-all"
+								     *ngIf="f.submitted && !idTipoNov.valid">
+									<i class="fa fa-close"></i>
+									{{ 'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+								</div>
+							</div>
+							<div class="ui-grid-col-6">
+								<label for="idNovedad">{{ 'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }}</label>
+								<p-dropdown id="idNovedad" name="idNovedad"
+								            [options]="listEventualities" [autoWidth]="false"
+								            [(ngModel)]="employeeEventuality.idNovedad"
+								            #idNov="ngModel" (onChange)="changeEventuality()"
+								></p-dropdown>
+								<div class="ui-message ui-messages-error ui-corner-all"
+								     *ngIf="f.submitted && !idNov.valid">
+									<i class="fa fa-close"></i>
+									{{ 'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+								</div>
 							</div>
 						</div>
-						<div class="ui-grid-col-6">
-							<label for="idNovedad">{{ 'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }}</label>
-							<p-dropdown id="idNovedad" name="idNovedad"
-							            [options]="listEventualities" [autoWidth]="false"
-							            [(ngModel)]="employeeEventuality.idNovedad"
-							            #idNov="ngModel" (onChange)="changeEventuality()"
-							></p-dropdown>
-							<div class="ui-message ui-messages-error ui-corner-all"
-							     *ngIf="f.submitted && !idNov.valid">
-								<i class="fa fa-close"></i>
-								{{ 'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-							</div>
-						</div>
-					</div>
 						
 						<div class="ui-grid-row">
 							<div class="ui-grid-col-3" *ngIf="showfechainicio">
@@ -305,30 +305,30 @@
 						</div>
 						<div class="ui-grid-row form-footer-buttons">
 							<div class="col-md-12">
-							<div class="col-md-1"></div>
-							<div class="col-md-4" *ngIf="!eventuality.indicadorConfirmacion"></div>
-							<div class="col-md-4" *ngIf="eventuality.indicadorConfirmacion && !employeeEventuality.idTerceroNovedad"></div>
-							<div class="col-md-4" *ngIf="eventuality.indicadorConfirmacion && employeeEventuality.idTerceroNovedad">
-								<div class="col-md-8">
-									<button (click)="generarCodigo()" label="{{'PROCESOSELECCION.LBL_GENERCOD' | translate }}" type="button"
-									        pButton></button>
-								</div>
-								<div class="col-md-4">
-									<input id="codigoinst" name="codigoinst" #codInst="ngModel" pInputText type="text"
-									       required maxlength="50" [(ngModel)]="codigoVerificacion"/>
-									<div class="ui-message ui-messages-error ui-corner-all"
-									     *ngIf="f.submitted && !codInst.valid">
-										<i class="fa fa-close"></i>
-										{{ 'DOCMANAGMENT.LBL_CODIGO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+								<div class="col-md-1"></div>
+								<div class="col-md-4" *ngIf="!eventuality.indicadorConfirmacion"></div>
+								<div class="col-md-4" *ngIf="eventuality.indicadorConfirmacion && !employeeEventuality.idTerceroNovedad"></div>
+								<div class="col-md-4" *ngIf="eventuality.indicadorConfirmacion && employeeEventuality.idTerceroNovedad">
+									<div class="col-md-8">
+										<button (click)="generarCodigo()" label="{{'PROCESOSELECCION.LBL_GENERCOD' | translate }}" type="button"
+										        pButton></button>
+									</div>
+									<div class="col-md-4">
+										<input id="codigoinst" name="codigoinst" #codInst="ngModel" pInputText type="text"
+										       required maxlength="50" [(ngModel)]="codigoVerificacion"/>
+										<div class="ui-message ui-messages-error ui-corner-all"
+										     *ngIf="f.submitted && !codInst.valid">
+											<i class="fa fa-close"></i>
+											{{ 'DOCMANAGMENT.LBL_CODIGO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-2">
-								<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
-							</div>
-							<div class="col-md-2">
-								<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
-							</div>
+								<div class="col-md-2">
+									<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+								</div>
+								<div class="col-md-2">
+									<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -339,8 +339,8 @@
 	<p-accordionTab *ngIf="eventuality.indicadorAdjuntos" header="{{'NOVEDADES.LBL_ADJUNTOS' | translate}}" [selected]="acordion == 1"
 	                [disabled]="!employeeEventuality.idTerceroNovedad">
 		<form (ngSubmit)="fa.valid && onSubmitAttachment()" #fa="ngForm" novalidate id="formularioAdjuntos" *ngIf="saveAttachmnet">
-				<div class="row">
-					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+			<div class="row">
+				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 					<div class="col-md-8" style="padding-left: 14px;">
 						<label for="nombreAd">{{ 'NOVEDADES.LBL_NOMBRE' | translate }}</label>
 						<input id="nombreAd" name="nombreAd" #nombre="ngModel" pInputText type="text"

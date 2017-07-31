@@ -59,7 +59,7 @@
             <img src="{{svcThUrl}}/file/{{avatar}}" class="user-image" alt="User Image">
              <span class="hidden-xs">{{usuarioLogueado.nombre}}</span>
           </a>
-          <ul class="dropdown-menu">
+	        <ul id="menuUsuario" class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
             <img src="{{svcThUrl}}/file/{{avatar}}" class="img-circle" alt="User Image">
@@ -78,9 +78,7 @@
             <!-- Menu Footer-->
             <li class="user-footer">
 					<a routerLink="/employees/detail/{{usuarioLogueado.usuario.idTercero}}"
-						class="btn btn-default" style="margin-bottom: 4px;">
-						Mi Historia Laboral
-					</a>
+					   class="btn btn-default" style="margin-bottom: 4px;">{{ 'TEMPLATE.LBL_ACTUALIZAPERFIL' | translate }}</a>
                <div class="pull-left">
                   <a routerLink="/user-session" class="btn btn-default">{{ 'TEMPLATE.LBL_EDITARCONTRASENA' | translate }}</a>
                </div>

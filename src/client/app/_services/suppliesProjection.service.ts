@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { SuppliesProjection } from '../_models/suppliesProjection';
+import { Supplies, TotalSupplies } from '../_models/supplies';
 
 @Injectable()
 export class SuppliesProjectionServices {
@@ -21,6 +22,11 @@ export class SuppliesProjectionServices {
 
    getAll() {
       return this.authHttp.get( this.masterService + 'proyeccionDotacion' )
+      .map( ( res: Response ) => res.json() as SuppliesProjection[] );
+   }
+
+   getByEmployees( idTercero: number ) {
+      return this.authHttp.get( this.masterService + 'proyeccionDotacion/tercero/' + idTercero )
       .map( ( res: Response ) => res.json() as SuppliesProjection[] );
    }
 
@@ -53,6 +59,21 @@ export class SuppliesProjectionServices {
    handleError( error: any ): Promise<any> {
       console.error( 'Error:', error );
       return Promise.reject( error.message || error );
+   }
+
+   getByProjection( id: number ) {
+      return this.authHttp.get( this.masterService + 'dotaciones/ProyeccionDotacion/' + id )
+      .map( ( res: Response ) => res.json() as Supplies[] );
+   }
+
+   getConsolidatedSize( idDotacion: number, idProyeccionDotacion: number ) {
+      return this.authHttp.get( this.masterService + 'dotaciones/tallasGenero/' + idProyeccionDotacion + '/' + idDotacion )
+      .map( ( res: Response ) => res.json() as TotalSupplies[] );
+   }
+
+   getConsolidatedArea( idDotacion: number, idProyeccionDotacion: number ) {
+      return this.authHttp.get( this.masterService + 'dotaciones/tallasGenero/' + idProyeccionDotacion + '/' + idDotacion )
+      .map( ( res: Response ) => res.json() as TotalSupplies[] );
    }
 
 }
