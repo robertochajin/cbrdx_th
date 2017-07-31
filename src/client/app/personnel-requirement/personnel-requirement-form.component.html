@@ -99,7 +99,7 @@
 										<div class="form-group col-md-6" *ngIf="dispFechaInicioRemplazo">
 											<label for="initDate">* {{'REQUERIMIENTOPERSONAL.LBL_FECHA_INICIO' | translate}}:</label>
 											<p-calendar id="initDate" name="initDate" [showIcon]="true"
-											            [locale]="es" readonlyInput="true" [maxDate]="maxDate"
+											            [locale]="es" readonlyInput="true" [maxDate]="maxDate" [minDate]="minDateIni"
 											            dataType="date" #ngInitDate="ngModel" required (onSelect)="onSelectBegin($event)"
 											            [(ngModel)]="personnelRequirement.fechaInicio" dateFormat="yy'-'mm'-'dd"></p-calendar>
 											<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngInitDate.valid">
