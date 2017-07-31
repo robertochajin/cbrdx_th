@@ -156,6 +156,7 @@ export class EmployeesContactListComponent implements OnInit {
       this.msgs = [];
       this.showForm = true;
       this.contact = Object.assign( {}, f );
+      this.validarTelefono();
 
    }
 
