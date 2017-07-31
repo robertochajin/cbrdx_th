@@ -588,7 +588,8 @@ export class EmployeesUpdateComponent implements OnInit {
 
    onBeforeSend( event: any ) {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "', 'ruta':" +
+                " '/Gestionamos/Terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "' }";
       event.formData.append( 'obj', obj.toString() );
    }
 
@@ -602,10 +603,11 @@ export class EmployeesUpdateComponent implements OnInit {
    }
 
    downloadFile(id: number){
-
-      this.adjuntosService.downloadFile( id ).subscribe(res => {
-         window.location.assign(res);
-      });
+      this.adjuntosService.downloadFile( id ).subscribe( res => {
+         this.adjuntosService.getFileName( id ).subscribe( adj => {
+            saveAs( res, adj.nombreArchivo );
+         } );
+      } );
    }
    getFileName() {
       if(this.employee.idAdjunto) {

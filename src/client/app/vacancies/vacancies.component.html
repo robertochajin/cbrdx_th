@@ -40,7 +40,7 @@
 							            [(ngModel)]="fechaInicio"  (onSelect)="changeDate();"
 							></p-calendar>
 						</div>
-						<div class="pull-right col-md-1">
+						<div class="pull-right ">
 							<div *ngIf="fechaInicio !== undefined && fechaInicio !== null && fechaInicio !== ''" class="col-sm-1 col-md-1">
 								<button pButton type="button" class="ui-button-danger "
 								        (click)="clearDate()"
@@ -102,7 +102,7 @@
 					<div class="form-group">
 						<label for="area" class="control-label col-sm-3">{{ 'PLANTACOLABORADORES.LBL_AREA' | translate }}</label>
 						<div class=" col-sm-9">
-							<p-dropdown id="area" [options]="listArea" [style]="{'width':'100%'}"
+							<p-dropdown id="estructuraOrganizacional" [options]="listArea" [style]="{'width':'100%'}"
 							            (onChange)="vp.filter($event.value,'estructuraOrganizacional','startsWith')"
 							></p-dropdown>
 						</div>
@@ -138,7 +138,7 @@
 		</div>
 		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listPositions"
 		             [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gbVacantes" #vp>
-			<p-column field="area" header="{{ 'PLANTACOLABORADORES.LBL_AREA' | translate }}" [sortable]="true"></p-column>
+			<p-column field="estructuraOrganizacional" header="{{ 'PLANTACOLABORADORES.LBL_AREA' | translate }}" [sortable]="true"></p-column>
 			<p-column field="estructuraFisica" header="{{ 'PLANTACOLABORADORES.LBL_ESTRUCTFISICA' | translate }}" [sortable]="true"></p-column>
 			<p-column field="cargo" header="{{ 'PLANTACOLABORADORES.LBL_CARGO' | translate }}" [sortable]="true"></p-column>
 			<p-column header="Salario" [sortable]="true">

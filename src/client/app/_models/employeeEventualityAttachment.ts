@@ -5,6 +5,7 @@ export class EmployeeEventualityAttachment {
    idTerceroNovedadAdjunto: number;
    idTerceroNovedad: number;
    idAdjunto: number;
+   nombre: string;
    auditoriaFecha: Date;
    auditoriaUsuario: number;
    indicadorHabilitado: boolean;

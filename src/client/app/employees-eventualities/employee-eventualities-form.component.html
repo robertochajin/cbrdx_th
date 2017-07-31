@@ -172,7 +172,7 @@
 								<p-calendar id="periodoinicial" name="periodoinicial" #periodoini="ngModel" [showIcon]="true"
 								            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
 								            [locale]="es" readonlyInput="readonlyInput" [required]="requiredperiodoinicial"
-								            dataType="date" [(ngModel)]="periodoInicio" [yearRange]="rangeFin"
+								            dataType="date" [(ngModel)]="periodoInicial" [yearRange]="rangeFin"
 								            dateFormat="yy'-'mm'-'dd" (onSelect)="selectPeriodoInicio()"></p-calendar>
 								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !periodoini.valid">
 									<i class="fa fa-close"></i>
@@ -289,36 +289,75 @@
 								</div>
 							</div>
 						</div>
-						<div class="ui-grid-row form-footer-buttons">
-							<div class="col-md-1"></div>
-							<div class="col-md-4" *ngIf="!eventuality.indicadorConfirmacion"></div>
-							<div class="col-md-4" *ngIf="eventuality.indicadorConfirmacion && !employeeEventuality.idTerceroNovedad"></div>
-							<div  class="col-md-4" *ngIf="eventuality.indicadorConfirmacion && employeeEventuality.idTerceroNovedad">
-								<div class="col-md-8">
-									<button (click)="generarCodigo()" label="{{'PROCESOSELECCION.LBL_GENERCOD' | translate }}" type="button"
-									        pButton></button>
-								</div>
+						<div class="row"  *ngIf="eventuality.indicadorConfirmacion && employeeEventuality.idTerceroNovedad">
+							<div class="col-md-12">
+								<div class="col-md-10 col-md-offset-1">
 									<div class="col-md-4">
-									<input id="codigoinst" name="codigoinst" #codInst="ngModel" pInputText type="text"
-									       required maxlength="50" [(ngModel)]="codigoVerificacion"/>
-									<div class="ui-message ui-messages-error ui-corner-all"
-									     *ngIf="f.submitted && !codInst.valid">
-										<i class="fa fa-close"></i>
-										{{ 'DOCMANAGMENT.LBL_CODIGO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+										<button (click)="generarCodigo()" label="{{'PROCESOSELECCION.LBL_GENERCOD' | translate }}" type="button"
+												  pButton></button>
+									</div>
+									<div class="col-md-8">
+										<input id="codigoinst" name="codigoinst" #codInst="ngModel" pInputText type="text"
+												 required maxlength="50" [(ngModel)]="codigoVerificacion"/>
+										<div class="ui-message ui-messages-info ui-corner-all"
+											  *ngIf="f.submitted && !codInst.valid">
+											<i class="fa fa-close"></i>
+											{{ 'EMPLOYEENOVELTY.MSG_INGRESECODIGO' | translate }}
+										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-md-1">
-								<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
-							</div>
-							<div class="col-md-2">
-								<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
-							</div>
-							<!--<div class="ui-grid-col-5"></div>-->
+						</div>
+					</div>
+					<div class="form-footer-buttons">
+						<div class="col-md-12">
+							<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+							<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
 						</div>
 					</div>
 				</form>
 			</div>
 		</div>
+	</p-accordionTab>
+	<p-accordionTab *ngIf="eventuality.indicadorAdjuntos" header="{{'NOVEDADES.LBL_ADJUNTOS' | translate}}" [selected]="acordion == 1"
+	                [disabled]="!employeeEventuality.idTerceroNovedad">
+		<form (ngSubmit)="fa.valid && onSubmitAttachment()" #fa="ngForm" novalidate id="formularioAdjuntos" *ngIf="saveAttachmnet">
+			<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="nombreAd">{{ 'NOVEDADES.LBL_NOMBRE' | translate }}</label>
+						<input id="nombreAd" name="nombreAd" #nombre="ngModel" pInputText type="text"
+						       (keyup)="inputAttachment($event)" required maxlength="50"
+						       [(ngModel)]="dataUploadArchivo"/>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="fa.submitted && !nombre.valid">
+							<i class="fa fa-close"></i>
+							{{ 'NOVEDADES.LBL_NOMBRE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label>{{'LBL_ADJUNTAR' | translate}} </label>
+						<p-fileUpload name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
+						              chooseLabel="{{'LBL_ADJUNTAR' | translate}}"
+						              (onBeforeSend)="onBeforeSend($event)"
+						              (onSelect)="onSelect($event, $event.files)"
+						              (onUpload)="uploadingOk($event)" [disabled]="dataUploadArchivo===null || dataUploadArchivo===''"
+						              maxFileSize="{{fsize}}" accept="{{ftype}}">
+						</p-fileUpload>
+					</div>
+				</div>
+			</div>
+		</form>
+		<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listAttachment" [paginator]="true" [rows]="10"
+		             [responsive]="true">
+			<p-column field="nombreArchivo" header="{{'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}" [sortable]="true"></p-column>
+			<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+				<template let-atta="rowData" pTemplate="body">
+					<button type="button" icon="fa-download" class="ui-button-success" data-toggle="tooltip"
+					        title="{{'BTN_DOWNLOAD' | translate}}"
+					        pButton (click)="downloadFile(atta.idAdjunto)"></button>
+				</template>
+			</p-column>
+		</p-dataTable>
 	</p-accordionTab>
 </p-accordion>

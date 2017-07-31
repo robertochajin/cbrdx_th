@@ -13,6 +13,8 @@ import { ListaItem } from '../_models/listaItem';
 import { AdjuntosService } from '../_services/adjuntos.service';
 import { ConstanteService } from '../_services/constante.service';
 import { JwtHelper } from 'angular2-jwt';
+import { Employee } from '../_models/employees';
+import { EmployeesService } from '../_services/employees.service';
 
 @Component( {
                moduleId: module.id,
@@ -28,19 +30,23 @@ export class ReferencesAddComponent implements OnInit {
    localizacion: Localizaciones = new Localizaciones();
    header: string = 'Agregando Referencia';
    referencesTypes: SelectItem[] = [];
+   listReferencesTypes: any[];
+   listConstantCompany: string[] = [];
    submitted: boolean;
    msgs: Message[] = [];
    uploadedFiles: any[] = [];
    addinglocation: boolean = true;
+   companyRequired: boolean = true;
    idTercero: number;
 
    svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
-   dataUploadArchivo : any = 'Archivo Adjunto';
-   dataUploadUsuario : any = '';
+   dataUploadArchivo: any = 'Archivo Adjunto';
+   dataUploadUsuario: any = '';
    usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
    jwtHelper: JwtHelper = new JwtHelper();
    fsize: number = 50000000;
    ftype: string = '';
+   employee: Employee = new Employee();
 
    constructor( private referencesService: ReferencesService,
       private route: ActivatedRoute,
@@ -51,7 +57,8 @@ export class ReferencesAddComponent implements OnInit {
       private listaService: ListaService,
       private adjuntosService: AdjuntosService,
       private constanteService: ConstanteService,
-      private _nav: NavService ) {
+      private _nav: NavService,
+      private employeesService: EmployeesService) {
 
       let token = localStorage.getItem( 'token' );
       this.usuarioLogueado = this.jwtHelper.decodeToken( token );
@@ -73,9 +80,17 @@ export class ReferencesAddComponent implements OnInit {
          res.map( ( s: ListaItem ) => {
             this.referencesTypes.push( { label: s.nombre, value: s.idLista } );
          } );
+         this.listReferencesTypes = res;
+      } );
+      this.constanteService.getByCode( 'REFOBL' ).subscribe( rs => {
+         if ( rs ) {
+            let temp = rs.valor;
+            this.listConstantCompany = temp.split( ',' );
+         }
       } );
       this.route.params.subscribe( ( params: Params ) => {
          this.idTercero = params[ 'tercero' ];
+         this.employeesService.get( this.idTercero ).subscribe( res => this.employee = res );
       } );
       this.focusUP();
    }
@@ -112,23 +127,24 @@ export class ReferencesAddComponent implements OnInit {
       } else {
          this.focusUP();
          // this.msgs.push( { severity: 'error', summary: 'Dirección invalida', detail: 'Es necesario agregar una dirección válida' } );
-         this._nav.setMesage(0, {severity: 'error', summary: 'Dirección invalida', detail: 'Es necesario agregar una dirección válida'});
+         this._nav.setMesage( 0,
+                              { severity: 'error', summary: 'Dirección invalida', detail: 'Es necesario agregar una dirección válida' } );
       }
    }
 
-   goBack(fDirty : boolean): void {
+   goBack( fDirty: boolean ): void {
 
-      if ( fDirty ){
+      if ( fDirty ) {
          this.confirmationService.confirm( {
-            message: ` ¿Está seguro que desea salir sin guardar?`,
-            header: 'Confirmación',
-            icon: 'fa fa-question-circle',
-            accept: () => {
-               this._nav.setTab( 8 );
-               this.location.back();
-            }
-         } );
-      }else {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this._nav.setTab( 8 );
+                                                 this.location.back();
+                                              }
+                                           } );
+      } else {
          this._nav.setTab( 8 );
          this.location.back();
       }
@@ -161,6 +177,16 @@ export class ReferencesAddComponent implements OnInit {
       //this._nav.setMesage(0, {severity: 'info', summary: 'File Uploaded', detail: '' });
    }
 
+   changeReferencesType() {
+      let temp = this.listReferencesTypes.find( r => r.idLista === this.reference.idTipoReferencia );
+      let temp2 = this.listConstantCompany.find( c => c === temp.codigo );
+      if ( temp2 ) {
+         this.companyRequired = false;
+      } else {
+         this.companyRequired = true;
+      }
+   }
+
    bindLocation( event: any ) {
       this.localizacion = event;
       this.reference.direccion = event.direccion;
@@ -170,35 +196,39 @@ export class ReferencesAddComponent implements OnInit {
    toggleform() {
       this.addinglocation = !this.addinglocation;
    }
+
    // Archivo Adjunto
    uploadingOk( event: any ) {
-      let respuesta = JSON.parse(event.xhr.response);
-      if(respuesta.idAdjunto != null || respuesta.idAdjunto != undefined){
+      let respuesta = JSON.parse( event.xhr.response );
+      if ( respuesta.idAdjunto != null || respuesta.idAdjunto != undefined ) {
          this.reference.idAdjunto = respuesta.idAdjunto;
       }
    }
 
    onBeforeSend( event: any ) {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "', 'ruta':" +
+                " '/Gestionamos/Terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "/Referencias' }";
       event.formData.append( 'obj', obj.toString() );
    }
 
-   onSelect(event:any, file:any){
-      this.dataUploadArchivo = file[0].name;
+   onSelect( event: any, file: any ) {
+      this.dataUploadArchivo = file[ 0 ].name;
       this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
    }
 
-   uploadAgain(rta:boolean){
+   uploadAgain( rta: boolean ) {
       this.reference.idAdjunto = null;
    }
 
-   downloadFile(id: number){
-
-      this.adjuntosService.downloadFile( id ).subscribe(res => {
-         window.location.assign(res);
-      });
+   downloadFile( id: number ) {
+      this.adjuntosService.downloadFile( id ).subscribe( res => {
+         this.adjuntosService.getFileName( id ).subscribe( adj => {
+            saveAs( res, adj.nombreArchivo );
+         } );
+      } );
    }
+
    getFileName() {
       this.adjuntosService.getFileName( this.reference.idAdjunto ).subscribe( res => {
          this.dataUploadArchivo = res.nombreArchivo;

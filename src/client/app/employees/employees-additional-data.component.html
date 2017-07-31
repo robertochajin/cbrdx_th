@@ -7,7 +7,7 @@
 					<div class="row">
 						<div class="form-group col-md-4"
 						     *ngIf="seccion.PESO ? seccion.PESO.visible : true">
-							<label for="peso">{{'EMPLOYEES.LBL_PESO' | translate}}</label>
+							<label for="peso">*{{'EMPLOYEES.LBL_PESO' | translate}}</label>
 							<input type="number" pInputText id="peso" name="peso" min="1"
 							       [(ngModel)]="employee.peso" #weight="ngModel" (change)="getimc()"
 							       (keyup)="inputNumberPeso()"
@@ -22,7 +22,7 @@
 						</div>
 						<div class="form-group col-md-4"
 						     *ngIf="seccion.TALLA ? seccion.TALLA.visible : true">
-							<label for="talla">{{'EMPLOYEES.LBL_ESTATURA' | translate}}</label>
+							<label for="talla">*{{'EMPLOYEES.LBL_ESTATURA' | translate}}</label>
 							<input type="number" pInputText id="talla" name="talla" min="1"
 							       [(ngModel)]="employee.talla" #tal="ngModel" (change)="getimc()"
 							       (keyup)="inputNumber()"
@@ -46,7 +46,7 @@
 					<div class="row">
 						<div class="form-group col-md-6"
 						     *ngIf="seccion.IDLATERALIDAD ? seccion.IDLATERALIDAD.visible : true">
-							<label for="idLateralidad">{{'EMPLOYEES.LBL_LATERALIDAD' | translate}}</label>
+							<label for="idLateralidad">*{{'EMPLOYEES.LBL_LATERALIDAD' | translate}}</label>
 							<p-dropdown id="idLateralidad" name="idLateralidad" required="true"
 							            [options]="lateralityTypes" [autoWidth]="false"
 							            [(ngModel)]="employee.idLateralidad"
@@ -61,7 +61,7 @@
 						</div>
 						<div class="form-group col-md-6"
 						     *ngIf="seccion.IDTALLACAMISA ? seccion.IDTALLACAMISA.visible : true">
-							<label for="tallaCamisa">{{'EMPLOYEES.LBL_TALLACAMISA' | translate}}</label>
+							<label for="tallaCamisa">*{{'EMPLOYEES.LBL_TALLACAMISA' | translate}}</label>
 							<p-dropdown id="tallaCamisa" name="tallaCamisa" required="true"
 							            [options]="listSizeShirt" [autoWidth]="false"
 							            [(ngModel)]="employee.idTallaCamisa"
@@ -78,7 +78,7 @@
 					<div class="row">
 						<div class="form-group col-md-6"
 						     *ngIf="seccion.IDTALLAPANTALON ? seccion.IDTALLAPANTALON.visible : true">
-							<label for="tallaPantalon">{{'EMPLOYEES.LBL_TALLAPANTALON' | translate}}</label>
+							<label for="tallaPantalon">*{{'EMPLOYEES.LBL_TALLAPANTALON' | translate}}</label>
 							<p-dropdown id="tallaPantalon" name="tallaPantalon" required="true"
 							            [options]="listSizePants" [autoWidth]="false"
 							            [(ngModel)]="employee.idTallaPantalon"
@@ -93,7 +93,7 @@
 						</div>
 						<div class="form-group col-md-6"
 						     *ngIf="seccion.IDTALLACALZADO ? seccion.IDTALLACALZADO.visible : true">
-							<label for="tallaCalzado">{{'EMPLOYEES.LBL_TALLACALZADO' | translate}}</label>
+							<label for="tallaCalzado">*{{'EMPLOYEES.LBL_TALLACALZADO' | translate}}</label>
 							<p-dropdown id="tallaCalzado" name="tallaCalzado" required="true"
 							            [options]="listSizeFootwear" [autoWidth]="false"
 							            [(ngModel)]="employee.idTallaCalzado"
@@ -110,7 +110,7 @@
 				</div>
 				<div class="row form-footer-buttons">
 					<div class="form-group col-md-12">
-						<button icon="fa-plus" label="Guardar" type="submit"
+						<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate}}" type="submit"
 						        pButton></button>
 					</div>
 				</div>

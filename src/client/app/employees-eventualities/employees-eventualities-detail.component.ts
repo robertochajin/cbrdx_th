@@ -5,6 +5,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { EmployeeEventuality } from '../_models/employeeEventuality';
 import { EventualityServices } from '../_services/eventuality.service';
 import { EmployeeEventualitiesService } from '../_services/employees-eventualities.service';
+import { EmployeeEventualitiesAttachmentService } from '../_services/employees-eventualities-attachment.service';
+import { EmployeeEventualityAttachment } from '../_models/employeeEventualityAttachment';
+import { AdjuntosService } from '../_services/adjuntos.service';
 
 @Component( {
                moduleId: module.id,
@@ -62,13 +65,21 @@ export class EmployeeEventualityDetailComponent {
    @Output()
    dismiss: EventEmitter<number> = new EventEmitter<number>();
 
+   listAttachment: EmployeeEventualityAttachment[] = [];
+
    constructor( private eventualityServices: EventualityServices,
       private employeeNoveltyService: EmployeeEventualitiesService,
+      private employeeEventualitiesAttachmentService: EmployeeEventualitiesAttachmentService,
       private router: Router,
+      private adjuntosService: AdjuntosService,
       private route: ActivatedRoute ) {
    }
 
    ngOnInit() {
+      this.employeeEventualitiesAttachmentService.getAllByIdEventuality( this.employeeEventuality.idTerceroNovedad )
+      .subscribe( rest => {
+         this.listAttachment = rest;
+      } );
       this.employeeNoveltyService.getFieldByIdEventuality( this.employeeEventuality.idNovedad ).subscribe( data => {
          this.listField = data;
          this.propareForm();
@@ -140,6 +151,14 @@ export class EmployeeEventualityDetailComponent {
          }
       }
 
+   }
+
+   downloadFile( id: number ) {
+      this.adjuntosService.downloadFile( id ).subscribe( res => {
+         this.adjuntosService.getFileName( id ).subscribe( adj => {
+            saveAs( res, adj.nombreArchivo );
+         } );
+      } );
    }
 
    goBack(): void {

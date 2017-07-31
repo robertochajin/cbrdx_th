@@ -36,6 +36,10 @@ import { EmployeeEventualitiesComponent } from '../employees-eventualities/emplo
 import { EmployeeEventualitiesAddComponent } from '../employees-eventualities/employee-eventualities-edit.component';
 import { EmployeeEventualitiesService } from '../_services/employees-eventualities.service';
 import { EmployeeEventualityDetailComponent } from '../employees-eventualities/employees-eventualities-detail.component';
+import { EmployeeEventualitiesAttachmentService } from '../_services/employees-eventualities-attachment.service';
+import { EventualityTransactEmployeeComponent } from '../employees-eventualities/employees-transact-eventualities.component';
+import { SuppliesEmployeesComponent } from './supplies-employees/supplies-employees.component';
+import { SuppliesConfirmationComponent } from './supplies-employees/supplies-confirmation.component';
 
 @NgModule( {
               imports: [
@@ -60,11 +64,15 @@ import { EmployeeEventualityDetailComponent } from '../employees-eventualities/e
                  EmployeesDetailPerfilComponent,
                  EmployeeEventualitiesComponent,
                  EmployeeEventualitiesAddComponent,
-                 EmployeeEventualityDetailComponent
+                 EmployeeEventualityDetailComponent,
+                 EventualityTransactEmployeeComponent,
+                 SuppliesEmployeesComponent,
+                 SuppliesConfirmationComponent
               ],
               bootstrap: [ EmployeesComponent ],
               providers: [ EmployeesService, ListEmployeesService, EmployeesRecruitmentService, PoliticalDivisionService, NavService,
-                 ListaService, AdjuntosService, ConstanteService, EmployeeEventualitiesService, SmsService
+                 ListaService, AdjuntosService, ConstanteService, EmployeeEventualitiesService, SmsService,
+                 EmployeeEventualitiesAttachmentService
               ],
               exports: [ EmployeesComponent ]
            } )

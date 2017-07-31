@@ -1,86 +1,149 @@
-<!--<form (ngSubmit)="f.valid " #f="ngForm" novalidate id="formulario">
-	<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-		<div class="ui-grid-row">
-			<div class="ui-grid-col-4">
-				<label for="idEstructuraFisica">{{ 'EMPLOYEENOVELTY.LBL_OFICINA' | translate }}</label>
-				<p-dropdown id="idEstructuraFisica" name="idEstructuraFisica"
-				            [options]="ListaOficinas" [autoWidth]="false"
-				            [(ngModel)]="filter.idEstructuraFisica" (onChange)="changeFilter()"
-				            #idEstructuraFisica="ngModel"
-				></p-dropdown>
+<div *ngIf="!detailEventuality">
+	<div *ngIf="!editEventuality">
+		<div *ngIf="!saveEventuality">
+			<p-panel header="{{ 'NOVEDADES.LBL_FILTROS' | translate }}">
+				<form (ngSubmit)="f.valid " #f="ngForm" novalidate id="formulario">
+					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+						<div class="ui-grid-row">
+							<div class="ui-grid-col-4">
+								<label for="idEstructuraFisica">{{ 'EMPLOYEENOVELTY.LBL_OFICINA' | translate }}</label>
+								<p-dropdown id="idEstructuraFisica" name="idEstructuraFisica"
+								            [options]="ListaOficinas" [autoWidth]="false"
+								            (onChange)="dt.filter($event.value,'estructuraFisica','startsWith')"
+								></p-dropdown>
+							</div>
+							<div class="ui-grid-col-4">
+								<label for="idArea">{{ 'EMPLOYEENOVELTY.LBL_AREA' | translate }}</label>
+								<p-dropdown id="idArea" name="idArea"
+								            [options]="ListaAreas" [autoWidth]="false"
+								            (onChange)="dt.filter($event.value,'estructuraArea','startsWith')"
+								></p-dropdown>
+							</div>
+							<div class="ui-grid-col-4">
+								<label for="idEstadoNovedad">{{ 'EMPLOYEENOVELTY.LBL_ESTADONOVEDAD' | translate }}</label>
+								<p-dropdown id="idEstadoNovedad" name="idEstadoNovedad"
+								            [options]="ListaEstados" [autoWidth]="false"
+								            (onChange)="dt.filter($event.value,'estadoNovedad','startsWith')"
+								></p-dropdown>
+							</div>
+						</div>
+						<div class="ui-grid-row">
+							<div class="ui-grid-col-4">
+								<label for="tipoNovedad">{{ 'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}</label>
+								<p-dropdown id="tipoNovedad" name="tipoNovedad"
+								            [options]="ListaTipos" [autoWidth]="false"
+								            (onChange)="dt.filter($event.value,'tipoNovedad','startsWith')"
+								></p-dropdown>
+							</div>
+							<div class="ui-grid-col-4">
+								<label for="novedad">{{ 'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }}</label>
+								<p-dropdown id="novedad" name="novedad"
+								            [options]="ListaNovedad" [autoWidth]="false"
+								            (onChange)="dt.filter($event.value,'novedad','startsWith')"
+								></p-dropdown>
+							</div>
+							<div class="ui-grid-col-4">
+								<label for="nombreTerceroReporta">{{ 'EMPLOYEENOVELTY.LBL_REPORTADOPOR' | translate }}</label>
+								<p-dropdown id="nombreTerceroReporta" name="nombreTerceroReporta"
+								            [options]="ListaReporta" [autoWidth]="false" filter="filter"
+								            (onChange)="dt.filter($event.value,'nombreTerceroReporta','startsWith')"
+								></p-dropdown>
+							</div>
+						</div>
+						<div class="ui-grid-row">
+							<div class="ui-grid-col-4">
+								<label for="fInicio">{{ 'EMPLOYEENOVELTY.LBL_FECHASOLICITUD' | translate }}</label>
+								<p-calendar [locale]="es" [showIcon]="true"
+								            id="fInicio" name="fInicio"
+								            dateFormat="yy'-'mm'-'dd" [maxDate]="fechaFin"
+								            readonlyInput="true" placeholder='Desde' dataType="date" #fechaI="ngModel"
+								            [(ngModel)]="fechaInicio" (onSelect)="changeDate();"
+								></p-calendar>
+							</div>
+							<div class="pull-right ui-grid-col-1" *ngIf="fechaInicio !== undefined && fechaInicio !== null && fechaInicio !== ''">
+								<label>Limpiar Fecha</label>
+								<button pButton type="button" class="ui-button-danger "
+								        (click)="clearDate()"
+								        icon="fa-close"></button>
+							</div>
+							<div class="ui-grid-col-4">
+								<label for="fFinal">{{ 'EMPLOYEENOVELTY.LBL_FECHASOLICITUD' | translate }}</label>
+								<p-calendar [locale]="es" [showIcon]="true"
+								            id="fFinal" name="fFinal"
+								            dateFormat="yy'-'mm'-'dd" [maxDate]="today" [minDate]="fechaInicio"
+								            readonlyInput="true" placeholder='Hasta' dataType="date"
+								            [(ngModel)]="fechaFin" (onSelect)="changeDate();"
+								></p-calendar>
+							</div>
+							<div class="ui-grid-col-4">
+								<label for="nombreTercero">{{ 'EMPLOYEES.LBL_COLABORADOR' | translate }}</label>
+								<p-dropdown id="nombreTercero" name="nombreTercero"
+								            [options]="ListaColaborador" [autoWidth]="false" filter="filter"
+								            (onChange)="dt.filter($event.value,'nombreTercero','startsWith')"
+								></p-dropdown>
+							</div>
+						</div>
+					</div>
+				</form>
+			</p-panel>
+			<div class="col-md-12">
+				<br>
 			</div>
-			<div class="ui-grid-col-4">
-				<label for="idArea">{{ 'EMPLOYEENOVELTY.LBL_AREA' | translate }}</label>
-				<p-dropdown id="idArea" name="idArea" required="true"
-				            [options]="ListaAreas" [autoWidth]="false" (onChange)="changeFilter()"
-				            [(ngModel)]="filter.idEstructuraArea"
-				            #idEstructuraArea="ngModel"
-				></p-dropdown>
+			<div class="row datable-header">
+				<div class="col-md-6 col-xs-12 datatable-header-add">
+					<button type="button" icon="fa-plus" label="{{'EMPLOYEENOVELTY.LBL_AGREGAR' | translate }}"
+					        pButton (click)="add()"></button>
+				</div>
+				<div class="col-md-6 col-xs-12 datatable-header-search">
+					<div class="input-group">
+						<div class="input-group-addon"><i class="fa fa-search"></i></div>
+						<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate }}" class="form-control"
+						       [(ngModel)]="busqueda" (change)="setSearch()">
+					</div>
+				</div>
 			</div>
-			<div class="ui-grid-col-4">
-				<label for="idArea">{{ 'EMPLOYEENOVELTY.LBL_ESTADONOVEDAD' | translate }}</label>
-				<p-dropdown id="idEstadoNovedad" name="idEstadoNovedad" required="true"
-				            [options]="ListaEstados" [autoWidth]="false" (onChange)="changeFilter()"
-				            [(ngModel)]="filter.idEstadoNovedad"
-				            #idEstadoNovedad="ngModel"
-				></p-dropdown>
-			</div>
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listEventualities" [paginator]="true" [rows]="10"
+			             [responsive]="true" [globalFilter]="gb" #dt>
+				<p-column field="numeroDocumento" header="{{'LBL_DOCUMENTO' | translate }}" [sortable]="true"></p-column>
+				<p-column field="nombreTercero" header="{{'EMPLOYEES.LBL_COLABORADOR' | translate }}" [sortable]="true"></p-column>
+				<p-column field="estructuraFisica" header="{{'EMPLOYEENOVELTY.LBL_OFICINA' | translate }}" [sortable]="true"></p-column>
+				<p-column field="estructuraArea" header="{{'EMPLOYEENOVELTY.LBL_AREA' | translate }}" [sortable]="true"></p-column>
+				<p-column field="tipoNovedad" header="{{'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}" [sortable]="true"></p-column>
+				<p-column field="novedad" header="{{'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }}" [sortable]="true"></p-column>
+				<p-column field="fechaReporte" header="{{'EMPLOYEENOVELTY.LBL_FECHASOLICITUD' | translate }}" [sortable]="true"></p-column>
+				<p-column field="estadoNovedad" header="{{'EMPLOYEENOVELTY.LBL_ESTADONOVEDAD' | translate }}" [sortable]="true"></p-column>
+				<p-column field="nombreTerceroReporta" header="{{'EMPLOYEENOVELTY.LBL_REPORTADOPOR' | translate }}"
+				          [sortable]="true"></p-column>
+				<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+					<template let-datos="rowData" pTemplate="body">
+						<button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip"
+						        title="{{'BTN_VISUALIZAR' | translate}}"
+						        pButton (click)="detail(datos)"></button>
+						<button *ngIf="datos.codigoNovedad!=='RECHZ' && datos.codigoNovedad!=='TRAMIT' &&  datos.codigoNovedad!=='CANCEL'"
+						        type="button" icon="fa-pencil"
+						        class="ui-button-success" data-toggle="tooltip"
+						        title="{{'BTN_EDITAR' | translate}}"
+						        pButton (click)="update(datos)"></button>
+						<button *ngIf="datos.codigoNovedad!=='RECHZ' && datos.codigoNovedad!=='TRAMIT' &&  datos.codigoNovedad!=='CANCEL'"
+						        type="button" icon="fa-external-link"
+						        class="ui-button-success" data-toggle="tooltip"
+						        title="{{'EMPLOYEENOVELTY.BTN_TRAMITAR' | translate}}"
+						        pButton (click)="refer(datos)"></button>
+					</template>
+				</p-column>
+			</p-dataTable>
 		</div>
-		<div class="ui-grid-row">
-			<div class="ui-grid-col-4">
-				<label for="idEstructuraFisica">{{ 'EMPLOYEENOVELTY.LBL_OFICINA' | translate }}</label>
-				<p-dropdown id="tipoNovedad" name="tipoNovedad"
-				            [options]="ListaTipos" [autoWidth]="false"
-				            [(ngModel)]="filter.tipoNovedad" (onChange)="changeFilter()"
-				            #tipoNovedad="ngModel"
-				></p-dropdown>
-			</div>
-			<div class="ui-grid-col-4">
-				<label for="idArea">{{ 'EMPLOYEENOVELTY.LBL_AREA' | translate }}</label>
-				<p-dropdown id="novedad" name="novedad" required="true"
-				            [options]="ListaNovedad" [autoWidth]="false" (onChange)="changeFilter()"
-				            [(ngModel)]="filter.novedad"
-				            #novedad="ngModel"
-				></p-dropdown>
-			</div>
+		<div *ngIf="saveEventuality">
+			<tray-employee-eventuality-add [employeeEventuality]="employeeEventuality" (dismiss)="closeSave()"></tray-employee-eventuality-add>
 		</div>
 	</div>
-</form>-->
-<div class="row datable-header">
-	<div class="col-md-6 col-xs-12 datatable-header-add">
-		<!--<button type="button" icon="fa-plus" label="{{'EMPLOYEENOVELTY.LBL_AGREGAR' | translate }}"
-		        pButton (click)="add()"></button>-->
-	</div>
-	<div class="col-md-6 col-xs-12 datatable-header-search">
-		<div class="input-group">
-			<div class="input-group-addon"><i class="fa fa-search"></i></div>
-			<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate }}" class="form-control"
-			       [(ngModel)]="busqueda" (change)="setSearch()">
-		</div>
+	<div *ngIf="editEventuality">
+		<tray-employee-eventuality-add [employeeEventuality]="employeeEventuality" (dismiss)="closeEdit()"></tray-employee-eventuality-add>
 	</div>
 </div>
-<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listEventualities" [paginator]="true" [rows]="10"
-             [responsive]="true" [globalFilter]="gb">
-	<p-column field="numeroDocumento" header="{{'LBL_DOCUMENTO' | translate }}" [sortable]="true"></p-column>
-	<p-column field="nombreTercero" header="{{'EMPLOYEES.LBL_COLABORADOR' | translate }}" [sortable]="true"></p-column>
-	<p-column field="estructuraFisica" header="{{'EMPLOYEENOVELTY.LBL_OFICINA' | translate }}" [sortable]="true"></p-column>
-	<p-column field="estructuraArea" header="{{'EMPLOYEENOVELTY.LBL_AREA' | translate }}" [sortable]="true"></p-column>
-	<p-column field="tipoNovedad" header="{{'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}" [sortable]="true"></p-column>
-	<p-column field="novedad" header="{{'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }}" [sortable]="true"></p-column>
-	<p-column field="fechaReporte" header="{{'EMPLOYEENOVELTY.LBL_FECHASOLICITUD' | translate }}" [sortable]="true"></p-column>
-	<p-column field="estadoNovedad" header="{{'EMPLOYEENOVELTY.LBL_ESTADONOVEDAD' | translate }}" [sortable]="true"></p-column>
-	<p-column field="nombreTerceroReporta" header="{{'EMPLOYEENOVELTY.LBL_REPORTADOPOR' | translate }}"
-	          [sortable]="true"></p-column>
-	<!--<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
-		<template let-nv="rowData" pTemplate="body">
-			<button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_INACTIVAR' | translate}}"
-			pButton (click)="detail(nv)"></button>
-			<button *ngIf="nv.idEstadoNovedad===1" type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip"
-			        title="{{'BTN_EDITAR' | translate}}"
-			        pButton (click)="update(nv)"></button>
-		</template>
-	</p-column>-->
-</p-dataTable>
+<div *ngIf="detailEventuality">
+	<tray-employees-eventuality-detail [employeeEventuality]="employeeEventuality" (dismiss)="closeDetail()"></tray-employees-eventuality-detail>
+</div>
 <p-confirmDialog icon="fa fa-question-circle" #cd width="400">
 	<p-footer>
 		<button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>

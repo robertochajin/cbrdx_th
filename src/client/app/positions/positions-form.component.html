@@ -112,7 +112,7 @@
                                  <div class="form-group col-md-6" *hasPermission ="seccion1.IDESTADO ? seccion1.IDESTADO : defaultCampo">
                                     <label for="idEstado">{{ 'LBL_ESTADO' | translate }}</label>
                                     <p-dropdown id="idEstado" name="idEstado"
-                                                [disabled]="seccion1.IDCARGOJEFE.IDESTADO"
+                                                [disabled]="true"
                                                 [options]="stateTypes" [autoWidth]="false"
                                                 [(ngModel)]="position.idEstado" disabled="true"
                                                 #idEstado="ngModel"
@@ -226,54 +226,55 @@
                          [disabled]="step >0 && step < 4">
             <position-roles (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-roles>
          </p-accordionTab>
-
-         <p-accordionTab header="{{ 'POSITION.LBL_RESPONSABILIDADESPRINCIPALES' | translate }}" [selected]="acordion === 4"
-                         *hasPermission ="seccion5 ? seccion5 : defaultCampo"
-                         [disabled]="step >0 && step <5">
-            <position-responsabilities (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-responsabilities>
+	      <p-accordionTab header="{{ 'POSITION.LBL_RESPONSABILIDADESPRINCIPALES' | translate }}" [selected]="acordion === 4"
+	                      *hasPermission="seccion6 ? seccion6 : defaultCampo"
+	                      [disabled]="step >0 && step <5">
+		      <fieldset>
+			      <div *ngIf="position">
+				      <div class="row-fluid">
+					      <div class="col-md-12">
+						      <form name="formulario" (ngSubmit)="f5.valid && onSubmit5()" #f5="ngForm" novalidate>
+							      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+								
+								      <div class="row">
+									      <div class=" col-sm-12"
+									           *hasPermission="seccion6.RESPONSABILIDADESAD ? seccion6.RESPONSABILIDADESAD : defaultCampo">
+										      <label for="responsabilidadesAd">* {{ 'POSITION.LBL_RESPONSABILIDADESPRINCIPALES' | translate
+											      }}</label>
+										      <textarea pInputTextarea id="responsabilidadesAd"
+										                name="responsabilidadesAd" maxlength="500"
+										                [(ngModel)]="position.responsabilidadesAd"
+										                #responsabilidadesAd="ngModel"
+										                [required]="true"></textarea>
+										      <div *ngIf="f5.submitted && !responsabilidadesAd.valid"
+										           class="ui-message ui-messages-error ui-corner-all">
+											      {{ 'POSITION.LBL_RESPONSABILIDADESPRINCIPALES' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+										      </div>
+									      </div>
+								      </div>
+							      </div>
+							      <div class="row form-footer-buttons">
+								      <div class="form-group col-md-12">
+									      <button icon="fa-arrow-right" label=" {{ 'BTN_SIGUIENTE' | translate }}" type="submit"
+									              pButton></button>
+								      </div>
+							      </div>
+						      </form>
+					      </div>
+				      </div>
+			      </div>
+		
+		      </fieldset>
+	      </p-accordionTab>
+	      <p-accordionTab header="{{ 'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' | translate }}" [selected]="acordion === 5"
+	                      *hasPermission="seccion5 ? seccion5 : defaultCampo"
+	                      [disabled]="step >0 && step <6">
+		      <position-responsabilities (nextStep)="nextStep($event)" *ngIf="position.idCargo"
+		                                 [position]="position"></position-responsabilities>
          </p-accordionTab>
-
-         <p-accordionTab header="{{ 'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' | translate }}" [selected]="acordion === 5"
-                         *hasPermission ="seccion6 ? seccion6 : defaultCampo"
-                         [disabled]="step >0 && step <6">
-            <fieldset>
-               <div *ngIf="position">
-                  <div class="row-fluid">
-                     <div class="col-md-12">
-                        <form name="formulario" (ngSubmit)="f5.valid && onSubmit5()" #f5="ngForm" novalidate>
-                           <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-
-                              <div class="row">
-                                 <div class=" col-sm-12" *hasPermission ="seccion6.RESPONSABILIDADESAD ? seccion6.RESPONSABILIDADESAD : defaultCampo">
-                                    <label for="responsabilidadesAd">* {{ 'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' | translate
-	                                    }}</label>
-                                    <textarea pInputTextarea id="responsabilidadesAd"
-                                              name="responsabilidadesAd" maxlength="500"
-                                              [(ngModel)]="position.responsabilidadesAd"
-                                              #responsabilidadesAd="ngModel"
-                                              [required]="true"></textarea>
-                                    <div *ngIf="f5.submitted && !responsabilidadesAd.valid"
-                                          class="ui-message ui-messages-error ui-corner-all">
-                                       {{ 'POSITION.LBL_RESPONSABILIDADESCOMPLEMENTARIAS' | translate }} {{ 'LBL_REQUERIDO' | translate }}
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="row form-footer-buttons">
-                              <div class="form-group col-md-12">
-                                 <button icon="fa-arrow-right" label=" {{ 'BTN_SIGUIENTE' | translate }}" type="submit"
-                                         pButton></button>
-                              </div>
-                           </div>
-                        </form>
-                     </div>
-                  </div>
-               </div>
-
-            </fieldset>
-         </p-accordionTab>
-
-         <p-accordionTab header="{{ 'POSITION.LBL_POSICION' | translate }}" [selected]="acordion === 6"
+	
+	
+	      <p-accordionTab header="{{ 'POSITION.LBL_POSICION' | translate }}" [selected]="acordion === 6"
                          *hasPermission ="seccion7 ? seccion7 : defaultCampo"
                          [disabled]="step >0 && step <7">
             <position-absence (nextStep)="nextStep($event)" *ngIf="position.idCargo" [position]="position"></position-absence>
@@ -564,7 +565,6 @@
                                  <div class="ui-grid-col-4" *ngIf="seccion15.INDICADORREQUIEREFORMACION.visible"><br>
 	                                 <label for="indicadorRequiereFormacion">{{'POSITION.LBL_REQUIERE' | translate }}</label>
 	                                 <p-checkbox id="indicadorRequiereFormacion" name="indicadorRequiereFormacion"
-	                                             disabled="seccion15.INDICADORREQUIEREFORMACION.editable === false"
 	                                             [(ngModel)]="position.indicadorRequiereFormacion" binary="true"></p-checkbox>
                                  </div>
                               </div>

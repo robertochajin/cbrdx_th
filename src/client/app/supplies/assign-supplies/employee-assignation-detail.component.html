@@ -1,0 +1,145 @@
+<div class="col-md-offset-1 col-md-10">
+	<div class="row">
+		<div class="col-md-12">
+			<p-panel header="{{ 'ASIGNARDOTACION.LBL_DETALLECOLABORADOR' | translate }}" class="perfil">
+				<form class="form-horizontal">
+					<fieldset>
+						<div class="form-group row">
+							<div class="col-md-2">
+								<div class="thumbnail">
+									<img src="{{svcThUrlAvatar}}/file/" alt="...">
+								</div>
+							</div>
+							<div class="col-md-10">
+								<h2>{{employessAssign.nombreCompleto}}</h2>
+								<h4>{{employessAssign.documento}}</h4>
+								<span>{{employessAssign.tipoArea}} - {{employessAssign.area}}</span>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</p-panel>
+		</div>
+	</div>
+	<div *ngIf="employessAssign.idProyeccionDotacion" class="row">
+		<div class="col-md-12">
+			<form >
+				<p-panel header="{{ 'ASIGNARDOTACION.LBL_DOTACION' | translate }}">
+					
+					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+						
+						<div class="row row-border" >
+							<div class="form-group col-md-4">
+								<strong>{{ 'ASIGNARDOTACION.LBL_DOTACION' | translate }}</strong>
+							</div>
+							<div class="form-group col-md-2">
+								<strong>{{ 'ASIGNARDOTACION.LBL_TALLA' | translate }}</strong>
+							</div>
+							<div class="form-group col-md-2">
+								-
+							</div>
+							<div  class="form-group col-md-2">
+								<strong>{{ 'ASIGNARDOTACION.LBL_CANTIDADASIGNAR' | translate }}</strong>
+							</div>
+							<div  class="form-group col-md-2">
+								<strong>{{ 'ASIGNARDOTACION.LBL_CANTIDADENTREGAR' | translate }}</strong>
+							</div>
+						</div>
+						
+						<div class="row row-border" *ngFor="let supp of employeeSupplies; let i = index">
+							<div class="form-group col-md-4">
+								{{supp.dotacion}}
+							</div>
+							<div class="form-group col-md-2">
+								{{supp.talla}}
+							</div>
+							<div class="form-group col-md-2">
+								-
+							</div>
+							<div class="form-group col-md-2">
+								{{supp.cantidadAsignada}}
+							</div>
+							<div class="form-group col-md-2">
+								{{supp.cantidadEntregada}}
+							</div>
+						</div>
+																		
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label >{{ 'ASIGNARDOTACION.LBL_COMENTARIO' | translate }}:</label>
+								<p>{{employessAssign.comentario}}</p>
+							</div>
+						</div>
+					</div>
+				</p-panel>
+				<p-panel header="{{ 'ASIGNARDOTACION.LBL_DOTACIONADICIONAL' | translate }}">
+					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+						
+						<div class="row row-border" >
+							<div class="form-group col-md-1"></div>
+							<div class="form-group col-md-4">
+								<strong>{{ 'ASIGNARDOTACION.LBL_DOTACION' | translate }}</strong>
+							</div>
+							<div class="form-group col-md-2">
+								<strong>{{ 'ASIGNARDOTACION.LBL_TALLA' | translate }}</strong>
+							</div>
+							<div class="form-group col-md-2">
+								<strong>{{ 'ASIGNARDOTACION.LBL_CANTIDADDOTACION' | translate }}</strong>
+							</div>
+							<div class="form-group col-md-2"></div>
+							<div class="form-group col-md-1"></div>
+						</div>
+						
+						<div class="row row-border" *ngFor="let addSupp of employeeAditionalSupplies; let i = index">
+							<div class="form-group col-md-1"></div>
+							<div class="form-group col-md-4">
+								{{addSupp.dotacion}}
+							</div>
+							<div class="form-group col-md-2">
+								{{addSupp.talla}}
+							</div>
+							<div class="form-group col-md-2">
+								{{addSupp.cantidadDotacion}}
+							</div>
+							<div class="form-group col-md-2"></div>
+							<div class="form-group col-md-1"></div>
+						</div>
+						
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label >{{ 'ASIGNARDOTACION.LBL_COMENTARIOADICIONAL' | translate }}:</label>
+								<p>{{employessAssign.comentarioAdicional}}</p>
+							</div>
+						</div>
+					</div>
+				</p-panel>
+				
+				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+					<div class="row">
+						<div class="form-group col-md-2">
+						</div>
+						<div  class="form-group col-md-4">
+							<label>{{'ASIGNARDOTACION.LBL_FECHAENTREGA' | translate}}</label>
+							<p>{{employessAssign.fechaEntrega}}</p>
+						</div>
+						<div class="form-group col-md-4">
+							<label>{{'ASIGNARDOTACION.LBL_FECHAASIGNACION' | translate}}</label>
+							<p>{{employessAssign.fechaPosibleEntrega}}</p>
+						</div>
+						<div class="form-group col-md-2">
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label >{{ 'ASIGNARDOTACION.LBL_COMENTARIOENTREGA' | translate }}:</label>
+							<p>{{employessAssign.comentarioEntrega}}</p>
+						</div>
+					</div>
+				
+				</div>
+			
+			</form>
+		</div>
+	</div>
+</div>

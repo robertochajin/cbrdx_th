@@ -14,6 +14,8 @@ import { ListaService } from '../_services/lista.service';
 import { JwtHelper } from 'angular2-jwt';
 import { AdjuntosService } from '../_services/adjuntos.service';
 import { ConstanteService } from '../_services/constante.service';
+import { Employee } from '../_models/employees';
+import { EmployeesService } from '../_services/employees.service';
 
 
 @Component( {
@@ -54,6 +56,7 @@ export class FormalStudiesUpdateComponent implements OnInit {
    jwtHelper: JwtHelper = new JwtHelper();
    fsize: number = 50000000;
    ftype: string = '';
+   employee: Employee = new Employee();
 
    constructor( private academicEducationService: AcademicEducationService,
       private politicalDivisionService: PoliticalDivisionService,
@@ -64,7 +67,7 @@ export class FormalStudiesUpdateComponent implements OnInit {
       private constanteService: ConstanteService,
       private confirmationService: ConfirmationService,
       private _nav: NavService,
-
+      private employeesService: EmployeesService
    ) {
 
       let token = localStorage.getItem( 'token' );
@@ -103,6 +106,7 @@ export class FormalStudiesUpdateComponent implements OnInit {
       } );
       this.route.params.subscribe( ( params: Params ) => {
          this.idTercero = params[ 'tercero' ];
+         this.employeesService.get( this.idTercero ).subscribe( res => this.employee = res );
          this.academicEducationService.getFormal( +params[ 'id' ] ).subscribe( fstudy => {
             this.fstudy = fstudy;
             this.getFileName();
@@ -277,7 +281,8 @@ export class FormalStudiesUpdateComponent implements OnInit {
 
    onBeforeSend( event: any ) {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "', 'ruta':" +
+                " '/Gestionamos/Terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "/Estudios Formales' }";
       event.formData.append( 'obj', obj.toString() );
    }
 
@@ -290,9 +295,11 @@ export class FormalStudiesUpdateComponent implements OnInit {
       this.fstudy.idAdjunto = null;
    }
    downloadFile(id: number){
-      this.adjuntosService.downloadFile( id ).subscribe(res => {
-         window.location.assign(res);
-      });
+      this.adjuntosService.downloadFile( id ).subscribe( res => {
+         this.adjuntosService.getFileName( id ).subscribe( adj => {
+            saveAs( res, adj.nombreArchivo );
+         } );
+      } );
    }
 
    getFileName() {

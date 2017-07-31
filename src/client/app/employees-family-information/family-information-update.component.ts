@@ -17,6 +17,7 @@ import { PoliticalDivisionService } from '../_services/political-division.servic
 import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
 import { ConstanteService } from '../_services/constante.service';
+import { LocationsNomenclaturesServices } from '../_services/locationsNomenclatures.service';
 
 @Component( {
                moduleId: module.id,
@@ -64,6 +65,7 @@ export class FamilyInformationUpdateComponent implements OnInit {
       private listEmployeesService: ListEmployeesService,
       private confirmationService: ConfirmationService,
       private politicalDivisionService: PoliticalDivisionService,
+      private locationsNomenclaturesServices: LocationsNomenclaturesServices,
       private location: Location,
       private _nav: NavService ) {
    }
@@ -153,6 +155,9 @@ export class FamilyInformationUpdateComponent implements OnInit {
                   this.politicalDivisionService.getLocation( localizacion.idDivisionPolitica ).subscribe( ciudad => {
                      this.localizacion.locacion.camino = ciudad.camino;
                      this.localizacion.locacion.idDivisionPolitica = ciudad.idDivisionPolitica;
+                  } );
+                  this.locationsNomenclaturesServices.getAllByLocalizacion( this.localizacion.idLocalizacion ).subscribe( lns => {
+                     this.localizacion.listLN = lns;
                   } );
                } );
 

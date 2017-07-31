@@ -8,6 +8,16 @@ import { SuppliesComponent } from './supplies.component';
 import { SuppliesService } from '../_services/supplies.service';
 import { SuppliesAddComponent } from './supplies-add.component';
 import { SuppliesUpdateComponent } from './supplies-update.component';
+import { AssignationListComponent } from './assign-supplies/assignation-list.component';
+import { EmployeeAssignationComponent } from './assign-supplies/employee-assignation.component';
+import { EmployeeAssignationDetailComponent } from './assign-supplies/employee-assignation-detail.component';
+import { SuppliesProjectionAddComponent } from './supplies-projection/supplies-projection-add.component';
+import { SuppliesProjectionComponent } from './supplies-projection/supplies-projection.component';
+import { SuppliesProjectionServices } from '../_services/suppliesProjection.service';
+import { EmployessSuppliesServices } from '../_services/employeesSupplies.service';
+import { ConsolidatedProjectionComponent } from './supplies-projection/consolidated-projection.component';
+import { TracingSuppliesComponent } from './tracing-supplies/tracing-supplies.component';
+import { SuppliesProjectionOrganizationalStructureServices } from '../_services/suppliesProjectionOrganizationalStructure.service';
 
 
 @NgModule( {
@@ -16,10 +26,17 @@ import { SuppliesUpdateComponent } from './supplies-update.component';
                  FormSharedModule,
               ],
 
-              declarations: [ SuppliesComponent, SuppliesAddComponent, SuppliesUpdateComponent
+              declarations: [ AssignationListComponent,
+                 EmployeeAssignationDetailComponent,
+                 EmployeeAssignationComponent,
+                 SuppliesComponent, SuppliesAddComponent, SuppliesUpdateComponent,
+                 SuppliesProjectionComponent, SuppliesProjectionAddComponent,
+                 TracingSuppliesComponent, ConsolidatedProjectionComponent
               ],
               bootstrap: [ SuppliesComponent ],
-              providers: [ SuppliesService, NavService, ListaService ],
+              providers: [ SuppliesService, NavService, ListaService, SuppliesProjectionServices, EmployessSuppliesServices,
+                 SuppliesProjectionOrganizationalStructureServices
+              ],
               exports: [ SuppliesComponent ]
            } )
 export class SuppliesModule {

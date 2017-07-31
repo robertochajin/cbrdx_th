@@ -301,16 +301,17 @@
 							      <legend>{{ 'PLANTACOLABORADORES.MSG_ASIGNACOLABORADORCARGO' | translate }}</legend>
 							      <div class="form-group container">
 								      <div class="row">
-									      <div class="form-group col-md-12">
-										      <label>{{ 'ESTRUCTURAORGANIZACIONAL.LBL_CODIGOZONA' | translate }}:</label>
+									      <div class="col-md-12">
+										      <label class="control-label">{{ 'ESTRUCTURAORGANIZACIONAL.LBL_CODIGOZONA' | translate }}:</label>
 										      {{zone.codigo}}
 									      </div>
 								      </div>
 								      <div class="row">
-									      <div class="form-group col-md-12">
-										      <label for="zoneName">{{ 'ESTRUCTURAORGANIZACIONAL.LBL_ZONA' | translate }}:</label>
+									      <div class="col-md-12">
+										      <label class="control-label" for="zoneName">{{ 'ESTRUCTURAORGANIZACIONAL.LBL_ZONA' | translate
+											      }}:</label>
 										      <input id="zoneName" type="text" pInputText name="zoneName"
-										             [(ngModel)]="zone.zona" #zoneName="ngModel" required
+										             [(ngModel)]="zone.zona" #zoneName="ngModel" required maxlength="50"
 										             (keyup)="capitalizeZone($event.target.value)"
 										      />
 										      <div class="ui-message ui-messages-error ui-corner-all"

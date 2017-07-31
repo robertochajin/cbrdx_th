@@ -18,6 +18,8 @@ import { Employee } from '../_models/employees';
 import { EventualityServices } from '../_services/eventuality.service';
 import { Eventuality } from '../_models/eventuality';
 import { EmployeesClinicalData } from '../_models/employeesClinicalData';
+import { EmployeeEventualityAttachment } from '../_models/employeeEventualityAttachment';
+import { EmployeeEventualitiesAttachmentService } from '../_services/employees-eventualities-attachment.service';
 
 @Component( {
                moduleId: module.id,
@@ -62,6 +64,11 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    eventuality: Eventuality = new Eventuality();
    acordion: number;
    ecd: EmployeesClinicalData = new EmployeesClinicalData();
+
+   employeeEventualityAttachment: EmployeeEventualityAttachment = new EmployeeEventualityAttachment();
+   listAttachment: EmployeeEventualityAttachment[] = [];
+   nameAttachment: string;
+   saveAttachmnet: boolean = true;
 
    // indicadores para mostrar campos en formulario
    showhorainicio: boolean = false;
@@ -128,6 +135,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       private adjuntosService: AdjuntosService,
       private location: Location,
       private confirmationService: ConfirmationService,
+      private employeeEventualitiesAttachmentService: EmployeeEventualitiesAttachmentService,
       private _nav: NavService, ) {
       let token = localStorage.getItem( 'token' );
       this.usuarioLogueado = this.jwtHelper.decodeToken( token );
@@ -187,12 +195,16 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
             this.horaFinal = new Date( this.employeeEventuality.horaFin );
             this.fechaReintegro = new Date( this.employeeEventuality.fechaReintegro );
             this.horaReintegro = new Date( this.employeeEventuality.horaReintergo );
-            this.periodoInicio = new Date( this.employeeEventuality.periodoInicio );
+            this.periodoInicio = new Date( this.employeeEventuality.periodoInicial );
             this.periodoFin = new Date( this.employeeEventuality.periodoFinal );
             this.eventualityServices.get( this.employeeEventuality.idNovedad ).subscribe( rest => {
                this.eventuality = rest;
             } );
             this.changeEventuality();
+            this.employeeEventualitiesAttachmentService.getAllByIdEventuality( this.employeeEventuality.idTerceroNovedad )
+            .subscribe( rest => {
+               this.listAttachment = rest;
+            } );
          } );
       } else {
          this.eventuality = new Eventuality();
@@ -231,7 +243,11 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
                   }
                   this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( data => {
                      this._nav.setMesage( 2, this.msgs );
-                     this.dismiss.emit( 1 );
+                     if ( this.eventuality.indicadorAdjuntos ) {
+                        this.acordion = 1;
+                     }else{
+                        this.dismiss.emit( 1 );
+                     }
                   }, error => {
                      this._nav.setMesage( 3, this.msgs );
                   } );
@@ -241,7 +257,11 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
                   this.employeeEventuality.idTerceroReporta = this.usuarioLogueado.usuario.idTercero;
                   this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
                      this._nav.setMesage( 1, this.msgs );
-                     this.dismiss.emit( 1 );
+                     if ( this.eventuality.indicadorAdjuntos ) {
+                        this.acordion = 1;
+                     }else{
+                        this.dismiss.emit( 1 );
+                     }
                   }, error => {
                      this._nav.setMesage( 3, this.msgs );
                   } );
@@ -257,7 +277,11 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
               this.employeeEventuality.idTerceroNovedad !== undefined ) {
             this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( data => {
                this._nav.setMesage( 2, this.msgs );
-               this.dismiss.emit( 1 );
+               if ( this.eventuality.indicadorAdjuntos ) {
+                  this.acordion = 1;
+               }else{
+                  this.dismiss.emit( 1 );
+               }
             }, error => {
                this._nav.setMesage( 3, this.msgs );
             } );
@@ -269,7 +293,11 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
                this.employeeEventuality.idTerceroNovedad = data.idTerceroNovedad;
                this._nav.setMesage( 1, this.msgs );
                if ( !this.eventuality.indicadorConfirmacion ) {
-                  this.dismiss.emit( 1 );
+                  if ( this.eventuality.indicadorAdjuntos ) {
+                     this.acordion = 1;
+                  }else{
+                     this.dismiss.emit( 1 );
+                  }
                }
             }, error => {
                this._nav.setMesage( 3, this.msgs );
@@ -349,7 +377,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       if ( fecha2 && fecha1 ) {
          let diasDif = fecha2.getTime() - fecha1.getTime();
          let dias = Math.round( diasDif / (1000 * 60 * 60 * 24) );
-         this.employeeEventuality.dias = dias+1;
+         this.employeeEventuality.dias = dias + 1;
       }
    }
 
@@ -534,7 +562,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       }
       if ( this.periodoInicio !== undefined && this.periodoInicio !== null ) {
          if ( this.periodoInicio.toString() !== 'Invalid Date' ) {
-            this.employeeEventuality.periodoInicio = this.periodoInicio.toISOString().replace( 'Z', '-0500' );
+            this.employeeEventuality.periodoInicial = this.periodoInicio.toISOString().replace( 'Z', '-0500' );
          }
       }
       if ( this.periodoFin !== undefined && this.periodoFin !== null ) {
@@ -562,6 +590,58 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
             this._nav.setMesage( 4, {
                severity: 'success', summary: 'Exito', detail: 'El codigo se ha enviado con éxito.'
             } );
+         } );
+      } );
+   }
+
+   inputAttachment( event: any ) {
+      let input = event.target.value;
+      if ( input !== ' ' ) {
+         event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+      } else {
+         this.dataUploadArchivo = '';
+      }
+   }
+
+   uploadingOk( event: any ) {
+      let respuesta = JSON.parse( event.xhr.response );
+      if ( respuesta.idAdjunto != null || respuesta.idAdjunto != undefined ) {
+         this.saveAttachmnet = false;
+         this.employeeEventualityAttachment.idTerceroNovedad = this.employeeEventuality.idTerceroNovedad;
+         this.employeeEventualityAttachment.idAdjunto = respuesta.idAdjunto;
+         this.employeeEventualitiesAttachmentService.add( this.employeeEventualityAttachment ).subscribe( data => {
+            this.dataUploadArchivo = '';
+            this.listAttachment = [];
+            this.employeeEventualitiesAttachmentService.getAllByIdEventuality( this.employeeEventuality.idTerceroNovedad )
+            .subscribe( rest => {
+               this.listAttachment = rest;
+            } );
+            this.saveAttachmnet = true;
+         }, error => {
+            this.saveAttachmnet = true;
+         } );
+      }
+   }
+
+   onBeforeSend( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "', 'ruta':" +
+                " '/Gestionamos/Terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "/Novedades' }";
+      event.formData.append( 'obj', obj.toString() );
+   }
+
+   onSelect( event: any, file: any ) {
+      this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   }
+
+   uploadAgain( rta: boolean ) {
+      this.employeeEventualityAttachment.idAdjunto = null;
+   }
+
+   downloadFile( id: number ) {
+      this.adjuntosService.downloadFile( id ).subscribe( res => {
+         this.adjuntosService.getFileName( id ).subscribe( adj => {
+            saveAs( res, adj.nombreArchivo );
          } );
       } );
    }
