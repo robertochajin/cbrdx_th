@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Employee } from '../_models/employees';
@@ -16,7 +16,7 @@ import { PermissionsEmployees } from '../_models/permissionsEmployees';
                providers: []
             } )
 
-export class EmployeesContactComponent {
+export class EmployeesContactComponent implements OnInit {
    @Input() employee: Employee;
    @Input() seccion: PermissionsEmployees;
 
@@ -34,6 +34,9 @@ export class EmployeesContactComponent {
 
    }
 
+   ngOnInit() {
+      this.validarTelefono();
+   }
    onSubmit() {
       this.msgs = [];
       this.employeesService.update( this.employee )
@@ -68,28 +71,30 @@ export class EmployeesContactComponent {
     }
     }*/
    validarTelefono() {
-      if ( this.employee.telefonoFijo === '' ) {
-         this.tel = true;
-         this.cel = true;
+      let tel = this.employee.telefonoFijo;
+      if ( tel !== undefined ) {
+         let telcel = tel.replace( /[^0-9]/g, '' ).length;
+         if ( telcel >= 7 ) {
+            this.cel = false;
+         } else {
+            this.cel = true;
+         }
       } else {
-         this.tel = false;
-         this.cel = false;
+         this.cel = true;
       }
    }
 
-   validarCelular() {
-      let temp = this.employee.telefonoCelular;
-      if(temp  !== undefined) {
-         let telcel = temp.replace( /[^0-9]/g, '' ).length;
-         if ( telcel < 10 ) {
-            this.tel = true;
-            this.cel = true;
-         } else {
+   /*validarCelular() {
+    let cel = this.employee.telefonoCelular;
+    if(cel  !== undefined) {
+    let telcel = cel.replace( /[^0-9]/g, '' ).length;
+    if ( telcel === 10 ) {
             this.tel = false;
-            this.cel = false;
+    } else {
+    this.tel = true;
          }
       }
-   }
+    }*/
    correoMinusculas() {
       if ( this.employee.correoElectronico !== null &&
            this.employee.correoElectronico !== undefined && this.employee.correoElectronico !== '' ) {

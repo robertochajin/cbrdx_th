@@ -30,8 +30,8 @@
 				            (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
 			</template>
 		</p-column>
-		<p-column field="fechaEntrega" header="{{ 'ASIGNARDOTACION.LBL_FECHAASIGNACION' | translate }}" [sortable]="true"></p-column>
-		<p-column field="fechaPosibleEntrega" header="{{ 'ASIGNARDOTACION.LBL_FECHAENTREGA' | translate }}" [sortable]="true"></p-column>
+		<p-column field="fechaPosibleEntrega" header="{{ 'ASIGNARDOTACION.LBL_FECHAASIGNACION' | translate }}" [sortable]="true"></p-column>
+		<p-column field="fechaEntrega" header="{{ 'ASIGNARDOTACION.LBL_FECHAENTREGA' | translate }}" [sortable]="true"></p-column>
 		<p-column field="estado" header="{{ 'ASIGNARDOTACION.LBL_ESTADO' | translate }}" [filter]="true" filterMatchMode="equals">
 			<template pTemplate="filter" let-col>
 				<p-dropdown [options]="states" [(ngModel)]="statesFilter" [style]="{'width':'100%'}"
