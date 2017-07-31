@@ -68,7 +68,7 @@ export class EmployeesContactComponent {
     }
     }*/
    validarTelefono() {
-      if ( this.employee.telefonoFijo === '(___) ___-____ Ext ____' ) {
+      if ( this.employee.telefonoFijo === '' ) {
          this.tel = true;
          this.cel = true;
       } else {
@@ -78,12 +78,16 @@ export class EmployeesContactComponent {
    }
 
    validarCelular() {
-      if ( this.employee.telefonoCelular === '(___) ___-____' ) {
-         this.tel = true;
-         this.cel = true;
-      } else {
-         this.tel = false;
-         this.cel = false;
+      let temp = this.employee.telefonoCelular;
+      if(temp  !== undefined) {
+         let telcel = temp.replace( /[^0-9]/g, '' ).length;
+         if ( telcel < 10 ) {
+            this.tel = true;
+            this.cel = true;
+         } else {
+            this.tel = false;
+            this.cel = false;
+         }
       }
    }
    correoMinusculas() {

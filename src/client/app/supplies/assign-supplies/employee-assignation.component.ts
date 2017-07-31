@@ -70,9 +70,10 @@ export class EmployeeAssignationComponent implements OnInit {
                // load all supplies of the employee
                this._emplSupplies.getAllSuppliesByEmployeeProjection( this.employessAssign.idProyeccionDotacionTerceros ).subscribe(
                   supplies => {
-                     supplies.map(s => {
+                     supplies.map( ( s: EmployessSuppliesProjectionSupply ) => {
                         s.indicadorEntregado = s.indicadorHabilitado;
-                     });
+                        s.cantidadPorDefecto = s.cantidadAsignada;
+                     } );
                      this.employeeSupplies = supplies;
                   }
                );
@@ -84,13 +85,13 @@ export class EmployeeAssignationComponent implements OnInit {
 
    toggleSupply( supply: EmployessSuppliesProjectionSupply ) {
 
-      if(this.assignState.idLista === this.employessAssign.idEstado) {
+      if ( this.assignState.idLista === this.employessAssign.idEstado ) {
          if ( !supply.indicadorEntregado ) {
-            supply.cantidadEntregada = 0;
+            supply.cantidadEntregada = supply.cantidadAsignada;
          }
       } else {
          if ( !supply.indicadorHabilitado ) {
-            supply.cantidadAsignada = 1;
+            supply.cantidadAsignada = supply.cantidadPorDefecto;
          }
       }
 
@@ -115,14 +116,18 @@ export class EmployeeAssignationComponent implements OnInit {
             //Si no tiene estado asignado se define asignado
             this.employessAssign.idEstado = this.assignState.idLista;
 
-            for( let s of this.employeeSupplies){
-               s.cantidadEntregada = s.cantidadAsignada;
+            for ( let s of this.employeeSupplies ) {
+               if ( s.indicadorHabilitado ) {
+                  s.cantidadEntregada = s.cantidadAsignada;
+               } else {
+                  s.cantidadEntregada = 0;
+               }
             }
          } else if ( this.employessAssign.idEstado === this.assignState.idLista ) {
             //Si el estado es asignado lo pasa a entregado
             this.employessAssign.idEstado = this.deliverState.idLista;
 
-            for( let s of this.employeeSupplies){
+            for ( let s of this.employeeSupplies ) {
                s.indicadorHabilitado = s.indicadorEntregado;
             }
          }
@@ -131,12 +136,14 @@ export class EmployeeAssignationComponent implements OnInit {
          .subscribe( resSupplies => {
             if ( resSupplies ) {
                this._emplSupplies.updateProjection( this.employessAssign )
-                  .subscribe( resProj => {
-                     if ( resProj ) {
-                        this.navService.setMesage( 2 );
-                        this.location.back();
-                     }
-                  } );
+               .subscribe( resProj => {
+                  if ( resProj ) {
+                     this.navService.setMesage( 2 );
+                     this.location.back();
+                  }
+               }, error => {
+                  this.navService.setMesage( 3 );
+               }  );
             } else {
                this.navService.setMesage( 3 );
             }
@@ -150,9 +157,12 @@ export class EmployeeAssignationComponent implements OnInit {
 
    private checkEmptySupplies(): boolean {
       let wrong = false;
-      for ( let supplie of this.employeeSupplies ) {
-         if (( supplie.cantidadAsignada === undefined || supplie.cantidadAsignada === null || supplie.cantidadAsignada === 0) &&
-               (supplie.indicadorHabilitado && supplie.indicadorEntregado)) {
+      for ( let supply of this.employeeSupplies ) {
+         if ( ( supply.cantidadAsignada === undefined ||
+                supply.cantidadAsignada === null ||
+                supply.cantidadAsignada === 0 ||
+                supply.cantidadAsignada > supply.cantidadPorDefecto) &&
+              (supply.indicadorHabilitado && supply.indicadorEntregado) ) {
             wrong = true;
          }
       }

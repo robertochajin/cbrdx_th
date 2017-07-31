@@ -49,8 +49,14 @@ export class ProjectConfig extends SeedConfig {
          { src: 'bootstrap/dist/css/bootstrap.min.css', inject: true },
          { src: 'font-awesome/css/font-awesome.min.css', inject: true },
 
-         { src: 'primeng/resources/primeng.min.css', inject: true },
-         { src: 'primeng/resources/themes/bootstrap/theme.css', inject: true },
+         { src: 'admin-lte/dist/css/AdminLTE.min.css', inject: true, vendor: true },
+         { src: 'admin-lte/dist/css/skins/skin-blue.min.css', inject: true, vendor: true },
+         { src: 'admin-lte/dist/css/skins/skin-green.min.css', inject: true, vendor: true },
+         { src: 'admin-lte/dist/css/skins/skin-purple.min.css', inject: true, vendor: true },
+         { src: 'admin-lte/dist/js/app.min.js', inject: true, vendor: true },
+
+         { src: 'primeng/resources/primeng.min.css', inject: true, vendor: true},
+         { src: 'primeng/resources/themes/bootstrap/theme.css', inject: true, vendor: true },
 
          { src: 'moment/min/moment.min.js', inject: true },
          { src: 'moment/locale/es.js', inject: true },
@@ -68,15 +74,15 @@ export class ProjectConfig extends SeedConfig {
          // {src: `${this.APP_SRC}/your-path-to-lib/libs/jquery-ui.js`, inject: true, vendor: false}
          // {src: `${this.CSS_SRC}/path-to-lib/test-lib.css`, inject: true, vendor: false},
 
-         { src: `${this.ASSETS_SRC}/css/AdminLTE.css`, inject: true, vendor: true },
-         { src: `${this.ASSETS_SRC}/css/skins/skin-blue.css`, inject: true, vendor: true },
-         { src: `${this.ASSETS_SRC}/css/skins/skin-green.css`, inject: true, vendor: true },
-         { src: `${this.ASSETS_SRC}/css/skins/skin-purple.css`, inject: true, vendor: true },
+         // { src: `${this.ASSETS_SRC}/css/AdminLTE.css`, inject: true, vendor: true },
+         // { src: `${this.ASSETS_SRC}/css/skins/skin-blue.css`, inject: true, vendor: true },
+         // { src: `${this.ASSETS_SRC}/css/skins/skin-green.css`, inject: true, vendor: true },
+         // { src: `${this.ASSETS_SRC}/css/skins/skin-purple.css`, inject: true, vendor: true },
          { src: `${this.ASSETS_SRC}/font/style-th.css`, inject: true, vendor: false },
 
          // { src: `${this.ASSETS_SRC}/js/fastclick/fastclick.js`, inject: true, vendor: false },
          // { src: `${this.ASSETS_SRC}/js/slimScroll/jquery.slimscroll.min.js`, inject: true, vendor: false },
-         { src: `${this.ASSETS_SRC}/js/app.js`, inject: true, vendor: true },
+         // { src: `${this.ASSETS_SRC}/js/app.js`, inject: true, vendor: true },
          { src: `${this.ASSETS_SRC}/js/script.js`, inject: true, vendor: false },
 
       ];

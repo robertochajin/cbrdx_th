@@ -79,8 +79,8 @@ export class TracingSuppliesComponent implements OnInit {
             this.employessSuppliesServices.getAllEmployeesSupplies().subscribe( list => {
                this.projectedEmployess = list;
             } );
-         });
-      });
+         } );
+      } );
    }
 
    add() {

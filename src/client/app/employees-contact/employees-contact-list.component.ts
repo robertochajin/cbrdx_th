@@ -77,7 +77,7 @@ export class EmployeesContactListComponent implements OnInit {
       this.showForm = false;
       this.contact.idTercero = this.idTer;
       if ( this.contact.idTerceroContacto === null ||
-           this.contact.idTerceroContacto === 0  ||
+           this.contact.idTerceroContacto === 0 ||
            this.contact.idTerceroContacto === undefined ) {
          this.employeesContactService.add( this.contact )
          .subscribe( data => {
@@ -159,19 +159,19 @@ export class EmployeesContactListComponent implements OnInit {
 
    }
 
-   goBackUpdate(fDirty:boolean) {
+   goBackUpdate( fDirty: boolean ) {
 
-      if ( fDirty ){
+      if ( fDirty ) {
          this.confirmationService.confirm( {
-            message: ` ¿Está seguro que desea salir sin guardar?`,
-            header: 'Confirmación',
-            icon: 'fa fa-question-circle',
-            accept: () => {
-               this.msgs = [];
-               this.showForm = false;
-            }
-         } );
-      }else {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this.msgs = [];
+                                                 this.showForm = false;
+                                              }
+                                           } );
+      } else {
          this.msgs = [];
          this.showForm = false;
       }
@@ -186,7 +186,7 @@ export class EmployeesContactListComponent implements OnInit {
    }
 
    validarTelefono() {
-      if ( this.contact.telefono === '(___) ___-____ Ext ____' ) {
+      if ( this.contact.telefono === '' ) {
          this.tel = true;
          this.cel = true;
       } else {
@@ -196,12 +196,18 @@ export class EmployeesContactListComponent implements OnInit {
    }
 
    validarCelular() {
-      if ( this.contact.celular === '(___) ___-____' ) {
-         this.tel = true;
-         this.cel = true;
-      } else {
-         this.tel = false;
-         this.cel = false;
+      let temp = this.contact.celular;
+      if(temp  !== undefined) {
+
+         let telcel = temp.replace( /[^0-9]/g, '' ).length;
+         if ( telcel < 10 ) {
+            this.tel = true;
+            this.cel = true;
+         } else {
+            this.tel = false;
+            this.cel = false;
+         }
+
       }
    }
 

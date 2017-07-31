@@ -486,7 +486,7 @@ export class SeedConfig {
    ];
 
    /**
-    * White list for CSS color guard
+    * White list for CSS coloupdater guard
     * @type {[string, string][]}
     */
    COLOR_GUARD_WHITE_LIST: [string, string][] = [];
