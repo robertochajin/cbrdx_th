@@ -46,7 +46,7 @@ export class PositionCompetenciesComponent implements OnInit {
 
    ngOnInit() {
       this.ponderanciesServices.getAllEnabled().subscribe( ponderancies => {
-         this.ponderanciesList.push( { label: 'Selccione...', value: null } );
+         this.ponderanciesList.push( { label: 'No Aplica', value: null } );
          ponderancies.map( p => {
             this.ponderanciesList.push( { label: p.ponderacion, value: p.idPonderacion } );
          } );
@@ -115,15 +115,16 @@ export class PositionCompetenciesComponent implements OnInit {
 
    next() {
       this.msgs = [];
-      let complete = true;
+      let complete = false;
       for ( let group of this.groups ) {
          for ( let competencie of group.competencies ) {
-            if ( competencie.cargoCompetencia === undefined || competencie.cargoCompetencia.idCargoCompetencia === undefined ) {
-               complete = false;
+            if ( competencie.cargoCompetencia !== undefined && competencie.cargoCompetencia.idCargoCompetencia !== undefined
+                 && competencie.cargoCompetencia.idPonderacion !== null ) {
+               complete = true;
                break;
             }
          }
-         if ( !complete ) {
+         if ( complete ) {
             break;
          }
       }
@@ -135,7 +136,7 @@ export class PositionCompetenciesComponent implements OnInit {
          // lanzar mensaje advirtiendo que un grupo no tiene asignado ningun factor
          this._nav.setMesage(4, {
             severity: 'warn', summary: 'Formulario incompleto',
-            detail: 'Es necesario asignar ponderación a todas las competencias.'
+            detail: 'Es necesario asignar ponderación a por lo menos una competencia.'
          })
 
       }

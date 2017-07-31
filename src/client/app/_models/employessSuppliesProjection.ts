@@ -26,6 +26,7 @@ export class EmployessSuppliesProjection {
    public idMotivo: number;
    public motivo: number;
    public observacion: string;
+   public imagen: string;
 
    constructor() {
 

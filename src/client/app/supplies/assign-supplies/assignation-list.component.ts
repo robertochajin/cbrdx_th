@@ -134,7 +134,7 @@ export class AssignationListComponent implements OnInit {
    }
 
    employeeSearch( event: any ) {
-      this.employeesService.getTerColWithoutPosition( event.query ).subscribe( list => {
+      this.employeesService.getByTypeAndWildCard( 'TERCOL', event.query ).subscribe( list => {
          list.map(
             ( e: Employee ) => e.nombreCompleto = e.primerNombre + ' ' + e.segundoNombre + ' ' + e.primerApellido + ' ' + e.segundoApellido );
          this.employeeList = list;
