@@ -118,6 +118,8 @@ export class EmployeesDetailComponent implements OnInit {
          jQuery( 'body' ).animate( {
                                       scrollTop: jQuery( 'p-accordiontab > .ui-state-active' ).position().top + 90
                                    }, 'fast' );
+         jQuery( 'p-accordiontab > .ui-state-active' ).next('div').first().find('input:visible').first();
+
       }, 1000 );
    }
 
