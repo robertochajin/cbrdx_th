@@ -141,7 +141,7 @@
 										</div>
 										<div class="form-group col-md-2" *ngIf="selectedPosition && idCargo !==0">
 											<label>{{'REQUERIMIENTOPERSONAL.BTN_VISUALIZAR' | translate }}</label>
-											<button icon="fa-eye" (click)="viewDetail(selectedPosition.idCargo)"
+											<button icon="fa-eye" (click)="viewDetail(selectedPosition.idCargo)" type="button"
 											        pButton></button>
 										</div>
 									</div>
@@ -535,12 +535,12 @@
 			</p-accordionTab>
 		
 		</p-accordion>
-	</div>
-	<div class="row form-footer-buttons">
-		<div class="form-group col-md-12">
-			<button icon="fa-arrrow" label="{{'REQUERIMIENTOPERSONAL.BTN_SENDREQUEST' | translate }}" type="button"
-			        (click)="sendRequest()" pButton
-			        [disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)"></button>
+		<div class="row form-footer-buttons">
+			<div class="form-group col-md-12">
+				<button icon="fa-arrrow" label="{{'REQUERIMIENTOPERSONAL.BTN_SENDREQUEST' | translate }}" type="button"
+				        (click)="sendRequest()" pButton
+				        [disabled]="(personnelRequirement === undefined || personnelRequirement.idRequerimiento === undefined)"></button>
+			</div>
 		</div>
 	</div>
 </div>
