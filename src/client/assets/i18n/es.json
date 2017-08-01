@@ -1240,6 +1240,7 @@
       "LBL_PROJECTION": "Nueva proyección/pedido",
       "LBL_FECHAINICIO": "Fecha Inicio",
       "LBL_FECHAIFIN": "Fecha Fin",
+      "LBL_RANGOFECHA": "Rango de Fecha",
       "LBL_NOMBREPEDIDO": "Nombre de pedido",
       "LBL_FECHASOLICITUD": "Fecha solicitud",
       "LBL_PERIODO": "Periodo",
