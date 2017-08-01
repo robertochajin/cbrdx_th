@@ -20,21 +20,16 @@ export class AttachmentsService {
          this.idUsuario = this.usuarioLogueado.usuario.idUsuario;
       }
    }
-   listAttachments(idProcesoPaso: number, idTerceroPublicacion: number) {
-      return this.authHttp.get( this.serviceURL + 'procesoSeleccionAdjuntos/terPublicPaso/'+idTerceroPublicacion+'/'+idProcesoPaso )
+
+   listAttachments( idProcesoPaso: number, idTerceroPublicacion: number ) {
+      return this.authHttp.get( this.serviceURL + 'procesoSeleccionAdjuntos/terPublicPaso/' + idTerceroPublicacion + '/' + idProcesoPaso )
       .map( ( res: Response ) => res.json() as Attachments[] );
    }
-
 
    addAdjunto( r: Attachments ) {
       r.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'riesgos', r ).map( ( res: Response ) => res.json() );
    };
-
-   downloadFile(id:number){
-      return this.authHttp.get( this.serviceURL + 'adjuntos/file/'+id ).map( ( res: Response ) => res.text() );
-   }
-
 
    handleError( error: any ): Promise<any> {
       console.error( 'Error:', error );

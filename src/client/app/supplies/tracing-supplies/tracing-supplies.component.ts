@@ -8,6 +8,7 @@ import { SelectItem } from 'primeng/primeng';
 import { TipoDeAreaService } from '../../_services/tipoDeArea.service';
 import { OrganizationalStructureService } from '../../_services/organizationalStructure.service';
 import { ListaService } from '../../_services/lista.service';
+import { ListaItem } from '../../_models/listaItem';
 
 @Component( {
                moduleId: module.id,
@@ -26,6 +27,10 @@ export class TracingSuppliesComponent implements OnInit {
    typeArea: SelectItem[] = [];
    area: SelectItem[] = [];
    states: SelectItem[] = [];
+   private notDefinedState: ListaItem;
+   private assignState: ListaItem;
+   private deliverState: ListaItem;
+   private empProyectionStates: ListaItem[] = [];
 
    constructor( private employessSuppliesServices: EmployessSuppliesServices,
       private router: Router,
@@ -63,8 +68,18 @@ export class TracingSuppliesComponent implements OnInit {
             this.states.push( { label: s.nombre, value: s.nombre } );
          } );
       } );
-      this.employessSuppliesServices.getAllEmployeesSupplies().subscribe( list => {
-         this.projectedEmployess = list;
+
+      this.route.params.subscribe( ( params: Params ) => {
+         this.listaService.getMasterDetails( 'ListasEstadosProyeccionesTerceros' ).subscribe( res => {
+            this.empProyectionStates = res;
+            this.notDefinedState = this.empProyectionStates.find( s => s.codigo === 'PORASIG' );
+            this.assignState = this.empProyectionStates.find( s => s.codigo === 'ASIG' );
+            this.deliverState = this.empProyectionStates.find( s => s.codigo === 'ENTRE' );
+
+            this.employessSuppliesServices.getAllEmployeesSupplies().subscribe( list => {
+               this.projectedEmployess = list;
+            } );
+         } );
       } );
    }
 

@@ -7,13 +7,13 @@
 						<div class="form-group row">
 							<div class="col-md-2">
 								<div class="thumbnail">
-									<img src="{{svcThUrlAvatar}}/file/" alt="...">
+									<img src="{{svcThUrlAvatar}}/file/{{employessAssign.imagen}}" alt="...">
 								</div>
 							</div>
 							<div class="col-md-10">
 								<h2>{{employessAssign.nombreCompleto}}</h2>
 								<h4>{{employessAssign.documento}}</h4>
-								<span>{{employessAssign.tipoArea}} - {{employessAssign.area}}</span>
+								<span>({{employessAssign.cargo}}) {{employessAssign.tipoArea}} - {{employessAssign.area}}</span>
 							</div>
 						</div>
 					</fieldset>
@@ -21,29 +21,174 @@
 			</p-panel>
 		</div>
 	</div>
-	<div class="row">
+	<div *ngIf="employessAssign.idProyeccionDotacion" class="row">
 		<div class="col-md-12">
 			<form name="assignForm" (ngSubmit)="f.valid && assignProjection()" #f="ngForm" novalidate id="assignForm">
 				<p-panel header="{{ 'ASIGNARDOTACION.LBL_DOTACION' | translate }}">
-				
-				</p-panel>
-				<p-panel header="{{ 'ASIGNARDOTACION.LBL_DOTACIONADICIONAL' | translate }}">
 					
-					<div class="row">
-						<div class="form-group col-md-12">
-							<label for="aditionalComment">{{ 'ASIGNARDOTACION.LBL_COMENTARIOADICIONAL' | translate }}:</label>
-							<textarea id="aditionalComment" name="aditionalComment" pInputTextarea
-							          [(ngModel)]="employessAssign.comentarioAdicional" maxLength="200"
-							          #ngAditionalComment="ngModel" ></textarea>
+					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+						
+						<div class="row row-border">
+							<div class="form-group col-md-1"></div>
+							<div class="form-group col-md-4">
+								<strong>{{ 'ASIGNARDOTACION.LBL_DOTACION' | translate }}</strong>
+							</div>
+							<div class="form-group col-md-2">
+								<strong>{{ 'ASIGNARDOTACION.LBL_TALLA' | translate }}</strong>
+							</div>
+							<div class="form-group col-md-2">
+								-
+							</div>
+							<div *ngIf="assignState.idLista !== employessAssign.idEstado" class="form-group col-md-2">
+								<strong>{{ 'ASIGNARDOTACION.LBL_CANTIDADASIGNAR' | translate }}</strong>
+							</div>
+							<div *ngIf="assignState.idLista === employessAssign.idEstado" class="form-group col-md-2">
+								<strong>{{ 'ASIGNARDOTACION.LBL_CANTIDADENTREGAR' | translate }}</strong>
+							</div>
+							<div class="form-group col-md-1"></div>
+						</div>
+						
+						<div class="row row-border" *ngFor="let supp of employeeSupplies; let i = index">
+							<div class="form-group col-md-1"></div>
+							<div class="form-group col-md-4">
+								{{supp.dotacion}}
+							</div>
+							<div class="form-group col-md-2">
+								{{supp.idTalla !== null ? supp.talla : 'No definida'}}
+							</div>
+							<div *ngIf="assignState.idLista !== employessAssign.idEstado" class="form-group col-md-2">
+								<p-inputSwitch name="asigna{{i}}" onLabel="Si" offLabel="No" [(ngModel)]="supp.indicadorHabilitado"
+								               (onChange)="toggleSupply(supp)"></p-inputSwitch>
+							</div>
+							<div *ngIf="assignState.idLista === employessAssign.idEstado" class="form-group col-md-2">
+								<p-inputSwitch *ngIf="supp.indicadorHabilitado" name="asigna{{i}}" onLabel="Si" offLabel="No"
+								               [(ngModel)]="supp.indicadorEntregado"
+								               (onChange)="toggleSupply(supp)"></p-inputSwitch>
+								<label *ngIf="!supp.indicadorHabilitado">{{ 'No asignado' }}</label>
+							</div>
+							<div *ngIf="assignState.idLista !== employessAssign.idEstado" class="form-group col-md-2">
+								<input *ngIf="supp.indicadorHabilitado" id="sdf{{i}}"
+								       type="number" maxlength="3" size="3" pattern="(?:\b|-)([1-9]{1,2}[0]?|100)\b" min="1"
+								       pInputText name="sdf{{i}}" class="form-control"
+								       [(ngModel)]="supp.cantidadAsignada"
+								/>
+								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="supp.cantidadAsignada > supp.cantidadPorDefecto">
+									{{'ASIGNARDOTACION.MSG_NOMAYORASIGNADA' | translate}} {{supp.cantidadPorDefecto + 1}}
+								</div>
+							</div>
+							<div *ngIf="assignState.idLista === employessAssign.idEstado" class="form-group col-md-2">
+								<input *ngIf="supp.indicadorEntregado" id="deliver{{i}}"
+								       type="number" maxlength="3" size="3" pattern="(?:\b|-)([1-9]{1,2}[0]?|100)\b" min="1"
+								       pInputText name="sdf{{i}}" class="form-control"
+								       [(ngModel)]="supp.cantidadEntregada"
+								/>
+							</div>
+							<div class="form-group col-md-1"></div>
+						</div>
+						
+						<div class="row">
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && someSuppliesAreWrong">
+								{{'ASIGNARDOTACION.MSG_ASIGNACIONESERRONEAS' | translate}}
+							</div>
+						</div>
+						
+						<div *ngIf="assignState.idLista !== employessAssign.idEstado" class="row">
+							<div class="form-group col-md-12">
+								<label for="comment">{{ 'ASIGNARDOTACION.LBL_COMENTARIO' | translate }}:</label>
+								<textarea id="comment" name="comment" pInputTextarea
+								          [(ngModel)]="employessAssign.comentario" maxLength="200"></textarea>
+							</div>
+						</div>
+					</div>
+				</p-panel>
+				<p-panel *ngIf="employeeAditionalSupplies.length > 0" header="{{ 'ASIGNARDOTACION.LBL_DOTACIONADICIONAL' | translate }}">
+					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+						
+						<div class="row row-border">
+							<div class="form-group col-md-1"></div>
+							<div class="form-group col-md-4">
+								<strong>{{ 'ASIGNARDOTACION.LBL_DOTACION' | translate }}</strong>
+							</div>
+							<div class="form-group col-md-2">
+								<strong>{{ 'ASIGNARDOTACION.LBL_TALLA' | translate }}</strong>
+							</div>
+							<div class="form-group col-md-2">
+								<strong>{{ 'ASIGNARDOTACION.LBL_CANTIDADDOTACION' | translate }}</strong>
+							</div>
+							<div class="form-group col-md-2"></div>
+							<div class="form-group col-md-1"></div>
+						</div>
+						
+						<div class="row row-border" *ngFor="let addSupp of employeeAditionalSupplies; let i = index">
+							<div class="form-group col-md-1"></div>
+							<div class="form-group col-md-4">
+								{{addSupp.dotacion}}
+							</div>
+							<div class="form-group col-md-2">
+								{{addSupp.talla}}
+							</div>
+							<div class="form-group col-md-2">
+								{{addSupp.cantidadDotacion}}
+							</div>
+							<div class="form-group col-md-2"></div>
+							<div class="form-group col-md-1"></div>
+						</div>
+						
+						<div *ngIf="assignState.idLista !== employessAssign.idEstado" class="row">
+							<div class="form-group col-md-12">
+								<label for="aditionalComment">{{ 'ASIGNARDOTACION.LBL_COMENTARIOADICIONAL' | translate }}:</label>
+								<textarea id="aditionalComment" name="aditionalComment" pInputTextarea
+								          [(ngModel)]="employessAssign.comentarioAdicional" maxLength="200"></textarea>
+							</div>
 						</div>
 					</div>
 				</p-panel>
 				
+				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+					<div class="row">
+						<div class="form-group col-md-4">
+						</div>
+						<div *ngIf="assignState.idLista === employessAssign.idEstado" class="form-group col-md-4">
+							<label for="assignDate">{{'ASIGNARDOTACION.LBL_FECHAENTREGA' | translate}}</label>
+							<p-calendar id="deliverDate" name="assignDate" [showIcon]="true"
+							            [minDate]="minDate" [locale]="es" readonlyInput="true"
+							            dataType="date" #ngDeliverDate="ngModel" required
+							            [(ngModel)]="employessAssign.fechaEntrega" dateFormat="yy'-'mm'-'dd"></p-calendar>
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngDeliverDate.valid">
+								{{'ASIGNARDOTACION.LBL_FECHAENTREGA' | translate}} {{'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+						<div *ngIf="assignState.idLista !== employessAssign.idEstado" class="form-group col-md-4">
+							<label for="assignDate">{{'ASIGNARDOTACION.LBL_FECHAASIGNACION' | translate}}</label>
+							<p-calendar id="assignDate" name="assignDate" [showIcon]="true"
+							            [minDate]="minDate" [locale]="es" readonlyInput="true"
+							            dataType="date" #ngAssingDate="ngModel" required
+							            [(ngModel)]="employessAssign.fechaPosibleEntrega" dateFormat="yy'-'mm'-'dd"></p-calendar>
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngAssingDate.valid">
+								{{'ASIGNARDOTACION.LBL_FECHAASIGNACION' | translate}} {{'LBL_REQUERIDO' | translate}}
+							</div>
+						</div>
+						<div class="form-group col-md-4">
+						</div>
+					</div>
+					
+					<div *ngIf="assignState.idLista === employessAssign.idEstado" class="row">
+						<div class="form-group col-md-12">
+							<label for="deliverComment">{{ 'ASIGNARDOTACION.LBL_COMENTARIOENTREGA' | translate }}:</label>
+							<textarea id="deliverComment" name="deliverComment" pInputTextarea
+							          [(ngModel)]="employessAssign.comentarioEntrega"
+							          #ngDeliverComment="ngModel" maxlength="200"></textarea>
+						</div>
+					</div>
+				
+				</div>
 				
 				<div class="row form-footer-buttons">
 					<div class="form-group col-md-12">
 						<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
-						<button icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"
+						<button icon="fa-plus"
+						        label="{{ (assignState.idLista === employessAssign.idEstado) ? ('ASIGNARDOTACION.BTN_ENTREGAR' | translate) : ('ASIGNARDOTACION.BTN_ASIGNAR' | translate)}}"
+						        type="submit"
 						        pButton></button>
 					
 					</div>
@@ -53,3 +198,10 @@
 		</div>
 	</div>
 </div>
+
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate}}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate}}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>

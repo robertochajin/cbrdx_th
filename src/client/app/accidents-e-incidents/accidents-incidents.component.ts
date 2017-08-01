@@ -18,8 +18,7 @@ export class AccidentIncidentComponent {
    idUsuario: number;
    listAccidentIncident: any[];
 
-   constructor(
-      private router: Router,
+   constructor( private router: Router,
       private _nav: NavService,
       private confirmationService: ConfirmationService ) {
       this.busqueda = _nav.getSearch( 'accidents-incidents' );

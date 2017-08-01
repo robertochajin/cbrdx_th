@@ -25,7 +25,8 @@ import { LocationsNomenclaturesServices } from '../_services/locationsNomenclatu
               ],
               bootstrap: [ FamilyInformationComponent ],
               providers: [ FamilyInformationService, PoliticalDivisionService,
-                 LocationsNomenclaturesServices ],
+                 LocationsNomenclaturesServices
+              ],
               exports: [ FamilyInformationComponent ]
            } )
 export class FamilyInformationModule {
