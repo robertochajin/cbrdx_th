@@ -161,8 +161,7 @@ export class EmployeeAssignationComponent implements OnInit {
       for ( let supply of this.employeeSupplies ) {
          if ( ( supply.cantidadAsignada === undefined ||
                 supply.cantidadAsignada === null ||
-                supply.cantidadAsignada === 0 ||
-                supply.cantidadAsignada > supply.cantidadPorDefecto) &&
+                supply.cantidadAsignada === 0 ) &&
               (supply.indicadorHabilitado && supply.indicadorEntregado) ) {
             wrong = true;
          }
