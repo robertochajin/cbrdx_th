@@ -26,6 +26,7 @@ export class EmployeeAssignationComponent implements OnInit {
    private someSuppliesAreWrong = false;
    private deliverState: ListaItem;
    private empProyectionStates: ListaItem[] = [];
+   svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
 
    constructor( private _emplSupplies: EmployessSuppliesServices,
       private route: ActivatedRoute,
