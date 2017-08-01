@@ -116,7 +116,9 @@
 						</div>
 					</div>
 				</div>
+				
 				<div class="row" *ngIf="listEmployees.length>0">
+					<hr>
 					<p-messages [value]="configTer" [closable]="false"></p-messages>
 					<div class="col-md-12">
 						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listEmployees" [paginator]="true"
