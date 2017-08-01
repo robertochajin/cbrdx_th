@@ -534,6 +534,30 @@
       "LBL_ACTUALIZACORRECTO":"Actualizacion Correcta",
       "MSG_INFOACTUALIZADA":"Información actualizada."
    },
+   "CONFIGLIST": {
+      "LBL_RELACIONLISTAS": "Relación de listas",
+      "LBL_NUEVARELACION": "Nueva Relación",
+      "LBL_ID": "ID",
+      "LBL_CODIGO": "Código",
+      "LBL_NOMBRE": "Nombre Relación",
+      "LBL_HABILITA": "Habilita",
+      "LBL_ACCIONES": "Acciones",
+      "LBL_CREARRELACION": "Crear Relación",
+      "LBL_RELACIONITEM": "Relación Item-Item",
+      "LBL_LISTA1": "Lista 1",
+      "LBL_ITEMLISTA1": "Item de Lista 1",
+      "LBL_LISTA2": "Lista 2",
+      "LBL_DODIGOITEM": "Código Item",
+      "LBL_NOMBREITEM": "Nombre Item",
+      "LBL_CODREGISTRADO": "Este Código Ya Esta Registrado",
+      "LBL_DATOSGENERALES": "Datos Generales",
+      "": "",
+      "LBL_FUNCIONALIDAD_RELACION": "Funcionalidad relacionada",
+      "LBL_FUNCIONALIDADES": "Funcionalidades",
+      "LBL_CONTROLES": "Controles",
+      "LBL_FUNCIONALIDAD": "Funcionalidad",
+      "LBL_CONTROL": "Control"
+   },
 
    "CENTROSDECOSTOS":{
       "LBL_CENTROCOSTOS": "Centro de Costos",
