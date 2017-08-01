@@ -3,6 +3,7 @@ import { Response } from '@angular/http';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { SuppliesProjection } from '../_models/suppliesProjection';
 import { Supplies, TotalSupplies } from '../_models/supplies';
+import { Employee } from '../_models/employees';
 
 @Injectable()
 export class SuppliesProjectionServices {
@@ -74,6 +75,10 @@ export class SuppliesProjectionServices {
    getConsolidatedArea( idDotacion: number, idProyeccionDotacion: number ) {
       return this.authHttp.get( this.masterService + 'dotaciones/tallasGenero/' + idProyeccionDotacion + '/' + idDotacion )
       .map( ( res: Response ) => res.json() as TotalSupplies[] );
+   }
+   validate(f: SuppliesProjection) {
+      return this.authHttp.post( this.masterService + 'proyeccionDotacion/validate',f )
+      .map( ( res: Response ) => res.json() as Employee[] );
    }
 
 }
