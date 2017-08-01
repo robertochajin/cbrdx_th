@@ -72,8 +72,8 @@
 								       pInputText name="sdf{{i}}" class="form-control"
 								       [(ngModel)]="supp.cantidadAsignada"
 								/>
-								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="supp.cantidadAsignada > supp.cantidadPorDefecto">
-									{{'ASIGNARDOTACION.MSG_NOMAYORASIGNADA' | translate}} {{supp.cantidadPorDefecto + 1}}
+								<div class="ui-message ui-messages-info ui-corner-all" *ngIf="supp.cantidadAsignada > supp.cantidadPorDefecto">
+									{{'ASIGNARDOTACION.MSG_NOMAYORASIGNADA' | translate}} {{supp.cantidadPorDefecto}}
 								</div>
 							</div>
 							<div *ngIf="assignState.idLista === employessAssign.idEstado" class="form-group col-md-2">
