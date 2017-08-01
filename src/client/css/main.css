@@ -34,7 +34,7 @@ body .ui-widget input,
 body .ui-widget select,
 body .ui-widget textarea,
 body .ui-widget button  {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif!important;
+  /* font-family: "Helvetica Neue",Helvetica,Arial,sans-serif!important; */
 }
 body .ui-state-disabled,
 body .ui-widget:disabled {

@@ -64,21 +64,3 @@ function changeTheme(color) {
   sessionStorage.setItem("datatheme", color);
   $('body').addClass(color);
 }
-
-
-/**
- *
- */
-function changePage(){
-  console.log('changePage Rulez');
-  $('#wrapper').animate({scrollTop:0},'slow');
-}
-
-/**
- */
-function focusNGInvalid(){
-  topInvalid = jQuery('.ng-invalid:first').position().top + 10;
-  console.log(topInvalid);
-  jQuery('#wrapper').scrollTop(topInvalid);
-  jQuery('.ng-invalid:first').select().focus();
-}
