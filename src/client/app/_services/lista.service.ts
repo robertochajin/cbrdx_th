@@ -55,6 +55,18 @@ export class ListaService {
       .map( ( res: Response ) => res.json() as ListaItem[] );
    }
 
+   /**
+    * Este método retorna los items de una lista dependiente.
+    * @param tableName Nombre de la lista independiente
+    * @param selectedItem idLista del item seleccionado en la lista independiente
+    * @param control Codigo del control asociado a la relación de dependencia (Funcionalidades, Secciones, Controles)
+    * @returns {ListaItem[]}
+    */
+   getMasterDetailsByDependency( tableName: string, selectedItem: number, control: string ) {
+      return this.authHttp.get( this.masterService + 'buscarRelacionFuncional/' + tableName + '/' + selectedItem + '/' + control )
+      .map( ( res: Response ) => res.json() as ListaItem[] );
+   }
+
    getMasterDetailsByCode( tableName: string, code: string ) {
       return this.authHttp.get( this.masterService + 'tabla/' + tableName + '/code/' + code + '/' )
       .map( ( res: Response ) => res.json() as ListaItem );
