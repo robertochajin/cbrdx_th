@@ -11,6 +11,7 @@ import { OrganizationalStructureService } from '../../_services/organizationalSt
 import { OrganizationalStructure } from '../../_models/organizationalStructure';
 import { SuppliesProjectionServices } from '../../_services/suppliesProjection.service';
 import { ConstanteService } from '../../_services/constante.service';
+import * as moment from 'moment/moment';
 
 @Component( {
                moduleId: module.id,
@@ -80,7 +81,7 @@ export class SuppliesProjectionAddComponent implements OnInit {
       if ( !this.suppliesProjection.indicadorNoAreas ) {
          if ( this.list2.length === 0 ) {
             this.requiredArea = true;
-         }else {
+         } else {
             this.requiredArea = false;
          }
          for ( let a of this.list2 ) {
@@ -120,18 +121,16 @@ export class SuppliesProjectionAddComponent implements OnInit {
       let temp = new Date( this.suppliesProjection.fechaInicio );
       this.minDateFin = new Date( temp.setHours( 24 ) );
       if ( this.suppliesProjection.cantidadMeses ) {
-         this.suppliesProjection.fechaFin = new Date( temp.setHours( 24 * (this.suppliesProjection.cantidadMeses * 30) ) );
-      } else {
-         this.suppliesProjection.fechaFin = new Date( temp.setHours( 24 * (0 * 30) ) );
+         let fechaCalcul = moment( this.suppliesProjection.fechaInicio ).add( this.suppliesProjection.cantidadMeses, 'M' );
+         this.suppliesProjection.fechaFin = new Date( fechaCalcul.toDate() );
       }
    }
 
    calculateRange() {
       let temp = new Date( this.suppliesProjection.fechaInicio );
-      if ( temp ) {
-         this.suppliesProjection.fechaFin = new Date( temp.setHours( 24 * (this.suppliesProjection.cantidadMeses * 30) ) );
-      } else {
-         this.suppliesProjection.fechaFin = new Date( temp.setHours( 24 * (0 * 30) ) );
+      if ( temp.toString() !=='Invalid Date' ) {
+         let fechaCalcul = moment( this.suppliesProjection.fechaInicio ).add( this.suppliesProjection.cantidadMeses, 'M' );
+         this.suppliesProjection.fechaFin = new Date( fechaCalcul.toDate() );
       }
    }
 
