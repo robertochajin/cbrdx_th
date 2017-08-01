@@ -1223,6 +1223,7 @@
       "LBL_FECHAENTREGA": "Fecha entrega",
       "LBL_FECHAPOSIBLEENTREGA": "Fecha posible entrega",
       "LBL_ESTADO": "Estado",
+      "LBL_ASIGNACION": "Asignación",
       "BTN_ASIGNAR": "Asignar",
       "BTN_ENTREGAR": "Entregar"
    },
