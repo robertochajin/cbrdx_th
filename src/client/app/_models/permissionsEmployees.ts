@@ -52,6 +52,8 @@ export class PermissionsEmployees {
    PESO: { editable: boolean, visible: boolean, seccion: boolean } = { editable: true, visible: true, seccion: false };
    TALLA: { editable: boolean, visible: boolean, seccion: boolean } = { editable: true, visible: true, seccion: false };
    IMC: { editable: boolean, visible: boolean, seccion: boolean } = { editable: true, visible: true, seccion: false };
+   PROCESO: { editable: boolean, visible: boolean, seccion: boolean } = { editable: true, visible: true, seccion: false };
+   SUBPROCESO: { editable: boolean, visible: boolean, seccion: boolean } = { editable: true, visible: true, seccion: false };
 
    constructor() {
    }
