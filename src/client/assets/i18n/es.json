@@ -1289,6 +1289,18 @@
       "LBL_ADJUNTOS": "Adjuntos",
       "": ""
    },
+   "EXAMENOCUPACIONAL": {
+      "LBL_TIPOAREA": "Tipo area",
+      "LBL_OFICINA": "Oficina",
+      "LBL_CARGO": "Cargo",
+      "BTN_FILTRAR": "Filtrar",
+      "LBL_DOCUMENTO": "Documento",
+      "LBL_COLABORADOR": "Colaborador",
+      "LBL_PROXIMOEXAMEN": "Próximo examen",
+      "LBL_ULTIMORESULTADO": "Último resultado",
+      "LBL_ENVIREXAMEN": "Enviar examen",
+      "": ""
+   },
    "FIN_ARCHIVO": "============================FIN ARCHIVO============================="
 
 }
