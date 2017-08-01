@@ -1,5 +1,8 @@
 import 'rxjs/add/operator/toPromise';
 import { NgModule } from '@angular/core';
+
+import { EmployeesRouting } from './employees.routing';
+
 import { EmployeesComponent } from './employees.component';
 import { EmployeesDetailComponent } from './employees-detail.component';
 import { EmployeesAddComponent } from './employees-add.component';
@@ -43,6 +46,7 @@ import { SuppliesConfirmationComponent } from './supplies-employees/supplies-con
 
 @NgModule( {
               imports: [
+                 EmployeesRouting,
                  FamilyInformationModule,
                  ReferencesModule,
                  AcademicEducationModule,

@@ -1,10 +1,10 @@
-import { ModuleWithProviders  } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 // historia de employees
-// import { EmployeesDetailComponent } from './employees/employees-detail.component';
-// import { EmployeesAddComponent } from './employees/employees-add.component';
-// import { EmployeesUpdateComponent } from './employees/employees-update.component';
-// import { EmployeesComponent } from './employees/employees.component';
+import { EmployeesDetailComponent } from './employees/employees-detail.component';
+import { EmployeesAddComponent } from './employees/employees-add.component';
+import { EmployeesUpdateComponent } from './employees/employees-update.component';
+import { EmployeesComponent } from './employees/employees.component';
 import { EmployeesAdditionalDataComponent } from './employees/employees-additional-data.component';
 import { EmployeesDetailPerfilComponent } from './selecttion-process-apply/employees-detail-perfil.component';
 
@@ -155,7 +155,7 @@ import { VacancyDetailComponent } from './selection-process/vacancy-detail.compo
 import { StepListComponent } from './selection-process/step-list.component';
 import { StepEditComponent } from './selection-process/step-edit.component';
 import { StepDetailComponent } from './selection-process/step-detail.component';
-//import { EmployeesViewDetailComponent } from './employees/employees-view-detail.component';
+import { EmployeesViewDetailComponent } from './employees/employees-view-detail.component';
 import { StepProcessComponent } from './selection-process/step-process.component';
 import { CandidatesComponent } from './selection-process/candidates.component';
 import { CandidateRevisionComponent } from './selection-process/candidate-revision.component';
@@ -164,7 +164,7 @@ import { VacancyApplyComponent } from './selecttion-process-apply/apply-detail.c
 import { ApplyQuestionnairesComponent } from './selecttion-process-apply/questionnaires.component';
 
 // hoja de vida
-// import { EmployeesCurriculumVitaeComponent } from './employees/employees-curriculum-vitae.component';
+import { EmployeesCurriculumVitaeComponent } from './employees/employees-curriculum-vitae.component';
 import { MedicalInstitutionsComponent } from './medical-institutions/medical-institutions.component';
 import { MedicalInstitutionAddComponent } from './medical-institutions/medical-institutions-add.component';
 import { MedicalInstitutionUpdateComponent } from './medical-institutions/medical-institutions-update.component';
@@ -216,17 +216,12 @@ const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
    // historia de employees
-   {
-      path: 'employees',
-      loadChildren: '/app/employees/employees.module#EmployeesModule'
-   },
-
-   // { path: 'employees', component: EmployeesComponent, canActivate: [ AuthGuard ] },
-   // { path: 'employees/add', component: EmployeesAddComponent, canActivate: [ AuthGuard ] },
-   // { path: 'employees/view/detail/:id', component: EmployeesViewDetailComponent, canActivate: [ AuthGuard ] }, // solo ver
-   // { path: 'employees/detail/:id', component: EmployeesDetailComponent, canActivate: [ AuthGuard ] }, // ver editar
-   // { path: 'employees/update/:id', component: EmployeesUpdateComponent, canActivate: [ AuthGuard ] }, // ver editar
-   // { path: 'employees/curriculum/:id', component: EmployeesCurriculumVitaeComponent, canActivate: [ AuthGuard ] }, // hoja de vida
+   { path: 'employees', component: EmployeesComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/add', component: EmployeesAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'employees/view/detail/:id', component: EmployeesViewDetailComponent, canActivate: [ AuthGuard ] }, // solo ver
+   { path: 'employees/detail/:id', component: EmployeesDetailComponent, canActivate: [ AuthGuard ] }, // ver editar
+   { path: 'employees/update/:id', component: EmployeesUpdateComponent, canActivate: [ AuthGuard ] }, // ver editar
+   { path: 'employees/curriculum/:id', component: EmployeesCurriculumVitaeComponent, canActivate: [ AuthGuard ] }, // hoja de vida
 
    // Información de referencia de employees
    { path: 'employees/detail/:tercero/references', component: ReferencesComponent, canActivate: [ AuthGuard ] },
@@ -533,7 +528,7 @@ const routes = [
    { path: 'employees/supplies-confirmation/:id', component: SuppliesConfirmationComponent, canActivate: [ AuthGuard ] }
 
 ];
-/*
+
 @NgModule( {
               imports: [
                  RouterModule.forRoot( routes )
@@ -542,5 +537,4 @@ const routes = [
            } )
 export class AppRoutingModule {
 }
-*/
-export const AppRoutingModule: ModuleWithProviders = RouterModule.forRoot(routes);
+
