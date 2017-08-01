@@ -58,6 +58,7 @@ export class ProjectConfig extends SeedConfig {
 
          { src: 'jspdf/dist/jspdf.min.js', inject: true },
          { src: 'html2canvas/dist/html2canvas.js', inject: true },
+         { src: 'file-saver/FileSaver.js', inject: true },
 
       ];
 
@@ -94,6 +95,9 @@ export class ProjectConfig extends SeedConfig {
       }, {
          name: 'idle-keepalive-angular2',
          path: 'node_modules/idle-keepalive-angular2/bundles/keepalive.umd.js'
+      }, {
+         name: 'file-saver',
+         path: 'node_modules/file-saver/FileSaver.js'
       }
       ];
       //

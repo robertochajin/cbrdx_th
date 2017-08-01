@@ -1,0 +1,128 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+
+</p-confirmDialog>
+<div class="col-md-10 col-md-offset-1">
+	<p-panel header="Datos de la Proyección">
+	<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+		<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-6">
+					<label for="nombre">{{ 'SUPPLIESPROJECTION.LBL_NOMBREPEDIDO' | translate }}</label>
+					<input id="nombre" name="nombre" #nombrepedido="ngModel" pInputText type="text"
+					       (keyup)="capitalize($event)"
+					       [(ngModel)]="suppliesProjection.nombreProyeccion" required maxlength="50"/>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !nombrepedido.valid">
+						<i class="fa fa-close"></i>
+						{{ 'SUPPLIESPROJECTION.LBL_NOMBREPEDIDO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-6">
+					<label for="grupodotacion">{{ 'SUPPLIESPROJECTION.LBL_GRUPODOTACION' | translate }}</label>
+					<p-dropdown id="grupodotacion" name="grupodotacion" required="true"
+									[options]="listSupplies" [autoWidth]="false"
+									[(ngModel)]="suppliesProjection.idGrupoDotacion"
+									#idgrupodot="ngModel" (onChange)="changeSupplies()"
+					></p-dropdown>
+					<div class="ui-message ui-messages-error ui-corner-all"
+						  *ngIf="f.submitted && !idgrupodot.valid">
+						<i class="fa fa-close"></i>
+						{{ 'SUPPLIESPROJECTION.LBL_GRUPODOTACION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-6">
+					<label for="mesesdot">{{ 'SUPPLIESPROJECTION.LBL_DOTACIONMESES' | translate }}</label>
+					<input id="mesesdot" name="mesesdot" #dotmeses="ngModel" pInputText type="text"
+					       (keyup)="inputNumber($event)" (change)="calculateRange()"
+					       [(ngModel)]="suppliesProjection.cantidadMeses" required maxlength="4"/>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="f.submitted && !dotmeses.valid">
+						<i class="fa fa-close"></i>
+						{{ 'SUPPLIESPROJECTION.LBL_DOTACIONMESES' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="ui-grid-col-3">
+					<label>{{ 'SUPPLIESPROJECTION.LBL_FECHAINICIO' | translate }}</label>
+					<p-calendar id="fechaInicio" name="fechaInicio" #fechaIni="ngModel" [showIcon]="true"
+									[minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
+									[locale]="es" readonlyInput="readonlyInput" required
+									dataType="date" [(ngModel)]="suppliesProjection.fechaInicio" [yearRange]="rangeFin"
+									dateFormat="yy'-'mm'-'dd" (onSelect)="selectInicio()"></p-calendar>
+					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !fechaIni.valid">
+						{{'SUPPLIESPROJECTION.LBL_RANGOFECHA' | translate}} {{'LBL_REQUERIDO' | translate}}
+					</div>
+				</div>
+				<div class="ui-grid-col-3">
+					<label>{{ 'SUPPLIESPROJECTION.LBL_FECHAIFIN' | translate }}</label>
+				<p-calendar id="fechaFinal" name="fechaFinal" #fechaFinal="ngModel" [showIcon]="true"
+									[minDate]="minDateFin" [monthNavigator]="true" [yearNavigator]="true"
+									[locale]="es" readonlyInput="readonlyInput" disabled="true"
+									dataType="date" [(ngModel)]="suppliesProjection.fechaFin" [yearRange]="rangeFin"
+									dateFormat="yy'-'mm'-'dd"></p-calendar>
+				</div>
+			</div>
+			<div class="col-md-12"></div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-3">
+					<br>
+					<p-checkbox binary="true" id="adiccional" name="adiccional"
+					            [(ngModel)]="suppliesProjection.indicadorAdicional"
+					            #indicador="ngModel"></p-checkbox>
+					<label>{{ 'SUPPLIESPROJECTION.LBL_DOTACIONADICIONAL' | translate }}</label>
+				</div>
+				<div class="ui-grid-col-3">
+					<br>
+					<p-checkbox binary="true" id="mostrarareas" name="mostrarareas"
+									[(ngModel)]="suppliesProjection.indicadorNoAreas"
+									#indicador="ngModel"></p-checkbox>
+					<label>{{ 'SUPPLIESPROJECTION.LBL_SELECCIONARAREAS' | translate }}</label>
+				</div>
+				<div class="ui-grid-col-6" *ngIf="suppliesProjection.indicadorNoAreas">
+					<label for="campovalor">{{ 'SUPPLIESPROJECTION.LBL_CAMPOVALOR' | translate }}</label>
+					<input id="campovalor" name="campovalor" #valor="ngModel" pInputText type="text"
+							 (keyup)="inputNumber($event)" [required]="suppliesProjection.indicadorNoAreas"
+							 [(ngModel)]="suppliesProjection.cantidadProyeccion" required maxlength="4"/>
+					<div class="ui-message ui-messages-error ui-corner-all"
+						  *ngIf="f.submitted && !valor.valid">
+						<i class="fa fa-close"></i>
+						{{ 'SUPPLIESPROJECTION.LBL_CAMPOVALOR' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12"></div>
+
+			<div class="ui-grid-row" *ngIf="!suppliesProjection.indicadorNoAreas">
+				<div class="ui-grid-col-12">
+					<p-pickList [source]="listAreas" [target]="list2" sourceHeader="{{ 'SUPPLIESPROJECTION.LBL_AREAS' | translate }} "
+					            targetHeader="{{ 'SUPPLIESPROJECTION.LBL_AREASSELECCIONADAS' | translate }} " [responsive]="true"
+					            [showTargetControls]="false" [showSourceControls]="false">
+						<template let-area pTemplate="item">
+							<div class="ui-helper-clearfix">
+								<div>{{area.nombre}}</div>
+							</div>
+						</template>
+					</p-pickList>
+					<div class="ui-message ui-messages-error ui-corner-all"
+					     *ngIf="requiredArea">
+						<i class="fa fa-close"></i>
+						{{ 'SUPPLIESPROJECTION.LBL_AREASREQUERIDAS' | translate }}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row form-footer-buttons">
+				<div class="form-group col-md-12">
+					<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+					<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+				</div>
+			</div>
+	</form>
+	</p-panel>
+</div>

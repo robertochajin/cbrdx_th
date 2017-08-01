@@ -203,6 +203,14 @@ import { SuppliesUpdateComponent } from './supplies/supplies-update.component';
 // Bandeja de Novedades
 import { TrayEventualitiesComponent } from './tray-eventualities/tray-eventualities.component';
 import { EmployeeEventualityTransactComponent } from './tray-eventualities/transact-eventualities.component';
+import { SuppliesProjectionComponent } from './supplies/supplies-projection/supplies-projection.component';
+import { SuppliesProjectionAddComponent } from './supplies/supplies-projection/supplies-projection-add.component';
+import { AssignationListComponent } from './supplies/assign-supplies/assignation-list.component';
+import { EmployeeAssignationComponent } from './supplies/assign-supplies/employee-assignation.component';
+import { EmployeeAssignationDetailComponent } from './supplies/assign-supplies/employee-assignation-detail.component';
+import { TracingSuppliesComponent } from './supplies/tracing-supplies/tracing-supplies.component';
+import { ConsolidatedProjectionComponent } from './supplies/supplies-projection/consolidated-projection.component';
+import { SuppliesConfirmationComponent } from './employees/supplies-employees/supplies-confirmation.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -500,11 +508,24 @@ const routes = [
    { path: 'supplies', component: SuppliesComponent },
    { path: 'supplies/add', component: SuppliesAddComponent },
    { path: 'supplies/update/:id', component: SuppliesUpdateComponent },
+   { path: 'supplies-projection/assignations/:idProjection', component: AssignationListComponent },
+   { path: 'supplies-projection/assignations/assign/:idEmployeeAssign', component: EmployeeAssignationComponent },
+   { path: 'supplies-projection/assignations/detail/:idEmployeeAssign', component: EmployeeAssignationDetailComponent },
 
    //  Bandeja de novedades
    { path: 'tray-eventualities', component: TrayEventualitiesComponent },
    { path: 'trayEventualities/transact-eventyality/:idTerceroNovedad', component: EmployeeEventualityTransactComponent },
 
+   // proyección de dotaciones
+   { path: 'supplies-projection', component: SuppliesProjectionComponent },
+   { path: 'supplies-projection/add', component: SuppliesProjectionAddComponent },
+   { path: 'supplies-projection/update/:id', component: ConsolidatedProjectionComponent },
+
+   // seguimiento de dotaciones
+   { path: 'tracing-supplies', component: TracingSuppliesComponent },
+
+   //  employees additional data
+   { path: 'employees/supplies-confirmation/:id', component: SuppliesConfirmationComponent, canActivate: [ AuthGuard ] }
 
 ];
 

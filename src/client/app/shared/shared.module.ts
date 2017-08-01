@@ -47,17 +47,7 @@ export class SharedModule {
       this._window = windowRef.nativeWindow;
 
       router.events.subscribe( ( val ) => {
-
-         // console.log(val);
-         if(val.url) {
-            // console.log(val.url);
-         }
-
-
-
          if ( val instanceof NavigationEnd ) {
-
-           //  console.log(' -- NavigationEnd Rulez --');
 
             // Fix Footer -
             setTimeout( () => {
@@ -68,23 +58,24 @@ export class SharedModule {
             //jQuery( '#wrapper' ).animate( { scrollTop: 0 }, 'fast' );
 
             // Focus Primer campo
-            jQuery( 'input[type=text]:enabled:visible:first' ).select().focus();
+            jQuery( 'input[type=text]:enabled:visible, p-dropdown>input:first' ).first().select().focus();
 
             // Focus primer invalid campo
             setTimeout( () => {
                jQuery( 'button' ).click( function () {
                   setTimeout( () => {
 
-
-                     if ( jQuery( 'input.ng-invalid' ).length > 0 ) {
+                     if ( jQuery( 'form.ng-touched input.ng-invalid' ).length > 0 ) {
 
                         if( jQuery( 'input.ng-invalid:first' ).parents('p-accordion').length == 0 ){
-                           jQuery( 'body' ).scrollTop( jQuery( 'input.ng-invalid:first' ).position().top );
-                           // console.log( 'Focus in input Error!' );
                            setTimeout( () => {
-                              jQuery( 'input.ng-invalid:first' ).select().focus();
+                              let inputError = jQuery( 'input[type=text].ng-invalid:enabled:visible, p-dropdown.ng-invalid>input:first' )
+                              .first();
+                              inputError.select().focus();
+                              jQuery( 'body' ).scrollTop( inputError.position().top );
                            }, 500 );
                         }
+
                      } else {
                         // if ( jQuery( 'div.ui-messages' ).length ) {
                         //    jQuery( 'body' ).scrollTop( jQuery( 'div.ui-messages:first' ).position().top );

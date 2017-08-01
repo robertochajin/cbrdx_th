@@ -29,6 +29,7 @@ export class EmployeeEventualitiesComponent {
    saveEventuality: boolean = false;
    editEventuality: boolean = false;
    detailEventuality: boolean = false;
+   activitiesEventuality: boolean = false;
 
    constructor( private employeeEventualitiesService: EmployeeEventualitiesService,
       private listaService: ListaService,
@@ -77,6 +78,9 @@ export class EmployeeEventualitiesComponent {
    toggleDetail() {
       this.detailEventuality = !this.detailEventuality;
    }
+   toggleActivities() {
+      this.activitiesEventuality = !this.activitiesEventuality;
+   }
 
    detail( e: EmployeeEventuality ) {
       this.employeeEventuality = e;
@@ -112,5 +116,10 @@ export class EmployeeEventualitiesComponent {
                                               } );
                                            }
                                         } );
+   }
+
+   activities( e: EmployeeEventuality ) {
+      this.employeeEventuality = e;
+      this.activitiesEventuality = !this.activitiesEventuality;
    }
 }

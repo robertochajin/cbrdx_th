@@ -21,7 +21,7 @@
 						<label for="codigo">*{{ 'PROCESOSELECCION.LBL_CODIGOPASO' | translate }}:</label>
 						<input id="codigo" type="text" pInputText name="codigo" [disabled]="!editing"
 						       [(ngModel)]="step.codigo" #ngCodigo="ngModel" [required]="editing"
-						       (keyup)="inputCleanUp($event.target.value)"
+						       (keyup)="inputCleanUp($event.target.value)" maxlength="20"
 						/>
 						<div class="ui-message ui-messages-error ui-corner-all"
 						     *ngIf="f.submitted && !ngCodigo.valid && editing">
@@ -43,7 +43,7 @@
 				<div class="row">
 					<div class="form-group col-md-12">
 						<label for="nombre">*{{ 'PROCESOSELECCION.LBL_NOMBREPASO' | translate }}:</label>
-						<input id="nombre" type="text" pInputText name="nombre"
+						<input id="nombre" type="text" pInputText name="nombre" maxlength="50"
 						       [(ngModel)]="step.nombre" (keyup)="capitalize($event)"
 						       #ngNombre="ngModel" required />
 						<div class="ui-message ui-messages-error ui-corner-all"

@@ -15,6 +15,8 @@ import {
    InputTextModule, DataTableModule, ButtonModule, DialogModule, InputTextareaModule, CalendarModule, AutoCompleteModule, DropdownModule,
    CheckboxModule, InputMaskModule, MessagesModule, ConfirmDialogModule
 } from 'primeng/primeng';
+import { PoliticalDivisionService } from '../_services/political-division.service';
+import { LocationsNomenclaturesServices } from '../_services/locationsNomenclatures.service';
 
 @NgModule( {
               imports: [ CommonModule,
@@ -43,7 +45,9 @@ import {
               bootstrap: [ PhysicStructureComponent, PhysicStructureAddComponent,
                  PhysicStructureDetailComponent, PhysicStructureUpdateComponent
               ],
-              providers: [ PhysicStructureService ],
+              providers: [ PhysicStructureService, PoliticalDivisionService,
+                 LocationsNomenclaturesServices
+              ],
               exports: [ PhysicStructureComponent, PhysicStructureAddComponent,
                  PhysicStructureDetailComponent, PhysicStructureUpdateComponent
               ]

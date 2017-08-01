@@ -15,4 +15,5 @@ export class CentralRisk {
    idAdjunto: number = null;
    indicadorReportado: boolean = false;
    indicadorAprobado: boolean = false;
+   ruta?: string;
 }

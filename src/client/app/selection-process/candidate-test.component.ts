@@ -347,7 +347,8 @@ export class CandidateTestComponent implements OnInit {
 
    onBeforeSend( event: any ) {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "'}";
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "', 'ruta':" +
+                " '/Gestionamos/Terceros/" + this.candidate.tipoDocumento + "_" + this.candidate.numeroDocumento + "/Pruebas Técnicas' }";
       event.formData.append( 'obj', obj.toString() );
    }
 

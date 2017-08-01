@@ -26,7 +26,6 @@ export class EmployeeEventuality {
    idEntidad: number;
    entidad: string;
    descripcion: string;
-   periodoInicio: string;
    periodoFinal: string;
    retiro: boolean;
    idEps: number;

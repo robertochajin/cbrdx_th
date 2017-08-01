@@ -195,7 +195,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
             this.horaFinal = new Date( this.employeeEventuality.horaFin );
             this.fechaReintegro = new Date( this.employeeEventuality.fechaReintegro );
             this.horaReintegro = new Date( this.employeeEventuality.horaReintergo );
-            this.periodoInicio = new Date( this.employeeEventuality.periodoInicio );
+            this.periodoInicio = new Date( this.employeeEventuality.periodoInicial );
             this.periodoFin = new Date( this.employeeEventuality.periodoFinal );
             this.eventualityServices.get( this.employeeEventuality.idNovedad ).subscribe( rest => {
                this.eventuality = rest;
@@ -562,7 +562,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
       }
       if ( this.periodoInicio !== undefined && this.periodoInicio !== null ) {
          if ( this.periodoInicio.toString() !== 'Invalid Date' ) {
-            this.employeeEventuality.periodoInicio = this.periodoInicio.toISOString().replace( 'Z', '-0500' );
+            this.employeeEventuality.periodoInicial = this.periodoInicio.toISOString().replace( 'Z', '-0500' );
          }
       }
       if ( this.periodoFin !== undefined && this.periodoFin !== null ) {
@@ -625,7 +625,8 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
 
    onBeforeSend( event: any ) {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "'}";
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "', 'ruta':" +
+                " '/Gestionamos/Terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "/Novedades' }";
       event.formData.append( 'obj', obj.toString() );
    }
 
@@ -639,7 +640,9 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
 
    downloadFile( id: number ) {
       this.adjuntosService.downloadFile( id ).subscribe( res => {
-         window.location.assign( res );
+         this.adjuntosService.getFileName( id ).subscribe( adj => {
+            saveAs( res, adj.nombreArchivo );
+         } );
       } );
    }
 

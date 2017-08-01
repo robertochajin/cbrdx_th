@@ -172,7 +172,7 @@
 								<p-calendar id="periodoinicial" name="periodoinicial" #periodoini="ngModel" [showIcon]="true"
 								            [minDate]="minDateInicio" [monthNavigator]="true" [yearNavigator]="true"
 								            [locale]="es" readonlyInput="readonlyInput" [required]="requiredperiodoinicial"
-								            dataType="date" [(ngModel)]="periodoInicio" [yearRange]="rangeFin"
+								            dataType="date" [(ngModel)]="periodoInicial" [yearRange]="rangeFin"
 								            dateFormat="yy'-'mm'-'dd" (onSelect)="selectPeriodoInicio()"></p-calendar>
 								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !periodoini.valid">
 									<i class="fa fa-close"></i>
@@ -289,31 +289,30 @@
 								</div>
 							</div>
 						</div>
-						<div class="ui-grid-row form-footer-buttons">
-							<div class="col-md-1"></div>
-							<div class="col-md-4" *ngIf="!eventuality.indicadorConfirmacion"></div>
-							<div class="col-md-4" *ngIf="eventuality.indicadorConfirmacion && !employeeEventuality.idTerceroNovedad"></div>
-							<div class="col-md-4" *ngIf="eventuality.indicadorConfirmacion && employeeEventuality.idTerceroNovedad">
-								<div class="col-md-8">
-									<button (click)="generarCodigo()" label="{{'PROCESOSELECCION.LBL_GENERCOD' | translate }}" type="button"
-									        pButton></button>
-								</div>
-								<div class="col-md-4">
-									<input id="codigoinst" name="codigoinst" #codInst="ngModel" pInputText type="text"
-									       required maxlength="50" [(ngModel)]="codigoVerificacion"/>
-									<div class="ui-message ui-messages-error ui-corner-all"
-									     *ngIf="f.submitted && !codInst.valid">
-										<i class="fa fa-close"></i>
-										{{ 'DOCMANAGMENT.LBL_CODIGO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+						<div class="row"  *ngIf="eventuality.indicadorConfirmacion && employeeEventuality.idTerceroNovedad">
+							<div class="col-md-12">
+								<div class="col-md-10 col-md-offset-1">
+									<div class="col-md-4">
+										<button (click)="generarCodigo()" label="{{'PROCESOSELECCION.LBL_GENERCOD' | translate }}" type="button"
+												  pButton></button>
+									</div>
+									<div class="col-md-8">
+										<input id="codigoinst" name="codigoinst" #codInst="ngModel" pInputText type="text"
+												 required maxlength="50" [(ngModel)]="codigoVerificacion"/>
+										<div class="ui-message ui-messages-info ui-corner-all"
+											  *ngIf="f.submitted && !codInst.valid">
+											<i class="fa fa-close"></i>
+											{{ 'EMPLOYEENOVELTY.MSG_INGRESECODIGO' | translate }}
+										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-md-1">
-								<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
-							</div>
-							<div class="col-md-2">
-								<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
-							</div>
+						</div>
+					</div>
+					<div class="form-footer-buttons">
+						<div class="col-md-12">
+							<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+							<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
 						</div>
 					</div>
 				</form>

@@ -9,6 +9,8 @@ import { JwtHelper } from 'angular2-jwt';
 import { ConstanteService } from '../_services/constante.service';
 import { DocumentoRelacionTercero } from '../_models/DocumentoRelacionTercero';
 import { PermissionsEmployees } from '../_models/permissionsEmployees';
+import * as FileSaver from 'file-saver';
+import { AdjuntosService } from '../_services/adjuntos.service';
 
 @Component( {
                moduleId: module.id,
@@ -44,7 +46,8 @@ export class EmployeesAttachmentsComponent implements OnInit {
       private employeesAttachmentService: EmployeesAttachmentService,
       private constanteService: ConstanteService,
       private confirmationService: ConfirmationService,
-      private navService: NavService ) {
+      private navService: NavService,
+      private adjuntosService: AdjuntosService ) {
 
       let token = localStorage.getItem( 'token' );
       this.usuarioLogueado = this.jwtHelper.decodeToken( token );
@@ -82,8 +85,10 @@ export class EmployeesAttachmentsComponent implements OnInit {
    }
 
    download( d: DocumentoTercero ) {
-      this.employeesAttachmentService.getFile( d.idAdjunto ).subscribe( res => {
-         window.location.assign( res );
+      this.adjuntosService.downloadFile( d.idAdjunto ).subscribe( res => {
+         this.adjuntosService.getFileName( d.idAdjunto ).subscribe( adj => {
+            saveAs( res, adj.nombreArchivo );
+         } );
       } );
    }
 
@@ -112,7 +117,8 @@ export class EmployeesAttachmentsComponent implements OnInit {
    onBeforeSend( event: any, dato: DocumentoTercero ) {
       this.cargando = dato.idDocumentoTercero;
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "'}";
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "', 'ruta':" +
+                " '/Gestionamos/Terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "/Requisitos Generales' }";
       event.formData.append( 'obj', obj.toString() );
    }
 
@@ -122,9 +128,13 @@ export class EmployeesAttachmentsComponent implements OnInit {
    }
 
    previewFile( f: DocumentoTercero ) {
-      this.url = this.previewUrl + '/' + f.idAdjunto;
-      this.title = f.nombre;
-      this.displayDialog = true;
+      this.adjuntosService.downloadFile( f.idAdjunto ).subscribe( res => {
+         let blob_url = URL.createObjectURL( res );
+
+         this.url = blob_url;
+         this.title = f.nombre;
+         this.displayDialog = true;
+      } );
    }
 
    deleteFile( f: DocumentoTercero ) {

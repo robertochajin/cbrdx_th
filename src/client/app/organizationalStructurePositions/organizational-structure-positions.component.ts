@@ -57,6 +57,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    indicadorZonaPosition = false;
    backupPosition:string
    msg: Message;
+   readyTreeCompany: boolean = false;
 
    constructor( private positionsService: PositionsService,
       private ospService: OrganizationalStructurePositionsServices,
@@ -80,6 +81,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
             this.treedCompany.push( companyNode );
             this.nodeExpand( companyNode );
          }
+         this.readyTreeCompany = true;
       } );
    }
 

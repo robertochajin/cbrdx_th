@@ -184,9 +184,11 @@ export class DivisionPoliticaComponent implements OnInit {
 
             break;
       }
-
-
-
+      this.divisionPoliticaService.viewDivisionPolitica( node.data.idDivisionPolitica ).subscribe(
+         dp => {
+            this.politicalDivision = dp;
+            this.validateCode();
+         } );
    }
 
    save() {

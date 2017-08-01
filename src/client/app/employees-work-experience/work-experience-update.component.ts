@@ -19,6 +19,8 @@ import { ListaItem } from '../_models/listaItem';
 import { ListaService } from '../_services/lista.service';
 
 import { JwtHelper } from 'angular2-jwt';
+import { Employee } from '../_models/employees';
+import { EmployeesService } from '../_services/employees.service';
 
 
 @Component( {
@@ -55,6 +57,7 @@ export class WorkExperienceUpdateComponent implements OnInit {
    jwtHelper: JwtHelper = new JwtHelper();
    fsize: number = 50000000;
    ftype: string = '';
+   employee: Employee = new Employee();
 
    constructor( private workExperienceService: WorkExperienceService,
       private router: Router,
@@ -67,7 +70,8 @@ export class WorkExperienceUpdateComponent implements OnInit {
       private adjuntosService: AdjuntosService,
       private route: ActivatedRoute,
       private constanteService: ConstanteService,
-      private _nav: NavService ) {
+      private _nav: NavService,
+      private employeesService: EmployeesService ) {
 
       let token = localStorage.getItem( 'token' );
       this.usuarioLogueado = this.jwtHelper.decodeToken( token );
@@ -116,6 +120,7 @@ export class WorkExperienceUpdateComponent implements OnInit {
       .switchMap( ( params: Params ) => this.workExperienceService.get( +params[ 'id' ] ) )
       .subscribe( experience => {
          this.experience = experience;
+         this.employeesService.get( this.experience.idTercero ).subscribe( res => this.employee = res );
          this.updateActivities( this.experience.idSectorEmpresa );
          this.getFileName();
          let mom: moment.Moment = moment( this.experience.fechaIngresa, 'YYYY-MM-DD' );
@@ -244,7 +249,8 @@ export class WorkExperienceUpdateComponent implements OnInit {
 
    onBeforeSend( event: any ) {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "'}";
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '"+ this.dataUploadArchivo + "', 'ruta':" +
+                " '/Gestionamos/Terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "/Experiencia Laboral' }";
       event.formData.append( 'obj', obj.toString() );
    }
 
@@ -258,10 +264,11 @@ export class WorkExperienceUpdateComponent implements OnInit {
    }
 
    downloadFile(id: number){
-
-      this.adjuntosService.downloadFile( id ).subscribe(res => {
-         window.location.assign(res);
-      });
+      this.adjuntosService.downloadFile( id ).subscribe( res => {
+         this.adjuntosService.getFileName( id ).subscribe( adj => {
+            saveAs( res, adj.nombreArchivo );
+         } );
+      } );
    }
    getFileName() {
       if(this.experience.idAdjunto){

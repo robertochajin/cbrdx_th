@@ -1,0 +1,76 @@
+<div class="row datable-header">
+	<div class="col-md-6 col-xs-12 datatable-header-add">
+		<button type="button" icon="fa-plus" label="{{'SUPPLIESPROJECTION.LBL_AGREGAR' | translate }}"
+		        pButton (click)="add()"></button>
+	</div>
+	<div class="col-md-6 col-xs-12 datatable-header-search">
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-4">
+		<div class="col-md-2">
+			<label for="idTipoNovedad">{{ 'SUPPLIESPROJECTION.LBL_USUARIO' | translate }}</label>
+		</div>
+		<div class="col-md-10">
+			<p-dropdown id="idTipoNovedad" name="idTipoNovedad"
+			            [options]="listUsers" [autoWidth]="false"
+			            [(ngModel)]="idUsuario"
+			            #idTipoNov="ngModel" (onChange)="changeUser()"
+			></p-dropdown>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="col-md-5">
+			<label>{{ 'SUPPLIESPROJECTION.LBL_RANGOFECHA' | translate }}</label>
+		</div>
+		<div class="col-md-7">
+			<p-calendar id="fechaInicio" name="fechaInicio" #fechaIni="ngModel" [showIcon]="true"
+			            [monthNavigator]="true" [yearNavigator]="true"
+			            [locale]="es" readonlyInput="readonlyInput" [maxDate]="maxDateInicio"
+			            dataType="date" [(ngModel)]="fechaInicio" [yearRange]="rangeFin"
+			            dateFormat="yy'-'mm'-'dd" (onSelect)="selectInicio()"></p-calendar>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="col-md-7">
+			<p-calendar id="fechaFinal" name="fechaFinal" #fechaFinal="ngModel" [showIcon]="true"
+			            [minDate]="minDateFin" [monthNavigator]="true" [yearNavigator]="true"
+			            [locale]="es" readonlyInput="readonlyInput"
+			            dataType="date" [(ngModel)]="fechaFin" [yearRange]="rangeFin"
+			            dateFormat="yy'-'mm'-'dd" (onSelect)="selectFinal()"></p-calendar>
+		</div>
+		<div class="col-md-5">
+			<button type="button" label="{{'SUPPLIESPROJECTION.LBL_LIMPIARFECHAS' | translate }}"
+			        pButton (click)="resetFilterDate()"></button>
+		</div>
+	</div>
+</div><br>
+<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listSuppliesProjection" [paginator]="true" [rows]="10"
+             [responsive]="true" [globalFilter]="gb">
+	<p-column field="nombreProyeccion" header="{{'SUPPLIESPROJECTION.LBL_NOMBREPEDIDO' | translate }}" [sortable]="true"></p-column>
+	<p-column header="{{'SUPPLIESPROJECTION.LBL_FECHASOLICITUD' | translate }}" [sortable]="true">
+		<template let-sp="rowData" pTemplate="body">
+			{{sp.auditoriaFecha| date:'dd/MM/yyyy'}}
+		</template>
+	</p-column>
+	<p-column field="periodo" header="{{'SUPPLIESPROJECTION.LBL_PERIODO' | translate }}" [sortable]="true"></p-column>
+	<p-column field="cantidadMeses" header="{{'SUPPLIESPROJECTION.LBL_PERIODOMESES' | translate }}" [sortable]="true"></p-column>
+	<p-column field="nombreTercero" header="{{'SUPPLIESPROJECTION.LBL_USUARIO' | translate }}" [sortable]="true"></p-column>
+	<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+		<template let-nv="rowData" pTemplate="body">
+			<button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip"
+			        title="{{'BTN_VISUALIZAR' | translate}}"
+			        pButton (click)="detail(nv)"></button>
+			<button type="button" icon="fa-external-link"
+			        class="ui-button-success" data-toggle="tooltip"
+			        title="{{'EMPLOYEENOVELTY.BTN_TRAMITAR' | translate}}"
+			        pButton (click)="refer(nv)"></button>
+		</template>
+	</p-column>
+</p-dataTable>
+<p-confirmDialog icon="fa fa-question-circle" #cd width="400">
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
