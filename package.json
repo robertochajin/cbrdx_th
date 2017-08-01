@@ -144,6 +144,7 @@
     "@types/file-saver": "0.0.1",
     "@types/html2canvas": "^0.5.34",
     "@types/jspdf": "^1.1.31",
+    "admin-lte": "^2.3.11",
     "angular2-jwt": "^0.2.2",
     "bootstrap": "^3.3.7",
     "chart.js": "^2.5.0",

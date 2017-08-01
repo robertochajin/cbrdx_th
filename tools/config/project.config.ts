@@ -49,16 +49,22 @@ export class ProjectConfig extends SeedConfig {
          { src: 'bootstrap/dist/css/bootstrap.min.css', inject: true },
          { src: 'font-awesome/css/font-awesome.min.css', inject: true },
 
+         { src: 'admin-lte/dist/css/AdminLTE.min.css', inject: true},
+         { src: 'admin-lte/dist/css/skins/skin-blue.min.css', inject: true},
+         { src: 'admin-lte/dist/css/skins/skin-green.min.css', inject: true},
+         { src: 'admin-lte/dist/css/skins/skin-purple.min.css', inject: true},
+         { src: 'admin-lte/dist/js/app.min.js', inject: true},
+
          { src: 'primeng/resources/primeng.min.css', inject: true },
          { src: 'primeng/resources/themes/bootstrap/theme.css', inject: true },
 
          { src: 'moment/min/moment.min.js', inject: true },
          { src: 'moment/locale/es.js', inject: true },
-         { src: 'chart.js/dist/Chart.js', inject: true },
+         { src: 'chart.js/dist/Chart.min.js', inject: true },
 
          { src: 'jspdf/dist/jspdf.min.js', inject: true },
-         { src: 'html2canvas/dist/html2canvas.js', inject: true },
-         { src: 'file-saver/FileSaver.js', inject: true },
+         { src: 'html2canvas/dist/html2canvas.min.js', inject: true },
+         { src: 'file-saver/FileSaver.min.js', inject: true },
 
       ];
 
@@ -68,16 +74,16 @@ export class ProjectConfig extends SeedConfig {
          // {src: `${this.APP_SRC}/your-path-to-lib/libs/jquery-ui.js`, inject: true, vendor: false}
          // {src: `${this.CSS_SRC}/path-to-lib/test-lib.css`, inject: true, vendor: false},
 
-         { src: `${this.ASSETS_SRC}/css/AdminLTE.min.css`, inject: true, vendor: true },
-         { src: `${this.ASSETS_SRC}/css/skins/skin-blue.min.css`, inject: true, vendor: true },
-         { src: `${this.ASSETS_SRC}/css/skins/skin-green.min.css`, inject: true, vendor: true },
-         { src: `${this.ASSETS_SRC}/css/skins/skin-purple.min.css`, inject: true, vendor: true },
-         { src: `${this.ASSETS_SRC}/font/style-th.min.css`, inject: true, vendor: false },
+         // { src: `${this.ASSETS_SRC}/css/AdminLTE.min.css`, inject: true, vendor: true },
+         // { src: `${this.ASSETS_SRC}/css/skins/skin-blue.min.css`, inject: true, vendor: true },
+         // { src: `${this.ASSETS_SRC}/css/skins/skin-green.min.css`, inject: true, vendor: true },
+         // { src: `${this.ASSETS_SRC}/css/skins/skin-purple.min.css`, inject: true, vendor: true },
+         { src: `${this.ASSETS_SRC}/font/style-th.css`, inject: true, vendor: false },
 
          // { src: `${this.ASSETS_SRC}/js/fastclick/fastclick.js`, inject: true, vendor: false },
          // { src: `${this.ASSETS_SRC}/js/slimScroll/jquery.slimscroll.min.js`, inject: true, vendor: false },
-         { src: `${this.ASSETS_SRC}/js/app.min.js`, inject: true, vendor: true },
-         { src: `${this.ASSETS_SRC}/js/script.min.js`, inject: true, vendor: false },
+         // { src: `${this.ASSETS_SRC}/js/app.min.js`, inject: true, vendor: true },
+         { src: `${this.ASSETS_SRC}/js/script.js`, inject: true},
 
       ];
 
@@ -95,9 +101,6 @@ export class ProjectConfig extends SeedConfig {
       }, {
          name: 'idle-keepalive-angular2',
          path: 'node_modules/idle-keepalive-angular2/bundles/keepalive.umd.js'
-      }, {
-         name: 'file-saver',
-         path: 'node_modules/file-saver/FileSaver.js'
       }
       ];
       //

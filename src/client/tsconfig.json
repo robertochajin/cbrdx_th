@@ -25,7 +25,8 @@
       "jasmine",
       "protractor",
       "systemjs",
-      "jquery"
+      "jquery",
+       "file-saver"
     ]
   },
   "exclude": [
