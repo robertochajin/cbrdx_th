@@ -368,6 +368,12 @@
 		</p-dataTable>
 	</p-accordionTab>
 </p-accordion>
+	<div class="row form-footer-buttons">
+		<div class="form-group col-md-12">
+			<button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate }}" type="button"
+					  pButton (click)="goBack()"></button>
+		</div>
+	</div>
 </div>
 <p-messages [value]="msgs"></p-messages>
 <p-confirmDialog width="400" #cd>
