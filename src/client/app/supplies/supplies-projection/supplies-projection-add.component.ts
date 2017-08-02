@@ -12,6 +12,7 @@ import { OrganizationalStructure } from '../../_models/organizationalStructure';
 import { SuppliesProjectionServices } from '../../_services/suppliesProjection.service';
 import { ConstanteService } from '../../_services/constante.service';
 import * as moment from 'moment/moment';
+import { Employee } from '../../_models/employees';
 
 @Component( {
                moduleId: module.id,
@@ -24,8 +25,10 @@ export class SuppliesProjectionAddComponent implements OnInit {
 
    suppliesProjection: SuppliesProjection = new SuppliesProjection();
    msgs: Message[] = [];
+   configTer: Message[] = [];
    listSupplies: SelectItem[] = [];
    listAreas: OrganizationalStructure[] = [];
+   listEmployees: Employee[] = [];
    es: any;
    minDateInicio: Date;
    minDateFin: Date;
@@ -79,23 +82,43 @@ export class SuppliesProjectionAddComponent implements OnInit {
 
    onSubmit() {
       if ( !this.suppliesProjection.indicadorNoAreas ) {
-         if ( this.list2.length === 0 ) {
-            this.requiredArea = true;
+         if ( this.list2.length > 0 ) {
+            this.suppliesProjection.idEstructuraOrganizacional = [];
+            for ( let a of this.list2 ) {
+               this.suppliesProjection.idEstructuraOrganizacional.push( a.idEstructuraOrganizacional );
+            }
+            this.listEmployees = [];
+            this.configTer = [];
+            this.suppliesProjectionServices.validate( this.suppliesProjection ).subscribe( rs => {
+               if ( rs.length <= 0 ) {
+                  this.suppliesProjectionServices.add( this.suppliesProjection ).subscribe( rs => {
+                     this._nav.setMesage( 1, this.msgs );
+                     this.location.back();
+                  }, error => {
+                     this._nav.setMesage( 3, this.msgs );
+                  } );
+               } else {
+                  for ( let t of rs ) {
+                     t.nombreCompleto = t.primerNombre + ' ' +
+                                        t.segundoNombre + ' ' +
+                                        t.primerApellido + ' ' +
+                                        t.segundoApellido;
+                     this.listEmployees.push( t );
+                  }
+                  this.configTer.push(
+                     { severity: 'info', summary: 'Info', detail: 'Falta configuración de tallas de los siguientes colaboradores' } );
+               }
+            } );
          } else {
-            this.requiredArea = false;
+            this.requiredArea = true;
          }
-         for ( let a of this.list2 ) {
-            this.suppliesProjection.idEstructuraOrganizacional.push( a.idEstructuraOrganizacional );
-         }
-      }
-      if ( !this.requiredArea ) {
+      } else {
          this.suppliesProjectionServices.add( this.suppliesProjection ).subscribe( rs => {
             this._nav.setMesage( 1, this.msgs );
             this.location.back();
          }, error => {
             this._nav.setMesage( 3, this.msgs );
          } );
-
       }
    }
 
@@ -112,6 +135,8 @@ export class SuppliesProjectionAddComponent implements OnInit {
    changeSupplies() {
       this.listAreas = [];
       this.list2 = [];
+      this.configTer=[];
+      this.listEmployees=[];
       this.organizationalStructureService.getAreaBySuppliesGroup( this.suppliesProjection.idGrupoDotacion ).subscribe( rs => {
          this.listAreas = rs;
       } );
@@ -128,7 +153,7 @@ export class SuppliesProjectionAddComponent implements OnInit {
 
    calculateRange() {
       let temp = new Date( this.suppliesProjection.fechaInicio );
-      if ( temp.toString() !=='Invalid Date' ) {
+      if ( temp.toString() !== 'Invalid Date' ) {
          let fechaCalcul = moment( this.suppliesProjection.fechaInicio ).add( this.suppliesProjection.cantidadMeses, 'M' );
          this.suppliesProjection.fechaFin = new Date( fechaCalcul.toDate() );
       }

@@ -1,0 +1,234 @@
+<p-messages [value]="msgs"></p-messages>
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+		<p-accordion (onOpen)="onTabShow($event)" id="accordion">
+			<p-accordionTab header="{{ 'CONFIGLIST.LBL_CREARRELACION' | translate }}"
+			                [selected]="acordion == 0 || acordion == null ">
+				<div *ngIf="configurationList">
+					<form (ngSubmit)="f.valid && onSubmit(acordion)" #f="ngForm" novalidate id="formulario">
+						<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-1"></div>
+								<div class="ui-grid-col-10">
+									<div class="form-group">
+										<label for="codigo" class="control-label col-sm-2">* {{ 'CONFIGLIST.LBL_CODIGO' | translate}}</label>
+										<div class="col-sm-9">
+											<input id="codigo" name="codigo" #codigoR="ngModel" pInputText
+											       type="text" required [(ngModel)]="configurationList.codigo" (keyup)="validCod()"
+											       (change)="validCodExi()" maxlength="50"/>
+											<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !codigoR.valid">
+												<i class="fa fa-close"></i>
+												{{'CONFIGLIST.LBL_CODIGO' | translate }} {{'LBL_REQUERIDO' | translate }}
+											</div>
+											<div *ngIf="codeExists" class="alert alert-danger">
+												{{ 'CONFIGLIST.LBL_CODREGISTRADO' | translate}}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-1"></div>
+								<div class="ui-grid-col-10">
+									<div class="form-group">
+										<label for="nombre" class="control-label col-sm-2">* {{ 'CONFIGLIST.LBL_NOMBRE' | translate}}</label>
+										<div class="col-sm-9">
+											<input id="nombre" name="nombre" #nombreR="ngModel" pInputText
+											       type="text" required [(ngModel)]="configurationList.nombreRelacion"
+											       (keyup)="capitalize($event)" maxlength="50"/>
+											<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !nombreR.valid">
+												<i class="fa fa-close"></i>
+												{{'CONFIGLIST.LBL_NOMBRE' | translate }} {{'LBL_REQUERIDO' | translate }}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-3"></div>
+								<div class="ui-grid-col-3">
+									<label for="Habilitado">{{ 'LBL_HABILITADO' | translate}}</label>
+									<p-checkbox id="Habilitado" name="Habilitado" [(ngModel)]="configurationList.indicadorHabilitado"
+									            binary="true"></p-checkbox>
+								</div>
+							</div>
+							<div class="ui-grid-row form-footer-buttons">
+								<div class="ui-grid-col-4"></div>
+								<div class="ui-grid-col-1">
+									<a (click)="goBack(f.dirty == true)" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+								</div>
+								<div class="ui-grid-col-2">
+									<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}"
+									        type="submit"></button>
+								</div>
+								<div class="ui-grid-col-5"></div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<p-confirmDialog width="400" #cd>
+					<p-footer>
+						<button type="button" pButton icon="fa-close" label="{{ 'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+						<button type="button" pButton icon="fa-check" label="{{ 'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+					</p-footer>
+				</p-confirmDialog>
+			</p-accordionTab>
+			<p-accordionTab header="{{ 'CONFIGLIST.LBL_RELACIONITEM' | translate }}" [selected]="acordion==1"
+			                [disabled]="!configurationList.idRelacionLista">
+				<form (ngSubmit)="fs.valid && onSubmitRelac()" #fs="ngForm" novalidate id="estructura">
+					<div class="row">
+						<div class="ui-grid-row">
+							<div class="ui-grid-col-1"></div>
+							<div class="ui-grid-col-5">
+								<label for="lista1">* {{ 'CONFIGLIST.LBL_LISTA1' | translate}}</label>
+								<p-dropdown id="lista1" name="lista1" required="true"
+								            [options]="list1" [autoWidth]="false" filter="filter"
+								            [(ngModel)]="configurationList.idListaPadre"
+								            #listaP="ngModel" (onChange)="changeList()"
+								></p-dropdown>
+								<div class="ui-message ui-messages-error ui-corner-all"
+								     *ngIf="fs.submitted && !listaP.valid">
+									<i class="fa fa-close"></i>
+									{{ 'CONFIGLIST.LBL_LISTA1' | translate }} {{'LBL_REQUERIDO' | translate }}
+								</div>
+							</div>
+							<div class="ui-grid-col-5">
+								<label for="listItemP">* {{ 'CONFIGLIST.LBL_ITEMLISTA1' | translate}}</label>
+								<p-dropdown id="listItemP" name="listItemP" required="true"
+								            [options]="itemList1" [autoWidth]="false" filter="filter"
+								            [(ngModel)]="configurationList.idItemPadre"
+								            #itemP="ngModel"
+								></p-dropdown>
+								<div class="ui-message ui-messages-error ui-corner-all"
+								     *ngIf="fs.submitted && !itemP.valid">
+									<i class="fa fa-close"></i>
+									{{ 'CONFIGLIST.LBL_ITEMLISTA1' | translate }} {{'LBL_REQUERIDO' | translate }}
+								</div>
+							</div>
+						</div>
+						<div class="ui-grid-row">
+							<hr/>
+							<div class="ui-grid-col-1"></div>
+							<div class="ui-grid-col-5">
+								<label for="lista2">* {{ 'CONFIGLIST.LBL_LISTA2' | translate}}</label>
+								<p-dropdown id="lista2" name="lista2" required="true"
+								            [options]="list2" [autoWidth]="false" filter="filter"
+								            [(ngModel)]="configurationList.idListaHijo"
+								            #listaH="ngModel" (onChange)="changeList2()"
+								></p-dropdown>
+								<div class="ui-message ui-messages-error ui-corner-all"
+								     *ngIf="fs.submitted && !listaH.valid">
+									<i class="fa fa-close"></i>
+									{{ 'CONFIGLIST.LBL_LISTA2' | translate }} {{'LBL_REQUERIDO' | translate }}
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-12">
+							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listRelation"
+							             [paginator]="true" [rows]="10" [responsive]="true">
+								<p-column field="codigo" header="{{ 'CONFIGLIST.LBL_DODIGOITEM' | translate }}"
+								          [sortable]="true"></p-column>
+								<p-column field="nombre" header="{{ 'CONFIGLIST.LBL_NOMBREITEM' | translate }}"
+								          [sortable]="true"></p-column>
+								<p-column header="{{ 'LBL_HABILITADO' | translate}}" styleClass="datatable-col-action">
+									<template let-rl="rowData" pTemplate="body">
+										<p-checkbox name="indicadorHabilitado" [(ngModel)]="rl.indicadorHabilitado" binary="true"></p-checkbox>
+									</template>
+								</p-column>
+							</p-dataTable>
+						</div>
+					</div>
+               <div class="row form-footer-buttons">
+                  <div class="ui-grid-col-4"></div>
+                  <div class="ui-grid-col-1">
+                     <a (click)="cancelRelation()" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+                  </div>
+                  <div class="ui-grid-col-2">
+                     <button pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate }}"
+                             type="submit"></button>
+                  </div>
+                  <div class="ui-grid-col-5"></div>
+               </div>
+				</form>
+			</p-accordionTab>
+         <!-- Funcionalidad relacionada -->
+         <p-accordionTab header="{{ 'CONFIGLIST.LBL_FUNCIONALIDAD_RELACION' | translate }}" [selected]="acordion==2"
+                         [disabled]="!configurationList.idRelacionLista">
+            <form (ngSubmit)="listRelacionFuncionalidadControl.length > 0 && onSubmitFuncionalidadControles()" #fr="ngForm" novalidate
+                  id="funcionalidadrelacionada">
+               <div class="row">
+                  <div class="ui-grid-row">
+                     <div class="ui-grid-col-1"></div>
+                     <div class="ui-grid-col-5">
+                        <label for="listaFuncionalidad">{{ 'CONFIGLIST.LBL_FUNCIONALIDADES' | translate}}</label>
+                        <p-dropdown id="listaFuncionalidad" name="listaFuncionalidad" required="true"
+                                    [options]="listFuncionalidades" [autoWidth]="false" filter="filter"
+                                    [(ngModel)]="funcionalidad.idFuncionalidad"
+                                    #listaFuncionalidad="ngModel"
+                                    (onChange)="changeListFuncionalidades()"
+                        ></p-dropdown>
+                        <!--<div class="ui-message ui-messages-error ui-corner-all"-->
+                             <!--*ngIf="fs.submitted && !listaFuncionalidad.valid">-->
+                           <!--<i class="fa fa-close"></i>-->
+                           <!--{{ 'CONFIGLIST.LBL_FUNCIONALIDADES' | translate }} {{'LBL_REQUERIDO' | translate }}-->
+                        <!--</div>-->
+                     </div>
+                     <div class="ui-grid-col-5" *ngIf="listFuncionalidadesControles.length > 0">
+                        <label for="listaControl">{{ 'CONFIGLIST.LBL_CONTROLES' | translate}}</label>
+                        <p-dropdown id="listaControl" name="listaControl" required="true"
+                                    [options]="listFuncionalidadesControles" [autoWidth]="false" filter="filter"
+                                    [(ngModel)]="funcionalidadControl.idFuncionalidadControl"
+                                    #listaFuncionalidadesControles="ngModel"
+                        ></p-dropdown>
+                        <!--<div class="ui-message ui-messages-error ui-corner-all"-->
+                             <!--*ngIf="fs.submitted && !listaFuncionalidadesControles.valid">-->
+                           <!--<i class="fa fa-close"></i>-->
+                           <!--{{ 'CONFIGLIST.LBL_CONTROLES' | translate }} {{'LBL_REQUERIDO' | translate }}-->
+                        <!--</div>-->
+                     </div>
+                  </div>
+                  <div class="ui-grid-row">
+                     <div class="ui-grid-col-5"></div>
+                     <div class="ui-grid-col-5">
+                        <button pButton icon="fa-plus" label="{{ 'BTN_AGREGAR' | translate }}"
+                                type="button" (click)="agregarFuncionalidad()"></button>
+                     </div>
+                  </div>
+               </div>
+               
+               <div class="ui-grid-row">
+                  <div class="ui-grid-col-12">
+                     <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listRelacionFuncionalidadControl"
+                                  [paginator]="true" [rows]="10" [responsive]="true">
+                        <p-column field="menu" header="{{ 'CONFIGLIST.LBL_FUNCIONALIDAD' | translate }}"
+                                  [sortable]="true"></p-column>
+                        <p-column field="funcionalidadControl" header="{{ 'CONFIGLIST.LBL_CONTROL' | translate }}"
+                                  [sortable]="true"></p-column>
+                        <p-column header="{{ 'LBL_HABILITADO' | translate }}"
+                                  [sortable]="true" styleClass="datatable-col-center">
+                           <template let-cont="rowData" pTemplate="body" let-rowIndex="rowIndex">
+                              <p-inputSwitch name="indicadorHabilitado{{rowIndex}}" onLabel="Si" offLabel="No"
+                                             [(ngModel)]="cont.indicadorHabilitado"></p-inputSwitch>
+                           </template>
+                        </p-column>
+                     </p-dataTable>
+                  </div>
+               </div>
+               <div class="row form-footer-buttons">
+                  <div class="ui-grid-col-4"></div>
+                  <div class="ui-grid-col-1">
+                     <a (click)="goBack(fr.dirty == true)" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+                  </div>
+                  <div class="ui-grid-col-2">
+                     <button pButton icon="fa-plus" label="{{ 'BTN_GUARDAR' | translate }}"
+                             type="submit"></button>
+                  </div>
+               </div>
+            </form>
+         </p-accordionTab>
+		</p-accordion>
+	</div>
+</div>

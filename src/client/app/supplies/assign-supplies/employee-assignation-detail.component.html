@@ -7,7 +7,7 @@
 						<div class="form-group row">
 							<div class="col-md-2">
 								<div class="thumbnail">
-									<img src="{{svcThUrlAvatar}}/file/" alt="...">
+									<img src="{{svcThUrlAvatar}}/file/{{employessAssign.imagen}}" alt="...">
 								</div>
 							</div>
 							<div class="col-md-10">
@@ -72,7 +72,7 @@
 						</div>
 					</div>
 				</p-panel>
-				<p-panel header="{{ 'ASIGNARDOTACION.LBL_DOTACIONADICIONAL' | translate }}">
+				<p-panel *ngIf="employeeAditionalSupplies.length > 0"  header="{{ 'ASIGNARDOTACION.LBL_DOTACIONADICIONAL' | translate }}">
 					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 						
 						<div class="row row-border" >
