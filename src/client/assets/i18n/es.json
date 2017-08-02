@@ -86,6 +86,7 @@
    "BTN_NUEVO": "Nuevo",
    "BTN_NUEVA": "Nueva",
    "LBL_NOAPLICA": "N/A",
+   "LBL_DATOSADICIONALES": "Datos Adicionales",
    "BTN_FINALIZARPROCESO": "Finalizar el proceso",
   "FIN_COMUNES":"====================================================================",
 
@@ -1287,6 +1288,7 @@
       "LBL_LIMPIARFECHAS": "Limpiar fechas",
       "LBL_HOMBRE": "Hombre",
       "LBL_MUJER": "Mujer",
+      "LBL_DATOSPROYECCION": "Datos de la Proyección",
       "LBL_AREASREQUERIDAS": "Debe seleccionar al menos un area",
       "": ""
    },
