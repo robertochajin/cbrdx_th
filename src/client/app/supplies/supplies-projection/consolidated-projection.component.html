@@ -51,7 +51,6 @@
 					</p-column>
 					<p-column field="total" header="{{'SUPPLIES.LBL_TOTAL' | translate}}" [sortable]="true"></p-column>
 				</p-dataTable>
-				<p-messages [(value)]="msgs" *ngIf="item.cantidadTotal !== item.suma"></p-messages>
 			</div>
 			<div class="col-md-12" *ngIf="showArea">
 				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="item.areas">

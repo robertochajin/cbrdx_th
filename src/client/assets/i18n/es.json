@@ -1262,12 +1262,13 @@
       "": ""
    },
    "ACCIDENTINCIDENT": {
+      "LBL_REPORTAR": "Reportat Accidente/Incidnete",
       "LBL_ESTADO": "Estado",
       "LBL_TIPOAREA": "Tipo area",
       "LBL_TIPONOVEDAD": "Tipo novedad",
       "LBL_COLABORADOR": "Colaborador",
       "LBL_CARGO": "Cargo",
-      "LBL_AREA": "Area",
+      "LBL_AREA": "Area/Oficina",
       "LBL_FECHAACCIDENTE": "Fecha accidente",
       "LBL_ACTIVIDADES": "Actividades",
       "LBL_ACTIVIDAD": "Actividad",

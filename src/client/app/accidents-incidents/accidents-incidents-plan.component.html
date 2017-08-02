@@ -1,0 +1,167 @@
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
+
+<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+	<div class="ui-grid-row">
+		<div class="ui-grid-col-5">
+			<p-panel header="{{'EMPLOYEES.LBL_COLABORADORES' | translate}}">
+				<div class="clearfix card-header">
+					<div class="col-md-4">
+						<div class="thumbnail img-responsive" *ngIf="employee.imagen">
+							<img src="{{svcThUrl}}/file/{{employee.imagen }}" alt="...">
+						</div>
+					</div>
+					<div class="col-md-8">
+						<h2>{{employee.nombreCompleto}} <span *ngIf=" employee.estadoTercero !== null " class="tag">{{ employee.estadoTercero }}</span>
+						</h2>
+						<h4>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</h4>
+						<span>{{employee.fechaNacimiento}} ({{employee.edad}} años) </span><br/>
+						<span>Cargo actual : {{employee.cargoActual}}</span><br />
+						<span>Usuario desde : {{employee.fechaCreacion}}</span><br />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}:</label>
+						<label class="col-md-3 col-sm-6 col-xs-12 "><strong>{{employeeEventuality.tipoNovedad}}</strong></label>
+					</div>
+					<div class="row">
+						<label class="col-md-3 col-sm-3 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }}:</label>
+						<label class="col-md-9 col-sm-9 col-xs-12"><strong>{{employeeEventuality.novedad}}</strong></label>
+					</div>
+					<div class="row">
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label" >{{'EMPLOYEENOVELTY.LBL_FECHAINICIO' | translate}}:</label>
+						<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeEventuality.fechaInicio}} {{employeeEventuality.horaInicio | date:"h:mma"}}</strong></label>
+						<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_FECHASOLICITUD' | translate
+							}}:</label>
+						<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{employeeEventuality.fechaReporte}}</strong></label>
+					</div>
+					<div class="row">
+						<label class="col-md-3 col-sm-3 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_REPORTADOPOR' | translate
+							}}:</label>
+						<label class="col-md-9 col-sm-9 col-xs-12 "><strong>{{employeeEventuality.nombreTerceroReporta}}</strong></label>
+						
+					</div>
+					<div class="row">
+						<label class="col-md-3 col-sm-3 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_DESCRIPCION' | translate }}:</label>
+						<label class="col-md-9 col-sm-9 col-xs-12"><strong>{{employeeEventuality.descripcion}}</strong></label>
+					</div>
+				</div>
+			</p-panel>
+		</div>
+		<div class="ui-grid-col-7">
+			<div *ngIf="!showForm">
+				<h3 class="first">{{'ACCIDENTINCIDENT.LBL_PLANDEACCION' | translate}}</h3>
+				<div class="row datable-header">
+					<div class="col-md-6 col-xs-12 datatable-header-add">
+						<button type="button" icon="fa-plus"
+						        label="{{'ACCIDENTINCIDENT.LBL_AGREGARPLAN' | translate}}"
+						        pButton (click)="add()"></button>
+					</div>
+					<div class="col-md-6 col-xs-12 datatable-header-search" >
+						
+						<div class="input-group">
+							<div class="input-group-addon"><i class="fa fa-search"></i></div>
+							<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate}}" class="form-control"
+							       [(ngModel)]="busqueda" (change)="setSearch()">
+						</div>
+					
+					</div>
+				</div>
+				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listAccidentesIncidents" [paginator]="true" [rows]="10"
+				             [responsive]="true" [globalFilter]="gb" #dt>
+					<p-column field="nombreTercero" header="{{'ACCIDENTINCIDENT.LBL_ACTIVIDAD' | translate }}" [sortable]="true"></p-column>
+					<p-column field="cargo" header="{{'ACCIDENTINCIDENT.LBL_DIRIGIDO' | translate }}" [sortable]="true"></p-column>
+					<p-column field="estructuraArea" header="{{'ACCIDENTINCIDENT.LBL_FECHA' | translate }}" [sortable]="true"></p-column>
+					<p-column field="fechaInicio" header="{{'ACCIDENTINCIDENT.LBL_COMPLETADO' | translate }}" [sortable]="true"></p-column>
+					<p-column field="tipoNovedad" header="{{'ACCIDENTINCIDENT.LBL_TIPONOVEDAD' | translate }}" [sortable]="true"></p-column>
+					<p-column field="estadoNovedad" header="{{'ACCIDENTINCIDENT.LBL_ESTADO' | translate }}" [sortable]="true"></p-column>
+					<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+						<template let-datos="rowData" pTemplate="body">
+							<button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip"
+							        title="{{'BTN_VISUALIZAR' | translate}}"
+							        pButton (click)="detail(datos)"></button>
+						</template>
+					</p-column>
+				</p-dataTable>
+			</div>
+			<div *ngIf="showForm">
+				<h3 class="first">{{'ACCIDENTINCIDENT.LBL_AGREGARPLAN' | translate}}</h3>
+				<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
+					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+						<div class="ui-grid-row">
+							<div class="ui-grid-col-12">
+								<label for="actividad">* {{'ACCIDENTINCIDENT.LBL_ACTIVIDAD' | translate }}</label>
+								<textarea id="actividad" name="actividad" pInputTextarea rows="4" cols="35" #NGactividad="ngModel"
+								          [(ngModel)]="employeeEventualityPlan.actividad" class="form-control" required="true"
+								          maxlength="500" (keyup)="capitalize($event)"></textarea>
+								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !NGactividad.valid">
+									<i class="fa fa-close"></i>
+									{{'EMPLOYEENOVELTY.LBL_DESCRIPCION' | translate }} {{'LBL_REQUERIDO' | translate }}
+								</div>
+							</div>
+						</div>
+						<div class="ui-grid-row">
+							<div class="ui-grid-col-12" >
+								<label for="responsables">{{ 'ACCIDENTINCIDENT.LBL_RESPONSABLE' | translate }}</label>
+								<p-dropdown id="responsables" name="responsables"
+								            [options]="listEmployees" [autoWidth]="false"
+								            [(ngModel)]="employeeEventualityPlan.idResponsable"
+								            #idResponsable="ngModel"  required="true" filter="filter"
+								></p-dropdown>
+								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !idResponsable.valid">
+									<i class="fa fa-close"></i>{{ 'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+								</div>
+							</div>
+						</div>
+						<div class="ui-grid-row">
+							<div class="ui-grid-col-12" >
+								<label for="limitDate">{{ 'ACCIDENTINCIDENT.LBL_FECHALIMITE' | translate }}</label>
+								<p-calendar id="limitDate" name="limitDate" [locale]="es" [showIcon]="true"
+								            [minDate]="today" dateFormat="yy'-'mm'-'dd" readonlyInput="readonlyInput"
+								            dataType="date" #NGlimitDate="ngModel" [required]="true"
+								            [(ngModel)]="employeeEventualityPlan.fechaLimite"
+								></p-calendar>
+								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !NGlimitDate.valid">
+									<i class="fa fa-close"></i>{{ 'EMPLOYEENOVELTY.LBL_FECHALIMITE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+								</div>
+							</div>
+						</div>
+						<div class="ui-grid-row">
+							<div class="ui-grid-col-12" >
+								<label for="encargado">{{ 'ACCIDENTINCIDENT.LBL_ENCARGADOVERIFICAR' | translate }}</label>
+								<p-dropdown id="encargado" name="encargado"
+								            [options]="listEmployees" [autoWidth]="false"
+								            [(ngModel)]="employeeEventualityPlan.idEncargado"
+								            #idEncargado="ngModel"  required="true" filter="filter"
+								></p-dropdown>
+								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !idEncargado.valid">
+									<i class="fa fa-close"></i>{{ 'EMPLOYEENOVELTY.LBL_ENCARGADOVERIFICAR' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+								</div>
+							</div>
+						</div>
+						<div class="ui-grid-row">
+							<div class="ui-grid-col-12" >
+								<label for="fechaVerificacion">{{ 'ACCIDENTINCIDENT.LBL_FECHAVERIFICACION' | translate }}</label>
+								<p-calendar id="fechaVerificacion" name="fechaVerificacion" [locale]="es" [showIcon]="true"
+								            [minDate]="employeeEventualityPlan.fechaLimite" dateFormat="yy'-'mm'-'dd" readonlyInput="readonlyInput"
+								            dataType="date" #NGfechaVerificacion="ngModel" [required]="true"
+								            [(ngModel)]="employeeEventualityPlan.fechaVerificacion"
+								></p-calendar>
+								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !NGfechaVerificacion.valid">
+									<i class="fa fa-close"></i>{{ 'EMPLOYEENOVELTY.LBL_FECHAVERIFICACION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
