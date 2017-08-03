@@ -8,6 +8,7 @@ import { EmployeeEventualitiesService } from '../_services/employees-eventualiti
 import { AccidentIncidentPlanComponent } from './accidents-incidents-plan.component';
 import { EmployeeEventualitiesPlansService } from '../_services/employeeEventualitiesPlans.service';
 import { EmployeeEventualitiesAttachmentService } from '../_services/employees-eventualities-attachment.service';
+import { EmployeeEventualitiesPlansAttachmentService } from '../_services/employees-eventualities-plans-attachment.service';
 
 @NgModule( {
               imports: [
@@ -16,7 +17,12 @@ import { EmployeeEventualitiesAttachmentService } from '../_services/employees-e
               ],
               declarations: [ AccidentIncidentComponent, AccidentIncidentPlanComponent ],
               bootstrap: [ AccidentIncidentComponent ],
-              providers: [ EmployeeEventualitiesService, EmployeeEventualitiesPlansService, EmployeeEventualitiesAttachmentService ],
+              providers: [
+                 EmployeeEventualitiesService,
+                 EmployeeEventualitiesPlansService,
+                 EmployeeEventualitiesAttachmentService,
+                 EmployeeEventualitiesPlansAttachmentService
+              ],
               exports: [ AccidentIncidentComponent ]
            } )
 export class AccidentIncidentModule {

@@ -66,7 +66,7 @@
 			</p-panel>
 		</div>
 		<div class="ui-grid-col-7">
-			<div *ngIf="!showForm">
+			<br *ngIf="!showForm">
 				<h3 class="first">{{'ACCIDENTINCIDENT.LBL_PLANDEACCION' | translate}}</h3>
 				<div class="row datable-header">
 					<div class="col-md-6 col-xs-12 datatable-header-add">
@@ -93,15 +93,29 @@
 					<p-column field="estadoPlanAccion" header="{{'ACCIDENTINCIDENT.LBL_ESTADO' | translate }}" [sortable]="true"></p-column>
 					<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 						<template let-datos="rowData" pTemplate="body">
-							<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip"
+							<!--<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip"
 							        title="{{'BTN_EDITAR' | translate}}"
-							        pButton (click)="update(datos)"></button>
+							        pButton (click)="update(datos)"></button>-->
 							<button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip"
 							        title="{{'BTN_VISUALIZAR' | translate}}"
 							        pButton (click)="detail(datos)"></button>
 						</template>
 					</p-column>
 				</p-dataTable>
+			<br/>
+			<br/>
+			<div class="row datable-header">
+				<div class="col-md-6 col-xs-12 datatable-header-add">
+				
+				</div>
+				<div class="col-md-6 col-xs-12 datatable-header-search">
+					
+					<button type="button" icon="fa-plus"
+					        label="{{'ACCIDENTINCIDENT.LBL_AGREGARPLAN' | translate}}"
+					        pButton (click)="finishEventuality()"></button>
+				
+				</div>
+			</div>
 			</div>
 			<div *ngIf="showForm">
 				<h3 class="first">{{'ACCIDENTINCIDENT.LBL_AGREGARPLAN' | translate}}</h3>
@@ -211,7 +225,8 @@
 							</div>
 						</div>
 					</form>
-					<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listAttachment" [paginator]="true" [rows]="10"
+					<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listplansAttachments" [paginator]="true"
+					             [rows]="10"
 					             [responsive]="true">
 						<p-column field="nombreArchivo" header="{{'LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
 						<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">

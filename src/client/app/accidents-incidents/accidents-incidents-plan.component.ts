@@ -16,6 +16,9 @@ import { EmployeeEventualityAttachment } from '../_models/employeeEventualityAtt
 import { EmployeeEventualitiesAttachmentService } from '../_services/employees-eventualities-attachment.service';
 import { ConstanteService } from '../_services/constante.service';
 import { EmployeeEventualitiesPlansService } from '../_services/employeeEventualitiesPlans.service';
+import { EmployeeEventualitiesPlansAttachmentService } from '../_services/employees-eventualities-plans-attachment.service';
+import { ListaItem } from '../_models/listaItem';
+import { ListaService } from '../_services/lista.service';
 
 @Component( {
                moduleId: module.id,
@@ -27,20 +30,26 @@ import { EmployeeEventualitiesPlansService } from '../_services/employeeEventual
 export class AccidentIncidentPlanComponent implements OnInit {
    employee: Employee = new Employee();
    listEmployees: SelectItem[] = [];
+   listEstados: ListaItem[] = [];
    msg: Message;
    busqueda: string;
    id: number;
    employeeEventuality: EmployeeEventuality = new EmployeeEventuality();
-   employeeEventualityPlan: EmployeeEventualityPlans = new EmployeeEventualityPlans();
-   employeeEventualityAttachment: EmployeeEventualityAttachment = new EmployeeEventualityAttachment();
+
    listEmployeeEventualityPlan: EmployeeEventualityPlans[] = [];
-   plansAttachments: EmployeeEventualityPlansAttachments[] = [];
+   employeeEventualityPlan: EmployeeEventualityPlans = new EmployeeEventualityPlans();
+
+   plansAttachments: EmployeeEventualityPlansAttachments = new EmployeeEventualityPlansAttachments();
+   listplansAttachments: EmployeeEventualityPlansAttachments[] = [];
+
+   employeeEventualityAttachment: EmployeeEventualityAttachment = new EmployeeEventualityAttachment();
    listAttachment: EmployeeEventualityAttachment[] = [];
    svcThUrlImagen = '<%= SVC_TH_URL %>/api/upload';
    showForm: boolean = false;
    today: Date;
    minDate: Date;
    es: any;
+   estadoTerminado: number;
    saveAttachmnet: boolean = true;
 
    // -----para adjuntar archivos-----
@@ -59,9 +68,11 @@ export class AccidentIncidentPlanComponent implements OnInit {
       private employeeEventualitiesService: EmployeeEventualitiesService,
       private employeeEventualitiesPlansService: EmployeeEventualitiesPlansService,
       private employeeEventualitiesAttachmentService: EmployeeEventualitiesAttachmentService,
+      private employeeEventualitiesPlansAttachmentService: EmployeeEventualitiesPlansAttachmentService,
       private employeeService: EmployeesService,
       private adjuntosService: AdjuntosService,
       private constanteService: ConstanteService,
+      private listaService: ListaService,
       private navService: NavService ) {
       let token = localStorage.getItem( 'token' );
       this.usuarioLogueado = this.jwtHelper.decodeToken( token );
@@ -74,6 +85,10 @@ export class AccidentIncidentPlanComponent implements OnInit {
          if ( data.valor ) {
             this.fsize = Number( data.valor );
          }
+      } );
+      this.listaService.getMasterDetails( 'ListasEstadosNovedades' ).subscribe( res => {
+         this.listEstados = res;
+         this.estadoTerminado = this.listEstados.find( s => s.codigo === 'TRAMIT' ).idLista;
       } );
       this.route.params.subscribe( params => {
          this.id = +params[ 'id' ];
@@ -109,6 +124,16 @@ export class AccidentIncidentPlanComponent implements OnInit {
       };
       this.today = new Date();
       this.initDate();
+   }
+
+   finishEventuality() {
+      this.employeeEventuality.idEstadoNovedad = this.estadoTerminado;
+      this.employeeEventualitiesService.update( this.employeeEventuality ).subscribe( res => {
+         this.navService.setMesage( 2, this.msg );
+         this.router.navigate( [ 'accidents-incidents' ] );
+      }, error => {
+         this.navService.setMesage( 3, this.msg );
+      } );
    }
 
    onSubmit() {
@@ -152,6 +177,14 @@ export class AccidentIncidentPlanComponent implements OnInit {
       } );
    }
 
+   getPlanAttachment() {
+      this.listplansAttachments = [];
+      this.employeeEventualitiesPlansAttachmentService.getByPlan( this.employeeEventualityPlan.idPlanAccionNovedadAccidente )
+      .subscribe( rest => {
+         this.listplansAttachments = rest;
+      } );
+   }
+
    onSubmitAttachment() {
    }
 
@@ -166,11 +199,13 @@ export class AccidentIncidentPlanComponent implements OnInit {
       this.employeeEventualityPlan = new EmployeeEventualityPlans();
       this.initDate();
       this.showForm = true;
+      this.listplansAttachments = [];
    }
 
    update( s: EmployeeEventualityPlans ) {
       this.employeeEventualityPlan = s;
-      // this.changeDate();
+      this.changeDate();
+      this.getPlanAttachment();
       this.showForm = true;
    }
 
@@ -187,15 +222,12 @@ export class AccidentIncidentPlanComponent implements OnInit {
       let respuesta = JSON.parse( event.xhr.response );
       if ( respuesta.idAdjunto != null || respuesta.idAdjunto != undefined ) {
          this.saveAttachmnet = false;
-         this.employeeEventualityAttachment.idTerceroNovedad = this.employeeEventuality.idTerceroNovedad;
-         this.employeeEventualityAttachment.idAdjunto = respuesta.idAdjunto;
-         this.employeeEventualitiesAttachmentService.add( this.employeeEventualityAttachment ).subscribe( data => {
+         this.plansAttachments.idPlanAccionNovedadAccidente = this.employeeEventualityPlan.idPlanAccionNovedadAccidente;
+         this.plansAttachments.idAdjunto = respuesta.idAdjunto;
+         this.plansAttachments.indicadorRespuesta = false;
+         this.employeeEventualitiesPlansAttachmentService.add( this.plansAttachments ).subscribe( data => {
             this.dataUploadArchivo = '';
-            this.listAttachment = [];
-            this.employeeEventualitiesAttachmentService.getAllByIdEventuality( this.employeeEventuality.idTerceroNovedad )
-            .subscribe( rest => {
-               this.listAttachment = rest;
-            } );
+            this.getPlanAttachment();
             this.saveAttachmnet = true;
          }, error => {
             this.saveAttachmnet = true;
@@ -206,7 +238,7 @@ export class AccidentIncidentPlanComponent implements OnInit {
    onBeforeSend( event: any ) {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
       let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "', 'ruta':" +
-                " '/Gestionamos/Terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "/Novedades' }";
+                " '/Gestionamos/Terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "/PlanAcciones' }";
       event.formData.append( 'obj', obj.toString() );
    }
 

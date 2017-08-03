@@ -15,8 +15,10 @@ export class EmployeeEventualityPlans {
    auditoriaFecha: Date;
    auditoriaUsuario: number;
    indicadorHabilitado: boolean;
+   indicadorVerificado: boolean;
 
    constructor() {
+      this.indicadorVerificado = false;
       this.indicadorHabilitado = true;
       this.auditoriaFecha = null;
       this.auditoriaUsuario = null;
