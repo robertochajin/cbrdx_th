@@ -40,7 +40,7 @@ export class PositionAssessmentComponent implements OnInit {
             this.riskService.getTypeRisk().subscribe( (rest: RiskType[]) => {
                rest.map(riskType => {
                   this.riskService.getRiskByTypeAndPosition(this.position.idCargo, riskType.idRiesgoTipo).subscribe(riesgos => {
-                     // riskType.subTypes = riesgos;
+                     riskType.subTypes = riesgos;
                   });
                });
                this.riskTypes = rest;
