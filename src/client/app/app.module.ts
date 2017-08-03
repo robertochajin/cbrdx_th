@@ -21,6 +21,8 @@ import { CompanyAssetsModule } from './position-company-assets/company-assets.mo
 import { LoginModule } from './seguridad/login.module';
 import { AuthGuard } from './_guards/auth.guard';
 import { AuthenticationService } from './_services/authentication.service';
+// Configuacion de listas
+import { ConfigurationListModule } from './configuration-list/configuration-list.module';
 //  Global Messages
 import { DialogModule, GrowlModule, MessagesModule } from 'primeng/primeng';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -90,6 +92,7 @@ import { NgIdleKeepaliveModule } from 'idle-keepalive-angular2';
 import { SuppliesModule } from './supplies/supplies.module';
 import { TrayEventualitiesModule } from './tray-eventualities/tray-eventualities.module';
 import { AccidentIncidentModule } from './accidents-incidents/accidents-incidents.module';
+import { OccupationalExamsModule } from './occupational-exams/occupational-exams.module';
 
 
 export function createTranslateLoader(http: Http) {
@@ -135,6 +138,7 @@ export function createTranslateLoader(http: Http) {
                                           } ),
                  ConstanteModule,
                  ListaModule,
+                 ConfigurationListModule,
                  CentroCostosModule,
                  GruposGestionModule,
                  RolesModule,
@@ -162,7 +166,9 @@ export function createTranslateLoader(http: Http) {
                  // EmployeeEventualitiesModule,
                  // EmployeesAttachmentsModule,
                  //AssignmentProfessionalModule
+                 AccidentIncidentModule,
                  QuestionnairesModule,
+                 OccupationalExamsModule,
                  SuppliesModule,
                  TrayEventualitiesModule,
                  AccidentIncidentModule

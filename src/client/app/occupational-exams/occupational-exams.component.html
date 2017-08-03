@@ -1,0 +1,95 @@
+<div>
+	<p-panel header="Filtro" class="perfil">
+		<form (ngSubmit)="f.valid && onSubmitFilter()" #f="ngForm" novalidate id="formulario">
+			<div class="row">
+				<div class="col-md-5 col-md-offset-1">
+					<label for="typeareas">{{'EXAMENOCUPACIONAL.LBL_TIPOAREA' | translate }}</label>
+					<p-dropdown id="typeareas" name="typeareas" #typearea="ngModel" [options]="listTypeArea" [autoWidth]="false"
+					            [(ngModel)]="idTipoArea" (onChange)="changeTypeArea()"></p-dropdown>
+					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !typearea.valid">
+						<i class="fa fa-close"></i>
+						{{'EXAMENOCUPACIONAL.LBL_TIPOAREA' | translate }} {{'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+				<div class="col-md-5">
+					<label for="offic">{{'EXAMENOCUPACIONAL.LBL_AREAOFICINA' | translate }}</label>
+					<p-dropdown id="offic" name="offic" #ngoffice="ngModel" [options]="listArea" [autoWidth]="false"
+					            [(ngModel)]="idArea" [required]="idTipoArea" filter="filter" (onChange)="changeArea()"></p-dropdown>
+					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !ngoffice.valid">
+						<i class="fa fa-close"></i>
+						{{'EXAMENOCUPACIONAL.LBL_AREAOFICINA' | translate }} {{'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-10  col-md-offset-1">
+					<p-pickList [source]="listPosition" [target]="selectedPositions"
+					            sourceHeader="{{ 'EXAMENOCUPACIONAL.LBL_CARGOS' | translate }} "
+					            targetHeader="{{ 'EXAMENOCUPACIONAL.LBL_CARGOSSELECT' | translate }} " [responsive]="true"
+					            [showTargetControls]="false" [showSourceControls]="false">
+						<template let-position pTemplate="item">
+							<div class="ui-helper-clearfix">
+								<div>{{position.cargo}}</div>
+							</div>
+						</template>
+					</p-pickList>
+					<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && selectedPositions.length<=0 && idTipoArea">
+						<i class="fa fa-close"></i>
+						{{'EXAMENOCUPACIONAL.LBL_CARGOS' | translate }} {{'LBL_REQUERIDO' | translate }}
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2 col-md-offset-4">
+					<button pButton label="{{'EXAMENOCUPACIONAL.BTN_FILTRAR' | translate }}"
+					        type="submit"></button>
+				</div>
+				<div class="col-md-2">
+					<button pButton label="{{'EXAMENOCUPACIONAL.BTN_LIMPIARFILTRAR' | translate }}"
+					        type="button" (click)="clearFilter()"></button>
+				</div>
+			</div>
+		</form>
+	</p-panel>
+	<p-panel header="Resultados" class="perfil" *ngIf="listPosition.length>0">
+		<div>
+			<div class="row datable-header">
+				<div class="col-md-6 col-xs-12 datatable-header-add"></div>
+				<div class="col-md-6 col-xs-12 datatable-header-search">
+					<div class="input-group">
+						<div class="input-group-addon"><i class="fa fa-search"></i></div>
+						<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate }}" class="form-control"
+						       [(ngModel)]="busqueda" (change)="setSearch()">
+					</div>
+				</div>
+			</div>
+			<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listEmployee" [paginator]="true" [rows]="10"
+			             [responsive]="true" [globalFilter]="gb">
+				<p-column styleClass="datatable-col-action">
+					<template pTemplate="header">
+						<p-checkbox binary="true" (onChange)="selectEmployee()" [(ngModel)]="allEmployee"></p-checkbox>
+					</template>
+					<template let-employee="rowData" pTemplate="body">
+						<p-checkbox name="groupname" value={{employee.idTercero}} [(ngModel)]="listSelectEmployee"></p-checkbox>
+					</template>
+				</p-column>
+				<p-column field="numeroDocumento" header="{{'EXAMENOCUPACIONAL.LBL_DOCUMENTO' | translate }}" [sortable]="true"></p-column>
+				<p-column field="nombreCompleto" header="{{'EXAMENOCUPACIONAL.LBL_COLABORADOR' | translate }}" [sortable]="true"></p-column>
+				<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+					<template let-dc="rowData" pTemplate="body">
+						<button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip"
+						        title="{{'BTN_VISUALIZAR' | translate}}"
+						        pButton (click)="detail(dc)"></button>
+					</template>
+				</p-column>
+			</p-dataTable>
+		</div>
+	</p-panel>
+</div>
+<p-confirmDialog icon="fa fa-question-circle" #cd width="400">
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
+

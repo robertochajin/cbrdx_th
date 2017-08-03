@@ -96,7 +96,7 @@
 										</div>
 									</div>
 								</div>
-
+								
 								<div class="ui-grid-row">
 									<div class="ui-grid-col-6">
 										<label for="opto">* {{'MEDICALINSTITUTION.LBL_EXAMENOPTPMETRIA' | translate }}</label>
@@ -112,18 +112,24 @@
 									</div>
 									<div class="ui-grid-col-6">
 										<label>{{'MEDICALINSTITUTION.LBL_EXAMENVALOR' | translate }}</label>
-										<input id="totalexamenes" type="text" disabled value="{{totalExamenes}}" />
-										<h3>${{totalExamenes}}</h3>
+										<h3>$ {{totalExamenes}}</h3>
 									</div>
 								</div>
-								<!--<div class="ui-grid-row">-->
-									<!--<div class="ui-grid-col-3"></div>-->
-									<!--<div class="ui-grid-col-3">-->
-										<!--<label for="Habilitado">{{ 'LBL_HABILITADO' | translate}}</label>-->
-										<!--<p-checkbox id="Habilitado" name="Habilitado" [(ngModel)]="medicalInstitution.indicadorHabilitado"-->
-										            <!--binary="true"></p-checkbox>-->
-									<!--</div>-->
-								<!--</div>-->
+								<div class="ui-grid-row">
+									<div class="col-md-3">
+										<h3>{{'MEDICALINSTITUTION.LBL_EXAMENES' | translate }}</h3>
+										<div *ngFor="let c of typeExams">
+											<p-checkbox name="tiposexamenes" value="{{c.value}}" label="{{c.label}}"
+											            [(ngModel)]="selectTypeExams" (onChange)="selected()"
+											></p-checkbox>
+										</div>
+										<div class="ui-message ui-messages-error ui-corner-all"
+										     *ngIf="f.submitted && selectTypeExams.length===0">
+											<i class="fa fa-close"></i>
+											{{'MEDICALINSTITUTION.LBL_EXAMENES' | translate }} {{'LBL_REQUERIDO' | translate }}
+										</div>
+									</div>
+								</div>
 								<div class="ui-grid-row form-footer-buttons">
 									<div class="ui-grid-col-4"></div>
 									<div class="ui-grid-col-1">
@@ -151,83 +157,7 @@
 				</div>
 			</p-accordionTab>
 			<p-accordionTab header="{{ 'MEDICALINSTITUTION.LBL_ESTRUCTURAFISICA' | translate }}" [selected]="acordion==2"
-			                [disabled]="!medicalInstitution.idInstitucionMedica"  >
-				<!--<form (ngSubmit)="fs.valid && onSubmitEstructura()" #fs="ngForm" novalidate id="estructura">-->
-					<!--<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">-->
-						<!--<div class="ui-grid-row">-->
-							<!--<div class="ui-grid-col-12">-->
-									<!--<label for="estrucFisica">{{ 'MEDICALINSTITUTION.LBL_ESTRUCTURAFISICA' | translate}}</label>-->
-									<!--<p-dropdown id="estrucFisica" name="estrucFisica" required="true"-->
-									            <!--[options]="physicStructure" [autoWidth]="false" filter="filter"-->
-									            <!--[(ngModel)]="medicalInstitutionStructure.idEstructuraFisica"-->
-									            <!--#estructura="ngModel"-->
-									<!--&gt;</p-dropdown>-->
-									<!--<div class="ui-message ui-messages-error ui-corner-all"-->
-									     <!--*ngIf="fs.submitted && !estructura.valid">-->
-										<!--<i class="fa fa-close"></i>-->
-										<!--{{ 'MEDICALINSTITUTION.LBL_ESTRUCTURAFISICA' | translate }}  {{'LBL_REQUERIDO' | translate }}-->
-									<!--</div>-->
-							<!--</div>-->
-						<!--</div>-->
-						<!--<div class="ui-grid-row">-->
-							<!--<div class="ui-grid-col-3">-->
-								<!--<label></label><br>-->
-								<!--<p-checkbox id="habilitadoE" name="habilitadoE" [(ngModel)]="medicalInstitutionStructure.indicadorHabilitado"-->
-								            <!--binary="true" label="{{ 'LBL_HABILITADO' | translate }}"></p-checkbox>-->
-							<!--</div>-->
-							<!--<div class="ui-grid-col-3">-->
-								<!--<label></label><br>-->
-								<!--<p-checkbox id="viaja" name="viaja" [(ngModel)]="medicalInstitutionStructure.indicadorViaja"-->
-								            <!--binary="true" label="{{ 'MEDICALINSTITUTION.LBL_VIAJA' | translate }}"></p-checkbox>-->
-							<!--</div>-->
-							<!--<div class="ui-grid-col-4" *ngIf="medicalInstitutionStructure.indicadorViaja">-->
-								<!--<label for="valorviaje">* {{'MEDICALINSTITUTION.LBL_VALORVIAJA' | translate }}</label>-->
-								<!--<input id="valorviaje" name="valorviaje" #valorv="ngModel" pInputText-->
-								       <!--type="text" [required]="medicalInstitutionStructure.valorViaje"-->
-								       <!--[(ngModel)]="medicalInstitutionStructure.valorViaje"-->
-								       <!--(keyup)="inputNumber()"/>-->
-								<!--<div class="ui-message ui-messages-error ui-corner-all" *ngIf="fs.submitted && !valorv.valid ">-->
-									<!--<i class="fa fa-close"></i>-->
-									<!--{{'MEDICALINSTITUTION.LBL_VALORVIAJA' | translate }} {{'LBL_REQUERIDO' | translate }}-->
-								<!--</div>-->
-							<!--</div>-->
-							<!---->
-						<!--</div>-->
-						<!--<div class="ui-grid-row">-->
-							<!--<div class="ui-grid-col-4"></div>-->
-							<!--<div class="ui-grid-col-1">-->
-							<!--</div>-->
-							<!--<div class="ui-grid-col-5"></div>-->
-							<!--<div class="ui-grid-col-2">-->
-								<!--<button pButton icon="fa-plus" label="{{ 'BTN_AGREGAR' | translate }}"-->
-								        <!--type="submit"></button>-->
-							<!--</div>-->
-						<!--</div>-->
-						<!--<div class="ui-grid-row">-->
-							<!--<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}"  [value]="medicalInstitutions" [paginator]="true" [rows]="10" [responsive]="true" [globalFilter]="gb">-->
-								<!--<p-column field="representanteLegal" header="{{ 'MEDICALINSTITUTION.LBL_REPRESENTANTELEGAL' | translate }}" [sortable]="true"></p-column>-->
-								<!--<p-column header="{{ 'LBL_HABILITADO' | translate}}" styleClass="datatable-col-action">-->
-									<!--<template let-mi="rowData" pTemplate="body">-->
-										<!--<p-checkbox name="indicadorHabilitado" [(ngModel)]="mi.indicadorHabilitado" binary="true" disabled="true" ></p-checkbox>-->
-									<!--</template>-->
-								<!--</p-column>-->
-								<!--<p-column field="descripcionDivisonPolitica" header="{{ 'MEDICALINSTITUTION.LBL_CIUDAD' | translate }}" [sortable]="true"></p-column>-->
-								<!--<p-column header="{{ 'LBL_HABILITADO' | translate}}" styleClass="datatable-col-action">-->
-									<!--<template let-mi="rowData" pTemplate="body">-->
-										<!--<p-checkbox name="indicadorHabilitado" [(ngModel)]="mi.indicadorHabilitado" binary="true" disabled="true" ></p-checkbox>-->
-									<!--</template>-->
-								<!--</p-column>-->
-								<!--<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">-->
-									<!--<template let-mi="rowData" pTemplate="body">-->
-										<!--<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"-->
-										        <!--pButton (click)="update(mi)"></button>-->
-									<!--</template>-->
-								<!--</p-column>-->
-							<!--</p-dataTable>-->
-						<!--</div>-->
-					<!--</div>-->
-				<!--</form>-->
-			
+			                [disabled]="!medicalInstitution.idInstitucionMedica">
 			</p-accordionTab>
 		</p-accordion>
 	</div>

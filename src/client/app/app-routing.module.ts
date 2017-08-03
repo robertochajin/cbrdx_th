@@ -61,6 +61,10 @@ import { ConstanteDetailComponent } from './constantes/constante-detail.componen
 import { ListaComponent } from './listas/lista.component';
 import { ListaDetailComponent } from './listas/lista-detail.component';
 import { ListaEditComponent } from './listas/lista-edit.component';
+import { ConfigurationListComponent } from './configuration-list/configuration-list.component';
+import { ConfigurationListAddComponent } from './configuration-list/configuration-list-add.component';
+import { ConfigurationListUpdateComponent } from './configuration-list/configuration-list-update.component';
+import { ConfigurationListDetailComponent } from './configuration-list/configuration-list-detail.component';
 //  Centros de Costos
 import { CentroCostosComponent } from './centroCostos/centroCostos.component';
 import { CentroCostosAddComponent } from './centroCostos/centroCostos-add.component';
@@ -211,6 +215,7 @@ import { EmployeeAssignationDetailComponent } from './supplies/assign-supplies/e
 import { TracingSuppliesComponent } from './supplies/tracing-supplies/tracing-supplies.component';
 import { ConsolidatedProjectionComponent } from './supplies/supplies-projection/consolidated-projection.component';
 import { SuppliesConfirmationComponent } from './employees/supplies-employees/supplies-confirmation.component';
+import { OccupationalExamsComponent } from './occupational-exams/occupational-exams.component';
 
 import { AccidentIncidentComponent } from './accidents-incidents/accidents-incidents.component';
 import { AccidentIncidentPlanComponent } from './accidents-incidents/accidents-incidents-plan.component';
@@ -306,6 +311,11 @@ const routes = [
    { path: 'listas', component: ListaComponent, canActivate: [ AuthGuard ] },
    { path: 'listas/detail/:id', component: ListaDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'listas/edit/:id', component: ListaEditComponent, canActivate: [ AuthGuard ] },
+   // Configuracion de listas producto
+   { path: 'configuration-list', component: ConfigurationListComponent, canActivate: [ AuthGuard ] },
+   { path: 'configuration-list/add', component: ConfigurationListAddComponent, canActivate: [ AuthGuard ] },
+   { path: 'configuration-list/update/:id', component: ConfigurationListUpdateComponent, canActivate: [ AuthGuard ] },
+   { path: 'configuration-list/detail/:id', component: ConfigurationListDetailComponent, canActivate: [ AuthGuard ] },
 
    //  Centros de Costos
    { path: 'centroCostos', component: CentroCostosComponent, canActivate: [ AuthGuard ] },
@@ -529,6 +539,10 @@ const routes = [
 
    //  employees additional data
    { path: 'employees/supplies-confirmation/:id', component: SuppliesConfirmationComponent, canActivate: [ AuthGuard ] },
+   // examenes ocupacionales
+   { path: 'occupational-exams', component: OccupationalExamsComponent }
+
+
 
    // Accidentes e incidentes
    { path: 'accidents-incidents', component: AccidentIncidentComponent },

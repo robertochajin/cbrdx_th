@@ -13,6 +13,7 @@ import { LocateService } from '../_services/locate.service';
 import { PhysicStructureService } from '../_services/physic-structure.service';
 import { PoliticalDivisionService } from '../_services/political-division.service';
 import { LocationsNomenclaturesServices } from '../_services/locationsNomenclatures.service';
+import { ListaItem } from '../_models/listaItem';
 
 @Component( {
                moduleId: module.id,
@@ -28,6 +29,8 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
    listMedicalInstitutionStructure: MedicalInstitutionStructure[];
    localizacion: Localizaciones = new Localizaciones();
    physicStructure: SelectItem[] = [];
+   typeExams: SelectItem[] = [];
+   selectTypeExams: any[] = [];
    msgs: Message[] = [];
    acordion: number = 0;
    totalExamenes: number = 0;
@@ -51,11 +54,26 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
    }
 
    ngOnInit() {
+      this.listaService.getMasterDetails( 'ListasTiposExamenesMedicos' ).subscribe( rs => {
+         rs.map( ( s: ListaItem ) => {
+            this.typeExams.push( { label: s.nombre, value: s.idLista } );
+         } );
+         this.route.params.switchMap( ( params: Params ) => this.medicalInstitutionService.getTypeExamByIdInstitution( +params[ 'id' ] ) )
+         .subscribe( rs => {
+            let temp: any[] = [];
+            for ( let c of rs ) {
+               if ( c.indicadorHabilitado ) {
+                  temp.push( c.idTipoExamen.toString() );
+               }
+            }
+            this.selectTypeExams = temp;
+         } );
+      } );
       this.physicStructure = [];
       this.route.params.switchMap( ( params: Params ) => this.medicalInstitutionService.getById( +params[ 'id' ] ) )
       .subscribe( data => {
          this.medicalInstitution = data;
-         this.totalExamenes=data.valorExamenVisiometria+data.valorExamenOsteosmuscular+data.valorExamenOptometria;
+         this.totalExamenes = data.valorExamenVisiometria + data.valorExamenOsteosmuscular + data.valorExamenOptometria;
          this.medicalInstitutionService.getStructureByIdMedicalInstitution( this.medicalInstitution.idInstitucionMedica )
          .subscribe( rest => {
             this.listMedicalInstitutionStructure = rest;
@@ -86,8 +104,9 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
    }
 
    onSubmit() {
-      if ( this.medicalInstitution.direccion !== '' ) {
+      if ( this.medicalInstitution.direccion !== '' && this.selectTypeExams.length > 0 ) {
          this.submitted = true;
+         this.medicalInstitution.listTipos = this.selectTypeExams;
          this.locateService.add( this.localizacion ).subscribe( data => {
             this.medicalInstitution.idLocalizacion = data.idLocalizacion;
             this.medicalInstitutionService.update( this.medicalInstitution ).subscribe( res => {
@@ -95,7 +114,8 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
                .subscribe( dt => {
                   this.listMedicalInstitutionStructure = dt;
                } );
-               this._nav.setMesage( 1, this.msgs );
+               this._nav.setMesage( 2, this.msgs );
+               this.acordion = 1;
             }, error => {
                this._nav.setMesage( 3, this.msgs );
             } );
@@ -107,15 +127,15 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
    onSubmitEstructura() {
       this.medicalInstitutionStructure.idInstitucionMedica = this.medicalInstitution.idInstitucionMedica;
       this.addingStructure = false;
-      if(!this.medicalInstitutionStructure.indicadorViaja){
-         this.medicalInstitutionStructure.valorViaje=0;
+      if ( !this.medicalInstitutionStructure.indicadorViaja ) {
+         this.medicalInstitutionStructure.valorViaje = 0;
       }
-      if(this.medicalInstitutionStructure.idInstitucionMedicaEstructuraFisica){
+      if ( this.medicalInstitutionStructure.idInstitucionMedicaEstructuraFisica ) {
          this.medicalInstitutionService.updateStructure( this.medicalInstitutionStructure ).subscribe( data => {
             this._nav.setMesage( 1, this.msgs );
-            this.medicalInstitutionStructure.valorViaje=null;
-            this.medicalInstitutionStructure.idEstructuraFisica=null;
-            this.medicalInstitutionStructure.indicadorViaja=false;
+            this.medicalInstitutionStructure.valorViaje = null;
+            this.medicalInstitutionStructure.idEstructuraFisica = null;
+            this.medicalInstitutionStructure.indicadorViaja = false;
             this.editing = false;
             this.listMedicalInstitutionStructure = [];
             this.physicStructure = [];
@@ -136,12 +156,12 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
          }, error => {
             this._nav.setMesage( 3, this.msgs );
          } );
-      }else {
+      } else {
          this.medicalInstitutionService.addStructure( this.medicalInstitutionStructure ).subscribe( data => {
             this._nav.setMesage( 1, this.msgs );
-            this.medicalInstitutionStructure.valorViaje=null;
-            this.medicalInstitutionStructure.idEstructuraFisica=null;
-            this.medicalInstitutionStructure.indicadorViaja=false;
+            this.medicalInstitutionStructure.valorViaje = null;
+            this.medicalInstitutionStructure.idEstructuraFisica = null;
+            this.medicalInstitutionStructure.indicadorViaja = false;
             this.listMedicalInstitutionStructure = [];
             this.physicStructure = [];
             this.medicalInstitutionService.getStructureByIdMedicalInstitution( this.medicalInstitution.idInstitucionMedica )
@@ -169,6 +189,10 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
       this._nav.setTab( e.index );
       this.acordion = this._nav.getTab();
 
+   }
+
+   selected() {
+      this.selectTypeExams;
    }
 
    bindLocation( event: any ) {
@@ -230,10 +254,10 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
       event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
    }
 
-   updateStructure(c:MedicalInstitutionStructure){
-      if(c!==null){
+   updateStructure( c: MedicalInstitutionStructure ) {
+      if ( c !== null ) {
          this.medicalInstitutionStructure = Object.assign( {}, c );
-         this.editing=true;
+         this.editing = true;
          this.physicStructure.push( { label: c.estructuraFisica, value: c.idEstructuraFisica } );
       }
    }
@@ -253,8 +277,9 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
          this.location.back();
       }
    }
-   cancelEditing(fcDirty : boolean) {
-      if ( fcDirty ){
+
+   cancelEditing( fcDirty: boolean ) {
+      if ( fcDirty ) {
          this.confirmationService.confirm( {
                                               message: `¿Está seguro que desea Cancelar?`,
                                               header: 'Confirmación',
@@ -263,15 +288,15 @@ export class MedicalInstitutionUpdateComponent implements OnInit {
                                               accept: () => {
                                                  this.medicalInstitutionStructure = new MedicalInstitutionStructure();
                                                  this.editing = false;
-                                                 let temp =this.physicStructure.length;
-                                                 this.physicStructure.splice(temp-1);
+                                                 let temp = this.physicStructure.length;
+                                                 this.physicStructure.splice( temp - 1 );
                                               }
                                            } );
-      }else {
+      } else {
          this.medicalInstitutionStructure = new MedicalInstitutionStructure();
          this.editing = false;
-         let temp =this.physicStructure.length;
-         this.physicStructure.splice(temp-1);
+         let temp = this.physicStructure.length;
+         this.physicStructure.splice( temp - 1 );
       }
 
    }

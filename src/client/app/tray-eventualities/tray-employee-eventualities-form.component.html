@@ -2,13 +2,6 @@
 <p-accordion (onOpen)="onTabShow($event)" id="accordion">
 	<p-accordionTab header="{{'EMPLOYEES.LBL_DATOSGENERALES' | translate}}" [selected]="acordion == 0 || acordion == null">
 		<div class="clearfix">
-			<p-messages [value]="msgs"></p-messages>
-			<p-confirmDialog width="400" #cd>
-				<p-footer>
-					<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
-					<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
-				</p-footer>
-			</p-confirmDialog>
 			<div class="col-md-10 col-md-offset-1">
 				<h3>{{ 'EMPLOYEENOVELTY.LBL_NOVEDAD' | translate }}</h3>
 				<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate id="formulario">
@@ -32,7 +25,7 @@
 							<div class="ui-grid-col-6">
 								<label for="idTipoNovedad">{{ 'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }}</label>
 								<p-dropdown id="idTipoNovedad" name="idTipoNovedad"
-								            [options]="listTypeEvent" [autoWidth]="false"
+								            [options]="listTypeEvent" [autoWidth]="false" filter="filter"
 								            [(ngModel)]="idTipoNovedad"
 								            #idTipoNov="ngModel" (onChange)="changeTypeEvent()"
 								></p-dropdown>
@@ -303,35 +296,32 @@
 								</div>
 							</div>
 						</div>
-						<div class="ui-grid-row form-footer-buttons">
+						<div class="row"  *ngIf="eventuality.indicadorConfirmacion && employeeEventuality.idTerceroNovedad">
 							<div class="col-md-12">
-								<div class="col-md-1"></div>
-								<div class="col-md-4" *ngIf="!eventuality.indicadorConfirmacion"></div>
-								<div class="col-md-4" *ngIf="eventuality.indicadorConfirmacion && !employeeEventuality.idTerceroNovedad"></div>
-								<div class="col-md-4" *ngIf="eventuality.indicadorConfirmacion && employeeEventuality.idTerceroNovedad">
-									<div class="col-md-8">
+								<div class="col-md-10 col-md-offset-1">
+									<div class="col-md-4">
 										<button (click)="generarCodigo()" label="{{'PROCESOSELECCION.LBL_GENERCOD' | translate }}" type="button"
 										        pButton></button>
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-8">
 										<input id="codigoinst" name="codigoinst" #codInst="ngModel" pInputText type="text"
 										       required maxlength="50" [(ngModel)]="codigoVerificacion"/>
-										<div class="ui-message ui-messages-error ui-corner-all"
+										<div class="ui-message ui-messages-info ui-corner-all"
 										     *ngIf="f.submitted && !codInst.valid">
 											<i class="fa fa-close"></i>
-											{{ 'DOCMANAGMENT.LBL_CODIGO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+											{{ 'EMPLOYEENOVELTY.MSG_INGRESECODIGO' | translate }}
 										</div>
 									</div>
-								</div>
-								<div class="col-md-2">
-									<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
-								</div>
-								<div class="col-md-2">
-									<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
 								</div>
 							</div>
 						</div>
 					</div>
+						<div class="form-footer-buttons">
+							<div class="col-md-12">
+						<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+									<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+						</div>
+						</div>
 				</form>
 			</div>
 		</div>
@@ -359,7 +349,7 @@
 						              (onBeforeSend)="onBeforeSend($event)"
 						              (onSelect)="onSelect($event, $event.files)"
 						              (onUpload)="uploadingOk($event)" [disabled]="dataUploadArchivo===null || dataUploadArchivo===''"
-						              maxFileSize="{{fsize}}" accept="{{ftype}}" style="padding-right: 140px">
+						              maxFileSize="{{fsize}}" accept="{{ftype}}">
 						</p-fileUpload>
 					</div>
 				</div>
@@ -378,4 +368,17 @@
 		</p-dataTable>
 	</p-accordionTab>
 </p-accordion>
+	<div class="row form-footer-buttons">
+		<div class="form-group col-md-12">
+			<button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate }}" type="button"
+					  pButton (click)="goBack()"></button>
+		</div>
+	</div>
 </div>
+<p-messages [value]="msgs"></p-messages>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>

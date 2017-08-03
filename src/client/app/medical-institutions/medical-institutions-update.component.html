@@ -119,11 +119,23 @@
 									</div>
 									<div class="ui-grid-col-6">
 										<label>{{'MEDICALINSTITUTION.LBL_EXAMENVALOR' | translate }}</label>
-										<h3>${{totalExamenes}}</h3>
+										<h3>$ {{totalExamenes}}</h3>
 									</div>
 								</div>
 								<div class="ui-grid-row">
-									<div class="ui-grid-col-3"></div>
+									<div class="col-md-3">
+										<h3>{{'MEDICALINSTITUTION.LBL_EXAMENES' | translate }}</h3>
+										<div *ngFor="let c of typeExams">
+											<p-checkbox name="tiposexamenes" value="{{c.value}}" label="{{c.label}}"
+											            [(ngModel)]="selectTypeExams" (onChange)="selected()"
+											></p-checkbox>
+										</div>
+										<div class="ui-message ui-messages-error ui-corner-all"
+										     *ngIf="f.submitted && selectTypeExams.length===0">
+											<i class="fa fa-close"></i>
+											{{'MEDICALINSTITUTION.LBL_EXAMENES' | translate }} {{'LBL_REQUERIDO' | translate }}
+										</div>
+									</div>
 									<div class="ui-grid-col-3">
 										<label for="Habilitado">{{ 'LBL_HABILITADO' | translate}}</label>
 										<p-checkbox id="Habilitado" name="Habilitado" [(ngModel)]="medicalInstitution.indicadorHabilitado"

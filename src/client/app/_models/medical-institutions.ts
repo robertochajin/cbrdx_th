@@ -17,7 +17,8 @@ export class MedicalInstitution {
    public auditoriaUsuario: Number;
    public auditoriaFecha: Date;
 
-
+   // auxiliar para tipos de examenes medicos
+   public listTipos: number[];
    constructor() {
       this.indicadorHabilitado = true;
       this.auditoriaFecha = null;
