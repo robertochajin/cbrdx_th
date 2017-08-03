@@ -1,0 +1,24 @@
+<p-tabView orientation="left" id="tbvCompetenciasHabilidades">
+	<p-tabPanel *ngFor="let type of riskTypes; let i = index" header="{{type.riesgoTipo}}" [selected]="i == 0">
+		<div class="row" >
+			<p-dataTable [rows]="6" [paginator]="true" emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="type.subTypes"
+			             [responsive]="true" id="positionCompetenciesDT" styleClass="dejemeverelcombo">
+				<p-column field="competencia" header="{{'COMPETENCIES.LBL_COMPETENCIA' | translate }}" [sortable]="true"></p-column>
+				<p-column field="descripcion" header="{{'LBL_DESCRIPCION' | translate }}" [sortable]="true"></p-column>
+				<p-column header="{{ 'LBL_HABILITADO' | translate }}" styleClass="datatable-col-action">
+					<template let-competencie="rowData" pTemplate="body">
+						<p-checkbox [(ngModel)]="competencie.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
+					</template>
+				</p-column>
+				<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+					<template let-competencie="rowData" pTemplate="body">
+						<button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
+						        pButton (click)="editCompetencie(competencie, group.idGrupoCompetencia)"></button>
+						<!-- <button type="button" class="ui-button ui-button-danger btn" icon="fa-trash"
+									pButton (click)="disableCompetencie(competencie)"></button>-->
+					</template>
+				</p-column>
+			</p-dataTable>
+		</div>
+	</p-tabPanel>
+</p-tabView>
