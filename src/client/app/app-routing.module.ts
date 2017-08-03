@@ -540,9 +540,7 @@ const routes = [
    //  employees additional data
    { path: 'employees/supplies-confirmation/:id', component: SuppliesConfirmationComponent, canActivate: [ AuthGuard ] },
    // examenes ocupacionales
-   { path: 'occupational-exams', component: OccupationalExamsComponent }
-
-
+   { path: 'occupational-exams', component: OccupationalExamsComponent },
 
    // Accidentes e incidentes
    { path: 'accidents-incidents', component: AccidentIncidentComponent },
