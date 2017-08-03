@@ -702,7 +702,9 @@
            "MSG_DOSEARCH" : "Para visualizar los cargos debe realizar una búsqueda válida",
            "MSG_CRITERIOS" : "La suma de factores para todos los críterios debe ser 100 para poder guardar",
            "LBL_PROCESS" : "Proceso",
-           "LBL_SUBPROCESS" : "Subproceso"
+           "LBL_SUBPROCESS" : "Subproceso",
+           "LBL_PORCENTAJEVALORACION" : "Porcentaje",
+           "LBL_MAPARIESGOS" : "Consultar mapa del riesgo"
 
            },
 

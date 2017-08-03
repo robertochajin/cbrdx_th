@@ -217,6 +217,7 @@ import { ConsolidatedProjectionComponent } from './supplies/supplies-projection/
 import { SuppliesConfirmationComponent } from './employees/supplies-employees/supplies-confirmation.component';
 import { AccidentIncidentComponent } from './accidents-e-incidents/accidents-incidents.component';
 import { OccupationalExamsComponent } from './occupational-exams/occupational-exams.component';
+import { AssessmentListComponent } from './position_assessment/assessment-list.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -422,6 +423,7 @@ const routes = [
    { path: 'position-absence/:idCargo', component: AbsenceComponent, canActivate: [ AuthGuard ] },
    { path: 'position-activities/:idCargo', component: PositionAuthoritiesComponent, canActivate: [ AuthGuard ] },
    { path: 'position/requirement/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
+   { path: 'position/assessment', component: AssessmentListComponent },
 
    // Administracion
    { path: 'menus', component: MenuManagerComponent, canActivate: [ AuthGuard ] },

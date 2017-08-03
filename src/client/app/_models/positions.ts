@@ -44,7 +44,10 @@ export class Positions {
    public indicadorZona:boolean;
    public edadMax : number
    public idProceso: number;
+   public proceso: string;
    public idSubProceso: number;
+   public subProceso: string;
+   public avanceValoracion: string;
 
    constructor() {
       this.idCargo = null;
