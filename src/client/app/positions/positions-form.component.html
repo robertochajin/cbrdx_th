@@ -119,13 +119,16 @@
 				                           {{'POSITION.LBL_PROCESS' | translate }} {{'LBL_REQUERIDO' | translate }}
 			                           </div>
 		                           </div>
-		                           <div class="form-group col-md-6" *hasPermission="seccion1.SUBPROCESO ? seccion1.SUBPROCESO : defaultCampo">
-			                           <label for="subprocess">* {{'POSITION.LBL_SUBPROCESS' | translate }}</label>
-			                           <p-dropdown id="subprocess" name="subprocess" #ngSubprocess="ngModel" [options]="listSubProcess"
-			                                       [autoWidth]="false" [(ngModel)]="position.idSubProceso" required></p-dropdown>
-			                           <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f0.submitted && !ngSubprocess.valid">
-				                           <i class="fa fa-close"></i>
-				                           {{'POSITION.LBL_SUBPROCESS' | translate }} {{'LBL_REQUERIDO' | translate }}
+		                           <div class="form-group col-md-6"
+		                                *hasPermission="seccion1.SUBPROCESO ? seccion1.SUBPROCESO : defaultCampo">
+			                           <div  *ngIf="position.idProceso">
+				                           <label for="subprocess">* {{'POSITION.LBL_SUBPROCESS' | translate }}</label>
+				                           <p-dropdown id="subprocess" name="subprocess" #ngSubprocess="ngModel" [options]="listSubProcess"
+				                                       [autoWidth]="false" [(ngModel)]="position.idSubProceso" required></p-dropdown>
+				                           <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f0.submitted && !ngSubprocess.valid">
+					                           <i class="fa fa-close"></i>
+					                           {{'POSITION.LBL_SUBPROCESS' | translate }} {{'LBL_REQUERIDO' | translate }}
+				                           </div>
 			                           </div>
 		                           </div>
 	                           </div>

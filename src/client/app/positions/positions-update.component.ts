@@ -180,7 +180,9 @@ export class PositionsUpdateComponent implements OnInit {
       this.route.params.subscribe( ( params: Params ) => {
          this.positionsService.get( +params[ 'id' ] ).subscribe( position => {
             this.position = position;
-            this.onChangeProcess(null);
+            if(this.position.idProceso){
+               this.onChangeProcess(null);
+            }
             if ( this.position.edad !== null ) {
                this.rangoEdad[ 0 ] = this.position.edad;
             }
