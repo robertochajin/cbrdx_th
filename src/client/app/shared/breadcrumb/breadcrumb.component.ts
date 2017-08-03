@@ -356,5 +356,9 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
       this.breadcrumbService.hideRouteRegex( '^/supplies-projection/assignations/detail/[0-9]*');
 
       this.breadcrumbService.addFriendlyNameForRoute( '/tracing-supplies', 'Seguimiento a Dotaciones' );
+
+      this.breadcrumbService.addFriendlyNameForRoute( '/accidents-incidents', 'Accidentes e Incidentes' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/accidents-incidents/plan', 'Plan de Acción' );
+      this.breadcrumbService.hideRouteRegex( '^/accidents-incidents/plan/[0-9]*' );
    }
 }

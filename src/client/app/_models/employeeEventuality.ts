@@ -54,6 +54,8 @@ export class EmployeeEventuality {
    numeroDocumento: string;
    periodoInicial: string;
    codigoNovedad: string;
+   cargo: string;
+   actividades: number = 1;
 
    constructor() {
       this.indicadorHabilitado = true;

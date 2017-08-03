@@ -13,7 +13,7 @@ import { OccupationalExamsComponent } from './occupational-exams.component';
               ],
               declarations: [ OccupationalExamsComponent ],
               bootstrap: [ OccupationalExamsComponent ],
-              providers: [  ],
+              providers: [],
               exports: [ OccupationalExamsComponent ]
            } )
 export class OccupationalExamsModule {

@@ -26,7 +26,7 @@
 			<form name="assignForm" (ngSubmit)="f.valid && assignProjection()" #f="ngForm" novalidate id="assignForm">
 				<p-panel header="{{ 'ASIGNARDOTACION.LBL_DOTACION' | translate }}">
 					<fieldset>
-					<div class="col-md-10 col-md-offset-1">
+						<div class="col-md-10 col-md-offset-1">
 					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 						
 						<div class="row row-border">
@@ -101,7 +101,7 @@
 							</div>
 						</div>
 					</div>
-					</div>
+						</div>
 					</fieldset>
 				</p-panel>
 				<p-panel *ngIf="employeeAditionalSupplies.length > 0" header="{{ 'ASIGNARDOTACION.LBL_DOTACIONADICIONAL' | translate }}">

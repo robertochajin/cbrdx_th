@@ -215,9 +215,11 @@ import { EmployeeAssignationDetailComponent } from './supplies/assign-supplies/e
 import { TracingSuppliesComponent } from './supplies/tracing-supplies/tracing-supplies.component';
 import { ConsolidatedProjectionComponent } from './supplies/supplies-projection/consolidated-projection.component';
 import { SuppliesConfirmationComponent } from './employees/supplies-employees/supplies-confirmation.component';
-import { AccidentIncidentComponent } from './accidents-e-incidents/accidents-incidents.component';
 import { OccupationalExamsComponent } from './occupational-exams/occupational-exams.component';
 import { AssessmentListComponent } from './position_assessment/assessment-list.component';
+
+import { AccidentIncidentComponent } from './accidents-incidents/accidents-incidents.component';
+import { AccidentIncidentPlanComponent } from './accidents-incidents/accidents-incidents-plan.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -539,13 +541,14 @@ const routes = [
 
    //  employees additional data
    { path: 'employees/supplies-confirmation/:id', component: SuppliesConfirmationComponent, canActivate: [ AuthGuard ] },
-   // accidentes-incidentes
-   { path: 'accidents-incidents', component: AccidentIncidentComponent },
    // examenes ocupacionales
    { path: 'occupational-exams', component: OccupationalExamsComponent }
 
 
 
+   // Accidentes e incidentes
+   { path: 'accidents-incidents', component: AccidentIncidentComponent },
+   { path: 'accidents-incidents/plan/:id', component: AccidentIncidentPlanComponent }
 ];
 
 @NgModule( {

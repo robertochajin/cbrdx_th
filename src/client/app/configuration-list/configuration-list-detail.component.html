@@ -26,19 +26,20 @@
 								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'CONFIGLIST.LBL_LISTA2' | translate}}:</label>
 								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{lista2}}</strong></label>
 								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'LBL_HABILITADO' | translate}}:</label>
-								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{configurationList.indicadorHabilitado?'Si':'No'}}</strong></label>
+								<label
+									class="col-md-3 col-sm-6 col-xs-12"><strong>{{configurationList.indicadorHabilitado?'Si':'No'}}</strong></label>
 							</div>
 						</fieldset>
 					</p-panel>
 					<p-panel header="{{ 'CONFIGLIST.LBL_RELACIONITEM' | translate }}">
 						<fieldset>
 							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listRelation"
-							             [paginator]="true" [rows]="10" [responsive]="true" >
+							             [paginator]="true" [rows]="10" [responsive]="true">
 								<p-column field="codigo" header="{{ 'CONFIGLIST.LBL_DODIGOITEM' | translate }}"
 								          [sortable]="true"></p-column>
 								<p-column field="nombre" header="{{ 'CONFIGLIST.LBL_NOMBREITEM' | translate }}"
 								          [sortable]="true"></p-column>
-								<p-column header="{{ 'LBL_HABILITADO' | translate}}"  styleClass="datatable-col-action">
+								<p-column header="{{ 'LBL_HABILITADO' | translate}}" styleClass="datatable-col-action">
 									<template let-rl="rowData" pTemplate="body">
 										{{rl.indicadorHabilitado?'Si':'No'}}
 									</template>
@@ -47,25 +48,25 @@
 						
 						</fieldset>
 					</p-panel>
-               <!-- Funcionalidad relacionada -->
-               <p-panel header="{{ 'CONFIGLIST.LBL_FUNCIONALIDAD_RELACION' | translate }}">
-                  <fieldset>
-                     <p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listRelacionFuncionalidadControl"
-                                  [paginator]="true" [rows]="10" [responsive]="true">
-                        <p-column field="menu" header="{{ 'CONFIGLIST.LBL_FUNCIONALIDAD' | translate }}"
-                                  [sortable]="true"></p-column>
-                        <p-column field="funcionalidadControl" header="{{ 'CONFIGLIST.LBL_CONTROL' | translate }}"
-                                  [sortable]="true"></p-column>
-                        <p-column header="{{ 'LBL_HABILITADO' | translate }}"
-                                  [sortable]="true" styleClass="datatable-col-center">
-                           <template let-cont="rowData" pTemplate="body">
-                              <p-inputSwitch name="indicadorHabilitado{{cont.idRelacionListaCampo}}" onLabel="Si" offLabel="No"
-                                             [(ngModel)]="cont.indicadorHabilitado"></p-inputSwitch>
-                           </template>
-                        </p-column>
-                     </p-dataTable>
-                  </fieldset>
-               </p-panel>
+					<!-- Funcionalidad relacionada -->
+					<p-panel header="{{ 'CONFIGLIST.LBL_FUNCIONALIDAD_RELACION' | translate }}">
+						<fieldset>
+							<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listRelacionFuncionalidadControl"
+							             [paginator]="true" [rows]="10" [responsive]="true">
+								<p-column field="menu" header="{{ 'CONFIGLIST.LBL_FUNCIONALIDAD' | translate }}"
+								          [sortable]="true"></p-column>
+								<p-column field="funcionalidadControl" header="{{ 'CONFIGLIST.LBL_CONTROL' | translate }}"
+								          [sortable]="true"></p-column>
+								<p-column header="{{ 'LBL_HABILITADO' | translate }}"
+								          [sortable]="true" styleClass="datatable-col-center">
+									<template let-cont="rowData" pTemplate="body">
+										<p-inputSwitch name="indicadorHabilitado{{cont.idRelacionListaCampo}}" onLabel="Si" offLabel="No"
+										               [(ngModel)]="cont.indicadorHabilitado"></p-inputSwitch>
+									</template>
+								</p-column>
+							</p-dataTable>
+						</fieldset>
+					</p-panel>
 				</div>
 			</form>
 		</div>

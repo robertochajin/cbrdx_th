@@ -64,4 +64,8 @@ export class EmployeeEventualitiesService {
       return this.authHttp.put( this.serviceURL, c ).map( ( res: Response ) => res );
    }
 
+   getAllAccidents( ) {
+      return this.authHttp.get( this.serviceURL + '/incidentesAccidentes').map( ( res: Response ) => res.json() as EmployeeEventuality[] );
+   }
+
 }
