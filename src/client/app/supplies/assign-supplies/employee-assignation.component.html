@@ -25,7 +25,8 @@
 		<div class="col-md-12">
 			<form name="assignForm" (ngSubmit)="f.valid && assignProjection()" #f="ngForm" novalidate id="assignForm">
 				<p-panel header="{{ 'ASIGNARDOTACION.LBL_DOTACION' | translate }}">
-					
+					<fieldset>
+					<div class="col-md-10 col-md-offset-1">
 					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 						
 						<div class="row row-border">
@@ -37,7 +38,7 @@
 								<strong>{{ 'ASIGNARDOTACION.LBL_TALLA' | translate }}</strong>
 							</div>
 							<div class="form-group col-md-2">
-								-
+								<strong>{{ 'ASIGNARDOTACION.LBL_ASIGNACION' | translate }}</strong>
 							</div>
 							<div *ngIf="assignState.idLista !== employessAssign.idEstado" class="form-group col-md-2">
 								<strong>{{ 'ASIGNARDOTACION.LBL_CANTIDADASIGNAR' | translate }}</strong>
@@ -100,6 +101,8 @@
 							</div>
 						</div>
 					</div>
+					</div>
+					</fieldset>
 				</p-panel>
 				<p-panel *ngIf="employeeAditionalSupplies.length > 0" header="{{ 'ASIGNARDOTACION.LBL_DOTACIONADICIONAL' | translate }}">
 					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
@@ -143,7 +146,7 @@
 						</div>
 					</div>
 				</p-panel>
-				
+				<p-panel header="Detalles Adicionales">
 				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 					<div class="row">
 						<div class="form-group col-md-4">
@@ -182,7 +185,7 @@
 					</div>
 				
 				</div>
-				
+				</p-panel>
 				<div class="row form-footer-buttons">
 					<div class="form-group col-md-12">
 						<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>

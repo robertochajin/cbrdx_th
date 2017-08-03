@@ -23,9 +23,10 @@
 	</div>
 	<div *ngIf="employessAssign.idProyeccionDotacion" class="row">
 		<div class="col-md-12">
-			<form >
+			<form>
 				<p-panel header="{{ 'ASIGNARDOTACION.LBL_DOTACION' | translate }}">
-					
+					<fieldset>
+					<div class="col-md-offset-1 col-md-10">
 					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 						
 						<div class="row row-border" >
@@ -71,6 +72,8 @@
 							</div>
 						</div>
 					</div>
+					</div>
+					</fieldset>
 				</p-panel>
 				<p-panel *ngIf="employeeAditionalSupplies.length > 0"  header="{{ 'ASIGNARDOTACION.LBL_DOTACIONADICIONAL' | translate }}">
 					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
@@ -106,14 +109,15 @@
 						</div>
 						
 						<div class="row">
-							<div class="form-group col-md-12">
+							<div class="form-group col-md-10">
 								<label >{{ 'ASIGNARDOTACION.LBL_COMENTARIOADICIONAL' | translate }}:</label>
 								<p>{{employessAssign.comentarioAdicional}}</p>
 							</div>
 						</div>
 					</div>
 				</p-panel>
-				
+
+				<p-panel header="{{'LBL_DATOSADICIONALES' | translate}}">
 				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 					<div class="row">
 						<div class="form-group col-md-2">
@@ -130,15 +134,14 @@
 						</div>
 					</div>
 					
-					<div class="row">
-						<div class="form-group col-md-12">
+					<div class="form-group row">
+						<div class="col-md-10 col-md-offset-1">
 							<label >{{ 'ASIGNARDOTACION.LBL_COMENTARIOENTREGA' | translate }}:</label>
 							<p>{{employessAssign.comentarioEntrega}}</p>
 						</div>
 					</div>
-				
 				</div>
-			
+				</p-panel>
 			</form>
 		</div>
 	</div>
