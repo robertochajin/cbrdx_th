@@ -540,7 +540,7 @@ const routes = [
    // accidentes-incidentes
    { path: 'accidents-incidents', component: AccidentIncidentComponent },
    // examenes ocupacionales
-   { path: 'occupational-exams', component: OccupationalExamsComponent },
+   { path: 'occupational-exams', component: OccupationalExamsComponent }
 
 
 
