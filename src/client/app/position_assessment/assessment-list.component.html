@@ -12,13 +12,30 @@
 		</div>
 	</div>
 	<p-dataTable emptyMessage="{{ 'POSITION.MSG_DOSEARCH' | translate }}" [value]="positions" [paginator]="true" [rows]="10"
-	             [responsive]="true" [globalFilter]="gb">
-		<p-column field="proceso" header="{{ 'POSITION.LBL_PROCESS' | translate }}" [sortable]="true"></p-column>
-		<p-column field="subProceso" header="{{ 'POSITION.LBL_SUBPROCESS' | translate }}" [sortable]="true"></p-column>
+	             styleClass="table-overflow" [responsive]="true" [globalFilter]="gb" #dt>
+		<p-column field="proceso" header="{{ 'POSITION.LBL_PROCESS' | translate }}" [sortable]="true" [filter]="true" filterMatchMode="equals">
+			<template pTemplate="filter" let-col>
+				<p-dropdown [options]="process" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+			</template>
+		</p-column>
+		<p-column field="subProceso" header="{{ 'POSITION.LBL_SUBPROCESS' | translate }}" [sortable]="true" [filter]="true" filterMatchMode="equals">
+			<template pTemplate="filter" let-col>
+				<p-dropdown [options]="subProcess" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+			</template>
+		</p-column>
 		<p-column field="codigoCargo" header="{{ 'LBL_CODIGO' | translate }}" [sortable]="true"></p-column>
 		<p-column field="cargo" header="{{ 'LBL_NOMBRE' | translate }} " [sortable]="true"></p-column>
-		<p-column field="estructuraArea" header="{{ 'POSITION.LBL_AREA' | translate }} " [sortable]="true"></p-column>
-		<p-column field="avanceValoracion" header="{{ 'POSITION.LBL_PORCENTAJEVALORACION' | translate }} " [sortable]="true"></p-column>
+		<p-column field="estructuraArea" header="{{ 'POSITION.LBL_AREA' | translate }} " [sortable]="true" [filter]="true" filterMatchMode="equals">
+			<template pTemplate="filter" let-col>
+				<p-dropdown [options]="areaTypes" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+			</template>
+		</p-column>
+		<p-column field="avanceValoracion" header="{{ 'POSITION.LBL_PORCENTAJEVALORACION' | translate }} " [sortable]="true" [filter]="true" >
+			<template pTemplate="filter" let-col>
+				<p-dropdown [options]="percent" [style]="{'width':'100%'}" styleClass="ui-column-filter"
+				            (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"></p-dropdown>
+			</template>
+		</p-column>
 		<p-column field="indHab" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true" styleClass="datatable-col-center">
 			<template let-position="rowData" pTemplate="body">
 				<p-checkbox [(ngModel)]="position.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>

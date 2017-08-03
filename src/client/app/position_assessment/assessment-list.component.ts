@@ -22,6 +22,7 @@ export class AssessmentListComponent implements OnInit {
    percent: SelectItem[] = [];
    positions: Positions[] = [];
    busqueda: string;
+   percentFilter: number;
 
    constructor( private positionsService: PositionsService,
       private router: Router,
@@ -38,29 +39,30 @@ export class AssessmentListComponent implements OnInit {
       this.tipoDeAreaService.getlistAreas().subscribe( res => {
          this.areaTypes.push( { label: 'Seleccione', value: null } );
          for ( let dp of res ) {
-            this.areaTypes.push( {
-                                    label: dp.estructuraArea,
-                                    value: dp.idEstructuraArea
-                                 } );
+            this.areaTypes.push( { label: dp.estructuraArea, value: dp.estructuraArea} );
          }
       } );
 
       this.listaService.getMasterDetails( 'ListasProcesos' ).subscribe( res => {
          this.process.push( { label: 'Seleccione', value: null } );
-         res.map( ( s: ListaItem ) => this.process.push( { label: s.nombre, value: s.idLista } ) );
+         res.map( ( s: ListaItem ) => this.process.push( { label: s.nombre, value: s.nombre } ) );
       } );
 
       this.listaService.getMasterDetails( 'ListasSubProcesos' ).subscribe( res => {
          this.subProcess.push( { label: 'Seleccione', value: null } );
-         res.map( ( s: ListaItem ) => this.subProcess.push( { label: s.nombre, value: s.idLista } ) );
+         res.map( ( s: ListaItem ) => this.subProcess.push( { label: s.nombre, value: s.nombre } ) );
       } );
 
       this.percent.push( { label: 'Todos', value: null } );
-      this.percent.push( { label: 'Completos', value: 'completos' } );
-      this.percent.push( { label: 'Incompleto', value: 'incompletos' } );
+      this.percent.push( { label: 'Completos', value: '100%' } );
+      // this.percent.push( { label: 'Incompleto', value: 'incompletos' } );
+      // Esta opción no la soporta la versión de primeNg que usamos actualmente 3/08/2017
 
       //Consultamos TODOS los cargos habilitados
       this.positionsService.getListPositions().subscribe(list => {
+         list.map( (p: Positions) => {
+            p.avanceValoracion = p.idCargo + '%';
+         });
          this.positions  = list;
       });
 
