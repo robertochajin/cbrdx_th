@@ -41,6 +41,7 @@ export class AccidentIncidentPlanComponent implements OnInit {
 
    plansAttachments: EmployeeEventualityPlansAttachments = new EmployeeEventualityPlansAttachments();
    listplansAttachments: EmployeeEventualityPlansAttachments[] = [];
+   listplansAttachmentsAnswer: EmployeeEventualityPlansAttachments[] = [];
 
    employeeEventualityAttachment: EmployeeEventualityAttachment = new EmployeeEventualityAttachment();
    listAttachment: EmployeeEventualityAttachment[] = [];
@@ -51,6 +52,7 @@ export class AccidentIncidentPlanComponent implements OnInit {
    es: any;
    estadoTerminado: number;
    saveAttachmnet: boolean = true;
+   formAnswer: boolean = false;
 
    // -----para adjuntar archivos-----
    svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
@@ -181,7 +183,8 @@ export class AccidentIncidentPlanComponent implements OnInit {
       this.listplansAttachments = [];
       this.employeeEventualitiesPlansAttachmentService.getByPlan( this.employeeEventualityPlan.idPlanAccionNovedadAccidente )
       .subscribe( rest => {
-         this.listplansAttachments = rest;
+         this.listplansAttachments = rest.filter( s => s.indicadorRespuesta === false );
+         this.listplansAttachmentsAnswer = rest.filter( s => s.indicadorRespuesta === true );
       } );
    }
 
@@ -207,6 +210,12 @@ export class AccidentIncidentPlanComponent implements OnInit {
       this.changeDate();
       this.getPlanAttachment();
       this.showForm = true;
+   }
+
+   answer( s: EmployeeEventualityPlans ) {
+      this.employeeEventualityPlan = s;
+      this.getPlanAttachment();
+      this.formAnswer = true;
    }
 
    inputAttachment( event: any ) {
@@ -237,7 +246,16 @@ export class AccidentIncidentPlanComponent implements OnInit {
 
    onBeforeSend( event: any ) {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "', 'ruta':" +
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "'," +
+                " 'indicadorRespuesta' :  false', 'ruta':" +
+                " '/Gestionamos/Terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "/PlanAcciones' }";
+      event.formData.append( 'obj', obj.toString() );
+   }
+
+   onBeforeSendAnswer( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo +
+                "','indicadorRespuesta' :  true, 'ruta':" +
                 " '/Gestionamos/Terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "/PlanAcciones' }";
       event.formData.append( 'obj', obj.toString() );
    }
@@ -270,6 +288,21 @@ export class AccidentIncidentPlanComponent implements OnInit {
                                            } );
       } else {
          this.showForm = false;
+      }
+   }
+
+   goBackAnswer( fDirty: boolean ): void {
+      if ( fDirty ) {
+         this.confirmationService.confirm( {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this.router.navigate( [ 'accidents-incidents' ] );
+                                              }
+                                           } );
+      } else {
+         this.router.navigate( [ 'accidents-incidents' ] );
       }
    }
 
