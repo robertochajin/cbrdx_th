@@ -216,6 +216,7 @@ import { TracingSuppliesComponent } from './supplies/tracing-supplies/tracing-su
 import { ConsolidatedProjectionComponent } from './supplies/supplies-projection/consolidated-projection.component';
 import { SuppliesConfirmationComponent } from './employees/supplies-employees/supplies-confirmation.component';
 import { OccupationalExamsComponent } from './occupational-exams/occupational-exams.component';
+import { AssessmentListComponent } from './position_assessment/assessment-list.component';
 
 import { AccidentIncidentComponent } from './accidents-incidents/accidents-incidents.component';
 import { AccidentIncidentPlanComponent } from './accidents-incidents/accidents-incidents-plan.component';
@@ -424,6 +425,7 @@ const routes = [
    { path: 'position-absence/:idCargo', component: AbsenceComponent, canActivate: [ AuthGuard ] },
    { path: 'position-activities/:idCargo', component: PositionAuthoritiesComponent, canActivate: [ AuthGuard ] },
    { path: 'position/requirement/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
+   { path: 'position/assessment', component: AssessmentListComponent },
 
    // Administracion
    { path: 'menus', component: MenuManagerComponent, canActivate: [ AuthGuard ] },

@@ -3,6 +3,7 @@ import { Response } from '@angular/http';
 import { Risk } from '../_models/position-risks';
 import { Exam } from '../_models/position-exam';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
+import { RiskType } from '../_models/riskType';
 
 @Injectable()
 export class RiskService {
@@ -21,7 +22,7 @@ export class RiskService {
    }
 
    getTypeRisk() {
-      return this.authHttp.get( this.serviceURL + 'riesgosTipos' ).map( ( res: Response ) => res.json() );
+      return this.authHttp.get( this.serviceURL + 'riesgosTipos' ).map( ( res: Response ) => res.json() as RiskType[] );
    }
 
    getExamByIdCargo( id: number ) {
@@ -50,6 +51,13 @@ export class RiskService {
 
    getRiskByIdCargo( id: number ) {
       return this.authHttp.get( this.serviceURL + 'cargosRiesgos/buscarCargo/' + id ).map( ( res: Response ) => res.json() as Risk[] );
+   }
+
+   getRiskByTypeAndPosition( idCargo: number, idRiesgoTipo: number ) {
+      return this.authHttp.get( this.serviceURL + 'PORDEFINIR/' + idCargo + '/' + idRiesgoTipo ).map( ( res: Response ) => {
+         return res.json() as Risk[]
+   } );
+      // return this.authHttp.get( this.serviceURL + 'cargosRiesgos/buscarCargo/' + idRiesgoTipo ).map( ( res: Response ) => res.json() as Risk[] );
    }
 
    add( c: Risk ) {

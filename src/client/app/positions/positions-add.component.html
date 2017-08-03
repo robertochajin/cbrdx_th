@@ -100,6 +100,31 @@
                                     </div>
                                  </div>
                               </div>
+	
+	                           <div class="row">
+		                           <div class="form-group col-md-6" *hasPermission="seccion1.PROCESO ? seccion1.PROCESO : defaultCampo">
+			                           <label for="process">* {{'POSITION.LBL_PROCESS' | translate }}</label>
+			                           <p-dropdown id="process" name="process" #ngProcess="ngModel" [options]="listProcess" [autoWidth]="false"
+			                                       (onChange)="onChangeProcess($event)" [(ngModel)]="position.idProceso" required></p-dropdown>
+			                           <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f0.submitted && !ngProcess.valid">
+				                           <i class="fa fa-close"></i>
+				                           {{'POSITION.LBL_PROCESS' | translate }} {{'LBL_REQUERIDO' | translate }}
+			                           </div>
+		                           </div>
+		                           <div class="form-group col-md-6"
+		                                *hasPermission="seccion1.SUBPROCESO ? seccion1.SUBPROCESO : defaultCampo">
+			                           <div  *ngIf="position.idProceso">
+				                           <label for="subprocess">* {{'POSITION.LBL_SUBPROCESS' | translate }}</label>
+				                           <p-dropdown id="subprocess" name="subprocess" #ngSubprocess="ngModel" [options]="listSubProcess"
+				                                       [autoWidth]="false" [(ngModel)]="position.idSubProceso" required></p-dropdown>
+				                           <div class="ui-message ui-messages-error ui-corner-all" *ngIf="f0.submitted && !ngSubprocess.valid">
+					                           <i class="fa fa-close"></i>
+					                           {{'POSITION.LBL_SUBPROCESS' | translate }} {{'LBL_REQUERIDO' | translate }}
+				                           </div>
+			                           </div>
+		                           </div>
+	                           </div>
+	                           
                               <div class="row" *ngIf="position.paso == 16">
                                  <div class="form-group col-md-6">
                                     <label for="idEstado">{{ 'POSITION.LBL_ESTADO' | translate }} </label>

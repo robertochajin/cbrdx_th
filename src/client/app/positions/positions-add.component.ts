@@ -16,7 +16,7 @@ import { PersonnelRequirementServices } from '../_services/personnelRequirement.
 
 @Component( {
                moduleId: module.id,
-               selector: 'positions-form',
+                  selector: 'positions-form',
                templateUrl: 'positions-add.component.html',
                providers: [ ConfirmationService ]
             } )
@@ -35,6 +35,8 @@ export class PositionsAddComponent implements OnInit  {
    idRequirement = 0;
    requirement: PersonnelRequirement = new PersonnelRequirement();
    rangoEdad:number[];
+   listProcess: SelectItem[] = [];
+   listSubProcess: SelectItem[] = [];
 
    constructor( private positionsService: PositionsService,
       private router: Router,
@@ -61,6 +63,11 @@ export class PositionsAddComponent implements OnInit  {
       this.listaService.getMasterDetails( 'ListasNivelesEstudios' ).subscribe( res => {
          this.listStudies.push( { label: 'Seleccione', value: null } );
          res.map( ( s: ListaItem ) => this.listStudies.push( { label: s.nombre, value: s.idLista } ) );
+      } );
+      this.listaService.getMasterDetails( 'ListasProcesos' ).subscribe( res => {
+         this.listProcess.push( { label: 'Seleccione', value: null } );
+         this.listSubProcess.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => this.listProcess.push( { label: s.nombre, value: s.idLista } ) );
       } );
       this.tipoDeAreaService.getlistAreas().subscribe( res => {
          this.areaTypes.push( { label: 'Seleccione', value: null } );
@@ -149,6 +156,14 @@ export class PositionsAddComponent implements OnInit  {
       if ( this.position.personaACargoInd !== null ) {
          this.position.personaACargoInd = Number( numeroi.replace( /[^0-9]/g, '' ) );
       }
+   }
+
+   onChangeProcess( event: any ) {
+      this.listSubProcess = [];
+      this.listaService.getMasterDetailsByDependency( 'ListasProcesos', this.position.idProceso, 'SUBPROCESO' ).subscribe( res => {
+         this.listSubProcess.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => this.listSubProcess.push( { label: s.nombre, value: s.idLista } ) );
+      } );
    }
 
 }
