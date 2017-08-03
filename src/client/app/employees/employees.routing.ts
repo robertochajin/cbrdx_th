@@ -14,11 +14,11 @@ const employeesRoutes: Routes = [
       path: '',
       component: EmployeesComponent,
       children: [
-         { path: 'employees/add', component: EmployeesAddComponent, canActivate: [ AuthGuard ] },
-         { path: 'employees/view/detail/:id', component: EmployeesViewDetailComponent, canActivate: [ AuthGuard ] }, // solo ver
-         { path: 'employees/detail/:id', component: EmployeesDetailComponent, canActivate: [ AuthGuard ] }, // ver editar
-         { path: 'employees/update/:id', component: EmployeesUpdateComponent, canActivate: [ AuthGuard ] }, // ver editar
-         { path: 'employees/curriculum/:id', component: EmployeesCurriculumVitaeComponent, canActivate: [ AuthGuard ] }, // hoja de vida
+         { path: '/employees/add', component: EmployeesAddComponent, canActivate: [ AuthGuard ] },
+         { path: '/employees/view/detail/:id', component: EmployeesViewDetailComponent, canActivate: [ AuthGuard ] }, // solo ver
+         { path: '/employees/detail/:id', component: EmployeesDetailComponent, canActivate: [ AuthGuard ] }, // ver editar
+         { path: '/employees/update/:id', component: EmployeesUpdateComponent, canActivate: [ AuthGuard ] }, // ver editar
+         { path: '/employees/curriculum/:id', component: EmployeesCurriculumVitaeComponent, canActivate: [ AuthGuard ] }, // hoja de vida
       ]
    }
 ];

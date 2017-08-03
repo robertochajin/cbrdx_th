@@ -1,5 +1,5 @@
 import { ModuleWithProviders  } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 // historia de employees
 // import { EmployeesDetailComponent } from './employees/employees-detail.component';
 // import { EmployeesAddComponent } from './employees/employees-add.component';
@@ -216,8 +216,13 @@ import { TracingSuppliesComponent } from './supplies/tracing-supplies/tracing-su
 import { ConsolidatedProjectionComponent } from './supplies/supplies-projection/consolidated-projection.component';
 import { SuppliesConfirmationComponent } from './employees/supplies-employees/supplies-confirmation.component';
 
-const routes = [
+const routes: Routes = [
+
+   // Login
    { path: '', redirectTo: '/login', pathMatch: 'full' },
+   { path: 'login', component: LoginComponent },
+   { path: 'login/:token', component: LoginComponent },
+   { path: 'cambioContrasena', component: CambioContrasenaComponent },
 
    // historia de employees
    {
@@ -295,10 +300,7 @@ const routes = [
    //  employees additional data
    { path: 'employees-additional-data/:id', component: EmployeesAdditionalDataComponent, canActivate: [ AuthGuard ] },
 
-   // Login
-   { path: 'login', component: LoginComponent },
-   { path: 'login/:token', component: LoginComponent },
-   { path: 'cambioContrasena', component: CambioContrasenaComponent },
+   // Dashboard
    { path: 'dashboard', component: DashboardComponent, canActivate: [ AuthGuard ] },
    { path: 'widgets', component: WidgetsComponent, canActivate: [ AuthGuard ] },
 
