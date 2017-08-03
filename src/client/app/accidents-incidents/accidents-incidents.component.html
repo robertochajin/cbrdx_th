@@ -48,10 +48,10 @@
 	<p-column field="actividades" header="{{'ACCIDENTINCIDENT.LBL_ACTIVIDADES' | translate }}" styleClass="datatable-col-action">
 		<button pButton type="button" (click)="count()" icon="fa-check"></button>
 		<template let-datos="rowData" pTemplate="body">
-			<span class="label label-default" *ngIf="datos.actividad === 1"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
-			<span class="label label-primary" *ngIf="datos.actividad === 2"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
-			<span class="label label-success" *ngIf="datos.actividad === 3"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
-			<span class="label label-danger" *ngIf="datos.actividad === 4"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+			<span class="label label-default" *ngIf="datos.actividades === 1"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+			<span class="label label-primary" *ngIf="datos.actividades === 2"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+			<span class="label label-success" *ngIf="datos.actividades === 3"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+			<span class="label label-danger" *ngIf="datos.actividades === 4"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
 		</template>
 	</p-column>
 	<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">

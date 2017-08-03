@@ -6,6 +6,8 @@ import { FormSharedModule } from '../shared/form-shared.module';
 import { AccidentIncidentComponent } from './accidents-incidents.component';
 import { EmployeeEventualitiesService } from '../_services/employees-eventualities.service';
 import { AccidentIncidentPlanComponent } from './accidents-incidents-plan.component';
+import { EmployeeEventualitiesPlansService } from '../_services/employeeEventualitiesPlans.service';
+import { EmployeeEventualitiesAttachmentService } from '../_services/employees-eventualities-attachment.service';
 
 @NgModule( {
               imports: [
@@ -14,7 +16,7 @@ import { AccidentIncidentPlanComponent } from './accidents-incidents-plan.compon
               ],
               declarations: [ AccidentIncidentComponent, AccidentIncidentPlanComponent ],
               bootstrap: [ AccidentIncidentComponent ],
-              providers: [ EmployeeEventualitiesService ],
+              providers: [ EmployeeEventualitiesService, EmployeeEventualitiesPlansService, EmployeeEventualitiesAttachmentService ],
               exports: [ AccidentIncidentComponent ]
            } )
 export class AccidentIncidentModule {

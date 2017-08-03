@@ -13,7 +13,7 @@
 				<div class="clearfix card-header">
 					<div class="col-md-4">
 						<div class="thumbnail img-responsive" *ngIf="employee.imagen">
-							<img src="{{svcThUrl}}/file/{{employee.imagen }}" alt="...">
+							<img src="{{svcThUrlImagen}}/file/{{employee.imagen }}" alt="...">
 						</div>
 					</div>
 					<div class="col-md-8">
@@ -52,6 +52,17 @@
 						<label class="col-md-9 col-sm-9 col-xs-12"><strong>{{employeeEventuality.descripcion}}</strong></label>
 					</div>
 				</div>
+				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listAttachment" [paginator]="true" [rows]="10"
+				             [responsive]="true">
+					<p-column field="nombreArchivo" header="{{'LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
+					<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+						<template let-atta="rowData" pTemplate="body">
+							<button type="button" icon="fa-download" class="ui-button-success" data-toggle="tooltip"
+							        title="{{'BTN_DOWNLOAD' | translate}}"
+							        pButton (click)="downloadFile(atta.idAdjunto)"></button>
+						</template>
+					</p-column>
+				</p-dataTable>
 			</p-panel>
 		</div>
 		<div class="ui-grid-col-7">
@@ -73,16 +84,18 @@
 					
 					</div>
 				</div>
-				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listAccidentesIncidents" [paginator]="true" [rows]="10"
+				<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listEmployeeEventualityPlan" [paginator]="true"
+				             [rows]="10"
 				             [responsive]="true" [globalFilter]="gb" #dt>
-					<p-column field="nombreTercero" header="{{'ACCIDENTINCIDENT.LBL_ACTIVIDAD' | translate }}" [sortable]="true"></p-column>
-					<p-column field="cargo" header="{{'ACCIDENTINCIDENT.LBL_DIRIGIDO' | translate }}" [sortable]="true"></p-column>
-					<p-column field="estructuraArea" header="{{'ACCIDENTINCIDENT.LBL_FECHA' | translate }}" [sortable]="true"></p-column>
-					<p-column field="fechaInicio" header="{{'ACCIDENTINCIDENT.LBL_COMPLETADO' | translate }}" [sortable]="true"></p-column>
-					<p-column field="tipoNovedad" header="{{'ACCIDENTINCIDENT.LBL_TIPONOVEDAD' | translate }}" [sortable]="true"></p-column>
-					<p-column field="estadoNovedad" header="{{'ACCIDENTINCIDENT.LBL_ESTADO' | translate }}" [sortable]="true"></p-column>
+					<p-column field="actividad" header="{{'ACCIDENTINCIDENT.LBL_ACTIVIDAD' | translate }}" [sortable]="true"></p-column>
+					<p-column field="responsable" header="{{'ACCIDENTINCIDENT.LBL_DIRIGIDO' | translate }}" [sortable]="true"></p-column>
+					<p-column field="fechaLimite" header="{{'ACCIDENTINCIDENT.LBL_FECHA' | translate }}" [sortable]="true"></p-column>
+					<p-column field="estadoPlanAccion" header="{{'ACCIDENTINCIDENT.LBL_ESTADO' | translate }}" [sortable]="true"></p-column>
 					<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 						<template let-datos="rowData" pTemplate="body">
+							<button type="button" icon="fa-pencil" class="ui-button-success" data-toggle="tooltip"
+							        title="{{'BTN_EDITAR' | translate}}"
+							        pButton (click)="update(datos)"></button>
 							<button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip"
 							        title="{{'BTN_VISUALIZAR' | translate}}"
 							        pButton (click)="detail(datos)"></button>
@@ -102,7 +115,7 @@
 								          maxlength="500" (keyup)="capitalize($event)"></textarea>
 								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !NGactividad.valid">
 									<i class="fa fa-close"></i>
-									{{'EMPLOYEENOVELTY.LBL_DESCRIPCION' | translate }} {{'LBL_REQUERIDO' | translate }}
+									{{'ACCIDENTINCIDENT.LBL_ACTIVIDAD' | translate }} {{'LBL_REQUERIDO' | translate }}
 								</div>
 							</div>
 						</div>
@@ -115,20 +128,20 @@
 								            #idResponsable="ngModel"  required="true" filter="filter"
 								></p-dropdown>
 								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !idResponsable.valid">
-									<i class="fa fa-close"></i>{{ 'EMPLOYEENOVELTY.LBL_TIPONOVEDAD' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+									<i class="fa fa-close"></i>{{ 'ACCIDENTINCIDENT.LBL_RESPONSABLE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 								</div>
 							</div>
 						</div>
 						<div class="ui-grid-row">
-							<div class="ui-grid-col-12" >
+							<div class="ui-grid-col-5">
 								<label for="limitDate">{{ 'ACCIDENTINCIDENT.LBL_FECHALIMITE' | translate }}</label>
 								<p-calendar id="limitDate" name="limitDate" [locale]="es" [showIcon]="true"
 								            [minDate]="today" dateFormat="yy'-'mm'-'dd" readonlyInput="readonlyInput"
 								            dataType="date" #NGlimitDate="ngModel" [required]="true"
-								            [(ngModel)]="employeeEventualityPlan.fechaLimite"
+								            [(ngModel)]="employeeEventualityPlan.fechaLimite" (onSelect)="changeDate($event)"
 								></p-calendar>
 								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !NGlimitDate.valid">
-									<i class="fa fa-close"></i>{{ 'EMPLOYEENOVELTY.LBL_FECHALIMITE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+									<i class="fa fa-close"></i>{{ 'ACCIDENTINCIDENT.LBL_FECHALIMITE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
 								</div>
 							</div>
 						</div>
@@ -141,25 +154,75 @@
 								            #idEncargado="ngModel"  required="true" filter="filter"
 								></p-dropdown>
 								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !idEncargado.valid">
-									<i class="fa fa-close"></i>{{ 'EMPLOYEENOVELTY.LBL_ENCARGADOVERIFICAR' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+									<i class="fa fa-close"></i>{{ 'ACCIDENTINCIDENT.LBL_ENCARGADOVERIFICAR' | translate }} {{ 'LBL_REQUERIDO' |
+									translate }}
 								</div>
 							</div>
 						</div>
 						<div class="ui-grid-row">
-							<div class="ui-grid-col-12" >
+							<div class="ui-grid-col-5">
 								<label for="fechaVerificacion">{{ 'ACCIDENTINCIDENT.LBL_FECHAVERIFICACION' | translate }}</label>
 								<p-calendar id="fechaVerificacion" name="fechaVerificacion" [locale]="es" [showIcon]="true"
-								            [minDate]="employeeEventualityPlan.fechaLimite" dateFormat="yy'-'mm'-'dd" readonlyInput="readonlyInput"
+								            [minDate]="minDate" dateFormat="yy'-'mm'-'dd" readonlyInput="readonlyInput"
 								            dataType="date" #NGfechaVerificacion="ngModel" [required]="true"
 								            [(ngModel)]="employeeEventualityPlan.fechaVerificacion"
 								></p-calendar>
 								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !NGfechaVerificacion.valid">
-									<i class="fa fa-close"></i>{{ 'EMPLOYEENOVELTY.LBL_FECHAVERIFICACION' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+									<i class="fa fa-close"></i>{{ 'ACCIDENTINCIDENT.LBL_FECHAVERIFICACION' | translate }} {{ 'LBL_REQUERIDO' |
+									translate }}
 								</div>
 							</div>
 						</div>
+						<div class="ui-grid-row form-footer-buttons">
+							<div class="ui-grid-col-3"></div>
+							<div class="ui-grid-col-2">
+								<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+							</div>
+							<div class="ui-grid-col-3">
+								<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+							</div>
+							<div class="ui-grid-col-4"></div>
+						</div>
 					</div>
 				</form>
+				<div *ngIf="employeeEventualityPlan.idPlanAccionNovedadAccidente > 0">
+					<form (ngSubmit)="fa.valid && onSubmitAttachment()" #fa="ngForm" novalidate id="formularioAdjuntos" *ngIf="saveAttachmnet">
+						<div class="ui-grid-row">
+							<div class="col-md-4">
+								<label for="nombreAd">{{ 'LBL_NOMBRE' | translate }}</label>
+								<input id="nombreAd" name="nombreAd" #nombre="ngModel" pInputText type="text"
+								       (keyup)="inputAttachment($event)" required maxlength="50"
+								       [(ngModel)]="dataUploadArchivo"/>
+								<div class="ui-message ui-messages-error ui-corner-all"
+								     *ngIf="fa.submitted && !nombre.valid">
+									<i class="fa fa-close"></i>
+									{{ 'LBL_NOMBRE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+								</div>
+							</div>
+							<div class="col-md-4">
+								<label>{{'LBL_ADJUNTAR' | translate}} </label>
+								<p-fileUpload name="file" url="{{svcThUrl}}" auto="true" class="upload-avatar"
+								              chooseLabel="{{'LBL_ADJUNTAR' | translate}}"
+								              (onBeforeSend)="onBeforeSend($event)"
+								              (onSelect)="onSelect($event, $event.files)"
+								              (onUpload)="uploadingOk($event)" [disabled]="dataUploadArchivo===null || dataUploadArchivo===''"
+								              maxFileSize="{{fsize}}" accept="{{ftype}}">
+								</p-fileUpload>
+							</div>
+						</div>
+					</form>
+					<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listAttachment" [paginator]="true" [rows]="10"
+					             [responsive]="true">
+						<p-column field="nombreArchivo" header="{{'LBL_NOMBRE' | translate }}" [sortable]="true"></p-column>
+						<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+							<template let-atta="rowData" pTemplate="body">
+								<button type="button" icon="fa-download" class="ui-button-success" data-toggle="tooltip"
+								        title="{{'BTN_DOWNLOAD' | translate}}"
+								        pButton (click)="downloadFile(atta.idAdjunto)"></button>
+							</template>
+						</p-column>
+					</p-dataTable>
+				</div>
 			</div>
 		</div>
 	</div>

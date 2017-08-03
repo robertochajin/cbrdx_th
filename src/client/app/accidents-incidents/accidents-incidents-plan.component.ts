@@ -11,6 +11,11 @@ import { Employee } from '../_models/employees';
 import { EmployeesService } from '../_services/employees.service';
 import { EmployeeEventualityPlans } from '../_models/employeeEventualitiesPlans';
 import { EmployeeEventualityPlansAttachments } from '../_models/employeeEventualitiesPlansAttachment';
+import { AdjuntosService } from '../_services/adjuntos.service';
+import { EmployeeEventualityAttachment } from '../_models/employeeEventualityAttachment';
+import { EmployeeEventualitiesAttachmentService } from '../_services/employees-eventualities-attachment.service';
+import { ConstanteService } from '../_services/constante.service';
+import { EmployeeEventualitiesPlansService } from '../_services/employeeEventualitiesPlans.service';
 
 @Component( {
                moduleId: module.id,
@@ -21,27 +26,55 @@ import { EmployeeEventualityPlansAttachments } from '../_models/employeeEventual
 
 export class AccidentIncidentPlanComponent implements OnInit {
    employee: Employee = new Employee();
-   listEmployees: Employee[] = [];
+   listEmployees: SelectItem[] = [];
    msg: Message;
    busqueda: string;
    id: number;
    employeeEventuality: EmployeeEventuality = new EmployeeEventuality();
    employeeEventualityPlan: EmployeeEventualityPlans = new EmployeeEventualityPlans();
+   employeeEventualityAttachment: EmployeeEventualityAttachment = new EmployeeEventualityAttachment();
    listEmployeeEventualityPlan: EmployeeEventualityPlans[] = [];
    plansAttachments: EmployeeEventualityPlansAttachments[] = [];
-   svcThUrl = '<%= SVC_TH_URL %>/api/upload';
+   listAttachment: EmployeeEventualityAttachment[] = [];
+   svcThUrlImagen = '<%= SVC_TH_URL %>/api/upload';
    showForm: boolean = false;
    today: Date;
+   minDate: Date;
    es: any;
+   saveAttachmnet: boolean = true;
+
+   // -----para adjuntar archivos-----
+   svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
+   dataUploadArchivo: any = '';
+   dataUploadUsuario: any = '';
+   usuarioLogueado: any;
+   jwtHelper: JwtHelper = new JwtHelper();
+   fsize: number = 50000000;
+   ftype: string = '';
 
    constructor( private router: Router,
       private route: ActivatedRoute,
       private location: Location,
       private confirmationService: ConfirmationService,
       private employeeEventualitiesService: EmployeeEventualitiesService,
+      private employeeEventualitiesPlansService: EmployeeEventualitiesPlansService,
+      private employeeEventualitiesAttachmentService: EmployeeEventualitiesAttachmentService,
       private employeeService: EmployeesService,
+      private adjuntosService: AdjuntosService,
+      private constanteService: ConstanteService,
       private navService: NavService ) {
-
+      let token = localStorage.getItem( 'token' );
+      this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+      this.constanteService.getByCode( 'FTYPE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.ftype = data.valor;
+         }
+      } );
+      this.constanteService.getByCode( 'FSIZE' ).subscribe( data => {
+         if ( data.valor ) {
+            this.fsize = Number( data.valor );
+         }
+      } );
       this.route.params.subscribe( params => {
          this.id = +params[ 'id' ];
          if ( Number( this.id ) > 0 ) {
@@ -49,13 +82,21 @@ export class AccidentIncidentPlanComponent implements OnInit {
                res => {
                   this.employeeEventuality = res;
                   this.getTercero();
+                  this.getAttachment();
+                  this.getPlans();
                } );
          }
       } );
    }
 
    ngOnInit() {
-
+      this.employeeService.getEmployeesUsers().subscribe( res => {
+         this.listEmployees.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: Employee ) => {
+            this.listEmployees.push(
+               { label: s.primerNombre + ' ' + s.segundoNombre + ' ' + s.primerApellido + ' ' + s.segundoApellido, value: s.idTercero } );
+         } );
+      } );
       this.es = {
          firstDayOfWeek: 1,
          dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
@@ -67,9 +108,30 @@ export class AccidentIncidentPlanComponent implements OnInit {
          monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ]
       };
       this.today = new Date();
+      this.initDate();
    }
 
    onSubmit() {
+      if ( this.employeeEventualityPlan.idPlanAccionNovedadAccidente === null ||
+           this.employeeEventualityPlan.idPlanAccionNovedadAccidente === undefined ||
+           this.employeeEventualityPlan.idPlanAccionNovedadAccidente === 0 ) {
+         this.employeeEventualityPlan.idTerceroNovedad = this.id;
+         this.employeeEventualitiesPlansService.add( this.employeeEventualityPlan ).subscribe( res => {
+            this.employeeEventualityPlan = res;
+            this.getPlans();
+            this.navService.setMesage( 1, this.msg );
+         }, error => {
+            this.navService.setMesage( 3, this.msg );
+         } );
+      } else {
+         this.employeeEventualitiesPlansService.update( this.employeeEventualityPlan ).subscribe( res => {
+            this.navService.setMesage( 2, this.msg );
+            this.showForm = false;
+            this.getPlans();
+         }, error => {
+            this.navService.setMesage( 3, this.msg );
+         } );
+      }
    }
 
    getTercero() {
@@ -83,8 +145,129 @@ export class AccidentIncidentPlanComponent implements OnInit {
          } );
    }
 
+   getAttachment() {
+      this.employeeEventualitiesAttachmentService.getAllByIdEventuality( this.employeeEventuality.idTerceroNovedad )
+      .subscribe( rest => {
+         this.listAttachment = rest;
+      } );
+   }
+
+   onSubmitAttachment() {
+   }
+
+   getPlans() {
+      this.employeeEventualitiesPlansService.getByEventuality( this.employeeEventuality.idTerceroNovedad )
+      .subscribe( rest => {
+         this.listEmployeeEventualityPlan = rest;
+      } );
+   }
+
    add(){
+      this.employeeEventualityPlan = new EmployeeEventualityPlans();
+      this.initDate();
       this.showForm = true;
+   }
+
+   update( s: EmployeeEventualityPlans ) {
+      this.employeeEventualityPlan = s;
+      // this.changeDate();
+      this.showForm = true;
+   }
+
+   inputAttachment( event: any ) {
+      let input = event.target.value;
+      if ( input !== ' ' ) {
+         event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+      } else {
+         this.dataUploadArchivo = '';
+      }
+   }
+
+   uploadingOk( event: any ) {
+      let respuesta = JSON.parse( event.xhr.response );
+      if ( respuesta.idAdjunto != null || respuesta.idAdjunto != undefined ) {
+         this.saveAttachmnet = false;
+         this.employeeEventualityAttachment.idTerceroNovedad = this.employeeEventuality.idTerceroNovedad;
+         this.employeeEventualityAttachment.idAdjunto = respuesta.idAdjunto;
+         this.employeeEventualitiesAttachmentService.add( this.employeeEventualityAttachment ).subscribe( data => {
+            this.dataUploadArchivo = '';
+            this.listAttachment = [];
+            this.employeeEventualitiesAttachmentService.getAllByIdEventuality( this.employeeEventuality.idTerceroNovedad )
+            .subscribe( rest => {
+               this.listAttachment = rest;
+            } );
+            this.saveAttachmnet = true;
+         }, error => {
+            this.saveAttachmnet = true;
+         } );
+      }
+   }
+
+   onBeforeSend( event: any ) {
+      event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "', 'ruta':" +
+                " '/Gestionamos/Terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "/Novedades' }";
+      event.formData.append( 'obj', obj.toString() );
+   }
+
+   onSelect( event: any, file: any ) {
+      this.dataUploadUsuario = this.usuarioLogueado.usuario.idUsuario;
+   }
+
+   uploadAgain( rta: boolean ) {
+      this.employeeEventualityAttachment.idAdjunto = null;
+   }
+
+   downloadFile( id: number ) {
+      this.adjuntosService.downloadFile( id ).subscribe( res => {
+         this.adjuntosService.getFileName( id ).subscribe( adj => {
+            saveAs( res, adj.nombreArchivo );
+         } );
+      } );
+   }
+
+   goBack( fDirty: boolean ): void {
+      if ( fDirty ) {
+         this.confirmationService.confirm( {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this.showForm = false;
+                                              }
+                                           } );
+      } else {
+         this.showForm = false;
+      }
+   }
+
+   capitalize( event: any ) {
+      let input = event.target.value;
+      if ( input.length > 0 ) {
+         if ( input.substring( 0, 1 ) === ' ' ) {
+            input = input.replace( ' ', '' );
+         }
+         event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
+      }
+   }
+
+   changeDate() {
+      let d = new Date( this.employeeEventualityPlan.fechaLimite );
+      let month = d.getMonth();
+      let year = d.getFullYear();
+      this.minDate = new Date();
+      this.minDate.setMonth( month );
+      this.minDate.setFullYear( year );
+   }
+
+   initDate() {
+      let d = new Date();
+      let month = d.getMonth();
+      let year = d.getFullYear();
+      this.minDate = new Date();
+      this.minDate.setMonth( month );
+      this.minDate.setFullYear( year );
+
    }
 
 }
