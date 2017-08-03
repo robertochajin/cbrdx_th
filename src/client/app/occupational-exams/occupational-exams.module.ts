@@ -3,18 +3,19 @@ import 'rxjs/add/operator/switchMap';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { FormSharedModule } from '../shared/form-shared.module';
-import { AccidentIncidentComponent } from './accidents-incidents.component';
+import { OccupationalExamsComponent } from './occupational-exams.component';
 
 @NgModule( {
               imports: [
                  SharedModule,
-                 FormSharedModule,
+                 FormSharedModule
+
               ],
-              declarations: [ AccidentIncidentComponent  ],
-              bootstrap: [  ],
+              declarations: [ OccupationalExamsComponent ],
+              bootstrap: [ OccupationalExamsComponent ],
               providers: [  ],
-              exports: [  AccidentIncidentComponent]
+              exports: [ OccupationalExamsComponent ]
            } )
-export class AccidentIncidentModule {
+export class OccupationalExamsModule {
 
 }

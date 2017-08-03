@@ -24,34 +24,45 @@ export class MedicalInstitutionService {
    getAll() {
       return this.authHttp.get( this.serviceURL + 'institucionesMedicas/enabled' ).map( ( res: Response ) => res.json() );
    }
-   getById(id: number) {
-      return this.authHttp.get( this.serviceURL + 'institucionesMedicas/'+id ).map( ( res: Response ) => res.json() );
+
+   getById( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'institucionesMedicas/' + id ).map( ( res: Response ) => res.json() );
    }
 
    getByIdPublic( id: number ) {
       return this.authHttp.get( this.serviceURL + 'institucionesMedicas/publicacion/' + id ).map( ( res: Response ) => res.json() );
    }
-   getStructureByIdMedicalInstitution(id: Number) {
-      return this.authHttp.get( this.serviceURL + 'institucionesMedicasEstructurasFisicas/institucionMedica/'+id ).map( ( res: Response ) => res.json() as MedicalInstitutionStructure[] );
+
+   getStructureByIdMedicalInstitution( id: Number ) {
+      return this.authHttp.get( this.serviceURL + 'institucionesMedicasEstructurasFisicas/institucionMedica/' + id )
+      .map( ( res: Response ) => res.json() as any[] );
    }
+
    add( c: MedicalInstitution ) {
-      c.auditoriaUsuario= this.idUsuario;
+      c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL + 'institucionesMedicas', c ).map( ( res: Response ) => res.json() );
    };
 
-   update( c: MedicalInstitution ) {
-      c.auditoriaUsuario= this.idUsuario;
-      return this.authHttp.put( this.serviceURL + 'institucionesMedicas', c ).map( ( res: Response ) => res );
-   }
-   addStructure( c: MedicalInstitutionStructure ) {
-      c.auditoriaUsuario= this.idUsuario;
-      return this.authHttp.post( this.serviceURL + 'institucionesMedicasEstructurasFisicas', c ).map( ( res: Response ) => res.json() );
-   };
-   updateStructure( c: MedicalInstitutionStructure ) {
-      c.auditoriaUsuario= this.idUsuario;
-      return this.authHttp.put( this.serviceURL + 'institucionesMedicasEstructurasFisicas', c ).map( ( res: Response ) => res );
+   getTypeExamByIdInstitution( id: number ) {
+      return this.authHttp.get( this.serviceURL + 'institucionesMedicasTiposExamenes/institucionMedica/' + id )
+      .map( ( res: Response ) => res.json() );
+
    }
 
+   update( c: MedicalInstitution ) {
+      c.auditoriaUsuario = this.idUsuario;
+      return this.authHttp.put( this.serviceURL + 'institucionesMedicas', c ).map( ( res: Response ) => res );
+   }
+
+   addStructure( c: MedicalInstitutionStructure ) {
+      c.auditoriaUsuario = this.idUsuario;
+      return this.authHttp.post( this.serviceURL + 'institucionesMedicasEstructurasFisicas', c ).map( ( res: Response ) => res.json() );
+   };
+
+   updateStructure( c: MedicalInstitutionStructure ) {
+      c.auditoriaUsuario = this.idUsuario;
+      return this.authHttp.put( this.serviceURL + 'institucionesMedicasEstructurasFisicas', c ).map( ( res: Response ) => res );
+   }
 
    // delete( c: MedicalInstitution ) {
    //    const respuesta = this.authHttp.delete( this.serviceURL + '/' + c.idInstitucionMedica );
@@ -63,8 +74,8 @@ export class MedicalInstitutionService {
    // }
 
    // getById( id: number ) {
-   //    return this.authHttp.get( this.serviceURL + 'institucionesMedicas/' + id ).map( ( res: Response ) => res.json() as MedicalInstitution );
-   // }
+   //    return this.authHttp.get( this.serviceURL + 'institucionesMedicas/' + id ).map( ( res: Response ) => res.json() as
+   // MedicalInstitution ); }
 
    // getByIdTercero( id: number ) {
    //    return this.authHttp.get( this.serviceURL + 'institucionesMedicas/buscarTercero/' + id )
