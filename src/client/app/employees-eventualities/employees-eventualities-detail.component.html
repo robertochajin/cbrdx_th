@@ -13,15 +13,18 @@
 							</div>
 							<div class="row">
 								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_DESCRIPCION'| translate}}:</label>
-								<label class="col-md-8 col-sm-6 col-xs-12" *ngIf="showdescripcion"><strong>{{employeeEventuality.descripcion}}</strong></label>
-								<label class="col-md-8 col-sm-6 col-xs-12" *ngIf="!showdescripcion"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
+								<label class="col-md-8 col-sm-6 col-xs-12"
+								       *ngIf="showdescripcion"><strong>{{employeeEventuality.descripcion}}</strong></label>
+								<label class="col-md-8 col-sm-6 col-xs-12" *ngIf="!showdescripcion"><strong>{{'LBL_NOAPLICA'|
+									translate}}</strong></label>
 							</div>
 							<div class="row">
 								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_DIAGNOSTICO'
 									|
 									translate
 									}}:</label>
-								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="showdiagnostico"><strong>{{employeeEventuality.diagnostico}}</strong></label>
+								<label class="col-md-4 col-sm-6 col-xs-12 "
+								       *ngIf="showdiagnostico"><strong>{{employeeEventuality.diagnostico}}</strong></label>
 								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="!showdiagnostico"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
 								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_REEMPLAZADOPOR'
 									| translate
@@ -29,61 +32,78 @@
 								<label class="col-md-4 col-sm-6 col-xs-12"
 								       *ngIf="showreemplazado"><strong>{{employeeEventuality.reemplazadoPor}}</strong></label>
 								<label class="col-md-4 col-sm-6 col-xs-12"
-										 *ngIf="!showreemplazado"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
+								       *ngIf="!showreemplazado"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
 							</div>
 							<div class="row">
 								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_FECHAINICIO' | translate}}:</label>
-								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="showfechainicio"><strong>{{employeeEventuality.fechaInicio}}</strong></label>
+								<label class="col-md-4 col-sm-6 col-xs-12 "
+								       *ngIf="showfechainicio"><strong>{{employeeEventuality.fechaInicio}}</strong></label>
 								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="!showfechainicio"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
 								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_HORAINICIO' | translate}}:</label>
-								<label class="col-md-4 col-sm-6 col-xs-12" *ngIf="showhorainicio"><strong>{{employeeEventuality.horaInicio | date:"h:mma"}}</strong></label>
-								<label class="col-md-4 col-sm-6 col-xs-12" *ngIf="!showhorainicio"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
+								<label class="col-md-4 col-sm-6 col-xs-12" *ngIf="showhorainicio"><strong>{{employeeEventuality.horaInicio |
+									date:"h:mma"}}</strong></label>
+								<label class="col-md-4 col-sm-6 col-xs-12" *ngIf="!showhorainicio"><strong>{{'LBL_NOAPLICA'|
+									translate}}</strong></label>
 							</div>
 							<div class="row">
 								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_FECHAFINAL' | translate}}:</label>
 								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="showfechafinal"><strong>{{employeeEventuality.fechaFin}}</strong></label>
-								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="!showfechafinal"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
+								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="!showfechafinal"><strong>{{'LBL_NOAPLICA'|
+									translate}}</strong></label>
 								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_HORAFINAL' | translate}}:</label>
-								<label class="col-md-4 col-sm-6 col-xs-12" *ngIf="showhorafinal"><strong>{{employeeEventuality.horaFin | date:"h:mma"}}</strong></label>
-								<label class="col-md-4 col-sm-6 col-xs-12" *ngIf="!showhorafinal"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
+								<label class="col-md-4 col-sm-6 col-xs-12" *ngIf="showhorafinal"><strong>{{employeeEventuality.horaFin |
+									date:"h:mma"}}</strong></label>
+								<label class="col-md-4 col-sm-6 col-xs-12" *ngIf="!showhorafinal"><strong>{{'LBL_NOAPLICA'|
+									translate}}</strong></label>
 							</div>
 							<div class="row">
 								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_DIAS' | translate
 									}}:</label>
 								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="showdias"><strong>{{employeeEventuality.dias}}</strong></label>
 								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="!showdias"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
-								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_FECHAREINTEGRO' | translate}}:</label>
+								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_FECHAREINTEGRO' |
+									translate}}:</label>
 								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="showfechareintegro"><strong>{{employeeEventuality.fechaReintegro}}</strong></label>
-								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="!showfechareintegro"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
+								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="!showfechareintegro"><strong>{{'LBL_NOAPLICA'|
+									translate}}</strong></label>
 							</div>
 							<div class="row">
-								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_HORAREINTEGRO' | translate}}:</label>
-								<label class="col-md-4 col-sm-6 col-xs-12" *ngIf="showhorareintegro"><strong>{{employeeEventuality.horaReintergo | date:"h:mma"}}</strong></label>
+								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_HORAREINTEGRO' |
+									translate}}:</label>
+								<label class="col-md-4 col-sm-6 col-xs-12" *ngIf="showhorareintegro"><strong>{{employeeEventuality.horaReintergo |
+									date:"h:mma"}}</strong></label>
 								<label class="col-md-4 col-sm-6 col-xs-12" *ngIf="!showhorareintegro"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
 								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_RETIRO' | translate}}:</label>
-								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="showretiro"><strong>{{employeeEventuality.retiro?'Si':'No'}}</strong></label>
-								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="!showretiro"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
+								<label class="col-md-4 col-sm-6 col-xs-12 "
+								       *ngIf="showretiro"><strong>{{employeeEventuality.retiro?'Si':'No'}}</strong></label>
+								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="!showretiro"><strong>{{'LBL_NOAPLICA'|
+									translate}}</strong></label>
 							</div>
 							<div class="row">
-								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_PERIODOINICIAL' | translate}}:</label>
-								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="showperiodoinicial"><strong>{{employeeEventuality.periodoInicio}}</strong></label>
-								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="!showperiodoinicial"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
+								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_PERIODOINICIAL' |
+									translate}}:</label>
+								<label class="col-md-4 col-sm-6 col-xs-12 "
+								       *ngIf="showperiodoinicial"><strong>{{employeeEventuality.periodoInicio}}</strong></label>
+								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="!showperiodoinicial"><strong>{{'LBL_NOAPLICA'|
+									translate}}</strong></label>
 								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_PERIODOFINAL' | translate}}:</label>
-								<label class="col-md-4 col-sm-6 col-xs-12" *ngIf="showperiodofinal"><strong>{{employeeEventuality.periodoFinal}}</strong></label>
+								<label class="col-md-4 col-sm-6 col-xs-12"
+								       *ngIf="showperiodofinal"><strong>{{employeeEventuality.periodoFinal}}</strong></label>
 								<label class="col-md-4 col-sm-6 col-xs-12" *ngIf="!showperiodofinal"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
 							</div>
 							<div class="row">
 								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_VALOR' | translate
 									}}:</label>
 								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="showvalor"><strong>{{employeeEventuality.valor}}</strong></label>
-								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="!showvalor"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
+								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="!showvalor"><strong>{{'LBL_NOAPLICA'|
+									translate}}</strong></label>
 								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_CUOTAS' |
 									translate
 									}}:</label>
 								<label class="col-md-4 col-sm-6 col-xs-12"
 								       *ngIf="showcuotas"><strong>{{employeeEventuality.nroCuotas}}</strong></label>
 								<label class="col-md-4 col-sm-6 col-xs-12"
-										 *ngIf="!showcuotas"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
+								       *ngIf="!showcuotas"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
 							</div>
 							<div class="row">
 								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_REFERENCIA' |
@@ -92,20 +112,20 @@
 								<label class="col-md-4 col-sm-6 col-xs-12 "
 								       *ngIf="showreferencia"><strong>{{employeeEventuality.nroReferencia}}</strong></label>
 								<label class="col-md-4 col-sm-6 col-xs-12 "
-										 *ngIf="!showreferencia"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
+								       *ngIf="!showreferencia"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
 								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_ENTIDAD' |
 									translate }}:</label>
 								<label class="col-md-4 col-sm-6 col-xs-12"
 								       *ngIf="showentidad"><strong>{{employeeEventuality.entidad}}</strong></label>
 								<label class="col-md-4 col-sm-6 col-xs-12"
-										 *ngIf="!showentidad"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
+								       *ngIf="!showentidad"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
 							</div>
 							<div class="row">
 								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_EPS' | translate
 									}}:</label>
 								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="showeps"><strong>{{employeeEventuality.eps}}</strong></label>
 								<label class="col-md-4 col-sm-6 col-xs-12 " *ngIf="!showeps"><strong>{{'LBL_NOAPLICA'| translate}}</strong></label>
-
+								
 								<label class="col-md-2 col-sm-6 col-xs-12 control-label">{{'EMPLOYEENOVELTY.LBL_FP' | translate
 									}}:</label>
 								<label class="col-md-4 col-sm-6 col-xs-12" *ngIf="showfp"><strong>{{employeeEventuality.fp}}</strong></label>

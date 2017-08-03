@@ -19,18 +19,16 @@ export class ConfigurationListComponent implements OnInit {
    listConfigurationList: ConfigurationList[];
    busqueda: string;
 
-   constructor(
-      private configurationListServices: ConfigurationListServices,
+   constructor( private configurationListServices: ConfigurationListServices,
       private router: Router,
       private _nav: NavService,
-      private confirmationService: ConfirmationService
-   ) {
+      private confirmationService: ConfirmationService ) {
       this.busqueda = this._nav.getSearch( 'configuration-list' );
    }
 
    ngOnInit() {
 
-      this.configurationListServices.getAll(  ).subscribe(
+      this.configurationListServices.getAll().subscribe(
          data => {
             this.listConfigurationList = data;
 
@@ -64,12 +62,13 @@ export class ConfigurationListComponent implements OnInit {
    }
 
    detail( c: ConfigurationList ) {
-      this.router.navigate( [ 'configuration-list/detail/' + c.idRelacionLista  ] );
+      this.router.navigate( [ 'configuration-list/detail/' + c.idRelacionLista ] );
    }
 
    update( c: ConfigurationList ) {
-      this.router.navigate( [ 'configuration-list/update/' + c.idRelacionLista] );
+      this.router.navigate( [ 'configuration-list/update/' + c.idRelacionLista ] );
    }
+
    setSearch() {
       this._nav.setSearch( 'configuration-list', this.busqueda );
    }

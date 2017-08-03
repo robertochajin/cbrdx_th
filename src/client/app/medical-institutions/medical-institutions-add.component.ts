@@ -81,7 +81,8 @@ export class MedicalInstitutionAddComponent implements OnInit {
       this.medicalInstitutionStructure.idInstitucionMedica = this.medicalInstitution.idInstitucionMedica;
       this.medicalInstitutionStructure;
    }
-   selected(){
+
+   selected() {
       this.selectTypeExams;
    }
    onTabShow( e: any ) {

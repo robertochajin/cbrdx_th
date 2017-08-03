@@ -13,60 +13,60 @@
 <div class="col-md-10 col-md-offset-1">
 <fieldset *ngIf="showForm">
 	<p-panel header="{{'SUPPLIES.MSG_ENTREGA' | translate}}">
-	<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate>
-		<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-			<div class="ui-grid-row">
-				<div class="ui-grid-col-6">
-					<label for="motivo">* {{ 'SUPPLIESPROJECTION.LBL_MOTIVO' | translate}}</label>
-					<p-dropdown id="motivo" name="motivo" required="true"
-					            [options]="reason" [autoWidth]="false"
-					            [(ngModel)]="confirmation.idMotivo"
-					            #NGmotivo="ngModel"
-					></p-dropdown>
-					<div class="ui-message ui-messages-error ui-corner-all"
-					     *ngIf="f.submitted && !NGmotivo.valid ">
-						<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_SUPPLY' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+		<form (ngSubmit)="f.valid && onSubmit()" #f="ngForm" novalidate>
+			<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-6">
+						<label for="motivo">* {{ 'SUPPLIESPROJECTION.LBL_MOTIVO' | translate}}</label>
+						<p-dropdown id="motivo" name="motivo" required="true"
+						            [options]="reason" [autoWidth]="false"
+						            [(ngModel)]="confirmation.idMotivo"
+						            #NGmotivo="ngModel"
+						></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !NGmotivo.valid ">
+							<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_SUPPLY' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="ui-grid-row">
-				<div class="ui-grid-col-12">
-					<label for="observacion">* {{ 'SUPPLIESPROJECTION.LBL_OBSERVACION' | translate}}</label>
-					<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #NGobserva="ngModel"
-					          [(ngModel)]="confirmation.observacion" required="true" class="form-control"
-					          maxlength="500"></textarea>
-					<div class="ui-message ui-messages-error ui-corner-all"
-					     *ngIf="f.submitted && !NGobserva.valid">
-						<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_QUANTITY' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-12">
+						<label for="observacion">* {{ 'SUPPLIESPROJECTION.LBL_OBSERVACION' | translate}}</label>
+						<textarea id="observacion" name="observacion" pInputTextarea rows="4" cols="35" #NGobserva="ngModel"
+						          [(ngModel)]="confirmation.observacion" required="true" class="form-control"
+						          maxlength="500"></textarea>
+						<div class="ui-message ui-messages-error ui-corner-all"
+						     *ngIf="f.submitted && !NGobserva.valid">
+							<i class="fa fa-close"></i>{{ 'SUPPLIES.LBL_QUANTITY' | translate}} {{ 'LBL_REQUERIDO' | translate}}
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="ui-grid-row">
-				<div class="ui-grid-col-12">
-					<label>{{ 'SUPPLIES.MSG_ACCORDING' | translate}} </label>
-					<div *ngFor="let opcion of confirmationDotaciones">
-						<p-checkbox
-							[name]="opcion.idProyeccionDotacionTerceroDotacion"
-							[value]="opcion.idProyeccionDotacionTerceroDotacion"
-							[label]="opcion.dotacion"
-							[(ngModel)]="respuestasCheckbox"
-							#pCheckbox="ngModel"
-						></p-checkbox>
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-12">
+						<label>{{ 'SUPPLIES.MSG_ACCORDING' | translate}} </label>
+						<div *ngFor="let opcion of confirmationDotaciones">
+							<p-checkbox
+								[name]="opcion.idProyeccionDotacionTerceroDotacion"
+								[value]="opcion.idProyeccionDotacionTerceroDotacion"
+								[label]="opcion.dotacion"
+								[(ngModel)]="respuestasCheckbox"
+								#pCheckbox="ngModel"
+							></p-checkbox>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="ui-grid-row form-footer-buttons">
-				<div class="ui-grid-col-4"></div>
-				<div class="ui-grid-col-1">
-					<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+				<div class="ui-grid-row form-footer-buttons">
+					<div class="ui-grid-col-4"></div>
+					<div class="ui-grid-col-1">
+						<a (click)="goBack((f.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+					</div>
+					<div class="ui-grid-col-2">
+						<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
+					</div>
+					<div class="ui-grid-col-5"></div>
 				</div>
-				<div class="ui-grid-col-2">
-					<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
-				</div>
-				<div class="ui-grid-col-5"></div>
 			</div>
-		</div>
-	</form>
+		</form>
 	</p-panel>
 </fieldset>
 </div>
