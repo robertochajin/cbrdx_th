@@ -28,6 +28,8 @@ export class MedicalInstitutionAddComponent implements OnInit {
    listMedicalInstitutionStructure: MedicalInstitutionStructure[] = [];
    localizacion: Localizaciones = new Localizaciones();
    physicStructure: SelectItem[] = [];
+   typeExams: SelectItem[] = [];
+   selectTypeExams: any[] = [];
    msgs: Message[] = [];
    acordion: number = 0;
    totalExamenes: number = 0;
@@ -47,11 +49,17 @@ export class MedicalInstitutionAddComponent implements OnInit {
    }
 
    ngOnInit() {
+      this.listaService.getMasterDetails( 'ListasTiposExamenesMedicos' ).subscribe( rs => {
+         rs.map( ( s: ListaItem ) => {
+            this.typeExams.push( { label: s.nombre, value: s.idLista } );
+         } );
+      } );
    }
 
    onSubmit() {
-      if ( this.medicalInstitution.direccion !== '' ) {
+      if ( this.medicalInstitution.direccion !== '' && this.selectTypeExams.length > 0 ) {
          this.submitted = true;
+         this.medicalInstitution.listTipos = this.selectTypeExams;
          this.locateService.add( this.localizacion ).subscribe( data => {
             this.medicalInstitution.idLocalizacion = data.idLocalizacion;
             this.medicalInstitutionService.add( this.medicalInstitution ).subscribe( res => {
@@ -60,8 +68,8 @@ export class MedicalInstitutionAddComponent implements OnInit {
                   this.listMedicalInstitutionStructure = dt;
                } );
                this._nav.setMesage( 1, this.msgs );
-               this._nav.setTab(1);
-               this.router.navigate( [ 'medical-institutions/update/' +res.idInstitucionMedica  ] );
+               this._nav.setTab( 1 );
+               this.router.navigate( [ 'medical-institutions/update/' + res.idInstitucionMedica ] );
             }, error => {
                this._nav.setMesage( 3, this.msgs );
             } );
@@ -73,7 +81,9 @@ export class MedicalInstitutionAddComponent implements OnInit {
       this.medicalInstitutionStructure.idInstitucionMedica = this.medicalInstitution.idInstitucionMedica;
       this.medicalInstitutionStructure;
    }
-
+   selected(){
+      this.selectTypeExams;
+   }
    onTabShow( e: any ) {
       this._nav.setTab( e.index );
       this.acordion = this._nav.getTab();
@@ -91,7 +101,7 @@ export class MedicalInstitutionAddComponent implements OnInit {
    }
 
    calcularVaor() {
-      console.log('calcularVaor');
+      console.log( 'calcularVaor' );
       let tempExamOpto: number = 0;
       let tempExamVision: number = 0;
       let tempExamOsteo: number = 0;
@@ -138,9 +148,9 @@ export class MedicalInstitutionAddComponent implements OnInit {
    capitalize( event: any ) {
       let input = event.target.value;
       event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
-      let temp =this.medicalInstitution.representanteLegal;
-      if(this.medicalInstitution.representanteLegal!=null){
-         this.medicalInstitution.representanteLegal= temp.replace(/[^a-zA-ZÑñÁáÉéóÓúÚíÍ \/ /]/g,'');
+      let temp = this.medicalInstitution.representanteLegal;
+      if ( this.medicalInstitution.representanteLegal != null ) {
+         this.medicalInstitution.representanteLegal = temp.replace( /[^a-zA-ZÑñÁáÉéóÓúÚíÍ \/ /]/g, '' );
       }
    }
 

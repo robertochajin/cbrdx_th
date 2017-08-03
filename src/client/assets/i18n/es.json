@@ -1105,6 +1105,7 @@
    "LBL_VIAJA":"Viaja",
    "LBL_VALORVIAJA":"Valor Viaje",
    "LBL_ESTRUCTURAFISICA":"Estructura Física",
+   "LBL_EXAMENES":"Examenes",
    "":""
 },
    "DOCMANAGMENT": {
@@ -1315,6 +1316,21 @@
       "LBL_AGREGARPLAN": "Agregar plan",
       "LBL_PLANDEACCION": "Planes de acción",
       "LBL_ADJUNTOS": "Adjuntos",
+      "": ""
+   },
+   "EXAMENOCUPACIONAL": {
+      "LBL_TIPOAREA": "Tipo area",
+      "LBL_AREAOFICINA": "Area/Oficina",
+      "LBL_CARGO": "Cargo",
+      "BTN_FILTRAR": "Filtrar",
+      "BTN_LIMPIARFILTRAR": "Limpiar filtros",
+      "LBL_DOCUMENTO": "Documento",
+      "LBL_COLABORADOR": "Colaborador",
+      "LBL_PROXIMOEXAMEN": "Próximo examen",
+      "LBL_ULTIMORESULTADO": "Último resultado",
+      "LBL_ENVIREXAMEN": "Enviar examen",
+      "LBL_CARGOS": "Cargos",
+      "LBL_CARGOSSELECT": "Cargos selecionados",
       "": ""
    },
    "FIN_ARCHIVO": "============================FIN ARCHIVO============================="
