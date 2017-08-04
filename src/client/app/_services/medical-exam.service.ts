@@ -35,9 +35,9 @@ export class MedicalExamService {
 
    getByIdProceso( id: number ) {
       return this.authHttp.get( this.serviceURL + '/procesoSeleccion/' + id ).map( ( res: Response ) => {
-         if ( res.text()) {
-            return  res.json() as MedicalExam
-         }else {
+         if ( res.text() ) {
+            return res.json() as MedicalExam
+         } else {
             return null;
          }
       } );
@@ -52,5 +52,9 @@ export class MedicalExamService {
       c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.serviceURL, c ).map( ( res: Response ) => res );
    }
+
+   sendExam( c: number[] ) {
+      return this.authHttp.post( this.serviceURL + '/correosAutomaticos', c ).map( ( res: Response ) => res );
+   };
 
 }

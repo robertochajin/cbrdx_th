@@ -24,6 +24,7 @@ export class RolesUpdateComponent implements OnInit {
    minDate: Date;
    fechaInicio: string;
    fechaFin: string;
+   fechaFinRequired: boolean = false;
 
    constructor( private rolesService: RolesService,
       private router: Router,
@@ -47,6 +48,11 @@ export class RolesUpdateComponent implements OnInit {
       .switchMap( ( params: Params ) => this.rolesService.viewRole( +params[ 'id' ] ) )
       .subscribe( rol => {
          this.rol = rol;
+         if ( rol.fechaInicio !== null ) {
+            this.fechaFinRequired = true;
+         }else{
+            this.fechaFinRequired = false;
+         }
          // if ( this.rol.fechaInicio !== null ) {
          //    let momInicio: moment.Moment = moment( this.rol.fechaInicio, 'YYYY-MM-DD' );
          //    this.fechaInicio = momInicio.format( 'MM/DD/YYYY' );
@@ -78,6 +84,7 @@ export class RolesUpdateComponent implements OnInit {
       let d = new Date( Date.parse( event ) );
       this.fechaInicio = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
       this.minDate = new Date( Date.parse( event ) );
+      this.fechaFinRequired = true;
    }
 
    onFechaFin( event: any ) {
@@ -101,20 +108,20 @@ export class RolesUpdateComponent implements OnInit {
       }
    }
 
-   goBack(fDirty : boolean): void {
-      if (fDirty){
-      this.confirmationService.confirm( {
-                                           message: ` ¿Está seguro que desea salir sin guardar?`,
-                                           header: 'Confirmación',
-                                           icon: 'fa fa-question-circle',
-                                           accept: () => {
-                                              this.router.navigate( [ 'roles' ] );
-                                           }
-                                        } );
-      }else{
+   goBack( fDirty: boolean ): void {
+      if ( fDirty ) {
+         this.confirmationService.confirm( {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this.router.navigate( [ 'roles' ] );
+                                              }
+                                           } );
+      } else {
          this.router.navigate( [ 'roles' ] );
       }
-      }
+   }
 
    capitalizeName() {
       let input = this.rol.rol;
@@ -124,7 +131,6 @@ export class RolesUpdateComponent implements OnInit {
    }
 
    onSubmit() {
-
       this.rolesService.updateRole( this.rol ).then( () => {
          this.msgs = [];
          this._nav.setMesage( 1, this.msgs );

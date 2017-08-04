@@ -42,6 +42,14 @@ export class PositionsService {
    }
 
    /**
+    * Retorna la lista de cargos habilitados con la información de porcentaje de avance en valoración de riesgos
+    * @returns {Observable<Position>}
+    */
+   getListPositionsWithRiskProgress() {
+      return this.authHttp.get( this.serviceURL + 'cargos/getAllWithPerc' ).map( ( res: Response ) => res.json() );
+   }
+
+   /**
     * Retorna un archivo xls con la malla del mapa de riesgos por cargos
     * @returns {Observable<Response Blob>}
     */

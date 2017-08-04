@@ -26,6 +26,8 @@ import { PositionsDetailPdfComponent } from './positions-detail-pdf.component';
 import { AssessmentListComponent } from '../position_assessment/assessment-list.component';
 import { ListaService } from '../_services/lista.service';
 import { TipoDeAreaService } from '../_services/tipoDeArea.service';
+import { PositionAssessmentComponent } from '../position_assessment/position-assessment.component';
+import { RiskService } from '../_services/positios-risks.service';
 
 @NgModule( {
               imports: [
@@ -50,11 +52,13 @@ import { TipoDeAreaService } from '../_services/tipoDeArea.service';
                  PositionAuthoritiesComponent,
                  PositionActivitiesComponent,
                  AssessmentListComponent,
+                 PositionAssessmentComponent,
                  PositionsDetailPdfComponent
               ],
               bootstrap: [ PositionsComponent ],
               providers: [ PositionsService, ListPositionsService, PoliticalDivisionService, NavService,
                  ListaService,
+                 RiskService,
                  TipoDeAreaService
               ],
               exports: [ PositionsComponent ]

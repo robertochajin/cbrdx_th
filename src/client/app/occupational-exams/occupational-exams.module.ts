@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { FormSharedModule } from '../shared/form-shared.module';
 import { OccupationalExamsComponent } from './occupational-exams.component';
+import { ExamPipe } from '../_helpers/examPipe';
 
 @NgModule( {
               imports: [
@@ -11,7 +12,7 @@ import { OccupationalExamsComponent } from './occupational-exams.component';
                  FormSharedModule
 
               ],
-              declarations: [ OccupationalExamsComponent ],
+              declarations: [ OccupationalExamsComponent, ExamPipe ],
               bootstrap: [ OccupationalExamsComponent ],
               providers: [],
               exports: [ OccupationalExamsComponent ]

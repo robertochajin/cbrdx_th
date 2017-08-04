@@ -60,7 +60,7 @@
 										             mask="?(999) 999-9999 Ext 9999" placeholder="(999) 999-9999 Ext 99999" #telefonoFijo="ngModel"
 										             required [(ngModel)]="medicalInstitution.telefonoContacto" type="text"
 										             onKeyUp="this.value = this.value.toUpperCase();"
-
+										
 										></p-inputMask>
 										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !telefonoFijo.valid">
 											<i class="fa fa-close"></i>
@@ -84,7 +84,8 @@
 										<input id="osteo" name="osteo" #examosteo="ngModel" pInputText
 										       type="text" required [(ngModel)]="medicalInstitution.valorExamenOsteosmuscular" maxlength="9"
 										       (keyup)="calcularVaor()"
-										       currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
+										       currencyMask
+										       [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
 										/>
 										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !examosteo.valid ">
 											<i class="fa fa-close"></i>
@@ -96,7 +97,8 @@
 										<input id="visio" name="visio" #examvisio="ngModel" pInputText
 										       type="text" required [(ngModel)]="medicalInstitution.valorExamenVisiometria" maxlength="9"
 										       (keyup)="calcularVaor()"
-										       currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
+										       currencyMask
+										       [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
 										/>
 										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !examvisio.valid ">
 											<i class="fa fa-close"></i>
@@ -110,7 +112,8 @@
 										<input id="opto" name="opto" #examopto="ngModel" pInputText
 										       type="text" required [(ngModel)]="medicalInstitution.valorExamenOptometria" maxlength="9"
 										       (keyup)="calcularVaor()"
-										       currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
+										       currencyMask
+										       [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
 										/>
 										<div class="ui-message ui-messages-error ui-corner-all" *ngIf="f.submitted && !examopto.valid ">
 											<i class="fa fa-close"></i>
@@ -223,7 +226,8 @@
 				</form>
 				<div class="ui-grid-row">
 					<div class="ui-grid-col-12">
-						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listMedicalInstitutionStructure" [paginator]="true"
+						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listMedicalInstitutionStructure"
+						             [paginator]="true"
 						             [rows]="10" [responsive]="true" [globalFilter]="gb">
 							<p-column field="estructuraFisica" header="{{ 'MEDICALINSTITUTION.LBL_ESTRUCTURAFISICA' | translate }}"
 							          [sortable]="true"></p-column>
@@ -250,8 +254,14 @@
 						</p-dataTable>
 					</div>
 				</div>
-				
+			
 			</p-accordionTab>
 		</p-accordion>
+	</div>
+</div>
+<div class="row form-footer-buttons">
+	<div class="form-group col-md-12">
+		<button icon="fa-arrow-left" label="{{ 'BTN_REGRESAR' | translate }}" type="button"
+		        pButton (click)="goBack()"></button>
 	</div>
 </div>

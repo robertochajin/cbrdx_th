@@ -4,6 +4,8 @@ import { Employee } from '../_models/employees';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { EmployeesPublications } from '../_models/employeesPublications';
 import { EmployeesAnswersMaster } from '../_models/employeesAnswersMaster';
+import { OrganizationalStructurePositions } from '../_models/organizationalStructurePositions';
+import { VTercero } from '../_models/vTercero';
 
 @Injectable()
 export class EmployeesService {
@@ -13,6 +15,7 @@ export class EmployeesService {
    idTercero: number;
    private serviceURL = '<%= SVC_TH_URL %>/api/';
    private serviceURLTerceros = '<%= SVC_TH_URL %>/tercerosCargos/';
+   private serviceTercerosCargosURL = '<%= SVC_TH_URL %>/api/tercerosCargos/tercero/';
    private jwtHelper: JwtHelper = new JwtHelper();
 
    constructor( private authHttp: AuthHttp ) {
@@ -64,6 +67,9 @@ export class EmployeesService {
    get( id: number ) {
       return this.authHttp.get( this.serviceURL + 'vterceros/' + id ).map( ( res: Response ) => res.json() as Employee );
    }
+   getAllByOrganiztionalStructurePosition( c: OrganizationalStructurePositions[] ) {
+      return this.authHttp.put( this.serviceURL + 'vterceros/estructuraOrganizacionalCargos', c ).map( ( res: Response ) => res.json() );
+   }
 
    getInfoPositionEmployee(id: number) {
       return this.authHttp.get( this.serviceURL + 'terceros/tercerosCargosAreasFisica/' + id ).map( ( res: Response ) => {
@@ -92,7 +98,9 @@ export class EmployeesService {
    getCargoActual( id: number ) {
       return this.authHttp.get( this.serviceURLTerceros + '/tercerosCargos/' + id ).map( ( res: Response ) => res.json() );
    }
-
+   getEmployeePositionByIdEmployee(id: number){
+      return this.authHttp.get( this.serviceTercerosCargosURL + id ).map( ( res: Response ) => res.json() );
+   }
    delete( c: Employee ) {
       c.auditoriaUsuario = this.idUsuario;
       const respuesta = this.authHttp.delete( this.serviceURL + '/' + c.idTercero );

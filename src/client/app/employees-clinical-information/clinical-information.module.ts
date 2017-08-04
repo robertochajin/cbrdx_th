@@ -7,13 +7,14 @@ import { ClinicalInformationService } from '../_services/clinical-information.se
 import { DiagnosticCIEServices } from '../_services/diagnosticCIE.service';
 import { FormSharedModule } from '../shared/form-shared.module';
 import { MedicalExamInformedConsentComponent } from './informed-consent.component';
+import { MedicalExamInformedConsentPeriodComponent } from './informed-consent-period.component';
 
 @NgModule( {
               imports: [ CommonModule,
                  SharedModule,
                  FormSharedModule
               ],
-              declarations: [ ClinicalInformationComponent, MedicalExamInformedConsentComponent ],
+              declarations: [ ClinicalInformationComponent, MedicalExamInformedConsentComponent, MedicalExamInformedConsentPeriodComponent ],
               bootstrap: [ ClinicalInformationComponent ],
               providers: [ ClinicalInformationService, DiagnosticCIEServices ],
               exports: [ ClinicalInformationComponent ]

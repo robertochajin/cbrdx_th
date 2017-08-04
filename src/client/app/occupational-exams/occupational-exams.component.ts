@@ -16,6 +16,9 @@ import { OrganizationalStructureService } from '../_services/organizationalStruc
 import { OrganizationalStructure } from '../_models/organizationalStructure';
 import { OrganizationalStructurePositionsServices } from '../_services/organizationalStructurePositions.service';
 import { OrganizationalStructurePositions } from '../_models/organizationalStructurePositions';
+import { VTercero } from '../_models/vTercero';
+import { MedicalExamService } from '../_services/medical-exam.service';
+import { AdjuntosService } from '../_services/adjuntos.service';
 
 @Component( {
                moduleId: module.id,
@@ -25,7 +28,7 @@ import { OrganizationalStructurePositions } from '../_models/organizationalStruc
             } )
 export class OccupationalExamsComponent {
    msg: Message;
-   listEmployee: Employee[] = [];
+   listEmployee: VTercero[] = [];
    listSelectEmployee: any[] = [];
    listTypeArea: SelectItem[] = [];
    listArea: SelectItem[] = [];
@@ -36,14 +39,19 @@ export class OccupationalExamsComponent {
    idArea: number;
    busqueda: string;
    allEmployee: boolean = false;
+   showTable: boolean = false;
+   public url = '';
+   public title = '';
+   displayDialog: boolean = false;
 
    constructor( private employeesService: EmployeesService,
       private listaService: ListaService,
-      private positionsService: PositionsService,
+      private medicalExamService: MedicalExamService,
       private organizationalStructurePositionsServices: OrganizationalStructurePositionsServices,
       private organizationalStructureService: OrganizationalStructureService,
       private tipoDeAreaService: TipoDeAreaService,
       private router: Router,
+      private adjuntosService: AdjuntosService,
       private _nav: NavService,
       private confirmationService: ConfirmationService ) {
 
@@ -52,15 +60,6 @@ export class OccupationalExamsComponent {
    }
 
    ngOnInit(): void {
-      this.employeesService.getAll().subscribe( rs => {
-         for ( let t of rs ) {
-            t.nombreCompleto = t.primerNombre + ' ' +
-                               t.segundoNombre + ' ' +
-                               t.primerApellido + ' ' +
-                               t.segundoApellido;
-            this.listEmployee.push( t );
-         }
-      } );
       // this.positionsService.getAll().subscribe( rs => {
       //    this.listPosition = rs;
       // } );
@@ -89,6 +88,7 @@ export class OccupationalExamsComponent {
 
    changeArea() {
       this.listPosition = [];
+      this.selectedPositions = [];
       this.organizationalStructurePositionsServices.getAllByOrganizacionalStructure( this.idArea ).subscribe( rs => {
          this.listPosition = rs;
       } );
@@ -99,13 +99,30 @@ export class OccupationalExamsComponent {
       this.idTipoArea = null;
       this.idArea = null;
       this.listArea = [];
+      this.listEmployee = [];
+      this.showTable = false;
+      this.selectedPositions = [];
    }
 
    onSubmitFilter() {
       if ( this.selectedPositions.length > 0 ) {
-         this.selectedPositions;
+         this.listEmployee = [];
+         this.employeesService.getAllByOrganiztionalStructurePosition( this.selectedPositions ).subscribe( rs => {
+            if ( rs.length > 0 ) {
+               for ( let c of rs ) {
+                  c.nombreCompleto = c.primerNombre + ' ' +
+                                     c.segundoNombre + ' ' +
+                                     c.primerApellido + ' ' +
+                                     c.segundoApellido;
+                  this.listEmployee.push( c );
+               }
+               this.showTable = true;
+            } else {
+               this.showTable = false;
+               this._nav.setMesage( 0, { severity: 'info', summary: 'Info', detail: 'No se encotraron resultados en la busqueda.' } );
+            }
+         } );
       }
-      this.selectedPositions;
    }
 
    selectEmployee() {
@@ -120,11 +137,20 @@ export class OccupationalExamsComponent {
       }
    }
 
-   //
-   // add() {
-   //    this.router.navigate( [ 'document-management/add' ] );
-   // }
+   sendExam() {
+      this.listSelectEmployee;
+      this.medicalExamService.sendExam( this.listSelectEmployee ).subscribe( rs => {
+         this._nav.setMesage( 0, { severity: 'info', summary: 'Info', detail: 'Examenes enviados con exito!' } )
+      });
+   }
 
+   previewFile( id: number ) {
+      this.adjuntosService.downloadFile( id ).subscribe( res => {
+         let blob_url = URL.createObjectURL( res );
+         this.url = blob_url;
+         this.displayDialog = true;
+      } );
+   }
    update( d: DocumentManagement ) {
       // this.router.navigate( [ 'document-management/update/', d.idDocumentoTercero ] );
    }

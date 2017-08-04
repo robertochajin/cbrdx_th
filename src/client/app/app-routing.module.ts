@@ -191,7 +191,7 @@ import { MedicalExamComponent } from './selection-process/medical-exam.component
 import { MedicalExamInformedConsentComponent } from './employees-clinical-information/informed-consent.component';
 import { AnswerExamsComponent } from './medical-institutions/answer-exams.component';
 import { EmployeesAttachmentsComponent } from './employees-attatchments/employees-attachments.component';
-import {PositionsDetailPdfComponent} from "./positions/positions-detail-pdf.component";
+import { PositionsDetailPdfComponent } from "./positions/positions-detail-pdf.component";
 import { CandidateContractingComponent } from './selection-process/candidate-contracting.component';
 import { EmployeeEventualitiesComponent } from './employees-eventualities/employees-eventualities.component';
 import { EmployeeEventualitiesAddComponent } from './employees-eventualities/employee-eventualities-edit.component';
@@ -216,10 +216,12 @@ import { TracingSuppliesComponent } from './supplies/tracing-supplies/tracing-su
 import { ConsolidatedProjectionComponent } from './supplies/supplies-projection/consolidated-projection.component';
 import { SuppliesConfirmationComponent } from './employees/supplies-employees/supplies-confirmation.component';
 import { OccupationalExamsComponent } from './occupational-exams/occupational-exams.component';
-import { AssessmentListComponent } from './position_assessment/assessment-list.component';
-
+import { MedicalExamInformedConsentPeriodComponent } from './employees-clinical-information/informed-consent-period.component';
+import { AnswerExamsPeriodComponent } from './medical-institutions/answer-exams-period.component';
 import { AccidentIncidentComponent } from './accidents-incidents/accidents-incidents.component';
 import { AccidentIncidentPlanComponent } from './accidents-incidents/accidents-incidents-plan.component';
+import { AssessmentListComponent } from './position_assessment/assessment-list.component';
+import { PositionAssessmentComponent } from './position_assessment/position-assessment.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -426,6 +428,7 @@ const routes = [
    { path: 'position-activities/:idCargo', component: PositionAuthoritiesComponent, canActivate: [ AuthGuard ] },
    { path: 'position/requirement/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'position/assessment', component: AssessmentListComponent },
+   { path: 'position/assessment/position/:position', component: PositionAssessmentComponent },
 
    // Administracion
    { path: 'menus', component: MenuManagerComponent, canActivate: [ AuthGuard ] },
@@ -497,7 +500,9 @@ const routes = [
 
    // consentimiento informado
    { path: 'informed-consent/exam/:idExamen/terceroPublicacion/:idTerceroPublication', component: MedicalExamInformedConsentComponent },
+   { path: 'informed-consent-exam-period/:idExamen', component: MedicalExamInformedConsentPeriodComponent },
    { path: 'answer-exams/exam/:idExamen/terceroPublicacion/:idTerceroPublication', component: AnswerExamsComponent },
+   { path: 'answer-exams-exam-period/:idExamen', component: AnswerExamsPeriodComponent },
 
    // Aplicar a vacantes
    { path: 'apply-vacancy/publications-detail/:idPublication', component: VacancyApplyComponent, canActivate: [ AuthGuard ] },
