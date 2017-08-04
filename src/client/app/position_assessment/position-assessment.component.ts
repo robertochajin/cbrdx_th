@@ -20,6 +20,8 @@ export class PositionAssessmentComponent implements OnInit {
 
    public riskTypes: RiskType[] = [];
    private position: Positions = new Positions();
+   private consecuencies: SelectItem [] = [];
+   private probabilities: SelectItem [] = [];
 
    constructor( private listaService: ListaService,
       private riskService: RiskService,
@@ -33,22 +35,47 @@ export class PositionAssessmentComponent implements OnInit {
 
       this.route.params.subscribe( ( params: Params ) => {
 
-         this.positionsService.get(params[':position']).subscribe(position => {
+         this.positionsService.get( +params[ 'position' ] ).subscribe( position => {
             this.position = position;
 
-            this.riskService.getTypeRisk().subscribe( (rest: RiskType[]) => {
-               rest.map(riskType => {
-                  this.riskService.getRiskByTypeAndPosition(this.position.idCargo, riskType.idRiesgoTipo).subscribe(riesgos => {
-                     riskType.subTypes = riesgos;
-                  });
-               });
-               this.riskTypes = rest;
+            this.listaService.getMasterDetails( 'ListasConsecuenciasRiesgos' ).subscribe( res => {
+               this.consecuencies.push( { label: 'Seleccione', value: null } );
+               res.map( ( s: ListaItem ) => this.consecuencies.push( { label: s.nombre, value: s.idLista } ) );
+
+               this.listaService.getMasterDetails( 'ListasProbabilidadesRiesgos' ).subscribe( res => {
+                  this.probabilities.push( { label: 'Seleccione', value: null } );
+                  res.map( ( s: ListaItem ) => this.probabilities.push( { label: s.nombre, value: s.idLista } ) );
+                  this.riskService.getTypeRisk(this.position.idCargo).subscribe( ( rest: RiskType[] ) => {
+                     rest.map( riskType => {
+                        this.riskService.getRiskByTypeAndPosition( this.position.idCargo, riskType.idRiesgoTipo ).subscribe( riesgos => {
+                           riskType.subTypes = riesgos;
+                        } );
+                     } );
+                     this.riskTypes = rest;
+                  } );
+               } );
             } );
-         });
 
+         } );
+
+      } );
+
+   }
+
+   onChangeProbability(event: any, risk: Risk){
+      this.riskService.update(risk).subscribe(res => {
+         this._nav.setMesage(2);
+      }, error => {
+         this._nav.setMesage(3);
       });
+   }
 
-
+   onChangeConcecuence(event: any, risk: Risk){
+      this.riskService.update(risk).subscribe(res => {
+         this._nav.setMesage(2);
+      }, error => {
+         this._nav.setMesage(3);
+      })
    }
 
 }
