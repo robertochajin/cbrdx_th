@@ -75,7 +75,7 @@ export class AssessmentListComponent implements OnInit {
 
    showRiskMap() {
       this.positionsService.getMapa().subscribe( res => {
-            saveAs( res, 'MapaRiesgosCargos' );
+            saveAs( res, 'Matriz_de_priorizacion_de_riesgos.xlsx' );
       } );
    }
 
