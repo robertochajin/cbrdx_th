@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
+import { Response, ResponseContentType } from '@angular/http';
 import { Positions } from '../_models/positions';
 import { PositionsObservations } from '../_models/positionsObservations';
 import { PositionsActivities } from '../_models/positionsActivities';
@@ -39,6 +39,17 @@ export class PositionsService {
 
    getListPositions() {
       return this.authHttp.get( this.serviceURL + 'cargos/enabled' ).map( ( res: Response ) => res.json() );
+   }
+
+   /**
+    * Retorna un archivo xls con la malla del mapa de riesgos por cargos
+    * @returns {Observable<Response Blob>}
+    */
+   getMapa() {
+      return this.authHttp.get( this.serviceURL + 'mapa', { responseType: ResponseContentType.Blob }).map(
+         ( res: Response ) => {
+            return new Blob( [ res.blob() ], { type: res.headers.get( 'content-type' ) } );
+         } );
    }
 
    getListStudies() {

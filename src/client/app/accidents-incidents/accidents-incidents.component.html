@@ -1,0 +1,70 @@
+<form (ngSubmit)="f.valid " #f="ngForm" novalidate id="filtros">
+	<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+		<div class="ui-grid-row">
+			<div class="ui-grid-col-4">
+				<label for="estado">{{ 'ACCIDENTINCIDENT.LBL_ESTADO' | translate }}</label>
+				<p-dropdown id="estado" name="estado"
+				            [options]="ListaEstados" [autoWidth]="false"
+				            (onChange)="dt.filter($event.value,'estadoNovedad','startsWith')"
+				></p-dropdown>
+			</div>
+			<div class="ui-grid-col-4">
+				<label for="idArea">{{ 'ACCIDENTINCIDENT.LBL_AREA' | translate }}</label>
+				<p-dropdown id="idArea" name="idArea"
+				            [options]="ListaAreas" [autoWidth]="false"
+				            (onChange)="dt.filter($event.value,'estructuraArea','startsWith')"
+				></p-dropdown>
+			</div>
+			<div class="ui-grid-col-4">
+				<label for="tipoNovedad">{{ 'ACCIDENTINCIDENT.LBL_TIPONOVEDAD' | translate }}</label>
+				<p-dropdown id="tipoNovedad" name="tipoNovedad"
+				            [options]="ListaTipos" [autoWidth]="false"
+				            (onChange)="dt.filter($event.value,'tipoNovedad','startsWith')"
+				></p-dropdown>
+			</div>
+		</div>
+	</div>
+</form>
+<br>
+<div class="row datable-header">
+	<div class="col-md-6 col-xs-12 datatable-header-add">
+	</div>
+	<div class="col-md-6 col-xs-12 datatable-header-search">
+		<div class="input-group">
+			<div class="input-group-addon"><i class="fa fa-search"></i></div>
+			<input #gb type="text" pInputText size="40" placeholder="{{'LBL_BUSCAR' | translate }}" class="form-control"
+			       [(ngModel)]="busqueda" (change)="setSearch()">
+		</div>
+	</div>
+</div>
+<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listAccidentesIncidents" [paginator]="true" [rows]="10"
+             [responsive]="true" [globalFilter]="gb" #dt>
+	<p-column field="nombreTercero" header="{{'ACCIDENTINCIDENT.LBL_COLABORADOR' | translate }}" [sortable]="true"></p-column>
+	<p-column field="cargo" header="{{'ACCIDENTINCIDENT.LBL_CARGO' | translate }}" [sortable]="true"></p-column>
+	<p-column field="estructuraArea" header="{{'ACCIDENTINCIDENT.LBL_AREA' | translate }}" [sortable]="true"></p-column>
+	<p-column field="fechaInicio" header="{{'ACCIDENTINCIDENT.LBL_FECHAACCIDENTE' | translate }}" [sortable]="true"></p-column>
+	<p-column field="tipoNovedad" header="{{'ACCIDENTINCIDENT.LBL_TIPONOVEDAD' | translate }}" [sortable]="true"></p-column>
+	<p-column field="estadoNovedad" header="{{'ACCIDENTINCIDENT.LBL_ESTADO' | translate }}" [sortable]="true"></p-column>
+	<p-column field="actividades" header="{{'ACCIDENTINCIDENT.LBL_ACTIVIDADES' | translate }}" styleClass="datatable-col-action">
+		<button pButton type="button" (click)="count()" icon="fa-check"></button>
+		<template let-datos="rowData" pTemplate="body">
+			<span class="label label-default" *ngIf="datos.actividades === 1"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+			<span class="label label-primary" *ngIf="datos.actividades === 2"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+			<span class="label label-success" *ngIf="datos.actividades === 3"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+			<span class="label label-danger" *ngIf="datos.actividades === 4"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+		</template>
+	</p-column>
+	<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+		<template let-datos="rowData" pTemplate="body">
+			<button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip"
+			        title="{{'BTN_VISUALIZAR' | translate}}"
+			        pButton (click)="detail(datos)"></button>
+		</template>
+	</p-column>
+</p-dataTable>
+<p-confirmDialog icon="fa fa-question-circle" #cd width="400">
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="No" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="Si" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>

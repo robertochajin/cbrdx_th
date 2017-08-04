@@ -76,8 +76,9 @@ export class SuppliesProjectionServices {
       return this.authHttp.get( this.masterService + 'dotaciones/tallasGenero/' + idProyeccionDotacion + '/' + idDotacion )
       .map( ( res: Response ) => res.json() as TotalSupplies[] );
    }
-   validate(f: SuppliesProjection) {
-      return this.authHttp.post( this.masterService + 'proyeccionDotacion/validate',f )
+
+   validate( f: SuppliesProjection ) {
+      return this.authHttp.post( this.masterService + 'proyeccionDotacion/validate', f )
       .map( ( res: Response ) => res.json() as Employee[] );
    }
 

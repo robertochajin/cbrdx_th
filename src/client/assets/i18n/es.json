@@ -700,8 +700,11 @@
            "MSG_CRITERIOSSUMA" : "La suma es 100, perfecto!",
            "MSG_CRITERIO" : "Lo siento, debe sumar 100",
            "MSG_DOSEARCH" : "Para visualizar los cargos debe realizar una búsqueda válida",
-           "MSG_CRITERIOS" : "La suma de factores para todos los críterios debe ser 100 para poder guardar"
-
+           "MSG_CRITERIOS" : "La suma de factores para todos los críterios debe ser 100 para poder guardar",
+           "LBL_PROCESS" : "Proceso",
+           "LBL_SUBPROCESS" : "Subproceso",
+           "LBL_PORCENTAJEVALORACION" : "Porcentaje",
+           "LBL_MAPARIESGOS" : "Consultar mapa del riesgo"
 
            },
 
@@ -1106,7 +1109,7 @@
    "LBL_VIAJA":"Viaja",
    "LBL_VALORVIAJA":"Valor Viaje",
    "LBL_ESTRUCTURAFISICA":"Estructura Física",
-   "LBL_EXAMENES":"Examenes",
+   "LBL_EXAMENES": "Examenes",
    "":""
 },
    "DOCMANAGMENT": {
@@ -1295,12 +1298,13 @@
       "": ""
    },
    "ACCIDENTINCIDENT": {
+      "LBL_REPORTAR": "Reportat Accidente/Incidnete",
       "LBL_ESTADO": "Estado",
       "LBL_TIPOAREA": "Tipo area",
       "LBL_TIPONOVEDAD": "Tipo novedad",
       "LBL_COLABORADOR": "Colaborador",
       "LBL_CARGO": "Cargo",
-      "LBL_AREA": "Area",
+      "LBL_AREA": "Area/Oficina",
       "LBL_FECHAACCIDENTE": "Fecha accidente",
       "LBL_ACTIVIDADES": "Actividades",
       "LBL_ACTIVIDAD": "Actividad",

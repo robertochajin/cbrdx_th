@@ -170,8 +170,7 @@ export class SuppliesEmployeesComponent implements OnInit {
       this.msgs = [];
       this.msgs.push( {
                          severity: 'info', summary: 'Nota:',
-                         detail: 'Recuerde que debe crear la novedad de descuento para que sea efectiva la' +
-                                 ' solicitud'
+                         detail: 'Recuerde que se ha creado una novedad de descuento por esta dotación solicitada'
                       } );
    }
 
