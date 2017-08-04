@@ -45,7 +45,7 @@ export class PositionAssessmentComponent implements OnInit {
                this.listaService.getMasterDetails( 'ListasProbabilidadesRiesgos' ).subscribe( res => {
                   this.probabilities.push( { label: 'Seleccione', value: null } );
                   res.map( ( s: ListaItem ) => this.probabilities.push( { label: s.nombre, value: s.idLista } ) );
-                  this.riskService.getTypeRisk(this.position.idCargo).subscribe( ( rest: RiskType[] ) => {
+                  this.riskService.getTypeRiskByPosition(this.position.idCargo).subscribe( ( rest: RiskType[] ) => {
                      rest.map( riskType => {
                         this.riskService.getRiskByTypeAndPosition( this.position.idCargo, riskType.idRiesgoTipo ).subscribe( riesgos => {
                            riskType.subTypes = riesgos;

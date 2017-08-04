@@ -21,7 +21,11 @@ export class RiskService {
       }
    }
 
-   getTypeRisk(idPosition: number) {
+   getTypeRisk() {
+      return this.authHttp.get( this.serviceURL + 'riesgosTipos/').map( ( res: Response ) => res.json() as RiskType[] );
+   }
+
+   getTypeRiskByPosition(idPosition: number) {
       return this.authHttp.get( this.serviceURL + 'riesgosTipos/cargo/' + idPosition ).map( ( res: Response ) => res.json() as RiskType[] );
    }
 
