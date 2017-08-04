@@ -18,6 +18,7 @@ import { OrganizationalStructurePositionsServices } from '../_services/organizat
 import { OrganizationalStructurePositions } from '../_models/organizationalStructurePositions';
 import { VTercero } from '../_models/vTercero';
 import { MedicalExamService } from '../_services/medical-exam.service';
+import { AdjuntosService } from '../_services/adjuntos.service';
 
 @Component( {
                moduleId: module.id,
@@ -39,6 +40,9 @@ export class OccupationalExamsComponent {
    busqueda: string;
    allEmployee: boolean = false;
    showTable: boolean = false;
+   public url = '';
+   public title = '';
+   displayDialog: boolean = false;
 
    constructor( private employeesService: EmployeesService,
       private listaService: ListaService,
@@ -47,6 +51,7 @@ export class OccupationalExamsComponent {
       private organizationalStructureService: OrganizationalStructureService,
       private tipoDeAreaService: TipoDeAreaService,
       private router: Router,
+      private adjuntosService: AdjuntosService,
       private _nav: NavService,
       private confirmationService: ConfirmationService ) {
 
@@ -139,6 +144,13 @@ export class OccupationalExamsComponent {
       });
    }
 
+   previewFile( id: number ) {
+      this.adjuntosService.downloadFile( id ).subscribe( res => {
+         let blob_url = URL.createObjectURL( res );
+         this.url = blob_url;
+         this.displayDialog = true;
+      } );
+   }
    update( d: DocumentManagement ) {
       // this.router.navigate( [ 'document-management/update/', d.idDocumentoTercero ] );
    }

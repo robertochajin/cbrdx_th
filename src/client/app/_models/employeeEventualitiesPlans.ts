@@ -7,8 +7,12 @@ export class EmployeeEventualityPlans {
    idEstadoPlanAccion: number;
    estadoPlanAccion: string;
    idResponsable: number;
-   responsable: string;
+   nombreResponsable: string;
    idEncargado: number;
+   nombreEncargado: string;
+   codigoEstadoPlanAccion: string;
+   respuesta: string;
+   observacion: string;
    actividad: string;
    fechaLimite: Date;
    fechaVerificacion: Date;
