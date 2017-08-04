@@ -75,11 +75,16 @@
 				</p-column>
 				<p-column field="numeroDocumento" header="{{'EXAMENOCUPACIONAL.LBL_DOCUMENTO' | translate }}" [sortable]="true"></p-column>
 				<p-column field="nombreCompleto" header="{{'EXAMENOCUPACIONAL.LBL_COLABORADOR' | translate }}" [sortable]="true"></p-column>
+				<p-column field="cargo" header="{{'EXAMENOCUPACIONAL.LBL_COLABORADOR' | translate }}" [sortable]="true"></p-column>
+				<p-column field="estructuraArea" header="{{'EXAMENOCUPACIONAL.LBL_TIPOAREA' | translate }}" [sortable]="true"></p-column>
+				<p-column field="estructuraOrganizacional" header="{{'EXAMENOCUPACIONAL.LBL_AREAOFICINA' | translate }}"[sortable]="true"></p-column>
+				<p-column field="fechaUltimoExamen" header="{{'EXAMENOCUPACIONAL.LBL_PROXIMOEXAMEN' | translate }}"
+				          [sortable]="true"></p-column>
 				<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
 					<template let-dc="rowData" pTemplate="body">
 						<button type="button" icon="fa-eye" class="ui-button-success" data-toggle="tooltip"
 						        title="{{'BTN_VISUALIZAR' | translate}}"
-						        pButton (click)="previewFile(2104)"></button>
+						        pButton (click)="previewFile(dc.idAdjunto)"></button>
 					</template>
 				</p-column>
 			</p-dataTable>
