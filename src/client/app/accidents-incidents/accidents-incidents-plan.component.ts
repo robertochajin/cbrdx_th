@@ -66,6 +66,8 @@ export class AccidentIncidentPlanComponent implements OnInit {
    fsize: number = 50000000;
    ftype: string = '';
 
+   private idTercero: number;
+
    constructor( private router: Router,
       private route: ActivatedRoute,
       private location: Location,
@@ -81,6 +83,7 @@ export class AccidentIncidentPlanComponent implements OnInit {
       private navService: NavService ) {
       let token = localStorage.getItem( 'token' );
       this.usuarioLogueado = this.jwtHelper.decodeToken( token );
+      this.idTercero = this.usuarioLogueado.usuario.idTercero;
       this.constanteService.getByCode( 'FTYPE' ).subscribe( data => {
          if ( data.valor ) {
             this.ftype = data.valor;

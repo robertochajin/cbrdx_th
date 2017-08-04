@@ -127,7 +127,7 @@ export class QuestionnairesUpdateComponent implements OnInit {
       this.formQuestion = true;
       this.showAnswers = false;
       this.pregunta = new QuestionnariesQuestions();
-      this.getPreviousQuestions( this.preguntas.length );
+      this.getPreviousQuestions( this.preguntas.length + 1 );
    }
 
    getPreviousQuestions( secuencia: number ) {

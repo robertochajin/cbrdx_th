@@ -44,7 +44,7 @@ export class EmployeeEventuality {
    idTerceroReporta: number;
    idEstadoNovedad: number;
    idResultado: number;
-   resultado: number;
+   resultadoAccidente: number;
    descripcionResultado: string;
    estadoNovedad: string;
    estructuraArea: string;
