@@ -216,10 +216,11 @@ import { TracingSuppliesComponent } from './supplies/tracing-supplies/tracing-su
 import { ConsolidatedProjectionComponent } from './supplies/supplies-projection/consolidated-projection.component';
 import { SuppliesConfirmationComponent } from './employees/supplies-employees/supplies-confirmation.component';
 import { OccupationalExamsComponent } from './occupational-exams/occupational-exams.component';
-import { AssessmentListComponent } from './position_assessment/assessment-list.component';
-
+import { MedicalExamInformedConsentPeriodComponent } from './employees-clinical-information/informed-consent-period.component';
+import { AnswerExamsPeriodComponent } from './medical-institutions/answer-exams-period.component';
 import { AccidentIncidentComponent } from './accidents-incidents/accidents-incidents.component';
 import { AccidentIncidentPlanComponent } from './accidents-incidents/accidents-incidents-plan.component';
+import { AssessmentListComponent } from './position_assessment/assessment-list.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -497,7 +498,9 @@ const routes = [
 
    // consentimiento informado
    { path: 'informed-consent/exam/:idExamen/terceroPublicacion/:idTerceroPublication', component: MedicalExamInformedConsentComponent },
+   { path: 'informed-consent-exam-period/:idExamen', component: MedicalExamInformedConsentPeriodComponent },
    { path: 'answer-exams/exam/:idExamen/terceroPublicacion/:idTerceroPublication', component: AnswerExamsComponent },
+   { path: 'answer-exams-exam-period/:idExamen', component: AnswerExamsPeriodComponent },
 
    // Aplicar a vacantes
    { path: 'apply-vacancy/publications-detail/:idPublication', component: VacancyApplyComponent, canActivate: [ AuthGuard ] },

@@ -1098,6 +1098,7 @@
    "LBL_DATOSGENERALES":"Datos Generales",
    "LBL_CODIGO":"Código",
    "LBL_NOMBRE":"Nombre",
+   "LBL_ADJUNTAR":"Adjuntar",
    "LBL_REPRESENTANTELEGAL":"Representante Legal",
    "LBL_DIRECCION":"Dirección",
    "LBL_CIUDAD":"Ciudad",
@@ -1202,6 +1203,8 @@
       "LBL_COLABORADOR": "Colaborador",
       "MSG_INGRESECODIGO": "Ingrese el código enviado a su móvil",
       "BTN_TRAMITAR": "Tramitar",
+      "BTN_AUTORIZAR": "Autorizar",
+      "BTN_NOAUTORIZAR": "No autorizar",
       "": ""
    },
    "ASIGNARDOTACION": {

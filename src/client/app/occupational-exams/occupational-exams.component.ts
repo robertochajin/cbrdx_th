@@ -16,6 +16,7 @@ import { OrganizationalStructureService } from '../_services/organizationalStruc
 import { OrganizationalStructure } from '../_models/organizationalStructure';
 import { OrganizationalStructurePositionsServices } from '../_services/organizationalStructurePositions.service';
 import { OrganizationalStructurePositions } from '../_models/organizationalStructurePositions';
+import { VTercero } from '../_models/vTercero';
 
 @Component( {
                moduleId: module.id,
@@ -25,7 +26,7 @@ import { OrganizationalStructurePositions } from '../_models/organizationalStruc
             } )
 export class OccupationalExamsComponent {
    msg: Message;
-   listEmployee: Employee[] = [];
+   listEmployee: VTercero[] = [];
    listSelectEmployee: any[] = [];
    listTypeArea: SelectItem[] = [];
    listArea: SelectItem[] = [];
@@ -36,6 +37,7 @@ export class OccupationalExamsComponent {
    idArea: number;
    busqueda: string;
    allEmployee: boolean = false;
+   showTable: boolean = false;
 
    constructor( private employeesService: EmployeesService,
       private listaService: ListaService,
@@ -52,15 +54,6 @@ export class OccupationalExamsComponent {
    }
 
    ngOnInit(): void {
-      this.employeesService.getAll().subscribe( rs => {
-         for ( let t of rs ) {
-            t.nombreCompleto = t.primerNombre + ' ' +
-                               t.segundoNombre + ' ' +
-                               t.primerApellido + ' ' +
-                               t.segundoApellido;
-            this.listEmployee.push( t );
-         }
-      } );
       // this.positionsService.getAll().subscribe( rs => {
       //    this.listPosition = rs;
       // } );
@@ -89,6 +82,7 @@ export class OccupationalExamsComponent {
 
    changeArea() {
       this.listPosition = [];
+      this.selectedPositions = [];
       this.organizationalStructurePositionsServices.getAllByOrganizacionalStructure( this.idArea ).subscribe( rs => {
          this.listPosition = rs;
       } );
@@ -99,13 +93,29 @@ export class OccupationalExamsComponent {
       this.idTipoArea = null;
       this.idArea = null;
       this.listArea = [];
+      this.listEmployee = [];
+      this.showTable = false;
+      this.selectedPositions =[];
    }
 
    onSubmitFilter() {
       if ( this.selectedPositions.length > 0 ) {
-         this.selectedPositions;
+         this.employeesService.getAllByOrganiztionalStructurePosition( this.selectedPositions ).subscribe( rs => {
+            if ( rs.length > 0 ) {
+               for(let c of rs){
+                  c.nombreCompleto = c.primerNombre + ' ' +
+                                                  c.segundoNombre + ' ' +
+                                                  c.primerApellido + ' ' +
+                                                  c.segundoApellido;
+                  this.listEmployee.push(c);
+               }
+               this.showTable = true;
+            }else{
+               this.showTable = false;
+               this._nav.setMesage(0, { severity: 'info', summary: 'Info', detail: 'No se encotraron resultados en la busqueda.' });
+            }
+         } );
       }
-      this.selectedPositions;
    }
 
    selectEmployee() {
