@@ -9,6 +9,8 @@
    "BTN_AGREGAR": "Agregar",
    "BTN_CANCELAR": "Cancelar",
    "LBL_CORREOELECTRONICO": "Correo Electrónico",
+   "LBL_CODIGO_CONFIRMACION": "Código de confirmación",
+   "BTN_CONFIRMAR": "Confirmar",
    "LBL_DIRECCION": "Dirección",
    "BTN_GUARDAR": "Guardar",
    "BTN_VOLVER": "Volver",

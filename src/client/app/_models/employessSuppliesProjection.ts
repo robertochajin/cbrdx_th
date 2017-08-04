@@ -7,6 +7,7 @@ export class EmployessSuppliesProjection {
    public idProyeccionDotacion: number;
    public documento: string;
    public nombreCompleto: string;
+   public codigoVerificacion: string;
    public cargo: string;
    public area: string;
    public tipoArea: string;
