@@ -54,7 +54,7 @@
 									</div>
 								</div>
 								<div class="ui-grid-row">
-									<div class="ui-grid-col-5">
+									<div class="ui-grid-col-6">
 										<label for="telefonoFijo">* {{'MEDICALINSTITUTION.LBL_TELEFONO' | translate }}</label>
 										<p-inputMask id="telefonoFijo" name="telefonoFijo"
 										             mask="?(999) 999-9999 Ext 9999" placeholder="(999) 999-9999 Ext 99999" #telefonoFijo="ngModel"
@@ -67,7 +67,7 @@
 											{{'MEDICALINSTITUTION.LBL_TELEFONO' | translate }} {{'LBL_REQUERIDO' | translate }}
 										</div>
 									</div>
-									<div class="ui-grid-col-7">
+									<div class="ui-grid-col-6">
 										<label for="correoElectronico">* {{'LBL_CORREOELECTRONICO' | translate }}</label>
 										<input id="correoElectronico" name="correoElectronico" #correoElectronico="ngModel" pInputText
 										       type="text" required [(ngModel)]="medicalInstitution.correoElectronico" maxlength="128"
@@ -126,7 +126,15 @@
 									</div>
 								</div>
 								<div class="ui-grid-row">
-									<div class="col-md-3">
+									<div class="ui-grid-col-6">
+										<p-checkbox id="Habilitado" name="Habilitado" [(ngModel)]="medicalInstitution.indicadorHabilitado"
+														binary="true"></p-checkbox>
+										<label for="Habilitado">{{ 'LBL_HABILITADO' | translate}}</label>
+									</div>
+								</div>
+
+								<div class="ui-grid-row">
+									<div class="ui-grid-col-6">
 										<h3>{{'MEDICALINSTITUTION.LBL_EXAMENES' | translate }}</h3>
 										<div *ngFor="let c of typeExams">
 											<p-checkbox name="tiposexamenes" value="{{c.value}}" label="{{c.label}}"
@@ -139,24 +147,16 @@
 											{{'MEDICALINSTITUTION.LBL_EXAMENES' | translate }} {{'LBL_REQUERIDO' | translate }}
 										</div>
 									</div>
-									<div class="ui-grid-col-3">
-										<label for="Habilitado">{{ 'LBL_HABILITADO' | translate}}</label>
-										<p-checkbox id="Habilitado" name="Habilitado" [(ngModel)]="medicalInstitution.indicadorHabilitado"
-										            binary="true"></p-checkbox>
 									</div>
-								</div>
-								<div class="ui-grid-row form-footer-buttons">
-									<div class="ui-grid-col-4"></div>
-									<div class="ui-grid-col-1">
+							</div>
+
+							<div class="row form-footer-buttons">
+									<div class="col-md-12">
 										<a (click)="goBack(f.dirty == true)" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
-									</div>
-									<div class="ui-grid-col-2">
 										<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}"
 										        type="submit"></button>
 									</div>
-									<div class="ui-grid-col-5"></div>
 								</div>
-							</div>
 						</form>
 					</div>
 					<p-confirmDialog width="400" #cd>
@@ -173,10 +173,10 @@
 			</p-accordionTab>
 			<p-accordionTab header="{{ 'MEDICALINSTITUTION.LBL_ESTRUCTURAFISICA' | translate }}" [selected]="acordion==1"
 			                [disabled]="!medicalInstitution.idInstitucionMedica">
+				<div class="col-md-offset-1 col-md-10">
 				<form (ngSubmit)="fs.valid && onSubmitEstructura()" #fs="ngForm" novalidate id="estructura" *ngIf="addingStructure">
 					<div class="row">
-						<div class="ui-grid-row">
-							<div class="ui-grid-col-12">
+							<div class="col-md-6">
 								<label for="estrucFisica">{{ 'MEDICALINSTITUTION.LBL_ESTRUCTURAFISICA' | translate}}</label>
 								<p-dropdown id="estrucFisica" name="estrucFisica" required="true"
 								            [options]="physicStructure" [autoWidth]="false" filter="filter"
@@ -189,31 +189,30 @@
 									{{ 'MEDICALINSTITUTION.LBL_ESTRUCTURAFISICA' | translate }} {{'LBL_REQUERIDO' | translate }}
 								</div>
 							</div>
+						<div class="col-md-6" *ngIf="medicalInstitutionStructure.indicadorViaja">
+							<label for="valorviaje">* {{'MEDICALINSTITUTION.LBL_VALORVIAJA' | translate }}</label><br>
+							<input class="form-control" id="valorviaje" name="valorviaje" #valorv="ngModel" pInputText
+									 type="text" [required]="medicalInstitutionStructure.indicadorViaja"
+									 [(ngModel)]="medicalInstitutionStructure.valorViaje" maxlength="9"
+									 currencyMask
+									 [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
+									 (keyup)="inputNumber()"/>
+							<div class="ui-message ui-messages-error ui-corner-all" *ngIf="fs.submitted && !valorv.valid ">
+								<i class="fa fa-close"></i>
+								{{'MEDICALINSTITUTION.LBL_VALORVIAJA' | translate }} {{'LBL_REQUERIDO' | translate }}
+							</div>
 						</div>
-						<div class="ui-grid-row">
-							<div class="ui-grid-col-3" *ngIf="editing">
+					</div>
+						<div class="row">
+							<div class="col-md-3" *ngIf="editing">
 								<label></label><br>
 								<p-checkbox id="habilitadoE" name="habilitadoE" [(ngModel)]="medicalInstitutionStructure.indicadorHabilitado"
 								            binary="true" label="{{ 'LBL_HABILITADO' | translate }}"></p-checkbox>
 							</div>
-							<div class="ui-grid-col-2">
+							<div class="col-md-3">
 								<p-checkbox id="viaja" name="viaja" [(ngModel)]="medicalInstitutionStructure.indicadorViaja"
 								            binary="true" label="{{ 'MEDICALINSTITUTION.LBL_VIAJA' | translate }}"></p-checkbox>
 							</div>
-							<div class="ui-grid-col-4" *ngIf="medicalInstitutionStructure.indicadorViaja">
-								<label for="valorviaje">* {{'MEDICALINSTITUTION.LBL_VALORVIAJA' | translate }}</label>
-								<input id="valorviaje" name="valorviaje" #valorv="ngModel" pInputText
-								       type="text" [required]="medicalInstitutionStructure.indicadorViaja"
-								       [(ngModel)]="medicalInstitutionStructure.valorViaje" maxlength="9"
-								       currencyMask
-								       [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative:false, precision : 0 }"
-								       (keyup)="inputNumber()"/>
-								<div class="ui-message ui-messages-error ui-corner-all" *ngIf="fs.submitted && !valorv.valid ">
-									<i class="fa fa-close"></i>
-									{{'MEDICALINSTITUTION.LBL_VALORVIAJA' | translate }} {{'LBL_REQUERIDO' | translate }}
-								</div>
-							</div>
-						
 						</div>
 						<div class="row form-footer-buttons">
 							<div class="col-md-12">
@@ -222,8 +221,8 @@
 								        type="submit"></button>
 							</div>
 						</div>
-					</div>
 				</form>
+				</div>
 				<div class="ui-grid-row">
 					<div class="ui-grid-col-12">
 						<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listMedicalInstitutionStructure"
