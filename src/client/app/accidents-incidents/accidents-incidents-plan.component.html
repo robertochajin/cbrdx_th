@@ -72,6 +72,7 @@
 					<div class="col-md-6 col-xs-12 datatable-header-add">
 						<button type="button" icon="fa-plus"
 						        label="{{'ACCIDENTINCIDENT.LBL_AGREGARPLAN' | translate}}"
+						        *ngIf="employeeEventuality.idEstadoNovedad !== estadoTerminado"
 						        pButton (click)="add()"></button>
 					</div>
 					<div class="col-md-6 col-xs-12 datatable-header-search" >
@@ -97,10 +98,12 @@
 							        title="{{'BTN_EDITAR' | translate}}"
 							        pButton (click)="update(datos)"></button>-->
 							<!--*ngIf="datos.codigoEstado === 'Pendiente'"-->
-							<button *ngIf="datos.codigoEstadoPlanAccion === 'PEND'" type="button" icon="fa-pencil" class="ui-button-success"
+							<button *ngIf="datos.codigoEstadoPlanAccion === 'PEND' && employeeEventuality.idEstadoNovedad !== estadoTerminado"
+							        type="button" icon="fa-pencil" class="ui-button-success"
 							        data-toggle="tooltip" title="{{'ACCIDENTINCIDENT.LBL_RESPONDER' | translate }}"
 							        pButton (click)="answer(datos)"></button>
-							<button *ngIf="datos.codigoEstadoPlanAccion === 'REAL'" type="button" icon="fa-check-circle-o"
+							<button *ngIf="datos.codigoEstadoPlanAccion === 'REAL' && employeeEventuality.idEstadoNovedad !== estadoTerminado"
+							        type="button" icon="fa-check-circle-o"
 							        class="ui-button-success"
 							        data-toggle="tooltip" title="{{'ACCIDENTINCIDENT.LBL_VERIFICAR' | translate }}"
 							        pButton (click)="varify(datos)"></button>
@@ -372,7 +375,7 @@
 									}}</label>
 								<div class=" col-sm-9">
 									<p-checkbox binary="true" id="indicadorVerficar" name="indicadorVerficar"
-									            [(ngModel)]="employeeEventualityPlan.indicadorVerificado"
+									            [(ngModel)]="employeeEventualityPlan.indicadorVerficar"
 									            #NGindicadorVerficar="ngModel"
 									></p-checkbox>
 								</div>
@@ -393,7 +396,7 @@
 						<div class="ui-grid-row form-footer-buttons">
 							<div class="ui-grid-col-3"></div>
 							<div class="ui-grid-col-2">
-								<a (click)="goBackAnswer((fr.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+								<a (click)="goBackAnswer((fvr.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
 							</div>
 							<div class="ui-grid-col-3">
 								<button pButton icon="fa-plus" label="{{'BTN_GUARDAR' | translate }}" type="submit"></button>
