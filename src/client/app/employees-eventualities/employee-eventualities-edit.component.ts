@@ -69,6 +69,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
    listAttachment: EmployeeEventualityAttachment[] = [];
    nameAttachment: string;
    saveAttachmnet: boolean = true;
+   indicadorJefeAutoriza: boolean = false;
 
    // indicadores para mostrar campos en formulario
    showhorainicio: boolean = false;
@@ -245,7 +246,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
                      this._nav.setMesage( 2, this.msgs );
                      if ( this.eventuality.indicadorAdjuntos ) {
                         this.acordion = 1;
-                     }else{
+                     } else {
                         this.dismiss.emit( 1 );
                      }
                   }, error => {
@@ -253,13 +254,17 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
                   } );
                }
                else {
-                  this.employeeEventuality.idEstadoNovedad = this.eventuality.idEstadoInicialNovedad;
+                  if ( this.indicadorJefeAutoriza ) {
+                     this.employeeEventuality.idEstadoNovedad = this.getStateByCode( 'PENAPR' );
+                  } else {
+                     this.employeeEventuality.idEstadoNovedad = this.eventuality.idEstadoInicialNovedad;
+                  }
                   this.employeeEventuality.idTerceroReporta = this.usuarioLogueado.usuario.idTercero;
                   this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
                      this._nav.setMesage( 1, this.msgs );
                      if ( this.eventuality.indicadorAdjuntos ) {
                         this.acordion = 1;
-                     }else{
+                     } else {
                         this.dismiss.emit( 1 );
                      }
                   }, error => {
@@ -279,7 +284,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
                this._nav.setMesage( 2, this.msgs );
                if ( this.eventuality.indicadorAdjuntos ) {
                   this.acordion = 1;
-               }else{
+               } else {
                   this.dismiss.emit( 1 );
                }
             }, error => {
@@ -287,7 +292,11 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
             } );
          }
          else {
-            this.employeeEventuality.idEstadoNovedad = this.eventuality.idEstadoInicialNovedad;
+            if ( this.indicadorJefeAutoriza ) {
+               this.employeeEventuality.idEstadoNovedad = this.getStateByCode( 'PENAPR' );
+            } else {
+               this.employeeEventuality.idEstadoNovedad = this.eventuality.idEstadoInicialNovedad;
+            }
             this.employeeEventuality.idTerceroReporta = this.usuarioLogueado.usuario.idTercero;
             this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
                this.employeeEventuality.idTerceroNovedad = data.idTerceroNovedad;
@@ -295,7 +304,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
                if ( !this.eventuality.indicadorConfirmacion ) {
                   if ( this.eventuality.indicadorAdjuntos ) {
                      this.acordion = 1;
-                  }else{
+                  } else {
                      this.dismiss.emit( 1 );
                   }
                }
@@ -356,6 +365,11 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
          this.listField = data;
          this.eventualityServices.get( this.employeeEventuality.idNovedad ).subscribe( rest => {
             this.eventuality = rest;
+            if ( rest.indicadorAutorizaJefe ) {
+               this.indicadorJefeAutoriza = true;
+            } else {
+               this.indicadorJefeAutoriza = false;
+            }
          } );
          this.resetForm();
          this.propareForm();

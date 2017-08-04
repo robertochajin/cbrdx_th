@@ -218,6 +218,9 @@ import { SuppliesConfirmationComponent } from './employees/supplies-employees/su
 import { OccupationalExamsComponent } from './occupational-exams/occupational-exams.component';
 import { MedicalExamInformedConsentPeriodComponent } from './employees-clinical-information/informed-consent-period.component';
 import { AnswerExamsPeriodComponent } from './medical-institutions/answer-exams-period.component';
+import { AccidentIncidentComponent } from './accidents-incidents/accidents-incidents.component';
+import { AccidentIncidentPlanComponent } from './accidents-incidents/accidents-incidents-plan.component';
+import { AssessmentListComponent } from './position_assessment/assessment-list.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -542,7 +545,7 @@ const routes = [
    //  employees additional data
    { path: 'employees/supplies-confirmation/:id', component: SuppliesConfirmationComponent, canActivate: [ AuthGuard ] },
    // examenes ocupacionales
-   { path: 'occupational-exams', component: OccupationalExamsComponent }
+   { path: 'occupational-exams', component: OccupationalExamsComponent },
 
 
 
