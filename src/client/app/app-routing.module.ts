@@ -220,6 +220,7 @@ import { MedicalExamInformedConsentPeriodComponent } from './employees-clinical-
 import { AnswerExamsPeriodComponent } from './medical-institutions/answer-exams-period.component';
 import { AccidentIncidentComponent } from './accidents-incidents/accidents-incidents.component';
 import { AccidentIncidentPlanComponent } from './accidents-incidents/accidents-incidents-plan.component';
+import { AssessmentListComponent } from './position_assessment/assessment-list.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
