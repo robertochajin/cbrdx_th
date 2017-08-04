@@ -23,7 +23,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-10  col-md-offset-1">
-					<p-pickList [source]="listPosition" [target]="selectedPositions"
+					<p-pickList [source]="listPosition" [target]="selectedPositions" class="ui-picklist-buttons"
 					            sourceHeader="{{ 'EXAMENOCUPACIONAL.LBL_CARGOS' | translate }} "
 					            targetHeader="{{ 'EXAMENOCUPACIONAL.LBL_CARGOSSELECT' | translate }} " [responsive]="true"
 					            [showTargetControls]="false" [showSourceControls]="false">
@@ -51,7 +51,7 @@
 			</div>
 		</form>
 	</p-panel>
-	<p-panel header="Resultados" class="perfil" *ngIf="listPosition.length>0">
+	<p-panel header="Resultados" class="perfil" *ngIf="showTable">
 		<div>
 			<div class="row datable-header">
 				<div class="col-md-6 col-xs-12 datatable-header-add"></div>

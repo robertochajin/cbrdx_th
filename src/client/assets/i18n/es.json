@@ -9,6 +9,8 @@
    "BTN_AGREGAR": "Agregar",
    "BTN_CANCELAR": "Cancelar",
    "LBL_CORREOELECTRONICO": "Correo Electrónico",
+   "LBL_CODIGO_CONFIRMACION": "Código de confirmación",
+   "BTN_CONFIRMAR": "Confirmar",
    "LBL_DIRECCION": "Dirección",
    "BTN_GUARDAR": "Guardar",
    "BTN_VOLVER": "Volver",
@@ -1099,6 +1101,7 @@
    "LBL_DATOSGENERALES":"Datos Generales",
    "LBL_CODIGO":"Código",
    "LBL_NOMBRE":"Nombre",
+   "LBL_ADJUNTAR":"Adjuntar",
    "LBL_REPRESENTANTELEGAL":"Representante Legal",
    "LBL_DIRECCION":"Dirección",
    "LBL_CIUDAD":"Ciudad",
@@ -1203,6 +1206,8 @@
       "LBL_COLABORADOR": "Colaborador",
       "MSG_INGRESECODIGO": "Ingrese el código enviado a su móvil",
       "BTN_TRAMITAR": "Tramitar",
+      "BTN_AUTORIZAR": "Autorizar",
+      "BTN_NOAUTORIZAR": "No autorizar",
       "": ""
    },
    "ASIGNARDOTACION": {
