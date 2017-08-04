@@ -9,9 +9,9 @@
 			<h2>{{employee.nombreCompleto}} <span *ngIf=" employee.estadoTercero !== null " class="tag">{{ employee.estadoTercero }}</span>
 			</h2>
 			<h4>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</h4>
-			<span>{{employee.fechaNacimiento}} ({{employee.edad}})</span><br />
-			<span>Cargo actual : {{employee.cargoActual}}</span><br />
-			<span>Usuario desde : {{employee.fechaCreacion}}</span><br />
+			<span>{{employee.fechaNacimiento}} ({{employee.edad}})</span><br/>
+			<span>Cargo actual : {{employee.cargoActual}}</span><br/>
+			<span>Usuario desde : {{employee.fechaCreacion}}</span><br/>
 		</div>
 		<div class="col-md-2">
 			<!--<a href="#" class="btn btn-primary">{{'EMPLOYEES.LBL_HISTORIALABORAL' | translate}}</a>-->
@@ -183,7 +183,7 @@
 								</div>
 							</fieldset>
 						</p-panel>
-						<p-panel header="{{'NOVEDADES.LBL_ADJUNTOS' | translate}}">
+						<p-panel header="{{'NOVEDADES.LBL_ADJUNTOS' | translate}}" >
 							<fieldset>
 								<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="listAttachment" [paginator]="true"
 								             [rows]="10"
@@ -200,12 +200,21 @@
 								</p-dataTable>
 							</fieldset>
 						</p-panel>
+							<div class="form-footer-buttons"  *ngIf="indicadorJefeAutoriza">
+								<div class="col-md-12">
+									<button pButton icon="fa-remove" class="ui-button-danger"
+									        label="{{'EMPLOYEENOVELTY.BTN_NOAUTORIZAR' | translate }}"
+									        type="button" (click)="submitNotAuthorize()"></button>
+									<button pButton icon="fa-check" class="ui-button-success" label="{{'EMPLOYEENOVELTY.BTN_AUTORIZAR' | translate }}"
+									        type="button" (click)="submitAuthorize()"></button>
+								</div>
+							</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</p-accordionTab>
-	<p-accordionTab header="{{'NOVEDADES.LBL_ACTIVIDADES' | translate}}" [selected]="acordion == 1">
+	<p-accordionTab header="{{'NOVEDADES.LBL_ACTIVIDADES' | translate}}" [selected]="acordion == 1" *ngIf="!indicadorJefeAutoriza">
 		<div *ngIf="!saveActivity">
 			<div class="row datable-header">
 				<div class="col-md-6 col-xs-12 datatable-header-add">
@@ -254,7 +263,7 @@
 								<p-dropdown id="idTipoNovedad" name="idTipoNovedad"
 								            [options]="listEstados" [autoWidth]="false"
 								            [(ngModel)]="employeeEventualityActivity.idEstadoNovedad" required
-								            #idTipoNov="ngModel" ></p-dropdown>
+								            #idTipoNov="ngModel"></p-dropdown>
 								<div class="ui-message ui-messages-error ui-corner-all"
 								     *ngIf="f.submitted && !idTipoNov.valid">
 									<i class="fa fa-close"></i>

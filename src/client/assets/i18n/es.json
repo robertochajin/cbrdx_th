@@ -1201,6 +1201,8 @@
       "LBL_COLABORADOR": "Colaborador",
       "MSG_INGRESECODIGO": "Ingrese el código enviado a su móvil",
       "BTN_TRAMITAR": "Tramitar",
+      "BTN_AUTORIZAR": "Autorizar",
+      "BTN_NOAUTORIZAR": "No autorizar",
       "": ""
    },
    "ASIGNARDOTACION": {

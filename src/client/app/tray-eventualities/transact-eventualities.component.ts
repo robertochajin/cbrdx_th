@@ -15,6 +15,7 @@ import { Location } from '@angular/common';
 import { EmployeesService } from '../_services/employees.service';
 import { Employee } from '../_models/employees';
 import * as moment from 'moment/moment';
+import { ListaItem } from '../_models/listaItem';
 
 @Component( {
                moduleId: module.id,
@@ -79,8 +80,10 @@ export class EmployeeEventualityTransactComponent {
    busqueda: string = '';
    saveActivity: boolean = false;
    listEstados: SelectItem[] = [];
+   listEstadosTemp: ListaItem[] = [];
    msgs: Message[];
    employee: Employee = new Employee();
+   indicadorJefeAutoriza: boolean = false;
 
    constructor( private eventualityServices: EventualityServices,
       private employeeNoveltyService: EmployeeEventualitiesService,
@@ -99,6 +102,7 @@ export class EmployeeEventualityTransactComponent {
 
    ngOnInit() {
       this.listaService.getMasterDetails( 'ListasEstadosNovedades' ).subscribe( res => {
+         this.listEstadosTemp = res;
          this.listEstados.push( { label: 'Seleccione', value: null } );
          res.map( ( s: any ) => {
             if ( s.codigo !== 'ENCONSTRUC' ) {
@@ -111,6 +115,11 @@ export class EmployeeEventualityTransactComponent {
          if ( tempIdTerceroNovedad ) {
             this.employeeNoveltyService.getById( tempIdTerceroNovedad ).subscribe( rs => {
                this.employeeEventuality = rs;
+               if ( this.getStateByCode( 'PENAPR' ) === rs.idEstadoNovedad ) {
+                  this.indicadorJefeAutoriza = true;
+               } else {
+                  this.indicadorJefeAutoriza = false;
+               }
                this.employeeService.get( rs.idTercero ).subscribe( employee => {
                   this.employee = employee;
                   this.employee.nombreCompleto = this.employee.primerNombre + ' ' +
@@ -224,6 +233,15 @@ export class EmployeeEventualityTransactComponent {
       event.target.value = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
    }
 
+   getStateByCode( codigo: string ) {
+      let temp = this.listEstadosTemp.find( x => x.codigo === codigo );
+      if ( temp ) {
+         return temp.idLista;
+      } else {
+         return null;
+      }
+   }
+
    add() {
       this.employeeEventualityActivity.idTerceroNovedad = this.employeeEventuality.idTerceroNovedad;
       this.employeeEventualityActivity.idEstadoNovedad = this.employeeEventuality.idEstadoNovedad;
@@ -255,6 +273,26 @@ export class EmployeeEventualityTransactComponent {
 
    detail() {
 
+   }
+
+   submitNotAuthorize() {
+      this.employeeEventuality.idEstadoNovedad = this.getStateByCode( 'RECHAZ' );
+      this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( rs => {
+         this._nav.setMesage( 2, this.msgs );
+         this.location.back();
+      }, error => {
+         this._nav.setMesage( 3, this.msgs );
+      } );
+   }
+
+   submitAuthorize() {
+      this.employeeEventuality.idEstadoNovedad = this.getStateByCode( 'SOLICI' );
+      this.employeeNoveltyService.update( this.employeeEventuality ).subscribe( rs => {
+         this._nav.setMesage( 2, this.msgs );
+         this.location.back();
+      }, error => {
+         this._nav.setMesage( 3, this.msgs );
+      } );
    }
 
    onSubmit() {
