@@ -63,7 +63,7 @@ export class PositionAssessmentComponent implements OnInit {
    }
 
    onChangeProbability(event: any, risk: Risk){
-      this.riskService.update(risk).subscribe(res => {
+      this.riskService.updateRisk(risk).subscribe(res => {
          this._nav.setMesage(2);
       }, error => {
          this._nav.setMesage(3);
@@ -71,7 +71,7 @@ export class PositionAssessmentComponent implements OnInit {
    }
 
    onChangeConcecuence(event: any, risk: Risk){
-      this.riskService.update(risk).subscribe(res => {
+      this.riskService.updateRisk(risk).subscribe(res => {
          this._nav.setMesage(2);
       }, error => {
          this._nav.setMesage(3);

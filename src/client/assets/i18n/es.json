@@ -709,7 +709,13 @@
            "LBL_MAPARIESGOS" : "Consultar mapa del riesgo",
            "LBL_PROBABILIDAD" : "Probabilidad",
            "LBL_PELIGRO" : "Peligro",
-           "LBL_CONSECUENCIA" : "Consecuencia"
+           "LBL_CONSECUENCIA" : "Consecuencia",
+            "LBL_VERSIONESVALORACION" : "Listado de versiones de mapas de valoración de riesgos",
+            "LBL_NUEVAVERSION" : "Generar nueva versión",
+            "LBL_NOMBREVERSION" : "Nombre versión",
+            "LBL_NUMEROVERSION" : "Número versión",
+            "LBL_USUARIO" : "Usuario que genera",
+            "LBL_FECHACREACION" : "Fecha creación"
 
            },
 
