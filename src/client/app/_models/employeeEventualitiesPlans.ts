@@ -7,18 +7,22 @@ export class EmployeeEventualityPlans {
    idEstadoPlanAccion: number;
    estadoPlanAccion: string;
    idResponsable: number;
-   responsable: string;
+   nombreResponsable: string;
    idEncargado: number;
+   nombreEncargado: string;
+   codigoEstadoPlanAccion: string;
+   respuesta: string;
+   observacion: string;
    actividad: string;
    fechaLimite: Date;
    fechaVerificacion: Date;
    auditoriaFecha: Date;
    auditoriaUsuario: number;
    indicadorHabilitado: boolean;
-   indicadorVerificado: boolean;
+   indicadorVerficar: boolean;
 
    constructor() {
-      this.indicadorVerificado = false;
+      this.indicadorVerficar = false;
       this.indicadorHabilitado = true;
       this.auditoriaFecha = null;
       this.auditoriaUsuario = null;
