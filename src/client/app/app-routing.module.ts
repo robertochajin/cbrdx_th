@@ -221,6 +221,7 @@ import { AnswerExamsPeriodComponent } from './medical-institutions/answer-exams-
 import { AccidentIncidentComponent } from './accidents-incidents/accidents-incidents.component';
 import { AccidentIncidentPlanComponent } from './accidents-incidents/accidents-incidents-plan.component';
 import { AssessmentListComponent } from './position_assessment/assessment-list.component';
+import { PositionAssessmentComponent } from './position_assessment/position-assessment.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -427,6 +428,7 @@ const routes = [
    { path: 'position-activities/:idCargo', component: PositionAuthoritiesComponent, canActivate: [ AuthGuard ] },
    { path: 'position/requirement/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'position/assessment', component: AssessmentListComponent },
+   { path: 'position/assessment/position/:position', component: PositionAssessmentComponent },
 
    // Administracion
    { path: 'menus', component: MenuManagerComponent, canActivate: [ AuthGuard ] },

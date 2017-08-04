@@ -22,7 +22,11 @@ export class RiskService {
    }
 
    getTypeRisk() {
-      return this.authHttp.get( this.serviceURL + 'riesgosTipos' ).map( ( res: Response ) => res.json() as RiskType[] );
+      return this.authHttp.get( this.serviceURL + 'riesgosTipos/').map( ( res: Response ) => res.json() as RiskType[] );
+   }
+
+   getTypeRiskByPosition(idPosition: number) {
+      return this.authHttp.get( this.serviceURL + 'riesgosTipos/cargo/' + idPosition ).map( ( res: Response ) => res.json() as RiskType[] );
    }
 
    getExamByIdCargo( id: number ) {
@@ -54,10 +58,10 @@ export class RiskService {
    }
 
    getRiskByTypeAndPosition( idCargo: number, idRiesgoTipo: number ) {
-      return this.authHttp.get( this.serviceURL + 'PORDEFINIR/' + idCargo + '/' + idRiesgoTipo ).map( ( res: Response ) => {
+      return this.authHttp.get( this.serviceURL + 'cargosRiesgos/cargoTipoRiesgo/' + idCargo + '/' + idRiesgoTipo )
+      .map( ( res: Response ) => {
          return res.json() as Risk[]
-   } );
-      // return this.authHttp.get( this.serviceURL + 'cargosRiesgos/buscarCargo/' + idRiesgoTipo ).map( ( res: Response ) => res.json() as Risk[] );
+      } );
    }
 
    add( c: Risk ) {

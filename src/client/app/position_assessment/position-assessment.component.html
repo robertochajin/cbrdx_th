@@ -1,24 +1,35 @@
+<div class="row">
+	<div class="col-md-10">
+		<h2>{{position.cargo}}</h2>
+		<h4>{{'POSITION.LBL_PROCESS' | translate}} {{position.proceso}}</h4>
+		<h4>{{'POSITION.LBL_SUBPROCESS' | translate}} {{position.subProceso}}</h4>
+	</div>
+</div>
 <p-tabView orientation="left" id="tbvCompetenciasHabilidades">
 	<p-tabPanel *ngFor="let type of riskTypes; let i = index" header="{{type.riesgoTipo}}" [selected]="i == 0">
-		<div class="row" >
-			<p-dataTable [rows]="6" [paginator]="true" emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="type.subTypes"
-			             [responsive]="true" id="positionCompetenciesDT" styleClass="dejemeverelcombo">
-				<p-column field="competencia" header="{{'COMPETENCIES.LBL_COMPETENCIA' | translate }}" [sortable]="true"></p-column>
-				<p-column field="descripcion" header="{{'LBL_DESCRIPCION' | translate }}" [sortable]="true"></p-column>
-				<p-column header="{{ 'LBL_HABILITADO' | translate }}" styleClass="datatable-col-action">
-					<template let-competencie="rowData" pTemplate="body">
-						<p-checkbox [(ngModel)]="competencie.indicadorHabilitado" binary="true" disabled="true"></p-checkbox>
-					</template>
-				</p-column>
-				<p-column header="{{'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
-					<template let-competencie="rowData" pTemplate="body">
-						<button type="button" class="ui-button ui-button-success btn" icon="fa-pencil" data-toggle="tooltip" title="{{'BTN_EDITAR' | translate}}"
-						        pButton (click)="editCompetencie(competencie, group.idGrupoCompetencia)"></button>
-						<!-- <button type="button" class="ui-button ui-button-danger btn" icon="fa-trash"
-									pButton (click)="disableCompetencie(competencie)"></button>-->
-					</template>
-				</p-column>
-			</p-dataTable>
-		</div>
+		<fieldset>
+			<div class="row" >
+				<div class="col-md-12">
+				<p-dataTable [rows]="6" [paginator]="true" emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="type.subTypes"
+				             [responsive]="true" id="positionCompetenciesDT" styleClass="table-overflow">
+					<p-column field="subtipo" header="{{'POSITION.LBL_RIESGO' | translate }}" [sortable]="true"></p-column>
+					<p-column field="riesgo" header="{{'POSITION.LBL_PELIGRO' | translate }}" [sortable]="true"></p-column>
+					<p-column header="{{'POSITION.LBL_PROBABILIDAD' | translate }}" styleClass="datatable-col-action">
+						<template let-item="rowData" pTemplate="body">
+							<p-dropdown id="prob-{{item.idCargoRiesgo}}" name="prob-{{item.idCargoRiesgo}}" [options]="probabilities" [autoWidth]="false"
+							            (onChange)="onChangeProbability($event, item)" [(ngModel)]="item.idProbabilidad" ></p-dropdown>
+						</template>
+					</p-column>
+					<p-column header="{{'POSITION.LBL_CONSECUENCIA' | translate }}" styleClass="datatable-col-action">
+						<template let-item="rowData" pTemplate="body">
+							<p-dropdown id="cons-{{item.idCargoRiesgo}}" name="cons-{{item.idCargoRiesgo}}" [options]="consecuencies"
+							            [autoWidth]="false"
+							            (onChange)="onChangeConcecuence($event, item)" [(ngModel)]="item.idConsecuencia" ></p-dropdown>
+						</template>
+					</p-column>
+				</p-dataTable>
+				</div>
+			</div>
+		</fieldset>
 	</p-tabPanel>
 </p-tabView>

@@ -706,7 +706,10 @@
            "LBL_PROCESS" : "Proceso",
            "LBL_SUBPROCESS" : "Subproceso",
            "LBL_PORCENTAJEVALORACION" : "Porcentaje",
-           "LBL_MAPARIESGOS" : "Consultar mapa del riesgo"
+           "LBL_MAPARIESGOS" : "Consultar mapa del riesgo",
+           "LBL_PROBABILIDAD" : "Probabilidad",
+           "LBL_PELIGRO" : "Peligro",
+           "LBL_CONSECUENCIA" : "Consecuencia"
 
            },
 
