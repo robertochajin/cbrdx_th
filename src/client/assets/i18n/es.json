@@ -1093,6 +1093,7 @@
    "LBL_DATOSGENERALES":"Datos Generales",
    "LBL_CODIGO":"Código",
    "LBL_NOMBRE":"Nombre",
+   "LBL_ADJUNTAR":"Adjuntar",
    "LBL_REPRESENTANTELEGAL":"Representante Legal",
    "LBL_DIRECCION":"Dirección",
    "LBL_CIUDAD":"Ciudad",
