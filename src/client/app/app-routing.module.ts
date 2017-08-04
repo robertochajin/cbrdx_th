@@ -191,7 +191,7 @@ import { MedicalExamComponent } from './selection-process/medical-exam.component
 import { MedicalExamInformedConsentComponent } from './employees-clinical-information/informed-consent.component';
 import { AnswerExamsComponent } from './medical-institutions/answer-exams.component';
 import { EmployeesAttachmentsComponent } from './employees-attatchments/employees-attachments.component';
-import {PositionsDetailPdfComponent} from "./positions/positions-detail-pdf.component";
+import { PositionsDetailPdfComponent } from "./positions/positions-detail-pdf.component";
 import { CandidateContractingComponent } from './selection-process/candidate-contracting.component';
 import { EmployeeEventualitiesComponent } from './employees-eventualities/employees-eventualities.component';
 import { EmployeeEventualitiesAddComponent } from './employees-eventualities/employee-eventualities-edit.component';
@@ -546,8 +546,6 @@ const routes = [
    { path: 'employees/supplies-confirmation/:id', component: SuppliesConfirmationComponent, canActivate: [ AuthGuard ] },
    // examenes ocupacionales
    { path: 'occupational-exams', component: OccupationalExamsComponent },
-
-
 
    // Accidentes e incidentes
    { path: 'accidents-incidents', component: AccidentIncidentComponent },
