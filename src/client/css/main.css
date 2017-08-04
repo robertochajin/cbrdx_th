@@ -579,6 +579,9 @@ body .ui-datatable .ui-cell-data {
 .datatable-order tr:last-child .btnDown{
    display: none;
 }
+body .ui-datatable thead th.ui-state-active {
+   background-color: #ccc!important;
+}
 
 /* --- Buscador general unico --- */
 .uniSearch{
