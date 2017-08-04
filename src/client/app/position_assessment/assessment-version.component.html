@@ -1,0 +1,39 @@
+<h3>{{ 'POSITION.LBL_VERSIONESVALORACION' | translate }}</h3>
+<div>
+	<div class="row datable-header">
+		<div class="col-md-6 col-xs-12 datatable-header-add">
+			<button type="button" pButton icon="fa-plus" (click)="generateNewRiskMap()" label="{{ 'POSITION.LBL_NUEVAVERSION' | translate }}"
+			></button>
+		</div>
+		<div class="col-md-6 col-xs-12 datatable-header-search">
+			<div class="input-group">
+				<div class="input-group-addon"><i class="fa fa-search"></i></div>
+				<input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control"
+				       [(ngModel)]="busqueda" (change)="setSearch()">
+			</div>
+		</div>
+	</div>
+	<p-dataTable emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="assessmentVersions" [paginator]="true" [rows]="10"
+	             [responsive]="true" [globalFilter]="gb">
+		<p-column field="numeroVersion" header="{{ 'POSITION.LBL_NUMEROVERSION' | translate }}" [sortable]="true"></p-column>
+		<p-column field="nombreVersion" header="{{ 'POSITION.LBL_NOMBREVERSION' | translate }}" [sortable]="true"></p-column>
+		<p-column field="nombreUsuario" header="{{ 'POSITION.LBL_USUARIO' | translate }}" [sortable]="true"></p-column>
+		<p-column field="fechaCreacion" header="{{ 'POSITION.LBL_FECHACREACION' | translate }}" [sortable]="true"></p-column>
+		<p-column header="{{ 'LBL_ACCIONES' | translate }}" styleClass="datatable-col-action">
+			<template let-item="rowData" pTemplate="body">
+				<div class="btn-group" role="group">
+					<button type="button" icon="fa-download" class="ui-button-info" data-toggle="tooltip"
+					        title="{{'BTN_DOWNLOAD' | translate}}"
+					        pButton (click)="download(item)"></button>
+				</div>
+			</template>
+		</p-column>
+	</p-dataTable>
+</div>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
+
