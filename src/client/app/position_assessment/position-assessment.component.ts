@@ -26,7 +26,6 @@ export class PositionAssessmentComponent implements OnInit {
       private route: ActivatedRoute,
       private positionsService: PositionsService,
       private confirmationService: ConfirmationService,
-      private location: Location,
       private _nav: NavService ) {
    }
 

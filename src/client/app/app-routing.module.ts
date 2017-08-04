@@ -220,6 +220,7 @@ import { AssessmentListComponent } from './position_assessment/assessment-list.c
 
 import { AccidentIncidentComponent } from './accidents-incidents/accidents-incidents.component';
 import { AccidentIncidentPlanComponent } from './accidents-incidents/accidents-incidents-plan.component';
+import { PositionAssessmentComponent } from './position_assessment/position-assessment.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -426,6 +427,7 @@ const routes = [
    { path: 'position-activities/:idCargo', component: PositionAuthoritiesComponent, canActivate: [ AuthGuard ] },
    { path: 'position/requirement/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'position/assessment', component: AssessmentListComponent },
+   { path: 'position/assessment/position/:position', component: PositionAssessmentComponent },
 
    // Administracion
    { path: 'menus', component: MenuManagerComponent, canActivate: [ AuthGuard ] },
@@ -542,7 +544,7 @@ const routes = [
    //  employees additional data
    { path: 'employees/supplies-confirmation/:id', component: SuppliesConfirmationComponent, canActivate: [ AuthGuard ] },
    // examenes ocupacionales
-   { path: 'occupational-exams', component: OccupationalExamsComponent }
+   { path: 'occupational-exams', component: OccupationalExamsComponent },
 
 
 
