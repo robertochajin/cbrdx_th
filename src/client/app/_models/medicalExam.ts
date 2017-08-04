@@ -1,6 +1,7 @@
 export class MedicalExam {
 
    idExamenMedico: number;
+   idTercero: number;
    idProcesoSeleccion: number;
    idEstadoExamenMedico: number;
    codigoVerificacion: string;

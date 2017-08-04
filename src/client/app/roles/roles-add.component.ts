@@ -26,6 +26,7 @@ export class RolesAddComponent implements OnInit {
    minDate: Date;
    fechaInicio: string;
    fechaFin: string;
+   fechaFinRequired: boolean = false;
 
    asignedRoles: VRolMenuElemento[];
    masterCreated: boolean = false;
@@ -62,13 +63,14 @@ export class RolesAddComponent implements OnInit {
 
    onFechaInicio( event: any ) {
       let d = new Date( Date.parse( event ) );
-    this.minDate= new Date();
+      this.minDate = new Date();
       this.minDate = new Date( Date.parse( event ) );
+      this.fechaFinRequired = true;
    }
 
    onFechaFin( event: any ) {
       let d = new Date( Date.parse( event ) );
-     this.maxDate= new Date();
+      this.maxDate = new Date();
       this.maxDate = new Date( Date.parse( event ) );
    }
 
@@ -87,17 +89,17 @@ export class RolesAddComponent implements OnInit {
       }
    }
 
-   goBack(fDirty : boolean): void {
-      if (fDirty){
-      this.confirmationService.confirm( {
-                                           message: ` ¿Está seguro que desea salir sin guardar?`,
-                                           header: 'Confirmación',
-                                           icon: 'fa fa-question-circle',
-                                           accept: () => {
-                                              this.location.back();
-                                           }
-                                        } );
-      }else{
+   goBack( fDirty: boolean ): void {
+      if ( fDirty ) {
+         this.confirmationService.confirm( {
+                                              message: ` ¿Está seguro que desea salir sin guardar?`,
+                                              header: 'Confirmación',
+                                              icon: 'fa fa-question-circle',
+                                              accept: () => {
+                                                 this.location.back();
+                                              }
+                                           } );
+      } else {
          this.location.back();
       }
    }

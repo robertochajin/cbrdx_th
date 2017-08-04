@@ -1,0 +1,111 @@
+<div class="row">
+	<div class="col-md-10 col-md-offset-1" *ngIf="candidate.idTercero">
+		<p-panel header="{{ 'PROCESOSELECCION.LBL_INFOPOSTULANTE' | translate }}" class="perfil">
+			<form class="form-horizontal">
+				<fieldset>
+					<div class="form-group row">
+						<div class="col-md-2">
+							<div class="thumbnail">
+								<img src="{{svcThUrlAvatar}}/file/{{candidate.imagen}}" alt="...">
+							</div>
+						</div>
+						<div class="col-md-10">
+							<h2>{{candidate.nombreCompleto}}</h2>
+							<h4>{{candidate.tipoDocumento}} - {{candidate.numeroDocumento}}</h4>
+							<span>{{candidate.fechaNacimiento}} ({{candidate.edad}}) Años</span>
+							<div class="perfil-footer-button">
+								<button icon="fa-address-book-o" label="{{'PROCESOSELECCION.LBL_VERHOJADEVIDA' | translate }}" type="button"
+								        (click)="curriculum()"
+								        pButton></button>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</p-panel>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+		<p-panel header="{{'PROCESOSELECCION.LBL_CONSENTINFORMADO' | translate}}">
+			<form class="form-horizontal">
+				<fieldset>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-12">
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{ 'POSITION.LBL_CARGO' | translate
+									}}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{cargo}}</strong></label>
+								
+								<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_OFICINA' | translate }}:</label>
+								<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{estructuraFisica}}</strong></label>
+							</div>
+						</div>
+						<div class="row">
+							<label class="col-md-3 col-sm-6 col-xs-12 control-label">{{'PROCESOSELECCION.LBL_AREA' | translate }}:</label>
+							<label class="col-md-3 col-sm-6 col-xs-12"><strong>{{area}}</strong></label>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+			<div>
+				<form name="process" (ngSubmit)="fco.valid && onSubmitCon()" #fco="ngForm" novalidate id="processCon">
+					<fieldset>
+						<div class="row">
+							<div class="form-group col-md-1"></div>
+							<div class="form-group col-md-10">
+								<p>
+									<strong>
+										DECLARACIÓN DE VERACIDAD DE INFORMACIÓN SUMINISTRADA Y CONSENTIMIENTO INFORMADO
+									</strong><br><br>
+									El evaluado declara que dará los datos necesarios y veraces al evaluador, sin omitir información relevante sobre
+									sus antecedentes personales, familiares y ocupacionales, que pudiesen influir sobre su estado de salud,
+									igualmente manifiesta que autoriza al evaluador para que informe al Empleador y a la Administradora de Riesgos
+									Laborales (ARL) sobre las condiciones de su estado de salud que pudieran estar relacionadas con la exposición a
+									factores de riesgo del ambiente laboral; para que remita a la empresa y a la ARL los documentos que hacen parte
+									de la presente evaluación que puede incluir como insumo para los sistemas de vigilancia epidemiológica,
+									enmarcados en el subprograma de medicina preventiva y del trabajo. Asimismo, autoriza la realización de las
+									pruebas o valoraciones médicas complementarias que forman parte de las evaluaciones médicas ocupacionales.
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-1"></div>
+							<div class="form-group col-md-10">
+								<p-checkbox binary="true" id="indicadoraplica" name="indicadoraplica"
+								            [(ngModel)]="medicalExam.indicadorVerificado"
+								            label="Declaro la veracidad de la información suministrada y el concentimineto informado del mismo"
+								            #indicador="ngModel"></p-checkbox>
+							</div>
+						</div>
+						<div class="row form-footer-buttons">
+							<div class="form-group col-md-1"></div>
+							<div class="form-group col-md-5" *ngIf="medicalExam.indicadorVerificado">
+								<button (click)="generarCodigo()" label="{{'PROCESOSELECCION.LBL_GENERCOD' | translate }}" type="button"
+								        pButton></button>
+								<input id="codigoinst" name="codigoinst" #codInst="ngModel" pInputText type="text"
+								       required maxlength="50" [(ngModel)]="codigoVerificacion"/>
+								<div class="ui-message ui-messages-error ui-corner-all"
+								     *ngIf="fco.submitted && !codInst.valid">
+									<i class="fa fa-close"></i>
+									{{ 'DOCMANAGMENT.LBL_CODIGO' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+								</div>
+							</div>
+							<div class="form-group col-md-4">
+								<a (click)="goBack((fco.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+								<button icon="fa-plus" label="{{'LBL_ENVIAR' | translate }}" type="submit"
+								        pButton></button>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</p-panel>
+	</div>
+</div>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>
