@@ -1317,11 +1317,18 @@
       "LBL_ADJUNTAR": "Adjuntar",
       "LBL_NOMBRE": "Nombre",
       "LBL_VISUALIZAR": "Visualizar",
+      "LBL_VISUALIZARRESPUESTA": "Visualizar Respuesta",
       "LBL_AGREGARPLAN": "Agregar plan",
       "LBL_PLANDEACCION": "Planes de acción",
       "LBL_ADJUNTOS": "Adjuntos",
       "LBL_CERRARCASO": "Cerrar Caso",
       "LBL_RESPUESTA": "Respuesta",
+      "LBL_RESULTADO": "Resultado",
+      "LBL_DESCRIPCION": "Descripción",
+      "LBL_OBSERVACION": "Observacion",
+      "LBL_RESPONDER": "Responder",
+      "LBL_FINALIZAR": "Finalizar",
+      "LBL_VERIFICAR": "Verificar",
       "": ""
    },
    "EXAMENOCUPACIONAL": {

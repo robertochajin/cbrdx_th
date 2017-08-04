@@ -31,6 +31,7 @@ export class AccidentIncidentPlanComponent implements OnInit {
    employee: Employee = new Employee();
    listEmployees: SelectItem[] = [];
    listEstados: ListaItem[] = [];
+   results: SelectItem[] = [];
    msg: Message;
    busqueda: string;
    id: number;
@@ -42,9 +43,11 @@ export class AccidentIncidentPlanComponent implements OnInit {
    plansAttachments: EmployeeEventualityPlansAttachments = new EmployeeEventualityPlansAttachments();
    listplansAttachments: EmployeeEventualityPlansAttachments[] = [];
    listplansAttachmentsAnswer: EmployeeEventualityPlansAttachments[] = [];
+   listplansAttachmentsVerify: EmployeeEventualityPlansAttachments[] = [];
 
    employeeEventualityAttachment: EmployeeEventualityAttachment = new EmployeeEventualityAttachment();
    listAttachment: EmployeeEventualityAttachment[] = [];
+   listAttachmentClose: EmployeeEventualityAttachment[] = [];
    svcThUrlImagen = '<%= SVC_TH_URL %>/api/upload';
    showForm: boolean = false;
    today: Date;
@@ -52,7 +55,7 @@ export class AccidentIncidentPlanComponent implements OnInit {
    es: any;
    estadoTerminado: number;
    saveAttachmnet: boolean = true;
-   formAnswer: boolean = false;
+   process: string = 'LISTAR';
 
    // -----para adjuntar archivos-----
    svcThUrl = '<%= SVC_TH_URL %>/api/adjuntos';
@@ -92,6 +95,14 @@ export class AccidentIncidentPlanComponent implements OnInit {
          this.listEstados = res;
          this.estadoTerminado = this.listEstados.find( s => s.codigo === 'TRAMIT' ).idLista;
       } );
+
+      this.listaService.getMasterDetails( 'ListasResultadosAccidente' ).subscribe( res => {
+         this.results.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => {
+            this.results.push( { label: s.nombre, value: s.idLista } );
+         } );
+      } );
+
       this.route.params.subscribe( params => {
          this.id = +params[ 'id' ];
          if ( Number( this.id ) > 0 ) {
@@ -128,7 +139,7 @@ export class AccidentIncidentPlanComponent implements OnInit {
       this.initDate();
    }
 
-   finishEventuality() {
+   onSubmitClose() {
       this.employeeEventuality.idEstadoNovedad = this.estadoTerminado;
       this.employeeEventualitiesService.update( this.employeeEventuality ).subscribe( res => {
          this.navService.setMesage( 2, this.msg );
@@ -145,20 +156,39 @@ export class AccidentIncidentPlanComponent implements OnInit {
          this.employeeEventualityPlan.idTerceroNovedad = this.id;
          this.employeeEventualitiesPlansService.add( this.employeeEventualityPlan ).subscribe( res => {
             this.employeeEventualityPlan = res;
-            this.getPlans();
             this.navService.setMesage( 1, this.msg );
+            this.process = 'ADJUNTO_AGREGAR';
          }, error => {
             this.navService.setMesage( 3, this.msg );
          } );
       } else {
          this.employeeEventualitiesPlansService.update( this.employeeEventualityPlan ).subscribe( res => {
             this.navService.setMesage( 2, this.msg );
-            this.showForm = false;
+            this.process = 'ADJUNTO_AGREGAR';
             this.getPlans();
          }, error => {
             this.navService.setMesage( 3, this.msg );
          } );
       }
+   }
+
+   closeEventuality() {
+      this.process = 'CERRAR_CASO';
+   }
+
+   finishAdd() {
+      this.getPlans();
+      this.process = 'LISTAR';
+   }
+
+   onSubmitAnswer() {
+      this.employeeEventualitiesPlansService.update( this.employeeEventualityPlan ).subscribe( res => {
+         this.navService.setMesage( 2, this.msg );
+         this.process = 'LISTAR';
+         this.getPlans();
+      }, error => {
+         this.navService.setMesage( 3, this.msg );
+      } );
    }
 
    getTercero() {
@@ -181,10 +211,13 @@ export class AccidentIncidentPlanComponent implements OnInit {
 
    getPlanAttachment() {
       this.listplansAttachments = [];
+      this.listplansAttachmentsAnswer = [];
+      this.listplansAttachmentsVerify = [];
       this.employeeEventualitiesPlansAttachmentService.getByPlan( this.employeeEventualityPlan.idPlanAccionNovedadAccidente )
       .subscribe( rest => {
-         this.listplansAttachments = rest.filter( s => s.indicadorRespuesta === false );
-         this.listplansAttachmentsAnswer = rest.filter( s => s.indicadorRespuesta === true );
+         this.listplansAttachments = rest.filter( s => s.codigoAdjunto === 'LISTA' );
+         this.listplansAttachmentsAnswer = rest.filter( s => s.codigoAdjunto === 'RESPUESTA' );
+         this.listplansAttachmentsVerify = rest.filter( s => s.codigoAdjunto === 'VERIFICACION' );
       } );
    }
 
@@ -201,7 +234,7 @@ export class AccidentIncidentPlanComponent implements OnInit {
    add(){
       this.employeeEventualityPlan = new EmployeeEventualityPlans();
       this.initDate();
-      this.showForm = true;
+      this.process = 'FORMULARIO_AGREGAR';
       this.listplansAttachments = [];
    }
 
@@ -209,13 +242,27 @@ export class AccidentIncidentPlanComponent implements OnInit {
       this.employeeEventualityPlan = s;
       this.changeDate();
       this.getPlanAttachment();
-      this.showForm = true;
+      this.process = 'FORMULARIO_AGREGAR';
    }
 
    answer( s: EmployeeEventualityPlans ) {
       this.employeeEventualityPlan = s;
       this.getPlanAttachment();
-      this.formAnswer = true;
+      this.process = 'FORMULARIO_RESPUESTA';
+   }
+
+   varify( s: EmployeeEventualityPlans ) {
+      this.employeeEventualityPlan = s;
+      this.getPlanAttachment();
+      this.process = 'FORMULARIO_VERIFICAR';
+   }
+
+   detail() {
+      this.employeeEventualitiesAttachmentService.getAllByIdEventualityAccident( this.employeeEventuality.idTerceroNovedad )
+      .subscribe( rest => {
+         this.listAttachmentClose = rest;
+      } );
+      this.process = 'CERRAR_CASO_DETALLE';
    }
 
    inputAttachment( event: any ) {
@@ -233,7 +280,7 @@ export class AccidentIncidentPlanComponent implements OnInit {
          this.saveAttachmnet = false;
          this.plansAttachments.idPlanAccionNovedadAccidente = this.employeeEventualityPlan.idPlanAccionNovedadAccidente;
          this.plansAttachments.idAdjunto = respuesta.idAdjunto;
-         this.plansAttachments.indicadorRespuesta = false;
+         this.plansAttachments.codigoAdjunto = 'LISTA';
          this.employeeEventualitiesPlansAttachmentService.add( this.plansAttachments ).subscribe( data => {
             this.dataUploadArchivo = '';
             this.getPlanAttachment();
@@ -244,19 +291,71 @@ export class AccidentIncidentPlanComponent implements OnInit {
       }
    }
 
+   uploadingOkAnswer( event: any ) {
+      let respuesta = JSON.parse( event.xhr.response );
+      if ( respuesta.idAdjunto != null || respuesta.idAdjunto != undefined ) {
+         this.saveAttachmnet = false;
+         this.plansAttachments.idPlanAccionNovedadAccidente = this.employeeEventualityPlan.idPlanAccionNovedadAccidente;
+         this.plansAttachments.idAdjunto = respuesta.idAdjunto;
+         this.plansAttachments.codigoAdjunto = 'RESPUESTA';
+         this.employeeEventualitiesPlansAttachmentService.add( this.plansAttachments ).subscribe( data => {
+            this.dataUploadArchivo = '';
+            this.getPlanAttachment();
+            this.saveAttachmnet = true;
+         }, error => {
+            this.saveAttachmnet = true;
+         } );
+      }
+   }
+
+   uploadingOkVerify( event: any ) {
+      let respuesta = JSON.parse( event.xhr.response );
+      if ( respuesta.idAdjunto != null || respuesta.idAdjunto != undefined ) {
+         this.saveAttachmnet = false;
+         this.plansAttachments.idPlanAccionNovedadAccidente = this.employeeEventualityPlan.idPlanAccionNovedadAccidente;
+         this.plansAttachments.idAdjunto = respuesta.idAdjunto;
+         this.plansAttachments.codigoAdjunto = 'VERIFICACION';
+         this.employeeEventualitiesPlansAttachmentService.add( this.plansAttachments ).subscribe( data => {
+            this.dataUploadArchivo = '';
+            this.getPlanAttachment();
+            this.saveAttachmnet = true;
+         }, error => {
+            this.saveAttachmnet = true;
+         } );
+      }
+   }
+
+   uploadingOkClose( event: any ) {
+      let respuesta = JSON.parse( event.xhr.response );
+      if ( respuesta.idAdjunto != null || respuesta.idAdjunto != undefined ) {
+         this.saveAttachmnet = false;
+         this.plansAttachments.idPlanAccionNovedadAccidente = this.employeeEventualityPlan.idPlanAccionNovedadAccidente;
+         this.plansAttachments.idAdjunto = respuesta.idAdjunto;
+         this.employeeEventualitiesAttachmentService.add( this.employeeEventualityAttachment ).subscribe( data => {
+            this.dataUploadArchivo = '';
+            this.listAttachmentClose = [];
+            this.employeeEventualitiesAttachmentService.getAllByIdEventualityAccident( this.employeeEventuality.idTerceroNovedad )
+            .subscribe( rest => {
+               this.listAttachmentClose = rest;
+            } );
+            this.saveAttachmnet = true;
+         }, error => {
+            this.saveAttachmnet = true;
+         } );
+      }
+   }
+
    onBeforeSend( event: any ) {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "'," +
-                " 'indicadorRespuesta' :  false', 'ruta':" +
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "', 'ruta':" +
                 " '/Gestionamos/Terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "/PlanAcciones' }";
       event.formData.append( 'obj', obj.toString() );
    }
 
-   onBeforeSendAnswer( event: any ) {
+   onBeforeSendEventuality( event: any ) {
       event.xhr.setRequestHeader( 'Authorization', localStorage.getItem( 'token' ) );
-      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo +
-                "','indicadorRespuesta' :  true, 'ruta':" +
-                " '/Gestionamos/Terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "/PlanAcciones' }";
+      let obj = "{ 'auditoriaUsuario' : '" + this.dataUploadUsuario + "', 'nombreArchivo' :  '" + this.dataUploadArchivo + "', 'ruta':" +
+                " '/Gestionamos/Terceros/" + this.employee.tipoDocumento + "_" + this.employee.numeroDocumento + "/Novedades' }";
       event.formData.append( 'obj', obj.toString() );
    }
 
@@ -283,11 +382,11 @@ export class AccidentIncidentPlanComponent implements OnInit {
                                               header: 'Confirmación',
                                               icon: 'fa fa-question-circle',
                                               accept: () => {
-                                                 this.showForm = false;
+                                                 this.process = 'LISTAR';
                                               }
                                            } );
       } else {
-         this.showForm = false;
+         this.process = 'LISTAR';
       }
    }
 
@@ -298,11 +397,11 @@ export class AccidentIncidentPlanComponent implements OnInit {
                                               header: 'Confirmación',
                                               icon: 'fa fa-question-circle',
                                               accept: () => {
-                                                 this.router.navigate( [ 'accidents-incidents' ] );
+                                                 this.process = 'LISTAR';
                                               }
                                            } );
       } else {
-         this.router.navigate( [ 'accidents-incidents' ] );
+         this.process = 'LISTAR';
       }
    }
 

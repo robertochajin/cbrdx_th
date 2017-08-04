@@ -8,11 +8,10 @@ export class EmployeeEventualityPlansAttachments {
    auditoriaFecha: Date;
    auditoriaUsuario: number;
    indicadorHabilitado: boolean;
-   indicadorRespuesta: boolean;
+   codigoAdjunto: string;
 
    constructor() {
       this.indicadorHabilitado = true;
-      this.indicadorRespuesta = false;
       this.auditoriaFecha = null;
       this.auditoriaUsuario = null;
    }

@@ -37,6 +37,11 @@ export class EmployeeEventualitiesAttachmentService {
       .map( ( res: Response ) => res.json() as EmployeeEventualityAttachment[] );
    }
 
+   getAllByIdEventualityAccident( id: number ) {
+      return this.authHttp.get( this.serviceURL + '/terceroNovedadAccidente/' + id )
+      .map( ( res: Response ) => res.json() as EmployeeEventualityAttachment[] );
+   }
+
    add( c: EmployeeEventualityAttachment ) {
       c.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.serviceURL, c ).map( ( res: Response ) => res.json() );
