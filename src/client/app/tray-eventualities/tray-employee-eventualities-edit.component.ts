@@ -71,6 +71,8 @@ export class EmployeeEventualitiesTrayAddComponent implements OnInit {
    nameAttachment: string;
    saveAttachmnet: boolean = true;
 
+   indicadorJefeAutoriza: boolean = false;
+
    // indicadores para mostrar campos en formulario
    showhorainicio: boolean = false;
    showfechainicio: boolean = false;
@@ -262,7 +264,11 @@ export class EmployeeEventualitiesTrayAddComponent implements OnInit {
                   } );
                }
                else {
-                  this.employeeEventuality.idEstadoNovedad = this.eventuality.idEstadoInicialNovedad;
+                  if ( this.indicadorJefeAutoriza ) {
+                     this.employeeEventuality.idTerceroNovedad = this.getStateByCode( 'PENAPR' );
+                  } else {
+                     this.employeeEventuality.idEstadoNovedad = this.eventuality.idEstadoInicialNovedad;
+                  }
                   this.employeeEventuality.idTerceroReporta = this.usuarioLogueado.usuario.idTercero;
                   this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
                      this._nav.setMesage( 1, this.msgs );
@@ -296,7 +302,11 @@ export class EmployeeEventualitiesTrayAddComponent implements OnInit {
             } );
          }
          else {
-            this.employeeEventuality.idEstadoNovedad = this.eventuality.idEstadoInicialNovedad;
+            if ( this.indicadorJefeAutoriza ) {
+               this.employeeEventuality.idTerceroNovedad = this.getStateByCode( 'PENAPR' );
+            } else {
+               this.employeeEventuality.idEstadoNovedad = this.eventuality.idEstadoInicialNovedad;
+            }
             this.employeeEventuality.idTerceroReporta = this.usuarioLogueado.usuario.idTercero;
             this.employeeNoveltyService.add( this.employeeEventuality ).subscribe( data => {
                this.employeeEventuality.idTerceroNovedad = data.idTerceroNovedad;
@@ -365,6 +375,9 @@ export class EmployeeEventualitiesTrayAddComponent implements OnInit {
          this.listField = data;
          this.eventualityServices.get( this.employeeEventuality.idNovedad ).subscribe( rest => {
             this.eventuality = rest;
+            if ( rest.indicadorAutorizaJefe ) {
+               this.indicadorJefeAutoriza = true;
+            }
          } );
          this.resetForm();
          this.propareForm();

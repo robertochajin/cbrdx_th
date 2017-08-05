@@ -5,7 +5,8 @@ import { RouterModule } from '@angular/router';
 import {
    InputTextModule, DataTableModule, ButtonModule, DialogModule, ConfirmDialogModule, TabViewModule, AccordionModule, MessagesModule,
    AutoCompleteModule, FileUploadModule, DropdownModule, CalendarModule, GrowlModule, TreeModule, FieldsetModule, CheckboxModule,
-   ToggleButtonModule, InputMaskModule, InputTextareaModule, InputSwitchModule, PanelModule, SliderModule, RadioButtonModule, PickListModule
+   ToggleButtonModule, InputMaskModule, InputTextareaModule, InputSwitchModule, PanelModule, SliderModule, RadioButtonModule,
+   PickListModule, MultiSelectModule, ListboxModule
 } from 'primeng/primeng';
 
 import { CurrencyMaskModule } from "ng2-currency-mask/index";
@@ -73,6 +74,8 @@ import { CurrencyMaskModule } from "ng2-currency-mask/index";
                  CurrencyMaskModule,
                  RadioButtonModule,
                  PickListModule,
+                 MultiSelectModule,
+                 ListboxModule,
                  SliderModule
 
               ]

@@ -300,6 +300,7 @@ export class MedicalExamComponent implements OnInit {
    onSubmitExam() {
       this.medicalExam.fechaProgramada = this.fechaProgramada.toISOString().replace('Z', '-0500');
       this.medicalExam.idProcesoSeleccion = this.candidateProcess.idProcesoSeleccion;
+      this.medicalExam.idTercero = this.candidate.idTercero;
       if ( this.medicalExam.idExamenMedico ) {
          let temp = this.listEstExaMed.find( c => c.idLista === this.medicalExam.idEstadoExamenMedico ).codigo;
          if ( temp === 'RESPOND' ) {

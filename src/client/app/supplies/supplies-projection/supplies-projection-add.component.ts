@@ -135,8 +135,8 @@ export class SuppliesProjectionAddComponent implements OnInit {
    changeSupplies() {
       this.listAreas = [];
       this.list2 = [];
-      this.configTer=[];
-      this.listEmployees=[];
+      this.configTer = [];
+      this.listEmployees = [];
       this.organizationalStructureService.getAreaBySuppliesGroup( this.suppliesProjection.idGrupoDotacion ).subscribe( rs => {
          this.listAreas = rs;
       } );

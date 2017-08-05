@@ -20,6 +20,7 @@ import { AnswerExamsComponent } from './answer-exams.component';
 import { QuestionnairesModule } from '../questionnaires/questionnaires.module';
 import { PoliticalDivisionService } from '../_services/political-division.service';
 import { LocationsNomenclaturesServices } from '../_services/locationsNomenclatures.service';
+import { AnswerExamsPeriodComponent } from './answer-exams-period.component';
 
 @NgModule( {
               imports: [
@@ -38,7 +39,7 @@ import { LocationsNomenclaturesServices } from '../_services/locationsNomenclatu
                  InputTextareaModule, PanelModule, QuestionnairesModule
               ],
               declarations: [ MedicalInstitutionsComponent, MedicalInstitutionAddComponent, MedicalInstitutionUpdateComponent,
-                 MedicalInstitutionDetailComponent, AnswerExamsComponent
+                 MedicalInstitutionDetailComponent, AnswerExamsComponent, AnswerExamsPeriodComponent
               ],
               bootstrap: [ MedicalInstitutionsComponent, MedicalInstitutionAddComponent ],
               providers: [ MedicalInstitutionService, ListaService, ConfirmationService, PoliticalDivisionService,

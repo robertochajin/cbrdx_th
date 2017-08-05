@@ -22,9 +22,15 @@ import { PositionCompetenciesModule } from '../position-competencies/position-co
 import { CompanyAssetsModule } from '../position-company-assets/company-assets.module';
 import { PersonalityModule } from '../position-personality/personality.module';
 import { PositionsDetailComponent } from './positions-detail.component';
-import {PositionsDetailPdfComponent} from './positions-detail-pdf.component';
-
-
+import { PositionsDetailPdfComponent } from './positions-detail-pdf.component';
+import { AssessmentListComponent } from '../position_assessment/assessment-list.component';
+import { ListaService } from '../_services/lista.service';
+import { TipoDeAreaService } from '../_services/tipoDeArea.service';
+import { PositionAssessmentComponent } from '../position_assessment/position-assessment.component';
+import { RiskService } from '../_services/positios-risks.service';
+import { AssessmentVersionServices } from '../_services/assessmentVersion.services';
+import { AssessmentVersionComponent } from '../position_assessment/assessment-version.component';
+import { AdjuntosService } from '../_services/adjuntos.service';
 
 @NgModule( {
               imports: [
@@ -48,10 +54,19 @@ import {PositionsDetailPdfComponent} from './positions-detail-pdf.component';
                  PositionsObservationsListComponent,
                  PositionAuthoritiesComponent,
                  PositionActivitiesComponent,
+                 AssessmentListComponent,
+                 PositionAssessmentComponent,
+                 AssessmentVersionComponent,
                  PositionsDetailPdfComponent
               ],
               bootstrap: [ PositionsComponent ],
-              providers: [ PositionsService, ListPositionsService, PoliticalDivisionService, NavService ],
+              providers: [ PositionsService, ListPositionsService, PoliticalDivisionService, NavService,
+                 ListaService,
+                 RiskService,
+                 AssessmentVersionServices,
+                 AdjuntosService,
+                 TipoDeAreaService
+              ],
               exports: [ PositionsComponent ]
            } )
 export class PositionsModule {

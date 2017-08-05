@@ -26,6 +26,7 @@ export class EmployeeEventuality {
    idEntidad: number;
    entidad: string;
    descripcion: string;
+
    periodoFinal: string;
    retiro: boolean;
    idEps: number;
@@ -42,6 +43,9 @@ export class EmployeeEventuality {
    nombreTerceroReporta: string;
    idTerceroReporta: number;
    idEstadoNovedad: number;
+   idResultado: number;
+   resultadoAccidente: number;
+   descripcionResultado: string;
    estadoNovedad: string;
    estructuraArea: string;
    idEstructuraArea: number;
@@ -54,6 +58,8 @@ export class EmployeeEventuality {
    numeroDocumento: string;
    periodoInicial: string;
    codigoNovedad: string;
+   cargo: string;
+   actividades: number = 1;
 
    constructor() {
       this.indicadorHabilitado = true;

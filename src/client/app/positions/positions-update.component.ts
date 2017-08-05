@@ -36,6 +36,8 @@ export class PositionsUpdateComponent implements OnInit {
    listslevelTypes: any[] = [];
    genderTypes: SelectItem[] = [];
    listStudies: SelectItem[] = [];
+   listProcess: SelectItem[] = [];
+   listSubProcess: SelectItem[] = [];
    maritalStatusTypes: SelectItem[] = [];
    msgs: Message[] = [];
    msgOcupaciones: Message[] = [];
@@ -120,6 +122,12 @@ export class PositionsUpdateComponent implements OnInit {
          res.map( ( s: ListaItem ) => this.listStudies.push( { label: s.nombre, value: s.idLista } ) );
       } );
 
+      this.listaService.getMasterDetails( 'ListasProcesos' ).subscribe( res => {
+         this.listProcess.push( { label: 'Seleccione', value: null } );
+         this.listSubProcess.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => this.listProcess.push( { label: s.nombre, value: s.idLista } ) );
+      } );
+
       this.tipoDeAreaService.getlistAreas().subscribe( res => {
          this.areaTypes.push( { label: 'Seleccione', value: null } );
          for ( let dp of res ) {
@@ -172,6 +180,9 @@ export class PositionsUpdateComponent implements OnInit {
       this.route.params.subscribe( ( params: Params ) => {
          this.positionsService.get( +params[ 'id' ] ).subscribe( position => {
             this.position = position;
+            if(this.position.idProceso){
+               this.onChangeProcess(null);
+            }
             if ( this.position.edad !== null ) {
                this.rangoEdad[ 0 ] = this.position.edad;
             }
@@ -484,4 +495,13 @@ export class PositionsUpdateComponent implements OnInit {
          this.position.cargo = input.substring( 0, 1 ).toUpperCase() + input.substring( 1 ).toLowerCase();
       }
    }
+
+   onChangeProcess( event: any ) {
+      this.listSubProcess = [];
+      this.listaService.getMasterDetailsByDependency( 'ListasProcesos', this.position.idProceso, 'SUBPROCESO' ).subscribe( res => {
+         this.listSubProcess.push( { label: 'Seleccione', value: null } );
+         res.map( ( s: ListaItem ) => this.listSubProcess.push( { label: s.nombre, value: s.idLista } ) );
+      } );
+   }
+
 }
