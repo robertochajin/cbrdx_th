@@ -7,6 +7,10 @@
          <li class="header">
             {{ 'TEMPLATE.LBL_MENUPRINCIPAL' | translate }}
          </li>
+
+			<li style="color: #fff;text-align: center;padding: 6px 2px;" *ngIf="loadingMenu">
+				<i class="fa fa-refresh fa-spin fa-fw"></i>
+			</li>
          
          <li *ngFor="let modulo of treeMenu;" class="treeview" routerLinkActive="active">
                <a *ngIf="modulo.children.length > 1">
@@ -15,7 +19,13 @@
                </a>
                <ul class="treeview-menu" *ngIf="modulo.children.length > 1">
                   <li routerLinkActive="active" *ngFor="let menu of modulo.children;">
-                     <a routerLink="{{menu.data.ruta}}"><i class="{{menu.data.clase}}"></i><span *ngIf="menu.data.nuevo" class="pull-right-container"><small class="label pull-right bg-green">new</small></span>{{menu.data.menu}}</a>
+                     <a routerLink="{{menu.data.ruta}}">
+								<i class="{{menu.data.clase}}"></i>
+								<span *ngIf="menu.data.nuevo" class="pull-right-container">
+									<small class="label pull-right bg-green">new</small>
+								</span>
+								{{menu.data.menu}}
+							</a>
                   </li>
                </ul>
                <a routerLink="{{modulo.children[0].data.ruta}}" *ngIf="modulo.children.length == 1 ">

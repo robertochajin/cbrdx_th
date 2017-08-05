@@ -16,6 +16,7 @@ export class NavbarComponent implements AfterViewInit {
    listModulos: MenuManager[];
    listmenu: MenuManager[];
    treeMenu: TreeNode[] = [];
+   loadingMenu:boolean = true;
 
    constructor( private menuManagerService: MenuManagerService,
       private authService: AuthenticationService ) {
@@ -72,6 +73,7 @@ export class NavbarComponent implements AfterViewInit {
                   this.treeMenu.push( companyNode );
                }
             }
+            this.loadingMenu = false;
          } );
       } );
    }
