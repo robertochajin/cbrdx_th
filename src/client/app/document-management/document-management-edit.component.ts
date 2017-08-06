@@ -92,7 +92,6 @@ export class DocumentManagementAddComponent implements OnInit {
             this.listValidity.push( { label: c + ' Meses', value: c } );
          }
       }
-      ;
       this.listAdjDes.push( { label: 'Seleccione', value: null } );
       this.listAdjDes.push( { label: 'Adjuntar al sistema', value: 1 } );
       this.listAdjDes.push( { label: 'Descargar de sistema', value: 2 } );

@@ -42,7 +42,7 @@ export class Positions {
    public estado: string;
    public paso: number;
    public indicadorZona:boolean;
-   public edadMax : number
+   public edadMax : number;
    public idProceso: number;
    public proceso: string;
    public idSubProceso: number;

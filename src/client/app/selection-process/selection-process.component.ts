@@ -167,7 +167,7 @@ export class SelectionProcessComponent implements OnInit {
          if ( confRoles.find( c => c === r.codigoRol ) ) {
             foundRol = true;
          }
-      } )
+      } );
       return foundRol;
    }
 }

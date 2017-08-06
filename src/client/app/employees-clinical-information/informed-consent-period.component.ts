@@ -165,7 +165,6 @@ export class MedicalExamInformedConsentPeriodComponent implements OnInit {
                                               icon: 'fa fa-question-circle',
                                               accept: () => {
                                                  this.router.navigate( [ 'dashboard' ] );
-                                                 ;
                                               }
                                            } );
       } else {
@@ -184,7 +183,7 @@ export class MedicalExamInformedConsentPeriodComponent implements OnInit {
          let obj = {
             destination: this.candidate.telefonoCelular,
             codigo: this.medicalExam.codigoVerificacion
-         }
+         };
 
          this.candidateProcessService.generateVerificationCode( obj ).subscribe( res => {
             console.log( res );

@@ -12,7 +12,7 @@ export class EmployessSuppliesAdditional {
    public idTalla: number;
    public talla: string;
    public costo: number;
-   public indicadorHabilitado: boolean = true
+   public indicadorHabilitado: boolean = true;
    public auditoriaUsuario: number;
    public auditoriaFecha: Date;
 

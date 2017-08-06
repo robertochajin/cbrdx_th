@@ -194,7 +194,7 @@ export class LocationsComponent implements OnInit, AfterViewInit {
          this.localizacion.longitud = t;
          document.getElementById( 'graphMap' ).innerHTML = 'La busqueda no arroja ningun resultado';
       }
-   }
+   };
 
    addComplementary(): void {
       // let complementary = { 'tipo': 0, 'detalle': '' };

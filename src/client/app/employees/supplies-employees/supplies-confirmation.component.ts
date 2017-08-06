@@ -118,7 +118,7 @@ export class SuppliesConfirmationComponent {
          let obj = {
             destination: this.employee.telefonoCelular,
             codigo: this.confirmation.codigoVerificacion
-         }
+         };
 
          this.smsService.generateVerificationCode( obj ).subscribe( res => {
          }, error => {

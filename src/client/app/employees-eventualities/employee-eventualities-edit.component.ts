@@ -596,7 +596,7 @@ export class EmployeeEventualitiesAddComponent implements OnInit {
          let obj = {
             destination: this.employee.telefonoCelular,
             codigo: this.employeeEventuality.codigoValidacion
-         }
+         };
 
          this._sms.generateVerificationCode( obj ).subscribe( res => {
             console.log( res );

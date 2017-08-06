@@ -55,7 +55,7 @@ export class OrganizationalStructurePositionsComponent implements OnInit {
    es: any;
    maxDate: Date = null;
    indicadorZonaPosition = false;
-   backupPosition:string
+   backupPosition:string;
    msg: Message;
    readyTreeCompany: boolean = false;
 

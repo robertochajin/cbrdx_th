@@ -104,7 +104,7 @@ export class EmployeesAttachmentsComponent implements OnInit {
          d.idAdjunto = respuesta.idAdjunto;
 
          this.documentoRelacionTercero.idDocumentoTercero = d.idDocumentoTercero;
-         this.documentoRelacionTercero.idAdjunto = respuesta.idAdjunto
+         this.documentoRelacionTercero.idAdjunto = respuesta.idAdjunto;
          this.documentoRelacionTercero.idTercero = this.employee.idTercero;
          this.documentoRelacionTercero.indicadorHabilitado = true;
 

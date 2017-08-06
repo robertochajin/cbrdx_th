@@ -18,7 +18,7 @@ import { MasterAnswersService } from '../../_services/masterAnswers.service';
             } )
 export class SolutionsQuestionnairesDetailComponent implements OnInit {
    @Input() maestroRespuestas: MasterAnswers;
-   cuestionario: Questionnaries = new Questionnaries()
+   cuestionario: Questionnaries = new Questionnaries();
    respuestas: Answers[] = [];
    idMaestroRespuestas: number;
    idCuestionario: number;

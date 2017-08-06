@@ -21,7 +21,7 @@ import { MasterAnswersService } from '../../_services/masterAnswers.service';
 export class SolutionsQuestionnairesComponent implements OnInit {
    @Input() maestroRespuestas: MasterAnswers;
    @Output() finish: EventEmitter<MasterAnswers> = new EventEmitter<MasterAnswers>();
-   cuestionario: Questionnaries = new Questionnaries()
+   cuestionario: Questionnaries = new Questionnaries();
    preguntas: QuestionnariesQuestions[] = [];
    pregunta: QuestionnariesQuestions = new QuestionnariesQuestions();
    opciones: QuestionnariesAnswers[] = [];

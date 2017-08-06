@@ -16,10 +16,11 @@ import { ListaService } from '../_services/lista.service';
 import { AdjuntosService } from '../_services/adjuntos.service';
 import { ConstanteService } from '../_services/constante.service';
 import { LocationsNomenclaturesServices } from '../_services/locationsNomenclatures.service';
+import { ReferencesRoutingModule } from './references-routing.module'
 
 @NgModule( {
               imports: [ CommonModule, FormsModule,
-                 SharedModule, LocationsModule, FormSharedModule
+                 SharedModule, LocationsModule, FormSharedModule, ReferencesRoutingModule
               ],
               declarations: [ ReferencesComponent,
                  ReferencesDetailComponent,

@@ -32,8 +32,6 @@ class employeeBasicInfo {
    correoTercero: string;
    correoUsuario: string;
 }
-;
-
 @Component( {
                moduleId: module.id,
                templateUrl: 'personnel-requirement-historicall.component.html',

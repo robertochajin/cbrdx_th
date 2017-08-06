@@ -26,13 +26,13 @@ export class SelectionStepService {
    }
 
    add( f: SelectionStep ) {
-      f.auditoriaUsuario = this.idUsuario
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.post( this.masterService, f )
       .map( ( res: Response ) => res.json() );
    };
 
    update( f: SelectionStep ) {
-      f.auditoriaUsuario = this.idUsuario
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( this.masterService, JSON.stringify( f ) ).catch( this.handleError );
    }
 
@@ -46,7 +46,7 @@ export class SelectionStepService {
    }
 
    updateProcess( f: SelectionProcess ) {
-      f.auditoriaUsuario = this.idUsuario
+      f.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( '<%= SVC_TH_URL %>/api/procesos/', JSON.stringify( f ) ).catch( this.handleError );
    }
 
@@ -106,7 +106,7 @@ export class SelectionStepService {
    }
 
    updateThirdPublication(tp: TerceroPublicaciones){
-      tp.auditoriaUsuario = this.idUsuario
+      tp.auditoriaUsuario = this.idUsuario;
       return this.authHttp.put( '<%= SVC_TH_URL %>/api/tercerosPublicaciones/', JSON.stringify( tp ) ).catch( this.handleError );
    }
 

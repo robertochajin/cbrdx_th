@@ -7,7 +7,7 @@ export class SuppliesGroups {
    public codigo: string;
    public grupoDotacion: string;
    public descripcion: string;
-   public indicadorHabilitado: boolean = true
+   public indicadorHabilitado: boolean = true;
    public auditoriaUsuario: number;
    public auditoriaFecha: Date;
 

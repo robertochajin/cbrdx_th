@@ -1,10 +1,14 @@
-import { ModuleWithProviders  } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
+//import { ModuleWithProviders  } from '@angular/core';
+import { RouterModule } from '@angular/router';
 // historia de employees
 // import { EmployeesDetailComponent } from './employees/employees-detail.component';
 // import { EmployeesAddComponent } from './employees/employees-add.component';
 // import { EmployeesUpdateComponent } from './employees/employees-update.component';
 // import { EmployeesComponent } from './employees/employees.component';
+
+// import { NotFoundComponent } from './404/404.component';
+
 import { EmployeesAdditionalDataComponent } from './employees/employees-additional-data.component';
 import { EmployeesDetailPerfilComponent } from './selecttion-process-apply/employees-detail-perfil.component';
 
@@ -29,10 +33,10 @@ import { LocationUpdateComponent } from './employees-location/employee-location-
 import { LocationAddComponent } from './employees-location/employee-location-add.component';
 import { LocationDetailComponent } from './employees-location/employee-location-detail.component';
 // Información de referencia de employees
-import { ReferencesComponent } from './employees-references/references.component';
-import { ReferencesDetailComponent } from './employees-references/references-detail.component';
-import { ReferencesAddComponent } from './employees-references/references-add.component';
-import { ReferencesUpdateComponent } from './employees-references/references-update.component';
+// import { ReferencesComponent } from './employees-references/references.component';
+// import { ReferencesDetailComponent } from './employees-references/references-detail.component';
+// import { ReferencesAddComponent } from './employees-references/references-add.component';
+// import { ReferencesUpdateComponent } from './employees-references/references-update.component';
 // Información de formacion academica
 import { FormalStudiesComponent } from './employees-academic-education/formal-studies.component';
 import { FormalStudiesDetailComponent } from './employees-academic-education/formal-studies-detail.component';
@@ -224,7 +228,7 @@ import { AssessmentListComponent } from './position_assessment/assessment-list.c
 import { PositionAssessmentComponent } from './position_assessment/position-assessment.component';
 import { AssessmentVersionComponent } from './position_assessment/assessment-version.component';
 
-const routes: Routes = [
+export const AppRoutingModule = RouterModule.forRoot([
 
    // Login
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -232,10 +236,14 @@ const routes: Routes = [
    { path: 'login/:token', component: LoginComponent },
    { path: 'cambioContrasena', component: CambioContrasenaComponent },
 
+   // 404
+   // { path: '**', component: NotFoundComponent },
+
    // historia de employees
+   // https://github.com/NamitaMalik/Lazy-Loading-with-Angular2-Routing/blob/master/app/tasks/tasks-routing.module.ts
    {
       path: 'employees',
-      loadChildren: '/app/employees/employees.module#EmployeesModule'
+      loadChildren: './app/employees/employees.module#EmployeesModule'
    },
 
    // { path: 'employees', component: EmployeesComponent, canActivate: [ AuthGuard ] },
@@ -246,18 +254,19 @@ const routes: Routes = [
    // { path: 'employees/curriculum/:id', component: EmployeesCurriculumVitaeComponent, canActivate: [ AuthGuard ] }, // hoja de vida
 
    // Información de referencia de employees
-   { path: 'employees/detail/:tercero/references', component: ReferencesComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:tercero/references/add', component: ReferencesAddComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:tercero/references/update/:id', component: ReferencesUpdateComponent, canActivate: [ AuthGuard ] },
-   { path: 'employees/detail/:tercero/references/detail/:id', component: ReferencesDetailComponent, canActivate: [ AuthGuard ] },
+   {
+      path: 'employees/detail/:tercero/references',
+      loadChildren: './app/employees-references/references.module#ReferencesModule'
+   },
+   // { path: 'employees/detail/:tercero/references', component: ReferencesComponent, canActivate: [ AuthGuard ] },
+   // { path: 'employees/detail/:tercero/references/add', component: ReferencesAddComponent, canActivate: [ AuthGuard ] },
+   // { path: 'employees/detail/:tercero/references/update/:id', component: ReferencesUpdateComponent, canActivate: [ AuthGuard ] },
+   // { path: 'employees/detail/:tercero/references/detail/:id', component: ReferencesDetailComponent, canActivate: [ AuthGuard ] },
 
    // Información familiar de employees
    { path: 'employees/detail/:tercero/family-information', component: FamilyInformationComponent, canActivate: [ AuthGuard ] },
    { path: 'employees/detail/:tercero/family-information/add', component: FamilyInformationAddComponent, canActivate: [ AuthGuard ] },
-   {
-      path: 'employees/detail/:tercero/family-information/update/:id', component: FamilyInformationUpdateComponent,
-      canActivate: [ AuthGuard ]
-   },
+   { path: 'employees/detail/:tercero/family-information/update/:id', component: FamilyInformationUpdateComponent, canActivate: [ AuthGuard ] },
    {
       path: 'employees/detail/:tercero/family-information/detail/:id', component: FamilyInformationDetailComponent,
       canActivate: [ AuthGuard ]
@@ -561,15 +570,15 @@ const routes: Routes = [
    // Accidentes e incidentes
    { path: 'accidents-incidents', component: AccidentIncidentComponent },
    { path: 'accidents-incidents/plan/:id', component: AccidentIncidentPlanComponent }
-];
-/*
-@NgModule( {
-              imports: [
-                 RouterModule.forRoot( routes )
-              ],
-              exports: [ RouterModule ]
-           } )
-export class AppRoutingModule {
-}
-*/
-export const AppRoutingModule: ModuleWithProviders = RouterModule.forRoot(routes);
+]);
+
+// @NgModule( {
+//              imports: [
+//                 RouterModule.forRoot( routes )
+//              ],
+//              exports: [ RouterModule ]
+//           } )
+// export class AppRoutingModule {
+// }
+
+// export const AppRoutingModule: ModuleWithProviders = RouterModule.forRoot(routes);

@@ -33,8 +33,6 @@ class employeeBasicInfo {
    correoTercero: string;
    correoUsuario: string;
 }
-;
-
 @Component( {
                moduleId: module.id,
                templateUrl: 'personnel-requirement-detail.component.html',

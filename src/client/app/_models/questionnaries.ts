@@ -7,7 +7,7 @@ export class Questionnaries {
    public codigoCuestionario: string;
    public cuestionario: string;
    public descripcion: string;
-   public indicadorHabilitado: boolean = false
+   public indicadorHabilitado: boolean = false;
    public indicadorPonderacion: boolean;
    public auditoriaUsuario: number;
    public valor: number;

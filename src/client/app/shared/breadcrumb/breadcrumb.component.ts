@@ -26,7 +26,7 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
 
    ngOnInit(): void {
       this.setAllFriendlyName();
-      this._urls = new Array();
+      this._urls = [];
 
       if ( this.prefix.length > 0 ) {
          this._urls.unshift( this.prefix );
@@ -300,7 +300,7 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
       this.breadcrumbService.addFriendlyNameForRoute( '/selection-process/add-publication', 'Publicación' );
       this.breadcrumbService.hideRouteRegex( '^/selection-process/add-publication/[0-9]*' );
       this.breadcrumbService.addFriendlyNameForRoute( '/selection-process/publications-detail', 'Detalle' );
-      this.breadcrumbService.hideRouteRegex( '^/selection-process/publications-detail/[0-9]*' )
+      this.breadcrumbService.hideRouteRegex( '^/selection-process/publications-detail/[0-9]*' );
       this.breadcrumbService.addFriendlyNameForRoute( '/selection-process/candidates-list', 'Candidatos' );
       this.breadcrumbService.hideRouteRegex( '^/selection-process/candidates-list/[0-9]*' );
       this.breadcrumbService.addFriendlyNameForRoute( '/selection-process/process-step', 'Paso' );

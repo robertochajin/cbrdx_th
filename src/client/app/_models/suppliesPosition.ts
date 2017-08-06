@@ -8,7 +8,7 @@ export class SuppliesPosition {
    public idCargo: number = null;
    public cargo: string;
    public grupoDotacion: string;
-   public indicadorHabilitado: boolean = true
+   public indicadorHabilitado: boolean = true;
    public auditoriaUsuario: number;
    public auditoriaFecha: Date;
 

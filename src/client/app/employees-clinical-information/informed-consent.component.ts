@@ -202,7 +202,7 @@ export class MedicalExamInformedConsentComponent implements OnInit {
          let obj = {
             destination: this.candidate.telefonoCelular,
             codigo: this.medicalExam.codigoVerificacion
-         }
+         };
 
          this.candidateProcessService.generateVerificationCode( obj ).subscribe( res => {
             console.log( res );

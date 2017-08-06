@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
    options: any;
    displayDialog: boolean;
    rolWidgets: Widgets[];
-   publications: PersonnelRequirement[] = []
+   publications: PersonnelRequirement[] = [];
    usuarioLogueado: any = { sub: '', usuario: '', nombre: '' };
    jwtHelper: JwtHelper = new JwtHelper();
 
