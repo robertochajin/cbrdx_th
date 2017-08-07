@@ -222,6 +222,11 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
       this.breadcrumbService.hideRoute( '/position/requirement/detail');
       this.breadcrumbService.hideRouteRegex( '^/position/requirement/detail/[0-9]*$' );
 
+      this.breadcrumbService.addFriendlyNameForRoute( '/position/assessment' , 'Valoración de riesgos de cargos');
+      this.breadcrumbService.addFriendlyNameForRoute( '/position/assessment-version' , 'Versiones de valoración de riesgos');
+      this.breadcrumbService.addFriendlyNameForRoute( '/position/assessment/position' , 'cargo');
+      this.breadcrumbService.hideRouteRegex( '^/position/assessment/position/[0-9]*$' );
+
       this.breadcrumbService.addFriendlyNameForRoute( '/physic-structure', 'Estructura Física' );
       this.breadcrumbService.addFriendlyNameForRoute( '/physic-structure/add', 'Nuevo' );
       this.breadcrumbService.addFriendlyNameForRoute( '/physic-structure/update', 'Actualizar' );
@@ -326,6 +331,13 @@ export class BreadcrumbComponent implements OnInit, OnChanges, OnDestroy {
       this.breadcrumbService.addFriendlyNameForRoute( '/supplies/detail', 'Detalle' );
       this.breadcrumbService.hideRouteRegex( '^/supplies/update/[0-9]*' );
       this.breadcrumbService.hideRouteRegex( '^/supplies/detail/[0-9]*' );
+
+      this.breadcrumbService.addFriendlyNameForRoute( '/configuration-list', 'Configuración de relaciones entre listas' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/configuration-list/add', 'Nuevo' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/configuration-list/update', 'Actualizar' );
+      this.breadcrumbService.addFriendlyNameForRoute( '/configuration-list/detail', 'Detalle' );
+      this.breadcrumbService.hideRouteRegex( '^/configuration-list/update/[0-9]*' );
+      this.breadcrumbService.hideRouteRegex( '^/configuration-list/detail/[0-9]*' );
 
       this.breadcrumbService.addFriendlyNameForRoute( '/eventualities', 'Configuración novedades' );
       this.breadcrumbService.addFriendlyNameForRoute( '/eventualities/add', 'Nuevo' );

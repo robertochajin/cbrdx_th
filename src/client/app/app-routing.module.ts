@@ -191,7 +191,7 @@ import { MedicalExamComponent } from './selection-process/medical-exam.component
 import { MedicalExamInformedConsentComponent } from './employees-clinical-information/informed-consent.component';
 import { AnswerExamsComponent } from './medical-institutions/answer-exams.component';
 import { EmployeesAttachmentsComponent } from './employees-attatchments/employees-attachments.component';
-import {PositionsDetailPdfComponent} from "./positions/positions-detail-pdf.component";
+import { PositionsDetailPdfComponent } from "./positions/positions-detail-pdf.component";
 import { CandidateContractingComponent } from './selection-process/candidate-contracting.component';
 import { EmployeeEventualitiesComponent } from './employees-eventualities/employees-eventualities.component';
 import { EmployeeEventualitiesAddComponent } from './employees-eventualities/employee-eventualities-edit.component';
@@ -221,6 +221,8 @@ import { AnswerExamsPeriodComponent } from './medical-institutions/answer-exams-
 import { AccidentIncidentComponent } from './accidents-incidents/accidents-incidents.component';
 import { AccidentIncidentPlanComponent } from './accidents-incidents/accidents-incidents-plan.component';
 import { AssessmentListComponent } from './position_assessment/assessment-list.component';
+import { PositionAssessmentComponent } from './position_assessment/position-assessment.component';
+import { AssessmentVersionComponent } from './position_assessment/assessment-version.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -427,6 +429,8 @@ const routes = [
    { path: 'position-activities/:idCargo', component: PositionAuthoritiesComponent, canActivate: [ AuthGuard ] },
    { path: 'position/requirement/detail/:id', component: PersonnelRequirementDetailComponent, canActivate: [ AuthGuard ] },
    { path: 'position/assessment', component: AssessmentListComponent },
+   { path: 'position/assessment-version', component: AssessmentVersionComponent },
+   { path: 'position/assessment/position/:position', component: PositionAssessmentComponent },
 
    // Administracion
    { path: 'menus', component: MenuManagerComponent, canActivate: [ AuthGuard ] },
@@ -546,8 +550,6 @@ const routes = [
    { path: 'employees/supplies-confirmation/:id', component: SuppliesConfirmationComponent, canActivate: [ AuthGuard ] },
    // examenes ocupacionales
    { path: 'occupational-exams', component: OccupationalExamsComponent },
-
-
 
    // Accidentes e incidentes
    { path: 'accidents-incidents', component: AccidentIncidentComponent },

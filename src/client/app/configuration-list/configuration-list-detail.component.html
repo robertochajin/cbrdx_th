@@ -60,8 +60,7 @@
 								<p-column header="{{ 'LBL_HABILITADO' | translate }}"
 								          [sortable]="true" styleClass="datatable-col-center">
 									<template let-cont="rowData" pTemplate="body">
-										<p-inputSwitch name="indicadorHabilitado{{cont.idRelacionListaCampo}}" onLabel="Si" offLabel="No"
-										               [(ngModel)]="cont.indicadorHabilitado"></p-inputSwitch>
+										{{cont.indicadorHabilitado ? 'Aplica' : 'No Aplica'}}
 									</template>
 								</p-column>
 							</p-dataTable>

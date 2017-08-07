@@ -59,10 +59,7 @@ export class AssessmentListComponent implements OnInit {
       // Esta opción no la soporta la versión de primeNg que usamos actualmente 3/08/2017
 
       //Consultamos TODOS los cargos habilitados
-      this.positionsService.getListPositions().subscribe(list => {
-         list.map( (p: Positions) => {
-            p.avanceValoracion = p.idCargo + '%';
-         });
+      this.positionsService.getListPositionsWithRiskProgress().subscribe(list => {
          this.positions  = list;
       });
 
@@ -78,7 +75,7 @@ export class AssessmentListComponent implements OnInit {
 
    showRiskMap() {
       this.positionsService.getMapa().subscribe( res => {
-            saveAs( res, 'MapaRiesgosCargos' );
+            saveAs( res, 'Matriz_de_priorizacion_de_riesgos.xlsx' );
       } );
    }
 

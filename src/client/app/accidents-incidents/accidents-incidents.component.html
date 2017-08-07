@@ -48,9 +48,13 @@
 	<p-column field="actividades" header="{{'ACCIDENTINCIDENT.LBL_ACTIVIDADES' | translate }}" styleClass="datatable-col-action">
 		<button pButton type="button" (click)="count()" icon="fa-check"></button>
 		<template let-datos="rowData" pTemplate="body">
+			<!--Estado 1 = Ninguna cerrada-->
 			<span class="label label-default" *ngIf="datos.actividades === 1"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+			<!--Estado 2 = Cerrada la Novedad Total-->
 			<span class="label label-primary" *ngIf="datos.actividades === 2"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+			<!--Estado 3 = Todos los planes de acciones estan cerrados -->
 			<span class="label label-success" *ngIf="datos.actividades === 3"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+			<!-- Estado 4 Al menos un plan esta abierto -->
 			<span class="label label-danger" *ngIf="datos.actividades === 4"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
 		</template>
 	</p-column>
