@@ -20,9 +20,8 @@
 						<h2>{{employee.nombreCompleto}} <span *ngIf=" employee.estadoTercero !== null " class="tag">{{ employee.estadoTercero }}</span>
 						</h2>
 						<h4>{{employee.tipoDocumento}} : {{employee.numeroDocumento}}</h4>
-						<span>{{employee.fechaNacimiento}} ({{employee.edad}} años) </span><br/>
-						<span>Cargo actual : {{employee.cargoActual}}</span><br />
-						<span>Usuario desde : {{employee.fechaCreacion}}</span><br />
+						<span>{{'ACCIDENTINCIDENT.LBL_CARGO' | translate }} : {{employeeEventuality.cargo}}</span><br/>
+						<span>{{'ACCIDENTINCIDENT.LBL_AREA' | translate }} : {{employeeEventuality.estructuraArea}}</span><br/>
 					</div>
 				</div>
 				<div class="form-group">
@@ -98,15 +97,17 @@
 							        title="{{'BTN_EDITAR' | translate}}"
 							        pButton (click)="update(datos)"></button>-->
 							<!--*ngIf="datos.codigoEstado === 'Pendiente'"-->
-							<button *ngIf="datos.codigoEstadoPlanAccion === 'PEND' && employeeEventuality.idEstadoNovedad !== estadoTerminado"
+							<button
+								*ngIf="datos.codigoEstadoPlanAccion === 'PEND' && employeeEventuality.idEstadoNovedad !== estadoTerminado && idTercero === datos.idResponsable"
 							        type="button" icon="fa-pencil" class="ui-button-success"
 							        data-toggle="tooltip" title="{{'ACCIDENTINCIDENT.LBL_RESPONDER' | translate }}"
 							        pButton (click)="answer(datos)"></button>
-							<button *ngIf="datos.codigoEstadoPlanAccion === 'REAL' && employeeEventuality.idEstadoNovedad !== estadoTerminado"
-							        type="button" icon="fa-check-circle-o"
-							        class="ui-button-success"
-							        data-toggle="tooltip" title="{{'ACCIDENTINCIDENT.LBL_VERIFICAR' | translate }}"
-							        pButton (click)="varify(datos)"></button>
+							<button
+								*ngIf="datos.codigoEstadoPlanAccion === 'REAL' && employeeEventuality.idEstadoNovedad !== estadoTerminado && idTercero === datos.idEncargado"
+								type="button" icon="fa-check-circle-o"
+								class="ui-button-success"
+								data-toggle="tooltip" title="{{'ACCIDENTINCIDENT.LBL_VERIFICAR' | translate }}"
+								pButton (click)="varify(datos)"></button>
 						</template>
 					</p-column>
 				</p-dataTable>
@@ -258,7 +259,8 @@
 					<div class="ui-grid-col-2">
 					</div>
 					<div class="ui-grid-col-3">
-						<button pButton icon="fa-plus" label="{{'LBL_FINALIZAR' | translate }}" type="button" (click)="finishAdd()"></button>
+						<button pButton icon="fa-plus" label="{{'ACCIDENTINCIDENT.LBL_FINALIZAR' | translate }}" type="button"
+						        (click)="finishAdd()"></button>
 					</div>
 					<div class="ui-grid-col-4"></div>
 				</div>
@@ -304,6 +306,15 @@
 				</p-dataTable>
 				<form (ngSubmit)="fr.valid && onSubmitAnswer()" #fr="ngForm" novalidate id="fRespuesta">
 					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+						<div>
+						
+						</div>
+						<div class="ui-grid-row">
+							<div class="ui-grid-col-12">
+								<label for="respuesta">{{'ACCIDENTINCIDENT.LBL_ACTIVIDAD' | translate }}: </label>
+								{{employeeEventualityPlan.actividad}}
+							</div>
+						</div>
 						<div class="ui-grid-row">
 							<div class="ui-grid-col-12">
 								<label for="respuesta">* {{'ACCIDENTINCIDENT.LBL_RESPUESTA' | translate }}</label>
@@ -369,6 +380,18 @@
 				</p-dataTable>
 				<form (ngSubmit)="fvr.valid && onSubmitAnswer()" #fvr="ngForm" novalidate id="fVerificar">
 					<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+						<div class="ui-grid-row">
+							<div class="ui-grid-col-12">
+								<label>{{'ACCIDENTINCIDENT.LBL_ACTIVIDAD' | translate }}: </label>
+								{{employeeEventualityPlan.actividad}}
+							</div>
+						</div>
+						<div class="ui-grid-row">
+							<div class="ui-grid-col-12">
+								<label>{{'ACCIDENTINCIDENT.LBL_RESPUESTA' | translate }}: </label>
+								{{employeeEventualityPlan.respuesta}}
+							</div>
+						</div>
 						<div class="ui-grid-row">
 							<div class="ui-grid-col-12">
 								<label for="indicadorVerficar" class="control-label col-sm-3">{{'ACCIDENTINCIDENT.LBL_VERIFICAR' | translate
@@ -504,7 +527,7 @@
 						<div class="ui-grid-row">
 							<div class="ui-grid-col-12">
 								<label for="NGresultado">{{'ACCIDENTINCIDENT.LBL_RESULTADO' | translate}}</label>
-								{{ employeeEventuality.resultado }}
+								{{ employeeEventuality.resultadoAccidente }}
 							</div>
 						</div>
 						<div class="ui-grid-row">
