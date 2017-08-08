@@ -223,6 +223,8 @@ import { AccidentIncidentPlanComponent } from './accidents-incidents/accidents-i
 import { AssessmentListComponent } from './position_assessment/assessment-list.component';
 import { PositionAssessmentComponent } from './position_assessment/position-assessment.component';
 import { AssessmentVersionComponent } from './position_assessment/assessment-version.component';
+import { JobAdaptationComponent } from './job-adaptation/job-adaptation.component';
+import { JobAdaptationExamComponent } from './job-adaptation/job-daptation-exam.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -553,7 +555,11 @@ const routes = [
 
    // Accidentes e incidentes
    { path: 'accidents-incidents', component: AccidentIncidentComponent },
-   { path: 'accidents-incidents/plan/:id', component: AccidentIncidentPlanComponent }
+   { path: 'accidents-incidents/plan/:id', component: AccidentIncidentPlanComponent },
+
+   // Adaptacion Laboral
+   { path: 'job-adaptation', component: JobAdaptationComponent },
+   { path: 'job-adaptation/exam/:id', component: JobAdaptationExamComponent }
 ];
 
 @NgModule( {

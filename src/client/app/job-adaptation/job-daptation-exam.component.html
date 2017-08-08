@@ -1,0 +1,72 @@
+<div class="row">
+	<div class="col-md-10 col-md-offset-1" *ngIf="candidate.idTercero">
+		<p-panel header="{{ 'PROCESOSELECCION.LBL_INFOPOSTULANTE' | translate }}" class="perfil">
+			<form class="form-horizontal">
+				<fieldset>
+					<div class="form-group row">
+						<div class="col-md-2">
+							<div class="thumbnail">
+								<img src="{{svcThUrlAvatar}}/file/{{candidate.imagen}}" alt="...">
+							</div>
+						</div>
+						<div class="col-md-10">
+							<h2>{{candidate.nombreCompleto}}</h2>
+							<h4>{{candidate.tipoDocumento}} - {{candidate.numeroDocumento}}</h4>
+							<span>{{candidate.fechaNacimiento}} ({{candidate.edad}}) Años</span>
+							<div class="perfil-footer-button">
+								<button icon="fa-address-book-o" label="{{'PROCESOSELECCION.LBL_VERHOJADEVIDA' | translate }}" type="button"
+								        (click)="curriculum()"
+								        pButton></button>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</p-panel>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+		<p-panel header="{{'PROCESOSELECCION.LBL_EXAMENMEDICO' | translate}}">
+			<form (ngSubmit)="f.valid && onSubmit(acordion)" #f="ngForm" novalidate id="formulario">
+				<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-6">
+							<label for="programar">{{ 'ADAPTACIONLABORAL.LBL_PROGRAMAREXAMEN' | translate }}</label>
+							<p-calendar id="programar" name="programar" [locale]="es" [showIcon]="true"
+							            [minDate]="minDate" dateFormat="yy'-'mm'-'dd" readonlyInput="readonlyInput"
+							            dataType="date" #NGprogramar="ngModel" [required]="!employee.indicadorVivo"
+							            [(ngModel)]="medicalExam.fechaProgramada" (onSelect)="onDeathDate($event)"
+							></p-calendar>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !NGprogramar.valid">
+								<i class="fa fa-close"></i>
+								{{ 'MEDICALINSTITUTION.LBL_NOMBRE' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+							</div>
+						</div>
+						<div class="ui-grid-col-6">
+							<label for="institucion">{{ 'MEDICALINSTITUTION.LBL_INSTITUCIONESMEDICAS' | translate }}</label>
+							<p-dropdown id="institucion" name="institucion" required="true" filter="filter"
+							            [options]="listMedicalInstitutionStructure" [autoWidth]="false"
+							            [(ngModel)]="medicalExam.idInstitucionMedica"
+							            #NGinstitucion="ngModel"
+							></p-dropdown>
+							<div class="ui-message ui-messages-error ui-corner-all"
+							     *ngIf="f.submitted && !NGinstitucion.valid">
+								<i class="fa fa-close"></i>
+								{{ 'MEDICALINSTITUTION.LBL_REPRESENTANTELEGAL' | translate }} {{ 'LBL_REQUERIDO' | translate }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</p-panel>
+	</div>
+</div>
+
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>

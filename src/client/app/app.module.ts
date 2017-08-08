@@ -93,6 +93,7 @@ import { SuppliesModule } from './supplies/supplies.module';
 import { TrayEventualitiesModule } from './tray-eventualities/tray-eventualities.module';
 import { AccidentIncidentModule } from './accidents-incidents/accidents-incidents.module';
 import { OccupationalExamsModule } from './occupational-exams/occupational-exams.module';
+import { JobAdaptationtModule } from './job-adaptation/job-adaptation.module';
 
 
 export function createTranslateLoader(http: Http) {
@@ -171,7 +172,8 @@ export function createTranslateLoader(http: Http) {
                  OccupationalExamsModule,
                  SuppliesModule,
                  TrayEventualitiesModule,
-                 AccidentIncidentModule
+                 AccidentIncidentModule,
+                 JobAdaptationtModule
               ],
 
               declarations: [ AppComponent ],

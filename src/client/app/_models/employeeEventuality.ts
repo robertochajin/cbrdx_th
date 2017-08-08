@@ -17,6 +17,7 @@ export class EmployeeEventuality {
    fechaReintegro: string;
    horaReintergo: string;
    dias: number;
+   diasAcumulados: number;
    idDiagnostico: number;
    diagnostico: string;
    reemplazadoPor: string;

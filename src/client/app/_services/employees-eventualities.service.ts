@@ -68,4 +68,8 @@ export class EmployeeEventualitiesService {
       return this.authHttp.get( this.serviceURL + '/incidentesAccidentes').map( ( res: Response ) => res.json() as EmployeeEventuality[] );
    }
 
+   getAllAdaptations() {
+      return this.authHttp.get( this.serviceURL + '/incidentesAccidentes' ).map( ( res: Response ) => res.json() as EmployeeEventuality[] );
+   }
+
 }

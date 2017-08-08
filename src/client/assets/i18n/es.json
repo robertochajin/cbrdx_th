@@ -1102,7 +1102,7 @@
    },
 "MEDICALINSTITUTION":{
    "LBL_INSTITUCIONESMEDICAS":"Instituciones Medicas",
-   "LBL_INSTITUCIONMEDICA":"Institución Medicas",
+   "LBL_INSTITUCIONMEDICA": "Institución Medica",
    "LBL_NUEVA":"Nueva Institución",
    "LBL_DATOSGENERALES":"Datos Generales",
    "LBL_CODIGO":"Código",
@@ -1359,6 +1359,12 @@
       "LBL_CARGOS": "Cargos",
       "LBL_CARGOSSELECT": "Cargos selecionados",
       "BTN_ENVIAREXAMEN": "Enviar examen",
+      "": ""
+   },
+   "ADAPTACIONLABORAL": {
+      "LBL_FECHAREINTEGRO": "Fecha de Reintegro",
+      "LBL_ACUMULADODIAS": "Acumulado Días",
+      "LBL_PROGRAMAREXAMEN": "Programar Examen",
       "": ""
    },
    "FIN_ARCHIVO": "============================FIN ARCHIVO============================="
