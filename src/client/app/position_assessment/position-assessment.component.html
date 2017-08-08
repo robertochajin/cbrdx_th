@@ -12,7 +12,7 @@
 				<div class="col-md-12">
 				<p-dataTable [rows]="6" [paginator]="true" emptyMessage="{{ 'MSG_NORECORDSFOUND' | translate }}" [value]="type.subTypes"
 				             [responsive]="true" id="positionCompetenciesDT" styleClass="table-overflow">
-					<p-column field="subtipo" header="{{'POSITION.LBL_RIESGO' | translate }}" [sortable]="true"></p-column>
+					<p-column field="riesgoSubTipo" header="{{'POSITION.LBL_RIESGO' | translate }}" [sortable]="true"></p-column>
 					<p-column field="riesgo" header="{{'POSITION.LBL_PELIGRO' | translate }}" [sortable]="true"></p-column>
 					<p-column header="{{'POSITION.LBL_PROBABILIDAD' | translate }}" styleClass="datatable-col-action">
 						<template let-item="rowData" pTemplate="body">
