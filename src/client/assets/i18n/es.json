@@ -1357,8 +1357,13 @@
       "LBL_ULTIMORESULTADO": "Último resultado",
       "LBL_ENVIREXAMEN": "Enviar examen",
       "LBL_CARGOS": "Cargos",
+      "LBL_FECHAREINEGRO": "Fecha reintegro",
+      "LBL_DIAS": "No Días",
+      "LBL_DIASAACUMULADOS": "Días acumulados",
+      "LBL_CARGOS": "Cargos",
       "LBL_CARGOSSELECT": "Cargos selecionados",
       "BTN_ENVIAREXAMEN": "Enviar examen",
+      "BTN_PROGRAMAREXAMEN": "Programar examen",
       "": ""
    },
    "FIN_ARCHIVO": "============================FIN ARCHIVO============================="

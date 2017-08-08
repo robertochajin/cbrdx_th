@@ -69,5 +69,9 @@ export class VTercero {
    sitioWeb: string;
    idAdjunto: number;
    estadoTercero: string;
-   idEstadoTercero: number
+   idEstadoTercero: number;
+   cargo: string;
+   estructuraOrganizacional: string;
+   estructuraArea: string;
+   fechaUltimoExamen: string;
 }
