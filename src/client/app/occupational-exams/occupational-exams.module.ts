@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FormSharedModule } from '../shared/form-shared.module';
 import { OccupationalExamsComponent } from './occupational-exams.component';
 import { ExamPipe } from '../_helpers/examPipe';
+import { AnswerExamOccupationalPeriodComponent } from './answer-exam-occupational-period.component';
 
 @NgModule( {
               imports: [
@@ -12,7 +13,7 @@ import { ExamPipe } from '../_helpers/examPipe';
                  FormSharedModule
 
               ],
-              declarations: [ OccupationalExamsComponent, ExamPipe ],
+              declarations: [ OccupationalExamsComponent, ExamPipe, AnswerExamOccupationalPeriodComponent ],
               bootstrap: [ OccupationalExamsComponent ],
               providers: [],
               exports: [ OccupationalExamsComponent ]

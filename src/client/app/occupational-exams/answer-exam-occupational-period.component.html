@@ -1,0 +1,87 @@
+<div class="row">
+	<div class="col-md-10 col-md-offset-1" *ngIf="candidate.idTercero">
+		<p-panel header="{{ 'PROCESOSELECCION.LBL_INFOPOSTULANTE' | translate }}" class="perfil">
+			<form class="form-horizontal">
+				<fieldset>
+					<div class="form-group row">
+						<div class="col-md-2">
+							<div class="thumbnail">
+								<img src="{{svcThUrlAvatar}}/file/{{candidate.imagen}}" alt="...">
+							</div>
+						</div>
+						<div class="col-md-10">
+							<h2>{{candidate.nombreCompleto}}</h2>
+							<h4>{{candidate.tipoDocumento}} - {{candidate.numeroDocumento}}</h4>
+							<span>{{candidate.fechaNacimiento}} ({{candidate.edad}}) Años</span>
+							<div class="perfil-footer-button">
+								<button icon="fa-address-book-o" label="{{'PROCESOSELECCION.LBL_VERHOJADEVIDA' | translate }}" type="button"
+								        (click)="curriculum()"
+								        pButton></button>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</p-panel>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+		<p-panel header="{{'PROCESOSELECCION.LBL_CONSENTINFORMADO' | translate}}">
+			<form name="process" (ngSubmit)="fco.valid && onSubmitCon()" #fco="ngForm" novalidate id="processCon">
+				<fieldset>
+					<div class="row">
+						<div class="col-md-4 col-md-offset-2">
+							<label>{{'PROCESOSELECCION.LBL_FECHA' | translate}}</label>
+							<label><strong>{{medicalExam.fechaProgramada | date:'yyyy-MM-dd'}}</strong></label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-md-offset-2">
+							<label>{{'PROCESOSELECCION.LBL_INSTITUCIONMEDICA' | translate }}</label>
+							<label><strong>{{medicalExam.institucionMedica}}</strong></label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-md-offset-2">
+							<label>{{'PROCESOSELECCION.LBL_ADJUNTOPRUEBATECNICA' | translate }}</label>
+							<div *ngIf="medicalExam.idAdjunto != null" class="btn-group" role="group" style="display: block;">
+								<a class="btn btn-default" style="max-width: 87%; overflow: hidden;"
+								   (click)="downloadFile(medicalExam.idAdjunto)">
+									<i class="fa fa-file-o" aria-hidden="true"></i>
+									{{dataUploadArchivo}}
+								</a>
+							</div>
+							<div *ngIf="medicalExam.idAdjunto == null" class="btn-group" role="group" style="display: block;">
+								<label><strong>No hay archivos adjuntos</strong></label>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-10 col-md-offset-1">
+						<label for="concepto">* {{'PROCESOSELECCION.LBL_CONCEPTOMEDICO' | translate }}</label>
+						<p-dropdown id="concepto" name="concepto" #conceptomedico="ngModel" [options]="opcionesPregunta"
+						            [autoWidth]="false" [(ngModel)]="medicalExam.idPreguntaOpcion"></p-dropdown>
+						<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!conceptomedico.valid">
+							<i class="fa fa-close"></i>
+							{{'PROCESOSELECCION.LBL_INSTITUCION' | translate }} {{'LBL_REQUERIDO' | translate }}
+						</div>
+					</div>
+					<div class="row form-footer-buttons">
+						<div class="form-group col-md-3"></div>
+					</div>
+					<div class="form-group col-md-4">
+						<a (click)="goBack((fco.dirty === true))" class="cancelar">{{'BTN_CANCELAR' | translate }}</a>
+						<button icon="fa-plus" label="{{'LBL_ENVIAR' | translate }}" type="submit"
+						        pButton></button>
+					</div>
+				</fieldset>
+			</form>
+		</p-panel>
+	</div>
+</div>
+<p-confirmDialog width="400" #cd>
+	<p-footer>
+		<button type="button" pButton icon="fa-close" label="{{'BTN_NO' | translate }}" (click)="cd.reject()"></button>
+		<button type="button" pButton icon="fa-check" label="{{'BTN_SI' | translate }}" (click)="cd.accept()"></button>
+	</p-footer>
+</p-confirmDialog>

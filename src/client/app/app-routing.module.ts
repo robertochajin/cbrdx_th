@@ -223,6 +223,7 @@ import { AccidentIncidentPlanComponent } from './accidents-incidents/accidents-i
 import { AssessmentListComponent } from './position_assessment/assessment-list.component';
 import { PositionAssessmentComponent } from './position_assessment/position-assessment.component';
 import { AssessmentVersionComponent } from './position_assessment/assessment-version.component';
+import { AnswerExamOccupationalPeriodComponent } from './occupational-exams/answer-exam-occupational-period.component';
 
 const routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -550,6 +551,7 @@ const routes = [
    { path: 'employees/supplies-confirmation/:id', component: SuppliesConfirmationComponent, canActivate: [ AuthGuard ] },
    // examenes ocupacionales
    { path: 'occupational-exams', component: OccupationalExamsComponent },
+   { path: 'answer-exam-occupational-period/:idExamen', component: AnswerExamOccupationalPeriodComponent },
 
    // Accidentes e incidentes
    { path: 'accidents-incidents', component: AccidentIncidentComponent },

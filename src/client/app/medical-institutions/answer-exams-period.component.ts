@@ -162,6 +162,7 @@ export class AnswerExamsPeriodComponent implements OnInit {
    }
 
    onSubmitAnsw() {
+      this.medicalExam.fechaProgramada = new Date().toISOString().replace('Z','-0500');
       if ( this.medicalExam.idExamenMedico ) {
          let temp = this.listEstExaMed.find( c => c.idLista === this.medicalExam.idEstadoExamenMedico ).codigo;
          if ( temp === 'ENESPR' ) {
