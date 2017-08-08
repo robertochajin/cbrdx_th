@@ -24,7 +24,7 @@ import { MedicalInstitutionService } from '../_services/medical-institutions.ser
 export class JobAdaptationExamComponent implements OnInit {
 
    private candidate: Employee = new Employee();
-   medicalInstitution: MedicalInstitution[] = [];
+   medicalInstitutions: MedicalInstitution[] = [];
    private es: any;
    private minDate: Date = new Date();
    svcThUrlAvatar = '<%= SVC_TH_URL %>/api/upload';
@@ -52,7 +52,7 @@ export class JobAdaptationExamComponent implements OnInit {
          this.listEstExaMed = res;
       } );
       this.medicalInstitutionService.getAll().subscribe( res => {
-         this.medicalInstitution = res;
+         this.medicalInstitutions = res;
       } );
 
       this.route.params.subscribe( ( params: Params ) => {
@@ -81,7 +81,12 @@ export class JobAdaptationExamComponent implements OnInit {
    }
 
    ngOnInit() {
-
+      let today = new Date();
+      let month = today.getMonth();
+      let year = today.getFullYear();
+      this.minDate = new Date();
+      this.minDate.setMonth( month );
+      this.minDate.setFullYear( year );
    }
 
    onSubmit() {

@@ -35,8 +35,8 @@
 							<label for="programar">{{ 'ADAPTACIONLABORAL.LBL_PROGRAMAREXAMEN' | translate }}</label>
 							<p-calendar id="programar" name="programar" [locale]="es" [showIcon]="true"
 							            [minDate]="minDate" dateFormat="yy'-'mm'-'dd" readonlyInput="readonlyInput"
-							            dataType="date" #NGprogramar="ngModel" [required]="!employee.indicadorVivo"
-							            [(ngModel)]="medicalExam.fechaProgramada" (onSelect)="onDeathDate($event)"
+							            dataType="date" #NGprogramar="ngModel" required="true"
+							            [(ngModel)]="medicalExam.fechaProgramada"
 							></p-calendar>
 							<div class="ui-message ui-messages-error ui-corner-all"
 							     *ngIf="f.submitted && !NGprogramar.valid">
@@ -47,7 +47,7 @@
 						<div class="ui-grid-col-6">
 							<label for="institucion">{{ 'MEDICALINSTITUTION.LBL_INSTITUCIONESMEDICAS' | translate }}</label>
 							<p-dropdown id="institucion" name="institucion" required="true" filter="filter"
-							            [options]="listMedicalInstitutionStructure" [autoWidth]="false"
+							            [options]="medicalInstitutions" [autoWidth]="false"
 							            [(ngModel)]="medicalExam.idInstitucionMedica"
 							            #NGinstitucion="ngModel"
 							></p-dropdown>
