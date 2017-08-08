@@ -21,8 +21,8 @@ export class AssessmentListComponent implements OnInit {
    subProcess: SelectItem[] = [];
    percent: SelectItem[] = [];
    positions: Positions[] = [];
+   allPositions: Positions[] = [];
    busqueda: string;
-   percentFilter: number;
 
    constructor( private positionsService: PositionsService,
       private router: Router,
@@ -54,15 +54,30 @@ export class AssessmentListComponent implements OnInit {
       } );
 
       this.percent.push( { label: 'Todos', value: null } );
-      this.percent.push( { label: 'Completos', value: '100%' } );
-      // this.percent.push( { label: 'Incompleto', value: 'incompletos' } );
+      this.percent.push( { label: 'Completos', value: '100' } );
+      this.percent.push( { label: 'Incompleto', value: 'incompletos' } );
       // Esta opción no la soporta la versión de primeNg que usamos actualmente 3/08/2017
 
       //Consultamos TODOS los cargos habilitados
       this.positionsService.getListPositionsWithRiskProgress().subscribe(list => {
          this.positions  = list;
+         this.allPositions  = list;
       });
 
+   }
+
+   filterPercentage(selected: any) {
+      this.positions = this.allPositions.filter(function ( value ) {
+         if(value.avanceValoracion.toString() !== '100' && selected.value === 'incompletos' ) {
+            return true;
+         } else if (value.avanceValoracion.toString() === '100' && selected.value === '100' ) {
+            return true;
+         } else if (selected.value === null) {
+            return true;
+         } else {
+            return false;
+         }
+      });
    }
 
    makeAssessment(position: Positions) {

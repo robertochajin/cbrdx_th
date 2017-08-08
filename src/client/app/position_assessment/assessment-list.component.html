@@ -1,9 +1,13 @@
 <div>
 	<div class="row datable-header">
-		<div class="col-md-6 col-xs-12 datatable-header-add">
+		<div class="col-md-4 col-xs-12 datatable-header-add">
 			<button type="button" pButton icon="fa-plus" (click)="showRiskMap()" label="{{ 'POSITION.LBL_MAPARIESGOS' | translate }}"></button>
 		</div>
-		<div class="col-md-6 col-xs-12 datatable-header-search">
+		<div class="col-md-4 col-xs-12" >
+			<p-dropdown id="filterPrctg" name="filterPrctg" [options]="percent" [autoWidth]="false"
+			            (onChange)="filterPercentage($event)" ></p-dropdown>
+		</div>
+		<div class="col-md-4 col-xs-12 datatable-header-search">
 			<div class="input-group">
 				<div class="input-group-addon"><i class="fa fa-search"></i></div>
 				<input #gb type="text" pInputText size="40" placeholder="{{ 'LBL_BUSCAR' | translate }}" class="form-control"
@@ -30,11 +34,7 @@
 				<p-dropdown [options]="areaTypes" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
 			</template>
 		</p-column>
-		<p-column field="avanceValoracion" header="{{ 'POSITION.LBL_PORCENTAJEVALORACION' | translate }} " [sortable]="true" [filter]="true" >
-			<template pTemplate="filter" let-col>
-				<p-dropdown [options]="percent" [style]="{'width':'100%'}" styleClass="ui-column-filter"
-				            (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"></p-dropdown>
-			</template>
+		<p-column field="avanceValoracion" header="{{ 'POSITION.LBL_PORCENTAJEVALORACION' | translate }} " [sortable]="true" >
 		</p-column>
 		<p-column field="indHab" header="{{ 'LBL_HABILITADO' | translate }}" [sortable]="true" styleClass="datatable-col-center">
 			<template let-position="rowData" pTemplate="body">
